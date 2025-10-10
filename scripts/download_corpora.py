@@ -28,7 +28,7 @@ def main():
     ap = argparse.ArgumentParser(description="Download small EN/ZH corpora to JSONL")
     ap.add_argument("--out", default="data/raw", help="output folder")
     ap.add_argument("--en_source", default="wikitext", choices=["wikitext", "oscar"], help="EN dataset")
-    ap.add_argument("--zh_source", default="oscar", choices=["oscar"], help="ZH dataset")
+    ap.add_argument("--zh_source", default="oscar", choices=["oscar", "clue_tnews", "wikipedia_abstracts"], help="ZH dataset")
     ap.add_argument("--en_limit", type=int, default=20000, help="EN documents limit")
     ap.add_argument("--zh_limit", type=int, default=20000, help="ZH documents limit")
     ap.add_argument("--bitext", action="store_true", help="also download small EN-ZH parallel set (opus_books)")
@@ -65,44 +65,52 @@ def main():
             dszh = load_dataset("oscar-corpus/OSCAR-2301", "zh", split="train", streaming=True)
             zh_iter = ({"text": ex.get("text", "")} for ex in dszh)
             zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
+        elif args.zh_source == "clue_tnews":
+            clue = load_dataset("clue", "tnews")
+            zh_iter = ({"text": ex.get("sentence", "")} for ex in clue["train"])  # field name per CLUE
+            zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
+        elif args.zh_source == "wikipedia_abstracts":
+            # handled in fallback streaming below
+            pass
     except Exception:
         zh_written = 0
 
     # Fallback: Wikipedia abstracts (ZH)
     if zh_written == 0:
+        # Stream Wikipedia abstracts without loading entire file
         try:
             url = "https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-abstract.xml.gz"
-            print(f"Downloading ZH abstracts from {url} ...")
+            print(f"Streaming ZH abstracts from {url} ...")
             with urlopen(url, timeout=60) as resp:
-                data = resp.read()
-            fh = io.BytesIO(data)
-            with gzip.GzipFile(fileobj=fh) as gz:
-                count = 0
-                out_path = out_dir / "zh.jsonl"
-                out_path.parent.mkdir(parents=True, exist_ok=True)
-                with out_path.open("w", encoding="utf-8") as f:
-                    # Stream parse simplistic: read line-wise and accumulate doc
-                    buf = []
-                    for raw in gz:
-                        line = raw.decode("utf-8", errors="ignore")
-                        buf.append(line)
-                        if line.strip() == "</doc>":
-                            block = "".join(buf)
-                            buf.clear()
-                            # Extract title/abstract
-                            try:
-                                root = ET.fromstring(block)
-                                abs_el = root.find("abstract")
-                                if abs_el is not None:
-                                    txt = (abs_el.text or "").strip()
-                                    if txt:
-                                        f.write(json.dumps({"text": txt, "lang": "zh"}, ensure_ascii=False) + "\n")
+                with gzip.GzipFile(fileobj=resp) as gz:
+                    out_path = out_dir / "zh.jsonl"
+                    out_path.parent.mkdir(parents=True, exist_ok=True)
+                    with out_path.open("w", encoding="utf-8") as f:
+                        count = 0
+                        in_abs = False
+                        abs_buf = []
+                        for raw in gz:
+                            line = raw.decode("utf-8", errors="ignore")
+                            if "<abstract>" in line:
+                                in_abs = True
+                                # capture after tag
+                                abs_buf.append(line.split("<abstract>", 1)[1])
+                                continue
+                            if in_abs:
+                                if "</abstract>" in line:
+                                    seg = "".join(abs_buf) + line.split("</abstract>", 1)[0]
+                                    text = ET.fromstring(f"<abstract>{seg}</abstract>").text or ""
+                                    text = text.strip()
+                                    if text:
+                                        f.write(json.dumps({"text": text, "lang": "zh"}, ensure_ascii=False) + "\n")
                                         count += 1
                                         if count >= args.zh_limit:
                                             break
-                            except ET.ParseError:
-                                continue
-                zh_written = count
+                                    in_abs = False
+                                    abs_buf.clear()
+                                else:
+                                    abs_buf.append(line)
+                        zh_written = count
         except Exception:
             zh_written = 0
 
