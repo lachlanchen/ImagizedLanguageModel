@@ -51,6 +51,7 @@ def main():
     ap.add_argument("--epochs", type=int, default=None, help="Override epochs for quick tests")
     ap.add_argument("--batch-size", type=int, default=None, help="Override batch size for quick tests")
     ap.add_argument("--auto-generate-missing", action="store_true", help="Generate glyph images on the fly if missing")
+    ap.add_argument("--glyph-db", default=None, help="Path to SQLite glyph DB to manage glyphs")
     args = ap.parse_args()
 
     cfg = load_yaml(args.config)
@@ -81,6 +82,7 @@ def main():
             num_workers=cfg["data"].get("num_workers", 4),
             image_size=cfg["data"].get("image_size", None),
             auto_generate_missing=args.auto_generate_missing,
+            glyph_db_path=args.glyph_db,
         )
 
     # Model

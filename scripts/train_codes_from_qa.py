@@ -41,7 +41,9 @@ def load_yaml(path: str) -> dict:
         return yaml.safe_load(f)
 
 
-def collate_render(batch: List[QAPair], image_size: int = 128) -> Dict:
+def collate_render(batch: List[QAPair], image_size: int = 128, glyph_db_path: str | None = None) -> Dict:
+    from ilm.db.glyph_db import GlyphDB
+    db = GlyphDB(glyph_db_path) if glyph_db_path else None
     # Gather unique tokens across QA in the batch
     uniq: Dict[Tuple[str, str], int] = {}
     all_pairs: List[Tuple[List[int], List[int], str]] = []
@@ -64,8 +66,13 @@ def collate_render(batch: List[QAPair], image_size: int = 128) -> Dict:
     keys = list(uniq.keys())
     imgs = []
     for lang, tok in keys:
-        rgb = make_rgb_token_image(lang, tok, size=image_size)
-        x = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
+        if db is not None:
+            path = db.ensure_glyph(lang, tok, size=image_size)
+            import PIL.Image as Image
+            x = torch.from_numpy(np.array(Image.open(path).convert("RGB"), dtype=np.float32) / 255.0).permute(2, 0, 1)
+        else:
+            rgb = make_rgb_token_image(lang, tok, size=image_size)
+            x = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
         imgs.append(x)
     X = torch.stack(imgs, dim=0)  # (U,C,H,W)
     return {"X": X, "keys": keys, "pairs": all_pairs}
@@ -110,6 +117,7 @@ def main():
     ap.add_argument("--w-usage", type=float, default=0.05)
     ap.add_argument("--w-indep", type=float, default=0.05)
     ap.add_argument("--resume", default=None, help="optional color_codes checkpoint to resume from")
+    ap.add_argument("--glyph-db", default=None, help="Path to SQLite glyph DB to reuse cached glyphs instead of re-rendering")
     args = ap.parse_args()
 
     set_seed(args.seed)
@@ -121,7 +129,7 @@ def main():
     # mix datasets
     full = list(en_ds.pairs) + list(zh_ds.pairs)
     ds = type("_DS", (), {"__len__": lambda self: len(full), "__getitem__": lambda self, i: full[i]})()
-    loader = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=0, collate_fn=lambda b: collate_render(b, image_size=args.image_size))
+    loader = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=0, collate_fn=lambda b: collate_render(b, image_size=args.image_size, glyph_db_path=args.glyph_db))
 
     # Model
     d_glyph = 128
@@ -215,4 +223,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
