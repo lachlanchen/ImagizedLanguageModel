@@ -41,24 +41,28 @@ def main():
         raise SystemExit("Please install 'datasets' (pip install datasets). Error: %s" % e)
 
     # English
-    if args.en_source == "wikitext":
-        ds = load_dataset("wikitext", "wikitext-103-raw-v1")
-        en_iter = ( {"text": ex["text"]} for ex in ds["train"] )
-        en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
-    elif args.en_source == "oscar":
-        ds = load_dataset("oscar-corpus/OSCAR-2301", "en", split="train", streaming=True)
-        en_iter = ( {"text": ex.get("text", "")} for ex in ds )
-        en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
-    else:
-        raise SystemExit("Unsupported en_source")
+    en_written = 0
+    try:
+        if args.en_source == "wikitext":
+            ds = load_dataset("wikitext", "wikitext-103-raw-v1")
+            en_iter = ({"text": ex["text"]} for ex in ds["train"])
+            en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
+        elif args.en_source == "oscar":
+            ds = load_dataset("oscar-corpus/OSCAR-2301", "en", split="train", streaming=True)
+            en_iter = ({"text": ex.get("text", "")} for ex in ds)
+            en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
+    except Exception:
+        en_written = 0
 
     # Chinese
-    if args.zh_source == "oscar":
-        dszh = load_dataset("oscar-corpus/OSCAR-2301", "zh", split="train", streaming=True)
-        zh_iter = ( {"text": ex.get("text", "")} for ex in dszh )
-        zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
-    else:
-        raise SystemExit("Unsupported zh_source")
+    zh_written = 0
+    try:
+        if args.zh_source == "oscar":
+            dszh = load_dataset("oscar-corpus/OSCAR-2301", "zh", split="train", streaming=True)
+            zh_iter = ({"text": ex.get("text", "")} for ex in dszh)
+            zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
+    except Exception:
+        zh_written = 0
 
     # Optional bitext (very small sample for alignment) and fallback for mono
     bitext_written = 0
