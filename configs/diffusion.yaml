@@ -1,0 +1,33 @@
+seed: 42
+device: auto
+
+data:
+  jsonl: data/processed/test_100.jsonl
+  grid_h: 8
+  grid_w: 8
+  glyph_size: 128
+  batch_size: 8
+  num_workers: 0
+
+model:
+  d_glyph: 128
+  in_channels: 129   # d_glyph + 1 mask channel
+  base_ch: 64
+  depth: 2
+  out_channels: 128
+
+optim:
+  lr: 1.0e-3
+  wd: 1.0e-4
+  epochs: 3
+  grad_clip: 1.0
+
+train:
+  mask_ratio_min: 0.1
+  mask_ratio_max: 0.6
+
+log:
+  log_every: 20
+  ckpt_dir: artifacts
+  ckpt_name: diffusion_unet.pt
+
