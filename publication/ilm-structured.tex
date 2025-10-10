@@ -1,0 +1,153 @@
+% ILM Structured Technical Document
+\documentclass[11pt]{article}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage{ucs}
+  \usepackage[utf8x]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+\fi
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+
+\title{Imagized Language Model: Structured Technical Documentation}
+\author{Prepared from user-provided manuscript}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Imagized Language Model (ILM) treats language as an image-like tensor and generates text via diffusion-style denoising in that space. We present a structured specification with mathematical derivations for: superposition-based meta-elements, hierarchical memory-like embeddings, text rasterization, and discrete/latent diffusion. A practical roadmap targets consumer hardware.
+\end{abstract}
+
+\tableofcontents
+
+\section{Executive Overview}
+ILM reframes text generation as image synthesis. A sentence becomes a compact, multi-channel 2D grid with explicit meta-element channels (grammar, semantics, tone, emotion). Generation proceeds coarse-to-fine via diffusion on discrete or continuous latents.
+
+\paragraph{Key innovations}
+\begin{itemize}[noitemsep,topsep=2pt]
+  \item Superposition of meta-elements (grammar, semantics, tone, emotion).
+  \item Hierarchical mixed-radix vocabulary codes with spatial organization.
+  \item Text-as-image rasterization and latent diffusion for efficiency.
+  \item Multiscript support via glyph rendering and byte/character modeling.
+\end{itemize}
+
+\section{Meta-Elements as Superposition}
+Let $\mathcal{G}{=}\{G_i\}$, $\mathcal{M}{=}\{M_j\}$, $\mathcal{E}{=}\{E_k\}$, $\mathcal{T}{=}\{T_\ell\}$ be basis sets for grammar, meaning, emotion, and tone. A token representation $s\in\mathbb{R}^d$ is modeled as
+\begin{equation}
+  s \approx \sum_{i} \alpha_i G_i + \sum_{j} \beta_j M_j + \sum_{k} \gamma_k E_k + \sum_{\ell} \delta_\ell T_\ell + \varepsilon.
+\end{equation}
+We learn dictionary $D$ and sparse activations $\bm{a}$ via
+\begin{equation}
+\mathcal{L}_{\text{sup}}=\| s - D\bm{a} \|_2^2 + \lambda_1\|\bm{a}\|_1 + \lambda_2\sum_{u\ne v}\|D_u^\top D_v\|_F^2,
+\end{equation}
+with the last term limiting cross-group interference. Disentanglement regularizers penalize $\operatorname{MI}(z_u,z_v)$ across factors.
+
+\paragraph{Examples}
+\begin{itemize}[noitemsep,topsep=2pt]
+  \item Grammar: UD relations (nsubj, obj, advmod), clause patterns (SVO/SOV/VSO), TAM, voice.
+  \item Meaning: Frame primitives (CAUSE, GO, TO), role bindings (AGENT, THEME, RECIPIENT).
+  \item Emotion/Style: VAD space and discrete categories; formality, politeness, certainty, register.
+\end{itemize}
+
+\section{Hierarchical, Memory-Like Embeddings}
+Map $v\in\mathcal{V}$ to a mixed-radix code $\phi(v){=}(k_1,\ldots,k_L)$ with $k_\ell\in\{0,\ldots,K_\ell{-}1\}$ and capacity $\prod_\ell K_\ell\ge |\mathcal{V}|$. Arrange codes on a 2D grid $(h,w)$ and learn $E[h,w]\in\mathbb{R}^d$.
+
+\paragraph{Laplacian regularization}
+With affinity $W$ and degree matrix $\mathrm{Deg}$, $L{=}\mathrm{Deg}{-}W$ induces
+\begin{equation}
+\mathcal{L}_{\text{spatial}}=\operatorname{tr}(E^\top L E)=\tfrac{1}{2}\sum_{p,q}w_{pq}\|E_p{-}E_q\|_2^2,
+\end{equation}
+encouraging local smoothness aligned with lexical similarity.
+
+\paragraph{Text-as-image rasterization}
+Given width $W$, index $i$ maps to $(r,c)$ by $r{=}\lfloor (i{-}1)/W \rfloor$, $c{=}(i{-}1)\bmod W$. For level $\ell$, form $X^{(\ell)}\in\{0,\ldots,K_\ell{-}1\}^{H\times W}$; embed via $E_\ell\in\mathbb{R}^{K_\ell\times d_\ell}$, project to a common depth, and sum with meta-element channels and 2D positional encodings.
+
+\section{Diffusion for Language}
+\paragraph{Discrete diffusion}
+Let $Q_t\in[0,1]^{K\times K}$ be the transition (e.g., absorbing-mask), and $\bar{Q}_t{=}\prod_{s\le t}Q_s$. The single-site posterior is
+\begin{equation}
+  q(x_{t-1}\mid x_t,x_0) \propto Q_t(x_{t-1}\to x_t)\,(\bar{Q}_{t-1})(x_0\to x_{t-1}).
+\end{equation}
+Training minimizes $\mathbb{E}_{t,x_0}\big[\lambda(t)\,\mathrm{KL}(q\Vert p_\theta)\big]$.
+
+\paragraph{Latent diffusion}
+Embed categorical planes to $h_0$; use Gaussian noising $q(h_t\mid h_0){=}\mathcal{N}(\sqrt{\bar{\alpha}_t}h_0,(1{-}\bar{\alpha}_t)I)$. Operate in a compact latent $z_t$ with an autoencoder and predict $\varepsilon_\theta$.
+
+\paragraph{Coarse-to-fine}
+Assign per-level schedules $\beta_t^{(\ell)}$ so coarse levels retain information longer; choose schedules to maintain a target mutual-information proxy until step $t^*$.
+
+\section{Comparison with Autoregressive Generation}
+\begin{table}[h]
+  \centering
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabularx}{\linewidth}{@{} l XX @{} }
+    \toprule
+    Aspect & Autoregressive & Diffusion (ILM) \\
+    \midrule
+    Generation order & Sequential L$\to$R & Parallel blocks, iterative refinement \\
+    Short outputs & Faster ($<50$ tok) & Slower (multiple steps) \\
+    Long outputs & Slower ($>200$ tok) & Faster (parallel denoise) \\
+    Error correction & One-shot, irreversible & Global revision each step \\
+    Controllability & Prompt heuristics & Guidance + meta channels \\
+    Perplexity & Lower (mature) & Approaching parity (2025) \\
+    Memory & KV cache grows & Fixed per step \\
+    Reasoning & Strong CoT & Emerging DoT \\
+    Creativity & Lower diversity & Higher diversity \\
+    \bottomrule
+  \end{tabularx}
+  \vspace{-6pt}
+  \caption{Autoregressive vs. diffusion generation.}
+\end{table}
+
+\section{Direct Character Visual Representation}
+ILM supports both byte/character encodings and glyph images. For CJK, render small glyphs (e.g., $32$--$64$ px), pass through a tiny CNN, and fuse with text embeddings. For Latin scripts, ByT5-style byte models avoid OOV and improve spelling sensitivity.
+
+\section{Unified Objective}
+\begin{align}
+\mathcal{L}_{\text{total}} 
+&= \mathcal{L}_{\text{diff}} 
+ + \lambda_1 \mathcal{L}_{\text{sup}} 
+ + \lambda_2 \mathcal{L}_{\text{spatial}} 
+ + \lambda_3 \mathcal{L}_{\text{visual}} 
+ + \lambda_4 \mathcal{L}_{\text{recon}} 
+ + \lambda_5 \mathcal{L}_{\text{reg}}, \\[-2pt]
+\mathcal{L}_{\text{reg}} &= \lambda_{\text{ortho}} \sum_{u\neq v}\|D_u^\top D_v\|_F^2 + \lambda_{\text{dis}}\sum_{u\neq v} \operatorname{MI}(z_u,z_v).
+\end{align}
+
+\section{Architecture and Training}
+\paragraph{Backbone} A UNet or Diffusion Transformer (DiT) operates on latent grids. Per-level embeddings are projected to a common depth and summed with meta-element conditioning and 2D positional encodings.
+
+\paragraph{Sampling} Use $T{=}16$--$32$ steps with classifier-free guidance. Coarse levels are generated first; fine levels condition on the skeleton.
+
+\paragraph{Efficiency} Latent diffusion yields $\times 16$--$\times 64$ fewer spatial elements; 8-bit quantization and LoRA reduce memory and adaptation cost.
+
+\section{Feasibility and Roadmap}
+We follow a phased plan: build hierarchical code tables; implement rasterization and latent AE; train a small UNet/DiT with discrete heads; add conditioning; then end-to-end finetune. Intrinsic metrics include NLL, edit distance, grammar accuracy; extrinsic tasks evaluate controllability and multilingual transfer.
+
+\paragraph{Key insights} Superposition enables control; hierarchical structure enables compression and interpretability; diffusion enables global revision; and visual encoding enables universal multilingual handling.
+
+\section*{Appendix: Mathematical Notes}
+\subsection*{A. Graph Laplacian}
+With affinity $W$ and degree matrix $\mathrm{Deg}$, $L{=}\mathrm{Deg}{-}W$ yields $\operatorname{tr}(E^\top L E){=}\tfrac{1}{2}\sum_{p,q}w_{pq}\|E_p{-}E_q\|_2^2$.
+
+\subsection*{B. Mixed-Radix Capacity}
+Given $C{=}\prod K_\ell$ codes and $V$ items, balanced assignment reduces expected prefix collisions; nearest-neighbor lookup on prefixes accelerates decoding and improves robustness to denoise errors.
+
+\end{document}
+
