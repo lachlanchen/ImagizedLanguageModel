@@ -43,7 +43,9 @@ def load_yaml(path: str) -> dict:
         return yaml.safe_load(f)
 
 
-def collate_tokens(batch: List[dict], glyph_size: int):
+def collate_tokens(batch: List[dict], glyph_size: int, glyph_db_path: str | None = None):
+    from ilm.db.glyph_db import GlyphDB
+    db = GlyphDB(glyph_db_path) if glyph_db_path else None
     # Flatten tokens across batch and remember mapping to grid positions
     tokens: List[str] = []
     langs: List[str] = []
@@ -61,8 +63,13 @@ def collate_tokens(batch: List[dict], glyph_size: int):
     # Render glyph images
     Ximgs = []
     for lang, tok in zip(langs, tokens):
-        rgb = make_rgb_token_image(lang, tok, size=glyph_size)
-        t = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
+        if db is not None:
+            path = db.ensure_glyph(lang, tok, size=glyph_size)
+            import PIL.Image as Image
+            t = torch.from_numpy(np.array(Image.open(path).convert("RGB"), dtype=np.float32) / 255.0).permute(2, 0, 1)
+        else:
+            rgb = make_rgb_token_image(lang, tok, size=glyph_size)
+            t = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
         Ximgs.append(t)
     X = torch.stack(Ximgs, dim=0)  # (N,C,h,w)
     return {"X": X, "grids": grids, "masks": masks}
@@ -98,6 +105,7 @@ def main():
     ap.add_argument("--wd", type=float, default=None)
     ap.add_argument("--accum-steps", type=int, default=1, help="gradient accumulation steps")
     ap.add_argument("--save-every-epochs", type=int, default=1, help="checkpoint frequency (epochs)")
+    ap.add_argument("--glyph-db", default=None, help="Optional SQLite glyph DB to cache glyphs for frames")
     args = ap.parse_args()
 
     cfg = load_yaml(args.config)
@@ -112,7 +120,7 @@ def main():
     W = args.grid_w or cfg["data"]["grid_w"]
     glyph_size = cfg["data"]["glyph_size"]
     ds = SentenceFrameDataset(jsonl, H=H, W=W)
-    loader = DataLoader(ds, batch_size=(args.batch_size or cfg["data"]["batch_size"]), shuffle=True, num_workers=cfg["data"].get("num_workers", 0), collate_fn=lambda b: collate_tokens(b, glyph_size))
+    loader = DataLoader(ds, batch_size=(args.batch_size or cfg["data"]["batch_size"]), shuffle=True, num_workers=cfg["data"].get("num_workers", 0), collate_fn=lambda b: collate_tokens(b, glyph_size, glyph_db_path=args.glyph_db))
 
     # Models
     d_glyph = cfg["model"]["d_glyph"]

@@ -29,7 +29,9 @@ except ModuleNotFoundError:
     from ilm.diffusion.discrete import sample_mask, masked_mse, corruption
 
 
-def collate_tokens(batch: List[dict], glyph_size: int):
+def collate_tokens(batch: List[dict], glyph_size: int, glyph_db_path: str | None = None):
+    from ilm.db.glyph_db import GlyphDB
+    db = GlyphDB(glyph_db_path) if glyph_db_path else None
     tokens: List[str] = []
     langs: List[str] = []
     grids: List[tuple[int, int, int, int]] = []
@@ -45,8 +47,13 @@ def collate_tokens(batch: List[dict], glyph_size: int):
         masks.append(torch.tensor(mask_flat, dtype=torch.float32))
     Ximgs = []
     for lang, tok in zip(langs, tokens):
-        rgb = make_rgb_token_image(lang, tok, size=glyph_size)
-        t = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
+        if db is not None:
+            path = db.ensure_glyph(lang, tok, size=glyph_size)
+            import PIL.Image as Image
+            t = torch.from_numpy(np.array(Image.open(path).convert("RGB"), dtype=np.float32) / 255.0).permute(2, 0, 1)
+        else:
+            rgb = make_rgb_token_image(lang, tok, size=glyph_size)
+            t = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
         Ximgs.append(t)
     X = torch.stack(Ximgs, dim=0)
     return {"X": X, "grids": grids, "masks": masks}
@@ -73,12 +80,13 @@ def main():
     ap.add_argument("--batch-size", type=int, default=8)
     ap.add_argument("--glyph-size", type=int, default=128)
     ap.add_argument("--device", default="auto")
+    ap.add_argument("--glyph-db", default=None, help="Optional SQLite glyph DB to cache glyphs for frames")
     args = ap.parse_args()
 
     device = ("cuda" if torch.cuda.is_available() else "cpu") if args.device == "auto" else args.device
 
     ds = SentenceFrameDataset(args.jsonl, H=8, W=8)
-    loader = DataLoader(ds, batch_size=args.batch_size, shuffle=False, num_workers=0, collate_fn=lambda b: collate_tokens(b, glyph_size=args.glyph_size))
+    loader = DataLoader(ds, batch_size=args.batch_size, shuffle=False, num_workers=0, collate_fn=lambda b: collate_tokens(b, glyph_size=args.glyph_size, glyph_db_path=args.glyph_db))
 
     glyph_cnn = GlyphCNN(d=128, in_channels=3).to(device)
     glyph_cnn.eval()
@@ -121,4 +129,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

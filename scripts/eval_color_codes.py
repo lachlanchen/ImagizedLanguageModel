@@ -42,7 +42,8 @@ def ensure_dir(p: Path):
 def eval_metrics(index_path: str, ckpt_path: str, out_root: str,
                  batch_size: int = 256, image_size: int | None = 128,
                  device: str = "cuda", auto_generate_missing: bool = False,
-                 pairs_path: str | None = None):
+                 pairs_path: str | None = None,
+                 glyph_db_path: str | None = None):
     # Output directory with datetime suffix
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_dir = Path(out_root) / ts
@@ -57,7 +58,8 @@ def eval_metrics(index_path: str, ckpt_path: str, out_root: str,
 
     # Build dataset/loader
     ds = ImageIndexDataset(index_path=index_path, image_size=image_size,
-                           auto_generate_missing=auto_generate_missing)
+                           auto_generate_missing=auto_generate_missing,
+                           glyph_db_path=glyph_db_path)
     loader = DataLoader(ds, batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
     # Instantiate models
@@ -391,6 +393,7 @@ def main():
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--auto-generate-missing", action="store_true")
     ap.add_argument("--pairs", default=None, help="Optional bilingual pairs TSV with columns: en\tzh")
+    ap.add_argument("--glyph-db", default=None, help="Optional SQLite glyph DB path to load/generate glyphs")
     args = ap.parse_args()
 
     if args.device == "auto":
@@ -407,6 +410,7 @@ def main():
         device=device,
         auto_generate_missing=args.auto_generate_missing,
         pairs_path=args.pairs,
+        glyph_db_path=args.glyph_db,
     )
 
 
