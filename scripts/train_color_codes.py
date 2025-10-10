@@ -3,15 +3,24 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from ilm.data.loader import make_dataloader
-from ilm.encoders.glyph_cnn import GlyphCNN
-from ilm.code.product import ProductCode
+# Ensure repo root on sys.path for `ilm` imports when running as script
+try:
+    from ilm.data.loader import make_dataloader
+    from ilm.encoders.glyph_cnn import GlyphCNN
+    from ilm.code.product import ProductCode
+except ModuleNotFoundError:
+    repo_root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(repo_root))
+    from ilm.data.loader import make_dataloader
+    from ilm.encoders.glyph_cnn import GlyphCNN
+    from ilm.code.product import ProductCode
 
 
 def set_seed(seed: int):
