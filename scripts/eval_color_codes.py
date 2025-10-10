@@ -13,6 +13,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
+import base64
+import io
 
 try:
     from ilm.data.loader import ImageIndexDataset
@@ -164,6 +166,12 @@ def eval_metrics(index_path: str, ckpt_path: str, out_root: str,
 
     # Save a few NN examples
     save_nn_examples(out_dir)
+    # Write HTML report (best-effort)
+    try:
+        write_html_report(out_dir, usage, entropies, indep_mean)
+    except Exception as e:
+        with open(out_dir / "report_error.txt", "w", encoding="utf-8") as f:
+            f.write(str(e))
 
     print(json.dumps({"metrics_dir": str(out_dir)}))
 
@@ -249,6 +257,130 @@ def save_nn_examples(out_dir: Path, n_samples: int = 10, k: int = 10):
                 ])
 
 
+def _encode_fig_png(fig) -> str:
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", bbox_inches="tight", dpi=150)
+    buf.seek(0)
+    b64 = base64.b64encode(buf.read()).decode("ascii")
+    return f"data:image/png;base64,{b64}"
+
+
+def _plot_usage_images(usage: List[np.ndarray]) -> List[str]:
+    try:
+        import matplotlib.pyplot as plt
+    except Exception:
+        return []
+    imgs = []
+    for c, p in enumerate(usage):
+        fig, ax = plt.subplots(figsize=(6, 2))
+        ax.bar(np.arange(len(p)), p, color="#4e79a7")
+        ax.set_title(f"Channel {c} usage")
+        ax.set_xlabel("bin (K)")
+        ax.set_ylabel("probability")
+        ax.set_ylim(0, max(0.05, float(p.max()) * 1.1))
+        data_uri = _encode_fig_png(fig)
+        imgs.append(data_uri)
+        plt.close(fig)
+    return imgs
+
+
+def _pca_scatter_image(codes: np.ndarray, langs: List[str], max_points: int = 2000) -> str | None:
+    try:
+        import matplotlib.pyplot as plt
+    except Exception:
+        return None
+    n = codes.shape[0]
+    idx = np.random.default_rng(0).choice(n, size=min(max_points, n), replace=False)
+    X = codes[idx].astype(np.float32)
+    L = [langs[i] for i in idx]
+    Xc = X - X.mean(axis=0, keepdims=True)
+    # PCA via SVD
+    U, S, Vt = np.linalg.svd(Xc, full_matrices=False)
+    coords = Xc @ Vt[:2].T
+    colors = ["#4e79a7" if l == "en" else ("#e15759" if l == "zh" else "#76b7b2") for l in L]
+    fig, ax = plt.subplots(figsize=(5, 5))
+    ax.scatter(coords[:, 0], coords[:, 1], c=colors, s=6, alpha=0.6, linewidths=0)
+    ax.set_title("Codes PCA (sample)")
+    ax.set_xlabel("PC1")
+    ax.set_ylabel("PC2")
+    data_uri = _encode_fig_png(fig)
+    plt.close(fig)
+    return data_uri
+
+
+def write_html_report(out_dir: Path, usage: List[np.ndarray], entropies: List[float], indep_mean: float) -> None:
+    # Load ids and codes
+    codes = np.load(out_dir / "codes.npy")
+    langs = []
+    tokens = []
+    with open(out_dir / "ids.tsv", "r", encoding="utf-8") as f:
+        r = csv.DictReader(f, delimiter="\t")
+        for row in r:
+            langs.append(row["lang"])  # type: ignore[index]
+            tokens.append(row["token"])  # type: ignore[index]
+
+    usage_imgs = _plot_usage_images(usage)
+    pca_img = _pca_scatter_image(codes, langs)
+
+    # Load top-NN table (first 50 rows)
+    nn_rows = []
+    nn_path = out_dir / "nn_examples.tsv"
+    if nn_path.exists():
+        with open(nn_path, "r", encoding="utf-8") as f:
+            r = csv.DictReader(f, delimiter="\t")
+            for i, row in enumerate(r):
+                if i >= 50:
+                    break
+                nn_rows.append(row)
+
+    # Compose HTML
+    html = [
+        "<html><head><meta charset='utf-8'><title>Color Codes Metrics</title>",
+        "<style>body{font-family:sans-serif;max-width:1000px;margin:20px auto;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ccc;padding:4px 6px;} .sec{margin:20px 0;} .imgs{display:flex;gap:12px;flex-wrap:wrap;} .imgbox{border:1px solid #ddd;padding:6px}</style>",
+        "</head><body>",
+        f"<h1>Product Color Codes Report</h1>",
+        f"<div class='sec'><h2>Summary</h2>",
+        f"<p>Entropy per channel: {', '.join(f'{h:.3f}' for h in entropies)}<br/>Independence (mean Frob^2): {indep_mean:.6f}</p>",
+        f"<p>Artifacts: <a href='summary.json'>summary.json</a>, <a href='usage.csv'>usage.csv</a>, <a href='ids.tsv'>ids.tsv</a>, <a href='codes.npy'>codes.npy</a>, <a href='glyphs.npy'>glyphs.npy</a></p>",
+        "</div>",
+    ]
+
+    # Usage images
+    html.append("<div class='sec'><h2>Channel Usage</h2><div class='imgs'>")
+    if usage_imgs:
+        for uri in usage_imgs:
+            html.append(f"<div class='imgbox'><img src='{uri}'/></div>")
+    else:
+        html.append("<p>(matplotlib unavailable; see usage.csv)</p>")
+    html.append("</div></div>")
+
+    # PCA image
+    html.append("<div class='sec'><h2>PCA of Codes (sample)</h2>")
+    if pca_img:
+        html.append(f"<div class='imgbox'><img src='{pca_img}'/></div>")
+    else:
+        html.append("<p>(matplotlib unavailable)</p>")
+    html.append("</div>")
+
+    # NN examples
+    html.append("<div class='sec'><h2>Nearest Neighbors (sample)</h2>")
+    if nn_rows:
+        html.append("<table><thead><tr><th>q_idx</th><th>q_lang</th><th>q_token</th><th>rank</th><th>nn_idx</th><th>nn_lang</th><th>nn_token</th><th>sim</th></tr></thead><tbody>")
+        for r in nn_rows:
+            html.append("<tr>" + "".join(
+                f"<td>{r[k]}</td>" for k in ["query_idx","query_lang","query_token","nn_rank","nn_idx","nn_lang","nn_token","sim"]
+            ) + "</tr>")
+        html.append("</tbody></table>")
+    else:
+        html.append("<p>No NN examples available.</p>")
+    html.append("</div>")
+
+    html.append("</body></html>")
+
+    with open(out_dir / "report.html", "w", encoding="utf-8") as f:
+        f.write("\n".join(html))
+
+
 def main():
     ap = argparse.ArgumentParser(description="Evaluate product color codes and generate metrics with timestamped folder")
     ap.add_argument("--index", default="data/processed/images_common_freq/index.tsv")
@@ -280,4 +412,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -131,7 +131,7 @@ def main():
             images = images.to(device, non_blocking=True)
 
             opt.zero_grad(set_to_none=True)
-            with torch.cuda.amp.autocast(enabled=(device == "cuda")):
+            with torch.amp.autocast('cuda', enabled=(device == "cuda")):
                 g = glyph_cnn(images)               # (B×d_glyph)
                 out = code(g, tau=tau)              # embed, logits, y
                 losses, total = code.compute_losses(
