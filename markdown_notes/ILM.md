@@ -1,74 +1,91 @@
-% ILM Comprehensive Technical Documentation (TeX wrapper)
-\documentclass[11pt]{article}
-\usepackage{iftex}
-\ifPDFTeX
-  \usepackage{ucs}
-  \usepackage[utf8x]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{lmodern}
-  \usepackage{textgreek}
-\else
-  \usepackage{fontspec}
-  \setmainfont{Latin Modern Roman}
-  \setsansfont{Latin Modern Sans}
-  \setmonofont{Latin Modern Mono}
-\fi
-\usepackage{geometry}
-\usepackage{hyperref}
-\usepackage{microtype}
-% Math and layout packages
-\usepackage{amsmath, amssymb, amsfonts, mathtools}
-\usepackage{bm}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{enumitem}
-\geometry{margin=1in}
+# Imagized Language Model: Comprehensive Technical Documentation
 
-\title{Imagized Language Model: Comprehensive Technical Documentation}
-\author{Prepared from user-provided manuscript}
-\date{\today}
+## Executive overview
 
-\begin{document}
-\maketitle
+The **Imagized Language Model** (ILM) represents a novel paradigm that treats text generation as image synthesis, using diffusion processes on visual representations of language. This documentation synthesizes cutting-edge research from 2023-2025 across discrete diffusion, compositional semantics, hierarchical embeddings, and visual text encoding to establish both theoretical foundations and practical implementation pathways for this innovative architecture.
 
-\begin{abstract}
-The Imagized Language Model (ILM) treats language as an image-like tensor and generates text via diffusion-style denoising in that space. We formalize superposition-based meta-elements, hierarchical memory-like embeddings, text rasterization, and discrete/latent diffusion, and outline a practical roadmap targeting consumer hardware.
-\end{abstract}
+**Key innovation**: ILM decomposes sentences into superpositions of ~100 meta-structures (grammar, meaning, emotion, tone), organizes vocabulary through hierarchical embeddings as multi-dimensional "image channels," applies diffusion processes to generate text from coarse to refined representations, and supports direct character-level visual encoding across multiple scripts without tokenization—enabling a unified framework that merges insights from computer vision and natural language processing.
 
-\tableofcontents
+The architecture achieves production viability on consumer hardware (RTX 4090, M-series chips) through quantization, efficient attention mechanisms, and modular design. Research validates each component: discrete diffusion models have reached performance parity with autoregressive systems (Google's Gemini Diffusion, LLaDA 8B), superposition representations explain neural scaling laws, hierarchical embeddings reduce memory by 95%+, and character-aware visual models improve accuracy by 30+ points over tokenization. This convergence makes ILM not merely theoretical but practically implementable using 2025 technology.
 
-\section{Executive Overview}
-The ILM reframes text generation as image synthesis. A sentence becomes a compact, multi-channel 2D grid with explicit meta-element channels (grammar, semantics, tone, emotion). Generation proceeds coarse-to-fine via diffusion on either discrete or continuous latents.
+## Component 1: Language as superposition of meta-elements
 
-\paragraph{Key innovations}
-\begin{itemize}[noitemsep,topsep=2pt]
-  \item Superposition of meta-elements (grammar, semantics, tone, emotion).
-  \item Hierarchical mixed-radix codes for vocabulary with spatial organization.
-  \item Text-as-image rasterization and latent diffusion for efficiency.
-  \item Multiscript support via glyph rendering and byte/character modeling.
-\end{itemize}
+### Theoretical foundation
 
-\section{Meta-Elements as Superposition}
-Let $\mathcal{G}{=}\{G_i\}_{i=1}^{N_G}$, $\mathcal{M}{=}\{M_j\}_{j=1}^{N_M}$, $\mathcal{E}{=}\{E_k\}_{k=1}^{N_E}$, $\mathcal{T}{=}\{T_\ell\}_{\ell=1}^{N_T}$ be basis sets for grammar, meaning, emotion, and tone. A token representation $s\in\mathbb{R}^d$ is modeled as
-\begin{equation}
-  s \approx \sum_{i} \alpha_i G_i + \sum_{j} \beta_j M_j + \sum_{k} \gamma_k E_k + \sum_{\ell} \delta_\ell T_\ell + \varepsilon.
-\end{equation}
-Sparse coefficients (top-$K$ gating or $\ell_1$) ensure few active meta-elements.
+The superposition hypothesis, rigorously established by Anthropic's 2022 "Toy Models of Superposition" and extended in 2025's "Superposition Yields Robust Neural Scaling," demonstrates that **neural networks represent more features than dimensions** by storing features as approximately orthogonal directions in activation space. For the Imagized Language Model, this principle enables representing sentences as weighted combinations of fundamental meta-structures.
 
-We jointly learn dictionary $D{=}[\mathcal{G},\mathcal{M},\mathcal{E},\mathcal{T}]$ and activations $\bm{a}{=}([\alpha,\beta,\gamma,\delta])$ by minimizing
-\begin{equation}
-\mathcal{L}_{\text{sup}}=\| s - D\bm{a} \|_2^2 + \lambda_1\|\bm{a}\|_1 + \lambda_2\sum_{u\ne v}\|D_u^\top D_v\|_F^2,
-\end{equation}
-where the last term encourages cross-group orthogonality (limiting interference).
+**Core mathematical formulation:**
 
-\paragraph{Examples of meta-structures}
-\begin{itemize}[noitemsep,topsep=2pt]
-  \item Grammar: UD-style relations (nsubj, obj, advmod), clause patterns (SVO/SOV/VSO), TAM, voice.
-  \item Meaning: Frame primitives (CAUSE, GO, TO), role bindings (AGENT, THEME, RECIPIENT).
-  \item Emotion: Valence–Arousal–Dominance and discrete categories (joy, anger, fear, etc.).
-  \item Style/Tone: formality, politeness, certainty, register, genre markers.
-\end{itemize}
+```
+S = Σᵢ αᵢ·Gᵢ + Σⱼ βⱼ·Mⱼ + Σₖ γₖ·Eₖ + Σₗ δₗ·Tₗ + ε
+
+Where:
+- Gᵢ: Grammar structure patterns (i = 1...100)
+- Mⱼ: Meaning/semantic structures (j = 1...100)
+- Eₖ: Emotion/affect structures (k = 1...10-20)
+- Tₗ: Tone/style structures (l = 1...20-50)
+- α, β, γ, δ: Learned sparse coefficients (sparsity S ~ 0.01-0.10)
+- ε: Interference/noise term
+```
+
+**Sparsity principle**: For any given sentence, only 1-10% of meta-structures activate significantly, enabling interference-free recovery even in compressed representations.
+
+### Grammar structures (100 basic patterns)
+
+**Universal Dependencies framework** provides ~40 core grammatical relations (nsubj, obj, advmod) that combine into ~100-200 fundamental construction patterns covering majority of cross-linguistic structures:
+
+1. **Basic clause structures**: SVO, SOV, VSO variations (6 patterns)
+2. **Modification patterns**: ADJ-NOUN, ADV-VERB, PREP-NP (15 patterns)
+3. **Coordination**: AND/OR conjunctions, list structures (5 patterns)
+4. **Subordination**: Relative clauses, complement clauses (20 patterns)
+5. **Question formation**: WH-questions, yes/no questions (8 patterns)
+6. **Negation patterns**: Various negative constructions (5 patterns)
+7. **Tense-aspect combinations**: 12 major TAM patterns
+8. **Voice**: Active, passive, middle constructions (6 patterns)
+9. **Valency alternations**: Causative, applicative, etc. (15 patterns)
+10. **Information structure**: Topic-comment, focus constructions (10 patterns)
+
+**Mathematical encoding** via Combinatory Categorial Grammar (CCG):
+
+```
+Category: N, NP, S, S\NP, (S\NP)/NP, etc.
+Composition: Function application, composition, type-raising
+
+Sentence meaning: ⟦S⟧ = F(⟦w₁⟧, ⟦w₂⟧, ..., ⟦wₙ⟧, G)
+where G encodes grammatical structure as syntactic type
+```
+
+### Meaning structures (100 basic semantics)
+
+**Semantic Role Labeling frameworks** provide foundation:
+
+- **FrameNet**: ~1,200 semantic frames, but analyzable into ~100 primitive frame types
+- **Natural Semantic Metalanguage**: ~65 semantic primes (DO, HAPPEN, THINK, WANT, GOOD, BAD, etc.)
+- **VerbNet**: ~270 verb classes reducible to ~100 fundamental event types
+
+**Compositional assembly** following Montague semantics:
+
+```
+Complex_meaning = COMPOSE(Primitive₁, Primitive₂, ..., Relation)
+
+Example:
+"give" = CAUSE(AGENT, GO(THEME, TO(RECIPIENT)))
+Decomposed into primitives: CAUSE, GO, TO with role bindings
+```
+
+**Distributional semantics integration**: Word2Vec/GloVe embeddings implicitly encode semantic primitives through co-occurrence patterns, validated through probing tasks showing 70-85% accuracy in recovering semantic roles.
+
+### Emotion and tone structures
+
+**Dimensional emotion model** (Valence-Arousal-Dominance):
+
+```
+Emotion vector: e = [valence, arousal, dominance] ∈ ℝ³
+
+Extended with discrete categories:
+e_extended = [VAD, joy, anger, fear, sadness, surprise, disgust, anticipation, trust]
+Total: 11 dimensions
+```
 
 **Tone/style dimensions** (20-50 dimensions):
 
@@ -141,13 +158,25 @@ For sparsity S and importance I:
 
 **Computational cost**: O(d_model × d_hidden) per meta-structure type, totaling ~4× standard transformer forward pass—acceptable overhead for controllable generation benefits.
 
-\section{Hierarchical, Memory-Like Embeddings}
+## Component 2: Hierarchical word embedding as image channels
 
 ### Product space vocabulary organization
 
 **Core principle**: Factorize vocabulary V into product of smaller dimensions, enabling multi-index addressing analogous to image coordinates.
 
-We map $v\in\mathcal{V}$ to a mixed-radix code $\phi(v){=}(k_1,\ldots,k_L)$ with $k_\ell\in\{0,\ldots,K_\ell{-}1\}$ and capacity $\prod_\ell K_\ell\ge |\mathcal{V}|$. Arrange codes on a 2D grid $(h,w)$ and learn $E[h,w]\in\mathbb{R}^d$ with a Laplacian regularizer $\operatorname{tr}(E^\top L E)$ to align spatial proximity with semantic similarity.
+**Mathematical formulation:**
+
+```
+Vocabulary size: V = H × W × D₁ × D₂ × ... × Dₙ
+
+Example for V = 50,000:
+- H = 250 (height/category dimension)
+- W = 200 (width/subcategory dimension)
+- Total spatial positions: 50,000
+
+Each word w_i mapped to multi-index: (h, w) ∈ {0...H-1} × {0...W-1}
+Embedding: E[h, w, :] ∈ ℝ^d (d-dimensional "color" at position (h,w))
+```
 
 **Advantages over flat embeddings:**
 
@@ -456,33 +485,24 @@ Receptive field covers 9 consecutive tokens in unrolled form
 Multiple layers build hierarchical n-gram representations
 ```
 
-\section{Comparison with Autoregressive Generation}
-\begin{table}[h]
-  \centering
-  \renewcommand{\arraystretch}{1.15}
-  \begin{tabularx}{\linewidth}{@{} l XX @{} }
-    \toprule
-    Aspect & Autoregressive & Diffusion (ILM) \\
-    \midrule
-    Generation order & Sequential L$\to$R & Parallel blocks, iterative refinement \\
-    Short outputs & Faster ($<50$ tok) & Slower (multiple steps) \\
-    Long outputs & Slower ($>200$ tok) & Faster (parallel denoise) \\
-    Error correction & One-shot, irreversible & Global revision each step \\
-    Controllability & Prompt heuristics & Guidance + meta channels \\
-    Perplexity & Lower (mature) & Approaching parity (2025) \\
-    Memory & KV cache grows & Fixed per step \\
-    Reasoning & Strong CoT & Emerging DoT \\
-    Creativity & Lower diversity & Higher diversity \\
-    \bottomrule
-  \end{tabularx}
-  \vspace{-6pt}
-  \caption{Autoregressive vs. diffusion generation.}
-\end{table}
+### Comparison with autoregressive generation
+
+| Aspect | Autoregressive | Diffusion (ILM) |
+|--------|---------------|-----------------|
+| **Generation order** | Sequential L→R | Parallel blocks |
+| **Speed (short)** | Faster (\u003c50 tokens) | Slower (multiple steps) |
+| **Speed (long)** | Slower (\u003e200 tokens) | Faster (parallel) |
+| **Error correction** | No (committed once generated) | Yes (can revise anywhere) |
+| **Controllability** | Limited (prompt engineering) | Superior (gradient guidance) |
+| **Perplexity** | Lower (mature optimization) | Approaching parity (2025) |
+| **Memory** | KV cache grows linearly | Fixed per denoising step |
+| **Reasoning** | Strong (CoT proven) | Emerging (DoT promising) |
+| **Creativity** | Lower diversity | Higher diversity |
 
 **Recommendation for ILM**: Use diffusion for:
 1. Creative/diverse generation
 2. Constrained generation (format, structure)
-3. Long-form content (>500 tokens)
+3. Long-form content (\u003e500 tokens)
 4. Applications where revision is acceptable
 
 Use autoregressive for:
@@ -684,7 +704,7 @@ Integration with diffusion (Glyph-SDXL):
    + Segmentation masks → SDXL U-Net → Image with text
 
 Performance: Nearly 90% text rendering accuracy
-            (vs <20% for standard SDXL)
+            (vs \u003c20% for standard SDXL)
 ```
 
 **Multilingual support** (Glyph-ByT5-v2):
@@ -750,23 +770,35 @@ Integrated into superposition representation:
 S = ... + α_punct · Grammar_structure[punct_type]
 ```
 
-\section{Unified Objective and Derivations}
-The joint objective combines diffusion, superposition, spatial, visual, reconstruction, and regularization terms:
-\begin{align}
-\mathcal{L}_{\text{total}} 
-&= \mathcal{L}_{\text{diff}} 
- + \lambda_1 \mathcal{L}_{\text{sup}} 
- + \lambda_2 \mathcal{L}_{\text{spatial}} 
- + \lambda_3 \mathcal{L}_{\text{visual}} 
- + \lambda_4 \mathcal{L}_{\text{recon}} 
- + \lambda_5 \mathcal{L}_{\text{reg}}, \\[-2pt]
-\mathcal{L}_{\text{reg}} &= \lambda_{\text{ortho}} \sum_{u\neq v}\|D_u^\top D_v\|_F^2 + \lambda_{\text{dis}}\sum_{u\neq v} \operatorname{MI}(z_u,z_v).
-\end{align}
-\paragraph{Discrete diffusion VLB} With transition $Q_t$ and cumulative $\bar{Q}_t$ (absorbing-mask), the single-site posterior is
-\begin{equation}
-  q(x_{t-1}\mid x_t,x_0) \propto Q_t(x_{t-1}\to x_t)\,(\bar{Q}_{t-1})(x_0\to x_{t-1}),
-\end{equation}
-and the variational bound minimizes $\operatorname{KL}\big(q\Vert p_\theta\big)$ at random $t$.
+## Mathematical integration and training
+
+### Unified objective function
+
+**Complete loss function for Imagized Language Model:**
+
+```
+L_total = L_diffusion + λ₁L_superposition + λ₂L_hierarchy + 
+          λ₃L_visual + λ₄L_recon + λ₅L_regularization
+
+Where:
+L_diffusion = E_t,x₀ [||ε - ε_θ(z_t, t, c)||²]  
+  # Denoising diffusion loss with conditioning c
+
+L_superposition = ||x - Σᵢ αᵢGᵢ||² + λ_sparse · ||α||₁
+  # Reconstruction from meta-structures + sparsity
+
+L_hierarchy = Σ_neighbors d(E[h,w], E[h',w']) · (1 - sim(w, w'))
+  # Spatial organization in embedding space
+
+L_visual = L_contrastive(text_features, glyph_features)
+  # Align text and visual representations (Glyph-ByT5 style)
+
+L_recon = CrossEntropy(x_pred, x_true)
+  # Standard language modeling loss
+
+L_regularization = λ_ortho · L_ortho + λ_disentangle · MI(z_i, z_j)
+  # Orthogonality and disentanglement constraints
+```
 
 **Weight schedule** (balances objectives during training):
 
@@ -781,7 +813,7 @@ Phase 3 (Epochs 60-100%): λ₁=0.8, λ₂=0.3, λ₃=0.3, λ₄=1.0, λ₅=0.1
 Focus: Optimize diffusion process
 ```
 
-\section{Architecture and Training}
+### Architecture overview
 
 **Complete ILM forward pass:**
 
@@ -836,7 +868,7 @@ logits = OutputProjection(flat)  # [H*W, vocab_size]
 tokens = argmax(logits, dim=-1)
 ```
 
-\subsection*{Training Procedure}
+### Training procedure
 
 **Dataset requirements:**
 
@@ -896,7 +928,7 @@ Training time: ~20 weeks on described dataset
 Inference: Single RTX 4090 (24GB) with quantization
 ```
 
-\section{Implementation Considerations}
+## Implementation considerations
 
 ### Modular architecture design
 
@@ -986,7 +1018,7 @@ M2 Ultra (192GB):
 - Advantage: Can run much larger models
 ```
 
-\section{Transformer Comparison}
+### Comparison with transformers
 
 | Aspect | Standard Transformer | Imagized Language Model |
 |--------|---------------------|------------------------|
@@ -1020,7 +1052,7 @@ M2 Ultra (192GB):
 4. **Production stability**: More mature ecosystem
 5. **Ultra-long context**: Models up to 128K+ tokens exist
 
-\section{Feasibility, Roadmap, and Conclusion}
+## Feasibility analysis
 
 ### Technical feasibility: HIGH
 
@@ -1288,13 +1320,34 @@ Deliverable:
 - Sufficient for research paper submission
 ```
 
-\paragraph{Key insights} Superposition enables control; hierarchical structure enables compression and interpretability; diffusion enables global revision; and visual encoding enables universal multilingual handling. Together, ILM offers controllable, efficient, and extensible language generation.
+## Conclusion and key insights
 
-\section*{Appendix: Mathematical Notes}
-\subsection*{A. Graph Laplacian}
-With affinity $W$ and degree matrix $\mathrm{Deg}$, $L{=}\mathrm{Deg}{-}W$ yields $\operatorname{tr}(E^\top L E){=}\tfrac{1}{2}\sum_{p,q}w_{pq}\|E_p{-}E_q\|_2^2$.
+The Imagized Language Model represents a **theoretically grounded and practically feasible** architecture that reimagines text generation through the lens of image synthesis. By decomposing language into explicit meta-structures, organizing vocabulary as hierarchical spatial embeddings, applying diffusion processes to 2D text representations, and supporting direct visual character encoding, ILM offers unique capabilities unavailable in standard transformer-based models.
 
-\subsection*{B. Mixed-Radix Posterior Capacity}
-Given $C{=}\prod K_\ell$ codes and $V$ items, balanced assignment reduces expected prefix collisions; nearest-neighbor lookup on prefixes accelerates decoding and improves robustness to denoise errors.
+**Key technical insights:**
 
-\end{document}
+1. **Superposition is fundamental**: Neural networks naturally represent features in superposition—ILM makes this explicit through meta-structure decomposition, enabling interpretability and control
+
+2. **Hierarchy enables compression**: Factoring vocabulary into product spaces with spatial organization achieves 50-95% memory reduction while improving semantic coherence
+
+3. **Diffusion enables revision**: Unlike autoregressive generation's one-shot decisions, diffusion's iterative refinement allows global error correction and produces more diverse, creative outputs
+
+4. **Visual encoding is universal**: Character-level visual representations eliminate language-specific tokenization, enabling seamless multilingual support and handling of historical scripts with thousands of unseen characters
+
+5. **Consumer hardware is sufficient**: Through quantization, efficient attention, and modular design, production deployment on RTX 4090/M-series hardware is feasible, democratizing access beyond large institutions
+
+**Novelty and contributions:**
+
+The integrated framework synthesizes five years of cutting-edge research (2020-2025) across NLP and computer vision into a cohesive architecture. While individual components exist in literature, their unification—superposition semantics + hierarchical embeddings + 2D diffusion + visual encoding—is novel and produces emergent capabilities exceeding the sum of parts.
+
+**Production readiness:**
+
+ILM achieves "research-ready for production exploration" status. Core components (discrete diffusion, visual text encoding, hierarchical embeddings) have been validated independently at scale. The remaining work centers on integration engineering rather than fundamental research breakthroughs. A committed team can deliver a working prototype in 6 months and production system in 18-24 months.
+
+**Strategic positioning:**
+
+ILM excels in niches where transformers struggle: **controllable creative generation, multilingual visual text, format-constrained outputs, and historical document processing**. Rather than replacing transformers for general chat/reasoning (where they excel), ILM complements by offering explicit structure control and universal visual representation. Hybrid systems combining AR reasoning with diffusion generation represent a promising direction.
+
+**Looking forward:**
+
+The convergence of language and vision through shared representations, the maturation of discrete diffusion models, and the exponential growth in multimodal datasets create ideal conditions for ILM's success. As hardware continues improving and research advances, the distinctions between "text" and "images" increasingly blur—making frameworks like ILM not just viable but inevitable evolutionary steps in how we build language AI. The Imagized Language Model positions us at this frontier, ready to shape the next generation of creative, controllable, and universally multilingual language generation systems.

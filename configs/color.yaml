@@ -1,0 +1,36 @@
+seed: 42
+device: auto  # cuda, cpu, or auto
+
+data:
+  index_path: data/processed/images_common_freq/index.tsv
+  image_size: 128
+  batch_size: 512
+  num_workers: 4
+
+model:
+  d_glyph: 128
+  d_code: 128
+  K: 32
+  C: 3
+  tau_start: 1.0
+  tau_end: 0.2
+  tau_anneal_epochs: 20
+  temperature: 0.07
+  straight_through: true
+
+optim:
+  lr: 1.0e-3
+  wd: 1.0e-4
+  epochs: 10
+  grad_clip: 1.0
+
+loss_weights:
+  info: 1.0
+  usage: 0.1
+  indep: 0.1
+
+log:
+  log_every: 50
+  ckpt_dir: artifacts
+  ckpt_every: 1
+
