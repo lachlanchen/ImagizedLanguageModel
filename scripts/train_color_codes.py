@@ -39,6 +39,8 @@ def main():
     ap = argparse.ArgumentParser(description="Train 3x32 product color codes with InfoNCE alignment")
     ap.add_argument("--config", default="configs/color.yaml")
     ap.add_argument("--smoke-test", action="store_true", help="Run a quick gradient check with random data")
+    ap.add_argument("--epochs", type=int, default=None, help="Override epochs for quick tests")
+    ap.add_argument("--batch-size", type=int, default=None, help="Override batch size for quick tests")
     args = ap.parse_args()
 
     cfg = load_yaml(args.config)
@@ -56,14 +58,15 @@ def main():
         H = W = cfg["data"].get("image_size", 128)
         X = torch.rand(B, 3, H, W)
         ds = TensorDataset(X)
-        loader = DataLoader(ds, batch_size=cfg["data"].get("batch_size", 256), shuffle=True)
+        bs = args.batch_size or cfg["data"].get("batch_size", 256)
+        loader = DataLoader(ds, batch_size=bs, shuffle=True)
     else:
         idx_path = cfg["data"]["index_path"]
         if not os.path.exists(idx_path):
             raise FileNotFoundError(f"index.tsv not found: {idx_path}. Run image builders in scripts/.")
         loader = make_dataloader(
             index_path=idx_path,
-            batch_size=cfg["data"].get("batch_size", 256),
+            batch_size=args.batch_size or cfg["data"].get("batch_size", 256),
             shuffle=True,
             num_workers=cfg["data"].get("num_workers", 4),
             image_size=cfg["data"].get("image_size", None),
@@ -96,6 +99,8 @@ def main():
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     ckpt_every = cfg["log"].get("ckpt_every", 1)
 
+    if args.epochs is not None:
+        cfg["optim"]["epochs"] = int(args.epochs)
     epochs = int(cfg["optim"]["epochs"])
     step = 0
 
@@ -160,4 +165,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
