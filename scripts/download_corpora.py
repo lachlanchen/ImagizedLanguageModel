@@ -106,6 +106,33 @@ def main():
         except Exception:
             zh_written = 0
 
+    # Fallback 2: CLUE TNEWS (Chinese short news titles)
+    if zh_written == 0:
+        try:
+            clue_url = "https://raw.githubusercontent.com/CLUEbenchmark/CLUE/master/datasets/tnews/train.json"
+            print(f"Downloading ZH CLUE TNEWS from {clue_url} ...")
+            with urlopen(clue_url, timeout=60) as resp:
+                data = resp.read().decode("utf-8", errors="ignore").splitlines()
+            out_path = out_dir / "zh.jsonl"
+            with out_path.open("w", encoding="utf-8") as f:
+                count = 0
+                for i, line in enumerate(data):
+                    try:
+                        obj = json.loads(line)
+                        # fields can be 'sentence' or 'sentence1'
+                        txt = obj.get("sentence") or obj.get("sentence1") or ""
+                        txt = (txt or "").strip()
+                        if txt:
+                            f.write(json.dumps({"text": txt, "lang": "zh"}, ensure_ascii=False) + "\n")
+                            count += 1
+                            if count >= args.zh_limit:
+                                break
+                    except Exception:
+                        continue
+            zh_written = count
+        except Exception:
+            zh_written = 0
+
     # Optional bitext (very small sample for alignment) and fallback for mono
     bitext_written = 0
     if args.bitext or en_written == 0 or zh_written == 0:
