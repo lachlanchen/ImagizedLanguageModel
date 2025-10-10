@@ -3,6 +3,10 @@ import argparse
 import json
 import os
 from pathlib import Path
+import gzip
+import io
+import xml.etree.ElementTree as ET
+from urllib.request import urlopen
 
 
 def write_lines(path: Path, iterable, limit: int, field: str = "text", lang: str = ""):
@@ -63,6 +67,44 @@ def main():
             zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
     except Exception:
         zh_written = 0
+
+    # Fallback: Wikipedia abstracts (ZH)
+    if zh_written == 0:
+        try:
+            url = "https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-abstract.xml.gz"
+            print(f"Downloading ZH abstracts from {url} ...")
+            with urlopen(url, timeout=60) as resp:
+                data = resp.read()
+            fh = io.BytesIO(data)
+            with gzip.GzipFile(fileobj=fh) as gz:
+                count = 0
+                out_path = out_dir / "zh.jsonl"
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                with out_path.open("w", encoding="utf-8") as f:
+                    # Stream parse simplistic: read line-wise and accumulate doc
+                    buf = []
+                    for raw in gz:
+                        line = raw.decode("utf-8", errors="ignore")
+                        buf.append(line)
+                        if line.strip() == "</doc>":
+                            block = "".join(buf)
+                            buf.clear()
+                            # Extract title/abstract
+                            try:
+                                root = ET.fromstring(block)
+                                abs_el = root.find("abstract")
+                                if abs_el is not None:
+                                    txt = (abs_el.text or "").strip()
+                                    if txt:
+                                        f.write(json.dumps({"text": txt, "lang": "zh"}, ensure_ascii=False) + "\n")
+                                        count += 1
+                                        if count >= args.zh_limit:
+                                            break
+                            except ET.ParseError:
+                                continue
+                zh_written = count
+        except Exception:
+            zh_written = 0
 
     # Optional bitext (very small sample for alignment) and fallback for mono
     bitext_written = 0
