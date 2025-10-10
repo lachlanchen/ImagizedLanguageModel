@@ -87,6 +87,17 @@ def main():
     ap = argparse.ArgumentParser(description="Train small 2D UNet on sentence frames with masked infilling")
     ap.add_argument("--config", default="configs/diffusion.yaml")
     ap.add_argument("--resume-glyph", default=None, help="optional color_codes checkpoint for glyph CNN init")
+    # Overrides for serious training
+    ap.add_argument("--epochs", type=int, default=None)
+    ap.add_argument("--batch-size", type=int, default=None)
+    ap.add_argument("--grid-h", type=int, default=None)
+    ap.add_argument("--grid-w", type=int, default=None)
+    ap.add_argument("--mask-ratio-min", type=float, default=None)
+    ap.add_argument("--mask-ratio-max", type=float, default=None)
+    ap.add_argument("--lr", type=float, default=None)
+    ap.add_argument("--wd", type=float, default=None)
+    ap.add_argument("--accum-steps", type=int, default=1, help="gradient accumulation steps")
+    ap.add_argument("--save-every-epochs", type=int, default=1, help="checkpoint frequency (epochs)")
     args = ap.parse_args()
 
     cfg = load_yaml(args.config)
@@ -97,11 +108,11 @@ def main():
 
     # Dataset/loader
     jsonl = cfg["data"]["jsonl"]
-    H = cfg["data"]["grid_h"]
-    W = cfg["data"]["grid_w"]
+    H = args.grid_h or cfg["data"]["grid_h"]
+    W = args.grid_w or cfg["data"]["grid_w"]
     glyph_size = cfg["data"]["glyph_size"]
     ds = SentenceFrameDataset(jsonl, H=H, W=W)
-    loader = DataLoader(ds, batch_size=cfg["data"]["batch_size"], shuffle=True, num_workers=cfg["data"].get("num_workers", 0), collate_fn=lambda b: collate_tokens(b, glyph_size))
+    loader = DataLoader(ds, batch_size=(args.batch_size or cfg["data"]["batch_size"]), shuffle=True, num_workers=cfg["data"].get("num_workers", 0), collate_fn=lambda b: collate_tokens(b, glyph_size))
 
     # Models
     d_glyph = cfg["model"]["d_glyph"]
@@ -120,6 +131,10 @@ def main():
     out_ch = cfg["model"]["out_channels"]
     unet = UNet2D(in_ch=in_ch, base_ch=base_ch, depth=depth, out_ch=out_ch).to(device)
 
+    if args.lr is not None:
+        cfg["optim"]["lr"] = args.lr
+    if args.wd is not None:
+        cfg["optim"]["wd"] = args.wd
     opt = optim.AdamW(unet.parameters(), lr=cfg["optim"]["lr"], weight_decay=cfg["optim"]["wd"])
     scaler = torch.amp.GradScaler('cuda', enabled=(device == "cuda"))
 
@@ -128,6 +143,8 @@ def main():
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     ckpt_name = cfg["log"]["ckpt_name"]
 
+    if args.epochs is not None:
+        cfg["optim"]["epochs"] = int(args.epochs)
     epochs = int(cfg["optim"]["epochs"])
     step = 0
     for epoch in range(1, epochs + 1):
@@ -154,27 +171,35 @@ def main():
 
             with torch.amp.autocast('cuda', enabled=(device == "cuda")):
                 pred = unet(Xin, t_scalar=ratio)
-                loss = masked_mse(pred, Ftrue, M)
+                loss = masked_mse(pred, Ftrue, M) / max(1, args.accum_steps)
             scaler.scale(loss).backward()
-            if cfg["optim"].get("grad_clip") is not None:
-                scaler.unscale_(opt)
-                torch.nn.utils.clip_grad_norm_(unet.parameters(), cfg["optim"]["grad_clip"])
-            scaler.step(opt)
-            scaler.update()
+
+            if (step + 1) % max(1, args.accum_steps) == 0:
+                if cfg["optim"].get("grad_clip") is not None:
+                    scaler.unscale_(opt)
+                    torch.nn.utils.clip_grad_norm_(unet.parameters(), cfg["optim"]["grad_clip"])
+                scaler.step(opt)
+                scaler.update()
+                opt.zero_grad(set_to_none=True)
 
             if step % log_every == 0:
                 print({"epoch": epoch, "step": step, "loss": float(loss.detach().cpu()), "mask_ratio_mean": float(ratio.mean().item())})
             step += 1
 
-    # Save checkpoint
-    ckpt_path = ckpt_dir / ckpt_name
-    torch.save({
-        "unet": unet.state_dict(),
-        "cfg": cfg,
-    }, ckpt_path)
-    print(json.dumps({"saved": str(ckpt_path)}))
+        # Save checkpoint per epoch
+        if (epoch % max(1, args.save_every_epochs)) == 0:
+            ckpt_path = ckpt_dir / (ckpt_name if args.save_every_epochs == 0 else ckpt_name.replace('.pt', f"_e{epoch}.pt"))
+            torch.save({
+                "unet": unet.state_dict(),
+                "cfg": cfg,
+            }, ckpt_path)
+            print(json.dumps({"saved": str(ckpt_path)}))
+
+    # Final checkpoint
+    final_path = ckpt_dir / ckpt_name
+    torch.save({"unet": unet.state_dict(), "cfg": cfg}, final_path)
+    print(json.dumps({"saved_final": str(final_path)}))
 
 
 if __name__ == "__main__":
     main()
-
