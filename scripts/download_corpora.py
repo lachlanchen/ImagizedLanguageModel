@@ -60,9 +60,9 @@ def main():
     else:
         raise SystemExit("Unsupported zh_source")
 
-    # Optional bitext (very small sample for alignment)
+    # Optional bitext (very small sample for alignment) and fallback for mono
     bitext_written = 0
-    if args.bitext:
+    if args.bitext or en_written == 0 or zh_written == 0:
         try:
             opus = load_dataset("opus_books", "en-zh", split="train")
             outp = out_dir / "bitext.tsv"
@@ -76,6 +76,26 @@ def main():
                         bitext_written += 1
                         if 0 < args.bitext_limit <= bitext_written:
                             break
+            # Fallback: populate mono files from bitext if missing
+            if en_written == 0:
+                with (out_dir / "bitext.tsv").open("r", encoding="utf-8") as f_in, (out_dir / "en.jsonl").open("w", encoding="utf-8") as f_en:
+                    for ln_i, ln in enumerate(f_in):
+                        en = ln.split("\t")[0].strip()
+                        if en:
+                            f_en.write(json.dumps({"text": en, "lang": "en"}) + "\n")
+                            if ln_i + 1 >= args.en_limit:
+                                break
+                en_written = min(args.en_limit, bitext_written)
+            if zh_written == 0:
+                with (out_dir / "bitext.tsv").open("r", encoding="utf-8") as f_in, (out_dir / "zh.jsonl").open("w", encoding="utf-8") as f_zh:
+                    for ln_i, ln in enumerate(f_in):
+                        parts = ln.rstrip("\n").split("\t")
+                        zh = parts[1].strip() if len(parts) > 1 else ""
+                        if zh:
+                            f_zh.write(json.dumps({"text": zh, "lang": "zh"}) + "\n")
+                            if ln_i + 1 >= args.zh_limit:
+                                break
+                zh_written = min(args.zh_limit, bitext_written)
         except Exception:
             pass
 
