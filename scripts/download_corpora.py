@@ -23,8 +23,8 @@ def write_lines(path: Path, iterable, limit: int, field: str = "text", lang: str
 def main():
     ap = argparse.ArgumentParser(description="Download small EN/ZH corpora to JSONL")
     ap.add_argument("--out", default="data/raw", help="output folder")
-    ap.add_argument("--en_source", default="mc4", choices=["mc4", "wikitext"], help="EN dataset")
-    ap.add_argument("--zh_source", default="mc4", choices=["mc4"], help="ZH dataset")
+    ap.add_argument("--en_source", default="wikitext", choices=["wikitext", "oscar"], help="EN dataset")
+    ap.add_argument("--zh_source", default="oscar", choices=["oscar"], help="ZH dataset")
     ap.add_argument("--en_limit", type=int, default=20000, help="EN documents limit")
     ap.add_argument("--zh_limit", type=int, default=20000, help="ZH documents limit")
     ap.add_argument("--bitext", action="store_true", help="also download small EN-ZH parallel set (opus_books)")
@@ -45,18 +45,20 @@ def main():
         ds = load_dataset("wikitext", "wikitext-103-raw-v1")
         en_iter = ( {"text": ex["text"]} for ex in ds["train"] )
         en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
-    else:
-        ds = load_dataset("mc4", "en", streaming=True)
-        en_iter = ( {"text": ex["text"]} for ex in ds["train"] )
+    elif args.en_source == "oscar":
+        ds = load_dataset("oscar-corpus/OSCAR-2301", "en", split="train", streaming=True)
+        en_iter = ( {"text": ex.get("text", "")} for ex in ds )
         en_written = write_lines(out_dir / "en.jsonl", en_iter, args.en_limit, field="text", lang="en")
+    else:
+        raise SystemExit("Unsupported en_source")
 
     # Chinese
-    if args.zh_source == "mc4":
-        dszh = load_dataset("mc4", "zh", streaming=True)
-        zh_iter = ( {"text": ex["text"]} for ex in dszh["train"] )
+    if args.zh_source == "oscar":
+        dszh = load_dataset("oscar-corpus/OSCAR-2301", "zh", split="train", streaming=True)
+        zh_iter = ( {"text": ex.get("text", "")} for ex in dszh )
         zh_written = write_lines(out_dir / "zh.jsonl", zh_iter, args.zh_limit, field="text", lang="zh")
     else:
-        zh_written = 0
+        raise SystemExit("Unsupported zh_source")
 
     # Optional bitext (very small sample for alignment)
     bitext_written = 0
@@ -91,4 +93,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
