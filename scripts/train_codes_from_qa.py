@@ -67,9 +67,13 @@ def collate_render(batch: List[QAPair], image_size: int = 128, glyph_db_path: st
     imgs = []
     for lang, tok in keys:
         if db is not None:
-            path = db.ensure_glyph(lang, tok, size=image_size)
-            import PIL.Image as Image
-            x = torch.from_numpy(np.array(Image.open(path).convert("RGB"), dtype=np.float32) / 255.0).permute(2, 0, 1)
+            try:
+                path = db.ensure_glyph(lang, tok, size=image_size)
+                import PIL.Image as Image
+                x = torch.from_numpy(np.array(Image.open(path).convert("RGB"), dtype=np.float32) / 255.0).permute(2, 0, 1)
+            except Exception:
+                rgb = make_rgb_token_image(lang, tok, size=image_size)
+                x = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)
         else:
             rgb = make_rgb_token_image(lang, tok, size=image_size)
             x = torch.from_numpy(rgb.astype(np.float32) / 255.0).permute(2, 0, 1)

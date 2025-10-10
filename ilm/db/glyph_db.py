@@ -132,13 +132,26 @@ class GlyphDB:
     def ensure_glyph(self, lang: str, token: str, size: int) -> str:
         """Ensure a glyph image exists on disk and in DB. Returns absolute path."""
         rec = self.get(lang, token, size)
-        if rec and os.path.exists(rec.path):
-            return rec.path
+        if rec:
+            rec_path = Path(rec.path)
+            if rec_path.suffix.lower() != ".png":
+                new_path = rec_path.with_suffix(".png")
+                new_path.parent.mkdir(parents=True, exist_ok=True)
+                if rec_path.exists():
+                    try:
+                        rec_path.rename(new_path)
+                    except Exception:
+                        pass
+                rec = GlyphRecord(lang=rec.lang, token=rec.token, size=rec.size, path=str(new_path), checksum=rec.checksum)
+                self.upsert(rec)
+                rec_path = new_path
+            if rec_path.exists():
+                return str(rec_path)
         # render
         rgb = make_rgb_token_image(lang, token, size=size)
         # write
         path = self._default_path(lang, token, size)
-        save_rgb_image(path, rgb)
+        path = save_rgb_image(path, rgb)
         # checksum
         try:
             with open(path, "rb") as f:
