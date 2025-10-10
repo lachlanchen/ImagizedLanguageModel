@@ -86,7 +86,7 @@ class UNet2D(nn.Module):
             skips.append(h)
             h = blk["down"](h)
         h = self.mid(h, t)
-        for blk in self.ups[::-1]:
+        for blk in self.ups:
             h = blk["up"](h)
             # match skip size if needed
             if skips:
@@ -98,4 +98,3 @@ class UNet2D(nn.Module):
             h = blk["res"](h, t)
         out = self.out_conv(h)
         return out
-
