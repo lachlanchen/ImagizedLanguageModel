@@ -100,6 +100,9 @@ class GlyphDB:
             h = hashlib.sha1(token.encode("utf-8")).hexdigest()[:8]
             name = f"{safe}-{h}.png"
             full = sub / name
+        # Ensure .png suffix (safety)
+        if full.suffix.lower() != ".png":
+            full = full.with_suffix(".png")
         return str(full)
 
     def get(self, lang: str, token: str, size: int) -> Optional[GlyphRecord]:
@@ -145,4 +148,3 @@ class GlyphDB:
         # store
         self.upsert(GlyphRecord(lang=lang, token=token, size=size, path=path, checksum=checksum))
         return path
-

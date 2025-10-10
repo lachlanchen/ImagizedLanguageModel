@@ -118,6 +118,8 @@ def make_rgb_token_image(lang: str, token: str, size: int = 128) -> np.ndarray:
 
 def save_rgb_image(path: str | Path, rgb: np.ndarray) -> None:
     path = Path(path)
+    # Ensure .png extension to satisfy PIL format detection
+    if path.suffix.lower() not in (".png", ".jpg", ".jpeg", ".bmp", ".webp"):
+        path = path.with_suffix(".png")
     path.parent.mkdir(parents=True, exist_ok=True)
-    Image.fromarray(rgb).save(path)
-
+    Image.fromarray(rgb).save(str(path))
