@@ -15,6 +15,7 @@ ZH_CANDIDATES = [
     "https://raw.githubusercontent.com/shibing624/alpaca-chinese-dataset/main/alpaca_chinese_dataset.json",
     "https://raw.githubusercontent.com/ymcui/Chinese-LLaMA-Alpaca/main/data/alpaca_chinese_dataset.json",
     "https://raw.githubusercontent.com/LC1332/Chinese-alpaca-lora/main/data/alpaca_chinese_dataset.json",
+    "https://raw.githubusercontent.com/Instruction-Tuning-with-GPT-4/GPT-4-LLM/main/data/alpaca_gpt4_data_zh.json",
 ]
 
 
@@ -83,4 +84,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
