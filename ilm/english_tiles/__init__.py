@@ -3,6 +3,8 @@
 from .grid_renderer import (
     GridSpec,
     DEFAULT_SPEC,
+    SHORT_WORD_SPEC,
+    select_spec,
     render_char_patch,
     render_word_tile_tensor,
     render_word_tile_image,
@@ -12,6 +14,8 @@ from .grid_renderer import (
 __all__ = [
     "GridSpec",
     "DEFAULT_SPEC",
+    "SHORT_WORD_SPEC",
+    "select_spec",
     "render_char_patch",
     "render_word_tile_tensor",
     "render_word_tile_image",

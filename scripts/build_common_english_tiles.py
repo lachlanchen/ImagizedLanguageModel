@@ -10,7 +10,12 @@ from typing import Iterable, List
 
 from PIL import Image
 
-from ilm.english_tiles import GridSpec, render_word_tile_image
+from ilm.english_tiles import (
+    DEFAULT_SPEC,
+    SHORT_WORD_SPEC,
+    GridSpec,
+    render_word_tile_image,
+)
 
 DEFAULT_COMMON_WORDS: List[str] = [
     "the",
@@ -298,11 +303,23 @@ def safe_filename(word: str, suffix: str, *, used: set[str]) -> Path:
     return Path(f"{candidate}{suffix}")
 
 
-def save_images(words: Iterable[str], out_dir: Path, spec: GridSpec) -> None:
+def save_images(
+    words: Iterable[str],
+    out_dir: Path,
+    spec: GridSpec,
+    short_spec: GridSpec,
+    *,
+    dynamic: bool = True,
+) -> None:
     used_names: set[str] = set()
     index_lines = []
     for word in words:
-        image = render_word_tile_image(word, spec=spec)
+        image = render_word_tile_image(
+            word,
+            spec=spec,
+            short_spec=short_spec,
+            dynamic=dynamic,
+        )
         png_path = safe_filename(word, ".png", used=used_names)
         full_png = out_dir / png_path
         full_png.parent.mkdir(parents=True, exist_ok=True)
@@ -325,14 +342,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tile-size",
         type=int,
-        default=16,
-        help="Tile dimension in pixels (default: 16)",
+        default=DEFAULT_SPEC.tile_size,
+        help="Tile size for the main layout (default: 16)",
     )
     parser.add_argument(
         "--grid-size",
         type=int,
-        default=8,
-        help="Number of tiles per row/column (default: 8)",
+        default=DEFAULT_SPEC.grid_size,
+        help="Grid size for the main layout (default: 8)",
+    )
+    parser.add_argument(
+        "--short-tile-size",
+        type=int,
+        default=SHORT_WORD_SPEC.tile_size,
+        help="Tile size for short words (default: 32)",
+    )
+    parser.add_argument(
+        "--short-grid-size",
+        type=int,
+        default=SHORT_WORD_SPEC.grid_size,
+        help="Grid size for short words (default: 4)",
+    )
+    parser.add_argument(
+        "--no-dynamic",
+        action="store_true",
+        help="Disable dynamic short-word scaling",
     )
     return parser.parse_args()
 
@@ -341,9 +375,16 @@ def main() -> None:
     args = parse_args()
     words = load_words(args.word_list)
     spec = GridSpec(grid_size=args.grid_size, tile_size=args.tile_size)
+    short_spec = GridSpec(grid_size=args.short_grid_size, tile_size=args.short_tile_size)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    save_images(words, out_dir, spec)
+    save_images(
+        words,
+        out_dir,
+        spec,
+        short_spec,
+        dynamic=not args.no_dynamic,
+    )
     print(f"Rendered {len(words)} words into {out_dir}")
 
 

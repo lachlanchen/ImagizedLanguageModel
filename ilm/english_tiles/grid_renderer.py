@@ -1,7 +1,10 @@
-"""Sequential English glyph tiling.
+"""Sequential English glyph tiling with dynamic layouts.
 
-This module renders each character of a word into a 16×16 patch and places
-patches sequentially across an 8×8 grid, yielding a 128×128 square glyph.
+Each character is rendered into an individual tile and placed row-wise across a
+square grid. For long strings the default layout uses 16×16 tiles over an 8×8
+grid (64 positions). For shorter words (≤16 characters) we up-scale the tiles to
+32×32 and place them on a 4×4 grid so the glyph makes fuller use of the canvas
+while keeping the final image size at 128×128.
 """
 
 from __future__ import annotations
@@ -17,6 +20,8 @@ from ilm.utils.glyphs import find_font_path
 
 @dataclass(frozen=True)
 class GridSpec:
+    """Tiling configuration for sequential glyph placement."""
+
     grid_size: int = 8
     tile_size: int = 16
 
@@ -29,7 +34,24 @@ class GridSpec:
         return self.grid_size * self.tile_size
 
 
-DEFAULT_SPEC = GridSpec()
+DEFAULT_SPEC = GridSpec(grid_size=8, tile_size=16)
+SHORT_WORD_SPEC = GridSpec(grid_size=4, tile_size=32)
+
+
+def select_spec(
+    word: str,
+    *,
+    default: GridSpec = DEFAULT_SPEC,
+    short_word: GridSpec | None = SHORT_WORD_SPEC,
+    dynamic: bool = True,
+) -> GridSpec:
+    """Choose an appropriate tiling spec for the supplied word."""
+
+    if not dynamic or not word:
+        return default
+    if short_word and len(word) <= short_word.max_length:
+        return short_word
+    return default
 
 
 def _load_font(font_size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
@@ -40,7 +62,7 @@ def _load_font(font_size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
 
 
 def render_char_patch(character: str, *, tile_size: int = 16, intensity: int = 255) -> np.ndarray:
-    """Render a single character centred in a tile-sized image."""
+    """Render a single character centred in a tile-sized grayscale patch."""
 
     img = Image.new("L", (tile_size, tile_size), color=0)
     draw = ImageDraw.Draw(img)
@@ -73,16 +95,23 @@ def render_char_patch(character: str, *, tile_size: int = 16, intensity: int = 2
     return np.array(img, dtype=np.uint8)
 
 
-def render_word_tile_tensor(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.ndarray:
+def render_word_tile_tensor(
+    word: str,
+    *,
+    spec: GridSpec = DEFAULT_SPEC,
+    short_spec: GridSpec | None = SHORT_WORD_SPEC,
+    dynamic: bool = True,
+) -> np.ndarray:
     """Return a tensor of shape (grid, grid, tile, tile) for the word."""
 
-    grid = spec.grid_size
-    tile = spec.tile_size
+    spec_used = select_spec(word, default=spec, short_word=short_spec, dynamic=dynamic)
+    grid = spec_used.grid_size
+    tile = spec_used.tile_size
     tensor = np.zeros((grid, grid, tile, tile), dtype=np.uint8)
     if not word:
         return tensor
 
-    capped = word[: spec.max_length]
+    capped = word[: spec_used.max_length]
     for idx, ch in enumerate(capped):
         row = idx // grid
         col = idx % grid
@@ -90,13 +119,25 @@ def render_word_tile_tensor(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.n
     return tensor
 
 
-def render_word_tile_image(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.ndarray:
-    """Render the word as a 128×128 grayscale image."""
+def render_word_tile_image(
+    word: str,
+    *,
+    spec: GridSpec = DEFAULT_SPEC,
+    short_spec: GridSpec | None = SHORT_WORD_SPEC,
+    dynamic: bool = True,
+) -> np.ndarray:
+    """Render the word as a grayscale image using sequential tiling."""
 
-    tensor = render_word_tile_tensor(word, spec=spec)
-    grid = spec.grid_size
-    tile = spec.tile_size
-    image = np.zeros((spec.image_size, spec.image_size), dtype=np.uint8)
+    spec_used = select_spec(word, default=spec, short_word=short_spec, dynamic=dynamic)
+    tensor = render_word_tile_tensor(
+        word,
+        spec=spec_used,
+        short_spec=short_spec,
+        dynamic=False,
+    )
+    grid = spec_used.grid_size
+    tile = spec_used.tile_size
+    image = np.zeros((spec_used.image_size, spec_used.image_size), dtype=np.uint8)
     for row in range(grid):
         for col in range(grid):
             patch = tensor[row, col]
@@ -106,15 +147,31 @@ def render_word_tile_image(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.nd
     return image
 
 
-def render_words(words: Iterable[str], *, spec: GridSpec = DEFAULT_SPEC) -> dict[str, np.ndarray]:
-    """Convenience helper that renders many words using the same spec."""
+def render_words(
+    words: Iterable[str],
+    *,
+    spec: GridSpec = DEFAULT_SPEC,
+    short_spec: GridSpec | None = SHORT_WORD_SPEC,
+    dynamic: bool = True,
+) -> dict[str, np.ndarray]:
+    """Render multiple words, optionally with dynamic short-word handling."""
 
-    return {word: render_word_tile_image(word, spec=spec) for word in words}
+    return {
+        word: render_word_tile_image(
+            word,
+            spec=spec,
+            short_spec=short_spec,
+            dynamic=dynamic,
+        )
+        for word in words
+    }
 
 
 __all__ = [
     "GridSpec",
     "DEFAULT_SPEC",
+    "SHORT_WORD_SPEC",
+    "select_spec",
     "render_char_patch",
     "render_word_tile_tensor",
     "render_word_tile_image",
