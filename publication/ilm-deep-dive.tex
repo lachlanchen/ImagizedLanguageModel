@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\title{Imagized Language Modeling with Product Codes, QA Alignment, and Diffusion Denoising\\A Deep Technical Analysis}
+\author{Incoder Research Log}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We document and analyse the current implementation of the Imagized Language Model (ILM) stack in this repository. The system learns visual glyph embeddings, differentiable product ``colour codes'', question--answer (QA) alignment, and a 2D diffusion-based infiller. We derive the training objectives, explain why optimisation nudges the model toward semantic organisation, and outline how the same pipeline can be applied to under-documented scripts such as Oracle Bone, Tangut (Xixia), or Khitan (Qidan) without dictionaries.
+\end{abstract}
+
+\section{System Overview}
+The ILM pipeline is modular :
+\begin{enumerate}
+    \item \textbf{Glyph Encoding:} Convert every token (word or character) into a 128\,$\times$\,128 RGB glyph image combining ASCII row--column coding and centred font rendering (\texttt{ilm/utils/glyphs.py}).
+    \item \textbf{Product Code Learning:} Train a 3\,$\times$\,32 differentiable product code layer that maps glyph CNN features to discrete ``colour'' indices (\texttt{ilm/code/product.py}, \texttt{scripts/train\_color\_codes.py}).
+    \item \textbf{QA Alignment:} Fine-tune colour codes with InfoNCE on question--answer pairs plus Gram matrix autocorrelation, enforcing structural alignment of semantics (\texttt{scripts/train\_codes\_from\_qa.py}).
+    \item \textbf{Sentence Diffusion:} Assemble glyph embeddings into $H\times W$ frames and train a small UNet to reconstruct masked features, enabling denoising-based language generation (\texttt{scripts/train\_diffusion.py}).
+\end{enumerate}
+
+\paragraph{Pipeline summary.} Figure placeholder omitted; see main documentation for visuals.
+
+\section{Differentiable Product Codes}\label{sec:codes}
+\subsection{Glyph Encoder}
+A lightweight CNN, $f_{\text{glyph}}:\mathbb{R}^{3\times 128\times 128}\to\mathbb{R}^{d_g}$, is defined (\texttt{ilm/encoders/glyph\_cnn.py}) with $d_g=128$. Convolutional layers reduce spatial resolution while preserving writing strokes.
+
+\subsection{Product Code Layer}
+The product code module maintains $C=3$ codebooks $E_c\in\mathbb{R}^{K\times d_e}$ with $K=32$ and $d_e=128$. For each channel $c$, logits $\ell_c = W_c g + b_c$ are produced, where $g=f_{\text{glyph}}(x)$.
+
+Sampling uses relaxed Gumbel--Softmax:
+\begin{equation}
+    y_c = \mathrm{GumbelSoftmax}(\ell_c, \tau), \qquad e = \sum_{c=1}^C y_c E_c.
+\end{equation}
+With straight-through estimation the forward pass is effectively discrete while gradients flow through the soft relaxation.
+
+\subsection{Losses}
+\paragraph{InfoNCE (Glyph$\leftrightarrow$Code).}
+For a batch of $B$ glyphs with features $g_i$ and code embeddings $e_i$, we use
+\begin{equation}
+    \mathcal{L}_{\text{NCE}} = -\frac{1}{B}\sum_{i=1}^B \log \frac{\exp(\langle \hat{g}_i, \hat{e}_i\rangle/\tau_{\text{info}})}{\sum_{j=1}^B \exp(\langle \hat{g}_i, \hat{e}_j\rangle/\tau_{\text{info}})},
+\end{equation}
+where hats denote $\ell_2$ normalization and $\tau_{\text{info}}=0.07$. This pushes each code embedding toward its glyph feature and away from others, forcing codes that preserve glyph identity.
+
+\paragraph{Usage KL.}
+To discourage collapse, average channel assignments $p_c = \frac{1}{B}\sum_i y_{c,i}$ are matched to the uniform distribution $u = \frac{1}{K}\mathbf{1}$:
+\begin{equation}
+    \mathcal{L}_{\text{usage}} = \frac{1}{C}\sum_{c=1}^C \mathrm{KL}(p_c\Vert u).
+\end{equation}
+This keeps each axis of the product space populated, ensuring the memory table has high capacity.
+
+\paragraph{Independence Penalty.}
+Cross-covariance between channel assignments is penalised:
+\begin{equation}
+    \mathcal{L}_{\text{indep}} = \frac{2}{C(C-1)}\sum_{a<b} \Vert \mathrm{Cov}(y_a, y_b)\Vert_F^2.
+\end{equation}
+This encourages factorised structure so that each channel captures different semantics (grammar, meaning, tone, etc.).
+
+\paragraph{Total Objective.}
+Training minimises
+\begin{equation}
+    \mathcal{L}_{\text{codes}} = \mathcal{L}_{\text{NCE}} + \lambda_{\text{usage}}\mathcal{L}_{\text{usage}} + \lambda_{\text{indep}}\mathcal{L}_{\text{indep}},
+\end{equation}
+with $(\lambda_{\text{usage}}, \lambda_{\text{indep}})=(0.1,0.1)$ in \texttt{configs/color.yaml}. The gradient encourages glyphs with similar strokes or structures to share nearby indices, while maintaining combinatorial expressivity.
+
+\section{QA Alignment: Why Semantics Emerge}
+\subsection{Batch Collation}
+For each QA sample all tokens are deduplicated, the glyph DB provides or creates glyph PNGs, and stacked into a mini-batch $X$.
+
+\subsection{Loss Components}
+Let $E$ denote token code embeddings and $G$ glyph features. For each question $Q$ and answer $A$ we compute pooled representations
+\begin{equation}
+    e_Q = \frac{1}{|Q|}\sum_{i\in Q} E_i, \qquad e_A = \frac{1}{|A|}\sum_{j\in A} E_j,
+\end{equation}
+(normalised before similarity).
+
+\paragraph{QA InfoNCE.}
+Pairs are treated as positives, negatives come from the rest of the mini-batch:
+\begin{equation}
+    \mathcal{L}_{\text{QA}} = -\frac{1}{B}\sum_{b=1}^B \log \frac{\exp(\langle \hat{e}^Q_b, \hat{e}^A_b\rangle / \tau_{\text{QA}})}{\sum_{j=1}^B \exp(\langle \hat{e}^Q_b, \hat{e}^A_j\rangle / \tau_{\text{QA}})},
+\end{equation}
+with $\tau_{\text{QA}}=0.07$. Questions and answers about the same topic must occupy nearby points.
+
+\paragraph{Autocorrelation Alignment.}
+We align second-order structure via Gram matrices:
+\begin{equation}
+    C_Q = Z_Q^\top Z_Q/(|Q|+\epsilon), \quad C_A = Z_A^\top Z_A/(|A|+\epsilon),
+\end{equation}
+where $Z_Q$ stacks unit-normalised token embeddings of the question. The loss is
+\begin{equation}
+    \mathcal{L}_{\text{Gram}} = \frac{1}{B}\sum_b \Vert C_Q^{(b)} - C_A^{(b)}\Vert_F^2.
+\end{equation}
+This enforces that relational geometry of tokens inside the question matches that of its answer, pushing the model to capture latent roles (subject, object, modality) rather than surface co-occurrence only.
+
+\paragraph{Code Regularisers.}
+Usage and independence penalties from Section~\ref{sec:codes} are reused to keep codes expressive when conditioned on real language contexts.
+
+\subsection{Optimisation Behaviour}
+Gradients from $\mathcal{L}_{\text{QA}}$ propagate through the codebooks: if two different answers share a topic (``photosynthesis'' or Chinese equivalent "guang he zuo yong"''), they must align to similar pooled embeddings, pulling constituent tokens share closer code vectors. Because everything is functions of glyphs, the optimisation is language-agnostic; the network only sees strokes and shapes.
+
+\paragraph{Why This Learns Meaning.}
+\begin{itemize}
+    \item InfoNCE collapses question--answer pairs into the same neighbourhood, so the code representation must encode semantic compatibility.
+    \item The Gram term penalises mismatched relational geometry. For instance, if a question emphasises an agent acting on a patient, the embeddings for verbs and nouns must sit in comparable orientations to those in the answer.
+    \item Usage and independence prevent trivial solutions (everyone to one index), forcing the network to reuse latent factors across many QA items. Shared factors coalesce into interpretable axes (e.g., animacy, polarity, aspect).
+\end{itemize}
+
+\section{Diffusion over Sentence Frames}
+Tokens are assembled into $H\times W$ grids; the glyph CNN produces features $F\in\mathbb{R}^{B\times d\times H\times W}$.
+
+A Bernoulli mask $M$ with per-sample ratio $\beta\sim\mathcal{U}(\beta_{\min},\beta_{\max})$ selects which positions to corrupt. The input to UNet is $[\tilde{F} \Vert M]$ where $\tilde{F}=F\odot(1-M)$.
+
+The UNet predicts $
+abla$-like residuals, trained with masked MSE:
+\begin{equation}
+    \mathcal{L}_{\text{diff}} = \frac{1}{|\{i:M_i=1\}|}\sum_{i:M_i=1} \Vert \hat{F}_i - F_i\Vert_2^2.
+\end{equation}
+This encourages the network to exploit context when reconstructing masked features. As colour codes carry semantics, the diffusion head learns to fill in tokens coherently.
+
+\section{Extension to Historical or Unsegmented Scripts}
+\subsection{Glyph Layer is the Key}
+All stages operate on glyph images. To ingest a new script (Oracle Bone, Khitan, Tangut), supply a glyph renderer (font or vector) and populate the glyph DB with characters encountered in the corpus. No tokenisation is required; each character is a visual symbol.
+
+\subsection{Learning Without Dictionaries}
+Given only monolingual text:
+\begin{enumerate}
+    \item Build glyph dataset: run \texttt{scripts/glyphdb\_add\_tokens.py} on unique characters.
+    \item Train product codes on glyph reconstruction (Section~\ref{sec:codes}). Shared radicals or strokes will cluster automatically.
+    \item Use pseudo-QA generated from the corpus: e.g., treat adjacent sentences as (context, response) pairs, or use masked spans as question/answer. The InfoNCE loss still pushes semantically related glyph groups together.
+    \item Once codes stabilise, train diffusion for denoising; the model learns internal language structure just from visual co-occurrence.
+\end{enumerate}
+Without dictionaries, semantics emerge from distributional structure: questions and answers formed by context windows, sentence pairs, or self-supervised tasks provide contrastive signals.
+
+\subsection{Practical Considerations}
+\begin{itemize}
+    \item \textbf{Font Availability:} For ancient scripts, use raster renderings (scans) embedded as glyphs. The pipeline is agnostic to font source.
+    \item \textbf{Corpus Size:} Contrastive learning benefits from millions of QA-like pairs. For scarce data, augment with back-translation or pseudo-instruction templates.
+    \item \textbf{Evaluation:} Use nearest-neighbour clustering on product codes to discover radicals or semantic fields; compare to ground truth when available, or rely on human experts.
+\end{itemize}
+
+\section{Derivation Summary}
+We summarise the total objective being minimised across stages:
+\begin{align}
+    \mathcal{L} &= \mathcal{L}_{\text{codes}} \;+\; \mathcal{L}_{\text{QA}} + \lambda_{\text{Gram}} \mathcal{L}_{\text{Gram}} \;+\; \lambda_{\text{usage}} \mathcal{L}_{\text{usage}} + \lambda_{\text{indep}} \mathcal{L}_{\text{indep}} \;+\; \mathcal{L}_{\text{diff}}.\label{eq:total-loss}
+\end{align}
+Each term propagates gradients to the shared codebooks $\{E_c\}$, making them the semantic memory. Because the glyph CNN is frozen during diffusion and fine-tuned during QA, tokens remain anchored to their visual form while gradually aligned semantically.
+
+\section{Why the Pipeline Works}
+\begin{enumerate}
+    \item \textbf{Visual Anchoring:} Tokens remain tied to glyphs, so the representation respects orthographic similarity (stroke sharing).
+    \item \textbf{Contrastive Pull:} InfoNCE objectives across glyph--code and QA pairs enforce that meaning-bearing contexts cluster.
+    \item \textbf{Structural Regularisation:} Gram alignment and independence penalties prevent degenerate minima, promoting interpretable subspace factors.
+    \item \textbf{Diffusion Closure:} The denoiser validates that the learned codes retain enough information to reconstruct sentences from corrupted fragments. This demonstrates that semantics are not destroyed by discretisation.
+\end{enumerate}
+
+\section{Future Directions}
+\begin{itemize}
+    \item \textbf{Orthography Discovery:} Run clustering on colour codes to propose radical decompositions for undocumented scripts.
+    \item \textbf{Interactive Translation:} Use diffusion infilling conditioned on bilingual seeds to bootstrap lexicons for under-studied languages.
+    \item \textbf{Probabilistic Grammars:} Fit simple probabilistic models (e.g., HMMs) over the colour-code sequences to extract latent grammatical categories.
+\end{itemize}
+
+\section{Conclusion}
+The ILM codebase already optimises a principled objective that aligns visual token embeddings with semantic structure purely from images and QA supervision. Because the glyph interface is script-agnostic, the same method can ingest Oracle Bone inscriptions, Tangut texts, or any logographic script without dictionaries: any corpora of glyph sequences can serve as self-supervision for the colour-code memory table, providing an automatic path toward meaning discovery.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+\bibitem{infoclim} van den Oord et al. \emph{Representation Learning with Contrastive Predictive Coding}.
+\bibitem{glowgumbel} Jang et al. \emph{Categorical Reparameterization with Gumbel-Softmax}.
+\bibitem{visualtext} Liu et al. \emph{Glyph-aware Multilingual Models}.
+\end{thebibliography}
+\end{document}
