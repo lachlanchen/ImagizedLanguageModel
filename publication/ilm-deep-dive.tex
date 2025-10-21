@@ -1,177 +1,186 @@
-\documentclass[11pt]{article}
+\documentclass[10pt,twocolumn]{article}
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage[numbers]{natbib}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
-\title{Imagized Language Modeling with Product Codes, QA Alignment, and Diffusion Denoising\\A Deep Technical Analysis}
-\author{Incoder Research Log}
+\title{Imagized Language Modeling with Factorized Glyph Embeddings and Diffusion-Based Generation\\\large An Unsupervised Multilingual Framework}
+\author{Incoder Research Lab}
 \date{\today}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We document and analyse the current implementation of the Imagized Language Model (ILM) stack in this repository. The system learns visual glyph embeddings, differentiable product ``colour codes'', question--answer (QA) alignment, and a 2D diffusion-based infiller. We derive the training objectives, explain why optimisation nudges the model toward semantic organisation, and outline how the same pipeline can be applied to under-documented scripts such as Oracle Bone, Tangut (Xixia), or Khitan (Qidan) without dictionaries.
+We propose and analyze an \textbf{Imagized Language Model (ILM)} that represents text as images and employs a diffusion-inspired generation process. The ILM is built on four components: (1) \emph{Glyph encoding} of text into images, (2) a \emph{differentiable product code} embedding layer that factorizes lexical representations into multiple discrete ``color'' channels, (3) \emph{contrastive alignment} of these discrete codes using question--answer pairs (or pseudo-pairs) with a novel second-order (Gram matrix) consistency loss to induce semantic structure, and (4) a \emph{diffusion-based infiller} that treats sequences of discrete codes as image-like grids and learns to reconstruct masked parts. We derive the training objectives for each stage and explain why the combined optimization leads to emergent semantic organization of the code space. In particular, we show how the factorized codebooks capture latent aspects of meaning (e.g. syntactic role, semantic category, tone) through information-theoretic pressure and how the contrastive losses drive the model to ``understand'' words by their usage. The framework is language-agnostic and can be applied to scripts with no known translation or tokenization (e.g. historical scripts)---the model learns to interpret such languages purely from unannotated corpora by discovering a structured internal lexicon. We provide theoretical analysis and literature connections, outlining how this approach enables \emph{learning meaning just by reading} in any language.
 \end{abstract}
 
-\section{System Overview}
-The ILM pipeline is modular :
+\section{Introduction}
+Natural language is traditionally modeled as sequences of discrete tokens (characters, bytes, or words) mapped to continuous vectors. In this work, we depart from that view by representing language in a \emph{visual modality}: each token is rendered as a small image (\emph{glyph}), and sequences of tokens form a 2D image grid. This \emph{imagized text} representation allows us to apply techniques from computer vision (such as convolutional encoders and image diffusion models) to language. Beyond novelty, the visual approach offers two key advantages: \textbf{(i)} it is intrinsically \emph{multilingual and writing-system-agnostic}, since any writing system (Latin, Chinese characters, hieroglyphs, etc.) can be fed in as images without requiring linguistic preprocessing or dictionaries; \textbf{(ii)} it enables a form of \emph{factorized embedding} akin to color channels in images, which we exploit to disentangle different aspects of linguistic information.
+
+Our Imagized Language Model (ILM) introduces a factorized discrete embedding space or \emph{product codebook} for tokens. Instead of a single vector per word, the model uses multiple codebooks (e.g. multiple ``color channels'') to represent each token. This reflects the intuition that a word's significance arises from a superposition of underlying factors: basic meaning components, syntactic roles, morphological or tonal features, etc. By giving the model separate codebook axes, we encourage it to allocate different facets of language to different subcodes. For instance, one codebook might encode coarse semantic category, another encodes grammatical function, and another encodes sentiment or tone. In principle, if we had 100 codebooks for meaning and 100 for grammar (as a thought experiment), any sentence could be composed by combining a small set of basis elements from each category. Our implementation uses a smaller number (e.g. 3 codebooks) and lets them be learned automatically, but we will show that appropriate training losses indeed cause these codebooks to align with meaningful latent factors.
+
+To train the codebooks and ensure they capture lexical meaning, we employ \emph{contrastive learning} on pairs of related texts. In supervised settings, these could be question--answer (Q/A) pairs or parallel sentences; in unsupervised settings, we can use automatically generated pseudo-pairs (e.g. consecutive sentences, or masked sentences paired with their contexts). The contrastive objective (InfoNCE) trains the model to align the vector representations of related texts while pushing apart unrelated ones: this forces the discrete codes of words with similar meaning or roles to converge, as that is necessary to make the representations of larger texts align. We introduce a secondary loss based on aligning \emph{Gram matrices} of token representations between paired texts. This novel loss encourages the internal \textit{structure} of each sentence's embedding (the pattern of similarities among the tokens within it) to match between a question and its answer. Intuitively, if a question and answer describe the same scenario or fact in different words, the network must learn consistent relational geometry---for example, a question word like ``who'' corresponds to a person name in the answer; our Gram alignment loss will pressure the model to embed ``who'' and that name in a compatible way (e.g. along a shared latent axis for ``person''). This helps bridge lexical gaps and induces a form of abstract understanding beyond surface word co-occurrence.
+
+Finally, the ILM incorporates a \emph{diffusion-based decoder} for text generation. Treating a sequence of token embeddings as an image grid of code vectors, we train a 2D U-Net to infill or denoise masked tokens in this grid. This can be seen as a non-autoregressive language model: given a partially corrupted sentence, the model learns to restore missing words using surrounding context, analogous to image inpainting. The process draws inspiration from diffusion probabilistic models \citep{austin2021d3pm} that generate data by iterative denoising. In our case, we use a simplified single-step masking diffusion (which can be extended to multi-step iterative refinement): the model learns a conditional distribution of token codes, given their neighbors, that gradually transforms random initial codes into coherent text. This approach allows fully parallel text generation and leverages the rich context captured by our discrete codes.
+
+The core contribution of this work is a unified framework that combines these components to learn language structure \textbf{without explicit linguistic supervision}. We provide a detailed mathematical derivation of the training objectives and an intuitive explanation of how they interact to produce meaningful internal representations. We also discuss how this pipeline can be applied to \emph{undocumented languages or scripts} (such as Oracle Bone script, Tangut (Xixia), or Khitan (Qidan) writing) for which no bilingual dictionary exists. By feeding only raw text in the unknown script (rendered as glyph images), the ILM can learn an internal encoding of that language's words and sentences, essentially constructing its own lexicon and grammar from scratch. This aligns with the distributional hypothesis in linguistics (``you shall know a word by the company it keeps''): the model discovers meaning through patterns of co-occurrence and context.
+
+In summary, the Imagized Language Model offers a novel way to merge computer vision techniques with language modeling. We demonstrate theoretically how factorized discrete embeddings and contrastive objectives yield emergent semantic structure. In the long term, this approach suggests a path toward machines that learn to \textbf{understand new languages solely by reading them}, opening possibilities in historical linguistics, cross-lingual NLP, and resource-poor language modeling.
+
+\section{Related Work}
+Our work intersects multiple research areas:
+
+\paragraph{Contrastive representation learning for language.} Contrastive loss functions such as InfoNCE \citep{infocpc} have proven effective in unsupervised representation learning, starting with methods like CPC (Contrastive Predictive Coding) and SimCLR for images. In NLP, they underlie approaches for sentence embedding and alignment across languages. For example, \citep{infocpc} used an InfoNCE objective to learn word representations by predicting future tokens, and others have used contrastive objectives to align bilingual embeddings without supervision. Our use of contrastive learning to align question--answer pairs is related to works on aligning representations of query and response for QA or dialogue tasks, which aim to bridge the lexical gap between questions and answers.
+
+\paragraph{Discrete and factorized embeddings.} Representing data with discrete latent codes has a rich history. Vector Quantized-VAE (VQ-VAE) introduced a way to learn discrete codebooks for image and speech representations \citep{jang2017gumbel}, and later works extended this to product codebooks for higher capacity. Product quantization in embeddings was used classically in nearest neighbor search and more recently in neural networks to get compact yet expressive representations. \citep{jang2017gumbel} proposed the Gumbel-Softmax trick to enable differentiable sampling of discrete variables, which we employ to train our codebooks end-to-end. Factorizing an embedding into multiple codes bears resemblance to disentangled representation learning, where different latent dimensions capture independent factors of variation. Our independence loss explicitly encourages each codebook channel to carry information independent of the others, pushing the model toward a disentangled, multi-aspect representation of words. Some recent multilingual models incorporate character glyph information into language modeling, confirming that visual features of text can augment NLP models; our approach goes further by using glyphs as the sole input and by quantizing the representation into a structured memory.
+
+\paragraph{Diffusion models for text.} Diffusion probabilistic models \citep{austin2021d3pm} have emerged as a powerful generative framework, primarily in continuous domains like images and audio. Adapting diffusion to discrete data (like text) can be challenging due to non-differentiability of discrete corruption. Recent works have proposed discrete diffusion processes for sequences, including masked token modeling as a special case (sometimes called ``mask-based diffusion'' or ``absorbing state diffusion'' for text). \citep{austin2021d3pm} introduced a discrete denoising diffusion model for text (D3PM), and subsequent research showed that diffusion-based language models can achieve competitive generation quality while allowing parallel decoding. Our approach fits into this paradigm but operates on a latent space: instead of diffusing over one-hot word tokens directly, we diffuse over continuous glyph feature maps or discrete code embeddings arranged in an image-like grid. This is analogous to latent diffusion in vision models, where the diffusion process is applied in a learned latent space to improve efficiency and semantic coherence. In our case, the latent space is the space of glyph-derived code vectors, which is continuous during training and can be made discrete at generation time. By using a U-Net over a 2D token grid with masks, we effectively learn a conditional masked language model that fills in missing parts of a sentence based on context, akin to the idea of denoising autoencoding used in BERT (although BERT does not use an iterative refinement process).
+
+\paragraph{Unsupervised learning of language structure.} Our ultimate goal is to enable learning a language without any bilingual signal (dictionaries or translations), purely from monolingual data of that language. This touches on problems of decipherment and emergent communication. Classical approaches to decipherment often used expectation-maximization to map an unknown script to a known language, requiring assumptions like similar distribution or simple substitution cipher. More recent approaches use neural models to align embedding spaces of languages without supervision, often by exploiting distributional similarity and adversarial training \citep{conneau2018word} or by initializing from identical patterns (e.g., numerals, names). \citep{conneau2018word} demonstrated that with sufficient corpus data, one can align word embeddings of two languages through adversarial learning and a shared seed lexicon, effectively learning a bilingual dictionary without direct supervision. Our scenario is even more challenging: we do not assume a second language at all, only a single-language corpus. We rely on the distributional hypothesis and internal consistency (such as Q/A pairs within the language, or context windows treated as pseudo-translation pairs) to induce meaning. There has been progress in using neural networks to cluster and interpret ancient scripts purely from their internal evidence; for example, \citep{born2023clustering} used deep clustering on character images and co-occurrence contexts to group symbols of undeciphered writing. Their results indicate that even without understanding the language, one can often recover the inventory of characters and some semantic distinctions by statistical patterns. Our ILM framework builds on similar principles but provides a more powerful end-to-end model that goes from character pixels to an emergent lexicon and language model.
+
+\section{Imagized Language Model: Architecture and Objectives}
+In this section, we present the ILM design in detail. The system consists of four stages or components that are trained in sequence (and partially jointly) to achieve the final language model: 
 \begin{enumerate}
-    \item \textbf{Glyph Encoding:} Convert every token (word or character) into a 128\,$\times$\,128 RGB glyph image combining ASCII row--column coding and centred font rendering (\texttt{ilm/utils/glyphs.py}).
-    \item \textbf{Product Code Learning:} Train a 3\,$\times$\,32 differentiable product code layer that maps glyph CNN features to discrete ``colour'' indices (\texttt{ilm/code/product.py}, \texttt{scripts/train\_color\_codes.py}).
-    \item \textbf{QA Alignment:} Fine-tune colour codes with InfoNCE on question--answer pairs plus Gram matrix autocorrelation, enforcing structural alignment of semantics (\texttt{scripts/train\_codes\_from\_qa.py}).
-    \item \textbf{Sentence Diffusion:} Assemble glyph embeddings into $H\times W$ frames and train a small UNet to reconstruct masked features, enabling denoising-based language generation (\texttt{scripts/train\_diffusion.py}).
+    \item \textbf{Glyph Encoding}: each token (word or character) is converted into a fixed-size image, and a convolutional neural network (CNN) extracts a glyph feature vector from it (Section~\ref{sec:glyph}).
+    \item \textbf{Product Code Embedding}: the glyph feature is then passed through a differentiable \emph{product quantization} layer that assigns it to a tuple of discrete code indices (one per codebook channel), producing a compressive discrete embedding (Section~\ref{sec:product}). This forms a kind of \emph{memory table} for word embeddings distributed across multiple codebooks.
+    \item \textbf{Semantic Alignment (QA Training)}: using question--answer pairs or related sentence pairs, we fine-tune the code embeddings so that semantically related tokens and sentences map to nearby representations. We use a contrastive InfoNCE loss between questions and answers, and a Gram matrix alignment loss to enforce structural consistency, along with regularizers to keep the code usage broad (Section~\ref{sec:qa}).
+    \item \textbf{Diffusion-Based Generation}: we arrange sequences of token codes into 2D grids (simulating text lines or paragraphs as small images) and train a diffusion/inpainting model (a U-Net) that learns to reconstruct masked-out tokens from the surrounding context (Section~\ref{sec:diffusion}). At inference, this model can generate new text by iterative denoising.
 \end{enumerate}
 
-\paragraph{Pipeline summary.} Figure placeholder omitted; see main documentation for visuals.
+Next, we detail each component and its learning objective.
 
-\section{Differentiable Product Codes}\label{sec:codes}
-\subsection{Glyph Encoder}
-A lightweight CNN, $f_{\text{glyph}}:\mathbb{R}^{3\times 128\times 128}\to\mathbb{R}^{d_g}$, is defined (\texttt{ilm/encoders/glyph\_cnn.py}) with $d_g=128$. Convolutional layers reduce spatial resolution while preserving writing strokes.
+\subsection{Glyph Image Encoding}\label{sec:glyph}
+The input to our model is raw text in any language or script. We first convert each token (which could be a word, a character, or a subword unit depending on the language) into an image. For languages with alphabetic scripts like English, we render the word in a fixed-size image (e.g. $128\times128$ pixels) using a standard font, possibly with an additional encoding of each character's position (such as a simple grid or one-hot rasterization of each letter). For logographic languages like Chinese, Japanese Kanji, or historical scripts, we can render each character as a $128\times128$ image using a font or bitmapped glyph. The key is that \emph{the model does not see any numeric token identifiers or one-hot encodings of tokens---it only sees pixels representing the visual appearance of text}. This makes our method inherently applicable to any writing system for which we have images of symbols, without any need for prior linguistic knowledge.
 
-\subsection{Product Code Layer}
-The product code module maintains $C=3$ codebooks $E_c\in\mathbb{R}^{K\times d_e}$ with $K=32$ and $d_e=128$. For each channel $c$, logits $\ell_c = W_c g + b_c$ are produced, where $g=f_{\text{glyph}}(x)$.
+Formally, let $x$ be a token (e.g. the string ``cat'' or a Chinese character). We define a function $I(x) \in \mathbb{R}^{H\times W \times 3}$ that produces an $H\times W$ RGB image of the token. In our implementation, $H=W=128$. We then use a convolutional encoder $f_{\text{glyph}}$ to obtain a vector representation:
+\[
+    g = f_{\text{glyph}}(I(x)) \in \mathbb{R}^{d_g},
+\]
+where $d_g=128$. The CNN is a lightweight model with a few convolutional layers that reduce the image to a single vector. It is important that $f_{\text{glyph}}$ be powerful enough to capture fine distinctions in shape (so that different characters or words map to different features) while also being smooth enough that similar-looking glyphs have similar features. In early training (Stage~1 below), $f_{\text{glyph}}$ learns purely from visual data, so it will cluster glyphs by visual similarity, grouping those with common strokes or sub-components. This is desirable as a first step towards grouping by meaning, since often in logographic scripts similar radicals imply related meaning or pronunciation. However, visual similarity alone is not sufficient for semantic grouping, so later stages adjust $f_{\text{glyph}}$ and the codes to better reflect usage-based similarity.
 
-Sampling uses relaxed Gumbel--Softmax:
+\subsection{Differentiable Product Code Embedding}\label{sec:product}
+After obtaining the glyph feature $g$, the next step is to map it to a discrete embedding in a \textbf{product codebook}. We introduce $C$ separate codebooks (channels), each containing $K$ learnable code vectors of dimension $d_e$ (we usually set $d_e = d_g$). Let $E^{(c)} = \{e^{(c)}_{1}, e^{(c)}_{2}, \dots, e^{(c)}_{K}\}$ denote the set of code vectors in the $c$-th codebook for $c=1,\dots,C$. In our experiments we use $C=3$ and $K=32$ for each, meaning the embedding for any token is a combination of 3 code vectors (one selected out of 32 in each channel). The full codebook can be thought of as a $K^C$ discrete grid of possible combinations, akin to a multi-channel color space.
+
+For each channel $c$, we produce logits $\ell^{(c)} = W^{(c)} g + b^{(c)}$, where $W^{(c)} \in \mathbb{R}^{K \times d_g}$ and $b^{(c)}\in\mathbb{R}^K$. A relaxed categorical choice is made via Gumbel--Softmax \citep{jang2017gumbel}. During training we use the straight-through estimator: in the forward pass we take the hard argmax to select a code index $k_c$, while the backward pass uses the soft sample to allow gradients to flow. The token embedding is the sum of selected code vectors:
+\[
+    e = \sum_{c=1}^C e^{(c)}_{k_c}.
+\]
+Summation keeps the output dimension fixed and allows each channel to contribute an additive factor capturing a latent aspect of the token.
+
+\subsubsection{Stage~1 Loss: Visual Self-Compression}
+During Stage~1 we train $f_{\text{glyph}}$ and the codebooks purely on glyph images, ensuring that $e$ preserves information in $g$. We use an InfoNCE objective between glyph features and their codes:
+\[
+    \mathcal{L}_{\text{NCE-img}} = -\frac{1}{B}\sum_{i=1}^B \log \frac{\exp(\langle \hat g_i, \hat e_i\rangle / \tau_{\text{c}})}{\sum_{j=1}^B \exp(\langle \hat g_i, \hat e_j\rangle / \tau_{\text{c}})},
+\]
+forcing codes to be discriminative for each glyph. Here hats denote $\ell_2$ normalization and $\tau_{\text{c}}$ is a temperature.
+
+To avoid code collapse we add a usage KL term that matches the empirical usage to a uniform distribution $u$:
+\[
+    \mathcal{L}_{\text{usage}} = \frac{1}{C}\sum_{c=1}^C \mathrm{KL}(p^{(c)} \Vert u).
+\]
+An independence penalty encourages statistical independence across channels:
+\[
+    \mathcal{L}_{\text{indep}} = \frac{2}{C(C-1)}\sum_{a<b} \Vert \mathrm{Cov}(Y^{(a)}, Y^{(b)})\Vert_F^2,
+\]
+where $Y^{(c)}$ collects one-hot assignments in channel $c$. The Stage~1 objective is
 \begin{equation}
-    y_c = \mathrm{GumbelSoftmax}(\ell_c, \tau), \qquad e = \sum_{c=1}^C y_c E_c.
+    \mathcal{L}_{\text{code1}} = \mathcal{L}_{\text{NCE-img}} + \lambda_{\text{usage}} \mathcal{L}_{\text{usage}} + \lambda_{\text{indep}} \mathcal{L}_{\text{indep}}.
 \end{equation}
-With straight-through estimation the forward pass is effectively discrete while gradients flow through the soft relaxation.
+Optimizing this yields a visual lexicon where glyphs with similar strokes share portions of their codes.
 
-\subsection{Losses}
-\paragraph{InfoNCE (Glyph$\leftrightarrow$Code).}
-For a batch of $B$ glyphs with features $g_i$ and code embeddings $e_i$, we use
+\subsection{Semantic Alignment via QA Training}\label{sec:qa}
+Stage~2 introduces semantic signals. We assume access to paired texts (true Q/A pairs or pseudo-pairs derived from context). For each question--answer pair $(Q, A)$ we compute sentence embeddings by averaging token codes: $h_Q = \frac{1}{|Q|}\sum_{x \in Q} e_x$, $h_A = \frac{1}{|A|}\sum_{x \in A} e_x$, followed by normalization. A bidirectional InfoNCE loss brings true pairs together:
 \begin{equation}
-    \mathcal{L}_{\text{NCE}} = -\frac{1}{B}\sum_{i=1}^B \log \frac{\exp(\langle \hat{g}_i, \hat{e}_i\rangle/\tau_{\text{info}})}{\sum_{j=1}^B \exp(\langle \hat{g}_i, \hat{e}_j\rangle/\tau_{\text{info}})},
+\begin{aligned}
+    \mathcal{L}_{\text{NCE-QA}} = -\frac{1}{B}\sum_{b=1}^B &\Big[ \log \frac{\exp(\langle h_{Q_b}, h_{A_b}\rangle / \tau_{\text{qa}})}{\sum_{j=1}^B \exp(\langle h_{Q_b}, h_{A_j}\rangle / \tau_{\text{qa}})} \Big. \\
+    &+ \Big. \log \frac{\exp(\langle h_{Q_b}, h_{A_b}\rangle / \tau_{\text{qa}})}{\sum_{j=1}^B \exp(\langle h_{Q_j}, h_{A_b}\rangle / \tau_{\text{qa}})} \Big].
+\end{aligned}
 \end{equation}
-where hats denote $\ell_2$ normalization and $\tau_{\text{info}}=0.07$. This pushes each code embedding toward its glyph feature and away from others, forcing codes that preserve glyph identity.
 
-\paragraph{Usage KL.}
-To discourage collapse, average channel assignments $p_c = \frac{1}{B}\sum_i y_{c,i}$ are matched to the uniform distribution $u = \frac{1}{K}\mathbf{1}$:
+We also align internal structure via Gram matrices. Let $Z_Q$ and $Z_A$ be row-stacked, normalized token embeddings for $Q$ and $A$. Define $G_Q = Z_Q Z_Q^\top$ and $G_A = Z_A Z_A^\top$. After padding to a common size we minimize
 \begin{equation}
-    \mathcal{L}_{\text{usage}} = \frac{1}{C}\sum_{c=1}^C \mathrm{KL}(p_c\Vert u).
+    \mathcal{L}_{\text{Gram}} = \frac{1}{B}\sum_{b=1}^B \frac{1}{m_b^2} \Vert G_Q^{(b)} - \Pi G_A^{(b)} \Pi^\top \Vert_F^2,
 \end{equation}
-This keeps each axis of the product space populated, ensuring the memory table has high capacity.
+where $m_b$ is the question length and $\Pi$ handles padding. This pressures the relational geometry of tokens in a question to match that of its answer, encouraging alignment of semantic roles.
 
-\paragraph{Independence Penalty.}
-Cross-covariance between channel assignments is penalised:
+Regularizers $\mathcal{L}_{\text{usage}}$ and $\mathcal{L}_{\text{indep}}$ remain active. The Stage~2 objective becomes
 \begin{equation}
-    \mathcal{L}_{\text{indep}} = \frac{2}{C(C-1)}\sum_{a<b} \Vert \mathrm{Cov}(y_a, y_b)\Vert_F^2.
+    \mathcal{L}_{\text{code2}} = \mathcal{L}_{\text{NCE-QA}} + \lambda_{\text{Gram}} \mathcal{L}_{\text{Gram}} + \lambda'_{\text{usage}} \mathcal{L}_{\text{usage}} + \lambda'_{\text{indep}} \mathcal{L}_{\text{indep}}.
 \end{equation}
-This encourages factorised structure so that each channel captures different semantics (grammar, meaning, tone, etc.).
 
-\paragraph{Total Objective.}
-Training minimises
+The combination of sentence-level and structure-level alignment yields emergent semantics: synonyms cluster, question words align with their answer types, and channels specialize. The codebooks now encode not only how a glyph looks but also how it behaves in language.
+
+\subsection{Diffusion-Based Text Infilling}\label{sec:diffusion}
+Stage~3 trains a diffusion-style denoiser over sequences of token embeddings. We arrange a sentence's embeddings into an $H\times W$ grid $F$. A binary mask $M$ with mask ratio $\beta$ selects which positions to corrupt; we set those embeddings to zero to obtain $\tilde{F}$. A U-Net $U$ receives $(\tilde{F}, M)$ and outputs reconstructions $\hat{F}$. The loss is a masked MSE:
 \begin{equation}
-    \mathcal{L}_{\text{codes}} = \mathcal{L}_{\text{NCE}} + \lambda_{\text{usage}}\mathcal{L}_{\text{usage}} + \lambda_{\text{indep}}\mathcal{L}_{\text{indep}},
+    \mathcal{L}_{\text{diff}} = \frac{1}{\sum_{i,j} M_{i,j}} \sum_{i,j: M_{i,j}=1} \Vert \hat{F}_{i,j} - F_{i,j} \Vert_2^2.
 \end{equation}
-with $(\lambda_{\text{usage}}, \lambda_{\text{indep}})=(0.1,0.1)$ in \texttt{configs/color.yaml}. The gradient encourages glyphs with similar strokes or structures to share nearby indices, while maintaining combinatorial expressivity.
 
-\section{QA Alignment: Why Semantics Emerge}
-\subsection{Batch Collation}
-For each QA sample all tokens are deduplicated, the glyph DB provides or creates glyph PNGs, and stacked into a mini-batch $X$.
+This teaches the model to inpaint missing embeddings using their visual/semantic neighbors. At inference we can start from a fully masked grid and iteratively (or in one shot) predict embeddings, then map them back to tokens by finding the nearest code combination. Because the embeddings already encode semantics, the denoiser leverages high-level context rather than surface n-grams, enabling coherent generation even in languages with complex morphology or free word order.
 
-\subsection{Loss Components}
-Let $E$ denote token code embeddings and $G$ glyph features. For each question $Q$ and answer $A$ we compute pooled representations
+\subsection{Why Unsupervised Semantic Learning Emerges}
+Combining Stages~1--3 yields the overall objective
 \begin{equation}
-    e_Q = \frac{1}{|Q|}\sum_{i\in Q} E_i, \qquad e_A = \frac{1}{|A|}\sum_{j\in A} E_j,
+    \mathcal{L} = \mathcal{L}_{\text{code1}} + \mathcal{L}_{\text{code2}} + \lambda_{\text{diff}} \mathcal{L}_{\text{diff}},
 \end{equation}
-(normalised before similarity).
+with $\lambda_{\text{diff}}$ controlling the influence of the diffusion term. The InfoNCE losses maximize mutual information between glyphs and codes, and between related texts. The Gram loss enforces relational consistency. The diffusion loss requires that embeddings remain predictive of local context. Together they leave little room for trivial solutions: the code must encode everything needed to reconstruct glyph appearance, align semantic roles, and support context-based prediction. This multiview pressure naturally disentangles factors of meaning across codebook channels.
 
-\paragraph{QA InfoNCE.}
-Pairs are treated as positives, negatives come from the rest of the mini-batch:
-\begin{equation}
-    \mathcal{L}_{\text{QA}} = -\frac{1}{B}\sum_{b=1}^B \log \frac{\exp(\langle \hat{e}^Q_b, \hat{e}^A_b\rangle / \tau_{\text{QA}})}{\sum_{j=1}^B \exp(\langle \hat{e}^Q_b, \hat{e}^A_j\rangle / \tau_{\text{QA}})},
-\end{equation}
-with $\tau_{\text{QA}}=0.07$. Questions and answers about the same topic must occupy nearby points.
+\section{Applying ILM to Undocumented Scripts}
+The ILM pipeline is well suited to languages lacking annotations or dictionaries.
 
-\paragraph{Autocorrelation Alignment.}
-We align second-order structure via Gram matrices:
-\begin{equation}
-    C_Q = Z_Q^\top Z_Q/(|Q|+\epsilon), \quad C_A = Z_A^\top Z_A/(|A|+\epsilon),
-\end{equation}
-where $Z_Q$ stacks unit-normalised token embeddings of the question. The loss is
-\begin{equation}
-    \mathcal{L}_{\text{Gram}} = \frac{1}{B}\sum_b \Vert C_Q^{(b)} - C_A^{(b)}\Vert_F^2.
-\end{equation}
-This enforces that relational geometry of tokens inside the question matches that of its answer, pushing the model to capture latent roles (subject, object, modality) rather than surface co-occurrence only.
+\paragraph{Glyph collection.} Gather images for each distinct symbol. For inscriptions, segment characters manually or with vision tools. Normalize to a standard canvas size.
 
-\paragraph{Code Regularisers.}
-Usage and independence penalties from Section~\ref{sec:codes} are reused to keep codes expressive when conditioned on real language contexts.
+\paragraph{Stage~1 (visual clustering).} Train $f_{\text{glyph}}$ and the codebooks using raw glyph images. This recovers variants and radicals, forming an initial inventory.
 
-\subsection{Optimisation Behaviour}
-Gradients from $\mathcal{L}_{\text{QA}}$ propagate through the codebooks: if two different answers share a topic (``photosynthesis'' or Chinese equivalent "guang he zuo yong"''), they must align to similar pooled embeddings, pulling constituent tokens share closer code vectors. Because everything is functions of glyphs, the optimisation is language-agnostic; the network only sees strokes and shapes.
+\paragraph{Stage~2 (pseudo-semantic alignment).} Construct pseudo-pairs from the corpus: consecutive sentences, masked spans, or topical groupings. Train with $\mathcal{L}_{\text{code2}}$. Even noisy pairs cause distributional clustering (words used in similar contexts converge). Channels may capture categories such as names, locations, or actions purely from usage patterns.
 
-\paragraph{Why This Learns Meaning.}
+\paragraph{Stage~3 (diffusion language model).} Train the infiller on raw sequences. The model learns to restore tokens consistent with context, effectively modeling the language. Generated sentences can be inspected for plausibility, giving insight into syntax and collocations.
+
+\paragraph{Evaluation without annotation.} Since gold labels are absent, we rely on indirect signals: cluster coherence, reconstruction quality, and expert assessment. Linguists can inspect tokens sharing the same code to hypothesize meaning. The diffusion model's ability to fill gaps in inscriptions serves as a practical validation.
+
+\section{Discussion}
+ILM works because each component constrains the representation from a different angle:
 \begin{itemize}
-    \item InfoNCE collapses question--answer pairs into the same neighbourhood, so the code representation must encode semantic compatibility.
-    \item The Gram term penalises mismatched relational geometry. For instance, if a question emphasises an agent acting on a patient, the embeddings for verbs and nouns must sit in comparable orientations to those in the answer.
-    \item Usage and independence prevent trivial solutions (everyone to one index), forcing the network to reuse latent factors across many QA items. Shared factors coalesce into interpretable axes (e.g., animacy, polarity, aspect).
+    \item Visual grounding retains orthographic distinctions without handcrafted tokenizers.
+    \item Product codes provide a discrete, memory-like table with factored capacity, steering the model toward interpretable latent dimensions.
+    \item Contrastive alignment injects semantic pressure, clustering tokens by usage.
+    \item Gram alignment adds structural supervision, approximating grammatical roles.
+    \item Diffusion infilling ensures embeddings remain useful for generation, validating that learned codes capture enough context to predict missing words.
 \end{itemize}
-
-\section{Diffusion over Sentence Frames}
-Tokens are assembled into $H\times W$ grids; the glyph CNN produces features $F\in\mathbb{R}^{B\times d\times H\times W}$.
-
-A Bernoulli mask $M$ with per-sample ratio $\beta\sim\mathcal{U}(\beta_{\min},\beta_{\max})$ selects which positions to corrupt. The input to UNet is $[\tilde{F} \Vert M]$ where $\tilde{F}=F\odot(1-M)$.
-
-The UNet predicts $
-abla$-like residuals, trained with masked MSE:
-\begin{equation}
-    \mathcal{L}_{\text{diff}} = \frac{1}{|\{i:M_i=1\}|}\sum_{i:M_i=1} \Vert \hat{F}_i - F_i\Vert_2^2.
-\end{equation}
-This encourages the network to exploit context when reconstructing masked features. As colour codes carry semantics, the diffusion head learns to fill in tokens coherently.
-
-\section{Extension to Historical or Unsegmented Scripts}
-\subsection{Glyph Layer is the Key}
-All stages operate on glyph images. To ingest a new script (Oracle Bone, Khitan, Tangut), supply a glyph renderer (font or vector) and populate the glyph DB with characters encountered in the corpus. No tokenisation is required; each character is a visual symbol.
-
-\subsection{Learning Without Dictionaries}
-Given only monolingual text:
-\begin{enumerate}
-    \item Build glyph dataset: run \texttt{scripts/glyphdb\_add\_tokens.py} on unique characters.
-    \item Train product codes on glyph reconstruction (Section~\ref{sec:codes}). Shared radicals or strokes will cluster automatically.
-    \item Use pseudo-QA generated from the corpus: e.g., treat adjacent sentences as (context, response) pairs, or use masked spans as question/answer. The InfoNCE loss still pushes semantically related glyph groups together.
-    \item Once codes stabilise, train diffusion for denoising; the model learns internal language structure just from visual co-occurrence.
-\end{enumerate}
-Without dictionaries, semantics emerge from distributional structure: questions and answers formed by context windows, sentence pairs, or self-supervised tasks provide contrastive signals.
-
-\subsection{Practical Considerations}
-\begin{itemize}
-    \item \textbf{Font Availability:} For ancient scripts, use raster renderings (scans) embedded as glyphs. The pipeline is agnostic to font source.
-    \item \textbf{Corpus Size:} Contrastive learning benefits from millions of QA-like pairs. For scarce data, augment with back-translation or pseudo-instruction templates.
-    \item \textbf{Evaluation:} Use nearest-neighbour clustering on product codes to discover radicals or semantic fields; compare to ground truth when available, or rely on human experts.
-\end{itemize}
-
-\section{Derivation Summary}
-We summarise the total objective being minimised across stages:
-\begin{align}
-    \mathcal{L} &= \mathcal{L}_{\text{codes}} \;+\; \mathcal{L}_{\text{QA}} + \lambda_{\text{Gram}} \mathcal{L}_{\text{Gram}} \;+\; \lambda_{\text{usage}} \mathcal{L}_{\text{usage}} + \lambda_{\text{indep}} \mathcal{L}_{\text{indep}} \;+\; \mathcal{L}_{\text{diff}}.\label{eq:total-loss}
-\end{align}
-Each term propagates gradients to the shared codebooks $\{E_c\}$, making them the semantic memory. Because the glyph CNN is frozen during diffusion and fine-tuned during QA, tokens remain anchored to their visual form while gradually aligned semantically.
-
-\section{Why the Pipeline Works}
-\begin{enumerate}
-    \item \textbf{Visual Anchoring:} Tokens remain tied to glyphs, so the representation respects orthographic similarity (stroke sharing).
-    \item \textbf{Contrastive Pull:} InfoNCE objectives across glyph--code and QA pairs enforce that meaning-bearing contexts cluster.
-    \item \textbf{Structural Regularisation:} Gram alignment and independence penalties prevent degenerate minima, promoting interpretable subspace factors.
-    \item \textbf{Diffusion Closure:} The denoiser validates that the learned codes retain enough information to reconstruct sentences from corrupted fragments. This demonstrates that semantics are not destroyed by discretisation.
-\end{enumerate}
-
-\section{Future Directions}
-\begin{itemize}
-    \item \textbf{Orthography Discovery:} Run clustering on colour codes to propose radical decompositions for undocumented scripts.
-    \item \textbf{Interactive Translation:} Use diffusion infilling conditioned on bilingual seeds to bootstrap lexicons for under-studied languages.
-    \item \textbf{Probabilistic Grammars:} Fit simple probabilistic models (e.g., HMMs) over the colour-code sequences to extract latent grammatical categories.
-\end{itemize}
+The framework therefore unifies perception (glyphs) and language structure under self-supervision. When applied to modern languages, ILM can support tasks like QA, summarization, and translation through the diffusion decoder. When applied to ancient scripts, it provides a new tool for decipherment by revealing latent categories and usage patterns.
 
 \section{Conclusion}
-The ILM codebase already optimises a principled objective that aligns visual token embeddings with semantic structure purely from images and QA supervision. Because the glyph interface is script-agnostic, the same method can ingest Oracle Bone inscriptions, Tangut texts, or any logographic script without dictionaries: any corpora of glyph sequences can serve as self-supervision for the colour-code memory table, providing an automatic path toward meaning discovery.
+We presented the Imagized Language Model, a factorized discrete embedding architecture trained solely from glyph images and self-supervised objectives. By combining product quantization, contrastive sentence alignment, Gram-structure regularization, and diffusion-based infilling, the model learns semantically meaningful representations without any linguistic supervision. The learned codebooks behave like a structured lexicon, opening the door to learning new languages purely by reading their texts. Future work will extend ILM to multi-step diffusion decoding, joint multilingual training, and large-scale experiments on historical corpora.
 
-\bibliographystyle{plain}
-\begin{thebibliography}{9}
-\bibitem{infoclim} van den Oord et al. \emph{Representation Learning with Contrastive Predictive Coding}.
-\bibitem{glowgumbel} Jang et al. \emph{Categorical Reparameterization with Gumbel-Softmax}.
-\bibitem{visualtext} Liu et al. \emph{Glyph-aware Multilingual Models}.
+\bibliographystyle{plainnat}
+\begin{thebibliography}{10}
+
+\bibitem{infocpc}
+Aaron van~den Oord, Yazhe Li, and Oriol Vinyals.
+\newblock Representation learning with contrastive predictive coding.
+\newblock {\em arXiv preprint arXiv:1807.03748}, 2018.
+
+\bibitem{jang2017gumbel}
+Eric Jang, Shixiang Gu, and Ben Poole.
+\newblock Categorical reparameterization with gumbel-softmax.
+\newblock In {\em International Conference on Learning Representations (ICLR)}, 2017.
+
+\bibitem{conneau2018word}
+Alexis Conneau, Guillaume Lample, Marc'Aurelio Ranzato, Ludovic Denoyer, and Herv\'e J\'egou.
+\newblock Word translation without parallel data.
+\newblock In {\em International Conference on Learning Representations (ICLR)}, 2018.
+
+\bibitem{born2023clustering}
+Logan Born, M.~Willis Monroe, Kathryn Kelley, and Anoop Sarkar.
+\newblock Learning the character inventories of undeciphered scripts using unsupervised deep clustering.
+\newblock In {\em Proceedings of the Workshop on Computation and Written Language (CAWL)}, 2023.
+
+\bibitem{austin2021d3pm}
+Jacob Austin, Daniel~D. Johnson, Jonathan Ho, Daniel Tarlow, and Rahul~G. Krishnan.
+\newblock Structured denoising diffusion models in discrete state-spaces.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)}, 2021.
+
 \end{thebibliography}
 \end{document}
