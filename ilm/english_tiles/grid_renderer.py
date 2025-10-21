@@ -1,189 +1,122 @@
-"""English glyph tiling utilities.
+"""Sequential English glyph tiling.
 
-This module builds a 16x16x64 tensor representation for English words where each
-channel corresponds to a canonical character bucket. The 64 tiles are arranged
-into an 8x8 grid so they can be rasterized as a 128x128 image reminiscent of a
-CJK square glyph.
+This module renders each character of a word into a 16×16 patch and places
+patches sequentially across an 8×8 grid, yielding a 128×128 square glyph.
 """
 
 from __future__ import annotations
 
-import string
-from functools import lru_cache
-from typing import Dict, Sequence
+from dataclasses import dataclass
+from typing import Iterable
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from ilm.utils.glyphs import find_font_path
 
-# 64 canonical slots: 26 uppercase letters, 10 digits, 27 punctuation/space, 1 UNK
-DEFAULT_TILE_SET = [
-    *list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
-    *list("0123456789"),
-    " ",
-    ".",
-    ",",
-    ";",
-    ":",
-    "?",
-    "!",
-    "'",
-    '"',
-    "-",
-    "_",
-    "(",
-    ")",
-    "[",
-    "]",
-    "{",
-    "}",
-    "/",
-    "\\",
-    "@",
-    "#",
-    "$",
-    "%",
-    "&",
-    "+",
-    "*",
-    "=",
-    "UNK",
-]
 
-ENGLISH_TILE_TO_INDEX: Dict[str, int] = {token: idx for idx, token in enumerate(DEFAULT_TILE_SET)}
+@dataclass(frozen=True)
+class GridSpec:
+    grid_size: int = 8
+    tile_size: int = 16
 
-_WHITESPACE = set(string.whitespace)
+    @property
+    def max_length(self) -> int:
+        return self.grid_size * self.grid_size
+
+    @property
+    def image_size(self) -> int:
+        return self.grid_size * self.tile_size
 
 
-@lru_cache(maxsize=None)
-def _load_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+DEFAULT_SPEC = GridSpec()
+
+
+def _load_font(font_size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     font_path = find_font_path()
     if font_path:
-        return ImageFont.truetype(font_path, size=size)
+        return ImageFont.truetype(font_path, size=font_size)
     return ImageFont.load_default()
 
 
-def _tile_key_for_char(ch: str) -> str:
-    if not ch:
-        return "UNK"
-    if ch in _WHITESPACE:
-        return " "
-    if ch in ENGLISH_TILE_TO_INDEX:
-        return ch
-    upper = ch.upper()
-    if upper in ENGLISH_TILE_TO_INDEX and upper.isalpha():
-        return upper
-    if ch in {";", ":", "?", "!", "'", '"', "-", "_", "/", "\\", "@", "#", "$", "%", "&", "+", "*", "="}:
-        return ch
-    return "UNK"
+def render_char_patch(character: str, *, tile_size: int = 16, intensity: int = 255) -> np.ndarray:
+    """Render a single character centred in a tile-sized image."""
 
-
-def render_char_patch(char: str, size: int = 16, intensity: int = 255) -> np.ndarray:
-    """Render a single character into a centered square glyph patch."""
-
-    img = Image.new("L", (size, size), color=0)
+    img = Image.new("L", (tile_size, tile_size), color=0)
     draw = ImageDraw.Draw(img)
 
-    if not char:
-        char = " "
-
-    if char in _WHITESPACE:
-        radius = max(1, size // 8)
-        cx = cy = size // 2
-        draw.ellipse((cx - radius, cy - radius, cx + radius, cy + radius), fill=intensity)
+    if not character or character.isspace():
         return np.array(img, dtype=np.uint8)
 
-    if char == "UNK":
-        draw.line((2, 2, size - 3, size - 3), fill=intensity, width=1)
-        draw.line((2, size - 3, size - 3, 2), fill=intensity, width=1)
-        return np.array(img, dtype=np.uint8)
-
-    font_size = max(10, int(size * 0.9))
-    for _ in range(6):
+    font_size = max(6, int(tile_size * 0.85))
+    for _ in range(8):
         font = _load_font(font_size)
-        bbox = font.getbbox(char)
+        bbox = font.getbbox(character)
         width = bbox[2] - bbox[0]
         height = bbox[3] - bbox[1]
-        if width <= size - 2 and height <= size - 2:
+        if width <= tile_size - 2 and height <= tile_size - 2:
             break
         font_size = max(6, int(font_size * 0.9))
     else:
         font = _load_font(font_size)
-        bbox = font.getbbox(char)
+        bbox = font.getbbox(character)
         width = bbox[2] - bbox[0]
         height = bbox[3] - bbox[1]
 
     try:
-        draw.text((size // 2, size // 2), char, font=font, fill=intensity, anchor="mm")
+        draw.text((tile_size // 2, tile_size // 2), character, font=font, fill=intensity, anchor="mm")
     except Exception:
-        x_pos = (size - width) // 2
-        y_pos = (size - height) // 2
-        draw.text((x_pos, y_pos), char, font=font, fill=intensity)
+        x = (tile_size - width) // 2
+        y = (tile_size - height) // 2
+        draw.text((x, y), character, font=font, fill=intensity)
 
     return np.array(img, dtype=np.uint8)
 
 
-def render_word_tile_tensor(
-    word: str,
-    *,
-    tile_size: int = 16,
-    tile_set: Sequence[str] = DEFAULT_TILE_SET,
-) -> np.ndarray:
-    """Return a (len(tile_set) x tile_size x tile_size) tensor for the word."""
+def render_word_tile_tensor(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.ndarray:
+    """Return a tensor of shape (grid, grid, tile, tile) for the word."""
 
-    num_tiles = len(tile_set)
-    tensor = np.zeros((num_tiles, tile_size, tile_size), dtype=np.float32)
-    counts = np.zeros(num_tiles, dtype=np.int32)
+    grid = spec.grid_size
+    tile = spec.tile_size
+    tensor = np.zeros((grid, grid, tile, tile), dtype=np.uint8)
     if not word:
-        return tensor.astype(np.uint8)
+        return tensor
 
-    total = max(1, len(word) - 1)
-    for pos, raw_ch in enumerate(word):
-        key = _tile_key_for_char(raw_ch)
-        idx = ENGLISH_TILE_TO_INDEX.get(key, ENGLISH_TILE_TO_INDEX["UNK"])
-        patch_char = raw_ch if key != "UNK" else "UNK"
-        patch = render_char_patch(patch_char, size=tile_size, intensity=200)
-        weight = 0.6 + 0.4 / (counts[idx] + 1)
-        tensor[idx] = np.clip(tensor[idx] + patch.astype(np.float32) * weight, 0.0, 255.0)
-
-        row = int(round((pos / total) * (tile_size - 1))) if total else tile_size // 2
-        col = min(tile_size - 1, counts[idx])
-        tensor[idx, row, col] = 255.0
-
-        counts[idx] += 1
-
-    return tensor.astype(np.uint8)
+    capped = word[: spec.max_length]
+    for idx, ch in enumerate(capped):
+        row = idx // grid
+        col = idx % grid
+        tensor[row, col] = render_char_patch(ch, tile_size=tile)
+    return tensor
 
 
-def render_word_tile_image(
-    word: str,
-    *,
-    tile_size: int = 16,
-    grid_cols: int = 8,
-    tile_set: Sequence[str] = DEFAULT_TILE_SET,
-) -> np.ndarray:
-    """Render the tiled tensor as a square grayscale image."""
+def render_word_tile_image(word: str, *, spec: GridSpec = DEFAULT_SPEC) -> np.ndarray:
+    """Render the word as a 128×128 grayscale image."""
 
-    tensor = render_word_tile_tensor(word, tile_size=tile_size, tile_set=tile_set)
-    num_tiles = len(tile_set)
-    grid_rows = (num_tiles + grid_cols - 1) // grid_cols
-    height = grid_rows * tile_size
-    width = grid_cols * tile_size
-    grid = np.zeros((height, width), dtype=np.uint8)
-    for idx in range(num_tiles):
-        row = idx // grid_cols
-        col = idx % grid_cols
-        y0 = row * tile_size
-        x0 = col * tile_size
-        grid[y0 : y0 + tile_size, x0 : x0 + tile_size] = tensor[idx]
-    return grid
+    tensor = render_word_tile_tensor(word, spec=spec)
+    grid = spec.grid_size
+    tile = spec.tile_size
+    image = np.zeros((spec.image_size, spec.image_size), dtype=np.uint8)
+    for row in range(grid):
+        for col in range(grid):
+            patch = tensor[row, col]
+            y0 = row * tile
+            x0 = col * tile
+            image[y0 : y0 + tile, x0 : x0 + tile] = patch
+    return image
+
+
+def render_words(words: Iterable[str], *, spec: GridSpec = DEFAULT_SPEC) -> dict[str, np.ndarray]:
+    """Convenience helper that renders many words using the same spec."""
+
+    return {word: render_word_tile_image(word, spec=spec) for word in words}
 
 
 __all__ = [
-    "DEFAULT_TILE_SET",
-    "ENGLISH_TILE_TO_INDEX",
+    "GridSpec",
+    "DEFAULT_SPEC",
     "render_char_patch",
     "render_word_tile_tensor",
     "render_word_tile_image",
+    "render_words",
 ]
