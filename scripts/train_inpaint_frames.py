@@ -106,6 +106,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--r-channels", type=int, default=16)
     ap.add_argument("--log-every", type=int, default=200)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    # Resume
+    ap.add_argument("--resume-from", default=None, help="Path to inpaint ckpt to resume from")
+    ap.add_argument("--resume-auto", action="store_true", help="Auto-resume from latest ckpt in --out directory")
     return ap.parse_args()
 
 
@@ -131,11 +134,40 @@ def main() -> None:
     dl = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=0)
 
     net = InpaintNet(d_model=d_model, r=args.r_channels).to(args.device)
+    # Optional resume
+    start_epoch = 0
+    def latest_ckpt(root: Path) -> Path | None:
+        best = None
+        best_n = -1
+        for p in root.glob("ckpt_epoch*.pt"):
+            try:
+                n = int(p.stem.split("epoch")[-1])
+            except Exception:
+                continue
+            if n > best_n:
+                best_n = n
+                best = p
+        return best
+    if args.resume_auto:
+        last = latest_ckpt(out_dir)
+        if last is not None:
+            args.resume_from = str(last)
+    if args.resume_from:
+        ip_ckpt = torch.load(args.resume_from, map_location="cpu")
+        r_prev = ip_ckpt.get("r_channels", args.r_channels)
+        if r_prev != args.r_channels:
+            args.r_channels = r_prev
+            net = InpaintNet(d_model=d_model, r=r_prev).to(args.device)
+        net.load_state_dict(ip_ckpt["net"])  # type: ignore
+        try:
+            start_epoch = int(Path(args.resume_from).stem.split("epoch")[-1])
+        except Exception:
+            start_epoch = 0
     opt = torch.optim.AdamW(net.parameters(), lr=1e-3)
 
     # Precompute normalized vocab embeddings once per epoch
     V = len(vocab)
-    for epoch in range(args.epochs):
+    for epoch in range(start_epoch + 1, start_epoch + args.epochs + 1):
         for step, (y, valid, ids_frame) in enumerate(dl, 1):
             y = y.to(args.device)  # (B,d,H,W)
             ids_frame = ids_frame.to(args.device)  # (B,H,W)
@@ -166,13 +198,13 @@ def main() -> None:
                     denom = masked_pos.sum().clamp_min(1)
                     acc = correct.sum().float() / denom.float()
                     acc_msg = f" acc_masked_top1={acc.item():.3f}"
-                print(f"epoch {epoch+1} step {step}: loss={loss.item():.4f}{acc_msg}")
+                print(f"epoch {epoch} step {step}: loss={loss.item():.4f}{acc_msg}")
         torch.save({
             "net": net.state_dict(),
             "d_model": d_model,
             "r_channels": args.r_channels,
             "grid": args.grid,
-        }, out_dir / f"ckpt_epoch{epoch+1}.pt")
+        }, out_dir / f"ckpt_epoch{epoch}.pt")
     print(f"Training complete. Artifacts in {out_dir}")
 
 

@@ -92,6 +92,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--log-every", type=int, default=50, help="Print logs every N steps with accuracy metrics")
+    # Resume options
+    ap.add_argument("--resume-from", default=None, help="Path to checkpoint to resume from (loads weights)")
+    ap.add_argument("--resume-auto", action="store_true", help="Auto-resume from latest ckpt in --out directory")
     # Optional regularizers
     ap.add_argument("--lambda-uniq", type=float, default=0.0, help="Uniqueness regularizer weight (L_uniq)")
     ap.add_argument("--lambda-adv", type=float, default=0.0, help="Adversarial language invariance weight for early channels")
@@ -105,6 +108,19 @@ def main() -> None:
     args = parse_args()
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
+    # Helper to find latest checkpoint in out_dir
+    def latest_ckpt(root: Path) -> Path | None:
+        best = None
+        best_n = -1
+        for p in root.glob("ckpt_epoch*.pt"):
+            try:
+                n = int(p.stem.split("epoch")[-1])
+            except Exception:
+                continue
+            if n > best_n:
+                best_n = n
+                best = p
+        return best
 
     # Load QA data
     pairs: List[QAPair] = []
@@ -146,6 +162,31 @@ def main() -> None:
     code_cfg = ProductCodebookConfig(d_model=args.d_model, n_channels=args.n_channels, n_codes=args.n_codes)
     codebook = ProductCodebook(vocab_size=vocab_size, cfg=code_cfg).to(args.device)
 
+    # Optional resume
+    start_epoch = 0
+    if args.resume_auto and (ck := latest_ckpt(out_dir)) is not None:
+        args.resume_from = str(ck)
+    if args.resume_from:
+        ckpt_r = torch.load(args.resume_from, map_location="cpu")
+        cfg_r = ckpt_r.get("config", {})
+        dm_r = cfg_r.get("d_model", args.d_model)
+        nc_r = cfg_r.get("n_channels", args.n_channels)
+        nk_r = cfg_r.get("n_codes", args.n_codes)
+        if (dm_r, nc_r, nk_r) != (args.d_model, args.n_channels, args.n_codes):
+            # Rebuild models to match checkpoint config
+            args.d_model, args.n_channels, args.n_codes = dm_r, nc_r, nk_r
+            code_cfg = ProductCodebookConfig(d_model=dm_r, n_channels=nc_r, n_codes=nk_r)
+            glyph_cnn = GlyphCNN(d=dm_r, in_channels=3).to(args.device)
+            codebook = ProductCodebook(vocab_size=vocab_size, cfg=code_cfg).to(args.device)
+        if ckpt_r.get("glyph_cnn") is not None:
+            glyph_cnn.load_state_dict(ckpt_r["glyph_cnn"])  # type: ignore
+        codebook.load_state_dict(ckpt_r["codebook"])  # type: ignore
+        # Parse start epoch from filename
+        try:
+            start_epoch = int(Path(args.resume_from).stem.split("epoch")[-1])
+        except Exception:
+            start_epoch = 0
+
     params_main = list(glyph_cnn.parameters()) + list(codebook.parameters())
     opt = torch.optim.AdamW(params_main, lr=args.lr)
 
@@ -167,7 +208,7 @@ def main() -> None:
 
     # Training loop
     rng = random.Random(0)
-    for epoch in range(args.epochs):
+    for epoch in range(start_epoch + 1, start_epoch + args.epochs + 1):
         rng.shuffle(pairs)
         for step in range(args.steps_per_epoch):
             # Sample QA mini-batch
@@ -299,7 +340,7 @@ def main() -> None:
             if (step + 1) % args.log_every == 0:
                 ent = codebook.usage_entropy().item()
                 print(
-                    f"epoch {epoch+1} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f} uniq={loss_uniq.item():.4f} langAdv={loss_lang_main.item():.4f} acc_ic@1={acc_ic:.3f} acc_qa@1={acc_qa:.3f} entropy={ent:.2f}"
+                    f"epoch {epoch} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f} uniq={loss_uniq.item():.4f} langAdv={loss_lang_main.item():.4f} acc_ic@1={acc_ic:.3f} acc_qa@1={acc_qa:.3f} entropy={ent:.2f}"
                 )
 
         # Save checkpoint each epoch
@@ -317,7 +358,7 @@ def main() -> None:
                 "adv_early_channels": early_channels,
             },
         }
-        torch.save(ckpt, out_dir / f"ckpt_epoch{epoch+1}.pt")
+        torch.save(ckpt, out_dir / f"ckpt_epoch{epoch}.pt")
 
     # Export token code indices (hard) for memory table mapping
     inv_vocab = [None] * len(vocab)
