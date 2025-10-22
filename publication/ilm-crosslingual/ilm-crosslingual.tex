@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Cross-Lingual Imagized Language Model: A Mathematical Derivation}
+\author{ImagizedLanguageModel Project}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We derive a complete, code-ready mathematical framework for a cross-lingual Imagized Language Model (ILM) that learns directly from glyph images of tokens and question--answer (QA) corpora in multiple languages (here: English and Chinese). Tokens are mapped to multi-channel discrete indices (a ``color code'') via a shared, invertible memory table. Sentences become images (code tensors) that the model encodes and decodes. We formalize the shared product-codebook, sentence-as-image representation, language-agnostic training losses (glyph--code InfoNCE, QA InfoNCE, Gram alignment), optional language-invariance regularizers, and the invertible decoding. The resulting derivation is consistent with and informs the training code in this repository.
+\end{abstract}
+
+\section{Problem Setting and Notation}
+Let \(\mathcal{L}=\{\texttt{en},\texttt{zh}\}\) be languages and \(V_\ell\) their token sets (words for English, characters for Chinese). For any token \(w\in V_{\ell}\):
+\begin{itemize}
+  \item Glyph renderer \(\mathcal{G}: V_\ell \to [0,1]^{3\times 128\times 128}\) produces a 128\,\(\times\)\,128 RGB image. For EN, dynamic tiling composes letters into a centered grid; for ZH, a centered font glyph is rendered.
+  \item A shared, invertible memory code \(f\) maps tokens to an \(L\)-channel index tuple:
+  \[
+    f: \bigcup_{\ell\in\mathcal{L}} V_\ell\;\to\; \prod_{c=1}^L \{0,\ldots,n_c-1\}, \quad f(w)=\big(c_1(w),\ldots,c_L(w)\big).
+  \]
+  The code is hierarchical: early channels capture coarse semantics/syntax; later channels refine into concepts and language-specific identity. Invertibility means \(f\) is injective; decoding uses \(f^{-1}\).
+\end{itemize}
+For a sequence \(W=[w_1,\ldots,w_N]\), define its code tensor (``color image'') as
+\[
+  X=\big[ f(w_1),\ldots,f(w_N)\big] \in \mathbb{N}^{N\times L}.
+\]
+We treat \(X\) as an image-like object with \(L\) channels.
+
+\paragraph{QA data.} An Alpaca-style QA record provides a question--answer pair \((Q,A)\), both tokenized per language into \(T_Q, T_A\), then rendered to code tensors \(X_Q, X_A\).
+
+\section{Shared Product Codebook (Learnable Variant)}
+Instead of fixing \(f\) a priori, we parametrize a learnable product-codebook that induces \(f\) via hard selections and provides smooth relaxations during training.
+
+\subsection{Parameters}
+Let \(V=\lvert \bigcup_{\ell} V_\ell \rvert\) be the total vocab size after unioning lexical items with language tags. Choose embedding dim \(d\), number of channels \(C\) and codes-per-channel \(K\); assume \(d\) divisible by \(C\). The codebook contains channel matrices
+\[
+  E_c \in \mathbb{R}^{K\times d/C} \quad (c=1,\ldots,C),
+\]
+and token-wise assignment logits
+\[
+  A \in \mathbb{R}^{V\times C\times K},\quad A_{j,c,:} \text{ for token } j.
+\]
+With temperature \(\tau>0\), per-channel probabilities are \(p_{j,c}=\mathrm{softmax}(A_{j,c,:}/\tau)\in\Delta^{K-1}\). The token embedding
+\begin{equation}
+  \mathbf{e}_j=\operatorname*{concat}_{c=1}^C \Big( \sum_{k=1}^K p_{j,c,k}\, E_c[k] \Big)\;\in\;\mathbb{R}^d, \qquad \hat{\mathbf{e}}_j=\frac{\mathbf{e}_j}{\lVert\mathbf{e}_j\rVert_2}.
+\end{equation}
+The hard, memory-like index tuple is \(c^{*}_j(c)=\arg\max_k A_{j,c,k}\), i.e.,\ \(f(w_j)=(c^{*}_j(1),\ldots,c^{*}_j(C))\). Capacity \(K^C\) is chosen \(\ge V\) to support injectivity.
+
+\subsection{Uniqueness and Diversity}
+We encourage unique codes and avoid channel collapse via:
+\begin{align}
+  H &\;=\; -\frac{1}{VC}\sum_{j,c,k} P_{j,c,k}\,\log P_{j,c,k},\qquad P=\mathrm{softmax}(A,\text{dim}=K) \label{eq:entropy}\\
+  \mathcal{L}_{\text{reg}} &\;=\; -\lambda_{u}\, H\qquad (\lambda_u>0),
+\end{align}
+and an optional soft collision penalty over a sampled token set \(\mathcal{B}\):
+\begin{equation}
+  \mathcal{L}_{\text{uniq}}\;=\; \lambda_{q}\, \frac{1}{\lvert\mathcal{B}\rvert^2}\sum_{j\ne j'\in\mathcal{B}} \prod_{c=1}^C \Big\langle p_{j,c},\, p_{j',c}\Big\rangle,\label{eq:uniq}
+\end{equation}
+which penalizes identical per-channel distributions (and thus discourages identical hard tuples) without discrete indicators.
+
+\paragraph{Level-Embedding View.} The parametric form naturally supports the fixed-level embedding design often used in code: for each channel \(c\) we can view \(E_c[k]\) as the learnable embedding for index \(k\) at level \(c\), and summation/concatenation across channels implements hierarchical composition.
+
+\section{Glyph Encoder and Sentence Embeddings}
+The glyph encoder \(f_g: [0,1]^{3\times 128\times 128}\to\mathbb{R}^d\) maps token images to vectors with adaptive pooling and L2 normalization, \(\hat{\mathbf{g}}_j= f_g\big(\mathcal{G}(w_j)\big)/\lVert\cdot\rVert_2\). Sentence embeddings are token means:
+\begin{equation}
+  \mathbf{s}_Q=\frac{1}{\lvert T_Q\rvert}\sum_{t\in T_Q} \mathbf{e}_t,\quad \mathbf{s}_A=\frac{1}{\lvert T_A\rvert}\sum_{t\in T_A} \mathbf{e}_t,\quad \hat{\mathbf{s}}_Q=\frac{\mathbf{s}_Q}{\lVert\mathbf{s}_Q\rVert_2},\ \hat{\mathbf{s}}_A=\frac{\mathbf{s}_A}{\lVert\mathbf{s}_A\rVert_2}.
+\end{equation}
+
+\section{Losses from QA-Only Bilingual Data}
+Training uses mixed-language batches of QA pairs from English and Chinese (no explicit parallel alignment required). Let a mini-batch contain \(U\) unique tokens across pairs and \(B\) QA pairs.
+
+\subsection{Glyph--Code InfoNCE}
+Align visual glyph features and codebook embeddings:
+\begin{align}
+  S_{uv}&=\hat{\mathbf{g}}_u^{\top}\,\hat{\mathbf{e}}_v\in\mathbb{R},\qquad u,v=1,\ldots,U,\\
+  \mathcal{L}_{\text{img}}&= -\frac{1}{U}\sum_{u=1}^U \log\frac{\exp(S_{uu}/\tau_g)}{\sum_{v=1}^U \exp(S_{uv}/\tau_g)}.\label{eq:img}
+\end{align}
+This ties each token’s visual identity to its learned code embedding, language-agnostically.
+
+\subsection{QA InfoNCE (Semantic Alignment)}
+For \(B\) pairs, with sentence similarities \(M_{ij}=\hat{\mathbf{s}}_{Q_i}^{\top}\hat{\mathbf{s}}_{A_j}\):
+\begin{equation}
+  \mathcal{L}_{\text{qa}}= -\frac{1}{B}\sum_{i=1}^B \log \frac{\exp(M_{ii}/\tau_s)}{\sum_{j=1}^B \exp(M_{ij}/\tau_s)}.\label{eq:qa}
+\end{equation}
+This encourages question--answer meaning alignment within each language yet pressures shared code channels to represent reusable concepts, because English and Chinese pairs share loss parameters and codebooks.
+
+\subsection{Gram Structural Alignment}
+Using normalized token embeddings within each Q/A, let
+\(Z_Q\in\mathbb{R}^{m\times d},\ Z_A\in\mathbb{R}^{n\times d}\) stack token rows. Gram matrices \(G_Q=Z_QZ_Q^{\top},\ G_A=Z_AZ_A^{\top}\). With \(m_0=\min(m,n)\):
+\begin{equation}
+  \mathcal{L}_{\text{gram}}= \frac{1}{B}\sum_{i=1}^B \frac{1}{m_{0,i}^2}\,\big\lVert G_{Q_i}^{(m_{0,i})}-G_{A_i}^{(m_{0,i})}\big\rVert_F^2.\label{eq:gram}
+\end{equation}
+This preserves role/structure patterns and fosters language-agnostic relational geometry in the shared code space.
+
+\subsection{Language-Invariance for Early Channels (Optional)}
+To strengthen cross-lingual sharing ``without supervision,'' we can discourage predicting language from early channels. Let \(\phi(\mathbf{e}_j^{\text{early}})\) be a small classifier over the concatenated first \(C-1\) channels. An adversarial loss
+\begin{equation}
+  \mathcal{L}_{\text{lang}}= \lambda_{\text{adv}}\,\mathbb{E}_{j}\big[\mathrm{CE}(\phi(\mathbf{e}_j^{\text{early}}),\text{lang}(j))\big],\qquad \min_{E,A} \max_{\phi} \ \mathcal{L}_{\text{lang}}
+\end{equation}
+nudges early channels toward language-agnostic features, deferring language identity to the last channel.
+
+\subsection{Total Loss}
+With weights \(\lambda_g,\lambda_u,\lambda_q,\lambda_{\text{adv}}\ge 0\):
+\begin{equation}
+  \boxed{\ \mathcal{L}= \mathcal{L}_{\text{img}}+\mathcal{L}_{\text{qa}}+ \lambda_g\,\mathcal{L}_{\text{gram}}+ \mathcal{L}_{\text{reg}}+ \mathcal{L}_{\text{uniq}}+ \mathcal{L}_{\text{lang}}\ }.
+\end{equation}
+In code, we already use \(\mathcal{L}_{\text{img}}\), \(\mathcal{L}_{\text{qa}}\), \(\mathcal{L}_{\text{gram}}\), and \(\mathcal{L}_{\text{reg}}\); \(\mathcal{L}_{\text{uniq}}\) and \(\mathcal{L}_{\text{lang}}\) are optional improvements.
+
+\section{Decoding and Invertibility}
+After training, each token \(j\) has a hard tuple \(f(w_j)=(c^{*}_j(1),\ldots,c^{*}_j(C))\). The capacity \(K^C\) is chosen large and training discourages collisions, yielding an injective \(f\). Sentences are decoded by reading per-position tuples and applying \(f^{-1}\) to recover the word/character. Punctuation and special tokens can be mapped to fixed codes or treated as structured blanks to reduce semantic interference.
+
+\section{Why QA-Only Bilingual Data Suffices}
+Even without explicit cross-lingual alignment, the shared codebook is jointly optimized by \eqref{eq:img}--\eqref{eq:qa}. English and Chinese pairs update the same \(E_c\) and \(A\). The entropy/diversity terms induce broad reuse of early channels across the entire vocabulary; the QA objective clusters tokens by role and meaning within each language; because the same channels must service both languages, the optimizer tends to allocate early channels to language-neutral concepts and defer language idiosyncrasies to later channels. Gram alignment further encourages preserving relational structure common to QA (definition, attribute, entity--value), which is language-agnostic.
+
+\paragraph{Intuition.} If multiple English QA pairs frequently activate a subset of early codes for “definition” questions, Chinese QA with similar structure pushes those same codes (via shared parameters) to represent analogous roles. The final channel remains available to distinguish language-specific leaves, enabling invertible decoding per language.
+
+\section{Sentence-as-Image and Diffusion (Optional)}
+Let an answer of length \(M\) be viewed as a matrix \(Y\in\mathbb{N}^{M\times C}\) of code indices (an image of width \(M\), \(C\) channels). Embedding or one-hotting yields \(\tilde{Y}\in\mathbb{R}^{M\times C\times d_c}\). A variance-preserving diffusion can be defined on \(\tilde{Y}\): with schedule \(\beta_t\),
+\begin{equation}
+  \tilde{Y}_t= \sqrt{\bar{\alpha}_t}\,\tilde{Y}_0 + \sqrt{1-\bar{\alpha}_t}\,\bm{\epsilon},\qquad \bm{\epsilon}\sim\mathcal{N}(0,I),
+\end{equation}
+and a denoiser \(\bm{\epsilon}_\theta(\tilde{Y}_t, X_Q, t)\) minimizes \(\mathbb{E}\lVert \bm{\epsilon}-\bm{\epsilon}_\theta\rVert_2^2\). Inference runs the reverse process, then snaps channel values to nearest valid codes for \(f^{-1}\) decoding. This exploits the “text-as-image” view for parallel generation while preserving invertibility.
+
+\section{Implementation Notes}
+\begin{itemize}
+  \item Glyph DB: a SQLite-backed store ensures each \((\ell, w, \text{size})\) has a cached image \(\mathcal{G}(w)\), enabling reproducible rendering for EN (dynamic tiles) and ZH (centered glyphs).
+  \item Product codebook in code: channel codebooks \(E_c\), assignment logits \(A\), token embeddings \(\mathbf{e}_j\), usage entropy \eqref{eq:entropy}, optional uniqueness \eqref{eq:uniq}.
+  \item Losses are implemented as in \eqref{eq:img}--\eqref{eq:gram}, mixed across languages in each batch. Hyperparameters: \(\tau_g\approx\tau_s\approx 0.07\), modest \(\lambda_g\), \(\lambda_u\), and (optionally) \(\lambda_q,\lambda_{\text{adv}}\).
+\end{itemize}
+
+\section{Conclusion}
+We presented a self-contained derivation for a cross-lingual ILM that: (i) maps tokens to discrete multi-channel memory indices in a shared space, (ii) treats sentences as images of codes, (iii) learns language-agnostic semantics from QA-only data via glyph--code and QA contrastive objectives plus structural alignment, and (iv) decodes invertibly to text. This directly informs and justifies the implemented training pipeline.
+
+\end{document}
+
