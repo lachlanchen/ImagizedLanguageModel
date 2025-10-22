@@ -214,14 +214,31 @@ def main() -> None:
     pred_frame = build_code_frame(pred_hard, K=n_codes, grid=args.grid, cell=args.cell)
     pred_frame.save(out / "04_code_frame_pred.png")
 
+    # Save masked overlay on original frame for visualization
+    # Build a binary mask frame image highlighting masked positions in red overlay
+    coords, grid, Tused = frame_layout_tokens(tokens, grid=args.grid)
+    mask_overlay = frame_img.convert("RGBA")
+    overlay = Image.new("RGBA", mask_overlay.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    for pos in mask_idx:
+        if pos < len(coords):
+            r, c = coords[pos]
+            x0 = c * args.cell
+            y0 = r * args.cell
+            draw.rectangle([x0, y0, x0 + args.cell - 1, y0 + args.cell - 1], fill=(255, 0, 0, 90))
+    masked_frame = Image.alpha_composite(mask_overlay, overlay)
+    masked_frame.convert("RGB").save(out / "03b_code_frame_masked.png")
+
     # Decode original and predicted text from ids
     orig_text = decode_ids_to_text(ids, inv_vocab, args.lang)
     pred_text = decode_ids_to_text(pred_seq_ids, inv_vocab, args.lang)
-    (out / "05_text.txt").write_text(f"ORIG ({args.lang}):\n{orig_text}\n\nMASKED POS: {mask_idx}\nPRED:\n{pred_text}\n", encoding="utf-8")
+    (out / "05_text.txt").write_text(
+        f"ORIG ({args.lang}):\n{orig_text}\n\nMASKED POS: {mask_idx}\nPRED:\n{pred_text}\n",
+        encoding="utf-8",
+    )
 
     print(f"Saved demo artifacts to {out}")
 
 
 if __name__ == "__main__":
     main()
-
