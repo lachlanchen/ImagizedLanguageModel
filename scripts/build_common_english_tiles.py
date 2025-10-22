@@ -6,16 +6,11 @@ from __future__ import annotations
 import argparse
 import unicodedata
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable, List, Sequence, Tuple
 
 from PIL import Image
 
-from ilm.english_tiles import (
-    DEFAULT_SPEC,
-    SHORT_WORD_SPEC,
-    GridSpec,
-    render_word_tile_image,
-)
+from ilm.english_tiles import GridSpec, render_word_tile_image
 
 DEFAULT_COMMON_WORDS: List[str] = [
     "the",
@@ -271,6 +266,8 @@ DEFAULT_COMMON_WORDS: List[str] = [
     "pay",
 ]
 
+CanvasRules = Sequence[Tuple[int, GridSpec]]
+
 
 def load_words(path: str | None) -> List[str]:
     if path is None:
@@ -303,11 +300,25 @@ def safe_filename(word: str, suffix: str, *, used: set[str]) -> Path:
     return Path(f"{candidate}{suffix}")
 
 
+def build_rules(args: argparse.Namespace) -> tuple[CanvasRules, GridSpec]:
+    canvas = args.canvas
+    rules: list[tuple[int, GridSpec]] = []
+    if args.len_2x2 > 0:
+        rules.append((args.len_2x2, GridSpec(grid_size=2, tile_size=args.tile_2x2, canvas_size=canvas)))
+    if args.len_3x3 > 0:
+        rules.append((args.len_3x3, GridSpec(grid_size=3, tile_size=args.tile_3x3, canvas_size=canvas)))
+    if args.len_4x4 > 0:
+        rules.append((args.len_4x4, GridSpec(grid_size=4, tile_size=args.tile_4x4, canvas_size=canvas)))
+    fallback = GridSpec(grid_size=8, tile_size=args.tile_8x8, canvas_size=canvas)
+    rules.append((args.len_8x8, fallback))
+    return tuple(rules), fallback
+
+
 def save_images(
     words: Iterable[str],
     out_dir: Path,
-    spec: GridSpec,
-    short_spec: GridSpec,
+    rules: CanvasRules,
+    fallback: GridSpec,
     *,
     dynamic: bool = True,
 ) -> None:
@@ -316,8 +327,8 @@ def save_images(
     for word in words:
         image = render_word_tile_image(
             word,
-            spec=spec,
-            short_spec=short_spec,
+            rules=rules,
+            fallback=fallback,
             dynamic=dynamic,
         )
         png_path = safe_filename(word, ".png", used=used_names)
@@ -330,59 +341,36 @@ def save_images(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate glyph grids for common English words")
-    parser.add_argument(
-        "--word-list",
-        help="Optional newline-delimited list of words to render",
-    )
+    parser.add_argument("--word-list", help="Optional newline-delimited list of words to render")
     parser.add_argument(
         "--out-dir",
         default="artifacts/english_common_tiles",
         help="Directory to store rendered PNGs (default: artifacts/english_common_tiles)",
     )
-    parser.add_argument(
-        "--tile-size",
-        type=int,
-        default=DEFAULT_SPEC.tile_size,
-        help="Tile size for the main layout (default: 16)",
-    )
-    parser.add_argument(
-        "--grid-size",
-        type=int,
-        default=DEFAULT_SPEC.grid_size,
-        help="Grid size for the main layout (default: 8)",
-    )
-    parser.add_argument(
-        "--short-tile-size",
-        type=int,
-        default=SHORT_WORD_SPEC.tile_size,
-        help="Tile size for short words (default: 32)",
-    )
-    parser.add_argument(
-        "--short-grid-size",
-        type=int,
-        default=SHORT_WORD_SPEC.grid_size,
-        help="Grid size for short words (default: 4)",
-    )
-    parser.add_argument(
-        "--no-dynamic",
-        action="store_true",
-        help="Disable dynamic short-word scaling",
-    )
+    parser.add_argument("--len-2x2", type=int, default=3, help="Max length using the 2x2 layout (default: 3)")
+    parser.add_argument("--len-3x3", type=int, default=8, help="Max length using the 3x3 layout (default: 8)")
+    parser.add_argument("--len-4x4", type=int, default=16, help="Max length using the 4x4 layout (default: 16)")
+    parser.add_argument("--len-8x8", type=int, default=64, help="Max length using the 8x8 layout (default: 64)")
+    parser.add_argument("--tile-2x2", type=int, default=64, help="Tile size for the 2x2 layout (default: 64)")
+    parser.add_argument("--tile-3x3", type=int, default=40, help="Tile size for the 3x3 layout (default: 40)")
+    parser.add_argument("--tile-4x4", type=int, default=32, help="Tile size for the 4x4 layout (default: 32)")
+    parser.add_argument("--tile-8x8", type=int, default=16, help="Tile size for the 8x8 layout (default: 16)")
+    parser.add_argument("--canvas", type=int, default=128, help="Overall canvas size (default: 128)")
+    parser.add_argument("--no-dynamic", action="store_true", help="Disable dynamic layout selection")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
     words = load_words(args.word_list)
-    spec = GridSpec(grid_size=args.grid_size, tile_size=args.tile_size)
-    short_spec = GridSpec(grid_size=args.short_grid_size, tile_size=args.short_tile_size)
+    rules, fallback = build_rules(args)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     save_images(
         words,
         out_dir,
-        spec,
-        short_spec,
+        rules,
+        fallback,
         dynamic=not args.no_dynamic,
     )
     print(f"Rendered {len(words)} words into {out_dir}")
