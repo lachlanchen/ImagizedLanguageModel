@@ -97,6 +97,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--lambda-adv", type=float, default=0.0, help="Adversarial language invariance weight for early channels")
     ap.add_argument("--adv-early-channels", type=int, default=-1, help="How many early channels to use for adversary; -1 means C-1")
     ap.add_argument("--strict-codes", action="store_true", help="Abort if vocab size exceeds K^C capacity for unique hard codes")
+    ap.add_argument("--lambda-gram", type=float, default=0.1, help="Weight for Gram alignment loss")
     return ap.parse_args()
 
 
@@ -288,7 +289,7 @@ def main() -> None:
                 logits_lang_main = lang_clf(emb_early)
                 loss_lang_main = -args.lambda_adv * F.cross_entropy(logits_lang_main, labels)
 
-            loss = loss_img + loss_qa + 0.1 * loss_gram + loss_reg + loss_uniq + loss_lang_main
+            loss = loss_img + loss_qa + args.lambda_gram * loss_gram + loss_reg + loss_uniq + loss_lang_main
 
             opt.zero_grad()
             loss.backward()
