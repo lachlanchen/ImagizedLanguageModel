@@ -15,6 +15,7 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
     frame = out_dir / "03_code_frame.png"
     frame_mask = out_dir / "03b_code_frame_masked.png"
     frame_pred = out_dir / "04_code_frame_pred.png"
+    frame_pred_unet = out_dir / "04_code_frame_pred_unet.png"
     text_txt = out_dir / "05_text.txt"
     # Build HTML
     title = f"ILM Pipeline Report ({lang})"
@@ -47,11 +48,16 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
         doc.append("<div class='col'><h3>Masked Frame (red cells masked)</h3>")
         doc.append(f"<img src='{frame_mask.name}' alt='masked frame'></div>")
     doc.append("</div>")
-    doc.append("<div class='row'>")
-    if frame_pred.exists():
-        doc.append("<div class='col'><h3>Predicted Frame (mask+infill baseline)</h3>")
-        doc.append(f"<img src='{frame_pred.name}' alt='predicted frame'></div>")
-    doc.append("</div>")
+    # Predicted Frames (baseline vs UNet)
+    if frame_pred.exists() or frame_pred_unet.exists():
+        doc.append("<div class='row'>")
+        if frame_pred.exists():
+            doc.append("<div class='col'><h3>Predicted (Baseline mask+infill)</h3>")
+            doc.append(f"<img src='{frame_pred.name}' alt='predicted frame baseline'></div>")
+        if frame_pred_unet.exists():
+            doc.append("<div class='col'><h3>Predicted (UNet inpainting)</h3>")
+            doc.append(f"<img src='{frame_pred_unet.name}' alt='predicted frame unet'></div>")
+        doc.append("</div>")
     doc.append("<h2>Decoded Text</h2>")
     if text_txt.exists():
         txt = text_txt.read_text(encoding="utf-8")
@@ -63,7 +69,7 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
     doc.append("<li>Glyph size per token: <b>128×128</b> (for visual inspection).</li>")
     doc.append("<li>Frame size per sentence: default <b>16×16</b> tokens with <b>8px</b> cells → <b>128×128</b> frame.</li>")
     doc.append("<li>For long paragraphs, <b>32×32</b> tokens with <b>4px</b> cells stays 128×128 but reduces per-token signal; recommended only when needed.</li>")
-    doc.append("<li>The predicted frame here uses a nearest-neighbor mask+infill baseline in code space (a diffusion-style visualization). A full 2D UNet diffusion can replace this for iterative denoising.</li>")
+    doc.append("<li>Baseline predicted frame uses nearest-neighbor mask+infill in code space. If an inpainting checkpoint is provided, the report also shows a <b>2D UNet</b> inpainted prediction side-by-side.</li>")
     doc.append("</ul>")
     doc.append("</body></html>")
     (out_dir / "index.html").write_text("\n".join(doc), encoding="utf-8")
@@ -78,6 +84,8 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--glyph-db", default="data/glyphdb/glyphs.sqlite3")
     ap.add_argument("--grid", type=int, default=16)
     ap.add_argument("--cell", type=int, default=8)
+    ap.add_argument("--ckpt-inpaint", default=None, help="Optional UNet inpaint checkpoint to include UNet prediction")
+    ap.add_argument("--mask-ratio", type=float, default=0.3, help="Mask ratio used for UNet inpainting demo")
     return ap.parse_args()
 
 
@@ -100,6 +108,29 @@ def main() -> None:
     ]
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, check=True)
+    # Optionally run UNet inpainting into a temp folder and copy result next to baseline
+    if args.ckpt_inpaint:
+        unet_out = out_dir / "_unet"
+        unet_out.mkdir(parents=True, exist_ok=True)
+        ip_cmd = [
+            sys.executable,
+            "scripts/inpaint_demo.py",
+            "--ckpt-code", args.ckpt,
+            "--ckpt-inpaint", args.ckpt_inpaint,
+            "--lang", args.lang,
+            "--text", args.text,
+            "--out", str(unet_out),
+            "--grid", str(args.grid),
+            "--cell", str(args.cell),
+            "--mask-ratio", str(args.mask_ratio),
+        ]
+        print("Running:", " ".join(ip_cmd))
+        subprocess.run(ip_cmd, check=True)
+        src = unet_out / "predicted_frame.png"
+        dst = out_dir / "04_code_frame_pred_unet.png"
+        if src.exists():
+            import shutil
+            shutil.copy2(src, dst)
     # Write HTML report
     write_report(out_dir, args.lang, args.text, args.grid, args.cell)
     print(f"Report ready: {out_dir / 'index.html'}")
