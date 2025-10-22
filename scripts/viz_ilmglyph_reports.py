@@ -84,8 +84,8 @@ def main() -> None:
     langs = [k.split("::", 1)[0] for k in inv]
 
     d_model = ckpt.get("config", {}).get("d_model", 128)
-    n_channels = ckpt.get("config", {}).get("n_channels", 4)
-    n_codes = ckpt.get("config", {}).get("n_codes", 64)
+    n_channels = ckpt.get("config", {}).get("n_channels", 3)
+    n_codes = ckpt.get("config", {}).get("n_codes", 32)
     cfg = ProductCodebookConfig(d_model=d_model, n_channels=n_channels, n_codes=n_codes)
     codebook = ProductCodebook(vocab_size=len(vocab), cfg=cfg)
     codebook.load_state_dict(ckpt["codebook"])
@@ -129,4 +129,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

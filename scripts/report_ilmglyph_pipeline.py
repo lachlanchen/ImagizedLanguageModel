@@ -38,6 +38,7 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
     doc.append("</div>")
     doc.append("<h2>Sentence as Image (Code Frame)</h2>")
     doc.append(f"<p>Grid <b>{grid}×{grid}</b> (max tokens <b>{limit_tokens}</b>), cell size <b>{cell}px</b> → frame <b>{grid*cell}×{grid*cell}</b> pixels.</p>")
+    doc.append("<p>Default codebook capacity: <b>C=3</b> channels × <b>K=32</b> codes → <b>32<sup>3</sup>=32,768</b> unique hard codes. Adjust via training flags if needed.</p>")
     doc.append("<div class='row'>")
     if frame.exists():
         doc.append("<div class='col'><h3>Frame (original)</h3>")
@@ -106,4 +107,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

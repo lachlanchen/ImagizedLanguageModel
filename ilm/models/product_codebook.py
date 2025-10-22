@@ -12,8 +12,10 @@ import torch.nn.functional as F
 @dataclass
 class ProductCodebookConfig:
     d_model: int = 128  # embedding dimension
-    n_channels: int = 4  # number of codebook channels
-    n_codes: int = 64  # codes per channel
+    # Default to 3 channels × 32 codes = 32^3 = 32,768 capacity
+    # (enough for many EN+ZH setups with sensible tokenization)
+    n_channels: int = 3  # number of codebook channels
+    n_codes: int = 32  # codes per channel
 
 
 class ProductCodebook(nn.Module):
@@ -69,4 +71,3 @@ class ProductCodebook(nn.Module):
         probs = F.softmax(self.assign_logits, dim=-1)  # (V,C,K)
         ent = -torch.sum(probs * torch.log(probs.clamp_min(1e-8)), dim=-1)  # (V,C)
         return ent.mean()
-

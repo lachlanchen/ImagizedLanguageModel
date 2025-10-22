@@ -86,8 +86,8 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--steps-per-epoch", type=int, default=200)
     ap.add_argument("--batch-size", type=int, default=8, help="QA pairs per step")
     ap.add_argument("--d-model", type=int, default=128)
-    ap.add_argument("--n-channels", type=int, default=4)
-    ap.add_argument("--n-codes", type=int, default=64)
+    ap.add_argument("--n-channels", type=int, default=3)
+    ap.add_argument("--n-codes", type=int, default=32)
     ap.add_argument("--glyph-size", type=int, default=128)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
@@ -95,6 +95,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--lambda-uniq", type=float, default=0.0, help="Uniqueness regularizer weight (L_uniq)")
     ap.add_argument("--lambda-adv", type=float, default=0.0, help="Adversarial language invariance weight for early channels")
     ap.add_argument("--adv-early-channels", type=int, default=-1, help="How many early channels to use for adversary; -1 means C-1")
+    ap.add_argument("--strict-codes", action="store_true", help="Abort if vocab size exceeds K^C capacity for unique hard codes")
     return ap.parse_args()
 
 
@@ -119,6 +120,18 @@ def main() -> None:
     vocab, pairs, id_to_lang = build_vocab_and_cache_glyphs(pairs, db, glyph_size=args.glyph_size)
     vocab_size = len(vocab)
     (out_dir / "vocab.json").write_text(json.dumps(vocab, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Capacity check: unique hard-code capacity is K^C
+    capacity = (args.n_codes ** args.n_channels)
+    if vocab_size > capacity:
+        msg = (
+            f"WARNING: vocab size {vocab_size} exceeds hard-code capacity K^C = {args.n_codes}^{args.n_channels} = {capacity}.\n"
+            "Hard code export (token_codes.tsv) will collide; training can proceed (soft assignments), but uniqueness is not guaranteed.\n"
+            "Use more channels or codes, or enable subword/character tokenization to reduce vocab."
+        )
+        print(msg)
+        if args.strict_codes:
+            raise SystemExit("Aborting due to --strict-codes.")
 
     # Models
     glyph_cnn = GlyphCNN(d=args.d_model, in_channels=3).to(args.device)
