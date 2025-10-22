@@ -85,7 +85,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--epochs", type=int, default=1)
     ap.add_argument("--steps-per-epoch", type=int, default=200)
     ap.add_argument("--batch-size", type=int, default=8, help="QA pairs per step")
-    ap.add_argument("--d-model", type=int, default=128)
+    ap.add_argument("--d-model", type=int, default=96)
     ap.add_argument("--n-channels", type=int, default=3)
     ap.add_argument("--n-codes", type=int, default=32)
     ap.add_argument("--glyph-size", type=int, default=128)
@@ -134,6 +134,12 @@ def main() -> None:
             raise SystemExit("Aborting due to --strict-codes.")
 
     # Models
+    # Ensure d_model is divisible by n_channels; round up if needed to avoid assertion.
+    if args.d_model % args.n_channels != 0:
+        old_dm = args.d_model
+        args.d_model = ((args.d_model + args.n_channels - 1) // args.n_channels) * args.n_channels
+        print(f"Adjusted d_model from {old_dm} to {args.d_model} to be divisible by n_channels={args.n_channels}")
+
     glyph_cnn = GlyphCNN(d=args.d_model, in_channels=3).to(args.device)
     code_cfg = ProductCodebookConfig(d_model=args.d_model, n_channels=args.n_channels, n_codes=args.n_codes)
     codebook = ProductCodebook(vocab_size=vocab_size, cfg=code_cfg).to(args.device)
