@@ -49,16 +49,20 @@ class GridSpec:
 SPEC_2X2_64 = GridSpec(grid_size=2, tile_size=64, canvas_size=128)
 SPEC_3X3_40 = GridSpec(grid_size=3, tile_size=40, canvas_size=128)
 SPEC_4X4_32 = GridSpec(grid_size=4, tile_size=32, canvas_size=128)
+SPEC_5X5_24 = GridSpec(grid_size=5, tile_size=24, canvas_size=128)
+SPEC_6X6_20 = GridSpec(grid_size=6, tile_size=20, canvas_size=128)
 SPEC_8X8_16 = GridSpec(grid_size=8, tile_size=16, canvas_size=128)
 
 DEFAULT_SPEC = SPEC_8X8_16
 
 # Default dynamic rules (max length inclusive)
 DEFAULT_RULES: Sequence[tuple[int, GridSpec]] = (
-    (3, SPEC_2X2_64),
-    (8, SPEC_3X3_40),
-    (16, SPEC_4X4_32),
-    (64, SPEC_8X8_16),
+    (3, SPEC_2X2_64),      # <=3 letters: 2x2, 64px cells
+    (8, SPEC_3X3_40),      # <=8 letters: 3x3, 40px cells, symmetric padding
+    (16, SPEC_4X4_32),     # <=16 letters: 4x4, 32px cells
+    (25, SPEC_5X5_24),     # <=25 letters: 5x5, 24px cells
+    (36, SPEC_6X6_20),     # <=36 letters: 6x6, 20px cells
+    (64, SPEC_8X8_16),     # <=64 letters: 8x8, 16px cells
 )
 
 

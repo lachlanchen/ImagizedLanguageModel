@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import random
+from pathlib import Path
+from typing import List
+
+import numpy as np
+import torch
+import torch.nn.functional as F
+from torch.utils.data import DataLoader, Dataset
+
+from ilm.datasets.alpaca_glyph_dataset import iter_alpaca_qa
+from ilm.models.product_codebook import ProductCodebook, ProductCodebookConfig
+from ilm.diffusion.inpaint_unet2d import InpaintNet
+
+
+def layout_ids(ids: List[int], grid: int) -> np.ndarray:
+    T = min(len(ids), grid * grid)
+    frame = np.full((grid, grid), fill_value=-1, dtype=np.int64)
+    for i in range(T):
+        r = i // grid
+        c = i % grid
+        frame[r, c] = ids[i]
+    return frame
+
+
+class AnswerFrames(Dataset):
+    def __init__(self, en_path: str | None, zh_path: str | None, codebook: ProductCodebook, grid: int = 16):
+        self.items: List[tuple[str, List[str]]] = []
+        if en_path:
+            for qa in iter_alpaca_qa(en_path, "en"):
+                self.items.append((qa.lang, qa.a_tokens))
+        if zh_path:
+            for qa in iter_alpaca_qa(zh_path, "zh"):
+                self.items.append((qa.lang, qa.a_tokens))
+        self.vocab = None
+        self.codebook = codebook
+        self.grid = grid
+
+    def set_vocab(self, vocab: dict):
+        self.vocab = vocab
+
+    def __len__(self) -> int:
+        return len(self.items)
+
+    def __getitem__(self, idx: int):
+        lang, toks = self.items[idx]
+        ids = []
+        for t in toks:
+            key = f"{lang}::{t}"
+            if key in self.vocab:
+                ids.append(self.vocab[key])
+        frame_ids = layout_ids(ids, self.grid)  # (G,G)
+        valid = (frame_ids >= 0)
+        H = W = self.grid
+        with torch.no_grad():
+            flat = frame_ids.reshape(-1)
+            flat_ids = torch.tensor([i if i >= 0 else 0 for i in flat], dtype=torch.long)
+            emb = self.codebook.token_embedding(flat_ids)  # (G*G,d)
+            d = emb.size(1)
+            y = emb.reshape(H, W, d).permute(2, 0, 1).contiguous()  # (d,H,W)
+        return y, torch.tensor(valid.reshape(H, W), dtype=torch.bool)
+
+
+def random_mask(valid: torch.Tensor, min_ratio: float = 0.2, max_ratio: float = 0.5) -> torch.Tensor:
+    H, W = valid.shape
+    mask = torch.zeros_like(valid, dtype=torch.float32)
+    vpos = valid.nonzero(as_tuple=False)
+    if vpos.numel() == 0:
+        return mask.unsqueeze(0)
+    ratio = random.uniform(min_ratio, max_ratio)
+    k = max(1, int(vpos.size(0) * ratio))
+    idx = torch.randperm(vpos.size(0))[:k]
+    sel = vpos[idx]
+    mask[sel[:, 0], sel[:, 1]] = 1.0
+    return mask.unsqueeze(0)  # (1,H,W)
+
+
+def parse_args() -> argparse.Namespace:
+    ap = argparse.ArgumentParser(description="Train 2D UNet masked inpainting on code frames")
+    ap.add_argument("--ckpt-code", required=True, help="Trained codebook checkpoint (ckpt_epochX.pt)")
+    ap.add_argument("--en", default="data/raw/alpaca_en.json")
+    ap.add_argument("--zh", default="data/raw/alpaca_zh.json")
+    ap.add_argument("--out", default="artifacts/inpaint")
+    ap.add_argument("--epochs", type=int, default=1)
+    ap.add_argument("--batch-size", type=int, default=16)
+    ap.add_argument("--grid", type=int, default=16)
+    ap.add_argument("--r-channels", type=int, default=16)
+    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    return ap.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Load codebook
+    ckpt = torch.load(args.ckpt_code, map_location="cpu")
+    vocab = ckpt["vocab"]
+    cfg = ckpt.get("config", {})
+    d_model = cfg.get("d_model", 96)
+    n_channels = cfg.get("n_channels", 3)
+    n_codes = cfg.get("n_codes", 32)
+    code_cfg = ProductCodebookConfig(d_model=d_model, n_channels=n_channels, n_codes=n_codes)
+    codebook = ProductCodebook(vocab_size=len(vocab), cfg=code_cfg)
+    codebook.load_state_dict(ckpt["codebook"])  # type: ignore
+    codebook.eval().to(args.device)
+
+    ds = AnswerFrames(args.en, args.zh, codebook=codebook, grid=args.grid)
+    ds.set_vocab(vocab)
+    dl = DataLoader(ds, batch_size=args.batch_size, shuffle=True, num_workers=0)
+
+    net = InpaintNet(d_model=d_model, r=args.r_channels).to(args.device)
+    opt = torch.optim.AdamW(net.parameters(), lr=1e-3)
+
+    for epoch in range(args.epochs):
+        for step, (y, valid) in enumerate(dl, 1):
+            y = y.to(args.device)  # (B,d,H,W)
+            mask = torch.stack([random_mask(v) for v in valid], dim=0).to(args.device)  # (B,1,H,W)
+            y_hat, y_r_hat, y_r = net(y, mask)
+            # L2 on masked positions only
+            m = mask
+            loss = ((y_hat - y) ** 2 * m).sum() / (m.sum() + 1e-6)
+            opt.zero_grad()
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0)
+            opt.step()
+            if step % 100 == 0:
+                print(f"epoch {epoch+1} step {step}: loss={loss.item():.4f}")
+        torch.save({
+            "net": net.state_dict(),
+            "d_model": d_model,
+            "r_channels": args.r_channels,
+            "grid": args.grid,
+        }, out_dir / f"ckpt_epoch{epoch+1}.pt")
+    print(f"Training complete. Artifacts in {out_dir}")
+
+
+if __name__ == "__main__":
+    main()
+
