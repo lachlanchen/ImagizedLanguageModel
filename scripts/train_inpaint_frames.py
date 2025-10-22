@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 
-from ilm.datasets.alpaca_glyph_dataset import iter_alpaca_qa
+from ilm.datasets.alpaca_glyph_dataset import iter_alpaca_qa, special_token_ids
 from ilm.models.product_codebook import ProductCodebook, ProductCodebookConfig
 from ilm.diffusion.inpaint_unet2d import InpaintNet
 
@@ -47,13 +47,29 @@ class AnswerFrames(Dataset):
 
     def __getitem__(self, idx: int):
         lang, toks = self.items[idx]
-        ids = []
+        # Compose [BOS] + tokens + [EOS], pad rest with [PAD]
+        bos, eos, pad = special_token_ids(self.vocab, lang)
+        seq: list[int] = []
+        if bos is not None:
+            seq.append(bos)
         for t in toks:
             key = f"{lang}::{t}"
             if key in self.vocab:
-                ids.append(self.vocab[key])
-        frame_ids = layout_ids(ids, self.grid)  # (G,G)
-        valid = (frame_ids >= 0)
+                seq.append(self.vocab[key])
+        if eos is not None:
+            seq.append(eos)
+        # Map into frame and pad remainder with PAD (or 0 if missing)
+        frame = np.full((self.grid, self.grid), fill_value=-1, dtype=np.int64)
+        T = min(len(seq), self.grid * self.grid)
+        for i in range(T):
+            r = i // self.grid
+            c = i % self.grid
+            frame[r, c] = seq[i]
+        # Replace -1 with PAD id if available
+        pad_id = pad if pad is not None else 0
+        frame[frame < 0] = pad_id
+        frame_ids = frame
+        valid = (frame_ids != pad_id)
         H = W = self.grid
         with torch.no_grad():
             flat = frame_ids.reshape(-1)
@@ -141,4 +157,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

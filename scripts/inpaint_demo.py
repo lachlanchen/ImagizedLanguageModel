@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 import torch
 import torch.nn.functional as F
 from PIL import Image
 
-from ilm.datasets.alpaca_glyph_dataset import tokenize_en, tokenize_zh
+from ilm.datasets.alpaca_glyph_dataset import tokenize_en, tokenize_zh, special_token_ids
 from ilm.models.product_codebook import ProductCodebook, ProductCodebookConfig
 from ilm.diffusion.inpaint_unet2d import InpaintNet
 
@@ -59,6 +59,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--grid", type=int, default=16)
     ap.add_argument("--cell", type=int, default=8)
     ap.add_argument("--mask-ratio", type=float, default=0.3)
+    ap.add_argument("--mode", choices=["infill", "completion", "generate"], default="infill",
+                    help="infill=mask random cells; completion=keep prefix and predict rest; generate=no prefix, predict full")
+    ap.add_argument("--keep-prefix", type=int, default=None, help="Prefix tokens to keep (for completion)")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     return ap.parse_args()
 
@@ -80,10 +83,22 @@ def main() -> None:
     codebook.load_state_dict(ckpt["codebook"])  # type: ignore
     codebook.eval().to(args.device)
 
-    # Tokens and ids
+    # Tokens and ids with special tokens [BOS], [EOS], [PAD]
     toks = tokenize_en(args.text) if args.lang == "en" else tokenize_zh(args.text)
-    ids = [vocab.get(f"{args.lang}::{t}", 0) for t in toks]
-    frame_ids = layout_ids(ids, args.grid)
+    bos, eos, pad = special_token_ids(vocab, args.lang)
+    seq: List[int] = []
+    if bos is not None:
+        seq.append(bos)
+    seq.extend([vocab.get(f"{args.lang}::{t}", 0) for t in toks])
+    if eos is not None:
+        seq.append(eos)
+    # Layout into frame and pad
+    frame_ids = np.full((args.grid, args.grid), fill_value=(pad if pad is not None else 0), dtype=np.int64)
+    T = min(len(seq), args.grid * args.grid)
+    for i in range(T):
+        r = i // args.grid
+        c = i % args.grid
+        frame_ids[r, c] = seq[i]
     H = W = args.grid
     flat_ids = torch.tensor([i if i >= 0 else 0 for i in frame_ids.reshape(-1)], dtype=torch.long, device=args.device)
     with torch.no_grad():
@@ -96,15 +111,30 @@ def main() -> None:
     net.load_state_dict(ip_ckpt["net"])  # type: ignore
     net.eval().to(args.device)
 
-    # Build random mask on valid tokens
-    valid = (torch.tensor(frame_ids, device=args.device) >= 0)
+    # Build mask based on mode
+    pad_id = pad if pad is not None else -1
+    valid = (torch.tensor(frame_ids, device=args.device) != pad_id)
     vpos = valid.nonzero(as_tuple=False)
     m = torch.zeros((H, W), dtype=torch.float32, device=args.device)
-    if vpos.numel() > 0:
-        k = max(1, int(vpos.size(0) * args.mask_ratio))
-        idx = torch.randperm(vpos.size(0))[:k]
-        sel = vpos[idx]
-        m[sel[:, 0], sel[:, 1]] = 1.0
+    if args.mode == "infill":
+        if vpos.numel() > 0:
+            k = max(1, int(vpos.size(0) * args.mask_ratio))
+            idx = torch.randperm(vpos.size(0))[:k]
+            sel = vpos[idx]
+            m[sel[:, 0], sel[:, 1]] = 1.0
+    else:
+        # completion/generate: keep a prefix and mask the rest
+        # Determine prefix length (number of filled cells to keep)
+        if args.mode == "generate":
+            keep = 0
+        else:
+            keep = args.keep_prefix if args.keep_prefix is not None else len(seq)
+        keep = max(0, min(keep, H * W))
+        # Mask from keep .. end
+        for i in range(keep, H * W):
+            r = i // W
+            c = i % W
+            m[r, c] = 1.0
     mask = m.unsqueeze(0).unsqueeze(0)  # (1,1,H,W)
 
     with torch.no_grad():
@@ -127,9 +157,43 @@ def main() -> None:
         codes = codes.cpu().numpy()
     frame_img = build_frame_image(codes, K=n_codes, grid=args.grid, cell=args.cell)
     frame_img.save(out / "predicted_frame.png")
+
+    # Decode sequence until EOS, skipping BOS and PAD
+    inv = [None] * len(vocab)
+    for k, i in vocab.items():
+        inv[i] = k
+    bos_id, eos_id, pad_id_full = bos, eos, pad
+    def decode_until_eos(ids_flat: List[int]) -> Tuple[List[str], int]:
+        out_toks: List[str] = []
+        stop_at = len(ids_flat)
+        for i, tid in enumerate(ids_flat):
+            if tid == pad_id_full:
+                continue
+            if tid == bos_id:
+                continue
+            if tid == eos_id:
+                stop_at = i
+                break
+            tok = inv[tid].split("::", 1)[1]
+            out_toks.append(tok)
+        return out_toks, stop_at
+
+    toks_pred, _ = decode_until_eos(top.tolist())
+    # Save decoded text
+    pred_text = (" ".join(toks_pred) if args.lang == "en" else "".join(toks_pred))
+    (out / "predicted.txt").write_text(pred_text, encoding="utf-8")
+
+    # Optional: contact sheet of predicted tokens glyphs (first 64)
+    try:
+        from ilm.db.glyph_db import GlyphDB
+        from PIL import Image
+        db = GlyphDB("")  # dummy path won’t be used if paths exist in vocab cache images
+    except Exception:
+        db = None
+    # Build a sheet using existing glyphs on disk if available
+    # We can reuse the input rendering pipeline in report to show glyphs; skipped here for simplicity.
     print(f"Saved {out / 'predicted_frame.png'}")
 
 
 if __name__ == "__main__":
     main()
-

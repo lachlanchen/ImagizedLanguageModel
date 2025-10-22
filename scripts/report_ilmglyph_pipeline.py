@@ -17,6 +17,7 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
     frame_pred = out_dir / "04_code_frame_pred.png"
     frame_pred_unet = out_dir / "04_code_frame_pred_unet.png"
     text_txt = out_dir / "05_text.txt"
+    unet_txt = out_dir / "predicted_unet.txt"
     # Build HTML
     title = f"ILM Pipeline Report ({lang})"
     input_tokens = tokenize_en(text) if lang == "en" else tokenize_zh(text)
@@ -64,6 +65,9 @@ def write_report(out_dir: Path, lang: str, text: str, grid: int, cell: int) -> N
         doc.append("<pre>%s</pre>" % html.escape(txt))
     else:
         doc.append("<p>Decoded text file not found.</p>")
+    if unet_txt.exists():
+        doc.append("<h3>UNet Predicted Text</h3>")
+        doc.append("<pre>%s</pre>" % html.escape(unet_txt.read_text(encoding="utf-8")))
     doc.append("<h2>Design Notes</h2>")
     doc.append("<ul>")
     doc.append("<li>Glyph size per token: <b>128×128</b> (for visual inspection).</li>")
@@ -86,6 +90,8 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--cell", type=int, default=8)
     ap.add_argument("--ckpt-inpaint", default=None, help="Optional UNet inpaint checkpoint to include UNet prediction")
     ap.add_argument("--mask-ratio", type=float, default=0.3, help="Mask ratio used for UNet inpainting demo")
+    ap.add_argument("--inpaint-mode", choices=["infill", "completion", "generate"], default="completion")
+    ap.add_argument("--keep-prefix", type=int, default=0)
     return ap.parse_args()
 
 
@@ -123,6 +129,8 @@ def main() -> None:
             "--grid", str(args.grid),
             "--cell", str(args.cell),
             "--mask-ratio", str(args.mask_ratio),
+            "--mode", args.inpaint_mode,
+            "--keep-prefix", str(args.keep_prefix),
         ]
         print("Running:", " ".join(ip_cmd))
         subprocess.run(ip_cmd, check=True)
@@ -131,6 +139,11 @@ def main() -> None:
         if src.exists():
             import shutil
             shutil.copy2(src, dst)
+        # Copy predicted text
+        src_txt = unet_out / "predicted.txt"
+        if src_txt.exists():
+            import shutil
+            shutil.copy2(src_txt, out_dir / "predicted_unet.txt")
     # Write HTML report
     write_report(out_dir, args.lang, args.text, args.grid, args.cell)
     print(f"Report ready: {out_dir / 'index.html'}")

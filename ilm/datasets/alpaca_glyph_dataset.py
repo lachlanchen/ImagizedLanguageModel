@@ -8,6 +8,11 @@ from typing import Iterator, List, Tuple, Dict
 
 from ilm.db.glyph_db import GlyphDB
 
+# Special tokens (language-scoped)
+BOS = "<BOS>"
+EOS = "<EOS>"
+PAD = "<PAD>"
+
 
 _WORD_RE = re.compile(r"[A-Za-z]+|\d+|[^\w\s]", re.UNICODE)
 
@@ -82,7 +87,9 @@ def build_vocab_and_cache_glyphs(
     """
     vocab: dict[tuple[str, str], int] = {}
     next_id = 0
+    languages = set()
     for pair in qa_pairs:
+        languages.add(pair.lang)
         for token in pair.q_tokens + pair.a_tokens:
             key = (pair.lang, token)
             if key not in vocab:
@@ -90,6 +97,14 @@ def build_vocab_and_cache_glyphs(
                 next_id += 1
                 # Ensure glyph on disk
                 db.ensure_glyph(pair.lang, token, glyph_size)
+    # Add language-scoped special tokens and ensure glyphs
+    for lang in sorted(languages):
+        for tok in (BOS, EOS, PAD):
+            key = (lang, tok)
+            if key not in vocab:
+                vocab[key] = next_id
+                next_id += 1
+                db.ensure_glyph(lang, tok, glyph_size)
     # Remap to a flat map (lang::token -> id)
     flat_vocab = {f"{k[0]}::{k[1]}": v for k, v in vocab.items()}
     # id -> lang list (index by id)
@@ -97,6 +112,13 @@ def build_vocab_and_cache_glyphs(
     for (lang, tok), idx in vocab.items():
         id_to_lang[idx] = lang
     return flat_vocab, qa_pairs, id_to_lang
+
+
+def special_token_ids(flat_vocab: Dict[str, int], lang: str) -> tuple[int | None, int | None, int | None]:
+    bos = flat_vocab.get(f"{lang}::{BOS}")
+    eos = flat_vocab.get(f"{lang}::{EOS}")
+    pad = flat_vocab.get(f"{lang}::{PAD}")
+    return bos, eos, pad
 
 def id_to_lang_from_vocab(flat_vocab: Dict[str, int]) -> List[str]:
     id_to_lang = [None] * len(flat_vocab)

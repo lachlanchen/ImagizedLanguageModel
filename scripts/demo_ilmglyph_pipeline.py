@@ -10,7 +10,7 @@ import torch
 import torch.nn.functional as F
 from PIL import Image, ImageDraw, ImageFont
 
-from ilm.datasets.alpaca_glyph_dataset import tokenize_en, tokenize_zh
+from ilm.datasets.alpaca_glyph_dataset import tokenize_en, tokenize_zh, special_token_ids
 from ilm.db.glyph_db import GlyphDB
 from ilm.models.product_codebook import ProductCodebook, ProductCodebookConfig
 
@@ -175,15 +175,19 @@ def main() -> None:
     codebook.load_state_dict(ckpt["codebook"])  # type: ignore
     codebook.eval()
 
-    # Token ids
+    # Token ids with [BOS]/[EOS]/[PAD]
+    bos, eos, pad = special_token_ids(vocab, args.lang)
     ids = []
+    if bos is not None:
+        ids.append(bos)
     for t in tokens:
         key = f"{args.lang}::{t}"
         if key in vocab:
             ids.append(vocab[key])
         else:
-            # unknown token fallback: choose closest by string or 0
             ids.append(0)
+    if eos is not None:
+        ids.append(eos)
     ids_t = torch.tensor(ids, dtype=torch.long)
 
     # Hard codes for visualization
@@ -196,7 +200,7 @@ def main() -> None:
     hstripe = build_code_image_hstripe(hard, K=n_codes, cell=6)
     hstripe.save(out / "02_code_hstripes.png")
 
-    # 2D frame image of codes
+    # 2D frame image of codes (pad/truncate to grid^2 for visualization)
     frame_img = build_code_frame(hard, K=n_codes, grid=args.grid, cell=args.cell)
     frame_img.save(out / "03_code_frame.png")
 
@@ -230,8 +234,21 @@ def main() -> None:
     masked_frame.convert("RGB").save(out / "03b_code_frame_masked.png")
 
     # Decode original and predicted text from ids
-    orig_text = decode_ids_to_text(ids, inv_vocab, args.lang)
-    pred_text = decode_ids_to_text(pred_seq_ids, inv_vocab, args.lang)
+    # Decode by skipping BOS/PAD and stopping on EOS if present
+    def decode_until_eos(seq_ids: List[int]) -> str:
+        toks_out = []
+        for tid in seq_ids:
+            if pad is not None and tid == pad:
+                continue
+            if bos is not None and tid == bos:
+                continue
+            if eos is not None and tid == eos:
+                break
+            toks_out.append(inv_vocab[tid].split("::", 1)[1])
+        return (" ".join(toks_out) if args.lang == "en" else "".join(toks_out))
+
+    orig_text = decode_until_eos(ids)
+    pred_text = decode_until_eos(pred_seq_ids)
     (out / "05_text.txt").write_text(
         f"ORIG ({args.lang}):\n{orig_text}\n\nMASKED POS: {mask_idx}\nPRED:\n{pred_text}\n",
         encoding="utf-8",
