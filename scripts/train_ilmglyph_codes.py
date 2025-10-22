@@ -91,6 +91,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--glyph-size", type=int, default=128)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    ap.add_argument("--log-every", type=int, default=50, help="Print logs every N steps with accuracy metrics")
     # Optional regularizers
     ap.add_argument("--lambda-uniq", type=float, default=0.0, help="Uniqueness regularizer weight (L_uniq)")
     ap.add_argument("--lambda-adv", type=float, default=0.0, help="Adversarial language invariance weight for early channels")
@@ -185,6 +186,10 @@ def main() -> None:
             logits = g @ e.T  # (U,U)
             targets = torch.arange(logits.size(0), device=logits.device)
             loss_img = F.cross_entropy(logits / 0.07, targets)
+            # Retrieval accuracy (image -> code embedding)
+            with torch.no_grad():
+                pred_ic = logits.argmax(dim=1)
+                acc_ic = (pred_ic == targets).float().mean().item()
 
             # Stage 2: QA InfoNCE + Gram
             q_embs = []
@@ -221,6 +226,9 @@ def main() -> None:
             qa_logits = Q @ A.T
             qa_targets = torch.arange(qa_logits.size(0), device=qa_logits.device)
             loss_qa = F.cross_entropy(qa_logits / 0.07, qa_targets)
+            with torch.no_grad():
+                pred_qa = qa_logits.argmax(dim=1)
+                acc_qa = (pred_qa == qa_targets).float().mean().item() if qa_logits.size(0) > 0 else 0.0
             loss_gram = torch.stack(gram_losses).mean()
 
             # Regularization: encourage assignment entropy (diversity)
@@ -287,9 +295,10 @@ def main() -> None:
             torch.nn.utils.clip_grad_norm_(params_main, 1.0)
             opt.step()
 
-            if (step + 1) % 20 == 0:
+            if (step + 1) % args.log_every == 0:
+                ent = codebook.usage_entropy().item()
                 print(
-                    f"epoch {epoch+1} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f} uniq={loss_uniq.item():.4f} langAdv={loss_lang_main.item():.4f}"
+                    f"epoch {epoch+1} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f} uniq={loss_uniq.item():.4f} langAdv={loss_lang_main.item():.4f} acc_ic@1={acc_ic:.3f} acc_qa@1={acc_qa:.3f} entropy={ent:.2f}"
                 )
 
         # Save checkpoint each epoch

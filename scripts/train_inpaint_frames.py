@@ -77,7 +77,7 @@ class AnswerFrames(Dataset):
             emb = self.codebook.token_embedding(flat_ids)  # (G*G,d)
             d = emb.size(1)
             y = emb.reshape(H, W, d).permute(2, 0, 1).contiguous()  # (d,H,W)
-        return y, torch.tensor(valid.reshape(H, W), dtype=torch.bool)
+        return y, torch.tensor(valid.reshape(H, W), dtype=torch.bool), torch.tensor(frame_ids.reshape(H, W), dtype=torch.long)
 
 
 def random_mask(valid: torch.Tensor, min_ratio: float = 0.2, max_ratio: float = 0.5) -> torch.Tensor:
@@ -104,6 +104,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--batch-size", type=int, default=16)
     ap.add_argument("--grid", type=int, default=16)
     ap.add_argument("--r-channels", type=int, default=16)
+    ap.add_argument("--log-every", type=int, default=200)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     return ap.parse_args()
 
@@ -132,9 +133,12 @@ def main() -> None:
     net = InpaintNet(d_model=d_model, r=args.r_channels).to(args.device)
     opt = torch.optim.AdamW(net.parameters(), lr=1e-3)
 
+    # Precompute normalized vocab embeddings once per epoch
+    V = len(vocab)
     for epoch in range(args.epochs):
-        for step, (y, valid) in enumerate(dl, 1):
+        for step, (y, valid, ids_frame) in enumerate(dl, 1):
             y = y.to(args.device)  # (B,d,H,W)
+            ids_frame = ids_frame.to(args.device)  # (B,H,W)
             mask = torch.stack([random_mask(v) for v in valid], dim=0).to(args.device)  # (B,1,H,W)
             y_hat, y_r_hat, y_r = net(y, mask)
             # L2 on masked positions only
@@ -144,8 +148,25 @@ def main() -> None:
             loss.backward()
             torch.nn.utils.clip_grad_norm_(net.parameters(), 1.0)
             opt.step()
-            if step % 100 == 0:
-                print(f"epoch {epoch+1} step {step}: loss={loss.item():.4f}")
+            # Periodic masked top-1 token accuracy
+            acc_msg = ""
+            if step % args.log_every == 0:
+                with torch.no_grad():
+                    y_pred = y * (1.0 - m) + y_hat * m
+                    # Nearest-neighbor to vocab
+                    all_ids = torch.arange(V, dtype=torch.long, device=args.device)
+                    all_emb = F.normalize(codebook.token_embedding(all_ids), dim=-1)  # (V,d)
+                    Bh, d, H, W = y_pred.shape
+                    y_seq = y_pred.permute(0, 2, 3, 1).reshape(Bh * H * W, d)
+                    y_seq = F.normalize(y_seq, dim=-1)
+                    sims = y_seq @ all_emb.T
+                    top = sims.argmax(dim=1).reshape(Bh, H, W)
+                    masked_pos = (m.squeeze(1) > 0.5)
+                    correct = (top == ids_frame) & masked_pos
+                    denom = masked_pos.sum().clamp_min(1)
+                    acc = correct.sum().float() / denom.float()
+                    acc_msg = f" acc_masked_top1={acc.item():.3f}"
+                print(f"epoch {epoch+1} step {step}: loss={loss.item():.4f}{acc_msg}")
         torch.save({
             "net": net.state_dict(),
             "d_model": d_model,
