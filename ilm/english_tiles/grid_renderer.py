@@ -7,8 +7,21 @@ from typing import Iterable, Sequence
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+import os
 
-from ilm.utils.glyphs import find_font_path
+def find_font_path() -> str:
+    candidates = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJKsc-Regular.otf",
+        "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+        "/usr/share/fonts/truetype/arphic/uming.ttc",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    return ""
 
 
 @dataclass(frozen=True)

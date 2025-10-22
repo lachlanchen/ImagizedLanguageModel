@@ -6,6 +6,7 @@ from typing import Tuple
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from ilm.english_tiles import render_word_tile_image as render_en_word_tiled
 
 
 def find_font_path() -> str:
@@ -96,24 +97,26 @@ def render_char_image(ch: str, size: int = 128) -> np.ndarray:
 
 
 def make_rgb_token_image(lang: str, token: str, size: int = 128) -> np.ndarray:
+    """Build a 3-channel token image.
+
+    - English ("en"): use the new dynamic tiled renderer to produce a centered
+      128x128 grayscale word glyph; replicate into RGB (G channel primary).
+    - Chinese ("zh"): center-render a single character into a 128x128 tile; replicate.
+    - Others: fallback to centered text render replicated to RGB.
+    """
     if lang == "en":
-        r = ascii_matrix_centered(token, size=size)
-        g = render_word_glyph_center(token, size=size)
-        b = np.zeros_like(r)
-        rgb = np.stack([r, g, b], axis=-1)
-        return rgb
+        g = render_en_word_tiled(token)
+        r = g.copy()
+        b = np.zeros_like(g)
+        return np.stack([r, g, b], axis=-1)
     elif lang == "zh":
         g = render_char_image(token, size=size)
         r = g.copy()
-        r[-1, -1] = 255
         b = np.zeros_like(r)
-        rgb = np.stack([r, g, b], axis=-1)
-        return rgb
+        return np.stack([r, g, b], axis=-1)
     else:
-        # Fallback: render token as centered glyph on all channels
         g = render_word_glyph_center(token, size=size)
-        rgb = np.stack([g, g, g], axis=-1)
-        return rgb
+        return np.stack([g, g, g], axis=-1)
 
 
 def save_rgb_image(path: str | Path, rgb: np.ndarray) -> str:
