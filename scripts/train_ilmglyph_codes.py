@@ -18,6 +18,7 @@ from ilm.datasets.alpaca_glyph_dataset import (
     QAPair,
     build_vocab_and_cache_glyphs,
     iter_alpaca_qa,
+    id_to_lang_from_vocab,
 )
 from ilm.db.glyph_db import GlyphDB
 from ilm.encoders.glyph_cnn import GlyphCNN
@@ -90,6 +91,10 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--glyph-size", type=int, default=128)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    # Optional regularizers
+    ap.add_argument("--lambda-uniq", type=float, default=0.0, help="Uniqueness regularizer weight (L_uniq)")
+    ap.add_argument("--lambda-adv", type=float, default=0.0, help="Adversarial language invariance weight for early channels")
+    ap.add_argument("--adv-early-channels", type=int, default=-1, help="How many early channels to use for adversary; -1 means C-1")
     return ap.parse_args()
 
 
@@ -111,7 +116,7 @@ def main() -> None:
     db = GlyphDB(args.glyph_db)
 
     # Build vocab and render glyphs
-    vocab, pairs = build_vocab_and_cache_glyphs(pairs, db, glyph_size=args.glyph_size)
+    vocab, pairs, id_to_lang = build_vocab_and_cache_glyphs(pairs, db, glyph_size=args.glyph_size)
     vocab_size = len(vocab)
     (out_dir / "vocab.json").write_text(json.dumps(vocab, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -120,8 +125,24 @@ def main() -> None:
     code_cfg = ProductCodebookConfig(d_model=args.d_model, n_channels=args.n_channels, n_codes=args.n_codes)
     codebook = ProductCodebook(vocab_size=vocab_size, cfg=code_cfg).to(args.device)
 
-    params = list(glyph_cnn.parameters()) + list(codebook.parameters())
-    opt = torch.optim.AdamW(params, lr=args.lr)
+    params_main = list(glyph_cnn.parameters()) + list(codebook.parameters())
+    opt = torch.optim.AdamW(params_main, lr=args.lr)
+
+    # Optional adversarial language classifier over early channels
+    lang2id = {"en": 0, "zh": 1}
+    d_per = code_cfg.d_model // code_cfg.n_channels
+    early_channels = (code_cfg.n_channels - 1) if args.adv_early_channels < 0 else max(0, min(code_cfg.n_channels, args.adv_early_channels))
+    if args.lambda_adv > 0 and early_channels > 0:
+        adv_in = d_per * early_channels
+        lang_clf = nn.Sequential(
+            nn.Linear(adv_in, max(32, adv_in // 2)),
+            nn.SiLU(),
+            nn.Linear(max(32, adv_in // 2), len(lang2id)),
+        ).to(args.device)
+        opt_lang = torch.optim.AdamW(lang_clf.parameters(), lr=args.lr)
+    else:
+        lang_clf = None
+        opt_lang = None
 
     # Training loop
     rng = random.Random(0)
@@ -186,16 +207,70 @@ def main() -> None:
             # Regularization: encourage assignment entropy (diversity)
             loss_reg = -0.01 * codebook.usage_entropy()
 
-            loss = loss_img + loss_qa + 0.1 * loss_gram + loss_reg
+            # Optional uniqueness regularizer (L_uniq) over current unique tokens
+            loss_uniq = torch.zeros((), device=args.device)
+            if args.lambda_uniq > 0 and token_ids.numel() > 1:
+                with torch.no_grad():
+                    uniq_ids, inv = torch.unique(token_ids, sorted=False, return_inverse=True)
+                # Soft assignments for unique ids: (Uu,C,K)
+                probs = F.softmax(codebook.assign_logits[uniq_ids], dim=-1)
+                # Similarity per pair: product over channels of inner products over K
+                # To avoid underflow, use log-domain
+                Uu = probs.size(0)
+                sim_sum = torch.zeros((), device=args.device)
+                pair_count = 0
+                for i in range(Uu):
+                    pi = probs[i]  # (C,K)
+                    for j in range(i + 1, Uu):
+                        pj = probs[j]
+                        ip = torch.einsum("ck,ck->c", pi, pj).clamp_min(1e-8)
+                        log_prod = torch.log(ip).sum()
+                        sim = torch.exp(log_prod)
+                        sim_sum = sim_sum + sim
+                        pair_count += 1
+                if pair_count > 0:
+                    loss_uniq = args.lambda_uniq * (sim_sum / pair_count)
+
+            # Optional adversarial language invariance over early channels
+            loss_lang_main = torch.zeros((), device=args.device)
+            if lang_clf is not None:
+                # Build a token-level sample with language labels for classifier
+                with torch.no_grad():
+                    uniq_ids, inv = torch.unique(token_ids, sorted=False, return_inverse=True)
+                    langs = [k[0] for k in keys]  # keys are (lang, token) per occurrence order
+                    # Map to per-uniq id labels by scanning keys order
+                    # Build lang label per uniq id: pick first occurrence
+                    id_to_label = {}
+                    for (lang, tok), tid in zip(keys, token_ids_cpu.tolist()):
+                        if tid not in id_to_label:
+                            id_to_label[tid] = lang2id.get(lang, 0)
+                    labels = torch.tensor([id_to_label.get(i, 0) for i in uniq_ids.tolist()], device=args.device, dtype=torch.long)
+                # Early embedding slice
+                emb_full = codebook.token_embedding(uniq_ids.to(args.device))  # (Uu,d)
+                if early_channels > 0:
+                    emb_early = emb_full[:, : d_per * early_channels]
+                else:
+                    emb_early = emb_full[:, :0]
+                # Update language classifier to minimize CE
+                opt_lang.zero_grad()
+                logits_lang = lang_clf(emb_early.detach())
+                loss_lang_clf = F.cross_entropy(logits_lang, labels)
+                loss_lang_clf.backward()
+                opt_lang.step()
+                # Main model adversarial: maximize CE -> minimize negative CE
+                logits_lang_main = lang_clf(emb_early)
+                loss_lang_main = -args.lambda_adv * F.cross_entropy(logits_lang_main, labels)
+
+            loss = loss_img + loss_qa + 0.1 * loss_gram + loss_reg + loss_uniq + loss_lang_main
 
             opt.zero_grad()
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(params, 1.0)
+            torch.nn.utils.clip_grad_norm_(params_main, 1.0)
             opt.step()
 
             if (step + 1) % 20 == 0:
                 print(
-                    f"epoch {epoch+1} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f}"
+                    f"epoch {epoch+1} step {step+1}: loss={loss.item():.4f} img={loss_img.item():.4f} qa={loss_qa.item():.4f} gram={loss_gram.item():.4f} uniq={loss_uniq.item():.4f} langAdv={loss_lang_main.item():.4f}"
                 )
 
         # Save checkpoint each epoch
@@ -203,6 +278,15 @@ def main() -> None:
             "glyph_cnn": glyph_cnn.state_dict(),
             "codebook": codebook.state_dict(),
             "vocab": vocab,
+            "lang_clf": (lang_clf.state_dict() if lang_clf is not None else None),
+            "config": {
+                "d_model": args.d_model,
+                "n_channels": args.n_channels,
+                "n_codes": args.n_codes,
+                "lambda_uniq": args.lambda_uniq,
+                "lambda_adv": args.lambda_adv,
+                "adv_early_channels": early_channels,
+            },
         }
         torch.save(ckpt, out_dir / f"ckpt_epoch{epoch+1}.pt")
 
