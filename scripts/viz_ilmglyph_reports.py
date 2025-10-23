@@ -42,7 +42,8 @@ def nearest_neighbors(emb: np.ndarray, langs: List[str], vocab_inv: List[str], t
     for i in idx_en:
         s = sims[i, idx_zh]
         order = np.argsort(-s)[:topk]
-        nbrs = [(vocab_inv[idx_zh[j]], float(s[order[j]])) for j in range(len(order))]
+        # IMPORTANT: use ordered zh indices for both token and similarity
+        nbrs = [(vocab_inv[idx_zh[order[j]]], float(s[order[j]])) for j in range(len(order))]
         results.append((vocab_inv[i], nbrs))
     return results
 
