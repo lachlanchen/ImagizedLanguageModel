@@ -44,3 +44,14 @@ Ingest Etymology Pages
 - Outputs:
   - Images: `data/historic/glyphs/<char>/<stage>/<label>.<ext>`
   - DB: `data/historic/etymology.sqlite3`
+
+Tornado Web UI (optional)
+-------------------------
+- Quick web front‑end for ad‑hoc ingestion and a demo pinyin mapping (e.g., `zhong` → `中`).
+- Install deps: `pip install tornado requests beautifulsoup4`
+- Run the server:
+  - `PYTHONPATH=. python scripts/serve_etymology.py`
+  - Open `http://127.0.0.1:8888` in a browser.
+- Usage:
+  - Enter a character (e.g., `中`) or demo pinyin (`zhong`), choose a site helper, submit.
+  - The app will fetch the page, parse glyphs, save images, and update the DB.
