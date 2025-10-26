@@ -171,10 +171,26 @@ def fetch_hanziyuan_ajax(
     except Exception as e:
         logger.warning("hanziyuan: priming failed: %s", e)
 
-    data = {"chinese": _codepoint_decimal(char)}
+    # Gather Bronze token from cookies (set by landing page)
+    bronze_cookie = None
+    try:
+        bronze_cookie = sess.cookies.get("Bronze")
+    except Exception:
+        bronze_cookie = None
+    data = {
+        # The site expects the literal character in form data
+        "chinese": char,
+        # It also echoes the Bronze cookie value in the form body
+        **({"Bronze": bronze_cookie} if bronze_cookie else {}),
+    }
     url = "https://hanziyuan.net/etymology"
-    logger.info("POST %s chinese=%s", url, data["chinese"])
-    r = sess.post(url, headers=headers, data=data, timeout=timeout)
+    post_headers = dict(headers)
+    # Custom headers used by site scripts
+    post_headers["Chinese"] = _codepoint_decimal(char)
+    if bronze_cookie:
+        post_headers["Seal"] = bronze_cookie
+    logger.info("POST %s chinese=%s has_bronze_cookie=%s", url, _codepoint_decimal(char), bool(bronze_cookie))
+    r = sess.post(url, headers=post_headers, data=data, timeout=timeout)
     r.raise_for_status()
     html = r.text
     if cache_dir:
