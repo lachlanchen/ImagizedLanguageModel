@@ -32,3 +32,15 @@ Caveats
 - These third‑party tools depend on external sites that may require login, rate‑limit crawlers, or change HTML structure.
 - Downloads can be large (GBs). Keep them in `data/historic/` (ignored by git) to avoid bloating the repo.
 
+Ingest Etymology Pages
+----------------------
+- Use the bundled CLI to scrape hanziyuan/chineseetymology‑style pages and persist glyphs + metadata.
+- Install deps: `pip install requests beautifulsoup4`
+- Single page:
+  - `PYTHONPATH=. python scripts/ingest_etymology.py --url https://example/hanziyuan/车`
+  - If auto‑detection fails, add `--char 车`
+- Batch mode from file `urls.txt` (supports lines as `char\turl`, `url`, or `char url`):
+  - `PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt`
+- Outputs:
+  - Images: `data/historic/glyphs/<char>/<stage>/<label>.<ext>`
+  - DB: `data/historic/etymology.sqlite3`
