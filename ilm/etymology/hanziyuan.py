@@ -274,15 +274,41 @@ def _extract_char_info(soup: BeautifulSoup) -> Optional[CharInfo]:
     return CharInfo(char=ch, codepoint=codepoint, pinyin=pinyin, main_meaning=meaning)
 
 
-def parse_page(html: str, base_url: Optional[str] = None, *, filter_related: bool = True) -> Tuple[Optional[CharInfo], List[Glyph]]:
+def parse_page(
+    html: str,
+    base_url: Optional[str] = None,
+    *,
+    filter_related: bool = True,
+    debug: Optional[List[str]] = None,
+) -> Tuple[Optional[CharInfo], List[Glyph]]:
     """Parse an etymology page and extract char info and glyphs.
     Designed to handle hanziyuan/chineseetymology-like structures, including
     <img> tags and elements with CSS background-image: url(data:...).
     """
     soup = BeautifulSoup(html, "html.parser")
     char_info = _extract_char_info(soup)
+    if debug is not None:
+        debug.append(f"html_length={len(html)}")
+        if char_info:
+            debug.append(f"char_detected={char_info.char} codepoint={char_info.codepoint}")
+        else:
+            debug.append("char_detected=None")
 
     glyphs: List[Glyph] = []
+
+    # 0) CSS <style> blocks with background-image rules
+    css_map: Dict[str, str] = {}
+    css_count = 0
+    for style_tag in soup.find_all("style"):
+        text = style_tag.string or style_tag.get_text() or ""
+        # Match selectors like #J00886, #etymologyJ00886 { background-image: url('data:...') }
+        for m in re.finditer(r"#([A-Za-z0-9_\-]+)[^{}]*\{[^{}]*background(?:-image)?:\s*url\(([^)]+)\)", text, re.I):
+            sel_id = m.group(1)
+            url = m.group(2).strip().strip('"\'')
+            css_map[sel_id] = url
+            css_count += 1
+    if debug is not None:
+        debug.append(f"css_background_entries={css_count}")
 
     # 1) IMG tags
     for img in soup.find_all("img"):
@@ -300,7 +326,7 @@ def parse_page(html: str, base_url: Optional[str] = None, *, filter_related: boo
             src = urllib.parse.urljoin(base_url, src)
         glyphs.append(Glyph(stage=stage, label=label, src=src, width=w, height=h))
 
-    # 2) Elements with background-image data URIs
+    # 2) Elements with inline background-image data URIs
     for el in soup.find_all(True):  # all tags
         style = el.get("style")
         if not style:
@@ -311,6 +337,51 @@ def parse_page(html: str, base_url: Optional[str] = None, *, filter_related: boo
         label = el.get("data-label") or el.get("title")
         stage = _nearest_stage_for(el) or "unknown"
         glyphs.append(Glyph(stage=stage, label=label, src=url))
+
+    # 3) Build glyphs from CSS map + stage sections (Oracle/Bronze/Seal/Liushutong)
+    # Sections live under #etymologyCharacters; headings are <h3> text with stage names.
+    section_root = soup.find(id="etymologyCharacters") or soup
+    labels_by_stage: Dict[str, List[str]] = {}
+    total_labels = 0
+    for h3 in section_root.find_all("h3"):
+        stage = canonical_stage_from_text(h3.get_text(" ", strip=True)) or None
+        if not stage:
+            continue
+        ul = h3.find_next_sibling()
+        while ul and ul.name != "ul":
+            # skip non-list nodes until the UL
+            ul = ul.find_next_sibling()
+        if not ul:
+            continue
+        labels: List[str] = []
+        for li in ul.find_all("li"):
+            text = li.get_text(" ", strip=True)
+            # Labels look like J00886, B00610, S00273, L00585, etc.
+            m = re.search(r"\b([JBSL][0-9]{3,6})\b", text)
+            if not m:
+                # sometimes label is in an element id like etymologyJ00886
+                div = li.find(id=re.compile(r"^(etymology)?[JBSL][0-9]{3,6}$"))
+                if div:
+                    m = re.search(r"([JBSL][0-9]{3,6})", div.get("id"))
+            if m:
+                labels.append(m.group(1))
+        if labels:
+            labels_by_stage.setdefault(stage, []).extend(labels)
+            total_labels += len(labels)
+    if debug is not None:
+        debug.append(f"stage_labels_total={total_labels} stage_breakdown={ {k: len(v) for k,v in labels_by_stage.items()} }")
+
+    # Resolve labels to CSS images
+    css_hits = 0
+    for stage, labels in labels_by_stage.items():
+        for label in labels:
+            # Try both bare and with etymology prefix selectors seen in CSS
+            url = css_map.get(label) or css_map.get(f"etymology{label}")
+            if url:
+                glyphs.append(Glyph(stage=stage, label=label, src=url))
+                css_hits += 1
+    if debug is not None:
+        debug.append(f"glyphs_from_css={css_hits}")
 
     # Deduplicate identical sources within same stage/label
     seen = set()
@@ -323,7 +394,10 @@ def parse_page(html: str, base_url: Optional[str] = None, *, filter_related: boo
         uniq.append(g)
 
     if filter_related:
+        before = len(uniq)
         uniq = filter_glyphs_for_related(uniq, base_url)
+        if debug is not None:
+            debug.append(f"filtered_glyphs={len(uniq)} (before={before})")
         logger.info("filtered glyphs: %d", len(uniq))
 
     return char_info, uniq

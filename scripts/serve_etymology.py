@@ -146,8 +146,10 @@ class IngestHandler(tornado.web.RequestHandler):
                 base_url = url
                 log(f"Fetch: {url}")
                 html_text = fetch_url(url, cache_dir=cache_dir, delay=delay_s)
-
-            meta, glyphs = parse_page(html_text, base_url=base_url, filter_related=True)
+            dbg = []
+            meta, glyphs = parse_page(html_text, base_url=base_url, filter_related=True, debug=dbg)
+            for entry in dbg:
+                log(entry)
             meta = build_char_info(char_override, meta)
             if not meta:
                 raise RuntimeError("Failed to detect character; try specifying the char in the query field.")
