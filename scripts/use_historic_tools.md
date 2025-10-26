@@ -1,0 +1,34 @@
+Using Historic Script Tools
+===========================
+
+Cloned (untracked) repos live under `data/historic/repos`:
+
+1) YinQiWenYuan
+   - Path: `data/historic/repos/YinQiWenYuan`
+   - Entry points: `SearchByText_v*.py`
+   - Requirements: `requests`, `pyautogui`, plus site access credentials/session for 殷契文渊.
+   - Typical usage:
+     - Install deps: `pip install requests pyautogui zhconv`
+     - Edit the script `savepath` and any login/session tokens as per README.
+     - Run: `python SearchByText_v3.1.py` and follow prompts.
+
+2) Chinese-Etymology-Crawler
+   - Path: `data/historic/repos/Chinese-Etymology-Crawler`
+   - Entry points: `utils_fetch.py`
+   - Requirements: `requests` (and possibly `BeautifulSoup` depending on your extensions).
+   - Typical usage:
+     - Install deps: `pip install requests beautifulsoup4`
+     - Review `utils_fetch.py` and update target lists; run it to fetch images from chineseetymology.org.
+     - Respect robots.txt and site licensing.
+
+Large Official Datasets
+-----------------------
+- Use `scripts/download_historic_datasets.py` to manage downloads to `data/historic/...`.
+- Before running, edit the `DEFAULT_MANIFEST` in the script to include the official archive URLs (e.g., HUST‑OBC, Tangut TCD). Then:
+  - `PYTHONPATH=. python scripts/download_historic_datasets.py --only hust_obc tangut_tcd`
+
+Caveats
+-------
+- These third‑party tools depend on external sites that may require login, rate‑limit crawlers, or change HTML structure.
+- Downloads can be large (GBs). Keep them in `data/historic/` (ignored by git) to avoid bloating the repo.
+
