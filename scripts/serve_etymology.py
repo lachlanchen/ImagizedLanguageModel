@@ -14,6 +14,7 @@ from ilm.etymology import db as dbm
 from ilm.etymology.hanziyuan import (
     build_char_info,
     fetch_url,
+    fetch_hanziyuan_ajax,
     guess_source_site,
     parse_page,
     save_glyph_assets,
@@ -138,15 +139,21 @@ class IngestHandler(tornado.web.RequestHandler):
                 pass
 
         try:
-            log(f"Fetch: {url}")
-            html_text = fetch_url(url, cache_dir=cache_dir, delay=delay_s)
-            meta, glyphs = parse_page(html_text, base_url=url, filter_related=True)
+            if site == "hanziyuan" and char_override and (not url or url.startswith("https://hanziyuan.net/#")):
+                log(f"AJAX POST to hanziyuan/etymology for char='{char_override}'")
+                html_text, base_url = fetch_hanziyuan_ajax(char=char_override, cache_dir=cache_dir, delay=delay_s)
+            else:
+                base_url = url
+                log(f"Fetch: {url}")
+                html_text = fetch_url(url, cache_dir=cache_dir, delay=delay_s)
+
+            meta, glyphs = parse_page(html_text, base_url=base_url, filter_related=True)
             meta = build_char_info(char_override, meta)
             if not meta:
                 raise RuntimeError("Failed to detect character; try specifying the char in the query field.")
             log(f"Detected char: {meta.char} {meta.codepoint or ''}")
             log(f"Glyph candidates: {len(glyphs)}")
-            saved = save_glyph_assets(glyphs=glyphs, out_root=out_root, char=meta.char, base_url=url)
+            saved = save_glyph_assets(glyphs=glyphs, out_root=out_root, char=meta.char, base_url=base_url)
             log(f"Saved files: {len(saved)} → {out_root}")
 
             # DB upsert
@@ -160,7 +167,7 @@ class IngestHandler(tornado.web.RequestHandler):
                     pinyin=meta.pinyin,
                     main_meaning=meta.main_meaning,
                     importance_freq=meta.importance_freq,
-                    sources=guess_source_site(url),
+                    sources=guess_source_site(base_url if site == "hanziyuan" and char_override else url),
                 )
                 for g, local_path, w, h in saved:
                     dbm.add_glyph(
@@ -168,8 +175,8 @@ class IngestHandler(tornado.web.RequestHandler):
                         char_id=char_id,
                         stage=g.stage or "unknown",
                         label=g.label,
-                        source_site=guess_source_site(url),
-                        url=url if not (g.src or "").startswith("data:") else None,
+                        source_site=guess_source_site(base_url if site == "hanziyuan" and char_override else url),
+                        url=(base_url if (site == "hanziyuan" and char_override) else url) if not (g.src or "").startswith("data:") else None,
                         local_path=str(local_path),
                         width=w,
                         height=h,

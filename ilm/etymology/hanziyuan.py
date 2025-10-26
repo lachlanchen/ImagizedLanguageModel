@@ -131,6 +131,57 @@ def fetch_url(url: str, *, headers: Optional[Dict[str, str]] = None, timeout: fl
     return html
 
 
+def _codepoint_decimal(ch: str) -> str:
+    return str(ord(ch))
+
+
+def fetch_hanziyuan_ajax(
+    *,
+    char: str,
+    session: Optional[requests.Session] = None,
+    timeout: float = 20.0,
+    cache_dir: Optional[Path] = None,
+    delay: float = 0.0,
+) -> Tuple[str, str]:
+    """Fetch HTML by POSTing to hanziyuan `/etymology` with `chinese` codepoint.
+
+    Returns (html, base_url) used for joining relative resources.
+    """
+    sess = session or requests.Session()
+    headers = {
+        "User-Agent": "ILM-Etymology/1.0 (+https://github.com/lachlanchen/ImagizedLanguageModel)",
+        "Accept": "text/html, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Origin": "https://hanziyuan.net",
+        "Referer": "https://hanziyuan.net/",
+    }
+    if cache_dir:
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        key = _sanitize_filename(f"hanziyuan_ajax_{char}")
+        cache_path = cache_dir / f"{key}.html"
+        if cache_path.exists():
+            return cache_path.read_text("utf-8", errors="ignore"), "https://hanziyuan.net/etymology"
+
+    if delay:
+        time.sleep(delay)
+    # Prime cookies/session (ASP.NET often sets tokens on first GET)
+    try:
+        logger.info("hanziyuan: prime session cookies")
+        sess.get("https://hanziyuan.net/", headers=headers, timeout=timeout)
+    except Exception as e:
+        logger.warning("hanziyuan: priming failed: %s", e)
+
+    data = {"chinese": _codepoint_decimal(char)}
+    url = "https://hanziyuan.net/etymology"
+    logger.info("POST %s chinese=%s", url, data["chinese"])
+    r = sess.post(url, headers=headers, data=data, timeout=timeout)
+    r.raise_for_status()
+    html = r.text
+    if cache_dir:
+        cache_path.write_text(html, "utf-8")  # type: ignore[name-defined]
+    return html, url
+
+
 def _nearest_stage_for(el: Tag) -> Optional[str]:
     # Walk up ancestors to find a heading or container with stage text
     node: Optional[Tag] = el
