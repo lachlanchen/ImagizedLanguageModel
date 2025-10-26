@@ -6,6 +6,7 @@ import re
 import time
 import urllib.parse
 from dataclasses import dataclass
+import logging
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
@@ -121,6 +122,7 @@ def fetch_url(url: str, *, headers: Optional[Dict[str, str]] = None, timeout: fl
             return cache_path.read_text("utf-8", errors="ignore")
     if delay:
         time.sleep(delay)
+    logger.info("fetch: %s", url)
     r = requests.get(url, headers=headers, timeout=timeout)
     r.raise_for_status()
     html = r.text
@@ -205,7 +207,7 @@ def _extract_char_info(soup: BeautifulSoup) -> Optional[CharInfo]:
     return CharInfo(char=ch, codepoint=codepoint, pinyin=pinyin, main_meaning=meaning)
 
 
-def parse_page(html: str, base_url: Optional[str] = None) -> Tuple[Optional[CharInfo], List[Glyph]]:
+def parse_page(html: str, base_url: Optional[str] = None, *, filter_related: bool = True) -> Tuple[Optional[CharInfo], List[Glyph]]:
     """Parse an etymology page and extract char info and glyphs.
     Designed to handle hanziyuan/chineseetymology-like structures, including
     <img> tags and elements with CSS background-image: url(data:...).
@@ -252,6 +254,10 @@ def parse_page(html: str, base_url: Optional[str] = None) -> Tuple[Optional[Char
             continue
         seen.add(key)
         uniq.append(g)
+
+    if filter_related:
+        uniq = filter_glyphs_for_related(uniq, base_url)
+        logger.info("filtered glyphs: %d", len(uniq))
 
     return char_info, uniq
 
@@ -301,6 +307,7 @@ def save_glyph_assets(
         url = urllib.parse.urljoin(base_url, src) if (base_url and not src.startswith("http")) else src
         if delay:
             time.sleep(delay)
+        logger.info("download: %s", url)
         r = sess.get(url, timeout=20)
         r.raise_for_status()
         # Determine extension
@@ -335,3 +342,54 @@ def build_char_info(char: Optional[str], meta: Optional[CharInfo]) -> Optional[C
     return meta
 
 
+def _url_host(u: Optional[str]) -> str:
+    try:
+        return urllib.parse.urlparse(u or "").hostname or ""
+    except Exception:
+        return ""
+
+
+_EXCLUDE_NAME_RE = re.compile(
+    r"(logo|wechat|alipay|first[_-]?class|banner|ad|research|net|favicon)", re.I
+)
+_LIKELY_LABEL_RE = re.compile(r"^[A-Za-z]?[0-9]{3,6}")
+
+
+def filter_glyphs_for_related(glyphs: List[Glyph], base_url: Optional[str]) -> List[Glyph]:
+    """Heuristically keep only glyph-like images, dropping generic page assets.
+    Rules:
+      - Always allow data: URIs.
+      - Otherwise, host must match base_url host.
+      - Prefer items with a plausible label (e.g., J12345) or stage != unknown.
+      - Exclude names containing obvious non-glyph terms (logo, wechat, alipay, banner, ad...).
+    """
+    base_host = _url_host(base_url)
+    kept: List[Glyph] = []
+    for g in glyphs:
+        src = g.src or ""
+        if src.startswith("data:"):
+            kept.append(g)
+            continue
+        host = _url_host(src)
+        if base_host and host and host != base_host:
+            # Cross-origin image — likely unrelated
+            continue
+        # File name checks
+        path = urllib.parse.urlparse(src).path
+        fname = os.path.basename(path)
+        if _EXCLUDE_NAME_RE.search(fname):
+            continue
+        plausible = False
+        if g.label and _LIKELY_LABEL_RE.match(g.label.strip()):
+            plausible = True
+        if (g.stage or "").lower() not in {"", "unknown"}:
+            plausible = True
+        if not plausible:
+            # If file looks like svg/png and small-ish filename, still allow
+            if fname.lower().endswith((".svg", ".png", ".jpg", ".jpeg", ".gif")):
+                plausible = True
+        if plausible:
+            kept.append(g)
+    return kept
+
+logger = logging.getLogger(__name__)
