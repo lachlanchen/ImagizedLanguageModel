@@ -156,6 +156,7 @@ def main() -> None:
     ap.add_argument("--out", default=str(DEFAULT_OUT), help="Output root for glyph images")
     ap.add_argument("--cache-dir", default=str(DEFAULT_CACHE), help="HTML cache dir")
     ap.add_argument("--limit", type=int, default=1000, help="Number of characters to ingest")
+    ap.add_argument("--offset", type=int, default=0, help="Skip the first N most common characters (e.g., 1000 to fetch the next batch)")
     ap.add_argument("--delay", type=float, default=0.5, help="Base delay between requests (seconds)")
     ap.add_argument("--chars-file", type=Path, default=None, help="Optional file of characters (one per line or space-separated)")
     ap.add_argument("--resume", action="store_true", help="Skip characters that already have saved glyph files")
@@ -172,7 +173,9 @@ def main() -> None:
         chars = read_chars_file(Path(args.chars_file), args.limit)
     else:
         print("[bulk] deriving top Chinese characters via wordfreq…")
-        chars = top_zh_chars(args.limit, sample_words=max(20000, args.limit * 50))
+        need = args.offset + args.limit
+        full = top_zh_chars(need, sample_words=max(30000, need * 60))
+        chars = full[args.offset:need]
 
     stats = IngestStats()
     start = time.time()
@@ -203,4 +206,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
