@@ -39,6 +39,9 @@ Ingest Etymology Pages
 - Single page:
   - `PYTHONPATH=. python scripts/ingest_etymology.py --url https://example/hanziyuan/车`
   - If auto‑detection fails, add `--char 车`
+- Hanziyuan AJAX (char‑only, more robust):
+  - `PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中`
+  - You may also combine with a hanziyuan hash URL (both work): `--site hanziyuan --char 中 --url https://hanziyuan.net/#%E4%B8%AD`
 - Batch mode from file `urls.txt` (supports lines as `char\turl`, `url`, or `char url`):
   - `PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt`
 - Outputs:
@@ -55,3 +58,9 @@ Tornado Web UI (optional)
 - Usage:
   - Enter a character (e.g., `中`) or demo pinyin (`zhong`), choose a site helper, submit.
   - The app will fetch the page, parse glyphs, save images, and update the DB.
+
+Polite crawling tips
+--------------------
+- Keep delays ≥ 0.5s and avoid bursts. The scraper now throttles per‑host and retries with exponential backoff.
+- Prefer cached results and use `--cache-dir` to avoid refetching the same page frequently.
+- Do not bypass paywalls or defeat interactive protections. If the site responds with 403/429, slow down and try later.

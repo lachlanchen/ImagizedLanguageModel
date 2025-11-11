@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup, Tag
 
 
@@ -111,19 +113,35 @@ def _extract_data_url_from_style(style: str) -> Optional[str]:
 
 
 def fetch_url(url: str, *, headers: Optional[Dict[str, str]] = None, timeout: float = 20.0,
-              cache_dir: Optional[Path] = None, delay: float = 0.0) -> str:
-    """Fetch a URL with optional file cache."""
+              cache_dir: Optional[Path] = None, delay: float = 0.0,
+              cache_ttl_s: Optional[float] = None,
+              session: Optional[requests.Session] = None) -> str:
+    """Fetch a URL with optional file cache and retries.
+
+    - cache_ttl_s: if provided, reuse cached file newer than this TTL.
+    - session: if provided, use it (with keep-alive and retry adapter mounted).
+    """
     headers = headers or {"User-Agent": "ILM-Etymology/1.0 (+https://github.com/lachlanchen/ImagizedLanguageModel)"}
     if cache_dir:
         cache_dir.mkdir(parents=True, exist_ok=True)
         key = _sanitize_filename(url, fallback=str(abs(hash(url))))
         cache_path = cache_dir / f"{key}.html"
         if cache_path.exists():
-            return cache_path.read_text("utf-8", errors="ignore")
+            if cache_ttl_s is None:
+                return cache_path.read_text("utf-8", errors="ignore")
+            try:
+                mtime = cache_path.stat().st_mtime
+                if (time.time() - mtime) <= cache_ttl_s:
+                    return cache_path.read_text("utf-8", errors="ignore")
+            except Exception:
+                pass
     if delay:
         time.sleep(delay)
     logger.info("fetch: %s", url)
-    r = requests.get(url, headers=headers, timeout=timeout)
+
+    sess = session or _session_with_retries()
+    _polite_throttle(url)
+    r = sess.get(url, headers=headers, timeout=timeout)
     r.raise_for_status()
     html = r.text
     if cache_dir:
@@ -147,13 +165,16 @@ def fetch_hanziyuan_ajax(
 
     Returns (html, base_url) used for joining relative resources.
     """
-    sess = session or requests.Session()
+    sess = _session_with_retries(session)
     headers = {
-        "User-Agent": "ILM-Etymology/1.0 (+https://github.com/lachlanchen/ImagizedLanguageModel)",
+        "User-Agent": _default_user_agent(),
         "Accept": "text/html, */*; q=0.01",
         "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br, zstd",
+        "Connection": "keep-alive",
         "Origin": "https://hanziyuan.net",
         "Referer": "https://hanziyuan.net/",
+        "X-Requested-With": "XMLHttpRequest",
     }
     if cache_dir:
         cache_dir.mkdir(parents=True, exist_ok=True)
@@ -164,15 +185,16 @@ def fetch_hanziyuan_ajax(
 
     if delay:
         time.sleep(delay)
+
     # Prime cookies/session (ASP.NET often sets tokens on first GET)
     try:
         logger.info("hanziyuan: prime session cookies")
+        _polite_throttle("https://hanziyuan.net/")
         sess.get("https://hanziyuan.net/", headers=headers, timeout=timeout)
     except Exception as e:
         logger.warning("hanziyuan: priming failed: %s", e)
 
     # Gather Bronze token from cookies (set by landing page)
-    bronze_cookie = None
     try:
         bronze_cookie = sess.cookies.get("Bronze")
     except Exception:
@@ -180,7 +202,7 @@ def fetch_hanziyuan_ajax(
     data = {
         # The site expects the literal character in form data
         "chinese": char,
-        # It also echoes the Bronze cookie value in the form body
+        # It may echo the Bronze cookie value in the form body
         **({"Bronze": bronze_cookie} if bronze_cookie else {}),
     }
     url = "https://hanziyuan.net/etymology"
@@ -189,8 +211,25 @@ def fetch_hanziyuan_ajax(
     post_headers["Chinese"] = _codepoint_decimal(char)
     if bronze_cookie:
         post_headers["Seal"] = bronze_cookie
-    logger.info("POST %s chinese=%s has_bronze_cookie=%s", url, _codepoint_decimal(char), bool(bronze_cookie))
+    logger.info(
+        "POST %s chinese=%s has_bronze_cookie=%s",
+        url,
+        _codepoint_decimal(char),
+        bool(bronze_cookie),
+    )
+    _polite_throttle(url)
     r = sess.post(url, headers=post_headers, data=data, timeout=timeout)
+    # Retry fallback: if 404/403, retry without Bronze/Seal headers once
+    if r.status_code in (403, 404):
+        logger.warning("hanziyuan: POST returned %s, retrying without tokens", r.status_code)
+        try:
+            alt_headers = dict(post_headers)
+            alt_headers.pop("Seal", None)
+            data.pop("Bronze", None)
+            _polite_throttle(url)
+            r = sess.post(url, headers=alt_headers, data=data, timeout=timeout)
+        except Exception:
+            pass
     r.raise_for_status()
     html = r.text
     if cache_dir:
@@ -302,7 +341,7 @@ def parse_page(
     for style_tag in soup.find_all("style"):
         text = style_tag.string or style_tag.get_text() or ""
         # Match selectors like #J00886, #etymologyJ00886 { background-image: url('data:...') }
-        for m in re.finditer(r"#([A-Za-z0-9_\-]+)[^{}]*\{[^{}]*background(?:-image)?:\s*url\(([^)]+)\)", text, re.I):
+        for m in re.finditer(r"#([A-Za-z0-9_\-]+)[^{}]*\{[^{}]*background(?:-image)?:\s*url\(([^)]+)\)", text, re.I | re.S):
             sel_id = m.group(1)
             url = m.group(2).strip().strip('"\'')
             css_map[sel_id] = url
@@ -425,7 +464,7 @@ def save_glyph_assets(
     """Save glyph sources to files under out_root/<char>/<stage>/<label>.ext
     Returns list of (glyph, local_path, width, height).
     """
-    sess = session or requests.Session()
+    sess = _session_with_retries(session)
     results: List[Tuple[Glyph, Path, Optional[int], Optional[int]]] = []
 
     for idx, g in enumerate(glyphs, 1):
@@ -449,6 +488,7 @@ def save_glyph_assets(
         if delay:
             time.sleep(delay)
         logger.info("download: %s", url)
+        _polite_throttle(url)
         r = sess.get(url, timeout=20)
         r.raise_for_status()
         # Determine extension
@@ -534,3 +574,55 @@ def filter_glyphs_for_related(glyphs: List[Glyph], base_url: Optional[str]) -> L
     return kept
 
 logger = logging.getLogger(__name__)
+
+
+# ----------------
+# Robust requests: retries + polite host-level throttling
+# ----------------
+_HOST_NEXT_OK: Dict[str, float] = {}
+
+
+def _default_user_agent() -> str:
+    # Slightly more realistic UA while still identifying the project
+    return (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/120.0 Safari/537.36 "
+        "ILM-Etymology/1.0 (+https://github.com/lachlanchen/ImagizedLanguageModel)"
+    )
+
+
+def _session_with_retries(session: Optional[requests.Session] = None,
+                          *,
+                          total: int = 4,
+                          backoff_factor: float = 0.5) -> requests.Session:
+    s = session or requests.Session()
+    retry = Retry(
+        total=total,
+        connect=total,
+        read=total,
+        status=total,
+        backoff_factor=backoff_factor,
+        status_forcelist=(429, 500, 502, 503, 504, 520, 522),
+        allowed_methods=("GET", "POST"),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10)
+    s.mount("http://", adapter)
+    s.mount("https://", adapter)
+    return s
+
+
+def _polite_throttle(url_or_host: str, *, base_delay: float = 0.6, jitter: float = 0.4) -> None:
+    try:
+        host = urllib.parse.urlparse(url_or_host).hostname or url_or_host
+    except Exception:
+        host = url_or_host
+    now = time.time()
+    next_ok = _HOST_NEXT_OK.get(host, 0.0)
+    if now < next_ok:
+        to_sleep = max(0.0, next_ok - now)
+        time.sleep(to_sleep)
+        now = time.time()
+    # Update next window with small jitter to avoid lockstep patterns
+    delay = base_delay + (jitter * (0.5 - os.urandom(1)[0] / 255.0))
+    _HOST_NEXT_OK[host] = now + max(0.1, delay)
