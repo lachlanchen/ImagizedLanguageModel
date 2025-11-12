@@ -1,6 +1,9 @@
 Imagized Language Model (ILM)
 =============================
 
+Language
+- English | [简体中文](i18n/README.zh-Hans.md) | [繁體中文](i18n/README.zh-Hant.md) | [日本語](i18n/README.ja.md) | [한국어](i18n/README.ko.md) | [Tiếng Việt](i18n/README.vi.md) | [العربية](i18n/README.ar.md) | [Français](i18n/README.fr.md) | [Español](i18n/README.es.md)
+
 ILM is a research codebase exploring text-as-image generation: it encodes language into compact, image‑like tensors and generates text with diffusion‑style iterative refinement. The representation factors sentences into meta‑elements (grammar, semantics, tone, emotion) and hierarchical, memory‑like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph‑aware character modeling.
 
 Key links
@@ -53,4 +56,3 @@ Project intent and roadmap
 Contributing
 - Follow `AGENTS.md` for conventions (atomic commits, push after change, no credentials in code).
 - Group related edits in focused commits with conventional messages.
-
