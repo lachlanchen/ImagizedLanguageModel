@@ -1,49 +1,54 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-# نموذج اللغة المُصوَّر (ILM)
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+# نموذج اللغة المصوّرة (ILM)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
 ![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
+![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM هو قاعدة شيفرة بحثية تستكشف توليد النص على هيئة صورة: إذ يرمّز اللغة إلى موترات مدمجة شبيهة بالصور، ثم يولّد النص عبر تنقيح تكراري بأسلوب الانتشار (diffusion). يفكك هذا التمثيل الجمل إلى عناصر فوقية (القواعد، الدلالة، النبرة، العاطفة) وإلى أكواد هرمية شبيهة بالذاكرة للكلمات والأحرف. بذلك يجمع بين أفكار الانتشار المتقطع، والتراكب/فك التشابك، والتضمينات المهيكلة، ونمذجة الأحرف الواعية بشكل الـ glyph.
+ILM هو مشروع بحثي يستكشف **توليد النص كنصٍ-صورة**: حيث يقوم بترميز اللغة في موترات مضغوطة شبيهة بالصور ثم يولّد النص عبر تنقيح تكراري بأسلوب التشتت (diffusion). يفكك هذا التمثيل الجمل إلى عناصر فوقية (قواعد، دلالة، نبرة، عاطفة) وكودات هرمية شبيهة بالذاكرة للكلمات والأحرف. كما يوحّد أفكار التشتت المنفصل، والتراكب/فكّ التشابك، والتضمينات المهيكلة، ونمذجة الأحرف المعتمدة على glyphs.
 
-## نظرة عامة
+> يحتفظ المستودع عمدًا بمسار عملي لتتبع علم الأصول التاريخي جنبًا إلى جنب مع تجارب ILM طويلة المدى.
 
-يتضمن هذا المستودع حاليًا مسارين عمليين رئيسيين:
+## 📌 نظرة عامة
 
-1. إدخال اشتقاقيات/أصول الـ glyph الصيني التاريخي (الاستخلاص/التحليل/التخزين/المعاينة).
-2. تجارب نمذجة ILM المعتمدة على glyph/الصورة (تصيير رموز glyph للتوكنات، دفاتر أكواد product codebooks، حزم الإطارات، الانتشار/الاستكمال inpainting، التقييم/التقارير).
+هذا المستودع يضم مسارين نشطين:
 
-ركز README الحالي تاريخيًا على أدوات الاشتقاقيات، وما يزال هذا المسار موثقًا بالكامل أدناه ومحفوظًا كمرجع أساسي.
+1. استيعاب أصول glyph الصينية التاريخية (الاستخراج/التحليل/التخزين/المعاينة).
+2. تجارب نمذجة glyph/صورة ILM (عرض glyphs للتوكن، دفاتر الأكواد، تعبئة الإطارات، التدريب/الـ diffusion/inpainting، التقييم/التقارير).
 
-## روابط أساسية
+يوثّق هذا الـ README المسارين معًا ويجعل سير عمل علم الأصول طريقًا أوليًا وقابلاً لإعادة التنفيذ.
+
+## 🔗 الروابط الأساسية
 
 | المجال | المسار |
 |---|---|
-| الشرح المفاهيمي | `docs/imagized-language-model.md` |
+| الموجز المفاهيمي | `docs/imagized-language-model.md` |
 | خطة الشيفرة والمقاييس | `docs/ilm-visual-diffusion-code-plan.md` |
-| خطة "ألوان" التضمين | `docs/embedding-color-plan.md` |
+| خطة "color" للتضمين | `docs/embedding-color-plan.md` |
 | ملاحظات/خطة التطوير | `docs/development-plan.md` |
-| README وحدة الاشتقاقيات | `ilm/etymology/README.md` |
+| دليل وحدة الأصول | `ilm/etymology/README.md` |
 
-## الميزات
+## ✨ الميزات
 
-- 🏺 إدخال بيانات الاشتقاقيات من مصادر بنمط `hanziyuan` و `chineseetymology`.
-- 🌐 مسار إدخال قوي عبر AJAX + HTML مع إعادة المحاولة، والتحكم في المعدل، والتخزين المؤقت.
-- 🧩 استخراج glyph مع وسم المرحلة، بما في ذلك `<img>` وبيانات URI داخل CSS `background-image`.
-- 🗃️ تخزين مدعوم بـ SQLite لبيانات المحارف/الـ glyph الوصفية، مع تنظيم الأصول على نظام الملفات.
-- 🖥️ واجهة ويب Tornado للإدخال السريع مع معرض معاينة.
-- 🔤 أدوات تصيير glyph لصور التوكنات متعددة اللغات.
-- 🧠 وحدات تضمين/دفتر أكواد بأسلوب product-code.
-- 🧱 نصوص تدريب/تقييم لتعبئة إطارات الجمل والانتشار/الاستكمال inpainting.
-- 📊 نصوص تقارير وتصورات لفحص التضمين ومسار المعالجة.
-- 📄 مخرجات النشر بصيغة LaTeX/PDF ضمن `publication/`.
+- 🏺 استيعاب الأصول من مصادر من نمط `hanziyuan` و`chineseetymology`.
+- 🌐 مسار استيعاب AJAX + HTML قوي مع إعادة المحاولة، وضبط الوتيرة، والتخزين المؤقت.
+- 🧩 استخراج glyph موسوم بمراحل يضم بيانات `<img>` وبيانات URI داخل CSS `background-image`.
+- 🗃️ تخزين قائم على SQLite لبيانات الـ chars/metadata الخاصة بالـ glyph مع تخطيط الأصول على نظام الملفات.
+- 🖥️ واجهة ويب عبر Tornado للاستيعاب اليدوي ومعاينة المعرض.
+- 🔤 أدوات عرض glyphs لتوكنات متعددة اللغات.
+- 🧠 وحدات embedding/codebook بنمط product-code.
+- 🧱 تعبئة إطارات الجمل ونصوص التدريب/التقييم لعمليات diffusion/inpainting.
+- 📊 نصوص التقارير والتصور لفحص embedding وسلسلة المعالجة.
+- 📄 مخرجات النشر بصيغ LaTeX/PDF داخل `publication/`.
 
-## بنية المشروع
+## 🧱 هيكل المشروع
 
 ```text
 .
@@ -73,20 +78,20 @@ ILM هو قاعدة شيفرة بحثية تستكشف توليد النص عل�
 └── *.ipynb
 ```
 
-## المتطلبات المسبقة
+## 🧰 المتطلبات المسبقة
 
 | المتطلب | ملاحظات |
 |---|---|
 | Python `3.10+` | بيئة التشغيل الأساسية |
-| `pip` | تثبيت الحزم |
-| GPU اختياري | مفيد لنصوص تدريب PyTorch CUDA |
+| `pip` | لتثبيت الحزم |
+| GPU اختياري | مفيد لبرامج التدريب باستخدام PyTorch CUDA |
 | سلسلة أدوات LaTeX اختيارية | مطلوبة لبناء ملفات النشر |
 
-ملاحظة افتراضية: لا يوجد حاليًا ملف مركزي موحّد لتثبيت الاعتماديات في الجذر (`pyproject.toml` أو `requirements.txt` وما شابه)، لذلك تُستنتج الاعتماديات من الاستيرادات وطريقة استخدام النصوص.
+ملاحظة افتراضية: لا يوجد حاليًا ملف جذر واحد لقفل/تحديد الاعتماديات (`pyproject.toml`, `requirements.txt`, وغيرها)، لذلك تُستنتج الاعتماديات من الاستيرادات واستخدامات السكربتات.
 
-## التثبيت
+## ⚙️ التثبيت
 
-### الحد الأدنى (أدوات الاشتقاقيات)
+### الحد الأدنى (أدوات مسار الأصول)
 
 ```bash
 python -m venv .venv
@@ -95,7 +100,7 @@ pip install --upgrade pip
 pip install requests beautifulsoup4 tornado
 ```
 
-### موسّع (مسارات النمذجة/التدريب)
+### موسع (مسارات النمذجة/التدريب)
 
 ```bash
 python -m venv .venv
@@ -104,13 +109,13 @@ pip install --upgrade pip
 pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
 ```
 
-إذا احتاج نص معين إلى حزم إضافية، ثبّتها وفق رسالة خطأ الاستيراد التي يعرضها ذلك النص.
+إذا احتاج سكربت معيّن حزمًا إضافية، ثبّتها بحسب الخطأ الظاهر في استيراد ذلك السكربت.
 
-## الاستخدام
+## 🚀 الاستخدام
 
-### بدء سريع: إدخال glyph التاريخي (CLI)
+### البدء السريع: استيعاب glyph التاريخية (CLI)
 
-1. Hanziyuan (موصى به): تدفق AJAX خاص بالمحرف فقط
+1. Hanziyuan (موصى به): مسار AJAX للحروف فقط
 
 ```bash
 PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中
@@ -122,7 +127,7 @@ PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中
 PYTHONPATH=. python scripts/ingest_etymology.py --site chineseetymology --url "https://www.chineseetymology.org/CharacterEtymology.aspx?characterInput=%E4%B8%AD"
 ```
 
-3. إدخال دفعي من ملف (الأسطر يمكن أن تكون `char\turl` أو `url` أو `char url`)
+3. استيعاب دفعة من ملف (الأسطر قد تكون `char\turl`, `url`, أو `char url`)
 
 ```bash
 PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
@@ -130,7 +135,7 @@ PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
 
 ### المخرجات
 
-| نوع المخرجات | الموقع |
+| نوع المخرج | الموقع |
 |---|---|
 | الملفات | `data/historic/glyphs/<char>/<stage>/<label>.<ext>` |
 | التخزين المؤقت | `data/historic/cache/*.html` |
@@ -142,20 +147,20 @@ PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
 PYTHONPATH=. python scripts/serve_etymology.py
 ```
 
-افتح `http://127.0.0.1:8888`، اختر الموقع، ثم أدخل محرفًا (مثل `中`).
+افتح `http://127.0.0.1:8888`، واختر الموقع، وأدخل حرفًا (مثل `中`).
 
 ### الزحف المهذب واحترام المواقع
 
-- يستخدم الجالب fetcher تنظيمًا للمعدل لكل مضيف، مع إعادة المحاولة وفق backoff والتخزين المؤقت.
-- اجعل التأخير `>= 0.5s`، وتجنب الدفقات السريعة، واحترم شروط المواقع/robots/التراخيص.
-- لا تتجاوز جدران الدفع أو وسائل الحماية التفاعلية.
-- إذا ظهر `403` أو `429`، خفّض السرعة وأعد المحاولة لاحقًا.
+- يستخدم أداة الجلب تقييد معدل لكل مضيف مع إعادة المحاولة (backoff) والتخزين المؤقت.
+- احرص على فواصل `>= 0.5s`، وتجنب الاندفاع، واطّلع على شروط الموقع/robots/licensing.
+- لا تتجاوز الجدران المدفوعة أو الحواجز التفاعلية.
+- إذا ظهرت `403`/`429`، خفّف السرعة وحاول لاحقًا.
 
-### مسارات ILM إضافية
+### مسارات ILM الإضافية
 
-هذه النصوص موجودة وتُعد جزءًا فعليًا من سطح المستودع، لكنها مسارات بحثية وقد تتطلب مجموعات بيانات/نقاط تحقق محلية مجهّزة مسبقًا.
+توجد هذه السكربتات حالًا ضمن سطح المستودع، لكنها تُعدّ تدفقًا بحثيًا وقد تتطلب مجموعات بيانات/نقاط تفتيش محضّرة محليًا.
 
-1. تنزيل/تهيئة البيانات
+1. تنزيل/إعداد البيانات
 
 ```bash
 python scripts/download_alpaca.py --outdir data/raw
@@ -164,14 +169,14 @@ python scripts/sample_paragraphs.py --out data/processed/test_100.jsonl
 python scripts/build_images_common_freq.py --out data/processed/images_common_freq --size 128 --en 5000 --zh 5000
 ```
 
-2. دورة حياة Glyph DB
+2. دورة حياة قاعدة glyph DB
 
 ```bash
 python scripts/glyphdb_init.py --db data/glyphdb/glyphs.sqlite3
 python scripts/glyphdb_ingest_index.py --db data/glyphdb/glyphs.sqlite3 --index data/processed/images_common_freq/index.tsv
 ```
 
-3. تدريب نماذج الكود/اللون
+3. تدريب كود/ألوان النموذج
 
 ```bash
 python scripts/train_color_codes.py --config configs/color.yaml
@@ -179,7 +184,7 @@ python scripts/train_codes_from_qa.py --en-json data/raw/alpaca_en.json --zh-jso
 python scripts/train_ilmglyph_codes.py --en data/raw/alpaca_en.json --zh data/raw/alpaca_zh.json --out artifacts/ilm_glyph_train
 ```
 
-4. الانتشار/الاستكمال inpainting
+4. diffusion/inpainting
 
 ```bash
 python scripts/train_diffusion.py --config configs/diffusion.yaml
@@ -195,23 +200,23 @@ python scripts/eval_qa_retrieval.py --checkpoint artifacts/color_codes_qa.pt
 python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt_epoch1.pt --lang en --text "hello world"
 ```
 
-## الإعدادات
+## 🧩 الإعدادات
 
-ملفات YAML الأساسية:
+إعدادات YAML الأساسية:
 
 - `configs/color.yaml`
   - مسار البيانات: `data/processed/images_common_freq/index.tsv`
-  - معاملات النموذج/الكود: `d_glyph` و `d_code` و `K` و `C` و temperature/anneal
-  - إعدادات optimizer/log
+  - معاملات النموذج/الكود: `d_glyph`، `d_code`، `K`، `C`، temperature/anneal
+  - إعدادات المحسن/السجلات
 
 - `configs/diffusion.yaml`
   - JSONL الإدخال: `data/processed/test_100.jsonl`
-  - إعدادات حجم الإطار/الشبكة وحجم النموذج
-  - نطاق نسبة القناع أثناء التدريب وإعدادات نقاط التحقق
+  - إعدادات الشبكة/الإطار/النموذج
+  - نطاق نسبة القناع أثناء التدريب وإعدادات نقاط التفتيش
 
-يمكن تجاوز الإعدادات عبر وسائط CLI حيثما كان ذلك مدعومًا (`--epochs` و `--batch-size` و `--lr` وغيرها).
+يمكن تجاوز الإعدادات عبر أعلام سطر الأوامر حيث يدعم ذلك (`--epochs`, `--batch-size`, `--lr`, ...).
 
-## أمثلة
+## 🧪 أمثلة
 
 - بناء glyph بلاطة إنجليزية واحدة:
 
@@ -219,7 +224,7 @@ python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt
 python scripts/build_english_tile_glyph.py "language" artifacts/language_tile --save-tensor
 ```
 
-- تشغيل عرض inpainting تجريبي باستخدام نقاط تحقق مدرَّبة:
+- تشغيل عرض inpainting باستخدام نقاط تفتيش مدربة:
 
 ```bash
 python scripts/inpaint_demo.py \
@@ -231,61 +236,33 @@ python scripts/inpaint_demo.py \
   --out artifacts/inpaint_demo
 ```
 
-- إدخال دفعي لمحارف شائعة من Hanziyuan:
+- استيعاب جماعي للأحرف الشائعة من Hanziyuan:
 
 ```bash
 PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 ```
 
-## ملاحظات التطوير
+## 📝 ملاحظات التطوير
 
-- هذا مستودع بحثي يجمع بين أدوات CLI متينة ومخرجات استكشافية (بما فيها دفاتر ملاحظات ونصوص أولية).
-- الملفات الكبيرة المتولدة مخصصة لمساري `data/` و `artifacts/` (وكلاهما متجاهل في `.gitignore`).
-- مصادر النشر وملفات PDF تقع ضمن `publication/`، مع نص بناء مساعد: `scripts/latex_build.sh`.
-- أعراف التعاون/العملية موثقة في `AGENTS.md`.
+- هذا مستودع بحثي يجمع بين أدوات CLI المتماسكة والمواد الاستكشافية (بما في ذلك notebooks و prototype scripts).
+- الملفات الكبيرة الناتجة تُوجّه إلى `data/` و`artifacts/` (كلاهما مُستثنى في `.gitignore`).
+- مصادر وملفات النشر تكون داخل `publication/`؛ سكربت البناء المساعد: `scripts/latex_build.sh`.
+- عادات التعاون/العمليات موثقة في `AGENTS.md`.
 
-## استكشاف الأعطال وإصلاحها
+## 🛠️ استكشاف الأخطاء وإصلاحها
 
 - `ModuleNotFoundError: ilm...`
-  - شغّل النصوص من جذر المستودع.
-  - استخدم `PYTHONPATH=.` للنصوص التي تتوقع حل الحزم محليًا.
+  - نفّذ السكربتات من جذر المستودع.
+  - استخدم `PYTHONPATH=.` للسكربتات التي تتطلب حلًا محليًا للحزم.
 
-- `FileNotFoundError` لبيانات/فهرس/نقاط تحقق
-  - شغّل نصوص البيانات/البناء المطلوبة أولًا.
-  - تأكد من وجود المسارات الافتراضية مثل `data/processed/images_common_freq/index.tsv` و `data/processed/test_100.jsonl`.
+- `FileNotFoundError` لملفات البيانات/الفهارس/نقاط التفتيش
+  - شغّل سكربتات البيانات/البناء التمهيدي أولًا.
+  - تأكد من وجود المسارات الافتراضية مثل `data/processed/images_common_freq/index.tsv` و`data/processed/test_100.jsonl`.
 
-- مشكلات CUDA/الجهاز
-  - انتقل إلى CPU عبر أعلام النص أو الإعداد (`device: cpu` أو `--device cpu`).
 
-- أخطاء حزم مفقودة
-  - ثبّت الاعتمادية المطلوبة وفق مسار الاستيراد في النص المحدد (`torch` أو `pyyaml` أو `Pillow` وغيرها).
 
-- HTTP `403` / `429` أثناء الكشط
-  - زِد `--delay`، وأعد المحاولة لاحقًا، وحافظ على طلبات مهذبة.
+## ❤️ Support
 
-## خارطة الطريق
-
-- مواصلة تطوير أدلة التشغيل للتدريب/التقييم في ILM المعتمد على النص كصورة، بما يتجاوز البدء السريع المرتكز على الاشتقاقيات.
-- تحسين قابلية إعادة إنتاج البيئة (مواصفة اعتماديات موحدة ومرجعية واحدة).
-- توسيع تغطية الاختبارات/التكامل المستمر لنصوص البحث وروابط خطوط المعالجة.
-- التكرار على دفاتر الأكواد الهرمية، وأهداف الانتشار، وقنوات التحكم.
-- توحيد التوثيق بين `docs/` ونصوص المساعدة ومخرجات النشر.
-
-للتفاصيل المفاهيمية الأعمق وخطط المراحل، راجع:
-
-- `docs/imagized-language-model.md`
-- `docs/ilm-visual-diffusion-code-plan.md`
-- `docs/development-plan.md`
-
-## المساهمة
-
-- اتبع `AGENTS.md` فيما يخص الأعراف (commits ذرية، push بعد التغيير، وعدم تضمين بيانات اعتماد في الشيفرة).
-- اجمع التعديلات المرتبطة ضمن commits مركزة برسائل تقليدية.
-- فضّل أوامر نصوص قابلة لإعادة الإنتاج مع أعلام واضحة ومسارات دخل صريحة.
-- في التعديلات المتعلقة بالكشط، حافظ على سلوك تقليل المعدل/التخزين المؤقت وضوابط احترام المواقع.
-
-## الترخيص
-
-لا يوجد حاليًا ملف ترخيص على مستوى الجذر في هذا المستودع.
-
-ملاحظة افتراضية: يُتعامل مع المشروع ككود بحثي بترخيص غير محدد حتى يضيف المشرفون ملف `LICENSE`.
+| Donate | PayPal | Stripe |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

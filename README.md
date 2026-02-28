@@ -1,26 +1,31 @@
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-# Imagized Language Model (ILM)
 
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+# Imagized Language Model (ILM)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
 ![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
+![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM is a research codebase exploring text-as-image generation: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
+ILM is a research codebase exploring **text-as-image generation**: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
 
-## Overview
+> The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
 
-This repository currently includes two major practical tracks:
+## 📌 Overview
+
+This repository has two active tracks:
 
 1. Historic Chinese glyph etymology ingestion (scraping/parsing/storage/preview).
-2. ILM glyph/image modeling experiments (token glyph rendering, product codebooks, frame packing, diffusion/inpainting, evaluation/reporting).
+2. ILM glyph/image modeling experiments (token glyph rendering, codebooks, frame packing, diffusion/inpainting, evaluation/reporting).
 
-The current README in this repo has historically centered on the etymology toolkit. That workflow remains fully documented below and is preserved as canonical.
+This README also documents both tracks and keeps the etymology workflow as a first-class, reproducible path.
 
-## Key Links
+## 🔗 Key Links
 
 | Area | Path |
 |---|---|
@@ -30,7 +35,7 @@ The current README in this repo has historically centered on the etymology toolk
 | Development notes/plan | `docs/development-plan.md` |
 | Etymology module readme | `ilm/etymology/README.md` |
 
-## Features
+## ✨ Features
 
 - 🏺 Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
 - 🌐 Robust AJAX + HTML ingestion path with retries, throttling, and cache.
@@ -43,7 +48,7 @@ The current README in this repo has historically centered on the etymology toolk
 - 📊 Reporting and visualization scripts for embedding and pipeline inspection.
 - 📄 Publication artifacts in LaTeX/PDF under `publication/`.
 
-## Project Structure
+## 🧱 Project Structure
 
 ```text
 .
@@ -73,7 +78,7 @@ The current README in this repo has historically centered on the etymology toolk
 └── *.ipynb
 ```
 
-## Prerequisites
+## 🧰 Prerequisites
 
 | Requirement | Notes |
 |---|---|
@@ -84,7 +89,7 @@ The current README in this repo has historically centered on the etymology toolk
 
 Assumption note: there is currently no single root dependency lock/spec file (`pyproject.toml`, `requirements.txt`, etc.), so dependencies are inferred from imports and script usage.
 
-## Installation
+## ⚙️ Installation
 
 ### Minimal (etymology toolkit)
 
@@ -106,7 +111,7 @@ pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
 
 If a specific script needs additional packages, install them from the import error shown by that script.
 
-## Usage
+## 🚀 Usage
 
 ### Quick Start: Historic Glyph Ingestion (CLI)
 
@@ -195,7 +200,7 @@ python scripts/eval_qa_retrieval.py --checkpoint artifacts/color_codes_qa.pt
 python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt_epoch1.pt --lang en --text "hello world"
 ```
 
-## Configuration
+## 🧩 Configuration
 
 Primary YAML configs:
 
@@ -211,7 +216,7 @@ Primary YAML configs:
 
 Override settings via CLI flags where supported (`--epochs`, `--batch-size`, `--lr`, etc.).
 
-## Examples
+## 🧪 Examples
 
 - Build a single English tile glyph:
 
@@ -237,14 +242,14 @@ python scripts/inpaint_demo.py \
 PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 ```
 
-## Development Notes
+## 📝 Development Notes
 
 - This is a research repository with both robust CLIs and exploratory artifacts (including notebooks and prototype scripts).
 - Generated large files are intended for `data/` and `artifacts/` (both ignored in `.gitignore`).
 - Publication source and PDFs are under `publication/`; helper build script: `scripts/latex_build.sh`.
 - Collaboration/process conventions are documented in `AGENTS.md`.
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 - `ModuleNotFoundError: ilm...`
   - Run scripts from repo root.
@@ -263,7 +268,7 @@ PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 - HTTP `403` / `429` while scraping
   - Increase `--delay`, retry later, and keep requests polite.
 
-## Roadmap
+## 🗺️ Roadmap
 
 - Continue maturing the text-as-image ILM training/eval runbooks beyond the etymology-first quick start.
 - Improve environment reproducibility (single authoritative dependency spec).
@@ -277,14 +282,20 @@ For deeper conceptual and staged planning details, see:
 - `docs/ilm-visual-diffusion-code-plan.md`
 - `docs/development-plan.md`
 
-## Contributing
+## 🤝 Contributing
 
 - Follow `AGENTS.md` for conventions (atomic commits, push after change, no credentials in code).
 - Group related edits in focused commits with conventional messages.
 - Prefer reproducible script invocations with explicit flags and input paths.
 - For scraping-related changes, preserve throttling/cache behavior and site-respect constraints.
 
-## License
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
+
+## 📄 License
 
 No top-level license file is currently present in this repository.
 

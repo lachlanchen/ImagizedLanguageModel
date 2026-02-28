@@ -1,26 +1,31 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-# Imagized Language Model (ILM)
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+# Modelo de Lenguaje Imaginizado (ILM)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
 ![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
+![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM es una base de código de investigación que explora la generación de texto como imagen: codifica el lenguaje en tensores compactos, similares a imágenes, y genera texto mediante refinamiento iterativo de estilo difusión. La representación factoriza las oraciones en meta-elementos (gramática, semántica, tono, emoción) y en códigos jerárquicos tipo memoria para palabras y caracteres. Esto unifica ideas de difusión discreta, superposición/desentrelazado, embeddings estructurados y modelado de caracteres con conciencia de glifos.
+ILM es una base de código de investigación que explora la **generación de texto como imagen**: codifica el idioma en tensores compactos, similares a imágenes, y genera texto mediante refinamiento iterativo de estilo difusión. La representación descompone las frases en metaelementos (gramática, semántica, tono, emoción) y en códigos jerárquicos tipo memoria para palabras y caracteres. Esto unifica ideas de difusión discreta, superposición/desentrelazado, embeddings estructurados y modelado de caracteres con conciencia de glifos.
 
-## Descripción General
+> El repositorio mantiene de forma deliberada un pipeline práctico de etimología y experimentación ILM a largo plazo lado a lado.
 
-Actualmente, este repositorio incluye dos líneas prácticas principales:
+## 📌 Visión general
 
-1. Ingesta de etimología de glifos del chino histórico (scraping/parsing/almacenamiento/visualización).
-2. Experimentos de modelado de glifos/imágenes de ILM (renderizado de glifos de tokens, codebooks de producto, empaquetado de frames, difusión/inpainting, evaluación/reportes).
+Este repositorio tiene dos líneas activas:
 
-El README actual de este repositorio se ha centrado históricamente en el toolkit de etimología. Ese flujo de trabajo sigue completamente documentado abajo y se conserva como canónico.
+1. Ingesta de etimología de glifos chinos históricos (extracción/análisis/almacenamiento/vista previa).
+2. Experimentos de modelado de imágenes/glifos de ILM (renderizado de glifos de tokens, codebooks, empaquetado de frames, difusión/inpainting, evaluación/reporte).
 
-## Enlaces Clave
+Este README documenta ambas líneas y conserva el flujo de etimología como una ruta reproducible de primera clase.
+
+## 🔗 Enlaces clave
 
 | Área | Ruta |
 |---|---|
@@ -30,20 +35,20 @@ El README actual de este repositorio se ha centrado históricamente en el toolki
 | Notas/plan de desarrollo | `docs/development-plan.md` |
 | README del módulo de etimología | `ilm/etymology/README.md` |
 
-## Funcionalidades
+## ✨ Características
 
-- 🏺 Ingesta etimológica desde fuentes tipo `hanziyuan` y `chineseetymology`.
-- 🌐 Ruta de ingesta robusta AJAX + HTML con reintentos, limitación y caché.
-- 🧩 Extracción de glifos etiquetada por etapa, incluyendo `<img>` y datos URI de `background-image` en CSS.
-- 🗃️ Almacenamiento sobre SQLite para metadatos de caracteres/glifos y disposición de assets en filesystem.
-- 🖥️ UI web con Tornado para ingesta ad-hoc y vista previa en galería.
+- 🏺 Ingesta de etimología desde fuentes tipo `hanziyuan` y `chineseetymology`.
+- 🌐 Ruta de ingesta robusta AJAX + HTML con reintentos, control de ritmo y caché.
+- 🧩 Extracción de glifos marcada por etapas, incluyendo `<img>` y datos URI de `background-image` en CSS.
+- 🗃️ Almacenamiento en SQLite para metadatos de caracteres/glifos y organización de recursos en el sistema de archivos.
+- 🖥️ UI web con Tornado para ingesta ad hoc y vista previa de galería.
 - 🔤 Utilidades de renderizado de glifos para imágenes de tokens multilingües.
-- 🧠 Módulos de embedding/codebook estilo product-code.
-- 🧱 Scripts de entrenamiento/evaluación para empaquetado de frames de oraciones y difusión/inpainting.
-- 📊 Scripts de reportes y visualización para inspección de embeddings y del pipeline.
-- 📄 Artefactos de publicación en LaTeX/PDF bajo `publication/`.
+- 🧠 Módulos de embedding/codebook con estilo de código de producto.
+- 🧱 Scripts de entrenamiento/evaluación de empaquetado de frames de frases y difusión/inpainting.
+- 📊 Scripts de reporte y visualización para inspección de embeddings y del pipeline.
+- 📄 Artefactos de publicación en LaTeX/PDF en `publication/`.
 
-## Estructura del Proyecto
+## 🧱 Estructura del proyecto
 
 ```text
 .
@@ -73,20 +78,20 @@ El README actual de este repositorio se ha centrado históricamente en el toolki
 └── *.ipynb
 ```
 
-## Requisitos Previos
+## 🧰 Requisitos previos
 
 | Requisito | Notas |
 |---|---|
 | Python `3.10+` | Runtime principal |
 | `pip` | Instalación de paquetes |
-| GPU opcional | Útil para scripts de entrenamiento CUDA con PyTorch |
-| Toolchain LaTeX opcional | Necesario para builds de publicación |
+| GPU opcional | Útil para scripts de entrenamiento CUDA de PyTorch |
+| Cadena de herramientas LaTeX opcional | Necesaria para builds de publicación |
 
-Nota de supuesto: actualmente no existe un único archivo raíz de bloqueo/especificación de dependencias (`pyproject.toml`, `requirements.txt`, etc.), por lo que las dependencias se infieren de los imports y del uso de scripts.
+Nota de supuestos: actualmente no existe un único archivo raíz de dependencia bloqueada (`pyproject.toml`, `requirements.txt`, etc.), por lo que las dependencias se infieren de los imports y del uso en scripts.
 
-## Instalación
+## ⚙️ Instalación
 
-### Mínima (toolkit de etimología)
+### Mínima (herramientas de etimología)
 
 ```bash
 python -m venv .venv
@@ -104,11 +109,11 @@ pip install --upgrade pip
 pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
 ```
 
-Si un script específico necesita paquetes adicionales, instálalos según el error de importación que muestre ese script.
+Si un script concreto requiere paquetes adicionales, instálalos según el error de importación mostrado por ese script.
 
-## Uso
+## 🚀 Uso
 
-### Inicio Rápido: Ingesta de Glifos Históricos (CLI)
+### Inicio rápido: ingesta de glifos históricos (CLI)
 
 1. Hanziyuan (recomendado): flujo AJAX solo por carácter
 
@@ -122,7 +127,7 @@ PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中
 PYTHONPATH=. python scripts/ingest_etymology.py --site chineseetymology --url "https://www.chineseetymology.org/CharacterEtymology.aspx?characterInput=%E4%B8%AD"
 ```
 
-3. Ingesta por archivo por lotes (las líneas pueden ser `char\turl`, `url` o `char url`)
+3. Ingesta por lotes desde archivo (las líneas pueden ser `char\turl`, `url` o `char url`)
 
 ```bash
 PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
@@ -144,16 +149,16 @@ PYTHONPATH=. python scripts/serve_etymology.py
 
 Abre `http://127.0.0.1:8888`, elige el sitio e introduce un carácter (por ejemplo `中`).
 
-### Crawling Responsable y Respeto del Sitio
+### Crawling cortés y respeto al sitio
 
-- El fetcher usa limitación por host, reintentos con backoff y caché.
-- Mantén demoras `>= 0.5s`, evita ráfagas y respeta términos/robots/licencias del sitio.
-- No eludas paywalls ni protecciones interactivas.
-- Si ves `403`/`429`, reduce la velocidad y reintenta más tarde.
+- El colector usa control de ritmo por host, reintentos con backoff y caché.
+- Mantén retrasos `>= 0.5s`, evita ráfagas y respeta términos/robots/licencias del sitio.
+- No eludas muros de pago ni protecciones interactivas.
+- Si ves `403`/`429`, reduce la frecuencia y vuelve a intentarlo más tarde.
 
-### Flujos de Trabajo ILM Adicionales
+### Flujos adicionales de ILM
 
-Estos scripts existen y forman parte activa de la superficie del repositorio, pero son flujos de investigación y pueden requerir datasets/checkpoints locales preparados.
+Estos scripts existen y forman parte activa del repositorio, pero son flujos de investigación y pueden requerir datasets/checkpoints locales preparados.
 
 1. Descarga/preparación de datos
 
@@ -171,7 +176,7 @@ python scripts/glyphdb_init.py --db data/glyphdb/glyphs.sqlite3
 python scripts/glyphdb_ingest_index.py --db data/glyphdb/glyphs.sqlite3 --index data/processed/images_common_freq/index.tsv
 ```
 
-3. Entrenamiento de modelos de código/color
+3. Entrenamiento de modelos de códigos/color
 
 ```bash
 python scripts/train_color_codes.py --config configs/color.yaml
@@ -195,25 +200,25 @@ python scripts/eval_qa_retrieval.py --checkpoint artifacts/color_codes_qa.pt
 python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt_epoch1.pt --lang en --text "hello world"
 ```
 
-## Configuración
+## 🧩 Configuración
 
-Configs YAML principales:
+Configuración YAML principal:
 
 - `configs/color.yaml`
   - ruta de datos: `data/processed/images_common_freq/index.tsv`
   - parámetros de modelo/código: `d_glyph`, `d_code`, `K`, `C`, temperature/anneal
-  - ajustes de optimizador/log
+  - configuración de optimizador/log
 
 - `configs/diffusion.yaml`
   - JSONL de entrada: `data/processed/test_100.jsonl`
-  - ajustes de tamaño de frame/grid + modelo
-  - rango de máscara de entrenamiento y ajustes de checkpoints
+  - ajustes de marco/cuadrícula + tamaño del modelo
+  - rango de ratio de máscara de entrenamiento y configuración de checkpoints
 
-Sobrescribe ajustes vía flags de CLI donde estén soportados (`--epochs`, `--batch-size`, `--lr`, etc.).
+Sobrescribe la configuración mediante flags CLI donde se soporte (`--epochs`, `--batch-size`, `--lr`, etc.).
 
-## Ejemplos
+## 🧪 Ejemplos
 
-- Construir un solo glifo tile en inglés:
+- Construir un glifo de baldosa en inglés único:
 
 ```bash
 python scripts/build_english_tile_glyph.py "language" artifacts/language_tile --save-tensor
@@ -237,25 +242,62 @@ python scripts/inpaint_demo.py \
 PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 ```
 
-## Notas de Desarrollo
+## 📝 Notas de desarrollo
 
-- Este es un repositorio de investigación con CLIs robustas y artefactos exploratorios (incluyendo notebooks y scripts prototipo).
-- Los archivos grandes generados están pensados para `data/` y `artifacts/` (ambos ignorados en `.gitignore`).
-- El código fuente y los PDFs de publicación están en `publication/`; script auxiliar de build: `scripts/latex_build.sh`.
-- Las convenciones de colaboración/proceso están documentadas en `AGENTS.md`.
+- Este es un repositorio de investigación con CLIs robustos y artefactos exploratorios (incluyendo notebooks y scripts prototipo).
+- Los archivos grandes generados están destinados a `data/` y `artifacts/` (ambos ignorados por `.gitignore`).
+- El código fuente y los PDF de publicación están en `publication/`; script auxiliar de compilación: `scripts/latex_build.sh`.
+- Las convenciones de colaboración y proceso están documentadas en `AGENTS.md`.
 
-## Resolución de Problemas
+## 🛠️ Solución de problemas
 
 - `ModuleNotFoundError: ilm...`
   - Ejecuta los scripts desde la raíz del repositorio.
-  - Usa `PYTHONPATH=.` para scripts que esperan resolución de paquetes locales.
+  - Usa `PYTHONPATH=.` para scripts que esperan resolver paquetes locales.
 
 - `FileNotFoundError` para data/index/checkpoints
-  - Ejecuta primero los scripts previos de datos/build.
+  - Ejecuta primero los scripts de datos/compilación necesarios.
   - Confirma que existan los valores por defecto como `data/processed/images_common_freq/index.tsv` y `data/processed/test_100.jsonl`.
 
 - Problemas de CUDA/dispositivo
   - Cambia a CPU con flags/config del script (`device: cpu` o `--device cpu`).
 
-- Errores por paquetes faltantes
-  - Instala la dependencia requerida desde la ruta de import del script específico (`torch`, `pyyaml`, `Pillow`, etc.).
+- Errores por dependencias faltantes
+  - Instala la dependencia requerida según la ruta de import del script concreto (`torch`, `pyyaml`, `Pillow`, `etc.`).
+
+- HTTP `403` / `429` durante scraping
+  - Incrementa `--delay`, reintenta más tarde y mantén solicitudes corteses.
+
+## 🗺️ Hoja de ruta
+
+- Seguir madurando los runbooks de entrenamiento/evaluación de ILM text-as-image más allá del inicio rápido centrado en etimología.
+- Mejorar la reproducibilidad del entorno (especificación única y autoritativa de dependencias).
+- Expandir pruebas/CI para scripts de investigación y lógica de pipeline.
+- Iterar en codebooks jerárquicos, objetivos de difusión y canales de controlabilidad.
+- Consolidar la documentación entre `docs/`, textos de ayuda de scripts y artefactos de publicación.
+
+Para obtener detalles conceptuales y de planificación por etapas más profundos, consulta:
+
+- `docs/imagized-language-model.md`
+- `docs/ilm-visual-diffusion-code-plan.md`
+- `docs/development-plan.md`
+
+## 🤝 Contribución
+
+- Sigue `AGENTS.md` para las convenciones (commits atómicos, push tras cambios, sin credenciales en el código).
+- Agrupa cambios relacionados en commits enfocados con mensajes convencionales.
+- Prefiere invocaciones de scripts reproducibles con flags e inputs explícitos.
+- Para cambios relacionados con scraping, conserva el comportamiento de throttling/caché y las restricciones de respeto al sitio.
+
+## 📄 Licencia
+
+No existe actualmente un archivo de licencia de nivel superior en este repositorio.
+
+Nota de supuestos: trata el proyecto como código de investigación con licencia no especificada hasta que los mantenedores añadan un archivo `LICENSE`.
+
+
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

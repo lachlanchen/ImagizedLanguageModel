@@ -1,49 +1,54 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
-# Imagized Language Model (ILM)
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+# Imagized-Sprachmodell (ILM)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
 ![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
+![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM ist eine Forschungs-Codebasis, die Text-als-Bild-Generierung untersucht: Sprache wird in kompakte, bildähnliche Tensoren kodiert, und Text wird mit diffusion-ähnlicher iterativer Verfeinerung erzeugt. Die Repräsentation zerlegt Sätze in Meta-Elemente (Grammatik, Semantik, Ton, Emotion) sowie in hierarchische, speicherähnliche Codes für Wörter und Zeichen. Damit werden Ideen aus diskreter Diffusion, Superposition/Entflechtung, strukturierten Embeddings und glyphenbewusstem Zeichenmodellieren zusammengeführt.
+ILM ist eine Forschungscodebasis für **Text-als-Bild-Generierung**: Sie kodiert Sprache in kompakte, bildähnliche Tensoren und erzeugt Text mit iterativer Diffusions-verstärkter Verfeinerung. Die Repräsentation zerlegt Sätze in Meta-Elemente (Grammatik, Semantik, Tonfall, Emotion) sowie hierarchische, speicherartige Codes für Wörter und Zeichen. Das vereint Ideen aus diskreter Diffusion, Superposition/Disentanglement, strukturierten Einbettungen und glyph-bewusster Zeichenerkennung.
 
-## Überblick
+> Das Repository hält bewusst eine praxisnahe Etymologie-Pipeline und ILM-Experimentieren auf lange Sicht nebeneinander.
 
-Dieses Repository enthält derzeit zwei wichtige praktische Schwerpunkte:
+## 📌 Überblick
 
-1. Ingestion historischer chinesischer Glyphen-Etymologie (Scraping/Parsing/Speicherung/Vorschau).
-2. ILM-Glyph/Bild-Modellierungs-Experimente (Token-Glyph-Rendering, Produkt-Codebooks, Frame-Packing, Diffusion/Inpainting, Evaluation/Reporting).
+Dieses Repository verfolgt zwei aktive Pfade:
 
-Das aktuelle README in diesem Repo war historisch auf das Etymologie-Toolkit ausgerichtet. Dieser Workflow bleibt unten vollständig dokumentiert und wird als kanonisch beibehalten.
+1. Historische chinesische Glyphen-Etymologie-Ingestion (Scraping/Parsing/Speicherung/Vorschau).
+2. ILM-Experimente für Glyphen-/Bildmodellierung (Token-Glyph-Rendering, Codebücher, Frame-Packing, Diffusion/Inpainting, Auswertung/Reporting).
 
-## Wichtige Links
+Diese README dokumentiert beide Spuren und hält den Etymologie-Workflow als ersten Klassen-Zweig mit reproduzierbarem Pfad.
+
+## 🔗 Wichtige Links
 
 | Bereich | Pfad |
 |---|---|
-| Konzeptionelle Ausarbeitung | `docs/imagized-language-model.md` |
-| Code-Plan und Metriken | `docs/ilm-visual-diffusion-code-plan.md` |
-| Embedding-"color"-Plan | `docs/embedding-color-plan.md` |
+| Konzeptionelles Exposé | `docs/imagized-language-model.md` |
+| Codeplan und Metriken | `docs/ilm-visual-diffusion-code-plan.md` |
+| Embedding-„Color“-Plan | `docs/embedding-color-plan.md` |
 | Entwicklungsnotizen/-plan | `docs/development-plan.md` |
 | Etymologie-Modul-README | `ilm/etymology/README.md` |
 
-## Funktionen
+## ✨ Funktionen
 
-- 🏺 Etymologie-Ingestion aus `hanziyuan`- und `chineseetymology`-artigen Quellen.
-- 🌐 Robuster AJAX- + HTML-Ingestion-Pfad mit Retries, Throttling und Cache.
-- 🧩 Stage-gelabelte Glyphen-Extraktion inklusive `<img>`- und CSS-`background-image`-Data-URIs.
-- 🗃️ SQLite-basierte Speicherung für Zeichen-/Glyphen-Metadaten plus Dateisystem-Asset-Layout.
-- 🖥️ Tornado-Web-UI für ad-hoc Ingestion + Galerie-Vorschau.
-- 🔤 Glyph-Rendering-Utilities für mehrsprachige Token-Bilder.
-- 🧠 Produkt-Code-Embedding-/Codebook-Module.
-- 🧱 Satz-Frame-Packing- und Diffusion/Inpainting-Training-/Evaluierungsskripte.
-- 📊 Reporting- und Visualisierungsskripte für Embedding- und Pipeline-Inspektion.
-- 📄 Publikationsartefakte in LaTeX/PDF unter `publication/`.
+- 🏺 Etymologie-Ingestion aus `hanziyuan`- und `chineseetymology`-ähnlichen Quellen.
+- 🌐 Robuster AJAX- + HTML-Ingestion-Pfad mit Wiederholungsversuchen, Drosselung und Cache.
+- 🧩 Etappen-etikettierte Glyphen-Extraktion inklusive `<img>`- und CSS-`background-image`-Data-URIs.
+- 🗃️ SQLite-basierte Speicherung für Zeichen-/Glyphen-Metadaten plus Dateisystemstruktur für Assets.
+- 🖥️ Tornado-Web-UI für ad-hoc-Ingestion + Galerievorschau.
+- 🔤 Glyph-Rendering-Werkzeuge für mehrsprachige Token-Bilder.
+- 🧠 Embedding-/Codebook-Module im Stil von Product-Codes.
+- 🧱 Satz-Frame-Packing sowie Diffusions-/Inpainting-Trainings- und Evaluations-Skripte.
+- 📊 Reporting- und Visualisierungs-Skripte für Embeddings und Pipeline-Inspektion.
+- 📄 Veröffentlichungsartefakte in LaTeX/PDF unter `publication/`.
 
-## Projektstruktur
+## 🧱 Projektstruktur
 
 ```text
 .
@@ -73,18 +78,18 @@ Das aktuelle README in diesem Repo war historisch auf das Etymologie-Toolkit aus
 └── *.ipynb
 ```
 
-## Voraussetzungen
+## 🧰 Voraussetzungen
 
 | Anforderung | Hinweise |
 |---|---|
-| Python `3.10+` | Kernlaufzeit |
+| Python `3.10+` | Zentrale Laufzeit |
 | `pip` | Paketinstallation |
-| Optionale GPU | Hilfreich für PyTorch-CUDA-Trainingsskripte |
-| Optionale LaTeX-Toolchain | Erforderlich für Publikations-Builds |
+| Optional GPU | Hilfreich für PyTorch CUDA-Trainingsskripte |
+| Optionaler LaTeX-Stack | Für Publication-Builds erforderlich |
 
-Annahme-Hinweis: Derzeit gibt es keine einzelne root-Abhängigkeitsdatei (`pyproject.toml`, `requirements.txt` usw.), daher werden Abhängigkeiten aus Imports und Skriptnutzung abgeleitet.
+Hinweis zur Annahme: Es gibt momentan keine einzelne zentrale Dependency-Sperre/Spezifikation (`pyproject.toml`, `requirements.txt` usw.), daher werden Abhängigkeiten aus Imports und Skript-Nutzung abgeleitet.
 
-## Installation
+## ⚙️ Installation
 
 ### Minimal (Etymologie-Toolkit)
 
@@ -104,13 +109,13 @@ pip install --upgrade pip
 pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
 ```
 
-Wenn ein bestimmtes Skript zusätzliche Pakete benötigt, installiere sie anhand der vom Skript gemeldeten Import-Fehler.
+Wenn ein bestimmtes Skript zusätzliche Pakete benötigt, installiere diese anhand der konkreten Import-Fehlermeldung des Skripts.
 
-## Nutzung
+## 🚀 Verwendung
 
-### Schnellstart: Ingestion historischer Glyphen (CLI)
+### Schnellstart: Historische Glyphen-Ingestion (CLI)
 
-1. Hanziyuan (empfohlen): char-only AJAX flow
+1. Hanziyuan (empfohlen): Nur-Zeichen-AJAX-Flow
 
 ```bash
 PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中
@@ -122,7 +127,7 @@ PYTHONPATH=. python scripts/ingest_etymology.py --site hanziyuan --char 中
 PYTHONPATH=. python scripts/ingest_etymology.py --site chineseetymology --url "https://www.chineseetymology.org/CharacterEtymology.aspx?characterInput=%E4%B8%AD"
 ```
 
-3. Ingestion aus Batch-Datei (Zeilen können `char\turl`, `url` oder `char url` sein)
+3. Batch-Datei-Ingestion (Zeilen können `char\turl`, `url` oder `char url` sein)
 
 ```bash
 PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
@@ -130,11 +135,11 @@ PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
 
 ### Ausgaben
 
-| Ausgabetyp | Speicherort |
+| Ausgabetyp | Ort |
 |---|---|
 | Dateien | `data/historic/glyphs/<char>/<stage>/<label>.<ext>` |
 | Cache | `data/historic/cache/*.html` |
-| DB | `data/historic/etymology.sqlite3` |
+| Datenbank | `data/historic/etymology.sqlite3` |
 
 ### Web-Demo (optional)
 
@@ -142,20 +147,20 @@ PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
 PYTHONPATH=. python scripts/serve_etymology.py
 ```
 
-Öffne `http://127.0.0.1:8888`, wähle die Seite und gib ein Zeichen ein (zum Beispiel `中`).
+Öffne `http://127.0.0.1:8888`, wähle eine Seite und gib ein Zeichen ein (zum Beispiel `中`).
 
-### Höfliches Crawling und Respekt gegenüber Websites
+### Höfliches Crawling und Rücksicht auf Webseiten
 
-- Der Fetcher nutzt host-spezifisches Throttling, Retries mit Backoff und Caching.
-- Halte Delays bei `>= 0.5s`, vermeide Bursts und beachte Nutzungsbedingungen/robots/Lizenzen.
-- Umgehe keine Paywalls oder interaktive Schutzmechanismen.
-- Bei `403`/`429` langsamer werden und später erneut versuchen.
+- Der Fetcher nutzt pro-Host-Drosselung, Wiederholungsversuche mit Backoff und Caching.
+- Halte Delays von `>= 0.5s` ein, vermeide Bursts und beachte Nutzungsbedingungen/Robots/Lizenz.
+- Umgehe keine Paywalls oder interaktive Schutzmaßnahmen.
+- Bei `403`/`429` langsamer machen und später erneut versuchen.
 
-### Weitere ILM-Workflows
+### Zusätzliche ILM-Workflows
 
-Diese Skripte sind vorhanden und aktiv Teil der Repo-Oberfläche, aber es handelt sich um Forschungs-Workflows, die vorbereitete lokale Datensätze/Checkpoints erfordern können.
+Diese Skripte sind vorhanden und aktiv Teil der Repo-Oberfläche, aber Forschungs-Workflows und können vorbereitete lokale Datensätze/Checkpoints erfordern.
 
-1. Daten-Download/-Vorbereitung
+1. Daten herunterladen/vorbereiten
 
 ```bash
 python scripts/download_alpaca.py --outdir data/raw
@@ -171,7 +176,7 @@ python scripts/glyphdb_init.py --db data/glyphdb/glyphs.sqlite3
 python scripts/glyphdb_ingest_index.py --db data/glyphdb/glyphs.sqlite3 --index data/processed/images_common_freq/index.tsv
 ```
 
-3. Code-/Color-Modell-Training
+3. Code-/Farbmodell-Training
 
 ```bash
 python scripts/train_color_codes.py --config configs/color.yaml
@@ -179,7 +184,7 @@ python scripts/train_codes_from_qa.py --en-json data/raw/alpaca_en.json --zh-jso
 python scripts/train_ilmglyph_codes.py --en data/raw/alpaca_en.json --zh data/raw/alpaca_zh.json --out artifacts/ilm_glyph_train
 ```
 
-4. Diffusion/Inpainting
+4. Diffusions-/Inpainting-Workflows
 
 ```bash
 python scripts/train_diffusion.py --config configs/diffusion.yaml
@@ -195,23 +200,23 @@ python scripts/eval_qa_retrieval.py --checkpoint artifacts/color_codes_qa.pt
 python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt_epoch1.pt --lang en --text "hello world"
 ```
 
-## Konfiguration
+## 🧩 Konfiguration
 
 Primäre YAML-Konfigurationen:
 
 - `configs/color.yaml`
   - Datenpfad: `data/processed/images_common_freq/index.tsv`
-  - Modell-/Code-Parameter: `d_glyph`, `d_code`, `K`, `C`, temperature/anneal
-  - Optimierer-/Log-Einstellungen
+  - Modell/Code-Parameter: `d_glyph`, `d_code`, `K`, `C`, temperature/anneal
+  - Optimizer-/Logging-Einstellungen
 
 - `configs/diffusion.yaml`
-  - Input-JSONL: `data/processed/test_100.jsonl`
-  - Frame/Grid- + Modellgrößen-Einstellungen
-  - Train-Mask-Ratio-Bereich und Checkpoint-Einstellungen
+  - Eingabe-JSONL: `data/processed/test_100.jsonl`
+  - Frame-/Raster- und Modellgrößeneinstellungen
+  - Bereich der Trainings-Maske und Checkpoint-Einstellungen
 
 Überschreibe Einstellungen über CLI-Flags, wo unterstützt (`--epochs`, `--batch-size`, `--lr` usw.).
 
-## Beispiele
+## 🧪 Beispiele
 
 - Erstelle eine einzelne englische Tile-Glyphe:
 
@@ -219,7 +224,7 @@ Primäre YAML-Konfigurationen:
 python scripts/build_english_tile_glyph.py "language" artifacts/language_tile --save-tensor
 ```
 
-- Führe die Inpainting-Demo mit trainierten Checkpoints aus:
+- Inpainting-Demo mit trainierten Checkpoints ausführen:
 
 ```bash
 python scripts/inpaint_demo.py \
@@ -231,61 +236,68 @@ python scripts/inpaint_demo.py \
   --out artifacts/inpaint_demo
 ```
 
-- Bulk-Ingestion häufiger Zeichen aus Hanziyuan:
+- Häufige Zeichen massenhaft aus Hanziyuan ingestieren:
 
 ```bash
 PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 ```
 
-## Entwicklungsnotizen
+## 📝 Entwicklungsnotizen
 
-- Dies ist ein Forschungs-Repository mit robusten CLIs und explorativen Artefakten (einschließlich Notebooks und Prototyp-Skripten).
-- Generierte große Dateien sind für `data/` und `artifacts/` vorgesehen (beide in `.gitignore` ignoriert).
-- Publikationsquellen und PDFs liegen unter `publication/`; Hilfs-Build-Skript: `scripts/latex_build.sh`.
-- Kollaborations-/Prozesskonventionen sind in `AGENTS.md` dokumentiert.
+- Dieses ist ein Forschungs-Repository mit robusten CLIs und explorativen Artefakten (inklusive Notebooks und Prototyp-Skripten).
+- Große erzeugte Dateien sind für `data/` und `artifacts/` vorgesehen (beides ist in `.gitignore` ausgeschlossen).
+- Veröffentlichungssourcen und PDFs liegen unter `publication/`; Hilfsskript: `scripts/latex_build.sh`.
+- Zusammenarbeit/Prozesskonventionen sind in `AGENTS.md` dokumentiert.
 
-## Fehlerbehebung
+## 🛠️ Fehlerbehebung
 
 - `ModuleNotFoundError: ilm...`
-  - Skripte vom Repo-Root aus ausführen.
-  - `PYTHONPATH=.` für Skripte verwenden, die lokale Paketauflösung erwarten.
+  - Führe Skripte vom Repo-Root aus.
+  - Setze `PYTHONPATH=.` für Skripte, die mit lokaler Paketauflösung arbeiten.
 
-- `FileNotFoundError` für Daten/Index/Checkpoints
-  - Zuerst erforderliche Daten-/Build-Skripte ausführen.
-  - Bestätigen, dass Defaults wie `data/processed/images_common_freq/index.tsv` und `data/processed/test_100.jsonl` vorhanden sind.
+- `FileNotFoundError` bei Daten/Index/Checkpoints
+  - Führe zuerst die nötigen Daten-/Build-Skripte aus.
+  - Prüfe, dass Standardpfade wie `data/processed/images_common_freq/index.tsv` und `data/processed/test_100.jsonl` existieren.
 
-- CUDA-/Geräteprobleme
-  - Auf CPU wechseln über Skript-Flags/Konfiguration (`device: cpu` oder `--device cpu`).
+- CUDA/Geräteprobleme
+  - Wechsle mit Skript-Flags/Konfiguration auf CPU (`device: cpu` oder `--device cpu`).
 
 - Fehlende Paketfehler
-  - Erforderliche Abhängigkeit anhand des jeweiligen Skript-Imports installieren (`torch`, `pyyaml`, `Pillow` usw.).
+  - Installiere die benötigte Abhängigkeit aus dem konkreten Importpfad des Skripts (`torch`, `pyyaml`, `Pillow` usw.).
 
-- HTTP-`403` / `429` beim Scraping
-  - `--delay` erhöhen, später erneut versuchen und Anfragen höflich halten.
+- HTTP `403`/`429` beim Scraping
+  - Erhöhe `--delay`, versuche es später erneut und halte Anfragen höflich.
 
-## Roadmap
+## 🗺️ Roadmap
 
-- Die Text-als-Bild-ILM-Trainings-/Eval-Runbooks über den etymologiezentrierten Schnellstart hinaus weiter ausbauen.
-- Reproduzierbarkeit der Umgebung verbessern (eine maßgebliche Abhängigkeits-Spezifikation).
-- Test-/CI-Abdeckung für Forschungs-Skripte und Pipeline-Glue erweitern.
-- Hierarchische Codebooks, Diffusionsziele und Steuerbarkeitskanäle weiterentwickeln.
-- Dokumentation über `docs/`, Skript-Hilfetexte und Publikationsartefakte hinweg konsolidieren.
+- Verfeinere die Text-als-Bild-ILM-Trainings-/Eval-Runbooks über den Etymologie-orientierten Quick-Start hinaus.
+- Verbessere Reproduzierbarkeit der Umgebung (eine einzige autoritative Dependency-Spezifikation).
+- Erweitere Tests/CI-Abdeckung für Forschungsskripte und Pipeline-Klebeschicht.
+- Iteriere weiter bei hierarchischen Codebooks, Diffusionszielen und Kontrollierbarkeitskanälen.
+- Konsolidiere Dokumentation über `docs/`, Skript-Helptexte und Veröffentlichungspakete.
 
-Für tiefergehende konzeptionelle und stufenweise Planungsdetails siehe:
+Für konzeptionell tiefere und stufenweise Planungsdetails siehe:
 
 - `docs/imagized-language-model.md`
 - `docs/ilm-visual-diffusion-code-plan.md`
 - `docs/development-plan.md`
 
-## Mitwirken
+## 🤝 Mitwirken
 
 - Folge `AGENTS.md` für Konventionen (atomare Commits, Push nach Änderungen, keine Zugangsdaten im Code).
-- Verwandte Änderungen in fokussierten Commits mit konventionellen Messages gruppieren.
-- Reproduzierbare Skriptaufrufe mit expliziten Flags und Input-Pfaden bevorzugen.
-- Bei scrapingbezogenen Änderungen Throttling-/Cache-Verhalten und Site-Respect-Constraints beibehalten.
+- Fasse verwandte Änderungen in fokussierten Commits mit konventionellen Nachrichten zusammen.
+- Bevorzuge reproduzierbare Skriptaufrufe mit expliziten Flags und Eingabepfaden.
+- Für Änderungen am Scraping die Drosselung/Cache-Verhalten und Site-Respekt-Kontrollen unverändert erhalten.
 
-## Lizenz
+## 📄 Lizenz
 
-In diesem Repository ist derzeit keine top-level Lizenzdatei vorhanden.
+Eine Top-level-Lizenzdatei ist derzeit im Repository nicht vorhanden.
 
-Annahme-Hinweis: Das Projekt als Forschungscode mit nicht spezifizierter Lizenz behandeln, bis eine `LICENSE`-Datei von den Maintainers hinzugefügt wird.
+Annahmehinweis: Betrachte das Projekt bis zum Hinzufügen einer `LICENSE` durch die Maintainer als Forschungs-Code mit nicht spezifizierter Lizenzierung.
+
+
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |

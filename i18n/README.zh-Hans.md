@@ -1,6 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
 # Imagized Language Model (ILM)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
@@ -8,42 +10,45 @@
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
 ![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
+![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM 是一个研究型代码库，探索“将文本视作图像生成”的方法：它将语言编码为紧凑、类图像的张量，并通过扩散式迭代细化来生成文本。该表示会将句子分解为元要素（语法、语义、语气、情绪），以及面向词和字符的分层、类记忆编码。它统一了离散扩散、叠加/解耦、结构化嵌入与字形感知字符建模等思路。
+ILM 是一个研究代码库，探索**文字即影像（text-as-image）生成**：它将语言编码为紧凑的类影像张量，并通过类扩散（diffusion）的迭代细化方式生成文本。该表征把句子拆解为元元素（语法、语义、语气、情绪）以及具有层级结构、类记忆特征的词汇与字符码。它融合了离散 diffusion、superposition/disentanglement、结构化 embedding，以及字形感知的字符建模思路。
 
-## 概览
+> 该仓库有意将可复现的语源流程与面向长跨度的 ILM 实验并置。
 
-当前仓库包含两条主要的实践路线：
+## 📌 概览
 
-1. 历史汉字字形词源数据摄取（抓取/解析/存储/预览）。
-2. ILM 字形/图像建模实验（token 字形渲染、乘积码本、帧打包、扩散/修补、评估/报告）。
+该仓库目前有两条并行的主线：
 
-本仓库当前 README 在历史上以词源工具链为中心。该工作流在下文仍完整保留并作为规范基线。
+1. 历史中文字形语源数据摄取（爬取/解析/存储/预览）。
+2. ILM 字形/图像建模实验（token 字形渲染、码本、frame 打包、diffusion/inpainting、评估与报告）。
 
-## 关键链接
+本 README 同时记录这两条主线，并将语源流程作为一等公民、可复现的路线保留。
 
-| 领域 | 路径 |
+## 🔗 关键链接
+
+| 区域 | 路径 |
 |---|---|
-| 概念说明文档 | `docs/imagized-language-model.md` |
+| 概念文档 | `docs/imagized-language-model.md` |
 | 代码计划与指标 | `docs/ilm-visual-diffusion-code-plan.md` |
-| 嵌入“颜色”计划 | `docs/embedding-color-plan.md` |
-| 开发笔记/计划 | `docs/development-plan.md` |
-| 词源模块说明 | `ilm/etymology/README.md` |
+| Embedding "color" 计划 | `docs/embedding-color-plan.md` |
+| 开发说明/计划 | `docs/development-plan.md` |
+| 语源模块 readme | `ilm/etymology/README.md` |
 
-## 功能特性
+## ✨ 特性
 
-- 🏺 从 `hanziyuan` 与 `chineseetymology` 风格来源摄取词源数据。
-- 🌐 稳健的 AJAX + HTML 摄取路径，包含重试、限速与缓存。
-- 🧩 带阶段标签的字形提取，支持 `<img>` 与 CSS `background-image` 的 data URI。
-- 🗃️ 基于 SQLite 存储字符/字形元数据，并配套文件系统资源布局。
-- 🖥️ 基于 Tornado 的 Web UI，用于临时摄取与图库预览。
-- 🔤 用于多语言 token 图像的字形渲染工具。
-- 🧠 乘积码风格的嵌入/码本模块。
-- 🧱 句子帧打包与扩散/修补训练、评估脚本。
-- 📊 用于嵌入与流水线检查的报告和可视化脚本。
-- 📄 `publication/` 下的 LaTeX/PDF 论文产物。
+- 🏺 来自 `hanziyuan` 与 `chineseetymology` 风格来源的语源数据摄取。
+- 🌐 稳健的 AJAX + HTML 摄取流程，带有重试、节流与缓存。
+- 🧩 分阶段标注的字形提取，包含 `<img>` 与 CSS `background-image` data URI。
+- 🗃️ SQLite 支持的字符/字形元数据存储，以及文件系统资源布局。
+- 🖥️ Tornado Web UI，可进行临时摄取与图库预览。
+- 🔤 多语言 token 图像的字形渲染工具。
+- 🧠 Product-code 风格的 embedding/码本模块。
+- 🧱 句子 frame 打包与 diffusion/inpainting 训练与评估脚本。
+- 📊 嵌入与流程检查的报告与可视化脚本。
+- 📄 `publication/` 下的 LaTeX/PDF 发布素材。
 
-## 项目结构
+## 🧱 项目结构
 
 ```text
 .
@@ -73,20 +78,20 @@ ILM 是一个研究型代码库，探索“将文本视作图像生成”的方�
 └── *.ipynb
 ```
 
-## 前置要求
+## 🧰 先决条件
 
 | 要求 | 说明 |
 |---|---|
-| Python `3.10+` | 核心运行环境 |
-| `pip` | 包安装工具 |
-| 可选 GPU | 对 PyTorch CUDA 训练脚本有帮助 |
-| 可选 LaTeX 工具链 | 构建论文产物所需 |
+| Python `3.10+` | 核心运行时 |
+| `pip` | 安装依赖 |
+| 可选 GPU | 有助于运行 PyTorch CUDA 训练脚本 |
+| 可选 LaTeX 工具链 | 用于构建发布物 |
 
-假设说明：当前仓库根目录暂无统一依赖锁定/规范文件（`pyproject.toml`、`requirements.txt` 等），因此依赖主要从导入项与脚本用法推断。
+假设说明：目前尚无单一的根级依赖锁定/规范文件（如 `pyproject.toml`、`requirements.txt` 等），因此依赖关系需根据 import 和脚本使用推断。
 
-## 安装
+## ⚙️ 安装
 
-### 最小安装（词源工具链）
+### 最小安装（语源工具链）
 
 ```bash
 python -m venv .venv
@@ -104,11 +109,11 @@ pip install --upgrade pip
 pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
 ```
 
-如果某个脚本需要额外包，请根据该脚本报出的 import 错误进行安装。
+若某个具体脚本需要额外依赖，请按该脚本报出的导入错误逐一安装。
 
-## 使用
+## 🚀 使用方式
 
-### 快速开始：历史字形词源摄取（CLI）
+### 快速开始：历史字形摄取（CLI）
 
 1. Hanziyuan（推荐）：仅字符 AJAX 流程
 
@@ -144,18 +149,18 @@ PYTHONPATH=. python scripts/serve_etymology.py
 
 打开 `http://127.0.0.1:8888`，选择站点并输入一个字符（例如 `中`）。
 
-### 礼貌抓取与站点尊重
+### 礼貌抓取与站点约束
 
-- 抓取器使用按主机限速、带退避的重试和缓存。
-- 保持延迟 `>= 0.5s`，避免突发请求，并遵守站点条款/robots/许可证。
-- 不要绕过付费墙或交互式防护。
-- 如遇 `403`/`429`，请放慢速度并稍后重试。
+- 抓取器使用按主机节流、带退避重试与缓存。
+- 保持延迟 `>= 0.5s`，避免突发请求，并遵守站点条款/robots/授权约束。
+- 不要绕过付费墙或交互式保护。
+- 如果你看到 `403`/`429`，请放慢速率后稍后重试。
 
-### 其他 ILM 工作流
+### 额外的 ILM 工作流
 
-这些脚本已存在并且是仓库活跃功能面的一部分，但它们属于研究工作流，可能需要预先准备本地数据集/检查点。
+这些脚本均已存在并是仓库可见面向研究的流程的一部分，但它们是研究流程，可能需要本地预先准备的数据集/检查点。
 
-1. 数据下载/预处理
+1. 数据下载与预处理
 
 ```bash
 python scripts/download_alpaca.py --outdir data/raw
@@ -171,7 +176,7 @@ python scripts/glyphdb_init.py --db data/glyphdb/glyphs.sqlite3
 python scripts/glyphdb_ingest_index.py --db data/glyphdb/glyphs.sqlite3 --index data/processed/images_common_freq/index.tsv
 ```
 
-3. 码/颜色模型训练
+3. Code/color 模型训练
 
 ```bash
 python scripts/train_color_codes.py --config configs/color.yaml
@@ -179,14 +184,14 @@ python scripts/train_codes_from_qa.py --en-json data/raw/alpaca_en.json --zh-jso
 python scripts/train_ilmglyph_codes.py --en data/raw/alpaca_en.json --zh data/raw/alpaca_zh.json --out artifacts/ilm_glyph_train
 ```
 
-4. 扩散/修补
+4. Diffusion/inpainting
 
 ```bash
 python scripts/train_diffusion.py --config configs/diffusion.yaml
 python scripts/train_inpaint_frames.py --ckpt-code artifacts/ilm_glyph_train/ckpt_epoch1.pt --out artifacts/inpaint
 ```
 
-5. 评估/报告
+5. 评估与报告
 
 ```bash
 python scripts/eval_color_codes.py --checkpoint artifacts/color_codes_e1.pt
@@ -195,31 +200,31 @@ python scripts/eval_qa_retrieval.py --checkpoint artifacts/color_codes_qa.pt
 python scripts/report_ilmglyph_pipeline.py --ckpt artifacts/ilm_glyph_train/ckpt_epoch1.pt --lang en --text "hello world"
 ```
 
-## 配置
+## 🧩 配置
 
-主要 YAML 配置：
+主要 YAML 配置文件：
 
 - `configs/color.yaml`
   - 数据路径：`data/processed/images_common_freq/index.tsv`
-  - 模型/编码参数：`d_glyph`、`d_code`、`K`、`C`、temperature/anneal
-  - 优化器/日志设置
+  - 模型/code 参数：`d_glyph`、`d_code`、`K`、`C`、temperature/anneal
+  - optimizer/log 设置
 
 - `configs/diffusion.yaml`
   - 输入 JSONL：`data/processed/test_100.jsonl`
-  - 帧/网格与模型尺寸设置
-  - 训练掩码比例范围与检查点设置
+  - frame/grid 与模型规模设置
+  - 训练掩码比例范围与 checkpoint 设置
 
-在支持的情况下，可通过 CLI 参数覆盖设置（`--epochs`、`--batch-size`、`--lr` 等）。
+在支持的情况下，可用 CLI 标志覆盖配置（如 `--epochs`、`--batch-size`、`--lr`）。
 
-## 示例
+## 🧪 示例
 
-- 构建单个英文 tile 字形：
+- 构建单个英语 tile 字形：
 
 ```bash
 python scripts/build_english_tile_glyph.py "language" artifacts/language_tile --save-tensor
 ```
 
-- 使用已训练检查点运行修补演示：
+- 使用训练完成的检查点运行 inpainting 演示：
 
 ```bash
 python scripts/inpaint_demo.py \
@@ -231,61 +236,68 @@ python scripts/inpaint_demo.py \
   --out artifacts/inpaint_demo
 ```
 
-- 从 Hanziyuan 批量摄取常用字：
+- 从 Hanziyuan 批量摄取常见字符：
 
 ```bash
 PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 ```
 
-## 开发说明
+## 📝 开发备注
 
-- 这是一个研究型仓库，既包含稳健的 CLI，也包含探索性产物（包括 notebooks 和原型脚本）。
-- 生成的大文件建议放在 `data/` 与 `artifacts/`（两者均在 `.gitignore` 中忽略）。
-- 论文源文件与 PDF 位于 `publication/`；辅助构建脚本：`scripts/latex_build.sh`。
-- 协作/流程约定记录在 `AGENTS.md`。
+- 这是一个研究型仓库，同时包含稳健 CLI 与探索性成果（包括 notebook 与原型脚本）。
+- 大文件输出应写入 `data/` 和 `artifacts/`（二者均在 `.gitignore` 中）。
+- 发布源码与 PDF 位于 `publication/`；辅助构建脚本为 `scripts/latex_build.sh`。
+- 协作与流程约定记录在 `AGENTS.md`。
 
-## 故障排查
+## 🛠️ 故障排查
 
 - `ModuleNotFoundError: ilm...`
   - 从仓库根目录运行脚本。
   - 对需要本地包解析的脚本使用 `PYTHONPATH=.`。
 
-- 数据/索引/检查点 `FileNotFoundError`
-  - 先运行前置数据/构建脚本。
-  - 确认默认路径（如 `data/processed/images_common_freq/index.tsv` 和 `data/processed/test_100.jsonl`）存在。
+- 数据/index/checkpoints 的 `FileNotFoundError`
+  - 先运行前置的数据/构建脚本。
+  - 确认默认项存在，例如 `data/processed/images_common_freq/index.tsv` 与 `data/processed/test_100.jsonl`。
 
 - CUDA/设备问题
-  - 通过脚本参数/配置切换到 CPU（`device: cpu` 或 `--device cpu`）。
+  - 用脚本参数/配置改为 CPU（`device: cpu` 或 `--device cpu`）。
 
-- 缺少包错误
-  - 按具体脚本的 import 路径安装所需依赖（`torch`、`pyyaml`、`Pillow` 等）。
+- 缺少依赖错误
+  - 按照具体脚本的 import 路径安装所需依赖（`torch`、`pyyaml`、`Pillow` 等）。
 
 - 抓取时出现 HTTP `403` / `429`
-  - 增大 `--delay`、稍后重试，并保持请求礼貌。
+  - 提高 `--delay`，稍后重试，并保持抓取行为礼貌。
 
-## 路线图
+## 🗺️ 路线图
 
-- 在词源优先的快速开始之外，继续完善 text-as-image ILM 训练/评估操作手册。
-- 提升环境可复现性（单一权威依赖规范）。
-- 扩展研究脚本与流水线胶水代码的测试/CI 覆盖率。
-- 迭代分层码本、扩散目标与可控性通道。
-- 统一 `docs/`、脚本帮助文本与论文产物之间的文档。
+- 在语源优先快速起步之外，继续完善 text-as-image ILM 的训练/评估 runbook。
+- 改进环境可复现性（统一、权威的依赖规范）。
+- 扩展研究脚本与 pipeline glue 的测试/CI 覆盖。
+- 在分层码本、diffusion 目标与可控通道上持续迭代。
+- 统一 `docs/`、脚本帮助文本与发布素材中的文档。
 
-更多概念与分阶段规划细节，请参见：
+更深入的概念与分阶段规划细节可参见：
 
 - `docs/imagized-language-model.md`
 - `docs/ilm-visual-diffusion-code-plan.md`
 - `docs/development-plan.md`
 
-## 贡献
+## 🤝 贡献
 
-- 请遵循 `AGENTS.md` 中的约定（原子提交、修改后推送、代码中不包含凭据）。
-- 将相关改动分组为聚焦提交，并使用约定式提交消息。
-- 优先使用带显式参数和输入路径、可复现的脚本调用方式。
-- 对抓取相关改动，请保留限速/缓存行为和站点尊重约束。
+- 按 `AGENTS.md` 的约定执行（原子提交、变更后推送、代码中不包含凭证）。
+- 将相关修改聚合为聚焦提交，并使用规范化提交信息。
+- 优先使用可复现的脚本调用，明确传入标志和输入路径。
+- 进行抓取相关修改时，保留节流/缓存行为及站点尊重约束。
 
-## 许可证
+## 📄 许可证
 
-当前仓库顶层尚不存在许可证文件。
+仓库当前未包含顶层许可证文件。
 
-假设说明：在维护者添加 `LICENSE` 文件前，请将本项目视为许可证未指定的研究代码。
+假设说明：在维护者添加 `LICENSE` 文件前，请将该项目按未明确指定许可证的研究代码对待。
+
+
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
