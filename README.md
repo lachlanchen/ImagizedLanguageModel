@@ -2,9 +2,11 @@
 
 Language: English | [简体中文](i18n/README.zh-Hans.md) | [繁體中文](i18n/README.zh-Hant.md) | [日本語](i18n/README.ja.md) | [한국어](i18n/README.ko.md) | [Tiếng Việt](i18n/README.vi.md) | [العربية](i18n/README.ar.md) | [Français](i18n/README.fr.md) | [Español](i18n/README.es.md)
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
-![Repo](https://img.shields.io/badge/focus-text--as--image-informational)
+![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
+![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 
 ILM is a research codebase exploring text-as-image generation: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
 
@@ -19,24 +21,26 @@ The current README in this repo has historically centered on the etymology toolk
 
 ## Key Links
 
-- Conceptual write-up: `docs/imagized-language-model.md`
-- Code plan and metrics: `docs/ilm-visual-diffusion-code-plan.md`
-- Embedding "color" plan: `docs/embedding-color-plan.md`
-- Development notes/plan: `docs/development-plan.md`
-- Etymology module readme: `ilm/etymology/README.md`
+| Area | Path |
+|---|---|
+| Conceptual write-up | `docs/imagized-language-model.md` |
+| Code plan and metrics | `docs/ilm-visual-diffusion-code-plan.md` |
+| Embedding "color" plan | `docs/embedding-color-plan.md` |
+| Development notes/plan | `docs/development-plan.md` |
+| Etymology module readme | `ilm/etymology/README.md` |
 
 ## Features
 
-- Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
-- Robust AJAX + HTML ingestion path with retries, throttling, and cache.
-- Stage-labeled glyph extraction including `<img>` and CSS `background-image` data URIs.
-- SQLite-backed storage for chars/glyph metadata plus filesystem asset layout.
-- Tornado web UI for ad-hoc ingest + gallery preview.
-- Glyph rendering utilities for multilingual token images.
-- Product-code style embedding/codebook modules.
-- Sentence frame packing and diffusion/inpainting training/evaluation scripts.
-- Reporting and visualization scripts for embedding and pipeline inspection.
-- Publication artifacts in LaTeX/PDF under `publication/`.
+- 🏺 Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
+- 🌐 Robust AJAX + HTML ingestion path with retries, throttling, and cache.
+- 🧩 Stage-labeled glyph extraction including `<img>` and CSS `background-image` data URIs.
+- 🗃️ SQLite-backed storage for chars/glyph metadata plus filesystem asset layout.
+- 🖥️ Tornado web UI for ad-hoc ingest + gallery preview.
+- 🔤 Glyph rendering utilities for multilingual token images.
+- 🧠 Product-code style embedding/codebook modules.
+- 🧱 Sentence frame packing and diffusion/inpainting training/evaluation scripts.
+- 📊 Reporting and visualization scripts for embedding and pipeline inspection.
+- 📄 Publication artifacts in LaTeX/PDF under `publication/`.
 
 ## Project Structure
 
@@ -70,10 +74,12 @@ The current README in this repo has historically centered on the etymology toolk
 
 ## Prerequisites
 
-- Python `3.10+`
-- `pip`
-- Optional GPU for training scripts (PyTorch CUDA)
-- Optional LaTeX toolchain for publication builds
+| Requirement | Notes |
+|---|---|
+| Python `3.10+` | Core runtime |
+| `pip` | Package installation |
+| Optional GPU | Helpful for PyTorch CUDA training scripts |
+| Optional LaTeX toolchain | Needed for publication builds |
 
 Assumption note: there is currently no single root dependency lock/spec file (`pyproject.toml`, `requirements.txt`, etc.), so dependencies are inferred from imports and script usage.
 
@@ -123,9 +129,11 @@ PYTHONPATH=. python scripts/ingest_etymology.py --from-file urls.txt
 
 ### Outputs
 
-- Files: `data/historic/glyphs/<char>/<stage>/<label>.<ext>`
-- Cache: `data/historic/cache/*.html`
-- DB: `data/historic/etymology.sqlite3`
+| Output Type | Location |
+|---|---|
+| Files | `data/historic/glyphs/<char>/<stage>/<label>.<ext>` |
+| Cache | `data/historic/cache/*.html` |
+| DB | `data/historic/etymology.sqlite3` |
 
 ### Web Demo (optional)
 
