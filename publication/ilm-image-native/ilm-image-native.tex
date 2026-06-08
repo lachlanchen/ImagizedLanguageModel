@@ -19,6 +19,13 @@
 Most large language models represent language through symbolic text tokens and treat images of writing as an auxiliary input modality. This paper sketches a different research direction: an image-native language model whose inputs and outputs are visual canvases. The model learns from printed pages, handwritten forms, oracle-bone glyphs, bronze inscriptions, seal forms, and other historical scripts as images. It answers by generating readable images containing modern language and historically grounded glyph panels. We propose a 3090-friendly staged architecture based on visual autoencoding, masked visual language modeling, latent diffusion, and retrieval-augmented glyph evolution.
 \end{abstract}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/ilm_v_yan_readme_hero.png}
+  \caption{Image-native language modeling concept figure generated with an AgInTi background and overlaid with real local ziyuan glyph exemplars for \texttt{YAN} (U+8A00). The answer is a rendered image containing both modern explanation and historical forms.}
+  \label{fig:yanhero}
+\end{figure}
+
 \section{Motivation}
 
 Human readers do not see byte-pair tokens. They see pages, lines, strokes, spacing, damage, font variation, and script-specific visual forms. Current language models are extremely capable, but their central representation is normally a sequence of text tokens. Multimodal models accept images, but many still produce text as the primary output interface. For example, GPT-4 is reported as accepting image and text inputs and producing text outputs; GPT-4o's API documentation lists text and image input with text output for that model. Llama 3 similarly remains a token-based dense Transformer family, with multimodal capabilities added compositionally.

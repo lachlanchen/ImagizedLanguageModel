@@ -11,6 +11,13 @@ Style:
 
 Figures:
 
+0. `ilm_v_yan_readme_hero.png`
+   - README/paper hero figure.
+   - Use an AgInTi-generated abstract background with bronze vessel / oracle bone / neural circuit mood.
+   - Overlay all readable labels deterministically.
+   - Use real local ziyuan glyph exemplars for `言` (YAN, U+8A00): oracle, bronze, seal, modern.
+   - Show the core idea clearly: image input -> ILM-V -> image output answer.
+
 1. `architecture_overview.png`
    - Show the flow:
      - Input canvas: book page / oracle glyph / cuneiform-like sign
@@ -44,5 +51,5 @@ Figures:
 
 Current implementation:
 - The PNGs are generated deterministically by `publication/ilm-image-native/generate_figures.py`.
+- `aginti_yan_background.png` is the AgInTi-generated no-text background used by the README hero.
 - This keeps the paper reproducible even if an interactive image agent is not available.
-

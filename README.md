@@ -12,6 +12,10 @@
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
+![ILM-V image-native language model concept: image input to image output with 言 glyph evolution](publication/ilm-image-native/figures/ilm_v_yan_readme_hero.png)
+
+*Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
+
 ILM is a research codebase exploring **text-as-image generation**: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.

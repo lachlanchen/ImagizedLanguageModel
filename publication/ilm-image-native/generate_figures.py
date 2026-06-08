@@ -197,6 +197,150 @@ def zhong_evolution() -> None:
     img.save(FIG / "zhong_evolution_example.png")
 
 
+def draw_glow(draw: ImageDraw.ImageDraw, center: Tuple[int, int], radius: int, color: str) -> None:
+    x, y = center
+    for i in range(radius, 0, -10):
+        alpha = i / radius
+        # PIL RGB draw has no alpha compositing here; use progressively lighter outlines.
+        draw.ellipse((x - i, y - i, x + i, y + i), outline=color, width=1)
+
+
+def paste_svg_on_card(
+    base: Image.Image,
+    path: Path | None,
+    *,
+    char: str | None,
+    box: Tuple[int, int, int, int],
+    label: str,
+    sublabel: str,
+    fill_text: str = "#f8fafc",
+) -> None:
+    d = ImageDraw.Draw(base)
+    x1, y1, x2, y2 = box
+    overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
+    od.rounded_rectangle(box, radius=24, fill=(8, 16, 30, 178), outline=(220, 185, 120, 220), width=2)
+    base.alpha_composite(overlay)
+
+    glyph_size = min(x2 - x1 - 70, y2 - y1 - 110)
+    gx = x1 + (x2 - x1 - glyph_size) // 2
+    gy = y1 + 48
+    if path is not None and path.exists():
+        glyph = load_svg(path, glyph_size)
+        # Invert black SVG strokes to warm ivory for dark cards.
+        bg = Image.new("RGBA", glyph.size, (0, 0, 0, 0))
+        pix = glyph.load()
+        for yy in range(glyph.height):
+            for xx in range(glyph.width):
+                r, g, b, a = pix[xx, yy]
+                if a and (r + g + b) < 520:
+                    pix[xx, yy] = (250, 230, 185, a)
+                elif a:
+                    pix[xx, yy] = (255, 255, 255, 0)
+        base.alpha_composite(glyph, (gx, gy))
+    elif char:
+        f = cjk_font(glyph_size)
+        bbox = d.textbbox((0, 0), char, font=f)
+        d.text((x1 + (x2 - x1 - (bbox[2] - bbox[0])) // 2, gy - 12), char, font=f, fill="#fde68a")
+
+    centered_text(d, (x1 + 10, y2 - 76, x2 - 10, y2 - 42), label, font(24, True), fill_text)
+    centered_text(d, (x1 + 10, y2 - 42, x2 - 10, y2 - 12), sublabel, font(18), "#cbd5e1")
+
+
+def yan_cover_hero() -> None:
+    bg_path = FIG / "aginti_yan_background.png"
+    if bg_path.exists():
+        bg = Image.open(bg_path).convert("RGB")
+    else:
+        bg = Image.new("RGB", (2048, 1536), "#07111f")
+        bd = ImageDraw.Draw(bg)
+        for x in range(0, 2048, 60):
+            bd.line((x, 0, x + 700, 1536), fill="#0e7490", width=1)
+    bg = bg.resize((1800, 1200), Image.LANCZOS).crop((0, 90, 1800, 1090)).convert("RGBA")
+
+    # Darken and vignette to make publication labels readable.
+    shade = Image.new("RGBA", bg.size, (0, 0, 0, 70))
+    bg.alpha_composite(shade)
+    d = ImageDraw.Draw(bg)
+    W, H = bg.size
+
+    # Top title block.
+    title_box = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+    td = ImageDraw.Draw(title_box)
+    td.rounded_rectangle((58, 48, 910, 205), radius=28, fill=(3, 7, 18, 178), outline=(245, 196, 106, 190), width=2)
+    bg.alpha_composite(title_box)
+    d.text((88, 72), "Image-Native Language Model", font=font(52, True), fill="#fff7ed")
+    d.text((91, 143), "reading and writing language as images, not text tokens", font=font(25), fill="#dbeafe")
+
+    # Flow boxes.
+    flow_y = 275
+    flow = [
+        ((90, flow_y, 400, flow_y + 135), "IMAGE INPUT", "book page / oracle shard"),
+        ((735, flow_y - 25, 1085, flow_y + 170), "ILM-V", "visual memory + latent diffusion"),
+        ((1365, flow_y, 1710, flow_y + 135), "IMAGE OUTPUT", "answer sheet with glyph forms"),
+    ]
+    for box, head, sub in flow:
+        x1, y1, x2, y2 = box
+        ov = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+        od = ImageDraw.Draw(ov)
+        od.rounded_rectangle(box, radius=24, fill=(5, 13, 27, 184), outline=(125, 211, 252, 220), width=2)
+        bg.alpha_composite(ov)
+        centered_text(d, (x1 + 8, y1 + 20, x2 - 8, y1 + 68), head, font(25, True), "#ecfeff")
+        centered_text(d, (x1 + 12, y1 + 68, x2 - 12, y2 - 16), sub, font(20), "#bae6fd")
+    arrow(d, (420, flow_y + 67), (718, flow_y + 67), "#67e8f9")
+    arrow(d, (1100, flow_y + 67), (1345, flow_y + 67), "#67e8f9")
+
+    # Central model chip.
+    chip = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+    cd = ImageDraw.Draw(chip)
+    cd.rounded_rectangle((690, 485, 1125, 800), radius=36, fill=(10, 24, 46, 210), outline=(103, 232, 249, 235), width=3)
+    for i in range(13):
+        x = 710 + i * 32
+        cd.line((x, 455, x, 485), fill=(103, 232, 249, 180), width=3)
+        cd.line((x, 800, x, 835), fill=(251, 191, 36, 170), width=3)
+    for i in range(8):
+        y = 510 + i * 34
+        cd.line((655, y, 690, y), fill=(103, 232, 249, 180), width=3)
+        cd.line((1125, y, 1165, y), fill=(251, 191, 36, 170), width=3)
+    bg.alpha_composite(chip)
+    centered_text(d, (710, 520, 1105, 592), "ILM-V", font(48, True), "#ecfeff")
+    centered_text(d, (720, 610, 1095, 710), "visual canvas encoder\n2D memory transformer\nmasked image generator", font(22), "#dbeafe")
+    centered_text(d, (720, 730, 1095, 775), "patches are visual units", font(21, True), "#fde68a")
+
+    # Real Yan evolution panels.
+    data_root = Path("/home/lachlan/ProjectsLFS/incoder/data/historic/glyphs/言")
+    glyphs = [
+        ("Oracle", "J04903", data_root / "oracle" / "J04903.svg"),
+        ("Bronze", "B02975", data_root / "bronze" / "B02975.svg"),
+        ("Seal", "S01648", data_root / "seal" / "S01648.svg"),
+        ("Modern", "U+8A00", None),
+    ]
+    x = 92
+    y = 610
+    card_w = 255
+    for i, (stage, sub, path) in enumerate(glyphs):
+        box = (x + i * (card_w + 24), y, x + i * (card_w + 24) + card_w, y + 310)
+        paste_svg_on_card(bg, path, char="言" if path is None else None, box=box, label=stage, sublabel=sub)
+        if i < len(glyphs) - 1:
+            arrow(d, (box[2] + 4, y + 155), (box[2] + 22, y + 155), "#fbbf24")
+
+    # Output answer card on right.
+    answer = Image.new("RGBA", bg.size, (0, 0, 0, 0))
+    ad = ImageDraw.Draw(answer)
+    ad.rounded_rectangle((1240, 545, 1718, 905), radius=28, fill=(248, 250, 252, 235), outline=(186, 230, 253, 255), width=3)
+    ad.rounded_rectangle((1272, 585, 1688, 705), radius=18, fill=(15, 23, 42, 230))
+    bg.alpha_composite(answer)
+    d.text((1288, 604), "Prompt: evolution of YAN", font=font(26, True), fill="#e0f2fe")
+    d.text((1288, 652), "Answer is an image, not token text.", font=font(21), fill="#bae6fd")
+    d.text((1275, 735), "YAN means speech / language.", font=font(25, True), fill="#0f172a")
+    d.text((1275, 780), "The model retrieves real historical forms,\nplaces them in a readable explanation,\nand renders the whole answer as pixels.", font=font(22), fill="#334155")
+    d.text((1275, 872), "Oracle → Bronze → Seal → Modern", font=font(22, True), fill="#92400e")
+
+    # Footer provenance.
+    d.text((72, 958), "Real glyph exemplars from local hanziyuan-derived ziyuan data for YAN (U+8A00): oracle, bronze, seal, modern.", font=font(18), fill="#e5e7eb")
+    bg.convert("RGB").save(FIG / "ilm_v_yan_readme_hero.png", quality=95)
+
+
 def aginti_loop() -> None:
     img = Image.new("RGB", (1800, 900), "#f8fafc")
     d = ImageDraw.Draw(img)
@@ -223,6 +367,7 @@ def main() -> None:
     architecture()
     curriculum()
     zhong_evolution()
+    yan_cover_hero()
     aginti_loop()
     print(f"Wrote figures to {FIG}")
 
