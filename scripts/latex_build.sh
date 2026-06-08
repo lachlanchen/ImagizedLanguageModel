@@ -9,7 +9,7 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-TEX_PATH=$1
+TEX_PATH=$(readlink -f "$1")
 TEX_DIR=$(dirname "$TEX_PATH")
 TEX_BASE=$(basename "$TEX_PATH" .tex)
 AUX_DIR="$TEX_DIR/.${TEX_BASE}"

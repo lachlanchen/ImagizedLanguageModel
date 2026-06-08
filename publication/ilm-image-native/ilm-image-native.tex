@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\title{Image-Native Language Models: Reading and Writing as Visual Generation}
+\author{Imagized Language Model Project}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Most large language models represent language through symbolic text tokens and treat images of writing as an auxiliary input modality. This paper sketches a different research direction: an image-native language model whose inputs and outputs are visual canvases. The model learns from printed pages, handwritten forms, oracle-bone glyphs, bronze inscriptions, seal forms, and other historical scripts as images. It answers by generating readable images containing modern language and historically grounded glyph panels. We propose a 3090-friendly staged architecture based on visual autoencoding, masked visual language modeling, latent diffusion, and retrieval-augmented glyph evolution.
+\end{abstract}
+
+\section{Motivation}
+
+Human readers do not see byte-pair tokens. They see pages, lines, strokes, spacing, damage, font variation, and script-specific visual forms. Current language models are extremely capable, but their central representation is normally a sequence of text tokens. Multimodal models accept images, but many still produce text as the primary output interface. For example, GPT-4 is reported as accepting image and text inputs and producing text outputs; GPT-4o's API documentation lists text and image input with text output for that model. Llama 3 similarly remains a token-based dense Transformer family, with multimodal capabilities added compositionally.
+
+The Imagized Language Model (ILM) goal is different:
+\[
+\text{image input} \rightarrow \text{visual language state} \rightarrow \text{image output}.
+\]
+The output should itself be a readable answer image. For a query such as ``explain the evolution of character zhong'', the system should produce a page containing modern explanatory writing plus oracle, bronze, seal, and modern forms.
+
+\section{Prior Art and Gap}
+
+OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. Token-free language models such as CANINE, ByT5, and MEGABYTE show that subword tokenization is not a hard requirement for language modeling. Discrete diffusion language models, including D3PM, Diffusion-LM, SEDD, and LLaDA-style masked diffusion, show that generation need not be left-to-right. Image generative models such as latent diffusion, MaskGIT, and DiT show that high-quality image generation can be performed in compressed latent spaces.
+
+The missing combination is direct: train a model to read and write language as images, while preserving the visual structure of scripts and historical glyphs.
+
+\section{Architecture}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/architecture_overview.png}
+  \caption{ILM-V architecture. The model consumes input canvases, encodes them into visual latents, maintains a 2D visual memory, and denoises or fills output image latents. OCR-style readers are only auxiliary evaluators, not the main generation path.}
+  \label{fig:architecture}
+\end{figure}
+
+Figure~\ref{fig:architecture} gives the proposed system. The main components are:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Visual encoder.} A patch/conv hybrid converts glyph tiles, line strips, and page crops into visual latent grids.
+  \item \textbf{Visual memory transformer.} A 2D Transformer maintains cross-panel state with relative position and sparse/window attention.
+  \item \textbf{Latent generator.} A masked diffusion or MaskGIT-like prior fills an output canvas conditioned on input canvas latents.
+  \item \textbf{Image decoder.} A VAE/VQ-VAE decoder converts latents back to readable output images.
+  \item \textbf{Auxiliary readers and critics.} OCR/readability heads evaluate the output, but should not become the primary hidden path.
+\end{enumerate}
+
+The internal units are visual patches or visual codebook entries, not BPE, wordpiece, or Unicode language tokens.
+
+\section{Data}
+
+The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Item & Count \\
+\midrule
+Characters & 9,055 \\
+Glyph records & 84,642 \\
+Oracle & 32,216 \\
+Bronze & 23,500 \\
+Liushutong & 21,923 \\
+Seal & 6,996 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This is enough to train a first glyph autoencoder and a character-evolution generator. Modern book/page data can be added by rendering multilingual corpora into images and by ingesting scanned pages where licenses permit.
+
+\section{Training Objectives}
+
+The first ILM-V model should combine the following losses:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Masked visual language modeling:} mask image patches and predict missing visual latents.
+  \item \textbf{Denoising reconstruction:} recover pages and glyphs from blur, noise, damage, dropout, and partial occlusion.
+  \item \textbf{Image-to-image instruction tuning:} render prompts and target answers as images and train conditional generation.
+  \item \textbf{Glyph evolution modeling:} map modern forms to historical stages and historical forms back to modern answer sheets.
+  \item \textbf{Contrastive visual semantics:} align different visual renderings of the same content without making OCR the bottleneck.
+\end{enumerate}
+
+\section{3090-Friendly Curriculum}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/training_curriculum.png}
+  \caption{A staged curriculum that fits one or two RTX 3090 GPUs by starting with glyph tiles and latent generation before scaling to page-level image language modeling.}
+  \label{fig:curriculum}
+\end{figure}
+
+Figure~\ref{fig:curriculum} shows the practical schedule:
+\begin{enumerate}[leftmargin=*]
+  \item Build manifests for glyphs, rendered line images, and rendered instruction pairs.
+  \item Train a 30M--100M parameter glyph/page autoencoder.
+  \item Train a 100M--250M parameter conditional glyph evolution generator.
+  \item Train a 200M--600M parameter visual page language model on latent crops.
+  \item Add instruction tuning with image prompts and image answers.
+  \item Expand to additional scripts: cuneiform-like signs, hieroglyphic forms, Arabic, Japanese, Korean, and multilingual book pages.
+\end{enumerate}
+
+Mixed precision, gradient checkpointing, latent crops, LoRA/adapters, and gradient accumulation make this path realistic on one or two 24GB GPUs.
+
+\section{Target Demonstration}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/zhong_evolution_example.png}
+  \caption{Target output style for a glyph-evolution question. The answer is not merely text: it is a readable image with historical visual forms. The example uses local hanziyuan-derived glyph files when available.}
+  \label{fig:zhong}
+\end{figure}
+
+The first demo should answer a rendered visual prompt: ``Explain the evolution of the Chinese character zhong.'' The target answer image should contain:
+\begin{itemize}[leftmargin=*]
+  \item a title and concise modern explanation,
+  \item a historical timeline with real glyph exemplars,
+  \item stage labels and citations,
+  \item modern-language text as rendered image.
+\end{itemize}
+
+This directly tests whether the model can combine language understanding and visual-script generation.
+
+\section{AgInTi Artifact Loop}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/aginti_artifact_loop.png}
+  \caption{AgInTi-assisted artifact loop. The current figures are deterministic scripted PNGs so the paper is reproducible; the figure brief can later be sent to an interactive AgInTi/image agent for visual refinement.}
+  \label{fig:aginti}
+\end{figure}
+
+The figure brief for AgInTi-style refinement is stored in the local AgInTi prompts subfolder. The current paper uses scripted PNG generation to keep the artifact reproducible.
+
+\section{Evaluation}
+
+The model should be evaluated as both a language model and a visual generator:
+\begin{itemize}[leftmargin=*]
+  \item OCR readability of generated modern text images, used only as an external metric.
+  \item Human readability and task-success ratings.
+  \item Glyph-stage retrieval accuracy: generated glyphs should retrieve correct characters and stages.
+  \item Historical plausibility: distance to nearest real glyph exemplars in stage-specific embedding space.
+  \item Layout validity: no text/panel overlap, stable reading order, correct answer composition.
+  \item Image-to-image QA accuracy on rendered prompts and rendered answers.
+\end{itemize}
+
+\section{Conclusion}
+
+ILM-V is a feasible research direction because the pieces exist: OCR-free visual readers, token-free language models, visual latent autoencoders, masked image generators, and diffusion language models. The contribution is to make visible writing itself the modeling substrate. The local Chinese etymology dataset gives a concrete first domain where image output is essential rather than decorative.
+
+\begin{thebibliography}{99}
+\bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
+\bibitem{gpt4} OpenAI. GPT-4 Technical Report. \url{https://arxiv.org/abs/2303.08774}
+\bibitem{gpt4o} OpenAI. GPT-4o API model documentation. \url{https://developers.openai.com/api/docs/models/gpt-4o}
+\bibitem{llama3} Meta AI. The Llama 3 Herd of Models. \url{https://arxiv.org/abs/2407.21783}
+\bibitem{donut} Kim et al. OCR-free Document Understanding Transformer. \url{https://arxiv.org/abs/2111.15664}
+\bibitem{pix2struct} Lee et al. Pix2Struct: Screenshot Parsing as Pretraining for Visual Language Understanding. \url{https://arxiv.org/abs/2210.03347}
+\bibitem{canine} Clark et al. CANINE: Pre-training an Efficient Tokenization-Free Encoder. \url{https://arxiv.org/abs/2103.06874}
+\bibitem{byt5} Xue et al. ByT5: Towards a Token-Free Future. \url{https://arxiv.org/abs/2105.13626}
+\bibitem{megabyte} Yu et al. MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers. \url{https://arxiv.org/abs/2305.07185}
+\bibitem{d3pm} Austin et al. Structured Denoising Diffusion Models in Discrete State-Spaces. \url{https://arxiv.org/abs/2107.03006}
+\bibitem{diffusionlm} Li et al. Diffusion-LM Improves Controllable Text Generation. \url{https://arxiv.org/abs/2205.14217}
+\bibitem{sedd} Lou et al. Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution. \url{https://arxiv.org/abs/2310.16834}
+\bibitem{llada} Nie et al. Large Language Diffusion Models. \url{https://arxiv.org/abs/2502.09992}
+\bibitem{maskgit} Chang et al. MaskGIT: Masked Generative Image Transformer. \url{https://arxiv.org/abs/2202.04200}
+\bibitem{ldm} Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models. \url{https://arxiv.org/abs/2112.10752}
+\bibitem{dit} Peebles and Xie. Scalable Diffusion Models with Transformers. \url{https://arxiv.org/abs/2212.09748}
+\end{thebibliography}
+
+\end{document}
