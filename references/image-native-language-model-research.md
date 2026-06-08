@@ -26,6 +26,8 @@ The minimum successful system should do three things:
 
 Current large language models usually use text tokens as the central representation. GPT-3 is a canonical large autoregressive token model, trained as a next-token predictor at large scale. GPT-4 introduced strong multimodal input capability, but its reported interface is still image/text input to text output. OpenAI's GPT-4o API documentation likewise describes text and image input with text output for that model. Llama 3 is a dense Transformer family with large token context windows and compositional multimodal extensions; it is still primarily a token-language foundation model.
 
+Modern product systems now expose image understanding and image generation endpoints. OpenAI's image/vision documentation describes APIs for processing images as input and generating images as output, and Google's Gemini API documentation describes image generation from text and image prompts. These systems are important baselines, but the ILM research gap remains: the visible page should be the **native language substrate**, not only an input modality, a tool call, or a display layer around a token-language core.
+
 The gap for ILM is therefore precise: build a language model whose **visible writing image is both the input substrate and the output substrate**, rather than only an input modality or a display layer.
 
 ## 3. Relevant Research Threads
@@ -308,8 +310,58 @@ Immediate files/modules to add next:
 7. `publication/ilm-image-native/`
    - Paper draft and diagrams.
 
-## 9. Literature and Sources
+## 9. Image-First Training And Inference Contract
 
+The updated ILM-V contract should be strict enough to distinguish the project from a normal OCR + LLM + renderer stack.
+
+### 9.1 Training Figure: Visual Corpus To Image Targets
+
+Training samples should be built as paired or self-supervised image canvases:
+
+```text
+text corpus -> page rasterizer -> page image
+scanned book/manuscript -> crop/deskew/tile -> page image
+historical glyph SVG/bitmap -> normalized glyph tile -> glyph image
+unknown or unencoded marks -> raw visual patch -> image region
+```
+
+The model sees these as visual latents. Metadata such as source URL, crop box, character ID, stage label, and license can remain in the training manifest, but it should not become a hidden text-language path. The core losses should remain visual:
+
+1. Mask page/glyph patches and predict visual latents.
+2. Reconstruct damaged or incomplete page images.
+3. Map prompt images to answer images.
+4. Generate historical glyph panels from visual examples.
+5. Use OCR/readability only as an auxiliary critic or evaluation metric.
+
+This matters for scripts that are missing from font tables or computer codecs. A bronze inscription, cuneiform wedge, or damaged manuscript mark can still be a valid training unit because it is an image patch.
+
+### 9.2 Inference Figure: Text Or Image Prompt To Page Image
+
+The user interface may look like a chat system, but the model contract is image-native:
+
+```text
+typed prompt -> page rasterizer -> prompt image
+uploaded page/glyph/photo -> visual cropper -> prompt image
+prompt image -> ILM-V visual latent state -> rendered answer image
+answer image -> optional OCR/transcoder -> text layer only where representable
+```
+
+The output is first a PNG/page image, like a section of a book. It can contain English, modern Chinese, classical Chinese, and glyph regions that have no Unicode representation. If a span is representable in computer codecs, a post-processing reader may attach a searchable text layer. If not, the correct representation is still the image region plus coordinates, provenance, and nearest known glyph references.
+
+For the `言` demonstration, a target answer should look like a page excerpt:
+
+- English paragraph: "YAN is the written idea of speech."
+- Chinese paragraph: "言，本義為言語、說話、辭令。"
+- Classical-style line: "言者，心聲見於簡冊也。"
+- Timeline panels: oracle `J04903`, bronze `B02975`, seal `S01648`, modern `言`.
+
+The critical point is that the page image is not a rendering after a token answer. It is the model's primary answer object.
+
+## 10. Literature and Sources
+
+- OpenAI Images and Vision API documentation: https://platform.openai.com/docs/guides/images-vision
+- OpenAI Image generation guide: https://platform.openai.com/docs/guides/image-generation
+- Google Gemini API image generation documentation: https://ai.google.dev/gemini-api/docs/image-generation
 - OpenAI, GPT-4 Technical Report: https://arxiv.org/abs/2303.08774
 - OpenAI GPT-4o API model documentation: https://developers.openai.com/api/docs/models/gpt-4o
 - Brown et al., Language Models are Few-Shot Learners (GPT-3): https://arxiv.org/abs/2005.14165
@@ -326,4 +378,3 @@ Immediate files/modules to add next:
 - Chang et al., MaskGIT: Masked Generative Image Transformer: https://arxiv.org/abs/2202.04200
 - Rombach et al., High-Resolution Image Synthesis with Latent Diffusion Models: https://arxiv.org/abs/2112.10752
 - Peebles and Xie, Scalable Diffusion Models with Transformers (DiT): https://arxiv.org/abs/2212.09748
-

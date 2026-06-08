@@ -28,7 +28,7 @@ Most large language models represent language through symbolic text tokens and t
 
 \section{Motivation}
 
-Human readers do not see byte-pair tokens. They see pages, lines, strokes, spacing, damage, font variation, and script-specific visual forms. Current language models are extremely capable, but their central representation is normally a sequence of text tokens. Multimodal models accept images, but many still produce text as the primary output interface. For example, GPT-4 is reported as accepting image and text inputs and producing text outputs; GPT-4o's API documentation lists text and image input with text output for that model. Llama 3 similarly remains a token-based dense Transformer family, with multimodal capabilities added compositionally.
+Human readers do not see byte-pair tokens. They see pages, lines, strokes, spacing, damage, font variation, and script-specific visual forms. Current language models are extremely capable, but their central representation is normally a sequence of text tokens. Multimodal models accept images, and modern APIs also expose image-generation endpoints. For example, OpenAI documents APIs for processing images as input and generating images as output, and Google's Gemini API documentation describes image generation from text and image prompts~\cite{openaiimages,openaiimagegen,geminiimage}. These systems are important baselines, but they do not by themselves define a language model whose primary language substrate is the visible page.
 
 The Imagized Language Model (ILM) goal is different:
 \[
@@ -92,6 +92,26 @@ The first ILM-V model should combine the following losses:
   \item \textbf{Glyph evolution modeling:} map modern forms to historical stages and historical forms back to modern answer sheets.
   \item \textbf{Contrastive visual semantics:} align different visual renderings of the same content without making OCR the bottleneck.
 \end{enumerate}
+
+\section{Image-First Training and Inference}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_language_training_pipeline.png}
+  \caption{Training pipeline for ILM-V. Rendered text corpora, scanned pages, historical glyph files, and unencoded marks are all converted into visual canvases. The training target is visual latent prediction and image generation, not BPE-token prediction.}
+  \label{fig:visualtraining}
+\end{figure}
+
+Figure~\ref{fig:visualtraining} makes the training contract explicit. Typed corpora are rendered into page images; scanned books and manuscripts are cropped and tiled; historical glyph files become glyph tiles; and marks that are missing from font tables remain valid image patches. Metadata such as crop boxes and stage labels may remain in manifests, but the model path should learn from visual latents. OCR is useful as a readability critic, not as the hidden language channel.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_language_inference_pipeline.png}
+  \caption{Inference pipeline for ILM-V. A chat-like interface may accept typed text or uploaded images, but typed text is first rasterized into a prompt image. The primary output is a rendered page image. OCR or transcoding is optional and only applies to output regions that exist in computer codecs.}
+  \label{fig:visualinference}
+\end{figure}
+
+Figure~\ref{fig:visualinference} shows the user-facing path. A typed prompt is converted into a visual prompt canvas, and an uploaded image is normalized into the same visual space. The model returns a page-like image containing modern language and historical glyph regions. A later OCR/transcoder can attach a searchable text layer for English, Chinese, or Unicode-representable spans; ancient or unencoded glyphs remain image regions with coordinates and provenance.
 
 \section{3090-Friendly Curriculum}
 
@@ -164,6 +184,9 @@ ILM-V is a feasible research direction because the pieces exist: OCR-free visual
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
 \bibitem{gpt4} OpenAI. GPT-4 Technical Report. \url{https://arxiv.org/abs/2303.08774}
 \bibitem{gpt4o} OpenAI. GPT-4o API model documentation. \url{https://developers.openai.com/api/docs/models/gpt-4o}
+\bibitem{openaiimages} OpenAI. Images and Vision API documentation. \url{https://platform.openai.com/docs/guides/images-vision}
+\bibitem{openaiimagegen} OpenAI. Image generation guide. \url{https://platform.openai.com/docs/guides/image-generation}
+\bibitem{geminiimage} Google. Gemini API image generation documentation. \url{https://ai.google.dev/gemini-api/docs/image-generation}
 \bibitem{llama3} Meta AI. The Llama 3 Herd of Models. \url{https://arxiv.org/abs/2407.21783}
 \bibitem{donut} Kim et al. OCR-free Document Understanding Transformer. \url{https://arxiv.org/abs/2111.15664}
 \bibitem{pix2struct} Lee et al. Pix2Struct: Screenshot Parsing as Pretraining for Visual Language Understanding. \url{https://arxiv.org/abs/2210.03347}

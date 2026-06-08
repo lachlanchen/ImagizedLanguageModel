@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import math
 from pathlib import Path
 from typing import Iterable, Tuple
 
@@ -62,6 +63,93 @@ def arrow(draw: ImageDraw.ImageDraw, p1: Tuple[int, int], p2: Tuple[int, int], c
     else:
         pts = [(x2, y2), (x2 + 14, y2 - 8), (x2 + 14, y2 + 8)]
     draw.polygon(pts, fill=color)
+
+
+def arrow_any(
+    draw: ImageDraw.ImageDraw,
+    p1: Tuple[int, int],
+    p2: Tuple[int, int],
+    color: str = "#344054",
+    width: int = 4,
+) -> None:
+    draw.line([p1, p2], fill=color, width=width)
+    x1, y1 = p1
+    x2, y2 = p2
+    angle = math.atan2(y2 - y1, x2 - x1)
+    head = 16
+    spread = 0.48
+    pts = [
+        (x2, y2),
+        (int(x2 - head * math.cos(angle - spread)), int(y2 - head * math.sin(angle - spread))),
+        (int(x2 - head * math.cos(angle + spread)), int(y2 - head * math.sin(angle + spread))),
+    ]
+    draw.polygon(pts, fill=color)
+
+
+def line_text(
+    draw: ImageDraw.ImageDraw,
+    xy: Tuple[int, int],
+    text: str,
+    fnt: ImageFont.FreeTypeFont,
+    fill: str = "#18212f",
+    spacing: int = 8,
+) -> int:
+    x, y = xy
+    line_h = getattr(fnt, "size", 22) + spacing
+    for line in text.split("\n"):
+        draw.text((x, y), line, font=fnt, fill=fill)
+        y += line_h
+    return y
+
+
+def mini_page(
+    base: Image.Image,
+    box: Tuple[int, int, int, int],
+    title: str,
+    lines: Iterable[str],
+    *,
+    tint: str = "#fffaf0",
+    outline: str = "#d6c7a1",
+) -> None:
+    d = ImageDraw.Draw(base)
+    x1, y1, x2, y2 = box
+    d.rounded_rectangle(box, radius=12, fill=tint, outline=outline, width=2)
+    d.rectangle((x1 + 16, y1 + 14, x2 - 16, y1 + 46), fill="#f1e7ca")
+    d.text((x1 + 26, y1 + 20), title, font=font(18, True), fill="#4a3418")
+    y = y1 + 66
+    for line in lines:
+        fnt = cjk_font(24) if any(ord(ch) > 127 for ch in line) else font(21)
+        d.text((x1 + 24, y), line, font=fnt, fill="#2c2418")
+        y += 34
+    for yy in range(y + 6, y2 - 20, 24):
+        d.line((x1 + 24, yy, x2 - 24, yy), fill="#eadfbe", width=2)
+
+
+def light_glyph(
+    base: Image.Image,
+    box: Tuple[int, int, int, int],
+    label: str,
+    path: Path | None,
+    *,
+    char: str | None = None,
+    sublabel: str = "",
+) -> None:
+    d = ImageDraw.Draw(base)
+    x1, y1, x2, y2 = box
+    d.rounded_rectangle(box, radius=16, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((x1 + 18, y1 + 16), label, font=font(19, True), fill="#0f172a")
+    glyph_size = min(x2 - x1 - 52, y2 - y1 - 94)
+    gx = x1 + (x2 - x1 - glyph_size) // 2
+    gy = y1 + 54
+    if path is not None and path.exists():
+        glyph = load_svg(path, glyph_size)
+        base.paste(glyph, (gx, gy), glyph)
+    elif char:
+        fnt = cjk_font(glyph_size)
+        bbox = d.textbbox((0, 0), char, font=fnt)
+        d.text((x1 + (x2 - x1 - (bbox[2] - bbox[0])) // 2, gy - 12), char, font=fnt, fill="#111827")
+    if sublabel:
+        centered_text(d, (x1 + 8, y2 - 36, x2 - 8, y2 - 8), sublabel, font(16), "#475467")
 
 
 def architecture() -> None:
@@ -341,6 +429,259 @@ def yan_cover_hero() -> None:
     bg.convert("RGB").save(FIG / "ilm_v_yan_readme_hero.png", quality=95)
 
 
+def yan_paths() -> dict[str, Path]:
+    data_root = Path("/home/lachlan/ProjectsLFS/incoder/data/historic/glyphs/言")
+    return {
+        "oracle": data_root / "oracle" / "J04903.svg",
+        "bronze": data_root / "bronze" / "B02975.svg",
+        "seal": data_root / "seal" / "S01648.svg",
+    }
+
+
+def draw_visual_code_grid(draw: ImageDraw.ImageDraw, box: Tuple[int, int, int, int], colors: list[str]) -> None:
+    x1, y1, x2, y2 = box
+    cols = 10
+    rows = 7
+    gap = 5
+    cw = (x2 - x1 - gap * (cols - 1)) // cols
+    ch = (y2 - y1 - gap * (rows - 1)) // rows
+    for r in range(rows):
+        for c in range(cols):
+            idx = (r * cols + c) % len(colors)
+            xx = x1 + c * (cw + gap)
+            yy = y1 + r * (ch + gap)
+            draw.rounded_rectangle((xx, yy, xx + cw, yy + ch), radius=5, fill=colors[idx], outline="#ffffff")
+
+
+def visual_training_pipeline() -> None:
+    img = Image.new("RGB", (2400, 1600), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    d.text((70, 45), "Training ILM-V: Language as Visual Corpus", font=font(54, True), fill="#0f172a")
+    d.text(
+        (74, 116),
+        "Every source is converted into page/glyph images. The model learns to predict and generate visual latents, not BPE or word tokens.",
+        font=font(27),
+        fill="#475467",
+    )
+
+    cols = [
+        (70, 185, 560, 1175, "#eff6ff", "#2563eb", "1  Visual Corpus"),
+        (620, 185, 1110, 1175, "#f0fdf4", "#16a34a", "2  Canvas Builder"),
+        (1170, 185, 1710, 1175, "#111827", "#38bdf8", "3  ILM-V Training Core"),
+        (1770, 185, 2330, 1175, "#fff7ed", "#f97316", "4  Image Targets"),
+    ]
+    for x1, y1, x2, y2, fill, outline, title in cols:
+        d.rounded_rectangle((x1, y1, x2, y2), radius=28, fill=fill, outline=outline, width=3)
+        d.text((x1 + 28, y1 + 24), title, font=font(29, True), fill="#f8fafc" if fill == "#111827" else "#0f172a")
+
+    # Column 1: data as pages/glyphs.
+    mini_page(
+        img,
+        (105, 260, 525, 485),
+        "Rendered corpus page",
+        ["The river speaks in lines.", "漢字之源在形", "子曰：學而時習之。"],
+        tint="#fffaf0",
+    )
+    mini_page(
+        img,
+        (105, 520, 525, 745),
+        "Scanned book / manuscript",
+        ["ink, margin, damage", "古書一頁，字有殘闕。", "layout is evidence"],
+        tint="#f7efe1",
+    )
+    d.rounded_rectangle((105, 780, 525, 1088), radius=16, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((128, 805), "Local ziyuan glyph data", font=font(23, True), fill="#0f172a")
+    paths = yan_paths()
+    light_glyph(img, (130, 855, 250, 1035), "Oracle", paths["oracle"], sublabel="J04903")
+    light_glyph(img, (268, 855, 388, 1035), "Bronze", paths["bronze"], sublabel="B02975")
+    light_glyph(img, (406, 855, 500, 1035), "Seal", paths["seal"], sublabel="S01648")
+    d.text((130, 1050), "unencoded historical signs\nstay as image patches", font=font(18), fill="#475467")
+
+    # Column 2: rendering and normalization.
+    d.rounded_rectangle((675, 275, 1055, 395), radius=16, fill="#ffffff", outline="#bbf7d0", width=2)
+    centered_text(d, (685, 290, 1045, 380), "Text sources are rendered\nonto prompt/answer pages", font(24, True), "#14532d")
+    d.rounded_rectangle((675, 455, 1055, 595), radius=16, fill="#ffffff", outline="#bbf7d0", width=2)
+    centered_text(d, (685, 470, 1045, 575), "Image sources are cropped,\ndeskewed, tiled,\nand normalized", font(23, True), "#14532d")
+    d.rounded_rectangle((675, 665, 1055, 885), radius=16, fill="#dcfce7", outline="#16a34a", width=2)
+    d.text((710, 690), "Shared visual canvas", font=font(26, True), fill="#14532d")
+    draw_visual_code_grid(d, (710, 748, 1020, 850), ["#166534", "#22c55e", "#86efac", "#fef3c7", "#0f766e"])
+    d.text((710, 928), "Metadata stays outside\nthe language path:\nstage, crop box, source, mask region.", font=font(20), fill="#166534")
+    arrow_any(d, (560, 520), (620, 520), "#64748b", 5)
+    arrow_any(d, (1110, 520), (1170, 520), "#64748b", 5)
+    arrow_any(d, (1710, 520), (1770, 520), "#64748b", 5)
+
+    # Column 3: model core.
+    d.rounded_rectangle((1225, 285, 1655, 1035), radius=28, fill="#0b1220", outline="#67e8f9", width=3)
+    d.text((1265, 330), "Visual latent stack", font=font(29, True), fill="#e0f2fe")
+    d.text((1265, 392), "VAE / VQ-VAE\n2D memory transformer\nmasked image generator\nlatent diffusion decoder", font=font(27), fill="#cbd5e1")
+    d.rounded_rectangle((1265, 610, 1615, 795), radius=20, fill="#1e293b", outline="#38bdf8", width=2)
+    draw_visual_code_grid(d, (1295, 642, 1585, 762), ["#38bdf8", "#a78bfa", "#fbbf24", "#34d399", "#f472b6"])
+    centered_text(d, (1268, 815, 1612, 890), "Visual units only:\nstrokes + patches\nlayout latents", font(24, True), "#fde68a")
+    centered_text(d, (1268, 920, 1612, 990), "NO BPE\nNO hidden Unicode decoder", font(24, True), "#fecaca")
+
+    # Column 4: image targets.
+    mini_page(
+        img,
+        (1815, 265, 2285, 565),
+        "Target answer page",
+        ["言 YAN: speech / language", "English explanation paragraph", "中文說明與古文例句", "forms shown as glyph panels"],
+        tint="#fffaf0",
+    )
+    d.rounded_rectangle((1815, 625, 2285, 1005), radius=18, fill="#ffffff", outline="#fed7aa", width=2)
+    d.text((1840, 655), "Glyph-evolution target", font=font(27, True), fill="#7c2d12")
+    light_glyph(img, (1845, 720, 1975, 945), "Oracle", paths["oracle"], sublabel="image")
+    light_glyph(img, (1995, 720, 2125, 945), "Bronze", paths["bronze"], sublabel="image")
+    light_glyph(img, (2145, 720, 2260, 945), "Modern", None, char="言", sublabel="U+8A00")
+    d.text((1840, 1045), "Target is a PNG/page image first;\ntext labels are optional supervision.", font=font(20), fill="#9a3412")
+
+    # Bottom loss band.
+    d.rounded_rectangle((70, 1240, 2330, 1515), radius=30, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((105, 1268), "Loss mixture for one or two RTX 3090 GPUs", font=font(34, True), fill="#0f172a")
+    losses = [
+        ("Masked visual LM", "hide page patches\npredict visual latents", "#dbeafe"),
+        ("Denoising", "blur/drop strokes\nrecover readable page", "#dcfce7"),
+        ("Image instruction", "prompt image ->\nanswer image", "#fef3c7"),
+        ("Glyph evolution", "modern glyph <->\nancient forms", "#fee2e2"),
+        ("Auxiliary OCR", "readability metric only\nnot the main path", "#ede9fe"),
+    ]
+    lx = 105
+    for title, body, fill in losses:
+        d.rounded_rectangle((lx, 1335, lx + 405, 1475), radius=18, fill=fill, outline="#94a3b8", width=2)
+        centered_text(d, (lx + 15, 1348, lx + 390, 1398), title, font(24, True), "#0f172a")
+        centered_text(d, (lx + 20, 1402, lx + 385, 1462), body, font(21), "#334155")
+        lx += 440
+
+    img.save(FIG / "visual_language_training_pipeline.png", quality=95)
+
+
+def draw_answer_page(base: Image.Image, box: Tuple[int, int, int, int]) -> None:
+    d = ImageDraw.Draw(base)
+    x1, y1, x2, y2 = box
+    d.rounded_rectangle(box, radius=18, fill="#fffaf0", outline="#d6c7a1", width=3)
+    d.rectangle((x1 + 34, y1 + 36, x2 - 34, y1 + 104), fill="#efe2bd")
+    d.text((x1 + 56, y1 + 52), "言 YAN: speech, language, saying", font=cjk_font(31), fill="#3f2b12")
+    line_text(
+        d,
+        (x1 + 58, y1 + 138),
+        "English: YAN is the written idea of speech.\nIt links a mouth, sound, statement, and record.",
+        font(24),
+        "#2c2418",
+        spacing=10,
+    )
+    line_text(
+        d,
+        (x1 + 58, y1 + 250),
+        "中文：言，本義為言語、說話、辭令。\n古文：言者，心聲見於簡冊也。",
+        cjk_font(26),
+        "#2c2418",
+        spacing=10,
+    )
+    d.line((x1 + 58, y1 + 365, x2 - 58, y1 + 365), fill="#d8c697", width=3)
+    paths = yan_paths()
+    gx = x1 + 58
+    gy = y1 + 405
+    card_w = 128
+    gap = 18
+    light_glyph(base, (gx, gy, gx + card_w, gy + 220), "Oracle", paths["oracle"], sublabel="J04903")
+    light_glyph(base, (gx + (card_w + gap), gy, gx + (card_w + gap) + card_w, gy + 220), "Bronze", paths["bronze"], sublabel="B02975")
+    light_glyph(base, (gx + 2 * (card_w + gap), gy, gx + 2 * (card_w + gap) + card_w, gy + 220), "Seal", paths["seal"], sublabel="S01648")
+    light_glyph(base, (gx + 3 * (card_w + gap), gy, gx + 3 * (card_w + gap) + card_w, gy + 220), "Modern", None, char="言", sublabel="U+8A00")
+    line_text(
+        d,
+        (x1 + 58, gy + 250),
+        "Ancient forms are visual glyph regions.\nThey do not need a font table or codec.",
+        font(20),
+        "#5f4b24",
+        spacing=8,
+    )
+    line_text(
+        d,
+        (x1 + 58, y2 - 92),
+        "Output artifact: rendered page image first.\nA text layer may be extracted later.",
+        font(20, True),
+        "#7c2d12",
+        spacing=8,
+    )
+
+
+def visual_inference_pipeline() -> None:
+    img = Image.new("RGB", (2400, 1500), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    d.text((70, 45), "Inference ILM-V: Chat-Like UI, Image-First Output", font=font(54, True), fill="#0f172a")
+    d.text(
+        (74, 116),
+        "Typed text and uploaded images are both turned into visual prompt canvases. The model returns a rendered page image first.",
+        font=font(27),
+        fill="#475467",
+    )
+
+    # Inputs.
+    d.rounded_rectangle((80, 220, 600, 1280), radius=28, fill="#eff6ff", outline="#2563eb", width=3)
+    d.text((115, 250), "Input interface", font=font(31, True), fill="#0f172a")
+    mini_page(
+        img,
+        (125, 320, 555, 585),
+        "Typed prompt rendered as image",
+        ["Tell the evolution of 言.", "Use English + 中文 + 古文.", "Show forms not in fonts."],
+        tint="#fffaf0",
+    )
+    mini_page(
+        img,
+        (125, 660, 555, 925),
+        "Uploaded image prompt",
+        ["book page crop / glyph photo", "oracle or cuneiform-like signs", "layout and damage preserved"],
+        tint="#f7efe1",
+    )
+    d.rounded_rectangle((125, 990, 555, 1190), radius=18, fill="#dbeafe", outline="#60a5fa", width=2)
+    centered_text(d, (150, 1015, 530, 1088), "No tokenization step\nis required before reading.", font(25, True), "#1e3a8a")
+    centered_text(d, (150, 1105, 530, 1168), "Text input is simply\nanother visual page.", font(23), "#1e40af")
+
+    # Canvas router.
+    d.rounded_rectangle((710, 325, 1170, 1115), radius=28, fill="#f0fdf4", outline="#16a34a", width=3)
+    d.text((745, 360), "Prompt canvas router", font=font(31, True), fill="#14532d")
+    d.rounded_rectangle((760, 450, 1120, 640), radius=18, fill="#ffffff", outline="#86efac", width=2)
+    centered_text(d, (790, 475, 1090, 545), "typed text ->\npage rasterizer", font(27, True), "#14532d")
+    centered_text(d, (790, 555, 1090, 615), "font is an input renderer,\nnot the model language", font(21), "#166534")
+    d.rounded_rectangle((760, 710, 1120, 900), radius=18, fill="#ffffff", outline="#86efac", width=2)
+    centered_text(d, (790, 735, 1090, 810), "image upload ->\nvisual crop + tiling", font(27, True), "#14532d")
+    centered_text(d, (790, 820, 1090, 875), "keeps unknown glyphs\nas pixels", font(21), "#166534")
+    d.rounded_rectangle((780, 965, 1100, 1050), radius=16, fill="#dcfce7", outline="#16a34a", width=2)
+    centered_text(d, (790, 970, 1090, 1045), "unified prompt image", font(25, True), "#14532d")
+    arrow_any(d, (600, 450), (710, 515), "#64748b", 5)
+    arrow_any(d, (600, 790), (710, 785), "#64748b", 5)
+
+    # Model.
+    d.rounded_rectangle((1250, 365, 1495, 1075), radius=34, fill="#111827", outline="#38bdf8", width=3)
+    d.text((1284, 410), "ILM-V", font=font(45, True), fill="#e0f2fe")
+    d.text((1284, 485), "visual encoder\n2D memory\nmasked image\ngenerator\nlatent decoder", font=font(24), fill="#cbd5e1")
+    draw_visual_code_grid(d, (1285, 720, 1460, 850), ["#38bdf8", "#a78bfa", "#fbbf24", "#34d399", "#f472b6"])
+    centered_text(d, (1275, 895, 1470, 985), "internal state:\nvisual latent page", font(23, True), "#fde68a")
+    arrow_any(d, (1170, 735), (1250, 735), "#64748b", 5)
+
+    # Output page.
+    d.rounded_rectangle((1570, 210, 2325, 1225), radius=30, fill="#fff7ed", outline="#f97316", width=3)
+    d.text((1605, 245), "Image-first answer", font=font(32, True), fill="#7c2d12")
+    draw_answer_page(img, (1615, 315, 2280, 1130))
+    arrow_any(d, (1495, 735), (1570, 735), "#64748b", 5)
+
+    # Optional conversion layer.
+    d.rounded_rectangle((710, 1255, 2325, 1435), radius=26, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((745, 1282), "Optional post-processing after image generation", font=font(30, True), fill="#0f172a")
+    line_text(
+        d,
+        (745, 1336),
+        "OCR/transcoder can emit text only for computer-codec regions: English, Chinese, U+8A00.\nOracle, bronze, cuneiform-like, or unknown glyphs remain image assets with coordinates and provenance.",
+        font(23),
+        "#334155",
+        spacing=8,
+    )
+    for x in range(1930, 1930 + 270, 28):
+        d.line((x, 1225, x + 15, 1255), fill="#94a3b8", width=3)
+    d.polygon([(2200, 1255), (2180, 1250), (2191, 1232)], fill="#94a3b8")
+
+    img.save(FIG / "visual_language_inference_pipeline.png", quality=95)
+
+
 def aginti_loop() -> None:
     img = Image.new("RGB", (1800, 900), "#f8fafc")
     d = ImageDraw.Draw(img)
@@ -368,6 +709,8 @@ def main() -> None:
     curriculum()
     zhong_evolution()
     yan_cover_hero()
+    visual_training_pipeline()
+    visual_inference_pipeline()
     aginti_loop()
     print(f"Wrote figures to {FIG}")
 

@@ -16,6 +16,16 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
+## Image-First Training And Inference
+
+![Training ILM-V from visual corpora: rendered text pages, scanned pages, and historical glyphs become visual latents and image targets](publication/ilm-image-native/figures/visual_language_training_pipeline.png)
+
+Training treats language as a visual corpus. Typed text, scanned pages, book images, and historical glyph data are all converted into page/glyph canvases; the model predicts visual latents and output images rather than text tokens.
+
+![Inference pipeline for ILM-V: text or image prompts become prompt canvases, the model generates a page image first, and OCR is optional afterward](publication/ilm-image-native/figures/visual_language_inference_pipeline.png)
+
+Inference keeps the same contract. A chat UI may accept typed text or uploaded images, but typed text is first rendered as an image prompt. The model returns a rendered page image; OCR/transcoding is only a post-process for spans that exist in computer codecs, while historical or unencoded glyphs remain image regions.
+
 ILM is a research codebase exploring **text-as-image generation**: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
