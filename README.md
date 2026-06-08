@@ -26,6 +26,56 @@ Training treats language as a visual corpus. Typed text, scanned pages, book ima
 
 Inference keeps the same contract. A chat UI may accept typed text or uploaded images, but typed text is first rendered as an image prompt. The model returns a rendered page image; OCR/transcoding is only a post-process for spans that exist in computer codecs, while historical or unencoded glyphs remain image regions.
 
+## Runnable Image-Native Training Code
+
+The `ilm/visual_lm/` package is a complete image-to-image implementation of the ILM-V idea. It renders visual prompt pages and visual answer pages from real historical glyph assets, trains a conditional U-Net on page images, evaluates image reconstruction metrics, and runs inference where `answer.png` is the primary output.
+
+Quick validation run on a small real glyph subset:
+
+```bash
+PYTHONPATH=. python scripts/train_visual_language_model.py \
+  --characters 言,中,水,日 \
+  --image-size 384 \
+  --samples-per-epoch 2 \
+  --val-samples 1 \
+  --epochs 1 \
+  --batch-size 1 \
+  --base-ch 8 \
+  --depth 2 \
+  --limit-steps 1 \
+  --out artifacts/visual_lm_smoke
+```
+
+Longer real training run:
+
+```bash
+PYTHONPATH=. python scripts/train_visual_language_model.py \
+  --characters auto \
+  --max-characters 256 \
+  --image-size 384 \
+  --samples-per-epoch 4096 \
+  --val-samples 128 \
+  --epochs 50 \
+  --batch-size 8 \
+  --base-ch 32 \
+  --depth 3 \
+  --amp \
+  --out artifacts/visual_lm
+```
+
+Evaluate and run image-first inference:
+
+```bash
+PYTHONPATH=. python scripts/eval_visual_language_model.py \
+  --checkpoint artifacts/visual_lm/ckpt_latest.pt \
+  --samples 64
+
+PYTHONPATH=. python scripts/infer_visual_language_model.py \
+  --checkpoint artifacts/visual_lm/ckpt_latest.pt \
+  --char 言 \
+  --out artifacts/visual_lm_infer_yan
+```
+
 ILM is a research codebase exploring **text-as-image generation**: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
