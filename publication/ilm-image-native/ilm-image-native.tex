@@ -16,7 +16,7 @@
 \maketitle
 
 \begin{abstract}
-Most large language models represent language through symbolic text tokens and treat images of writing as an auxiliary input modality. This paper sketches a different research direction: an image-native language model whose inputs and outputs are visual canvases. The model learns from printed pages, handwritten forms, oracle-bone glyphs, bronze inscriptions, seal forms, and other historical scripts as images. It answers by generating readable images containing modern language and historically grounded glyph panels. We propose a 3090-friendly staged architecture based on visual autoencoding, masked visual language modeling, latent diffusion, and retrieval-augmented glyph evolution.
+Most large language models represent language through symbolic text tokens and treat images of writing as an auxiliary input modality. This paper sketches a different research direction: an image-native language model whose inputs and outputs are visual canvases. The model learns from printed pages, handwritten forms, oracle-bone glyphs, bronze inscriptions, seal forms, and other historical scripts as images. It answers by generating readable page images containing modern language, classical-style text, and historically grounded glyph panels. A machine-readable text layer is optional and only applies to spans that computer codecs can represent. We propose a 3090-friendly staged architecture based on visual autoencoding, masked visual language modeling, latent diffusion, and retrieval-augmented glyph evolution.
 \end{abstract}
 
 \begin{figure}[t]
@@ -34,7 +34,7 @@ The Imagized Language Model (ILM) goal is different:
 \[
 \text{image input} \rightarrow \text{visual language state} \rightarrow \text{image output}.
 \]
-The output should itself be a readable answer image. For a query such as ``explain the evolution of character zhong'', the system should produce a page containing modern explanatory writing plus oracle, bronze, seal, and modern forms.
+The output should itself be a readable answer image. For a query such as ``explain the evolution of character yan'', the system should produce a page containing modern explanatory writing, classical-style Chinese, and oracle, bronze, seal, and modern forms. Typed text can still be accepted by a user interface, but it is rasterized into an image prompt before entering the core model. Conversely, the model's answer is a page image first; OCR or transcription is an optional downstream extraction step.
 
 \section{Prior Art and Gap}
 
@@ -113,6 +113,28 @@ Figure~\ref{fig:visualtraining} makes the training contract explicit. Typed corp
 
 Figure~\ref{fig:visualinference} shows the user-facing path. A typed prompt is converted into a visual prompt canvas, and an uploaded image is normalized into the same visual space. The model returns a page-like image containing modern language and historical glyph regions. A later OCR/transcoder can attach a searchable text layer for English, Chinese, or Unicode-representable spans; ancient or unencoded glyphs remain image regions with coordinates and provenance.
 
+The formal contract is:
+\[
+\begin{aligned}
+r_\alpha(\text{text prompt}) &\rightarrow x_{\mathrm{prompt}},\\
+g_\beta(\text{uploaded page or glyph}) &\rightarrow x_{\mathrm{prompt}},\\
+f_\theta(x_{\mathrm{prompt}}, x_{\mathrm{context}}) &\rightarrow y_{\mathrm{page}},\\
+o_\psi(y_{\mathrm{page}}) &\rightarrow \text{optional text layer} + \text{glyph-region metadata}.
+\end{aligned}
+\]
+Here \(r_\alpha\) is only a UI rasterizer, not the language model itself. The core model \(f_\theta\) maps visual inputs to a rendered page image \(y_{\mathrm{page}}\). The optional reader \(o_\psi\) may recover Unicode text where possible, but unencoded historical forms remain valid image regions.
+
+A useful answer canvas should resemble a page excerpt from a book or corpus:
+\begin{itemize}[leftmargin=*]
+  \item a title region rendered as text image,
+  \item one or more modern-language paragraphs, for example English and Chinese,
+  \item a classical-style line or quotation when appropriate,
+  \item glyph panels for forms that may not exist in computer fonts,
+  \item a provenance strip with source IDs or nearest retrieved exemplars.
+\end{itemize}
+
+This schema is intentionally different from ``text answer plus illustrations''. The generated page image is the primary output object, and the text layer is secondary.
+
 \section{3090-Friendly Curriculum}
 
 \begin{figure}[t]
@@ -143,15 +165,16 @@ Mixed precision, gradient checkpointing, latent crops, LoRA/adapters, and gradie
   \label{fig:zhong}
 \end{figure}
 
-The first demo should answer a rendered visual prompt: ``Explain the evolution of the Chinese character zhong.'' The target answer image should contain:
+The first demo should answer a rendered visual prompt such as: ``Explain the evolution of the Chinese character yan.'' The target answer image should contain:
 \begin{itemize}[leftmargin=*]
   \item a title and concise modern explanation,
-  \item a historical timeline with real glyph exemplars,
-  \item stage labels and citations,
-  \item modern-language text as rendered image.
+  \item English and Chinese paragraphs rendered as page text,
+  \item a classical-style line such as ``yan is the visible trace of speech'',
+  \item a historical timeline with real oracle, bronze, seal, and modern glyph exemplars,
+  \item stage labels and citations as rendered image text.
 \end{itemize}
 
-This directly tests whether the model can combine language understanding and visual-script generation.
+The existing Zhong figure in Figure~\ref{fig:zhong} is a compact stage-timeline example; the Yan figures in Figures~\ref{fig:yanhero} and~\ref{fig:visualinference} show the fuller answer-page style. Together they test whether the model can combine language understanding, visual page composition, and historical script generation.
 
 \section{AgInTi Artifact Loop}
 
