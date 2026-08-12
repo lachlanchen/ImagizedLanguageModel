@@ -80,3 +80,23 @@ must not use frozen examples or imply that a checkpoint was selected.
 - Opening the V20 frozen partition.
 - Implementing or training V21 in this revision.
 - Building the 3D/movie extension before the 2D causal language loop passes.
+
+## Execution Record
+
+Status: completed on 2026-08-12.
+
+- Added the measured V20 receipt and deterministic result figure.
+- Updated the engineering goal, README, 2026 decision scan, TeX manuscript,
+  and compiled PDF.
+- Added the Visual Language Stream contract with explicit sequence/time and
+  optional depth axes while retaining a 2D-first acceptance order.
+- Regenerated the result figure twice with stable SHA-256
+  `b87e7d5060850c6cb5168d5b2165cd1e79603babc9ec41d4d2f8eeb58e83d6d8`.
+- Compiled the 27-page paper with no unresolved references, LaTeX errors, or
+  overfull boxes introduced by this revision. Existing narrow-table underfull
+  warnings remain unrelated to V20.
+- Visually inspected PDF pages 13--15; the V20 table, result figure, caption,
+  and transition to V21 are legible and non-overlapping.
+- `pytest` reports `31 passed`; Ruff and Python compilation pass.
+- No manuscript baseline or response-letter workflow exists in this research
+  draft, so a reviewer redline was not generated.
