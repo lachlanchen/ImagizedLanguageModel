@@ -15,6 +15,7 @@ from ilm.visual_lm.retinal_topology_router import (
 )
 from scripts.train_retinal_topology_router import (
     ARCHITECTURE,
+    EXPECTED_PVF_SHA256,
     FIXED_EVIDENCE_ARGUMENTS,
     FIXED_LOSS_ARGUMENTS,
     FIXED_MODEL_ARGUMENTS,
@@ -30,6 +31,7 @@ from scripts.train_retinal_topology_router import (
     selection_rule,
     validate_resume_checkpoint,
 )
+from scripts.eval_retinal_topology_router_development import validate_pair_metadata
 
 
 def _partition() -> dict[str, object]:
@@ -78,6 +80,7 @@ def _fixed_args(*, smoke: bool = False) -> argparse.Namespace:
         "smoke": smoke,
         "route_mode": FIELD_ROUTE,
         "pvf_checkpoint": "pvf.pt",
+        "manifest": "data.jsonl",
     }
     return argparse.Namespace(**values)
 
@@ -96,6 +99,40 @@ def _config(route_mode: str = FIELD_ROUTE) -> RetinalTopologyRouterConfig:
         dropout=0.0,
         route_mode=route_mode,
     )
+
+
+def _paired_checkpoint(route_mode: str) -> dict[str, object]:
+    config = _config(route_mode)
+    arguments = vars(_fixed_args()).copy()
+    arguments["route_mode"] = route_mode
+    arguments["smoke"] = False
+    return {
+        "architecture": ARCHITECTURE,
+        "route_mode": route_mode,
+        "planner_config": retinal_topology_router_config_payload(config),
+        "partition": _partition(),
+        "pvf_sha256": EXPECTED_PVF_SHA256,
+        "selection_rule": selection_rule(route_mode),
+        "best_development": {"step": 200},
+        "smoke_only": False,
+        "frozen_images_instantiated_during_training": False,
+        "arguments": arguments,
+        "student_contract": {
+            "route_mode": route_mode,
+            "global_state_enters_detail_path": (
+                route_mode == GLOBAL_CONTROL_ROUTE
+            ),
+            "target_spatial_pixels_enter_condition": False,
+            "student_received_token_ids": False,
+            "student_received_unicode_ids": False,
+            "student_received_ocr": False,
+            "student_received_character_labels": False,
+            "student_used_visual_codebook": False,
+            "student_used_candidate_classifier": False,
+            "student_used_external_language_model": False,
+            "retina_trainable": False,
+        },
+    }
 
 
 def test_candidate_selection_requires_every_strict_gate() -> None:
@@ -340,3 +377,57 @@ def test_checkpoint_records_image_only_student_contract(
     assert payload["frozen_images_instantiated_during_training"] is False
     assert payload["paired_control_gate_passed"] is False
     assert payload["blinded_readability_gate_passed"] is False
+
+
+def test_paired_audit_accepts_only_clean_equal_shape_arms() -> None:
+    candidate = _paired_checkpoint(FIELD_ROUTE)
+    control = _paired_checkpoint(GLOBAL_CONTROL_ROUTE)
+    candidate_config, control_config = validate_pair_metadata(candidate, control)
+    assert candidate_config.route_mode == FIELD_ROUTE
+    assert control_config.route_mode == GLOBAL_CONTROL_ROUTE
+    assert {
+        **retinal_topology_router_config_payload(candidate_config),
+        "route_mode": None,
+    } == {
+        **retinal_topology_router_config_payload(control_config),
+        "route_mode": None,
+    }
+
+
+@pytest.mark.parametrize(
+    ("arm", "mutation"),
+    (
+        ("candidate", lambda value: value.update(smoke_only=True)),
+        ("candidate", lambda value: value.update(best_development=None)),
+        ("candidate", lambda value: value.update(pvf_sha256="wrong")),
+        (
+            "candidate",
+            lambda value: value["student_contract"].update(
+                student_received_token_ids=True
+            ),
+        ),
+        (
+            "control",
+            lambda value: value.update(
+                partition={**_partition(), "salt": "wrong"}
+            ),
+        ),
+        (
+            "control",
+            lambda value: value["arguments"].update(seed=1),
+        ),
+        (
+            "control",
+            lambda value: value["planner_config"].update(pointwise_blocks=2),
+        ),
+    ),
+)
+def test_paired_audit_rejects_noncomparable_or_contaminated_arms(
+    arm: str,
+    mutation,
+) -> None:
+    candidate = _paired_checkpoint(FIELD_ROUTE)
+    control = _paired_checkpoint(GLOBAL_CONTROL_ROUTE)
+    mutation(candidate if arm == "candidate" else control)
+    with pytest.raises(ValueError):
+        validate_pair_metadata(candidate, control)
