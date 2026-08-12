@@ -31,6 +31,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--threshold", type=float, default=0.5)
     parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument("--stochastic", action="store_true")
+    parser.add_argument("--feedback-mode", choices=("soft", "hard"), default="soft")
     parser.add_argument("--variant", type=int, default=2_000_003)
     parser.add_argument("--device", default="auto")
     return parser.parse_args()
@@ -89,6 +90,7 @@ def main() -> None:
             threshold=args.threshold,
             temperature=args.temperature,
             stochastic=args.stochastic,
+            feedback_mode=args.feedback_mode,
         )
     if device.type == "cuda":
         torch.cuda.synchronize(device)

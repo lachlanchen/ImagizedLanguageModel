@@ -61,6 +61,7 @@ def parse_args() -> argparse.Namespace:
     model.add_argument("--heads", type=int, default=8)
     model.add_argument("--mlp-ratio", type=float, default=3.0)
     model.add_argument("--dropout", type=float, default=0.0)
+    model.add_argument("--local-motor-gain", type=float, default=0.15)
 
     train = parser.add_argument_group("optimization")
     train.add_argument("--out", default="artifacts/ink_stream")
@@ -73,6 +74,9 @@ def parse_args() -> argparse.Namespace:
     train.add_argument("--warmup-steps", type=int, default=100)
     train.add_argument("--ink-weight", type=float, default=4.0)
     train.add_argument("--edge-weight", type=float, default=0.15)
+    train.add_argument("--density-weight", type=float, default=0.50)
+    train.add_argument("--self-feedback-probability", type=float, default=0.45)
+    train.add_argument("--self-feedback-warmup", type=int, default=300)
     train.add_argument("--grad-clip", type=float, default=1.0)
     train.add_argument("--precision", choices=("fp32", "fp16", "bf16"), default="bf16")
     train.add_argument("--device", default="auto")
@@ -195,10 +199,17 @@ def evaluate(
     precision: str,
     ink_weight: float,
     edge_weight: float,
+    density_weight: float,
     maximum_batches: int = 8,
 ) -> dict[str, float]:
     model.eval()
-    totals: dict[str, float] = {"loss": 0.0, "bce": 0.0, "edge": 0.0, "ink_f1": 0.0}
+    totals: dict[str, float] = {
+        "loss": 0.0,
+        "bce": 0.0,
+        "edge": 0.0,
+        "density": 0.0,
+        "ink_f1": 0.0,
+    }
     batches = 0
     for batch_index, batch in enumerate(loader):
         if batch_index >= maximum_batches:
@@ -214,10 +225,12 @@ def evaluate(
                 weights,
                 ink_weight=ink_weight,
                 edge_weight=edge_weight,
+                density_weight=density_weight,
             )
         totals["loss"] += float(loss)
         totals["bce"] += float(parts["bce"])
         totals["edge"] += float(parts["edge"])
+        totals["density"] += float(parts["density"])
         totals["ink_f1"] += float(parts["ink_f1"])
         batches += 1
     model.train()
@@ -266,6 +279,7 @@ def save_sample(
             maximum_new_strips=generation_strips,
             threshold=0.5,
             stochastic=False,
+            feedback_mode="soft",
         )
     prefix_length = prefix.shape[1]
     answer_only = generated[:, prefix_length:]
@@ -328,6 +342,7 @@ def main() -> None:
         heads=args.heads,
         mlp_ratio=args.mlp_ratio,
         dropout=args.dropout,
+        local_motor_gain=args.local_motor_gain,
     )
     model = InkStreamLM(model_config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay, betas=(0.9, 0.95))
@@ -377,13 +392,36 @@ def main() -> None:
             for group in optimizer.param_groups:
                 group["lr"] = lr
             with autocast_context(device, args.precision):
-                logits = model(inputs)
+                feedback_probability = args.self_feedback_probability * min(
+                    1.0,
+                    global_step / max(1, args.self_feedback_warmup),
+                )
+                if feedback_probability > 0:
+                    with torch.no_grad():
+                        teacher_prediction = model(inputs).sigmoid().reshape_as(inputs)
+                    replacement = torch.rand(
+                        inputs.shape[:2],
+                        device=inputs.device,
+                    ) < feedback_probability
+                    replacement[:, 0] = False
+                    replacement &= weights > 0
+                    mixed_inputs = inputs.clone()
+                    previous_prediction = teacher_prediction[:, :-1].detach()
+                    mixed_inputs[:, 1:] = torch.where(
+                        replacement[:, 1:, None, None, None],
+                        previous_prediction,
+                        inputs[:, 1:],
+                    )
+                else:
+                    mixed_inputs = inputs
+                logits = model(mixed_inputs)
                 loss, parts = ink_stream_loss(
                     logits,
                     targets,
                     weights,
                     ink_weight=args.ink_weight,
                     edge_weight=args.edge_weight,
+                    density_weight=args.density_weight,
                 )
                 scaled_loss = loss / args.gradient_accumulation
             scaler.scale(scaled_loss).backward()
@@ -406,6 +444,7 @@ def main() -> None:
                     "loss": float(loss.detach()),
                     "lr": lr,
                     "gradient_norm": float(gradient_norm),
+                    "self_feedback_probability": feedback_probability,
                     "elapsed_seconds": time.monotonic() - started,
                     **{key: float(value) for key, value in parts.items()},
                 }
@@ -420,6 +459,7 @@ def main() -> None:
                     precision=args.precision,
                     ink_weight=args.ink_weight,
                     edge_weight=args.edge_weight,
+                    density_weight=args.density_weight,
                 )
                 event = {
                     "stage": "validation",

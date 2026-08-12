@@ -19,6 +19,7 @@ class InkStreamConfig:
     heads: int = 8
     mlp_ratio: float = 3.0
     dropout: float = 0.0
+    local_motor_gain: float = 1.0
 
     def __post_init__(self) -> None:
         if self.ribbon_height < 24 or self.strip_width < 2:
@@ -165,7 +166,7 @@ class InkStreamLM(nn.Module):
         for block in self.blocks:
             state = block(state)
         state = self.output_norm(state)
-        return self.motor(state) + self.local_motor(flat)
+        return self.motor(state) + self.config.local_motor_gain * self.local_motor(flat)
 
     @torch.no_grad()
     def generate(
@@ -176,6 +177,7 @@ class InkStreamLM(nn.Module):
         threshold: float = 0.5,
         temperature: float = 1.0,
         stochastic: bool = False,
+        feedback_mode: str = "soft",
     ) -> torch.Tensor:
         if prefix.ndim != 5 or prefix.shape[0] != 1:
             raise ValueError("generation currently requires one visual stream")
@@ -184,7 +186,14 @@ class InkStreamLM(nn.Module):
             context = sequence[:, -self.config.maximum_strips :]
             logits = self(context)[:, -1] / max(temperature, 1e-4)
             probability = logits.sigmoid()
-            next_flat = torch.bernoulli(probability) if stochastic else (probability >= threshold).to(probability.dtype)
+            if stochastic:
+                next_flat = torch.bernoulli(probability)
+            elif feedback_mode == "soft":
+                next_flat = probability
+            elif feedback_mode == "hard":
+                next_flat = (probability >= threshold).to(probability.dtype)
+            else:
+                raise ValueError("feedback_mode must be soft or hard")
             next_strip = next_flat.reshape(
                 1,
                 1,
@@ -203,6 +212,7 @@ def ink_stream_loss(
     *,
     ink_weight: float = 4.0,
     edge_weight: float = 0.15,
+    density_weight: float = 0.25,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     target_flat = target.flatten(2)
     pixel_weight = 1.0 + target_flat * ink_weight
@@ -221,7 +231,10 @@ def ink_stream_loss(
         ((pred_dx - target_dx).abs() * strip_weight).sum() / strip_weight.sum().clamp_min(1.0) / pred_dx[0, 0].numel()
         + ((pred_dy - target_dy).abs() * strip_weight).sum() / strip_weight.sum().clamp_min(1.0) / pred_dy[0, 0].numel()
     )
-    loss = reconstruction + edge_weight * edge
+    prediction_density = prediction.mean(dim=(-3, -2, -1))
+    target_density = target.mean(dim=(-3, -2, -1))
+    density = (((prediction_density - target_density).square()) * sequence_weight).sum() / sequence_weight.sum().clamp_min(1.0)
+    loss = reconstruction + edge_weight * edge + density_weight * density
     with torch.no_grad():
         hard = prediction >= 0.5
         truth = target >= 0.5
@@ -233,6 +246,13 @@ def ink_stream_loss(
     return loss, {
         "bce": reconstruction.detach(),
         "edge": edge.detach(),
+        "density": density.detach(),
+        "predicted_ink_density": (
+            (prediction_density * sequence_weight).sum() / sequence_weight.sum().clamp_min(1.0)
+        ).detach(),
+        "target_ink_density": (
+            (target_density * sequence_weight).sum() / sequence_weight.sum().clamp_min(1.0)
+        ).detach(),
         "ink_precision": precision.detach(),
         "ink_recall": recall.detach(),
         "ink_f1": f1.detach(),
