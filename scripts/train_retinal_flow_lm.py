@@ -62,6 +62,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--energy-dim", type=int, default=256)
     parser.add_argument("--condition-dropout", type=float, default=0.10)
     parser.add_argument("--duplicate-similarity", type=float, default=0.90)
+    parser.add_argument("--energy-positions-per-sequence", type=int, default=8)
     parser.add_argument("--flow-weight", type=float, default=1.0)
     parser.add_argument("--energy-weight", type=float, default=0.60)
     parser.add_argument("--invariance-weight", type=float, default=0.20)
@@ -197,6 +198,7 @@ def loss_for_batch(
         outputs,
         context,
         target_ink,
+        energy_positions_per_sequence=args.energy_positions_per_sequence,
         duplicate_similarity=args.duplicate_similarity,
         flow_weight=args.flow_weight,
         energy_weight=args.energy_weight,
@@ -460,6 +462,7 @@ def main() -> None:
         "train_records": len(train_dataset.records),
         "validation_records": len(validation_dataset.records),
         "sequence_length": args.sequence_length,
+        "energy_positions_per_sequence": args.energy_positions_per_sequence,
         "initialization": initialization,
         "planned_steps": planned_steps,
         "device": str(device),

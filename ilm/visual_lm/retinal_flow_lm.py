@@ -286,6 +286,7 @@ def retinal_flow_loss(
     context_foveas: torch.Tensor,
     target_ink: torch.Tensor,
     *,
+    energy_positions_per_sequence: int = 8,
     duplicate_similarity: float = 0.90,
     flow_weight: float = 1.0,
     energy_weight: float = 0.60,
@@ -297,27 +298,35 @@ def retinal_flow_loss(
     generator: torch.Generator | None = None,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor], dict[str, torch.Tensor]]:
     batch, length = context_foveas.shape[:2]
+    if not 1 <= energy_positions_per_sequence <= length:
+        raise ValueError("energy_positions_per_sequence must be within the causal sequence")
     batch_indices = torch.arange(batch, device=context_foveas.device)
-    positions = torch.randint(
-        0,
+    random_order = torch.rand(
+        batch,
         length,
-        (batch,),
         device=context_foveas.device,
         generator=generator,
+    ).argsort(dim=1)[:, :energy_positions_per_sequence]
+    energy_batches = batch_indices[:, None].expand_as(random_order)
+    energy_condition = outputs["condition"][energy_batches, random_order].flatten(0, 1)
+    energy_target_visual = (
+        outputs["target_visual"][energy_batches, random_order].float().detach().flatten(0, 1)
     )
+
+    visual_positive, target_similarity = _visual_positive_mask(
+        energy_target_visual,
+        duplicate_similarity,
+    )
+    energy_logits = model.energy(energy_condition, energy_target_visual)
+    energy, energy_retrieval = _multi_positive_nce(energy_logits, visual_positive)
+
+    positions = random_order[:, 0]
     condition = outputs["condition"][batch_indices, positions]
     target_visual = outputs["target_visual"][batch_indices, positions].float().detach()
     current_visual = outputs["current_visual"][batch_indices, positions].float()
     current_reference = outputs["current_reference_visual"][batch_indices, positions].float()
     current_fovea = context_foveas[batch_indices, positions].float()
     target_fovea = target_ink[batch_indices, positions].float().clamp(0, 1)
-
-    visual_positive, target_similarity = _visual_positive_mask(
-        target_visual,
-        duplicate_similarity,
-    )
-    energy_logits = model.energy(condition, target_visual)
-    energy, energy_retrieval = _multi_positive_nce(energy_logits, visual_positive)
 
     flow_target = target_fovea * 2.0 - 1.0
     flow_state, velocity, time_field, _ = flow_training_state(
@@ -367,9 +376,10 @@ def retinal_flow_loss(
         "visual_energy_nce": energy.detach(),
         "visual_energy_top1": energy_retrieval.detach(),
         "visual_positive_count": visual_positive.float().sum(dim=1).mean().detach(),
+        "visual_energy_queries": energy.new_tensor(float(energy_condition.shape[0])),
         "visual_off_diagonal_similarity": (
             (target_similarity.sum() - target_similarity.diagonal().sum())
-            / max(1, batch * (batch - 1))
+            / max(1, energy_condition.shape[0] * (energy_condition.shape[0] - 1))
         ).detach(),
         "cross_render_invariance": invariance.detach(),
         "retina_contrastive_loss": retina_contrastive.detach(),
