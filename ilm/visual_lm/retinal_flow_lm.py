@@ -259,14 +259,21 @@ def _multi_positive_nce(
     logits: torch.Tensor,
     positive_mask: torch.Tensor,
 ) -> tuple[torch.Tensor, torch.Tensor]:
+    rows = _multi_positive_nce_rows(logits, positive_mask)
+    retrieval = positive_mask.gather(1, logits.argmax(dim=1, keepdim=True)).float().mean()
+    return rows.mean(), retrieval
+
+
+def _multi_positive_nce_rows(
+    logits: torch.Tensor,
+    positive_mask: torch.Tensor,
+) -> torch.Tensor:
     if logits.ndim != 2 or logits.shape != positive_mask.shape:
         raise ValueError("multi-positive logits and mask must be matching matrices")
     if not positive_mask.any(dim=1).all():
         raise ValueError("every query must have at least one visual positive")
     positive_logits = logits.masked_fill(~positive_mask, -torch.inf)
-    loss = (torch.logsumexp(logits, dim=1) - torch.logsumexp(positive_logits, dim=1)).mean()
-    retrieval = positive_mask.gather(1, logits.argmax(dim=1, keepdim=True)).float().mean()
-    return loss, retrieval
+    return torch.logsumexp(logits, dim=1) - torch.logsumexp(positive_logits, dim=1)
 
 
 def _visual_positive_mask(
@@ -293,6 +300,7 @@ def retinal_flow_loss(
     invariance_weight: float = 0.20,
     retina_contrastive_weight: float = 0.25,
     retina_variance_weight: float = 0.10,
+    writer_cycle_weight: float = 0.35,
     endpoint_weight: float = 0.10,
     stroke_weight: float = 2.0,
     generator: torch.Generator | None = None,
@@ -354,6 +362,30 @@ def retinal_flow_loss(
         stroke_weight=stroke_weight,
     )
 
+    endpoint = flow_state.float() - time_field.float()[:, None, None, None] * predicted_velocity.float()
+    endpoint_ink = ((endpoint + 1.0) * 0.5).clamp(0, 1)
+    generated_visual = model.target_retina(endpoint_ink)
+    normalized_generated = F.normalize(generated_visual.float(), dim=-1)
+    normalized_target = F.normalize(target_visual, dim=-1)
+    writer_positive, _ = _visual_positive_mask(target_visual, duplicate_similarity)
+    writer_logits = model.retina_scale.detach() * (
+        normalized_generated @ normalized_target.transpose(0, 1)
+    )
+    writer_cycle_rows = _multi_positive_nce_rows(writer_logits, writer_positive)
+    cycle_weights = keep.float() * (0.25 + 0.75 * time_field.float().square())
+    writer_cycle = (writer_cycle_rows * cycle_weights).sum() / cycle_weights.sum().clamp_min(1.0)
+    with torch.no_grad():
+        writer_cycle_retrieval = writer_positive.gather(
+            1,
+            writer_logits.argmax(dim=1, keepdim=True),
+        ).float()
+        writer_cycle_top1 = (
+            writer_cycle_retrieval[:, 0] * keep.float()
+        ).sum() / keep.float().sum().clamp_min(1.0)
+        writer_target_cosine = (
+            (normalized_generated * normalized_target).sum(dim=-1) * keep.float()
+        ).sum() / keep.float().sum().clamp_min(1.0)
+
     normalized_current = F.normalize(current_visual, dim=-1)
     normalized_reference = F.normalize(current_reference, dim=-1)
     invariance = (1.0 - (normalized_current * normalized_reference).sum(dim=-1)).mean()
@@ -370,6 +402,7 @@ def retinal_flow_loss(
         + invariance_weight * invariance
         + retina_contrastive_weight * retina_contrastive
         + retina_variance_weight * retina_variance
+        + writer_cycle_weight * writer_cycle
     )
     metrics = {
         **flow_metrics,
@@ -387,6 +420,9 @@ def retinal_flow_loss(
         "retina_variance_penalty": retina_variance.detach(),
         "retina_feature_std": retina_std.mean().detach(),
         "condition_keep_fraction": keep.mean().detach(),
+        "writer_cycle_nce": writer_cycle.detach(),
+        "writer_cycle_top1": writer_cycle_top1.detach(),
+        "writer_target_cosine": writer_target_cosine.detach(),
     }
     selected = {
         "batch_indices": batch_indices,
