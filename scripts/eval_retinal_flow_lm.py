@@ -567,7 +567,7 @@ def main() -> None:
         "beats_unigram": pretrained["full_top1"] > pretrained["unigram_top1"],
         "beats_bigram": pretrained["full_top1"] > pretrained["bigram_top1"],
         "uses_longer_context": (
-            pretrained["context_target_score_gain"] > 0.0
+            pretrained["context_target_log_probability_gain"] > 0.0
             and pretrained["full_top1"] >= pretrained["last_top1"]
         ),
         "learned_visual_alphabet": (
