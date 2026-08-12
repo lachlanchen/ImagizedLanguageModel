@@ -37,6 +37,11 @@ from .visual_episodes import (
     historical_episode_specs,
     instruction_episode_specs,
 )
+from .visual_actuator import (
+    ContinuousVisualActuator,
+    VisualActuatorConfig,
+    visual_actuator_loss,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -67,6 +72,8 @@ __all__ = [
     "VisualLanguageDataset",
     "VisualLanguageSample",
     "VisualAssociativeReader",
+    "ContinuousVisualActuator",
+    "VisualActuatorConfig",
     "VisualEpisodeMemory",
     "VisualEpisodeDataset",
     "VisualEpisodeSpec",
@@ -80,4 +87,5 @@ __all__ = [
     "render_folio",
     "render_folio_pages",
     "visual_saccade_loss",
+    "visual_actuator_loss",
 ]
