@@ -16,7 +16,30 @@ ILM étudie l'apprentissage et la génération du langage comme **écriture
 visible** : de l'image vers un état visuel continu, puis de nouveau vers
 l'image, sans canal symbolique caché.
 
-## Paradigme de recherche actuel : champ visuel prédictif
+## Dernier test d'instruction : le circuit de relation visuelle V23 est accepté
+
+![Résultat mesuré de V23 : six images d'instruction passent par une comparaison visuelle, une porte d'opération, le routage du glyphe source et un canonicaliseur d'image gelé pour produire une image-réponse](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
+
+V23 est la première expérience de ce dépôt à franchir toute la chaîne de preuve
+image-instruction vers image-réponse. Le modèle ne reçoit que six images
+d'écriture `32x32` et produit une image-réponse `32x32`. Son chemin déployé ne
+contient ni chaîne, token, identifiant Unicode, OCR, recherche de glyphe, indice
+de réponse, ni modèle de langage externe.
+
+Lors de l'unique évaluation gelée autorisée, sur 98 caractères chinois jamais
+vus, 1 024 épisodes et 4 096 variantes d'instruction, il atteint `0.99829` en
+choix binaire, `0.99609` au changement de requête, `0.99707` au changement
+d'opération, `0.99463` en top-1 du glyphe produit et `0.78478` en F1 pixel. Les
+contrôles aveugles à la requête et à l'opération restent exactement invariants
+au facteur qu'ils ne voient pas.
+
+Ce résultat prouve seulement le suivi d'une grammaire visuelle fixe à six rôles,
+deux associations et relation same/other; il ne prouve pas la compréhension
+libre du langage. V24 supprimera les rôles de trame fixes, lira un flux 2D
+d'écriture de longueur variable et produira une seconde trame après relecture
+de la première. Voir le [rapport V23 en anglais](../docs/visual-relation-circuit-v23-result.md).
+
+## Référence de recherche antérieure : origine du champ visuel prédictif
 
 ![Schéma du champ visuel prédictif](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 

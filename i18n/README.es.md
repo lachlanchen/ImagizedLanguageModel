@@ -16,7 +16,30 @@ ILM investiga cómo aprender y generar lenguaje como **escritura visible**: de
 imagen a estado visual continuo y de nuevo a imagen, sin un canal simbólico
 oculto.
 
-## Paradigma de investigación actual: campo visual predictivo
+## Última prueba de instrucciones: V23 aprueba el circuito de relación visual
+
+![Resultado medido de V23: seis imágenes de instrucción pasan por comparación visual, compuerta de operación, enrutamiento del glifo fuente y un normalizador de imagen congelado para producir una imagen de respuesta](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
+
+V23 es el primer experimento de este repositorio que supera toda la cadena de
+evidencia de instrucción en imagen a respuesta en imagen. El modelo recibe solo
+seis imágenes de escritura `32x32` y produce una respuesta `32x32`. Su ruta de
+inferencia no contiene cadenas, tokens, ID Unicode, OCR, consulta de glifos,
+índice de respuesta ni un modelo de lenguaje externo.
+
+En la única evaluación congelada autorizada, con 98 caracteres chinos no
+vistos, 1.024 episodios y 4.096 variantes de instrucción, alcanza `0.99829` en
+elección binaria, `0.99609` al cambiar la consulta, `0.99707` al cambiar la
+operación, `0.99463` top-1 del glifo generado y `0.78478` F1 de píxel. Los
+controles ciegos a consulta y operación permanecen exactamente invariantes al
+factor que no pueden ver.
+
+Este resultado solo demuestra seguimiento visual para una gramática fija de
+seis roles, dos asociaciones y relación same/other; no demuestra comprensión
+libre del lenguaje. V24 eliminará los roles fijos, leerá un flujo 2D de
+escritura de longitud variable y generará un segundo cuadro después de releer
+el primero. Véase el [informe V23 en inglés](../docs/visual-relation-circuit-v23-result.md).
+
+## Referencia de investigación anterior: origen del campo visual predictivo
 
 ![Diagrama del campo visual predictivo](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 

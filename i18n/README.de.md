@@ -8,11 +8,33 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
 ILM ist eine Forschungscodebasis für **Text-als-Bild-Generierung**: Sie kodiert Sprache in kompakte, bildähnliche Tensoren und erzeugt Text mit iterativer Diffusions-verstärkter Verfeinerung. Die Repräsentation zerlegt Sätze in Meta-Elemente (Grammatik, Semantik, Tonfall, Emotion) sowie hierarchische, speicherartige Codes für Wörter und Zeichen. Das vereint Ideen aus diskreter Diffusion, Superposition/Disentanglement, strukturierten Einbettungen und glyph-bewusster Zeichenerkennung.
+
+## Neuester Prompt-Test: V23-Relationsschaltung bestanden
+
+![Gemessenes V23-Ergebnis: Sechs Bild-Promptframes durchlaufen visuellen Abgleich, Operationsgatter, Quellglyphen-Routing und einen eingefrorenen Bildnormalisierer und erzeugen ein Antwortbild](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
+
+V23 ist das erste Experiment dieses Repositorys, das die vollständige
+Beweiskette von einem Bild-Prompt zu einem Bild-Antwortfeld besteht. Das Modell
+erhält nur sechs `32x32`-Schriftbilder und erzeugt ein `32x32`-Antwortbild. Im
+Inferenzpfad gibt es keine Strings, Tokens, Unicode-IDs, OCR, Glyphensuche,
+Antwortindizes oder externen Sprachmodelle.
+
+In der einzigen autorisierten Frozen-Evaluation mit 98 ungesehenen chinesischen
+Zeichen, 1.024 Episoden und 4.096 Promptvarianten erreicht es `0.99829` binäre
+Auswahl, `0.99609` Query-Wechsel, `0.99707` Operationswechsel, `0.99463`
+Glyphen-Top-1 und `0.78478` Pixel-F1. Query-blinde und operationsblinde
+Kontrollen bleiben gegenüber ihrem jeweils unsichtbaren Faktor exakt invariant.
+
+Dies belegt nur visuelles Prompt-Folgen für eine feste Grammatik mit sechs
+Rollen, zwei Bindungen und einer Same/Other-Relation, nicht freies
+Sprachverständnis. V24 soll feste Framerollen entfernen, einen variabel langen
+2D-Schriftbildstrom lesen und nach dem Wiederlesen des ersten Ausgabeframes ein
+zweites erzeugen. Siehe den [englischen V23-Bericht](../docs/visual-relation-circuit-v23-result.md).
 
 > Das Repository hält bewusst eine praxisnahe Etymologie-Pipeline und ILM-Experimentieren auf lange Sicht nebeneinander.
 

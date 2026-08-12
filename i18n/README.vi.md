@@ -16,7 +16,28 @@ ILM nghiên cứu cách học và sinh ngôn ngữ dưới dạng **chữ viết
 từ ảnh sang trạng thái thị giác liên tục rồi trở lại ảnh, không có kênh ký hiệu
 ẩn làm lõi.
 
-## Mô hình nghiên cứu hiện tại: Predictive Visual Field
+## Thử nghiệm prompt mới nhất: V23 vượt qua mạch quan hệ thị giác
+
+![Kết quả đo V23: sáu khung prompt ảnh đi qua phép so khớp thị giác, cổng thao tác, định tuyến chữ nguồn và bộ chuẩn hóa ảnh đã đóng băng để tạo một ảnh trả lời](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
+
+V23 là thử nghiệm đầu tiên trong kho này hoàn tất toàn bộ chuỗi bằng chứng từ
+prompt ảnh đến câu trả lời ảnh. Mô hình chỉ nhận sáu ảnh chữ viết `32x32` và xuất
+một ảnh trả lời `32x32`. Đường suy luận không có chuỗi ký tự, token, Unicode ID,
+OCR, tra cứu glyph, chỉ số đáp án hay mô hình ngôn ngữ bên ngoài.
+
+Trong lần đánh giá đóng băng duy nhất được cho phép trên 98 chữ Hán chưa thấy,
+1.024 episode và 4.096 biến thể prompt, độ chính xác chọn nhị phân là `0.99829`,
+đổi truy vấn `0.99609`, đổi thao tác `0.99707`, top-1 glyph đầu ra `0.99463` và
+pixel F1 `0.78478`. Hai đối chứng che truy vấn và che thao tác có mức chuyển đổi
+chính xác bằng không đối với yếu tố mà chúng không nhìn thấy.
+
+Kết quả này chỉ chứng minh việc làm theo prompt thị giác cho ngữ pháp cố định gồm
+sáu vai, hai cặp ràng buộc và quan hệ same/other; đây chưa phải hiểu ngôn ngữ tự
+do. V24 sẽ bỏ vai khung cố định, đọc luồng ảnh chữ viết 2D có độ dài thay đổi và
+sinh khung thứ hai sau khi đọc lại khung đầu tiên. Xem
+[biên bản V23 bằng tiếng Anh](../docs/visual-relation-circuit-v23-result.md).
+
+## Mốc nghiên cứu trước đây: khởi điểm Predictive Visual Field
 
 ![Sơ đồ Predictive Visual Field](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
