@@ -20,6 +20,12 @@ class VisualRetina(Protocol):
     def __call__(self, images: torch.Tensor) -> torch.Tensor: ...
 
 
+class StyleImageConfig(Protocol):
+    fovea_size: int
+    style_dim: int
+    style_base_channels: int
+
+
 @dataclass(frozen=True)
 class VisualActuatorConfig:
     """Configuration for rendering a continuous retinal plan as pixels."""
@@ -48,7 +54,7 @@ class VisualActuatorConfig:
 class StyleImageEncoder(nn.Module):
     """Compress a writing image into a continuous typography field."""
 
-    def __init__(self, config: VisualActuatorConfig):
+    def __init__(self, config: StyleImageConfig):
         super().__init__()
         base = config.style_base_channels
         self.fovea_size = config.fovea_size

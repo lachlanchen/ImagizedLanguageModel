@@ -42,6 +42,11 @@ from .visual_actuator import (
     VisualActuatorConfig,
     visual_actuator_loss,
 )
+from .visual_motor_plan import (
+    ContinuousVisualMotorPlan,
+    VisualMotorPlanConfig,
+    visual_motor_plan_loss,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -73,7 +78,9 @@ __all__ = [
     "VisualLanguageSample",
     "VisualAssociativeReader",
     "ContinuousVisualActuator",
+    "ContinuousVisualMotorPlan",
     "VisualActuatorConfig",
+    "VisualMotorPlanConfig",
     "VisualEpisodeMemory",
     "VisualEpisodeDataset",
     "VisualEpisodeSpec",
@@ -88,4 +95,5 @@ __all__ = [
     "render_folio_pages",
     "visual_saccade_loss",
     "visual_actuator_loss",
+    "visual_motor_plan_loss",
 ]
