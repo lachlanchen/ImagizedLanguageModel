@@ -131,16 +131,19 @@ reread those pixels, and retain legibility without any deployed symbolic path.
 
 ```bash
 PYTHONPATH=. python scripts/train_retinal_topology_router.py \
+  --pvf-checkpoint artifacts/predictive_visual_field_v16_memory_pilot/checkpoint_step_0002200.pt \
   --route-mode field \
-  --output artifacts/retinal_topology_router_v20_field_evidence_20260812
+  --out artifacts/retinal_topology_router_v20_field_evidence_20260812
 
 PYTHONPATH=. python scripts/train_retinal_topology_router.py \
+  --pvf-checkpoint artifacts/predictive_visual_field_v16_memory_pilot/checkpoint_step_0002200.pt \
   --route-mode global_control \
-  --output artifacts/retinal_topology_router_v20_control_evidence_20260812
+  --out artifacts/retinal_topology_router_v20_control_evidence_20260812
 
 PYTHONPATH=. python scripts/eval_retinal_topology_router_development.py \
-  --candidate artifacts/retinal_topology_router_v20_field_evidence_20260812/checkpoint_latest.pt \
-  --control artifacts/retinal_topology_router_v20_control_evidence_20260812/checkpoint_latest.pt
+  --candidate-checkpoint artifacts/retinal_topology_router_v20_field_evidence_20260812/checkpoint_latest.pt \
+  --control-checkpoint artifacts/retinal_topology_router_v20_control_evidence_20260812/checkpoint_latest.pt \
+  --out artifacts/retinal_topology_router_v20_paired_development_audit
 ```
 
 The last command is expected to reject these unselected checkpoints before
