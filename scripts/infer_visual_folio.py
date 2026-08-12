@@ -13,9 +13,9 @@ import numpy as np
 import torch
 from PIL import Image
 
-from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
 from ilm.visual_lm.folio_data import FolioRenderConfig, folio_tensor_to_image, render_folio
 from ilm.visual_lm.folio_memory import FolioMemory
+from ilm.visual_lm.folio_runtime import load_folio_encoder
 
 
 def parse_args() -> argparse.Namespace:
@@ -36,16 +36,6 @@ def choose_device(value: str) -> torch.device:
     if value == "auto":
         return torch.device("cuda" if torch.cuda.is_available() else "cpu")
     return torch.device(value)
-
-
-def load_model(path: str | Path, device: torch.device) -> tuple[FolioRetina, dict[str, Any]]:
-    checkpoint = torch.load(path, map_location=device, weights_only=False)
-    if checkpoint.get("architecture") != "visual-folio-retina-v1":
-        raise ValueError("checkpoint is not a visual folio retina")
-    model = FolioRetina(folio_config_from_payload(checkpoint["model_config"])).to(device)
-    model.load_state_dict(checkpoint["model"])
-    model.eval()
-    return model, checkpoint
 
 
 def render_config(checkpoint: dict[str, Any]) -> FolioRenderConfig:
@@ -83,7 +73,7 @@ def main() -> None:
     output = Path(args.out)
     output.mkdir(parents=True, exist_ok=True)
     device = choose_device(args.device)
-    model, checkpoint = load_model(args.checkpoint, device)
+    model, checkpoint = load_folio_encoder(args.checkpoint, device)
     config = render_config(checkpoint)
     if args.text is not None:
         query = render_folio(args.text, config=config, variant=args.variant, augment=False)
@@ -117,7 +107,8 @@ def main() -> None:
         copied_paths.append(destination)
     combine_pages(copied_paths, output / "answer.png")
     result = {
-        "architecture": "visual-folio-memory-v1",
+        "architecture": "visual-folio-memory-v2",
+        "encoder_architecture": checkpoint["architecture"],
         "input_adapter": adapter,
         "input_sha256": input_digest,
         "query_image": "query.png",

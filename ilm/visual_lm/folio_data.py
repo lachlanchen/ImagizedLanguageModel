@@ -213,6 +213,7 @@ class FolioSemanticDataset(Dataset):
         validation_fraction: float = 0.05,
         seed: int = 0,
         length: int | None = None,
+        target_fields: torch.Tensor | None = None,
     ):
         if split not in {"train", "validation", "all"}:
             raise ValueError("split must be train, validation, or all")
@@ -227,7 +228,13 @@ class FolioSemanticDataset(Dataset):
         if not selected_indices:
             raise ValueError(f"teacher cache has no documents for split={split}")
         self.documents: Sequence[dict[str, Any]] = documents
-        self.embeddings, self.embedding_mean = semantic_residual_fields(teacher_cache)
+        residuals, self.embedding_mean = semantic_residual_fields(teacher_cache)
+        if target_fields is None:
+            self.embeddings = residuals
+        else:
+            if target_fields.ndim != 2 or target_fields.shape[0] != len(documents):
+                raise ValueError("target fields must have one vector per teacher document")
+            self.embeddings = target_fields.float()
         self.indices = selected_indices
         self.render_config = render_config
         self.seed = int(seed)

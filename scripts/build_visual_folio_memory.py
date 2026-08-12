@@ -13,7 +13,6 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 
-from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
 from ilm.visual_lm.folio_data import (
     FolioRenderConfig,
     folio_tensor_to_image,
@@ -23,6 +22,7 @@ from ilm.visual_lm.folio_data import (
     stable_fraction,
 )
 from ilm.visual_lm.folio_memory import FolioMemory
+from ilm.visual_lm.folio_runtime import load_folio_encoder
 from ilm.visual_lm.rendering import GlyphCorpus
 from ilm.visual_lm.teacher import load_teacher_manifest
 from ilm.visual_lm.visual_episodes import historical_episode_specs, render_episode_answer
@@ -75,16 +75,6 @@ def atomic_torch_save(payload: dict[str, Any], path: Path) -> None:
     os.replace(temporary, path)
 
 
-def load_model(path: Path, device: torch.device) -> tuple[FolioRetina, dict[str, Any]]:
-    checkpoint = torch.load(path, map_location=device, weights_only=False)
-    if checkpoint.get("architecture") != "visual-folio-retina-v1":
-        raise ValueError("checkpoint is not a visual folio retina")
-    model = FolioRetina(folio_config_from_payload(checkpoint["model_config"])).to(device)
-    model.load_state_dict(checkpoint["model"])
-    model.eval()
-    return model, checkpoint
-
-
 def render_config_from_checkpoint(checkpoint: dict[str, Any]) -> FolioRenderConfig:
     payload = dict(checkpoint["render_config"])
     payload["augment"] = False
@@ -118,7 +108,7 @@ def paired_documents(cache: dict[str, Any]) -> list[dict[str, Any]]:
 
 @torch.no_grad()
 def encode_images(
-    model: FolioRetina,
+    model: torch.nn.Module,
     images: Sequence[torch.Tensor],
     *,
     batch_size: int,
@@ -289,7 +279,7 @@ def main() -> None:
     args = parse_args()
     device = choose_device(args.device)
     checkpoint_path = Path(args.checkpoint)
-    model, checkpoint = load_model(checkpoint_path, device)
+    model, checkpoint = load_folio_encoder(checkpoint_path, device)
     render_config = render_config_from_checkpoint(checkpoint)
     cache = load_teacher_cache(args.teacher_cache)
     pairs = paired_documents(cache)
@@ -372,7 +362,8 @@ def main() -> None:
         for entry in entries:
             handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True) + "\n")
     metadata = {
-        "architecture": "visual-folio-memory-v1",
+        "architecture": "visual-folio-memory-v2",
+        "encoder_architecture": checkpoint["architecture"],
         "checkpoint": str(checkpoint_path),
         "checkpoint_sha256": file_sha256(checkpoint_path),
         "entries": len(entries),

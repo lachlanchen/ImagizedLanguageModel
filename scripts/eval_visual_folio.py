@@ -13,7 +13,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
+from ilm.visual_lm.folio_address import interference_addresses
 from ilm.visual_lm.folio_data import (
     FolioRenderConfig,
     folio_tensor_to_image,
@@ -22,6 +22,7 @@ from ilm.visual_lm.folio_data import (
     semantic_residual_fields,
 )
 from ilm.visual_lm.folio_memory import FolioMemory
+from ilm.visual_lm.folio_runtime import folio_encoder_from_checkpoint
 
 
 def parse_args() -> argparse.Namespace:
@@ -87,11 +88,13 @@ def finalize(values: dict[str, float]) -> dict[str, float | int | None]:
     }
 
 
-def teacher_fields(path: str | None) -> dict[str, torch.Tensor]:
+def teacher_fields(path: str | None, checkpoint: dict[str, Any]) -> dict[str, torch.Tensor]:
     if path is None:
         return {}
     cache = load_teacher_cache(path)
     residuals, _ = semantic_residual_fields(cache)
+    if checkpoint.get("architecture") == "visual-folio-interference-retina-v2":
+        residuals = interference_addresses(residuals, checkpoint["interference_transform"])
     output = {}
     for index, document in enumerate(cache["documents"]):
         if document["kind"] == "prompt":
@@ -135,13 +138,11 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
     device = choose_device(args.device)
     checkpoint = torch.load(args.checkpoint, map_location=device, weights_only=False)
-    config = folio_config_from_payload(checkpoint["model_config"])
+    config = checkpoint["model_config"]
     render_payload = dict(checkpoint["render_config"])
     render_payload["augment"] = False
     render_config = FolioRenderConfig(**render_payload)
-    model = FolioRetina(config).to(device)
-    model.load_state_dict(checkpoint["model"])
-    model.eval()
+    model = folio_encoder_from_checkpoint(checkpoint, device)
     memory = FolioMemory.load(args.memory)
     targets = []
     for entry_index, entry in enumerate(memory.entries):
@@ -164,7 +165,7 @@ def main() -> None:
     )
     if args.limit is not None:
         targets = targets[: args.limit]
-    teacher = teacher_fields(args.teacher_cache)
+    teacher = teacher_fields(args.teacher_cache, checkpoint)
     groups: dict[str, dict[str, float]] = defaultdict(metric_template)
     predictions = []
     encode_seconds = 0.0
@@ -173,7 +174,7 @@ def main() -> None:
 
     for batch in chunks(targets, max(1, args.batch_size)):
         images = torch.stack(
-            [image_to_ink(path, height=config.image_height, width=config.image_width) for _, _, path, _ in batch]
+            [image_to_ink(path, height=int(config["image_height"]), width=int(config["image_width"])) for _, _, path, _ in batch]
         ).to(device)
         if device.type == "cuda":
             torch.cuda.synchronize(device)
@@ -228,7 +229,8 @@ def main() -> None:
             )
 
     report = {
-        "architecture": "visual-folio-memory-v1",
+        "architecture": "visual-folio-memory-v2",
+        "encoder_architecture": checkpoint["architecture"],
         "checkpoint": args.checkpoint,
         "memory": args.memory,
         "memory_entries": len(memory.entries),
