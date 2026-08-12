@@ -1,4 +1,50 @@
-# Visual Field Machine: A Non-Token Architecture for Visible Language
+# Visual Folio Machine: A Non-Token Architecture for Visible Language
+
+## Current architecture decision
+
+The implementation has moved from a single global retinal vector to an ordered
+**visual folio**. A grayscale writing image (X\in[0,1]^{H\times W}) is reduced
+by a stroke-preserving convolutional stem to a field
+(F\in\mathbb R^{H/16\times W/16\times d}). Alternating axial attention reads
+along each writing line and then exchanges context between lines:
+
+\[
+F'_{r,:,:}=F_{r,:,:}+\operatorname{Attn}_{x}(F_{r,:,:}),\qquad
+F''_{:,c,:}=F'_{:,c,:}+\operatorname{Attn}_{y}(F'_{:,c,:}).
+\]
+
+This retains visual order without assigning any strip or patch a lexical ID.
+An ink-aware pooling read produces the continuous document field (s(X)).
+
+The offline semantic teacher has a large common direction, so raw cosine is a
+misleading objective. For corpus fields (t_i), training instead uses
+
+\[
+\mu={1\over N}\sum_i t_i,\qquad
+r_i={t_i-\mu\over\lVert t_i-\mu\rVert_2}.
+\]
+
+Two independently rendered images of the same document are aligned to (r_i),
+to each other, and to the pairwise geometry (r_i^\top r_j). The resulting
+checkpoint contains only the visual student. Neither BGE nor Qwen is called at
+inference.
+
+At runtime, a key is (k_{iv}=s(A_v(q_i))) for visual augmentation (A_v) of
+question image (q_i); its value is one or more exact answer-page images
+(P_i). Retrieval is
+
+\[
+i^*=\arg\max_i\max_v s(X)^\top k_{iv}.
+\]
+
+The runtime manifest deliberately stores no prompt or answer strings. It stores
+image paths, provenance, language/source metadata, and continuous keys. Typed
+UI input is discarded after deterministic rasterization.
+
+This is a useful but bounded language mechanism: semantic visual addressing and
+exact image output. It is not yet unrestricted composition. Novel writing is a
+separate whole-field masked-refinement stage, conditioned on retrieved pages
+and evidence, so its failure cannot corrupt exact historical material.
 
 ## Why the obvious design failed
 
@@ -9,6 +55,14 @@ objective gives most pixels to paper, margins, and layout; exact strokes occupy
 a small minority. It also asks one network to discover semantics, remember
 facts, typeset prose, and reproduce historical evidence through the same noisy
 channel.
+
+A second obvious design also failed. InkStream predicted 8-pixel-wide image
+columns causally. Scheduled self-feedback kept density finite and achieved
+validation ink F1 0.639, but autonomous continuation collapsed to repeated
+grey stamps. The local next-column objective learned stroke continuation, not
+semantic choice or stable writing. The Visual Folio Machine therefore uses
+parallel page reading and will use whole-field answer revision rather than
+unbounded pixel feedback.
 
 The new design rejects three assumptions:
 

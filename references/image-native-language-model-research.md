@@ -1,6 +1,44 @@
 # Image-Native Language Model Research Dossier
 
-Date: 2026-06-08
+Date: 2026-08-12
+
+## 2026 architecture revision: Visual Folio Machine
+
+Three measured results changed the project direction:
+
+1. Whole-page conditional flow reduced validation velocity loss but generated
+   only page-like texture. Page statistics are not language.
+2. A global visual associative encoder beat random retrieval but failed all
+   historical paraphrases. One pooled vector trained only from paired images
+   did not acquire enough semantics.
+3. Causal 8-pixel InkStream reached teacher-forced validation F1 0.639 after
+   2,500 updates, but every autonomous sample collapsed to repetitive grey
+   columns. Local pixel likelihood and scheduled sampling did not solve
+   exposure bias or semantic generation.
+
+The current implementation therefore separates four operations:
+
+- **ordered visual reading:** convolutional stroke retina plus axial line/page
+  attention;
+- **semantic field distillation:** a local open embedding teacher supplies
+  centered continuous targets offline, then is removed;
+- **visual folio recall:** image-derived keys retrieve exact image-valued answer
+  pages, with no answer strings in runtime memory;
+- **evidence-aware composition:** attested historical pixels are copied with
+  provenance; novel connective writing will use masked whole-field revision.
+
+This is different from PIXEL, which is primarily a masked visual encoder, and
+from PIXAR/PixelGPT, which use autoregressive patch prediction. It is also not
+OCR-RAG: no OCR transcript reaches the student or deployed memory lookup. The
+first bounded proof is semantic image-to-image retrieval under unseen fonts and
+validated paraphrases. Open-ended image generation remains a later, separately
+measured proof.
+
+The BGE-M3 cache is a training workaround, not part of the claimed independent
+model. Raw BGE fields on a 10,000-document Chinese corpus had unrelated-pair
+mean cosine about 0.360 and mean-vector norm 0.597. Centering reduced the
+unrelated-pair mean to approximately zero, preventing a student from earning a
+high cosine merely by learning the corpus-wide direction.
 
 Goal: design an Imagized Language Model (ILM) whose primary input and output are images of writing, not linguistic tokens. The model should read book pages, handwritten scripts, oracle-bone forms, cuneiform-like signs, and other historical writing as visual evidence; it should answer by producing readable rendered images, including modern-language explanations and historically faithful glyph forms.
 

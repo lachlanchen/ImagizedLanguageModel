@@ -39,16 +39,18 @@ not the model output and cannot represent every historical form.
 
 ## Model contract
 
-The main implementation is a **Visual Field Machine**, not a page diffusion
-model. It separates visual reading, memory, thought, and writing:
+The main implementation is a **Visual Folio Machine**, not a page diffusion
+model and not a next-patch clone. It separates visual reading, semantic field,
+memory, evidence, and writing:
 
-- a peripheral page view and adaptive high-resolution foveae read occupied ink;
-- recurrent continuous visual state integrates the foveae without text IDs;
-- a content-addressed image memory stores answer regions and factual evidence;
+- an ordered axial retina reads full-resolution writing lines without OCR;
+- offline teacher fields are centered and distilled into a continuous student
+  field; the teacher is absent from the checkpoint and runtime;
+- a content-addressed folio stores image-derived keys and exact answer pages;
 - a provenance gate copies attested historical forms instead of hallucinating
   them;
-- a recurrent canvas controller decides which visible region to write next;
-- a high-resolution neural ink writer renders only occupied line/glyph regions;
+- a whole-answer masked canvas revises visible regions in parallel rather than
+  feeding its own fragile pixel columns back forever;
 - optional OCR is restricted to evaluation and representable sidecars.
 
 There is no BPE vocabulary, character embedding table, Unicode-ID tensor,
@@ -61,6 +63,13 @@ a negative baseline. On the first measured run its held-out flow velocity MSE
 fell from 1.780 at step 200 to 0.851 at step 1,200, yet its output remained
 illegible page texture. That result rejects the assumption that learning page
 appearance from noise is sufficient to learn visible language.
+
+The causal InkStream experiment is a second negative baseline. A 7.46M model
+trained for 2,500 updates reached teacher-forced validation ink F1 0.639 using
+0.61 GB peak VRAM, yet autonomous output became repeated grey column stamps.
+That rejects teacher-forced next-column accuracy as evidence of visual language
+generation. The project now treats held-out semantic retrieval and autonomous
+page legibility as separate mandatory tests.
 
 ## Dataset workaround
 
