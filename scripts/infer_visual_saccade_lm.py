@@ -164,7 +164,10 @@ def main() -> None:
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    if checkpoint.get("architecture") != "visual-saccade-language-model-v1":
+    if checkpoint.get("architecture") not in {
+        "visual-saccade-language-model-v1",
+        "visual-saccade-language-model-v2",
+    }:
         raise ValueError("checkpoint is not a visual saccade language model")
     model = VisualSaccadeLM(visual_saccade_config_from_payload(checkpoint["model_config"]))
     model.load_state_dict(checkpoint["model"])

@@ -40,6 +40,7 @@ class VisualSaccadeConfig:
     retina_base_channels: int = 64
     ink_base_channels: int = 96
     dropout: float = 0.05
+    visual_hypotheses: int = 1
 
     def __post_init__(self) -> None:
         if self.fovea_size < 16 or self.fovea_size % 8:
@@ -48,6 +49,8 @@ class VisualSaccadeConfig:
             raise ValueError("visual saccade state is underspecified")
         if self.state_layers < 1:
             raise ValueError("state_layers must be positive")
+        if not 1 <= self.visual_hypotheses <= 32:
+            raise ValueError("visual_hypotheses must be between one and 32")
 
 
 class FovealRetina(nn.Module):
@@ -124,6 +127,36 @@ class NextFoveaInkHead(nn.Module):
         return ink.reshape(batch, length, 1, ink.shape[-2], ink.shape[-1])
 
 
+class ContinuousVisualMixture(nn.Module):
+    """A compact mixture distribution over possible next visual fixations."""
+
+    def __init__(self, config: VisualSaccadeConfig):
+        super().__init__()
+        self.hypotheses = config.visual_hypotheses
+        self.visual_dim = config.visual_dim
+        self.trunk = nn.Sequential(
+            nn.LayerNorm(config.state_dim),
+            nn.Linear(config.state_dim, config.state_dim * 2),
+            nn.SiLU(),
+            nn.Linear(config.state_dim * 2, config.state_dim),
+            nn.SiLU(),
+        )
+        self.components = nn.Linear(
+            config.state_dim,
+            config.visual_hypotheses * config.visual_dim,
+        )
+        self.mixture = nn.Linear(config.state_dim, config.visual_hypotheses)
+
+    def forward(self, state: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        hidden = self.trunk(state)
+        components = self.components(hidden).reshape(
+            *state.shape[:-1],
+            self.hypotheses,
+            self.visual_dim,
+        )
+        return components, self.mixture(hidden)
+
+
 class VisualSaccadeLM(nn.Module):
     """Causal language dynamics over continuous visual fixations."""
 
@@ -140,12 +173,17 @@ class VisualSaccadeLM(nn.Module):
             batch_first=True,
             dropout=config.dropout if config.state_layers > 1 else 0.0,
         )
-        self.next_visual = nn.Sequential(
-            nn.LayerNorm(config.state_dim),
-            nn.Linear(config.state_dim, config.state_dim),
-            nn.SiLU(),
-            nn.Linear(config.state_dim, config.visual_dim),
-        )
+        if config.visual_hypotheses == 1:
+            self.next_visual: nn.Module | None = nn.Sequential(
+                nn.LayerNorm(config.state_dim),
+                nn.Linear(config.state_dim, config.state_dim),
+                nn.SiLU(),
+                nn.Linear(config.state_dim, config.visual_dim),
+            )
+            self.visual_distribution: ContinuousVisualMixture | None = None
+        else:
+            self.next_visual = None
+            self.visual_distribution = ContinuousVisualMixture(config)
         self.ink = NextFoveaInkHead(config)
         self.logit_scale = nn.Parameter(torch.tensor(math.log(1.0 / 0.08)))
 
@@ -170,13 +208,49 @@ class VisualSaccadeLM(nn.Module):
     ) -> dict[str, torch.Tensor]:
         visual = self.encode_sequence(context_foveas)
         state, final_state = self.dynamics(visual, initial_state)
-        return {
+        output = {
             "current_visual": visual,
             "state": state,
             "final_state": final_state,
-            "predicted_visual": self.next_visual(state),
             "predicted_ink_logits": self.ink(state, visual),
         }
+        if self.visual_distribution is None:
+            if self.next_visual is None:
+                raise RuntimeError("visual prediction head is not configured")
+            output["predicted_visual"] = self.next_visual(state)
+        else:
+            components, mixture_logits = self.visual_distribution(state)
+            probabilities = mixture_logits.softmax(dim=-1)
+            output["predicted_visual_hypotheses"] = components
+            output["predicted_visual_logits"] = mixture_logits
+            output["predicted_visual"] = (
+                probabilities[..., None] * F.normalize(components, dim=-1)
+            ).sum(dim=-2)
+        return output
+
+    def score_visual_candidates(
+        self,
+        prediction: dict[str, torch.Tensor],
+        candidates: torch.Tensor,
+        *,
+        position: int = -1,
+    ) -> torch.Tensor:
+        """Score continuous candidate images under the predicted visual distribution."""
+
+        candidates = F.normalize(candidates.float(), dim=-1)
+        if "predicted_visual_hypotheses" not in prediction:
+            point = F.normalize(prediction["predicted_visual"][:, position].float(), dim=-1)
+            return self.contrastive_scale * point @ candidates.transpose(0, 1)
+        components = F.normalize(
+            prediction["predicted_visual_hypotheses"][:, position].float(),
+            dim=-1,
+        )
+        log_mixture = prediction["predicted_visual_logits"][:, position].float().log_softmax(dim=-1)
+        similarities = torch.einsum("bkd,nd->bkn", components, candidates)
+        return torch.logsumexp(
+            log_mixture[..., None] + self.contrastive_scale * similarities,
+            dim=1,
+        )
 
     def forward(
         self,
@@ -253,29 +327,71 @@ def visual_saccade_loss(
     retina_contrastive_weight: float = 0.30,
     retina_variance_weight: float = 0.10,
     variance_weight: float = 0.20,
+    hypothesis_diversity_weight: float = 0.05,
     generator: torch.Generator | None = None,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     predicted_sequence = outputs["predicted_visual"].float()
     target_sequence = outputs["target_visual"].float().detach()
     predicted = predicted_sequence.reshape(-1, predicted_sequence.shape[-1])
     target = target_sequence.reshape(-1, target_sequence.shape[-1])
-    normalized_prediction = F.normalize(predicted, dim=-1)
-    normalized_target = F.normalize(target, dim=-1)
-    visual = (1.0 - (normalized_prediction * normalized_target).sum(dim=-1)).mean()
-
-    selected_prediction, selected_batches, selected_positions = _sample_causal_entries(
+    normalized_target_sequence = F.normalize(target_sequence, dim=-1)
+    _, selected_batches, selected_positions = _sample_causal_entries(
         predicted_sequence,
         maximum_contrastive,
         generator=generator,
     )
-    selected_target = target_sequence[selected_batches, selected_positions]
-    selected_prediction = F.normalize(selected_prediction.float(), dim=-1)
-    selected_target = F.normalize(selected_target.float(), dim=-1)
-    labels = torch.arange(selected_prediction.shape[0], device=predicted.device)
-    logits = contrastive_scale * selected_prediction @ selected_target.transpose(0, 1)
-    contrastive = 0.5 * (
-        F.cross_entropy(logits, labels) + F.cross_entropy(logits.transpose(0, 1), labels)
-    )
+    selected_target = normalized_target_sequence[selected_batches, selected_positions]
+
+    if "predicted_visual_hypotheses" in outputs:
+        components = F.normalize(outputs["predicted_visual_hypotheses"].float(), dim=-1)
+        log_mixture = outputs["predicted_visual_logits"].float().log_softmax(dim=-1)
+        positive_similarity = torch.einsum(
+            "blkd,bld->blk",
+            components,
+            normalized_target_sequence,
+        )
+        visual = (
+            -torch.logsumexp(
+                log_mixture + contrastive_scale * (positive_similarity - 1.0),
+                dim=-1,
+            )
+            / contrastive_scale
+        ).mean()
+        selected_components = components[selected_batches, selected_positions]
+        selected_log_mixture = log_mixture[selected_batches, selected_positions]
+        similarities = torch.einsum("bkd,nd->bkn", selected_components, selected_target)
+        logits = torch.logsumexp(
+            selected_log_mixture[..., None] + contrastive_scale * similarities,
+            dim=1,
+        )
+        labels = torch.arange(selected_components.shape[0], device=predicted.device)
+        contrastive = F.cross_entropy(logits, labels)
+        component_similarity = torch.einsum("...kd,...jd->...kj", components, components)
+        diagonal = torch.eye(
+            components.shape[-2],
+            device=components.device,
+            dtype=torch.bool,
+        )
+        off_diagonal = component_similarity[..., ~diagonal]
+        diversity = F.relu(off_diagonal - 0.25).mean()
+        mixture_entropy = -(log_mixture.exp() * log_mixture).sum(dim=-1).mean()
+        positive_component_cosine = positive_similarity.amax(dim=-1).mean()
+    else:
+        normalized_prediction = F.normalize(predicted, dim=-1)
+        normalized_target = normalized_target_sequence.reshape(-1, target_sequence.shape[-1])
+        visual = (1.0 - (normalized_prediction * normalized_target).sum(dim=-1)).mean()
+        selected_prediction = F.normalize(
+            predicted_sequence[selected_batches, selected_positions],
+            dim=-1,
+        )
+        logits = contrastive_scale * selected_prediction @ selected_target.transpose(0, 1)
+        labels = torch.arange(selected_prediction.shape[0], device=predicted.device)
+        contrastive = 0.5 * (
+            F.cross_entropy(logits, labels) + F.cross_entropy(logits.transpose(0, 1), labels)
+        )
+        diversity = visual.new_zeros(())
+        mixture_entropy = visual.new_zeros(())
+        positive_component_cosine = 1.0 - visual.detach()
 
     target_ink = target_ink.float().clamp(0, 1)
     ink_logits = outputs["predicted_ink_logits"].float()
@@ -328,6 +444,7 @@ def visual_saccade_loss(
         + retina_contrastive_weight * retina_contrastive
         + retina_variance_weight * retina_variance
         + variance_weight * variance
+        + hypothesis_diversity_weight * diversity
     )
     with torch.no_grad():
         retrieval = (logits.argmax(dim=1) == labels).float().mean()
@@ -338,8 +455,11 @@ def visual_saccade_loss(
         ink_f1 = 2.0 * true_positive / (ink_binary.sum() + target_binary.sum()).clamp_min(1)
     return total, {
         "visual_cosine_loss": visual.detach(),
+        "positive_component_cosine": positive_component_cosine.detach(),
         "contrastive_loss": contrastive.detach(),
         "contrastive_top1": retrieval.detach(),
+        "hypothesis_diversity_penalty": diversity.detach(),
+        "mixture_entropy": mixture_entropy.detach(),
         "ink_bce": ink.detach(),
         "ink_f1": ink_f1.detach(),
         "cross_render_invariance": invariance.detach(),

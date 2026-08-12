@@ -49,6 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retina-base-channels", type=int, default=64)
     parser.add_argument("--ink-base-channels", type=int, default=96)
     parser.add_argument("--dropout", type=float, default=0.05)
+    parser.add_argument("--visual-hypotheses", type=int, default=8)
     parser.add_argument("--maximum-contrastive", type=int, default=768)
     parser.add_argument("--visual-weight", type=float, default=1.0)
     parser.add_argument("--contrastive-weight", type=float, default=0.50)
@@ -57,6 +58,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retina-contrastive-weight", type=float, default=0.30)
     parser.add_argument("--retina-variance-weight", type=float, default=0.10)
     parser.add_argument("--variance-weight", type=float, default=0.20)
+    parser.add_argument("--hypothesis-diversity-weight", type=float, default=0.05)
     parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--maximum-steps", type=int, default=3_000)
     parser.add_argument("--batch-size", type=int, default=32)
@@ -76,6 +78,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-batches", type=int, default=16)
     parser.add_argument("--save-every", type=int, default=400)
     parser.add_argument("--sample-count", type=int, default=8)
+    parser.add_argument("--initialize-from")
     parser.add_argument("--resume")
     return parser.parse_args()
 
@@ -125,6 +128,47 @@ def atomic_save(payload: dict[str, Any], path: Path) -> None:
     os.replace(temporary, path)
 
 
+def architecture_name(model: VisualSaccadeLM) -> str:
+    if model.config.visual_hypotheses > 1:
+        return "visual-saccade-language-model-v2"
+    return "visual-saccade-language-model-v1"
+
+
+def initialize_compatible_state(model: VisualSaccadeLM, path: str) -> dict[str, Any]:
+    checkpoint = torch.load(path, map_location="cpu", weights_only=False)
+    if checkpoint.get("architecture") not in {
+        "visual-saccade-language-model-v1",
+        "visual-saccade-language-model-v2",
+    }:
+        raise ValueError("initialization checkpoint is not a visual saccade language model")
+    source_config = dict(checkpoint["model_config"])
+    target_config = visual_saccade_config_payload(model.config)
+    source_config.setdefault("visual_hypotheses", 1)
+    for key, value in target_config.items():
+        if key == "visual_hypotheses":
+            continue
+        if source_config.get(key) != value:
+            raise ValueError(f"initialization model differs at {key}")
+    incompatible = model.load_state_dict(checkpoint["model"], strict=False)
+    invalid_missing = [
+        key for key in incompatible.missing_keys if not key.startswith("visual_distribution.")
+    ]
+    invalid_unexpected = [
+        key for key in incompatible.unexpected_keys if not key.startswith("next_visual.")
+    ]
+    if invalid_missing or invalid_unexpected:
+        raise ValueError(
+            f"incompatible initialization state: missing={invalid_missing}, unexpected={invalid_unexpected}"
+        )
+    return {
+        "path": path,
+        "architecture": checkpoint["architecture"],
+        "global_step": int(checkpoint.get("global_step", 0)),
+        "missing_new_parameters": len(incompatible.missing_keys),
+        "discarded_old_parameters": len(incompatible.unexpected_keys),
+    }
+
+
 def loss_for_batch(
     model: VisualSaccadeLM,
     batch: dict[str, Any],
@@ -150,6 +194,7 @@ def loss_for_batch(
         retina_contrastive_weight=args.retina_contrastive_weight,
         retina_variance_weight=args.retina_variance_weight,
         variance_weight=args.variance_weight,
+        hypothesis_diversity_weight=args.hypothesis_diversity_weight,
         generator=generator,
     )
     return loss, metrics, outputs, target_ink
@@ -160,6 +205,16 @@ def diagonal_retrieval(predicted: torch.Tensor, target: torch.Tensor) -> torch.T
     target = F.normalize(target.float(), dim=-1)
     labels = torch.arange(predicted.shape[0], device=predicted.device)
     return (predicted @ target.transpose(0, 1)).argmax(dim=1).eq(labels).float().mean()
+
+
+def distribution_retrieval(
+    model: VisualSaccadeLM,
+    prediction: dict[str, torch.Tensor],
+    target: torch.Tensor,
+) -> torch.Tensor:
+    scores = model.score_visual_candidates(prediction, target, position=-1)
+    labels = torch.arange(scores.shape[0], device=scores.device)
+    return scores.argmax(dim=1).eq(labels).float().mean()
 
 
 def save_validation_samples(
@@ -227,8 +282,8 @@ def validate(
                 "full_context_last_cosine": full_cosine,
                 "last_fixation_only_cosine": last_cosine,
                 "context_cosine_gain": full_cosine - last_cosine,
-                "full_context_batch_top1": diagonal_retrieval(full_prediction, target_visual),
-                "last_fixation_batch_top1": diagonal_retrieval(last_prediction, target_visual),
+                "full_context_batch_top1": distribution_retrieval(model, outputs, target_visual),
+                "last_fixation_batch_top1": distribution_retrieval(model, last_only, target_visual),
                 "context_prediction_change": (
                     1.0
                     - F.cosine_similarity(full_prediction.float(), last_prediction.float(), dim=-1).mean()
@@ -268,7 +323,7 @@ def checkpoint_payload(
     elapsed_seconds: float,
 ) -> dict[str, Any]:
     return {
-        "architecture": "visual-saccade-language-model-v1",
+        "architecture": architecture_name(model),
         "model_config": visual_saccade_config_payload(model.config),
         "render_config": render_config.__dict__,
         "model": model.state_dict(),
@@ -287,6 +342,8 @@ def checkpoint_payload(
 
 def main() -> None:
     args = parse_args()
+    if args.resume and args.initialize_from:
+        raise ValueError("--resume and --initialize-from are mutually exclusive")
     seed_everything(args.seed)
     device = choose_device(args.device)
     if device.type == "cuda":
@@ -337,8 +394,14 @@ def main() -> None:
             retina_base_channels=args.retina_base_channels,
             ink_base_channels=args.ink_base_channels,
             dropout=args.dropout,
+            visual_hypotheses=args.visual_hypotheses,
         )
     ).to(device)
+    initialization = (
+        initialize_compatible_state(model, args.initialize_from)
+        if args.initialize_from
+        else None
+    )
     optimizer = torch.optim.AdamW(
         [parameter for parameter in model.parameters() if parameter.requires_grad],
         lr=args.lr,
@@ -351,7 +414,7 @@ def main() -> None:
     elapsed_before = 0.0
     if args.resume:
         checkpoint = torch.load(args.resume, map_location=device, weights_only=False)
-        if checkpoint.get("architecture") != "visual-saccade-language-model-v1":
+        if checkpoint.get("architecture") != architecture_name(model):
             raise ValueError("resume checkpoint is not a visual saccade language model")
         if checkpoint.get("model_config") != visual_saccade_config_payload(model.config):
             raise ValueError("resume model configuration differs")
@@ -364,13 +427,15 @@ def main() -> None:
     planned_steps = args.maximum_steps or args.epochs * max(1, len(train_loader))
     startup = {
         "stage": "startup",
-        "architecture": "visual-saccade-language-model-v1",
+        "architecture": architecture_name(model),
         "parameters": sum(parameter.numel() for parameter in model.parameters()),
         "trainable_parameters": sum(parameter.numel() for parameter in model.parameters() if parameter.requires_grad),
         "records": len(records),
         "train_records": len(train_dataset.records),
         "validation_records": len(validation_dataset.records),
         "sequence_length": args.sequence_length,
+        "visual_hypotheses": args.visual_hypotheses,
+        "initialization": initialization,
         "planned_steps": planned_steps,
         "device": str(device),
     }

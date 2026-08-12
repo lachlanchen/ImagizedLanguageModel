@@ -78,7 +78,10 @@ def load_model(
     random_weights: bool,
     seed: int,
 ) -> VisualSaccadeLM:
-    if checkpoint.get("architecture") != "visual-saccade-language-model-v1":
+    if checkpoint.get("architecture") not in {
+        "visual-saccade-language-model-v1",
+        "visual-saccade-language-model-v2",
+    }:
         raise ValueError("checkpoint is not a visual saccade language model")
     if random_weights:
         torch.manual_seed(seed + 81_337)

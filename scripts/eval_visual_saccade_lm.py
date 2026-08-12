@@ -194,7 +194,7 @@ def rank_metrics(similarity: torch.Tensor, expected: torch.Tensor) -> dict[str, 
         "top1": (rank == 1).float(),
         "top5": (rank <= 5).float(),
         "mrr": 1.0 / rank.float(),
-        "target_cosine": target_score[:, 0],
+        "target_score": target_score[:, 0],
     }
 
 
@@ -242,8 +242,8 @@ def evaluate_branch(
             oracle_visual = model.target_retina(target_reference).float()
         full_visual = F.normalize(full["predicted_visual"][:, -1].float(), dim=-1)
         last_visual = F.normalize(last["predicted_visual"][:, -1].float(), dim=-1)
-        full_similarity = full_visual @ bank.transpose(0, 1)
-        last_similarity = last_visual @ bank.transpose(0, 1)
+        full_similarity = model.score_visual_candidates(full, bank, position=-1)
+        last_similarity = model.score_visual_candidates(last, bank, position=-1)
         oracle_similarity = F.normalize(oracle_visual, dim=-1) @ bank.transpose(0, 1)
         full_metrics = rank_metrics(full_similarity, expected)
         last_metrics = rank_metrics(last_similarity, expected)
@@ -282,7 +282,7 @@ def evaluate_branch(
         examples += len(eligible)
     report = {key: value / max(1, examples) for key, value in sums.items()}
     for prefix in ("full", "last", "oracle"):
-        for metric in ("top1", "top5", "mrr", "target_cosine"):
+        for metric in ("top1", "top5", "mrr", "target_score"):
             report.setdefault(f"{prefix}_{metric}", 0.0)
     for metric in ("prediction_change", "unigram_top1", "bigram_top1"):
         report.setdefault(metric, 0.0)
@@ -306,7 +306,10 @@ def main() -> None:
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    if checkpoint.get("architecture") != "visual-saccade-language-model-v1":
+    if checkpoint.get("architecture") not in {
+        "visual-saccade-language-model-v1",
+        "visual-saccade-language-model-v2",
+    }:
         raise ValueError("checkpoint is not a visual saccade language model")
     records = load_visual_grammar_manifest(args.manifest)
     characters, unigram, bigram_best = language_statistics(records, args.bank_size)
@@ -371,6 +374,7 @@ def main() -> None:
     acceptance = {
         "beats_random": pretrained["full_top1"] > random_report["full_top1"],
         "beats_unigram": pretrained["full_top1"] > pretrained["unigram_top1"],
+        "beats_bigram": pretrained["full_top1"] > pretrained["bigram_top1"],
         "uses_longer_context": pretrained["full_top1"] > pretrained["last_top1"],
         "renders_nonzero_ink": pretrained["ink_f1"] > 0.0,
     }
