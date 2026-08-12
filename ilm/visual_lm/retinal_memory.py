@@ -273,11 +273,17 @@ class VisualAssociativeReader(nn.Module):
 
     def encode_query(self, images: torch.Tensor) -> torch.Tensor:
         field = self.retina(images)
-        return F.normalize(self.query_head(field), dim=-1)
+        return F.normalize(self.project_query(field), dim=-1)
 
     def encode_answer(self, images: torch.Tensor) -> torch.Tensor:
         field = self.retina(images)
-        return F.normalize(self.answer_head(field), dim=-1)
+        return F.normalize(self.project_answer(field), dim=-1)
+
+    def project_query(self, field: torch.Tensor) -> torch.Tensor:
+        return self.query_head(field)
+
+    def project_answer(self, field: torch.Tensor) -> torch.Tensor:
+        return self.answer_head(field)
 
     @property
     def contrastive_scale(self) -> torch.Tensor:
@@ -298,12 +304,56 @@ def symmetric_info_nce(
     return loss, accuracy
 
 
-def field_variance_loss(*fields: torch.Tensor, target_std: float = 0.35) -> torch.Tensor:
-    losses = []
-    for field in fields:
-        standard_deviation = torch.sqrt(field.float().var(dim=0, unbiased=False) + 1e-4)
-        losses.append(F.relu(target_std - standard_deviation).mean())
-    return torch.stack(losses).mean()
+def _off_diagonal(matrix: torch.Tensor) -> torch.Tensor:
+    size = matrix.shape[0]
+    if matrix.shape != (size, size):
+        raise ValueError("covariance matrix must be square")
+    return matrix.flatten()[:-1].view(size - 1, size + 1)[:, 1:].flatten()
+
+
+def vicreg_field_loss(
+    first: torch.Tensor,
+    second: torch.Tensor,
+    *,
+    invariance_weight: float = 25.0,
+    variance_weight: float = 25.0,
+    covariance_weight: float = 1.0,
+    target_std: float = 1.0,
+) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+    """Keep continuous fields informative without requiring negative labels."""
+
+    if first.shape != second.shape or first.ndim != 2:
+        raise ValueError("VICReg fields must be paired [batch, dimensions] tensors")
+    first = first.float()
+    second = second.float()
+    invariance = F.mse_loss(first, second)
+    first_centered = first - first.mean(dim=0)
+    second_centered = second - second.mean(dim=0)
+    first_std = torch.sqrt(first_centered.var(dim=0, unbiased=False) + 1e-4)
+    second_std = torch.sqrt(second_centered.var(dim=0, unbiased=False) + 1e-4)
+    variance = 0.5 * (
+        F.relu(target_std - first_std).mean()
+        + F.relu(target_std - second_std).mean()
+    )
+    denominator = max(1, first.shape[0] - 1)
+    first_covariance = first_centered.transpose(0, 1) @ first_centered / denominator
+    second_covariance = second_centered.transpose(0, 1) @ second_centered / denominator
+    dimensions = first.shape[1]
+    covariance = (
+        _off_diagonal(first_covariance).square().sum()
+        + _off_diagonal(second_covariance).square().sum()
+    ) / max(1, 2 * dimensions)
+    loss = (
+        invariance_weight * invariance
+        + variance_weight * variance
+        + covariance_weight * covariance
+    )
+    return loss, {
+        "invariance": invariance.detach(),
+        "variance": variance.detach(),
+        "covariance": covariance.detach(),
+        "field_std": (0.5 * (first_std.mean() + second_std.mean())).detach(),
+    }
 
 
 @dataclass(frozen=True)

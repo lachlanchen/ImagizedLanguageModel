@@ -29,9 +29,9 @@ from ilm.visual_lm import (
 )
 from ilm.visual_lm.dataset import pil_to_tensor
 from ilm.visual_lm.retinal_memory import (
-    field_variance_loss,
     retinal_config_payload,
     symmetric_info_nce,
+    vicreg_field_loss,
 )
 from ilm.visual_lm.teacher import load_teacher_manifest
 from ilm.visual_lm.visual_episodes import (
@@ -83,8 +83,8 @@ def parse_args() -> argparse.Namespace:
     train.add_argument("--num-workers", type=int, default=2)
     train.add_argument("--lr", type=float, default=3e-4)
     train.add_argument("--weight-decay", type=float, default=1e-4)
-    train.add_argument("--answer-weight", type=float, default=0.55)
-    train.add_argument("--variance-weight", type=float, default=0.08)
+    train.add_argument("--answer-weight", type=float, default=0.15)
+    train.add_argument("--infonce-weight", type=float, default=0.20)
     train.add_argument("--historical-batches-per-epoch", type=int, default=6)
     train.add_argument("--precision", choices=("fp32", "fp16", "bf16"), default="bf16")
     train.add_argument("--device", default="auto")
@@ -220,9 +220,9 @@ def encode_training_fields(
     batch = query_a.shape[0]
     fields = model.retina(torch.cat((query_a, query_b, answer), dim=0))
     first, second, answer_field = fields.split(batch, dim=0)
-    first = F.normalize(model.query_head(first), dim=-1)
-    second = F.normalize(model.query_head(second), dim=-1)
-    answer_field = F.normalize(model.answer_head(answer_field), dim=-1)
+    first = model.project_query(first)
+    second = model.project_query(second)
+    answer_field = model.project_answer(answer_field)
     return first, second, answer_field
 
 
@@ -235,7 +235,7 @@ def train_batch(
     device: torch.device,
     precision: str,
     answer_weight: float,
-    variance_weight: float,
+    infonce_weight: float,
 ) -> dict[str, float]:
     query_a = batch["query_a"].to(device, non_blocking=True)
     query_b = batch["query_b"].to(device, non_blocking=True)
@@ -243,10 +243,26 @@ def train_batch(
     optimizer.zero_grad(set_to_none=True)
     with autocast_context(device, precision):
         first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
-        view_loss, view_accuracy = symmetric_info_nce(first, second, model.contrastive_scale)
-        answer_loss, answer_accuracy = symmetric_info_nce(first, answer_field, model.contrastive_scale)
-        variance = field_variance_loss(first, second, answer_field)
-        loss = view_loss + answer_weight * answer_loss + variance_weight * variance
+        view_field_loss, view_parts = vicreg_field_loss(first, second)
+        answer_field_loss, answer_parts = vicreg_field_loss(first, answer_field)
+        normalized_first = F.normalize(first, dim=-1)
+        normalized_second = F.normalize(second, dim=-1)
+        normalized_answer = F.normalize(answer_field, dim=-1)
+        view_nce, view_accuracy = symmetric_info_nce(
+            normalized_first,
+            normalized_second,
+            model.contrastive_scale,
+        )
+        answer_nce, answer_accuracy = symmetric_info_nce(
+            normalized_first,
+            normalized_answer,
+            model.contrastive_scale,
+        )
+        loss = (
+            view_field_loss
+            + answer_weight * answer_field_loss
+            + infonce_weight * (view_nce + answer_weight * answer_nce)
+        )
     scaler.scale(loss).backward()
     scaler.unscale_(optimizer)
     gradient_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -254,9 +270,15 @@ def train_batch(
     scaler.update()
     return {
         "loss": float(loss.detach()),
-        "view_loss": float(view_loss.detach()),
-        "answer_loss": float(answer_loss.detach()),
-        "variance_loss": float(variance.detach()),
+        "view_field_loss": float(view_field_loss.detach()),
+        "answer_field_loss": float(answer_field_loss.detach()),
+        "view_invariance": float(view_parts["invariance"]),
+        "view_variance": float(view_parts["variance"]),
+        "view_covariance": float(view_parts["covariance"]),
+        "view_field_std": float(view_parts["field_std"]),
+        "answer_field_std": float(answer_parts["field_std"]),
+        "view_nce": float(view_nce.detach()),
+        "answer_nce": float(answer_nce.detach()),
         "view_batch_accuracy": float(view_accuracy.detach()),
         "answer_batch_accuracy": float(answer_accuracy.detach()),
         "gradient_norm": float(gradient_norm),
@@ -283,8 +305,16 @@ def validation_batch_metrics(
         answer = batch["answer"].to(device)
         with autocast_context(device, precision):
             first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
-            view_loss, view_accuracy = symmetric_info_nce(first, second, model.contrastive_scale)
-            answer_loss, answer_accuracy = symmetric_info_nce(first, answer_field, model.contrastive_scale)
+            view_loss, view_accuracy = symmetric_info_nce(
+                F.normalize(first, dim=-1),
+                F.normalize(second, dim=-1),
+                model.contrastive_scale,
+            )
+            answer_loss, answer_accuracy = symmetric_info_nce(
+                F.normalize(first, dim=-1),
+                F.normalize(answer_field, dim=-1),
+                model.contrastive_scale,
+            )
         totals["view_loss"] += float(view_loss)
         totals["answer_loss"] += float(answer_loss)
         totals["view_accuracy"] += float(view_accuracy)
@@ -547,7 +577,7 @@ def main() -> None:
                 device=device,
                 precision=args.precision,
                 answer_weight=args.answer_weight,
-                variance_weight=args.variance_weight,
+                infonce_weight=args.infonce_weight,
             )
             scheduler.step()
             global_step += 1
@@ -574,7 +604,7 @@ def main() -> None:
                     device=device,
                     precision=args.precision,
                     answer_weight=args.answer_weight,
-                    variance_weight=args.variance_weight,
+                    infonce_weight=args.infonce_weight,
                 )
                 scheduler.step()
                 global_step += 1
