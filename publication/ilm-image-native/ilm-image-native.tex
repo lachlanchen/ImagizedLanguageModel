@@ -120,6 +120,18 @@ ink density but obtains zero generated-identity top-1, reread cosine 0.080,
 and pixel F1 0.322. V25 therefore rejects this natural-language objective and
 writer rather than treating low memory or glyph-like marks as language
 efficiency.
+V26 tests the proposed repair with a 19.14M-parameter factorized model: the last
+glyph supplies appearance, the preceding 63 glyph images supply a separate
+history residual, and a continuous head predicts eight visual particles at
+future offsets 1, 2, 4, and 8. After 8,000 fixed BF16 updates, full-history
+top-1 is 0.0488\%, below 1.4160\% image unigram and 13.5254\% symbolic bigram.
+For 512 cross-record pairs with pixel-identical four-glyph suffixes, history
+residuals differ by 4.628 on average, yet correct pair ranking and
+residual-swap target accuracy are both exactly 50\%. A perfect retina-bank
+oracle rules out a blind evaluator. V26 therefore rejects the factorized
+mechanism: visual history changes state without binding that state to the
+correct next-glyph distribution. It uses 0.888~GiB peak allocated CUDA memory;
+no writer or frozen evaluation is opened.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -255,6 +267,11 @@ implemented controls that makes that slogan falsifiable:
   while rejecting the model under six fixed gates and preserving the frozen
   seal. A separately labeled writer diagnostic localizes stable ink without
   correct generated identity.
+  \item V26, a preregistered factorization of exact last-glyph appearance,
+  earlier-history residual, and continuous future particles. Pixel-identical
+  suffix pairs prove that history changes the residual state while exact-chance
+  pair ranking proves that the state is not bound to the correct target. A
+  perfect visual oracle separates this failure from retinal identity loss.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -1356,6 +1373,155 @@ this representation before repairing the 64-cell objective would increase
 context without establishing better language.
 
 \clearpage
+\subsection{Factorized Visual Context V26: changed state, failed binding}
+
+V26 tests the repair proposed by V25 while preserving the same ordinary-Chinese
+corpus, record-group partitions, disjoint font partitions, 64-cell horizon,
+frozen V16 retina, and strict student boundary. It changes the supervised unit.
+Every natural training example predicts only its full-context endpoint and
+future offsets 2, 4, and 8; losses are no longer averaged over all short
+prefixes. A fixed set of 16,384 cross-record training pairs shares the same
+four-character suffix but has different earlier histories and different next
+glyphs. Pair suffixes are rendered with identical font and augmentation draws,
+so their final four image tensors are exactly equal.
+
+For $X=(x_1,\ldots,x_{64})$, the appearance route receives only the last
+visible image and the history route receives only the preceding images:
+\[
+a=A_\theta(R(x_{64})),\qquad
+r=C_\theta\!\left(R(x_{1:63})\right),\qquad
+s=\operatorname{RMSNorm}\!\left(a+
+\sigma(G_\theta([a;r]))\odot r\right).
+\]
+Zeroing $r$ is therefore a true last-only intervention. For two suffix-matched
+contexts, swapping $r$ changes only earlier-history state while preserving the
+last-glyph appearance route.
+
+For horizon $h\in\{1,2,4,8\}$ and independent Gaussian noise
+$\epsilon_k$, $k=1,\ldots,8$, a shared conditional head emits unit retinal
+particles
+\[
+q_{h,k}=\operatorname{normalize}
+P_\theta\!\left(s+e_h+N_\theta(\epsilon_k)\right)
+\in\mathbb S^{191}.
+\]
+These samples are continuous predictions, not vocabulary rows or persistent
+glyph prototypes. For target state $y_h$, the empirical energy score is
+\[
+\mathcal E(Q_h,y_h)=
+\frac18\sum_k\lVert q_{h,k}-y_h\rVert_2
+-\frac1{128}\sum_{k,j}\lVert q_{h,k}-q_{h,j}\rVert_2.
+\]
+Training combines next- and multi-horizon energy scores, continuous
+candidate ranking against an 8,192-entry FIFO of detached image states, and a
+softplus pair-ranking loss with fixed margin 0.10. The queue contains image
+observations but no IDs and is absent from deployed inference. This design
+follows the calibrated continuous-prediction motivation of proper energy
+scores~\cite{continuousvar}; it does not assume that particle diversity itself
+is semantic.
+
+The complete model contains 19,142,721 parameters, of which 16,476,865 are
+trainable. Its fixed run performs 8,000 BF16 AdamW updates in 1,863.27 seconds
+on one RTX 4090, with 0.888403~GiB peak allocated CUDA memory. The corpus
+manifest SHA-256 is \texttt{76048753...f6866c03}, the preregistered protocol
+SHA-256 is \texttt{dcfa5b97...b899df1}, and the final checkpoint SHA-256 is
+\texttt{065f84e1...db6e1d}. The frozen partition is counted but never rendered.
+
+The fixed natural audit uses 2,048 development windows and the same
+evaluator-only 1,024-form image bank for every branch. Table~\ref{tab:v26natural}
+shows the preregistered mechanism and language comparisons.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V26 natural development measure & Measured & Required & Result \\
+\midrule
+Full-history top-1 & 0.000488 & diagnostic & -- \\
+Last-only / suffix-4 top-1 & 0.000488 / 0.000488 & diagnostic & -- \\
+Shuffled-prefix top-1 & 0.000488 & diagnostic & -- \\
+Image-unigram top-1 & 0.014160 & control & below \\
+Symbolic-bigram top-1 & 0.135254 & benchmark & below \\
+Full minus last top-1 & 0.000000 & $>0.020$ & fail \\
+Full minus unigram top-1 & $-0.013672$ & $>0.030$ & fail \\
+Full minus last log probability & +0.170451 & $>0.10$ & pass \\
+Full minus suffix-4 log probability & +0.019729 & $>0.03$ & fail \\
+Full minus shuffled log probability & +0.003692 & $>0.03$ & fail \\
+Full target cosine / particle spread & 0.160451 / 1.210599 & diagnostic & -- \\
+Retina oracle / student boundary & 1.0 / clean & $\geq0.99$ / clean & pass \\
+Peak allocated CUDA & 0.888403~GiB & $<18$~GiB & pass \\
+\bottomrule
+\end{tabular}
+\caption{V26 fixed natural-Chinese development audit. Full history improves
+target log probability over last-only, but not over the same four-cell suffix
+or suffix-preserving history shuffle. It remains below image unigram and
+symbolic bigram controls.}
+\label{tab:v26natural}
+\end{table}
+
+The retina-bank oracle is exactly 1.0, so the frozen visual sensor and
+evaluator can distinguish every audited target. The model nevertheless assigns
+almost no top-1 advantage to history. Its full-history target log probability
+is $-6.932756$, versus $-6.952485$ for suffix-4 and $-6.936448$ after shuffling
+cells 1--60 while preserving the suffix. Only the full-versus-last
+log-probability gate passes.
+
+The primary causal audit uses 512 cross-record suffix-4 pairs. Its result is
+shown in Table~\ref{tab:v26pairs}.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V26 suffix-4 pair measure & Measured & Required & Result \\
+\midrule
+Suffix pixel equality & 1.000000 & exact & pass \\
+Mean appearance-state difference & 0.000000 & exact & pass \\
+Mean history-residual difference & 4.628258 & diagnostic & changed \\
+Correct two-way pair ranking & 0.500000 & $>0.65$ & fail \\
+Swapped-residual target accuracy & 0.500000 & $>0.65$ & fail \\
+Mean correct-versus-other margin & 0.0000677 & diagnostic & near zero \\
+Top-1 output switch rate & 0.212891 & diagnostic & -- \\
+Both pair targets top-1 correct & 0.025391 & diagnostic & -- \\
+\bottomrule
+\end{tabular}
+\caption{V26 pixel-identical suffix intervention. Earlier history materially
+changes the continuous residual, but neither ordinary nor swapped-residual
+scoring prefers the associated target above chance.}
+\label{tab:v26pairs}
+\end{table}
+
+The pair result localizes the failure. The history branch is not constant:
+pixel-identical suffix contexts produce substantially different residuals.
+Those differences do not bind to the correct next-glyph distribution. Because
+suffix-matched pair members have exactly the same appearance state, ordinary
+two-way pair ranking and the residual-swap target test are algebraically
+equivalent in this implementation; both are retained to preserve the
+preregistered intervention interface rather than counted as independent
+evidence. A suffix-8 diagnostic agrees, with 0.501953 ranking and swap accuracy.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/factorized_visual_context_v26_result.png}
+  \caption{Measured V26 development result generated directly from the fixed
+  audit. The visual retina and exact suffix intervention pass, and earlier
+  history changes the residual state, but natural next-glyph accuracy remains
+  below frequency controls and matched target preference is exactly chance.
+  The frozen partition stays sealed and no writer is trained.}
+  \label{fig:v26result}
+\end{figure}
+
+V26 therefore rejects this factorization and objective, not image-native
+language modeling in general. A broad particle cloud and a changing hidden
+state are not evidence of useful conditional language. The next attributable
+experiment should remain at 64 cells and make matched target choice
+conditionally identifiable during optimization. It must beat suffix-only,
+history-shuffled, image-unigram, and symbolic-bigram controls before a pixel
+writer, serpentine page lattice, geometric depth, or motion is authorized.
+
+\clearpage
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -1804,15 +1970,27 @@ symbolic bigram. Six fixed gates reject the language model. The exploratory
 writer's nonblank images preserve density while obtaining zero identity
 top-1, so appearance stability cannot substitute for semantic continuation.
 The frozen partition remains sealed.
+V26 then separates last-glyph appearance from the preceding visual history and
+replaces one-point prediction with continuous future particles. It passes the
+full-versus-last log-probability gate, the perfect retina-oracle gate, the
+image-only boundary, and the resource gate. It fails the more specific causal
+tests: full history gains only 0.0197 nat over suffix-4 and 0.00369 nat over a
+suffix-preserving shuffle. Pixel-identical suffix pairs produce a 4.628 mean
+history-residual difference but exactly 50\% correct target ranking. Thus the
+representation reacts to history while the predictive distribution does not
+use that reaction correctly. V26 rejects the proposed factorization and loss;
+the frozen partition remains sealed and no writer is trained.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
 answer stream whose second frame depends on rereading the first. It does not
 establish useful autonomous language. V25 shows that simply replacing the
-hand-authored grammar with a generic causal visual field is insufficient. The
-next proof must first separate appearance preservation from context-predictive
-state at the same 64-cell horizon and pass matched state interventions. Only
-then should a serpentine lattice, variable answer length, or multiple generated
+hand-authored grammar with a generic causal visual field is insufficient. V26
+shows that separating appearance from history is also insufficient when the
+objective permits changed residuals with nearly unchanged target preference.
+The next proof must make context-dependent target choice identifiable and
+necessary at the same 64-cell horizon under matched alternatives. Only then
+should a serpentine lattice, variable answer length, or multiple generated
 lines expand the task. This order is also consistent with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
 
@@ -1893,15 +2071,27 @@ fails counterfactual and target-cosine gates, and remains 10.8 times below the
 symbolic bigram. The exploratory writer reaches zero generated identity. The
 25.55M-parameter system fits easily on one RTX 4090, but capability-normalized
 efficiency is not established. The frozen partition is not queried.
-The seven-context V16 increase and V25 ordered-history increase are therefore
-both too small to establish a useful causal memory core. The next attributable
-test must keep ordinary Chinese and the strict image boundary while separating
-exact appearance from a context-predictive residual at the 64-cell horizon.
-Matched appearance-shuffle, predictive-state-shuffle, last-only,
-order-shuffled, visual-unigram, and symbolic-bigram controls must pass before
-long context or a writer is promoted. The exact serpentine mapping may then
-fold clean $32\times32$ cells into a $256\times256$ retinal lattice without
-making an $8\times8$ thumbnail the sole record. Page-native canvases, 3D
+V26 performs the prescribed separation and replaces a point proposal with
+eight-particle conditional distributions at four future horizons. Its
+19.14M-parameter system completes 8,000 BF16 updates in 31.05 minutes with
+0.888~GiB peak allocated memory. This is a resource result, not a language
+result. Full-history top-1 is 0.0488\%, below 1.4160\% image unigram and
+13.5254\% symbolic bigram. More decisively, exact suffix matching makes the
+appearance-state difference zero while earlier histories produce residual
+difference 4.628; correct pair ranking and swapped-residual target accuracy are
+still exactly chance. The perfect retina oracle rules out target-identity loss.
+No mechanism selects, no writer is trained, and the frozen partition is not
+queried.
+The seven-context V16 increase, V25 ordered-history increase, and V26 changed
+history state are therefore all too weak to establish a useful causal memory
+core. The next attributable test must keep ordinary Chinese and the strict
+image boundary while making context-dependent target choice directly
+identifiable under matched visual alternatives at the 64-cell horizon.
+Suffix-only, predictive-state-swap, order-shuffled, visual-unigram, and
+symbolic-bigram controls must pass before long context or a writer is promoted.
+The exact serpentine mapping may then fold clean $32\times32$ cells into a
+$256\times256$ retinal lattice without making an $8\times8$ thumbnail the sole
+record. Page-native canvases, 3D
 geometry, color, and motion remain later observable channels and may not encode
 hidden character IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
 generated-history-blind, retrieval, and OCR-plus-text controls must distinguish

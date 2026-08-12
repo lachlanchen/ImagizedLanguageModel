@@ -41,9 +41,12 @@ completes the first bounded 2D Chinese grammar proof: it reads a variable raster
 packet stream, writes one image, rereads those generated pixels, and writes a
 second image on one RTX 4090. V25 then replaces that designed packet algebra
 with ordinary rendered Chinese. It finds a weak ordered-history signal but is
-rejected as a language model. The next proof must repair visual
-context-to-glyph binding at 64 cells before adding page scale, 3D geometry, or
-motion.
+rejected as a language model. V26 separates last-glyph appearance from earlier
+history and predicts continuous visual particles, but its pixel-identical
+suffix intervention shows that changed history states still produce chance
+target preferences. The next proof must make visual context-to-glyph binding
+conditionally identifiable at 64 cells before adding page scale, 3D geometry,
+or motion.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -63,7 +66,41 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V25 Visual Cell Stream Rejected
+## Latest Natural-Language Test: V26 Factorized Context Rejected
+
+![Measured V26 factorized visual-context result: earlier history changes the residual state, but matched next-glyph preference remains at chance](publication/ilm-image-native/figures/factorized_visual_context_v26_result.png)
+
+V26 tests the repair proposed after V25 without changing the ordinary-Chinese
+or image-only boundary. Its `19,142,721`-parameter model gives the last visible
+glyph and the preceding 63 glyph images separate routes, fuses their continuous
+states, and predicts eight 192-dimensional visual particles for each of future
+horizons 1, 2, 4, and 8. The deployed student receives no strings, token or
+Unicode IDs, OCR, labels, glyph table, candidate bank, or external model state.
+
+The fixed run completes 8,000 BF16 updates in `31.05` minutes on one RTX 4090,
+using `0.888 GiB` peak allocated CUDA memory. On 2,048 development windows,
+full-history top-1 is `0.0488%`, versus `1.4160%` for the image unigram and
+`13.5254%` for the symbolic bigram. Full history improves target log
+probability over last-only by `0.17045` nat, but only by `0.01973` over the
+same four-cell suffix and `0.00369` over a prefix shuffle.
+
+The decisive audit uses 512 cross-record context pairs with pixel-identical
+four-glyph suffixes and different targets. Their appearance-state difference
+is exactly zero and their mean history-residual difference is `4.62826`, so the
+history branch is active. Correct pair ranking and swapped-residual target
+accuracy are nevertheless both exactly `50%`, with mean score margin
+`0.0000677`. A perfect retina-bank oracle rules out a blind evaluator. V26
+therefore fails its mechanism and language gates; no frozen evaluation or
+writer is authorized.
+
+This localizes the failure to conditional binding, not visual detection or the
+mere existence of a history state. Low memory and materially different hidden
+states are not useful language prediction. See the
+[complete V26 receipt](docs/factorized-visual-context-v26-result.md),
+[preregistered protocol](references/factorized_visual_context_v26_protocol.md),
+and [research decision](references/factorized_visual_context_v26_research.md).
+
+## Prior Natural-Language Test: V25 Visual Cell Stream Rejected
 
 ![Measured V25 visual-cell result: full image history carries a weak ordered signal, but the language model and exploratory writer fail their fixed gates](publication/ilm-image-native/figures/visual_cell_stream_v25_result.png)
 

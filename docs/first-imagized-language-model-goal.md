@@ -142,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains eleven complete experimental systems. V25 is the
+The repository now contains twelve complete experimental systems. V26 is the
 latest measured development result; its frozen partition remains sealed:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
@@ -183,6 +183,11 @@ latest measured development result; its frozen partition remains sealed:
   continuous cell from 64 visible cells, and implements pixel-flow writing and
   actual generated-image rereading. Its fixed language stage is rejected; a
   separately labeled exploratory writer diagnostic is also rejected.
+- Factorized Visual Context V26 is a 19.14M-parameter ordinary-Chinese
+  experiment. It separates the last visible glyph from a causal state over the
+  preceding 63 glyph images and predicts continuous visual-particle
+  distributions at four future horizons. Its fixed mechanism and language
+  stages are rejected; no writer or frozen evaluation is opened.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -288,6 +293,22 @@ continuation.
 
 ![Visual Cell Stream V25 rejected development result](../publication/ilm-image-native/figures/visual_cell_stream_v25_result.png)
 
+V26 then tests the proposed appearance/history repair for 8,000 fixed BF16
+updates. Full-history top-1 is `0.000488`, below image unigram (`0.014160`) and
+symbolic bigram (`0.135254`). Full history gains `+0.170451` nat over last-only
+target log probability, but only `+0.019729` over the same four-cell suffix and
+`+0.003692` over a suffix-preserving prefix shuffle. In 512 cross-record pairs,
+the shared suffix pixels and appearance state are exactly equal and the mean
+history-residual difference is `4.628258`; nevertheless, correct pair ranking
+and swapped-residual target accuracy are both exactly `0.500`. The
+retina-bank oracle remains perfect. V26 therefore isolates the failure to
+conditional target binding: history changes state but not useful language
+preference. It uses `0.888403 GiB` peak allocated CUDA memory and completes in
+`31.05` minutes on one RTX 4090, but those are resource receipts rather than an
+efficiency claim.
+
+![Factorized Visual Context V26 rejected development result](../publication/ilm-image-native/figures/factorized_visual_context_v26_result.png)
+
 It proved:
 
 - a strict image-only student boundary;
@@ -321,10 +342,13 @@ It proved:
 - autonomous rereading and feedback without OCR or symbolic decoding;
 - improved long-rollout ink stability after training on its own sampled images;
 - useful gradients through a deployed two-step image sampler;
-- improved calibrated visual prediction from independent image anchors; and
+- improved calibrated visual prediction from independent image anchors;
 - a weak but measurable ordered-history effect in a natural Chinese
   `64 x 32 x 32` image-cell stream, with the V25 failure localized before any
-  frozen evaluation.
+  frozen evaluation; and
+- a pixel-identical suffix intervention showing that V26's earlier-history
+  branch changes its continuous residual while correct next-glyph preference
+  remains at chance, with a perfect retina evaluator and sealed frozen split.
 
 It did not prove:
 
@@ -338,14 +362,16 @@ It did not prove:
 - lower end-to-end cost than a text LLM;
 - parity with Qwen 8B; or
 - a selected natural-Chinese next-cell model: V25 remains below its image
-  unigram and symbolic bigram controls and fails six fixed language gates.
+  unigram and symbolic bigram controls, and V26's factorized continuous
+  distribution remains below both while its matched pair ranking is chance.
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
 relation proof, accepted V24 bounded visual packet/reread proof, and rejected
-V25 natural-Chinese cell stream and autonomous language-system proof**.
+V25 natural-Chinese cell stream, rejected V26 factorized visual-context
+mechanism, and rejected autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
@@ -355,15 +381,18 @@ that small constrained circuits can instead compare several visible roles,
 route unseen source forms, write, and use generated-image history. V25 then
 removes the role syntax and establishes that a generic causal visual field can
 detect ordered natural-writing history, but not bind it strongly enough to the
-correct next form. The immediate milestone is therefore not a larger page or
-3D stream. It is a new preregistered 64-cell model that separates an exact
-appearance state from a context-predictive residual and proves both are needed
-through matched state-shuffle controls. Only after that model beats last-cell,
-shuffled-history, and visual-unigram controls should the reversible serpentine
-lattice expand context. The unchanged V25 contract and complete result are in
-[`references/visual_cell_stream_v25_protocol.md`](../references/visual_cell_stream_v25_protocol.md)
+correct next form. V26 implements the proposed appearance/history separation
+and proves that the residual state changes, but its pixel-identical suffix pairs
+show chance target binding. The immediate milestone is therefore not a larger
+page or 3D stream. It is a new preregistered 64-cell objective in which
+context-dependent target choice is identifiable and necessary during training,
+not merely represented in a hidden state. Only after that model beats suffix,
+shuffled-history, visual-unigram, and symbolic-bigram controls should the
+reversible serpentine lattice expand context. The unchanged V26 contract and
+complete result are in
+[`references/factorized_visual_context_v26_protocol.md`](../references/factorized_visual_context_v26_protocol.md)
 and
-[`docs/visual-cell-stream-v25-result.md`](visual-cell-stream-v25-result.md).
+[`docs/factorized-visual-context-v26-result.md`](factorized-visual-context-v26-result.md).
 
 ## Implemented paradigm: predictive visual fields
 
