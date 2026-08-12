@@ -8,7 +8,7 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
@@ -16,92 +16,145 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
-## Image-First Training And Inference
+## Current Paradigm: Retinal Flow
 
-![Training ILM-V from visual corpora: rendered text pages, scanned pages, and historical glyphs become visual latents and image targets](publication/ilm-image-native/figures/visual_language_training_pipeline.png)
+![Retinal Flow Language Model: ordered image fixations become a recurrent visual field, a rectified-flow writer generates candidate ink, and the candidates are reread and fed back](publication/ilm-image-native/figures/retinal_flow_paradigm.png)
 
-Training treats language as a visual corpus. Typed text, scanned pages, book images, and historical glyph data are all converted into page/glyph canvases; the model predicts visual latents and output images rather than text tokens.
+The current model is a **Retinal Flow Language Model**, a concrete
+read-predict-write-reread loop:
 
-![Inference pipeline for ILM-V: text or image prompts become prompt canvases, the model generates a page image first, and OCR is optional afterward](publication/ilm-image-native/figures/visual_language_inference_pipeline.png)
+1. A small convolutional retina reads ordered `32x32` grayscale fixations.
+2. A three-layer recurrent visual field integrates the fixation history.
+3. A continuous energy function scores arbitrary candidate images; it has no
+   character output table.
+4. A conditional rectified flow writes the next fixation directly in pixel
+   space.
+5. The model rereads its generated ink, selects a candidate by visual energy,
+   and feeds those pixels back into the recurrent state.
 
-Inference keeps the same contract. A chat UI may accept typed text or uploaded images, but typed text is first rendered as an image prompt. The model returns a rendered page image; OCR/transcoding is only a post-process for spans that exist in computer codecs, while historical or unencoded glyphs remain image regions.
+The strict student boundary is:
 
-## Runnable Image-Native Training Code
-
-The `ilm/visual_lm/` package is a complete image-to-image implementation of the ILM-V idea. It renders visual prompt pages and visual answer pages from real historical glyph assets, trains a conditional U-Net on page images, evaluates image reconstruction metrics, and runs inference where `answer.png` is the primary output.
-
-Quick validation run on a small real glyph subset:
-
-```bash
-PYTHONPATH=. python scripts/train_visual_language_model.py \
-  --characters 言,中,水,日 \
-  --image-size 384 \
-  --samples-per-epoch 2 \
-  --val-samples 1 \
-  --epochs 1 \
-  --batch-size 1 \
-  --base-ch 8 \
-  --depth 2 \
-  --limit-steps 1 \
-  --out artifacts/visual_lm_smoke
+```text
+writing pixels -> continuous retinal states -> continuous ink pixels
 ```
 
-Longer real training run:
+The student receives no strings, token IDs, Unicode IDs, OCR transcript,
+character labels, external language model, or discrete visual codebook. Typed
+input is supported only by deterministic rasterization before this boundary.
+An uploaded page can enter directly as pixels.
+
+### Measured status, not a capability claim
+
+The first complete Chinese run used `11,690,244` parameters, peaked at
+`2.56 GiB` of training VRAM on one RTX 4090, and generated `11.3` visual cells
+per second. Its fixed held-out test used 512 common Han characters rendered in
+four font views over 2,423 contexts.
+
+| Gate | Result | Interpretation |
+|---|---:|---|
+| Retina oracle top-1 | `97.65%` | The image encoder learned a strong cross-font visual alphabet. |
+| Recurrent full-context top-1 | `0.91%` | Better than random (`0.04%`), but worse than unigram (`1.86%`) and bigram (`13.58%`). |
+| Generated target signal | `+0.0211` cosine | The writer is context-sensitive, but not yet linguistically accurate. |
+| Best-of-four target hit | `1.56%` | Non-zero visual generation, still below acceptance. |
+| Autonomous continuation | failed | Early glyph-like marks drift into unreadable fragments under feedback. |
+
+**Verdict: the MVP is rejected.** It proves the image-only software boundary,
+visual invariance, direct image generation, and autonomous feedback loop. It
+does not yet prove a useful language model, readable continuation, efficiency
+over a text LLM, or Qwen-8B parity. The next milestone is closed-loop trajectory
+training on model-induced image states, not a larger parameter count.
+
+## Run The Retinal MVP
+
+Build the provenance-bearing public-domain Chinese manifest:
 
 ```bash
-PYTHONPATH=. python scripts/train_visual_language_model.py \
-  --characters auto \
-  --max-characters 256 \
-  --image-size 384 \
-  --samples-per-epoch 4096 \
-  --val-samples 128 \
-  --epochs 50 \
-  --batch-size 8 \
-  --base-ch 32 \
-  --depth 3 \
-  --amp \
-  --out artifacts/visual_lm
+PYTHONPATH=. python scripts/build_visual_grammar_manifest.py \
+  --wikisource-root ../Books/resources/curated-books/chinese-classics/public-domain-canon \
+  --out data/visual_grammar/chinese_wikisource_public_domain.jsonl
 ```
 
-Evaluate and run image-first inference:
+Train the model on one 24 GiB GPU:
 
 ```bash
-PYTHONPATH=. python scripts/eval_visual_language_model.py \
-  --checkpoint artifacts/visual_lm/ckpt_latest.pt \
-  --samples 64
-
-PYTHONPATH=. python scripts/infer_visual_language_model.py \
-  --checkpoint artifacts/visual_lm/ckpt_latest.pt \
-  --char 言 \
-  --out artifacts/visual_lm_infer_yan
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/train_retinal_flow_lm.py \
+  --manifest data/visual_grammar/chinese_wikisource_public_domain.jsonl \
+  --out artifacts/retinal_flow_chinese_mvp \
+  --sequence-length 48 \
+  --energy-positions-per-sequence 8 \
+  --batch-size 32 \
+  --maximum-steps 3600 \
+  --precision bf16
 ```
 
-ILM is a research codebase exploring **text-as-image generation**: it encodes language into compact, image-like tensors and generates text with diffusion-style iterative refinement. The representation factors sentences into meta-elements (grammar, semantics, tone, emotion) and hierarchical, memory-like codes for words and characters. This unifies ideas from discrete diffusion, superposition/disentanglement, structured embeddings, and glyph-aware character modeling.
+Run the strict fixed-bank evaluation:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_retinal_flow_lm.py \
+  --checkpoint artifacts/retinal_flow_chinese_mvp/checkpoint_latest.pt \
+  --bank-size 512 \
+  --prototype-views 4 \
+  --evaluation-samples 3000 \
+  --generation-contexts 192 \
+  --out artifacts/retinal_flow_chinese_mvp/fixed_glyph_bank
+```
+
+Generate an autonomous image continuation from typed or image input:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/infer_retinal_flow_lm.py \
+  --checkpoint artifacts/retinal_flow_chinese_mvp/checkpoint_latest.pt \
+  --text '天地玄黃，宇宙洪荒。' \
+  --new-cells 12 \
+  --candidate-samples 8 \
+  --out artifacts/retinal_flow_chinese_mvp/autonomous_demo
+```
+
+The primary inference artifact is `complete_page.png`; `receipt.json` records
+the model boundary, parameter count, throughput, VRAM, font hashes, and every
+candidate-selection step. Generated checkpoints and data remain git-ignored.
+
+The earlier whole-page U-Net, latent diffusion, associative-memory, and causal
+InkStream implementations remain as baselines. They are not the current model.
+
+ILM is a research codebase for **language learned and generated as visible
+writing**. Its current experiment predicts continuous retinal states and writes
+continuous ink with rectified flow. Older structured embeddings, codebooks, and
+page diffusion experiments remain available as falsified or comparative
+baselines; they do not define the current model boundary.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
 
 ## 📌 Overview
 
-This repository has two active tracks:
+This repository has three connected tracks:
 
-1. Historic Chinese glyph etymology ingestion (scraping/parsing/storage/preview).
-2. ILM glyph/image modeling experiments (token glyph rendering, codebooks, frame packing, diffusion/inpainting, evaluation/reporting).
+1. Retinal-flow image-native language modeling and strict held-out evaluation.
+2. Historic Chinese glyph etymology ingestion and provenance-preserving assets.
+3. Earlier glyph, codebook, diffusion, folio, and InkStream baselines retained
+   for reproducibility.
 
-This README also documents both tracks and keeps the etymology workflow as a first-class, reproducible path.
+This README documents all three tracks and keeps the etymology workflow as a first-class, reproducible path.
 
 ## 🔗 Key Links
 
 | Area | Path |
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
-| Code plan and metrics | `docs/ilm-visual-diffusion-code-plan.md` |
-| Embedding "color" plan | `docs/embedding-color-plan.md` |
-| Development notes/plan | `docs/development-plan.md` |
+| Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| Research dossier and evidence | `references/image-native-language-model-research.md` |
+| Archived diffusion plan | `docs/ilm-visual-diffusion-code-plan.md` |
+| Archived embedding "color" plan | `docs/embedding-color-plan.md` |
+| Historical development plan | `docs/development-plan.md` |
 | Etymology module readme | `ilm/etymology/README.md` |
 
 ## ✨ Features
 
 - 🏺 Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
+- 👁️ Continuous foveal retina with recurrent visual context and cross-font invariance.
+- 🖋️ Conditional pixel-space rectified-flow writer with a differentiable write-read cycle.
+- 🔁 Autonomous image-only inference with candidate rereading, energy reranking, and pixel feedback.
+- 🧪 Fixed 512-character visual-bank evaluation against random, unigram, and bigram baselines.
 - 🌐 Robust AJAX + HTML ingestion path with retries, throttling, and cache.
 - 🧩 Stage-labeled glyph extraction including `<img>` and CSS `background-image` data URIs.
 - 🗃️ SQLite-backed storage for chars/glyph metadata plus filesystem asset layout.
@@ -134,6 +187,7 @@ This README also documents both tracks and keeps the etymology workflow as a fir
 │   ├── etymology/
 │   ├── frames/
 │   ├── models/
+│   ├── visual_lm/
 │   └── utils/
 ├── scripts/
 ├── publication/
@@ -170,7 +224,7 @@ pip install requests beautifulsoup4 tornado
 python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch
+pip install requests beautifulsoup4 tornado pyyaml numpy pillow matplotlib torch fonttools
 ```
 
 If a specific script needs additional packages, install them from the import error shown by that script.
@@ -334,11 +388,11 @@ PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 
 ## 🗺️ Roadmap
 
-- Continue maturing the text-as-image ILM training/eval runbooks beyond the etymology-first quick start.
-- Improve environment reproducibility (single authoritative dependency spec).
-- Expand tests/CI coverage for research scripts and pipeline glue.
-- Iterate on hierarchical codebooks, diffusion objectives, and controllability channels.
-- Consolidate docs across `docs/`, script help text, and publication artifacts.
+- Train on model-induced visual trajectories so the writer sees its own errors during training.
+- Require full visual context to beat last-fixation, unigram, and bigram baselines.
+- Require stable, readable 32-cell autonomous continuations before scaling width or corpus size.
+- Add multiscale page memory and provenance-gated historical glyph composition only after the causal gate passes.
+- Improve environment reproducibility with one authoritative dependency specification and focused tests.
 
 For deeper conceptual and staged planning details, see:
 

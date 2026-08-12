@@ -8,28 +8,46 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM は **text-as-image generation** を扱う研究用コードベースです。言語をコンパクトな画像ライクなテンソルとして符号化し、拡散スタイルの反復的な精緻化でテキストを生成します。表現は文をメタ要素（文法、意味、トーン、感情）と、単語・文字向けの階層的なメモリ的コードに分解します。これにより、離散拡散、重ね合わせ/独立化、構造化埋め込み、字形を意識した文字モデリングという発想を統合します。
+ILM は言語を **目に見える書字** として学習・生成する研究プロジェクトです。
+現在のモデルは、順序付きのインク画像を読み、連続的な視覚状態を保持し、
+整流フローによって次の画像を直接ピクセルで書きます。以前のコードブックや
+ページ拡散モデルは比較用ベースラインであり、現在の方式ではありません。
+
+## 現在の方式：Retinal Flow Language Model
+
+![Retinal Flow Language Model の構成](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+学習モデルの境界は `書字ピクセル -> 連続網膜状態 -> インクピクセル` です。
+モデルにはテキストトークン、Unicode ID、OCR、視覚コードブック、外部 LLM を
+与えません。視覚同定では `97.65%` を達成しましたが、全履歴による次画像予測は
+`0.91%` で、unigram (`1.86%`) と bigram (`13.58%`) を下回りました。
+自律生成も読めない断片へドリフトします。したがって **現 MVP は言語モデルとして
+不合格** です。次は単純な大規模化ではなく、モデル自身が生成した視覚軌跡上で
+学習します。
 
 > リポジトリは実用的な語源パイプラインと長期の ILM 実験を意図的に並行して維持しています。
 
 ## 📌 概要
 
-このリポジトリには以下の2つのアクティブなトラックがあります。
+このリポジトリには3つの関連トラックがあります。
 
-1. 歴史的漢字字形の語源データ取り込み（スクレイピング / パース / 保存 / プレビュー）。
-2. ILM のグリフ/画像モデリング実験（トークングリフ描画、コードブック、フレームパッキング、拡散/インペインティング、評価/レポート）。
+1. Retinal Flow による画像ネイティブ言語モデリングと厳密な外部評価。
+2. 出典を保持した歴史的漢字字形の語源データ取り込み。
+3. 再現性のために残す旧グリフ、コードブック、拡散、folio、InkStream ベースライン。
 
-この README は両トラックを同時に記載し、語源ワークフローを本流で再現可能な主要経路として扱います。
+この README は3トラックを記載し、語源ワークフローを再現可能な主要経路として扱います。
 
 ## 🔗 主要リンク
 
 | 領域 | パス |
 |---|---|
 | 概念説明 | `docs/imagized-language-model.md` |
+| 現在の工学目標 | `docs/first-imagized-language-model-goal.md` |
+| 研究資料と実験証拠 | `references/image-native-language-model-research.md` |
 | コード計画と指標 | `docs/ilm-visual-diffusion-code-plan.md` |
 | 埋め込み「カラー」計画 | `docs/embedding-color-plan.md` |
 | 開発ノート/計画 | `docs/development-plan.md` |

@@ -8,28 +8,49 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM es una base de código de investigación que explora la **generación de texto como imagen**: codifica el idioma en tensores compactos, similares a imágenes, y genera texto mediante refinamiento iterativo de estilo difusión. La representación descompone las frases en metaelementos (gramática, semántica, tono, emoción) y en códigos jerárquicos tipo memoria para palabras y caracteres. Esto unifica ideas de difusión discreta, superposición/desentrelazado, embeddings estructurados y modelado de caracteres con conciencia de glifos.
+ILM es un proyecto de investigación para aprender y generar lenguaje como
+**escritura visible**. El modelo actual lee fijaciones de tinta ordenadas,
+mantiene un estado visual continuo y escribe la siguiente fijación directamente
+en píxeles mediante flujo rectificado. Los codebooks y modelos de difusión de
+página anteriores se conservan como líneas base, no como el paradigma actual.
+
+## Paradigma actual: modelo de lenguaje de flujo retinal
+
+![Diagrama del modelo de lenguaje de flujo retinal](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+El límite del alumno es estricto: `píxeles de escritura -> estado retinal
+continuo -> píxeles de tinta`. El alumno no recibe tokens, identificadores
+Unicode, OCR, codebooks visuales ni un modelo de lenguaje externo. El lector
+visual alcanzó `97,65%` en identidad visual, pero la predicción con contexto
+completo fue sólo `0,91%`, por debajo de unigram (`1,86%`) y bigram (`13,58%`).
+La continuación autónoma también deriva hacia marcas ilegibles. Por tanto,
+**el MVP actual queda rechazado como modelo de lenguaje**. El siguiente paso es
+entrenar sobre trayectorias visuales inducidas por el propio modelo, no escalarlo
+de inmediato.
 
 > El repositorio mantiene de forma deliberada un pipeline práctico de etimología y experimentación ILM a largo plazo lado a lado.
 
 ## 📌 Visión general
 
-Este repositorio tiene dos líneas activas:
+Este repositorio tiene tres líneas conectadas:
 
-1. Ingesta de etimología de glifos chinos históricos (extracción/análisis/almacenamiento/vista previa).
-2. Experimentos de modelado de imágenes/glifos de ILM (renderizado de glifos de tokens, codebooks, empaquetado de frames, difusión/inpainting, evaluación/reporte).
+1. Modelado de lenguaje nativo de imagen con flujo retinal y evaluación estricta.
+2. Ingesta etimológica de glifos chinos con procedencia conservada.
+3. Líneas base anteriores de glifos, codebooks, difusión, folio e InkStream para reproducibilidad.
 
-Este README documenta ambas líneas y conserva el flujo de etimología como una ruta reproducible de primera clase.
+Este README documenta las tres líneas y conserva el flujo de etimología como una ruta reproducible de primera clase.
 
 ## 🔗 Enlaces clave
 
 | Área | Ruta |
 |---|---|
 | Documento conceptual | `docs/imagized-language-model.md` |
+| Objetivo de ingeniería actual | `docs/first-imagized-language-model-goal.md` |
+| Dossier de investigación y evidencia | `references/image-native-language-model-research.md` |
 | Plan de código y métricas | `docs/ilm-visual-diffusion-code-plan.md` |
 | Plan de "color" de embeddings | `docs/embedding-color-plan.md` |
 | Notas/plan de desarrollo | `docs/development-plan.md` |

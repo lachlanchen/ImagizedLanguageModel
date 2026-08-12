@@ -1,5 +1,10 @@
 ILM Phase-1 Plan: Learning “Color” Codes for EN+ZH
 
+Status: **archived baseline as of 2026-08-12**. Product codes are excluded from
+the current student boundary because a finite visual code can become a renamed
+character vocabulary. The active model is documented in
+`docs/imagized-language-model.md`.
+
 Goal
 - Learn a compact, gradient-learnable, product-code (“color”) embedding that maps each English word or Chinese character image to a 3-channel code c = (k1, k2, k3), with kℓ ∈ {0,…,31} (32 levels per channel), i.e., a 32×32×32 code space (32,768 codes).
 - Train jointly on English + Chinese so semantically related units (synonyms, inflections, translations) share nearby codes or identical prefixes (e.g., do/did/done, make/做/作).

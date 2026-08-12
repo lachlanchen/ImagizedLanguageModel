@@ -1,5 +1,10 @@
 # Visual Folio Machine: A Non-Token Architecture for Visible Language
 
+> **Archived architecture branch (2026-08-12).** The folio reader and
+> image-valued retrieval memory remain useful comparison and evidence modules,
+> but they no longer define the language model. The active paradigm is the
+> autonomous Retinal Flow Language Model in `docs/imagized-language-model.md`.
+
 ## Current architecture decision
 
 The implementation has moved from a single global retinal vector to an ordered

@@ -8,28 +8,49 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM est une base de code de recherche qui explore la **génération texte-image** : il encode le langage en tenseurs compacts de type image et génère du texte via un raffinement itératif de type diffusion. La représentation factorise les phrases en méta-éléments (grammaire, sémantique, ton, émotion) et en codes hiérarchiques de type mémoire pour les mots et les caractères. Cela unifie des idées issues de la diffusion discrète, de la superposition/désentrelacement, des embeddings structurés et de la modélisation de glyphes sensibles au caractère.
+ILM est un projet de recherche qui apprend et génère le langage comme
+**écriture visible**. Le modèle actuel lit des fixations d'encre ordonnées,
+maintient un état visuel continu et écrit directement la fixation suivante en
+pixels par flux rectifié. Les anciens codebooks et modèles de diffusion de page
+sont conservés comme bases de comparaison, pas comme paradigme actuel.
+
+## Paradigme actuel : modèle de langage à flux rétinien
+
+![Schéma du modèle de langage à flux rétinien](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+La frontière de l'élève est stricte : `pixels d'écriture -> état rétinien
+continu -> pixels d'encre`. L'élève ne reçoit ni tokens, ni identifiants
+Unicode, ni OCR, ni codebook visuel, ni modèle de langage externe. La rétine
+atteint `97,65 %` pour l'identité visuelle, mais la prédiction en contexte
+complet n'atteint que `0,91 %`, sous l'unigramme (`1,86 %`) et le bigramme
+(`13,58 %`). La continuation autonome dérive aussi vers des marques illisibles.
+Le **MVP actuel est donc rejeté comme modèle de langage**. L'étape suivante est
+l'apprentissage sur les trajectoires visuelles produites par le modèle lui-même,
+et non une augmentation immédiate de sa taille.
 
 > Le dépôt maintient volontairement une pipeline d’étymologie pratique et des expérimentations ILM à horizon long côte à côte.
 
 ## 📌 Aperçu
 
-Ce dépôt suit deux axes actifs :
+Ce dépôt suit trois axes liés :
 
-1. Ingestion d’étymologies de glyphes chinois historiques (scraping/parsing/stockage/aperçu).
-2. Expérimentations de modélisation d’ILM glyphes/images (rendu de glyphes de tokens, codebooks, empaquetage de trames, diffusion/inpainting, scripts d’entraînement/évaluation).
+1. Modélisation rétinienne image-native et évaluation stricte hors entraînement.
+2. Ingestion de glyphes chinois historiques avec conservation de la provenance.
+3. Anciennes bases glyphes, codebooks, diffusion, folio et InkStream conservées pour la reproductibilité.
 
-Ce README documente également les deux axes et maintient le workflow d’étymologie comme un parcours de référence reproductible.
+Ce README documente les trois axes et maintient le workflow d’étymologie comme parcours reproductible.
 
 ## 🔗 Liens clés
 
 | Domaine | Chemin |
 |---|---|
 | Présentation conceptuelle | `docs/imagized-language-model.md` |
+| Objectif d'ingénierie actuel | `docs/first-imagized-language-model-goal.md` |
+| Dossier de recherche et preuves | `references/image-native-language-model-research.md` |
 | Plan de code et métriques | `docs/ilm-visual-diffusion-code-plan.md` |
 | Plan de « couleur » des embeddings | `docs/embedding-color-plan.md` |
 | Notes de plan de développement | `docs/development-plan.md` |

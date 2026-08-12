@@ -1,5 +1,11 @@
 # Imagized Diffusion Language Model — Code Plan and Metrics
 
+> **Archived baseline (2026-08-12).** This product-code and discrete-diffusion
+> plan is not the current ILM paradigm because it relies on a finite symbolic
+> code space. See `docs/imagized-language-model.md` and
+> `docs/first-imagized-language-model-goal.md` for the continuous retinal-flow
+> model. The material below is retained to reproduce earlier experiments.
+
 ## Objectives
 - Build a trainable, single‑GPU friendly pipeline that learns visual “color‑code” word embeddings and a diffusion‑like model over sentence frames.
 - Achieve measurable semantic structure: similar meanings map to nearby embeddings, cross‑lingual alignment (EN↔ZH), and coherent denoising on masked frames.
@@ -145,4 +151,3 @@ python scripts/train_diffusion.py --config configs/diffusion.yaml --frames data/
 # Evaluate diffusion
 python scripts/eval_diffusion.py --frames data/frames --checkpoint artifacts/diffusion.ckpt
 ```
-

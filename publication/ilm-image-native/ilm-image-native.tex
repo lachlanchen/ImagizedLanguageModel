@@ -9,7 +9,7 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 
-\title{The Visual Folio Machine: Image-Native Reading, Memory, and Writing}
+\title{Retinal Flow Language Models:\\Read--Predict--Write--Reread in Continuous Image Space}
 \author{Imagized Language Model Project}
 \date{August 2026}
 
@@ -17,7 +17,24 @@
 \maketitle
 
 \begin{abstract}
-Most language models represent language through symbolic tokens and treat visible writing as an auxiliary modality. We investigate a stricter object: an independent model that receives writing images, forms continuous visual states, and returns image-valued answers. Three implementations falsify convenient shortcuts. Whole-page rectified flow learns page texture but not legible language; a pooled visual embedding does not retrieve semantic paraphrases reliably; and an 8-pixel causal writing stream reaches teacher-forced ink F1 0.639 while autonomous output collapses to repeated grey marks. These results motivate the Visual Folio Machine (VFM): an ordered axial retina distilled offline into a centered continuous semantic field, an image-keyed and image-valued associative folio, an evidence gate that copies attested historical forms, and a future whole-field masked writer for novel connective prose. The deployed reader contains no vocabulary, text IDs, OCR transcript, or external language-model call. This paper defines the model boundary, equations, one-RTX-4090 implementation, falsifiable benchmark, and limits of the present proof.
+Most language models represent language through symbolic tokens and treat visible
+writing as an auxiliary modality. We study a stricter object: an independent
+model whose inputs, state supervision, probability model, and primary outputs
+are images of writing. We introduce the Retinal Flow Language Model (RFLM), a
+causal model that reads ordered $32\times32$ image fixations through a continuous
+retina, integrates them in a recurrent visual field, scores arbitrary candidate
+images with an energy function, writes the next fixation with conditional
+pixel-space rectified flow, and rereads its own generated ink. The 11.69M
+parameter implementation contains no tokenizer, Unicode IDs, OCR transcript,
+character output table, discrete visual codebook, or external language-model
+call. It trains on one RTX 4090 with 2.56 GiB peak memory and generates 11.3
+cells/s. On a fixed 512-character, four-view Chinese benchmark, the retina oracle
+reaches 97.65\% top-1 and generated pixels show positive context signal, but
+recurrent top-1 is only 0.91\%, below unigram (1.86\%) and bigram (13.58\%)
+baselines; autonomous ink also drifts. We therefore reject the present MVP as a
+language model while retaining its image-only boundary and visual alphabet as
+measured progress. The result identifies model-induced visual trajectory
+training, rather than immediate scaling, as the next falsifiable step.
 \end{abstract}
 
 \begin{figure}[t]
@@ -41,45 +58,97 @@ The output should itself be a readable answer image. For a query such as ``expla
 
 OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. PIXEL reconstructs masked rendered-text patches and demonstrates cross-script visual transfer~\cite{pixel}; PIXAR is a genuinely generative pixel-space autoregressive language model and identifies noisy maximum-likelihood text images as a central difficulty~\cite{pixar}; PixelGPT studies autoregressive visual and textual pretraining~\cite{pixelgpt}. These are the closest model-level precedents. Token-free language models such as CANINE, ByT5, and MEGABYTE remove subwords but retain symbolic bytes or characters. Discrete diffusion language models show that generation need not be left-to-right, but usually retain a linguistic vocabulary.
 
-The remaining gap is not simply ``pixels instead of tokens.'' It is a system that (i) preserves ordered visual evidence, (ii) acquires semantic neighborhoods without retaining a text teacher, (iii) outputs exact image values when the answer already exists, and (iv) never presents a synthesized historical-looking mark as attested evidence. VFM addresses the first three in runnable code and makes the fourth an explicit provenance contract. Unrestricted novel image writing remains an open stage rather than an implied result.
+I-JEPA shows that predicting target image representations from visual context can
+learn semantic visual fields without reconstructing every pixel~\cite{ijepa}.
+Flow matching trains continuous generative paths by vector-field regression and
+supports efficient numerical sampling~\cite{flowmatching}. Human reading is
+also sequential and foveated: Chinese readers make saccades and can use both
+character- and word-related targeting cues~\cite{yanreading}. These observations
+motivate RFLM, but they do not imply biological equivalence.
+
+The remaining gap is not simply ``pixels instead of tokens.'' It is a system
+whose predictive random variables are continuous writing images, whose memory
+is learned from ordered visual observations, whose writer produces new pixels,
+and whose own output distribution is present during evaluation. Historical
+evidence adds a separate constraint: synthesized marks must never be presented
+as attested source glyphs.
 
 \section{Architecture}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/architecture_overview.png}
-  \caption{Conceptual image-native architecture. The implemented VFM specializes this design into an ordered axial retina, a continuous semantic field, an image-valued folio, and a provenance gate. Whole-field masked writing is the next stage.}
-  \label{fig:architecture}
+  \includegraphics[width=\linewidth]{figures/retinal_flow_paradigm.png}
+  \caption{The implemented Retinal Flow Language Model. Training joins visual next-state energy, conditional rectified flow, and a write--read cycle. Autonomous inference samples candidate ink images, rereads them, selects by visual energy, and feeds the selected pixels back. The receipt reports the failed language gate explicitly.}
+  \label{fig:retinalflow}
 \end{figure}
 
-Figure~\ref{fig:architecture} gives the visual contract. The implemented system has four separable components:
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Ordered folio retina.} A stroke-preserving convolutional stem maps a grayscale writing image to a stride-16 field. Alternating axial attention reads along writing lines and exchanges evidence between lines without assigning patches lexical identities.
-  \item \textbf{Centered semantic field.} A local multilingual embedding model supplies continuous fields during offline training only. Corpus anisotropy is removed before distillation; the deployed student contains neither teacher weights nor calls.
-  \item \textbf{Image-valued folio.} Multiple student-derived visual keys address exact answer-page images. Runtime manifests contain paths and provenance but deliberately omit prompt and answer strings.
-  \item \textbf{Evidence and writing gates.} Attested historical glyphs are copied from source pixels. Novel prose is reserved for a masked whole-answer canvas refiner, so a weak generator cannot silently replace evidence.
-\end{enumerate}
+Figure~\ref{fig:retinalflow} gives the strict visual contract. For fixation images
+$x_t\in[0,1]^{H\times W}$, RFLM factors a visual sequence as
+\[
+p_\Theta(x_{1:T})=p(x_1)\prod_{t=1}^{T-1}
+p_\Theta(x_{t+1}\mid x_{\le t}).
+\]
+The random variables are continuous image fields rather than entries in a
+linguistic or visual vocabulary.
 
-For image $X\in[0,1]^{H\times W}$, the retina produces $F\in\mathbb{R}^{H/16\times W/16\times d}$. One axial block computes
+\paragraph{Foveal retina.}
+A convolutional reader maps each $32\times32$ image to a normalized
+192-dimensional visual state:
 \[
-F'_{r,:,:}=F_{r,:,:}+\operatorname{Attn}_{x}(F_{r,:,:}),\quad
-F''_{:,c,:}=F'_{:,c,:}+\operatorname{Attn}_{y}(F'_{:,c,:}).
+z_t=R_\theta(x_t)/\lVert R_\theta(x_t)\rVert_2.
 \]
-Ink-aware pooling and projection produce $s_\theta(X)\in\mathbb{S}^{D-1}$. There is no embedding lookup or language-classification head.
+Independent font renderings are aligned with visual contrastive, invariance, and
+variance objectives. The target retina $R_{\bar\theta}$ is an exponential moving
+average of the online retina. Font coverage is checked from font cmap tables so
+missing-glyph boxes cannot become a spurious class.
 
-The raw teacher field is anisotropic. In the measured 10,000-document Chinese cache, unrelated pairs average cosine 0.360 and the mean-vector norm is 0.597. Therefore
+\paragraph{Recurrent visual field and energy.}
+A three-layer GRU integrates the fixation history,
 \[
-\mu=\frac{1}{N}\sum_i t_i,\qquad r_i=\frac{t_i-\mu}{\lVert t_i-\mu\rVert_2}
+h_t=G_\phi(h_{t-1},z_t),\qquad h_t\in\mathbb{R}^{384}.
 \]
-is the target. Centering reduces mean unrelated cosine to approximately zero. Two visual augmentations $A_1,A_2$ of one document are trained with
+An energy function scores any candidate image $c_j$ after rereading it:
 \[
-\mathcal{L}_{\mathrm{read}}=
-\mathcal{L}_{\mathrm{cos}}(s(A_1X),r)+
-\lambda_v\mathcal{L}_{\mathrm{cos}}(s(A_1X),s(A_2X))+
-\lambda_r\lVert SS^\top-RR^\top\rVert_1+
-\lambda_c\mathcal{L}_{\mathrm{NCE}}(S,R).
+s_{t,j}=E_\psi(h_t,z_t,R_{\bar\theta}(c_j)).
 \]
-At inference, $i^*=\arg\max_i\max_v s_\theta(X)^\top k_{iv}$, and the value is a sequence of image pages. The internal units remain continuous spatial observations, not BPE, wordpiece, Unicode, or renamed discrete visual tokens.
+Multi-positive visual NCE admits multiple near-identical image views as valid
+targets. Unlike a softmax language head, this energy is not tied to a finite
+character inventory.
+
+\paragraph{Conditional ink flow.}
+For clean target $x_{t+1}$, noise $\epsilon$, and $\tau\in[0,1]$, define
+\[
+y_\tau=(1-\tau)x_{t+1}+\tau\epsilon,
+\qquad u_\tau=\epsilon-x_{t+1}.
+\]
+The pixel writer predicts the path velocity
+\[
+\hat u_\omega=F_\omega(y_\tau,\tau,h_t,z_t),\qquad
+\mathcal L_{\mathrm{flow}}=
+\lVert\hat u_\omega-u_\tau\rVert_2^2.
+\]
+Training emphasizes high-noise times, where target pixels cannot simply be
+copied, and weights sparse strokes and the predicted clean endpoint.
+
+\paragraph{Write--read cycle.}
+The one-step endpoint $\hat x_0=y_\tau-\tau\hat u_\omega$ is reread through the
+frozen target retina. A visual NCE cycle objective aligns it to independent
+target renderings:
+\[
+\mathcal L_{\mathrm{cycle}}=
+\operatorname{NCE}\!\left(R_{\bar\theta}(\hat x_0),
+R_{\bar\theta}(x_{t+1}^{(1)}),R_{\bar\theta}(x_{t+1}^{(2)})\right).
+\]
+The complete loss combines flow, energy, cross-render invariance, retina
+contrast, endpoint, stroke, and cycle terms. At inference, the writer samples a
+candidate set $\mathcal C_t$ and selects
+\[
+\hat x_{t+1}=\arg\max_{c\in\mathcal C_t}
+E_\psi(h_t,z_t,R_{\bar\theta}(c)).
+\]
+The selected pixels become the next observation. This closes the visual loop and
+turns autonomous stability into a mandatory model property rather than a
+post-processing concern.
 
 \section{Data}
 
@@ -99,18 +168,47 @@ Seal & 6,996 \\
 \end{tabular}
 \end{center}
 
-This supports evidence-bearing historical answer pages. The first semantic run additionally uses 5,000 CC-BY-NC-4.0 Chinese Alpaca instruction pairs, rendered into 10,000 prompt/answer folios. BGE-M3 fields are cached only for offline distillation. Public-domain scans remain a planned robustness corpus; source license, hash, and transform must be recorded before use.
+This supports future evidence-bearing historical answer pages but was not used as
+a character-label channel in the RFLM run. The language trajectory corpus is a
+7,017-record manifest built from 16 public-domain Chinese Wikisource book
+packages. The contribution layer is recorded as CC BY-SA, and the manifest
+stores source artifacts and rights. Strings exist only in the offline manifest
+and renderer; model batches contain image tensors.
+
+Eight Noto Sans/Serif CJK fonts provide independent visual views. The run stores
+the exact font paths, byte counts, and SHA-256 hashes in checkpoints and
+receipts. Cmap intersection filtering leaves 8,282 supported visible characters;
+107 unsupported unique forms account for only 0.0074\% of visible corpus
+instances and are skipped instead of rendered as missing-glyph boxes.
 
 \section{Training Objectives}
 
-The current VFM curriculum separates objectives that previous runs incorrectly conflated:
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Visual reading:} align independently rendered folios to centered continuous teacher fields and preserve pairwise semantic geometry.
-  \item \textbf{Visual addressing:} evaluate full-memory top-(k) retrieval under unseen typography before adding generation.
-  \item \textbf{Paraphrase transfer:} use Qwen offline to rewrite held-out questions, reject meaning drift with an independent embedding threshold, rasterize the accepted rewrite, and test the independent student only.
-  \item \textbf{Evidence output:} retrieve and copy exact historical glyph panels with source metadata.
-  \item \textbf{Whole-field writing:} corrupt complete answer canvases and learn iterative masked revision conditioned on prompt and retrieved evidence. This stage is not credited until autonomous pages are legible.
-\end{enumerate}
+Each 48-fixation page supplies eight sampled causal positions, making the
+language objective denser than one endpoint per page. The complete training loss
+is
+\[
+\mathcal L =
+\lambda_f\mathcal L_{\mathrm{flow}}+
+\lambda_e\mathcal L_{\mathrm{energy}}+
+\lambda_r\mathcal L_{\mathrm{retina}}+
+\lambda_v\mathcal L_{\mathrm{view}}+
+\lambda_p\mathcal L_{\mathrm{endpoint}}+
+\lambda_s\mathcal L_{\mathrm{stroke}}+
+\lambda_c\mathcal L_{\mathrm{cycle}}.
+\]
+The energy term uses 512 cross-render candidate views per batch in the final
+run. Visual duplicate positives are discovered by image similarity rather than
+labels. The view term aligns independent renderings in both retinal and
+candidate-projection spaces. Endpoint and stroke terms improve sparse-ink
+geometry. The cycle term is weighted toward high-noise examples, where a writer
+must use recurrent context rather than visible target pixels.
+
+The present loss is still teacher-forced at the trajectory level: its recurrent
+prefix contains clean image fixations. The next objective will mix generated
+prefixes and align clean and model-induced recurrent trajectories. This follows
+the general distribution-shift lesson of scheduled sampling and
+DAgger~\cite{scheduledsampling,dagger}; it remains image-only because the
+aggregated states and targets are pixels and continuous visual fields.
 
 \section{Image-First Training and Inference}
 
@@ -163,17 +261,23 @@ This schema is intentionally different from ``text answer plus illustrations''. 
   \label{fig:curriculum}
 \end{figure}
 
-Figure~\ref{fig:curriculum} illustrates the original schedule. Measurements support a revised, lower-risk order:
+Figure~\ref{fig:curriculum} records the original page-model schedule.
+Measurements now support a different order:
 \begin{enumerate}[leftmargin=*]
-  \item Train the 10.9M-parameter ordered retina on rendered instruction folios.
-  \item Prove full-memory semantic retrieval, held-out typography, and held-out paraphrases.
-  \item Insert evidence-bearing historical pages without retraining and verify multilingual queries.
-  \item Train a compact whole-field writer over retrieved answer layouts rather than pages sampled from pure noise.
-  \item Add public-domain book crops and manuscript damage to the retina curriculum.
-  \item Scale width, memory, and answer composition only after bounded comparisons justify it.
+  \item Learn a cross-font foveal visual alphabet and audit missing-glyph coverage.
+  \item Train recurrent visual energy and conditional ink flow jointly on dense causal positions.
+  \item Reread generated endpoints during training and evaluate on a fixed external visual bank.
+  \item Aggregate autonomous model-induced visual trajectories and train against their distribution.
+  \item Add a slow line/page state only if full history improves over the last-fixation ablation.
+  \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
+  \item Scale width and corpus size only after the fixed language and stability gates pass.
 \end{enumerate}
 
-The retina is deliberately small enough for one 24GB RTX 4090. The first 10,000-field teacher cache took 55 seconds locally. All speed, VRAM, and accuracy numbers must be measured again on the finalized checkpoint; ``more efficient than an LLM'' is a hypothesis until a named benchmark supports it.
+The complete 11.69M model is deliberately small enough for one 24 GiB RTX
+4090. Its measured 2.56 GiB training peak leaves room for longer rollouts and a
+slow page state. This is capacity headroom, not an efficiency victory: quality
+is currently below a symbolic bigram, so ``more efficient than an LLM'' remains
+an unsupported hypothesis.
 
 \section{Target Demonstration}
 
@@ -210,32 +314,57 @@ The figure brief for AgInTi-style refinement is stored in the local AgInTi promp
 
 The model should be evaluated as both a language model and a visual generator:
 \begin{itemize}[leftmargin=*]
-  \item Full-memory top-1/top-5 and reciprocal rank, not only within-batch accuracy.
-  \item Separate results for same-wording rerenders and validated semantic paraphrases.
-  \item OCR readability of genuinely generated modern text images, used only as an external metric.
-  \item Human readability and task-success ratings.
-  \item Glyph-stage retrieval accuracy: generated glyphs should retrieve correct characters and stages.
-  \item Historical plausibility: distance to nearest real glyph exemplars in stage-specific embedding space.
-  \item Layout validity: no text/panel overlap, stable reading order, correct answer composition.
-  \item Image-to-image QA accuracy on rendered prompts and rendered answers.
+  \item Fixed-bank top-1, top-5, and reciprocal rank for full context and a last-fixation ablation.
+  \item Random-weight, chance, unigram, and symbolic bigram baselines on identical contexts.
+  \item Cross-font retina-oracle retrieval, separated from recurrent language prediction.
+  \item Generated-image target similarity, pixel F1, ink occupancy, variance, and energy-reranked hit rate.
+  \item Autonomous rollout length, throughput, VRAM, and blinded human readability.
+  \item Student-boundary audit for token IDs, Unicode IDs, OCR, codebooks, labels, and external models.
+  \item Later historical tasks: glyph-stage accuracy, attested-source provenance, and explicit synthetic-form labeling.
 \end{itemize}
 
 \begin{center}
-\begin{tabular}{p{0.26\linewidth}p{0.19\linewidth}p{0.42\linewidth}}
+\begin{tabular}{p{0.28\linewidth}p{0.20\linewidth}p{0.39\linewidth}}
 \toprule
 System & Measured signal & Interpretation \\
 \midrule
 Whole-page flow & velocity MSE 0.851 & Unreadable page texture; negative baseline \\
 Global visual memory & top-1 2.23\% over 2,016 & Above random, but 0/16 historical paraphrases \\
 Causal InkStream & validation ink F1 0.639 & Autonomous repeated-grey collapse; negative baseline \\
-Centered VFM & training in progress & Accept only after full-memory and paraphrase evaluation \\
+RFLM retina oracle & top-1 97.65\% & Strong cross-font visual alphabet \\
+RFLM recurrent state & top-1 0.91\% & Above random 0.04\%; below unigram 1.86\% and bigram 13.58\% \\
+RFLM pixel writer & context gain $+0.0211$ & Context-sensitive ink, but best-of-four hit only 1.56\% \\
+RFLM autonomous loop & 11.3 cells/s & Dense early marks drift into unreadable fragments \\
 \bottomrule
 \end{tabular}
 \end{center}
 
+The fixed evaluation contains 512 common Han candidates with four independent
+font views and 2,423 eligible held-out contexts. Full-context top-1 is also below
+the last-fixation-only result (0.91\% versus 1.36\%), so longer context has not
+yet been shown useful. The formal acceptance result is false. This separation is
+important: the 97.65\% retina oracle cannot be cited as language accuracy.
+
+The next checkpoint is accepted only if full context beats random,
+last-fixation, unigram, and bigram baselines; generated context signal remains
+positive on held-out fonts; and a 32-cell autonomous continuation remains
+readable. Training on perturbed or model-induced states is motivated additionally
+by measured error accumulation in iterative diffusion chains~\cite{inputperturb}.
+
 \section{Conclusion}
 
-The experiments show that merely replacing tokens with pixels is insufficient. A page diffusion model can learn paper, and a causal pixel model can learn local strokes, without learning autonomous language. VFM instead treats visible language as an ordered semantic field coupled to amendable image-valued memory and protected historical evidence. The present code can establish image-only semantic reading and image answer recall on one GPU. It cannot yet claim unrestricted visual composition or parity with Qwen 8B. Those claims are reserved for the masked writer and a fixed benchmark, respectively.
+The experiments show that merely replacing tokens with pixels is insufficient.
+A page flow can learn paper statistics, a causal writer can learn local ink, and
+a retina can learn character identity without acquiring language dynamics.
+RFLM contributes a stricter testable paradigm: ordered continuous visual
+reading, recurrent image-state prediction, direct conditional ink flow, and
+rereading under autonomous feedback. Its first run proves that this complete
+loop fits comfortably on one consumer GPU and learns a visual alphabet, but it
+fails elementary language and stability baselines. The correct next step is to
+train on the visual states produced by the model itself and re-run the same
+frozen gates. Historical etymology answers and broad instruction following
+remain downstream goals, not present capabilities, and no Qwen-8B parity or
+efficiency claim is warranted.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
@@ -260,6 +389,12 @@ The experiments show that merely replacing tokens with pixels is insufficient. A
 \bibitem{maskgit} Chang et al. MaskGIT: Masked Generative Image Transformer. \url{https://arxiv.org/abs/2202.04200}
 \bibitem{ldm} Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models. \url{https://arxiv.org/abs/2112.10752}
 \bibitem{dit} Peebles and Xie. Scalable Diffusion Models with Transformers. \url{https://arxiv.org/abs/2212.09748}
+\bibitem{flowmatching} Lipman et al. Flow Matching for Generative Modeling. \url{https://arxiv.org/abs/2210.02747}
+\bibitem{ijepa} Assran et al. Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture. \url{https://arxiv.org/abs/2301.08243}
+\bibitem{dagger} Ross, Gordon, and Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. \url{https://proceedings.mlr.press/v15/ross11a.html}
+\bibitem{scheduledsampling} Bengio et al. Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks. \url{https://papers.nips.cc/paper_files/paper/2015/hash/e995f98d56967d946471af29d7bf99f1-Abstract.html}
+\bibitem{inputperturb} Ning et al. Input Perturbation Reduces Exposure Bias in Diffusion Models. \url{https://proceedings.mlr.press/v202/ning23a.html}
+\bibitem{yanreading} Yan et al. Eye movement guidance in Chinese reading: Is there a preferred viewing location? \emph{Vision Research}, 51(10), 2011. \url{https://doi.org/10.1016/j.visres.2011.03.004}
 \end{thebibliography}
 
 \end{document}

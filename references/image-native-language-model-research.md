@@ -2,6 +2,73 @@
 
 Date: 2026-08-12
 
+## 2026-08-12 experimental revision: Retinal Flow Language Model
+
+The project now has a stricter and more complete experimental paradigm than the
+Visual Folio retrieval system described below. The **Retinal Flow Language
+Model (RFLM)** is a causal model over continuous image fixations:
+
+```text
+ordered ink images -> foveal retina -> recurrent visual field
+                   -> image energy + conditional pixel flow
+                   -> candidate ink images -> reread -> visual feedback
+```
+
+Its student boundary excludes strings, token IDs, Unicode IDs, OCR,
+character-label supervision, external language models, and discrete visual
+codebooks. Typed text is rasterized before the boundary. At inference, generated
+pixels are reread and become the next input.
+
+The implemented system has four trainable parts:
+
+1. A convolutional `32x32` foveal retina with a 192-dimensional continuous
+   output and an EMA target branch.
+2. A three-layer, 384-dimensional GRU visual field.
+3. A continuous compatibility energy that can score any candidate image
+   embedding without a vocabulary-sized head.
+4. A conditional pixel-space rectified-flow writer with high-noise training and
+   a differentiable write-read cycle.
+
+The first clean cross-font Chinese run contains 11,690,244 parameters, peaked
+at 2.56 GiB training VRAM on one RTX 4090, and generated 11.3 cells/s. A fixed
+bank evaluation over 512 common Han characters, four prototype views, and 2,423
+held-out contexts produced:
+
+| Measurement | Result |
+|---|---:|
+| Retina oracle top-1 | 97.648% |
+| Retina oracle top-5 | 100% |
+| Random full-context top-1 | 0.041% |
+| RFLM full-context top-1 | 0.908% |
+| RFLM full-context top-5 | 2.229% |
+| Last-fixation-only top-1 | 1.362% |
+| Unigram top-1 | 1.857% |
+| Symbolic bigram top-1 | 13.578% |
+| Generated context cosine gain | +0.0211 |
+| Generated best-of-four target hit | 1.5625% |
+
+The acceptance result is false. The retina has learned a robust visual
+alphabet, and generated pixels contain a measurable context signal, but the
+recurrent state does not yet use longer history effectively and loses to simple
+language baselines. Autonomous rollouts begin with dense character-like ink and
+then drift into unreadable fragments. The experiment localizes the bottleneck
+to language dynamics and closed-loop stability rather than glyph perception.
+
+The next research intervention is **model-induced visual trajectory training**:
+aggregate generated prefixes, train on the image-state distribution induced by
+the current model, align clean and rollout recurrent trajectories, and test a
+slow page state alongside the fast foveal state. This follows the general lesson
+from DAgger and scheduled sampling that sequential predictors must learn under
+states produced by their own decisions, while remaining an image-only algorithm
+in this implementation. Input perturbation work in diffusion models provides a
+closely related warning that iterative generative chains accumulate errors when
+their train and inference inputs differ.
+
+The RFLM does not replace the need for provenance-bearing folio memory. It
+replaces that memory as the definition of the language model. Later etymology
+answers should combine an autonomous visual writer for connective language with
+a separate evidence gate that inserts attested historical pixels.
+
 ## 2026 architecture revision: Visual Folio Machine
 
 Three measured results changed the project direction:
@@ -16,7 +83,7 @@ Three measured results changed the project direction:
    columns. Local pixel likelihood and scheduled sampling did not solve
    exposure bias or semantic generation.
 
-The current implementation therefore separates four operations:
+That earlier implementation therefore separated four operations:
 
 - **ordered visual reading:** convolutional stroke retina plus axial line/page
   attention;
@@ -52,7 +119,11 @@ The proposed object is an **image-native language model**:
 image/page/glyph input -> visual latent language state -> image/page/glyph output
 ```
 
-Internally, it may use patches, continuous VAE latents, or learned visual codebook entries. These are not word/subword tokens. They are spatial visual units, closer to retinal/text-line patches than to BPE.
+The current RFLM uses continuous retinal vectors and pixel-space flow. It
+deliberately does not use VAE IDs or a learned visual codebook: a finite glyph
+code vocabulary would weaken the open-form claim and could become a renamed
+character vocabulary. Earlier latent/codebook proposals are retained below as
+historical design alternatives.
 
 The minimum successful system should do three things:
 
@@ -113,7 +184,11 @@ Available local data snapshot (external to this repo, git-ignored):
 
 This dataset is enough for a first glyph-evolution generator and a glyph-aware visual language pretraining task.
 
-## 4. Proposed Architecture: ILM-V (Image-Native Visual Language Model)
+## 4. Archived Proposal: ILM-V Latent Page Model
+
+This section records the pre-RFLM proposal. Whole-page flow experiments learned
+page texture without readable language, so the latent page generator is no
+longer the primary model. It remains useful as a renderer and baseline.
 
 ### 4.1 Data Representation
 
@@ -217,7 +292,7 @@ Model:
 - Input: glyph/page tiles.
 - Latent: 16x16 or 32x32 grid.
 
-Goal:
+Historical goal:
 
 - Reconstruct stroke shape faithfully.
 - Learn compact visual units for writing.
@@ -323,9 +398,11 @@ Mitigation: stage the project. Start with glyph autoencoding/evolution, then lin
 
 Mitigation: keep downloaded data local/git-ignored; cite sources; prefer public/open datasets for papers; use local data for experiments where permitted.
 
-## 8. Implementation Direction in This Repo
+## 8. Archived Implementation Direction
 
-Immediate files/modules to add next:
+These were the original proposed modules; the active implementation is now
+`ilm/visual_lm/retinal_flow_lm.py` with the retinal train, evaluation, and
+inference scripts documented in the root README.
 
 1. `ilm/visual_lm/autoencoder.py`
    - VAE/VQ-VAE for glyph and page tiles.
@@ -416,3 +493,9 @@ The critical point is that the page image is not a rendering after a token answe
 - Chang et al., MaskGIT: Masked Generative Image Transformer: https://arxiv.org/abs/2202.04200
 - Rombach et al., High-Resolution Image Synthesis with Latent Diffusion Models: https://arxiv.org/abs/2112.10752
 - Peebles and Xie, Scalable Diffusion Models with Transformers (DiT): https://arxiv.org/abs/2212.09748
+- Lipman et al., Flow Matching for Generative Modeling: https://arxiv.org/abs/2210.02747
+- Assran et al., Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA): https://arxiv.org/abs/2301.08243
+- Ross, Gordon, and Bagnell, A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning (DAgger): https://proceedings.mlr.press/v15/ross11a.html
+- Bengio et al., Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks: https://papers.nips.cc/paper_files/paper/2015/hash/e995f98d56967d946471af29d7bf99f1-Abstract.html
+- Ning et al., Input Perturbation Reduces Exposure Bias in Diffusion Models: https://proceedings.mlr.press/v202/ning23a.html
+- Yan et al., Eye movement guidance in Chinese reading: Is there a preferred viewing location?: https://doi.org/10.1016/j.visres.2011.03.004

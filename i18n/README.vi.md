@@ -8,28 +8,48 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM là một mã nguồn nghiên cứu cho bài toán **tạo văn bản dưới dạng hình ảnh**: mã hóa ngôn ngữ thành tensor giống hình ảnh gọn nhẹ và sinh văn bản bằng tinh chỉnh lặp kiểu khuếch tán. Các biểu diễn tách câu thành các phần tử siêu ngữ nghĩa (ngữ pháp, ngữ nghĩa, giọng điệu, cảm xúc) cùng mã phân cấp kiểu bộ nhớ cho từ và ký tự. Cách tiếp cận này thống nhất các ý tưởng từ khuếch tán rời rạc, chồng chập/khử trộn, nhúng có cấu trúc và mô hình ký tự có ý thức glyph.
+ILM là dự án nghiên cứu học và sinh ngôn ngữ dưới dạng **chữ viết nhìn thấy
+được**. Mô hình hiện tại đọc các ô mực có thứ tự, duy trì trạng thái thị giác
+liên tục và viết trực tiếp ô tiếp theo bằng pixel qua rectified flow. Các
+codebook và mô hình khuếch tán trang cũ được giữ làm đường chuẩn so sánh, không
+phải mô hình hiện hành.
+
+## Mô hình hiện tại: Retinal Flow Language Model
+
+![Sơ đồ Retinal Flow Language Model](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+Biên của mô hình con là `pixel chữ viết -> trạng thái võng mạc liên tục -> pixel
+mực`. Mô hình không nhận token văn bản, mã Unicode, OCR, codebook thị giác hay
+mô hình ngôn ngữ ngoài. Bộ đọc thị giác đạt `97,65%` về nhận dạng hình ảnh,
+nhưng dự đoán với toàn bộ ngữ cảnh chỉ đạt `0,91%`, thấp hơn unigram (`1,86%`)
+và bigram (`13,58%`). Sinh tự trị cũng trôi thành các nét không đọc được. Vì
+vậy **MVP hiện tại bị bác bỏ với tư cách mô hình ngôn ngữ**. Bước tiếp theo là
+huấn luyện trên quỹ đạo thị giác do chính mô hình tạo ra, không phải tăng kích
+thước ngay lập tức.
 
 > Kho lưu trữ duy trì cùng lúc đường ống ngữ nguyên lịch sử có tính thực dụng và các thử nghiệm ILM tầm xa trong cùng một nơi.
 
 ## 📌 Tổng quan
 
-Repo này gồm hai hướng hoạt động chính:
+Repo này gồm ba hướng liên kết:
 
-1. Tiếp nhận chữ Hán lịch sử (cào dữ liệu/phân tích/cơ sở dữ liệu/xem trước).
-2. Thử nghiệm mô hình ILM glyph/image (render glyph token, codebook, đóng gói khung, khuếch tán/phục hồi từng phần, đánh giá/báo cáo).
+1. Mô hình ngôn ngữ ảnh Retinal Flow và đánh giá ngoài tập huấn luyện nghiêm ngặt.
+2. Thu thập chữ Hán lịch sử có lưu nguồn gốc.
+3. Các đường chuẩn glyph, codebook, diffusion, folio và InkStream cũ được giữ để tái lập.
 
-README này ghi nhận đầy đủ cả hai hướng và giữ luồng xử lý etymology như một phần cốt lõi, có thể lặp lại.
+README này ghi nhận cả ba hướng và giữ luồng etymology như một phần cốt lõi có thể lặp lại.
 
 ## 🔗 Liên kết chính
 
 | Khu vực | Đường dẫn |
 |---|---|
 | Bài viết khái niệm | `docs/imagized-language-model.md` |
+| Mục tiêu kỹ thuật hiện tại | `docs/first-imagized-language-model-goal.md` |
+| Hồ sơ nghiên cứu và bằng chứng | `references/image-native-language-model-research.md` |
 | Kế hoạch mã nguồn và chỉ số | `docs/ilm-visual-diffusion-code-plan.md` |
 | Kế hoạch "màu" embedding | `docs/embedding-color-plan.md` |
 | Ghi chú/kế hoạch phát triển | `docs/development-plan.md` |

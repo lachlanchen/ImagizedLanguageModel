@@ -8,28 +8,46 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM은 **텍스트-이미지(text-as-image) 생성**을 탐구하는 연구 코드베이스입니다. 언어를 컴팩트한 이미지 유사 텐서로 인코딩하고, 확산 기반 반복 정제를 통해 텍스트를 생성합니다. 이 표현은 문장을 메타 요소(문법, 의미, 톤, 감정)와 단어 및 문자에 대한 계층적 코드로 분해합니다. 이 접근은 이산 확산, 중첩/분해, 구조화 임베딩, 글리프 인지 문자 모델링 아이디어를 통합합니다.
+ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성하는 연구 프로젝트입니다.
+현재 모델은 순서가 있는 잉크 고정시야를 읽고 연속 시각 상태를 유지하며,
+rectified flow로 다음 고정시야를 픽셀 공간에 직접 씁니다. 이전 코드북과 페이지
+확산 모델은 비교용 기준선이며 현재 패러다임이 아닙니다.
+
+## 현재 패러다임: Retinal Flow Language Model
+
+![Retinal Flow Language Model 구조](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+학생 모델의 경계는 `글쓰기 픽셀 -> 연속 망막 상태 -> 잉크 픽셀`입니다. 학생은
+텍스트 토큰, Unicode ID, OCR, 시각 코드북, 외부 언어 모델을 받지 않습니다.
+시각 정체성 평가는 `97.65%`였지만 전체 문맥의 다음 이미지 예측은 `0.91%`로,
+unigram (`1.86%`)과 bigram (`13.58%`)보다 낮았습니다. 자율 생성도 읽을 수 없는
+조각으로 드리프트합니다. 따라서 **현재 MVP는 언어 모델로서 불합격**입니다.
+다음 단계는 즉시 규모를 키우는 것이 아니라 모델이 스스로 만든 시각 궤적에서
+학습하는 것입니다.
 
 > 저장소는 실용적인 어원 파이프라인과 장기 ILM 실험을 나란히 유지합니다.
 
 ## 📌 개요
 
-이 저장소는 두 개의 활성 트랙이 있습니다.
+이 저장소에는 세 개의 연결된 트랙이 있습니다.
 
-1. 역사적 중국어 글리프 어원 수집 (수집/파싱/저장/미리보기).
-2. ILM 글리프/이미지 모델링 실험 (토큰 글리프 렌더링, 코드북, 프레임 패킹, 확산/인페인팅, 평가/리포팅).
+1. Retinal Flow 이미지 네이티브 언어 모델링과 엄격한 외부 평가.
+2. 출처를 보존하는 역사적 중국어 글리프 어원 수집.
+3. 재현성을 위해 보존한 이전 글리프, 코드북, 확산, folio, InkStream 기준선.
 
-이 README는 두 트랙을 모두 문서화하며, 어원 워크플로를 1급 재현 가능한 경로로 유지합니다.
+이 README는 세 트랙을 문서화하며 어원 워크플로를 재현 가능한 핵심 경로로 유지합니다.
 
 ## 🔗 주요 링크
 
 | 영역 | 경로 |
 |---|---|
 | 개념 정리 문서 | `docs/imagized-language-model.md` |
+| 현재 엔지니어링 목표 | `docs/first-imagized-language-model-goal.md` |
+| 연구 자료와 실험 근거 | `references/image-native-language-model-research.md` |
 | 코드 계획 및 지표 | `docs/ilm-visual-diffusion-code-plan.md` |
 | 임베딩 "색상" 계획 | `docs/embedding-color-plan.md` |
 | 개발 노트/계획 | `docs/development-plan.md` |

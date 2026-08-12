@@ -8,28 +8,44 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Diffusion](https://img.shields.io/badge/paradigm-diffusion%20%2B%20glyphs-6A5ACD)
+![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM 是一個研究型程式碼庫，探索 **text-as-image（文字即影像）生成**：它將語言編碼成緊湊、類影像的 tensor，並以擴散式（diffusion）反覆精煉的方式來生成文字。這個表示法會把句子拆解為後設元素（文法、語意、語氣、情緒），並以階層化且類記憶的詞彙/字元碼組合成表徵。它整合了離散 diffusion、superposition/disentanglement、結構化嵌入，以及具字形感知的字元建模觀念。
+ILM 是一個把語言當作**可見書寫影像**來學習與生成的研究專案。現行模型依序
+讀取墨跡視野，維持連續視覺狀態，並以 rectified flow 在像素空間直接寫出下一個
+視野。舊有碼本、整頁擴散與檢索模型仍作為對照基線保留，但不再定義現行範式。
+
+## 現行範式：視網膜流語言模型
+
+![視網膜流語言模型架構](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+
+學生模型的嚴格邊界是：`書寫像素 -> 連續視網膜狀態 -> 墨跡像素`。學生不接收
+文字 token、Unicode ID、OCR、視覺碼本或外部語言模型。視覺身分測試達到
+`97.65%`，但完整上下文的下一影像預測只有 `0.91%`，低於 unigram
+(`1.86%`) 與 bigram (`13.58%`)；自主生成也會漂移為不可讀碎片。因此，
+**目前 MVP 作為語言模型未通過驗收**。下一步不是立即增加參數，而是在模型自身
+誘導出的視覺軌跡上訓練。
 
 > 該儲存庫有意讓「可實際執行的語源工作流程」與「長程 ILM 實驗」保持並行。
 
 ## 📌 概覽
 
-這個儲存庫目前有兩條主線：
+這個儲存庫目前有三條互相關聯的主線：
 
-1. 歷史漢字字形語源資料擷取（爬取 / 解析 / 儲存 / 預覽）。
-2. ILM 字形/影像建模實驗（token 字形渲染、碼本、frame 打包、diffusion / inpainting、評估與報告）。
+1. 視網膜流影像原生語言建模與嚴格的訓練外評估。
+2. 保留來源證據的歷史漢字字形語源資料擷取。
+3. 為重現而保留的早期字形、碼本、擴散、folio 與 InkStream 對照基線。
 
-本 README 也會同時記錄這兩條主線，並將語源流程維持為可重現的主流程之一。
+本 README 記錄三條主線，並將語源流程維持為可重現的主流程之一。
 
 ## 🔗 關鍵連結
 
 | 項目 | 路徑 |
 |---|---|
 | 概念性說明 | `docs/imagized-language-model.md` |
+| 現行工程目標 | `docs/first-imagized-language-model-goal.md` |
+| 研究檔案與實驗證據 | `references/image-native-language-model-research.md` |
 | 程式規劃與量測 | `docs/ilm-visual-diffusion-code-plan.md` |
 | 嵌入「色彩」計畫 | `docs/embedding-color-plan.md` |
 | 開發筆記與規劃 | `docs/development-plan.md` |

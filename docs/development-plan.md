@@ -1,5 +1,9 @@
 # ILM Development Plan — Executable, Verifiable Steps
 
+> **Historical plan.** This document predates the Retinal Flow Language Model
+> and remains for reproducibility. The active milestones and acceptance gates
+> are in `docs/first-imagized-language-model-goal.md`.
+
 This plan breaks the Imagized Language Model (ILM) into concrete, sequential tasks. Every task declares: objective, actions to perform, artifacts produced, and verifiable checks (commands and quantitative acceptance criteria). The plan assumes a Linux environment with Python 3.10+, CUDA GPU optional, and XeLaTeX installed (already present here).
 
 Conventions
@@ -389,4 +393,3 @@ Legend
 ---
 
 This plan is living: as modules land, update each task’s commands to the real entry points and tighten DoD thresholds based on observed baselines.
-

@@ -189,6 +189,130 @@ def architecture() -> None:
     img.save(FIG / "architecture_overview.png")
 
 
+def retinal_flow_paradigm() -> None:
+    """Render the implemented read-predict-write-reread paradigm and its receipt."""
+    img = Image.new("RGB", (2200, 1320), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    navy = "#102a43"
+    blue = "#0b6fa4"
+    cyan = "#0891b2"
+    green = "#16835b"
+    amber = "#b45f06"
+    red = "#b42318"
+    grey = "#475467"
+
+    d.text((80, 45), "Retinal Flow Language Model", font=font(52, True), fill=navy)
+    d.text(
+        (82, 112),
+        "Read visible fixations, predict a visual distribution, write ink, then read the model's own ink.",
+        font=font(27),
+        fill=grey,
+    )
+
+    # Strict boundary banner.
+    d.rounded_rectangle((80, 170, 2120, 235), radius=8, fill="#e8f4f8", outline="#8ec9d6", width=2)
+    centered_text(
+        d,
+        (95, 172, 2105, 233),
+        "STUDENT BOUNDARY   pixels in -> continuous visual state -> pixels out   |   no tokenizer, Unicode IDs, OCR, codebook, or external LM",
+        font(22, True),
+        navy,
+    )
+
+    # Reading path.
+    d.text((80, 278), "A  READ AND PREDICT", font=font(28, True), fill=blue)
+    rounded(d, (80, 330, 450, 650), "#ffffff", "#8ebbd2", radius=8)
+    d.text((105, 352), "Ordered image fixations", font=font(24, True), fill=navy)
+    glyphs = ["天", "地", "玄", "黃", "宇", "宙"]
+    for i, glyph in enumerate(glyphs):
+        row, col = divmod(i, 3)
+        x = 108 + col * 105
+        y = 420 + row * 105
+        d.rounded_rectangle((x, y, x + 82, y + 82), radius=5, fill="#fffdf8", outline="#94a3b8", width=2)
+        centered_text(d, (x, y - 2, x + 82, y + 82), glyph, cjk_font(50), "#111827")
+    d.text((108, 615), "x_t in [0,1]^(32 x 32)", font=font(18), fill=grey)
+
+    rounded(d, (560, 330, 900, 650), "#ecfdf3", "#58a889", radius=8)
+    d.text((595, 352), "Foveal retina", font=font(24, True), fill=navy)
+    for r in range(4):
+        for c in range(4):
+            shade = 65 + 25 * ((r + c) % 3)
+            fill = (shade, 130 + shade // 3, 150 + shade // 4)
+            d.rectangle((615 + c * 52, 430 + r * 42, 655 + c * 52, 460 + r * 42), fill=fill)
+    d.text((615, 610), "z_t = R(x_t), 192-D", font=font(19), fill=grey)
+
+    rounded(d, (1010, 330, 1370, 650), "#fff7ed", "#d99a52", radius=8)
+    d.text((1044, 352), "Recurrent visual field", font=font(24, True), fill=navy)
+    for i in range(3):
+        d.rounded_rectangle((1065 + i * 65, 435, 1165 + i * 65, 545), radius=8, fill="#ffffff", outline="#d97706", width=3)
+        centered_text(d, (1065 + i * 65, 435, 1165 + i * 65, 545), f"GRU\n{i + 1}", font(20, True), amber)
+    d.text((1060, 610), "h_t = G(h_(t-1), z_t), 384-D", font=font(18), fill=grey)
+
+    rounded(d, (1480, 330, 2120, 650), "#f0f9ff", "#3b91b4", radius=8)
+    d.text((1515, 352), "Visual compatibility energy", font=font(24, True), fill=navy)
+    d.text((1518, 410), "E(h_t, z_t, R(candidate image))", font=font(22), fill=blue)
+    d.text((1518, 462), "Scores arbitrary image candidates", font=font(21), fill=grey)
+    d.text((1518, 502), "Multi-positive visual NCE", font=font(21), fill=grey)
+    d.text((1518, 542), "Cross-font views share a neighborhood", font=font(21), fill=grey)
+    d.text((1518, 600), "No finite character output table", font=font(21, True), fill=green)
+
+    arrow_any(d, (450, 490), (555, 490), blue)
+    arrow_any(d, (900, 490), (1005, 490), blue)
+    arrow_any(d, (1370, 490), (1475, 490), blue)
+
+    # Writing and rereading path.
+    d.text((80, 715), "B  WRITE, REREAD, AND CLOSE THE LOOP", font=font(28, True), fill=green)
+    rounded(d, (80, 770, 530, 1060), "#ffffff", "#8ebbd2", radius=8)
+    d.text((113, 793), "Conditional rectified flow", font=font(24, True), fill=navy)
+    d.text((112, 855), "y_tau = (1-tau) x_(t+1) + tau noise", font=font(20), fill=grey)
+    d.text((112, 900), "v = F(y_tau, tau, h_t, z_t)", font=font(22, True), fill=green)
+    d.text((112, 950), "32 x 32 continuous ink", font=font(21), fill=grey)
+    d.text((112, 990), "high-noise training prevents copying", font=font(20), fill=grey)
+
+    rounded(d, (650, 770, 1000, 1060), "#fff7ed", "#d99a52", radius=8)
+    d.text((686, 793), "Candidate ink images", font=font(24, True), fill=navy)
+    for i in range(4):
+        x = 692 + (i % 2) * 130
+        y = 858 + (i // 2) * 88
+        d.rounded_rectangle((x, y, x + 88, y + 72), radius=5, fill="#ffffff", outline="#94a3b8", width=2)
+        # Abstract continuous strokes, deliberately not symbolic labels.
+        d.line((x + 18, y + 51, x + 45, y + 18, x + 68, y + 50), fill="#1f2937", width=5 + i)
+        d.line((x + 28, y + 35, x + 66, y + 35), fill="#1f2937", width=4)
+
+    rounded(d, (1120, 770, 1515, 1060), "#ecfdf3", "#58a889", radius=8)
+    d.text((1156, 793), "Reread and select", font=font(24, True), fill=navy)
+    d.text((1154, 858), "z_hat = R(x_hat)", font=font(22, True), fill=green)
+    d.text((1154, 908), "arg max E(h_t, z_t, z_hat)", font=font(21), fill=grey)
+    d.text((1154, 958), "write-read cycle loss", font=font(21), fill=grey)
+    d.text((1154, 998), "chosen pixels become next input", font=font(19), fill=grey)
+
+    rounded(d, (1640, 770, 2120, 1060), "#fef2f2", "#d65a50", radius=8)
+    d.text((1675, 793), "Autonomous visual trajectory", font=font(24, True), fill=navy)
+    d.text((1680, 860), "x_1 -> x_2 -> ... -> x_T", font=font(23, True), fill=red)
+    d.text((1680, 910), "The model observes its own marks", font=font(20), fill=grey)
+    d.text((1680, 952), "Current failure: ink drift", font=font(21, True), fill=red)
+    d.text((1680, 992), "Next: train on induced rollouts", font=font(20), fill=navy)
+
+    arrow_any(d, (530, 915), (645, 915), green)
+    arrow_any(d, (1000, 915), (1115, 915), green)
+    arrow_any(d, (1515, 915), (1635, 915), green)
+    arrow_any(d, (1875, 770), (1245, 695), red, width=3)
+    d.text((1450, 684), "visual feedback", font=font(18, True), fill=red)
+
+    # Measured receipt and acceptance gate.
+    rounded(d, (80, 1120, 2120, 1265), "#ffffff", "#cbd5e1", radius=8)
+    d.text((108, 1143), "Measured one-RTX-4090 receipt", font=font(23, True), fill=navy)
+    d.text((108, 1192), "11.69M parameters  |  2.56 GiB train peak  |  11.3 generated cells/s", font=font(21), fill=grey)
+    d.text((875, 1143), "Vision", font=font(22, True), fill=green)
+    d.text((875, 1192), "97.65% oracle top-1", font=font(21), fill=grey)
+    d.text((1235, 1143), "Language", font=font(22, True), fill=red)
+    d.text((1235, 1192), "0.91% < unigram 1.86% < bigram 13.58%", font=font(20), fill=grey)
+    d.text((1770, 1143), "VERDICT", font=font(22, True), fill=red)
+    d.text((1770, 1192), "MVP REJECTED", font=font(22, True), fill=red)
+
+    img.save(FIG / "retinal_flow_paradigm.png", quality=95)
+
+
 def curriculum() -> None:
     img = Image.new("RGB", (1800, 1050), "#ffffff")
     d = ImageDraw.Draw(img)
@@ -259,7 +383,7 @@ def zhong_evolution() -> None:
     ]
     img = Image.new("RGB", (1800, 800), "#fbfbfd")
     d = ImageDraw.Draw(img)
-    d.text((70, 45), "Example Output: Evolution of Chinese Character Zhong (中)", font=font(42, True), fill="#101828")
+    d.text((70, 45), "Example Output: Evolution of Chinese Character Zhong", font=font(42, True), fill="#101828")
     d.text((72, 105), "A target answer is itself an image: explanation plus historical forms.", font=font(25), fill="#475467")
     card_w = 295
     x0 = 90
@@ -706,6 +830,7 @@ def aginti_loop() -> None:
 
 def main() -> None:
     architecture()
+    retinal_flow_paradigm()
     curriculum()
     zhong_evolution()
     yan_cover_hero()
