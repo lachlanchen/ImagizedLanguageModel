@@ -11,6 +11,7 @@ from typing import Any, Sequence
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from torch.utils.data import Dataset
 
@@ -237,5 +238,172 @@ def visual_grammar_collate(batch: Sequence[dict[str, Any]]) -> dict[str, Any]:
     return {
         "view_a": torch.stack([item["view_a"] for item in batch]),
         "view_b": torch.stack([item["view_b"] for item in batch]),
+        "metadata": [item["metadata"] for item in batch],
+    }
+
+
+def retinal_layout(text: str, config: RetinalRenderConfig) -> list[tuple[int, int, int]]:
+    """Return source offsets and visual cells using the renderer's layout rules."""
+
+    positions: list[tuple[int, int, int]] = []
+    row = 0
+    column = 0
+    for source_offset, character in enumerate(text):
+        if character == "\n":
+            row += 1
+            column = 0
+            if row >= config.rows:
+                break
+            continue
+        if column >= config.columns:
+            row += 1
+            column = 0
+        if row >= config.rows:
+            break
+        if not character.isspace():
+            positions.append((source_offset, row, column))
+        column += 1
+    return positions
+
+
+def _fovea_from_page(
+    page: torch.Tensor,
+    *,
+    row: int,
+    column: int,
+    config: RetinalRenderConfig,
+    fovea_size: int,
+) -> torch.Tensor:
+    left = config.margin + column * config.cell_width
+    top = config.margin + row * config.line_height
+    crop = page[:, top : top + config.line_height, left : left + config.cell_width]
+    if crop.shape[-2] > fovea_size or crop.shape[-1] > fovea_size:
+        crop = F.interpolate(
+            crop[None],
+            size=(min(fovea_size, crop.shape[-2]), min(fovea_size, crop.shape[-1])),
+            mode="bilinear",
+            align_corners=False,
+        )[0]
+    output = page.new_zeros(1, fovea_size, fovea_size)
+    top_padding = (fovea_size - crop.shape[-2]) // 2
+    left_padding = (fovea_size - crop.shape[-1]) // 2
+    output[:, top_padding : top_padding + crop.shape[-2], left_padding : left_padding + crop.shape[-1]] = crop
+    return output
+
+
+def _future_masks(
+    *,
+    row: int,
+    column: int,
+    config: RetinalRenderConfig,
+    patch_size: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    future = torch.zeros(config.height, config.width, dtype=torch.float32)
+    left = config.margin + column * config.cell_width
+    top = config.margin + row * config.line_height
+    bottom = min(config.height, top + config.line_height)
+    future[top:bottom, left:] = 1.0
+    future[bottom:] = 1.0
+    target = torch.zeros_like(future)
+    target[top:bottom, left : min(config.width, left + config.cell_width)] = 1.0
+    hidden_mask = F.max_pool2d(future[None, None], patch_size, patch_size)[0, 0].bool()
+    target_mask = F.max_pool2d(target[None, None], patch_size, patch_size)[0, 0].bool()
+    return hidden_mask, target_mask
+
+
+class FovealContinuationDataset(Dataset):
+    """Create image-prefix to next-ink samples without returning character labels."""
+
+    def __init__(
+        self,
+        records: Sequence[VisualGrammarRecord],
+        *,
+        render_config: RetinalRenderConfig,
+        patch_size: int,
+        fovea_size: int,
+        split: str,
+        validation_fraction: float = 0.03,
+        length: int | None = None,
+        minimum_context_cells: int = 8,
+        seed: int = 0,
+    ):
+        if split not in {"train", "validation", "all"}:
+            raise ValueError("split must be train, validation, or all")
+        selected = []
+        for record in records:
+            validation = _stable_fraction(record.identifier) < validation_fraction
+            if split == "all" or (split == "validation" and validation) or (split == "train" and not validation):
+                selected.append(record)
+        if not selected:
+            raise ValueError(f"no continuation records selected for split={split}")
+        if render_config.height % patch_size or render_config.width % patch_size:
+            raise ValueError("retinal render dimensions must be divisible by patch_size")
+        self.records = selected
+        self.config = render_config
+        self.patch_size = int(patch_size)
+        self.fovea_size = int(fovea_size)
+        self.length = int(length) if length is not None else len(selected)
+        self.minimum_context_cells = int(minimum_context_cells)
+        self.seed = int(seed)
+        self.epoch = 0
+
+    def set_epoch(self, epoch: int) -> None:
+        self.epoch = int(epoch)
+
+    def __len__(self) -> int:
+        return self.length
+
+    def __getitem__(self, index: int) -> dict[str, Any]:
+        rng = random.Random(self.seed + self.epoch * 10_000_019 + index * 104_729)
+        for _ in range(32):
+            record = self.records[index % len(self.records)] if self.length <= len(self.records) else rng.choice(self.records)
+            maximum_offset = max(0, len(record.text) - self.config.capacity)
+            offset = rng.randint(0, maximum_offset) if maximum_offset else 0
+            segment = _page_segment(record.text, offset, self.config.capacity)
+            positions = retinal_layout(segment, self.config)
+            if len(positions) > self.minimum_context_cells:
+                break
+        else:
+            raise ValueError("could not find a record with enough visible continuation cells")
+        position_index = rng.randint(self.minimum_context_cells, len(positions) - 1)
+        source_offset, row, column = positions[position_index]
+        variant = rng.randrange(2**31)
+        full_page = render_retinal_page(segment, config=self.config, variant=variant)
+        context = render_retinal_page(segment[:source_offset], config=self.config, variant=variant)
+        target = _fovea_from_page(
+            full_page,
+            row=row,
+            column=column,
+            config=self.config,
+            fovea_size=self.fovea_size,
+        )
+        hidden_mask, target_mask = _future_masks(
+            row=row,
+            column=column,
+            config=self.config,
+            patch_size=self.patch_size,
+        )
+        return {
+            "context": context,
+            "target": target,
+            "hidden_mask": hidden_mask,
+            "target_mask": target_mask,
+            "metadata": {
+                "id": record.identifier,
+                "source": record.source,
+                "rights": record.rights,
+                "row": row,
+                "column": column,
+                "context_cells": position_index,
+            },
+        }
+
+
+def foveal_continuation_collate(batch: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "context": torch.stack([item["context"] for item in batch]),
+        "target": torch.stack([item["target"] for item in batch]),
+        "hidden_mask": torch.stack([item["hidden_mask"] for item in batch]),
+        "target_mask": torch.stack([item["target_mask"] for item in batch]),
         "metadata": [item["metadata"] for item in batch],
     }
