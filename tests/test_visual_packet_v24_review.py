@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import pytest
 import torch
+from PIL import Image
 
 from scripts.prepare_visual_packet_opaque_review_v24 import (
     REVIEW_CASES,
     REVIEW_HELDOUT_LENGTH_CASES,
     REVIEW_SEEN_LENGTH_CASES,
     render_review_card,
+    save_review_pages,
     select_review_items,
 )
 from scripts.score_visual_packet_opaque_review_v24 import score_review
@@ -72,6 +74,16 @@ def test_v24_review_card_accepts_only_two_frame_visual_output() -> None:
             generated[:1],
             pair_packet_indices=(0, 2),
         )
+
+
+def test_v24_review_pages_reserve_the_widest_card_column(tmp_path) -> None:
+    cards = [
+        Image.new("RGB", (100, 50), "white"),
+        Image.new("RGB", (200, 50), "white"),
+    ]
+    save_review_pages(cards, tmp_path)
+    with Image.open(tmp_path / "review_page_01.png") as page:
+        assert page.width == 2 * 200 + 3 * 14
 
 
 def test_v24_review_scores_both_frames_and_heldout_lengths() -> None:

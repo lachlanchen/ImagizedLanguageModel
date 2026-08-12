@@ -282,16 +282,18 @@ def save_review_pages(cards: Sequence[Image.Image], root: Path) -> None:
     rows = cards_per_page // columns
     margin = 14
     vertical_gap = 8
+    card_width = max(card.width for card in cards)
+    card_height = max(card.height for card in cards)
     for page_index in range((len(cards) + cards_per_page - 1) // cards_per_page):
         page_cards = cards[
             page_index * cards_per_page : (page_index + 1) * cards_per_page
         ]
-        width = columns * page_cards[0].width + (columns + 1) * margin
-        height = rows * page_cards[0].height + (rows + 1) * vertical_gap
+        width = columns * card_width + (columns + 1) * margin
+        height = rows * card_height + (rows + 1) * vertical_gap
         page = Image.new("RGB", (width, height), "#e9eff1")
         for index, card in enumerate(page_cards):
-            x = margin + (index % columns) * (card.width + margin)
-            y = vertical_gap + (index // columns) * (card.height + vertical_gap)
+            x = margin + (index % columns) * (card_width + margin)
+            y = vertical_gap + (index // columns) * (card_height + vertical_gap)
             page.paste(card, (x, y))
         page.save(root / f"review_page_{page_index + 1:02d}.png")
 
