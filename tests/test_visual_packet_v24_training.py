@@ -23,6 +23,9 @@ from scripts.eval_visual_packet_stream_development_v24 import (
     EXPECTED_ROUTES,
     paired_gate_report,
 )
+from scripts.eval_visual_packet_stream_frozen_v24 import (
+    frozen_performance_gate_report,
+)
 from scripts.train_visual_packet_stream_v24 import (
     EXPECTED_PARAMETERS,
     FIXED_EVIDENCE_ARGUMENTS,
@@ -234,6 +237,17 @@ def test_v24_paired_gate_margins_are_strict() -> None:
         metadata_validated=True,
     )
     assert report["parameter_count_equal"] is False
+
+
+def test_v24_frozen_gate_requires_the_complete_frozen_identity_bank() -> None:
+    metrics = passing_candidate_metrics()
+    metrics["identity_bank_identities"] = 107.0
+    metrics["frozen_images_instantiated"] = 1.0
+    assert all(frozen_performance_gate_report(metrics).values())
+
+    metrics["identity_bank_identities"] = 106.0
+    report = frozen_performance_gate_report(metrics)
+    assert report["frozen_identity_bank_complete"] is False
 
 
 def test_v24_selection_rank_prefers_weakest_causal_switch() -> None:
