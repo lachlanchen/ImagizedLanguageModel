@@ -4,19 +4,20 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{xcolor}
 
-\title{Image-Native Language Models: Reading and Writing as Visual Generation}
+\title{The Visual Folio Machine: Image-Native Reading, Memory, and Writing}
 \author{Imagized Language Model Project}
-\date{June 2026}
+\date{August 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Most large language models represent language through symbolic text tokens and treat images of writing as an auxiliary input modality. This paper sketches a different research direction: an image-native language model whose inputs and outputs are visual canvases. The model learns from printed pages, handwritten forms, oracle-bone glyphs, bronze inscriptions, seal forms, and other historical scripts as images. It answers by generating readable page images containing modern language, classical-style text, and historically grounded glyph panels. A machine-readable text layer is optional and only applies to spans that computer codecs can represent. We propose a 3090-friendly staged architecture based on visual autoencoding, masked visual language modeling, latent diffusion, and retrieval-augmented glyph evolution.
+Most language models represent language through symbolic tokens and treat visible writing as an auxiliary modality. We investigate a stricter object: an independent model that receives writing images, forms continuous visual states, and returns image-valued answers. Three implementations falsify convenient shortcuts. Whole-page rectified flow learns page texture but not legible language; a pooled visual embedding does not retrieve semantic paraphrases reliably; and an 8-pixel causal writing stream reaches teacher-forced ink F1 0.639 while autonomous output collapses to repeated grey marks. These results motivate the Visual Folio Machine (VFM): an ordered axial retina distilled offline into a centered continuous semantic field, an image-keyed and image-valued associative folio, an evidence gate that copies attested historical forms, and a future whole-field masked writer for novel connective prose. The deployed reader contains no vocabulary, text IDs, OCR transcript, or external language-model call. This paper defines the model boundary, equations, one-RTX-4090 implementation, falsifiable benchmark, and limits of the present proof.
 \end{abstract}
 
 \begin{figure}[t]
@@ -38,29 +39,47 @@ The output should itself be a readable answer image. For a query such as ``expla
 
 \section{Prior Art and Gap}
 
-OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. Token-free language models such as CANINE, ByT5, and MEGABYTE show that subword tokenization is not a hard requirement for language modeling. Discrete diffusion language models, including D3PM, Diffusion-LM, SEDD, and LLaDA-style masked diffusion, show that generation need not be left-to-right. Image generative models such as latent diffusion, MaskGIT, and DiT show that high-quality image generation can be performed in compressed latent spaces.
+OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. PIXEL reconstructs masked rendered-text patches and demonstrates cross-script visual transfer~\cite{pixel}; PIXAR is a genuinely generative pixel-space autoregressive language model and identifies noisy maximum-likelihood text images as a central difficulty~\cite{pixar}; PixelGPT studies autoregressive visual and textual pretraining~\cite{pixelgpt}. These are the closest model-level precedents. Token-free language models such as CANINE, ByT5, and MEGABYTE remove subwords but retain symbolic bytes or characters. Discrete diffusion language models show that generation need not be left-to-right, but usually retain a linguistic vocabulary.
 
-The missing combination is direct: train a model to read and write language as images, while preserving the visual structure of scripts and historical glyphs.
+The remaining gap is not simply ``pixels instead of tokens.'' It is a system that (i) preserves ordered visual evidence, (ii) acquires semantic neighborhoods without retaining a text teacher, (iii) outputs exact image values when the answer already exists, and (iv) never presents a synthesized historical-looking mark as attested evidence. VFM addresses the first three in runnable code and makes the fourth an explicit provenance contract. Unrestricted novel image writing remains an open stage rather than an implied result.
 
 \section{Architecture}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/architecture_overview.png}
-  \caption{ILM-V architecture. The model consumes input canvases, encodes them into visual latents, maintains a 2D visual memory, and denoises or fills output image latents. OCR-style readers are only auxiliary evaluators, not the main generation path.}
+  \caption{Conceptual image-native architecture. The implemented VFM specializes this design into an ordered axial retina, a continuous semantic field, an image-valued folio, and a provenance gate. Whole-field masked writing is the next stage.}
   \label{fig:architecture}
 \end{figure}
 
-Figure~\ref{fig:architecture} gives the proposed system. The main components are:
+Figure~\ref{fig:architecture} gives the visual contract. The implemented system has four separable components:
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Visual encoder.} A patch/conv hybrid converts glyph tiles, line strips, and page crops into visual latent grids.
-  \item \textbf{Visual memory transformer.} A 2D Transformer maintains cross-panel state with relative position and sparse/window attention.
-  \item \textbf{Latent generator.} A masked diffusion or MaskGIT-like prior fills an output canvas conditioned on input canvas latents.
-  \item \textbf{Image decoder.} A VAE/VQ-VAE decoder converts latents back to readable output images.
-  \item \textbf{Auxiliary readers and critics.} OCR/readability heads evaluate the output, but should not become the primary hidden path.
+  \item \textbf{Ordered folio retina.} A stroke-preserving convolutional stem maps a grayscale writing image to a stride-16 field. Alternating axial attention reads along writing lines and exchanges evidence between lines without assigning patches lexical identities.
+  \item \textbf{Centered semantic field.} A local multilingual embedding model supplies continuous fields during offline training only. Corpus anisotropy is removed before distillation; the deployed student contains neither teacher weights nor calls.
+  \item \textbf{Image-valued folio.} Multiple student-derived visual keys address exact answer-page images. Runtime manifests contain paths and provenance but deliberately omit prompt and answer strings.
+  \item \textbf{Evidence and writing gates.} Attested historical glyphs are copied from source pixels. Novel prose is reserved for a masked whole-answer canvas refiner, so a weak generator cannot silently replace evidence.
 \end{enumerate}
 
-The internal units are visual patches or visual codebook entries, not BPE, wordpiece, or Unicode language tokens.
+For image $X\in[0,1]^{H\times W}$, the retina produces $F\in\mathbb{R}^{H/16\times W/16\times d}$. One axial block computes
+\[
+F'_{r,:,:}=F_{r,:,:}+\operatorname{Attn}_{x}(F_{r,:,:}),\quad
+F''_{:,c,:}=F'_{:,c,:}+\operatorname{Attn}_{y}(F'_{:,c,:}).
+\]
+Ink-aware pooling and projection produce $s_\theta(X)\in\mathbb{S}^{D-1}$. There is no embedding lookup or language-classification head.
+
+The raw teacher field is anisotropic. In the measured 10,000-document Chinese cache, unrelated pairs average cosine 0.360 and the mean-vector norm is 0.597. Therefore
+\[
+\mu=\frac{1}{N}\sum_i t_i,\qquad r_i=\frac{t_i-\mu}{\lVert t_i-\mu\rVert_2}
+\]
+is the target. Centering reduces mean unrelated cosine to approximately zero. Two visual augmentations $A_1,A_2$ of one document are trained with
+\[
+\mathcal{L}_{\mathrm{read}}=
+\mathcal{L}_{\mathrm{cos}}(s(A_1X),r)+
+\lambda_v\mathcal{L}_{\mathrm{cos}}(s(A_1X),s(A_2X))+
+\lambda_r\lVert SS^\top-RR^\top\rVert_1+
+\lambda_c\mathcal{L}_{\mathrm{NCE}}(S,R).
+\]
+At inference, $i^*=\arg\max_i\max_v s_\theta(X)^\top k_{iv}$, and the value is a sequence of image pages. The internal units remain continuous spatial observations, not BPE, wordpiece, Unicode, or renamed discrete visual tokens.
 
 \section{Data}
 
@@ -80,17 +99,17 @@ Seal & 6,996 \\
 \end{tabular}
 \end{center}
 
-This is enough to train a first glyph autoencoder and a character-evolution generator. Modern book/page data can be added by rendering multilingual corpora into images and by ingesting scanned pages where licenses permit.
+This supports evidence-bearing historical answer pages. The first semantic run additionally uses 5,000 CC-BY-NC-4.0 Chinese Alpaca instruction pairs, rendered into 10,000 prompt/answer folios. BGE-M3 fields are cached only for offline distillation. Public-domain scans remain a planned robustness corpus; source license, hash, and transform must be recorded before use.
 
 \section{Training Objectives}
 
-The first ILM-V model should combine the following losses:
+The current VFM curriculum separates objectives that previous runs incorrectly conflated:
 \begin{enumerate}[leftmargin=*]
-  \item \textbf{Masked visual language modeling:} mask image patches and predict missing visual latents.
-  \item \textbf{Denoising reconstruction:} recover pages and glyphs from blur, noise, damage, dropout, and partial occlusion.
-  \item \textbf{Image-to-image instruction tuning:} render prompts and target answers as images and train conditional generation.
-  \item \textbf{Glyph evolution modeling:} map modern forms to historical stages and historical forms back to modern answer sheets.
-  \item \textbf{Contrastive visual semantics:} align different visual renderings of the same content without making OCR the bottleneck.
+  \item \textbf{Visual reading:} align independently rendered folios to centered continuous teacher fields and preserve pairwise semantic geometry.
+  \item \textbf{Visual addressing:} evaluate full-memory top-(k) retrieval under unseen typography before adding generation.
+  \item \textbf{Paraphrase transfer:} use Qwen offline to rewrite held-out questions, reject meaning drift with an independent embedding threshold, rasterize the accepted rewrite, and test the independent student only.
+  \item \textbf{Evidence output:} retrieve and copy exact historical glyph panels with source metadata.
+  \item \textbf{Whole-field writing:} corrupt complete answer canvases and learn iterative masked revision conditioned on prompt and retrieved evidence. This stage is not credited until autonomous pages are legible.
 \end{enumerate}
 
 \section{Image-First Training and Inference}
@@ -144,17 +163,17 @@ This schema is intentionally different from ``text answer plus illustrations''. 
   \label{fig:curriculum}
 \end{figure}
 
-Figure~\ref{fig:curriculum} shows the practical schedule:
+Figure~\ref{fig:curriculum} illustrates the original schedule. Measurements support a revised, lower-risk order:
 \begin{enumerate}[leftmargin=*]
-  \item Build manifests for glyphs, rendered line images, and rendered instruction pairs.
-  \item Train a 30M--100M parameter glyph/page autoencoder.
-  \item Train a 100M--250M parameter conditional glyph evolution generator.
-  \item Train a 200M--600M parameter visual page language model on latent crops.
-  \item Add instruction tuning with image prompts and image answers.
-  \item Expand to additional scripts: cuneiform-like signs, hieroglyphic forms, Arabic, Japanese, Korean, and multilingual book pages.
+  \item Train the 10.9M-parameter ordered retina on rendered instruction folios.
+  \item Prove full-memory semantic retrieval, held-out typography, and held-out paraphrases.
+  \item Insert evidence-bearing historical pages without retraining and verify multilingual queries.
+  \item Train a compact whole-field writer over retrieved answer layouts rather than pages sampled from pure noise.
+  \item Add public-domain book crops and manuscript damage to the retina curriculum.
+  \item Scale width, memory, and answer composition only after bounded comparisons justify it.
 \end{enumerate}
 
-Mixed precision, gradient checkpointing, latent crops, LoRA/adapters, and gradient accumulation make this path realistic on one or two 24GB GPUs.
+The retina is deliberately small enough for one 24GB RTX 4090. The first 10,000-field teacher cache took 55 seconds locally. All speed, VRAM, and accuracy numbers must be measured again on the finalized checkpoint; ``more efficient than an LLM'' is a hypothesis until a named benchmark supports it.
 
 \section{Target Demonstration}
 
@@ -191,7 +210,9 @@ The figure brief for AgInTi-style refinement is stored in the local AgInTi promp
 
 The model should be evaluated as both a language model and a visual generator:
 \begin{itemize}[leftmargin=*]
-  \item OCR readability of generated modern text images, used only as an external metric.
+  \item Full-memory top-1/top-5 and reciprocal rank, not only within-batch accuracy.
+  \item Separate results for same-wording rerenders and validated semantic paraphrases.
+  \item OCR readability of genuinely generated modern text images, used only as an external metric.
   \item Human readability and task-success ratings.
   \item Glyph-stage retrieval accuracy: generated glyphs should retrieve correct characters and stages.
   \item Historical plausibility: distance to nearest real glyph exemplars in stage-specific embedding space.
@@ -199,9 +220,22 @@ The model should be evaluated as both a language model and a visual generator:
   \item Image-to-image QA accuracy on rendered prompts and rendered answers.
 \end{itemize}
 
+\begin{center}
+\begin{tabular}{p{0.26\linewidth}p{0.19\linewidth}p{0.42\linewidth}}
+\toprule
+System & Measured signal & Interpretation \\
+\midrule
+Whole-page flow & velocity MSE 0.851 & Unreadable page texture; negative baseline \\
+Global visual memory & top-1 2.23\% over 2,016 & Above random, but 0/16 historical paraphrases \\
+Causal InkStream & validation ink F1 0.639 & Autonomous repeated-grey collapse; negative baseline \\
+Centered VFM & training in progress & Accept only after full-memory and paraphrase evaluation \\
+\bottomrule
+\end{tabular}
+\end{center}
+
 \section{Conclusion}
 
-ILM-V is a feasible research direction because the pieces exist: OCR-free visual readers, token-free language models, visual latent autoencoders, masked image generators, and diffusion language models. The contribution is to make visible writing itself the modeling substrate. The local Chinese etymology dataset gives a concrete first domain where image output is essential rather than decorative.
+The experiments show that merely replacing tokens with pixels is insufficient. A page diffusion model can learn paper, and a causal pixel model can learn local strokes, without learning autonomous language. VFM instead treats visible language as an ordered semantic field coupled to amendable image-valued memory and protected historical evidence. The present code can establish image-only semantic reading and image answer recall on one GPU. It cannot yet claim unrestricted visual composition or parity with Qwen 8B. Those claims are reserved for the masked writer and a fixed benchmark, respectively.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
@@ -213,6 +247,9 @@ ILM-V is a feasible research direction because the pieces exist: OCR-free visual
 \bibitem{llama3} Meta AI. The Llama 3 Herd of Models. \url{https://arxiv.org/abs/2407.21783}
 \bibitem{donut} Kim et al. OCR-free Document Understanding Transformer. \url{https://arxiv.org/abs/2111.15664}
 \bibitem{pix2struct} Lee et al. Pix2Struct: Screenshot Parsing as Pretraining for Visual Language Understanding. \url{https://arxiv.org/abs/2210.03347}
+\bibitem{pixel} Rust et al. Language Modelling with Pixels. \url{https://arxiv.org/abs/2207.06991}
+\bibitem{pixar} Tai et al. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \url{https://arxiv.org/abs/2401.03321}
+\bibitem{pixelgpt} Chai et al. Autoregressive Pre-Training on Pixels and Texts. \url{https://arxiv.org/abs/2404.10710}
 \bibitem{canine} Clark et al. CANINE: Pre-training an Efficient Tokenization-Free Encoder. \url{https://arxiv.org/abs/2103.06874}
 \bibitem{byt5} Xue et al. ByT5: Towards a Token-Free Future. \url{https://arxiv.org/abs/2105.13626}
 \bibitem{megabyte} Yu et al. MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers. \url{https://arxiv.org/abs/2305.07185}
