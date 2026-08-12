@@ -59,7 +59,53 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Prompt Test: V22 Binding Mechanism Rejected
+## Latest Prompt Test: V23 Visual Relation Circuit Accepted
+
+![Measured V23 visual relation circuit: six raster prompt frames pass through a frozen retina, learned visual comparison and operation gate, routed source pixels, and a frozen canonicalizer; paired controls and the single frozen evaluation pass](publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
+
+V23 is the first complete positive image-prompt-to-image-answer result in this
+repository. Six `32x32` writing images enter the student and one `32x32` answer
+image comes out. The prompt visibly binds two previously unseen Chinese glyphs
+to two labels, supplies `同` or `异`, and ends with a visual query label. The
+student compares images, reads the operation from its image, routes one visible
+source glyph, and renders a canonical answer. Its learned path receives no
+strings, token or Unicode IDs, OCR, character labels, answer indices, codebook,
+glyph lookup, or external language model.
+
+The relation-aware candidate selected under the fixed development protocol.
+On a fresh 1,024-episode paired audit it reaches `0.99805` query and operation
+switch accuracy and `0.99512` identity top-1. Query-blind and operation-blind
+controls have exactly `0.0` switch accuracy and `0.0` output-pixel change for
+the factor each cannot see. An opaque agent visual review then scores `48/48`
+overall and `12/12` on held-out compositions before the sealed key is opened.
+
+The single authorized frozen run covers 98 unseen identities, 1,024 episodes,
+and 4,096 prompt variants. It performs no model selection and changes no
+threshold.
+
+| V23 frozen gate | Measured | Required | Result |
+|---|---:|---:|:---:|
+| Binary choice | `0.99829` | `>0.95` | pass |
+| Query switch | `0.99609` | `>0.90` | pass |
+| Operation switch | `0.99707` | `>0.90` | pass |
+| Held-out minimum switch | `0.99606` | `>0.85` | pass |
+| Unseen-identity top-1 | `0.99463` | `>0.75` | pass |
+| Pixel F1 | `0.78478` | `>0.68` | pass |
+| Target cosine | `0.93994` | `>0.82` | pass |
+| Query-label visual match | `0.99951` | `>0.98` | pass |
+| Operation-gate accuracy | `1.00000` | `>0.98` | pass |
+| Pair-swap consistency | `1.00000` | `>0.99` | pass |
+
+V23 proves bounded visual relation following, not open-ended language. Frame
+roles and the two-pair same/other algebra remain fixed; the output is a
+canonicalized form of one visible source glyph. It does not yet parse arbitrary
+sentences, answer etymology questions, continue pages, or emit an image stream
+or movie. The next proof removes the fixed six-role syntax, reads a
+variable-length 2D visual instruction stream, and generates at least two answer
+frames while rereading its first output. See the
+[complete V23 receipt](docs/visual-relation-circuit-v23-result.md).
+
+## Prior Prompt Test: V22 Binding Mechanism Rejected
 
 ![Measured V22 visual binding stream: the query-aware selector collapses onto the operation frame, candidate and query-blind outputs remain nearly identical, and the preregistered prompt-binding gates reject the model](publication/ilm-image-native/figures/visual_binding_stream_v22_result.png)
 

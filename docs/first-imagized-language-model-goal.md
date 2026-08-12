@@ -142,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains eight complete experimental systems:
+The repository now contains nine complete experimental systems:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -169,6 +169,10 @@ The repository now contains eight complete experimental systems:
 - Visual Binding Stream V22 is a paired 3.410M-parameter-per-arm image-prompt
   experiment. It reads six rendered frames and emits one answer image while a
   query-blind arm controls whether the final visual query is used.
+- Visual Relation Circuit V23 separates image canonicalization from visual
+  relation binding. A 1.122M-parameter frozen canonicalizer and three matched
+  25,602-parameter relation arms test query, operation, and pair-order causality
+  before one authorized frozen evaluation.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -236,6 +240,17 @@ weak operation-conditioned glyph prototype, not the visual relation. No
 candidate selects, the paired evaluator refuses, and human/frozen stages remain
 forbidden.
 
+V23 replaces the failed selector with explicit relation-before-generation and
+passes its complete evidence chain. On a fresh 1,024-episode development audit,
+the relation-aware candidate reaches `0.99805` query and operation switch
+accuracy and `0.99512` identity top-1. The query-blind and operation-blind
+controls produce exactly zero switch and zero pixel change for the factor each
+cannot see. An opaque agent visual review scores `48/48` overall and `12/12`
+held-out. The single authorized frozen evaluation over 98 unseen identities
+then reaches `0.99829` binary choice, `0.99609` query switch, `0.99707`
+operation switch, `0.99463` identity top-1, and `0.78478` pixel F1. Every fixed
+gate passes without frozen model selection or threshold changes.
+
 It proved:
 
 - a strict image-only student boundary;
@@ -261,6 +276,9 @@ It proved:
   intervention invariant holds;
 - a complete six-frame continuous image-prompt to answer-image implementation
   with a matched query-blind intervention and sealed unseen identities;
+- a selected six-frame image-prompt to image-answer relation circuit whose
+  query and operation dependence survives matched blind controls, held-out
+  relation compositions, opaque visual review, and one frozen evaluation;
 - direct continuous ink generation by conditional rectified flow;
 - context-sensitive generated pixels;
 - autonomous rereading and feedback without OCR or symbolic decoding;
@@ -273,8 +291,8 @@ It did not prove:
 - prediction better than a symbolic bigram baseline;
 - broad complex-form visual-state output under a frozen protocol;
 - a selected field-complete writer that is both causal and broadly readable;
-- prompt-conditioned answer-image generation or a readable image stream; V22
-  implements this interface but fails the causal prompt-binding gates;
+- arbitrary or variable-length prompt-conditioned answer-image generation;
+  V23 passes only a fixed six-role, one-answer-frame grammar;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
@@ -283,18 +301,18 @@ It did not prove:
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
-V20/V21 writers, rejected V22 visual binder, and rejected autonomous
-language-system proof**.
+V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
+relation proof, and rejected autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
 solved by image generation. V22 shows that merely adding a Transformer and a
-single-frame soft selector is not a prompt-to-answer solution: a relational
-answer must compare and compose several visible roles. The next milestone is a
-multi-frame visual relation circuit whose causal graph forces query-to-label
-matching and operation-conditioned glyph routing before writing. The causal
-language core must still be strengthened independently against the bigram
-baseline.
+single-frame soft selector is not a prompt-to-answer solution. V23 shows that a
+small constrained circuit can instead compare and compose several visible
+roles, route unseen source forms, and render the requested result. The next
+milestone must remove the fixed role syntax and close a multi-frame
+write--reread loop. The causal language core must still be strengthened
+independently against the bigram baseline.
 
 ## Implemented paradigm: predictive visual fields
 
@@ -710,7 +728,7 @@ a one-step denoising estimate. V6's trajectory and recovery terms remain as
 stability regularizers. V7 validates both corrections but rejects the monolithic
 language-plus-rendering writer.
 
-## Next proof: V23 compositional visual relation circuit
+## Completed proof: V23 compositional visual relation circuit
 
 V22 implemented the first six-frame image-prompt to answer-image path, but its
 single soft selector is the wrong computational primitive. The answer is not
@@ -803,6 +821,37 @@ state, writes one or more answer images, rereads them, and changes the answer
 correctly under held-out visual counterfactuals without a deployed symbolic
 path.
 
+V23 completes parts 1 and 2. The selected canonicalizer reaches `0.75829`
+development pixel F1 and `0.99512` unseen-identity top-1. The selected relation
+circuit passes a fresh matched-control audit, a `48/48` opaque agent visual
+review, and one frozen evaluation over 98 unseen identities. Frozen query and
+operation switch accuracies are `0.99609` and `0.99707`; identity top-1 is
+`0.99463`; pixel F1 is `0.78478`. The query-blind and operation-blind controls
+are exactly invariant to their hidden factor. This accepts the bounded
+same/other visual relation and one-frame image-answer gate. It does not accept
+free-form syntax, factual language, or autonomous continuation.
+
+## Next proof: V24 variable-length visual instruction stream
+
+V24 should generalize the proven relation primitive without jumping directly
+to full pages. The input is a variable-length sequence of rendered visual
+patches rather than six fixed roles. A compact causal state must locate visible
+instruction, label, evidence, and query regions through learned image content;
+compose them without receiving role IDs; emit answer frame 1; reread that
+generated image through the same retina; and emit answer frame 2 from visual
+state only. The first two-frame task should remain synthetic and exactly
+scorable before introducing factual etymology.
+
+The V24 minimum causal controls are instruction-blind, evidence-blind,
+query-counterfactual, order-preserving layout perturbation, generated-history
+blind, and teacher-forced-versus-autonomous rollout. Candidate and controls
+must be matched at the intervened module, and generated frame 2 must depend on
+the actual pixels of generated frame 1. A hidden token transcript, OCR side
+channel, role label, character index, retrieval table, or external language
+model remains forbidden in the student. `T_a=2` is the first real answer-image
+stream; longer pages, depth, and movies follow only after this causal loop
+passes.
+
 ## Acceptance gates for the next checkpoint
 
 All gates are evaluated on a frozen manifest and glyph bank:
@@ -823,10 +872,11 @@ All gates are evaluated on a frozen manifest and glyph bank:
 5. The prompt-conditioned model must change its generated answer under held-out
    semantic prompt changes and beat exact query-blind and operation-blind
    controls. V22 fails with `0.00781` switch accuracy and operation-frame
-   selector collapse. V23 must pass preregistered query and operation
-   counterfactuals, pair-swap invariance, unseen-identity output, and routed-state
-   diagnostics before any longer instruction curriculum. Input reconstruction,
-   glyph retrieval, or selector movement alone cannot satisfy this gate.
+   selector collapse. V23 passes preregistered query and operation
+   counterfactuals, pair-swap invariance, unseen-identity output, opaque review,
+   and one frozen evaluation for its fixed grammar. V24 must retain those
+   properties after removing fixed frame roles. Input reconstruction, glyph
+   retrieval, or selector movement alone cannot satisfy this gate.
 6. The closed model must retain readability and prompt dependence over a fixed
    multi-frame autonomous rollout.
 7. A visual identity evaluator may score output, but no evaluator signal may
@@ -902,24 +952,31 @@ dense advantage over shuffled field, `+0.34654` over zero field, and `1.0`
 locality; all algebraic invariants pass. It still misses simple, medium, and
 overall F1. V22 adds overlapping local patches, but its independently measured
 oracle-writer F1 reaches only `0.60196` against the fixed `>0.64` gate. P1.5
-remains incomplete until a continuity-preserving local writer passes automatic
-selection, blinded readability, and a new frozen evaluation without glyph
-lookup.
+remains incomplete as a state-to-image actuator. V23 separately qualifies an
+image-to-image canonicalizer: it reaches `0.78478` frozen pixel F1 and
+`0.99463` identity top-1 after relation routing, with no glyph lookup. That
+writer starts from routed source pixels, not an arbitrary predicted retinal
+state, so it cannot close P1.5 by itself.
 
 ### P2: bounded visual instruction following
 
-Started but not achieved. V22 implements a bounded six-frame Chinese visual
+Partially achieved. V22 implements a bounded six-frame Chinese visual
 instruction and one-frame image answer, then rejects its single-selector
-binding mechanism. V23 must first pass compositional same/other binding on
-unseen forms. After that, rasterize openly licensed Chinese and English
-instruction pairs, train image-question to image-answer trajectories, and
-evaluate the 200-question Visual Word-Origin Book benchmark. Historical panels
-are provenance-gated source images. P2 passes only if the independent model
+binding mechanism. V23 passes compositional same/other binding on unseen forms,
+matched query/operation controls, opaque visual review, and one frozen
+evaluation. This closes P2a, the fixed-grammar relation gate. It does not close
+P2 because frame roles are fixed and the answer is one routed/canonicalized
+glyph rather than a freely generated explanation. V24 must accept a
+variable-length visual instruction and generate a two-frame autonomous answer
+stream. After that, rasterize openly licensed Chinese and English instruction
+pairs, train image-question to image-answer trajectories, and evaluate the
+200-question Visual Word-Origin Book benchmark. Historical panels are
+provenance-gated source images. Full P2 passes only if the independent model
 produces readable answer pages, beats retrieval/template controls on factual
 questions, preserves unencoded regions, changes answers under held-out prompt
-counterfactuals, and passes a runtime receipt with no token/OCR/teacher/database
-path. The model may output a single page or an ordered answer-image stream; OCR
-remains optional post-hoc accessibility output.
+counterfactuals, and passes a runtime receipt with no
+token/OCR/teacher/database path. OCR remains optional post-hoc accessibility
+output.
 
 ### P3: bounded Qwen-8B comparison
 
@@ -956,9 +1013,14 @@ V21 establishes a stronger cheap routing result, not task-level efficiency.
 V22 uses 3.410M trainable parameters per arm; candidate and control train for
 258.70 and 255.11 seconds at 0.315 and 0.316 GiB peak. This shows that the
 failed binding hypothesis was cheap to falsify and that GPU capacity was not
-the bottleneck. It does not establish useful task efficiency. V16 remains below
-a symbolic bigram, V18 is not a frozen broad-readability result, V19--V21 are
-rejected writers, and V22 is a rejected prompt binder.
+the bottleneck. It does not establish useful task efficiency. V23's selected
+1.122M-parameter canonicalizer trains in 214.10 seconds at 0.700 GiB peak, and
+its 25,602-parameter candidate relation circuit trains in 117.18 seconds at
+1.406 GiB peak. The single frozen evaluation takes 4.74 seconds at 0.498 GiB.
+This establishes low-cost bounded relation following, not language-level
+efficiency. V16 remains below a symbolic bigram, V18 is not a frozen
+broad-readability result, V19--V21 are rejected state writers, V22 is a rejected
+prompt binder, and V23 remains a fixed grammar.
 Future comparisons must report quality at equal tasks alongside VRAM, training
 energy, latency, throughput, storage, and rendering cost. Parameter count alone
 is not efficiency.
