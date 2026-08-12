@@ -51,10 +51,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dropout", type=float, default=0.05)
     parser.add_argument("--maximum-contrastive", type=int, default=768)
     parser.add_argument("--visual-weight", type=float, default=1.0)
-    parser.add_argument("--contrastive-weight", type=float, default=0.20)
+    parser.add_argument("--contrastive-weight", type=float, default=0.50)
     parser.add_argument("--ink-weight", type=float, default=0.45)
     parser.add_argument("--invariance-weight", type=float, default=0.20)
-    parser.add_argument("--variance-weight", type=float, default=0.05)
+    parser.add_argument("--retina-contrastive-weight", type=float, default=0.30)
+    parser.add_argument("--variance-weight", type=float, default=0.20)
     parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--maximum-steps", type=int, default=3_000)
     parser.add_argument("--batch-size", type=int, default=32)
@@ -64,7 +65,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--warmup-steps", type=int, default=200)
     parser.add_argument("--weight-decay", type=float, default=0.04)
     parser.add_argument("--gradient-clip", type=float, default=1.0)
-    parser.add_argument("--ema-start", type=float, default=0.996)
+    parser.add_argument("--ema-start", type=float, default=0.99)
     parser.add_argument("--ema-end", type=float, default=0.99995)
     parser.add_argument("--precision", choices=("fp32", "fp16", "bf16"), default="bf16")
     parser.add_argument("--device", default="auto")
@@ -145,6 +146,7 @@ def loss_for_batch(
         contrastive_weight=args.contrastive_weight,
         ink_weight=args.ink_weight,
         invariance_weight=args.invariance_weight,
+        retina_contrastive_weight=args.retina_contrastive_weight,
         variance_weight=args.variance_weight,
         generator=generator,
     )

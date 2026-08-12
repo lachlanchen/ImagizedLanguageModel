@@ -229,10 +229,11 @@ def visual_saccade_loss(
     contrastive_scale: torch.Tensor,
     maximum_contrastive: int = 768,
     visual_weight: float = 1.0,
-    contrastive_weight: float = 0.20,
+    contrastive_weight: float = 0.50,
     ink_weight: float = 0.45,
     invariance_weight: float = 0.20,
-    variance_weight: float = 0.05,
+    retina_contrastive_weight: float = 0.30,
+    variance_weight: float = 0.20,
     generator: torch.Generator | None = None,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     predicted = outputs["predicted_visual"].reshape(-1, outputs["predicted_visual"].shape[-1]).float()
@@ -261,11 +262,31 @@ def visual_saccade_loss(
     ink = F.binary_cross_entropy_with_logits(ink_logits, target_ink, pos_weight=positive_weight)
 
     if "current_reference_visual" in outputs:
-        current = F.normalize(outputs["current_visual"].float(), dim=-1)
-        reference = F.normalize(outputs["current_reference_visual"].float(), dim=-1)
-        invariance = (1.0 - (current * reference).sum(dim=-1)).mean()
+        current = outputs["current_visual"].reshape(-1, predicted.shape[-1]).float()
+        reference = outputs["current_reference_visual"].reshape(-1, predicted.shape[-1]).float()
+        normalized_current = F.normalize(current, dim=-1)
+        normalized_reference = F.normalize(reference, dim=-1)
+        invariance = (1.0 - (normalized_current * normalized_reference).sum(dim=-1)).mean()
+        retina_selected = _sample_rows(
+            current.shape[0],
+            maximum_contrastive,
+            device=current.device,
+            generator=generator,
+        )
+        retina_logits = contrastive_scale * (
+            normalized_current[retina_selected]
+            @ normalized_reference[retina_selected].transpose(0, 1)
+        )
+        retina_labels = torch.arange(retina_selected.shape[0], device=current.device)
+        retina_contrastive = 0.5 * (
+            F.cross_entropy(retina_logits, retina_labels)
+            + F.cross_entropy(retina_logits.transpose(0, 1), retina_labels)
+        )
     else:
         invariance = visual.new_zeros(())
+        retina_contrastive = visual.new_zeros(())
+        retina_logits = logits.new_zeros((1, 1))
+        retina_labels = labels.new_zeros((1,))
 
     centered = F.layer_norm(predicted, (predicted.shape[-1],))
     feature_std = torch.sqrt(centered.var(dim=0, unbiased=False) + 1e-4)
@@ -275,10 +296,12 @@ def visual_saccade_loss(
         + contrastive_weight * contrastive
         + ink_weight * ink
         + invariance_weight * invariance
+        + retina_contrastive_weight * retina_contrastive
         + variance_weight * variance
     )
     with torch.no_grad():
         retrieval = (logits.argmax(dim=1) == labels).float().mean()
+        retina_retrieval = (retina_logits.argmax(dim=1) == retina_labels).float().mean()
         ink_binary = ink_logits.sigmoid() >= 0.5
         target_binary = target_ink >= 0.5
         true_positive = (ink_binary & target_binary).sum().float()
@@ -290,6 +313,8 @@ def visual_saccade_loss(
         "ink_bce": ink.detach(),
         "ink_f1": ink_f1.detach(),
         "cross_render_invariance": invariance.detach(),
+        "retina_contrastive_loss": retina_contrastive.detach(),
+        "retina_contrastive_top1": retina_retrieval.detach(),
         "variance_penalty": variance.detach(),
         "predicted_feature_std": feature_std.mean().detach(),
         "target_ink_fraction": target_ink.mean().detach(),
