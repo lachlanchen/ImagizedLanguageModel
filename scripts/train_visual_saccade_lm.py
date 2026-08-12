@@ -55,6 +55,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ink-weight", type=float, default=0.45)
     parser.add_argument("--invariance-weight", type=float, default=0.20)
     parser.add_argument("--retina-contrastive-weight", type=float, default=0.30)
+    parser.add_argument("--retina-variance-weight", type=float, default=0.10)
     parser.add_argument("--variance-weight", type=float, default=0.20)
     parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--maximum-steps", type=int, default=3_000)
@@ -147,6 +148,7 @@ def loss_for_batch(
         ink_weight=args.ink_weight,
         invariance_weight=args.invariance_weight,
         retina_contrastive_weight=args.retina_contrastive_weight,
+        retina_variance_weight=args.retina_variance_weight,
         variance_weight=args.variance_weight,
         generator=generator,
     )

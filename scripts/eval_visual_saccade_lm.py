@@ -229,6 +229,7 @@ def evaluate_branch(
             continue
         context = batch["context"][eligible].to(device, non_blocking=True)
         target_ink = batch["target_ink"][eligible, -1].to(device, non_blocking=True)
+        target_reference = batch["target_reference"][eligible, -1].to(device, non_blocking=True)
         metadata = [batch["metadata"][index] for index in eligible]
         expected = torch.tensor(
             [bank_index[item["target_character"]] for item in metadata],
@@ -238,16 +239,21 @@ def evaluate_branch(
         with autocast_context(device, precision):
             full = model.predict(context)
             last = model.predict(context[:, -1:])
+            oracle_visual = model.target_retina(target_reference).float()
         full_visual = F.normalize(full["predicted_visual"][:, -1].float(), dim=-1)
         last_visual = F.normalize(last["predicted_visual"][:, -1].float(), dim=-1)
         full_similarity = full_visual @ bank.transpose(0, 1)
         last_similarity = last_visual @ bank.transpose(0, 1)
+        oracle_similarity = F.normalize(oracle_visual, dim=-1) @ bank.transpose(0, 1)
         full_metrics = rank_metrics(full_similarity, expected)
         last_metrics = rank_metrics(last_similarity, expected)
+        oracle_metrics = rank_metrics(oracle_similarity, expected)
         for key, values in full_metrics.items():
             sums[f"full_{key}"] += float(values.sum())
         for key, values in last_metrics.items():
             sums[f"last_{key}"] += float(values.sum())
+        for key, values in oracle_metrics.items():
+            sums[f"oracle_{key}"] += float(values.sum())
         sums["prediction_change"] += float(
             (1.0 - F.cosine_similarity(full_visual, last_visual, dim=-1)).sum()
         )
@@ -275,7 +281,7 @@ def evaluate_branch(
                     break
         examples += len(eligible)
     report = {key: value / max(1, examples) for key, value in sums.items()}
-    for prefix in ("full", "last"):
+    for prefix in ("full", "last", "oracle"):
         for metric in ("top1", "top5", "mrr", "target_cosine"):
             report.setdefault(f"{prefix}_{metric}", 0.0)
     for metric in ("prediction_change", "unigram_top1", "bigram_top1"):

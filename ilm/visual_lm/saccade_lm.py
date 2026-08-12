@@ -222,6 +222,24 @@ def _sample_rows(
     return torch.randperm(count, device=device, generator=generator)[:maximum]
 
 
+def _sample_causal_entries(
+    sequence: torch.Tensor,
+    maximum: int,
+    *,
+    generator: torch.Generator | None,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    batch, length = sequence.shape[:2]
+    batch_indices = _sample_rows(batch, maximum, device=sequence.device, generator=generator)
+    positions = torch.randint(
+        0,
+        length,
+        (batch_indices.shape[0],),
+        device=sequence.device,
+        generator=generator,
+    )
+    return sequence[batch_indices, positions], batch_indices, positions
+
+
 def visual_saccade_loss(
     outputs: dict[str, torch.Tensor],
     target_ink: torch.Tensor,
@@ -233,24 +251,27 @@ def visual_saccade_loss(
     ink_weight: float = 0.45,
     invariance_weight: float = 0.20,
     retina_contrastive_weight: float = 0.30,
+    retina_variance_weight: float = 0.10,
     variance_weight: float = 0.20,
     generator: torch.Generator | None = None,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
-    predicted = outputs["predicted_visual"].reshape(-1, outputs["predicted_visual"].shape[-1]).float()
-    target = outputs["target_visual"].reshape(-1, outputs["target_visual"].shape[-1]).float().detach()
+    predicted_sequence = outputs["predicted_visual"].float()
+    target_sequence = outputs["target_visual"].float().detach()
+    predicted = predicted_sequence.reshape(-1, predicted_sequence.shape[-1])
+    target = target_sequence.reshape(-1, target_sequence.shape[-1])
     normalized_prediction = F.normalize(predicted, dim=-1)
     normalized_target = F.normalize(target, dim=-1)
     visual = (1.0 - (normalized_prediction * normalized_target).sum(dim=-1)).mean()
 
-    selected = _sample_rows(
-        predicted.shape[0],
+    selected_prediction, selected_batches, selected_positions = _sample_causal_entries(
+        predicted_sequence,
         maximum_contrastive,
-        device=predicted.device,
         generator=generator,
     )
-    selected_prediction = normalized_prediction[selected]
-    selected_target = normalized_target[selected]
-    labels = torch.arange(selected.shape[0], device=predicted.device)
+    selected_target = target_sequence[selected_batches, selected_positions]
+    selected_prediction = F.normalize(selected_prediction.float(), dim=-1)
+    selected_target = F.normalize(selected_target.float(), dim=-1)
+    labels = torch.arange(selected_prediction.shape[0], device=predicted.device)
     logits = contrastive_scale * selected_prediction @ selected_target.transpose(0, 1)
     contrastive = 0.5 * (
         F.cross_entropy(logits, labels) + F.cross_entropy(logits.transpose(0, 1), labels)
@@ -262,31 +283,39 @@ def visual_saccade_loss(
     ink = F.binary_cross_entropy_with_logits(ink_logits, target_ink, pos_weight=positive_weight)
 
     if "current_reference_visual" in outputs:
-        current = outputs["current_visual"].reshape(-1, predicted.shape[-1]).float()
-        reference = outputs["current_reference_visual"].reshape(-1, predicted.shape[-1]).float()
+        current_sequence = outputs["current_visual"].float()
+        reference_sequence = outputs["current_reference_visual"].float()
+        current = current_sequence.reshape(-1, predicted.shape[-1])
+        reference = reference_sequence.reshape(-1, predicted.shape[-1])
         normalized_current = F.normalize(current, dim=-1)
         normalized_reference = F.normalize(reference, dim=-1)
         invariance = (1.0 - (normalized_current * normalized_reference).sum(dim=-1)).mean()
-        retina_selected = _sample_rows(
-            current.shape[0],
+        retina_current, retina_batches, retina_positions = _sample_causal_entries(
+            current_sequence,
             maximum_contrastive,
-            device=current.device,
             generator=generator,
         )
+        retina_reference = reference_sequence[retina_batches, retina_positions]
+        retina_current = F.normalize(retina_current.float(), dim=-1)
+        retina_reference = F.normalize(retina_reference.float(), dim=-1)
         retina_logits = contrastive_scale * (
-            normalized_current[retina_selected]
-            @ normalized_reference[retina_selected].transpose(0, 1)
+            retina_current @ retina_reference.transpose(0, 1)
         )
-        retina_labels = torch.arange(retina_selected.shape[0], device=current.device)
+        retina_labels = torch.arange(retina_current.shape[0], device=current.device)
         retina_contrastive = 0.5 * (
             F.cross_entropy(retina_logits, retina_labels)
             + F.cross_entropy(retina_logits.transpose(0, 1), retina_labels)
         )
+        retina_centered = F.layer_norm(current, (current.shape[-1],))
+        retina_std = torch.sqrt(retina_centered.var(dim=0, unbiased=False) + 1e-4)
+        retina_variance = F.relu(0.75 - retina_std).mean()
     else:
         invariance = visual.new_zeros(())
         retina_contrastive = visual.new_zeros(())
         retina_logits = logits.new_zeros((1, 1))
         retina_labels = labels.new_zeros((1,))
+        retina_std = visual.new_zeros(())
+        retina_variance = visual.new_zeros(())
 
     centered = F.layer_norm(predicted, (predicted.shape[-1],))
     feature_std = torch.sqrt(centered.var(dim=0, unbiased=False) + 1e-4)
@@ -297,6 +326,7 @@ def visual_saccade_loss(
         + ink_weight * ink
         + invariance_weight * invariance
         + retina_contrastive_weight * retina_contrastive
+        + retina_variance_weight * retina_variance
         + variance_weight * variance
     )
     with torch.no_grad():
@@ -315,6 +345,8 @@ def visual_saccade_loss(
         "cross_render_invariance": invariance.detach(),
         "retina_contrastive_loss": retina_contrastive.detach(),
         "retina_contrastive_top1": retina_retrieval.detach(),
+        "retina_variance_penalty": retina_variance.detach(),
+        "retina_feature_std": retina_std.mean().detach(),
         "variance_penalty": variance.detach(),
         "predicted_feature_std": feature_std.mean().detach(),
         "target_ink_fraction": target_ink.mean().detach(),
