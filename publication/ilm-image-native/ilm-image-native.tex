@@ -27,17 +27,19 @@ remains unreadable. We therefore implement a Predictive Visual Field (PVF) that
 factorizes visual language from visual actuation. A frozen convolutional retina
 maps writing images to the unit sphere, a causal field integrates image history,
 a deterministic continuous proposal predicts a low-variance next visual state,
-and an intrinsic hyperspherical flow models alternatives. The 10.47M-parameter
+and an intrinsic hyperspherical flow models alternatives. V16 adds residual
+multiscale causal memory with dilated local fields and global causal attention.
+The 16.47M-parameter
 student contains no tokenizer, strings after rasterization, Unicode IDs, OCR,
 character labels, output vocabulary, discrete visual codebook, candidate
 classifier, or external language model. On a frozen 512-form, four-view Chinese
-benchmark, selected V15 proposal top-1 is 5.87\%, exceeding last-image-only
-(4.42\%), unigram (1.73\%), and random dynamics (0.17\%); full history adds
-$+0.0707$ normalized target log-probability. The stochastic field reaches
-3.41\%, versus 2.68\% last-only, and sampled context cosine gain is $+0.0805$.
-The model trains on one RTX 4090 with 1.181~GiB peak allocated CUDA memory.
+benchmark, selected V16 proposal top-1 is 6.26\%, exceeding last-image-only
+(3.97\%), unigram (1.73\%), and random dynamics (0.22\%); full history adds
+$+0.0773$ normalized target log-probability. The stochastic field reaches
+3.69\%, versus 3.24\% last-only, and sampled context cosine gain is $+0.0795$.
+The model trains on one RTX 4090 with 1.479~GiB peak allocated CUDA memory.
 These results establish causal visual-state learning under a strict image-only
-boundary, but remain below a symbolic bigram (13.14\%). PVF V15 has no pixel
+boundary, but remain below a symbolic bigram (13.14\%). PVF V16 has no pixel
 actuator, so it does not establish readable image generation, general language
 understanding, historical question answering, or efficiency over text models.
 \end{abstract}
@@ -242,6 +244,19 @@ enter the student, and the bank is not deployed. This visual contrast is
 necessary because geodesic endpoint alignment alone can reward a visual mean
 without separating language alternatives.
 
+V16 augments the pretrained recurrent trajectory $h^R_{1:t}$ with three
+residual causal memory blocks. Each block combines a left-padded depthwise
+temporal field at dilation $1$, $2$, or $4$, global causal attention, and a
+gated feed-forward residual. For memory $M_\phi$, the corrected state is
+\[
+h^{V16}_t=h^R_t+\sigma(g)W_o\operatorname{LN}
+\{M_\phi(h^R_{1:t},z_{1:t})\}.
+\]
+The per-channel gate is initialized at $g=-4$, preserving the trained V15
+function at the start of the upgrade. The selected checkpoint has mean
+$\sigma(g)=0.018023$; therefore the frozen result is a bounded memory pilot,
+not evidence that a large residual correction is necessary.
+
 A later separate visual actuator will write
 \[
 \hat x_{t+1}=W_\omega(\epsilon_x,h_t,\hat z_{t+1},R_\theta(x_t))
@@ -262,9 +277,9 @@ manifold~\cite{rfm,rcnf}, while retaining an image-derived language state.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/predictive_visual_field_v15_result.png}
-  \caption{Measured PVF V15 state proof. Both deterministic proposal and stochastic hyperspherical field use full image history and beat random, last-only, and unigram controls. The proposal remains below the symbolic bigram, and no pixel actuator is present.}
-  \label{fig:pvfv15}
+  \includegraphics[width=\linewidth]{figures/predictive_visual_field_v16_result.png}
+  \caption{Measured PVF V16 memory result. Both deterministic proposal and stochastic hyperspherical field use full image history and beat random, last-only, and unigram controls. V16 improves proposal top-1 by seven frozen contexts over V15, but remains below the symbolic bigram and has no pixel actuator.}
+  \label{fig:pvfv16}
 \end{figure}
 
 \section{Data}
@@ -346,7 +361,7 @@ training and peaks near 3.0 GiB allocated VRAM on one RTX 4090.
 
 \subsection{PVF state objectives}
 
-V8--V15 reuse the proven retina but remove the pixel writer from the state
+V8--V16 reuse the proven retina but remove the pixel writer from the state
 ablation. The causal GRU, proposal, and hyperspherical field are trainable. For
 proposal $\mu$, target image state $z^+$, and image-derived candidate states
 $\{z_j\}$, visual identity uses
@@ -371,6 +386,15 @@ classifier or pixel-actuator parameters. It trains in BF16 with 48-image
 sequences and peaks at 1.181~GiB allocated CUDA memory. The full V14--V15
 trajectory records 1,895.24 seconds on one RTX 4090. Step 2,000 was selected on
 the development image bank before running the frozen evaluator.
+
+V16 resumes selected V15 step 2,000, adds 6,001,536 causal-memory parameters,
+and resets the optimizer with a new 100-step warmup. It has 16,471,809 total
+parameters, 15,138,881 trainable parameters, and zero classifier or actuator
+parameters. The 1,200-update continuation records 2,047.63 seconds, about
+92--114 sequences per second, and 1.479~GiB peak allocated CUDA memory. Step
+2,200 was selected before the frozen evaluator by maximum development proposal
+top-1 subject to full-context over last-only, positive normalized context gain,
+and target cosine above 0.10.
 
 \section{Image-First Training and Inference}
 
@@ -432,15 +456,16 @@ Measurements now support a different order:
   \item Train on autonomous model-induced visual trajectories; V6 completes this step and stabilizes ink but remains unreadable.
   \item Train normalized context advantage on independent images and identity through differentiable sampled endpoints; V7 improves both signals but remains unreadable.
   \item Train continuous proposal and next-retina flow alone; V15 passes random, last-only, unigram, context-use, and target-signal state gates.
-  \item Replace the GRU with compact multiscale causal visual memory and require the unchanged state evaluator to beat the symbolic bigram.
+  \item Add residual multiscale causal visual memory; V16 replicates the gates with a seven-context proposal increase but does not beat the symbolic bigram.
+  \item Run a paired memory ablation on a newly preregistered bank before attributing the small V16 change to the memory module.
   \item Condition a separate pixel actuator on continuous visual plans and validate isolated reread identity before closing the loop.
   \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
   \item Scale width and corpus size only after the fixed language and stability gates pass.
 \end{enumerate}
 
-The 10.47M PVF state model is deliberately small enough for one RTX 4090. Its
-measured 1.181~GiB peak leaves substantial capacity headroom for a controlled
-causal-memory ablation and later actuator. This is not an efficiency victory:
+The 16.47M PVF V16 state model is deliberately small enough for one RTX 4090.
+Its measured 1.479~GiB peak leaves substantial capacity headroom for a
+controlled memory ablation and later actuator. This is not an efficiency victory:
 quality remains below a symbolic bigram and pixel output is absent, so ``more
 efficient than an LLM'' remains an unsupported hypothesis.
 
@@ -533,9 +558,11 @@ V14 proposal & top-1 2.52\% & First proposal gate pass; above last-only 2.24\% a
 V14 state flow & top-1 2.35\% & First stochastic state gate pass \\
 V15 proposal & top-1 \textbf{5.87\%} & Above last-only 4.42\%, unigram 1.73\%, and random 0.17\%; context gain $+0.0707$ \\
 V15 state flow & top-1 \textbf{3.41\%} & Above last-only 2.68\% and unigram; sampled context cosine gain $+0.0805$ \\
+V16 proposal & top-1 \textbf{6.26\%} & 112/1,788; above last-only 3.97\% and V15 by seven contexts; context gain $+0.0773$ \\
+V16 state flow & top-1 \textbf{3.69\%} & Above last-only 3.24\% and unigram; sampled context cosine gain $+0.0795$ \\
 \bottomrule
 \end{tabular}
-\caption{Frozen Predictive Visual Field results. Both V15 branches pass their visual-state gates but remain below the 13.14\% symbolic bigram.}
+\caption{Frozen Predictive Visual Field results. V15 and V16 branches pass their visual-state gates but remain below the 13.14\% symbolic bigram.}
 \label{tab:pvfresults}
 \end{table}
 
@@ -551,7 +578,7 @@ that raw energy was a misleading metric. The formal acceptance result remains
 false, and retina-oracle accuracy cannot be cited as language accuracy.
 
 PVF uses a separate frozen evaluation with the same 512 objects and four views
-for V14 and V15, bank SHA-256
+for V14 through V16, bank SHA-256
 \texttt{543987dd...1181c4},
 and 1,788 eligible held-out contexts. V15 proposal top-1 is 5.872\%, compared
 with 4.418\% last-only, 1.734\% unigram, 0.168\% random dynamics, and 13.143\%
@@ -561,12 +588,23 @@ $+0.03032$ normalized context gain, and $+0.08053$ sampled context cosine gain.
 Random-dynamics sampled target cosine is 0.03180, versus 0.21576 for V15. The
 retina oracle is 98.546\%.
 
+V16 was selected at step 2,200 without reading that frozen bank and evaluated
+once. Its proposal obtains 6.264\% top-1 (112/1,788), versus 3.971\% last-only,
+1.734\% unigram, 0.224\% random dynamics, 0.195\% chance, and 13.143\%
+symbolic bigram. Its proposal context gain is $+0.07732$. The stochastic field
+obtains 3.691\% top-1 versus 3.244\% last-only, normalized context gain
+$+0.03579$, sampled target cosine 0.19506, and sampled context cosine gain
+$+0.07947$. V16 adds seven correct proposal contexts over V15, while proposal
+top-5 and target cosine decline. This is directional evidence and not a
+statistically established memory advantage; paired predictions on a new frozen
+bank are required for attribution.
+
 Thus the proposal and flow state gates are accepted, while the bigram language
 gate remains false. The result establishes that a small image-only student can
 learn causal language signal; it does not establish useful language. The next
-proof should replace the GRU bottleneck with compact multiscale causal visual
-memory while freezing the retina and evaluator. Only after exceeding the
-bigram should an isolated actuator render sampled states with high reread
+proof should isolate the multiscale memory contribution with paired
+base-versus-memory predictions while freezing the retina and evaluator. In
+parallel, an isolated actuator can render sampled states with high reread
 identity and readable ink without lookup. The final closed 32-cell loop must
 then remain readable. This order is also consistent with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
@@ -580,14 +618,15 @@ RFLM contributes a strict test harness for ordered visual reading, direct ink
 flow, and autonomous rereading, but V6 and V7 reject exposure-bias correction
 and a monolithic language-plus-rendering writer as sufficient solutions. PVF
 then factors perception, causal language state, stochastic visual form, and
-future actuation. V15's 5.87\% proposal and 3.41\% state-flow top-1, positive
-normalized history gains, and random/unigram/last-only controls constitute the
-first accepted visual-state proof in this project. They show that causal
-language signal can be learned directly from writing images by a 10.47M model
-on one consumer GPU. The 13.14\% bigram still rejects the current causal core,
+future actuation. V16's 6.26\% proposal and 3.69\% state-flow top-1, positive
+normalized history gains, and random/unigram/last-only controls replicate the
+accepted visual-state proof in this project. They show that causal language
+signal can be learned directly from writing images by a 16.47M model on one
+consumer GPU. The seven-context proposal increase over V15 is too small to
+establish an architecture win. The 13.14\% bigram still rejects the current causal core,
 and the absence of a pixel actuator precludes any claim of readable generation.
-The next attributable test is compact multiscale causal visual memory, followed
-by isolated state-conditioned actuation and only then a closed write-reread
+The next attributable test is paired multiscale-memory ablation, alongside
+isolated state-conditioned actuation and only then a closed write-reread
 loop. Historical etymology answers and broad instruction following remain
 downstream goals, not present capabilities, and no Qwen-8B parity or end-to-end
 efficiency claim is warranted.

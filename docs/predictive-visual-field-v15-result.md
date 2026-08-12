@@ -1,5 +1,9 @@
 # Predictive Visual Field V15: Image-Only Causal State Proof
 
+> Successor: V16 adds residual multiscale causal visual memory and reaches
+> 6.264% proposal top-1 on the same frozen bank. See
+> [`predictive-visual-field-v16-memory-result.md`](predictive-visual-field-v16-memory-result.md).
+
 Date: 2026-08-12
 
 ## Verdict
