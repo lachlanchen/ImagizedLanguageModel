@@ -176,7 +176,7 @@ def _allowed_combinations(*, held_out: bool) -> list[tuple[str, tuple[str, str]]
     ]
 
 
-def _noncanonical_variant(rng: random.Random, canonical_variant: int) -> int:
+def noncanonical_variant(rng: random.Random, canonical_variant: int) -> int:
     variant = rng.randrange(2**31)
     font_count = len(RETINAL_CJK_AVAILABLE_FONTS)
     if font_count > 1:
@@ -217,6 +217,7 @@ class VisualBindingEpisodeDataset(Dataset):
         self.target_config = self.config.target_render_config()
         self.seen_combinations = tuple(_allowed_combinations(held_out=False))
         self.heldout_combinations = tuple(_allowed_combinations(held_out=True))
+        self._target_cache: dict[str, torch.Tensor] = {}
 
     def set_epoch(self, epoch: int) -> None:
         self.epoch = int(epoch)
@@ -233,12 +234,17 @@ class VisualBindingEpisodeDataset(Dataset):
         )
 
     def _render_target(self, character: str) -> torch.Tensor:
-        return render_glyph_fovea(
+        cached = self._target_cache.get(character)
+        if cached is not None:
+            return cached
+        rendered = render_glyph_fovea(
             character,
             render_config=self.target_config,
             fovea_size=self.config.fovea_size,
             variant=self.config.canonical_target_variant,
         )
+        self._target_cache[character] = rendered
+        return rendered
 
     def __getitem__(self, index: int) -> dict[str, Any]:
         rng = random.Random(
@@ -270,7 +276,7 @@ class VisualBindingEpisodeDataset(Dataset):
         )
 
         variants = [
-            _noncanonical_variant(rng, self.config.canonical_target_variant)
+            noncanonical_variant(rng, self.config.canonical_target_variant)
             for _ in range(6)
         ]
         prompt = torch.stack(
@@ -289,10 +295,9 @@ class VisualBindingEpisodeDataset(Dataset):
             variants[5],
         )
 
-        target = self._render_target(glyphs[target_index])
-        counterfactual_target = self._render_target(
-            glyphs[counterfactual_target_index]
-        )
+        canonical_targets = tuple(self._render_target(glyph) for glyph in glyphs)
+        target = canonical_targets[target_index]
+        counterfactual_target = canonical_targets[counterfactual_target_index]
         return {
             "prompt": prompt,
             "target": target,
@@ -302,10 +307,10 @@ class VisualBindingEpisodeDataset(Dataset):
             "counterfactual_oracle_reference": prompt[
                 1 + counterfactual_target_index * 2
             ],
-            "distractor_target": self._render_target(glyphs[1 - target_index]),
-            "counterfactual_distractor_target": self._render_target(
-                glyphs[1 - counterfactual_target_index]
-            ),
+            "distractor_target": canonical_targets[1 - target_index],
+            "counterfactual_distractor_target": canonical_targets[
+                1 - counterfactual_target_index
+            ],
             "metadata": {
                 "operation": operation,
                 "labels": labels,

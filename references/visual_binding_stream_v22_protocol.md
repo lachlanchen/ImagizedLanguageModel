@@ -49,7 +49,7 @@ The student interface is
 \[
 X_{\mathrm{prompt}}\in[0,1]^{B\times T_p\times1\times32\times32}
 \longrightarrow
-\hat Y_{\mathrm{answer}}in[0,1]^{B\times T_a\times1\times32\times32}.
+\hat Y_{\mathrm{answer}}\in[0,1]^{B\times T_a\times1\times32\times32}.
 \]
 
 V22 fixes `T_p=6`, `T_a=1`, and `D=1`. The implementation must retain the
@@ -321,7 +321,10 @@ fresh paired development audit:
 5. control must retain every structural and sealed-split gate; and
 6. parameter counts and shapes must be exactly equal.
 
-No endpoint comparison may replace selected checkpoints.
+No endpoint comparison may replace selected checkpoints. The fresh paired
+audit is fixed to `1,024` paired development episodes, batch size `64`, four
+independent noncanonical identity-bank views, and audit seed
+`dataset_seed + 2,000,003`.
 
 ## Blinded And Frozen Policy
 

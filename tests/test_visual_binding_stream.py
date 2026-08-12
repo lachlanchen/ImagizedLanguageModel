@@ -80,6 +80,7 @@ def test_stream_shapes_and_image_only_boundary() -> None:
         "uses_visual_codebook",
         "uses_glyph_lookup",
         "uses_external_language_model",
+        "retina_trainable",
     ):
         assert receipt[forbidden] is False
     with pytest.raises(TypeError):

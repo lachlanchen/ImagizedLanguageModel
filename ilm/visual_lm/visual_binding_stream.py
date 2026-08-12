@@ -452,6 +452,7 @@ class VisualBindingStream(nn.Module):
             "uses_visual_codebook": False,
             "uses_glyph_lookup": False,
             "uses_external_language_model": False,
+            "retina_trainable": False,
         }
 
 
@@ -647,16 +648,16 @@ def visual_binding_batch_metrics(
     counterfactual_generated = generated[batch_size:]
 
     operation_visual, _ = model.encode_images(prompt[:, 4])
-    query_visual, _ = model.encode_images(prompt[:, 5])
-    original_visual = generated_visual[:batch_size]
-    target_margin_operation = (
-        target_cosine_rows[:batch_size]
-        - (original_visual * operation_visual).sum(dim=-1)
+    query_visual, _ = model.encode_images(
+        torch.cat((prompt[:, 5], counterfactual_prompt[:, 5]), dim=0)
     )
-    target_margin_query = (
-        target_cosine_rows[:batch_size]
-        - (original_visual * query_visual).sum(dim=-1)
-    )
+    operation_visual = torch.cat((operation_visual, operation_visual), dim=0)
+    target_margin_operation = target_cosine_rows - (
+        generated_visual * operation_visual
+    ).sum(dim=-1)
+    target_margin_query = target_cosine_rows - (
+        generated_visual * query_visual
+    ).sum(dim=-1)
 
     heldout = torch.tensor(
         [bool(item["heldout_combination"]) for item in batch["metadata"]],
@@ -687,6 +688,8 @@ def visual_binding_batch_metrics(
     metrics: dict[str, torch.Tensor] = {
         "examples": generated.new_tensor(float(generated.shape[0])),
         "pairs": generated.new_tensor(float(batch_size)),
+        "heldout_pairs": heldout.float().sum(),
+        "seen_pairs": (~heldout).float().sum(),
         "binary_choice_accuracy": choice.float().mean(),
         "counterfactual_switch_accuracy": paired_choice.float().mean(),
         "heldout_combination_switch_accuracy": (
