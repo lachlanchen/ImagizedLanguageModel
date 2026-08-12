@@ -191,10 +191,21 @@ def prototype_bank(
     flush()
     features = torch.cat(encoded)
     owner_tensor = torch.tensor(encoded_owners, dtype=torch.long)
-    bank = torch.zeros(len(characters), features.shape[-1])
-    bank.index_add_(0, owner_tensor, features)
-    counts = torch.bincount(owner_tensor, minlength=len(characters)).float()[:, None]
-    return F.normalize(bank / counts.clamp_min(1.0), dim=-1).to(device)
+    expected_owners = torch.arange(len(characters)).repeat_interleave(views)
+    if not torch.equal(owner_tensor, expected_owners):
+        raise RuntimeError("prototype rendering order is not owner-major")
+    bank = features.reshape(len(characters), views, features.shape[-1])
+    return F.normalize(bank, dim=-1).to(device)
+
+
+def aggregate_view_scores(scores: torch.Tensor) -> torch.Tensor:
+    """Marginalize rendered views without averaging before a nonlinear scorer."""
+
+    return torch.logsumexp(scores, dim=-1) - torch.tensor(
+        scores.shape[-1],
+        device=scores.device,
+        dtype=scores.dtype,
+    ).log()
 
 
 def rank_metrics(scores: torch.Tensor, expected: torch.Tensor) -> dict[str, torch.Tensor]:
@@ -281,9 +292,25 @@ def evaluate_branch(
             full = model.predict(context)
             last = model.predict(context[:, -1:])
             oracle_visual = model.target_retina(target_reference).float()
-            full_scores = model.score_visual_candidates(full, bank, position=-1)
-            last_scores = model.score_visual_candidates(last, bank, position=-1)
-        oracle_scores = F.normalize(oracle_visual, dim=-1) @ bank.transpose(0, 1)
+            flat_bank = bank.flatten(0, 1)
+            full_scores = aggregate_view_scores(
+                model.score_visual_candidates(full, flat_bank, position=-1).reshape(
+                    context.shape[0],
+                    bank.shape[0],
+                    bank.shape[1],
+                )
+            )
+            last_scores = aggregate_view_scores(
+                model.score_visual_candidates(last, flat_bank, position=-1).reshape(
+                    context.shape[0],
+                    bank.shape[0],
+                    bank.shape[1],
+                )
+            )
+        flat_bank = bank.flatten(0, 1)
+        oracle_scores = (
+            F.normalize(oracle_visual, dim=-1) @ flat_bank.transpose(0, 1)
+        ).reshape(context.shape[0], bank.shape[0], bank.shape[1]).amax(dim=-1)
         full_metrics = rank_metrics(full_scores, expected)
         last_metrics = rank_metrics(last_scores, expected)
         oracle_metrics = rank_metrics(oracle_scores, expected)
@@ -321,7 +348,11 @@ def evaluate_branch(
                     generated.reshape(-1, *generated.shape[2:])
                 ).float().reshape(count, samples_per_context, -1)
             normalized_generated = F.normalize(generated_visual, dim=-1)
-            generated_bank_scores = torch.einsum("bsd,nd->bsn", normalized_generated, bank)
+            generated_bank_scores = torch.einsum(
+                "bsd,nvd->bsnv",
+                normalized_generated,
+                bank,
+            ).amax(dim=-1)
             generated_identity = generated_bank_scores.argmax(dim=-1)
             expected_generation = expected[:count]
             sample_hit = generated_identity.eq(expected_generation[:, None]).any(dim=1)
