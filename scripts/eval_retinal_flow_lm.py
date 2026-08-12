@@ -17,7 +17,11 @@ import torch.nn.functional as F
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from ilm.visual_lm.ink_jepa_data import RetinalRenderConfig, load_visual_grammar_manifest
+from ilm.visual_lm.ink_jepa_data import (
+    RetinalRenderConfig,
+    load_visual_grammar_manifest,
+    retinal_font_manifest,
+)
 from ilm.visual_lm.retinal_flow_lm import (
     RetinalFlowLanguageModel,
     retinal_flow_config_from_payload,
@@ -569,6 +573,7 @@ def main() -> None:
         "bank_size": len(characters),
         "bank_sha256": bank_digest,
         "prototype_views": args.prototype_views,
+        "retinal_fonts": retinal_font_manifest(),
         "chance_top1": 1.0 / len(characters),
         "student_received_token_ids": False,
         "student_received_labels": False,

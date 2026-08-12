@@ -18,7 +18,12 @@ import torch.nn.functional as F
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from ilm.visual_lm.ink_jepa_data import RetinalRenderConfig, load_visual_grammar_manifest
+from ilm.visual_lm.ink_jepa_data import (
+    RETINAL_CJK_AVAILABLE_FONTS,
+    RetinalRenderConfig,
+    load_visual_grammar_manifest,
+    retinal_font_manifest,
+)
 from ilm.visual_lm.retinal_flow_lm import (
     RetinalFlowConfig,
     RetinalFlowLanguageModel,
@@ -338,6 +343,7 @@ def checkpoint_payload(
         "architecture": ARCHITECTURE,
         "model_config": retinal_flow_config_payload(model.config),
         "render_config": render_config.__dict__,
+        "retinal_fonts": retinal_font_manifest(),
         "model": model.state_dict(),
         "optimizer": optimizer.state_dict(),
         "epoch": epoch,
@@ -463,6 +469,7 @@ def main() -> None:
         "validation_records": len(validation_dataset.records),
         "sequence_length": args.sequence_length,
         "energy_positions_per_sequence": args.energy_positions_per_sequence,
+        "retinal_fonts": list(RETINAL_CJK_AVAILABLE_FONTS),
         "initialization": initialization,
         "planned_steps": planned_steps,
         "device": str(device),

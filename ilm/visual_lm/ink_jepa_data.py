@@ -15,7 +15,21 @@ import torch.nn.functional as F
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from torch.utils.data import Dataset
 
-from .folio_data import FOLIO_AVAILABLE_FONTS
+
+
+RETINAL_CJK_FONT_PATHS = (
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Regular.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Light.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Light.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSerifCJK-Medium.ttc",
+)
+RETINAL_CJK_AVAILABLE_FONTS = tuple(
+    path for path in RETINAL_CJK_FONT_PATHS if Path(path).exists()
+)
 
 
 @dataclass(frozen=True)
@@ -75,9 +89,77 @@ def _load_font(path: str, size: int) -> ImageFont.FreeTypeFont:
 
 
 def _font(variant: int, size: int) -> ImageFont.ImageFont:
-    if not FOLIO_AVAILABLE_FONTS:
+    if not RETINAL_CJK_AVAILABLE_FONTS:
         return ImageFont.load_default()
-    return _load_font(FOLIO_AVAILABLE_FONTS[variant % len(FOLIO_AVAILABLE_FONTS)], size)
+    return _load_font(
+        RETINAL_CJK_AVAILABLE_FONTS[variant % len(RETINAL_CJK_AVAILABLE_FONTS)],
+        size,
+    )
+
+
+@lru_cache(maxsize=65_536)
+def _font_supports_character(path: str, character: str) -> bool:
+    font = _load_font(path, 24)
+    missing = bytes(font.getmask("\U0010ffff", mode="L"))
+    return bytes(font.getmask(character, mode="L")) != missing
+
+
+@lru_cache(maxsize=1)
+def _shared_retinal_codepoints() -> frozenset[int] | None:
+    try:
+        from fontTools.ttLib import TTFont
+    except ImportError:
+        return None
+    shared: set[int] | None = None
+    for path in RETINAL_CJK_AVAILABLE_FONTS:
+        if Path(path).suffix.lower() == ".ttc":
+            font = TTFont(path, fontNumber=0, lazy=True)
+        else:
+            font = TTFont(path, lazy=True)
+        try:
+            coverage = set(font.getBestCmap() or {})
+        finally:
+            font.close()
+        shared = coverage if shared is None else shared.intersection(coverage)
+    return frozenset(shared or ())
+
+
+@lru_cache(maxsize=65_536)
+def retinal_character_supported(character: str) -> bool:
+    """Return whether every selected retinal face has a real glyph."""
+
+    if len(character) != 1:
+        raise ValueError("retinal character coverage accepts one character")
+    if character.isspace():
+        return True
+    if not RETINAL_CJK_AVAILABLE_FONTS:
+        return ord(character) < 128
+    shared = _shared_retinal_codepoints()
+    if shared is not None:
+        return ord(character) in shared
+    return all(
+        _font_supports_character(path, character)
+        for path in RETINAL_CJK_AVAILABLE_FONTS
+    )
+
+
+@lru_cache(maxsize=1)
+def retinal_font_manifest() -> tuple[dict[str, str | int], ...]:
+    output: list[dict[str, str | int]] = []
+    for value in RETINAL_CJK_AVAILABLE_FONTS:
+        path = Path(value)
+        digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+        output.append(
+            {
+                "path": str(path),
+                "bytes": path.stat().st_size,
+                "sha256": digest.hexdigest(),
+            }
+        )
+    return tuple(output)
 
 
 def normalize_visual_text(text: str) -> str:

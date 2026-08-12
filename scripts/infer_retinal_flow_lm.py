@@ -22,6 +22,7 @@ from ilm.visual_lm.ink_jepa_data import (
     render_retinal_page,
     retinal_cell_bounds,
     retinal_cursor_after_text,
+    retinal_font_manifest,
     retinal_layout,
 )
 from ilm.visual_lm.ink_writer import sample_foveal_ink
@@ -318,6 +319,7 @@ def main() -> None:
         "student_used_codebook": False,
         "student_used_external_language_model": False,
         "primary_output": "continuous ink image",
+        "retinal_fonts": retinal_font_manifest(),
         "initial_visual_fixations": len(foveas),
         "generated_cells": len(traces),
         "requested_cells": args.new_cells,

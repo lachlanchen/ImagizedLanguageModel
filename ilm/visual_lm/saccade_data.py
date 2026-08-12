@@ -8,11 +8,12 @@ from typing import Any, Sequence
 import torch
 from torch.utils.data import Dataset
 
-from .folio_data import FOLIO_AVAILABLE_FONTS
 from .ink_jepa_data import (
+    RETINAL_CJK_AVAILABLE_FONTS,
     RetinalRenderConfig,
     VisualGrammarRecord,
     extract_retinal_fovea,
+    retinal_character_supported,
     render_retinal_page,
 )
 
@@ -24,7 +25,11 @@ def _validation_record(identifier: str, fraction: float) -> bool:
 
 
 def _visible_writing(text: str) -> str:
-    return "".join(character for character in text if not character.isspace())
+    return "".join(
+        character
+        for character in text
+        if not character.isspace() and retinal_character_supported(character)
+    )
 
 
 @dataclass(frozen=True)
@@ -134,8 +139,11 @@ class VisualSaccadeDataset(Dataset):
         segment = writing[start : start + self.spec.sequence_length + 1]
         first_variant = rng.randrange(2**31)
         second_variant = first_variant + 1
-        if len(FOLIO_AVAILABLE_FONTS) > 1:
-            while second_variant % len(FOLIO_AVAILABLE_FONTS) == first_variant % len(FOLIO_AVAILABLE_FONTS):
+        if len(RETINAL_CJK_AVAILABLE_FONTS) > 1:
+            while (
+                second_variant % len(RETINAL_CJK_AVAILABLE_FONTS)
+                == first_variant % len(RETINAL_CJK_AVAILABLE_FONTS)
+            ):
                 second_variant += 1
         first = render_saccade_foveas(
             segment,
