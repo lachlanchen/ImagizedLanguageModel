@@ -87,3 +87,34 @@ This repository uses a continuously evolving research manuscript rather than a
 journal response package, and no manuscript baseline/redline convention is
 currently present. Verification will therefore use the Git diff plus the newly
 compiled PDF; no baseline file will be overwritten.
+
+## Execution Record
+
+Status: completed on 2026-08-13.
+
+- Added the canonical V24 result receipt and a reproducible measured figure.
+- Updated the README, abstract, contributions, experiment narrative, aggregate
+  results, and conclusion with the same bounded claim.
+- The manuscript builds successfully through `publication/Makefile` to a
+  38-page PDF (`7,457,557` bytes).
+- Inspected compiled pages 21--25 at 125 dpi. The V24 equations, paired-control
+  table, frozen table, measured figure, caption, and claim boundary are readable
+  and do not overlap or clip.
+- The final LaTeX log has no unresolved-reference, missing-character, or
+  overfull-box warning. Existing underfull bibliography/table warnings remain
+  outside this revision's scope.
+- `PYTHONPATH=. pytest -q` passes: `186 passed in 23.55s`.
+- `git diff --check` passes.
+
+The first plain `pytest -q` attempt failed during collection because this source
+tree is not installed as a Python package. Rerunning with the repository's
+required `PYTHONPATH=.` environment produced the passing result above; no code
+change was needed.
+
+### Deviation
+
+The original plan allowed a `publication/Makefile` update if needed. None was
+needed. The first PDF build fell back to XeLaTeX because newly inserted Chinese
+header literals were unsupported by the default PDFLaTeX font. The prose now
+uses role names and Unicode code-point references while the actual glyph images
+remain in the measured figure; the final two-pass PDFLaTeX build succeeds.

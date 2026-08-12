@@ -97,13 +97,25 @@ identities reaches 99.83\% binary choice, 99.61\% query switch, 99.71\%
 operation switch, 99.46\% identity top-1, and 0.785 pixel F1. Every fixed gate
 passes without frozen model selection or threshold changes. This accepts a
 fixed two-pair same/other visual grammar, not free-form language.
+V24 removes absolute frame roles and fixed input length while closing a
+two-frame autoregressive visual loop. Visible header images locate roles in
+15--24-frame packet streams; frame 1 renders the selected unseen glyph, and
+frame 2 is produced after rereading the actual generated frame-1 pixels. Only
+1,347 parameters are trained. Fresh paired query-, operation-, history-, and
+header-blind controls localize every required cause. An opaque agent review
+scores 47/48 for frame 1 and 48/48 for frame 2. The single authorized frozen
+run over 107 unseen identities reaches 98.67\% frame-1 identity, 99.73\%
+frame-2 label accuracy, 97.66\% query switch, 97.27\% operation switch, and
+99.61\% history switch. Every fixed gate passes. This accepts a variable-input
+but fixed-grammar two-frame image stream, not arbitrary rendered language.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
 and provenance-linked historical or unencoded forms. The present experiments
-establish causal visual-language signal, compact continuous-image writing, and
-one bounded image-prompt-to-image-answer relation, not autonomous question
-answering, broad readability, Qwen parity, or efficiency over text models.
+establish causal visual-language signal, compact continuous-image writing, a
+bounded image relation, and a bounded causal two-frame image stream, not
+autonomous question answering, broad readability, Qwen parity, or efficiency
+over text models.
 More generally, ILM treats writing as the first
 instance of language modeled as a continuous sensory field. A proposed Visual
 Language Stream adds sequence/time and optional geometric depth to the same
@@ -220,6 +232,11 @@ implemented controls that makes that slogan falsifiable:
   operation-blind controls, held-out relation compositions, an opaque visual
   review, and one frozen-identity evaluation. It supplies the first accepted
   bounded image-prompt-to-image-answer result in this project.
+  \item V24, a variable 15--24-frame visual packet stream with learned
+  header-image role localization and two autonomous output frames. Matched
+  header-, query-, operation-, and generated-history-blind controls, an opaque
+  visual audit, and one frozen run establish that frame 2 causally depends on
+  rereading generated frame-1 pixels.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -1028,10 +1045,169 @@ V23 therefore accepts a bounded image-only relation: multiple visible roles
 are composed, unseen source forms are routed, and the answer is emitted as
 pixels. It does not establish arbitrary syntax or free-form generation. Frame
 roles and the two-pair same/other algebra remain architecturally fixed, and the
-answer is a canonicalized version of one visible source form. The next test
-must remove fixed frame roles, consume a variable-length visual instruction,
-emit at least two answer-image frames, and make frame 2 causally depend on
-rereading the generated pixels of frame 1.
+answer is a canonicalized version of one visible source form. V24 implements
+the preregistered next test: remove absolute frame roles, consume a
+variable-length visual instruction, emit two answer-image frames, and make
+frame 2 causally depend on rereading the generated pixels of frame 1.
+
+\subsection{Visual Packet Reread Stream V24: causal two-frame stream accepted}
+
+V24 replaces V23's six absolute roles with a variable sequence of three-frame
+visual packets. Its prompt and autonomous answer have shapes
+\[
+X\in[0,1]^{B\times T\times1\times32\times32},
+\quad T\in\{15,18,21,24\},
+\qquad
+\hat Y\in[0,1]^{B\times2\times1\times32\times32}.
+\]
+Each packet is \emph{header, content A, content B}. The visible header glyphs
+for pair (U+5951), operation (U+6CD5), query (U+95EE), distractor (U+65C1),
+and stop (U+6B62) denote their respective roles. Packets before the terminating
+packet are shuffled. Training uses 15, 18, and 21 active frames; 24 frames with
+three distractors are held out by length. Dynamic batching adds only all-zero
+packet images and supplies neither active lengths nor padding masks.
+
+The identity bank contains 829 training, 88 development, and 107 frozen
+Chinese forms under the fixed salt
+\texttt{visual-packet-reread-stream-v24}. Two operation/label-pair
+compositions are held out while every constituent operation and label pair
+appears separately in training. As in V23, renderer strings and episode
+metadata are deleted before every model call.
+
+For packet $j$, the frozen V16 retina yields normalized header and content
+states $H_j,A_j,B_j$. Three learned normalized prototypes locate roles from
+header pixels:
+\[
+e_{jr}=\tau_r\langle H_j,p_r\rangle,
+\qquad r\in\{\mathrm{pair},\mathrm{operation},\mathrm{query}\}.
+\]
+Straight-through hard routing selects the top two pair packets and top one
+operation and query packet; its backward surrogate is a softmax. Scores inspect
+only header images, not packet contents. With located query $q$, operation $o$,
+pair labels $A_j$, and pair-glyph images $B_j^{\mathrm{image}}$, frame 1 uses
+the frozen V23 comparison temperature, operation reader, and canonicalizer:
+\[
+m_j=\operatorname{softmax}_{j\in\mathrm{pair}}
+\left(\tau_{23}\langle q,A_j\rangle\right),\qquad
+s=\sigma(U_{23}(o)),
+\]
+\[
+w_j=s m_j+(1-s)(1-m_j),\qquad
+x_1=\sum_{j\in\mathrm{pair}}w_jB_j^{\mathrm{image}},\qquad
+\hat y_1=C_{23}(x_1).
+\]
+The second step rereads the actual generated pixels:
+\[
+r_1=R(\hat y_1),\qquad
+b_j=\operatorname{softmax}_{j\in\mathrm{pair}}
+\left(\tau_{23}\langle r_1,B_j\rangle\right),
+\]
+\[
+x_2=\sum_{j\in\mathrm{pair}}b_jA_j^{\mathrm{image}},\qquad
+\hat y_2=C_{23}(x_2).
+\]
+Thus no pre-render identity state crosses the frame-1/frame-2 boundary. All
+weighted reductions accumulate in FP64.
+
+V16 retina parameters and every inherited V23 parameter are frozen. V24 trains
+only three 192-dimensional role prototypes, four 192-dimensional continuous
+null states, and three role temperatures: 1,347 parameters total. The
+packet-aware, header-blind, query-blind, operation-blind, and history-blind
+arms have identical parameter names, shapes, and counts. Each receives exactly
+800 AdamW updates in BF16 with batch 64 and eight workers on one RTX 4090. The
+candidate selects step 100, then completes the fixed run in 394.18 seconds at
+2.322~GiB peak allocated CUDA memory.
+
+A fresh audit uses 1,024 newly rendered development episodes at seed 22260832.
+Table~\ref{tab:v24paired} shows the paired causes. A blind arm is exactly
+invariant to the intervention it cannot observe. Header blindness prevents
+reliable role localization, while history blindness leaves frame 1 intact but
+breaks frame 2.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Fresh paired metric & Packet-aware & Corresponding blind \\
+\midrule
+Query switch & 0.9922 & 0.0000 \\
+Query-output L1 & 0.1677 & 0.0000 \\
+Operation switch & 0.9932 & 0.0000 \\
+Operation-output L1 & 0.1676 & 0.0000 \\
+Frame-2 history switch & 0.9961 & 0.0000 \\
+History-output L1 & 0.1421 & 0.0000 \\
+Minimum role localization & 1.0000 & 0.0820 \\
+Frame-1 identity top-1 & 0.9961 & 0.3410 / 0.3197 / 0.2740 \\
+Frame-2 label top-1 & 0.9969 & 0.4873 / 0.3717 \\
+\bottomrule
+\end{tabular}
+\caption{V24 fresh paired development audit. The last two control cells list
+query/operation/header-blind and history/header-blind results, respectively.
+All arms have exactly 1,347 trainable parameters.}
+\label{tab:v24paired}
+\end{table}
+
+After every paired gate passes, an opaque agent visual audit presents 48
+development cards containing only the packet images, two visible source
+choices, and two generated frames. It exposes no targets, transcriptions,
+correctness labels, or frozen forms. The committed judgments score 47/48 for
+frame 1 and 48/48 for frame 2, including 12/12 for each frame at held-out
+$T=24$. This is an agent visual audit, not a human-subject study.
+
+Only then does the evaluator instantiate frozen images. It runs exactly once
+on 1,024 episodes, 107 unseen identities, and four identity-bank views, without
+model selection, threshold changes, or repetition. Table~\ref{tab:v24frozen}
+reports the primary gates. All remaining role, distractor, packet-permutation,
+teacher-forcing, and image-boundary gates also pass. The run takes 8.13 seconds
+and peaks at 0.542~GiB allocated CUDA memory.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V24 frozen gate & Measured & Required & Result \\
+\midrule
+Frame-1 binary choice & 0.9980 & $>0.95$ & pass \\
+Query switch & 0.9766 & $>0.90$ & pass \\
+Operation switch & 0.9727 & $>0.90$ & pass \\
+Generated-history switch & 0.9961 & $>0.90$ & pass \\
+Held-out minimum switch & 0.9635 & $>0.85$ & pass \\
+Frame-1 identity top-1 & 0.9867 & $>0.75$ & pass \\
+Frame-2 label top-1 & 0.9973 & $>0.95$ & pass \\
+Frame-1 pixel F1 & 0.8371 & $>0.68$ & pass \\
+Frame-2 pixel F1 & 0.7286 & $>0.58$ & pass \\
+Generated-history consistency & 0.9863 & $>0.92$ & pass \\
+Held-out $T=24$, frame 1 & 0.9847 & $>0.90$ & pass \\
+Held-out $T=24$, frame 2 & 1.0000 & $>0.90$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{Single authorized V24 frozen evaluation. The sealed report records no
+model selection, no threshold change, and no repeated frozen run.}
+\label{tab:v24frozen}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_packet_stream_v24_result.png}
+  \caption{Measured V24 result. An actual opaque review card shows a
+  variable-length image prompt and two autonomous answer frames. Matched
+  controls localize header, query, operation, and generated-history causality;
+  every gate in the single frozen evaluation passes.}
+  \label{fig:v24result}
+\end{figure}
+
+V24 therefore accepts a variable-input, two-frame image stream under one fixed
+visual grammar. It establishes that frame 2 can depend causally on rereading
+generated frame-1 pixels, not merely on a hidden state. It does not establish
+arbitrary sentence parsing, factual retrieval, page continuation, historical
+form synthesis, free-form output length, or movie generation. The next
+experiment must replace packet algebra with ordinary rendered prompts and
+short passages, learn an answer-line stop decision, and compare page-native
+canvases with packed 8-, 16-, and 32-pixel glyph-cell streams under semantic
+counterfactuals. Cell reconstruction or glyph classification alone cannot
+satisfy that language gate.
 
 \section{Data}
 
@@ -1466,15 +1642,23 @@ fresh paired audit; the corresponding blind controls are exactly invariant.
 The opaque visual review and single frozen evaluation also pass, with 99.46\%
 frozen identity top-1 and 0.7848 pixel F1. This turns V22's interface into the
 first accepted bounded image-prompt-to-image-answer circuit in the project.
+V24 then replaces six absolute frame roles with visible headers in a
+15--24-frame packet stream and closes a two-frame visual autoregressive loop.
+The fresh candidate reaches 99.22\% query, 99.32\% operation, and 99.61\%
+generated-history switch accuracy; each corresponding blind control is exactly
+invariant. The opaque audit scores 47/48 and 48/48 for the two output frames.
+On the single frozen run, frame-1 unseen-identity accuracy is 98.67\%,
+frame-2 label accuracy is 99.73\%, and held-out-length scores are 98.47\% and
+100\%. Every fixed gate passes.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
-answer. It does not establish useful autonomous language. The next proof must
-remove fixed frame roles, integrate a variable-length visual instruction, and
-generate a two-frame answer whose second frame causally depends on rereading
-the first generated image. The closed multi-frame loop must remain readable and
-prompt-dependent. This order is also consistent with measured error
-accumulation in iterative diffusion chains~\cite{inputperturb}.
+answer stream whose second frame depends on rereading the first. It does not
+establish useful autonomous language. The next proof must replace the
+hand-authored packet grammar with rendered Chinese questions and passages,
+learn a variable answer length, and preserve prompt and history dependence
+across multiple generated lines. This order is also consistent with measured
+error accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -1536,14 +1720,26 @@ binary choice is 0.9983, identity top-1 is 0.9946, and pixel F1 is 0.7848. The
 maximum supported claim is fixed-grammar visual relation following. The roles
 and relation algebra remain built into the circuit, and the answer remains a
 canonicalized visible source form.
+V24 removes absolute role positions, varies the prompt from 15 to 24 raster
+frames, and emits two images. Five matched 1,347-parameter arms localize the
+causal chain: query-, operation-, and history-blind controls each have exactly
+zero response to their hidden factor, while header blindness destroys role
+localization. The candidate's single frozen run over 107 unseen identities
+reaches 0.9867 frame-1 identity, 0.9973 frame-2 label accuracy, and 0.9961
+history switch accuracy; every fixed gate passes. V24 therefore establishes
+generated-pixel rereading in a bounded variable-input stream. It does not turn
+the fixed packet algebra into natural language.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal memory core. The next
-attributable test is a variable-length visual instruction stream with learned
-role localization and a two-frame autonomous answer. Instruction-blind,
-evidence-blind, generated-history-blind, and counterfactual controls must show
-that frame 2 depends on the prompt and on rereading frame 1. Only selected
-components may enter longer visual memory. The named product gate is a Visual
-Word-Origin Book that
+attributable test uses ordinary rendered Chinese prompts and short passages,
+not packet headers, with a learned-length image-line answer. Page-native
+canvases and packed glyph grids at 8, 16, and 32 pixels per cell should be
+compared at matched information and compute. Color or depth channels may carry
+observable ink, style, geometry, or layout, but may not encode hidden character
+IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
+generated-history-blind, retrieval, and OCR-plus-text controls must distinguish
+language use from reconstruction and lookup. Only selected components may enter
+longer visual memory. The named product gate is a Visual Word-Origin Book that
 reads a rendered prompt alone or composed with a source page, then emits one
 answer image or an ordered answer-image stream plus an optional declared text
 sidecar. Prompt counterfactuals must change that answer correctly; input
