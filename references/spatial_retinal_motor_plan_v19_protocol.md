@@ -43,18 +43,27 @@ F=R_{\mathrm{field}}(x^{\mathrm{semantic}})\in
 \mathbb R^{192\times4\times4}.
 \]
 
-V19 adds a zero-initialized continuous spatial residual to V18's learned global
-seed:
+Directly loading the existing V18 checkpoint would contaminate a new V19
+holdout because V18 used a different record partition. V19 therefore first
+trains a fresh **global baseline** from scratch, using the V18 architecture and
+the V19 train/development/frozen partition. No V18 or V17 learned weight enters
+that baseline. It is selected on V19 development data by V18's fixed automatic
+topology rule.
+
+The spatial intervention then loads that newly selected V19-global checkpoint,
+freezes every baseline parameter, and adds a zero-initialized continuous
+spatial residual to its learned global seed:
 
 \[
 H_0=H_{\mathrm{V18}}(z,E_s(x^{\mathrm{style}}))
 +\sigma(g)A_\phi(F).
 \]
 
-All compatible V18 parameters are warm-started exactly. `A_phi` is initialized
-to zero, so the initial V19 function equals the selected V18 function. Any
-improvement can therefore be attributed to learned use of the new field more
-cleanly than in a from-scratch comparison.
+All global-baseline parameters are loaded exactly. `A_phi` is initialized to
+zero, so the initial spatial V19 function equals the selected V19-global
+function. Only `A_phi` and its scalar gate are trainable. This prevents ordinary
+baseline fine-tuning from masquerading as a spatial-field gain and keeps the
+new holdout clean from earlier V17/V18 training.
 
 ## Image-Only Complexity Strata
 
@@ -101,6 +110,11 @@ fixed.
 ## Development Selection
 
 Partition salt: `spatial-retinal-motor-plan-v19`.
+
+Both the fresh global baseline and spatial residual use this exact partition.
+The global baseline is trained from scratch on V19 training records. Its
+selected checkpoint seeds the frozen-base spatial intervention; neither phase
+instantiates V19 frozen images.
 
 The primary score is dense-stratum correct pixel F1. A checkpoint is eligible
 only if all of these prospectively fixed gates pass:
