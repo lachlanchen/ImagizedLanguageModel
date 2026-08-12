@@ -10,6 +10,7 @@ from scripts.train_spatial_motor_plan import (
     GLOBAL_ARCHITECTURE,
     PARTITION_SALT,
     better_development_candidate,
+    spatial_selection_gate_report,
     spatial_selection_eligible,
     validate_global_baseline_checkpoint,
     validate_resume_checkpoint,
@@ -136,6 +137,7 @@ def test_global_baseline_rejects_contamination(mutation, message: str) -> None:
 def test_spatial_selection_requires_every_fixed_gate() -> None:
     passing = _passing_metrics()
     assert spatial_selection_eligible(passing)
+    assert all(spatial_selection_gate_report(passing).values())
     failures = {
         "correct_pixel_f1": 0.68,
         "correct_pixel_f1_dense": 0.58,
@@ -152,6 +154,7 @@ def test_spatial_selection_requires_every_fixed_gate() -> None:
     for key, value in failures.items():
         metrics = {**passing, key: value}
         assert not spatial_selection_eligible(metrics), key
+        assert not all(spatial_selection_gate_report(metrics).values()), key
 
 
 def test_spatial_selection_uses_dense_then_overall_then_earlier_step() -> None:

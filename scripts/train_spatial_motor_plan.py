@@ -151,23 +151,35 @@ def seed_everything(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
+def spatial_selection_gate_report(metrics: dict[str, float]) -> dict[str, bool]:
+    dense = metrics["correct_pixel_f1_dense"]
+    return {
+        "overall_pixel_f1": metrics["correct_pixel_f1"] > 0.68,
+        "dense_pixel_f1": dense > 0.58,
+        "dense_spatial_shuffle_margin": (
+            dense - metrics["spatial_shuffled_pixel_f1_dense"] > 0.12
+        ),
+        "dense_zero_field_margin": (
+            dense - metrics["zero_field_pixel_f1_dense"] > 0.03
+        ),
+        "identity_top1": (
+            metrics["correct_identity_top1"] > 0.75
+            and metrics["correct_identity_top1"]
+            > metrics["both_shuffled_identity_top1"]
+        ),
+        "target_cosine": (
+            metrics["correct_target_cosine"] > 0.84
+            and metrics["correct_target_cosine"]
+            > metrics["both_shuffled_target_cosine"]
+        ),
+        "condition_pixel_l1": metrics["condition_pixel_l1"] > 0.08,
+        "semantic_target_pixel_l1": metrics["semantic_target_pixel_l1"] > 0.05,
+        "frozen_bank_sealed": (metrics.get("frozen_images_instantiated", 0.0) == 0.0),
+    }
+
+
 def spatial_selection_eligible(metrics: dict[str, float]) -> bool:
-    return bool(
-        metrics["correct_pixel_f1"] > 0.68
-        and metrics["correct_pixel_f1_dense"] > 0.58
-        and metrics["correct_pixel_f1_dense"]
-        - metrics["spatial_shuffled_pixel_f1_dense"]
-        > 0.12
-        and metrics["correct_pixel_f1_dense"] - metrics["zero_field_pixel_f1_dense"]
-        > 0.03
-        and metrics["correct_identity_top1"] > 0.75
-        and metrics["correct_identity_top1"] > metrics["both_shuffled_identity_top1"]
-        and metrics["correct_target_cosine"] > 0.84
-        and metrics["correct_target_cosine"] > metrics["both_shuffled_target_cosine"]
-        and metrics["condition_pixel_l1"] > 0.08
-        and metrics["semantic_target_pixel_l1"] > 0.05
-        and metrics.get("frozen_images_instantiated", 0.0) == 0.0
-    )
+    return all(spatial_selection_gate_report(metrics).values())
 
 
 def better_development_candidate(
