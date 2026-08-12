@@ -290,6 +290,8 @@ class VisualBindingStream(nn.Module):
         self.null_field = nn.Parameter(
             torch.zeros(config.spatial_channels, config.field_size, config.field_size)
         )
+        nn.init.normal_(self.null_visual, std=0.02)
+        nn.init.normal_(self.null_field, std=0.02)
         self.writer = OverlapLocalWriter(config)
 
     def train(self, mode: bool = True) -> "VisualBindingStream":

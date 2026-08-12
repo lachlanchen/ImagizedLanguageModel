@@ -98,6 +98,8 @@ def test_attention_is_finite_and_normalized() -> None:
 
 def test_query_blind_control_is_exactly_invariant_to_final_frame() -> None:
     model = build_model(QUERY_BLIND_ROUTE).eval()
+    assert float(model.null_visual.detach().norm()) > 0.0
+    assert float(model.null_field.detach().norm()) > 0.0
     first = random_prompt()
     second = first.clone()
     second[:, -1] = torch.rand_like(second[:, -1])
@@ -110,6 +112,24 @@ def test_query_blind_control_is_exactly_invariant_to_final_frame() -> None:
         rtol=0.0,
         atol=0.0,
     )
+
+
+def test_query_blind_null_state_has_finite_training_gradients() -> None:
+    model = build_model(QUERY_BLIND_ROUTE).train()
+    prompt = random_prompt(batch=2)
+    loss = model(prompt).mean()
+    loss.backward()
+    gradients = [
+        parameter.grad
+        for parameter in model.parameters()
+        if parameter.requires_grad and parameter.grad is not None
+    ]
+    assert gradients
+    assert all(torch.isfinite(gradient).all() for gradient in gradients)
+    norm = torch.linalg.vector_norm(
+        torch.stack([gradient.float().norm() for gradient in gradients])
+    )
+    assert float(norm) < 1_000.0
 
 
 def test_query_aware_route_changes_with_final_frame() -> None:
