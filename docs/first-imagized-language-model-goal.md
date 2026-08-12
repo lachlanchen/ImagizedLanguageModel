@@ -142,7 +142,8 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains nine complete experimental systems:
+The repository now contains ten complete experimental systems and one frozen
+next experiment:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -173,6 +174,15 @@ The repository now contains nine complete experimental systems:
   relation binding. A 1.122M-parameter frozen canonicalizer and three matched
   25,602-parameter relation arms test query, operation, and pair-order causality
   before one authorized frozen evaluation.
+- Visual Packet Reread Stream V24 extends the bounded relation into a variable
+  `15`--`24` frame image stream. It writes two answer images, rereads its actual
+  first generated frame to produce the second, and tests four matched blind
+  routes before one authorized frozen evaluation.
+- Visual Cell Stream V25 is preregistered, not yet a result. It treats ordinary
+  Chinese as a `T x 32 x 32` visual-time volume, predicts the next continuous
+  cell from 64 visible cells, draws it with pixel flow, and appends the actual
+  generated image for autonomous rereading. Historical forms are deliberately
+  deferred from this first natural-language test.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -251,6 +261,17 @@ then reaches `0.99829` binary choice, `0.99609` query switch, `0.99707`
 operation switch, `0.99463` identity top-1, and `0.78478` pixel F1. Every fixed
 gate passes without frozen model selection or threshold changes.
 
+V24 then removes fixed absolute frame positions and closes a two-frame
+write--reread loop inside a variable packet stream. On the single authorized
+1,024-episode frozen evaluation it reaches `0.99805` binary choice,
+`0.98672` frame-one identity top-1, `0.99727` frame-two label accuracy,
+`0.97656` query switch, `0.97266` operation switch, and `0.99609` history
+switch. Its held-out `T=24` frame-one identity is `0.98473` and frame-two label
+accuracy is `1.0`. The trainable route contains only 1,347 parameters because
+its image retina, canonical writer, and relation operator are inherited and
+frozen. This is strong evidence for visual routing and generated-image history
+inside its packet grammar, not evidence of ordinary language generation.
+
 It proved:
 
 - a strict image-only student boundary;
@@ -291,8 +312,8 @@ It did not prove:
 - prediction better than a symbolic bigram baseline;
 - broad complex-form visual-state output under a frozen protocol;
 - a selected field-complete writer that is both causal and broadly readable;
-- arbitrary or variable-length prompt-conditioned answer-image generation;
-  V23 passes only a fixed six-role, one-answer-frame grammar;
+- arbitrary or open-ended prompt-conditioned answer-image generation; V24
+  passes only a variable-length but fixed three-frame packet grammar;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
@@ -302,17 +323,23 @@ The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
-relation proof, and rejected autonomous language-system proof**.
+relation proof, accepted V24 bounded visual packet/reread proof, and rejected
+autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
 solved by image generation. V22 shows that merely adding a Transformer and a
-single-frame soft selector is not a prompt-to-answer solution. V23 shows that a
-small constrained circuit can instead compare and compose several visible
-roles, route unseen source forms, and render the requested result. The next
-milestone must remove the fixed role syntax and close a multi-frame
-write--reread loop. The causal language core must still be strengthened
-independently against the bigram baseline.
+single-frame soft selector is not a prompt-to-answer solution. V23 and V24 show
+that small constrained circuits can instead compare several visible roles,
+route unseen source forms, write, and use generated-image history. The next
+milestone removes the role syntax entirely. V25 rasterizes natural Chinese
+book text into clean two-dimensional cells and stacks them along visual time.
+Its model sees `B x T x 1 x 32 x 32`, never strings or character IDs, and must
+beat last-cell, shuffled-history, and visual-unigram controls before a
+continuous writer is allowed to generate and reread a 16-cell continuation.
+The symbolic bigram remains a required benchmark. The complete frozen contract
+is in
+[`references/visual_cell_stream_v25_protocol.md`](../references/visual_cell_stream_v25_protocol.md).
 
 ## Implemented paradigm: predictive visual fields
 
