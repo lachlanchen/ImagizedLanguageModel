@@ -60,74 +60,117 @@ damaged, ambiguous, or historically unfamiliar writing. Acceptance requires a
 quality-versus-FLOPs curve against a fixed number of updates; entropy gating is
 not accepted merely because it sounds biologically plausible.
 
-## V19 Consequence
+## V19 to V20: Routing Decision
 
 V19 added a spatial field as an optional residual to a complete frozen global
 writer. The correct field beat a shuffled field by only `0.00879` dense F1,
-against a fixed `0.12` requirement. This shows that ordinary reconstruction loss
-allows the adapter to become a shared polish while the global route remains
-sufficient.
+against a fixed `0.12` requirement. Ordinary reconstruction therefore learned
+a shared polish while the global route remained sufficient.
 
-The next model must change information routing, not only loss weights.
+V20 changed the causal graph. Its global branch emitted only coarse `4x4` block
+logits; the continuous local field emitted zero-mean `8x8` detail inside each
+block. An exact-capacity control sent repeated global state through the same
+local decoder. Both arms had `506,448` trainable parameters and used the same
+salted split, compute budget, and frozen V16 retina.
 
-## Recommended V20: Retinal Topology Router
+The structural intervention worked. Candidate dense F1 was `0.70131`, versus
+`0.57953` under a shuffled field and `0.34003` under a zero field. The gains
+`+0.12177` and `+0.36128` pass the fixed causal margins. Occluding one field
+quadrant changed only the corresponding output quadrant (`1.0` locality), while
+all field interventions had exactly zero effect in the global-repeat control.
 
-The smallest decisive experiment is a field-primary deterministic motor plan:
+The writer did not pass. Candidate overall F1 (`0.63608`) and target cosine
+(`0.81519`) missed their fixed thresholds, as did the strict floating-point
+detail-mean invariant (`2.03e-6` versus `<1e-6`). Its final dense advantage over
+the equal-capacity control was only `+0.01791`, below the fixed paired target of
+`>0.03`. Neither arm selected, so no paired audit, human review, or frozen query
+was authorized.
+
+The decision is narrow and useful: topology-necessary local routing is now
+demonstrated, but reserving only high-frequency residual detail for the field is
+not a sufficient visual writer.
+
+## Recommended V21: Field-Complete Visual Writer
+
+The next smallest decisive model lets the topographic field determine both
+coarse occupancy and fine detail:
 
 \[
-p=\sigma\left(U(G(z,s))+(I-UD)H(F,s)\right).
+(\gamma,\beta)=M(z,s),\qquad
+c=C_F(\gamma\odot F+\beta),\qquad
+d=B_0A_F(\gamma\odot F+\beta),\qquad
+p=\sigma(U(c)+d).
 \]
 
 Here:
 
-- `F` is the continuous local retinal field and drives spatial topology;
-- `z` is the continuous global retinal state;
-- `s` is image-derived style;
-- `G` emits only a coarse plan;
-- `D` and `U` are fixed down/up-sampling operators; and
-- `(I-UD)H` is a high-frequency local component unavailable to the global path.
+- `F` is the continuous local retinal field;
+- `z` is continuous global state and `s` is image-derived style;
+- `M` emits only channelwise modulation shared over spatial locations;
+- `C_F` derives coarse occupancy from the field;
+- `A_F` derives local detail through a bounded receptive field; and
+- `B_0` is a fixed zero-mean basis, making the decomposition exact by
+  construction rather than numerical recentering.
 
-A stricter arm removes the global spatial seed and allows `z` only as
-spatially-uniform FiLM modulation of a field-driven decoder. This tests whether
-global semantics can guide local visual writing without redrawing the topology
-from a class-like global vector.
+The exact-capacity control replaces `F` with global state tiled over the same
+grid. It retains every operation and parameter. Correct, shuffled, zero,
+global-shuffled, both-shuffled, and four quadrant-occlusion branches remain
+mandatory. The output must pass topology, reread similarity, a prospectively
+numeric blinded-recognition rubric, and the paired-control margin before any
+frozen query.
 
-### Fixed comparison
+This is more direct than widening the planner. It tests the remaining causal
+question: can a local continuous visual field carry a complete readable form
+while a global visual state guides it without becoming a hidden character
+unembedding?
 
-Train capacity-matched arms on one new salted split:
+## Visual Language Stream Contract
 
-1. global-only coarse planner;
-2. field-primary planner;
-3. field-primary plus global channel modulation; and
-4. the V19 additive-residual design as a negative control.
+The long-term input/output standard can cover flat books and 3D writing without
+changing the representational principle:
 
-For each arm report correct field, shuffled field, zero field, local occlusion,
-and shuffled global state. Preserve the V19 complexity strata and blinded
-recognition rubric. Predeclare gates before training, including a substantial
-dense field-causality margin, identity, readability, FLOPs, peak VRAM, and
-throughput.
+\[
+X\in[0,1]^{T\times D\times H\times W\times C}.
+\]
+
+`T` is visual sequence or time, `D` is optional geometric depth, `H,W` are
+space, and `C` is the sensor channel. A page has `T=1,D=1`; an ordered book or
+line stream has `T>1,D=1`; a 3D glyph string has `D>1`; and a 3D character movie
+uses both depth and time. Chinese oracle, bronze, seal, traditional, simplified,
+Kanji, Latin, and other writing are visual observations in the same stream, not
+entries in separate deployed vocabularies.
+
+This unification is a goal, not present evidence. V21 remains 2D because the
+core proof is language learning and readable generation. Depth and motion are
+added only after a small `D=1` model predicts, writes, and rereads successfully.
 
 ### What not to do next
 
-- Do not tune V19 thresholds after its failed audit.
-- Do not increase model width to hide a routing failure.
+- Do not tune V20 thresholds or reinterpret its unselected endpoint as a pass.
+- Do not increase model width to hide a routing or objective failure.
 - Do not couple the writer to the weak language core before isolated actuation
   passes.
-- Do not use OCR/text embeddings in the student to obtain semantic alignment.
-- Do not train a page-scale diffusion model before a 32-cell closed loop remains
-  readable.
+- Do not use OCR/text embeddings in the deployed student to obtain semantic
+  alignment.
+- Do not train page-scale, 3D, or video diffusion before a 32-region 2D loop
+  remains readable.
 
 ## Roadmap Placement
 
-V20 is still P1.5, not instruction following. After a field-causal writer passes
-development, blinded recognition, and a new frozen evaluation, the order is:
+V20 remains a P1.5 causal result, not instruction following. The ordered route
+is now:
 
-1. predict local and global future visual state from causal image history;
-2. run the accepted writer on predicted rather than supplied state;
-3. reread the generated pixels for 32 regions without losing readability;
-4. use uncertainty-triggered compute only if it improves the matched curve; and
+1. preregister and train the V21 field-complete writer and exact-capacity
+   control;
+2. pass automatic selection, numeric blinded recognition, and one new frozen
+   writer evaluation;
+3. predict local and global future visual fields from causal image history and
+   beat last-only, unigram, and symbolic bigram controls;
+4. run the accepted writer on predicted fields and reread 32 generated regions;
 5. begin the bounded Visual Word-Origin Book curriculum from open or
-   rights-cleared image trajectories.
+   rights-cleared 2D trajectories; and
+6. extend the same Visual Language Stream to page scale, geometric depth, and
+   character movies only after the 2D loop is accepted.
 
-This keeps the broader model innovative but the next experiment small enough to
-fail clearly on one RTX 4090.
+This keeps the broad interface genuinely new while making the next experiment
+small enough to fail clearly on one RTX 4090.
