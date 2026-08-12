@@ -74,6 +74,16 @@ algebraic invariant pass. The exact-parameter tiled-global control collapses to
 repeated patches. V21 still rejects the writer because overall, simple, and
 medium F1 (0.604, 0.565, and 0.594) miss fixed gates. No candidate selects, so
 the paired, human, and frozen stages remain forbidden.
+V22 then implements a six-frame visual prompt and one-frame image answer with
+two exactly matched 3.410M-parameter arms. A query-aware candidate sees the
+final visual query; a query-blind control receives a continuous null state. The
+candidate reaches only 0.78\% counterfactual switch accuracy versus 0\% control,
+15.92\% identity top-1 versus 15.33\%, and pixel F1 0.511 versus 0.513. A
+development-only audit finds that its selector argmax is the operation frame in
+all 1,024 original and counterfactual prompts, while mean query attention is
+$1.37{\times}10^{-13}$. V22 therefore rejects single-frame selection as a
+relational binding mechanism. No candidate selects and frozen images remain
+uninstantiated.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -187,6 +197,10 @@ implemented controls that makes that slogan falsifiable:
   rejecting its own writer-quality claim, and V21, which makes the field carry
   the complete spatial plan while identifying disjoint local raster patches as
   the next quality bottleneck.
+  \item V22, a strict six-frame image-prompt to image-answer experiment with a
+  parameter-matched query-blind control. Its negative result localizes failure
+  to relational binding: the selector collapses onto the operation image while
+  writer quality and identity rise almost identically in both arms.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -760,20 +774,106 @@ a fixed partition-of-unity blend, or an equivalently bounded multiscale local
 operator, while retaining an exact-parameter tiled-global control and a
 measured influence radius.
 
-The next language test is separate. Supplied semantic intent must be removed;
-an image-only recurrent model must read prompt frames and predict the local and
-global state of answer frames. For observed frame $x_t$,
+\subsection{Visual Binding Stream V22: image prompt, rejected relation}
+
+V22 removes supplied semantic intent and asks the smallest prompt-following
+question that also requires arbitrary visible form. Every episode is a
+six-frame image stream,
 \[
-(z_t,F_t)=R(x_t),\quad h_t=\mathcal M(h_{t-1},z_t,F_t),\quad
-(\hat z_{t+1},\hat F_{t+1})=P(h_t),
+X=(l_1,g_1,l_2,g_2,o,q),
+\]
+where two visible labels bind two distinct, previously unseen glyph images. The
+operation image is either the visible form for same or other, and the final
+query is one of the two label images. A paired counterfactual changes only $q$;
+the correct canonical answer image must switch. Source glyphs use independent
+noncanonical faces, so exact pixel copying cannot satisfy the target.
+
+The frozen V16 retina maps each frame to global and local continuous states. A
+four-block visual Transformer forms a query from its final hidden state and a
+softmax over all six frames. Weighted global/local values feed an overlapping
+$12\times12$, stride-8 local writer with a fixed positive
+partition-of-unity blend. The query-blind control replaces only the final
+query retinal state with a learned continuous null state. Both arms contain
+exactly 3,410,128 trainable parameters with identical shapes. The student path
+contains no string, token or Unicode ID, OCR, character/operation label, answer
+index, glyph lookup, finite codebook, or external language model.
+
+The fixed identity bank contains 815 training, 104 development, and 105 frozen
+Chinese forms under a salted split; two operation/label combinations are held
+out compositionally. Each arm trains for exactly 1,600 updates. Table
+\ref{tab:v22} reports the final development endpoints. Candidate and control
+writer/identity trajectories nearly overlap, while prompt switching remains
+absent.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V22 candidate development gate & Measured & Required & Result \\
+\midrule
+Binary choice & 0.4824 & $>0.85$ & fail \\
+Counterfactual switch & 0.0078 & $>0.80$ & fail \\
+Held-out-combination switch & 0.0113 & $>0.75$ & fail \\
+Identity top-1 & 0.1592 & $>0.45$ & fail \\
+Identity gain over query shuffle & 0.0225 & $>0.20$ & fail \\
+Target cosine & 0.4601 & $>0.78$ & fail \\
+Pixel F1 & 0.5107 & $>0.58$ & fail \\
+Oracle-writer F1 & 0.6020 & $>0.64$ & fail \\
+Paired output L1 & 0.0089 & $>0.08$ & fail \\
+Frozen images instantiated & 0 & 0 & pass \\
+\bottomrule
+\end{tabular}
+\caption{V22 query-aware endpoint. The anti-copy margins and structural
+receipts pass, but every prompt-dependence and output-quality gate fails. The
+query-blind control ends at 0 switch accuracy, 0.1533 identity top-1, 0.5125
+pixel F1, and exactly zero paired-output difference.}
+\label{tab:v22}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_binding_stream_v22_result.png}
+  \caption{Measured V22 result. Actual endpoint samples show that targets
+  switch when only the final visual query changes, while candidate predictions
+  barely move and match the query-blind control. The candidate selector assigns
+  every one of 1,024 development argmaxes to the operation frame. Writer
+  metrics improve without relational prompt binding.}
+  \label{fig:v22result}
+\end{figure}
+
+The mechanism audit makes the rejection more specific than failure to
+converge. Candidate mean attention is 1.0 on the operation frame,
+$2.49{\times}10^{-12}$ and $5.53{\times}10^{-12}$ on the two glyph frames,
+and $1.37{\times}10^{-13}$ on the query. The entropy penalty rewards this
+confident shortcut. The task, however, is a relation among operation, query,
+labels, and glyphs; no single frame contains the answer. Candidate training
+takes 258.70 seconds at 0.315~GiB peak allocated CUDA memory, so model/GPU
+capacity is not the identified bottleneck.
+
+No candidate checkpoint selects. The paired evaluator refuses before fresh
+data construction, blinded review is unauthorized, and no frozen image is
+instantiated. V22 establishes a real image-prompt to image-answer interface and
+weak unseen-form writing only; it does not establish prompt understanding.
+
+The next test removes unrestricted single-frame selection. A shared visual
+comparator must match query and label images, while an operation-image reader
+provides a continuous gate,
+\[
+a_i=C_\theta(R(q),R(l_i)),\quad
+m_i=\operatorname{softmax}_{i\in\{1,2\}}(a_i),\quad
+s=\sigma(U_\theta(R(o))),
 \]
 \[
-\hat x_{t+1}=W(\hat z_{t+1},\hat F_{t+1},s_t),\qquad
-h_{t+1}=\mathcal M(h_t,R(\hat x_{t+1})).
+w_i=s m_i+(1-s)(1-m_i),\quad
+(\hat z,\hat F)=\sum_{i=1}^{2}w_i V(R(g_i)).
 \]
-Held-out prompt counterfactuals, prompt shuffling, last-frame-only, visual
-unigram/bigram, and autonomous rereading are required. Unselected V21 weights
-cannot satisfy or bypass that proof.
+This relation circuit composes multiple visible roles before writing. Its
+operation semantics and equality function are learned from answer images; no
+symbolic target index enters the student. Exact query-blind, operation-blind,
+pair-swap, query-counterfactual, and operation-counterfactual interventions are
+required before any longer answer stream. A qualified writer should be frozen
+first so binder/writer co-adaptation cannot hide another average-glyph route.
 
 \section{Data}
 
@@ -1196,15 +1296,23 @@ snapshot, correct dense F1 exceeds shuffled-field by 0.1739 and zero-field by
 and every exact-basis invariant passes. The tiled-global control collapses to
 repeated patches. Overall, simple, and medium F1 remain below their fixed gates,
 so no candidate selects and no paired, human, or frozen stage is authorized.
+V22 then tests the first prompt-to-answer image stream. Its candidate changes
+answer identity correctly for only 0.78\% of query-counterfactual pairs, versus
+0\% for the query-blind control, while identity and writer quality are nearly
+equal. Every candidate selector argmax lands on the operation image. Thus the
+implemented stream boundary works, but an entropy-sharpened single-frame
+selector cannot perform the required multi-frame relation.
 The combined result establishes that a small image-only student can learn
 causal language signal and that a small continuous field can control
 topographic generated ink; it does not establish useful autonomous language.
-The next proof should preserve complete local causality while adding bounded
-raster continuity, then isolate the multiscale memory contribution in a model
-that predicts answer fields from prompt images rather than receiving intended
-state. The final closed multi-frame loop must remain readable and
-prompt-dependent. This order is also consistent with measured error
-accumulation in iterative diffusion chains~\cite{inputperturb}.
+The next proof must qualify a writer independently and replace selection with a
+compositional visual circuit that compares query and label images, reads the
+operation image, and routes the corresponding glyph state under exact query-
+and operation-blind controls. Only after this bounded relation passes should a
+causal memory predict longer answer fields and reread its own outputs. The final
+closed multi-frame loop must remain readable and prompt-dependent. This order
+is also consistent with measured error accumulation in iterative diffusion
+chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -1249,12 +1357,21 @@ stronger field-complete routing result. The equal-parameter global-only source
 cannot draw a spatial plan. Yet 0.6038 overall, 0.5648 simple, and 0.5945
 medium F1 reject V21's disjoint-patch writer. No candidate selects, and no
 paired, human, or frozen claim is accepted.
+V22 then closes the interface for a bounded six-frame visual prompt and
+one-frame image answer with two exactly matched 3.410M-parameter arms. It
+rejects the stronger understanding claim: 0.0078 counterfactual switch accuracy,
+0.0089 paired-output L1, and 0.1592 identity top-1 are not meaningfully better
+than the query-blind control's 0, 0, and 0.1533. The operation frame receives
+all 1,024 candidate selector argmaxes. This demonstrates why prompt-dependent
+image generation requires relation composition, not simply a visual
+Transformer, sharp attention, and a pixel writer.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are a continuity-preserving local writer under the same matched causal
-controls and a paired visual-memory model that reads prompt images and predicts
-local/global answer fields. Only selected components may enter a closed
-write--reread loop. The named product gate is a Visual Word-Origin Book that
+tests are an independently qualified continuity-preserving writer and a
+multi-frame visual relation circuit under query-blind, operation-blind,
+pair-swap, and counterfactual controls. Only selected components may enter a
+closed write--reread loop and longer visual memory. The named product gate is a
+Visual Word-Origin Book that
 reads a rendered prompt alone or composed with a source page, then emits one
 answer image or an ordered answer-image stream plus an optional declared text
 sidecar. Prompt counterfactuals must change that answer correctly; input

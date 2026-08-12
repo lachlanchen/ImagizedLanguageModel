@@ -16,6 +16,7 @@ from ilm.visual_lm.visual_binding_stream import (
     visual_binding_config_payload,
 )
 from scripts.eval_visual_binding_stream_development import validate_pair_metadata
+from scripts.audit_visual_binding_attention_v22 import summarize_attention
 from scripts.train_visual_binding_stream import (
     ARCHITECTURE,
     EXPECTED_PARAMETERS,
@@ -202,3 +203,20 @@ def test_pair_metadata_accepts_equal_arms_and_refuses_smoke() -> None:
     control["smoke_only"] = True
     with pytest.raises(ValueError, match="smoke-only"):
         validate_pair_metadata(candidate, control)
+
+
+def test_endpoint_attention_audit_reports_visual_roles() -> None:
+    attention = torch.tensor(
+        [
+            [0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+            [0.1, 0.2, 0.1, 0.2, 0.3, 0.1],
+        ]
+    )
+    report = summarize_attention(attention)
+    assert report["examples"] == 2
+    assert report["argmax_counts"]["operation"] == 2
+    assert report["mean_attention"]["operation"] == pytest.approx(0.65)
+    assert report["mean_attention"]["query_label"] == pytest.approx(0.05)
+
+    with pytest.raises(ValueError, match="shape"):
+        summarize_attention(torch.ones(2, 5) / 5)

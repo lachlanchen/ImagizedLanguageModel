@@ -142,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains seven complete experimental systems:
+The repository now contains eight complete experimental systems:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -166,6 +166,9 @@ The repository now contains seven complete experimental systems:
   experiment. It removes every global spatial drawing route and makes each
   local retinal cell emit both coarse occupancy and exact zero-DC detail for
   its corresponding output patch.
+- Visual Binding Stream V22 is a paired 3.410M-parameter-per-arm image-prompt
+  experiment. It reads six rendered frames and emits one answer image while a
+  query-blind arm controls whether the final visual query is used.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -221,6 +224,18 @@ its selected structural step). Candidate overall (`0.60378`), simple
 selects. The descriptive arm comparison is not a formal paired audit; human and
 frozen evaluation remain forbidden.
 
+V22 is the first bounded prompt-to-answer image stream and rejects its binding
+mechanism. At the fixed step-`1,600` development endpoint, query-aware
+counterfactual switch accuracy is `0.00781`, versus `0.0` for the query-blind
+control. Identity top-1 is `0.15918` versus `0.15332`; pixel F1 is `0.51067`
+versus `0.51252`; and changing only the visible query changes candidate pixels
+by `0.00890` mean L1. A reproducible endpoint audit finds that the candidate's
+selector argmax is the operation frame for all `1,024/1,024` original and
+counterfactual prompts. Mean query attention is `1.37e-13`. The writer learns a
+weak operation-conditioned glyph prototype, not the visual relation. No
+candidate selects, the paired evaluator refuses, and human/frozen stages remain
+forbidden.
+
 It proved:
 
 - a strict image-only student boundary;
@@ -244,6 +259,8 @@ It proved:
 - a stricter capacity-matched intervention showing that the same local field
   can carry coarse occupancy and fine detail while every algebraic and local
   intervention invariant holds;
+- a complete six-frame continuous image-prompt to answer-image implementation
+  with a matched query-blind intervention and sealed unseen identities;
 - direct continuous ink generation by conditional rectified flow;
 - context-sensitive generated pixels;
 - autonomous rereading and feedback without OCR or symbolic decoding;
@@ -256,7 +273,8 @@ It did not prove:
 - prediction better than a symbolic bigram baseline;
 - broad complex-form visual-state output under a frozen protocol;
 - a selected field-complete writer that is both causal and broadly readable;
-- prompt-conditioned answer-image generation or a readable image stream;
+- prompt-conditioned answer-image generation or a readable image stream; V22
+  implements this interface but fails the causal prompt-binding gates;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
@@ -265,15 +283,18 @@ It did not prove:
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
-V20/V21 writers, and rejected autonomous language-system proof**.
+V20/V21 writers, rejected V22 visual binder, and rejected autonomous
+language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
-solved by image generation. The next milestone must preserve V21's complete
-local route while improving raster continuity, and then learn a genuine
-prompt-image to answer-image transition rather than reconstructing supplied
-intent. The causal language core must still be strengthened independently
-against the bigram baseline.
+solved by image generation. V22 shows that merely adding a Transformer and a
+single-frame soft selector is not a prompt-to-answer solution: a relational
+answer must compare and compose several visible roles. The next milestone is a
+multi-frame visual relation circuit whose causal graph forces query-to-label
+matching and operation-conditioned glyph routing before writing. The causal
+language core must still be strengthened independently against the bigram
+baseline.
 
 ## Implemented paradigm: predictive visual fields
 
@@ -689,49 +710,73 @@ a one-step denoising estimate. V6's trajectory and recovery terms remain as
 stability regularizers. V7 validates both corrections but rejects the monolithic
 language-plus-rendering writer.
 
-## Next proofs: continuous local writing, then prompt-conditioned visual stream
+## Next proof: V23 compositional visual relation circuit
 
-V21 implemented the field-complete writer prospectively specified after V20:
+V22 implemented the first six-frame image-prompt to answer-image path, but its
+single soft selector is the wrong computational primitive. The answer is not
+contained in one prompt frame. It depends on a visual equality relation between
+the query and two labels, two visible label/glyph bindings, and a visual
+same/other operation. The entropy term made the selector confidently choose the
+stable operation marker, while the writer learned an operation-conditioned
+average glyph. Increasing width, steps, page size, or diffusion capacity would
+leave that causal defect intact.
+
+V23 therefore uses **relation before generation**. For the fixed bounded prompt
+grammar
 
 \[
-(\gamma,\beta)=M(z,s),\qquad
-(c_{ij},a_{ij})=A_F(\gamma\odot F_{ij}+\beta),\qquad
-\ell_{ij}=c_{ij}\mathbf 1+B_0a_{ij}.
+(l_1,g_1,l_2,g_2,o,q),
 \]
 
-It validates the causal graph. The field supplies both occupancy and detail,
-all exact-basis invariants pass, local occlusion remains exactly local, and the
-tiled-global control cannot draw spatial structure. It rejects the specific
-rasterizer: disjoint pointwise `8x8` patches leave seams, blur thin strokes,
-and miss the simple, medium, and overall F1 gates. No V21 candidate selected,
-so its weights are diagnostic and may not be promoted into a claimed language
-system.
+the frozen image retina produces continuous global and local states. A shared
+visual comparator scores query-to-label equality,
 
-The next proof has three ordered stages:
+\[
+a_i=C_\theta(R(q),R(l_i)),\qquad
+m_i=\operatorname{softmax}_{i\in\{1,2\}}(a_i),
+\]
 
-1. **V22A continuity-preserving field writer.** Decode each topographic field
-   cell into an overlapping local patch and combine patches with a fixed
-   partition-of-unity window, or use an equivalently bounded multiscale local
-   operator. Neighboring cells may cooperate only inside a preregistered local
-   radius. Global state and style remain spatially uniform. Compare with an
-   exact-parameter tiled-global source and measure a bounded influence map,
-   shuffled/zero-field gaps, quality by complexity stratum, recognition, and a
-   sealed split. This stage repairs the measured raster discontinuity without
-   reopening a hidden global character unembedding.
-2. **V22B prompt-conditioned future-field model.** Remove supplied semantic
-   intent. Read only rendered or native prompt frames, maintain continuous
-   visual memory, and predict the global/local state of answer frames. Train on
-   openly licensed Chinese line continuation and rendered instruction--answer
-   trajectories, with strings deleted before the student batch. Require
-   held-out prompt counterfactuals, compositional splits, prompt-shuffle and
-   last-frame controls, and improvement over visual unigram/bigram baselines.
-3. **Closed answer-image stream.** Feed predicted states into a selected local
-   writer, generate answer pixels, reread those pixels, and continue
-   autoregressively. Require readable prompt-dependent output over a fixed
-   multi-frame horizon before page scale, factual etymology composition, 3D
-   depth, or movie generation.
+and an image-only operation reader produces a continuous same/other gate,
 
-For prompt frames `x_1,...,x_T`, the smallest complete recurrence is
+\[
+s=\sigma(U_\theta(R(o))).
+\]
+
+The relation circuit composes them rather than attending over all six frames:
+
+\[
+w_i=s\,m_i+(1-s)(1-m_i),\qquad
+\hat z=\sum_{i=1}^{2}w_i V_z(R_z(g_i)),\qquad
+\hat F=\sum_{i=1}^{2}w_i V_F(R_F(g_i)).
+\]
+
+With two normalized match weights, `s=1` routes the visually matching glyph and
+`s=0` routes the other glyph. The operation semantics and visual equality
+function are learned from answer-image loss; no operation ID, label ID,
+character ID, target index, string, token, Unicode value, OCR transcript, or
+glyph lookup is provided. The fixed six-frame order is part of this bounded
+visual grammar and must not be generalized into a claim about free-form
+language syntax.
+
+The proof has three ordered parts:
+
+1. **Qualify and freeze the visual canonicalizer.** Train an image-only
+   source-form-to-canonical-form writer on training identities, with development
+   identities unseen. Select it under fixed F1, visual-identity, topology, and
+   shuffled-source gates before training the binder. Freezing it prevents a
+   binder/writer pair from jointly hiding an average-glyph shortcut.
+2. **Train the relation circuit with exact interventions.** The candidate sees
+   all six images. A parameter-matched query-blind control replaces only `q`
+   with a continuous null image state; an operation-blind control replaces only
+   `o`. Pair-order swaps must preserve the answer, query counterfactuals must
+   switch it, and operation counterfactuals must invert it. Report match weights,
+   operation gates, routed-state identity, final pixels, and every causal gain.
+3. **Close the answer-image stream.** Once one-frame binding and writing both
+   select, emit `Y_answer[:,0]`, reread it through the retina, and predict a
+   second answer frame from visual state only. Extend to line/page streams only
+   after prompt dependence survives that autonomous rereading step.
+
+The broader recurrence remains
 
 \[
 (z_t,F_t)=R(x_t),\qquad
@@ -740,23 +785,23 @@ h_t=\mathcal M(h_{t-1},z_t,F_t),
 
 \[
 (\hat z_{t+1},\hat F_{t+1})=P(h_t),\qquad
-\hat x_{t+1}=W(\hat z_{t+1},\hat F_{t+1},s_t),\qquad
+\hat x_{t+1}=W(\hat z_{t+1},\hat F_{t+1}),\qquad
 h_{t+1}=\mathcal M(h_t,R(\hat x_{t+1})).
 \]
 
-The recurrence does not emit a token or Unicode distribution. During teacher
-forcing, future answer pixels supervise continuous state and writing losses;
-during evaluation, the model consumes only its generated image frames. The
-typed prompt renderer and optional output OCR are declared boundary adapters,
-not hidden model inputs.
+It never emits a token or Unicode distribution. During teacher forcing, future
+answer pixels supervise continuous state and writing losses; during evaluation,
+the model consumes its generated image frames. Typed prompts are rendered only
+at the boundary, and optional OCR remains a post-hoc accessibility adapter.
 
-Two bottlenecks remain independent. A local writer must pass causal
-readability, and the prompt-conditioned state model must beat visual and
-symbolic context controls. Neither a larger decoder nor page-scale diffusion
-can substitute for those proofs. The first complete ILM milestone is a small
-Chinese VLS that reads a previously unseen visual prompt, predicts an answer
+Three bottlenecks remain independent: relational prompt binding, readable
+visual actuation, and predictive language memory stronger than visual and
+symbolic context baselines. A larger decoder cannot substitute for any of
+these causal proofs. The first complete ILM milestone remains a small Chinese
+VLS that reads a previously unseen visual prompt, predicts the requested answer
 state, writes one or more answer images, rereads them, and changes the answer
-correctly under held-out prompt changes without a deployed symbolic path.
+correctly under held-out visual counterfactuals without a deployed symbolic
+path.
 
 ## Acceptance gates for the next checkpoint
 
@@ -772,12 +817,16 @@ All gates are evaluated on a frozen manifest and glyph bank:
    its sampled plan and remains readable under a prespecified blinded rubric.
    It must also show a preregistered advantage for the correct local field over
    shuffled, zero, and occluded fields. V21 passes every local-field causal and
-   structural gate but fails simple, medium, and overall writer selection; no
-   frozen promotion or post-hoc human gate is permitted.
+   structural gate but fails simple, medium, and overall writer selection. The
+   V22 overlapping writer reaches only `0.60196` oracle F1 against `>0.64`.
+   Neither may be frozen-promoted through a post-hoc human gate.
 5. The prompt-conditioned model must change its generated answer under held-out
-   semantic prompt changes, beat prompt-shuffled and last-frame-only controls,
-   and fail appropriately on unanswerable prompts. Input reconstruction or
-   glyph retrieval cannot satisfy this gate.
+   semantic prompt changes and beat exact query-blind and operation-blind
+   controls. V22 fails with `0.00781` switch accuracy and operation-frame
+   selector collapse. V23 must pass preregistered query and operation
+   counterfactuals, pair-swap invariance, unseen-identity output, and routed-state
+   diagnostics before any longer instruction curriculum. Input reconstruction,
+   glyph retrieval, or selector movement alone cannot satisfy this gate.
 6. The closed model must retain readability and prompt dependence over a fixed
    multi-frame autonomous rollout.
 7. A visual identity evaluator may score output, but no evaluator signal may
@@ -851,21 +900,26 @@ overall quality, reread similarity, exact decomposition, and the paired-control
 margin. V21 makes both occupancy and detail field-causal, with a `+0.17390`
 dense advantage over shuffled field, `+0.34654` over zero field, and `1.0`
 locality; all algebraic invariants pass. It still misses simple, medium, and
-overall F1. P1.5 remains incomplete until a continuity-preserving local writer
-passes automatic selection, blinded readability, and a new frozen evaluation
-without glyph lookup.
+overall F1. V22 adds overlapping local patches, but its independently measured
+oracle-writer F1 reaches only `0.60196` against the fixed `>0.64` gate. P1.5
+remains incomplete until a continuity-preserving local writer passes automatic
+selection, blinded readability, and a new frozen evaluation without glyph
+lookup.
 
 ### P2: bounded visual instruction following
 
-Rasterize openly licensed Chinese and English instruction pairs, train image
-question to image answer trajectories, and evaluate the 200-question Visual
-Word-Origin Book benchmark. Historical panels are provenance-gated source
-images. P2 passes only if the independent model produces readable answer pages,
-beats retrieval/template controls on factual questions, preserves unencoded
-regions, changes answers under held-out prompt counterfactuals, and passes a
-runtime receipt with no token/OCR/teacher/database path. The model may output a
-single page or an ordered answer-image stream; OCR remains optional post-hoc
-accessibility output.
+Started but not achieved. V22 implements a bounded six-frame Chinese visual
+instruction and one-frame image answer, then rejects its single-selector
+binding mechanism. V23 must first pass compositional same/other binding on
+unseen forms. After that, rasterize openly licensed Chinese and English
+instruction pairs, train image-question to image-answer trajectories, and
+evaluate the 200-question Visual Word-Origin Book benchmark. Historical panels
+are provenance-gated source images. P2 passes only if the independent model
+produces readable answer pages, beats retrieval/template controls on factual
+questions, preserves unencoded regions, changes answers under held-out prompt
+counterfactuals, and passes a runtime receipt with no token/OCR/teacher/database
+path. The model may output a single page or an ordered answer-image stream; OCR
+remains optional post-hoc accessibility output.
 
 ### P3: bounded Qwen-8B comparison
 
@@ -899,8 +953,12 @@ the candidate trains for 325.90 seconds at 0.323 GiB peak and the control for
 not task-level efficiency. V21 uses exactly 0.582M parameters per arm; candidate
 and control train for 327.04 and 333.41 seconds at 0.325 and 0.400 GiB peak.
 V21 establishes a stronger cheap routing result, not task-level efficiency.
-V16 remains below a symbolic bigram, V18 is not a frozen broad-readability
-result, and V19--V21 are rejected writers.
+V22 uses 3.410M trainable parameters per arm; candidate and control train for
+258.70 and 255.11 seconds at 0.315 and 0.316 GiB peak. This shows that the
+failed binding hypothesis was cheap to falsify and that GPU capacity was not
+the bottleneck. It does not establish useful task efficiency. V16 remains below
+a symbolic bigram, V18 is not a frozen broad-readability result, V19--V21 are
+rejected writers, and V22 is a rejected prompt binder.
 Future comparisons must report quality at equal tasks alongside VRAM, training
 energy, latency, throughput, storage, and rendering cost. Parameter count alone
 is not efficiency.

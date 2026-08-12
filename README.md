@@ -59,7 +59,49 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Causal Test: V21 Field-Complete Route Works, Writer Rejected
+## Latest Prompt Test: V22 Binding Mechanism Rejected
+
+![Measured V22 visual binding stream: the query-aware selector collapses onto the operation frame, candidate and query-blind outputs remain nearly identical, and the preregistered prompt-binding gates reject the model](publication/ilm-image-native/figures/visual_binding_stream_v22_result.png)
+
+V22 is the first bounded implementation of the requested visual prompt stream:
+six `32x32` writing images enter the student and one answer image comes out.
+Each prompt visibly binds two previously unseen Chinese glyph images to labels,
+shows `同` or `异`, and ends with a visual query label. A paired
+counterfactual changes only that final image, so a model that understands the
+prompt must switch its generated answer. The query-aware candidate and
+query-blind control each have exactly `3,410,128` trainable parameters and use
+no strings, token/Unicode IDs, OCR, glyph lookup, answer codebook, or external
+language model.
+
+The model does **not** pass. At step `1,600`, candidate switch accuracy is only
+`0.0078`, versus `0.0` for the query-blind control. Identity top-1 is `0.1592`
+versus `0.1533`, and pixel F1 is `0.5107` versus `0.5125`. Changing the visible
+query changes candidate pixels by only `0.0089` mean L1, far below the fixed
+`0.08` requirement.
+
+| V22 candidate development gate | Measured | Required | Result |
+|---|---:|---:|:---:|
+| Binary choice | `0.4824` | `>0.85` | fail |
+| Counterfactual switch | `0.0078` | `>0.80` | fail |
+| Held-out-combination switch | `0.0113` | `>0.75` | fail |
+| Unseen-identity top-1 | `0.1592` | `>0.45` | fail |
+| Identity gain over query shuffle | `+0.0225` | `>0.20` | fail |
+| Pixel F1 | `0.5107` | `>0.58` | fail |
+| Oracle-writer F1 | `0.6020` | `>0.64` | fail |
+| Paired-output L1 | `0.0089` | `>0.08` | fail |
+| Frozen images instantiated | `0` | `0` | pass |
+
+The endpoint audit explains why: the candidate gives the operation frame the
+maximum selector weight in all **`1,024/1,024`** original and counterfactual
+prompts, with mean operation attention `1.0` and mean query attention
+`1.37e-13`. A relational answer needs the operation, query-to-label match, and
+label-to-glyph binding jointly; collapsing six frames into one selected frame
+cannot perform that composition. V23 therefore replaces single-frame selection
+with an explicit, differentiable multi-frame visual relation circuit. No V22
+candidate selected, so paired, human, and frozen evaluation remain forbidden.
+See the [complete V22 receipt](docs/visual-binding-stream-v22-result.md).
+
+## Prior Causal Test: V21 Field-Complete Route Works, Writer Rejected
 
 ![Measured V21 field-complete writer: the local continuous field carries the complete spatial plan, but simple, medium, and overall quality gates reject the writer](publication/ilm-image-native/figures/field_complete_writer_v21_result.png)
 
