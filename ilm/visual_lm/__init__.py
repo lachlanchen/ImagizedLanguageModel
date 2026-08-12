@@ -83,6 +83,17 @@ from .visual_cell_lattice import (
     visual_cell_lattice_boundary_receipt,
     visual_cell_lattice_config_payload,
 )
+from .visual_cell_eval_data import (
+    VisualCellAuditDataset,
+    VisualCellAuditWindow,
+    VisualCharacterStatistics,
+    build_visual_cell_audit_windows,
+    build_visual_character_statistics,
+    is_han_character,
+    render_visual_character_bank,
+    visual_cell_audit_collate,
+    visual_character_statistics_receipt,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -117,6 +128,9 @@ __all__ = [
     "VisualAssociativeReader",
     "VisualCellRenderConfig",
     "VisualCellLatticeConfig",
+    "VisualCellAuditDataset",
+    "VisualCellAuditWindow",
+    "VisualCharacterStatistics",
     "VisualCellStreamConfig",
     "VisualCellStreamDataset",
     "VisualCellStreamModel",
@@ -155,6 +169,12 @@ __all__ = [
     "unfold_page_to_cells",
     "visual_cell_lattice_boundary_receipt",
     "visual_cell_lattice_config_payload",
+    "build_visual_cell_audit_windows",
+    "build_visual_character_statistics",
+    "is_han_character",
+    "render_visual_character_bank",
+    "visual_cell_audit_collate",
+    "visual_character_statistics_receipt",
     "visual_cell_flow_loss",
     "visual_cell_language_loss",
     "visual_cell_model_boundary_receipt",
