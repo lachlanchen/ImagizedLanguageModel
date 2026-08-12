@@ -19,6 +19,10 @@ from ilm.visual_lm.visual_packet_stream import (
     VisualPacketStreamConfig,
 )
 from ilm.visual_lm.visual_relation_circuit import VisualCanonicalizer
+from scripts.eval_visual_packet_stream_development_v24 import (
+    EXPECTED_ROUTES,
+    paired_gate_report,
+)
 from scripts.train_visual_packet_stream_v24 import (
     EXPECTED_PARAMETERS,
     FIXED_EVIDENCE_ARGUMENTS,
@@ -112,6 +116,44 @@ def passing_candidate_metrics() -> dict[str, float]:
     }
 
 
+def passing_paired_metrics() -> dict[str, dict[str, float]]:
+    candidate = passing_candidate_metrics()
+    header_blind = dict(
+        passing_candidate_metrics(),
+        header_output_pixel_l1=0.0,
+        query_header_localization_accuracy=0.20,
+        operation_header_localization_accuracy=0.20,
+        pair_header_localization_accuracy=0.20,
+        frame1_identity_top1=0.25,
+        frame2_label_top1=0.40,
+    )
+    query_blind = dict(
+        passing_candidate_metrics(),
+        query_output_pixel_l1=0.0,
+        query_switch_accuracy=0.0,
+        frame1_identity_top1=0.50,
+    )
+    operation_blind = dict(
+        passing_candidate_metrics(),
+        operation_output_pixel_l1=0.0,
+        operation_switch_accuracy=0.0,
+        frame1_identity_top1=0.50,
+    )
+    history_blind = dict(
+        passing_candidate_metrics(),
+        history_output_pixel_l1=0.0,
+        history_switch_accuracy=0.0,
+        frame2_label_top1=0.50,
+    )
+    return {
+        PACKET_AWARE_ROUTE: candidate,
+        HEADER_BLIND_ROUTE: header_blind,
+        QUERY_BLIND_ROUTE: query_blind,
+        OPERATION_BLIND_ROUTE: operation_blind,
+        HISTORY_BLIND_ROUTE: history_blind,
+    }
+
+
 def test_v24_evidence_arguments_are_fixed_and_smoke_is_bounded() -> None:
     _require_fixed_arguments(fixed_args())
     changed = fixed_args()
@@ -148,6 +190,52 @@ def test_v24_candidate_and_control_gates_are_strict() -> None:
         assert not all(control_selection_gate_report(control, route_mode).values())
 
 
+def test_v24_paired_gate_requires_all_visual_causes_and_equal_arms() -> None:
+    metrics = passing_paired_metrics()
+    parameters = {route_mode: EXPECTED_PARAMETERS for route_mode in EXPECTED_ROUTES}
+    report = paired_gate_report(
+        metrics,
+        arm_parameters=parameters,
+        parameter_shapes_equal=True,
+        metadata_validated=True,
+    )
+    assert all(report.values())
+
+    metrics[HISTORY_BLIND_ROUTE]["history_switch_accuracy"] = 0.55
+    report = paired_gate_report(
+        metrics,
+        arm_parameters=parameters,
+        parameter_shapes_equal=True,
+        metadata_validated=True,
+    )
+    assert report["candidate_history_switch_gain"] is False
+
+
+def test_v24_paired_gate_margins_are_strict() -> None:
+    metrics = passing_paired_metrics()
+    parameters = {route_mode: EXPECTED_PARAMETERS for route_mode in EXPECTED_ROUTES}
+    metrics[HEADER_BLIND_ROUTE]["query_header_localization_accuracy"] = 0.60
+    metrics[HEADER_BLIND_ROUTE]["operation_header_localization_accuracy"] = 0.60
+    metrics[HEADER_BLIND_ROUTE]["pair_header_localization_accuracy"] = 0.60
+    report = paired_gate_report(
+        metrics,
+        arm_parameters=parameters,
+        parameter_shapes_equal=True,
+        metadata_validated=True,
+    )
+    assert report["candidate_role_localization_gain"] is False
+
+    metrics = passing_paired_metrics()
+    parameters[HISTORY_BLIND_ROUTE] = EXPECTED_PARAMETERS + 1
+    report = paired_gate_report(
+        metrics,
+        arm_parameters=parameters,
+        parameter_shapes_equal=True,
+        metadata_validated=True,
+    )
+    assert report["parameter_count_equal"] is False
+
+
 def test_v24_selection_rank_prefers_weakest_causal_switch() -> None:
     first = passing_candidate_metrics()
     later = dict(first, step=500.0)
@@ -164,11 +252,14 @@ def test_v24_selection_rank_prefers_weakest_causal_switch() -> None:
 
 def test_v24_packet_state_excludes_frozen_modules_and_round_trips() -> None:
     model = build_model(PACKET_AWARE_ROUTE).eval()
-    assert sum(
-        parameter.numel()
-        for parameter in model.parameters()
-        if parameter.requires_grad
-    ) == EXPECTED_PARAMETERS
+    assert (
+        sum(
+            parameter.numel()
+            for parameter in model.parameters()
+            if parameter.requires_grad
+        )
+        == EXPECTED_PARAMETERS
+    )
     state = packet_state_dict(model)
     assert state
     assert all(
@@ -204,9 +295,7 @@ def test_v24_loss_accepts_only_image_streams_and_backpropagates() -> None:
         "operation_counterfactual_target_stream": torch.rand_like(target),
         "localization_target": localization,
         "query_counterfactual_localization_target": torch.rand_like(localization),
-        "operation_counterfactual_localization_target": torch.rand_like(
-            localization
-        ),
+        "operation_counterfactual_localization_target": torch.rand_like(localization),
     }
     loss, metrics = packet_stream_loss(
         model,
@@ -220,9 +309,7 @@ def test_v24_loss_accepts_only_image_streams_and_backpropagates() -> None:
     assert torch.isfinite(metrics["localization_loss"])
     assert model.role_prototypes.grad is not None
     assert all(parameter.grad is None for parameter in model.retina.parameters())
-    assert all(
-        parameter.grad is None for parameter in model.canonicalizer.parameters()
-    )
+    assert all(parameter.grad is None for parameter in model.canonicalizer.parameters())
     assert all(
         parameter.grad is None for parameter in model.operation_reader.parameters()
     )
