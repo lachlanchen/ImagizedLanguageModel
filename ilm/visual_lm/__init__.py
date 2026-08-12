@@ -72,6 +72,17 @@ from .visual_cell_stream import (
     visual_cell_model_config_from_payload,
     visual_cell_model_config_payload,
 )
+from .visual_cell_lattice import (
+    VisualCellLatticeConfig,
+    fold_cells_to_page,
+    fold_latent_sequence,
+    serpentine_coordinates,
+    serpentine_flat_indices,
+    unfold_latent_lattice,
+    unfold_page_to_cells,
+    visual_cell_lattice_boundary_receipt,
+    visual_cell_lattice_config_payload,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -105,6 +116,7 @@ __all__ = [
     "VisualLanguageSample",
     "VisualAssociativeReader",
     "VisualCellRenderConfig",
+    "VisualCellLatticeConfig",
     "VisualCellStreamConfig",
     "VisualCellStreamDataset",
     "VisualCellStreamModel",
@@ -135,6 +147,14 @@ __all__ = [
     "render_visual_cell_stream",
     "student_visual_cell_batch",
     "visual_cell_collate",
+    "fold_cells_to_page",
+    "fold_latent_sequence",
+    "serpentine_coordinates",
+    "serpentine_flat_indices",
+    "unfold_latent_lattice",
+    "unfold_page_to_cells",
+    "visual_cell_lattice_boundary_receipt",
+    "visual_cell_lattice_config_payload",
     "visual_cell_flow_loss",
     "visual_cell_language_loss",
     "visual_cell_model_boundary_receipt",
