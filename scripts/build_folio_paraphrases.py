@@ -75,6 +75,10 @@ def extract_object(content: str) -> dict[str, Any]:
 def extract_items(payload: dict[str, Any], expected_ids: set[str]) -> list[Any]:
     """Accept common local-model JSON key variants without accepting prose."""
 
+    identifier = payload.get("id")
+    paraphrase = payload.get("paraphrase")
+    if isinstance(identifier, str) and identifier in expected_ids and isinstance(paraphrase, str):
+        return [{"id": identifier, "paraphrase": paraphrase}]
     for key in ("items", "key_items", "paraphrases"):
         value = payload.get(key)
         if isinstance(value, list):
