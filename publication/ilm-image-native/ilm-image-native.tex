@@ -20,26 +20,26 @@
 Most language models represent language through symbolic tokens and treat visible
 writing as an auxiliary modality. We study a stricter object: an independent
 model whose inputs, state supervision, probability model, and primary outputs
-are images of writing. We implement the Retinal Flow Language Model (RFLM), a
-causal model that reads ordered $32\times32$ image fixations through a continuous
-retina, integrates them in a recurrent visual field, scores arbitrary candidate
-images with an energy function, writes the next fixation with conditional
-pixel-space rectified flow, and rereads its own generated ink. The 11.69M
-parameter implementation contains no tokenizer, Unicode IDs, OCR transcript,
-character output table, discrete visual codebook, or external language-model
-call. V6 adds training on image trajectories sampled by the deployed writer.
-V7 adds normalized full-history advantage against independent image anchors and
-differentiable identity learning through sampled pixel-flow endpoints. On a
-frozen 512-character, four-view Chinese benchmark, selected V7 full-context
-top-1 rises from V6's 1.20\% to 2.31\%, exceeding last-only (2.02\%) and unigram
-(1.86\%); generated context cosine gain rises from $+0.0077$ to $+0.0303$.
-Nevertheless, normalized target-log-probability gain remains negative
-($-0.2155$), top-1 remains far below the symbolic bigram (13.58\%), and the
-matched 32-cell output is unreadable. We reject V7 as a language model. The
-failure motivates a Predictive Visual Field: first model a distribution over
-next image-derived retinal states, then use a separate pixel actuator to render
-a sampled state and reread it. This is a falsifiable next hypothesis, not a
-present capability.
+are continuous images of writing. Earlier Retinal Flow Language Models (RFLM)
+read ordered $32\times32$ image fixations, integrate them recurrently, write the
+next fixation by pixel flow, and reread generated ink; their monolithic writer
+remains unreadable. We therefore implement a Predictive Visual Field (PVF) that
+factorizes visual language from visual actuation. A frozen convolutional retina
+maps writing images to the unit sphere, a causal field integrates image history,
+a deterministic continuous proposal predicts a low-variance next visual state,
+and an intrinsic hyperspherical flow models alternatives. The 10.47M-parameter
+student contains no tokenizer, strings after rasterization, Unicode IDs, OCR,
+character labels, output vocabulary, discrete visual codebook, candidate
+classifier, or external language model. On a frozen 512-form, four-view Chinese
+benchmark, selected V15 proposal top-1 is 5.87\%, exceeding last-image-only
+(4.42\%), unigram (1.73\%), and random dynamics (0.17\%); full history adds
+$+0.0707$ normalized target log-probability. The stochastic field reaches
+3.41\%, versus 2.68\% last-only, and sampled context cosine gain is $+0.0805$.
+The model trains on one RTX 4090 with 1.181~GiB peak allocated CUDA memory.
+These results establish causal visual-state learning under a strict image-only
+boundary, but remain below a symbolic bigram (13.14\%). PVF V15 has no pixel
+actuator, so it does not establish readable image generation, general language
+understanding, historical question answering, or efficiency over text models.
 \end{abstract}
 
 \begin{figure}[t]
@@ -199,29 +199,50 @@ pixel-flow endpoint,
 \]
 This trains the sampled image path rather than only a one-step endpoint proxy.
 
-\section{Predictive Visual Field Hypothesis}
+\section{Predictive Visual Field}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/predictive_visual_field_paradigm.png}
-  \caption{The post-V7 Predictive Visual Field hypothesis. A causal field first models a distribution over continuous image-derived retinal states. A separate visual actuator renders a sampled state, and the generated pixels are reread. V8 must validate state flow and isolated actuation separately before closing the autonomous loop.}
+  \caption{Predictive Visual Field factorization. A causal image field predicts a low-variance continuous visual proposal and a stochastic distribution over image-derived retinal states. A later separate actuator renders a selected state and the retina rereads its pixels.}
   \label{fig:pvf}
 \end{figure}
 
 Figure~\ref{fig:pvf} separates linguistic uncertainty from stroke rendering.
-For target state $z_{t+1}=R_{\bar\theta}(x_{t+1})$, Gaussian $\epsilon$, and
-$\tau\in[0,1]$, define
+For target state $z_{t+1}=R(x_{t+1})\in\mathbb S^{d-1}$, a deterministic
+proposal predicts
 \[
-q_\tau=(1-\tau)z_{t+1}+\tau\epsilon,
-\qquad v^*=\epsilon-z_{t+1}.
+\mu_t=\frac{P_\psi([h_t,z_t])}{\lVert P_\psi([h_t,z_t])\rVert_2}.
 \]
-A conditional state field learns
+The proposal is a continuous image-derived state, not a class index. It is
+trained with geodesic alignment, image contrast, and full-history advantage
+against a detached last-image branch.
+
+In parallel, choose random unit source $\epsilon$, let $q_\tau$ follow the
+shortest spherical geodesic from $z_{t+1}$ to $\epsilon$, and let $u_\tau$ be
+its tangent velocity. The conditional field learns
 \[
 \mathcal L_{\mathrm{state\text{-}flow}}=
-\left\|P_\eta(q_\tau,\tau,h_t)-v^*\right\|_2^2.
+\mathbb E\left\|v_\eta(q_\tau,\tau,[h_t,z_t])-u_\tau\right\|_2^2.
 \]
-Sampling backward from noise yields an intended next visual state
-$\hat z_{t+1}$, not a glyph ID. A separate visual actuator writes
+The loss is full tangent-vector energy, not coordinate-mean MSE. Sampling
+integrates backward with the spherical exponential map,
+\[
+q_{k-1}=\operatorname{Exp}_{q_k}
+\left(-\Delta\tau\,v_\eta(q_k,\tau_k,[h_t,z_t])\right),
+\]
+yielding intended next visual states $\hat z_{t+1}$, not glyph IDs. Candidate
+images are used only by the evaluator: it rereads them with the frozen retina
+and computes kernel density against continuous samples. There is no learned
+512-way output layer.
+
+The training-only multiview anchor curriculum contains image tensors. Positives
+are inferred from retinal cosine similarity; labels and target indices do not
+enter the student, and the bank is not deployed. This visual contrast is
+necessary because geodesic endpoint alignment alone can reward a visual mean
+without separating language alternatives.
+
+A later separate visual actuator will write
 \[
 \hat x_{t+1}=W_\omega(\epsilon_x,h_t,\hat z_{t+1},R_\theta(x_t))
 \]
@@ -236,7 +257,15 @@ permitted. This differs from Embedded Language Flows, which demonstrates
 effective continuous flow dynamics but encodes and finally unembeds discrete
 tokens~\cite{elf}. It combines the next-fixation representation objective of
 recurrent JEPA~\cite{rjepa} with the prediction/generation separation explored
-by D-JEPA~\cite{djepa}, while retaining image input and image output.
+by D-JEPA~\cite{djepa}, and uses intrinsic flow matching on a Riemannian
+manifold~\cite{rfm,rcnf}, while retaining an image-derived language state.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/predictive_visual_field_v15_result.png}
+  \caption{Measured PVF V15 state proof. Both deterministic proposal and stochastic hyperspherical field use full image history and beat random, last-only, and unigram controls. The proposal remains below the symbolic bigram, and no pixel actuator is present.}
+  \label{fig:pvfv15}
+\end{figure}
 
 \section{Data}
 
@@ -315,6 +344,34 @@ the strongest combination of independent-anchor context gain ($+0.1798$) and
 sampled pixel F1 (0.3636). The continuation adds approximately 261 seconds of
 training and peaks near 3.0 GiB allocated VRAM on one RTX 4090.
 
+\subsection{PVF state objectives}
+
+V8--V15 reuse the proven retina but remove the pixel writer from the state
+ablation. The causal GRU, proposal, and hyperspherical field are trainable. For
+proposal $\mu$, target image state $z^+$, and image-derived candidate states
+$\{z_j\}$, visual identity uses
+\[
+\mathcal L_{\mathrm{proposal\text{-}NCE}}
+=-\log\frac{\sum_{j\in\mathcal P}\exp\{s\mu^\top z_j\}}
+{\sum_j\exp\{s\mu^\top z_j\}},
+\]
+where positives $\mathcal P$ are inferred by frozen retinal similarity. A
+detached last-image condition supplies the calibrated context objective
+\[
+\mathcal L_{\mathrm{proposal\text{-}ctx}}=
+\max\{0,m-\ell(z^+\mid h_{\mathrm{full}})
++\ell(z^+\mid h_{\mathrm{last}})\}.
+\]
+Equivalent identity and context losses are applied to states numerically
+sampled from the flow. Direct sampled geodesic loss prevents inference-path
+drift, while contrastive loss prevents collapse to the retinal mean.
+
+V15 has 10,470,273 total parameters, 9,137,345 trainable parameters, and zero
+classifier or pixel-actuator parameters. It trains in BF16 with 48-image
+sequences and peaks at 1.181~GiB allocated CUDA memory. The full V14--V15
+trajectory records 1,895.24 seconds on one RTX 4090. Step 2,000 was selected on
+the development image bank before running the frozen evaluator.
+
 \section{Image-First Training and Inference}
 
 \begin{figure}[t]
@@ -374,17 +431,18 @@ Measurements now support a different order:
   \item Reread generated endpoints during training and evaluate on a fixed external visual bank.
   \item Train on autonomous model-induced visual trajectories; V6 completes this step and stabilizes ink but remains unreadable.
   \item Train normalized context advantage on independent images and identity through differentiable sampled endpoints; V7 improves both signals but remains unreadable.
-  \item Train continuous next-retina flow alone and require positive normalized context advantage before coupling a renderer.
-  \item Condition a separate pixel actuator on sampled visual states and validate isolated reread identity before closing the loop.
-  \item Add line/page timescales, provenance-gated historical panels, and instruction images only after readable autonomous continuation.
+  \item Train continuous proposal and next-retina flow alone; V15 passes random, last-only, unigram, context-use, and target-signal state gates.
+  \item Replace the GRU with compact multiscale causal visual memory and require the unchanged state evaluator to beat the symbolic bigram.
+  \item Condition a separate pixel actuator on continuous visual plans and validate isolated reread identity before closing the loop.
+  \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
   \item Scale width and corpus size only after the fixed language and stability gates pass.
 \end{enumerate}
 
-The complete 11.69M model is deliberately small enough for one 24 GiB RTX
-4090. Its measured V7 peak near 3.0 GiB leaves room for state flow and a
-controlled line-state ablation. This is capacity headroom, not an efficiency victory: quality
-is currently below a symbolic bigram, so ``more efficient than an LLM'' remains
-an unsupported hypothesis.
+The 10.47M PVF state model is deliberately small enough for one RTX 4090. Its
+measured 1.181~GiB peak leaves substantial capacity headroom for a controlled
+causal-memory ablation and later actuator. This is not an efficiency victory:
+quality remains below a symbolic bigram and pixel output is absent, so ``more
+efficient than an LLM'' remains an unsupported hypothesis.
 
 \section{Target Demonstration}
 
@@ -464,6 +522,23 @@ RFLM V7 pixel writer & context cosine $+0.0303$ & Passes generated-signal gate; 
 \end{tabular}
 \end{center}
 
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.24\linewidth}p{0.20\linewidth}p{0.45\linewidth}}
+\toprule
+PVF branch & Frozen signal & Interpretation \\
+\midrule
+V14 proposal & top-1 2.52\% & First proposal gate pass; above last-only 2.24\% and unigram 1.73\% \\
+V14 state flow & top-1 2.35\% & First stochastic state gate pass \\
+V15 proposal & top-1 \textbf{5.87\%} & Above last-only 4.42\%, unigram 1.73\%, and random 0.17\%; context gain $+0.0707$ \\
+V15 state flow & top-1 \textbf{3.41\%} & Above last-only 2.68\% and unigram; sampled context cosine gain $+0.0805$ \\
+\bottomrule
+\end{tabular}
+\caption{Frozen Predictive Visual Field results. Both V15 branches pass their visual-state gates but remain below the 13.14\% symbolic bigram.}
+\label{tab:pvfresults}
+\end{table}
+
 The fixed evaluation contains 512 common Han candidates with four independent
 font views and 2,423 eligible held-out contexts. V6 and V7 use the identical
 bank SHA-256. Selected V7 raises full-context top-1 from 1.197\% to 2.311\% and
@@ -475,33 +550,47 @@ but still negative. Raw target-score gain stays positive in both models, showing
 that raw energy was a misleading metric. The formal acceptance result remains
 false, and retina-oracle accuracy cannot be cited as language accuracy.
 
-The next proof is staged. First, continuous next-retina flow must beat last-only
-and unigram and obtain positive normalized context gain without a pixel writer.
-Second, an isolated actuator must render sampled states with high reread
-identity and readable ink without lookup. Third, the closed 32-cell loop must
-remain readable. Beating the symbolic bigram remains the causal-language gate.
-This order is also consistent with measured error accumulation in iterative
-diffusion chains~\cite{inputperturb}.
+PVF uses a separate frozen evaluation with the same 512 objects and four views
+for V14 and V15, bank SHA-256
+\texttt{543987dd...1181c4},
+and 1,788 eligible held-out contexts. V15 proposal top-1 is 5.872\%, compared
+with 4.418\% last-only, 1.734\% unigram, 0.168\% random dynamics, and 13.143\%
+symbolic bigram. Proposal top-5 is 12.192\%, and normalized context gain is
+$+0.07069$. The stochastic field obtains 3.412\% top-1, 7.662\% top-5,
+$+0.03032$ normalized context gain, and $+0.08053$ sampled context cosine gain.
+Random-dynamics sampled target cosine is 0.03180, versus 0.21576 for V15. The
+retina oracle is 98.546\%.
+
+Thus the proposal and flow state gates are accepted, while the bigram language
+gate remains false. The result establishes that a small image-only student can
+learn causal language signal; it does not establish useful language. The next
+proof should replace the GRU bottleneck with compact multiscale causal visual
+memory while freezing the retina and evaluator. Only after exceeding the
+bigram should an isolated actuator render sampled states with high reread
+identity and readable ink without lookup. The final closed 32-cell loop must
+then remain readable. This order is also consistent with measured error
+accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
 The experiments show that merely replacing tokens with pixels is insufficient.
 A page flow can learn paper statistics, a causal writer can learn local ink, and
 a retina can learn character identity without acquiring language dynamics.
-RFLM contributes a strict test harness: ordered continuous visual
-reading, recurrent image-state prediction, direct conditional ink flow, and
-rereading under autonomous feedback. V6 further trains on the exact image states
-produced by its deployed writer. V7 then trains calibrated full-history
-advantage on independent images and differentiates through sampled endpoints.
-It crosses unigram and generated-signal gates on one consumer GPU, but negative
-normalized context probability and unreadable output reject it as a language
-model. The combined evidence falsifies both exposure-bias correction alone and
-a monolithic language-plus-rendering pixel writer as sufficient solutions.
-Predictive Visual Fields make the next test more direct: learn continuous
-image-derived language dynamics first, then audit a separate renderer and the
-closed loop in order. Historical etymology answers and broad instruction
-following remain downstream goals, not present capabilities, and no Qwen-8B
-parity or efficiency claim is warranted.
+RFLM contributes a strict test harness for ordered visual reading, direct ink
+flow, and autonomous rereading, but V6 and V7 reject exposure-bias correction
+and a monolithic language-plus-rendering writer as sufficient solutions. PVF
+then factors perception, causal language state, stochastic visual form, and
+future actuation. V15's 5.87\% proposal and 3.41\% state-flow top-1, positive
+normalized history gains, and random/unigram/last-only controls constitute the
+first accepted visual-state proof in this project. They show that causal
+language signal can be learned directly from writing images by a 10.47M model
+on one consumer GPU. The 13.14\% bigram still rejects the current causal core,
+and the absence of a pixel actuator precludes any claim of readable generation.
+The next attributable test is compact multiscale causal visual memory, followed
+by isolated state-conditioned actuation and only then a closed write-reread
+loop. Historical etymology answers and broad instruction following remain
+downstream goals, not present capabilities, and no Qwen-8B parity or end-to-end
+efficiency claim is warranted.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
@@ -527,6 +616,8 @@ parity or efficiency claim is warranted.
 \bibitem{ldm} Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models. \url{https://arxiv.org/abs/2112.10752}
 \bibitem{dit} Peebles and Xie. Scalable Diffusion Models with Transformers. \url{https://arxiv.org/abs/2212.09748}
 \bibitem{flowmatching} Lipman et al. Flow Matching for Generative Modeling. \url{https://arxiv.org/abs/2210.02747}
+\bibitem{rfm} Chen and Lipman. Riemannian Flow Matching on General Geometries. \url{https://arxiv.org/abs/2302.03660}
+\bibitem{rcnf} Mathieu and Nickel. Riemannian Continuous Normalizing Flows. \url{https://arxiv.org/abs/2006.10605}
 \bibitem{ijepa} Assran et al. Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture. \url{https://arxiv.org/abs/2301.08243}
 \bibitem{rjepa} Velarde and Parra. Recurrent Joint Embedding Predictive Architecture with Recurrent Forward Propagation Learning. \url{https://arxiv.org/abs/2411.16695}
 \bibitem{djepa} Chen et al. Denoising with a Joint-Embedding Predictive Architecture. \url{https://arxiv.org/abs/2410.03755}

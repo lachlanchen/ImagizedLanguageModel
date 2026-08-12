@@ -431,12 +431,12 @@ def predictive_visual_field_paradigm() -> None:
     d.text((1215, 668), "visual feedback", font=font(18, True), fill=green)
 
     rounded(d, (80, 1150, 2320, 1370), "#ffffff", "#cbd5e1", radius=8)
-    d.text((112, 1176), "V8 falsifiable proof sequence", font=font(25, True), fill=navy)
+    d.text((112, 1176), "PVF staged proof sequence", font=font(25, True), fill=navy)
     gates = [
-        ("A", "visual-state flow", "beats last-only + unigram"),
-        ("B", "rendering actuator", "reread matches planned state"),
-        ("C", "closed visual loop", "32 readable cells"),
-        ("D", "language", "beats 13.58% bigram"),
+        ("A", "visual-state core", "V15 passes last-only + unigram"),
+        ("B", "causal language", "5.87% < 13.14% bigram"),
+        ("C", "rendering actuator", "reread must match plan"),
+        ("D", "closed visual loop", "32 readable cells"),
     ]
     for i, (tag, title, evidence) in enumerate(gates):
         x1 = 110 + i * 545
@@ -448,6 +448,149 @@ def predictive_visual_field_paradigm() -> None:
             arrow_any(d, (x1 + 465, 1272), (x1 + 530, 1272), "#94a3b8", width=3)
 
     img.save(FIG / "predictive_visual_field_paradigm.png", quality=95)
+
+
+def predictive_visual_field_v15_result() -> None:
+    """Render the measured V15 architecture and frozen state-language result."""
+    img = Image.new("RGB", (2400, 1500), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    navy = "#102a43"
+    blue = "#0b6fa4"
+    green = "#16835b"
+    amber = "#b45f06"
+    red = "#b42318"
+    grey = "#475467"
+    light = "#e2e8f0"
+
+    d.text((80, 45), "PVF V15: Language Signal Learned From Writing Images", font=font(51, True), fill=navy)
+    d.text(
+        (82, 116),
+        "A 10.47M-parameter visual student learns causal next-state structure on one RTX 4090; pixels remain the only learned input boundary.",
+        font=font(25),
+        fill=grey,
+    )
+    d.rounded_rectangle((80, 173, 2320, 242), radius=8, fill="#e8f4f8", outline="#8ec9d6", width=2)
+    centered_text(
+        d,
+        (95, 175, 2305, 240),
+        "NO TOKENS  |  NO OCR  |  NO UNICODE IDs  |  NO CHARACTER LABELS  |  NO CODEBOOK  |  NO CANDIDATE CLASSIFIER",
+        font(22, True),
+        navy,
+    )
+
+    # Image-native causal path.
+    d.text((80, 280), "A   IMAGE-NATIVE CAUSAL PATH", font=font(27, True), fill=blue)
+    d.rounded_rectangle((80, 330, 565, 665), radius=8, fill="#ffffff", outline="#8ebbd2", width=2)
+    d.text((112, 355), "Writing-image history", font=font(24, True), fill=navy)
+    glyphs = ["學", "而", "時", "習", "之"]
+    for index, glyph in enumerate(glyphs):
+        x = 112 + index * 83
+        d.rectangle((x, 430, x + 68, 502), fill="#fffdf8", outline="#94a3b8", width=2)
+        centered_text(d, (x, 423, x + 68, 502), glyph, cjk_font(44), "#111827")
+        centered_text(d, (x, 515, x + 68, 548), f"x{index + 1}", font(15), grey)
+    d.text((112, 585), "observations: 32 x 32 continuous pixels", font=font(18), fill=grey)
+    d.text((112, 620), "sequence length: 48 visual fixations", font=font(18), fill=grey)
+
+    d.rounded_rectangle((670, 330, 995, 665), radius=8, fill="#ecfdf3", outline="#58a889", width=2)
+    d.text((704, 355), "Frozen retina", font=font(24, True), fill=navy)
+    center = (833, 482)
+    d.ellipse((744, 393, 922, 571), outline=green, width=4)
+    d.arc((760, 424, 906, 541), 10, 170, fill="#5ab28d", width=3)
+    d.arc((760, 424, 906, 541), 190, 350, fill="#5ab28d", width=3)
+    d.line((833, 395, 833, 568), fill="#5ab28d", width=3)
+    for angle in (0.25, 1.05, 1.9, 2.8, 3.8, 4.7, 5.55):
+        px = int(center[0] + 75 * math.cos(angle))
+        py = int(center[1] + 75 * math.sin(angle))
+        d.ellipse((px - 8, py - 8, px + 8, py + 8), fill=green)
+    centered_text(d, (704, 585, 962, 630), "z_t in unit visual sphere", font(18, True), green)
+
+    d.rounded_rectangle((1100, 330, 1450, 665), radius=8, fill="#fff7ed", outline="#d99a52", width=2)
+    d.text((1133, 355), "Causal visual field", font=font(24, True), fill=navy)
+    for index, label in enumerate(("retinal state", "history memory", "causal condition")):
+        y = 420 + index * 64
+        d.rounded_rectangle((1150, y, 1400, y + 43), radius=6, fill="#ffffff", outline="#d97706", width=2)
+        centered_text(d, (1160, y, 1390, y + 43), label, font(18, index == 2), amber)
+    centered_text(d, (1130, 605, 1420, 640), "h_t = GRU(z_1, ..., z_t)", font(17), grey)
+
+    arrow_any(d, (565, 495), (665, 495), blue)
+    arrow_any(d, (995, 495), (1095, 495), blue)
+
+    # Two complementary continuous heads.
+    d.rounded_rectangle((1570, 285, 2320, 475), radius=8, fill="#edf9f2", outline="#58a889", width=2)
+    d.text((1605, 310), "Deterministic visual proposal", font=font(24, True), fill=navy)
+    d.text((1605, 362), "mu_t = normalize P([h_t, z_t])", font=font(20), fill=green)
+    d.text((1605, 406), "low-variance next-language mode", font=font(19, True), fill=green)
+
+    d.rounded_rectangle((1570, 505, 2320, 695), radius=8, fill="#eef5ff", outline="#7aa7cf", width=2)
+    d.text((1605, 530), "Hyperspherical visual state flow", font=font(24, True), fill=navy)
+    d.text((1605, 582), "noise -> geodesic tangent field -> visual states", font=font(19), fill=blue)
+    d.text((1605, 626), "multimodal uncertainty and form variation", font=font(19, True), fill=blue)
+
+    arrow_any(d, (1450, 456), (1565, 382), green)
+    arrow_any(d, (1450, 535), (1565, 598), blue)
+
+    # Frozen benchmark bars.
+    d.text((80, 742), "B   FROZEN 512-FORM NEXT-IMAGE EVALUATION", font=font(27, True), fill=blue)
+    d.text((82, 790), "Evaluator labels score image-derived states only; they never enter the student.", font=font(20), fill=grey)
+    chart_left = 350
+    chart_right = 1440
+    chart_top = 880
+    scale_max = 14.0
+    for tick in (0, 2, 4, 6, 8, 10, 12, 14):
+        x = chart_left + int((chart_right - chart_left) * tick / scale_max)
+        d.line((x, chart_top - 8, x, 1300), fill=light, width=2)
+        centered_text(d, (x - 35, chart_top - 48, x + 35, chart_top - 12), f"{tick}%", font(15), grey)
+
+    metrics = [
+        ("random dynamics", 0.168, "#94a3b8"),
+        ("unigram", 1.734, amber),
+        ("last image only", 4.418, "#4f7cac"),
+        ("PVF V15 proposal", 5.872, green),
+        ("symbolic bigram", 13.143, red),
+    ]
+    for index, (label, value, color) in enumerate(metrics):
+        y = chart_top + index * 83
+        d.text((82, y + 10), label, font=font(19, label == "PVF V15 proposal"), fill=navy)
+        width = max(4, int((chart_right - chart_left) * value / scale_max))
+        d.rounded_rectangle((chart_left, y, chart_left + width, y + 52), radius=5, fill=color)
+        d.text((chart_left + width + 14, y + 10), f"{value:.3f}%", font=font(18, True), fill=color)
+
+    # Receipt and acceptance on the right.
+    d.rounded_rectangle((1540, 790, 2320, 1050), radius=8, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((1575, 820), "Single-GPU receipt", font=font(24, True), fill=navy)
+    receipt = [
+        "10.47M parameters / 9.14M trainable",
+        "1.181 GiB peak allocated CUDA memory",
+        "about 100-106 sequences per second",
+        "one RTX 4090, BF16",
+    ]
+    for index, line in enumerate(receipt):
+        d.ellipse((1580, 883 + index * 38, 1592, 895 + index * 38), fill=blue)
+        d.text((1610, 874 + index * 38), line, font=font(18), fill=grey)
+
+    d.rounded_rectangle((1540, 1080, 2320, 1325), radius=8, fill="#ffffff", outline="#cbd5e1", width=2)
+    d.text((1575, 1110), "What the evidence says", font=font(24, True), fill=navy)
+    statements = [
+        ("PASS", "full history > last image > unigram", green),
+        ("PASS", "normalized context gain +0.0707", green),
+        ("PASS", "state flow 3.41% > 2.68% last-only", green),
+        ("OPEN", "5.87% remains below 13.14% bigram", red),
+        ("OPEN", "state-conditioned pixel actuator", red),
+    ]
+    for index, (tag, line, color) in enumerate(statements):
+        y = 1165 + index * 31
+        d.text((1578, y), tag, font=font(16, True), fill=color)
+        d.text((1652, y), line, font=font(17), fill=grey)
+
+    d.rounded_rectangle((80, 1370, 2320, 1440), radius=8, fill="#fff7ed", outline="#d99a52", width=2)
+    centered_text(
+        d,
+        (100, 1372, 2300, 1438),
+        "Result: image-only causal language learning is feasible on one consumer GPU. General language and readable image output remain falsifiable next gates.",
+        font(21, True),
+        navy,
+    )
+    img.save(FIG / "predictive_visual_field_v15_result.png", quality=95)
 
 
 def anchor_identity_v7_result() -> None:
@@ -1019,6 +1162,7 @@ def main() -> None:
     architecture()
     retinal_flow_paradigm()
     predictive_visual_field_paradigm()
+    predictive_visual_field_v15_result()
     anchor_identity_v7_result()
     curriculum()
     zhong_evolution()

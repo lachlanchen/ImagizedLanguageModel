@@ -1,6 +1,6 @@
 # Imagized Language Model
 
-Version: 0.4, predictive-visual-field experimental paradigm
+Version: 0.5, predictive-visual-field visual-state proof
 
 Date: 2026-08-12
 
@@ -42,34 +42,49 @@ It may not receive:
 A fixed image grid is a sensor layout, not a vocabulary. A continuous retinal
 state is a visual observation, not a renamed token.
 
-## Current research paradigm: predictive visual field
+## Current implementation: predictive visual field
 
 V7 shows that direct pixel flow can learn stable, context-sensitive ink while
-still failing to become a useful language distribution. The next model therefore
-separates **imagining the next visual state** from **drawing that state**:
+still failing to become a useful language distribution. V14 and V15 therefore
+separate **imagining the next visual state** from **drawing that state**:
 
 ```text
-writing pixels -> retina -> causal visual field -> next-retina flow
-               -> sampled visual plan -> pixel actuator -> writing pixels
+writing pixels -> frozen retina -> causal visual field
+               -> continuous proposal + hyperspherical state flow
+               -> future pixel actuator -> writing pixels -> reread
 ```
 
 ![Predictive Visual Field](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-For image-derived target state \(z_{t+1}=R_{\bar\theta}(x_{t+1})\), a
-conditional state flow learns
+The deterministic branch predicts a unit visual proposal directly from image
+history,
 
 \[
-q_\tau=(1-\tau)z_{t+1}+\tau\epsilon,\qquad
-P_\eta(q_\tau,\tau,h_t)\approx\epsilon-z_{t+1}.
+\mu_t=\operatorname{normalize}(P_\psi([h_t,z_t])).
 \]
 
-It samples an intended continuous visual state, never a character index. A
-separate pixel flow renders that plan and is checked by rereading. No
-nearest-glyph lookup, token unembedding, OCR path, or output vocabulary is
-allowed. This Predictive Visual Field is the V8 hypothesis; it is not yet a
-demonstrated language model.
+The stochastic branch learns intrinsic tangent velocity along a geodesic
+between image-derived target state \(z_{t+1}\) and random unit source
+\(\epsilon\):
 
-## Implemented precursor: read, predict, write, reread
+\[
+\mathcal L_{\mathrm{sphere}}=
+\mathbb E\lVert v_\eta(q_\tau,\tau,[h_t,z_t])-u_\tau\rVert_2^2.
+\]
+
+It samples intended continuous visual states, never character indices. A later
+separate pixel flow will render a plan and be checked by rereading. No nearest-
+glyph lookup, token unembedding, OCR path, or output vocabulary is allowed.
+
+![Measured V15 state proof](../publication/ilm-image-native/figures/predictive_visual_field_v15_result.png)
+
+V15 passes the frozen proposal and stochastic state gates. The proposal reaches
+5.872% top-1 over 512 forms, versus 4.418% last-only and 1.734% unigram; the
+state flow reaches 3.412%, versus 2.685% last-only. Both use full history with
+positive normalized target-probability gain. The 13.143% symbolic bigram still
+wins, and the pixel actuator is intentionally absent.
+
+## Earlier precursor: read, predict, write, reread
 
 The implemented **Retinal Flow Language Model (RFLM)** is a causal probability
 model over image fixations:
@@ -189,6 +204,28 @@ empirical questions.
 
 ## What the current experiment proves
 
+PVF V15 has 10,470,273 parameters, of which 9,137,345 are trainable. Its peak
+allocated CUDA memory was 1.181 GiB on one RTX 4090. The frozen evaluator uses
+512 common Han forms, four independent font views, and 1,788 eligible contexts:
+
+| Measurement | V14 | V15 step 2,000 |
+|---|---:|---:|
+| Retina-oracle top-1 | 98.546% | 98.546% |
+| Proposal full-context top-1 | 2.517% | **5.872%** |
+| Proposal last-only top-1 | 2.237% | 4.418% |
+| Proposal normalized context gain | +0.02853 | **+0.07069** |
+| State-flow full-context top-1 | 2.349% | **3.412%** |
+| State-flow last-only top-1 | 1.734% | 2.685% |
+| State-flow normalized context gain | +0.02759 | **+0.03032** |
+| State-flow sampled context cosine gain | +0.07000 | **+0.08053** |
+| Unigram / symbolic bigram top-1 | 1.734% / 13.143% | same |
+
+This proves a small student can learn causal language signal from images of
+writing without token IDs or a character classifier. It does not prove useful
+general language, readable image output, or efficiency over a text model.
+
+### Retinal-flow precursor
+
 The complete RFLM has 11,690,244 parameters. V7 resumed V6 for 800 updates on
 one RTX 4090 and peaked near 3.0 GiB. The same frozen 512-character Chinese
 visual bank gives:
@@ -218,17 +255,15 @@ probability also falsifies raw score gain as an acceptance measure.
 
 The next intervention is again not immediate scale:
 
-1. Freeze or slowly update the proven image retina.
-2. Train a conditional flow over next retinal states, without the pixel writer,
-   and require positive normalized full-history gain.
-3. Require sampled state prediction to beat last-only and unigram before adding
-   a rendering actuator.
-4. Condition the existing pixel flow on the sampled intended state and require
+1. Keep the proven retina and external bank fixed.
+2. Replace the GRU with one compact multiscale causal visual memory and require
+   proposal/state performance above the symbolic bigram.
+3. Condition a separate pixel flow on the sampled intended state and require
    the rendered image to reread back to that state without lookup.
-5. Close the autonomous feedback loop only after state prediction and isolated
+4. Close the autonomous feedback loop only after state prediction and isolated
    actuation pass independently.
-6. Add line/page timescales one at a time, then require the complete system to
-   beat the bigram and remain readable for 32 cells before widening it.
+5. Require the complete system to remain readable for 32 cells before widening
+   it or adding instruction tuning.
 
 After this causal visual gate passes, add image-to-image instruction tuning and
 provenance-gated historical glyph composition. A local LLM may help create or
@@ -248,6 +283,8 @@ deployed ILM.
 The detailed equations, measured receipt, acceptance gates, and staged
 capabilities are in
 [`first-imagized-language-model-goal.md`](first-imagized-language-model-goal.md).
+The V8-V15 visual-state record is in
+[`predictive-visual-field-v15-result.md`](predictive-visual-field-v15-result.md).
 The exact V7 experiment and frozen receipts are in
 [`retinal-flow-v7-anchor-identity-result.md`](retinal-flow-v7-anchor-identity-result.md).
 The V6 precursor is in

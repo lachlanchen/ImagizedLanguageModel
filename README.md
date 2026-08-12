@@ -16,25 +16,59 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
-## Current Research Paradigm: Predictive Visual Field
+## Current Proof: Predictive Visual Field V15
+
+![Measured Predictive Visual Field V15: writing images enter a frozen retina and causal visual field, which produce a deterministic visual proposal and stochastic hyperspherical states; frozen evaluation shows both use full history and beat unigram](publication/ilm-image-native/figures/predictive_visual_field_v15_result.png)
+
+V15 is a real `10,470,273`-parameter image-only causal state model trained on
+one RTX 4090. Its learned path receives sequences of `32x32` writing images and
+produces continuous next-image states. It has no token IDs, Unicode IDs, OCR,
+character labels, output vocabulary, visual codebook, candidate classifier, or
+external language model.
+
+On a frozen 512-form, four-view Chinese benchmark, the selected continuous
+visual proposal obtains **5.87%** top-1, versus **4.42%** with only the last
+image, **1.73%** unigram, **0.17%** random dynamics, and **13.14%** symbolic
+bigram. Full image history adds `+0.0707` normalized target log-probability. The
+parallel stochastic hyperspherical field obtains **3.41%**, versus **2.68%**
+last-only and **1.73%** unigram, and its sampled-state context cosine gain is
+`+0.0805`.
+
+| Frozen gate | V14 | V15 | Result |
+|---|---:|---:|---|
+| Proposal full-context top-1 | `2.52%` | **`5.87%`** | beats last-only and unigram |
+| Proposal context log-probability gain | `+0.0285` | **`+0.0707`** | full history helps |
+| State-flow full-context top-1 | `2.35%` | **`3.41%`** | beats last-only and unigram |
+| State-flow sampled target cosine | `0.2086` | **`0.2158`** | far above random `0.0318` |
+| Symbolic bigram | `13.14%` | `13.14%` | **not beaten** |
+| Pixel actuator | absent | absent | image output remains future work |
+
+This breaks a narrow but important claim: a small model can learn causal
+language signal directly from rendered writing images on a consumer GPU. It
+does **not** yet establish general language understanding, readable image
+generation, historical question answering, or parity with an LLM. The full
+receipt and V8-V15 failure analysis are in
+[`docs/predictive-visual-field-v15-result.md`](docs/predictive-visual-field-v15-result.md).
+
+## Paradigm: Separate Language From Drawing
 
 ![Predictive Visual Field: writing images become continuous retinal states, a causal field predicts the next visual state, a separate visual actuator writes it, and the generated pixels are reread](publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-The implemented RFLM V7 experiment exposed a structural error: one conditional
-pixel flow was being asked to discover the next linguistic identity and render
-its strokes in the same operation. The next falsifiable architecture separates
-those jobs without relaxing the image-only boundary:
+RFLM V7 exposed a structural error: one conditional pixel flow was being asked
+to discover the next linguistic identity and render its strokes in the same
+operation. V14 and V15 now implement the first half of a factorized solution
+without relaxing the image-only boundary:
 
 1. A retina learns a continuous manifold directly from writing images.
-2. A causal fast/line/page field predicts a **distribution over the next visual
-   state** with continuous flow matching.
-3. A separate pixel-flow actuator renders a sampled visual state as ink.
-4. The retina rereads the rendered pixels and feeds them back into the field.
+2. A causal field predicts a low-variance **continuous visual proposal**.
+3. A hyperspherical flow models a distribution over alternative next states.
+4. A separate pixel-flow actuator will render a sampled state as ink.
+5. The retina will reread the rendered pixels and feed them back into the field.
 
-There is no nearest-character lookup or output vocabulary. This Predictive
-Visual Field is the V8 hypothesis, not a demonstrated capability. The first
-proof must show that image-derived state flow beats last-only and unigram
-baselines before the renderer or model is scaled.
+There is no nearest-character lookup or output vocabulary. The continuous state
+proof now passes random, last-only, unigram, context-use, and target-signal
+gates. It still fails the bigram language gate. The actuator and autonomous
+write-reread loop are deliberately withheld until the causal core is stronger.
 
 The strict student boundary remains:
 
@@ -47,11 +81,11 @@ character labels, external language model, or discrete visual codebook. Typed
 input is supported only by deterministic rasterization before this boundary.
 An uploaded page can enter directly as pixels.
 
-### Implemented precursor: Retinal Flow V7
+### Earlier precursor: Retinal Flow V7
 
 ![Retinal Flow Language Model: ordered image fixations become a recurrent visual field, a rectified-flow writer generates candidate ink, and the candidates are reread and fed back](publication/ilm-image-native/figures/retinal_flow_paradigm.png)
 
-The current runnable model is an 11.69M-parameter **Retinal Flow Language
+The earlier runnable model is an 11.69M-parameter **Retinal Flow Language
 Model**, a concrete
 read-predict-write-reread loop:
 
@@ -92,7 +126,24 @@ continuation, historical question answering, efficiency over a text LLM, or
 Qwen-8B parity. The result motivates the Predictive Visual Field separation
 shown above.
 
-## Run The Retinal MVP
+## Run The Predictive Visual Field
+
+Evaluate a trained PVF checkpoint on the fixed image bank:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_predictive_visual_field.py \
+  --checkpoint artifacts/predictive_visual_field_v15_language_scale/checkpoint_step_0002000.pt \
+  --out artifacts/predictive_visual_field_v15_step2000_eval \
+  --device cuda \
+  --precision bf16
+```
+
+The implementation, exact V15 continuation settings, checkpoint-selection rule,
+and metric definitions are recorded in
+[`docs/predictive-visual-field-v15-result.md`](docs/predictive-visual-field-v15-result.md).
+Training and evaluation artifacts remain git-ignored.
+
+## Run The Retinal Precursor
 
 Build the provenance-bearing public-domain Chinese manifest:
 
@@ -163,10 +214,13 @@ The earlier whole-page U-Net, latent diffusion, associative-memory, and causal
 InkStream implementations remain as baselines. They are not the current model.
 
 ILM is a research codebase for **language learned and generated as visible
-writing**. Its current experiment predicts continuous retinal states and writes
-continuous ink with rectified flow. Older structured embeddings, codebooks, and
-page diffusion experiments remain available as falsified or comparative
-baselines; they do not define the current model boundary.
+writing**. Its current experiment predicts continuous retinal states with a
+causal proposal and hyperspherical flow. The earlier RFLM writes continuous ink
+with rectified flow, but the current PVF intentionally postpones its pixel
+actuator until the visual language core passes stronger gates. Older structured
+embeddings, codebooks, and page diffusion experiments remain available as
+falsified or comparative baselines; they do not define the current model
+boundary.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
 
