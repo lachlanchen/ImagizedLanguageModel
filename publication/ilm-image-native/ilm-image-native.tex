@@ -27,14 +27,16 @@ images with an energy function, writes the next fixation with conditional
 pixel-space rectified flow, and rereads its own generated ink. The 11.69M
 parameter implementation contains no tokenizer, Unicode IDs, OCR transcript,
 character output table, discrete visual codebook, or external language-model
-call. It trains on one RTX 4090 with 2.56 GiB peak memory and generates 11.3
-cells/s. On a fixed 512-character, four-view Chinese benchmark, the retina oracle
-reaches 97.65\% top-1 and generated pixels show positive context signal, but
-recurrent top-1 is only 0.91\%, below unigram (1.86\%) and bigram (13.58\%)
-baselines; autonomous ink also drifts. We therefore reject the present MVP as a
-language model while retaining its image-only boundary and visual alphabet as
-measured progress. The result identifies model-induced visual trajectory
-training, rather than immediate scaling, as the next falsifiable step.
+call. V6 adds training on short image trajectories sampled by the deployed
+writer and peaks at 2.576 GiB on one RTX 4090. On a frozen 512-character,
+four-view Chinese benchmark, full-context top-1 improves from 0.91\% to 1.20\%
+and a matched 32-cell rollout improves its late-to-early ink ratio from 0.483 to
+1.168. However, full context remains below last-only (1.69\%), unigram (1.86\%),
+and bigram (13.58\%) baselines; generated context signal falls from $+0.0211$ to
+$+0.0077$ and the output remains unreadable. We therefore reject V6 as a
+language model while retaining its image-only boundary and measured stability
+gain. The result motivates an explicit full-history advantage objective and
+differentiable identity learning through sampled image endpoints.
 \end{abstract}
 
 \begin{figure}[t]
@@ -78,7 +80,7 @@ as attested source glyphs.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/retinal_flow_paradigm.png}
-  \caption{The implemented Retinal Flow Language Model. Training joins visual next-state energy, conditional rectified flow, and a write--read cycle. Autonomous inference samples candidate ink images, rereads them, selects by visual energy, and feeds the selected pixels back. The receipt reports the failed language gate explicitly.}
+  \caption{The implemented Retinal Flow Language Model. Training joins visual next-state energy, conditional rectified flow, a write--read cycle, and V6 model-induced visual rollouts. Autonomous inference samples candidate ink images, rereads them, selects by visual energy, and feeds the selected pixels back.}
   \label{fig:retinalflow}
 \end{figure}
 
@@ -150,6 +152,23 @@ The selected pixels become the next observation. This closes the visual loop and
 turns autonomous stability into a mandatory model property rather than a
 post-processing concern.
 
+\paragraph{Model-induced visual rollout.}
+V6 invokes the same sampler and energy reranker during training. From a clean
+prefix it generates two short-flow candidates, selects and detaches one bitmap,
+rereads it with the online retina, and advances the recurrent state. For two
+rollout steps it minimizes
+\[
+\mathcal L_{\mathrm{roll}}=
+0.15\mathcal L_{\mathrm{state}}+
+0.35\mathcal L_{\mathrm{energy}}^{\mathrm{roll}}+
+0.30\mathcal L_{\mathrm{recovery}}.
+\]
+The terms align clean and induced recurrent states, predict the real next image
+from the induced state, and recover clean next pixels after generated feedback.
+All targets remain continuous image fields. Candidate selection is
+stop-gradient, which bounds memory while exposing the trainable state and writer
+to deployed pixels.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -194,7 +213,8 @@ is
 \lambda_v\mathcal L_{\mathrm{view}}+
 \lambda_p\mathcal L_{\mathrm{endpoint}}+
 \lambda_s\mathcal L_{\mathrm{stroke}}+
-\lambda_c\mathcal L_{\mathrm{cycle}}.
+\lambda_c\mathcal L_{\mathrm{cycle}}+
+\rho(t)\mathcal L_{\mathrm{roll}}.
 \]
 The energy term uses 512 cross-render candidate views per batch in the final
 run. Visual duplicate positives are discovered by image similarity rather than
@@ -203,12 +223,14 @@ candidate-projection spaces. Endpoint and stroke terms improve sparse-ink
 geometry. The cycle term is weighted toward high-noise examples, where a writer
 must use recurrent context rather than visible target pixels.
 
-The present loss is still teacher-forced at the trajectory level: its recurrent
-prefix contains clean image fixations. The next objective will mix generated
-prefixes and align clean and model-induced recurrent trajectories. This follows
-the general distribution-shift lesson of scheduled sampling and
-DAgger~\cite{scheduledsampling,dagger}; it remains image-only because the
-aggregated states and targets are pixels and continuous visual fields.
+For V6, $\rho(t)$ ramps from zero to one over 400 updates. A rollout subset of
+eight sequences uses two generated steps, two candidates, and two flow steps per
+candidate. This follows the distribution-shift lesson of scheduled sampling and
+DAgger~\cite{scheduledsampling,dagger}; it remains image-only because the visited
+states, selected observations, and recovery targets are pixels and continuous
+visual fields. The final rollout state cosine reaches 0.961, but selected-image
+target cosine is only 0.103. This distinction predicts the measured outcome:
+state recovery becomes robust while sampled visual identity remains weak.
 
 \section{Image-First Training and Inference}
 
@@ -267,14 +289,15 @@ Measurements now support a different order:
   \item Learn a cross-font foveal visual alphabet and audit missing-glyph coverage.
   \item Train recurrent visual energy and conditional ink flow jointly on dense causal positions.
   \item Reread generated endpoints during training and evaluate on a fixed external visual bank.
-  \item Aggregate autonomous model-induced visual trajectories and train against their distribution.
-  \item Add a slow line/page state only if full history improves over the last-fixation ablation.
+  \item Train on autonomous model-induced visual trajectories; V6 completes this step and stabilizes ink but remains unreadable.
+  \item Require full history to beat a reset last-fixation state and train identity through differentiable sampled endpoints.
+  \item Add a slow line/page state only after full history improves over the last-fixation ablation.
   \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
   \item Scale width and corpus size only after the fixed language and stability gates pass.
 \end{enumerate}
 
 The complete 11.69M model is deliberately small enough for one 24 GiB RTX
-4090. Its measured 2.56 GiB training peak leaves room for longer rollouts and a
+4090. Its measured 2.576 GiB V6 training peak leaves room for longer rollouts and a
 slow page state. This is capacity headroom, not an efficiency victory: quality
 is currently below a symbolic bigram, so ``more efficient than an LLM'' remains
 an unsupported hypothesis.
@@ -323,6 +346,13 @@ The model should be evaluated as both a language model and a visual generator:
   \item Later historical tasks: glyph-stage accuracy, attested-source provenance, and explicit synthetic-form labeling.
 \end{itemize}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/closed_loop_v6_result.png}
+  \caption{Matched autonomous evidence for V5 and V6. The prompt, seed, sampler, model size, and 32-cell horizon are fixed. Model-induced rollout training prevents the earlier loss of ink and halves the sparse-cell fraction, but neither continuation is readable and generated target signal weakens.}
+  \label{fig:v6result}
+\end{figure}
+
 \begin{center}
 \begin{tabular}{p{0.28\linewidth}p{0.20\linewidth}p{0.39\linewidth}}
 \toprule
@@ -331,25 +361,37 @@ System & Measured signal & Interpretation \\
 Whole-page flow & velocity MSE 0.851 & Unreadable page texture; negative baseline \\
 Global visual memory & top-1 2.23\% over 2,016 & Above random, but 0/16 historical paraphrases \\
 Causal InkStream & validation ink F1 0.639 & Autonomous repeated-grey collapse; negative baseline \\
-RFLM retina oracle & top-1 97.65\% & Strong cross-font visual alphabet \\
-RFLM recurrent state & top-1 0.91\% & Above random 0.04\%; below unigram 1.86\% and bigram 13.58\% \\
-RFLM pixel writer & context gain $+0.0211$ & Context-sensitive ink, but best-of-four hit only 1.56\% \\
-RFLM autonomous loop & 11.3 cells/s & Dense early marks drift into unreadable fragments \\
+RFLM V5 retina oracle & top-1 97.65\% & Strong cross-font visual alphabet \\
+RFLM V5 recurrent state & top-1 0.91\% & Below last-only 1.36\%, unigram 1.86\%, and bigram 13.58\% \\
+RFLM V6 recurrent state & top-1 1.20\% & Improved, but below last-only 1.69\% and both language baselines \\
+RFLM V6 pixel writer & context gain $+0.0077$ & Positive but weaker than V5's $+0.0211$ \\
+RFLM V6 autonomous loop & ink ratio 1.168 & Stable character-scale marks remain unreadable \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 The fixed evaluation contains 512 common Han candidates with four independent
-font views and 2,423 eligible held-out contexts. Full-context top-1 is also below
-the last-fixation-only result (0.91\% versus 1.36\%), so longer context has not
-yet been shown useful. The formal acceptance result is false. This separation is
-important: the 97.65\% retina oracle cannot be cited as language accuracy.
+font views and 2,423 eligible held-out contexts. V5 and V6 use the identical
+bank SHA-256. V6 raises full-context top-1 from 0.908\% to 1.197\% and top-5 from
+2.229\% to 3.219\%, while the retina oracle rises from 97.648\% to 98.184\%.
+Full context nevertheless remains below V6 last-only (1.692\%), unigram
+(1.857\%), and symbolic bigram (13.578\%). The formal acceptance result remains
+false. The retina oracle cannot be cited as language accuracy.
 
 The next checkpoint is accepted only if full context beats random,
-last-fixation, unigram, and bigram baselines; generated context signal remains
-positive on held-out fonts; and a 32-cell autonomous continuation remains
-readable. Training on perturbed or model-induced states is motivated additionally
-by measured error accumulation in iterative diffusion chains~\cite{inputperturb}.
+last-fixation, unigram, and bigram baselines; generated context cosine gain
+exceeds 0.02 and the random branch by 0.01 on held-out fonts; and a 32-cell
+autonomous continuation remains readable. Its next objective explicitly requires the real next image to score
+higher under a full visual prefix than under a reset last-fixation state,
+\[
+\mathcal L_{\mathrm{ctx}}=
+\max(0,m-s(y\mid h_{\mathrm{full}})+s(y\mid h_{\mathrm{last}})),
+\]
+while a truncated differentiable flow sample receives visual identity NCE. A
+full-state NCE term prevents the margin from being satisfied only by degrading
+the ablation. V6 rollout losses remain as stability regularizers. This direction
+is also consistent with measured error accumulation in iterative diffusion
+chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -358,13 +400,15 @@ A page flow can learn paper statistics, a causal writer can learn local ink, and
 a retina can learn character identity without acquiring language dynamics.
 RFLM contributes a stricter testable paradigm: ordered continuous visual
 reading, recurrent image-state prediction, direct conditional ink flow, and
-rereading under autonomous feedback. Its first run proves that this complete
-loop fits comfortably on one consumer GPU and learns a visual alphabet, but it
-fails elementary language and stability baselines. The correct next step is to
-train on the visual states produced by the model itself and re-run the same
-frozen gates. Historical etymology answers and broad instruction following
-remain downstream goals, not present capabilities, and no Qwen-8B parity or
-efficiency claim is warranted.
+rereading under autonomous feedback. V6 further trains on the exact image states
+produced by its deployed writer. This intervention materially improves
+autonomous ink stability and modestly improves frozen-bank retrieval on one
+consumer GPU, but it does not create readable language or useful long context.
+The result falsifies the claim that exposure-bias correction alone is the core
+solution. The next test aligns the training loss with contextual advantage and
+the identity of actually sampled pixels. Historical etymology answers and broad
+instruction following remain downstream goals, not present capabilities, and no
+Qwen-8B parity or efficiency claim is warranted.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}

@@ -195,7 +195,6 @@ def retinal_flow_paradigm() -> None:
     d = ImageDraw.Draw(img)
     navy = "#102a43"
     blue = "#0b6fa4"
-    cyan = "#0891b2"
     green = "#16835b"
     amber = "#b45f06"
     red = "#b42318"
@@ -290,8 +289,8 @@ def retinal_flow_paradigm() -> None:
     d.text((1675, 793), "Autonomous visual trajectory", font=font(24, True), fill=navy)
     d.text((1680, 860), "x_1 -> x_2 -> ... -> x_T", font=font(23, True), fill=red)
     d.text((1680, 910), "The model observes its own marks", font=font(20), fill=grey)
-    d.text((1680, 952), "Current failure: ink drift", font=font(21, True), fill=red)
-    d.text((1680, 992), "Next: train on induced rollouts", font=font(20), fill=navy)
+    d.text((1680, 952), "V6: ink stable, text unreadable", font=font(19, True), fill=red)
+    d.text((1680, 992), "Next: context margin + sampled identity", font=font(17), fill=navy)
 
     arrow_any(d, (530, 915), (645, 915), green)
     arrow_any(d, (1000, 915), (1115, 915), green)
@@ -302,13 +301,14 @@ def retinal_flow_paradigm() -> None:
     # Measured receipt and acceptance gate.
     rounded(d, (80, 1120, 2120, 1265), "#ffffff", "#cbd5e1", radius=8)
     d.text((108, 1143), "Measured one-RTX-4090 receipt", font=font(23, True), fill=navy)
-    d.text((108, 1192), "11.69M parameters  |  2.56 GiB train peak  |  11.3 generated cells/s", font=font(21), fill=grey)
+    d.text((108, 1192), "11.69M parameters  |  2.576 GiB train peak  |  21.5 generated cells/s", font=font(20), fill=grey)
     d.text((875, 1143), "Vision", font=font(22, True), fill=green)
-    d.text((875, 1192), "97.65% oracle top-1", font=font(21), fill=grey)
+    d.text((875, 1192), "98.18% oracle top-1", font=font(21), fill=grey)
     d.text((1235, 1143), "Language", font=font(22, True), fill=red)
-    d.text((1235, 1192), "0.91% < unigram 1.86% < bigram 13.58%", font=font(20), fill=grey)
+    d.text((1235, 1182), "full 1.20% < last 1.69%", font=font(18), fill=grey)
+    d.text((1235, 1213), "< unigram 1.86% << bigram 13.58%", font=font(17), fill=grey)
     d.text((1770, 1143), "VERDICT", font=font(22, True), fill=red)
-    d.text((1770, 1192), "MVP REJECTED", font=font(22, True), fill=red)
+    d.text((1770, 1192), "V6 REJECTED", font=font(22, True), fill=red)
 
     img.save(FIG / "retinal_flow_paradigm.png", quality=95)
 
@@ -412,7 +412,6 @@ def zhong_evolution() -> None:
 def draw_glow(draw: ImageDraw.ImageDraw, center: Tuple[int, int], radius: int, color: str) -> None:
     x, y = center
     for i in range(radius, 0, -10):
-        alpha = i / radius
         # PIL RGB draw has no alpha compositing here; use progressively lighter outlines.
         draw.ellipse((x - i, y - i, x + i, y + i), outline=color, width=1)
 
@@ -440,7 +439,6 @@ def paste_svg_on_card(
     if path is not None and path.exists():
         glyph = load_svg(path, glyph_size)
         # Invert black SVG strokes to warm ivory for dark cards.
-        bg = Image.new("RGBA", glyph.size, (0, 0, 0, 0))
         pix = glyph.load()
         for yy in range(glyph.height):
             for xx in range(glyph.width):

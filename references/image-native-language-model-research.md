@@ -29,45 +29,56 @@ The implemented system has four trainable parts:
 4. A conditional pixel-space rectified-flow writer with high-noise training and
    a differentiable write-read cycle.
 
-The first clean cross-font Chinese run contains 11,690,244 parameters, peaked
-at 2.56 GiB training VRAM on one RTX 4090, and generated 11.3 cells/s. A fixed
-bank evaluation over 512 common Han characters, four prototype views, and 2,423
-held-out contexts produced:
+The model contains 11,690,244 parameters. Its V6 run resumed the clean-prefix
+V5 checkpoint for 1,600 updates with exact model-induced visual rollouts and
+peaked at 2.576 GiB on one RTX 4090. A fixed evaluation over 512 common Han
+characters, four prototype views, and 2,423 held-out contexts produced:
 
-| Measurement | Result |
-|---|---:|
-| Retina oracle top-1 | 97.648% |
-| Retina oracle top-5 | 100% |
-| Random full-context top-1 | 0.041% |
-| RFLM full-context top-1 | 0.908% |
-| RFLM full-context top-5 | 2.229% |
-| Last-fixation-only top-1 | 1.362% |
-| Unigram top-1 | 1.857% |
-| Symbolic bigram top-1 | 13.578% |
-| Generated context cosine gain | +0.0211 |
-| Generated best-of-four target hit | 1.5625% |
+| Measurement | V5 | V6 closed loop |
+|---|---:|---:|
+| Retina oracle top-1 | 97.648% | 98.184% |
+| Random full-context top-1 | 0.041% | 0.041% |
+| RFLM full-context top-1 | 0.908% | 1.197% |
+| RFLM full-context top-5 | 2.229% | 3.219% |
+| Last-fixation-only top-1 | 1.362% | 1.692% |
+| Unigram top-1 | 1.857% | 1.857% |
+| Symbolic bigram top-1 | 13.578% | 13.578% |
+| Generated context cosine gain | +0.0211 | +0.0077 |
+| Generated sample target hit | 1.5625% | 1.0417% |
+| Autonomous late/early ink | 0.483 | 1.168 |
+| Autonomous sparse cells | 37.5% | 18.75% |
 
-The acceptance result is false. The retina has learned a robust visual
-alphabet, and generated pixels contain a measurable context signal, but the
-recurrent state does not yet use longer history effectively and loses to simple
-language baselines. Autonomous rollouts begin with dense character-like ink and
-then drift into unreadable fragments. The experiment localizes the bottleneck
-to language dynamics and closed-loop stability rather than glyph perception.
+The V6 objective samples the deployed flow writer from a clean prefix, selects
+continuous bitmap candidates with the deployed energy, rereads the selected
+bitmap, and trains clean-versus-induced state consistency, next-image energy,
+and recovery flow. It follows the distribution-shift lesson of DAgger and
+scheduled sampling while remaining image-only. Input-perturbation work in
+diffusion models provides a related warning that iterative chains accumulate
+errors when train and inference inputs differ.
 
-The next research intervention is **model-induced visual trajectory training**:
-aggregate generated prefixes, train on the image-state distribution induced by
-the current model, align clean and rollout recurrent trajectories, and test a
-slow page state alongside the fast foveal state. This follows the general lesson
-from DAgger and scheduled sampling that sequential predictors must learn under
-states produced by their own decisions, while remaining an image-only algorithm
-in this implementation. Input perturbation work in diffusion models provides a
-closely related warning that iterative generative chains accumulate errors when
-their train and inference inputs differ.
+The acceptance result remains false. Model-induced training eliminates V5's
+loss-of-ink collapse and modestly improves retrieval, but both 32-cell outputs
+remain unreadable. Full context is still worse than last-only, unigram, and
+bigram baselines, and generated target signal weakens. A high rollout-state
+cosine (`0.961`) paired with low selected-target cosine (`0.103`) shows that
+robust state recovery is not equivalent to generating the right linguistic
+image.
+
+The next research intervention is therefore a **visual context-advantage and
+sampled-identity objective**. It explicitly trains a full-prefix state to score
+the real next image above a reset last-only state, while a truncated
+differentiable flow unroll aligns the actually sampled endpoint with independent
+target-image views. V6's stop-gradient rollout losses remain to preserve the
+stability gain. A slow page state and larger model are deferred until this
+direct intervention passes the unchanged gate.
 
 The RFLM does not replace the need for provenance-bearing folio memory. It
 replaces that memory as the definition of the language model. Later etymology
 answers should combine an autonomous visual writer for connective language with
 a separate evidence gate that inserts attested historical pixels.
+
+The complete measured receipt is in
+[`docs/retinal-flow-v6-closed-loop-result.md`](../docs/retinal-flow-v6-closed-loop-result.md).
 
 ## 2026 architecture revision: Visual Folio Machine
 

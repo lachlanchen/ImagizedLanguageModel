@@ -45,24 +45,29 @@ An uploaded page can enter directly as pixels.
 
 ### Measured status, not a capability claim
 
-The first complete Chinese run used `11,690,244` parameters, peaked at
-`2.56 GiB` of training VRAM on one RTX 4090, and generated `11.3` visual cells
-per second. Its fixed held-out test used 512 common Han characters rendered in
-four font views over 2,423 contexts.
+The closed-loop V6 experiment kept the model at `11,690,244` parameters, peaked
+at `2.576 GiB` of training VRAM on one RTX 4090, and generated `21.5` visual
+cells per second in its final matched run. It resumed V5 for 1,600 updates while
+training on short image trajectories sampled by the model itself. Both models
+were tested on the same 512 common Han characters, four font views, and 2,423
+held-out contexts.
 
-| Gate | Result | Interpretation |
-|---|---:|---|
-| Retina oracle top-1 | `97.65%` | The image encoder learned a strong cross-font visual alphabet. |
-| Recurrent full-context top-1 | `0.91%` | Better than random (`0.04%`), but worse than unigram (`1.86%`) and bigram (`13.58%`). |
-| Generated target signal | `+0.0211` cosine | The writer is context-sensitive, but not yet linguistically accurate. |
-| Best-of-four target hit | `1.56%` | Non-zero visual generation, still below acceptance. |
-| Autonomous continuation | failed | Early glyph-like marks drift into unreadable fragments under feedback. |
+| Gate | V5 | V6 closed loop | Interpretation |
+|---|---:|---:|---|
+| Retina oracle top-1 | `97.65%` | `98.18%` | The image encoder learned a strong cross-font visual alphabet. |
+| Recurrent full-context top-1 | `0.91%` | `1.20%` | Improved, but still below last-only (`1.69%`), unigram (`1.86%`), and bigram (`13.58%`). |
+| Generated target signal | `+0.0211` | `+0.0077` cosine | Positive but weaker; sampled ink is not linguistically accurate. |
+| Late/early autonomous ink | `0.483` | `1.168` | Model-induced training prevents the earlier loss-of-ink collapse. |
+| Sparse autonomous cells | `37.5%` | `18.75%` | Form stability improved, but the 32-cell continuation remains unreadable. |
 
-**Verdict: the MVP is rejected.** It proves the image-only software boundary,
-visual invariance, direct image generation, and autonomous feedback loop. It
-does not yet prove a useful language model, readable continuation, efficiency
-over a text LLM, or Qwen-8B parity. The next milestone is closed-loop trajectory
-training on model-induced image states, not a larger parameter count.
+![Matched V5 and V6 autonomous comparison](publication/ilm-image-native/figures/closed_loop_v6_result.png)
+
+**Verdict: V6 is still rejected.** It proves that exact model-induced visual
+rollout training can stabilize the image feedback loop and modestly improve
+fixed-bank retrieval. It does not prove useful language, readable continuation,
+efficiency over a text LLM, historical question answering, or Qwen-8B parity.
+The next milestone directly trains a full-history advantage over a last-image
+ablation and backpropagates visual identity through sampled flow endpoints.
 
 ## Run The Retinal MVP
 
@@ -74,45 +79,55 @@ PYTHONPATH=. python scripts/build_visual_grammar_manifest.py \
   --out data/visual_grammar/chinese_wikisource_public_domain.jsonl
 ```
 
-Train the model on one 24 GiB GPU:
+Train the current closed-loop objective on one 24 GiB GPU:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/train_retinal_flow_lm.py \
   --manifest data/visual_grammar/chinese_wikisource_public_domain.jsonl \
-  --out artifacts/retinal_flow_chinese_mvp \
+  --out artifacts/retinal_flow_chinese_closed_loop \
   --sequence-length 48 \
   --energy-positions-per-sequence 8 \
   --batch-size 32 \
-  --maximum-steps 3600 \
+  --maximum-steps 5200 \
+  --rollout-start-step 800 \
+  --rollout-ramp-steps 400 \
+  --rollout-batch-size 8 \
+  --rollout-steps 2 \
+  --rollout-candidates 2 \
+  --rollout-sample-steps 2 \
   --precision bf16
 ```
+
+The exact V5-to-V6 continuation command and all measured checkpoint results are
+recorded in [`docs/retinal-flow-v6-closed-loop-result.md`](docs/retinal-flow-v6-closed-loop-result.md).
 
 Run the strict fixed-bank evaluation:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_retinal_flow_lm.py \
-  --checkpoint artifacts/retinal_flow_chinese_mvp/checkpoint_latest.pt \
+  --checkpoint artifacts/retinal_flow_chinese_closed_loop/checkpoint_latest.pt \
   --bank-size 512 \
   --prototype-views 4 \
   --evaluation-samples 3000 \
   --generation-contexts 192 \
-  --out artifacts/retinal_flow_chinese_mvp/fixed_glyph_bank
+  --out artifacts/retinal_flow_chinese_closed_loop/fixed_glyph_bank
 ```
 
 Generate an autonomous image continuation from typed or image input:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/infer_retinal_flow_lm.py \
-  --checkpoint artifacts/retinal_flow_chinese_mvp/checkpoint_latest.pt \
-  --text '天地玄黃，宇宙洪荒。' \
-  --new-cells 12 \
+  --checkpoint artifacts/retinal_flow_chinese_closed_loop/checkpoint_latest.pt \
+  --text '天地玄黃，宇宙洪荒。日月盈昃，辰宿列張。' \
+  --new-cells 32 \
   --candidate-samples 8 \
-  --out artifacts/retinal_flow_chinese_mvp/autonomous_demo
+  --out artifacts/retinal_flow_chinese_closed_loop/autonomous_demo
 ```
 
 The primary inference artifact is `complete_page.png`; `receipt.json` records
-the model boundary, parameter count, throughput, VRAM, font hashes, and every
-candidate-selection step. Generated checkpoints and data remain git-ignored.
+the model boundary, parameter count, throughput, VRAM, font hashes, every
+candidate-selection step, and early/late autonomous trajectory summaries.
+Generated checkpoints and data remain git-ignored.
 
 The earlier whole-page U-Net, latent diffusion, associative-memory, and causal
 InkStream implementations remain as baselines. They are not the current model.
@@ -142,6 +157,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| Closed-loop V6 experiment | `docs/retinal-flow-v6-closed-loop-result.md` |
 | Research dossier and evidence | `references/image-native-language-model-research.md` |
 | Archived diffusion plan | `docs/ilm-visual-diffusion-code-plan.md` |
 | Archived embedding "color" plan | `docs/embedding-color-plan.md` |
@@ -154,6 +170,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 - 👁️ Continuous foveal retina with recurrent visual context and cross-font invariance.
 - 🖋️ Conditional pixel-space rectified-flow writer with a differentiable write-read cycle.
 - 🔁 Autonomous image-only inference with candidate rereading, energy reranking, and pixel feedback.
+- 🧭 Training on exact model-induced visual rollouts with state alignment, next-image energy, and recovery flow.
 - 🧪 Fixed 512-character visual-bank evaluation against random, unigram, and bigram baselines.
 - 🌐 Robust AJAX + HTML ingestion path with retries, throttling, and cache.
 - 🧩 Stage-labeled glyph extraction including `<img>` and CSS `background-image` data URIs.
@@ -388,7 +405,8 @@ PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 
 ## 🗺️ Roadmap
 
-- Train on model-induced visual trajectories so the writer sees its own errors during training.
+- Train a visual context-advantage objective so full history beats the last-fixation ablation without labels.
+- Backpropagate visual identity through short sampled flow endpoints while retaining V6 rollout stability.
 - Require full visual context to beat last-fixation, unigram, and bigram baselines.
 - Require stable, readable 32-cell autonomous continuations before scaling width or corpus size.
 - Add multiscale page memory and provenance-gated historical glyph composition only after the causal gate passes.

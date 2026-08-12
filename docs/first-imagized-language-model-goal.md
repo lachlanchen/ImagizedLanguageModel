@@ -28,8 +28,9 @@ bronze, seal, clerical, manuscript, traditional, simplified, and Kanji forms.
 ## Current verdict
 
 The repository now contains a complete 11.69M-parameter image-only student,
-training loop, fixed-bank evaluator, and autonomous inference loop. The first
-one-RTX-4090 run **did not pass the language-model gate**.
+training loop, model-induced rollout objective, fixed-bank evaluator, and
+autonomous inference loop. Neither the clean-prefix V5 run nor the closed-loop
+V6 continuation passed the language-model gate.
 
 It proved:
 
@@ -37,20 +38,24 @@ It proved:
 - a cross-font visual alphabet;
 - a recurrent state that changes candidate-image energies;
 - direct continuous ink generation by conditional rectified flow;
-- context-sensitive generated pixels; and
-- autonomous rereading and feedback without OCR or symbolic decoding.
+- context-sensitive generated pixels;
+- autonomous rereading and feedback without OCR or symbolic decoding; and
+- improved long-rollout ink stability after training on its own sampled images.
 
 It did not prove:
 
 - prediction better than elementary symbolic language baselines;
 - useful long-context visual language state;
-- stable readable autonomous continuation;
+- readable autonomous continuation, despite stable V6 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
 - parity with Qwen 8B.
 
-The present MVP is therefore **rejected but informative**. The next milestone
-is closed-loop visual trajectory learning, not a larger model.
+The present MVP is therefore **rejected but informative**. Closed-loop visual
+trajectory learning has now been tested: it fixes the loss-of-ink failure but
+does not create contextual meaning. The next milestone is an image-only
+full-history advantage objective plus differentiable sampled-image identity,
+not a larger model.
 
 ## New paradigm: retinal flow language modeling
 
@@ -166,10 +171,9 @@ E_\psi(h_t,z_t,R_{\bar\theta}(c)).
 \]
 
 The selected pixels are pasted into the page and become the next retinal input.
-The model therefore lives under the image distribution that it creates. This
-last property is essential and exposes the present failure: one-step training
-states are cleaner than autonomous model states, so small visual errors compound
-into ink drift.
+The model therefore lives under the image distribution that it creates. V6 also
+uses this exact path during training. It removed the earlier monotonic ink drift,
+but the selected images still have weak target identity and unreadable language.
 
 ## Why this is a different paradigm
 
@@ -194,77 +198,104 @@ network or that the current run is a useful language model.
 
 ## Measured proof receipt
 
-The clean V5 run used public-domain Chinese book text rendered through eight
-Noto CJK font files. Font bytes and SHA-256 hashes are stored in every
-checkpoint and evaluation receipt.
+V5 and V6 used the same public-domain Chinese book manifest, eight Noto CJK font
+files, model width, and fixed evaluation bank. Font bytes and SHA-256 hashes are
+stored in every checkpoint and receipt. V6 resumed V5 for 1,600 updates with
+two-step, two-candidate induced visual rollouts.
 
-| Property | Measured value |
-|---|---:|
-| Parameters | 11,690,244 |
-| Training peak VRAM | 2.56 GiB |
-| Autonomous throughput | 11.3 generated cells/s |
-| Held-out candidate bank | 512 characters x 4 image views |
-| Eligible held-out contexts | 2,423 |
-| Random full-context top-1 | 0.041% |
-| RFLM full-context top-1 | 0.908% |
-| RFLM full-context top-5 | 2.229% |
-| Last-fixation-only top-1 | 1.362% |
-| Unigram top-1 | 1.857% |
-| Symbolic bigram top-1 | 13.578% |
-| Retina oracle top-1 | 97.648% |
-| Retina oracle top-5 | 100% |
-| Generated context cosine gain | +0.0211 |
-| Generated best-of-four target hit | 1.5625% |
-| Acceptance | false |
+| Property | V5 | V6 closed loop |
+|---|---:|---:|
+| Parameters | 11,690,244 | 11,690,244 |
+| Training peak VRAM | 2.56 GiB | 2.576 GiB |
+| Held-out candidate bank | 512 x 4 image views | same bank and SHA-256 |
+| Eligible held-out contexts | 2,423 | 2,423 |
+| Random full-context top-1 | 0.041% | 0.041% |
+| RFLM full-context top-1 | 0.908% | **1.197%** |
+| RFLM full-context top-5 | 2.229% | **3.219%** |
+| Last-fixation-only top-1 | 1.362% | 1.692% |
+| Unigram top-1 | 1.857% | 1.857% |
+| Symbolic bigram top-1 | 13.578% | 13.578% |
+| Retina oracle top-1 | 97.648% | **98.184%** |
+| Generated context cosine gain | **+0.0211** | +0.0077 |
+| Generated sample target hit | **1.5625%** | 1.0417% |
+| Autonomous late/early ink | 0.483 | **1.168** |
+| Autonomous sparse cells | 37.5% | **18.75%** |
+| Autonomous human readability | false | false |
+| Acceptance | false | false |
 
-The 97.65% oracle result localizes the main bottleneck: visual perception is
-already strong on this bank. The recurrent language distribution and its
-closed-loop stability are weak. Full-context exact prediction being worse than
-last-fixation-only is direct evidence that the current recurrent state does not
-yet use its history effectively.
+![Matched autonomous V5 and V6 evidence](../publication/ilm-image-native/figures/closed_loop_v6_result.png)
 
-## Next learning algorithm: induced visual trajectories
+The 98.18% oracle localizes the main bottleneck away from basic visual
+perception. V6 improves full-context retrieval and fixes the measured loss of
+ink, but full context is still worse than last-only and generated target signal
+falls. The final rollout state cosine (`0.961`) is high while the selected-image
+target cosine (`0.103`) is low. The model learns state recovery around wrong
+pixels, not correct visual language.
 
-The next stage changes the training distribution before changing model size.
-It extends the same RFLM rather than adding a symbolic teacher at runtime.
+The exact command, intermediate checkpoint table, bank hash, and autonomous
+receipts are preserved in
+[`retinal-flow-v6-closed-loop-result.md`](retinal-flow-v6-closed-loop-result.md).
 
-### Rollout aggregation
+## Implemented V6 algorithm: induced visual trajectories
 
-For each clean image sequence, periodically run the current model for `K`
-steps. Store the generated fixation images and recurrent states in a bounded
-replay queue. Subsequent updates mix clean prefixes, damaged-font prefixes, and
-model-induced prefixes. This is the image-generation analogue of dataset
-aggregation: the student learns on states it actually visits.
-
-### Trajectory consistency
-
-For the same underlying clean sequence, compare a clean recurrent trajectory
-with one that rereads generated or perturbed images:
+For a clean image prefix, V6 runs the deployed two-step flow sampler, generates
+two candidate bitmaps, rereads them with the target retina, and selects by the
+deployed visual energy. The selected bitmap is detached, reread by the online
+retina, and fed into the GRU. It adds
 
 \[
-\mathcal L_{\mathrm{traj}} =
-\sum_{k=1}^{K} w_k
-\left(1-cos(h_{t+k}^{\mathrm{clean}},
-             h_{t+k}^{\mathrm{rollout}})\right).
+\mathcal L_{\mathrm{roll}} =
+0.15\mathcal L_{\mathrm{traj}} +
+0.35\mathcal L_{\mathrm{energy}}^{\mathrm{roll}} +
+0.30\mathcal L_{\mathrm{recovery}}.
 \]
 
-The target is a continuous clean visual trajectory, not a character ID. Initial
-rollouts use stopped gradients for memory efficiency. Later short unrolls can
-differentiate through the writer and retina if the receipt shows a benefit.
+This is online model-induced sampling, not a replay queue. It trains the state,
+energy, and recovery writer on the exact pixels the current model visits while
+keeping memory bounded. The experiment validates the stability effect and
+rejects the assumption that trajectory consistency alone yields semantics.
 
-### Distributional recurrent state
+## Next learning algorithm: context advantage and sampled identity
 
-The current deterministic GRU is asked to represent a multimodal next-image
-distribution in one vector. After rollout training is validated, replace or
-augment it with a compact stochastic state or recurrent latent flow. Do not add
-this complexity until the simpler clean-versus-rollout ablation is measured.
+The next stage targets the two failed measurements rather than increasing
+capacity.
 
-### Multiscale reading
+### Full-history advantage
 
-The fixed fovea sees local form efficiently but has no explicit line or page
-summary. Add a slow page state updated every row alongside the fast fixation
-state. This remains continuous image memory and is accepted only if it improves
-full-context over last-fixation evaluation.
+For the same real next image `y`, form one continuous state from the full visual
+prefix and one reset state from only the last image. Train the full state to
+score `y` above the ablated state by a margin:
+
+\[
+\mathcal L_{\mathrm{ctx}}=
+\max\left(0,m-s(y\mid h_{\mathrm{full}})+s(y\mid h_{\mathrm{last}})\right).
+\]
+
+A full-state NCE loss remains active so the network cannot win only by damaging
+the last-only branch. No labels or IDs enter either state.
+
+### Differentiable sampled endpoint
+
+V6 stops gradients through candidate sampling. The next run differentiates
+through one truncated two-step flow endpoint and aligns its reread identity to
+independent target images:
+
+\[
+\mathcal L_{\mathrm{sample}}=
+\operatorname{NCE}\left(
+R(\hat x_0^{K=2}),\{R(y^{(v)})\}_{v=1}^{V}\right).
+\]
+
+This supervises the image distribution actually sampled at inference rather
+than only a one-step denoising estimate. V6's stop-gradient trajectory and
+recovery terms remain as stability regularizers.
+
+### Deferred complexity
+
+A stochastic recurrent field and a slow line/page state remain plausible, but
+they are deferred. Add them only if the direct context and sampled-identity
+objectives fail under the unchanged bank; otherwise extra capacity would obscure
+which mechanism created predictive history.
 
 ## Acceptance gates for the next checkpoint
 
@@ -273,15 +304,16 @@ All gates are evaluated on a frozen manifest and glyph bank:
 1. Full-context top-1 must exceed random, last-fixation-only, unigram, and the
    symbolic bigram baseline.
 2. Full-context target energy and top-1 must exceed last-fixation ablations.
-3. Generated target signal must remain positive on held-out fonts.
+3. Generated context cosine gain must exceed `0.02` and the random branch by at
+   least `0.01` on held-out fonts, matching the evaluator.
 4. A 32-cell autonomous rollout must preserve nontrivial ink and remain human
    readable under a blinded rubric.
 5. A visual identity evaluator may score output, but no evaluator signal may
    enter inference.
 6. Student-boundary receipts must continue to report false for token IDs,
    Unicode IDs, OCR, visual codebooks, and external language models.
-7. Scaling beyond the current width is allowed only after the trajectory
-   ablation improves at least two failed gates.
+7. Scaling beyond the current width is allowed only after context advantage and
+   sampled-endpoint identity improve at least two failed gates beyond V6.
 
 ## Dataset path
 
@@ -310,8 +342,9 @@ the fixed-bank oracle establishes cross-font visual identity.
 
 ### P1: causal visual language
 
-Not achieved. The model must beat elementary language baselines and remain
-stable under autonomous visual feedback.
+Not achieved. V6 remains visually populated under autonomous feedback, but its
+marks are unreadable and full-context prediction still loses to elementary
+language baselines.
 
 ### P2: bounded visual instruction following
 
@@ -336,9 +369,10 @@ dialogue.
 
 Image-native representation is a hypothesis, not automatically more efficient
 than tokens. The current receipt shows that a complete 11.69M model fits easily
-on one 4090, but its accuracy is not competitive. Future comparisons must report
-quality at equal tasks alongside VRAM, training energy, latency, throughput,
-storage, and rendering cost. Parameter count alone is not efficiency.
+on one 4090 at 2.576 GiB peak allocation, but its accuracy is not competitive.
+Future comparisons must report quality at equal tasks alongside VRAM, training
+energy, latency, throughput, storage, and rendering cost. Parameter count alone
+is not efficiency.
 
 ## Non-negotiable rules
 

@@ -1,6 +1,6 @@
 # Imagized Language Model
 
-Version: 0.2, retinal-flow experimental paradigm
+Version: 0.3, closed-loop retinal-flow experimental paradigm
 
 Date: 2026-08-12
 
@@ -115,6 +115,26 @@ observation.
 
 This final feedback step is part of the language model, not a UI feature.
 
+### Learn under its own visual distribution
+
+V6 uses the deployed sampler inside training. From a clean image prefix it
+generates two short-flow candidates, selects one by visual energy, detaches the
+selected bitmap, rereads it through the online retina, and advances the
+recurrent state. The added objective is
+
+\[
+\mathcal L_{\mathrm{roll}}=
+0.15\mathcal L_{\mathrm{state}}+
+0.35\mathcal L_{\mathrm{energy}}^{\mathrm{roll}}+
+0.30\mathcal L_{\mathrm{recovery}}.
+\]
+
+The terms align induced and clean states, predict the real next image from an
+induced state, and recover the clean next pixels after generated feedback. The
+selected image remains a continuous bitmap; there is no character target ID.
+This closes the train-inference state-distribution gap without relaxing the
+student boundary.
+
 ## Why the paradigm is useful
 
 Visible writing carries information that symbolic normalization deletes:
@@ -137,37 +157,69 @@ empirical questions.
 
 ## What the current experiment proves
 
-The first complete RFLM has 11,690,244 parameters and trained on one RTX 4090
-with 2.56 GiB peak VRAM. On a fixed 512-character Chinese visual bank:
+The complete RFLM has 11,690,244 parameters. V6 resumed V5 for 1,600
+model-induced rollout updates on one RTX 4090 and peaked at 2.576 GiB. The same
+frozen 512-character Chinese visual bank gives:
 
-- retina-oracle top-1 is 97.65%;
-- recurrent full-context top-1 is 0.91%;
-- last-fixation-only top-1 is 1.36%;
-- unigram top-1 is 1.86%;
-- symbolic bigram top-1 is 13.58%; and
-- generated images have a positive `+0.0211` context cosine signal.
+| Measurement | V5 | V6 |
+|---|---:|---:|
+| Retina-oracle top-1 | 97.65% | 98.18% |
+| Recurrent full-context top-1 | 0.91% | 1.20% |
+| Last-fixation-only top-1 | 1.36% | 1.69% |
+| Unigram top-1 | 1.86% | 1.86% |
+| Symbolic bigram top-1 | 13.58% | 13.58% |
+| Generated context cosine gain | +0.0211 | +0.0077 |
+| Autonomous late/early ink | 0.483 | 1.168 |
+| Autonomous sparse cells | 37.5% | 18.75% |
 
-The visual alphabet is strong, but the language state is weak. Autonomous
-feedback begins with glyph-like ink and then drifts into unreadable fragments.
-The current MVP is rejected as a useful language model.
+![Measured closed-loop result](../publication/ilm-image-native/figures/closed_loop_v6_result.png)
+
+The intervention solves the measured loss-of-ink collapse: V6 preserves
+character-scale marks over 32 generated cells. It also improves frozen-bank
+retrieval. It does **not** solve language: full context remains worse than the
+last image, unigram, and bigram baselines; generated target signal weakens; and
+the output remains unreadable. V6 is rejected as a useful language model.
+
+The combination of `0.961` rollout state cosine and only `0.103` selected-target
+cosine localizes the failure. The recurrent state can return to a clean-like
+region after rereading the wrong image, but the sampled pixels do not express
+the correct next visual identity. State robustness is not semantic generation.
 
 ## What comes next
 
-The next intervention is not immediate scale. It is **model-induced visual
-trajectory training**:
+The next intervention is again not immediate scale. It directly aligns training
+with the two failed gates:
 
-1. Run short autonomous image rollouts from clean prefixes.
-2. Store generated image states in a bounded replay queue.
-3. Mix clean, perturbed, and generated prefixes during training.
-4. Align clean and rollout recurrent trajectories in continuous visual space.
-5. Measure whether full context beats last-fixation, unigram, and bigram
-   baselines.
-6. Require readable 32-cell autonomous output before widening the model.
+1. Build `full` and `last-only` continuous states for the same target image.
+2. Add a visual context-advantage margin that requires full history to score the
+   real next image above the reset last-only state.
+3. Keep full-state visual NCE so the margin cannot be satisfied by degrading
+   only the ablation branch.
+4. Backpropagate through a truncated two-step flow sample and contrast the
+   reread sampled endpoint with independent real target images.
+5. Retain V6's stop-gradient rollout state and recovery losses to preserve
+   autonomous stability.
+6. Require full context to beat last-only and unigram, plus readable 32-cell
+   output, before adding a slow page state or widening the model.
 
-After the causal visual gate passes, add a slow line/page state, image-to-image
-instruction tuning, and provenance-gated historical glyph composition. A local
-LLM may help create or critique offline curricula, but its strings and weights
-must not enter the deployed ILM.
+Formally, for real next image `y`,
+
+\[
+\mathcal L_{\mathrm{ctx}}=
+\max(0,m-s(y\mid h_{\mathrm{full}})+s(y\mid h_{\mathrm{last}})),
+\]
+
+and for a differentiable short-flow endpoint,
+
+\[
+\mathcal L_{\mathrm{sample}}=
+\operatorname{NCE}(R(\hat x_0^{K=2}),\{R(y^{(v)})\}_{v=1}^{V}).
+\]
+
+Both remain image-only. After this causal visual gate passes, add a slow
+line/page state, image-to-image instruction tuning, and provenance-gated
+historical glyph composition. A local LLM may help create or critique offline
+curricula, but its strings and weights must not enter the deployed ILM.
 
 ## Research contract
 
@@ -182,6 +234,8 @@ must not enter the deployed ILM.
 The detailed equations, measured receipt, acceptance gates, and staged
 capabilities are in
 [`first-imagized-language-model-goal.md`](first-imagized-language-model-goal.md).
+The exact V6 experiment and frozen receipts are in
+[`retinal-flow-v6-closed-loop-result.md`](retinal-flow-v6-closed-loop-result.md).
 The literature dossier is in
 [`references/image-native-language-model-research.md`](../references/image-native-language-model-research.md),
 and the compiled paper is in
