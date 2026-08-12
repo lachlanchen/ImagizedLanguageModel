@@ -20,15 +20,25 @@ from ilm.visual_lm.visual_relation_circuit import (
 )
 from ilm.visual_lm.visual_relation_data import PARTITION_SALT
 from scripts.eval_visual_relation_circuit_development_v23 import (
+    AUDIT_ARCHITECTURE,
     validate_pair_metadata,
 )
+from scripts.eval_visual_relation_circuit_frozen_v23 import (
+    EXPECTED_REVIEW_RESULT_SHA256,
+    frozen_performance_gate_report,
+    validate_frozen_authorization,
+)
 from scripts.prepare_visual_relation_blinded_review_v23 import (
+    EXPECTED_PAIRED_AUDIT_SHA256,
     REVIEW_CASES,
     REVIEW_HELDOUT_CASES,
     REVIEW_SEEN_CASES,
     select_review_items,
 )
-from scripts.score_visual_relation_blinded_review_v23 import score_review
+from scripts.score_visual_relation_blinded_review_v23 import (
+    ARCHITECTURE as REVIEW_RESULT_ARCHITECTURE,
+    score_review,
+)
 from scripts.train_visual_relation_circuit_v23 import (
     ARCHITECTURE,
     EXPECTED_CANONICALIZER_SHA256,
@@ -395,3 +405,50 @@ def test_blinded_review_score_enforces_overall_and_heldout_gates() -> None:
         "B" if responses[1]["response"] == "A" else "A"
     )
     assert score_review(answers, responses)["passed"] is False
+
+
+def test_frozen_authorization_requires_every_prior_gate() -> None:
+    candidate = arm_checkpoint(RELATION_AWARE_ROUTE)
+    candidate_sha256 = "candidate"
+    paired = {
+        "architecture": AUDIT_ARCHITECTURE,
+        "paired_gate_passed": True,
+        "checkpoint_sha256": {RELATION_AWARE_ROUTE: candidate_sha256},
+        "frozen_images_instantiated": 0,
+    }
+    review = {
+        "architecture": REVIEW_RESULT_ARCHITECTURE,
+        "paired_gate_passed": True,
+        "blinded_review_passed": True,
+        "frozen_evaluation_permitted": True,
+        "frozen_images_instantiated": 0,
+    }
+    validate_frozen_authorization(
+        candidate=candidate,
+        candidate_sha256=candidate_sha256,
+        paired=paired,
+        paired_sha256=EXPECTED_PAIRED_AUDIT_SHA256,
+        review_result=review,
+        review_result_sha256=EXPECTED_REVIEW_RESULT_SHA256,
+    )
+
+    refused = dict(review, blinded_review_passed=False)
+    with pytest.raises(ValueError, match="did not pass"):
+        validate_frozen_authorization(
+            candidate=candidate,
+            candidate_sha256=candidate_sha256,
+            paired=paired,
+            paired_sha256=EXPECTED_PAIRED_AUDIT_SHA256,
+            review_result=refused,
+            review_result_sha256=EXPECTED_REVIEW_RESULT_SHA256,
+        )
+
+
+def test_frozen_gate_reuses_candidate_thresholds_without_seal_gate() -> None:
+    metrics = passing_candidate_metrics()
+    metrics["frozen_images_instantiated"] = 1.0
+    gates = frozen_performance_gate_report(metrics)
+    assert "frozen_bank_sealed" not in gates
+    assert all(gates.values())
+    metrics["identity_top1"] = 0.75
+    assert frozen_performance_gate_report(metrics)["identity_top1"] is False
