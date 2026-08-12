@@ -52,10 +52,12 @@ identity versus 0.98\% after shuffling intended state---but fails readability.
 A topology-first 2.36M-parameter V18 planner reaches 73.63\% identity top-1
 versus 0.98\% shuffled and pixel F1 0.658 versus 0.313 on a fresh development
 audit at 0.778~GiB peak memory. Simple and medium forms become recognizable;
-dense forms remain malformed, and V18's frozen bank remains sealed. We further
-specify and implement, but do not yet report a trained result for, V19: a
-zero-initialized spatial-retinal residual with fixed complexity strata and five
-causal interventions.
+dense forms remain malformed, and V18's frozen bank remains sealed. V19 then
+tests a zero-initialized spatial-retinal residual under fixed complexity strata
+and five causal interventions. Its fresh 512-candidate development audit rejects
+the mechanism: dense F1 is 0.728, but correct fields improve it by only 0.009
+over shuffled fields and 0.005 over zero fields, against fixed margins of 0.12
+and 0.03. No human or frozen query is authorized.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -132,14 +134,25 @@ implemented controls that makes that slogan falsifiable:
   intent controls generated identity, and V18 shows on development data that a
   2.36M topology-first planner can render recognizable writing without token
   unembedding. Their failures delimit identity, topology, and language choice.
-  \item A preregistered V19 spatial-field correction and a rights-aware Visual
-  Word-Origin Book benchmark that tests readable explanation, historical visual
-  evidence, unencoded forms, provenance, and compute on one consumer GPU.
+  \item A preregistered V19 spatial-field intervention whose negative result
+  separates feature availability from causal use, plus a rights-aware Visual
+  Word-Origin Book benchmark for readable explanation, historical visual
+  evidence, unencoded forms, provenance, and one-GPU compute.
 \end{enumerate}
 
 \section{Prior Art and Gap}
 
-OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. PIXEL reconstructs masked rendered-text patches and demonstrates cross-script visual transfer~\cite{pixel}; PIXAR is a genuinely generative pixel-space autoregressive language model and identifies noisy maximum-likelihood text images as a central difficulty~\cite{pixar}; PixelGPT studies autoregressive visual and textual pretraining~\cite{pixelgpt}. These are the closest model-level precedents. Token-free language models such as CANINE, ByT5, and MEGABYTE remove subwords but retain symbolic bytes or characters. Discrete diffusion language models show that generation need not be left-to-right, but usually retain a linguistic vocabulary.
+OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. PIXEL reconstructs masked rendered-text patches and demonstrates cross-script visual transfer~\cite{pixel}; PIXAR is a genuinely generative pixel-space autoregressive language model and identifies noisy maximum-likelihood text images as a central difficulty~\cite{pixar}; PixelGPT studies autoregressive visual and textual pretraining~\cite{pixelgpt}. These are the closest model-level precedents. Token-free language models such as CANINE, ByT5, and MEGABYTE remove subwords but retain symbolic bytes or characters. BLT and Scratchpad Patching allocate computation dynamically to high-entropy byte regions~\cite{blt,scratchpad}; ILM borrows the adaptive-compute question but not the byte substrate. Discrete diffusion language models show that generation need not be left-to-right, but usually retain a linguistic vocabulary.
+
+Recent continuous approaches sharpen the distinction. Continuous visual
+autoregression can be trained with strictly proper energy scores without vector
+quantization~\cite{continuousvar}. VL-JEPA predicts continuous target-text
+embeddings but invokes a text decoder when output is required~\cite{vljepa}.
+TextLDM reports that reconstruction-quality continuous latents are insufficient
+without alignment to a frozen pretrained language model~\cite{textldm}. These
+results motivate calibrated visual uncertainty and warn against equating
+reconstruction with semantics. Their byte, token, or text-decoder paths remain
+outside the independent ILM student boundary.
 
 I-JEPA shows that predicting target image representations from visual context can
 learn semantic visual fields without reconstructing every pixel~\cite{ijepa}.
@@ -439,7 +452,7 @@ rejects broad-complexity readability, and leaves the frozen identifier bank
 sealed. The next experiment must define complexity strata and a recognition
 rubric prospectively.
 
-\subsection{Spatial-retinal residual V19}
+\subsection{Spatial-retinal residual V19 and its rejection}
 
 V18 compresses the semantic image into one global vector before drawing. V19
 tests the narrower hypothesis that this pooling discards component location in
@@ -501,9 +514,59 @@ prospective gate requires overall pixel F1 above $0.68$, dense F1 above $0.58$,
 dense spatial-shuffle and zero-field advantages, global identity above $0.75$,
 and 38/48 blinded recognitions with stratum-specific minima. The implementation
 passes exact-equivalence, gradient-isolation, field-shape, intervention,
-complexity, and serialization tests. No trained V19 metric is reported here;
-the frozen split remains unavailable until the development and blinded gates
-pass.
+complexity, and serialization tests.
+
+A clean global planner was trained from scratch for 1,600 updates on the V19
+partition, selected at step 1,600, and frozen. It reached development F1 0.6754,
+identity top-1 77.93\%, and target cosine 0.8339. The V19 intervention then
+trained only 764,545 adapter parameters for 1,600 updates in 329.51 seconds,
+using 0.899~GiB peak allocated CUDA memory on one RTX 4090. A separate
+deterministic audit rendered 512 new development candidates. Table
+\ref{tab:v19} records the fixed decision.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V19 development gate & Measured & Required & Result \\
+\midrule
+Overall pixel F1 & 0.6710 & $>0.68$ & fail \\
+Dense pixel F1 & 0.7278 & $>0.58$ & pass \\
+Dense gain over shuffled field & 0.0088 & $>0.12$ & fail \\
+Dense gain over zero field & 0.0054 & $>0.03$ & fail \\
+Identity top-1 & 72.66\% & $>75\%$ & fail \\
+Target cosine & 0.8416 & $>0.84$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{Fresh 512-candidate V19 development audit. Four fixed automatic gates
+fail, so the blinded human review and frozen evaluation are not authorized.}
+\label{tab:v19}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/spatial_motor_plan_v19_result.png}
+  \caption{Measured V19 result. Correct, shuffled-field, and zero-field rows are
+  nearly identical, while shuffling the global state changes identity. The
+  spatial adapter learned a shared residual polish rather than necessary local
+  topology.}
+  \label{fig:v19result}
+\end{figure}
+
+This result rejects the additive routing mechanism, not the possibility that
+the field contains useful information. The global planner can already draw the
+whole form, so ordinary reconstruction gradients need not use the field. The
+next bounded candidate must make local visual state structurally necessary. One
+testable decomposition is
+\[
+p=\sigma\left(U(G(z,s))+(I-UD)H(F,s)\right),
+\]
+where $G$ can emit only a coarse plan and the fixed high-pass projection
+$(I-UD)$ reserves unavailable detail for the field route $H$. A stricter arm
+removes the global spatial seed and permits $z$ only as spatially uniform
+channel modulation. This V20 candidate requires a new preregistration and a
+capacity-matched V19 control; it is not a result reported here.
 
 \section{Data}
 
@@ -701,8 +764,9 @@ intentionally simpler than the complete research space:
   $4\times4$ spatial field. V16 already provides the retina and causal state.
   \item Predict the next continuous visual state from image history and require
   it to beat last-only, unigram, and bigram controls.
-  \item Draw that state with the deterministic V18 motor planner; train only the
-  small V19 spatial residual until dense forms pass the prospective rubric.
+  \item Draw that state with a field-primary topology route. V19 shows that a
+  small optional residual is ignored; V20 must restrict the global branch to
+  coarse semantics/style and pass shuffled, zero, and occluded-field controls.
   \item Feed generated pixels back through the same retina and require a
   readable 32-region autonomous rollout.
   \item Render typed prompts and optional source pages into one canvas, then
@@ -905,14 +969,15 @@ Thus the proposal and flow state gates are accepted, while the bigram language
 gate remains false. Separately, V17 accepts causal visual actuation and rejects
 readable topology. V18 then passes every automatic development topology gate
 and makes many held-out forms readable, but leaves dense-form and prospective
-human-readability gates unresolved. The combined result establishes that a
+human-readability gates unresolved. V19 then rejects an additive local-field
+repair: dense F1 is 0.7278, but field shuffling reduces it by only 0.0088 and
+field removal by only 0.0054. The combined result establishes that a
 small image-only student can learn causal language signal and that a small
 continuous state can control recognizable generated ink; it does not establish
 useful autonomous language. The next proof should isolate the multiscale memory
-contribution while the implemented V19 spatial retinal field is trained and
-tested for dense topology under its fixed protocol. The final
-closed 32-cell loop must then remain readable. This order is also consistent
-with measured error
+contribution while a new field-primary writer makes local topology causally
+necessary under matched controls. The final closed 32-cell loop must then remain
+readable. This order is also consistent with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
@@ -939,11 +1004,16 @@ and 73.63\% identity top-1 on fresh development renderings, versus 0.313 and
 writing can be generated as continuous image topology by a compact model on one
 consumer GPU without token unembedding. Dense forms still fail, the V18 frozen
 bank remains sealed, and the intended state is supplied rather than predicted.
+V19 adds a clean split, fixed complexity strata, five interventions, and a
+prospective blinded rule, then rejects its own proposed repair: the correct
+field gains only 0.0088 dense F1 over a shuffled field and 0.0054 over no field.
+This demonstrates that exposing local features is not equivalent to using them
+causally.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are paired multiscale-memory ablation and training the implemented V19
-spatial-retinal residual under its prospectively fixed readability rubric,
-followed only then by a closed write-reread loop. The named product gate is a
+tests are paired multiscale-memory ablation and a preregistered field-primary
+V20 motor route that structurally prevents the global state from redrawing fine
+topology, followed only then by a closed write-reread loop. The named product gate is a
 Visual Word-Origin Book that reads a rendered prompt alone or composed with a
 source page, then emits an answer image and optional declared text sidecar.
 Historical etymology answers and broad instruction following remain downstream
@@ -968,6 +1038,8 @@ that general sensory-language extension is not established here.
 \bibitem{canine} Clark et al. CANINE: Pre-training an Efficient Tokenization-Free Encoder. \url{https://arxiv.org/abs/2103.06874}
 \bibitem{byt5} Xue et al. ByT5: Towards a Token-Free Future. \url{https://arxiv.org/abs/2105.13626}
 \bibitem{megabyte} Yu et al. MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers. \url{https://arxiv.org/abs/2305.07185}
+\bibitem{blt} Pagnoni et al. Byte Latent Transformer: Patches Scale Better Than Tokens. \url{https://arxiv.org/abs/2412.09871}
+\bibitem{scratchpad} Zheng et al. Scratchpad Patching: Decoupling Compute from Patch Size in Byte-Level Language Models. \url{https://arxiv.org/abs/2605.09630}
 \bibitem{d3pm} Austin et al. Structured Denoising Diffusion Models in Discrete State-Spaces. \url{https://arxiv.org/abs/2107.03006}
 \bibitem{diffusionlm} Li et al. Diffusion-LM Improves Controllable Text Generation. \url{https://arxiv.org/abs/2205.14217}
 \bibitem{sedd} Lou et al. Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution. \url{https://arxiv.org/abs/2310.16834}
@@ -982,6 +1054,9 @@ that general sensory-language extension is not established here.
 \bibitem{rjepa} Velarde and Parra. Recurrent Joint Embedding Predictive Architecture with Recurrent Forward Propagation Learning. \url{https://arxiv.org/abs/2411.16695}
 \bibitem{djepa} Chen et al. Denoising with a Joint-Embedding Predictive Architecture. \url{https://arxiv.org/abs/2410.03755}
 \bibitem{elf} Hu et al. ELF: Embedded Language Flows. \url{https://arxiv.org/abs/2605.10938}
+\bibitem{continuousvar} Shao, Meng, and Zhou. Continuous Visual Autoregressive Generation via Score Maximization. \url{https://arxiv.org/abs/2505.07812}
+\bibitem{vljepa} Chen et al. VL-JEPA: Joint Embedding Predictive Architecture for Vision-language. \url{https://arxiv.org/abs/2512.10942}
+\bibitem{textldm} Jiang et al. TextLDM: Language Modeling with Continuous Latent Diffusion. \url{https://arxiv.org/abs/2605.07748}
 \bibitem{dagger} Ross, Gordon, and Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. \url{https://proceedings.mlr.press/v15/ross11a.html}
 \bibitem{scheduledsampling} Bengio et al. Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks. \url{https://papers.nips.cc/paper_files/paper/2015/hash/e995f98d56967d946471af29d7bf99f1-Abstract.html}
 \bibitem{inputperturb} Ning et al. Input Perturbation Reduces Exposure Bias in Diffusion Models. \url{https://proceedings.mlr.press/v202/ning23a.html}

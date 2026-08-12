@@ -42,7 +42,42 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Current Proof: Visual Motor Plan V18
+## Latest Causal Test: V19 Rejected
+
+![Measured V19 spatial retinal residual: correct, shuffled, and zero spatial fields produce nearly identical writing, so the preregistered causal topology gate fails](publication/ilm-image-native/figures/spatial_motor_plan_v19_result.png)
+
+V19 tested the next proposed correction instead of assuming it worked. A clean
+`2,358,977`-parameter global planner was first trained from scratch on a new
+salted split. Its weights and the V16 retina were then frozen while a
+`764,545`-parameter adapter learned from the retina's continuous `4x4x192`
+spatial field. The target image supplied loss only. The student still received
+no token IDs, Unicode IDs, OCR, strings, character labels, lookup, codebook, or
+external language model.
+
+On a fresh 512-candidate development audit, dense pixel F1 is `0.7278`, but the
+correct field beats a shuffled field by only **`0.0088`** and a zero field by
+only **`0.0054`**. The prospectively fixed margins were `>0.12` and `>0.03`.
+Overall F1 (`0.6710`) and identity top-1 (`72.66%`) also miss their fixed gates.
+
+| V19 development gate | Measured | Required | Result |
+|---|---:|---:|:---:|
+| Overall pixel F1 | `0.6710` | `>0.68` | fail |
+| Dense pixel F1 | `0.7278` | `>0.58` | pass |
+| Dense gain over shuffled field | **`+0.0088`** | `>0.12` | fail |
+| Dense gain over zero field | **`+0.0054`** | `>0.03` | fail |
+| Identity top-1 | `72.66%` | `>75%` | fail |
+| Target cosine | `0.8416` | `>0.84` | pass |
+
+The automatic gate is rejected, so human review was not authorized and the
+frozen split remains sealed. The result identifies a routing failure: an
+optional local residual can polish a complete global writer without making
+local topology necessary. V20 will make the retinal field the primary
+high-frequency topology path and restrict global state to coarse semantics and
+style. See the [full V19 result](docs/spatial-retinal-motor-plan-v19-result.md)
+and the
+[2026 continuous-sensory decision scan](references/continuous_sensory_language_scan_2026.md).
+
+## Accepted Development Proof: Visual Motor Plan V18
 
 ![Measured V18 visual motor plan: a compact image-native decoder writes recognizable held-out Chinese forms from continuous visual intent](publication/ilm-image-native/figures/visual_motor_plan_v18_result.png)
 
@@ -177,8 +212,10 @@ There is no nearest-character lookup or output vocabulary. The continuous state
 proof now passes random, last-only, unigram, context-use, and target-signal
 gates. It still fails the bigram language gate. V18 passes automatic development
 topology gates but is not frozen-promoted because its human rubric was
-underspecified and dense forms still fail. The autonomous write-reread loop
-remains withheld until both modules pass a new fixed protocol independently.
+underspecified and dense forms still fail. V19 then rejects an additive spatial
+residual as the repair: correct, shuffled, and zero spatial fields produce
+nearly the same output. The autonomous write-reread loop remains withheld until
+a topology-necessary local route and the language core pass independently.
 
 The strict student boundary remains:
 
@@ -235,6 +272,22 @@ score margins were an invalid acceptance measure. V7 does not prove readable
 continuation, historical question answering, efficiency over a text LLM, or
 Qwen-8B parity. The result motivates the Predictive Visual Field separation
 shown above.
+
+## Audit The V19 Spatial Test
+
+Reproduce the fresh V19 development audit. The evaluator verifies the clean
+global-baseline hash and cannot access the sealed frozen split:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_spatial_motor_plan_development.py \
+  --checkpoint artifacts/spatial_motor_plan_v19_pilot/checkpoint_latest.pt \
+  --out artifacts/spatial_motor_plan_v19_step1600_development_audit \
+  --samples 128 --batch-size 32 --num-workers 8 \
+  --sample-count 32 --sample-columns 8 --device cuda --precision bf16
+```
+
+The fixed protocol, full training commands, hashes, and failed gate are in
+[`docs/spatial-retinal-motor-plan-v19-result.md`](docs/spatial-retinal-motor-plan-v19-result.md).
 
 ## Run The Visual Motor Plan
 
@@ -359,11 +412,13 @@ InkStream implementations remain as baselines. They are not the current model.
 ILM is a research codebase for **language learned and generated as visible
 writing**. Its current experiment predicts continuous retinal states with a
 causal proposal and hyperspherical flow, then tests visual actuation separately.
-V18 now writes recognizable development forms through a deterministic spatial
-motor plan; it is deliberately not coupled to the still-sub-bigram language
-core. Older structured embeddings, codebooks, and page diffusion experiments
-remain available as falsified or comparative baselines; they do not define the
-current model boundary.
+V18 writes recognizable development forms through a deterministic spatial motor
+plan. V19 shows that simply adding local retinal features as a residual does not
+make those features causally responsible for topology. The next experiment is a
+field-primary motor route, deliberately kept separate from the still-sub-bigram
+language core. Older structured embeddings, codebooks, and page diffusion
+experiments remain available as falsified or comparative baselines; they do not
+define the current model boundary.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
 
@@ -384,6 +439,8 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V19 spatial causal-test result | `docs/spatial-retinal-motor-plan-v19-result.md` |
+| 2026 continuous-sensory research scan | `references/continuous_sensory_language_scan_2026.md` |
 | V18 visual motor-plan result | `docs/visual-motor-plan-v18-result.md` |
 | V17 causal actuator result | `docs/visual-state-actuator-v17-result.md` |
 | V16 predictive visual-field result | `docs/predictive-visual-field-v16-memory-result.md` |

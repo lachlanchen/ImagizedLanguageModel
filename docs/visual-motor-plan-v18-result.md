@@ -194,25 +194,28 @@ This factorization is both more efficient and more testable than asking a large
 diffusion model to rediscover linguistic identity, stroke topology, and style
 from noise in one network.
 
-## Remaining Bottleneck And V19
+## Remaining Bottleneck, V19 Result, And V20
 
 V18 compresses the intended form into one global `192`-dimensional vector. That
 state preserves identity well enough for many forms but can discard the exact
-location and separation of dense components. V19 should preserve a continuous
-spatial retinal field, for example an `8x8xC` feature map, and decode it at
-multiple stroke scales. This remains image-native and continuous; it is not a
-glyph ID or a codebook.
+location and separation of dense components. V19 subsequently exposed the
+retina's continuous `4x4x192` field and added it as a zero-initialized residual
+to a clean frozen global planner. It preregistered image-complexity strata, a
+numeric blinded-recognition rule, and five interventions on a new salted split.
 
-The next proof should:
+V19 rejected that repair. On its fresh development audit, correct-field dense
+F1 (`0.72776`) was nearly unchanged by shuffling (`0.71898`) or zeroing
+(`0.72241`) the field. The fixed causal margins failed, human review was not
+authorized, and the frozen bank remained sealed. The full record is in
+[`spatial-retinal-motor-plan-v19-result.md`](spatial-retinal-motor-plan-v19-result.md).
 
-1. preregister visual-complexity strata using image geometry rather than text
-   labels;
-2. preregister a blinded human/candidate recognition threshold;
-3. compare global intent, spatial intent, and spatial-plus-global intent on one
-   shared development protocol;
-4. open a new frozen bank only after the fixed readability rule passes; and
-5. couple the accepted motor planner to predicted PVF states only after the
-   isolated writer is stable.
+V20 must therefore make the local field the primary topology route rather than
+an optional residual. The next proof should compare capacity-matched global,
+field-primary, fused, shuffled-field, zero-field, and local-occlusion arms under
+a new preregistration. Global state may control coarse semantics and style, but
+must not be able to redraw all fine topology by itself. Only a writer that
+passes automatic causality, blinded readability, and a new frozen evaluation
+may be coupled to predicted PVF states.
 
 ## Reproduction
 
