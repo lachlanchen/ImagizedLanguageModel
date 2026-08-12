@@ -84,13 +84,27 @@ all 1,024 original and counterfactual prompts, while mean query attention is
 $1.37{\times}10^{-13}$. V22 therefore rejects single-frame selection as a
 relational binding mechanism. No candidate selects and frozen images remain
 uninstantiated.
+V23 replaces single-frame selection with relation before generation. A
+separately selected 1.122M-parameter image canonicalizer is frozen; a
+25,602-parameter relation circuit compares query and label images, reads the
+operation image, routes one of two visible source glyphs, and emits a canonical
+answer image. On a fresh 1,024-episode development audit, the candidate reaches
+99.80\% query and operation switch accuracy and 99.51\% identity top-1. Exact
+query-blind and operation-blind controls have zero switch and zero pixel change
+for their hidden factor. An opaque agent visual review scores 48/48 overall and
+12/12 held-out. The single authorized frozen evaluation over 98 unseen
+identities reaches 99.83\% binary choice, 99.61\% query switch, 99.71\%
+operation switch, 99.46\% identity top-1, and 0.785 pixel F1. Every fixed gate
+passes without frozen model selection or threshold changes. This accepts a
+fixed two-pair same/other visual grammar, not free-form language.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
 and provenance-linked historical or unencoded forms. The present experiments
-establish causal visual-language signal and compact continuous-image writing,
-not autonomous question answering, broad readability, Qwen parity, or
-efficiency over text models. More generally, ILM treats writing as the first
+establish causal visual-language signal, compact continuous-image writing, and
+one bounded image-prompt-to-image-answer relation, not autonomous question
+answering, broad readability, Qwen parity, or efficiency over text models.
+More generally, ILM treats writing as the first
 instance of language modeled as a continuous sensory field. A proposed Visual
 Language Stream adds sequence/time and optional geometric depth to the same
 image-native contract, so a page, book stream, 3D glyph string, or character
@@ -201,6 +215,11 @@ implemented controls that makes that slogan falsifiable:
   parameter-matched query-blind control. Its negative result localizes failure
   to relational binding: the selector collapses onto the operation image while
   writer quality and identity rise almost identically in both arms.
+  \item V23, a compositional visual relation circuit with an independently
+  selected and frozen image canonicalizer, matched query-blind and
+  operation-blind controls, held-out relation compositions, an opaque visual
+  review, and one frozen-identity evaluation. It supplies the first accepted
+  bounded image-prompt-to-image-answer result in this project.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -856,7 +875,7 @@ data construction, blinded review is unauthorized, and no frozen image is
 instantiated. V22 establishes a real image-prompt to image-answer interface and
 weak unseen-form writing only; it does not establish prompt understanding.
 
-The next test removes unrestricted single-frame selection. A shared visual
+V23 removes unrestricted single-frame selection. A shared visual
 comparator must match query and label images, while an operation-image reader
 provides a continuous gate,
 \[
@@ -874,6 +893,145 @@ symbolic target index enters the student. Exact query-blind, operation-blind,
 pair-swap, query-counterfactual, and operation-counterfactual interventions are
 required before any longer answer stream. A qualified writer should be frozen
 first so binder/writer co-adaptation cannot hide another average-glyph route.
+
+\subsection{Visual Relation Circuit V23: bounded prompt relation accepted}
+
+V23 fixes the V22 causal defect while preserving the same strict visual
+interface. Its bank contains 817 training, 109 development, and 98 frozen
+Chinese identities under the preregistered salt
+\texttt{visual-relation-circuit-v23}. The two held-out operation/label
+compositions never occur during training, although every individual operation
+and label pair does. Every model call receives only floating image tensors or
+continuous states derived from those tensors; renderer strings and episode
+metadata are deleted before \texttt{forward}.
+
+Stage A independently trains a 1,122,081-parameter convolutional U-Net to map a
+noncanonical source-glyph image to a canonical target image. It has no identity
+embedding, target-font ID, coordinate channel, or character table. The selected
+step-1,000 checkpoint reaches 0.7583 pixel F1, 0.9951 identity top-1, and 0.9375
+target cosine on all 109 unseen development identities. Its pixel-F1 gains over
+the raw source and a shuffled source are 0.2173 and 0.4237. The canonicalizer is
+then frozen before relation training.
+
+Stage B uses normalized frozen-retina states. For each label image,
+\[
+c_i=\langle R(q),R(l_i)\rangle,\qquad
+m_i=\operatorname{softmax}_{i\in\{1,2\}}(\tau c_i),
+\]
+where the positive temperature $\tau$ is learned. A small operation-image
+reader produces
+\[
+s=\sigma(U_\theta(R(o))),
+\]
+and composes match and operation before generation:
+\[
+w_i=s m_i+(1-s)(1-m_i),\qquad
+x_r=w_1g_1+w_2g_2,\qquad
+\hat y=C_\psi(x_r).
+\]
+Thus same routes the visually matched source and other routes its complement.
+The operation semantics are learned from answer-image loss, not supplied as a
+class label. The routed variable is a continuous source-pixel field, and
+$C_\psi$ is the frozen Stage A canonicalizer. The trainable relation circuit
+has 25,602 parameters: the operation reader, one temperature scalar, and two
+continuous null states.
+
+Candidate, query-blind, and operation-blind arms have exactly identical
+parameter names and shapes. Query-blind replaces only $R(q)$ with its learned
+continuous null state; operation-blind replaces only $R(o)$. All arms process
+base, query-counterfactual, operation-counterfactual, and pair-swapped image
+prompts jointly for 600 fixed updates. The selected candidate reaches 0.9946
+binary choice, 0.9902 query switch, 0.9902 operation switch, 0.9873 identity
+top-1, and 0.7548 pixel F1 on checkpoint-selection development data.
+
+A fresh paired audit then constructs 1,024 new development episodes and 4,096
+prompt variants. Table~\ref{tab:v23paired} reports the exact interventions. The
+candidate changes identity and pixels when either visible causal factor changes.
+Each blind control is exactly invariant to the factor it cannot see, and all
+arms remain exactly invariant to pair order.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Fresh paired metric & Relation-aware & Query-blind & Operation-blind \\
+\midrule
+Binary choice & 0.9990 & 0.5010 & 0.5002 \\
+Query switch & 0.9980 & 0.0000 & 0.0615 \\
+Operation switch & 0.9980 & 0.0156 & 0.0000 \\
+Identity top-1 & 0.9951 & 0.2947 & 0.2993 \\
+Pixel F1 & 0.7563 & 0.5407 & 0.5404 \\
+Query-output L1 & 0.1915 & 0.0000 & 0.0109 \\
+Operation-output L1 & 0.1912 & 0.0017 & 0.0000 \\
+Pair-swap output L1 & 0.0000 & 0.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\caption{V23 fresh paired development audit. A control has exactly zero
+response to its blinded factor by construction, while the relation-aware arm
+retains both dependencies with matched parameter shapes.}
+\label{tab:v23paired}
+\end{table}
+
+After the paired gate passes, an opaque development review presents 48 image
+cards without transcriptions, targets, correctness labels, or frozen examples.
+The reviewing agent chooses which of the two visible source forms the generated
+answer depicts before the scorer opens the sealed key. It obtains 48/48 overall
+and 12/12 on held-out compositions, above the fixed 44/48 and 11/12 gates. This
+is an agent visual review, not a human-subject study.
+
+Only then does the frozen evaluator instantiate the 98 held-out identities. It
+runs once on 1,024 episodes, 4,096 prompt variants, and four identity-bank
+views, with no model selection or threshold changes. Every gate in
+Table~\ref{tab:v23frozen} passes. The run takes 4.74 seconds and peaks at
+0.498~GiB allocated CUDA memory. Stage A training takes 214.10 seconds at
+0.700~GiB; candidate relation training takes 117.18 seconds at 1.406~GiB, all
+on one RTX 4090.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V23 frozen gate & Measured & Required & Result \\
+\midrule
+Binary choice & 0.9983 & $>0.95$ & pass \\
+Query switch & 0.9961 & $>0.90$ & pass \\
+Operation switch & 0.9971 & $>0.90$ & pass \\
+Held-out minimum switch & 0.9961 & $>0.85$ & pass \\
+Identity top-1 & 0.9946 & $>0.75$ & pass \\
+Pixel F1 & 0.7848 & $>0.68$ & pass \\
+Target cosine & 0.9399 & $>0.82$ & pass \\
+Query-label visual match & 0.9995 & $>0.98$ & pass \\
+Operation-gate accuracy & 1.0000 & $>0.98$ & pass \\
+Pair-swap consistency & 1.0000 & $>0.99$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{Single authorized V23 frozen evaluation over previously unseen
+identities. Every threshold was fixed before implementation and remained
+unchanged.}
+\label{tab:v23frozen}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_relation_circuit_v23_result.png}
+  \caption{Measured V23 result. Actual frozen samples show generated answers
+  above their targets for base, query-counterfactual,
+  operation-counterfactual, and pair-swapped prompts. The matched blind
+  controls localize both causal dependencies, and the single frozen run passes
+  every fixed gate.}
+  \label{fig:v23result}
+\end{figure}
+
+V23 therefore accepts a bounded image-only relation: multiple visible roles
+are composed, unseen source forms are routed, and the answer is emitted as
+pixels. It does not establish arbitrary syntax or free-form generation. Frame
+roles and the two-pair same/other algebra remain architecturally fixed, and the
+answer is a canonicalized version of one visible source form. The next test
+must remove fixed frame roles, consume a variable-length visual instruction,
+emit at least two answer-image frames, and make frame 2 causally depend on
+rereading the generated pixels of frame 1.
 
 \section{Data}
 
@@ -1302,17 +1460,21 @@ answer identity correctly for only 0.78\% of query-counterfactual pairs, versus
 equal. Every candidate selector argmax lands on the operation image. Thus the
 implemented stream boundary works, but an entropy-sharpened single-frame
 selector cannot perform the required multi-frame relation.
+V23 then qualifies and freezes an image canonicalizer before learning the
+relation. Its candidate reaches 99.80\% minimum query/operation switch on a
+fresh paired audit; the corresponding blind controls are exactly invariant.
+The opaque visual review and single frozen evaluation also pass, with 99.46\%
+frozen identity top-1 and 0.7848 pixel F1. This turns V22's interface into the
+first accepted bounded image-prompt-to-image-answer circuit in the project.
 The combined result establishes that a small image-only student can learn
-causal language signal and that a small continuous field can control
-topographic generated ink; it does not establish useful autonomous language.
-The next proof must qualify a writer independently and replace selection with a
-compositional visual circuit that compares query and label images, reads the
-operation image, and routes the corresponding glyph state under exact query-
-and operation-blind controls. Only after this bounded relation passes should a
-causal memory predict longer answer fields and reread its own outputs. The final
-closed multi-frame loop must remain readable and prompt-dependent. This order
-is also consistent with measured error accumulation in iterative diffusion
-chains~\cite{inputperturb}.
+causal language signal, that a small continuous field can control topographic
+generated ink, and that several visual roles can be composed into a rendered
+answer. It does not establish useful autonomous language. The next proof must
+remove fixed frame roles, integrate a variable-length visual instruction, and
+generate a two-frame answer whose second frame causally depends on rereading
+the first generated image. The closed multi-frame loop must remain readable and
+prompt-dependent. This order is also consistent with measured error
+accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -1365,13 +1527,23 @@ than the query-blind control's 0, 0, and 0.1533. The operation frame receives
 all 1,024 candidate selector argmaxes. This demonstrates why prompt-dependent
 image generation requires relation composition, not simply a visual
 Transformer, sharp attention, and a pixel writer.
+V23 supplies that composition with a separately qualified writer and three
+matched 25,602-parameter relation arms. Fresh development controls, an opaque
+visual review, and the single frozen run agree: the candidate uses both query
+and operation images, preserves pair-order invariance, generalizes to held-out
+compositions and 98 unseen identities, and renders the selected form. Frozen
+binary choice is 0.9983, identity top-1 is 0.9946, and pixel F1 is 0.7848. The
+maximum supported claim is fixed-grammar visual relation following. The roles
+and relation algebra remain built into the circuit, and the answer remains a
+canonicalized visible source form.
 The seven-context V16 increase is too small to establish an architecture win,
-and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are an independently qualified continuity-preserving writer and a
-multi-frame visual relation circuit under query-blind, operation-blind,
-pair-swap, and counterfactual controls. Only selected components may enter a
-closed write--reread loop and longer visual memory. The named product gate is a
-Visual Word-Origin Book that
+and the 13.14\% bigram still rejects the causal memory core. The next
+attributable test is a variable-length visual instruction stream with learned
+role localization and a two-frame autonomous answer. Instruction-blind,
+evidence-blind, generated-history-blind, and counterfactual controls must show
+that frame 2 depends on the prompt and on rereading frame 1. Only selected
+components may enter longer visual memory. The named product gate is a Visual
+Word-Origin Book that
 reads a rendered prompt alone or composed with a source page, then emits one
 answer image or an ordered answer-image stream plus an optional declared text
 sidecar. Prompt counterfactuals must change that answer correctly; input
