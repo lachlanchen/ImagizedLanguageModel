@@ -244,12 +244,14 @@ class VisualEpisodeDataset(Dataset):
         *,
         image_size: int = 384,
         seed: int = 0,
+        include_answer: bool = True,
     ):
         if not episodes:
             raise ValueError("VisualEpisodeDataset requires at least one episode")
         self.episodes = list(episodes)
         self.image_size = int(image_size)
         self.seed = int(seed)
+        self.include_answer = bool(include_answer)
         self.epoch = 0
 
     def set_epoch(self, epoch: int) -> None:
@@ -283,11 +285,15 @@ class VisualEpisodeDataset(Dataset):
         )
         query_a = augment_episode_image(query_a, rng)
         query_b = augment_episode_image(query_b, rng)
-        answer = render_episode_answer(
-            episode,
-            image_size=self.image_size,
-            variant=rng.randrange(2**31),
-            augment=True,
+        answer = (
+            render_episode_answer(
+                episode,
+                image_size=self.image_size,
+                variant=rng.randrange(2**31),
+                augment=True,
+            )
+            if self.include_answer
+            else query_a
         )
         return {
             "query_a": pil_to_tensor(query_a),

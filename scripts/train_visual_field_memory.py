@@ -226,6 +226,17 @@ def encode_training_fields(
     return first, second, answer_field
 
 
+def encode_query_fields(
+    model: VisualAssociativeReader,
+    query_a: torch.Tensor,
+    query_b: torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    batch = query_a.shape[0]
+    fields = model.retina(torch.cat((query_a, query_b), dim=0))
+    first, second = fields.split(batch, dim=0)
+    return model.project_query(first), model.project_query(second)
+
+
 def train_batch(
     model: VisualAssociativeReader,
     batch: dict[str, Any],
@@ -239,25 +250,36 @@ def train_batch(
 ) -> dict[str, float]:
     query_a = batch["query_a"].to(device, non_blocking=True)
     query_b = batch["query_b"].to(device, non_blocking=True)
-    answer = batch["answer"].to(device, non_blocking=True)
+    answer = batch["answer"].to(device, non_blocking=True) if answer_weight > 0 else None
     optimizer.zero_grad(set_to_none=True)
     with autocast_context(device, precision):
-        first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
+        if answer is None:
+            first, second = encode_query_fields(model, query_a, query_b)
+            answer_field = None
+        else:
+            first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
         view_field_loss, view_parts = vicreg_field_loss(first, second)
-        answer_field_loss, answer_parts = vicreg_field_loss(first, answer_field)
+        if answer_field is None:
+            answer_field_loss = first.new_zeros(())
+            answer_parts = {"field_std": first.detach().float().std(dim=0).mean()}
+        else:
+            answer_field_loss, answer_parts = vicreg_field_loss(first, answer_field)
         normalized_first = F.normalize(first, dim=-1)
         normalized_second = F.normalize(second, dim=-1)
-        normalized_answer = F.normalize(answer_field, dim=-1)
         view_nce, view_accuracy = symmetric_info_nce(
             normalized_first,
             normalized_second,
             model.contrastive_scale,
         )
-        answer_nce, answer_accuracy = symmetric_info_nce(
-            normalized_first,
-            normalized_answer,
-            model.contrastive_scale,
-        )
+        if answer_field is None:
+            answer_nce = first.new_zeros(())
+            answer_accuracy = first.new_zeros(())
+        else:
+            answer_nce, answer_accuracy = symmetric_info_nce(
+                normalized_first,
+                F.normalize(answer_field, dim=-1),
+                model.contrastive_scale,
+            )
         loss = (
             view_field_loss
             + answer_weight * answer_field_loss
@@ -292,6 +314,7 @@ def validation_batch_metrics(
     *,
     device: torch.device,
     precision: str,
+    include_answer: bool,
     maximum_batches: int = 8,
 ) -> dict[str, float]:
     model.eval()
@@ -302,19 +325,27 @@ def validation_batch_metrics(
             break
         query_a = batch["query_a"].to(device)
         query_b = batch["query_b"].to(device)
-        answer = batch["answer"].to(device)
+        answer = batch["answer"].to(device) if include_answer else None
         with autocast_context(device, precision):
-            first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
+            if answer is None:
+                first, second = encode_query_fields(model, query_a, query_b)
+                answer_field = None
+            else:
+                first, second, answer_field = encode_training_fields(model, query_a, query_b, answer)
             view_loss, view_accuracy = symmetric_info_nce(
                 F.normalize(first, dim=-1),
                 F.normalize(second, dim=-1),
                 model.contrastive_scale,
             )
-            answer_loss, answer_accuracy = symmetric_info_nce(
-                F.normalize(first, dim=-1),
-                F.normalize(answer_field, dim=-1),
-                model.contrastive_scale,
-            )
+            if answer_field is None:
+                answer_loss = first.new_zeros(())
+                answer_accuracy = first.new_zeros(())
+            else:
+                answer_loss, answer_accuracy = symmetric_info_nce(
+                    F.normalize(first, dim=-1),
+                    F.normalize(answer_field, dim=-1),
+                    model.contrastive_scale,
+                )
         totals["view_loss"] += float(view_loss)
         totals["answer_loss"] += float(answer_loss)
         totals["view_accuracy"] += float(view_accuracy)
@@ -488,13 +519,29 @@ def main() -> None:
         args.encoder_holdout_fraction,
     )
     all_episodes = list(instruction_episodes) + list(historical)
-    train_dataset = VisualEpisodeDataset(encoder_train, image_size=args.image_size, seed=args.seed)
+    include_answer = args.answer_weight > 0
+    train_dataset = VisualEpisodeDataset(
+        encoder_train,
+        image_size=args.image_size,
+        seed=args.seed,
+        include_answer=include_answer,
+    )
     validation_source = holdout[: max(args.batch_size, min(len(holdout), args.batch_size * 8))]
     if not validation_source:
         validation_source = encoder_train[: max(1, min(len(encoder_train), args.batch_size * 4))]
-    validation_dataset = VisualEpisodeDataset(validation_source, image_size=args.image_size, seed=args.seed + 50_000)
+    validation_dataset = VisualEpisodeDataset(
+        validation_source,
+        image_size=args.image_size,
+        seed=args.seed + 50_000,
+        include_answer=include_answer,
+    )
     historical_dataset = (
-        VisualEpisodeDataset(historical, image_size=args.image_size, seed=args.seed + 100_000)
+        VisualEpisodeDataset(
+            historical,
+            image_size=args.image_size,
+            seed=args.seed + 100_000,
+            include_answer=include_answer,
+        )
         if historical
         else None
     )
@@ -616,6 +663,7 @@ def main() -> None:
             validation_loader,
             device=device,
             precision=args.precision,
+            include_answer=include_answer,
         )
         event = {
             "stage": "epoch",
