@@ -22,6 +22,13 @@ from ilm.visual_lm.visual_relation_data import PARTITION_SALT
 from scripts.eval_visual_relation_circuit_development_v23 import (
     validate_pair_metadata,
 )
+from scripts.prepare_visual_relation_blinded_review_v23 import (
+    REVIEW_CASES,
+    REVIEW_HELDOUT_CASES,
+    REVIEW_SEEN_CASES,
+    select_review_items,
+)
+from scripts.score_visual_relation_blinded_review_v23 import score_review
 from scripts.train_visual_relation_circuit_v23 import (
     ARCHITECTURE,
     EXPECTED_CANONICALIZER_SHA256,
@@ -340,3 +347,51 @@ def test_fresh_audit_metadata_refuses_smoke_and_unequal_shapes() -> None:
     unequal[OPERATION_BLIND_ROUTE]["trainable_parameter_shapes"][0]["shape"] = [1]
     with pytest.raises(ValueError, match="parameter shapes differ"):
         validate_pair_metadata(unequal)
+
+
+def test_blinded_review_selection_has_fixed_balance() -> None:
+    class FakeDataset:
+        def __len__(self) -> int:
+            return 200
+
+        def __getitem__(self, index: int) -> dict[str, object]:
+            return {
+                "metadata": {"heldout_combination": index % 3 == 0},
+            }
+
+    selected = select_review_items(FakeDataset())
+    assert len(selected) == REVIEW_CASES
+    heldout = sum(
+        bool(item["metadata"]["heldout_combination"])
+        for _, item in selected
+    )
+    assert heldout == REVIEW_HELDOUT_CASES
+    assert len(selected) - heldout == REVIEW_SEEN_CASES
+
+
+def test_blinded_review_score_enforces_overall_and_heldout_gates() -> None:
+    answers = [
+        {
+            "review_id": f"R-{index:02d}",
+            "correct_source": "A" if index % 2 == 0 else "B",
+            "heldout_combination": index < REVIEW_HELDOUT_CASES,
+        }
+        for index in range(REVIEW_CASES)
+    ]
+    responses = [
+        {"review_id": row["review_id"], "response": row["correct_source"]}
+        for row in answers
+    ]
+    for index in (0, 12, 13, 14):
+        responses[index]["response"] = (
+            "B" if responses[index]["response"] == "A" else "A"
+        )
+    score = score_review(answers, responses)
+    assert score["correct"] == 44
+    assert score["heldout_correct"] == 11
+    assert score["passed"] is True
+
+    responses[1]["response"] = (
+        "B" if responses[1]["response"] == "A" else "A"
+    )
+    assert score_review(answers, responses)["passed"] is False
