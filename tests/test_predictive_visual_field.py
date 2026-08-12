@@ -9,13 +9,19 @@ from ilm.visual_lm.predictive_visual_field import (
     PredictiveVisualFieldConfig,
     hyperspherical_flow_path,
     initialize_from_retinal_flow_checkpoint,
+    predictive_visual_field_config_from_payload,
+    predictive_visual_field_config_payload,
     predictive_visual_field_loss,
     sphere_exponential_map,
 )
 from ilm.visual_lm.retinal_flow_lm import RetinalFlowConfig, RetinalFlowLanguageModel
 
 
-def small_config(*, flow_geometry: str = "euclidean") -> PredictiveVisualFieldConfig:
+def small_config(
+    *,
+    flow_geometry: str = "euclidean",
+    context_memory_blocks: int = 0,
+) -> PredictiveVisualFieldConfig:
     return PredictiveVisualFieldConfig(
         fovea_size=16,
         visual_dim=64,
@@ -28,6 +34,10 @@ def small_config(*, flow_geometry: str = "euclidean") -> PredictiveVisualFieldCo
         time_dim=32,
         proposal_hidden_dim=128,
         proposal_blocks=1,
+        context_memory_blocks=context_memory_blocks,
+        context_memory_heads=4,
+        context_memory_kernel=3,
+        context_memory_ff_multiplier=2,
         condition_dropout=0.0,
         sample_temperature=0.10,
         flow_geometry=flow_geometry,
@@ -44,6 +54,7 @@ def test_predictive_visual_field_has_strict_state_only_boundary() -> None:
     assert any(parameter.requires_grad for parameter in model.dynamics.parameters())
     assert any(parameter.requires_grad for parameter in model.visual_proposal.parameters())
     assert any(parameter.requires_grad for parameter in model.state_flow.parameters())
+    assert model.context_memory is None
 
     images = torch.rand(2, 3, 1, model.config.fovea_size, model.config.fovea_size)
     proposal = model.predict(images)["proposal_visual"]
@@ -54,6 +65,54 @@ def test_predictive_visual_field_has_strict_state_only_boundary() -> None:
         atol=1e-6,
         rtol=1e-6,
     )
+
+
+def test_residual_multiscale_memory_is_causal_and_trainable() -> None:
+    torch.manual_seed(7)
+    model = PredictiveVisualField(small_config(context_memory_blocks=3)).eval()
+    assert model.context_memory is not None
+    assert float(model.context_memory.residual_logit.sigmoid().max().detach()) < 0.02
+
+    visual = F.normalize(torch.randn(2, 8, model.config.visual_dim), dim=-1)
+    changed_future = visual.clone()
+    changed_future[:, 5:] = F.normalize(
+        torch.randn_like(changed_future[:, 5:]),
+        dim=-1,
+    )
+    original_state, _ = model.integrate_visual(visual)
+    changed_state, _ = model.integrate_visual(changed_future)
+
+    torch.testing.assert_close(
+        original_state[:, :5],
+        changed_state[:, :5],
+        atol=2e-6,
+        rtol=2e-6,
+    )
+    assert not torch.allclose(original_state[:, 5:], changed_state[:, 5:])
+
+    model.train()
+    trained_state, _ = model.integrate_visual(visual)
+    trained_state.square().mean().backward()
+    assert any(
+        parameter.grad is not None and float(parameter.grad.abs().sum()) > 0.0
+        for parameter in model.context_memory.parameters()
+    )
+
+
+def test_legacy_config_payload_defaults_to_gru_only_memory() -> None:
+    payload = predictive_visual_field_config_payload(small_config())
+    for key in (
+        "context_memory_blocks",
+        "context_memory_heads",
+        "context_memory_kernel",
+        "context_memory_ff_multiplier",
+    ):
+        payload.pop(key)
+
+    restored = predictive_visual_field_config_from_payload(payload)
+
+    assert restored.context_memory_blocks == 0
+    assert PredictiveVisualField(restored).context_memory is None
 
 
 class ConstantVelocity(nn.Module):

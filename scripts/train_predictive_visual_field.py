@@ -11,6 +11,7 @@ import signal
 import time
 from collections import Counter
 from contextlib import nullcontext
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -69,6 +70,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--condition-dropout", type=float, default=0.10)
     parser.add_argument("--sample-temperature", type=float, default=0.08)
     parser.add_argument(
+        "--context-memory-blocks",
+        type=int,
+        default=0,
+        help="residual dilated-attention blocks; upgrades a legacy PVF when positive",
+    )
+    parser.add_argument("--context-memory-heads", type=int, default=6)
+    parser.add_argument("--context-memory-kernel", type=int, default=5)
+    parser.add_argument("--context-memory-ff-multiplier", type=int, default=3)
+    parser.add_argument(
         "--flow-geometry",
         choices=("euclidean", "hypersphere"),
         default="hypersphere",
@@ -104,8 +114,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-workers", type=int, default=10)
     parser.add_argument("--lr", type=float, default=1.5e-4)
     parser.add_argument("--dynamics-lr-ratio", type=float, default=0.25)
+    parser.add_argument("--context-memory-lr-ratio", type=float, default=1.0)
     parser.add_argument("--minimum-lr-ratio", type=float, default=0.08)
     parser.add_argument("--warmup-steps", type=int, default=100)
+    parser.add_argument(
+        "--lr-schedule-origin-step",
+        type=int,
+        default=0,
+        help="global checkpoint step treated as step zero for a continuation schedule",
+    )
     parser.add_argument("--weight-decay", type=float, default=0.04)
     parser.add_argument("--gradient-clip", type=float, default=1.0)
     parser.add_argument("--precision", choices=("fp32", "fp16", "bf16"), default="bf16")
@@ -273,6 +290,10 @@ def model_config_from_source(
         flow_hidden_dim=args.flow_hidden_dim,
         flow_blocks=args.flow_blocks,
         time_dim=args.time_dim,
+        context_memory_blocks=args.context_memory_blocks,
+        context_memory_heads=args.context_memory_heads,
+        context_memory_kernel=args.context_memory_kernel,
+        context_memory_ff_multiplier=args.context_memory_ff_multiplier,
         condition_dropout=args.condition_dropout,
         sample_temperature=args.sample_temperature,
         flow_geometry=args.flow_geometry,
@@ -406,7 +427,11 @@ def checkpoint_payload(
         "training_visual_anchor_bank": visual_anchor_manifest,
         "student_contract": {
             "input": "ordered continuous writing-image foveas",
-            "state": "causal continuous visual field",
+            "state": (
+                "causal GRU plus residual multiscale visual memory"
+                if model.context_memory is not None
+                else "causal continuous GRU visual field"
+            ),
             "distribution": "conditional rectified flow over image-derived retinal states",
             "flow_geometry": model.config.flow_geometry,
             "output_for_this_stage": "continuous sampled retinal state",
@@ -446,8 +471,33 @@ def main() -> None:
         model_config = predictive_visual_field_config_from_payload(
             resume_checkpoint["model_config"]
         )
+        if args.context_memory_blocks:
+            if model_config.context_memory_blocks not in {
+                0,
+                args.context_memory_blocks,
+            }:
+                raise ValueError(
+                    "requested context-memory blocks differ from the resume checkpoint"
+                )
+            if model_config.context_memory_blocks == 0:
+                model_config = replace(
+                    model_config,
+                    context_memory_blocks=args.context_memory_blocks,
+                    context_memory_heads=args.context_memory_heads,
+                    context_memory_kernel=args.context_memory_kernel,
+                    context_memory_ff_multiplier=args.context_memory_ff_multiplier,
+                )
+                resume_optimizer_state = False
         render_config = RetinalRenderConfig(**resume_checkpoint["render_config"])
         initialization = dict(resume_checkpoint.get("initialization", {}))
+        if not resume_optimizer_state:
+            initialization["context_memory_upgrade"] = {
+                "source": "random_residual_initialized_near_zero",
+                "blocks": model_config.context_memory_blocks,
+                "heads": model_config.context_memory_heads,
+                "kernel": model_config.context_memory_kernel,
+                "optimizer_reset": True,
+            }
     else:
         source_checkpoint = torch.load(
             args.initialize_from,
@@ -529,15 +579,30 @@ def main() -> None:
         missing = list(incompatible.missing_keys)
         if unexpected:
             raise ValueError(f"unexpected resume parameters: {unexpected}")
-        if any(not key.startswith("visual_proposal.") for key in missing):
+        if any(
+            not key.startswith(("visual_proposal.", "context_memory."))
+            for key in missing
+        ):
             raise ValueError(f"unsupported missing resume parameters: {missing}")
         if missing:
             resume_optimizer_state = False
-            initialization["visual_proposal_initialization"] = {
-                "source": "random",
-                "missing_parameters": len(missing),
-                "optimizer_reset": True,
-            }
+            proposal_missing = sum(key.startswith("visual_proposal.") for key in missing)
+            memory_missing = sum(key.startswith("context_memory.") for key in missing)
+            if proposal_missing:
+                initialization["visual_proposal_initialization"] = {
+                    "source": "random",
+                    "missing_parameters": proposal_missing,
+                    "optimizer_reset": True,
+                }
+            if memory_missing:
+                initialization["context_memory_upgrade"] = {
+                    "source": "random_residual_initialized_near_zero",
+                    "missing_parameters": memory_missing,
+                    "blocks": model_config.context_memory_blocks,
+                    "heads": model_config.context_memory_heads,
+                    "kernel": model_config.context_memory_kernel,
+                    "optimizer_reset": True,
+                }
     model = model.to(device)
     visual_anchor_candidates = encode_visual_anchor_images(
         model,
@@ -547,21 +612,29 @@ def main() -> None:
     )
     del visual_anchor_images
 
+    parameter_groups: list[dict[str, Any]] = [
+        {
+            "params": (
+                list(model.state_flow.parameters())
+                + list(model.visual_proposal.parameters())
+                + [model.logit_scale]
+            ),
+            "lr_ratio": 1.0,
+        },
+        {
+            "params": model.dynamics.parameters(),
+            "lr_ratio": args.dynamics_lr_ratio,
+        },
+    ]
+    if model.context_memory is not None:
+        parameter_groups.append(
+            {
+                "params": model.context_memory.parameters(),
+                "lr_ratio": args.context_memory_lr_ratio,
+            }
+        )
     optimizer = torch.optim.AdamW(
-        [
-            {
-                "params": (
-                    list(model.state_flow.parameters())
-                    + list(model.visual_proposal.parameters())
-                    + [model.logit_scale]
-                ),
-                "lr_ratio": 1.0,
-            },
-            {
-                "params": model.dynamics.parameters(),
-                "lr_ratio": args.dynamics_lr_ratio,
-            },
-        ],
+        parameter_groups,
         lr=args.lr,
         betas=(0.9, 0.95),
         weight_decay=args.weight_decay,
@@ -582,6 +655,10 @@ def main() -> None:
         del resume_checkpoint
 
     planned_steps = args.maximum_steps or args.epochs * max(1, len(train_loader))
+    if not 0 <= args.lr_schedule_origin_step <= global_step:
+        raise ValueError("lr_schedule_origin_step must be between zero and resume step")
+    if args.lr_schedule_origin_step >= planned_steps:
+        raise ValueError("lr_schedule_origin_step must precede the planned terminal step")
     startup = {
         "stage": "startup",
         "architecture": ARCHITECTURE,
@@ -595,12 +672,19 @@ def main() -> None:
         "visual_proposal_parameters": sum(
             parameter.numel() for parameter in model.visual_proposal.parameters()
         ),
+        "context_memory_parameters": (
+            sum(parameter.numel() for parameter in model.context_memory.parameters())
+            if model.context_memory is not None
+            else 0
+        ),
+        "context_memory_blocks": model.config.context_memory_blocks,
         "flow_geometry": model.config.flow_geometry,
         "records": len(records),
         "train_records": len(train_dataset.records),
         "validation_records": len(validation_dataset.records),
         "sequence_length": args.sequence_length,
         "planned_steps": planned_steps,
+        "lr_schedule_origin_step": args.lr_schedule_origin_step,
         "initialization": initialization,
         "training_visual_anchor_bank": visual_anchor_manifest,
         "retinal_fonts": list(RETINAL_CJK_AVAILABLE_FONTS),
@@ -638,10 +722,10 @@ def main() -> None:
                 break
             global_step += 1
             base_lr = scheduled_lr(
-                global_step,
+                global_step - args.lr_schedule_origin_step,
                 base=args.lr,
                 warmup=args.warmup_steps,
-                total=planned_steps,
+                total=planned_steps - args.lr_schedule_origin_step,
                 minimum_ratio=args.minimum_lr_ratio,
             )
             for group in optimizer.param_groups:

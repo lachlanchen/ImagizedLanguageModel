@@ -26,6 +26,10 @@ class PredictiveVisualFieldConfig:
     time_dim: int = 128
     proposal_hidden_dim: int = 512
     proposal_blocks: int = 2
+    context_memory_blocks: int = 0
+    context_memory_heads: int = 6
+    context_memory_kernel: int = 5
+    context_memory_ff_multiplier: int = 3
     condition_dropout: float = 0.10
     sample_temperature: float = 0.08
     flow_geometry: str = "euclidean"
@@ -41,6 +45,17 @@ class PredictiveVisualFieldConfig:
             raise ValueError("retinal state flow is underspecified")
         if self.proposal_hidden_dim < 128 or self.proposal_blocks < 1:
             raise ValueError("continuous visual proposal is underspecified")
+        if self.context_memory_blocks < 0:
+            raise ValueError("context_memory_blocks must be non-negative")
+        if self.context_memory_blocks:
+            if self.context_memory_heads < 1:
+                raise ValueError("context_memory_heads must be positive")
+            if self.state_dim % self.context_memory_heads:
+                raise ValueError("state_dim must be divisible by context_memory_heads")
+            if self.context_memory_kernel < 3 or self.context_memory_kernel % 2 == 0:
+                raise ValueError("context_memory_kernel must be an odd integer of at least 3")
+            if self.context_memory_ff_multiplier < 2:
+                raise ValueError("context_memory_ff_multiplier must be at least two")
         if self.time_dim < 32 or self.time_dim % 2:
             raise ValueError("time_dim must be an even integer of at least 32")
         if not 0.0 <= self.condition_dropout < 1.0:
@@ -169,6 +184,121 @@ class ContinuousVisualProposal(nn.Module):
         return F.normalize(self.output(hidden), dim=-1)
 
 
+class CausalVisualMemoryBlock(nn.Module):
+    """Fuse dilated local fields with global causal attention."""
+
+    def __init__(
+        self,
+        dimension: int,
+        *,
+        heads: int,
+        kernel: int,
+        dilation: int,
+        ff_multiplier: int,
+        dropout: float,
+    ):
+        super().__init__()
+        self.dimension = dimension
+        self.heads = heads
+        self.head_dim = dimension // heads
+        self.kernel = kernel
+        self.dilation = dilation
+        self.dropout = dropout
+        self.local_norm = nn.LayerNorm(dimension)
+        self.local_field = nn.Conv1d(
+            dimension,
+            dimension,
+            kernel_size=kernel,
+            dilation=dilation,
+            groups=dimension,
+        )
+        self.local_gate = nn.Linear(dimension, dimension * 2)
+        self.local_output = nn.Linear(dimension, dimension)
+        self.attention_norm = nn.LayerNorm(dimension)
+        self.qkv = nn.Linear(dimension, dimension * 3)
+        self.attention_output = nn.Linear(dimension, dimension)
+        self.ff_norm = nn.LayerNorm(dimension)
+        self.ff_input = nn.Linear(dimension, dimension * ff_multiplier * 2)
+        self.ff_output = nn.Linear(dimension * ff_multiplier, dimension)
+
+    def forward(self, hidden: torch.Tensor) -> torch.Tensor:
+        if hidden.ndim != 3 or hidden.shape[-1] != self.dimension:
+            raise ValueError("causal visual memory expects [batch, length, dimension]")
+
+        local = self.local_norm(hidden).transpose(1, 2)
+        left_padding = self.dilation * (self.kernel - 1)
+        local = self.local_field(F.pad(local, (left_padding, 0))).transpose(1, 2)
+        local_value, local_gate = self.local_gate(local).chunk(2, dim=-1)
+        local = self.local_output(F.silu(local_value) * local_gate.sigmoid())
+        hidden = hidden + F.dropout(local, p=self.dropout, training=self.training)
+
+        normalized = self.attention_norm(hidden)
+        batch, length = normalized.shape[:2]
+        qkv = self.qkv(normalized).reshape(
+            batch,
+            length,
+            3,
+            self.heads,
+            self.head_dim,
+        )
+        query, key, value = qkv.unbind(dim=2)
+        query = query.transpose(1, 2)
+        key = key.transpose(1, 2)
+        value = value.transpose(1, 2)
+        attended = F.scaled_dot_product_attention(
+            query,
+            key,
+            value,
+            dropout_p=self.dropout if self.training else 0.0,
+            is_causal=True,
+        )
+        attended = attended.transpose(1, 2).reshape(batch, length, self.dimension)
+        attended = self.attention_output(attended)
+        hidden = hidden + F.dropout(attended, p=self.dropout, training=self.training)
+
+        value, gate = self.ff_input(self.ff_norm(hidden)).chunk(2, dim=-1)
+        feed_forward = self.ff_output(F.silu(value) * gate.sigmoid())
+        return hidden + F.dropout(feed_forward, p=self.dropout, training=self.training)
+
+
+class ResidualCausalVisualMemory(nn.Module):
+    """Learn a causal multiscale correction while preserving a trained GRU base."""
+
+    def __init__(self, config: PredictiveVisualFieldConfig):
+        super().__init__()
+        self.state_dim = config.state_dim
+        self.visual_projection = nn.Linear(config.visual_dim, config.state_dim)
+        self.blocks = nn.ModuleList(
+            CausalVisualMemoryBlock(
+                config.state_dim,
+                heads=config.context_memory_heads,
+                kernel=config.context_memory_kernel,
+                dilation=2**index,
+                ff_multiplier=config.context_memory_ff_multiplier,
+                dropout=config.dropout,
+            )
+            for index in range(config.context_memory_blocks)
+        )
+        self.output_norm = nn.LayerNorm(config.state_dim)
+        self.output = nn.Linear(config.state_dim, config.state_dim)
+        self.residual_logit = nn.Parameter(torch.full((config.state_dim,), -4.0))
+
+    def forward(
+        self,
+        visual: torch.Tensor,
+        recurrent_state: torch.Tensor,
+    ) -> torch.Tensor:
+        if visual.ndim != 3 or recurrent_state.ndim != 3:
+            raise ValueError("visual memory inputs must have [batch, length, dimension]")
+        if visual.shape[:2] != recurrent_state.shape[:2]:
+            raise ValueError("visual and recurrent memory sequences must align")
+        hidden = recurrent_state.float() + self.visual_projection(visual.float())
+        for block in self.blocks:
+            hidden = block(hidden)
+        correction = self.output(self.output_norm(hidden))
+        return recurrent_state.float() + self.residual_logit.sigmoid() * correction
+
+
 class RetinalStateFlow(nn.Module):
     """Conditional velocity field in an image-derived continuous state space."""
 
@@ -255,6 +385,11 @@ class PredictiveVisualField(nn.Module):
             batch_first=True,
             dropout=config.dropout if config.state_layers > 1 else 0.0,
         )
+        self.context_memory = (
+            ResidualCausalVisualMemory(config)
+            if config.context_memory_blocks
+            else None
+        )
         self.visual_proposal = ContinuousVisualProposal(config)
         self.state_flow = RetinalStateFlow(config)
         self.logit_scale = nn.Parameter(
@@ -283,6 +418,18 @@ class PredictiveVisualField(nn.Module):
         encoded = self.encode_images(foveas.reshape(batch * length, *foveas.shape[2:]))
         return encoded.reshape(batch, length, self.config.visual_dim)
 
+    def integrate_visual(
+        self,
+        visual: torch.Tensor,
+        initial_state: torch.Tensor | None = None,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Integrate image states through recurrent and optional multiscale memory."""
+
+        recurrent_state, final_state = self.dynamics(visual, initial_state)
+        if self.context_memory is None:
+            return recurrent_state, final_state
+        return self.context_memory(visual, recurrent_state), final_state
+
     def predict(
         self,
         context_foveas: torch.Tensor,
@@ -290,7 +437,7 @@ class PredictiveVisualField(nn.Module):
         initial_state: torch.Tensor | None = None,
     ) -> dict[str, torch.Tensor]:
         visual = self.encode_sequence(context_foveas)
-        state, final_state = self.dynamics(visual, initial_state)
+        state, final_state = self.integrate_visual(visual, initial_state)
         condition = torch.cat((state, visual), dim=-1)
         proposal = self.visual_proposal(
             condition.reshape(-1, condition.shape[-1])
@@ -433,7 +580,7 @@ def _sample_identity_inputs(
     positive[query, query] = True
     positive[query, condition.shape[0] + query] = True
     with torch.no_grad():
-        last_state, _ = model.dynamics(current_visual[:, None])
+        last_state, _ = model.integrate_visual(current_visual[:, None])
         last_condition = torch.cat((last_state[:, 0], current_visual), dim=-1)
     return condition, last_condition, candidates, positive
 
