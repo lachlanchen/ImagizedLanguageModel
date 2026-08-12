@@ -8,29 +8,32 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM es un proyecto de investigación para aprender y generar lenguaje como
-**escritura visible**. El modelo actual lee fijaciones de tinta ordenadas,
-mantiene un estado visual continuo y escribe la siguiente fijación directamente
-en píxeles mediante flujo rectificado. Los codebooks y modelos de difusión de
-página anteriores se conservan como líneas base, no como el paradigma actual.
+ILM investiga cómo aprender y generar lenguaje como **escritura visible**: de
+imagen a estado visual continuo y de nuevo a imagen, sin un canal simbólico
+oculto.
 
-## Paradigma actual: modelo de lenguaje de flujo retinal
+## Paradigma de investigación actual: campo visual predictivo
 
-![Diagrama del modelo de lenguaje de flujo retinal](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+![Diagrama del campo visual predictivo](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-El límite del alumno es estricto: `píxeles de escritura -> estado retinal
-continuo -> píxeles de tinta`. El alumno no recibe tokens, identificadores
-Unicode, OCR, codebooks visuales ni un modelo de lenguaje externo. El lector
-visual alcanzó `97,65%` en identidad visual, pero la predicción con contexto
-completo fue sólo `0,91%`, por debajo de unigram (`1,86%`) y bigram (`13,58%`).
-La continuación autónoma también deriva hacia marcas ilegibles. Por tanto,
-**el MVP actual queda rechazado como modelo de lenguaje**. El siguiente paso es
-entrenar sobre trayectorias visuales inducidas por el propio modelo, no escalarlo
-de inmediato.
+El experimento RFLM V7 mostró que un único flujo de píxeles no debe inferir la
+identidad lingüística y dibujar los trazos en la misma operación. V7 elevó el
+top-1 de contexto completo de `1,20%` a `2,31%`, por encima de last-only
+(`2,02%`) y unigram (`1,86%`), pero lejos de bigram (`13,58%`). La ganancia
+normalizada de log-probabilidad mejoró de `-0,9066` a `-0,2155`, pero siguió
+siendo negativa, y la salida autónoma continuó ilegible. Por eso **V7 queda
+rechazado como modelo de lenguaje**.
+
+El siguiente PVF separa un flujo continuo que predice el próximo estado retinal
+de un actuador visual que lo renderiza como tinta y lo vuelve a leer. No hay
+búsqueda del carácter más cercano ni tabla de salida. El límite sigue siendo
+`píxeles de escritura -> dinámica visual continua -> píxeles de tinta`, sin
+tokens, Unicode IDs, OCR, codebook visual ni modelo externo. PVF es una hipótesis
+V8 falsable, no una capacidad demostrada.
 
 > El repositorio mantiene de forma deliberada un pipeline práctico de etimología y experimentación ILM a largo plazo lado a lado.
 

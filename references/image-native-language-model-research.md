@@ -2,11 +2,11 @@
 
 Date: 2026-08-12
 
-## 2026-08-12 experimental revision: Retinal Flow Language Model
+## 2026-08-12 experimental revision: Predictive Visual Field
 
-The project now has a stricter and more complete experimental paradigm than the
-Visual Folio retrieval system described below. The **Retinal Flow Language
-Model (RFLM)** is a causal model over continuous image fixations:
+The project now has a measured bridge from Retinal Flow Language Modeling to a
+new **Predictive Visual Field (PVF)** hypothesis. The implemented RFLM remains a
+causal model over continuous image fixations:
 
 ```text
 ordered ink images -> foveal retina -> recurrent visual field
@@ -29,55 +29,78 @@ The implemented system has four trainable parts:
 4. A conditional pixel-space rectified-flow writer with high-noise training and
    a differentiable write-read cycle.
 
-The model contains 11,690,244 parameters. Its V6 run resumed the clean-prefix
-V5 checkpoint for 1,600 updates with exact model-induced visual rollouts and
-peaked at 2.576 GiB on one RTX 4090. A fixed evaluation over 512 common Han
-characters, four prototype views, and 2,423 held-out contexts produced:
+The model contains 11,690,244 parameters. V7 resumed the closed-loop V6
+checkpoint for 800 updates on one RTX 4090. It added independent image-anchor
+context contrast, normalized target likelihood, and differentiable
+sampled-endpoint identity. A fixed evaluation over 512 common Han characters,
+four prototype views, and 2,423 eligible held-out contexts produced:
 
-| Measurement | V5 | V6 closed loop |
+| Measurement | V6 closed loop | V7 step 5,800 |
 |---|---:|---:|
-| Retina oracle top-1 | 97.648% | 98.184% |
-| Random full-context top-1 | 0.041% | 0.041% |
-| RFLM full-context top-1 | 0.908% | 1.197% |
-| RFLM full-context top-5 | 2.229% | 3.219% |
-| Last-fixation-only top-1 | 1.362% | 1.692% |
+| Retina oracle top-1 | 98.184% | 98.267% |
+| RFLM full-context top-1 | 1.197% | **2.311%** |
+| RFLM full-context top-5 | 3.219% | **5.613%** |
+| Last-fixation-only top-1 | 1.692% | 2.022% |
 | Unigram top-1 | 1.857% | 1.857% |
 | Symbolic bigram top-1 | 13.578% | 13.578% |
-| Generated context cosine gain | +0.0211 | +0.0077 |
-| Generated sample target hit | 1.5625% | 1.0417% |
-| Autonomous late/early ink | 0.483 | 1.168 |
-| Autonomous sparse cells | 37.5% | 18.75% |
+| Raw target-score gain | +2.806 | +2.463 |
+| Normalized target-log-probability gain | -0.9066 | **-0.2155** |
+| Generated context cosine gain | +0.0077 | **+0.0303** |
+| Generated sample target hit | 1.0417% | 0.5208% |
+| Autonomous late/early ink | 1.168 | **1.050** |
+| Autonomous sparse cells | 18.75% | **15.63%** |
 
-The V6 objective samples the deployed flow writer from a clean prefix, selects
-continuous bitmap candidates with the deployed energy, rereads the selected
-bitmap, and trains clean-versus-induced state consistency, next-image energy,
-and recovery flow. It follows the distribution-shift lesson of DAgger and
-scheduled sampling while remaining image-only. Input-perturbation work in
-diffusion models provides a related warning that iterative chains accumulate
-errors when train and inference inputs differ.
+V6 samples its deployed pixel writer, rereads selected bitmap candidates, and
+trains state consistency, next-image energy, and recovery flow. V7 retains that
+stability regularizer and adds two corrections. First, it compares full and
+last-only states using normalized visual target probability rather than raw
+energy. Second, it differentiates through a two-step pixel-flow endpoint and
+aligns the reread sample with independent target images. The training image
+anchors are selected offline, use pixels disjoint from the evaluator views, do
+not expose IDs or target indices to the student, and are not deployed.
 
-The acceptance result remains false. Model-induced training eliminates V5's
-loss-of-ink collapse and modestly improves retrieval, but both 32-cell outputs
-remain unreadable. Full context is still worse than last-only, unigram, and
-bigram baselines, and generated target signal weakens. A high rollout-state
-cosine (`0.961`) paired with low selected-target cosine (`0.103`) shows that
-robust state recovery is not equivalent to generating the right linguistic
-image.
+The acceptance result remains false. V7 more than doubles top-1, crosses the
+unigram baseline, restores generated context signal, and closes about 76% of
+V6's calibrated context deficit. Nevertheless, normalized full-history gain is
+still negative, top-1 is far below the 13.578% bigram, and matched 32-cell
+generation remains unreadable. Raw energy remains positive in both V6 and V7,
+which proves why it cannot serve as an acceptance metric.
 
-The next research intervention is therefore a **visual context-advantage and
-sampled-identity objective**. It explicitly trains a full-prefix state to score
-the real next image above a reset last-only state, while a truncated
-differentiable flow unroll aligns the actually sampled endpoint with independent
-target-image views. V6's stop-gradient rollout losses remain to preserve the
-stability gain. A slow page state and larger model are deferred until this
-direct intervention passes the unchanged gate.
+This result motivates a structural split:
+
+```text
+writing pixels -> image-derived retinal states -> causal visual state flow
+               -> sampled intended state -> pixel actuator -> writing pixels
+```
+
+PVF first learns the conditional distribution of the next retinal state with
+flow matching. A separate pixel writer then renders a sampled state and is
+audited by rereading. There is no nearest-character projection or token
+unembedding at deployment. This makes the state-flow branch falsifiable before
+typographic generation is allowed to obscure its language accuracy.
+
+Three primary research threads make this intervention technically plausible
+without establishing it in advance:
+
+- [Recurrent JEPA](https://arxiv.org/abs/2411.16695) explicitly predicts the
+  representation of the next visual fixation from past fixations and analyzes
+  collapse avoidance.
+- [D-JEPA](https://arxiv.org/abs/2410.03755) separates target-embedding
+  prediction from a compact conditional generative model, avoiding the need to
+  denoise the complete predictor.
+- [Embedded Language Flows](https://arxiv.org/abs/2605.10938) reports effective
+  language dynamics in continuous embedding flow. ELF still starts and ends
+  with discrete tokens, so it does not satisfy the ILM boundary; PVF replaces
+  its token embedding/unembedding with an image retina and pixel actuator.
 
 The RFLM does not replace the need for provenance-bearing folio memory. It
 replaces that memory as the definition of the language model. Later etymology
 answers should combine an autonomous visual writer for connective language with
 a separate evidence gate that inserts attested historical pixels.
 
-The complete measured receipt is in
+The complete V7 measured receipt is in
+[`docs/retinal-flow-v7-anchor-identity-result.md`](../docs/retinal-flow-v7-anchor-identity-result.md).
+The V6 precursor remains in
 [`docs/retinal-flow-v6-closed-loop-result.md`](../docs/retinal-flow-v6-closed-loop-result.md).
 
 ## 2026 architecture revision: Visual Folio Machine
@@ -130,9 +153,10 @@ The proposed object is an **image-native language model**:
 image/page/glyph input -> visual latent language state -> image/page/glyph output
 ```
 
-The current RFLM uses continuous retinal vectors and pixel-space flow. It
-deliberately does not use VAE IDs or a learned visual codebook: a finite glyph
-code vocabulary would weaken the open-form claim and could become a renamed
+The implemented RFLM uses continuous retinal vectors and pixel-space flow. The
+next PVF separates a continuous retinal-state flow from a conditioned pixel
+actuator. Neither uses VAE IDs or a learned visual codebook: a finite glyph-code
+vocabulary would weaken the open-form claim and could become a renamed
 character vocabulary. Earlier latent/codebook proposals are retained below as
 historical design alternatives.
 

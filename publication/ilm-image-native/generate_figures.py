@@ -313,6 +313,195 @@ def retinal_flow_paradigm() -> None:
     img.save(FIG / "retinal_flow_paradigm.png", quality=95)
 
 
+def predictive_visual_field_paradigm() -> None:
+    """Render the post-V7 image-native state-and-rendering separation."""
+    img = Image.new("RGB", (2400, 1440), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    navy = "#102a43"
+    blue = "#0b6fa4"
+    green = "#16835b"
+    amber = "#b45f06"
+    red = "#b42318"
+    grey = "#475467"
+
+    d.text((80, 42), "Predictive Visual Field", font=font(54, True), fill=navy)
+    d.text(
+        (82, 112),
+        "Language evolves as a distribution over continuous retinal states; a separate visual actuator writes each state as ink.",
+        font=font(27),
+        fill=grey,
+    )
+    d.rounded_rectangle((80, 172, 2320, 240), radius=8, fill="#e8f4f8", outline="#8ec9d6", width=2)
+    centered_text(
+        d,
+        (95, 174, 2305, 238),
+        "STRICT STUDENT: writing pixels -> continuous visual dynamics -> writing pixels   |   no tokens, OCR, Unicode IDs, codebook, or character lookup",
+        font(22, True),
+        navy,
+    )
+
+    d.text((80, 282), "1  SEE AND REMEMBER", font=font(28, True), fill=blue)
+    rounded(d, (80, 335, 440, 645), "#ffffff", "#8ebbd2", radius=8)
+    d.text((112, 360), "Visible writing", font=font(25, True), fill=navy)
+    for index, glyph in enumerate(["天", "地", "玄", "黃", "宇", "宙"]):
+        row, col = divmod(index, 3)
+        x = 112 + col * 99
+        y = 430 + row * 92
+        d.rectangle((x, y, x + 76, y + 72), fill="#fffdf8", outline="#94a3b8", width=2)
+        centered_text(d, (x, y - 3, x + 76, y + 72), glyph, cjk_font(45), "#111827")
+    d.text((110, 610), "x_t: arbitrary image fixation", font=font(18), fill=grey)
+
+    rounded(d, (545, 335, 875, 645), "#ecfdf3", "#58a889", radius=8)
+    d.text((578, 360), "Retinal manifold", font=font(25, True), fill=navy)
+    for r in range(5):
+        for c in range(5):
+            shade = 55 + 19 * ((r * 2 + c) % 4)
+            d.ellipse((605 + c * 43, 430 + r * 34, 625 + c * 43, 450 + r * 34), fill=(shade, 145, 172))
+    d.text((594, 610), "z_t = R(x_t), continuous", font=font(18), fill=grey)
+
+    rounded(d, (980, 335, 1395, 645), "#fff7ed", "#d99a52", radius=8)
+    d.text((1015, 360), "Causal visual field", font=font(25, True), fill=navy)
+    for i, label in enumerate(("fast", "line", "page")):
+        y = 430 + i * 58
+        d.rounded_rectangle((1035, y, 1338, y + 42), radius=6, fill="#ffffff", outline="#d97706", width=2)
+        d.text((1060, y + 7), f"{label} predictive state", font=font(19, i == 2), fill=amber)
+    d.text((1018, 610), "h_t = C(z_1, ..., z_t)", font=font(18), fill=grey)
+
+    arrow_any(d, (440, 490), (540, 490), blue)
+    arrow_any(d, (875, 490), (975, 490), blue)
+
+    d.text((1510, 282), "2  IMAGINE THE NEXT VISUAL STATE", font=font(28, True), fill=green)
+    rounded(d, (1510, 335, 2320, 645), "#f0fdf4", "#58a889", radius=8)
+    d.text((1548, 360), "Continuous retinal flow", font=font(25, True), fill=navy)
+    d.text((1548, 412), "q_tau = (1-tau) z_(t+1) + tau epsilon", font=font(21), fill=grey)
+    for i in range(7):
+        x = 1580 + i * 94
+        y = 525 - int(52 * math.sin(i / 6 * math.pi))
+        radius = 17 + i
+        color = "#8ecae6" if i < 3 else "#39a278"
+        d.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color, outline="#ffffff", width=2)
+        if i:
+            arrow_any(d, (x - 74, y + (10 if i < 4 else -4)), (x - radius - 5, y), green, width=3)
+    d.text(
+        (1550, 577),
+        "noise -> sampled image-derived state z_hat_(t+1)",
+        font=font(20, True),
+        fill=green,
+    )
+    d.text((1550, 611), "no nearest-glyph lookup", font=font(18, True), fill=green)
+    arrow_any(d, (1395, 490), (1505, 490), green)
+
+    d.text((80, 710), "3  WRITE THE PLAN, THEN SEE IT AGAIN", font=font(28, True), fill=green)
+    rounded(d, (80, 765, 610, 1085), "#ffffff", "#8ebbd2", radius=8)
+    d.text((115, 790), "Visual actuator", font=font(25, True), fill=navy)
+    d.text((115, 850), "pixel flow conditioned on:", font=font(21), fill=grey)
+    d.text((115, 895), "h_t + z_hat_(t+1) + local style", font=font(22, True), fill=green)
+    d.text((115, 950), "The writer draws an intended visual state;", font=font(19), fill=grey)
+    d.text((115, 986), "it no longer discovers language and strokes", font=font(19), fill=grey)
+    d.text((115, 1022), "inside the same denoising operation.", font=font(19), fill=grey)
+
+    rounded(d, (735, 765, 1115, 1085), "#fff7ed", "#d99a52", radius=8)
+    d.text((770, 790), "Continuous ink", font=font(25, True), fill=navy)
+    for i in range(4):
+        x = 782 + (i % 2) * 145
+        y = 866 + (i // 2) * 92
+        d.rectangle((x, y, x + 100, y + 74), fill="#ffffff", outline="#94a3b8", width=2)
+        d.line((x + 18, y + 54, x + 46, y + 17, x + 78, y + 55), fill="#1f2937", width=5)
+        d.line((x + 28, y + 36, x + 76, y + 36), fill="#1f2937", width=4 + i)
+
+    rounded(d, (1240, 765, 1660, 1085), "#ecfdf3", "#58a889", radius=8)
+    d.text((1274, 790), "Reread and verify", font=font(25, True), fill=navy)
+    d.text((1275, 858), "z_read = R(x_hat)", font=font(22, True), fill=green)
+    d.text((1275, 910), "cycle: z_read ~= z_hat", font=font(21), fill=grey)
+    d.text((1275, 962), "pixels become the next input", font=font(20), fill=grey)
+    d.text((1275, 1014), "unknown and ancient forms stay images", font=font(18), fill=grey)
+
+    rounded(d, (1785, 765, 2320, 1085), "#fef2f2", "#d65a50", radius=8)
+    d.text((1820, 790), "What V7 falsified", font=font(25, True), fill=red)
+    d.text((1820, 850), "One pixel flow was asked to learn", font=font(20), fill=grey)
+    d.text((1820, 888), "both linguistic identity and rendering.", font=font(20), fill=grey)
+    d.text((1820, 942), "2.31% top-1 > 1.86% unigram", font=font(19, True), fill=green)
+    d.text((1820, 980), "but normalized context gain = -0.215", font=font(19, True), fill=red)
+    d.text((1820, 1018), "and autonomous writing is unreadable", font=font(19, True), fill=red)
+
+    arrow_any(d, (610, 920), (730, 920), green)
+    arrow_any(d, (1115, 920), (1235, 920), green)
+    arrow_any(d, (1660, 920), (1780, 920), red)
+    arrow_any(d, (1450, 765), (1190, 690), green, width=3)
+    d.text((1215, 668), "visual feedback", font=font(18, True), fill=green)
+
+    rounded(d, (80, 1150, 2320, 1370), "#ffffff", "#cbd5e1", radius=8)
+    d.text((112, 1176), "V8 falsifiable proof sequence", font=font(25, True), fill=navy)
+    gates = [
+        ("A", "visual-state flow", "beats last-only + unigram"),
+        ("B", "rendering actuator", "reread matches planned state"),
+        ("C", "closed visual loop", "32 readable cells"),
+        ("D", "language", "beats 13.58% bigram"),
+    ]
+    for i, (tag, title, evidence) in enumerate(gates):
+        x1 = 110 + i * 545
+        d.ellipse((x1, 1245, x1 + 54, 1299), fill=navy)
+        centered_text(d, (x1, 1245, x1 + 54, 1299), tag, font(22, True), "#ffffff")
+        d.text((x1 + 70, 1238), title, font=font(20, True), fill=navy)
+        d.text((x1 + 70, 1278), evidence, font=font(17), fill=grey)
+        if i < len(gates) - 1:
+            arrow_any(d, (x1 + 465, 1272), (x1 + 530, 1272), "#94a3b8", width=3)
+
+    img.save(FIG / "predictive_visual_field_paradigm.png", quality=95)
+
+
+def anchor_identity_v7_result() -> None:
+    """Render a matched V6/V7 autonomous comparison with measured receipts."""
+    img = Image.new("RGB", (2200, 1120), "#f8fafc")
+    d = ImageDraw.Draw(img)
+    navy = "#102a43"
+    red = "#b42318"
+    green = "#16835b"
+    grey = "#475467"
+    d.text((70, 42), "V7 Anchor Identity: Better Signal, Still Not Language", font=font(48, True), fill=navy)
+    d.text((72, 110), "Same prompt, seed, model size, sampler, and 32-cell horizon", font=font(25), fill=grey)
+
+    root = ROOT.parent.parent
+    rows = [
+        (
+            "V6 closed loop",
+            root / "artifacts/retinal_flow_chinese_mvp_v6_closed_loop/autonomous_32_step_5200/complete_page.png",
+            "top-1 1.20%   normalized context -0.907   generated signal +0.0077",
+            "ink ratio 1.168   sparse 18.75%   unreadable",
+        ),
+        (
+            "V7 anchor + sampled identity",
+            root / "artifacts/retinal_flow_chinese_mvp_v7_anchor_identity/autonomous_32_step_5800/complete_page.png",
+            "top-1 2.31%   normalized context -0.215   generated signal +0.0303",
+            "ink ratio 1.050   sparse 15.63%   unreadable",
+        ),
+    ]
+    for index, (label, path, metric, rollout) in enumerate(rows):
+        y = 205 + index * 405
+        d.text((78, y), label, font=font(28, True), fill=navy)
+        d.rounded_rectangle((70, y + 50, 2130, y + 270), radius=8, fill="#ffffff", outline="#cbd5e1", width=2)
+        if path.exists():
+            page = Image.open(path).convert("L").convert("RGB")
+            page.thumbnail((1980, 190), Image.Resampling.NEAREST)
+            px = 110 + (1980 - page.width) // 2
+            py = y + 65 + (190 - page.height) // 2
+            img.paste(page, (px, py))
+        else:
+            centered_text(d, (100, y + 70, 2100, y + 250), "local autonomous artifact unavailable", font(24), grey)
+        d.text((82, y + 292), metric, font=font(22), fill=green if index else grey)
+        d.text((82, y + 333), rollout, font=font(22, True), fill=red)
+
+    d.rounded_rectangle((70, 1010, 2130, 1080), radius=7, fill="#fef2f2", outline="#d65a50", width=2)
+    centered_text(
+        d,
+        (85, 1012, 2115, 1078),
+        "Verdict: V7 closes most of the calibrated context deficit, but dense pseudo-glyphs are not readable Chinese. Separate visual-state prediction from rendering.",
+        font(21, True),
+        red,
+    )
+    img.save(FIG / "anchor_identity_v7_result.png", quality=95)
+
+
 def curriculum() -> None:
     img = Image.new("RGB", (1800, 1050), "#ffffff")
     d = ImageDraw.Draw(img)
@@ -829,6 +1018,8 @@ def aginti_loop() -> None:
 def main() -> None:
     architecture()
     retinal_flow_paradigm()
+    predictive_visual_field_paradigm()
+    anchor_identity_v7_result()
     curriculum()
     zhong_evolution()
     yan_cover_hero()

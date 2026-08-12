@@ -8,26 +8,29 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM は言語を **目に見える書字** として学習・生成する研究プロジェクトです。
-現在のモデルは、順序付きのインク画像を読み、連続的な視覚状態を保持し、
-整流フローによって次の画像を直接ピクセルで書きます。以前のコードブックや
-ページ拡散モデルは比較用ベースラインであり、現在の方式ではありません。
+ILM は言語を **目に見える書字** として学習・生成します。画像から連続視覚状態へ、
+そして画像へ戻る経路を研究し、隠れた記号列を中核に置きません。
 
-## 現在の方式：Retinal Flow Language Model
+## 現在の研究方式：Predictive Visual Field
 
-![Retinal Flow Language Model の構成](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+![Predictive Visual Field の構成](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-学習モデルの境界は `書字ピクセル -> 連続網膜状態 -> インクピクセル` です。
-モデルにはテキストトークン、Unicode ID、OCR、視覚コードブック、外部 LLM を
-与えません。視覚同定では `97.65%` を達成しましたが、全履歴による次画像予測は
-`0.91%` で、unigram (`1.86%`) と bigram (`13.58%`) を下回りました。
-自律生成も読めない断片へドリフトします。したがって **現 MVP は言語モデルとして
-不合格** です。次は単純な大規模化ではなく、モデル自身が生成した視覚軌跡上で
-学習します。
+RFLM V7 は、1つのピクセルフローに言語的同一性の推論と字形描画を同時に任せる
+設計の限界を示しました。全履歴 top-1 は `1.20%` から `2.31%` に上がり、
+last-only (`2.02%`) と unigram (`1.86%`) を超えましたが、bigram
+(`13.58%`) には遠く及びません。正規化対数確率の利得も `-0.9066` から
+`-0.2155` に改善したものの負のままで、自律出力も読めません。したがって
+**V7 は言語モデルとして不合格** です。
+
+次の PVF は、次の網膜状態を予測する連続フローと、その状態をインク画像として
+描いて再読する視覚アクチュエータを分離します。最近傍文字検索や出力表は使いません。
+境界は `書字ピクセル -> 連続視覚ダイナミクス -> インクピクセル` のままで、
+token、Unicode ID、OCR、視覚コードブック、外部 LLM は入りません。PVF は
+検証可能な V8 仮説であり、実証済み能力ではありません。
 
 > リポジトリは実用的な語源パイプラインと長期の ILM 実験を意図的に並行して維持しています。
 

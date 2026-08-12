@@ -8,28 +8,30 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM là dự án nghiên cứu học và sinh ngôn ngữ dưới dạng **chữ viết nhìn thấy
-được**. Mô hình hiện tại đọc các ô mực có thứ tự, duy trì trạng thái thị giác
-liên tục và viết trực tiếp ô tiếp theo bằng pixel qua rectified flow. Các
-codebook và mô hình khuếch tán trang cũ được giữ làm đường chuẩn so sánh, không
-phải mô hình hiện hành.
+ILM nghiên cứu cách học và sinh ngôn ngữ dưới dạng **chữ viết nhìn thấy được**:
+từ ảnh sang trạng thái thị giác liên tục rồi trở lại ảnh, không có kênh ký hiệu
+ẩn làm lõi.
 
-## Mô hình hiện tại: Retinal Flow Language Model
+## Mô hình nghiên cứu hiện tại: Predictive Visual Field
 
-![Sơ đồ Retinal Flow Language Model](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+![Sơ đồ Predictive Visual Field](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-Biên của mô hình con là `pixel chữ viết -> trạng thái võng mạc liên tục -> pixel
-mực`. Mô hình không nhận token văn bản, mã Unicode, OCR, codebook thị giác hay
-mô hình ngôn ngữ ngoài. Bộ đọc thị giác đạt `97,65%` về nhận dạng hình ảnh,
-nhưng dự đoán với toàn bộ ngữ cảnh chỉ đạt `0,91%`, thấp hơn unigram (`1,86%`)
-và bigram (`13,58%`). Sinh tự trị cũng trôi thành các nét không đọc được. Vì
-vậy **MVP hiện tại bị bác bỏ với tư cách mô hình ngôn ngữ**. Bước tiếp theo là
-huấn luyện trên quỹ đạo thị giác do chính mô hình tạo ra, không phải tăng kích
-thước ngay lập tức.
+Thử nghiệm RFLM V7 cho thấy một pixel flow không nên vừa suy ra định danh ngôn
+ngữ vừa vẽ nét trong cùng một thao tác. Top-1 toàn ngữ cảnh tăng từ `1,20%` lên
+`2,31%`, vượt last-only (`2,02%`) và unigram (`1,86%`) nhưng còn xa bigram
+(`13,58%`). Mức tăng log-xác suất chuẩn hóa cải thiện từ `-0,9066` lên
+`-0,2155` nhưng vẫn âm, và đầu ra tự trị vẫn không đọc được. Vì vậy **V7 bị bác
+bỏ với tư cách mô hình ngôn ngữ**.
+
+PVF tiếp theo tách dòng liên tục dự đoán trạng thái võng mạc kế tiếp khỏi bộ
+chấp hành thị giác vẽ trạng thái đó thành mực rồi đọc lại. Không có tra cứu ký
+tự gần nhất hay bảng đầu ra. Biên vẫn là `pixel chữ viết -> động lực thị giác
+liên tục -> pixel mực`, không token, Unicode ID, OCR, codebook thị giác hay mô
+hình ngoài. PVF là giả thuyết V8 có thể kiểm chứng, chưa phải năng lực đã chứng minh.
 
 > Kho lưu trữ duy trì cùng lúc đường ống ngữ nguyên lịch sử có tính thực dụng và các thử nghiệm ILM tầm xa trong cùng một nơi.
 

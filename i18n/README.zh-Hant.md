@@ -8,24 +8,27 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM 是一個把語言當作**可見書寫影像**來學習與生成的研究專案。現行模型依序
-讀取墨跡視野，維持連續視覺狀態，並以 rectified flow 在像素空間直接寫出下一個
-視野。舊有碼本、整頁擴散與檢索模型仍作為對照基線保留，但不再定義現行範式。
+ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影像進入連續視覺狀態，
+再直接回到影像，不把隱藏的符號序列當作語言核心。
 
-## 現行範式：視網膜流語言模型
+## 現行研究範式：預測視覺場
 
-![視網膜流語言模型架構](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+![預測視覺場架構](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-學生模型的嚴格邊界是：`書寫像素 -> 連續視網膜狀態 -> 墨跡像素`。學生不接收
-文字 token、Unicode ID、OCR、視覺碼本或外部語言模型。視覺身分測試達到
-`97.65%`，但完整上下文的下一影像預測只有 `0.91%`，低於 unigram
-(`1.86%`) 與 bigram (`13.58%`)；自主生成也會漂移為不可讀碎片。因此，
-**目前 MVP 作為語言模型未通過驗收**。下一步不是立即增加參數，而是在模型自身
-誘導出的視覺軌跡上訓練。
+RFLM V7 證明了現行結構的一個關鍵問題：不應讓同一個像素 flow 同時推斷下一項
+語言身分並完成筆畫渲染。V7 把完整上下文 top-1 從 `1.20%` 提升到 `2.31%`，
+超過 last-only (`2.02%`) 與 unigram (`1.86%`)，但仍遠低於 bigram
+(`13.58%`)。正規化目標對數機率增益從 `-0.9066` 改善到 `-0.2155`，但仍為
+負值；32 格自主輸出仍不可讀。因此，**V7 作為語言模型未通過驗收**。
+
+下一代 PVF 將「預測下一連續視網膜狀態」與「把該狀態繪製為墨跡並重新讀取」分開。
+部署時沒有最近字元檢索，也沒有字元輸出表。嚴格邊界仍是：`書寫像素 -> 連續視覺
+動力學 -> 墨跡像素`；學生不接收 token、Unicode ID、OCR、視覺碼本或外部語言
+模型。PVF 是可證偽的 V8 假設，不是已實現的能力。
 
 > 該儲存庫有意讓「可實際執行的語源工作流程」與「長程 ILM 實驗」保持並行。
 

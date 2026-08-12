@@ -1,6 +1,6 @@
 # Imagized Language Model
 
-Version: 0.3, closed-loop retinal-flow experimental paradigm
+Version: 0.4, predictive-visual-field experimental paradigm
 
 Date: 2026-08-12
 
@@ -42,7 +42,34 @@ It may not receive:
 A fixed image grid is a sensor layout, not a vocabulary. A continuous retinal
 state is a visual observation, not a renamed token.
 
-## Current paradigm: read, predict, write, reread
+## Current research paradigm: predictive visual field
+
+V7 shows that direct pixel flow can learn stable, context-sensitive ink while
+still failing to become a useful language distribution. The next model therefore
+separates **imagining the next visual state** from **drawing that state**:
+
+```text
+writing pixels -> retina -> causal visual field -> next-retina flow
+               -> sampled visual plan -> pixel actuator -> writing pixels
+```
+
+![Predictive Visual Field](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
+
+For image-derived target state \(z_{t+1}=R_{\bar\theta}(x_{t+1})\), a
+conditional state flow learns
+
+\[
+q_\tau=(1-\tau)z_{t+1}+\tau\epsilon,\qquad
+P_\eta(q_\tau,\tau,h_t)\approx\epsilon-z_{t+1}.
+\]
+
+It samples an intended continuous visual state, never a character index. A
+separate pixel flow renders that plan and is checked by rereading. No
+nearest-glyph lookup, token unembedding, OCR path, or output vocabulary is
+allowed. This Predictive Visual Field is the V8 hypothesis; it is not yet a
+demonstrated language model.
+
+## Implemented precursor: read, predict, write, reread
 
 The implemented **Retinal Flow Language Model (RFLM)** is a causal probability
 model over image fixations:
@@ -135,6 +162,11 @@ selected image remains a continuous bitmap; there is no character target ID.
 This closes the train-inference state-distribution gap without relaxing the
 student boundary.
 
+V7 retains this closed-loop objective, adds a normalized full-history advantage
+against independent image anchors, and backpropagates visual identity through a
+two-step sampled endpoint. The anchor labels and target indices remain outside
+the student; the anchor pixels are not deployed.
+
 ## Why the paradigm is useful
 
 Visible writing carries information that symbolic normalization deletes:
@@ -157,69 +189,51 @@ empirical questions.
 
 ## What the current experiment proves
 
-The complete RFLM has 11,690,244 parameters. V6 resumed V5 for 1,600
-model-induced rollout updates on one RTX 4090 and peaked at 2.576 GiB. The same
-frozen 512-character Chinese visual bank gives:
+The complete RFLM has 11,690,244 parameters. V7 resumed V6 for 800 updates on
+one RTX 4090 and peaked near 3.0 GiB. The same frozen 512-character Chinese
+visual bank gives:
 
-| Measurement | V5 | V6 |
+| Measurement | V6 | V7 step 5,800 |
 |---|---:|---:|
-| Retina-oracle top-1 | 97.65% | 98.18% |
-| Recurrent full-context top-1 | 0.91% | 1.20% |
-| Last-fixation-only top-1 | 1.36% | 1.69% |
+| Retina-oracle top-1 | 98.18% | 98.27% |
+| Recurrent full-context top-1 | 1.20% | **2.31%** |
+| Last-fixation-only top-1 | 1.69% | 2.02% |
 | Unigram top-1 | 1.86% | 1.86% |
 | Symbolic bigram top-1 | 13.58% | 13.58% |
-| Generated context cosine gain | +0.0211 | +0.0077 |
-| Autonomous late/early ink | 0.483 | 1.168 |
-| Autonomous sparse cells | 37.5% | 18.75% |
+| Normalized target-log-probability gain | -0.9066 | **-0.2155** |
+| Generated context cosine gain | +0.0077 | **+0.0303** |
+| Autonomous late/early ink | 1.168 | **1.050** |
+| Autonomous sparse cells | 18.75% | **15.63%** |
 
-![Measured closed-loop result](../publication/ilm-image-native/figures/closed_loop_v6_result.png)
+![Measured V6 and V7 result](../publication/ilm-image-native/figures/anchor_identity_v7_result.png)
 
-The intervention solves the measured loss-of-ink collapse: V6 preserves
-character-scale marks over 32 generated cells. It also improves frozen-bank
-retrieval. It does **not** solve language: full context remains worse than the
-last image, unigram, and bigram baselines; generated target signal weakens; and
-the output remains unreadable. V6 is rejected as a useful language model.
-
-The combination of `0.961` rollout state cosine and only `0.103` selected-target
-cosine localizes the failure. The recurrent state can return to a clean-like
-region after rereading the wrong image, but the sampled pixels do not express
-the correct next visual identity. State robustness is not semantic generation.
+V7 more than doubles full-context top-1, beats last-only and unigram, restores
+generated context signal, and closes about 76% of V6's calibrated deficit. It
+does **not** solve language: normalized context gain is still negative, top-1
+is far below the bigram, and the output remains unreadable. V7 is rejected as a
+useful language model. Positive raw energy alongside negative normalized
+probability also falsifies raw score gain as an acceptance measure.
 
 ## What comes next
 
-The next intervention is again not immediate scale. It directly aligns training
-with the two failed gates:
+The next intervention is again not immediate scale:
 
-1. Build `full` and `last-only` continuous states for the same target image.
-2. Add a visual context-advantage margin that requires full history to score the
-   real next image above the reset last-only state.
-3. Keep full-state visual NCE so the margin cannot be satisfied by degrading
-   only the ablation branch.
-4. Backpropagate through a truncated two-step flow sample and contrast the
-   reread sampled endpoint with independent real target images.
-5. Retain V6's stop-gradient rollout state and recovery losses to preserve
-   autonomous stability.
-6. Require full context to beat last-only and unigram, plus readable 32-cell
-   output, before adding a slow page state or widening the model.
+1. Freeze or slowly update the proven image retina.
+2. Train a conditional flow over next retinal states, without the pixel writer,
+   and require positive normalized full-history gain.
+3. Require sampled state prediction to beat last-only and unigram before adding
+   a rendering actuator.
+4. Condition the existing pixel flow on the sampled intended state and require
+   the rendered image to reread back to that state without lookup.
+5. Close the autonomous feedback loop only after state prediction and isolated
+   actuation pass independently.
+6. Add line/page timescales one at a time, then require the complete system to
+   beat the bigram and remain readable for 32 cells before widening it.
 
-Formally, for real next image `y`,
-
-\[
-\mathcal L_{\mathrm{ctx}}=
-\max(0,m-s(y\mid h_{\mathrm{full}})+s(y\mid h_{\mathrm{last}})),
-\]
-
-and for a differentiable short-flow endpoint,
-
-\[
-\mathcal L_{\mathrm{sample}}=
-\operatorname{NCE}(R(\hat x_0^{K=2}),\{R(y^{(v)})\}_{v=1}^{V}).
-\]
-
-Both remain image-only. After this causal visual gate passes, add a slow
-line/page state, image-to-image instruction tuning, and provenance-gated
-historical glyph composition. A local LLM may help create or critique offline
-curricula, but its strings and weights must not enter the deployed ILM.
+After this causal visual gate passes, add image-to-image instruction tuning and
+provenance-gated historical glyph composition. A local LLM may help create or
+critique offline curricula, but its strings and weights must not enter the
+deployed ILM.
 
 ## Research contract
 
@@ -234,7 +248,9 @@ curricula, but its strings and weights must not enter the deployed ILM.
 The detailed equations, measured receipt, acceptance gates, and staged
 capabilities are in
 [`first-imagized-language-model-goal.md`](first-imagized-language-model-goal.md).
-The exact V6 experiment and frozen receipts are in
+The exact V7 experiment and frozen receipts are in
+[`retinal-flow-v7-anchor-identity-result.md`](retinal-flow-v7-anchor-identity-result.md).
+The V6 precursor is in
 [`retinal-flow-v6-closed-loop-result.md`](retinal-flow-v6-closed-loop-result.md).
 The literature dossier is in
 [`references/image-native-language-model-research.md`](../references/image-native-language-model-research.md),

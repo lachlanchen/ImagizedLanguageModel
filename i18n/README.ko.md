@@ -8,26 +8,29 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
-![Paradigm](https://img.shields.io/badge/paradigm-retinal%20flow-16835B)
+![Paradigm](https://img.shields.io/badge/paradigm-predictive%20visual%20field-16835B)
 ![License](https://img.shields.io/badge/license-unspecified-lightgrey)
 ![Domain](https://img.shields.io/badge/domain-historic%20etymology%20%7C%20glyph%20models-2F80ED?logo=github)
 
-ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성하는 연구 프로젝트입니다.
-현재 모델은 순서가 있는 잉크 고정시야를 읽고 연속 시각 상태를 유지하며,
-rectified flow로 다음 고정시야를 픽셀 공간에 직접 씁니다. 이전 코드북과 페이지
-확산 모델은 비교용 기준선이며 현재 패러다임이 아닙니다.
+ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니다. 이미지에서 연속
+시각 상태로, 다시 이미지로 이어지는 경로를 연구하며 숨은 기호 채널을 두지 않습니다.
 
-## 현재 패러다임: Retinal Flow Language Model
+## 현재 연구 패러다임: Predictive Visual Field
 
-![Retinal Flow Language Model 구조](../publication/ilm-image-native/figures/retinal_flow_paradigm.png)
+![Predictive Visual Field 구조](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
 
-학생 모델의 경계는 `글쓰기 픽셀 -> 연속 망막 상태 -> 잉크 픽셀`입니다. 학생은
-텍스트 토큰, Unicode ID, OCR, 시각 코드북, 외부 언어 모델을 받지 않습니다.
-시각 정체성 평가는 `97.65%`였지만 전체 문맥의 다음 이미지 예측은 `0.91%`로,
-unigram (`1.86%`)과 bigram (`13.58%`)보다 낮았습니다. 자율 생성도 읽을 수 없는
-조각으로 드리프트합니다. 따라서 **현재 MVP는 언어 모델로서 불합격**입니다.
-다음 단계는 즉시 규모를 키우는 것이 아니라 모델이 스스로 만든 시각 궤적에서
-학습하는 것입니다.
+RFLM V7은 하나의 픽셀 흐름이 언어적 정체성을 추론하면서 획까지 동시에 그리도록 한
+구조의 한계를 보였습니다. 전체 문맥 top-1은 `1.20%`에서 `2.31%`로 올라
+last-only (`2.02%`)와 unigram (`1.86%`)을 넘었지만 bigram (`13.58%`)에는
+크게 못 미쳤습니다. 정규화 로그확률 이득도 `-0.9066`에서 `-0.2155`로
+개선됐지만 여전히 음수이고 자율 출력은 읽을 수 없습니다. 따라서 **V7은 언어
+모델로서 불합격**입니다.
+
+다음 PVF는 다음 망막 상태를 예측하는 연속 흐름과 그 상태를 잉크로 렌더링한 뒤
+다시 읽는 시각 액추에이터를 분리합니다. 최근접 문자 검색이나 출력 테이블은 없습니다.
+경계는 `글쓰기 픽셀 -> 연속 시각 동역학 -> 잉크 픽셀`이며 token, Unicode ID,
+OCR, 시각 코드북, 외부 언어 모델을 받지 않습니다. PVF는 검증 가능한 V8 가설이지
+입증된 능력이 아닙니다.
 
 > 저장소는 실용적인 어원 파이프라인과 장기 ILM 실험을 나란히 유지합니다.
 
