@@ -287,8 +287,8 @@ identity top-1, pixel F1, then earlier step. Eligibility requires all of:
 7. generated overall pixel F1 `>0.58`;
 8. oracle-writer overall pixel F1 `>0.64`;
 9. mean paired-output pixel L1 after changing only the query `>0.08`;
-10. correct answer is not a style/input-label copy under fixed visual
-    similarity checks;
+10. generated target cosine exceeds both operation-frame cosine and final
+    query-label cosine by `>0.15`;
 11. student-boundary receipt is clean; and
 12. frozen images instantiated equals zero.
 
