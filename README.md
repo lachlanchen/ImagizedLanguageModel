@@ -36,10 +36,12 @@ The canonical interface is a **Visual Language Stream** with sequence/time,
 optional geometric depth, height, width, and sensory channels. A page is the
 `T=1,D=1` case; a book is an ordered stream of fields; a 3D Chinese or English
 character string uses depth; and a character movie also uses time. These are
-one continuous input/output contract, not separate token vocabularies. The
-first proof remains deliberately 2D and Chinese: predict, write, and reread a
-small visual stream on one RTX 4090 before adding page scale, 3D geometry, or
-motion.
+one continuous input/output contract, not separate token vocabularies. V24
+completes the first bounded 2D Chinese proof: it reads a variable raster packet
+stream, writes one image, rereads those generated pixels, and writes a second
+image on one RTX 4090. The next proof must replace the fixed packet algebra with
+rendered sentences and variable-length answer lines before adding page scale,
+3D geometry, or motion.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -59,7 +61,60 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Prompt Test: V23 Visual Relation Circuit Accepted
+## Latest Stream Test: V24 Visual Packet Rereading Accepted
+
+![Measured V24 visual packet stream: variable raster packets are localized from visible headers, routed through a visual relation, emitted as a glyph image, reread from generated pixels, and followed by a generated label image; paired controls and the single frozen evaluation pass](publication/ilm-image-native/figures/visual_packet_stream_v24_result.png)
+
+V24 is the first accepted **variable-input, multi-frame-output** visual stream
+in this repository. The student receives `15`, `18`, `21`, or `24` grayscale
+`32x32` frames grouped into visibly headed packets. It locates two bindings, an
+operation, and a query from header images; emits the selected unseen Chinese
+glyph as frame 1; rereads the actual generated pixels through the frozen visual
+retina; and emits the glyph's visibly bound label as frame 2. Its deployed path
+receives no strings, token or Unicode IDs, OCR, role or operation labels,
+packet indices, active length, padding mask, glyph lookup, discrete codebook, or
+external language model.
+
+Only `1,347` parameters are trained. On a fresh `1,024`-episode paired audit,
+query, operation, and generated-history switch accuracy are `0.99219`,
+`0.99316`, and `0.99609`. The corresponding query-blind, operation-blind, and
+history-blind controls each have exactly `0.0` switch accuracy and `0.0`
+output-pixel change for the factor they cannot observe. A header-blind control
+falls to `0.08203` minimum role localization, versus `1.0` for the candidate.
+Every arm has identical parameter names, shapes, and count.
+
+An opaque agent visual audit, performed before opening its sealed answer key,
+scores `47/48` for frame 1 and `48/48` for frame 2, including `12/12` for both
+frames at the held-out `T=24` length. This is an agent visual audit, not a human
+study.
+
+The single authorized frozen run covers `107` unseen identities and `1,024`
+episodes. It performs no model selection, changes no threshold, and is not
+repeated.
+
+| V24 frozen gate | Measured | Required | Result |
+|---|---:|---:|:---:|
+| Frame-1 binary choice | `0.99805` | `>0.95` | pass |
+| Query switch | `0.97656` | `>0.90` | pass |
+| Operation switch | `0.97266` | `>0.90` | pass |
+| Generated-history switch | `0.99609` | `>0.90` | pass |
+| Held-out minimum switch | `0.96353` | `>0.85` | pass |
+| Frame-1 identity top-1 | `0.98672` | `>0.75` | pass |
+| Frame-2 label top-1 | `0.99727` | `>0.95` | pass |
+| Frame-1 / frame-2 pixel F1 | `0.83714 / 0.72860` | `>0.68 / >0.58` | pass |
+| Held-out `T=24`, frame 1 / frame 2 | `0.98473 / 1.00000` | each `>0.90` | pass |
+| Packet-permutation consistency | `1.00000 / 1.00000` | each `>0.99` | pass |
+
+V24 proves a fixed packet grammar and causal two-frame image answer, not
+arbitrary sentence understanding or a finished language model. Packet arity,
+header semantics, same/other algebra, and output length remain designed into
+the task. It does not yet answer etymology questions, continue pages, write
+unrestricted text, or emit a movie. The next milestone must learn from rendered
+Chinese prompts and passages, generate a learned-length image-line stream, and
+pass semantic counterfactuals and blind-history controls. See the
+[complete V24 receipt](docs/visual-packet-reread-stream-v24-result.md).
+
+## Prior Prompt Test: V23 Visual Relation Circuit Accepted
 
 ![Measured V23 visual relation circuit: six raster prompt frames pass through a frozen retina, learned visual comparison and operation gate, routed source pixels, and a frozen canonicalizer; paired controls and the single frozen evaluation pass](publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
 
@@ -100,9 +155,9 @@ V23 proves bounded visual relation following, not open-ended language. Frame
 roles and the two-pair same/other algebra remain fixed; the output is a
 canonicalized form of one visible source glyph. It does not yet parse arbitrary
 sentences, answer etymology questions, continue pages, or emit an image stream
-or movie. The next proof removes the fixed six-role syntax, reads a
-variable-length 2D visual instruction stream, and generates at least two answer
-frames while rereading its first output. See the
+or movie. V24 takes the next bounded step by removing absolute frame roles,
+reading a variable-length packet stream, and generating two answer frames while
+rereading the first. See the
 [complete V23 receipt](docs/visual-relation-circuit-v23-result.md).
 
 ## Prior Prompt Test: V22 Binding Mechanism Rejected
