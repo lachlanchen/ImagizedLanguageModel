@@ -29,6 +29,8 @@ from .retinal_memory import (
     VisualEpisodeMemory,
 )
 from .rendering import GlyphCorpus, RenderConfig
+from .saccade_data import SaccadeSequenceSpec, VisualSaccadeDataset
+from .saccade_lm import VisualSaccadeConfig, VisualSaccadeLM, visual_saccade_loss
 from .visual_episodes import (
     VisualEpisodeDataset,
     VisualEpisodeSpec,
@@ -55,6 +57,10 @@ __all__ = [
     "RenderConfig",
     "RetinalFieldConfig",
     "RetinalFieldEncoder",
+    "SaccadeSequenceSpec",
+    "VisualSaccadeConfig",
+    "VisualSaccadeDataset",
+    "VisualSaccadeLM",
     "VisualFlowConfig",
     "VisualInstructionDataset",
     "VisualInstructionRecord",
@@ -73,4 +79,5 @@ __all__ = [
     "render_instruction_page",
     "render_folio",
     "render_folio_pages",
+    "visual_saccade_loss",
 ]
