@@ -19,11 +19,73 @@ receive strings, token IDs, Unicode IDs, character labels, OCR transcripts, a
 discrete glyph codebook, or an external language-model call. Its primary answer
 is an image. OCR may create an optional searchable sidecar after inference.
 
+This boundary is not based on the claim that transcription is unimportant.
+Transcribing a photographed page is one useful image-to-image ILM task. The
+point is that Unicode and token vocabularies are not universal interfaces to
+written language: many historical, regional, handwritten, damaged, undeciphered,
+or newly created forms are absent, ambiguous, or visually informative beyond a
+coded transcript. Writing is itself language, not merely a container around an
+abstract token sequence. An ILM should therefore be able to transcribe,
+continue, translate, explain, compare, and generate writing without first
+discarding its material form.
+
 This goal includes modern simplified and traditional Chinese, historical
 writing, regional variants, handwriting, damaged print, and forms absent from
 Unicode. It eventually includes image questions in Chinese or English and
 image answers that combine readable explanation with provenance-linked oracle,
 bronze, seal, clerical, manuscript, traditional, simplified, and Kanji forms.
+
+### Product proof: the Visual Word-Origin Book
+
+The first complete product is not an open-ended chatbot claim. It is a bounded,
+auditable **Visual Word-Origin Book**:
+
+```text
+rendered English/Chinese question or photographed writing
+    -> independent ILM visual reasoning
+    -> rendered answer-page image
+    -> optional post-hoc searchable text sidecar
+```
+
+The answer page must explain an English word or Chinese form in readable modern
+language while preserving visual evidence that ordinary token output cannot
+represent. For Chinese, it should place attested oracle, bronze, seal, clerical,
+traditional, simplified, manuscript, and regional forms next to an explanation.
+For unencoded Khitan, Tangut, Jurchen, Nôm, stone-inscription, handwritten, or
+damaged marks, the image region remains the answer rather than being forced
+through Unicode. Attested source pixels and model-synthesized forms must be
+visually and metadata-distinguishable.
+
+The first named benchmark contains 200 held-out questions: 100 Chinese
+word/character-origin questions and 100 English word-origin questions, balanced
+between typed-rendered and photographed/scanned prompts. It reports factual
+answer correctness, modern-text readability, historical-form retrieval,
+provenance accuracy, unencoded-region preservation, page-layout validity,
+latency, peak VRAM, and blinded human preference. This benchmark defines the
+meaning of "usable"; parameter count or attractive images alone do not.
+
+### Independence boundary
+
+Qwen, OCR, text corpora, and PDF extraction may be offline teachers or dataset
+construction tools. They are absent from deployed ILM inference. A released
+student is independent only when its checkpoint and runtime consume no strings,
+token IDs, Unicode IDs, OCR transcripts, teacher logits, external model calls,
+finite glyph lookup, or candidate answer database. Typed input is rasterized at
+the UI boundary. The model's primary output is generated pixels; OCR is optional
+post-processing and never changes the answer image. A user-facing response may
+show both the native page image and this optional searchable/accessibility text,
+with the source of each channel declared.
+
+### Broader sensory-language hypothesis
+
+Vision is the first testbed because pages provide ordered, persistent, and
+auditable sensory evidence. The more general hypothesis is that language can be
+modeled as continuous sensory fields rather than only symbols: retinal fields
+for writing, and later waveform or time-frequency fields for speech and vocal
+language. The shared abstraction would be perception, causal sensory memory,
+continuous future-state prediction, motor generation, and self-perception of
+the generated signal. This repository claims only the visual-writing evidence
+measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
@@ -549,6 +611,24 @@ Large language datasets remain useful at the offline boundary:
 6. Mix scanned books, handwriting, Kanji vectors, and historical glyph images
    without forcing unencoded forms through Unicode.
 
+The local source-book registry now covers 11 works totaling 963,986,234 bytes,
+including 9,361 PDF pages and one EPUB. It is registered by SHA-256 under
+`references/source_books/manifest.json`; ignored symlinks avoid duplicating the
+archives. Rights are unverified, so these books are private research,
+source-comparison, and evaluation material only until each license is
+documented. Redistributable pretraining must prefer public-domain or openly
+licensed corpora. The sibling `ZhJpBook` OCR/PDF tools may produce auditable
+offline sidecars, but extracted strings are deleted before student batches are
+formed.
+
+Book continuation is useful but not sufficient as "page n predicts page n+1"
+alone: adjacent pages often begin a new topic and full-page pixels waste compute
+on paper texture. The efficient curriculum samples line/fixation windows,
+predicts the next visible region and its continuous retinal field, reconstructs
+masked future regions, and only later composes full answer pages. Page-order
+prediction remains a long-context auxiliary objective with shuffled-page and
+same-layout controls.
+
 The local historical snapshot currently contains 9,055 characters and 84,642
 glyph records across oracle, bronze, seal, and Liushutong stages. These assets
 are evidence, not generic style targets. A factual etymology answer must copy or
@@ -580,8 +660,11 @@ bank without glyph lookup.
 ### P2: bounded visual instruction following
 
 Rasterize openly licensed Chinese and English instruction pairs, train image
-question to image answer trajectories, and evaluate task correctness plus
-readability. Historical panels are provenance-gated source images.
+question to image answer trajectories, and evaluate the 200-question Visual
+Word-Origin Book benchmark. Historical panels are provenance-gated source
+images. P2 passes only if the independent model produces readable answer pages,
+beats retrieval/template controls on factual questions, preserves unencoded
+regions, and passes a runtime receipt with no token/OCR/teacher/database path.
 
 ### P3: bounded Qwen-8B comparison
 

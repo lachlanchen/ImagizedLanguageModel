@@ -9,7 +9,7 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 
-\title{From Retinal Flow to Predictive Visual Fields:\\Image-Native Language in Continuous State and Pixel Space}
+\title{Language as Visible Signal:\\Toward an Image-Native Language Model in Continuous State and Pixel Space}
 \author{Imagized Language Model Project}
 \date{August 2026}
 
@@ -17,45 +17,54 @@
 \maketitle
 
 \begin{abstract}
-Most language models represent language through symbolic tokens and treat visible
-writing as an auxiliary modality. We study a stricter object: an independent
-model whose inputs, state supervision, probability model, and primary outputs
-are continuous images of writing. Earlier Retinal Flow Language Models (RFLM)
-read ordered $32\times32$ image fixations, integrate them recurrently, write the
-next fixation by pixel flow, and reread generated ink; their monolithic writer
-remains unreadable. We therefore implement a Predictive Visual Field (PVF) that
-factorizes visual language from visual actuation. A frozen convolutional retina
-maps writing images to the unit sphere, a causal field integrates image history,
-a deterministic continuous proposal predicts a low-variance next visual state,
-and an intrinsic hyperspherical flow models alternatives. V16 adds residual
-multiscale causal memory with dilated local fields and global causal attention.
-The 16.47M-parameter
-student contains no tokenizer, strings after rasterization, Unicode IDs, OCR,
-character labels, output vocabulary, discrete visual codebook, candidate
-classifier, or external language model. On a frozen 512-form, four-view Chinese
-benchmark, selected V16 proposal top-1 is 6.26\%, exceeding last-image-only
-(3.97\%), unigram (1.73\%), and random dynamics (0.22\%); full history adds
-$+0.0773$ normalized target log-probability. The stochastic field reaches
-3.69\%, versus 3.24\% last-only, and sampled context cosine gain is $+0.0795$.
-The model trains on one RTX 4090 with 1.479~GiB peak allocated CUDA memory.
-These results establish causal visual-state learning under a strict image-only
-boundary, but remain below a symbolic bigram (13.14\%). We then train a separate
-5.73M-parameter V17 visual actuator from continuous retinal state and style image
-to ink pixels. On one untouched 512-example evaluation, correct-state visual
-identity is 58.59\% versus 0.98\% after shuffling only intended states; target
-cosine is 0.713 versus 0.086. However, pixel F1 is 0.438, below the fixed 0.500
-gate, and human review rejects readability. Thus a small continuous visual state
-causally controls generated writing on one consumer GPU. A topology-first V18
-planner then maps the same kind of continuous intent and a style image to a
-directly supervised spatial ink plan. Its 2.36M trainable parameters reach
-73.63\% identity top-1 versus 0.98\% shuffled and pixel F1 0.658 versus 0.313
-on a fresh 512-example development audit, while using 0.778~GiB peak allocated
-CUDA memory. Most reviewed simple and medium forms are recognizable, but dense
-forms remain malformed. The V18 frozen bank remains sealed because the human
-gate lacked a prespecified numeric rubric. These experiments refute a
-categorical impossibility claim about compact continuous-image writing, while
-autonomous language, broad readability, historical question answering, and
-efficiency over text models remain unproved.
+Most language models treat language as a sequence from a finite token and
+Unicode-accessible inventory, even when an image encoder or image generator is
+attached. That interface is incomplete for historical, regional, handwritten,
+damaged, undeciphered, and newly formed writing, and it discards visual form
+that can itself carry linguistic and historical evidence. OCR can transcribe
+the encodable subset but does not make writing the model's language substrate.
+We define a stricter target: an independent Imagized Language Model (ILM) whose
+inputs, learned states, predictive random variables, and primary outputs are
+continuous images of writing. Transcription is one supported task, alongside
+continuation, translation, explanation, comparison, and generation; it is not
+the architecture.
+
+We contribute a staged, falsifiable implementation. Retinal Flow Language
+Models read ordered $32\times32$ fixations, integrate visual history, generate
+the next ink field, and reread their own pixels, but expose the failure of a
+monolithic language-and-typography writer. Predictive Visual Fields (PVF)
+factorize the problem: a convolutional retina maps writing to continuous state,
+a causal field integrates history, a deterministic proposal predicts the next
+state, an intrinsic hyperspherical flow models alternatives, and a separate
+motor planner renders pixels. The learned path has no tokenizer, strings after
+rasterization, Unicode or character IDs, OCR transcript, output vocabulary,
+discrete visual codebook, glyph lookup, candidate classifier, or external
+language model.
+
+On a frozen 512-form, four-view Chinese benchmark, the 16.47M-parameter V16
+proposal reaches 6.26\% top-1, above last-image-only (3.97\%), unigram (1.73\%),
+and random dynamics (0.22\%); full history adds $+0.0773$ normalized target
+log-probability. Its stochastic field reaches 3.69\% versus 3.24\% last-only.
+V16 trains on one RTX 4090 at 1.479~GiB peak allocated CUDA memory, but remains
+below a symbolic bigram (13.14\%). A separate 5.73M-parameter V17 actuator
+proves causal state control on an untouched evaluation---58.59\% visual
+identity versus 0.98\% after shuffling intended state---but fails readability.
+A topology-first 2.36M-parameter V18 planner reaches 73.63\% identity top-1
+versus 0.98\% shuffled and pixel F1 0.658 versus 0.313 on a fresh development
+audit at 0.778~GiB peak memory. Simple and medium forms become recognizable;
+dense forms remain malformed, and V18's frozen bank remains sealed. We further
+specify and implement, but do not yet report a trained result for, V19: a
+zero-initialized spatial-retinal residual with fixed complexity strata and five
+causal interventions.
+
+The bounded product target is a Visual Word-Origin Book: rendered English or
+Chinese questions produce answer-page images containing readable explanation
+and provenance-linked historical or unencoded forms. The present experiments
+establish causal visual-language signal and compact continuous-image writing,
+not autonomous question answering, broad readability, Qwen parity, or
+efficiency over text models. More generally, ILM treats writing as the first
+instance of language modeled as a continuous sensory field; extension to speech
+or vocal fields is a future hypothesis, not a result of this paper.
 \end{abstract}
 
 \begin{figure}[t]
@@ -65,15 +74,68 @@ efficiency over text models remain unproved.
   \label{fig:yanhero}
 \end{figure}
 
-\section{Motivation}
+\section{Introduction: Writing as Language}
 
-Human readers do not see byte-pair tokens. They see pages, lines, strokes, spacing, damage, font variation, and script-specific visual forms. Current language models are extremely capable, but their central representation is normally a sequence of text tokens. Multimodal models accept images, and modern APIs also expose image-generation endpoints. For example, OpenAI documents APIs for processing images as input and generating images as output, and Google's Gemini API documentation describes image generation from text and image prompts~\cite{openaiimages,openaiimagegen,geminiimage}. These systems are important baselines, but they do not by themselves define a language model whose primary language substrate is the visible page.
+\subsection{Pain point}
 
-The Imagized Language Model (ILM) goal is different:
+Human readers encounter language as marks on pages, screens, stone, bone, metal,
+and moving hands. Those marks vary with writer, era, medium, damage, typography,
+and reading direction. A finite token or Unicode interface is therefore not a
+generally accessible inventory of written language: it is an extremely useful
+codec for a documented subset. Historical and regional forms may have no code
+point, two visually different forms may share one code point, and an OCR
+transcript may erase the form whose evolution is the question.
+
+Current language models are extremely capable, but their central language state
+is normally a sequence of symbolic tokens. Multimodal models can accept images,
+and modern APIs expose image generation~\cite{openaiimages,openaiimagegen,geminiimage}.
+These systems are important baselines, but attaching vision to a token-centered
+model does not make visible writing the predictive language substrate. An OCR
+system similarly solves a useful projection from image to available codes; it
+does not model all of the visual language that was projected away.
+
+\subsection{Goal and scope}
+
+The Imagized Language Model (ILM) instead treats written form as language:
 \[
 \text{image input} \rightarrow \text{visual language state} \rightarrow \text{image output}.
 \]
-The output should itself be a readable answer image. For a query such as ``explain the evolution of character yan'', the system should produce a page containing modern explanatory writing, classical-style Chinese, and oracle, bronze, seal, and modern forms. Typed text can still be accepted by a user interface, but it is rasterized into an image prompt before entering the core model. Conversely, the model's answer is a page image first; OCR or transcription is an optional downstream extraction step.
+The output should itself be a readable answer image. For a query such as
+``explain the evolution of character yan'', the system should produce a page
+containing modern explanation and attested oracle, bronze, seal, and modern
+forms, including forms unavailable in computer fonts. Typed input is rasterized
+before the core. A photographed page can be transcribed, but the same model
+should also continue, translate, explain, compare, and generate writing. Its
+answer is an image first; coded transcription is an optional downstream view.
+
+The design is inspired by foveated visual reading, without claiming a biological
+simulation. Its broader hypothesis is sensory: the same perception--memory--
+prediction--motor--self-perception loop might later operate on speech waveforms
+or time-frequency fields. This paper tests visible writing only.
+
+\subsection{Contributions}
+
+The contribution is not the slogan ``text as pixels.'' It is a sequence of
+implemented controls that makes that slogan falsifiable:
+\begin{enumerate}[leftmargin=*]
+  \item A strict student boundary in which strings, token and Unicode IDs, OCR,
+  finite visual codebooks, glyph lookup, and external language models are absent
+  after rasterization and at deployed inference.
+  \item RFLM, a complete visual reading--prediction--writing--rereading loop that
+  exposes autonomous generated pixels during evaluation and records its own
+  negative result: stable ink is not readable language.
+  \item PVF, a mathematical factorization of continuous visual language state,
+  causal memory, hyperspherical future-state uncertainty, and pixel actuation;
+  V16 supplies controlled evidence that full visual history carries predictive
+  language signal, while the symbolic bigram remains stronger.
+  \item Causal writer interventions: V17 proves that continuous image-derived
+  intent controls generated identity, and V18 shows on development data that a
+  2.36M topology-first planner can render recognizable writing without token
+  unembedding. Their failures delimit identity, topology, and language choice.
+  \item A preregistered V19 spatial-field correction and a rights-aware Visual
+  Word-Origin Book benchmark that tests readable explanation, historical visual
+  evidence, unencoded forms, provenance, and compute on one consumer GPU.
+\end{enumerate}
 
 \section{Prior Art and Gap}
 
@@ -377,6 +439,72 @@ rejects broad-complexity readability, and leaves the frozen identifier bank
 sealed. The next experiment must define complexity strata and a recognition
 rubric prospectively.
 
+\subsection{Spatial-retinal residual V19}
+
+V18 compresses the semantic image into one global vector before drawing. V19
+tests the narrower hypothesis that this pooling discards component location in
+dense forms. The frozen retina now exposes both its existing global state and
+its pre-pooling spatial field,
+\[
+(z,F)=R(x^{\mathrm{semantic}}),\qquad
+z\in\mathbb S^{191},\quad F\in\mathbb R^{192\times4\times4}.
+\]
+Let $c=[z,E_s(x^{\mathrm{style}})]$ and let $q_0=S(c)$ be the learned global
+$4\times4$ seed of a V18-architecture planner. A conditioned convolutional
+adapter supplies a spatial residual,
+\[
+a=A_\varphi(F,c),\qquad
+q=q_0+\sigma(g)a,\qquad
+p=D(q,c).
+\]
+The adapter's final projection is initialized exactly to zero, so V19 initially
+equals the selected global planner for every input even though its scalar gate
+is trainable. All global-planner and retina parameters remain frozen. This
+makes a gain attributable to spatial information rather than unrestricted
+baseline fine-tuning.
+
+A clean causal comparison requires a new global baseline trained from scratch
+on the V19 partition. Loading V18 would contaminate V19 because V18's training
+split can intersect the new holdout. The selected clean global checkpoint is
+therefore frozen before the spatial adapter is trained; no V17 or V18 learned
+weight enters the experiment.
+
+Complexity is computed from target image geometry, never a character label. For
+thresholded ink $b$, define
+\[
+C(b)=\overline b+\tfrac12
+\left(\overline{|\Delta_x b|}+\overline{|\Delta_y b|}\right)
++0.1\,\overline{\mathbf 1[\operatorname{AvgPool}_4(b)>0.05]}.
+\]
+The preregistered strata are simple $C<0.24$, medium
+$0.24\le C<0.35$, and dense $C\ge0.35$, weighted $1$, $1.25$, and $2$ during
+spatial training. The objective is
+\[
+\begin{aligned}
+\mathcal L_{19}={}&
+\mathcal L_{\mathrm{WBCE}}+
+\mathcal L_{\mathrm{Dice}}+0.5\mathcal L_{1}
++0.25\mathcal L_{\mathrm{edge}}\\
+&+0.05\mathcal L_{\mathrm{id}}+0.05\mathcal L_{\mathrm{NCE}}
++0.1\mathcal L_{\mathrm{spatial\text{-}margin}}
++0.1\mathcal L_{\mathrm{zero\text{-}margin}}.
+\end{aligned}
+\]
+Rowwise terms use the complexity weights. The margins require correct fields to
+outperform batch-shuffled fields by $0.03$ and the zero-field branch by $0.01$
+in target pixel error.
+
+Evaluation fixes target and style while comparing five branches: correct global
+state plus correct field; correct global plus shuffled field; shuffled global
+plus correct field; both shuffled; and correct global plus zero field. The
+prospective gate requires overall pixel F1 above $0.68$, dense F1 above $0.58$,
+dense spatial-shuffle and zero-field advantages, global identity above $0.75$,
+and 38/48 blinded recognitions with stratum-specific minima. The implementation
+passes exact-equivalence, gradient-isolation, field-shape, intervention,
+complexity, and serialization tests. No trained V19 metric is reported here;
+the frozen split remains unavailable until the development and blinded gates
+pass.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -407,6 +535,16 @@ the exact font paths, byte counts, and SHA-256 hashes in checkpoints and
 receipts. Cmap intersection filtering leaves 8,282 supported visible characters;
 107 unsupported unique forms account for only 0.0074\% of visible corpus
 instances and are skipped instead of rendered as missing-glyph boxes.
+
+For word-origin and book-layout research, 11 additional local works are
+registered by SHA-256 in \texttt{references/source\_books/manifest.json}. They
+total 963,986,234 bytes and include 9,361 PDF pages plus one EPUB: English and
+Chinese encyclopedias, an English word-origin reference, and Chinese character-
+origin and oracle-form references. Relative symlinks avoid duplicating or
+committing the source binaries. Their rights are unverified, so they are private
+reference, source-comparison, and evaluation material only; they are not part
+of the releasable training corpus. PDF/OCR extraction may create offline
+sidecars, but those strings cannot enter a student batch.
 
 \section{Training Objectives}
 
@@ -509,18 +647,32 @@ Figure~\ref{fig:visualtraining} makes the training contract explicit. Typed corp
   \label{fig:visualinference}
 \end{figure}
 
-Figure~\ref{fig:visualinference} shows the user-facing path. A typed prompt is converted into a visual prompt canvas, and an uploaded image is normalized into the same visual space. The model returns a page-like image containing modern language and historical glyph regions. A later OCR/transcoder can attach a searchable text layer for English, Chinese, or Unicode-representable spans; ancient or unencoded glyphs remain image regions with coordinates and provenance.
+Figure~\ref{fig:visualinference} shows the user-facing path. The interface can
+behave like a normal LLM prompt box. Typed text is rasterized into a clean prompt
+band; an optional book page, inscription, or glyph crop is normalized and placed
+beside or below it on the same canvas. Borders, whitespace, and coordinates make
+the relation visible rather than encoding it in hidden IDs. The ILM can thus
+answer a typed question alone or a grounded question such as ``What does the
+marked form mean, and how did it evolve?'' about an attached page. It returns a
+page image containing modern language and historical glyph regions. A later
+OCR/transcoder may attach a searchable layer for encodable spans; ancient or
+unencoded glyphs remain image regions with coordinates and provenance.
 
 The formal contract is:
 \[
 \begin{aligned}
-r_\alpha(\text{text prompt}) &\rightarrow x_{\mathrm{prompt}},\\
-g_\beta(\text{uploaded page or glyph}) &\rightarrow x_{\mathrm{prompt}},\\
-f_\theta(x_{\mathrm{prompt}}, x_{\mathrm{context}}) &\rightarrow y_{\mathrm{page}},\\
+r_\alpha(\text{text prompt}) &\rightarrow x_{\mathrm{text}},\\
+g_\beta(\text{uploaded page or glyph}) &\rightarrow x_{\mathrm{source}},\\
+\operatorname{Compose}(x_{\mathrm{text}},x_{\mathrm{source}})&\rightarrow x_{\mathrm{prompt}},\\
+f_\theta(x_{\mathrm{prompt}}) &\rightarrow y_{\mathrm{page}},\\
 o_\psi(y_{\mathrm{page}}) &\rightarrow \text{optional text layer} + \text{glyph-region metadata}.
 \end{aligned}
 \]
-Here \(r_\alpha\) is only a UI rasterizer, not the language model itself. The core model \(f_\theta\) maps visual inputs to a rendered page image \(y_{\mathrm{page}}\). The optional reader \(o_\psi\) may recover Unicode text where possible, but unencoded historical forms remain valid image regions.
+Here \(r_\alpha\) and \(\operatorname{Compose}\) are deterministic UI adapters,
+not language components. Either visual region may be absent. The core
+$f_\theta$ receives the resulting pixels and maps them to answer image
+$y_{\mathrm{page}}$. The optional reader $o_\psi$ may recover coded text where
+possible, but unencoded historical forms remain valid image regions.
 
 A useful answer canvas should resemble a page excerpt from a book or corpus:
 \begin{itemize}[leftmargin=*]
@@ -533,32 +685,36 @@ A useful answer canvas should resemble a page excerpt from a book or corpus:
 
 This schema is intentionally different from ``text answer plus illustrations''. The generated page image is the primary output object, and the text layer is secondary.
 
-\section{3090-Friendly Curriculum}
+\section{Single-4090 Curriculum}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/training_curriculum.png}
-  \caption{A staged curriculum that fits one or two RTX 3090 GPUs by starting with glyph tiles and latent generation before scaling to page-level image language modeling.}
+  \caption{A staged curriculum that keeps each causal proof small enough for one RTX 4090 before any page-scale expansion.}
   \label{fig:curriculum}
 \end{figure}
 
-Figure~\ref{fig:curriculum} records the original page-model schedule.
-Measurements now support a different order:
+Figure~\ref{fig:curriculum} records the broad curriculum. The executable path is
+intentionally simpler than the complete research space:
 \begin{enumerate}[leftmargin=*]
-  \item Learn a cross-font foveal visual alphabet and audit missing-glyph coverage.
-  \item Train recurrent visual energy and conditional ink flow jointly on dense causal positions.
-  \item Reread generated endpoints during training and evaluate on a fixed external visual bank.
-  \item Train on autonomous model-induced visual trajectories; V6 completes this step and stabilizes ink but remains unreadable.
-  \item Train normalized context advantage on independent images and identity through differentiable sampled endpoints; V7 improves both signals but remains unreadable.
-  \item Train continuous proposal and next-retina flow alone; V15 passes random, last-only, unigram, context-use, and target-signal state gates.
-  \item Add residual multiscale causal visual memory; V16 replicates the gates with a seven-context proposal increase but does not beat the symbolic bigram.
-  \item Run a paired memory ablation on a newly preregistered bank before attributing the small V16 change to the memory module.
-  \item Condition a separate actuator on continuous visual plans; V17 passes isolated causal reread identity but fails topology and readability.
-  \item Decode a directly supervised spatial motor plan before stochastic refinement; V18 passes automatic development topology gates and makes many forms readable, while dense forms still fail.
-  \item Preserve a continuous spatial retinal field, preregister complexity strata and a blinded readability threshold, and open a new frozen bank only after those development gates pass.
-  \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
-  \item Scale width and corpus size only after the fixed language and stability gates pass.
+  \item Read $32\times32$ writing images into one global state and one small
+  $4\times4$ spatial field. V16 already provides the retina and causal state.
+  \item Predict the next continuous visual state from image history and require
+  it to beat last-only, unigram, and bigram controls.
+  \item Draw that state with the deterministic V18 motor planner; train only the
+  small V19 spatial residual until dense forms pass the prospective rubric.
+  \item Feed generated pixels back through the same retina and require a
+  readable 32-region autonomous rollout.
+  \item Render typed prompts and optional source pages into one canvas, then
+  train bounded question-to-answer-page trajectories from open data.
+  \item Add model width or a second GPU only after the preceding fixed gate
+  passes; use the second GPU for throughput or independent replication, not to
+  hide an unresolved objective.
 \end{enumerate}
+
+This uses one retina, one causal field, one deterministic motor planner, and one
+write--reread loop. Stochastic surface generation, billion-parameter scaling,
+and broad multimodal alignment are deferred until this minimal system works.
 
 The 16.47M PVF V16 state model, 5.73M V17 actuator, and 2.36M V18 motor planner
 are deliberately small enough for one RTX 4090. Their measured peaks are 1.479,
@@ -569,7 +725,7 @@ symbolic bigram, dense topology remains imperfect, and autonomous continuation
 has not passed. ``More efficient than an LLM'' remains an unsupported
 hypothesis until quality is matched on a named task.
 
-\section{Target Demonstration}
+\section{Target Demonstration: Visual Word-Origin Book}
 
 \begin{figure}[t]
   \centering
@@ -578,7 +734,10 @@ hypothesis until quality is matched on a named task.
   \label{fig:zhong}
 \end{figure}
 
-The first demo should answer a rendered visual prompt such as: ``Explain the evolution of the Chinese character yan.'' The target answer image should contain:
+The first demo should answer either a normal rendered prompt such as ``Explain
+the evolution of the Chinese character yan'' or the same question composed with
+a photographed book page. It must also support English word-origin questions.
+The target answer image should contain:
 \begin{itemize}[leftmargin=*]
   \item a title and concise modern explanation,
   \item English and Chinese paragraphs rendered as page text,
@@ -610,7 +769,11 @@ The model should be evaluated as both a language model and a visual generator:
   \item Generated-image target similarity, pixel F1, ink occupancy, variance, and energy-reranked hit rate.
   \item Autonomous rollout length, throughput, VRAM, and blinded human readability.
   \item Student-boundary audit for token IDs, Unicode IDs, OCR, codebooks, labels, and external models.
-  \item Later historical tasks: glyph-stage accuracy, attested-source provenance, and explicit synthetic-form labeling.
+  \item Visual Word-Origin Book tasks: factual proposition accuracy, modern-text
+  readability, prompt-image grounding, attested glyph-stage and source accuracy,
+  unencoded-region preservation, and explicit synthetic-form labeling.
+  \item Optional output transcription scored separately from the native answer
+  image so an OCR sidecar cannot conceal a failed visual answer.
 \end{itemize}
 
 \begin{figure}[t]
@@ -746,7 +909,8 @@ human-readability gates unresolved. The combined result establishes that a
 small image-only student can learn causal language signal and that a small
 continuous state can control recognizable generated ink; it does not establish
 useful autonomous language. The next proof should isolate the multiscale memory
-contribution while a spatial retinal field preserves dense topology. The final
+contribution while the implemented V19 spatial retinal field is trained and
+tested for dense topology under its fixed protocol. The final
 closed 32-cell loop must then remain readable. This order is also consistent
 with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
@@ -777,11 +941,16 @@ consumer GPU without token unembedding. Dense forms still fail, the V18 frozen
 bank remains sealed, and the intended state is supplied rather than predicted.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are paired multiscale-memory ablation and a spatial-retinal-field motor
-planner with a prospectively fixed readability rubric, followed only then by a
-closed write-reread loop. Historical etymology answers and broad instruction
-following remain downstream goals, not present capabilities, and no Qwen-8B
-parity or end-to-end efficiency claim is warranted.
+tests are paired multiscale-memory ablation and training the implemented V19
+spatial-retinal residual under its prospectively fixed readability rubric,
+followed only then by a closed write-reread loop. The named product gate is a
+Visual Word-Origin Book that reads a rendered prompt alone or composed with a
+source page, then emits an answer image and optional declared text sidecar.
+Historical etymology answers and broad instruction following remain downstream
+goals, not present capabilities, and no Qwen-8B parity or end-to-end efficiency
+claim is warranted. The perception--prediction--motor--self-perception
+factorization may later be tested on continuous speech or vocal fields, but
+that general sensory-language extension is not established here.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}

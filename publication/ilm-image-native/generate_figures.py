@@ -787,21 +787,32 @@ def anchor_identity_v7_result() -> None:
 def curriculum() -> None:
     img = Image.new("RGB", (1800, 1050), "#ffffff")
     d = ImageDraw.Draw(img)
-    d.text((70, 45), "3090-Friendly Training Curriculum", font=font(46, True), fill="#101828")
+    d.text(
+        (70, 45),
+        "Single-4090 ILM: Minimal Working Path",
+        font=font(46, True),
+        fill="#101828",
+    )
+    d.text(
+        (72, 112),
+        "One visual substrate from ordinary prompts and book pages to generated answer pages",
+        font=font(25),
+        fill="#475467",
+    )
 
     phases = [
-        ("0", "Data pipeline", "glyph DB, rendered pages,\nimage instruction pairs", "#e0f2fe"),
-        ("1", "Glyph autoencoder", "128-256 px glyph tiles\nVAE / VQ-VAE", "#dcfce7"),
-        ("2", "Evolution generator", "modern -> oracle/bronze/seal\nconditional latent diffusion", "#fef3c7"),
-        ("3", "Visual page LM", "line/page image continuation\nmasked page denoising", "#f3e8ff"),
-        ("4", "Instruction images", "prompt image -> answer image\nlayout-aware generation", "#ffe4e6"),
-        ("5", "Multiscript expansion", "Chinese, books, cuneiform,\nhieroglyphic-style forms", "#e0e7ff"),
+        ("0", "Compose", "typed prompt + page\n-> one prompt canvas", "#e0f2fe"),
+        ("1", "Read", "pixels -> global state\n+ 4 x 4 field", "#dcfce7"),
+        ("2", "Predict", "history -> next\nvisual language state", "#fef3c7"),
+        ("3", "Write", "state + field ->\nink motor plan", "#f3e8ff"),
+        ("4", "Reread", "generated pixels ->\nsame retina", "#ffe4e6"),
+        ("5", "Answer", "answer page image\n+ optional text", "#e0e7ff"),
     ]
     x0 = 80
     y = 190
-    w = 260
+    w = 250
     h = 240
-    gap = 35
+    gap = 30
     for i, (num, name, desc, fill) in enumerate(phases):
         x = x0 + i * (w + gap)
         rounded(d, (x, y, x + w, y + h), fill, "#667085", radius=18)
@@ -813,16 +824,25 @@ def curriculum() -> None:
             arrow(d, (x + w + 5, y + h // 2), (x + w + gap - 8, y + h // 2), "#475467")
 
     lanes = [
-        ("1 GPU", "Phase 1-2: autoencoder and glyph evolution, 30M-250M params, bf16, checkpointing."),
-        ("2 GPUs", "Phase 3-4: visual page LM, 200M-600M params, latent crops, gradient accumulation."),
-        ("Always", "Use OCR only for evaluation/auxiliary loss; keep the primary path image-to-image."),
+        (
+            "ONE 4090",
+            "Measured: V16 state core 1.479 GiB peak; V18 writer 0.778 GiB peak; V19 trains only a small residual.",
+        ),
+        (
+            "FIXED GATES",
+            "Beat last-only + unigram + bigram; pass dense writing; preserve 32 readable generated regions.",
+        ),
+        (
+            "IMAGE NATIVE",
+            "No runtime tokens, Unicode IDs, OCR transcript, glyph lookup, or external language model.",
+        ),
     ]
     y2 = 555
     for i, (tag, text) in enumerate(lanes):
         top = y2 + i * 120
         rounded(d, (120, top, 1680, top + 88), "#f8fafc", "#cbd5e1", radius=12)
-        d.text((155, top + 26), tag, font=font(28, True), fill="#0f172a")
-        d.text((320, top + 29), text, font=font(25), fill="#334155")
+        d.text((155, top + 26), tag, font=font(25, True), fill="#0f172a")
+        d.text((385, top + 29), text, font=font(21), fill="#334155")
 
     img.save(FIG / "training_curriculum.png")
 

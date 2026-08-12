@@ -16,6 +16,32 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
+## Research North Star: A Visual Word-Origin Book
+
+The concrete product target is an independent image-native model that accepts a
+rendered English or Chinese question, or a photographed page, and emits a
+readable answer **as a page image**. A word-origin answer should combine modern
+English/Chinese explanation with real provenance-linked oracle, bronze, seal,
+clerical, traditional, simplified, manuscript, or unencoded forms. OCR may add
+a searchable sidecar after inference; the UI may display that text beside the
+native answer image, but it is not the model's language channel.
+
+The interface still behaves like a normal prompt box. Typed text is rendered
+into a clean prompt band; an optional book page, inscription, or glyph image is
+placed beside or below it on the same visual canvas. The model can therefore
+answer ordinary typed questions or questions grounded in an attached page
+without receiving hidden text metadata.
+
+The deployed student must not call Qwen, an OCR engine, a tokenizer, a Unicode
+lookup, or a glyph database to decide its answer. External models and extracted
+text may help build and audit an offline curriculum, but every student batch and
+checkpoint must pass a boundary receipt showing that its learned path contains
+only writing pixels and continuous visual states. The measurable roadmap and
+source-book policy are in
+[`docs/first-imagized-language-model-goal.md`](docs/first-imagized-language-model-goal.md)
+and
+[`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
+
 ## Current Proof: Visual Motor Plan V18
 
 ![Measured V18 visual motor plan: a compact image-native decoder writes recognizable held-out Chinese forms from continuous visual intent](publication/ilm-image-native/figures/visual_motor_plan_v18_result.png)
