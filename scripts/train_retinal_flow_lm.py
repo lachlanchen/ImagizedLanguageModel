@@ -93,6 +93,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--num-workers", type=int, default=10)
     parser.add_argument("--lr", type=float, default=2e-4)
+    parser.add_argument("--lr-cycle-start-step", type=int, default=0)
     parser.add_argument("--minimum-lr-ratio", type=float, default=0.08)
     parser.add_argument("--warmup-steps", type=int, default=200)
     parser.add_argument("--weight-decay", type=float, default=0.04)
@@ -498,6 +499,9 @@ def main() -> None:
         elapsed_before = float(checkpoint.get("elapsed_seconds", 0.0))
 
     planned_steps = args.maximum_steps or args.epochs * max(1, len(train_loader))
+    if not 0 <= args.lr_cycle_start_step < planned_steps:
+        raise ValueError("lr-cycle-start-step must be within the planned training interval")
+    lr_cycle_steps = planned_steps - args.lr_cycle_start_step
     startup = {
         "stage": "startup",
         "architecture": ARCHITECTURE,
@@ -523,6 +527,8 @@ def main() -> None:
         "retinal_fonts": list(RETINAL_CJK_AVAILABLE_FONTS),
         "initialization": initialization,
         "planned_steps": planned_steps,
+        "lr_cycle_start_step": args.lr_cycle_start_step,
+        "lr_cycle_steps": lr_cycle_steps,
         "device": str(device),
     }
     print(json.dumps(startup), flush=True)
@@ -561,10 +567,10 @@ def main() -> None:
                 ramp=args.rollout_ramp_steps,
             )
             learning_rate = scheduled_lr(
-                global_step,
+                max(1, global_step - args.lr_cycle_start_step),
                 base=args.lr,
                 warmup=args.warmup_steps,
-                total=planned_steps,
+                total=lr_cycle_steps,
                 minimum_ratio=args.minimum_lr_ratio,
             )
             for group in optimizer.param_groups:
