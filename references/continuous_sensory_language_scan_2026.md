@@ -90,10 +90,10 @@ The decision is narrow and useful: topology-necessary local routing is now
 demonstrated, but reserving only high-frequency residual detail for the field is
 not a sufficient visual writer.
 
-## Recommended V21: Field-Complete Visual Writer
+## V21 Result: Field-Complete Routing Works, Disjoint Patches Do Not
 
-The next smallest decisive model lets the topographic field determine both
-coarse occupancy and fine detail:
+V21 implemented the smallest decisive field-complete model. The topographic
+field determines both coarse occupancy and fine detail:
 
 \[
 (\gamma,\beta)=M(z,s),\qquad
@@ -113,16 +113,26 @@ Here:
   construction rather than numerical recentering.
 
 The exact-capacity control replaces `F` with global state tiled over the same
-grid. It retains every operation and parameter. Correct, shuffled, zero,
-global-shuffled, both-shuffled, and four quadrant-occlusion branches remain
-mandatory. The output must pass topology, reread similarity, a prospectively
-numeric blinded-recognition rubric, and the paired-control margin before any
-frozen query.
+grid. Both arms have `582,336` parameters. At candidate step 1,400, dense F1 is
+`0.70535`, versus `0.53145` for shuffled `F` and `0.35880` for zero `F`.
+The fixed gains `+0.17390` and `+0.34654` pass; identity top-1 is `79.102%`,
+target cosine is `0.83313`, and quadrant locality is `1.0`. DC leakage, basis
+Gram error, zero-source cell variation, and decomposition error are exactly
+zero in the recorded snapshot. The tiled-global control produces repeated
+patch textures and reaches only `0.14733` overall F1 at its selected structural
+step.
 
-This is more direct than widening the planner. It tests the remaining causal
-question: can a local continuous visual field carry a complete readable form
-while a global visual state guides it without becoming a hidden character
-unembedding?
+The candidate does not select. Overall F1 (`0.60378`), simple F1 (`0.56483`),
+and medium F1 (`0.59449`) miss the fixed `0.66`, `0.58`, and `0.60` gates. No
+formal paired audit, human review, or frozen query is authorized.
+
+The causal question is answered positively and the writer question negatively:
+a local continuous field can carry the complete spatial plan, but independent
+nonoverlapping `8x8` patch emission introduces seams and weak thin-stroke
+continuity. The next writer should use overlapping local support with a fixed
+partition-of-unity blend, or a matched bounded multiscale local operator. Its
+influence radius must remain measurable so continuity does not reintroduce a
+global character unembedding.
 
 ## Visual Language Stream Contract
 
@@ -140,13 +150,30 @@ uses both depth and time. Chinese oracle, bronze, seal, traditional, simplified,
 Kanji, Latin, and other writing are visual observations in the same stream, not
 entries in separate deployed vocabularies.
 
-This unification is a goal, not present evidence. V21 remains 2D because the
-core proof is language learning and readable generation. Depth and motion are
-added only after a small `D=1` model predicts, writes, and rereads successfully.
+For prompt following, the same contract is partitioned into observed prompt and
+generated answer frames:
+
+\[
+X_{\mathrm{prompt}}\rightarrow
+Y_{\mathrm{answer}},\qquad
+Y_{\mathrm{answer}}\in
+[0,1]^{T_a\times D\times H\times W\times C}.
+\]
+
+Typed text is rendered at the boundary and photographed writing enters
+natively. `T_a=1` is an answer image; `T_a>1` is a text-image stream or movie.
+A valid language test requires held-out prompt-dependent answer changes, not
+only reconstruction or glyph identity.
+
+This unification is a goal, not present evidence. V21 remains 2D and is an
+isolated writer supplied with intended state. Depth and motion are added only
+after a small `D=1` model reads a prompt, predicts answer state, writes, and
+rereads successfully.
 
 ### What not to do next
 
-- Do not tune V20 thresholds or reinterpret its unselected endpoint as a pass.
+- Do not tune V21 thresholds or reinterpret its best diagnostic snapshot as a
+  selected writer.
 - Do not increase model width to hide a routing or objective failure.
 - Do not couple the writer to the weak language core before isolated actuation
   passes.
@@ -157,20 +184,22 @@ added only after a small `D=1` model predicts, writes, and rereads successfully.
 
 ## Roadmap Placement
 
-V20 remains a P1.5 causal result, not instruction following. The ordered route
-is now:
+V21 remains a P1.5 causal-routing result, not a selected writer or instruction
+following. The ordered route is now:
 
-1. preregister and train the V21 field-complete writer and exact-capacity
-   control;
+1. preregister a continuity-preserving local writer and exact-capacity
+   tiled-global control;
 2. pass automatic selection, numeric blinded recognition, and one new frozen
    writer evaluation;
-3. predict local and global future visual fields from causal image history and
-   beat last-only, unigram, and symbolic bigram controls;
-4. run the accepted writer on predicted fields and reread 32 generated regions;
+3. train an image-only prompt-conditioned model to predict local and global
+   answer fields, with prompt-shuffle, last-frame, unigram, symbolic bigram, and
+   held-out counterfactual controls;
+4. run only an accepted writer on predicted fields and reread a fixed
+   multi-frame answer stream;
 5. begin the bounded Visual Word-Origin Book curriculum from open or
-   rights-cleared 2D trajectories; and
+   rights-cleared 2D prompt/answer trajectories; and
 6. extend the same Visual Language Stream to page scale, geometric depth, and
-   character movies only after the 2D loop is accepted.
+   character movies only after the 2D prompt-to-answer loop is accepted.
 
 This keeps the broad interface genuinely new while making the next experiment
 small enough to fail clearly on one RTX 4090.

@@ -1,6 +1,6 @@
 # The First Imagized Language Model: Engineering Goal
 
-Date: 2026-08-12
+Date: 2026-08-13
 
 ## North star
 
@@ -64,6 +64,24 @@ traditional, simplified, Kanji, Latin letters, and other writing systems remain
 observations in the same field rather than separate token tables. Typed text,
 mesh geometry, camera frames, and book pages are boundary adapters into VLS.
 
+For prompt following, partition the stream into observed prompt frames and
+generated answer frames:
+
+\[
+X_{\mathrm{prompt}}\in[0,1]^{T_p\times D\times H\times W\times C},
+\qquad
+Y_{\mathrm{answer}}\sim
+p_\theta(\cdot\mid X_{\mathrm{prompt}}),
+\quad
+Y_{\mathrm{answer}}\in[0,1]^{T_a\times D\times H\times W\times C}.
+\]
+
+`T_a=1` is a generated answer page; `T_a>1` is an ordered text-image
+continuation or movie. A typed question is first rendered into prompt frames;
+a scan or inscription is already in the native representation. Understanding
+is measured by held-out prompt-dependent answer behavior, not by input
+reconstruction, OCR accuracy, glyph identity, or visual plausibility alone.
+
 The first proof deliberately fixes `D=1` and small `T`: a bounded Chinese
 image stream must be learned, predicted, written, and reread on one RTX 4090.
 Only after that loop passes may the project add volumetric glyphs or character
@@ -124,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains six complete experimental systems:
+The repository now contains seven complete experimental systems:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -144,6 +162,10 @@ The repository now contains six complete experimental systems:
 - Retinal Topology Router V20 is a paired 0.506M-parameter-per-arm experiment.
   It structurally reserves within-block detail for the local `4x4x192` retinal
   field and compares it with an exactly parameter-matched global-repeat route.
+- Field-Complete Visual Writer V21 is a paired 0.582M-parameter-per-arm
+  experiment. It removes every global spatial drawing route and makes each
+  local retinal cell emit both coarse occupancy and exact zero-DC detail for
+  its corresponding output patch.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -187,6 +209,18 @@ Its endpoint dense gain over the equal-capacity control is only `+0.01791`,
 below the fixed `>0.03` paired margin. Neither arm selected; human review and
 frozen evaluation remain forbidden.
 
+V21 strengthens the routing result and again rejects the writer. At its best
+development diagnostic step, correct-field dense F1 is `0.70535`, versus
+`0.53145` after field shuffling and `0.35880` after zeroing, for gains of
+`+0.17390` and `+0.34654`. Identity top-1 is `79.102%`, target cosine is
+`0.83313`, occlusion locality is exactly `1.0`, and every fixed-basis and
+decomposition invariant passes. The equal-parameter tiled-global control
+collapses to repeated patches (`0.14733` overall F1 and `0.30741` dense F1 at
+its selected structural step). Candidate overall (`0.60378`), simple
+(`0.56483`), and medium (`0.59449`) F1 miss their fixed gates, so no candidate
+selects. The descriptive arm comparison is not a formal paired audit; human and
+frozen evaluation remain forbidden.
+
 It proved:
 
 - a strict image-only student boundary;
@@ -207,6 +241,9 @@ It proved:
   not enough when a complete global planner can ignore local topology;
 - a capacity-matched structural intervention showing that a continuous local
   retinal field can become necessary and exactly topographic for fine detail;
+- a stricter capacity-matched intervention showing that the same local field
+  can carry coarse occupancy and fine detail while every algebraic and local
+  intervention invariant holds;
 - direct continuous ink generation by conditional rectified flow;
 - context-sensitive generated pixels;
 - autonomous rereading and feedback without OCR or symbolic decoding;
@@ -219,6 +256,7 @@ It did not prove:
 - prediction better than a symbolic bigram baseline;
 - broad complex-form visual-state output under a frozen protocol;
 - a selected field-complete writer that is both causal and broadly readable;
+- prompt-conditioned answer-image generation or a readable image stream;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
@@ -226,14 +264,16 @@ It did not prove:
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
-topology-causality proof, rejected V20 writer, and rejected autonomous
-language-system proof**.
+topology-causality proof, accepted field-complete routing proof, rejected
+V20/V21 writers, and rejected autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
-solved by image generation. The next milestone must let spatial retinal fields
-carry the complete visual plan, not only high-frequency correction, while the
-causal language core is strengthened independently against the bigram baseline.
+solved by image generation. The next milestone must preserve V21's complete
+local route while improving raster continuity, and then learn a genuine
+prompt-image to answer-image transition rather than reconstructing supplied
+intent. The causal language core must still be strengthened independently
+against the bigram baseline.
 
 ## Implemented paradigm: predictive visual fields
 
@@ -649,52 +689,74 @@ a one-step denoising estimate. V6's trajectory and recovery terms remain as
 stability regularizers. V7 validates both corrections but rejects the monolithic
 language-plus-rendering writer.
 
-## Next proof: field-complete writing, then causal visual rollout
+## Next proofs: continuous local writing, then prompt-conditioned visual stream
 
-V16 establishes bounded causal visual-state signal, V17 establishes causal
-pixel control, V18 establishes recognizable development topology, V19 rejects
-optional spatial fusion, and V20 proves that structural routing can make local
-retinal detail necessary. V20 also shows that forcing the field to carry only
-zero-mean detail is too restrictive. The next proof has three ordered stages:
-
-1. **V21 field-complete writer.** Let the local continuous field determine both
-   coarse occupancy and fine detail. Permit global `z` and image-derived style
-   only as spatially uniform channel modulation. Compare with an exact-capacity
-   global-repeat control under the same shuffled, zero, and local-occlusion
-   interventions. Require automatic selection, a prespecified blinded
-   recognition pass, and only then one frozen evaluation.
-2. **Future-field language model.** On a newly preregistered bank, predict both
-   global and local future visual state from image history. Require paired
-   base-versus-memory attribution and performance above last-only, unigram, and
-   the `13.143%` symbolic bigram before calling the causal core improved.
-3. **Closed visual generation.** Feed predicted fields into the accepted writer,
-   reread generated pixels, and require readable 32-region continuation before
-   instruction tuning, historical-answer composition, page scale, 3D depth, or
-   movie generation.
-
-The bounded V21 candidate uses a field-derived coarse plan and a fixed
-zero-mean detail basis:
+V21 implemented the field-complete writer prospectively specified after V20:
 
 \[
 (\gamma,\beta)=M(z,s),\qquad
-c=C_F(\gamma\odot F+\beta),\qquad
-d=B_0A_F(\gamma\odot F+\beta),\qquad
-p=\sigma(U(c)+d).
+(c_{ij},a_{ij})=A_F(\gamma\odot F_{ij}+\beta),\qquad
+\ell_{ij}=c_{ij}\mathbf 1+B_0a_{ij}.
 \]
 
-`M` emits channelwise modulation shared over all spatial locations; it cannot
-draw. `C_F` and `A_F` use a bounded local receptive field and receive the
-topographic retina. `B_0` is a fixed zero-mean basis, so the detail invariant is
-algebraic rather than a floating-point tolerance trick. The exact-capacity
-control replaces `F` with a tiled global state while retaining every parameter
-and operation. This is a prospective direction, not a V21 result.
+It validates the causal graph. The field supplies both occupancy and detail,
+all exact-basis invariants pass, local occlusion remains exactly local, and the
+tiled-global control cannot draw spatial structure. It rejects the specific
+rasterizer: disjoint pointwise `8x8` patches leave seams, blur thin strokes,
+and miss the simple, medium, and overall F1 gates. No V21 candidate selected,
+so its weights are diagnostic and may not be promoted into a claimed language
+system.
 
-Two bottlenecks remain independent. The writer must pass causal readability,
-and the causal compressor must beat the symbolic bigram. Neither a larger
-decoder nor page-scale training can substitute for those proofs. The first
-complete ILM milestone is therefore a small Chinese VLS that reads visual
-history, predicts continuous local/global fields, writes the next image, and
-rereads its own output without a deployed symbolic path.
+The next proof has three ordered stages:
+
+1. **V22A continuity-preserving field writer.** Decode each topographic field
+   cell into an overlapping local patch and combine patches with a fixed
+   partition-of-unity window, or use an equivalently bounded multiscale local
+   operator. Neighboring cells may cooperate only inside a preregistered local
+   radius. Global state and style remain spatially uniform. Compare with an
+   exact-parameter tiled-global source and measure a bounded influence map,
+   shuffled/zero-field gaps, quality by complexity stratum, recognition, and a
+   sealed split. This stage repairs the measured raster discontinuity without
+   reopening a hidden global character unembedding.
+2. **V22B prompt-conditioned future-field model.** Remove supplied semantic
+   intent. Read only rendered or native prompt frames, maintain continuous
+   visual memory, and predict the global/local state of answer frames. Train on
+   openly licensed Chinese line continuation and rendered instruction--answer
+   trajectories, with strings deleted before the student batch. Require
+   held-out prompt counterfactuals, compositional splits, prompt-shuffle and
+   last-frame controls, and improvement over visual unigram/bigram baselines.
+3. **Closed answer-image stream.** Feed predicted states into a selected local
+   writer, generate answer pixels, reread those pixels, and continue
+   autoregressively. Require readable prompt-dependent output over a fixed
+   multi-frame horizon before page scale, factual etymology composition, 3D
+   depth, or movie generation.
+
+For prompt frames `x_1,...,x_T`, the smallest complete recurrence is
+
+\[
+(z_t,F_t)=R(x_t),\qquad
+h_t=\mathcal M(h_{t-1},z_t,F_t),
+\]
+
+\[
+(\hat z_{t+1},\hat F_{t+1})=P(h_t),\qquad
+\hat x_{t+1}=W(\hat z_{t+1},\hat F_{t+1},s_t),\qquad
+h_{t+1}=\mathcal M(h_t,R(\hat x_{t+1})).
+\]
+
+The recurrence does not emit a token or Unicode distribution. During teacher
+forcing, future answer pixels supervise continuous state and writing losses;
+during evaluation, the model consumes only its generated image frames. The
+typed prompt renderer and optional output OCR are declared boundary adapters,
+not hidden model inputs.
+
+Two bottlenecks remain independent. A local writer must pass causal
+readability, and the prompt-conditioned state model must beat visual and
+symbolic context controls. Neither a larger decoder nor page-scale diffusion
+can substitute for those proofs. The first complete ILM milestone is a small
+Chinese VLS that reads a previously unseen visual prompt, predicts an answer
+state, writes one or more answer images, rereads them, and changes the answer
+correctly under held-out prompt changes without a deployed symbolic path.
 
 ## Acceptance gates for the next checkpoint
 
@@ -709,15 +771,20 @@ All gates are evaluated on a frozen manifest and glyph bank:
 4. The isolated actuator must produce nontrivial ink whose reread state matches
    its sampled plan and remains readable under a prespecified blinded rubric.
    It must also show a preregistered advantage for the correct local field over
-   shuffled, zero, and occluded fields. V20 passes the local-field causal gates
-   but fails writer selection and the matched-control margin; no frozen
-   promotion or post-hoc human gate is permitted.
-5. The closed model must retain readability over a 32-cell autonomous rollout.
-6. A visual identity evaluator may score output, but no evaluator signal may
+   shuffled, zero, and occluded fields. V21 passes every local-field causal and
+   structural gate but fails simple, medium, and overall writer selection; no
+   frozen promotion or post-hoc human gate is permitted.
+5. The prompt-conditioned model must change its generated answer under held-out
+   semantic prompt changes, beat prompt-shuffled and last-frame-only controls,
+   and fail appropriately on unanswerable prompts. Input reconstruction or
+   glyph retrieval cannot satisfy this gate.
+6. The closed model must retain readability and prompt dependence over a fixed
+   multi-frame autonomous rollout.
+7. A visual identity evaluator may score output, but no evaluator signal may
    enter inference.
-7. Student-boundary receipts must continue to report false for token IDs,
+8. Student-boundary receipts must continue to report false for token IDs,
    Unicode IDs, OCR, visual codebooks, and external language models.
-8. Scaling beyond the current width, page size, or 2D stream is allowed only
+9. Scaling beyond the current width, page size, or 2D stream is allowed only
    after a causal-memory ablation and the isolated actuator pass their own
    gates.
 
@@ -781,9 +848,12 @@ F1 but fails to use its local field causally: shuffled- and zero-field dense F1
 remain 0.71898 and 0.72241. V20 makes local detail causal, with a `+0.12177`
 dense advantage over shuffled field and `1.0` occlusion locality, but fails
 overall quality, reread similarity, exact decomposition, and the paired-control
-margin. P1.5 remains incomplete until a field-complete writer passes automatic
-selection, blinded readability, and a new frozen evaluation without glyph
-lookup.
+margin. V21 makes both occupancy and detail field-causal, with a `+0.17390`
+dense advantage over shuffled field, `+0.34654` over zero field, and `1.0`
+locality; all algebraic invariants pass. It still misses simple, medium, and
+overall F1. P1.5 remains incomplete until a continuity-preserving local writer
+passes automatic selection, blinded readability, and a new frozen evaluation
+without glyph lookup.
 
 ### P2: bounded visual instruction following
 
@@ -792,7 +862,10 @@ question to image answer trajectories, and evaluate the 200-question Visual
 Word-Origin Book benchmark. Historical panels are provenance-gated source
 images. P2 passes only if the independent model produces readable answer pages,
 beats retrieval/template controls on factual questions, preserves unencoded
-regions, and passes a runtime receipt with no token/OCR/teacher/database path.
+regions, changes answers under held-out prompt counterfactuals, and passes a
+runtime receipt with no token/OCR/teacher/database path. The model may output a
+single page or an ordered answer-image stream; OCR remains optional post-hoc
+accessibility output.
 
 ### P3: bounded Qwen-8B comparison
 
@@ -823,8 +896,11 @@ experiments can reject a mechanism cheaply, not evidence that image-native
 language is already more efficient. V20 uses exactly 0.506M parameters per arm;
 the candidate trains for 325.90 seconds at 0.323 GiB peak and the control for
 327.11 seconds at 0.397 GiB. Those measurements establish cheap causal testing,
-not task-level efficiency. V16 remains below a symbolic bigram, V18 is not a
-frozen broad-readability result, and V19/V20 are rejected writers.
+not task-level efficiency. V21 uses exactly 0.582M parameters per arm; candidate
+and control train for 327.04 and 333.41 seconds at 0.325 and 0.400 GiB peak.
+V21 establishes a stronger cheap routing result, not task-level efficiency.
+V16 remains below a symbolic bigram, V18 is not a frozen broad-readability
+result, and V19--V21 are rejected writers.
 Future comparisons must report quality at equal tasks alongside VRAM, training
 energy, latency, throughput, storage, and rendering cost. Parameter count alone
 is not efficiency.

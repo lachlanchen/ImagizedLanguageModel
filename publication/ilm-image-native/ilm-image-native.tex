@@ -65,6 +65,15 @@ and quadrant-occlusion locality is 1.0. The writer remains rejected because
 overall F1 is 0.636, target cosine is 0.815, the exact-decomposition tolerance
 fails, and final dense gain over the control is only 0.018 against a fixed 0.03
 margin. Neither arm selects; no human or frozen query is authorized.
+V21 removes the remaining global spatial route: each local field cell emits
+coarse occupancy and 63 coefficients in an exact zero-DC patch basis, while
+global state supplies only spatially uniform modulation. At its best diagnostic
+snapshot, dense F1 is 0.705 versus 0.531 shuffled-field and 0.359 zero-field;
+identity top-1 is 79.10\%, target cosine is 0.833, and locality and every
+algebraic invariant pass. The exact-parameter tiled-global control collapses to
+repeated patches. V21 still rejects the writer because overall, simple, and
+medium F1 (0.604, 0.565, and 0.594) miss fixed gates. No candidate selects, so
+the paired, human, and frozen stages remain forbidden.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -134,6 +143,20 @@ one, so these are shapes of one continuous field rather than separate
 vocabularies. The present proof fixes $D=1$ and short $T$; depth and motion must
 earn separate causal and quality evidence after the 2D loop passes.
 
+Prompt following partitions this stream into observed prompt frames and
+generated answer frames,
+\[
+X_{\mathrm{prompt}}\in[0,1]^{T_p\times D\times H\times W\times C}
+\longrightarrow
+Y_{\mathrm{answer}}\in[0,1]^{T_a\times D\times H\times W\times C}.
+\]
+A typed question is deterministically rendered into prompt frames; a scan or
+inscription enters natively. $T_a=1$ is an answer page and $T_a>1$ is an
+ordered text-image stream or movie. A language claim requires correct held-out
+changes in the generated answer when the prompt meaning changes. Input
+reconstruction, OCR accuracy, glyph classification, or attractive writing
+alone is insufficient.
+
 The design is inspired by foveated visual reading, without claiming a biological
 simulation. Its broader hypothesis is sensory: the same perception--memory--
 prediction--motor--self-perception loop might later operate on speech waveforms
@@ -161,7 +184,9 @@ implemented controls that makes that slogan falsifiable:
   \item A preregistered V19 spatial-field intervention whose negative result
   separates feature availability from causal use, followed by an exactly
   capacity-matched V20 intervention that makes local topology necessary while
-  rejecting its own writer-quality claim.
+  rejecting its own writer-quality claim, and V21, which makes the field carry
+  the complete spatial plan while identifying disjoint local raster patches as
+  the next quality bottleneck.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -655,18 +680,100 @@ exceeds the control by only 0.01791 at the final endpoint, below the paired
 0.03 margin. Candidate and control train in 325.90 and 327.11 seconds and peak
 at 0.323 and 0.397~GiB allocated CUDA memory, respectively.
 
-V21 should therefore be field-complete rather than wider. Let global state and
-style emit only spatially uniform modulation,
+\subsection{Field-complete writer V21: complete local route, rejected rasterizer}
+
+V21 tests the field-complete correction rather than widening V20. Global state
+and image-derived style emit only spatially uniform modulation. Each local
+field cell independently emits one coarse coefficient and 63 detail
+coefficients,
 \[
-(\gamma,\beta)=M(z,s),\quad
-c=C_F(\gamma\odot F+\beta),\quad
-d=B_0A_F(\gamma\odot F+\beta),\quad
-p=\sigma(U(c)+d),
+(\gamma,\beta)=M(z,s),\qquad
+(c_{ij},a_{ij})=A_F(\gamma\odot F_{ij}+\beta),\qquad
+\ell_{ij}=c_{ij}\mathbf 1+B_0a_{ij},
 \]
-where both coarse occupancy $c$ and detail coefficients come from the
-topographic field, and $B_0$ is a fixed zero-mean basis. The matched control
-tiles $z$ in place of $F$ without changing capacity. This is the next
-prospective experiment, not a result reported here.
+where $B_0$ contains the 63 non-DC columns of a normalized
+Walsh--Hadamard basis. Its column sums and Gram error are exactly zero in the
+recorded FP32 computation. The 16 nonoverlapping $8\times8$ patches make the
+$32\times32$ logit field. There is no coordinate input, position parameter,
+cell mixing, global spatial projection, or learned glyph table. The matched
+control tiles $z$ into all 16 source cells while retaining every parameter and
+operation. Each arm has 582,336 trainable parameters.
+
+The preregistered salted split has 6,613 training, 195 development, and 209
+frozen records. Both arms train for exactly 1,600 updates. No candidate
+checkpoint passes every selection gate. Table~\ref{tab:v21} therefore reports
+step 1,400 only as the best diagnostic snapshot under the fixed ranking, not as
+a selected model.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V21 candidate development gate & Measured & Required & Result \\
+\midrule
+Overall pixel F1 & 0.6038 & $>0.66$ & fail \\
+Simple pixel F1 & 0.5648 & $>0.58$ & fail \\
+Medium pixel F1 & 0.5945 & $>0.60$ & fail \\
+Dense pixel F1 & 0.7053 & $>0.70$ & pass \\
+Dense gain over shuffled field & 0.1739 & $>0.15$ & pass \\
+Dense gain over zero field & 0.3465 & $>0.20$ & pass \\
+Identity top-1 & 79.10\% & $>74\%$ & pass \\
+Target cosine & 0.8331 & $>0.82$ & pass \\
+Occlusion pixel change & 0.0926 & $>0.03$ & pass \\
+Occlusion locality & 1.0000 & $>0.95$ & pass \\
+Detail block-mean magnitude & $3.87{\times}10^{-7}$ & $<5{\times}10^{-6}$ & pass \\
+Decomposition error & 0.0 & $<10^{-6}$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{Best V21 candidate diagnostic snapshot. It passes every causal,
+identity, reread, and algebraic gate but fails overall, simple, and medium
+pixel fidelity. It is not a selected checkpoint.}
+\label{tab:v21}
+\end{table}
+
+The tiled-global control selects its structural step 1,200 and reaches only
+0.1473 overall F1, 0.3074 dense F1, 25.00\% identity top-1, and 0.4332 target
+cosine. Candidate step 1,400 exceeds those values by 0.4564 overall F1 and
+0.3979 dense F1. This comparison is descriptive rather than the formal paired
+audit: the snapshots use different development draws and steps, and the paired
+evaluator requires a selected candidate before constructing a shared audit.
+It must therefore refuse V21.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/field_complete_writer_v21_result.png}
+  \caption{Measured V21 result. The candidate uses local state for complete
+  spatial structure: shuffling or zeroing the field corrupts the form and a
+  local occlusion stays local. The equal-parameter tiled-global source repeats
+  one patch. Disjoint candidate patches remain blurred and seamed, causing the
+  preregistered broad-fidelity rejection.}
+  \label{fig:v21result}
+\end{figure}
+
+Candidate and control train in 327.04 and 333.41 seconds at 0.325 and
+0.400~GiB peak allocated CUDA memory. Frozen-image count remains zero. V21
+therefore establishes complete, necessary, topographic use of continuous local
+state, but rejects nonoverlapping pointwise patch emission as a broadly
+readable writer. The next writer test should add overlapping local support with
+a fixed partition-of-unity blend, or an equivalently bounded multiscale local
+operator, while retaining an exact-parameter tiled-global control and a
+measured influence radius.
+
+The next language test is separate. Supplied semantic intent must be removed;
+an image-only recurrent model must read prompt frames and predict the local and
+global state of answer frames. For observed frame $x_t$,
+\[
+(z_t,F_t)=R(x_t),\quad h_t=\mathcal M(h_{t-1},z_t,F_t),\quad
+(\hat z_{t+1},\hat F_{t+1})=P(h_t),
+\]
+\[
+\hat x_{t+1}=W(\hat z_{t+1},\hat F_{t+1},s_t),\qquad
+h_{t+1}=\mathcal M(h_t,R(\hat x_{t+1})).
+\]
+Held-out prompt counterfactuals, prompt shuffling, last-frame-only, visual
+unigram/bigram, and autonomous rereading are required. Unselected V21 weights
+cannot satisfy or bypass that proof.
 
 \section{Data}
 
@@ -864,14 +971,15 @@ intentionally simpler than the complete research space:
   $4\times4$ spatial field. V16 already provides the retina and causal state.
   \item Predict the next continuous visual state from image history and require
   it to beat last-only, unigram, and bigram controls.
-  \item Draw that state with a field-complete topology route. V19 shows that a
-  small optional residual is ignored; V20 makes field detail causal but fails
-  writer quality. V21 must derive coarse occupancy and detail from the local
-  field while global state supplies only spatially uniform modulation.
-  \item Feed generated pixels back through the same retina and require a
-  readable 32-region autonomous rollout.
-  \item Render typed prompts and optional source pages into one canvas, then
-  train bounded question-to-answer-page trajectories from open data.
+  \item Draw that state with a continuity-preserving local route. V19 shows
+  that a small optional residual is ignored; V20 makes field detail causal; V21
+  makes both occupancy and detail field-causal but rejects disjoint patch
+  rasterization. The successor may overlap only bounded neighboring patches.
+  \item Render typed prompts and optional source pages into visual frames, then
+  predict local/global answer fields from open question--answer trajectories.
+  Require held-out prompt counterfactuals and prompt-shuffle controls.
+  \item Feed generated answer pixels back through the same retina and require a
+  readable, prompt-dependent multi-frame autonomous rollout.
   \item Add model width or a second GPU only after the preceding fixed gate
   passes; use the second GPU for throughput or independent replication, not to
   hide an unresolved objective.
@@ -1082,13 +1190,20 @@ through the field. Correct dense F1 exceeds shuffled-field by 0.1218 and
 zero-field by 0.3613, with exact quadrant locality, so the local-causality
 hypothesis passes. Writer selection still fails, and endpoint dense advantage
 over the equal-capacity control is only 0.0179 against a fixed 0.03 margin.
+V21 removes the remaining global spatial route. At its best diagnostic
+snapshot, correct dense F1 exceeds shuffled-field by 0.1739 and zero-field by
+0.3465, identity top-1 is 79.10\%, target cosine is 0.8331, locality is 1.0,
+and every exact-basis invariant passes. The tiled-global control collapses to
+repeated patches. Overall, simple, and medium F1 remain below their fixed gates,
+so no candidate selects and no paired, human, or frozen stage is authorized.
 The combined result establishes that a small image-only student can learn
 causal language signal and that a small continuous field can control
 topographic generated ink; it does not establish useful autonomous language.
-The next proof should isolate the multiscale memory contribution while a
-field-complete writer makes both coarse occupancy and detail depend on local
-state under matched controls. The final closed 32-region loop must then remain
-readable. This order is also consistent with measured error
+The next proof should preserve complete local causality while adding bounded
+raster continuity, then isolate the multiscale memory contribution in a model
+that predicts answer fields from prompt images rather than receiving intended
+state. The final closed multi-frame loop must remain readable and
+prompt-dependent. This order is also consistent with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
@@ -1126,15 +1241,24 @@ topographic use of the continuous retinal field. V20 is nevertheless rejected
 as a writer: overall F1, target cosine, exact decomposition, and the paired
 control margin fail, so no checkpoint, human review, or frozen evaluation is
 accepted.
+V21 then makes both coarse occupancy and detail originate from each
+corresponding local cell, with global state restricted to uniform modulation.
+Its 0.1739 shuffled-field dense gap, 0.3465 zero-field gap, 79.10\% identity,
+0.8331 target cosine, 1.0 locality, and exact basis receipts establish the
+stronger field-complete routing result. The equal-parameter global-only source
+cannot draw a spatial plan. Yet 0.6038 overall, 0.5648 simple, and 0.5945
+medium F1 reject V21's disjoint-patch writer. No candidate selects, and no
+paired, human, or frozen claim is accepted.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are a preregistered field-complete V21 writer, in which local state drives
-coarse occupancy and detail while global state only modulates channels, and a
-paired multiscale-memory ablation that predicts local/global future fields.
-Only selected components may enter a closed write--reread loop. The named
-product gate is a Visual Word-Origin Book that reads a rendered prompt alone or
-composed with a source page, then emits an answer image and optional declared
-text sidecar.
+tests are a continuity-preserving local writer under the same matched causal
+controls and a paired visual-memory model that reads prompt images and predicts
+local/global answer fields. Only selected components may enter a closed
+write--reread loop. The named product gate is a Visual Word-Origin Book that
+reads a rendered prompt alone or composed with a source page, then emits one
+answer image or an ordered answer-image stream plus an optional declared text
+sidecar. Prompt counterfactuals must change that answer correctly; input
+reconstruction and glyph retrieval do not constitute understanding.
 Historical etymology answers and broad instruction following remain downstream
 goals, not present capabilities, and no Qwen-8B parity or end-to-end efficiency
 claim is warranted. The perception--prediction--motor--self-perception
