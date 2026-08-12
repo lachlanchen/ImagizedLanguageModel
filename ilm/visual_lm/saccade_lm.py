@@ -83,15 +83,27 @@ class FovealRetina(nn.Module):
             nn.LayerNorm(config.visual_dim),
         )
 
-    def forward(self, fovea: torch.Tensor) -> torch.Tensor:
+    def spatial_field(self, fovea: torch.Tensor) -> torch.Tensor:
+        """Return the continuous pre-pooling retinal field without an ID bottleneck."""
+
         expected = (1, self.config.fovea_size, self.config.fovea_size)
         if fovea.ndim != 4 or tuple(fovea.shape[1:]) != expected:
             raise ValueError(f"expected continuous foveal images [batch, {expected}]")
         if not torch.is_floating_point(fovea):
             raise TypeError("FovealRetina accepts continuous image tensors only")
-        hidden = self.down2(self.down1(self.stem(fovea.clamp(0, 1))))
+        return self.down2(self.down1(self.stem(fovea.clamp(0, 1))))
+
+    def forward_with_field(
+        self,
+        fovea: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        hidden = self.spatial_field(fovea)
         summary = torch.cat((hidden.mean(dim=(2, 3)), hidden.amax(dim=(2, 3))), dim=-1)
-        return self.output(summary)
+        return self.output(summary), hidden
+
+    def forward(self, fovea: torch.Tensor) -> torch.Tensor:
+        visual, _ = self.forward_with_field(fovea)
+        return visual
 
 
 class NextFoveaInkHead(nn.Module):
@@ -333,7 +345,6 @@ def visual_saccade_loss(
     predicted_sequence = outputs["predicted_visual"].float()
     target_sequence = outputs["target_visual"].float().detach()
     predicted = predicted_sequence.reshape(-1, predicted_sequence.shape[-1])
-    target = target_sequence.reshape(-1, target_sequence.shape[-1])
     normalized_target_sequence = F.normalize(target_sequence, dim=-1)
     _, selected_batches, selected_positions = _sample_causal_entries(
         predicted_sequence,

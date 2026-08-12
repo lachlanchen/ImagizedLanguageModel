@@ -31,6 +31,12 @@ from .retinal_memory import (
 from .rendering import GlyphCorpus, RenderConfig
 from .saccade_data import SaccadeSequenceSpec, VisualSaccadeDataset
 from .saccade_lm import VisualSaccadeConfig, VisualSaccadeLM, visual_saccade_loss
+from .spatial_motor_plan import (
+    SpatialMotorPlanConfig,
+    SpatialRetinalMotorPlan,
+    spatial_motor_plan_loss,
+    visual_complexity_score,
+)
 from .visual_episodes import (
     VisualEpisodeDataset,
     VisualEpisodeSpec,
@@ -68,6 +74,8 @@ __all__ = [
     "RetinalFieldConfig",
     "RetinalFieldEncoder",
     "SaccadeSequenceSpec",
+    "SpatialMotorPlanConfig",
+    "SpatialRetinalMotorPlan",
     "VisualSaccadeConfig",
     "VisualSaccadeDataset",
     "VisualSaccadeLM",
@@ -94,6 +102,8 @@ __all__ = [
     "render_folio",
     "render_folio_pages",
     "visual_saccade_loss",
+    "spatial_motor_plan_loss",
+    "visual_complexity_score",
     "visual_actuator_loss",
     "visual_motor_plan_loss",
 ]
