@@ -266,6 +266,21 @@ def retinal_layout(text: str, config: RetinalRenderConfig) -> list[tuple[int, in
     return positions
 
 
+def retinal_cell_bounds(
+    *,
+    row: int,
+    column: int,
+    config: RetinalRenderConfig,
+) -> tuple[int, int, int, int]:
+    if not 0 <= row < config.rows or not 0 <= column < config.columns:
+        raise ValueError(f"retinal cell ({row}, {column}) is outside the page")
+    left = config.margin + column * config.cell_width
+    top = config.margin + row * config.line_height
+    right = min(config.width, left + config.cell_width)
+    bottom = min(config.height, top + config.line_height)
+    return left, top, right, bottom
+
+
 def extract_retinal_fovea(
     page: torch.Tensor,
     *,
@@ -274,9 +289,10 @@ def extract_retinal_fovea(
     config: RetinalRenderConfig,
     fovea_size: int,
 ) -> torch.Tensor:
-    left = config.margin + column * config.cell_width
-    top = config.margin + row * config.line_height
-    crop = page[:, top : top + config.line_height, left : left + config.cell_width]
+    if page.ndim != 3 or page.shape[0] != 1:
+        raise ValueError("retinal page must have shape [1, height, width]")
+    left, top, right, bottom = retinal_cell_bounds(row=row, column=column, config=config)
+    crop = page[:, top:bottom, left:right]
     if crop.shape[-2] > fovea_size or crop.shape[-1] > fovea_size:
         crop = F.interpolate(
             crop[None],
@@ -291,7 +307,108 @@ def extract_retinal_fovea(
     return output
 
 
-def _future_masks(
+def place_retinal_fovea(
+    page: torch.Tensor,
+    fovea: torch.Tensor,
+    *,
+    row: int,
+    column: int,
+    config: RetinalRenderConfig,
+) -> torch.Tensor:
+    """Paste continuous ink into one visual cell while preserving existing ink."""
+
+    if page.ndim != 3 or page.shape[0] != 1:
+        raise ValueError("retinal page must have shape [1, height, width]")
+    if fovea.ndim != 3 or fovea.shape[0] != 1 or fovea.shape[-2] != fovea.shape[-1]:
+        raise ValueError("fovea must have shape [1, size, size]")
+    left, top, right, bottom = retinal_cell_bounds(row=row, column=column, config=config)
+    cell_height = bottom - top
+    cell_width = right - left
+    scaled_height = min(fovea.shape[-2], cell_height)
+    scaled_width = min(fovea.shape[-1], cell_width)
+    top_padding = (fovea.shape[-2] - scaled_height) // 2
+    left_padding = (fovea.shape[-1] - scaled_width) // 2
+    crop = fovea[
+        :,
+        top_padding : top_padding + scaled_height,
+        left_padding : left_padding + scaled_width,
+    ]
+    if (scaled_height, scaled_width) != (cell_height, cell_width):
+        crop = F.interpolate(
+            crop[None],
+            size=(cell_height, cell_width),
+            mode="bilinear",
+            align_corners=False,
+        )[0]
+    output = page.clone()
+    output[:, top:bottom, left:right] = torch.maximum(output[:, top:bottom, left:right], crop.clamp(0, 1))
+    return output
+
+
+def advance_retinal_cursor(
+    row: int,
+    column: int,
+    config: RetinalRenderConfig,
+) -> tuple[int, int] | None:
+    retinal_cell_bounds(row=row, column=column, config=config)
+    column += 1
+    if column >= config.columns:
+        row += 1
+        column = 0
+    if row >= config.rows:
+        return None
+    return row, column
+
+
+def retinal_cursor_after_text(
+    text: str,
+    config: RetinalRenderConfig,
+) -> tuple[int, int] | None:
+    """Compute the write position in the boundary renderer, never inside the model."""
+
+    row = 0
+    column = 0
+    for character in text:
+        if character == "\n":
+            row += 1
+            column = 0
+        else:
+            if column >= config.columns:
+                row += 1
+                column = 0
+            if row >= config.rows:
+                return None
+            column += 1
+        if row >= config.rows:
+            return None
+    if column >= config.columns:
+        row += 1
+        column = 0
+    return None if row >= config.rows else (row, column)
+
+
+def infer_retinal_cursor(
+    page: torch.Tensor,
+    config: RetinalRenderConfig,
+    *,
+    minimum_mean_ink: float = 0.002,
+) -> tuple[int, int] | None:
+    """Find the first visual cell after the last occupied cell without OCR."""
+
+    if page.ndim != 3 or page.shape != (1, config.height, config.width):
+        raise ValueError("retinal page dimensions do not match the render configuration")
+    last_occupied: tuple[int, int] | None = None
+    for row in range(config.rows):
+        for column in range(config.columns):
+            left, top, right, bottom = retinal_cell_bounds(row=row, column=column, config=config)
+            if float(page[:, top:bottom, left:right].float().mean()) >= minimum_mean_ink:
+                last_occupied = (row, column)
+    if last_occupied is None:
+        return 0, 0
+    return advance_retinal_cursor(*last_occupied, config)
+
+
+def future_retinal_masks(
     *,
     row: int,
     column: int,
@@ -299,13 +416,11 @@ def _future_masks(
     patch_size: int,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     future = torch.zeros(config.height, config.width, dtype=torch.float32)
-    left = config.margin + column * config.cell_width
-    top = config.margin + row * config.line_height
-    bottom = min(config.height, top + config.line_height)
+    left, top, right, bottom = retinal_cell_bounds(row=row, column=column, config=config)
     future[top:bottom, left:] = 1.0
     future[bottom:] = 1.0
     target = torch.zeros_like(future)
-    target[top:bottom, left : min(config.width, left + config.cell_width)] = 1.0
+    target[top:bottom, left:right] = 1.0
     hidden_mask = F.max_pool2d(future[None, None], patch_size, patch_size)[0, 0].bool()
     target_mask = F.max_pool2d(target[None, None], patch_size, patch_size)[0, 0].bool()
     return hidden_mask, target_mask
@@ -377,7 +492,7 @@ class FovealContinuationDataset(Dataset):
             config=self.config,
             fovea_size=self.fovea_size,
         )
-        hidden_mask, target_mask = _future_masks(
+        hidden_mask, target_mask = future_retinal_masks(
             row=row,
             column=column,
             config=self.config,

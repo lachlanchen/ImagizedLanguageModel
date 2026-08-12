@@ -278,7 +278,7 @@ def checkpoint_payload(
     elapsed_seconds: float,
 ) -> dict[str, Any]:
     return {
-        "architecture": "foveal-continuous-ink-flow-v1",
+        "architecture": "foveal-continuous-ink-flow-v2",
         "writer_config": foveal_writer_config_payload(writer.config),
         "writer": writer.state_dict(),
         "optimizer": optimizer.state_dict(),
@@ -292,7 +292,7 @@ def checkpoint_payload(
         "elapsed_seconds": elapsed_seconds,
         "arguments": vars(args),
         "deployment_contract": {
-            "input": "continuous retinal prediction field",
+            "input": "continuous retinal prediction field plus continuous coarse ink plan",
             "output": "continuous ink fovea",
             "forbidden": ["token_ids", "unicode_ids", "character_labels", "ocr_strings", "external_model_calls"],
         },
@@ -366,7 +366,7 @@ def main() -> None:
     elapsed_before = 0.0
     if args.resume:
         checkpoint = torch.load(args.resume, map_location=device, weights_only=False)
-        if checkpoint.get("architecture") != "foveal-continuous-ink-flow-v1":
+        if checkpoint.get("architecture") != "foveal-continuous-ink-flow-v2":
             raise ValueError("resume checkpoint is not a foveal ink writer")
         if checkpoint.get("writer_config") != foveal_writer_config_payload(writer.config):
             raise ValueError("resume writer configuration differs")
@@ -379,7 +379,7 @@ def main() -> None:
     planned_steps = args.maximum_steps or args.epochs * max(1, len(train_loader))
     startup = {
         "stage": "startup",
-        "architecture": "foveal-continuous-ink-flow-v1",
+        "architecture": "foveal-continuous-ink-flow-v2",
         "parameters": sum(parameter.numel() for parameter in writer.parameters()),
         "frozen_foundation_parameters": sum(parameter.numel() for parameter in foundation.parameters()),
         "foundation_step": int(foundation_checkpoint.get("global_step", 0)),
