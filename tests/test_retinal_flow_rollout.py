@@ -7,6 +7,7 @@ from ilm.visual_lm.retinal_flow_lm import (
     RetinalFlowLanguageModel,
     retinal_flow_loss,
     sampled_endpoint_identity_loss,
+    visual_anchor_context_advantage_loss,
     visual_context_advantage_loss,
     visual_rollout_losses,
 )
@@ -117,6 +118,40 @@ def test_context_advantage_detaches_last_only_baseline() -> None:
     assert last.grad is None
 
 
+def test_visual_anchor_context_uses_image_similarity_and_backpropagates() -> None:
+    model = _tiny_model().train()
+    full = torch.randn(4, 192, requires_grad=True)
+    last = torch.randn(4, 192, requires_grad=True)
+    target_images = torch.rand(4, 1, 16, 16)
+    distractor_images = torch.rand(4, 1, 16, 16)
+    with torch.no_grad():
+        targets = model.target_retina(target_images).float()
+        anchors = torch.cat(
+            (targets, model.target_retina(distractor_images).float()),
+            dim=0,
+        )
+
+    loss, metrics = visual_anchor_context_advantage_loss(
+        model,
+        full,
+        last,
+        targets,
+        anchors,
+        positive_similarity=0.99,
+        margin=0.25,
+        batch_size=3,
+        generator=torch.Generator().manual_seed(23),
+    )
+    loss.backward()
+
+    assert torch.isfinite(loss)
+    assert float(metrics["anchor_context_active"]) == 1.0
+    assert float(metrics["anchor_context_coverage"]) == 1.0
+    assert full.grad is not None
+    assert last.grad is None
+    assert model.energy.condition[1].weight.grad is not None
+
+
 def test_sampled_endpoint_identity_backpropagates_through_two_step_flow() -> None:
     model = _tiny_model().train()
     condition = torch.randn(4, 192, requires_grad=True)
@@ -159,6 +194,7 @@ def test_retinal_flow_loss_wires_context_and_sampled_identity() -> None:
     current_reference = (0.85 * context + 0.075).clamp(0, 1)
     target_reference = (0.85 * target_ink + 0.075).clamp(0, 1)
     outputs = model(context, target_reference, current_reference)
+    anchor_candidates = outputs["target_visual"].float().detach().flatten(0, 1)
 
     loss, metrics, selected = retinal_flow_loss(
         model,
@@ -166,6 +202,9 @@ def test_retinal_flow_loss_wires_context_and_sampled_identity() -> None:
         context,
         target_ink,
         energy_positions_per_sequence=2,
+        context_anchor_candidates=anchor_candidates,
+        context_anchor_positive_similarity=0.99,
+        context_anchor_batch_size=2,
         sampled_identity_batch_size=2,
         sampled_identity_steps=2,
         context_identity_weight_scale=1.0,
@@ -178,6 +217,7 @@ def test_retinal_flow_loss_wires_context_and_sampled_identity() -> None:
     assert torch.isfinite(loss)
     assert torch.isfinite(metrics["context_log_probability_gain"])
     assert torch.isfinite(metrics["context_advantage_loss"])
+    assert float(metrics["anchor_context_active"]) == 1.0
     assert float(metrics["sampled_identity_active"]) == 1.0
     assert selected["sampled_identity_generated"].shape == (2, 1, 16, 16)
     assert model.dynamics.weight_ih_l0.grad is not None

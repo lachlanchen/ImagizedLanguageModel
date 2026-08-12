@@ -357,6 +357,86 @@ def visual_context_advantage_loss(
     return loss, log_probability_gain
 
 
+def visual_anchor_context_advantage_loss(
+    model: RetinalFlowLanguageModel,
+    full_condition: torch.Tensor,
+    last_condition: torch.Tensor,
+    target_visual: torch.Tensor,
+    anchor_candidates: torch.Tensor | None,
+    *,
+    positive_similarity: float,
+    margin: float,
+    batch_size: int,
+    generator: torch.Generator | None = None,
+) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+    """Measure context against independent image anchors instead of exact target copies."""
+
+    if full_condition.ndim != 2 or full_condition.shape != last_condition.shape:
+        raise ValueError("anchor context conditions must be matching matrices")
+    if target_visual.shape != (full_condition.shape[0], model.config.visual_dim):
+        raise ValueError("anchor context targets have the wrong visual shape")
+    if not -1.0 <= positive_similarity <= 1.0:
+        raise ValueError("anchor positive similarity must be in [-1, 1]")
+    zero = full_condition.sum() * 0.0
+    disabled = {
+        "anchor_context_active": zero.detach(),
+        "anchor_context_coverage": zero.detach(),
+        "anchor_context_eligible_queries": zero.detach(),
+        "anchor_context_selected_queries": zero.detach(),
+        "anchor_context_positive_count": zero.detach(),
+        "anchor_context_full_nce": zero.detach(),
+        "anchor_context_last_nce": zero.detach(),
+        "anchor_context_log_probability_gain": zero.detach(),
+        "anchor_context_satisfied_fraction": zero.detach(),
+    }
+    if anchor_candidates is None or batch_size < 1:
+        return zero, disabled
+    if anchor_candidates.ndim != 2 or anchor_candidates.shape[1] != model.config.visual_dim:
+        raise ValueError("anchor candidates have the wrong visual shape")
+    if anchor_candidates.shape[0] < 2:
+        raise ValueError("anchor context requires at least two candidate images")
+
+    normalized_targets = F.normalize(target_visual.float().detach(), dim=-1)
+    normalized_anchors = F.normalize(anchor_candidates.float().detach(), dim=-1)
+    positive = normalized_targets @ normalized_anchors.transpose(0, 1) >= positive_similarity
+    eligible = positive.any(dim=1)
+    eligible_indices = eligible.nonzero(as_tuple=False)[:, 0]
+    coverage = eligible.float().mean()
+    if eligible_indices.numel() == 0:
+        disabled["anchor_context_coverage"] = coverage.detach()
+        return zero, disabled
+
+    count = min(batch_size, eligible_indices.numel())
+    order = torch.randperm(
+        eligible_indices.numel(),
+        device=full_condition.device,
+        generator=generator,
+    )[:count]
+    selected = eligible_indices[order]
+    selected_positive = positive[selected]
+    anchors = anchor_candidates.float().detach()
+    full_logits = model.energy(full_condition[selected], anchors)
+    full_rows = _multi_positive_nce_rows(full_logits, selected_positive)
+    with torch.no_grad():
+        last_logits = model.energy(last_condition[selected].detach(), anchors)
+        last_rows = _multi_positive_nce_rows(last_logits, selected_positive)
+    loss, gain = visual_context_advantage_loss(full_rows, last_rows, margin=margin)
+    metrics = {
+        "anchor_context_active": loss.new_tensor(1.0).detach(),
+        "anchor_context_coverage": coverage.detach(),
+        "anchor_context_eligible_queries": loss.new_tensor(
+            float(eligible_indices.numel())
+        ).detach(),
+        "anchor_context_selected_queries": loss.new_tensor(float(count)).detach(),
+        "anchor_context_positive_count": selected_positive.float().sum(dim=1).mean().detach(),
+        "anchor_context_full_nce": full_rows.mean().detach(),
+        "anchor_context_last_nce": last_rows.mean().detach(),
+        "anchor_context_log_probability_gain": gain.mean().detach(),
+        "anchor_context_satisfied_fraction": (gain >= margin).float().mean().detach(),
+    }
+    return loss, metrics
+
+
 def visual_rollout_losses(
     model: RetinalFlowLanguageModel,
     outputs: dict[str, torch.Tensor],
@@ -666,6 +746,9 @@ def retinal_flow_loss(
     writer_cycle_weight: float = 0.35,
     context_advantage_weight: float = 0.25,
     context_advantage_margin: float = 0.25,
+    context_anchor_candidates: torch.Tensor | None = None,
+    context_anchor_positive_similarity: float = 0.85,
+    context_anchor_batch_size: int = 64,
     sampled_identity_weight: float = 0.30,
     sampled_identity_batch_size: int = 8,
     sampled_identity_steps: int = 2,
@@ -731,10 +814,45 @@ def retinal_flow_loss(
             1,
             last_energy_logits.argmax(dim=1, keepdim=True),
         ).float().mean()
-    context_advantage, context_log_probability_gain = visual_context_advantage_loss(
-        energy_rows,
-        last_energy_rows,
-        margin=context_advantage_margin,
+    in_batch_context_advantage, in_batch_context_log_probability_gain = (
+        visual_context_advantage_loss(
+            energy_rows,
+            last_energy_rows,
+            margin=context_advantage_margin,
+        )
+    )
+    anchor_context_advantage, anchor_context_metrics = (
+        visual_anchor_context_advantage_loss(
+            model,
+            energy_condition,
+            last_condition,
+            energy_target_visual,
+            (
+                context_anchor_candidates
+                if context_identity_weight_scale > 0.0
+                else None
+            ),
+            positive_similarity=context_anchor_positive_similarity,
+            margin=context_advantage_margin,
+            batch_size=context_anchor_batch_size,
+            generator=generator,
+        )
+    )
+    anchor_active = float(anchor_context_metrics["anchor_context_active"]) > 0.0
+    context_advantage = (
+        anchor_context_advantage if anchor_active else in_batch_context_advantage
+    )
+    context_log_probability_gain = (
+        anchor_context_metrics["anchor_context_log_probability_gain"]
+        if anchor_active
+        else in_batch_context_log_probability_gain.detach().mean()
+    )
+    context_satisfied_fraction = (
+        anchor_context_metrics["anchor_context_satisfied_fraction"]
+        if anchor_active
+        else (
+            in_batch_context_log_probability_gain >= context_advantage_margin
+        ).float().mean().detach()
     )
     projected_reference = F.normalize(model.energy.candidate(energy_target_visual), dim=-1)
     projected_source = F.normalize(model.energy.candidate(source_target_visual), dim=-1)
@@ -883,12 +1001,15 @@ def retinal_flow_loss(
         "visual_energy_top1": energy_retrieval.detach(),
         "last_visual_energy_nce": last_energy_rows.mean().detach(),
         "last_visual_energy_top1": last_energy_retrieval.detach(),
-        "context_log_probability_gain": context_log_probability_gain.mean().detach(),
+        "in_batch_context_log_probability_gain": (
+            in_batch_context_log_probability_gain.mean().detach()
+        ),
+        "in_batch_context_advantage_loss": in_batch_context_advantage.detach(),
+        "context_log_probability_gain": context_log_probability_gain.detach(),
         "context_advantage_margin": energy.new_tensor(float(context_advantage_margin)).detach(),
         "context_advantage_loss": context_advantage.detach(),
-        "context_advantage_satisfied_fraction": (
-            context_log_probability_gain >= context_advantage_margin
-        ).float().mean().detach(),
+        "context_advantage_satisfied_fraction": context_satisfied_fraction.detach(),
+        **anchor_context_metrics,
         "context_identity_weight_scale": total.new_tensor(
             float(context_identity_weight_scale)
         ).detach(),

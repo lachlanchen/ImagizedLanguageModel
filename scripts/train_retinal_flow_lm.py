@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
 import random
 import signal
 import time
+from collections import Counter
 from contextlib import nullcontext
 from pathlib import Path
 from typing import Any
@@ -33,6 +35,7 @@ from ilm.visual_lm.retinal_flow_lm import (
 from ilm.visual_lm.saccade_data import (
     SaccadeSequenceSpec,
     VisualSaccadeDataset,
+    render_glyph_fovea,
     visual_saccade_collate,
 )
 
@@ -77,6 +80,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--writer-cycle-weight", type=float, default=0.35)
     parser.add_argument("--context-advantage-weight", type=float, default=0.25)
     parser.add_argument("--context-advantage-margin", type=float, default=0.25)
+    parser.add_argument("--context-anchor-bank-size", type=int, default=512)
+    parser.add_argument("--context-anchor-views", type=int, default=4)
+    parser.add_argument("--context-anchor-positive-similarity", type=float, default=0.85)
+    parser.add_argument("--context-anchor-batch-size", type=int, default=64)
+    parser.add_argument("--context-anchor-refresh-steps", type=int, default=400)
+    parser.add_argument("--context-anchor-seed-offset", type=int, default=17_000_009)
     parser.add_argument("--sampled-identity-weight", type=float, default=0.30)
     parser.add_argument("--sampled-identity-batch-size", type=int, default=8)
     parser.add_argument("--sampled-identity-steps", type=int, default=2)
@@ -141,6 +150,90 @@ def autocast_context(device: torch.device, precision: str):
         return nullcontext()
     dtype = torch.float16 if precision == "fp16" else torch.bfloat16
     return torch.amp.autocast("cuda", dtype=dtype)
+
+
+def is_han_character(character: str) -> bool:
+    value = ord(character)
+    return any(
+        lower <= value <= upper
+        for lower, upper in (
+            (0x3400, 0x4DBF),
+            (0x4E00, 0x9FFF),
+            (0xF900, 0xFAFF),
+            (0x20000, 0x2FA1F),
+            (0x30000, 0x323AF),
+        )
+    )
+
+
+def build_context_anchor_images(
+    records: list[Any],
+    *,
+    bank_size: int,
+    views: int,
+    render_config: RetinalRenderConfig,
+    fovea_size: int,
+    seed: int,
+) -> tuple[torch.Tensor | None, dict[str, Any]]:
+    if bank_size < 0 or views < 1:
+        raise ValueError("anchor bank size must be non-negative and views must be positive")
+    if bank_size == 0:
+        return None, {"enabled": False, "bank_size": 0, "views": views}
+    counts = Counter(
+        character
+        for record in records
+        for character in record.text
+        if is_han_character(character)
+    )
+    characters = [character for character, _ in counts.most_common(bank_size)]
+    if len(characters) != bank_size:
+        raise ValueError(
+            f"requested {bank_size} visual anchors, but corpus supplied only {len(characters)}"
+        )
+    images = torch.stack(
+        [
+            render_glyph_fovea(
+                character,
+                render_config=render_config,
+                fovea_size=fovea_size,
+                variant=seed + owner * 10_007 + view * 1_000_003,
+            )
+            for owner, character in enumerate(characters)
+            for view in range(views)
+        ]
+    )
+    digest = hashlib.sha256("".join(characters).encode("utf-8")).hexdigest()
+    return images, {
+        "enabled": True,
+        "bank_size": bank_size,
+        "views": views,
+        "candidate_images": bank_size * views,
+        "render_seed": seed,
+        "sha256": digest,
+        "characters": characters,
+        "labels_enter_student": False,
+        "target_indices_enter_student": False,
+        "deployed_with_model": False,
+    }
+
+
+@torch.no_grad()
+def encode_context_anchor_images(
+    model: RetinalFlowLanguageModel,
+    images: torch.Tensor | None,
+    *,
+    device: torch.device,
+    precision: str,
+    batch_size: int = 128,
+) -> torch.Tensor | None:
+    if images is None:
+        return None
+    encoded = []
+    for start in range(0, images.shape[0], batch_size):
+        batch = images[start : start + batch_size].to(device, non_blocking=True)
+        with autocast_context(device, precision):
+            encoded.append(model.target_retina(batch).float())
+    return F.normalize(torch.cat(encoded), dim=-1).detach()
 
 
 def scheduled_lr(step: int, *, base: float, warmup: int, total: int, minimum_ratio: float) -> float:
@@ -226,6 +319,7 @@ def loss_for_batch(
     generator: torch.Generator | None,
     rollout_scale: float,
     context_identity_scale: float,
+    context_anchor_candidates: torch.Tensor | None,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor], dict[str, torch.Tensor], torch.Tensor, torch.Tensor]:
     context = batch["context"].to(device, non_blocking=True)
     target_ink = batch["target_ink"].to(device, non_blocking=True)
@@ -248,6 +342,9 @@ def loss_for_batch(
         writer_cycle_weight=args.writer_cycle_weight,
         context_advantage_weight=args.context_advantage_weight,
         context_advantage_margin=args.context_advantage_margin,
+        context_anchor_candidates=context_anchor_candidates,
+        context_anchor_positive_similarity=args.context_anchor_positive_similarity,
+        context_anchor_batch_size=args.context_anchor_batch_size,
         sampled_identity_weight=args.sampled_identity_weight,
         sampled_identity_batch_size=args.sampled_identity_batch_size,
         sampled_identity_steps=args.sampled_identity_steps,
@@ -312,6 +409,7 @@ def validate(
     args: argparse.Namespace,
     step: int,
     sample_root: Path,
+    context_anchor_candidates: torch.Tensor | None,
 ) -> dict[str, float]:
     model.eval()
     totals: dict[str, float] = {}
@@ -338,6 +436,7 @@ def validate(
                     start=args.context_identity_start_step,
                     ramp=args.context_identity_ramp_steps,
                 ),
+                context_anchor_candidates=context_anchor_candidates,
             )
             target_visual = outputs["target_visual"][:, -1]
             full_scores = model.score_visual_candidates(outputs, target_visual, position=-1)
@@ -444,6 +543,18 @@ def main() -> None:
     log_path = output / "training.jsonl"
     records = load_visual_grammar_manifest(args.manifest)
     render_config = RetinalRenderConfig(augment=True)
+    context_anchor_images, context_anchor_manifest = build_context_anchor_images(
+        records,
+        bank_size=args.context_anchor_bank_size,
+        views=args.context_anchor_views,
+        render_config=render_config,
+        fovea_size=args.fovea_size,
+        seed=args.seed + args.context_anchor_seed_offset,
+    )
+    (output / "context_anchor_bank.json").write_text(
+        json.dumps(context_anchor_manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     sequence_spec = SaccadeSequenceSpec(
         sequence_length=args.sequence_length,
         fovea_size=args.fovea_size,
@@ -519,6 +630,13 @@ def main() -> None:
         start_epoch = int(checkpoint.get("epoch", 0))
         elapsed_before = float(checkpoint.get("elapsed_seconds", 0.0))
 
+    context_anchor_candidates = encode_context_anchor_images(
+        model,
+        context_anchor_images,
+        device=device,
+        precision=args.precision,
+    )
+
     planned_steps = args.maximum_steps or args.epochs * max(1, len(train_loader))
     if not 0 <= args.lr_cycle_start_step < planned_steps:
         raise ValueError("lr-cycle-start-step must be within the planned training interval")
@@ -548,6 +666,14 @@ def main() -> None:
         "context_and_sampled_identity": {
             "context_advantage_weight": args.context_advantage_weight,
             "context_advantage_margin": args.context_advantage_margin,
+            "anchor_bank": {
+                key: value
+                for key, value in context_anchor_manifest.items()
+                if key != "characters"
+            },
+            "anchor_positive_similarity": args.context_anchor_positive_similarity,
+            "anchor_batch_size": args.context_anchor_batch_size,
+            "anchor_refresh_steps": args.context_anchor_refresh_steps,
             "sampled_identity_weight": args.sampled_identity_weight,
             "sampled_identity_batch_size": args.sampled_identity_batch_size,
             "sampled_identity_steps": args.sampled_identity_steps,
@@ -621,6 +747,7 @@ def main() -> None:
                     generator=generator,
                     rollout_scale=current_rollout_scale,
                     context_identity_scale=current_context_identity_scale,
+                    context_anchor_candidates=context_anchor_candidates,
                 )
             scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
@@ -629,6 +756,17 @@ def main() -> None:
             scaler.update()
             momentum = ema_momentum(global_step, planned_steps, args.ema_start, args.ema_end)
             model.update_target(momentum)
+            if (
+                context_anchor_images is not None
+                and args.context_anchor_refresh_steps > 0
+                and global_step % args.context_anchor_refresh_steps == 0
+            ):
+                context_anchor_candidates = encode_context_anchor_images(
+                    model,
+                    context_anchor_images,
+                    device=device,
+                    precision=args.precision,
+                )
             batch_size = len(batch["metadata"])
             for key, value in {"loss": loss.detach(), **metrics}.items():
                 running[key] = running.get(key, 0.0) + float(value) * batch_size
@@ -667,6 +805,7 @@ def main() -> None:
                     args=args,
                     step=global_step,
                     sample_root=output / "samples",
+                    context_anchor_candidates=context_anchor_candidates,
                 )
                 report = {"stage": "validation", "step": global_step, **validation}
                 print(json.dumps(report), flush=True)
