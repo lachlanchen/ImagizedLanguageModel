@@ -53,6 +53,15 @@ from .visual_motor_plan import (
     VisualMotorPlanConfig,
     visual_motor_plan_loss,
 )
+from .visual_cell_data import (
+    VisualCellRenderConfig,
+    VisualCellStreamDataset,
+    assert_image_only_student_batch,
+    pack_visual_cells,
+    render_visual_cell_stream,
+    student_visual_cell_batch,
+    visual_cell_collate,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -85,6 +94,8 @@ __all__ = [
     "VisualLanguageDataset",
     "VisualLanguageSample",
     "VisualAssociativeReader",
+    "VisualCellRenderConfig",
+    "VisualCellStreamDataset",
     "ContinuousVisualActuator",
     "ContinuousVisualMotorPlan",
     "VisualActuatorConfig",
@@ -106,4 +117,9 @@ __all__ = [
     "visual_complexity_score",
     "visual_actuator_loss",
     "visual_motor_plan_loss",
+    "assert_image_only_student_batch",
+    "pack_visual_cells",
+    "render_visual_cell_stream",
+    "student_visual_cell_batch",
+    "visual_cell_collate",
 ]
