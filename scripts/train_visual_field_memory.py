@@ -71,6 +71,11 @@ def parse_args() -> argparse.Namespace:
     model.add_argument("--fovea-extent", type=int, default=112)
     model.add_argument("--fovea-count", type=int, default=8)
     model.add_argument("--saliency-grid", type=int, default=12)
+    model.add_argument("--line-fovea-count", type=int, default=4)
+    model.add_argument("--column-fovea-count", type=int, default=2)
+    model.add_argument("--sweep-extent", type=int, default=44)
+    model.add_argument("--sweep-long-size", type=int, default=192)
+    model.add_argument("--sweep-short-size", type=int, default=48)
     model.add_argument("--base-channels", type=int, default=32)
     model.add_argument("--field-dim", type=int, default=256)
     model.add_argument("--embedding-dim", type=int, default=256)
@@ -574,6 +579,11 @@ def main() -> None:
         fovea_extent=args.fovea_extent,
         fovea_count=args.fovea_count,
         saliency_grid=args.saliency_grid,
+        line_fovea_count=args.line_fovea_count,
+        column_fovea_count=args.column_fovea_count,
+        sweep_extent=args.sweep_extent,
+        sweep_long_size=args.sweep_long_size,
+        sweep_short_size=args.sweep_short_size,
         base_channels=args.base_channels,
         field_dim=args.field_dim,
         embedding_dim=args.embedding_dim,

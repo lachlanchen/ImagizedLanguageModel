@@ -20,6 +20,11 @@ class RetinalFieldConfig:
     fovea_extent: int = 112
     fovea_count: int = 8
     saliency_grid: int = 12
+    line_fovea_count: int = 0
+    column_fovea_count: int = 0
+    sweep_extent: int = 44
+    sweep_long_size: int = 192
+    sweep_short_size: int = 48
     base_channels: int = 32
     field_dim: int = 256
     embedding_dim: int = 256
@@ -33,6 +38,8 @@ class RetinalFieldConfig:
             raise ValueError("fovea_count must be positive")
         if self.saliency_grid * self.saliency_grid < self.fovea_count:
             raise ValueError("saliency grid has fewer cells than foveae")
+        if self.line_fovea_count < 0 or self.column_fovea_count < 0:
+            raise ValueError("sweep fovea counts cannot be negative")
         if self.field_dim % 8:
             raise ValueError("field_dim must be divisible by 8")
 
@@ -165,6 +172,89 @@ def extract_foveal_crops(
     return crops.reshape(batch, count, 3, output_size, output_size)
 
 
+def select_projection_sweeps(
+    images: torch.Tensor,
+    *,
+    count: int,
+    orientation: str,
+    suppression_extent: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Find occupied text-line or column centres from image projections."""
+
+    if orientation not in {"horizontal", "vertical"}:
+        raise ValueError("orientation must be horizontal or vertical")
+    rgb = images.float().clamp(-1, 1).add(1).mul(0.5)
+    luminance = rgb[:, 0:1] * 0.299 + rgb[:, 1:2] * 0.587 + rgb[:, 2:3] * 0.114
+    darkness = (1.0 - luminance).clamp_min(0.0)
+    if orientation == "horizontal":
+        projection = darkness.mean(dim=3).squeeze(1)
+    else:
+        projection = darkness.mean(dim=2).squeeze(1)
+    projection = F.avg_pool1d(projection[:, None], 5, stride=1, padding=2).squeeze(1)
+    kernel = max(3, suppression_extent | 1)
+    maxima = F.max_pool1d(projection[:, None], kernel, stride=1, padding=kernel // 2).squeeze(1)
+    local = projection >= maxima - 1e-7
+    ranked = projection + local.to(projection.dtype) * (projection.detach().amax(dim=1, keepdim=True) + 1e-4)
+    _, indices = ranked.topk(min(count, projection.shape[1]), dim=1)
+    raw = projection.gather(1, indices)
+    position = (indices.to(images.dtype) + 0.5) * (2.0 / projection.shape[1]) - 1.0
+    zeros = torch.zeros_like(position)
+    coordinates = (
+        torch.stack((zeros, position), dim=-1)
+        if orientation == "horizontal"
+        else torch.stack((position, zeros), dim=-1)
+    )
+    saliency = raw / raw.sum(dim=1, keepdim=True).clamp_min(1e-6)
+    return coordinates, saliency
+
+
+def extract_projection_sweeps(
+    images: torch.Tensor,
+    coordinates: torch.Tensor,
+    *,
+    orientation: str,
+    extent: int,
+    long_size: int,
+    short_size: int,
+) -> torch.Tensor:
+    """Extract full-width/height strips while retaining useful stroke scale."""
+
+    batch, _, height, width = images.shape
+    count = coordinates.shape[1]
+    batch_index = torch.arange(batch, device=images.device, dtype=images.dtype)[:, None].expand(-1, count)
+    half = float(extent) * 0.5
+    if orientation == "horizontal":
+        centre = (coordinates[..., 1] + 1.0) * 0.5 * height
+        boxes = torch.stack(
+            (
+                batch_index,
+                torch.zeros_like(centre),
+                (centre - half).clamp(0, height - 1),
+                torch.full_like(centre, float(width)),
+                (centre + half).clamp(1, height),
+            ),
+            dim=-1,
+        ).reshape(-1, 5)
+        output_size = (short_size, long_size)
+    elif orientation == "vertical":
+        centre = (coordinates[..., 0] + 1.0) * 0.5 * width
+        boxes = torch.stack(
+            (
+                batch_index,
+                (centre - half).clamp(0, width - 1),
+                torch.zeros_like(centre),
+                (centre + half).clamp(1, width),
+                torch.full_like(centre, float(height)),
+            ),
+            dim=-1,
+        ).reshape(-1, 5)
+        output_size = (long_size, short_size)
+    else:
+        raise ValueError("orientation must be horizontal or vertical")
+    crops = roi_align(images, boxes, output_size=output_size, aligned=True)
+    return crops.reshape(batch, count, 3, output_size[0], output_size[1])
+
+
 class RetinalFieldEncoder(nn.Module):
     """Read a page through peripheral context and recurrent visual foveation."""
 
@@ -224,6 +314,40 @@ class RetinalFieldEncoder(nn.Module):
         global_feature = self.tower(peripheral)
         local_features = self.tower(crops.flatten(0, 1)).reshape(batch, fovea_count, -1)
         local_features = local_features + self.coordinate(self.coordinate_features(coordinates))
+
+        feature_groups = [local_features]
+        coordinate_groups = [coordinates]
+        saliency_groups = [saliency]
+        for count, orientation in (
+            (cfg.line_fovea_count, "horizontal"),
+            (cfg.column_fovea_count, "vertical"),
+        ):
+            if count <= 0:
+                continue
+            sweep_coordinates, sweep_saliency = select_projection_sweeps(
+                images,
+                count=count,
+                orientation=orientation,
+                suppression_extent=max(5, cfg.sweep_extent // 2),
+            )
+            sweeps = extract_projection_sweeps(
+                images,
+                sweep_coordinates,
+                orientation=orientation,
+                extent=cfg.sweep_extent,
+                long_size=cfg.sweep_long_size,
+                short_size=cfg.sweep_short_size,
+            )
+            sweep_count = sweeps.shape[1]
+            sweep_features = self.tower(sweeps.flatten(0, 1)).reshape(batch, sweep_count, -1)
+            sweep_features = sweep_features + self.coordinate(self.coordinate_features(sweep_coordinates))
+            feature_groups.append(sweep_features)
+            coordinate_groups.append(sweep_coordinates)
+            saliency_groups.append(sweep_saliency)
+        local_features = torch.cat(feature_groups, dim=1)
+        coordinates = torch.cat(coordinate_groups, dim=1)
+        saliency = torch.cat(saliency_groups, dim=1)
+        saliency = saliency / saliency.sum(dim=1, keepdim=True).clamp_min(1e-6)
 
         state = self.initial_state(global_feature)
         coverage = torch.zeros_like(saliency)
