@@ -89,6 +89,7 @@ def parse_args() -> argparse.Namespace:
     train.add_argument("--lr", type=float, default=3e-4)
     train.add_argument("--weight-decay", type=float, default=1e-4)
     train.add_argument("--answer-weight", type=float, default=0.15)
+    train.add_argument("--field-weight", type=float, default=1.0)
     train.add_argument("--infonce-weight", type=float, default=0.20)
     train.add_argument("--historical-batches-per-epoch", type=int, default=6)
     train.add_argument("--precision", choices=("fp32", "fp16", "bf16"), default="bf16")
@@ -251,6 +252,7 @@ def train_batch(
     device: torch.device,
     precision: str,
     answer_weight: float,
+    field_weight: float,
     infonce_weight: float,
 ) -> dict[str, float]:
     query_a = batch["query_a"].to(device, non_blocking=True)
@@ -286,8 +288,7 @@ def train_batch(
                 model.contrastive_scale,
             )
         loss = (
-            view_field_loss
-            + answer_weight * answer_field_loss
+            field_weight * (view_field_loss + answer_weight * answer_field_loss)
             + infonce_weight * (view_nce + answer_weight * answer_nce)
         )
     scaler.scale(loss).backward()
@@ -634,6 +635,7 @@ def main() -> None:
                 device=device,
                 precision=args.precision,
                 answer_weight=args.answer_weight,
+                field_weight=args.field_weight,
                 infonce_weight=args.infonce_weight,
             )
             scheduler.step()
@@ -661,6 +663,7 @@ def main() -> None:
                     device=device,
                     precision=args.precision,
                     answer_weight=args.answer_weight,
+                    field_weight=args.field_weight,
                     infonce_weight=args.infonce_weight,
                 )
                 scheduler.step()
