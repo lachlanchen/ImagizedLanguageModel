@@ -108,6 +108,18 @@ run over 107 unseen identities reaches 98.67\% frame-1 identity, 99.73\%
 frame-2 label accuracy, 97.66\% query switch, 97.27\% operation switch, and
 99.61\% history switch. Every fixed gate passes. This accepts a variable-input
 but fixed-grammar two-frame image stream, not arbitrary rendered language.
+V25 removes that grammar and trains a 25.55M-parameter causal field on ordinary
+Chinese book streams represented as 64 visible $32\times32$ cells. On 2,048
+fixed development windows, full-history top-1 is 1.123\%, versus 0.146\%
+last-only, 0.342\% after shuffling prior history, 1.611\% image unigram, and
+12.158\% symbolic bigram. The ordered-history effect is measurable but six
+fixed semantic and causal gates fail. Peak allocated CUDA memory is
+0.598~GiB, the student boundary passes, and the frozen partition remains
+sealed. An explicitly exploratory writer trained after rejection preserves
+ink density but obtains zero generated-identity top-1, reread cosine 0.080,
+and pixel F1 0.322. V25 therefore rejects this natural-language objective and
+writer rather than treating low memory or glyph-like marks as language
+efficiency.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -237,6 +249,12 @@ implemented controls that makes that slogan falsifiable:
   header-, query-, operation-, and generated-history-blind controls, an opaque
   visual audit, and one frozen run establish that frame 2 causally depends on
   rereading generated frame-1 pixels.
+  \item V25, a preregistered natural-Chinese visual-cell stream with fixed
+  last-only, shuffled, blank, visual-frequency, text-bigram, and paired-history
+  controls. It measures a weak ordered-history effect
+  while rejecting the model under six fixed gates and preserving the frozen
+  seal. A separately labeled writer diagnostic localizes stable ink without
+  correct generated identity.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -1202,13 +1220,142 @@ V24 therefore accepts a variable-input, two-frame image stream under one fixed
 visual grammar. It establishes that frame 2 can depend causally on rereading
 generated frame-1 pixels, not merely on a hidden state. It does not establish
 arbitrary sentence parsing, factual retrieval, page continuation, historical
-form synthesis, free-form output length, or movie generation. The next
-experiment must replace packet algebra with ordinary rendered prompts and
-short passages, learn an answer-line stop decision, and compare page-native
-canvases with packed 8-, 16-, and 32-pixel glyph-cell streams under semantic
-counterfactuals. Cell reconstruction or glyph classification alone cannot
-satisfy that language gate.
+form synthesis, free-form output length, or movie generation. V25 implements
+the next narrower question: remove packet algebra, train on ordinary rendered
+Chinese, and require the resulting visual history to beat causal and frequency
+controls before a writer is authorized.
 
+\clearpage
+\subsection{Visual Cell Stream V25: natural Chinese prediction rejected}
+
+V25 treats each visible writing unit as an inspectable retinal observation and
+stacks observations along visual time:
+\[
+X\in[0,1]^{B\times T\times1\times32\times32},\qquad T=64.
+\]
+The third nontrivial axis of one sample is reading order, not a character ID or
+geometric depth. The student receives only these grayscale images, their
+order, continuous corruption and flow times, random image noise, and its own
+generated pixels. Strings, bytes, token and Unicode IDs, OCR transcripts,
+character labels, candidate-bank rows, and external models are excluded from
+the learned path.
+
+The fixed manifest contains 7,017 records from 16 public-domain Chinese works,
+with SHA-256
+\texttt{76048753...f6866c03}. Hash partitioning by original record gives 6,608
+training, 190 development, and 219 frozen groups. Training and development
+fonts are disjoint. Two independently rendered views of every 65-cell span
+reverse their context/target roles within a batch; their strings and renderer
+metadata are deleted before each model call. The frozen partition is counted
+but never rendered. An evaluator-only 1,024-form image bank and symbolic
+frequency tables are unavailable to the student and absent from deployment.
+
+A frozen V16 retina maps each image to a continuous unit state
+$z_t\in\mathbb S^{191}$. Eight causal Transformer blocks of width 384 use
+rotary reading position and continuously corrupted prior images:
+\[
+h_t=C_\theta(\tilde z_{\le t}),\qquad
+\hat z_{t+1}=\frac{P_\theta(h_t)}{\lVert P_\theta(h_t)\rVert_2}.
+\]
+There is no character embedding or vocabulary projection. The fixed language
+objective combines independent-view cosine prediction with multi-positive
+in-batch visual contrast,
+\[
+\mathcal L_{\mathrm{language}}=
+1-\langle\hat z_{t+1},z'_{t+1}\rangle
++0.5\mathcal L_{\mathrm{visual\ contrast}}.
+\]
+The complete model contains 25,549,714 parameters; 15,810,241 are trainable in
+the language stage. The run performs 2,400 BF16 AdamW updates with physical
+batch three, two view directions, and four-step accumulation, for 24 effective
+streams per update on one RTX 4090.
+
+Development evaluation uses 2,048 fixed windows. The same model is queried
+with full history, only the last cell, shuffled prior history with the last
+cell fixed, and blank history. The evaluator separately computes image-unigram
+and symbolic-bigram controls from training frequencies. It also forms 512
+pairs with the same last cell but different histories and different true next
+cells. Table~\ref{tab:v25language} reports every selection-relevant measure.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V25 development measure & Measured & Required & Result \\
+\midrule
+Full-history top-1 & 0.01123 & diagnostic & -- \\
+Last-only top-1 & 0.00146 & diagnostic & -- \\
+Shuffled-history top-1 & 0.00342 & diagnostic & -- \\
+Image-unigram top-1 & 0.01611 & diagnostic & below \\
+Symbolic-bigram top-1 & 0.12158 & benchmark & below \\
+Full minus last top-1 & +0.00977 & $>0.030$ & fail \\
+Full minus unigram top-1 & $-0.00488$ & $>0.030$ & fail \\
+Full minus last log probability & +0.04882 & $>0.050$ & fail \\
+Full minus shuffled top-1 & +0.00781 & $>0.015$ & fail \\
+Counterfactual switch accuracy & 0.12891 & $>0.550$ & fail \\
+Full-history target cosine & 0.27513 & $>0.550$ & fail \\
+Student boundary / peak CUDA & clean / 0.598~GiB & clean / $<18$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{V25 fixed natural-Chinese development audit. Full history has a
+small advantage over last-only and shuffled history, but remains below the
+image unigram and symbolic bigram. Six semantic and causal gates fail.}
+\label{tab:v25language}
+\end{table}
+
+Thus the causal field uses ordered history, but does not use it accurately
+enough to select the correct next form. Its top-1 changes on 77.93\% of paired
+counterfactuals, yet changes to the correct target only 12.89\% of the time.
+Context sensitivity alone is not understanding. The language stage is
+rejected, writer training is not authorized by the fixed path, and no frozen
+evaluation is opened.
+
+For diagnosis only, a separate command explicitly marks itself exploratory and
+continues from the rejected language checkpoint. It freezes the causal field
+and trains the 7,073,617-parameter continuous flow writer for 1,200 updates.
+For clean target $x$, noise $\epsilon$, and time $\tau$ it learns the velocity
+of $y_\tau=(1-\tau)x+\tau\epsilon$, conditions on $h_t$ and $\hat z_{t+1}$,
+and rereads its sampled pixels. This run cannot change the evidence verdict.
+On 256 targets and 16 autonomous continuations, generated identity top-1 is
+zero, reread target cosine is 0.08015, and pixel F1 is 0.32210. Blank rate is
+zero and position-16 density is 0.97657 times target density. The writer
+therefore learns ink occupancy, not the intended continuation.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_cell_stream_v25_result.png}
+  \caption{Measured V25 development result generated directly from the fixed
+  language report, separately labeled exploratory writer report, and actual
+  writer sample. Ordered visual history has a weak effect, but the unigram and
+  bigram controls remain stronger and generated images are not the intended
+  Chinese forms. The frozen partition stays sealed.}
+  \label{fig:v25result}
+\end{figure}
+
+V25 localizes the next problem to the predictive state rather than page
+geometry. Cross-font visual appearance, exact identity, and context-predictive
+meaning share one target state; cosine can improve toward a frequent visual
+centroid without selecting the next glyph. A subsequent preregistered model
+should separate an exact appearance field from a context-predictive residual
+and require both under matched state-shuffle interventions.
+
+Long context has a separate exact representation. For a lattice width $K$,
+sequence index $t$ maps serpentine-wise to
+\[
+r=\lfloor t/K\rfloor,\qquad
+c=\begin{cases}t\bmod K,&r\ \mathrm{even},\\
+K-1-(t\bmod K),&r\ \mathrm{odd}.
+\end{cases}
+\]
+This bijection preserves adjacency at row turns and maps clean
+$N\times1\times32\times32$ cells to either an inspectable flat page or a
+learned $C\times R\times K$ retinal lattice with a validity mask. A
+$256\times256$ lattice holds 65,536 cells, but was not used in V25. Scaling
+this representation before repairing the 64-cell objective would increase
+context without establishing better language.
+
+\clearpage
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -1650,15 +1797,24 @@ invariant. The opaque audit scores 47/48 and 48/48 for the two output frames.
 On the single frozen run, frame-1 unseen-identity accuracy is 98.67\%,
 frame-2 label accuracy is 99.73\%, and held-out-length scores are 98.47\% and
 100\%. Every fixed gate passes.
+V25 then removes the packet grammar and exposes the larger gap. Full natural-
+Chinese visual history reaches 1.123\% top-1, above 0.146\% last-only and
+0.342\% shuffled history, but below 1.611\% image unigram and 12.158\%
+symbolic bigram. Six fixed gates reject the language model. The exploratory
+writer's nonblank images preserve density while obtaining zero identity
+top-1, so appearance stability cannot substitute for semantic continuation.
+The frozen partition remains sealed.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
 answer stream whose second frame depends on rereading the first. It does not
-establish useful autonomous language. The next proof must replace the
-hand-authored packet grammar with rendered Chinese questions and passages,
-learn a variable answer length, and preserve prompt and history dependence
-across multiple generated lines. This order is also consistent with measured
-error accumulation in iterative diffusion chains~\cite{inputperturb}.
+establish useful autonomous language. V25 shows that simply replacing the
+hand-authored grammar with a generic causal visual field is insufficient. The
+next proof must first separate appearance preservation from context-predictive
+state at the same 64-cell horizon and pass matched state interventions. Only
+then should a serpentine lattice, variable answer length, or multiple generated
+lines expand the task. This order is also consistent with measured error
+accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -1729,17 +1885,28 @@ reaches 0.9867 frame-1 identity, 0.9973 frame-2 label accuracy, and 0.9961
 history switch accuracy; every fixed gate passes. V24 therefore establishes
 generated-pixel rereading in a bounded variable-input stream. It does not turn
 the fixed packet algebra into natural language.
-The seven-context V16 increase is too small to establish an architecture win,
-and the 13.14\% bigram still rejects the causal memory core. The next
-attributable test uses ordinary rendered Chinese prompts and short passages,
-not packet headers, with a learned-length image-line answer. Page-native
-canvases and packed glyph grids at 8, 16, and 32 pixels per cell should be
-compared at matched information and compute. Color or depth channels may carry
-observable ink, style, geometry, or layout, but may not encode hidden character
-IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
+V25 performs that first ordinary-language test at a bounded 64-cell horizon.
+Its 1.123\% full-history top-1 exceeds last-only by 0.977 percentage points and
+shuffled history by 0.781 points, establishing a weak ordered dependency. It
+does not exceed image unigram, misses the log-probability gate by 0.00118 nat,
+fails counterfactual and target-cosine gates, and remains 10.8 times below the
+symbolic bigram. The exploratory writer reaches zero generated identity. The
+25.55M-parameter system fits easily on one RTX 4090, but capability-normalized
+efficiency is not established. The frozen partition is not queried.
+The seven-context V16 increase and V25 ordered-history increase are therefore
+both too small to establish a useful causal memory core. The next attributable
+test must keep ordinary Chinese and the strict image boundary while separating
+exact appearance from a context-predictive residual at the 64-cell horizon.
+Matched appearance-shuffle, predictive-state-shuffle, last-only,
+order-shuffled, visual-unigram, and symbolic-bigram controls must pass before
+long context or a writer is promoted. The exact serpentine mapping may then
+fold clean $32\times32$ cells into a $256\times256$ retinal lattice without
+making an $8\times8$ thumbnail the sole record. Page-native canvases, 3D
+geometry, color, and motion remain later observable channels and may not encode
+hidden character IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
 generated-history-blind, retrieval, and OCR-plus-text controls must distinguish
-language use from reconstruction and lookup. Only selected components may enter
-longer visual memory. The named product gate is a Visual Word-Origin Book that
+language use from reconstruction and lookup. Only selected components may
+enter longer visual memory. The named product gate is a Visual Word-Origin Book that
 reads a rendered prompt alone or composed with a source page, then emits one
 answer image or an ordered answer-image stream plus an optional declared text
 sidecar. Prompt counterfactuals must change that answer correctly; input

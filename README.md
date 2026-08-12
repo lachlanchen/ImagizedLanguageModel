@@ -37,11 +37,13 @@ optional geometric depth, height, width, and sensory channels. A page is the
 `T=1,D=1` case; a book is an ordered stream of fields; a 3D Chinese or English
 character string uses depth; and a character movie also uses time. These are
 one continuous input/output contract, not separate token vocabularies. V24
-completes the first bounded 2D Chinese proof: it reads a variable raster packet
-stream, writes one image, rereads those generated pixels, and writes a second
-image on one RTX 4090. The next proof must replace the fixed packet algebra with
-rendered sentences and variable-length answer lines before adding page scale,
-3D geometry, or motion.
+completes the first bounded 2D Chinese grammar proof: it reads a variable raster
+packet stream, writes one image, rereads those generated pixels, and writes a
+second image on one RTX 4090. V25 then replaces that designed packet algebra
+with ordinary rendered Chinese. It finds a weak ordered-history signal but is
+rejected as a language model. The next proof must repair visual
+context-to-glyph binding at 64 cells before adding page scale, 3D geometry, or
+motion.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -60,6 +62,43 @@ source-book policy are in
 [`docs/first-imagized-language-model-goal.md`](docs/first-imagized-language-model-goal.md)
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
+
+## Latest Natural-Language Test: V25 Visual Cell Stream Rejected
+
+![Measured V25 visual-cell result: full image history carries a weak ordered signal, but the language model and exploratory writer fail their fixed gates](publication/ilm-image-native/figures/visual_cell_stream_v25_result.png)
+
+V25 is the first experiment here to train directly on ordinary Chinese book
+language as an ordered `64 x 1 x 32 x 32` visual-time stream. Its
+`25,549,714`-parameter model uses a frozen image retina, an eight-layer causal
+continuous field, a vocabulary-free next-state proposal, and a flow writer that
+can append and reread actual generated pixels. The student receives no strings,
+token or Unicode IDs, OCR transcript, character labels, glyph lookup, discrete
+codebook, or external model call.
+
+The fixed 2,400-update language run completes on one RTX 4090. On 2,048
+development windows, full 64-cell history reaches `1.123%` next-cell top-1,
+versus `0.146%` last-only and `0.342%` with prior history shuffled. This is a
+real ordered-history effect, but it is too small: the image unigram reaches
+`1.611%` and the symbolic bigram `12.158%`. Counterfactual switch accuracy is
+`12.891%`, target cosine is `0.2751`, and six fixed semantic/causal gates fail.
+Peak allocated CUDA memory is `0.598 GiB`; low memory is not evidence of
+language efficiency when predictive quality remains below a bigram. The frozen
+partition stays sealed.
+
+An explicitly labeled exploratory writer run after rejection preserves
+position-16 ink density (`0.977x`) and avoids blanks, but reaches `0%` generated
+identity top-1, `0.0802` reread cosine, and `0.3221` pixel F1. Its output is
+glyph-like texture, not readable continuation. This diagnostic does not alter
+the fixed evidence verdict.
+
+The result points to the next controlled problem: separate exact visible
+appearance from a context-predictive residual and prove that both states are
+causally needed before scaling context. The implemented reversible
+[`serpentine visual lattice`](references/serpentine_visual_lattice.md) can later
+fold up to 65,536 clean cells into a long-context retinal field without losing
+the authoritative `32x32` glyph stream, but it was not used in V25 and is not a
+claimed fix. See the [complete V25 receipt](docs/visual-cell-stream-v25-result.md)
+and [unchanged frozen protocol](references/visual_cell_stream_v25_protocol.md).
 
 ## Latest Stream Test: V24 Visual Packet Rereading Accepted
 

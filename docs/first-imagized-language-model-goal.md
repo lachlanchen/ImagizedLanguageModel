@@ -142,8 +142,8 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains ten complete experimental systems and one frozen
-next experiment:
+The repository now contains eleven complete experimental systems. V25 is the
+latest measured development result; its frozen partition remains sealed:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -178,11 +178,11 @@ next experiment:
   `15`--`24` frame image stream. It writes two answer images, rereads its actual
   first generated frame to produce the second, and tests four matched blind
   routes before one authorized frozen evaluation.
-- Visual Cell Stream V25 is preregistered, not yet a result. It treats ordinary
-  Chinese as a `T x 32 x 32` visual-time volume, predicts the next continuous
-  cell from 64 visible cells, draws it with pixel flow, and appends the actual
-  generated image for autonomous rereading. Historical forms are deliberately
-  deferred from this first natural-language test.
+- Visual Cell Stream V25 is a 25.55M-parameter ordinary-Chinese experiment. It
+  treats writing as a `T x 32 x 32` visual-time volume, predicts the next
+  continuous cell from 64 visible cells, and implements pixel-flow writing and
+  actual generated-image rereading. Its fixed language stage is rejected; a
+  separately labeled exploratory writer diagnostic is also rejected.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -272,6 +272,22 @@ its image retina, canonical writer, and relation operator are inherited and
 frozen. This is strong evidence for visual routing and generated-image history
 inside its packet grammar, not evidence of ordinary language generation.
 
+V25 removes that packet grammar and trains for 2,400 updates on ordinary
+Chinese book streams. On 2,048 fixed development windows, full-history top-1
+is `0.01123`, versus `0.00146` last-only and `0.00342` after shuffling prior
+history. Full history therefore carries a small ordered dependency, but it
+remains below image unigram (`0.01611`) and symbolic bigram (`0.12158`).
+Counterfactual switch accuracy is `0.12891` and target cosine is `0.27513`;
+six fixed language gates fail. Peak allocated CUDA memory is `0.59763 GiB` and
+the student-boundary audit passes, but these resource and boundary results do
+not make the rejected predictor efficient in capability terms. The frozen
+partition remains sealed. An explicitly exploratory writer run reaches zero
+generated identity top-1, `0.08015` reread cosine, and `0.32210` pixel F1 while
+preserving nonblank ink density. It confirms that stable marks are not correct
+continuation.
+
+![Visual Cell Stream V25 rejected development result](../publication/ilm-image-native/figures/visual_cell_stream_v25_result.png)
+
 It proved:
 
 - a strict image-only student boundary;
@@ -304,8 +320,11 @@ It proved:
 - context-sensitive generated pixels;
 - autonomous rereading and feedback without OCR or symbolic decoding;
 - improved long-rollout ink stability after training on its own sampled images;
-- useful gradients through a deployed two-step image sampler; and
-- improved calibrated visual prediction from independent image anchors.
+- useful gradients through a deployed two-step image sampler;
+- improved calibrated visual prediction from independent image anchors; and
+- a weak but measurable ordered-history effect in a natural Chinese
+  `64 x 32 x 32` image-cell stream, with the V25 failure localized before any
+  frozen evaluation.
 
 It did not prove:
 
@@ -316,30 +335,35 @@ It did not prove:
   passes only a variable-length but fixed three-frame packet grammar;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
-- lower end-to-end cost than a text LLM; or
-- parity with Qwen 8B.
+- lower end-to-end cost than a text LLM;
+- parity with Qwen 8B; or
+- a selected natural-Chinese next-cell model: V25 remains below its image
+  unigram and symbolic bigram controls and fails six fixed language gates.
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
 relation proof, accepted V24 bounded visual packet/reread proof, and rejected
-autonomous language-system proof**.
+V25 natural-Chinese cell stream and autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
 solved by image generation. V22 shows that merely adding a Transformer and a
 single-frame soft selector is not a prompt-to-answer solution. V23 and V24 show
 that small constrained circuits can instead compare several visible roles,
-route unseen source forms, write, and use generated-image history. The next
-milestone removes the role syntax entirely. V25 rasterizes natural Chinese
-book text into clean two-dimensional cells and stacks them along visual time.
-Its model sees `B x T x 1 x 32 x 32`, never strings or character IDs, and must
-beat last-cell, shuffled-history, and visual-unigram controls before a
-continuous writer is allowed to generate and reread a 16-cell continuation.
-The symbolic bigram remains a required benchmark. The complete frozen contract
-is in
-[`references/visual_cell_stream_v25_protocol.md`](../references/visual_cell_stream_v25_protocol.md).
+route unseen source forms, write, and use generated-image history. V25 then
+removes the role syntax and establishes that a generic causal visual field can
+detect ordered natural-writing history, but not bind it strongly enough to the
+correct next form. The immediate milestone is therefore not a larger page or
+3D stream. It is a new preregistered 64-cell model that separates an exact
+appearance state from a context-predictive residual and proves both are needed
+through matched state-shuffle controls. Only after that model beats last-cell,
+shuffled-history, and visual-unigram controls should the reversible serpentine
+lattice expand context. The unchanged V25 contract and complete result are in
+[`references/visual_cell_stream_v25_protocol.md`](../references/visual_cell_stream_v25_protocol.md)
+and
+[`docs/visual-cell-stream-v25-result.md`](visual-cell-stream-v25-result.md).
 
 ## Implemented paradigm: predictive visual fields
 
