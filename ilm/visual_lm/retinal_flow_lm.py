@@ -300,6 +300,7 @@ def retinal_flow_loss(
     invariance_weight: float = 0.20,
     retina_contrastive_weight: float = 0.25,
     retina_variance_weight: float = 0.10,
+    candidate_invariance_weight: float = 0.10,
     writer_cycle_weight: float = 0.35,
     endpoint_weight: float = 0.10,
     stroke_weight: float = 2.0,
@@ -320,13 +321,25 @@ def retinal_flow_loss(
     energy_target_visual = (
         outputs["target_visual"][energy_batches, random_order].float().detach().flatten(0, 1)
     )
-
-    visual_positive, target_similarity = _visual_positive_mask(
-        energy_target_visual,
-        duplicate_similarity,
-    )
-    energy_logits = model.energy(energy_condition, energy_target_visual)
+    energy_target_ink = target_ink[energy_batches, random_order].flatten(0, 1)
+    with torch.no_grad():
+        source_target_visual = model.target_retina(energy_target_ink).float()
+    energy_candidates = torch.cat((energy_target_visual, source_target_visual), dim=0)
+    normalized_energy_target = F.normalize(energy_target_visual, dim=-1)
+    normalized_energy_candidates = F.normalize(energy_candidates, dim=-1)
+    energy_similarity = normalized_energy_target @ normalized_energy_candidates.transpose(0, 1)
+    visual_positive = energy_similarity >= duplicate_similarity
+    query_indices = torch.arange(energy_condition.shape[0], device=context_foveas.device)
+    visual_positive[query_indices, query_indices] = True
+    visual_positive[query_indices, energy_condition.shape[0] + query_indices] = True
+    energy_logits = model.energy(energy_condition, energy_candidates)
     energy, energy_retrieval = _multi_positive_nce(energy_logits, visual_positive)
+    projected_reference = F.normalize(model.energy.candidate(energy_target_visual), dim=-1)
+    projected_source = F.normalize(model.energy.candidate(source_target_visual), dim=-1)
+    candidate_invariance = (
+        1.0 - (projected_reference * projected_source).sum(dim=-1)
+    ).mean()
+    target_similarity = normalized_energy_target @ normalized_energy_target.transpose(0, 1)
 
     positions = random_order[:, 0]
     condition = outputs["condition"][batch_indices, positions]
@@ -337,8 +350,15 @@ def retinal_flow_loss(
     target_fovea = target_ink[batch_indices, positions].float().clamp(0, 1)
 
     flow_target = target_fovea * 2.0 - 1.0
+    high_noise_time = torch.rand(
+        batch,
+        device=flow_target.device,
+        dtype=flow_target.dtype,
+        generator=generator,
+    ).sqrt()
     flow_state, velocity, time_field, _ = flow_training_state(
         flow_target,
+        time=high_noise_time,
         generator=generator,
     )
     keep = (
@@ -372,19 +392,20 @@ def retinal_flow_loss(
         normalized_generated @ normalized_target.transpose(0, 1)
     )
     writer_cycle_rows = _multi_positive_nce_rows(writer_logits, writer_positive)
-    cycle_weights = keep.float() * (0.25 + 0.75 * time_field.float().square())
-    writer_cycle = (writer_cycle_rows * cycle_weights).sum() / cycle_weights.sum().clamp_min(1.0)
+    cycle_weights = keep.float() * (0.05 + 0.95 * time_field.float().pow(4))
+    cycle_weight_sum = cycle_weights.sum().clamp_min(1e-6)
+    writer_cycle = (writer_cycle_rows * cycle_weights).sum() / cycle_weight_sum
     with torch.no_grad():
         writer_cycle_retrieval = writer_positive.gather(
             1,
             writer_logits.argmax(dim=1, keepdim=True),
         ).float()
         writer_cycle_top1 = (
-            writer_cycle_retrieval[:, 0] * keep.float()
-        ).sum() / keep.float().sum().clamp_min(1.0)
+            writer_cycle_retrieval[:, 0] * cycle_weights
+        ).sum() / cycle_weight_sum
         writer_target_cosine = (
-            (normalized_generated * normalized_target).sum(dim=-1) * keep.float()
-        ).sum() / keep.float().sum().clamp_min(1.0)
+            (normalized_generated * normalized_target).sum(dim=-1) * cycle_weights
+        ).sum() / cycle_weight_sum
 
     normalized_current = F.normalize(current_visual, dim=-1)
     normalized_reference = F.normalize(current_reference, dim=-1)
@@ -402,6 +423,7 @@ def retinal_flow_loss(
         + invariance_weight * invariance
         + retina_contrastive_weight * retina_contrastive
         + retina_variance_weight * retina_variance
+        + candidate_invariance_weight * candidate_invariance
         + writer_cycle_weight * writer_cycle
     )
     metrics = {
@@ -410,6 +432,8 @@ def retinal_flow_loss(
         "visual_energy_top1": energy_retrieval.detach(),
         "visual_positive_count": visual_positive.float().sum(dim=1).mean().detach(),
         "visual_energy_queries": energy.new_tensor(float(energy_condition.shape[0])),
+        "visual_energy_candidates": energy.new_tensor(float(energy_candidates.shape[0])),
+        "candidate_cross_render_invariance": candidate_invariance.detach(),
         "visual_off_diagonal_similarity": (
             (target_similarity.sum() - target_similarity.diagonal().sum())
             / max(1, energy_condition.shape[0] * (energy_condition.shape[0] - 1))

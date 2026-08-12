@@ -163,10 +163,16 @@ def retinal_foveal_prediction(
 def flow_training_state(
     target: torch.Tensor,
     *,
+    time: torch.Tensor | None = None,
     generator: torch.Generator | None = None,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
     batch = target.shape[0]
-    time = torch.rand(batch, device=target.device, dtype=target.dtype, generator=generator)
+    if time is None:
+        time = torch.rand(batch, device=target.device, dtype=target.dtype, generator=generator)
+    elif time.shape != (batch,):
+        raise ValueError("flow time must have shape [batch]")
+    else:
+        time = time.to(device=target.device, dtype=target.dtype)
     noise = torch.randn(target.shape, device=target.device, dtype=target.dtype, generator=generator)
     expanded = time[:, None, None, None]
     state = (1.0 - expanded) * target + expanded * noise
