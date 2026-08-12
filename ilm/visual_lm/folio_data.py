@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import random
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -121,6 +121,37 @@ def render_folio(
         noise = np.random.default_rng(variant).normal(0.0, rng.uniform(0.002, 0.018), array.shape)
         array = np.clip(array + noise, 0.0, 1.0)
     return torch.from_numpy(1.0 - array.astype(np.float32))[None]
+
+
+def split_folio_text(text: str, *, config: FolioRenderConfig, variant: int) -> list[str]:
+    """Split by visual fit, without requiring character or word tokenization."""
+
+    text = text.strip()
+    if not text:
+        return [""]
+    image = Image.new("L", (config.width, config.height), 255)
+    draw = ImageDraw.Draw(image)
+    font = _font(variant, config.minimum_font_size)
+    spacing = max(3, config.minimum_font_size // 4)
+    lines = _lines(draw, text, font, config.width - config.margin * 2)
+    lines_per_page = max(1, (config.height - config.margin * 2) // (font.size + spacing))
+    return [
+        "\n".join(lines[offset : offset + lines_per_page])
+        for offset in range(0, len(lines), lines_per_page)
+    ]
+
+
+def render_folio_pages(
+    text: str,
+    *,
+    config: FolioRenderConfig,
+    variant: int,
+) -> list[torch.Tensor]:
+    page_config = replace(config, font_size=config.minimum_font_size, augment=False)
+    return [
+        render_folio(page, config=page_config, variant=variant + index, augment=False)
+        for index, page in enumerate(split_folio_text(text, config=config, variant=variant))
+    ]
 
 
 def folio_tensor_to_image(ink: torch.Tensor) -> Image.Image:

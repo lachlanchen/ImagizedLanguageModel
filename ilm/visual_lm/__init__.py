@@ -4,7 +4,13 @@ from .autoencoder import VisualPageVAE, VisualVAEConfig
 from .dataset import VisualLanguageDataset, VisualLanguageSample
 from .flow import ConditionalVisualFlow, VisualFlowConfig
 from .folio import FolioRetina, FolioRetinaConfig, folio_distillation_loss
-from .folio_data import FolioRenderConfig, FolioSemanticDataset, render_folio
+from .folio_data import (
+    FolioRenderConfig,
+    FolioSemanticDataset,
+    render_folio,
+    render_folio_pages,
+)
+from .folio_memory import FolioMemory, FolioMemoryHit
 from .instruction_data import (
     InstructionRenderConfig,
     MixedVisualDataset,
@@ -36,6 +42,8 @@ __all__ = [
     "FolioRetinaConfig",
     "FolioRenderConfig",
     "FolioSemanticDataset",
+    "FolioMemory",
+    "FolioMemoryHit",
     "GlyphCorpus",
     "ImageToImageUNet",
     "InstructionRenderConfig",
@@ -64,4 +72,5 @@ __all__ = [
     "instruction_episode_specs",
     "render_instruction_page",
     "render_folio",
+    "render_folio_pages",
 ]
