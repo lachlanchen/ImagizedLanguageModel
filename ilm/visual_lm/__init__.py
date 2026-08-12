@@ -62,6 +62,16 @@ from .visual_cell_data import (
     student_visual_cell_batch,
     visual_cell_collate,
 )
+from .visual_cell_stream import (
+    ContinuousCellFlowWriter,
+    VisualCellStreamConfig,
+    VisualCellStreamModel,
+    visual_cell_flow_loss,
+    visual_cell_language_loss,
+    visual_cell_model_boundary_receipt,
+    visual_cell_model_config_from_payload,
+    visual_cell_model_config_payload,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -95,7 +105,10 @@ __all__ = [
     "VisualLanguageSample",
     "VisualAssociativeReader",
     "VisualCellRenderConfig",
+    "VisualCellStreamConfig",
     "VisualCellStreamDataset",
+    "VisualCellStreamModel",
+    "ContinuousCellFlowWriter",
     "ContinuousVisualActuator",
     "ContinuousVisualMotorPlan",
     "VisualActuatorConfig",
@@ -122,4 +135,9 @@ __all__ = [
     "render_visual_cell_stream",
     "student_visual_cell_batch",
     "visual_cell_collate",
+    "visual_cell_flow_loss",
+    "visual_cell_language_loss",
+    "visual_cell_model_boundary_receipt",
+    "visual_cell_model_config_from_payload",
+    "visual_cell_model_config_payload",
 ]
