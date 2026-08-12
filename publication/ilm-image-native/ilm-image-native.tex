@@ -57,7 +57,14 @@ tests a zero-initialized spatial-retinal residual under fixed complexity strata
 and five causal interventions. Its fresh 512-candidate development audit rejects
 the mechanism: dense F1 is 0.728, but correct fields improve it by only 0.009
 over shuffled fields and 0.005 over zero fields, against fixed margins of 0.12
-and 0.03. No human or frozen query is authorized.
+and 0.03. V20 then constrains the global route to coarse $4\times4$ block
+logits and reserves within-block detail for a continuous local retinal field,
+with an exactly parameter-matched global-repeat control. The field becomes
+causally necessary: dense F1 is 0.701, versus 0.580 shuffled and 0.340 zeroed,
+and quadrant-occlusion locality is 1.0. The writer remains rejected because
+overall F1 is 0.636, target cosine is 0.815, the exact-decomposition tolerance
+fails, and final dense gain over the control is only 0.018 against a fixed 0.03
+margin. Neither arm selects; no human or frozen query is authorized.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -65,8 +72,11 @@ and provenance-linked historical or unencoded forms. The present experiments
 establish causal visual-language signal and compact continuous-image writing,
 not autonomous question answering, broad readability, Qwen parity, or
 efficiency over text models. More generally, ILM treats writing as the first
-instance of language modeled as a continuous sensory field; extension to speech
-or vocal fields is a future hypothesis, not a result of this paper.
+instance of language modeled as a continuous sensory field. A proposed Visual
+Language Stream adds sequence/time and optional geometric depth to the same
+image-native contract, so a page, book stream, 3D glyph string, or character
+movie differs by field shape rather than vocabulary. Only the 2D writing case
+is tested here; 3D, motion, speech, and vocal fields remain future hypotheses.
 \end{abstract}
 
 \begin{figure}[t]
@@ -110,6 +120,20 @@ before the core. A photographed page can be transcribed, but the same model
 should also continue, translate, explain, compare, and generate writing. Its
 answer is an image first; coded transcription is an optional downstream view.
 
+The canonical input/output can be written as a Visual Language Stream,
+\[
+X\in[0,1]^{T\times D\times H\times W\times C},
+\qquad
+p_\theta(X_{t+1:t+k}\mid X_{\leq t}),
+\]
+where $T$ is reading sequence or visual time, $D$ is optional geometric depth,
+$H,W$ are spatial extent, and $C$ is the sensor channel. A flat prompt has
+$T=1,D=1$; an ordered line or book has $T>1,D=1$; a 3D glyph string has
+$D>1$; and a 3D character movie uses depth and time. Collapsed axes have length
+one, so these are shapes of one continuous field rather than separate
+vocabularies. The present proof fixes $D=1$ and short $T$; depth and motion must
+earn separate causal and quality evidence after the 2D loop passes.
+
 The design is inspired by foveated visual reading, without claiming a biological
 simulation. Its broader hypothesis is sensory: the same perception--memory--
 prediction--motor--self-perception loop might later operate on speech waveforms
@@ -135,9 +159,13 @@ implemented controls that makes that slogan falsifiable:
   2.36M topology-first planner can render recognizable writing without token
   unembedding. Their failures delimit identity, topology, and language choice.
   \item A preregistered V19 spatial-field intervention whose negative result
-  separates feature availability from causal use, plus a rights-aware Visual
-  Word-Origin Book benchmark for readable explanation, historical visual
-  evidence, unencoded forms, provenance, and one-GPU compute.
+  separates feature availability from causal use, followed by an exactly
+  capacity-matched V20 intervention that makes local topology necessary while
+  rejecting its own writer-quality claim.
+  \item A rights-aware Visual Word-Origin Book benchmark and a continuous
+  Visual Language Stream interface. They cover readable explanation,
+  historical evidence, unencoded forms, optional depth and time, provenance,
+  and one-GPU compute. The higher-dimensional interface is prospective.
 \end{enumerate}
 
 \section{Prior Art and Gap}
@@ -557,16 +585,88 @@ fail, so the blinded human review and frozen evaluation are not authorized.}
 This result rejects the additive routing mechanism, not the possibility that
 the field contains useful information. The global planner can already draw the
 whole form, so ordinary reconstruction gradients need not use the field. The
-next bounded candidate must make local visual state structurally necessary. One
-testable decomposition is
+next bounded candidate must make local visual state structurally necessary.
+
+\subsection{Retinal topology router V20: local causality without writer selection}
+
+V20 implements the preregistered coarse/detail decomposition
 \[
 p=\sigma\left(U(G(z,s))+(I-UD)H(F,s)\right),
 \]
-where $G$ can emit only a coarse plan and the fixed high-pass projection
-$(I-UD)$ reserves unavailable detail for the field route $H$. A stricter arm
-removes the global spatial seed and permits $z$ only as spatially uniform
-channel modulation. This V20 candidate requires a new preregistration and a
-capacity-matched V19 control; it is not a result reported here.
+where $G$ emits only one logit per $8\times8$ output block and $H$ maps each
+$4\times4$ retinal-field cell pointwise to its corresponding $8\times8$
+detail patch. The fixed projection $I-UD$ removes each patch mean, so the global
+route cannot represent within-block detail. An exactly capacity-matched control
+replaces $F$ with $\operatorname{tile}(z)$ while retaining the same local
+decoder, losses, and operations. Each arm has 506,448 trainable parameters.
+
+The new salted split contains 6,611 training, 196 development, and 210 frozen
+records. Both arms train for 1,600 updates against the same frozen V16 retina.
+The fixed interventions hold target and style constant while shuffling the
+local field, zeroing it, shuffling global state, shuffling both, or occluding
+each field quadrant. Validation renders 512 development candidates, including
+146 dense forms. Table~\ref{tab:v20} records the final endpoints; neither is a
+selected checkpoint.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V20 development gate & Candidate & Required & Result \\
+\midrule
+Overall pixel F1 & 0.6361 & $>0.66$ & fail \\
+Dense pixel F1 & 0.7013 & $>0.68$ & pass \\
+Dense gain over shuffled field & 0.1218 & $>0.12$ & pass \\
+Dense gain over zero field & 0.3613 & $>0.10$ & pass \\
+Identity top-1 & 75.00\% & $>70\%$ & pass \\
+Target cosine & 0.8152 & $>0.82$ & fail \\
+Occlusion locality & 1.0000 & $>0.40$ & pass \\
+Detail block-mean magnitude & $2.03{\times}10^{-6}$ & $<10^{-6}$ & fail \\
+Dense gain over matched control & 0.0179 & $>0.03$ & fail \\
+\bottomrule
+\end{tabular}
+\caption{Final V20 development endpoints. The field candidate passes every
+local-causality gate but fails writer selection and the matched-control margin.
+Because neither arm selects, the formal paired audit, blinded review, and frozen
+evaluation remain forbidden.}
+\label{tab:v20}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/retinal_topology_router_v20_result.png}
+  \caption{Measured V20 result. Shuffling or zeroing the candidate's local field
+  destroys detail, and a quadrant occlusion changes only its corresponding
+  output quadrant. The equal-parameter global-repeat control is invariant to
+  field interventions. Recognizable endpoints do not pass the fixed writer and
+  paired-control gates.}
+  \label{fig:v20result}
+\end{figure}
+
+The candidate's correct dense F1 exceeds shuffled-field by 0.12177 and
+zero-field by 0.36128; its quadrant locality is exactly 1.0. These measurements
+establish that the continuous field carries necessary, topographically aligned
+detail. They do not establish a selected writer. Overall F1 and reread cosine
+remain below threshold. Both arms also exceed the strict $10^{-6}$ detail-mean
+tolerance after detail magnitude grows, indicating that floating-point
+recentering is a poor way to encode an algebraic invariant. Candidate dense F1
+exceeds the control by only 0.01791 at the final endpoint, below the paired
+0.03 margin. Candidate and control train in 325.90 and 327.11 seconds and peak
+at 0.323 and 0.397~GiB allocated CUDA memory, respectively.
+
+V21 should therefore be field-complete rather than wider. Let global state and
+style emit only spatially uniform modulation,
+\[
+(\gamma,\beta)=M(z,s),\quad
+c=C_F(\gamma\odot F+\beta),\quad
+d=B_0A_F(\gamma\odot F+\beta),\quad
+p=\sigma(U(c)+d),
+\]
+where both coarse occupancy $c$ and detail coefficients come from the
+topographic field, and $B_0$ is a fixed zero-mean basis. The matched control
+tiles $z$ in place of $F$ without changing capacity. This is the next
+prospective experiment, not a result reported here.
 
 \section{Data}
 
@@ -764,9 +864,10 @@ intentionally simpler than the complete research space:
   $4\times4$ spatial field. V16 already provides the retina and causal state.
   \item Predict the next continuous visual state from image history and require
   it to beat last-only, unigram, and bigram controls.
-  \item Draw that state with a field-primary topology route. V19 shows that a
-  small optional residual is ignored; V20 must restrict the global branch to
-  coarse semantics/style and pass shuffled, zero, and occluded-field controls.
+  \item Draw that state with a field-complete topology route. V19 shows that a
+  small optional residual is ignored; V20 makes field detail causal but fails
+  writer quality. V21 must derive coarse occupancy and detail from the local
+  field while global state supplies only spatially uniform modulation.
   \item Feed generated pixels back through the same retina and require a
   readable 32-region autonomous rollout.
   \item Render typed prompts and optional source pages into one canvas, then
@@ -779,15 +880,20 @@ intentionally simpler than the complete research space:
 This uses one retina, one causal field, one deterministic motor planner, and one
 write--reread loop. Stochastic surface generation, billion-parameter scaling,
 and broad multimodal alignment are deferred until this minimal system works.
+The same Visual Language Stream can later expose geometric depth and time, but
+3D glyph strings and character movies are also deferred until the 2D
+write--reread gate passes.
 
 The 16.47M PVF V16 state model, 5.73M V17 actuator, and 2.36M V18 motor planner
 are deliberately small enough for one RTX 4090. Their measured peaks are 1.479,
 1.588, and 0.778~GiB, respectively, leaving substantial capacity headroom for
-controlled corrections. V18 makes many isolated forms readable, but this is not
-an end-to-end efficiency victory: the causal language core remains below a
-symbolic bigram, dense topology remains imperfect, and autonomous continuation
-has not passed. ``More efficient than an LLM'' remains an unsupported
-hypothesis until quality is matched on a named task.
+controlled corrections. V20 reduces the causal routing test to two exactly
+matched 0.506M-parameter arms, peaking at 0.323 and 0.397~GiB, and cheaply
+rejects the writer despite positive field causality. This is not an end-to-end
+efficiency victory: the causal language core remains below a symbolic bigram,
+dense topology remains imperfect, and autonomous continuation has not passed.
+``More efficient than an LLM'' remains an unsupported hypothesis until quality
+is matched on a named task.
 
 \section{Target Demonstration: Visual Word-Origin Book}
 
@@ -971,12 +1077,17 @@ readable topology. V18 then passes every automatic development topology gate
 and makes many held-out forms readable, but leaves dense-form and prospective
 human-readability gates unresolved. V19 then rejects an additive local-field
 repair: dense F1 is 0.7278, but field shuffling reduces it by only 0.0088 and
-field removal by only 0.0054. The combined result establishes that a
-small image-only student can learn causal language signal and that a small
-continuous state can control recognizable generated ink; it does not establish
-useful autonomous language. The next proof should isolate the multiscale memory
-contribution while a new field-primary writer makes local topology causally
-necessary under matched controls. The final closed 32-cell loop must then remain
+field removal by only 0.0054. V20 then forces unavailable within-block detail
+through the field. Correct dense F1 exceeds shuffled-field by 0.1218 and
+zero-field by 0.3613, with exact quadrant locality, so the local-causality
+hypothesis passes. Writer selection still fails, and endpoint dense advantage
+over the equal-capacity control is only 0.0179 against a fixed 0.03 margin.
+The combined result establishes that a small image-only student can learn
+causal language signal and that a small continuous field can control
+topographic generated ink; it does not establish useful autonomous language.
+The next proof should isolate the multiscale memory contribution while a
+field-complete writer makes both coarse occupancy and detail depend on local
+state under matched controls. The final closed 32-region loop must then remain
 readable. This order is also consistent with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
 
@@ -1008,19 +1119,28 @@ V19 adds a clean split, fixed complexity strata, five interventions, and a
 prospective blinded rule, then rejects its own proposed repair: the correct
 field gains only 0.0088 dense F1 over a shuffled field and 0.0054 over no field.
 This demonstrates that exposing local features is not equivalent to using them
-causally.
+causally. V20 changes the routing constraint with two exactly matched
+0.506M-parameter arms. It obtains a 0.1218 dense-F1 field-shuffle gap, a 0.3613
+zero-field gap, and 1.0 local-occlusion locality. This establishes necessary,
+topographic use of the continuous retinal field. V20 is nevertheless rejected
+as a writer: overall F1, target cosine, exact decomposition, and the paired
+control margin fail, so no checkpoint, human review, or frozen evaluation is
+accepted.
 The seven-context V16 increase is too small to establish an architecture win,
 and the 13.14\% bigram still rejects the causal core. The next attributable
-tests are paired multiscale-memory ablation and a preregistered field-primary
-V20 motor route that structurally prevents the global state from redrawing fine
-topology, followed only then by a closed write-reread loop. The named product gate is a
-Visual Word-Origin Book that reads a rendered prompt alone or composed with a
-source page, then emits an answer image and optional declared text sidecar.
+tests are a preregistered field-complete V21 writer, in which local state drives
+coarse occupancy and detail while global state only modulates channels, and a
+paired multiscale-memory ablation that predicts local/global future fields.
+Only selected components may enter a closed write--reread loop. The named
+product gate is a Visual Word-Origin Book that reads a rendered prompt alone or
+composed with a source page, then emits an answer image and optional declared
+text sidecar.
 Historical etymology answers and broad instruction following remain downstream
 goals, not present capabilities, and no Qwen-8B parity or end-to-end efficiency
 claim is warranted. The perception--prediction--motor--self-perception
-factorization may later be tested on continuous speech or vocal fields, but
-that general sensory-language extension is not established here.
+factorization may later use the Visual Language Stream for 3D character strings
+or writing movies, and may be tested on continuous speech or vocal fields. None
+of those higher-dimensional sensory-language extensions is established here.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
