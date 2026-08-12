@@ -16,7 +16,49 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
-## Current Proof: Predictive Visual Field V16
+## Current Proof: Visual State Actuator V17
+
+![Measured Visual State Actuator V17: an image-derived continuous state causally controls generated pixels on a frozen split, but exact stroke topology and human readability fail](publication/ilm-image-native/figures/visual_state_actuator_v17_result.png)
+
+V17 is a real `5,729,921`-parameter visual actuator trained for 1,600 updates on
+one RTX 4090. It receives a `192`-dimensional state read from a different-font
+image of the intended form plus a continuous style image, then generates
+`32x32` ink pixels. The target image supplies loss only; its spatial pixels do
+not enter the condition. The learned path has no token IDs, Unicode IDs, OCR,
+character labels, output vocabulary, visual codebook, candidate classifier,
+glyph lookup, or external language model.
+
+On one untouched frozen split of 512 generated examples, V17 obtains **58.59%**
+global visual-identity top-1 versus **0.98%** when intended states are shuffled
+while style and initial noise remain fixed. Target-state cosine is **0.7130**
+versus `0.0861`, a gain of `+0.6269`. The intervention establishes that a small
+continuous visual state causally controls generated writing pixels rather than
+merely copying style.
+
+| Frozen actuator gate | Correct state | Shuffled state | Result |
+|---|---:|---:|---|
+| Global visual identity top-1 | **58.594%** | 0.977% | passes causal-control gate |
+| Target cosine | **0.7130** | 0.0861 | gain `+0.6269` |
+| Pixel F1 | **0.4385** | 0.2800 | **fails required 0.5000** |
+| Human readability | rejected | rejected | pseudo-characters remain |
+| Peak allocated CUDA memory | **1.588 GiB** | - | fits far below 4090 capacity |
+
+This breaks a categorical claim, not the whole language problem: a consumer GPU
+can train a compact non-token visual state to control image generation. V17 is
+still rejected as a readable actuator. Its mostly pseudo-character outputs show
+that retinal identity can be optimized without preserving exact stroke
+topology. It is also an isolated actuator test supplied with the intended state,
+not autonomous next-language generation. V16 remains below a symbolic bigram.
+
+The next correction decodes the continuous state into a directly supervised
+spatial **visual motor plan**, then reserves stochastic flow for style and
+surface refinement. This preserves the image-native boundary while matching
+the low-entropy topology of writing instead of asking generic noise-to-image
+flow to rediscover every stroke. The complete selection, frozen receipt,
+limitations, and reproduction command are in
+[`docs/visual-state-actuator-v17-result.md`](docs/visual-state-actuator-v17-result.md).
+
+## Language Core: Predictive Visual Field V16
 
 ![Measured Predictive Visual Field V16: writing images enter a frozen retina, recurrent base, and residual multiscale causal visual memory; frozen evaluation shows continuous predictions use full history while remaining below a symbolic bigram](publication/ilm-image-native/figures/predictive_visual_field_v16_result.png)
 
@@ -44,7 +86,7 @@ cosine gain `+0.0795`.
 | State-flow full-context top-1 | `3.412%` | **`3.691%`** | beats last-only and unigram |
 | Symbolic bigram | `13.143%` | `13.143%` | **not beaten** |
 | Peak allocated CUDA memory | `1.181 GiB` | `1.479 GiB` | fits far below 4090 capacity |
-| Pixel actuator | absent | absent | image output remains future work |
+| Coupled pixel actuator | absent | absent | isolated V17 actuator is not yet readable |
 
 This breaks a narrow but important claim: a small model can learn causal
 language signal directly from rendered writing images on a consumer GPU. It
@@ -68,13 +110,15 @@ without relaxing the image-only boundary:
 1. A retina learns a continuous manifold directly from writing images.
 2. A causal field predicts a low-variance **continuous visual proposal**.
 3. A hyperspherical flow models a distribution over alternative next states.
-4. A separate pixel-flow actuator will render a sampled state as ink.
+4. A separate visual actuator renders an intended state as ink; V17 proves
+   causal state control but fails readable topology.
 5. The retina will reread the rendered pixels and feed them back into the field.
 
 There is no nearest-character lookup or output vocabulary. The continuous state
 proof now passes random, last-only, unigram, context-use, and target-signal
-gates. It still fails the bigram language gate. The actuator and autonomous
-write-reread loop are deliberately withheld until the causal core is stronger.
+gates. It still fails the bigram language gate. The isolated V17 actuator passes
+causal control but fails readability; the autonomous write-reread loop remains
+withheld until both modules pass independently.
 
 The strict student boundary remains:
 
@@ -131,6 +175,22 @@ score margins were an invalid acceptance measure. V7 does not prove readable
 continuation, historical question answering, efficiency over a text LLM, or
 Qwen-8B parity. The result motivates the Predictive Visual Field separation
 shown above.
+
+## Run The Visual Actuator
+
+Evaluate the selected V17 checkpoint once on its frozen record split:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_visual_state_actuator.py \
+  --checkpoint artifacts/visual_state_actuator_v17_pilot/checkpoint_step_0001600.pt \
+  --out artifacts/visual_state_actuator_v17_frozen_eval \
+  --samples 128 --batch-size 32 --num-workers 8 \
+  --sample-count 12 --device cuda --precision bf16
+```
+
+The evaluator refuses to overwrite an existing frozen receipt. Full training
+settings and the rejected readability audit are in
+[`docs/visual-state-actuator-v17-result.md`](docs/visual-state-actuator-v17-result.md).
 
 ## Run The Predictive Visual Field
 

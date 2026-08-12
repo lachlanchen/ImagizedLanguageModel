@@ -1,6 +1,6 @@
 # Imagized Language Model
 
-Version: 0.5, predictive-visual-field visual-state proof
+Version: 0.6, predictive visual field plus isolated visual actuation
 
 Date: 2026-08-12
 
@@ -45,13 +45,14 @@ state is a visual observation, not a renamed token.
 ## Current implementation: predictive visual field
 
 V7 shows that direct pixel flow can learn stable, context-sensitive ink while
-still failing to become a useful language distribution. V14 through V16 therefore
-separate **imagining the next visual state** from **drawing that state**:
+still failing to become a useful language distribution. V14 through V17
+therefore separate **imagining the next visual state** from **drawing that
+state**:
 
 ```text
 writing pixels -> frozen retina -> causal visual field
                -> continuous proposal + hyperspherical state flow
-               -> future pixel actuator -> writing pixels -> reread
+               -> isolated visual actuator -> writing pixels -> reread
 ```
 
 ![Predictive Visual Field](../publication/ilm-image-native/figures/predictive_visual_field_paradigm.png)
@@ -72,9 +73,9 @@ between image-derived target state \(z_{t+1}\) and random unit source
 \mathbb E\lVert v_\eta(q_\tau,\tau,[h_t,z_t])-u_\tau\rVert_2^2.
 \]
 
-It samples intended continuous visual states, never character indices. A later
-separate pixel flow will render a plan and be checked by rereading. No nearest-
-glyph lookup, token unembedding, OCR path, or output vocabulary is allowed.
+It samples intended continuous visual states, never character indices. A
+separate actuator renders a plan and is checked by rereading. No nearest-glyph
+lookup, token unembedding, OCR path, or output vocabulary is allowed.
 
 ![Measured V16 visual-memory proof](../publication/ilm-image-native/figures/predictive_visual_field_v16_result.png)
 
@@ -83,7 +84,17 @@ and global attention. It passes the frozen proposal and stochastic state gates.
 The proposal reaches 6.264% top-1 over 512 forms, versus 3.971% last-only and
 1.734% unigram; the state flow reaches 3.691%, versus 3.244% last-only. Both use
 full history with positive normalized target-probability gain. The 13.143%
-symbolic bigram still wins, and the pixel actuator is intentionally absent.
+symbolic bigram still wins.
+
+![Measured V17 visual-state actuator](../publication/ilm-image-native/figures/visual_state_actuator_v17_result.png)
+
+V17 independently tests the drawing half. Its `5.73M` trainable parameters turn
+a continuous state from a different-font target view plus a separate style
+image into ink. On one untouched frozen split, correct-state visual identity is
+58.59% versus 0.98% after shuffling only the intended state. The target-cosine
+gain is `+0.6269`. Pixel F1 is only 0.4385 and human review rejects the output as
+mostly pseudo-characters. V17 therefore accepts causal visual control and
+rejects readable actuation. It is not yet coupled to V16's predicted states.
 
 ## Earlier precursor: read, predict, write, reread
 
@@ -203,7 +214,24 @@ This does not imply that images are automatically more compute-efficient than
 tokens or that human neural processing is identical to RFLM. Both remain
 empirical questions.
 
-## What the current experiment proves
+## What the current experiments prove
+
+The isolated V17 actuator trained for 1,600 updates in 339.67 seconds and used
+1.588 GiB peak allocated CUDA memory on one RTX 4090:
+
+| Frozen actuator measurement | Correct state | Shuffled state |
+|---|---:|---:|
+| Global visual identity top-1 | **58.594%** | 0.977% |
+| Target cosine | **0.71301** | 0.08612 |
+| Pixel F1 | **0.43849** | 0.28001 |
+| Ink fraction | 0.15947 | 0.15967 |
+
+This proves that a small non-token continuous visual state causally controls
+generated writing pixels. It does not prove readable writing: V17 fails the
+preregistered `0.50` pixel-F1 gate and human review. The next actuator must make
+stroke topology explicit with a learned spatial visual motor plan.
+
+### Predictive visual field language core
 
 PVF V16 has 16,471,809 parameters, of which 15,138,881 are trainable. Its peak
 allocated CUDA memory was 1.479 GiB on one RTX 4090. The frozen evaluator uses
@@ -260,8 +288,9 @@ The next intervention is again not immediate scale:
 2. Run an attributable V16 memory ablation on a newly preregistered bank, with
    paired per-context predictions and correction-norm receipts; require
    proposal/state performance above the symbolic bigram.
-3. Condition a separate pixel flow on the sampled intended state and require
-   the rendered image to reread back to that state without lookup.
+3. Replace V17's blank spatial condition with a visual-state-decoded motor plan,
+   supervise topology directly, and require readable output under a shuffled-
+   state control without lookup.
 4. Close the autonomous feedback loop only after state prediction and isolated
    actuation pass independently.
 5. Require the complete system to remain readable for 32 cells before widening
@@ -287,6 +316,8 @@ capabilities are in
 [`first-imagized-language-model-goal.md`](first-imagized-language-model-goal.md).
 The V16 memory receipt is in
 [`predictive-visual-field-v16-memory-result.md`](predictive-visual-field-v16-memory-result.md).
+The isolated V17 actuator receipt is in
+[`visual-state-actuator-v17-result.md`](visual-state-actuator-v17-result.md).
 The V8-V15 visual-state record is in
 [`predictive-visual-field-v15-result.md`](predictive-visual-field-v15-result.md).
 The exact V7 experiment and frozen receipts are in
