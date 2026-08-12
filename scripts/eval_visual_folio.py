@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import time
 from collections import defaultdict
@@ -13,7 +14,13 @@ import torch
 from PIL import Image
 
 from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
-from ilm.visual_lm.folio_data import load_teacher_cache, semantic_residual_fields
+from ilm.visual_lm.folio_data import (
+    FolioRenderConfig,
+    folio_tensor_to_image,
+    load_teacher_cache,
+    render_folio,
+    semantic_residual_fields,
+)
 from ilm.visual_lm.folio_memory import FolioMemory
 
 
@@ -22,6 +29,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--memory", required=True)
     parser.add_argument("--teacher-cache", default=None)
+    parser.add_argument("--paraphrases", default=None)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--limit", type=int, default=None)
@@ -91,6 +99,36 @@ def teacher_fields(path: str | None) -> dict[str, torch.Tensor]:
     return output
 
 
+def append_paraphrase_targets(
+    targets: list[tuple[int, dict[str, Any], Path, str]],
+    *,
+    paraphrase_path: str | None,
+    entries: Sequence[dict[str, Any]],
+    render_config: FolioRenderConfig,
+    output: Path,
+) -> None:
+    if paraphrase_path is None:
+        return
+    by_identifier = {str(entry.get("identifier")): index for index, entry in enumerate(entries)}
+    query_root = output / "paraphrase_queries"
+    query_root.mkdir(parents=True, exist_ok=True)
+    for line_index, line in enumerate(Path(paraphrase_path).read_text(encoding="utf-8").splitlines()):
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        identifier = str(record.get("identifier", ""))
+        entry_index = by_identifier.get(identifier)
+        paraphrase = record.get("paraphrase")
+        if entry_index is None or not isinstance(paraphrase, str) or not paraphrase.strip():
+            continue
+        digest = hashlib.sha256(f"{identifier}\0{paraphrase}".encode("utf-8")).hexdigest()
+        variant = int(digest[:8], 16)
+        image = render_folio(paraphrase, config=render_config, variant=variant, augment=True)
+        path = query_root / f"{line_index:05d}_{digest[:12]}.png"
+        folio_tensor_to_image(image).save(path, optimize=True)
+        targets.append((entry_index, entries[entry_index], path, "validated_paraphrase"))
+
+
 def main() -> None:
     args = parse_args()
     output = Path(args.out)
@@ -98,6 +136,9 @@ def main() -> None:
     device = choose_device(args.device)
     checkpoint = torch.load(args.checkpoint, map_location=device, weights_only=False)
     config = folio_config_from_payload(checkpoint["model_config"])
+    render_payload = dict(checkpoint["render_config"])
+    render_payload["augment"] = False
+    render_config = FolioRenderConfig(**render_payload)
     model = FolioRetina(config).to(device)
     model.load_state_dict(checkpoint["model"])
     model.eval()
@@ -106,7 +147,21 @@ def main() -> None:
     for entry_index, entry in enumerate(memory.entries):
         for relative in entry.get("evaluation_images", []):
             path = Path(str(relative))
-            targets.append((entry_index, entry, path if path.is_absolute() else memory.root / path))
+            targets.append(
+                (
+                    entry_index,
+                    entry,
+                    path if path.is_absolute() else memory.root / path,
+                    "held_out_render",
+                )
+            )
+    append_paraphrase_targets(
+        targets,
+        paraphrase_path=args.paraphrases,
+        entries=memory.entries,
+        render_config=render_config,
+        output=output,
+    )
     if args.limit is not None:
         targets = targets[: args.limit]
     teacher = teacher_fields(args.teacher_cache)
@@ -118,7 +173,7 @@ def main() -> None:
 
     for batch in chunks(targets, max(1, args.batch_size)):
         images = torch.stack(
-            [image_to_ink(path, height=config.image_height, width=config.image_width) for _, _, path in batch]
+            [image_to_ink(path, height=config.image_height, width=config.image_width) for _, _, path, _ in batch]
         ).to(device)
         if device.type == "cuda":
             torch.cuda.synchronize(device)
@@ -129,7 +184,7 @@ def main() -> None:
             torch.cuda.synchronize(device)
         encode_seconds += time.perf_counter() - started
         hit_batches = memory.search(fields, top_k=max(5, args.top_k))
-        for row, ((expected, entry, path), hits) in enumerate(zip(batch, hit_batches)):
+        for row, ((expected, entry, path, evaluation_policy), hits) in enumerate(zip(batch, hit_batches)):
             ranks = [rank for rank, hit in enumerate(hits, 1) if hit.entry_index == expected]
             rank = ranks[0] if ranks else None
             best_score = hits[0].score if hits else -1.0
@@ -144,6 +199,7 @@ def main() -> None:
                 str(entry.get("kind", "unknown")),
                 str(entry.get("encoder_training_status", "unknown")),
                 str(entry.get("language", "unknown")),
+                evaluation_policy,
             )
             for group_name in group_names:
                 values = groups[group_name]
@@ -162,6 +218,7 @@ def main() -> None:
                     "identifier": identifier,
                     "kind": entry.get("kind"),
                     "evaluation_image": str(path),
+                    "evaluation_policy": evaluation_policy,
                     "rank": rank,
                     "best_score": best_score,
                     "score_margin": margin,
