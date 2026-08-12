@@ -32,6 +32,15 @@ placed beside or below it on the same visual canvas. The model can therefore
 answer ordinary typed questions or questions grounded in an attached page
 without receiving hidden text metadata.
 
+The canonical interface is a **Visual Language Stream** with sequence/time,
+optional geometric depth, height, width, and sensory channels. A page is the
+`T=1,D=1` case; a book is an ordered stream of fields; a 3D Chinese or English
+character string uses depth; and a character movie also uses time. These are
+one continuous input/output contract, not separate token vocabularies. The
+first proof remains deliberately 2D and Chinese: predict, write, and reread a
+small visual stream on one RTX 4090 before adding page scale, 3D geometry, or
+motion.
+
 The deployed student must not call Qwen, an OCR engine, a tokenizer, a Unicode
 lookup, or a glyph database to decide its answer. External models and extracted
 text may help build and audit an offline curriculum, but every student batch and
@@ -42,7 +51,44 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Causal Test: V19 Rejected
+## Latest Causal Test: V20 Routes Local Topology, Writer Rejected
+
+![Measured V20 retinal topology router: correct local fields carry necessary detail and local occlusion stays local, but quality and paired-control gates reject the writer](publication/ilm-image-native/figures/retinal_topology_router_v20_result.png)
+
+V20 tests the structural correction implied by V19. Its candidate and
+global-repeat control each have exactly `506,448` trainable parameters. The
+candidate's global state can emit only coarse `4x4` block logits; its continuous
+`4x4x192` retinal field must emit the unavailable within-block detail. The
+control repeats global state over the same local decoder, changing information
+routing without changing capacity.
+
+The final 512-candidate development endpoint provides real causal evidence.
+Correct-field dense F1 is `0.7013`, versus `0.5795` after shuffling the field
+and `0.3400` after zeroing it. The fixed gains `+0.1218` and `+0.3613` pass.
+Occluding one field quadrant changes only the corresponding output quadrant
+(`1.0` locality); field edits have exactly zero effect in the matched control.
+
+| V20 candidate development gate | Measured | Required | Result |
+|---|---:|---:|:---:|
+| Overall pixel F1 | `0.6361` | `>0.66` | fail |
+| Dense pixel F1 | `0.7013` | `>0.68` | pass |
+| Dense gain over shuffled field | **`+0.1218`** | `>0.12` | pass |
+| Dense gain over zero field | **`+0.3613`** | `>0.10` | pass |
+| Identity top-1 | `75.00%` | `>70%` | pass |
+| Target cosine | `0.8152` | `>0.82` | fail |
+| Occlusion locality | **`1.0000`** | `>0.40` | pass |
+| Detail block-mean magnitude | `2.03e-6` | `<1e-6` | fail |
+
+The writer is still rejected. Neither arm selected a checkpoint, and the final
+candidate dense gain over its equal-capacity control is only `+0.0179`, below
+the fixed `>0.03` paired margin. Human review was not authorized and frozen
+images remained uninstantiated. The result proves local continuous topology can
+be made necessary; it does not prove a readable autonomous ILM. V21 will make
+the field drive coarse occupancy and detail while global state supplies only
+spatially uniform modulation. See the
+[complete V20 receipt](docs/retinal-topology-router-v20-result.md).
+
+## Prior Routing Test: V19 Rejected
 
 ![Measured V19 spatial retinal residual: correct, shuffled, and zero spatial fields produce nearly identical writing, so the preregistered causal topology gate fails](publication/ilm-image-native/figures/spatial_motor_plan_v19_result.png)
 
@@ -71,10 +117,9 @@ Overall F1 (`0.6710`) and identity top-1 (`72.66%`) also miss their fixed gates.
 The automatic gate is rejected, so human review was not authorized and the
 frozen split remains sealed. The result identifies a routing failure: an
 optional local residual can polish a complete global writer without making
-local topology necessary. V20 will make the retinal field the primary
-high-frequency topology path and restrict global state to coarse semantics and
-style. See the [full V19 result](docs/spatial-retinal-motor-plan-v19-result.md)
-and the
+local topology necessary. V20 subsequently fixed that causal routing defect but
+still failed writer selection. See the
+[full V19 result](docs/spatial-retinal-motor-plan-v19-result.md) and the
 [2026 continuous-sensory decision scan](references/continuous_sensory_language_scan_2026.md).
 
 ## Accepted Development Proof: Visual Motor Plan V18
@@ -214,8 +259,10 @@ gates. It still fails the bigram language gate. V18 passes automatic development
 topology gates but is not frozen-promoted because its human rubric was
 underspecified and dense forms still fail. V19 then rejects an additive spatial
 residual as the repair: correct, shuffled, and zero spatial fields produce
-nearly the same output. The autonomous write-reread loop remains withheld until
-a topology-necessary local route and the language core pass independently.
+nearly the same output. V20 makes local detail structurally necessary and
+topographic, but still misses writer quality and matched-control gates. The
+autonomous write-reread loop remains withheld until a field-complete writer and
+the language core pass independently.
 
 The strict student boundary remains:
 
@@ -272,6 +319,28 @@ score margins were an invalid acceptance measure. V7 does not prove readable
 continuation, historical question answering, efficiency over a text LLM, or
 Qwen-8B parity. The result motivates the Predictive Visual Field separation
 shown above.
+
+## Reproduce The V20 Topology Test
+
+The two fixed arms must be trained separately. They use the same frozen V16
+retina and exactly matched parameter counts:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/train_retinal_topology_router.py \
+  --pvf-checkpoint artifacts/predictive_visual_field_v16_memory_pilot/checkpoint_step_0002200.pt \
+  --route-mode field \
+  --out artifacts/retinal_topology_router_v20_field_evidence_20260812
+
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/train_retinal_topology_router.py \
+  --pvf-checkpoint artifacts/predictive_visual_field_v16_memory_pilot/checkpoint_step_0002200.pt \
+  --route-mode global_control \
+  --out artifacts/retinal_topology_router_v20_control_evidence_20260812
+```
+
+The paired evaluator requires two selected checkpoints. It deliberately rejects
+the measured endpoints because neither arm passed selection; it cannot access
+the frozen partition. Full hashes, metrics, and the expected rejection command
+are in the [V20 result receipt](docs/retinal-topology-router-v20-result.md).
 
 ## Audit The V19 Spatial Test
 
@@ -414,9 +483,12 @@ writing**. Its current experiment predicts continuous retinal states with a
 causal proposal and hyperspherical flow, then tests visual actuation separately.
 V18 writes recognizable development forms through a deterministic spatial motor
 plan. V19 shows that simply adding local retinal features as a residual does not
-make those features causally responsible for topology. The next experiment is a
-field-primary motor route, deliberately kept separate from the still-sub-bigram
-language core. Older structured embeddings, codebooks, and page diffusion
+make those features causally responsible for topology. V20 forces fine topology
+through the local field and verifies local causality, but rejects the resulting
+writer. The next experiment is a field-complete motor route in which local state
+drives coarse occupancy and detail while global state only modulates channels.
+It remains separate from the still-sub-bigram language core. Older structured
+embeddings, codebooks, and page diffusion
 experiments remain available as falsified or comparative baselines; they do not
 define the current model boundary.
 
@@ -439,6 +511,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V20 topology-router result | `docs/retinal-topology-router-v20-result.md` |
 | V19 spatial causal-test result | `docs/spatial-retinal-motor-plan-v19-result.md` |
 | 2026 continuous-sensory research scan | `references/continuous_sensory_language_scan_2026.md` |
 | V18 visual motor-plan result | `docs/visual-motor-plan-v18-result.md` |
