@@ -75,6 +75,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retina-variance-weight", type=float, default=0.10)
     parser.add_argument("--candidate-invariance-weight", type=float, default=0.10)
     parser.add_argument("--writer-cycle-weight", type=float, default=0.35)
+    parser.add_argument("--rollout-batch-size", type=int, default=8)
+    parser.add_argument("--rollout-steps", type=int, default=2)
+    parser.add_argument("--rollout-candidates", type=int, default=2)
+    parser.add_argument("--rollout-sample-steps", type=int, default=2)
+    parser.add_argument("--rollout-guidance-scale", type=float, default=1.5)
+    parser.add_argument("--rollout-min-prefix", type=int, default=8)
+    parser.add_argument("--rollout-state-weight", type=float, default=0.15)
+    parser.add_argument("--rollout-energy-weight", type=float, default=0.35)
+    parser.add_argument("--rollout-recovery-flow-weight", type=float, default=0.30)
+    parser.add_argument("--rollout-start-step", type=int, default=800)
+    parser.add_argument("--rollout-ramp-steps", type=int, default=400)
     parser.add_argument("--endpoint-weight", type=float, default=0.10)
     parser.add_argument("--stroke-weight", type=float, default=2.0)
     parser.add_argument("--epochs", type=int, default=20)
@@ -138,6 +149,16 @@ def ema_momentum(step: int, total: int, start: float, end: float) -> float:
     return end - (end - start) * 0.5 * (1.0 + math.cos(math.pi * progress))
 
 
+def rollout_weight_scale(step: int, *, start: int, ramp: int) -> float:
+    if start < 0 or ramp < 0:
+        raise ValueError("rollout start and ramp steps must be non-negative")
+    if step < start:
+        return 0.0
+    if ramp == 0:
+        return 1.0
+    return min(1.0, (step - start + 1) / ramp)
+
+
 def append_jsonl(path: Path, payload: dict[str, Any]) -> None:
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, ensure_ascii=False, sort_keys=True) + "\n")
@@ -194,6 +215,7 @@ def loss_for_batch(
     device: torch.device,
     args: argparse.Namespace,
     generator: torch.Generator | None,
+    rollout_scale: float,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor], dict[str, torch.Tensor], torch.Tensor, torch.Tensor]:
     context = batch["context"].to(device, non_blocking=True)
     target_ink = batch["target_ink"].to(device, non_blocking=True)
@@ -214,6 +236,16 @@ def loss_for_batch(
         retina_variance_weight=args.retina_variance_weight,
         candidate_invariance_weight=args.candidate_invariance_weight,
         writer_cycle_weight=args.writer_cycle_weight,
+        rollout_batch_size=args.rollout_batch_size,
+        rollout_steps=args.rollout_steps,
+        rollout_candidates=args.rollout_candidates,
+        rollout_sample_steps=args.rollout_sample_steps,
+        rollout_guidance_scale=args.rollout_guidance_scale,
+        rollout_min_prefix=args.rollout_min_prefix,
+        rollout_state_weight=args.rollout_state_weight,
+        rollout_energy_weight=args.rollout_energy_weight,
+        rollout_recovery_flow_weight=args.rollout_recovery_flow_weight,
+        rollout_weight_scale=rollout_scale,
         endpoint_weight=args.endpoint_weight,
         stroke_weight=args.stroke_weight,
         generator=generator,
@@ -279,6 +311,11 @@ def validate(
                 device=device,
                 args=args,
                 generator=generator,
+                rollout_scale=rollout_weight_scale(
+                    step,
+                    start=args.rollout_start_step,
+                    ramp=args.rollout_ramp_steps,
+                ),
             )
             target_visual = outputs["target_visual"][:, -1]
             full_scores = model.score_visual_candidates(outputs, target_visual, position=-1)
@@ -473,6 +510,16 @@ def main() -> None:
         "validation_records": len(validation_dataset.records),
         "sequence_length": args.sequence_length,
         "energy_positions_per_sequence": args.energy_positions_per_sequence,
+        "visual_rollout": {
+            "batch_size": args.rollout_batch_size,
+            "steps": args.rollout_steps,
+            "candidates": args.rollout_candidates,
+            "sample_steps": args.rollout_sample_steps,
+            "guidance_scale": args.rollout_guidance_scale,
+            "min_prefix": args.rollout_min_prefix,
+            "start_step": args.rollout_start_step,
+            "ramp_steps": args.rollout_ramp_steps,
+        },
         "retinal_fonts": list(RETINAL_CJK_AVAILABLE_FONTS),
         "initialization": initialization,
         "planned_steps": planned_steps,
@@ -508,6 +555,11 @@ def main() -> None:
             if stop_requested or (args.maximum_steps is not None and global_step >= args.maximum_steps):
                 break
             global_step += 1
+            current_rollout_scale = rollout_weight_scale(
+                global_step,
+                start=args.rollout_start_step,
+                ramp=args.rollout_ramp_steps,
+            )
             learning_rate = scheduled_lr(
                 global_step,
                 base=args.lr,
@@ -525,6 +577,7 @@ def main() -> None:
                     device=device,
                     args=args,
                     generator=generator,
+                    rollout_scale=current_rollout_scale,
                 )
             scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
@@ -547,6 +600,7 @@ def main() -> None:
                     "learning_rate": learning_rate,
                     "ema_momentum": momentum,
                     "gradient_norm": float(gradient_norm),
+                    "rollout_scale": current_rollout_scale,
                     "examples_per_second": running_examples / max(1e-6, now - interval_started),
                     **{
                         key: value / max(1, running_examples)

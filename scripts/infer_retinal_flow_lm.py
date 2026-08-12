@@ -25,7 +25,6 @@ from ilm.visual_lm.ink_jepa_data import (
     retinal_font_manifest,
     retinal_layout,
 )
-from ilm.visual_lm.ink_writer import sample_foveal_ink
 from ilm.visual_lm.retinal_flow_lm import (
     RetinalFlowLanguageModel,
     retinal_flow_config_from_payload,
@@ -232,21 +231,19 @@ def main() -> None:
         for step in range(args.new_cells):
             row, column = cursor
             condition = torch.cat((state[:, 0], current_visual[:, 0]), dim=-1)
-            repeated_condition = condition.repeat_interleave(args.candidate_samples, dim=0)
-            repeated_current = current_fovea.repeat_interleave(args.candidate_samples, dim=0)
-            sampled = sample_foveal_ink(
-                model.writer,
-                repeated_condition,
-                repeated_current * 2.0 - 1.0,
+            sampled = model.sample_visual_candidates(
+                condition,
+                current_fovea,
+                samples_per_context=args.candidate_samples,
                 steps=args.sample_steps,
                 guidance_scale=args.guidance_scale,
                 generator=generator,
             )
-            candidates = ((sampled + 1.0) * 0.5).clamp(0, 1)
-            candidate_visual = model.target_retina(candidates).float()
-            energy = model.energy(condition, candidate_visual)[0]
-            choice = int(energy.argmax())
-            soft_fovea = candidates[choice]
+            candidates = sampled["candidates"][0]
+            candidate_visual = sampled["candidate_visual"][0]
+            energy = sampled["energy"][0]
+            choice = int(sampled["choice"][0])
+            soft_fovea = sampled["selected"][0]
             feedback_fovea = (
                 (soft_fovea >= args.ink_threshold).to(soft_fovea.dtype)
                 if args.feedback == "hard"

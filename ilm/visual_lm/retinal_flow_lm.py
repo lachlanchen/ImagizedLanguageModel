@@ -212,6 +212,67 @@ class RetinalFlowLanguageModel(nn.Module):
         return output
 
     @torch.no_grad()
+    def sample_visual_candidates(
+        self,
+        condition: torch.Tensor,
+        current_foveas: torch.Tensor,
+        *,
+        samples_per_context: int = 1,
+        steps: int = 8,
+        guidance_scale: float = 1.5,
+        generator: torch.Generator | None = None,
+    ) -> dict[str, torch.Tensor]:
+        """Sample, reread, and energy-rank image candidates without symbolic IDs."""
+
+        if condition.ndim != 2:
+            raise ValueError("candidate condition must have shape [batch, dimension]")
+        expected = (
+            condition.shape[0],
+            1,
+            self.config.fovea_size,
+            self.config.fovea_size,
+        )
+        if tuple(current_foveas.shape) != expected:
+            raise ValueError(f"current foveas must have shape {expected}")
+        if samples_per_context < 1:
+            raise ValueError("samples_per_context must be positive")
+
+        batch = condition.shape[0]
+        repeated_condition = condition.repeat_interleave(samples_per_context, dim=0)
+        repeated_current = current_foveas.repeat_interleave(samples_per_context, dim=0)
+        sampled = sample_foveal_ink(
+            self.writer,
+            repeated_condition,
+            repeated_current * 2.0 - 1.0,
+            steps=steps,
+            guidance_scale=guidance_scale,
+            generator=generator,
+        )
+        candidates = ((sampled + 1.0) * 0.5).clamp(0, 1).reshape(
+            batch,
+            samples_per_context,
+            1,
+            self.config.fovea_size,
+            self.config.fovea_size,
+        )
+        candidate_visual = self.target_retina(candidates.flatten(0, 1)).float().reshape(
+            batch,
+            samples_per_context,
+            self.config.visual_dim,
+        )
+        energy = self.energy(condition, candidate_visual)
+        choice = energy.argmax(dim=1)
+        batch_indices = torch.arange(batch, device=condition.device)
+        return {
+            "candidates": candidates,
+            "candidate_visual": candidate_visual,
+            "energy": energy,
+            "choice": choice,
+            "selected": candidates[batch_indices, choice],
+            "selected_visual": candidate_visual[batch_indices, choice],
+        }
+
+    @torch.no_grad()
     def sample_next(
         self,
         context_foveas: torch.Tensor,
@@ -224,24 +285,15 @@ class RetinalFlowLanguageModel(nn.Module):
         if samples_per_context < 1:
             raise ValueError("samples_per_context must be positive")
         prediction = self.predict(context_foveas)
-        condition = prediction["condition"][:, -1].repeat_interleave(samples_per_context, dim=0)
-        current = context_foveas[:, -1].repeat_interleave(samples_per_context, dim=0)
-        sampled = sample_foveal_ink(
-            self.writer,
-            condition,
-            current * 2.0 - 1.0,
+        sampled = self.sample_visual_candidates(
+            prediction["condition"][:, -1],
+            context_foveas[:, -1],
+            samples_per_context=samples_per_context,
             steps=steps,
             guidance_scale=guidance_scale,
             generator=generator,
         )
-        sampled = ((sampled + 1.0) * 0.5).clamp(0, 1)
-        return sampled.reshape(
-            context_foveas.shape[0],
-            samples_per_context,
-            1,
-            self.config.fovea_size,
-            self.config.fovea_size,
-        )
+        return sampled["candidates"]
 
     @torch.no_grad()
     def update_target(self, momentum: float) -> None:
@@ -287,6 +339,202 @@ def _visual_positive_mask(
     return mask, similarity
 
 
+def visual_rollout_losses(
+    model: RetinalFlowLanguageModel,
+    outputs: dict[str, torch.Tensor],
+    context_foveas: torch.Tensor,
+    target_ink: torch.Tensor,
+    candidate_bank: torch.Tensor,
+    *,
+    rollout_batch_size: int,
+    rollout_steps: int,
+    rollout_candidates: int,
+    rollout_sample_steps: int,
+    rollout_guidance_scale: float,
+    rollout_min_prefix: int,
+    duplicate_similarity: float,
+    endpoint_weight: float,
+    stroke_weight: float,
+    generator: torch.Generator | None = None,
+) -> tuple[dict[str, torch.Tensor], dict[str, torch.Tensor], dict[str, torch.Tensor]]:
+    """Train on the visual states induced by the model's own sampled writing.
+
+    Candidate generation and selection are intentionally stop-gradient. The
+    selected bitmap is then reread by the online retina, so the recurrent state,
+    visual energy, and recovery writer learn on the same pixel feedback used at
+    inference time.
+    """
+
+    batch, length = context_foveas.shape[:2]
+    if rollout_batch_size < 1:
+        zero = outputs["condition"].sum() * 0.0
+        return (
+            {"state": zero, "energy": zero, "recovery_flow": zero},
+            {
+                "rollout_active": zero.detach(),
+                "rollout_state_cosine": zero.detach(),
+                "rollout_selected_target_cosine": zero.detach(),
+                "rollout_next_energy_nce": zero.detach(),
+                "rollout_next_energy_top1": zero.detach(),
+                "rollout_recovery_flow": zero.detach(),
+                "rollout_recovery_endpoint_f1": zero.detach(),
+                "rollout_ink_fraction": zero.detach(),
+            },
+            {},
+        )
+    if rollout_steps < 1 or rollout_candidates < 1 or rollout_sample_steps < 1:
+        raise ValueError("rollout steps, candidates, and sample steps must be positive")
+    if rollout_min_prefix < 1:
+        raise ValueError("rollout_min_prefix must be positive")
+    last_start = length - rollout_steps - 1
+    first_start = rollout_min_prefix - 1
+    if last_start < first_start:
+        raise ValueError("causal sequence is too short for the requested visual rollout")
+
+    count = min(batch, rollout_batch_size)
+    subset = torch.randperm(batch, device=context_foveas.device, generator=generator)[:count]
+    start = int(
+        torch.randint(
+            first_start,
+            last_start + 1,
+            (1,),
+            device=context_foveas.device,
+            generator=generator,
+        ).item()
+    )
+    prefix_visual = outputs["current_visual"][subset, : start + 1]
+    prefix_state, recurrent = model.dynamics(prefix_visual)
+    current_state = prefix_state[:, -1]
+    current_visual = prefix_visual[:, -1]
+    current_fovea = context_foveas[subset, start].float()
+
+    state_losses: list[torch.Tensor] = []
+    state_cosines: list[torch.Tensor] = []
+    energy_losses: list[torch.Tensor] = []
+    energy_top1: list[torch.Tensor] = []
+    selected_target_cosines: list[torch.Tensor] = []
+    selected_ink: list[torch.Tensor] = []
+    generated: list[torch.Tensor] = []
+
+    for offset in range(rollout_steps):
+        condition = torch.cat((current_state, current_visual), dim=-1)
+        sampled = model.sample_visual_candidates(
+            condition.detach(),
+            current_fovea.detach(),
+            samples_per_context=rollout_candidates,
+            steps=rollout_sample_steps,
+            guidance_scale=rollout_guidance_scale,
+            generator=generator,
+        )
+        selected_fovea = sampled["selected"].detach()
+        selected_visual = sampled["selected_visual"].float().detach()
+        expected_visual = outputs["target_visual"][subset, start + offset].float().detach()
+        selected_target_cosines.append(
+            (F.normalize(selected_visual, dim=-1) * F.normalize(expected_visual, dim=-1))
+            .sum(dim=-1)
+            .mean()
+        )
+        selected_ink.append(selected_fovea.mean())
+        generated.append(selected_fovea)
+
+        current_visual = model.online_retina(selected_fovea)
+        state_step, recurrent = model.dynamics(current_visual[:, None], recurrent)
+        current_state = state_step[:, 0]
+        current_fovea = selected_fovea
+
+        clean_state = outputs["state"][subset, start + offset + 1].float().detach()
+        normalized_rollout_state = F.normalize(
+            F.layer_norm(current_state.float(), (current_state.shape[-1],)),
+            dim=-1,
+        )
+        normalized_clean_state = F.normalize(
+            F.layer_norm(clean_state, (clean_state.shape[-1],)),
+            dim=-1,
+        )
+        state_cosine = (normalized_rollout_state * normalized_clean_state).sum(dim=-1)
+        state_cosines.append(state_cosine.mean())
+        state_losses.append((1.0 - state_cosine).mean())
+
+        next_position = start + offset + 1
+        next_target = outputs["target_visual"][subset, next_position].float().detach()
+        with torch.no_grad():
+            next_source = model.target_retina(target_ink[subset, next_position].float()).float()
+        candidates = torch.cat((candidate_bank.detach(), next_target, next_source), dim=0)
+        normalized_target = F.normalize(next_target, dim=-1)
+        normalized_candidates = F.normalize(candidates, dim=-1)
+        positive = normalized_target @ normalized_candidates.transpose(0, 1) >= duplicate_similarity
+        known = torch.arange(count, device=context_foveas.device)
+        positive[known, candidate_bank.shape[0] + known] = True
+        positive[known, candidate_bank.shape[0] + count + known] = True
+        rollout_condition = torch.cat((current_state, current_visual), dim=-1)
+        logits = model.energy(rollout_condition, candidates)
+        step_energy, step_top1 = _multi_positive_nce(logits, positive)
+        energy_losses.append(step_energy)
+        energy_top1.append(step_top1)
+
+    recovery_position = start + rollout_steps
+    recovery_target = target_ink[subset, recovery_position].float().clamp(0, 1)
+    recovery_flow_target = recovery_target * 2.0 - 1.0
+    recovery_time = torch.rand(
+        count,
+        device=context_foveas.device,
+        dtype=recovery_flow_target.dtype,
+        generator=generator,
+    ).sqrt()
+    recovery_state, recovery_velocity, recovery_time, _ = flow_training_state(
+        recovery_flow_target,
+        time=recovery_time,
+        generator=generator,
+    )
+    recovery_keep = (
+        torch.rand(count, device=context_foveas.device, generator=generator)
+        >= model.config.condition_dropout
+    ).to(recovery_flow_target.dtype)
+    recovery_condition = torch.cat((current_state, current_visual), dim=-1)
+    recovery_prediction = model.writer(
+        recovery_state,
+        recovery_time,
+        recovery_condition,
+        current_fovea * 2.0 - 1.0,
+        condition_present=recovery_keep,
+    )
+    recovery_flow, recovery_metrics = foveal_flow_loss(
+        recovery_prediction,
+        recovery_velocity,
+        recovery_state,
+        recovery_flow_target,
+        recovery_time,
+        endpoint_weight=endpoint_weight,
+        stroke_weight=stroke_weight,
+    )
+
+    rollout_state = torch.stack(state_losses).mean()
+    rollout_energy = torch.stack(energy_losses).mean()
+    metrics = {
+        "rollout_active": rollout_state.new_tensor(1.0).detach(),
+        "rollout_examples": rollout_state.new_tensor(float(count)).detach(),
+        "rollout_steps": rollout_state.new_tensor(float(rollout_steps)).detach(),
+        "rollout_start_position": rollout_state.new_tensor(float(start)).detach(),
+        "rollout_state_cosine": torch.stack(state_cosines).mean().detach(),
+        "rollout_selected_target_cosine": torch.stack(selected_target_cosines).mean().detach(),
+        "rollout_next_energy_nce": rollout_energy.detach(),
+        "rollout_next_energy_top1": torch.stack(energy_top1).mean().detach(),
+        "rollout_recovery_flow": recovery_flow.detach(),
+        "rollout_recovery_endpoint_f1": recovery_metrics["endpoint_ink_f1"],
+        "rollout_ink_fraction": torch.stack(selected_ink).mean().detach(),
+    }
+    trace = {
+        "subset": subset,
+        "generated": torch.stack(generated, dim=1),
+        "start": rollout_state.new_tensor(start, dtype=torch.long),
+    }
+    return (
+        {"state": rollout_state, "energy": rollout_energy, "recovery_flow": recovery_flow},
+        metrics,
+        trace,
+    )
+
+
 def retinal_flow_loss(
     model: RetinalFlowLanguageModel,
     outputs: dict[str, torch.Tensor],
@@ -302,6 +550,16 @@ def retinal_flow_loss(
     retina_variance_weight: float = 0.10,
     candidate_invariance_weight: float = 0.10,
     writer_cycle_weight: float = 0.35,
+    rollout_batch_size: int = 0,
+    rollout_steps: int = 2,
+    rollout_candidates: int = 2,
+    rollout_sample_steps: int = 2,
+    rollout_guidance_scale: float = 1.5,
+    rollout_min_prefix: int = 8,
+    rollout_state_weight: float = 0.15,
+    rollout_energy_weight: float = 0.35,
+    rollout_recovery_flow_weight: float = 0.30,
+    rollout_weight_scale: float = 1.0,
     endpoint_weight: float = 0.10,
     stroke_weight: float = 2.0,
     generator: torch.Generator | None = None,
@@ -417,6 +675,29 @@ def retinal_flow_loss(
     retina_std = torch.sqrt(retina_centered.var(dim=0, unbiased=False) + 1e-4)
     retina_variance = F.relu(0.75 - retina_std).mean()
 
+    rollout_losses, rollout_metrics, rollout_trace = visual_rollout_losses(
+        model,
+        outputs,
+        context_foveas,
+        target_ink,
+        energy_candidates,
+        rollout_batch_size=rollout_batch_size if rollout_weight_scale > 0.0 else 0,
+        rollout_steps=rollout_steps,
+        rollout_candidates=rollout_candidates,
+        rollout_sample_steps=rollout_sample_steps,
+        rollout_guidance_scale=rollout_guidance_scale,
+        rollout_min_prefix=rollout_min_prefix,
+        duplicate_similarity=duplicate_similarity,
+        endpoint_weight=endpoint_weight,
+        stroke_weight=stroke_weight,
+        generator=generator,
+    )
+    rollout_total = (
+        rollout_state_weight * rollout_losses["state"]
+        + rollout_energy_weight * rollout_losses["energy"]
+        + rollout_recovery_flow_weight * rollout_losses["recovery_flow"]
+    )
+
     total = (
         flow_weight * flow
         + energy_weight * energy
@@ -425,6 +706,7 @@ def retinal_flow_loss(
         + retina_variance_weight * retina_variance
         + candidate_invariance_weight * candidate_invariance
         + writer_cycle_weight * writer_cycle
+        + rollout_weight_scale * rollout_total
     )
     metrics = {
         **flow_metrics,
@@ -447,6 +729,9 @@ def retinal_flow_loss(
         "writer_cycle_nce": writer_cycle.detach(),
         "writer_cycle_top1": writer_cycle_top1.detach(),
         "writer_target_cosine": writer_target_cosine.detach(),
+        "rollout_weight_scale": total.new_tensor(float(rollout_weight_scale)).detach(),
+        "rollout_total": rollout_total.detach(),
+        **rollout_metrics,
     }
     selected = {
         "batch_indices": batch_indices,
@@ -455,6 +740,7 @@ def retinal_flow_loss(
         "current_fovea": current_fovea,
         "target_fovea": target_fovea,
         "target_visual": target_visual,
+        **{f"rollout_{key}": value for key, value in rollout_trace.items()},
     }
     return total, metrics, selected
 
