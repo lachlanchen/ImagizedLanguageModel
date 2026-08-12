@@ -13,7 +13,7 @@ import torch
 from PIL import Image
 
 from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
-from ilm.visual_lm.folio_data import load_teacher_cache
+from ilm.visual_lm.folio_data import load_teacher_cache, semantic_residual_fields
 from ilm.visual_lm.folio_memory import FolioMemory
 
 
@@ -83,10 +83,11 @@ def teacher_fields(path: str | None) -> dict[str, torch.Tensor]:
     if path is None:
         return {}
     cache = load_teacher_cache(path)
+    residuals, _ = semantic_residual_fields(cache)
     output = {}
     for index, document in enumerate(cache["documents"]):
         if document["kind"] == "prompt":
-            output[str(document["record_identifier"])] = cache["embeddings"][index].float()
+            output[str(document["record_identifier"])] = residuals[index]
     return output
 
 

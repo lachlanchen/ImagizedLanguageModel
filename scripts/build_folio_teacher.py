@@ -144,6 +144,8 @@ def cache_payload(
         "student_runtime_dependency": False,
         "documents": documents[: embeddings.shape[0]],
         "embeddings": embeddings.half().cpu(),
+        "embedding_mean": embeddings.float().mean(dim=0).half().cpu(),
+        "student_target_transform": "center_then_l2_normalize_v1",
         "sources": sources,
         "complete": complete,
         "elapsed_seconds": elapsed_seconds,

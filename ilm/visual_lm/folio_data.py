@@ -179,6 +179,17 @@ def load_teacher_cache(path: str | Path) -> dict[str, Any]:
     return payload
 
 
+def semantic_residual_fields(teacher_cache: dict[str, Any]) -> tuple[torch.Tensor, torch.Tensor]:
+    """Remove the corpus-common direction before visual distillation."""
+
+    embeddings = teacher_cache["embeddings"].float()
+    mean = teacher_cache.get("embedding_mean")
+    if not isinstance(mean, torch.Tensor) or mean.shape != (embeddings.shape[1],):
+        mean = embeddings.mean(dim=0)
+    residuals = torch.nn.functional.normalize(embeddings - mean.float(), dim=-1)
+    return residuals, mean.float()
+
+
 class FolioSemanticDataset(Dataset):
     """Expose pixels and continuous teacher fields, never linguistic IDs."""
 
@@ -205,7 +216,7 @@ class FolioSemanticDataset(Dataset):
         if not selected_indices:
             raise ValueError(f"teacher cache has no documents for split={split}")
         self.documents: Sequence[dict[str, Any]] = documents
-        self.embeddings: torch.Tensor = teacher_cache["embeddings"].float()
+        self.embeddings, self.embedding_mean = semantic_residual_fields(teacher_cache)
         self.indices = selected_indices
         self.render_config = render_config
         self.seed = int(seed)

@@ -159,6 +159,7 @@ def make_checkpoint(
             "model": teacher_cache.get("teacher_model"),
             "role": teacher_cache.get("teacher_role"),
             "sources": teacher_cache.get("sources", []),
+            "target_transform": "center_then_l2_normalize_v1",
         },
         "deployment_contract": {
             "input": "continuous writing image",
