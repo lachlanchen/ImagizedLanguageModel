@@ -45,9 +45,17 @@ to ink pixels. On one untouched 512-example evaluation, correct-state visual
 identity is 58.59\% versus 0.98\% after shuffling only intended states; target
 cosine is 0.713 versus 0.086. However, pixel F1 is 0.438, below the fixed 0.500
 gate, and human review rejects readability. Thus a small continuous visual state
-causally controls generated writing on one consumer GPU, while exact stroke
-topology, general language, historical question answering, and efficiency over
-text models remain unproved.
+causally controls generated writing on one consumer GPU. A topology-first V18
+planner then maps the same kind of continuous intent and a style image to a
+directly supervised spatial ink plan. Its 2.36M trainable parameters reach
+73.63\% identity top-1 versus 0.98\% shuffled and pixel F1 0.658 versus 0.313
+on a fresh 512-example development audit, while using 0.778~GiB peak allocated
+CUDA memory. Most reviewed simple and medium forms are recognizable, but dense
+forms remain malformed. The V18 frozen bank remains sealed because the human
+gate lacked a prespecified numeric rubric. These experiments refute a
+categorical impossibility claim about compact continuous-image writing, while
+autonomous language, broad readability, historical question answering, and
+efficiency over text models remain unproved.
 \end{abstract}
 
 \begin{figure}[t]
@@ -290,7 +298,7 @@ manifold~\cite{rfm,rcnf}, while retaining an image-derived language state.
   \label{fig:pvfv16}
 \end{figure}
 
-\section{Isolated Visual Actuation}
+\section{Isolated Visual Actuation and Motor Planning}
 
 The V17 actuator tests whether an image-derived continuous state can control
 new pixels without a glyph table. A frozen retina produces
@@ -323,15 +331,51 @@ causal signal. Pixel F1 is 0.43849 versus 0.28001 shuffled, failing the required
 0.50, and human review rejects most outputs as unreadable. Training takes
 339.67 seconds and peaks at 1.588~GiB allocated CUDA memory on one RTX 4090.
 
-The result identifies a topology gap rather than an identity-control gap. V18
-therefore decodes state and style into a directly supervised spatial visual motor
+The result identifies a topology gap rather than an identity-control gap.
+
+\subsection{Topology-first visual motor plan V18}
+
+V18 decodes state and style into a directly supervised spatial visual motor
 plan,
 \[
-p_\omega=D_\omega(z,E_s(x^{\mathrm{style}}))\in[0,1]^{H\times W},
+p_\omega=D_\omega(z,E_s(x^{\mathrm{style}}))\in[0,1]^{H\times W}.
 \]
-and reserves stochastic flow for residual style and surface variation. The plan
-remains continuous and image-derived; it is not copied target ink, an ID lookup,
-or a discrete visual codebook.
+A context MLP modulates a learned $4\times4$ seed, conditioned residual blocks
+upsample it to $32\times32$, and a sigmoid emits continuous ink. The loss joins
+stroke-weighted binary cross entropy, soft Dice, pixel and Sobel-edge distances,
+retinal identity and contrast, and a correct-versus-shuffled state margin. Target
+pixels supervise the output but never enter the condition. The plan remains
+continuous and image-derived; it is not copied target ink, an ID lookup, or a
+discrete visual codebook. Stochastic flow is reserved for later residual style
+and surface variation rather than stroke placement.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_motor_plan_v18_result.png}
+  \caption{Measured V18 development result. A 2.36M-parameter deterministic
+  motor planner turns continuous image-derived intent into recognizable writing.
+  Shuffling only intended state destroys identity and topology while preserving
+  mean ink occupancy. This is development-only evidence; the frozen bank remains
+  untouched.}
+  \label{fig:motorv18}
+\end{figure}
+
+The salted partition contains 6,573 training, 223 development, and 221 frozen
+records. Selection maximized development correct-state pixel F1 subject to fixed
+topology, state-dependence, retinal-similarity, and non-copying gates. Step 1,400
+was selected at pixel F1 0.6890 versus 0.3368 shuffled and global identity
+top-1 78.32\% versus 1.17\%. A fresh development seed yields 512 examples:
+identity top-1 is 73.63\% versus 0.98\%, target cosine is 0.8462 versus 0.0716,
+and pixel F1 is 0.6577 versus 0.3129. Mean ink fraction is 0.17505 in both
+branches and style-copy cosine is 0.0686.
+
+Full-resolution review finds clear simple and medium forms but merged strokes
+in dense forms. Because the preregistration required human readability without
+defining a numeric blinded threshold, post-hoc inspection cannot authorize a
+frozen query. V18 therefore accepts readable topology emergence on development,
+rejects broad-complexity readability, and leaves the frozen identifier bank
+sealed. The next experiment must define complexity strata and a recognition
+rubric prospectively.
 
 \section{Data}
 
@@ -510,17 +554,20 @@ Measurements now support a different order:
   \item Add residual multiscale causal visual memory; V16 replicates the gates with a seven-context proposal increase but does not beat the symbolic bigram.
   \item Run a paired memory ablation on a newly preregistered bank before attributing the small V16 change to the memory module.
   \item Condition a separate actuator on continuous visual plans; V17 passes isolated causal reread identity but fails topology and readability.
-  \item Decode a directly supervised spatial motor plan before stochastic refinement and require legible held-out forms.
+  \item Decode a directly supervised spatial motor plan before stochastic refinement; V18 passes automatic development topology gates and makes many forms readable, while dense forms still fail.
+  \item Preserve a continuous spatial retinal field, preregister complexity strata and a blinded readability threshold, and open a new frozen bank only after those development gates pass.
   \item Add provenance-gated historical panels and instruction images only after readable autonomous continuation.
   \item Scale width and corpus size only after the fixed language and stability gates pass.
 \end{enumerate}
 
-The 16.47M PVF V16 state model and 5.73M V17 actuator are deliberately small
-enough for one RTX 4090. Their measured peaks are 1.479 and 1.588~GiB,
-respectively, leaving substantial capacity headroom for controlled corrections.
-This is not an efficiency victory: quality remains below a symbolic bigram and
-pixel output is unreadable, so ``more
-efficient than an LLM'' remains an unsupported hypothesis.
+The 16.47M PVF V16 state model, 5.73M V17 actuator, and 2.36M V18 motor planner
+are deliberately small enough for one RTX 4090. Their measured peaks are 1.479,
+1.588, and 0.778~GiB, respectively, leaving substantial capacity headroom for
+controlled corrections. V18 makes many isolated forms readable, but this is not
+an end-to-end efficiency victory: the causal language core remains below a
+symbolic bigram, dense topology remains imperfect, and autonomous continuation
+has not passed. ``More efficient than an LLM'' remains an unsupported
+hypothesis until quality is matched on a named task.
 
 \section{Target Demonstration}
 
@@ -637,6 +684,27 @@ Human readability & rejected & rejected & fail \\
 \label{tab:v17actuator}
 \end{table}
 
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V18 development motor-plan metric & Correct intent & Shuffled intent & Gate \\
+\midrule
+Global identity top-1 & \textbf{73.633\%} & 0.977\% & pass \\
+Target cosine & \textbf{0.84618} & 0.07162 & pass \\
+Pixel F1 & \textbf{0.65772} & 0.31290 & pass ($>0.60$) \\
+Ink fraction & 0.17505 & 0.17505 & controlled \\
+Human readability & simple/medium clear & unrelated & dense forms fail \\
+Frozen images instantiated & \multicolumn{2}{c}{no} & sealed \\
+\bottomrule
+\end{tabular}
+\caption{Fresh V18 development audit with style held fixed and only continuous
+intent shuffled. Automatic topology gates pass, but frozen promotion is
+withheld because the human rubric was not numerically prespecified.}
+\label{tab:v18motor}
+\end{table}
+
 The fixed evaluation contains 512 common Han candidates with four independent
 font views and 2,423 eligible held-out contexts. V6 and V7 use the identical
 bank SHA-256. Selected V7 raises full-context top-1 from 1.197\% to 2.311\% and
@@ -672,12 +740,15 @@ bank are required for attribution.
 
 Thus the proposal and flow state gates are accepted, while the bigram language
 gate remains false. Separately, V17 accepts causal visual actuation and rejects
-readable topology. The combined result establishes that a small image-only
-student can learn causal language signal and that a small continuous state can
-control generated ink; it does not establish useful language. The next proof
-should isolate the multiscale memory contribution while a visual motor-plan
-decoder makes topology explicit. The final closed 32-cell loop must then remain
-readable. This order is also consistent with measured error
+readable topology. V18 then passes every automatic development topology gate
+and makes many held-out forms readable, but leaves dense-form and prospective
+human-readability gates unresolved. The combined result establishes that a
+small image-only student can learn causal language signal and that a small
+continuous state can control recognizable generated ink; it does not establish
+useful autonomous language. The next proof should isolate the multiscale memory
+contribution while a spatial retinal field preserves dense topology. The final
+closed 32-cell loop must then remain readable. This order is also consistent
+with measured error
 accumulation in iterative diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
@@ -697,13 +768,20 @@ consumer GPU. V17 then reaches 58.59\% frozen visual-identity retrieval versus
 0.98\% under shuffled intended states with only 5.73M trainable parameters and
 1.588~GiB peak memory. This breaks the categorical claim that lightweight
 continuous visual intent cannot control generated writing. Its 0.438 pixel F1
-and unreadable pseudo-characters reject the stronger claim. The seven-context
-V16 increase is too small to establish an architecture win, and the 13.14\%
-bigram still rejects the causal core. The next attributable tests are paired
-multiscale-memory ablation and a spatial visual motor-plan actuator, followed
-only then by a closed write-reread loop. Historical etymology answers and broad instruction following remain
-downstream goals, not present capabilities, and no Qwen-8B parity or end-to-end
-efficiency claim is warranted.
+and unreadable pseudo-characters reject the stronger claim. V18 then uses only
+2.36M trainable parameters and 0.778~GiB peak memory to reach 0.658 pixel F1
+and 73.63\% identity top-1 on fresh development renderings, versus 0.313 and
+0.98\% when intent is shuffled. This demonstrates that structured, recognizable
+writing can be generated as continuous image topology by a compact model on one
+consumer GPU without token unembedding. Dense forms still fail, the V18 frozen
+bank remains sealed, and the intended state is supplied rather than predicted.
+The seven-context V16 increase is too small to establish an architecture win,
+and the 13.14\% bigram still rejects the causal core. The next attributable
+tests are paired multiscale-memory ablation and a spatial-retinal-field motor
+planner with a prospectively fixed readability rubric, followed only then by a
+closed write-reread loop. Historical etymology answers and broad instruction
+following remain downstream goals, not present capabilities, and no Qwen-8B
+parity or end-to-end efficiency claim is warranted.
 
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}

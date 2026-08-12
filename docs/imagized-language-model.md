@@ -1,6 +1,6 @@
 # Imagized Language Model
 
-Version: 0.6, predictive visual field plus isolated visual actuation
+Version: 0.7, predictive visual field plus topology-first visual motor planning
 
 Date: 2026-08-12
 
@@ -45,7 +45,7 @@ state is a visual observation, not a renamed token.
 ## Current implementation: predictive visual field
 
 V7 shows that direct pixel flow can learn stable, context-sensitive ink while
-still failing to become a useful language distribution. V14 through V17
+still failing to become a useful language distribution. V14 through V18
 therefore separate **imagining the next visual state** from **drawing that
 state**:
 
@@ -95,6 +95,17 @@ image into ink. On one untouched frozen split, correct-state visual identity is
 gain is `+0.6269`. Pixel F1 is only 0.4385 and human review rejects the output as
 mostly pseudo-characters. V17 therefore accepts causal visual control and
 rejects readable actuation. It is not yet coupled to V16's predicted states.
+
+![Measured V18 visual motor plan](../publication/ilm-image-native/figures/visual_motor_plan_v18_result.png)
+
+V18 corrects the topology failure with a `2.36M`-parameter deterministic
+visual motor planner. On a fresh 512-example development audit, correct-state
+identity top-1 is 73.63% versus 0.98% shuffled, target cosine is 0.8462 versus
+0.0716, and pixel F1 is 0.6577 versus 0.3129. Most simple and medium forms are
+recognizable; dense forms still merge strokes. The automatic topology gates
+pass, but the frozen bank remains sealed because the required human review had
+no prespecified numeric rubric. This is readable writing emergence, not yet a
+frozen broad-readability or autonomous-language result.
 
 ## Earlier precursor: read, predict, write, reread
 
@@ -216,6 +227,24 @@ empirical questions.
 
 ## What the current experiments prove
 
+The V18 motor planner trained for 1,600 updates in 458.34 seconds and used
+0.778 GiB peak allocated CUDA memory on one RTX 4090:
+
+| Fresh development measurement | Correct intent | Shuffled intent |
+|---|---:|---:|
+| Global visual identity top-1 | **73.633%** | 0.977% |
+| Target cosine | **0.84618** | 0.07162 |
+| Pixel F1 | **0.65772** | 0.31290 |
+| Ink fraction | 0.17505 | 0.17505 |
+
+This proves that a compact continuous visual decoder can learn recognizable
+writing topology without a token output table. It does not prove language
+choice: the intended state is supplied by a different-font target image, and
+V18 is not coupled to V16's prediction. Dense forms and the underspecified
+human gate also prevent frozen promotion.
+
+### Prior continuous actuator
+
 The isolated V17 actuator trained for 1,600 updates in 339.67 seconds and used
 1.588 GiB peak allocated CUDA memory on one RTX 4090:
 
@@ -228,8 +257,8 @@ The isolated V17 actuator trained for 1,600 updates in 339.67 seconds and used
 
 This proves that a small non-token continuous visual state causally controls
 generated writing pixels. It does not prove readable writing: V17 fails the
-preregistered `0.50` pixel-F1 gate and human review. The next actuator must make
-stroke topology explicit with a learned spatial visual motor plan.
+preregistered `0.50` pixel-F1 gate and human review. V18 supplies the learned
+spatial motor-plan correction and improves readability on development data.
 
 ### Predictive visual field language core
 
@@ -288,12 +317,13 @@ The next intervention is again not immediate scale:
 2. Run an attributable V16 memory ablation on a newly preregistered bank, with
    paired per-context predictions and correction-norm receipts; require
    proposal/state performance above the symbolic bigram.
-3. Replace V17's blank spatial condition with a visual-state-decoded motor plan,
-   supervise topology directly, and require readable output under a shuffled-
-   state control without lookup.
-4. Close the autonomous feedback loop only after state prediction and isolated
+3. Preserve an `8x8xC` continuous spatial retinal field instead of forcing
+   dense topology through only one global vector. Compare it against V18 under
+   prespecified complexity strata and a blinded readability rule.
+4. Open a new frozen bank only after the fixed complex-form rule passes.
+5. Close the autonomous feedback loop only after state prediction and isolated
    actuation pass independently.
-5. Require the complete system to remain readable for 32 cells before widening
+6. Require the complete system to remain readable for 32 cells before widening
    it or adding instruction tuning.
 
 After this causal visual gate passes, add image-to-image instruction tuning and
@@ -318,6 +348,8 @@ The V16 memory receipt is in
 [`predictive-visual-field-v16-memory-result.md`](predictive-visual-field-v16-memory-result.md).
 The isolated V17 actuator receipt is in
 [`visual-state-actuator-v17-result.md`](visual-state-actuator-v17-result.md).
+The topology-first V18 development receipt is in
+[`visual-motor-plan-v18-result.md`](visual-motor-plan-v18-result.md).
 The V8-V15 visual-state record is in
 [`predictive-visual-field-v15-result.md`](predictive-visual-field-v15-result.md).
 The exact V7 experiment and frozen receipts are in

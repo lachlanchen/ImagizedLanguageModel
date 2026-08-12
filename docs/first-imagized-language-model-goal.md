@@ -27,7 +27,7 @@ bronze, seal, clerical, manuscript, traditional, simplified, and Kanji forms.
 
 ## Current verdict
 
-The repository now contains three complete experimental systems:
+The repository now contains four complete experimental systems:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -38,6 +38,9 @@ The repository now contains three complete experimental systems:
 - Visual State Actuator V17 is a separate 5.73M-parameter
   continuous-state-to-pixel model. It receives a retinal state and style image,
   not a glyph ID or spatial target, and was trained on one RTX 4090.
+- Visual Motor Plan V18 is a 2.36M-parameter deterministic
+  continuous-state-to-ink model. It directly supervises stroke topology before
+  any optional stochastic surface rendering.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -55,6 +58,13 @@ state control, but pixel F1 is `0.43849`, below the preregistered `0.50` gate,
 and human inspection rejects readability. V17 is an isolated actuator supplied
 with the intended state; it is not next-language generation.
 
+On a fresh 512-example development audit, V18 reaches **73.633%** global visual
+identity top-1 versus **0.977%** shuffled, target cosine `0.84618` versus
+`0.07162`, and pixel F1 `0.65772` versus `0.31290`. Most simple and medium forms
+are recognizable, while dense forms still merge strokes. V18 passes every
+automatic development topology gate. Its frozen bank remains sealed because
+the required human-review gate did not prespecify a numeric recognition rule.
+
 It proved:
 
 - a strict image-only student boundary;
@@ -69,6 +79,8 @@ It proved:
   allocated CUDA memory on one RTX 4090;
 - strong held-out causal control of generated ink by a continuous retinal state
   with 5.73M trainable parameters and 1.588 GiB peak memory;
+- recognizable development writing from a 2.36M-parameter deterministic visual
+  motor planner using 0.778 GiB peak allocated CUDA memory;
 - direct continuous ink generation by conditional rectified flow;
 - context-sensitive generated pixels;
 - autonomous rereading and feedback without OCR or symbolic decoding;
@@ -79,19 +91,20 @@ It proved:
 It did not prove:
 
 - prediction better than a symbolic bigram baseline;
-- readable visual-state pixel output, because V17 generates pseudo-characters;
+- broad complex-form visual-state output under a frozen protocol;
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM; or
 - parity with Qwen 8B.
 
-The present result is therefore an **accepted visual-state and causal-actuation
-proof, and a rejected readable language-system proof**. It breaks the narrower
-assumptions that image-native training on one consumer GPU cannot acquire causal
-language structure or make a continuous visual intent control generated pixels.
-It does not justify claiming that language is solved by image generation. The
-next milestone makes stroke topology an explicit visual motor plan while the
-causal language core is strengthened against the bigram baseline.
+The present result is therefore an **accepted visual-state proof, accepted
+development motor-plan proof, and rejected autonomous language-system proof**.
+It breaks the narrower assumptions that image-native training on one consumer
+GPU cannot acquire causal language structure or make continuous visual intent
+produce recognizable writing. It does not justify claiming that language is
+solved by image generation. The next milestone preserves spatial retinal detail
+for dense forms while the causal language core is strengthened against the
+bigram baseline.
 
 ## Implemented paradigm: predictive visual fields
 
@@ -189,6 +202,8 @@ ink, an ID lookup, or a discrete codebook.
 ![Predictive Visual Field V16 result](../publication/ilm-image-native/figures/predictive_visual_field_v16_result.png)
 
 ![Visual State Actuator V17 result](../publication/ilm-image-native/figures/visual_state_actuator_v17_result.png)
+
+![Visual Motor Plan V18 development result](../publication/ilm-image-native/figures/visual_motor_plan_v18_result.png)
 
 V16 replicates that the continuous state distribution uses causal visual
 history and beats random, last-only, and unigram controls. It still falls 2.10
@@ -372,6 +387,9 @@ The V16 selection, compute, and frozen receipt is in
 The V17 isolated-actuator selection, causal intervention, readability rejection,
 and compute receipt is in
 [`visual-state-actuator-v17-result.md`](visual-state-actuator-v17-result.md).
+The V18 topology-first development selection, fresh causal audit, sealed-frozen
+decision, and compute receipt is in
+[`visual-motor-plan-v18-result.md`](visual-motor-plan-v18-result.md).
 The complete V8-V15 ablations remain in
 [`predictive-visual-field-v15-result.md`](predictive-visual-field-v15-result.md).
 
@@ -472,27 +490,29 @@ a one-step denoising estimate. V6's trajectory and recovery terms remain as
 stability regularizers. V7 validates both corrections but rejects the monolithic
 language-plus-rendering writer.
 
-## Next proof: attributable memory and readable visual motor planning
+## Next proof: attributable memory and spatial visual motor planning
 
-V16 completes the first bounded memory pilot and V17 completes the first
-isolated actuation pilot. The next proof has three ordered stages:
+V16 completes the first bounded memory pilot, V17 establishes causal pixel
+control, and V18 establishes readable topology on development data. The next
+proof has three ordered stages:
 
 1. Run paired base-versus-memory predictions on a newly preregistered bank,
    log correction norms and gate behavior, and require full-history performance
    above the `13.143%` symbolic bigram before attributing a memory advance.
-2. Decode continuous intended state and style into a directly supervised
-   spatial visual motor plan. Require both correct topology and intended-state
-   reread across held-out fonts, including forms without an output ID. Use
-   stochastic flow only for residual style variation after the plan is legible.
+2. Preserve a continuous spatial retinal field instead of compressing all
+   topology into one global vector. Preregister image-complexity strata and a
+   blinded recognition rule before training; compare global-only, spatial-only,
+   and fused planners without IDs or lookup.
 3. Close the write-reread loop only after causal state and isolated actuation
    independently pass. Require readable 32-cell continuation before adding
    instruction tuning or historical-answer composition.
 
 The experiments expose two separate bottlenecks. Causal compression remains
-below bigram even though the retina oracle is 98.546%. V17 then shows that
-global retinal identity alone is an insufficient topology objective: intended
-state strongly controls the result, yet the strokes remain unreadable. Compact
-language memory and visual motor planning must therefore improve independently.
+below bigram even though the retina oracle is 98.546%. V17 shows that global
+retinal identity alone is an insufficient topology objective. V18 shows that a
+direct spatial motor plan repairs most simple and medium forms, while dense
+forms still expose information lost in the global state. Compact language
+memory and spatial visual planning must therefore improve independently.
 
 ## Acceptance gates for the next checkpoint
 
@@ -505,8 +525,9 @@ All gates are evaluated on a frozen manifest and glyph bank:
 3. Sampled state context cosine gain must exceed `0.02` and the random branch by
    at least `0.01` on held-out fonts.
 4. The isolated actuator must produce nontrivial ink whose reread state matches
-   its sampled plan and remains readable under a blinded rubric. V17 passes the
-   causal reread condition and fails topology/readability.
+   its sampled plan and remains readable under a prespecified blinded rubric.
+   V18 passes automatic development topology gates; frozen promotion remains
+   withheld until the rubric and complex-form strata are fixed prospectively.
 5. The closed model must retain readability over a 32-cell autonomous rollout.
 6. A visual identity evaluator may score output, but no evaluator signal may
    enter inference.
@@ -550,9 +571,11 @@ complete until the fixed bigram is beaten without labels entering the student.
 ### P1.5: readable visual actuation
 
 Partially achieved. V17 proves continuous-state causal control at 58.594%
-frozen top-1 versus 0.977% shuffled, but fails pixel F1 and human readability.
-P1.5 requires a visual motor-plan actuator that produces recognizable held-out
-forms without a glyph lookup and survives the same shuffled-state intervention.
+frozen top-1 versus 0.977% shuffled but fails readability. V18 produces
+recognizable simple and medium development forms, reaching 73.633% top-1 and
+0.65772 pixel F1 versus 0.977% and 0.31290 shuffled. P1.5 remains incomplete
+until dense forms pass a prospectively defined readability rule on a new frozen
+bank without glyph lookup.
 
 ### P2: bounded visual instruction following
 
@@ -579,7 +602,9 @@ Image-native representation is a hypothesis, not automatically more efficient
 than tokens. V16 shows that a complete 16.47M visual-state model trains on one
 4090 at 1.479 GiB peak allocated memory and learns real causal signal. V17 adds
 a 5.73M trainable actuator at 1.588 GiB and learns strong state-dependent image
-generation. V16 remains below a symbolic bigram and V17 remains unreadable.
+generation. V18 reduces the topology planner to 2.36M trainable parameters and
+0.778 GiB while making many forms readable on development data. V16 remains
+below a symbolic bigram, and V18 is not a frozen broad-readability result.
 Future comparisons must report quality at equal tasks alongside VRAM, training
 energy, latency, throughput, storage, and rendering cost. Parameter count alone
 is not efficiency.

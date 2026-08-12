@@ -16,7 +16,41 @@
 
 *Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
 
-## Current Proof: Visual State Actuator V17
+## Current Proof: Visual Motor Plan V18
+
+![Measured V18 visual motor plan: a compact image-native decoder writes recognizable held-out Chinese forms from continuous visual intent](publication/ilm-image-native/figures/visual_motor_plan_v18_result.png)
+
+V18 is a real `2,358,977`-parameter deterministic visual motor planner trained
+for 1,600 updates on one RTX 4090. It receives a continuous `192`-dimensional
+state read from a different-font image plus a separate style image and emits a
+`32x32` continuous ink plan. Target pixels provide loss only. The learned path
+has no token IDs, Unicode IDs, OCR, strings, character labels, output
+vocabulary, glyph lookup, finite visual codebook, candidate classifier, or
+external language model.
+
+On a fresh 512-example **development-only** audit, V18 reaches **73.63%** global
+visual-identity top-1 versus **0.98%** after shuffling only intended states.
+Target cosine is **0.8462** versus `0.0716`; pixel F1 is **0.6577** versus
+`0.3129`. Ink occupancy is identical in both branches. Most reviewed simple and
+medium forms are recognizable, while dense forms can still merge strokes.
+
+| Fresh development measurement | Correct intent | Shuffled intent | Result |
+|---|---:|---:|---|
+| Global visual identity top-1 | **73.633%** | 0.977% | strong causal control |
+| Target cosine | **0.8462** | 0.0716 | gain `+0.7746` |
+| Pixel F1 | **0.6577** | 0.3129 | automatic topology gate passes |
+| Human review | simple/medium readable | unrelated forms | dense forms still fail |
+| Peak allocated CUDA memory | **0.778 GiB** | - | far below 4090 capacity |
+
+This breaks a categorical claim: structured writing can be learned and emitted
+as continuous image topology by a small consumer-GPU model without a token
+output table. It does not prove autonomous language generation. V18 is supplied
+the intended state, the human gate lacked a prespecified numeric rubric, and
+the new frozen bank remains untouched. The full protocol, limitations, and
+reproduction receipt is in
+[`docs/visual-motor-plan-v18-result.md`](docs/visual-motor-plan-v18-result.md).
+
+## Prior Causal Actuator: V17
 
 ![Measured Visual State Actuator V17: an image-derived continuous state causally controls generated pixels on a frozen split, but exact stroke topology and human readability fail](publication/ilm-image-native/figures/visual_state_actuator_v17_result.png)
 
@@ -50,12 +84,10 @@ that retinal identity can be optimized without preserving exact stroke
 topology. It is also an isolated actuator test supplied with the intended state,
 not autonomous next-language generation. V16 remains below a symbolic bigram.
 
-The next correction decodes the continuous state into a directly supervised
-spatial **visual motor plan**, then reserves stochastic flow for style and
-surface refinement. This preserves the image-native boundary while matching
-the low-entropy topology of writing instead of asking generic noise-to-image
-flow to rediscover every stroke. The complete selection, frozen receipt,
-limitations, and reproduction command are in
+V18 implements the correction: it decodes continuous intent into a directly
+supervised spatial **visual motor plan** and makes readable writing emerge on
+development data. V17 remains the frozen causal-control baseline. Its complete
+selection, frozen receipt, limitations, and reproduction command are in
 [`docs/visual-state-actuator-v17-result.md`](docs/visual-state-actuator-v17-result.md).
 
 ## Language Core: Predictive Visual Field V16
@@ -86,7 +118,7 @@ cosine gain `+0.0795`.
 | State-flow full-context top-1 | `3.412%` | **`3.691%`** | beats last-only and unigram |
 | Symbolic bigram | `13.143%` | `13.143%` | **not beaten** |
 | Peak allocated CUDA memory | `1.181 GiB` | `1.479 GiB` | fits far below 4090 capacity |
-| Coupled pixel actuator | absent | absent | isolated V17 actuator is not yet readable |
+| Coupled pixel actuator | absent | absent | isolated V18 planner is readable on development, not yet coupled |
 
 This breaks a narrow but important claim: a small model can learn causal
 language signal directly from rendered writing images on a consumer GPU. It
@@ -110,15 +142,17 @@ without relaxing the image-only boundary:
 1. A retina learns a continuous manifold directly from writing images.
 2. A causal field predicts a low-variance **continuous visual proposal**.
 3. A hyperspherical flow models a distribution over alternative next states.
-4. A separate visual actuator renders an intended state as ink; V17 proves
-   causal state control but fails readable topology.
-5. The retina will reread the rendered pixels and feed them back into the field.
+4. A deterministic visual motor planner renders intended topology; V18 makes
+   simple and medium held-out forms readable on development data.
+5. Optional stochastic flow can refine style only after topology is stable.
+6. The retina will reread the rendered pixels and feed them back into the field.
 
 There is no nearest-character lookup or output vocabulary. The continuous state
 proof now passes random, last-only, unigram, context-use, and target-signal
-gates. It still fails the bigram language gate. The isolated V17 actuator passes
-causal control but fails readability; the autonomous write-reread loop remains
-withheld until both modules pass independently.
+gates. It still fails the bigram language gate. V18 passes automatic development
+topology gates but is not frozen-promoted because its human rubric was
+underspecified and dense forms still fail. The autonomous write-reread loop
+remains withheld until both modules pass a new fixed protocol independently.
 
 The strict student boundary remains:
 
@@ -176,7 +210,24 @@ continuation, historical question answering, efficiency over a text LLM, or
 Qwen-8B parity. The result motivates the Predictive Visual Field separation
 shown above.
 
-## Run The Visual Actuator
+## Run The Visual Motor Plan
+
+Audit the selected V18 checkpoint on fresh development renderings. This command
+cannot access the sealed frozen split:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/eval_visual_motor_plan_development.py \
+  --checkpoint artifacts/visual_motor_plan_v18_pilot/checkpoint_selected_development.pt \
+  --out artifacts/visual_motor_plan_v18_step1400_development_audit_v2 \
+  --samples 128 --batch-size 32 --num-workers 8 \
+  --sample-count 32 --sample-columns 8 --device cuda --precision bf16
+```
+
+The evaluator refuses to overwrite an existing receipt. Full training settings
+and the sealed-development decision are in
+[`docs/visual-motor-plan-v18-result.md`](docs/visual-motor-plan-v18-result.md).
+
+## Run The V17 Baseline
 
 Evaluate the selected V17 checkpoint once on its frozen record split:
 
@@ -281,12 +332,12 @@ InkStream implementations remain as baselines. They are not the current model.
 
 ILM is a research codebase for **language learned and generated as visible
 writing**. Its current experiment predicts continuous retinal states with a
-causal proposal and hyperspherical flow. The earlier RFLM writes continuous ink
-with rectified flow, but the current PVF intentionally postpones its pixel
-actuator until the visual language core passes stronger gates. Older structured
-embeddings, codebooks, and page diffusion experiments remain available as
-falsified or comparative baselines; they do not define the current model
-boundary.
+causal proposal and hyperspherical flow, then tests visual actuation separately.
+V18 now writes recognizable development forms through a deterministic spatial
+motor plan; it is deliberately not coupled to the still-sub-bigram language
+core. Older structured embeddings, codebooks, and page diffusion experiments
+remain available as falsified or comparative baselines; they do not define the
+current model boundary.
 
 > The repository intentionally keeps a practical etymology pipeline and long-horizon ILM experimentation side-by-side.
 
@@ -307,6 +358,9 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V18 visual motor-plan result | `docs/visual-motor-plan-v18-result.md` |
+| V17 causal actuator result | `docs/visual-state-actuator-v17-result.md` |
+| V16 predictive visual-field result | `docs/predictive-visual-field-v16-memory-result.md` |
 | V7 anchor-identity experiment | `docs/retinal-flow-v7-anchor-identity-result.md` |
 | Closed-loop V6 experiment | `docs/retinal-flow-v6-closed-loop-result.md` |
 | Research dossier and evidence | `references/image-native-language-model-research.md` |
@@ -319,6 +373,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 
 - 🏺 Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
 - 👁️ Continuous foveal retina with recurrent visual context and cross-font invariance.
+- ✒️ Deterministic continuous visual motor plan for directly supervised stroke topology.
 - 🖋️ Conditional pixel-space rectified-flow writer with a differentiable write-read cycle.
 - 🔁 Autonomous image-only inference with candidate rereading, energy reranking, and pixel feedback.
 - 🧭 Training on exact model-induced visual rollouts with state alignment, next-image energy, and recovery flow.

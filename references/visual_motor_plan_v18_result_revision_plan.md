@@ -89,3 +89,25 @@ training. The frozen V18 bank remains sealed.
 This repository maintains an evolving research preprint and has no designated
 submission baseline or response letter for this revision unit. Active filenames
 remain stable. No baseline or redline file will be invented.
+
+## Execution Record
+
+Completed on 2026-08-12 within the allowed scope.
+
+- Added `docs/visual-motor-plan-v18-result.md`.
+- Added the reproducible measured-figure generator and
+  `figures/visual_motor_plan_v18_result.png`.
+- Updated the README, engineering goal, conceptual write-up, and active TeX.
+- Kept the V18 frozen bank sealed; no frozen rendering or metric was produced.
+- Ran the fresh development audit over 512 candidates with paginated evidence.
+- Passed 23 relevant pytest tests and Ruff checks.
+- Rebuilt `ilm-image-native.pdf` successfully in two pdflatex passes.
+- Inspected pages 1, 9, 10, 18, 19, and 20 from rendered PNGs; the V18 figure,
+  tables, abstract, and conclusion are legible and correctly labeled.
+- Verified extracted PDF text for `V18`, `73.63`, `0.778`, and sealed-frozen
+  claims.
+- `git diff --check` passed.
+
+The build emits only underfull-box warnings in existing narrow tables and long
+bibliography URLs. No overfull box, missing figure, unresolved-reference, or
+build error remains.
