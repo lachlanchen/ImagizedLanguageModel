@@ -90,6 +90,24 @@ V19 implementation. Representative mean scores were `王=0.228`, `子=0.195`,
 `鬱=0.429`. These characters do not enter the student or define evaluation
 membership; only the equation does.
 
+## Spatial-Phase Objective
+
+The fresh global baseline uses the unchanged V18 objective. During the spatial
+phase, the frozen baseline's per-example topology loss is weighted by image-only
+complexity stratum:
+
+- simple: `1.00`;
+- medium: `1.25`;
+- dense: `2.00`.
+
+The trainable spatial residual receives stroke-weighted BCE, soft Dice, weighted
+pixel L1, Sobel-edge L1, retinal identity/contrast, and two causal margins. The
+first requires correct-field pixel error to beat a batch-shuffled field; the
+second requires it to beat the zero-field baseline. Default margins are `0.03`
+and `0.01`, respectively. Global baseline parameters remain frozen throughout.
+These weights and margins may not be changed after the first non-smoke V19
+training run.
+
 ## Causal Branches
 
 Every development validation must render these branches with the same style:
