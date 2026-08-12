@@ -108,6 +108,15 @@ Development and frozen targets therefore contain no glyph identity used as a
 training target or source candidate. Marker glyphs are shared task language,
 not answer candidates.
 
+The implemented deterministic partition resolves to:
+
+- `815` training identities;
+- `104` development identities, identifier SHA-256
+  `86007f870644707c6de2379f068c2ac5666265661891e0aa1ed964ed13815047`;
+  and
+- `105` frozen identities, identifier SHA-256
+  `7e144212e1b90a64cd5b7ad095ed2b95ccd6aa52095b2ae474d30cfec5a438de`.
+
 Two operation/label-pair combinations are withheld from training while keeping
 every operation and label pair visible elsewhere:
 
@@ -196,10 +205,11 @@ coordinate map or global spatial seed. Unit tests must measure the exact input
 cell influence radius and verify that a constant tiled field cannot acquire a
 content-specific global spatial plan.
 
-The complete trainable student must contain fewer than `4,000,000` parameters.
-Candidate and query-blind control must have exactly equal trainable parameter
-counts and parameter shapes. The exact count is recorded by tests before the
-first non-smoke run and may not be changed afterward.
+The complete trainable student contains exactly `3,410,128` parameters, below
+the fixed `4,000,000` limit. Candidate and query-blind control have exactly
+equal trainable parameter counts and parameter shapes. This count is fixed by
+structural tests before the first smoke or evidence run and may not be changed
+afterward.
 
 ### Query-blind control
 
