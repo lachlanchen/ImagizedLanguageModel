@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ilm.visual_lm.ink_jepa_data import retinal_font_manifest
 from ilm.visual_lm.visual_relation_circuit import (
     OPERATION_BLIND_ROUTE,
     QUERY_BLIND_ROUTE,
@@ -15,14 +16,26 @@ from ilm.visual_lm.visual_relation_circuit import (
     VisualCanonicalizer,
     VisualRelationCircuit,
     VisualRelationCircuitConfig,
+    relation_circuit_config_payload,
 )
 from ilm.visual_lm.visual_relation_data import PARTITION_SALT
+from scripts.eval_visual_relation_circuit_development_v23 import (
+    validate_pair_metadata,
+)
 from scripts.train_visual_relation_circuit_v23 import (
+    ARCHITECTURE,
+    EXPECTED_CANONICALIZER_SHA256,
+    EXPECTED_MANIFEST_SHA256,
     EXPECTED_PARAMETERS,
+    EXPECTED_PARTITION,
+    EXPECTED_PVF_SHA256,
     FIXED_EVIDENCE_ARGUMENTS,
     FIXED_LOSS_ARGUMENTS,
     FIXED_MODEL_ARGUMENTS,
     FIXED_OPTIMIZATION_ARGUMENTS,
+    PROTOCOL_DOCUMENT,
+    SOURCE_FILES,
+    _parameter_shapes,
     _require_fixed_arguments,
     _visual_variants,
     candidate_selection_gate_report,
@@ -34,6 +47,7 @@ from scripts.train_visual_relation_circuit_v23 import (
     selection_rank,
     student_boundary_is_clean,
 )
+from scripts.train_visual_state_actuator import file_sha256
 
 
 class TinyRetina(nn.Module):
@@ -266,3 +280,63 @@ def test_boundary_rejects_symbolic_or_trainable_frozen_modules() -> None:
     trainable_writer = dict(receipt)
     trainable_writer["canonicalizer_trainable"] = True
     assert not student_boundary_is_clean(trainable_writer, RELATION_AWARE_ROUTE)
+
+
+def arm_checkpoint(route_mode: str) -> dict[str, object]:
+    model = build_model(route_mode)
+    if route_mode == RELATION_AWARE_ROUTE:
+        metrics = passing_candidate_metrics()
+    elif route_mode == QUERY_BLIND_ROUTE:
+        metrics = passing_query_blind_metrics()
+    else:
+        metrics = passing_operation_blind_metrics()
+    metrics["step"] = 400.0
+    return {
+        "architecture": ARCHITECTURE,
+        "route_mode": route_mode,
+        "smoke_only": False,
+        "step": 400,
+        "best_development": metrics,
+        "trainable_parameters": EXPECTED_PARAMETERS,
+        "trainable_parameter_shapes": _parameter_shapes(model),
+        "model_config": relation_circuit_config_payload(model.config),
+        "boundary_receipt": model.boundary_receipt(),
+        "pvf_sha256": EXPECTED_PVF_SHA256,
+        "canonicalizer_sha256": EXPECTED_CANONICALIZER_SHA256,
+        "manifest_sha256": EXPECTED_MANIFEST_SHA256,
+        "partition": dict(EXPECTED_PARTITION),
+        "retinal_fonts": retinal_font_manifest(),
+        "protocol": {
+            "protocol_sha256": file_sha256(PROTOCOL_DOCUMENT),
+            "source_files_sha256": {
+                path: file_sha256(path) for path in SOURCE_FILES
+            },
+            "fixed_model_arguments": FIXED_MODEL_ARGUMENTS,
+            "fixed_loss_arguments": FIXED_LOSS_ARGUMENTS,
+            "fixed_optimization_arguments": FIXED_OPTIMIZATION_ARGUMENTS,
+            "fixed_evidence_arguments": FIXED_EVIDENCE_ARGUMENTS,
+            "canonicalizer_protocol": {"receipt": "same"},
+        },
+    }
+
+
+def test_fresh_audit_metadata_refuses_smoke_and_unequal_shapes() -> None:
+    checkpoints = {
+        route_mode: arm_checkpoint(route_mode)
+        for route_mode in (
+            RELATION_AWARE_ROUTE,
+            QUERY_BLIND_ROUTE,
+            OPERATION_BLIND_ROUTE,
+        )
+    }
+    validate_pair_metadata(checkpoints)
+
+    smoke = copy.deepcopy(checkpoints)
+    smoke[QUERY_BLIND_ROUTE]["smoke_only"] = True
+    with pytest.raises(ValueError, match="smoke-only"):
+        validate_pair_metadata(smoke)
+
+    unequal = copy.deepcopy(checkpoints)
+    unequal[OPERATION_BLIND_ROUTE]["trainable_parameter_shapes"][0]["shape"] = [1]
+    with pytest.raises(ValueError, match="parameter shapes differ"):
+        validate_pair_metadata(unequal)
