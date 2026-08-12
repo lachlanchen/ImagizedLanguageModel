@@ -72,6 +72,34 @@ def extract_object(content: str) -> dict[str, Any]:
     return value
 
 
+def extract_items(payload: dict[str, Any], expected_ids: set[str]) -> list[Any]:
+    """Accept common local-model JSON key variants without accepting prose."""
+
+    for key in ("items", "key_items", "paraphrases"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return value
+    list_values = [value for value in payload.values() if isinstance(value, list)]
+    if len(list_values) == 1:
+        return list_values[0]
+    keyed_items: list[dict[str, str]] = []
+    for identifier, value in payload.items():
+        if identifier not in expected_ids:
+            continue
+        if isinstance(value, str):
+            paraphrase = value.strip()
+        elif isinstance(value, dict) and isinstance(value.get("paraphrase"), str):
+            paraphrase = value["paraphrase"].strip()
+        else:
+            continue
+        if paraphrase:
+            keyed_items.append({"id": identifier, "paraphrase": paraphrase})
+    if keyed_items:
+        return keyed_items
+    keys = ", ".join(sorted(str(key) for key in payload))
+    raise ValueError(f"paraphrase teacher omitted an item array; keys={keys}")
+
+
 def paraphrase_group(items: Sequence[dict[str, Any]], args: argparse.Namespace) -> list[dict[str, str]]:
     source = [{"id": item["identifier"], "language": item["language"], "prompt": item["text"]} for item in items]
     system = (
@@ -98,13 +126,13 @@ def paraphrase_group(items: Sequence[dict[str, Any]], args: argparse.Namespace) 
         authorization=args.api_key,
     )
     parsed = extract_object(body["choices"][0]["message"]["content"])
-    returned = parsed.get("items")
-    if not isinstance(returned, list):
-        raise ValueError("paraphrase teacher omitted items array")
-    by_id = {}
+    returned = extract_items(parsed, {item["identifier"] for item in items})
+    by_id: dict[str, str] = {}
     for value in returned:
         if isinstance(value, dict) and isinstance(value.get("id"), str) and isinstance(value.get("paraphrase"), str):
-            by_id[value["id"]] = value["paraphrase"].strip()
+            paraphrase = value["paraphrase"].strip()
+            if paraphrase:
+                by_id.setdefault(value["id"], paraphrase)
     output = []
     for item in items:
         paraphrase = by_id.get(item["identifier"], "")
