@@ -109,6 +109,35 @@ def save_candidates(candidates: torch.Tensor, path: Path) -> None:
     Image.fromarray(image, mode="L").save(path, optimize=True)
 
 
+def summarize_trajectory(traces: list[dict[str, Any]], window: int = 8) -> dict[str, float]:
+    if not traces:
+        return {}
+    width = min(len(traces), max(1, window))
+
+    def mean(key: str, rows: list[dict[str, Any]]) -> float:
+        return sum(float(row[key]) for row in rows) / len(rows)
+
+    first = traces[:width]
+    last = traces[-width:]
+    first_ink = mean("mean_ink", first)
+    last_ink = mean("mean_ink", last)
+    return {
+        "mean_ink": mean("mean_ink", traces),
+        "first_window_mean_ink": first_ink,
+        "last_window_mean_ink": last_ink,
+        "late_to_early_ink_ratio": last_ink / max(first_ink, 1e-9),
+        "sparse_cell_fraction": sum(
+            float(row["binary_ink_fraction"]) < 0.10 for row in traces
+        )
+        / len(traces),
+        "first_window_candidate_mean_cosine": mean("candidate_mean_cosine", first),
+        "last_window_candidate_mean_cosine": mean("candidate_mean_cosine", last),
+        "first_window_selected_energy": mean("selected_energy", first),
+        "last_window_selected_energy": mean("selected_energy", last),
+        "window_cells": float(width),
+    }
+
+
 def occupied_foveas(
     page: torch.Tensor,
     config: RetinalRenderConfig,
@@ -334,6 +363,7 @@ def main() -> None:
         "prompt_image": str(output / "prompt_page.png"),
         "answer_image": str(output / "answer_page.png"),
         "complete_image": str(output / "complete_page.png"),
+        "trajectory_summary": summarize_trajectory(traces),
         "trace": traces,
     }
     (output / "receipt.json").write_text(
