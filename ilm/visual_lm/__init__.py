@@ -12,7 +12,19 @@ from .instruction_data import (
     render_instruction_page,
 )
 from .model import ImageToImageUNet
+from .retinal_memory import (
+    RetinalFieldConfig,
+    RetinalFieldEncoder,
+    VisualAssociativeReader,
+    VisualEpisodeMemory,
+)
 from .rendering import GlyphCorpus, RenderConfig
+from .visual_episodes import (
+    VisualEpisodeDataset,
+    VisualEpisodeSpec,
+    historical_episode_specs,
+    instruction_episode_specs,
+)
 
 __all__ = [
     "ConditionalVisualFlow",
@@ -21,13 +33,21 @@ __all__ = [
     "InstructionRenderConfig",
     "MixedVisualDataset",
     "RenderConfig",
+    "RetinalFieldConfig",
+    "RetinalFieldEncoder",
     "VisualFlowConfig",
     "VisualInstructionDataset",
     "VisualInstructionRecord",
     "VisualLanguageDataset",
     "VisualLanguageSample",
+    "VisualAssociativeReader",
+    "VisualEpisodeMemory",
+    "VisualEpisodeDataset",
+    "VisualEpisodeSpec",
     "VisualPageVAE",
     "VisualVAEConfig",
     "load_alpaca_records",
+    "historical_episode_specs",
+    "instruction_episode_specs",
     "render_instruction_page",
 ]

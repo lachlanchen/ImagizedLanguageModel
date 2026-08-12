@@ -39,18 +39,28 @@ not the model output and cannot represent every historical form.
 
 ## Model contract
 
-The first production-shaped implementation uses:
+The main implementation is a **Visual Field Machine**, not a page diffusion
+model. It separates visual reading, memory, thought, and writing:
 
-- a KL-regularized visual VAE that compresses writing canvases by 8x per axis;
-- a conditional latent rectified-flow U-Net with multi-scale image condition;
-- classifier-free guidance and exponential-moving-average weights;
-- 8-16-step Heun sampling for lower latency than long DDPM trajectories;
-- page continuation tiles for responses that do not fit one canvas;
-- retrieval of attested historical glyph images as visual evidence; and
-- optional OCR only for evaluation and Unicode-representable sidecars.
+- a peripheral page view and adaptive high-resolution foveae read occupied ink;
+- recurrent continuous visual state integrates the foveae without text IDs;
+- a content-addressed image memory stores answer regions and factual evidence;
+- a provenance gate copies attested historical forms instead of hallucinating
+  them;
+- a recurrent canvas controller decides which visible region to write next;
+- a high-resolution neural ink writer renders only occupied line/glyph regions;
+- optional OCR is restricted to evaluation and representable sidecars.
 
-There is no BPE vocabulary, character embedding table, token ID tensor, or
-cross-entropy language head in the independent model.
+There is no BPE vocabulary, character embedding table, Unicode-ID tensor,
+language-token codebook, or cross-entropy language head in the independent
+model. Continuous foveal states and canvas regions are spatial observations,
+not renamed linguistic tokens.
+
+The earlier whole-page KL-VAE plus rectified-flow U-Net remains in the repo as
+a negative baseline. On the first measured run its held-out flow velocity MSE
+fell from 1.780 at step 200 to 0.851 at step 1,200, yet its output remained
+illegible page texture. That result rejects the assumption that learning page
+appearance from noise is sufficient to learn visible language.
 
 ## Dataset workaround
 
@@ -73,10 +83,11 @@ all useful open datasets were originally distributed as images.
 
 ### P0: mathematical and software proof
 
-- Real VAE reconstruction optimization and latent calibration.
-- Real flow-matching loss from data latents to Gaussian noise.
-- Iterative sampling from noise, not direct RGB regression or a fixed template.
-- Resumable checkpoints, EMA, held-out data, and deterministic inference.
+- Image-only model calls after the raster boundary.
+- Multi-view retinal invariance under unseen font, layout, and scan damage.
+- Content-addressed answer-image memory with insertion without retraining.
+- Held-out retrieval, provenance, latency, memory-size, and VRAM measurements.
+- Resumable checkpoints and deterministic independent inference.
 
 ### P1: first trained visual instruction proof
 
@@ -104,10 +115,11 @@ the stage at which broad language competence can be tested credibly.
 
 Image-native representation is a hypothesis, not automatically more efficient
 than tokens. The project must report measured values. The intended advantages
-are parallel page generation, compact spatial latents, preservation of visual
-forms, and a much smaller independent student. The costs include VAE compute,
-multiple flow evaluations, and difficulty rendering exact small text. Negative
-results remain valid evidence.
+are sparse computation over occupied ink, one visual memory entry per answer
+rather than repeated parametric memorization, exact preservation of unusual
+forms, and a much smaller independent student. Costs include high-resolution
+visual encoding, memory storage, and the difficulty of composing genuinely new
+readable writing. Negative results remain valid evidence.
 
 ## Non-negotiable evaluation rules
 
