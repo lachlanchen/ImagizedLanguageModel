@@ -90,7 +90,7 @@ class FovealInkFlow(nn.Module):
             nn.SiLU(),
             nn.Linear(config.context_dim * 2, config.context_dim),
         )
-        self.input = nn.Conv2d(1, base, 3, padding=1)
+        self.input = nn.Conv2d(2, base, 3, padding=1)
         self.level0 = ConditionedInkBlock(base, base, config.context_dim)
         self.down0 = nn.Conv2d(base, base * 2, 4, stride=2, padding=1)
         self.level1 = ConditionedInkBlock(base * 2, base * 2, config.context_dim)
@@ -114,6 +114,7 @@ class FovealInkFlow(nn.Module):
         state: torch.Tensor,
         time: torch.Tensor,
         condition: torch.Tensor,
+        ink_plan: torch.Tensor,
         *,
         condition_present: torch.Tensor | None = None,
     ) -> torch.Tensor:
@@ -122,11 +123,14 @@ class FovealInkFlow(nn.Module):
             raise ValueError(f"expected foveal state [batch, {expected}]")
         if condition.ndim != 2 or condition.shape[1] != self.config.condition_dim:
             raise ValueError("condition does not match the configured retinal state dimension")
+        if ink_plan.shape != state.shape:
+            raise ValueError("ink_plan must have the same continuous foveal shape as state")
         if condition_present is None:
             condition_present = torch.ones(state.shape[0], device=state.device, dtype=state.dtype)
         condition_present = condition_present.to(state).reshape(-1, 1)
         context = self.time(time) + self.condition(condition * condition_present)
-        level0 = self.level0(self.input(state), context)
+        visible_plan = ink_plan * condition_present[:, :, None, None]
+        level0 = self.level0(self.input(torch.cat((state, visible_plan), dim=1)), context)
         level1 = self.level1(self.down0(level0), context)
         hidden = self.mid1(self.mid0(self.down1(level1), context), context)
         hidden = self.up1(hidden)
@@ -136,21 +140,24 @@ class FovealInkFlow(nn.Module):
         return self.output(hidden)
 
 
-def retinal_foveal_condition(
+def retinal_foveal_prediction(
     foundation: InkJEPA,
     context_image: torch.Tensor,
     hidden_mask: torch.Tensor,
     target_mask: torch.Tensor,
-) -> torch.Tensor:
+) -> tuple[torch.Tensor, torch.Tensor]:
     """Read a blank future location from image context without symbolic IDs."""
 
     online = foundation.online_encoder(context_image, hidden_mask=hidden_mask)
-    predicted = foundation.predictor(online["field"], hidden_mask)["local"]
+    prediction = foundation.predictor(online["field"], hidden_mask)
+    predicted = prediction["local"]
     weights = target_mask.to(predicted.dtype)
     local = (predicted * weights[..., None]).sum(dim=(1, 2))
     local = local / weights.sum(dim=(1, 2), keepdim=False)[:, None].clamp_min(1.0)
     page = foundation.page_predictor(online["page"])
-    return torch.cat((local, page), dim=-1)
+    patch_logits = prediction["ink_logits"].permute(0, 3, 1, 2)
+    ink_plan = F.pixel_shuffle(patch_logits, foundation.config.patch_size)
+    return torch.cat((local, page), dim=-1), ink_plan
 
 
 def flow_training_state(
@@ -201,6 +208,7 @@ def foveal_flow_loss(
 def sample_foveal_ink(
     model: FovealInkFlow,
     condition: torch.Tensor,
+    ink_plan: torch.Tensor,
     *,
     steps: int = 8,
     guidance_scale: float = 1.0,
@@ -209,6 +217,13 @@ def sample_foveal_ink(
 ) -> torch.Tensor:
     if steps < 1:
         raise ValueError("sampling steps must be positive")
+    if ink_plan.shape != (
+        condition.shape[0],
+        1,
+        model.config.fovea_size,
+        model.config.fovea_size,
+    ):
+        raise ValueError("sampling ink plan has the wrong foveal shape")
     state = initial_noise
     if state is None:
         state = torch.randn(
@@ -226,14 +241,16 @@ def sample_foveal_ink(
 
     def velocity(current: torch.Tensor, value: torch.Tensor) -> torch.Tensor:
         if guidance_scale == 1.0:
-            return model(current, value, condition, condition_present=present)
+            return model(current, value, condition, ink_plan, condition_present=present)
         both_state = torch.cat((current, current), dim=0)
         both_time = torch.cat((value, value), dim=0)
         both_condition = torch.cat((condition, condition), dim=0)
+        both_plan = torch.cat((ink_plan, ink_plan), dim=0)
         unconditioned, conditioned = model(
             both_state,
             both_time,
             both_condition,
+            both_plan,
             condition_present=torch.cat((absent, present)),
         ).chunk(2)
         return unconditioned + guidance_scale * (conditioned - unconditioned)

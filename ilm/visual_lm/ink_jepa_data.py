@@ -266,7 +266,7 @@ def retinal_layout(text: str, config: RetinalRenderConfig) -> list[tuple[int, in
     return positions
 
 
-def _fovea_from_page(
+def extract_retinal_fovea(
     page: torch.Tensor,
     *,
     row: int,
@@ -370,7 +370,7 @@ class FovealContinuationDataset(Dataset):
         variant = rng.randrange(2**31)
         full_page = render_retinal_page(segment, config=self.config, variant=variant)
         context = render_retinal_page(segment[:source_offset], config=self.config, variant=variant)
-        target = _fovea_from_page(
+        target = extract_retinal_fovea(
             full_page,
             row=row,
             column=column,

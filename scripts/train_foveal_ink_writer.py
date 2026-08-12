@@ -20,6 +20,7 @@ from ilm.visual_lm.ink_jepa import InkJEPA, ink_jepa_config_from_payload
 from ilm.visual_lm.ink_jepa_data import (
     FovealContinuationDataset,
     RetinalRenderConfig,
+    extract_retinal_fovea,
     foveal_continuation_collate,
     load_visual_grammar_manifest,
 )
@@ -29,7 +30,7 @@ from ilm.visual_lm.ink_writer import (
     flow_training_state,
     foveal_flow_loss,
     foveal_writer_config_payload,
-    retinal_foveal_condition,
+    retinal_foveal_prediction,
     sample_foveal_ink,
 )
 
@@ -134,14 +135,33 @@ def batch_condition(
     batch: dict[str, Any],
     *,
     device: torch.device,
-) -> tuple[torch.Tensor, torch.Tensor]:
+    render_config: RetinalRenderConfig,
+    fovea_size: int,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     context = batch["context"].to(device, non_blocking=True)
     hidden_mask = batch["hidden_mask"].to(device, non_blocking=True)
     target_mask = batch["target_mask"].to(device, non_blocking=True)
     with torch.no_grad():
-        condition = retinal_foveal_condition(foundation, context, hidden_mask, target_mask)
+        condition, plan_page_logits = retinal_foveal_prediction(
+            foundation,
+            context,
+            hidden_mask,
+            target_mask,
+        )
+        plan = torch.stack(
+            [
+                extract_retinal_fovea(
+                    plan_page_logits[index].sigmoid(),
+                    row=int(metadata["row"]),
+                    column=int(metadata["column"]),
+                    config=render_config,
+                    fovea_size=fovea_size,
+                )
+                for index, metadata in enumerate(batch["metadata"])
+            ]
+        )
     target = batch["target"].to(device, non_blocking=True) * 2.0 - 1.0
-    return condition, target
+    return condition, plan * 2.0 - 1.0, target
 
 
 def loss_for_batch(
@@ -150,15 +170,28 @@ def loss_for_batch(
     batch: dict[str, Any],
     *,
     device: torch.device,
+    render_config: RetinalRenderConfig,
     args: argparse.Namespace,
     generator: torch.Generator | None,
-) -> tuple[torch.Tensor, dict[str, torch.Tensor], torch.Tensor, torch.Tensor]:
-    condition, target = batch_condition(foundation, batch, device=device)
+) -> tuple[
+    torch.Tensor,
+    dict[str, torch.Tensor],
+    torch.Tensor,
+    torch.Tensor,
+    torch.Tensor,
+]:
+    condition, ink_plan, target = batch_condition(
+        foundation,
+        batch,
+        device=device,
+        render_config=render_config,
+        fovea_size=writer.config.fovea_size,
+    )
     state, velocity, time_field, _ = flow_training_state(target, generator=generator)
     keep = (
         torch.rand(target.shape[0], device=device, generator=generator) >= writer.config.condition_dropout
     ).to(target.dtype)
-    prediction = writer(state, time_field, condition, condition_present=keep)
+    prediction = writer(state, time_field, condition, ink_plan, condition_present=keep)
     loss, metrics = foveal_flow_loss(
         prediction,
         velocity,
@@ -168,7 +201,7 @@ def loss_for_batch(
         endpoint_weight=args.endpoint_weight,
         stroke_weight=args.stroke_weight,
     )
-    return loss, metrics, condition, target
+    return loss, metrics, condition, ink_plan, target
 
 
 @torch.no_grad()
@@ -178,6 +211,7 @@ def validate(
     loader: DataLoader,
     *,
     device: torch.device,
+    render_config: RetinalRenderConfig,
     args: argparse.Namespace,
     step: int,
     sample_root: Path,
@@ -186,32 +220,36 @@ def validate(
     totals: dict[str, float] = {}
     examples = 0
     first_condition: torch.Tensor | None = None
+    first_plan: torch.Tensor | None = None
     first_target: torch.Tensor | None = None
     generator = torch.Generator(device=device).manual_seed(args.seed + step * 99991)
     for batch_index, batch in enumerate(loader):
         if batch_index >= args.validation_batches:
             break
         with autocast_context(device, args.precision):
-            loss, metrics, condition, target = loss_for_batch(
+            loss, metrics, condition, ink_plan, target = loss_for_batch(
                 foundation,
                 writer,
                 batch,
                 device=device,
+                render_config=render_config,
                 args=args,
                 generator=generator,
             )
         if first_condition is None:
             first_condition = condition[: args.sample_count]
+            first_plan = ink_plan[: args.sample_count]
             first_target = target[: args.sample_count]
         batch_size = len(batch["metadata"])
         for key, value in {"loss": loss.detach(), **metrics}.items():
             totals[key] = totals.get(key, 0.0) + float(value) * batch_size
         examples += batch_size
 
-    if first_condition is not None and first_target is not None:
+    if first_condition is not None and first_plan is not None and first_target is not None:
         sampled = sample_foveal_ink(
             writer,
             first_condition,
+            first_plan,
             steps=args.sample_steps,
             generator=generator,
         )
@@ -387,11 +425,12 @@ def main() -> None:
                 group["lr"] = learning_rate
             optimizer.zero_grad(set_to_none=True)
             with autocast_context(device, args.precision):
-                loss, metrics, _, _ = loss_for_batch(
+                loss, metrics, _, _, _ = loss_for_batch(
                     foundation,
                     writer,
                     batch,
                     device=device,
+                    render_config=retinal_render,
                     args=args,
                     generator=generator,
                 )
@@ -430,6 +469,7 @@ def main() -> None:
                     writer,
                     validation_loader,
                     device=device,
+                    render_config=retinal_render,
                     args=args,
                     step=global_step,
                     sample_root=output / "samples",
