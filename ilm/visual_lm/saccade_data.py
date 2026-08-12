@@ -159,6 +159,7 @@ class VisualSaccadeDataset(Dataset):
         }
         if self.expose_evaluation_labels:
             metadata["target_character"] = segment[-1]
+            metadata["previous_character"] = segment[-2]
         return {
             "context": first[:-1],
             "target_ink": first[1:],
