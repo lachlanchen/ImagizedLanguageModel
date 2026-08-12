@@ -14,6 +14,7 @@ from .ink_writer import (
     FovealWriterConfig,
     flow_training_state,
     foveal_flow_loss,
+    integrate_foveal_ink,
     sample_foveal_ink,
 )
 from .saccade_lm import FovealRetina, VisualSaccadeConfig
@@ -339,6 +340,23 @@ def _visual_positive_mask(
     return mask, similarity
 
 
+def visual_context_advantage_loss(
+    full_nce_rows: torch.Tensor,
+    last_nce_rows: torch.Tensor,
+    *,
+    margin: float,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Require full visual history to improve normalized target likelihood."""
+
+    if full_nce_rows.ndim != 1 or full_nce_rows.shape != last_nce_rows.shape:
+        raise ValueError("full and last visual NCE rows must be matching vectors")
+    if margin < 0.0:
+        raise ValueError("visual context margin must be non-negative")
+    log_probability_gain = last_nce_rows.detach() - full_nce_rows
+    loss = F.relu(margin - log_probability_gain).mean()
+    return loss, log_probability_gain
+
+
 def visual_rollout_losses(
     model: RetinalFlowLanguageModel,
     outputs: dict[str, torch.Tensor],
@@ -535,6 +553,102 @@ def visual_rollout_losses(
     )
 
 
+def sampled_endpoint_identity_loss(
+    model: RetinalFlowLanguageModel,
+    condition: torch.Tensor,
+    current_fovea: torch.Tensor,
+    target_fovea: torch.Tensor,
+    target_visual: torch.Tensor,
+    target_source_visual: torch.Tensor,
+    *,
+    batch_size: int,
+    steps: int,
+    guidance_scale: float,
+    duplicate_similarity: float,
+    generator: torch.Generator | None = None,
+) -> tuple[torch.Tensor, dict[str, torch.Tensor], dict[str, torch.Tensor]]:
+    """Align images from the deployed flow integrator with real target views."""
+
+    if condition.ndim != 2:
+        raise ValueError("sampled identity condition must have shape [batch, dimension]")
+    batch = condition.shape[0]
+    expected_fovea = (batch, 1, model.config.fovea_size, model.config.fovea_size)
+    if tuple(current_fovea.shape) != expected_fovea:
+        raise ValueError(f"sampled identity foveas must have shape {expected_fovea}")
+    if tuple(target_fovea.shape) != expected_fovea:
+        raise ValueError(f"sampled identity targets must have shape {expected_fovea}")
+    if target_visual.shape != target_source_visual.shape:
+        raise ValueError("sampled identity target views must have matching shapes")
+    if target_visual.shape != (batch, model.config.visual_dim):
+        raise ValueError("sampled identity target views have the wrong visual shape")
+    if batch_size < 1:
+        zero = condition.sum() * 0.0
+        return (
+            zero,
+            {
+                "sampled_identity_active": zero.detach(),
+                "sampled_identity_examples": zero.detach(),
+                "sampled_identity_steps": zero.detach(),
+                "sampled_identity_nce": zero.detach(),
+                "sampled_identity_top1": zero.detach(),
+                "sampled_identity_target_cosine": zero.detach(),
+                "sampled_identity_ink_fraction": zero.detach(),
+                "sampled_identity_pixel_f1": zero.detach(),
+            },
+            {},
+        )
+    if steps < 1:
+        raise ValueError("sampled identity flow steps must be positive")
+
+    count = min(batch, batch_size)
+    subset = torch.randperm(batch, device=condition.device, generator=generator)[:count]
+    sampled_state = integrate_foveal_ink(
+        model.writer,
+        condition[subset],
+        current_fovea[subset] * 2.0 - 1.0,
+        steps=steps,
+        guidance_scale=guidance_scale,
+        generator=generator,
+    )
+    sampled_ink = ((sampled_state + 1.0) * 0.5).clamp(0, 1)
+    sampled_visual = model.target_retina(sampled_ink).float()
+
+    candidates = torch.cat((target_visual.detach(), target_source_visual.detach()), dim=0)
+    normalized_target = F.normalize(target_visual[subset].float().detach(), dim=-1)
+    normalized_candidates = F.normalize(candidates.float(), dim=-1)
+    positive = normalized_target @ normalized_candidates.transpose(0, 1) >= duplicate_similarity
+    rows = torch.arange(count, device=condition.device)
+    positive[rows, subset] = True
+    positive[rows, batch + subset] = True
+    normalized_sampled = F.normalize(sampled_visual, dim=-1)
+    logits = model.retina_scale.detach() * normalized_sampled @ normalized_candidates.transpose(0, 1)
+    identity, retrieval = _multi_positive_nce(logits, positive)
+
+    target_cosine = (normalized_sampled * normalized_target).sum(dim=-1).mean()
+    sampled_binary = sampled_ink >= 0.5
+    target_binary = target_fovea[subset] >= 0.5
+    true_positive = (sampled_binary & target_binary).sum(dim=(1, 2, 3)).float()
+    pixel_f1 = 2.0 * true_positive / (
+        sampled_binary.sum(dim=(1, 2, 3)) + target_binary.sum(dim=(1, 2, 3))
+    ).clamp_min(1)
+    metrics = {
+        "sampled_identity_active": identity.new_tensor(1.0).detach(),
+        "sampled_identity_examples": identity.new_tensor(float(count)).detach(),
+        "sampled_identity_steps": identity.new_tensor(float(steps)).detach(),
+        "sampled_identity_nce": identity.detach(),
+        "sampled_identity_top1": retrieval.detach(),
+        "sampled_identity_target_cosine": target_cosine.detach(),
+        "sampled_identity_ink_fraction": sampled_ink.mean().detach(),
+        "sampled_identity_pixel_f1": pixel_f1.mean().detach(),
+    }
+    trace = {
+        "subset": subset,
+        "generated": sampled_ink,
+        "sampled_binary": sampled_binary,
+    }
+    return identity, metrics, trace
+
+
 def retinal_flow_loss(
     model: RetinalFlowLanguageModel,
     outputs: dict[str, torch.Tensor],
@@ -550,6 +664,13 @@ def retinal_flow_loss(
     retina_variance_weight: float = 0.10,
     candidate_invariance_weight: float = 0.10,
     writer_cycle_weight: float = 0.35,
+    context_advantage_weight: float = 0.25,
+    context_advantage_margin: float = 0.25,
+    sampled_identity_weight: float = 0.30,
+    sampled_identity_batch_size: int = 8,
+    sampled_identity_steps: int = 2,
+    sampled_identity_guidance_scale: float = 1.5,
+    context_identity_weight_scale: float = 1.0,
     rollout_batch_size: int = 0,
     rollout_steps: int = 2,
     rollout_candidates: int = 2,
@@ -576,6 +697,7 @@ def retinal_flow_loss(
     ).argsort(dim=1)[:, :energy_positions_per_sequence]
     energy_batches = batch_indices[:, None].expand_as(random_order)
     energy_condition = outputs["condition"][energy_batches, random_order].flatten(0, 1)
+    energy_current_visual = outputs["current_visual"][energy_batches, random_order].flatten(0, 1)
     energy_target_visual = (
         outputs["target_visual"][energy_batches, random_order].float().detach().flatten(0, 1)
     )
@@ -591,7 +713,29 @@ def retinal_flow_loss(
     visual_positive[query_indices, query_indices] = True
     visual_positive[query_indices, energy_condition.shape[0] + query_indices] = True
     energy_logits = model.energy(energy_condition, energy_candidates)
-    energy, energy_retrieval = _multi_positive_nce(energy_logits, visual_positive)
+    energy_rows = _multi_positive_nce_rows(energy_logits, visual_positive)
+    energy = energy_rows.mean()
+    energy_retrieval = visual_positive.gather(
+        1,
+        energy_logits.argmax(dim=1, keepdim=True),
+    ).float().mean()
+    with torch.no_grad():
+        last_state, _ = model.dynamics(energy_current_visual.detach()[:, None])
+        last_condition = torch.cat(
+            (last_state[:, 0], energy_current_visual.detach()),
+            dim=-1,
+        )
+        last_energy_logits = model.energy(last_condition, energy_candidates.detach())
+        last_energy_rows = _multi_positive_nce_rows(last_energy_logits, visual_positive)
+        last_energy_retrieval = visual_positive.gather(
+            1,
+            last_energy_logits.argmax(dim=1, keepdim=True),
+        ).float().mean()
+    context_advantage, context_log_probability_gain = visual_context_advantage_loss(
+        energy_rows,
+        last_energy_rows,
+        margin=context_advantage_margin,
+    )
     projected_reference = F.normalize(model.energy.candidate(energy_target_visual), dim=-1)
     projected_source = F.normalize(model.energy.candidate(source_target_visual), dim=-1)
     candidate_invariance = (
@@ -606,6 +750,8 @@ def retinal_flow_loss(
     current_reference = outputs["current_reference_visual"][batch_indices, positions].float()
     current_fovea = context_foveas[batch_indices, positions].float()
     target_fovea = target_ink[batch_indices, positions].float().clamp(0, 1)
+    with torch.no_grad():
+        target_source_visual = model.target_retina(target_fovea).float()
 
     flow_target = target_fovea * 2.0 - 1.0
     high_noise_time = torch.rand(
@@ -675,6 +821,24 @@ def retinal_flow_loss(
     retina_std = torch.sqrt(retina_centered.var(dim=0, unbiased=False) + 1e-4)
     retina_variance = F.relu(0.75 - retina_std).mean()
 
+    sampled_identity, sampled_identity_metrics, sampled_identity_trace = (
+        sampled_endpoint_identity_loss(
+            model,
+            condition,
+            current_fovea,
+            target_fovea,
+            target_visual,
+            target_source_visual,
+            batch_size=(
+                sampled_identity_batch_size if context_identity_weight_scale > 0.0 else 0
+            ),
+            steps=sampled_identity_steps,
+            guidance_scale=sampled_identity_guidance_scale,
+            duplicate_similarity=duplicate_similarity,
+            generator=generator,
+        )
+    )
+
     rollout_losses, rollout_metrics, rollout_trace = visual_rollout_losses(
         model,
         outputs,
@@ -697,6 +861,10 @@ def retinal_flow_loss(
         + rollout_energy_weight * rollout_losses["energy"]
         + rollout_recovery_flow_weight * rollout_losses["recovery_flow"]
     )
+    context_identity_total = (
+        context_advantage_weight * context_advantage
+        + sampled_identity_weight * sampled_identity
+    )
 
     total = (
         flow_weight * flow
@@ -706,12 +874,25 @@ def retinal_flow_loss(
         + retina_variance_weight * retina_variance
         + candidate_invariance_weight * candidate_invariance
         + writer_cycle_weight * writer_cycle
+        + context_identity_weight_scale * context_identity_total
         + rollout_weight_scale * rollout_total
     )
     metrics = {
         **flow_metrics,
         "visual_energy_nce": energy.detach(),
         "visual_energy_top1": energy_retrieval.detach(),
+        "last_visual_energy_nce": last_energy_rows.mean().detach(),
+        "last_visual_energy_top1": last_energy_retrieval.detach(),
+        "context_log_probability_gain": context_log_probability_gain.mean().detach(),
+        "context_advantage_margin": energy.new_tensor(float(context_advantage_margin)).detach(),
+        "context_advantage_loss": context_advantage.detach(),
+        "context_advantage_satisfied_fraction": (
+            context_log_probability_gain >= context_advantage_margin
+        ).float().mean().detach(),
+        "context_identity_weight_scale": total.new_tensor(
+            float(context_identity_weight_scale)
+        ).detach(),
+        "context_identity_total": context_identity_total.detach(),
         "visual_positive_count": visual_positive.float().sum(dim=1).mean().detach(),
         "visual_energy_queries": energy.new_tensor(float(energy_condition.shape[0])),
         "visual_energy_candidates": energy.new_tensor(float(energy_candidates.shape[0])),
@@ -729,6 +910,7 @@ def retinal_flow_loss(
         "writer_cycle_nce": writer_cycle.detach(),
         "writer_cycle_top1": writer_cycle_top1.detach(),
         "writer_target_cosine": writer_target_cosine.detach(),
+        **sampled_identity_metrics,
         "rollout_weight_scale": total.new_tensor(float(rollout_weight_scale)).detach(),
         "rollout_total": rollout_total.detach(),
         **rollout_metrics,
@@ -740,6 +922,7 @@ def retinal_flow_loss(
         "current_fovea": current_fovea,
         "target_fovea": target_fovea,
         "target_visual": target_visual,
+        **{f"sampled_identity_{key}": value for key, value in sampled_identity_trace.items()},
         **{f"rollout_{key}": value for key, value in rollout_trace.items()},
     }
     return total, metrics, selected

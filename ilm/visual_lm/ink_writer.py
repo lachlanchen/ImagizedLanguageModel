@@ -210,8 +210,7 @@ def foveal_flow_loss(
     }
 
 
-@torch.no_grad()
-def sample_foveal_ink(
+def integrate_foveal_ink(
     model: FovealInkFlow,
     condition: torch.Tensor,
     ink_plan: torch.Tensor,
@@ -221,6 +220,8 @@ def sample_foveal_ink(
     generator: torch.Generator | None = None,
     initial_noise: torch.Tensor | None = None,
 ) -> torch.Tensor:
+    """Integrate the conditional flow while preserving autograd when enabled."""
+
     if steps < 1:
         raise ValueError("sampling steps must be positive")
     if ink_plan.shape != (
@@ -273,6 +274,28 @@ def sample_foveal_ink(
             second = velocity(proposal, next_time)
             state = state + delta * 0.5 * (first + second)
     return state.clamp(-1, 1)
+
+
+@torch.no_grad()
+def sample_foveal_ink(
+    model: FovealInkFlow,
+    condition: torch.Tensor,
+    ink_plan: torch.Tensor,
+    *,
+    steps: int = 8,
+    guidance_scale: float = 1.0,
+    generator: torch.Generator | None = None,
+    initial_noise: torch.Tensor | None = None,
+) -> torch.Tensor:
+    return integrate_foveal_ink(
+        model,
+        condition,
+        ink_plan,
+        steps=steps,
+        guidance_scale=guidance_scale,
+        generator=generator,
+        initial_noise=initial_noise,
+    )
 
 
 def foveal_writer_config_payload(config: FovealWriterConfig) -> dict[str, Any]:

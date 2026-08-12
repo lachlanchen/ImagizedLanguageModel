@@ -75,6 +75,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retina-variance-weight", type=float, default=0.10)
     parser.add_argument("--candidate-invariance-weight", type=float, default=0.10)
     parser.add_argument("--writer-cycle-weight", type=float, default=0.35)
+    parser.add_argument("--context-advantage-weight", type=float, default=0.25)
+    parser.add_argument("--context-advantage-margin", type=float, default=0.25)
+    parser.add_argument("--sampled-identity-weight", type=float, default=0.30)
+    parser.add_argument("--sampled-identity-batch-size", type=int, default=8)
+    parser.add_argument("--sampled-identity-steps", type=int, default=2)
+    parser.add_argument("--sampled-identity-guidance-scale", type=float, default=1.5)
+    parser.add_argument("--context-identity-start-step", type=int, default=800)
+    parser.add_argument("--context-identity-ramp-steps", type=int, default=400)
     parser.add_argument("--rollout-batch-size", type=int, default=8)
     parser.add_argument("--rollout-steps", type=int, default=2)
     parser.add_argument("--rollout-candidates", type=int, default=2)
@@ -217,6 +225,7 @@ def loss_for_batch(
     args: argparse.Namespace,
     generator: torch.Generator | None,
     rollout_scale: float,
+    context_identity_scale: float,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor], dict[str, torch.Tensor], torch.Tensor, torch.Tensor]:
     context = batch["context"].to(device, non_blocking=True)
     target_ink = batch["target_ink"].to(device, non_blocking=True)
@@ -237,6 +246,13 @@ def loss_for_batch(
         retina_variance_weight=args.retina_variance_weight,
         candidate_invariance_weight=args.candidate_invariance_weight,
         writer_cycle_weight=args.writer_cycle_weight,
+        context_advantage_weight=args.context_advantage_weight,
+        context_advantage_margin=args.context_advantage_margin,
+        sampled_identity_weight=args.sampled_identity_weight,
+        sampled_identity_batch_size=args.sampled_identity_batch_size,
+        sampled_identity_steps=args.sampled_identity_steps,
+        sampled_identity_guidance_scale=args.sampled_identity_guidance_scale,
+        context_identity_weight_scale=context_identity_scale,
         rollout_batch_size=args.rollout_batch_size,
         rollout_steps=args.rollout_steps,
         rollout_candidates=args.rollout_candidates,
@@ -316,6 +332,11 @@ def validate(
                     step,
                     start=args.rollout_start_step,
                     ramp=args.rollout_ramp_steps,
+                ),
+                context_identity_scale=rollout_weight_scale(
+                    step,
+                    start=args.context_identity_start_step,
+                    ramp=args.context_identity_ramp_steps,
                 ),
             )
             target_visual = outputs["target_visual"][:, -1]
@@ -524,6 +545,16 @@ def main() -> None:
             "start_step": args.rollout_start_step,
             "ramp_steps": args.rollout_ramp_steps,
         },
+        "context_and_sampled_identity": {
+            "context_advantage_weight": args.context_advantage_weight,
+            "context_advantage_margin": args.context_advantage_margin,
+            "sampled_identity_weight": args.sampled_identity_weight,
+            "sampled_identity_batch_size": args.sampled_identity_batch_size,
+            "sampled_identity_steps": args.sampled_identity_steps,
+            "sampled_identity_guidance_scale": args.sampled_identity_guidance_scale,
+            "start_step": args.context_identity_start_step,
+            "ramp_steps": args.context_identity_ramp_steps,
+        },
         "retinal_fonts": list(RETINAL_CJK_AVAILABLE_FONTS),
         "initialization": initialization,
         "planned_steps": planned_steps,
@@ -566,6 +597,11 @@ def main() -> None:
                 start=args.rollout_start_step,
                 ramp=args.rollout_ramp_steps,
             )
+            current_context_identity_scale = rollout_weight_scale(
+                global_step,
+                start=args.context_identity_start_step,
+                ramp=args.context_identity_ramp_steps,
+            )
             learning_rate = scheduled_lr(
                 max(1, global_step - args.lr_cycle_start_step),
                 base=args.lr,
@@ -584,6 +620,7 @@ def main() -> None:
                     args=args,
                     generator=generator,
                     rollout_scale=current_rollout_scale,
+                    context_identity_scale=current_context_identity_scale,
                 )
             scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
@@ -607,6 +644,7 @@ def main() -> None:
                     "ema_momentum": momentum,
                     "gradient_norm": float(gradient_norm),
                     "rollout_scale": current_rollout_scale,
+                    "context_identity_scale": current_context_identity_scale,
                     "examples_per_second": running_examples / max(1e-6, now - interval_started),
                     **{
                         key: value / max(1, running_examples)

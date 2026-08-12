@@ -318,6 +318,14 @@ def evaluate_branch(
         full_metrics = rank_metrics(full_scores, expected)
         last_metrics = rank_metrics(last_scores, expected)
         oracle_metrics = rank_metrics(oracle_scores, expected)
+        full_target_log_probability = full_scores.log_softmax(dim=-1).gather(
+            1,
+            expected[:, None],
+        )[:, 0]
+        last_target_log_probability = last_scores.log_softmax(dim=-1).gather(
+            1,
+            expected[:, None],
+        )[:, 0]
         for key, values in full_metrics.items():
             sums[f"full_{key}"] += float(values.sum())
         for key, values in last_metrics.items():
@@ -326,6 +334,11 @@ def evaluate_branch(
             sums[f"oracle_{key}"] += float(values.sum())
         sums["context_target_score_gain"] += float(
             (full_metrics["target_score"] - last_metrics["target_score"]).sum()
+        )
+        sums["full_target_log_probability"] += float(full_target_log_probability.sum())
+        sums["last_target_log_probability"] += float(last_target_log_probability.sum())
+        sums["context_target_log_probability_gain"] += float(
+            (full_target_log_probability - last_target_log_probability).sum()
         )
         most_frequent = bank_characters[0]
         sums["unigram_top1"] += sum(
@@ -443,6 +456,9 @@ def evaluate_branch(
             report.setdefault(f"{prefix}_{metric}", 0.0)
     for metric in (
         "context_target_score_gain",
+        "full_target_log_probability",
+        "last_target_log_probability",
+        "context_target_log_probability_gain",
         "unigram_top1",
         "bigram_top1",
         "generated_sample_hit",
