@@ -55,6 +55,12 @@ from scripts.train_visual_state_actuator import (
 
 ARCHITECTURE = "visual-binding-stream-v1"
 PROTOCOL_DOCUMENT = "references/visual_binding_stream_v22_protocol.md"
+SOURCE_FILES = (
+    "ilm/visual_lm/visual_binding_data.py",
+    "ilm/visual_lm/visual_binding_stream.py",
+    "scripts/eval_visual_binding_stream_development.py",
+    "scripts/train_visual_binding_stream.py",
+)
 EXPECTED_PVF_SHA256 = (
     "90791001203640f0de66316cf2e30b3e2c588480fef0e3d9d4f6283ba043ecbe"
 )
@@ -631,6 +637,10 @@ def _protocol_payload(
         "architecture": ARCHITECTURE,
         "protocol_document": PROTOCOL_DOCUMENT,
         "protocol_sha256": file_sha256(PROTOCOL_DOCUMENT),
+        "source_files_sha256": {
+            path: file_sha256(path)
+            for path in SOURCE_FILES
+        },
         "route_mode": args.route_mode,
         "fixed_model_arguments": FIXED_MODEL_ARGUMENTS,
         "fixed_loss_arguments": FIXED_LOSS_ARGUMENTS,

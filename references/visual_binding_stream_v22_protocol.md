@@ -216,9 +216,11 @@ afterward.
 The matched control replaces only the final query-label retinal state with a
 learned continuous null state before the same Transformer. Every module,
 parameter, operation, optimizer setting, batch, target, schedule, and update
-count remains identical. The null parameter exists in both arms. The control
-therefore sees both labeled glyph bindings and the operation but cannot know
-which query label was shown.
+count remains identical. The null global and field parameters exist in both
+arms and are initialized from the fixed training seed with a zero-mean Gaussian
+of standard deviation `0.02`; nonzero initialization avoids the singular
+gradient of normalizing the origin. The control therefore sees both labeled
+glyph bindings and the operation but cannot know which query label was shown.
 
 ## Training Objective
 

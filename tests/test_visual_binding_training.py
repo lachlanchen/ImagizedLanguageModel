@@ -26,6 +26,7 @@ from scripts.train_visual_binding_stream import (
     FIXED_MODEL_ARGUMENTS,
     FIXED_OPTIMIZATION_ARGUMENTS,
     PROTOCOL_DOCUMENT,
+    SOURCE_FILES,
     _parameter_shapes,
     candidate_selection_gate_report,
     control_selection_gate_report,
@@ -171,6 +172,10 @@ def checkpoint_metadata(
         "partition": dict(EXPECTED_PARTITION),
         "protocol": {
             "protocol_sha256": file_sha256(PROTOCOL_DOCUMENT),
+            "source_files_sha256": {
+                path: file_sha256(path)
+                for path in SOURCE_FILES
+            },
             "fixed_model_arguments": FIXED_MODEL_ARGUMENTS,
             "fixed_loss_arguments": FIXED_LOSS_ARGUMENTS,
             "fixed_optimization_arguments": FIXED_OPTIMIZATION_ARGUMENTS,

@@ -40,6 +40,7 @@ from scripts.train_visual_binding_stream import (
     FIXED_MODEL_ARGUMENTS,
     FIXED_OPTIMIZATION_ARGUMENTS,
     PROTOCOL_DOCUMENT,
+    SOURCE_FILES,
     _development_bank_images,
     _parameter_shapes,
     _trainable_parameters,
@@ -123,6 +124,11 @@ def _validate_arm(
         PROTOCOL_DOCUMENT
     ):
         raise ValueError(f"{name} protocol document hash differs")
+    current_source_hashes = {path: file_sha256(path) for path in SOURCE_FILES}
+    if checkpoint.get("protocol", {}).get("source_files_sha256") != (
+        current_source_hashes
+    ):
+        raise ValueError(f"{name} V22 source file hashes differ")
     fixed_groups = (
         ("fixed_model_arguments", FIXED_MODEL_ARGUMENTS),
         ("fixed_loss_arguments", FIXED_LOSS_ARGUMENTS),
