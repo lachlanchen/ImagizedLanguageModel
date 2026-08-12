@@ -54,8 +54,8 @@ def test_training_statistics_define_host_only_visual_controls() -> None:
     )
     assert statistics.characters[:4] == ("地", "天", "玄", "黄")
     assert len(statistics.counts) == 8
-    assert sum(statistics.bigram_rows["天"]) > 0
-    assert len(statistics.bigram_rows["天"]) == 8
+    assert sum(count for _, count in statistics.bigram_rows["天"]) > 0
+    assert all(0 <= index < 8 for index, _ in statistics.bigram_rows["天"])
 
 
 def test_development_windows_are_deterministic_and_never_use_frozen_records() -> None:
@@ -93,7 +93,7 @@ def test_audit_dataset_keeps_labels_outside_image_model_inputs() -> None:
     statistics = VisualCharacterStatistics(
         characters=("天", "地"),
         counts=(9, 7),
-        bigram_rows={"天": (0, 7), "地": (9, 0)},
+        bigram_rows={"天": ((1, 7),), "地": ((0, 9),)},
         visible_character_count=16,
         han_character_count=16,
     )

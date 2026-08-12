@@ -37,7 +37,7 @@ def is_han_character(character: str) -> bool:
 class VisualCharacterStatistics:
     characters: tuple[str, ...]
     counts: tuple[int, ...]
-    bigram_rows: dict[str, tuple[int, ...]]
+    bigram_rows: dict[str, tuple[tuple[int, int], ...]]
     visible_character_count: int
     han_character_count: int
 
@@ -47,8 +47,12 @@ class VisualCharacterStatistics:
         if len(set(self.characters)) != len(self.characters):
             raise ValueError("visual character bank must contain unique forms")
         width = len(self.characters)
-        if any(len(row) != width for row in self.bigram_rows.values()):
-            raise ValueError("bigram rows must align with the visual bank")
+        for row in self.bigram_rows.values():
+            indices = [index for index, count in row]
+            if any(index < 0 or index >= width for index in indices):
+                raise ValueError("bigram row index is outside the visual bank")
+            if len(set(indices)) != len(indices) or any(count < 1 for _, count in row):
+                raise ValueError("bigram rows must be sparse positive counts")
 
     @property
     def index(self) -> dict[str, int]:
@@ -81,7 +85,7 @@ def build_visual_character_statistics(
             f"training corpus contains only {len(characters)} supported Han forms"
         )
     index = {character: position for position, character in enumerate(characters)}
-    bigrams: dict[str, list[int]] = defaultdict(lambda: [0] * len(characters))
+    bigrams: dict[str, Counter[int]] = defaultdict(Counter)
     for _, _, writing in iter_split_writing(
         records,
         split="train",
@@ -94,7 +98,9 @@ def build_visual_character_statistics(
     return VisualCharacterStatistics(
         characters=characters,
         counts=tuple(counts[character] for character in characters),
-        bigram_rows={key: tuple(value) for key, value in sorted(bigrams.items())},
+        bigram_rows={
+            key: tuple(sorted(value.items())) for key, value in sorted(bigrams.items())
+        },
         visible_character_count=visible_count,
         han_character_count=sum(counts.values()),
     )
