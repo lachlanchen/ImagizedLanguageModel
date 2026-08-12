@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import random
 from dataclasses import dataclass, replace
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -22,6 +23,7 @@ FOLIO_FONT_PATHS = (
     "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
     "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
 )
+FOLIO_AVAILABLE_FONTS = tuple(path for path in FOLIO_FONT_PATHS if Path(path).exists())
 
 
 @dataclass(frozen=True)
@@ -43,11 +45,16 @@ def stable_fraction(identifier: str) -> float:
     return int.from_bytes(digest[:8], "big") / float(2**64 - 1)
 
 
+@lru_cache(maxsize=128)
+def _load_font(path: str, size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(path, size=size)
+
+
 def _font(variant: int, size: int) -> ImageFont.FreeTypeFont:
-    available = [path for path in FOLIO_FONT_PATHS if Path(path).exists()]
-    if not available:
+    if not FOLIO_AVAILABLE_FONTS:
         return ImageFont.load_default()
-    return ImageFont.truetype(available[variant % len(available)], size=size)
+    path = FOLIO_AVAILABLE_FONTS[variant % len(FOLIO_AVAILABLE_FONTS)]
+    return _load_font(path, size)
 
 
 def _lines(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont, width: int) -> list[str]:
@@ -56,16 +63,20 @@ def _lines(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.FreeTypeFont, w
         if not paragraph:
             output.append("")
             continue
-        current = ""
+        current: list[str] = []
+        current_width = 0.0
         for character in paragraph:
-            candidate = current + character
-            if current and draw.textlength(candidate, font=font) > width:
-                output.append(current.rstrip())
-                current = character.lstrip() if character.isspace() else character
+            advance = font.getlength(character)
+            if current and current_width + advance > width:
+                output.append("".join(current).rstrip())
+                first = character.lstrip() if character.isspace() else character
+                current = list(first)
+                current_width = font.getlength(first) if first else 0.0
             else:
-                current = candidate
+                current.append(character)
+                current_width += advance
         if current:
-            output.append(current.rstrip())
+            output.append("".join(current).rstrip())
     return output
 
 

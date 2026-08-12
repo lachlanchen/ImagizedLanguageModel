@@ -11,6 +11,7 @@ from typing import Any, Sequence
 
 import torch
 import torch.nn.functional as F
+from torch.utils.data import DataLoader, Dataset
 
 from ilm.visual_lm.folio import FolioRetina, folio_config_from_payload
 from ilm.visual_lm.folio_data import (
@@ -40,6 +41,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--key-views", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=32)
+    parser.add_argument("--num-workers", type=int, default=8)
     parser.add_argument("--validation-fraction", type=float, default=None)
     parser.add_argument("--glyph-root", default=None)
     parser.add_argument("--teacher-manifest", default="data/teacher/historical_qwen8b_v2.jsonl")
@@ -172,6 +174,57 @@ def write_instruction_entry(
     return entry, [evaluation]
 
 
+class InstructionMemoryRenderDataset(Dataset):
+    def __init__(
+        self,
+        pairs: Sequence[dict[str, Any]],
+        *,
+        root: Path,
+        render_config: FolioRenderConfig,
+        validation_fraction: float,
+        key_views: int,
+    ):
+        self.pairs = list(pairs)
+        self.root = root
+        self.render_config = render_config
+        self.validation_fraction = float(validation_fraction)
+        self.key_views = int(key_views)
+
+    def __len__(self) -> int:
+        return len(self.pairs)
+
+    def __getitem__(self, index: int) -> dict[str, Any]:
+        pair = self.pairs[index]
+        entry, _ = write_instruction_entry(
+            pair,
+            entry_index=index,
+            root=self.root,
+            render_config=self.render_config,
+            validation_fraction=self.validation_fraction,
+        )
+        seed = stable_seed(pair["identifier"])
+        keys = torch.stack(
+            [
+                render_folio(
+                    pair["prompt"],
+                    config=self.render_config,
+                    variant=seed + view * 10_007,
+                    augment=True,
+                )
+                for view in range(self.key_views)
+            ]
+        )
+        return {"entry_index": index, "entry": entry, "key_images": keys}
+
+
+def instruction_memory_collate(batch: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "entry_indices": torch.tensor([item["entry_index"] for item in batch], dtype=torch.long),
+        "entries": [item["entry"] for item in batch],
+        "key_images": torch.stack([item["key_images"] for item in batch]),
+    }
+
+
 def historical_entries(
     args: argparse.Namespace,
     *,
@@ -255,34 +308,35 @@ def main() -> None:
     entry_indices: list[int] = []
     started = time.perf_counter()
 
-    for batch_start in range(0, len(pairs), args.batch_size):
-        batch_pairs = pairs[batch_start : batch_start + args.batch_size]
-        images: list[torch.Tensor] = []
-        image_entries: list[int] = []
-        for pair in batch_pairs:
-            entry_index = len(entries)
-            entry, _ = write_instruction_entry(
-                pair,
-                entry_index=entry_index,
-                root=root,
-                render_config=render_config,
-                validation_fraction=validation_fraction,
-            )
-            entries.append(entry)
-            seed = stable_seed(pair["identifier"])
-            for view in range(args.key_views):
-                images.append(
-                    render_folio(
-                        pair["prompt"],
-                        config=render_config,
-                        variant=seed + view * 10_007,
-                        augment=True,
-                    )
-                )
-                image_entries.append(entry_index)
-        encoded = encode_images(model, images, batch_size=args.batch_size, device=device)
+    render_dataset = InstructionMemoryRenderDataset(
+        pairs,
+        root=root,
+        render_config=render_config,
+        validation_fraction=validation_fraction,
+        key_views=args.key_views,
+    )
+    render_loader = DataLoader(
+        render_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        pin_memory=device.type == "cuda",
+        persistent_workers=args.num_workers > 0,
+        collate_fn=instruction_memory_collate,
+    )
+    for batch in render_loader:
+        expected_indices = list(range(len(entries), len(entries) + len(batch["entries"])))
+        if batch["entry_indices"].tolist() != expected_indices:
+            raise RuntimeError("parallel renderer changed deterministic entry order")
+        entries.extend(batch["entries"])
+        image_tensor = batch["key_images"].flatten(0, 1)
+        encoded_parts = []
+        with torch.inference_mode():
+            for offset in range(0, image_tensor.shape[0], args.batch_size):
+                encoded_parts.append(model(image_tensor[offset : offset + args.batch_size].to(device)).cpu())
+        encoded = torch.cat(encoded_parts, dim=0)
         keys.extend(encoded.unbind(dim=0))
-        entry_indices.extend(image_entries)
+        entry_indices.extend(batch["entry_indices"].repeat_interleave(args.key_views).tolist())
         print(
             json.dumps(
                 {
