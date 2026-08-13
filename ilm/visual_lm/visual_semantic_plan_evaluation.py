@@ -97,12 +97,15 @@ def nearest_length_counterfactual_pairs(
     targets: torch.Tensor,
     *,
     maximum_target_cosine: float = 0.98,
+    labels: Sequence[str] | None = None,
 ) -> tuple[CounterfactualPair, ...]:
     if target_lengths.ndim != 1 or len(target_lengths) < 2:
         raise ValueError("V36 counterfactual lengths must be [N] with N >= 2")
     normalized = _validate_plan_matrix("counterfactual targets", targets)
     if len(normalized) != len(target_lengths):
         raise ValueError("V36 counterfactual targets and lengths do not align")
+    if labels is not None and len(labels) != len(target_lengths):
+        raise ValueError("V36 counterfactual labels and lengths do not align")
     remaining = set(range(len(target_lengths)))
     pairs: list[CounterfactualPair] = []
     while len(remaining) >= 2:
@@ -115,13 +118,20 @@ def nearest_length_counterfactual_pairs(
                 index,
             ),
         )
+        distinct = (
+            candidates
+            if labels is None
+            else [index for index in candidates if labels[index] != labels[first]]
+        )
+        if not distinct:
+            raise ValueError("V36 cannot form a different-answer counterfactual pair")
         second = next(
             (
                 index
-                for index in candidates
+                for index in distinct
                 if float(normalized[first] @ normalized[index]) < maximum_target_cosine
             ),
-            candidates[0],
+            distinct[0],
         )
         remaining.remove(second)
         pairs.append(CounterfactualPair(first=first, second=second))
@@ -223,7 +233,13 @@ def v36_semantic_plan_gate(report: Mapping[str, Any]) -> dict[str, Any]:
     untrained_top1 = float(baselines["untrained_head"]["top1"])
 
     gates = {
-        "finite_report": _finite_tree(report),
+        "finite_report": (
+            _finite_tree(report)
+            and bool(report.get("finite", False))
+            and bool(integrity.get("finite_checkpoint", False))
+            and bool(integrity.get("finite_target_bank", False))
+            and bool(training.get("finite", False))
+        ),
         "source_hashes": bool(integrity["source_hashes"]),
         "external_hashes": bool(integrity["external_hashes"]),
         "data_hashes": bool(integrity["data_hashes"]),

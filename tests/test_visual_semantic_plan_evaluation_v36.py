@@ -46,6 +46,18 @@ def test_v36_counterfactual_assignment_uses_nearest_lengths() -> None:
     assert result["assignment_margin"] > 0.0
 
 
+def test_v36_counterfactual_pairing_excludes_same_answers() -> None:
+    targets = torch.eye(4)
+    lengths = torch.tensor([2.0, 2.0, 3.0, 3.0])
+    labels = ("same", "same", "first", "second")
+    pairs = nearest_length_counterfactual_pairs(
+        lengths,
+        targets,
+        labels=labels,
+    )
+    assert all(labels[pair.first] != labels[pair.second] for pair in pairs)
+
+
 def _passing_report() -> dict:
     return {
         "integrity": {
@@ -55,8 +67,10 @@ def _passing_report() -> dict:
             "strict_mapping": True,
             "boundary": True,
             "total_parameters": 93_000_000,
+            "finite_checkpoint": True,
+            "finite_target_bank": True,
         },
-        "training": {"global_update": 6_000},
+        "training": {"global_update": 6_000, "finite": True},
         "resources": {"peak_vram_bytes": 5 * 1024**3},
         "correct": {
             "top1": 0.20,
@@ -75,6 +89,7 @@ def _passing_report() -> dict:
         "font": {"prompt_plan_cosine": 0.90, "answer_teacher_cosine": 0.90},
         "paraphrase": {"top5": 0.30, "original_plan_cosine": 0.80},
         "baselines": {"untrained_head": {"top1": 0.02}},
+        "finite": True,
     }
 
 
@@ -86,3 +101,11 @@ def test_v36_gate_is_conjunctive() -> None:
     failed = v36_semantic_plan_gate(report)
     assert failed["decision"] == "not-qualified"
     assert failed["conditions"]["blank_drop"] is False
+
+
+def test_v36_gate_rejects_explicit_nonfinite_state() -> None:
+    report = _passing_report()
+    report["integrity"]["finite_target_bank"] = False
+    failed = v36_semantic_plan_gate(report)
+    assert failed["decision"] == "not-qualified"
+    assert failed["conditions"]["finite_report"] is False

@@ -55,7 +55,7 @@ from ilm.visual_lm.visual_semantic_raster_data import VisualRasterRecord
 EXPERIMENT = "visual-semantic-plan-v36"
 PROTOCOL_DOCUMENT = "references/visual_semantic_plan_v36_protocol.md"
 EXPECTED_PROTOCOL_SHA256 = (
-    "1ae7334063d84c28acafae6f7308ef4115ab4591e4668e335839ef584c30639c"
+    "7e637698af08803c4ef509c564160ea63e5a952398a1e50cd924ec888167d6fb"
 )
 DEFAULT_INSTRUCTION_MANIFEST = "data/raw/alpaca_zh.json"
 DEFAULT_TARGET_BANK = "artifacts/visual_semantic_plan_v36_targets/train.pt"

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import torch
@@ -15,11 +16,30 @@ from ilm.visual_lm.visual_semantic_plan_training import VisualSemanticPlanTarget
 from ilm.visual_lm.visual_semantic_raster_data import VisualRasterRecord
 from scripts.build_visual_semantic_plan_targets_v36 import (
     build_target_bank,
+    effective_arguments,
     v36_model_config,
 )
 
 
 FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
+
+
+def test_smoke_target_count_defaults_to_four_but_honors_explicit_limit() -> None:
+    base = {
+        "smoke": True,
+        "device": "cuda:0",
+        "precision": "bf16",
+        "batch_size": 32,
+        "num_workers": 4,
+        "maximum_records": 0,
+        "tiny_model": False,
+        "random_foundation": False,
+    }
+    assert effective_arguments(argparse.Namespace(**base)).maximum_records == 4
+    explicit = effective_arguments(
+        argparse.Namespace(**(base | {"maximum_records": 196}))
+    )
+    assert explicit.maximum_records == 196
 
 
 def test_tiny_target_builder_preserves_external_identifier_alignment() -> None:

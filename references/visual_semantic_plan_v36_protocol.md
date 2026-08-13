@@ -2,8 +2,31 @@
 
 Date frozen: 2026-08-14
 
-Status: preregistered before V36 implementation, smoke training, development
-measurement, or sealed evaluation
+Status: originally preregistered before V36 implementation, smoke training,
+development measurement, or sealed evaluation; one data-routing amendment was
+recorded after evaluator smoke and before any production target construction or
+evidence training
+
+## Pre-evidence amendment
+
+The fixed paraphrase manifest contains 31 rows, but its source identifiers do
+not all belong to the deterministic instruction development partition: 27 map
+to train, three to development, and one to sealed. This was discovered by the
+complete evaluator smoke. The earlier phrase "31 fixed development
+paraphrases" was therefore factually incorrect.
+
+V36 evaluates the 30 nonsealed rows as a separate fixed wording-shift
+diagnostic. The sealed-source row is excluded before its source prompt or answer
+is selected, rendered, embedded, or scored. The evaluator renders the 30
+original prompts, paraphrased prompts, and original answers in the development
+font. It first infers both prompt routes, then constructs a 30-answer visual
+candidate bank with the frozen teacher. It reports paraphrase top-5 retrieval
+against those 30 distinct original answers and paired original-paraphrase plan
+cosine. This diagnostic tests wording stability; because 27 source
+prompt-answer pairs occur in training, it is not evidence of unseen-answer
+generalization. The primary 196-record development evaluation remains the
+generalization test. No metric threshold, model, training route, primary split,
+or sealed rule changed.
 
 ## Decision question
 
@@ -250,8 +273,8 @@ Report the mean assignment rate and bootstrap 95 percent interval.
 
 ### Wording and font controls
 
-- evaluate the 31 fixed development paraphrases against their original answer
-  targets;
+- evaluate the 30 fixed nonsealed paraphrases against a separate bank of their
+  original answer-image targets;
 - compare original and paraphrase plan cosine;
 - rerender every development prompt in the held train font and compare plan
   cosine; and

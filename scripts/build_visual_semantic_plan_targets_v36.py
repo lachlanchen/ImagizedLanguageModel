@@ -39,7 +39,7 @@ from ilm.visual_lm.visual_semantic_plan_training import (
 EXPERIMENT = "visual-semantic-plan-target-bank-v36"
 PROTOCOL_DOCUMENT = "references/visual_semantic_plan_v36_protocol.md"
 EXPECTED_PROTOCOL_SHA256 = (
-    "1ae7334063d84c28acafae6f7308ef4115ab4591e4668e335839ef584c30639c"
+    "7e637698af08803c4ef509c564160ea63e5a952398a1e50cd924ec888167d6fb"
 )
 DEFAULT_INSTRUCTION_MANIFEST = "data/raw/alpaca_zh.json"
 EXPECTED_INSTRUCTION_SHA256 = (
@@ -94,7 +94,7 @@ def effective_arguments(args: argparse.Namespace) -> argparse.Namespace:
                 "precision": "fp32",
                 "batch_size": 2,
                 "num_workers": 0,
-                "maximum_records": 4,
+                "maximum_records": args.maximum_records or 4,
                 "tiny_model": True,
                 "random_foundation": True,
             }
