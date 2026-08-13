@@ -329,6 +329,7 @@ loss is permitted.
 | dataset seed | `20260921` |
 | pair seed | `20260922` |
 | candidate-bank seed | `20260923` |
+| development audit seed | `20260924` |
 | precision | BF16 |
 | hardware | one RTX 4090, CUDA device 0 |
 | peak allocated CUDA cap | 18 GiB |
