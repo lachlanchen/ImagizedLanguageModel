@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import re
+import shutil
 import subprocess
 import tempfile
 from contextlib import nullcontext
@@ -75,6 +78,44 @@ def _tesseract_text(image: Image.Image, *, language: str = "chi_sim") -> str:
     return normalize_visible_text(result.stdout)
 
 
+def tesseract_identity(language: str) -> dict[str, str]:
+    executable = shutil.which("tesseract")
+    if executable is None:
+        raise FileNotFoundError("V33 evaluator requires the tesseract executable")
+    version_result = subprocess.run(
+        [executable, "--version"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    list_result = subprocess.run(
+        [executable, "--list-langs"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    listing = f"{list_result.stdout}\n{list_result.stderr}"
+    match = re.search(r'List of available languages in "([^"]+)"', listing)
+    if match is None:
+        raise RuntimeError("V33 evaluator could not locate Tesseract traineddata")
+    traineddata = Path(match.group(1)) / f"{language}.traineddata"
+    if not traineddata.is_file():
+        raise FileNotFoundError(f"V33 evaluator lacks {traineddata}")
+    digest = hashlib.sha256()
+    with traineddata.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return {
+        "executable": executable,
+        "version": version_result.stdout.splitlines()[0],
+        "language": language,
+        "traineddata": str(traineddata.resolve()),
+        "traineddata_sha256": digest.hexdigest(),
+        "page_segmentation_mode": "7",
+        "scale": "2x-nearest",
+    }
+
+
 def _patches_to_image(patches: torch.Tensor, count: int) -> Image.Image:
     if patches.ndim != 4 or patches.shape[1] != 1:
         raise ValueError("V33 image patches must be [L,1,H,W]")
@@ -102,6 +143,7 @@ def save_calibration_gallery(
     path: str | Path,
     *,
     maximum_rows: int = 12,
+    title: str = "V33 Stage-A held-out visual calibration",
 ) -> None:
     selected = list(rows[:maximum_rows])
     if not selected:
@@ -114,7 +156,7 @@ def save_calibration_gallery(
     row_height = 92
     canvas = Image.new("RGB", (display_width, 36 + len(selected) * row_height), "white")
     draw = ImageDraw.Draw(canvas)
-    draw.text((8, 8), "V33 Stage-A held-out visual calibration", fill="black", font=font)
+    draw.text((8, 8), title, fill="black", font=font)
     for index, row in enumerate(selected):
         top = 36 + index * row_height
         draw.text((8, top + 5), f"target {index + 1}", fill="black", font=font)
@@ -136,7 +178,7 @@ def save_calibration_gallery(
 
 
 @torch.no_grad()
-def evaluate_visual_calibration(
+def _collect_visual_calibration(
     model: DirectVisualPatchLM,
     dataset: Dataset[dict[str, Any]],
     *,
@@ -146,6 +188,9 @@ def evaluate_visual_calibration(
     batch_size: int = 8,
     num_workers: int = 0,
     gallery_path: str | Path | None = None,
+    ocr_language: str = "chi_sim",
+    include_target_ocr: bool = False,
+    gallery_title: str = "V33 Stage-A held-out visual calibration",
 ) -> dict[str, Any]:
     if minimum_patches < 1 or batch_size < 1:
         raise ValueError("V33 calibration audit sizes must be positive")
@@ -162,6 +207,8 @@ def evaluate_visual_calibration(
     ink_f1_values: list[float] = []
     edge_f1_values: list[float] = []
     character_accuracies: list[float] = []
+    target_character_accuracies: list[float] = []
+    paired_ocr_agreements: list[float] = []
     blank_false_ink: list[float] = []
     rows: list[dict[str, Any]] = []
     patch_total = 0
@@ -200,20 +247,45 @@ def evaluate_visual_calibration(
                     predicted_white[index].float(), length
                 )
                 expected = str(batch["metadata"][index].get("text", ""))
-                observed = _tesseract_text(reconstruction_image)
+                observed = _tesseract_text(
+                    reconstruction_image,
+                    language=ocr_language,
+                )
                 accuracy = _ocr_character_accuracy(expected, observed)
                 character_accuracies.append(accuracy)
-                if len(rows) < 12:
-                    rows.append(
-                        {
-                            "identifier": batch["metadata"][index]["identifier"],
-                            "expected": expected,
-                            "observed": observed,
-                            "character_accuracy": accuracy,
-                            "target_image": target_image,
-                            "reconstruction_image": reconstruction_image,
-                        }
+                target_observed = ""
+                target_accuracy = 0.0
+                paired_agreement = 0.0
+                if include_target_ocr:
+                    target_observed = _tesseract_text(
+                        target_image,
+                        language=ocr_language,
                     )
+                    target_accuracy = _ocr_character_accuracy(expected, target_observed)
+                    paired_agreement = _ocr_character_accuracy(
+                        target_observed,
+                        observed,
+                    )
+                    target_character_accuracies.append(target_accuracy)
+                    paired_ocr_agreements.append(paired_agreement)
+                if len(rows) < 12:
+                    row = {
+                        "identifier": batch["metadata"][index]["identifier"],
+                        "expected": expected,
+                        "observed": observed,
+                        "character_accuracy": accuracy,
+                        "target_image": target_image,
+                        "reconstruction_image": reconstruction_image,
+                    }
+                    if include_target_ocr:
+                        row.update(
+                            {
+                                "target_observed": target_observed,
+                                "target_character_accuracy": target_accuracy,
+                                "paired_ocr_agreement": paired_agreement,
+                            }
+                        )
+                    rows.append(row)
                 patch_total += length
                 if patch_total >= minimum_patches:
                     break
@@ -226,7 +298,8 @@ def evaluate_visual_calibration(
             f"V33 calibration dataset supplied {patch_total} patches, need {minimum_patches}"
         )
     if gallery_path is not None:
-        save_calibration_gallery(rows, gallery_path)
+        save_calibration_gallery(rows, gallery_path, title=gallery_title)
+
     def mean(values: Sequence[float]) -> float:
         return float(sum(values) / len(values)) if values else 0.0
 
@@ -247,12 +320,96 @@ def evaluate_visual_calibration(
             for row in rows
         ],
     }
+    if include_target_ocr:
+        target_accuracy = mean(target_character_accuracies)
+        reconstruction_accuracy = report["ocr_character_accuracy"]
+        report.update(
+            {
+                "target_ocr_character_accuracy": target_accuracy,
+                "reconstruction_ocr_character_accuracy": reconstruction_accuracy,
+                "ocr_retention": (
+                    reconstruction_accuracy / target_accuracy
+                    if target_accuracy > 0.0
+                    else 0.0
+                ),
+                "paired_ocr_agreement": mean(paired_ocr_agreements),
+            }
+        )
+    return report
+
+
+def evaluate_visual_calibration(
+    model: DirectVisualPatchLM,
+    dataset: Dataset[dict[str, Any]],
+    *,
+    device: torch.device,
+    precision: str,
+    minimum_patches: int = 2_048,
+    batch_size: int = 8,
+    num_workers: int = 0,
+    gallery_path: str | Path | None = None,
+) -> dict[str, Any]:
+    report = _collect_visual_calibration(
+        model,
+        dataset,
+        device=device,
+        precision=precision,
+        minimum_patches=minimum_patches,
+        batch_size=batch_size,
+        num_workers=num_workers,
+        gallery_path=gallery_path,
+    )
     report["gates"] = {
         "finite": report["finite"],
         "ink_pixel_f1_at_least_0_90": report["ink_pixel_f1"] >= 0.90,
         "edge_f1_at_least_0_90": report["edge_f1"] >= 0.90,
         "ocr_character_accuracy_at_least_0_95": (
             report["ocr_character_accuracy"] >= 0.95
+        ),
+        "blank_false_ink_below_0_01": report["blank_patch_false_ink_rate"] < 0.01,
+    }
+    report["pass"] = all(report["gates"].values())
+    return report
+
+
+def evaluate_visual_calibration_v331(
+    model: DirectVisualPatchLM,
+    dataset: Dataset[dict[str, Any]],
+    *,
+    device: torch.device,
+    precision: str,
+    minimum_patches: int = 2_048,
+    batch_size: int = 8,
+    num_workers: int = 0,
+    gallery_path: str | Path | None = None,
+    ocr_language: str = "chi_tra",
+) -> dict[str, Any]:
+    identity = tesseract_identity(ocr_language)
+    report = _collect_visual_calibration(
+        model,
+        dataset,
+        device=device,
+        precision=precision,
+        minimum_patches=minimum_patches,
+        batch_size=batch_size,
+        num_workers=num_workers,
+        gallery_path=gallery_path,
+        ocr_language=ocr_language,
+        include_target_ocr=True,
+        gallery_title="V33.1 held-out direct-raster calibration",
+    )
+    report["ocr_evaluator"] = identity
+    report["pixel_threshold"] = 0.5
+    report["gates"] = {
+        "finite": report["finite"],
+        "ink_pixel_f1_at_least_0_90": report["ink_pixel_f1"] >= 0.90,
+        "edge_f1_at_least_0_90": report["edge_f1"] >= 0.90,
+        "target_ocr_accuracy_at_least_0_60": (
+            report["target_ocr_character_accuracy"] >= 0.60
+        ),
+        "ocr_retention_at_least_0_90": report["ocr_retention"] >= 0.90,
+        "paired_ocr_agreement_at_least_0_80": (
+            report["paired_ocr_agreement"] >= 0.80
         ),
         "blank_false_ink_below_0_01": report["blank_patch_false_ink_rate"] < 0.01,
     }

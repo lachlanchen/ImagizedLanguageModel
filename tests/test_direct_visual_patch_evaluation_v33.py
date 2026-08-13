@@ -5,9 +5,11 @@ from pathlib import Path
 import torch
 from torch.utils.data import Dataset
 
+from ilm.visual_lm import direct_visual_patch_evaluation as evaluation
 from ilm.visual_lm.direct_visual_patch_evaluation import (
     _edit_distance,
     evaluate_visual_calibration,
+    evaluate_visual_calibration_v331,
 )
 from ilm.visual_lm.direct_visual_patch_lm import (
     DirectVisualPatchConfig,
@@ -73,3 +75,33 @@ def test_calibration_audit_writes_gallery(tmp_path: Path) -> None:
     assert report["finite"] is True
     assert report["pass"] is True
     assert gallery.is_file()
+
+
+def test_v331_calibration_normalizes_ocr_against_target(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    model = tiny_model()
+    with torch.no_grad():
+        model.output_projection.weight.zero_()
+    monkeypatch.setattr(evaluation, "_tesseract_text", lambda image, language: "")
+    monkeypatch.setattr(
+        evaluation,
+        "tesseract_identity",
+        lambda language: {"language": language, "traineddata_sha256": "test"},
+    )
+    report = evaluate_visual_calibration_v331(
+        model,
+        BlankDataset(),
+        device=torch.device("cpu"),
+        precision="fp32",
+        minimum_patches=8,
+        batch_size=2,
+        gallery_path=tmp_path / "v331.png",
+    )
+    assert report["target_ocr_character_accuracy"] == 1.0
+    assert report["reconstruction_ocr_character_accuracy"] == 1.0
+    assert report["ocr_retention"] == 1.0
+    assert report["paired_ocr_agreement"] == 1.0
+    assert report["ocr_evaluator"]["language"] == "chi_tra"
+    assert report["pass"] is True
