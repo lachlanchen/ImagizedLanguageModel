@@ -77,6 +77,21 @@ Prerequisites are Python 3.10+, PyTorch with CUDA BF16 support, Transformers,
 Pillow, NumPy, the four recorded Noto CJK fonts, the V34 checkpoint, and the
 local PIXAR checkpoint.
 
+The evidence workstation used Python 3.10, PyTorch `2.11.0+cu130`, CUDA 13.0,
+Transformers 4.57.6, NumPy 2.2.6, and Pillow 10.4.0. Install a CUDA-compatible
+PyTorch build through the official PyTorch channel first, then install the
+remaining pinned packages:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-v35.txt
+```
+
+The evaluator additionally requires Tesseract 5 with `chi_sim` and `chi_tra`
+traineddata. Rendering requires Noto Sans CJK Regular/Medium and Noto Serif CJK
+Regular/Light at the paths recorded in the protocol.
+
 ```bash
 PYTHONPATH=. python scripts/train_causal_glyph_flow_v35.py \
   --device cuda:0 \
