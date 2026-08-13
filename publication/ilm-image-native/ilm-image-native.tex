@@ -54,8 +54,21 @@ glyph-like marks rather than correctly bound answers. The decision is
 \texttt{not-qualified}, and the sealed split remains unopened. Thus V35
 establishes a complete one-GPU raster-input/raster-output experimental runtime,
 not useful autonomous language, parity with text LLMs, or superior compute
-efficiency. The result localizes the next problem to answer-level semantic
-planning and prompt-to-output binding before local raster realization.
+efficiency.
+
+V36-P then isolates answer-level planning. Its 93.47M-parameter runtime maps
+only prompt pixels and a patch mask to five continuous plans and visual length;
+answer targets, candidates, text, OCR, and symbolic identifiers remain outside
+deployment. It completes 6,000 finite updates in 25.63 minutes with 1.541~GiB
+peak allocated memory. The fixed development gate nevertheless rejects it:
+EMA top-1/top-5 retrieval is 1.02/12.24\%, raw top-1 is 2.04\%, and only 13/23
+conditions pass. Counterfactual assignment reaches 78.57\%, but absolute
+retrieval, blank control, font and paraphrase transfer, and length fail. A
+post-result nonsealed audit finds that measuring occupancy after augmentation
+inflated mean train length to 37.31 patches versus 11.53 in development and
+left the train target space at effective rank 4.77/768. The sealed split stays
+closed and no renderer is opened. These results localize the next test to
+clean-mask, end-to-end visual semantic distillation before raster generation.
 \end{abstract}
 
 \begin{figure}[t]
@@ -65,7 +78,7 @@ planning and prompt-to-output binding before local raster realization.
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output; the latest measured result
-  is the rejected V35 experiment in Figure~\ref{fig:v35result}.}
+  is the rejected V36 experiment in Figure~\ref{fig:v36result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -160,6 +173,11 @@ and controls that makes a stronger image-native language claim falsifiable:
   rectified-flow writers, and a visible decode--threshold--re-encode recurrent
   boundary. It trains and runs on one RTX 4090 without a symbolic deployed
   path.
+  \item V36-P, a 93.47M-parameter candidate-free visual semantic planner that
+  maps prompt rasters to continuous answer plans. Its complete 6,000-update,
+  one-4090 run passes counterfactual assignment but fails the conjunctive
+  held-out semantic gate; the negative result exposes an occupancy-mask shift
+  and low-rank target geometry before writer compute is spent.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -2442,6 +2460,111 @@ language foundations may be used when they improve this test, provided their
 provenance, license, training role, and runtime absence or presence remain
 explicit.
 
+\subsection{Visual Semantic Plan V36-P: weak relation, failed semantic gate}
+
+\paragraph{Candidate-free deployed boundary.}
+V36-P tests the necessary semantic mechanism before attaching another writer.
+A Pixel-Linguist-v0-initialized visual reader receives a
+\(3\times16\times1024\) prompt strip and 64-position visual mask. Five
+learned queries cross-attend to its visual memory and emit one global plus four
+ordered 768-dimensional plans. A separate scalar head estimates visual answer
+length. The deployable method is
+\[
+(x,m)\longmapsto(z_0,z_1,z_2,z_3,z_4,\hat\ell),
+\qquad \lVert z_k\rVert_2=1.
+\]
+It contains no strings, token or Unicode IDs, OCR, glyph lookup, answer
+teacher, candidate bank, or visual codebook, and it does not yet generate a
+raster. Candidate retrieval is evaluator-only.
+
+During training, a frozen copy of Pixel-Linguist sees answer images and
+produces detached global and spatial targets. For normalized global predictions
+\(z_i\) and answer targets \(q_i\), V36 combines symmetric in-batch
+InfoNCE,
+\[
+\mathcal L_{\mathrm{NCE}}=-\frac{1}{2B}\sum_i\left[
+\log\frac{e^{z_i^\top q_i/\tau}}{\sum_j e^{z_i^\top q_j/\tau}}
++\log\frac{e^{q_i^\top z_i/\tau}}{\sum_j e^{q_i^\top z_j/\tau}}\right],
+\]
+with cosine regression, a hard-negative margin, active spatial-chunk alignment,
+two-view consistency, and visual-length Huber loss. The answer teacher is
+removed after detached target construction. Pixel-Linguist is external prior
+work \cite{pixelsentence}; its released checkpoint states no license, so the
+derived V36 weights remain local-research-only.
+
+The 93,473,281-parameter student completes 2,000 frozen-reader alignment
+updates and 4,000 final-two-block adaptation updates over 5,832 train pairs.
+The run consumes 512,000 rendered examples, takes 1,537.63 seconds, and peaks
+at 1,654,311,424 allocated bytes (1.541~GiB) on GPU~0 of one RTX 4090. All
+states, losses, gradients, targets, and reports are finite, and the checkpoint
+contains no target tensors or answer teacher.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+V36 development metric & EMA & Raw & Frozen EMA gate \\
+\midrule
+Top-1 retrieval & 1.02\% & 2.04\% & \(\geq 8\%\) \\
+Top-5 retrieval & 12.24\% & 11.22\% & \(\geq 25\%\) \\
+Mean reciprocal rank & 0.0783 & 0.0808 & \(\geq 0.15\) \\
+Correct--cyclic cosine margin & 0.0427 & 0.0418 & \(\geq 0.05\) \\
+Correct beats cyclic & 67.35\% & 65.82\% & \(\geq 70\%\) \\
+Counterfactual assignment & 78.57\% & 76.53\% & \(\geq 70\%\) \\
+Held-font plan cosine & 0.6265 & 0.6100 & \(\geq 0.85\) \\
+Paraphrase top-5 & 33.33\% & 33.33\% & \(\geq 20\%\) \\
+Original--paraphrase cosine & 0.6578 & 0.6473 & \(\geq 0.75\) \\
+Visual-length MAE & 36.16 & 36.53 & \(\leq 4\) \\
+\bottomrule
+\end{tabular}
+\caption{V36-P development result. Counterfactual assignment and
+paraphrase top-5 pass individually, but the preregistered decision is
+conjunctive. Raw weights do not reveal a hidden qualified route.}
+\label{tab:v36semantic}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_semantic_plan_v36_result.png}
+  \caption{Measured V36-P development decision generated from hash-pinned
+  training, EMA/raw evaluation, target-bank, and protocol artifacts. Retrieval
+  is an evaluator-only probe of the autonomous continuous plans. V36 does not
+  retrieve at runtime and does not emit answer pixels.}
+  \label{fig:v36result}
+\end{figure}
+
+The EMA route passes 13/23 conjunctive checks. Exact source and external hashes,
+strict upstream mapping, runtime boundary, resource limits, shuffled-prompt
+degradation, counterfactual assignment, paraphrase top-5, and answer-teacher
+cross-font stability pass. Absolute retrieval, improvement over the untrained
+head, cyclic separation, blank-prompt degradation, held-font transfer,
+paraphrase consistency, and length fail. The exact decision is
+\texttt{not-qualified}; the sealed split remains unopened and V36-R is not
+implemented.
+
+\paragraph{Post-result diagnosis.}
+The train renderer measured patch occupancy after contrast and noise. When a
+nominally white background shifts below exactly white, blank patches cross the
+ink threshold. Mean stored train answer length is consequently 37.31 patches,
+versus 11.53 on clean development, although median character lengths are 19
+and 18.5. The normalized train targets have centered effective rank only 4.77
+in 768 dimensions, mean pairwise cosine 0.777, and median nearest-neighbor
+cosine 0.967. This defect directly compromises length and target pooling, but
+it is not the sole cause: the frozen visual teacher's direct development
+prompt-to-answer top-1 is only 4.59\%.
+
+A nonsealed directional probe reused the exact local BGE-M3 multilingual
+embedding model \cite{bgem3}. Its text prompt-to-answer ceiling on the same 196
+pairs is 83.16\% top-1, 93.37\% top-5, and 0.8772 MRR, with answer effective
+rank 77.27. A train-fitted closed-form map from clean frozen visual features to
+that semantic space reaches only 2.04\% top-1. This is not V36 evidence and
+does not put a text teacher in deployment. It motivates a successor that fixes
+clean occupancy, adapts the visual reader end to end, distills multilingual
+semantic geometry offline, and explicitly controls dimensional collapse with
+variance/covariance regularization \cite{vicreg}. A raster writer remains gated
+on that semantic result.
+
 \clearpage
 \section{Data}
 
@@ -3041,29 +3164,38 @@ but their marks are corrupted and not bound to the requested target. V35 passes
 nonblank pixels, and nonempty OCR are not substitutes for counterfactual
 semantic evidence.
 
-The strongest supported claim is therefore narrow: one consumer GPU is enough
-to build, train, audit, package, and execute a self-contained continuous visual
-language experiment at 129M parameters, but the tested objective does not learn
-useful autonomous Chinese language. No Qwen, GPT, or general-LLM parity is
-shown, and no matched evidence supports compute superiority over token models.
-The runtime is independent of external services, not independent of
-provenance: PIXAR supplies external causal initialization, V34 supplies the
-project codec, and the unstated PIXAR weight license prevents redistribution of
-the derived artifact.
+V36 then tests the isolated answer-level plan before another raster writer. Its
+93.47M-parameter image-only runtime completes 6,000 updates in 25.63 minutes
+with 1.541~GiB peak allocated memory. Counterfactual assignment reaches
+78.57\% and paraphrase top-5 reaches 33.33\%, but EMA top-1 is only 1.02\%,
+raw top-1 is 2.04\%, and the conjunctive gate passes 13/23 checks. The mask
+audit additionally exposes a 37.31-versus-11.53-patch train/development length
+shift and effective target rank 4.77/768. V36 is therefore also
+\texttt{not-qualified}; neither its sealed split nor its renderer is opened.
 
-The next bounded experiment should not merely enlarge V35. It should learn an
-answer-level, multi-patch visual semantic plan with strong paired,
-counterfactual, and contrastive supervision, then condition a separate raster
-renderer on that plan. Representation-rich external visual or language
-foundations are acceptable if they make the experiment work and if source,
-license, training role, and deployed presence are explicit. Promotion still
-requires that correct prompts move autonomous pixels toward the correct paired
-answer more than shuffled, blank, partial, and paraphrased controls.
+The strongest supported claim remains narrow: one consumer GPU is enough to
+build, train, audit, package, and execute self-contained continuous visual
+language mechanisms at roughly 100M parameters, but neither tested natural
+language objective learns useful autonomous Chinese. No Qwen, GPT, or
+general-LLM parity is shown, and no matched evidence supports compute
+superiority over token models. Runtime independence does not erase provenance:
+V34 is project work, while PIXAR and Pixel-Linguist provide external
+initialization, and unstated upstream weight licenses prevent redistribution of
+the derived V35/V36 artifacts.
+
+The next bounded experiment should not merely enlarge V35 or rerun V36. It
+should compute occupancy from clean geometry, distill a strong multilingual
+semantic space into prompt and answer images while adapting the visual reader
+end to end, and maintain effective rank explicitly. The text teacher may build
+detached targets, but must not enter the deployed image-only model. Only a
+complete held-out semantic pass may open a separate raster renderer; that
+writer must still show correct-prompt gains over shuffled, blank, partial, and
+paraphrased controls in its own generated pixels.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. V35 does not yet answer such questions. Page-scale reading, 3D
+encodings. Neither V35 nor V36 answers such questions. Page-scale reading, 3D
 writing, motion, speech, and broad multilingual generation remain future
 extensions of the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
@@ -3079,6 +3211,9 @@ extensions of the same sensory interface and require separate evidence.
 \bibitem{pixel} Rust et al. Language Modelling with Pixels. \url{https://arxiv.org/abs/2207.06991}
 \bibitem{renderingstrategies} Lotz et al. Text Rendering Strategies for Pixel Language Models. \url{https://arxiv.org/abs/2311.00522}
 \bibitem{pixelm4} Kesen et al. Multilingual Pretraining for Pixel Language Models. \url{https://arxiv.org/abs/2505.21265}
+\bibitem{pixelsentence} Xiao et al. Pixel Sentence Representation Learning. \url{https://arxiv.org/abs/2402.08183}
+\bibitem{bgem3} Chen et al. BGE M3-Embedding: Multi-Lingual, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation. \url{https://arxiv.org/abs/2402.03216}
+\bibitem{vicreg} Bardes, Ponce, and LeCun. VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning. \url{https://arxiv.org/abs/2105.04906}
 \bibitem{pixar} Tai et al. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \url{https://arxiv.org/abs/2401.03321}
 \bibitem{mixar} Hu et al. MIXAR: Scaling Autoregressive Pixel-based Language Models to Multiple Languages and Scripts. \url{https://arxiv.org/abs/2604.11575}
 \bibitem{pixelgpt} Chai et al. Autoregressive Pre-Training on Pixels and Texts. \url{https://arxiv.org/abs/2404.10710}

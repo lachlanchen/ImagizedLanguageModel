@@ -16,10 +16,48 @@
 
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V35
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V36
 measurement and its negative semantic result are reported directly below.*
 
-## Current Evidence: V35 Closes the Raster Loop but Fails Binding
+## Current Evidence: V36 Learns a Weak Relation but Fails the Semantic Gate
+
+![Measured V36 result: the one-GPU visual planner is finite and counterfactually responsive, but fails held-out retrieval, transfer, and length gates](publication/ilm-image-native/figures/visual_semantic_plan_v36_result.png)
+
+Visual Semantic Plan V36 is a `93,473,281`-parameter image-only planner. It
+completed all `6,000` BF16 updates in `25.63` minutes on GPU 0 of one RTX 4090
+with `1.541 GiB` peak allocated CUDA memory. Its deployed method receives only
+a `3 x 16 x 1024` prompt raster and visual patch mask and emits five continuous
+`768`-dimensional plans plus visual length. The checkpoint contains no answer
+teacher, candidates, strings, token or Unicode IDs, OCR, glyph lookup, or
+visual codebook. It does not yet render answer pixels.
+
+The frozen development decision is **`not-qualified`**. EMA top-1/top-5/MRR
+are `1.02%`, `12.24%`, and `0.0783`, against gates of `8%`, `25%`, and `0.15`.
+Raw top-1 is only `2.04%`, so EMA lag is not the explanation. Counterfactual
+assignment passes at `78.57%`, shuffled prompts degrade retrieval, and
+paraphrase top-5 reaches `33.33%`; however, absolute retrieval, cyclic margin,
+blank control, held-font transfer, paraphrase consistency, and visual length
+all fail. Only `13/23` conjunctive checks pass. The sealed split remains
+unopened and the V36-R renderer remains closed.
+
+A post-result nonsealed audit found a real data defect: augmentation was
+applied before occupancy masks were measured, causing shifted white background
+to become active. Mean train answer length is therefore `37.31` patches versus
+`11.53` in development, and the 768-dimensional train answer targets have
+effective rank only `4.77`. This is contributory but not the sole cause: the
+frozen visual foundation itself reaches only `4.59%` direct top-1. By contrast,
+the exact local BGE-M3 teacher reaches `83.16%` direct prompt-to-answer top-1,
+while a closed-form map from frozen visual features reaches only `2.04%`.
+The next bounded experiment must fix clean geometry masks and adapt the visual
+reader end to end by offline semantic distillation. BGE-M3 may prepare targets,
+but it may not enter the deployed ILM.
+
+See the [measured V36 result](docs/visual-semantic-plan-v36-result.md),
+[frozen protocol](references/visual_semantic_plan_v36_protocol.md),
+[pre-run research note](references/visual_semantic_plan_v36_research.md), and
+[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
+
+## Prior Evidence: V35 Closes the Raster Loop but Fails Binding
 
 ![Measured V35 result: a complete raster-input/raster-output run produces prompt-responsive marks but fails copying and instruction binding](publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 
@@ -85,10 +123,13 @@ shows that a direct linear raster adapter is readable but below its fixed
 interface gate. V34 then qualifies a compact, codebook-free continuous writing
 codec. V35 combines that codec with credited PIXAR initialization and closes
 the direct raster generation and rereading loop, but still fails copying and
-instruction semantics. The next proof must learn an answer-level visual plan
-with strong counterfactual supervision before local raster realization; simply
-scaling V35's objective is not justified. Page scale, 3D geometry, and motion
-remain deferred.
+instruction semantics. V36 then isolates a candidate-free answer-level visual
+plan. It learns a measurable counterfactual relation but fails its complete
+semantic gate, exposing both a post-augmentation occupancy-mask defect and a
+low-rank visual target space. The next proof fixes those masks and distills a
+strong multilingual semantic geometry into the pixel reader before local
+raster realization; simply scaling either failed objective is not justified.
+Page scale, 3D geometry, and motion remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
