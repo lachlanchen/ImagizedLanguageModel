@@ -404,7 +404,9 @@ def _evaluate_state(
     raw_limit = int(evaluation["raw_diagnostic_cases"])
     selected_cases = _selection_cases(cases, evaluation)
     if state == "raw":
-        selected_cases = selected_cases[: max(2, raw_limit * 2)]
+        selected_cases = list(cases["copy"][:raw_limit]) + list(
+            cases["instruction"][:raw_limit]
+        )
     writer_reports = {
         writer: autonomous_case_audit(
             model,
