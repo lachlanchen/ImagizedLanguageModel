@@ -34,6 +34,9 @@ from ilm.visual_lm.direct_visual_patch_data import (
     DirectPatchContinuationDataset,
     DirectPatchInstructionDataset,
     DirectPatchRenderConfig,
+    V33_DEVELOPMENT_FONTS,
+    V33_SEALED_FONTS,
+    V33_TRAIN_FONTS,
     direct_patch_partition,
     render_direct_patch_instruction,
 )
@@ -136,6 +139,18 @@ def evaluator_source_receipt(
 ) -> dict[str, str]:
     paths = tuple(dict.fromkeys((*EVALUATOR_SOURCE_FILES, *extra_files)))
     return {path: file_sha256(ROOT / path) for path in paths}
+
+
+def renderer_asset_receipt() -> dict[str, dict[str, str]]:
+    fonts = {
+        "train": V33_TRAIN_FONTS,
+        "development": V33_DEVELOPMENT_FONTS,
+        "sealed": V33_SEALED_FONTS,
+    }
+    return {
+        split: {path: file_sha256(path) for path in paths}
+        for split, paths in fonts.items()
+    }
 
 
 def _evaluation_config(smoke: bool) -> dict[str, Any]:
@@ -629,6 +644,7 @@ def main() -> None:
         "checkpoint_audit": checkpoint_audit,
         "closed_loop_receipt": closed_loop,
         "evaluator_source_sha256": evaluator_source_receipt(),
+        "renderer_asset_sha256": renderer_asset_receipt(),
         "inputs": input_receipt,
         "data": {
             "records": _split_counts(public_records, instruction_records),

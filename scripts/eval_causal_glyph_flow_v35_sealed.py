@@ -46,6 +46,7 @@ from scripts.eval_causal_glyph_flow_v35 import (
     build_copy_counterfactual_pairs,
     choose_device,
     evaluator_source_receipt,
+    renderer_asset_receipt,
 )
 
 
@@ -244,6 +245,7 @@ def main() -> None:
         "evaluator_source_sha256": evaluator_source_receipt(
             ("scripts/eval_causal_glyph_flow_v35_sealed.py",)
         ),
+        "renderer_asset_sha256": renderer_asset_receipt(),
         "inputs": input_receipt,
         "data": {
             "records": _split_counts(public_records, instruction_records),

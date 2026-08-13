@@ -31,6 +31,7 @@ from scripts.eval_causal_glyph_flow_v35 import (
     _evaluation_config,
     build_copy_counterfactual_pairs,
     evaluator_source_receipt,
+    renderer_asset_receipt,
 )
 
 
@@ -388,6 +389,14 @@ def test_runner_configuration_and_closed_loop_receipt_are_explicit() -> None:
         "scripts/eval_causal_glyph_flow_v35.py",
     }
     assert all(len(value) == 64 for value in source_receipt.values())
+    font_receipt = renderer_asset_receipt()
+    assert set(font_receipt) == {"train", "development", "sealed"}
+    assert [len(font_receipt[split]) for split in font_receipt] == [2, 1, 1]
+    assert all(
+        len(digest) == 64
+        for split_receipt in font_receipt.values()
+        for digest in split_receipt.values()
+    )
     model = _tiny_model()
     state = {
         "writer_selection": {"selected": "anchor"},
