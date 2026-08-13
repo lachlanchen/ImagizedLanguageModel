@@ -157,4 +157,9 @@ def test_v36_stream_is_a_permutation_before_repeating() -> None:
     ]
     assert sorted(first_epoch) == list(range(17))
     assert sorted(second_epoch) == list(range(17))
-    assert first_epoch != second_epoch
+    assert first_epoch == second_epoch
+    crossing = [
+        visual_semantic_plan_stream_record_index(index, records=17, seed=36)
+        for index in range(12, 22)
+    ]
+    assert len(set(crossing)) == len(crossing)

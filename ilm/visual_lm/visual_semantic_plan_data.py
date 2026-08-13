@@ -358,13 +358,12 @@ def select_v36_instruction_records(
 def _visual_stream_affine_permutation(
     size: int,
     seed: int,
-    epoch: int,
 ) -> tuple[int, int]:
-    if size < 1 or epoch < 0:
+    if size < 1:
         raise ValueError("V36 visual stream permutation is invalid")
     if size == 1:
         return 0, 1
-    rng = random.Random(int(seed) + int(epoch) * 1_000_000_007)
+    rng = random.Random(int(seed))
     offset = rng.randrange(size)
     stride = rng.randrange(1, size)
     while gcd(stride, size) != 1:
@@ -380,8 +379,8 @@ def visual_semantic_plan_stream_record_index(
 ) -> int:
     if index < 0 or records < 1:
         raise ValueError("V36 visual stream index is invalid")
-    epoch, position = divmod(index, records)
-    offset, stride = _visual_stream_affine_permutation(records, seed, epoch)
+    _, position = divmod(index, records)
+    offset, stride = _visual_stream_affine_permutation(records, seed)
     return (offset + position * stride) % records
 
 
