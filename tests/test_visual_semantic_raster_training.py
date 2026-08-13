@@ -1,17 +1,23 @@
 from __future__ import annotations
 
+import pytest
 import torch
 
 from ilm.visual_lm.visual_semantic_raster_training import (
     V32_LOSS_WEIGHTS,
+    SelectiveExponentialMovingAverage,
     diagonal_gaussian_state_nll,
     latent_variance_floor_loss,
     raster_edge_loss,
     raster_ink_dice_loss,
     raster_pixel_bce,
     raster_warmup_microstep,
+    set_visual_semantic_raster_learning_rates,
+    stage_cosine_learning_rate,
     stop_position_loss,
     visual_semantic_raster_training_microstep,
+    visual_semantic_raster_optimizer_groups,
+    visual_semantic_raster_optimizer_receipt,
     weighted_visual_semantic_raster_loss,
 )
 from ilm.visual_lm.visual_semantic_raster_transducer import (
@@ -152,3 +158,65 @@ def test_v32_raster_warmup_does_not_touch_reader_or_planner() -> None:
     assert all(parameter.grad is None for parameter in model.planner.parameters())
     assert any(parameter.grad is not None for parameter in model.target_encoder.parameters())
     assert any(parameter.grad is not None for parameter in model.raster_decoder.parameters())
+
+
+def test_v32_optimizer_excludes_static_reader_and_keeps_future_blocks() -> None:
+    config = VisualSemanticRasterConfig(
+        **{
+            **_config().__dict__,
+            "reader_layers": 3,
+        }
+    )
+    model = VisualSemanticRasterTransducer(config)
+    model.freeze_reader()
+    groups = visual_semantic_raster_optimizer_groups(
+        model,
+        reader_final_blocks=1,
+    )
+    receipt = visual_semantic_raster_optimizer_receipt(model, groups)
+    optimized = set(receipt["optimized_parameter_names"])
+    assert any(name.startswith("reader.encoder.layer.2") for name in optimized)
+    assert not any(name.startswith("reader.encoder.layer.0") for name in optimized)
+    assert receipt["permanently_frozen_reader_parameters"] > 0
+    assert {group["role"] for group in groups} == {"writer", "reader"}
+    assert {group["weight_decay"] for group in groups} == {0.0, 0.05}
+
+
+def test_v32_stage_schedule_and_group_learning_rates() -> None:
+    assert stage_cosine_learning_rate(update=1, peak=3e-4, warmup=2, total=10) == 1.5e-4
+    assert stage_cosine_learning_rate(update=2, peak=3e-4, warmup=2, total=10) == 3e-4
+    assert stage_cosine_learning_rate(
+        update=10, peak=3e-4, warmup=2, total=10
+    ) == pytest.approx(3e-5)
+    model = VisualSemanticRasterTransducer(_config())
+    groups = visual_semantic_raster_optimizer_groups(model, reader_final_blocks=1)
+    optimizer = torch.optim.AdamW(groups)
+    set_visual_semantic_raster_learning_rates(optimizer, writer=1e-4, reader=1e-5)
+    assert {group["lr"] for group in optimizer.param_groups if group["role"] == "writer"} == {1e-4}
+    assert {group["lr"] for group in optimizer.param_groups if group["role"] == "reader"} == {1e-5}
+
+
+def test_v32_selective_ema_tracks_only_optimizer_boundary() -> None:
+    model = VisualSemanticRasterTransducer(_config())
+    groups = visual_semantic_raster_optimizer_groups(model, reader_final_blocks=1)
+    receipt = visual_semantic_raster_optimizer_receipt(model, groups)
+    ema = SelectiveExponentialMovingAverage(
+        model,
+        receipt["optimized_parameter_names"],
+        decay=0.5,
+    )
+    name = receipt["optimized_parameter_names"][0]
+    parameter = dict(model.named_parameters())[name]
+    before = ema.shadow[name].clone()
+    with torch.no_grad():
+        parameter.add_(2.0)
+    ema.update(model)
+    assert torch.allclose(ema.shadow[name], before + 1.0)
+    state = ema.state_dict()
+    restored = SelectiveExponentialMovingAverage(
+        model,
+        receipt["optimized_parameter_names"],
+        decay=0.5,
+    )
+    restored.load_state_dict(state)
+    assert torch.equal(restored.shadow[name], ema.shadow[name])

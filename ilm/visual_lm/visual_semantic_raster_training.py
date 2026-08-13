@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
-from typing import Mapping
+from typing import Any, Mapping, Sequence
 
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 
 from .visual_semantic_raster_transducer import (
@@ -38,6 +40,208 @@ V32_TRAINING_KEYS = (
     "stop_targets",
     "stop_mask",
 )
+
+
+def stage_cosine_learning_rate(
+    update: int,
+    *,
+    peak: float,
+    warmup: int,
+    total: int,
+    minimum_ratio: float = 0.10,
+) -> float:
+    if not 1 <= update <= total:
+        raise ValueError("V32 learning-rate update must be inside the stage")
+    if peak <= 0.0 or not 0 <= warmup < total:
+        raise ValueError("V32 learning-rate schedule is invalid")
+    if not 0.0 <= minimum_ratio <= 1.0:
+        raise ValueError("V32 minimum learning-rate ratio must be in [0,1]")
+    if warmup and update <= warmup:
+        return peak * update / warmup
+    if update == total:
+        return peak * minimum_ratio
+    progress = (update - warmup) / max(1, total - warmup)
+    cosine = 0.5 * (1.0 + math.cos(progress * math.pi))
+    return peak * (minimum_ratio + (1.0 - minimum_ratio) * cosine)
+
+
+def _normalization_and_bias_parameter_ids(model: nn.Module) -> set[int]:
+    normalization_types = (
+        nn.BatchNorm1d,
+        nn.BatchNorm2d,
+        nn.BatchNorm3d,
+        nn.GroupNorm,
+        nn.LayerNorm,
+    )
+    no_decay: set[int] = set()
+    for module in model.modules():
+        for name, parameter in module.named_parameters(recurse=False):
+            if name == "bias" or isinstance(module, normalization_types):
+                no_decay.add(id(parameter))
+    return no_decay
+
+
+def visual_semantic_raster_optimizer_groups(
+    model: VisualSemanticRasterTransducer,
+    *,
+    writer_learning_rate: float = 3e-4,
+    reader_learning_rate: float = 2e-5,
+    weight_decay: float = 0.05,
+    reader_final_blocks: int = 2,
+) -> list[dict[str, Any]]:
+    if writer_learning_rate <= 0 or reader_learning_rate <= 0:
+        raise ValueError("V32 optimizer learning rates must be positive")
+    if weight_decay < 0:
+        raise ValueError("V32 optimizer weight decay must be non-negative")
+    if not 1 <= reader_final_blocks <= len(model.reader.encoder.layer):
+        raise ValueError("V32 optimizer reader block count is invalid")
+
+    reader_ids: set[int] = set()
+    for block in model.reader.encoder.layer[-reader_final_blocks:]:
+        reader_ids.update(id(parameter) for parameter in block.parameters())
+    reader_ids.update(id(parameter) for parameter in model.reader.layernorm.parameters())
+    no_decay_ids = _normalization_and_bias_parameter_ids(model)
+    groups: dict[tuple[str, bool], list[nn.Parameter]] = {
+        ("writer", True): [],
+        ("writer", False): [],
+        ("reader", True): [],
+        ("reader", False): [],
+    }
+    for name, parameter in model.named_parameters():
+        if name.startswith("reader.") and id(parameter) not in reader_ids:
+            continue
+        role = "reader" if id(parameter) in reader_ids else "writer"
+        decay = id(parameter) not in no_decay_ids
+        groups[(role, decay)].append(parameter)
+
+    output: list[dict[str, Any]] = []
+    for role, decay in (("writer", True), ("writer", False), ("reader", True), ("reader", False)):
+        parameters = groups[(role, decay)]
+        if not parameters:
+            continue
+        learning_rate = (
+            writer_learning_rate if role == "writer" else reader_learning_rate
+        )
+        output.append(
+            {
+                "params": parameters,
+                "lr": learning_rate,
+                "initial_lr": learning_rate,
+                "weight_decay": weight_decay if decay else 0.0,
+                "role": role,
+                "decay": decay,
+            }
+        )
+    optimized_ids = [id(parameter) for group in output for parameter in group["params"]]
+    if len(optimized_ids) != len(set(optimized_ids)):
+        raise RuntimeError("V32 optimizer contains duplicate parameters")
+    return output
+
+
+def set_visual_semantic_raster_learning_rates(
+    optimizer: torch.optim.Optimizer,
+    *,
+    writer: float,
+    reader: float,
+) -> None:
+    for group in optimizer.param_groups:
+        role = group.get("role")
+        if role == "writer":
+            group["lr"] = float(writer)
+        elif role == "reader":
+            group["lr"] = float(reader)
+        else:
+            raise ValueError("V32 optimizer group has no recognized role")
+
+
+def visual_semantic_raster_optimizer_receipt(
+    model: VisualSemanticRasterTransducer,
+    groups: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    names = {id(parameter): name for name, parameter in model.named_parameters()}
+    rows = []
+    for group in groups:
+        parameters = list(group["params"])
+        rows.append(
+            {
+                "role": group["role"],
+                "decay": bool(group["decay"]),
+                "weight_decay": float(group["weight_decay"]),
+                "parameters": sum(parameter.numel() for parameter in parameters),
+                "tensors": len(parameters),
+            }
+        )
+    optimized = {
+        names[id(parameter)] for group in groups for parameter in group["params"]
+    }
+    return {
+        "groups": rows,
+        "optimized_parameters": sum(
+            parameter.numel()
+            for name, parameter in model.named_parameters()
+            if name in optimized
+        ),
+        "permanently_frozen_reader_parameters": sum(
+            parameter.numel()
+            for name, parameter in model.named_parameters()
+            if name.startswith("reader.") and name not in optimized
+        ),
+        "optimized_parameter_names": sorted(optimized),
+    }
+
+
+class SelectiveExponentialMovingAverage:
+    def __init__(
+        self,
+        model: nn.Module,
+        parameter_names: Sequence[str],
+        *,
+        decay: float = 0.999,
+    ) -> None:
+        if not 0.0 <= decay < 1.0:
+            raise ValueError("V32 EMA decay must be in [0,1)")
+        source = dict(model.named_parameters())
+        names = tuple(dict.fromkeys(parameter_names))
+        missing = set(names).difference(source)
+        if missing:
+            raise ValueError(f"V32 EMA parameters are missing: {sorted(missing)}")
+        self.decay = float(decay)
+        self.names = names
+        self.shadow = {
+            name: source[name].detach().float().clone() for name in self.names
+        }
+
+    @torch.no_grad()
+    def update(self, model: nn.Module) -> None:
+        source = dict(model.named_parameters())
+        for name in self.names:
+            self.shadow[name].lerp_(source[name].detach().float(), 1.0 - self.decay)
+
+    @torch.no_grad()
+    def copy_to(self, model: nn.Module) -> None:
+        destination = dict(model.named_parameters())
+        for name in self.names:
+            destination[name].copy_(self.shadow[name].to(destination[name].dtype))
+
+    def state_dict(self, *, cpu: bool = True) -> dict[str, Any]:
+        shadow = {
+            name: value.detach().cpu().clone() if cpu else value.detach().clone()
+            for name, value in self.shadow.items()
+        }
+        return {"decay": self.decay, "names": list(self.names), "shadow": shadow}
+
+    def load_state_dict(self, state: Mapping[str, Any]) -> None:
+        names = tuple(state["names"])
+        if names != self.names:
+            raise ValueError("V32 EMA parameter names differ from the run")
+        if float(state["decay"]) != self.decay:
+            raise ValueError("V32 EMA decay differs from the run")
+        shadow = state["shadow"]
+        for name in self.names:
+            value = shadow[name]
+            if value.shape != self.shadow[name].shape:
+                raise ValueError(f"V32 EMA shape differs for {name}")
+            self.shadow[name].copy_(value.to(self.shadow[name]))
 
 
 def _masked_mean(values: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
@@ -312,6 +516,7 @@ def raster_warmup_microstep(
 __all__ = [
     "V32_LATENT_STANDARD_DEVIATION_FLOOR",
     "V32_LOSS_WEIGHTS",
+    "SelectiveExponentialMovingAverage",
     "VisualSemanticRasterLossWeights",
     "diagonal_gaussian_state_nll",
     "latent_variance_floor_loss",
@@ -319,9 +524,13 @@ __all__ = [
     "raster_ink_dice_loss",
     "raster_pixel_bce",
     "raster_warmup_microstep",
+    "set_visual_semantic_raster_learning_rates",
     "sobel_edges",
+    "stage_cosine_learning_rate",
     "stop_position_loss",
     "visual_semantic_raster_loss_terms",
     "visual_semantic_raster_training_microstep",
+    "visual_semantic_raster_optimizer_groups",
+    "visual_semantic_raster_optimizer_receipt",
     "weighted_visual_semantic_raster_loss",
 ]
