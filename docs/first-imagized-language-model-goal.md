@@ -1,6 +1,6 @@
-# The First Imagized Language Model: Engineering Goal
+# Imagized Language Model: Engineering Goal
 
-Date: 2026-08-13
+Updated: 2026-08-14
 
 ## North star
 
@@ -34,6 +34,21 @@ writing, regional variants, handwriting, damaged print, and forms absent from
 Unicode. It eventually includes image questions in Chinese or English and
 image answers that combine readable explanation with provenance-linked oracle,
 bronze, seal, clerical, manuscript, traditional, simplified, and Kanji forms.
+
+### Research and contribution boundary
+
+This project does not require every useful component to be invented here.
+Public models, algorithms, fonts, OCR evaluators, and data tools may be reused
+when they improve the experiment and their provenance, license, runtime role,
+and contribution boundary are explicit. The repository does not claim priority
+for pixel-language modeling, visual autoregression, PIXAR, rectified flow, or
+other external foundations.
+
+An independent ILM means a self-contained deployed visual model: no external
+teacher call, OCR decision path, tokenizer, Unicode lookup, or retrieval system
+is needed at inference. It does not mean from-scratch pretraining. Any stronger
+from-scratch, originality, efficiency, or model-parity claim requires its own
+measurement.
 
 ### Canonical input and output: Visual Language Stream
 
@@ -142,8 +157,38 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains fifteen complete experimental systems. V29 is the
-latest measured development result; its frozen partition remains sealed:
+The latest completed experiment is V35. The current evidence is:
+
+- **V33/V33.1:** credited PIXAR initialization plus a direct linear raster
+  adapter produced readable held-out Chinese, but missed the fixed interface
+  thresholds; semantic training was not authorized.
+- **V34:** the project-trained 7.42M-parameter continuous, codebook-free writing
+  codec passed every development and once-opened sealed interface gate. This is
+  a qualified visual interface, not a language result.
+- **V35:** a 129.09M-parameter student combined frozen V34 with credited PIXAR
+  causal initialization and completed 22,000 BF16 updates in 2.770 hours at
+  2.899 GiB peak allocated memory on one RTX 4090. Its exported runtime is
+  pixel-only and self-contained, but development copy accuracy is `0.3125%`,
+  instruction accuracy is `0.1116%`, and only `5/12` visual-causal plus `5/9`
+  semantic-raster gates pass. The decision is `not-qualified`; the sealed split
+  remains unopened.
+
+V35 is a complete engineering implementation and a negative language result.
+It establishes that a consumer GPU can train and run this raster loop, while
+rejecting the tested local-latent objective as a route to semantic binding.
+The next experiment must learn a prompt-conditioned, multi-patch visual
+semantic plan before rendering, with sequence-level contrastive and
+counterfactual supervision. Scaling the same V35 objective is not authorized.
+
+See the [V35 measured receipt](../references/causal_glyph_flow_v35_result.md),
+[V35 implementation guide](causal-glyph-flow-v35.md), and
+[V34 codec receipt](../references/continuous_glyph_codec_v34_result.md).
+
+### Earlier evidence ledger through V29
+
+The following entries preserve the earlier mechanism lineage. Their
+forward-looking statements are historical and are superseded by the V35 verdict
+above:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
   write-reread feedback. It produces stable but unreadable pseudo-glyphs.
@@ -477,7 +522,7 @@ It did not prove:
   but remains at chance on exact-suffix candidate binding and far below bigram
   on natural retrieval.
 
-The present result is therefore an **accepted visual-state proof, accepted
+At the V29 checkpoint, the result was therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
@@ -509,7 +554,7 @@ both frequency baselines. V29 then trained that candidate-conditioned
 full-minus-suffix score directly. It produced a much larger natural
 ordered-versus-shuffled probability effect, yet exact-suffix binding remained
 at chance and the common suffix baseline canceled from aggregate pair margin.
-The next preregistered 64-cell objective should predict a continuous spatial
+The next preregistered 64-cell objective at that checkpoint was to predict a continuous spatial
 next-image field and compare candidate patches before reducing compatibility to
 a scalar. A parameter-matched bilinear visual scorer should control whether
 spatial interaction, rather than capacity, supplies the gain. The authoritative
@@ -539,9 +584,72 @@ The preregistered V29 protocol, research rationale, and fixed result are in
 and
 [`docs/conditional-visual-density-ratio-v29-result.md`](conditional-visual-density-ratio-v29-result.md).
 
-## Implemented paradigm: predictive visual fields
+## Current implemented system: Causal Glyph Flow V35
 
-The current architecture is the **Predictive Visual Field (PVF)**:
+V35 implements the current end-to-end runtime rather than leaving the writer as
+a proposed module:
+
+```text
+prompt pixels + visual mask
+  -> frozen V34 continuous encoder
+  -> aligned 768-dimensional visual patches
+  -> transferred 12-layer causal field
+  -> continuous anchor or rectified-flow writer
+  -> frozen V34 decoder -> binary writing pixels
+  -> frozen V34 encoder -> next causal context
+```
+
+For visible patch \(x_i\), codec encoder \(E\), adapter \(A\), causal field
+\(C\), writer \(G\), decoder \(D\), and binary threshold \(B\), the autonomous
+loop is
+
+\[
+z_i=E(x_i),\qquad h_i=C(A(z_{\leq i}),m_{\leq i}),\qquad
+\tilde z_{i+1}=G(h_i,\epsilon),
+\]
+
+\[
+\hat x_{i+1}=B(D(\tilde z_{i+1})),\qquad
+z_{i+1}=E(\hat x_{i+1}).
+\]
+
+No symbolic decode is inserted between these equations. The implementation is
+complete, but the V35 measurements reject its language claim: local codec
+quality and a transferred causal prior do not force \(h_i\) to encode the
+requested answer or \(G\) to bind that answer to the generated raster.
+
+## Next bounded proof: plan before rendering
+
+The next route keeps the strict raster boundary and credited external
+initialization, but introduces an answer-level continuous plan \(s\) before
+local glyph realization. It must optimize three separately audited contracts:
+
+1. **Plan binding:** correct prompt/answer pairs must outrank matched shuffled,
+   blank, and counterfactual pairs in a representation-rich visual space.
+2. **Plan-to-raster consistency:** a renderer must preserve the selected plan
+   across all answer patches, with sequence-level rather than patch-only loss.
+3. **Closed-loop causality:** actual generated pixels must be reread, and held-out
+   prompt interventions must change them toward the correct counterfactual
+   answer rather than merely changing their appearance.
+
+A compact objective can combine an answer-level contrastive term, a
+counterfactual margin, a continuous raster loss, and stop/length supervision:
+
+\[
+\mathcal L=\lambda_p\mathcal L_{\mathrm{plan}}
++\lambda_c\mathcal L_{\mathrm{cf}}
++\lambda_r\mathcal L_{\mathrm{raster}}
++\lambda_s\mathcal L_{\mathrm{stop}}.
+\]
+
+The proof remains bounded to short Chinese strips on one RTX 4090. It must first
+beat direct-copy and instruction counterfactual gates on development data. A
+larger model, longer page, 3D input, broader corpus, or sealed evaluation is not
+authorized until those bindings pass.
+
+## Earlier implemented paradigm: predictive visual fields
+
+The V16-era architecture was the **Predictive Visual Field (PVF)**:
 
 ```text
 writing image -> retinal state -> causal visual field
@@ -1056,9 +1164,9 @@ are exactly invariant to their hidden factor. This accepts the bounded
 same/other visual relation and one-frame image-answer gate. It does not accept
 free-form syntax, factual language, or autonomous continuation.
 
-## Next proof: V24 variable-length visual instruction stream
+## Historical V24 proof specification
 
-V24 should generalize the proven relation primitive without jumping directly
+V24 was specified to generalize the proven relation primitive without jumping directly
 to full pages. The input is a variable-length sequence of rendered visual
 patches rather than six fixed roles. A compact causal state must locate visible
 instruction, label, evidence, and query regions through learned image content;
@@ -1077,7 +1185,7 @@ model remains forbidden in the student. `T_a=2` is the first real answer-image
 stream; longer pages, depth, and movies follow only after this causal loop
 passes.
 
-## Acceptance gates for the next checkpoint
+## Historical acceptance gates for the V24-era checkpoint
 
 All gates are evaluated on a frozen manifest and glyph bank:
 
@@ -1099,8 +1207,8 @@ All gates are evaluated on a frozen manifest and glyph bank:
    controls. V22 fails with `0.00781` switch accuracy and operation-frame
    selector collapse. V23 passes preregistered query and operation
    counterfactuals, pair-swap invariance, unseen-identity output, opaque review,
-   and one frozen evaluation for its fixed grammar. V24 must retain those
-   properties after removing fixed frame roles. Input reconstruction, glyph
+   and one frozen evaluation for its fixed grammar. V24 was required to retain
+   those properties after removing fixed frame roles. Input reconstruction, glyph
    retrieval, or selector movement alone cannot satisfy this gate.
 6. The closed model must retain readability and prompt dependence over a fixed
    multi-frame autonomous rollout.
@@ -1153,14 +1261,17 @@ cite attested source pixels; a synthesized form must be labeled synthesized.
 ### P0: boundary and visual alphabet
 
 Implemented. The model trains and infers with only continuous image tensors;
-the fixed-bank oracle establishes cross-font visual identity.
+the fixed-bank oracle establishes cross-font visual identity. V34 additionally
+qualifies a codebook-free continuous writing codec on development and sealed
+font/family splits.
 
 ### P1: causal visual language
 
-Partially achieved. V16's proposal and stochastic field both beat random,
-last-only, and unigram while obtaining positive normalized context gain. The
-proposal reaches 6.264%, but the symbolic bigram remains 13.143%. P1 is not
-complete until the fixed bigram is beaten without labels entering the student.
+Not qualified. V16's proposal and stochastic field beat random, last-only, and
+unigram while obtaining positive normalized context gain, but remain below the
+symbolic bigram. V25 through V31 detect aspects of visual order without robust
+next-form binding. V35 closes the raster loop but fails direct copy and
+instruction semantics. P1 remains open.
 
 ### P1.5: readable visual actuation
 
@@ -1181,27 +1292,23 @@ remains incomplete as a state-to-image actuator. V23 separately qualifies an
 image-to-image canonicalizer: it reaches `0.78478` frozen pixel F1 and
 `0.99463` identity top-1 after relation routing, with no glyph lookup. That
 writer starts from routed source pixels, not an arbitrary predicted retinal
-state, so it cannot close P1.5 by itself.
+state, so it cannot close P1.5 by itself. V34 qualifies the continuous
+pixel/latent interface, but V35's autonomous outputs remain corrupted and
+semantically incorrect. P1.5 therefore remains incomplete for predicted
+answer states.
 
 ### P2: bounded visual instruction following
 
-Partially achieved. V22 implements a bounded six-frame Chinese visual
-instruction and one-frame image answer, then rejects its single-selector
-binding mechanism. V23 passes compositional same/other binding on unseen forms,
-matched query/operation controls, opaque visual review, and one frozen
-evaluation. This closes P2a, the fixed-grammar relation gate. It does not close
-P2 because frame roles are fixed and the answer is one routed/canonicalized
-glyph rather than a freely generated explanation. V24 must accept a
-variable-length visual instruction and generate a two-frame autonomous answer
-stream. After that, rasterize openly licensed Chinese and English instruction
-pairs, train image-question to image-answer trajectories, and evaluate the
-200-question Visual Word-Origin Book benchmark. Historical panels are
-provenance-gated source images. Full P2 passes only if the independent model
-produces readable answer pages, beats retrieval/template controls on factual
-questions, preserves unencoded regions, changes answers under held-out prompt
-counterfactuals, and passes a runtime receipt with no
-token/OCR/teacher/database path. OCR remains optional post-hoc accessibility
-output.
+Partially achieved only for designed grammars. V23 passes compositional
+same/other binding on unseen forms, matched controls, opaque review, and one
+frozen evaluation. V24 passes a variable-length fixed packet grammar and a
+two-frame generated-image reread loop. Neither is free-form language. V35 then
+attempts direct ordinary-Chinese prompt-to-raster answers and fails semantic
+binding. Full P2 passes only if an independent model produces readable answer
+pages, beats retrieval/template controls on factual questions, preserves
+unencoded regions, changes answers toward correct held-out counterfactuals, and
+passes a runtime receipt with no token/OCR/teacher/database path. OCR remains
+optional post-hoc accessibility output.
 
 ### P3: bounded Qwen-8B comparison
 
@@ -1249,6 +1356,13 @@ prompt binder, and V23 remains a fixed grammar.
 Future comparisons must report quality at equal tasks alongside VRAM, training
 energy, latency, throughput, storage, and rendering cost. Parameter count alone
 is not efficiency.
+
+V34 later trained its 7.42M-parameter codec for 6,000 updates in 321.306
+seconds at 2.38 GiB peak allocated memory. V35 trained 129.09M parameters for
+22,000 updates in 2.770 hours at 2.899 GiB peak and still failed semantic
+binding. These results demonstrate one-GPU feasibility and cheap falsification,
+not end-to-end efficiency. A valid efficiency comparison must hold task quality,
+data, evaluation, and deployment boundary fixed against a named token model.
 
 ## Non-negotiable rules
 

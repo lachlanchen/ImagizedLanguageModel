@@ -16,7 +16,33 @@ ILM étudie l'apprentissage et la génération du langage comme **écriture
 visible** : de l'image vers un état visuel continu, puis de nouveau vers
 l'image, sans canal symbolique caché.
 
-## Dernier test d'instruction : le circuit de relation visuelle V23 est accepté
+## État actuel : V35 ferme la boucle raster mais échoue à lier le sens
+
+![Résultat mesuré de V35 : le modèle raster entrée-sortie complet produit des marques sensibles à l'instruction, mais échoue en copie et en liaison sémantique](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
+
+V35 est un modèle visuel chinois de `129 092 738` paramètres. Il a effectué les
+`22 000` mises à jour BF16 en `2,770` heures sur une RTX 4090, avec `2,899 GiB`
+de mémoire GPU allouée au maximum. Le chemin déployé ne reçoit que les pixels
+d'écriture et un masque visuel, puis génère et relit directement le raster. Il
+n'utilise à l'exécution ni tokenizer, ni identifiant Unicode/de caractère, ni
+OCR, ni recherche, ni codebook visuel, ni modèle enseignant.
+
+La décision mesurée est **`not-qualified`**. La précision de copie avec la bonne
+instruction est de `0,3125 %`; la précision d'instruction est de `0,1116 %`,
+inférieure au contrôle avec instruction mélangée. Seuls `5/12` tests
+visuo-causaux et `5/9` tests sémantique-raster passent. Les sorties sont non
+vides et réagissent aux interventions, mais leurs marques sont corrompues et ne
+correspondent pas à la réponse demandée. Le jeu scellé n'a donc pas été ouvert.
+
+V35 repose sur un transfert. Le codec continu V34 est un travail du projet,
+mais le cœur causal est initialisé depuis le checkpoint PIXAR externe. PIXAR
+est crédité comme fondation externe et n'est pas revendiqué comme contribution
+du projet. « Indépendant » signifie ici un artefact déployé autonome, et non un
+entraînement intégral depuis zéro. Voir le [rapport mesuré en anglais](../references/causal_glyph_flow_v35_result.md),
+le [guide d'implémentation](../docs/causal-glyph-flow-v35.md) et
+l'[article](../publication/ilm-image-native/ilm-image-native.pdf).
+
+## Test d'instruction borné antérieur : le circuit visuel V23 est accepté
 
 ![Résultat mesuré de V23 : six images d'instruction passent par une comparaison visuelle, une porte d'opération, le routage du glyphe source et un canonicaliseur d'image gelé pour produire une image-réponse](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
 

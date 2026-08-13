@@ -16,7 +16,30 @@ ILM nghiên cứu cách học và sinh ngôn ngữ dưới dạng **chữ viết
 từ ảnh sang trạng thái thị giác liên tục rồi trở lại ảnh, không có kênh ký hiệu
 ẩn làm lõi.
 
-## Thử nghiệm prompt mới nhất: V23 vượt qua mạch quan hệ thị giác
+## Bằng chứng hiện tại: V35 khép kín vòng raster nhưng thất bại ở liên kết ngữ nghĩa
+
+![Kết quả đo V35: mô hình raster vào-ra hoàn chỉnh tạo nét phản ứng theo prompt nhưng thất bại ở sao chép và liên kết chỉ dẫn](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
+
+V35 là mô hình ngôn ngữ thị giác tiếng Trung có `129.092.738` tham số. Mô hình
+hoàn tất toàn bộ `22.000` cập nhật BF16 trong `2,770` giờ trên một RTX 4090, với
+bộ nhớ GPU đỉnh `2,899 GiB`. Đường triển khai chỉ nhận pixel chữ viết và mặt nạ
+thị giác, rồi trực tiếp sinh và đọc lại raster. Khi chạy, mô hình không dùng
+tokenizer, ID Unicode/ký tự, OCR, truy xuất, codebook thị giác hay mô hình giáo viên.
+
+Kết luận đo được là **`not-qualified`**. Độ chính xác sao chép với prompt đúng là
+`0,3125%`; độ chính xác chỉ dẫn là `0,1116%` và thấp hơn đối chứng prompt bị xáo
+trộn. Mô hình chỉ vượt `5/12` cổng nhân quả thị giác và `5/9` cổng raster ngữ
+nghĩa. Đầu ra không trắng và phản ứng với thay đổi prompt, nhưng nét bị hỏng và
+không gắn với câu trả lời yêu cầu. Vì vậy tập niêm phong không được mở.
+
+V35 dùng học chuyển giao. Codec chữ viết liên tục V34 là công việc của dự án;
+lõi nhân quả được khởi tạo từ checkpoint PIXAR bên ngoài. PIXAR được ghi công
+như nền tảng bên ngoài, không được tuyên bố là đóng góp của dự án. “Độc lập” ở
+đây nghĩa là gói triển khai tự chứa, không có nghĩa mọi thành phần được huấn
+luyện từ đầu. Xem [báo cáo đo bằng tiếng Anh](../references/causal_glyph_flow_v35_result.md),
+[hướng dẫn triển khai](../docs/causal-glyph-flow-v35.md) và [bài báo](../publication/ilm-image-native/ilm-image-native.pdf).
+
+## Thử nghiệm prompt giới hạn trước đây: V23 vượt qua mạch quan hệ thị giác
 
 ![Kết quả đo V23: sáu khung prompt ảnh đi qua phép so khớp thị giác, cổng thao tác, định tuyến chữ nguồn và bộ chuẩn hóa ảnh đã đóng băng để tạo một ảnh trả lời](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
 

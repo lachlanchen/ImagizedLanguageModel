@@ -1,9 +1,9 @@
 # Causal Glyph Flow V35
 
-V35 is the repository's first production-sized attempt to join a causal visual
-language backbone to a qualified continuous writing codec and close the loop on
-the pixels it actually emits. It is a mechanism experiment, not a general LLM
-or Qwen-parity claim.
+V35 is a production-sized attempt to join a causal visual-language backbone to
+a qualified continuous writing codec and close the loop on the pixels it
+actually emits. It is a mechanism experiment, not a general LLM, priority, or
+Qwen-parity claim.
 
 The immutable design and decision rules are in:
 
@@ -11,9 +11,30 @@ The immutable design and decision rules are in:
 - `references/causal_glyph_flow_v35_research.md`; and
 - `references/continuous_glyph_codec_v34_result.md`.
 
-The measured V35 decision belongs in
-`references/causal_glyph_flow_v35_result.md` after evaluation. A checkpoint or
-training loss alone is not evidence of language behavior.
+The completed measured decision is in
+`references/causal_glyph_flow_v35_result.md`. It is `not-qualified`; a
+checkpoint or lower training loss is not evidence of language behavior.
+
+## Measured Outcome
+
+![Measured V35 development result](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
+
+The `129,092,738`-parameter model completed all `22,000` BF16 updates in
+`9,972.458` seconds (`2.770` hours) on one RTX 4090, with `2.899 GiB` peak
+allocated CUDA memory. The development audit found:
+
+- copy OCR character accuracy of `0.3125%`, only `0.117` percentage point above
+  the shuffled-prompt condition;
+- instruction OCR character accuracy of `0.1116%`, `0.445` percentage point
+  below the shuffled-prompt condition;
+- `5/12` visual-causal and `5/9` semantic-raster gates passed; and
+- nonblank, prompt-responsive, but semantically incorrect generated marks.
+
+The exact decision is `not-qualified`. The sealed split was not opened. The
+result establishes a complete pixel-only packaged runtime and a visible
+decode-threshold-reencode feedback loop, but not correct copying, causal answer
+binding, Chinese instruction following, useful language generation, or
+efficiency over token models.
 
 ## Runtime Contract
 
@@ -56,6 +77,11 @@ and deployment boundaries remain explicit.
 The PIXAR source revision is MIT, but the downloaded weight archive does not
 state a weight license. V35 artifacts are therefore local research evidence;
 the exporter sets `weight_redistribution_authorized` to false.
+
+PIXAR is external work and is not claimed as a repository contribution. In this
+document, an independent student means that the exported runtime is
+self-contained and does not call PIXAR, an OCR engine, a tokenizer, or another
+model. It does not mean that the causal core was trained from scratch.
 
 ## Data
 
@@ -162,10 +188,12 @@ result is retained and reported.
 
 ## Standalone Student
 
-After development evaluation, export the selected student state:
+For the completed negative V35 result, export the selected student state only
+as an explicitly unqualified diagnostic:
 
 ```bash
-PYTHONPATH=. python scripts/export_causal_glyph_flow_v35.py
+PYTHONPATH=. python scripts/export_causal_glyph_flow_v35.py \
+  --allow-unqualified
 ```
 
 The standalone file contains the V34 codec, aligned adapter, causal field,
@@ -174,6 +202,12 @@ contains no optimizer, RNG, alignment teacher, OCR, tokenizer, retrieval data,
 or resumable training state. Export rejects an unqualified report unless
 `--allow-unqualified` is explicitly supplied, in which case the diagnostic
 status remains embedded in the artifact.
+
+The completed local artifact was exported with `--allow-unqualified`, embeds
+the `not-qualified` status, and is for diagnosis only. Its path is
+`artifacts/causal_glyph_flow_v35_20260814/ilm_v35_ema_standalone.pt`; the
+`artifacts/` tree is intentionally ignored by Git because it contains large
+checkpoints, generated evidence, and data with separate redistribution terms.
 
 Typed prompt to PNG:
 

@@ -15,9 +15,45 @@
 ![ILM-V image-native language model concept: image input to image output with 言 glyph evolution](publication/ilm-image-native/figures/ilm_v_yan_readme_hero.png)
 
 *Concept target, not a measured model output: writing pixels enter an independent
-ILM-V student and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured V31
-experiment and its rejection are reported directly below.*
+ILM-V runtime and the intended answer is a rendered page image. The glyph panels
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V35
+measurement and its negative semantic result are reported directly below.*
+
+## Current Evidence: V35 Closes the Raster Loop but Fails Binding
+
+![Measured V35 result: a complete raster-input/raster-output run produces prompt-responsive marks but fails copying and instruction binding](publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
+
+Causal Glyph Flow V35 is a `129,092,738`-parameter Chinese visual-language
+student. It completed all `22,000` BF16 updates in `2.770` hours on one RTX
+4090, with `2.899 GiB` peak allocated CUDA memory. Its deployed path receives
+only writing pixels and a visual mask, predicts continuous states, decodes them
+to binary writing patches, and rereads those actual patches. It has no runtime
+tokenizer, Unicode or character IDs, OCR, retrieval table, visual codebook, or
+teacher-model call.
+
+The measured decision is **`not-qualified`**. Correct-prompt copy accuracy is
+`0.3125%`; instruction accuracy is `0.1116%` and is lower than the shuffled
+prompt condition. The visual-causal and semantic-raster routes pass only `5/12`
+and `5/9` gates. Outputs are nonblank and respond to interventions, but contain
+corrupted marks that are not bound to the requested answer. The sealed split
+was therefore not opened.
+
+V35 is transfer-based. The compact V34 continuous writing codec is project
+work; the causal core starts from the external PIXAR checkpoint and PIXAR is
+credited as an external foundation, not claimed as an ILM contribution.
+"Independent" here means a self-contained pixel-only deployment artifact, not
+training every component from scratch. PIXAR's source revision is MIT, but its
+downloaded weight archive states no weight license, so the local diagnostic
+artifact is not authorized for redistribution.
+
+![Implemented V35 training path](publication/ilm-image-native/figures/causal_glyph_flow_v35_training.png)
+
+![Implemented V35 inference path](publication/ilm-image-native/figures/causal_glyph_flow_v35_inference.png)
+
+See the [measured result](references/causal_glyph_flow_v35_result.md),
+[frozen protocol](references/causal_glyph_flow_v35_protocol.md),
+[implementation guide](docs/causal-glyph-flow-v35.md), and
+[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
 
 ## Research North Star: A Visual Word-Origin Book
 
@@ -39,44 +75,20 @@ The canonical interface is a **Visual Language Stream** with sequence/time,
 optional geometric depth, height, width, and sensory channels. A page is the
 `T=1,D=1` case; a book is an ordered stream of fields; a 3D Chinese or English
 character string uses depth; and a character movie also uses time. These are
-one continuous input/output contract, not separate token vocabularies. V24
-completes the first bounded 2D Chinese grammar proof: it reads a variable raster
-packet stream, writes one image, rereads those generated pixels, and writes a
-second image on one RTX 4090. V25 then replaces that designed packet algebra
-with ordinary rendered Chinese. It finds a weak ordered-history signal but is
-rejected as a language model. V26 separates last-glyph appearance from earlier
-history and predicts continuous visual particles, but its pixel-identical
-suffix intervention shows that changed history states still produce chance
-target preferences. V27 jointly trains a causal visual context and arbitrary
-candidate-image compatibility. The raw retina still distinguishes cross-font
-forms at `99.95%`, but full-context pair assignment is `50.71%` and only
-`0.15` percentage point above shuffled context; natural top-1 remains below
-unigram and bigram. This rejects the global query/key compatibility route. V28
-then freezes the raw V16 retina and trains dense continuous future-energy
-objectives at horizons 1, 2, and 4. Its semantic route improves same-scope
-1,024-way cross-font identity from `92.04%` to `96.44%`, but natural top-1 is
-only `1.42%`, below unigram (`1.86%`) and bigram (`13.13%`), while matched-pair
-assignment is `49.56%` versus `49.95%` with a shuffled prefix. V28 is therefore
-also rejected. V29 then makes each arbitrary candidate image query the retained
-visual history and trains the full-minus-suffix score directly. It produces a
-large ordered-versus-shuffled target-probability effect, but held-out
-incremental pair assignment is only `50.71%` and full natural top-1 is `2.34%`
-versus `13.87%` for a symbolic bigram. V29 is also rejected. V30 then makes
-context predict a candidate-independent `4 x 4 x 192` next-image field and
-compares aligned candidate patches before reduction, against a
-parameter-identical global-semantic control. The spatial route is sensitive to
-patch alignment, but natural top-1 is only `1.27%` versus `2.49%` for the
-global control and `11.72%` for a symbolic bigram; exact-suffix assignment is
-`50.05%` versus `50.59%` for the control. V30 is rejected. The next proof must
-represent multimodal continuous next-field density and beat both the matched
-global route and symbolic controls. V31 performs that test with a coherent
-conditional flow over continuous retinal fields. It detects ordered context
-and local spatial changes, yet spatial natural path top-1 falls to `0.10%`,
-exact-suffix assignment remains at `50.49%`, and all ten language and generation
-gates fail. V31 is rejected. The next proof therefore predicts a directly
-rendered **multi-glyph answer block** from a causal visual-language state and
-tests held-out semantics and readable output; page scale, 3D geometry, and
-motion remain deferred.
+one continuous input/output contract, not separate token vocabularies.
+
+The evidence trajectory is narrower than the product goal. V24 passes a
+designed variable-length visual packet grammar with generated-image rereading.
+V25 through V31 replace that grammar with ordinary Chinese and repeatedly find
+visual or order-sensitive signals without reliable next-form binding. V33.1
+shows that a direct linear raster adapter is readable but below its fixed
+interface gate. V34 then qualifies a compact, codebook-free continuous writing
+codec. V35 combines that codec with credited PIXAR initialization and closes
+the direct raster generation and rereading loop, but still fails copying and
+instruction semantics. The next proof must learn an answer-level visual plan
+with strong counterfactual supervision before local raster realization; simply
+scaling V35's objective is not justified. Page scale, 3D geometry, and motion
+remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -96,7 +108,7 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V31 Conditional Visual Flow Rejected
+## Earlier Natural-Language Test: V31 Conditional Visual Flow Rejected
 
 ![Measured V31 result: conditional flow detects visual order and local layout but fails next-glyph binding and direct generation](publication/ilm-image-native/figures/conditional_visual_field_flow_v31_result.png)
 
@@ -388,7 +400,7 @@ the authoritative `32x32` glyph stream, but it was not used in V25 and is not a
 claimed fix. See the [complete V25 receipt](docs/visual-cell-stream-v25-result.md)
 and [unchanged frozen protocol](references/visual_cell_stream_v25_protocol.md).
 
-## Latest Stream Test: V24 Visual Packet Rereading Accepted
+## Earlier Stream Test: V24 Visual Packet Rereading Accepted
 
 ![Measured V24 visual packet stream: variable raster packets are localized from visible headers, routed through a visual relation, emitted as a glyph image, reread from generated pixels, and followed by a generated label image; paired controls and the single frozen evaluation pass](publication/ilm-image-native/figures/visual_packet_stream_v24_result.png)
 
@@ -1014,6 +1026,11 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V35 measured result | `references/causal_glyph_flow_v35_result.md` |
+| V35 implementation and reproduction | `docs/causal-glyph-flow-v35.md` |
+| V35 preregistered protocol | `references/causal_glyph_flow_v35_protocol.md` |
+| V34 qualified continuous codec | `references/continuous_glyph_codec_v34_result.md` |
+| Current paper | `publication/ilm-image-native/ilm-image-native.pdf` |
 | V31 conditional visual field-flow result | `docs/conditional-visual-field-flow-v31-result.md` |
 | V31 preregistered protocol | `references/conditional_visual_field_flow_v31_protocol.md` |
 | V31 research decision | `references/conditional_visual_field_flow_v31_research.md` |

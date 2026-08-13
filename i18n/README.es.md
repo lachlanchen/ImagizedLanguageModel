@@ -16,7 +16,34 @@ ILM investiga cómo aprender y generar lenguaje como **escritura visible**: de
 imagen a estado visual continuo y de nuevo a imagen, sin un canal simbólico
 oculto.
 
-## Última prueba de instrucciones: V23 aprueba el circuito de relación visual
+## Evidencia actual: V35 cierra el bucle ráster, pero falla la vinculación semántica
+
+![Resultado medido de V35: el modelo ráster completo de entrada y salida produce trazos sensibles al prompt, pero falla en copia y vinculación de instrucciones](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
+
+V35 es un modelo visual de chino con `129.092.738` parámetros. Completó las
+`22.000` actualizaciones BF16 en `2,770` horas sobre una RTX 4090, con un máximo
+de `2,899 GiB` de memoria GPU asignada. La ruta desplegada solo recibe píxeles
+de escritura y una máscara visual, y genera y relee directamente el ráster. En
+ejecución no usa tokenizer, identificadores Unicode/de carácter, OCR,
+recuperación, codebook visual ni un modelo docente.
+
+La decisión medida es **`not-qualified`**. La precisión de copia con el prompt
+correcto es `0,3125 %`; la precisión de instrucciones es `0,1116 %` y queda por
+debajo del control con prompt mezclado. Solo supera `5/12` puertas
+visuales-causales y `5/9` puertas semántico-ráster. Las salidas no están vacías
+y responden a intervenciones, pero sus trazos están dañados y no se vinculan a
+la respuesta solicitada. Por ello no se abrió la partición sellada.
+
+V35 usa aprendizaje por transferencia. El códec continuo V34 es trabajo del
+proyecto, mientras que el núcleo causal se inicializa desde el checkpoint
+externo PIXAR. PIXAR se acredita como fundamento externo y no se reclama como
+contribución del proyecto. “Independiente” significa aquí un artefacto de
+despliegue autocontenido, no que todo se entrenó desde cero. Véanse el
+[informe medido en inglés](../references/causal_glyph_flow_v35_result.md), la
+[guía de implementación](../docs/causal-glyph-flow-v35.md) y el
+[artículo](../publication/ilm-image-native/ilm-image-native.pdf).
+
+## Prueba acotada anterior: V23 aprueba el circuito de relación visual
 
 ![Resultado medido de V23: seis imágenes de instrucción pasan por comparación visual, compuerta de operación, enrutamiento del glifo fuente y un normalizador de imagen congelado para producir una imagen de respuesta](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
 
