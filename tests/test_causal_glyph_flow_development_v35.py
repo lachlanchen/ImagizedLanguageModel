@@ -15,6 +15,16 @@ from ilm.visual_lm.causal_glyph_flow_development import (
     text_is_readable,
     v35_development_gate,
 )
+from ilm.visual_lm.direct_visual_patch_data import (
+    DirectPatchRenderConfig,
+    direct_patch_partition,
+)
+from ilm.visual_lm.visual_semantic_raster_data import VisualTextRecord
+from scripts.eval_causal_glyph_flow_v35 import (
+    _closed_loop_receipt,
+    _evaluation_config,
+    build_copy_counterfactual_pairs,
+)
 
 
 def _case(identifier: str, value: float = 1.0) -> V35RasterCase:
@@ -245,3 +255,66 @@ def test_development_gate_uses_exact_status_vocabulary() -> None:
     gate = v35_development_gate(report)
     assert gate["status"] == "not-qualified"
     assert gate["visual_causal"]["passed"] is False
+
+
+def _development_public_records(count: int = 6) -> list[VisualTextRecord]:
+    records = []
+    index = 0
+    while len(records) < count:
+        identifier = f"v35-counterfactual:{index}"
+        if direct_patch_partition(identifier, stream="public-domain") == "development":
+            records.append(
+                VisualTextRecord(
+                    identifier=identifier,
+                    text=(
+                        "天地玄黄宇宙洪荒日月盈昃辰宿列张寒来暑往秋收冬藏"
+                        "闰余成岁律吕调阳云腾致雨露结为霜金生丽水玉出昆冈"
+                    ),
+                    language="zh",
+                    source="unit",
+                    rights="public domain",
+                )
+            )
+        index += 1
+    return records
+
+
+def test_counterfactual_builder_holds_style_and_shape_constant() -> None:
+    pairs = build_copy_counterfactual_pairs(
+        _development_public_records(),
+        config=DirectPatchRenderConfig(augment=False),
+        count=2,
+    )
+    assert len(pairs) == 2
+    for first, second in pairs:
+        assert first.expected != second.expected
+        assert first.prompt_length == second.prompt_length
+        assert first.target_length == second.target_length
+        assert first.metadata["prompt"]["font_path"] == second.metadata["prompt"][
+            "font_path"
+        ]
+        assert first.metadata["prompt"]["font_size"] == second.metadata["prompt"][
+            "font_size"
+        ]
+        assert first.metadata["prompt"]["origin"] == second.metadata["prompt"][
+            "origin"
+        ]
+
+
+def test_runner_configuration_and_closed_loop_receipt_are_explicit() -> None:
+    smoke = _evaluation_config(True)
+    production = _evaluation_config(False)
+    assert smoke["copy_cases"] < production["copy_cases"]
+    model = _tiny_model()
+    state = {
+        "writer_selection": {"selected": "anchor"},
+        "autonomous": {
+            stream: {
+                "anchor": {"conditions": {"correct": {"finite": True}}}
+            }
+            for stream in ("copy", "public", "instruction", "paraphrase")
+        },
+    }
+    receipt = _closed_loop_receipt(model, state)
+    assert receipt["passed"] is True
+    assert all(receipt["checks"].values())
