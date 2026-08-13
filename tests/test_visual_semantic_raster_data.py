@@ -12,6 +12,7 @@ from ilm.visual_lm.visual_semantic_raster_data import (
     VisualRasterInstructionDataset,
     VisualRasterRecord,
     VisualRasterRenderConfig,
+    VisualRasterWarmupDataset,
     VisualTextRecord,
     load_visual_raster_instructions,
     load_visual_raster_paraphrases,
@@ -143,6 +144,32 @@ def test_v32_continuation_partition_is_source_disjoint() -> None:
     assert sample["answer_mask"].sum() >= 1
 
 
+def test_v32_warmup_renders_answers_without_spending_work_on_prompts() -> None:
+    record = VisualTextRecord(
+        identifier=_identifier_for("train", "public-domain"),
+        text="天地玄黄宇宙洪荒日月盈昃辰宿列张" * 2,
+        language="zh-Hant",
+        source="unit-test",
+        rights="test-only",
+    )
+    config = VisualRasterRenderConfig(
+        maximum_prompt_patches=16,
+        maximum_answer_cells=8,
+        augment=False,
+    )
+    sample = VisualRasterWarmupDataset(
+        [record],
+        split="train",
+        render_config=config,
+        seed=32,
+        length=2,
+    )[0]
+    assert torch.equal(sample["prompt_pixels"], torch.ones(3, 16, 256))
+    assert sample["prompt_mask"].sum() == 0
+    assert sample["answer_mask"].sum() >= 1
+    assert sample["metadata"]["warmup_only"] is True
+
+
 def test_v32_instruction_and_paraphrase_loaders_keep_text_host_side(tmp_path) -> None:
     instruction_path = tmp_path / "instructions.json"
     instruction_path.write_text(
@@ -209,4 +236,3 @@ def test_v32_student_boundary_rejects_symbolic_or_integer_tensors() -> None:
 
 def test_v32_development_font_is_distinct_from_training_fonts() -> None:
     assert set(V32_DEVELOPMENT_FONTS).isdisjoint(V32_TRAIN_FONTS)
-

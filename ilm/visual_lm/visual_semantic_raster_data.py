@@ -588,6 +588,86 @@ class VisualRasterContinuationDataset(Dataset):
         raise RuntimeError("V32 could not render a valid continuation sample")
 
 
+class VisualRasterWarmupDataset(Dataset):
+    """Render only answer cells for writer warmup; prompt tensors stay blank."""
+
+    def __init__(
+        self,
+        records: Sequence[VisualTextRecord],
+        *,
+        split: str,
+        render_config: VisualRasterRenderConfig,
+        seed: int,
+        length: int,
+    ) -> None:
+        if split not in V32_SPLITS:
+            raise ValueError(f"unknown V32 split: {split}")
+        selected = [
+            record
+            for record in records
+            if visual_raster_partition(record.identifier, stream="public-domain") == split
+            and normalize_visible_text(record.text)
+        ]
+        if not selected or length < 1:
+            raise ValueError(f"V32 warmup split {split!r} is empty")
+        self.records = tuple(selected)
+        self.split = split
+        self.render_config = render_config
+        self.seed = int(seed)
+        self.length = int(length)
+
+    def __len__(self) -> int:
+        return self.length
+
+    def __getitem__(self, index: int) -> dict[str, Any]:
+        rng = random.Random(self.seed + index * 1_000_037)
+        fonts = _font_paths(self.split)
+        for _ in range(256):
+            record = self.records[rng.randrange(len(self.records))]
+            maximum = min(self.render_config.maximum_answer_cells, len(record.text))
+            if maximum < 1:
+                continue
+            answer_length = rng.randint(1, maximum)
+            start = rng.randint(0, len(record.text) - answer_length)
+            answer = normalize_visible_text(record.text[start : start + answer_length])
+            if not answer or len(answer) > self.render_config.maximum_answer_cells:
+                continue
+            variant = rng.randrange(2**31)
+            font_path = fonts[random.Random(variant).randrange(len(fonts))]
+            cells, answer_mask, stop_targets, stop_mask, answer_meta = (
+                render_answer_cells(
+                    answer,
+                    config=self.render_config,
+                    font_path=font_path,
+                    variant=variant + 17,
+                )
+            )
+            return {
+                "prompt_pixels": torch.ones(
+                    3,
+                    self.render_config.prompt_patch_size,
+                    self.render_config.prompt_width,
+                    dtype=torch.float32,
+                ),
+                "prompt_mask": torch.zeros(
+                    self.render_config.maximum_prompt_patches,
+                    dtype=torch.float32,
+                ),
+                "answer_cells": cells,
+                "answer_mask": answer_mask,
+                "stop_targets": stop_targets,
+                "stop_mask": stop_mask,
+                "metadata": {
+                    "identifier": f"{record.identifier}:{start}:{answer_length}",
+                    "source": record.source,
+                    "rights": record.rights,
+                    "answer": answer_meta,
+                    "warmup_only": True,
+                },
+            }
+        raise RuntimeError("V32 could not render a valid warmup sample")
+
+
 def visual_semantic_raster_collate(
     batch: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
@@ -651,4 +731,3 @@ def visual_semantic_raster_data_boundary_receipt() -> dict[str, Any]:
         "uses_external_language_model": False,
         "candidate_bank_deployed": False,
     }
-
