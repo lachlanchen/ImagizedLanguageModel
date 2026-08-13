@@ -144,6 +144,32 @@ def test_v32_continuation_partition_is_source_disjoint() -> None:
     assert sample["answer_mask"].sum() >= 1
 
 
+def test_v32_continuation_respects_declared_prompt_capacity() -> None:
+    record = VisualTextRecord(
+        identifier=_identifier_for("train", "public-domain"),
+        text="天地玄黄宇宙洪荒日月盈昃辰宿列张" * 16,
+        language="zh-Hant",
+        source="unit-test",
+        rights="test-only",
+    )
+    dataset = VisualRasterContinuationDataset(
+        [record],
+        split="train",
+        render_config=VisualRasterRenderConfig(
+            maximum_prompt_patches=32,
+            maximum_answer_cells=8,
+            augment=False,
+        ),
+        seed=17,
+        length=8,
+        maximum_prompt_cells=24,
+    )
+    for sample in dataset:
+        assert sample["metadata"]["continuation"]["prompt_cells"] <= 24
+    with pytest.raises(IndexError):
+        dataset[len(dataset)]
+
+
 def test_v32_warmup_renders_answers_without_spending_work_on_prompts() -> None:
     record = VisualTextRecord(
         identifier=_identifier_for("train", "public-domain"),

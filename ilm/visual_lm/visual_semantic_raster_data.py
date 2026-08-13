@@ -499,6 +499,8 @@ class VisualRasterInstructionDataset(Dataset):
         return self.length
 
     def __getitem__(self, index: int) -> dict[str, Any]:
+        if not 0 <= index < self.length:
+            raise IndexError(index)
         rng = random.Random(self.seed + index * 1_000_003)
         record = (
             self.records[index]
@@ -523,6 +525,7 @@ class VisualRasterContinuationDataset(Dataset):
         seed: int,
         length: int,
         minimum_prompt_cells: int = 8,
+        maximum_prompt_cells: int = 160,
     ) -> None:
         if split not in V32_SPLITS:
             raise ValueError(f"unknown V32 split: {split}")
@@ -534,21 +537,26 @@ class VisualRasterContinuationDataset(Dataset):
         ]
         if not selected or length < 1:
             raise ValueError(f"V32 continuation split {split!r} is empty")
+        if not minimum_prompt_cells <= maximum_prompt_cells:
+            raise ValueError("V32 continuation prompt range is invalid")
         self.records = tuple(selected)
         self.split = split
         self.render_config = render_config
         self.seed = int(seed)
         self.length = int(length)
         self.minimum_prompt_cells = int(minimum_prompt_cells)
+        self.maximum_prompt_cells = int(maximum_prompt_cells)
 
     def __len__(self) -> int:
         return self.length
 
     def __getitem__(self, index: int) -> dict[str, Any]:
+        if not 0 <= index < self.length:
+            raise IndexError(index)
         rng = random.Random(self.seed + index * 1_000_033)
         for _ in range(256):
             record = self.records[rng.randrange(len(self.records))]
-            maximum_prompt = min(160, len(record.text) - 1)
+            maximum_prompt = min(self.maximum_prompt_cells, len(record.text) - 1)
             if maximum_prompt < self.minimum_prompt_cells:
                 continue
             prompt_length = rng.randint(self.minimum_prompt_cells, maximum_prompt)
@@ -620,6 +628,8 @@ class VisualRasterWarmupDataset(Dataset):
         return self.length
 
     def __getitem__(self, index: int) -> dict[str, Any]:
+        if not 0 <= index < self.length:
+            raise IndexError(index)
         rng = random.Random(self.seed + index * 1_000_037)
         fonts = _font_paths(self.split)
         for _ in range(256):
