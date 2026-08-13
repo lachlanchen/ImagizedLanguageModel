@@ -17,200 +17,45 @@
 \maketitle
 
 \begin{abstract}
-Most language models treat language as a sequence from a finite token and
-Unicode-accessible inventory, even when an image encoder or image generator is
-attached. That interface is incomplete for historical, regional, handwritten,
-damaged, undeciphered, and newly formed writing, and it discards visual form
-that can itself carry linguistic and historical evidence. OCR can transcribe
-the encodable subset but does not make writing the model's language substrate.
-We define a stricter target: an independent Imagized Language Model (ILM) whose
-inputs, learned states, predictive random variables, and primary outputs are
-continuous images of writing. Transcription is one supported task, alongside
-continuation, translation, explanation, comparison, and generation; it is not
-the architecture.
+Most language models make a finite symbolic encoding the primary interface to
+language. That interface is effective for modern encoded text but incomplete
+for historical, handwritten, regional, damaged, and unencoded writing, where
+visual form is part of the evidence. We study a stricter image-native contract:
+the deployed model receives writing pixels, maintains continuous visual states,
+predicts continuous visual futures, emits a raster answer, and rereads the
+visible pixels it generated. OCR and coded transcription remain optional
+post-hoc views rather than the model's language substrate.
 
-We contribute a staged, falsifiable implementation. Retinal Flow Language
-Models read ordered $32\times32$ fixations, integrate visual history, generate
-the next ink field, and reread their own pixels, but expose the failure of a
-monolithic language-and-typography writer. Predictive Visual Fields (PVF)
-factorize the problem: a convolutional retina maps writing to continuous state,
-a causal field integrates history, a deterministic proposal predicts the next
-state, an intrinsic hyperspherical flow models alternatives, and a separate
-motor planner renders pixels. The learned path has no tokenizer, strings after
-rasterization, Unicode or character IDs, OCR transcript, output vocabulary,
-discrete visual codebook, glyph lookup, candidate classifier, or external
-language model.
+We implement this contract through staged, falsifiable experiments. V34 is a
+codebook-free convolutional codec with 7.42 million parameters for
+$32\times32$ writing patches. It qualifies on held-font and held-family
+development and sealed
+audits, reaching 0.9978 rendered ink F1 and 0.9981 historical ink F1 on the
+sealed split with 2.38~GiB peak allocated memory. Reconstruction is only an
+interface result. V35 combines the frozen codec with a residual interface
+adapter, a 12-layer PIXAR-initialized causal transformer, deterministic anchor
+and conditional rectified-flow writers, a stop head, and a strict
+decode--threshold--re-encode feedback loop. PIXAR is an external causal
+foundation, not a project contribution; V35 is transfer-based rather than
+from-scratch pretraining.
 
-On a frozen 512-form, four-view Chinese benchmark, the 16.47M-parameter V16
-proposal reaches 6.26\% top-1, above last-image-only (3.97\%), unigram (1.73\%),
-and random dynamics (0.22\%); full history adds $+0.0773$ normalized target
-log-probability. Its stochastic field reaches 3.69\% versus 3.24\% last-only.
-V16 trains on one RTX 4090 at 1.479~GiB peak allocated CUDA memory, but remains
-below a symbolic bigram (13.14\%). A separate 5.73M-parameter V17 actuator
-proves causal state control on an untouched evaluation---58.59\% visual
-identity versus 0.98\% after shuffling intended state---but fails readability.
-A topology-first 2.36M-parameter V18 planner reaches 73.63\% identity top-1
-versus 0.98\% shuffled and pixel F1 0.658 versus 0.313 on a fresh development
-audit at 0.778~GiB peak memory. Simple and medium forms become recognizable;
-dense forms remain malformed, and V18's frozen bank remains sealed. V19 then
-tests a zero-initialized spatial-retinal residual under fixed complexity strata
-and five causal interventions. Its fresh 512-candidate development audit rejects
-the mechanism: dense F1 is 0.728, but correct fields improve it by only 0.009
-over shuffled fields and 0.005 over zero fields, against fixed margins of 0.12
-and 0.03. V20 then constrains the global route to coarse $4\times4$ block
-logits and reserves within-block detail for a continuous local retinal field,
-with an exactly parameter-matched global-repeat control. The field becomes
-causally necessary: dense F1 is 0.701, versus 0.580 shuffled and 0.340 zeroed,
-and quadrant-occlusion locality is 1.0. The writer remains rejected because
-overall F1 is 0.636, target cosine is 0.815, the exact-decomposition tolerance
-fails, and final dense gain over the control is only 0.018 against a fixed 0.03
-margin. Neither arm selects; no human or frozen query is authorized.
-V21 removes the remaining global spatial route: each local field cell emits
-coarse occupancy and 63 coefficients in an exact zero-DC patch basis, while
-global state supplies only spatially uniform modulation. At its best diagnostic
-snapshot, dense F1 is 0.705 versus 0.531 shuffled-field and 0.359 zero-field;
-identity top-1 is 79.10\%, target cosine is 0.833, and locality and every
-algebraic invariant pass. The exact-parameter tiled-global control collapses to
-repeated patches. V21 still rejects the writer because overall, simple, and
-medium F1 (0.604, 0.565, and 0.594) miss fixed gates. No candidate selects, so
-the paired, human, and frozen stages remain forbidden.
-V22 then implements a six-frame visual prompt and one-frame image answer with
-two exactly matched 3.410M-parameter arms. A query-aware candidate sees the
-final visual query; a query-blind control receives a continuous null state. The
-candidate reaches only 0.78\% counterfactual switch accuracy versus 0\% control,
-15.92\% identity top-1 versus 15.33\%, and pixel F1 0.511 versus 0.513. A
-development-only audit finds that its selector argmax is the operation frame in
-all 1,024 original and counterfactual prompts, while mean query attention is
-$1.37{\times}10^{-13}$. V22 therefore rejects single-frame selection as a
-relational binding mechanism. No candidate selects and frozen images remain
-uninstantiated.
-V23 replaces single-frame selection with relation before generation. A
-separately selected 1.122M-parameter image canonicalizer is frozen; a
-25,602-parameter relation circuit compares query and label images, reads the
-operation image, routes one of two visible source glyphs, and emits a canonical
-answer image. On a fresh 1,024-episode development audit, the candidate reaches
-99.80\% query and operation switch accuracy and 99.51\% identity top-1. Exact
-query-blind and operation-blind controls have zero switch and zero pixel change
-for their hidden factor. An opaque agent visual review scores 48/48 overall and
-12/12 held-out. The single authorized frozen evaluation over 98 unseen
-identities reaches 99.83\% binary choice, 99.61\% query switch, 99.71\%
-operation switch, 99.46\% identity top-1, and 0.785 pixel F1. Every fixed gate
-passes without frozen model selection or threshold changes. This accepts a
-fixed two-pair same/other visual grammar, not free-form language.
-V24 removes absolute frame roles and fixed input length while closing a
-two-frame autoregressive visual loop. Visible header images locate roles in
-15--24-frame packet streams; frame 1 renders the selected unseen glyph, and
-frame 2 is produced after rereading the actual generated frame-1 pixels. Only
-1,347 parameters are trained. Fresh paired query-, operation-, history-, and
-header-blind controls localize every required cause. An opaque agent review
-scores 47/48 for frame 1 and 48/48 for frame 2. The single authorized frozen
-run over 107 unseen identities reaches 98.67\% frame-1 identity, 99.73\%
-frame-2 label accuracy, 97.66\% query switch, 97.27\% operation switch, and
-99.61\% history switch. Every fixed gate passes. This accepts a variable-input
-but fixed-grammar two-frame image stream, not arbitrary rendered language.
-V25 removes that grammar and trains a 25.55M-parameter causal field on ordinary
-Chinese book streams represented as 64 visible $32\times32$ cells. On 2,048
-fixed development windows, full-history top-1 is 1.123\%, versus 0.146\%
-last-only, 0.342\% after shuffling prior history, 1.611\% image unigram, and
-12.158\% symbolic bigram. The ordered-history effect is measurable but six
-fixed semantic and causal gates fail. Peak allocated CUDA memory is
-0.598~GiB, the student boundary passes, and the frozen partition remains
-sealed. An explicitly exploratory writer trained after rejection preserves
-ink density but obtains zero generated-identity top-1, reread cosine 0.080,
-and pixel F1 0.322. V25 therefore rejects this natural-language objective and
-writer rather than treating low memory or glyph-like marks as language
-efficiency.
-V26 tests the proposed repair with a 19.14M-parameter factorized model: the last
-glyph supplies appearance, the preceding 63 glyph images supply a separate
-history residual, and a continuous head predicts eight visual particles at
-future offsets 1, 2, 4, and 8. After 8,000 fixed BF16 updates, full-history
-top-1 is 0.0488\%, below 1.4160\% image unigram and 13.5254\% symbolic bigram.
-For 512 cross-record pairs with pixel-identical four-glyph suffixes, history
-residuals differ by 4.628 on average, yet correct pair ranking and
-residual-swap target accuracy are both exactly 50\%. A perfect retina-bank
-oracle rules out a blind evaluator. V26 therefore rejects the factorized
-mechanism: visual history changes state without binding that state to the
-correct next-glyph distribution. It uses 0.888~GiB peak allocated CUDA memory;
-no writer or frozen evaluation is opened.
-A post-hoc localization freezes every V26 parameter and trains a three-branch,
-1.11M-parameter candidate-conditioned visual probe for one pass over the 16,384 training
-pairs. On 512 disjoint-record development pairs, frozen history and fused state
-reach only 50.684\% and 50.342\% cross-font assignment accuracy, respectively,
-while raw-retina target identity reaches 99.951\%. This diagnostic is not
-preregistered evidence, but it rules against preserving V26's context encoder
-and replacing only its stochastic proposal.
-V27 then performs the preregistered joint test with an 18.60M-parameter
-V16-initialized retina, eight-layer causal context field, and deterministic
-arbitrary-candidate image compatibility. The fixed 8,000-update run reaches
-1.611\% natural top-1, below 2.051\% image unigram and 12.598\% symbolic
-bigram. On pixel-identical suffix pairs, full-context assignment is 50.708\%,
-versus 50.562\% after shuffling the earlier prefix. The untouched V16 retina
-still identifies the correct one of two cross-font candidates at 99.951\% and
-candidate permutation error is zero. Separately, learned 1,024-bank identity is
-94.873\% and misses its 99\% gate; these differently sized retrieval tests are
-not a before/after comparison. V27 therefore rejects the global
-context-query/candidate-key mechanism and preserves the frozen seal.
-V28 freezes the raw V16 retina and replaces one endpoint query with dense
-continuous visual-future energies at horizons 1, 2, and 4. Its
-17.86M-parameter system completes 10,000 fixed BF16 updates and audit in
-118.91 minutes with 1.144~GiB peak allocated CUDA memory. On the same-scope
-1,024-way identity audit, an EMA semantic route improves from 92.041\% raw
-retina identity to 96.436\%. Full context also improves target log probability
-by 0.215 nat over a suffix-preserving prefix shuffle. These effects do not
-produce useful language choice: natural top-1 is 1.416\%, below 1.855\% image
-unigram and 13.135\% symbolic bigram, while pixel-identical-suffix pair
-assignment is 49.561\% versus 49.951\% after prefix shuffling. V28 passes ten of
-fourteen mechanism gates and two of six language gates, so the mechanism is
-rejected without opening frozen images or training a writer.
-V29 executes the candidate-conditioned density-ratio test with a 20.08M-
-parameter image-only critic. An arbitrary candidate image cross-attends to all
-retained context states, while exact-suffix scoring defines a centered
-full-minus-suffix increment. Full target log probability gains 0.179 nat over
-suffix and 3.102 nat over shuffled-prefix context, but natural top-1 is only
-2.344\% versus 13.867\% for a symbolic bigram. On 512 exact-suffix pairs,
-incremental assignment is 50.708\% versus 49.561\% shuffled and both-correct is
-8.984\%. The common suffix baseline cancels exactly in aggregate two-by-two
-assignment margin. V29 passes eight of fourteen mechanism gates and two of six
-language gates and is rejected without frozen evaluation or writer training.
-V30 replaces the scalar critic with a candidate-independent
-$4\times4\times192$ next-image field and compares aligned frozen retinal
-patches before reduction. A parameter-identical control repeats a matched
-global semantic vector over the same 16 rows. Both 18.64M-parameter arms start
-from byte-identical tensors and complete 8,000 finite BF16 updates. Spatial
-natural top-1 is 1.270\%, below 2.490\% for the global control, 1.318\% image
-unigram, and 11.719\% symbolic bigram. Pixel-identical-suffix assignment is
-50.049\% versus 50.586\% for the control. Patch reversal changes spatial
-scores, but target log probability improves by only 0.0154 nat and pair
-accuracy by 0.391 percentage point, below fixed gates. V30 passes zero of eight
-language gates and is rejected with frozen evaluation and writer training
-closed.
-V31 tests the prescribed multimodal repair with a conditional flow over
-continuous retinal fields. Two matched 18.74M-parameter arms start from
-byte-identical initialized states and complete 10,000 finite BF16 updates each.
-The spatial path gains 0.126 nat over shuffled-prefix context and 0.053 nat over
-spatial permutation, while autonomous fields are diverse and context dependent.
-These sensitivities still do not produce language: spatial natural path top-1
-is 0.098%, below 1.855% for the global control, 1.611% image unigram,
-13.525% symbolic bigram, and 20.996% symbolic trigram. Pixel-identical-suffix
-path assignment is 50.488%, autonomous assignment is 50.195%, and all ten
-language and generation gates fail. V31 therefore rejects this one-glyph latent
-field flow. Its nearest-image panel is an evaluator diagnostic, not direct
-pixel generation. Frozen images remain sealed and writer training remains
-closed.
-
-The bounded product target is a Visual Word-Origin Book: rendered English or
-Chinese questions produce answer-page images containing readable explanation
-and provenance-linked historical or unencoded forms. The present experiments
-establish causal visual-language signal, compact continuous-image writing, a
-bounded image relation, and a bounded causal two-frame image stream, not
-autonomous question answering, broad readability, Qwen parity, or efficiency
-over text models.
-More generally, ILM treats writing as the first
-instance of language modeled as a continuous sensory field. A proposed Visual
-Language Stream adds sequence/time and optional geometric depth to the same
-image-native contract, so a page, book stream, 3D glyph string, or character
-movie differs by field shape rather than vocabulary. Only the 2D writing case
-is tested here; 3D, motion, speech, and vocal fields remain future hypotheses.
+The 129.09M-parameter V35 student completes 22,000 finite BF16 updates in
+2.77 hours on one RTX 4090 with 2.899~GiB peak allocated memory. Its packaged
+runtime accepts only pixels and a visual-position mask and calls no tokenizer,
+Unicode or character IDs, OCR, lookup table, retrieval system, codebook, or
+teacher. Nevertheless, the fixed development audit rejects the mechanism.
+Autonomous copy accuracy is 0.3125\%, retaining only 0.491\% of its
+target-through-codec OCR ceiling; correct prompts improve over shuffled prompts
+by only 0.117 percentage point. Instruction accuracy is 0.1116\% and is
+0.445 point worse than the shuffled-prompt condition. The visual-causal and
+semantic-raster routes pass only 5/12 and 5/9 gates, respectively. Generated
+pixels are finite, nonblank, and prompt-responsive, but contain corrupted
+glyph-like marks rather than correctly bound answers. The decision is
+\texttt{not-qualified}, and the sealed split remains unopened. Thus V35
+establishes a complete one-GPU raster-input/raster-output experimental runtime,
+not useful autonomous language, parity with text LLMs, or superior compute
+efficiency. The result localizes the next problem to answer-level semantic
+planning and prompt-to-output binding before local raster realization.
 \end{abstract}
 
 \begin{figure}[t]
@@ -220,7 +65,7 @@ is tested here; 3D, motion, speech, and vocal fields remain future hypotheses.
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output; the latest measured result
-  is the rejected V31 experiment in Figure~\ref{fig:v31result}.}
+  is the rejected V35 experiment in Figure~\ref{fig:v35result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -293,123 +138,94 @@ or time-frequency fields. This paper tests visible writing only.
 
 \subsection{Contributions}
 
-The contribution is not the slogan ``text as pixels.'' It is a sequence of
-implemented controls that makes that slogan falsifiable:
+The contribution is not the slogan \emph{text as pixels}, nor a priority claim
+over earlier pixel language models. It is an implemented sequence of interfaces
+and controls that makes a stronger image-native language claim falsifiable:
 \begin{enumerate}[leftmargin=*]
-  \item A strict student boundary in which strings, token and Unicode IDs, OCR,
-  finite visual codebooks, glyph lookup, and external language models are absent
-  after rasterization and at deployed inference.
-  \item RFLM, a complete visual reading--prediction--writing--rereading loop that
-  exposes autonomous generated pixels during evaluation and records its own
-  negative result: stable ink is not readable language.
-  \item PVF, a mathematical factorization of continuous visual language state,
-  causal memory, hyperspherical future-state uncertainty, and pixel actuation;
-  V16 supplies controlled evidence that full visual history carries predictive
-  language signal, while the symbolic bigram remains stronger.
-  \item Causal writer interventions: V17 proves that continuous image-derived
-  intent controls generated identity, and V18 shows on development data that a
-  2.36M topology-first planner can render recognizable writing without token
-  unembedding. Their failures delimit identity, topology, and language choice.
-  \item A preregistered V19 spatial-field intervention whose negative result
-  separates feature availability from causal use, followed by an exactly
-  capacity-matched V20 intervention that makes local topology necessary while
-  rejecting its own writer-quality claim, and V21, which makes the field carry
-  the complete spatial plan while identifying disjoint local raster patches as
-  the next quality bottleneck.
-  \item V22, a strict six-frame image-prompt to image-answer experiment with a
-  parameter-matched query-blind control. Its negative result localizes failure
-  to relational binding: the selector collapses onto the operation image while
-  writer quality and identity rise almost identically in both arms.
-  \item V23, a compositional visual relation circuit with an independently
-  selected and frozen image canonicalizer, matched query-blind and
-  operation-blind controls, held-out relation compositions, an opaque visual
-  review, and one frozen-identity evaluation. It supplies the first accepted
-  bounded image-prompt-to-image-answer result in this project.
-  \item V24, a variable 15--24-frame visual packet stream with learned
-  header-image role localization and two autonomous output frames. Matched
-  header-, query-, operation-, and generated-history-blind controls, an opaque
-  visual audit, and one frozen run establish that frame 2 causally depends on
-  rereading generated frame-1 pixels.
-  \item V25, a preregistered natural-Chinese visual-cell stream with fixed
-  last-only, shuffled, blank, visual-frequency, text-bigram, and paired-history
-  controls. It measures a weak ordered-history effect
-  while rejecting the model under six fixed gates and preserving the frozen
-  seal. A separately labeled writer diagnostic localizes stable ink without
-  correct generated identity.
-  \item V26, a preregistered factorization of exact last-glyph appearance,
-  earlier-history residual, and continuous future particles. Pixel-identical
-  suffix pairs prove that history changes the residual state while exact-chance
-  pair ranking proves that the state is not bound to the correct target. A
-  perfect visual oracle separates this failure from retinal identity loss.
-  \item V27, a preregistered joint context/candidate image scorer with
-  independently permuted candidate order, raw and learned cross-font identity
-  controls, pixel-identical suffix pairs, and natural frequency baselines. It
-  shows that preserving candidate visibility is insufficient: the learned
-  global compatibility remains at chance and does not use prefix order.
-  \item V28, a preregistered dense multi-horizon visual-future energy model with
-  a frozen raw retina, identity-initialized semantic residual, EMA target, and
-  explicit suffix-preserving order losses. It improves same-scope visual
-  identity and detects prefix information, while its negative rank and
-  frequency-control results distinguish order sensitivity from correct
-  conditional language binding.
-  \item V29, a preregistered candidate-conditioned visual density-ratio critic
-  with exact shared-suffix scoring, full-minus-suffix contrast, independently
-  shuffled prefixes, and candidate-permutation replay. It finds a large natural
-  order effect but chance matched binding, and exposes the exact cancellation
-  of a common suffix baseline in aggregate two-by-two assignment margin.
-  \item V30, a preregistered candidate-independent spatial next-image field
-  tested against a parameter-identical global-semantic control. Local patch
-  reversal proves that aligned retinal geometry affects scores, while matched
-  natural and exact-suffix results reject that sensitivity as useful
-  context-to-target binding.
-  \item V31, a preregistered conditional flow over spatial retinal fields with
-  a matched tiled-global control. Fixed path, sample, exact-suffix, order,
-  permutation, diversity, and boundary audits show context response without
-  next-writing identity or direct raster generation.
-  \item A rights-aware Visual Word-Origin Book benchmark and a continuous
-  Visual Language Stream interface. They cover readable explanation,
-  historical evidence, unencoded forms, optional depth and time, provenance,
-  and one-GPU compute. The higher-dimensional interface is prospective.
+  \item A strict deployed-student boundary: after optional typed-prompt
+  rasterization, model methods receive pixels and masks and return pixels.
+  Token and Unicode IDs, strings, OCR, finite visual codebooks, glyph lookup,
+  retrieval, and runtime teacher calls are excluded and audited.
+  \item A staged experimental record separating visual identity, continuous
+  actuation, relational binding, generated-pixel rereading, natural
+  continuation, and autonomous writing. Positive bounded mechanisms and
+  negative natural-language results are retained rather than collapsed into a
+  single capability claim.
+  \item V34, a qualified 7.42M-parameter continuous writing codec that preserves
+  held-font modern Chinese and held-family historical forms without
+  quantization. Its sealed reconstruction result establishes an interface, not
+  language understanding.
+  \item V35, a 129.09M-parameter causal raster student combining that frozen
+  codec with an explicitly credited PIXAR initialization, anchor and
+  rectified-flow writers, and a visible decode--threshold--re-encode recurrent
+  boundary. It trains and runs on one RTX 4090 without a symbolic deployed
+  path.
+  \item A preregistered development audit with correct, shuffled, blank,
+  partial, paraphrased, and copy-counterfactual prompts; target-through-codec
+  ceilings; writer selection; direct raster galleries; immutable hashes; and a
+  sealed split that may open only after qualification. These controls reject
+  V35's prompt-to-answer binding despite nonblank prompt-responsive pixels.
+  \item A rights-aware Visual Word-Origin Book target and Visual Language Stream
+  interface for modern and historical writing. Historical answer generation,
+  page-scale memory, depth, motion, speech, and broad multilingual capability
+  remain prospective until they pass their own causal and quality controls.
 \end{enumerate}
 
 \section{Prior Art and Gap}
 
-OCR-free document models such as Donut and screenshot parsing models such as Pix2Struct show that document images can be understood without an explicit OCR pipeline. PIXEL reconstructs masked rendered-text patches and demonstrates cross-script visual transfer~\cite{pixel}; PIXAR is a genuinely generative pixel-space autoregressive language model and identifies noisy maximum-likelihood text images as a central difficulty~\cite{pixar}; PixelGPT studies autoregressive visual and textual pretraining~\cite{pixelgpt}. These are the closest model-level precedents. Token-free language models such as CANINE, ByT5, and MEGABYTE remove subwords but retain symbolic bytes or characters. BLT and Scratchpad Patching allocate computation dynamically to high-entropy byte regions~\cite{blt,scratchpad}; ILM borrows the adaptive-compute question but not the byte substrate. Discrete diffusion language models show that generation need not be left-to-right, but usually retain a linguistic vocabulary.
+Pixel language modeling is established prior art. PIXEL treats rendered text as
+patches for masked representation learning and cross-script transfer
+\cite{pixel}. Rendering strategy is itself consequential: character-bigram
+rendering enabled a 22M PIXEL variant to match its 86M reference on the studied
+tasks while exposing patch-frequency anisotropy
+\cite{renderingstrategies}. PIXEL-M4 extends encoder pretraining to English,
+Hindi, Ukrainian, and Simplified Chinese and reports multilingual semantic and
+syntactic transfer \cite{pixelm4}. These are encoder-side results rather than
+autonomous raster answering.
 
-Recent continuous approaches sharpen the distinction. Continuous visual
-autoregression can be trained with strictly proper energy scores without vector
-quantization~\cite{continuousvar}. VL-JEPA predicts continuous target-text
-embeddings but invokes a text decoder when output is required~\cite{vljepa}.
-TextLDM reports that reconstruction-quality continuous latents are insufficient
-without alignment to a frozen pretrained language model~\cite{textldm}. These
-results motivate calibrated visual uncertainty and warn against equating
-reconstruction with semantics. Their byte, token, or text-decoder paths remain
-outside the independent ILM student boundary.
+PIXAR directly demonstrates decoder-only autoregressive language modeling from
+and to binary rendered patches \cite{pixar}. MIXAR scales that family across
+eight languages and multiple scripts \cite{mixar}, while PixelGPT studies
+autoregressive pretraining across pixels and text \cite{pixelgpt}. Accordingly,
+we make no priority claim for pixel language modeling or pixel generation.
+V35 deliberately reuses PIXAR's released causal weights so that one-GPU
+experiments test a new interface and binding hypothesis instead of attempting
+to reproduce industrial pretraining. The audited PIXAR source revision is MIT;
+the separately distributed weight archive contains no stated weight license, so
+the derived standalone artifact is local-research-only and is not
+redistribution-authorized.
 
-Recent unified understanding--generation systems provide a useful architectural
-warning even though their language cores remain symbolic. Orthus uses a shared
-autoregressive context with modality-specific output heads~\cite{orthus};
-FlowAR combines scale-wise autoregression with flow matching~\cite{flowar}; and
-UniDDT explicitly decouples semantic encoding from diffusion decoding to reduce
-optimization conflict~\cite{uniddt}. ILM adopts only the separation principle:
-a causal visual predictive state should carry meaning, while a conditional
-continuous head should render answer pixels. Neither component may introduce a
-text-token path inside the student.
+OCR-free document systems such as Donut and Pix2Struct map document images to
+task outputs without a separate OCR engine \cite{donut,pix2struct}. Token-free
+models such as CANINE, ByT5, MEGABYTE, BLT, and Scratchpad Patching remove
+subwords or allocate compute dynamically, but retain symbolic character or byte
+streams \cite{canine,byt5,megabyte,blt,scratchpad}. These are strong practical
+baselines. They differ from the stricter deployed ILM boundary in which visible
+writing is both the recurrent input and primary output.
 
-I-JEPA shows that predicting target image representations from visual context can
-learn semantic visual fields without reconstructing every pixel~\cite{ijepa}.
-Flow matching trains continuous generative paths by vector-field regression and
-supports efficient numerical sampling~\cite{flowmatching}. Human reading is
-also sequential and foveated: Chinese readers make saccades and can use both
-character- and word-related targeting cues~\cite{yanreading}. These observations
-motivate RFLM, but they do not imply biological equivalence.
+Continuous image generation supplies a second foundation. MAR models each
+continuous image latent with a diffusion loss rather than vector quantization
+\cite{mar}; Continuous VAR derives non-quantized autoregression from strictly
+proper scoring rules \cite{continuousvar}; and NextStep-1 pairs a large
+autoregressive backbone with a flow-matching image head
+\cite{nextstep}. Representation Autoencoders show that reconstructive fidelity
+alone does not guarantee a representation well suited to generation
+\cite{rae}. TextLDM reaches a parallel conclusion for continuous text latents:
+alignment to a pretrained language representation is critical, while
+reconstruction alone is insufficient \cite{textldm}. V35's negative result is
+consistent with that warning: an almost lossless local glyph codec does not by
+itself supply an answer-level semantic plan.
 
-The remaining gap is not simply ``pixels instead of tokens.'' It is a system
-whose predictive random variables are continuous writing images, whose memory
-is learned from ordered visual observations, whose writer produces new pixels,
-and whose own output distribution is present during evaluation. Historical
-evidence adds a separate constraint: synthesized marks must never be presented
-as attested source glyphs.
+The scoped gap tested here is therefore not \emph{pixels instead of tokens}. It
+is the combination of a continuous non-quantized writing representation, a
+causal visual state, direct generated raster output, and a recurrent boundary in
+which the model must reread its own thresholded visible pixels. Correct,
+shuffled, blank, partial, paraphrased, and counterfactual prompts distinguish
+semantic binding from reconstruction, frequency, or merely changing pixels.
+Historical forms add a provenance constraint: generated marks must never be
+presented as attested source glyphs. External components are allowed when they
+work well, but their origin, license, training-time role, and presence or
+absence at runtime must remain explicit.
 
 \section{Architecture}
 
@@ -2386,6 +2202,246 @@ not enter student batches, checkpoints, or inference. Open corpora provide the
 published benchmark, while local books enter only through a provenance-tracked
 preparation layer after this compact proof succeeds.
 
+\subsection{Continuous Glyph Representation Codec V34}
+
+V32--V33.1 showed that a language experiment is uninterpretable when the
+answer representation cannot preserve the target raster. V34 therefore
+isolates the visual interface before testing causality. For a binary writing
+patch \(p\in\{0,1\}^{1\times32\times32}\), the convolutional encoder and
+decoder are
+\[
+z=\operatorname{LN}(E_\phi(p))\in\mathbb R^{768},
+\qquad
+\hat p=\sigma(D_\psi(z)).
+\]
+The 7,423,361-parameter model uses four convolutional scales with channels
+\(32,64,96,192\), a continuous normalized latent, and no VQ, codebook,
+character label, OCR target, or external model. Its objective is
+\[
+\mathcal L_{\mathrm{codec}}=
+\mathcal L_{\mathrm{weighted\ BCE}}
++0.5\,\mathcal L_{\mathrm{Sobel}}
++0.5\,\mathcal L_{\mathrm{ink\ Dice}}.
+\]
+Half of training patches receive independently sampled latent noise with
+standard deviation in \([0,0.05]\).
+
+The public stream contains 7,017 public-domain Chinese book records with
+different Noto CJK files for train, development, and sealed rendering. The
+historical stream contains 84,626 local SVG records partitioned by modern
+character family, so all known forms of one modern character remain in one
+split. This local corpus is neither copied into the repository nor treated as
+a redistribution grant. V34 completes 6,000 BF16 updates in 321.31 seconds on
+one RTX 4090, processes 4,519,796 patches, and peaks at 2.38~GiB allocated
+memory.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+V34 EMA measure & Development & Sealed \\
+\midrule
+Rendered clean ink F1 & 0.997864 & 0.997793 \\
+Rendered clean edge F1 & 0.997270 & 0.997291 \\
+Rendered noisy-latent ink F1 & 0.997836 & 0.997749 \\
+Historical ink F1 & 0.998311 & 0.998068 \\
+Historical edge F1 & 0.997934 & 0.997747 \\
+Rendered OCR retention & 1.002567 & 1.006088 \\
+Blank false-ink rate & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{V34 development and once-opened sealed results. The sealed audit was
+authorized only after every development gate passed; every required sealed
+metric retained more than 97\% of its development value. OCR is an evaluator,
+not a codec input or objective.}
+\label{tab:v34codec}
+\end{table}
+
+V34 is therefore \texttt{continuous-codec-qualified}. It establishes that a
+compact non-quantized interface can preserve held-font modern writing and
+held-family historical forms. It does not establish continuation, prompt
+following, factual knowledge, or autonomous language generation.
+
+\subsection{Causal Glyph Flow V35: complete raster loop, failed binding}
+
+\paragraph{Transferred foundation and student boundary.}
+V35 tests whether a qualified visual interface and a transferred causal prior
+are sufficient for short Chinese continuation, copying, and instruction
+answering. The causal core is initialized from PIXAR's released 12-layer,
+width-768 transformer \cite{pixar}. This prior is external work. The local
+source revision is MIT, while the separately hosted weight archive states no
+weight license; the derived weight artifact is consequently not authorized for
+redistribution. The V34 EMA codec is this project's frozen interface. At
+deployed inference, both foundations are packaged into one checkpoint and no
+PIXAR process, tokenizer, OCR engine, retrieval system, database, or language
+teacher is called. Thus \emph{independent} denotes a self-contained visual
+runtime, not from-scratch provenance.
+
+For visible patches \(p_{\leq t}\), frozen codec \(E,D\), aligned residual
+adapter \(A\), and causal transformer \(T\),
+\[
+z_t=E(p_t),\qquad a_t=A(z_t),\qquad
+h_t=T(a_{\leq t}).
+\]
+The deterministic writer gives a normalized anchor
+\[
+m_{t+1}=\operatorname{LN}(M(h_t)).
+\]
+The conditional writer instead learns a rectified flow. For target latent
+\(z\), Gaussian base \(\epsilon\), and \(\tau\sim\mathcal U(0,1)\),
+\[
+x_\tau=(1-\tau)\epsilon+\tau z,\qquad
+v^\star=z-\epsilon,
+\]
+\[
+\mathcal L_{\mathrm{flow}}=
+\mathbb E\left[
+\left\|F_\theta(x_\tau,\tau,h_t)-v^\star\right\|_2^2
+\right].
+\]
+The anchor supplies a one-pass route; the three-block width-512 flow head tests
+whether a conditional continuous distribution improves upon that route. A
+scalar visual-position head predicts when generation should stop.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/causal_glyph_flow_v35_training.png}
+  \caption{Implemented V35 training path. Stage A aligns the V34 latent
+  interface to PIXAR's visual coordinate system while both the codec and causal
+  core are frozen. The alignment teacher is then removed. Stages B and C train
+  the causal field and continuous writers from raster-only student batches.
+  PIXAR initialization and offline text rendering are explicitly outside the
+  deployed student boundary.}
+  \label{fig:v35training}
+\end{figure}
+
+The critical recurrence is visible rather than latent. Every predicted latent
+is decoded, thresholded into the emitted binary patch, and encoded again:
+\[
+\widetilde p_{t+1}
+=\mathbf 1\!\left[\sigma(D(\widehat z_{t+1}))\geq0.5\right],
+\qquad
+z^{\mathrm{feedback}}_{t+1}=E(\widetilde p_{t+1}).
+\]
+No unrendered writer state crosses this recurrent boundary. The fixed causal
+objective is
+\[
+\begin{split}
+\mathcal L_{\mathrm{total}}
+={}&\mathcal L_{\mathrm{flow}}
++\left(1-\cos(m,z)+0.25\lVert m-z\rVert_2^2\right)\\
+&+0.25\,\mathcal L_{\mathrm{visual}}
++0.10\,\mathcal L_{\mathrm{stop}},
+\end{split}
+\]
+where \(\mathcal L_{\mathrm{visual}}\) combines pixel BCE, Sobel edge error, and
+ink Dice error. Flow and decoded-visual losses use at most 128 sampled valid
+positions per microbatch; anchor and stop losses use every supervised
+position.
+
+Stage A runs for 2,000 updates. It passes with adapter MSE 0.008510 and cosine
+0.979348 on 2,461 held-out patches while the causal core and codec hashes remain
+unchanged. Stage B runs 8,000 updates on public continuation. Stage C runs
+12,000 updates with 75\% Chinese Alpaca instructions, 12.5\% deterministic
+visual-copy tasks, and 12.5\% public replay. Physical batch 8, eight-way
+accumulation, BF16, gradient checkpointing, EMA, and maximum context 96 keep the
+129,092,738-parameter model at 2.899~GiB peak allocated memory. All 22,000
+updates are finite and complete in 9,972.46 seconds.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/causal_glyph_flow_v35_inference.png}
+  \caption{Implemented V35 inference path. A typed prompt is rasterized before
+  the model or a writing image enters directly. The student sees pixels and a
+  visual-position mask, generates raster patches through the selected
+  continuous writer, and rereads only the thresholded visible result. OCR and
+  coded text are optional post-hoc sidecars and cannot affect generation.}
+  \label{fig:v35inference}
+\end{figure}
+
+\paragraph{Fixed development audit.}
+EMA is the preregistered primary state. The anchor writer is selected because
+its fixed selection-set OCR character accuracy is 0.4241\%, versus 0 for the
+eight-step flow writer; neither is useful. The raw-weight diagnostic also
+selects anchor at 0.4464\%, versus 0.2232\% for flow. Raw public teacher-forced
+ink and edge F1 are 0.3398 and 0.4760, effectively the same as EMA's 0.3397 and
+0.4754, so EMA selection does not conceal a capable raw route. The full audit
+evaluates every
+teacher-forced development record and autonomous correct, cyclically shuffled,
+blank, final-quarter, paraphrase, and copy-counterfactual conditions. Identical
+generation noise is reused across each intervention. OCR 5.3.4 with
+\texttt{chi\_sim+chi\_tra} is post-hoc only. In this audit,
+\emph{readable} means only that OCR returned a nonempty string; it is not a
+human-readability claim.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+V35 autonomous condition & Character accuracy & Nonempty OCR & Ink F1 \\
+\midrule
+Copy, correct & 0.3125\% & 87.50\% & 0.09214 \\
+Copy, shuffled & 0.1953\% & 87.50\% & 0.08645 \\
+Copy, blank & 0 & 84.38\% & 0.07670 \\
+Public continuation, correct & 0 & 71.88\% & 0.21265 \\
+Instruction, correct & 0.1116\% & 75.00\% & 0.17346 \\
+Instruction, shuffled & 0.5565\% & 75.00\% & 0.13709 \\
+Instruction, blank & 0 & 100\% & 0.14888 \\
+Paraphrase, correct & 0.3002\% & 87.10\% & 0.15300 \\
+\bottomrule
+\end{tabular}
+\caption{V35 autonomous EMA-anchor development results. All rows are nonblank,
+but nonempty OCR is not correct language. Correct instruction prompts perform
+worse than shuffled prompts, directly rejecting semantic binding.}
+\label{tab:v35autonomous}
+\end{table}
+
+The copy target-through-codec ceiling is 63.676\%, already below its fixed
+70\% audit floor. Generated copy retains only 0.491\% of that ceiling, versus
+the required 60\%; correct prompts gain only 0.117 percentage point over
+shuffled and 0.313 point over blank prompts. Copy counterfactual target
+preference is 62.5\%, below 75\%, with zero mean character accuracy. The
+instruction ceiling passes at 78.858\%, but autonomous correct-prompt accuracy
+is 0.1116\%, against an 8\% gate. It is 0.445 point worse than shuffled and
+only 0.112 point above blank, against required \(+2\) and \(+3\) point margins.
+The pixels change when prompts are shuffled or blanked, but the changes are not
+bound to the requested answer.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/causal_glyph_flow_v35_result.png}
+  \caption{Measured V35 development decision generated from the hash-pinned
+  22,000-row metric log, report JSON, and immutable EMA galleries. Targets and
+  generated rasters are shown directly; OCR strings never replace model
+  pixels. The model closes the visible feedback loop and responds to prompt
+  interventions, but fails copy, continuation, counterfactual, and
+  instruction-binding gates.}
+  \label{fig:v35result}
+\end{figure}
+
+V35 passes 5/12 visual-causal checks and 5/9 semantic-raster checks. Its exact
+decision is \texttt{not-qualified}. The sealed 139 public and 202 instruction
+records were not rendered, inspected, OCR-scored, or opened. A standalone EMA
+artifact was exported only under an explicit unqualified diagnostic override;
+typed-raster and native-image prompts both execute with finite closed-loop
+states, but their outputs remain incorrect. This is a functioning experimental
+system and a failed language mechanism. It establishes neither useful
+autonomous Chinese generation nor parity or compute superiority over a text
+language model.
+
+The failure localizes the next test. A reconstruction-qualified local glyph
+latent and a transferred causal transformer can produce prompt-responsive
+marks without learning answer-level binding. The next model should retain the
+audited raster boundary while separating a prompt-conditioned multi-patch
+semantic plan from local raster realization, train that plan with answer-level
+contrastive and counterfactual objectives, and promote it only if correct
+prompt interventions move output toward the paired target. External visual or
+language foundations may be used when they improve this test, provided their
+provenance, license, training role, and runtime absence or presence remain
+explicit.
+
 \clearpage
 \section{Data}
 
@@ -2661,7 +2717,12 @@ The target answer image should contain:
   \item stage labels and citations as rendered image text.
 \end{itemize}
 
-The existing Zhong figure in Figure~\ref{fig:zhong} is a compact stage-timeline example; the Yan figures in Figures~\ref{fig:yanhero} and~\ref{fig:visualinference} show the fuller answer-page style. Together they test whether the model can combine language understanding, visual page composition, and historical script generation.
+The existing Zhong figure in Figure~\ref{fig:zhong} is a compact stage-timeline
+example; the Yan figures in Figures~\ref{fig:yanhero}
+and~\ref{fig:visualinference} show the fuller answer-page style. Together they
+define a future benchmark for combining prompt semantics, visual page
+composition, and historical-script generation; they are not measured V35
+outputs.
 
 \section{AgInTi Artifact Loop}
 
@@ -2928,8 +2989,8 @@ order effect while exact-suffix assignment remains at chance. V30 shows that
 one aligned deterministic next-image field is also insufficient and is weaker
 than its matched global route. V31 then models a coherent multimodal continuous
 field distribution. Its spatial route detects order and local permutation and
-produces diverse context-dependent fields, yet natural path top-1 is 0.098%
-and exact-suffix path and autonomous assignment remain at 50.488% and 50.195%.
+produces diverse context-dependent fields, yet natural path top-1 is 0.098\%
+and exact-suffix path and autonomous assignment remain at 50.488\% and 50.195\%.
 Thus adding continuous transport to the same one-glyph target does not repair
 language binding. The next experiment should stop optimizing candidate-bank
 retrieval and instead directly generate a multi-glyph answer raster from a
@@ -2943,180 +3004,68 @@ diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
-The experiments show that merely replacing tokens with pixels is insufficient.
-A page flow can learn paper statistics, a causal writer can learn local ink, and
-a retina can learn character identity without acquiring language dynamics.
-RFLM contributes a strict test harness for ordered visual reading, direct ink
-flow, and autonomous rereading, but V6 and V7 reject exposure-bias correction
-and a monolithic language-plus-rendering writer as sufficient solutions. PVF
-then factors perception, causal language state, stochastic visual form, and
-actuation. V16's 6.26\% proposal and 3.69\% state-flow top-1, positive
-normalized history gains, and random/unigram/last-only controls replicate the
-accepted visual-state proof in this project. They show that causal language
-signal can be learned directly from writing images by a 16.47M model on one
-consumer GPU. V17 then reaches 58.59\% frozen visual-identity retrieval versus
-0.98\% under shuffled intended states with only 5.73M trainable parameters and
-1.588~GiB peak memory. This breaks the categorical claim that lightweight
-continuous visual intent cannot control generated writing. Its 0.438 pixel F1
-and unreadable pseudo-characters reject the stronger claim. V18 then uses only
-2.36M trainable parameters and 0.778~GiB peak memory to reach 0.658 pixel F1
-and 73.63\% identity top-1 on fresh development renderings, versus 0.313 and
-0.98\% when intent is shuffled. This demonstrates that structured, recognizable
-writing can be generated as continuous image topology by a compact model on one
-consumer GPU without token unembedding. Dense forms still fail, the V18 frozen
-bank remains sealed, and the intended state is supplied rather than predicted.
-V19 adds a clean split, fixed complexity strata, five interventions, and a
-prospective blinded rule, then rejects its own proposed repair: the correct
-field gains only 0.0088 dense F1 over a shuffled field and 0.0054 over no field.
-This demonstrates that exposing local features is not equivalent to using them
-causally. V20 changes the routing constraint with two exactly matched
-0.506M-parameter arms. It obtains a 0.1218 dense-F1 field-shuffle gap, a 0.3613
-zero-field gap, and 1.0 local-occlusion locality. This establishes necessary,
-topographic use of the continuous retinal field. V20 is nevertheless rejected
-as a writer: overall F1, target cosine, exact decomposition, and the paired
-control margin fail, so no checkpoint, human review, or frozen evaluation is
-accepted.
-V21 then makes both coarse occupancy and detail originate from each
-corresponding local cell, with global state restricted to uniform modulation.
-Its 0.1739 shuffled-field dense gap, 0.3465 zero-field gap, 79.10\% identity,
-0.8331 target cosine, 1.0 locality, and exact basis receipts establish the
-stronger field-complete routing result. The equal-parameter global-only source
-cannot draw a spatial plan. Yet 0.6038 overall, 0.5648 simple, and 0.5945
-medium F1 reject V21's disjoint-patch writer. No candidate selects, and no
-paired, human, or frozen claim is accepted.
-V22 then closes the interface for a bounded six-frame visual prompt and
-one-frame image answer with two exactly matched 3.410M-parameter arms. It
-rejects the stronger understanding claim: 0.0078 counterfactual switch accuracy,
-0.0089 paired-output L1, and 0.1592 identity top-1 are not meaningfully better
-than the query-blind control's 0, 0, and 0.1533. The operation frame receives
-all 1,024 candidate selector argmaxes. This demonstrates why prompt-dependent
-image generation requires relation composition, not simply a visual
-Transformer, sharp attention, and a pixel writer.
-V23 supplies that composition with a separately qualified writer and three
-matched 25,602-parameter relation arms. Fresh development controls, an opaque
-visual review, and the single frozen run agree: the candidate uses both query
-and operation images, preserves pair-order invariance, generalizes to held-out
-compositions and 98 unseen identities, and renders the selected form. Frozen
-binary choice is 0.9983, identity top-1 is 0.9946, and pixel F1 is 0.7848. The
-maximum supported claim is fixed-grammar visual relation following. The roles
-and relation algebra remain built into the circuit, and the answer remains a
-canonicalized visible source form.
-V24 removes absolute role positions, varies the prompt from 15 to 24 raster
-frames, and emits two images. Five matched 1,347-parameter arms localize the
-causal chain: query-, operation-, and history-blind controls each have exactly
-zero response to their hidden factor, while header blindness destroys role
-localization. The candidate's single frozen run over 107 unseen identities
-reaches 0.9867 frame-1 identity, 0.9973 frame-2 label accuracy, and 0.9961
-history switch accuracy; every fixed gate passes. V24 therefore establishes
-generated-pixel rereading in a bounded variable-input stream. It does not turn
-the fixed packet algebra into natural language.
-V25 performs that first ordinary-language test at a bounded 64-cell horizon.
-Its 1.123\% full-history top-1 exceeds last-only by 0.977 percentage points and
-shuffled history by 0.781 points, establishing a weak ordered dependency. It
-does not exceed image unigram, misses the log-probability gate by 0.00118 nat,
-fails counterfactual and target-cosine gates, and remains 10.8 times below the
-symbolic bigram. The exploratory writer reaches zero generated identity. The
-25.55M-parameter system fits easily on one RTX 4090, but capability-normalized
-efficiency is not established. The frozen partition is not queried.
-V26 performs the prescribed separation and replaces a point proposal with
-eight-particle conditional distributions at four future horizons. Its
-19.14M-parameter system completes 8,000 BF16 updates in 31.05 minutes with
-0.888~GiB peak allocated memory. This is a resource result, not a language
-result. Full-history top-1 is 0.0488\%, below 1.4160\% image unigram and
-13.5254\% symbolic bigram. More decisively, exact suffix matching makes the
-appearance-state difference zero while earlier histories produce residual
-difference 4.628; correct pair ranking and swapped-residual target accuracy are
-still exactly chance. The perfect retina oracle rules out target-identity loss.
-No mechanism selects, no writer is trained, and the frozen partition is not
-queried.
-V27 then jointly trains the context field and deterministic arbitrary-candidate
-image compatibility. Its 18.60M-parameter model completes the fixed 8,000
-updates and audit in 39.12 minutes with 2.268~GiB peak allocated memory. The
-raw V16 retina still gives 99.951\% cross-font identity, suffix pixels are
-exact, candidate permutation error is zero, and last-only and suffix-only arms
-are exactly at chance. Yet full-context assignment is only 50.708\%, versus
-50.562\% after prefix shuffling. Separately, learned 1,024-bank identity is
-94.873\% and misses its 99\% gate; it is not directly comparable to the
-two-candidate raw control. Natural top-1 is 1.611\%, below 2.051\% unigram and
-12.598\% bigram, while its
-full-versus-shuffled log-probability gain is only 0.00273 nat. V27 passes seven
-of thirteen mechanism gates and one of five language gates. No frozen query or
-writer is authorized.
-V28 performs the dense future-field test with a frozen retina. Its
-17.86M-parameter system completes 10,000 BF16 updates and audit in 118.91
-minutes with 1.144~GiB peak allocated memory. The EMA semantic route improves
-same-scope 1,024-way identity from 92.041\% to 96.436\%, and full context gains
-0.0304 nat over suffix-4 and 0.2151 nat over shuffled-prefix target log
-probability. Yet natural top-1 is only 1.416\%, below unigram and bigram, while
-pixel-identical-suffix pair assignment is 49.561\% versus 49.951\% shuffled.
-V28 passes ten of fourteen mechanism gates and two of six language gates. No
-frozen query or writer is authorized.
-V29 performs that candidate-conditioned incremental test. Its 20.08M-parameter
-system completes 8,000 BF16 updates and audit in 82.60 minutes with
-3.356~GiB peak allocated memory. Full target log probability gains 0.1794 nat
-over suffix-4 and 3.1025 nat over shuffled prefix, yet natural top-1 is 2.344\%
-versus 13.867\% bigram. Exact-suffix increment assignment is 50.708\% versus
-49.561\% shuffled; both-correct is 8.984\%. Full and incremental aggregate mean
-margins are both 0.005103 because the common suffix baseline cancels. V29
-passes eight of fourteen mechanism gates and two of six language gates. No
-frozen query or writer is authorized.
-V30 then predicts a candidate-independent $4\times4\times192$ retinal field and
-compares aligned local evidence with a parameter-identical tiled-global
-control. Both arms complete 8,000 finite updates from byte-identical initialized
-tensors with approximately 1.60~GiB peak allocated memory. Spatial natural
-top-1 is 1.270\%, below 2.490\% global, 1.318\% image unigram, and 11.719\%
-symbolic bigram. Exact-suffix pair assignment is 50.049\% versus 50.586\%
-global. Patch reversal changes the score but improves target log probability by
-only 0.0154 nat and pair accuracy by 0.391 percentage point. V30 passes 12/18
-spatial common gates, 12/12 control integrity gates, 5/9 matched gates, and 0/8
-language gates. No frozen query or writer is authorized.
-V31 performs the conditional continuous-flow test. Two 18.74M-parameter arms
-complete 10,000 finite updates from byte-identical initialized states with
-approximately 0.997~GiB peak allocated memory. The spatial route gains 0.1259
-nat over shuffled context and 0.0527 nat over spatial permutation, and its
-autonomous fields pass fixed diversity and condition-sensitivity gates. Yet
-natural path top-1 is 0.0977%, below 1.8555% global, 1.6113% image unigram,
-13.5254% symbolic bigram, and 20.9961% symbolic trigram. Exact-suffix path and
-autonomous assignment are 50.4883% and 50.1953%. V31 passes 14/19 spatial
-common gates, 6/6 control integrity gates, 4/8 matched gates, and 0/10 language
-and generation gates. Its generated object is a latent field rather than a
-pixel image; evaluator-nearest glyphs are diagnostic proxies. No frozen query
-or direct raster writer is authorized.
-The seven-context V16 increase, V25 ordered-history increase, V26 changed
-history state, V27 global compatibility score, V28 probability/margin order
-effect, V29 density-ratio order effect, V30 local-alignment effect, and V31
-conditional-flow response are therefore all too weak to establish a useful
-causal language core. V30 shows that one deterministic aligned field does not
-repair that core; V31 shows that a coherent multimodal flow over the same
-one-glyph latent target still does not repair it. The next attributable test
-must keep ordinary Chinese and the strict image boundary while changing the
-task to rendered prompt-to-answer and block continuation. Causal QKV attention
-must form a visual semantic plan; a decoupled continuous renderer must emit a
-multi-glyph answer raster directly. The first proof should use only enough open
-and provenance-tracked data to test held-out compositions. LocalLLM may prepare
-fixed offline curricula, but it cannot enter student training tensors,
-checkpoints, or inference. Prompt counterfactual, content-swap, paraphrase,
-order-shuffle, visual-frequency, symbolic sequence, readability, and
-generated-history controls must pass before long context or raw-book scale is
-promoted. The exact serpentine mapping may later fold clean $32\times32$ cells
-into a $256\times256$ retinal lattice without making an $8\times8$ thumbnail
-the sole record. Page-native canvases, 3D
-geometry, color, and motion remain later observable channels and may not encode
-hidden character IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
-generated-history-blind, retrieval, and OCR-plus-text controls must distinguish
-language use from reconstruction and lookup. Only selected components may
-enter longer visual memory. The named product gate is a Visual Word-Origin Book that
-reads a rendered prompt alone or composed with a source page, then emits one
-answer image or an ordered answer-image stream plus an optional declared text
-sidecar. Prompt counterfactuals must change that answer correctly; input
-reconstruction and glyph retrieval do not constitute understanding.
-Historical etymology answers and broad instruction following remain downstream
-goals, not present capabilities, and no Qwen-8B parity or end-to-end efficiency
-claim is warranted. The perception--prediction--motor--self-perception
-factorization may later use the Visual Language Stream for 3D character strings
-or writing movies, and may be tested on continuous speech or vocal fields. None
-of those higher-dimensional sensory-language extensions is established here.
+Visible writing is a legitimate modeling substrate, but replacing symbolic
+tokens with pixels does not make language learning easy or automatically more
+efficient. The experimental sequence separates several requirements that are
+often conflated: preserving glyph form, using ordered visual context, binding a
+prompt relation, writing pixels, and rereading generated output. V23 and V24
+establish bounded visual relation following and generated-pixel causality under
+fixed grammars. V25--V31 then show repeatedly that context-sensitive continuous
+states can fail to select the correct natural-language future.
 
+V34 resolves one interface bottleneck. Its 7.42M-parameter continuous codec
+preserves held-font modern Chinese and held-family historical forms with about
+0.998 ink and edge F1, without a discrete visual vocabulary, and trains in
+321 seconds with 2.38~GiB peak allocated memory. This is a strong visual
+representation and reconstruction result. It is not evidence that the latent
+organizes meaning, grammar, or likely futures.
+
+V35 tests the stronger closed-loop hypothesis using that codec and an explicitly
+credited PIXAR initialization. The 129.09M-parameter system completes 22,000
+finite BF16 updates in 2.77 hours with 2.899~GiB peak allocated memory on one
+RTX 4090. Its packaged inference path receives pixels and a visual-position
+mask, emits binary raster patches, and feeds only decoded, thresholded, and
+re-encoded visible patches into later context. It contains no tokenizer,
+Unicode or character IDs, OCR, retrieval, codebook, lookup table, or runtime
+teacher. This makes V35 a complete and reproducible raster-input/raster-output
+experimental runtime.
+
+The language result is nevertheless negative. Autonomous copy character
+accuracy is 0.3125\%, correct copy prompts exceed shuffled prompts by only
+0.117 percentage point, and copy target preference is 62.5\%. Autonomous
+instruction accuracy is 0.1116\%, lower than the shuffled-prompt condition.
+Generated strips are finite, nonblank, and responsive to pixel interventions,
+but their marks are corrupted and not bound to the requested target. V35 passes
+5/12 visual-causal gates and 5/9 semantic-raster gates and is
+\texttt{not-qualified}. The sealed split remains unopened. Training loss,
+nonblank pixels, and nonempty OCR are not substitutes for counterfactual
+semantic evidence.
+
+The strongest supported claim is therefore narrow: one consumer GPU is enough
+to build, train, audit, package, and execute a self-contained continuous visual
+language experiment at 129M parameters, but the tested objective does not learn
+useful autonomous Chinese language. No Qwen, GPT, or general-LLM parity is
+shown, and no matched evidence supports compute superiority over token models.
+The runtime is independent of external services, not independent of
+provenance: PIXAR supplies external causal initialization, V34 supplies the
+project codec, and the unstated PIXAR weight license prevents redistribution of
+the derived artifact.
+
+The next bounded experiment should not merely enlarge V35. It should learn an
+answer-level, multi-patch visual semantic plan with strong paired,
+counterfactual, and contrastive supervision, then condition a separate raster
+renderer on that plan. Representation-rich external visual or language
+foundations are acceptable if they make the experiment work and if source,
+license, training role, and deployed presence are explicit. Promotion still
+requires that correct prompts move autonomous pixels toward the correct paired
+answer more than shuffled, blank, partial, and paraphrased controls.
+
+A Visual Word-Origin Book remains the product target: rendered questions should
+produce readable answer images containing modern explanation and
+provenance-linked historical forms, including forms absent from computer
+encodings. V35 does not yet answer such questions. Page-scale reading, 3D
+writing, motion, speech, and broad multilingual generation remain future
+extensions of the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
 \bibitem{gpt4} OpenAI. GPT-4 Technical Report. \url{https://arxiv.org/abs/2303.08774}
@@ -3128,7 +3077,10 @@ of those higher-dimensional sensory-language extensions is established here.
 \bibitem{donut} Kim et al. OCR-free Document Understanding Transformer. \url{https://arxiv.org/abs/2111.15664}
 \bibitem{pix2struct} Lee et al. Pix2Struct: Screenshot Parsing as Pretraining for Visual Language Understanding. \url{https://arxiv.org/abs/2210.03347}
 \bibitem{pixel} Rust et al. Language Modelling with Pixels. \url{https://arxiv.org/abs/2207.06991}
+\bibitem{renderingstrategies} Lotz et al. Text Rendering Strategies for Pixel Language Models. \url{https://arxiv.org/abs/2311.00522}
+\bibitem{pixelm4} Kesen et al. Multilingual Pretraining for Pixel Language Models. \url{https://arxiv.org/abs/2505.21265}
 \bibitem{pixar} Tai et al. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \url{https://arxiv.org/abs/2401.03321}
+\bibitem{mixar} Hu et al. MIXAR: Scaling Autoregressive Pixel-based Language Models to Multiple Languages and Scripts. \url{https://arxiv.org/abs/2604.11575}
 \bibitem{pixelgpt} Chai et al. Autoregressive Pre-Training on Pixels and Texts. \url{https://arxiv.org/abs/2404.10710}
 \bibitem{canine} Clark et al. CANINE: Pre-training an Efficient Tokenization-Free Encoder. \url{https://arxiv.org/abs/2103.06874}
 \bibitem{byt5} Xue et al. ByT5: Towards a Token-Free Future. \url{https://arxiv.org/abs/2105.13626}
@@ -3142,6 +3094,9 @@ of those higher-dimensional sensory-language extensions is established here.
 \bibitem{maskgit} Chang et al. MaskGIT: Masked Generative Image Transformer. \url{https://arxiv.org/abs/2202.04200}
 \bibitem{ldm} Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models. \url{https://arxiv.org/abs/2112.10752}
 \bibitem{dit} Peebles and Xie. Scalable Diffusion Models with Transformers. \url{https://arxiv.org/abs/2212.09748}
+\bibitem{mar} Li et al. Autoregressive Image Generation without Vector Quantization. \url{https://arxiv.org/abs/2406.11838}
+\bibitem{nextstep} NextStep Team. NextStep-1: Toward Autoregressive Image Generation with Continuous Tokens at Scale. \url{https://arxiv.org/abs/2508.10711}
+\bibitem{rae} Zheng et al. Diffusion Transformers with Representation Autoencoders. \url{https://arxiv.org/abs/2510.11690}
 \bibitem{flowmatching} Lipman et al. Flow Matching for Generative Modeling. \url{https://arxiv.org/abs/2210.02747}
 \bibitem{rfm} Chen and Lipman. Riemannian Flow Matching on General Geometries. \url{https://arxiv.org/abs/2302.03660}
 \bibitem{rcnf} Mathieu and Nickel. Riemannian Continuous Normalizing Flows. \url{https://arxiv.org/abs/2006.10605}

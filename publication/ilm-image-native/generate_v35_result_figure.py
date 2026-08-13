@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Compose the measured V35 result from hash-pinned development evidence."""
+"""Compose the measured V35 result from hash-pinned training and audit evidence."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+import math
 import textwrap
 from pathlib import Path
 from typing import Any
@@ -26,6 +27,9 @@ DEFAULT_INSTRUCTION = (
     ROOT
     / "artifacts/causal_glyph_flow_v35_20260814/development/galleries/ema/instruction_anchor.png"
 )
+DEFAULT_METRICS = (
+    ROOT / "artifacts/causal_glyph_flow_v35_20260814/training_metrics.jsonl"
+)
 DEFAULT_PROTOCOL = ROOT / "references/causal_glyph_flow_v35_protocol.md"
 DEFAULT_OUT = Path(__file__).resolve().parent / "figures/causal_glyph_flow_v35_result.png"
 
@@ -37,6 +41,9 @@ EXPECTED_COPY_SHA256 = (
 )
 EXPECTED_INSTRUCTION_SHA256 = (
     "4e9243b09411e341b936671148de6e423cbc5001f36fe51feb98ead47ff6355c"
+)
+EXPECTED_METRICS_SHA256 = (
+    "c3a982c826c060c94fa2e95a72fe4b47bb7eee26565a4e529901a0060c52cc6e"
 )
 EXPECTED_CHECKPOINT_SHA256 = (
     "ca30872ffdc84d3719068d27ad456da9629428eed6a37ca9eaf62f40c3acb0b1"
@@ -63,6 +70,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--copy", type=Path, default=DEFAULT_COPY)
     parser.add_argument("--instruction", type=Path, default=DEFAULT_INSTRUCTION)
+    parser.add_argument("--metrics", type=Path, default=DEFAULT_METRICS)
     parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     return parser.parse_args()
@@ -83,11 +91,14 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def load_and_validate(args: argparse.Namespace) -> dict[str, Any]:
+def load_and_validate(
+    args: argparse.Namespace,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     expected = {
         args.report: EXPECTED_REPORT_SHA256,
         args.copy: EXPECTED_COPY_SHA256,
         args.instruction: EXPECTED_INSTRUCTION_SHA256,
+        args.metrics: EXPECTED_METRICS_SHA256,
         args.protocol: EXPECTED_PROTOCOL_SHA256,
     }
     for path, digest in expected.items():
@@ -112,7 +123,28 @@ def load_and_validate(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError("V35 checkpoint audit changed")
     if not report.get("closed_loop_receipt", {}).get("passed"):
         raise ValueError("V35 closed-loop receipt changed")
-    return report
+    metrics = [
+        json.loads(line)
+        for line in args.metrics.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    stage_counts = {
+        stage: sum(row.get("stage") == stage for row in metrics)
+        for stage in (
+            "visual-interface-alignment",
+            "public-causal-continuation",
+            "instruction-and-copy",
+        )
+    }
+    if len(metrics) != 22_000 or stage_counts != {
+        "visual-interface-alignment": 2_000,
+        "public-causal-continuation": 8_000,
+        "instruction-and-copy": 12_000,
+    }:
+        raise ValueError("V35 training metric coverage changed")
+    if any(not math.isfinite(float(row["loss"])) for row in metrics):
+        raise ValueError("V35 training metrics contain a non-finite loss")
+    return report, metrics
 
 
 def centered(
@@ -169,6 +201,105 @@ def summary_panel(
             font=font(16),
             fill=MUTED,
         )
+
+
+def training_panel(
+    draw: ImageDraw.ImageDraw,
+    bounds: tuple[int, int, int, int],
+    metrics: list[dict[str, Any]],
+) -> None:
+    left, top, right, bottom = bounds
+    draw.rounded_rectangle(bounds, radius=7, fill=WHITE, outline=LINE, width=2)
+    draw.rectangle((left, top, left + 10, bottom), fill=GREEN)
+    draw.text(
+        (left + 28, top + 15),
+        "Training trajectory",
+        font=font(21, bold=True),
+        fill=INK,
+    )
+    draw.text(
+        (left + 28, top + 48),
+        "22,000 finite updates | Stage A pass | 2.899 GiB peak",
+        font=font(13),
+        fill=MUTED,
+    )
+
+    causal = [
+        row
+        for row in metrics
+        if row["stage"]
+        in {"public-causal-continuation", "instruction-and-copy"}
+    ]
+    windows: list[tuple[int, float, str]] = []
+    for offset in range(0, len(causal), 100):
+        batch = causal[offset : offset + 100]
+        windows.append(
+            (
+                int(batch[-1]["global_update"]),
+                sum(float(row["loss"]) for row in batch) / len(batch),
+                str(batch[-1]["stage"]),
+            )
+        )
+
+    chart = (left + 30, top + 82, right - 22, bottom - 20)
+    chart_left, chart_top, chart_right, chart_bottom = chart
+    draw.rectangle(chart, fill="#f8fafb", outline="#d3dde0", width=1)
+    values = [value for _, value, _ in windows]
+    minimum = min(values) - 0.08
+    maximum = max(values) + 0.08
+
+    def point(update: int, value: float) -> tuple[float, float]:
+        x = chart_left + (update - 2_100) / (22_000 - 2_100) * (
+            chart_right - chart_left
+        )
+        y = chart_bottom - (value - minimum) / (maximum - minimum) * (
+            chart_bottom - chart_top
+        )
+        return x, y
+
+    for ratio in (0.25, 0.5, 0.75):
+        y = chart_top + ratio * (chart_bottom - chart_top)
+        draw.line((chart_left, y, chart_right, y), fill="#e2e9eb", width=1)
+    boundary_x = point(10_000, minimum)[0]
+    draw.line(
+        (boundary_x, chart_top, boundary_x, chart_bottom),
+        fill=LINE,
+        width=2,
+    )
+    for stage, color in (
+        ("public-causal-continuation", TEAL),
+        ("instruction-and-copy", AMBER),
+    ):
+        stage_points = [
+            point(update, value)
+            for update, value, row_stage in windows
+            if row_stage == stage
+        ]
+        draw.line(stage_points, fill=color, width=3, joint="curve")
+
+    public = [row for row in causal if row["stage"] == "public-causal-continuation"]
+    instruction = [row for row in causal if row["stage"] == "instruction-and-copy"]
+
+    def edge_means(rows: list[dict[str, Any]]) -> tuple[float, float]:
+        return (
+            sum(float(row["loss"]) for row in rows[:200]) / 200,
+            sum(float(row["loss"]) for row in rows[-200:]) / 200,
+        )
+
+    public_first, public_last = edge_means(public)
+    instruction_first, instruction_last = edge_means(instruction)
+    draw.text(
+        (chart_left + 6, chart_top + 4),
+        f"public {public_first:.2f}->{public_last:.2f}",
+        font=font(11, bold=True),
+        fill=TEAL,
+    )
+    draw.text(
+        (boundary_x + 8, chart_top + 4),
+        f"instruction {instruction_first:.2f}->{instruction_last:.2f}",
+        font=font(11, bold=True),
+        fill=AMBER,
+    )
 
 
 def metric_tile(
@@ -231,7 +362,7 @@ def evidence_panel(
 
 def main() -> None:
     args = parse_args()
-    report = load_and_validate(args)
+    report, metrics = load_and_validate(args)
     decision = report["decision"]
     writer = decision["selected_writer"]
     ema = report["states"]["ema"]
@@ -269,17 +400,10 @@ def main() -> None:
     )
     badge(draw, (2032, 42, 2340, 94), "NOT QUALIFIED", fill=RED)
 
-    summary_panel(
+    training_panel(
         draw,
         (58, 140, 765, 330),
-        "Training integrity",
-        (
-            "22,000 / 22,000 finite updates",
-            "Stage A alignment passed",
-            "2.899 GiB peak allocated VRAM",
-            "checkpoint ca30872f...b0b1",
-        ),
-        accent=GREEN,
+        metrics,
     )
     summary_panel(
         draw,
@@ -424,7 +548,7 @@ def main() -> None:
     )
     draw.text(
         (60, 1654),
-        "Report 3d14e15d...17ba | checkpoint ca30872f...b0b1 | sealed unopened | external PIXAR initialization credited",
+        "Metrics c3a982c8...cc6e | report 3d14e15d...17ba | checkpoint ca30872f...b0b1 | sealed unopened | PIXAR credited",
         font=font(13),
         fill=MUTED,
     )
