@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -89,6 +90,7 @@ def visual_semantic_plan_fonts(split: str) -> tuple[str, ...]:
     return available
 
 
+@lru_cache(maxsize=32)
 def _font(path: str, size: int) -> ImageFont.FreeTypeFont:
     if not Path(path).is_file():
         raise FileNotFoundError(path)
@@ -318,6 +320,39 @@ def load_v36_instruction_records(path: str | Path) -> list[VisualRasterRecord]:
     )
 
 
+def select_v36_instruction_records(
+    records: Sequence[VisualRasterRecord],
+    *,
+    split: str,
+    render_config: VisualSemanticPlanRenderConfig,
+    include_all_records: bool = False,
+) -> tuple[tuple[VisualRasterRecord, ...], tuple[str, ...]]:
+    if split not in V36_SPLITS:
+        raise ValueError(f"unknown V36 split: {split}")
+    partitioned = [
+        record
+        for record in records
+        if include_all_records
+        or visual_raster_partition(record.identifier, stream="instruction") == split
+    ]
+    rejected = tuple(
+        record.identifier
+        for record in partitioned
+        if not visual_semantic_plan_record_fits(
+            record,
+            split=split,
+            config=render_config,
+        )
+    )
+    rejected_set = set(rejected)
+    selected = tuple(
+        record for record in partitioned if record.identifier not in rejected_set
+    )
+    if not selected:
+        raise ValueError(f"V36 instruction split {split!r} is empty")
+    return selected, rejected
+
+
 class VisualSemanticPlanDataset(Dataset):
     def __init__(
         self,
@@ -329,33 +364,16 @@ class VisualSemanticPlanDataset(Dataset):
         length: int | None = None,
         include_all_records: bool = False,
     ) -> None:
-        if split not in V36_SPLITS:
-            raise ValueError(f"unknown V36 split: {split}")
-        partitioned = [
-            record
-            for record in records
-            if include_all_records
-            or visual_raster_partition(record.identifier, stream="instruction")
-            == split
-        ]
-        self.rejected_identifiers = tuple(
-            record.identifier
-            for record in partitioned
-            if not visual_semantic_plan_record_fits(
-                record,
-                split=split,
-                config=render_config,
-            )
+        self.records, self.rejected_identifiers = select_v36_instruction_records(
+            records,
+            split=split,
+            render_config=render_config,
+            include_all_records=include_all_records,
         )
-        rejected = set(self.rejected_identifiers)
-        selected = [record for record in partitioned if record.identifier not in rejected]
-        if not selected:
-            raise ValueError(f"V36 instruction split {split!r} is empty")
-        self.records = tuple(selected)
         self.split = split
         self.render_config = render_config
         self.seed = int(seed)
-        self.length = len(selected) if length is None else int(length)
+        self.length = len(self.records) if length is None else int(length)
         if self.length < 1:
             raise ValueError("V36 dataset length must be positive")
 
@@ -377,6 +395,157 @@ class VisualSemanticPlanDataset(Dataset):
             config=self.render_config,
             variant=rng.randrange(2**31),
         )
+
+
+class VisualSemanticPlanPromptDataset(Dataset):
+    def __init__(
+        self,
+        records: Sequence[VisualRasterRecord],
+        *,
+        split: str,
+        render_config: VisualSemanticPlanRenderConfig,
+        seed: int,
+        length: int,
+    ) -> None:
+        self.records, self.rejected_identifiers = select_v36_instruction_records(
+            records,
+            split=split,
+            render_config=render_config,
+        )
+        if length < 1:
+            raise ValueError("V36 prompt stream length must be positive")
+        self.split = split
+        self.render_config = render_config
+        self.seed = int(seed)
+        self.length = int(length)
+
+    def __len__(self) -> int:
+        return self.length
+
+    def __getitem__(self, index: int) -> dict[str, Any]:
+        if not 0 <= index < self.length:
+            raise IndexError(index)
+        rng = random.Random(self.seed + index * 1_000_003)
+        record = self.records[rng.randrange(len(self.records))]
+        fonts = visual_semantic_plan_fonts(self.split)
+        prompt_font = fonts[rng.randrange(len(fonts))]
+        view_font = fonts[rng.randrange(len(fonts))]
+        variant = rng.randrange(2**31)
+        force_origin = None if self.split == "train" else 0
+        prompt_pixels, prompt_mask, prompt_meta = render_visual_sentence_strip(
+            record.prompt,
+            config=self.render_config,
+            font_path=prompt_font,
+            variant=variant,
+            force_origin=force_origin,
+        )
+        prompt_view_pixels, prompt_view_mask, prompt_view_meta = (
+            render_visual_sentence_strip(
+                record.prompt,
+                config=self.render_config,
+                font_path=view_font,
+                variant=variant + 17,
+                force_origin=force_origin,
+            )
+        )
+        return {
+            "prompt_pixels": prompt_pixels,
+            "prompt_mask": prompt_mask,
+            "prompt_view_pixels": prompt_view_pixels,
+            "prompt_view_mask": prompt_view_mask,
+            "metadata": {
+                "identifier": record.identifier,
+                "prompt": prompt_meta,
+                "prompt_view": prompt_view_meta,
+            },
+        }
+
+
+class VisualSemanticPlanAnswerDataset(Dataset):
+    def __init__(
+        self,
+        records: Sequence[VisualRasterRecord],
+        *,
+        split: str,
+        render_config: VisualSemanticPlanRenderConfig,
+        seed: int,
+    ) -> None:
+        self.records, self.rejected_identifiers = select_v36_instruction_records(
+            records,
+            split=split,
+            render_config=render_config,
+        )
+        self.split = split
+        self.render_config = render_config
+        self.seed = int(seed)
+
+    def __len__(self) -> int:
+        return len(self.records)
+
+    def __getitem__(self, index: int) -> dict[str, Any]:
+        if not 0 <= index < len(self.records):
+            raise IndexError(index)
+        record = self.records[index]
+        rng = random.Random(self.seed + index * 1_000_033)
+        fonts = visual_semantic_plan_fonts(self.split)
+        font_path = fonts[rng.randrange(len(fonts))]
+        variant = rng.randrange(2**31)
+        force_origin = None if self.split == "train" else 0
+        answer_pixels, answer_mask, answer_meta = render_visual_sentence_strip(
+            record.answer,
+            config=self.render_config,
+            font_path=font_path,
+            variant=variant,
+            force_origin=force_origin,
+        )
+        chunk_pixels, chunk_mask = split_visual_answer_chunks(
+            answer_pixels,
+            answer_mask,
+        )
+        return {
+            "answer_pixels": answer_pixels,
+            "answer_mask": answer_mask,
+            "answer_chunk_pixels": chunk_pixels,
+            "answer_chunk_mask": chunk_mask,
+            "answer_length": answer_mask.sum().float(),
+            "metadata": {
+                "identifier": record.identifier,
+                "answer": answer_meta,
+            },
+        }
+
+
+def visual_semantic_plan_prompt_collate(
+    batch: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    if not batch:
+        raise ValueError("cannot collate an empty V36 prompt batch")
+    keys = (
+        "prompt_pixels",
+        "prompt_mask",
+        "prompt_view_pixels",
+        "prompt_view_mask",
+    )
+    return {key: torch.stack([item[key] for item in batch]) for key in keys} | {
+        "metadata": [item.get("metadata", {}) for item in batch]
+    }
+
+
+def visual_semantic_plan_answer_collate(
+    batch: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    if not batch:
+        raise ValueError("cannot collate an empty V36 answer batch")
+    keys = (
+        "answer_pixels",
+        "answer_mask",
+        "answer_chunk_pixels",
+        "answer_chunk_mask",
+        "answer_length",
+    )
+    return {key: torch.stack([item[key] for item in batch]) for key in keys} | {
+        "metadata": [item.get("metadata", {}) for item in batch]
+    }
 
 
 def visual_semantic_plan_collate(
