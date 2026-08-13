@@ -521,8 +521,11 @@ def main() -> None:
     if not args.smoke and not args.exploratory and device.type != "cuda":
         raise ValueError("V32 evidence requires CUDA")
     seed_everything(args.seed)
+    cuda_index = None
     if device.type == "cuda":
-        torch.cuda.reset_peak_memory_stats(device)
+        cuda_index = 0 if device.index is None else device.index
+        torch.cuda.set_device(cuda_index)
+        torch.cuda.reset_peak_memory_stats(cuda_index)
     output_dir = Path(args.out)
     output_dir.mkdir(parents=True, exist_ok=True)
     metrics_path = output_dir / "training_metrics.jsonl"
@@ -602,7 +605,7 @@ def main() -> None:
         "device": str(device),
         "torch_version": torch.__version__,
         "cuda_version": torch.version.cuda,
-        "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None,
+        "gpu": torch.cuda.get_device_name(cuda_index) if cuda_index is not None else None,
         "model_boundary": visual_semantic_raster_boundary_receipt(model),
         "optimizer": optimizer_receipt,
         "initialization": initialization,
@@ -719,7 +722,7 @@ def main() -> None:
                 **aggregate,
             }
             if device.type == "cuda":
-                row["peak_vram_bytes"] = torch.cuda.max_memory_allocated(device)
+                row["peak_vram_bytes"] = torch.cuda.max_memory_allocated(cuda_index)
             if global_update == 1 or global_update % args.log_every == 0:
                 print(json.dumps(row), flush=True)
             append_jsonl(metrics_path, row)
@@ -755,7 +758,9 @@ def main() -> None:
         "elapsed_seconds": time.perf_counter() - started,
         "checkpoint": str(output_dir / "checkpoint_latest.pt"),
         "peak_vram_bytes": (
-            torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0
+            torch.cuda.max_memory_allocated(cuda_index)
+            if cuda_index is not None
+            else 0
         ),
         "stopped_by_signal": stop_requested[0],
     }
