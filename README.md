@@ -44,11 +44,14 @@ with ordinary rendered Chinese. It finds a weak ordered-history signal but is
 rejected as a language model. V26 separates last-glyph appearance from earlier
 history and predicts continuous visual particles, but its pixel-identical
 suffix intervention shows that changed history states still produce chance
-target preferences. The next proof must make visual context-to-glyph binding
-conditionally identifiable at 64 cells before adding page scale, 3D geometry,
-or motion. A frozen-state diagnostic now shows that replacing only V26's
-stochastic output head is insufficient: its history representation itself does
-not expose a transferable next-glyph relation to a compact visual scorer.
+target preferences. V27 jointly trains a causal visual context and arbitrary
+candidate-image compatibility. The raw retina still distinguishes cross-font
+forms at `99.95%`, but full-context pair assignment is `50.71%` and only
+`0.15` percentage point above shuffled context; natural top-1 remains below
+unigram and bigram. This rejects the global query/key compatibility route. The
+next proof must preserve raw visual geometry and make ordered future-field
+prediction causally necessary at 64 cells before adding page scale, 3D
+geometry, or motion.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -68,7 +71,47 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V26 Factorized Context Rejected
+## Latest Natural-Language Test: V27 Joint Compatibility Rejected
+
+![Measured V27 joint visual-compatibility result: candidate images remain visible, but full context does not beat shuffled context or frequency baselines](publication/ilm-image-native/figures/joint_visual_compatibility_v27_result.png)
+
+V27 tests whether a compact model can learn language by scoring an arbitrary
+next-glyph image directly from 64 preceding glyph images. Its
+`18,599,553`-parameter image-only student initializes an online retina from
+V16, builds a context query with eight causal rotary blocks, and scores an EMA
+candidate-image key. It contains no strings, token or Unicode IDs, OCR,
+vocabulary matrix, codebook, candidate bank, glyph lookup, or external model.
+Candidate order is randomized independently, and the evaluator removes that
+permutation before scoring.
+
+The single preregistered run performs 8,000 BF16 updates on one RTX 4090.
+Training plus audit takes `39.12` minutes with `2.268 GiB` peak allocated
+CUDA memory. The fixed 2,048-window natural audit reaches `1.6113%` top-1,
+below the image unigram (`2.0508%`) and symbolic bigram (`12.5977%`).
+Full context improves target log probability over suffix-4 by `0.05925` nat,
+but only `0.00273` nat over a suffix-preserving prefix shuffle.
+
+The decisive 512-pair audit keeps the final four glyph images bitwise equal
+while changing earlier history and the target. The unchanged V16 retina
+identifies cross-font candidate forms at `99.9512%`, and candidate
+permutation error is exactly zero, so candidate visibility and row-position
+shortcuts are controlled. Full-context assignment is nevertheless
+`50.7080%`, compared with `50.5615%` after shuffling the prefix; learned
+cross-font candidate identity also falls to `94.8730%`. V27 passes only
+`7/13` mechanism gates and `1/5` language gates. It is rejected, the frozen
+partition remains sealed, and no writer is trained.
+
+The next experiment should keep the full `N x 1 x 32 x 32` glyph-image
+stream authoritative, freeze or exactly preserve the strong raw retinal
+geometry, and optimize dense per-position predictions with explicit
+suffix-preserving order interventions. A reversible 2D lattice can accelerate
+that stream later; depth and motion remain observable extensions rather than
+identity encodings. See the
+[complete V27 receipt](docs/joint-visual-compatibility-v27-result.md),
+[preregistered protocol](references/joint_visual_compatibility_v27_protocol.md),
+and [research decision](references/deterministic_visual_compatibility_v27_research.md).
+
+## Prior Natural-Language Test: V26 Factorized Context Rejected
 
 ![Measured V26 factorized visual-context result: earlier history changes the residual state, but matched next-glyph preference remains at chance](publication/ilm-image-native/figures/factorized_visual_context_v26_result.png)
 
@@ -102,7 +145,7 @@ states are not useful language prediction. See the
 [preregistered protocol](references/factorized_visual_context_v26_protocol.md),
 and [research decision](references/factorized_visual_context_v26_research.md).
 
-### Post-V26 Localization: Frozen Compatibility Probe
+### Pre-V27 Localization: Frozen Compatibility Probe
 
 ![Frozen V26 visual compatibility diagnostic: retina identity remains nearly perfect while history and fused-state next-glyph assignment stay at chance](publication/ilm-image-native/figures/v26_frozen_visual_compatibility_probe.png)
 
@@ -116,9 +159,9 @@ The same frozen retina identifies the paired target image across fonts at
 does not explain the chance language result.
 
 This diagnostic is not preregistered evidence and opens no frozen data. It
-narrows the V27 decision: jointly train the causal visual context representation
-and deterministic image-candidate compatibility, then authorize a stochastic
-writer only after that language relation passes. See the
+motivated V27's joint causal-context and deterministic image-candidate test.
+The preregistered result above shows that this relation did not pass, so no
+stochastic writer was authorized. See the
 [diagnostic receipt](docs/v26-frozen-visual-compatibility-probe.md) and
 [V27 research decision](references/deterministic_visual_compatibility_v27_research.md).
 

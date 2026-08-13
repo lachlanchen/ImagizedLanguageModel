@@ -142,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains twelve complete experimental systems. V26 is the
+The repository now contains thirteen complete experimental systems. V27 is the
 latest measured development result; its frozen partition remains sealed:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
@@ -188,6 +188,12 @@ latest measured development result; its frozen partition remains sealed:
   preceding 63 glyph images and predicts continuous visual-particle
   distributions at four future horizons. Its fixed mechanism and language
   stages are rejected; no writer or frozen evaluation is opened.
+- Joint Visual Compatibility V27 is an 18.60M-parameter ordinary-Chinese
+  experiment. It jointly adapts a V16-initialized retina, an eight-layer causal
+  context field, and deterministic arbitrary-candidate image compatibility.
+  Raw cross-font form identity remains `99.95%`, but full-context pair
+  assignment is `50.71%` and natural top-1 remains below unigram and bigram.
+  Its fixed mechanism and language stages are rejected.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -313,14 +319,32 @@ A post-hoc frozen-state localization then trains a three-branch,
 per pair, the history residual reaches only `0.506836` arm accuracy and the
 fused state `0.503418`; appearance-only is exactly `0.500000`. The same frozen
 retina identifies paired target images across fonts at `0.999512`, so candidate
-visibility is not the explanation. V27 must jointly shape the context encoder
-and deterministic visual compatibility rather than replacing only V26's
-stochastic proposal. The diagnostic is post-hoc, does not open frozen images,
-and does not revise any V26 gate.
+visibility is not the explanation. This motivated V27 to jointly shape the
+context encoder and deterministic visual compatibility rather than replace
+only V26's stochastic proposal. The diagnostic is post-hoc, does not open
+frozen images, and does not revise any V26 gate.
 
 ![Factorized Visual Context V26 rejected development result](../publication/ilm-image-native/figures/factorized_visual_context_v26_result.png)
 
 ![Frozen V26 compatibility probe](../publication/ilm-image-native/figures/v26_frozen_visual_compatibility_probe.png)
+
+V27 directly tests that diagnostic's proposed repair. The fixed
+`18,599,553`-parameter model performs 8,000 BF16 updates and its complete
+development audit in `39.12` minutes on one RTX 4090, using `2.267916 GiB`
+peak allocated CUDA memory. On 2,048 natural windows, full-context top-1 is
+`0.016113`, below image unigram (`0.020508`) and symbolic bigram
+(`0.125977`). Full context gains `+0.059248` nat over suffix-4 target log
+probability but only `+0.002726` over a suffix-preserving prefix shuffle.
+
+In 512 pixel-identical suffix pairs and two unseen-font views, the unchanged
+V16 retina identifies cross-font targets at `0.999512`, candidate-permutation
+score error is exactly zero, and last-only and suffix-4 arms are exactly
+`0.500000`. Full context reaches only `0.507080`, versus `0.505615`
+after shuffling the earlier prefix. Learned candidate identity falls to
+`0.948730`. V27 passes `7/13` mechanism gates and `1/5` language gates,
+so it is rejected without frozen evaluation or writer training.
+
+![Joint Visual Compatibility V27 rejected development result](../publication/ilm-image-native/figures/joint_visual_compatibility_v27_result.png)
 
 It proved:
 
@@ -361,7 +385,11 @@ It proved:
   frozen evaluation; and
 - a pixel-identical suffix intervention showing that V26's earlier-history
   branch changes its continuous residual while correct next-glyph preference
-  remains at chance, with a perfect retina evaluator and sealed frozen split.
+  remains at chance, with a perfect retina evaluator and sealed frozen split;
+  and
+- a permutation-equivariant, arbitrary-candidate image audit showing that raw
+  retinal form identity remains nearly perfect while V27's jointly learned
+  context compatibility stays at chance and loses sequence-order evidence.
 
 It did not prove:
 
@@ -373,10 +401,14 @@ It did not prove:
 - readable autonomous continuation, despite stable V6/V7 ink occupancy;
 - historical-form question answering;
 - lower end-to-end cost than a text LLM;
-- parity with Qwen 8B; or
+- parity with Qwen 8B;
 - a selected natural-Chinese next-cell model: V25 remains below its image
   unigram and symbolic bigram controls, and V26's factorized continuous
-  distribution remains below both while its matched pair ranking is chance.
+  distribution remains below both while its matched pair ranking is chance;
+  and
+- a selected deterministic image-compatibility model: V27 remains below
+  unigram and bigram, degrades candidate identity, and differs negligibly from
+  suffix-preserving shuffled context.
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
@@ -384,7 +416,8 @@ topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
 relation proof, accepted V24 bounded visual packet/reread proof, and rejected
 V25 natural-Chinese cell stream, rejected V26 factorized visual-context
-mechanism, and rejected autonomous language-system proof**.
+mechanism, rejected V27 joint visual-compatibility mechanism, and rejected
+autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
@@ -397,14 +430,18 @@ detect ordered natural-writing history, but not bind it strongly enough to the
 correct next form. V26 implements the proposed appearance/history separation
 and proves that the residual state changes, but its pixel-identical suffix pairs
 show chance target binding. The immediate milestone is therefore not a larger
-page or 3D stream. It is a new preregistered 64-cell objective in which
-the visual context representation and context-dependent candidate choice are
-learned jointly and made necessary during training. The frozen-state diagnostic
-shows that useful binding is not merely hidden upstream of V26's proposal head.
-Only after that model beats suffix,
-shuffled-history, visual-unigram, and symbolic-bigram controls should the
-reversible serpentine lattice expand context. The unchanged V26 contract and
-complete result are in
+page or 3D stream. V27 has now tested and rejected the direct joint
+context-query/candidate-key repair: raw candidate visibility stays nearly
+perfect, but jointly learned geometry degrades and full context is effectively
+indistinguishable from shuffled context. The next preregistered 64-cell
+objective must preserve raw retinal geometry exactly, supervise dense ordered
+future fields instead of one global query, and make the correct history beat a
+suffix-preserving shuffle for the same candidate pixels. The authoritative
+representation remains the reversible `N x 1 x 32 x 32` glyph-image stream;
+a two-dimensional lattice is only a lossless compute view. Only after this
+model beats suffix, shuffled-history, visual-unigram, and symbolic-bigram
+controls should context length, geometric depth, motion, or a writer expand.
+The unchanged V26 contract and complete result are in
 [`references/factorized_visual_context_v26_protocol.md`](../references/factorized_visual_context_v26_protocol.md)
 and
 [`docs/factorized-visual-context-v26-result.md`](factorized-visual-context-v26-result.md).
@@ -412,6 +449,10 @@ The post-result localization and resulting V27 direction are in
 [`docs/v26-frozen-visual-compatibility-probe.md`](v26-frozen-visual-compatibility-probe.md)
 and
 [`references/deterministic_visual_compatibility_v27_research.md`](../references/deterministic_visual_compatibility_v27_research.md).
+The preregistered V27 protocol and fixed result are in
+[`references/joint_visual_compatibility_v27_protocol.md`](../references/joint_visual_compatibility_v27_protocol.md)
+and
+[`docs/joint-visual-compatibility-v27-result.md`](joint-visual-compatibility-v27-result.md).
 
 ## Implemented paradigm: predictive visual fields
 

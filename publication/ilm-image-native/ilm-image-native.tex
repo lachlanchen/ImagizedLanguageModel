@@ -139,6 +139,16 @@ reach only 50.684\% and 50.342\% cross-font assignment accuracy, respectively,
 while raw-retina target identity reaches 99.951\%. This diagnostic is not
 preregistered evidence, but it rules against preserving V26's context encoder
 and replacing only its stochastic proposal.
+V27 then performs the preregistered joint test with an 18.60M-parameter
+V16-initialized retina, eight-layer causal context field, and deterministic
+arbitrary-candidate image compatibility. The fixed 8,000-update run reaches
+1.611\% natural top-1, below 2.051\% image unigram and 12.598\% symbolic
+bigram. On pixel-identical suffix pairs, full-context assignment is 50.708\%,
+versus 50.562\% after shuffling the earlier prefix. The untouched V16 retina
+still identifies cross-font candidates at 99.951\%, candidate permutation
+error is zero, and learned candidate identity falls to 94.873\%. V27 therefore
+rejects the global context-query/candidate-key mechanism and preserves the
+frozen seal.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -279,6 +289,11 @@ implemented controls that makes that slogan falsifiable:
   suffix pairs prove that history changes the residual state while exact-chance
   pair ranking proves that the state is not bound to the correct target. A
   perfect visual oracle separates this failure from retinal identity loss.
+  \item V27, a preregistered joint context/candidate image scorer with
+  independently permuted candidate order, raw and learned cross-font identity
+  controls, pixel-identical suffix pairs, and natural frequency baselines. It
+  shows that preserving candidate visibility is insufficient: the learned
+  global compatibility remains at chance and does not use prefix order.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -1561,6 +1576,146 @@ unigram, and symbolic bigram remain required controls. Stochastic form
 generation follows only after this relation passes.
 
 \clearpage
+\subsection{Joint Visual Compatibility V27: visible candidates, failed relation}
+
+V27 executes that joint test without changing the corpus, record partitions,
+font separation, 64-cell horizon, or student boundary. Its online retina
+initializes from V16 and is optimized at one tenth the main learning rate. An
+eight-layer width-384 causal rotary field maps the ordered context images to a
+normalized query. An exponential-moving-average retina and residual image
+projector map an arbitrary candidate image to a normalized key:
+\[
+q(X)=\operatorname{normalize}Q(F(R_o(X))_{64}),\qquad
+k(Y)=\operatorname{normalize}G_t(R_t(Y)),
+\]
+\[
+s(X,Y)=\exp(\alpha)q(X)^\top k(Y),\qquad \exp(\alpha)\leq100.
+\]
+The candidate collection is not part of the model or checkpoint. At deployed
+inference the scorer accepts any floating candidate image. Every paired
+training view independently permutes its two candidate images, and the
+evaluator undoes only that visible-array permutation. This makes fixed diagonal
+position unusable as an identity channel.
+
+The fixed objective combines multi-positive cross-font natural-image contrast,
+symmetric row-and-column assignment on suffix-matched pairs, cross-font
+candidate identity, and VICReg variance/covariance regularization:
+\[
+\mathcal L=\mathcal L_{\mathrm{natural}}
++2\mathcal L_{\mathrm{pair}}
++0.5\mathcal L_{\mathrm{identity}}
++0.05\mathcal L_{\mathrm{VC}}.
+\]
+No vocabulary classification, symbolic target, reconstruction decoder,
+stochastic particle head, or writer is trained. The complete model has
+18,599,553 parameters, of which 17,118,401 are trainable. The single fixed run
+performs 8,000 BF16 AdamW updates. Training and the complete development audit
+take 2,347.47 seconds on one RTX 4090 with 2.267916~GiB peak allocated CUDA
+memory. The protocol SHA-256 is \texttt{0c386dd2...cb223310}; the final
+checkpoint SHA-256 is \texttt{49dc07f2...1e77e539}. The frozen partition is
+never rendered.
+
+The natural audit uses 2,048 development windows and the same evaluator-only
+1,024-image bank for every branch. Table~\ref{tab:v27natural} reports the fixed
+language comparisons.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V27 natural development measure & Measured & Required & Result \\
+\midrule
+Full-context top-1 / top-5 & 0.016113 / 0.023926 & diagnostic & -- \\
+Last-only / suffix-4 top-1 & 0.001953 / 0.008301 & diagnostic & -- \\
+Shuffled-prefix top-1 & 0.013184 & diagnostic & -- \\
+Image-unigram top-1 & 0.020508 & control & below \\
+Symbolic-bigram top-1 & 0.125977 & benchmark & below \\
+Full minus unigram top-1 & $-0.004395$ & $>0.03$ & fail \\
+Full minus bigram top-1 & $-0.109863$ & $>0.01$ & fail \\
+Full minus bigram log probability & $-1.856770$ & $>0.05$ & fail \\
+Full minus suffix-4 log probability & +0.059248 & $>0.03$ & pass \\
+Full minus shuffled log probability & +0.002726 & $>0.03$ & fail \\
+Learned cross-font identity & 0.948730 & $\geq0.99$ & fail \\
+Student boundary / peak CUDA & clean / 2.267916~GiB & clean / $<18$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{V27 fixed natural-Chinese development audit. Full context improves
+target log probability over the four-cell suffix, but the advantage almost
+vanishes when the same prefix images are shuffled. The model remains below
+image unigram and symbolic bigram controls.}
+\label{tab:v27natural}
+\end{table}
+
+Only one of five natural-language gates passes. Full target log probability is
+$-6.876778$, versus $-6.936025$ for suffix-4 and $-6.879503$ after shuffling
+cells 1--60. Thus the apparent context gain is not attributable to the order of
+the earlier writing. Full top-1 is also lower than both frequency controls.
+
+The primary causal audit contains 512 cross-record suffix-4 pairs in two unseen
+development fonts, yielding 1,024 assignments and 2,048 scored arms.
+Table~\ref{tab:v27pairs} reports the fixed mechanism controls.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V27 suffix-4 pair measure & Measured & Required & Result \\
+\midrule
+Suffix pixel equality & 1.000000 & exact & pass \\
+Candidate permutation score error & 0.000000 & $<10^{-5}$ & pass \\
+Candidate permutation agreement & 1.000000 & exact & pass \\
+Raw V16 cross-font identity & 0.999512 & $\geq0.99$ & pass \\
+Learned cross-font identity & 0.948730 & $\geq0.99$ & fail \\
+Full-context arm accuracy & 0.507080 & $>0.65$ & fail \\
+Full both-correct rate & 0.088867 & $>0.40$ & fail \\
+Last-only / suffix-4 accuracy & 0.500000 / 0.500000 & exact chance & pass \\
+Shuffled-prefix arm accuracy & 0.505615 & control & near chance \\
+Full minus suffix-4 accuracy & +0.007080 & $>0.15$ & fail \\
+Full minus shuffled accuracy & +0.001465 & $>0.05$ & fail \\
+Full minus shuffled margin & +0.002265 & $>0.02$ & fail \\
+\bottomrule
+\end{tabular}
+\caption{V27 pixel-identical suffix intervention. Candidate visibility,
+permutation equivariance, suffix equality, and chance controls pass. The
+learned context/candidate relation remains at chance and does not materially
+exceed a suffix-preserving prefix shuffle.}
+\label{tab:v27pairs}
+\end{table}
+
+The raw V16 retina reaches 0.999512 cross-font target identity with 0.736124
+mean cosine margin. Candidate pixels and the evaluator are therefore adequate.
+Joint optimization instead lowers learned cross-font identity by 5.078
+percentage points and leaves full assignment only 0.1465 percentage point above
+the shuffled-prefix arm. Seven of thirteen mechanism gates pass, but all five
+context-binding gates and the learned-identity gate fail.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/joint_visual_compatibility_v27_result.png}
+  \caption{Measured V27 development result generated directly from the fixed
+  audit. The image-only boundary, candidate permutation, exact suffix
+  intervention, and raw-retina identity controls pass. Jointly learned visual
+  compatibility remains near chance, loses cross-font identity, and does not
+  use prefix order. The frozen partition stays sealed and no writer is trained.}
+  \label{fig:v27result}
+\end{figure}
+
+V27 rejects this global query/key compatibility mechanism, not image-native
+language modeling in general. It also removes a tempting explanation for V26:
+the main failure is not that arbitrary candidate images are invisible to the
+retina. The next controlled experiment should preserve the raw retinal geometry
+exactly and supervise dense, explicitly ordered future visual fields rather
+than compressing all language evidence into one global dot product. The
+authoritative representation remains an ordered
+$N\times1\times32\times32$ stream of full glyph images. A reversible 2D fold
+may expose parallel spatial computation, but must invert exactly and pass an
+order intervention. A writer, longer lattice, geometric depth, and motion
+remain unauthorized until ordered context beats suffix, shuffle, unigram, and
+bigram controls.
+
+\clearpage
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -2022,8 +2177,14 @@ the frozen partition remains sealed and no writer is trained.
 A post-hoc frozen-state probe further shows that this is not solely a particle-
 proposal bottleneck: a deterministic nonlinear scorer reaches 50.684\% from
 history and 50.342\% from fused state while a raw-retina identity control reaches
-99.951\%. V27 must therefore jointly learn visual context representation and
-candidate compatibility rather than preserve V26's encoder unchanged.
+99.951\%. This motivates jointly learning visual context representation and
+candidate compatibility rather than preserving V26's encoder unchanged.
+V27 performs that joint test. Its full-context pair assignment is 50.708\%,
+versus 50.562\% after shuffling the earlier prefix, while natural top-1 is
+1.611\%, below 2.051\% image unigram and 12.598\% symbolic bigram. The raw
+retina still gives 99.951\% cross-font identity and candidate permutation error
+is exactly zero, but learned identity falls to 94.873\%. V27 therefore rejects
+the global query/key compatibility route; its frozen partition remains sealed.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
@@ -2032,11 +2193,15 @@ establish useful autonomous language. V25 shows that simply replacing the
 hand-authored grammar with a generic causal visual field is insufficient. V26
 shows that separating appearance from history is also insufficient when the
 objective permits changed residuals with nearly unchanged target preference.
-The next proof must make context-dependent target choice identifiable and
-necessary at the same 64-cell horizon under matched alternatives. Only then
-should a serpentine lattice, variable answer length, or multiple generated
-lines expand the task. This order is also consistent with measured error
-accumulation in iterative diffusion chains~\cite{inputperturb}.
+V27 shows that joint dot-product candidate compatibility is also insufficient:
+it preserves raw target visibility but neither preserves learned form geometry
+nor makes earlier order useful. The next proof should freeze or exactly
+preserve the raw retina and supervise dense ordered future visual fields at the
+same 64-cell horizon. Only after the correct history beats a
+suffix-preserving shuffle for the same candidate pixels should a serpentine
+lattice, variable answer length, or multiple generated lines expand the task.
+This order is also consistent with measured error accumulation in iterative
+diffusion chains~\cite{inputperturb}.
 
 \section{Conclusion}
 
@@ -2126,13 +2291,25 @@ difference 4.628; correct pair ranking and swapped-residual target accuracy are
 still exactly chance. The perfect retina oracle rules out target-identity loss.
 No mechanism selects, no writer is trained, and the frozen partition is not
 queried.
-The seven-context V16 increase, V25 ordered-history increase, and V26 changed
-history state are therefore all too weak to establish a useful causal memory
-core. The next attributable test must keep ordinary Chinese and the strict
-image boundary while making context-dependent target choice directly
-identifiable under matched visual alternatives at the 64-cell horizon.
-Suffix-only, predictive-state-swap, order-shuffled, visual-unigram, and
-symbolic-bigram controls must pass before long context or a writer is promoted.
+V27 then jointly trains the context field and deterministic arbitrary-candidate
+image compatibility. Its 18.60M-parameter model completes the fixed 8,000
+updates and audit in 39.12 minutes with 2.268~GiB peak allocated memory. The
+raw V16 retina still gives 99.951\% cross-font identity, suffix pixels are
+exact, candidate permutation error is zero, and last-only and suffix-only arms
+are exactly at chance. Yet full-context assignment is only 50.708\%, versus
+50.562\% after prefix shuffling; learned identity falls to 94.873\%. Natural
+top-1 is 1.611\%, below 2.051\% unigram and 12.598\% bigram, while its
+full-versus-shuffled log-probability gain is only 0.00273 nat. V27 passes seven
+of thirteen mechanism gates and one of five language gates. No frozen query or
+writer is authorized.
+The seven-context V16 increase, V25 ordered-history increase, V26 changed
+history state, and V27 global compatibility score are therefore all too weak to
+establish a useful causal memory core. The next attributable test must keep
+ordinary Chinese and the strict image boundary, preserve the strong raw retinal
+geometry exactly, and make dense per-position future-field prediction depend
+on sequence order at the 64-cell horizon. Suffix-only, order-shuffled,
+visual-unigram, and symbolic-bigram controls must pass before long context or a
+writer is promoted.
 The exact serpentine mapping may then fold clean $32\times32$ cells into a
 $256\times256$ retinal lattice without making an $8\times8$ thumbnail the sole
 record. Page-native canvases, 3D
