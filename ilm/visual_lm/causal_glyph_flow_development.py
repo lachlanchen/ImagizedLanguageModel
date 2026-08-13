@@ -1194,6 +1194,186 @@ def v35_development_gate(report: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _primary_metrics(report: Mapping[str, Any]) -> dict[str, float]:
+    primary = report["states"]["ema"]
+    selected = primary["writer_selection"]["selected"]
+    autonomous = primary["autonomous"]
+    copy = autonomous["copy"][selected]
+    public = autonomous["public"][selected]
+    instruction = autonomous["instruction"][selected]
+    copy_correct = copy["conditions"]["correct"]
+    copy_shuffled = copy["conditions"]["shuffled"]
+    copy_blank = copy["conditions"]["blank"]
+    instruction_correct = instruction["conditions"]["correct"]
+    instruction_shuffled = instruction["conditions"]["shuffled"]
+    instruction_blank = instruction["conditions"]["blank"]
+    return {
+        "copy_target_ocr_ceiling": float(
+            copy["target_ocr"]["codec_character_accuracy"]
+        ),
+        "copy_correct_ocr": float(copy_correct["ocr_character_accuracy"]),
+        "copy_correct_minus_shuffled": float(
+            copy_correct["ocr_character_accuracy"]
+        )
+        - float(copy_shuffled["ocr_character_accuracy"]),
+        "copy_correct_minus_blank": float(copy_correct["ocr_character_accuracy"])
+        - float(copy_blank["ocr_character_accuracy"]),
+        "copy_counterfactual_target_preference": float(
+            autonomous["copy_counterfactual"][selected]["target_preference_rate"]
+        ),
+        "public_teacher_ink_f1": float(
+            primary["teacher_forced"]["public"]["decoded_ink_f1"]
+        ),
+        "public_teacher_edge_f1": float(
+            primary["teacher_forced"]["public"]["decoded_edge_f1"]
+        ),
+        "public_readable": float(
+            public["conditions"]["correct"]["readable_rate"]
+        ),
+        "public_nonblank": float(
+            public["conditions"]["correct"]["nonblank_rate"]
+        ),
+        "instruction_target_ocr_ceiling": float(
+            instruction["target_ocr"]["codec_character_accuracy"]
+        ),
+        "instruction_correct_ocr": float(
+            instruction_correct["ocr_character_accuracy"]
+        ),
+        "instruction_correct_minus_shuffled": float(
+            instruction_correct["ocr_character_accuracy"]
+        )
+        - float(instruction_shuffled["ocr_character_accuracy"]),
+        "instruction_correct_minus_blank": float(
+            instruction_correct["ocr_character_accuracy"]
+        )
+        - float(instruction_blank["ocr_character_accuracy"]),
+        "instruction_readable": float(instruction_correct["readable_rate"]),
+        "instruction_pixel_response_shuffled": float(
+            instruction["control_comparisons"]["shuffled"][
+                "mean_pixel_disagreement"
+            ]
+        ),
+        "instruction_pixel_response_blank": float(
+            instruction["control_comparisons"]["blank"]["mean_pixel_disagreement"]
+        ),
+    }
+
+
+def v35_sealed_transfer_gate(
+    development: Mapping[str, Any],
+    sealed: Mapping[str, Any],
+) -> dict[str, Any]:
+    development_status = str(
+        development.get("decision", {}).get("status", "not-qualified")
+    )
+    if development_status not in {
+        "visual-causal-qualified",
+        "semantic-raster-qualified",
+    }:
+        raise ValueError("V35 sealed data cannot open after an unqualified development run")
+    development_writer = str(
+        development["states"]["ema"]["writer_selection"]["selected"]
+    )
+    sealed_writer = str(sealed["states"]["ema"]["writer_selection"]["selected"])
+    if sealed_writer != development_writer:
+        raise ValueError("V35 sealed evaluation changed the selected writer")
+    metrics = _primary_metrics(sealed)
+    development_metrics = _primary_metrics(development)
+    ratios = {
+        name: (
+            value / development_metrics[name]
+            if development_metrics[name] > 0.0
+            else float(value >= development_metrics[name])
+        )
+        for name, value in metrics.items()
+    }
+    ratio_checks = {name: value >= 0.90 for name, value in ratios.items()}
+    primary = sealed["states"]["ema"]
+    autonomous = primary["autonomous"]
+    copy_ceiling = metrics["copy_target_ocr_ceiling"]
+    visual_checks = {
+        "checkpoint_audit": bool(sealed["checkpoint_audit"]["passed"]),
+        "closed_loop_receipt": bool(
+            sealed.get("closed_loop_receipt", {}).get("passed")
+        ),
+        "copy_target_ocr_ceiling": copy_ceiling >= 0.70,
+        "copy_ocr_retention": metrics["copy_correct_ocr"] >= 0.60 * copy_ceiling,
+        "copy_correct_minus_shuffled": metrics["copy_correct_minus_shuffled"]
+        >= 0.20,
+        "copy_correct_minus_blank": metrics["copy_correct_minus_blank"] >= 0.25,
+        "copy_counterfactual_target_preference": metrics[
+            "copy_counterfactual_target_preference"
+        ]
+        >= 0.75,
+        "public_teacher_ink_f1": metrics["public_teacher_ink_f1"] >= 0.70,
+        "public_teacher_edge_f1": metrics["public_teacher_edge_f1"] >= 0.70,
+        "public_readable_nonblank": metrics["public_readable"] >= 0.50
+        and metrics["public_nonblank"] >= 0.50,
+        "finite": all(
+            stream[sealed_writer]["conditions"]["correct"]["finite"]
+            for stream in (
+                autonomous["copy"],
+                autonomous["public"],
+                autonomous["instruction"],
+            )
+        ),
+        "single_gpu_vram": int(
+            sealed["checkpoint_audit"]["peak_allocated_vram_bytes"]
+        )
+        < 20 * 1024**3,
+    }
+    semantic_checks = {
+        "visual_causal": all(visual_checks.values()),
+        "instruction_target_ocr_ceiling": metrics[
+            "instruction_target_ocr_ceiling"
+        ]
+        >= 0.60,
+        "instruction_correct_ocr": metrics["instruction_correct_ocr"] >= 0.08,
+        "instruction_correct_minus_shuffled": metrics[
+            "instruction_correct_minus_shuffled"
+        ]
+        >= 0.02,
+        "instruction_correct_minus_blank": metrics[
+            "instruction_correct_minus_blank"
+        ]
+        >= 0.03,
+        "instruction_readable": metrics["instruction_readable"] >= 0.35,
+        "instruction_pixel_response_shuffled": metrics[
+            "instruction_pixel_response_shuffled"
+        ]
+        >= 0.01,
+        "instruction_pixel_response_blank": metrics[
+            "instruction_pixel_response_blank"
+        ]
+        >= 0.01,
+        "development_wording_shift": bool(
+            development["decision"]["semantic_raster"]["checks"]["wording_shift"]
+        ),
+    }
+    absolute_pass = (
+        all(semantic_checks.values())
+        if development_status == "semantic-raster-qualified"
+        else all(visual_checks.values())
+    )
+    transfer_pass = absolute_pass and all(ratio_checks.values())
+    return {
+        "passed": transfer_pass,
+        "development_status": development_status,
+        "sealed_status": (
+            development_status if absolute_pass else "not-qualified"
+        ),
+        "selected_writer": sealed_writer,
+        "absolute_checks": {
+            "visual_causal": visual_checks,
+            "semantic_raster": semantic_checks,
+        },
+        "primary_metrics": metrics,
+        "development_primary_metrics": development_metrics,
+        "sealed_to_development_ratio": ratios,
+        "ratio_at_least_0_90": ratio_checks,
+    }
+
+
 def report_sha256(report: Mapping[str, Any]) -> str:
     import json
 

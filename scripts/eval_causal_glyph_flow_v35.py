@@ -477,11 +477,16 @@ def _closed_loop_receipt(
 ) -> dict[str, Any]:
     boundary = causal_glyph_flow_boundary_receipt(model)
     selected = state_report["writer_selection"]["selected"]
+    streams = tuple(
+        stream
+        for stream in ("copy", "public", "instruction", "paraphrase")
+        if stream in state_report["autonomous"]
+    )
     finite = all(
         state_report["autonomous"][stream][selected]["conditions"]["correct"][
             "finite"
         ]
-        for stream in ("copy", "public", "instruction", "paraphrase")
+        for stream in streams
     )
     checks = {
         "forward_pixels_and_mask_only": boundary["forward_parameters"]
@@ -511,7 +516,12 @@ def _closed_loop_receipt(
         ),
         "finite_autonomous_generation": finite,
     }
-    return {"passed": all(checks.values()), "checks": checks, "boundary": boundary}
+    return {
+        "passed": bool(streams) and all(checks.values()),
+        "checks": checks,
+        "streams": list(streams),
+        "boundary": boundary,
+    }
 
 
 def main() -> None:

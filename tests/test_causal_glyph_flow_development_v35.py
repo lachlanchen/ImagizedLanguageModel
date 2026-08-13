@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import copy
+
 import torch
+import pytest
 
 from ilm.visual_lm.causal_glyph_flow import CausalGlyphFlowConfig, CausalGlyphFlowLM
 from ilm.visual_lm.causal_glyph_flow_development import (
@@ -14,6 +17,7 @@ from ilm.visual_lm.causal_glyph_flow_development import (
     select_v35_writer,
     text_is_readable,
     v35_development_gate,
+    v35_sealed_transfer_gate,
 )
 from ilm.visual_lm.direct_visual_patch_data import (
     DirectPatchRenderConfig,
@@ -255,6 +259,27 @@ def test_development_gate_uses_exact_status_vocabulary() -> None:
     gate = v35_development_gate(report)
     assert gate["status"] == "not-qualified"
     assert gate["visual_causal"]["passed"] is False
+
+
+def test_sealed_gate_locks_writer_absolute_thresholds_and_retention() -> None:
+    development = _qualified_report()
+    development["decision"] = v35_development_gate(development)
+    sealed = copy.deepcopy(development)
+    transfer = v35_sealed_transfer_gate(development, sealed)
+    assert transfer["passed"] is True
+    assert transfer["sealed_status"] == "semantic-raster-qualified"
+    assert all(transfer["ratio_at_least_0_90"].values())
+
+    sealed["states"]["ema"]["teacher_forced"]["public"]["decoded_ink_f1"] = 0.6
+    transfer = v35_sealed_transfer_gate(development, sealed)
+    assert transfer["passed"] is False
+    assert transfer["absolute_checks"]["visual_causal"][
+        "public_teacher_ink_f1"
+    ] is False
+
+    development["decision"]["status"] = "not-qualified"
+    with pytest.raises(ValueError, match="cannot open"):
+        v35_sealed_transfer_gate(development, sealed)
 
 
 def _development_public_records(count: int = 6) -> list[VisualTextRecord]:
