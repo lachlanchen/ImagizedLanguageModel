@@ -150,6 +150,18 @@ candidate permutation error is zero. Separately, learned 1,024-bank identity is
 94.873\% and misses its 99\% gate; these differently sized retrieval tests are
 not a before/after comparison. V27 therefore rejects the global
 context-query/candidate-key mechanism and preserves the frozen seal.
+V28 freezes the raw V16 retina and replaces one endpoint query with dense
+continuous visual-future energies at horizons 1, 2, and 4. Its
+17.86M-parameter system completes 10,000 fixed BF16 updates and audit in
+118.91 minutes with 1.144~GiB peak allocated CUDA memory. On the same-scope
+1,024-way identity audit, an EMA semantic route improves from 92.041\% raw
+retina identity to 96.436\%. Full context also improves target log probability
+by 0.215 nat over a suffix-preserving prefix shuffle. These effects do not
+produce useful language choice: natural top-1 is 1.416\%, below 1.855\% image
+unigram and 13.135\% symbolic bigram, while pixel-identical-suffix pair
+assignment is 49.561\% versus 49.951\% after prefix shuffling. V28 passes ten of
+fourteen mechanism gates and two of six language gates, so the mechanism is
+rejected without opening frozen images or training a writer.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -295,6 +307,12 @@ implemented controls that makes that slogan falsifiable:
   controls, pixel-identical suffix pairs, and natural frequency baselines. It
   shows that preserving candidate visibility is insufficient: the learned
   global compatibility remains at chance and does not use prefix order.
+  \item V28, a preregistered dense multi-horizon visual-future energy model with
+  a frozen raw retina, identity-initialized semantic residual, EMA target, and
+  explicit suffix-preserving order losses. It improves same-scope visual
+  identity and detects prefix information, while its negative rank and
+  frequency-control results distinguish order sensitivity from correct
+  conditional language binding.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -1719,6 +1737,171 @@ order intervention. A writer, longer lattice, geometric depth, and motion
 remain unauthorized until ordered context beats suffix, shuffle, unigram, and
 bigram controls.
 
+V28 executes this dense-future test below without changing the corpus,
+partitions, student boundary, or frozen-data rule.
+
+\subsection{Dense Visual Future Energy V28: order signal without binding}
+
+V28 consumes an authoritative ordered volume
+$X\in\mathbb R^{64\times1\times32\times32}$ and predicts future writing images
+at offsets $d\in\{1,2,4\}$. The fixed V16 retina is never updated. For image
+$x$, a residual semantic adapter, initialized as the identity, and its
+stop-gradient EMA copy produce
+\[
+r(x)=\operatorname{normalize}R_0(x),\qquad
+z(x)=\operatorname{normalize}A_\theta(r(x)),\qquad
+\bar z(x)=\operatorname{EMA}(z(x)).
+\]
+An eight-layer width-384 causal rotary field reads the concatenated raw and
+semantic states. At each selected position and horizon it emits four normalized
+raw hypotheses, four normalized semantic hypotheses, and mixture logits:
+\[
+H_{1:t}=F([r(x_1);z(x_1)],\ldots,[r(x_t);z(x_t)]),
+\]
+\[
+\{q^r_{d,k},q^z_{d,k},\pi_{d,k}\}_{k=1}^{4}=P_d(H_t).
+\]
+The score of an arbitrary candidate image $Y$ is continuous and contains no
+vocabulary table:
+\[
+s_d(X,Y)=\log\sum_{k=1}^{4}\pi_{d,k}
+\exp\!\left(
+\tau_r q_{d,k}^{r\top}r(Y)+
+\tau_z q_{d,k}^{z\top}\bar z(Y)
+\right).
+\]
+
+Each natural microbatch samples 16 stratified causal positions, including the
+endpoint, and uses opposite-font targets at horizons 1, 2, and 4. The fixed
+objective is
+\[
+\mathcal L=\mathcal L_{\mathrm{dense}}
++0.25\mathcal L_{\mathrm{ES}}
++0.5\mathcal L_{\mathrm{id}}
++2\mathcal L_{\mathrm{pair}}
++\mathcal L_{\mathrm{natural\text{-}order}}
++\mathcal L_{\mathrm{pair\text{-}order}}.
+\]
+Here $\mathcal L_{\mathrm{dense}}$ is weighted multi-positive cross-font
+contrast, $\mathcal L_{\mathrm{ES}}$ is a strictly proper empirical energy
+score over the continuous raw hypotheses, and $\mathcal L_{\mathrm{id}}$
+trains the semantic route across fonts. The final three terms use identical
+candidate pixels under symmetric suffix-pair assignment and under explicit
+full, suffix-only, and suffix-preserving shuffled-prefix interventions.
+Temporary equality groups are derived from canonical pixels by the host loss;
+they are not model inputs or inference state.
+
+The complete model has 17,859,142 parameters, of which 16,377,990 are
+trainable. Its single fixed run performs 10,000 BF16 AdamW updates and the full
+development audit in 7,134.82 seconds (118.91 minutes) on one RTX 4090, with
+1.144400~GiB peak allocated CUDA memory. The protocol SHA-256 is
+\texttt{b8e515d2...a7780f7f}, the final checkpoint SHA-256 is
+\texttt{22503464...2c7f64f}, and the audit SHA-256 is
+\texttt{2cb73707...8f0fb3d}. The frozen partition is never rendered.
+
+The natural audit uses 2,048 development windows and one fixed evaluator-only
+1,024-image bank. Table~\ref{tab:v28natural} reports the result.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V28 natural development measure & Measured & Required & Result \\
+\midrule
+Full-context top-1 / top-5 & 0.014160 / 0.035156 & diagnostic & -- \\
+Last-only / suffix-4 top-1 & 0.004395 / 0.015625 & diagnostic & -- \\
+Shuffled-prefix top-1 & 0.002441 & diagnostic & -- \\
+Image-unigram top-1 & 0.018555 & control & below \\
+Symbolic-bigram / trigram top-1 & 0.131348 / 0.193359 & controls & below \\
+Full minus unigram top-1 & $-0.004395$ & $>0.03$ & fail \\
+Full minus bigram top-1 & $-0.117188$ & $>0.01$ & fail \\
+Full minus bigram log probability & $-1.801083$ & $>0.05$ & fail \\
+Full minus suffix-4 log probability & +0.030369 & $>0.03$ & pass \\
+Full minus shuffled log probability & +0.215112 & $>0.03$ & pass \\
+Raw / EMA 1,024-way identity & 0.920410 / 0.964355 & EMA $\geq0.95$ & pass \\
+EMA minus raw identity & +0.043945 & $\geq0.02$ & pass \\
+Student boundary / peak CUDA & clean / 1.144400~GiB & clean / $<18$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{V28 fixed natural-Chinese development audit. Full context changes
+target probability relative to suffix and shuffled controls, and the semantic
+route improves same-scope identity. Correct future-image rank remains below
+the unigram, bigram, and trigram controls.}
+\label{tab:v28natural}
+\end{table}
+
+Full target log probability is $-6.829707$, versus $-6.860076$ for suffix-4
+and $-7.044819$ after shuffling cells 1--60. This is an attributable order
+effect in probability, but suffix-4 top-1 is slightly higher than full-context
+top-1 and the symbolic bigram is more than nine times as accurate. Four of six
+language gates fail.
+
+The primary causal audit uses 512 cross-record context pairs whose final four
+glyph images are bitwise equal but whose earlier histories and targets differ.
+Candidate order is independently permuted in two unseen development fonts.
+Table~\ref{tab:v28pairs} reports the fixed mechanism controls.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V28 suffix-4 pair measure & Measured & Required & Result \\
+\midrule
+Suffix pixel equality & 1.000000 & exact & pass \\
+Permutation error / agreement & 0.000000 / 1.000000 & exact & pass \\
+Raw V16 two-candidate identity & 0.999512 & diagnostic & -- \\
+Full-context arm accuracy & 0.495605 & $>0.65$ & fail \\
+Full both-correct rate & 0.096680 & $>0.40$ & fail \\
+Last-only / suffix-4 accuracy & 0.500000 / 0.500000 & exact chance & pass \\
+Shuffled-prefix arm accuracy & 0.499512 & control & chance \\
+Full minus suffix-4 accuracy & $-0.004395$ & $>0.15$ & fail \\
+Full minus shuffled accuracy & $-0.003906$ & $>0.05$ & fail \\
+Full minus shuffled mean margin & +0.022070 & $>0.02$ & pass \\
+\bottomrule
+\end{tabular}
+\caption{V28 pixel-identical suffix intervention. The full score has a larger
+mean margin than the shuffled score on a subset of examples, but this movement
+does not yield reliable correct rank or context-to-target binding.}
+\label{tab:v28pairs}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/dense_visual_future_energy_v28_result.png}
+  \caption{Measured V28 development result generated directly from the fixed
+  audit. Frozen raw geometry and the learned semantic route preserve candidate
+  visibility, and ordered history affects probability and mean margin. Natural
+  selection remains below frequency controls and matched pair assignment stays
+  at chance. Ten of fourteen mechanism gates and two of six language gates
+  pass, so frozen evaluation and writer training remain unauthorized.}
+  \label{fig:v28result}
+\end{figure}
+
+V28 is a clean negative result. It establishes that the
+$N\times1\times32\times32$ visual-time interface, frozen-retina semantic
+adaptation, dense multi-horizon prediction, and continuous candidate scoring
+are executable within 1.15~GiB peak allocated memory. It does not establish a
+useful language model or a capability-normalized efficiency advantage. The
+failure is now narrower: ordered prefix information changes scores, but the
+training objective does not distribute that evidence reliably enough to bind
+each context to its correct future image.
+
+The next controlled question should therefore condition the prefix evidence on
+the candidate itself. A minimal V29 hypothesis is
+\[
+\Delta s(X,Y)=s(X_{1:64},Y)-s(X_{61:64},Y),
+\]
+with the same candidate image $Y$ attending to retained per-cell causal states.
+Training should compare correct and incorrect $\Delta s$ values inside dense
+suffix-collision buckets, cancelling candidate frequency and shared suffix
+evidence. Full context must beat exact suffix, shuffled-prefix, image-unigram,
+and symbolic-bigram controls before any writer, page fold, geometric depth,
+motion, or larger model is authorized. Reshaping the character stream into a
+2D lattice or a 3D volume remains a reversible interface choice, not a repair
+for failed conditional binding.
+
 \clearpage
 \section{Data}
 
@@ -2191,6 +2374,15 @@ is exactly zero in the two-candidate pair control. Separately, learned
 1,024-bank identity is 94.873\% and misses its 99\% gate; the two retrieval
 sizes are not directly comparable. V27 therefore rejects the global query/key
 compatibility route; its frozen partition remains sealed.
+V28 then freezes the raw retina and distributes supervision across 16 causal
+positions and three future horizons. The same-scope 1,024-way EMA semantic
+identity reaches 96.436\%, 4.395 percentage points above the raw-retina route,
+and full target log probability gains 0.215 nat over the shuffled-prefix arm.
+Nevertheless, natural top-1 is 1.416\%, below 1.855\% unigram and 13.135\%
+bigram, while full-context pair assignment is 49.561\% versus 49.951\% after
+prefix shuffling. The pair mean-margin gate passes, but the rank gates fail.
+V28 therefore rejects dense global future energy as a sufficient binding
+mechanism; its frozen partition remains sealed and no writer is trained.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
@@ -2202,11 +2394,14 @@ objective permits changed residuals with nearly unchanged target preference.
 V27 shows that joint dot-product candidate compatibility is also insufficient:
 it preserves raw target visibility in the pair control but neither passes the
 separate learned full-bank identity gate nor makes earlier order useful. The
-next proof should freeze the raw retina to isolate language learning and
-supervise dense ordered future visual fields at the
-same 64-cell horizon. Only after the correct history beats a
-suffix-preserving shuffle for the same candidate pixels should a serpentine
-lattice, variable answer length, or multiple generated lines expand the task.
+V28 shows that freezing that retina, improving semantic identity, and adding
+dense ordered future supervision can make earlier order affect probability and
+margin without producing correct binding. The next proof should optimize the
+candidate-conditioned incremental contribution of the prefix inside
+suffix-collision buckets at the same 64-cell horizon. Only after the correct
+history beats suffix, suffix-preserving shuffle, unigram, and bigram for the
+same candidate pixels should a serpentine lattice, variable answer length, or
+multiple generated lines expand the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -2311,14 +2506,24 @@ two-candidate raw control. Natural top-1 is 1.611\%, below 2.051\% unigram and
 full-versus-shuffled log-probability gain is only 0.00273 nat. V27 passes seven
 of thirteen mechanism gates and one of five language gates. No frozen query or
 writer is authorized.
+V28 performs the dense future-field test with a frozen retina. Its
+17.86M-parameter system completes 10,000 BF16 updates and audit in 118.91
+minutes with 1.144~GiB peak allocated memory. The EMA semantic route improves
+same-scope 1,024-way identity from 92.041\% to 96.436\%, and full context gains
+0.0304 nat over suffix-4 and 0.2151 nat over shuffled-prefix target log
+probability. Yet natural top-1 is only 1.416\%, below unigram and bigram, while
+pixel-identical-suffix pair assignment is 49.561\% versus 49.951\% shuffled.
+V28 passes ten of fourteen mechanism gates and two of six language gates. No
+frozen query or writer is authorized.
 The seven-context V16 increase, V25 ordered-history increase, V26 changed
-history state, and V27 global compatibility score are therefore all too weak to
-establish a useful causal memory core. The next attributable test must keep
-ordinary Chinese and the strict image boundary, preserve the strong raw retinal
-geometry exactly, and make dense per-position future-field prediction depend
-on sequence order at the 64-cell horizon. Suffix-only, order-shuffled,
-visual-unigram, and symbolic-bigram controls must pass before long context or a
-writer is promoted.
+history state, V27 global compatibility score, and V28 probability/margin order
+effect are therefore all too weak to establish a useful causal memory core.
+The next attributable test must keep ordinary Chinese and the strict image
+boundary, preserve the strong raw retinal geometry exactly, and make the
+candidate-conditioned incremental score
+$\Delta s(X,Y)=s(X_{1:64},Y)-s(X_{61:64},Y)$ favor the correct target inside
+suffix-collision buckets. Suffix-only, order-shuffled, visual-unigram, and
+symbolic-bigram controls must pass before long context or a writer is promoted.
 The exact serpentine mapping may then fold clean $32\times32$ cells into a
 $256\times256$ retinal lattice without making an $8\times8$ thumbnail the sole
 record. Page-native canvases, 3D

@@ -2,8 +2,8 @@
 
 Date: 2026-08-13
 
-Status: executable result-publication plan created after the fixed development
-audit and before any V28 manuscript edit
+Status: completed result-publication revision; plan created after the fixed
+development audit and before any V28 manuscript edit
 
 ## Revision Stage
 
@@ -148,4 +148,37 @@ serve as the traceable internal rationale.
 
 ## Execution Record
 
-Pending.
+Completed on 2026-08-13 without changing the fixed V28 model, protocol,
+thresholds, data, checkpoint, frozen partition, or writer authorization.
+
+- Added the canonical result receipt in
+  `docs/dense-visual-future-energy-v28-result.md`.
+- Added the evidence-validating figure generator and measured 2400-by-1800 PNG.
+  Two consecutive regenerations produced identical figure SHA-256
+  `98e279d1425cb431eb855347478283ddc801346764450fcef510205253a8a96b`.
+- Confirmed that appending one byte to a copy of the audit makes the generator
+  fail with `V28 report SHA-256 does not match fixed evidence`.
+- Updated the root README and engineering goal to identify V28 as the latest
+  completed development result and V29 candidate-conditioned prefix increment
+  as the next bounded hypothesis.
+- Updated only the allowed manuscript regions, inserted the fixed architecture,
+  equations, natural and suffix-pair tables, measured figure, interpretation,
+  and bounded V29 direction, and rebuilt the active PDF.
+- The final TeX SHA-256 is
+  `339294eab47b1597596f88d54fcce05735ad7c575e21ad95e37a58311d020593`.
+  The 54-page PDF SHA-256 is
+  `416dec322d5be4b910e5d188786735af2c07899832e12ff173da91e539e8f02e`.
+- `pdftotext -layout` preserves the V28 heading, `49.561%` versus `49.951%`
+  pair result, and the ten-of-fourteen/two-of-six gate statement.
+- Rendered and visually inspected pages 1--6, 34--38, and 49--52. The abstract,
+  contribution list, equations, both tables, measured figure, discussion, and
+  conclusion have no clipping, overlap, unreadable scaling, or unsupported
+  visual claim. The LaTeX log has no undefined references or overfull boxes.
+- `ruff check` and `python -m py_compile` pass for the figure generator;
+  `git diff --check` passes.
+- The full executable suite passes: `273 passed` with one existing FontTools
+  deprecation warning.
+
+Tracked publication commits before the final manuscript unit are
+`069460f` (result receipt), `b172f88` (measured figure), and `6bac2d2`
+(README and engineering-goal summary).
