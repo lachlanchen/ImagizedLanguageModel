@@ -44,7 +44,10 @@ The revision may claim only what the immutable V34 and V35 reports establish.
 
 - `publication/ilm-image-native/ilm-image-native.tex`
 - `publication/ilm-image-native/generate_v35_result_figure.py`
+- `publication/ilm-image-native/generate_v35_pipeline_figures.py`
 - `publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png`
+- `publication/ilm-image-native/figures/causal_glyph_flow_v35_training.png`
+- `publication/ilm-image-native/figures/causal_glyph_flow_v35_inference.png`
 - `references/causal_glyph_flow_v35_result.md`
 
 README, goal-document, multilingual-summary, and inference-documentation work
@@ -80,7 +83,11 @@ plan.
 8. Add one deterministic measured figure generated directly from the training
    metrics, report JSON, and autonomous PNG galleries. Concept illustrations
    remain labeled as concepts.
-9. Revise the conclusion to state the strongest supported result and the next
+9. Add deterministic V35 training and inference diagrams that match the
+   implemented codec, adapter, causal field, anchor/flow writer, stop head, and
+   visible feedback loop. These diagrams describe architecture and boundary;
+   they must not depict the word-origin target as a measured capability.
+10. Revise the conclusion to state the strongest supported result and the next
    bounded experiment. Keep page, 3D, movie, speech, and broad word-origin
    answering as future work unless directly measured.
 
@@ -100,6 +107,14 @@ painted or synthesized as evidence. It should contain:
 Every displayed number must be recoverable from report JSON. The figure must
 remain legible at one-column width, use a restrained multi-hue palette, avoid
 decorative gradients, and never substitute OCR text for generated pixels.
+
+The two V35 pipeline figures must be generated from repository code and label
+the public PIXAR initialization, frozen V34 codec, and evaluator-only OCR
+explicitly. The training figure distinguishes offline alignment from causal
+student training. The inference figure accepts a rendered prompt strip or
+writing image and returns generated raster patches through the actual
+decode-threshold-reencode loop. Existing concept images remain in the repository
+but are not reused as evidence.
 
 ## Out Of Scope
 
