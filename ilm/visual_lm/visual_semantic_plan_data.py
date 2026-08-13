@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass
 from functools import lru_cache
+from math import gcd
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -353,6 +354,37 @@ def select_v36_instruction_records(
     return selected, rejected
 
 
+@lru_cache(maxsize=4_096)
+def _visual_stream_affine_permutation(
+    size: int,
+    seed: int,
+    epoch: int,
+) -> tuple[int, int]:
+    if size < 1 or epoch < 0:
+        raise ValueError("V36 visual stream permutation is invalid")
+    if size == 1:
+        return 0, 1
+    rng = random.Random(int(seed) + int(epoch) * 1_000_000_007)
+    offset = rng.randrange(size)
+    stride = rng.randrange(1, size)
+    while gcd(stride, size) != 1:
+        stride = stride % (size - 1) + 1
+    return offset, stride
+
+
+def visual_semantic_plan_stream_record_index(
+    index: int,
+    *,
+    records: int,
+    seed: int,
+) -> int:
+    if index < 0 or records < 1:
+        raise ValueError("V36 visual stream index is invalid")
+    epoch, position = divmod(index, records)
+    offset, stride = _visual_stream_affine_permutation(records, seed, epoch)
+    return (offset + position * stride) % records
+
+
 class VisualSemanticPlanDataset(Dataset):
     def __init__(
         self,
@@ -406,11 +438,13 @@ class VisualSemanticPlanPromptDataset(Dataset):
         render_config: VisualSemanticPlanRenderConfig,
         seed: int,
         length: int,
+        include_all_records: bool = False,
     ) -> None:
         self.records, self.rejected_identifiers = select_v36_instruction_records(
             records,
             split=split,
             render_config=render_config,
+            include_all_records=include_all_records,
         )
         if length < 1:
             raise ValueError("V36 prompt stream length must be positive")
@@ -426,7 +460,13 @@ class VisualSemanticPlanPromptDataset(Dataset):
         if not 0 <= index < self.length:
             raise IndexError(index)
         rng = random.Random(self.seed + index * 1_000_003)
-        record = self.records[rng.randrange(len(self.records))]
+        record = self.records[
+            visual_semantic_plan_stream_record_index(
+                index,
+                records=len(self.records),
+                seed=self.seed,
+            )
+        ]
         fonts = visual_semantic_plan_fonts(self.split)
         prompt_font = fonts[rng.randrange(len(fonts))]
         view_font = fonts[rng.randrange(len(fonts))]
@@ -469,11 +509,13 @@ class VisualSemanticPlanAnswerDataset(Dataset):
         split: str,
         render_config: VisualSemanticPlanRenderConfig,
         seed: int,
+        include_all_records: bool = False,
     ) -> None:
         self.records, self.rejected_identifiers = select_v36_instruction_records(
             records,
             split=split,
             render_config=render_config,
+            include_all_records=include_all_records,
         )
         self.split = split
         self.render_config = render_config

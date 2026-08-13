@@ -19,6 +19,7 @@ from ilm.visual_lm.visual_semantic_plan_data import (
     visual_semantic_plan_data_boundary_receipt,
     visual_semantic_plan_pixel_batch,
     visual_semantic_plan_prompt_collate,
+    visual_semantic_plan_stream_record_index,
 )
 from ilm.visual_lm.visual_semantic_raster_data import VisualRasterRecord
 
@@ -143,3 +144,17 @@ def test_v36_data_boundary_has_no_symbolic_student_interface() -> None:
     assert receipt["uses_unicode_ids"] is False
     assert receipt["uses_character_ids"] is False
     assert receipt["candidate_bank_deployed"] is False
+
+
+def test_v36_stream_is_a_permutation_before_repeating() -> None:
+    first_epoch = [
+        visual_semantic_plan_stream_record_index(index, records=17, seed=36)
+        for index in range(17)
+    ]
+    second_epoch = [
+        visual_semantic_plan_stream_record_index(index, records=17, seed=36)
+        for index in range(17, 34)
+    ]
+    assert sorted(first_epoch) == list(range(17))
+    assert sorted(second_epoch) == list(range(17))
+    assert first_epoch != second_epoch
