@@ -2,8 +2,9 @@
 
 Date: 2026-08-13
 
-Status: planned result-publication revision; created after the fixed development
-audit and before any V29 manuscript edit
+Status: completed result-publication revision; created after the fixed
+development audit and before any V29 manuscript edit, then closed after source,
+PDF, visual, and test verification
 
 ## Revision Stage
 
@@ -169,4 +170,31 @@ serve as the traceable internal rationale.
 
 ## Execution Record
 
-Pending.
+Completed on 2026-08-13.
+
+- The canonical result receipt was committed as `26549cf`; the measured figure
+  generator and PNG were committed as `791e7ed`; and the README and project-goal
+  verdict were committed as `4aa4074`.
+- The figure was regenerated twice from the fixed audit with stable SHA-256
+  `20960d6d33c060826fb166bd59aee10bd27649efef26323c4c86354c02d72a32`.
+  A deliberately modified audit was rejected at the fixed evidence-hash check.
+- `ruff check publication/ilm-image-native/generate_v29_result_figure.py` and
+  `git diff --check` passed.
+- The manuscript was built twice with `scripts/latex_build.sh`. The final TeX
+  SHA-256 is
+  `0031083b45614e85bd78a072393e580b98b2df93325949cadc17c81e5cda47f6`;
+  the final PDF SHA-256 is
+  `637198f4c430b400037887b289583cca0b211d8bc08df058d50367fa9ba2b3fb`.
+  The PDF is 56 US-letter pages and 8,723,345 bytes.
+- The retained LaTeX log contains no undefined-reference, undefined-citation,
+  or overfull-box warning. Extracted PDF text contains the fixed V29 gate
+  counts, natural and pair metrics, rejection, and suffix-cancellation result.
+- Directly changed and downstream-reflow pages 1--6 and 36--56 were rendered
+  and inspected. The V29 equations, tables, measured figure, captions,
+  discussion, and conclusion have no clipping or overlap. The unchanged Figure
+  23 bitmap retains a pre-existing footer line at its right boundary; repairing
+  that unrelated asset remains outside this revision.
+- `PYTHONPATH=. pytest -q` passed: 297 tests, with one upstream `fontTools`
+  deprecation warning.
+- Frozen evaluation remained unopened, no frozen image was instantiated, and
+  writer training remained unauthorized throughout publication.
