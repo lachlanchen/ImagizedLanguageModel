@@ -584,7 +584,7 @@ def main() -> None:
     global_update = 0
 
     if args.resume:
-        checkpoint = torch.load(args.resume, map_location=device, weights_only=False)
+        checkpoint = torch.load(args.resume, map_location="cpu", weights_only=False)
         if checkpoint.get("architecture") != V32_ARCHITECTURE:
             raise ValueError("V32 resume checkpoint has the wrong architecture")
         if checkpoint.get("model_config") != asdict(config):
