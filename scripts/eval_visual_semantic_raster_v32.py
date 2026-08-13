@@ -346,6 +346,54 @@ def teacher_forced_generation(
     )
 
 
+@torch.no_grad()
+def target_reconstruction_generation(
+    model: VisualSemanticRasterTransducer,
+    data: RasterEvaluationData,
+    *,
+    device: torch.device,
+    precision: str,
+    batch_size: int,
+) -> GeneratedRasterSet:
+    """Diagnostic upper bound: target pixels enter the continuous raster autoencoder."""
+
+    cells = []
+    started = time.perf_counter()
+    for start in range(0, len(data), batch_size):
+        prompt_pixels = data.prompt_pixels[start : start + batch_size].to(device)
+        prompt_mask = data.prompt_mask[start : start + batch_size].to(device)
+        answer_cells = data.answer_cells[start : start + batch_size].to(device)
+        answer_mask = data.answer_mask[start : start + batch_size].to(device)
+        with autocast_context(device, precision):
+            output = model(
+                prompt_pixels,
+                prompt_mask,
+                answer_cells,
+                answer_mask,
+                feedback_mode="clean",
+            )
+            cells.append(output.raster_logits.sigmoid().float().cpu())
+    elapsed = time.perf_counter() - started
+    generated_cells = torch.cat(cells)
+    lengths = data.answer_mask.sum(dim=1).long()
+    stop_probabilities = torch.zeros(
+        len(data),
+        model.config.maximum_answer_cells + 1,
+    )
+    stop_probabilities.scatter_(1, lengths[:, None], 1.0)
+    return GeneratedRasterSet(
+        cells=generated_cells,
+        lengths=lengths,
+        stop_probabilities=stop_probabilities,
+        finite=bool(
+            torch.isfinite(generated_cells).all()
+            and torch.isfinite(stop_probabilities).all()
+        ),
+        elapsed_seconds=elapsed,
+        examples_per_second=len(data) / max(elapsed, 1e-9),
+    )
+
+
 def score_generated_set(
     model: VisualSemanticRasterTransducer,
     generated: GeneratedRasterSet,
@@ -412,12 +460,18 @@ def save_autonomous_gallery(
     path: str | Path,
     *,
     maximum_rows: int = 16,
+    output_label: str = "AUTONOMOUS OUTPUT",
 ) -> None:
     rows = min(len(data), maximum_rows)
     canvas = Image.new("RGB", (1_000, rows * 92 + 32), "white")
     draw = ImageDraw.Draw(canvas)
     font = ImageFont.load_default()
-    draw.text((8, 7), "PROMPT RASTER / TARGET RASTER / AUTONOMOUS OUTPUT", fill="black", font=font)
+    draw.text(
+        (8, 7),
+        f"PROMPT RASTER / TARGET RASTER / {output_label}",
+        fill="black",
+        font=font,
+    )
     for index in range(rows):
         top = 32 + index * 92
         prompt = (data.prompt_pixels[index].mean(dim=0).clamp(0, 1) * 255).byte().numpy()
@@ -697,6 +751,28 @@ def main() -> None:
         precision=args.precision,
         batch_size=args.batch_size,
     )
+    target_reconstruction = target_reconstruction_generation(
+        model,
+        original,
+        device=device,
+        precision=args.precision,
+        batch_size=args.batch_size,
+    )
+    target_reconstruction_metrics, _ = score_generated_set(
+        model,
+        target_reconstruction,
+        original,
+        bank,
+        device=device,
+        precision=args.precision,
+        batch_size=args.batch_size,
+    )
+    save_autonomous_gallery(
+        original,
+        target_reconstruction,
+        output_dir / "target_reconstruction.png",
+        output_label="TARGET-LATENT RECONSTRUCTION",
+    )
 
     shuffled_metrics = None
     blank_metrics = None
@@ -809,6 +885,7 @@ def main() -> None:
         "answers_enter_after_generation": True,
         "correct_original": correct_metrics,
         "teacher_forced": teacher_metrics,
+        "target_reconstruction": target_reconstruction_metrics,
         "shuffled_prompt": shuffled_metrics,
         "blank_prompt": blank_metrics,
         "training_font": training_font_metrics,
@@ -835,6 +912,7 @@ def main() -> None:
                 else None
             ),
             "autonomous_original_png": str(output_dir / "autonomous_original.png"),
+            "target_reconstruction_png": str(output_dir / "target_reconstruction.png"),
         },
     }
     (output_dir / "evaluation_report.json").write_text(

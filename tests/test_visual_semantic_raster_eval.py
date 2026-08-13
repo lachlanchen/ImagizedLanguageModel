@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import inspect
+from types import SimpleNamespace
 
 import torch
 
@@ -9,6 +10,7 @@ from scripts.eval_visual_semantic_raster_v32 import (
     RasterEvaluationData,
     autonomous_generate_batch,
     controlled_prompts,
+    target_reconstruction_generation,
     v32_gate_report,
 )
 
@@ -71,6 +73,38 @@ def test_v32_prompt_controls_preserve_shapes_and_break_condition() -> None:
     assert torch.equal(shuffled_mask[0], data.prompt_mask[1])
     assert torch.equal(blank, torch.ones_like(blank))
     assert torch.equal(blank_mask, data.prompt_mask)
+
+
+def test_v32_target_reconstruction_is_labeled_as_post_generation_diagnostic() -> None:
+    data = _data()
+
+    class ExactRasterAutoencoder:
+        config = SimpleNamespace(maximum_answer_cells=2)
+
+        def __call__(
+            self,
+            _prompt_pixels: torch.Tensor,
+            _prompt_mask: torch.Tensor,
+            answer_cells: torch.Tensor,
+            _answer_mask: torch.Tensor,
+            *,
+            feedback_mode: str,
+        ) -> SimpleNamespace:
+            assert feedback_mode == "clean"
+            bounded = answer_cells.clamp(0.01, 0.99)
+            return SimpleNamespace(raster_logits=torch.logit(bounded))
+
+    generated = target_reconstruction_generation(
+        ExactRasterAutoencoder(),  # type: ignore[arg-type]
+        data,
+        device=torch.device("cpu"),
+        precision="fp32",
+        batch_size=1,
+    )
+    assert generated.finite
+    assert torch.equal(generated.lengths, torch.tensor([2, 2]))
+    assert torch.equal(generated.stop_probabilities[:, 2], torch.ones(2))
+    assert torch.allclose(generated.cells, data.answer_cells.clamp(0.01, 0.99))
 
 
 def test_v32_gate_report_never_claims_final_proof_without_ablations() -> None:
