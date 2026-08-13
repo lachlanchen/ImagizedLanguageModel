@@ -132,4 +132,54 @@ None. This is an internal research manuscript, not a reviewer-response round.
 
 ## Execution Record
 
-Pending.
+Completed on 2026-08-13.
+
+### Evidence Publication
+
+- Added the tracked V30 result receipt and an evidence-derived result figure.
+- The result generator accepted only the fixed audit, protocol, and checkpoint
+  hashes listed above and regenerated the PNG byte-for-byte with SHA-256
+  `180d1d4fc0e0f99a3103dfdbf84b03ef541bed2c70c8344f80ddfc4e72a13d33`.
+- Updated the README and manuscript to report rejection, `0/8` language gates,
+  sealed frozen images, and closed writer training without capability or
+  efficiency overclaims.
+
+### Figure Revision
+
+- Rebuilt the README hero as one aligned visual-prompt -> image-native-student
+  -> rendered-answer-target argument. The AgInTi artwork remains only in the
+  title band; all labels, arrows, panels, and glyph placement are deterministic.
+- Added explicit concept-target labels to the training and inference figures,
+  changed the training resource statement to one RTX 4090 proof run, replaced
+  the inference arrow fan with one optional post-processing arrow, and marked
+  the example answer as illustrative rather than measured.
+- Kept the measured V30 panel in the same manuscript figure sequence and added
+  cross-references that distinguish its fixed evidence from the two design
+  targets.
+- Final figure SHA-256 values are:
+  - hero: `0d85bfbcf5badcf5aee048bbf0436e70277518486257598efb37c67f12d9a916`;
+  - training: `94ee83ddc7023d180bc8b01e74b7abc9b55ce820a0bf914a259d0489b7ebeb47`;
+  - inference: `2f09d83337f5977d10972e288dc0c9d5f20979d46f18f54f998fe22e7e14d2a5`;
+    and
+  - measured V30:
+    `180d1d4fc0e0f99a3103dfdbf84b03ef541bed2c70c8344f80ddfc4e72a13d33`.
+
+### Verification
+
+- `pytest` focused on V30 model/training/evaluation and the inherited V29
+  evaluator: `21 passed in 6.64s`.
+- `ruff check` passed for both affected figure generators; the new V30
+  generator also passes `ruff format --check`.
+- The repository LaTeX build completed in two passes and produced a 61-page
+  `publication/ilm-image-native/ilm-image-native.pdf`.
+- The final log contains no LaTeX errors, undefined references, overfull boxes,
+  or multiply defined labels. Existing underfull table/reference warnings and
+  three pre-existing `!h` float-normalization warnings remain out of scope.
+- Rendered PDF pages 4, 44, 47, and 48 were visually inspected at 150 DPI for
+  the hero, measured V30 result, training target, and inference target. Text is
+  legible, arrows and panels are aligned, captions fit, and no content clips or
+  overlaps.
+- Explicit page boundaries prevent diagnosis or contract prose from being
+  split around the full-width figures.
+- `git diff --check` passed, and unrelated untracked `.auto-readme-work/`
+  content was not modified or staged.

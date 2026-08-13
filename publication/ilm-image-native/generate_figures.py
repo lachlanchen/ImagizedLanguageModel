@@ -951,95 +951,74 @@ def paste_svg_on_card(
 def yan_cover_hero() -> None:
     bg_path = FIG / "aginti_yan_background.png"
     if bg_path.exists():
-        bg = Image.open(bg_path).convert("RGB")
+        source = Image.open(bg_path).convert("RGB")
     else:
-        bg = Image.new("RGB", (2048, 1536), "#07111f")
-        bd = ImageDraw.Draw(bg)
+        source = Image.new("RGB", (2048, 1536), "#07111f")
+        bd = ImageDraw.Draw(source)
         for x in range(0, 2048, 60):
             bd.line((x, 0, x + 700, 1536), fill="#0e7490", width=1)
-    bg = bg.resize((1800, 1200), Image.LANCZOS).crop((0, 90, 1800, 1090)).convert("RGBA")
+    source = source.resize((1800, 1120), Image.LANCZOS).crop((0, 70, 1800, 1070))
 
-    # Darken and vignette to make publication labels readable.
-    shade = Image.new("RGBA", bg.size, (0, 0, 0, 70))
-    bg.alpha_composite(shade)
-    d = ImageDraw.Draw(bg)
-    W, H = bg.size
+    # Preserve the generated bronze/circuit artwork only as a title band. All
+    # explanatory typography and geometry below are deterministic.
+    canvas = Image.new("RGBA", (1800, 1000), "#f8fafc")
+    banner = source.crop((0, 0, 1800, 300)).convert("RGBA")
+    banner.alpha_composite(Image.new("RGBA", banner.size, (3, 10, 24, 142)))
+    canvas.alpha_composite(banner, (0, 0))
+    d = ImageDraw.Draw(canvas)
+    d.rectangle((0, 296, 1800, 302), fill="#2aa7b8")
 
-    # Top title block.
-    title_box = Image.new("RGBA", bg.size, (0, 0, 0, 0))
-    td = ImageDraw.Draw(title_box)
-    td.rounded_rectangle((58, 48, 910, 205), radius=28, fill=(3, 7, 18, 178), outline=(245, 196, 106, 190), width=2)
-    bg.alpha_composite(title_box)
-    d.text((88, 72), "Image-Native Language Model", font=font(52, True), fill="#fff7ed")
-    d.text((91, 143), "reading and writing language as images, not text tokens", font=font(25), fill="#dbeafe")
+    d.text((72, 50), "ILM-V", font=font(22, True), fill="#8be2ed")
+    d.text((72, 86), "Image-native language modeling", font=font(52, True), fill="#f8fafc")
+    d.text((74, 157), "A student reads written language as pixels and renders its answer as a page image.", font=font(25), fill="#dbeafe")
+    d.rounded_rectangle((1390, 62, 1728, 146), radius=12, fill="#f8fafc", outline="#67e8f9", width=2)
+    centered_text(d, (1402, 68, 1716, 105), "CONCEPT TARGET", font(20, True), "#0f5361")
+    centered_text(d, (1402, 104, 1716, 138), "measured V30 shown separately", font(16), "#475467")
 
-    # Flow boxes.
-    flow_y = 275
-    flow = [
-        ((90, flow_y, 400, flow_y + 135), "IMAGE INPUT", "book page / oracle shard"),
-        ((735, flow_y - 25, 1085, flow_y + 170), "ILM-V", "visual memory + latent diffusion"),
-        ((1365, flow_y, 1710, flow_y + 135), "IMAGE OUTPUT", "answer sheet with glyph forms"),
-    ]
-    for box, head, sub in flow:
-        x1, y1, x2, y2 = box
-        ov = Image.new("RGBA", bg.size, (0, 0, 0, 0))
-        od = ImageDraw.Draw(ov)
-        od.rounded_rectangle(box, radius=24, fill=(5, 13, 27, 184), outline=(125, 211, 252, 220), width=2)
-        bg.alpha_composite(ov)
-        centered_text(d, (x1 + 8, y1 + 20, x2 - 8, y1 + 68), head, font(25, True), "#ecfeff")
-        centered_text(d, (x1 + 12, y1 + 68, x2 - 12, y2 - 16), sub, font(20), "#bae6fd")
-    arrow(d, (420, flow_y + 67), (718, flow_y + 67), "#67e8f9")
-    arrow(d, (1100, flow_y + 67), (1345, flow_y + 67), "#67e8f9")
+    paths = yan_paths()
+    input_box = (70, 350, 505, 855)
+    model_box = (675, 380, 1110, 825)
+    output_box = (1275, 335, 1730, 870)
 
-    # Central model chip.
-    chip = Image.new("RGBA", bg.size, (0, 0, 0, 0))
-    cd = ImageDraw.Draw(chip)
-    cd.rounded_rectangle((690, 485, 1125, 800), radius=36, fill=(10, 24, 46, 210), outline=(103, 232, 249, 235), width=3)
-    for i in range(13):
-        x = 710 + i * 32
-        cd.line((x, 455, x, 485), fill=(103, 232, 249, 180), width=3)
-        cd.line((x, 800, x, 835), fill=(251, 191, 36, 170), width=3)
-    for i in range(8):
-        y = 510 + i * 34
-        cd.line((655, y, 690, y), fill=(103, 232, 249, 180), width=3)
-        cd.line((1125, y, 1165, y), fill=(251, 191, 36, 170), width=3)
-    bg.alpha_composite(chip)
-    centered_text(d, (710, 520, 1105, 592), "ILM-V", font(48, True), "#ecfeff")
-    centered_text(d, (720, 610, 1095, 710), "visual canvas encoder\n2D memory transformer\nmasked image generator", font(22), "#dbeafe")
-    centered_text(d, (720, 730, 1095, 775), "patches are visual units", font(21, True), "#fde68a")
+    d.rounded_rectangle(input_box, radius=18, fill="#ffffff", outline="#2b6cb0", width=3)
+    d.text((98, 375), "1  Visual prompt", font=font(27, True), fill="#102a43")
+    mini_page(canvas, (98, 430, 477, 615), "Prompt rendered as pixels", ["Explain the evolution of 言.", "Use modern and historical forms."], tint="#fffaf0")
+    d.text((100, 645), "Attached visual evidence", font=font(21, True), fill="#344054")
+    light_glyph(canvas, (98, 685, 278, 825), "Oracle", paths["oracle"], sublabel="J04903")
+    light_glyph(canvas, (298, 685, 478, 825), "Bronze", paths["bronze"], sublabel="B02975")
 
-    # Real Yan evolution panels.
-    data_root = Path("/home/lachlan/ProjectsLFS/incoder/data/historic/glyphs/言")
+    d.rounded_rectangle(model_box, radius=22, fill="#102a43", outline="#2aa7b8", width=3)
+    centered_text(d, (705, 410, 1080, 458), "2  IMAGE-NATIVE STUDENT", font(25, True), "#dff8fb")
+    centered_text(d, (720, 485, 1065, 610), "visual encoder\ncausal 2D memory\ncontinuous image predictor", font(25), "#dbeafe")
+    d.rounded_rectangle((735, 640, 1050, 740), radius=14, fill="#183b56", outline="#67e8f9", width=2)
+    draw_visual_code_grid(d, (770, 666, 1015, 714), ["#38bdf8", "#a78bfa", "#fbbf24", "#34d399"])
+    centered_text(d, (710, 760, 1075, 810), "pixels  →  visual state  →  pixels", font(21, True), "#fde68a")
+
+    d.rounded_rectangle(output_box, radius=18, fill="#fffdf8", outline="#b7791f", width=3)
+    d.text((1302, 360), "3  Rendered answer target", font=font(26, True), fill="#7c2d12")
+    d.rectangle((1303, 415, 1702, 475), fill="#f1e7ca")
+    d.text((1323, 429), "言  YAN · speech / language", font=cjk_font(25), fill="#3f2b12")
+    d.text((1305, 500), "A page image may combine readable text", font=font(20), fill="#334155")
+    d.text((1305, 530), "with glyphs that have no reliable codec.", font=font(20), fill="#334155")
     glyphs = [
-        ("Oracle", "J04903", data_root / "oracle" / "J04903.svg"),
-        ("Bronze", "B02975", data_root / "bronze" / "B02975.svg"),
-        ("Seal", "S01648", data_root / "seal" / "S01648.svg"),
-        ("Modern", "U+8A00", None),
+        ("Oracle", "J04903", paths["oracle"], None),
+        ("Bronze", "B02975", paths["bronze"], None),
+        ("Seal", "S01648", paths["seal"], None),
+        ("Modern", "U+8A00", None, "言"),
     ]
-    x = 92
-    y = 610
-    card_w = 255
-    for i, (stage, sub, path) in enumerate(glyphs):
-        box = (x + i * (card_w + 24), y, x + i * (card_w + 24) + card_w, y + 310)
-        paste_svg_on_card(bg, path, char="言" if path is None else None, box=box, label=stage, sublabel=sub)
-        if i < len(glyphs) - 1:
-            arrow(d, (box[2] + 4, y + 155), (box[2] + 22, y + 155), "#fbbf24")
+    for index, (stage, sublabel, path, char) in enumerate(glyphs):
+        x1 = 1300 + index * 101
+        light_glyph(canvas, (x1, 585, x1 + 91, 790), stage, path, char=char, sublabel=sublabel)
+    centered_text(d, (1300, 798, 1705, 852), "Illustrative target\nnot a measured V30 output", font(17, True), "#9a3412")
 
-    # Output answer card on right.
-    answer = Image.new("RGBA", bg.size, (0, 0, 0, 0))
-    ad = ImageDraw.Draw(answer)
-    ad.rounded_rectangle((1240, 545, 1718, 905), radius=28, fill=(248, 250, 252, 235), outline=(186, 230, 253, 255), width=3)
-    ad.rounded_rectangle((1272, 585, 1688, 705), radius=18, fill=(15, 23, 42, 230))
-    bg.alpha_composite(answer)
-    d.text((1288, 604), "Prompt: evolution of YAN", font=font(26, True), fill="#e0f2fe")
-    d.text((1288, 652), "Answer is an image, not token text.", font=font(21), fill="#bae6fd")
-    d.text((1275, 735), "YAN means speech / language.", font=font(25, True), fill="#0f172a")
-    d.text((1275, 780), "The model retrieves real historical forms,\nplaces them in a readable explanation,\nand renders the whole answer as pixels.", font=font(22), fill="#334155")
-    d.text((1275, 872), "Oracle → Bronze → Seal → Modern", font=font(22, True), fill="#92400e")
+    arrow_any(d, (505, 605), (655, 605), "#526779", 5)
+    arrow_any(d, (1110, 605), (1255, 605), "#526779", 5)
+    centered_text(d, (515, 555, 645, 590), "pixels", font(18, True), "#475467")
+    centered_text(d, (1120, 555, 1245, 590), "pixels", font(18, True), "#475467")
 
-    # Footer provenance.
-    d.text((72, 958), "Real glyph exemplars from local hanziyuan-derived ziyuan data for YAN (U+8A00): oracle, bronze, seal, modern.", font=font(18), fill="#e5e7eb")
-    bg.convert("RGB").save(FIG / "ilm_v_yan_readme_hero.png", quality=95)
+    d.rounded_rectangle((70, 910, 1730, 968), radius=10, fill="#e8f1f5", outline="#9fb3c8", width=2)
+    d.text((92, 926), "Boundary: no token IDs, Unicode labels, OCR, or external LM inside the student path.  V30 was rejected; writer training remains closed.", font=font(19, True), fill="#243b53")
+    canvas.convert("RGB").save(FIG / "ilm_v_yan_readme_hero.png", quality=95)
 
 
 def yan_paths() -> dict[str, Path]:
@@ -1072,15 +1051,17 @@ def visual_training_pipeline() -> None:
     d.text((70, 45), "Training ILM-V: Language as Visual Corpus", font=font(54, True), fill="#0f172a")
     d.text(
         (74, 116),
-        "Every source is converted into page/glyph images. The model learns to predict and generate visual latents, not BPE or word tokens.",
+        "Every source becomes a page/glyph image. The proposed student is trained on visual latents, not BPE or word tokens.",
         font=font(27),
         fill="#475467",
     )
+    d.rounded_rectangle((1910, 45, 2330, 98), radius=10, fill="#e8f1f5", outline="#2aa7b8", width=2)
+    centered_text(d, (1920, 49, 2320, 94), "CONCEPT · FULL-SYSTEM TARGET", font(18, True), "#0f5361")
 
     cols = [
         (70, 185, 560, 1175, "#eff6ff", "#2563eb", "1  Visual Corpus"),
         (620, 185, 1110, 1175, "#f0fdf4", "#16a34a", "2  Canvas Builder"),
-        (1170, 185, 1710, 1175, "#111827", "#38bdf8", "3  ILM-V Training Core"),
+        (1170, 185, 1710, 1175, "#111827", "#38bdf8", "3  Proposed Training Core"),
         (1770, 185, 2330, 1175, "#fff7ed", "#f97316", "4  Image Targets"),
     ]
     for x1, y1, x2, y2, fill, outline, title in cols:
@@ -1108,7 +1089,7 @@ def visual_training_pipeline() -> None:
     light_glyph(img, (130, 855, 250, 1035), "Oracle", paths["oracle"], sublabel="J04903")
     light_glyph(img, (268, 855, 388, 1035), "Bronze", paths["bronze"], sublabel="B02975")
     light_glyph(img, (406, 855, 500, 1035), "Seal", paths["seal"], sublabel="S01648")
-    d.text((130, 1050), "unencoded historical signs\nstay as image patches", font=font(18), fill="#475467")
+    d.text((130, 1050), "Unencoded forms remain image patches.", font=font(16), fill="#475467")
 
     # Column 2: rendering and normalization.
     d.rounded_rectangle((675, 275, 1055, 395), radius=16, fill="#ffffff", outline="#bbf7d0", width=2)
@@ -1149,7 +1130,7 @@ def visual_training_pipeline() -> None:
 
     # Bottom loss band.
     d.rounded_rectangle((70, 1240, 2330, 1515), radius=30, fill="#ffffff", outline="#cbd5e1", width=2)
-    d.text((105, 1268), "Loss mixture for one or two RTX 3090 GPUs", font=font(34, True), fill="#0f172a")
+    d.text((105, 1268), "Proposed loss mixture for one RTX 4090 proof run", font=font(34, True), fill="#0f172a")
     losses = [
         ("Masked visual LM", "hide page patches\npredict visual latents", "#dbeafe"),
         ("Denoising", "blur/drop strokes\nrecover readable page", "#dcfce7"),
@@ -1176,7 +1157,7 @@ def draw_answer_page(base: Image.Image, box: Tuple[int, int, int, int]) -> None:
     line_text(
         d,
         (x1 + 58, y1 + 138),
-        "English: YAN is the written idea of speech.\nIt links a mouth, sound, statement, and record.",
+        "English: YAN denotes speech, words, or a statement.\nHistorical forms remain visible evidence below.",
         font(24),
         "#2c2418",
         spacing=10,
@@ -1184,7 +1165,7 @@ def draw_answer_page(base: Image.Image, box: Tuple[int, int, int, int]) -> None:
     line_text(
         d,
         (x1 + 58, y1 + 250),
-        "中文：言，本義為言語、說話、辭令。\n古文：言者，心聲見於簡冊也。",
+        "中文：言，本義為言語、說話、辭令。\n《說文》：直言曰言，論難曰語。",
         cjk_font(26),
         "#2c2418",
         spacing=10,
@@ -1223,10 +1204,12 @@ def visual_inference_pipeline() -> None:
     d.text((70, 45), "Inference ILM-V: Chat-Like UI, Image-First Output", font=font(54, True), fill="#0f172a")
     d.text(
         (74, 116),
-        "Typed text and uploaded images are both turned into visual prompt canvases. The model returns a rendered page image first.",
+        "Typed text and uploaded images become visual prompt canvases. The target student returns a rendered page image first.",
         font=font(27),
         fill="#475467",
     )
+    d.rounded_rectangle((1900, 45, 2325, 98), radius=10, fill="#e8f1f5", outline="#2aa7b8", width=2)
+    centered_text(d, (1910, 49, 2315, 94), "CONCEPT · TARGET BEHAVIOR", font(18, True), "#0f5361")
 
     # Inputs.
     d.rounded_rectangle((80, 220, 600, 1280), radius=28, fill="#eff6ff", outline="#2563eb", width=3)
@@ -1265,7 +1248,8 @@ def visual_inference_pipeline() -> None:
 
     # Model.
     d.rounded_rectangle((1250, 365, 1495, 1075), radius=34, fill="#111827", outline="#38bdf8", width=3)
-    d.text((1284, 410), "ILM-V", font=font(45, True), fill="#e0f2fe")
+    d.text((1284, 402), "ILM-V", font=font(45, True), fill="#e0f2fe")
+    d.text((1287, 458), "target student", font=font(18, True), fill="#67e8f9")
     d.text((1284, 485), "visual encoder\n2D memory\nmasked image\ngenerator\nlatent decoder", font=font(24), fill="#cbd5e1")
     draw_visual_code_grid(d, (1285, 720, 1460, 850), ["#38bdf8", "#a78bfa", "#fbbf24", "#34d399", "#f472b6"])
     centered_text(d, (1275, 895, 1470, 985), "internal state:\nvisual latent page", font(23, True), "#fde68a")
@@ -1273,7 +1257,7 @@ def visual_inference_pipeline() -> None:
 
     # Output page.
     d.rounded_rectangle((1570, 210, 2325, 1225), radius=30, fill="#fff7ed", outline="#f97316", width=3)
-    d.text((1605, 245), "Image-first answer", font=font(32, True), fill="#7c2d12")
+    d.text((1605, 245), "Illustrative image-first answer", font=font(30, True), fill="#7c2d12")
     draw_answer_page(img, (1615, 315, 2280, 1130))
     arrow_any(d, (1495, 735), (1570, 735), "#64748b", 5)
 
@@ -1288,9 +1272,7 @@ def visual_inference_pipeline() -> None:
         "#334155",
         spacing=8,
     )
-    for x in range(1930, 1930 + 270, 28):
-        d.line((x, 1225, x + 15, 1255), fill="#94a3b8", width=3)
-    d.polygon([(2200, 1255), (2180, 1250), (2191, 1232)], fill="#94a3b8")
+    arrow_any(d, (1948, 1225), (1948, 1255), "#64748b", 4)
 
     img.save(FIG / "visual_language_inference_pipeline.png", quality=95)
 

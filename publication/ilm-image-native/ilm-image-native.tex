@@ -172,6 +172,18 @@ incremental assignment is 50.708\% versus 49.561\% shuffled and both-correct is
 8.984\%. The common suffix baseline cancels exactly in aggregate two-by-two
 assignment margin. V29 passes eight of fourteen mechanism gates and two of six
 language gates and is rejected without frozen evaluation or writer training.
+V30 replaces the scalar critic with a candidate-independent
+$4\times4\times192$ next-image field and compares aligned frozen retinal
+patches before reduction. A parameter-identical control repeats a matched
+global semantic vector over the same 16 rows. Both 18.64M-parameter arms start
+from byte-identical tensors and complete 8,000 finite BF16 updates. Spatial
+natural top-1 is 1.270\%, below 2.490\% for the global control, 1.318\% image
+unigram, and 11.719\% symbolic bigram. Pixel-identical-suffix assignment is
+50.049\% versus 50.586\% for the control. Patch reversal changes spatial
+scores, but target log probability improves by only 0.0154 nat and pair
+accuracy by 0.391 percentage point, below fixed gates. V30 passes zero of eight
+language gates and is rejected with frozen evaluation and writer training
+closed.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -191,7 +203,11 @@ is tested here; 3D, motion, speech, and vocal fields remain future hypotheses.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/ilm_v_yan_readme_hero.png}
-  \caption{Image-native language modeling concept figure generated with an AgInTi background and overlaid with real local ziyuan glyph exemplars for \texttt{YAN} (U+8A00). The answer is a rendered image containing both modern explanation and historical forms.}
+  \caption{Image-native language modeling design target. A restrained AgInTi
+  background is overlaid with deterministic typography and real local ziyuan
+  glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
+  answer-page target, not a measured model output; the measured V30 result is
+  reported in Figure~\ref{fig:v30result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -328,6 +344,11 @@ implemented controls that makes that slogan falsifiable:
   shuffled prefixes, and candidate-permutation replay. It finds a large natural
   order effect but chance matched binding, and exposes the exact cancellation
   of a common suffix baseline in aggregate two-by-two assignment margin.
+  \item V30, a preregistered candidate-independent spatial next-image field
+  tested against a parameter-identical global-semantic control. Local patch
+  reversal proves that aligned retinal geometry affects scores, while matched
+  natural and exact-suffix results reject that sensitivity as useful
+  context-to-target binding.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -2053,6 +2074,133 @@ The existing suffix, shuffle, frequency, permutation, identity, and boundary
 controls must pass before a writer, page fold, geometric depth, motion, or
 larger model is authorized.
 
+\subsection{Spatial Visual Next-Field V30: local sensitivity without language}
+
+V30 changes the predicted random variable rather than the scalar-score
+baseline. Both arms retain the V29 causal context field and frozen visual
+perception, discard the candidate-query critic, and emit a candidate-independent
+continuous next-image field:
+\[
+P_\theta(X)\in\mathbb R^{16\times192}.
+\]
+The 16 rows preserve the frozen retina's $4\times4$ topology. For an arbitrary
+candidate image $y$, the spatial arm compares corresponding normalized retinal
+cells before reduction,
+\[
+s_{sp}(X,y)=\tau\frac1{16}\sum_{p=1}^{16}
+P_{\theta,p}(X)^\top u_p(y).
+\]
+The matched control repeats the candidate's frozen global-semantic vector over
+the same rows,
+\[
+s_{gl}(X,y)=\tau\frac1{16}\sum_{p=1}^{16}
+P_{\theta,p}(X)^\top z(y).
+\]
+It preserves candidate visibility, trainable capacity, score reduction, and
+compute topology while removing local correspondence. A 180-degree reversal of
+the candidate cells intervenes on the spatial route and leaves the global route
+exactly invariant.
+
+The arms have 18,641,153 total and 17,011,777 trainable parameters. They start
+from tensors with the same keys, shapes, dtypes, values, and SHA-256
+(\texttt{507d875d...d9547ca8e}). Each independently completes 8,000 finite BF16
+AdamW updates on one RTX 4090. The spatial and global runs take 2,693.27 and
+3,789.99 seconds and peak at 1.595290 and 1.597071~GiB allocated memory. The
+joint audit takes 39.33 seconds. These are resource measurements for a rejected
+mechanism, not capability-normalized efficiency claims. The protocol, spatial
+checkpoint, global checkpoint, and audit SHA-256 values begin
+\texttt{81d2b2af}, \texttt{11a3a7e9}, \texttt{66378d4b}, and
+\texttt{2d0a3a08}, respectively.
+
+Table~\ref{tab:v30natural} reports the fixed 2,048-window natural audit. Both
+routes detect ordered context, but the global route is stronger and both remain
+far below the symbolic bigram.
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{lrrl}
+\toprule
+V30 natural development measure & Spatial & Global & Spatial requirement \\
+\midrule
+Full-context top-1 & 0.012695 & 0.024902 & $\geq0.15$; fail \\
+Suffix-4 / shuffled top-1 & 0.006348 / 0.000488 & 0.015625 / 0.001465 & diagnostic \\
+Patch-reversed top-1 & 0.000488 & 0.024902 & diagnostic \\
+Image-unigram top-1 & 0.013184 & 0.013184 & spatial below \\
+Symbolic-bigram top-1 & 0.117188 & 0.117188 & spatial below \\
+Symbolic-trigram top-1 & 0.200195 & 0.200195 & diagnostic \\
+Full minus shuffled log probability & +0.315340 & +0.650060 & $>0.03$; pass \\
+Full minus patch-reversed log probability & +0.015412 & 0.000000 & $>0.05$; fail \\
+Spatial minus global top-1 & \multicolumn{2}{c}{$-0.012207$} & $>0.01$; fail \\
+Spatial minus global log probability & \multicolumn{2}{c}{$-0.190402$} & $>0.05$; fail \\
+Cross-font candidate identity & 0.963379 & 0.964355 & $\geq0.95$; pass \\
+\bottomrule
+\end{tabular}
+\caption{V30 fixed natural-Chinese development audit. Patch alignment affects
+the spatial rank, but its target-probability effect misses the causal gate and
+the parameter-identical global control is stronger.}
+\label{tab:v30natural}
+\end{table}
+
+The 512-pair intervention keeps the final four context images bitwise equal
+while changing earlier history and the next image. Table~\ref{tab:v30pairs}
+shows that neither route binds the correct candidate to the earlier context.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+V30 suffix-4 pair measure & Spatial & Global & Spatial requirement \\
+\midrule
+Suffix pixels / score-row error & 1.000000 / 0 & 1.000000 / 0 & exact; pass \\
+Full arm accuracy & 0.500488 & 0.505859 & $>0.65$; fail \\
+Full both-correct rate & 0.050781 & 0.081055 & $>0.40$; fail \\
+Suffix-only arm accuracy & 0.500000 & 0.500000 & exact chance \\
+Shuffled-prefix arm accuracy & 0.492920 & 0.491943 & control \\
+Patch-reversed arm accuracy & 0.496582 & 0.505859 & control \\
+Full minus shuffled accuracy & +0.007568 & +0.013916 & $>0.10$; fail \\
+Full minus shuffled mean margin & +0.010235 & +0.034522 & $>0.05$; fail \\
+Full minus patch-reversed accuracy & +0.003906 & 0.000000 & $>0.05$; fail \\
+Candidate-column error / agreement & 0 / 1.000000 & 0 / 1.000000 & exact; pass \\
+Spatial minus global full accuracy & \multicolumn{2}{c}{$-0.005371$} & $>0.05$; fail \\
+\bottomrule
+\end{tabular}
+\caption{V30 pixel-identical suffix intervention. Candidate pixels, exact
+suffix equality, and column equivariance are controlled. Local patch alignment
+does not produce reliable context-to-candidate assignment.}
+\label{tab:v30pairs}
+\end{table}
+
+The field's sensitivity is real but insufficient. Reversal changes spatial
+scores by as much as 3.297, yet it improves target log probability by only
+0.0154 nat and pair correctness by 0.391 percentage point. A single
+deterministic field with bilinear candidate energy is encouraged toward an
+average next retinal state. Natural next writing is multimodal; the fixed
+contrastive and pair losses do not make this one field represent the required
+conditional alternatives. This interpretation does not reject all spatial
+continuous distributions. It rejects this field, decoder, and objective on the
+fixed benchmark.
+
+V30 passes 12/18 spatial common gates, 12/12 global integrity gates, 5/9
+matched-arm gates, and 0/8 spatial language gates. Frozen images remain
+uninstantiated. A separately preregistered successor would need to model
+multimodal continuous next-field density and beat the same global, exact-suffix,
+shuffle, image-unigram, and symbolic-bigram controls before a writer, page fold,
+depth axis, or historical-glyph task is opened.
+
+\clearpage
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/spatial_visual_next_field_v30_result.png}
+  \caption{Measured V30 matched-arm result generated directly from the fixed
+  audit. The spatial route is sensitive to local candidate alignment but is
+  worse than the parameter-identical global route on natural top-1, target log
+  probability, pair assignment, and pair both-correct. It passes 12/18 common
+  gates and 0/8 language gates; the control passes all 12 integrity gates.}
+  \label{fig:v30result}
+\end{figure}
+
 \clearpage
 \section{Data}
 
@@ -2178,32 +2326,57 @@ parameters. The 1,200-update continuation records 2,047.63 seconds, about
 top-1 subject to full-context over last-only, positive normalized context gain,
 and target cosine above 0.10.
 
-\section{Image-First Training and Inference}
+\section{Image-First Training and Inference Targets}
 
+The next two figures specify the intended full-system contract; they do not
+claim that the rejected V30 reader can yet generate answer pages. The measured
+comparison is Figure~\ref{fig:v30result}: local spatial alignment changes
+scores, but exact-suffix assignment remains at chance and writer training stays
+closed. Presenting the target and the experiment in one figure sequence keeps
+the research direction visible without turning a concept rendering into
+evidence.
+
+\clearpage
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/visual_language_training_pipeline.png}
-  \caption{Training pipeline for ILM-V. Rendered text corpora, scanned pages, historical glyph files, and unencoded marks are all converted into visual canvases. The training target is visual latent prediction and image generation, not BPE-token prediction.}
+  \caption{Proposed full-system training target for ILM-V. Rendered text
+  corpora, scanned pages, historical glyph files, and unencoded marks become
+  visual canvases. The intended objective predicts visual latents and images,
+  not BPE tokens. This is a design figure; Figure~\ref{fig:v30result} reports
+  the measured reader experiment.}
   \label{fig:visualtraining}
 \end{figure}
 
-Figure~\ref{fig:visualtraining} makes the training contract explicit. Typed corpora are rendered into page images; scanned books and manuscripts are cropped and tiled; historical glyph files become glyph tiles; and marks that are missing from font tables remain valid image patches. Metadata such as crop boxes and stage labels may remain in manifests, but the model path should learn from visual latents. OCR is useful as a readability critic, not as the hidden language channel.
+Figure~\ref{fig:visualtraining} makes the proposed training contract explicit.
+Typed corpora are rendered into page images; scanned books and manuscripts are
+cropped and tiled; historical glyph files become glyph tiles; and marks that
+are missing from font tables remain valid image patches. Metadata such as crop
+boxes and stage labels may remain in manifests, but the student path must learn
+from visual latents. OCR is useful as a readability critic, not as the hidden
+language channel.
 
+\clearpage
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/visual_language_inference_pipeline.png}
-  \caption{Inference pipeline for ILM-V. A chat-like interface may accept typed text or uploaded images, but typed text is first rasterized into a prompt image. The primary output is a rendered page image. OCR or transcoding is optional and only applies to output regions that exist in computer codecs.}
+  \caption{Proposed inference contract for ILM-V. A chat-like interface may
+  accept typed text or uploaded images, but typed text is first rasterized into
+  a prompt image. The target primary output is a rendered page image. OCR or
+  transcoding is optional and applies only to output regions represented by
+  computer codecs. The displayed answer is illustrative, not a V30 output.}
   \label{fig:visualinference}
 \end{figure}
 
-Figure~\ref{fig:visualinference} shows the user-facing path. The interface can
+Figure~\ref{fig:visualinference} shows the target user-facing path. The interface can
 behave like a normal LLM prompt box. Typed text is rasterized into a clean prompt
 band; an optional book page, inscription, or glyph crop is normalized and placed
 beside or below it on the same canvas. Borders, whitespace, and coordinates make
-the relation visible rather than encoding it in hidden IDs. The ILM can thus
+the relation visible rather than encoding it in hidden IDs. A successful ILM should
 answer a typed question alone or a grounded question such as ``What does the
 marked form mean, and how did it evolve?'' about an attached page. It returns a
-page image containing modern language and historical glyph regions. A later
+page image containing modern language and historical glyph regions only after
+the corresponding visual-language gates pass. A later
 OCR/transcoder may attach a searchable layer for encodable spans; ancient or
 unencoded glyphs remain image regions with coordinates and provenance.
 
@@ -2545,6 +2718,12 @@ separates a strong global order effect from candidate-specific binding. It also
 shows algebraically and empirically that a shared suffix baseline cancels from
 the aggregate two-by-two assignment margin. The critic itself must learn the
 missing interaction; changing only the baseline cannot supply it.
+V30 makes that context state predict a candidate-independent $4\times4$ retinal
+field and tests aligned local scoring against a parameter-identical tiled-global
+control. Patch reversal changes spatial scores, but natural top-1 is 1.270\%
+versus 2.490\% for the global route, and exact-suffix assignment is 50.049\%
+versus 50.586\%. The spatial route is therefore sensitive to local geometry
+without learning a useful conditional next-image distribution.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
@@ -2555,18 +2734,19 @@ shows that separating appearance from history is also insufficient when the
 objective permits changed residuals with nearly unchanged target preference.
 V27 shows that joint dot-product candidate compatibility is also insufficient:
 it preserves raw target visibility in the pair control but neither passes the
-separate learned full-bank identity gate nor makes earlier order useful. The
-V28 shows that freezing that retina, improving semantic identity, and adding
-dense ordered future supervision can make earlier order affect probability and
+separate learned full-bank identity gate nor makes earlier order useful. V28
+shows that freezing that retina, improving semantic identity, and adding dense
+ordered future supervision can make earlier order affect probability and
 margin without producing correct binding. V29 shows that candidate-conditioned
 cross-attention and explicit prefix-increment contrast can amplify the natural
-order effect while exact-suffix assignment remains at chance. The next proof
-should make the context construct a continuous spatial next-image field and
-compare arbitrary candidate patches before scalar reduction, against a matched
-bilinear scorer. Only after the correct history beats suffix,
-suffix-preserving shuffle, unigram, and bigram for the same candidate pixels
-should a serpentine lattice, variable answer length, or multiple generated
-lines expand the task.
+order effect while exact-suffix assignment remains at chance. V30 shows that
+one aligned deterministic next-image field is also insufficient and is weaker
+than its matched global route. A successor should model a multimodal continuous
+field distribution and retain the same global, suffix-preserving shuffle,
+unigram, bigram, candidate-column, and patch-permutation controls. Only after
+the correct history beats those controls for the same candidate pixels should a
+serpentine lattice, variable answer length, or multiple generated lines expand
+the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -2689,15 +2869,27 @@ versus 13.867\% bigram. Exact-suffix increment assignment is 50.708\% versus
 margins are both 0.005103 because the common suffix baseline cancels. V29
 passes eight of fourteen mechanism gates and two of six language gates. No
 frozen query or writer is authorized.
+V30 then predicts a candidate-independent $4\times4\times192$ retinal field and
+compares aligned local evidence with a parameter-identical tiled-global
+control. Both arms complete 8,000 finite updates from byte-identical initialized
+tensors with approximately 1.60~GiB peak allocated memory. Spatial natural
+top-1 is 1.270\%, below 2.490\% global, 1.318\% image unigram, and 11.719\%
+symbolic bigram. Exact-suffix pair assignment is 50.049\% versus 50.586\%
+global. Patch reversal changes the score but improves target log probability by
+only 0.0154 nat and pair accuracy by 0.391 percentage point. V30 passes 12/18
+spatial common gates, 12/12 control integrity gates, 5/9 matched gates, and 0/8
+language gates. No frozen query or writer is authorized.
 The seven-context V16 increase, V25 ordered-history increase, V26 changed
 history state, V27 global compatibility score, V28 probability/margin order
-effect, and V29 density-ratio order effect are therefore all too weak to
-establish a useful causal memory core. The next attributable test must keep
-ordinary Chinese and the strict image boundary, preserve the strong visual
-geometry, and predict a continuous next-image patch field before scoring an
-arbitrary candidate. A parameter-matched bilinear visual scorer, suffix-only,
-order-shuffled, visual-unigram, and symbolic-bigram controls must pass before
-long context or a writer is promoted.
+effect, V29 density-ratio order effect, and V30 local-alignment effect are
+therefore all too weak to
+establish a useful causal memory core. V30 further shows that replacing the
+scalar critic with one deterministic aligned next-image field does not repair
+that core and underperforms its global visual control. The next attributable
+test must keep ordinary Chinese and the strict image boundary while representing
+multimodal continuous next-field density. A parameter-matched global-density
+control, suffix-only, order-shuffled, visual-unigram, symbolic-bigram, and local
+permutation controls must pass before long context or a writer is promoted.
 The exact serpentine mapping may then fold clean $32\times32$ cells into a
 $256\times256$ retinal lattice without making an $8\times8$ thumbnail the sole
 record. Page-native canvases, 3D

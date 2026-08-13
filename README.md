@@ -14,7 +14,10 @@
 
 ![ILM-V image-native language model concept: image input to image output with 言 glyph evolution](publication/ilm-image-native/figures/ilm_v_yan_readme_hero.png)
 
-*Image-native language modeling concept: a writing image enters ILM-V, the model reasons in visual latent space, and the answer is rendered as an image. The glyph panels use local hanziyuan-derived ziyuan data for the evolution of `言` (YAN, U+8A00).*
+*Concept target, not a measured model output: writing pixels enter an independent
+ILM-V student and the intended answer is a rendered page image. The glyph panels
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured V30
+experiment and its rejection are reported directly below.*
 
 ## Research North Star: A Visual Word-Origin Book
 
@@ -58,9 +61,16 @@ also rejected. V29 then makes each arbitrary candidate image query the retained
 visual history and trains the full-minus-suffix score directly. It produces a
 large ordered-versus-shuffled target-probability effect, but held-out
 incremental pair assignment is only `50.71%` and full natural top-1 is `2.34%`
-versus `13.87%` for a symbolic bigram. V29 is also rejected. The next proof
-must make context predict a spatial next-image field before scalar candidate
-scoring; page scale, 3D geometry, and motion remain deferred.
+versus `13.87%` for a symbolic bigram. V29 is also rejected. V30 then makes
+context predict a candidate-independent `4 x 4 x 192` next-image field and
+compares aligned candidate patches before reduction, against a
+parameter-identical global-semantic control. The spatial route is sensitive to
+patch alignment, but natural top-1 is only `1.27%` versus `2.49%` for the
+global control and `11.72%` for a symbolic bigram; exact-suffix assignment is
+`50.05%` versus `50.59%` for the control. V30 is rejected. The next proof must
+represent multimodal continuous next-field density and beat both the matched
+global route and symbolic controls; page scale, 3D geometry, and motion remain
+deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -80,7 +90,46 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V29 Conditional Visual Density Ratio Rejected
+## Latest Natural-Language Test: V30 Spatial Next-Field Rejected
+
+![Measured V30 matched-arm result: local candidate alignment changes scores, but the spatial route fails binding and every language gate](publication/ilm-image-native/figures/spatial_visual_next_field_v30_result.png)
+
+V30 tests the spatial predictive target proposed after V29. Two independently
+trained, parameter-identical `18,641,153`-parameter students start from
+byte-identical initialized states. Both read 64 ordered `32 x 32` Chinese
+writing images and emit a candidate-independent `4 x 4 x 192` continuous
+next-image field. The spatial arm compares corresponding frozen retinal cells;
+the control tiles a matched-visibility global semantic vector across the same
+16 rows. Neither arm receives text, token or Unicode IDs, OCR, a glyph lookup,
+vocabulary logits, or a deployed candidate bank.
+
+Each arm completes 8,000 fixed BF16 updates on one RTX 4090. Peak allocated
+memory is `1.595 GiB` and `1.597 GiB`. On 2,048 natural development windows,
+spatial full-context 1,024-way top-1 is `1.2695%`, below the global control
+(`2.4902%`), image unigram (`1.3184%`), and symbolic bigram (`11.7188%`).
+Spatial full target log probability improves by `0.31534` nat over a
+suffix-preserving prefix shuffle, but is `0.19040` nat worse than the global
+control.
+
+Reversing the candidate's 16 local cells changes spatial scores and drops
+natural top-1 to `0.0488%`, confirming that local geometry is visible. The
+target log-probability gain is only `0.01541` nat, below the fixed `>0.05`
+gate. On 512 pixel-identical-suffix pairs, spatial assignment is `50.0488%`,
+global assignment is `50.5859%`, and spatial patch reversal changes accuracy
+by only `0.3906` percentage point. Exact suffix rows, candidate-column
+equivariance, cross-font visibility, finite-state, boundary, and resource
+controls all pass.
+
+The spatial arm passes `12/18` common gates, the control passes `12/12`
+integrity gates, matched arms pass `5/9`, and spatial language passes `0/8`.
+V30 is rejected, frozen images remain uninstantiated, and no writer is trained.
+The result rejects a single deterministic bilinear next-field as the selected
+mechanism; it does not reject continuous image-native language modeling. See
+the [complete V30 receipt](docs/spatial-visual-next-field-v30-result.md),
+[preregistered protocol](references/spatial_visual_next_field_v30_protocol.md),
+and [research decision](references/spatial_visual_next_field_v30_research.md).
+
+## Prior Natural-Language Test: V29 Conditional Visual Density Ratio Rejected
 
 ![Measured V29 conditional visual density-ratio result: natural visual order affects probability, but candidate binding and language retrieval fail](publication/ilm-image-native/figures/conditional_visual_density_ratio_v29_result.png)
 
@@ -913,6 +962,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V30 spatial visual next-field result | `docs/spatial-visual-next-field-v30-result.md` |
 | V29 conditional visual density-ratio result | `docs/conditional-visual-density-ratio-v29-result.md` |
 | V28 dense visual future-energy result | `docs/dense-visual-future-energy-v28-result.md` |
 | V21 field-complete writer result | `docs/field-complete-writer-v21-result.md` |
