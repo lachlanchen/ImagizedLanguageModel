@@ -168,8 +168,13 @@ def main() -> None:
         raise RuntimeError("V35 sealed audit checkpoint differs from development")
     ocr = TesseractStripOCR()
     started = time.perf_counter()
-    teacher = {
-        stream: teacher_forced_diagnostics(
+    def progress(message: str) -> None:
+        print(f"[sealed/ema] {message}", flush=True)
+
+    teacher = {}
+    for index, (stream, dataset) in enumerate(datasets.items()):
+        progress(f"teacher-forced/{stream}: starting {len(dataset)} examples")
+        teacher[stream] = teacher_forced_diagnostics(
             model,
             dataset,
             device=device,
@@ -178,10 +183,14 @@ def main() -> None:
             maximum_examples=0,
             flow_seed=V35_EVALUATION_SEED + index * 100_000,
         )
-        for index, (stream, dataset) in enumerate(datasets.items())
-    }
-    autonomous = {
-        stream: {
+        progress(
+            f"teacher-forced/{stream}: complete "
+            f"({teacher[stream]['examples']} examples)"
+        )
+    autonomous = {}
+    for index, (stream, stream_cases) in enumerate(cases.items()):
+        progress(f"autonomous/{stream}: starting {len(stream_cases)} cases")
+        autonomous[stream] = {
             selected_writer: autonomous_case_audit(
                 model,
                 stream_cases,
@@ -197,10 +206,9 @@ def main() -> None:
                     / "ema"
                     / f"{stream}_{selected_writer}.png"
                 ),
+                progress=progress,
             )
         }
-        for index, (stream, stream_cases) in enumerate(cases.items())
-    }
     autonomous["copy_counterfactual"] = {
         selected_writer: copy_counterfactual_audit(
             model,
@@ -209,6 +217,7 @@ def main() -> None:
             device=device,
             precision=args.precision,
             ocr=ocr,
+            progress=progress,
         )
     }
     state_report = {

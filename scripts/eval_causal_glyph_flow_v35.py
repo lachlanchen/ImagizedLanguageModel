@@ -62,6 +62,7 @@ EXPECTED_PARAPHRASE_SHA256 = (
 )
 PRODUCTION_EVALUATION = {
     "teacher_batch_size": 4,
+    "teacher_maximum_examples": 0,
     "public_cases": 32,
     "copy_cases": 32,
     "instruction_cases": 32,
@@ -128,6 +129,7 @@ def _evaluation_config(smoke: bool) -> dict[str, Any]:
         return dict(PRODUCTION_EVALUATION)
     return dict(PRODUCTION_EVALUATION) | {
         "teacher_batch_size": 1,
+        "teacher_maximum_examples": 4,
         "public_cases": 2,
         "copy_cases": 2,
         "instruction_cases": 2,
@@ -389,26 +391,35 @@ def _evaluate_state(
     ocr: TesseractStripOCR,
     output: Path,
 ) -> dict[str, Any]:
-    teacher = {
-        stream: teacher_forced_diagnostics(
+    def progress(message: str) -> None:
+        print(f"[{state}] {message}", flush=True)
+
+    teacher = {}
+    for index, (stream, dataset) in enumerate(datasets.items()):
+        progress(f"teacher-forced/{stream}: starting {len(dataset)} examples")
+        teacher[stream] = teacher_forced_diagnostics(
             model,
             dataset,
             device=device,
             precision=precision,
             batch_size=int(evaluation["teacher_batch_size"]),
-            maximum_examples=0,
+            maximum_examples=int(evaluation["teacher_maximum_examples"]),
             flow_seed=V35_EVALUATION_SEED + index * 100_000,
         )
-        for index, (stream, dataset) in enumerate(datasets.items())
-    }
+        progress(
+            f"teacher-forced/{stream}: complete "
+            f"({teacher[stream]['examples']} examples)"
+        )
     raw_limit = int(evaluation["raw_diagnostic_cases"])
     selected_cases = _selection_cases(cases, evaluation)
     if state == "raw":
         selected_cases = list(cases["copy"][:raw_limit]) + list(
             cases["instruction"][:raw_limit]
         )
-    writer_reports = {
-        writer: autonomous_case_audit(
+    writer_reports = {}
+    for writer in ("anchor", "flow"):
+        progress(f"writer-selection/{writer}: starting {len(selected_cases)} cases")
+        writer_reports[writer] = autonomous_case_audit(
             model,
             selected_cases,
             writer=writer,
@@ -417,9 +428,8 @@ def _evaluate_state(
             precision=precision,
             ocr=ocr,
             seed=V35_EVALUATION_SEED + 10_000_000,
+            progress=progress,
         )
-        for writer in ("anchor", "flow")
-    }
     selection = select_v35_writer(writer_reports["anchor"], writer_reports["flow"])
     selected_writer = str(selection["selected"])
     other_writer = "flow" if selected_writer == "anchor" else "anchor"
@@ -428,6 +438,10 @@ def _evaluate_state(
         stream_cases = list(cases[stream])
         if state == "raw":
             stream_cases = stream_cases[:raw_limit]
+        progress(
+            f"autonomous/{stream}: selected={selected_writer}, "
+            f"cases={len(stream_cases)}"
+        )
         autonomous[stream] = {
             selected_writer: autonomous_case_audit(
                 model,
@@ -441,6 +455,7 @@ def _evaluate_state(
                 gallery_path=(
                     output / "galleries" / state / f"{stream}_{selected_writer}.png"
                 ),
+                progress=progress,
             ),
             other_writer: autonomous_case_audit(
                 model,
@@ -451,6 +466,7 @@ def _evaluate_state(
                 precision=precision,
                 ocr=ocr,
                 seed=V35_EVALUATION_SEED + 20_000_000 + stream_index * 100_000,
+                progress=progress,
             ),
         }
     selected_pairs = list(counterfactual)
@@ -464,6 +480,7 @@ def _evaluate_state(
             device=device,
             precision=precision,
             ocr=ocr,
+            progress=progress,
         )
     }
     return {
@@ -562,6 +579,7 @@ def main() -> None:
     closed_loop = None
     receipts: dict[str, Any] = {}
     for state in ("raw", "ema"):
+        print(f"[{state}] loading checkpoint state", flush=True)
         model, checkpoint, receipt = load_v35_checkpoint_model(
             args.checkpoint,
             device=device,

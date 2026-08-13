@@ -888,12 +888,14 @@ def autonomous_case_audit(
     ocr: Callable[[Image.Image], str],
     seed: int = V35_EVALUATION_SEED,
     gallery_path: str | Path | None = None,
+    progress: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
     if not cases or not conditions or "correct" not in conditions:
         raise ValueError("V35 autonomous audit requires cases and correct prompts")
     generated: dict[str, list[V35GeneratedCase]] = {}
     started = time.perf_counter()
     for condition in conditions:
+        condition_started = time.perf_counter()
         rows = []
         for index, case in enumerate(cases):
             pixels, mask = controlled_prompt(cases, index, condition)
@@ -912,6 +914,11 @@ def autonomous_case_audit(
                 )
             )
         generated[condition] = rows
+        if progress is not None:
+            progress(
+                f"{cases[0].stream}/{writer}/{condition}: "
+                f"{len(rows)} cases in {time.perf_counter() - condition_started:.1f}s"
+            )
     comparisons: dict[str, Any] = {}
     for condition, rows in generated.items():
         if condition == "correct":
@@ -992,6 +999,7 @@ def copy_counterfactual_audit(
     precision: str,
     ocr: Callable[[Image.Image], str],
     seed: int = V35_EVALUATION_SEED + 1_000_000,
+    progress: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
     rows = []
     for index, (first, second) in enumerate(pairs):
@@ -1065,6 +1073,10 @@ def copy_counterfactual_audit(
                 "second_character_accuracy": second_output.character_accuracy,
             }
         )
+        if progress is not None and (
+            len(rows) == len(pairs) or len(rows) % max(1, min(4, len(pairs))) == 0
+        ):
+            progress(f"copy/{writer}/counterfactual: {len(rows)}/{len(pairs)} pairs")
     if not rows:
         raise ValueError("V35 counterfactual audit requires at least one pair")
     return {

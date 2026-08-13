@@ -126,6 +126,7 @@ def test_prompt_controls_preserve_visual_length() -> None:
 
 def test_tiny_closed_raster_audit_runs_without_text_inside_model() -> None:
     model = _tiny_model().eval()
+    progress = []
     report = autonomous_case_audit(
         model,
         [_case("one"), _case("two", 0.5)],
@@ -134,11 +135,14 @@ def test_tiny_closed_raster_audit_runs_without_text_inside_model() -> None:
         device=torch.device("cpu"),
         precision="fp32",
         ocr=lambda _image: "",
+        progress=progress.append,
     )
     assert report["writer"] == "anchor"
     assert report["conditions"]["correct"]["examples"] == 2
     assert report["conditions"]["correct"]["finite"] is True
     assert "mean_pixel_disagreement" in report["control_comparisons"]["blank"]
+    assert len(progress) == 2
+    assert progress[0].startswith("copy/anchor/correct: 2 cases in ")
 
 
 def _generated(value: float) -> V35GeneratedCase:
@@ -373,6 +377,8 @@ def test_runner_configuration_and_closed_loop_receipt_are_explicit() -> None:
     smoke = _evaluation_config(True)
     production = _evaluation_config(False)
     assert smoke["copy_cases"] < production["copy_cases"]
+    assert smoke["teacher_maximum_examples"] == 4
+    assert production["teacher_maximum_examples"] == 0
     model = _tiny_model()
     state = {
         "writer_selection": {"selected": "anchor"},
