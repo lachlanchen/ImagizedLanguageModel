@@ -230,6 +230,8 @@ def render_direct_patch_instruction(
             "language": record.language,
             "source": record.source,
             "rights": record.rights,
+            "prompt_text": prompt_text,
+            "answer_text": answer_text,
             "prompt_patches": prompt_count,
             "answer_patches": answer_count,
             "prompt": prompt_meta,
@@ -291,10 +293,22 @@ def render_direct_patch_continuation(
             "language": record.language,
             "source": record.source,
             "rights": record.rights,
+            "text": normalized,
             "occupied_patches": occupied,
             "render": meta,
         },
     }
+
+
+def direct_patch_prompt_tensors(sample: Mapping[str, Any]) -> tuple[torch.Tensor, torch.Tensor]:
+    metadata = sample.get("metadata")
+    if not isinstance(metadata, Mapping) or "prompt_patches" not in metadata:
+        raise ValueError("V33 instruction sample lacks prompt metadata")
+    count = int(metadata["prompt_patches"])
+    if not 1 <= count <= sample["patch_mask"].shape[0]:
+        raise ValueError("V33 prompt patch count is invalid")
+    width = count * V33_PATCH_SIZE
+    return sample["pixels"][..., :width], sample["patch_mask"][:count]
 
 
 class DirectPatchInstructionDataset(Dataset[dict[str, Any]]):
@@ -406,4 +420,3 @@ def direct_patch_data_boundary_receipt(batch: Mapping[str, Any]) -> dict[str, An
         ),
         "shapes": {key: list(value.shape) for key, value in student.items()},
     }
-
