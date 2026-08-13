@@ -48,6 +48,10 @@ tie-breaking. It renders two unaugmented image views using the first two V25
 training fonts. The bank manifest records canonical pixel SHA-256 values, font
 paths, image hashes, and ordering.
 
+For the first-context training direction, candidates use bank view 1. For the
+second-context direction, candidates use bank view 0. This mapping is fixed for
+the run and cannot be selected from development performance.
+
 Natural windows are restricted to targets whose canonical pixels occur in the
 bank. The positive column is recovered only by exact canonical-pixel equality.
 The student receives candidate images or features produced by its frozen image
