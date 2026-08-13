@@ -46,7 +46,9 @@ history and predicts continuous visual particles, but its pixel-identical
 suffix intervention shows that changed history states still produce chance
 target preferences. The next proof must make visual context-to-glyph binding
 conditionally identifiable at 64 cells before adding page scale, 3D geometry,
-or motion.
+or motion. A frozen-state diagnostic now shows that replacing only V26's
+stochastic output head is insufficient: its history representation itself does
+not expose a transferable next-glyph relation to a compact visual scorer.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -99,6 +101,26 @@ states are not useful language prediction. See the
 [complete V26 receipt](docs/factorized-visual-context-v26-result.md),
 [preregistered protocol](references/factorized_visual_context_v26_protocol.md),
 and [research decision](references/factorized_visual_context_v26_research.md).
+
+### Post-V26 Localization: Frozen Compatibility Probe
+
+![Frozen V26 visual compatibility diagnostic: retina identity remains nearly perfect while history and fused-state next-glyph assignment stay at chance](publication/ilm-image-native/figures/v26_frozen_visual_compatibility_probe.png)
+
+A post-hoc diagnostic freezes all `19.14M` V26 parameters and trains three
+small candidate-conditioned image scorers for one pass over the existing
+`16,384` train suffix pairs. On `512` disjoint-record development pairs and
+`2,048` cross-font decisions, appearance-only accuracy is exactly `50.000%`,
+history-residual accuracy is `50.684%`, and fused-state accuracy is `50.342%`.
+The same frozen retina identifies the paired target image across fonts at
+`99.951%`, with a `0.74724` mean cosine margin. Candidate ambiguity therefore
+does not explain the chance language result.
+
+This diagnostic is not preregistered evidence and opens no frozen data. It
+narrows the V27 decision: jointly train the causal visual context representation
+and deterministic image-candidate compatibility, then authorize a stochastic
+writer only after that language relation passes. See the
+[diagnostic receipt](docs/v26-frozen-visual-compatibility-probe.md) and
+[V27 research decision](references/deterministic_visual_compatibility_v27_research.md).
 
 ## Prior Natural-Language Test: V25 Visual Cell Stream Rejected
 

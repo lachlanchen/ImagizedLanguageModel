@@ -132,6 +132,13 @@ oracle rules out a blind evaluator. V26 therefore rejects the factorized
 mechanism: visual history changes state without binding that state to the
 correct next-glyph distribution. It uses 0.888~GiB peak allocated CUDA memory;
 no writer or frozen evaluation is opened.
+A post-hoc localization freezes every V26 parameter and trains a three-branch,
+1.11M-parameter candidate-conditioned visual probe for one pass over the 16,384 training
+pairs. On 512 disjoint-record development pairs, frozen history and fused state
+reach only 50.684\% and 50.342\% cross-font assignment accuracy, respectively,
+while raw-retina target identity reaches 99.951\%. This diagnostic is not
+preregistered evidence, but it rules against preserving V26's context encoder
+and replacing only its stochastic proposal.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -1521,6 +1528,38 @@ conditionally identifiable during optimization. It must beat suffix-only,
 history-shuffled, image-unigram, and symbolic-bigram controls before a pixel
 writer, serpentine page lattice, geometric depth, or motion is authorized.
 
+We further localize this failure with a post-hoc diagnostic that cannot revise
+the V26 result or authorize frozen evaluation. Every V26 parameter is frozen.
+Three visual scorers, totaling 1.11M trainable parameters, receive appearance,
+history residual, or fused state and score two arbitrary candidate images using
+normalized projected compatibility. One pass over all 16,384 train suffix pairs
+optimizes symmetric $2\times2$ assignment. The fixed 512 development pairs yield
+1,024 cross-font assignments and 2,048 scored arms. Appearance-only accuracy is
+exactly 0.500000, history accuracy is 0.506836, and fused-state accuracy is
+0.503418. Their mean margins are 0.000108 and 0.000371. In contrast, direct
+frozen-retina cosine assigns the same cross-font target images at 0.999512 with
+a mean margin of 0.747237. Thus candidate visibility is intact, but V26's
+history state does not expose a transferable next-glyph relation to this
+deterministic nonlinear decoder.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/v26_frozen_visual_compatibility_probe.png}
+  \caption{Post-hoc frozen-V26 localization. The raw retina nearly perfectly
+  distinguishes paired target images across unseen fonts, while deterministic
+  candidate scorers over frozen history and fused states remain at chance. This
+  is a development diagnostic, not preregistered model evidence.}
+  \label{fig:v26probe}
+\end{figure}
+
+The resulting V27 direction is therefore stricter than replacing an output
+head. A trainable image retina and causal context field must be optimized
+jointly with deterministic candidate compatibility under matched alternatives.
+The primary score remains image-to-image and vocabulary-free; an
+appearance-only chance arm, raw-retina identity control, prefix shuffle,
+unigram, and symbolic bigram remain required controls. Stochastic form
+generation follows only after this relation passes.
+
 \clearpage
 \section{Data}
 
@@ -1980,6 +2019,11 @@ history-residual difference but exactly 50\% correct target ranking. Thus the
 representation reacts to history while the predictive distribution does not
 use that reaction correctly. V26 rejects the proposed factorization and loss;
 the frozen partition remains sealed and no writer is trained.
+A post-hoc frozen-state probe further shows that this is not solely a particle-
+proposal bottleneck: a deterministic nonlinear scorer reaches 50.684\% from
+history and 50.342\% from fused state while a raw-retina identity control reaches
+99.951\%. V27 must therefore jointly learn visual context representation and
+candidate compatibility rather than preserve V26's encoder unchanged.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered

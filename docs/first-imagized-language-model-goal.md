@@ -307,7 +307,20 @@ preference. It uses `0.888403 GiB` peak allocated CUDA memory and completes in
 `31.05` minutes on one RTX 4090, but those are resource receipts rather than an
 efficiency claim.
 
+A post-hoc frozen-state localization then trains a three-branch,
+`1,111,683`-parameter candidate-conditioned visual probe for one pass over all
+`16,384` V26 training pairs. On `512` disjoint-record development pairs and two cross-font assignments
+per pair, the history residual reaches only `0.506836` arm accuracy and the
+fused state `0.503418`; appearance-only is exactly `0.500000`. The same frozen
+retina identifies paired target images across fonts at `0.999512`, so candidate
+visibility is not the explanation. V27 must jointly shape the context encoder
+and deterministic visual compatibility rather than replacing only V26's
+stochastic proposal. The diagnostic is post-hoc, does not open frozen images,
+and does not revise any V26 gate.
+
 ![Factorized Visual Context V26 rejected development result](../publication/ilm-image-native/figures/factorized_visual_context_v26_result.png)
+
+![Frozen V26 compatibility probe](../publication/ilm-image-native/figures/v26_frozen_visual_compatibility_probe.png)
 
 It proved:
 
@@ -385,14 +398,20 @@ correct next form. V26 implements the proposed appearance/history separation
 and proves that the residual state changes, but its pixel-identical suffix pairs
 show chance target binding. The immediate milestone is therefore not a larger
 page or 3D stream. It is a new preregistered 64-cell objective in which
-context-dependent target choice is identifiable and necessary during training,
-not merely represented in a hidden state. Only after that model beats suffix,
+the visual context representation and context-dependent candidate choice are
+learned jointly and made necessary during training. The frozen-state diagnostic
+shows that useful binding is not merely hidden upstream of V26's proposal head.
+Only after that model beats suffix,
 shuffled-history, visual-unigram, and symbolic-bigram controls should the
 reversible serpentine lattice expand context. The unchanged V26 contract and
 complete result are in
 [`references/factorized_visual_context_v26_protocol.md`](../references/factorized_visual_context_v26_protocol.md)
 and
 [`docs/factorized-visual-context-v26-result.md`](factorized-visual-context-v26-result.md).
+The post-result localization and resulting V27 direction are in
+[`docs/v26-frozen-visual-compatibility-probe.md`](v26-frozen-visual-compatibility-probe.md)
+and
+[`references/deterministic_visual_compatibility_v27_research.md`](../references/deterministic_visual_compatibility_v27_research.md).
 
 ## Implemented paradigm: predictive visual fields
 
