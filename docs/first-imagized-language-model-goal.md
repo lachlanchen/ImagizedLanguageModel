@@ -142,7 +142,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The repository now contains fourteen complete experimental systems. V28 is the
+The repository now contains fifteen complete experimental systems. V29 is the
 latest measured development result; its frozen partition remains sealed:
 
 - RFLM V7 is an 11.69M-parameter pixels-to-pixels precursor with autonomous
@@ -201,6 +201,13 @@ latest measured development result; its frozen partition remains sealed:
   `92.04%` to `96.44%`, but natural top-1 is `1.42%` and matched-pair assignment
   is `49.56%` versus `49.95%` under prefix shuffling. Its fixed mechanism and
   language stages are rejected.
+- Conditional Visual Density Ratio V29 is a 20.08M-parameter ordinary-Chinese
+  experiment. An arbitrary candidate image cross-attends to all retained
+  context states, and training scores full context, exact suffix, and their
+  centered difference. Natural target probability is strongly order-sensitive,
+  but incremental pair assignment is `50.71%`, full natural top-1 is `2.34%`
+  versus `13.87%` for bigram, and its fixed mechanism and language stages are
+  rejected.
 
 On the unchanged frozen 512-form Chinese bank, V16's proposal reaches
 **6.264%** top-1 (`112/1,788`), versus **3.971%** last-only, **1.734%**
@@ -376,6 +383,26 @@ frozen evaluation or writer training.
 
 ![Dense Visual Future Energy V28 rejected development result](../publication/ilm-image-native/figures/dense_visual_future_energy_v28_result.png)
 
+V29 executes the candidate-conditioned density-ratio repair. The fixed
+`20,080,961`-parameter model performs 8,000 BF16 updates and its complete
+development audit in `82.60` minutes on one RTX 4090, using `3.356465 GiB`
+peak allocated CUDA memory. On 2,048 natural windows, full-context top-1 is
+`0.023438`, above image unigram (`0.013672`) but below symbolic bigram
+(`0.138672`). Full target log probability gains `+0.179446` nat over suffix-4
+and `+3.102479` nat over suffix-preserving prefix shuffle. This establishes a
+large order-sensitive probability effect, not correct next-image selection.
+
+In 512 pixel-identical suffix pairs, raw two-candidate identity is `0.999512`,
+suffix score rows are exactly equal, and every candidate-permutation score
+error is zero. Incremental assignment reaches only `0.507080`, versus
+`0.495605` after shuffling the prefix; both-correct is `0.089844`. Full score
+alone reaches `0.497314`. The full and incremental aggregate mean margins are
+both exactly `0.005103277`: the common suffix baseline cancels in the two-by-two
+assignment contrast. V29 passes `8/14` mechanism gates and `2/6` language
+gates, so it is rejected without frozen evaluation or writer training.
+
+![Conditional Visual Density Ratio V29 rejected development result](../publication/ilm-image-native/figures/conditional_visual_density_ratio_v29_result.png)
+
 It proved:
 
 - a strict image-only student boundary;
@@ -440,23 +467,25 @@ It did not prove:
 - a selected natural-Chinese next-cell model: V25 remains below its image
   unigram and symbolic bigram controls, and V26's factorized continuous
   distribution remains below both while its matched pair ranking is chance;
-  and
 - a selected deterministic image-compatibility model: V27 remains below
   unigram and bigram, misses its separate full-bank identity gate, and differs
-  negligibly from suffix-preserving shuffled context; or
+  negligibly from suffix-preserving shuffled context;
 - a selected dense visual future-energy model: V28 remains below unigram and
   bigram, and its order-sensitive log-probability and margin gains do not
-  produce above-chance matched target binding.
+  produce above-chance matched target binding; and
+- a selected conditional visual density-ratio model: V29 detects natural order
+  but remains at chance on exact-suffix candidate binding and far below bigram
+  on natural retrieval.
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
 topology-causality proof, accepted field-complete routing proof, rejected
 V20/V21 writers, rejected V22 visual binder, accepted V23 bounded visual
-relation proof, accepted V24 bounded visual packet/reread proof, and rejected
-V25 natural-Chinese cell stream, rejected V26 factorized visual-context
-mechanism, rejected V27 joint visual-compatibility mechanism, and rejected
-V28 dense visual future-energy mechanism, and rejected
-autonomous language-system proof**.
+relation proof, accepted V24 bounded visual packet/reread proof, rejected V25
+natural-Chinese cell stream, rejected V26 factorized visual-context mechanism,
+rejected V27 joint visual-compatibility mechanism, rejected V28 dense visual
+future-energy mechanism, rejected V29 conditional visual density-ratio
+mechanism, and rejected autonomous language-system proof**.
 It breaks the narrower assumptions that image-native training on one consumer
 GPU cannot acquire causal language structure or make continuous visual intent
 produce recognizable writing. It does not justify claiming that language is
@@ -476,11 +505,14 @@ gate fails and full context is effectively indistinguishable from shuffled
 context. V28 then held the raw retina fixed and supervised dense ordered future
 fields. It improved same-scope semantic identity and made the full prefix affect
 target probability and score margin, but it still failed matched target rank and
-both frequency baselines. The next preregistered 64-cell objective should train
-a candidate-conditioned incremental score
-`Delta s(X,Y) = s(X[1:64],Y) - s(X[61:64],Y)` inside suffix-collision buckets,
-so the correct earlier history must improve the score of the same candidate
-pixels. The authoritative
+both frequency baselines. V29 then trained that candidate-conditioned
+full-minus-suffix score directly. It produced a much larger natural
+ordered-versus-shuffled probability effect, yet exact-suffix binding remained
+at chance and the common suffix baseline canceled from aggregate pair margin.
+The next preregistered 64-cell objective should predict a continuous spatial
+next-image field and compare candidate patches before reducing compatibility to
+a scalar. A parameter-matched bilinear visual scorer should control whether
+spatial interaction, rather than capacity, supplies the gain. The authoritative
 representation remains the reversible `N x 1 x 32 x 32` glyph-image stream;
 a two-dimensional lattice is only a lossless compute view. Only after this
 model beats suffix, shuffled-history, visual-unigram, and symbolic-bigram
@@ -501,6 +533,11 @@ The preregistered V28 protocol and fixed result are in
 [`references/dense_visual_future_energy_v28_protocol.md`](../references/dense_visual_future_energy_v28_protocol.md)
 and
 [`docs/dense-visual-future-energy-v28-result.md`](dense-visual-future-energy-v28-result.md).
+The preregistered V29 protocol, research rationale, and fixed result are in
+[`references/conditional_visual_density_ratio_v29_protocol.md`](../references/conditional_visual_density_ratio_v29_protocol.md),
+[`references/conditional_visual_density_ratio_v29_research.md`](../references/conditional_visual_density_ratio_v29_research.md),
+and
+[`docs/conditional-visual-density-ratio-v29-result.md`](conditional-visual-density-ratio-v29-result.md).
 
 ## Implemented paradigm: predictive visual fields
 
