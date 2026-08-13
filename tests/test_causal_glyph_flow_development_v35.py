@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import copy
 
-import torch
 import pytest
+import torch
+from PIL import Image
 
 from ilm.visual_lm.causal_glyph_flow import CausalGlyphFlowConfig, CausalGlyphFlowLM
 from ilm.visual_lm.causal_glyph_flow_development import (
     V35GeneratedCase,
     V35RasterCase,
+    TesseractStripOCR,
     autonomous_case_audit,
     controlled_prompt,
     ocr_character_accuracy,
@@ -79,6 +81,31 @@ def test_text_and_raster_metrics_are_normalized() -> None:
     blank = raster_pair_metrics(torch.ones_like(target), 2, target, 2)
     assert blank["ink_f1"] == 0.0
     assert blank["pixel_disagreement"] > 0.0
+
+
+def test_tesseract_wrapper_caches_identical_images(monkeypatch) -> None:
+    calls = []
+
+    def fake_identity(_self):
+        return {"executable": "tesseract", "language": "chi_sim+chi_tra"}
+
+    def fake_run(*_args, **_kwargs):
+        calls.append(1)
+
+        class Result:
+            returncode = 0
+            stdout = "中文\n"
+            stderr = ""
+
+        return Result()
+
+    monkeypatch.setattr(TesseractStripOCR, "_build_identity", fake_identity)
+    monkeypatch.setattr("subprocess.run", fake_run)
+    ocr = TesseractStripOCR()
+    image = Image.new("L", (32, 32), 255)
+    assert ocr(image) == "中文"
+    assert ocr(image.copy()) == "中文"
+    assert len(calls) == 1
 
 
 def test_prompt_controls_preserve_visual_length() -> None:

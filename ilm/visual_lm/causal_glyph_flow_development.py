@@ -83,6 +83,7 @@ class TesseractStripOCR:
     def __init__(self, language: str = V35_OCR_LANGUAGE) -> None:
         self.language = language
         self._identity = self._build_identity()
+        self._cache: dict[str, str] = {}
 
     def _build_identity(self) -> dict[str, Any]:
         executable = shutil.which("tesseract")
@@ -119,6 +120,7 @@ class TesseractStripOCR:
             "traineddata_sha256": traineddata,
             "page_segmentation_mode": 7,
             "scale": "2x-nearest",
+            "cache": "in-memory SHA-256 of normalized image bytes",
         }
 
     @property
@@ -130,6 +132,11 @@ class TesseractStripOCR:
             (image.width * 2, image.height * 2),
             Image.Resampling.NEAREST,
         )
+        cache_key = hashlib.sha256(
+            f"{scaled.size}:{self.language}".encode("ascii") + scaled.tobytes()
+        ).hexdigest()
+        if cache_key in self._cache:
+            return self._cache[cache_key]
         with tempfile.TemporaryDirectory(prefix="ilm-v35-ocr-") as directory:
             path = Path(directory) / "strip.png"
             scaled.save(path)
@@ -149,7 +156,9 @@ class TesseractStripOCR:
             )
         if result.returncode:
             raise RuntimeError(f"tesseract failed: {result.stderr.strip()}")
-        return normalize_visible_text(result.stdout)
+        observed = normalize_visible_text(result.stdout)
+        self._cache[cache_key] = observed
+        return observed
 
 
 @dataclass(frozen=True)
