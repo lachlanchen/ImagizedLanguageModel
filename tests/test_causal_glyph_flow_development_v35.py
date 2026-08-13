@@ -296,6 +296,7 @@ def test_sealed_gate_locks_writer_absolute_thresholds_and_retention() -> None:
     assert transfer["passed"] is True
     assert transfer["sealed_status"] == "semantic-raster-qualified"
     assert all(transfer["ratio_at_least_0_90"].values())
+    assert "instruction_correct_ocr" in transfer["applicable_ratio_metrics"]
 
     sealed["states"]["ema"]["teacher_forced"]["public"]["decoded_ink_f1"] = 0.6
     transfer = v35_sealed_transfer_gate(development, sealed)
@@ -307,6 +308,21 @@ def test_sealed_gate_locks_writer_absolute_thresholds_and_retention() -> None:
     development["decision"]["status"] = "not-qualified"
     with pytest.raises(ValueError, match="cannot open"):
         v35_sealed_transfer_gate(development, sealed)
+
+
+def test_visual_only_sealed_gate_excludes_semantic_retention() -> None:
+    development = _qualified_report()
+    development["decision"] = v35_development_gate(development)
+    development["decision"]["status"] = "visual-causal-qualified"
+    development["decision"]["semantic_raster"]["passed"] = False
+    sealed = copy.deepcopy(development)
+    sealed["states"]["ema"]["autonomous"]["instruction"]["anchor"][
+        "conditions"
+    ]["correct"]["ocr_character_accuracy"] = 0.0
+    transfer = v35_sealed_transfer_gate(development, sealed)
+    assert transfer["passed"] is True
+    assert "instruction_correct_ocr" not in transfer["applicable_ratio_metrics"]
+    assert transfer["sealed_status"] == "visual-causal-qualified"
 
 
 def _development_public_records(count: int = 6) -> list[VisualTextRecord]:

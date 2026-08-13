@@ -1288,15 +1288,43 @@ def v35_sealed_transfer_gate(
         raise ValueError("V35 sealed evaluation changed the selected writer")
     metrics = _primary_metrics(sealed)
     development_metrics = _primary_metrics(development)
+    visual_metric_names = {
+        "copy_target_ocr_ceiling",
+        "copy_correct_ocr",
+        "copy_correct_minus_shuffled",
+        "copy_correct_minus_blank",
+        "copy_counterfactual_target_preference",
+        "public_teacher_ink_f1",
+        "public_teacher_edge_f1",
+        "public_readable",
+        "public_nonblank",
+    }
+    semantic_metric_names = {
+        "instruction_target_ocr_ceiling",
+        "instruction_correct_ocr",
+        "instruction_correct_minus_shuffled",
+        "instruction_correct_minus_blank",
+        "instruction_readable",
+        "instruction_pixel_response_shuffled",
+        "instruction_pixel_response_blank",
+    }
+    applicable_metric_names = visual_metric_names | (
+        semantic_metric_names
+        if development_status == "semantic-raster-qualified"
+        else set()
+    )
     ratios = {
         name: (
             value / development_metrics[name]
-            if development_metrics[name] > 0.0
-            else float(value >= development_metrics[name])
+            if development_metrics[name] != 0.0
+            else None
         )
         for name, value in metrics.items()
     }
-    ratio_checks = {name: value >= 0.90 for name, value in ratios.items()}
+    ratio_checks = {
+        name: metrics[name] + 1e-12 >= 0.90 * development_metrics[name]
+        for name in sorted(applicable_metric_names)
+    }
     primary = sealed["states"]["ema"]
     autonomous = primary["autonomous"]
     copy_ceiling = metrics["copy_target_ocr_ceiling"]
@@ -1378,6 +1406,7 @@ def v35_sealed_transfer_gate(
         },
         "primary_metrics": metrics,
         "development_primary_metrics": development_metrics,
+        "applicable_ratio_metrics": sorted(applicable_metric_names),
         "sealed_to_development_ratio": ratios,
         "ratio_at_least_0_90": ratio_checks,
     }
