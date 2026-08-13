@@ -48,10 +48,14 @@ target preferences. V27 jointly trains a causal visual context and arbitrary
 candidate-image compatibility. The raw retina still distinguishes cross-font
 forms at `99.95%`, but full-context pair assignment is `50.71%` and only
 `0.15` percentage point above shuffled context; natural top-1 remains below
-unigram and bigram. This rejects the global query/key compatibility route. The
-next proof must preserve raw visual geometry and make ordered future-field
-prediction causally necessary at 64 cells before adding page scale, 3D
-geometry, or motion.
+unigram and bigram. This rejects the global query/key compatibility route. V28
+then freezes the raw V16 retina and trains dense continuous future-energy
+objectives at horizons 1, 2, and 4. Its semantic route improves same-scope
+1,024-way cross-font identity from `92.04%` to `96.44%`, but natural top-1 is
+only `1.42%`, below unigram (`1.86%`) and bigram (`13.13%`), while matched-pair
+assignment is `49.56%` versus `49.95%` with a shuffled prefix. V28 is therefore
+also rejected. The next proof must test candidate-conditioned incremental
+prefix evidence at 64 cells before adding page scale, 3D geometry, or motion.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -71,7 +75,46 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V27 Joint Compatibility Rejected
+## Latest Natural-Language Test: V28 Dense Visual Future Energy Rejected
+
+![Measured V28 dense visual future-energy result: semantic visual identity improves, but natural prediction and matched target binding fail](publication/ilm-image-native/figures/dense_visual_future_energy_v28_result.png)
+
+V28 tests the dense ordered-future objective proposed after V27. Its
+`17,859,142`-parameter image-only student freezes the V16 raw retina, learns an
+identity-initialized semantic residual with an EMA target, integrates 64 glyph
+images with eight causal blocks, and scores continuous visual futures at
+horizons 1, 2, and 4. Four image-derived hypotheses per position make the
+training signal dense without introducing token IDs, Unicode IDs, OCR,
+vocabulary logits, or a glyph lookup in the student path.
+
+The one preregistered run performs 10,000 BF16 updates and its complete
+development audit in `118.91` minutes on one RTX 4090, with `1.144 GiB` peak
+allocated CUDA memory. On 2,048 natural windows, full-context top-1 is
+`1.4160%`, below the image unigram (`1.8555%`) and symbolic bigram
+(`13.1348%`). Full context improves target log probability over suffix-4 by
+`0.03037` nat and over a suffix-preserving prefix shuffle by `0.21511` nat, so
+the field detects order, but not enough to select the correct future.
+
+The decisive 512-pair audit holds the final four glyph images bitwise equal
+while changing earlier history and the target. Candidate permutation error is
+zero, and the frozen V16 retina identifies the two cross-font candidates at
+`99.9512%`. Full-context assignment is nevertheless `49.5605%`, versus
+`49.9512%` after shuffling the prefix. Its mean score margin does improve by
+`0.02207`, but that probability movement does not become reliable rank or
+binding. On the separate 1,024-way identity audit, the learned EMA semantic
+route improves over the same-scope raw retina from `92.0410%` to `96.4355%`.
+
+V28 passes `10/14` mechanism gates and `2/6` language gates. It is rejected,
+the frozen partition remains sealed, and no writer is trained. The next bounded
+test is a candidate-conditioned prefix-incremental score,
+`Delta s(X,Y) = s(X[1:64],Y) - s(X[61:64],Y)`, trained inside
+suffix-collision buckets so that correct earlier history must improve the score
+of the same candidate pixels. See the
+[complete V28 receipt](docs/dense-visual-future-energy-v28-result.md),
+[preregistered protocol](references/dense_visual_future_energy_v28_protocol.md),
+and [research decision](references/dense_visual_future_energy_v28_research.md).
+
+## Prior Natural-Language Test: V27 Joint Compatibility Rejected
 
 ![Measured V27 joint visual-compatibility result: candidate images remain visible, but full context does not beat shuffled context or frequency baselines](publication/ilm-image-native/figures/joint_visual_compatibility_v27_result.png)
 
@@ -103,11 +146,10 @@ two-candidate raw control. V27 passes only
 `7/13` mechanism gates and `1/5` language gates. It is rejected, the frozen
 partition remains sealed, and no writer is trained.
 
-The next experiment should keep the full `N x 1 x 32 x 32` glyph-image
-stream authoritative, freeze or exactly preserve the strong raw retinal
-geometry, and optimize dense per-position predictions with explicit
-suffix-preserving order interventions. A reversible 2D lattice can accelerate
-that stream later; depth and motion remain observable extensions rather than
+V28 executes this proposed dense-future test while keeping the full
+`N x 1 x 32 x 32` glyph-image stream authoritative and the raw retina frozen.
+Its result is reported above. A reversible 2D lattice can accelerate that
+stream later; depth and motion remain observable extensions rather than
 identity encodings. See the
 [complete V27 receipt](docs/joint-visual-compatibility-v27-result.md),
 [preregistered protocol](references/joint_visual_compatibility_v27_protocol.md),
@@ -830,6 +872,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V28 dense visual future-energy result | `docs/dense-visual-future-energy-v28-result.md` |
 | V21 field-complete writer result | `docs/field-complete-writer-v21-result.md` |
 | V20 topology-router result | `docs/retinal-topology-router-v20-result.md` |
 | V19 spatial causal-test result | `docs/spatial-retinal-motor-plan-v19-result.md` |
@@ -1087,7 +1130,7 @@ PYTHONPATH=. python scripts/bulk_ingest_hanziyuan.py --limit 200 --resume
 
 ## 🗺️ Roadmap
 
-- Implement continuous next-retina flow as the primary language distribution; keep pixel flow as a conditioned actuator.
+- Test candidate-conditioned prefix-incremental visual energy inside suffix-collision buckets before authorizing another writer.
 - Add fast, line, and page visual states only through measured ablations, starting with the smallest causal state flow.
 - Require full visual context to beat last-fixation, unigram, and bigram baselines.
 - Require stable, readable 32-cell autonomous continuations before scaling width or corpus size.
