@@ -45,6 +45,7 @@ from scripts.eval_causal_glyph_flow_v35 import (
     atomic_write_json,
     build_copy_counterfactual_pairs,
     choose_device,
+    evaluator_source_receipt,
 )
 
 
@@ -240,6 +241,9 @@ def main() -> None:
         },
         "checkpoint": {"ema": checkpoint_receipt},
         "checkpoint_audit": v35_checkpoint_audit(model, checkpoint),
+        "evaluator_source_sha256": evaluator_source_receipt(
+            ("scripts/eval_causal_glyph_flow_v35_sealed.py",)
+        ),
         "inputs": input_receipt,
         "data": {
             "records": _split_counts(public_records, instruction_records),

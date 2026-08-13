@@ -30,6 +30,7 @@ from scripts.eval_causal_glyph_flow_v35 import (
     _closed_loop_receipt,
     _evaluation_config,
     build_copy_counterfactual_pairs,
+    evaluator_source_receipt,
 )
 
 
@@ -379,6 +380,14 @@ def test_runner_configuration_and_closed_loop_receipt_are_explicit() -> None:
     assert smoke["copy_cases"] < production["copy_cases"]
     assert smoke["teacher_maximum_examples"] == 4
     assert production["teacher_maximum_examples"] == 0
+    source_receipt = evaluator_source_receipt()
+    assert set(source_receipt) == {
+        "ilm/visual_lm/causal_glyph_flow_development.py",
+        "ilm/visual_lm/direct_visual_patch_data.py",
+        "ilm/visual_lm/visual_semantic_raster_data.py",
+        "scripts/eval_causal_glyph_flow_v35.py",
+    }
+    assert all(len(value) == 64 for value in source_receipt.values())
     model = _tiny_model()
     state = {
         "writer_selection": {"selected": "anchor"},

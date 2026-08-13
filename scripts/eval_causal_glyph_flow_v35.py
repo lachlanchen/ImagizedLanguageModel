@@ -51,6 +51,13 @@ DEFAULT_PUBLIC_MANIFEST = "data/visual_grammar/chinese_wikisource_public_domain.
 DEFAULT_INSTRUCTION_MANIFEST = "data/raw/alpaca_zh.json"
 DEFAULT_PARAPHRASE_MANIFEST = "data/teacher/folio_paraphrases_zh_holdout.jsonl"
 DEFAULT_OUTPUT = "artifacts/causal_glyph_flow_v35_20260814/development"
+ROOT = Path(__file__).resolve().parents[1]
+EVALUATOR_SOURCE_FILES = (
+    "ilm/visual_lm/causal_glyph_flow_development.py",
+    "ilm/visual_lm/direct_visual_patch_data.py",
+    "ilm/visual_lm/visual_semantic_raster_data.py",
+    "scripts/eval_causal_glyph_flow_v35.py",
+)
 EXPECTED_PUBLIC_SHA256 = (
     "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03"
 )
@@ -122,6 +129,13 @@ def atomic_write_json(payload: Mapping[str, Any], path: Path) -> None:
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def evaluator_source_receipt(
+    extra_files: Sequence[str] = (),
+) -> dict[str, str]:
+    paths = tuple(dict.fromkeys((*EVALUATOR_SOURCE_FILES, *extra_files)))
+    return {path: file_sha256(ROOT / path) for path in paths}
 
 
 def _evaluation_config(smoke: bool) -> dict[str, Any]:
@@ -614,6 +628,7 @@ def main() -> None:
         "checkpoint": receipts,
         "checkpoint_audit": checkpoint_audit,
         "closed_loop_receipt": closed_loop,
+        "evaluator_source_sha256": evaluator_source_receipt(),
         "inputs": input_receipt,
         "data": {
             "records": _split_counts(public_records, instruction_records),
