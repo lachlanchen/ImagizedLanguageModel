@@ -3,7 +3,8 @@
 Date: 2026-08-13
 
 Status: approved internal evidence-publication plan; created after the fixed
-V30 development audit and before manuscript edits
+V30 development audit and before manuscript edits; expanded during execution
+to include a bounded audit of the paper figures at the user's request
 
 ## Problem
 
@@ -41,6 +42,15 @@ result receipt, evidence-derived figure, README summary, or manuscript account.
    contribution list if needed, the natural-language experiment sequence, and
    conclusion so V30 is reported from measured evidence.
 5. Update this plan with build and verification status after execution.
+6. Update `publication/ilm-image-native/generate_figures.py` only in the
+   generators for `ilm_v_yan_readme_hero.png`,
+   `visual_language_training_pipeline.png`, and
+   `visual_language_inference_pipeline.png`, then regenerate those three PNGs.
+   The existing `architecture_overview.png` is out of scope because its audit
+   found no alignment or communication defect.
+7. Place the measured V30 result figure near the conceptual training and
+   inference figures in the manuscript, with captions and surrounding text
+   that clearly distinguish intended architecture from observed evidence.
 
 ## Required Claims
 
@@ -87,6 +97,23 @@ protocol, and checkpoint hashes. It should show:
 - matched-arm differences and gate counts; and
 - the negative decision with frozen and writer stages closed.
 
+The three pre-existing concept figures must also satisfy the following bounded
+revision rules:
+
+- draw all labels, arrows, panels, and alignment programmatically so the
+  typography is exact and reproducible;
+- preserve the AgInTi-generated bronze/circuit bitmap only as a restrained
+  background in the README hero; do not rely on generated lettering;
+- reduce the hero to one left-to-right input/model/output argument and remove
+  overlapping or duplicate model blocks;
+- replace the inference figure's decorative fan of arrows with one explicit
+  optional post-processing connection;
+- update the training resource label from the obsolete RTX 3090 wording to the
+  current single-RTX-4090 proof target; and
+- do not imply that the rejected V30 system can retrieve etymologies or produce
+  usable answers. Concept figures must be labelled as targets, while the V30
+  figure remains the measured result.
+
 ## Verification
 
 1. Run the figure generator against the fixed local audit.
@@ -94,7 +121,8 @@ protocol, and checkpoint hashes. It should show:
 3. Build `publication/ilm-image-native/ilm-image-native.pdf` using the existing
    repository build script.
 4. Inspect the generated figure dimensions and the compiled PDF text/pages;
-   render relevant PDF pages when necessary to verify clipping and placement.
+   render the hero, training, inference, and V30 PDF pages to verify clipping,
+   alignment, captions, and the conceptual/measured distinction.
 5. Confirm `git diff --check` and that `.auto-readme-work/` remains untouched.
 6. Commit and push the bounded publication unit.
 
