@@ -323,15 +323,28 @@ class ConditionalVisualDensityRatioModel(nn.Module):
         context_state: torch.Tensor,
         candidate_raw: torch.Tensor,
         candidate_semantic: torch.Tensor,
+        *,
+        chunk_size: int | None = None,
     ) -> torch.Tensor:
         """Score a different candidate-image bank for each context row."""
 
         if context_state.ndim != 3:
             raise ValueError("V29 batched context state must be [B,T,D]")
-        score = self.score_encoded_paired(
-            context_state[:, None], candidate_raw, candidate_semantic
-        )
-        return score[:, 0]
+        if candidate_raw.ndim != 3 or candidate_semantic.ndim != 3:
+            raise ValueError("V29 batched candidate features must be [B,N,D]")
+        if candidate_raw.shape[:2] != candidate_semantic.shape[:2]:
+            raise ValueError("V29 batched candidate shapes do not align")
+        width = self.config.score_chunk_size if chunk_size is None else chunk_size
+        if width < 1:
+            raise ValueError("V29 score chunk must be positive")
+        scores: list[torch.Tensor] = []
+        for start in range(0, candidate_raw.shape[1], width):
+            query = self._candidate_queries(
+                candidate_raw[:, start : start + width],
+                candidate_semantic[:, start : start + width],
+            )
+            scores.append(self._score_query_chunk(context_state, query))
+        return torch.cat(scores, dim=1)
 
     def score_shared_candidates(
         self,
