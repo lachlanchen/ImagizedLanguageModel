@@ -2,8 +2,9 @@
 
 Date: 2026-08-13
 
-Status: research direction after V26 and its frozen-state diagnostic; protocol
-not yet preregistered
+Status: research direction after V26 and its frozen-state diagnostic; fixed
+protocol preregistered in
+[`joint_visual_compatibility_v27_protocol.md`](joint_visual_compatibility_v27_protocol.md)
 
 ## Decision
 
