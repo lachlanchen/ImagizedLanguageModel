@@ -184,6 +184,19 @@ scores, but target log probability improves by only 0.0154 nat and pair
 accuracy by 0.391 percentage point, below fixed gates. V30 passes zero of eight
 language gates and is rejected with frozen evaluation and writer training
 closed.
+V31 tests the prescribed multimodal repair with a conditional flow over
+continuous retinal fields. Two matched 18.74M-parameter arms start from
+byte-identical initialized states and complete 10,000 finite BF16 updates each.
+The spatial path gains 0.126 nat over shuffled-prefix context and 0.053 nat over
+spatial permutation, while autonomous fields are diverse and context dependent.
+These sensitivities still do not produce language: spatial natural path top-1
+is 0.098%, below 1.855% for the global control, 1.611% image unigram,
+13.525% symbolic bigram, and 20.996% symbolic trigram. Pixel-identical-suffix
+path assignment is 50.488%, autonomous assignment is 50.195%, and all ten
+language and generation gates fail. V31 therefore rejects this one-glyph latent
+field flow. Its nearest-image panel is an evaluator diagnostic, not direct
+pixel generation. Frozen images remain sealed and writer training remains
+closed.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -206,8 +219,8 @@ is tested here; 3D, motion, speech, and vocal fields remain future hypotheses.
   \caption{Image-native language modeling design target. A restrained AgInTi
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
-  answer-page target, not a measured model output; the measured V30 result is
-  reported in Figure~\ref{fig:v30result}.}
+  answer-page target, not a measured model output; the latest measured result
+  is the rejected V31 experiment in Figure~\ref{fig:v31result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -349,6 +362,10 @@ implemented controls that makes that slogan falsifiable:
   reversal proves that aligned retinal geometry affects scores, while matched
   natural and exact-suffix results reject that sensitivity as useful
   context-to-target binding.
+  \item V31, a preregistered conditional flow over spatial retinal fields with
+  a matched tiled-global control. Fixed path, sample, exact-suffix, order,
+  permutation, diversity, and boundary audits show context response without
+  next-writing identity or direct raster generation.
   \item A rights-aware Visual Word-Origin Book benchmark and a continuous
   Visual Language Stream interface. They cover readable explanation,
   historical evidence, unencoded forms, optional depth and time, provenance,
@@ -368,6 +385,16 @@ without alignment to a frozen pretrained language model~\cite{textldm}. These
 results motivate calibrated visual uncertainty and warn against equating
 reconstruction with semantics. Their byte, token, or text-decoder paths remain
 outside the independent ILM student boundary.
+
+Recent unified understanding--generation systems provide a useful architectural
+warning even though their language cores remain symbolic. Orthus uses a shared
+autoregressive context with modality-specific output heads~\cite{orthus};
+FlowAR combines scale-wise autoregression with flow matching~\cite{flowar}; and
+UniDDT explicitly decouples semantic encoding from diffusion decoding to reduce
+optimization conflict~\cite{uniddt}. ILM adopts only the separation principle:
+a causal visual predictive state should carry meaning, while a conditional
+continuous head should render answer pixels. Neither component may introduce a
+text-token path inside the student.
 
 I-JEPA shows that predicting target image representations from visual context can
 learn semantic visual fields without reconstructing every pixel~\cite{ijepa}.
@@ -2184,10 +2211,9 @@ fixed benchmark.
 
 V30 passes 12/18 spatial common gates, 12/12 global integrity gates, 5/9
 matched-arm gates, and 0/8 spatial language gates. Frozen images remain
-uninstantiated. A separately preregistered successor would need to model
-multimodal continuous next-field density and beat the same global, exact-suffix,
-shuffle, image-unigram, and symbolic-bigram controls before a writer, page fold,
-depth axis, or historical-glyph task is opened.
+uninstantiated. This failure motivates the separately preregistered V31
+multimodal continuous-field test below; it does not authorize a writer, page
+fold, depth axis, or historical-glyph task.
 
 \clearpage
 \begin{figure}[t]
@@ -2200,6 +2226,165 @@ depth axis, or historical-glyph task is opened.
   gates and 0/8 language gates; the control passes all 12 integrity gates.}
   \label{fig:v30result}
 \end{figure}
+
+\subsection{Conditional Visual Field Flow V31: context response without language}
+
+V31 executes the multimodal continuous-field test prescribed by V30. The
+candidate-independent causal reader remains image-only, but the deterministic
+field decoder is replaced by a context-conditioned velocity field. For
+normalized target retinal field $Y$, coherent Gaussian base field $E$, context
+state $h$, and $t\sim\mathcal U(0,1)$, the interpolation and target velocity are
+\[
+Z_t=(1-t)E+tY,
+\qquad
+u^*(Z_t,t,h)=Y-E.
+\]
+The learned field minimizes the conditional flow-matching objective
+\[
+\mathcal L_{\mathrm{flow}}(\theta)=
+\mathbb E_{h,Y,E,t}
+\left[
+\left\|v_\theta(Z_t,t,h)-(Y-E)\right\|_2^2
+\right].
+\]
+One base vector is tiled coherently over the full retinal field; independent
+per-patch noise is forbidden. Thus one draw denotes one global visual
+alternative rather than a collage of independently sampled patches. The
+spatial arm predicts a $16\times192$ field. The matched global arm predicts one
+semantic vector tiled across the same 16 cells.
+
+The audit reports both a path score and autonomous generation. For eight fixed
+probe times $t_k$, evaluator-only candidate ranking uses the negative velocity
+residual along each coherent base-to-candidate path,
+\[
+s_\theta(Y\mid h,E)=
+-\frac1K\sum_{k=1}^{K}
+\left\|v_\theta((1-t_k)E+t_kY,t_k,h)-(Y-E)\right\|_2^2.
+\]
+Autonomous fields integrate
+\[
+\frac{dZ_t}{dt}=v_\theta(Z_t,t,h),\qquad Z_0=E,
+\]
+with eight-step Heun integration. The 1,024-image bank is evaluator-only: it is
+absent from student inputs, parameters, checkpoints, and sampling. The displayed
+nearest glyph to a generated field is therefore a diagnostic proxy, not the
+model's generated pixel image.
+
+Both arms contain 18,736,577 total and 17,107,201 trainable parameters. They
+start from byte-identical initialized states
+(\texttt{0682269c...2ad3d3}) and each completes exactly 10,000 finite BF16
+updates. Spatial and global training take 4,217.57 and 4,470.01 seconds and peak
+at 0.99670 and 0.99661~GiB allocated CUDA memory. These are resource receipts
+for a rejected mechanism, not capability-normalized efficiency claims. The
+protocol, spatial checkpoint, global checkpoint, development audit, and
+comparison SHA-256 values begin \texttt{92b6f709}, \texttt{9808e996},
+\texttt{485011a4}, \texttt{530c21d3}, and \texttt{2e97b732}, respectively.
+
+Table~\ref{tab:v31natural} reports the fixed 2,048-window natural audit. The
+spatial route passes its order and local-layout log-probability interventions,
+and autonomous samples pass diversity and condition-sensitivity gates. Correct
+next-writing identity nevertheless falls below every useful baseline.
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\begin{tabular}{lrr}
+\toprule
+V31 natural development measure & Spatial & Global \\
+\midrule
+Path full-context top-1 & 0.000977 & 0.018555 \\
+Path suffix-4 / shuffled top-1 & 0.001465 / 0.000000 & 0.013672 / 0.007812 \\
+Path spatial-permuted top-1 & 0.009277 & 0.018555 \\
+Autonomous full / shuffled top-1 & 0.001465 / 0.000000 & 0.005371 / 0.000000 \\
+Image-unigram top-1 & 0.016113 & 0.016113 \\
+Symbolic-bigram top-1 & 0.135254 & 0.135254 \\
+Symbolic-trigram top-1 & 0.209961 & 0.209961 \\
+Path full minus shuffled log probability & +0.125880 & +0.131427 \\
+Path full minus spatial-permuted log probability & +0.052740 & 0.000000 \\
+Autonomous pairwise cosine distance & 0.302390 & 0.933120 \\
+Same-noise full/shuffled displacement & 5.736859 & 1.293999 \\
+Best-of-eight mean target rank & 425.78 & 103.04 \\
+Cross-font candidate identity & 0.963379 & 0.964355 \\
+\bottomrule
+\end{tabular}
+\caption{V31 fixed natural-Chinese development audit. Ordered and spatial
+interventions change the conditional field, but the spatial route identifies
+the correct next glyph in only two of 2,048 path rankings; autonomous
+nearest-bank matching identifies three of 2,048. Both are far below
+image-frequency and symbolic sequence baselines.}
+\label{tab:v31natural}
+\end{table}
+
+The 512-pair intervention changes earlier visual history and target while
+holding the final four context images pixel-identical. Table~\ref{tab:v31pairs}
+shows that both path scoring and autonomous sampling remain at chance.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+V31 suffix-4 pair measure & Spatial & Global \\
+\midrule
+Suffix pixel equality / score-row max error & 1.000000 / 0 & 1.000000 / 0 \\
+Path full-context arm accuracy & 0.504883 & 0.514648 \\
+Path full both-correct rate & 0.035156 & 0.078125 \\
+Path suffix-only arm accuracy & 0.500000 & 0.500000 \\
+Path shuffled-prefix arm accuracy & 0.492676 & 0.487793 \\
+Path full-minus-shuffle arm accuracy & 0.012207 & 0.026855 \\
+Path full-minus-shuffle mean margin & 0.005293 & 0.015111 \\
+Autonomous full-context arm accuracy & 0.501953 & 0.505859 \\
+Autonomous full both-correct rate & 0.008789 & 0.045898 \\
+Path spatial-permutation max score error & 4.939047 & 0.000000 \\
+\bottomrule
+\end{tabular}
+\caption{V31 pixel-identical suffix intervention. Exact equality and
+candidate-column controls pass. Spatial flow responds to local permutation but
+does not bind earlier visual context to the correct target.}
+\label{tab:v31pairs}
+\end{table}
+
+The spatial arm passes 14/19 common gates, the control passes 6/6 integrity
+gates, matched arms pass 4/8 gates, and spatial language and generation pass
+0/10 gates. Frozen images remain uninstantiated; frozen evaluation and direct
+pixel writer training remain unauthorized. Figure~\ref{fig:v31result} combines
+the architecture, measurements, and autonomous nearest-image diagnostic.
+
+\clearpage
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/conditional_visual_field_flow_v31_result.png}
+  \caption{Measured V31 matched-arm result generated directly from the fixed
+  audit. Conditional flow detects order, local layout, diversity, and context
+  dependence while failing next-glyph identity and exact-suffix assignment.
+  The embedded glyph columns are evaluator-nearest images to generated latent
+  fields, not direct generated pixels.}
+  \label{fig:v31result}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.30\linewidth]{figures/conditional_visual_field_flow_v31_autonomous_nearest.png}
+  \caption{V31 autonomous latent-field diagnostic. Each row shows the target
+  and the external evaluator's nearest glyph under full and shuffled context.
+  Repeated wrong modes expose generation failure. The model did not render
+  these nearest glyph pixels.}
+  \label{fig:v31samples}
+\end{figure}
+
+V31 rejects one-glyph latent-field flow, not continuous visual generation in
+general. The next bounded proof changes both task and output variable. A causal
+QKV reader must form a visual predictive state from rendered prompts; a separate
+compact continuous head must directly render a multi-glyph answer block. A
+small reproducible curriculum should mix visual instruction-to-answer mappings
+with line/block continuation and hold out semantic compositions. Prompt
+counterfactuals, content swaps, paraphrases, generated-raster readability, and
+closed-loop continuation must all pass. Diffusion, rectified flow, or continuous
+autoregression may implement the renderer, but cannot substitute for causal
+language evidence. LocalLLM may author or audit fixed offline examples; it may
+not enter student batches, checkpoints, or inference. Open corpora provide the
+published benchmark, while local books enter only through a provenance-tracked
+preparation layer after this compact proof succeeds.
 
 \clearpage
 \section{Data}
@@ -2741,12 +2926,18 @@ margin without producing correct binding. V29 shows that candidate-conditioned
 cross-attention and explicit prefix-increment contrast can amplify the natural
 order effect while exact-suffix assignment remains at chance. V30 shows that
 one aligned deterministic next-image field is also insufficient and is weaker
-than its matched global route. A successor should model a multimodal continuous
-field distribution and retain the same global, suffix-preserving shuffle,
-unigram, bigram, candidate-column, and patch-permutation controls. Only after
-the correct history beats those controls for the same candidate pixels should a
-serpentine lattice, variable answer length, or multiple generated lines expand
-the task.
+than its matched global route. V31 then models a coherent multimodal continuous
+field distribution. Its spatial route detects order and local permutation and
+produces diverse context-dependent fields, yet natural path top-1 is 0.098%
+and exact-suffix path and autonomous assignment remain at 50.488% and 50.195%.
+Thus adding continuous transport to the same one-glyph target does not repair
+language binding. The next experiment should stop optimizing candidate-bank
+retrieval and instead directly generate a multi-glyph answer raster from a
+causal visual state. It must retain suffix-preserving shuffle, visual-frequency,
+symbolic sequence, content-swap, prompt-counterfactual, and generated-history
+controls. Only after held-out semantic compositions and readable direct pixels
+pass should variable page length, multiple generated lines, or raw-book scale
+expand the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -2879,20 +3070,37 @@ global. Patch reversal changes the score but improves target log probability by
 only 0.0154 nat and pair accuracy by 0.391 percentage point. V30 passes 12/18
 spatial common gates, 12/12 control integrity gates, 5/9 matched gates, and 0/8
 language gates. No frozen query or writer is authorized.
+V31 performs the conditional continuous-flow test. Two 18.74M-parameter arms
+complete 10,000 finite updates from byte-identical initialized states with
+approximately 0.997~GiB peak allocated memory. The spatial route gains 0.1259
+nat over shuffled context and 0.0527 nat over spatial permutation, and its
+autonomous fields pass fixed diversity and condition-sensitivity gates. Yet
+natural path top-1 is 0.0977%, below 1.8555% global, 1.6113% image unigram,
+13.5254% symbolic bigram, and 20.9961% symbolic trigram. Exact-suffix path and
+autonomous assignment are 50.4883% and 50.1953%. V31 passes 14/19 spatial
+common gates, 6/6 control integrity gates, 4/8 matched gates, and 0/10 language
+and generation gates. Its generated object is a latent field rather than a
+pixel image; evaluator-nearest glyphs are diagnostic proxies. No frozen query
+or direct raster writer is authorized.
 The seven-context V16 increase, V25 ordered-history increase, V26 changed
 history state, V27 global compatibility score, V28 probability/margin order
-effect, V29 density-ratio order effect, and V30 local-alignment effect are
-therefore all too weak to
-establish a useful causal memory core. V30 further shows that replacing the
-scalar critic with one deterministic aligned next-image field does not repair
-that core and underperforms its global visual control. The next attributable
-test must keep ordinary Chinese and the strict image boundary while representing
-multimodal continuous next-field density. A parameter-matched global-density
-control, suffix-only, order-shuffled, visual-unigram, symbolic-bigram, and local
-permutation controls must pass before long context or a writer is promoted.
-The exact serpentine mapping may then fold clean $32\times32$ cells into a
-$256\times256$ retinal lattice without making an $8\times8$ thumbnail the sole
-record. Page-native canvases, 3D
+effect, V29 density-ratio order effect, V30 local-alignment effect, and V31
+conditional-flow response are therefore all too weak to establish a useful
+causal language core. V30 shows that one deterministic aligned field does not
+repair that core; V31 shows that a coherent multimodal flow over the same
+one-glyph latent target still does not repair it. The next attributable test
+must keep ordinary Chinese and the strict image boundary while changing the
+task to rendered prompt-to-answer and block continuation. Causal QKV attention
+must form a visual semantic plan; a decoupled continuous renderer must emit a
+multi-glyph answer raster directly. The first proof should use only enough open
+and provenance-tracked data to test held-out compositions. LocalLLM may prepare
+fixed offline curricula, but it cannot enter student training tensors,
+checkpoints, or inference. Prompt counterfactual, content-swap, paraphrase,
+order-shuffle, visual-frequency, symbolic sequence, readability, and
+generated-history controls must pass before long context or raw-book scale is
+promoted. The exact serpentine mapping may later fold clean $32\times32$ cells
+into a $256\times256$ retinal lattice without making an $8\times8$ thumbnail
+the sole record. Page-native canvases, 3D
 geometry, color, and motion remain later observable channels and may not encode
 hidden character IDs. Prompt-paraphrase, fact-substitution, evidence-removal,
 generated-history-blind, retrieval, and OCR-plus-text controls must distinguish
@@ -2942,6 +3150,9 @@ of those higher-dimensional sensory-language extensions is established here.
 \bibitem{djepa} Chen et al. Denoising with a Joint-Embedding Predictive Architecture. \url{https://arxiv.org/abs/2410.03755}
 \bibitem{elf} Hu et al. ELF: Embedded Language Flows. \url{https://arxiv.org/abs/2605.10938}
 \bibitem{continuousvar} Shao, Meng, and Zhou. Continuous Visual Autoregressive Generation via Score Maximization. \url{https://arxiv.org/abs/2505.07812}
+\bibitem{orthus} Kou et al. Orthus: Autoregressive Interleaved Image-Text Generation with Modality-Specific Heads. \url{https://proceedings.mlr.press/v267/kou25a.html}
+\bibitem{flowar} Ren et al. FlowAR: Scale-wise Autoregressive Image Generation Meets Flow Matching. \url{https://proceedings.mlr.press/v267/ren25e.html}
+\bibitem{uniddt} Wang et al. UniDDT: Unifying Multimodal Understanding and Generation with Decoupled Diffusion Transformer. \url{https://arxiv.org/abs/2606.16255}
 \bibitem{vljepa} Chen et al. VL-JEPA: Joint Embedding Predictive Architecture for Vision-language. \url{https://arxiv.org/abs/2512.10942}
 \bibitem{textldm} Jiang et al. TextLDM: Language Modeling with Continuous Latent Diffusion. \url{https://arxiv.org/abs/2605.07748}
 \bibitem{dagger} Ross, Gordon, and Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. \url{https://proceedings.mlr.press/v15/ross11a.html}

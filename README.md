@@ -16,7 +16,7 @@
 
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V student and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured V30
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured V31
 experiment and its rejection are reported directly below.*
 
 ## Research North Star: A Visual Word-Origin Book
@@ -69,8 +69,14 @@ patch alignment, but natural top-1 is only `1.27%` versus `2.49%` for the
 global control and `11.72%` for a symbolic bigram; exact-suffix assignment is
 `50.05%` versus `50.59%` for the control. V30 is rejected. The next proof must
 represent multimodal continuous next-field density and beat both the matched
-global route and symbolic controls; page scale, 3D geometry, and motion remain
-deferred.
+global route and symbolic controls. V31 performs that test with a coherent
+conditional flow over continuous retinal fields. It detects ordered context
+and local spatial changes, yet spatial natural path top-1 falls to `0.10%`,
+exact-suffix assignment remains at `50.49%`, and all ten language and generation
+gates fail. V31 is rejected. The next proof therefore predicts a directly
+rendered **multi-glyph answer block** from a causal visual-language state and
+tests held-out semantics and readable output; page scale, 3D geometry, and
+motion remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
@@ -90,7 +96,53 @@ source-book policy are in
 and
 [`references/word_origin_ilm_dataset_plan.md`](references/word_origin_ilm_dataset_plan.md).
 
-## Latest Natural-Language Test: V30 Spatial Next-Field Rejected
+## Latest Natural-Language Test: V31 Conditional Visual Flow Rejected
+
+![Measured V31 result: conditional flow detects visual order and local layout but fails next-glyph binding and direct generation](publication/ilm-image-native/figures/conditional_visual_field_flow_v31_result.png)
+
+V31 tests whether coherent conditional flow can repair V30's deterministic
+next-field averaging. Two parameter-identical `18,736,577`-parameter students
+start from byte-identical initialized states. Both read 64 ordered `32 x 32`
+Chinese writing images with a causal QKV visual reader. The spatial arm learns
+a conditional velocity over a `16 x 192` retinal field; the global control
+learns one semantic vector tiled across the same 16 cells. Neither student
+receives text, token or Unicode IDs, OCR, a glyph lookup, vocabulary logits, or
+a candidate bank.
+
+Each arm completes 10,000 finite BF16 updates on one RTX 4090, using `0.997 GiB`
+peak allocated memory. The fixed audit uses 2,048 natural windows, 512
+pixel-identical suffix pairs, eight path probes, and eight-step Heun sampling.
+Spatial full-context path top-1 is only `0.0977%`, below the global control
+(`1.8555%`), image unigram (`1.6113%`), symbolic bigram (`13.5254%`), and
+symbolic trigram (`20.9961%`). Spatial autonomous top-1 is `0.1465%`.
+
+The spatial path's target log probability improves by `0.1259` nat over a
+suffix-preserving prefix shuffle and by `0.0527` nat over spatial permutation.
+Its autonomous samples are diverse and context dependent. These effects do not
+bind meaning to output: exact-suffix path assignment is `50.4883%` and
+autonomous assignment is `50.1953%`, both effectively chance and below the
+matched control.
+
+![Evaluator-nearest glyphs to autonomous V31 latent fields; diagnostic proxies, not generated pixels](publication/ilm-image-native/figures/conditional_visual_field_flow_v31_autonomous_nearest.png)
+
+V31 generates continuous latent retinal fields, not pixels. The panel above
+shows the external evaluator's nearest glyph for each field and exposes repeated
+wrong modes; those glyphs are diagnostic proxies, not model-rendered output.
+The spatial arm passes `14/19` common gates, global passes `6/6` integrity
+gates, matched arms pass `4/8`, and language plus generation passes `0/10`.
+V31 is rejected, frozen images remain uninstantiated, and direct pixel writer
+training remains unauthorized under this protocol.
+
+The next proof separates visual semantic planning from rendering: causal QKV
+attention must predict a multi-glyph answer state, while a compact continuous
+renderer must emit the answer raster directly. Diffusion, rectified flow, or a
+continuous autoregressive head may implement rendering, but held-out semantic
+counterfactuals and readable direct pixels must carry the language claim. See
+the [complete V31 receipt](docs/conditional-visual-field-flow-v31-result.md),
+[preregistered protocol](references/conditional_visual_field_flow_v31_protocol.md),
+and [research decision](references/conditional_visual_field_flow_v31_research.md).
+
+## Prior Natural-Language Test: V30 Spatial Next-Field Rejected
 
 ![Measured V30 matched-arm result: local candidate alignment changes scores, but the spatial route fails binding and every language gate](publication/ilm-image-native/figures/spatial_visual_next_field_v30_result.png)
 
@@ -962,6 +1014,9 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V31 conditional visual field-flow result | `docs/conditional-visual-field-flow-v31-result.md` |
+| V31 preregistered protocol | `references/conditional_visual_field_flow_v31_protocol.md` |
+| V31 research decision | `references/conditional_visual_field_flow_v31_research.md` |
 | V30 spatial visual next-field result | `docs/spatial-visual-next-field-v30-result.md` |
 | V29 conditional visual density-ratio result | `docs/conditional-visual-density-ratio-v29-result.md` |
 | V28 dense visual future-energy result | `docs/dense-visual-future-energy-v28-result.md` |
