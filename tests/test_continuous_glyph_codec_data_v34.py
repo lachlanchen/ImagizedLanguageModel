@@ -115,6 +115,35 @@ def test_historic_dataset_and_collate_keep_metadata_outside_pixels(
     assert isinstance(batch["metadata"][0]["character"], str)
 
 
+def test_historic_training_order_has_a_reproducible_permutation() -> None:
+    records = [
+        HistoricGlyphRecord(
+            character=chr(0x4E00 + index),
+            stage="oracle",
+            label=f"J{index}",
+            local_path=f"glyph-{index}.svg",
+        )
+        for index in range(200)
+    ]
+    pixels = torch.ones(len(records), 1, 32, 32, dtype=torch.uint8)
+    canonical = HistoricGlyphRasterDataset(records, pixels, split="train")
+    first = HistoricGlyphRasterDataset(
+        records,
+        pixels,
+        split="train",
+        order_seed=20263400,
+    )
+    second = HistoricGlyphRasterDataset(
+        records,
+        pixels,
+        split="train",
+        order_seed=20263400,
+    )
+    assert first.indices == second.indices
+    assert set(first.indices) == set(canonical.indices)
+    assert first.indices != canonical.indices
+
+
 def test_active_rendered_patches_uses_only_masked_cells() -> None:
     strip = torch.ones(1, 1, 32, 96)
     strip[..., :32] = 0

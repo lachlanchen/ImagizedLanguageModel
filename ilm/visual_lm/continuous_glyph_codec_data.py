@@ -4,6 +4,7 @@ import hashlib
 import io
 import math
 import os
+import random
 import sqlite3
 import tempfile
 from concurrent.futures import ProcessPoolExecutor
@@ -209,6 +210,7 @@ class HistoricGlyphRasterDataset(Dataset[dict[str, Any]]):
         *,
         split: str,
         example_count: int | None = None,
+        order_seed: int | None = None,
     ) -> None:
         if split not in V34_HISTORIC_SPLITS:
             raise ValueError(f"unknown V34 historical split: {split}")
@@ -216,11 +218,14 @@ class HistoricGlyphRasterDataset(Dataset[dict[str, Any]]):
             raise ValueError("V34 historical records and pixels do not align")
         self.records = tuple(records)
         self.pixels = pixels
-        self.indices = tuple(
+        indices = [
             index
             for index, record in enumerate(self.records)
             if historic_character_partition(record.character) == split
-        )
+        ]
+        if order_seed is not None:
+            random.Random(order_seed).shuffle(indices)
+        self.indices = tuple(indices)
         if not self.indices:
             raise ValueError(f"V34 historical split {split!r} is empty")
         self.split = split

@@ -278,11 +278,13 @@ def build_historic_stream(
         pixels,
         split="train",
         example_count=examples,
+        order_seed=SEED,
     )
     start = completed_updates * historic_batch_size
     count = (planned_updates - completed_updates) * historic_batch_size
     return DatasetWindow(stream, start=start, count=count), {
         "unique_train_glyphs": len(stream.indices),
+        "order_seed": SEED,
         "stream_examples": examples,
         "window_start": start,
         "window_count": count,
