@@ -513,7 +513,12 @@ class VisualSemanticRasterTransducer(nn.Module):
             raise ValueError("V32 feedback mode must be decoded or clean")
 
         memory, memory_padding_mask = self.encode_prompt(prompt_pixels, prompt_mask)
-        clean_hidden = self.plan_from_memory(memory, memory_padding_mask, answer_cells)
+        with torch.no_grad():
+            clean_hidden = self.plan_from_memory(
+                memory.detach(),
+                memory_padding_mask,
+                answer_cells,
+            )
         target_states = self.encode_target_states(
             answer_cells,
             clean_hidden[:, :-1].detach(),

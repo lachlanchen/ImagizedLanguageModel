@@ -60,6 +60,7 @@ def test_v32_forward_is_pixel_to_continuous_state_to_pixels() -> None:
     assert output.raster_logits.shape == (2, 5, 1, 24, 24)
     assert output.stop_logits.shape == (2, 6)
     assert output.clean_hidden.shape == (2, 6, 64)
+    assert not output.clean_hidden.requires_grad
     assert torch.isfinite(output.raster_logits).all()
 
 
