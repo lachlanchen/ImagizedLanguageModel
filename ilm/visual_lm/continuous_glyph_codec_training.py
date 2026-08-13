@@ -14,7 +14,7 @@ class ContinuousGlyphCodecLossWeights:
     pixel: float = 1.0
     edge: float = 0.5
     ink: float = 0.5
-    boundary_boost: float = 4.0
+    boundary_boost: float = 2.0
 
     def __post_init__(self) -> None:
         if any(value < 0.0 for value in self.__dict__.values()):

@@ -8,6 +8,7 @@ from ilm.visual_lm.continuous_glyph_codec import (
     ContinuousGlyphCodecOutput,
 )
 from ilm.visual_lm.continuous_glyph_codec_training import (
+    V34_LOSS_WEIGHTS,
     continuous_glyph_codec_loss,
     fixed_latent_noise,
     training_latent_noise,
@@ -25,6 +26,7 @@ def output_for_logits(logits: torch.Tensor) -> ContinuousGlyphCodecOutput:
 
 
 def test_codec_loss_prefers_correct_binary_reconstruction() -> None:
+    assert V34_LOSS_WEIGHTS.boundary_boost == 2.0
     targets = torch.randint(0, 2, (8, 1, 32, 32)).float()
     correct = continuous_glyph_codec_loss(
         output_for_logits((targets * 2.0 - 1.0) * 12.0),
