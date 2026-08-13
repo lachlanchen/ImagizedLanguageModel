@@ -96,8 +96,10 @@ while changing earlier history and the target. The unchanged V16 retina
 identifies cross-font candidate forms at `99.9512%`, and candidate
 permutation error is exactly zero, so candidate visibility and row-position
 shortcuts are controlled. Full-context assignment is nevertheless
-`50.7080%`, compared with `50.5615%` after shuffling the prefix; learned
-cross-font candidate identity also falls to `94.8730%`. V27 passes only
+`50.7080%`, compared with `50.5615%` after shuffling the prefix. Separately,
+learned cross-font identity over the 1,024-image bank is `94.8730%` and misses
+its `99%` gate; that 1,024-way metric is not directly comparable to the
+two-candidate raw control. V27 passes only
 `7/13` mechanism gates and `1/5` language gates. It is rejected, the frozen
 partition remains sealed, and no writer is trained.
 

@@ -8,14 +8,15 @@ V27 is **rejected as both a visual-compatibility mechanism and a natural-
 Chinese language model** under its preregistered development protocol.
 
 The experiment resolves the ambiguity left by V26. Candidate images are
-visible: the unchanged V16 retina assigns cross-font identity at
-`99.9512%`, candidate-order permutation changes scores by exactly `0.0`,
-and the image-only boundary passes. Joint optimization nevertheless reduces
-learned cross-font candidate identity to `94.8730%` and does not learn a
-useful context-conditioned relation. On pixel-identical suffix pairs, full
-context reaches `50.7080%` arm accuracy versus `50.5615%` after shuffling
-the earlier prefix. The difference is `0.1465` percentage point, effectively
-chance under the fixed gate.
+visible in the matched-pair test: the unchanged V16 retina assigns the correct
+one of two cross-font candidates at `99.9512%`, candidate-order permutation
+changes scores by exactly `0.0`, and the image-only boundary passes.
+Separately, learned cross-font identity over the full 1,024-image bank is
+`94.8730%` and misses its `99%` gate. These metrics use different candidate
+sets and are not a before/after identity comparison. On pixel-identical suffix
+pairs, full context reaches `50.7080%` arm accuracy versus `50.5615%` after
+shuffling the earlier prefix. The difference is `0.1465` percentage point,
+effectively chance under the fixed gate.
 
 On natural language, full-context top-1 is `1.6113%`, below the image unigram
 (`2.0508%`) and symbolic bigram (`12.5977%`). Full context improves target
@@ -105,7 +106,7 @@ evaluator-only bank of 1,024 candidate images.
 | Full minus bigram log probability | `-1.856770` nat | `>0.05` | fail |
 | Full minus suffix-4 log probability | `+0.059248` nat | `>0.03` | pass |
 | Full minus shuffled log probability | `+0.002726` nat | `>0.03` | fail |
-| Learned cross-font identity top-1 | `0.948730` | `>=0.99` | fail |
+| Learned 1,024-bank cross-font identity top-1 | `0.948730` | `>=0.99` | fail |
 | Student boundary clean | `1.0` | required | pass |
 | Peak allocated CUDA memory | `2.267916 GiB` | `<18 GiB` | pass |
 
@@ -126,8 +127,8 @@ arms.
 | Suffix pixel equality | `1.0` | exact | pass |
 | Candidate permutation score error | `0.0` | `<1e-5` | pass |
 | Candidate permutation accuracy agreement | `1.0` | exact | pass |
-| Raw V16 cross-font identity | `0.999512` | `>=0.99` | pass |
-| Learned cross-font identity | `0.948730` | `>=0.99` | fail |
+| Raw V16 two-candidate cross-font identity | `0.999512` | `>=0.99` | pass |
+| Learned 1,024-bank cross-font identity | `0.948730` | `>=0.99` | fail |
 | Full-context arm accuracy | `0.507080` | `>0.65` | fail |
 | Full-context both-correct rate | `0.088867` | `>0.40` | fail |
 | Last-only arm accuracy | `0.500000` | exact chance | pass |
@@ -144,6 +145,11 @@ balanced. The remaining result is direct: the jointly trained context query
 does not select its associated candidate above chance, and preserving all
 prefix images while changing only their order has negligible effect.
 
+The raw identity control above is a two-candidate decision inside each matched
+pair. The learned identity metric is a 1,024-candidate bank retrieval. Both are
+valid preregistered gates, but their difference is not an identity-loss
+estimate. No claim of a `5.08`-point degradation is supported.
+
 ## What The Result Means
 
 V27 falsifies a specific proposed mechanism: under this corpus, budget, and
@@ -153,12 +159,13 @@ compatibility.
 
 The failure is more localized than V26:
 
-1. **Candidate pixels are sufficient.** The untouched V16 geometry gives
-   `99.9512%` cross-font identity.
+1. **Pair candidate pixels are sufficient.** The untouched V16 geometry gives
+   `99.9512%` identity in the exact two-candidate pair control.
 2. **The evaluator is equivariant.** Independently permuting candidates changes
    scores by exactly zero after undoing the permutation.
-3. **Joint adaptation damages form geometry.** Learned candidate identity falls
-   by `5.0781` percentage points to `94.8730%`, despite the identity loss.
+3. **The separate full-bank identity gate fails.** Learned 1,024-way
+   cross-font identity is `94.8730%` against a fixed `99%` requirement; it is
+   not directly comparable to the two-way raw control.
 4. **Context does not bind the candidate.** Pair assignment is `50.7080%`,
    only `0.1465` point above shuffled context.
 5. **The weak natural score is not useful language.** It is below unigram and

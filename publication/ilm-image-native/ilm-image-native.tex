@@ -145,10 +145,11 @@ arbitrary-candidate image compatibility. The fixed 8,000-update run reaches
 1.611\% natural top-1, below 2.051\% image unigram and 12.598\% symbolic
 bigram. On pixel-identical suffix pairs, full-context assignment is 50.708\%,
 versus 50.562\% after shuffling the earlier prefix. The untouched V16 retina
-still identifies cross-font candidates at 99.951\%, candidate permutation
-error is zero, and learned candidate identity falls to 94.873\%. V27 therefore
-rejects the global context-query/candidate-key mechanism and preserves the
-frozen seal.
+still identifies the correct one of two cross-font candidates at 99.951\% and
+candidate permutation error is zero. Separately, learned 1,024-bank identity is
+94.873\% and misses its 99\% gate; these differently sized retrieval tests are
+not a before/after comparison. V27 therefore rejects the global
+context-query/candidate-key mechanism and preserves the frozen seal.
 
 The bounded product target is a Visual Word-Origin Book: rendered English or
 Chinese questions produce answer-page images containing readable explanation
@@ -1636,7 +1637,7 @@ Full minus bigram top-1 & $-0.109863$ & $>0.01$ & fail \\
 Full minus bigram log probability & $-1.856770$ & $>0.05$ & fail \\
 Full minus suffix-4 log probability & +0.059248 & $>0.03$ & pass \\
 Full minus shuffled log probability & +0.002726 & $>0.03$ & fail \\
-Learned cross-font identity & 0.948730 & $\geq0.99$ & fail \\
+Learned 1,024-bank cross-font identity & 0.948730 & $\geq0.99$ & fail \\
 Student boundary / peak CUDA & clean / 2.267916~GiB & clean / $<18$ & pass \\
 \bottomrule
 \end{tabular}
@@ -1666,8 +1667,8 @@ V27 suffix-4 pair measure & Measured & Required & Result \\
 Suffix pixel equality & 1.000000 & exact & pass \\
 Candidate permutation score error & 0.000000 & $<10^{-5}$ & pass \\
 Candidate permutation agreement & 1.000000 & exact & pass \\
-Raw V16 cross-font identity & 0.999512 & $\geq0.99$ & pass \\
-Learned cross-font identity & 0.948730 & $\geq0.99$ & fail \\
+Raw V16 two-candidate identity & 0.999512 & $\geq0.99$ & pass \\
+Learned 1,024-bank identity & 0.948730 & $\geq0.99$ & fail \\
 Full-context arm accuracy & 0.507080 & $>0.65$ & fail \\
 Full both-correct rate & 0.088867 & $>0.40$ & fail \\
 Last-only / suffix-4 accuracy & 0.500000 / 0.500000 & exact chance & pass \\
@@ -1686,10 +1687,12 @@ exceed a suffix-preserving prefix shuffle.}
 
 The raw V16 retina reaches 0.999512 cross-font target identity with 0.736124
 mean cosine margin. Candidate pixels and the evaluator are therefore adequate.
-Joint optimization instead lowers learned cross-font identity by 5.078
-percentage points and leaves full assignment only 0.1465 percentage point above
-the shuffled-prefix arm. Seven of thirteen mechanism gates pass, but all five
-context-binding gates and the learned-identity gate fail.
+This is a two-candidate pair control. The learned identity gate instead uses
+1,024 candidates, reaches 0.948730, and therefore cannot be subtracted from the
+raw number as a before/after change. Full assignment remains only 0.1465
+percentage point above the shuffled-prefix arm. Seven of thirteen mechanism
+gates pass, but all five context-binding gates and the learned full-bank
+identity gate fail.
 
 \begin{figure}[t]
   \centering
@@ -1697,8 +1700,9 @@ context-binding gates and the learned-identity gate fail.
   \caption{Measured V27 development result generated directly from the fixed
   audit. The image-only boundary, candidate permutation, exact suffix
   intervention, and raw-retina identity controls pass. Jointly learned visual
-  compatibility remains near chance, loses cross-font identity, and does not
-  use prefix order. The frozen partition stays sealed and no writer is trained.}
+  compatibility remains near chance, misses its separate full-bank identity
+  gate, and does not use prefix order. The frozen partition stays sealed and no
+  writer is trained.}
   \label{fig:v27result}
 \end{figure}
 
@@ -2183,8 +2187,10 @@ V27 performs that joint test. Its full-context pair assignment is 50.708\%,
 versus 50.562\% after shuffling the earlier prefix, while natural top-1 is
 1.611\%, below 2.051\% image unigram and 12.598\% symbolic bigram. The raw
 retina still gives 99.951\% cross-font identity and candidate permutation error
-is exactly zero, but learned identity falls to 94.873\%. V27 therefore rejects
-the global query/key compatibility route; its frozen partition remains sealed.
+is exactly zero in the two-candidate pair control. Separately, learned
+1,024-bank identity is 94.873\% and misses its 99\% gate; the two retrieval
+sizes are not directly comparable. V27 therefore rejects the global query/key
+compatibility route; its frozen partition remains sealed.
 The combined result establishes that a small image-only student can learn
 causal language signal, that a small continuous field can control topographic
 generated ink, and that several visual roles can be composed into a rendered
@@ -2194,9 +2200,10 @@ hand-authored grammar with a generic causal visual field is insufficient. V26
 shows that separating appearance from history is also insufficient when the
 objective permits changed residuals with nearly unchanged target preference.
 V27 shows that joint dot-product candidate compatibility is also insufficient:
-it preserves raw target visibility but neither preserves learned form geometry
-nor makes earlier order useful. The next proof should freeze or exactly
-preserve the raw retina and supervise dense ordered future visual fields at the
+it preserves raw target visibility in the pair control but neither passes the
+separate learned full-bank identity gate nor makes earlier order useful. The
+next proof should freeze the raw retina to isolate language learning and
+supervise dense ordered future visual fields at the
 same 64-cell horizon. Only after the correct history beats a
 suffix-preserving shuffle for the same candidate pixels should a serpentine
 lattice, variable answer length, or multiple generated lines expand the task.
@@ -2297,8 +2304,10 @@ updates and audit in 39.12 minutes with 2.268~GiB peak allocated memory. The
 raw V16 retina still gives 99.951\% cross-font identity, suffix pixels are
 exact, candidate permutation error is zero, and last-only and suffix-only arms
 are exactly at chance. Yet full-context assignment is only 50.708\%, versus
-50.562\% after prefix shuffling; learned identity falls to 94.873\%. Natural
-top-1 is 1.611\%, below 2.051\% unigram and 12.598\% bigram, while its
+50.562\% after prefix shuffling. Separately, learned 1,024-bank identity is
+94.873\% and misses its 99\% gate; it is not directly comparable to the
+two-candidate raw control. Natural top-1 is 1.611\%, below 2.051\% unigram and
+12.598\% bigram, while its
 full-versus-shuffled log-probability gain is only 0.00273 nat. V27 passes seven
 of thirteen mechanism gates and one of five language gates. No frozen query or
 writer is authorized.

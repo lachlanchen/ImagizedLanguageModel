@@ -319,7 +319,7 @@ def main() -> None:
         draw,
         x=90,
         y=967,
-        label="Raw / learned cross-font identity",
+        label="Raw pair / learned 1,024-bank identity",
         value=(
             f"{100.0 * suffix4['raw_retina_cross_font_identity_accuracy']:.2f}%"
             f" / {100.0 * natural['learned_candidate_cross_font_identity_top1']:.2f}%"
@@ -475,7 +475,7 @@ def main() -> None:
     )
     draw.text(
         (92, 1410),
-        "The learned candidate geometry degrades to 94.87%, and full context is only 0.15 point above a prefix shuffle.",
+        "The separate learned 1,024-bank identity gate is 94.87%; full context is only 0.15 point above a prefix shuffle.",
         font=font(18),
         fill="#d9e4e7",
     )

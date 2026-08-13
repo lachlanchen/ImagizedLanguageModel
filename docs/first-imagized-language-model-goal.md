@@ -340,9 +340,11 @@ In 512 pixel-identical suffix pairs and two unseen-font views, the unchanged
 V16 retina identifies cross-font targets at `0.999512`, candidate-permutation
 score error is exactly zero, and last-only and suffix-4 arms are exactly
 `0.500000`. Full context reaches only `0.507080`, versus `0.505615`
-after shuffling the earlier prefix. Learned candidate identity falls to
-`0.948730`. V27 passes `7/13` mechanism gates and `1/5` language gates,
-so it is rejected without frozen evaluation or writer training.
+after shuffling the earlier prefix. Separately, learned 1,024-bank candidate
+identity is `0.948730` and fails its `0.99` gate. It is not directly
+comparable to the two-candidate raw-retina control. V27 passes `7/13`
+mechanism gates and `1/5` language gates, so it is rejected without frozen
+evaluation or writer training.
 
 ![Joint Visual Compatibility V27 rejected development result](../publication/ilm-image-native/figures/joint_visual_compatibility_v27_result.png)
 
@@ -407,8 +409,8 @@ It did not prove:
   distribution remains below both while its matched pair ranking is chance;
   and
 - a selected deterministic image-compatibility model: V27 remains below
-  unigram and bigram, degrades candidate identity, and differs negligibly from
-  suffix-preserving shuffled context.
+  unigram and bigram, misses its separate full-bank identity gate, and differs
+  negligibly from suffix-preserving shuffled context.
 
 The present result is therefore an **accepted visual-state proof, accepted
 development motor-plan proof, rejected additive-spatial repair, accepted local
@@ -432,10 +434,11 @@ and proves that the residual state changes, but its pixel-identical suffix pairs
 show chance target binding. The immediate milestone is therefore not a larger
 page or 3D stream. V27 has now tested and rejected the direct joint
 context-query/candidate-key repair: raw candidate visibility stays nearly
-perfect, but jointly learned geometry degrades and full context is effectively
-indistinguishable from shuffled context. The next preregistered 64-cell
-objective must preserve raw retinal geometry exactly, supervise dense ordered
-future fields instead of one global query, and make the correct history beat a
+perfect in the two-way pair control, but the separate learned full-bank identity
+gate fails and full context is effectively indistinguishable from shuffled
+context. The next preregistered 64-cell objective should hold the raw retina
+fixed to isolate language learning, supervise dense ordered future fields
+instead of one global query, and make the correct history beat a
 suffix-preserving shuffle for the same candidate pixels. The authoritative
 representation remains the reversible `N x 1 x 32 x 32` glyph-image stream;
 a two-dimensional lattice is only a lossless compute view. Only after this
