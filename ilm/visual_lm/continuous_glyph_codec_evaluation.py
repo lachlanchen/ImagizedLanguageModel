@@ -21,7 +21,8 @@ from .direct_visual_patch_evaluation import (
     _tesseract_text,
     tesseract_identity,
 )
-from .direct_visual_patch_training import sobel_edges, strip_to_patches
+from .continuous_glyph_codec_training import glyph_sobel_edges
+from .direct_visual_patch_training import strip_to_patches
 
 
 def _autocast(device: torch.device, precision: str):
@@ -55,12 +56,8 @@ class BinaryPatchMetrics:
         self.predicted_ink += int(predicted_ink.sum())
         self.target_ink += int(target_ink.sum())
 
-        predicted_edge = (
-            sobel_edges(predicted_white.float().unsqueeze(1)).abs() > 0.05
-        ).squeeze(1)
-        target_edge = (
-            sobel_edges(target_white.float().unsqueeze(1)).abs() > 0.05
-        ).squeeze(1)
+        predicted_edge = glyph_sobel_edges(predicted_white.float()).abs() > 0.05
+        target_edge = glyph_sobel_edges(target_white.float()).abs() > 0.05
         self.edge_true_positive += int((predicted_edge & target_edge).sum())
         self.predicted_edge += int(predicted_edge.sum())
         self.target_edge += int(target_edge.sum())

@@ -6,7 +6,6 @@ import torch
 import torch.nn.functional as F
 
 from .continuous_glyph_codec import ContinuousGlyphCodecOutput
-from .direct_visual_patch_training import sobel_edges
 
 
 @dataclass(frozen=True)
@@ -42,10 +41,17 @@ class ContinuousGlyphCodecLoss:
         }
 
 
-def _patch_edges(patches: torch.Tensor) -> torch.Tensor:
+def glyph_sobel_edges(patches: torch.Tensor) -> torch.Tensor:
     if patches.ndim != 4 or patches.shape[1] != 1:
         raise ValueError("V34 edge input must have shape [B,1,H,W]")
-    return sobel_edges(patches.unsqueeze(1)).squeeze(1)
+    kernel_x = patches.new_tensor(
+        [[-1.0, 0.0, 1.0], [-2.0, 0.0, 2.0], [-1.0, 0.0, 1.0]]
+    ).reshape(1, 1, 3, 3)
+    kernel_y = kernel_x.transpose(-1, -2)
+    padded = F.pad(patches.float(), (1, 1, 1, 1), mode="replicate")
+    horizontal = F.conv2d(padded, kernel_x.float()) / 8.0
+    vertical = F.conv2d(padded, kernel_y.float()) / 8.0
+    return torch.cat((horizontal, vertical), dim=1)
 
 
 def continuous_glyph_codec_loss(
@@ -65,8 +71,8 @@ def continuous_glyph_codec_loss(
 
     target = targets.float()
     probability = output.logits.float().sigmoid()
-    target_edges = _patch_edges(target)
-    predicted_edges = _patch_edges(probability)
+    target_edges = glyph_sobel_edges(target)
+    predicted_edges = glyph_sobel_edges(probability)
 
     boundary_strength = torch.linalg.vector_norm(
         target_edges,

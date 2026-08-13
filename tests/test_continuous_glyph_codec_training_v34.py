@@ -11,6 +11,7 @@ from ilm.visual_lm.continuous_glyph_codec_training import (
     V34_LOSS_WEIGHTS,
     continuous_glyph_codec_loss,
     fixed_latent_noise,
+    glyph_sobel_edges,
     training_latent_noise,
 )
 
@@ -39,6 +40,13 @@ def test_codec_loss_prefers_correct_binary_reconstruction() -> None:
     assert correct.loss < 1e-3
     assert inverted.loss > correct.loss
     assert correct.patches == 8
+
+
+def test_glyph_sobel_does_not_create_canvas_border_edges() -> None:
+    white = torch.ones(2, 1, 32, 32)
+    assert torch.count_nonzero(glyph_sobel_edges(white)) == 0
+    white[:, :, 8:24, 12:20] = 0
+    assert torch.count_nonzero(glyph_sobel_edges(white)) > 0
 
 
 def test_codec_loss_backpropagates_through_encoder_and_decoder() -> None:
