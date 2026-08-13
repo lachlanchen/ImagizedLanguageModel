@@ -30,7 +30,7 @@ a selected language mechanism while recording useful localization:
   pair-relation gate;
 - frozen V16 cross-font identity over the same 1,024-way scope is
   `0.92041015625`, while the EMA semantic route reaches `0.96435546875`;
-- 9 of 14 mechanism gates and 2 of 6 language gates pass;
+- 10 of 14 mechanism gates and 2 of 6 language gates pass;
 - no frozen image was instantiated, and frozen evaluation and writer training
   remain unauthorized.
 
