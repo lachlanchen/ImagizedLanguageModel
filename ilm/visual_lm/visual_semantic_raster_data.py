@@ -556,23 +556,28 @@ class VisualRasterContinuationDataset(Dataset):
         rng = random.Random(self.seed + index * 1_000_033)
         for _ in range(256):
             record = self.records[rng.randrange(len(self.records))]
-            maximum_prompt = min(self.maximum_prompt_cells, len(record.text) - 1)
+            text = normalize_visible_text(record.text)
+            maximum_prompt = min(self.maximum_prompt_cells, len(text) - 1)
             if maximum_prompt < self.minimum_prompt_cells:
                 continue
             prompt_length = rng.randint(self.minimum_prompt_cells, maximum_prompt)
             maximum_answer = min(
                 self.render_config.maximum_answer_cells,
-                len(record.text) - prompt_length,
+                len(text) - prompt_length,
             )
             if maximum_answer < 1:
                 continue
             answer_length = rng.randint(1, maximum_answer)
-            maximum_start = len(record.text) - prompt_length - answer_length
+            maximum_start = len(text) - prompt_length - answer_length
             start = rng.randint(0, maximum_start)
-            prompt = record.text[start : start + prompt_length]
-            answer = record.text[
-                start + prompt_length : start + prompt_length + answer_length
-            ]
+            prompt = normalize_visible_text(text[start : start + prompt_length])
+            answer = normalize_visible_text(
+                text[
+                    start + prompt_length : start + prompt_length + answer_length
+                ]
+            )
+            if not prompt or not answer:
+                continue
             sample = render_visual_raster_record(
                 VisualRasterRecord(
                     identifier=f"{record.identifier}:{start}:{prompt_length}:{answer_length}",
@@ -589,8 +594,8 @@ class VisualRasterContinuationDataset(Dataset):
             sample["metadata"]["continuation"] = {
                 "source_identifier": record.identifier,
                 "offset": start,
-                "prompt_cells": prompt_length,
-                "answer_cells": answer_length,
+                "prompt_cells": len(prompt),
+                "answer_cells": len(answer),
             }
             return sample
         raise RuntimeError("V32 could not render a valid continuation sample")

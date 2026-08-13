@@ -170,6 +170,32 @@ def test_v32_continuation_respects_declared_prompt_capacity() -> None:
         dataset[len(dataset)]
 
 
+def test_v32_continuation_retries_whitespace_only_slices() -> None:
+    record = VisualTextRecord(
+        identifier=_identifier_for("train", "public-domain"),
+        text="天地" + " " * 48 + "玄黄",
+        language="zh-Hant",
+        source="unit-test",
+        rights="test-only",
+    )
+    dataset = VisualRasterContinuationDataset(
+        [record],
+        split="train",
+        render_config=VisualRasterRenderConfig(
+            maximum_prompt_patches=8,
+            maximum_answer_cells=4,
+            augment=False,
+        ),
+        seed=2032,
+        length=32,
+        minimum_prompt_cells=1,
+        maximum_prompt_cells=2,
+    )
+    for sample in dataset:
+        assert sample["answer_mask"].sum() >= 1
+        assert sample["prompt_mask"].sum() >= 1
+
+
 def test_v32_warmup_renders_answers_without_spending_work_on_prompts() -> None:
     record = VisualTextRecord(
         identifier=_identifier_for("train", "public-domain"),
