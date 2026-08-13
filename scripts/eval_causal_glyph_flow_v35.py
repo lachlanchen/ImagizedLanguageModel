@@ -56,6 +56,7 @@ DEFAULT_PARAPHRASE_MANIFEST = "data/teacher/folio_paraphrases_zh_holdout.jsonl"
 DEFAULT_OUTPUT = "artifacts/causal_glyph_flow_v35_20260814/development"
 ROOT = Path(__file__).resolve().parents[1]
 EVALUATOR_SOURCE_FILES = (
+    "ilm/visual_lm/causal_glyph_flow.py",
     "ilm/visual_lm/causal_glyph_flow_development.py",
     "ilm/visual_lm/direct_visual_patch_data.py",
     "ilm/visual_lm/visual_semantic_raster_data.py",

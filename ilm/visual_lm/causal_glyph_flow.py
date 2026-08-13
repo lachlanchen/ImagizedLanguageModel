@@ -547,7 +547,7 @@ class CausalGlyphFlowLM(nn.Module):
                 stop_probabilities[
                     rows,
                     generated_lengths.clamp_max(maximum_new_patches),
-                ] = stop
+                ] = stop.float()
                 may_stop = generated_lengths >= minimum_new_patches
                 active = active & ~(may_stop & (stop >= stop_threshold))
                 active = active & (generated_lengths < maximum_new_patches)
@@ -702,4 +702,3 @@ def causal_glyph_flow_boundary_receipt(model: CausalGlyphFlowLM) -> dict[str, An
         "uses_retrieval": False,
         "uses_runtime_teacher": False,
     }
-

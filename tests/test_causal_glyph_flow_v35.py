@@ -102,6 +102,22 @@ def test_generation_uses_closed_visible_loop() -> None:
     assert torch.equal(generation.feedback_latents[:, 0], expected)
 
 
+def test_generation_records_bfloat16_stop_probabilities_in_float_buffer() -> None:
+    torch.manual_seed(38)
+    model = CausalGlyphFlowLM(tiny_config()).eval()
+    pixels, mask = sample_inputs(length=3)
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        generation = model.generate(
+            pixels,
+            mask,
+            maximum_new_patches=1,
+            minimum_new_patches=1,
+            seed=38,
+        )
+    assert generation.stop_probabilities.dtype == torch.float32
+    assert torch.isfinite(generation.stop_probabilities).all()
+
+
 def test_boundary_has_no_symbolic_runtime_interface() -> None:
     model = CausalGlyphFlowLM(tiny_config())
     receipt = causal_glyph_flow_boundary_receipt(model)
@@ -121,4 +137,3 @@ def test_production_parameter_count_is_below_protocol_limit() -> None:
     assert receipt["production_shape"] is True
     assert receipt["total_parameters"] < 150_000_000
     assert receipt["codec_parameters"] == 7_423_361
-

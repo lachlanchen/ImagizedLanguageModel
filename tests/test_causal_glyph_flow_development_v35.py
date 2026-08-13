@@ -383,6 +383,7 @@ def test_runner_configuration_and_closed_loop_receipt_are_explicit() -> None:
     assert production["teacher_maximum_examples"] == 0
     source_receipt = evaluator_source_receipt()
     assert set(source_receipt) == {
+        "ilm/visual_lm/causal_glyph_flow.py",
         "ilm/visual_lm/causal_glyph_flow_development.py",
         "ilm/visual_lm/direct_visual_patch_data.py",
         "ilm/visual_lm/visual_semantic_raster_data.py",
