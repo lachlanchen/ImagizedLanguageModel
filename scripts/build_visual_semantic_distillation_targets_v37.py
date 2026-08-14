@@ -527,6 +527,9 @@ def main() -> None:
             if args.split == "train"
             else str(Path(args.train_bank).resolve())
         ),
+        "train_bank_sha256": (
+            None if args.split == "train" else file_sha256(args.train_bank)
+        ),
         "teacher_mean_norm": float(teacher_mean.norm()),
         "embedding_requests": request_count,
         "embedding_documents": 2 * len(records),
