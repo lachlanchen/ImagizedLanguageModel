@@ -109,6 +109,22 @@ and retains 99.66\% of clean projected-motor F1. All outputs are finite and
 nonblank. This qualifies an image-conditioned glyph motor, not autonomous
 language: the target glyph image is supplied to this audit and the model does
 not choose the next glyph.
+
+V42 then removes that target supply and trains a 24.35M-parameter causal model
+directly on ordered $64\times1\times32\times32$ Chinese glyph rasters. On 2,048
+development windows, full-history next-image top-1 is 19.97\%, above image
+unigram (1.42\%), symbolic bigram (12.26\%), and shuffled earlier history
+(18.36\%); ordered target log probability gains 0.174 nat over shuffled
+history. This is the first bounded positive natural-language result in the
+project, not a complete ILM: exact-suffix assignment is 53.03\% and generated
+pixel F1 is 0.373. V43 adds same-suffix pair supervision and a 5.69M-parameter
+bank-free spatial rectified-flow writer. It preserves every language-control
+win and raises generated pixel F1 to 0.445, but counterfactual assignment is
+only 54.49\%; the fixed 0.60 and 0.55 gates fail. A post-result diagnostic finds
+99.22\% seen-pair but only 58.30\% unseen-train accuracy, while evaluator exact
+ink plans let the same writer reach 0.882 F1. V43 is partial: pair memorization
+and the autonomous visual plan, rather than writer capacity, are now the
+dominant bottlenecks. The frozen partition remains unopened.
 \end{abstract}
 
 \begin{figure}[t]
@@ -117,9 +133,9 @@ not choose the next glyph.
   \caption{Image-native language modeling design target. A restrained AgInTi
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
-  answer-page target, not a measured model output. The latest language result
-  remains negative (V39.1), while the latest bounded positive result is the V41
-  image-conditioned motor in Figure~\ref{fig:v41motor}.}
+  answer-page target, not a measured model output. V42 now supplies bounded
+  positive ordered-raster language evidence, while V43 remains a partial
+  reader/writer result reported in Figure~\ref{fig:v43result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -238,6 +254,17 @@ and controls that makes a stronger image-native language claim falsifiable:
   exactly attributed MX-Font image-conditioned generator. It improves
   target-style ink F1 under clean and perturbed visual states on one RTX 4090 D,
   qualifying a robust output motor while making no language claim.
+  \item V42, a 24.35M-parameter causal Chinese raster model whose full ordered
+  history beats image-unigram, symbolic-bigram, suffix, last-cell, and
+  shuffled-history controls on a fixed development audit. This establishes a
+  bounded image-native language signal while its counterfactual binding and
+  direct raster-quality gates remain false.
+  \item V43, a 30.04M-parameter continuation with train-only exact-suffix pair
+  supervision and a bank-free 5.69M-parameter spatial rectified-flow writer.
+  It improves visible glyph coherence but fails its unchanged binding and
+  pixel-F1 gates. Post-result controls separate pair-pool memorization from a
+  high exact-plan writer ceiling, identifying the continuous reader plan as
+  the next bottleneck.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -2978,6 +3005,133 @@ canonical content state from raster history without receiving the evaluator's
 target glyph, then beat visual unigram, bigram, shuffled-history, and
 blank-history controls under autonomous pixel feedback.
 
+\subsection{Canonical Glyph Language V42 and Spatial Flow V43}
+
+\paragraph{A canonical image field isolates language before historical form.}
+V42 deliberately removes style variation and answer-level instruction tuning.
+Each visible cell is a single canonical-font raster
+$x_t\in[0,1]^{1\times32\times32}$. A fixed orthonormal two-dimensional DCT
+maps thresholded signed pixels into a normalized continuous image field,
+\[
+\phi(x_t)=\operatorname{norm}\!\left[
+  \operatorname{DCT}_2\bigl(2\mathbf 1[x_t\geq0.5]-1\bigr)
+\right]\in\mathbb R^{1024}.
+\]
+A learned linear projection and eight causal visual Transformer blocks consume
+64 such fields. The final state predicts a normalized anchor
+$a_t\in\mathbb R^{1024}$. All 64 shifted positions in each training stream
+participate in dynamic image contrast, anchor cosine, and inverse-field pixel
+losses. Candidate images exist only inside the train/evaluation loss; no finite
+bank is present in \texttt{language}, \texttt{sample\_next}, or recurrent
+generation. The production model has 24,346,497 parameters, completes 10,000
+BF16 updates in 1,374.70 seconds, and peaks at 0.63194~GiB allocated CUDA memory
+on one RTX 4090 D.
+
+The fixed 2,048-window development audit uses a 1,024-image evaluator bank only
+to identify predictions after the model emits a field. It also computes image
+unigram and symbolic bigram baselines, suffix-four and last-cell ablations,
+suffix-preserving prefix shuffles, blank history, 512 exact-suffix pairs, and
+256 direct generated rasters. Table~\ref{tab:v42v43language} reports the
+predeclared decision. V42 passes every ordered-language, runtime-boundary, and
+resource condition. Its full top-1 is 19.9707\%, compared with 12.2559\%
+bigram and 18.3594\% shuffled history; ordered target log probability gains
+0.17391 nat over shuffled history. These controls provide bounded evidence that
+the model uses earlier writing images to predict a natural Chinese next image.
+Counterfactual assignment and pixel F1 remain below gate, so the evidence does
+not imply general understanding or readable autonomous writing.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Development metric & V42 & V43 & Fixed requirement \\
+\midrule
+Full ordered top-1 & 0.19971 & 0.17822 & report \\
+Image-unigram top-1 & 0.01416 & 0.02295 & control \\
+Symbolic-bigram top-1 & 0.12256 & 0.13721 & full gain $>0.01$ \\
+Shuffled-history top-1 & 0.18359 & 0.14063 & full gain $>0.015$ \\
+Ordered--shuffled log probability & +0.17391 & +0.27946 & $>0.05$ nat \\
+Exact-suffix arm accuracy & 0.53027 & 0.54492 & $>0.60$; both fail \\
+Generated identity top-1 & 0.08203 & 0.04297 & $>$ own unigram; both pass \\
+Generated pixel F1 & 0.37308 & 0.44507 & $>0.55$; both fail \\
+Generated blank rate & 0 & 0 & $<0.02$ \\
+Peak allocated CUDA memory & 0.63194 & 1.19858 & $<18$~GiB \\
+\bottomrule
+\end{tabular}
+\caption{Preregistered canonical glyph-language results. V42 and V43 use
+independently seeded fixed development samples, so cross-version absolute
+differences are descriptive; every within-version control and gate is matched.}
+\label{tab:v42v43language}
+\end{table}
+
+\paragraph{V43 tests binding and rendering as separate mechanisms.}
+Stage A initializes the reader from the pinned V42 SHA-256
+\texttt{a5ce2ff2...a9abe870}. In addition to ordinary streams, each update
+contains eight train-only context pairs with pixel-identical final four glyphs
+but different earlier histories and next-glyph images. Candidate columns are
+deterministically permuted. For pair $b$, context arm $i$, and raster-candidate
+field $c_{bj}$,
+\[
+S_{bij}=s\,a_{bi}^{\mathsf T}c_{bj},\qquad
+\mathcal L_A=\mathcal L_{dynamic}+0.25\mathcal L_{anchor}
++0.20\mathcal L_{pixel}+2.0\mathcal L_{pair}.
+\]
+The 3,000-update stage completes in 207.89 seconds and peaks at 0.61394~GiB.
+
+Stage B freezes that reader and trains a 5,693,697-parameter convolutional
+spatial writer. Final hidden state $h$, anchor $a$, and its fixed inverse-DCT
+ink plan $p(a)$ condition a rectified flow. For signed target pixels $x$,
+Gaussian noise $\epsilon$, and $\tau\sim\mathcal U(0,1)$,
+\[
+y_\tau=(1-\tau)x+\tau\epsilon,\qquad
+u^*=\epsilon-x,\qquad
+\mathcal L_B=\mathcal L_{stroke\text{-}weighted\ flow}
++0.10\mathcal L_{endpoint}.
+\]
+At inference, four independent fields use 16 Heun steps and guidance 1.25. The
+reader re-encodes those generated pixels and its own anchor selects one; no
+glyph bank participates. The chosen pixels are thresholded and become the only
+feedback for another step. Stage B completes 5,000 updates in 272.09 seconds.
+The combined model has 30,040,194 parameters and writer-checkpoint SHA-256
+\texttt{f2f142f3...e6fe0539}.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/canonical_glyph_flow_v43_result.png}
+  \caption{Measured V42/V43 result rendered from hash-pinned receipts and real
+  target/generated raster sheets. V42 establishes a bounded ordered-image
+  language signal. V43 makes autonomous marks more glyph-like but misses its
+  exact-suffix and generated-pixel gates. The bottom panels are explicitly
+  post-result diagnostics and do not change that decision.}
+  \label{fig:v43result}
+\end{figure}
+
+V43 preserves all four ordered-language wins, emits no blank fields, and raises
+generated pixel F1 to 0.44507. Exact-suffix arm accuracy reaches only 0.54492,
+below 0.60, and pixel F1 remains below 0.55. Thus V43 passes 8/10 conditions
+and is \texttt{rejected-or-partial}; the frozen partition remains sealed.
+
+\paragraph{Post-result diagnostics localize the bottleneck.}
+The corpus contains about 215,340 eligible train suffix-four pairs. V43 uses
+only 5,000 and revisits them about 4.8 times. On matched 512-pair samples, V43
+scores 0.99219 on sampled training pairs but only 0.58301 on unseen train pairs
+and 0.54688 on development. V42 scores 0.55078, 0.57422, and 0.53613 on the
+same sets. The large seen-only gain diagnoses pair-pool memorization rather
+than a generalized earlier-history rule.
+
+The writer diagnostic points in the opposite direction. With the autonomous
+predicted plan, ordinary anchor selection reaches 0.46110 pixel F1; even
+target-side best-of-four pixel selection reaches only 0.52006. If the evaluator
+supplies the exact target ink plan solely to test motor capacity, the unchanged
+writer reaches 0.88240 F1 with ordinary anchor selection and 0.92032 with
+target-side selection. The direct V43 anchor inverse is 0.46315. Writer
+capacity and sample selection are therefore secondary to the predicted visual
+language field. The next test should freeze V42, train a small residual
+long-history path over a nonrepeating sample of at least 24,000 pairs, and align
+pairwise anchor differences with pairwise target-image differences before
+reopening the V43 writer.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -3526,14 +3680,19 @@ than its matched global route. V31 then models a coherent multimodal continuous
 field distribution. Its spatial route detects order and local permutation and
 produces diverse context-dependent fields, yet natural path top-1 is 0.098\%
 and exact-suffix path and autonomous assignment remain at 50.488\% and 50.195\%.
-Thus adding continuous transport to the same one-glyph target does not repair
-language binding. The next experiment should stop optimizing candidate-bank
-retrieval and instead directly generate a multi-glyph answer raster from a
-causal visual state. It must retain suffix-preserving shuffle, visual-frequency,
-symbolic sequence, content-swap, prompt-counterfactual, and generated-history
-controls. Only after held-out semantic compositions and readable direct pixels
-pass should variable page length, multiple generated lines, or raw-book scale
-expand the task.
+Thus adding continuous transport to the same one-glyph target does not by itself
+repair language binding. V42 changes that narrow conclusion with a simpler
+canonical full-field objective: ordered-raster top-1 finally exceeds image
+unigram, symbolic bigram, and shuffled-history controls, and ordered target log
+probability improves by 0.17391 nat over shuffle. This is bounded positive
+natural-language evidence, even though exact-suffix assignment remains 0.53027.
+V43 then shows that a compact spatial writer can turn an exact continuous plan
+into 0.88240-F1 pixels, but the autonomous reader supplies an inadequate plan
+and a small pair pool is memorized. The next experiment therefore expands
+nonrepeating counterfactual diversity and learns a residual long-history reader
+path while freezing the accepted V42 base. Only after held-out binding and
+readable direct pixels pass should variable page length, multiple generated
+lines, historical form control, or raw-book scale expand the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -3624,40 +3783,59 @@ CUDA memory. This qualifies an image-conditioned glyph motor. Since the source
 glyph image is supplied, it does not qualify language, continuation, or
 question answering.
 
-The strongest supported claim remains narrow: one consumer GPU is enough to
-build, train, audit, package, and execute self-contained continuous visual
-language mechanisms at roughly 100M parameters and a robust image-conditioned
-motor below 23M parameters. V38 additionally shows that
-paired visual paths can produce materially better prompt reading, font
-invariance, and non-identity answer-transition geometry in under two hours,
-but no tested natural-language route qualifies autonomous Chinese or raster
-answering. No Qwen, GPT, or general-LLM parity is shown, and no matched evidence
-supports compute superiority over token models. Runtime independence does not
-erase provenance: V34 is project work, while PIXAR and Pixel-Linguist provide
-external initialization, BGE-M3 supplies offline target geometry, and
-Qwen-family models prepare V38 training paraphrases. MX-Font supplies the V41
-external motor. None is an uncredited ILM contribution or a deployed language
-teacher. Unstated upstream weight licenses prevent redistribution of the
-derived V35--V39 artifacts; V41 provenance is recorded separately.
+V42 performs the missing autonomous canonical-content test. Its
+24.35M-parameter image-only causal core trains from scratch on public-domain
+Chinese raster order in 22.91 minutes with 0.63194~GiB peak allocated memory.
+Full next-image top-1 reaches 19.9707\%, above image unigram (1.4160\%),
+symbolic bigram (12.2559\%), and shuffled earlier history (18.3594\%). Ordered
+target log probability gains 0.17391 nat over shuffled history. This is the
+project's first bounded positive natural-language result. Exact-suffix arm
+accuracy (53.0273\%) and generated pixel F1 (0.37308) fail, so V42 does not
+establish reliable binding or readable autonomous writing.
 
-The next bounded experiment starts simpler than answer-level instruction
-tuning: one canonical Chinese font, real public-domain text order, the qualified
-V34 visual state, a compact causal history model, and a probabilistic continuous
-next-glyph head. Evaluation must not supply the target glyph image. Autonomous
-raster continuations must beat visual unigram and bigram baselines and correct
-history must beat shuffled and blank history; lexical minimal pairs and exact
-copy must pass before factual question answering. Only then should the V41
-motor add font, calligraphy, or historical-form control. Stronger external
-foundations and offline teachers remain admissible when provenance, licensing,
-training role, and deployed absence are exact.
+V43 tests those failures without changing the gates. A 3,000-update pair stage
+and 5,000-update spatial-flow stage produce a 30.04M-parameter image-input,
+image-output runtime in eight minutes total, peaking at 1.19858~GiB. It
+preserves every ordered-language control win and raises generated pixel F1 to
+0.44507, but exact-suffix assignment is only 54.4922\%; V43 passes 8/10 and is
+\texttt{rejected-or-partial}. Post-result evidence shows 99.22\% seen-pair
+accuracy but only 58.30\% on unseen train pairs, while an evaluator exact ink
+plan lets the unchanged writer reach 0.88240 F1. Pair memorization and the
+autonomous visual plan, not writer capacity, are the immediate limitations.
+
+The strongest supported claim remains narrow but is now positive at the
+language-control level: one consumer GPU can train from scratch a 24.35M-
+parameter image-only causal model whose ordered Chinese raster history predicts
+the next glyph image better than matched unigram, bigram, and shuffled-history
+controls. A 5.69M-parameter spatial writer can render a supplied continuous ink
+plan at high quality. Their current autonomous composition does not pass
+counterfactual binding or readable-pixel gates. No Qwen, GPT, or general-LLM
+parity is shown, and no matched evidence supports compute superiority over token
+models. Runtime independence does not erase provenance: V34, V42, and V43 are
+project work; PIXAR and Pixel-Linguist provide external initialization to other
+branches; BGE-M3 supplies offline target geometry; Qwen-family models prepare
+V38 training paraphrases; and MX-Font supplies the V41 external motor. None is
+an uncredited ILM contribution or a deployed language teacher. Unstated
+upstream weight licenses prevent redistribution of the derived V35--V39
+artifacts; V41 provenance is recorded separately.
+
+The next bounded experiment does not enlarge the writer. It freezes the
+accepted V42 base reader, adds a small residual long-history path, consumes one
+nonrepeating pass over at least 24,000 of the roughly 215,340 eligible train
+pairs, aligns pairwise anchor differences with pairwise target-image
+differences, and distills ordinary natural-window anchors to prevent forgetting.
+Only a development improvement under the unchanged exact-suffix gate can reopen
+the V43 writer. Stronger external foundations and offline teachers remain
+admissible when provenance, licensing, training role, and deployed absence are
+exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. Neither V35--V39 nor the motor-only V41 answers such questions.
-Page-scale reading, 3D
-writing, motion, speech, and broad multilingual generation remain future
-extensions of the same sensory interface and require separate evidence.
+encodings. V42 and V43 still predict one canonical next glyph and do not answer
+such questions. Page-scale reading, historical answer composition, 3D writing,
+motion, speech, and broad multilingual generation remain future extensions of
+the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
 \bibitem{gpt3} Brown et al. Language Models are Few-Shot Learners. \url{https://arxiv.org/abs/2005.14165}
 \bibitem{gpt4} OpenAI. GPT-4 Technical Report. \url{https://arxiv.org/abs/2303.08774}

@@ -16,11 +16,53 @@
 
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V41
-motor measurement and its strict non-language boundary are reported directly
-below.*
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
+V42/V43 canonical Chinese result and its narrower claim boundary are reported
+directly below.*
 
-## Current Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
+## Current Evidence: V42 Learns Raster Language; V43 Still Fails Binding
+
+![Measured V42/V43 result: an image-only causal reader beats unigram, bigram, and shuffled-history controls, while a bank-free flow writer improves glyph form but misses counterfactual binding and pixel-F1 gates](publication/ilm-image-native/figures/canonical_glyph_flow_v43_result.png)
+
+Canonical Glyph Language V42 is the first bounded positive natural-language
+result in this repository. Its `24,346,497`-parameter causal model receives only
+ordered `64 x 1 x 32 x 32` glyph rasters and predicts a continuous next-image
+field. On 2,048 fixed development windows, full-history top-1 is `19.9707%`,
+above image unigram (`1.4160%`), symbolic bigram (`12.2559%`), and shuffled
+earlier history (`18.3594%`). Ordered target log probability improves over
+shuffled history by `0.17391` nat. The run completes 10,000 updates in `22.91`
+minutes with `0.632 GiB` peak allocated CUDA memory on one RTX 4090 D.
+
+This establishes a narrow but real result: ordered writing pixels carry usable
+next-glyph language information without a tokenizer, token or Unicode IDs, OCR,
+a visual codebook, glyph lookup, an external runtime LM, or a deployed candidate
+bank. V42 is not a complete ILM. Exact-suffix counterfactual arm accuracy is
+only `53.0273%`, and generated pixel F1 is only `0.37308`.
+
+V43 tests those two failures. It fine-tunes the reader with train-only
+same-suffix raster pairs, freezes it, and trains a `5,693,697`-parameter spatial
+rectified-flow writer. The full `30,040,194`-parameter model preserves all four
+language-control wins and raises autonomous generated pixel F1 to `0.44507`.
+Its outputs are visibly more coherent and remain bank-free during generation,
+but exact-suffix arm accuracy reaches only `54.4922%`. It therefore fails the
+unchanged `> 0.60` binding and `> 0.55` pixel-F1 gates. V43 is **partial**, and
+the frozen partition remains unopened.
+
+A post-result diagnostic explains where to work next. V43 scores `99.22%` on
+sampled training pairs but only `58.30%` on unseen train pairs and `54.69%` on
+development pairs: the 5,000-pair pool was memorized. By contrast, the spatial
+writer reaches `0.8824` pixel F1 when the evaluator supplies an exact target ink
+plan, versus `0.4611` from the autonomous predicted plan. The writer can render;
+the continuous visual language state is now the dominant bottleneck.
+
+See the [V42 protocol](references/canonical_glyph_language_v42_protocol.md),
+[V43 protocol](references/canonical_glyph_flow_v43_protocol.md),
+[measured V43 result and diagnosis](references/canonical_glyph_flow_v43_result.md),
+[tracked V42 evidence](publication/ilm-image-native/evidence/v42),
+[tracked V43 evidence](publication/ilm-image-native/evidence/v43), and
+[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
+
+## Prior Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
 
 ![Measured V41 result: a pinned image-conditioned glyph motor improves imperfect V34 projections while preserving visible glyph identity](publication/ilm-image-native/figures/glyph_motor_bridge_v41_result.png)
 
@@ -228,9 +270,16 @@ low-rank visual target space. V37 fixes clean masks, adapts the reader end to
 end, and distills a strong multilingual semantic geometry offline. It raises
 prompt top-1 to `47.45%` and answer-plan top-1 to `20.41%`, but still fails the
 conjunctive semantic gate because absolute alignment, font/wording invariance,
-margins, and length remain inadequate. The next proof targets those specific
-failures; page scale, raster generation, 3D geometry, and motion remain
-deferred.
+margins, and length remain inadequate. V38 improves visual reading and
+invariance without solving held-out answer semantics; V39.1 calibrates answer
+length but fails trajectory semantics; and V41 qualifies an isolated external
+glyph motor. V42 then provides the first bounded positive ordered-raster
+language result. V43 adds a capable bank-free spatial writer but diagnoses
+memorized pair supervision and an inadequate autonomous image plan. The next
+proof therefore freezes V42, learns a small residual long-history binding path
+from a nonrepeating sample of the much larger pair pool, and reuses the V43
+writer only after the reader gate improves. Page-scale prompting, historical
+answer generation, 3D geometry, and motion remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames
