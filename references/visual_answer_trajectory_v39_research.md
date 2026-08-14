@@ -61,20 +61,20 @@ reconstruction latent is not used as the sole V39 semantic target.
 
 The local `data/raw/alpaca_zh.json` contains 48,818 valid Chinese instruction
 rows. V38's 32-character answer limit admitted only 6,231 raw rows and 5,822
-training rows. With prompts limited to 160 visible characters, 48,771 rows are
+training rows. With prompts limited to 160 visible characters, 48,775 rows are
 eligible before answer segmentation.
 
 A deterministic punctuation-aware segmentation audit produced:
 
 | Maximum visible characters per span | Records with at most 16 spans | Coverage |
 |---:|---:|---:|
-| 24 | 30,652 | 62.85% |
-| 32 | 38,690 | 79.33% |
-| 40 | 46,106 | 94.54% |
-| 48 | 47,926 | 98.27% |
+| 24 | 31,005 | 63.57% |
+| 32 | 38,751 | 79.45% |
+| 40 | 46,159 | 94.64% |
+| 48 | 47,951 | 98.31% |
 
-For 48-character spans, the median, 90th, and 95th percentile answer lengths
-are 6, 13, and 14 spans. A 16-state trajectory therefore retains nearly the
+For 48-character-scale spans, the median, 90th, and 95th percentile answer
+lengths are 5, 12, and 13 spans. A 16-state trajectory therefore retains nearly the
 whole corpus without truncation. Segmentation is an offline layout operation:
 the model receives rendered pixels and visual masks, not characters or segment
 strings.
