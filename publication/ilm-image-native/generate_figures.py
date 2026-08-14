@@ -973,7 +973,7 @@ def yan_cover_hero() -> None:
     d.text((74, 157), "A student reads written language as pixels and renders its answer as a page image.", font=font(25), fill="#dbeafe")
     d.rounded_rectangle((1390, 62, 1728, 146), radius=12, fill="#f8fafc", outline="#67e8f9", width=2)
     centered_text(d, (1402, 68, 1716, 105), "CONCEPT TARGET", font(20, True), "#0f5361")
-    centered_text(d, (1402, 104, 1716, 138), "measured V38 shown separately", font(16), "#475467")
+    centered_text(d, (1402, 104, 1716, 138), "measured V42 to V45 shown separately", font(16), "#475467")
 
     paths = yan_paths()
     input_box = (70, 350, 505, 855)
@@ -1009,7 +1009,7 @@ def yan_cover_hero() -> None:
     for index, (stage, sublabel, path, char) in enumerate(glyphs):
         x1 = 1300 + index * 101
         light_glyph(canvas, (x1, 585, x1 + 91, 790), stage, path, char=char, sublabel=sublabel)
-    centered_text(d, (1300, 798, 1705, 852), "Illustrative target\nnot a measured V38 output", font(17, True), "#9a3412")
+    centered_text(d, (1300, 798, 1705, 852), "Illustrative target\nnot a measured model output", font(17, True), "#9a3412")
 
     arrow_any(d, (505, 605), (655, 605), "#526779", 5)
     arrow_any(d, (1110, 605), (1255, 605), "#526779", 5)
@@ -1017,7 +1017,13 @@ def yan_cover_hero() -> None:
     centered_text(d, (1120, 555, 1245, 590), "pixels", font(18, True), "#475467")
 
     d.rounded_rectangle((70, 910, 1730, 968), radius=10, fill="#e8f1f5", outline="#9fb3c8", width=2)
-    d.text((92, 926), "Boundary: no token IDs, Unicode labels, OCR, or external LM inside the student path.  V38 is not qualified; writer remains closed.", font=font(19, True), fill="#243b53")
+    d.text(
+        (92, 926),
+        "Boundary: no token IDs, Unicode labels, OCR, or external LM in the student path. "
+        "V45 qualifies geometry, not language; writer and frozen split stay closed.",
+        font=font(18, True),
+        fill="#243b53",
+    )
     canvas.convert("RGB").save(FIG / "ilm_v_yan_readme_hero.png", quality=95)
 
 

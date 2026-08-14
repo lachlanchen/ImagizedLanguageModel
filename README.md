@@ -17,10 +17,10 @@
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
 use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
-V42--V44 canonical Chinese results and their narrower claim boundary are
+V42--V45 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current Evidence: V42 Learns Raster Language; V43/V44 Still Fail Binding
+## Current Evidence: V42 Learns Raster Language; V45 Repairs Its Target Geometry
 
 ![Measured V42/V43 result: an image-only causal reader beats unigram, bigram, and shuffled-history controls, while a bank-free flow writer improves glyph form but misses counterfactual binding and pixel-F1 gates](publication/ilm-image-native/figures/canonical_glyph_flow_v43_result.png)
 
@@ -80,14 +80,42 @@ test must therefore center and variance-balance the continuous raster field,
 then qualify that representation on held-out image geometry before training
 another reader or reopening the writer.
 
+![Measured V45 result: an exactly invertible, training-only retinal field removes the common image mode, improves held-pair displacement geometry, and preserves font and translation continuity](publication/ilm-image-native/figures/noise_limited_retinal_field_v45_result.png)
+
+V45 performs that preregistered representation test without training a reader
+or writer. It fits a zero-parameter, invertible matrix-power field from 8,000
+training-only canonical rasters and emits continuous direction plus log radius.
+Across 14,144 fit, held-font, and one-pixel-shift rasters, maximum FP64 DCT
+reconstruction error is `4.26e-14`, binary pixel accuracy and ink F1 are both
+`1.0`, and no output is blank.
+
+The target geometry improves on every fixed measure. Weighted common resultant
+falls from `0.7190` to `0.01524`, while effective rank rises from `145.08` to
+`185.38`. On the pinned 1,024-pair V44 holdout, candidate-pair cosine falls from
+`0.56319` to `0.06402`, fifth-percentile displacement norm more than doubles
+from `0.36976` to `0.77724`, and displacement effective/stable ranks rise from
+`122.80/60.82` to `144.95/67.79`. Held-font and shift retrieval gates also pass.
+V45 passes **13/13** gates in `66.51` seconds with `0.302 GiB` peak allocated
+CUDA memory on one RTX 4090 D.
+
+This qualifies an image-only **representation**, not a language model. Applying
+V45 after the already-trained V42 reader reduces matched natural top-1 from
+`19.43%` to `15.04%`; that preregistered report-only diagnostic rejects a
+retrofit between incompatible coordinate systems. The next authorized test is
+a separately preregistered causal reader trained from scratch in V45 geometry.
+The V43 writer and frozen partition remain closed.
+
 See the [V42 protocol](references/canonical_glyph_language_v42_protocol.md),
 [V43 protocol](references/canonical_glyph_flow_v43_protocol.md),
 [measured V43 result and diagnosis](references/canonical_glyph_flow_v43_result.md),
 [V44 protocol](references/canonical_glyph_binding_v44_protocol.md),
 [measured V44 result and diagnosis](references/canonical_glyph_binding_v44_result.md),
+[V45 protocol](references/noise_limited_retinal_field_v45_protocol.md),
+[measured V45 result](references/noise_limited_retinal_field_v45_result.md),
 [tracked V42 evidence](publication/ilm-image-native/evidence/v42),
 [tracked V43 evidence](publication/ilm-image-native/evidence/v43),
-[tracked V44 evidence](publication/ilm-image-native/evidence/v44), and
+[tracked V44 evidence](publication/ilm-image-native/evidence/v44),
+[tracked V45 evidence](publication/ilm-image-native/evidence/v45), and
 [compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
 
 ## Prior Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
@@ -305,10 +333,12 @@ glyph motor. V42 then provides the first bounded positive ordered-raster
 language result. V43 adds a capable bank-free spatial writer but diagnoses
 memorized pair supervision and an inadequate autonomous image plan. V44 removes
 that memorization gap with a one-pass frozen-base residual, yet fails held-out
-binding and drifts toward the corpus-common image field. The next proof therefore
-tests a centered, variance-balanced, invertible raster representation before
-training another reader; the V43 writer remains closed. Page-scale prompting,
-historical answer generation, 3D geometry, and motion remain deferred.
+binding and drifts toward the corpus-common image field. V45 then qualifies a
+centered, variance-balanced, exactly invertible raster representation on all 13
+fixed geometry, continuity, boundary, and resource gates. Its failed V42 retrofit
+shows why the next reader must train from scratch in the new coordinates; the V43
+writer remains closed. Page-scale prompting, historical answer generation, 3D
+geometry, and motion remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames

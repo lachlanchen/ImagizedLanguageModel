@@ -60,6 +60,10 @@ closed.
   hash-pinned evidence renderer.
 - `publication/ilm-image-native/figures/noise_limited_retinal_field_v45_result.png`:
   generated result figure.
+- `publication/ilm-image-native/generate_figures.py` and
+  `publication/ilm-image-native/figures/ilm_v_yan_readme_hero.png`: change only
+  the embedded experiment-boundary footer from stale V38 wording to the current
+  V45 representation/language boundary.
 - `references/noise_limited_retinal_field_v45_result.md`: bounded decision and
   metric audit.
 - This revision plan's execution record.
@@ -114,4 +118,26 @@ paper. The resulting Git commit is the traceable revision baseline.
 
 ## Execution Record
 
-Pending.
+Completed on 2026-08-15:
+
+- copied the official production report and created a tensor-free checkpoint
+  receipt with matching checkpoint, field-state, corpus, protocol, partition,
+  and held-pair hashes;
+- independently recomputed the tracked report's gate map with the repository
+  evaluator and matched all 13 passing gates exactly;
+- generated the V45 figure twice with identical SHA-256
+  `021cecb9256c9206a82a7cb4fa8aca6d950dc3769bae90085d97dd28d5ada542`;
+- passed Ruff and Python compilation for the V45 model, evaluator, audit script,
+  tests, and both touched figure generators;
+- passed all 23 focused V42--V45 tests, with one upstream `fontTools`
+  deprecation warning;
+- rebuilt the 87-page active paper through two LaTeX passes with no undefined
+  citation/reference, LaTeX error, fatal error, or overfull-box report;
+- searched extracted PDF text for `13/13`, the `0.19434` to `0.15039` retrofit
+  decline, the qualified-representation wording, and the next-reader boundary;
+- visually inspected the abstract and concept hero on pages 2--3, V45 table on
+  page 68, V45 result figure on page 69, and synthesis/conclusion on page 84;
+- corrected only the concept hero's stale V38 footer and float placement after
+  PDF inspection, leaving its illustrative answer explicitly unmeasured; and
+- confirmed that the next causal reader requires separate preregistration and
+  that the V43 writer and frozen partition remain closed.

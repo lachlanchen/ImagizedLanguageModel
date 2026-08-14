@@ -131,10 +131,19 @@ gap, but development binding reaches only 53.42\% and matched natural top-1
 falls from 19.43\% to 17.43\%. A post-result audit finds that the learned update
 is negatively aligned with target-image displacement and drifts toward the
 corpus-common image field. V44 passes 8/14 gates and is rejected-or-partial;
-the writer and frozen partition remain unopened.
+the writer and frozen partition remain unopened. V45 then fits a fixed,
+zero-parameter, exactly invertible matrix-power field from 8,000 training-only
+rasters. It lowers weighted common resultant from 0.7190 to 0.0152, raises
+effective rank from 145.08 to 185.38, and improves all four displacement
+measures on the pinned 1,024-pair V44 holdout while preserving held-font and
+one-pixel-shift retrieval. V45 passes 13/13 preregistered representation gates
+in 66.51 seconds with 0.302~GiB peak allocated memory. A report-only V42
+retrofit lowers natural top-1 from 19.43\% to 15.04\%, so V45 qualifies target
+geometry, not language; the next reader must train from scratch in these
+coordinates, and the writer and frozen partition remain unopened.
 \end{abstract}
 
-\begin{figure}[t]
+\begin{figure}[h!]
   \centering
   \includegraphics[width=\linewidth]{figures/ilm_v_yan_readme_hero.png}
   \caption{Image-native language modeling design target. A restrained AgInTi
@@ -142,8 +151,9 @@ the writer and frozen partition remain unopened.
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output. V42 supplies bounded positive
   ordered-raster language evidence; V43 and V44 remain partial or rejected
-  binding results reported in Figures~\ref{fig:v43result}
-  and~\ref{fig:v44result}.}
+  binding results, while V45 qualifies only their replacement target geometry,
+  as reported in Figures~\ref{fig:v43result}, \ref{fig:v44result},
+  and~\ref{fig:v45result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -279,6 +289,12 @@ and controls that makes a stronger image-native language claim falsifiable:
   retention. A scale-and-direction audit identifies drift toward a
   corpus-common image mode, motivating a representation test rather than a
   larger reader or writer.
+  \item V45, a zero-parameter, training-only noise-limited retinal field with
+  an exact direction-plus-radius inverse. It passes 13/13 fixed reconstruction,
+  common-mode, rank, held-pair displacement, font, translation, boundary, and
+  resource gates. A failed report-only V42 retrofit prevents a calibration
+  shortcut and authorizes only a new causal reader trained from initialization
+  in V45 coordinates.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -3019,7 +3035,7 @@ canonical content state from raster history without receiving the evaluator's
 target glyph, then beat visual unigram, bigram, shuffled-history, and
 blank-history controls under autonomous pixel feedback.
 
-\subsection{Canonical Glyph Language V42--V44}
+\subsection{Canonical Glyph Language V42--V45}
 
 \paragraph{A canonical image field isolates language before historical form.}
 V42 deliberately removes style variation and answer-level instruction tuning.
@@ -3219,6 +3235,88 @@ erasing discriminative displacement. Another larger residual on that target is
 therefore unjustified. The next bounded test must center and variance-balance a
 reversible continuous raster field and qualify its held-out image geometry
 before another causal reader or the V43 writer is opened.
+
+\paragraph{V45 qualifies a reversible noise-limited retinal field.}
+Motivated by noise-limited efficient coding \cite{atickredlich} and symmetric
+whitening that preserves the original coordinate orientation
+\cite{kessywhitening}, V45 fits only fixed statistics from the 8,000 most frequent training-partition
+canonical rasters, covering 99.9249\% of retained Han instances. Let $d$ be the
+unnormalized orthonormal DCT of a signed $32\times32$ raster, let $w_i$ be
+normalized corpus counts, and define
+\[
+\mu=\sum_i w_i d_i,\qquad
+C=\sum_iw_i(d_i-\mu)(d_i-\mu)^\mathsf{T}
+=U\operatorname{diag}(\lambda)U^\mathsf{T},\qquad
+\bar\lambda=\frac{\operatorname{tr}(C)}{1024}.
+\]
+The preregistered transform uses a noise ridge equal to half the mean variance
+and a fractional matrix power,
+\[
+A=U\operatorname{diag}\!\left[
+  (\max(\lambda,0)+0.50\bar\lambda)^{-0.10}
+\right]U^\mathsf{T},\quad
+z=A(d-\mu),\quad u=\frac{z}{\lVert z\rVert_2},\quad
+q=\log\lVert z\rVert_2.
+\]
+The continuous state is $(u,q)$, not an index. Its exact inverse is
+$d=\mu+A^{-1}(e^q u)$. The deployed field has zero trainable parameters and no
+token, Unicode or character ID, OCR engine, visual codebook, quantizer, glyph
+lookup, external language model, or candidate bank.
+
+The fixed reconstruction audit spans all 8,000 fit rasters, two held fonts over
+1,024 identities, and four cardinal one-pixel translations over the same
+identities. Across these 14,144 rasters, maximum FP64 DCT reconstruction error
+is $4.2633\times10^{-14}$; binary pixel accuracy and ink F1 are both 1.0; every
+field is finite; and blank rate is zero. Table~\ref{tab:v45field} reports the
+geometry and continuity gates.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Fixed audit metric & Raw DCT & V45 & Requirement / result \\
+\midrule
+Weighted common resultant & 0.71900 & 0.01524 & $<0.05$ and $<0.1\times$; pass \\
+Fit covariance effective rank & 145.08 & 185.38 & $\geq1.20\times$; pass \\
+Bold held-font top-1 & 0.96582 & 0.96582 & loss $\leq0.01$; pass \\
+Serif held-font top-1 & 0.82129 & 0.83984 & loss $\leq0.01$; pass \\
+Mean cardinal-shift top-1 & 0.75781 & 0.76660 & no loss $>0.02$; pass \\
+Held-pair candidate cosine & 0.56319 & 0.06402 & reduction $\geq0.25$; pass \\
+Held-pair displacement norm p05 & 0.36976 & 0.77724 & $\geq1.50\times$; pass \\
+Held-pair displacement effective rank & 122.80 & 144.95 & $\geq1.10\times$; pass \\
+Held-pair displacement stable rank & 60.82 & 67.79 & $\geq1.08\times$; pass \\
+\bottomrule
+\end{tabular}
+\caption{V45 preregistered representation audit. Pair metrics use the exact
+1,024-pair V44 holdout receipt. Font and shift rows compare retrieval against
+the same 1,024 canonical identities. Reconstruction, image-only-boundary, and
+resource gates also pass, yielding 13/13 conjunctive conditions.}
+\label{tab:v45field}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/noise_limited_retinal_field_v45_result.png}
+  \caption{Measured V45 result rendered from hash-pinned report and checkpoint
+  receipts. The fixed direction-plus-radius field is exactly invertible,
+  suppresses the common raster mode, increases held-pair displacement magnitude
+  and rank, and preserves held-font and translation retrieval. The lower-right
+  retrofit is explicitly report-only: V45 qualifies a representation, not a
+  language model.}
+  \label{fig:v45result}
+\end{figure}
+
+V45 completes in 66.51 seconds with 0.30211~GiB peak allocated CUDA memory on
+one RTX 4090 D, reconstructs its on-disk field state with the recorded SHA-256,
+and passes all 13 gates. The frozen evaluation images and V43 writer remain
+unopened. A preregistered, non-gating coordinate retrofit applies V45 after the
+already-trained V42 reader; natural top-1 falls from 0.19434 to 0.15039 and
+target log probability from $-5.23837$ to $-7.13590$. V42 optimized anchors in
+raw normalized-DCT geometry, so this decline rejects a post-hoc calibration
+bridge rather than the new geometry. The authorized next experiment must be
+separately preregistered and train a causal raster reader from initialization
+with V45 targets and feedback before any writer composition is reconsidered.
 
 \section{Data}
 
@@ -3908,6 +4006,18 @@ displacement and increases alignment to the corpus-mean image field. This
 localizes the next bottleneck to target representation rather than adapter
 scale, pair count, or spatial-writer capacity.
 
+V45 executes that representation test with a fixed, invertible fractional
+matrix-power field fitted from 8,000 training-only rasters. It passes all 13
+preregistered gates: common resultant falls from 0.7190 to 0.0152, fit-field
+effective rank rises from 145.08 to 185.38, all four pinned held-pair
+displacement gates pass, held-font and one-pixel-shift retrieval are retained,
+and all 14,144 audited rasters reconstruct exactly at binary resolution. The
+zero-parameter audit takes 66.51 seconds and 0.30211~GiB peak allocated memory.
+This qualifies V45 as target geometry. A report-only post-hoc V42 retrofit
+reduces natural top-1 from 19.43\% to 15.04\%, rejecting a coordinate shortcut
+and requiring the next causal reader to learn in V45 geometry from
+initialization.
+
 The strongest supported claim remains narrow but is now positive at the
 language-control level: one consumer GPU can train from scratch a 24.35M-
 parameter image-only causal model whose ordered Chinese raster history predicts
@@ -3916,8 +4026,8 @@ controls. A 5.69M-parameter spatial writer can render a supplied continuous ink
 plan at high quality. Their current autonomous composition does not pass
 counterfactual binding or readable-pixel gates. No Qwen, GPT, or general-LLM
 parity is shown, and no matched evidence supports compute superiority over token
-models. Runtime independence does not erase provenance: V34, V42, and V43 are
-project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
+models. Runtime independence does not erase provenance: V34, V42, V43, and V45
+are project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
 provide external initialization to other
 branches; BGE-M3 supplies offline target geometry; Qwen-family models prepare
 V38 training paraphrases; and MX-Font supplies the V41 external motor. None is
@@ -3925,22 +4035,21 @@ an uncredited ILM contribution or a deployed language teacher. Unstated
 upstream weight licenses prevent redistribution of the derived V35--V39
 artifacts; V41 provenance is recorded separately.
 
-The next bounded experiment does not enlarge the reader or writer. It estimates
-common modes from training rasters only, constructs a centered and
-variance-balanced continuous image field with an explicitly reversible raster
-path, and tests whether held-out target displacements and natural-image
-retrieval become better conditioned. Only a representation that passes frozen
-image-geometry gates may replace V42's raw normalized DCT target in another
-causal run; only a subsequent development binding improvement can reopen the
-V43 writer. Stronger external foundations and offline teachers remain
-admissible when provenance, licensing, training role, and deployed absence are
-exact.
+The next bounded experiment does not enlarge or retrofit the old reader and
+does not open the writer. It must be preregistered, initialize a new causal
+raster reader, replace V42's raw normalized DCT target and feedback with V45
+direction plus radius, and use the same public-domain stream and matched V42
+language controls. Only a development result that preserves the ordered-raster
+signal and improves counterfactual binding may reopen the V43 writer or frozen
+partition. Stronger external foundations and offline teachers remain admissible
+when provenance, licensing, training role, and deployed absence are exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. V42--V44 still predict one canonical next glyph and do not answer
-such questions. Page-scale reading, historical answer composition, 3D writing,
+encodings. V42--V45 still predict or qualify only one canonical next-glyph
+interface and do not answer such questions. Page-scale reading, historical
+answer composition, 3D writing,
 motion, speech, and broad multilingual generation remain future extensions of
 the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
@@ -3959,6 +4068,8 @@ the same sensory interface and require separate evidence.
 \bibitem{pixelsentence} Xiao et al. Pixel Sentence Representation Learning. \url{https://arxiv.org/abs/2402.08183}
 \bibitem{bgem3} Chen et al. BGE M3-Embedding: Multi-Lingual, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation. \url{https://arxiv.org/abs/2402.03216}
 \bibitem{vicreg} Bardes, Ponce, and LeCun. VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning. \url{https://arxiv.org/abs/2105.04906}
+\bibitem{atickredlich} Atick and Redlich. What Does the Retina Know about Natural Scenes? \emph{Neural Computation}, 4(2):196--210, 1992. \url{https://doi.org/10.1162/neco.1992.4.2.196}
+\bibitem{kessywhitening} Kessy, Lewin, and Strimmer. Optimal Whitening and Decorrelation. \emph{The American Statistician}, 72(4):309--314, 2018. \url{https://arxiv.org/abs/1512.00809}
 \bibitem{pixar} Tai et al. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \url{https://arxiv.org/abs/2401.03321}
 \bibitem{mixar} Hu et al. MIXAR: Scaling Autoregressive Pixel-based Language Models to Multiple Languages and Scripts. \url{https://arxiv.org/abs/2604.11575}
 \bibitem{pixelgpt} Chai et al. Autoregressive Pre-Training on Pixels and Texts. \url{https://arxiv.org/abs/2404.10710}

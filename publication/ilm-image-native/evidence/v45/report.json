@@ -1,0 +1,374 @@
+{
+  "boundary": {
+    "architecture": "noise-limited-retinal-field-v45",
+    "candidate_bank_deployed": false,
+    "config": {
+      "binary_threshold": 0.5,
+      "fit_bank_size": 8000,
+      "identity_bank_size": 1024,
+      "radius_epsilon": 1e-08,
+      "ridge_ratio": 0.5,
+      "size": 32,
+      "whitening_power": 0.1
+    },
+    "exact_radial_side_channel": true,
+    "fixed_dct": true,
+    "fixed_invertible_matrix_power": true,
+    "input_is_continuous_raster": true,
+    "output_is_continuous_direction_and_radius": true,
+    "statistics_are_buffers": true,
+    "trainable_parameters": 0,
+    "uses_character_ids": false,
+    "uses_external_language_model": false,
+    "uses_glyph_lookup": false,
+    "uses_ocr": false,
+    "uses_quantization": false,
+    "uses_strings": false,
+    "uses_token_ids": false,
+    "uses_unicode_ids": false,
+    "uses_visual_codebook": false,
+    "uses_vocabulary_embedding": false,
+    "uses_vocabulary_output": false
+  },
+  "boundary_clean": true,
+  "checkpoint": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/noise_limited_retinal_field_v45_20260814/field.pt",
+  "checkpoint_reload_verified": true,
+  "checkpoint_sha256": "0e5947d85a8baeff99d92996ee8434d3aceab39e64042c9b6ec1a142aa174534",
+  "claim_status": "qualified-retinal-field",
+  "config": {
+    "binary_threshold": 0.5,
+    "fit_bank_size": 8000,
+    "identity_bank_size": 1024,
+    "radius_epsilon": 1e-08,
+    "ridge_ratio": 0.5,
+    "size": 32,
+    "whitening_power": 0.1
+  },
+  "descriptive_controls": {
+    "full_zca": {
+      "effective_rank": 389.7108459472656,
+      "examples": 8000.0,
+      "maximum_eigenvalue": 0.014991960488259792,
+      "radius_maximum": 29.98141860961914,
+      "radius_median": 20.78412437438965,
+      "radius_minimum": 6.910545349121094,
+      "stable_rank": 277.37738037109375,
+      "trace": 0.9996261596679688,
+      "weighted_resultant_length": 0.019337216392159462
+    },
+    "mean_center_only": {
+      "effective_rank": 139.96800231933594,
+      "examples": 8000.0,
+      "maximum_eigenvalue": 0.049489669501781464,
+      "radius_maximum": 25.940507888793945,
+      "radius_median": 23.097412109375,
+      "radius_minimum": 18.323200225830078,
+      "stable_rank": 69.63471221923828,
+      "trace": 0.9998570680618286,
+      "weighted_resultant_length": 0.011958098970353603
+    }
+  },
+  "development_fonts": [
+    {
+      "bytes": 20050760,
+      "path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+      "sha256": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb"
+    },
+    {
+      "bytes": 26555992,
+      "path": "/usr/share/fonts/opentype/noto/NotoSerifCJK-Medium.ttc",
+      "sha256": "9a9bec9cdcbb187384748656fa8e63f3c29b30c84e20fb91ec0af944e2bc2a29"
+    }
+  ],
+  "elapsed_seconds": 66.50835551368073,
+  "experiment": "noise-limited-retinal-field-v45",
+  "field_geometry": {
+    "effective_rank": 185.37869262695312,
+    "examples": 8000.0,
+    "maximum_eigenvalue": 0.03793714568018913,
+    "radius_maximum": 24.705703735351562,
+    "radius_median": 21.393932342529297,
+    "radius_minimum": 14.362883567810059,
+    "stable_rank": 97.12391662597656,
+    "trace": 0.9997677803039551,
+    "weighted_resultant_length": 0.015239826403558254
+  },
+  "field_pair_geometry": {
+    "candidate_pair_cosine": 0.06401517987251282,
+    "candidate_pair_separation": 0.9359847903251648,
+    "delta_effective_rank": 144.9454345703125,
+    "delta_norm_median": 1.4118080139160156,
+    "delta_norm_p05": 0.7772442698478699,
+    "delta_norm_p95": 1.4997475147247314,
+    "delta_stable_rank": 67.7912368774414,
+    "pairs": 1024.0
+  },
+  "field_state_sha256": "08b57734ac3ded0c1438cc4bf963d92357ce1f1d31ae49ee6548c56c19db019d",
+  "fit_font": {
+    "bytes": 19484784,
+    "path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+  },
+  "fit_sequence": {
+    "characters_sha256": "706c457d4864f0357b9f8f42ec15f17c197b96d5fd8a68572312a7586ac41631",
+    "count": 8000,
+    "counts_sha256": "9580d1515f7885943ed838aeebb592d60c1e1886d5de1936747d56ae9f17a6c7",
+    "joint_sha256": "eb0a4ede44a062eb4107fa857c0cda488734b9ddf5ad56e30a5f375516e61fd8",
+    "retained_fraction_of_han_instances": 0.9992490853893,
+    "retained_instances": 5457239
+  },
+  "frozen_partition_opened": false,
+  "frozen_v42_retrofit_report_only": {
+    "raw": {
+      "examples": 2048.0,
+      "target_log_probability": -5.238370351493359,
+      "top1": 0.1943359375
+    },
+    "v45": {
+      "examples": 2048.0,
+      "target_log_probability": -7.135901533067226,
+      "top1": 0.150390625
+    }
+  },
+  "gates": {
+    "common_resultant_removed": true,
+    "effective_rank_gain": true,
+    "exact_binary_roundtrip": true,
+    "finite_and_nonblank": true,
+    "fp64_dct_roundtrip": true,
+    "held_font_continuity": true,
+    "image_only_training_boundary": true,
+    "one_pixel_shift_continuity": true,
+    "pair_cosine_reduction": true,
+    "pair_effective_rank_gain": true,
+    "pair_low_quantile_norm_gain": true,
+    "pair_stable_rank_gain": true,
+    "resource_bound": true
+  },
+  "gates_passed": 13,
+  "gates_total": 13,
+  "held_fonts": {
+    "NotoSansCJK-Bold.ttc": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.7828809022903442,
+        "target_cosine_minimum": 0.43554747104644775,
+        "top1": 0.9658203125,
+        "top5": 0.98828125
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.5576394200325012,
+        "target_cosine_minimum": -0.023042261600494385,
+        "top1": 0.9658203125,
+        "top5": 0.9892578125
+      }
+    },
+    "NotoSerifCJK-Medium.ttc": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.7900199890136719,
+        "target_cosine_minimum": 0.43554675579071045,
+        "top1": 0.8212890625,
+        "top5": 0.91796875
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.5159693360328674,
+        "target_cosine_minimum": -0.16779737174510956,
+        "top1": 0.83984375,
+        "top5": 0.935546875
+      }
+    }
+  },
+  "holdout_pair_receipt": {
+    "count": 1024,
+    "sha256": "e41637c5e3846e47d19ade6312205cd30c2c96c65730bce75ee8ab4a0745154c",
+    "unique_suffixes": 1024
+  },
+  "manifest": {
+    "bytes": 13659628,
+    "path": "data/visual_grammar/chinese_wikisource_public_domain.jsonl",
+    "records": 7017,
+    "rights": {
+      "public-domain historical text; Wikisource CC BY-SA contribution layer": 7017
+    },
+    "sha256": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+    "source_titles": {
+      "\u4e09\u570b\u6f14\u7fa9": 1222,
+      "\u4eba\u9593\u8a5e\u8a71": 58,
+      "\u53e4\u6587\u89c0\u6b62": 567,
+      "\u5609\u7950\u96c6": 200,
+      "\u5927\u5510\u897f\u57df\u8a18": 259,
+      "\u5999\u6cd5\u84ee\u83ef\u7d93": 167,
+      "\u5c1a\u66f8": 116,
+      "\u5e7c\u5b78\u74ca\u6797": 38,
+      "\u6771\u5761\u5168\u96c6": 206,
+      "\u6b12\u57ce\u96c6": 730,
+      "\u6c34\u6ef8\u50b3\uff08120\u56de\u672c\uff09": 1845,
+      "\u6d1b\u967d\u4f3d\u85cd\u8a18": 70,
+      "\u8001\u5b50\u60f3\u723e\u6ce8": 26,
+      "\u897f\u904a\u8a18": 1446,
+      "\u91d1\u525b\u822c\u82e5\u6ce2\u7f85\u871c\u7d93": 14,
+      "\u9577\u6625\u771f\u4eba\u897f\u904a\u8a18": 53
+    },
+    "strict_digest": true
+  },
+  "one_pixel_shifts": {
+    "down": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.7316513061523438,
+        "target_cosine_minimum": 0.4257813096046448,
+        "top1": 0.630859375,
+        "top5": 0.837890625
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.42370712757110596,
+        "target_cosine_minimum": -0.14715635776519775,
+        "top1": 0.654296875,
+        "top5": 0.8671875
+      }
+    },
+    "left": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.778106689453125,
+        "target_cosine_minimum": 0.5703125,
+        "top1": 0.8857421875,
+        "top5": 0.990234375
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.49061575531959534,
+        "target_cosine_minimum": 0.1263623833656311,
+        "top1": 0.8779296875,
+        "top5": 0.990234375
+      }
+    },
+    "right": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.778106689453125,
+        "target_cosine_minimum": 0.5703120231628418,
+        "top1": 0.8984375,
+        "top5": 0.9912109375
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.4913029670715332,
+        "target_cosine_minimum": 0.1330491006374359,
+        "top1": 0.8837890625,
+        "top5": 0.9931640625
+      }
+    },
+    "up": {
+      "raw": {
+        "examples": 1024.0,
+        "target_cosine": 0.7316513061523438,
+        "target_cosine_minimum": 0.4257814884185791,
+        "top1": 0.6162109375,
+        "top5": 0.841796875
+      },
+      "v45": {
+        "examples": 1024.0,
+        "target_cosine": 0.42207199335098267,
+        "target_cosine_minimum": -0.1824750155210495,
+        "top1": 0.650390625,
+        "top5": 0.865234375
+      }
+    }
+  },
+  "peak_allocated_vram_gib": 0.30211448669433594,
+  "raw_geometry": {
+    "effective_rank": 145.07627868652344,
+    "examples": 8000.0,
+    "maximum_eigenvalue": 0.021392209455370903,
+    "radius_maximum": 32.000003814697266,
+    "radius_median": 32.0,
+    "radius_minimum": 31.999998092651367,
+    "stable_rank": 72.95317077636719,
+    "trace": 0.48303452134132385,
+    "weighted_resultant_length": 0.7190031409263611
+  },
+  "raw_pair_geometry": {
+    "candidate_pair_cosine": 0.5631943941116333,
+    "candidate_pair_separation": 0.4368056654930115,
+    "delta_effective_rank": 122.80028533935547,
+    "delta_norm_median": 0.9762811660766602,
+    "delta_norm_p05": 0.3697550296783447,
+    "delta_norm_p95": 1.0677258968353271,
+    "delta_stable_rank": 60.82309341430664,
+    "pairs": 1024.0
+  },
+  "roundtrip": {
+    "all_finite": true,
+    "banks": 7.0,
+    "examples": 14144.0,
+    "maximum_blank_rate": 0.0,
+    "maximum_dct_absolute_error": 4.263256414560601e-14,
+    "minimum_binary_pixel_accuracy": 1.0,
+    "minimum_ink_f1": 1.0
+  },
+  "roundtrip_banks": {
+    "NotoSansCJK-Bold.ttc": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 4.263256414560601e-14
+    },
+    "NotoSerifCJK-Medium.ttc": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 3.019806626980426e-14
+    },
+    "down": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 3.019806626980426e-14
+    },
+    "fit": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 8000.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 3.6415315207705135e-14
+    },
+    "left": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 2.930988785010413e-14
+    },
+    "right": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 3.197442310920451e-14
+    },
+    "up": {
+      "binary_pixel_accuracy": 1.0,
+      "blank_rate": 0.0,
+      "examples": 1024.0,
+      "finite": true,
+      "ink_f1": 1.0,
+      "maximum_dct_absolute_error": 3.4638958368304884e-14
+    }
+  },
+  "smoke_only": false,
+  "writer_opened": false
+}

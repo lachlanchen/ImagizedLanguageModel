@@ -1,0 +1,73 @@
+{
+  "architecture": "noise-limited-retinal-field-v45",
+  "boundary": {
+    "candidate_bank_deployed": false,
+    "exact_radial_side_channel": true,
+    "fixed_dct": true,
+    "fixed_invertible_matrix_power": true,
+    "input_is_continuous_raster": true,
+    "output_is_continuous_direction_and_radius": true,
+    "statistics_are_buffers": true,
+    "trainable_parameters": 0,
+    "uses_character_ids": false,
+    "uses_external_language_model": false,
+    "uses_glyph_lookup": false,
+    "uses_ocr": false,
+    "uses_quantization": false,
+    "uses_strings": false,
+    "uses_token_ids": false,
+    "uses_unicode_ids": false,
+    "uses_visual_codebook": false,
+    "uses_vocabulary_embedding": false,
+    "uses_vocabulary_output": false
+  },
+  "checkpoint_sha256": "0e5947d85a8baeff99d92996ee8434d3aceab39e64042c9b6ec1a142aa174534",
+  "config": {
+    "binary_threshold": 0.5,
+    "fit_bank_size": 8000,
+    "identity_bank_size": 1024,
+    "radius_epsilon": 1e-08,
+    "ridge_ratio": 0.5,
+    "size": 32,
+    "whitening_power": 0.1
+  },
+  "field_state_sha256": "08b57734ac3ded0c1438cc4bf963d92357ce1f1d31ae49ee6548c56c19db019d",
+  "fit_sequence": {
+    "characters_sha256": "706c457d4864f0357b9f8f42ec15f17c197b96d5fd8a68572312a7586ac41631",
+    "count": 8000,
+    "counts_sha256": "9580d1515f7885943ed838aeebb592d60c1e1886d5de1936747d56ae9f17a6c7",
+    "joint_sha256": "eb0a4ede44a062eb4107fa857c0cda488734b9ddf5ad56e30a5f375516e61fd8",
+    "retained_fraction_of_han_instances": 0.9992490853893,
+    "retained_instances": 5457239
+  },
+  "holdout_pair_receipt": {
+    "count": 1024,
+    "sha256": "e41637c5e3846e47d19ade6312205cd30c2c96c65730bce75ee8ab4a0745154c",
+    "unique_suffixes": 1024
+  },
+  "manifest": {
+    "bytes": 13659628,
+    "path": "data/visual_grammar/chinese_wikisource_public_domain.jsonl",
+    "records": 7017,
+    "sha256": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+    "strict_digest": true
+  },
+  "partition": {
+    "development_identifiers": 190,
+    "development_identifiers_sha256": "46f3364ddbcdef7a3b6f9147a3ccfab7246deb059516c2524f9026ee01c0b221",
+    "frozen_identifiers": 219,
+    "frozen_identifiers_sha256": "7426e2440d378f77c1577698020cd1c266eeed0317c200e9a535d6b5a85cf94f",
+    "frozen_images_instantiated": false,
+    "identifiers": 7017,
+    "salt": "ilm-v25-natural-chinese-cell-stream-20260813",
+    "train_identifiers": 6608,
+    "train_identifiers_sha256": "a3eb1af8e6860aca8589574f41fb2a00a7dcb0e38478e051b701aa8b67541654"
+  },
+  "protocol": {
+    "document": "references/noise_limited_retinal_field_v45_protocol.md",
+    "sha256": "125702090b87534e1ab8bb8f3000765c65937608df056a0c5b771a09b1976029"
+  },
+  "smoke_only": false,
+  "v42_checkpoint_sha256": "a5ce2ff20d0fc6d336f489b1e2d29bb96a1d0666399c2e2b95e7ac33a9abe870",
+  "v44_checkpoint_sha256": "4b8e9d8e2c0e6cfa459c5a4f7bcf77e2e8921eb61f6eb34578fac086db93867d"
+}
