@@ -128,10 +128,10 @@ targets and no language optimization.
 Training positives remain exact raster equality. A pre-freeze audit over all
 8,000 fit forms found 7,999 distinct binary rasters and one duplicate-raster
 pair. The largest cosine between two distinct V45 directions was `0.958143`
-(`吕` versus `呂`), leaving a gap of `0.041857` from one. Thus the fixed
-`cosine >= 1 - 1e-6` implementation recovers exact-raster groups on this frozen
-bank with zero false-positive directed pairs. This is an implementation audit,
-not identity supervision.
+(`吕` versus `呂`), leaving a gap of `0.041857` from one. The production loss is
+stricter still: it packs each thresholded raster into 32 exact 32-bit words and
+constructs the positive mask by word-for-word equality. The cosine audit is a
+geometry diagnostic, not the equality mechanism or identity supervision.
 
 ## Alternatives Rejected For V46
 
