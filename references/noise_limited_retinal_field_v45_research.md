@@ -118,13 +118,16 @@ geometry changes as follows:
 
 | Raster-only metric | Raw V42 field | Selected field |
 |---|---:|---:|
-| candidate-pair cosine | `0.56209` | `0.06221` |
+| candidate-pair cosine | `0.56319` | `0.06402` |
 | 5th-percentile target-delta norm | `0.36975` | `0.77724` |
-| target-delta effective rank | `117.49` | `138.88` |
-| target-delta stable rank | `57.55` | `64.21` |
+| target-delta effective rank | `122.80` | `144.95` |
+| target-delta stable rank | `60.83` | `67.82` |
 
-These are design observations, not preregistered capability evidence. The V45
-protocol freezes independent receipts and repeats the audit in repository code.
+These values were reconstructed with V44's pinned seed and verified against
+holdout receipt
+`e41637c5e3846e47d19ade6312205cd30c2c96c65730bce75ee8ab4a0745154c`.
+They remain design observations, not preregistered capability evidence. The V45
+protocol repeats the audit in repository code.
 
 ## Scientific Boundary
 
