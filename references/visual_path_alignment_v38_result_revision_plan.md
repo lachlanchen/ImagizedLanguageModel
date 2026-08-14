@@ -139,4 +139,4 @@ architecture.
   rendered-page inspection cover the abstract, V38 equations, table, figure,
   decision, and conclusion. No undefined reference, overfull box, missing math
   delimiter, or fatal error remains.
-- Commit and push: pending
+- Commit and push: complete in `4062497` on `main`; pushed to `origin/main`.
