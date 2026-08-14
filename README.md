@@ -17,10 +17,46 @@
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
 use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
-V42--V45 canonical Chinese results and their narrower claim boundary are
+V42--V46 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current Evidence: V42 Learns Raster Language; V45 Repairs Its Target Geometry
+## Current Evidence: V46 Preserves Raster Language but Does Not Qualify
+
+![Measured V46 result: a from-scratch scaled-retinal reader preserves ordered-raster language controls and improves V42 log probability, but misses rank, binding, and generated-pixel gates](publication/ilm-image-native/figures/scaled_retinal_glyph_language_v46_result.png)
+
+Scaled Retinal Glyph Language V46 is the preregistered from-scratch test
+authorized by V45. It keeps V42's exact `24,346,497` learned parameters and
+causal raster architecture, but replaces its normalized-DCT substrate with the
+full scaled V45 field `v = A(d - mu) / 19.622622...`. The deployed model still
+receives only ordered `64 x 1 x 32 x 32` image streams, emits a continuous
+1,024-dimensional image field, exactly inverts it to pixels, and rereads its
+generated pixels. It has no token or Unicode IDs, strings, OCR, visual codebook,
+glyph lookup, external runtime LM, or deployed candidate bank.
+
+On the fixed 2,048-window development audit, full top-1 reaches `20.752%`,
+above image unigram (`1.416%`), symbolic bigram (`12.256%`), and shuffled
+history (`19.238%`). Full target log probability is `-4.9355`, a `0.3198` nat
+improvement over V42 that passes the frozen V42-gain gate. But top-1 improves
+over V42 by only `0.781` percentage point, below the required one point, and
+exact-suffix counterfactual arm accuracy is only `54.297%` against the `>60%`
+gate.
+
+Bank-free generated identity top-1 is `8.594%`, only `0.391` point above V42
+and below the required one-point gain. Generated pixel F1 falls from V42's
+`0.37308` to `0.35943`, against a fixed `>0.55` gate. The real held-out sheet
+shows the same failure: some outputs retain recognizable structure, while many
+fragment strokes or move toward another identity. V46 passes **10/14** gates
+and is **non-qualifying**. Train plus audit takes `955.78` seconds with
+`0.64668 GiB` peak allocated CUDA memory on one RTX 4090 D. The V43 writer and
+frozen partition remain closed.
+
+This narrows the next question. V45's conditioning is useful and V46 can learn
+language probability in it, but one isotropic full-field energy objective does
+not couple identity direction, ink radius, and clean raster rendering. The next
+bounded test must factor those quantities explicitly before any larger model,
+writer composition, or frozen-data opening.
+
+### Evidence Path: V42 Language, V43--V44 Binding, V45 Geometry
 
 ![Measured V42/V43 result: an image-only causal reader beats unigram, bigram, and shuffled-history controls, while a bank-free flow writer improves glyph form but misses counterfactual binding and pixel-F1 gates](publication/ilm-image-native/figures/canonical_glyph_flow_v43_result.png)
 
@@ -101,9 +137,10 @@ CUDA memory on one RTX 4090 D.
 This qualifies an image-only **representation**, not a language model. Applying
 V45 after the already-trained V42 reader reduces matched natural top-1 from
 `19.43%` to `15.04%`; that preregistered report-only diagnostic rejects a
-retrofit between incompatible coordinate systems. The next authorized test is
-a separately preregistered causal reader trained from scratch in V45 geometry.
-The V43 writer and frozen partition remain closed.
+retrofit between incompatible coordinate systems. V46 performs the required
+separately preregistered from-scratch test and, as reported above, preserves
+ordered language controls but passes only 10/14 gates. The V43 writer and frozen
+partition remain closed.
 
 See the [V42 protocol](references/canonical_glyph_language_v42_protocol.md),
 [V43 protocol](references/canonical_glyph_flow_v43_protocol.md),
@@ -112,10 +149,13 @@ See the [V42 protocol](references/canonical_glyph_language_v42_protocol.md),
 [measured V44 result and diagnosis](references/canonical_glyph_binding_v44_result.md),
 [V45 protocol](references/noise_limited_retinal_field_v45_protocol.md),
 [measured V45 result](references/noise_limited_retinal_field_v45_result.md),
+[V46 protocol](references/scaled_retinal_glyph_language_v46_protocol.md),
+[measured V46 result and diagnosis](references/scaled_retinal_glyph_language_v46_result.md),
 [tracked V42 evidence](publication/ilm-image-native/evidence/v42),
 [tracked V43 evidence](publication/ilm-image-native/evidence/v43),
 [tracked V44 evidence](publication/ilm-image-native/evidence/v44),
-[tracked V45 evidence](publication/ilm-image-native/evidence/v45), and
+[tracked V45 evidence](publication/ilm-image-native/evidence/v45),
+[tracked V46 evidence](publication/ilm-image-native/evidence/v46), and
 [compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
 
 ## Prior Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
