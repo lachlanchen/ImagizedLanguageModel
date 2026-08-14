@@ -56,8 +56,9 @@ from ilm.visual_lm.visual_semantic_raster_data import (
 
 EXPERIMENT = V38_ARCHITECTURE
 PROTOCOL_DOCUMENT = "references/visual_path_alignment_v38_protocol.md"
-# Set with the trainer after smoke validation and before evidence evaluation.
-EXPECTED_PROTOCOL_SHA256: str | None = None
+EXPECTED_PROTOCOL_SHA256 = (
+    "cc7112e3f04e7fab622652d7da21955a5b632c5008e51f30182f3bcf2094c0c5"
+)
 DEFAULT_INSTRUCTION_MANIFEST = "data/raw/alpaca_zh.json"
 DEFAULT_PARAPHRASE_MANIFEST = "data/teacher/folio_paraphrases_zh_holdout.jsonl"
 DEFAULT_TRAIN_PARAPHRASE_MANIFEST = (

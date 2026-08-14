@@ -1,7 +1,7 @@
 # Visual Path Alignment V38: Research Decision
 
-Status: training-view preparation complete; model implementation and frozen
-evidence protocol still pending.
+Status: training views, production model, evaluator, and evidence protocol
+complete; 8,000-update evidence training pending.
 
 Date: 2026-08-14
 
@@ -177,6 +177,34 @@ Length remains a visual quantity computed from clean pre-augmentation answer
 geometry. V38 increases its loss weight and predicts it from shared visual
 features rather than only a normalized semantic direction. Variance and
 covariance controls remain, but they cannot dominate direct target alignment.
+
+## Pre-evidence engineering validation
+
+The architecture, schedule, objective, evaluator, and 39 gate conditions were
+committed before two explicitly exploratory production-model runs. A 30-update
+run established strict V37 initialization, train-only answer-map construction,
+full checkpoint and resume state, raw and all-parameter EMA evaluation, and the
+checkpoint tensor boundary. A second 500-update run used the production batch
+geometry of 64 records, 512 candidates, and 16 deterministic nearest negatives.
+
+The 500-update run completed in 501.05 seconds on GPU 0 with 3,188,168,704 bytes
+peak allocated VRAM. Its raw development route improved over V37 in the intended
+directions:
+
+- prompt paired cosine: 0.2374 to 0.3298;
+- prompt-derived answer paired cosine: 0.1634 to 0.2393;
+- transition-direction cosine: 0.3450, while prompt-answer cosine fell to
+  0.7493 rather than remaining near identity;
+- canonical-to-held prompt/answer cosine: 0.7465/0.7541, compared with
+  0.4130/0.4089 in V37;
+- original-to-paraphrase prompt/answer cosine: 0.5259/0.5535; and
+- clean visual-length MAE: 3.5816.
+
+Answer top-1 remained only 0.2296 after 500 updates, so the pilot is not a
+qualification result and cannot justify opening sealed data or a raster writer.
+It shows that the full image-only path is trainable and that the principal V37
+failure modes move in the intended direction. The frozen 8,000-update run is
+required for the actual decision.
 
 ## Falsifiable boundary
 

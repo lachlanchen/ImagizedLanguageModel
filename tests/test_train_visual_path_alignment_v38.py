@@ -7,11 +7,17 @@ import torch
 import torch.nn.functional as F
 
 from ilm.visual_lm.visual_path_alignment import VisualPathAlignmentOutput
+from scripts.eval_visual_path_alignment_v38 import (
+    EXPECTED_PROTOCOL_SHA256 as EVALUATION_PROTOCOL_SHA256,
+)
 from scripts.train_visual_path_alignment_v38 import (
     DatasetWindow,
+    EXPECTED_PROTOCOL_SHA256,
+    PROTOCOL_DOCUMENT,
     _stage_progress,
     candidate_seed,
     effective_arguments,
+    file_sha256,
     require_preregistered_arguments,
     split_path_outputs,
     training_stages,
@@ -93,9 +99,12 @@ def test_smoke_arguments_preserve_five_path_training() -> None:
     assert args.tiny_model and args.random_foundation
 
 
-def test_evidence_is_blocked_until_protocol_is_frozen() -> None:
-    with pytest.raises(RuntimeError, match="protocol has not been frozen"):
-        require_preregistered_arguments(_args())
+def test_evidence_requires_the_frozen_protocol_and_arguments() -> None:
+    assert EXPECTED_PROTOCOL_SHA256 == file_sha256(PROTOCOL_DOCUMENT)
+    assert EVALUATION_PROTOCOL_SHA256 == EXPECTED_PROTOCOL_SHA256
+    require_preregistered_arguments(_args())
+    with pytest.raises(ValueError, match="candidate-count=512"):
+        require_preregistered_arguments(_args(candidate_count=256))
 
 
 def test_stage_progress_and_dataset_window_resume_exactly() -> None:
@@ -145,4 +154,3 @@ def test_checkpoint_boundary_rejects_all_detached_training_tensors() -> None:
     ):
         with pytest.raises(ValueError):
             validate_checkpoint_boundary(payload)
-
