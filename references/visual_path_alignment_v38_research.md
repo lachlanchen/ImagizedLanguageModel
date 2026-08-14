@@ -131,7 +131,12 @@ must:
   decomposes operation preservation, instruction form, condition preservation,
   and task execution into separately recorded decisions; reject unless every
   sub-decision passes; apply a deterministic operation-retention gate before
-  that judge for high-risk fill, edit, translation, and calculation tasks; and
+  that judge for high-risk fill, edit, translation, and calculation tasks;
+- pass a second, independently pinned
+  `qwen3:30b-a3b-instruct-2507-q4_K_M` adjudicator whose relation-enum protocol
+  separately checks operation, quantity and unit, category scope, named input,
+  output form and style, request form, and task execution; apply exact
+  normalized numeric-constraint preservation before this stage; and
 - record Qwen, BGE, Ollama, source, and output hashes.
 
 The generated strings exist only in the offline renderer. Student batches

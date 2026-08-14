@@ -5,10 +5,12 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import tempfile
 import time
 import urllib.error
 import urllib.request
+from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 from urllib.parse import urlsplit
@@ -47,6 +49,9 @@ DEFAULT_CANDIDATES = (
 DEFAULT_JUDGMENTS = (
     "artifacts/visual_path_alignment_v38_paraphrases/judgments.jsonl"
 )
+DEFAULT_ADJUDICATIONS = (
+    "artifacts/visual_path_alignment_v38_paraphrases/adjudications.jsonl"
+)
 EXPECTED_INSTRUCTION_SHA256 = (
     "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903"
 )
@@ -76,6 +81,16 @@ JUDGE_MODEL_SHA256 = (
 )
 JUDGE_MODEL_BYTES = 8_851_075_872
 JUDGE_PROTOCOL_VERSION = 2
+
+ADJUDICATOR_MODEL = "qwen3:30b-a3b-instruct-2507-q4_K_M"
+ADJUDICATOR_MANIFEST_SHA256 = (
+    "19e422b0231392335cfc49cfd172de7034bb1aeabb08aa307cce745c60b272fe"
+)
+ADJUDICATOR_MODEL_SHA256 = (
+    "78b329e716e7e9775973d392cd132b1f1ff1c8287a992887caeb6fd6c56ba9cc"
+)
+ADJUDICATOR_MODEL_BYTES = 18_556_685_856
+ADJUDICATOR_PROTOCOL_VERSION = 1
 
 BGE_ENDPOINT = "http://127.0.0.1:11434/api/embed"
 V38_EXTRA_TRAIN_FONTS = (
@@ -221,6 +236,142 @@ HIGH_RISK_OPERATION_FAMILIES: tuple[
     ),
 )
 
+ADJUDICATOR_RELATIONS = (
+    "equal",
+    "candidate_broader",
+    "candidate_narrower",
+    "different",
+    "not_applicable",
+)
+ADJUDICATOR_SYSTEM_PROMPT = (
+    "Conservatively audit Chinese instruction paraphrases. Precision is more "
+    "important than recall. Ignore a leading '问：' metadata prefix. Extract "
+    "all atomic requirements. For every relation field choose an explicit "
+    "relation: equal, candidate_broader, candidate_narrower, different, or "
+    "not_applicable. Do not call a broader or narrower category equal. "
+    "Quantity/unit includes all numbers, counts, units, and relations. Named "
+    "inputs include supplied names, quoted text, and items. Output requirements "
+    "include format, language, tone, ordering, length, and exclusions. Candidate "
+    "form is request only if it still asks the task. State whether task work was "
+    "performed. Return the required JSON object only."
+)
+ADJUDICATOR_EXAMPLES: tuple[tuple[str, str, Mapping[str, Any]], ...] = (
+    (
+        "\u5217\u51fa\u4e24\u79cd\u6d77\u6d0b\u54fa\u4e73\u52a8\u7269\u3002",
+        "\u95ee\uff1a\u5217\u51fa\u4e24\u79cd\u6d77\u6d0b\u52a8\u7269\u3002",
+        {
+            "candidate_form": "request",
+            "operation_relation": "equal",
+            "quantity_unit_relation": "equal",
+            "category_scope_relation": "candidate_broader",
+            "named_input_relation": "not_applicable",
+            "output_requirement_relation": "equal",
+            "task_execution": "not_performed",
+            "original_requirements": [
+                "\u5217\u51fa",
+                "\u4e24\u79cd",
+                "\u6d77\u6d0b\u54fa\u4e73\u52a8\u7269",
+            ],
+            "candidate_requirements": [
+                "\u5217\u51fa",
+                "\u4e24\u79cd",
+                "\u6d77\u6d0b\u52a8\u7269",
+            ],
+            "reason": "\u5019\u9009\u7c7b\u522b\u66f4\u5bbd\u3002",
+        },
+    ),
+    (
+        "\u5199\u4e00\u9996\u4e09\u884c\u8bd7\uff0c\u6bcf\u884c\u56db\u4e2a\u5b57\u3002",
+        "\u95ee\uff1a\u5199\u4e00\u9996\u4e09\u8a00\u4e09\u884c\u8bd7\u3002",
+        {
+            "candidate_form": "request",
+            "operation_relation": "equal",
+            "quantity_unit_relation": "different",
+            "category_scope_relation": "not_applicable",
+            "named_input_relation": "not_applicable",
+            "output_requirement_relation": "different",
+            "task_execution": "not_performed",
+            "original_requirements": [
+                "\u5199\u8bd7",
+                "\u4e09\u884c",
+                "\u6bcf\u884c\u56db\u5b57",
+            ],
+            "candidate_requirements": [
+                "\u5199\u8bd7",
+                "\u4e09\u884c",
+                "\u6bcf\u884c\u4e09\u5b57",
+            ],
+            "reason": "\u6570\u91cf\u4e0e\u8f93\u51fa\u5f62\u5f0f\u4e0d\u540c\u3002",
+        },
+    ),
+    (
+        "\u8bf4\u660e\u6c34\u5faa\u73af\u7684\u4e09\u4e2a\u9636\u6bb5\u3002",
+        "\u95ee\uff1a\u6c34\u5faa\u73af\u5305\u542b\u54ea\u4e09\u4e2a\u9636\u6bb5\uff1f",
+        {
+            "candidate_form": "request",
+            "operation_relation": "equal",
+            "quantity_unit_relation": "equal",
+            "category_scope_relation": "equal",
+            "named_input_relation": "equal",
+            "output_requirement_relation": "equal",
+            "task_execution": "not_performed",
+            "original_requirements": [
+                "\u8bf4\u660e",
+                "\u6c34\u5faa\u73af",
+                "\u4e09\u4e2a\u9636\u6bb5",
+            ],
+            "candidate_requirements": [
+                "\u8be2\u95ee",
+                "\u6c34\u5faa\u73af",
+                "\u4e09\u4e2a\u9636\u6bb5",
+            ],
+            "reason": "\u8981\u6c42\u7b49\u4ef7\u3002",
+        },
+    ),
+    (
+        "\u9009\u62e9\u8bcd\u8bed\u586b\u7a7a\uff1a\u5929\u6c14\u53d8\u5f97____\u3002",
+        "\u95ee\uff1a\u5929\u6c14\u53d8\u5f97\u5bd2\u51b7\u3002",
+        {
+            "candidate_form": "task_result",
+            "operation_relation": "different",
+            "quantity_unit_relation": "not_applicable",
+            "category_scope_relation": "not_applicable",
+            "named_input_relation": "equal",
+            "output_requirement_relation": "different",
+            "task_execution": "fully_performed",
+            "original_requirements": [
+                "\u9009\u8bcd\u586b\u7a7a",
+                "\u7ed9\u5b9a\u53e5\u5b50",
+            ],
+            "candidate_requirements": ["\u5b8c\u6210\u53e5"],
+            "reason": "\u5019\u9009\u5df2\u6267\u884c\u4efb\u52a1\u3002",
+        },
+    ),
+)
+
+CHINESE_NUMERAL_VALUES = {
+    "\u96f6": 0,
+    "\u3007": 0,
+    "\u4e00": 1,
+    "\u4e8c": 2,
+    "\u4e24": 2,
+    "\u4e09": 3,
+    "\u56db": 4,
+    "\u4e94": 5,
+    "\u516d": 6,
+    "\u4e03": 7,
+    "\u516b": 8,
+    "\u4e5d": 9,
+}
+CHINESE_NUMERAL_UNITS = {"\u5341": 10, "\u767e": 100, "\u5343": 1_000, "\u4e07": 10_000}
+CHINESE_QUANTITY_UNITS = (
+    "\u4e2a|\u79cd|\u7c7b|\u53ea|\u6761|\u672c|\u7bc7|\u9996|\u884c|\u5217|\u53e5|\u6bb5|\u5b57|\u8bcd|\u8a00|"
+    "\u97f3\u8282|\u9879|\u6b21|\u5e74|\u6708|\u65e5|\u5929|\u5c0f\u65f6|\u5206\u949f|\u79d2|\u516c\u91cc|\u5343\u7c73|"
+    "\u7c73|\u5398\u7c73|\u6beb\u7c73|\u7f8e\u5143|\u5143|\u4eba|\u56fd|\u9636\u6bb5|\u4f8b|\u70b9|\u7ae0|\u9875|\u90e8\u5206|"
+    "\u95ee\u9898|\u6b65\u9aa4|\u65b9\u5f0f|\u65b9\u6cd5|\u7b54\u6848|\u539f\u56e0|\u7279\u70b9|\u8981\u7d20|\u65b9\u9762|\u89d2\u8272|"
+    "\u4e8b\u4ef6|\u5355\u8bcd|\u77ed\u8bed|\u53e5\u5b50|%"
+)
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -231,6 +382,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out", default=DEFAULT_OUT)
     parser.add_argument("--candidates", default=DEFAULT_CANDIDATES)
     parser.add_argument("--judgments", default=DEFAULT_JUDGMENTS)
+    parser.add_argument("--adjudications", default=DEFAULT_ADJUDICATIONS)
     parser.add_argument("--target-count", type=int, default=1_024)
     parser.add_argument("--candidate-count", type=int, default=2_000)
     parser.add_argument("--minimum-cosine", type=float, default=0.82)
@@ -275,6 +427,29 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--judge-license-layer",
+        default=(
+            "../LocalLLM/.local/models/ollama/blobs/"
+            "sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
+        ),
+    )
+    parser.add_argument("--adjudicator-endpoint", default=QWEN_ENDPOINT)
+    parser.add_argument("--adjudicator-model", default=ADJUDICATOR_MODEL)
+    parser.add_argument(
+        "--adjudicator-manifest",
+        default=(
+            "../LocalLLM/.local/models/ollama/manifests/"
+            "registry.ollama.ai/library/qwen3/30b-a3b-instruct-2507-q4_K_M"
+        ),
+    )
+    parser.add_argument(
+        "--adjudicator-model-layer",
+        default=(
+            "../LocalLLM/.local/models/ollama/blobs/"
+            "sha256-78b329e716e7e9775973d392cd132b1f1ff1c8287a992887caeb6fd6c56ba9cc"
+        ),
+    )
+    parser.add_argument(
+        "--adjudicator-license-layer",
         default=(
             "../LocalLLM/.local/models/ollama/blobs/"
             "sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
@@ -455,6 +630,30 @@ def verify_judge_artifact(
         expected_model_sha256=JUDGE_MODEL_SHA256,
         expected_model_bytes=JUDGE_MODEL_BYTES,
         role="offline instruction-versus-answer validation only",
+    )
+
+
+def verify_adjudicator_artifact(
+    *,
+    endpoint: str,
+    model: str,
+    manifest_path: str | Path,
+    model_layer_path: str | Path,
+    license_layer_path: str | Path,
+    timeout: float,
+) -> dict[str, Any]:
+    return _verify_chat_model_artifact(
+        endpoint=endpoint,
+        model=model,
+        manifest_path=manifest_path,
+        model_layer_path=model_layer_path,
+        license_layer_path=license_layer_path,
+        timeout=timeout,
+        expected_model=ADJUDICATOR_MODEL,
+        expected_manifest_sha256=ADJUDICATOR_MANIFEST_SHA256,
+        expected_model_sha256=ADJUDICATOR_MODEL_SHA256,
+        expected_model_bytes=ADJUDICATOR_MODEL_BYTES,
+        role="offline final paraphrase adjudication only",
     )
 
 
@@ -727,6 +926,238 @@ def request_judgment(
     return normalized_verdict, usage
 
 
+def _chinese_numeral_to_int(value: str) -> int:
+    total = 0
+    section = 0
+    number = 0
+    for character in value:
+        if character in CHINESE_NUMERAL_VALUES:
+            number = CHINESE_NUMERAL_VALUES[character]
+            continue
+        unit = CHINESE_NUMERAL_UNITS.get(character)
+        if unit is None:
+            raise ValueError(f"unsupported Chinese numeral: {value!r}")
+        if unit == 10_000:
+            section += number
+            total += (section or 1) * unit
+            section = 0
+            number = 0
+        else:
+            section += (number or 1) * unit
+            number = 0
+    return total + section + number
+
+
+def normalized_numeric_constraints(text: str) -> Counter[str]:
+    constraints: Counter[str] = Counter()
+    for match in re.finditer(r"\d+(?:\.\d+)?", text):
+        raw = match.group(0)
+        if "." in raw:
+            normalized = raw.rstrip("0").rstrip(".")
+        else:
+            normalized = raw.lstrip("0") or "0"
+        constraints[normalized] += 1
+    chinese_number = "\u96f6\u3007\u4e00\u4e8c\u4e24\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341\u767e\u5343\u4e07"
+    patterns = (
+        rf"([{chinese_number}]+)(?=(?:{CHINESE_QUANTITY_UNITS}))",
+        rf"\u767e\u5206\u4e4b([{chinese_number}]+)",
+    )
+    for pattern in patterns:
+        for match in re.finditer(pattern, text):
+            constraints[str(_chinese_numeral_to_int(match.group(1)))] += 1
+    return constraints
+
+
+def deterministic_numeric_gate(original: str, candidate: str) -> tuple[bool, str]:
+    original_numbers = normalized_numeric_constraints(original)
+    candidate_numbers = normalized_numeric_constraints(candidate)
+    if original_numbers != candidate_numbers:
+        return False, "numeric-constraint-changed"
+    return True, ""
+
+
+def _adjudicator_schema() -> dict[str, Any]:
+    relation = {"type": "string", "enum": list(ADJUDICATOR_RELATIONS)}
+    return {
+        "type": "object",
+        "properties": {
+            "candidate_form": {
+                "type": "string",
+                "enum": ["request", "task_result", "declarative_nonrequest", "unclear"],
+            },
+            "operation_relation": relation,
+            "quantity_unit_relation": relation,
+            "category_scope_relation": relation,
+            "named_input_relation": relation,
+            "output_requirement_relation": relation,
+            "task_execution": {
+                "type": "string",
+                "enum": [
+                    "not_performed",
+                    "partly_performed",
+                    "fully_performed",
+                    "unclear",
+                ],
+            },
+            "original_requirements": {"type": "array", "items": {"type": "string"}},
+            "candidate_requirements": {"type": "array", "items": {"type": "string"}},
+            "reason": {"type": "string"},
+        },
+        "required": [
+            "candidate_form",
+            "operation_relation",
+            "quantity_unit_relation",
+            "category_scope_relation",
+            "named_input_relation",
+            "output_requirement_relation",
+            "task_execution",
+            "original_requirements",
+            "candidate_requirements",
+            "reason",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _adjudicator_messages(original: str, candidate: str) -> list[dict[str, str]]:
+    messages = [{"role": "system", "content": ADJUDICATOR_SYSTEM_PROMPT}]
+    for example_original, example_candidate, verdict in ADJUDICATOR_EXAMPLES:
+        messages.extend(
+            (
+                {
+                    "role": "user",
+                    "content": _judge_pair(example_original, example_candidate),
+                },
+                {
+                    "role": "assistant",
+                    "content": json.dumps(verdict, ensure_ascii=False, sort_keys=True),
+                },
+            )
+        )
+    messages.append({"role": "user", "content": _judge_pair(original, candidate)})
+    return messages
+
+
+def adjudicator_protocol_sha256() -> str:
+    protocol = {
+        "version": ADJUDICATOR_PROTOCOL_VERSION,
+        "system": ADJUDICATOR_SYSTEM_PROMPT,
+        "examples": ADJUDICATOR_EXAMPLES,
+        "schema": _adjudicator_schema(),
+        "numeric_constraint_units": CHINESE_QUANTITY_UNITS,
+    }
+    encoded = json.dumps(
+        protocol, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def adjudication_passes(verdict: Mapping[str, Any]) -> bool:
+    acceptable = {"equal", "not_applicable"}
+    return bool(
+        verdict.get("candidate_form") == "request"
+        and verdict.get("task_execution") == "not_performed"
+        and all(
+            verdict.get(name) in acceptable
+            for name in (
+                "operation_relation",
+                "quantity_unit_relation",
+                "category_scope_relation",
+                "named_input_relation",
+                "output_requirement_relation",
+            )
+        )
+    )
+
+
+def adjudication_failure_code(verdict: Mapping[str, Any]) -> str:
+    if verdict.get("task_execution") != "not_performed":
+        return f"task-{verdict.get('task_execution', 'invalid')}"
+    if verdict.get("candidate_form") != "request":
+        return f"candidate-{verdict.get('candidate_form', 'invalid')}"
+    for label, field in (
+        ("operation", "operation_relation"),
+        ("quantity-unit", "quantity_unit_relation"),
+        ("category-scope", "category_scope_relation"),
+        ("named-input", "named_input_relation"),
+        ("output-requirement", "output_requirement_relation"),
+    ):
+        relation = str(verdict.get(field, "invalid"))
+        if relation not in {"equal", "not_applicable"}:
+            return f"{label}-{relation}"
+    return "unspecified-adjudication-failure"
+
+
+def request_adjudication(
+    record: VisualRasterRecord,
+    paraphrase: str,
+    *,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[dict[str, Any], dict[str, int]]:
+    body = _request_json(
+        _validate_local_endpoint(endpoint, path="/api/chat"),
+        payload={
+            "model": model,
+            "stream": False,
+            "think": False,
+            "keep_alive": "10m",
+            "format": _adjudicator_schema(),
+            "options": {
+                "temperature": 0.0,
+                "seed": int(seed),
+                "num_predict": 320,
+            },
+            "messages": _adjudicator_messages(record.prompt, paraphrase),
+        },
+        timeout=timeout,
+    )
+    message = body.get("message", {})
+    content = message.get("content", "") if isinstance(message, Mapping) else ""
+    try:
+        verdict = json.loads(str(content))
+    except json.JSONDecodeError as error:
+        raise RuntimeError("V38 adjudicator returned invalid JSON") from error
+    relation_fields = (
+        "operation_relation",
+        "quantity_unit_relation",
+        "category_scope_relation",
+        "named_input_relation",
+        "output_requirement_relation",
+    )
+    if (
+        not isinstance(verdict, Mapping)
+        or verdict.get("candidate_form")
+        not in {"request", "task_result", "declarative_nonrequest", "unclear"}
+        or verdict.get("task_execution")
+        not in {"not_performed", "partly_performed", "fully_performed", "unclear"}
+        or any(verdict.get(name) not in ADJUDICATOR_RELATIONS for name in relation_fields)
+    ):
+        raise RuntimeError("V38 adjudicator returned an invalid verdict")
+    normalized_verdict = {
+        "candidate_form": str(verdict["candidate_form"]),
+        **{name: str(verdict[name]) for name in relation_fields},
+        "task_execution": str(verdict["task_execution"]),
+        "original_requirements": [
+            normalize_visible_text(str(item))[:160]
+            for item in list(verdict.get("original_requirements", []))[:24]
+        ],
+        "candidate_requirements": [
+            normalize_visible_text(str(item))[:160]
+            for item in list(verdict.get("candidate_requirements", []))[:24]
+        ],
+        "reason": normalize_visible_text(str(verdict.get("reason", "")))[:240],
+    }
+    usage = {
+        "prompt_eval_count": int(body.get("prompt_eval_count", 0)),
+        "eval_count": int(body.get("eval_count", 0)),
+        "total_duration_ns": int(body.get("total_duration", 0)),
+    }
+    return normalized_verdict, usage
+
+
 def judge_candidates(
     rows: Sequence[Mapping[str, Any]],
     records: Mapping[str, VisualRasterRecord],
@@ -840,6 +1271,121 @@ def judge_candidates(
         "usage": usage,
         "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
         "judge_protocol_sha256": protocol_sha,
+    }
+
+
+def adjudicate_candidates(
+    rows: Sequence[Mapping[str, Any]],
+    records: Mapping[str, VisualRasterRecord],
+    *,
+    journal_path: Path,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    existing = _read_jsonl(journal_path)
+    protocol_sha = adjudicator_protocol_sha256()
+    by_key = {
+        (
+            str(row.get("identifier", "")),
+            str(row.get("source_prompt_sha256", "")),
+            str(row.get("paraphrase_sha256", "")),
+        ): row
+        for row in existing
+        if row.get("adjudicator_protocol_version") == ADJUDICATOR_PROTOCOL_VERSION
+        and row.get("adjudicator_protocol_sha256") == protocol_sha
+        and isinstance(row.get("pass"), bool)
+    }
+    usage = {"prompt_eval_count": 0, "eval_count": 0, "total_duration_ns": 0}
+    errors: list[dict[str, str]] = []
+    passed: list[dict[str, Any]] = []
+    failed_reasons: dict[str, int] = {}
+    for position, row in enumerate(rows):
+        identifier = str(row["identifier"])
+        paraphrase = str(row["paraphrase"])
+        record = records[identifier]
+        source_prompt_sha = hashlib.sha256(record.prompt.encode("utf-8")).hexdigest()
+        paraphrase_sha = hashlib.sha256(paraphrase.encode("utf-8")).hexdigest()
+        key = (identifier, source_prompt_sha, paraphrase_sha)
+        adjudication = by_key.get(key)
+        if adjudication is None:
+            item_seed = seed + position * 1_000_037
+            base_adjudication = {
+                "identifier": identifier,
+                "source_prompt_sha256": source_prompt_sha,
+                "paraphrase_sha256": paraphrase_sha,
+                "adjudicator_protocol_version": ADJUDICATOR_PROTOCOL_VERSION,
+                "adjudicator_protocol_sha256": protocol_sha,
+                "seed": item_seed,
+            }
+            numeric_passed, numeric_reason = deterministic_numeric_gate(
+                record.prompt, paraphrase
+            )
+            if not numeric_passed:
+                adjudication = base_adjudication | {
+                    "pass": False,
+                    "failure_code": numeric_reason,
+                    "reason": "normalized numeric constraints differ",
+                    "adjudicator_model": "deterministic-numeric-gate",
+                    "decision_path": "deterministic-numeric-gate",
+                }
+                _append_jsonl(journal_path, adjudication)
+                by_key[key] = adjudication
+            else:
+                try:
+                    verdict, item_usage = request_adjudication(
+                        record,
+                        paraphrase,
+                        endpoint=endpoint,
+                        model=model,
+                        seed=item_seed,
+                        timeout=timeout,
+                    )
+                    accepted = adjudication_passes(verdict)
+                    adjudication = base_adjudication | verdict | {
+                        "pass": accepted,
+                        "failure_code": (
+                            "pass" if accepted else adjudication_failure_code(verdict)
+                        ),
+                        "adjudicator_model": model,
+                        "decision_path": "relation-enum-model-adjudicator",
+                    }
+                    _append_jsonl(journal_path, adjudication)
+                    by_key[key] = adjudication
+                    for name, value in item_usage.items():
+                        usage[name] += value
+                except Exception as error:  # Failed adjudications fail closed.
+                    errors.append({"identifier": identifier, "error": str(error)})
+                    continue
+        if bool(adjudication.get("pass", False)):
+            passed.append(dict(row) | {"constraint_adjudicator": "pass"})
+        else:
+            failure_code = normalize_visible_text(
+                str(adjudication.get("failure_code", "unspecified"))
+            )
+            failed_reasons[failure_code] = failed_reasons.get(failure_code, 0) + 1
+        if (position + 1) % 25 == 0 or position + 1 == len(rows):
+            print(
+                json.dumps(
+                    {
+                        "adjudicated": position + 1,
+                        "adjudicator_passed": len(passed),
+                        "adjudicator_errors": len(errors),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+    return passed, {
+        "journal_rows": len(_read_jsonl(journal_path)),
+        "passed": len(passed),
+        "failed": len(rows) - len(passed) - len(errors),
+        "failed_reasons": failed_reasons,
+        "errors": errors,
+        "usage": usage,
+        "adjudicator_protocol_version": ADJUDICATOR_PROTOCOL_VERSION,
+        "adjudicator_protocol_sha256": protocol_sha,
     }
 
 
@@ -1004,6 +1550,14 @@ def main() -> None:
         license_layer_path=args.judge_license_layer,
         timeout=args.timeout,
     )
+    adjudicator_receipt = verify_adjudicator_artifact(
+        endpoint=args.adjudicator_endpoint,
+        model=args.adjudicator_model,
+        manifest_path=args.adjudicator_manifest,
+        model_layer_path=args.adjudicator_model_layer,
+        license_layer_path=args.adjudicator_license_layer,
+        timeout=args.timeout,
+    )
     bge_receipt = verify_bge_artifact(
         endpoint=args.bge_endpoint,
         model=args.bge_model,
@@ -1027,13 +1581,20 @@ def main() -> None:
 
     candidate_path = Path(args.candidates)
     judgment_path = Path(args.judgments)
+    adjudication_path = Path(args.adjudications)
     out_path = Path(args.out)
     receipt_path = out_path.with_suffix(".receipt.json")
     previous_receipt: dict[str, Any] = {}
     if receipt_path.exists():
         previous_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     if args.overwrite:
-        for path in (candidate_path, judgment_path, out_path, receipt_path):
+        for path in (
+            candidate_path,
+            judgment_path,
+            adjudication_path,
+            out_path,
+            receipt_path,
+        ):
             path.unlink(missing_ok=True)
         previous_receipt = {}
     elif args.rebuild_final:
@@ -1134,11 +1695,27 @@ def main() -> None:
             model=args.judge_model,
             timeout=args.timeout,
         )
+    try:
+        adjudicated, adjudication_summary = adjudicate_candidates(
+            judged,
+            by_identifier,
+            journal_path=adjudication_path,
+            endpoint=args.adjudicator_endpoint,
+            model=args.adjudicator_model,
+            seed=args.seed + 76_000_000,
+            timeout=args.timeout,
+        )
+    finally:
+        unload_qwen(
+            endpoint=args.adjudicator_endpoint,
+            model=args.adjudicator_model,
+            timeout=args.timeout,
+        )
 
     unique: list[dict[str, Any]] = []
     seen_paraphrases: set[str] = set()
     duplicate_paraphrases = 0
-    for row in judged:
+    for row in adjudicated:
         paraphrase = str(row["paraphrase"])
         if paraphrase in seen_paraphrases:
             duplicate_paraphrases += 1
@@ -1150,8 +1727,8 @@ def main() -> None:
 
     if len(unique) < args.target_count:
         raise RuntimeError(
-            f"V38 accepted {len(unique)} judged unique paraphrases, fewer than "
-            f"{args.target_count}; "
+            f"V38 accepted {len(unique)} adjudicated unique paraphrases, fewer "
+            f"than {args.target_count}; "
             "rerun with a larger --candidate-count"
         )
     selected = unique[: args.target_count]
@@ -1169,6 +1746,7 @@ def main() -> None:
         "generated_count": len(generated),
         "accepted_by_numeric_filters": len(accepted),
         "accepted_by_instruction_judge": len(judged),
+        "accepted_by_constraint_adjudicator": len(adjudicated),
         "accepted_unique_before_truncation": len(unique),
         "minimum_semantic_cosine": args.minimum_cosine,
         "semantic_cosine": {
@@ -1192,6 +1770,11 @@ def main() -> None:
         "judgment": judgment_summary,
         "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
         "judge_protocol_sha256": judge_protocol_sha256(),
+        "adjudication_manifest": str(adjudication_path.resolve()),
+        "adjudication_manifest_sha256": file_sha256(adjudication_path),
+        "adjudication": adjudication_summary,
+        "adjudicator_protocol_version": ADJUDICATOR_PROTOCOL_VERSION,
+        "adjudicator_protocol_sha256": adjudicator_protocol_sha256(),
         "output": str(out_path.resolve()),
         "output_sha256": file_sha256(out_path),
         "training_fonts": list(V38_TRAIN_FONTS),
@@ -1200,6 +1783,7 @@ def main() -> None:
         },
         "qwen": qwen_receipt,
         "instruction_judge": judge_receipt,
+        "constraint_adjudicator": adjudicator_receipt,
         "bge": bge_receipt
         | {
             "manifest_sha256": BGE_MANIFEST_SHA256,

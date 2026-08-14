@@ -218,3 +218,95 @@ def test_judgment_decision_is_computed_from_all_subdecisions() -> None:
     assert builder.judgment_passes(valid)
     assert not builder.judgment_passes(valid | {"performs_or_answers_task": True})
     assert not builder.judgment_passes(valid | {"same_requested_operation": False})
+
+
+def test_numeric_gate_normalizes_arabic_and_chinese_quantities() -> None:
+    assert builder.deterministic_numeric_gate(
+        "\u95ee\uff1a12/3\u7684\u7ed3\u679c\u662f\u4ec0\u4e48\uff1f",
+        "\u95ee\uff1a12\u9664\u4ee53\u7684\u7ed3\u679c\u662f\u591a\u5c11\uff1f",
+    ) == (True, "")
+    assert builder.deterministic_numeric_gate(
+        "\u95ee\uff1a\u5199\u4e00\u9996\u4e94\u884c\u8bd7\uff0c\u6bcf\u884c\u56db\u4e2a\u97f3\u8282\u3002",
+        "\u95ee\uff1a\u5199\u4e00\u9996\u4e94\u8a00\u4e94\u884c\u8bd7\u3002",
+    ) == (False, "numeric-constraint-changed")
+
+
+def test_adjudication_decision_rejects_any_non_equal_relation() -> None:
+    valid = {
+        "candidate_form": "request",
+        "operation_relation": "equal",
+        "quantity_unit_relation": "equal",
+        "category_scope_relation": "equal",
+        "named_input_relation": "not_applicable",
+        "output_requirement_relation": "equal",
+        "task_execution": "not_performed",
+    }
+    assert builder.adjudication_passes(valid)
+    assert not builder.adjudication_passes(
+        valid | {"category_scope_relation": "candidate_broader"}
+    )
+    assert not builder.adjudication_passes(
+        valid | {"task_execution": "partly_performed"}
+    )
+
+
+def test_final_adjudicator_is_resumable_and_fails_closed(monkeypatch, tmp_path) -> None:
+    records = {
+        "alpaca-zh:1": record("alpaca-zh:1"),
+        "alpaca-zh:2": record("alpaca-zh:2"),
+    }
+    rows = [
+        {"identifier": "alpaca-zh:1", "paraphrase": "\u95ee\uff1a\u6c34\u80fd\u505a\u4ec0\u4e48\uff1f"},
+        {"identifier": "alpaca-zh:2", "paraphrase": "\u95ee\uff1a\u6c34\u7684\u4e3b\u8981\u7528\u9014\u662f\u4ec0\u4e48\uff1f"},
+    ]
+    calls: list[str] = []
+
+    def fake_adjudication(source, paraphrase, **_kwargs):
+        calls.append(source.identifier)
+        accepted = source.identifier.endswith(":1")
+        relation = "equal" if accepted else "candidate_broader"
+        return {
+            "candidate_form": "request",
+            "operation_relation": "equal",
+            "quantity_unit_relation": "not_applicable",
+            "category_scope_relation": relation,
+            "named_input_relation": "equal",
+            "output_requirement_relation": "equal",
+            "task_execution": "not_performed",
+            "original_requirements": ["ask"],
+            "candidate_requirements": ["ask"],
+            "reason": "valid" if accepted else "broader",
+        }, {
+            "prompt_eval_count": 1,
+            "eval_count": 1,
+            "total_duration_ns": 1,
+        }
+
+    monkeypatch.setattr(builder, "request_adjudication", fake_adjudication)
+    journal = tmp_path / "adjudications.jsonl"
+    first, summary = builder.adjudicate_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.ADJUDICATOR_MODEL,
+        seed=9,
+        timeout=1,
+    )
+    assert [row["identifier"] for row in first] == ["alpaca-zh:1"]
+    assert summary["passed"] == 1
+    assert summary["failed"] == 1
+    assert len(calls) == 2
+
+    second, second_summary = builder.adjudicate_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.ADJUDICATOR_MODEL,
+        seed=9,
+        timeout=1,
+    )
+    assert [row["identifier"] for row in second] == ["alpaca-zh:1"]
+    assert second_summary["journal_rows"] == 2
+    assert len(calls) == 2
