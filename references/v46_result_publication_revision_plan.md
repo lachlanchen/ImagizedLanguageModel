@@ -93,3 +93,29 @@ in V45 coordinates is merely the next authorized experiment.
 
 None. This is an internal manuscript evidence update, not a reviewer response.
 
+## Execution Record
+
+- Independent `jq` recomputation matched all 14 reported gate booleans exactly:
+  10 pass and 4 fail.
+- The V46 figure was generated twice from hash-pinned evidence; both renders
+  have SHA-256
+  `0756c84be684b85d33c8e686d9b2188ca355420eeeaaf9010c246da3d24636f7`.
+- The final manuscript source SHA-256 is
+  `dbd4aa4bd87e2c2b53632041dd44aba2690cf588f4dc86462ba63dee2830ab4b`.
+- The rebuilt 90-page PDF SHA-256 is
+  `e7f421537a194c39625b58e603ff03f8720388cfd2df7b65cd82e021a40d725e`.
+- Two-pass `pdflatex` completed successfully. The final log has no undefined
+  references, overfull boxes, LaTeX errors, emergency stops, or fatal errors.
+- Extracted PDF text contains the V46 abstract, method, full table, diagnosis,
+  synthesis, and conclusion values.
+- PDF pages 68--71 were rendered and visually inspected. The field equation,
+  table, figure, raster pairs, caption, and surrounding prose fit without
+  overlap or clipping.
+- Focused V42--V46 regression completed with `28 passed` and one upstream
+  fontTools deprecation warning.
+- Ruff passes all V42--V46 model/training/evaluation files, both V46 entry
+  points, the V46 test, and the new figure generator. A repository-wide Ruff
+  sweep still reports 75 pre-existing violations in unrelated legacy files;
+  they were left unchanged under this plan's scope.
+- No active baseline TeX file exists, so a repository redline was not created.
+  The pre-edit hashes above and Git commit history preserve the comparison.
