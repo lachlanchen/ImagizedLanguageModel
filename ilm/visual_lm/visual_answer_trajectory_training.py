@@ -541,10 +541,18 @@ def _ordered_losses(
         positive = F.cosine_similarity(student, teacher, dim=-1)
         adjacent = F.cosine_similarity(student, teacher.roll(shifts=-1, dims=0), dim=-1)
         order_losses.append(F.relu(margin - positive + adjacent).mean())
-        student_delta = F.normalize(student[1:] - student[:-1], dim=-1)
-        teacher_delta = F.normalize(teacher[1:] - teacher[:-1], dim=-1)
+        student_delta = F.normalize(
+            student[1:] - student[:-1],
+            dim=-1,
+            eps=1e-2,
+        )
+        teacher_delta = F.normalize(
+            teacher[1:] - teacher[:-1],
+            dim=-1,
+            eps=1e-2,
+        )
         transition_losses.append(
-            (1 - F.cosine_similarity(student_delta, teacher_delta, dim=-1)).mean()
+            (1 - (student_delta * teacher_delta).sum(dim=-1)).mean()
         )
         relation_losses.append(
             F.mse_loss(student @ student.T, teacher @ teacher.T)
@@ -693,10 +701,15 @@ def visual_answer_trajectory_loss(
             reduction="none",
         )
         stop_bce = (stop_bce * targets.stop_mask).sum() / targets.stop_mask.sum()
-        active_bce = F.binary_cross_entropy(
-            output.active_probabilities.clamp(1e-5, 1 - 1e-5),
-            targets.segment_mask,
+        active_probabilities = output.active_probabilities.float().clamp(
+            1e-5,
+            1 - 1e-5,
         )
+        active_bce = -(
+            targets.segment_mask.float() * active_probabilities.log()
+            + (1 - targets.segment_mask.float())
+            * torch.log1p(-active_probabilities)
+        ).mean()
         stop_losses.append(stop_bce + 0.25 * active_bce)
         length_value = F.smooth_l1_loss(
             output.lengths,

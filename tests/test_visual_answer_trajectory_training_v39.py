@@ -160,9 +160,15 @@ def test_complete_v39_loss_is_finite_and_backpropagates() -> None:
         segment_candidates,
     )
     losses.loss.backward()
+    gradient_norm = torch.nn.utils.clip_grad_norm_(
+        [parameter for parameter in model.parameters() if parameter.requires_grad],
+        1.0,
+    )
 
     assert torch.isfinite(losses.loss)
     assert losses.loss > 0
+    assert torch.isfinite(gradient_norm)
+    assert gradient_norm < 1e6
     assert model.prompt_head[-1].weight.grad is not None
     assert model.answer_transform.weight.grad is not None
     assert model.position_queries.grad is not None
@@ -175,6 +181,46 @@ def test_complete_v39_loss_is_finite_and_backpropagates() -> None:
         for parameter in model.parameters()
         if parameter.grad is not None
     )
+
+
+def test_complete_v39_loss_is_cpu_autocast_safe() -> None:
+    model = VisualAnswerTrajectoryModel(tiny_config())
+    bank = target_bank()
+    targets = bank.lookup(
+        ("record-2", "record-5"),
+        torch.tensor((1, 0)),
+        device="cpu",
+    )
+    global_candidates = bank.global_candidate_set(
+        targets.bank_indices,
+        count=8,
+        seed=123,
+        device="cpu",
+    )
+    segment_candidates = bank.segment_candidate_set(
+        targets,
+        count=12,
+        seed=456,
+        device="cpu",
+    )
+    pixels, mask = visual_batch()
+
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        prompt_anchor = model(pixels, mask)
+        prompt_view = model(pixels + 0.001, mask)
+        segment_anchor = model.encode_visual(pixels + 0.002, mask)
+        segment_view = model.encode_visual(pixels + 0.003, mask)
+        losses = visual_answer_trajectory_loss(
+            prompt_anchor,
+            prompt_view,
+            segment_anchor,
+            segment_view,
+            targets,
+            global_candidates,
+            segment_candidates,
+        )
+
+    assert torch.isfinite(losses.loss)
 
 
 def test_variance_control_detects_collapse() -> None:
