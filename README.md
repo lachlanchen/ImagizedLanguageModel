@@ -16,53 +16,72 @@
 
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V37
-measurement and its bounded visual-semantic advance are reported directly below.*
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V38
+measurement and its bounded visual-semantic result are reported directly below.*
 
-## Current Evidence: V37 Reads Visually but Fails the Complete Semantic Gate
+## Current Evidence: V38 Improves Visual Reading but Fails Answer Generalization
+
+![Measured V38 result: paired visual paths improve reading and font invariance, but the frozen answer-semantic gate rejects the model](publication/ilm-image-native/figures/visual_path_alignment_v38_result.png)
+
+Visual Path Alignment V38 is a `90,753,281`-parameter image-only reader and
+prompt-conditioned answer-state model. It completed all `8,000` BF16 updates
+in `99.71` minutes on GPU 0 of one RTX 4090 D with `2.969 GiB` peak allocated
+CUDA memory. Its deployed tensor path receives only a `3 x 16 x 1024` prompt
+raster and clean 64-patch mask, then emits continuous `1024`-dimensional prompt
+and answer states plus visual length. It contains no strings, token or Unicode
+IDs, OCR, vocabulary logits, candidate bank, visual codebook, target tensor,
+teacher call, or network client. It does not render answer pixels.
+
+The frozen EMA development decision is **`not-qualified`**. Prompt top-1/top-5
+reaches `60.71%/86.73%`, held-font prompt consistency reaches `0.793`, and the
+answer transition is no longer near identity: prompt-answer cosine falls from
+V37's `0.997` to `0.577`, with transition-direction cosine `0.340`. But the
+actual prompt-conditioned answer state reaches only `21.94%` top-1, `49.49%`
+top-5, `0.3460` MRR, and `0.244` paired cosine. Held-font answer consistency
+(`0.732`), paraphrase answer consistency (`0.491`), counterfactual assignment
+(`89.80%` against `90%`), and visual-length MAE (`3.370` patches) also miss
+their frozen bounds. EMA passes `25/39` conditions. Raw weights are materially
+the same and do not repair the answer path.
+
+V38 intentionally reuses strong external work with exact attribution.
+Pixel-Linguist-v0 initializes the reader through V37; BGE-M3 builds detached
+targets; and Qwen-family models prepare and audit training-only paraphrases.
+None is claimed as project work or called by the deployed student. External
+models that work are welcome when provenance, licensing, training role, and
+runtime status are explicit. "Independent" describes the final self-contained
+image-only runtime, not a requirement to pretrain every supporting component
+from scratch. Pixel-Linguist's checkpoint states no weight license, so derived
+weights remain local-research-only.
+
+The bounded advance is real: V38 improves prompt reading, held-font prompt
+consistency, and answer-transition geometry. The failed answer generalization
+is equally real. The next proof should expand deduplicated instruction-relation
+diversity and test ordered multi-state answer dynamics before any raster writer
+is opened. Zero sealed rows were rendered, and the renderer remains
+unauthorized.
+
+See the [measured V38 result](docs/visual-path-alignment-v38-result.md),
+[frozen protocol](references/visual_path_alignment_v38_protocol.md),
+[research decision](references/visual_path_alignment_v38_research.md),
+[tracked evidence](publication/ilm-image-native/evidence/v38), and
+[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
+
+## Prior Evidence: V37 Reads Visually but Fails the Complete Semantic Gate
 
 ![Measured V37 result: end-to-end image reading and answer planning improve sharply, but the conjunctive semantic gate rejects the model](publication/ilm-image-native/figures/visual_semantic_distillation_v37_result.png)
 
 Visual Semantic Distillation V37 is an `89,768,706`-parameter image-only
-reader and answer planner. It completed all `8,000` BF16 updates in `61.59`
-minutes on GPU 0 of one RTX 4090 D with `2.748 GiB` peak allocated CUDA
-memory. Its deployed path receives only a `3 x 16 x 1024` prompt raster and
-clean visual mask, then emits continuous `1024`-dimensional prompt and answer
-states plus visual length. It contains no text, token or Unicode IDs, OCR,
-candidate bank, lookup table, visual codebook, BGE call, or target tensor.
-It does not yet render answer pixels.
+reader and answer planner. It completed `8,000` BF16 updates in `61.59` minutes
+with `2.748 GiB` peak allocated CUDA memory on one RTX 4090 D. Prompt-state
+top-1/top-5 reaches `47.45%/77.55%`; candidate-independent answer plans reach
+`20.41%/45.41%` and `0.3377` MRR. Counterfactual assignment and answer rank
+pass, while absolute answer alignment, font and wording invariance, and length
+fail. EMA passes `20/33` checks and is **`not-qualified`**. Its sealed split
+and renderer remain closed. V38 directly tests the diagnosed invariance and
+near-identity transition failures reported by V37.
 
-The fixed EMA development decision is **`not-qualified`**. Prompt-state
-top-1/top-5 retrieval reaches `47.45%/77.55%`, but paired prompt cosine is
-only `0.237`. Candidate-independent answer plans reach `20.41%` top-1,
-`45.41%` top-5, and `0.3377` MRR, below gates of `30%`, `60%`, and `0.40`.
-Counterfactual assignment passes at `93.88%`, paraphrase top-5 passes at
-`73.33%`, and answer-plan effective rank passes at `55.37`. Held-font plan
-cosine (`0.409`), original/paraphrase plan cosine (`0.456`), absolute answer
-cosine/margins, and visual-length MAE (`3.682` patches) fail. EMA passes only
-`20/33` conjunctive checks; raw weights pass `19/33` and do not repair the
-result. The sealed split remains unopened and V37-R remains forbidden.
-
-V37 deliberately reuses good external work with exact attribution.
-Pixel-Linguist-v0 initializes the visual encoder and is adapted end to end;
-BGE-M3 constructs detached continuous targets offline. Neither is claimed as
-project work, and neither is a runtime service. "Independent" means the final
-student inference artifact is self-contained and image-only, not that every
-weight was pretrained from scratch. Pixel-Linguist's checkpoint states no
-weight license, so the derived artifact remains local-research-only.
-
-The bounded result is still useful: V37 raises answer-plan top-1 from V36's
-`1.02%` to `20.41%`, fixes the mask defect, and prevents low-rank collapse,
-all in about one hour on one 4090. It demonstrates practical visual semantic
-distillation, not autonomous language understanding or generated language.
-The next proof must train explicit font and wording invariance plus harder
-relation-aware negatives before any raster writer is opened.
-
-See the [measured V37 result](docs/visual-semantic-distillation-v37-result.md),
-[frozen protocol](references/visual_semantic_distillation_v37_protocol.md),
-[pre-run research note](references/visual_semantic_distillation_v37_research.md),
-[tracked evidence](publication/ilm-image-native/evidence/v37), and
-[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
+See the [measured V37 result](docs/visual-semantic-distillation-v37-result.md)
+and [frozen protocol](references/visual_semantic_distillation_v37_protocol.md).
 
 ## Prior Evidence: V36 Learns a Weak Relation but Fails the Semantic Gate
 

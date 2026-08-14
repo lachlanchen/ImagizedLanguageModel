@@ -1,7 +1,7 @@
 # Visual Path Alignment V38: Research Decision
 
-Status: training views, production model, evaluator, and evidence protocol
-complete; 8,000-update evidence training pending.
+Status: frozen 8,000-update evidence run and EMA/raw development evaluations
+complete; decision `not-qualified`; sealed split and raster renderer closed.
 
 Date: 2026-08-14
 
@@ -219,10 +219,49 @@ failure set without opening sealed data:
 - all finite, source-hash, parameter-cap, update, and VRAM conditions.
 
 The exact thresholds, data hashes, update count, model initialization, and
-primary EMA/raw route will be frozen in a separate V38 protocol after the data
-builder, implementation, and smoke tests are complete but before evidence
-training. Failing that protocol keeps sealed evaluation and the raster writer
-closed.
+primary EMA/raw route were frozen in
+`references/visual_path_alignment_v38_protocol.md` before evidence training.
+Its SHA-256 is
+`cc7112e3f04e7fab622652d7da21955a5b632c5008e51f30182f3bcf2094c0c5`.
+Failing that protocol keeps sealed evaluation and the raster writer closed.
+
+## Completed frozen result
+
+The production run completed all 8,000 BF16 updates in 5,982.31 seconds
+(99.71 minutes) on GPU 0 of one RTX 4090 D. The 90,753,281-parameter model
+used 3,188,168,704 bytes (2.969 GiB) peak allocated CUDA memory. All training,
+checkpoint, EMA, raw-weight, and evaluation routes were finite. The checkpoint
+SHA-256 is
+`eea1595107455977bc7ffb96dde3d4cda733186f628f46ab4fb789e83802fcde`.
+
+The primary EMA development route reads prompt images materially better than
+V37: top-1/top-5/MRR is 60.71/86.73/72.36 percent and paired cosine is 0.3789.
+Canonical-to-held-font prompt consistency rises from V37's 0.4130 to 0.7925.
+The learned answer map also ceases to be near identity: prompt-answer cosine
+falls from 0.9972 to 0.5769, transition-direction cosine reaches 0.3401, and
+answer-state effective rank reaches 49.02.
+
+The answer relation remains below the frozen absolute gate. Prompt-conditioned
+answer top-1/top-5/MRR is 21.94/49.49/34.60 percent and paired answer cosine is
+0.2441. Held-font answer consistency is 0.7323, original-to-paraphrase answer
+consistency is 0.4908, counterfactual assignment is 0.898 against a 0.900
+threshold, and visual-length MAE is 3.370 against a maximum of 3. Raw weights
+are materially the same, so EMA lag does not explain the result.
+
+The EMA route passes 25/39 conjunctive conditions and is `not-qualified`.
+Zero sealed rows were rendered and no raster renderer is authorized. Retrieval
+is an evaluator-only probe of continuous states; V38 emits neither answer
+pixels nor generated language.
+
+The measured result narrows the next hypothesis. Paired visual paths repair a
+large part of the reading and font-invariance problem, but the 5,822-pair
+curriculum is seen roughly 88 times and a single answer vector does not
+generalize the relation. The next bounded proof should increase deduplicated
+instruction and relation diversity, add held-operation and held-composition
+tests, and replace one answer state with a small ordered set of conditional
+continuous states or recurrent dynamics. External visual and language systems
+remain acceptable for initialization or offline data preparation when
+provenance, licensing, and deployed absence are exact.
 
 ## What V38 cannot prove
 

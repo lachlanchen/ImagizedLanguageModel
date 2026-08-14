@@ -157,7 +157,7 @@ measured here; speech adaptation is a future experiment, not a present result.
 
 ## Current verdict
 
-The latest completed experiment is V35. The current evidence is:
+The latest completed experiment is V38. The current evidence is:
 
 - **V33/V33.1:** credited PIXAR initialization plus a direct linear raster
   adapter produced readable held-out Chinese, but missed the fixed interface
@@ -172,16 +172,42 @@ The latest completed experiment is V35. The current evidence is:
   instruction accuracy is `0.1116%`, and only `5/12` visual-causal plus `5/9`
   semantic-raster gates pass. The decision is `not-qualified`; the sealed split
   remains unopened.
+- **V36:** an image-only continuous planner exposed an occupancy-mask shift,
+  low-rank target geometry, and only `1.02%` EMA answer top-1. It is
+  `not-qualified`.
+- **V37:** clean masks and end-to-end visual semantic distillation raised prompt
+  and answer-plan top-1 to `47.45%` and `20.41%`, but font, wording, absolute
+  answer alignment, and length failed. It is `not-qualified`.
+- **V38:** paired five-font paths, audited paraphrases, semantically near
+  negatives, and a full answer map trained a 90.75M-parameter image-only model
+  for 8,000 updates in 99.71 minutes at 2.969 GiB peak allocated memory on one
+  RTX 4090 D. Prompt top-1/top-5 reaches `60.71%/86.73%`; held-font prompt
+  consistency reaches `0.7925`; and the answer transition is no longer a
+  near-copy of the prompt. Prompt-conditioned answer top-1/top-5 remains only
+  `21.94%/49.49%`, however, and held-font/paraphrase answer transfer remains
+  below gate. EMA passes `25/39` conditions and is `not-qualified`. Zero sealed
+  rows were rendered and no raster renderer is authorized.
 
-V35 is a complete engineering implementation and a negative language result.
-It establishes that a consumer GPU can train and run this raster loop, while
-rejecting the tested local-latent objective as a route to semantic binding.
-The next experiment must learn a prompt-conditioned, multi-patch visual
-semantic plan before rendering, with sequence-level contrastive and
-counterfactual supervision. Scaling the same V35 objective is not authorized.
+The sequence is a complete engineering program with bounded positive mechanisms
+and negative language decisions. V38 shows that paired visual paths can improve
+image reading, font invariance, and prompt-to-answer transition geometry on one
+consumer GPU. It does not establish answer generation or language
+understanding. The next proof must enlarge deduplicated relation diversity and
+test a small ordered set of conditional answer states or recurrent latent
+dynamics before rendering. Scaling the same single-vector objective or opening
+the sealed split is not authorized.
 
-See the [V35 measured receipt](../references/causal_glyph_flow_v35_result.md),
-[V35 implementation guide](causal-glyph-flow-v35.md), and
+Strong external work is acceptable and often preferable when it works. The
+project must record its exact provenance, license, preparation or
+initialization role, and runtime status. Pixel-Linguist, BGE-M3, Qwen, PIXAR,
+or a future document model may help train the student without becoming a hidden
+runtime dependency or an ILM contribution. Independence applies to the final
+deployed image-native model, not to an artificial requirement that every
+training aid be rebuilt from scratch.
+
+See the [V38 measured result](visual-path-alignment-v38-result.md),
+[V38 frozen protocol](../references/visual_path_alignment_v38_protocol.md),
+[V35 measured receipt](../references/causal_glyph_flow_v35_result.md), and
 [V34 codec receipt](../references/continuous_glyph_codec_v34_result.md).
 
 ### Earlier evidence ledger through V29

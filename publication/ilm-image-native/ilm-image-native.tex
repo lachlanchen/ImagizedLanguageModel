@@ -81,6 +81,19 @@ cosine margins, font and wording invariance, and length fail. The EMA route
 passes 20/33 frozen conditions and is \texttt{not-qualified}; sealed data and
 the raster renderer remain closed. V37 therefore establishes a practical
 one-GPU visual-semantic advance, not autonomous language or image generation.
+
+V38 tests the diagnosed invariance and near-identity transition failures with
+five-font paired visual paths, 1,024 audited training paraphrases, semantically
+near negatives, and an unconstrained answer map. Its 90.75M-parameter
+image-only student completes 8,000 finite BF16 updates in 99.71 minutes with
+2.969~GiB peak allocated memory on one RTX 4090 D. Prompt top-1/top-5 rises to
+60.71/86.73\%, held-font prompt consistency reaches 0.7925, and mean
+prompt-answer cosine falls from 0.9972 to 0.5769. Prompt-conditioned answer
+top-1/top-5 remains only 21.94/49.49\%, however; answer cosine, held-font and
+paraphrase answer consistency, and length remain below gate. EMA passes 25/39
+conditions and raw weights do not repair the result. V38 is
+\texttt{not-qualified}; zero sealed rows are rendered and no raster renderer
+is authorized.
 \end{abstract}
 
 \begin{figure}[t]
@@ -90,7 +103,7 @@ one-GPU visual-semantic advance, not autonomous language or image generation.
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output; the latest measured result
-  is the rejected V37 experiment in Figure~\ref{fig:v37result}.}
+  is the rejected V38 experiment in Figure~\ref{fig:v38result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -196,6 +209,12 @@ and controls that makes a stronger image-native language claim falsifiable:
   BGE-M3 targets. It raises prompt and answer-plan retrieval substantially on
   one RTX 4090, while its frozen font, wording, margin, and length failures
   keep the sealed split and renderer closed.
+  \item V38, a 90.75M-parameter paired-path visual reader and conditional
+  answer-state model. Five distinct font paths, audited paraphrase views,
+  nearest semantic negatives, and a full answer map improve prompt reading,
+  held-font invariance, and transition geometry on one RTX 4090 D. The frozen
+  8,000-update result still fails absolute and transferred answer semantics;
+  25/39 conditions pass, so no sealed row or renderer is opened.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -222,7 +241,10 @@ autonomous raster answering.
 PIXAR directly demonstrates decoder-only autoregressive language modeling from
 and to binary rendered patches \cite{pixar}. MIXAR scales that family across
 eight languages and multiple scripts \cite{mixar}, while PixelGPT studies
-autoregressive pretraining across pixels and text \cite{pixelgpt}. Accordingly,
+autoregressive pretraining across pixels and text \cite{pixelgpt}. SPIRAL
+studies cross-path inconsistency between text and rendered-image language paths
+and uses paired-path alignment without adding an inference-time teacher
+\cite{spiral}. Accordingly,
 we make no priority claim for pixel language modeling or pixel generation.
 V35 deliberately reuses PIXAR's released causal weights so that one-GPU
 experiments test a new interface and binding hypothesis instead of attempting
@@ -2711,6 +2733,110 @@ visual foundations are acceptable when provenance, licensing, training role,
 and runtime absence or presence are exact. No favorable external component or
 subset metric may bypass the same complete semantic gate.
 
+\subsection{Visual Path Alignment V38: better reading, failed answer generalization}
+
+\paragraph{Paired visual paths and full answer map.}
+V38 directly tests the three V37 diagnoses. Each training item contributes
+five image paths drawn from five distinct fonts: two prompt views, a validated
+paraphrase view when available, and two answer views. Clean patch occupancy is
+computed before augmentation. The reader and prompt head start from the
+exactly pinned V37 EMA state; a train-only orthogonal prompt-to-answer fit
+initializes a full linear map, and a zero-initialized nonlinear adapter can
+depart from that map without V37's angle cap. For pooled visual state (h),
+prompt feature (q), and normalized states (s,z), the deployed computation is
+\[
+q=P_{\mathrm p}(h),\qquad
+s=\operatorname{norm}(q),\qquad
+z=\operatorname{norm}(Ws+A(q)),\qquad
+\hat\ell=64\,\sigma(P_\ell(h)).
+\]
+The 90,753,281-parameter checkpoint accepts only a
+$3\times16\times1024$ prompt raster and a 64-element clean mask. It returns
+$s,z,\hat\ell$; it contains no strings, token or Unicode identifiers, OCR,
+vocabulary logits, codebook, candidate bank, BGE, Qwen, teacher, or network
+client, and it does not generate a raster.
+
+Training uses detached BGE-M3 prompt and answer states, explicit cross-font and
+paraphrase consistency, and 16 semantically nearest answer negatives under a
+fixed 0.85 teacher-cosine ceiling inside each 512-candidate set. Qwen-family
+models prepare and independently audit 1,024 training-only paraphrases before
+the tensor boundary. Pixel-Linguist, BGE-M3, and Qwen are exactly attributed
+external foundations or offline tools, not project contributions or deployed
+services. Strong external work is admissible when its provenance, license,
+training role, and runtime status are explicit.
+
+\paragraph{Completed one-GPU result.}
+The frozen schedule uses 500 head-realignment updates and 7,500 full-path
+updates with effective batch 64. It consumes 512,000 rendered examples and
+completes all 8,000 BF16 updates in 5,982.31 seconds (99.71 minutes) on GPU~0
+of one RTX 4090 D. Peak allocated CUDA memory is 3,188,168,704 bytes
+(2.969~GiB). All training and evaluation routes are finite. The complete
+checkpoint and evidence hashes are retained in the tracked V38 result receipt.
+
+\begin{table}[h!]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+V38 development metric & EMA & Raw & Frozen EMA gate \\
+\midrule
+Prompt top-1 / top-5 & 60.71 / 86.73\% & 60.71 / 85.71\% & \(\geq 55 / 80\%\) \\
+Prompt paired cosine & 0.3789 & 0.3791 & \(\geq 0.50\) \\
+Direct answer-read top-1 & 44.39\% & 43.37\% & \(\geq 45\%\) \\
+Conditional answer top-1 / top-5 & 21.94 / 49.49\% & 21.94 / 49.49\% & \(\geq 35 / 65\%\) \\
+Conditional answer MRR / cosine & 0.3460 / 0.2441 & 0.3436 / 0.2428 & \(\geq 0.45 / 0.30\) \\
+Answer cyclic margin / win & 0.2050 / 83.67\% & 0.2037 / 84.18\% & \(\geq 0.15 / 85\%\) \\
+Counterfactual assignment & 89.80\% & 89.80\% & \(\geq 90\%\) \\
+Held-font prompt / answer cosine & 0.7925 / 0.7323 & 0.7944 / 0.7321 & \(\geq 0.75 / 0.75\) \\
+Paraphrase top-5 & 73.33\% & 73.33\% & \(\geq 70\%\) \\
+Paraphrase prompt / answer cosine & 0.5408 / 0.4908 & 0.5403 / 0.4871 & \(\geq 0.70 / 0.70\) \\
+Transition direction / prompt-answer cosine & 0.3401 / 0.5769 & 0.3392 / 0.5693 & \(\geq 0.25 / \leq 0.95\) \\
+Answer-state effective rank & 49.02 & 49.28 & \(\geq 32\) and 40\% of target \\
+Visual-length MAE & 3.370 & 3.370 & \(\leq 3\) \\
+\bottomrule
+\end{tabular}}
+\caption{Frozen V38 development result on 196 pairs. Retrieval is an
+evaluator-only probe of candidate-independent continuous states after all
+student inference. It is not generated text or a deployed candidate system.}
+\label{tab:v38semantic}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_path_alignment_v38_result.png}
+  \caption{Measured V38 result generated from hash-pinned training and EMA/raw
+  development receipts. Paired paths improve reading and prompt font
+  invariance, while absolute and transferred answer semantics remain below the
+  complete gate. Zero sealed rows were rendered and no writer is authorized.}
+  \label{fig:v38result}
+\end{figure}
+
+The EMA route passes 25/39 conditions. Relative to V37, prompt top-1/top-5
+rises from 47.45/77.55\% to 60.71/86.73\%, prompt paired cosine rises from
+0.2374 to 0.3789, and canonical-to-held prompt/answer consistency rises from
+0.4130/0.4089 to 0.7925/0.7323. Mean prompt-answer cosine falls from 0.9972
+to 0.5769 while transition-direction cosine reaches 0.3401 and answer-state
+effective rank reaches 49.02. Thus the reader and transition geometry improve
+in the intended directions.
+
+The central answer relation does not improve enough: top-1 moves only from
+20.41\% to 21.94\%, and held-font and paraphrase answer consistency fail. The
+last training batch reports 96.35\% answer-plan top-1 while development remains
+21.94\%; this is diagnostic evidence of poor generalization, not a capability
+claim. Raw weights pass 24/39 only because the frozen primary route is EMA and
+otherwise match the rejected answer metrics. The exact decision is
+\texttt{not-qualified}; zero sealed rows were rendered and the raster writer
+remains closed.
+
+The bounded diagnosis is curriculum and answer dynamics rather than reader
+invariance alone. The 5,822-pair stream supplies roughly 88 effective passes,
+and one vector must represent the complete conditional answer. The next test
+should enlarge deduplicated relation diversity, reserve held-operation and
+held-composition probes, and predict a small ordered set of continuous answer
+states or recurrent latent dynamics. It must retain image-only deployment and
+the same complete gate before any answer-pixel writer is trained.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -3329,32 +3455,46 @@ retrieval, cyclic and intervention margins, font and wording invariance, and
 length still fail. EMA passes 20/33 conditions and raw weights pass 19/33.
 V37 is \texttt{not-qualified}; sealed evaluation and V37-R remain closed.
 
+V38 then tests paired visual-path alignment and removes the angle-limited
+answer transition. Its 90.75M-parameter image-only runtime completes 8,000
+updates in 99.71 minutes with 2.969~GiB peak allocated memory. Prompt
+top-1/top-5 reaches 60.71/86.73\%, held-font prompt consistency reaches
+0.7925, and the mean prompt-answer cosine falls from V37's 0.9972 to 0.5769.
+The actual conditional answer remains weak: top-1/top-5 is 21.94/49.49\%,
+paired cosine is 0.2441, and held-font and paraphrase answer consistency remain
+below threshold. EMA passes 25/39 conditions; raw weights do not repair the
+result. V38 is \texttt{not-qualified}; zero sealed rows were rendered and no
+raster renderer is authorized.
+
 The strongest supported claim remains narrow: one consumer GPU is enough to
 build, train, audit, package, and execute self-contained continuous visual
-language mechanisms at roughly 100M parameters. V37 additionally shows that
-useful visual semantic reading and noncollapsed answer planning can be learned
-in about one hour, but no tested natural-language route qualifies autonomous
-Chinese or raster answering. No Qwen, GPT, or general-LLM parity is shown, and
-no matched evidence supports compute superiority over token models. Runtime
-independence does not erase provenance: V34 is project work, while PIXAR and
-Pixel-Linguist provide external initialization and BGE-M3 provides V37's
-offline target geometry. Unstated upstream weight licenses prevent
-redistribution of the derived V35--V37 artifacts.
+language mechanisms at roughly 100M parameters. V38 additionally shows that
+paired visual paths can produce materially better prompt reading, font
+invariance, and non-identity answer-transition geometry in under two hours,
+but no tested natural-language route qualifies autonomous Chinese or raster
+answering. No Qwen, GPT, or general-LLM parity is shown, and no matched evidence
+supports compute superiority over token models. Runtime independence does not
+erase provenance: V34 is project work, while PIXAR and Pixel-Linguist provide
+external initialization, BGE-M3 supplies offline target geometry, and
+Qwen-family models prepare V38 training paraphrases. None is an uncredited ILM
+contribution or deployed dependency. Unstated upstream weight licenses prevent
+redistribution of the derived V35--V38 artifacts.
 
-The next bounded experiment should preserve V37's clean masks, end-to-end
-reader adaptation, detached target boundary, and rank controls. It should add
-explicit canonical/held-font and original/paraphrase positive pairs,
-semantically nearest relation negatives, and stronger clean-length
-supervision. Stronger external visual or document foundations are welcome when
-their provenance, license, training role, and deployed status are exact. Only
-a complete held-out semantic pass may open a separate raster renderer; that
-writer must still show correct-prompt gains over shuffled, blank, partial, and
-paraphrased controls in its own generated pixels.
+The next bounded experiment should preserve V38's clean masks, paired visual
+paths, end-to-end reader adaptation, detached target boundary, transition and
+rank controls. It should enlarge deduplicated instruction-relation diversity,
+reduce repeated exposure, reserve held-operation and held-composition probes,
+and replace one answer vector with a small ordered set of conditional states or
+recurrent latent dynamics. Stronger external visual, document, or language
+foundations are welcome when provenance, license, training role, and deployed
+status are exact. Only a complete held-out semantic pass may open a separate
+raster renderer; that writer must still show correct-prompt gains over shuffled,
+blank, partial, and paraphrased controls in its own generated pixels.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. Neither V35, V36, nor V37 answers such questions. Page-scale reading, 3D
+encodings. Neither V35, V36, V37, nor V38 answers such questions. Page-scale reading, 3D
 writing, motion, speech, and broad multilingual generation remain future
 extensions of the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
@@ -3376,6 +3516,7 @@ extensions of the same sensory interface and require separate evidence.
 \bibitem{pixar} Tai et al. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \url{https://arxiv.org/abs/2401.03321}
 \bibitem{mixar} Hu et al. MIXAR: Scaling Autoregressive Pixel-based Language Models to Multiple Languages and Scripts. \url{https://arxiv.org/abs/2604.11575}
 \bibitem{pixelgpt} Chai et al. Autoregressive Pre-Training on Pixels and Texts. \url{https://arxiv.org/abs/2404.10710}
+\bibitem{spiral} Liang, Zheng, Wang, and Mao. Same Semantics, Different Paths: Self-Improving Alignment for Vision--Text Compression. \url{https://arxiv.org/abs/2608.02109}
 \bibitem{canine} Clark et al. CANINE: Pre-training an Efficient Tokenization-Free Encoder. \url{https://arxiv.org/abs/2103.06874}
 \bibitem{byt5} Xue et al. ByT5: Towards a Token-Free Future. \url{https://arxiv.org/abs/2105.13626}
 \bibitem{megabyte} Yu et al. MEGABYTE: Predicting Million-byte Sequences with Multiscale Transformers. \url{https://arxiv.org/abs/2305.07185}
