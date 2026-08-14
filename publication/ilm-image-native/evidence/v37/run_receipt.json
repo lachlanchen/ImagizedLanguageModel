@@ -1,0 +1,393 @@
+{
+  "experiment": "visual-semantic-distillation-v37",
+  "label": "evidence",
+  "architecture": "visual-semantic-distillation-v37",
+  "protocol": {
+    "path": "references/visual_semantic_distillation_v37_protocol.md",
+    "sha256": "e3cca1c8eedb387f80a88cf17a93466f59532ea666d6dcbfe57e5d7d5e91f6d7"
+  },
+  "arguments": {
+    "instruction_manifest": "data/raw/alpaca_zh.json",
+    "target_bank": "artifacts/visual_semantic_distillation_v37_targets/train.pt",
+    "development_target_bank": "artifacts/visual_semantic_distillation_v37_targets/development.pt",
+    "checkpoint": null,
+    "out": "artifacts/visual_semantic_distillation_v37_20260814",
+    "resume": null,
+    "device": "cuda:0",
+    "precision": "bf16",
+    "num_workers": 4,
+    "batch_size": 8,
+    "warmup_updates": 500,
+    "adaptation_updates": 7500,
+    "warmup_head_lr": 0.0003,
+    "adaptation_head_lr": 0.0001,
+    "adaptation_reader_lr": 1e-05,
+    "warmup_effective_batch": 64,
+    "adaptation_effective_batch": 64,
+    "candidate_count": 512,
+    "stage_warmup": 200,
+    "minimum_learning_rate_ratio": 0.1,
+    "weight_decay": 0.05,
+    "gradient_clip": 1.0,
+    "ema_decay": 0.999,
+    "seed": 20263700,
+    "log_every": 10,
+    "save_every": 500,
+    "smoke": false,
+    "exploratory": false,
+    "tiny_model": false,
+    "random_foundation": false
+  },
+  "stages": [
+    {
+      "name": "projection-warmup",
+      "updates": 500,
+      "head_learning_rate": 0.0003,
+      "reader_learning_rate": 0.0,
+      "effective_batch": 64
+    },
+    {
+      "name": "full-visual-adaptation",
+      "updates": 7500,
+      "head_learning_rate": 0.0001,
+      "reader_learning_rate": 1e-05,
+      "effective_batch": 64
+    }
+  ],
+  "source_sha256": {
+    "ilm/visual_lm/visual_semantic_distillation.py": "31e2a274e976e361a47f7be301422643ce7133f502534c948341d973b391240f",
+    "ilm/visual_lm/visual_semantic_distillation_data.py": "a4fe92f6e8d11f4ad1120decf012cbc7030ba78bbc3e585fc9ac6af0547b129a",
+    "ilm/visual_lm/visual_semantic_distillation_training.py": "15afc6453c7571ff00cb1f0f87f781b5b2aad63a0608b6bd3a7222b340590bc0",
+    "scripts/build_visual_semantic_distillation_targets_v37.py": "89722910b50b3856475b1d149a8370351beb312409140b4a6e494fa93089abae",
+    "scripts/train_visual_semantic_distillation_v37.py": "0ffc4f3488342dc4df0d8f955c1d4935b41e6642d254eb921a3f4d7b2bed5e56"
+  },
+  "data": {
+    "instruction_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/raw/alpaca_zh.json",
+    "instruction_sha256": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+    "raw_records": 6231,
+    "train_target_records": 5822,
+    "selected_identifier_sha256": "ba3e01ba496590037e5f077e84b778ce52c1f08d3e85d2effb9421b8534cd391",
+    "target_bank": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_semantic_distillation_v37_targets/train.pt",
+    "target_bank_sha256": "3cd73f0818d65fd45c7700470cd010e292f359eed5aa3e62859bdf50d301711d",
+    "target_bank_receipt": {
+      "experiment": "visual-semantic-distillation-target-bank-v37",
+      "label": "evidence-input",
+      "split": "train",
+      "protocol": {
+        "path": "references/visual_semantic_distillation_v37_protocol.md",
+        "sha256": "e3cca1c8eedb387f80a88cf17a93466f59532ea666d6dcbfe57e5d7d5e91f6d7"
+      },
+      "source_sha256": {
+        "ilm/visual_lm/visual_semantic_distillation_data.py": "a4fe92f6e8d11f4ad1120decf012cbc7030ba78bbc3e585fc9ac6af0547b129a",
+        "ilm/visual_lm/visual_semantic_distillation_training.py": "15afc6453c7571ff00cb1f0f87f781b5b2aad63a0608b6bd3a7222b340590bc0",
+        "scripts/build_visual_semantic_distillation_targets_v37.py": "89722910b50b3856475b1d149a8370351beb312409140b4a6e494fa93089abae"
+      },
+      "data": {
+        "manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/raw/alpaca_zh.json",
+        "sha256": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+        "raw_eligible_records": 6231,
+        "selected_records": 5822,
+        "rejected_records": 25,
+        "rejected_identifiers": [
+          "alpaca-zh:261",
+          "alpaca-zh:5849",
+          "alpaca-zh:8396",
+          "alpaca-zh:9606",
+          "alpaca-zh:11477",
+          "alpaca-zh:11769",
+          "alpaca-zh:15160",
+          "alpaca-zh:17818",
+          "alpaca-zh:18216",
+          "alpaca-zh:21561",
+          "alpaca-zh:23517",
+          "alpaca-zh:29553",
+          "alpaca-zh:30254",
+          "alpaca-zh:30997",
+          "alpaca-zh:31164",
+          "alpaca-zh:32738",
+          "alpaca-zh:34192",
+          "alpaca-zh:36071",
+          "alpaca-zh:37755",
+          "alpaca-zh:39360",
+          "alpaca-zh:40042",
+          "alpaca-zh:41848",
+          "alpaca-zh:41951",
+          "alpaca-zh:42364",
+          "alpaca-zh:42443"
+        ]
+      },
+      "render_config": {
+        "patch_size": 16,
+        "patches": 64,
+        "minimum_font_size": 8,
+        "maximum_font_size": 11,
+        "evaluation_font_size": 10,
+        "maximum_origin": 15,
+        "augment": false
+      },
+      "teacher": {
+        "model": "bge-m3:latest",
+        "endpoint": "http://127.0.0.1:11434/api/embed",
+        "server_version": "0.32.6",
+        "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/bge-m3/latest",
+        "manifest_sha256": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+        "model_layer_sha256": "daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+        "model_layer_bytes": 1157671200,
+        "official_model_card_license": "MIT",
+        "role": "offline detached semantic target construction only",
+        "student_runtime_dependency": false,
+        "evidence_eligible": true
+      },
+      "target_transform": "l2_normalize(raw_l2_normalized_bge - train_joint_mean)",
+      "teacher_mean_source": "current-complete-train-bank",
+      "train_bank_sha256": null,
+      "teacher_mean_norm": 0.6286531090736389,
+      "embedding_requests": 91,
+      "embedding_documents": 11644,
+      "target_metrics": {
+        "samples": 5822,
+        "top1": 0.6482308506965637,
+        "top5": 0.7861559391021729,
+        "mrr": 0.7117671370506287,
+        "correct_cosine": 0.5183433294296265,
+        "cyclic_margin": 0.533003032207489,
+        "correct_beats_cyclic": 0.9848849177360535,
+        "answer_effective_rank": 120.69961547851562
+      },
+      "strings_stored": false,
+      "token_ids_stored": false,
+      "student_runtime_dependency": false,
+      "elapsed_seconds": 89.41213902598247
+    },
+    "development_target_bank": {
+      "path": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_semantic_distillation_v37_targets/development.pt",
+      "sha256": "6dac8ea8df5afbb1fbe032ab6f1dd8b196ea67ef549475025adbe7bb04706b8f",
+      "receipt": {
+        "experiment": "visual-semantic-distillation-target-bank-v37",
+        "label": "evidence-input",
+        "split": "development",
+        "protocol": {
+          "path": "references/visual_semantic_distillation_v37_protocol.md",
+          "sha256": "e3cca1c8eedb387f80a88cf17a93466f59532ea666d6dcbfe57e5d7d5e91f6d7"
+        },
+        "source_sha256": {
+          "ilm/visual_lm/visual_semantic_distillation_data.py": "a4fe92f6e8d11f4ad1120decf012cbc7030ba78bbc3e585fc9ac6af0547b129a",
+          "ilm/visual_lm/visual_semantic_distillation_training.py": "15afc6453c7571ff00cb1f0f87f781b5b2aad63a0608b6bd3a7222b340590bc0",
+          "scripts/build_visual_semantic_distillation_targets_v37.py": "89722910b50b3856475b1d149a8370351beb312409140b4a6e494fa93089abae"
+        },
+        "data": {
+          "manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/raw/alpaca_zh.json",
+          "sha256": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+          "raw_eligible_records": 6231,
+          "selected_records": 196,
+          "rejected_records": 1,
+          "rejected_identifiers": [
+            "alpaca-zh:14816"
+          ]
+        },
+        "render_config": {
+          "patch_size": 16,
+          "patches": 64,
+          "minimum_font_size": 8,
+          "maximum_font_size": 11,
+          "evaluation_font_size": 10,
+          "maximum_origin": 15,
+          "augment": false
+        },
+        "teacher": {
+          "model": "bge-m3:latest",
+          "endpoint": "http://127.0.0.1:11434/api/embed",
+          "server_version": "0.32.6",
+          "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/bge-m3/latest",
+          "manifest_sha256": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+          "model_layer_sha256": "daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+          "model_layer_bytes": 1157671200,
+          "official_model_card_license": "MIT",
+          "role": "offline detached semantic target construction only",
+          "student_runtime_dependency": false,
+          "evidence_eligible": true
+        },
+        "target_transform": "l2_normalize(raw_l2_normalized_bge - train_joint_mean)",
+        "teacher_mean_source": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_semantic_distillation_v37_targets/train.pt",
+        "train_bank_sha256": "3cd73f0818d65fd45c7700470cd010e292f359eed5aa3e62859bdf50d301711d",
+        "teacher_mean_norm": 0.6286531090736389,
+        "embedding_requests": 4,
+        "embedding_documents": 392,
+        "target_metrics": {
+          "samples": 196,
+          "top1": 0.8265306353569031,
+          "top5": 0.9285714030265808,
+          "mrr": 0.8723083734512329,
+          "correct_cosine": 0.5112253427505493,
+          "cyclic_margin": 0.5331093668937683,
+          "correct_beats_cyclic": 0.9744898080825806,
+          "answer_effective_rank": 76.53340148925781
+        },
+        "strings_stored": false,
+        "token_ids_stored": false,
+        "student_runtime_dependency": false,
+        "elapsed_seconds": 5.914106154348701
+      }
+    }
+  },
+  "initialization": {
+    "repository": "Pixel-Linguist/Pixel-Linguist-v0",
+    "revision": "086b70818b2241e81b0de131aa5debe982af7a54",
+    "checkpoint": "/home/lachlan/.cache/huggingface/hub/models--Pixel-Linguist--Pixel-Linguist-v0/blobs/84c1bfbeada57e7e70164811a201a116ad18c22df69beb762fdbb853f8e02676",
+    "sha256": "84c1bfbeada57e7e70164811a201a116ad18c22df69beb762fdbb853f8e02676",
+    "selected_state_prefix": "vit.*",
+    "selected_tensors": 198,
+    "ignored_tensors": [
+      "pooler.linear.bias",
+      "pooler.linear.weight",
+      "pooler.ln.bias",
+      "pooler.ln.weight"
+    ],
+    "selected_positions": 65,
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "license": "not stated; local research only; no redistribution",
+    "route": "pixel-linguist-v0-vit-only-v37",
+    "config_sha256": "b61018a997aa030f41571615641204cf40bd7c623f25dfc129a49ffe1f571b97",
+    "upstream_representation_head": "masked active-patch mean; pooler MLP dropped",
+    "evidence_eligible": true
+  },
+  "model_boundary": {
+    "architecture": "visual-semantic-distillation-v37",
+    "model_config": {
+      "patch_size": 16,
+      "patches": 64,
+      "reader_hidden_size": 768,
+      "reader_layers": 12,
+      "reader_heads": 12,
+      "reader_intermediate_size": 3072,
+      "reader_dropout": 0.1,
+      "projection_hidden_size": 1536,
+      "semantic_dim": 1024,
+      "projection_dropout": 0.05,
+      "plan_hidden_size": 512,
+      "length_hidden_size": 256,
+      "initial_residual_scale": 0.05
+    },
+    "total_parameters": 89768706,
+    "trainable_parameters": 89768706,
+    "parameter_cap": 100000000,
+    "parameter_cap_pass": true,
+    "primary_input": "prompt raster and clean visual patch mask",
+    "primary_output": "continuous semantic state, answer plan, and visual length",
+    "forbidden_parameter_names": [],
+    "uses_strings": false,
+    "uses_token_ids": false,
+    "uses_unicode_ids": false,
+    "uses_character_ids": false,
+    "uses_vocabulary_logits": false,
+    "uses_ocr": false,
+    "uses_visual_codebook": false,
+    "uses_bge_at_runtime": false,
+    "uses_teacher_at_runtime": false,
+    "candidate_bank_deployed": false,
+    "network_client_deployed": false,
+    "generates_raster": false,
+    "external_initialization": {
+      "repository": "Pixel-Linguist/Pixel-Linguist-v0",
+      "revision": "086b70818b2241e81b0de131aa5debe982af7a54",
+      "weight_sha256": "84c1bfbeada57e7e70164811a201a116ad18c22df69beb762fdbb853f8e02676",
+      "config_sha256": "b61018a997aa030f41571615641204cf40bd7c623f25dfc129a49ffe1f571b97"
+    }
+  },
+  "data_boundary": {
+    "architecture": "visual-semantic-distillation-v37",
+    "pixel_keys": [
+      "prompt_pixels",
+      "prompt_mask",
+      "prompt_view_pixels",
+      "prompt_view_mask",
+      "answer_pixels",
+      "answer_mask",
+      "answer_view_pixels",
+      "answer_view_mask"
+    ],
+    "deployable_keys": [
+      "prompt_pixels",
+      "prompt_mask"
+    ],
+    "prompt_shape": [
+      3,
+      16,
+      1024
+    ],
+    "mask_shape": [
+      64
+    ],
+    "mask_source": "clean-pre-augmentation-raster",
+    "strings_exist_only_before_tensor_boundary": true,
+    "metadata_enters_model": false,
+    "uses_strings": false,
+    "uses_token_ids": false,
+    "uses_unicode_ids": false,
+    "uses_character_ids": false,
+    "uses_ocr": false,
+    "uses_visual_codebook": false,
+    "candidate_bank_deployed": false
+  },
+  "optimizer": {
+    "algorithm": "AdamW",
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "groups": [
+      {
+        "role": "head",
+        "decay": true,
+        "parameters": 6,
+        "elements": 4063488,
+        "names_sha256": "cf7f317c3b3bb5ac7648d206f741c7270addecea03a911bf9bb602a81173db6d"
+      },
+      {
+        "role": "head",
+        "decay": false,
+        "parameters": 11,
+        "elements": 7938,
+        "names_sha256": "9370e742ba7ad831b65f8db0ff2e97443b21aa702510dd69edccb5233c2efc5d"
+      },
+      {
+        "role": "reader",
+        "decay": true,
+        "parameters": 75,
+        "elements": 85575168,
+        "names_sha256": "aa4f4cb7936cb9abafae41dc274a4927abd2a1d3b263cfa2a7a17e49fa4a81a8"
+      },
+      {
+        "role": "reader",
+        "decay": false,
+        "parameters": 123,
+        "elements": 122112,
+        "names_sha256": "2ed03505ba3ce4c51f77ec4ea4205c61c41804956a2880b97cc4f9c45fea1939"
+      }
+    ]
+  },
+  "ema_parameter_names_sha256": "82dff67462a7464082aabfc7ceaf592e9163d4b62ee1f8f86e0595840cacb49d",
+  "target_bank_role": "offline detached training supervision only",
+  "target_tensors_in_checkpoint": false,
+  "teacher_mean_in_checkpoint": false,
+  "teacher_model_in_student_process": false,
+  "candidate_tensors_in_checkpoint": false,
+  "source_language_strings_in_checkpoint": false,
+  "effective_batch_preserved_by_gradient_accumulation": true,
+  "candidate_seed_derived_from_global_update": true,
+  "device": "cuda:0",
+  "device_name": "NVIDIA GeForce RTX 4090 D",
+  "startup_gpu_memory": {
+    "free_bytes": 24318902272,
+    "total_bytes": 25252724736
+  },
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "maximum_vram_bytes": 21474836480,
+  "external_revision": "086b70818b2241e81b0de131aa5debe982af7a54",
+  "external_weight_sha256": "84c1bfbeada57e7e70164811a201a116ad18c22df69beb762fdbb853f8e02676",
+  "derived_checkpoint_license": "local research only; no redistribution"
+}

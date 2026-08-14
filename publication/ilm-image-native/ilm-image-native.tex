@@ -67,8 +67,20 @@ retrieval, blank control, font and paraphrase transfer, and length fail. A
 post-result nonsealed audit finds that measuring occupancy after augmentation
 inflated mean train length to 37.31 patches versus 11.53 in development and
 left the train target space at effective rank 4.77/768. The sealed split stays
-closed and no renderer is opened. These results localize the next test to
-clean-mask, end-to-end visual semantic distillation before raster generation.
+closed and no renderer is opened.
+
+V37 implements the resulting clean-mask, end-to-end visual semantic
+distillation test. Its 89.77M-parameter image-only student uses an exactly
+attributed Pixel-Linguist initialization and detached BGE-M3 targets prepared
+offline; neither text nor teacher is present at runtime. It completes 8,000
+finite updates in 61.59 minutes with 2.748~GiB peak allocated memory. Prompt
+reading reaches 47.45/77.55\% top-1/top-5, while candidate-independent answer
+plans reach 20.41/45.41\% and 0.3377 MRR. Counterfactual assignment reaches
+93.88\% and paraphrase top-5 reaches 73.33\%, but absolute answer retrieval,
+cosine margins, font and wording invariance, and length fail. The EMA route
+passes 20/33 frozen conditions and is \texttt{not-qualified}; sealed data and
+the raster renderer remain closed. V37 therefore establishes a practical
+one-GPU visual-semantic advance, not autonomous language or image generation.
 \end{abstract}
 
 \begin{figure}[t]
@@ -78,7 +90,7 @@ clean-mask, end-to-end visual semantic distillation before raster generation.
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output; the latest measured result
-  is the rejected V36 experiment in Figure~\ref{fig:v36result}.}
+  is the rejected V37 experiment in Figure~\ref{fig:v37result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -178,6 +190,12 @@ and controls that makes a stronger image-native language claim falsifiable:
   one-4090 run passes counterfactual assignment but fails the conjunctive
   held-out semantic gate; the negative result exposes an occupancy-mask shift
   and low-rank target geometry before writer compute is spent.
+  \item V37, an 89.77M-parameter end-to-end visual semantic distillation
+  student that fixes clean-mask construction, adapts the image reader, and
+  learns a noncollapsed continuous answer-plan space from detached offline
+  BGE-M3 targets. It raises prompt and answer-plan retrieval substantially on
+  one RTX 4090, while its frozen font, wording, margin, and length failures
+  keep the sealed split and renderer closed.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -2565,7 +2583,134 @@ semantic geometry offline, and explicitly controls dimensional collapse with
 variance/covariance regularization \cite{vicreg}. A raster writer remains gated
 on that semantic result.
 
-\clearpage
+\subsection{Visual Semantic Distillation V37: useful reading, failed complete gate}
+
+\paragraph{Offline targets and image-only runtime.}
+V37 implements the bounded successor prescribed by the V36 diagnosis. For each
+selected training pair, the pinned BGE-M3 model \cite{bgem3} prepares raw
+prompt and answer vectors offline. With the arithmetic mean over all train
+prompt and answer vectors denoted by \(\mu\), the detached targets are
+\[
+u_i=\operatorname{norm}(e(p_i)-\mu),\qquad
+v_i=\operatorname{norm}(e(a_i)-\mu).
+\]
+The development bank reuses the immutable train \(\mu\), so no
+development-fitted centering enters the result. The target-space sanity ceiling
+on 196 development pairs is 82.65\% top-1, 92.86\% top-5, and 0.8723 MRR,
+with answer effective rank 76.53. Target construction stores neither strings
+nor token IDs in the tensor bank, and BGE-M3 is absent from student training
+and inference processes.
+
+The deployed student begins with the exactly pinned Pixel-Linguist-v0
+\texttt{vit.*} visual state \cite{pixelsentence}. It adapts a 12-layer,
+768-wide, 12-head reader end to end over 64 clean visual patches. Masked mean
+pooling feeds a 1,024-dimensional normalized semantic head. A bounded residual
+head converts prompt semantics into a normalized answer plan, while a separate
+head estimates the clean answer length:
+\[
+F_\theta(x,m)\longmapsto
+\left(s_\theta(x,m),z_\theta(x,m),\hat\ell_\theta(x,m)\right),
+\qquad s,z\in\mathbb S^{1023},\quad \hat\ell\in[0,64].
+\]
+The resulting 89,768,706-parameter artifact contains no text, token or Unicode
+IDs, OCR, vocabulary logits, candidate bank, lookup table, visual codebook,
+target tensor, BGE component, or network client. It emits continuous states,
+not a raster.
+
+Patch occupancy is measured from clean black-on-white geometry before blur,
+contrast, or noise, so augmentation cannot reproduce V36's mask shift. Two
+independent prompt views and two answer views are trained with detached
+512-candidate InfoNCE and cosine terms. If \(p,a,z\) denote prompt state,
+answer-image state, and prompt-conditioned answer plan, respectively, the
+principal loss is
+\begin{align*}
+\mathcal L={}&0.70\mathcal L_{\mathrm{prompt}}
++0.70\mathcal L_{\mathrm{answer}}
++\mathcal L_{\mathrm{plan}}
++0.50\mathcal L_{\mathrm{margin}}\\
+&+0.20\mathcal L_{\mathrm{relation}}
++0.20\mathcal L_{\mathrm{view}}
++0.05\mathcal L_{\mathrm{variance}}
++0.005\mathcal L_{\mathrm{covariance}}\\
+&+0.02\mathcal L_{\mathrm{length}}
++0.01\mathcal L_{\mathrm{residual}}.
+\end{align*}
+The relation term matches within-batch student and teacher pair geometry;
+VICReg-style variance/covariance terms discourage collapse; and the hard
+negative is the highest-scoring detached candidate below a frozen teacher
+similarity ceiling. Candidate tensors supervise training and scoring only.
+They are not a deployed retrieval path.
+
+\paragraph{Completed one-GPU result.}
+The fixed run uses 5,822 train pairs, 500 frozen-reader projection updates, and
+7,500 full-reader updates with effective batch 64. It consumes 512,000 rendered
+examples and completes all 8,000 BF16 updates in 3,695.48 seconds
+(61.59 minutes) on GPU~0 of one RTX 4090 D. Peak allocated CUDA memory is
+2,951,057,920 bytes (2.748~GiB). Every reported loss, gradient, parameter,
+optimizer state, EMA state, target, checkpoint, prediction, and metric is
+finite. The deterministic answer-plan rank probe rises from 9.23 after warmup
+to 36.44 after full adaptation.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+V37 development metric & EMA & Raw & Frozen EMA gate \\
+\midrule
+Prompt paired cosine & 0.2374 & 0.2347 & \(\geq 0.70\) \\
+Prompt top-1 / top-5 & 47.45 / 77.55\% & 47.45 / 77.04\% & \(\geq 25 / 60\%\) \\
+Answer top-1 / top-5 & 20.41 / 45.41\% & 20.41 / 46.94\% & \(\geq 30 / 60\%\) \\
+Answer MRR & 0.3377 & 0.3340 & \(\geq 0.40\) \\
+Paired answer cosine & 0.1634 & 0.1621 & \(\geq 0.35\) \\
+Correct--cyclic margin & 0.1590 & 0.1572 & \(\geq 0.20\) \\
+Counterfactual assignment & 93.88\% & 93.88\% & \(\geq 85\%\) \\
+Held-font plan cosine & 0.4089 & 0.4088 & \(\geq 0.85\) \\
+Paraphrase top-5 & 73.33\% & 73.33\% & \(\geq 50\%\) \\
+Original--paraphrase cosine & 0.4558 & 0.4523 & \(\geq 0.75\) \\
+Plan effective rank & 55.37 & 56.83 & \(\geq 32\) \\
+Visual-length MAE & 3.682 & 3.678 & \(\leq 3\) \\
+\bottomrule
+\end{tabular}
+\caption{V37 development result. Prompt retrieval, counterfactual assignment,
+paraphrase top-5, and plan rank pass individually, but absolute answer
+alignment and invariance remain below the conjunctive gate. Retrieval is an
+evaluator-only probe of candidate-independent continuous states.}
+\label{tab:v37semantic}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_semantic_distillation_v37_result.png}
+  \caption{Measured V37 development decision generated from tracked,
+  hash-pinned training and EMA/raw evaluation receipts. Pixel-Linguist is
+  external initialization and BGE-M3 is an offline target builder; neither is
+  claimed as project work or called by the deployed student. V37 predicts
+  continuous states and does not emit answer pixels.}
+  \label{fig:v37result}
+\end{figure}
+
+The EMA route passes 20/33 conditions. It passes all integrity and resource
+checks, prompt top-1/top-5, the tenfold gain over an untrained head,
+counterfactual assignment, paraphrase top-5, and both rank conditions. It
+fails prompt paired cosine, absolute answer top-1/top-5/MRR, the 0.20 absolute
+gain by 0.00102, answer cosine and cyclic margins, shuffled/blank cosine drops,
+held-font consistency, original--paraphrase consistency, and length. Raw
+weights pass 19/33 and do not repair the mechanism. The exact decision is
+\texttt{not-qualified}; the sealed split remains unopened and V37-R remains
+forbidden.
+
+V37 is nevertheless a substantive bounded advance over V36: answer-plan top-1
+rises from 1.02\% to 20.41\%, prompt top-1 reaches 47.45\%, and the learned
+plan no longer fails the effective-rank controls. The remaining failure is not
+target availability but stable visual-to-semantic transfer. The next bounded
+experiment should train explicit canonical/held-font and
+original/paraphrase positive pairs, use semantically nearest detached
+relation negatives, and improve clean-length supervision. Stronger external
+visual foundations are acceptable when provenance, licensing, training role,
+and runtime absence or presence are exact. No favorable external component or
+subset metric may bypass the same complete semantic gate.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -3173,29 +3318,43 @@ audit additionally exposes a 37.31-versus-11.53-patch train/development length
 shift and effective target rank 4.77/768. V36 is therefore also
 \texttt{not-qualified}; neither its sealed split nor its renderer is opened.
 
+V37 implements the resulting clean-mask route with end-to-end semantic
+distillation. Its 89.77M-parameter image-only runtime completes 8,000 updates in
+61.59 minutes with 2.748~GiB peak allocated memory. Prompt top-1/top-5 rises
+to 47.45/77.55\%, and candidate-independent answer plans reach
+20.41/45.41\% with 0.3377 MRR. Counterfactual assignment is 93.88\%,
+paraphrase top-5 is 73.33\%, and plan effective rank is 55.37. These are
+substantial improvements over V36, but paired cosine, absolute answer
+retrieval, cyclic and intervention margins, font and wording invariance, and
+length still fail. EMA passes 20/33 conditions and raw weights pass 19/33.
+V37 is \texttt{not-qualified}; sealed evaluation and V37-R remain closed.
+
 The strongest supported claim remains narrow: one consumer GPU is enough to
 build, train, audit, package, and execute self-contained continuous visual
-language mechanisms at roughly 100M parameters, but neither tested natural
-language objective learns useful autonomous Chinese. No Qwen, GPT, or
-general-LLM parity is shown, and no matched evidence supports compute
-superiority over token models. Runtime independence does not erase provenance:
-V34 is project work, while PIXAR and Pixel-Linguist provide external
-initialization, and unstated upstream weight licenses prevent redistribution of
-the derived V35/V36 artifacts.
+language mechanisms at roughly 100M parameters. V37 additionally shows that
+useful visual semantic reading and noncollapsed answer planning can be learned
+in about one hour, but no tested natural-language route qualifies autonomous
+Chinese or raster answering. No Qwen, GPT, or general-LLM parity is shown, and
+no matched evidence supports compute superiority over token models. Runtime
+independence does not erase provenance: V34 is project work, while PIXAR and
+Pixel-Linguist provide external initialization and BGE-M3 provides V37's
+offline target geometry. Unstated upstream weight licenses prevent
+redistribution of the derived V35--V37 artifacts.
 
-The next bounded experiment should not merely enlarge V35 or rerun V36. It
-should compute occupancy from clean geometry, distill a strong multilingual
-semantic space into prompt and answer images while adapting the visual reader
-end to end, and maintain effective rank explicitly. The text teacher may build
-detached targets, but must not enter the deployed image-only model. Only a
-complete held-out semantic pass may open a separate raster renderer; that
+The next bounded experiment should preserve V37's clean masks, end-to-end
+reader adaptation, detached target boundary, and rank controls. It should add
+explicit canonical/held-font and original/paraphrase positive pairs,
+semantically nearest relation negatives, and stronger clean-length
+supervision. Stronger external visual or document foundations are welcome when
+their provenance, license, training role, and deployed status are exact. Only
+a complete held-out semantic pass may open a separate raster renderer; that
 writer must still show correct-prompt gains over shuffled, blank, partial, and
 paraphrased controls in its own generated pixels.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. Neither V35 nor V36 answers such questions. Page-scale reading, 3D
+encodings. Neither V35, V36, nor V37 answers such questions. Page-scale reading, 3D
 writing, motion, speech, and broad multilingual generation remain future
 extensions of the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
