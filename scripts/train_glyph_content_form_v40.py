@@ -39,6 +39,8 @@ from ilm.visual_lm.glyph_content_form_data import (
 )
 from ilm.visual_lm.glyph_content_form_evaluation import (
     evaluate_glyph_content_form,
+    v40_development_gate,
+    v40_pilot_gate,
 )
 from ilm.visual_lm.glyph_content_form_training import (
     WarmStartTrainableEMA,
@@ -61,6 +63,10 @@ EXPECTED_CACHE_MANIFEST_SHA256 = (
     "3c4064441563c88dffe0c36d42cce0c381bf8b401b764b87484edfb4aa7db99c"
 )
 DEFAULT_OUT = "artifacts/glyph_content_form_v40_20260814"
+PROTOCOL_DOCUMENT = "references/glyph_content_form_v40_protocol.md"
+EXPECTED_PROTOCOL_SHA256 = (
+    "3e7eb30f16aca5158cd95a42c6b3d50fd4576b29a96ba64b58aaba47f55e2e2c"
+)
 UPDATES = 3_000
 BATCH_SIZE = 128
 LEARNING_RATE = 3e-4
@@ -76,6 +82,7 @@ SOURCE_FILES = (
     "ilm/visual_lm/glyph_content_form_training.py",
     "ilm/visual_lm/glyph_content_form_evaluation.py",
     "scripts/train_glyph_content_form_v40.py",
+    PROTOCOL_DOCUMENT,
 )
 
 
@@ -347,6 +354,9 @@ def main() -> None:
         cache_path=Path(args.cache),
         verified=verified,
     )
+    protocol_hash = file_sha256(PROTOCOL_DOCUMENT)
+    if verified and protocol_hash != EXPECTED_PROTOCOL_SHA256:
+        raise RuntimeError("V40 protocol hash changed")
     config = GlyphContentFormConfig()
     model = GlyphContentFormModel(config)
     codec_receipt = load_v40_v34_codec(
@@ -427,6 +437,10 @@ def main() -> None:
         "data_boundary": glyph_content_form_data_boundary_receipt(probe_batch),
         "data": data_receipt,
         "codec": codec_receipt,
+        "protocol": {
+            "path": str(Path(PROTOCOL_DOCUMENT).resolve()),
+            "sha256": protocol_hash,
+        },
         "source_sha256": {path: file_sha256(path) for path in SOURCE_FILES},
         "seed": SEED,
         "device": str(device),
@@ -439,13 +453,17 @@ def main() -> None:
         "smoke": args.smoke,
     }
     atomic_write_json(run_receipt, output_dir / "run_receipt.json")
+    baseline_path = output_dir / "development_zero_trained.json"
     if completed_updates == 0:
         baseline = evaluate_glyph_content_form(
             model,
             development_loader,
             device=device,
         )
-        atomic_write_json(baseline, output_dir / "development_zero_trained.json")
+        atomic_write_json(baseline, baseline_path)
+    else:
+        with baseline_path.open("r", encoding="utf-8") as handle:
+            baseline = json.load(handle)
 
     stop_requested = False
 
@@ -554,12 +572,19 @@ def main() -> None:
 
     with use_ema_parameters(model, ema):
         selected_sha256 = module_state_sha256(model)
+    final_gate: dict[str, Any] | None = None
+    if development_report is not None and not stop_requested:
+        if args.updates == 250:
+            final_gate = v40_pilot_gate(baseline, development_report)
+        elif args.updates == UPDATES:
+            final_gate = v40_development_gate(development_report)
     final = {
         **run_receipt,
         "completed_updates": int(last_metrics.get("update", completed_updates)),
         "last_metrics": last_metrics,
         "selected_route": "warm-start-ema",
         "selected_model_sha256": selected_sha256,
+        "gate": final_gate,
         "peak_cuda_memory_bytes": (
             int(torch.cuda.max_memory_allocated(device)) if device.type == "cuda" else 0
         ),

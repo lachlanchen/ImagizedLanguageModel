@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Any, Iterable, Mapping
 
 import torch
@@ -56,6 +57,8 @@ def evaluate_glyph_content_form(
     model.eval()
     model.to(device)
     collected: dict[str, list[torch.Tensor]] = {
+        "anchor_surface": [],
+        "positive_surface": [],
         "anchor_content": [],
         "positive_content": [],
         "anchor_form": [],
@@ -77,6 +80,10 @@ def evaluate_glyph_content_form(
                     for key, value in glyph_content_form_student_batch(batch).items()
                 }
                 output = model(**student)
+                collected["anchor_surface"].append(output.anchor_surface.float().cpu())
+                collected["positive_surface"].append(
+                    output.positive_surface.float().cpu()
+                )
                 collected["anchor_content"].append(output.anchor_content.float().cpu())
                 collected["positive_content"].append(output.positive_content.float().cpu())
                 collected["anchor_form"].append(output.anchor_form.float().cpu())
@@ -133,6 +140,10 @@ def evaluate_glyph_content_form(
         values["anchor_content"],
         values["positive_content"],
     )
+    surface_retrieval = cross_era_retrieval_metrics(
+        values["anchor_surface"],
+        values["positive_surface"],
+    )
     content_cosine = F.cosine_similarity(
         values["anchor_content"],
         values["positive_content"],
@@ -164,7 +175,11 @@ def evaluate_glyph_content_form(
     )
     return {
         "families": len(families),
+        "frozen_surface_retrieval": surface_retrieval,
         "content_retrieval": retrieval,
+        "content_top1_gain_over_surface": float(
+            retrieval["argmax_top1"] - surface_retrieval["argmax_top1"]
+        ),
         "content_cosine_mean": float(content_cosine.mean()),
         "content_cosine_median": float(content_cosine.median()),
         "same_stage_form_cosine_mean": float(same_stage_form.mean()),
@@ -182,8 +197,153 @@ def evaluate_glyph_content_form(
     }
 
 
+def _all_finite(value: Any) -> bool:
+    if isinstance(value, Mapping):
+        return all(_all_finite(item) for item in value.values())
+    if isinstance(value, (tuple, list)):
+        return all(_all_finite(item) for item in value)
+    if isinstance(value, float):
+        return math.isfinite(value)
+    return True
+
+
+def _criterion(
+    value: float,
+    threshold: float,
+    *,
+    operator: str,
+) -> dict[str, float | str | bool]:
+    if operator == ">=":
+        passed = value >= threshold
+    elif operator == ">":
+        passed = value > threshold
+    else:
+        raise ValueError("V40 gate operator is invalid")
+    return {
+        "value": float(value),
+        "threshold": float(threshold),
+        "operator": operator,
+        "pass": bool(passed),
+    }
+
+
+def v40_pilot_gate(
+    zero_trained: Mapping[str, Any],
+    trained: Mapping[str, Any],
+) -> dict[str, Any]:
+    content_top1 = float(trained["content_retrieval"]["argmax_top1"])
+    surface_top1 = float(trained["frozen_surface_retrieval"]["argmax_top1"])
+    zero_content_top1 = float(zero_trained["content_retrieval"]["argmax_top1"])
+    reference_f1 = float(trained["reference_style_visual"]["ink_f1"])
+    zero_reference_f1 = float(zero_trained["reference_style_visual"]["ink_f1"])
+    form_margin = float(trained["form_stage_margin"])
+    zero_form_margin = float(zero_trained["form_stage_margin"])
+    criteria = {
+        "finite": {
+            "value": bool(_all_finite(trained)),
+            "threshold": True,
+            "operator": "is",
+            "pass": bool(_all_finite(trained)),
+        },
+        "content_at_least_surface": _criterion(
+            content_top1 - surface_top1,
+            0.0,
+            operator=">=",
+        ),
+        "content_gain_over_zero": _criterion(
+            content_top1 - zero_content_top1,
+            0.03,
+            operator=">=",
+        ),
+        "reference_ink_f1_gain": _criterion(
+            reference_f1 - zero_reference_f1,
+            0.15,
+            operator=">=",
+        ),
+        "form_stage_margin_gain": _criterion(
+            form_margin - zero_form_margin,
+            0.05,
+            operator=">=",
+        ),
+    }
+    return {
+        "gate": "v40-bounded-pilot",
+        "qualified": all(bool(value["pass"]) for value in criteria.values()),
+        "criteria": criteria,
+    }
+
+
+def v40_development_gate(report: Mapping[str, Any]) -> dict[str, Any]:
+    content = report["content_retrieval"]
+    criteria = {
+        "content_top1": _criterion(
+            float(content["argmax_top1"]),
+            0.60,
+            operator=">=",
+        ),
+        "content_top1_gain_over_surface": _criterion(
+            float(report["content_top1_gain_over_surface"]),
+            0.10,
+            operator=">=",
+        ),
+        "content_mrr": _criterion(float(content["mrr"]), 0.70, operator=">="),
+        "reference_ink_f1": _criterion(
+            float(report["reference_style_visual"]["ink_f1"]),
+            0.70,
+            operator=">=",
+        ),
+        "self_ink_f1": _criterion(
+            float(report["self_visual"]["ink_f1"]),
+            0.75,
+            operator=">=",
+        ),
+        "form_stage_margin": _criterion(
+            float(report["form_stage_margin"]),
+            0.10,
+            operator=">=",
+        ),
+    }
+    return {
+        "gate": "v40-development",
+        "qualified": _all_finite(report)
+        and all(bool(value["pass"]) for value in criteria.values()),
+        "criteria": criteria,
+    }
+
+
+def v40_sealed_gate(report: Mapping[str, Any]) -> dict[str, Any]:
+    content = report["content_retrieval"]
+    criteria = {
+        "content_top1": _criterion(
+            float(content["argmax_top1"]),
+            0.55,
+            operator=">=",
+        ),
+        "content_mrr": _criterion(float(content["mrr"]), 0.65, operator=">="),
+        "reference_ink_f1": _criterion(
+            float(report["reference_style_visual"]["ink_f1"]),
+            0.65,
+            operator=">=",
+        ),
+        "form_stage_margin": _criterion(
+            float(report["form_stage_margin"]),
+            0.0,
+            operator=">",
+        ),
+    }
+    return {
+        "gate": "v40-sealed",
+        "qualified": _all_finite(report)
+        and all(bool(value["pass"]) for value in criteria.values()),
+        "criteria": criteria,
+    }
+
+
 __all__ = [
     "BinaryGlyphMetrics",
     "binary_glyph_metrics",
     "evaluate_glyph_content_form",
+    "v40_development_gate",
+    "v40_pilot_gate",
+    "v40_sealed_gate",
 ]

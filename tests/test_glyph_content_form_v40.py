@@ -7,7 +7,12 @@ from ilm.visual_lm.glyph_content_form import (
     GlyphContentFormModel,
     glyph_content_form_boundary_receipt,
 )
-from ilm.visual_lm.glyph_content_form_evaluation import binary_glyph_metrics
+from ilm.visual_lm.glyph_content_form_evaluation import (
+    binary_glyph_metrics,
+    v40_development_gate,
+    v40_pilot_gate,
+    v40_sealed_gate,
+)
 from ilm.visual_lm.glyph_content_form_training import (
     WarmStartTrainableEMA,
     glyph_content_form_loss,
@@ -127,3 +132,59 @@ def test_v40_ema_warm_start_does_not_preserve_random_initialization() -> None:
 
     assert effective_decay == 0.1
     assert torch.allclose(layer.weight, torch.full_like(layer.weight, 0.9))
+
+
+def _gate_report(
+    *,
+    content_top1: float,
+    surface_top1: float,
+    content_mrr: float,
+    reference_f1: float,
+    self_f1: float,
+    form_margin: float,
+) -> dict[str, object]:
+    return {
+        "content_retrieval": {
+            "argmax_top1": content_top1,
+            "mrr": content_mrr,
+        },
+        "frozen_surface_retrieval": {"argmax_top1": surface_top1},
+        "content_top1_gain_over_surface": content_top1 - surface_top1,
+        "reference_style_visual": {"ink_f1": reference_f1},
+        "self_visual": {"ink_f1": self_f1},
+        "form_stage_margin": form_margin,
+    }
+
+
+def test_v40_preregistered_gates_enforce_baseline_and_rendering() -> None:
+    zero = _gate_report(
+        content_top1=0.40,
+        surface_top1=0.45,
+        content_mrr=0.50,
+        reference_f1=0.20,
+        self_f1=0.25,
+        form_margin=-0.20,
+    )
+    pilot = _gate_report(
+        content_top1=0.61,
+        surface_top1=0.45,
+        content_mrr=0.71,
+        reference_f1=0.36,
+        self_f1=0.50,
+        form_margin=-0.14,
+    )
+    qualified = _gate_report(
+        content_top1=0.61,
+        surface_top1=0.45,
+        content_mrr=0.71,
+        reference_f1=0.71,
+        self_f1=0.76,
+        form_margin=0.11,
+    )
+
+    assert v40_pilot_gate(zero, pilot)["qualified"] is True
+    assert v40_development_gate(qualified)["qualified"] is True
+    assert v40_sealed_gate(qualified)["qualified"] is True
+    failed = dict(qualified)
+    failed["reference_style_visual"] = {"ink_f1": 0.40}
+    assert v40_development_gate(failed)["qualified"] is False
