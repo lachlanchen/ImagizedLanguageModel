@@ -568,25 +568,40 @@ def visual_answer_trajectory_tensor_batch(
     return result
 
 
+def canonical_v39_text_length(
+    text: str,
+    *,
+    render_config: VisualSemanticDistillationRenderConfig,
+    font_path: str = V39_DEVELOPMENT_FONT,
+    variant: int = 0,
+) -> float:
+    clean = replace(render_config, augment=False)
+    _pixels, mask, _metadata = render_visual_semantic_distillation_strip(
+        text,
+        config=clean,
+        font_path=_require_font(font_path),
+        font_size=clean.evaluation_font_size,
+        variant=variant,
+        force_origin=0,
+    )
+    return float(mask.sum())
+
+
 def canonical_v39_segment_lengths(
     record: VisualAnswerTrajectoryRecord,
     *,
     render_config: VisualSemanticDistillationRenderConfig,
     font_path: str = V39_DEVELOPMENT_FONT,
 ) -> tuple[float, ...]:
-    lengths: list[float] = []
-    clean = replace(render_config, augment=False)
-    for index, segment in enumerate(record.segments):
-        _pixels, mask, _metadata = render_visual_semantic_distillation_strip(
+    return tuple(
+        canonical_v39_text_length(
             segment,
-            config=clean,
-            font_path=_require_font(font_path),
-            font_size=clean.evaluation_font_size,
+            render_config=render_config,
+            font_path=font_path,
             variant=index,
-            force_origin=0,
         )
-        lengths.append(float(mask.sum()))
-    return tuple(lengths)
+        for index, segment in enumerate(record.segments)
+    )
 
 
 def visual_answer_trajectory_data_boundary_receipt() -> dict[str, Any]:
@@ -621,6 +636,7 @@ __all__ = [
     "VisualAnswerTrajectoryDataset",
     "VisualAnswerTrajectoryRecord",
     "canonical_v39_segment_lengths",
+    "canonical_v39_text_length",
     "convert_visual_script",
     "load_v39_instruction_records",
     "render_visual_answer_trajectory_record",
