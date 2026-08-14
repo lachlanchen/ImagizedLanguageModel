@@ -7,6 +7,7 @@ from ilm.visual_lm.visual_answer_trajectory import (
     V39_MAX_SEGMENTS,
     VisualAnswerTrajectoryConfig,
     VisualAnswerTrajectoryModel,
+    visual_segment_count_distribution,
     visual_answer_trajectory_boundary_receipt,
 )
 from ilm.visual_lm.visual_semantic_distillation_data import (
@@ -68,6 +69,27 @@ def test_v39_image_only_forward_emits_ordered_trajectory() -> None:
         .all()
     )
     assert bool(((output.lengths >= 0) & (output.lengths <= V37_PATCHES)).all())
+    assert torch.allclose(output.lengths, torch.full_like(output.lengths, 20.0))
+
+
+def test_stop_hazards_define_a_normalized_first_stop_distribution() -> None:
+    logits = torch.full((2, V39_MAX_SEGMENTS), -20.0)
+    logits[:, 1] = 20.0
+    alternate_last = logits.clone()
+    alternate_last[:, -1] = 20.0
+
+    distribution = visual_segment_count_distribution(logits)
+    alternate = visual_segment_count_distribution(alternate_last)
+
+    assert torch.allclose(
+        distribution.probabilities.sum(dim=1),
+        torch.ones(2),
+        atol=1e-6,
+    )
+    assert distribution.mode.tolist() == [2, 2]
+    assert distribution.median.tolist() == [2, 2]
+    assert torch.allclose(distribution.expected, torch.full((2,), 2.0), atol=1e-4)
+    assert torch.allclose(distribution.probabilities, alternate.probabilities)
 
 
 def test_zero_initialized_planner_preserves_v38_answer_baseline() -> None:

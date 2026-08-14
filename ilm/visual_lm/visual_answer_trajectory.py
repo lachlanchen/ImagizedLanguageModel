@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import inspect
+import math
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Mapping
@@ -96,6 +97,73 @@ class VisualAnswerTrajectoryOutput:
     lengths: torch.Tensor
     patch_states: torch.Tensor
     pooled_visual_state: torch.Tensor
+
+
+@dataclass
+class VisualSegmentCountDistribution:
+    log_probabilities: torch.Tensor
+    probabilities: torch.Tensor
+    mode: torch.Tensor
+    median: torch.Tensor
+    expected: torch.Tensor
+    entropy: torch.Tensor
+
+
+def visual_segment_count_distribution(
+    stop_logits: torch.Tensor,
+) -> VisualSegmentCountDistribution:
+    """Convert continuation hazards into a normalized count distribution."""
+    if stop_logits.ndim != 2 or stop_logits.shape[1] != V39_MAX_SEGMENTS:
+        raise ValueError("V39 stop logits must be [B,16]")
+    if not torch.is_floating_point(stop_logits) or not bool(
+        torch.isfinite(stop_logits).all()
+    ):
+        raise ValueError("V39 stop logits must be finite floating point")
+    # The sixteenth outcome absorbs all mass that survives the first 15 hazards.
+    log_continue = F.logsigmoid(-stop_logits.float()[:, :-1])
+    prefix = torch.cat(
+        (
+            torch.zeros(
+                len(stop_logits),
+                1,
+                dtype=log_continue.dtype,
+                device=log_continue.device,
+            ),
+            log_continue.cumsum(dim=1),
+        ),
+        dim=1,
+    )
+    log_probabilities = torch.cat(
+        (
+            prefix[:, :-1] + F.logsigmoid(stop_logits.float()[:, :-1]),
+            prefix[:, -1:],
+        ),
+        dim=1,
+    )
+    log_probabilities = log_probabilities - torch.logsumexp(
+        log_probabilities,
+        dim=1,
+        keepdim=True,
+    )
+    probabilities = log_probabilities.exp()
+    counts = torch.arange(
+        1,
+        V39_MAX_SEGMENTS + 1,
+        dtype=probabilities.dtype,
+        device=probabilities.device,
+    )
+    mode = probabilities.argmax(dim=1) + 1
+    median = (probabilities.cumsum(dim=1) < 0.5).sum(dim=1) + 1
+    expected = (probabilities * counts).sum(dim=1)
+    entropy = -(probabilities * log_probabilities).sum(dim=1)
+    return VisualSegmentCountDistribution(
+        log_probabilities=log_probabilities,
+        probabilities=probabilities,
+        mode=mode,
+        median=median,
+        expected=expected,
+        entropy=entropy,
+    )
 
 
 def _zero_last_linear(module: nn.Sequential) -> None:
@@ -211,6 +279,15 @@ class VisualAnswerTrajectoryModel(nn.Module):
             raise TypeError("V39 stop head must end in a linear layer")
         nn.init.zeros_(stop_final.weight)
         nn.init.constant_(stop_final.bias, -2.0)
+        length_final = self.length_head[-1]
+        if not isinstance(length_final, nn.Linear):
+            raise TypeError("V39 length head must end in a linear layer")
+        nn.init.zeros_(length_final.weight)
+        length_prior = 20.0 / V37_PATCHES
+        nn.init.constant_(
+            length_final.bias,
+            math.log(length_prior / (1.0 - length_prior)),
+        )
         self._reader_trainable = True
 
     @staticmethod
@@ -508,6 +585,8 @@ __all__ = [
     "VisualAnswerTrajectoryConfig",
     "VisualAnswerTrajectoryModel",
     "VisualAnswerTrajectoryOutput",
+    "VisualSegmentCountDistribution",
     "load_v39_v38_initialization",
+    "visual_segment_count_distribution",
     "visual_answer_trajectory_boundary_receipt",
 ]

@@ -105,6 +105,10 @@ def test_stop_length_and_consistency_metrics_are_finite() -> None:
     consistency = trajectory_consistency_metrics(value, value, offsets)
 
     assert stop["count_accuracy"] == 1.0
+    assert stop["mode_count_accuracy"] == 1.0
+    assert stop["median_count_accuracy"] == 1.0
+    assert stop["count_nll"] < 0.2
+    assert stop["active_expected_count_max_error"] < 1e-5
     assert stop["length_mae"] == 0.0
     assert consistency["read_cosine"] > 0.999
     assert consistency["answer_cosine"] > 0.999

@@ -14,6 +14,7 @@ from .visual_answer_trajectory import (
     VisualAnswerEncoding,
     VisualAnswerTrajectoryModel,
     VisualAnswerTrajectoryOutput,
+    visual_segment_count_distribution,
 )
 from .visual_answer_trajectory_data import V39_TARGET_ARCHITECTURE
 from .visual_semantic_distillation_data import V37_PATCHES
@@ -432,11 +433,12 @@ class VisualAnswerTrajectoryLossWeights:
     span_alignment: float = 1.0
     stage1_span: float = 0.25
     path: float = 0.5
-    order: float = 0.5
-    transition: float = 0.5
+    order: float = 1.0
+    transition: float = 1.0
     relation: float = 0.1
-    stop: float = 0.2
-    length: float = 0.02
+    stop: float = 0.5
+    stop_count_moment: float = 0.1
+    length: float = 0.05
     variance: float = 0.1
     covariance: float = 0.01
     order_margin: float = 0.10
@@ -470,6 +472,8 @@ class VisualAnswerTrajectoryLoss:
     transition: torch.Tensor
     relation: torch.Tensor
     stop: torch.Tensor
+    stop_nll: torch.Tensor
+    stop_count_moment: torch.Tensor
     length: torch.Tensor
     variance: torch.Tensor
     covariance: torch.Tensor
@@ -539,8 +543,16 @@ def _ordered_losses(
         student = predicted[row, :count].float()
         teacher = target[row, :count].float()
         positive = F.cosine_similarity(student, teacher, dim=-1)
-        adjacent = F.cosine_similarity(student, teacher.roll(shifts=-1, dims=0), dim=-1)
-        order_losses.append(F.relu(margin - positive + adjacent).mean())
+        next_negative = F.cosine_similarity(student[:-1], teacher[1:], dim=-1)
+        previous_negative = F.cosine_similarity(student[1:], teacher[:-1], dim=-1)
+        order_losses.append(
+            torch.cat(
+                (
+                    F.relu(margin - positive[:-1] + next_negative),
+                    F.relu(margin - positive[1:] + previous_negative),
+                )
+            ).mean()
+        )
         student_delta = F.normalize(
             student[1:] - student[:-1],
             dim=-1,
@@ -692,25 +704,24 @@ def visual_answer_trajectory_loss(
     transition = (transition_anchor + transition_view) / 2
     relation = (relation_anchor + relation_view) / 2
 
-    stop_losses: list[torch.Tensor] = []
+    stop_nll_losses: list[torch.Tensor] = []
+    stop_count_losses: list[torch.Tensor] = []
     length_losses: list[torch.Tensor] = []
+    target_counts = targets.segment_mask.sum(dim=1).long()
     for output in (prompt_anchor, prompt_view):
-        stop_bce = F.binary_cross_entropy_with_logits(
-            output.stop_logits,
-            targets.stop_targets,
-            reduction="none",
+        count_distribution = visual_segment_count_distribution(output.stop_logits)
+        stop_nll_losses.append(
+            F.nll_loss(
+                count_distribution.log_probabilities,
+                target_counts - 1,
+            )
         )
-        stop_bce = (stop_bce * targets.stop_mask).sum() / targets.stop_mask.sum()
-        active_probabilities = output.active_probabilities.float().clamp(
-            1e-5,
-            1 - 1e-5,
+        stop_count_losses.append(
+            F.smooth_l1_loss(
+                count_distribution.expected,
+                target_counts.float(),
+            )
         )
-        active_bce = -(
-            targets.segment_mask.float() * active_probabilities.log()
-            + (1 - targets.segment_mask.float())
-            * torch.log1p(-active_probabilities)
-        ).mean()
-        stop_losses.append(stop_bce + 0.25 * active_bce)
         length_value = F.smooth_l1_loss(
             output.lengths,
             targets.segment_lengths,
@@ -719,7 +730,9 @@ def visual_answer_trajectory_loss(
         length_losses.append(
             (length_value * targets.segment_mask).sum() / targets.segment_mask.sum()
         )
-    stop = torch.stack(stop_losses).mean()
+    stop_nll = torch.stack(stop_nll_losses).mean()
+    stop_count_moment = torch.stack(stop_count_losses).mean()
+    stop = stop_nll + weights.stop_count_moment * stop_count_moment
     length = torch.stack(length_losses).mean()
     variance, covariance = variance_covariance_loss(
         torch.cat(
@@ -778,6 +791,8 @@ def visual_answer_trajectory_loss(
         transition=transition,
         relation=relation,
         stop=stop,
+        stop_nll=stop_nll,
+        stop_count_moment=stop_count_moment,
         length=length,
         variance=variance,
         covariance=covariance,
@@ -883,19 +898,26 @@ class VisualAnswerTrajectoryEMA:
         if set(names) != set(parameters):
             raise ValueError("V39 EMA must cover every deployable parameter")
         self.decay = float(decay)
+        self.updates = 0
         self.names = tuple(names)
         self.shadow = {
             name: parameters[name].detach().float().clone() for name in self.names
         }
 
     @torch.no_grad()
-    def update(self, model: nn.Module) -> None:
+    def update(self, model: nn.Module) -> float:
         parameters = dict(model.named_parameters())
         if set(parameters) != set(self.names):
             raise ValueError("V39 EMA model parameter set changed")
+        effective_decay = min(
+            self.decay,
+            (1.0 + self.updates) / (10.0 + self.updates),
+        )
         for name in self.names:
             value = parameters[name].detach().float()
-            self.shadow[name].lerp_(value, 1 - self.decay)
+            self.shadow[name].lerp_(value, 1 - effective_decay)
+        self.updates += 1
+        return effective_decay
 
     @torch.no_grad()
     def copy_to(self, model: nn.Module) -> None:
@@ -908,6 +930,7 @@ class VisualAnswerTrajectoryEMA:
     def state_dict(self, *, cpu: bool = True) -> dict[str, Any]:
         return {
             "decay": self.decay,
+            "updates": self.updates,
             "names": self.names,
             "shadow": {
                 name: value.detach().cpu().clone() if cpu else value.detach().clone()
@@ -928,6 +951,9 @@ class VisualAnswerTrajectoryEMA:
             if not isinstance(value, torch.Tensor) or value.shape != self.shadow[name].shape:
                 raise ValueError(f"V39 EMA tensor changed for {name}")
             self.shadow[name].copy_(value.to(self.shadow[name]))
+        self.updates = int(state.get("updates", 0))
+        if self.updates < 0:
+            raise ValueError("V39 EMA update count cannot be negative")
 
 
 __all__ = [

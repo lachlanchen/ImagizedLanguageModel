@@ -727,6 +727,11 @@ def main() -> None:
         "data_boundary": visual_answer_trajectory_data_boundary_receipt(),
         "optimizer": optimizer_definition,
         "ema_parameter_names_sha256": selected_identifier_sha256(ema_names),
+        "ema_schedule": {
+            "ceiling": args.ema_decay,
+            "effective_decay": "min(ceiling,(1+updates)/(10+updates))",
+            "initial_updates": 0,
+        },
         "target_tensors_in_checkpoint": False,
         "teacher_model_in_student_process": False,
         "candidate_tensors_in_checkpoint": False,
@@ -963,7 +968,7 @@ def main() -> None:
                 {name: parameter for name, parameter in model.named_parameters() if parameter.requires_grad}
             ):
                 raise FloatingPointError("V39 encountered a non-finite parameter")
-            ema.update(model)
+            effective_ema_decay = ema.update(model)
             global_update += 1
             peak_vram = torch.cuda.max_memory_allocated() if device.type == "cuda" else 0
             if peak_vram >= MAXIMUM_VRAM_BYTES:
@@ -980,6 +985,7 @@ def main() -> None:
                 "head_lr": head_lr,
                 "reader_lr": reader_lr,
                 "gradient_norm": float(gradient_norm),
+                "effective_ema_decay": effective_ema_decay,
                 "peak_allocated_vram_bytes": peak_vram,
                 "elapsed_seconds": elapsed_seconds(),
                 **accumulated,

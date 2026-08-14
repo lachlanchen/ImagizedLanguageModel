@@ -14,6 +14,7 @@ from ilm.visual_lm.visual_answer_trajectory_training import (
     variance_covariance_loss,
     visual_answer_trajectory_loss,
     visual_answer_trajectory_optimizer_groups,
+    _ordered_losses,
 )
 from ilm.visual_lm.visual_semantic_distillation_data import (
     V37_PATCHES,
@@ -236,6 +237,24 @@ def test_variance_control_detects_collapse() -> None:
     assert collapsed_variance > diverse_variance
 
 
+def test_order_loss_uses_real_neighbors_without_cyclic_wraparound() -> None:
+    teacher = torch.eye(3, DIMENSION).unsqueeze(0)
+    student = teacher.clone()
+    student[:, -1] = teacher[:, 0]
+    mask = torch.ones(1, 3)
+
+    order, transition, relation = _ordered_losses(
+        student,
+        teacher,
+        mask,
+        margin=0.1,
+    )
+
+    assert 0.0 < order < 0.05
+    assert torch.isfinite(transition)
+    assert torch.isfinite(relation)
+
+
 def test_stage_trainability_and_optimizer_partition_are_explicit() -> None:
     model = VisualAnswerTrajectoryModel(tiny_config())
 
@@ -267,11 +286,13 @@ def test_all_parameter_ema_updates_serializes_and_copies() -> None:
 
     with torch.no_grad():
         first_parameter.add_(2.0)
-    ema.update(model)
+    effective_decay = ema.update(model)
 
     assert ema.shadow[first_name].device == first_parameter.device
-    assert torch.allclose(ema.shadow[first_name], original + 1.0)
+    assert effective_decay == 0.1
+    assert torch.allclose(ema.shadow[first_name], original + 1.8)
     state = ema.state_dict()
+    assert state["updates"] == 1
     assert state["shadow"][first_name].device.type == "cpu"
 
     destination = VisualAnswerTrajectoryModel(tiny_config())

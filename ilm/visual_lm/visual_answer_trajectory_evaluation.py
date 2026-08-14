@@ -6,7 +6,10 @@ from typing import Any
 import torch
 import torch.nn.functional as F
 
-from .visual_answer_trajectory import V39_MAX_SEGMENTS
+from .visual_answer_trajectory import (
+    V39_MAX_SEGMENTS,
+    visual_segment_count_distribution,
+)
 from .visual_semantic_distillation_training import centered_effective_rank
 
 
@@ -193,23 +196,39 @@ def stop_and_length_metrics(
     counts, mask, _labels = active_segment_geometry(offsets)
     if len(counts) != len(outputs.stop_logits) or len(target_lengths) != int(offsets[-1]):
         raise ValueError("V39 stop/length targets do not align")
-    stopping = outputs.stop_logits.float().sigmoid() >= 0.5
-    has_stop = stopping.any(dim=1)
-    first_stop = stopping.float().argmax(dim=1) + 1
-    predicted_count = torch.where(
-        has_stop,
-        first_stop,
-        torch.full_like(first_stop, V39_MAX_SEGMENTS),
-    )
-    expected_count = outputs.active_probabilities.float().sum(dim=1)
+    distribution = visual_segment_count_distribution(outputs.stop_logits)
+    counts = counts.to(distribution.probabilities.device)
+    mode_count = distribution.mode
+    median_count = distribution.median
+    expected_count = distribution.expected
+    active_expected_count = outputs.active_probabilities.float().sum(dim=1)
+    target_log_probability = distribution.log_probabilities[
+        torch.arange(len(counts), device=counts.device),
+        counts - 1,
+    ]
     active_lengths = outputs.lengths.float()[mask]
     return {
         "records": len(counts),
-        "count_accuracy": float((predicted_count == counts).float().mean()),
-        "count_mae": float((predicted_count.float() - counts.float()).abs().mean()),
+        "count_accuracy": float((mode_count == counts).float().mean()),
+        "count_mae": float((mode_count.float() - counts.float()).abs().mean()),
+        "mode_count_accuracy": float((mode_count == counts).float().mean()),
+        "mode_count_mae": float(
+            (mode_count.float() - counts.float()).abs().mean()
+        ),
+        "median_count_accuracy": float((median_count == counts).float().mean()),
+        "median_count_mae": float(
+            (median_count.float() - counts.float()).abs().mean()
+        ),
         "expected_count_mae": float((expected_count - counts.float()).abs().mean()),
-        "predicted_count_mean": float(predicted_count.float().mean()),
+        "predicted_count_mean": float(mode_count.float().mean()),
+        "median_count_mean": float(median_count.float().mean()),
+        "expected_count_mean": float(expected_count.mean()),
         "target_count_mean": float(counts.float().mean()),
+        "count_nll": float(-target_log_probability.mean()),
+        "count_entropy": float(distribution.entropy.mean()),
+        "active_expected_count_max_error": float(
+            (active_expected_count - expected_count).abs().max()
+        ),
         "length_mae": float((active_lengths - target_lengths.float()).abs().mean()),
     }
 
