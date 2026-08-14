@@ -1,0 +1,168 @@
+{
+  "experiment": "image-conditioned-glyph-motor-bridge-v41-audit",
+  "claim_status": "mechanism-audit-only",
+  "glyphs": [
+    "语",
+    "言",
+    "学",
+    "中",
+    "天",
+    "地",
+    "人",
+    "心",
+    "书",
+    "法"
+  ],
+  "model_input": "glyph raster plus style-reference rasters",
+  "model_output": "glyph raster",
+  "host_only_labels": true,
+  "uses_token_ids": false,
+  "uses_unicode_ids_in_model": false,
+  "uses_ocr": false,
+  "uses_retrieval": false,
+  "mxfont": {
+    "repository": "https://github.com/clovaai/mxfont",
+    "revision": "93f3c88517f7c904f16da6333adb2588dcdf3cce",
+    "root": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/external/mxfont",
+    "checkpoint": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/external/mxfont/generator.pth",
+    "checkpoint_sha256": "dcbcb6438d9b1e3230551bc78fcf64ec5454a01734502bdeac410d2f5c404119",
+    "source_sha256": {
+      "models/__init__.py": "7e3f79444c534626ab05b41a4735e71d762d05e6e89511593e89462c78043990",
+      "models/aux_classifier.py": "78f159ea3213c502fda75032d16e29cd6f475576f7599b872e7cf204b5c181dc",
+      "models/decoder.py": "c3782fb270a22c89f0ee6571b7651b60c11ec48cf7e38405566c1e14f2c41b83",
+      "models/discriminator.py": "08e9d3142422b46ae9fd553428f4bc81619d4825ae0d9b296b75dce52a4b3155",
+      "models/experts.py": "8c361d653a533a991549dac2c7337b4fdf076a396091f181428df01cdb3fefa9",
+      "models/generator.py": "aa0a358297b5c9913033dfff9616caa11bb79e049812f8e4bab97d15efc1b05b",
+      "models/modules/__init__.py": "a15543efbb92e724d92e64ea326b75d7c53fe429899f3c19aab201aaf6158915",
+      "models/modules/blocks.py": "c230abcf44b66e141c5172135236d35425827faec6a2997d33d80c0777331f32",
+      "models/modules/cbam.py": "893f33cb8ab9e9eb92846701e040efb14c25302a360028e60b0eb1279d735bf8",
+      "models/modules/frn.py": "9d3a31f68988a1d7c412cc8e008c2043792fd1e9433f9d1409ce90b29dbf003b",
+      "models/modules/globalcontext.py": "5ec5fe071c2f1e07e5b57471f0c6b5edd77e229e43425cb362383798920a89c2",
+      "models/modules/modules.py": "50c23ced26b6123f247b9fe41dea30079f14ea92138af975a74e13df428a1f16",
+      "models/style_encoder.py": "0e9b4afa91f8f7b0071905fffe162607e32495abf38ab99a0396702314634cd7",
+      "utils/__init__.py": "02f1abf2ff4153cfd27bdc3e1a49e28b24ece2a5df62b09cd5f416a5a3aeddf4",
+      "utils/logger.py": "900b52cd171040b218621319d6cbc5f920af3ee84465b714d07ed38970a24d21",
+      "utils/utils.py": "1cb3031b58772410f434813d743a9c13ad6bb923dc8f27442954c616f70c6374",
+      "utils/visualize.py": "5fd634da277000e613804004e7aa23dd07ad3f0e3c968cd63ace424e9b8ad75b",
+      "utils/writer.py": "b57f2adb2c1032e2c4bacca736edcfbb134853124593e9a935ce08242f56aafd"
+    },
+    "parameters": 22761566,
+    "license": "MIT source; checkpoint provenance follows the repository"
+  },
+  "v34": {
+    "path": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt",
+    "sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "architecture": "continuous-glyph-representation-codec-v34",
+    "update": 6000,
+    "parameters": 7423361,
+    "selection": "ema-shadow"
+  },
+  "fonts": {
+    "source": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/external/mxfont/data/ttfs/val/MaShanZheng-Regular.ttf",
+    "source_sha256": "995cd290eb86e8ae2a7fd2631824047444d2434b9de6f65727423d010ff5db1d",
+    "target": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/external/mxfont/data/ttfs/val/ZCOOLKuaiLe-Regular.ttf",
+    "target_sha256": "2770d29ce713e03ea310c2874957da0172f21d53afec30fc398c533483eaa995",
+    "style_reference_dir": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/external/mxfont/data/images/test/ZCOOLKuaiLe-Regular",
+    "style_reference_sha256": {
+      "圄.png": "ff16087cf3ab596437893f0e2b4c7aec26b41e18dabff4cf6febd7d6109b9aa9",
+      "檎.png": "044c22c2d8a5fc4ebd65e7d47307d18a97de4de03f005a13ffa92b3115312fdc",
+      "泷.png": "25bc879da49ce8e6c2b626581097a65b959e1286010b732731dea364b32e0b29",
+      "涠.png": "1a5dc8d086a35e0bc770b6f5fa6609fa9499f8e8ebcf3f0622c3b812cecb1b80"
+    }
+  },
+  "noise_sigmas": [
+    0.0,
+    0.03,
+    0.05,
+    0.1
+  ],
+  "latent_norms": {
+    "v34_sigma_0p000": 27.71186637878418,
+    "v34_sigma_0p030": 27.720434188842773,
+    "v34_sigma_0p050": 27.711462020874023,
+    "v34_sigma_0p100": 27.857572555541992
+  },
+  "metrics": {
+    "exact_source": {
+      "target_ink_f1_mean": 0.5786296725273132,
+      "target_ink_f1_min": 0.43981337547302246,
+      "source_before_motor_ink_f1_mean": 0.43943554162979126,
+      "motor_delta_ink_f1": 0.13919413089752197,
+      "pixel_mae": 0.16046631336212158,
+      "nonblank_fraction": 1.0
+    },
+    "coarse_32": {
+      "target_ink_f1_mean": 0.5648059844970703,
+      "target_ink_f1_min": 0.4406597316265106,
+      "source_before_motor_ink_f1_mean": 0.43967705965042114,
+      "motor_delta_ink_f1": 0.12512892484664917,
+      "pixel_mae": 0.1679421067237854,
+      "nonblank_fraction": 1.0
+    },
+    "v34_sigma_0p000": {
+      "target_ink_f1_mean": 0.5479416251182556,
+      "target_ink_f1_min": 0.41989612579345703,
+      "source_before_motor_ink_f1_mean": 0.43182364106178284,
+      "motor_delta_ink_f1": 0.11611798405647278,
+      "pixel_mae": 0.17726612091064453,
+      "nonblank_fraction": 1.0
+    },
+    "v34_sigma_0p030": {
+      "target_ink_f1_mean": 0.5444090962409973,
+      "target_ink_f1_min": 0.4257703125476837,
+      "source_before_motor_ink_f1_mean": 0.4312353730201721,
+      "motor_delta_ink_f1": 0.1131737232208252,
+      "pixel_mae": 0.17813803255558014,
+      "nonblank_fraction": 1.0
+    },
+    "v34_sigma_0p050": {
+      "target_ink_f1_mean": 0.546099841594696,
+      "target_ink_f1_min": 0.4268806278705597,
+      "source_before_motor_ink_f1_mean": 0.4317007064819336,
+      "motor_delta_ink_f1": 0.11439913511276245,
+      "pixel_mae": 0.1783212572336197,
+      "nonblank_fraction": 1.0
+    },
+    "v34_sigma_0p100": {
+      "target_ink_f1_mean": 0.5432384610176086,
+      "target_ink_f1_min": 0.4167826473712921,
+      "source_before_motor_ink_f1_mean": 0.4294095039367676,
+      "motor_delta_ink_f1": 0.11382895708084106,
+      "pixel_mae": 0.17970281839370728,
+      "nonblank_fraction": 1.0
+    }
+  },
+  "motor_gate": {
+    "passed": true,
+    "checks": {
+      "all_metrics_finite": true,
+      "all_outputs_nonblank": true,
+      "motor_improves_every_condition": true,
+      "sigma_0p03_retention_at_least_0p90": true,
+      "sigma_0p05_retention_at_least_0p90": true
+    },
+    "noise_retention": {
+      "v34_sigma_0p030": 0.9935530926738849,
+      "v34_sigma_0p050": 0.9966387231063855
+    },
+    "minimum_noise_retention": 0.9
+  },
+  "contact_sheet": {
+    "rows": 8,
+    "columns": 10,
+    "cell_pixels": 128
+  },
+  "resources": {
+    "device": "cuda:0",
+    "device_name": "NVIDIA GeForce RTX 4090 D",
+    "peak_vram_bytes": 771669504,
+    "elapsed_seconds": 1.6498890509828925
+  },
+  "determinism": {
+    "seed": 20264100,
+    "deterministic_algorithms": true,
+    "cudnn_benchmark": false,
+    "allow_tf32": false
+  },
+  "finite": true
+}

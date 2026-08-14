@@ -94,6 +94,21 @@ paraphrase answer consistency, and length remain below gate. EMA passes 25/39
 conditions and raw weights do not repair the result. V38 is
 \texttt{not-qualified}; zero sealed rows are rendered and no raster renderer
 is authorized.
+
+V39.1 next corrects the bounded first-stop distribution, order negatives,
+length prior, loss balance, and short-run EMA in a matched 512-record trajectory
+pilot. Expected answer-span count becomes 6.303 against 6.313 target and
+count-mode accuracy reaches 15.22\%, but answer MRR falls to 0.0741, segment
+MRR remains 0.0123, and transition-direction cosine is only 0.0065. We do not
+scale this unqualified semantic mechanism. V41 instead isolates the visible
+motor. The qualified V34 codec feeds exact, 32-pixel, clean-projected, and
+latent-perturbed glyph rasters into the pinned 22.76M-parameter MX-Font
+generator with four style-reference images. Clean projected ink F1 rises from
+0.4318 to 0.5479; at latent noise $\sigma=0.05$ it rises from 0.4317 to 0.5461
+and retains 99.66\% of clean projected-motor F1. All outputs are finite and
+nonblank. This qualifies an image-conditioned glyph motor, not autonomous
+language: the target glyph image is supplied to this audit and the model does
+not choose the next glyph.
 \end{abstract}
 
 \begin{figure}[t]
@@ -102,8 +117,9 @@ is authorized.
   \caption{Image-native language modeling design target. A restrained AgInTi
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
-  answer-page target, not a measured model output; the latest measured result
-  is the rejected V38 experiment in Figure~\ref{fig:v38result}.}
+  answer-page target, not a measured model output. The latest language result
+  remains negative (V39.1), while the latest bounded positive result is the V41
+  image-conditioned motor in Figure~\ref{fig:v41motor}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -215,6 +231,13 @@ and controls that makes a stronger image-native language claim falsifiable:
   held-font invariance, and transition geometry on one RTX 4090 D. The frozen
   8,000-update result still fails absolute and transferred answer semantics;
   25/39 conditions pass, so no sealed row or renderer is opened.
+  \item V39.1, a corrected ordered-answer pilot whose count process becomes
+  calibrated while held-out answer and segment semantics remain weak. This
+  negative matched result prevents an unjustified full-bank trajectory run.
+  \item V41, a hash-pinned bridge from the qualified V34 continuous codec to an
+  exactly attributed MX-Font image-conditioned generator. It improves
+  target-style ink F1 under clean and perturbed visual states on one RTX 4090 D,
+  qualifying a robust output motor while making no language claim.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -2837,6 +2860,124 @@ held-composition probes, and predict a small ordered set of continuous answer
 states or recurrent latent dynamics. It must retain image-only deployment and
 the same complete gate before any answer-pixel writer is trained.
 
+\subsection{V39.1 trajectory correction and V41 image-conditioned glyph motor}
+
+\paragraph{A corrected trajectory still fails semantic order.}
+V39 first extends V38 from one answer state to one global answer state and up to
+16 ordered answer-span states. A 512-record pilot detects bounded visual
+conditioning, but independent stop-threshold decoding selects all 16 positions
+and a cyclic last-to-first negative corrupts the order objective. V39.1 corrects
+these mechanics: it normalizes a categorical first-stop process, uses
+categorical stop and count-moment losses, removes the wraparound negative,
+initializes a realistic length prior, strengthens order supervision, and uses a
+warm-start all-parameter EMA. The matched 150-update rerun completes in 184.23
+seconds with 2,984,609,280 peak allocated CUDA bytes on one RTX 4090 D.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Held-out development metric & V39 pilot EMA & Corrected V39.1 EMA \\
+\midrule
+Answer top-1 & 0.04339 & 0.03562 \\
+Answer MRR & 0.08302 & 0.07406 \\
+Answer cosine & 0.18048 & 0.14486 \\
+Segment top-1 & 0.00523 & 0.00441 \\
+Segment MRR & 0.01264 & 0.01234 \\
+Transition-direction cosine & 0.00016 & 0.00648 \\
+Expected span count / target & 7.244 / 6.313 & 6.303 / 6.313 \\
+Count-mode accuracy & 0.00389 & 0.15220 \\
+Visual-length MAE & 9.025 & 4.915 \\
+\bottomrule
+\end{tabular}
+\caption{Matched V39 correction result. The count mechanics improve, but the
+semantic trajectory does not bind the visual prompt to the right ordered
+answer. The corrected final-answer route is 0.01049 MRR below its inherited
+V38-compatible baseline.}
+\label{tab:v39correction}
+\end{table}
+
+The raw route reaches only 0.07352 answer MRR and gives the same decision.
+Correct, shuffled, and blank prompts remain distinguishable, but the generated
+states do not select the right held-out content. V39.1 is therefore
+\texttt{not-qualified}; it is not scaled to the 44,637-record bank, no sealed
+data are opened, and no answer writer is authorized by this result.
+
+\paragraph{Separate content choice from the visible motor.}
+A language field and a writing motor solve different problems. Let $x_t$ be a
+visible canonical glyph cell, $E$ and $D$ the V34 image encoder and decoder,
+and $T_\theta$ a future causal visual field:
+\[
+c_t=E(x_t),\qquad h_t=T_\theta(c_{\leq t}).
+\]
+Because the next glyph is multimodal, the planned language head is a continuous
+conditional flow rather than deterministic mean regression. For Gaussian base
+$\epsilon$ and $\tau\sim\mathcal U(0,1)$,
+\[
+u_\tau=(1-\tau)\epsilon+\tau c_{t+1},\qquad
+\mathcal L_{\mathrm{flow}}=
+\mathbb E\left\|F_\psi(u_\tau,\tau,h_t)-(c_{t+1}-\epsilon)\right\|_2^2.
+\]
+This follows the codebook-free continuous autoregressive motivation of
+MAR~\cite{mar}. A sampled state is decoded to a canonical raster; a separate
+image-conditioned form projector may then control font or handwriting before
+the visible raster is re-encoded. No nearest-character lookup appears in the
+deployed equation.
+
+V41 audits only that last visual-motor bridge. The external
+MX-Font~\cite{mxfont} generator has 22.76 million parameters and accepts a source
+glyph image plus style-reference glyph images. Its source revision and
+checkpoint are pinned; the checkpoint SHA-256 begins
+\texttt{dcbcb6438d9b1e32}. The V34 EMA checkpoint has 7,423,361 parameters and
+SHA-256 prefix \texttt{a138c9cb3b05}. Ten supported Chinese glyphs are rendered
+in a source font, passed through exact, 32-pixel, clean-codec, and
+latent-perturbed routes, then projected using four held-style image references.
+Character strings are host-side evaluation labels and never model inputs. The
+model receives no token or Unicode IDs, OCR, retrieval, or candidate bank.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Source raster supplied to motor & Input ink F1 & Motor ink F1 & Gain \\
+\midrule
+Exact 128-pixel source & 0.43944 & 0.57863 & +0.13919 \\
+Coarse 32-pixel source & 0.43968 & 0.56481 & +0.12513 \\
+V34 clean projection & 0.43182 & 0.54794 & +0.11612 \\
+V34 projection, $\sigma=0.03$ & 0.43124 & 0.54441 & +0.11317 \\
+V34 projection, $\sigma=0.05$ & 0.43170 & 0.54610 & +0.11440 \\
+V34 projection, $\sigma=0.10$ & 0.42941 & 0.54324 & +0.11383 \\
+\bottomrule
+\end{tabular}
+\caption{Hash-pinned V41 motor audit. Ink F1 is measured against a held target
+style. The motor improves every imperfect source condition; all ten outputs are
+finite and nonblank.}
+\label{tab:v41motor}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/glyph_motor_bridge_v41_result.png}
+  \caption{Measured V41 image-conditioned motor result generated from the
+  tracked receipt and contact sheet. The $\sigma=0.05$ route retains 99.66\%
+  of clean projected-motor F1 and gains 0.1144 F1 over its projected input.
+  This is a motor qualification, not a language result: the intended source
+  glyph raster is supplied to the motor in every row.}
+  \label{fig:v41motor}
+\end{figure}
+
+The complete V41 audit takes 1.650 seconds with 771,669,504 peak allocated CUDA
+bytes on one RTX 4090 D. It passes the bounded motor gate: every route is
+finite and nonblank, every route improves target-style F1, and noise levels
+$\sigma=0.03$ and $0.05$ retain more than 99\% of clean projected-motor F1.
+This closes a practical raster-quality component but does not rescue V39.1 or
+establish language understanding. The next experiment must predict the
+canonical content state from raster history without receiving the evaluator's
+target glyph, then beat visual unigram, bigram, shuffled-history, and
+blank-history controls under autonomous pixel feedback.
+
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -3466,9 +3607,27 @@ below threshold. EMA passes 25/39 conditions; raw weights do not repair the
 result. V38 is \texttt{not-qualified}; zero sealed rows were rendered and no
 raster renderer is authorized.
 
+V39.1 tests whether an ordered answer trajectory repairs this binding failure.
+Its corrected first-stop process calibrates expected span count to 6.303 against
+6.313 target, raises count-mode accuracy to 15.22\%, and reduces visual-length
+MAE to 4.915. Those mechanical gains do not become language: answer MRR falls
+to 0.07406, segment MRR is 0.01234, and transition-direction cosine is 0.00648.
+The full-bank run is therefore rejected before compute is spent.
+
+V41 then separates the visual motor from semantic selection. A pinned
+22.76M-parameter MX-Font generator projects exact and imperfect V34-decoded
+source images into a held style. On ten glyphs, clean V34 projection improves
+from 0.4318 to 0.5479 target ink F1; a $\sigma=0.05$ latent perturbation
+improves from 0.4317 to 0.5461 and retains 99.66\% of clean projected-motor F1.
+Every output is finite and nonblank, and the audit uses 0.772 GB peak allocated
+CUDA memory. This qualifies an image-conditioned glyph motor. Since the source
+glyph image is supplied, it does not qualify language, continuation, or
+question answering.
+
 The strongest supported claim remains narrow: one consumer GPU is enough to
 build, train, audit, package, and execute self-contained continuous visual
-language mechanisms at roughly 100M parameters. V38 additionally shows that
+language mechanisms at roughly 100M parameters and a robust image-conditioned
+motor below 23M parameters. V38 additionally shows that
 paired visual paths can produce materially better prompt reading, font
 invariance, and non-identity answer-transition geometry in under two hours,
 but no tested natural-language route qualifies autonomous Chinese or raster
@@ -3476,25 +3635,27 @@ answering. No Qwen, GPT, or general-LLM parity is shown, and no matched evidence
 supports compute superiority over token models. Runtime independence does not
 erase provenance: V34 is project work, while PIXAR and Pixel-Linguist provide
 external initialization, BGE-M3 supplies offline target geometry, and
-Qwen-family models prepare V38 training paraphrases. None is an uncredited ILM
-contribution or deployed dependency. Unstated upstream weight licenses prevent
-redistribution of the derived V35--V38 artifacts.
+Qwen-family models prepare V38 training paraphrases. MX-Font supplies the V41
+external motor. None is an uncredited ILM contribution or a deployed language
+teacher. Unstated upstream weight licenses prevent redistribution of the
+derived V35--V39 artifacts; V41 provenance is recorded separately.
 
-The next bounded experiment should preserve V38's clean masks, paired visual
-paths, end-to-end reader adaptation, detached target boundary, transition and
-rank controls. It should enlarge deduplicated instruction-relation diversity,
-reduce repeated exposure, reserve held-operation and held-composition probes,
-and replace one answer vector with a small ordered set of conditional states or
-recurrent latent dynamics. Stronger external visual, document, or language
-foundations are welcome when provenance, license, training role, and deployed
-status are exact. Only a complete held-out semantic pass may open a separate
-raster renderer; that writer must still show correct-prompt gains over shuffled,
-blank, partial, and paraphrased controls in its own generated pixels.
+The next bounded experiment starts simpler than answer-level instruction
+tuning: one canonical Chinese font, real public-domain text order, the qualified
+V34 visual state, a compact causal history model, and a probabilistic continuous
+next-glyph head. Evaluation must not supply the target glyph image. Autonomous
+raster continuations must beat visual unigram and bigram baselines and correct
+history must beat shuffled and blank history; lexical minimal pairs and exact
+copy must pass before factual question answering. Only then should the V41
+motor add font, calligraphy, or historical-form control. Stronger external
+foundations and offline teachers remain admissible when provenance, licensing,
+training role, and deployed absence are exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. Neither V35, V36, V37, nor V38 answers such questions. Page-scale reading, 3D
+encodings. Neither V35--V39 nor the motor-only V41 answers such questions.
+Page-scale reading, 3D
 writing, motion, speech, and broad multilingual generation remain future
 extensions of the same sensory interface and require separate evidence.
 \begin{thebibliography}{99}
@@ -3530,6 +3691,7 @@ extensions of the same sensory interface and require separate evidence.
 \bibitem{ldm} Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models. \url{https://arxiv.org/abs/2112.10752}
 \bibitem{dit} Peebles and Xie. Scalable Diffusion Models with Transformers. \url{https://arxiv.org/abs/2212.09748}
 \bibitem{mar} Li et al. Autoregressive Image Generation without Vector Quantization. \url{https://arxiv.org/abs/2406.11838}
+\bibitem{mxfont} Park et al. Multiple Heads are Better than One: Few-shot Font Generation with Multiple Localized Experts. \url{https://arxiv.org/abs/2104.00887}
 \bibitem{nextstep} NextStep Team. NextStep-1: Toward Autoregressive Image Generation with Continuous Tokens at Scale. \url{https://arxiv.org/abs/2508.10711}
 \bibitem{rae} Zheng et al. Diffusion Transformers with Representation Autoencoders. \url{https://arxiv.org/abs/2510.11690}
 \bibitem{flowmatching} Lipman et al. Flow Matching for Generative Modeling. \url{https://arxiv.org/abs/2210.02747}

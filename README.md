@@ -16,10 +16,44 @@
 
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
-use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V38
-measurement and its bounded visual-semantic result are reported directly below.*
+use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The current V41
+motor measurement and its strict non-language boundary are reported directly
+below.*
 
-## Current Evidence: V38 Improves Visual Reading but Fails Answer Generalization
+## Current Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
+
+![Measured V41 result: a pinned image-conditioned glyph motor improves imperfect V34 projections while preserving visible glyph identity](publication/ilm-image-native/figures/glyph_motor_bridge_v41_result.png)
+
+V41 tests a practical output component for the image-native loop. A qualified
+V34 continuous codec produces clean or perturbed canonical glyph rasters;
+MX-Font, an externally developed `22,761,566`-parameter image-conditioned
+generator, receives only those source rasters and four target-style reference
+rasters. The model path receives no token IDs, Unicode IDs, OCR output,
+retrieval result, character lookup, or candidate bank. Both checkpoints,
+external source revision, fonts, style references, and evidence are hash-pinned.
+
+Across ten held glyphs, the motor raises target-style ink F1 from `0.43182` to
+`0.54794` for clean V34 projections and from `0.43170` to `0.54610` after
+`sigma=0.05` latent perturbation. The noisy route retains `99.66%` of clean
+projected-motor F1; every output is finite and nonblank. The complete audit
+takes `1.650` seconds and `771,669,504` peak allocated CUDA bytes on one RTX
+4090 D. This passes the **visual motor gate**.
+
+It does **not** pass a language gate. The audit supplies the intended source
+glyph image to the motor, so MX-Font cleans and restyles content but does not
+choose what comes next. The preceding corrected V39.1 trajectory pilot fixed
+count prediction (`6.303` expected versus `6.313` target), yet held-out answer
+MRR fell to `0.07406` and segment MRR remained `0.01234`; it was not scaled.
+The next proof must autonomously predict a continuous next-glyph state from
+canonical-font raster history, decode it to pixels, and beat unigram, bigram,
+shuffled-history, and blank-history controls without receiving the target glyph.
+
+See the [V41 research decision](references/image_conditioned_glyph_motor_bridge_v41_research.md),
+[V39.1 diagnosis](references/visual_answer_trajectory_v39_pilot_diagnosis.md),
+[tracked V41 evidence](publication/ilm-image-native/evidence/v41), and
+[compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
+
+## Prior Evidence: V38 Improves Visual Reading but Fails Answer Generalization
 
 ![Measured V38 result: paired visual paths improve reading and font invariance, but the frozen answer-semantic gate rejects the model](publication/ilm-image-native/figures/visual_path_alignment_v38_result.png)
 
@@ -1134,6 +1168,9 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 |---|---|
 | Conceptual write-up | `docs/imagized-language-model.md` |
 | Current engineering goal | `docs/first-imagized-language-model-goal.md` |
+| V41 image-conditioned glyph motor | `references/image_conditioned_glyph_motor_bridge_v41_research.md` |
+| V39.1 matched trajectory diagnosis | `references/visual_answer_trajectory_v39_pilot_diagnosis.md` |
+| V41 hash-pinned evidence | `publication/ilm-image-native/evidence/v41/` |
 | V35 measured result | `references/causal_glyph_flow_v35_result.md` |
 | V35 implementation and reproduction | `docs/causal-glyph-flow-v35.md` |
 | V35 preregistered protocol | `references/causal_glyph_flow_v35_protocol.md` |
@@ -1165,6 +1202,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 - 🏺 Etymology ingestion from `hanziyuan` and `chineseetymology`-style sources.
 - 👁️ Continuous foveal retina with recurrent visual context and cross-font invariance.
 - ✒️ Deterministic continuous visual motor plan for directly supervised stroke topology.
+- 🖼️ Hash-pinned image-conditioned glyph motor bridge with noisy-state robustness audit.
 - 🖋️ Conditional pixel-space rectified-flow writer with a differentiable write-read cycle.
 - 🔁 Autonomous image-only inference with candidate rereading, energy reranking, and pixel feedback.
 - 🧭 Training on exact model-induced visual rollouts with state alignment, next-image energy, and recovery flow.

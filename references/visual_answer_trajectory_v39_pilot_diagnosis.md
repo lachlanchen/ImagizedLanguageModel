@@ -110,6 +110,41 @@ mechanics:
 
 No sealed data or writer is authorized by this pilot.
 
+## Matched V39.1 correction result
+
+The six planned mechanical corrections were implemented in commit `9df7d6b`
+and tested in a matched 512-record, 150-update rerun. The run completed in
+`184.233` seconds with `2,984,609,280` peak allocated CUDA bytes. Its resumable
+checkpoint SHA-256 is
+`6f620d2b7dcfd332cd662ed551f88b96a1f20e3158edb3d1096f91962b5923a4`;
+the standalone EMA checkpoint SHA-256 is
+`6e26f53f1dfc97dc7d2d06063504170d6b1f4cb9bd360ef4badadd183058a538`.
+
+The corrected count process behaved coherently. Expected count mean was
+`6.3028` against target `6.3128`, count-mode accuracy increased from `0.00389`
+to `0.15220`, and visual-length MAE fell from `9.0253` to `4.9148`. This did not
+repair semantic order or answer binding:
+
+| Held-out metric | Original pilot EMA | Corrected pilot EMA |
+| --- | ---: | ---: |
+| answer top-1 | 0.04339 | 0.03562 |
+| answer MRR | 0.08302 | 0.07406 |
+| answer cosine | 0.18048 | 0.14486 |
+| segment top-1 | 0.00523 | 0.00441 |
+| segment MRR | 0.01264 | 0.01234 |
+| transition-direction cosine | 0.00016 | 0.00648 |
+
+The final answer route was `0.01049` MRR below its inherited V38-compatible
+baseline, and the final segment route was worse than the stage-1 route. Raw
+weights produced the same conclusion (`0.07352` answer MRR). Correct and blank
+or shuffled prompts remained distinguishable, but the trajectory did not bind
+that visual signal to the right ordered answer.
+
+Decision: do not scale V39 on the full bank. Preserve the corrected mechanics,
+but move the next bounded proof to a canonical image-conditioned glyph motor
+and a probabilistic continuous next-glyph state. Calligraphy and historical
+forms remain later view/form augmentations.
+
 ## Writer path after a semantic pass
 
 V34 already qualifies a 7.4M-parameter, codebook-free `32 x 32` visual codec
