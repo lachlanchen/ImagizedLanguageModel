@@ -136,7 +136,9 @@ must:
   `qwen3:30b-a3b-instruct-2507-q4_K_M` adjudicator whose relation-enum protocol
   separately checks operation, quantity and unit, category scope, named input,
   output form and style, request form, and task execution; apply exact
-  normalized numeric-constraint preservation before this stage; and
+  normalized numeric-constraint preservation before this stage; require a
+  second adversarial-falsification prompt and independent seed stream to agree
+  before accepting a row; and
 - record Qwen, BGE, Ollama, source, and output hashes.
 
 The generated strings exist only in the offline renderer. Student batches

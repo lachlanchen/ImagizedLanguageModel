@@ -52,6 +52,9 @@ DEFAULT_JUDGMENTS = (
 DEFAULT_ADJUDICATIONS = (
     "artifacts/visual_path_alignment_v38_paraphrases/adjudications.jsonl"
 )
+DEFAULT_CONFIRMATIONS = (
+    "artifacts/visual_path_alignment_v38_paraphrases/confirmations.jsonl"
+)
 EXPECTED_INSTRUCTION_SHA256 = (
     "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903"
 )
@@ -91,6 +94,7 @@ ADJUDICATOR_MODEL_SHA256 = (
 )
 ADJUDICATOR_MODEL_BYTES = 18_556_685_856
 ADJUDICATOR_PROTOCOL_VERSION = 1
+CONFIRMATOR_PROTOCOL_VERSION = 1
 
 BGE_ENDPOINT = "http://127.0.0.1:11434/api/embed"
 V38_EXTRA_TRAIN_FONTS = (
@@ -349,6 +353,48 @@ ADJUDICATOR_EXAMPLES: tuple[tuple[str, str, Mapping[str, Any]], ...] = (
     ),
 )
 
+CONFIRMATOR_SYSTEM_PROMPT = (
+    "Act as an adversarial falsifier of Chinese instruction-paraphrase "
+    "equivalence. Precision is more important than recall. Ignore a leading "
+    "'问：' metadata prefix. Try to construct a valid answer to one instruction "
+    "that would violate the other. Compare operation, every number/unit, "
+    "category scope, named or quoted inputs, and output format/style separately. "
+    "A subtype and its superclass are never equal. Missing information is not "
+    "implied. Choose equal only after you cannot find a counterexample; if "
+    "uncertain choose different or unclear. Candidate must remain a request and "
+    "perform none of the task. Return the required JSON object only."
+)
+CONFIRMATOR_NAMED_INPUT_EXAMPLE = (
+    "\u6bd4\u8f83\u5317\u4eac\u548c\u4e0a\u6d77\u7684\u6c14\u5019\u3002",
+    "\u95ee\uff1a\u6bd4\u8f83\u4e24\u4e2a\u57ce\u5e02\u7684\u6c14\u5019\u3002",
+    {
+        "candidate_form": "request",
+        "operation_relation": "equal",
+        "quantity_unit_relation": "equal",
+        "category_scope_relation": "candidate_broader",
+        "named_input_relation": "candidate_broader",
+        "output_requirement_relation": "equal",
+        "task_execution": "not_performed",
+        "original_requirements": [
+            "\u6bd4\u8f83\u6c14\u5019",
+            "\u5317\u4eac",
+            "\u4e0a\u6d77",
+        ],
+        "candidate_requirements": [
+            "\u6bd4\u8f83\u6c14\u5019",
+            "\u4e24\u4e2a\u672a\u6307\u5b9a\u57ce\u5e02",
+        ],
+        "reason": "\u5019\u9009\u672a\u4fdd\u7559\u6307\u5b9a\u57ce\u5e02\u3002",
+    },
+)
+CONFIRMATOR_EXAMPLES = (
+    ADJUDICATOR_EXAMPLES[0],
+    ADJUDICATOR_EXAMPLES[1],
+    CONFIRMATOR_NAMED_INPUT_EXAMPLE,
+    ADJUDICATOR_EXAMPLES[2],
+    ADJUDICATOR_EXAMPLES[3],
+)
+
 CHINESE_NUMERAL_VALUES = {
     "\u96f6": 0,
     "\u3007": 0,
@@ -383,6 +429,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--candidates", default=DEFAULT_CANDIDATES)
     parser.add_argument("--judgments", default=DEFAULT_JUDGMENTS)
     parser.add_argument("--adjudications", default=DEFAULT_ADJUDICATIONS)
+    parser.add_argument("--confirmations", default=DEFAULT_CONFIRMATIONS)
     parser.add_argument("--target-count", type=int, default=1_024)
     parser.add_argument("--candidate-count", type=int, default=2_000)
     parser.add_argument("--minimum-cosine", type=float, default=0.82)
@@ -1038,6 +1085,25 @@ def _adjudicator_messages(original: str, candidate: str) -> list[dict[str, str]]
     return messages
 
 
+def _confirmator_messages(original: str, candidate: str) -> list[dict[str, str]]:
+    messages = [{"role": "system", "content": CONFIRMATOR_SYSTEM_PROMPT}]
+    for example_original, example_candidate, verdict in CONFIRMATOR_EXAMPLES:
+        messages.extend(
+            (
+                {
+                    "role": "user",
+                    "content": _judge_pair(example_original, example_candidate),
+                },
+                {
+                    "role": "assistant",
+                    "content": json.dumps(verdict, ensure_ascii=False, sort_keys=True),
+                },
+            )
+        )
+    messages.append({"role": "user", "content": _judge_pair(original, candidate)})
+    return messages
+
+
 def adjudicator_protocol_sha256() -> str:
     protocol = {
         "version": ADJUDICATOR_PROTOCOL_VERSION,
@@ -1045,6 +1111,19 @@ def adjudicator_protocol_sha256() -> str:
         "examples": ADJUDICATOR_EXAMPLES,
         "schema": _adjudicator_schema(),
         "numeric_constraint_units": CHINESE_QUANTITY_UNITS,
+    }
+    encoded = json.dumps(
+        protocol, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def confirmator_protocol_sha256() -> str:
+    protocol = {
+        "version": CONFIRMATOR_PROTOCOL_VERSION,
+        "system": CONFIRMATOR_SYSTEM_PROMPT,
+        "examples": CONFIRMATOR_EXAMPLES,
+        "schema": _adjudicator_schema(),
     }
     encoded = json.dumps(
         protocol, ensure_ascii=False, sort_keys=True, separators=(",", ":")
@@ -1136,6 +1215,76 @@ def request_adjudication(
         or any(verdict.get(name) not in ADJUDICATOR_RELATIONS for name in relation_fields)
     ):
         raise RuntimeError("V38 adjudicator returned an invalid verdict")
+    normalized_verdict = {
+        "candidate_form": str(verdict["candidate_form"]),
+        **{name: str(verdict[name]) for name in relation_fields},
+        "task_execution": str(verdict["task_execution"]),
+        "original_requirements": [
+            normalize_visible_text(str(item))[:160]
+            for item in list(verdict.get("original_requirements", []))[:24]
+        ],
+        "candidate_requirements": [
+            normalize_visible_text(str(item))[:160]
+            for item in list(verdict.get("candidate_requirements", []))[:24]
+        ],
+        "reason": normalize_visible_text(str(verdict.get("reason", "")))[:240],
+    }
+    usage = {
+        "prompt_eval_count": int(body.get("prompt_eval_count", 0)),
+        "eval_count": int(body.get("eval_count", 0)),
+        "total_duration_ns": int(body.get("total_duration", 0)),
+    }
+    return normalized_verdict, usage
+
+
+def request_confirmation(
+    record: VisualRasterRecord,
+    paraphrase: str,
+    *,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[dict[str, Any], dict[str, int]]:
+    body = _request_json(
+        _validate_local_endpoint(endpoint, path="/api/chat"),
+        payload={
+            "model": model,
+            "stream": False,
+            "think": False,
+            "keep_alive": "10m",
+            "format": _adjudicator_schema(),
+            "options": {
+                "temperature": 0.0,
+                "seed": int(seed),
+                "num_predict": 320,
+            },
+            "messages": _confirmator_messages(record.prompt, paraphrase),
+        },
+        timeout=timeout,
+    )
+    message = body.get("message", {})
+    content = message.get("content", "") if isinstance(message, Mapping) else ""
+    try:
+        verdict = json.loads(str(content))
+    except json.JSONDecodeError as error:
+        raise RuntimeError("V38 confirmator returned invalid JSON") from error
+    relation_fields = (
+        "operation_relation",
+        "quantity_unit_relation",
+        "category_scope_relation",
+        "named_input_relation",
+        "output_requirement_relation",
+    )
+    if (
+        not isinstance(verdict, Mapping)
+        or verdict.get("candidate_form")
+        not in {"request", "task_result", "declarative_nonrequest", "unclear"}
+        or verdict.get("task_execution")
+        not in {"not_performed", "partly_performed", "fully_performed", "unclear"}
+        or any(verdict.get(name) not in ADJUDICATOR_RELATIONS for name in relation_fields)
+    ):
+        raise RuntimeError("V38 confirmator returned an invalid verdict")
     normalized_verdict = {
         "candidate_form": str(verdict["candidate_form"]),
         **{name: str(verdict[name]) for name in relation_fields},
@@ -1389,6 +1538,106 @@ def adjudicate_candidates(
     }
 
 
+def confirm_candidates(
+    rows: Sequence[Mapping[str, Any]],
+    records: Mapping[str, VisualRasterRecord],
+    *,
+    journal_path: Path,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    existing = _read_jsonl(journal_path)
+    protocol_sha = confirmator_protocol_sha256()
+    by_key = {
+        (
+            str(row.get("identifier", "")),
+            str(row.get("source_prompt_sha256", "")),
+            str(row.get("paraphrase_sha256", "")),
+        ): row
+        for row in existing
+        if row.get("confirmator_protocol_version") == CONFIRMATOR_PROTOCOL_VERSION
+        and row.get("confirmator_protocol_sha256") == protocol_sha
+        and isinstance(row.get("pass"), bool)
+    }
+    usage = {"prompt_eval_count": 0, "eval_count": 0, "total_duration_ns": 0}
+    errors: list[dict[str, str]] = []
+    passed: list[dict[str, Any]] = []
+    failed_reasons: dict[str, int] = {}
+    for position, row in enumerate(rows):
+        identifier = str(row["identifier"])
+        paraphrase = str(row["paraphrase"])
+        record = records[identifier]
+        source_prompt_sha = hashlib.sha256(record.prompt.encode("utf-8")).hexdigest()
+        paraphrase_sha = hashlib.sha256(paraphrase.encode("utf-8")).hexdigest()
+        key = (identifier, source_prompt_sha, paraphrase_sha)
+        confirmation = by_key.get(key)
+        if confirmation is None:
+            item_seed = seed + position * 1_000_039
+            try:
+                verdict, item_usage = request_confirmation(
+                    record,
+                    paraphrase,
+                    endpoint=endpoint,
+                    model=model,
+                    seed=item_seed,
+                    timeout=timeout,
+                )
+                accepted = adjudication_passes(verdict)
+                confirmation = {
+                    "identifier": identifier,
+                    "source_prompt_sha256": source_prompt_sha,
+                    "paraphrase_sha256": paraphrase_sha,
+                    "confirmator_protocol_version": CONFIRMATOR_PROTOCOL_VERSION,
+                    "confirmator_protocol_sha256": protocol_sha,
+                    "seed": item_seed,
+                    **verdict,
+                    "pass": accepted,
+                    "failure_code": (
+                        "pass" if accepted else adjudication_failure_code(verdict)
+                    ),
+                    "confirmator_model": model,
+                    "decision_path": "adversarial-relation-confirmation",
+                }
+                _append_jsonl(journal_path, confirmation)
+                by_key[key] = confirmation
+                for name, value in item_usage.items():
+                    usage[name] += value
+            except Exception as error:  # Failed confirmations fail closed.
+                errors.append({"identifier": identifier, "error": str(error)})
+                continue
+        if bool(confirmation.get("pass", False)):
+            passed.append(dict(row) | {"adversarial_confirmation": "pass"})
+        else:
+            failure_code = normalize_visible_text(
+                str(confirmation.get("failure_code", "unspecified"))
+            )
+            failed_reasons[failure_code] = failed_reasons.get(failure_code, 0) + 1
+        if (position + 1) % 25 == 0 or position + 1 == len(rows):
+            print(
+                json.dumps(
+                    {
+                        "confirmed": position + 1,
+                        "confirmator_passed": len(passed),
+                        "confirmator_errors": len(errors),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+    return passed, {
+        "journal_rows": len(_read_jsonl(journal_path)),
+        "passed": len(passed),
+        "failed": len(rows) - len(passed) - len(errors),
+        "failed_reasons": failed_reasons,
+        "errors": errors,
+        "usage": usage,
+        "confirmator_protocol_version": CONFIRMATOR_PROTOCOL_VERSION,
+        "confirmator_protocol_sha256": protocol_sha,
+    }
+
+
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -1582,6 +1831,7 @@ def main() -> None:
     candidate_path = Path(args.candidates)
     judgment_path = Path(args.judgments)
     adjudication_path = Path(args.adjudications)
+    confirmation_path = Path(args.confirmations)
     out_path = Path(args.out)
     receipt_path = out_path.with_suffix(".receipt.json")
     previous_receipt: dict[str, Any] = {}
@@ -1592,6 +1842,7 @@ def main() -> None:
             candidate_path,
             judgment_path,
             adjudication_path,
+            confirmation_path,
             out_path,
             receipt_path,
         ):
@@ -1705,6 +1956,15 @@ def main() -> None:
             seed=args.seed + 76_000_000,
             timeout=args.timeout,
         )
+        confirmed, confirmation_summary = confirm_candidates(
+            adjudicated,
+            by_identifier,
+            journal_path=confirmation_path,
+            endpoint=args.adjudicator_endpoint,
+            model=args.adjudicator_model,
+            seed=args.seed + 114_000_000,
+            timeout=args.timeout,
+        )
     finally:
         unload_qwen(
             endpoint=args.adjudicator_endpoint,
@@ -1715,7 +1975,7 @@ def main() -> None:
     unique: list[dict[str, Any]] = []
     seen_paraphrases: set[str] = set()
     duplicate_paraphrases = 0
-    for row in adjudicated:
+    for row in confirmed:
         paraphrase = str(row["paraphrase"])
         if paraphrase in seen_paraphrases:
             duplicate_paraphrases += 1
@@ -1727,7 +1987,7 @@ def main() -> None:
 
     if len(unique) < args.target_count:
         raise RuntimeError(
-            f"V38 accepted {len(unique)} adjudicated unique paraphrases, fewer "
+            f"V38 accepted {len(unique)} confirmed unique paraphrases, fewer "
             f"than {args.target_count}; "
             "rerun with a larger --candidate-count"
         )
@@ -1747,6 +2007,7 @@ def main() -> None:
         "accepted_by_numeric_filters": len(accepted),
         "accepted_by_instruction_judge": len(judged),
         "accepted_by_constraint_adjudicator": len(adjudicated),
+        "accepted_by_adversarial_confirmation": len(confirmed),
         "accepted_unique_before_truncation": len(unique),
         "minimum_semantic_cosine": args.minimum_cosine,
         "semantic_cosine": {
@@ -1775,6 +2036,11 @@ def main() -> None:
         "adjudication": adjudication_summary,
         "adjudicator_protocol_version": ADJUDICATOR_PROTOCOL_VERSION,
         "adjudicator_protocol_sha256": adjudicator_protocol_sha256(),
+        "confirmation_manifest": str(confirmation_path.resolve()),
+        "confirmation_manifest_sha256": file_sha256(confirmation_path),
+        "confirmation": confirmation_summary,
+        "confirmator_protocol_version": CONFIRMATOR_PROTOCOL_VERSION,
+        "confirmator_protocol_sha256": confirmator_protocol_sha256(),
         "output": str(out_path.resolve()),
         "output_sha256": file_sha256(out_path),
         "training_fonts": list(V38_TRAIN_FONTS),

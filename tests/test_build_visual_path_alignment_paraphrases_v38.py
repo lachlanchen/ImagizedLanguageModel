@@ -310,3 +310,66 @@ def test_final_adjudicator_is_resumable_and_fails_closed(monkeypatch, tmp_path) 
     assert [row["identifier"] for row in second] == ["alpaca-zh:1"]
     assert second_summary["journal_rows"] == 2
     assert len(calls) == 2
+
+
+def test_adversarial_confirmation_is_separate_and_resumable(
+    monkeypatch, tmp_path
+) -> None:
+    assert builder.confirmator_protocol_sha256() != builder.adjudicator_protocol_sha256()
+    records = {"alpaca-zh:1": record("alpaca-zh:1")}
+    rows = [
+        {
+            "identifier": "alpaca-zh:1",
+            "paraphrase": "\u95ee\uff1a\u6c34\u80fd\u505a\u4ec0\u4e48\uff1f",
+            "constraint_adjudicator": "pass",
+        }
+    ]
+    calls = 0
+
+    def fake_confirmation(source, paraphrase, **_kwargs):
+        nonlocal calls
+        calls += 1
+        return {
+            "candidate_form": "request",
+            "operation_relation": "equal",
+            "quantity_unit_relation": "not_applicable",
+            "category_scope_relation": "equal",
+            "named_input_relation": "equal",
+            "output_requirement_relation": "equal",
+            "task_execution": "not_performed",
+            "original_requirements": ["ask"],
+            "candidate_requirements": ["ask"],
+            "reason": "no counterexample",
+        }, {
+            "prompt_eval_count": 1,
+            "eval_count": 1,
+            "total_duration_ns": 1,
+        }
+
+    monkeypatch.setattr(builder, "request_confirmation", fake_confirmation)
+    journal = tmp_path / "confirmations.jsonl"
+    first, summary = builder.confirm_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.ADJUDICATOR_MODEL,
+        seed=10,
+        timeout=1,
+    )
+    assert first[0]["adversarial_confirmation"] == "pass"
+    assert summary["passed"] == 1
+    assert calls == 1
+
+    second, second_summary = builder.confirm_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.ADJUDICATOR_MODEL,
+        seed=10,
+        timeout=1,
+    )
+    assert second[0]["identifier"] == "alpaca-zh:1"
+    assert second_summary["journal_rows"] == 1
+    assert calls == 1
