@@ -1,0 +1,196 @@
+{
+  "accepted_by_adversarial_confirmation": 1285,
+  "accepted_by_constraint_adjudicator": 1322,
+  "accepted_by_instruction_judge": 1543,
+  "accepted_by_numeric_filters": 1857,
+  "accepted_unique_before_truncation": 1285,
+  "adjudication": {
+    "adjudicator_protocol_sha256": "7dbd41848486451ad2fcd9725f5ed6c6c84f51a5108078c7514e0b18a53b4227",
+    "adjudicator_protocol_version": 1,
+    "errors": [],
+    "failed": 221,
+    "failed_reasons": {
+      "category-scope-candidate_broader": 21,
+      "category-scope-candidate_narrower": 4,
+      "numeric-constraint-changed": 164,
+      "operation-different": 7,
+      "output-requirement-candidate_broader": 1,
+      "output-requirement-different": 13,
+      "quantity-unit-different": 9,
+      "task-fully_performed": 2
+    },
+    "journal_rows": 1543,
+    "passed": 1322,
+    "usage": {
+      "eval_count": 0,
+      "prompt_eval_count": 0,
+      "total_duration_ns": 0
+    }
+  },
+  "adjudication_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_path_alignment_v38_paraphrases/adjudications.jsonl",
+  "adjudication_manifest_sha256": "7b012460680abb90e86ae1e71322c8a112beeb6c0e30a1e062ecb915d7e336fc",
+  "adjudicator_protocol_sha256": "7dbd41848486451ad2fcd9725f5ed6c6c84f51a5108078c7514e0b18a53b4227",
+  "adjudicator_protocol_version": 1,
+  "bge": {
+    "endpoint": "http://127.0.0.1:11434/api/embed",
+    "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/bge-m3/latest",
+    "manifest_sha256": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "model": "bge-m3:latest",
+    "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+    "model_layer_bytes": 1157671200,
+    "model_layer_sha256": "daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+    "official_model_card_license": "MIT",
+    "role": "offline paraphrase validation only",
+    "server_version": "0.32.6",
+    "student_runtime_dependency": false
+  },
+  "candidate_count": 2600,
+  "candidate_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_path_alignment_v38_paraphrases/candidates.jsonl",
+  "candidate_manifest_sha256": "4222a05093461d43ff780ad8787d9c26c462802334809ef039bbcb031ebd6bd2",
+  "confirmation": {
+    "confirmator_protocol_sha256": "600a9333bc43edb7cfb7ed14439b4bf1a0fbaaacea9ab9181c351d81e4ca78a2",
+    "confirmator_protocol_version": 1,
+    "errors": [],
+    "failed": 37,
+    "failed_reasons": {
+      "named-input-different": 1,
+      "operation-different": 3,
+      "output-requirement-different": 32,
+      "quantity-unit-different": 1
+    },
+    "journal_rows": 1322,
+    "passed": 1285,
+    "usage": {
+      "eval_count": 141603,
+      "prompt_eval_count": 1113805,
+      "total_duration_ns": 900562531083
+    }
+  },
+  "confirmation_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_path_alignment_v38_paraphrases/confirmations.jsonl",
+  "confirmation_manifest_sha256": "1a0de874a1a99b8d06204d6c81aa12bb4354ce7c701de46cba615cd204bed592",
+  "confirmator_protocol_sha256": "600a9333bc43edb7cfb7ed14439b4bf1a0fbaaacea9ab9181c351d81e4ca78a2",
+  "confirmator_protocol_version": 1,
+  "constraint_adjudicator": {
+    "endpoint": "http://127.0.0.1:11434/api/chat",
+    "license": "Apache-2.0",
+    "license_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "license_layer_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/qwen3/30b-a3b-instruct-2507-q4_K_M",
+    "manifest_sha256": "19e422b0231392335cfc49cfd172de7034bb1aeabb08aa307cce745c60b272fe",
+    "model": "qwen3:30b-a3b-instruct-2507-q4_K_M",
+    "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-78b329e716e7e9775973d392cd132b1f1ff1c8287a992887caeb6fd6c56ba9cc",
+    "model_layer_bytes": 18556685856,
+    "model_layer_sha256": "78b329e716e7e9775973d392cd132b1f1ff1c8287a992887caeb6fd6c56ba9cc",
+    "role": "offline final paraphrase adjudication only",
+    "server_version": "0.32.6",
+    "student_runtime_dependency": false
+  },
+  "created_unix": 1786680417.5204558,
+  "elapsed_seconds": 953.632223255001,
+  "experiment": "visual-path-alignment-paraphrases-v38",
+  "generated_count": 2600,
+  "generation_errors": [],
+  "generation_usage": {
+    "eval_count": 37463,
+    "prompt_eval_count": 199298,
+    "total_duration_ns": 582757450047
+  },
+  "holdout_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/teacher/folio_paraphrases_zh_holdout.jsonl",
+  "holdout_sha256": "132a8a257d31be3cf607d0313bf042dafaee7f2df08440bf7e012a502ed6c02f",
+  "holdout_source_identifiers_excluded": 188,
+  "instruction_judge": {
+    "endpoint": "http://127.0.0.1:11434/api/chat",
+    "license": "Apache-2.0",
+    "license_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "license_layer_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/qwen3/8b-q8_0",
+    "manifest_sha256": "e56358ca25dd14db6853a9f68a92d717aaa6f0a94250a72d1a0f3d86a9f30130",
+    "model": "qwen3:8b-q8_0",
+    "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-d87f4a5a2f1a6051d9fac010c12f76f3ba2137b137d413ba8f4d3a3d06b3a25b",
+    "model_layer_bytes": 8851075872,
+    "model_layer_sha256": "d87f4a5a2f1a6051d9fac010c12f76f3ba2137b137d413ba8f4d3a3d06b3a25b",
+    "role": "offline instruction-versus-answer validation only",
+    "server_version": "0.32.6",
+    "student_runtime_dependency": false
+  },
+  "instruction_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/raw/alpaca_zh.json",
+  "instruction_sha256": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+  "judge_protocol_sha256": "5c76bea61dd0658cfc7375664bbd3d9be039f7722cabfac52e22339c09ee66c2",
+  "judge_protocol_version": 2,
+  "judgment": {
+    "errors": [],
+    "failed": 314,
+    "failed_reasons": {
+      "candidate-not-instruction": 79,
+      "input-or-condition-dropped": 2,
+      "missing-calculate-operation": 4,
+      "missing-fill-or-complete-operation": 3,
+      "missing-rewrite-or-edit-operation": 47,
+      "missing-translate-operation": 3,
+      "requested-operation-changed": 18,
+      "task-performed-or-answered": 158
+    },
+    "journal_rows": 1857,
+    "judge_protocol_sha256": "5c76bea61dd0658cfc7375664bbd3d9be039f7722cabfac52e22339c09ee66c2",
+    "judge_protocol_version": 2,
+    "passed": 1543,
+    "usage": {
+      "eval_count": 0,
+      "prompt_eval_count": 0,
+      "total_duration_ns": 0
+    }
+  },
+  "judgment_manifest": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/visual_path_alignment_v38_paraphrases/judgments.jsonl",
+  "judgment_manifest_sha256": "692e45f56e3fe334b58ddd67542c20fd130f95168b73657cba2f04fb75ff4f39",
+  "minimum_semantic_cosine": 0.82,
+  "output": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/data/teacher/visual_path_alignment_paraphrases_v38.jsonl",
+  "output_sha256": "25db6abd4eb266a2ae05b5d8b8e9cf23caa9c523f61e89b08cc52e542fc2a68b",
+  "qwen": {
+    "endpoint": "http://127.0.0.1:11434/api/chat",
+    "license": "Apache-2.0",
+    "license_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "license_layer_sha256": "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+    "manifest": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/manifests/registry.ollama.ai/library/qwen3/4b-q8_0",
+    "manifest_sha256": "6461746fd6b5a2327ba63d5cd1359af119852d82aa8c981efe948d1868a4dc20",
+    "model": "qwen3:4b-q8_0",
+    "model_layer": "/home/lachlan/ProjectsLFS/LocalLLM/.local/models/ollama/blobs/sha256-fb684cd1056921c526f12a9efbad10c4627e151ecc1e28314fae1c2cce0c2c15",
+    "model_layer_bytes": 4368878272,
+    "model_layer_sha256": "fb684cd1056921c526f12a9efbad10c4627e151ecc1e28314fae1c2cce0c2c15",
+    "role": "offline training-paraphrase preparation only",
+    "server_version": "0.32.6",
+    "student_runtime_dependency": false
+  },
+  "rejection_reasons": {
+    "exact-copy": 506,
+    "length-ratio": 117,
+    "semantic-cosine": 120
+  },
+  "seed": 20263800,
+  "semantic_cosine": {
+    "maximum": 0.9995977282524109,
+    "mean": 0.9631163204903714,
+    "minimum": 0.8218886852264404
+  },
+  "student_runtime_dependency": false,
+  "target_count": 1024,
+  "training_font_sha256": {
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc": "197d5e1e019faca33a4d55931c7d68b8056f3b97cb862049f5cb8de9efdfb8ce",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "/usr/share/fonts/truetype/arphic-gbsn00lp/gbsn00lp.ttf": "705ec2dba81eaee1208e4ed5d3ff23ab259292e8e0e163ea3de297ef1317007a",
+    "/usr/share/fonts/truetype/arphic-gkai00mp/gkai00mp.ttf": "61519fb9bdda4a1a3aa02a12cbb76c2ef897ce879775d7ea2265d0a65fe54d16",
+    "/usr/share/fonts/truetype/arphic/ukai.ttc": "cfc758e69386a21bade8cb3b373fda20d7f2fac6e8904ced2ded98588b63e274",
+    "/usr/share/fonts/truetype/arphic/uming.ttc": "fe952e55617275142d9cefd4d79eade4df446517b0478b2567d9bc7df49f70e2",
+    "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf": "acb6440a713d880a13a21b468ba7cd43f5a2b2934972e51be791c880730777b8"
+  },
+  "training_fonts": [
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Medium.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+    "/usr/share/fonts/truetype/arphic-gbsn00lp/gbsn00lp.ttf",
+    "/usr/share/fonts/truetype/arphic-gkai00mp/gkai00mp.ttf",
+    "/usr/share/fonts/truetype/arphic/ukai.ttc",
+    "/usr/share/fonts/truetype/arphic/uming.ttc"
+  ]
+}

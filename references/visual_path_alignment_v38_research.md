@@ -1,6 +1,7 @@
 # Visual Path Alignment V38: Research Decision
 
-Status: pre-implementation research note, not a frozen evidence protocol.
+Status: training-view preparation complete; model implementation and frozen
+evidence protocol still pending.
 
 Date: 2026-08-14
 
@@ -143,6 +144,32 @@ must:
 
 The generated strings exist only in the offline renderer. Student batches
 contain pixels, masks, target tensors, and numeric bank indices.
+
+### Prepared paraphrase evidence
+
+The production builder completed on 2026-08-14 with a deterministic prefix of
+2,600 eligible non-holdout records:
+
+- 1,857 passed fit, copy, length, BGE-M3 cosine, and answer-proximity filters;
+- 1,543 passed the pinned 8B instruction/operation judge;
+- 1,322 passed normalized-number equality and the first pinned 30B sparse
+  relation adjudication;
+- 1,285 passed the independent adversarial confirmation prompt and seed stream;
+- the first 1,024 unique source IDs and unique paraphrase strings form the
+  bounded training view; and
+- all four model-backed stages completed with zero generation, schema, or
+  serving errors.
+
+The final manifest is
+`data/teacher/visual_path_alignment_paraphrases_v38.jsonl`, SHA-256
+`25db6abd4eb266a2ae05b5d8b8e9cf23caa9c523f61e89b08cc52e542fc2a68b`.
+Its receipt records all source, font, model, protocol, candidate-journal,
+judgment-journal, adjudication-journal, and confirmation-journal hashes. The
+audit found 1,024 unique identifiers, 1,024 unique paraphrases, no overlap with
+the 188-source fixed holdout, no source-hash mismatch, no exact prompt or answer
+copy, and no failed operation, numeric, judgment, adjudication, or confirmation
+link. Qwen and BGE remain offline preparation tools with no student runtime
+dependency.
 
 ### 5. Length and collapse controls
 
