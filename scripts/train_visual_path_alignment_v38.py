@@ -101,7 +101,9 @@ MAXIMUM_VRAM_BYTES = 20 * 1024**3
 SOURCE_FILES = (
     "ilm/visual_lm/visual_path_alignment.py",
     "ilm/visual_lm/visual_path_alignment_data.py",
+    "ilm/visual_lm/visual_path_alignment_evaluation.py",
     "ilm/visual_lm/visual_path_alignment_training.py",
+    "scripts/eval_visual_path_alignment_v38.py",
     "scripts/train_visual_path_alignment_v38.py",
 )
 
