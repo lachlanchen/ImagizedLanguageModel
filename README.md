@@ -17,10 +17,10 @@
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
 use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
-V42/V43 canonical Chinese result and its narrower claim boundary are reported
-directly below.*
+V42--V44 canonical Chinese results and their narrower claim boundary are
+reported directly below.*
 
-## Current Evidence: V42 Learns Raster Language; V43 Still Fails Binding
+## Current Evidence: V42 Learns Raster Language; V43/V44 Still Fail Binding
 
 ![Measured V42/V43 result: an image-only causal reader beats unigram, bigram, and shuffled-history controls, while a bank-free flow writer improves glyph form but misses counterfactual binding and pixel-F1 gates](publication/ilm-image-native/figures/canonical_glyph_flow_v43_result.png)
 
@@ -48,18 +48,46 @@ but exact-suffix arm accuracy reaches only `54.4922%`. It therefore fails the
 unchanged `> 0.60` binding and `> 0.55` pixel-F1 gates. V43 is **partial**, and
 the frozen partition remains unopened.
 
-A post-result diagnostic explains where to work next. V43 scores `99.22%` on
+A post-result diagnostic explains the V43 failure. V43 scores `99.22%` on
 sampled training pairs but only `58.30%` on unseen train pairs and `54.69%` on
 development pairs: the 5,000-pair pool was memorized. By contrast, the spatial
 writer reaches `0.8824` pixel F1 when the evaluator supplies an exact target ink
 plan, versus `0.4611` from the autonomous predicted plan. The writer can render;
-the continuous visual language state is now the dominant bottleneck.
+the continuous visual language state is the dominant bottleneck.
+
+![Measured V44 result: a frozen V42 residual removes the seen-pair memorization gap but fails binding and drifts toward the common image field](publication/ilm-image-native/figures/canonical_glyph_binding_v44_result.png)
+
+V44 performs the resulting frozen-base test. A `1,735,936`-parameter residual
+reads earlier raster memory while preserving V42 exactly, consumes one pass over
+24,000 unique train pairs, and leaves 1,024 train-partition pairs untouched. Its
+3,000 updates take `210.87` seconds and `0.1985 GiB` peak allocated CUDA memory.
+Consumed and unseen-train arm accuracies are nearly identical (`57.47%` versus
+`57.42%`), so the V43 repeated-pool memorization gap is removed.
+
+Binding still does not generalize. V44 reaches only `53.42%` on fixed
+development pairs, versus `52.44%` for matched V42 and `51.86%` after shuffling
+the earlier prefix. It also damages the accepted natural calibration: matched
+full-history top-1 falls from `19.43%` to `17.43%`, and target log probability
+falls from `-5.238` to `-5.777`. V44 passes `8/14` preregistered gates and is
+**rejected-or-partial**. The writer and frozen partition remain closed.
+
+A fixed post-result scale sweep finds no residual strength that reaches the
+`60%` binding gate. More importantly, the learned update-difference has negative
+cosine with the true target-image difference (`-0.0229` on development), while
+anchor cosine to the corpus-mean image field rises from `0.777` to `0.882`.
+Raw target cosine improves even as rank and probability worsen. The next bounded
+test must therefore center and variance-balance the continuous raster field,
+then qualify that representation on held-out image geometry before training
+another reader or reopening the writer.
 
 See the [V42 protocol](references/canonical_glyph_language_v42_protocol.md),
 [V43 protocol](references/canonical_glyph_flow_v43_protocol.md),
 [measured V43 result and diagnosis](references/canonical_glyph_flow_v43_result.md),
+[V44 protocol](references/canonical_glyph_binding_v44_protocol.md),
+[measured V44 result and diagnosis](references/canonical_glyph_binding_v44_result.md),
 [tracked V42 evidence](publication/ilm-image-native/evidence/v42),
-[tracked V43 evidence](publication/ilm-image-native/evidence/v43), and
+[tracked V43 evidence](publication/ilm-image-native/evidence/v43),
+[tracked V44 evidence](publication/ilm-image-native/evidence/v44), and
 [compiled paper](publication/ilm-image-native/ilm-image-native.pdf).
 
 ## Prior Evidence: V41 Qualifies a Visual Glyph Motor, Not Language
@@ -275,11 +303,12 @@ invariance without solving held-out answer semantics; V39.1 calibrates answer
 length but fails trajectory semantics; and V41 qualifies an isolated external
 glyph motor. V42 then provides the first bounded positive ordered-raster
 language result. V43 adds a capable bank-free spatial writer but diagnoses
-memorized pair supervision and an inadequate autonomous image plan. The next
-proof therefore freezes V42, learns a small residual long-history binding path
-from a nonrepeating sample of the much larger pair pool, and reuses the V43
-writer only after the reader gate improves. Page-scale prompting, historical
-answer generation, 3D geometry, and motion remain deferred.
+memorized pair supervision and an inadequate autonomous image plan. V44 removes
+that memorization gap with a one-pass frozen-base residual, yet fails held-out
+binding and drifts toward the corpus-common image field. The next proof therefore
+tests a centered, variance-balanced, invertible raster representation before
+training another reader; the V43 writer remains closed. Page-scale prompting,
+historical answer generation, 3D geometry, and motion remain deferred.
 
 Concretely, the intended model maps prompt frames
 `X_prompt[Tp,D,H,W,C]` to generated answer frames

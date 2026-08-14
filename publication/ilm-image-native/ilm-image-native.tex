@@ -124,7 +124,14 @@ only 54.49\%; the fixed 0.60 and 0.55 gates fail. A post-result diagnostic finds
 99.22\% seen-pair but only 58.30\% unseen-train accuracy, while evaluator exact
 ink plans let the same writer reach 0.882 F1. V43 is partial: pair memorization
 and the autonomous visual plan, rather than writer capacity, are now the
-dominant bottlenecks. The frozen partition remains unopened.
+dominant bottlenecks. V44 freezes V42 and trains a 1.736M-parameter tangent
+residual in one pass over 24,000 unique raster pairs. Consumed and unseen-train
+accuracy become nearly equal (57.47\% and 57.42\%), removing the V43 memorization
+gap, but development binding reaches only 53.42\% and matched natural top-1
+falls from 19.43\% to 17.43\%. A post-result audit finds that the learned update
+is negatively aligned with target-image displacement and drifts toward the
+corpus-common image field. V44 passes 8/14 gates and is rejected-or-partial;
+the writer and frozen partition remain unopened.
 \end{abstract}
 
 \begin{figure}[t]
@@ -133,9 +140,10 @@ dominant bottlenecks. The frozen partition remains unopened.
   \caption{Image-native language modeling design target. A restrained AgInTi
   background is overlaid with deterministic typography and real local ziyuan
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
-  answer-page target, not a measured model output. V42 now supplies bounded
-  positive ordered-raster language evidence, while V43 remains a partial
-  reader/writer result reported in Figure~\ref{fig:v43result}.}
+  answer-page target, not a measured model output. V42 supplies bounded positive
+  ordered-raster language evidence; V43 and V44 remain partial or rejected
+  binding results reported in Figures~\ref{fig:v43result}
+  and~\ref{fig:v44result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -265,6 +273,12 @@ and controls that makes a stronger image-native language claim falsifiable:
   pixel-F1 gates. Post-result controls separate pair-pool memorization from a
   high exact-plan writer ceiling, identifying the continuous reader plan as
   the next bottleneck.
+  \item V44, a frozen-V42, 1.736M-parameter long-history tangent residual
+  trained once over 24,000 unique raster pairs. It removes V43's seen-pair
+  memorization gap but fails held-out binding and matched natural-language
+  retention. A scale-and-direction audit identifies drift toward a
+  corpus-common image mode, motivating a representation test rather than a
+  larger reader or writer.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -3005,7 +3019,7 @@ canonical content state from raster history without receiving the evaluator's
 target glyph, then beat visual unigram, bigram, shuffled-history, and
 blank-history controls under autonomous pixel feedback.
 
-\subsection{Canonical Glyph Language V42 and Spatial Flow V43}
+\subsection{Canonical Glyph Language V42--V44}
 
 \paragraph{A canonical image field isolates language before historical form.}
 V42 deliberately removes style variation and answer-level instruction tuning.
@@ -3127,10 +3141,84 @@ supplies the exact target ink plan solely to test motor capacity, the unchanged
 writer reaches 0.88240 F1 with ordinary anchor selection and 0.92032 with
 target-side selection. The direct V43 anchor inverse is 0.46315. Writer
 capacity and sample selection are therefore secondary to the predicted visual
-language field. The next test should freeze V42, train a small residual
-long-history path over a nonrepeating sample of at least 24,000 pairs, and align
-pairwise anchor differences with pairwise target-image differences before
+language field. This diagnosis fixes the V44 intervention: freeze V42, train a
+small residual long-history path over a nonrepeating 24,000-pair sample, and
+align pairwise anchor differences with pairwise target-image differences before
 reopening the V43 writer.
+
+\paragraph{V44 removes repeated-pool memorization but not visual binding.}
+V44 keeps every V42 parameter byte-exact and adds a two-block, width-192,
+six-head cross-attention residual. Its query combines the frozen full-history
+state, a second frozen suffix-four state, and their difference; its memory
+contains only the preceding 60 image fields and hidden states. If $a_0$ is the
+frozen V42 anchor and $r$ is the residual, V44 permits only a tangent update,
+\[
+r_{\perp}=r-(r^\mathsf{T}a_0)a_0,\qquad
+a=\operatorname{norm}(a_0+0.5r_{\perp}).
+\]
+The output projection starts at zero, contexts of four images or fewer bypass
+the adapter, and no candidate bank enters the model. The fixed loss combines
+pair cross-entropy, signed target-displacement alignment, displacement-norm and
+order margins, ordinary natural-image contrast, target cosine, and frozen-base
+distillation.
+
+The 1,735,936-parameter adapter consumes each of 24,000 unique training pairs
+once; the next 1,024 unique suffixes are untouched training-partition holdouts.
+Its 3,000 BF16 updates take 210.87 seconds and peak at 0.19848~GiB allocated
+CUDA memory. The complete 26,082,433-parameter runtime remains image-only, the
+V42 state is exact after training, and the frozen evaluation partition is not
+instantiated.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Matched development metric & V42 & V44 & Fixed requirement \\
+\midrule
+Natural full top-1 & 0.19434 & 0.17432 & $\geq$ V42$-0.015$; fail \\
+Natural full log probability & $-5.23837$ & $-5.77730$ & $\geq$ V42$-0.10$; fail \\
+Natural shuffled top-1 & 0.18604 & 0.15430 & full gain $>0.015$; pass \\
+Symbolic-bigram top-1 & 0.13672 & 0.13672 & full gain $>0.01$; pass \\
+Development pair arm accuracy & 0.52441 & 0.53418 & $>0.60$; fail \\
+V44 shuffled-pair arm accuracy & -- & 0.51855 & full gain $>0.04$; fail \\
+Consumed train-pair accuracy & -- & 0.57471 & diagnostic \\
+Unseen train-pair accuracy & -- & 0.57422 & $>0.60$; fail \\
+Consumed--unseen gap & -- & 0.00049 & $<0.10$; pass \\
+\bottomrule
+\end{tabular}
+\caption{V44 fixed matched-base and counterfactual audit. V44 retains the four
+absolute ordered-language controls and removes the V43 seen-pair gap, but fails
+both matched-base retention gates and all required binding improvements. It
+passes 8/14 conjunctive conditions.}
+\label{tab:v44binding}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/canonical_glyph_binding_v44_result.png}
+  \caption{Measured V44 result generated from hash-pinned training,
+  development, and diagnostic receipts. A one-pass frozen-base residual removes
+  repeated-pool memorization but neither passes held-out binding nor preserves
+  matched V42 natural calibration. The lower panels are explicitly post-result
+  diagnostics and do not alter the preregistered 8/14 rejection.}
+  \label{fig:v44result}
+\end{figure}
+
+\paragraph{The failure is representational, not a residual-scale choice.}
+A fixed post-result interpolation evaluates residual strengths from zero to
+two. Development arm accuracy peaks at only 0.53809 for strength 0.75; no tested
+strength reaches 0.60. The learned update-difference cosine with the true
+target-image difference is $-0.02289$ on development and $-0.03395$ on unseen
+training pairs. On natural windows, anchor cosine with the corpus-mean image
+field rises from 0.77712 at the frozen V42 anchor to 0.88183 at V44. Raw target
+cosine also rises from 0.60298 to 0.65413, yet exact top-1 falls from 0.19434 to
+0.17432 and target log probability falls by 0.53893 nat. The normalized raw DCT
+field lets shared background and common-stroke modes improve cosine while
+erasing discriminative displacement. Another larger residual on that target is
+therefore unjustified. The next bounded test must center and variance-balance a
+reversible continuous raster field and qualify its held-out image geometry
+before another causal reader or the V43 writer is opened.
 
 \section{Data}
 
@@ -3688,11 +3776,16 @@ probability improves by 0.17391 nat over shuffle. This is bounded positive
 natural-language evidence, even though exact-suffix assignment remains 0.53027.
 V43 then shows that a compact spatial writer can turn an exact continuous plan
 into 0.88240-F1 pixels, but the autonomous reader supplies an inadequate plan
-and a small pair pool is memorized. The next experiment therefore expands
-nonrepeating counterfactual diversity and learns a residual long-history reader
-path while freezing the accepted V42 base. Only after held-out binding and
-readable direct pixels pass should variable page length, multiple generated
-lines, historical form control, or raw-book scale expand the task.
+and a small pair pool is memorized. V44 removes that repeated-pool defect with a
+one-pass, frozen-base residual: consumed and unseen-pair accuracy differ by only
+0.00049. It still reaches only 0.53418 on development binding and reduces
+matched natural top-1 from 0.19434 to 0.17432. Its learned update is negatively
+aligned with target displacement and moves anchors toward the corpus-common
+image field. The next experiment therefore changes the continuous raster
+geometry before changing reader or writer capacity. Only after a centered,
+variance-balanced, reversible field passes held-out representation and language
+gates should variable page length, multiple generated lines, historical form
+control, or raw-book scale expand the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -3803,6 +3896,18 @@ accuracy but only 58.30\% on unseen train pairs, while an evaluator exact ink
 plan lets the unchanged writer reach 0.88240 F1. Pair memorization and the
 autonomous visual plan, not writer capacity, are the immediate limitations.
 
+V44 tests the prescribed frozen-reader correction with a 1.736M-parameter
+long-history tangent residual and one nonrepeating pass over 24,000 raster
+pairs. Training takes 210.87 seconds and 0.19848~GiB peak allocated memory.
+Consumed and unseen-train arm accuracy is 57.47\% and 57.42\%, so the V43
+memorization gap is removed, but fixed development binding is only 53.42\% and
+matched natural top-1 falls from 19.43\% to 17.43\%. V44 passes 8/14 and is
+\texttt{rejected-or-partial}. No residual-strength interpolation reaches the
+60\% gate; the learned displacement has negative cosine with target
+displacement and increases alignment to the corpus-mean image field. This
+localizes the next bottleneck to target representation rather than adapter
+scale, pair count, or spatial-writer capacity.
+
 The strongest supported claim remains narrow but is now positive at the
 language-control level: one consumer GPU can train from scratch a 24.35M-
 parameter image-only causal model whose ordered Chinese raster history predicts
@@ -3812,27 +3917,29 @@ plan at high quality. Their current autonomous composition does not pass
 counterfactual binding or readable-pixel gates. No Qwen, GPT, or general-LLM
 parity is shown, and no matched evidence supports compute superiority over token
 models. Runtime independence does not erase provenance: V34, V42, and V43 are
-project work; PIXAR and Pixel-Linguist provide external initialization to other
+project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
+provide external initialization to other
 branches; BGE-M3 supplies offline target geometry; Qwen-family models prepare
 V38 training paraphrases; and MX-Font supplies the V41 external motor. None is
 an uncredited ILM contribution or a deployed language teacher. Unstated
 upstream weight licenses prevent redistribution of the derived V35--V39
 artifacts; V41 provenance is recorded separately.
 
-The next bounded experiment does not enlarge the writer. It freezes the
-accepted V42 base reader, adds a small residual long-history path, consumes one
-nonrepeating pass over at least 24,000 of the roughly 215,340 eligible train
-pairs, aligns pairwise anchor differences with pairwise target-image
-differences, and distills ordinary natural-window anchors to prevent forgetting.
-Only a development improvement under the unchanged exact-suffix gate can reopen
-the V43 writer. Stronger external foundations and offline teachers remain
+The next bounded experiment does not enlarge the reader or writer. It estimates
+common modes from training rasters only, constructs a centered and
+variance-balanced continuous image field with an explicitly reversible raster
+path, and tests whether held-out target displacements and natural-image
+retrieval become better conditioned. Only a representation that passes frozen
+image-geometry gates may replace V42's raw normalized DCT target in another
+causal run; only a subsequent development binding improvement can reopen the
+V43 writer. Stronger external foundations and offline teachers remain
 admissible when provenance, licensing, training role, and deployed absence are
 exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. V42 and V43 still predict one canonical next glyph and do not answer
+encodings. V42--V44 still predict one canonical next glyph and do not answer
 such questions. Page-scale reading, historical answer composition, 3D writing,
 motion, speech, and broad multilingual generation remain future extensions of
 the same sensory interface and require separate evidence.
