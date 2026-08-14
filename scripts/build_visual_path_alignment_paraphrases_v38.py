@@ -44,6 +44,9 @@ DEFAULT_OUT = "data/teacher/visual_path_alignment_paraphrases_v38.jsonl"
 DEFAULT_CANDIDATES = (
     "artifacts/visual_path_alignment_v38_paraphrases/candidates.jsonl"
 )
+DEFAULT_JUDGMENTS = (
+    "artifacts/visual_path_alignment_v38_paraphrases/judgments.jsonl"
+)
 EXPECTED_INSTRUCTION_SHA256 = (
     "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903"
 )
@@ -64,6 +67,16 @@ QWEN_LICENSE_SHA256 = (
     "d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
 )
 
+JUDGE_MODEL = "qwen3:8b-q8_0"
+JUDGE_MANIFEST_SHA256 = (
+    "e56358ca25dd14db6853a9f68a92d717aaa6f0a94250a72d1a0f3d86a9f30130"
+)
+JUDGE_MODEL_SHA256 = (
+    "d87f4a5a2f1a6051d9fac010c12f76f3ba2137b137d413ba8f4d3a3d06b3a25b"
+)
+JUDGE_MODEL_BYTES = 8_851_075_872
+JUDGE_PROTOCOL_VERSION = 2
+
 BGE_ENDPOINT = "http://127.0.0.1:11434/api/embed"
 V38_EXTRA_TRAIN_FONTS = (
     "/usr/share/fonts/truetype/arphic-gkai00mp/gkai00mp.ttf",
@@ -77,6 +90,136 @@ SYSTEM_PROMPT = (
     "exactly the same intent and all conditions preserved. Do not answer the "
     "task. Return only the rewritten instruction, without labels or explanation."
 )
+JUDGE_SYSTEM_PROMPT = (
+    "You audit Chinese instruction-paraphrase training data. Decompose the "
+    "requested operation before judging wording similarity. A candidate passes "
+    "only when it is itself a request or question, asks for exactly the same "
+    "operation, preserves every input and condition, and does not perform any "
+    "part of the task. A literal leading '问：' is metadata added by the data "
+    "pipeline; ignore it when deciding whether the remaining sentence is a "
+    "request. A declarative answer after '问：' is still an answer. Filled "
+    "blanks, completed analogies, translated text, calculations, summaries, "
+    "rewritten sentences, and other task results must be marked as performing "
+    "the task. Return the required JSON object only."
+)
+
+JUDGE_EXAMPLES: tuple[tuple[str, str, Mapping[str, Any]], ...] = (
+    (
+        "\u89e3\u91ca\u6c34\u5faa\u73af\u7684\u4e09\u4e2a\u4e3b\u8981\u9636\u6bb5\u3002",
+        "\u95ee\uff1a\u8bf7\u8bf4\u660e\u6c34\u5faa\u73af\u5305\u542b\u54ea\u4e09\u4e2a\u4e3b\u8981\u9636\u6bb5\u3002",
+        {
+            "original_operation": "\u89e3\u91ca\u5e76\u5217\u51fa\u4e09\u4e2a\u9636\u6bb5",
+            "candidate_operation": "\u8bf7\u6c42\u8bf4\u660e\u5e76\u5217\u51fa\u4e09\u4e2a\u9636\u6bb5",
+            "candidate_is_instruction": True,
+            "same_requested_operation": True,
+            "preserves_all_inputs_and_conditions": True,
+            "performs_or_answers_task": False,
+            "reason": "\u5019\u9009\u53e5\u4ecd\u5728\u8bf7\u6c42\u540c\u4e00\u89e3\u91ca\uff0c\u672a\u7ed9\u51fa\u9636\u6bb5\u3002",
+        },
+    ),
+    (
+        "\u9009\u62e9\u6b63\u786e\u7684\u8bcd\u586b\u7a7a\uff1a\u5929\u6c14\u53d8\u5f97____\u3002",
+        "\u95ee\uff1a\u5929\u6c14\u53d8\u5f97\u5bd2\u51b7\u3002",
+        {
+            "original_operation": "\u9009\u8bcd\u586b\u7a7a",
+            "candidate_operation": "\u9648\u8ff0\u5df2\u586b\u597d\u7684\u53e5\u5b50",
+            "candidate_is_instruction": False,
+            "same_requested_operation": False,
+            "preserves_all_inputs_and_conditions": False,
+            "performs_or_answers_task": True,
+            "reason": "\u5019\u9009\u53e5\u586b\u4e86\u7a7a\uff0c\u662f\u7b54\u6848\u800c\u975e\u6539\u5199\u540e\u7684\u6307\u4ee4\u3002",
+        },
+    ),
+    (
+        "\u75c5\u4eba\u54b3\u55fd\u3002\u8bf7\u66f4\u7cbe\u786e\u5730\u7f16\u8f91\u8fd9\u53e5\u8bdd\u3002",
+        "\u95ee\uff1a\u75c5\u4eba\u51fa\u73b0\u54b3\u55fd\u75c7\u72b6\u3002",
+        {
+            "original_operation": "\u7cbe\u786e\u6539\u5199\u7ed9\u5b9a\u53e5\u5b50",
+            "candidate_operation": "\u7ed9\u51fa\u5df2\u6539\u5199\u7684\u53e5\u5b50",
+            "candidate_is_instruction": False,
+            "same_requested_operation": False,
+            "preserves_all_inputs_and_conditions": True,
+            "performs_or_answers_task": True,
+            "reason": "\u5019\u9009\u53e5\u5df2\u6267\u884c\u6539\u5199\u4efb\u52a1\u3002",
+        },
+    ),
+    (
+        "\u5b8c\u6210\u4ee5\u4e0b\u7c7b\u6bd4\uff1a'\u5feb\u5f97\u50cf____\u4e00\u6837\u3002'",
+        "\u95ee\uff1a\u5feb\u5f97\u50cf\u95ea\u7535\u4e00\u6837\u3002",
+        {
+            "original_operation": "\u8865\u5168\u7c7b\u6bd4",
+            "candidate_operation": "\u7ed9\u51fa\u5df2\u8865\u5168\u7684\u7c7b\u6bd4",
+            "candidate_is_instruction": False,
+            "same_requested_operation": False,
+            "preserves_all_inputs_and_conditions": False,
+            "performs_or_answers_task": True,
+            "reason": "\u5019\u9009\u53e5\u5b8c\u6210\u4e86\u7c7b\u6bd4\uff0c\u6ca1\u6709\u8bf7\u6c42\u5b8c\u6210\u5b83\u3002",
+        },
+    ),
+)
+
+HIGH_RISK_OPERATION_FAMILIES: tuple[
+    tuple[str, tuple[str, ...], tuple[str, ...]], ...
+] = (
+    (
+        "fill-or-complete",
+        (
+            "\u586b\u7a7a",
+            "\u586b\u5199\u7a7a",
+            "\u8865\u5168",
+            "\u5b8c\u6210\u4ee5\u4e0b\u7c7b\u6bd4",
+            "\u5b8c\u6210\u8fd9\u4e2a\u7c7b\u6bd4",
+            "\u5b8c\u6210\u4ee5\u4e0b\u53e5\u5b50",
+            "\u8865\u5145\u5b8c\u6574",
+        ),
+        (
+            "\u586b\u7a7a",
+            "\u586b\u5199",
+            "\u8865\u5168",
+            "\u8865\u4e0a",
+            "\u7a7a\u767d",
+            "\u6a2a\u7ebf",
+            "\u7f3a\u5931",
+            "\u5b8c\u6210\u7c7b\u6bd4",
+            "\u5b8c\u6210\u53e5\u5b50",
+        ),
+    ),
+    (
+        "rewrite-or-edit",
+        (
+            "\u6539\u5199",
+            "\u91cd\u5199",
+            "\u7f16\u8f91\u8fd9\u53e5",
+            "\u7f16\u8f91\u4ee5\u4e0b",
+            "\u4fee\u6539\u8fd9\u53e5",
+            "\u4fee\u6539\u4ee5\u4e0b",
+            "\u6da6\u8272",
+            "\u7ea0\u6b63",
+            "\u4fee\u6b63",
+        ),
+        (
+            "\u6539\u5199",
+            "\u91cd\u5199",
+            "\u7f16\u8f91",
+            "\u4fee\u6539",
+            "\u6da6\u8272",
+            "\u7ea0\u6b63",
+            "\u4fee\u6b63",
+            "\u91cd\u65b0\u8868\u8fbe",
+            "\u91cd\u65b0\u8868\u8ff0",
+        ),
+    ),
+    (
+        "translate",
+        ("\u7ffb\u8bd1", "\u8bd1\u6210", "\u8bd1\u4e3a", "\u82f1\u8bd1", "\u4e2d\u8bd1"),
+        ("\u7ffb\u8bd1", "\u8bd1\u6210", "\u8bd1\u4e3a", "\u8bd1\u6587", "\u82f1\u8bd1", "\u4e2d\u8bd1"),
+    ),
+    (
+        "calculate",
+        ("\u8ba1\u7b97", "\u6c42\u89e3", "\u6c42\u51fa", "\u7b97\u51fa"),
+        ("\u8ba1\u7b97", "\u6c42\u89e3", "\u6c42\u51fa", "\u7b97\u51fa", "\u6c42\u5f97"),
+    ),
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -87,8 +230,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--holdout-manifest", default=DEFAULT_HOLDOUT_MANIFEST)
     parser.add_argument("--out", default=DEFAULT_OUT)
     parser.add_argument("--candidates", default=DEFAULT_CANDIDATES)
+    parser.add_argument("--judgments", default=DEFAULT_JUDGMENTS)
     parser.add_argument("--target-count", type=int, default=1_024)
-    parser.add_argument("--candidate-count", type=int, default=1_600)
+    parser.add_argument("--candidate-count", type=int, default=2_000)
     parser.add_argument("--minimum-cosine", type=float, default=0.82)
     parser.add_argument("--qwen-endpoint", default=QWEN_ENDPOINT)
     parser.add_argument("--qwen-model", default=QWEN_MODEL)
@@ -108,6 +252,29 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--qwen-license-layer",
+        default=(
+            "../LocalLLM/.local/models/ollama/blobs/"
+            "sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
+        ),
+    )
+    parser.add_argument("--judge-endpoint", default=QWEN_ENDPOINT)
+    parser.add_argument("--judge-model", default=JUDGE_MODEL)
+    parser.add_argument(
+        "--judge-manifest",
+        default=(
+            "../LocalLLM/.local/models/ollama/manifests/"
+            "registry.ollama.ai/library/qwen3/8b-q8_0"
+        ),
+    )
+    parser.add_argument(
+        "--judge-model-layer",
+        default=(
+            "../LocalLLM/.local/models/ollama/blobs/"
+            "sha256-d87f4a5a2f1a6051d9fac010c12f76f3ba2137b137d413ba8f4d3a3d06b3a25b"
+        ),
+    )
+    parser.add_argument(
+        "--judge-license-layer",
         default=(
             "../LocalLLM/.local/models/ollama/blobs/"
             "sha256-d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12"
@@ -134,6 +301,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--rebuild-final", action="store_true")
     return parser.parse_args()
 
 
@@ -177,7 +345,7 @@ def _validate_local_endpoint(endpoint: str, *, path: str) -> str:
     return endpoint
 
 
-def verify_qwen_artifact(
+def _verify_chat_model_artifact(
     *,
     endpoint: str,
     model: str,
@@ -185,23 +353,28 @@ def verify_qwen_artifact(
     model_layer_path: str | Path,
     license_layer_path: str | Path,
     timeout: float,
+    expected_model: str,
+    expected_manifest_sha256: str,
+    expected_model_sha256: str,
+    expected_model_bytes: int,
+    role: str,
 ) -> dict[str, Any]:
     _validate_local_endpoint(endpoint, path="/api/chat")
-    if model != QWEN_MODEL:
-        raise ValueError(f"V38 paraphrases require {QWEN_MODEL!r}")
+    if model != expected_model:
+        raise ValueError(f"V38 chat stage requires {expected_model!r}")
     manifest = Path(manifest_path).expanduser().resolve()
     model_layer = Path(model_layer_path).expanduser().resolve()
     license_layer = Path(license_layer_path).expanduser().resolve()
     for path in (manifest, model_layer, license_layer):
         if not path.is_file():
             raise FileNotFoundError(path)
-    if file_sha256(manifest) != QWEN_MANIFEST_SHA256:
-        raise ValueError("V38 Qwen manifest hash changed")
+    if file_sha256(manifest) != expected_manifest_sha256:
+        raise ValueError("V38 chat-model manifest hash changed")
     if (
-        file_sha256(model_layer) != QWEN_MODEL_SHA256
-        or model_layer.stat().st_size != QWEN_MODEL_BYTES
+        file_sha256(model_layer) != expected_model_sha256
+        or model_layer.stat().st_size != expected_model_bytes
     ):
-        raise ValueError("V38 Qwen model layer changed")
+        raise ValueError("V38 chat-model layer changed")
     if file_sha256(license_layer) != QWEN_LICENSE_SHA256:
         raise ValueError("V38 Qwen license layer changed")
     manifest_value = json.loads(manifest.read_text(encoding="utf-8"))
@@ -211,30 +384,78 @@ def verify_qwen_artifact(
         if layer.get("mediaType") == "application/vnd.ollama.image.model"
     ]
     if len(model_layers) != 1 or model_layers[0].get("digest") != (
-        f"sha256:{QWEN_MODEL_SHA256}"
+        f"sha256:{expected_model_sha256}"
     ):
-        raise ValueError("V38 Qwen manifest model selection changed")
+        raise ValueError("V38 chat-model manifest selection changed")
     base = "http://127.0.0.1:11434"
     version = str(_request_json(f"{base}/api/version", timeout=timeout).get("version"))
     tags = _request_json(f"{base}/api/tags", timeout=timeout).get("models", [])
     live = [item for item in tags if item.get("name") == model]
-    if len(live) != 1 or live[0].get("digest") != QWEN_MANIFEST_SHA256:
-        raise RuntimeError("V38 live Qwen tag differs from the pinned manifest")
+    if len(live) != 1 or live[0].get("digest") != expected_manifest_sha256:
+        raise RuntimeError("V38 live chat-model tag differs from the pinned manifest")
     return {
         "model": model,
         "endpoint": endpoint,
         "server_version": version,
         "manifest": str(manifest),
-        "manifest_sha256": QWEN_MANIFEST_SHA256,
+        "manifest_sha256": expected_manifest_sha256,
         "model_layer": str(model_layer),
-        "model_layer_sha256": QWEN_MODEL_SHA256,
-        "model_layer_bytes": QWEN_MODEL_BYTES,
+        "model_layer_sha256": expected_model_sha256,
+        "model_layer_bytes": expected_model_bytes,
         "license_layer": str(license_layer),
         "license_layer_sha256": QWEN_LICENSE_SHA256,
         "license": "Apache-2.0",
-        "role": "offline training-paraphrase preparation only",
+        "role": role,
         "student_runtime_dependency": False,
     }
+
+
+def verify_qwen_artifact(
+    *,
+    endpoint: str,
+    model: str,
+    manifest_path: str | Path,
+    model_layer_path: str | Path,
+    license_layer_path: str | Path,
+    timeout: float,
+) -> dict[str, Any]:
+    return _verify_chat_model_artifact(
+        endpoint=endpoint,
+        model=model,
+        manifest_path=manifest_path,
+        model_layer_path=model_layer_path,
+        license_layer_path=license_layer_path,
+        timeout=timeout,
+        expected_model=QWEN_MODEL,
+        expected_manifest_sha256=QWEN_MANIFEST_SHA256,
+        expected_model_sha256=QWEN_MODEL_SHA256,
+        expected_model_bytes=QWEN_MODEL_BYTES,
+        role="offline training-paraphrase preparation only",
+    )
+
+
+def verify_judge_artifact(
+    *,
+    endpoint: str,
+    model: str,
+    manifest_path: str | Path,
+    model_layer_path: str | Path,
+    license_layer_path: str | Path,
+    timeout: float,
+) -> dict[str, Any]:
+    return _verify_chat_model_artifact(
+        endpoint=endpoint,
+        model=model,
+        manifest_path=manifest_path,
+        model_layer_path=model_layer_path,
+        license_layer_path=license_layer_path,
+        timeout=timeout,
+        expected_model=JUDGE_MODEL,
+        expected_manifest_sha256=JUDGE_MANIFEST_SHA256,
+        expected_model_sha256=JUDGE_MODEL_SHA256,
+        expected_model_bytes=JUDGE_MODEL_BYTES,
+        role="offline instruction-versus-answer validation only",
+    )
 
 
 def _holdout_source_identifiers(path: str | Path) -> set[str]:
@@ -348,6 +569,278 @@ def unload_qwen(*, endpoint: str, model: str, timeout: float) -> None:
         payload={"model": model, "keep_alive": 0},
         timeout=timeout,
     )
+
+
+def _judgment_schema() -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "original_operation": {"type": "string"},
+            "candidate_operation": {"type": "string"},
+            "candidate_is_instruction": {"type": "boolean"},
+            "same_requested_operation": {"type": "boolean"},
+            "preserves_all_inputs_and_conditions": {"type": "boolean"},
+            "performs_or_answers_task": {"type": "boolean"},
+            "reason": {"type": "string"},
+        },
+        "required": [
+            "original_operation",
+            "candidate_operation",
+            "candidate_is_instruction",
+            "same_requested_operation",
+            "preserves_all_inputs_and_conditions",
+            "performs_or_answers_task",
+            "reason",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _judge_pair(original: str, candidate: str) -> str:
+    return f"ORIGINAL TASK:\n{original}\n\nCANDIDATE:\n{candidate}"
+
+
+def _judge_messages(original: str, candidate: str) -> list[dict[str, str]]:
+    messages = [{"role": "system", "content": JUDGE_SYSTEM_PROMPT}]
+    for example_original, example_candidate, verdict in JUDGE_EXAMPLES:
+        messages.extend(
+            (
+                {
+                    "role": "user",
+                    "content": _judge_pair(example_original, example_candidate),
+                },
+                {
+                    "role": "assistant",
+                    "content": json.dumps(verdict, ensure_ascii=False, sort_keys=True),
+                },
+            )
+        )
+    messages.append({"role": "user", "content": _judge_pair(original, candidate)})
+    return messages
+
+
+def judge_protocol_sha256() -> str:
+    protocol = {
+        "version": JUDGE_PROTOCOL_VERSION,
+        "system": JUDGE_SYSTEM_PROMPT,
+        "examples": JUDGE_EXAMPLES,
+        "schema": _judgment_schema(),
+        "high_risk_operation_families": HIGH_RISK_OPERATION_FAMILIES,
+    }
+    encoded = json.dumps(
+        protocol, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def deterministic_operation_gate(original: str, candidate: str) -> tuple[bool, str]:
+    candidate_body = normalize_visible_text(candidate)
+    if candidate_body.startswith("\u95ee\uff1a"):
+        candidate_body = candidate_body[2:].strip()
+    for family, source_markers, candidate_markers in HIGH_RISK_OPERATION_FAMILIES:
+        if any(marker in original for marker in source_markers) and not any(
+            marker in candidate_body for marker in candidate_markers
+        ):
+            return False, f"missing-{family}-operation"
+    return True, ""
+
+
+def judgment_passes(verdict: Mapping[str, Any]) -> bool:
+    return bool(
+        verdict.get("candidate_is_instruction", False)
+        and verdict.get("same_requested_operation", False)
+        and verdict.get("preserves_all_inputs_and_conditions", False)
+        and not verdict.get("performs_or_answers_task", True)
+    )
+
+
+def judgment_failure_code(verdict: Mapping[str, Any]) -> str:
+    if bool(verdict.get("performs_or_answers_task", True)):
+        return "task-performed-or-answered"
+    if not bool(verdict.get("candidate_is_instruction", False)):
+        return "candidate-not-instruction"
+    if not bool(verdict.get("same_requested_operation", False)):
+        return "requested-operation-changed"
+    if not bool(verdict.get("preserves_all_inputs_and_conditions", False)):
+        return "input-or-condition-dropped"
+    return "unspecified-judge-failure"
+
+
+def request_judgment(
+    record: VisualRasterRecord,
+    paraphrase: str,
+    *,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[dict[str, Any], dict[str, int]]:
+    schema = _judgment_schema()
+    body = _request_json(
+        _validate_local_endpoint(endpoint, path="/api/chat"),
+        payload={
+            "model": model,
+            "stream": False,
+            "think": False,
+            "keep_alive": "10m",
+            "format": schema,
+            "options": {
+                "temperature": 0.0,
+                "seed": int(seed),
+                "num_predict": 192,
+            },
+            "messages": _judge_messages(record.prompt, paraphrase),
+        },
+        timeout=timeout,
+    )
+    message = body.get("message", {})
+    content = message.get("content", "") if isinstance(message, Mapping) else ""
+    try:
+        verdict = json.loads(str(content))
+    except json.JSONDecodeError as error:
+        raise RuntimeError("V38 judge returned invalid JSON") from error
+    bool_fields = (
+        "candidate_is_instruction",
+        "same_requested_operation",
+        "preserves_all_inputs_and_conditions",
+        "performs_or_answers_task",
+    )
+    if not isinstance(verdict, Mapping) or any(
+        not isinstance(verdict.get(name), bool) for name in bool_fields
+    ):
+        raise RuntimeError("V38 judge returned an invalid verdict")
+    normalized_verdict = {
+        "original_operation": normalize_visible_text(
+            str(verdict.get("original_operation", ""))
+        )[:160],
+        "candidate_operation": normalize_visible_text(
+            str(verdict.get("candidate_operation", ""))
+        )[:160],
+        **{name: bool(verdict[name]) for name in bool_fields},
+        "reason": normalize_visible_text(str(verdict.get("reason", "")))[:240],
+    }
+    usage = {
+        "prompt_eval_count": int(body.get("prompt_eval_count", 0)),
+        "eval_count": int(body.get("eval_count", 0)),
+        "total_duration_ns": int(body.get("total_duration", 0)),
+    }
+    return normalized_verdict, usage
+
+
+def judge_candidates(
+    rows: Sequence[Mapping[str, Any]],
+    records: Mapping[str, VisualRasterRecord],
+    *,
+    journal_path: Path,
+    endpoint: str,
+    model: str,
+    seed: int,
+    timeout: float,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    existing = _read_jsonl(journal_path)
+    protocol_sha = judge_protocol_sha256()
+    by_key = {
+        (
+            str(row.get("identifier", "")),
+            str(row.get("source_prompt_sha256", "")),
+            str(row.get("paraphrase_sha256", "")),
+        ): row
+        for row in existing
+        if row.get("judge_protocol_version") == JUDGE_PROTOCOL_VERSION
+        and row.get("judge_protocol_sha256") == protocol_sha
+        and isinstance(row.get("pass"), bool)
+    }
+    usage = {"prompt_eval_count": 0, "eval_count": 0, "total_duration_ns": 0}
+    errors: list[dict[str, str]] = []
+    passed: list[dict[str, Any]] = []
+    failed_reasons: dict[str, int] = {}
+    for position, row in enumerate(rows):
+        identifier = str(row["identifier"])
+        paraphrase = str(row["paraphrase"])
+        source_prompt_sha = hashlib.sha256(
+            records[identifier].prompt.encode("utf-8")
+        ).hexdigest()
+        paraphrase_sha = hashlib.sha256(paraphrase.encode("utf-8")).hexdigest()
+        key = (identifier, source_prompt_sha, paraphrase_sha)
+        judgment = by_key.get(key)
+        if judgment is None:
+            try:
+                gate_passed, gate_reason = deterministic_operation_gate(
+                    records[identifier].prompt, paraphrase
+                )
+                base_judgment = {
+                    "identifier": identifier,
+                    "source_prompt_sha256": source_prompt_sha,
+                    "paraphrase_sha256": paraphrase_sha,
+                    "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
+                    "judge_protocol_sha256": protocol_sha,
+                    "seed": seed + position * 1_000_033,
+                }
+                if gate_passed:
+                    verdict, item_usage = request_judgment(
+                        records[identifier],
+                        paraphrase,
+                        endpoint=endpoint,
+                        model=model,
+                        seed=seed + position * 1_000_033,
+                        timeout=timeout,
+                    )
+                    accepted = judgment_passes(verdict)
+                    judgment = base_judgment | verdict | {
+                        "pass": accepted,
+                        "failure_code": (
+                            "pass" if accepted else judgment_failure_code(verdict)
+                        ),
+                        "judge_model": model,
+                        "decision_path": "structured-model-judge",
+                    }
+                    for name, value in item_usage.items():
+                        usage[name] += value
+                else:
+                    judgment = base_judgment | {
+                        "pass": False,
+                        "failure_code": gate_reason,
+                        "reason": (
+                            "candidate omitted the source's explicit high-risk "
+                            "operation marker"
+                        ),
+                        "judge_model": "deterministic-operation-gate",
+                        "decision_path": "deterministic-operation-gate",
+                    }
+                _append_jsonl(journal_path, judgment)
+                by_key[key] = judgment
+            except Exception as error:  # Failed judgments cannot enter training.
+                errors.append({"identifier": identifier, "error": str(error)})
+                continue
+        if bool(judgment.get("pass", False)):
+            passed.append(dict(row) | {"instruction_judge": "pass"})
+        else:
+            key_reason = normalize_visible_text(
+                str(judgment.get("failure_code", "unspecified"))
+            )
+            failed_reasons[key_reason] = failed_reasons.get(key_reason, 0) + 1
+        if (position + 1) % 25 == 0 or position + 1 == len(rows):
+            print(
+                json.dumps(
+                    {
+                        "judged": position + 1,
+                        "judge_passed": len(passed),
+                        "judge_errors": len(errors),
+                    },
+                    sort_keys=True,
+                ),
+                flush=True,
+            )
+    return passed, {
+        "journal_rows": len(_read_jsonl(journal_path)),
+        "passed": len(passed),
+        "failed": len(rows) - len(passed) - len(errors),
+        "failed_reasons": failed_reasons,
+        "errors": errors,
+        "usage": usage,
+        "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
+        "judge_protocol_sha256": protocol_sha,
+    }
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -503,6 +996,14 @@ def main() -> None:
         license_layer_path=args.qwen_license_layer,
         timeout=args.timeout,
     )
+    judge_receipt = verify_judge_artifact(
+        endpoint=args.judge_endpoint,
+        model=args.judge_model,
+        manifest_path=args.judge_manifest,
+        model_layer_path=args.judge_model_layer,
+        license_layer_path=args.judge_license_layer,
+        timeout=args.timeout,
+    )
     bge_receipt = verify_bge_artifact(
         endpoint=args.bge_endpoint,
         model=args.bge_model,
@@ -525,18 +1026,32 @@ def main() -> None:
     by_identifier = {record.identifier: record for record in candidates}
 
     candidate_path = Path(args.candidates)
+    judgment_path = Path(args.judgments)
     out_path = Path(args.out)
     receipt_path = out_path.with_suffix(".receipt.json")
+    previous_receipt: dict[str, Any] = {}
+    if receipt_path.exists():
+        previous_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     if args.overwrite:
-        for path in (candidate_path, out_path, receipt_path):
+        for path in (candidate_path, judgment_path, out_path, receipt_path):
             path.unlink(missing_ok=True)
-    elif out_path.exists():
+        previous_receipt = {}
+    elif args.rebuild_final:
+        out_path.unlink(missing_ok=True)
+        receipt_path.unlink(missing_ok=True)
+    elif out_path.exists() or receipt_path.exists():
         raise FileExistsError(f"V38 final paraphrase manifest already exists: {out_path}")
 
     generated = _read_jsonl(candidate_path)
     generated_ids = {str(row.get("identifier")) for row in generated}
-    usage = {"prompt_eval_count": 0, "eval_count": 0, "total_duration_ns": 0}
-    generation_errors: list[dict[str, str]] = []
+    previous_usage = previous_receipt.get("generation_usage", {})
+    usage = {
+        name: int(previous_usage.get(name, 0))
+        for name in ("prompt_eval_count", "eval_count", "total_duration_ns")
+    }
+    generation_errors: list[dict[str, str]] = list(
+        previous_receipt.get("generation_errors", [])
+    )
     started = time.monotonic()
     try:
         for position, record in enumerate(candidates):
@@ -603,12 +1118,43 @@ def main() -> None:
         model=args.bge_model,
         timeout=args.timeout,
     )
-    if len(accepted) < args.target_count:
+    try:
+        judged, judgment_summary = judge_candidates(
+            accepted,
+            by_identifier,
+            journal_path=judgment_path,
+            endpoint=args.judge_endpoint,
+            model=args.judge_model,
+            seed=args.seed + 38_000_000,
+            timeout=args.timeout,
+        )
+    finally:
+        unload_qwen(
+            endpoint=args.judge_endpoint,
+            model=args.judge_model,
+            timeout=args.timeout,
+        )
+
+    unique: list[dict[str, Any]] = []
+    seen_paraphrases: set[str] = set()
+    duplicate_paraphrases = 0
+    for row in judged:
+        paraphrase = str(row["paraphrase"])
+        if paraphrase in seen_paraphrases:
+            duplicate_paraphrases += 1
+            continue
+        seen_paraphrases.add(paraphrase)
+        unique.append(row)
+    if duplicate_paraphrases:
+        rejection_reasons["duplicate-paraphrase"] = duplicate_paraphrases
+
+    if len(unique) < args.target_count:
         raise RuntimeError(
-            f"V38 accepted {len(accepted)} paraphrases, fewer than {args.target_count}; "
+            f"V38 accepted {len(unique)} judged unique paraphrases, fewer than "
+            f"{args.target_count}; "
             "rerun with a larger --candidate-count"
         )
-    selected = accepted[: args.target_count]
+    selected = unique[: args.target_count]
     lines = "".join(
         json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n" for row in selected
     )
@@ -621,7 +1167,9 @@ def main() -> None:
         "target_count": args.target_count,
         "candidate_count": args.candidate_count,
         "generated_count": len(generated),
-        "accepted_before_truncation": len(accepted),
+        "accepted_by_numeric_filters": len(accepted),
+        "accepted_by_instruction_judge": len(judged),
+        "accepted_unique_before_truncation": len(unique),
         "minimum_semantic_cosine": args.minimum_cosine,
         "semantic_cosine": {
             "minimum": min(float(row["semantic_cosine"]) for row in selected),
@@ -639,6 +1187,11 @@ def main() -> None:
         "holdout_source_identifiers_excluded": len(excluded),
         "candidate_manifest": str(candidate_path.resolve()),
         "candidate_manifest_sha256": file_sha256(candidate_path),
+        "judgment_manifest": str(judgment_path.resolve()),
+        "judgment_manifest_sha256": file_sha256(judgment_path),
+        "judgment": judgment_summary,
+        "judge_protocol_version": JUDGE_PROTOCOL_VERSION,
+        "judge_protocol_sha256": judge_protocol_sha256(),
         "output": str(out_path.resolve()),
         "output_sha256": file_sha256(out_path),
         "training_fonts": list(V38_TRAIN_FONTS),
@@ -646,6 +1199,7 @@ def main() -> None:
             path: file_sha256(path) for path in V38_TRAIN_FONTS
         },
         "qwen": qwen_receipt,
+        "instruction_judge": judge_receipt,
         "bge": bge_receipt
         | {
             "manifest_sha256": BGE_MANIFEST_SHA256,

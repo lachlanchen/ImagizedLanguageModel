@@ -126,7 +126,12 @@ must:
 - be deterministic and resumable;
 - retain only concise outputs that fit every V38 training font;
 - require pinned BGE-M3 cosine of at least 0.82 to the original prompt;
-- reject answer-like or exact-copy outputs; and
+- reject answer-like or exact-copy outputs;
+- pass a separately pinned `qwen3:8b-q8_0` instruction-versus-answer judge that
+  decomposes operation preservation, instruction form, condition preservation,
+  and task execution into separately recorded decisions; reject unless every
+  sub-decision passes; apply a deterministic operation-retention gate before
+  that judge for high-risk fill, edit, translation, and calculation tasks; and
 - record Qwen, BGE, Ollama, source, and output hashes.
 
 The generated strings exist only in the offline renderer. Student batches

@@ -110,3 +110,111 @@ def test_validation_accepts_semantic_rewrite_and_rejects_copy(monkeypatch) -> No
     assert len(accepted) == 1
     assert accepted[0]["semantic_cosine"] == pytest.approx(0.95)
     assert accepted[0]["paraphrase_answer_cosine"] == pytest.approx(0.0)
+
+
+def test_instruction_judge_is_resumable_and_excludes_failed_rows(
+    monkeypatch, tmp_path
+) -> None:
+    records = {
+        "alpaca-zh:1": record("alpaca-zh:1"),
+        "alpaca-zh:2": record("alpaca-zh:2"),
+    }
+    rows = [
+        {"identifier": "alpaca-zh:1", "paraphrase": "\u95ee\uff1a\u6c34\u80fd\u505a\u4ec0\u4e48\uff1f"},
+        {"identifier": "alpaca-zh:2", "paraphrase": "\u95ee\uff1a\u6c34\u53ef\u4ee5\u996e\u7528\u3002"},
+    ]
+    calls: list[str] = []
+
+    def fake_judgment(source, paraphrase, **_kwargs):
+        calls.append(source.identifier)
+        accepted = source.identifier.endswith(":1")
+        return {
+            "original_operation": "ask",
+            "candidate_operation": "ask" if accepted else "answer",
+            "candidate_is_instruction": accepted,
+            "same_requested_operation": accepted,
+            "preserves_all_inputs_and_conditions": True,
+            "performs_or_answers_task": not accepted,
+            "reason": "valid rewrite" if accepted else "answers task",
+        }, {
+            "prompt_eval_count": 1,
+            "eval_count": 1,
+            "total_duration_ns": 1,
+        }
+
+    monkeypatch.setattr(builder, "request_judgment", fake_judgment)
+    journal = tmp_path / "judgments.jsonl"
+    first, summary = builder.judge_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.JUDGE_MODEL,
+        seed=8,
+        timeout=1,
+    )
+    assert [row["identifier"] for row in first] == ["alpaca-zh:1"]
+    assert summary["passed"] == 1
+    assert summary["failed"] == 1
+    assert len(calls) == 2
+
+    second, second_summary = builder.judge_candidates(
+        rows,
+        records,
+        journal_path=journal,
+        endpoint=builder.QWEN_ENDPOINT,
+        model=builder.JUDGE_MODEL,
+        seed=8,
+        timeout=1,
+    )
+    assert [row["identifier"] for row in second] == ["alpaca-zh:1"]
+    assert second_summary["journal_rows"] == 2
+    assert len(calls) == 2
+
+
+@pytest.mark.parametrize(
+    ("original", "candidate", "expected_reason"),
+    (
+        (
+            "\u9009\u62e9\u6b63\u786e\u7684\u8bcd\u586b\u7a7a\uff1a\u57ce\u5e02\u7684\u7a7a\u6c14\u6c61\u67d3\u6b63\u5728\u53d8\u5f97____\u3002",
+            "\u95ee\uff1a\u57ce\u5e02\u7684\u7a7a\u6c14\u6c61\u67d3\u6b63\u5728\u53d8\u5f97\u8d8a\u6765\u8d8a\u4e25\u91cd\u3002",
+            "missing-fill-or-complete-operation",
+        ),
+        (
+            "\u75c5\u4eba\u53d1\u70e7\u3002\u8bf7\u66f4\u52a0\u7cbe\u786e\u5730\u7f16\u8f91\u8fd9\u53e5\u8bdd\u3002",
+            "\u95ee\uff1a\u75c5\u4eba\u51fa\u73b0\u53d1\u70ed\u75c7\u72b6\u3002",
+            "missing-rewrite-or-edit-operation",
+        ),
+        (
+            "\u5b8c\u6210\u4ee5\u4e0b\u7c7b\u6bd4\uff1a'\u7231\u5f97\u50cf____\u4e00\u6837\u6709\u8010\u5fc3\u3002'",
+            "\u95ee\uff1a\u7231\u5f97\u50cf\u732b\u4e00\u6837\u6709\u8010\u5fc3\u3002",
+            "missing-fill-or-complete-operation",
+        ),
+    ),
+)
+def test_deterministic_operation_gate_rejects_executed_tasks(
+    original, candidate, expected_reason
+) -> None:
+    assert builder.deterministic_operation_gate(original, candidate) == (
+        False,
+        expected_reason,
+    )
+
+
+def test_deterministic_operation_gate_preserves_valid_rewrite_request() -> None:
+    assert builder.deterministic_operation_gate(
+        "\u75c5\u4eba\u53d1\u70e7\u3002\u8bf7\u66f4\u52a0\u7cbe\u786e\u5730\u7f16\u8f91\u8fd9\u53e5\u8bdd\u3002",
+        "\u95ee\uff1a\u8bf7\u5c06\u201c\u75c5\u4eba\u53d1\u70e7\u201d\u6539\u5199\u5f97\u66f4\u7cbe\u786e\u3002",
+    ) == (True, "")
+
+
+def test_judgment_decision_is_computed_from_all_subdecisions() -> None:
+    valid = {
+        "candidate_is_instruction": True,
+        "same_requested_operation": True,
+        "preserves_all_inputs_and_conditions": True,
+        "performs_or_answers_task": False,
+    }
+    assert builder.judgment_passes(valid)
+    assert not builder.judgment_passes(valid | {"performs_or_answers_task": True})
+    assert not builder.judgment_passes(valid | {"same_requested_operation": False})
