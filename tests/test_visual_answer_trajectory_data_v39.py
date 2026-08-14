@@ -11,6 +11,7 @@ from ilm.visual_lm.visual_answer_trajectory_data import (
     load_v39_instruction_records,
     render_visual_answer_trajectory_record,
     segment_visual_answer,
+    select_v39_instruction_records,
     visual_answer_trajectory_collate,
     visual_answer_trajectory_data_boundary_receipt,
     visual_answer_trajectory_tensor_batch,
@@ -115,3 +116,26 @@ def test_data_boundary_declares_offline_only_text_operations() -> None:
     assert not receipt["uses_unicode_ids"]
     assert not receipt["uses_ocr"]
     assert not receipt["uses_runtime_script_converter"]
+
+
+def test_font_fit_selection_uses_bounded_geometry_and_rejects_overflow() -> None:
+    short = record()
+    long = VisualAnswerTrajectoryRecord(
+        identifier="alpaca-zh:long",
+        prompt="问：" + "汉" * 150,
+        answer="可见回答。",
+        segments=("可见回答。",),
+        language="zh",
+        source="unit",
+        rights="test",
+    )
+
+    selected, rejected = select_v39_instruction_records(
+        (short, long),
+        split="train",
+        render_config=VisualSemanticDistillationRenderConfig(augment=False),
+        include_all_records=True,
+    )
+
+    assert tuple(item.identifier for item in selected) == (short.identifier,)
+    assert rejected == (long.identifier,)

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import random
 import unicodedata
 from dataclasses import dataclass, replace
@@ -10,6 +11,8 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 import torch
+from fontTools.ttLib import TTFont
+from PIL import ImageFont
 from torch.utils.data import Dataset
 
 from .visual_answer_trajectory import V39_ARCHITECTURE, V39_MAX_SEGMENTS
@@ -17,7 +20,6 @@ from .visual_semantic_distillation_data import (
     VisualSemanticDistillationRenderConfig,
     render_visual_semantic_distillation_strip,
     visual_semantic_distillation_stream_record_index,
-    visual_text_fits_v37,
 )
 from .visual_semantic_raster_data import normalize_visible_text, visual_raster_partition
 
@@ -78,6 +80,43 @@ def _require_font(path: str) -> str:
     if not Path(path).is_file():
         raise FileNotFoundError(path)
     return path
+
+
+@lru_cache(maxsize=32)
+def _geometry_font(path: str, size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(_require_font(path), size=size)
+
+
+def _visible_unit_extents(
+    path: str,
+    size: int,
+    units: set[str],
+) -> dict[str, int]:
+    if not units:
+        raise ValueError("V39 cannot measure an empty visible-unit set")
+    options = {"fontNumber": 0} if Path(path).suffix.lower() == ".ttc" else {}
+    font = TTFont(_require_font(path), lazy=True, **options)
+    try:
+        units_per_em = int(font["head"].unitsPerEm)
+        cmap = font.getBestCmap() or {}
+        metrics = font["hmtx"].metrics
+        missing_advance = int(metrics.get(".notdef", (units_per_em, 0))[0])
+
+        def unit_advance(unit: str) -> int:
+            total = 0
+            for character in unit:
+                glyph_name = cmap.get(ord(character))
+                total += int(metrics.get(glyph_name, (missing_advance, 0))[0])
+            return total
+
+        advances = {unit: unit_advance(unit) for unit in units}
+    finally:
+        font.close()
+    # One raster pixel per visible unit covers hinting and side-bearing rounding.
+    return {
+        unit: max(1, math.ceil(advance * size / units_per_em) + 1)
+        for unit, advance in advances.items()
+    }
 
 
 def visual_answer_trajectory_fonts(split: str) -> tuple[str, ...]:
@@ -260,6 +299,7 @@ def visual_answer_trajectory_record_fits(
     *,
     split: str,
     render_config: VisualSemanticDistillationRenderConfig,
+    unit_extents: Mapping[str, Mapping[str, int]] | None = None,
 ) -> bool:
     fonts = visual_answer_trajectory_fonts(split)
     if split == "train":
@@ -268,17 +308,31 @@ def visual_answer_trajectory_record_fits(
     else:
         font_size = render_config.evaluation_font_size
         origin = 0
-    return all(
-        visual_text_fits_v37(
-            text,
-            config=render_config,
-            font_path=font_path,
-            font_size=font_size,
-            origin=origin,
-        )
-        for font_path in fonts
-        for text in (record.prompt, *record.segments)
-    )
+    if unit_extents is None:
+        units = {
+            unit
+            for text in (record.prompt, *record.segments)
+            for unit in _visible_units(text)
+        }
+        unit_extents = {
+            font_path: _visible_unit_extents(font_path, font_size, units)
+            for font_path in fonts
+        }
+    for font_path in fonts:
+        face = _geometry_font(font_path, font_size)
+        font_extents = unit_extents[font_path]
+        for text in (record.prompt, *record.segments):
+            visible_units = _visible_units(text)
+            conservative_width = origin + sum(
+                int(font_extents[unit]) for unit in visible_units
+            )
+            if conservative_width <= render_config.width:
+                continue
+            normalized = normalize_visible_text(text)
+            left, _top, right, _bottom = face.getbbox(normalized)
+            if origin + right - left > render_config.width:
+                return False
+    return True
 
 
 def select_v39_instruction_records(
@@ -296,6 +350,24 @@ def select_v39_instruction_records(
         if include_all_records
         or visual_raster_partition(record.identifier, stream="instruction") == split
     ]
+    if not partitioned:
+        raise ValueError(f"V39 instruction split {split!r} is empty")
+    fonts = visual_answer_trajectory_fonts(split)
+    font_size = (
+        render_config.maximum_font_size
+        if split == "train"
+        else render_config.evaluation_font_size
+    )
+    units = {
+        unit
+        for record in partitioned
+        for text in (record.prompt, *record.segments)
+        for unit in _visible_units(text)
+    }
+    unit_extents = {
+        font_path: _visible_unit_extents(font_path, font_size, units)
+        for font_path in fonts
+    }
     rejected = tuple(
         record.identifier
         for record in partitioned
@@ -303,6 +375,7 @@ def select_v39_instruction_records(
             record,
             split=split,
             render_config=render_config,
+            unit_extents=unit_extents,
         )
     )
     rejected_set = set(rejected)
