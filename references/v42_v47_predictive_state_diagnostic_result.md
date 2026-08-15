@@ -17,6 +17,9 @@ V47 failures that must not be conflated:
    visual field reaches about 18%. The frozen V34 codec is therefore retained
    as a strong visual retina/actuator, not as the next causal language
    coordinate.
+3. V42's direct visual proposal is already a better actuator than its learned
+   stochastic sampler. Exact threshold-zero decoding preserves 16.50% visible
+   identity and reaches 47.16% pixel F1 while removing 8.07M parameters.
 
 The smallest supported V48 direction is to return to V42's fixed, invertible
 image field and train one compact causal reader to predict several future
@@ -37,6 +40,7 @@ training- and development-partition reservoirs, each containing 2,048
 | --- | --- |
 | diagnostic report | `c66c619c41d501e90a4e2b252714cd65b3fe26f9cf47b6dd20730c73afe7d14e` |
 | terminal-position report | `a44a69d7c407fe2e6701dcd5f23d48acb2746e324fb5d41206ecf012405bf388` |
+| direct-actuator report | `802de8512afb2d5b4fc0f1853d359e13515a7453be435a8a009ad636fc5ae557` |
 | V42 checkpoint | `a5ce2ff20d0fc6d336f489b1e2d29bb96a1d0666399c2e2b95e7ac33a9abe870` |
 | V47 checkpoint | `9bec353a278c56aa79f538a22fd0143f3d60b9366a7f782399941811d12663fc` |
 | corpus manifest | `76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03` |
@@ -171,6 +175,35 @@ At 64 cells V42's anchor remains close to its four-cell anchor (cosine
 four-cell anchor, improves 37.84%, and worsens 60.16%. At 32 cells, before the
 cliff, V47 remains stable but still substantially weaker than V42.
 
+## Direct-Actuator Intervention
+
+A second post-result intervention reused the exact registered training and
+development windows. It bypassed V42's learned 8,069,248-parameter stochastic
+generator, transformed the predicted unit DCT field directly back to spatial
+ink, thresholded it at the mathematically exact zero boundary, and reread the
+visible pixels before evaluator-only identity scoring.
+
+| Development measurement | Learned V42 sampler | Direct threshold-zero field |
+| --- | ---: | ---: |
+| visible identity top-1 | 0.08203 | 0.16504 |
+| pixel F1 | 0.37308 | 0.47159 |
+| blank rate | 0.00000 | 0.00000 |
+| retained parameters | 24,346,497 | 16,277,249 |
+
+The learned-sampler values are from V42's registered development report; the
+direct values use the matched 2,048-window diagnostic reservoir. The windows
+are not identical, so the comparison is directional rather than a gate
+replacement. On the direct intervention's own development windows, proposal
+identity is 0.18018 before rendering and visible-reread identity is 0.16504,
+showing that exact rasterization retains most of the language prediction.
+
+The intervention also scanned 51 global thresholds from -0.50 through 0.75,
+selecting on training pixel F1 only. The selected threshold `-0.425` raised
+development F1 from 0.47159 to 0.50279 but lowered visible identity from
+0.16504 to 0.07959 and raised the ink-density ratio from 1.57955 to 2.39507.
+V48 will therefore retain zero as the fixed DCT sign boundary. Optimizing
+surface overlap alone is not a valid language objective.
+
 ## V48 Decision
 
 The evidence supports the following minimal architecture test:
@@ -182,11 +215,13 @@ The evidence supports the following minimal architecture test:
    special final-position task.
 4. Preserve a strong next-field objective for horizon one and add declared,
    fixed weights for horizons two through four.
-5. Generate a short correlated raster-field block through a continuous proper
-   scoring objective; decode it directly to pixels and reread only visible
-   pixels during autonomous rollout.
-6. Keep the 1,024-raster bank strictly evaluator-side.
-7. Add an explicit terminal-stability gate comparing context lengths 63 and
+5. Decode predicted fields directly through the fixed zero DCT boundary and
+   reread only visible pixels during autonomous rollout. Do not retain V42's
+   weaker stochastic sampler in the first V48 test.
+6. Score joint future-block consistency during training without introducing a
+   deployed glyph candidate set.
+7. Keep the 1,024-raster bank strictly evaluator-side.
+8. Add an explicit terminal-stability gate comparing context lengths 63 and
    64.
 
 V48 must not repeat V31's one-glyph flow, V35's raw reconstruction-latent
