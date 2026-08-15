@@ -1,0 +1,93 @@
+{
+  "architecture": "codec-spherical-glyph-language-v47",
+  "checkpoint_sha256": "9bec353a278c56aa79f538a22fd0143f3d60b9366a7f782399941811d12663fc",
+  "codec": {
+    "architecture": "continuous-glyph-representation-codec-v34",
+    "checkpoint_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "ema_tensor_state_sha256": "140e6d68d2be3bcbcdb6fb74b27a8f1258caba54bc0f0888ba8acecc48c22edb",
+    "parameters": 7423361,
+    "path": "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt",
+    "selection": "ema-shadow",
+    "trainable_parameters": 0,
+    "update": 6000
+  },
+  "elapsed_seconds": 2286.169366632588,
+  "field_preflight": {
+    "all_finite": true,
+    "canonical_binary_reconstruction_ink_f1": 0.9999655463092058,
+    "canonical_encode_decode_reread_cosine": 0.9999597072601318,
+    "canonical_minimum_reread_cosine": 0.9871106147766113,
+    "examples": 1024,
+    "field_trainable_parameters": 0,
+    "gates": {
+      "all_finite": true,
+      "canonical_reconstruction_ink_f1": true,
+      "canonical_reread_cosine": true,
+      "field_trainable_parameters_zero": true,
+      "held_sans_top1": true,
+      "held_serif_top1": true
+    },
+    "pass": true,
+    "retrieval": {
+      "noto_sans_cjk_bold": {
+        "paired_cosine": 0.7623892426490784,
+        "top1": 0.9716796875,
+        "top5": 0.9873046875
+      },
+      "noto_serif_cjk_medium": {
+        "paired_cosine": 0.6911430358886719,
+        "top1": 0.9013671875,
+        "top5": 0.96484375
+      }
+    }
+  },
+  "pair_rows_consumed": 80000,
+  "pair_sequence": {
+    "candidate_columns_permuted": true,
+    "consumed_without_replacement": true,
+    "count": 80000,
+    "seed": 20264702,
+    "sha256": "2f573c4c79deb9e2bf97c2b0af588a438c7a43280bd632c05c0ae477ec6918eb",
+    "split": "train",
+    "suffix_cells": 4,
+    "unique_suffixes": 80000
+  },
+  "peak_allocated_vram_gib": 2.786135673522949,
+  "total_parameters": 31376130,
+  "trainable_parameters": 23952769,
+  "training_metrics": {
+    "elapsed_seconds": 2286.169156361837,
+    "gradient_norm": 1.1801674365997314,
+    "learning_rate": 2.9999999999999997e-05,
+    "natural_anchor": 0.8401110172271729,
+    "natural_contrastive": 4.6948301792144775,
+    "natural_contrastive_positions": 512.0,
+    "natural_contrastive_scale": 22.501567840576172,
+    "natural_cycle": 0.2137298658490181,
+    "natural_energy": 1.3237116932868958,
+    "natural_energy_positions": 128.0,
+    "natural_energy_sample_distance": 1.2022351622581482,
+    "natural_energy_samples": 4.0,
+    "natural_energy_target_distance": 1.262973427772522,
+    "natural_in_batch_top1": 0.1484375,
+    "natural_loss": 6.023427724838257,
+    "natural_pixel": 0.8335995078086853,
+    "natural_pixel_bce": 0.5234565436840057,
+    "natural_pixel_dice": 0.6202859282493591,
+    "natural_sample": 0.7109375,
+    "natural_sample_best_target_cosine": 0.287109375,
+    "natural_sample_pixel": 0.9088673293590546,
+    "natural_sample_pixel_bce": 0.6314352750778198,
+    "natural_sample_pixel_dice": 0.5548640489578247,
+    "natural_sample_target_cosine": 0.18017578125,
+    "natural_soft_proposal_reread_cosine": 0.7862701117992401,
+    "objective": 6.714467763900757,
+    "pair": 0.6910400390625,
+    "pair_arm_accuracy": 0.5,
+    "pair_both_correct_rate": 0.125,
+    "pair_mean_margin": 0.0166015625,
+    "pair_rows_consumed": 80000.0,
+    "update": 10000.0
+  },
+  "update": 10000
+}

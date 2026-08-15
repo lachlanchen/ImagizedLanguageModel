@@ -155,6 +155,20 @@ is 8.594\%, and generated pixel F1 falls to 0.3594. V46 passes 10/14 gates and
 is non-qualifying. A scaled reversible field is therefore compatible with
 bounded raster language learning but does not by itself couple identity,
 radius, and high-fidelity autonomous writing.
+
+V47 tests a learned manifold. It freezes the V34 EMA codec, represents each
+glyph by a unit vector in 768 dimensions, and trains a 23.95M-parameter causal
+core from scratch. It consumes 80,000 unique train-only counterfactuals once
+and selects proposals after decode and reread. The visual field passes every
+preflight check, including 0.99997 canonical reconstruction F1 and
+0.97168/0.90137 held-sans/held-serif retrieval top-1. Language does not survive
+the replacement: full top-1 is 2.539\%, below the 12.256\% bigram and unchanged
+by ordered versus shuffled early history; counterfactual arm accuracy is
+52.930\%. Generated identity top-1 is 2.344\%, pixel F1 is 0.3773, and mean
+selected-proposal to visible-reread cosine is 0.6308. Six of sixteen gates pass.
+V47 is non-qualifying and rejects one normalized codec glyph vector as a
+sufficient causal language state, while preserving the frozen codec as a
+qualified visual interface.
 \end{abstract}
 
 \begin{figure}[h!]
@@ -165,10 +179,10 @@ radius, and high-fidelity autonomous writing.
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output. V42 supplies bounded positive
   ordered-raster language evidence; V43 and V44 remain partial or rejected
-  binding results; V45 qualifies replacement target geometry; and V46's
-  from-scratch reader is non-qualifying, as reported in
+  binding results; V45 qualifies replacement target geometry; and the V46 and
+  V47 from-scratch readers are non-qualifying, as reported in
   Figures~\ref{fig:v43result}, \ref{fig:v44result}, \ref{fig:v45result},
-  and~\ref{fig:v46result}.}
+  \ref{fig:v46result}, and~\ref{fig:v47result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -317,6 +331,13 @@ and controls that makes a stronger image-native language claim falsifiable:
   counterfactual binding, and generated-pixel F1. Its 10/14 decision localizes
   the next intervention to explicit identity--radius--spatial factorization
   rather than model scale or a post-hoc coordinate retrofit.
+  \item V47, a 31.38M-parameter codec-spherical system with a frozen V34 visual
+  field and 23.95M trainable causal parameters. It consumes 80,000 unique
+  counterfactual rows exactly once and selects proposals only after visible
+  decode and reread. The field preflight passes, but natural top-1 collapses to
+  2.539\%, counterfactual accuracy remains 52.930\%, and generated identity is
+  2.344\%. Its 6/16 decision rejects a single normalized codec vector as the
+  language state without rejecting the codec as a retina and actuator.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -3057,7 +3078,7 @@ canonical content state from raster history without receiving the evaluator's
 target glyph, then beat visual unigram, bigram, shuffled-history, and
 blank-history controls under autonomous pixel feedback.
 
-\subsection{Canonical Glyph Language V42--V46}
+\subsection{Canonical Glyph Language V42--V47}
 
 \paragraph{A canonical image field isolates language before historical form.}
 V42 deliberately removes style variation and answer-level instruction tuning.
@@ -3431,6 +3452,101 @@ partition remain closed. Before adding capacity, the next bounded test should
 factor identity direction, ink mass or radius, and spatial residual rendering
 explicitly, then qualify the same natural, shuffled, counterfactual, and
 generated-pixel controls.
+
+\paragraph{V47 tests a normalized learned glyph manifold and visible reread.}
+V47 replaces V46's fixed linear field with the qualified V34 EMA codec while
+retaining a small from-scratch causal reader. For an ink-positive raster $x$,
+frozen encoder $E$, and frozen decoder $D$, it defines
+\[
+e(x)=E\!\left(1-\mathbf 1[x\geq0.5]\right),\qquad
+c(x)=\frac{e(x)}{\max(\lVert e(x)\rVert_2,10^{-8})},
+\]
+\[
+p_{\mathrm{ink}}(c)=\sigma\!\left(-D(\sqrt{768}\,c)\right),\qquad
+R(c)=c\!\left(\mathbf 1[p_{\mathrm{ink}}(c)\geq0.5]\right).
+\]
+The eight-layer, width-384, six-head reader predicts a unit anchor from 64
+ordered glyph images. A four-layer stochastic head emits four unit proposals.
+Training combines exact-raster multi-positive contrast, anchor cosine, decoded
+pixel BCE--Dice, a proper energy score, best-sample cosine, a differentiable
+decode--reread cycle, and best-sample pixel loss. Each of 10,000 updates also
+consumes eight previously unseen same-suffix counterfactual pairs, exhausting
+the pinned 80,000-row sequence exactly once. At inference every proposal is
+decoded, thresholded, and reread; selection maximizes anchor cosine with the
+visible reread rather than consulting a glyph bank.
+
+The frozen field preflight passes before language training. On the 1,024-image
+bank, canonical reconstruction ink F1 is 0.99997, canonical decode--reread
+cosine is 0.99996, and held-sans/held-serif retrieval top-1 is
+0.97168/0.90137. The complete system has 31,376,130 parameters, of which
+23,952,769 are trainable. Training takes 2,286.17 seconds and the fixed audit
+takes 16.37 seconds, for 2,302.54 seconds total with 2.78614~GiB peak allocated
+CUDA memory on one RTX 4090. This exceeds the preregistered 35-minute total-time
+gate; all other source, argument, checkpoint, pair-sequence, boundary, memory,
+and closed-partition receipts verify. Table~\ref{tab:v47language} reports the
+fixed development result.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Fixed development metric & Reference & V47 & Requirement / result \\
+\midrule
+Full ordered top-1 & V46 0.20752 & 0.02539 & V46 gain $>0.01$; fail \\
+Image-unigram top-1 & 0.01416 & 0.02539 & full gain $>0.03$; fail \\
+Symbolic-bigram top-1 & 0.12256 & 0.02539 & full gain $>0.01$; fail \\
+Shuffled-history top-1 & 0.02539 & 0.02539 & full gain $>0.015$; fail \\
+Full / shuffled log probability & $-6.79904$ & $-6.79318$ & gain $>0.05$; fail \\
+Exact-suffix arm accuracy & gate 0.60 & 0.52930 & fail \\
+Generated identity top-1 & V46 0.08594 & 0.02344 & V46 gain $>0.01$; fail \\
+Generated pixel F1 & gate 0.55 & 0.37732 & fail \\
+Selected proposal / reread cosine & gate 0.90 & 0.63081 & fail \\
+Generated blank rate & gate 0.02 & 0 & pass \\
+\bottomrule
+\end{tabular}
+\caption{V47 preregistered codec-spherical language and generation audit. The
+candidate bank is evaluator-only and never selects an output. The source and
+pair sequences, model boundary, fixed arguments, production checkpoint, and
+closed partition verify; the runtime and nine scientific gates shown here
+fail. V47 passes 6/16 conjunctive conditions.}
+\label{tab:v47language}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/codec_spherical_glyph_language_v47_result.png}
+  \caption{Measured V47 result generated deterministically from hash-pinned
+  training and development receipts and the real target/generated/reread
+  raster sheet. The frozen codec remains reversible across canonical and held
+  fonts, but the learned spherical causal state loses V42/V46 natural-language
+  ranking, remains at chance-level counterfactual binding, and emits mostly
+  incorrect glyph identities. The 6/16 decision is non-qualifying.}
+  \label{fig:v47result}
+\end{figure}
+
+\paragraph{The learned visual interface is sound; the single-vector language
+state is not.}
+V47 separates representation quality from predictive adequacy more sharply
+than V46. Its codec reconstructs and rereads individual glyph images nearly
+perfectly, yet full-history top-1 is only 0.02539, below the symbolic bigram's
+0.12256 and identical to the suffix-preserving shuffled condition. Ordered
+target log probability exceeds shuffled by only 0.00586 nat. Full-history
+counterfactual arm accuracy is 0.52930, and the generated-raster identity rate
+is 0.02344 despite zero blank outputs. Thus neither a fixed radius, a
+glyph-aware reconstruction manifold, 80,000 nonrepeating pair rows, nor visible
+reread selection repairs causal binding when the next-language state is forced
+through one normalized glyph vector.
+
+This result does not reject V34 or continuous visual language. It rejects the
+particular composition of reconstruction geometry, one-point next-glyph
+prediction, and independent sample correction. The next bounded mechanism
+should retain V34 as the visual interface and V42 as the positive language
+control, while testing whether a short jointly predicted visual field or
+relational predictive state can represent multiple plausible futures without
+collapsing them into one reconstruction coordinate. Historical form, page
+scale, and instruction tuning remain closed until that canonical causal test
+passes.
 
 \section{Data}
 
@@ -4002,9 +4118,15 @@ probability improves by 0.31978 nat, but counterfactual assignment is only
 0.54297 and generated pixel F1 is 0.35943. The 10/14 failure shows that target
 conditioning was necessary but not sufficient: one coupled full-field anchor
 and Euclidean energy objective does not jointly solve identity direction,
-radius, and inverse-pixel quality. Those quantities should be factored and
-qualified before variable page length, multiple generated lines, historical
-form control, or raw-book scale expands the task.
+radius, and inverse-pixel quality. V47 then removes the learned radius, moves
+the reader onto V34's qualified glyph manifold, consumes 80,000 unique
+counterfactuals once, and selects only after visible decode and reread. The
+field preflight passes, but full-history top-1 falls to 0.02539, equal to
+shuffled, and binding is 0.52930. The failure therefore lies beyond radial
+calibration: a reconstruction-suitable single glyph vector is not necessarily
+a predictive language state. A short visual future or relational predictive
+state must qualify before variable page length, multiple generated lines,
+historical form control, or raw-book scale expands the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
 
@@ -4152,6 +4274,20 @@ reduce radius MAE relative to the deterministic anchor but lose most anchor
 identity, identifying a coupled identity--radius--rendering objective as the
 next bottleneck.
 
+V47 tests that diagnosis with the frozen V34 codec, unit-normalized visual
+fields, 23.95M trainable causal parameters, four decoded-and-reread proposals,
+and 80,000 nonrepeating train-only counterfactual rows. The codec preflight is
+strong: canonical reconstruction F1 and decode--reread cosine are both about
+0.99996, while held-sans and held-serif retrieval top-1 are 0.97168 and
+0.90137. The language result is worse, not better. Full top-1 is 0.02539 versus
+0.12256 for the symbolic bigram and 0.02539 for shuffled earlier history;
+counterfactual arm accuracy is 0.52930. Generated identity top-1 is 0.02344,
+pixel F1 is 0.37732, and selected-proposal/visible-reread cosine is 0.63081.
+The 31.38M-parameter system takes 2,302.54 seconds train plus audit, missing its
+35-minute gate, and passes 6/16 overall. V47 is non-qualifying. It preserves
+V34 as a visual retina and actuator but falsifies one normalized codec glyph
+vector as a sufficient language state.
+
 The strongest supported claim remains narrow but is now positive at the
 language-control level: one consumer GPU can train from scratch a 24.35M-
 parameter image-only causal model whose ordered Chinese raster history predicts
@@ -4161,7 +4297,7 @@ plan at high quality. Their current autonomous composition does not pass
 counterfactual binding or readable-pixel gates. No Qwen, GPT, or general-LLM
 parity is shown, and no matched evidence supports compute superiority over token
 models. Runtime independence does not erase provenance: V34, V42, V43, V45,
-and V46 are project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
+V46, and V47 are project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
 provide external initialization to other
 branches; BGE-M3 supplies offline target geometry; Qwen-family models prepare
 V38 training paraphrases; and MX-Font supplies the V41 external motor. None is
@@ -4171,18 +4307,20 @@ artifacts; V41 provenance is recorded separately.
 
 The next bounded experiment does not enlarge the reader and does not open the
 writer. It must be preregistered against the same public-domain stream and
-matched V42/V46 controls, preserve V45's fixed reversible substrate, and factor
-identity direction, ink mass or radius, and spatial residual rendering during
-learning and sample selection. Only a development result that improves
-counterfactual binding and generated pixels while retaining ordered-raster
-language may reopen the V43 writer or frozen partition. Stronger external
-foundations and offline teachers remain admissible when provenance, licensing,
-training role, and deployed absence are exact.
+matched V42/V46/V47 controls, preserve V34's qualified visual interface, and
+stop treating one reconstruction vector as the complete predictive language
+state. A short jointly predicted visual field or relational predictive state
+must first recover ordered-history rank, log probability, and counterfactual
+binding without a deployed candidate bank. Only a result that also improves
+generated pixels under visible reread may reopen the V43 writer or frozen
+partition. Stronger external foundations and offline teachers remain
+admissible when provenance, licensing, training role, and deployed absence are
+exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. V42--V46 still predict or qualify only one canonical next-glyph
+encodings. V42--V47 still predict or qualify only one canonical next-glyph
 interface and do not answer such questions. Page-scale reading, historical
 answer composition, 3D writing,
 motion, speech, and broad multilingual generation remain future extensions of

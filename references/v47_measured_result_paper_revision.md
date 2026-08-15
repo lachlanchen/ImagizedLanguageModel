@@ -142,5 +142,32 @@ trace record for this internal measured-result revision.
 
 ## Deviations and build record
 
-To be completed after execution.
-
+- Executed within the allowed file and manuscript-location scope. No V34--V46
+  metric, bibliography entry, README, sealed partition, or unrelated
+  publication file was changed.
+- The four publication evidence copies match every frozen SHA-256 listed above.
+- The deterministic V47 figure was generated successfully and visually
+  inspected at original resolution. Figure SHA-256:
+  `6a3bb9951d33579597ab5781aff12f2e680e67115027e7684048a643166a0c8a`.
+- `python -m ruff check` passes for the figure generator. The generator also
+  revalidated the 10,000-update checkpoint, 80,000-row nonrepeating pair
+  sequence, fixed source and protocol receipts, clean model boundary, unopened
+  frozen partition, and frozen 6/16 decision.
+- `scripts/latex_build.sh publication/ilm-image-native/ilm-image-native.tex`
+  completed both PDFLaTeX passes. The final build log contains no undefined
+  references, changed labels, or overfull boxes. Existing underfull warnings in
+  older table and bibliography material remain outside this revision.
+- Final TeX SHA-256:
+  `05b459df91dedb2f16d6b786985ab70a17c45a11fc87d3ad9f076e7fd730c1da`.
+- Final 94-page PDF SHA-256:
+  `c30dbf5e04c24440b364e72790b77dab9a5d1a75f1e7c7caf13ed64a8cba4c40`.
+- `pdftotext -layout` verifies V47 in the abstract, contribution list, measured
+  table and interpretation on page 73, result figure and caption on page 74,
+  and conclusion on pages 90--91. Rasterized visual inspection confirmed the
+  abstract, mathematics, table, figure, caption, and page transitions are
+  legible and correctly aligned.
+- A redline was attempted as planned, but `latexdiff` is not installed on this
+  workstation. No redline location was invented; immutable Git baseline
+  `a6cc8d9` and this scoped diff provide the revision trace.
+- `git diff --check` passes. Unrelated `.auto-readme-work/` remains untouched
+  and must remain unstaged.
