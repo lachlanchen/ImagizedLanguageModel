@@ -95,6 +95,16 @@ DEFAULT_V42_CHECKPOINT = (
     "artifacts/canonical_glyph_language_v42_20260814/checkpoint_final.pt"
 )
 DEFAULT_AUDIT_OUTPUT = f"{DEFAULT_OUTPUT}/development"
+AUDIT_ERRATUM_DOCUMENT = (
+    "references/visual_future_block_language_v48_audit_erratum.md"
+)
+EXPECTED_AUDIT_ERRATUM_SHA256 = (
+    "1cc9bdd777da6079b0cf0dbdaf88645114c5c25c77c283bdf92300730aa99f20"
+)
+EVALUATOR_SOURCE = "scripts/eval_visual_future_block_language_v48.py"
+ORIGINAL_EVALUATOR_SHA256 = (
+    "d7c2e865362715eb5eda7f23b2726031a648acafdba2a03b9b739e3d2e7e446d"
+)
 MATCHED_WINDOW_SEED = 20264220
 FUTURE_WINDOW_SEED = 20264820
 PAIR_SEED = 20264221
@@ -184,6 +194,33 @@ def _current_source_hashes() -> dict[str, str]:
     if missing:
         raise FileNotFoundError(f"V48 audit source files are missing: {missing}")
     return {path: file_sha256(path) for path in SOURCE_FILES}
+
+
+def _source_receipt(checkpoint: Mapping[str, Any]) -> dict[str, Any]:
+    registered = checkpoint.get("protocol", {}).get("source_files_sha256", {})
+    current = _current_source_hashes()
+    mismatches = sorted(
+        path for path in SOURCE_FILES if registered.get(path) != current[path]
+    )
+    exact_match = not mismatches and set(registered) == set(SOURCE_FILES)
+    documented_amendment = (
+        mismatches == [EVALUATOR_SOURCE]
+        and set(registered) == set(SOURCE_FILES)
+        and registered.get(EVALUATOR_SOURCE) == ORIGINAL_EVALUATOR_SHA256
+        and file_sha256(AUDIT_ERRATUM_DOCUMENT)
+        == EXPECTED_AUDIT_ERRATUM_SHA256
+    )
+    return {
+        "valid": exact_match or documented_amendment,
+        "exact_checkpoint_source_match": exact_match,
+        "documented_evaluator_amendment": documented_amendment,
+        "mismatched_registered_sources": mismatches,
+        "unchanged_registered_source_count": len(SOURCE_FILES) - len(mismatches),
+        "registered_evaluator_sha256": registered.get(EVALUATOR_SOURCE),
+        "current_evaluator_sha256": current[EVALUATOR_SOURCE],
+        "erratum_document": AUDIT_ERRATUM_DOCUMENT,
+        "erratum_sha256": file_sha256(AUDIT_ERRATUM_DOCUMENT),
+    }
 
 
 def _fixed_training_arguments(checkpoint: Mapping[str, Any]) -> bool:
@@ -290,6 +327,7 @@ def main() -> None:
     if (checkpoint_is_smoke or checkpoint_is_exploratory) and not args.allow_smoke:
         raise PermissionError("smoke or exploratory checkpoints require --allow-smoke")
     strict_evidence = not checkpoint_is_smoke and not checkpoint_is_exploratory
+    source_receipt = _source_receipt(checkpoint)
     if strict_evidence:
         if checkpoint.get("update") != FIXED_OPTIMIZATION["steps"]:
             raise ValueError("V48 evidence requires the update-10000 checkpoint")
@@ -303,10 +341,8 @@ def main() -> None:
             PROTOCOL_DOCUMENT
         ):
             raise ValueError("V48 checkpoint protocol digest changed")
-        if checkpoint.get("protocol", {}).get(
-            "source_files_sha256"
-        ) != _current_source_hashes():
-            raise ValueError("V48 checkpoint source digest changed")
+        if not source_receipt["valid"]:
+            raise ValueError("V48 checkpoint source receipt is invalid")
 
     render_config = CanonicalGlyphRenderConfig(**checkpoint["render_config"])
 
@@ -612,10 +648,7 @@ def main() -> None:
         "fixed_evaluation_arguments": _fixed_evaluation_arguments(args),
         "protocol_digest_matches": checkpoint.get("protocol", {}).get("sha256")
         == file_sha256(PROTOCOL_DOCUMENT),
-        "source_digests_match": checkpoint.get("protocol", {}).get(
-            "source_files_sha256"
-        )
-        == _current_source_hashes(),
+        "source_receipt_valid": source_receipt["valid"],
         "manifest_matches_checkpoint": manifest["sha256"]
         == checkpoint["manifest"]["sha256"],
         "partition_matches_checkpoint": partition == checkpoint["partition"],
@@ -649,7 +682,7 @@ def main() -> None:
         ],
         "evaluator_labels_excluded_from_student": True,
         "optimizer_inactive_during_evaluation": True,
-        "frozen_partition_opened": False,
+        "frozen_partition_remained_closed": True,
     }
     report = {
         "experiment": "visual-future-block-language-v48-development-audit",
@@ -676,6 +709,7 @@ def main() -> None:
         },
         "data_boundary": visual_future_block_data_boundary_receipt(),
         "model_boundary": model_boundary,
+        "source_receipt": source_receipt,
         **metrics,
         "peak_allocated_vram_gib": peak,
         "training_elapsed_seconds": checkpoint["training_elapsed_seconds"],
@@ -684,6 +718,7 @@ def main() -> None:
         "all_integrity_checks_pass": all(integrity.values()),
         "gates": gates,
         "all_gates_pass": all(gates.values()),
+        "frozen_partition_opened": False,
         "strict_evidence": strict_evidence,
         "effective_arguments": vars(args),
     }

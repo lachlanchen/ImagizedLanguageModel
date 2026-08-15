@@ -11,7 +11,11 @@ from ilm.visual_lm.visual_future_block_language_v48 import (
     VisualFutureBlockLanguageModelV48,
 )
 from scripts.eval_visual_future_block_language_v48 import (
+    EVALUATOR_SOURCE,
+    ORIGINAL_EVALUATOR_SHA256,
+    _current_source_hashes,
     _fixed_evaluation_arguments,
+    _source_receipt,
 )
 from scripts.train_visual_future_block_language_v48 import (
     DEFAULT_MANIFEST,
@@ -118,4 +122,23 @@ def test_strict_evaluator_shape_is_frozen() -> None:
     assert _fixed_evaluation_arguments(arguments)
     arguments.future_windows = 2_047
     assert not _fixed_evaluation_arguments(arguments)
+
+
+def test_audit_erratum_allows_only_the_registered_evaluator_change() -> None:
+    current = _current_source_hashes()
+    registered = current | {EVALUATOR_SOURCE: ORIGINAL_EVALUATOR_SHA256}
+    receipt = _source_receipt(
+        {"protocol": {"source_files_sha256": registered}}
+    )
+    assert receipt["valid"] is True
+    assert receipt["exact_checkpoint_source_match"] is False
+    assert receipt["documented_evaluator_amendment"] is True
+    assert receipt["mismatched_registered_sources"] == [EVALUATOR_SOURCE]
+    changed = registered | {
+        "ilm/visual_lm/visual_future_block_language_v48.py": "changed"
+    }
+    rejected = _source_receipt(
+        {"protocol": {"source_files_sha256": changed}}
+    )
+    assert rejected["valid"] is False
 
