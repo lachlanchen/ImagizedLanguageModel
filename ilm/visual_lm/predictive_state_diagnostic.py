@@ -21,6 +21,9 @@ from .visual_cell_eval_data import (
 
 PREDICTIVE_STATE_CONTEXT_LENGTHS = (1, 2, 4, 8, 16, 32, 64)
 PREDICTIVE_STATE_SHUFFLED_LENGTHS = (8, 16, 32, 64)
+DIRECT_ACTUATOR_THRESHOLDS = tuple(
+    round(-0.50 + 0.025 * index, 3) for index in range(51)
+)
 
 
 def build_partition_audit_windows(
@@ -462,6 +465,184 @@ def evaluate_context_length_curve(
 
 
 @torch.no_grad()
+def collect_direct_actuator_predictions(
+    model: Any,
+    loader: Iterable[dict[str, Any]],
+    *,
+    device: torch.device,
+    precision: str,
+) -> dict[str, torch.Tensor]:
+    """Collect V42's final visual proposal before its learned sampler."""
+
+    model.eval()
+    anchors: list[torch.Tensor] = []
+    signed_images: list[torch.Tensor] = []
+    targets: list[torch.Tensor] = []
+    target_indices: list[torch.Tensor] = []
+    for raw in loader:
+        context = raw["context"].to(device, non_blocking=True)
+        target = raw["continuation"][:, 0].to(device, non_blocking=True)
+        target_index = raw["target_index"].to(device, non_blocking=True)
+        if context.ndim != 5 or tuple(context.shape[-3:]) != (1, 32, 32):
+            raise ValueError("direct actuator context must be [B,T,1,32,32]")
+        if target.shape != (len(context), 1, 32, 32):
+            raise ValueError("direct actuator target must be [B,1,32,32]")
+        with _autocast(device, precision):
+            anchor = model.language(context)["anchor_fields"][:, -1].float()
+        field_dim = int(anchor.shape[-1])
+        if field_dim != 1_024:
+            raise ValueError("direct actuator requires the V42 1,024-D field")
+        signed = model.field.signed_spatial(anchor * math.sqrt(field_dim))
+        anchors.append(anchor)
+        signed_images.append(signed)
+        targets.append(target.float())
+        target_indices.append(target_index)
+    if not anchors:
+        raise ValueError("direct actuator loader is empty")
+    output = {
+        "anchor_fields": torch.cat(anchors),
+        "signed_images": torch.cat(signed_images),
+        "target_pixels": torch.cat(targets),
+        "target_indices": torch.cat(target_indices),
+    }
+    if not all(bool(torch.isfinite(value).all()) for value in output.values()):
+        raise ValueError("direct actuator collection contains non-finite values")
+    return output
+
+
+def _binary_image_statistics(
+    signed_images: torch.Tensor,
+    target_pixels: torch.Tensor,
+    *,
+    threshold: float,
+) -> dict[str, torch.Tensor]:
+    if signed_images.shape != target_pixels.shape:
+        raise ValueError("direct actuator signed images and targets must align")
+    if signed_images.ndim != 4 or tuple(signed_images.shape[1:]) != (1, 32, 32):
+        raise ValueError("direct actuator images must be [N,1,32,32]")
+    predicted = signed_images >= float(threshold)
+    target = target_pixels >= 0.5
+    true_positive = (predicted & target).flatten(1).sum(dim=1).float()
+    precision = true_positive / predicted.flatten(1).sum(dim=1).clamp_min(1)
+    recall = true_positive / target.flatten(1).sum(dim=1).clamp_min(1)
+    f1 = 2.0 * precision * recall / (precision + recall).clamp_min(1e-8)
+    predicted_density = predicted.flatten(1).sum(dim=1).float()
+    target_density = target.flatten(1).sum(dim=1).float().clamp_min(1)
+    return {
+        "pixels": predicted.float(),
+        "pixel_f1": f1,
+        "blank": predicted_density < 2,
+        "ink_density_ratio": predicted_density / target_density,
+    }
+
+
+def select_direct_actuator_threshold(
+    signed_images: torch.Tensor,
+    target_pixels: torch.Tensor,
+    *,
+    thresholds: Sequence[float] = DIRECT_ACTUATOR_THRESHOLDS,
+) -> dict[str, float]:
+    """Select one global threshold on evaluator-declared training imagery."""
+
+    candidates = tuple(float(value) for value in thresholds)
+    if not candidates or len(set(candidates)) != len(candidates):
+        raise ValueError("direct actuator thresholds must be nonempty and unique")
+    rows: list[tuple[float, float, float, float]] = []
+    for threshold in candidates:
+        statistics = _binary_image_statistics(
+            signed_images,
+            target_pixels,
+            threshold=threshold,
+        )
+        rows.append(
+            (
+                float(statistics["pixel_f1"].mean()),
+                -abs(threshold),
+                -threshold,
+                threshold,
+            )
+        )
+    selected = max(rows)
+    statistics = _binary_image_statistics(
+        signed_images,
+        target_pixels,
+        threshold=selected[3],
+    )
+    return {
+        "threshold": selected[3],
+        "pixel_f1": float(statistics["pixel_f1"].mean()),
+        "blank_rate": float(statistics["blank"].float().mean()),
+        "ink_density_ratio": float(statistics["ink_density_ratio"].mean()),
+        "candidate_count": float(len(candidates)),
+    }
+
+
+@torch.no_grad()
+def evaluate_direct_actuator_predictions(
+    model: Any,
+    predictions: Mapping[str, torch.Tensor],
+    bank_fields: torch.Tensor,
+    *,
+    threshold: float,
+) -> dict[str, float]:
+    """Decode a continuous proposal directly and score its visible reread."""
+
+    required = {
+        "anchor_fields",
+        "signed_images",
+        "target_pixels",
+        "target_indices",
+    }
+    if set(predictions) != required:
+        raise ValueError("direct actuator prediction payload changed")
+    anchors = predictions["anchor_fields"].float()
+    target_pixels = predictions["target_pixels"].float()
+    target_indices = predictions["target_indices"]
+    statistics = _binary_image_statistics(
+        predictions["signed_images"],
+        target_pixels,
+        threshold=threshold,
+    )
+    visible_pixels = statistics["pixels"]
+    visible_fields = model.field.encode_unit(visible_pixels)
+    target_fields = model.field.encode_unit(target_pixels)
+    bank = bank_fields.float()
+    if bank.ndim != 2 or bank.shape[1] != anchors.shape[1]:
+        raise ValueError("direct actuator evaluator bank does not align")
+    anchor_prediction = (anchors @ bank.transpose(0, 1)).argmax(dim=1)
+    visible_prediction = (visible_fields @ bank.transpose(0, 1)).argmax(dim=1)
+    examples = len(anchors)
+    output = {
+        "examples": float(examples),
+        "threshold": float(threshold),
+        "anchor_identity_top1": float(
+            (anchor_prediction == target_indices).float().mean()
+        ),
+        "visible_identity_top1": float(
+            (visible_prediction == target_indices).float().mean()
+        ),
+        "visible_pixel_f1": float(statistics["pixel_f1"].mean()),
+        "visible_blank_rate": float(statistics["blank"].float().mean()),
+        "visible_ink_density_ratio": float(
+            statistics["ink_density_ratio"].mean()
+        ),
+        "proposal_visible_reread_cosine": float(
+            (anchors * visible_fields).sum(dim=1).mean()
+        ),
+        "proposal_target_cosine": float(
+            (anchors * target_fields).sum(dim=1).mean()
+        ),
+        "visible_target_cosine": float(
+            (visible_fields * target_fields).sum(dim=1).mean()
+        ),
+        "rereads_visible_pixels": 1.0,
+    }
+    if not all(math.isfinite(value) for value in output.values()):
+        raise ValueError("direct actuator metrics are non-finite")
+    return output
+
+
+@torch.no_grad()
 def field_geometry(bank_fields: torch.Tensor) -> dict[str, float]:
     """Describe an evaluator bank's continuous geometry without language claims."""
 
@@ -556,13 +737,17 @@ def partition_generalization_gaps(
 
 
 __all__ = [
+    "DIRECT_ACTUATOR_THRESHOLDS",
     "PREDICTIVE_STATE_CONTEXT_LENGTHS",
     "PREDICTIVE_STATE_SHUFFLED_LENGTHS",
     "audit_window_digest",
     "build_partition_audit_windows",
+    "collect_direct_actuator_predictions",
     "evaluate_context_length_curve",
+    "evaluate_direct_actuator_predictions",
     "evaluate_predictive_state",
     "field_geometry",
     "partition_generalization_gaps",
+    "select_direct_actuator_threshold",
     "shuffle_prefix_preserving_suffix",
 ]

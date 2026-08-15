@@ -11,9 +11,11 @@ from ilm.visual_lm.predictive_state_diagnostic import (
     audit_window_digest,
     build_partition_audit_windows,
     evaluate_context_length_curve,
+    evaluate_direct_actuator_predictions,
     evaluate_predictive_state,
     field_geometry,
     partition_generalization_gaps,
+    select_direct_actuator_threshold,
     shuffle_prefix_preserving_suffix,
 )
 from ilm.visual_lm.visual_cell_data import visual_cell_partition
@@ -205,3 +207,55 @@ def test_partition_generalization_gap_is_development_minus_train() -> None:
     gaps = partition_generalization_gaps(models)["v"]
     assert gaps["context_64_top1"] == -0.25
     assert gaps["context_64_target_log_probability"] == -1.0
+
+
+def test_direct_actuator_threshold_is_selected_on_visible_pixel_f1() -> None:
+    signed = torch.full((2, 1, 32, 32), -1.0)
+    target = torch.zeros_like(signed)
+    signed[:, :, 0, 0] = 0.4
+    signed[:, :, 0, 1] = 0.05
+    target[:, :, 0, 0] = 1.0
+    selected = select_direct_actuator_threshold(
+        signed,
+        target,
+        thresholds=(-0.1, 0.1, 0.3),
+    )
+    assert selected["threshold"] == 0.1
+    assert selected["pixel_f1"] == 1.0
+    assert selected["blank_rate"] == 1.0
+
+
+class _FullIdentityField(nn.Module):
+    def encode_unit(self, pixels: torch.Tensor) -> torch.Tensor:
+        return F.normalize(pixels.flatten(1).float(), dim=-1)
+
+
+class _DirectActuatorModel(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+        self.field = _FullIdentityField()
+
+
+def test_direct_actuator_scores_visible_raster_after_reread() -> None:
+    first = torch.zeros(1, 32, 32)
+    second = torch.zeros(1, 32, 32)
+    first[:, 0, 0] = 1.0
+    second[:, 0, 1] = 1.0
+    targets = torch.stack((first, second))
+    bank = F.normalize(targets.flatten(1), dim=-1)
+    result = evaluate_direct_actuator_predictions(
+        _DirectActuatorModel(),
+        {
+            "anchor_fields": bank.clone(),
+            "signed_images": targets.mul(2.0).sub(1.0),
+            "target_pixels": targets,
+            "target_indices": torch.tensor([0, 1]),
+        },
+        bank,
+        threshold=0.0,
+    )
+    assert result["anchor_identity_top1"] == 1.0
+    assert result["visible_identity_top1"] == 1.0
+    assert result["visible_pixel_f1"] == 1.0
+    assert result["visible_ink_density_ratio"] == 1.0
+    assert result["proposal_visible_reread_cosine"] == 1.0
