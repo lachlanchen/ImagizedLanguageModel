@@ -409,6 +409,59 @@ def evaluate_predictive_state(
 
 
 @torch.no_grad()
+def evaluate_context_length_curve(
+    model: Any,
+    loader: Iterable[dict[str, Any]],
+    bank_fields: torch.Tensor,
+    *,
+    lengths: Sequence[int],
+    device: torch.device,
+    precision: str,
+) -> dict[str, dict[str, float]]:
+    """Score an evaluator-declared context-length intervention."""
+
+    ordered_lengths = tuple(int(length) for length in lengths)
+    if (
+        not ordered_lengths
+        or len(set(ordered_lengths)) != len(ordered_lengths)
+        or any(length < 1 or length > 64 for length in ordered_lengths)
+    ):
+        raise ValueError("diagnostic context lengths must be unique values in [1,64]")
+    model.eval()
+    accumulators = {
+        length: _empty_metric_accumulator() for length in ordered_lengths
+    }
+    for raw in loader:
+        context = raw["context"].to(device, non_blocking=True)
+        targets = raw["target_index"].to(device, non_blocking=True)
+        target_pixels = raw["continuation"][:, 0].to(device, non_blocking=True)
+        if context.ndim != 5 or tuple(context.shape[-3:]) != (1, 32, 32):
+            raise ValueError("diagnostic student context is not a raster stream")
+        target_fields = model.field.encode_unit(target_pixels)
+        for length in ordered_lengths:
+            with _autocast(device, precision):
+                anchor = model.language(context[:, -length:])[
+                    "anchor_fields"
+                ][:, -1].float()
+            logits = (
+                model.contrastive_scale.float()
+                * anchor
+                @ bank_fields.float().transpose(0, 1)
+            )
+            _score_batch(
+                accumulators[length],
+                logits,
+                targets,
+                anchor,
+                target_fields,
+            )
+    return {
+        str(length): _finish_metrics(accumulators[length])
+        for length in ordered_lengths
+    }
+
+
+@torch.no_grad()
 def field_geometry(bank_fields: torch.Tensor) -> dict[str, float]:
     """Describe an evaluator bank's continuous geometry without language claims."""
 
@@ -507,6 +560,7 @@ __all__ = [
     "PREDICTIVE_STATE_SHUFFLED_LENGTHS",
     "audit_window_digest",
     "build_partition_audit_windows",
+    "evaluate_context_length_curve",
     "evaluate_predictive_state",
     "field_geometry",
     "partition_generalization_gaps",

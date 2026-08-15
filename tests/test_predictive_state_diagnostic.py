@@ -10,6 +10,7 @@ from ilm.visual_lm.ink_jepa_data import VisualGrammarRecord
 from ilm.visual_lm.predictive_state_diagnostic import (
     audit_window_digest,
     build_partition_audit_windows,
+    evaluate_context_length_curve,
     evaluate_predictive_state,
     field_geometry,
     partition_generalization_gaps,
@@ -164,6 +165,16 @@ def test_predictive_state_evaluator_uses_images_and_emits_complete_curves() -> N
     assert set(result["shuffled_curve"]) == {"8", "16", "32", "64"}
     assert all(value["top1"] == 1.0 for value in result["context_curve"].values())
     assert result["anchor_interventions"]["64"]["vs_suffix4"]["anchor_cosine"] == 1.0
+    dense = evaluate_context_length_curve(
+        model,
+        loader,
+        bank_fields,
+        lengths=(3, 5, 64),
+        device=torch.device("cpu"),
+        precision="fp32",
+    )
+    assert set(dense) == {"3", "5", "64"}
+    assert all(value["top1"] == 1.0 for value in dense.values())
 
 
 def test_partition_generalization_gap_is_development_minus_train() -> None:
