@@ -191,4 +191,50 @@ provide the revision trace.
 
 ## Execution Record
 
-Pending.
+Completed and verified on 2026-08-15.
+
+- Added a deterministic V48 figure generator and generated the measured result
+  figure from the four frozen publication evidence files. The generator
+  revalidates the exact evidence hashes, 10,000-update checkpoint, 160,000
+  consumed image segments, 11/16 gate partition, all 23 positive integrity
+  checks, closed frozen partition, documented evaluator amendment, and
+  report/summary/checkpoint agreement before drawing.
+- Figure SHA-256:
+  `e84fe7eb71ba244beb40e95ec63e98a924bd6d7e5c4cf363a6e16520b0e33056`.
+  Original-resolution inspection confirms that labels, metrics, horizon bars,
+  gate outcome, and the actual raster sheet are legible and aligned. The
+  visual explicitly distinguishes target, point field, visible output, and
+  rollout rather than presenting the speckled result as success.
+- Updated only the planned abstract, hero caption, contribution list,
+  V42--V48 experiment section, late evaluation synthesis, conclusion, and
+  product-target range in the active manuscript. No V34--V47 metric, frozen
+  partition, README, bibliography, or unrelated publication source changed.
+- `python -m ruff check` and Python compilation pass for the generator. A
+  second deterministic render reproduced the figure hash above.
+- The four tracked V48 publication evidence files remain byte-identical to the
+  hashes frozen in this plan.
+- `scripts/latex_build.sh publication/ilm-image-native/ilm-image-native.tex`
+  completed both PDFLaTeX passes. The final log contains no undefined or
+  multiply-defined references, changed labels, or overfull boxes. Older
+  underfull warnings in pre-existing tables and bibliography URLs remain
+  outside this revision.
+- Final TeX SHA-256:
+  `b1fa4482b0027bf4595eafa1dec78f0947bf638e5d053ac1145190495473f60c`.
+- Final 96-page PDF SHA-256:
+  `17040a29a36b86e60ab81cf412ab14405507de425ed5c3a7cf78b2678b0aaaf0`.
+- `pdftotext -layout` verifies V48 material on PDF pages 3--4, 7, 64,
+  75--77, 90, and 93. Rasterized visual inspection confirms the abstract,
+  hero cross-reference, contribution item, equations, result table, measured
+  figure and caption, mechanism diagnosis, synthesis, conclusion, and page
+  transitions are legible. Changing the V48 table to a near-placement float
+  and flushing pending evidence before Data removed a detached table-only
+  page; the table now accompanies the diagnosis on page 77 and Data begins on
+  page 78.
+- A redline was attempted as planned, but `latexdiff` is not installed on this
+  workstation. No redline or page location was invented; immutable Git
+  baseline `5b947bb` and this scoped diff provide the revision trace.
+- `git diff --check` passes. Final staging is restricted to this plan, the
+  generator, generated figure, active TeX, and rebuilt PDF; unrelated
+  `.auto-readme-work/` remains untouched and unstaged.
+
+Final status: verified; commit pending.

@@ -169,6 +169,21 @@ selected-proposal to visible-reread cosine is 0.6308. Six of sixteen gates pass.
 V47 is non-qualifying and rejects one normalized codec glyph vector as a
 sufficient causal language state, while preserving the frozen codec as a
 qualified visual interface.
+
+V48 returns to an exact fixed raster coordinate and asks whether dense
+four-future supervision repairs the predictive state. Its 16.28M-parameter
+from-scratch reader completes 10,000 updates over 160,000 image segments in
+22.82 minutes with 0.492~GiB peak training allocation; the strict audit raises
+peak allocation to 2.149~GiB and passes all 23 integrity checks. Full-history
+top-1 is 18.066\%, above the 12.256\% bigram and 16.162\% shuffled-history
+controls but below matched V42 at 19.971\%. Dense supervision removes V47's
+terminal-position collapse, yet only the first of four future horizons clears
+its offset control. Direct visible-raster F1 reaches 0.4661, but visible
+identity is 14.893\%, identity retention is 82.43\%, and four-step identity
+falls from 14.453\% to 1.563\%, 0.391\%, and 1.172\% after pixel feedback.
+Eleven of sixteen gates pass. V48 therefore preserves bounded ordered visual
+language while rejecting deterministic point-average raster prediction as a
+readable autonomous writer.
 \end{abstract}
 
 \begin{figure}[h!]
@@ -179,10 +194,10 @@ qualified visual interface.
   glyph exemplars for \texttt{YAN} (U+8A00). The right panel is an illustrative
   answer-page target, not a measured model output. V42 supplies bounded positive
   ordered-raster language evidence; V43 and V44 remain partial or rejected
-  binding results; V45 qualifies replacement target geometry; and the V46 and
-  V47 from-scratch readers are non-qualifying, as reported in
+  binding results; V45 qualifies replacement target geometry; and the V46--V48
+  from-scratch readers are non-qualifying, as reported in
   Figures~\ref{fig:v43result}, \ref{fig:v44result}, \ref{fig:v45result},
-  \ref{fig:v46result}, and~\ref{fig:v47result}.}
+  \ref{fig:v46result}, \ref{fig:v47result}, and~\ref{fig:v48result}.}
   \label{fig:yanhero}
 \end{figure}
 
@@ -338,6 +353,13 @@ and controls that makes a stronger image-native language claim falsifiable:
   2.539\%, counterfactual accuracy remains 52.930\%, and generated identity is
   2.344\%. Its 6/16 decision rejects a single normalized codec vector as the
   language state without rejecting the codec as a retina and actuator.
+  \item V48, a 16.28M-parameter dense visual-future model in an exact fixed
+  DCT raster field. It removes V47's terminal-position collapse and preserves
+  ordered-history gains over bigram and shuffled controls in 22.82 minutes on
+  one RTX 4090, but does not beat V42. Its direct raster passes pixel F1 while
+  failing visible identity and retention, and its closed loop loses identity
+  after the first generated cell. The 11/16 result rejects deterministic
+  point-average writing while retaining the compact ordered visual reader.
   \item A preregistered development audit with correct, shuffled, blank,
   partial, paraphrased, and copy-counterfactual prompts; target-through-codec
   ceilings; writer selection; direct raster galleries; immutable hashes; and a
@@ -3078,7 +3100,7 @@ canonical content state from raster history without receiving the evaluator's
 target glyph, then beat visual unigram, bigram, shuffled-history, and
 blank-history controls under autonomous pixel feedback.
 
-\subsection{Canonical Glyph Language V42--V47}
+\subsection{Canonical Glyph Language V42--V48}
 
 \paragraph{A canonical image field isolates language before historical form.}
 V42 deliberately removes style variation and answer-level instruction tuning.
@@ -3548,6 +3570,126 @@ collapsing them into one reconstruction coordinate. Historical form, page
 scale, and instruction tuning remain closed until that canonical causal test
 passes.
 
+\paragraph{V48 predicts four visual futures densely and writes the point
+field directly.}
+V48 tests that short-future hypothesis without a learned codec or stochastic
+writer. Let $D$ be the fixed orthonormal $32$-point DCT-II matrix and let
+$s(x)=2\mathbf 1[x\geq0.5]-1$ for a writing raster $x$. Its exact unit visual
+coordinate and visible inverse are
+\[
+k(x)=\frac{\operatorname{vec}(D s(x)D^\top)}{32},\qquad
+V(q)=\mathbf 1\!\left[D^\top\operatorname{unvec}(32q)D\geq0\right].
+\]
+The width-384, eight-layer, six-head causal reader receives 64 such image
+fields. With hidden state $h_t$, one shared image head $g_\theta$, and learned
+horizon offsets $e_r$ with $e_1=0$, it predicts
+\[
+q_{t,r}=\frac{g_\theta(h_t+e_r)}
+{\max(\lVert g_\theta(h_t+e_r)\rVert_2,10^{-8})},
+\qquad r\in\{1,2,3,4\}.
+\]
+Every causal position is supervised. For horizon $r$, exact-raster
+multi-positive contrast, angular field error, and fixed-inverse pixel
+BCE--Dice form $L_r$; the complete loss is
+\[
+L= L_1+0.5L_2+0.25L_3+0.125L_4,
+\quad
+L_r=L_{\mathrm{contrast},r}+0.25L_{\mathrm{angle},r}
+     +0.20L_{\mathrm{pixel},r}.
+\]
+The ordinary deployed step emits $V(q_{t,1})$, appends those visible pixels,
+and rereads them. It receives no string, token ID, Unicode scalar, character
+ID, OCR result, glyph lookup, candidate raster, codebook, quantized latent, or
+external language model.
+
+The complete model has 16,278,401 trainable parameters. Ten thousand updates
+consume 160,000 image segments in 1,369.04 seconds with 0.49206~GiB peak
+training allocation. The strict audit takes another 89.69 seconds and raises
+peak train-or-audit allocation to 2.14902~GiB. It loads only the final
+checkpoint, reproduces V42's registered 0.199707 top-1 in the same process,
+recovers every frozen window, pair, bank, protocol, and source receipt, and
+leaves the frozen partition closed. An initial audit run stored the required
+negative fact \texttt{frozen\_partition\_opened=false} and then incorrectly
+applied \texttt{all} to that dictionary. The documented evaluator amendment
+reexpresses only that fact as
+\texttt{frozen\_partition\_remained\_closed=true}; the strict rerun passes all
+23 positive integrity checks without changing a model, metric, threshold,
+gate, or scientific result.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lrrl}
+\toprule
+Fixed development metric & Control / reference & V48 & Requirement / result \\
+\midrule
+Full ordered top-1 & V42 0.19971 & 0.18066 & V42 gain $>0.005$; fail \\
+Symbolic-bigram top-1 & 0.12256 & 0.18066 & gain $>0.03$; pass \\
+Shuffled-history top-1 & 0.16162 & 0.18066 & gain $>0.015$; pass \\
+Full / shuffled log probability & $-5.50752$ & $-5.34618$ & gain $>0.10$; pass \\
+Future-1 top-1 & control 0.10742 & 0.15527 & gain $>0.01$; pass \\
+Future-2 top-1 & control 0.03613 & 0.04053 & gain $>0.01$; fail \\
+Future-3 top-1 & control 0.02686 & 0.01758 & gain $>0.01$; fail \\
+Future-4 top-1 & control 0.03174 & 0.03027 & gain $>0.01$; fail \\
+Exact-suffix arm accuracy & gate 0.55 & 0.53223 & fail \\
+Visible-reread identity top-1 & gate 0.15 & 0.14893 & fail \\
+Visible binary pixel F1 & gate 0.46 & 0.46614 & pass \\
+Proposal identity retention & gate 0.85 & 0.82431 & fail \\
+Four-step mean identity top-1 & unigram 0.01416 & 0.04395 & pass \\
+\bottomrule
+\end{tabular}
+\caption{V48 frozen development audit. Immediate language uses 2,048 matched
+windows; future horizons use 2,048 separately pinned windows; binding uses 512
+pairs; and closed-loop generation uses 256 four-cell continuations. Every
+horizon remains diverse and terminal top-1 is stable from visible lengths 63
+to 64, but all-horizon advantage, binding, visible identity, and identity
+retention fail. V48 passes 11/16 conjunctive gates.}
+\label{tab:v48language}
+\end{table}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=\linewidth]{figures/visual_future_block_language_v48_result.png}
+  \caption{Measured V48 result rendered deterministically from hash-pinned
+  training and strict-development receipts. The displayed target, point-field,
+  thresholded-visible, and rollout rasters are the actual saved evidence, not
+  illustrative success. Ordered context improves over bigram and shuffled
+  controls, and dense supervision removes the terminal-position collapse.
+  Nevertheless, only horizon one beats its offset control; visible identity
+  and retention fail; and pixel feedback compounds speckled point-average
+  errors. The frozen decision is non-qualifying at 11/16 gates.}
+  \label{fig:v48result}
+\end{figure}
+
+\paragraph{The reader has an order signal; the point writer has the wrong
+statistical form.}
+V48's immediate state gains 0.01904 top-1 and 0.16133 nat over shuffled
+history, but loses 0.01904 top-1 to matched V42. Dense supervision therefore
+uses earlier order while trading away some of the stronger single-next-cell
+coordinate. It also solves the localized terminal defect: top-1 is 0.17383 at
+visible length 63 and 0.17432 at length 64, with 589 and 590 distinct
+predictions. This is a real mechanism gain, not a general qualification.
+
+The four-future audit exposes a metric failure. Target-field cosine rises from
+0.59368 at horizon one to 0.65811 at horizon four, while identity top-1 falls
+from 0.15527 to 0.03027 and only horizon one clears its offset control. The
+signed-raster DCT cosine is dominated by shared background and coarse ink; it
+can improve while glyph identity worsens. The same distinction appears in
+output: visible pixel F1 passes at 0.46614, yet visible identity is 0.14893 and
+the saved rasters are dense speckled fields rather than clean glyph samples.
+
+Finally, teacher-forced future offsets do not teach recovery from emitted
+pixels. Four-step mean identity exceeds unigram, but per-step identity is
+0.14453, 0.01563, 0.00391, and 0.01172. Once the deterministic average is
+reread, off-manifold error dominates the later context. The next bounded test
+should therefore retain the strongest single-next-image causal reader, derive
+a foreground-balanced continuous identity chart from rasters alone, and train
+a compact sampled conditional raster distribution on its own visible errors.
+The full invertible raster field remains the sensory and writing carrier; the
+identity chart remains continuous and image-derived. Neither requires OCR,
+tokens, Unicode IDs, a visual codebook, or a deployed candidate bank.
+
+\clearpage
 \section{Data}
 
 The project already has a strong historical Chinese glyph source outside the tracked repo. A local snapshot at \texttt{/home/lachlan/ProjectsLFS/incoder/data/historic} contains:
@@ -4124,8 +4266,15 @@ counterfactuals once, and selects only after visible decode and reread. The
 field preflight passes, but full-history top-1 falls to 0.02539, equal to
 shuffled, and binding is 0.52930. The failure therefore lies beyond radial
 calibration: a reconstruction-suitable single glyph vector is not necessarily
-a predictive language state. A short visual future or relational predictive
-state must qualify before variable page length, multiple generated lines,
+a predictive language state. V48 then returns to the exact fixed raster field
+and supervises four futures at every causal position. It recovers an ordered
+history gain and removes the terminal-position collapse, but full top-1 remains
+below V42, horizons two through four fail their controls, and direct raster
+identity decays sharply under visible feedback despite passing pixel F1. Thus
+short-future point prediction is also insufficient. The next mechanism must
+separate a foreground-sensitive image identity geometry from the invertible
+raster carrier and model a sampled conditional raster distribution with
+visible-error recovery before variable page length, multiple generated lines,
 historical form control, or raw-book scale expands the task.
 This order is also consistent with measured error accumulation in iterative
 diffusion chains~\cite{inputperturb}.
@@ -4288,6 +4437,19 @@ The 31.38M-parameter system takes 2,302.54 seconds train plus audit, missing its
 V34 as a visual retina and actuator but falsifies one normalized codec glyph
 vector as a sufficient language state.
 
+V48 tests the resulting short-future alternative in an exact fixed raster
+field. Its 16.28M-parameter from-scratch model predicts four future writing
+images at every causal position and finishes 10,000 updates in 1,369.04
+seconds with 0.49206~GiB peak training allocation. Full top-1 is 0.18066,
+above bigram 0.12256 and shuffled history 0.16162 but below matched V42
+0.19971. Dense supervision removes V47's terminal-position collapse, and all
+four horizons remain diverse, yet only horizon one beats its offset control.
+Direct visible F1 reaches 0.46614 while visible identity is 0.14893 and
+identity retention is 0.82431; after the first generated cell, closed-loop
+identity falls to approximately one percent or less. V48 passes 11/16 gates
+and is non-qualifying. It retains bounded ordered visual language while
+falsifying a deterministic multimodal point field as the writer.
+
 The strongest supported claim remains narrow but is now positive at the
 language-control level: one consumer GPU can train from scratch a 24.35M-
 parameter image-only causal model whose ordered Chinese raster history predicts
@@ -4297,7 +4459,7 @@ plan at high quality. Their current autonomous composition does not pass
 counterfactual binding or readable-pixel gates. No Qwen, GPT, or general-LLM
 parity is shown, and no matched evidence supports compute superiority over token
 models. Runtime independence does not erase provenance: V34, V42, V43, V45,
-V46, and V47 are project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
+V46, V47, and V48 are project work, as is the rejected V44 diagnostic; PIXAR and Pixel-Linguist
 provide external initialization to other
 branches; BGE-M3 supplies offline target geometry; Qwen-family models prepare
 V38 training paraphrases; and MX-Font supplies the V41 external motor. None is
@@ -4305,22 +4467,26 @@ an uncredited ILM contribution or a deployed language teacher. Unstated
 upstream weight licenses prevent redistribution of the derived V35--V39
 artifacts; V41 provenance is recorded separately.
 
-The next bounded experiment does not enlarge the reader and does not open the
-writer. It must be preregistered against the same public-domain stream and
-matched V42/V46/V47 controls, preserve V34's qualified visual interface, and
-stop treating one reconstruction vector as the complete predictive language
-state. A short jointly predicted visual field or relational predictive state
-must first recover ordered-history rank, log probability, and counterfactual
-binding without a deployed candidate bank. Only a result that also improves
-generated pixels under visible reread may reopen the V43 writer or frozen
-partition. Stronger external foundations and offline teachers remain
-admissible when provenance, licensing, training role, and deployed absence are
-exact.
+The next bounded experiment should not enlarge the reader or add fonts,
+etymology records, page layout, or an external teacher. It must be
+preregistered against the same public-domain stream and matched V42/V48
+controls. First, a training-partition diagnostic must derive a continuous,
+foreground-balanced image identity chart whose similarity tracks glyph
+identity rather than white background. Second, the strongest single-next-image
+causal reader should condition a compact distributional raster writer, such as
+a binary denoising or flow field, that samples visible glyph images instead of
+regressing their multimodal mean. Third, training must include corrupted or
+emitted visible rasters so the reader--writer loop learns recovery from its own
+off-manifold errors. Qualification still requires ordered-history rank,
+counterfactual binding, crisp candidate-independent pixels, and stable visible
+reread without tokens, Unicode IDs, OCR, codebooks, or a deployed candidate
+bank. Stronger external foundations and offline teachers remain admissible
+only when provenance, licensing, training role, and deployed absence are exact.
 
 A Visual Word-Origin Book remains the product target: rendered questions should
 produce readable answer images containing modern explanation and
 provenance-linked historical forms, including forms absent from computer
-encodings. V42--V47 still predict or qualify only one canonical next-glyph
+encodings. V42--V48 still predict or qualify only one canonical next-glyph
 interface and do not answer such questions. Page-scale reading, historical
 answer composition, 3D writing,
 motion, speech, and broad multilingual generation remain future extensions of
