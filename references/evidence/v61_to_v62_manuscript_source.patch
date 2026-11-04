@@ -1,0 +1,175 @@
+--- v61/frontmatter.tex
++++ v62/frontmatter.tex
+@@ -7 +7 @@
+-\newcommand{\PaperSummary}{Written language includes historical, handwritten and regional forms that a fixed character inventory cannot faithfully represent. We investigate language modelling with writing images as input and output on one consumer GPU. A continuous image interface supports normalized raster likelihood and independent generation without a deployed character vocabulary. Joint reader--density learning improves target likelihood to \JointNll\ versus \ControlNll\ nats per image, while autonomous streams remain inaccurate. A law over complete observed image answers enables limited Chinese reading: 25 of 256 fixed development answers are exact, versus three with question pixels blanked and 21 after matched additional glyph-answer training. Raster F1 reaches 27.033\%, a 4.893-point gain [0.469, 9.047], while the exact-match difference remains unresolved. Both questions are correct in only four of 393 shared-paragraph pairs. Full adaptation of a 477M-parameter native pixel-language foundation improves held-out answer-pixel NLL from 0.6842 to 0.1548 nats but produces zero exact answers. Its independent runtime is reproducible, while free writing remains fragmented. Faithful forms and likelihood therefore require separate tests from useful language; a high-quality general image-based language model remains unresolved.}
++\newcommand{\PaperSummary}{Written language includes historical, handwritten and regional forms that a fixed character inventory cannot faithfully represent. We investigate language modelling with writing images as input and output on one consumer GPU. A continuous image interface supports normalized raster likelihood and independent generation without a deployed character vocabulary. Joint reader--density learning improves target likelihood to \JointNll\ versus \ControlNll\ nats per image, while autonomous streams remain inaccurate. A law over complete observed image answers enables limited Chinese reading: 25 of 256 fixed development answers are exact, versus three with question pixels blanked and 21 after matched additional glyph-answer training. Raster F1 reaches 27.033\%, a 4.893-point gain [0.469, 9.047], while the exact-match difference remains unresolved. Both questions are correct in only four of 393 shared-paragraph pairs. Full adaptation of a 477M-parameter native pixel-language foundation improves pixel likelihood but produces zero exact answers. A matched whole-image mixture further lowers held-out NLL from 0.1542 to 0.1248 nats per pixel, yet still gives zero exact answers and no resolved question-dependent raster gain. Independent runtimes reproduce the raw outputs. Faithful forms and likelihood require separate tests from useful language; a high-quality general image-based language model remains unresolved.}
+--- v61/article_content.tex
++++ v62/article_content.tex
+@@ -388,0 +389,36 @@
++\section*{Correlated pixels improve fit without establishing answers}
++We next replace the single product-Bernoulli head with eight conditional
++experts, each defined over a complete $32\times64$ bitmap. A shared latent
++expert permits pixel covariance without a character inventory. Both arms
++fully adapt the same native foundation for 1,000 updates on identical sampled
++examples; the eight-head actor has 490.00M parameters versus 477.15M for the
++single-head control. The comparison matches training budget, not capacity.
++
++Held-out answer-pixel NLL is 0.1248 versus 0.1542 nats for eight and one
++experts, respectively (Fig.~\ref{fig:correlated-density}). Strict-raster F1
++increases from 0.234\% to 0.815\%, a 0.580-point difference [0.089, 1.094].
++Foreground F1 increases from 12.205\% to 15.827\%. Nevertheless, both arms
++produce zero exact answers among 256 questions and zero both-correct pairs
++among 393 shared-paragraph pairs. The eight-head normal-minus-blank raster
++gain is only 0.295 points [$-0.006$, 0.623], leaving question dependence
++unresolved. Foreground F1 also has no resolved question-dependent gain.
++The registered density-intervention gate and both bounded reading gates fail.
++
++Training takes 1,887.5 and 1,972.8 s, with 9.904 and 10.174 GiB peak allocated
++memory for one and eight experts. Both independent bundles reproduce native
++PNG tensors, image bytes and decoder events offline. The eight-head gate
++entropy averages 1.812 nats, with five experts selected across the primary
++continuations, including termination. These usage diagnostics describe the
++mixture; they do not demonstrate semantic specialization (Supplementary
++Note 21).
++
++\plate{Figure_7_correlated_density}{\textbf{A whole-image mixture improves pixel fit but fails the question-dependent writing test.}
++\textbf{a}, Conditional image law and inference boundary. One latent expert
++couples all pixels; experts are context-dependent neural functions.
++\textbf{b}, All-development answer/termination-pixel NLL after matched-budget
++adaptation. \textbf{c}, Strict-raster and aligned foreground F1 on normal and
++blank-question prompts. \textbf{d}, First two fixed primary references and
++raw outputs, with white display padding only. No nonblank pixel is repaired
++or removed. Parameter counts and output computation differ between arms;
++both use externally pretrained weights.}{fig:correlated-density}
++
+@@ -417,0 +454,8 @@
++Recent visual generators study mixture assignment and the geometry of
++distribution matching\cite{mgflow,semot}. These results motivate more expressive
++writing distributions, but marginal image fidelity cannot certify an answer.
++A generator that swaps the correct images for two equally frequent questions
++preserves the answer-image distribution while answering both incorrectly.
++Conditional supervision and prompt interventions therefore remain necessary;
++natural-image gains do not establish a shortcut to language learning.
++
+--- v61/supplementary_information.tex
++++ v62/supplementary_information.tex
+@@ -786,0 +787,99 @@
++\section*{Supplementary Note 21: conditional whole-image density}
++The matched experiment tests a latent expert shared across a complete native
++image block. Let $h_t$ be the visual transformer's causal state after the
++visible prefix and let $y\in\{0,1\}^{2048}$ denote the next $32\times64$
++bitmap, with one denoting white in this native interface. The normalized law is
++\begin{equation}
++ p_\theta(y\mid h_t)=\sum_{k=1}^{K}\pi_{\theta k}(h_t)
++ \prod_{i=1}^{2048}q_{\theta ki}(h_t)^{y_i}
++ [1-q_{\theta ki}(h_t)]^{1-y_i},
++ \qquad q_{\theta ki}=\sigma(a_{\theta ki}),
++\end{equation}
++where the gate is a softmax. Each expert is a neural function of the current
++visual state, without a fixed character identity or stored target bitmap.
++Marginalizing the expert retains a proper probability law. For distinct
++pixels, conditional covariance is
++\begin{equation}
++ \operatorname{Cov}(Y_i,Y_j\mid h_t)
++ =\sum_k\pi_k q_{ki}q_{kj}
++ -\Bigl(\sum_k\pi_k q_{ki}\Bigr)\Bigl(\sum_k\pi_k q_{kj}\Bigr).
++\end{equation}
++It can be nonzero even though pixels are independent within one expert.
++This elementary property permits coherent alternatives; it does not prove
++that training discovers valid writing or useful answers.
++
++The objective is exact negative log joint likelihood, computed with
++\texttt{logsumexp}, divided by 2,048 physical pixels. It averages only
++answer and two blank termination blocks within each example, then averages
++over accumulated examples. Teacher forcing uses the same one-block causal
++shift as Note 20. Prompt pixels enter the context without a prompt loss.
++There is no transcript, answer-span offset or Unicode target inside the actor.
++
++The single-head control has 477,145,984 parameters; eight experts have
++489,998,208. Both initialize from the same externally pretrained MIXAR
++revision and use the unchanged Noto-26 cell interface, 3,211 training
++questions and 1,321 article-disjoint development questions. The eight-head
++projection repeats the released head with zero-mean perturbations of scale
++0.01, seed 20266210, and a zero-initialized gate. Every backbone and head
++parameter receives gradients. The comparison matches examples, optimization
++and update budget, rather than parameter count or output computation.
++
++Each arm uses 1,000 updates, microbatch one, accumulation eight, AdamW at
++$2\times10^{-5}$ with betas $(0.9,0.95)$, decay 0.01, 50-update warmup,
++cosine decay to 10\%, norm clip one and EMA 0.99. Weights, optimizer and EMA
++are FP32; forward/backward use BF16 with deterministic algorithms, eager/math
++attention and nonreentrant activation checkpointing. Training and data seeds
++are 20266220 and 20266221. Complete sampled-example orders must match exactly.
++Only the final EMA is audited. Both arms run sequentially on physical GPU 0,
++under a 20 GiB allocated-memory and four-hour ceiling per phase.
++
++Generation thresholds each expert into one complete candidate bitmap, scores
++all candidates under the full mixture and emits the highest-scoring candidate.
++Searching component modes is approximate MAP; it is not a guarantee of the
++global mixture mode. Actual emitted pixels become subsequent context. The
++first exactly white native block ends generation, otherwise ten blocks cap
++the continuation. Only the detected terminal block and wholly blank trailing
++cells are removed. Malformed nonblank strokes are preserved. The deployed
++bundle has no tokenizer, OCR, glyph inventory or external language-model call.
++
++The primary audit retains the fixed 256 questions, blank-question controls,
++all 393 shared-paragraph pairs and all-development likelihood. Paired
++intervals resample articles 2,000 times, seed 20266229. An intervention pass
++requires positive lower intervals for both K8-minus-K1 strict-raster F1 and
++K8 normal-minus-blank F1, fewer than 20\% capped outputs and all implementation
++checks. Each arm's separate bounded reading gate requires at least 10\%
++exact answers, 25\% raster F1, 2\% both-correct pairs, a positive question
++effect, fewer than 20\% caps and implementation checks. Expert-use counts
++and gate entropy are descriptive; they cannot select a new checkpoint or
++change these gates. Reused development, one seed, the shifted font interface
++and external pretraining limit the conclusions.
++
++Both arms complete their registered budget and all replay checks. K=1 takes
++1,887.5 s at 9.904 GiB peak allocated memory; K=8 takes 1,972.8 s at 10.174 GiB.
++Their complete training-example orders match exactly. The locked audit takes
++527.4 s excluding model loading, at 1.904 GiB allocated memory. Four-update
++uninterrupted versus two-plus-resumed-two preflights match model, EMA,
++optimizer and every RNG state exactly for each arm. Future-pixel changes
++have zero effect on earlier predictions. Strict-FP32 cache errors remain
++below $2.1\times10^{-5}$; larger TF32 discrepancies are retained separately
++rather than hidden by changing the production recipe.
++
++All-development NLL is 0.1542 for K=1 and 0.1248 for K=8. Primary strict-raster
++F1 is 0.234\% versus 0.815\%, a 0.580-point gain [0.089, 1.094]. Foreground
++F1 is 12.205\% versus 15.827\%, a 3.623-point gain [1.815, 5.554]. Both
++arms have zero exact primary answers and zero both-correct pairs. K=8's
++normal-minus-blank raster difference is 0.295 points [$-0.006$, 0.623]; its
++foreground difference is $-0.044$ points [$-0.629$, 0.509]. Neither resolves
++question dependence. Seven of eight intervention gates pass; both arms pass
++six of ten bounded reading gates. The registered decision is
++\texttt{reject\_density\_intervention}; neither arm qualifies as free reading.
++
++K=8 selects experts 0, 1, 2, 4 and 7 on respectively 223, 4, 106, 605 and 3
++primary generation steps, including termination. Mean gate entropy is 1.812
++nats, compared with $\log 8=2.079$ for a uniform gate. The primary outputs all
++terminate before the cap, while one blank-question output reaches the cap.
++These descriptive observations do not identify semantic expert roles or
++justify selecting different parameters. The result supports improved bitmap
++fit at this budget, while the required question-dependent language remains
++unestablished.
++
+@@ -861,0 +961,11 @@
++The matched whole-image experiment uses the persistent sequential coordinator
++\begin{quote}\small\ttfamily
++scripts/run\_correlated\_native\_v62.py.
++\end{quote}
++It verifies both complete training reports, standalone offline replays and
++the locked audit in that order. Independent image inference uses
++\texttt{scripts/infer\_correlated\_native\_language.py};
++the exported bundle's \texttt{run.py} does not need the repository or the
++original foundation checkpoint. The optional, separately calibrated vision
++diagnostic is \texttt{scripts/audit\_correlated\_native\_transcripts\_v62.py}.
++That reader stays outside the actor and changes no primary gate.
+--- v61/references_main.tex
++++ v62/references_main.tex
+@@ -1 +1 @@
+-\begin{thebibliography}{12}
++\begin{thebibliography}{14}
+@@ -14,0 +15,2 @@
++\bibitem{mgflow} Zhang, C. et al. Unifying Distributional Training for One-Step Visual Generation. \emph{arXiv} 2609.35763v4 (2026). \url{https://arxiv.org/abs/2609.35763v4}.
++\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}.

@@ -92,7 +92,7 @@ alone is not sufficient: the expressivity paper cautions against replacing
 contextual reasoning with fixed probabilistic routing. Conditional image
 heads also differ from mixtures over fixed vocabulary distributions.
 
-## Experiment order
+## Experiment order fixed before the matched test
 
 1. Retain V61's failed decision and raw outputs. Preserve the distinction
    between fitting pixels and generating meaningful writing.
@@ -111,9 +111,9 @@ heads also differ from mixtures over fixed vocabulary distributions.
    residual problem. Physical analog-computing claims require separate hardware
    evidence; they are not training-budget reductions for our current machine.
 
-The current priority is a coherent conditional distribution over writing
-images, coupled to useful language context. It has a direct implementation,
-fits the measured memory budget in principle, and permits a falsifiable test.
+The priority was a coherent conditional distribution over writing images,
+coupled to useful language context. That implementation now fits the measured
+memory budget; its completed test below rejects the language intervention.
 
 ## Semantic geometry without losing the question
 
@@ -143,22 +143,36 @@ be discarded for actor inference, with their provenance and preparation cost
 reported separately. Features and hyperparameters should be selected on train
 data before evaluating the development questions.
 
-The current operational decision is therefore narrow: test the implemented
-whole-image density first, compare it with an identical single-head control,
-and audit the font interface. Only then add a feature-based objective if
-correct writing remains hard to learn. Coarse-to-fine refinement is a further
-option, provided it retains small strokes rather than treating them as noise.
+The initial operational decision was to compare the whole-image density with
+a single-head control and audit the font interface first. That test is now
+complete. Conditional feature supervision and learning on actual generated
+trajectories are candidates for a new experiment because question-dependent
+writing still fails. Coarse-to-fine refinement is a further option, provided
+it retains small strokes rather than treating them as noise.
 
-## Implementation status
+## Implementation and falsification
 
-The eight-expert density now has a real feasibility receipt: 489,998,208
-parameters, one full optimizer update on physical GPU 0, finite gradients
-through the entire backbone and rendering head, and 9.270 GiB peak allocated
-memory. This is not a production training result or evidence of readable
-language. The update uses a different context/accumulation configuration from
-V61, so its memory and timing cannot establish a speedup. See the
-[preflight result](correlated_native_density_v62_preflight_result.md).
+The feasibility prototype led to a completed matched test with 489,998,208
+parameters for K=8 and 477,145,984 for K=1. Each makes 1,000 full-backbone
+updates on identical sampled examples, sequentially on GPU 0. Held-out pixel
+NLL improves from 0.1542 to 0.1248, but both actors have zero exact primary
+answers and zero correct question pairs. The eight-expert question effect
+does not resolve zero, and the registered intervention is rejected. This
+does not falsify mixtures generally; it shows that this density change alone
+does not solve conditional writing at the tested budget. The
+[complete result](correlated_native_density_v62_result.md) retains confidence
+intervals, raw images, resources, replay and failed gates.
+
+The closely related [MIXAR revision of 15 October](https://arxiv.org/html/2604.11575v2)
+also distinguishes supervised pixel fit from free-running generation. Its
+second stage uses rollout reinforcement learning with reconstruction and
+reference anchoring; its evaluation restricts what a vision judge can see
+because visible questions permit answer guessing. These are relevant design
+lessons, not evidence that copying its recipe onto our shifted interface
+will succeed. A new rollout or semantic-feature objective needs its own
+registered comparison and independent actor, rather than a changed gate for
+the completed experiment.
 
 The active goal remains an independently deployed, useful image-language
-model. None of these papers or local preflights establishes a singularity,
+model. None of these papers or local experiments establishes a singularity,
 frontier-model equivalence, or a way to omit semantic training data.

@@ -386,6 +386,42 @@ controls. Foreground overlap does not establish a correct character or answer.
 generated pixels. White padding aligns the display and never changes a
 nonblank output. All exact answers and both-correct pairs fail.}{fig:native-pixel}
 
+\section*{Correlated pixels improve fit without establishing answers}
+We next replace the single product-Bernoulli head with eight conditional
+experts, each defined over a complete $32\times64$ bitmap. A shared latent
+expert permits pixel covariance without a character inventory. Both arms
+fully adapt the same native foundation for 1,000 updates on identical sampled
+examples; the eight-head actor has 490.00M parameters versus 477.15M for the
+single-head control. The comparison matches training budget, not capacity.
+
+Held-out answer-pixel NLL is 0.1248 versus 0.1542 nats for eight and one
+experts, respectively (Fig.~\ref{fig:correlated-density}). Strict-raster F1
+increases from 0.234\% to 0.815\%, a 0.580-point difference [0.089, 1.094].
+Foreground F1 increases from 12.205\% to 15.827\%. Nevertheless, both arms
+produce zero exact answers among 256 questions and zero both-correct pairs
+among 393 shared-paragraph pairs. The eight-head normal-minus-blank raster
+gain is only 0.295 points [$-0.006$, 0.623], leaving question dependence
+unresolved. Foreground F1 also has no resolved question-dependent gain.
+The registered density-intervention gate and both bounded reading gates fail.
+
+Training takes 1,887.5 and 1,972.8 s, with 9.904 and 10.174 GiB peak allocated
+memory for one and eight experts. Both independent bundles reproduce native
+PNG tensors, image bytes and decoder events offline. The eight-head gate
+entropy averages 1.812 nats, with five experts selected across the primary
+continuations, including termination. These usage diagnostics describe the
+mixture; they do not demonstrate semantic specialization (Supplementary
+Note 21).
+
+\plate{Figure_7_correlated_density}{\textbf{A whole-image mixture improves pixel fit but fails the question-dependent writing test.}
+\textbf{a}, Conditional image law and inference boundary. One latent expert
+couples all pixels; experts are context-dependent neural functions.
+\textbf{b}, All-development answer/termination-pixel NLL after matched-budget
+adaptation. \textbf{c}, Strict-raster and aligned foreground F1 on normal and
+blank-question prompts. \textbf{d}, First two fixed primary references and
+raw outputs, with white display padding only. No nonblank pixel is repaired
+or removed. Parameter counts and output computation differ between arms;
+both use externally pretrained weights.}{fig:correlated-density}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -414,6 +450,14 @@ Broader books and offline teacher-generated exercises can supply later
 training data while leaving the final inference path independent. A larger
 corpus or longer training requires improvement on the intended generation
 task, beyond the conditional-likelihood gain established here.
+
+Recent visual generators study mixture assignment and the geometry of
+distribution matching\cite{mgflow,semot}. These results motivate more expressive
+writing distributions, but marginal image fidelity cannot certify an answer.
+A generator that swaps the correct images for two equally frequent questions
+preserves the answer-image distribution while answering both incorrectly.
+Conditional supervision and prompt interventions therefore remain necessary;
+natural-image gains do not establish a shortcut to language learning.
 
 \section*{Methods}
 \subsection*{Data, rendering and partitioning}

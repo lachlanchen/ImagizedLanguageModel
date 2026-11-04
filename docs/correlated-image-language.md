@@ -24,6 +24,14 @@ parameter count and output computation differ. The registered protocol is
 V61's poor free-writing result remains unchanged; a more expressive output
 density is a hypothesis, not a language-quality claim.
 
+The completed matched test lowers held-out pixel NLL from 0.1542 to 0.1248
+and increases strict-raster F1 from 0.234% to 0.815%. Both actors nevertheless
+produce zero exact answers and zero both-correct question pairs. K=8's
+question-dependent raster gain remains unresolved. The registered decision
+is rejection, with all raw outputs and failed gates retained in the
+[result](../references/correlated_native_density_v62_result.md). Standalone
+offline replay passes for both arms; this does not qualify their language.
+
 ## Reproduce the experiment
 
 Reuse the prepared CMRC image cache and the shared pinned foundation cache.

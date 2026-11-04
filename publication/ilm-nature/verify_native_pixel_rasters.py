@@ -45,7 +45,7 @@ def main():
         if matrix.a<0:actual=actual[:,::-1]
         if not np.array_equal(actual,reference):raise ValueError("PDF altered a raw image pixel")
     prs=Presentation(HERE/"ILM_Figures_editable.pptx")
-    pictures=[shape for shape in prs.slides[-1].shapes if shape.shape_type==13]
+    pictures=[shape for shape in prs.slides[14].shapes if shape.shape_type==13]
     if len(pictures)!=4:raise ValueError("four raw PPT rasters required")
     for shape,reference in zip(pictures,ppt_expected):
         actual=np.asarray(Image.open(io.BytesIO(shape.image.blob)).convert("L"))

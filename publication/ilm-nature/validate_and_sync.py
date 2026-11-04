@@ -38,6 +38,7 @@ def main():
     reading = {version: json.loads((HERE / f"evidence/{version}_development_report.json").read_text())
                for version in ("v58", "v59", "v60")}
     native = json.loads((HERE / "evidence/v61_development_report.json").read_text())
+    correlated = json.loads((HERE / "evidence/v62_development_report.json").read_text())
     render = json.loads((HERE / "evidence/figure_render_receipt.json").read_text())
     if render["pptx_sha256"] != digest(HERE / "ILM_Figures_editable.pptx"):
         raise ValueError("editable deck has changed since rendering")
@@ -46,8 +47,8 @@ def main():
     figure_info = subprocess.check_output(
         ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
     )
-    if not any(line.split() == ["Pages:", "15"] for line in figure_info.splitlines()):
-        raise ValueError("figure render must contain fifteen slides")
+    if not any(line.split() == ["Pages:", "17"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain seventeen slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
@@ -74,6 +75,10 @@ def main():
                 "0.1548",
                 "0.149",
                 "9.912",
+                f"{correlated['likelihood']['k1']:.4f}",
+                f"{correlated['likelihood']['k8']:.4f}",
+                f"{100*correlated['measurements']['k8']['raster_f1']:.3f}",
+                "10.174",
             )
         ):
             raise ValueError(f"{name} lacks current measured results")
@@ -122,7 +127,7 @@ def main():
             raise ValueError("missing native density chart")
         slides = ET.fromstring(deck.read("ppt/presentation.xml"))
         pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
-        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 15:
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 17:
             raise ValueError("missing current figure slides")
         rels = ET.fromstring(deck.read("ppt/charts/_rels/chart3.xml.rels"))
         relation_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
@@ -149,6 +154,10 @@ def main():
                 ):
                     raise ValueError("matched evidence workbook differs from audit")
         for chart_index, expected in [
+            (12, [[correlated["likelihood"][r]] for r in ("k1", "k8")]),
+            (13, [[100*correlated["measurements"][r][key]
+                   for key in ("raster_f1", "pixel_foreground_f1")]
+                  for r in ("k1", "k1_blank", "k8", "k8_blank")]),
             (10, [[native["likelihood"][r]] for r in ("base", "trained")]),
             (11, [[100*native["measurements"][r][key]
                    for key in ("raster_f1", "pixel_foreground_f1")]
@@ -217,7 +226,7 @@ def main():
                         raise ValueError(
                             f"chart {chart_index} workbook differs from audit"
                         )
-    target = DESTINATION / "ILM_NatureStyle_20261105_V61"
+    target = DESTINATION / "ILM_NatureStyle_20261105_V62"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):

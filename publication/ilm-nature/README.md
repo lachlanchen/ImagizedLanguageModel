@@ -8,6 +8,16 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 ## Current result
 
+A matched conditional bitmap mixture improves pixel fit while failing the
+language gates. K=8 lowers held-out NLL to 0.1248 versus 0.1542 for K=1 and
+raises strict-raster F1 from 0.234% to 0.815%. Both have zero exact primary
+answers and zero both-correct question pairs. The K=8 question effect remains
+unresolved, so the registered density intervention and both reading gates
+fail. Both standalone offline bundles reproduce their outputs exactly.
+Figure 7, Supplementary Note 21 and native editable slides 16–17 give the
+probability law, mechanism, full comparison and first two raw answers.
+The complete V61 package is preserved in `baselines/v61/`.
+
 Full native image-language adaptation now provides a free-writing test. All
 477.15M externally pretrained parameters receive answer-image gradients for
 1,000 updates on one RTX 4090 D, taking 1,501.1 seconds at 9.912 GiB allocated
@@ -98,7 +108,7 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified fifteen-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified seventeen-slide LibreOffice rendering |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
 | `evidence/` | Reports with local paths normalized for delivery and source hashes |
@@ -109,7 +119,7 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53–V61 artifacts are present:
+From the repository root, after the V53–V62 artifacts are present:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
@@ -120,6 +130,8 @@ python publication/ilm-nature/generate_v57_evidence.py
 PYTHONPATH=. python publication/ilm-nature/generate_reading_interventions.py
 PYTHONPATH=. python publication/ilm-nature/generate_native_pixel_evidence.py
 PYTHONPATH=. python publication/ilm-nature/generate_native_pixel_editable_figures.py
+PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_evidence.py
+PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_editable_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
@@ -127,21 +139,24 @@ bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
 
 Render the deck through LibreOffice, inspect it, and refresh the render receipt
 before running `validate_and_sync.py`. That script refuses a deck or PDF whose
-hash has changed since review, checks all eleven embedded evidence workbooks and
+hash has changed since review, checks all thirteen embedded evidence workbooks and
 verifies the delivered copies byte for byte.
 `PYTHONPATH=. python publication/ilm-nature/verify_native_pixel_rasters.py`
 also checks the six PDF and four PowerPoint raw images against their source
 bits and confirms that the prior fourteen slides remain unchanged.
+`PYTHONPATH=. python publication/ilm-nature/verify_correlated_density_rasters.py`
+checks six additional PDF and six PowerPoint rasters against the V62 source
+bits and confirms that all fifteen V61 slide XMLs remain unchanged.
 
 `generate_evidence.py` checks the locked checkpoint identity before producing
 values and figures. Source code, checkpoint hashes and frozen protocols are
 recorded in the run report. Experimental code resides in `scripts/` and
 `ilm/visual_lm/`. Data and model weights remain outside the publication package.
 
-The fourteen-slide editable deck retains the earlier plates and adds native
-block-reading, frozen-foundation and input-order charts, editable mechanism
-shapes and actual answer images. Current
-validated copies are delivered to Nutstore `Projects/ILM/` under the V60 version
+The seventeen-slide editable deck retains earlier plates and adds native
+block-reading, frozen-foundation, input-order and conditional-density charts,
+editable mechanism shapes and actual answer images. Current
+validated copies are delivered to Nutstore `Projects/ILM/` under the V62 version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 

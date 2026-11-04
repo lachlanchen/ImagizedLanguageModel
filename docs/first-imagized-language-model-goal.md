@@ -4,6 +4,20 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
+V62's matched experiment is now complete. Eight whole-image experts improve
+held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
+0.815%, but both arms still have zero exact primary answers and zero correct
+question pairs. The eight-expert question effect is unresolved, so the density
+intervention and both bounded reading gates fail. Exact offline deployment
+replay and full optimizer/RNG resume checks pass. These are working runtime
+components, not a useful general language model. See the
+[completed primary result](../references/correlated_native_density_v62_result.md).
+The separately registered vision reader passes calibration; its answer-only
+actor transcription is running after the primary pipeline, on GPU 0 only.
+
+The following checkpoints preserve the experimental sequence; statements
+about a then-running V62 phase are superseded by the completed result above.
+
 The target remains a useful, high-quality independent image-to-image language
 model trained on one physical RTX 4090. A larger GPU budget is not a substitute
 for demonstrating prompt-dependent language. Offline teachers and public
