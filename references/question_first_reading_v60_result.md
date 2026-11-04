@@ -39,6 +39,10 @@ Checkpoints, full reports, raw answer PNGs/tensors and standalone replay live
 under `artifacts/question_first_reading_v60_20261105/`.
 The continued context checkpoint SHA-256 is
 `84cd0721a01d8de7e8d1428d54f6feb95595a2cf7e16db1c2c2343d368ed66d6`.
+Its inference-only export is 78,770,527 bytes, SHA-256
+`8de0ed6d36498106feb60f329a632bd8e4d1ce9fb1bc0879cdf61ae65083938c`.
+Exported-model replay reproduces answer tensors, PNG bytes and boundary
+events exactly from the emitted native prompt PNG.
 The retained inference-only native PNG route uses
 `scripts/infer_visual_answer_blocks.py`; output is an image block, with no
 runtime tokenizer, Unicode IDs, OCR, glyph inventory or external model call.

@@ -8,6 +8,24 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 ## Current result
 
+Complete observed image blocks improve answer structure. The 19.60M model
+answers 25/256 questions exactly (9.766%), versus 3/256 blanked-question and
+21/256 matched additional glyph-answer training. Raster F1 is 27.033%; its
+4.893-point gain over the matched control has interval [0.469, 9.047], while
+the exact-answer difference remains unresolved. Only 4/393 paragraph pairs
+have both answers correct, failing the registered paired gate. Figure 5,
+Supplementary Note 17 and slide 12 show the law, scores and raw first answers.
+
+Two registered interventions also fail. Frozen MIXAR features give 6/256
+exact answers and 11.588% F1, versus 24/256 and 25.340% on frozen student
+features. This shifted-interface probe does not rank native encoder quality
+or count external pretraining as local work. Moving the question first gives
+21/256 exact answers and 23.765% F1, versus 27/256 and 26.908% for matched
+context-first continuation; the difference is unresolved. Supplementary
+Notes 18–19, Figures S5–S6 and slides 13–14 report both negative results.
+All local phases use only physical GPU 0. The general language goal remains
+unachieved. The V57 baseline is preserved in `baselines/v57/`.
+
 Grounded visual reading now provides a direct language-use test. The 19.01M
 copy/raster model answers 10/256 held-out natural questions exactly, versus
 1/256 with question pixels blanked and 0/256 for matched no-copy training.
@@ -70,7 +88,7 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified eleven-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified fourteen-slide LibreOffice rendering |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
 | `evidence/` | Reports with local paths normalized for delivery and source hashes |
@@ -81,7 +99,7 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53–V57 artifacts are present:
+From the repository root, after the V53–V60 artifacts are present:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
@@ -89,7 +107,8 @@ python publication/ilm-nature/generate_v54_evidence.py
 python publication/ilm-nature/generate_v55_evidence.py
 python publication/ilm-nature/generate_v56_evidence.py
 python publication/ilm-nature/generate_v57_evidence.py
-python publication/ilm-nature/generate_v57_editable_figures.py
+PYTHONPATH=. python publication/ilm-nature/generate_reading_interventions.py
+PYTHONPATH=. python publication/ilm-nature/generate_reading_editable_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
@@ -97,7 +116,7 @@ bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
 
 Render the deck through LibreOffice, inspect it, and refresh the render receipt
 before running `validate_and_sync.py`. That script refuses a deck or PDF whose
-hash has changed since review, checks all six embedded evidence workbooks and
+hash has changed since review, checks all nine embedded evidence workbooks and
 verifies the delivered copies byte for byte.
 
 `generate_evidence.py` checks the locked checkpoint identity before producing
@@ -105,9 +124,10 @@ values and figures. Source code, checkpoint hashes and frozen protocols are
 recorded in the run report. Experimental code resides in `scripts/` and
 `ilm/visual_lm/`. Data and model weights remain outside the publication package.
 
-The eleven-slide editable deck retains the earlier plates and adds a native
-grounded-reading chart with actual answer images. Current
-validated copies are delivered to Nutstore `Projects/ILM/` under the V57 version
+The fourteen-slide editable deck retains the earlier plates and adds native
+block-reading, frozen-foundation and input-order charts, editable mechanism
+shapes and actual answer images. Current
+validated copies are delivered to Nutstore `Projects/ILM/` under the V60 version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 

@@ -600,7 +600,7 @@ control takes 302.237 s, 1.056 GiB. Earlier foundation costs are excluded.
 
 Both final checkpoints precede development inspection. Primary IDs are the
 same 256 as V57, explicitly reused development, not a sealed final test.
-Exact answers are 25 block, 3 blank-question and 21 matched glyph control.
+Exact answers are 25/256 (9.766\%) block, 3 blank-question and 21 matched glyph control.
 F1 is 27.033\%, 9.169\% and 22.140\%. Article-grouped bootstrap uses 2,000
 draws, seed 20265919. Block-minus-control F1 is 4.893 points [0.469, 9.047];
 exact match is 1.563 [-1.509, 4.652]. Normal-minus-blank F1 is 17.864
@@ -675,8 +675,9 @@ Training/data seeds are 20266010/20266011. The new prompt-order helper is
 tested for exact preservation of source characters and correct blanking
 positions. An uninterrupted versus two-plus-two resumed GPU preflight
 matches all model/EMA tensors and RNG states exactly. Both production arms
-finish before their development scores open. Cost remains incremental to
-the same previously trained foundation.
+finish before their development scores open. Context-first and question-first
+training take 214.699 and 225.207 s, each at 0.966 GiB peak allocated CUDA
+memory. Cost remains incremental to the same previously trained foundation.
 
 The same 256 primary IDs and 393 paragraph pairs are explicitly reused.
 Question pixels are blanked at each arm's actual question positions, retaining
