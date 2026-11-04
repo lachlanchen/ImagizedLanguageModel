@@ -19,6 +19,11 @@ from ilm.visual_lm.hierarchical_raster_language_training import (
     hierarchical_raster_language_loss,
     raster_mixture_nll,
 )
+from ilm.visual_lm.hierarchical_raster_language_evaluation import (
+    evaluate_raster_generation,
+    evaluate_raster_likelihood,
+    evaluate_visible_feedback,
+)
 
 
 def _reader_config() -> CanonicalGlyphLanguageConfig:
@@ -59,8 +64,8 @@ def test_micro_patch_roundtrip_is_exact() -> None:
     assert patches.shape == (3, 16, 64)
     assert torch.equal(restored, cells)
     units = raster_to_generation_units(cells, config=_model().config)
-    assert units.shape == (3, 17, 64)
-    assert torch.equal(units[:, 1:], patches)
+    assert units.shape == (3, 20, 64)
+    assert torch.equal(units[:, _model().config.coarse_units :], patches)
 
 
 def test_reader_loads_v42_without_failed_generator() -> None:
@@ -85,8 +90,8 @@ def test_teacher_forcing_and_generation_are_image_native() -> None:
         language["anchor_fields"][:, -1],
         target,
     )
-    assert output.mixture_logits.shape == (2, 17, 2)
-    assert output.pixel_logits.shape == (2, 17, 2, 64)
+    assert output.mixture_logits.shape == (2, 20, 2)
+    assert output.pixel_logits.shape == (2, 20, 2, 64)
     generated, metadata = model.sample_next(context, stochastic=False)
     assert generated.shape == (2, 1, 32, 32)
     assert set(torch.unique(generated).tolist()) <= {0.0, 1.0}
@@ -128,3 +133,46 @@ def test_joint_loss_backpropagates_through_reader_and_writer() -> None:
     assert model.reader.input_projection.weight.grad is not None
     assert model.writer.output.weight.grad is not None
     assert loss.selected_positions == 4
+
+
+def test_evaluator_compares_likelihood_generation_and_feedback() -> None:
+    torch.manual_seed(13)
+    model = _model().eval()
+    context = (torch.rand(2, 8, 1, 32, 32) > 0.84).float()
+    continuation = (torch.rand(2, 4, 1, 32, 32) > 0.84).float()
+    bank = continuation[:, 0].clone()
+    loader = [
+        {
+            "context": context,
+            "continuation": continuation,
+            "target_index": torch.arange(2),
+        }
+    ]
+    likelihood = evaluate_raster_likelihood(
+        model,
+        loader,
+        device=torch.device("cpu"),
+        precision="fp32",
+        maximum_examples=2,
+    )
+    generation = evaluate_raster_generation(
+        model,
+        loader,
+        bank,
+        device=torch.device("cpu"),
+        precision="fp32",
+        maximum_examples=2,
+        samples=2,
+    )
+    feedback = evaluate_visible_feedback(
+        model,
+        loader,
+        bank,
+        device=torch.device("cpu"),
+        precision="fp32",
+        maximum_examples=2,
+        steps=2,
+    )
+    assert likelihood["examples"] == 2
+    assert generation["ordered"]["examples"] == 2
+    assert len(feedback["ordered"]["identity_top1_by_step"]) == 2

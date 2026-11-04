@@ -101,13 +101,15 @@ def raster_mixture_nll(
 def _teacher_pixel_f1(
     output: RasterMixtureOutput,
     target_patches: torch.Tensor,
+    *,
+    coarse_units: int,
 ) -> torch.Tensor:
     components = output.mixture_logits.argmax(dim=-1)
     rows = torch.arange(len(components), device=components.device)[:, None]
     positions = torch.arange(components.shape[1], device=components.device)[None]
     logits = output.pixel_logits[rows, positions, components]
-    predicted = logits[:, 1:].sigmoid() >= 0.5
-    target = target_patches[:, 1:] >= 0.5
+    predicted = logits[:, coarse_units:].sigmoid() >= 0.5
+    target = target_patches[:, coarse_units:] >= 0.5
     true_positive = (predicted & target).flatten(1).sum(dim=-1).float()
     total = predicted.flatten(1).sum(dim=-1) + target.flatten(1).sum(dim=-1)
     return (2.0 * true_positive / total.clamp_min(1)).mean()
@@ -144,21 +146,30 @@ def hierarchical_raster_language_loss(
         selected_targets,
         config=model.config,
     )
-    correct = model.writer(selected_hidden, selected_anchors, target_patches)
+    correct_plan = model.plan_units(selected_anchors)
+    correct = model.writer(
+        selected_hidden,
+        selected_anchors,
+        target_patches,
+        correct_plan,
+    )
     correct_patch_nll, _ = raster_mixture_nll(correct, target_patches)
-    correct_coarse_nll = correct_patch_nll[:, 0]
-    correct_detail_nll = correct_patch_nll[:, 1:].mean(dim=-1)
+    coarse_units = model.config.coarse_units
+    correct_coarse_nll = correct_patch_nll[:, :coarse_units].mean(dim=-1)
+    correct_detail_nll = correct_patch_nll[:, coarse_units:].mean(dim=-1)
     correct_glyph_nll = 0.5 * (correct_coarse_nll + correct_detail_nll)
 
     shuffled_indices = _deranged_indices(len(selected_hidden), selected_hidden.device)
+    shuffled_anchor = selected_anchors[shuffled_indices]
     shuffled = model.writer(
         selected_hidden[shuffled_indices],
-        selected_anchors[shuffled_indices],
+        shuffled_anchor,
         target_patches,
+        model.plan_units(shuffled_anchor),
     )
     shuffled_patch_nll, _ = raster_mixture_nll(shuffled, target_patches)
-    shuffled_coarse_nll = shuffled_patch_nll[:, 0]
-    shuffled_detail_nll = shuffled_patch_nll[:, 1:].mean(dim=-1)
+    shuffled_coarse_nll = shuffled_patch_nll[:, :coarse_units].mean(dim=-1)
+    shuffled_detail_nll = shuffled_patch_nll[:, coarse_units:].mean(dim=-1)
     shuffled_glyph_nll = 0.5 * (
         shuffled_coarse_nll + shuffled_detail_nll
     )
@@ -199,7 +210,11 @@ def hierarchical_raster_language_loss(
         visual_contrastive=contrastive,
         anchor=anchor,
         in_batch_top1=top1,
-        teacher_pixel_f1=_teacher_pixel_f1(correct, target_patches),
+        teacher_pixel_f1=_teacher_pixel_f1(
+            correct,
+            target_patches,
+            coarse_units=coarse_units,
+        ),
         mixture_entropy=entropy,
         mixture_perplexity=entropy.exp(),
         selected_positions=len(selected_hidden),

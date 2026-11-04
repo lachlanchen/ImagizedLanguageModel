@@ -35,11 +35,14 @@ V50 uses two causal scales.
    from the measured V42 reader, whose ordered next-image top-1 was `0.19971`,
    compared with `0.18359` under shuffled history and `0.12256` for the bigram
    control. V42's failed whole-cell sampler is removed.
-2. A local writer first draws an 8-by-8 coarse image of the whole next cell,
-   then divides the final cell into sixteen raw 8-by-8 detail patches and draws
-   them in row-major order. Every local position is conditioned on the global
-   visual state, the reader's continuous visual anchor, and previously drawn
-   raster units from the same cell.
+2. The reader's continuous visual anchor is decoded to a 32-by-32 probability
+   field and patch-aligned with the writer, so high-frequency geometry is not
+   compressed through one global vector bottleneck.
+3. A local writer first draws a 16-by-16 coarse image of the whole next cell as
+   four 8-by-8 units, then divides the final cell into sixteen raw 8-by-8 detail
+   patches and draws them in row-major order. Every local position is
+   conditioned on the global visual state, its aligned spatial-plan patch, and
+   previously drawn raster units from the same cell.
 
 This is the smallest useful synthesis of two established observations:
 
@@ -50,9 +53,11 @@ This is the smallest useful synthesis of two established observations:
   text can be generated autoregressively in pixel space.
 
 V50 differs from a flat patch model by retaining one global step per writing
-cell while confining one coarse choice and sixteen detail steps to a small local
-network. The coarse image forces identity to be chosen visually before local
-stroke refinement. It
+cell while confining four coarse choices and sixteen detail steps to a small
+local network. The coarse image forces identity to be chosen visually before
+local stroke refinement. The aligned probability field preserves the reader's
+measured identity signal instead of asking a global MLP to rediscover spatial
+correspondence. It
 differs from V43 and the rejected joint-flow calibration by factorizing the
 next-image distribution autoregressively instead of asking one denoiser to
 choose and draw a whole glyph at once.
@@ -60,15 +65,16 @@ choose and draw a whole glyph at once.
 ## Raster Probability Model
 
 Let $h_t$ be the global visual state after visible cells $X_{\leq t}$, and let
-$a_t$ be its continuous image anchor. Let $c_t\in\{0,1\}^{64}$ be a fixed
-max-pooled 8-by-8 view of the whole next cell, and split the full-resolution
-cell $Y_t$ into raster patches $y_{t,1:16}\in\{0,1\}^{64}$. The local model
-factorizes
+$a_t$ be its continuous image anchor. Its fixed inverse visual transform gives
+an aligned probability field $q_t\in[0,1]^{32\times32}$. Let
+$c_{t,1:4}\in\{0,1\}^{64}$ be four patches of a fixed max-pooled 16-by-16 view
+of the whole next cell, and split the full-resolution cell $Y_t$ into raster
+patches $y_{t,1:16}\in\{0,1\}^{64}$. The local model factorizes
 
 \[
 p(Y_t\mid X_{\leq t})=
-p(c_t\mid h_t,a_t)
-\prod_{j=1}^{16}p(y_{t,j}\mid h_t,a_t,c_t,y_{t,<j}).
+\prod_{i=1}^{4}p(c_{t,i}\mid h_t,a_t,q_t,c_{t,<i})
+\prod_{j=1}^{16}p(y_{t,j}\mid h_t,a_t,q_t,c_t,y_{t,<j}).
 \]
 
 Each patch distribution is a learned mixture of eight Bernoulli raster fields:
@@ -116,7 +122,8 @@ The last two terms preserve the ordering signal already measured in V42.
 | Global reader | V42, failed generator removed |
 | Local width / layers / heads | 256 / 4 / 8 |
 | Raster patch | 8 by 8 binary pixels |
-| Generated raster units per cell | 1 coarse + 16 detail |
+| Generated raster units per cell | 4 coarse + 16 detail |
+| Aligned reader plan | 32 by 32 continuous probability field |
 | Conditional mixtures | 8 |
 | Batch | 8 streams |
 | Selected cells per stream | 8 |
