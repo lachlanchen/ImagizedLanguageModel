@@ -65,6 +65,17 @@ with the unadapted model and blank-question controls. A later general
 instruction corpus and held-out final test remain necessary. Offline teachers
 and public pretrained components are allowed; inference must be independent.
 
+V61 now implements that route: all 477,145,984 native pixel-language parameters
+receive answer-image likelihood gradients. The full-backbone preflight uses
+9.91 GiB allocated memory and passes exact interrupted/resumed weights, EMA,
+optimizer and RNG, plus a zero-error future-pixel causality check. The actual
+1,000-update production run is underway on physical GPU 0 only. Its output is
+free pixels with image-based termination, without a source-span selector.
+External MIXAR pretraining is attributed separately. Quality remains pending
+the registered base/blank-question/paired audit and native deployment replay;
+do not infer language competence from decreasing training loss. See the
+[native training and inference guide](native-pixel-language.md).
+
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining
 an architectural inverse-image path. Autonomous output still fails: first
