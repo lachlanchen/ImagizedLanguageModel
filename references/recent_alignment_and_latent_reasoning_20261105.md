@@ -68,3 +68,21 @@ Rollout training remains a candidate after a trustworthy conditional reward is
 established; the reference must stay frozen within the comparison and cannot
 replace independent question controls. A long latent trace, lower pixel loss
 or a clearer numeral is not evidence of correct reasoning.
+
+## Current implementation choice
+
+The repository's earlier V37–38 experiments already tested pooled semantic
+targets and left a large gap between training and held-out answer planning.
+Before adding another teacher representation, V63 tests a simpler signal:
+the free-image generator's likelihood must assign two accepted answer images
+to their own questions about the same paragraph. The paired contrast cancels
+question-only and answer-only energy offsets. It is applied alongside positive
+image likelihood, with a matched no-contrast arm. This is a training signal,
+not a proof that the output will be meaningful.
+
+The [new protocol](question_assignment_v63_protocol.md) retains actual free
+generation, blank-question controls, shared-paragraph pairs and independent
+offline deployment as required evidence. The real preflight passes and
+production starts on GPU 0; no new language pass is established. Semantic
+feature supervision above remains a candidate, rather than a claimed result
+or an external-model dependency silently added to the actor.

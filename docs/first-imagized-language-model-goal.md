@@ -4,6 +4,25 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
+V63 now runs a matched question-assignment experiment on GPU 0. It uses 3,793
+training-only pairs from 939 paragraphs, with distinct accepted answer images.
+The same full image generator scores correct and swapped question/answer
+streams; the assignment term trains conditional binding directly while
+positive image likelihood preserves writing. Both 490M-parameter arms start
+from the same learned V62 EMA and run 2,000 matched updates. They retain the
+independent image-only actor and unchanged autonomous-generation gates.
+
+The full-model preflight passes exact optimizer/RNG resume, assignment-only
+gradients, causal masking, physical data assembly and strict-FP32 cached
+inference. The longest pair fits in 9.197 GiB. Actual production has started
+in the persistent `ilm-v63-training` coordinator, control then aligned,
+followed by standalone replay and the locked audit. No V63 development result
+or language pass exists yet. The
+[training guide](question-assignment-language.md) and
+[registered protocol](../references/question_assignment_v63_protocol.md)
+specify the exact comparison. General useful language, books and historical
+writing remain the full objective, beyond this necessary conditional test.
+
 V62's matched experiment is now complete. Eight whole-image experts improve
 held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
 0.815%, but both arms still have zero exact primary answers and zero correct
