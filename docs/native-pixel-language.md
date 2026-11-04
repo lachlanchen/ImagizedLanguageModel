@@ -4,8 +4,10 @@ V61 fine-tunes every parameter of the released 477M MIXAR pixel-language model
 on prompt/answer images. The output is a newly generated binary image stream,
 with no source-span selector, glyph vocabulary, Unicode IDs, OCR or external
 model call. This is supervised adaptation of an externally pretrained model;
-its original pretraining is not single-4090 work. The completed reading
-qualification must be consulted before treating it as a useful assistant.
+its original pretraining is not single-4090 work. The completed run fails its
+reading qualification: zero exact answers among 256 questions despite lower
+pixel NLL. It is a research implementation, with damaged free-written glyphs.
+See the [complete result](../references/native_pixel_instruction_v61_result.md).
 
 The frozen [experiment protocol](../references/native_pixel_instruction_v61_protocol.md)
 defines 1,000 optimizer updates, eight accumulated image examples per update,

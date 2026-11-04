@@ -74,10 +74,21 @@ excluding loading and final serialization. Its output is
 free pixels with image-based termination, without a source-span selector.
 External MIXAR pretraining is attributed separately. A self-contained learned
 bundle reproduces native PNG output tensors, PNG bytes and events exactly
-with empty source/model caches and networking disabled. Quality remains pending
-the registered base/blank-question/paired audit;
-do not infer language competence from decreasing training loss. See the
+with empty source/model caches and networking disabled. The completed audit
+fails: zero exact answers, 0.149% raster F1 and zero correct pairs. Pixel NLL
+improves while output remains fragmented. The blind transcript diagnostic is
+also poorly calibrated on reference images. Do not infer language competence
+from decreasing training loss. See the
 [native training and inference guide](native-pixel-language.md).
+
+Recent physics/mathematics are reviewed in
+[`physics_math_routes_20261105.md`](../references/physics_math_routes_20261105.md).
+The next tested component is a conditional whole-image mixture above the
+contextual transformer. Its 490M-parameter full actor passes one real optimizer
+update on GPU 0 at 9.27 GiB, with finite gradients throughout. This is feasibility
+only. Audit the native font interface and register matched single-head versus
+correlated-head training before any language claim. A singularity, Qwen parity
+and high-quality general language remain unestablished.
 
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining
