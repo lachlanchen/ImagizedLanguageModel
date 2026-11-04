@@ -35,15 +35,28 @@ primary answers are 10/256, versus 1/256 with question pixels blanked and
 gain is resolved, but absolute F1 is 15.718% and only 1/393 question pairs has
 both answers correct. Four of seven gates pass; reading remains unqualified.
 
-A saved-output diagnostic finds 43 correct first images but only 10 complete
-answers, with 14 complete reference prefixes followed by extra output. V58
-therefore tests learned complete image blocks/end boundaries against matched
-extra glyph-answer training. It retains the free-writing path and is still
-limited to grounded paragraph extraction; no V58 qualification is claimed
-before its audit. Public MIXAR-477M inference was also checked with its
-released pretrained weights; six fixed prompts yielded incomplete English
-and fragmented CJK, not a qualified replacement foundation. Offline teachers
-remain allowed, with provenance. The final deployed model must be independent.
+V58's 19.60M-parameter block model predicts complete observed image sequences
+and their end boundaries. It reaches 25/256 exact answers and 27.033% F1,
+versus 21/256 and 22.140% for matched additional glyph-answer training. The
+F1 gain is resolved; the exact-match difference is not. Only 4/393 question
+pairs have both answers correct, failing the paired gate. Motor copying and
+inference-only native-PNG replay remain exact. Source blocks provide a working
+answer structure but do not establish free language or arbitrary-script meaning.
+
+V59's matched frozen-feature probe also fails: a fresh head on released
+MIXAR-477M features gets 6/256 exact answers and 11.588% F1, versus 24/256 and
+25.340% on frozen student features. This is a shifted Noto CJK interface and
+different prior task training, not a general rejection of pretrained visual
+models. External pretraining is not counted as local 4090 work. Do not adopt
+a larger frozen encoder merely because it is larger.
+
+V60 is the registered next intervention: read the question before the passage
+so every causal passage state can depend on it. Compare with matched continued
+context-first training, using the same checkpoint, data and compute. Both arms
+must finish before audit, and a useful bounded result still does not qualify
+general image-language generation. Offline teachers and public pretrained
+components remain allowed with provenance; the final deployed model must be
+independent.
 
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining

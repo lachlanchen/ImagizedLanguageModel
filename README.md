@@ -53,11 +53,11 @@ The rollout gate fails: the model is still an **unqualified research checkpoint*
 See the [measured decoder result](references/raster_beam_v56_result.md) and
 [native-image inference guide](docs/exact-raster-language.md).
 
-The next bounded task uses natural Chinese reading questions: 3,211 training
-and 1,321 development questions with article overlap removed. A visual copy
-distribution is planned to select answer images from the visible passage while
-retaining free image generation. This dataset preparation is not a trained
-question-answering result; see the [data audit](references/visual_reading_qa_data_result.md).
+The natural Chinese reading subset has 3,211 training and 1,321 development
+questions with article overlap removed; see the
+[data audit](references/visual_reading_qa_data_result.md). The completed copy
+and observed-block models retain a free image writer, whose useful general
+language generation remains unqualified.
 
 ### Joint visual likelihood learning
 
