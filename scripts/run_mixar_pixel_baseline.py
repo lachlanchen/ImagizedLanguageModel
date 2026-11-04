@@ -39,6 +39,10 @@ def main():
     )
     parser.add_argument("--device", default="cuda:0")
     parser.add_argument("--system-bindings", default="/usr/lib/python3/dist-packages")
+    parser.add_argument(
+        "--foreign-bindings",
+        default="artifacts/external/native_bindings/usr/lib/python3/dist-packages/gi",
+    )
     args = parser.parse_args()
     if sys.version_info < (3, 11):
         raise RuntimeError("author custom code requires Python 3.11 or later")
@@ -59,6 +63,10 @@ def main():
         import cairo
         import gi
         import manimpango
+
+        if Path(args.foreign_bindings).is_dir():
+            gi.__path__.append(str(Path(args.foreign_bindings).resolve()))
+        gi.require_foreign("cairo")
     except ImportError as exc:
         raise RuntimeError(
             "native Cairo/GI/Pango dependencies must be prepared explicitly; no automatic installer is permitted"
@@ -73,6 +81,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     device = torch.device(args.device)
     if device.type == "cuda":
+        torch.cuda.set_device(device)
         torch.cuda.reset_peak_memory_stats(device)
     torch.set_float32_matmul_precision("high")
     model = (
