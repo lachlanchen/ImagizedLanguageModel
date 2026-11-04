@@ -2,8 +2,12 @@
 
 Date: 2026-08-15
 
-Status: mechanism research completed before a V49 protocol, metric selection,
-implementation, optimization, development measurement, or frozen audit
+Status: superseded on 2026-11-04 by
+[`visual_flow_language_solution.md`](visual_flow_language_solution.md). The
+binary writer remains a possible fallback, but freezing the reader would repeat
+the measured V43 separation failure. The current direction first trains the
+existing causal reader and spatial image flow together, without a deterministic
+ink-plan shortcut.
 
 ## Decision
 
