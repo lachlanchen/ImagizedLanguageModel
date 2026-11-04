@@ -176,3 +176,9 @@ the completed experiment.
 The active goal remains an independently deployed, useful image-language
 model. None of these papers or local experiments establishes a singularity,
 frontier-model equivalence, or a way to omit semantic training data.
+
+A [follow-up on recent alignment and latent reasoning](recent_alignment_and_latent_reasoning_20261105.md)
+reviews PixelDense, LARC and Visual Prompt Engineering against this deployment
+boundary. It separates their transferable training ideas from retained text
+encoders/tokens and multi-GPU recipes, and outlines a conditional-feature
+hypothesis for a new registered experiment. No new language pass is claimed.
