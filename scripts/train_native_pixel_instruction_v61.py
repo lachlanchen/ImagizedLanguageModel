@@ -81,6 +81,7 @@ def main():
     if not torch.cuda.is_available() or os.environ.get("CUDA_VISIBLE_DEVICES") != "0":
         raise ValueError("explicit CUDA_VISIBLE_DEVICES=0 required")
     device = torch.device("cuda:0")
+    torch.cuda.set_device(device)
     random.seed(20266110); np.random.seed(20266110); torch.manual_seed(20266110)
     torch.cuda.manual_seed(20266110); torch.cuda.reset_peak_memory_stats(device)
     provenance = {name: sha256(name) for name in SOURCES}
