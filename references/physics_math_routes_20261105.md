@@ -25,8 +25,10 @@ the output distribution and checking the font interface before adding scale.
 
 | Work | Established result or author-reported evidence | Relevance to ILM |
 | --- | --- | --- |
-| **MGFlow**, 28 Sep 2026, preprint | Mixture representations, mass-constrained assignment and paired distributional updates address mode collapse in one-step visual generation. Its reported timing benchmark uses eight H200s. | Preserve distinct writing modes. Investigate a small conditional rendering head; the full published training recipe is not a one-4090 result. |
-| **W-Flow**, 12 May 2026, preprint and official code | A neural generator learns updates derived from a Sinkhorn/Wasserstein gradient flow, enabling one-evaluation image sampling. Large released recipes use multiple nodes and pretrained feature encoders. | A possible fast glyph renderer after learning an appropriate conditional distribution. One-step inference does not mean cheap foundation training. |
+| **MGFlow**, first posted 28 Sep, latest revision 2 Oct 2026, preprint | Mixture representations, mass-constrained assignment and paired distributional updates address mode collapse in one-step visual generation. Its reported timing benchmark uses eight H200s. | Preserve distinct writing modes. Investigate a small conditional rendering head; the full published training recipe is not a one-4090 result. |
+| **W-Flow**, first posted 12 May, latest revision 26 May 2026, preprint and official code | A neural generator learns updates derived from a Sinkhorn/Wasserstein gradient flow, enabling one-evaluation image sampling. Large released recipes use multiple nodes and pretrained feature encoders. | A possible fast glyph renderer after learning an appropriate conditional distribution. One-step inference does not mean cheap foundation training. |
+| **Generate in Reconstruction Space, Match in Semantic Space (SemOT)**, revised 2 Nov 2026; author record reports NeurIPS acceptance | Frozen semantic features make finite-batch transport matching more stable in the reported ImageNet experiments; optimizing the evaluation encoder can instead damage sample quality. | Investigate writing-sensitive features for training, while measuring raw strokes and question-specific correctness independently. Natural-image semantic features are not established language features. |
+| **Scalable generative sampling and multilevel estimation for lattice field theories near criticality**, published 26 Oct 2026; April preprint | A renormalization-inspired hierarchy combines conditional Gaussian mixtures and flows, preserving coarse fields during refinement in scalar lattice-field experiments. | A possible hierarchy for writing structure and fine strokes. The measured acceleration concerns physical-field sampling, not language learning or GPU foundation training. |
 | **Designing Optimal Transport Flows**, 2 Jun 2026, v1 preprint | Designs a low-frequency prior to simplify transport toward natural images, reducing trajectory curvature in reported experiments. | Test coherent coarse writing before fine strokes. Low-frequency agreement alone cannot distinguish similar Chinese characters. |
 | **The Expressivity Boundary of Probabilistic Circuits**, 13 May 2026, preprint | Identifies probability-space output and fixed-routing context bottlenecks; its separation-rank results describe worst-case expressivity, with controlled-topology experiments. | Keep flexible contextual reasoning in the transformer. Use a tractable circuit only for local image rendering, and test its limitations. |
 | **Digitally optimized initializations for fast thermodynamic computing**, 2 Nov 2026, peer-reviewed | Mpemba-inspired initial covariances suppress slow relaxation modes in quadratic Langevin systems; matrix inversion and determinant protocols are analyzed and simulated. | A possible warm-start principle for an iterative renderer. Its theorem is not a theorem about neural-language training, and physical hardware gains do not transfer directly to a GPU. |
@@ -34,8 +36,10 @@ the output distribution and checking the font interface before adding scale.
 
 Primary sources:
 
-- [MGFlow, versioned paper](https://arxiv.org/html/2609.35763v1), especially Sections 3 and Appendix I.
-- [W-Flow, versioned paper](https://arxiv.org/html/2605.11755v1) and [official implementation](https://github.com/hanjq17/W-Flow).
+- [MGFlow, latest version reviewed](https://arxiv.org/html/2609.35763v4), especially Sections 3 and Appendix I.
+- [W-Flow, latest version reviewed](https://arxiv.org/html/2605.11755v2) and [official implementation](https://github.com/hanjq17/W-Flow).
+- [SemOT, 2 November revision](https://arxiv.org/html/2606.00514v2) and [author-maintained implementation](https://github.com/Genentech/semantic-transport-generation).
+- [Multilevel lattice-field sampling, published article](https://journals.aps.org/prd/abstract/10.1103/jjss-lwzv) and [April preprint](https://arxiv.org/abs/2604.10209).
 - [Designing Optimal Transport Flows, versioned paper](https://arxiv.org/html/2606.04092v1).
 - [Probabilistic-circuit expressivity, versioned paper](https://arxiv.org/html/2605.12940v1).
 - [Mpemba initialization, published article](https://www.nature.com/articles/s44335-026-00103-2) and [March preprint](https://arxiv.org/html/2603.24183v1). The publication is new; the preprint predates it.
@@ -110,3 +114,51 @@ heads also differ from mixtures over fixed vocabulary distributions.
 The current priority is a coherent conditional distribution over writing
 images, coupled to useful language context. It has a direct implementation,
 fits the measured memory budget in principle, and permits a falsifiable test.
+
+## Semantic geometry without losing the question
+
+The 2 November SemOT revision makes the choice of training geometry especially
+relevant. An image feature used for writing must retain distinctions such as an
+extra stroke, character order and negation, while tolerating harmless changes
+in font or position. This is an ILM requirement, not a demonstrated property of
+the paper's natural-image features. Its feature-training recipes also use large
+global batches and pretrained teachers; their full cost cannot be assigned to
+our single-GPU adaptation budget.
+
+There is a simple failure case for importing an unconditional transport loss.
+Let two equally likely questions have different correct answer images A and B.
+A generator that ignores the question and randomly emits A or B has exactly the
+correct marginal answer distribution. Any distance between the two marginal
+distributions is zero, but its expected question-specific accuracy is only
+one half. Swapping the answers deterministically gives the same marginal and
+zero accuracy. Thus marginal visual distribution matching cannot establish
+language understanding.
+
+A conditional transport experiment would need matching restricted to the same
+prompt, with multiple legitimate answers or writing variants supplied during
+training. A cheaper paired feature loss is also possible when only one answer
+is available. Either would supplement a physical-image likelihood; neither
+replaces question controls. Frozen teacher features could guide training and
+be discarded for actor inference, with their provenance and preparation cost
+reported separately. Features and hyperparameters should be selected on train
+data before evaluating the development questions.
+
+The current operational decision is therefore narrow: test the implemented
+whole-image density first, compare it with an identical single-head control,
+and audit the font interface. Only then add a feature-based objective if
+correct writing remains hard to learn. Coarse-to-fine refinement is a further
+option, provided it retains small strokes rather than treating them as noise.
+
+## Implementation status
+
+The eight-expert density now has a real feasibility receipt: 489,998,208
+parameters, one full optimizer update on physical GPU 0, finite gradients
+through the entire backbone and rendering head, and 9.270 GiB peak allocated
+memory. This is not a production training result or evidence of readable
+language. The update uses a different context/accumulation configuration from
+V61, so its memory and timing cannot establish a speedup. See the
+[preflight result](correlated_native_density_v62_preflight_result.md).
+
+The active goal remains an independently deployed, useful image-language
+model. None of these papers or local preflights establishes a singularity,
+frontier-model equivalence, or a way to omit semantic training data.
