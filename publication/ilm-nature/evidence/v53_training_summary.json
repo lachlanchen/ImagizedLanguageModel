@@ -1,0 +1,69 @@
+{
+  "architecture": "causal-visual-block-diffusion-v53",
+  "boundary": {
+    "architecture": "causal-visual-block-diffusion-v53",
+    "combined_parameters": 22177219,
+    "config": {
+      "anchor_dimension": 1024,
+      "base_channels": 64,
+      "cell_size": 32,
+      "classifier_free_scale": 2.0,
+      "condition_dropout": 0.1,
+      "context_cells": 60,
+      "context_dimension": 384,
+      "cosine_offset": 0.008,
+      "diffusion_steps": 100,
+      "future_cells": 4,
+      "sampling_steps": 32,
+      "time_dimension": 128
+    },
+    "denoiser_parameters": 5899970,
+    "external_model_at_runtime": false,
+    "glyph_vocabulary_or_candidate_bank_in_model": false,
+    "ocr_in_model": false,
+    "parameter_names_with_forbidden_fragments": [],
+    "primary_input": "ordered floating writing rasters",
+    "primary_output": "four visible writing rasters",
+    "reader_parameters": 16277249,
+    "sample_parameters": [
+      "context",
+      "generator",
+      "conditioned"
+    ],
+    "text_tokenizer": false,
+    "unicode_or_character_ids_in_model": false,
+    "vector_quantizer_or_codebook": false
+  },
+  "elapsed_seconds": 361.59161753579974,
+  "peak_allocated_vram_gib": 0.5429930686950684,
+  "provenance": {
+    "protocol": {
+      "references/causal_visual_block_diffusion_v53_protocol.md": "519437023bcb139992a27566fcc22b07ccf6f26f424c14019eb09871c9fc9106",
+      "references/v53_pretraining_corrections_and_article_plan.md": "cb0bcec403de6850bea3a301a4a129224bfede7e82fe95bed80203fbc6256de6"
+    },
+    "source": {
+      "ilm/visual_lm/causal_visual_block_diffusion_v53.py": "749fe0c7f1bf9254c0cd52b702ef5fd5e86e0020d27211240dad704fb1e59639",
+      "ilm/visual_lm/causal_visual_block_diffusion_v53_training.py": "db23a7fe292d5d2d2ff5d43dab43dc5dfc6cbaa39087d7c87e0140e9d9a7fa19",
+      "scripts/train_causal_visual_block_diffusion_v53.py": "5aaa864563ccd9b3c7b4faaeb462e4a3aa132f726d2973b404ce1686b0235b76"
+    }
+  },
+  "smoke_only": false,
+  "training_metrics": {
+    "dropped_condition_fraction": 0.0,
+    "elapsed_seconds": 361.59161753579974,
+    "foreground_clean_mse": 0.05902878940105438,
+    "gradient_norm": 0.5905120372772217,
+    "loss": 0.2949886918067932,
+    "order_margin_loss": 0.7030870914459229,
+    "ordered_high_noise_field_cosine": 0.9517143964767456,
+    "ordered_minus_shuffled_field_cosine": 0.0002181529998779297,
+    "representation_loss": 0.10381729155778885,
+    "shuffled_high_noise_field_cosine": 0.9514962434768677,
+    "soft_ink_dice_loss": 0.2085874378681183,
+    "synchronous_noise": true,
+    "update": 8000,
+    "velocity_mse": 0.07989013195037842,
+    "visual_field_loss": 0.021834364160895348
+  },
+  "update": 8000
+}

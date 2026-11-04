@@ -1,0 +1,180 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{nature_reading}
+\usepackage{longtable}
+\input{results_values.tex}
+\begin{document}
+{\sffamily\bfseries\Large Supplementary Information\par}
+\medskip\noindent\textbf{Learning conditional language in continuous image space}\par
+\medskip\noindent Imagized Language Model Project
+
+\section*{Supplementary Note 1: experimental question and scope}
+The target is an independent visual language model whose runtime consumes
+writing images and generates writing images. Encoded text and local language
+models may prepare data offline. They cannot supply the answer during model
+inference. The present experiment isolates canonical Chinese continuation as
+one prerequisite. It does not cover the complete instruction-following or
+historical-script objective.
+
+The repository retains the earlier 96-page research record in its legacy
+image-native publication folder. That record documents prior
+experiments without treating every rejected architecture as a contribution to
+the compact article. This supplement specifies the latest directly conditional
+block test and the distinction between ranking and generation.
+
+\section*{Supplementary Note 2: conditional uncertainty}
+Let $H$ denote a visible history and $X$ the next writing image. Under squared
+pixel loss, the optimum $f^*(H)=\mathbb{E}[X\mid H]$ can mix valid glyphs.
+Under independent Bernoulli loss, each marginal equals
+$\Pr(X_p=1\mid H)$, which likewise does not specify joint stroke identity.
+An image distribution is consequently required for stochastic writing.
+
+Selection and sampling have different expected identity accuracy. If a
+model exactly recovers the true next-form distribution $p(x\mid H)$,
+deterministic top-1 identity has conditional accuracy
+$\max_x p(x\mid H)$. Independently sampling one future and comparing it to
+one observed continuation has expected accuracy $\sum_x p(x\mid H)^2$.
+Neither quantity is a general measure of semantic correctness. Thus the
+reader's 19.97\% top-1 cannot be used as the expected accuracy of a correct
+stochastic writer. Paired context controls, sampled probabilities, direct
+readability and meaningful longer continuations are needed together.
+
+\section*{Supplementary Note 3: raster transform and gradients}
+For signed ink image $S=2X-1$ and a $32\times32$ orthonormal basis $B$, the
+visual coordinate is
+\begin{equation}
+\phi(S)=\frac{\operatorname{vec}(BSB^{\mathsf T})}
+{\|\operatorname{vec}(BSB^{\mathsf T})\|_2}.
+\end{equation}
+For binary observed images this matches the reader's field. For soft predicted
+images it must be computed directly on $S$. Applying the reader's input
+threshold inside this training objective would cut all pixel gradients.
+The pretraining inspection found and corrected that defect. A regression test
+confirms a finite, nonzero gradient from the field cosine alone to the predicted
+pixels and equality with the reader transform on binary inputs.
+
+The transform is a full spatial coordinate, not a learned visual vocabulary.
+Its background contribution also limits its interpretation as a perceptual
+identity metric. A high cosine can accompany an incorrect glyph.
+
+\section*{Supplementary Note 4: directly conditional architecture}
+The frozen reader has 16,277,249 parameters. Its final 384-dimensional hidden
+state and 1,024-dimensional anchor form a continuous condition. A 5,899,970-
+parameter U-Net receives a complete $32\times128$ future strip. Three spatial
+scales have 64, 128 and 256 channels. Each residual scale receives the projected
+condition and a sinusoidal time embedding. Additional input channels carry the
+first-cell predicted plan, a horizontal coordinate and the cell noise levels.
+
+At the bottleneck, four pooled cell vectors enter four-head attention and a
+512-wide MLP. A zero-initialized scalar gates the spatial mixer residual.
+The output channel predicts velocity over four visible cells. The total
+runtime contains 22,177,219 parameters. The prior checkpoint only initializes
+matching U-Net weights. An epsilon predictor is not thereby a qualified
+velocity predictor, so all copied layers are fine-tuned under the new loss.
+
+\section*{Supplementary Note 5: data and optimization}
+The corpus manifest SHA-256 is
+\begin{quote}\small\ttfamily
+76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03.
+\end{quote}
+Source identifiers define deterministic splits before rendering. Original and
+OpenCC-simplified views inherit the same split. Data generation samples
+65-cell segments with a saved dataset seed. Only the first 64 cells are used
+in this test. A training example has 60 context and four target cells. A
+symbolic character identifier is never an input or target to a model method.
+
+On odd updates, the four future positions receive one level from each of
+0--24, 25--59, 60--89 and 90--99 under a random permutation. On even updates,
+one uniformly sampled level from 0--99 applies to all four future cells.
+The latter pretraining amendment supplies synchronous noise patterns like
+those encountered during sampling. It was frozen before optimization.
+
+Ten percent of rows drop the condition. All-dropped batches have zero order
+loss. The foreground loss weights pixels by $1+2X$. The complete objective is
+\begin{align}
+L={}&L_v+0.10L_{fg}+0.10L_{dice}+0.10L_{field}\nonumber\\
+&+0.10L_{repr}+0.25L_{order},\\
+L_{order}={}&\mathbb{E}_{t\geq60}\operatorname{softplus}
+\left[0.02-(c_{ordered}-c_{shuffled})\right].
+\end{align}
+Only rows with an available condition enter the order loss. The reader remains
+frozen. Noise, drop masks and data offsets derive from saved RNG states.
+The run uses seed 20265310, dataset seed 20265311, AdamW with
+$\beta=(0.9,0.95)$, weight decay 0.01, gradient norm clip 1, EMA decay 0.999,
+batch eight and 8,000 updates. The full run consumes 64,000 context segments
+and 256,000 supervised future cells. These are sampled segments rather than
+64,000 independent source records.
+
+\section*{Supplementary Note 6: locked audit and uncertainty}
+The audit seed is 20265320. It uses 512 fixed development windows for
+denoising, 256 for direct generation and 64 for two-block visible feedback.
+The first 60 cells form the context and the remaining four context-window
+cells form the first target block. The four subsequent continuation cells
+form the second block. Denoising probes use levels 75 and 95, with identical
+noise under all conditions. Prefix shuffling preserves the final four visible
+cells. The zero condition removes all reader state and plan channels.
+
+The 1,024-image bank is rendered after every denoising and generation call.
+Every primary output is the first sample. Nearest-bank identity is evaluator
+metadata, not an image replacement or glyph selected by the model. Per-position
+coverage records how many true targets appear in the bank. All out-of-bank
+targets receive zero exact-identity credit. The rendered output remains the
+actual model image even when a bank identity is assigned.
+
+Bootstrap uncertainty resamples source identifiers, retaining all correlated
+windows from a record together, with 2,000 resamples. Paired differences keep
+the same starting noise. The intervals do not include training-seed variation.
+There is one primary trained seed and no sealed generalization result.
+
+\input{results_table.tex}
+
+\section*{Supplementary Note 7: numerical and compute receipts}
+Training takes \TrainSeconds\ seconds and peaks at \TrainMemory\ GiB of
+allocated CUDA memory on GPU 0, an RTX 4090 D. These figures describe the
+bounded experiment. They exclude prior foundation training, data preparation,
+idle GPU memory, operating-system memory and evaluation. They are not an
+estimate of the cost of a broadly capable language model. The independent
+reader and prior training costs remain in their original run reports.
+
+The continuous versus interrupted four-step smoke check compares every
+denoiser and EMA tensor and the saved training generator. All match exactly.
+Production checkpoints save optimizer groups, CPU/CUDA/Python/NumPy RNGs and
+the deterministic data offset. Foundation, data, source and protocol hashes
+are checked before scoring. No other project's GPU service is part of this run.
+
+\section*{Supplementary Note 8: limitations and next evidence}
+The post-result motor diagnostic uses the first 64 fixed prefixes and paired
+noise. Replacing the first plan with the exact target raster gives F1 0.4586.
+Replacing both plan and visual anchor gives F1 0.4594 and identity 5/64,
+compared with F1 0.3775 and identity 1/64 for the predicted condition. An exact
+inverse-transform control has F1 1.0. Only 60.94\% of these targets occur in
+the Han identity bank, so its 60.94\% identity is the available ceiling for
+perfect copies. The target-supplied test was designed after the locked audit
+and does not change its decision. It isolates a remaining motor limitation.
+
+Readable copying of unseen forms, calibrated conditional sequence likelihood,
+held-out short answers, font transfer, independent seed replication and
+capability-matched text baselines remain outstanding. No selected gallery can
+substitute for these tests. Future teacher-generated exercises must retain
+source provenance and separate prompt/answer splits. A deployed teacher or
+an image-bank lookup would change the model contract.
+
+The older guided model's terminal-signal observation is a mathematical limit,
+not a proven failure explanation. Correct conditional diffusion also starts
+from a context-independent noise law. Direct interventions on trained
+conditional scores and matched initialization are needed to distinguish weak
+condition learning from a defective sampling trajectory.
+
+\section*{Reproduction}
+From the repository root, use the following entry points. All use only GPU 0.
+\begin{quote}\small\ttfamily
+CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
+scripts/train\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
+\end{quote}
+\begin{quote}\small\ttfamily
+CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
+scripts/eval\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
+\end{quote}
+Completed output directories are protected against accidental replacement.
+\input{references_main.tex}
+\end{document}
