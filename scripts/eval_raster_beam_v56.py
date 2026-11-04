@@ -37,6 +37,7 @@ from scripts.train_visual_state_actuator import file_sha256, seed_everything
 CHECKPOINT = "artifacts/joint_exact_raster_v55_20261105/joint/checkpoint_final.pt"
 CHECKPOINT_SHA = "ae4598c609648ba92a4eaa8680fa0842966a1f11b0757ed4a14b83038c048394"
 PROTOCOL = "references/raster_beam_v56_protocol.md"
+PRECISION_AMENDMENT = "references/raster_beam_v56_precision_amendment.md"
 DEFAULT_OUT = "artifacts/raster_beam_v56_20261105"
 SEED = 20265620
 
@@ -103,7 +104,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     device = _resolve_device(args.device)
     seed_everything(SEED)
-    torch.set_float32_matmul_precision("high")
+    torch.set_float32_matmul_precision("highest")
     torch.set_num_threads(4)
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
     for path, sha in checkpoint["provenance"].items():
@@ -308,11 +309,17 @@ def main():
         "checkpoint_sha256": CHECKPOINT_SHA,
         "provenance": {
             p: file_sha256(p)
-            for p in [__file__, "ilm/visual_lm/raster_beam.py", PROTOCOL]
+            for p in [
+                __file__,
+                "ilm/visual_lm/raster_beam.py",
+                PROTOCOL,
+                PRECISION_AMENDMENT,
+            ]
         },
         "manifest_sha256": checkpoint["manifest"]["sha256"],
         "audit_seed": SEED,
         "beam_width": 8,
+        "float32_matmul_precision": "highest",
         "windows": count,
         "gates": gates,
         "measurements": measured,

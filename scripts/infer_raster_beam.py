@@ -55,7 +55,7 @@ def main():
         raise ValueError("production V55-compatible checkpoint required")
     device = _resolve_device(args.device)
     model = model_from_checkpoint(checkpoint, device)
-    torch.set_float32_matmul_precision("high")
+    torch.set_float32_matmul_precision("highest")
     if args.prompt_image:
         images = load_aligned_image(args.prompt_image)
     else:
@@ -104,6 +104,7 @@ def main():
         "architecture": ARCHITECTURE,
         "decoder": "raw_pixel_beam",
         "beam_width": args.beam_width,
+        "float32_matmul_precision": "highest",
         "checkpoint_sha256": file_sha256(args.checkpoint),
         "decoder_sha256": file_sha256("ilm/visual_lm/raster_beam.py"),
         "mode": "supplied_image_copy" if args.copy else "autonomous_image_continuation",
