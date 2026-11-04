@@ -9,6 +9,11 @@ from ilm.visual_lm.causal_visual_block_diffusion_v53 import (
     ConditionalStripDenoiser,
     causal_visual_block_boundary_receipt,
 )
+from ilm.visual_lm.causal_visual_block_diffusion_v53_training import (
+    stratified_future_timesteps,
+    visual_block_diffusion_loss,
+)
+from ilm.visual_lm.canonical_glyph_language_evaluation import _shuffle_prefix
 from ilm.visual_lm.hierarchical_raster_language import CausalRasterReader
 from ilm.visual_lm.visual_posterior_language_v51 import (
     VisualGlyphScorePrior,
@@ -86,3 +91,46 @@ def test_v53_boundary_has_no_symbolic_runtime_path() -> None:
     assert receipt["text_tokenizer"] is False
     assert receipt["unicode_or_character_ids_in_model"] is False
     assert receipt["glyph_vocabulary_or_candidate_bank_in_model"] is False
+
+
+def test_v53_stratified_times_cover_all_noise_ranges() -> None:
+    generator = torch.Generator().manual_seed(53)
+    times = stratified_future_timesteps(
+        8,
+        device=torch.device("cpu"),
+        generator=generator,
+    )
+    assert times.shape == (8, 4)
+    for row in times:
+        assert int((row <= 24).sum()) == 1
+        assert int(((row >= 25) & (row <= 59)).sum()) == 1
+        assert int(((row >= 60) & (row <= 89)).sum()) == 1
+        assert int((row >= 90).sum()) == 1
+
+
+def test_v53_full_loss_is_finite_and_updates_the_conditional_writer() -> None:
+    torch.manual_seed(530)
+    model = _model()
+    context = torch.randint(0, 2, (2, 60, 1, 32, 32)).float()
+    shuffled = _shuffle_prefix(context, first_index=0)
+    targets = torch.randint(0, 2, (2, 4, 1, 32, 32)).float()
+    generator = torch.Generator().manual_seed(531)
+    times = stratified_future_timesteps(
+        2,
+        device=torch.device("cpu"),
+        generator=generator,
+    )
+    loss = visual_block_diffusion_loss(
+        model,
+        context=context,
+        shuffled_context=shuffled,
+        target_cells=targets,
+        timesteps=times,
+        noise=torch.randn(targets.shape, generator=generator),
+        drop_condition=torch.tensor([False, True]),
+    )
+    loss.loss.backward()
+    assert torch.isfinite(loss.loss)
+    assert model.denoiser.condition[-1].weight.grad is not None
+    assert torch.isfinite(model.denoiser.condition[-1].weight.grad).all()
+    assert all(parameter.grad is None for parameter in model.reader.parameters())
