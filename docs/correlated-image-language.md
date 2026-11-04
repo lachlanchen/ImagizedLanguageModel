@@ -49,6 +49,16 @@ an interrupted training arm, keep its arguments and add
 optimizer and every RNG state. Smoke checkpoints require an explicit loader
 exception and do not qualify as trained language results.
 
+The persistent coordinator `scripts/run_correlated_native_v62.py` performs
+those production stages sequentially, resumes an existing optimizer/RNG
+checkpoint and verifies a complete 1,000-update report before moving to the
+next arm. A zero process exit without that report is treated as interruption.
+It writes actual driver/child PIDs and stage to `pipeline_status.json`, with
+per-stage logs. On this workstation it runs in the single owned tmux session
+`ilm-v62-training`; reuse and inspect that session rather than starting another
+job. Its lock prevents a second coordinator for the same run. SIGINT/SIGTERM
+are forwarded to the active training child so it can save its state.
+
 The preflight checks four real updates against interrupted/resumed training
 for each arm, full-backbone gradients, future-pixel causality and cached
 inference. TF32 can produce shape-dependent logit differences between long

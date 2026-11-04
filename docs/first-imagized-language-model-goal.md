@@ -103,6 +103,22 @@ fixes the quality decisions in advance. The current manuscript adds V61's
 completed free-writing failure, actual raw images and mathematical objective;
 unfinished V62 training remains outside its Results.
 
+The single-head V62 arm now completes all 1,000 updates after exact checkpoint
+resume, taking 1,887.5 seconds of recorded training at 9.904 GiB. The K=8 arm
+is training sequentially in the persistent `ilm-v62-training` job. Both final
+arms must finish before their locked image audit; no V62 quality pass exists.
+
+A training-only CPU audit finds that the released native font configuration
+clips full ink and overflows many complete Chinese prompts. Blindly switching
+to that interface is therefore unsupported. The frozen cell helper also
+rejects ordinary spaces. A separate complete-line host adapter now preserves
+English/Chinese writing and prepares 12,976 lossless training images across
+CMRC and all eight Dolly categories. It rejects unsupported geometry explicitly,
+without cropping source text. These are candidate data for a later experiment;
+V62's frozen images remain unchanged. See
+[complete writing data](complete-writing-data.md) and the
+[rendering audit](../references/native_render_interface_audit_result.md).
+
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining
 an architectural inverse-image path. Autonomous output still fails: first
