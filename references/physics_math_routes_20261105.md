@@ -182,3 +182,10 @@ reviews PixelDense, LARC and Visual Prompt Engineering against this deployment
 boundary. It separates their transferable training ideas from retained text
 encoders/tokens and multi-GPU recipes, and outlines a conditional-feature
 hypothesis for a new registered experiment. No new language pass is claimed.
+
+A [further primary-source review](learning_response_and_visual_sufficiency_20261105.md)
+adds the 2 November physical-data susceptibility study, recent feature-learning
+theory, and statistical sufficiency. It states the visual-information and
+conditional-interaction requirements explicitly and links a completed CPU
+audit of coarse visual cues in the training pairs. That diagnostic changes
+neither the running V63 experiment nor its language gates.

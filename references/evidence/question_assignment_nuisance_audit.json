@@ -1,0 +1,113 @@
+{
+  "training_only": true,
+  "development_examples": 0,
+  "sealed_test_examples": 0,
+  "model_calls": 0,
+  "gpu_allocations": 0,
+  "actor_quality_claim": false,
+  "posterior_susceptibility_estimated": false,
+  "active_V63_modified": false,
+  "pairs": 3793,
+  "questions": 3016,
+  "contexts": 939,
+  "articles": 939,
+  "feature_names": [
+    "question_width_cells",
+    "question_ink_fraction",
+    "ink_mean_x",
+    "ink_mean_y",
+    "ink_variance_x",
+    "ink_variance_y"
+  ],
+  "target": "answer physical width in 32-pixel cell units",
+  "regularization": 1.0,
+  "folds": 5,
+  "fold_assignment": "SHA256(article_title) modulo 5",
+  "fold_question_counts": {
+    "4": 575,
+    "0": 589,
+    "1": 662,
+    "3": 598,
+    "2": 592
+  },
+  "all_articles_isolated": true,
+  "tie_tolerance": 1e-10,
+  "strata": {
+    "equal_answer_width": 373,
+    "equal_suffix_width": 659,
+    "equal_question_width": 307,
+    "both_equal_answer_and_suffix_width": 373
+  },
+  "probes": {
+    "width_only": {
+      "counts": {
+        "wrong": 1500,
+        "correct": 1641,
+        "tie": 652
+      },
+      "pair_weighted_tie_half_accuracy": 0.518586870551015,
+      "context_weighted_tie_half_accuracy": 0.514980475683351
+    },
+    "width_and_ink_moments": {
+      "counts": {
+        "correct": 1830,
+        "wrong": 1590,
+        "tie": 373
+      },
+      "pair_weighted_tie_half_accuracy": 0.5316372264698128,
+      "context_weighted_tie_half_accuracy": 0.5330670926517572
+    },
+    "constant": {
+      "counts": {
+        "tie": 3793
+      },
+      "pair_weighted_tie_half_accuracy": 0.5,
+      "context_weighted_tie_half_accuracy": 0.5
+    }
+  },
+  "pair_weighted_width_only_assignment_ceiling": 0.9508304771948326,
+  "source_sha256": {
+    "data/visual_qa/cmrc2018_short/train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "artifacts/question_assignment_v63_20261105/data/report.json": "55d7e641fe4a51547d7819359cf5a233dbe894d73a7b7ee5feae21a51a17aec6",
+    "artifacts/question_assignment_v63_20261105/data/pairs.jsonl": "861f7c487223d65b5649cb4c33fb1e3de24a7be4663eea5676de4a07b00f2dbb",
+    "artifacts/native_pixel_instruction_v61_20261105/data/report.json": "816d16ae19494ee2090503f39115d5b6eb46a44382fb9d7663112d49e95db6cd"
+  },
+  "output_sha256": {
+    "questions.jsonl": "4e2f0290be7a859dc8a394627f304c8fd59f83314cd08332fbc312e1250897b2",
+    "pair_scores.jsonl": "671a1eb0703881c804b8ce2189ef0402b375f3022a59bdc7a261bf7e4044d1c3"
+  },
+  "elapsed_seconds": 2.1987055484205484,
+  "limitations": "Training-only cross-validation of fixed coarse cues. Not an estimate of model behavior, semantic understanding, Bayesian susceptibility, causal data value or generalization on a language benchmark.",
+  "full_report": "artifacts/question_assignment_nuisance_20261105/report.json",
+  "full_report_sha256": "442e39c78dd90f6a5ee789478d0f0d9aa564df2aee738666d1b0080b65c2ca51",
+  "source_code_sha256": {
+    "scripts/audit_question_assignment_nuisance.py": "ef5fe7822e1822db04245d126320fc601e14d7ff4e3efeceba812a5b821a128d",
+    "references/question_assignment_nuisance_audit_plan.md": "15572fc548a99f5e78eb5ebb5a5b6d78e56ca54b9a1b3c286564d95fe0bcb4ed"
+  },
+  "hash_verified_native_training_images": 3016,
+  "native_crop_verification": {
+    "cpu_only": true,
+    "model_calls": 0,
+    "native_question_crop_exact": [
+      "TRAIN_1000_QUERY_0",
+      "TRAIN_1000_QUERY_1",
+      "TRAIN_1133_QUERY_0",
+      "TRAIN_1575_QUERY_3",
+      "TRAIN_2401_QUERY_2",
+      "TRAIN_3039_QUERY_2",
+      "TRAIN_3712_QUERY_4",
+      "TRAIN_9_QUERY_2"
+    ],
+    "source_report_sha256": "442e39c78dd90f6a5ee789478d0f0d9aa564df2aee738666d1b0080b65c2ca51",
+    "all_pairs_retained": true
+  },
+  "tests": {
+    "path": "tests/test_question_assignment_nuisance.py",
+    "passed": 2,
+    "sha256": "4ab5aa4c84cda025906fd2fe371fb610cdcbc12dea4b5a416761032bdf02da1c",
+    "scope": [
+      "held-fold target isolation",
+      "exhaustive two-way assignment orientation"
+    ]
+  }
+}

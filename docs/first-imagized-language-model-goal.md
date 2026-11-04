@@ -23,6 +23,16 @@ or language pass exists yet. The
 specify the exact comparison. General useful language, books and historical
 writing remain the full objective, beyond this necessary conditional test.
 
+The latest [learning-theory review](../references/learning_response_and_visual_sufficiency_20261105.md)
+connects recent physical-data susceptibilities and statistical sufficiency to
+the goal: retain answer-relevant information while compressing writing images,
+and measure actual question-dependent generation. A completed CPU-only audit
+of all 3,793 training pairs finds descriptive context-weighted assignment
+accuracy of 53.31% from question width and coarse ink statistics alone.
+This motivates keeping autonomous writing authoritative; it does not measure
+the running actor or alter its frozen comparison. No singularity or general
+language breakthrough is established.
+
 V62's matched experiment is now complete. Eight whole-image experts improve
 held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
 0.815%, but both arms still have zero exact primary answers and zero correct
