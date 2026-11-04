@@ -20,7 +20,24 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 V42--V46 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current evidence: exact copying works; language generation remains unresolved
+## Current evidence: joint visual likelihood improves; generation remains unqualified
+
+![Measured joint-learning result: improved exact target likelihood, low autonomous target identity and unselected raw output images](publication/ilm-nature/figures/Figure_S2_joint_learning.png)
+
+The 18.71M-parameter image-input/image-output model now learns its reader and
+writer together under exact raster likelihood. On one RTX 4090 D, 8,000
+additional updates improve held-out NLL to **7.026 nats/glyph**, versus 7.579
+for the matched frozen-reader control (paired gain 0.553, 95% interval
+[0.450, 0.665]). Joint training takes 342.4 seconds, excluding initialization
+training, and retains exact copying of all 256 supplied target images.
+
+Autonomous first-sample identity is still only 9/256, versus 8/256 with earlier
+history shuffled. The model passes six of eight registered gates and remains
+an **unqualified research checkpoint**. See the [measured result](references/joint_exact_raster_v55_result.md),
+[complete training/inference guide](docs/exact-raster-language.md) and
+[current article and editable figures](publication/ilm-nature/README.md).
+
+### Earlier exact-density result
 
 ![Measured exact-raster result: exact supplied-image copying, unresolved earlier-history likelihood effect and failed autonomous continuation](publication/ilm-nature/figures/Figure_3_exact_raster.png)
 

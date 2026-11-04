@@ -17,6 +17,7 @@ knowledge or that image input automatically reduces training cost.
 Exact pixel factorization also has established precedents in PixelRNN and
 conditional PixelCNN\cite{pixelrnn,pixelcnn}. Masked autoregressive networks
 provide normalized probabilities without a character dictionary\cite{made}.
+Multilingual generation from pixels has also been studied\cite{mixar}.
 
 We investigate the conditional generation problem directly. The model
 receives raster history, predicts a distribution of future writing, emits
@@ -197,6 +198,33 @@ The 9,932-image evaluator bank is created after generation, covers all targets
 and never selects or replaces an output. Its identity rates are not directly
 comparable to earlier 1,024-image-bank results.}{fig:density}
 
+\subsection*{Joint learning improves the conditional image distribution}
+A matched experiment tests whether the same raster law benefits from learning
+its reader under image NLL. Both arms start from the exact-density EMA and
+receive identical new training draws. One continues to freeze the reader;
+the other differentiates likelihood through its hidden state and predicted
+field. Reader dropout remains disabled in both, so gradient flow is the
+controlled change. The unused contrastive temperature stays fixed.
+
+After 8,000 updates per arm, joint target NLL is \JointNll\ versus
+\ControlNll\ for the frozen control. The paired gain is \JointNllGain\ nat,
+with interval [\JointNllLow, \JointNllHigh]. Joint ordered history improves
+NLL over earlier-shuffled history by 0.185 nat, with interval [0.128, 0.244].
+The frozen continuation also gains an earlier-history effect (0.119 nat,
+interval [0.052, 0.186]); extra training alone therefore explains part of the
+progress. The matched comparison isolates the additional likelihood benefit
+of updating the reader.
+
+Joint first-sample identity is 9/256, versus 6/256 for the matched control and
+8/256 after shuffling. The joint-minus-control identity difference is 1.172
+percentage points, with interval [-0.397, 2.893]. Both arms retain exact greedy
+copying of all 256 supplied images. Joint sampling has F1 \JointSampleFone\
+and isolated-ink fraction 0.00744. The joint arm passes six of eight gates,
+but fails sampled quality and ordered-generation criteria; its decision remains
+\texttt{\JointDecision} (Supplementary Note 13 and Fig.~S2).
+This is evidence of improved conditional learning, not a qualified language
+generator.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -216,15 +244,15 @@ GPU, rather than a general efficiency advantage over language models.
 Exact copying is now preserved by an aligned inverse-image path. The remaining
 test is whether context selects a coherent written future. Low teacher-forced
 image NLL can reflect dependencies among strokes already revealed within the
-target, while generated output still loses global identity. The next
-diagnostics must separate that image-prior effect from earlier-history
-information before selecting another training mechanism. Conditional
+target, while generated output still loses global identity. Joint training
+improves proper likelihood beyond matched extra density training; the raw
+generated continuations still fail the intended language test. Conditional
 continuation and short answers require counterfactual prompts and the same
 context effect during autonomous sampling and visible feedback.
 Broader books and offline teacher-generated exercises can supply later
 training data while leaving the final inference path independent. A larger
-corpus or longer training is warranted only when these measurements show
-that the conditional mechanism learns the intended task.
+corpus or longer training requires improvement on the intended generation
+task, beyond the conditional-likelihood gain established here.
 
 \section*{Methods}
 \subsection*{Data, rendering and partitioning}
@@ -263,6 +291,16 @@ BF16, norm clip one and EMA 0.999. All 8,000 updates complete in
 This timing excludes the frozen reader's earlier training. Exact resumed
 weights and EMA match uninterrupted smoke training. Strict-causality gradient
 tests and enumeration of a four-bit subproblem verify the probability masks.
+
+The matched continuation reinitializes optimizer and EMA from identical
+exact-density weights. Both arms make 8,000 additional updates, using the same
+data and training generator. The joint arm uses reader learning rate
+$2\times10^{-5}$ and density rate $2\times10^{-4}$, with the same schedule and
+motor mixture. It trains 18,711,840 participating parameters; the frozen arm
+trains 2,434,592. Joint and control times are \JointTime\ and \ControlTime\ s,
+with peaks \JointMemory\ and \ControlMemory\ GiB. Frozen-reader weights remain
+identical to initialization, while joint reader weights change. Both final
+training RNG states match. Development opens only after both arms finish.
 
 \subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale

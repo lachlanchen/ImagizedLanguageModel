@@ -8,6 +8,23 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 ## Current result
 
+Joint reader–density learning improves held-out exact image NLL to 7.026
+nats/glyph versus 7.579 for a matched frozen-reader continuation. The paired
+gain is 0.553 nat, 95% source-record interval [0.450, 0.665]. Both arms start
+from identical V54 EMA weights and make 8,000 additional updates. Joint training
+takes 342.4 seconds at 0.648 GiB allocated CUDA memory on one RTX 4090 D,
+excluding earlier foundation training. Greedy supplied-image copying remains
+exact on 256/256 targets.
+
+Autonomous language remains unqualified: joint first-sample identity is 9/256
+ordered versus 8/256 earlier-shuffled and 6/256 for the matched frozen control.
+The joint model passes six of eight unchanged gates, failing sampled quality
+and ordered generation. Supplementary Note 13, Figure S2 and the final two
+editable slides report both arms and raw images. The readable V54 baseline is
+preserved in `baselines/v54/`.
+
+## Exact-density baseline
+
 An exact autoregressive raster density now preserves all 256 supplied images
 under greedy copying, with stochastic-copy F1 0.99949. The independent runtime
 has 18.71M parameters, with 2.43M new density parameters trained for 8,000
@@ -35,7 +52,7 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified six-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified eight-slide LibreOffice rendering |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
 | `evidence/` | Reports with local paths normalized for delivery and source hashes |
@@ -46,12 +63,13 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53 and V54 artifacts are present:
+From the repository root, after the V53–V55 artifacts are present:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
 python publication/ilm-nature/generate_v54_evidence.py
-python publication/ilm-nature/generate_v54_editable_figures.py
+python publication/ilm-nature/generate_v55_evidence.py
+python publication/ilm-nature/generate_v55_editable_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
@@ -67,9 +85,9 @@ values and figures. Source code, checkpoint hashes and frozen protocols are
 recorded in the run report. Experimental code resides in `scripts/` and
 `ilm/visual_lm/`. Data and model weights remain outside the publication package.
 
-The six-slide editable deck retains the three V53 plates and adds the V54
-mechanism, native evidence chart/workbook and actual raster panel. Current
-validated copies are delivered to Nutstore `Projects/ILM/` under the V54 version
+The eight-slide editable deck retains the V53/V54 plates and adds a native
+matched-learning chart/workbook and actual raster panel. Current
+validated copies are delivered to Nutstore `Projects/ILM/` under the V55 version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 
@@ -78,6 +96,10 @@ The independent checkpoint export and native-image CLI are described in
 The output retains the scope of the tested task. Chinese instruction following,
 historical writing, etymology, multiple fonts, page-scale generation and
 capability-matched text-model efficiency remain open requirements.
+
+[Training and native-image inference guide](../../docs/exact-raster-language.md)
+and [matched V55 result](../../references/joint_exact_raster_v55_result.md)
+give complete code entry points, checkpoint hashes and qualification limits.
 
 Supplementary Note 12 and Figure S1 report a separately planned, post-result
 context diagnostic. Swapping the entire condition between source records

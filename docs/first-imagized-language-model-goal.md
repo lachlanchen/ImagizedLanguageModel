@@ -10,7 +10,23 @@ for demonstrating prompt-dependent language. Offline teachers and public
 pretrained components are allowed with provenance; the deployed model must
 read and generate writing independently.
 
-The V54 runtime has 18.71M parameters and a self-contained inference export.
+The current V55 runtime has 18.71M parameters and a self-contained image-only
+inference export. Joint reader/density likelihood training improves held-out
+NLL to 7.026 nats/glyph versus 7.579 for matched extra frozen-reader training
+(paired advantage 0.553, 95% interval [0.450, 0.665]). Copying remains exact on
+256/256 supplied development images. The joint run takes 342.4 seconds at
+0.648 GiB allocated memory on one RTX 4090 D, excluding initialization training.
+Autonomous first-sample identity is 9/256 versus 8/256 with earlier history
+shuffled. It passes 6/8 gates and remains unqualified as a language generator.
+
+Retain the measured joint-learning and copying components. The next evidence
+must distinguish producing a valid written form from choosing a particular
+observed continuation, and assess whether disclosed public pixel-language
+pretraining is a better foundation. Useful language, prompt following and
+coherent raw output remain the targets; a lower teacher-forced loss alone is
+insufficient. The final deployed model must remain independent.
+
+The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining
 an architectural inverse-image path. Autonomous output still fails: first
 sample identity is 4/256 versus 3/256 with earlier history shuffled. Ordered

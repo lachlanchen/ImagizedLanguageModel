@@ -10,7 +10,8 @@ by the result. Preserve previous numerical values, copying-versus-language
 distinctions, rejected decisions and the exploratory status of Note 12.
 
 Add Supplementary Note 13, a measured Figure S2, evidence summaries and a
-result note giving both full run budgets, parameter counts, all eight gates,+paired candidate-minus-control intervals, source hashes, checkpoint hashes and
+result note giving both full run budgets, parameter counts, all eight gates,
+paired candidate-minus-control intervals, source hashes, checkpoint hashes and
 raw unselected output images. Add editable matched-evidence slides to the
 current PPTX with workbook values tied to the audit. State the transfer from
 V54 and exclude earlier foundation training from the reported incremental cost.

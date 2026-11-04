@@ -4,6 +4,7 @@
 \usepackage{longtable}
 \input{results_values.tex}
 \input{density_values.tex}
+\input{joint_values.tex}
 \begin{document}
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -201,7 +202,8 @@ presentations over 8,000 updates; these are not independent records.
 Training completes in \DensitySeconds\ s with \DensityMemory\ GiB peak allocated
 CUDA memory. The runtime has 18,711,841 parameters, of which 2,434,592 are
 new density parameters. The 52.16-second audit peaks at 0.231 GiB allocated
-CUDA memory. Neither timing includes earlier reader training. Source hashes,+the corpus hash, optimizer, all RNGs and the dataset offset are saved. An
+CUDA memory. Neither timing includes earlier reader training. Source hashes,
+the corpus hash, optimizer, all RNGs and the dataset offset are saved. An
 interrupted-versus-continuous smoke run matches every model and EMA tensor and
 the training RNG exactly. The production checkpoint SHA-256 is
 \begin{quote}\small\ttfamily
@@ -296,6 +298,71 @@ uncertainty is reported in Supplementary Note 12.}
 \label{fig:context-attribution}
 \end{figure}
 
+\section*{Supplementary Note 13: matched joint likelihood learning}
+The joint experiment (V55) retains the exact V54 network and probability law.
+Both arms initialize from its EMA, with new optimizers and EMA copies. The
+frozen control trains only the 2,434,592 density parameters. The joint candidate
+also trains reader parameters through the exact image likelihood, for
+18,711,840 participating parameters. The unused scalar contrastive temperature
+is fixed. Runtime size stays 18,711,841 in both. Reader dropout remains disabled
+in both arms, independently of gradient flow. The deployed student continues
+to receive and generate image tensors, without a vocabulary or external model.
+
+Each arm makes 8,000 updates with eight streams and 16 selected causal
+positions per stream, using 25\% supplied-image motor exercises. Training seed
+20265510 and dataset seed 20265511 give matched new draws from the same public
+corpus. Both final training-generator states match exactly. The frozen reader
+is bit-identical to initialization; the joint reader changes. Reader likelihood
+gradients are finite and nonzero only in the joint arm. A four-step interrupted
+smoke reproduces every model and EMA tensor, plus CPU/CUDA/training RNG states.
+Reader gradients cannot pass through answer-supplied motor rows because those
+replace the natural state with a zero hidden vector and a fixed observed field.
+
+The density learning rate is $2\times10^{-4}$ in both arms; joint reader rate
+is $2\times10^{-5}$. Other optimizer, warmup, cosine, clipping, BF16 and EMA
+settings match the earlier density experiment. The control takes
+\ControlTime\ s at \ControlMemory\ GiB allocated CUDA memory; the joint arm
+takes \JointTime\ s at \JointMemory\ GiB. Both run sequentially on physical
+GPU 0. These costs exclude V42/V54 pretraining and data preparation.
+
+Both checkpoints finish before either development result opens. The same
+512 NLL windows, 256 generation/motor prefixes and 64 four-step feedback
+streams use audit seed 20265420. Joint ordered NLL is \JointNll\ nats per
+image versus \ControlNll\ for the matched frozen control. The paired gain is
+\JointNllGain\ nat, interval [\JointNllLow, \JointNllHigh]. The joint-minus-control
+sample identity gain is 1.172 percentage points, interval [-0.397, 2.893].
+All intervals use 2,000 source-record bootstrap draws. Joint earlier-history
+advantage is 0.185 nat [0.128, 0.244], versus 0.119 [0.052, 0.186] for the
+continued frozen arm. Extra training accounts for part of the likelihood
+progress; the matched gain isolates the reader update's additional benefit.
+
+\input{joint_table.tex}
+
+Both arms preserve exact greedy copying on 256/256 targets. Stochastic-copy
+F1 is 0.99993 frozen and 0.99994 joint; exact-image match is 96.875\% and
+97.266\%, respectively. Joint four-step feedback identity is 3.125\% ordered
+and 1.563\% shuffled; control values are 2.344\% and 2.734\%. The joint arm
+passes six of eight unchanged gates, failing sampled quality and the ordered
+generation advantage. The control passes five, additionally failing feedback.
+The matched decision remains \texttt{\JointDecision}. Neither the primary
+development reuse nor the paired intervals establish independent seed or
+sealed-partition generalization.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S2_joint_learning.pdf}
+\caption{\textbf{Matched end-to-end learning of exact raster probability.}
+\textbf{a}, Joint reader--density training improves target NLL over the matched
+frozen-reader continuation; annotation gives the paired source-record interval.
+\textbf{b}, First-sample identity on 256 prefixes remains low under ordered
+and earlier-shuffled conditions. \textbf{c}, First eight fixed audit rows:
+target, frozen sample, joint sample, joint shuffled sample, joint greedy output
+and answer-supplied copying. All outputs are raw model rasters, without
+selection, bank replacement or OCR repair. The image panels expose errors that
+the likelihood improvement alone cannot resolve.}
+\label{fig:joint-learning}
+\end{figure}
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -316,5 +383,13 @@ Independent image inference and export use
 \begin{quote}\small\ttfamily
 scripts/infer\_exact\_raster\_density\_v54.py.
 \end{quote}
+For the matched continuation, run the following with \texttt{--arm frozen}
+and then \texttt{--arm joint}, completing both before the evaluator:
+\begin{quote}\small\ttfamily
+scripts/train\_joint\_exact\_raster\_v55.py\\
+scripts/eval\_joint\_exact\_raster\_v55.py
+\end{quote}
+The independent runtime uses
+\texttt{scripts/infer\_joint\_exact\_raster\_v55.py}.
 \input{references_main.tex}
 \end{document}

@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import posixpath
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
@@ -25,6 +26,12 @@ def digest(path):
 def main():
     report = json.loads((HERE / "evidence/v53_development_report.json").read_text())
     density = json.loads((HERE / "evidence/v54_development_report.json").read_text())
+    joint_reports = {
+        arm: json.loads(
+            (HERE / f"evidence/v55_{arm}_development_report.json").read_text()
+        )
+        for arm in ("frozen", "joint")
+    }
     render = json.loads((HERE / "evidence/figure_render_receipt.json").read_text())
     if render["pptx_sha256"] != digest(HERE / "ILM_Figures_editable.pptx"):
         raise ValueError("editable deck has changed since rendering")
@@ -33,14 +40,23 @@ def main():
     figure_info = subprocess.check_output(
         ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
     )
-    if not any(line.split() == ["Pages:", "6"] for line in figure_info.splitlines()):
-        raise ValueError("figure render must contain six slides")
+    if not any(line.split() == ["Pages:", "8"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain eight slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
         extracted = subprocess.check_output(["pdftotext", str(pdf), "-"], text=True)
         if any(
-            value not in extracted for value in ("0.586", "15.219", "0.99949", "207.8")
+            value not in extracted
+            for value in (
+                "0.586",
+                "15.219",
+                "0.99949",
+                "207.8",
+                "7.026",
+                "7.579",
+                "342.4",
+            )
         ):
             raise ValueError(f"{name} lacks current measured results")
         log = (HERE / f".{name}/{name}.log").read_text()
@@ -88,9 +104,33 @@ def main():
             raise ValueError("missing native density chart")
         slides = ET.fromstring(deck.read("ppt/presentation.xml"))
         pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
-        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 6:
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 8:
             raise ValueError("missing current figure slides")
-    target = DESTINATION / "ILM_NatureStyle_20261105_V54"
+        rels = ET.fromstring(deck.read("ppt/charts/_rels/chart3.xml.rels"))
+        relation_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+        package = next(
+            rel
+            for rel in rels.findall(relation_ns + "Relationship")
+            if rel.get("Type").endswith("/package")
+        )
+        workbook_path = posixpath.normpath(
+            posixpath.join("ppt/charts", package.get("Target"))
+        )
+        matched_book = openpyxl.load_workbook(
+            io.BytesIO(deck.read(workbook_path)), data_only=True
+        )
+        for row, (arm, route) in enumerate(
+            (("frozen", "ordered"), ("joint", "ordered"), ("joint", "shuffled")),
+            start=2,
+        ):
+            item = joint_reports[arm]["generation"][route]
+            for column, key in ((2, "pixel_f1"), (3, "identity_top1")):
+                if (
+                    abs(matched_book.active.cell(row, column).value - 100 * item[key])
+                    > 1e-8
+                ):
+                    raise ValueError("matched evidence workbook differs from audit")
+    target = DESTINATION / "ILM_NatureStyle_20261105_V55"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):
