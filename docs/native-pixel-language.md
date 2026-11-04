@@ -95,7 +95,17 @@ The optional deployment directory contains learned weights, config, author
 model code, Apache license and an attribution/hash manifest. It can be loaded
 through the same `--checkpoint` argument without the original release weights.
 An actual exported-model native PNG replay is required before the quality
-audit. The audit then compares final EMA and unchanged base on the fixed
+audit. After the full run finishes, create and verify the bundle with:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python \
+  scripts/verify_native_pixel_export_v61.py
+```
+
+The second process uses empty Hugging Face source/model caches and offline
+mode. It must reproduce tensors, PNG bytes and stopping events from the
+bundle alone. The audit then compares final EMA and unchanged base on the fixed
 questions, blank controls and paired questions:
 
 ```bash
