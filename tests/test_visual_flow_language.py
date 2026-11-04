@@ -9,6 +9,7 @@ from ilm.visual_lm.visual_flow_language import (
     visual_flow_language_boundary_is_clean,
     visual_flow_language_boundary_receipt,
 )
+from ilm.visual_lm.visual_flow_language_evaluation import _pixel_f1
 from ilm.visual_lm.visual_flow_language_training import visual_flow_language_loss
 
 
@@ -97,3 +98,13 @@ def test_visual_flow_boundary_is_image_only() -> None:
     assert receipt["deterministic_ink_plan_used"] is False
     assert receipt["candidate_bank_deployed"] is False
     assert visual_flow_language_boundary_is_clean(model)
+
+
+def test_visual_flow_pixel_f1_is_per_example() -> None:
+    target = torch.zeros(2, 1, 4, 4)
+    target[0, 0, :2, :2] = 1
+    target[1, 0, 2:, 2:] = 1
+    prediction = target.clone()
+    prediction[1].zero_()
+    measured = _pixel_f1(prediction, target)
+    assert torch.allclose(measured, torch.tensor([1.0, 0.0]))
