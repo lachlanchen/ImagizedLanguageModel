@@ -704,6 +704,86 @@ after the passage. Question blanking uses each layout's actual positions.
 The question-first F1 difference is unresolved and its registered reading
 criteria fail.}{fig:question-first}
 
+\section*{Supplementary Note 20: full native pixel-language adaptation}
+The complete released MIXAR-477M\cite{mixar} image-language model is adapted
+using the pinned release identified by its full revision, weight SHA-256 and
+architecture-code hashes in the accompanying evidence. This is
+supervised adaptation of external pretraining, not local foundation training
+from scratch. All 477,145,984 contextual and image-output parameters train.
+The source data are the same 3,211 training and 1,321 development questions
+used for the preceding reading experiments, with no article or context-hash
+overlap. Development is explicitly reused. Complete prompts contain at most
+480 cells and first-reference training answers at most 16 cells.
+
+Noto CJK glyphs at 26 pixels occupy 32-pixel binary cells, a rendering shift
+from the author's native bundled-font interface. Odd prompt/answer lengths
+receive one blank cell for alignment to 32-by-64 native blocks. Two all-white
+blocks follow each target answer. Native input uses white $+1$ and ink $-1$;
+the target Bernoulli probability describes white pixels. Spatial prompt bounds
+are known, but strings, codepoint IDs and source-answer offsets never enter
+the actor. The causal answer-only objective is
+\begin{equation}
+\mathcal L=-\frac{1}{|A|P}\sum_{t\in A}\sum_{i=1}^{P}
+\left[y_{ti}\log\sigma(a_{t-1,i})+(1-y_{ti})\log(1-\sigma(a_{t-1,i}))\right],
+\end{equation}
+where $P=2048$, $A$ contains answer and termination blocks, and state $t-1$
+depends only on preceding physical images. Prompt labels contribute no loss.
+
+The registered run uses 1,000 updates, microbatch one accumulated eight times,
+uniform replacement sampling, AdamW $2\times10^{-5}$, betas $(0.9,0.95)$,
+weight decay 0.01, warmup 50, cosine decay to 10\%, norm clip one and EMA
+0.99. Seeds are 20266110 for training and 20266111 for data. FP32 weights,
+optimizer and EMA coexist with BF16 forward/backward, deterministic algorithms,
+math attention and nonreentrant activation checkpointing. The final EMA is
+used without development checkpoint selection. A real four-update interrupted
+preflight reproduces model, EMA, optimizer and all RNG states exactly, with
+finite gradients throughout. Altering future answer pixels changes earlier
+logits by exactly zero in the recorded causality check.
+
+Training through the final update takes 1,501.138 s, with 9.912 GiB peak
+allocated memory; loading takes 2.525 s. Cache preparation, final serialization
+and external pretraining are separate. All work uses physical GPU 0. Greedy
+decoding thresholds each white logit at zero, feeds back the generated image
+and stops at the first exactly white block, otherwise capping at ten new
+blocks. Only terminal blocks and entirely blank trailing cells are removed.
+No malformed image is repaired or snapped to a character.
+
+The locked audit compares adapted and released-base actors with normal and
+blank-question inputs on the same 256 primary IDs, and tests all 393
+shared-paragraph question pairs for the adapted actor. All 1,321 development
+examples contribute likelihood. Pixel NLL decreases from 0.684156 to
+0.154814 nats, yet exact answers are zero and exact-raster multiset F1 is
+0.149\%. Foreground F1 is 12.264\%, compared with 8.473\% blanked and zero
+for the released base under this shifted interface. Article-grouped bootstrap
+with 2,000 draws, seed 20266219, gives the adapted-minus-blank foreground
+difference as 3.791 points [2.521,5.056]. The exact-raster F1 difference is
+0.149 [0,0.372], unresolved. Both-correct pair accuracy is 0/393.
+
+No primary output is empty or capped for the adapted actor; the released base
+returns an empty answer on every normal primary prompt. The adapted mean
+length is 3.047 cells. Five of ten gates pass: image-only runtime, clean
+split/finite resources, full backward/resume/causality, independent replay,
+and capped-output rate. Exact answers, raster F1, adaptation gain,
+question-dependent raster F1 and paired correctness fail. Audit time is
+145.690 s excluding loading, at 1.832 GiB allocated memory. The registered
+decision is \texttt{reject\_native\_free\_reading}.
+
+A learned-weight deployment bundle includes configuration and local custom
+architecture code. A fresh offline process with empty model and code caches
+reproduces actual answer tensors, PNG bytes and stopping events. It loads no
+original release weights and calls no external model, tokenizer or OCR.
+Exact replay is an implementation result, separate from language quality.
+
+An auxiliary transcription plan was registered before development outputs
+were inspected. CPU Tesseract 5.3.4 receives anonymous answer-only images,
+enlarged fourfold with a white margin, without questions, references or model
+names. It recognizes only 40/256 retained reference images exactly, a 15.625\%
+calibration rate. No generated answer is transcribed exactly, but the poor
+reference calibration precludes treating this as a reliable semantic score.
+The primary raw-image failure and strict gates remain unchanged. One seed,
+the shifted font interface, limited training data and absent general-language
+evaluation constrain the interpretation.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -769,5 +849,15 @@ scripts/train\_question\_first\_reading\_v60.py\\
 --order question\\
 scripts/eval\_question\_first\_reading\_v60.py.
 \end{quote}
+Native pixel preparation, full adaptation and locked audit use the existing
+Python 3.12 MIXAR runtime, with \texttt{CUDA\_VISIBLE\_DEVICES=0}:
+\begin{quote}\small\ttfamily
+scripts/prepare\_native\_pixel\_qa\_v61.py\\
+scripts/train\_native\_pixel\_instruction\_v61.py\\
+scripts/verify\_native\_pixel\_export\_v61.py\\
+scripts/eval\_native\_pixel\_instruction\_v61.py.
+\end{quote}
+Independent image inference uses
+\texttt{scripts/infer\_native\_pixel\_language.py}.
 \input{references_main.tex}
 \end{document}

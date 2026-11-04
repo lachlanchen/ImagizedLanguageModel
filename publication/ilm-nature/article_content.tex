@@ -350,6 +350,42 @@ exact in both arms. This result limits a simple ordering explanation of the
 selection failure; it does not establish that question-conditioned source
 representations are ineffective in general (Supplementary Note 19 and Fig.~S6).
 
+\section*{Native free writing fits pixels but fails reading}
+We next adapt every parameter of the released MIXAR-477M native
+pixel-language model\cite{mixar}, rather than selecting source-image spans.
+The actor receives prompt images and predicts unrestricted binary image
+blocks, with no output glyph inventory, OCR or external inference call.
+All 477,145,984 parameters receive answer-image likelihood gradients.
+The 1,000-update run takes 1,501.1 s on one RTX 4090 D at 9.912 GiB peak
+allocated memory, excluding loading and final serialization. External
+foundation pretraining is attributed separately.
+
+Held-out answer-pixel NLL improves from 0.6842 to 0.1548 nats, yet generated
+answers remain inaccurate (Fig.~\ref{fig:native-pixel}). Exact answers are
+0/256 and both-correct paragraph pairs 0/393. Exact-raster F1 is 0.149\%,
+while aligned foreground F1 is 12.264\%. Question blanking reduces foreground
+F1 to 8.473\%, but the strict-raster F1 difference does not resolve zero.
+Five of ten registered gates pass, all concerning implementation, resources
+or termination rather than the required answer quality. The decision remains
+\texttt{reject\_native\_free\_reading}.
+
+Native PNG inference reproduces answer tensors, PNG bytes and stopping events
+from a self-contained learned bundle in a fresh offline process with empty
+model/code caches. This establishes an independent runtime, without certifying
+its language. The Noto CJK cell renderer differs from the released model's
+native font interface. A blinded answer-only OCR diagnostic is poorly
+calibrated even on reference images, recognizing only 40/256 exactly; it
+cannot replace a semantic evaluation (Supplementary Note 20).
+
+\plate{Figure_6_native_pixel_language}{\textbf{Better pixel likelihood does not yield useful free writing.}
+\textbf{a}, All-development answer/termination-pixel NLL, released base and
+final adapted EMA. \textbf{b}, Exact-raster multiset F1 and aligned foreground
+F1 on 256 fixed primary questions, with question-blanked and released-base
+controls. Foreground overlap does not establish a correct character or answer.
+\textbf{c}, First two fixed audit rows, with retained references and unmodified
+generated pixels. White padding aligns the display and never changes a
+nonblank output. All exact answers and both-correct pairs fail.}{fig:native-pixel}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

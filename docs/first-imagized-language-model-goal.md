@@ -90,6 +90,19 @@ only. Audit the native font interface and register matched single-head versus
 correlated-head training before any language claim. A singularity, Qwen parity
 and high-quality general language remain unestablished.
 
+V62 now has a registered matched experiment and complete training, image
+inference, standalone export and locked audit code. Both K=1 and K=8 actors
+pass exact interrupted/resumed weights, EMA, optimizer and all RNG states,
+full-backbone gradients, future-pixel causality and strict-FP32 cache checks.
+The single-head production arm is training on GPU 0; the eight-head arm must
+follow sequentially, with the same 1,000-update budget and training samples.
+No V62 development score or language pass is established. The
+[whole-image model guide](correlated-image-language.md) records commands and
+the [registered protocol](../references/correlated_native_density_v62_protocol.md)
+fixes the quality decisions in advance. The current manuscript adds V61's
+completed free-writing failure, actual raw images and mathematical objective;
+unfinished V62 training remains outside its Results.
+
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining
 an architectural inverse-image path. Autonomous output still fails: first

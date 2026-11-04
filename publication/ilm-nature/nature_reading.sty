@@ -8,6 +8,15 @@
 \RequirePackage{caption,titlesec,fancyhdr}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{balance}
+\RequirePackage{etoolbox}
+% balance.sty rounds its final split in whole points. Leave two points inside
+% the balanced column boxes for a final unsplittable line, without extending
+% the page or suppressing overfull-box diagnostics.
+\makeatletter
+\patchcmd{\@BAlancecol}{\setbox\@leftcolumn}
+  {\advance\@tempdima by 2pt\setbox\@leftcolumn}{}
+  {\PackageError{nature_reading}{Cannot patch final-column rounding}{}}
+\makeatother
 \DeclareCaptionLabelSeparator{pipe}{\space|\space}
 \captionsetup{font={small,sf},labelfont=bf,labelsep=pipe,justification=raggedright,singlelinecheck=false}
 \renewcommand{\figurename}{Fig.}

@@ -1,0 +1,164 @@
+diff --git a/publication/ilm-nature/baselines/v60/frontmatter.tex b/publication/ilm-nature/frontmatter.tex
+index 4258470..a74e68f 100644
+--- a/publication/ilm-nature/baselines/v60/frontmatter.tex
++++ b/publication/ilm-nature/frontmatter.tex
+@@ -7 +7 @@
+-\newcommand{\PaperSummary}{Written language includes forms that cannot be faithfully represented by a fixed character inventory. We study language modelling with writing images as input and output on one consumer GPU. Joint reader--density learning improves exact target likelihood to \JointNll\ versus \ControlNll\ nats per image for matched frozen-reader training, while retaining exact supplied-image copying. Raw-pixel search raises next-image match to \BeamAccuracy\% but produces repetitive streams. A normalized copy/free distribution and learned stopping rule enable limited question-dependent Chinese reading. Extending this model with a law over complete observed image blocks gives 25 exact answers among 256 fixed development questions, versus three with question pixels blanked and 21 for matched additional glyph-answer training. Raster F1 reaches 27.033\%; its gain over the matched control is 4.893 points [0.469, 9.047], while the exact-match difference remains unresolved. Both questions are correct in only four of 393 shared-paragraph pairs. Frozen pretrained visual features do not improve this shifted reading interface. These results separate faithful forms, conditional likelihood, answer structure and semantic selection. All experiments retain their registered decisions; a high-quality general image-based language model remains unresolved.}
++\newcommand{\PaperSummary}{Written language includes historical, handwritten and regional forms that a fixed character inventory cannot faithfully represent. We investigate language modelling with writing images as input and output on one consumer GPU. A continuous image interface supports normalized raster likelihood and independent generation without a deployed character vocabulary. Joint reader--density learning improves target likelihood to \JointNll\ versus \ControlNll\ nats per image, while autonomous streams remain inaccurate. A law over complete observed image answers enables limited Chinese reading: 25 of 256 fixed development answers are exact, versus three with question pixels blanked and 21 after matched additional glyph-answer training. Raster F1 reaches 27.033\%, a 4.893-point gain [0.469, 9.047], while the exact-match difference remains unresolved. Both questions are correct in only four of 393 shared-paragraph pairs. Full adaptation of a 477M-parameter native pixel-language foundation improves held-out answer-pixel NLL from 0.6842 to 0.1548 nats but produces zero exact answers. Its independent runtime is reproducible, while free writing remains fragmented. Faithful forms and likelihood therefore require separate tests from useful language; a high-quality general image-based language model remains unresolved.}
+diff --git a/publication/ilm-nature/baselines/v60/article_content.tex b/publication/ilm-nature/article_content.tex
+index 6166d46..cfc888f 100644
+--- a/publication/ilm-nature/baselines/v60/article_content.tex
++++ b/publication/ilm-nature/article_content.tex
+@@ -352,0 +353,36 @@ representations are ineffective in general (Supplementary Note 19 and Fig.~S6).
++\section*{Native free writing fits pixels but fails reading}
++We next adapt every parameter of the released MIXAR-477M native
++pixel-language model\cite{mixar}, rather than selecting source-image spans.
++The actor receives prompt images and predicts unrestricted binary image
++blocks, with no output glyph inventory, OCR or external inference call.
++All 477,145,984 parameters receive answer-image likelihood gradients.
++The 1,000-update run takes 1,501.1 s on one RTX 4090 D at 9.912 GiB peak
++allocated memory, excluding loading and final serialization. External
++foundation pretraining is attributed separately.
++
++Held-out answer-pixel NLL improves from 0.6842 to 0.1548 nats, yet generated
++answers remain inaccurate (Fig.~\ref{fig:native-pixel}). Exact answers are
++0/256 and both-correct paragraph pairs 0/393. Exact-raster F1 is 0.149\%,
++while aligned foreground F1 is 12.264\%. Question blanking reduces foreground
++F1 to 8.473\%, but the strict-raster F1 difference does not resolve zero.
++Five of ten registered gates pass, all concerning implementation, resources
++or termination rather than the required answer quality. The decision remains
++\texttt{reject\_native\_free\_reading}.
++
++Native PNG inference reproduces answer tensors, PNG bytes and stopping events
++from a self-contained learned bundle in a fresh offline process with empty
++model/code caches. This establishes an independent runtime, without certifying
++its language. The Noto CJK cell renderer differs from the released model's
++native font interface. A blinded answer-only OCR diagnostic is poorly
++calibrated even on reference images, recognizing only 40/256 exactly; it
++cannot replace a semantic evaluation (Supplementary Note 20).
++
++\plate{Figure_6_native_pixel_language}{\textbf{Better pixel likelihood does not yield useful free writing.}
++\textbf{a}, All-development answer/termination-pixel NLL, released base and
++final adapted EMA. \textbf{b}, Exact-raster multiset F1 and aligned foreground
++F1 on 256 fixed primary questions, with question-blanked and released-base
++controls. Foreground overlap does not establish a correct character or answer.
++\textbf{c}, First two fixed audit rows, with retained references and unmodified
++generated pixels. White padding aligns the display and never changes a
++nonblank output. All exact answers and both-correct pairs fail.}{fig:native-pixel}
++
+diff --git a/publication/ilm-nature/baselines/v60/supplementary_information.tex b/publication/ilm-nature/supplementary_information.tex
+index 34aff94..3246338 100644
+--- a/publication/ilm-nature/baselines/v60/supplementary_information.tex
++++ b/publication/ilm-nature/supplementary_information.tex
+@@ -706,0 +707,80 @@ criteria fail.}{fig:question-first}
++\section*{Supplementary Note 20: full native pixel-language adaptation}
++The complete released MIXAR-477M\cite{mixar} image-language model is adapted
++using the pinned release identified by its full revision, weight SHA-256 and
++architecture-code hashes in the accompanying evidence. This is
++supervised adaptation of external pretraining, not local foundation training
++from scratch. All 477,145,984 contextual and image-output parameters train.
++The source data are the same 3,211 training and 1,321 development questions
++used for the preceding reading experiments, with no article or context-hash
++overlap. Development is explicitly reused. Complete prompts contain at most
++480 cells and first-reference training answers at most 16 cells.
++
++Noto CJK glyphs at 26 pixels occupy 32-pixel binary cells, a rendering shift
++from the author's native bundled-font interface. Odd prompt/answer lengths
++receive one blank cell for alignment to 32-by-64 native blocks. Two all-white
++blocks follow each target answer. Native input uses white $+1$ and ink $-1$;
++the target Bernoulli probability describes white pixels. Spatial prompt bounds
++are known, but strings, codepoint IDs and source-answer offsets never enter
++the actor. The causal answer-only objective is
++\begin{equation}
++\mathcal L=-\frac{1}{|A|P}\sum_{t\in A}\sum_{i=1}^{P}
++\left[y_{ti}\log\sigma(a_{t-1,i})+(1-y_{ti})\log(1-\sigma(a_{t-1,i}))\right],
++\end{equation}
++where $P=2048$, $A$ contains answer and termination blocks, and state $t-1$
++depends only on preceding physical images. Prompt labels contribute no loss.
++
++The registered run uses 1,000 updates, microbatch one accumulated eight times,
++uniform replacement sampling, AdamW $2\times10^{-5}$, betas $(0.9,0.95)$,
++weight decay 0.01, warmup 50, cosine decay to 10\%, norm clip one and EMA
++0.99. Seeds are 20266110 for training and 20266111 for data. FP32 weights,
++optimizer and EMA coexist with BF16 forward/backward, deterministic algorithms,
++math attention and nonreentrant activation checkpointing. The final EMA is
++used without development checkpoint selection. A real four-update interrupted
++preflight reproduces model, EMA, optimizer and all RNG states exactly, with
++finite gradients throughout. Altering future answer pixels changes earlier
++logits by exactly zero in the recorded causality check.
++
++Training through the final update takes 1,501.138 s, with 9.912 GiB peak
++allocated memory; loading takes 2.525 s. Cache preparation, final serialization
++and external pretraining are separate. All work uses physical GPU 0. Greedy
++decoding thresholds each white logit at zero, feeds back the generated image
++and stops at the first exactly white block, otherwise capping at ten new
++blocks. Only terminal blocks and entirely blank trailing cells are removed.
++No malformed image is repaired or snapped to a character.
++
++The locked audit compares adapted and released-base actors with normal and
++blank-question inputs on the same 256 primary IDs, and tests all 393
++shared-paragraph question pairs for the adapted actor. All 1,321 development
++examples contribute likelihood. Pixel NLL decreases from 0.684156 to
++0.154814 nats, yet exact answers are zero and exact-raster multiset F1 is
++0.149\%. Foreground F1 is 12.264\%, compared with 8.473\% blanked and zero
++for the released base under this shifted interface. Article-grouped bootstrap
++with 2,000 draws, seed 20266219, gives the adapted-minus-blank foreground
++difference as 3.791 points [2.521,5.056]. The exact-raster F1 difference is
++0.149 [0,0.372], unresolved. Both-correct pair accuracy is 0/393.
++
++No primary output is empty or capped for the adapted actor; the released base
++returns an empty answer on every normal primary prompt. The adapted mean
++length is 3.047 cells. Five of ten gates pass: image-only runtime, clean
++split/finite resources, full backward/resume/causality, independent replay,
++and capped-output rate. Exact answers, raster F1, adaptation gain,
++question-dependent raster F1 and paired correctness fail. Audit time is
++145.690 s excluding loading, at 1.832 GiB allocated memory. The registered
++decision is \texttt{reject\_native\_free\_reading}.
++
++A learned-weight deployment bundle includes configuration and local custom
++architecture code. A fresh offline process with empty model and code caches
++reproduces actual answer tensors, PNG bytes and stopping events. It loads no
++original release weights and calls no external model, tokenizer or OCR.
++Exact replay is an implementation result, separate from language quality.
++
++An auxiliary transcription plan was registered before development outputs
++were inspected. CPU Tesseract 5.3.4 receives anonymous answer-only images,
++enlarged fourfold with a white margin, without questions, references or model
++names. It recognizes only 40/256 retained reference images exactly, a 15.625\%
++calibration rate. No generated answer is transcribed exactly, but the poor
++reference calibration precludes treating this as a reliable semantic score.
++The primary raw-image failure and strict gates remain unchanged. One seed,
++the shifted font interface, limited training data and absent general-language
++evaluation constrain the interpretation.
++
+@@ -771,0 +852,10 @@ scripts/eval\_question\_first\_reading\_v60.py.
++Native pixel preparation, full adaptation and locked audit use the existing
++Python 3.12 MIXAR runtime, with \texttt{CUDA\_VISIBLE\_DEVICES=0}:
++\begin{quote}\small\ttfamily
++scripts/prepare\_native\_pixel\_qa\_v61.py\\
++scripts/train\_native\_pixel\_instruction\_v61.py\\
++scripts/verify\_native\_pixel\_export\_v61.py\\
++scripts/eval\_native\_pixel\_instruction\_v61.py.
++\end{quote}
++Independent image inference uses
++\texttt{scripts/infer\_native\_pixel\_language.py}.
+diff --git a/publication/ilm-nature/baselines/v60/nature_reading.sty b/publication/ilm-nature/nature_reading.sty
+index 9676684..1350573 100644
+--- a/publication/ilm-nature/baselines/v60/nature_reading.sty
++++ b/publication/ilm-nature/nature_reading.sty
+@@ -10,0 +11,9 @@
++\RequirePackage{etoolbox}
++% balance.sty rounds its final split in whole points. Leave two points inside
++% the balanced column boxes for a final unsplittable line, without extending
++% the page or suppressing overfull-box diagnostics.
++\makeatletter
++\patchcmd{\@BAlancecol}{\setbox\@leftcolumn}
++  {\advance\@tempdima by 2pt\setbox\@leftcolumn}{}
++  {\PackageError{nature_reading}{Cannot patch final-column rounding}{}}
++\makeatother
+diff --git a/publication/ilm-nature/baselines/v60/references_main.tex b/publication/ilm-nature/references_main.tex
+index a0191bf..ca1de75 100644
+--- a/publication/ilm-nature/baselines/v60/references_main.tex
++++ b/publication/ilm-nature/references_main.tex
+@@ -1,0 +2 @@
++\interlinepenalty=10000

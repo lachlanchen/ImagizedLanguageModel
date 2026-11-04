@@ -1,0 +1,7 @@
+\input{results_values.tex}
+\input{density_values.tex}
+\input{joint_values.tex}
+\input{beam_values.tex}
+\input{qa_values.tex}
+\newcommand{\PaperTitle}{Learning conditional language\\in continuous image space}
+\newcommand{\PaperSummary}{Written language includes forms that cannot be faithfully represented by a fixed character inventory. We study language modelling with writing images as input and output on one consumer GPU. Joint reader--density learning improves exact target likelihood to \JointNll\ versus \ControlNll\ nats per image for matched frozen-reader training, while retaining exact supplied-image copying. Raw-pixel search raises next-image match to \BeamAccuracy\% but produces repetitive streams. A normalized copy/free distribution and learned stopping rule enable limited question-dependent Chinese reading. Extending this model with a law over complete observed image blocks gives 25 exact answers among 256 fixed development questions, versus three with question pixels blanked and 21 for matched additional glyph-answer training. Raster F1 reaches 27.033\%; its gain over the matched control is 4.893 points [0.469, 9.047], while the exact-match difference remains unresolved. Both questions are correct in only four of 393 shared-paragraph pairs. Frozen pretrained visual features do not improve this shifted reading interface. These results separate faithful forms, conditional likelihood, answer structure and semantic selection. All experiments retain their registered decisions; a high-quality general image-based language model remains unresolved.}
