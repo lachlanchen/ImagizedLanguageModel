@@ -1,0 +1,228 @@
+Written language is encountered as marks on paper, screens and historical
+surfaces. Its visual form carries information about script, handwriting and
+material history. Modern character encodings provide a powerful interface to
+many such marks, but a finite inventory cannot express every damaged,
+transitional or unencoded form. An image-based language model could retain
+that evidence throughout reading and generation, with transcription offered
+as an optional output view.
+
+Pixel-based language modelling already has substantial precedents.
+PIXAR demonstrates autoregressive language generation in pixel space and
+identifies the difficulty of generating readable text\cite{pixar}. Continuous
+autoregression can use a diffusion loss in place of vector quantization\cite{mar},
+while Diffusion Forcing models continuous sequences under independently chosen
+noise levels\cite{forcing}. These results motivate a visual language interface,
+but do not establish that a small glyph generator acquires linguistic
+knowledge or that image input automatically reduces training cost.
+
+We investigate the conditional generation problem directly. The model
+receives raster history, predicts a distribution of future writing, emits
+pixels and rereads those pixels. Chinese provides a demanding initial case:
+stroke configurations must remain coherent while context selects among many
+similar written forms. The present study uses one canonical font to isolate
+this coupling before introducing handwriting or historical scripts.
+
+\section*{Results}
+\subsection*{A continuous visual interface preserves the written signal}
+Each observed cell is a $32\times32$ ink image. An orthonormal transform maps
+its signed pixels into a 1,024-dimensional continuous field. The transform is
+invertible and contains no learned character dictionary. An ordered sequence
+of these fields enters a causal transformer. The deployed model receives no
+Unicode values, OCR transcripts, character IDs or vocabulary logits
+(Fig.~\ref{fig:mechanism}). Host-side rendering uses encoded source text during
+data preparation. This distinction matters: the current benchmark studies
+learning from rendered Chinese, rather than discovering a script from raw
+archaeological photographs.
+
+\plate{Figure_1_mechanism}{\textbf{A visual language interface and its conditional generation test.}
+\textbf{a}, Rendered or native writing supplies ordered image cells to a causal
+visual reader. Text rendering is an optional host interface. \textbf{b}, A
+conditional denoiser uses the frozen reader state and a noisy four-cell strip
+to predict diffusion velocity. Future cells exchange information through
+convolutions and pooled-cell attention. \textbf{c}, Sampling starts from noise,
+emits four visible cells and appends their pixels to the next context. Optional
+transcription follows generation and is absent from the model. The schematic
+shows the implemented experimental contract, without claiming that its
+generated content is already correct.}{fig:mechanism}
+
+\subsection*{Ordered image history contains next-writing information}
+The strongest established reader result uses 2,048 deterministic development
+windows and an evaluator-only bank of 1,024 canonical glyph images. Full-history
+next-image top-1 is 19.97\%, above the image unigram at 1.42\%, the symbolic
+bigram at 12.26\% and the prefix-shuffled condition at 18.36\%. The ordered
+history improves target log probability by 0.174 nat over the shuffled control.
+This result supports bounded conditional prediction from image sequences.
+
+These figures measure selection among completed images. The evaluator bank
+does not enter the model and cannot act as a deployed writer. Thresholding
+the predicted continuous field can mix strokes from several plausible futures.
+For squared-error prediction, the population optimum is
+$f^*(H)=\mathbb{E}[X\mid H]$. A conditional mean need not be a valid glyph
+when several futures are possible. Sharp copying, target ranking and sampled
+language generation therefore require separate measurements.
+
+\subsection*{A glyph prior does not automatically bind to language}
+To separate visual synthesis from contextual prediction, we train an
+unconditional glyph prior and a noisy visual compatibility critic while
+freezing the causal reader. The combined runtime contains 23.27 million
+parameters. The critic scores an arbitrary noisy image against the visible
+history. In the ideal density-ratio limit,
+\begin{equation}
+\nabla_x\log p_t(x\mid H)=\nabla_x\log p_t(x)
++\nabla_x\log\frac{p_t(x\mid H)}{p_t(x)}.
+\end{equation}
+The construction is related to classifier-guided diffusion\cite{guidance}.
+
+On 512 development windows, the clean critic reaches 21.875\% top-1, versus
+20.898\% with shuffled history. Its first guided sample reaches zero target
+identities in 256 cases. Selecting the highest clean critic score among four
+samples reaches 1/256, with the same result after shuffling history. The
+generated glyph-like marks are diverse and nonblank, yet fail conditional
+identity (Fig.~\ref{fig:evidence}).
+
+This experiment identifies a reader--writer gap without proving a unique
+cause. At the terminal corruption level, target signal power is
+$2.43\times10^{-7}$, and an exact conditional guidance term should vanish.
+That limit also occurs in successful conditional diffusion. It cannot alone
+explain the failure. Insufficient conditional-score accuracy, off-manifold
+gradients, limited prior quality and finite sampling remain compatible
+explanations. We consequently test a directly conditional writer rather than
+interpret clean-image ranking as evidence of a generative solution.
+
+\subsection*{Direct conditional block generation tests the missing coupling}
+The new writer models a joint four-cell future conditioned on 60 visible
+cells. It reuses the 16.28M-parameter reader and fine-tunes a 5.90M-parameter
+strip denoiser. A projected reader state modulates each residual scale, and a
+four-cell attention layer exchanges future information at the bottleneck.
+There is no separate guidance critic or candidate selector.
+
+For signed clean writing $x_0$, noise $\epsilon$ and cumulative signal
+$\bar\alpha_t$, the training target is velocity:
+\begin{align}
+x_t&=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\\
+v^*&=\sqrt{\bar\alpha_t}\epsilon-\sqrt{1-\bar\alpha_t}x_0.
+\end{align}
+The clean estimate is
+$\hat x_0=\sqrt{\bar\alpha_t}x_t-\sqrt{1-\bar\alpha_t}\hat v$.
+Training alternates independently stratified future noise levels with
+synchronous levels that cover the sampling distribution. Fixed visual-field
+and foreground losses retain the writing signal. Intermediate target-field
+alignment follows the motivation of representation alignment\cite{repa},
+using a fixed raster transform rather than a semantic teacher.
+
+The run completes all 8,000 updates in \TrainSeconds\ s, using
+\TrainMemory\ GiB peak allocated CUDA memory. Evaluation uses one primary
+sample from 256 prefixes under paired initial noise. Ordered first-position
+identity is \FirstIdentity\%, compared with \FirstShuffled\% after shuffling
+and \FirstZero\% with a zero condition. Across all four future cells, identity
+is \BlockIdentity\%, with an ordered-minus-shuffled difference of
+\BlockGain\ percentage points and a record-bootstrap 95\% interval of
+[\BlockLow, \BlockHigh]. Pixel F1 is \BlockFone.
+The registered complete-mechanism decision is \texttt{\RunDecision}.
+The raw image panel shows the first fixed examples without reranking or
+selection (Fig.~\ref{fig:evidence}).
+
+A post-result motor diagnostic supplies the intended first-cell image to the
+same trained writer on 64 fixed prefixes. Exact plan and image-field supply
+raise pixel F1 from 0.378 to 0.459 and target identity from 1/64 to 5/64.
+The fixed inverse transform reproduces the supplied raster with F1 1.0.
+Because this test supplies the answer, it provides no autonomous-language
+evidence. It shows that the current learned writer still loses substantial
+shape information even with an exact visual condition.
+
+\plate{Figure_2_evidence}{\textbf{Prediction and generated-image evidence.}
+\textbf{a}, The established causal reader ranks completed next images above
+unigram, bigram and shuffled-history controls on 2,048 windows. These are
+ranking measurements, not generated text. \textbf{b}, Prior-plus-critic
+guidance retains completed-image ranking but almost never generates the target
+identity. \textbf{c}, Direct conditional block generation reports all four
+positions under ordered, shuffled and zero conditions. Bars use the same
+starting noise and single primary samples. \textbf{d}, Fixed, unselected
+examples show the target and all generated controls. Images are raw model
+outputs with nearest-neighbour enlargement. No OCR or image-bank replacement
+is applied.}{fig:evidence}
+
+\section*{Discussion}
+The results separate a useful visual predictive state from a useful visual
+language generator. The established causal reader learns context-dependent
+next-writing information, while subsequent writers can erase that information
+or model the marginal appearance of glyphs. A complete visual language model
+must bind meaning and sequence to the exact marks it generates.
+
+An image interface enlarges the representable output space, including the
+possibility of forms absent from a character encoding. It does not remove the
+need to learn syntax, knowledge or long-range dependencies. This study has not
+demonstrated general instruction following, etymology answers, handwriting
+transfer or arbitrary historical-script generation. It also lacks independent
+training-seed replication and a capability-matched text-model comparison.
+Small allocated memory in a bounded experiment establishes feasibility on one
+GPU, rather than a general efficiency advantage over language models.
+
+The next decisive tests should first require exact visual copying on unseen
+forms, then conditional continuation and short answers with counterfactual
+prompts. High-noise denoising must improve with the correct history, and the
+same improvement must survive autonomous sampling and visible feedback.
+Broader books and offline teacher-generated exercises can supply later
+training data while leaving the final inference path independent. A larger
+corpus or longer training is warranted only when these measurements show
+that the conditional mechanism learns the intended task.
+
+\section*{Methods}
+\subsection*{Data, rendering and partitioning}
+The public Chinese stream contains 7,017 provenance-tracked records. Records
+are assigned deterministically to training, development or a sealed partition
+before rendering. Original and simplified views inherit their source split.
+The new block experiment uses one fixed Noto Sans CJK font, 26-pixel writing
+inside 32-pixel cells, without image augmentation. A 65-cell training segment
+supplies the first 60 cells as context and cells 61--64 as future writing.
+The remaining cell is unused. No string, source identifier or symbolic target
+enters a model method. Sealed records remain unopened.
+
+\subsection*{Training and numerical verification}
+The reader is frozen. Copied glyph-prior weights initialize the denoiser,
+which is then optimized as a velocity predictor. AdamW uses a learning rate of
+$5\times10^{-5}$ for transferred layers and $2\times10^{-4}$ for new modules,
+400 warmup updates, cosine decay to 10\%, batch size eight, BF16 arithmetic and
+gradient clipping at one. EMA decay is 0.999. Checkpoints retain model,
+optimizer, RNG, dataset offset and provenance hashes. Interrupted and
+continuous smoke runs produce byte-identical model and EMA weights.
+
+The field objective applies an orthonormal transform directly to floating
+signed predictions. Thresholding is confined to output and identity
+evaluation. This distinction is verified by an isolated pixel-gradient test.
+The primary velocity MSE is supplemented by foreground, Dice, field and
+representation losses at weight 0.10 each, plus an ordered-history margin at
+weight 0.25. Supplementary Information gives the complete objective and gates.
+
+\subsection*{Sampling, controls and statistics}
+Sampling uses 32 registered DDIM schedule levels and classifier-free scale
+two. Four future cells start from Gaussian noise. The same noise is reused for
+ordered, suffix-preserving shuffled and zero-condition histories. Only one
+sample contributes to the primary block result. Generated cells are appended
+as visible rasters for a second four-cell block.
+
+An evaluator-only canonical bank measures nearest-raster identity after
+generation. Targets outside the bank receive no identity credit, and bank
+coverage is reported per position. This measurement can assign a nearest
+identity to an illegible pseudo-glyph, so direct images and surface statistics
+accompany every result. Pixel F1 alone is also insufficient because many
+Chinese glyphs share strokes. No OCR is used by the model or the reported
+identity evaluator.
+
+Confidence intervals use 2,000 bootstrap resamples of source records, retaining
+all windows from a record together. Paired differences use identical windows
+and initial noise. Intervals describe development-record variability for this
+trained checkpoint, not variability across training seeds. The current
+development partition has informed a sequence of experiments and is not a
+final independent generalization test.
+
+\balance
+\section*{Data and code availability}
+Implementation, protocols, evidence summaries and scripts are available in
+\url{https://github.com/lachlanchen/ImagizedLanguageModel}. Manifest and
+checkpoint hashes identify the exact local research artifacts. Restricted
+reference books are not redistributed. The complete research record and
+Supplementary Information distinguish earlier foundation provenance from the
+present raster-only deployment experiment.
+
+\input{references_main.tex}

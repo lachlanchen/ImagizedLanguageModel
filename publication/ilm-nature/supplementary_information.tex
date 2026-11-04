@@ -3,6 +3,7 @@
 \usepackage{nature_reading}
 \usepackage{longtable}
 \input{results_values.tex}
+\input{density_values.tex}
 \begin{document}
 {\sffamily\bfseries\Large Supplementary Information\par}
 \medskip\noindent\textbf{Learning conditional language in continuous image space}\par
@@ -19,8 +20,9 @@ historical-script objective.
 The repository retains the earlier 96-page research record in its legacy
 image-native publication folder. That record documents prior
 experiments without treating every rejected architecture as a contribution to
-the compact article. This supplement specifies the latest directly conditional
-block test and the distinction between ranking and generation.
+the compact article. This supplement specifies the directly conditional
+block test, the subsequent exact-raster density and the distinction between
+ranking and generation.
 
 \section*{Supplementary Note 2: conditional uncertainty}
 Let $H$ denote a visible history and $X$ the next writing image. Under squared
@@ -152,7 +154,7 @@ the Han identity bank, so its 60.94\% identity is the available ceiling for
 perfect copies. The target-supplied test was designed after the locked audit
 and does not change its decision. It isolates a remaining motor limitation.
 
-Readable copying of unseen forms, calibrated conditional sequence likelihood,
+Reliable autonomous continuation, calibrated conditional sequence likelihood,
 held-out short answers, font transfer, independent seed replication and
 capability-matched text baselines remain outstanding. No selected gallery can
 substitute for these tests. Future teacher-generated exercises must retain
@@ -165,6 +167,92 @@ from a context-independent noise law. Direct interventions on trained
 conditional scores and matched initialization are needed to distinguish weak
 condition learning from a defective sampling trajectory.
 
+\section*{Supplementary Note 9: normalized raster density}
+The exact-density model (V54) freezes the same 16,277,249-parameter reader.
+A row transformer has width 192, four layers, six heads, MLP ratio three and
+zero dropout. Its inputs are shifted earlier rows, a projection of the aligned
+32-pixel plan row, spatial row positions and a projected continuous condition
+(hidden384 plus field1024). A MADE with two 256-wide SiLU layers masks pixels
+within each row. Its output mask is strict: pixel $c$ cannot see pixel $c$ or
+any later pixel. Earlier rows may be observed in full. Gradients with respect
+to forbidden pixels vanish even with nonzero randomized output weights.
+Enumeration of all 16 four-bit outcomes gives total probability one.
+
+The inverse reader field, scaled by 32 and clipped to $[-2,2]$, supplies an
+aligned logit at scale six. Residual output weights start at zero. Thus a
+supplied binary image has greedy reconstruction exactly equal to itself at
+initialization. This copy path does not learn language and is not a lookup
+bank. It applies to arbitrary supplied binary rasters. The experiment measures
+whether optimization retains that path while learning natural continuation.
+
+Each update samples eight streams and 16 causal positions per stream, four
+from each quarter, including the last position. Of the resulting 128 target
+images, 25\% in expectation receive their actual image field and a zero hidden
+state as explicit motor exercises. The remainder receive frozen predicted
+states. Antialiased target images are thresholded at 0.5 before unweighted
+Bernoulli NLL; soft labels are rejected by the loss. There is no additional
+foreground, contrastive or guidance objective. Seeds are 20265410 for training
+and 20265411 for data. AdamW uses learning rate $2\times10^{-4}$,
+$\beta=(0.9,0.95)$, weight decay 0.01, 400 warmup updates, cosine decay to
+10\%, norm clip one, BF16 and EMA 0.999. The run makes 1,024,000 selected-image
+presentations over 8,000 updates; these are not independent records.
+
+Training completes in \DensitySeconds\ s with \DensityMemory\ GiB peak allocated
+CUDA memory. The runtime has 18,711,841 parameters, of which 2,434,592 are
+new density parameters. The 52.16-second audit peaks at 0.231 GiB allocated
+CUDA memory. Neither timing includes earlier reader training. Source hashes,+the corpus hash, optimizer, all RNGs and the dataset offset are saved. An
+interrupted-versus-continuous smoke run matches every model and EMA tensor and
+the training RNG exactly. The production checkpoint SHA-256 is
+\begin{quote}\small\ttfamily
+f2c3fab74981541243a963c8cffab6bbbd8c7f9d051512b228347db04a57a9ee.
+\end{quote}
+
+\section*{Supplementary Note 10: exact-density audit and decision}
+Audit seed 20265420 selects 512 development windows from 169 source records
+for exact target NLL. Pixel autoregression is teacher forced only for this
+likelihood calculation. The paired earlier-history shuffle preserves the last
+four visible cells. Ordered NLL is \DensityNll\ nats per image and shuffled
+NLL is \DensityShuffledNll. Their advantage is \DensityAdvantage, with interval
+[\DensityLow, \DensityHigh] from 2,000 source-record draws (bootstrap seed
+20265519). The zero-condition NLL is 47.930 nats; zeroing is an
+out-of-distribution control, not an optimized unconditional model.
+
+Generation uses 256 prefixes with paired Bernoulli uniforms. Within each
+image, 32 row-transformer and 1,024 masked-head evaluations produce pixels
+without rejection or reranking. All generated images precede evaluator-bank
+construction. The bank combines all distinct training-form rasters with every
+target raster from generation, motor and feedback tests. Pixel deduplication
+gives 9,932 entries and full target coverage, including punctuation. Its
+nearest identity remains a proxy and can credit a malformed image. It differs
+from the 1,024-Han bank used in earlier experiments.
+
+\input{density_table.tex}
+
+The paired ordered-minus-shuffled identity difference is 0.391 percentage
+points with interval [0, 1.210], using 134 source records. Four-step visible
+feedback on 64 prefixes reaches mean identity 4.297\% versus 3.125\% shuffled.
+Ordered step-wise identity is 4.688, 4.688, 4.688 and 3.125\%; shuffled values
+are 4.688, 1.563, 3.125 and 3.125\%. These secondary measurements do not
+repair the failed primary context effect.
+
+Four of eight preregistered gates pass: runtime boundary, motor copying,
+positive feedback difference, and finite/resource checks. Ordered likelihood,
+ordered sampled identity, sampled quality and isolated-ink surface gates fail.
+The primary sample has isolated-ink fraction 0.01404, above the 0.01 limit.
+The decision remains \texttt{\DensityDecision}. No sealed evaluation or
+independent training-seed replication is reported.
+
+\section*{Supplementary Note 11: independent inference export}
+An inference-only checkpoint embeds the reader, row model, masks and
+configuration. It loads without original foundation checkpoints. An aligned
+32-pixel image grid is the native prompt interface; optional host text rendering
+does not pass symbolic identities into the network. Eight-cell greedy output
+from the exported checkpoint is pixel-identical to the training checkpoint's
+output with the same prompt. The native motor CLI also matches the binarized
+input exactly. The export is a 75,225,847-byte research artifact, not a
+qualified conversational model. General instruction following, open-script
+language generation and etymology remain unestablished.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -176,5 +264,14 @@ CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
 scripts/eval\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
 \end{quote}
 Completed output directories are protected against accidental replacement.
+For the exact density, with the same GPU selection, use
+\begin{quote}\small\ttfamily
+scripts/train\_exact\_raster\_density\_v54.py\\
+scripts/eval\_exact\_raster\_density\_v54.py
+\end{quote}
+Independent image inference and export use
+\begin{quote}\small\ttfamily
+scripts/infer\_exact\_raster\_density\_v54.py.
+\end{quote}
 \input{references_main.tex}
 \end{document}

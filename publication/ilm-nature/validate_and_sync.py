@@ -24,11 +24,24 @@ def digest(path):
 
 def main():
     report = json.loads((HERE / "evidence/v53_development_report.json").read_text())
+    density = json.loads((HERE / "evidence/v54_development_report.json").read_text())
+    render = json.loads((HERE / "evidence/figure_render_receipt.json").read_text())
+    if render["pptx_sha256"] != digest(HERE / "ILM_Figures_editable.pptx"):
+        raise ValueError("editable deck has changed since rendering")
+    if render["rendered_pdf_sha256"] != digest(HERE / "ILM_Figures_review.pdf"):
+        raise ValueError("figure PDF differs from inspected render")
+    figure_info = subprocess.check_output(
+        ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
+    )
+    if not any(line.split() == ["Pages:", "6"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain six slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
         extracted = subprocess.check_output(["pdftotext", str(pdf), "-"], text=True)
-        if "0.586" not in extracted or "361.6" not in extracted:
+        if any(
+            value not in extracted for value in ("0.586", "15.219", "0.99949", "207.8")
+        ):
             raise ValueError(f"{name} lacks current measured results")
         log = (HERE / f".{name}/{name}.log").read_text()
         if any(
@@ -55,7 +68,29 @@ def main():
                 cell = workbook.active.cell(position + 2, index + 2).value
                 if abs(cell - 100 * value) > 1e-8:
                     raise ValueError("editable workbook differs from audit")
-    target = DESTINATION / "ILM_NatureStyle_20261104_V53"
+        density_book = openpyxl.load_workbook(
+            io.BytesIO(deck.read("ppt/embeddings/density.xlsx")), data_only=True
+        )
+        for row, section, route in (
+            (2, "motor", "copy_greedy"),
+            (3, "motor", "copy_sample"),
+            (4, "generation", "ordered"),
+        ):
+            item = density[section][route]
+            for column, key in ((2, "pixel_f1"), (3, "identity_top1")):
+                if (
+                    abs(density_book.active.cell(row, column).value - 100 * item[key])
+                    > 1e-8
+                ):
+                    raise ValueError("density workbook differs from audit")
+        chart2 = ET.fromstring(deck.read("ppt/charts/chart2.xml"))
+        if len(chart2.findall(".//c:barChart/c:ser", namespace)) != 2:
+            raise ValueError("missing native density chart")
+        slides = ET.fromstring(deck.read("ppt/presentation.xml"))
+        pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 6:
+            raise ValueError("missing current figure slides")
+    target = DESTINATION / "ILM_NatureStyle_20261105_V54"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):
@@ -75,6 +110,7 @@ def main():
         "manuscript_review.pdf": "ILM_Manuscript_Review_LATEST.pdf",
         "supplementary_information.pdf": "ILM_Supplementary_LATEST.pdf",
         "ILM_Figures_editable.pptx": "ILM_Figures_editable_LATEST.pptx",
+        "ILM_Figures_review.pdf": "ILM_Figures_review_LATEST.pdf",
     }
     for source, name in aliases.items():
         destination = DESTINATION / name
