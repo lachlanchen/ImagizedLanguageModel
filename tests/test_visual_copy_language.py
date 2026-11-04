@@ -116,3 +116,19 @@ def test_native_copy_and_learned_stop_need_no_reference_length():
         m.stop_head.bias.fill_(30)
     result = m.generate(p)
     assert result["stopped"] and len(result["images"]) == 0
+
+
+def test_no_copy_and_answer_absent_paths_have_finite_backward():
+    m = small_model()
+    m.copy_enabled = False
+    x = torch.zeros(1, 4, 1, 32, 32)
+    y = torch.ones(1, 1, 1, 32, 32)
+    c = m.visual_condition(x, torch.tensor([4]), torch.tensor([[3]]))
+    nll = m.event_nll(c, y, torch.tensor([[True]]), torch.tensor([[False]]))
+    expected = m.image_nll(y[:, 0], c["hidden"][:, 0], c["fields"][:, 0])
+    expected = expected - torch.nn.functional.logsigmoid(-c["stop_logits"][:, 0])
+    torch.testing.assert_close(nll[:, 0], expected)
+    nll.sum().backward()
+    assert all(
+        torch.isfinite(p.grad).all() for p in m.parameters() if p.grad is not None
+    )
