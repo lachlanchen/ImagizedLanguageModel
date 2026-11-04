@@ -659,6 +659,50 @@ student or MIXAR features, with normal and blank-question prompts. All scores
 use the fixed 256 questions. External pretraining and rendering shift prevent
 a causal attribution to capacity or pretraining alone.}{fig:frozen-foundations}
 
+\section*{Supplementary Note 19: question-first causal reading}
+V60 tests whether passage states should be conditioned on the question before
+evidence selection. The context-first host layout places passage $X$ before
+question $Q$; the intervention reverses these two blocks, yielding causal
+passage states $h_i=f(Q,X_{\leq i})$. Framing and total visible length are
+unchanged. Both models start from identical V58 block EMA weights and retain
+the 19,597,363-parameter architecture, block law, image-only supervision,
+mode decoder and continuation writer. All visible prompt positions remain
+candidates. There is no answer offset or answer-aware cropping.
+
+Each arm makes 4,000 updates with the same V58 batch-four schedule, optimizer
+rates, warmup, cosine, clipping, EMA and deterministic BF16/math-SDPA regime.
+Training/data seeds are 20266010/20266011. The new prompt-order helper is
+tested for exact preservation of source characters and correct blanking
+positions. An uninterrupted versus two-plus-two resumed GPU preflight
+matches all model/EMA tensors and RNG states exactly. Both production arms
+finish before their development scores open. Cost remains incremental to
+the same previously trained foundation.
+
+The same 256 primary IDs and 393 paragraph pairs are explicitly reused.
+Question pixels are blanked at each arm's actual question positions, retaining
+the paragraph, length and framing. Exact answers are 27 context-first and
+21 question-first, versus three and two for the corresponding blank controls.
+F1 is 26.908\% and 23.765\%, versus 7.572\% and 9.098\% blanked. With 2,000
+article-grouped bootstrap draws, seed 20266119, question-first minus
+context-first F1 is $-3.143$ points [$-6.544$,0.446]; exact match is
+$-2.344$ [$-5.490$,0.810]. Neither difference resolves zero. The question-first
+normal-minus-blank F1 gain is 14.667 [10.873,18.809]. Both answers are exact in
+5/393 question-first pairs, versus 16/393 context-first pairs.
+
+All 256 supplied motor images remain exact for both arms. The complete audit
+takes 192.723 s at 0.184 GiB allocated CUDA memory. Four of eight registered
+gates pass: boundary, clean split/resources, question-dependent F1 and motor.
+The gain, absolute accuracy, absolute F1 and paired-question gates fail, so
+the decision is \texttt{reject\_question\_first\_intervention}. This is one
+matched training seed and a task-trained, context-first foundation; neither a
+universal ordering result nor a final generalization test is established.
+
+\plate{Figure_S6_question_first}{\textbf{Changing input order is insufficient.}
+Matched models receive the same source writing with the question before or
+after the passage. Question blanking uses each layout's actual positions.
+The question-first F1 difference is unresolved and its registered reading
+criteria fail.}{fig:question-first}
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -701,6 +745,28 @@ scripts/train\_visual\_copy\_language\_v57.py --arm no\_copy\\
 scripts/eval\_visual\_copy\_language\_v57.py.
 \end{quote}
 Native answers and self-contained export use
-\texttt{scripts/infer\_visual\_copy\_language.py}.
+\begin{quote}\small\ttfamily
+scripts/infer\_visual\_copy\_language.py.
+\end{quote}
+For complete image blocks, train both arms before the audit:
+\begin{quote}\small\ttfamily
+scripts/train\_visual\_answer\_blocks\_v58.py\\
+scripts/eval\_visual\_answer\_blocks\_v58.py.
+\end{quote}
+Native inference uses
+\begin{quote}\small\ttfamily
+scripts/infer\_visual\_answer\_blocks.py.
+\end{quote}
+Frozen-feature preparation, matched readout training and audit use the
+\texttt{cache\_frozen\_visual\_features\_v59},
+\texttt{train\_frozen\_visual\_readout\_v59} and
+\texttt{eval\_frozen\_visual\_readout\_v59} scripts.
+The matched input-order experiment runs both orders before auditing:
+\begin{quote}\small\ttfamily
+scripts/train\_question\_first\_reading\_v60.py\\
+--order context\\
+--order question\\
+scripts/eval\_question\_first\_reading\_v60.py.
+\end{quote}
 \input{references_main.tex}
 \end{document}

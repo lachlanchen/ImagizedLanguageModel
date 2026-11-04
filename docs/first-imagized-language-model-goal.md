@@ -50,13 +50,20 @@ different prior task training, not a general rejection of pretrained visual
 models. External pretraining is not counted as local 4090 work. Do not adopt
 a larger frozen encoder merely because it is larger.
 
-V60 is the registered next intervention: read the question before the passage
-so every causal passage state can depend on it. Compare with matched continued
-context-first training, using the same checkpoint, data and compute. Both arms
-must finish before audit, and a useful bounded result still does not qualify
-general image-language generation. Offline teachers and public pretrained
-components remain allowed with provenance; the final deployed model must be
-independent.
+V60's registered question-first intervention fails: 21/256 exact answers,
+23.765% F1, versus 27/256 and 26.908% for matched context-first continuation.
+The F1 difference is unresolved. Both arms retain all 256 exact motor copies;
+native PNG/export replay is exact. More readout adjustments or input reordering
+are not sufficient evidence of the intended language model.
+
+The next substantive route is end-to-end adaptation of a native image-language
+foundation with answer-image supervision and free image generation, rather
+than another frozen-feature extraction head. Keep its existing language
+pretraining attribution separate from local training, verify the full backward
+and optimizer memory on GPU 0, and compare actual unrestricted answer rasters
+with the unadapted model and blank-question controls. A later general
+instruction corpus and held-out final test remain necessary. Offline teachers
+and public pretrained components are allowed; inference must be independent.
 
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining

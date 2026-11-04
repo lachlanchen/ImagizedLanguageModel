@@ -17,10 +17,38 @@
 *Concept target, not a measured model output: writing pixels enter an independent
 ILM-V runtime and the intended answer is a rendered page image. The glyph panels
 use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
-V42--V46 canonical Chinese results and their narrower claim boundary are
+canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current evidence: image answers depend on the question, but remain inaccurate
+## Current evidence: complete image answers remain limited
+
+![Observed image-block model, matched reading scores and first two raw answers](publication/ilm-nature/figures/Figure_5_image_blocks.png)
+
+The independent **19.60M-parameter** model reads prompt images and predicts a
+complete observed image block with a learned end boundary. It gets **25/256**
+exact Chinese reading answers, versus **3/256** with question pixels blanked
+and **21/256** for matched additional glyph-answer training. Raster F1 is
+**27.033%**; its 4.893-point gain over that control is resolved, while the
+exact-answer difference is not. Training takes 211.0 seconds on one RTX 4090 D,
+excluding the earlier foundation.
+
+Reading still fails its registered qualification: both questions are correct
+in only **4/393** shared-paragraph pairs. Native prompt-PNG replay through the
+78.8 MB inference-only export reproduces output pixels and events exactly.
+This is extractive reading; the retained free writer is not a qualified general
+language model. [V58 result](references/visual_answer_blocks_v58_result.md) ·
+[Training and native inference](docs/visual-reading-language.md).
+
+Two further controlled experiments did not solve the selection problem.
+Frozen MIXAR features give 6/256 exact answers versus 24/256 student features
+under our shifted visual interface. Question-first reading gives 21/256 versus
+27/256 matched context-first continuation, with no resolved F1 gain. External
+pretraining is reported separately. The next route is end-to-end image-language
+adaptation and free image answers. See [V59](references/frozen_visual_foundation_v59_result.md),
+[V60](references/question_first_reading_v60_result.md) and the
+[current manuscript and editable figures](publication/ilm-nature/README.md).
+
+### Per-glyph visual reading baseline
 
 ![Measured visual reading result: exact answer and raster F1 with full questions, blanked questions and a matched no-copy model, plus the first two raw audit outputs](publication/ilm-nature/figures/Figure_4_visual_reading.png)
 

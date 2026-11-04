@@ -337,6 +337,19 @@ shift from MIXAR's native renderer; it does not disprove the released model's
 language competence. External pretraining is not local single-GPU work
 (Supplementary Note 18 and Fig.~S5).
 
+\subsection*{Moving the question before the passage is insufficient}
+For a causal reader, placing the question first allows each later passage
+state to depend on it. A registered input-order comparison starts both arms
+from identical V58 weights and retains the same images, parameters and
+4,000-update budget. Question-first reading yields 21/256 exact answers and
+23.765\% F1, versus 27/256 and 26.908\% for continued context-first training.
+The F1 difference is $-3.143$ points [$-6.544$, 0.446], unresolved. Both
+questions are correct in 5/393 versus 16/393 paragraph pairs. Four of eight
+intervention gates pass, and the change is rejected. Motor copying remains
+exact in both arms. This result limits a simple ordering explanation of the
+selection failure; it does not establish that question-conditioned source
+representations are ineffective in general (Supplementary Note 19 and Fig.~S6).
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
