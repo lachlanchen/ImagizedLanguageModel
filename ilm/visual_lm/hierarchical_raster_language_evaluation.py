@@ -9,6 +9,7 @@ import torch
 from .canonical_glyph_language_evaluation import _shuffle_prefix
 from .hierarchical_raster_language import (
     HierarchicalRasterLanguageModel,
+    micro_patches_to_raster,
     raster_to_generation_units,
 )
 from .hierarchical_raster_language_training import raster_mixture_nll
@@ -186,6 +187,8 @@ def evaluate_raster_generation(
             "sample_f1": 0.0,
             "selected_f1": 0.0,
             "greedy_coarse_f1": 0.0,
+            "plan_correct": 0.0,
+            "plan_f1": 0.0,
             "blank": 0.0,
             "unique": 0.0,
         }
@@ -233,6 +236,12 @@ def evaluate_raster_generation(
                     dtype=anchor.dtype,
                 )
             )
+            plan_raster = micro_patches_to_raster(
+                (plan[:, model.config.coarse_units :] >= 0.5).float(),
+                cell_size=model.config.cell_size,
+                patch_size=model.config.patch_size,
+            )
+            plan_identity = _identity(model, plan_raster, bank_fields)
             with _autocast(device, precision):
                 greedy, _ = model.writer.generate(
                     hidden,
@@ -290,6 +299,8 @@ def evaluate_raster_generation(
             item["greedy_coarse_f1"] += float(
                 _pixel_f1(greedy_coarse, target_coarse).sum()
             )
+            item["plan_correct"] += float((plan_identity == target_index).sum())
+            item["plan_f1"] += float(_pixel_f1(plan_raster, target).sum())
             item["blank"] += float(
                 (selected.flatten(1).sum(dim=-1) < 2).sum()
             )
@@ -302,13 +313,23 @@ def evaluate_raster_generation(
     result: dict[str, dict[str, float]] = {}
     for route, item in totals.items():
         count = item["examples"]
+        plan_identity = item["plan_correct"] / count
+        greedy_identity = item["greedy_correct"] / count
+        plan_f1 = item["plan_f1"] / count
+        greedy_f1 = item["greedy_f1"] / count
         result[route] = {
             "examples": count,
-            "greedy_identity_top1": item["greedy_correct"] / count,
+            "plan_identity_top1": plan_identity,
+            "plan_pixel_f1": plan_f1,
+            "greedy_identity_top1": greedy_identity,
+            "greedy_identity_retention_of_plan": (
+                greedy_identity / plan_identity if plan_identity > 0.0 else 0.0
+            ),
             "first_sample_identity_top1": item["sample_correct"] / count,
             "self_selected_identity_top1": item["selected_correct"] / count,
             "target_coverage": item["coverage"] / count,
-            "greedy_pixel_f1": item["greedy_f1"] / count,
+            "greedy_pixel_f1": greedy_f1,
+            "greedy_pixel_f1_delta_from_plan": greedy_f1 - plan_f1,
             "first_sample_pixel_f1": item["sample_f1"] / count,
             "self_selected_pixel_f1": item["selected_f1"] / count,
             "greedy_coarse_f1": item["greedy_coarse_f1"] / count,

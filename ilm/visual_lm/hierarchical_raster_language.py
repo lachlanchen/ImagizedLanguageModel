@@ -29,6 +29,10 @@ class HierarchicalRasterLanguageConfig:
     local_mlp_ratio: float = 3.0
     local_dropout: float = 0.05
     mixtures: int = 8
+    plan_preserving_residual: bool = False
+    plan_logit_limit: float = 4.0
+    residual_logit_limit: float = 4.0
+    residual_confidence_floor: float = 0.25
 
     def __post_init__(self) -> None:
         if self.cell_size != 32:
@@ -47,6 +51,10 @@ class HierarchicalRasterLanguageConfig:
             raise ValueError("V50 local dropout must lie in [0,1)")
         if self.mixtures < 2:
             raise ValueError("V50 requires at least two raster mixture components")
+        if self.plan_logit_limit <= 0.0 or self.residual_logit_limit <= 0.0:
+            raise ValueError("V50 plan and residual logit limits must be positive")
+        if not 0.0 <= self.residual_confidence_floor <= 1.0:
+            raise ValueError("V50 residual confidence floor must lie in [0,1]")
 
     @property
     def patches_per_side(self) -> int:
@@ -140,6 +148,8 @@ class RasterMixtureOutput:
     mixture_logits: torch.Tensor
     pixel_logits: torch.Tensor
     hidden_states: torch.Tensor
+    residual_logits: torch.Tensor | None = None
+    plan_logits: torch.Tensor | None = None
 
 
 def raster_to_micro_patches(
@@ -283,6 +293,19 @@ class LocalRasterAutoregressor(nn.Module):
         for block in self.blocks:
             block.attention.output.weight.data.mul_(residual_scale)
             block.down.weight.data.mul_(residual_scale)
+        if self.config.plan_preserving_residual:
+            output_weight = self.output.weight.data.reshape(
+                self.config.mixtures,
+                1 + self.config.pixels_per_patch,
+                self.config.local_dim,
+            )
+            output_weight[:, 1:].zero_()
+            if self.output.bias is not None:
+                output_bias = self.output.bias.data.reshape(
+                    self.config.mixtures,
+                    1 + self.config.pixels_per_patch,
+                )
+                output_bias[:, 1:].zero_()
 
     def _validate_condition(
         self,
@@ -333,10 +356,32 @@ class LocalRasterAutoregressor(nn.Module):
             self.config.mixtures,
             1 + self.config.pixels_per_patch,
         )
+        residual_logits = raw[..., 1:]
+        plan_logits: torch.Tensor | None = None
+        pixel_logits = residual_logits
+        if self.config.plan_preserving_residual:
+            plan_probability = plan_patches.float().clamp(1e-4, 1.0 - 1e-4)
+            plan_logits = torch.logit(plan_probability).clamp(
+                -self.config.plan_logit_limit,
+                self.config.plan_logit_limit,
+            )
+            uncertainty = 4.0 * plan_probability * (1.0 - plan_probability)
+            residual_gate = self.config.residual_confidence_floor + (
+                1.0 - self.config.residual_confidence_floor
+            ) * uncertainty
+            bounded_residual = self.config.residual_logit_limit * torch.tanh(
+                residual_logits
+            )
+            pixel_logits = (
+                plan_logits[:, :, None, :]
+                + residual_gate[:, :, None, :] * bounded_residual
+            )
         return RasterMixtureOutput(
             mixture_logits=raw[..., 0],
-            pixel_logits=raw[..., 1:],
+            pixel_logits=pixel_logits,
             hidden_states=state,
+            residual_logits=residual_logits,
+            plan_logits=plan_logits,
         )
 
     @torch.no_grad()
@@ -499,6 +544,12 @@ def hierarchical_raster_language_boundary_receipt(
         "coarse_generation_units": model.config.coarse_units,
         "total_generation_units": model.config.generation_units,
         "spatial_plan": "reader field decoded and patch-aligned without lookup",
+        "plan_preserving_residual": model.config.plan_preserving_residual,
+        "residual_rule": (
+            "confidence-gated bounded pixel-logit residual"
+            if model.config.plan_preserving_residual
+            else "unconstrained pixel logits"
+        ),
         "total_parameters": sum(parameter.numel() for parameter in model.parameters()),
         "reader_parameters": sum(
             parameter.numel() for parameter in model.reader.parameters()

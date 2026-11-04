@@ -21,6 +21,7 @@ class HierarchicalRasterLanguageLossWeights:
     counterfactual: float = 0.75
     visual_contrastive: float = 0.05
     anchor: float = 0.025
+    plan_residual: float = 0.01
 
     def __post_init__(self) -> None:
         if any(value < 0.0 for value in self.__dict__.values()):
@@ -46,6 +47,7 @@ class HierarchicalRasterLanguageLoss:
     teacher_pixel_f1: torch.Tensor
     mixture_entropy: torch.Tensor
     mixture_perplexity: torch.Tensor
+    plan_residual: torch.Tensor
     selected_positions: int
 
     def detached_metrics(self) -> dict[str, float]:
@@ -68,6 +70,7 @@ class HierarchicalRasterLanguageLoss:
             "teacher_pixel_f1": float(self.teacher_pixel_f1.detach()),
             "mixture_entropy": float(self.mixture_entropy.detach()),
             "mixture_perplexity": float(self.mixture_perplexity.detach()),
+            "plan_residual": float(self.plan_residual.detach()),
             "selected_positions": float(self.selected_positions),
         }
 
@@ -190,6 +193,12 @@ def hierarchical_raster_language_loss(
     entropy = -(
         probabilities * probabilities.clamp_min(1e-8).log()
     ).sum(dim=-1).mean()
+    plan_residual = (
+        torch.tanh(correct.residual_logits.float()).square().mean()
+        if correct.residual_logits is not None
+        and model.config.plan_preserving_residual
+        else correct.pixel_logits.new_zeros(())
+    )
     raster_nll = correct_glyph_nll.mean()
     shuffled_raster_nll = shuffled_glyph_nll.mean()
     total = (
@@ -197,6 +206,7 @@ def hierarchical_raster_language_loss(
         + weights.counterfactual * counterfactual
         + weights.visual_contrastive * contrastive
         + weights.anchor * anchor
+        + weights.plan_residual * plan_residual
     )
     return HierarchicalRasterLanguageLoss(
         loss=total,
@@ -217,5 +227,6 @@ def hierarchical_raster_language_loss(
         ),
         mixture_entropy=entropy,
         mixture_perplexity=entropy.exp(),
+        plan_residual=plan_residual,
         selected_positions=len(selected_hidden),
     )

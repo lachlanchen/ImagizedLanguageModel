@@ -56,7 +56,10 @@ from scripts.train_visual_state_actuator import (
 )
 
 
-PROTOCOL_DOCUMENT = "references/hierarchical_raster_language_v50_protocol.md"
+BASE_PROTOCOL_DOCUMENT = "references/hierarchical_raster_language_v50_protocol.md"
+PLAN_PRESERVING_PROTOCOL_DOCUMENT = (
+    "references/plan_preserving_raster_writer_v50p_protocol.md"
+)
 DEFAULT_MANIFEST = "data/visual_grammar/chinese_wikisource_public_domain.jsonl"
 DEFAULT_READER = "artifacts/canonical_glyph_language_v42_20260814/checkpoint_final.pt"
 DEFAULT_OUTPUT = "artifacts/hierarchical_raster_language_v50_20261104"
@@ -150,6 +153,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-layers", type=int, default=4)
     parser.add_argument("--local-heads", type=int, default=8)
     parser.add_argument("--mixtures", type=int, default=8)
+    parser.add_argument(
+        "--plan-preserving-residual",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help=(
+            "Initialize the writer at the decoded visual plan and learn only "
+            "confidence-gated bounded residual logits."
+        ),
+    )
+    parser.add_argument("--plan-logit-limit", type=float, default=4.0)
+    parser.add_argument("--residual-logit-limit", type=float, default=4.0)
+    parser.add_argument("--residual-confidence-floor", type=float, default=0.25)
     parser.add_argument("--log-every", type=int, default=50)
     parser.add_argument("--save-every", type=int, default=500)
     parser.add_argument("--smoke", action="store_true")
@@ -182,6 +197,12 @@ def _writer_config(arguments: Mapping[str, Any]) -> HierarchicalRasterLanguageCo
         local_layers=int(arguments["local_layers"]),
         local_heads=int(arguments["local_heads"]),
         mixtures=int(arguments["mixtures"]),
+        plan_preserving_residual=bool(arguments["plan_preserving_residual"]),
+        plan_logit_limit=float(arguments["plan_logit_limit"]),
+        residual_logit_limit=float(arguments["residual_logit_limit"]),
+        residual_confidence_floor=float(
+            arguments["residual_confidence_floor"]
+        ),
     )
 
 
@@ -255,6 +276,11 @@ def _checkpoint(
     metrics: Mapping[str, float],
     device: torch.device,
 ) -> dict[str, Any]:
+    protocol_document = (
+        PLAN_PRESERVING_PROTOCOL_DOCUMENT
+        if model.config.plan_preserving_residual
+        else BASE_PROTOCOL_DOCUMENT
+    )
     payload: dict[str, Any] = {
         "experiment": HIERARCHICAL_RASTER_LANGUAGE_ARCHITECTURE,
         "architecture": HIERARCHICAL_RASTER_LANGUAGE_ARCHITECTURE,
@@ -275,8 +301,8 @@ def _checkpoint(
         "data_boundary": canonical_glyph_data_boundary_receipt(),
         "model_boundary": hierarchical_raster_language_boundary_receipt(model),
         "protocol": {
-            "document": PROTOCOL_DOCUMENT,
-            "sha256": file_sha256(PROTOCOL_DOCUMENT),
+            "document": protocol_document,
+            "sha256": file_sha256(protocol_document),
             "source_files_sha256": {
                 path: file_sha256(path) for path in SOURCE_FILES
             },

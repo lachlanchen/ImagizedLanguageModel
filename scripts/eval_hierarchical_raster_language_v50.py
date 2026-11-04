@@ -120,6 +120,8 @@ def _save_sample_sheet(
     shuffled = _shuffle_prefix(context, first_index=0)
     generator = torch.Generator(device=device).manual_seed(V50_AUDIT_SEED + 91)
     with autocast_context(device, precision):
+        language = model.language(context)
+        plan = model.reader.field.binary(language["anchor_fields"][:, -1])
         ordered, _ = model.sample_next(context, stochastic=False)
         shuffled_output, _ = model.sample_next(shuffled, stochastic=False)
         sampled, _ = model.sample_next(
@@ -127,9 +129,9 @@ def _save_sample_sheet(
             stochastic=True,
             generator=generator,
         )
-    rows = torch.stack((target, ordered, shuffled_output, sampled), dim=1)
+    rows = torch.stack((target, plan, ordered, shuffled_output, sampled), dim=1)
     path.parent.mkdir(parents=True, exist_ok=True)
-    pack_visual_cells(rows.flatten(0, 1).cpu(), columns=8, gutter=2).save(path)
+    pack_visual_cells(rows.flatten(0, 1).cpu(), columns=10, gutter=2).save(path)
 
 
 def main() -> None:
@@ -265,33 +267,83 @@ def main() -> None:
             generation["ordered"]["first_sample_identity_top1"]
             - generation["shuffled"]["first_sample_identity_top1"]
         ),
+        "ordered_greedy_identity_gain_over_shuffled": (
+            generation["ordered"]["greedy_identity_top1"]
+            - generation["shuffled"]["greedy_identity_top1"]
+        ),
+        "ordered_plan_identity_gain_over_shuffled": (
+            generation["ordered"]["plan_identity_top1"]
+            - generation["shuffled"]["plan_identity_top1"]
+        ),
         "ordered_feedback_gain_over_shuffled": (
             feedback["ordered"]["mean_identity_top1"]
             - feedback["shuffled"]["mean_identity_top1"]
         ),
     }
-    gates = {
-        "coarse_counterfactual_accuracy": likelihood["ordered_better_coarse"]
-        > 0.60,
-        "coarse_nll_gain_positive": likelihood[
-            "ordered_coarse_nll_gain_over_shuffled"
-        ]
-        > 0.0,
-        "identity_beats_v43": comparisons["first_sample_identity_gain_over_v43"]
-        > 0.0,
-        "ordered_identity_margin": comparisons[
-            "ordered_identity_gain_over_shuffled"
-        ]
-        >= 0.01,
-        "pixel_f1_beats_v43": comparisons["first_sample_pixel_f1_gain_over_v43"]
-        > 0.0,
-        "nonblank": generation["ordered"]["self_selected_blank_rate"] < 0.02,
-        "feedback_order_sensitive": comparisons[
-            "ordered_feedback_gain_over_shuffled"
-        ]
-        > 0.0,
-        "image_only_boundary": _boundary_clean(boundary),
-    }
+    if model.config.plan_preserving_residual:
+        gates = {
+            "image_only_boundary": _boundary_clean(boundary),
+            "nonblank": generation["ordered"]["self_selected_blank_rate"]
+            < 0.02,
+            "coarse_nll_gain_positive": likelihood[
+                "ordered_coarse_nll_gain_over_shuffled"
+            ]
+            > 0.0,
+            "feedback_order_sensitive": comparisons[
+                "ordered_feedback_gain_over_shuffled"
+            ]
+            > 0.0,
+            "greedy_retains_plan_identity": generation["ordered"][
+                "greedy_identity_retention_of_plan"
+            ]
+            >= 0.85,
+            "greedy_retains_plan_f1": generation["ordered"][
+                "greedy_pixel_f1_delta_from_plan"
+            ]
+            >= -0.02,
+            "greedy_order_sensitive": comparisons[
+                "ordered_greedy_identity_gain_over_shuffled"
+            ]
+            > 0.0,
+            "sample_identity_beats_v43": comparisons[
+                "first_sample_identity_gain_over_v43"
+            ]
+            > 0.0,
+            "sample_f1_beats_v43": comparisons[
+                "first_sample_pixel_f1_gain_over_v43"
+            ]
+            > 0.0,
+        }
+    else:
+        gates = {
+            "coarse_counterfactual_accuracy": likelihood[
+                "ordered_better_coarse"
+            ]
+            > 0.60,
+            "coarse_nll_gain_positive": likelihood[
+                "ordered_coarse_nll_gain_over_shuffled"
+            ]
+            > 0.0,
+            "identity_beats_v43": comparisons[
+                "first_sample_identity_gain_over_v43"
+            ]
+            > 0.0,
+            "ordered_identity_margin": comparisons[
+                "ordered_identity_gain_over_shuffled"
+            ]
+            >= 0.01,
+            "pixel_f1_beats_v43": comparisons[
+                "first_sample_pixel_f1_gain_over_v43"
+            ]
+            > 0.0,
+            "nonblank": generation["ordered"]["self_selected_blank_rate"]
+            < 0.02,
+            "feedback_order_sensitive": comparisons[
+                "ordered_feedback_gain_over_shuffled"
+            ]
+            > 0.0,
+            "image_only_boundary": _boundary_clean(boundary),
+        }
     decision = "retain" if all(gates.values()) else "reject-or-revise"
     report = {
         "experiment": "hierarchical-raster-language-v50-development",

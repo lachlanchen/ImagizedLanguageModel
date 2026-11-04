@@ -53,6 +53,22 @@ def _model() -> HierarchicalRasterLanguageModel:
     )
 
 
+def _plan_preserving_model() -> HierarchicalRasterLanguageModel:
+    return HierarchicalRasterLanguageModel(
+        _reader_config(),
+        HierarchicalRasterLanguageConfig(
+            patch_size=8,
+            local_dim=64,
+            local_layers=1,
+            local_heads=4,
+            local_mlp_ratio=2.0,
+            local_dropout=0.0,
+            mixtures=2,
+            plan_preserving_residual=True,
+        ),
+    )
+
+
 def test_micro_patch_roundtrip_is_exact() -> None:
     cells = (torch.rand(3, 1, 32, 32) > 0.7).float()
     patches = raster_to_micro_patches(cells, patch_size=8)
@@ -112,6 +128,40 @@ def test_mixture_likelihood_rewards_matching_raster() -> None:
     _, matching_nll = raster_mixture_nll(matching_output, target)
     _, wrong_nll = raster_mixture_nll(wrong_output, target)
     assert bool((matching_nll < wrong_nll).all())
+
+
+def test_plan_preserving_writer_starts_at_visual_plan() -> None:
+    torch.manual_seed(5)
+    model = _plan_preserving_model().eval()
+    context = (torch.rand(2, 4, 1, 32, 32) > 0.8).float()
+    language = model.language(context)
+    hidden = language["hidden_states"][:, -1]
+    anchor = language["anchor_fields"][:, -1]
+    plan = model.plan_units(anchor)
+    generated, _ = model.writer.generate(
+        hidden,
+        anchor,
+        plan,
+        stochastic=False,
+    )
+    expected = model.reader.field.binary(anchor)
+    assert torch.equal(generated, expected)
+
+
+def test_confident_plan_pixels_cannot_be_flipped_by_bounded_residual() -> None:
+    torch.manual_seed(6)
+    model = _plan_preserving_model().eval()
+    context = (torch.rand(2, 4, 1, 32, 32) > 0.8).float()
+    language = model.language(context)
+    hidden = language["hidden_states"][:, -1]
+    anchor = language["anchor_fields"][:, -1]
+    plan = model.plan_units(anchor)
+    targets = torch.zeros_like(plan)
+    output = model.writer(hidden, anchor, targets, plan)
+    confident = (plan <= 1e-4) | (plan >= 1.0 - 1e-4)
+    if bool(confident.any()):
+        predicted = output.pixel_logits.mean(dim=2) >= 0.0
+        assert torch.equal(predicted[confident], (plan >= 0.5)[confident])
 
 
 def test_joint_loss_backpropagates_through_reader_and_writer() -> None:
@@ -175,4 +225,6 @@ def test_evaluator_compares_likelihood_generation_and_feedback() -> None:
     )
     assert likelihood["examples"] == 2
     assert generation["ordered"]["examples"] == 2
+    assert "plan_identity_top1" in generation["ordered"]
+    assert "greedy_identity_retention_of_plan" in generation["ordered"]
     assert len(feedback["ordered"]["identity_top1_by_step"]) == 2
