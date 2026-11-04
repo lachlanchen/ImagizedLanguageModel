@@ -9,6 +9,9 @@ from ilm.visual_lm.noisy_visual_energy_guidance_v52 import (
     NoisyVisualEnergyCritic,
     noisy_visual_energy_boundary_receipt,
 )
+from ilm.visual_lm.noisy_visual_energy_guidance_v52_evaluation import (
+    evaluate_clean_visual_energy,
+)
 from ilm.visual_lm.noisy_visual_energy_guidance_v52_training import (
     exact_raster_positive_mask,
     multi_positive_log_mass,
@@ -55,3 +58,29 @@ def test_v52_boundary_has_no_symbolic_runtime_path() -> None:
     assert receipt["text_tokenizer"] is False
     assert receipt["unicode_or_character_ids_in_model"] is False
     assert receipt["glyph_vocabulary_or_candidate_bank_in_model"] is False
+
+
+def test_v52_clean_energy_audit_reports_ordered_and_shuffled_routes() -> None:
+    reader = CausalRasterReader(CanonicalGlyphLanguageConfig())
+    critic = NoisyVisualEnergyCritic(NoisyVisualEnergyConfig())
+    bank = torch.zeros(4, 1, 32, 32)
+    bank[0, :, 6:26, 15:17] = 1.0
+    bank[1, :, 15:17, 6:26] = 1.0
+    bank[2, :, 8:24, 8:24] = torch.eye(16)
+    bank[3, :, 8:24, 8:24] = torch.flip(torch.eye(16), dims=(0,))
+    context = bank[torch.arange(128).remainder(4)].reshape(2, 64, 1, 32, 32)
+    loader = [{"context": context, "target_index": torch.tensor([0, 1])}]
+    result = evaluate_clean_visual_energy(
+        reader,
+        critic,
+        loader,
+        bank,
+        device=torch.device("cpu"),
+        maximum_examples=2,
+    )
+    assert set(result) == {"ordered", "shuffled"}
+    for route in result.values():
+        assert route["examples"] == 2
+        assert 0.0 <= route["identity_top1"] <= 1.0
+        assert 0.0 <= route["v42_identity_top1"] <= 1.0
+        assert torch.isfinite(torch.tensor(route["target_log_probability"]))
