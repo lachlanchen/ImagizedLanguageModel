@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 
 import openpyxl
@@ -39,6 +40,23 @@ def main():
                for version in ("v58", "v59", "v60")}
     native = json.loads((HERE / "evidence/v61_development_report.json").read_text())
     correlated = json.loads((HERE / "evidence/v62_development_report.json").read_text())
+    transcripts = json.loads((HERE / "evidence/v62_transcript_partial_bounds.json").read_text())
+    original_reader = json.loads((HERE / "evidence/v62_vision_transcript_diagnostic.json").read_text())
+    if not transcripts["post_hoc"] or transcripts["model_calls"] != 0 or original_reader["decision"] != "invalid_actor_transcription":
+        raise ValueError("transcript scope or original decision changed")
+    table = (HERE / "transcript_bounds_table.tex").read_text()
+    def formatted_interval(values):
+        a, b = values
+        def number(value):
+            return str(Decimal(str(100*value)).quantize(Decimal(".001"), rounding=ROUND_HALF_UP))
+        return number(a) if a == b else number(a) + "--" + number(b)
+    for route, label in (("k1", "K=1"), ("k1_blank", "K=1, blank Q"), ("k8", "K=8"), ("k8_blank", "K=8, blank Q")):
+        row = transcripts["measurements"][route]
+        expected = f"{label} & {row['valid_examples']} / {row['unknown_examples']} & " + " & ".join(
+            formatted_interval(row["metrics"][metric]["identification_interval"])
+            for metric in ("text_exact", "bounded_character_accuracy"))
+        if expected not in table or row["valid_examples"] + row["unknown_examples"] != 256:
+            raise ValueError("transcript table differs from full-case interval evidence")
     render = json.loads((HERE / "evidence/figure_render_receipt.json").read_text())
     if render["pptx_sha256"] != digest(HERE / "ILM_Figures_editable.pptx"):
         raise ValueError("editable deck has changed since rendering")
@@ -82,6 +100,9 @@ def main():
             )
         ):
             raise ValueError(f"{name} lacks current measured results")
+        if name == "supplementary_information" and any(value not in extracted for value in
+                ("122/128", "0.781", "2.806", "2.945", "post-hoc")):
+            raise ValueError("supplement lacks calibrated, explicitly post-hoc transcript evidence")
         log = (HERE / f".{name}/{name}.log").read_text()
         if any(
             text in log
@@ -226,7 +247,7 @@ def main():
                         raise ValueError(
                             f"chart {chart_index} workbook differs from audit"
                         )
-    target = DESTINATION / "ILM_NatureStyle_20261105_V62"
+    target = DESTINATION / "ILM_NatureStyle_20261105_V62_TranscriptBounds"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):

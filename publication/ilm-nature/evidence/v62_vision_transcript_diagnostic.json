@@ -1,0 +1,55 @@
+{
+  "primary_audit_sha256": "00b5a96cf6d8ece2c51fadb30349cd558e09ec2dc0b7243b8b4ede3a45b8d562",
+  "calibration_report_sha256": "269063cbb9e9c429b9223036b1f8550288b01ccb52d0384956f3c186c9ce3dbe",
+  "model": "qwen3-vl:8b-instruct-q4_K_M",
+  "evaluator_manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+  "evaluator_weights_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "options": {
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 20266371,
+    "num_ctx": 2048,
+    "num_predict": 256
+  },
+  "prompt_sha256": "9c3c4b9ac2d3e023b8e7d661239b2454dd31736527161f52c8b8fdf1a748fbab",
+  "source_sha256": {
+    "scripts/audit_correlated_native_transcripts_v62.py": "521b6b99ddf0ab9035e41a656de5613ce519a434aff2eb734532f23401aa8c7f",
+    "references/v62_blind_vision_transcription_plan.md": "ef586bb294c94e6a209122c7695430d68e58c36e6a0b6aa9b3ffa719b5d2b665",
+    "ilm/visual_lm/blind_vision_transcription.py": "5d4cc14f7f44f67543b76592cb03416b212374e407d8aa50fe619544025fa38f",
+    "scripts/audit_native_pixel_transcripts_v61.py": "f07664730db400e135a6cebb930ad1c9f76d92226b725546b5c6fa4a89f7a213"
+  },
+  "question_visible": false,
+  "reference_text_visible": false,
+  "actor_identity_visible": false,
+  "external_evaluator_not_actor": true,
+  "primary_decision_unchanged": true,
+  "calibration": {
+    "measurements": {
+      "reference": {
+        "examples": 128,
+        "exact_fraction": 0.953125
+      },
+      "blank": {
+        "examples": 16,
+        "exact_fraction": 1.0
+      },
+      "random_ink": {
+        "examples": 16,
+        "exact_fraction": 1.0
+      }
+    },
+    "gates": {
+      "reference_transcription": true,
+      "blanks_empty": true,
+      "random_ink_empty": true,
+      "valid_json": true
+    },
+    "passed": true,
+    "recognition_request_sha256": "d82cd6d26f5d5781cff9c84ca88b6a41c47b66b8639bd53562b7299ef0a8590f",
+    "source_image_count": 157,
+    "frozen_before_actor_recognition": true
+  },
+  "decision": "invalid_actor_transcription",
+  "actor_images_transcribed": 1015,
+  "qualification": "Invalid JSON prevents a complete fixed-case score"
+}

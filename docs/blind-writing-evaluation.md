@@ -46,4 +46,9 @@ reference agreement on the registered cases.
 Implementation checks on 5 November 2026: two payload/schema tests pass; both
 scripts compile; an actual attempted invocation during K=8 training exits at
 the pipeline guard before creating an evaluator service or making model calls.
-Reader calibration and V62 transcript results are pending at this checkpoint.
+The completed reader calibrates at 122/128 reference answers, with every blank
+and random-ink control empty. Three invalid actor responses prevent its complete
+fixed-case score. The [post-hoc sensitivity result](../references/v62_transcript_sensitivity_result.md)
+reports bounded missing-score intervals without dropping cases or retrying
+outputs. K=8 has zero exact transcript agreements and no resolved character
+question gain. The evaluator server/runner exit and release GPU 0 memory.

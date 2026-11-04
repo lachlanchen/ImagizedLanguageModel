@@ -1,0 +1,33 @@
+--- v62-primary/supplementary_information.tex
++++ v62-transcripts/supplementary_information.tex
+@@ -885,0 +886,30 @@
++\subsection*{Auxiliary reader and post-hoc transcript sensitivity}
++A separately preregistered, answer-only Qwen3-VL 8B reader transcribes
++122/128 training-reference images exactly (95.313\%), returns every one of
++16 blank and 16 random-ink controls empty, and produces valid JSON throughout
++calibration. The fixed instruction and anonymous images disclose neither
++questions nor reference answers to the reader. Three responses among 1,015
++unique actor images are invalid, including two that reach the registered
++256-output-token limit. The original diagnostic therefore reports
++\texttt{invalid\_actor\_transcription}; it has no complete fixed-case score.
++
++An explicitly post-hoc sensitivity analysis reuses the first responses
++without retry, repair or new model calls. It retains all 256 cases in each
++condition and assigns each invalid bounded score possible range $[0,1]$.
++The resulting full-case means are below; ranges are identification intervals,
++not confidence intervals. Exact text means normalized transcript agreement
++with any retained reference. Character score is one minus normalized edit
++error, clipped to $[0,1]$.
++\input{transcript_bounds_table.tex}
++K=8's normal-minus-blank character difference is $-0.139$ percentage points,
++with article-bootstrap sensitivity envelope [$-0.962$, 0.638]. The envelope
++uses 2,000 article resamples, seed 20266379, taking the lower endpoint's
++2.5th percentile and upper endpoint's 97.5th percentile. It covers the
++unknown-score assignments within this resampling scheme, not systematic
++reader errors, training-seed variation or reused-development selection.
++It establishes no new model qualification and changes neither failed decision.
++The external reader makes 1,172 calls over 1,092.1 s of owned runtime including
++cleanup; maximum resident GPU memory sampled after requests is 7,278 MiB.
++These costs are separate from actor inference and training. The evaluator
++server and runner exit, its port closes and GPU 0 memory is released.
++

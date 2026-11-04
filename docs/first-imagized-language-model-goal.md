@@ -12,8 +12,10 @@ intervention and both bounded reading gates fail. Exact offline deployment
 replay and full optimizer/RNG resume checks pass. These are working runtime
 components, not a useful general language model. See the
 [completed primary result](../references/correlated_native_density_v62_result.md).
-The separately registered vision reader passes calibration; its answer-only
-actor transcription is running after the primary pipeline, on GPU 0 only.
+The separately registered vision reader passes calibration; three invalid actor
+responses prevent a complete fixed-case score. Post-hoc missing-score bounds
+retain all cases: K=8 has zero exact transcript agreements and no resolved
+character question gain. The evaluator is stopped and GPU 0 memory released.
 
 The following checkpoints preserve the experimental sequence; statements
 about a then-running V62 phase are superseded by the completed result above.

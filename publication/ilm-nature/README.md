@@ -18,6 +18,13 @@ Figure 7, Supplementary Note 21 and native editable slides 16–17 give the
 probability law, mechanism, full comparison and first two raw answers.
 The complete V61 package is preserved in `baselines/v61/`.
 
+The auxiliary vision reader passes reference calibration but returns three
+invalid actor responses, so its original fixed-case diagnostic fails.
+An explicitly post-hoc table in Supplementary Note 21 bounds every missing
+score without dropping cases: K=8 has zero exact transcript agreements and no
+resolved character-accuracy question effect. The primary rejection is unchanged.
+The earlier primary-only V62 package is preserved in `baselines/v62-primary/`.
+
 Full native image-language adaptation now provides a free-writing test. All
 477.15M externally pretrained parameters receive answer-image gradients for
 1,000 updates on one RTX 4090 D, taking 1,501.1 seconds at 9.912 GiB allocated
@@ -132,6 +139,7 @@ PYTHONPATH=. python publication/ilm-nature/generate_native_pixel_evidence.py
 PYTHONPATH=. python publication/ilm-nature/generate_native_pixel_editable_figures.py
 PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_evidence.py
 PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_editable_figures.py
+PYTHONPATH=. python publication/ilm-nature/generate_transcript_bounds_evidence.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
@@ -156,7 +164,8 @@ recorded in the run report. Experimental code resides in `scripts/` and
 The seventeen-slide editable deck retains earlier plates and adds native
 block-reading, frozen-foundation, input-order and conditional-density charts,
 editable mechanism shapes and actual answer images. Current
-validated copies are delivered to Nutstore `Projects/ILM/` under the V62 version
+validated copies are delivered to Nutstore `Projects/ILM/` under the
+`V62_TranscriptBounds` version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 

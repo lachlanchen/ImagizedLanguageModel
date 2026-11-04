@@ -63,10 +63,12 @@ the completed comparison, preserving V61 and every earlier rejection.
 
 A separately preregistered answer-only vision reader passes its calibration:
 122/128 references exact, all 16 blanks empty, all 16 random-ink controls empty
-and valid JSON throughout. At this checkpoint, 1,015 unique anonymous actor
-images are being transcribed on an owned GPU-0 evaluator, outside the actor.
-Its auxiliary scores are not yet available and cannot alter the primary
-decisions. The owned evaluator will be stopped after evidence capture.
+and valid JSON throughout. It then reads 1,015 unique anonymous actor images,
+but three invalid responses prevent a complete fixed-case score. A separate
+[post-hoc bounds analysis](v62_transcript_sensitivity_result.md) preserves all
+unknown cases and leaves both decisions unchanged. K=8 has no exact reference
+transcript agreements and no resolved character-accuracy question gain.
+The owned evaluator is stopped, its port is closed and GPU 0 memory released.
 
 The result narrows the next question: more expressive local image likelihood
 helps bitmap fit at this budget, but a training signal that preserves the

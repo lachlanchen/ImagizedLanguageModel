@@ -1,0 +1,561 @@
+Written language is encountered as marks on paper, screens and historical
+surfaces. Its visual form carries information about script, handwriting and
+material history. Modern character encodings provide a powerful interface to
+many such marks, but a finite inventory cannot express every damaged,
+transitional or unencoded form. An image-based language model could retain
+that evidence throughout reading and generation, with transcription offered
+as an optional output view.
+
+Pixel-based language modelling already has substantial precedents.
+PIXAR demonstrates autoregressive language generation in pixel space and
+identifies the difficulty of generating readable text\cite{pixar}. Continuous
+autoregression can use a diffusion loss in place of vector quantization\cite{mar},
+while Diffusion Forcing models continuous sequences under independently chosen
+noise levels\cite{forcing}. These results motivate a visual language interface,
+but do not establish that a small glyph generator acquires linguistic
+knowledge or that image input automatically reduces training cost.
+Exact pixel factorization also has established precedents in PixelRNN and
+conditional PixelCNN\cite{pixelrnn,pixelcnn}. Masked autoregressive networks
+provide normalized probabilities without a character dictionary\cite{made}.
+Multilingual generation from pixels has also been studied\cite{mixar}.
+
+We investigate the conditional generation problem directly. The model
+receives raster history, predicts a distribution of future writing, emits
+pixels and rereads those pixels. Chinese provides a demanding initial case:
+stroke configurations must remain coherent while context selects among many
+similar written forms. The present study uses one canonical font to isolate
+this coupling before introducing handwriting or historical scripts.
+
+\section*{Results}
+\subsection*{A continuous visual interface preserves the written signal}
+Each observed cell is a $32\times32$ ink image. An orthonormal transform maps
+its signed pixels into a 1,024-dimensional continuous field. The transform is
+invertible and contains no learned character dictionary. An ordered sequence
+of these fields enters a causal transformer. The deployed model receives no
+Unicode values, OCR transcripts, character IDs or vocabulary logits
+(Fig.~\ref{fig:mechanism}). Host-side rendering uses encoded source text during
+data preparation. This distinction matters: the current benchmark studies
+learning from rendered Chinese, rather than discovering a script from raw
+archaeological photographs.
+
+\plate{Figure_1_mechanism}{\textbf{A visual language interface and its conditional generation test.}
+\textbf{a}, Rendered or native writing supplies ordered image cells to a causal
+visual reader. Text rendering is an optional host interface. \textbf{b}, A
+conditional denoiser uses the frozen reader state and a noisy four-cell strip
+to predict diffusion velocity. Future cells exchange information through
+convolutions and pooled-cell attention. \textbf{c}, Sampling starts from noise,
+emits four visible cells and appends their pixels to the next context. Optional
+transcription follows generation and is absent from the model. The schematic
+shows the implemented experimental contract, without claiming that its
+generated content is already correct.}{fig:mechanism}
+
+\subsection*{Ordered image history contains next-writing information}
+The strongest established reader result uses 2,048 deterministic development
+windows and an evaluator-only bank of 1,024 canonical glyph images. Full-history
+next-image top-1 is 19.97\%, above the image unigram at 1.42\%, the symbolic
+bigram at 12.26\% and the prefix-shuffled condition at 18.36\%. The ordered
+history improves target log probability by 0.174 nat over the shuffled control.
+This result supports bounded conditional prediction from image sequences.
+
+These figures measure selection among completed images. The evaluator bank
+does not enter the model and cannot act as a deployed writer. Thresholding
+the predicted continuous field can mix strokes from several plausible futures.
+For squared-error prediction, the population optimum is
+$f^*(H)=\mathbb{E}[X\mid H]$. A conditional mean need not be a valid glyph
+when several futures are possible. Sharp copying, target ranking and sampled
+language generation therefore require separate measurements.
+
+\subsection*{A glyph prior does not automatically bind to language}
+To separate visual synthesis from contextual prediction, we train an
+unconditional glyph prior and a noisy visual compatibility critic while
+freezing the causal reader. The combined runtime contains 23.27 million
+parameters. The critic scores an arbitrary noisy image against the visible
+history. In the ideal density-ratio limit,
+\begin{equation}
+\nabla_x\log p_t(x\mid H)=\nabla_x\log p_t(x)
++\nabla_x\log\frac{p_t(x\mid H)}{p_t(x)}.
+\end{equation}
+The construction is related to classifier-guided diffusion\cite{guidance}.
+
+On 512 development windows, the clean critic reaches 21.875\% top-1, versus
+20.898\% with shuffled history. Its first guided sample reaches zero target
+identities in 256 cases. Selecting the highest clean critic score among four
+samples reaches 1/256, with the same result after shuffling history. The
+generated glyph-like marks are diverse and nonblank, yet fail conditional
+identity (Fig.~\ref{fig:evidence}).
+
+This experiment identifies a reader--writer gap without proving a unique
+cause. At the terminal corruption level, target signal power is
+$2.43\times10^{-7}$, and an exact conditional guidance term should vanish.
+That limit also occurs in successful conditional diffusion. It cannot alone
+explain the failure. Insufficient conditional-score accuracy, off-manifold
+gradients, limited prior quality and finite sampling remain compatible
+explanations. We consequently test a directly conditional writer rather than
+interpret clean-image ranking as evidence of a generative solution.
+
+\subsection*{Direct conditional block generation tests the missing coupling}
+The new writer models a joint four-cell future conditioned on 60 visible
+cells. It reuses the 16.28M-parameter reader and fine-tunes a 5.90M-parameter
+strip denoiser. A projected reader state modulates each residual scale, and a
+four-cell attention layer exchanges future information at the bottleneck.
+There is no separate guidance critic or candidate selector.
+
+For signed clean writing $x_0$, noise $\epsilon$ and cumulative signal
+$\bar\alpha_t$, the training target is velocity:
+\begin{align}
+x_t&=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\\
+v^*&=\sqrt{\bar\alpha_t}\epsilon-\sqrt{1-\bar\alpha_t}x_0.
+\end{align}
+The clean estimate is
+$\hat x_0=\sqrt{\bar\alpha_t}x_t-\sqrt{1-\bar\alpha_t}\hat v$.
+Training alternates independently stratified future noise levels with
+synchronous levels that cover the sampling distribution. Fixed visual-field
+and foreground losses retain the writing signal. Intermediate target-field
+alignment follows the motivation of representation alignment\cite{repa},
+using a fixed raster transform rather than a semantic teacher.
+
+The run completes all 8,000 updates in \TrainSeconds\ s, using
+\TrainMemory\ GiB peak allocated CUDA memory. Evaluation uses one primary
+sample from 256 prefixes under paired initial noise. Ordered first-position
+identity is \FirstIdentity\%, compared with \FirstShuffled\% after shuffling
+and \FirstZero\% with a zero condition. Across all four future cells, identity
+is \BlockIdentity\%, with an ordered-minus-shuffled difference of
+\BlockGain\ percentage points and a record-bootstrap 95\% interval of
+[\BlockLow, \BlockHigh]. Pixel F1 is \BlockFone.
+The registered complete-mechanism decision is \texttt{\RunDecision}.
+The raw image panel shows the first fixed examples without reranking or
+selection (Fig.~\ref{fig:evidence}).
+
+A post-result motor diagnostic supplies the intended first-cell image to the
+same trained writer on 64 fixed prefixes. Exact plan and image-field supply
+raise pixel F1 from 0.378 to 0.459 and target identity from 1/64 to 5/64.
+The fixed inverse transform reproduces the supplied raster with F1 1.0.
+Because this test supplies the answer, it provides no autonomous-language
+evidence. It shows that the current learned writer still loses substantial
+shape information even with an exact visual condition.
+
+\plate{Figure_2_evidence}{\textbf{Prediction and generated-image evidence.}
+\textbf{a}, The established causal reader ranks completed next images above
+unigram, bigram and shuffled-history controls on 2,048 windows. These are
+ranking measurements, not generated text. \textbf{b}, Prior-plus-critic
+guidance retains completed-image ranking but almost never generates the target
+identity. \textbf{c}, Direct conditional block generation reports all four
+positions under ordered, shuffled and zero conditions. Bars use the same
+starting noise and single primary samples. \textbf{d}, Fixed, unselected
+examples show the target and all generated controls. Images are raw model
+outputs with nearest-neighbour enlargement. No OCR or image-bank replacement
+is applied.}{fig:evidence}
+
+\subsection*{Exact raster likelihood preserves copying but not conditional language}
+The diffusion writer's supplied-image failure motivates a distribution that
+retains the exact inverse visual field as aligned pixel logits. For binary
+image $X$, ordered history $H$ and row-major pixel index $p$, we define
+\begin{equation}
+p_\theta(X\mid H)=\prod_{p=1}^{1024}
+\operatorname{Bern}\!\left[X_p;\sigma(6A_p+\delta_\theta(H,X_{<p}))\right].
+\end{equation}
+Here $A$ is the inverse predicted field, scaled to signed pixels and clipped
+to $[-2,2]$. A causal row transformer and within-row MADE supply the residual.
+The density contains 2,434,592 learned parameters, combined with the frozen
+reader for 18,711,841 runtime parameters. This is a conditional raw-pixel
+factorization\cite{pixelrnn,pixelcnn,made}, not a new language vocabulary.
+
+With a supplied binary image, $A_p$ is exactly $\pm1$. A zero-initialized
+residual therefore copies its greedy mode exactly before training. This is an
+architectural property, not acquired linguistic knowledge. Pure image NLL
+training retains that property: greedy copying is exact for all 256 development
+targets, stochastic-copy F1 is \DensityCopyFone, and a deranged supplied image
+reduces F1 to 0.358 (Fig.~\ref{fig:density}). These exercises supply the answer
+and cannot qualify autonomous generation.
+
+On 512 natural targets, ordered NLL is \DensityNll\ nats per image
+(0.02144 bits per pixel), versus \DensityShuffledNll\ with earlier history
+shuffled. The paired advantage is \DensityAdvantage\ nat, with source-record
+bootstrap 95\% interval [\DensityLow, \DensityHigh]. This interval includes
+zero. An independent-pixel distribution using the same predicted plan has NLL
+846.09 nats. That comparison supports learned dependencies within the image;
+it does not isolate learned linguistic dependencies between images.
+
+Autonomous sampling recovers 4/256 nearest target identities, versus 3/256
+after shuffling, with pixel F1 \DensityFone. The paired identity advantage is
+0.391 percentage points, with interval [0, 1.210]. Greedy generation reaches
+14/256 exact images but only 0.215 F1 and 0.330 target-relative ink, consistent
+with frequent sparse forms in the visible gallery. Four-step feedback identity
+is 4.297\% ordered and 3.125\% shuffled; this small secondary difference does
+not reverse the failed primary language tests. The registered decision is
+\texttt{\DensityDecision}.
+
+\plate{Figure_3_exact_raster}{\textbf{Exact image likelihood separates motor success from language failure.}
+\textbf{a}, A frozen image reader supplies an aligned plan and continuous
+history state. Strict row and pixel masks give a normalized raster law.
+\textbf{b}, Ordered-versus-shuffled NLL advantage on 512 development targets;
+the interval uses 2,000 source-record bootstrap draws and crosses zero.
+\textbf{c}, Supplied-image copying and autonomous next-image sampling on 256
+targets. The copy controls reveal the answer. \textbf{d}, The first eight audit
+rows, shown without selection, compare target, exact supplied-image copying
+and autonomous controls. Every displayed output is the actual model raster.
+The 9,932-image evaluator bank is created after generation, covers all targets
+and never selects or replaces an output. Its identity rates are not directly
+comparable to earlier 1,024-image-bank results.}{fig:density}
+
+\subsection*{Joint learning improves the conditional image distribution}
+A matched experiment tests whether the same raster law benefits from learning
+its reader under image NLL. Both arms start from the exact-density EMA and
+receive identical new training draws. One continues to freeze the reader;
+the other differentiates likelihood through its hidden state and predicted
+field. Reader dropout remains disabled in both, so gradient flow is the
+controlled change. The unused contrastive temperature stays fixed.
+
+After 8,000 updates per arm, joint target NLL is \JointNll\ versus
+\ControlNll\ for the frozen control. The paired gain is \JointNllGain\ nat,
+with interval [\JointNllLow, \JointNllHigh]. Joint ordered history improves
+NLL over earlier-shuffled history by 0.185 nat, with interval [0.128, 0.244].
+The frozen continuation also gains an earlier-history effect (0.119 nat,
+interval [0.052, 0.186]); extra training alone therefore explains part of the
+progress. The matched comparison isolates the additional likelihood benefit
+of updating the reader.
+
+Joint first-sample identity is 9/256, versus 6/256 for the matched control and
+8/256 after shuffling. The joint-minus-control identity difference is 1.172
+percentage points, with interval [-0.397, 2.893]. Both arms retain exact greedy
+copying of all 256 supplied images. Joint sampling has F1 \JointSampleFone\
+and isolated-ink fraction 0.00744. The joint arm passes six of eight gates,
+but fails sampled quality and ordered-generation criteria; its decision remains
+\texttt{\JointDecision} (Supplementary Note 13 and Fig.~S2).
+This is evidence of improved conditional learning, not a qualified language
+generator.
+
+\subsection*{Raw-pixel search improves choice but exposes repetitive rollouts}
+Known-form validity and target correctness separate two remaining problems.
+A post-result audit of the original saved images finds exact known-form
+membership in 43.750\% of joint first samples, versus 33.594\% for matched
+frozen training. The paired gain is 10.156 percentage points [4.219, 16.240].
+Joint greedy images reach 98.438\% known-form membership, but only 7.422\%
+exact target match (Supplementary Note 14). Clear writing alone is insufficient.
+
+We next search the same normalized pixel law with eight partial-raster beams,
+without a glyph inventory or weight change. On 2,048 new deterministic
+development windows, ordered exact next-image match is \BeamAccuracy\%,
+versus \GreedyAccuracy\% for original pixel greediness and \BeamShuffled\%
+after earlier-history shuffling. The beam-minus-greedy gain is \BeamGain\
+points [\BeamGainLow, \BeamGainHigh]; the earlier-history gain is
+\BeamHistoryGain\ points [\BeamHistoryLow, \BeamHistoryHigh]. Every primary
+beam output matches a known canonical raster after generation.
+
+Eight-step feedback on 128 prefixes reaches 6.641\% exact target images,
+versus 4.883\% greedy, but adjacent repeated images rise to \BeamRepeat\%.
+The actual target rate is \TargetRepeat\%. Thus the registered decoder
+decision is \texttt{\BeamDecision}: five of six gates pass, but repetitive
+rollout fails (Supplementary Note 15 and Fig.~S4). This outcome is compatible
+with known limits of probability-maximizing language decoding\cite{degeneration}.
+No repetition filter or output replacement is applied.
+
+\subsection*{Natural questions expose the gap between selection and complete answers}
+To test use of language beyond continuation, we add a copy distribution over
+images in the current prompt, following the established pointer--generator
+idea\cite{pointer}. Repeated identical images contribute summed attention
+mass. A learned gate combines copying with the exact raster law, and a
+separate stop hazard controls answer length. Only observed pixels and causal
+states enter this 19.01M-parameter model. No reference answer, symbolic
+identity or persistent writing inventory enters generation.
+
+Training uses 3,211 natural Chinese questions with full paragraphs from
+CMRC 2018\cite{cmrc}; article overlap is removed across training and development.
+Both copy and no-copy arms make 4,000 updates from the same V55 weights,
+retaining natural continuation and motor exercises. On 256 fixed development
+questions, the copy arm gives 10 exact stopped answers (\QaExact\%), versus
+one (\QaBlankExact\%) with question pixels blanked and zero for the no-copy
+control. Raster F1 is \QaFone\%, \QaBlankFone\% and \QaControlFone\%,
+respectively (Fig.~\ref{fig:visual-reading}). The paired question-dependent
+F1 gain is \QaQuestionGain\ points [\QaQuestionLow, \QaQuestionHigh].
+
+Complete reading remains inaccurate. Only one of 393 question pairs sharing
+a paragraph has both answers correct. Output reaches the 17-cell safety cap
+in 22.656\% of primary cases. All 2,677 emitted primary cells use the copy
+branch; the free writer is retained but not exercised in these answers.
+All 256 supplied motor images remain exact. Four of seven gates pass, failing
+answer accuracy, F1 and paired-question correctness; the decision is
+\texttt{\QaDecision}. A post-result image-only diagnostic finds a correct
+first glyph in 43 cases, but only 10 become correct complete answers. Fourteen
+outputs contain a complete reference prefix followed by extra output. Both
+evidence selection and answer structure need improvement (Supplementary Note 16).
+
+\plate{Figure_4_visual_reading}{\textbf{Question-dependent image answers remain inaccurate.}
+\textbf{a}, Exact stopped answer and multiset raster F1 on 256 fixed questions
+from unseen articles, using full questions, blanked question pixels and the
+matched no-copy arm. F1 does not enforce order or correct termination.
+\textbf{b,c}, First two audit questions and raw answer images, with the first
+retained reference. The complete paragraph is also supplied to the model.
+No examples are selected or repaired; white output denotes a zero-cell answer.
+Question images are host renderings, and outputs are actual model rasters.
+All primary copy-arm answer cells are selected from the visible prompt.}{fig:visual-reading}
+
+\subsection*{Image-block answers improve structure but retain selection errors}
+We next normalize a joint start--end law over contiguous observed image
+blocks of one to sixteen cells. Equal image sequences share probability mass,
+and the selected end position terminates the answer. Training marginalizes
+all matching source locations using target images alone. This 19.60M-parameter
+model retains the free raster writer and natural/motor exercises.
+
+After 4,000 additional updates from the V57 copy checkpoint, exact answers
+reach 25/256 (9.766\%), versus 3/256 with question pixels blanked and 21/256
+for matched additional glyph-answer training (Fig.~\ref{fig:image-blocks}).
+Block F1 is 27.033\%, versus 9.169\% blanked and 22.140\% for the matched
+control. The block-minus-control F1 gain is 4.893 points [0.469, 9.047],
+but the exact-answer difference is unresolved: 1.563 [-1.509, 4.652].
+Extra training explains much of the improvement over V57; it cannot all be
+attributed to the block law.
+
+Both answers are correct in only 4/393 paragraph pairs. Six of seven
+registered gates pass; paired-question correctness fails. Motor copying
+remains exact on 256/256 images. The block arm trains in 211.0 s at
+0.967 GiB peak allocated memory on the same GPU, excluding previous training.
+Native prompt-PNG replay through the inference-only export exactly reproduces
+output pixels and boundary events. The result establishes limited extractive
+reading, not useful general free writing (Supplementary Note 17).
+
+\plate{Figure_5_image_blocks}{\textbf{Predicting whole observed image answers.}
+\textbf{a}, The reader assigns probability to variable-length source image
+blocks, marginalizing identical sequences. \textbf{b}, Fixed development
+answers after matched additional training. F1 counts exact-raster multiset
+overlap; exact answers also require order and termination.
+\textbf{c}, First two audit questions, retained reference images and raw
+block answers, without example selection or repair. The full passage also
+enters the model. Block copying preserves forms but does not establish that
+the selected text answers the question.}{fig:image-blocks}
+
+\subsection*{Frozen pretraining is not sufficient under a shifted visual interface}
+A separately registered probe compares frozen V58 and released MIXAR-477M\cite{mixar}
+features using identical fresh 789,520-parameter block readouts. Both see
+the same prompt images, pair-aligned states, fixed continuous projections and
+fine image features. The student readout reaches 24/256 exact answers and
+25.340\% F1; MIXAR reaches 6/256 and 11.588\%. Its F1 difference is
+$-13.752$ points [$-18.247$, $-9.094$]. No MIXAR pair has both answers correct,
+versus 12/393 student pairs. The frozen-foundation probe is rejected.
+This comparison includes different prior task training and a font/layout
+shift from MIXAR's native renderer; it does not disprove the released model's
+language competence. External pretraining is not local single-GPU work
+(Supplementary Note 18 and Fig.~S5).
+
+\subsection*{Moving the question before the passage is insufficient}
+For a causal reader, placing the question first allows each later passage
+state to depend on it. A registered input-order comparison starts both arms
+from identical V58 weights and retains the same images, parameters and
+4,000-update budget. Question-first reading yields 21/256 exact answers and
+23.765\% F1, versus 27/256 and 26.908\% for continued context-first training.
+The F1 difference is $-3.143$ points [$-6.544$, 0.446], unresolved. Both
+questions are correct in 5/393 versus 16/393 paragraph pairs. Four of eight
+intervention gates pass, and the change is rejected. Motor copying remains
+exact in both arms. This result limits a simple ordering explanation of the
+selection failure; it does not establish that question-conditioned source
+representations are ineffective in general (Supplementary Note 19 and Fig.~S6).
+
+\section*{Native free writing fits pixels but fails reading}
+We next adapt every parameter of the released MIXAR-477M native
+pixel-language model\cite{mixar}, rather than selecting source-image spans.
+The actor receives prompt images and predicts unrestricted binary image
+blocks, with no output glyph inventory, OCR or external inference call.
+All 477,145,984 parameters receive answer-image likelihood gradients.
+The 1,000-update run takes 1,501.1 s on one RTX 4090 D at 9.912 GiB peak
+allocated memory, excluding loading and final serialization. External
+foundation pretraining is attributed separately.
+
+Held-out answer-pixel NLL improves from 0.6842 to 0.1548 nats, yet generated
+answers remain inaccurate (Fig.~\ref{fig:native-pixel}). Exact answers are
+0/256 and both-correct paragraph pairs 0/393. Exact-raster F1 is 0.149\%,
+while aligned foreground F1 is 12.264\%. Question blanking reduces foreground
+F1 to 8.473\%, but the strict-raster F1 difference does not resolve zero.
+Five of ten registered gates pass, all concerning implementation, resources
+or termination rather than the required answer quality. The decision remains
+\texttt{reject\_native\_free\_reading}.
+
+Native PNG inference reproduces answer tensors, PNG bytes and stopping events
+from a self-contained learned bundle in a fresh offline process with empty
+model/code caches. This establishes an independent runtime, without certifying
+its language. The Noto CJK cell renderer differs from the released model's
+native font interface. A blinded answer-only OCR diagnostic is poorly
+calibrated even on reference images, recognizing only 40/256 exactly; it
+cannot replace a semantic evaluation (Supplementary Note 20).
+
+\plate{Figure_6_native_pixel_language}{\textbf{Better pixel likelihood does not yield useful free writing.}
+\textbf{a}, All-development answer/termination-pixel NLL, released base and
+final adapted EMA. \textbf{b}, Exact-raster multiset F1 and aligned foreground
+F1 on 256 fixed primary questions, with question-blanked and released-base
+controls. Foreground overlap does not establish a correct character or answer.
+\textbf{c}, First two fixed audit rows, with retained references and unmodified
+generated pixels. White padding aligns the display and never changes a
+nonblank output. All exact answers and both-correct pairs fail.}{fig:native-pixel}
+
+\section*{Correlated pixels improve fit without establishing answers}
+We next replace the single product-Bernoulli head with eight conditional
+experts, each defined over a complete $32\times64$ bitmap. A shared latent
+expert permits pixel covariance without a character inventory. Both arms
+fully adapt the same native foundation for 1,000 updates on identical sampled
+examples; the eight-head actor has 490.00M parameters versus 477.15M for the
+single-head control. The comparison matches training budget, not capacity.
+
+Held-out answer-pixel NLL is 0.1248 versus 0.1542 nats for eight and one
+experts, respectively (Fig.~\ref{fig:correlated-density}). Strict-raster F1
+increases from 0.234\% to 0.815\%, a 0.580-point difference [0.089, 1.094].
+Foreground F1 increases from 12.205\% to 15.827\%. Nevertheless, both arms
+produce zero exact answers among 256 questions and zero both-correct pairs
+among 393 shared-paragraph pairs. The eight-head normal-minus-blank raster
+gain is only 0.295 points [$-0.006$, 0.623], leaving question dependence
+unresolved. Foreground F1 also has no resolved question-dependent gain.
+The registered density-intervention gate and both bounded reading gates fail.
+
+Training takes 1,887.5 and 1,972.8 s, with 9.904 and 10.174 GiB peak allocated
+memory for one and eight experts. Both independent bundles reproduce native
+PNG tensors, image bytes and decoder events offline. The eight-head gate
+entropy averages 1.812 nats, with five experts selected across the primary
+continuations, including termination. These usage diagnostics describe the
+mixture; they do not demonstrate semantic specialization (Supplementary
+Note 21).
+
+\plate{Figure_7_correlated_density}{\textbf{A whole-image mixture improves pixel fit but fails the question-dependent writing test.}
+\textbf{a}, Conditional image law and inference boundary. One latent expert
+couples all pixels; experts are context-dependent neural functions.
+\textbf{b}, All-development answer/termination-pixel NLL after matched-budget
+adaptation. \textbf{c}, Strict-raster and aligned foreground F1 on normal and
+blank-question prompts. \textbf{d}, First two fixed primary references and
+raw outputs, with white display padding only. No nonblank pixel is repaired
+or removed. Parameter counts and output computation differ between arms;
+both use externally pretrained weights.}{fig:correlated-density}
+
+\section*{Discussion}
+The results separate a useful visual predictive state from a useful visual
+language generator. The established causal reader learns context-dependent
+next-writing information, while subsequent writers can erase that information
+or model the marginal appearance of glyphs. A complete visual language model
+must bind meaning and sequence to the exact marks it generates.
+
+An image interface enlarges the representable output space, including the
+possibility of forms absent from a character encoding. It does not remove the
+need to learn syntax, knowledge or long-range dependencies. This study has not
+demonstrated general instruction following, etymology answers, handwriting
+transfer or arbitrary historical-script generation. It also lacks independent
+training-seed replication and a capability-matched text-model comparison.
+Small allocated memory in a bounded experiment establishes feasibility on one
+GPU, rather than a general efficiency advantage over language models.
+
+Exact copying is now preserved by an aligned inverse-image path. The remaining
+test is whether context selects a coherent written future. Low teacher-forced
+image NLL can reflect dependencies among strokes already revealed within the
+target, while generated output still loses global identity. Joint training
+improves proper likelihood beyond matched extra density training; the raw
+generated continuations still fail the intended language test. Conditional
+continuation and short answers require counterfactual prompts and the same
+context effect during autonomous sampling and visible feedback.
+Broader books and offline teacher-generated exercises can supply later
+training data while leaving the final inference path independent. A larger
+corpus or longer training requires improvement on the intended generation
+task, beyond the conditional-likelihood gain established here.
+
+Recent visual generators study mixture assignment and the geometry of
+distribution matching\cite{mgflow,semot}. These results motivate more expressive
+writing distributions, but marginal image fidelity cannot certify an answer.
+A generator that swaps the correct images for two equally frequent questions
+preserves the answer-image distribution while answering both incorrectly.
+Conditional supervision and prompt interventions therefore remain necessary;
+natural-image gains do not establish a shortcut to language learning.
+
+\section*{Methods}
+\subsection*{Data, rendering and partitioning}
+The public Chinese stream contains 7,017 provenance-tracked records. Records
+are assigned deterministically to training, development or a sealed partition
+before rendering. Original and simplified views inherit their source split.
+Both generation experiments use one fixed Noto Sans CJK font, 26-pixel writing
+inside 32-pixel cells, without image augmentation. A 65-cell training segment
+supplies the first 60 cells as context and cells 61--64 as future writing.
+The remaining cell is unused. No string, source identifier or symbolic target
+enters a model method. Sealed records remain unopened.
+
+\subsection*{Training and numerical verification}
+In the diffusion experiment, the reader is frozen. Copied glyph-prior weights initialize the denoiser,
+which is then optimized as a velocity predictor. AdamW uses a learning rate of
+$5\times10^{-5}$ for transferred layers and $2\times10^{-4}$ for new modules,
+400 warmup updates, cosine decay to 10\%, batch size eight, BF16 arithmetic and
+gradient clipping at one. EMA decay is 0.999. Checkpoints retain model,
+optimizer, RNG, dataset offset and provenance hashes. Interrupted and
+continuous smoke runs produce byte-identical model and EMA weights.
+
+The field objective applies an orthonormal transform directly to floating
+signed predictions. Thresholding is confined to output and identity
+evaluation. This distinction is verified by an isolated pixel-gradient test.
+The primary velocity MSE is supplemented by foreground, Dice, field and
+representation losses at weight 0.10 each, plus an ordered-history margin at
+weight 0.25. Supplementary Information gives the complete objective and gates.
+
+The exact-density experiment uses 64-cell causal histories and 16 stratified
+positions in each of eight streams per update. A quarter of selected images
+receive supplied-image motor conditions; the remainder use predicted states.
+Binary observations are thresholded once before unweighted Bernoulli NLL.
+AdamW uses learning rate $2\times10^{-4}$, 400-update warmup, cosine decay,
+BF16, norm clip one and EMA 0.999. All 8,000 updates complete in
+\DensitySeconds\ s with \DensityMemory\ GiB peak allocated CUDA memory.
+This timing excludes the frozen reader's earlier training. Exact resumed
+weights and EMA match uninterrupted smoke training. Strict-causality gradient
+tests and enumeration of a four-bit subproblem verify the probability masks.
+
+The matched continuation reinitializes optimizer and EMA from identical
+exact-density weights. Both arms make 8,000 additional updates, using the same
+data and training generator. The joint arm uses reader learning rate
+$2\times10^{-5}$ and density rate $2\times10^{-4}$, with the same schedule and
+motor mixture. It trains 18,711,840 participating parameters; the frozen arm
+trains 2,434,592. Joint and control times are \JointTime\ and \ControlTime\ s,
+with peaks \JointMemory\ and \ControlMemory\ GiB. Frozen-reader weights remain
+identical to initialization, while joint reader weights change. Both final
+training RNG states match. Development opens only after both arms finish.
+
+The subsequent decoder retains eight partial images after each binary pixel
+expansion, ranked by accumulated Bernoulli log probability. Row conditions are
+gathered along beam-parent indices within each row. Stable ties prefer ink,
+matching the original width-one rule. Full FP32 matmuls are used for both new
+controls after a documented numerical preflight; model weights are unchanged.
+The maximum production incremental-score/parallel-NLL error is
+$2.10\times10^{-5}$ nat, below the unchanged 0.001 tolerance. The complete
+inference audit takes \BeamSeconds\ s at \BeamMemory\ GiB allocated CUDA memory.
+
+\subsection*{Sampling, controls and statistics}
+The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale
+two. Four future cells start from Gaussian noise. The same noise is reused for
+ordered, suffix-preserving shuffled and zero-condition histories. Only one
+sample contributes to the primary block result. Generated cells are appended
+as visible rasters for a second four-cell block.
+
+An evaluator-only canonical bank measures nearest-raster identity after
+generation. Targets outside the bank receive no identity credit, and bank
+coverage is reported per position. This measurement can assign a nearest
+identity to an illegible pseudo-glyph, so direct images and surface statistics
+accompany every result. Pixel F1 alone is also insufficient because many
+Chinese glyphs share strokes. No OCR is used by the model or the reported
+identity evaluator.
+
+The exact-density audit uses 512 NLL targets, 256 single-image generations and
+64 four-step feedback streams. Its sampler uses 32 row-transformer evaluations
+and 1,024 masked-head evaluations per image. Ordered and shuffled runs share
+the same Bernoulli uniforms. Its post-generation bank includes all distinct
+training forms plus every audit target, including punctuation: 9,932 unique
+binary rasters and 100\% target coverage. This enlarged bank differs from the
+earlier Han-only bank. Zero condition is an out-of-distribution intervention,
+not a separately trained unconditional baseline. One standalone export embeds
+the complete reader and density; image-prompt inference reproduces the
+training-checkpoint continuation exactly under the same seed and greedy mode.
+
+Confidence intervals use 2,000 bootstrap resamples of source records, retaining
+all windows from a record together. Paired differences use identical windows
+and initial noise. Intervals describe development-record variability for this
+trained checkpoint, not variability across training seeds. The current
+development partition has informed a sequence of experiments and is not a
+final independent generalization test.
+
+\balance
+\section*{Data and code availability}
+Implementation, protocols, evidence summaries and scripts are available in
+\url{https://github.com/lachlanchen/ImagizedLanguageModel}. Manifest and
+checkpoint hashes identify the exact local research artifacts. Restricted
+reference books are not redistributed. The complete research record and
+Supplementary Information distinguish earlier foundation provenance from the
+present raster-only deployment experiment.
+
+\input{references_main.tex}
