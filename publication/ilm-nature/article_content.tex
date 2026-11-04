@@ -250,6 +250,46 @@ rollout fails (Supplementary Note 15 and Fig.~S4). This outcome is compatible
 with known limits of probability-maximizing language decoding\cite{degeneration}.
 No repetition filter or output replacement is applied.
 
+\subsection*{Natural questions expose the gap between selection and complete answers}
+To test use of language beyond continuation, we add a copy distribution over
+images in the current prompt, following the established pointer--generator
+idea\cite{pointer}. Repeated identical images contribute summed attention
+mass. A learned gate combines copying with the exact raster law, and a
+separate stop hazard controls answer length. Only observed pixels and causal
+states enter this 19.01M-parameter model. No reference answer, symbolic
+identity or persistent writing inventory enters generation.
+
+Training uses 3,211 natural Chinese questions with full paragraphs from
+CMRC 2018\cite{cmrc}; article overlap is removed across training and development.
+Both copy and no-copy arms make 4,000 updates from the same V55 weights,
+retaining natural continuation and motor exercises. On 256 fixed development
+questions, the copy arm gives 10 exact stopped answers (\QaExact\%), versus
+one (\QaBlankExact\%) with question pixels blanked and zero for the no-copy
+control. Raster F1 is \QaFone\%, \QaBlankFone\% and \QaControlFone\%,
+respectively (Fig.~\ref{fig:visual-reading}). The paired question-dependent
+F1 gain is \QaQuestionGain\ points [\QaQuestionLow, \QaQuestionHigh].
+
+Complete reading remains inaccurate. Only one of 393 question pairs sharing
+a paragraph has both answers correct. Output reaches the 17-cell safety cap
+in 22.656\% of primary cases. All 2,677 emitted primary cells use the copy
+branch; the free writer is retained but not exercised in these answers.
+All 256 supplied motor images remain exact. Four of seven gates pass, failing
+answer accuracy, F1 and paired-question correctness; the decision is
+\texttt{\QaDecision}. A post-result image-only diagnostic finds a correct
+first glyph in 43 cases, but only 10 become correct complete answers. Fourteen
+outputs contain a complete reference prefix followed by extra output. Both
+evidence selection and answer structure need improvement (Supplementary Note 16).
+
+\plate{Figure_4_visual_reading}{\textbf{Question-dependent image answers remain inaccurate.}
+\textbf{a}, Exact stopped answer and multiset raster F1 on 256 fixed questions
+from unseen articles, using full questions, blanked question pixels and the
+matched no-copy arm. F1 does not enforce order or correct termination.
+\textbf{b,c}, First two audit questions and raw answer images, with the first
+retained reference. The complete paragraph is also supplied to the model.
+No examples are selected or repaired; white output denotes a zero-cell answer.
+Question images are host renderings, and outputs are actual model rasters.
+All primary copy-arm answer cells are selected from the visible prompt.}{fig:visual-reading}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

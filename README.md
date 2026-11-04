@@ -20,7 +20,27 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 V42--V46 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current evidence: clearer forms and better choice; extended language remains unqualified
+## Current evidence: image answers depend on the question, but remain inaccurate
+
+![Measured visual reading result: exact answer and raster F1 with full questions, blanked questions and a matched no-copy model, plus the first two raw audit outputs](publication/ilm-nature/figures/Figure_4_visual_reading.png)
+
+The 19.01M-parameter model now trains on natural Chinese reading questions and
+emits answer images with a learned copy/free gate and stopping rule. On one
+RTX 4090 D, 4,000 updates take 278.6 seconds, excluding earlier foundation
+training. It answers **10/256** held-out questions exactly, versus **1/256**
+with question pixels blanked and **0/256** for matched no-copy training.
+Raster F1 improves by 10.165 points over blanking [7.043, 13.371].
+
+This remains a failed qualification: absolute raster F1 is only **15.718%**,
+and both answers are correct in just **1/393** shared-paragraph question pairs.
+All primary copy-arm answer images come from the visible prompt. The free
+writer is retained, and all 256 supplied motor images still copy exactly, but
+these answers do not demonstrate novel free-form synthesis or a usable general
+assistant. See the [complete result](references/visual_copy_language_v57_result.md),
+[working training/inference code guide](docs/visual-reading-language.md), and
+[current paper with raw evidence and editable figures](publication/ilm-nature/README.md).
+
+### Earlier pixel-search result
 
 ![Measured pixel-beam result: higher exact next-image accuracy but excessive repetition in raw eight-step outputs](publication/ilm-nature/figures/Figure_S4_pixel_beam.png)
 

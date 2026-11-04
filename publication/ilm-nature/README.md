@@ -8,6 +8,15 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 ## Current result
 
+Grounded visual reading now provides a direct language-use test. The 19.01M
+copy/raster model answers 10/256 held-out natural questions exactly, versus
+1/256 with question pixels blanked and 0/256 for matched no-copy training.
+Raster F1 is 15.718%; its question-dependent gain is 10.165 points
+[7.043, 13.371]. Only 1/393 shared-paragraph question pairs has both answers
+correct. The reading model fails three of seven gates and remains rejected.
+Figure 4, Supplementary Note 16 and slide 11 show the full comparison and
+unselected raw failures. V56's readable baseline remains in `baselines/v56/`.
+
 With unchanged V55 weights, raw-pixel beam search improves exact next-image
 match from 8.252% greedy to 11.621% on 2,048 prefixes. Earlier-history shuffling
 reduces beam accuracy to 9.863%. All beam outputs exactly match a canonical
@@ -61,7 +70,7 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified ten-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified eleven-slide LibreOffice rendering |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
 | `evidence/` | Reports with local paths normalized for delivery and source hashes |
@@ -72,14 +81,15 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53–V56 artifacts are present:
+From the repository root, after the V53–V57 artifacts are present:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
 python publication/ilm-nature/generate_v54_evidence.py
 python publication/ilm-nature/generate_v55_evidence.py
 python publication/ilm-nature/generate_v56_evidence.py
-python publication/ilm-nature/generate_v56_editable_figures.py
+python publication/ilm-nature/generate_v57_evidence.py
+python publication/ilm-nature/generate_v57_editable_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
@@ -87,7 +97,7 @@ bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
 
 Render the deck through LibreOffice, inspect it, and refresh the render receipt
 before running `validate_and_sync.py`. That script refuses a deck or PDF whose
-hash has changed since review, checks all five embedded evidence workbooks and
+hash has changed since review, checks all six embedded evidence workbooks and
 verifies the delivered copies byte for byte.
 
 `generate_evidence.py` checks the locked checkpoint identity before producing
@@ -95,9 +105,9 @@ values and figures. Source code, checkpoint hashes and frozen protocols are
 recorded in the run report. Experimental code resides in `scripts/` and
 `ilm/visual_lm/`. Data and model weights remain outside the publication package.
 
-The ten-slide editable deck retains the V53–V55 plates and adds native
-form-validity and pixel-search charts with actual feedback images. Current
-validated copies are delivered to Nutstore `Projects/ILM/` under the V56 version
+The eleven-slide editable deck retains the earlier plates and adds a native
+grounded-reading chart with actual answer images. Current
+validated copies are delivered to Nutstore `Projects/ILM/` under the V57 version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 

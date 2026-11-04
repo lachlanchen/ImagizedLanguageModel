@@ -26,12 +26,21 @@ feedback remains repetitive: 25.446% adjacent repeats versus 0.112% observed.
 The decoder fails its rollout gate. Clear forms and better immediate choice
 are working components; coherent answers remain unproved.
 
-The next bounded task is natural Chinese visual reading comprehension. The
-prepared CMRC subset has 3,211 training and 1,321 development questions, with
-article overlap removed and 393 same-paragraph/different-question development
-pairs. A planned visual copy distribution selects among images actually in
-the prompt, while retaining the free raster density. No QA model has yet been
-trained or qualified. Public MIXAR-477M inference was also checked with its
+V57 completed natural Chinese visual reading training. Its 19.01M parameters
+include source-image attention, a copy/free gate and learned stopping. The
+CMRC subset has 3,211 training and 1,321 development questions, with article
+overlap removed. Four thousand updates take 278.6 seconds on GPU 0. Exact
+primary answers are 10/256, versus 1/256 with question pixels blanked and
+0/256 for matched no-copy training. The 10.165-point question-dependent F1
+gain is resolved, but absolute F1 is 15.718% and only 1/393 question pairs has
+both answers correct. Four of seven gates pass; reading remains unqualified.
+
+A saved-output diagnostic finds 43 correct first images but only 10 complete
+answers, with 14 complete reference prefixes followed by extra output. V58
+therefore tests learned complete image blocks/end boundaries against matched
+extra glyph-answer training. It retains the free-writing path and is still
+limited to grounded paragraph extraction; no V58 qualification is claimed
+before its audit. Public MIXAR-477M inference was also checked with its
 released pretrained weights; six fixed prompts yielded incomplete English
 and fragmented CJK, not a qualified replacement foundation. Offline teachers
 remain allowed, with provenance. The final deployed model must be independent.

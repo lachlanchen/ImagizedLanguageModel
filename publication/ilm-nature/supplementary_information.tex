@@ -6,6 +6,7 @@
 \input{density_values.tex}
 \input{joint_values.tex}
 \input{beam_values.tex}
+\input{qa_values.tex}
 \begin{document}
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -460,6 +461,109 @@ decoder's qualification decision.}
 \label{fig:pixel-beam}
 \end{figure}
 
+\section*{Supplementary Note 16: grounded image-answer learning}
+The V57 model retains the V55 joint reader and exact raster writer, extending
+the allowed causal context from 64 to 512 cells. Parameter-free rotary
+positions require no weight-shape change; this extension does not itself
+establish trained long-context competence. Two $384\times384$ projections
+produce source-position attention from the final causal query and observed
+prompt states. A linear copy gate and a linear stop head give 295,682 new
+parameters, for 19,007,523 runtime parameters. The contrastive temperature
+remains unused and fixed. Both reader and density continue learning.
+
+For observed source images $X_i$, attention $a_{ti}$ and copy gate
+$\lambda_t$, the continued image distribution is
+\begin{equation}
+q_t(Y)=\lambda_t\sum_i a_{ti}\mathbf{1}[Y=X_i]
+       +(1-\lambda_t)r_t(Y).
+\end{equation}
+Here $r_t$ is the normalized exact raster density. Duplicate source images
+contribute summed mass. Equality uses lossless bit packing of observed binary
+pixels; there is no persistent symbolic identity or writing bank. A query
+cannot attend to source positions later than itself, including when natural
+training sequences are packed together. With stop hazard $s_t$,
+$p_t(\mathrm{stop})=s_t$ and
+$p_t(Y,\mathrm{continue})=(1-s_t)q_t(Y)$. Training includes the terminal stop
+event after a reference answer. Reference length determines supervision masks,
+not a deployed input. Runtime receipts retain an inherited Bernoulli-density
+description; it describes $r_t$ alone, not the complete mixture/event law.
+
+CMRC 2018 supplies natural questions over Wikipedia paragraphs\cite{cmrc}.
+Pinned source revision and original annotation offsets are checked during data
+preparation. Whitespace is removed consistently, unsupported font forms are
+excluded, full rendered prompts are limited to 480 cells and retained answers
+to 16. No answer-centred crop is used. Answers must match the source substring
+and not occur verbatim in the question. The result contains 3,211 training
+questions over 1,134 paragraphs and 1,321 development questions over 421
+paragraphs. Article-title and context-hash overlap are zero across splits.
+The data retain CC-BY-SA-4.0 attribution. Canonical rendering and thresholding
+match V55. No symbolic label is passed to a student method.
+
+Both arms initialize from the same V55 EMA, train for 4,000 updates with batch
+four and use identical data RNGs. Three of four updates draw uniform training
+questions with replacement; the fourth retains 16 causal positions per natural
+stream, including 25\% supplied-image motor conditions. Motor conditions use
+zero hidden states and exact observed fields, bypass copying and omit the stop
+loss. The no-copy arm fixes $\lambda=0$; its source-attention heads are frozen.
+The first retained answer supervises event likelihood, while evaluation accepts
+every retained reference. Loss is mean exact event NLL over valid image and
+stop events, without the earlier image-only $1/1024$ rescaling.
+
+AdamW rates are $3\times10^{-5}$ for the reader, $10^{-4}$ for the density and
+$3\times10^{-4}$ for new heads; betas are (0.9,0.95), weight decay 0.01,
+warmup 200 updates, cosine decay to 10\%, norm clip one and EMA 0.999. BF16
+training uses deterministic CUDA algorithms, math SDPA and fixed cuBLAS
+workspace configuration; reader dropout stays disabled. A four-update smoke
+matches interrupted two-plus-two training exactly for all model/EMA tensors
+and data, training, CPU and CUDA RNG states. A masked-copy backward regression
+test covers matches occurring only at forbidden future positions. Copy and
+no-copy training take \QaSeconds\ and \QaControlSeconds\ s, with
+\QaMemory\ and \QaControlMemory\ GiB peak allocated CUDA memory on GPU 0.
+These costs exclude previous foundation training and preparation.
+
+Both final EMA checkpoints complete before development opens. Primary IDs are
+256 samples without replacement from sorted development records, seed
+20265720. The decoder stops at hazard $\geq0.5$; otherwise it selects the copy
+component at gate $\geq0.5$, sums attention over equal observed rasters and
+emits the largest-mass image. The free component uses pixel beam eight. This
+is hierarchical greedy decoding, not global mixture-mode search. The 17-cell
+safety cap is recorded separately from stopping. No answer location, reference
+length or candidate answer list is available at inference.
+
+Exact answer match requires every output image, its order and learned stop to
+match a retained reference. Raster F1 measures multiset overlap of exact
+rasters, maximizing over references. It can credit reordered images and is
+not the official word-segmented CMRC metric. Primary copy exact match is
+10/256 (\QaExact\%), versus 1/256 with question pixels blanked and 0/256 no-copy. Copy F1 is
+\QaFone\%, versus \QaBlankFone\% and \QaControlFone\%. Its paired gain over
+blanking is \QaQuestionGain\ points [\QaQuestionLow, \QaQuestionHigh]; over
+no-copy it is 9.136 [5.879, 12.483]. Intervals use 2,000 source-article draws,
+seed 20265819, retaining related questions together (198 primary articles).
+The blanking intervention removes question ink while retaining passage and
+framing; it is not an in-distribution alternative natural question.
+
+All 393 shared-paragraph/disjoint-answer question pairs are also tested.
+Only one has both answers exactly correct (\QaPairExact\%). Mean primary
+answer length is 10.457 cells, and 58/256 cases reach the safety cap.
+Every primary copy-arm image uses copying, with no free-branch emission.
+Teacher-forced mean event NLL across all 1,321 development questions is
+1.329 copy versus 12.025 no-copy; mean sequence NLL is 8.377 versus 91.477.
+All 256 V55 supplied motor images remain exact. The full audit takes
+1,117.1 s and peaks at 0.140 GiB allocated CUDA memory, including the slower
+2,106-image free-writing control. Four of seven gates pass: boundary, clean
+split/resources, motor and question-dependent F1. Exact answers, absolute F1
+and paired-question correctness fail. The decision is \texttt{\QaDecision}.
+
+A post-result, zero-model-call diagnostic on the saved primary outputs finds
+43/256 correct first images. Only 10/43 of those become exact complete answers;
+14/256 outputs contain a complete reference prefix followed by unwanted
+additional images. Mean aligned correct prefix length is 0.750 cells; adjacent
+repetition is 2.230\%. These descriptive observations do not alter the locked
+decision. They motivate testing answer-level structure alongside better
+evidence selection. All results remain limited to canonical, answerable,
+short-paragraph reading; independent seed replication, raw page segmentation,
+historical writing and general language generation are unestablished.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -495,5 +599,13 @@ scripts/eval\_raster\_beam\_v56.py.
 \end{quote}
 Independent pixel-beam inference uses
 \texttt{scripts/infer\_raster\_beam.py}.
+For grounded visual reading, complete both training arms before auditing:
+\begin{quote}\small\ttfamily
+scripts/train\_visual\_copy\_language\_v57.py --arm copy\\
+scripts/train\_visual\_copy\_language\_v57.py --arm no\_copy\\
+scripts/eval\_visual\_copy\_language\_v57.py.
+\end{quote}
+Native answers and self-contained export use
+\texttt{scripts/infer\_visual\_copy\_language.py}.
 \input{references_main.tex}
 \end{document}

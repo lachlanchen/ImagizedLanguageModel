@@ -6,6 +6,12 @@ hazard controls answer length. The runtime receives image tensors and packing
 lengths; it receives no strings, Unicode IDs, OCR transcript, vocabulary or
 external model output.
 
+The completed registered run gets 10/256 exact held-out answers, versus 1/256
+with the question blanked and 0/256 for its matched no-copy control. Raster F1
+is 15.718%; only 1/393 paired questions has both answers correct. All 256
+supplied motor images still copy exactly. The reading gates fail. See the
+[complete measured result](../references/visual_copy_language_v57_result.md).
+
 This is an experiment in Chinese paragraph reading. It does not qualify
 general instruction following or historical-script generation. The aligned
 32-pixel-cell input also does not yet segment a raw book page. The copy path

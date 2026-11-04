@@ -1,0 +1,58 @@
+{
+  "architecture": "visual-copy-raster-language-v57",
+  "arm": "no_copy",
+  "boundary": {
+    "architecture": "visual-copy-raster-language-v57",
+    "binary_sensor_space_size_log2": 1024,
+    "codebook": false,
+    "config": {
+      "heads": 6,
+      "layers": 4,
+      "pixel_hidden": 256,
+      "plan_logit_scale": 6.0,
+      "width": 192
+    },
+    "copy_enabled": false,
+    "copy_source": "currently visible prompt images only",
+    "decoder": "hierarchical branch greedy; duplicate copy mass marginalized",
+    "density_parameters": 2730274,
+    "external_runtime_model": false,
+    "glyph_inventory": false,
+    "maximum_cells": 512,
+    "nll_units": "nats per image; divide by 1024*log(2) for bits per pixel",
+    "ocr": false,
+    "probability": "normalized product of 1024 causal Bernoulli image measurements",
+    "reader_dropout_during_training": false,
+    "reader_frozen": false,
+    "reader_jointly_trained": true,
+    "runtime_parameters": 19007523,
+    "stop": "learned transport hazard, no output glyph ID",
+    "symbol_ids": false,
+    "text_tokenizer": false,
+    "trainable_parameters": 18712225
+  },
+  "data_sha256": {
+    "counterfactual_pairs.jsonl": "3bcb2e0534290ed9cf3dd1a4e378bbaa5a7eb4903dce0b4b0befb8f3ce58029d",
+    "development.jsonl": "8bef093075ac0715d5878a1abe61aa38092893ade8753b935cdf657551ebc6a7",
+    "train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c"
+  },
+  "elapsed_seconds": 269.1255208039656,
+  "initialization_sha256": "ae4598c609648ba92a4eaa8680fa0842966a1f11b0757ed4a14b83038c048394",
+  "peak_allocated_vram_gib": 1.04909086227417,
+  "provenance": {
+    "ilm/visual_lm/canonical_glyph_language.py": "3eb3b2e59ed18e53f4f307c72700340efeea2f121dcba1662751f9dcdfdfcbac",
+    "ilm/visual_lm/canonical_glyph_language_data.py": "b78268da05ccafa30a87516da83fbfc9d78264c10ffc13ba89e51fc72d337276",
+    "ilm/visual_lm/exact_raster_density_v54.py": "0a0edb191058b3da435f0a0814acff7e8103844b14fe346cfa4ffb58545eb0a3",
+    "ilm/visual_lm/hierarchical_raster_language.py": "50355fd7bb8231550385b77f219991a8684a5511d2d177bf5db601fd1abdadaf",
+    "ilm/visual_lm/joint_exact_raster_v55.py": "46b6c8d4989731138ff1ddb796d5412e3bc2744cd6b5d18eefed82fc973fc474",
+    "ilm/visual_lm/visual_cell_data.py": "cb3d00429297a0e74ed7bdcc0e018f657bf32271d0b95896daaa0d8d4814e2db",
+    "ilm/visual_lm/visual_cell_stream.py": "0f91f7a85851b9d258097748c28448f3caaa1ebb684ffa8795813fd9b0a27861",
+    "ilm/visual_lm/visual_copy_language.py": "902200ae57919761fd1b644de61ece3cf10a918a21b57b1c1a9b75ea94a605f4",
+    "ilm/visual_lm/visual_qa_data.py": "7c6122f312ee42095a82958585f7e77f29942d35d96508028a69ee44b4c495bc",
+    "references/visual_copy_language_v57_protocol.md": "df6a614fb0d4855c45fbc03db8af9e668186a45ebfb9a34275e97c4eb228cb80",
+    "scripts/train_visual_copy_language_v57.py": "42a078171a597e3d5575a7429c5416cc1105681d88c63b1fd486b2c094fafb8f"
+  },
+  "qualification": "unqualified research checkpoint",
+  "smoke_only": false,
+  "update": 4000
+}

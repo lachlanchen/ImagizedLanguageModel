@@ -64,6 +64,13 @@ def main():
     sources = [RUN / "development/report.json"] + [
         RUN / arm / "training_report.json" for arm in training
     ]
+    diagnostic = (
+        ROOT / "artifacts/visual_copy_language_v57_answer_diagnostic/report.json"
+    )
+    sources.append(diagnostic)
+    (HERE / "evidence/v57_answer_diagnostic.json").write_text(
+        diagnostic.read_text().replace(str(ROOT) + "/", "")
+    )
     for source, name in [(sources[0], "v57_development_report.json")] + [
         (RUN / arm / "training_report.json", f"v57_{arm}_training_report.json")
         for arm in training
@@ -127,8 +134,8 @@ def main():
             "axes.spines.right": False,
         }
     )
-    fig = plt.figure(figsize=(7.25, 6.6), layout="constrained")
-    grid = fig.add_gridspec(3, 1, height_ratios=(1.2, 1, 1))
+    fig = plt.figure(figsize=(7.25, 4.4), layout="constrained")
+    grid = fig.add_gridspec(3, 1, height_ratios=(1.4, 0.65, 0.65))
     ax = fig.add_subplot(grid[0])
     x = np.arange(3)
     ax.bar(
@@ -153,11 +160,14 @@ def main():
             "Matched no-copy",
         ],
         ylabel="Score (%)",
-        ylim=(0, 100),
+        ylim=(
+            0,
+            max(25, 10 * np.ceil(max(m[r]["raster_f1"] * 100 for r in ROUTES) / 10)),
+        ),
     )
     ax.legend(frameon=False, fontsize=7)
     ax.set_title(
-        "a  Natural questions on unseen Chinese paragraphs",
+        "a  Conditional image answers remain inaccurate",
         loc="left",
         weight="bold",
         fontsize=9,
@@ -167,8 +177,11 @@ def main():
         q = fig.add_subplot(sub[0, :])
         q.axis("off")
         question = evidence["questions"][index]
+        strip = np.concatenate([im[0].numpy() for im in question], axis=1)
+        padded = np.zeros((32, 4 * 17 * 32), dtype=np.float32)
+        padded[:, : strip.shape[1]] = strip
         q.imshow(
-            np.concatenate([im[0].numpy() for im in question], axis=1),
+            padded,
             cmap="gray_r",
             vmin=0,
             vmax=1,

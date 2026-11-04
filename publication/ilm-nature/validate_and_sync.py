@@ -34,6 +34,7 @@ def main():
     }
     beam = json.loads((HERE / "evidence/v56_report.json").read_text())
     forms = json.loads((HERE / "evidence/v55_form_validity.json").read_text())
+    qa = json.loads((HERE / "evidence/v57_development_report.json").read_text())
     render = json.loads((HERE / "evidence/figure_render_receipt.json").read_text())
     if render["pptx_sha256"] != digest(HERE / "ILM_Figures_editable.pptx"):
         raise ValueError("editable deck has changed since rendering")
@@ -42,8 +43,8 @@ def main():
     figure_info = subprocess.check_output(
         ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
     )
-    if not any(line.split() == ["Pages:", "10"] for line in figure_info.splitlines()):
-        raise ValueError("figure render must contain ten slides")
+    if not any(line.split() == ["Pages:", "11"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain eleven slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
@@ -60,6 +61,8 @@ def main():
                 "342.4",
                 "11.621",
                 "25.446",
+                "3.906",
+                "15.718",
             )
         ):
             raise ValueError(f"{name} lacks current measured results")
@@ -108,7 +111,7 @@ def main():
             raise ValueError("missing native density chart")
         slides = ET.fromstring(deck.read("ppt/presentation.xml"))
         pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
-        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 10:
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 11:
             raise ValueError("missing current figure slides")
         rels = ET.fromstring(deck.read("ppt/charts/_rels/chart3.xml.rels"))
         relation_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
@@ -135,27 +138,62 @@ def main():
                 ):
                     raise ValueError("matched evidence workbook differs from audit")
         for chart_index, expected in [
-            (4, [
-                [100 * forms["summaries"][n]["generation"]["ordered"][key]
-                 for key in ("exact_known_raster_fraction", "exact_target_fraction")]
-                for n in ("v54", "v55_frozen", "v55_joint")
-            ]),
-            (5, [
-                [100 * beam["measurements"]["generation"][r]["exact_target"],
-                 100 * beam["measurements"]["feedback"][r]["adjacent_repeated_raster_fraction"]]
-                for r in ("beam8", "beam8_shuffled", "greedy")
-            ]),
+            (
+                6,
+                [
+                    [
+                        100 * qa["measurements"][r][key]
+                        for key in ("exact_answer", "raster_f1")
+                    ]
+                    for r in ("copy", "copy_blank_question", "no_copy")
+                ],
+            ),
+            (
+                4,
+                [
+                    [
+                        100 * forms["summaries"][n]["generation"]["ordered"][key]
+                        for key in (
+                            "exact_known_raster_fraction",
+                            "exact_target_fraction",
+                        )
+                    ]
+                    for n in ("v54", "v55_frozen", "v55_joint")
+                ],
+            ),
+            (
+                5,
+                [
+                    [
+                        100 * beam["measurements"]["generation"][r]["exact_target"],
+                        100
+                        * beam["measurements"]["feedback"][r][
+                            "adjacent_repeated_raster_fraction"
+                        ],
+                    ]
+                    for r in ("beam8", "beam8_shuffled", "greedy")
+                ],
+            ),
         ]:
-            relationships = ET.fromstring(deck.read(f"ppt/charts/_rels/chart{chart_index}.xml.rels"))
-            package = next(rel for rel in relationships.findall(relation_ns + "Relationship")
-                           if rel.get("Type").endswith("/package"))
-            name = posixpath.normpath(posixpath.join("ppt/charts", package.get("Target")))
+            relationships = ET.fromstring(
+                deck.read(f"ppt/charts/_rels/chart{chart_index}.xml.rels")
+            )
+            package = next(
+                rel
+                for rel in relationships.findall(relation_ns + "Relationship")
+                if rel.get("Type").endswith("/package")
+            )
+            name = posixpath.normpath(
+                posixpath.join("ppt/charts", package.get("Target"))
+            )
             book = openpyxl.load_workbook(io.BytesIO(deck.read(name)), data_only=True)
             for row, values in enumerate(expected, start=2):
                 for column, value in enumerate(values, start=2):
                     if abs(book.active.cell(row, column).value - value) > 1e-8:
-                        raise ValueError(f"chart {chart_index} workbook differs from audit")
-    target = DESTINATION / "ILM_NatureStyle_20261105_V56"
+                        raise ValueError(
+                            f"chart {chart_index} workbook differs from audit"
+                        )
+    target = DESTINATION / "ILM_NatureStyle_20261105_V57"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):
