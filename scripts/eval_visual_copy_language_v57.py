@@ -113,6 +113,13 @@ def main():
     questions = sorted(
         read_questions(Path(a.data) / "development.jsonl"), key=lambda r: r["id"]
     )
+    training_questions = read_questions(Path(a.data) / "train.jsonl")
+    split_overlap = {
+        key: len({r[key] for r in training_questions} & {r[key] for r in questions})
+        for key in ("article_title", "context_hash")
+    }
+    if any(split_overlap.values()):
+        raise ValueError("training and development sources overlap")
     primary_indices = np.random.default_rng(20265720).choice(
         len(questions), 256, replace=False
     )
@@ -265,8 +272,20 @@ def main():
         else 0.0
     )
     gates = {
-        "image_only_boundary": True,
+        "image_only_boundary": all(
+            not c["boundary"][key]
+            for c in payloads.values()
+            for key in (
+                "text_tokenizer",
+                "symbol_ids",
+                "glyph_inventory",
+                "codebook",
+                "ocr",
+                "external_runtime_model",
+            )
+        ),
         "clean_split_finite_resource": peak < 16
+        and not any(split_overlap.values())
         and all(
             np.isfinite(r["event_nll"]) for rows in likelihood.values() for r in rows
         ),
@@ -282,6 +301,7 @@ def main():
     report = {
         **identity,
         "measurements": measured,
+        "split_overlap": split_overlap,
         "comparisons": comparisons,
         "likelihood": {
             arm: {
