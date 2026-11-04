@@ -7,6 +7,7 @@ import math
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
@@ -39,13 +40,32 @@ from ilm.visual_lm.visual_posterior_language_v51_evaluation import (
     isolated_ink_fraction,
     pixel_f1,
 )
-from scripts.eval_causal_visual_block_diffusion_v53 import grouped_bootstrap
 from scripts.eval_noisy_visual_energy_guidance_v52 import _numeric_tree_is_finite
 from scripts.train_canonical_glyph_binding_v43 import _atomic_json, _resolve_device
 from scripts.train_exact_raster_density_v54 import DEFAULT_OUT
 from scripts.train_visual_state_actuator import file_sha256, seed_everything
 
 AUDIT_SEED = 20265420
+
+
+def grouped_bootstrap(values, groups, *, replicates=2000):
+    values = np.asarray(values, dtype=float)
+    groups = np.asarray(groups)
+    unique = sorted(set(groups))
+    rows = [np.flatnonzero(groups == group) for group in unique]
+    sums = np.asarray([values[row].sum() for row in rows])
+    counts = np.asarray([len(row) for row in rows])
+    rng = np.random.default_rng(AUDIT_SEED + 99)
+    draws = rng.integers(0, len(rows), (replicates, len(rows)))
+    means = sums[draws].sum(1) / counts[draws].sum(1)
+    return {
+        "mean": float(values.mean()),
+        "ci95": np.quantile(means, [0.025, 0.975]).tolist(),
+        "source_records": len(rows),
+        "windows": len(values),
+        "replicates": replicates,
+        "bootstrap_seed": AUDIT_SEED + 99,
+    }
 
 
 def arguments():
@@ -217,7 +237,7 @@ def evaluator_bank(records, render, evidence):
     # the training bank. This post-generation bank is evaluator-only.
     raster = torch.cat((raster, *targets))
     unique = torch.from_numpy(
-        __import__("numpy").unique(raster.numpy().reshape(len(raster), -1), axis=0)
+        np.unique(raster.numpy().reshape(len(raster), -1), axis=0)
     )
     return unique.reshape(-1, 1, 32, 32)
 

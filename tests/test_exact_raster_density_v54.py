@@ -83,3 +83,18 @@ def test_density_backpropagates_without_changing_reader():
     assert model.pixel_density.output.weight.grad.abs().sum() > 0
     assert all(p.grad is None for p in model.reader.parameters())
     assert model.boundary_receipt()["density_parameters"] < 5_000_000
+
+
+def test_first_four_pixel_joint_sums_to_one():
+    head = ConditionalRowMADE(192, 256)
+    torch.nn.init.normal_(head.output.weight, std=0.1)
+    values = torch.zeros(16, 32)
+    values[:, :4] = (
+        torch.arange(16)[:, None].bitwise_right_shift(torch.arange(4)) % 2
+    ).float()
+    condition = torch.randn(1, 192).expand(16, -1)
+    logits = head(values, condition)[:, :4]
+    log_joint = -torch.nn.functional.binary_cross_entropy_with_logits(
+        logits, values[:, :4], reduction="none"
+    ).sum(-1)
+    assert torch.allclose(log_joint.exp().sum(), torch.tensor(1.0), atol=1e-6)
