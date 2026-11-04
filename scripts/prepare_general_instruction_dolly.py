@@ -14,6 +14,10 @@ import requests
 
 REVISION="bdd27f4d94b9c1f951818a7da7fd7aeea5dbff1a"
 REPOSITORY="databricks/databricks-dolly-15k"
+EXPECTED_SHA256={
+    "databricks-dolly-15k.jsonl":"2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec",
+    "README.md":"db06c60090a11b20e79d1933b2f316f781605f07761ff2ae2795d6523e3e960b",
+}
 
 
 def digest(path):
@@ -40,6 +44,8 @@ def main():
             response=requests.get(url,timeout=45,headers={"User-Agent":"ILM-public-data-research/1.0"})
             response.raise_for_status();temporary=path.with_suffix(path.suffix+".partial")
             temporary.write_bytes(response.content);temporary.replace(path)
+        if digest(path)!=EXPECTED_SHA256[name]:
+            raise ValueError("raw instruction source differs from pinned author bytes")
         files[name]=dict(url=url,sha256=digest(path),bytes=path.stat().st_size)
     source=[json.loads(s) for s in (raw/"databricks-dolly-15k.jsonl").read_text().splitlines()]
     parents=list(range(len(source)))
