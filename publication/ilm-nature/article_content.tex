@@ -290,6 +290,53 @@ No examples are selected or repaired; white output denotes a zero-cell answer.
 Question images are host renderings, and outputs are actual model rasters.
 All primary copy-arm answer cells are selected from the visible prompt.}{fig:visual-reading}
 
+\subsection*{Image-block answers improve structure but retain selection errors}
+We next normalize a joint start--end law over contiguous observed image
+blocks of one to sixteen cells. Equal image sequences share probability mass,
+and the selected end position terminates the answer. Training marginalizes
+all matching source locations using target images alone. This 19.60M-parameter
+model retains the free raster writer and natural/motor exercises.
+
+After 4,000 additional updates from the V57 copy checkpoint, exact answers
+reach 25/256 (9.766\%), versus 3/256 with question pixels blanked and 21/256
+for matched additional glyph-answer training (Fig.~\ref{fig:image-blocks}).
+Block F1 is 27.033\%, versus 9.169\% blanked and 22.140\% for the matched
+control. The block-minus-control F1 gain is 4.893 points [0.469, 9.047],
+but the exact-answer difference is unresolved: 1.563 [-1.509, 4.652].
+Extra training explains much of the improvement over V57; it cannot all be
+attributed to the block law.
+
+Both answers are correct in only 4/393 paragraph pairs. Six of seven
+registered gates pass; paired-question correctness fails. Motor copying
+remains exact on 256/256 images. The block arm trains in 211.0 s at
+0.967 GiB peak allocated memory on the same GPU, excluding previous training.
+Native prompt-PNG replay through the inference-only export exactly reproduces
+output pixels and boundary events. The result establishes limited extractive
+reading, not useful general free writing (Supplementary Note 17).
+
+\plate{Figure_5_image_blocks}{\textbf{Predicting whole observed image answers.}
+\textbf{a}, The reader assigns probability to variable-length source image
+blocks, marginalizing identical sequences. \textbf{b}, Fixed development
+answers after matched additional training. F1 counts exact-raster multiset
+overlap; exact answers also require order and termination.
+\textbf{c}, First two audit questions, retained reference images and raw
+block answers, without example selection or repair. The full passage also
+enters the model. Block copying preserves forms but does not establish that
+the selected text answers the question.}{fig:image-blocks}
+
+\subsection*{Frozen pretraining is not sufficient under a shifted visual interface}
+A separately registered probe compares frozen V58 and released MIXAR-477M\cite{mixar}
+features using identical fresh 789,520-parameter block readouts. Both see
+the same prompt images, pair-aligned states, fixed continuous projections and
+fine image features. The student readout reaches 24/256 exact answers and
+25.340\% F1; MIXAR reaches 6/256 and 11.588\%. Its F1 difference is
+$-13.752$ points [$-18.247$, $-9.094$]. No MIXAR pair has both answers correct,
+versus 12/393 student pairs. The frozen-foundation probe is rejected.
+This comparison includes different prior task training and a font/layout
+shift from MIXAR's native renderer; it does not disprove the released model's
+language competence. External pretraining is not local single-GPU work
+(Supplementary Note 18 and Fig.~S5).
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

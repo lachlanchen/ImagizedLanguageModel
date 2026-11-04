@@ -564,6 +564,101 @@ evidence selection. All results remain limited to canonical, answerable,
 short-paragraph reading; independent seed replication, raw page segmentation,
 historical writing and general language generation are unestablished.
 
+\section*{Supplementary Note 17: complete observed image blocks}
+V58 continues the completed V57 copy EMA with a normalized distribution over
+all contiguous observed prompt blocks $X_{i:j}$, where $1\leq j-i+1\leq16$.
+For causal states $h_i$ and final prompt state $h_L$, define
+\[
+ s_{ij}=\frac{(W^s_qh_L)^\top W^s_kh_i+
+                   (W^e_qh_L)^\top W^e_kh_j}{\sqrt{384}}+b_{j-i+1},
+ \qquad \pi_{ij}=\frac{e^{s_{ij}}}{\sum_{uv}e^{s_{uv}}}.
+\]
+The answer-image law is
+\[
+ p(Y\mid X)=\sum_{ij:\,X_{i:j}=Y}\pi_{ij}.
+\]
+Equality is lossless raster equality, computed from binary pixels; indices
+address only the current prompt. There is no persistent glyph inventory.
+Training minimizes exact negative log block mass, divided by reference cell
+count plus one boundary event across the batch. Annotated source offsets do
+not enter the loss. Mode decoding sums mass over equal sequences and chooses
+the most probable sequence, with first-source tie breaking. No reference
+length, answer list, OCR or output repair enters generation. The predicted
+end boundary terminates a nonempty block; the 16-cell support is fixed before
+training. The retained copy/free/stop continuation path remains separate.
+
+Four new 384-by-384 projections and sixteen length biases bring the runtime
+to 19,597,363 parameters. Projection pairs initialize from V57 copy attention;
+the matched glyph control constructs and freezes the same new heads. Both
+start from identical V57 copy EMA weights and make 4,000 updates, batch four,
+using the previous three-to-one QA/natural-motor schedule, optimizer rates
+and deterministic settings. Seeds are 20265810 (training) and 20265811 (data).
+A four-update uninterrupted versus two-plus-two resumed GPU run matches all
+model/EMA tensors and data, training, CPU and CUDA RNG states exactly.
+Block training takes 210.995 s, 0.967 GiB peak allocated memory; the glyph
+control takes 302.237 s, 1.056 GiB. Earlier foundation costs are excluded.
+
+Both final checkpoints precede development inspection. Primary IDs are the
+same 256 as V57, explicitly reused development, not a sealed final test.
+Exact answers are 25 block, 3 blank-question and 21 matched glyph control.
+F1 is 27.033\%, 9.169\% and 22.140\%. Article-grouped bootstrap uses 2,000
+draws, seed 20265919. Block-minus-control F1 is 4.893 points [0.469, 9.047];
+exact match is 1.563 [-1.509, 4.652]. Normal-minus-blank F1 is 17.864
+[13.438, 22.289]. Only 4/393 pairs have both answers correct; the paired gate
+fails and the registered decision remains \texttt{reject\_reading\_model}.
+All 256 supplied motor images remain exact. Mean conditional block sequence
+NLL is 6.505, versus 9.552 for glyph-event sequence likelihood; these laws have
+different supports and must not be treated as interchangeable language
+perplexities. The audit takes 98.951 s at 0.142 GiB allocated memory.
+The 78,772,107-byte inference-only export reproduces native prompt-PNG
+answers and events exactly. Raw first audit failures appear in Figure 5.
+
+\section*{Supplementary Note 18: frozen visual foundation probe}
+V59 pins MIXAR-477M stage-2 revision
+\texttt{c5d5bcfbad2f290296fd83810558f396c6a6333a}, reusing its shared
+Apache-2.0 checkpoint. Author-reported multilingual pretraining and its
+four-H200 compute are external work, not part of single-4090 training here.
+Both it and the frozen V58 reader consume identical Noto CJK 26-pixel glyphs
+inside binary 32-pixel cells. This differs from MIXAR's native rendering.
+An odd-length prompt gets a blank final cell for two-cell pairing; readout
+candidates exclude that extra cell. Both encoders supply states after each
+complete pair, repeated over its two source cells.
+
+A fixed CPU-QR semi-orthogonal projection maps MIXAR's 896 states to 384
+coordinates, seed 20265900; student states already have width 384. Both append
+128 projected normalized-DCT coordinates, seed 20265901, plus two within-pair
+phase channels. Semantic and fine-image parts are separately RMS-normalized.
+The 514-dimensional features are quantized to FP16 for caching and readout.
+All train, development and blank-question features are prepared without
+reading answer annotations. Recomputed quantized features agree exactly.
+
+Each fresh head has four 514-to-384 projections and sixteen biases, totaling
+789,520 learned parameters. Both train 4,000 updates, batch eight, with seeds
+20265910/20265911, AdamW rate $3\times10^{-4}$, betas (0.9,0.95), decay 0.05,
+norm clip one, warmup 200, cosine to 10\%, and EMA 0.999. Frozen encoders and
+native free writers are unchanged. An interrupted/resumed GPU preflight
+matches weights, EMA and RNG states exactly. Features take 184.781 s and
+1.906 GiB; student and MIXAR readouts take 106.593 and 109.257 s, each at
+0.170 GiB. These resource numbers exclude external pretraining.
+
+Both completed heads precede inspection of the same reused 256 development
+IDs and 393 pairs. Student exact/F1 scores are 9.375/25.340\%; MIXAR scores
+2.344/11.588\%. MIXAR-minus-student F1 is $-13.752$ points
+[$-18.247$,$-9.094$], using 2,000 article draws, seed 20266019.
+Normal-minus-blank F1 is 2.246 [0.415,4.378] for MIXAR, versus 18.343
+[13.949,22.519] for the student. Both questions are exact in zero versus
+twelve pairs. Three of seven gates pass; the frozen-foundation probe fails.
+The 117.085-s, 0.094-GiB audit uses cached readouts and excludes online encoder
+inference. Figure S5 reports all four conditions. Capacity, pretraining,
+prior task training and rendering differ; this is a scoped foundation probe,
+not a general ranking of encoders or native-font MIXAR competence.
+
+\plate{Figure_S5_frozen_foundations}{\textbf{Frozen pretrained features do not
+improve this reading interface.} Identical learned block heads consume frozen
+student or MIXAR features, with normal and blank-question prompts. All scores
+use the fixed 256 questions. External pretraining and rendering shift prevent
+a causal attribution to capacity or pretraining alone.}{fig:frozen-foundations}
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily

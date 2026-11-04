@@ -1,5 +1,49 @@
 # Grounded visual reading and image answers
 
+## Complete observed image blocks
+
+V58 adds a probability law over variable-length contiguous blocks of actual
+prompt images, marginalizing equal sequences. Its predicted end position
+terminates an answer. It gets 25/256 exact development answers (9.766%), versus
+21/256 for matched additional glyph training; the exact-match difference is
+unresolved. Raster F1 is 27.033%, and only 4/393 paired questions have both
+answers correct. The reading qualification fails. See the
+[V58 measured result](../references/visual_answer_blocks_v58_result.md).
+
+The inference-only model runs locally from a native image. No initial training
+checkpoint, text vocabulary, OCR or external model call is needed:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/infer_visual_answer_blocks.py \
+  --checkpoint artifacts/visual_answer_blocks_v58_20261105/block/checkpoint_final.pt \
+  --prompt-image prompt.png --out answer.png --export ilm_blocks_standalone.pt \
+  --device cuda:0
+```
+
+The export is 78,772,107 bytes. Replaying the emitted `_prompt.png` with that
+export reproduces the answer pixels and source-boundary events exactly. PNG
+cells must follow the same 32-pixel alignment described below. Typed prompts
+can use the host rasterizer through `--prompt-text`. The `.pt` output is a
+dictionary with an `images` tensor. `--continuation` selects the retained
+glyph copy/free writer, whose useful general language quality is unqualified.
+
+For reproducible V58 training, run `train_visual_answer_blocks_v58.py` with
+`--arm block` and then `--arm glyph` in separate output folders, and complete
+both before `eval_visual_answer_blocks_v58.py`. Each uses 4,000 updates on
+GPU 0. The current data hashes and initialization are checked automatically;
+the production protocol rejects modified inputs or replaced final outputs.
+
+## Frozen visual foundation comparison
+
+V59 tests identical small learned block heads over frozen student or released
+MIXAR features. It is not a deployment upgrade: the larger feature source gets
+6/256 exact answers versus 24/256 student, under our shifted Noto CJK interface.
+See the [negative result and resource accounting](../references/frozen_visual_foundation_v59_result.md).
+Cached readout inference cost excludes the encoder. External pretraining must
+not be counted as single-GPU training here. Shared release weights are reused.
+
+## Per-glyph copy/free baseline
+
 V57 trains a compact causal image reader with two output paths: copying a
 currently visible image and generating a new binary raster. A learned stop
 hazard controls answer length. The runtime receives image tensors and packing
