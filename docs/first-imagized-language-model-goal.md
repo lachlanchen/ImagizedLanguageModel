@@ -69,10 +69,13 @@ V61 now implements that route: all 477,145,984 native pixel-language parameters
 receive answer-image likelihood gradients. The full-backbone preflight uses
 9.91 GiB allocated memory and passes exact interrupted/resumed weights, EMA,
 optimizer and RNG, plus a zero-error future-pixel causality check. The actual
-1,000-update production run is underway on physical GPU 0 only. Its output is
+1,000-update production run completes in 1,501.1 seconds on physical GPU 0 only,
+excluding loading and final serialization. Its output is
 free pixels with image-based termination, without a source-span selector.
-External MIXAR pretraining is attributed separately. Quality remains pending
-the registered base/blank-question/paired audit and native deployment replay;
+External MIXAR pretraining is attributed separately. A self-contained learned
+bundle reproduces native PNG output tensors, PNG bytes and events exactly
+with empty source/model caches and networking disabled. Quality remains pending
+the registered base/blank-question/paired audit;
 do not infer language competence from decreasing training loss. See the
 [native training and inference guide](native-pixel-language.md).
 
