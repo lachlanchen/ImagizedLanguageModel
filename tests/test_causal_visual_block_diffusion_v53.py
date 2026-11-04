@@ -10,6 +10,7 @@ from ilm.visual_lm.causal_visual_block_diffusion_v53 import (
     causal_visual_block_boundary_receipt,
 )
 from ilm.visual_lm.causal_visual_block_diffusion_v53_training import (
+    _visual_fields,
     stratified_future_timesteps,
     visual_block_diffusion_loss,
 )
@@ -66,12 +67,10 @@ def test_v53_initialization_transfers_v51_function_to_the_strip() -> None:
     zeros_hidden = torch.zeros(2, 384)
     zeros_anchor = torch.zeros(2, 1024)
     zeros_plan = torch.zeros(2, 1, 32, 32)
-    block_velocity, _ = denoiser(
-        cells, zeros_hidden, zeros_anchor, zeros_plan, times
-    )
-    local_velocity = prior.predict_noise(cells.flatten(0, 1), times.flatten()).reshape_as(
-        cells
-    )
+    block_velocity, _ = denoiser(cells, zeros_hidden, zeros_anchor, zeros_plan, times)
+    local_velocity = prior.predict_noise(
+        cells.flatten(0, 1), times.flatten()
+    ).reshape_as(cells)
     difference = (block_velocity - local_velocity).abs().mean()
     cosine = torch.nn.functional.cosine_similarity(
         block_velocity.flatten(1), local_velocity.flatten(1)
@@ -134,3 +133,27 @@ def test_v53_full_loss_is_finite_and_updates_the_conditional_writer() -> None:
     assert model.denoiser.condition[-1].weight.grad is not None
     assert torch.isfinite(model.denoiser.condition[-1].weight.grad).all()
     assert all(parameter.grad is None for parameter in model.reader.parameters())
+
+
+def test_v53_visual_field_loss_reaches_predicted_pixels() -> None:
+    model = _model()
+    signed = torch.randn(2, 4, 1, 32, 32, requires_grad=True)
+    target = torch.nn.functional.normalize(torch.randn(2, 4, 1024), dim=-1)
+    loss = (1.0 - (_visual_fields(model, signed) * target).sum(-1)).mean()
+    gradient = torch.autograd.grad(loss, signed)[0]
+    assert torch.isfinite(gradient).all()
+    assert gradient.abs().sum() > 0
+    binary = torch.randint(0, 2, (2, 4, 1, 32, 32)).float()
+    expected = model.reader.field.encode_unit(binary.flatten(0, 1)).reshape(2, 4, -1)
+    assert torch.allclose(_visual_fields(model, binary * 2 - 1), expected, atol=1e-6)
+
+
+def test_v53_synchronous_noise_matches_inference_support() -> None:
+    times = stratified_future_timesteps(
+        32,
+        device=torch.device("cpu"),
+        generator=torch.Generator().manual_seed(532),
+        synchronous=True,
+    )
+    assert torch.equal(times, times[:, :1].expand_as(times))
+    assert bool((times[:, 0] >= 60).any())

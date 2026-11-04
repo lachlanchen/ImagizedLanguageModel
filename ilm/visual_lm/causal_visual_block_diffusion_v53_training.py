@@ -63,9 +63,16 @@ def stratified_future_timesteps(
     *,
     device: torch.device,
     generator: torch.Generator,
+    synchronous: bool = False,
 ) -> torch.Tensor:
     if batch_size < 1:
         raise ValueError("V53 timestep batch must be positive")
+    if synchronous:
+        return (
+            torch.randint(0, 100, (batch_size, 1), device=device, generator=generator)
+            .expand(-1, 4)
+            .clone()
+        )
     ranges = ((0, 24), (25, 59), (60, 89), (90, 99))
     rows: list[torch.Tensor] = []
     for _ in range(batch_size):
@@ -89,8 +96,11 @@ def _visual_fields(
     model: CausalVisualBlockDiffusion,
     signed_cells: torch.Tensor,
 ) -> torch.Tensor:
-    probability = signed_cells.add(1.0).mul(0.5).clamp(0.0, 1.0)
-    fields = model.reader.field.encode_unit(probability.flatten(0, 1)).float()
+    # Do not use encode_unit here: it thresholds pixels and cuts gradients.
+    basis = model.reader.field.basis.float()
+    spatial = signed_cells.flatten(0, 1)[:, 0].float()
+    spectral = basis @ spatial @ basis.transpose(0, 1)
+    fields = F.normalize(spectral.flatten(1), dim=-1, eps=1e-8)
     return fields.reshape(len(signed_cells), 4, -1)
 
 
@@ -138,9 +148,7 @@ def visual_block_diffusion_loss(
     ).sum() / foreground_weight.sum()
     probability = predicted_clean.add(1.0).mul(0.5).clamp(0.0, 1.0)
     overlap = 2.0 * (probability * target_cells).flatten(2).sum(dim=-1)
-    scale = probability.flatten(2).sum(dim=-1) + target_cells.flatten(2).sum(
-        dim=-1
-    )
+    scale = probability.flatten(2).sum(dim=-1) + target_cells.flatten(2).sum(dim=-1)
     dice = (1.0 - (overlap + 1e-6) / (scale + 1e-6)).mean()
     target_fields = _visual_fields(model, target_signed).detach()
     predicted_fields = _visual_fields(model, predicted_clean)
@@ -163,13 +171,12 @@ def visual_block_diffusion_loss(
     ordered_cosine = (predicted_fields * target_fields).sum(dim=-1)
     shuffled_cosine = (shuffled_fields * target_fields).sum(dim=-1)
     eligible = (timesteps >= 60) & (~drop_condition[:, None])
-    if not bool(eligible.any()):
-        raise ValueError("V53 order loss requires a conditioned high-noise cell")
-    ordered_high = ordered_cosine[eligible].mean()
-    shuffled_high = shuffled_cosine[eligible].mean()
-    order = F.softplus(weights.order_margin - (ordered_cosine - shuffled_cosine))[
-        eligible
-    ].mean()
+    count = eligible.sum().clamp_min(1)
+    ordered_high = (ordered_cosine * eligible).sum() / count
+    shuffled_high = (shuffled_cosine * eligible).sum() / count
+    order = (
+        F.softplus(weights.order_margin - (ordered_cosine - shuffled_cosine)) * eligible
+    ).sum() / count
     total = (
         velocity
         + weights.foreground * foreground
