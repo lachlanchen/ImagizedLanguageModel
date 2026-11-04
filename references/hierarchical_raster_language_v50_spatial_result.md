@@ -52,10 +52,10 @@ pixel-logit space, gated by plan uncertainty. Confident plan pixels cannot be
 flipped; uncertain stroke boundaries may be refined. The writer is thus a
 plan-preserving renderer rather than a second model that redraws the glyph.
 
-This revision is retained only if it preserves at least 85% of direct-plan
-identity, does not lower direct-plan pixel F1 by more than 0.02, and still shows
-an ordered-context advantage. Otherwise the separate writer is removed and
-the fixed inverse visual field becomes the deployed output path.
+The completed follow-up is recorded in
+[`plan_preserving_raster_writer_v50p_result.md`](plan_preserving_raster_writer_v50p_result.md).
+It fails identity retention and removes the separate writer from the active
+path. The fixed inverse visual field is the current deployed output mechanism.
 
 ## Claim Boundary
 
