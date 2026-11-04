@@ -85,3 +85,18 @@ compact manuscript and next protocol must keep those two tasks measurable.
 - Raw pixels: `artifacts/causal_visual_block_diffusion_v53_20261104/development/generated_image_evidence.pt`
 - Gallery: `artifacts/causal_visual_block_diffusion_v53_20261104/development/target_ordered_shuffled_zero_plan.png`
 - Checkpoint SHA-256: `bd8dd3e58483d4ef527ae9a0fc4db1c0df545d18ec0fa0067ff594256d7cc71b`
+
+## Completed post-result motor diagnostic
+
+On the first 64 fixed development prefixes, replacing the first predicted
+plan with the exact target image raises first-cell F1 from 0.377529 to
+0.458631. Supplying the exact image field as well raises identity from 1/64 to
+5/64 and F1 to 0.459375. The exact inverse transform gives pixel F1 1.0.
+Its 60.94% bank identity reflects the bank's target coverage, not copy error.
+
+This diagnostic supplies the answer and cannot establish autonomous language.
+It shows that the current writer remains a weak image-conditioned motor even
+when the intended shape is available. It supports qualifying visual copying
+before another conditional-language run. The diagnostic does not revise any
+frozen gate. Source: `scripts/diagnose_visual_block_motor_v53.py`; raw evidence:
+`artifacts/causal_visual_block_diffusion_v53_20261104/target_supplied_motor_diagnostic/`.
