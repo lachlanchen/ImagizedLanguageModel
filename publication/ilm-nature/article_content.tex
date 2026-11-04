@@ -225,6 +225,31 @@ but fails sampled quality and ordered-generation criteria; its decision remains
 This is evidence of improved conditional learning, not a qualified language
 generator.
 
+\subsection*{Raw-pixel search improves choice but exposes repetitive rollouts}
+Known-form validity and target correctness separate two remaining problems.
+A post-result audit of the original saved images finds exact known-form
+membership in 43.750\% of joint first samples, versus 33.594\% for matched
+frozen training. The paired gain is 10.156 percentage points [4.219, 16.240].
+Joint greedy images reach 98.438\% known-form membership, but only 7.422\%
+exact target match (Supplementary Note 14). Clear writing alone is insufficient.
+
+We next search the same normalized pixel law with eight partial-raster beams,
+without a glyph inventory or weight change. On 2,048 new deterministic
+development windows, ordered exact next-image match is \BeamAccuracy\%,
+versus \GreedyAccuracy\% for original pixel greediness and \BeamShuffled\%
+after earlier-history shuffling. The beam-minus-greedy gain is \BeamGain\
+points [\BeamGainLow, \BeamGainHigh]; the earlier-history gain is
+\BeamHistoryGain\ points [\BeamHistoryLow, \BeamHistoryHigh]. Every primary
+beam output matches a known canonical raster after generation.
+
+Eight-step feedback on 128 prefixes reaches 6.641\% exact target images,
+versus 4.883\% greedy, but adjacent repeated images rise to \BeamRepeat\%.
+The actual target rate is \TargetRepeat\%. Thus the registered decoder
+decision is \texttt{\BeamDecision}: five of six gates pass, but repetitive
+rollout fails (Supplementary Note 15 and Fig.~S4). This outcome is compatible
+with known limits of probability-maximizing language decoding\cite{degeneration}.
+No repetition filter or output replacement is applied.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -301,6 +326,15 @@ trains 2,434,592. Joint and control times are \JointTime\ and \ControlTime\ s,
 with peaks \JointMemory\ and \ControlMemory\ GiB. Frozen-reader weights remain
 identical to initialization, while joint reader weights change. Both final
 training RNG states match. Development opens only after both arms finish.
+
+The subsequent decoder retains eight partial images after each binary pixel
+expansion, ranked by accumulated Bernoulli log probability. Row conditions are
+gathered along beam-parent indices within each row. Stable ties prefer ink,
+matching the original width-one rule. Full FP32 matmuls are used for both new
+controls after a documented numerical preflight; model weights are unchanged.
+The maximum production incremental-score/parallel-NLL error is
+$2.10\times10^{-5}$ nat, below the unchanged 0.001 tolerance. The complete
+inference audit takes \BeamSeconds\ s at \BeamMemory\ GiB allocated CUDA memory.
 
 \subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale

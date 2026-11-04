@@ -20,7 +20,26 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 V42--V46 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current evidence: joint visual likelihood improves; generation remains unqualified
+## Current evidence: clearer forms and better choice; extended language remains unqualified
+
+![Measured pixel-beam result: higher exact next-image accuracy but excessive repetition in raw eight-step outputs](publication/ilm-nature/figures/Figure_S4_pixel_beam.png)
+
+Using the same 18.71M-parameter checkpoint, pixel beam search raises exact
+next-image matches to **11.621%** from 8.252% greedy on 2,048 development
+prefixes. Shuffling earlier history lowers beam accuracy to 9.863%. Every beam
+output is an exact canonical form, but eight-step output repeats adjacent
+images **25.446%** of the time, versus 0.112% in the observed streams.
+The rollout gate fails: the model is still an **unqualified research checkpoint**.
+See the [measured decoder result](references/raster_beam_v56_result.md) and
+[native-image inference guide](docs/exact-raster-language.md).
+
+The next bounded task uses natural Chinese reading questions: 3,211 training
+and 1,321 development questions with article overlap removed. A visual copy
+distribution is planned to select answer images from the visible passage while
+retaining free image generation. This dataset preparation is not a trained
+question-answering result; see the [data audit](references/visual_reading_qa_data_result.md).
+
+### Joint visual likelihood learning
 
 ![Measured joint-learning result: improved exact target likelihood, low autonomous target identity and unselected raw output images](publication/ilm-nature/figures/Figure_S2_joint_learning.png)
 

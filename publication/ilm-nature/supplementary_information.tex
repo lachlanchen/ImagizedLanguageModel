@@ -5,6 +5,7 @@
 \input{results_values.tex}
 \input{density_values.tex}
 \input{joint_values.tex}
+\input{beam_values.tex}
 \begin{document}
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -363,6 +364,102 @@ the likelihood improvement alone cannot resolve.}
 \label{fig:joint-learning}
 \end{figure}
 
+\section*{Supplementary Note 14: form validity after joint learning}
+A post-result diagnostic compares saved images with the same 9,932 distinct
+canonical rasters used for evaluation. Exact membership asks whether an output
+is a known form; exact target match asks whether it equals the observed next
+image. Neither uses nearest-neighbour replacement. The bank is confined to
+evaluation and never enters decoding. These descriptive measurements reuse
+development outputs and do not change any original decision.
+
+Among 256 first samples, exact known-form membership rises from 9.375\% in
+V54 to 33.594\% in the continued frozen arm and 43.750\% in the joint arm.
+The paired joint-minus-frozen gain is 10.156 percentage points, with 95\%
+source-record interval [4.219, 16.240]. Exact observed-target matches are
+0.781, 1.953 and 3.516\%, respectively. In four-step feedback, joint form
+membership is 46.875\% versus 38.672\% frozen; the paired gain is 8.203 points
+[1.230, 14.683]. The first-sample joint greedy output has 98.438\% membership
+but only 7.422\% exact target match and 34 distinct forms, compared with 78
+distinct stochastic outputs. Form coherence and linguistic choice remain
+separate requirements (Fig.~\ref{fig:form-validity}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S3_form_validity.pdf}
+\caption{\textbf{Exact canonical form does not imply correct continuation.}
+Saved first samples and four-step feedback images are compared with a fixed
+canonical raster bank. Blue bars require exact pixel equality with any known
+form; brown bars require equality with the observed future image. All three
+checkpoints use the same bank. The paired uncertainty is stated in Note 14;
+the bars are descriptive fractions, not independent replications.}
+\label{fig:form-validity}
+\end{figure}
+
+\section*{Supplementary Note 15: raw-pixel beam decoding}
+The V56 decoder changes search alone. V55 joint weights and the complete
+binary-image law remain fixed. A beam of eight prefixes expands the next
+binary pixel to ink or background, adds its exact conditional log probability
+and retains the eight best scores. The row model observes preceding rows;
+the masked within-row head observes preceding pixels. Parent gathering keeps
+row history and row conditions aligned. Stable ties prefer ink and then the
+earlier parent. Width one reproduces the original greedy rule. No persistent
+glyph inventory, target identity, image replacement, rejection filter or
+external model enters the decoder. Beam eight is approximate mode search,
+not exact global maximization over all $2^{1024}$ images.
+
+A two-image numerical preflight found that the original high matmul precision
+gave incremental/parallel score differences above the frozen $10^{-3}$-nat
+tolerance. An amendment recorded before production sets both beam and greedy
+controls to highest FP32 matmul precision. It changes no weights, windows,
+beam width, tolerance or quality gate. Production maximum score discrepancy
+is $2.10\times10^{-5}$ nat and the width-one equality check passes.
+
+The fixed audit uses 2,048 development windows, seed 20265620, 64 visible cells
+and eight future targets. Exact next-image matches are 238/2,048 for ordered
+beam, 202/2,048 for earlier-shuffled beam and 169/2,048 for ordered greedy:
+\BeamAccuracy, \BeamShuffled\ and \GreedyAccuracy\%, respectively. Shuffling
+preserves the final four visible cells. The paired beam-minus-greedy gain is
+\BeamGain\ points [\BeamGainLow, \BeamGainHigh]; ordered-minus-shuffled is
+\BeamHistoryGain\ points [\BeamHistoryLow, \BeamHistoryHigh]. Intervals use
+2,000 source-record bootstrap draws, seed 20265719, with 188 source records.
+All ordered and shuffled beam outputs exactly match a known canonical form.
+The post-generation bank has 9,934 distinct rasters and covers every target;
+it is descriptive, not the search space. Beam emits 127 distinct first forms,
+versus 116 greedy. Its mean self NLL is 3.108 versus 3.508 nats/image; this
+scores the selected output, not the true target, and is not a training gain.
+
+Visible feedback uses the first 128 prefixes for eight steps. Exact observed
+image matches are 68/1,024 ordered beam, 51/1,024 shuffled beam and 50/1,024
+greedy. The beam-minus-greedy difference is 1.758 points [0, 3.770], with 89
+source records. Adjacent image repetition is 228/896 transitions
+(\BeamRepeat\%) for beam, versus one transition (\TargetRepeat\%) in the
+observed streams. Shuffled beam repeats 32.366\% and greedy 17.746\%.
+Mean distinct images per eight-step stream are 4.711 beam and 7.789 observed.
+Thus search improves immediate conditional choice while longer output remains
+repetitive (Fig.~\ref{fig:pixel-beam}). Five of six gates pass; feedback
+repetition fails and the decision is \texttt{\BeamDecision}.
+
+All 256 supplied motor images still copy exactly. The audit takes
+\BeamSeconds\ s with \BeamMemory\ GiB peak allocated CUDA memory on GPU 0,
+excluding previous training and data preparation. No new training or sealed
+evaluation is performed. This bounded search result does not establish
+question answering, instruction following, historical-script generation or
+capability-matched efficiency against a text language model.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S4_pixel_beam.pdf}
+\caption{\textbf{Pixel search improves next-image choice but fails rollout.}
+\textbf{a}, Exact target-image matches on 2,048 fixed prefixes, with unchanged
+weights across ordered beam, earlier-shuffled beam and greedy controls.
+\textbf{b}, Adjacent raster repetition over eight-step feedback, compared
+with observed future streams. \textbf{c}, First four fixed audit streams:
+observed future and raw generated images. No examples are selected or repaired.
+Paired intervals are reported in Note 15; the feedback failure remains the
+decoder's qualification decision.}
+\label{fig:pixel-beam}
+\end{figure}
+
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
 \begin{quote}\small\ttfamily
@@ -391,5 +488,12 @@ scripts/eval\_joint\_exact\_raster\_v55.py
 \end{quote}
 The independent runtime uses
 \texttt{scripts/infer\_joint\_exact\_raster\_v55.py}.
+The form diagnostic and locked pixel decoder audit use
+\begin{quote}\small\ttfamily
+scripts/diagnose\_raster\_form\_validity.py\\
+scripts/eval\_raster\_beam\_v56.py.
+\end{quote}
+Independent pixel-beam inference uses
+\texttt{scripts/infer\_raster\_beam.py}.
 \input{references_main.tex}
 \end{document}

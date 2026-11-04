@@ -85,6 +85,32 @@ receipt. No image-bank replacement or OCR repair is applied.
 
 ## Evidence and limits
 
+### Raw-pixel beam inference
+
+The V56 search algorithm runs the same V55 weights. It expands binary pixels,
+keeps eight image prefixes and emits the highest-scoring completed raster.
+It uses no persistent glyph bank, image replacement or OCR repair. Both search
+and its matched greedy audit use highest FP32 matmul precision.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python scripts/infer_raster_beam.py \
+  --prompt-image prompt.png --cells 8 --out answer.png \
+  --export ilm_beam_standalone.pt --device cuda:0
+```
+
+The export contains the complete reader and image density. Native-image replay
+was verified pixel-for-pixel, including image log probabilities. `--copy` is
+an explicitly supplied-image motor control and reproduces binarized input;
+it is not question answering. `--beam-width 1` recovers pixel greedy decoding.
+
+Beam search improves immediate exact-target choice to 11.621% on 2,048
+prefixes but fails the repetition gate at 25.446% adjacent repeats over
+eight-step feedback. This CLI is a reproducible research runtime, not a fluent
+assistant. The [complete result](../references/raster_beam_v56_result.md)
+records paired intervals, numerical preflight and failed qualification.
+
+### Qualification scope
+
 Audits retain exact NLL, first samples, greedy outputs, visible feedback,
 supplied-image controls, raw galleries, resource receipts and paired
 source-record intervals. Evaluator banks are constructed after generation and

@@ -19,12 +19,22 @@ NLL to 7.026 nats/glyph versus 7.579 for matched extra frozen-reader training
 Autonomous first-sample identity is 9/256 versus 8/256 with earlier history
 shuffled. It passes 6/8 gates and remains unqualified as a language generator.
 
-Retain the measured joint-learning and copying components. The next evidence
-must distinguish producing a valid written form from choosing a particular
-observed continuation, and assess whether disclosed public pixel-language
-pretraining is a better foundation. Useful language, prompt following and
-coherent raw output remain the targets; a lower teacher-forced loss alone is
-insufficient. The final deployed model must remain independent.
+V56 keeps those weights and changes raw-pixel search. Exact next-image matches
+rise to 238/2,048 (11.621%) versus 169/2,048 greedy and 202/2,048 with earlier
+history shuffled. Every beam output is an exact canonical form. Eight-step
+feedback remains repetitive: 25.446% adjacent repeats versus 0.112% observed.
+The decoder fails its rollout gate. Clear forms and better immediate choice
+are working components; coherent answers remain unproved.
+
+The next bounded task is natural Chinese visual reading comprehension. The
+prepared CMRC subset has 3,211 training and 1,321 development questions, with
+article overlap removed and 393 same-paragraph/different-question development
+pairs. A planned visual copy distribution selects among images actually in
+the prompt, while retaining the free raster density. No QA model has yet been
+trained or qualified. Public MIXAR-477M inference was also checked with its
+released pretrained weights; six fixed prompts yielded incomplete English
+and fragmented CJK, not a qualified replacement foundation. Offline teachers
+remain allowed, with provenance. The final deployed model must be independent.
 
 The preceding V54 runtime has 18.71M parameters and a self-contained inference export.
 It copies all 256 supplied development images exactly in greedy mode, retaining

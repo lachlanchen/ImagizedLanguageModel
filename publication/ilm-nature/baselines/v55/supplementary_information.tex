@@ -1,0 +1,395 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{nature_reading}
+\usepackage{longtable}
+\input{results_values.tex}
+\input{density_values.tex}
+\input{joint_values.tex}
+\begin{document}
+\renewcommand{\thefigure}{S\arabic{figure}}
+{\sffamily\bfseries\Large Supplementary Information\par}
+\medskip\noindent\textbf{Learning conditional language in continuous image space}\par
+\medskip\noindent Imagized Language Model Project
+
+\section*{Supplementary Note 1: experimental question and scope}
+The target is an independent visual language model whose runtime consumes
+writing images and generates writing images. Encoded text and local language
+models may prepare data offline. They cannot supply the answer during model
+inference. The present experiment isolates canonical Chinese continuation as
+one prerequisite. It does not cover the complete instruction-following or
+historical-script objective.
+
+The repository retains the earlier 96-page research record in its legacy
+image-native publication folder. That record documents prior
+experiments without treating every rejected architecture as a contribution to
+the compact article. This supplement specifies the directly conditional
+block test, the subsequent exact-raster density and the distinction between
+ranking and generation.
+
+\section*{Supplementary Note 2: conditional uncertainty}
+Let $H$ denote a visible history and $X$ the next writing image. Under squared
+pixel loss, the optimum $f^*(H)=\mathbb{E}[X\mid H]$ can mix valid glyphs.
+Under independent Bernoulli loss, each marginal equals
+$\Pr(X_p=1\mid H)$, which likewise does not specify joint stroke identity.
+An image distribution is consequently required for stochastic writing.
+
+Selection and sampling have different expected identity accuracy. If a
+model exactly recovers the true next-form distribution $p(x\mid H)$,
+deterministic top-1 identity has conditional accuracy
+$\max_x p(x\mid H)$. Independently sampling one future and comparing it to
+one observed continuation has expected accuracy $\sum_x p(x\mid H)^2$.
+Neither quantity is a general measure of semantic correctness. Thus the
+reader's 19.97\% top-1 cannot be used as the expected accuracy of a correct
+stochastic writer. Paired context controls, sampled probabilities, direct
+readability and meaningful longer continuations are needed together.
+
+\section*{Supplementary Note 3: raster transform and gradients}
+For signed ink image $S=2X-1$ and a $32\times32$ orthonormal basis $B$, the
+visual coordinate is
+\begin{equation}
+\phi(S)=\frac{\operatorname{vec}(BSB^{\mathsf T})}
+{\|\operatorname{vec}(BSB^{\mathsf T})\|_2}.
+\end{equation}
+For binary observed images this matches the reader's field. For soft predicted
+images it must be computed directly on $S$. Applying the reader's input
+threshold inside this training objective would cut all pixel gradients.
+The pretraining inspection found and corrected that defect. A regression test
+confirms a finite, nonzero gradient from the field cosine alone to the predicted
+pixels and equality with the reader transform on binary inputs.
+
+The transform is a full spatial coordinate, not a learned visual vocabulary.
+Its background contribution also limits its interpretation as a perceptual
+identity metric. A high cosine can accompany an incorrect glyph.
+
+\section*{Supplementary Note 4: directly conditional architecture}
+The frozen reader has 16,277,249 parameters. Its final 384-dimensional hidden
+state and 1,024-dimensional anchor form a continuous condition. A 5,899,970-
+parameter U-Net receives a complete $32\times128$ future strip. Three spatial
+scales have 64, 128 and 256 channels. Each residual scale receives the projected
+condition and a sinusoidal time embedding. Additional input channels carry the
+first-cell predicted plan, a horizontal coordinate and the cell noise levels.
+
+At the bottleneck, four pooled cell vectors enter four-head attention and a
+512-wide MLP. A zero-initialized scalar gates the spatial mixer residual.
+The output channel predicts velocity over four visible cells. The total
+runtime contains 22,177,219 parameters. The prior checkpoint only initializes
+matching U-Net weights. An epsilon predictor is not thereby a qualified
+velocity predictor, so all copied layers are fine-tuned under the new loss.
+
+\section*{Supplementary Note 5: data and optimization}
+The corpus manifest SHA-256 is
+\begin{quote}\small\ttfamily
+76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03.
+\end{quote}
+Source identifiers define deterministic splits before rendering. Original and
+OpenCC-simplified views inherit the same split. Data generation samples
+65-cell segments with a saved dataset seed. Only the first 64 cells are used
+in this test. A training example has 60 context and four target cells. A
+symbolic character identifier is never an input or target to a model method.
+
+On odd updates, the four future positions receive one level from each of
+0--24, 25--59, 60--89 and 90--99 under a random permutation. On even updates,
+one uniformly sampled level from 0--99 applies to all four future cells.
+The latter pretraining amendment supplies synchronous noise patterns like
+those encountered during sampling. It was frozen before optimization.
+
+Ten percent of rows drop the condition. All-dropped batches have zero order
+loss. The foreground loss weights pixels by $1+2X$. The complete objective is
+\begin{align}
+L={}&L_v+0.10L_{fg}+0.10L_{dice}+0.10L_{field}\nonumber\\
+&+0.10L_{repr}+0.25L_{order},\\
+L_{order}={}&\mathbb{E}_{t\geq60}\operatorname{softplus}
+\left[0.02-(c_{ordered}-c_{shuffled})\right].
+\end{align}
+Only rows with an available condition enter the order loss. The reader remains
+frozen. Noise, drop masks and data offsets derive from saved RNG states.
+The run uses seed 20265310, dataset seed 20265311, AdamW with
+$\beta=(0.9,0.95)$, weight decay 0.01, gradient norm clip 1, EMA decay 0.999,
+batch eight and 8,000 updates. The full run consumes 64,000 context segments
+and 256,000 supervised future cells. These are sampled segments rather than
+64,000 independent source records.
+
+\section*{Supplementary Note 6: locked audit and uncertainty}
+The audit seed is 20265320. It uses 512 fixed development windows for
+denoising, 256 for direct generation and 64 for two-block visible feedback.
+The first 60 cells form the context and the remaining four context-window
+cells form the first target block. The four subsequent continuation cells
+form the second block. Denoising probes use levels 75 and 95, with identical
+noise under all conditions. Prefix shuffling preserves the final four visible
+cells. The zero condition removes all reader state and plan channels.
+
+The 1,024-image bank is rendered after every denoising and generation call.
+Every primary output is the first sample. Nearest-bank identity is evaluator
+metadata, not an image replacement or glyph selected by the model. Per-position
+coverage records how many true targets appear in the bank. All out-of-bank
+targets receive zero exact-identity credit. The rendered output remains the
+actual model image even when a bank identity is assigned.
+
+Bootstrap uncertainty resamples source identifiers, retaining all correlated
+windows from a record together, with 2,000 resamples. Paired differences keep
+the same starting noise. The intervals do not include training-seed variation.
+There is one primary trained seed and no sealed generalization result.
+
+\input{results_table.tex}
+
+\section*{Supplementary Note 7: numerical and compute receipts}
+Training takes \TrainSeconds\ seconds and peaks at \TrainMemory\ GiB of
+allocated CUDA memory on GPU 0, an RTX 4090 D. These figures describe the
+bounded experiment. They exclude prior foundation training, data preparation,
+idle GPU memory, operating-system memory and evaluation. They are not an
+estimate of the cost of a broadly capable language model. The independent
+reader and prior training costs remain in their original run reports.
+
+The continuous versus interrupted four-step smoke check compares every
+denoiser and EMA tensor and the saved training generator. All match exactly.
+Production checkpoints save optimizer groups, CPU/CUDA/Python/NumPy RNGs and
+the deterministic data offset. Foundation, data, source and protocol hashes
+are checked before scoring. No other project's GPU service is part of this run.
+
+\section*{Supplementary Note 8: limitations and next evidence}
+The post-result motor diagnostic uses the first 64 fixed prefixes and paired
+noise. Replacing the first plan with the exact target raster gives F1 0.4586.
+Replacing both plan and visual anchor gives F1 0.4594 and identity 5/64,
+compared with F1 0.3775 and identity 1/64 for the predicted condition. An exact
+inverse-transform control has F1 1.0. Only 60.94\% of these targets occur in
+the Han identity bank, so its 60.94\% identity is the available ceiling for
+perfect copies. The target-supplied test was designed after the locked audit
+and does not change its decision. It isolates a remaining motor limitation.
+
+Reliable autonomous continuation, calibrated conditional sequence likelihood,
+held-out short answers, font transfer, independent seed replication and
+capability-matched text baselines remain outstanding. No selected gallery can
+substitute for these tests. Future teacher-generated exercises must retain
+source provenance and separate prompt/answer splits. A deployed teacher or
+an image-bank lookup would change the model contract.
+
+The older guided model's terminal-signal observation is a mathematical limit,
+not a proven failure explanation. Correct conditional diffusion also starts
+from a context-independent noise law. Direct interventions on trained
+conditional scores and matched initialization are needed to distinguish weak
+condition learning from a defective sampling trajectory.
+
+\section*{Supplementary Note 9: normalized raster density}
+The exact-density model (V54) freezes the same 16,277,249-parameter reader.
+A row transformer has width 192, four layers, six heads, MLP ratio three and
+zero dropout. Its inputs are shifted earlier rows, a projection of the aligned
+32-pixel plan row, spatial row positions and a projected continuous condition
+(hidden384 plus field1024). A MADE with two 256-wide SiLU layers masks pixels
+within each row. Its output mask is strict: pixel $c$ cannot see pixel $c$ or
+any later pixel. Earlier rows may be observed in full. Gradients with respect
+to forbidden pixels vanish even with nonzero randomized output weights.
+Enumeration of all 16 four-bit outcomes gives total probability one.
+
+The inverse reader field, scaled by 32 and clipped to $[-2,2]$, supplies an
+aligned logit at scale six. Residual output weights start at zero. Thus a
+supplied binary image has greedy reconstruction exactly equal to itself at
+initialization. This copy path does not learn language and is not a lookup
+bank. It applies to arbitrary supplied binary rasters. The experiment measures
+whether optimization retains that path while learning natural continuation.
+
+Each update samples eight streams and 16 causal positions per stream, four
+from each quarter, including the last position. Of the resulting 128 target
+images, 25\% in expectation receive their actual image field and a zero hidden
+state as explicit motor exercises. The remainder receive frozen predicted
+states. Antialiased target images are thresholded at 0.5 before unweighted
+Bernoulli NLL; soft labels are rejected by the loss. There is no additional
+foreground, contrastive or guidance objective. Seeds are 20265410 for training
+and 20265411 for data. AdamW uses learning rate $2\times10^{-4}$,
+$\beta=(0.9,0.95)$, weight decay 0.01, 400 warmup updates, cosine decay to
+10\%, norm clip one, BF16 and EMA 0.999. The run makes 1,024,000 selected-image
+presentations over 8,000 updates; these are not independent records.
+
+Training completes in \DensitySeconds\ s with \DensityMemory\ GiB peak allocated
+CUDA memory. The runtime has 18,711,841 parameters, of which 2,434,592 are
+new density parameters. The 52.16-second audit peaks at 0.231 GiB allocated
+CUDA memory. Neither timing includes earlier reader training. Source hashes,
+the corpus hash, optimizer, all RNGs and the dataset offset are saved. An
+interrupted-versus-continuous smoke run matches every model and EMA tensor and
+the training RNG exactly. The production checkpoint SHA-256 is
+\begin{quote}\small\ttfamily
+f2c3fab74981541243a963c8cffab6bbbd8c7f9d051512b228347db04a57a9ee.
+\end{quote}
+
+\section*{Supplementary Note 10: exact-density audit and decision}
+Audit seed 20265420 selects 512 development windows from 169 source records
+for exact target NLL. Pixel autoregression is teacher forced only for this
+likelihood calculation. The paired earlier-history shuffle preserves the last
+four visible cells. Ordered NLL is \DensityNll\ nats per image and shuffled
+NLL is \DensityShuffledNll. Their advantage is \DensityAdvantage, with interval
+[\DensityLow, \DensityHigh] from 2,000 source-record draws (bootstrap seed
+20265519). The zero-condition NLL is 47.930 nats; zeroing is an
+out-of-distribution control, not an optimized unconditional model.
+
+Generation uses 256 prefixes with paired Bernoulli uniforms. Within each
+image, 32 row-transformer and 1,024 masked-head evaluations produce pixels
+without rejection or reranking. All generated images precede evaluator-bank
+construction. The bank combines all distinct training-form rasters with every
+target raster from generation, motor and feedback tests. Pixel deduplication
+gives 9,932 entries and full target coverage, including punctuation. Its
+nearest identity remains a proxy and can credit a malformed image. It differs
+from the 1,024-Han bank used in earlier experiments.
+
+\input{density_table.tex}
+
+The paired ordered-minus-shuffled identity difference is 0.391 percentage
+points with interval [0, 1.210], using 134 source records. Four-step visible
+feedback on 64 prefixes reaches mean identity 4.297\% versus 3.125\% shuffled.
+Ordered step-wise identity is 4.688, 4.688, 4.688 and 3.125\%; shuffled values
+are 4.688, 1.563, 3.125 and 3.125\%. These secondary measurements do not
+repair the failed primary context effect.
+
+Four of eight preregistered gates pass: runtime boundary, motor copying,
+positive feedback difference, and finite/resource checks. Ordered likelihood,
+ordered sampled identity, sampled quality and isolated-ink surface gates fail.
+The primary sample has isolated-ink fraction 0.01404, above the 0.01 limit.
+The decision remains \texttt{\DensityDecision}. No sealed evaluation or
+independent training-seed replication is reported.
+
+\section*{Supplementary Note 11: independent inference export}
+An inference-only checkpoint embeds the reader, row model, masks and
+configuration. It loads without original foundation checkpoints. An aligned
+32-pixel image grid is the native prompt interface; optional host text rendering
+does not pass symbolic identities into the network. Eight-cell greedy output
+from the exported checkpoint is pixel-identical to the training checkpoint's
+output with the same prompt. The native motor CLI also matches the binarized
+input exactly. The export is a 75,225,847-byte research artifact, not a
+qualified conversational model. General instruction following, open-script
+language generation and etymology remain unestablished.
+
+\section*{Supplementary Note 12: exploratory context attribution}
+A plan written after the locked result specifies a read-only likelihood
+diagnostic on the same 512 windows. It leaves the checkpoint, primary audit
+and rejection unchanged. Ordered and earlier-shuffled NLL reproduce the saved
+per-example values within $7.63\times10^{-6}$ nat. To derange the complete
+condition, windows are sorted by source record and the index list is shifted
+by half its length. Every donor source differs from its target source. Both
+hidden state and predicted field come from that donor. No image bank or
+optimization enters this intervention.
+
+Complete-condition derangement raises NLL from 15.219 to 20.630 nats/image.
+The paired ordered advantage is 5.411 nats, with source-record bootstrap
+95\% interval [4.514, 6.416]. Earlier-history shuffling, which retains the
+final four cells, still gives the unresolved 0.0355-nat difference. The density
+therefore uses the visual condition; its earlier-history ordering effect
+remains weak. Short-suffix or order-insensitive features are compatible
+explanations, not an established exclusive mechanism. The 512-image
+answer-supplied NLL is 0.190 nat; deranging that supplied image raises NLL to
+1,954.872 nats. These answer-revealing controls describe the motor path.
+
+The first eight image rows contain 8.644 of 15.219 ordered nats. Whole-context
+derangement adds 2.365 nats in that band and 1.530, 1.127 and 0.390 in the
+remaining eight-row bands (Fig.~\ref{fig:context-attribution}). Earlier-shuffle
+effects vary in sign across bands. No band-wise significance claim or
+multiple-comparison-adjusted result is made. These model-specific likelihood
+interventions are not calibrated mutual-information estimates. They do not
+establish autonomous coherent writing. The next mechanism must retain this
+context sensitivity while selecting globally coherent future forms.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S1_context_attribution.pdf}
+\caption{\textbf{Exploratory row-wise attribution of raster likelihood.}
+Left, teacher-forced NLL by target-image row for ordered, earlier-shuffled and
+completely deranged conditions on 512 windows. Right, ordered advantage
+relative to each control. Earlier target pixels are legitimately observed by
+the image density, so low later-row NLL cannot itself establish language
+information from the prompt. Curves are descriptive means; whole-image
+uncertainty is reported in Supplementary Note 12.}
+\label{fig:context-attribution}
+\end{figure}
+
+\section*{Supplementary Note 13: matched joint likelihood learning}
+The joint experiment (V55) retains the exact V54 network and probability law.
+Both arms initialize from its EMA, with new optimizers and EMA copies. The
+frozen control trains only the 2,434,592 density parameters. The joint candidate
+also trains reader parameters through the exact image likelihood, for
+18,711,840 participating parameters. The unused scalar contrastive temperature
+is fixed. Runtime size stays 18,711,841 in both. Reader dropout remains disabled
+in both arms, independently of gradient flow. The deployed student continues
+to receive and generate image tensors, without a vocabulary or external model.
+
+Each arm makes 8,000 updates with eight streams and 16 selected causal
+positions per stream, using 25\% supplied-image motor exercises. Training seed
+20265510 and dataset seed 20265511 give matched new draws from the same public
+corpus. Both final training-generator states match exactly. The frozen reader
+is bit-identical to initialization; the joint reader changes. Reader likelihood
+gradients are finite and nonzero only in the joint arm. A four-step interrupted
+smoke reproduces every model and EMA tensor, plus CPU/CUDA/training RNG states.
+Reader gradients cannot pass through answer-supplied motor rows because those
+replace the natural state with a zero hidden vector and a fixed observed field.
+
+The density learning rate is $2\times10^{-4}$ in both arms; joint reader rate
+is $2\times10^{-5}$. Other optimizer, warmup, cosine, clipping, BF16 and EMA
+settings match the earlier density experiment. The control takes
+\ControlTime\ s at \ControlMemory\ GiB allocated CUDA memory; the joint arm
+takes \JointTime\ s at \JointMemory\ GiB. Both run sequentially on physical
+GPU 0. These costs exclude V42/V54 pretraining and data preparation.
+
+Both checkpoints finish before either development result opens. The same
+512 NLL windows, 256 generation/motor prefixes and 64 four-step feedback
+streams use audit seed 20265420. Joint ordered NLL is \JointNll\ nats per
+image versus \ControlNll\ for the matched frozen control. The paired gain is
+\JointNllGain\ nat, interval [\JointNllLow, \JointNllHigh]. The joint-minus-control
+sample identity gain is 1.172 percentage points, interval [-0.397, 2.893].
+All intervals use 2,000 source-record bootstrap draws. Joint earlier-history
+advantage is 0.185 nat [0.128, 0.244], versus 0.119 [0.052, 0.186] for the
+continued frozen arm. Extra training accounts for part of the likelihood
+progress; the matched gain isolates the reader update's additional benefit.
+
+\input{joint_table.tex}
+
+Both arms preserve exact greedy copying on 256/256 targets. Stochastic-copy
+F1 is 0.99993 frozen and 0.99994 joint; exact-image match is 96.875\% and
+97.266\%, respectively. Joint four-step feedback identity is 3.125\% ordered
+and 1.563\% shuffled; control values are 2.344\% and 2.734\%. The joint arm
+passes six of eight unchanged gates, failing sampled quality and the ordered
+generation advantage. The control passes five, additionally failing feedback.
+The matched decision remains \texttt{\JointDecision}. Neither the primary
+development reuse nor the paired intervals establish independent seed or
+sealed-partition generalization.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S2_joint_learning.pdf}
+\caption{\textbf{Matched end-to-end learning of exact raster probability.}
+\textbf{a}, Joint reader--density training improves target NLL over the matched
+frozen-reader continuation; annotation gives the paired source-record interval.
+\textbf{b}, First-sample identity on 256 prefixes remains low under ordered
+and earlier-shuffled conditions. \textbf{c}, First eight fixed audit rows:
+target, frozen sample, joint sample, joint shuffled sample, joint greedy output
+and answer-supplied copying. All outputs are raw model rasters, without
+selection, bank replacement or OCR repair. The image panels expose errors that
+the likelihood improvement alone cannot resolve.}
+\label{fig:joint-learning}
+\end{figure}
+
+\section*{Reproduction}
+From the repository root, use the following entry points. All use only GPU 0.
+\begin{quote}\small\ttfamily
+CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
+scripts/train\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
+\end{quote}
+\begin{quote}\small\ttfamily
+CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
+scripts/eval\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
+\end{quote}
+Completed output directories are protected against accidental replacement.
+For the exact density, with the same GPU selection, use
+\begin{quote}\small\ttfamily
+scripts/train\_exact\_raster\_density\_v54.py\\
+scripts/eval\_exact\_raster\_density\_v54.py
+\end{quote}
+Independent image inference and export use
+\begin{quote}\small\ttfamily
+scripts/infer\_exact\_raster\_density\_v54.py.
+\end{quote}
+For the matched continuation, run the following with \texttt{--arm frozen}
+and then \texttt{--arm joint}, completing both before the evaluator:
+\begin{quote}\small\ttfamily
+scripts/train\_joint\_exact\_raster\_v55.py\\
+scripts/eval\_joint\_exact\_raster\_v55.py
+\end{quote}
+The independent runtime uses
+\texttt{scripts/infer\_joint\_exact\_raster\_v55.py}.
+\input{references_main.tex}
+\end{document}
