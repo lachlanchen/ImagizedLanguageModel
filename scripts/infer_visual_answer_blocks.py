@@ -71,7 +71,7 @@ def main():
     pack_visual_cells(prompt.cpu(), columns=len(prompt), gutter=0).save(
         out.with_name(out.stem + "_prompt.png")
     )
-    _atomic_save(result["images"].cpu(), out.with_suffix(".pt"))
+    _atomic_save({"images": result["images"].cpu()}, out.with_suffix(".pt"))
     receipt = {k: v for k, v in result.items() if k != "images"}
     receipt.update(
         architecture=ARCHITECTURE,
