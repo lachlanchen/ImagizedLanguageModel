@@ -20,7 +20,30 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 V42--V46 canonical Chinese results and their narrower claim boundary are
 reported directly below.*
 
-## Current Evidence: V46 Preserves Raster Language but Does Not Qualify
+## Current evidence: exact copying works; language generation remains unresolved
+
+![Measured exact-raster result: exact supplied-image copying, unresolved earlier-history likelihood effect and failed autonomous continuation](publication/ilm-nature/figures/Figure_3_exact_raster.png)
+
+The independent V54 runtime reads and writes image cells without a tokenizer,
+OCR, glyph lookup or external model call. Its 18.71M parameters include 2.43M
+new raster-density parameters trained on one RTX 4090 D. All 256 supplied-image
+motor targets copy exactly in greedy mode; stochastic-copy F1 is 0.99949.
+The 8,000-update density run takes 207.8 seconds, excluding earlier reader
+training.
+
+Autonomous first-sample identity remains 4/256 ordered versus 3/256 shuffled.
+Natural-target NLL is 15.219 versus 15.254 nats/image, with an unresolved
+earlier-history advantage. A later diagnostic shows the model uses the complete
+condition: swapping it between source records raises NLL to 20.630. This is
+context sensitivity, not evidence of fluent language generation. **The model
+is still an unqualified research checkpoint.**
+
+Read the [current article and editable figures](publication/ilm-nature/README.md),
+[measured V54 result](references/exact_raster_density_v54_result.md), and
+[engineering goal](docs/first-imagized-language-model-goal.md). The native-image
+inference and export entry point is `scripts/infer_exact_raster_density_v54.py`.
+
+## Earlier evidence: V46 preserves raster language but does not qualify
 
 ![Measured V46 result: a from-scratch scaled-retinal reader preserves ordered-raster language controls and improves V42 log probability, but misses rank, binding, and generated-pixel gates](publication/ilm-image-native/figures/scaled_retinal_glyph_language_v46_result.png)
 

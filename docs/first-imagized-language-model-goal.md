@@ -1,6 +1,36 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-08-14
+Updated: 2026-11-05
+
+## Current engineering checkpoint
+
+The target remains a useful, high-quality independent image-to-image language
+model trained on one physical RTX 4090. A larger GPU budget is not a substitute
+for demonstrating prompt-dependent language. Offline teachers and public
+pretrained components are allowed with provenance; the deployed model must
+read and generate writing independently.
+
+The V54 runtime has 18.71M parameters and a self-contained inference export.
+It copies all 256 supplied development images exactly in greedy mode, retaining
+an architectural inverse-image path. Autonomous output still fails: first
+sample identity is 4/256 versus 3/256 with earlier history shuffled. Ordered
+NLL is 15.219 versus 15.254 nats/image, with no resolved earlier-history
+advantage. It is not a qualified language model.
+
+A separately planned post-result diagnostic finds a 5.411-nat ordered advantage
+over swapping the entire visual condition with a different source record
+(95% source-record interval [4.514, 6.416]). Thus the density uses contextual
+information, while the retained four-cell suffix or other order-insensitive
+features may explain much of it. This does not prove exclusive reliance on the
+suffix. Copying and short-context conditioning are working components; coherent
+autonomous future-form selection and longer-range language remain the next
+requirements. Preserve the copy path and test global image structure/context
+coupling before another scale increase.
+
+Current article, review, supplement and editable figures are maintained in
+[`publication/ilm-nature/`](../publication/ilm-nature/README.md). The complete
+negative and positive evidence remains available. Do not replace language
+quality with copying scores, a selected image gallery or low allocated VRAM.
 
 ## North star
 

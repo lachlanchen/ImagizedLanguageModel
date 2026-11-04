@@ -78,3 +78,11 @@ The independent checkpoint export and native-image CLI are described in
 The output retains the scope of the tested task. Chinese instruction following,
 historical writing, etymology, multiple fonts, page-scale generation and
 capability-matched text-model efficiency remain open requirements.
+
+Supplementary Note 12 and Figure S1 report a separately planned, post-result
+context diagnostic. Swapping the entire condition between source records
+raises NLL to 20.630 nats/image; the ordered advantage is 5.411 nats with
+95% interval [4.514, 6.416]. Earlier-history shuffling still has no resolved
+whole-image effect. Context sensitivity does not reverse the failed generation
+decision. Raw row losses and the reproducible diagnostic entry point are
+described in [`v54_context_attribution_result.md`](../../references/v54_context_attribution_result.md).

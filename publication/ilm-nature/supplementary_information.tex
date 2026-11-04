@@ -5,6 +5,7 @@
 \input{results_values.tex}
 \input{density_values.tex}
 \begin{document}
+\renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
 \medskip\noindent\textbf{Learning conditional language in continuous image space}\par
 \medskip\noindent Imagized Language Model Project
@@ -252,6 +253,48 @@ output with the same prompt. The native motor CLI also matches the binarized
 input exactly. The export is a 75,225,847-byte research artifact, not a
 qualified conversational model. General instruction following, open-script
 language generation and etymology remain unestablished.
+
+\section*{Supplementary Note 12: exploratory context attribution}
+A plan written after the locked result specifies a read-only likelihood
+diagnostic on the same 512 windows. It leaves the checkpoint, primary audit
+and rejection unchanged. Ordered and earlier-shuffled NLL reproduce the saved
+per-example values within $7.63\times10^{-6}$ nat. To derange the complete
+condition, windows are sorted by source record and the index list is shifted
+by half its length. Every donor source differs from its target source. Both
+hidden state and predicted field come from that donor. No image bank or
+optimization enters this intervention.
+
+Complete-condition derangement raises NLL from 15.219 to 20.630 nats/image.
+The paired ordered advantage is 5.411 nats, with source-record bootstrap
+95\% interval [4.514, 6.416]. Earlier-history shuffling, which retains the
+final four cells, still gives the unresolved 0.0355-nat difference. The density
+therefore uses the visual condition; its earlier-history ordering effect
+remains weak. Short-suffix or order-insensitive features are compatible
+explanations, not an established exclusive mechanism. The 512-image
+answer-supplied NLL is 0.190 nat; deranging that supplied image raises NLL to
+1,954.872 nats. These answer-revealing controls describe the motor path.
+
+The first eight image rows contain 8.644 of 15.219 ordered nats. Whole-context
+derangement adds 2.365 nats in that band and 1.530, 1.127 and 0.390 in the
+remaining eight-row bands (Fig.~\ref{fig:context-attribution}). Earlier-shuffle
+effects vary in sign across bands. No band-wise significance claim or
+multiple-comparison-adjusted result is made. These model-specific likelihood
+interventions are not calibrated mutual-information estimates. They do not
+establish autonomous coherent writing. The next mechanism must retain this
+context sensitivity while selecting globally coherent future forms.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/Figure_S1_context_attribution.pdf}
+\caption{\textbf{Exploratory row-wise attribution of raster likelihood.}
+Left, teacher-forced NLL by target-image row for ordered, earlier-shuffled and
+completely deranged conditions on 512 windows. Right, ordered advantage
+relative to each control. Earlier target pixels are legitimately observed by
+the image density, so low later-row NLL cannot itself establish language
+information from the prompt. Curves are descriptive means; whole-image
+uncertainty is reported in Supplementary Note 12.}
+\label{fig:context-attribution}
+\end{figure}
 
 \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
