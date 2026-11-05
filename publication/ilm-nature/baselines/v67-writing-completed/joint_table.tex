@@ -1,0 +1,12 @@
+\section*{Supplementary Table 3: matched learning audit}
+\begin{center}\begin{tabular}{lrrrr}\toprule
+Arm / decoding & Identity (\%) & Exact image (\%) & Pixel F1 & Isolated ink \\
+\midrule
+Frozen / ordered & 2.344 & 1.953 & 0.3643 & 0.0070 \\
+Frozen / shuffled & 2.344 & 1.953 & 0.3638 & 0.0071 \\
+Frozen / greedy & 6.641 & 6.641 & 0.2296 & 0.0028 \\
+Joint / ordered & 3.516 & 3.516 & 0.3620 & 0.0074 \\
+Joint / shuffled & 3.125 & 3.125 & 0.3625 & 0.0065 \\
+Joint / greedy & 7.422 & 7.422 & 0.2230 & 0.0024 \\
+\bottomrule\end{tabular}\end{center}
+Both arms use 256 paired prefixes and the same post-generation evaluator bank. No sampled output is selected or replaced.

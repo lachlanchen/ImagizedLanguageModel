@@ -1,0 +1,90 @@
+{
+  "actor_image_generation_calls": 0,
+  "actual_reference_calls": 8,
+  "checks": {
+    "actor_vocabulary_absent": true,
+    "coarsened_kl": true,
+    "eight_cases": true,
+    "finite_logits": true,
+    "first_token_agreement": true,
+    "reference_position_agreement": true,
+    "source_engine_released": true,
+    "source_identity_unchanged": true
+  },
+  "coarsened_kl_mean_nats": 0.00026375833439041136,
+  "elapsed_seconds": 103.8315665917471,
+  "first_token_agreement": 1.0,
+  "general_ilm_goal_complete": false,
+  "helper_only_vocabulary": true,
+  "language_quality_claim": false,
+  "passed": true,
+  "peak_allocated_vram_gib": 18.700608730316162,
+  "positions": 9,
+  "provenance": {
+    "configurations": {
+      "text": {
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "head_dim": 128,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "max_position_embeddings": 262144,
+        "num_attention_heads": 32,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 8,
+        "pad_token_id": null,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "rope_scaling": {
+          "mrope_interleaved": true,
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "rope_type": "default"
+        },
+        "rope_theta": 5000000.0,
+        "tie_word_embeddings": false,
+        "vocab_size": 0
+      },
+      "vision": {
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "depth": 27,
+        "hidden_act": "gelu_pytorch_tanh",
+        "hidden_size": 1152,
+        "in_channels": 3,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "num_position_embeddings": 2304,
+        "out_hidden_size": 4096,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2
+      }
+    },
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "external_pretraining": true,
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "retained_base_parameters": 7522463984,
+    "retained_native_tensors": 748,
+    "vocabulary_parameters_materialized": 0
+  },
+  "reference_position_agreement": 1.0,
+  "scope": "Eight text-only source-engine sanity cases, not full equivalence or image-language quality.",
+  "source_response_cases": 8,
+  "source_sha256": {
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "references/inherited_context_check_plan.md": "6a6071eb8a6748fe5724a9347500669458d3cc95c34825fd515be863f9854e83",
+    "scripts/check_inherited_context.py": "ab4bfb549e8557e33af9f61e3f32dac2871b5ab222fce152568b5724022559bb"
+  }
+}

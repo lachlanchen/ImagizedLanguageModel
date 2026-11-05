@@ -103,3 +103,39 @@ Sync the complete verified package and matching latest aliases into a fresh
 Nutstore `Projects/ILM` version folder. Verify local byte equality; do not
 claim remote cloud propagation without evidence. Commit and push the finished
 revision unit. A language failure remains a failure after publication styling.
+
+## Completed revision and verification
+
+The 5 November 2026 revision implements the bounded changes above. The
+229-file V67 baseline is copied from commit
+`2cca38a95ef89e88f37625d873b17b542b301a80` and checked against Git, not only
+against a mutable local manifest. All 50 prior figure files and the reading
+style remain byte-identical. The new 24-slide deck preserves 184 prior package
+parts and identical rendered pixels on all 22 preceding slides.
+
+The three new native charts have source-matched workbooks and caches equal
+to the serialized worksheet decimals. A stricter additional chart audit finds
+historical cache/worksheet decimal differences of at most 5e-15 percentage
+points; those frozen parts are preserved. This numerical representation detail
+does not change any scientific score. The new 12 visible image assets match
+their source pixels. Figure 10 uses complete streams; Figure S9 explicitly
+labels six first-block excerpts. The deck PDF, two standalone figures,
+article, review and supplement retain those pixels exactly. No generated
+writing is repaired.
+
+The article has 13 pages, the review 24, the supplement 22, the two matching
+redlines 24 and 22, the figure review 24, and each new standalone figure one.
+All clean builds have resolved references and no overfull boxes. Both new
+slides, changed scientific pages, affected redline pages and full-document
+layout overviews receive visual inspection. The source-bound records are
+`publication/ilm-nature/evidence/codec_language_publication_verification.json`
+and `codec_language_visual_qa.json`. Artifact Tool is unavailable; the native
+OOXML and LibreOffice fallback is disclosed. No native PowerPoint playback or
+independent neural forward replay is claimed.
+
+The complete package and five latest aliases are copied into Nutstore
+`Projects/ILM/ILM_NatureStyle_20261105_V68_Conditional`, with local byte equality
+checked. Remote cloud propagation is unverified. The original failed V68
+language decision and the unopened sealed split remain unchanged. Conditional
+prediction repair, including its training-case failure, is the next research
+requirement; the overall ILM goal remains active.

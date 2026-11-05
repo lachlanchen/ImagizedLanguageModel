@@ -7,6 +7,7 @@
 \input{joint_values.tex}
 \input{beam_values.tex}
 \input{qa_values.tex}
+\input{codec_language_values.tex}
 \begin{document}
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -1201,11 +1202,11 @@ no global guarantee, especially after thresholding.
 
 The implemented conditional-learning stage uses the complete CMRC/Dolly
 training corpus with detached codec labels, decoded-image loss and balanced
-structural stopping. No evolving training loss is reported here as a language
-result. Its registered autonomous audit uses paired Chinese questions and
-English instructions, prompt-only generation and fixed blank controls.
-Useful language, historical forms, final held-out evaluation and standalone
-deployment remain unqualified. Inherited semantic pretraining is external.
+structural stopping. Its completed autonomous audit is reported in
+Supplementary Note 27; no evolving training loss is treated as a language
+result. Useful language, historical forms, final held-out evaluation and
+standalone deployment remain unqualified. Inherited semantic pretraining is
+external.
 
 \plate{Figure_S8_codec_actor}{\textbf{A fixed writing decoder separates physical rendering from conditional code prediction.}
 Blue modules contain trainable components. Prompt and completed generated
@@ -1214,6 +1215,135 @@ continuous writing coordinates. The output encoder supplies detached labels
 only during training. Gradients through the fixed decoder train the predicted
 codes and contextual adapters. The displayed parameter and resource counts
 come from actual complete-model execution, without a trained-language claim.}{fig:codec-actor}
+
+\section*{Supplementary Note 27: complete instruction learning and autonomous rejection}
+The separate-space actor starts from the authenticated inherited archive and
+the original fixed codec, without the failed earlier writer or preflight
+adaptation. All 27 visual and 36 contextual layers remain present. Only
+9,351,937 adapter, query, projection and stop parameters train; the language
+vocabulary module remains absent. Fused AdamW uses peak learning rate
+$10^{-4}$, betas $(0.9,0.95)$, weight decay 0.01, gradient clipping at one,
+500-update warmup and cosine decay to one tenth of peak. There is no EMA or
+development-based checkpoint selection.
+
+Every one of the 12,976 admitted training examples occurs once in the first
+seeded permutation; 7,024 unique draws follow from a fresh second permutation.
+The complete run records 20,000 draws: 4,926 Chinese and 15,074 English.
+Independent CPU checks reproduce all data-order entries, target block counts,
+sampled block indices, final cursor and data-generator state. The final
+adaptation equals the update-10,000 checkpoint's trainable tensors. All saved
+trainable and optimizer values are finite. The registered early production
+replay independently checks one update's parameters, optimizer and RNG states
+exactly; the later journal audit does not recompute all 10,000 gradients.
+
+Training-stage time is 16,773.459 seconds, including checkpoint and registered
+replay work, with separate initialization time 82.717 seconds. Peak allocated
+memory is 16.965 GiB on physical GPU 0. These costs exclude data preparation,
+prior codec learning and external foundation pretraining. They establish local
+adaptation feasibility rather than foundation training from scratch or a
+matched efficiency advantage.
+
+The source-frozen development audit contains 128 Chinese questions from
+64 distinct two-question articles and 64 English instructions, eight per
+category. All 384 normal/control streams use a common cap of 128 physical
+blocks and learned stopping. Generation receives owning prompt pixels alone,
+without target length, reference codes, source strings or case metadata.
+Before generation, an input-layout correction removes reflow from 31 Chinese
+and one English blank control. The corrected controls reuse the normal
+prompt's exact fold ranges; all normal pixels, cases, references and gates
+remain unchanged. Independent NumPy reconstruction checks all 384 layouts.
+
+Exact reference agreement requires correct stopping and identical full
+physical dimensions, including ordinary white padding. F1 counts all
+predicted/reference ink, with intersections only in the overlapping width;
+extra or missing ink contributes error. Alternative recorded references are
+accepted only when fully rendered by the fixed layout. Resampling uses
+64 source articles, 2,000 draws and seed 20266831.
+
+\begin{center}\small
+\begin{tabular}{lrrl}
+\toprule
+Chinese criterion & Observed & Required & Decision\\
+\midrule
+Exact answers & $0/128$ & $\geq50\%$ & Fail\\
+Foreground F1 & $\CodecLanguageFOne\%$ & $\geq80\%$ & Fail\\
+Both-correct pairs & $0/64$ & $\geq35\%$ & Fail\\
+Question F1 gain & $\CodecLanguageQuestionGain$ pp & $\geq10$ pp & Pass\\
+Gain interval lower bound & $\CodecLanguageCILow$ pp & $>0$ & Pass\\
+Learned stopping & $128/128$ & $\geq90\%$ & Pass\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All 192 original first references and 384 raw outputs are independently
+checked, including input geometry, PNG/tensor agreement, stopping and grouped
+aggregation. Chinese question-blank F1 is \CodecLanguageBlankFOne\%; the
+question effect has interval [\CodecLanguageCILow, \CodecLanguageCIHigh] pp.
+English normal F1 is 9.763\%, versus 3.963\% blank, with no exact recorded
+reference in either route and normal stopping on 54/64 cases. These English
+figures are reference agreement, not exhaustive semantic correctness.
+Generation sums to 783.228 seconds, with 65.599 seconds setup and 851.764
+seconds total audit time; inference peaks at 15.685 GiB allocated memory.
+All data are reused development, the sealed final split remains unopened,
+and no failed output is repaired or replaced.
+
+\section*{Supplementary Note 28: exact-history prediction remains poor}
+The frozen final actor is measured on 32 source-bound cases, without
+optimization: eight Chinese and eight English training examples sampled from
+sorted admitted files with Python seed 20266840; the first eight Chinese
+audit cases; and the first lexicographic audit case in each English category.
+Selection does not use output scores. CPU preparation preserves every
+prompt/reference pixel, discards only the training cache's two explicit
+termination blocks, and fixes the sample identities before model calls.
+
+Supplied-code reconstruction encodes and decodes each reference image through
+the fixed writing codec. Exact-history prediction instead uses the actor's
+actual cached contextual path, appending a reference block only after its
+own next-block prediction has been recorded. The driver continues to the
+reference length even after a predicted stop. This supplies history and
+length and is an assisted diagnostic. The 16 training autonomous streams use
+the original uniform 128-block cap; the 16 development streams are reused
+exactly from the locked audit.
+
+\begin{center}\small
+\input{codec_language_diagnosis_table.tex}
+\end{center}
+
+F1 columns are case averages in percent, with eight cases per row. Exact
+history includes reference-width assistance, so its advantage over autonomous
+F1 is not a pure history effect. No first predicted block, or block predicted
+with exact history, is exact. Initial stop probabilities and first physical
+blocks match between paths on all 32 identical starting prompts. This
+localizes a failure preceding generated-history drift, including on training
+examples, while leaving feature information, readout, loss and optimization
+as possible causes.
+
+For reference signs $y_i\in\{-1,+1\}$ and supplied code $z^*$, define the
+decoded margin $m=\min_i y_iD_w(z^*)_i$. A positive margin and
+$\|D_w(\widehat z)-D_w(z^*)\|_\infty<m$ suffice for matching binary pixels.
+No recorded prediction satisfies this sufficient condition. This numerical
+comparison on retained scores supplies no global latent-space certificate.
+Code MSE normalizes both two-vector writing states as in the training
+comparison.
+
+The diagnostic takes 208.112 seconds including actor initialization and peaks
+at 15.816 GiB allocated memory. Offline CPU verification reloads all source
+pixels and recomputes physical scores, margins and aggregation, including
+exact reuse of development streams. It does not independently replay the
+native neural forward pass. No optimizer update, OCR, source-model service
+call, vocabulary inventory or sealed example is used. The original
+autonomous language decision remains rejection.
+
+\plate{Figure_S9_prediction_diagnosis}{\textbf{Conditional writing fails with exact reference history.}
+\textbf{a}, Case-averaged foreground F1 for eight fixed cases in each
+split/source group. Supplied codes reconstruct the images faithfully, while
+the actor predicts poor writing even on training cases with correct history.
+The exact-history route also supplies length and forces continuation.
+\textbf{b}, The first 32-by-64 block of the first fixed Chinese training and
+development cases, displayed explicitly as block excerpts. Supplied-code
+reconstruction preserves the source marks; the initial prediction is already
+incorrect before generated history. All 32 initial predicted blocks match
+the autonomous path and none is exact. No image is repaired.}{fig:prediction-diagnosis}
 
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
@@ -1325,8 +1455,19 @@ and blank controls use \path{scripts/prepare_codec_language_audit_v68.py}.
 The evaluator \path{scripts/eval_codec_language_v68.py} accepts only the final
 10,000-update state and has a separate CPU data/metric preflight. Its
 independent raw-stream verifier is \path{scripts/verify_codec_language_v68.py}.
-These entry points specify the next language test; their existence does not
-constitute a completed language result.
+These entry points produce the completed, failed autonomous result in
+Supplementary Note 27. The source-bound integrity and output-verification
+receipts are retained in \path{references/evidence/}.
+
+The frozen-actor diagnostic is
+\path{scripts/diagnose_codec_language_v68.py}. In the compatible native
+PyTorch environment, use \texttt{--prepare-only} with CUDA hidden, then run
+the same command on physical GPU 0 with the deterministic cuBLAS configuration,
+and finally use \texttt{--verify-only} with CUDA hidden. Supply the same fresh
+\texttt{--out} directory for those phases; completed measurements are never
+overwritten. The source-frozen selection, assisted-history scope and
+measurement checks are defined in
+\path{references/codec_language_v68_diagnosis_protocol.md}.
 
 \input{references_main.tex}
 \end{document}

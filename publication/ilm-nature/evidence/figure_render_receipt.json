@@ -1,9 +1,19 @@
 {
-  "pptx_sha256": "24fc836af1e0e421f3ec55c0c8a814ecdd6169b2fbe7486c4a6a9b487351d20e",
-  "rendered_pdf_sha256": "390a850365fb650cb6d33bbb3677b9f87f23dfff44169a439f827d7006bd87ad",
-  "slides": 22,
-  "renderer": "LibreOffice Impress headless, dedicated profile",
+  "pptx_sha256": "e367ef8acf51a4d36b67b1ec3639d20d8663a8158aaf47277fc2a948cfedf46f",
+  "rendered_pdf_sha256": "64c54302c293a21e3fa6914c0bed2a7396b88f04e3720b4f728395143e6b71fd",
+  "slides": 24,
+  "renderer": "LibreOffice headless with dedicated project profile",
   "lossless_images": true,
   "reduce_image_resolution": false,
-  "artifact_tool_available": false
+  "artifact_tool_available": false,
+  "command": [
+    "soffice",
+    "-env:UserInstallation=file://${REPO}/artifacts/codec_language_publication_qa_20261105/lo_profile",
+    "--headless",
+    "--convert-to",
+    "pdf:impress_pdf_Export:{\"UseLosslessCompression\":{\"type\":\"boolean\",\"value\":\"true\"},\"ReduceImageResolution\":{\"type\":\"boolean\",\"value\":\"false\"}}",
+    "--outdir",
+    "${REPO}/artifacts/codec_language_publication_qa_20261105/deck_render",
+    "${REPO}/publication/ilm-nature/ILM_Figures_editable.pptx"
+  ]
 }

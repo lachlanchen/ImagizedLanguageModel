@@ -142,16 +142,19 @@ sampled perturbations of 64 training images. No new optimization or language
 pass is inferred. Preserve the simple actor experiment before adding spectral
 optimization, posterior-sampling diagnostics or a new generative architecture.
 
-Complete prompt-dependent instruction learning remains required. The completed
-[publication revision plan](../references/direct_writer_results_publication_plan.md)
-uses the completed V65–V67 evidence and the qualified new actor to update the
-current verified Nature package with matching editable figures. The article,
-review, supplement, matching redlines, twenty-two-slide deck and two new
-standalone figures pass build, data and visual checks. All twenty older slides
-render identically, and sixteen displayed raw rasters match their source
-pixels. The newly completed, failed V68 autonomous result still needs a
-subsequent publication revision with corresponding editable figures; the
-existing verified package reports the preceding completed experiments.
+Useful prompt-dependent language remains required. The completed
+[conditional-writing publication revision](../references/codec_language_results_publication_plan.md)
+adds the failed V68 autonomous result and the fixed 32-case diagnosis to the
+Nature-style research draft. The abstract, Results, Methods and Supplementary
+Notes 27–28 distinguish reconstruction, assisted prediction and autonomous
+generation. Figure 10 and Figure S9 contain source-matched native charts and
+unrepaired writing. The 24-slide deck preserves every part and identical
+rendering of all 22 prior slides. All eight PDFs, matching redlines and new
+editable figures pass build, data and visual checks. The verified package is
+copied into Nutstore `Projects/ILM/ILM_NatureStyle_20261105_V68_Conditional`
+with five current aliases. Local byte equality does not verify cloud propagation.
+The next learning change must address inaccurate conditional prediction,
+including training examples; generated-history drift alone is insufficient.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
@@ -229,9 +232,10 @@ Prepared components reduce integration risk but do not establish this candidate:
 The [V63 methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
 is a two-page methods explanation and editable training figure. Its displayed
 forms are observed targets. The main manuscript now includes the completed
-V63 assignment result, V65–V67 writing diagnosis, native editable figures and
-complete-actor execution evidence. The article, review, supplement, both
-redlines and twenty-two-slide deck pass the current verification and are
+V63 assignment result, V65–V67 writing diagnosis, V68 autonomous rejection and
+exact-history diagnosis, native editable figures and complete-actor execution
+evidence. The article, review, supplement, both
+redlines and twenty-four-slide deck pass the current verification and are
 copied byte-for-byte into Nutstore Projects/ILM. Local
 copying does not verify cloud propagation. The completed V62 supplement redline and standalone
 Nutstore package are preserved. General language quality is not inferred from

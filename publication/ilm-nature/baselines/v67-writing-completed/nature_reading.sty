@@ -1,0 +1,35 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nature_reading}[2026/11/04 Research article reading layout]
+% Reading geometry adapted from the Lamp+LCD V-SPICE v13.7 package.
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathptmx,amsmath,amssymb,bm,graphicx,microtype,booktabs,xcolor}
+\RequirePackage[scaled=.94]{helvet}
+\RequirePackage[super,numbers,sort&compress]{natbib}
+\RequirePackage{caption,titlesec,fancyhdr}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{balance}
+\RequirePackage{etoolbox}
+% balance.sty rounds its final split in whole points. Leave two points inside
+% the balanced column boxes for a final unsplittable line, without extending
+% the page or suppressing overfull-box diagnostics.
+\makeatletter
+\patchcmd{\@BAlancecol}{\setbox\@leftcolumn}
+  {\advance\@tempdima by 2pt\setbox\@leftcolumn}{}
+  {\PackageError{nature_reading}{Cannot patch final-column rounding}{}}
+\makeatother
+\DeclareCaptionLabelSeparator{pipe}{\space|\space}
+\captionsetup{font={small,sf},labelfont=bf,labelsep=pipe,justification=raggedright,singlelinecheck=false}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\bibnumfmt}[1]{#1.}\setlength{\bibsep}{1pt}
+\setlength{\parindent}{1em}\setlength{\parskip}{1pt}\setlength{\emergencystretch}{1.8em}
+\titleformat{\section}{\sffamily\bfseries\fontsize{11}{13}\selectfont}{}{0pt}{}
+\titleformat{\subsection}{\sffamily\bfseries\fontsize{10}{12}\selectfont}{}{0pt}{}
+\titlespacing*{\section}{0pt}{9pt}{4pt}\titlespacing*{\subsection}{0pt}{7pt}{3pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\sffamily\footnotesize RESEARCH DRAFT}
+\fancyhead[R]{\sffamily\footnotesize Language in pixel space}
+\fancyfoot[C]{\sffamily\footnotesize\thepage}\renewcommand{\headrulewidth}{.25pt}
+\setlength{\headheight}{13pt}
+\setcounter{dbltopnumber}{2}\renewcommand{\dbltopfraction}{.94}
+\renewcommand{\textfraction}{.04}\renewcommand{\floatpagefraction}{.8}
+\makeatletter\setlength{\@fptop}{0pt}\setlength{\@dblfptop}{0pt}\makeatother
+\newcommand{\plate}[3]{\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{figures/#1.pdf}\caption{#2}\label{#3}\end{figure*}}

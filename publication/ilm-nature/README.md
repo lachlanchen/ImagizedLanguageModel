@@ -8,12 +8,32 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved V63 completed-actor baseline. Their
-[builder](build_codec_writing_redlines.py) uses pinned latexdiff and inlines the
+revision with the preserved V67 completed-writing baseline. Their
+[builder](build_codec_language_redlines.py) uses pinned latexdiff and inlines the
 abstract so its changes are visible. The earlier supplement-only redline and
 builder remain inside the named baseline.
 
 ## Current result
+
+A complete conditional-writing actor finishes 10,000 updates on all 12,976
+admitted Chinese/English instruction examples. It adapts 9.352M of 7.539B
+parameters on one RTX 4090 D, peaking at 16.965 GiB allocated memory. The fixed
+autonomous audit fails: 0/128 exact Chinese answers, 32.671% foreground F1 and
+0/64 complete question pairs. Question pixels have a resolved 13.163-point
+effect [10.933, 15.730], and all 128 normal Chinese outputs stop through the
+learned decision. Three answer-quality requirements fail; input dependence
+and stopping do not qualify language. Figure 10 and Supplementary Note 27
+show the original six decisions and the complete first two raw outputs.
+
+A frozen 32-case diagnosis finds poor prediction even with exact history
+and known answer length, including on training examples. Supplied-code F1 is
+99.95–100%, while assisted prediction reaches only 21.8–35.6%. No first predicted
+block is exact. Figure S9 and Note 28 localize a failure preceding generated
+history without identifying a unique repair. The diagnostic makes no optimizer
+updates; CPU verification checks retained tensors and pixels rather than
+independently replaying the native neural forward pass. Development data are
+reused; sealed evaluation remains unopened. External foundation pretraining
+and prior codec learning are outside the reported local adaptation cost.
 
 A separate continuous output space qualifies supplied-code reconstruction.
 The original frozen writing codec reaches 99.998% foreground F1 and 126/128
@@ -29,8 +49,9 @@ coordinates. It retains 7.539B total parameters, trains 9.352M, and passes all
 Note 26 give the image-only feedback loop, detached target-code supervision,
 loss and numerical checks. Two-update output remains fragmented. These are
 execution and reconstruction results; autonomous language is unqualified.
-The current deck has 22 slides, preserving all preceding 20 slide renders
-and original slide/chart parts. Earlier source figures remain unchanged.
+The current deck has 24 slides, preserving all preceding 22 slide renders
+and original slide/chart parts. Three new native charts have source-matched
+embedded workbooks. Earlier source figures remain unchanged.
 
 A matched question--answer assignment term weakens free image writing.
 Control and aligned actors each train 490M parameters for 2,000 updates from
@@ -157,7 +178,7 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified twenty-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified twenty-four-slide LibreOffice rendering |
 | `redlined_manuscript.pdf`, `redlined_supplementary_information.pdf` | Matching change-marked review copies |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
@@ -169,7 +190,9 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53–V64 artifacts are present:
+From the repository root, after the corresponding source artifacts are present.
+Earlier figure builders below reproduce their historical packages; the final
+V68 builder appends to the immutable V67 baseline:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
@@ -185,15 +208,17 @@ PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_editable_
 PYTHONPATH=. python publication/ilm-nature/generate_transcript_bounds_evidence.py
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/generate_assignment_evidence.py
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/generate_assignment_editable_figures.py
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/generate_codec_language_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
-CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/build_assignment_redlines.py
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/build_codec_language_redlines.py
 ```
 
 Render the deck through LibreOffice, inspect it, and refresh the render receipt
 before running `validate_and_sync.py`. That script refuses a deck or PDF whose
-hash has changed since review, checks all fifteen embedded evidence workbooks and
+hash has changed since review, checks the twenty native charts and their preserved
+or source-matched workbooks, and
 verifies the delivered copies byte for byte.
 `PYTHONPATH=. python publication/ilm-nature/verify_native_pixel_rasters.py`
 also checks the six PDF and four PowerPoint raw images against their source
@@ -215,13 +240,25 @@ Use lossless PDF image compression and disable resolution reduction when
 rendering the deck. The Artifact Tool runtime is unavailable locally; the
 new builder edits OOXML directly without python-pptx authoring.
 
-The twenty-slide editable deck retains earlier plates and adds native
+The twenty-four-slide editable deck retains earlier plates and adds native
 block-reading, frozen-foundation, input-order and conditional-density charts,
 editable mechanism shapes and actual answer images. Current
 validated copies are delivered to Nutstore `Projects/ILM/` under the
-`V63_Assignment` version
+`ILM_NatureStyle_20261105_V68_Conditional` version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
+
+The current verification entry point is
+`CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/verify_codec_language_publication.py`.
+It binds all three current evidence receipts to pinned hashes, verifies the
+229-file baseline against its source Git commit, checks all 22 prior rendered
+slides, compares the three new editable charts with their source numbers and
+matches every displayed writing raster in the deck, standalone figures,
+article, review and supplement. Historical validators retain their original
+slide-count assumptions and should be run on their corresponding baselines.
+Lossless LibreOffice export disables image-resolution reduction. Artifact Tool
+is unavailable locally; native OOXML authoring and LibreOffice rendering are
+used, with no native PowerPoint playback claim.
 
 The independent checkpoint export and native-image CLI are described in
 [`exact_raster_density_v54_result.md`](../../references/exact_raster_density_v54_result.md).

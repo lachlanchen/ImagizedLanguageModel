@@ -1,0 +1,79 @@
+{
+  "architecture": "joint-exact-raster-language-v55",
+  "arm": "frozen",
+  "boundary": {
+    "architecture": "joint-exact-raster-language-v55",
+    "binary_sensor_space_size_log2": 1024,
+    "codebook": false,
+    "config": {
+      "heads": 6,
+      "layers": 4,
+      "pixel_hidden": 256,
+      "plan_logit_scale": 6.0,
+      "width": 192
+    },
+    "density_parameters": 2434592,
+    "external_runtime_model": false,
+    "glyph_inventory": false,
+    "nll_units": "nats per image; divide by 1024*log(2) for bits per pixel",
+    "ocr": false,
+    "probability": "normalized product of 1024 causal Bernoulli image measurements",
+    "reader_dropout_during_training": false,
+    "reader_frozen": true,
+    "reader_jointly_trained": false,
+    "runtime_parameters": 18711841,
+    "symbol_ids": false,
+    "text_tokenizer": false,
+    "trainable_parameters": 2434592
+  },
+  "elapsed_seconds": 218.01097555831075,
+  "initialization_sha256": "f2c3fab74981541243a963c8cffab6bbbd8c7f9d051512b228347db04a57a9ee",
+  "manifest": {
+    "bytes": 13659628,
+    "path": "data/visual_grammar/chinese_wikisource_public_domain.jsonl",
+    "records": 7017,
+    "rights": {
+      "public-domain historical text; Wikisource CC BY-SA contribution layer": 7017
+    },
+    "sha256": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+    "source_titles": {
+      "三國演義": 1222,
+      "人間詞話": 58,
+      "古文觀止": 567,
+      "嘉祐集": 200,
+      "大唐西域記": 259,
+      "妙法蓮華經": 167,
+      "尚書": 116,
+      "幼學瓊林": 38,
+      "東坡全集": 206,
+      "欒城集": 730,
+      "水滸傳（120回本）": 1845,
+      "洛陽伽藍記": 70,
+      "老子想爾注": 26,
+      "西遊記": 1446,
+      "金剛般若波羅蜜經": 14,
+      "長春真人西遊記": 53
+    },
+    "strict_digest": true
+  },
+  "peak_allocated_vram_gib": 0.4001612663269043,
+  "provenance": {
+    "ilm/visual_lm/exact_raster_density_v54.py": "0a0edb191058b3da435f0a0814acff7e8103844b14fe346cfa4ffb58545eb0a3",
+    "ilm/visual_lm/joint_exact_raster_v55.py": "46b6c8d4989731138ff1ddb796d5412e3bc2744cd6b5d18eefed82fc973fc474",
+    "references/joint_exact_raster_v55_protocol.md": "538f3cb93b534f9264713ca5abf760209f2787e2f660744973a103a9aa77c9fd",
+    "scripts/train_joint_exact_raster_v55.py": "03349e42edc1a7ba2f114a8c688c7dc76f2367b00361c9982bf99bd1179253d1"
+  },
+  "smoke_only": false,
+  "training_metrics": {
+    "arm": "frozen",
+    "copy_fraction": 0.21875,
+    "copy_nll": 0.04072152450680733,
+    "elapsed_seconds": 218.01097555831075,
+    "global_gradient_norm": 0.06105651333928108,
+    "image_nll_nats": 11.798171997070312,
+    "natural_nll": 15.090255737304688,
+    "reader_gradient_norm": 0.0,
+    "update": 8000
+  },
+  "update": 8000
+}

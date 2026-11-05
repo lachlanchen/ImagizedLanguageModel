@@ -1,0 +1,109 @@
+{
+  "component_result": {
+    "development_reused": true,
+    "examples": 128,
+    "gates": {
+      "conditioning_gain": false,
+      "foreground_f1": false
+    },
+    "general_ilm_goal_complete": false,
+    "language_quality_claim": false,
+    "measurements": {
+      "aligned": {
+        "blank": 0.0078125,
+        "exact": 0.0,
+        "foreground_f1": 0.34000390823911636
+      },
+      "shuffled": {
+        "blank": 0.0,
+        "exact": 0.0,
+        "foreground_f1": 0.21419738727947968
+      }
+    },
+    "paired_foreground_gain": 0.12580652095963668,
+    "scope": "Source-image reconstruction, not prompt-to-answer language generation.",
+    "writing_component_pass": false
+  },
+  "elapsed_seconds": 1553.7872483255342,
+  "extra_optimizer_replays": 1,
+  "final_ema_sha256": "c96186e2089b3f7f24f8461b0db532fa810638e83dc695f1b3db18b961365336",
+  "general_ilm_goal_complete": false,
+  "initialization": {
+    "configurations": {
+      "text": {
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "head_dim": 128,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "max_position_embeddings": 262144,
+        "num_attention_heads": 32,
+        "num_hidden_layers": 36,
+        "num_key_value_heads": 8,
+        "pad_token_id": null,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "rope_scaling": {
+          "mrope_interleaved": true,
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "rope_type": "default"
+        },
+        "rope_theta": 5000000.0,
+        "tie_word_embeddings": false,
+        "vocab_size": 0
+      },
+      "vision": {
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "depth": 27,
+        "hidden_act": "gelu_pytorch_tanh",
+        "hidden_size": 1152,
+        "in_channels": 3,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "num_position_embeddings": 2304,
+        "out_hidden_size": 4096,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2
+      }
+    },
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "external_pretraining": true,
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "retained_base_parameters": 7522463984,
+    "retained_native_tensors": 748,
+    "vocabulary_parameters_materialized": 0
+  },
+  "language_quality_claim": false,
+  "peak_allocated_vram_gib": 15.51365852355957,
+  "prerequisites": {
+    "inherited_context": "dc6d510f1aed60d974c0487455efaf872a174121f31f1030b4dcbf87bfc17a05",
+    "preflight": "2f1cfa22dbdd177a8baf4eca5fe0617fa8a03fbeabe4c51a4fac8c8f825d50fb"
+  },
+  "sources": {
+    "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+    "ilm/visual_lm/complete_writing_data.py": "b787e7d0f14bef27658cab335682a59f5f1390eb95b8f6772f94ae9208df5c2d",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "references/grounded_image_actor_preflight_plan.md": "72708b6e6007c0517472cedd3570b868ba638c76f63dab060d98180757754c39",
+    "references/grounded_writer_learning_protocol.md": "dd9a75918902e18e631096239f4bc09ad08649353691875e6d87076d60e257a4",
+    "scripts/check_grounded_image_actor.py": "93f5527975a8779616a2a56e0b2763024eb19de5511e42952d4642ab02790280",
+    "scripts/train_grounded_writer.py": "b2e2af5a8699ff58c0f9fd309b09ca77d3fd480f40796f57bf93c53bd6953991"
+  },
+  "trained_parameters": 19374096,
+  "update": 10000
+}

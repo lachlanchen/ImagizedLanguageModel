@@ -1,0 +1,79 @@
+{
+  "checked_at": "2026-11-05T13:01:38.314334+00:00",
+  "reviewer": "Codex visual inspection of rendered pages",
+  "scope": {
+    "new_deck_slides": [
+      23,
+      24
+    ],
+    "main_article_pages": [
+      1,
+      8,
+      9,
+      12
+    ],
+    "review_pages": [
+      1,
+      9,
+      10,
+      13,
+      24
+    ],
+    "supplement_pages": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "article_redline_pages": [
+      1,
+      10
+    ],
+    "supplement_redline_pages": [
+      18,
+      19,
+      21
+    ],
+    "all_page_layout_overviews": [
+      "manuscript",
+      "supplementary_information",
+      "redlined_manuscript",
+      "redlined_supplementary_information"
+    ]
+  },
+  "findings": "No clipped text, overlapping panels, missing figures or unreadable table entries in inspected pages. Source-output fragments are retained as experimental failures.",
+  "files_sha256": {
+    "manuscript.pdf": "e02dc1c604bbdab550b18bcaf88047c05fccadd1ff1c5001ac680364ea911117",
+    "manuscript_review.pdf": "9efd9e0c1ec29e159e7404513d7dddb97f0e8b5093198105de3adeac069fcec8",
+    "supplementary_information.pdf": "6f5f881ff9e8fb0a5ad2e040ed104f1c876d0ad46689bfe1abdc9568f44e2189",
+    "redlined_manuscript.pdf": "8df2763976314d620a5e60605f2f68449f8a5641429a9e9726c7856506a58a07",
+    "redlined_supplementary_information.pdf": "5bcb7f13359faea61436dff3dba464fb3fe790c484cbfa21fe707f14920fabd1",
+    "ILM_Figures_review.pdf": "64c54302c293a21e3fa6914c0bed2a7396b88f04e3720b4f728395143e6b71fd",
+    "figures/Figure_10_conditional_writing.pdf": "e906113a9b9fc88c7d7dfe63b66ae7889b71093bbacc1d90ccf154011790c172",
+    "figures/Figure_S9_prediction_diagnosis.pdf": "b3d67c8882e2a42af20e1299f324e82c098dcd7ea08440d61eb8ef5d0294e072",
+    "ILM_Figures_editable.pptx": "e367ef8acf51a4d36b67b1ec3639d20d8663a8158aaf47277fc2a948cfedf46f"
+  },
+  "native_powerpoint_playback_checked": false,
+  "artifact_tool_available": false,
+  "limitations": [
+    "Visual inspection supplements source-raster verification; it is not independent neural forward replay.",
+    "The old 22 slides are additionally checked by byte-exact part preservation and identical rendered pixels."
+  ],
+  "redline_whitespace_normalization_render_equivalence": {
+    "redlined_manuscript.pdf": 24,
+    "redlined_supplementary_information.pdf": 22
+  },
+  "serialized_cache_precision_fix_render_equivalence": {
+    "manuscript.pdf": 13,
+    "manuscript_review.pdf": 24,
+    "supplementary_information.pdf": 22,
+    "redlined_manuscript.pdf": 24,
+    "redlined_supplementary_information.pdf": 22,
+    "ILM_Figures_review.pdf": 24,
+    "figures/Figure_10_conditional_writing.pdf": 1,
+    "figures/Figure_S9_prediction_diagnosis.pdf": 1
+  },
+  "historical_cache_precision_note": "All original deck parts remain byte-identical. Some historical caches differ from serialized worksheet decimals by at most 5e-15 percentage points; they are preserved in this bounded revision. New chart caches equal serialized worksheet values exactly."
+}

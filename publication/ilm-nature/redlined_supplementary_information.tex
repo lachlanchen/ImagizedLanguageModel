@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Thu Nov  5 15:51:53 2026
-%DIF ADD new.tex   Thu Nov  5 15:51:53 2026
+%DIF DEL old.tex   Thu Nov  5 21:05:28 2026
+%DIF ADD new.tex   Thu Nov  5 21:05:28 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -78,6 +78,13 @@
 \newcommand{\QaControlSeconds}{269.126}
 \newcommand{\QaControlMemory}{1.049}
 \newcommand{\QaDecision}{reject\_reading\_model}
+ %DIF >
+% Generated from the fixed autonomous verification receipt. %DIF >
+\newcommand{\CodecLanguageFOne}{32.671} %DIF >
+\newcommand{\CodecLanguageBlankFOne}{19.508} %DIF >
+\newcommand{\CodecLanguageQuestionGain}{13.163} %DIF >
+\newcommand{\CodecLanguageCILow}{10.933} %DIF >
+\newcommand{\CodecLanguageCIHigh}{15.730} %DIF >
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
 %DIF CFONT PREAMBLE %DIF PREAMBLE
 \RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
@@ -119,7 +126,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V63 completed-actor baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V67 completed-writing baseline are blue.}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -1236,8 +1243,8 @@ contextual body also retains frozen inherited weights. A separate classifier
 predicts stopping. Parameter counts and memory describe actual complete-model
 execution. The diagram contains no generated-language example or quality claim.}{fig:grounded-actor}
 
-\DIFaddbegin \section*{\DIFadd{Supplementary Note 24: matched writer-fitting diagnosis}}
-\DIFadd{The failure in Note 23 motivates a factorial experiment on 64 fixed training
+\section*{Supplementary Note 24: matched writer-fitting diagnosis}
+The failure in Note 23 motivates a factorial experiment on 64 fixed training
 blocks. Each block is a physical $32\times64$ crop, which can contain partial
 letters or characters. Conditions are either the inherited reader's two
 4096-dimensional features or a lossless embedding of the actual target
@@ -1245,35 +1252,32 @@ pixels. The latter is an answer-supplying oracle control. Each condition is
 crossed with Gaussian velocity learning or direct one-pass image MSE, using
 the same writer architecture, initialization and 2,000-update batch exposure.
 All four early optimizer/EMA/RNG replays pass.
-}
 
 \begin{center}\small
 \begin{tabular}{lrrr}\toprule
-\DIFadd{Condition / objective }& \DIFadd{F1 (\%) }& \DIFadd{Exact / 64 }& \DIFadd{Shuffled F1 (\%)}\\\midrule
-\DIFadd{Reader / flow }& \DIFadd{34.567 }& \DIFadd{0 }& \DIFadd{26.716}\\
-\DIFadd{Reader / direct }& \DIFadd{99.995 }& \DIFadd{63 }& \DIFadd{27.466}\\
-\DIFadd{Pixels / flow }& \DIFadd{33.648 }& \DIFadd{0 }& \DIFadd{26.581}\\
-\DIFadd{Pixels / direct }& \DIFadd{100.000 }& \DIFadd{64 }& \DIFadd{27.464}\\\bottomrule
+Condition / objective & F1 (\%) & Exact / 64 & Shuffled F1 (\%)\\\midrule
+Reader / flow & 34.567 & 0 & 26.716\\
+Reader / direct & 99.995 & 63 & 27.466\\
+Pixels / flow & 33.648 & 0 & 26.581\\
+Pixels / direct & 100.000 & 64 & 27.464\\\bottomrule
 \end{tabular}
 \end{center}
-\DIFadd{All 512 main generated-image scores and all 8,000 batch draws are independently
+All 512 main generated-image scores and all 8,000 batch draws are independently
 verified against the original training pixels. The fitting result rejects an
 immediate flow-writing explanation at this configuration; it does not prove
 generalization from inherited features. Source-feature extraction peaks at
 15.251 GiB. Subsequent writer fits peak near 0.66 GiB after the unused semantic
 body is released, so the latter is not complete language-model memory.
-}
 
-\DIFadd{An auxiliary native-codec comparator initially uses the wrong image polarity,
+An auxiliary native-codec comparator initially uses the wrong image polarity,
 giving F1 81.364\%. That original report is retained and invalidated. The
 codec was trained with white-positive input. A separately recorded correction
 using its actual convention reconstructs all 64 training images exactly.
 Both comparator outputs and the correction are independently verified. The
 fixed raw rows in main-text Fig.~9 remain unmodified.
-}
 
-\section*{\DIFadd{Supplementary Note 25: broad direct writing and a fixed output codec}}
-\DIFadd{The broader direct writer retains the full inherited actor in memory but
+\section*{Supplementary Note 25: broad direct writing and a fixed output codec}
+The broader direct writer retains the full inherited actor in memory but
 trains only its 19,374,096 writer parameters. It initializes from Note 24's
 reader/direct EMA, then makes 10,000 additional updates on balanced
 Chinese/English physical-block draws. Independent replay confirms 160,000
@@ -1283,16 +1287,14 @@ Aligned foreground F1 is 56.563\%, shuffled 18.520\%, and exact counts are
 3/128 and 0/128. Each route contains two blank blocks. The 38.043-point
 conditioning gain exceeds 20 points, but the unchanged 90\% fidelity gate
 fails. The run is complete and rejected as a writing component.
-}
 
-\DIFadd{Training peaks at 15.804 GiB. The recorded 1,555.127-s interval includes
+Training peaks at 15.804 GiB. The recorded 1,555.127-s interval includes
 training, checkpointing and evaluation after restoration, excluding initial
 loading; it is not full wall-clock or from-scratch language training. The
 fixed fitting-stage initialization and different objective prevent treating
 this as a matched broad-corpus flow comparison.
-}
 
-\DIFadd{The next audit uses the existing V34 continuous glyph codec with its original
+The next audit uses the existing V34 continuous glyph codec with its original
 6,000-update EMA, 7,423,361 frozen parameters and no additional optimization.
 Each target block is split into left/right $32\times32$ tiles. Its native
 white-positive encoder produces two continuous 768-vectors; the fixed decoder
@@ -1301,17 +1303,15 @@ font renderer or stored-form lookup in this decoder. On the identical 128
 reused-development blocks, aligned F1 is 99.998\%, with 126 exact and no blank
 blocks. Shuffled codes give 21.413\% F1, zero exact and no blank blocks.
 The 78.584-point gain and 90\% fidelity requirements both pass.
-}
 
-\DIFadd{The original source images, native codes and all 256 native decoder outputs
+The original source images, native codes and all 256 native decoder outputs
 are independently verified. The CPU audit takes 1.684 s, excluding earlier
 codec training and inherited foundation pretraining. This establishes a
 faithful supplied-code output representation. The target encoder sees the
 answer image, so the audit contains no autonomous semantic prediction.
-}
 
-\section*{\DIFadd{Supplementary Note 26: separate writing coordinates in a complete actor}}
-\DIFadd{The complete candidate retains all 27 vision and 36 contextual layers and
+\section*{Supplementary Note 26: separate writing coordinates in a complete actor}
+The complete candidate retains all 27 vision and 36 contextual layers and
 replaces the failed reader-feature inverse with the fixed output codec
 (Fig.~\ref{fig:codec-actor}). A shared $4096\to768$ projection predicts each
 of two writing vectors. Rank-eight query/value/output adapters, two structural
@@ -1320,9 +1320,8 @@ parameters in a 7,539,239,282-parameter actor. The remaining 7,529,887,345
 parameters, including the entire codec, are frozen. No language vocabulary is
 materialized in this actor. Offline image rendering may use source strings;
 actor generation receives observed pixels alone.
-}
 
-\DIFadd{All 24 actual complete-model checks pass at 16.953 GiB allocated and 17.381 GiB
+All 24 actual complete-model checks pass at 16.953 GiB allocated and 17.381 GiB
 reserved peak memory. Adam-state backward executes both the 918-position,
 109-answer-block witness and the $512\times1024$ prompt witness. Finite,
 nonzero gradients reach the projection, queries, stop head and first/last
@@ -1333,54 +1332,52 @@ is also exact. Cached/full contextual relative maximum error is
 $1.292\times10^{-5}$; predicted-code error is $1.903\times10^{-5}$, both below
 the unchanged 0.02 requirement. Restored parameters, optimizer, sampling and
 global RNG states replay exactly across a real optimizer update.
-}
 
-\DIFadd{Setup takes 68.949 s and the complete preflight 78.022 s. Its two generated
+Setup takes 68.949 s and the complete preflight 78.022 s. Its two generated
 blocks are finite and deterministic with actual image feedback, but only two
 distinct optimizer updates precede them. Their strokes are fragmented and no
 language score is evaluated. A CPU source-bound receipt checks the committed
 implementation and GPU-report consistency; it is not a second GPU execution.
-}
 
-\DIFadd{A separate registered CPU diagnostic tests local code perturbations on the
+A separate registered CPU diagnostic tests local code perturbations on the
 same 64 training images as Note 24. Four seeded tangent directions per image
 give 256 evaluations at each scale. Codes are re-normalized after perturbation;
 the scale is not their resulting latent RMS error. The original codes and
 all 1,536 perturbed native outputs are retained and independently replayed.
-}\begin{center}\small
+\begin{center}\small
 \begin{tabular}{rrrr}\toprule
-\DIFadd{Scale }& \DIFadd{Mean latent MSE }& \DIFadd{F1 (\%) }& \DIFadd{Exact / 256}\\\midrule
-\DIFadd{0 }& \DIFadd{$1.23\times10^{-9}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
-\DIFadd{0.01 }& \DIFadd{$1.00\times10^{-4}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
-\DIFadd{0.03 }& \DIFadd{$8.99\times10^{-4}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
-\DIFadd{0.1 }& \DIFadd{$9.93\times10^{-3}$ }& \DIFadd{99.9986 }& \DIFadd{253}\\
-\DIFadd{0.3 }& \DIFadd{$8.43\times10^{-2}$ }& \DIFadd{99.7517 }& \DIFadd{73}\\
-\DIFadd{1.0 }& \DIFadd{$5.86\times10^{-1}$ }& \DIFadd{88.3693 }& \DIFadd{0}\\\bottomrule
+Scale & Mean latent MSE & F1 (\%) & Exact / 256\\\midrule
+0 & $1.23\times10^{-9}$ & 100.0000 & 256\\
+0.01 & $1.00\times10^{-4}$ & 100.0000 & 256\\
+0.03 & $8.99\times10^{-4}$ & 100.0000 & 256\\
+0.1 & $9.93\times10^{-3}$ & 99.9986 & 253\\
+0.3 & $8.43\times10^{-2}$ & 99.7517 & 73\\
+1.0 & $5.86\times10^{-1}$ & 88.3693 & 0\\\bottomrule
 \end{tabular}
 \end{center}
-\DIFadd{The diagnostic takes 4.577 s on four CPU threads, excluding Python startup.
+The diagnostic takes 4.577 s on four CPU threads, excluding Python startup.
 It measures sampled local stability, not worst-case error, intrinsic dimension
 or semantic sufficiency. In particular, high foreground F1 can conceal a low
 exact-block rate. Learned prediction errors and free-running history need
 their own evaluation. For small continuous error $\delta$, the familiar local
 expansion
-}\begin{equation}
+\begin{equation}
  \|D_w(z+\delta)-D_w(z)\|^2
  =\delta^{\mathsf T}J_{D_w}(z)^{\mathsf T}J_{D_w}(z)\delta
  +o(\|\delta\|^2)
 \end{equation}
-\DIFadd{explains why equal latent error can cause unequal pixel damage; it supplies
+explains why equal latent error can cause unequal pixel damage; it supplies
 no global guarantee, especially after thresholding.
-}
 
-\DIFadd{The implemented conditional-learning stage uses the complete CMRC/Dolly
+The implemented conditional-learning stage uses the complete CMRC/Dolly
 training corpus with detached codec labels, decoded-image loss and balanced
-structural stopping. No evolving training loss is reported here as a language
-result. Its registered autonomous audit uses paired Chinese questions and
+structural stopping. \DIFdelbegin \DIFdel{No }\DIFdelend \DIFaddbegin \DIFadd{Its completed autonomous audit is reported in
+Supplementary Note 27; no }\DIFaddend evolving training loss is \DIFdelbegin \DIFdel{reported here }\DIFdelend \DIFaddbegin \DIFadd{treated }\DIFaddend as a language
+result. \DIFdelbegin \DIFdel{Its registered autonomous audit uses paired Chinese questions and
 English instructions, prompt-only generation and fixed blank controls.
-Useful language, historical forms, final held-out evaluation and standalone
-deployment remain unqualified. Inherited semantic pretraining is external.
-}
+}\DIFdelend Useful language, historical forms, final held-out evaluation and
+standalone deployment remain unqualified. Inherited semantic pretraining is
+external.
 
 \plate{Figure_S8_codec_actor}{\textbf{A fixed writing decoder separates physical rendering from conditional code prediction.}
 Blue modules contain trainable components. Prompt and completed generated
@@ -1390,12 +1387,161 @@ only during training. Gradients through the fixed decoder train the predicted
 codes and contextual adapters. The displayed parameter and resource counts
 come from actual complete-model execution, without a trained-language claim.}{fig:codec-actor}
 
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 27: complete instruction learning and autonomous rejection}}
+\DIFadd{The separate-space actor starts from the authenticated inherited archive and
+the original fixed codec, without the failed earlier writer or preflight
+adaptation. All 27 visual and 36 contextual layers remain present. Only
+9,351,937 adapter, query, projection and stop parameters train; the language
+vocabulary module remains absent. Fused AdamW uses peak learning rate
+$10^{-4}$, betas $(0.9,0.95)$, weight decay 0.01, gradient clipping at one,
+500-update warmup and cosine decay to one tenth of peak. There is no EMA or
+development-based checkpoint selection.
+}
+
+\DIFadd{Every one of the 12,976 admitted training examples occurs once in the first
+seeded permutation; 7,024 unique draws follow from a fresh second permutation.
+The complete run records 20,000 draws: 4,926 Chinese and 15,074 English.
+Independent CPU checks reproduce all data-order entries, target block counts,
+sampled block indices, final cursor and data-generator state. The final
+adaptation equals the update-10,000 checkpoint's trainable tensors. All saved
+trainable and optimizer values are finite. The registered early production
+replay independently checks one update's parameters, optimizer and RNG states
+exactly; the later journal audit does not recompute all 10,000 gradients.
+}
+
+\DIFadd{Training-stage time is 16,773.459 seconds, including checkpoint and registered
+replay work, with separate initialization time 82.717 seconds. Peak allocated
+memory is 16.965 GiB on physical GPU 0. These costs exclude data preparation,
+prior codec learning and external foundation pretraining. They establish local
+adaptation feasibility rather than foundation training from scratch or a
+matched efficiency advantage.
+}
+
+\DIFadd{The source-frozen development audit contains 128 Chinese questions from
+64 distinct two-question articles and 64 English instructions, eight per
+category. All 384 normal/control streams use a common cap of 128 physical
+blocks and learned stopping. Generation receives owning prompt pixels alone,
+without target length, reference codes, source strings or case metadata.
+Before generation, an input-layout correction removes reflow from 31 Chinese
+and one English blank control. The corrected controls reuse the normal
+prompt's exact fold ranges; all normal pixels, cases, references and gates
+remain unchanged. Independent NumPy reconstruction checks all 384 layouts.
+}
+
+\DIFadd{Exact reference agreement requires correct stopping and identical full
+physical dimensions, including ordinary white padding. F1 counts all
+predicted/reference ink, with intersections only in the overlapping width;
+extra or missing ink contributes error. Alternative recorded references are
+accepted only when fully rendered by the fixed layout. Resampling uses
+64 source articles, 2,000 draws and seed 20266831.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrl}
+\toprule
+\DIFadd{Chinese criterion }& \DIFadd{Observed }& \DIFadd{Required }& \DIFadd{Decision}\\
+\midrule
+\DIFadd{Exact answers }& \DIFadd{$0/128$ }& \DIFadd{$\geq50\%$ }& \DIFadd{Fail}\\
+\DIFadd{Foreground F1 }& \DIFadd{$\CodecLanguageFOne\%$ }& \DIFadd{$\geq80\%$ }& \DIFadd{Fail}\\
+\DIFadd{Both-correct pairs }& \DIFadd{$0/64$ }& \DIFadd{$\geq35\%$ }& \DIFadd{Fail}\\
+\DIFadd{Question F1 gain }& \DIFadd{$\CodecLanguageQuestionGain$ pp }& \DIFadd{$\geq10$ pp }& \DIFadd{Pass}\\
+\DIFadd{Gain interval lower bound }& \DIFadd{$\CodecLanguageCILow$ pp }& \DIFadd{$>0$ }& \DIFadd{Pass}\\
+\DIFadd{Learned stopping }& \DIFadd{$128/128$ }& \DIFadd{$\geq90\%$ }& \DIFadd{Pass}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{All 192 original first references and 384 raw outputs are independently
+checked, including input geometry, PNG/tensor agreement, stopping and grouped
+aggregation. Chinese question-blank F1 is \CodecLanguageBlankFOne\%; the
+question effect has interval }[\DIFadd{\CodecLanguageCILow, \CodecLanguageCIHigh}] \DIFadd{pp.
+English normal F1 is 9.763\%, versus 3.963\% blank, with no exact recorded
+reference in either route and normal stopping on 54/64 cases. These English
+figures are reference agreement, not exhaustive semantic correctness.
+Generation sums to 783.228 seconds, with 65.599 seconds setup and 851.764
+seconds total audit time; inference peaks at 15.685 GiB allocated memory.
+All data are reused development, the sealed final split remains unopened,
+and no failed output is repaired or replaced.
+}
+
+\section*{\DIFadd{Supplementary Note 28: exact-history prediction remains poor}}
+\DIFadd{The frozen final actor is measured on 32 source-bound cases, without
+optimization: eight Chinese and eight English training examples sampled from
+sorted admitted files with Python seed 20266840; the first eight Chinese
+audit cases; and the first lexicographic audit case in each English category.
+Selection does not use output scores. CPU preparation preserves every
+prompt/reference pixel, discards only the training cache's two explicit
+termination blocks, and fixes the sample identities before model calls.
+}
+
+\DIFadd{Supplied-code reconstruction encodes and decodes each reference image through
+the fixed writing codec. Exact-history prediction instead uses the actor's
+actual cached contextual path, appending a reference block only after its
+own next-block prediction has been recorded. The driver continues to the
+reference length even after a predicted stop. This supplies history and
+length and is an assisted diagnostic. The 16 training autonomous streams use
+the original uniform 128-block cap; the 16 development streams are reused
+exactly from the locked audit.
+}
+
+\begin{center}\small
+%DIF >  Generated from the fixed diagnostic measurement receipt.
+\begin{tabular}{lrrrr}
+\toprule
+\DIFadd{Group }& \DIFadd{Supplied codes }& \DIFadd{Exact history }& \DIFadd{Autonomous }& \DIFadd{Code MSE }\\
+\midrule
+\DIFadd{Training, Chinese }& \DIFadd{99.947 }& \DIFadd{35.554 }& \DIFadd{30.005 }& \DIFadd{1.0635 }\\
+\DIFadd{Training, English }& \DIFadd{100.000 }& \DIFadd{21.805 }& \DIFadd{8.145 }& \DIFadd{1.2776 }\\
+\DIFadd{Development, Chinese }& \DIFadd{99.987 }& \DIFadd{29.131 }& \DIFadd{25.632 }& \DIFadd{1.2329 }\\
+\DIFadd{Development, English }& \DIFadd{100.000 }& \DIFadd{24.444 }& \DIFadd{10.542 }& \DIFadd{1.2260 }\\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
+\DIFadd{F1 columns are case averages in percent, with eight cases per row. Exact
+history includes reference-width assistance, so its advantage over autonomous
+F1 is not a pure history effect. No first predicted block, or block predicted
+with exact history, is exact. Initial stop probabilities and first physical
+blocks match between paths on all 32 identical starting prompts. This
+localizes a failure preceding generated-history drift, including on training
+examples, while leaving feature information, readout, loss and optimization
+as possible causes.
+}
+
+\DIFadd{For reference signs $y_i\in\{-1,+1\}$ and supplied code $z^*$, define the
+decoded margin $m=\min_i y_iD_w(z^*)_i$. A positive margin and
+$\|D_w(\widehat z)-D_w(z^*)\|_\infty<m$ suffice for matching binary pixels.
+No recorded prediction satisfies this sufficient condition. This numerical
+comparison on retained scores supplies no global latent-space certificate.
+Code MSE normalizes both two-vector writing states as in the training
+comparison.
+}
+
+\DIFadd{The diagnostic takes 208.112 seconds including actor initialization and peaks
+at 15.816 GiB allocated memory. Offline CPU verification reloads all source
+pixels and recomputes physical scores, margins and aggregation, including
+exact reuse of development streams. It does not independently replay the
+native neural forward pass. No optimizer update, OCR, source-model service
+call, vocabulary inventory or sealed example is used. The original
+autonomous language decision remains rejection.
+}
+
+\plate{Figure_S9_prediction_diagnosis}{\textbf{Conditional writing fails with exact reference history.}
+\textbf{a}, Case-averaged foreground F1 for eight fixed cases in each
+split/source group. Supplied codes reconstruct the images faithfully, while
+the actor predicts poor writing even on training cases with correct history.
+The exact-history route also supplies length and forces continuation.
+\textbf{b}, The first 32-by-64 block of the first fixed Chinese training and
+development cases, displayed explicitly as block excerpts. Supplied-code
+reconstruction preserves the source marks; the initial prediction is already
+incorrect before generated history. All 32 initial predicted blocks match
+the autonomous path and none is exact. No image is repaired.}{fig:prediction-diagnosis}
+
 \DIFaddend \section*{Reproduction}
-From the repository root, use the following entry points. \DIFdelbegin \DIFdel{All use
-only GPU 0.
-}\DIFdelend \DIFaddbegin \DIFadd{GPU stages use
+From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
-}\DIFaddend \begin{quote}\small\ttfamily
+\begin{quote}\small\ttfamily
 CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
 scripts/train\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
 \end{quote}
@@ -1486,25 +1632,37 @@ The separate successor preflight is \path{scripts/check_grounded_image_actor.py}
 and its helper-only source check is \path{scripts/check_inherited_context.py}.
 The writing-only curriculum is specified in
 \path{references/grounded_writer_learning_protocol.md}; it is not an
-additional \DIFaddbegin \DIFadd{completed language result.
+additional completed language result.
+
+The matched writer diagnosis and broader direct stage use
+\path{scripts/diagnose_grounded_writer_v65.py} and
+\path{scripts/train_direct_grounded_writer_v66.py}; their independent
+verifiers retain the failed fidelity decisions. The separate output-codec
+audit is \path{scripts/audit_codec_output_v67.py}, with native replay in
+\path{scripts/verify_codec_output_v67.py}. Complete separate-space actor
+execution is checked by \path{scripts/check_codec_visual_language_actor.py}.
+The fixed instruction-learning protocol is
+\path{references/codec_language_learning_v68_protocol.md}; its training entry
+point is \path{scripts/train_codec_language_v68.py}. Prepared prompt images
+and blank controls use \path{scripts/prepare_codec_language_audit_v68.py}.
+The evaluator \path{scripts/eval_codec_language_v68.py} accepts only the final
+10,000-update state and has a separate CPU data/metric preflight. Its
+independent raw-stream verifier is \path{scripts/verify_codec_language_v68.py}.
+These entry points \DIFdelbegin \DIFdel{specify the next language test; their existence does not
+constitute a completedlanguage result }\DIFdelend \DIFaddbegin \DIFadd{produce the completed, failed autonomous result in
+Supplementary Note 27. The source-bound integrity and output-verification
+receipts are retained in }\path{references/evidence/}\DIFadd{.
 }
 
-\DIFadd{The matched writer diagnosis and broader direct stage use
-}\path{scripts/diagnose_grounded_writer_v65.py} \DIFadd{and
-}\path{scripts/train_direct_grounded_writer_v66.py}\DIFadd{; their independent
-verifiers retain the failed fidelity decisions. The separate output-codec
-audit is }\path{scripts/audit_codec_output_v67.py}\DIFadd{, with native replay in
-}\path{scripts/verify_codec_output_v67.py}\DIFadd{. Complete separate-space actor
-execution is checked by }\path{scripts/check_codec_visual_language_actor.py}\DIFadd{.
-The fixed instruction-learning protocol is
-}\path{references/codec_language_learning_v68_protocol.md}\DIFadd{; its training entry
-point is }\path{scripts/train_codec_language_v68.py}\DIFadd{. Prepared prompt images
-and blank controls use }\path{scripts/prepare_codec_language_audit_v68.py}\DIFadd{.
-The evaluator }\path{scripts/eval_codec_language_v68.py} \DIFadd{accepts only the final
-10,000-update state and has a separate CPU data/metric preflight. Its
-independent raw-stream verifier is }\path{scripts/verify_codec_language_v68.py}\DIFadd{.
-These entry points specify the next language test; their existence does not
-constitute a }\DIFaddend completed language result.
+\DIFadd{The frozen-actor diagnostic is
+}\path{scripts/diagnose_codec_language_v68.py}\DIFadd{. In the compatible native
+PyTorch environment, use \texttt{--prepare-only} with CUDA hidden, then run
+the same command on physical GPU 0 with the deterministic cuBLAS configuration,
+and finally use \texttt{--verify-only} with CUDA hidden. Supply the same fresh
+\texttt{--out} directory for those phases; completed measurements are never
+overwritten. The source-frozen selection, assisted-history scope and
+measurement checks are defined in
+}\path{references/codec_language_v68_diagnosis_protocol.md}\DIFaddend .
 
 \begin{thebibliography}{18}
 \small

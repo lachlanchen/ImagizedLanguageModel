@@ -1,0 +1,36 @@
+{
+  "architecture": "joint-exact-raster-language-v55",
+  "arm_reports": {
+    "frozen": "frozen/development/development_report.json",
+    "joint": "joint/development/development_report.json"
+  },
+  "audit_seed": 20265420,
+  "checkpoint_sha256": {
+    "frozen": "0f993f484c7998629a1adf1dc94f60044c3f23f9ef95fd1459a4636c7f2b6c5a",
+    "joint": "ae4598c609648ba92a4eaa8680fa0842966a1f11b0757ed4a14b83038c048394"
+  },
+  "decision": "reject",
+  "frozen_partition_opened": false,
+  "joint_identity_advantage_over_matched_frozen": {
+    "bootstrap_seed": 20265519,
+    "ci95": [
+      -0.003968253968253968,
+      0.02893164600550961
+    ],
+    "mean": 0.01171875,
+    "replicates": 2000,
+    "source_records": 134,
+    "windows": 256
+  },
+  "joint_nll_advantage_over_matched_frozen": {
+    "bootstrap_seed": 20265519,
+    "ci95": [
+      0.4498711460223988,
+      0.6654169844095792
+    ],
+    "mean": 0.5533182875078637,
+    "replicates": 2000,
+    "source_records": 169,
+    "windows": 512
+  }
+}

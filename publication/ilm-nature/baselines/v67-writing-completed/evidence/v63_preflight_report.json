@@ -1,0 +1,68 @@
+{
+  "arms": {
+    "aligned": {
+      "final_ema_sha256": "90755c87bbca96535132d0983a6233e1eac197ef5522710d1c9fc0e3fcbde639",
+      "parameters": 489998208,
+      "peak_allocated_vram_gib": 9.234821796417236
+    },
+    "control": {
+      "final_ema_sha256": "d1f1954dd25991852c91d1247eedc237bdb9585be1d87c0e2371f93d013ca060",
+      "parameters": 489998208,
+      "peak_allocated_vram_gib": 9.234821796417236
+    }
+  },
+  "assignment_only_gradient_norms": {
+    "backbone.in_proj.weight": 0.4338693916797638,
+    "backbone.layers.0.self_attn.q_proj.weight": 0.0015394455986097455,
+    "backbone.layers.23.self_attn.q_proj.weight": 0.01034486386924982,
+    "head.gate.weight": 0.0005581385339610279,
+    "head.projection.weight": 0.010923941619694233
+  },
+  "cached_prefix_strict_fp32_max_error": 6.4849853515625e-05,
+  "checks": {
+    "aligned_exact_cpu_rng": true,
+    "aligned_exact_cuda_rng": true,
+    "aligned_exact_data_rng": true,
+    "aligned_exact_ema_model": true,
+    "aligned_exact_model": true,
+    "aligned_exact_numpy_rng": true,
+    "aligned_exact_optimizer": true,
+    "aligned_exact_python_rng": true,
+    "aligned_finite_backward": true,
+    "aligned_sample_order": true,
+    "assignment_only_gradient": true,
+    "control_exact_cpu_rng": true,
+    "control_exact_cuda_rng": true,
+    "control_exact_data_rng": true,
+    "control_exact_ema_model": true,
+    "control_exact_model": true,
+    "control_exact_numpy_rng": true,
+    "control_exact_optimizer": true,
+    "control_exact_python_rng": true,
+    "control_finite_backward": true,
+    "control_sample_order": true,
+    "full_backward": true,
+    "future_pixel_causality": true,
+    "longest_pair_fits": true,
+    "physical_stream_assembly": true,
+    "strict_fp32_cache": true
+  },
+  "data_sha256": "55d7e641fe4a51547d7819359cf5a233dbe894d73a7b7ee5feae21a51a17aec6",
+  "development_examples": 0,
+  "future_pixel_max_error": 0.0,
+  "initial_assignment_margin": 0.0024296194314956665,
+  "language_qualified": false,
+  "longest_pair_peak_allocated_vram_gib": 9.197139739990234,
+  "provenance": {
+    "ilm/visual_lm/correlated_native_density.py": "31d4b1c8f21bfa42966283c6cf927aa47860070940dc0aa9f96bd51a1469d150",
+    "ilm/visual_lm/correlated_native_runtime.py": "6acea588aed3670aa82e91e381b4dc32e6ae5b9f1b68982c47bb9d7151393398",
+    "ilm/visual_lm/question_assignment.py": "cf477790e2e4fb7a2a73f3975e82b5d611837c80a3e3ac32c3446e24089e0ad1",
+    "references/question_assignment_v63_protocol.md": "c89c43e31602aea5380ee064cc0964513132e41ecc6993b0e4e4053d0f939f6d",
+    "scripts/train_canonical_glyph_binding_v43.py": "3323b84803dfc80ae7b040daca7c48da959cccf24693893cc66594b0bbc13656",
+    "scripts/train_correlated_native_density_v62.py": "0c888fc93af26542bd452f6bf33f0e371ea5553d759a2d9f053641e456bde655",
+    "scripts/train_native_pixel_instruction_v61.py": "5d8ee0e97f572f1deb05cd1841c7d8d74469032a0ad553dd3da66555a2b4d661",
+    "scripts/train_question_assignment_v63.py": "c66ad2f68d26269bd05caf8c4e25585d88f7bd6bf94b274f112bbf19589867d2"
+  },
+  "training_only": true,
+  "verifier_sha256": "8e7bcf9628f7fde49f1a6740ff4aed04379e4418c4c184c3e968fadae2c57c78"
+}

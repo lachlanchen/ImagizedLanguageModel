@@ -498,8 +498,9 @@ predicting this separate writing space. It has 7,539,239,282 total parameters
 and 9,351,937 trainable parameters, with 16.953 GiB peak allocated memory.
 All 24 actual execution checks pass, including early/late adapter gradients,
 future-image isolation and exact optimizer/RNG replay. Its two-update
-output remains fragmented. Conditional instruction learning and autonomous
-answer evaluation remain required (Supplementary Notes 24--26).
+output remains fragmented. These preflight measurements establish execution,
+separately from the subsequent instruction-learning test
+(Supplementary Notes 24--26).
 
 \plate{Figure_9_writing_space}{\textbf{Faithful supplied-code writing does not establish answer selection.}
 \textbf{a}, Foreground F1 for four matched fitting arms on 64 training blocks.
@@ -509,6 +510,52 @@ their shuffled-condition controls. Training histories differ; this is not a
 matched efficiency comparison. \textbf{c,d}, The first two fixed fitting and
 development rows, with original source pixels and unmodified reconstructions.
 No row is chosen by quality, cropped or repaired.}{fig:writing-space}
+
+\section*{Conditional prediction remains inaccurate}
+The complete actor then finishes its registered 10,000-update instruction
+stage on all 12,976 admitted Chinese/English training examples. Fresh corpus
+permutations yield 20,000 recorded draws, including every admitted example
+once in the first epoch. The final adaptation and production checkpoint
+agree exactly; all recorded draws match the seeded order. This adapts
+9,351,937 parameters within the inherited 7.539B-parameter actor, using
+16.965 GiB peak allocated memory on one RTX 4090 D. External foundation and
+codec training remain part of its provenance (Supplementary Note 27).
+
+The final actor generates answers to 128 Chinese questions from 64
+shared-passage pairs and 64 English instructions, each with a fixed blank
+control. All 384 raw streams and input layouts are independently verified.
+Chinese foreground F1 is \CodecLanguageFOne\%, versus
+\CodecLanguageBlankFOne\% with question pixels blanked
+(Fig.~\ref{fig:codec-language}a). The paired difference is
+\CodecLanguageQuestionGain\ percentage points, with 95\% article-bootstrap
+interval [\CodecLanguageCILow, \CodecLanguageCIHigh]. Nevertheless, no
+Chinese answer is exact and no pair has both answers correct. All 128 normal
+Chinese outputs stop through the learned decision. The three absolute
+answer-quality gates fail while question dependence and stopping pass
+(Fig.~\ref{fig:codec-language}b,c). English recorded-reference agreement is
+also poor, at 9.763\% F1 and zero exact matches; that metric does not credit
+every alternative valid answer.
+
+A fixed 32-case diagnostic then separates supplied-code reconstruction,
+prediction with exact reference history, and autonomous writing. Each
+split/source group contains eight examples. Supplied-code F1 is
+99.947--100\%, but prediction with supplied history and answer length reaches
+only 21.805--35.554\%, including training examples. No first predicted block
+is exact (Supplementary Note 28 and Supplementary Fig.~S9).
+The initial pixels and stop probabilities agree between paths starting from
+the same prompt. The failure therefore precedes generated-history drift.
+This assisted diagnostic does not identify a unique learning repair or qualify
+language; the original autonomous decision remains rejection.
+
+\plate{Figure_10_conditional_writing}{\textbf{Question dependence persists when accurate answer writing fails.}
+\textbf{a}, Chinese foreground F1 on 128 fixed development questions with full
+and matched question-blank prompts. The paired difference uses 2,000 bootstrap
+draws of 64 source articles. \textbf{b}, Exact full answers, both-correct
+question pairs and learned stopping. The original answer-quality gates fail,
+although question dependence and stopping pass. \textbf{c}, Complete reference
+and unmodified generated streams for the first two fixed Chinese cases.
+Images retain their physical width and aspect ratio; no nonblank pixel is
+removed or repaired. These are reused development data.}{fig:codec-language}
 
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
@@ -554,9 +601,14 @@ memory. Causal, backward and resume checks pass after explicit precision
 repairs. Eight short source-engine sanity cases support the contextual
 initialization; no image-language ability follows from that check. Its
 continuous writer fails its reconstruction test (Supplementary Note 23).
-The separate qualified codec preserves supplied writing, while predicted-code
-selection and free image feedback still require autonomous language tests
-(Supplementary Notes 25--26).
+The separate qualified codec preserves supplied writing, while the completed
+predicted-code actor fails its autonomous language test
+(Supplementary Notes 25--28).
+Poor first-block and exact-history predictions, including on training cases,
+show that generated-history drift cannot be the sole explanation.
+Conditional feature information, readout capacity, the objective and
+optimization remain possible limitations. The current evidence does not
+select a successful density, optimizer or semantic-transfer method.
 External pretraining remains part of the model's provenance.
 
 \section*{Methods}
@@ -650,7 +702,13 @@ predicted codes and contextual adapters. Generation uses prompt pixels,
 learned stopping and only its own completed output images. This regression
 objective is not a normalized language likelihood or a guarantee against
 averaging distinct conditional writing modes. Execution and reconstruction
-are evaluated separately from language (Supplementary Note 26).
+are evaluated separately from language (Supplementary Notes 26--28).
+The complete instruction run fixes 10,000 updates and two examples per update
+under fresh full-corpus permutations, with final raw weights and no EMA.
+Its autonomous audit scores all 192 fixed normal prompts and their matched
+blank controls, preserving full widths and learned stops. Neither the actor
+nor its evaluator repairs generated pixels. The subsequent exact-history
+diagnostic uses the same final weights and no optimizer updates.
 
 \subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale
