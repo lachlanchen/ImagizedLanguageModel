@@ -82,3 +82,7 @@ The prepared interface reduces a future integration risk. It does not show
 that the inherited contextual weights will interpret the intended visual
 prompts, that a new writer will generate readable answers, or that joint
 adaptation fits one 4090. Those require a new measured comparison after V63.
+
+The subsequent [causal-prefix audit](causal-visual-prefix.md) verifies physical
+input assembly and demonstrates why future answer images must be excluded
+before this bidirectional encoder, even with a causal contextual decoder.

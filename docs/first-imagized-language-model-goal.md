@@ -66,6 +66,13 @@ repeatability checks pass. No contextual-body execution, image writer,
 language-quality result or measured GPU-training fit is established. This
 prepares a possible later actor while V63's frozen comparison continues.
 
+The [causal visual-prefix interface](causal-visual-prefix.md) now preserves all
+12,976 training prompts in exact page/strip round trips and isolates completed
+output storage from future answers. A real CPU encoder counterexample confirms
+that joint answer-image encoding can leak future pixels into prior features;
+independent completed-block encoding replays exactly. This is an input and
+causality preparation result, with no new language pass or V63 source change.
+
 A [two-page methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
 and editable training figure now explain the exact four-stream objective using
 the first frozen training pair. Displayed glyphs are observed targets; no new
