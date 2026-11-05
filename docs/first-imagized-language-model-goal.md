@@ -52,6 +52,15 @@ initialization, not an image-language actor or a language result. Image/state
 alignment, generation, suitable optimizer memory and independent evaluation
 still require real training. The current V63 experiment remains unchanged.
 
+A [two-page methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
+and editable training figure now explain the exact four-stream objective using
+the first frozen training pair. Displayed glyphs are observed targets; no new
+language result is claimed. Pixel, native-object, rendered-page and source-hash
+checks pass. All 240 existing publication files and the five main Nutstore
+LATEST aliases are preserved; the separate methods package is locally
+byte-verified in Nutstore. The full language goal still depends on autonomous
+answers and independent evaluation, beyond methods or implementation checks.
+
 V62's matched experiment is now complete. Eight whole-image experts improve
 held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
 0.815%, but both arms still have zero exact primary answers and zero correct
