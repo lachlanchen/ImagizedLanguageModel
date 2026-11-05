@@ -3,6 +3,9 @@
 Evidence checked on 5 November 2026. The objective is useful independent
 image-input/image-output language on one RTX 4090. No reviewed result proves
 a singularity, unlimited self-improvement or general frontier-model parity.
+The [execution and mathematical decision update](physics_math_action_update_20261105.md)
+supersedes the prospective execution status below and adds an error decomposition
+and a transport diagnostic; it does not change the frozen training protocol.
 The earlier [review](physics_math_routes_20261105.md) covers transport,
 physical-field hierarchies and thermodynamic initialization. This update
 connects recent primary work to the completed [V63 result](question_assignment_v63_result.md).

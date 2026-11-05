@@ -25,6 +25,8 @@ def digest(path):
 
 
 def main():
+    from verify_assignment_publication import verify
+    verify()
     report = json.loads((HERE / "evidence/v53_development_report.json").read_text())
     density = json.loads((HERE / "evidence/v54_development_report.json").read_text())
     joint_reports = {
@@ -65,8 +67,8 @@ def main():
     figure_info = subprocess.check_output(
         ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
     )
-    if not any(line.split() == ["Pages:", "17"] for line in figure_info.splitlines()):
-        raise ValueError("figure render must contain seventeen slides")
+    if not any(line.split() == ["Pages:", "20"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain twenty slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
@@ -103,6 +105,11 @@ def main():
         if name == "supplementary_information" and any(value not in extracted for value in
                 ("122/128", "0.781", "2.806", "2.945", "post-hoc")):
             raise ValueError("supplement lacks calibrated, explicitly post-hoc transcript evidence")
+        if any(value not in extracted for value in ("3.229", "2.417", "0.812", "17.181")):
+            raise ValueError("missing completed assignment/actor results")
+        if name == "supplementary_information" and any(value not in extracted for value in
+                ("34.000", "21.420", "12.581", "15.801", "15.514")):
+            raise ValueError("supplement lacks completed writer failure and resource distinction")
         log = (HERE / f".{name}/{name}.log").read_text()
         if any(
             text in log
@@ -148,7 +155,7 @@ def main():
             raise ValueError("missing native density chart")
         slides = ET.fromstring(deck.read("ppt/presentation.xml"))
         pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
-        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 17:
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 20:
             raise ValueError("missing current figure slides")
         rels = ET.fromstring(deck.read("ppt/charts/_rels/chart3.xml.rels"))
         relation_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
@@ -247,7 +254,13 @@ def main():
                         raise ValueError(
                             f"chart {chart_index} workbook differs from audit"
                         )
-    target = DESTINATION / "ILM_NatureStyle_20261105_V62_TranscriptBounds"
+    for name in ("redlined_manuscript", "redlined_supplementary_information"):
+        subprocess.run(["pdfinfo", str(HERE / (name+".pdf"))],check=True,capture_output=True)
+    redlines = json.loads((HERE/"evidence/assignment_redline_build.json").read_text())
+    for name,row in redlines["documents"].items():
+        if digest(HERE/(name+".pdf"))!=row["pdf_sha256"] or digest(HERE/(name+".tex"))!=row["tex_sha256"]:
+            raise ValueError("redline differs from verified build")
+    target = DESTINATION / "ILM_NatureStyle_20261105_V63_Assignment"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):

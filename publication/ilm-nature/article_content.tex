@@ -19,6 +19,13 @@ conditional PixelCNN\cite{pixelrnn,pixelcnn}. Masked autoregressive networks
 provide normalized probabilities without a character dictionary\cite{made}.
 Multilingual generation from pixels has also been studied\cite{mixar}.
 
+Recent continuous multimodal flow models share a generative objective across
+embeddings while retaining token-derived language encoders and text
+decoders\cite{multimodalflow}. OCG reports rendered-question and answer-image
+reasoning with teacher assistance on the restricted CLEVR task\cite{ocg}.
+We focus on independent image-only inference and controlled tests linking
+conditional scores to autonomous writing.
+
 We investigate the conditional generation problem directly. The model
 receives raster history, predicts a distribution of future writing, emits
 pixels and rereads those pixels. Chinese provides a demanding initial case:
@@ -422,6 +429,44 @@ raw outputs, with white display padding only. No nonblank pixel is repaired
 or removed. Parameter counts and output computation differ between arms;
 both use externally pretrained weights.}{fig:correlated-density}
 
+\section*{Direct assignment changes reference scores but weakens free writing}
+To test conditional binding, we continue the eight-expert generator from one
+shared learned checkpoint. Two questions about a paragraph provide distinct
+accepted answer images. Both matched 489,998,208-parameter actors score all
+four correct and swapped question--answer streams. The control uses positive
+image likelihood alone; the aligned arm adds a smooth penalty on the
+assignment margin. Both consume identical pair draws for 2,000 updates.
+The extra loss cancels additive question-only and answer-only offsets, but
+this property does not guarantee useful conditional generation.
+
+The aligned actor reaches 2.417\% strict-raster F1 versus 3.229\% for control
+(Fig.~\ref{fig:assignment}). The difference is $-0.812$ percentage points,
+article-bootstrap 95\% interval [$-1.504$, $-0.202$]. Exact answers are one
+and two of 256 respectively; both-correct pairs remain zero of 393 for both.
+Normal-minus-blank-question raster gains resolve positively in each arm:
+1.677 points [0.492, 3.033] for aligned and 1.765 [0.504, 3.251] for control.
+Thus both use question pixels, while neither meets the absolute reading
+requirements. The assignment intervention and both reading gates fail.
+
+When accepted answer images are supplied, control chooses the correct pair
+assignment in 324/393 cases and aligned in 330/393. These descriptive scores
+cannot establish a statistically resolved improvement, and supplied answers
+are unavailable to autonomous writing. All-development pixel NLL is 0.113901
+for control and 0.114186 for aligned. Training takes 7,355.2 and 6,737.3 s,
+with 10.301 GiB peak allocated memory in both. Complete sample journals match;
+standalone offline tensors, PNG bytes and stopping events replay exactly
+(Supplementary Note 22). Timing variation in one sequential run does not
+establish comparative efficiency.
+
+\plate{Figure_8_question_assignment}{\textbf{Question use and reference compatibility do not establish correct free writing.}
+\textbf{a}, Strict-raster F1 on the fixed 256 primary questions and their
+blank-question controls. Bars show means. \textbf{b}, Paired differences with
+95\% intervals from 2,000 article resamples. The assignment arm scores lower
+than control despite positive question effects in both. \textbf{c}, First two
+fixed primary references and unmodified generated answers. White padding
+aligns the display; no nonblank output pixel is removed or repaired. Strict
+raster agreement does not credit every readable alternative form.}{fig:assignment}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -458,6 +503,15 @@ A generator that swaps the correct images for two equally frequent questions
 preserves the answer-image distribution while answering both incorrectly.
 Conditional supervision and prompt interventions therefore remain necessary;
 natural-image gains do not establish a shortcut to language learning.
+
+An inherited visual/contextual successor provides a separately measured
+execution route. With its vocabulary module removed, the complete 7.548B
+actor trains 25.58M adapter/writer parameters within 17.181 GiB allocated
+memory. Causal, backward and resume checks pass after explicit precision
+repairs. Eight short source-engine sanity cases support the contextual
+initialization; no image-language ability follows from that check. Its
+continuous writer still requires quality evaluation (Supplementary Note 23).
+External pretraining remains part of the model's provenance.
 
 \section*{Methods}
 \subsection*{Data, rendering and partitioning}
@@ -516,6 +570,13 @@ The maximum production incremental-score/parallel-NLL error is
 $2.10\times10^{-5}$ nat, below the unchanged 0.001 tolerance. The complete
 inference audit takes \BeamSeconds\ s at \BeamMemory\ GiB allocated CUDA memory.
 
+The assignment experiment keeps the native eight-expert architecture and
+trains all parameters from the same V62 EMA. Both arms score the same four
+streams for every sampled pair. AdamW, sample order, update budget and final
+EMA selection match. The auxiliary penalty has temperature 0.01 and weight
+one for aligned, zero for control. Complete details, independent runtime
+replay and the unchanged conjunctive gates appear in Supplementary Note 22.
+
 \subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale
 two. Four future cells start from Gaussian noise. The same noise is reused for
@@ -548,6 +609,12 @@ and initial noise. Intervals describe development-record variability for this
 trained checkpoint, not variability across training seeds. The current
 development partition has informed a sequence of experiments and is not a
 final independent generalization test.
+
+The assignment comparison retains the same fixed 256 primary questions and
+393 paragraph pairs. Its paired 95\% intervals use 2,000 whole-article
+resamples, seed 20266329. Reference-energy ranking supplies accepted answers
+and remains a separate diagnostic. One seed, reused development data and
+external foundation training limit both this result and efficiency claims.
 
 \balance
 \section*{Data and code availability}

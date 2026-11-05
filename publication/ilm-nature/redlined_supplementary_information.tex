@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old_expanded.tex   Thu Nov  5 10:57:13 2026
-%DIF ADD new_expanded.tex   Thu Nov  5 10:57:13 2026
+%DIF DEL old.tex   Thu Nov  5 13:32:21 2026
+%DIF ADD new.tex   Thu Nov  5 13:32:21 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -119,7 +119,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked review copy: additions relative to the V62 primary baseline are shown in blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V62 transcript-bounds baseline are blue.}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -1029,8 +1029,8 @@ justify selecting different parameters. The result supports improved bitmap
 fit at this budget, while the required question-dependent language remains
 unestablished.
 
-\DIFaddbegin \subsection*{\DIFadd{Auxiliary reader and post-hoc transcript sensitivity}}
-\DIFadd{A separately preregistered, answer-only Qwen3-VL 8B reader transcribes
+\subsection*{Auxiliary reader and post-hoc transcript sensitivity}
+A separately preregistered, answer-only Qwen3-VL 8B reader transcribes
 122/128 training-reference images exactly (95.313\%), returns every one of
 16 blank and 16 random-ink controls empty, and produces valid JSON throughout
 calibration. The fixed instruction and anonymous images disclose neither
@@ -1038,27 +1038,26 @@ questions nor reference answers to the reader. Three responses among 1,015
 unique actor images are invalid, including two that reach the registered
 256-output-token limit. The original diagnostic therefore reports
 \texttt{invalid\_actor\_transcription}; it has no complete fixed-case score.
-}
 
-\DIFadd{An explicitly post-hoc sensitivity analysis reuses the first responses
+An explicitly post-hoc sensitivity analysis reuses the first responses
 without retry, repair or new model calls. It retains all 256 cases in each
 condition and assigns each invalid bounded score possible range $[0,1]$.
 The resulting full-case means are below; ranges are identification intervals,
 not confidence intervals. Exact text means normalized transcript agreement
 with any retained reference. Character score is one minus normalized edit
 error, clipped to $[0,1]$.
-}\begin{center}\small
+\begin{center}\small
 \begin{tabular}{lrrr}\toprule
-\DIFadd{Condition }& \DIFadd{Valid / unknown }& \DIFadd{Exact text (\%) }& \DIFadd{Character score (\%)}\\\midrule
-\DIFadd{K=1 }& \DIFadd{254 / 2 }& \DIFadd{0.781--1.563 }& \DIFadd{1.388--2.169}\\
-\DIFadd{K=1, blank Q }& \DIFadd{255 / 1 }& \DIFadd{0.000--0.391 }& \DIFadd{0.186--0.577}\\
-\DIFadd{K=8 }& \DIFadd{256 / 0 }& \DIFadd{0.000 }& \DIFadd{2.806}\\
-\DIFadd{K=8, blank Q }& \DIFadd{256 / 0 }& \DIFadd{0.000 }& \DIFadd{2.945}\\
+Condition & Valid / unknown & Exact text (\%) & Character score (\%)\\\midrule
+K=1 & 254 / 2 & 0.781--1.563 & 1.388--2.169\\
+K=1, blank Q & 255 / 1 & 0.000--0.391 & 0.186--0.577\\
+K=8 & 256 / 0 & 0.000 & 2.806\\
+K=8, blank Q & 256 / 0 & 0.000 & 2.945\\
 \bottomrule\end{tabular}
 \end{center}
 
-\DIFadd{K=8's normal-minus-blank character difference is $-0.139$ percentage points,
-with article-bootstrap sensitivity envelope }[\DIFadd{$-0.962$, 0.638}]\DIFadd{. The envelope
+K=8's normal-minus-blank character difference is $-0.139$ percentage points,
+with article-bootstrap sensitivity envelope [$-0.962$, 0.638]. The envelope
 uses 2,000 article resamples, seed 20266379, taking the lower endpoint's
 2.5th percentile and upper endpoint's 97.5th percentile. It covers the
 unknown-score assignments within this resampling scheme, not systematic
@@ -1068,7 +1067,188 @@ The external reader makes 1,172 calls over 1,092.1 s of owned runtime including
 cleanup; maximum resident GPU memory sampled after requests is 7,278 MiB.
 These costs are separate from actor inference and training. The evaluator
 server and runner exit, its port closes and GPU 0 memory is released.
+
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 22: matched question--answer assignment}}
+\DIFadd{For two observed question images $x_0,x_1$ about the same paragraph and two
+accepted answer-image streams $y_0,y_1$, define $e_{ij}$ as mean answer and
+termination-pixel NLL for $y_j$ conditioned on $x_i$. Each actor scores all
+four streams using the complete image generator. Let
+}\begin{align}
+ D &= e_{01}+e_{10}-e_{00}-e_{11},\\
+ \mathcal L_{\mathrm{positive}} &= (e_{00}+e_{11})/2,\\
+ \mathcal L_{\mathrm{assign}} &= \tau\log(1+\exp[-D/\tau]),\qquad \tau=0.01,\\
+ \mathcal L &= \mathcal L_{\mathrm{positive}}+\lambda\mathcal L_{\mathrm{assign}}.
+\end{align}
+\DIFadd{Aligned uses $\lambda=1$ and control $\lambda=0$. Additive question-only and
+answer-only energy offsets cancel from $D$. Different answer lengths receive
+their own normalization, so $D$ is not a joint log-odds or mutual-information
+estimate. The algebra does not identify linguistic meaning.
 }
+
+\DIFadd{There are 3,793 training-only pairs from 939 paragraphs and 3,016 questions.
+Accepted answer text sets and canonical reference images are distinct within
+each pair; two pairs with shared references are excluded. Sampling chooses
+paragraphs uniformly, then a pair within the paragraph. Both actors start
+from the same learned V62 eight-expert EMA, retain 489,998,208 parameters and
+use the unchanged Noto-26 interface and approximate component-mode decoder.
+No reference bank, OCR or teacher is deployed. All 2,000 update journals,
+containing four pair draws each, match byte for byte.
+}
+
+\DIFadd{Microbatch is one pair with accumulation four. Each pair forms two positive
+and two swapped likelihood streams. AdamW uses learning rate $2\times10^{-5}$,
+betas $(0.9,0.95)$, decay 0.01, 100-update warmup, cosine decay to 10\%, clip
+one and EMA 0.99. Model/optimizer/EMA weights are FP32; forward/backward use
+BF16, deterministic eager/math attention and nonreentrant checkpointing.
+Model and data seeds are 20266320 and 20266321. Only final EMA is audited.
+Both arms execute sequentially on physical GPU 0 under eight-hour and
+20-GiB allocated-memory ceilings per phase.
+}
+
+\begin{table}[htbp]\centering\small
+\caption*{\textbf{Supplementary Table 4: completed question--answer assignment.} Image F1 values are percentages.}
+\begin{tabular}{lrrrr}\toprule
+\DIFaddFL{Arm }& \DIFaddFL{Exact / 256 }& \DIFaddFL{Raster F1 }& \DIFaddFL{Foreground F1 }& \DIFaddFL{Both / 393}\\\midrule
+\DIFaddFL{Control }& \DIFaddFL{2 }& \DIFaddFL{3.229 }& \DIFaddFL{20.227 }& \DIFaddFL{0}\\
+\DIFaddFL{Aligned }& \DIFaddFL{1 }& \DIFaddFL{2.417 }& \DIFaddFL{17.219 }& \DIFaddFL{0}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\DIFadd{Control and aligned all-development NLLs are 0.113901 and 0.114186 nats per
+pixel. Aligned minus control raster F1 is $-0.812$ points }[\DIFadd{$-1.504$,$-0.202$}]\DIFadd{;
+foreground F1 differs by $-3.008$ points }[\DIFadd{$-3.978$,$-2.014$}]\DIFadd{. Normal-minus-blank
+raster effects are 1.765 points }[\DIFadd{0.504,3.251}] \DIFadd{for control and 1.677
+}[\DIFadd{0.492,3.033}] \DIFadd{for aligned. All intervals resample source articles 2,000 times,
+seed 20266329, over the same 256 primary cases from 198 articles.
+}
+
+\DIFadd{Each actor passes seven of ten reading gates. Both fail the unchanged 10\%
+exact-answer, 25\% raster-F1 and 2\% both-correct-pair requirements. Question
+dependence, capped outputs and implementation checks pass. The intervention
+requires an aligned reading pass and a positive lower interval for
+aligned-minus-control raster F1; both requirements fail. The decision is
+\texttt{reject\_assignment\_intervention}. No decoder, checkpoint selection,
+threshold or primary case changes after scoring.
+}
+
+\DIFadd{The separate accepted-reference diagnostic assigns the pair correctly in
+324/393 cases for control and 330/393 for aligned. Both individual energy
+ranks are correct in 82/393 and 109/393. These are descriptive comparisons
+without registered difference intervals, and do not evaluate free writing.
+Training takes 7,355.156 and 6,737.336 s at 10.301 GiB peak allocated memory.
+The audit takes 582.104 s excluding loading, at 1.904 GiB. Timing excludes
+loading, final serialization and external foundation pretraining.
+}
+
+\DIFadd{The preflight passes exact uninterrupted/resumed optimizer, EMA and RNG
+comparison, finite complete-backbone and assignment-only gradients, causal
+masking and physical stream assembly. Largest-pair allocation is 9.197 GiB.
+Same-shape future-pixel effects are zero; strict-FP32 cached-prefix error is
+$6.485\times10^{-5}$ against a $2\times10^{-4}$ bound. Both standalone bundles
+reproduce tensors, PNG bytes and stopping events with networking disabled,
+empty caches and no repository source path. Reused development, one seed,
+external pretraining and strict-raster limitations remain explicit. Sealed
+final partitions are unopened.
+}
+
+\section*{\DIFadd{Supplementary Note 23: inherited continuous writing actor}}
+\DIFadd{A separately executed successor retains the existing authenticated Qwen3-VL
+vision/contextual archive\cite{qwen3vl}, omits its vocabulary matrices and
+attaches a continuous physical-image writer (Fig.~\ref{fig:grounded-actor}).
+It has 7,548,043,521 parameters: 7,522,463,984 inherited/frozen and 25,579,537
+trainable. The trainable subset includes rank-eight query/value/output
+adapters in 36 contextual layers, two continuous writing queries, a
+19,374,096-parameter six-layer flow writer and a binary stop classifier.
+All 27 vision layers and three DeepStack feature sets remain present.
+The actor accepts observed grayscale image tensors and completed
+$32\times64$ blocks; it requires no character segmentation or alphabet.
+}
+
+\DIFadd{Teacher forcing places each query pair before its answer image. The observed
+prompt may be bidirectionally image-encoded, while each completed answer block
+is an independent encoder image. A causal contextual mask prevents current
+and future answer pixels from entering a prediction. Cached generation
+rereads only completed generated blocks. Explicit spatial/temporal rotary
+coordinates preserve image layout; sequential mask coordinates carry no
+character identity.
+}
+
+\DIFadd{The writer models all 2,048 pixels jointly. With Gaussian $U$, uniform $t$ and
+signed target image $Y$, its flow objective is
+}\begin{equation}
+ Y_t=(1-t)U+tY,\qquad
+ \mathcal L_{\mathrm{flow}}=\mathbb E\Vert v_\theta(Y_t,t,h)-(Y-U)\Vert_2^2.
+\end{equation}
+\DIFadd{Explicit midpoint integration gives a continuous raster; zero thresholding
+produces binary output. A class-balanced binary stop objective is separate
+from white-space generation. Its sigmoid score has no independent calibration.
+No token IDs, OCR, font renderer, glyph bank or external model call enters
+actor inference. Encoded text remains permissible in offline dataset creation.
+}
+
+\DIFadd{All 19 complete-model execution checks pass on GPU 0 at 17.181 GiB allocated
+and 18.053 GiB reserved peak memory. Geometry inspection covers 12,976 complete
+training examples from CMRC and Dolly instructions\cite{cmrc,dolly}. The
+largest contextual case has 918 positions, a $480\times1024$ prompt and
+109 complete target blocks; the largest prompt is $512\times1024$.
+Both receive full contextual backward with Adam moments allocated, while
+16 uniformly sampled target blocks receive writer loss. No prompt or
+answer history is truncated. Every trainable gradient is finite, and
+nonzero gradients reach first/last contextual adapters and the writing head.
+Restoring one saved optimizer update reproduces the next writer/adapters,
+optimizer, sampling and global RNG states exactly. Same-shape future-image
+and encoder-isolation interventions have exactly zero effect.
+}
+
+\DIFadd{Two retained attempts fail cached/full-prefix comparison at relative maximum
+errors 0.18524 and 0.09815. The accepted implementation keeps contextual weight
+storage in BF16 but evaluates contextual projections, attention and residuals
+in FP32. Layer checkpointing avoids retaining a full FP32 body. Vision
+weights/computation are FP32; writer contractions may use BF16 autocast.
+The complete contextual call disables ambient autocast, verified at actual
+attention entry. Cached/full-prefix error becomes $3.910\times10^{-4}$
+absolute and $1.210\times10^{-5}$ relative, below the unchanged 0.02 relative
+bound. These casts do not recover precision lost in the source quantization.
+}
+
+\DIFadd{A separate offline helper temporarily reads source token rows and an output
+head to test the contextual initialization against the source engine. Across
+eight short text-only prompts, it matches 8/8 initial and 9/9 returned token
+choices, with mean KL 0.000264 nat after grouping reference top-ten tokens
+and the outside mass. This limited check is not full engine equivalence or
+image-language understanding. The helper vocabulary is never attached to
+the actor, and its owned reference service exits before native model loading.
+Its 103.832-s runtime and 18.701-GiB allocation include the temporary head
+and are separate from the image-actor preflight.
+}
+
+\DIFadd{The preflight contains two optimizer updates and replay; its output is noise.
+It provides no writing or language quality score. A separate writer-only
+curriculum then trains 19,374,096 parameters for 10,000 updates on balanced
+Chinese/English blocks from 12,976 training examples. With the final EMA fixed,
+128 development blocks yield foreground F1 of 34.000\% under correct visual
+conditions and 21.420\% with cyclically shuffled conditions, a gain of 12.581
+percentage points. Neither route produces an exact block. Both registered
+component requirements, F1 at least 90\% and gain at least 20 points, fail.
+Training peaks at 15.801 GiB; the resumed evaluation's separately reset peak
+is 15.514 GiB. The first evaluation attempt stops before output because its
+directory is missing. Creating that directory and resuming unchanged code at
+update 10,000 leaves final weights and training journals byte-identical, with
+no further learning. All 256 generated-image scores are recomputed from raw
+pixels. These are source-image reconstruction measurements on reused
+development data, not prompt-to-answer language. Independent autonomous
+answers, historical-form behavior and capability-matched efficiency remain
+required. External pretraining is inherited work, not training performed
+from scratch on the local GPU.
+}
+
+\plate{Figure_S7_grounded_actor}{\textbf{An inherited image actor executes within one GPU, with language quality unqualified.}
+Observed prompt images and independently encoded completed blocks enter the
+retained visual/contextual body. Two continuous queries condition a flow over
+physical writing pixels. Blue modules contain trainable components; the
+contextual body also retains frozen inherited weights. A separate classifier
+predicts stopping. Parameter counts and memory describe actual complete-model
+execution. The diagram contains no generated-language example or quality claim.}{fig:grounded-actor}
 
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. All use only GPU 0.
@@ -1156,8 +1336,21 @@ the exported bundle's \texttt{run.py} does not need the repository or the
 original foundation checkpoint. The optional, separately calibrated vision
 diagnostic is \texttt{scripts/audit\_correlated\_native\_transcripts\_v62.py}.
 That reader stays outside the actor and changes no primary gate.
-\begin{thebibliography}{14}
-\interlinepenalty=10000
+\DIFdelbegin %DIFDELCMD < \begin{thebibliography}{14}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{The complete assignment comparison uses
+}\path{scripts/run_question_assignment_v63.py}\DIFadd{; its independent raw-score
+verification is }\path{scripts/verify_question_assignment_result_v63.py}\DIFadd{.
+The separate successor preflight is }\path{scripts/check_grounded_image_actor.py}\DIFadd{,
+and its helper-only source check is }\path{scripts/check_inherited_context.py}\DIFadd{.
+The writing-only curriculum is specified in
+}\path{references/grounded_writer_learning_protocol.md}\DIFadd{; it is not an
+additional completed language result.
+}
+
+\begin{thebibliography}{18}
+\small
+\DIFaddend \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.
 \bibitem{mar} Li, T., Tian, Y., Li, H., Deng, M. \& He, K. Autoregressive Image Generation without Vector Quantization. \emph{Advances in Neural Information Processing Systems} (2024). \url{https://arxiv.org/abs/2406.11838}.
 \bibitem{forcing} Chen, B. et al. Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion. \emph{arXiv} 2407.01392 (2024). \url{https://arxiv.org/abs/2407.01392}.
@@ -1171,7 +1364,11 @@ That reader stays outside the actor and changes no primary gate.
 \bibitem{pointer} See, A., Liu, P. J. \& Manning, C. D. Get To The Point: Summarization with Pointer-Generator Networks. \emph{Proceedings of ACL}, 1073--1083 (2017). \url{https://aclanthology.org/P17-1099/}.
 \bibitem{cmrc} Cui, Y. et al. A Span-Extraction Dataset for Chinese Machine Reading Comprehension. \emph{Proceedings of EMNLP-IJCNLP}, 5883--5889 (2019). \url{https://aclanthology.org/D19-1600/}.
 \bibitem{mgflow} Zhang, C. et al. Unifying Distributional Training for One-Step Visual Generation. \emph{arXiv} 2609.35763v4 (2026). \url{https://arxiv.org/abs/2609.35763v4}.
-\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}.
+\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}\DIFaddbegin \DIFadd{.
+}\bibitem{multimodalflow} \DIFadd{Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). }\url{https://arxiv.org/abs/2609.40362v1}\DIFadd{.
+}\bibitem{ocg} \DIFadd{Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. }\href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{\DIFadd{Author manuscript}} \DIFadd{(2026). Peer-review status unverified.
+}\bibitem{qwen3vl} \DIFadd{Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). }\url{https://arxiv.org/abs/2511.21631v2}\DIFadd{.
+}\bibitem{dolly} \DIFadd{Databricks. Databricks Dolly 15k instruction dataset (2023). }\url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}\DIFaddend .
 \end{thebibliography}
 
 \end{document}

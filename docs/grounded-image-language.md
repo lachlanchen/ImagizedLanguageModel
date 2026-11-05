@@ -89,9 +89,10 @@ Core interfaces in `ilm/visual_lm/grounded_image_actor.py`:
 - `trainable_state()` / `load_trainable_state(...)` save and restore adapters,
   queries, writer and stop head, with the frozen body identified separately.
 
-The preflight's two-update image is noise. Actual writing/instruction training,
-independent quality tests, foundation-engine equivalence and final standalone
-offline export remain outstanding. The general image-language goal stays open.
+The preflight's two-update image is noise. Subsequent writer learning is
+complete and fails reconstruction, as detailed below. Instruction learning,
+independent language-quality tests, full foundation-engine equivalence and
+final standalone export remain outstanding. The general goal stays open.
 
 The subsequent [offline source check](../references/inherited_context_check_result.md)
 matches all eight first-token choices and nine returned reference positions,
@@ -107,11 +108,14 @@ resume verification, EMA, deterministic sampling and a fixed final component
 evaluation. Reconstruction is a prerequisite output-path test, not a language
 answer qualification.
 
-Production is now running in the owned `ilm-grounded-writer` tmux session on
-GPU 0. Artifacts and exact-resume evidence are under
-`artifacts/grounded_writer_learning_v64_20261105/`; `status.json` records the
-live PID/stage, and `report.json` will record completion and the fixed component
-decision. Do not infer completion from a console line or loss decrease. Resume
-an interrupted stage with the same command/environment as the protocol and
-`scripts/train_grounded_writer.py --resume`. Preserve frozen sources and do
-not start a second heavy job while the trainer is live.
+The [completed writer result](../references/grounded_writer_v64_result.md)
+has 34.000% correct-condition foreground F1 versus 21.420% shuffled and zero
+exact blocks in both routes. Both fixed gates fail. Training completes all
+10,000 updates at 15.801 GiB peak. A missing evaluation directory was created
+after preserving the initial failure, then unchanged code resumed at update
+10,000 without additional learning. Final weights and journals are identical.
+Artifacts and exact-resume evidence remain under
+`artifacts/grounded_writer_learning_v64_20261105/`; the report is complete,
+and the owned trainer/tmux session have exited. All 256 raw image scores pass
+independent CPU recomputation. Faithful writing still needs repair before
+instruction learning can establish an autonomous image-language model.

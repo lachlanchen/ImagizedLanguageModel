@@ -6,13 +6,32 @@ V-SPICE v13.7 manuscript template: a two-column article, a matching review
 copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
-The [change-marked supplement](redlined_supplementary_information.pdf) shows
-the completed transcript-sensitivity addition relative to the preserved
-V62 primary baseline. Its [flattened TeX](redlined_supplementary_information.tex)
-and [builder](build_supplement_redline.py) / [verification](verify_supplement_redline.py)
-retain the clean paper and figure assets.
+The [change-marked article](redlined_manuscript.pdf) and
+[supplement](redlined_supplementary_information.pdf) compare the current
+revision with the preserved V62 transcript-bounds baseline. Their
+[builder](build_assignment_redlines.py) uses pinned latexdiff and inlines the
+abstract so its changes are visible. The earlier supplement-only redline and
+builder remain inside the named baseline.
 
 ## Current result
+
+A matched question--answer assignment term weakens free image writing.
+Control and aligned actors each train 490M parameters for 2,000 updates from
+identical weights and sample draws. Exact answers are 2/256 and 1/256; neither
+arm has a fully correct pair among 393. Raster F1 is 3.229% and 2.417%, with
+aligned minus control -0.812 percentage points, 95% article-bootstrap interval
+[-1.504, -0.202]. Both question effects resolve positively, but both absolute
+reading gates fail. Figure 8, Supplementary Note 22 and native slides 18–19
+show the method, paired uncertainty and first two unrepaired answers.
+
+A separate inherited 7.548B actor passes complete execution checks at
+17.181 GiB with 25.58M trainable parameters and no deployed vocabulary module.
+Its writer-only 10,000-update test fails reconstruction: 34.000% foreground F1
+under correct image conditions versus 21.420% shuffled, zero exact blocks.
+This does not qualify prompt-to-answer language. Figure S7, Note 23 and native
+slide 20 distinguish the executed mechanism from language capability. All
+256 raw writer image scores were independently recomputed. Local 4090 work
+does not include external foundation pretraining.
 
 A matched conditional bitmap mixture improves pixel fit while failing the
 language gates. K=8 lowers held-out NLL to 0.1248 versus 0.1542 for K=1 and
@@ -121,7 +140,8 @@ baselines remain in `baselines/v53/`.
 | `manuscript_review.pdf` | Matching line-numbered review copy |
 | `supplementary_information.pdf` | Complete method, metric limits and reproducibility |
 | `ILM_Figures_editable.pptx` | Native diagram shapes and bar chart with embedded workbook; raw glyphs remain images |
-| `ILM_Figures_review.pdf` | Verified seventeen-slide LibreOffice rendering |
+| `ILM_Figures_review.pdf` | Verified twenty-slide LibreOffice rendering |
+| `redlined_manuscript.pdf`, `redlined_supplementary_information.pdf` | Matching change-marked review copies |
 | `frontmatter.tex`, `article_content.tex` | Article summary and scientific content |
 | `figures/` | PDF, PNG and SVG evidence figures |
 | `evidence/` | Reports with local paths normalized for delivery and source hashes |
@@ -132,7 +152,7 @@ and tables describe a research draft, not an accepted Nature publication.
 
 ## Rebuild
 
-From the repository root, after the V53–V62 artifacts are present:
+From the repository root, after the V53–V64 artifacts are present:
 
 ```bash
 python publication/ilm-nature/generate_evidence.py
@@ -146,14 +166,17 @@ PYTHONPATH=. python publication/ilm-nature/generate_native_pixel_editable_figure
 PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_evidence.py
 PYTHONPATH=. python publication/ilm-nature/generate_correlated_density_editable_figures.py
 PYTHONPATH=. python publication/ilm-nature/generate_transcript_bounds_evidence.py
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/generate_assignment_evidence.py
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/generate_assignment_editable_figures.py
 bash scripts/latex_build.sh publication/ilm-nature/manuscript.tex
 bash scripts/latex_build.sh publication/ilm-nature/manuscript_review.tex
 bash scripts/latex_build.sh publication/ilm-nature/supplementary_information.tex
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/build_assignment_redlines.py
 ```
 
 Render the deck through LibreOffice, inspect it, and refresh the render receipt
 before running `validate_and_sync.py`. That script refuses a deck or PDF whose
-hash has changed since review, checks all thirteen embedded evidence workbooks and
+hash has changed since review, checks all fifteen embedded evidence workbooks and
 verifies the delivered copies byte for byte.
 `PYTHONPATH=. python publication/ilm-nature/verify_native_pixel_rasters.py`
 also checks the six PDF and four PowerPoint raw images against their source
@@ -167,11 +190,19 @@ values and figures. Source code, checkpoint hashes and frozen protocols are
 recorded in the run report. Experimental code resides in `scripts/` and
 `ilm/visual_lm/`. Data and model weights remain outside the publication package.
 
-The seventeen-slide editable deck retains earlier plates and adds native
+`CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python publication/ilm-nature/verify_assignment_publication.py`
+checks six source-exact PNG, PDF, PPTX and deck-PDF images, both new chart caches,
+workbooks and paired intervals, and preservation of every earlier deck part
+except global slide registrations. It also compares earlier slide rendering.
+Use lossless PDF image compression and disable resolution reduction when
+rendering the deck. The Artifact Tool runtime is unavailable locally; the
+new builder edits OOXML directly without python-pptx authoring.
+
+The twenty-slide editable deck retains earlier plates and adds native
 block-reading, frozen-foundation, input-order and conditional-density charts,
 editable mechanism shapes and actual answer images. Current
 validated copies are delivered to Nutstore `Projects/ILM/` under the
-`V62_TranscriptBounds` version
+`V63_Assignment` version
 folder and stable `LATEST` aliases. Local checksums verify copying; remote cloud
 synchronization is not independently confirmed.
 

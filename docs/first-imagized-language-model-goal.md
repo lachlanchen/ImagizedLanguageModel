@@ -4,15 +4,16 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
-The actual [grounded writer learning stage](../references/grounded_writer_learning_protocol.md)
-is now running on physical GPU 0 in `ilm-grounded-writer`, with a fixed
-10,000-update budget and balanced Chinese/English image blocks from all 12,976
-prepared training examples. Exact early checkpoint replay passes for writer,
-EMA, optimizer, image/noise sampling and global RNG states. Only the writer
-trains in this stage; the complete actor remains resident, with inherited
-weights frozen. No development generation is inspected before the final EMA.
-The fixed component evaluation is still outstanding. Source-image
-reconstruction cannot qualify prompt-dependent language.
+The actual [grounded writer learning stage](../references/grounded_writer_v64_result.md)
+has completed 10,000 updates on GPU 0 and fails both reconstruction gates.
+Correct-condition foreground F1 is 34.000% versus 21.420% shuffled, with no
+exact block in either route across 128 fixed development blocks. All 256
+raw-image scores were independently recomputed. Training peaks at 15.801 GiB.
+The missing-evaluation-directory failure was recovered by resuming unchanged
+code at update 10,000; final weights and journals remain byte-identical, with
+no extra training. Exact early optimizer/EMA/RNG replay passes. The run is
+complete, its GPU is released and no owned runtime remains. Faithful writing
+must be repaired before prompt-dependent language can be qualified.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
@@ -54,7 +55,7 @@ unopened.
 The immediate direction is **useful contextual understanding coupled to
 coherent autonomous image writing**. Another supplied-answer ranking gain or
 lower pixel loss alone cannot close that requirement. The
-[new primary-source review](../references/physics_math_followup_20261105.md)
+[new primary-source review](../references/physics_math_action_update_20261105.md)
 connects recent spectral learning theory and continuous image generation to
 this decision. No physics theorem, optimizer or singularity claim substitutes
 for correct unseen answers.
@@ -89,9 +90,11 @@ Prepared components reduce integration risk but do not establish this candidate:
 
 The [V63 methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
 is a two-page methods explanation and editable training figure. Its displayed
-forms are observed targets. The main manuscript still reports through V62;
-its V63 result and editable figures require a separate planned, compiled and
-visually verified revision. The completed V62 supplement redline and standalone
+forms are observed targets. The main manuscript now includes the completed
+V63 result, native editable figures and separate writer failure. The article,
+review, supplement, both redlines and twenty-slide deck pass the current
+verification and are copied byte-for-byte into Nutstore Projects/ILM. Local
+copying does not verify cloud propagation. The completed V62 supplement redline and standalone
 Nutstore package are preserved. General language quality is not inferred from
 publication layout, deployment replay or component verification.
 
