@@ -85,7 +85,8 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
 The [literal-writing transfer diagnostic](../references/copy_transfer_v75_protocol.md)
 contains 12 new requests in Chinese, English and digits. CPU preparation
 preserves all marks and confirms that none of the prompt rasters occurs in
-the admitted training corpus. This is prepared evaluation data, with zero
+the admitted training corpus. Its [preparation receipt](../references/evidence/copy_transfer_v75_preparation.json)
+binds all input/reference files and rendering sources. This is prepared evaluation data, with zero
 model calls or performance claims. A separate lightweight coordinator can
 wait for the exact live full-corpus process and then generate and independently
 score these images after the original audit finishes:
