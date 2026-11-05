@@ -81,3 +81,43 @@ or another bounded reading policy would need its own causal and memory checks.
 Upsampling adds no information to the original image and guarantees no
 language improvement. The full completion requirement remains an independent,
 useful image-input/image-output language model on one consumer GPU.
+
+## Implementation freeze for the first execution
+
+Use seed 20267100, four CPU threads, deterministic algorithms, no TF32,
+deterministic cuDNN and the existing FP32 eager/math attention path. Preserve
+the authenticated source model, BF16 contextual storage and FP32 visual
+weights. Remove only the unused writer from this diagnostic instance. No
+optimizer, V68 adaptation or source-model service is used.
+
+Compile the fixed controls from authenticated source embedding rows:
+`<|im_start|>user\n<|vision_start|>` before the actual visual features, and
+`<|vision_end|>` followed by the V70 task instruction and
+`<|im_end|>\n<|im_start|>assistant\n` afterward. The structural-state artifact
+contains only the two FP32 vector arrays. Symbolic compiler metadata is a
+separate offline artifact. For text controls use the same task plus two
+newlines and the original source prompt inside the native user/assistant
+frame. Compile exact source special IDs outside the image wrapper.
+
+Use Pillow RGB bilinear resizing to the V70 reconstructed native dimensions;
+record its version and preserve both source and transformed PNGs. This is a
+declared geometry-matched presentation, not an assertion of exact C++ pixel
+equivalence. Keep all 40 fixed generations and a 64-source-token cap. The
+temporary source projection is stored in BF16 and contracted in FP32, as in
+the earlier text compatibility check. Save every selected source ID, its
+contextual hidden state and projection logit for CPU verification.
+
+Report literal trimmed-reference exact agreement, bounded character edit
+accuracy, truncation, and reference inclusion. Also report reference inclusion
+without the paired question's reference, explicitly as a string-based
+selectivity diagnostic rather than semantic correctness. This secondary
+measure cannot qualify an image-language actor or credit full-page copying
+as correct answering. Inspect all raw responses.
+
+Independent CPU checks reconstruct all source/transformed pixels, compile the
+numeric controls again, decode the retained helper IDs, and recompute the
+output projection from retained hidden states. Report exact argmax agreement
+and numerical ties separately; the retained selected logit must be within
+1e-3 of its CPU replay and within 1e-4 of the CPU maximum. These tolerances
+concern floating-point projection replay, not answer quality. The verifier
+does not independently replay the whole vision/contextual body.
