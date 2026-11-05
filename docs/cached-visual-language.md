@@ -1,5 +1,10 @@
 # Cached vision-language weights for an independent image actor
 
+The subsequent [complete actor preflight](grounded-image-language.md) now
+executes all retained vision/contextual layers and real backward at 17.181 GiB
+peak allocated GPU memory, with an explicit precision repair. The CPU-only
+inspection below remains a separate source-interface result.
+
 The legacy combined Qwen3-VL 8B archive already available under `../LocalLLM`
 can now supply its vision and contextual weights without exposing its language
 vocabulary matrices. The new accessor reads the existing GGUF in place and
@@ -81,7 +86,9 @@ uses `[24, 20, 20]` from the pinned upstream compatibility implementation.
 The prepared interface reduces a future integration risk. It does not show
 that the inherited contextual weights will interpret the intended visual
 prompts, that a new writer will generate readable answers, or that joint
-adaptation fits one 4090. Those require a new measured comparison after V63.
+adaptation fits one 4090. Full-model execution and memory are now measured by
+the linked subsequent preflight; readable writing and autonomous answer quality
+still require actual learning and evaluation.
 
 The subsequent [causal-prefix audit](causal-visual-prefix.md) verifies physical
 input assembly and demonstrates why future answer images must be excluded

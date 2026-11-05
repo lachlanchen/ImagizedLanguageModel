@@ -4,6 +4,16 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
+The [complete grounded image actor](grounded-image-language.md) now passes all
+19 real-model preflight checks on GPU 0, with 17.181 GiB peak allocated memory.
+It retains all 27 vision and 36 contextual layers, removes the vocabulary
+module, and trains 25.58M adapters/writer parameters within a 7.548B-parameter
+actor. Largest-row backward, exact optimizer/RNG replay and future-pixel
+isolation pass. After two preserved precision failures, cached/full-prefix
+relative maximum error is 1.21e-5. This establishes measured execution and fit;
+its two-update output remains noise. Actual coherent-writing and instruction
+learning, autonomous language tests and final standalone export remain open.
+
 V63 is complete: both 2,000-update, 489,998,208-parameter arms finish on
 physical GPU 0, pass standalone offline replay and receive the locked audit.
 The assignment intervention is rejected. Control produces 2/256 exact primary
@@ -36,10 +46,10 @@ removed and a small continuous image writer. Offline teachers may supply
 semantic and rendering supervision separately, with inherited pretraining
 attributed. Deployment must consume observed pixels and generate writing
 without a tokenizer, Unicode IDs, OCR, glyph inventory or external model call.
-A complete physical forward/backward and measured memory fit precede adoption;
-then actual training and fixed autonomous Chinese/English tests must determine
-whether it works. Frozen base weights plus modest adapters are a candidate,
-not an established fit or language result. Spectral or thermodynamic optimizer
+A complete physical forward/backward and measured memory fit now pass; actual
+training and fixed autonomous Chinese/English tests must determine whether
+it works. Frozen inherited weights plus modest adapters establish a feasible
+execution route, with no language result yet. Spectral or thermodynamic optimizer
 changes are lower-priority ablations after the actor produces useful language.
 
 Prepared components reduce integration risk but do not establish this candidate:
@@ -50,8 +60,9 @@ Prepared components reduce integration risk but do not establish this candidate:
   categories and excludes sealed test data.
 - [Cached visual-language weights](cached-visual-language.md): all 748 retained
   native names/shapes match; the real 27-layer vision encoder executes on CPU.
-  Calculated retained BF16 weight storage is 14.012 GiB. Full contextual-body
-  execution, activation/optimizer memory and actor quality remain unverified.
+  Calculated retained BF16 weight storage is 14.012 GiB. The subsequent complete
+  actor now executes the contextual body and measures activation/optimizer
+  memory with its explicit precision repair. Actor quality remains unverified.
 - [Causal visual prefixes](causal-visual-prefix.md): all 12,976 training prompts
   preserve exact page/strip round trips. A real encoder counterexample shows
   that jointly encoding future answer blocks leaks their pixels into earlier
