@@ -33,6 +33,12 @@ This motivates keeping autonomous writing authoritative; it does not measure
 the running actor or alter its frozen comparison. No singularity or general
 language breakthrough is established.
 
+A [new visual evidence-use review](../references/visual_evidence_use_update_20261105.md)
+checks primary work through 3 November. Recognizing writing and using it to
+answer questions are separate empirical requirements. Causal language-state
+transfer is a candidate after V63, with the physical writing path preserved;
+no additional teacher, architecture or inference dependency is adopted now.
+
 The broader Chinese/English data interface now has 12,976 complete training
 images and 2,509 matching development images, covering all eight Dolly
 instruction categories. Every image passes hash and exact bit-round-trip

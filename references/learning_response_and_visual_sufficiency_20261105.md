@@ -122,3 +122,9 @@ before production. Do not call a training-loss trend a phase transition or
 reuse the language of mathematical singularities as evidence of an AI
 singularity. Broader Chinese/English instructions, book reading and historical
 writing remain the full objective after this bounded conditional test.
+
+The [visual evidence-use follow-up](visual_evidence_use_update_20261105.md)
+adds primary results through the 3 November read–use-gap revision, together
+with recent pixel-model adaptation, reconstruction and continuous-action work.
+It distinguishes recognition from usable language and outlines a causal-state
+transfer candidate for evaluation after V63. The current run remains frozen.
