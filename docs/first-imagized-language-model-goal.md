@@ -40,8 +40,33 @@ the existing frozen writing codec on the same 128 reused-development blocks:
 is reconstruction from supplied answer-image codes, not language generation.
 It supports distinct reading and writing representations. A complete causal
 actor must still learn which writing codes to produce from prompt pixels and
-its generated history; the new output interface needs its own full-model
-execution checks and autonomous instruction evaluation.
+its generated history.
+
+The [complete codec-language actor preflight](../references/codec_visual_actor_preflight_result.md)
+now passes all 24 actual GPU execution checks. It retains 7.539B total
+parameters, trains 9.352M, and peaks at 16.953 GiB allocated memory. Finite
+gradients reach early and late contextual adapters through the frozen decoder;
+future-pixel isolation, exact optimizer/RNG replay and cached writing pass.
+Its two-update output is fragmented execution evidence, without a language
+claim.
+
+The [V68 instruction stage](../references/codec_language_learning_v68_protocol.md)
+has started on physical GPU 0 in the single owned session `ilm-codec-language`.
+It learns prompt-conditioned answer codes using all 12,976 admitted training
+examples, fresh full-corpus permutations, two examples per update and a fixed
+10,000-update budget. The production optimizer, data permutation/cursor and
+all RNG states pass exact early replay. Sources, objective and prerequisites
+are frozen while it runs. Its authoritative state is
+`artifacts/codec_language_v68_20261105/status.json`; inspect the live PID before
+deciding that a stalled observation is a stopped job.
+
+The fixed [autonomous audit preparation](../references/codec_language_v68_audit_preparation.md)
+contains 128 Chinese questions from 64 shared-passage pairs and 64 English
+instructions across eight categories. Full prompts and first reference
+images match the existing development cache. Chinese question blanking uses
+the same Pango layout with white question ink; it preserves the passage and
+glyph advances. Preparation uses no actor calls. The final trained state and
+actual generated answers are still required before any language decision.
 
 The [latest physics/math review](../references/physics_math_after_codec_20261105.md)
 connects recent feature-learning and continuous-generation work to this
@@ -52,8 +77,9 @@ optimization, posterior-sampling diagnostics or a new generative architecture.
 
 Complete prompt-dependent instruction learning remains required. The next
 [publication revision plan](../references/direct_writer_results_publication_plan.md)
-requires the final audited result and matching editable figures before editing
-the current verified Nature package.
+uses the completed V65–V67 evidence and the qualified new actor to update the
+current verified Nature package with matching editable figures. V68's running
+state cannot be presented as a language result.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
