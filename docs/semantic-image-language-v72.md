@@ -11,8 +11,12 @@ The actor has no tokenizer, OCR, Unicode IDs, language vocabulary head,
 persistent glyph inventory or teacher service. Qwen3-VL 8B source pretraining
 and the earlier trained writing codec remain external foundations. The
 38.65M count describes the new writer, not the complete inherited actor.
-This is a new candidate under training; useful autonomous language generation
-has not yet been established.
+The fixed training and audit are complete. The candidate fails qualification:
+zero of 128 Chinese answers are exact, with 29.386% foreground F1. The
+[completed result](../references/semantic_ilm_v72_result.md) records every
+gate and the measured denoising obstruction. The
+[full-dimensional glyph control](../references/full_rank_flow_v73_control_protocol.md)
+tests a repair prerequisite; it is not a language-success result.
 
 ![Complete training and image-output computation](../publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
 
@@ -94,8 +98,9 @@ artifacts/external/mixar_env_py312/bin/python scripts/run_semantic_ilm_v72.py \
   --run artifacts/semantic_ilm_v72_20261105
 ```
 
-The active process already runs in tmux session `ilm-semantic-v72`; inspect its
-status before launching a duplicate. An exclusive GPU lock and memory checks
+The retained run has completed, and its model processes have exited. The
+coordinator's completed-verification status records execution integrity;
+language qualification failed. An exclusive GPU lock and memory checks
 guard each model stage. GPU 1 belongs to other work. Safe restart preserves
 cache identity and resumes the serialized production checkpoint. A hard
 interruption can replay at most the updates since the last 500-update save.

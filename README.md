@@ -20,20 +20,28 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current run: visual semantics to continuous image answers
+## Current result: continuous image writing fails qualification
 
 ![Implemented visual-semantic training and physical image-output feedback](publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
 
-A complete causal writer is implemented and the full-data pipeline is running
+A complete causal writer has finished the full-data pipeline
 on physical GPU 0. It conditions on frozen image-derived semantic states and
 generates answer pixels through a joint continuous code flow, rereading every
 emitted block. The writer has **38.65M trainable parameters**; the inherited
 reader remains a larger externally pretrained foundation. Runtime inference
 uses no tokenizer, OCR, language output head or teacher service.
 
-Real-example causality, bit-exact resume and physical-feedback checks pass.
-The full 12,976-example cache, 40,000-update run and unchanged autonomous audit
-remain in progress. **Useful image-language generation is not yet proven.**
+The 12,976-example cache, 40,000-update run and 384-output autonomous audit
+are complete and independently scored. Chinese exact answers are **0/128**,
+with **29.386% foreground F1**; four of the six original Chinese requirements
+fail. **This candidate is not a usable image-language model.**
+
+A source-bound diagnosis finds a denoising obstruction: the 1,536-dimensional
+flow ends in a width-768 projection, leaving 767 noise directions outside its
+affine output span. CPU trajectory checks confirm that this noise remains.
+A [full-dimensional glyph control](references/full_rank_flow_v73_control_protocol.md)
+is implemented for testing the repair; it has no language-success claim.
+See the [completed result and mathematical diagnosis](references/semantic_ilm_v72_result.md).
 See the [training, inference and data-location guide](docs/semantic-image-language-v72.md),
 [verified reader diagnostic](references/native_visual_transfer_v71_result.md)
 and [current manuscript](publication/ilm-nature/README.md).

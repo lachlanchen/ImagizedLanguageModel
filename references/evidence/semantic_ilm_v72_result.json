@@ -1,0 +1,121 @@
+{
+  "source_run": "artifacts/semantic_ilm_v72_20261105",
+  "source_files_sha256": {
+    "training/training_report.json": "ebcc50bda82ab787a60d728b6224bd8814b43312cc73061b4faea7d5324d2293",
+    "development/report.json": "4490d6a2e56ee3b874ad0ba4c88bd2c692068e99398f8b12ebac8f5278fd8de7",
+    "verification.json": "1aa5893eb29a67c7e5b0d3f38a868e9a922cc5cefc2bb8d399cff8a577c58db6",
+    "diagnosis/flow_rank_first128.json": "0f3212355fcedacc75865238f0194e2235f8f5ac693788dcd7157ff397fb24c5",
+    "diagnosis/flow_rank_noise_invariance.json": "e6386e36186dcfd63c36211b74b85fe671b92275ab52d5071c3a5900504f1422"
+  },
+  "training": {
+    "updates": 40000,
+    "draws": 640000,
+    "completed_epochs": 49,
+    "checkpoint_sha256": "20e0c9289182580fd0062d272e7bc470476b05fa4c105b9ece84a2982fe8ce87",
+    "trainable_parameters": 38651649,
+    "active_elapsed_seconds": 2510.2564085908234,
+    "peak_allocated_vram_gib": 1.1546216011047363
+  },
+  "audit": {
+    "generations": 384,
+    "elapsed_seconds": 853.4917073100805,
+    "setup_seconds": 79.6484439726919,
+    "peak_allocated_vram_gib": 18.294472217559814
+  },
+  "verification": {
+    "all_384_outputs_independently_scored": true,
+    "full_training_cache_payloads_verified": 12976,
+    "measurements": {
+      "cmrc": {
+        "normal": {
+          "foreground_f1": 0.29385603682356676,
+          "exact": 0.0,
+          "blank": 0.0,
+          "blocks": 3.5,
+          "stopped": 1.0
+        },
+        "blank": {
+          "foreground_f1": 0.21873047476780383,
+          "exact": 0.0,
+          "blank": 0.0,
+          "blocks": 4.6484375,
+          "stopped": 1.0
+        }
+      },
+      "dolly": {
+        "normal": {
+          "foreground_f1": 0.14393819628562077,
+          "exact": 0.0,
+          "blank": 0.0,
+          "blocks": 35.15625,
+          "stopped": 0.9375
+        },
+        "blank": {
+          "foreground_f1": 0.07838186522038801,
+          "exact": 0.0,
+          "blank": 0.0,
+          "blocks": 6.609375,
+          "stopped": 1.0
+        }
+      }
+    },
+    "paired_both_correct": 0.0,
+    "question_effect": {
+      "mean": 0.0751255620557629,
+      "ci95": [
+        0.057270124024924284,
+        0.09630843928843226
+      ],
+      "articles": 64,
+      "replicates": 2000,
+      "seed": 20266831
+    },
+    "gates": {
+      "chinese_exact": false,
+      "chinese_foreground_f1": false,
+      "both_correct_pairs": false,
+      "question_gain": false,
+      "question_gain_ci_positive": true,
+      "learned_stopping": true
+    },
+    "bounded_chinese_development_pass": false,
+    "general_language_qualified": false,
+    "general_ilm_goal_complete": false
+  },
+  "rank_diagnosis": {
+    "output_weight_shape": [
+      1536,
+      768
+    ],
+    "affine_output_span_rank": 769,
+    "unconstrained_noise_dimensions": 767,
+    "noise_only_expected_velocity_mse_floor": 0.4993489583333333,
+    "measured_example_balanced_target_orthogonal_energy_per_coordinate": 0.15075257506693057,
+    "real_arithmetic_expected_velocity_mse_floor_on_sample": 0.6501015334002639,
+    "sample_examples": 128,
+    "sample_blocks": 3619,
+    "floating_point_scope": "output weights are BF16-rounded as used by autocast; elementwise output rounding can create small departures from the exact subspace, so the analytic floor is stated for real arithmetic"
+  },
+  "noise_invariance": [
+    {
+      "precision": "CPU FP32",
+      "output_span_dimension": 769,
+      "initial_perpendicular_rms": 0.6996848207115702,
+      "final_perpendicular_rms": 0.6996848226916149,
+      "perpendicular_drift_rms": 1.1031266994674099e-07,
+      "maximum_velocity_perpendicular_rms": 1.1411079464922961e-07,
+      "qr_orthonormality_max_error": 8.881784197001252e-16
+    },
+    {
+      "precision": "CPU BF16 autocast",
+      "output_span_dimension": 769,
+      "initial_perpendicular_rms": 0.6996276453457828,
+      "final_perpendicular_rms": 0.6996144542039346,
+      "perpendicular_drift_rms": 0.000207290849978696,
+      "maximum_velocity_perpendicular_rms": 0.0013129846246910102,
+      "qr_orthonormality_max_error": 8.881784197001252e-16
+    }
+  ],
+  "external_pretraining": true,
+  "language_quality_claim": false
+}
