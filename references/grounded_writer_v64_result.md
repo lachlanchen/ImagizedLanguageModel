@@ -23,8 +23,9 @@ from 12,976 complete-line examples, with all inherited vision/context weights
 frozen. Training reaches 15.801 GiB peak allocated memory. The resumed audit's
 CUDA peak resets to 15.514 GiB and must not be reported as the whole run's peak.
 The durable update-10,000 training elapsed counter is 1,499.890 s; the final
-resumed report records 1,553.787 s including recovery setup/evaluation. Both
-describe local work and exclude external foundation pretraining.
+resumed report records 1,553.787 s including evaluation. The timer resets after
+model loading/checkpoint restoration, so both exclude those setup operations
+and external foundation pretraining. They are not complete wall-clock costs.
 
 The final EMA was saved before the initial evaluator failed to create its
 destination. No development output existed at that failure. The recovery

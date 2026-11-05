@@ -26,12 +26,17 @@ polarity correction; the original invalid comparator is retained. This
 isolates an immediate failure of the tested flow route, without establishing
 language or unseen-image generalization. The V64/V65 sources remain frozen.
 
-The next production stage is [direct-writing bootstrap](../references/direct_writer_learning_v66_protocol.md)
-over all 12,976 Chinese/English training examples, with a fixed 10,000-update
-budget and the unchanged 128-case reused-development component gates. It
-initializes from the verified direct-fitting EMA and keeps the full inherited
-actor resident. Complete prompt-dependent instruction learning remains
-required after faithful writing qualifies.
+The actual [direct-writing bootstrap](../references/direct_writer_learning_v66_protocol.md)
+is running on GPU 0 in `ilm-direct-writer`, drawing from all 12,976
+Chinese/English training examples, with a fixed 10,000-update budget and the
+unchanged 128-case reused-development component gates. Exact early optimizer,
+EMA, sampling and global RNG replay passes. It initializes from the verified
+direct-fitting EMA and keeps the full inherited actor resident, with measured
+training allocation around 15.804 GiB. Its fixed final quality audit is pending.
+Complete prompt-dependent instruction learning remains required after faithful
+writing qualifies. The next [publication revision plan](../references/direct_writer_results_publication_plan.md)
+requires the final audited result and matching editable figures before editing
+the current verified Nature package.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine

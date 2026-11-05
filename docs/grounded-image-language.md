@@ -119,3 +119,16 @@ Artifacts and exact-resume evidence remain under
 and the owned trainer/tmux session have exited. All 256 raw image scores pass
 independent CPU recomputation. Faithful writing still needs repair before
 instruction learning can establish an autonomous image-language model.
+
+The subsequent [matched diagnosis](../references/writer_factorial_v65_result.md)
+shows that this output architecture can recover a finite fitting set directly:
+63/64 exact blocks from inherited features, compared with zero from the tested
+flow route. Both arms use common initial weights and exposure. This establishes
+a fitting result, not generalization. The [new direct-writing curriculum](../references/direct_writer_learning_v66_protocol.md)
+is training on all available 12,976 Chinese/English examples on GPU 0, with
+the same fixed 128 reused-development blocks and unchanged component gates.
+Its final quality measurement is pending. The complete inherited body remains
+resident; only the output writer trains. `DirectBlockWriter.sample` uses one
+forward pass and rejects a multistep flow request. The legacy actor generation
+entry point must explicitly receive `flow_steps=1` when this writer is attached.
+Its untrained stopping head and semantic instruction stage remain unqualified.
