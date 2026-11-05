@@ -76,6 +76,14 @@ waits for the same trainer to finish, then runs all normal/control generations
 and an independent raw-output verifier. It allocates no model while waiting;
 the evaluator preflight is not a language result.
 
+The [image-file inference interface](codec-image-inference.md) now passes eight
+CPU checks. All 384 prepared prompt paths match exactly through both explicit
+page and strip input; native block/event serialization and early rejection of
+unfinished training also pass. Typed Chinese/English examples run through the
+existing host renderer and new input command. These checks make the final
+actor accessible through image files, but do not execute final-model inference,
+qualify scanned-page understanding or establish standalone deployment.
+
 The [latest physics/math review](../references/physics_math_after_codec_20261105.md)
 connects recent feature-learning and continuous-generation work to this
 decision. Its registered CPU diagnostic measures frozen-codec robustness at

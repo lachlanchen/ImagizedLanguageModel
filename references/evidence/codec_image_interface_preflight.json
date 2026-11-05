@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "all_384_real_prompts_exact_in_both_explicit_layouts": true,
+    "grayscale_alpha_padding_and_owning_tensor_round_trip": true,
+    "completed_input_record_immutable": true,
+    "oversized_ambiguous_and_nonbinary_strips_rejected": true,
+    "two_actual_execution_blocks_and_events_serialized_exactly": true,
+    "stopping_empty_output_and_immutability_distinctions": true,
+    "actual_cpu_preparation_command": true,
+    "actual_unfinished_training_rejected_before_cuda": true
+  },
+  "source_commit": "0ceb58daa8f55693683f81aa58abc8a65b5cec63",
+  "source_sha256": {
+    "ilm/visual_lm/codec_image_interface.py": "82612fb6962749627b3b5e135f192c3cbb2671ef5e652ceb0d566f0a437285d5",
+    "scripts/infer_codec_language_v68.py": "87caac3641e8d61e89f216e73c18c26c6e35b1ad107ff8f48e61c5dba1e0a88f",
+    "scripts/check_codec_image_interface.py": "03ea52fcadd21b6a148435433d5af68c8734ab4e792e44c5ccdae0685ead4f0d",
+    "references/codec_image_interface_plan.md": "c1bc71421d04839b905da876b23847dbb9031136881172a9dddaf40ebca53d29"
+  },
+  "prepared_data_sha256": "4f90406b51670e4e82327d1396e1c954e62bfb5d7b31c437b5c59e88a9180fe5",
+  "actual_prompt_paths": 384,
+  "explicit_input_layouts": 2,
+  "actual_prior_execution_blocks_serialized": 2,
+  "original_execution_report_sha256": "960a79cd02eab2b9f084a926dc137bef275356cec3ae9df26a567acc33d7f0ba",
+  "original_execution_png_sha256": "2e8c3e99e81149d9b81392bd46a76d2562bb194d3afd7eddd3faef398b211698",
+  "output_serialization_does_not_reexecute_actor": true,
+  "elapsed_seconds": 10.551561333239079,
+  "model_calls": 0,
+  "gpu_allocations": 0,
+  "final_actor_inference_tested": false,
+  "standalone_export_verified": false,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
