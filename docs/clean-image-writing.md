@@ -82,6 +82,24 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
   --out artifacts/clean_data_recheck.json
 ```
 
+The [literal-writing transfer diagnostic](../references/copy_transfer_v75_protocol.md)
+contains 12 new requests in Chinese, English and digits. CPU preparation
+preserves all marks and confirms that none of the prompt rasters occurs in
+the admitted training corpus. This is prepared evaluation data, with zero
+model calls or performance claims. A separate lightweight coordinator can
+wait for the exact live full-corpus process and then generate and independently
+score these images after the original audit finishes:
+
+```bash
+PYTHONPATH=. artifacts/external/mixar_env_py312/bin/python \
+  scripts/run_copy_transfer_after_v75.py
+```
+
+It starts no GPU work while the main coordinator is alive, verifies the main
+run's terminal receipt, and uses the same shared GPU lock for its model stage.
+An interrupted or failed original run does not trigger a replacement training
+job. Copy-probe scores are descriptive and do not replace the original gates.
+
 | Location under the full run | Contents |
 | --- | --- |
 | cache/ | Link to the existing authenticated V72 cache |
