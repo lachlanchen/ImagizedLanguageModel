@@ -1,0 +1,46 @@
+{
+  "actor_image_generation_calls": 0,
+  "actual_reference_calls": 8,
+  "artifacts_sha256": {
+    "artifacts/grounded_context_transfer_20261105/check/native_positions.json": "633e3c8dd9ee8f066574963c9e1957b51cb3878a4a814a915cf826a59339a1d6",
+    "artifacts/grounded_context_transfer_20261105/check/reference/0.json": "f9c97afff0c358993e2f6f730ff9d0b5301fe40e242200a1c0c8970b8f1a907b",
+    "artifacts/grounded_context_transfer_20261105/check/reference/1.json": "5292568e2e4fcc200fd731e6e21fe686c4a76e3be2377f5540674c372ca51e69",
+    "artifacts/grounded_context_transfer_20261105/check/reference/2.json": "4f8ec2a1d221d834422663e1427527cb35228e84978a3dbdb336d6599513bc3a",
+    "artifacts/grounded_context_transfer_20261105/check/reference/3.json": "ab1beb9e08543962d79944286136b4d9bbfa3c345ff5bc6928a44a471a473159",
+    "artifacts/grounded_context_transfer_20261105/check/reference/4.json": "f87ab7903de070c66d24c4311bfd172a9a589df55865fa17940708ace71be292",
+    "artifacts/grounded_context_transfer_20261105/check/reference/5.json": "51528475a9566aa3ea276b52bc955b41c2c03ad148dd8a1cbd889acbc960da90",
+    "artifacts/grounded_context_transfer_20261105/check/reference/6.json": "dd80e6d5e3382119e01224e2de6b76318d6bb22df90ff048ed5564f4a7b1904b",
+    "artifacts/grounded_context_transfer_20261105/check/reference/7.json": "503df84b504f35d1afdc0affcbad179ba249c393136b2402f2c3cab12868892c",
+    "artifacts/grounded_context_transfer_20261105/check/reference_runtime/cleanup.json": "3e61a1c38122a55fb8642c600a384fe03ce592e29ae67bb3142d23a420685509",
+    "artifacts/grounded_context_transfer_20261105/check/report.json": "dc6d510f1aed60d974c0487455efaf872a174121f31f1030b4dcbf87bfc17a05"
+  },
+  "checks": {
+    "actor_vocabulary_absent": true,
+    "coarsened_kl": true,
+    "eight_cases": true,
+    "finite_logits": true,
+    "first_token_agreement": true,
+    "reference_position_agreement": true,
+    "source_engine_released": true,
+    "source_identity_unchanged": true
+  },
+  "coarsened_kl_mean_nats": 0.00026375833439041136,
+  "elapsed_seconds": 103.8315665917471,
+  "first_token_agreement": 1.0,
+  "general_ilm_goal_complete": false,
+  "helper_only_vocabulary": true,
+  "language_quality_claim": false,
+  "passed": true,
+  "peak_allocated_vram_gib": 18.700608730316162,
+  "positions": 9,
+  "reference_position_agreement": 1.0,
+  "scope": "Eight text-only source-engine sanity cases, not full equivalence or image-language quality.",
+  "source_model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "source_response_cases": 8,
+  "source_sha256": {
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "references/inherited_context_check_plan.md": "6a6071eb8a6748fe5724a9347500669458d3cc95c34825fd515be863f9854e83",
+    "scripts/check_inherited_context.py": "ab4bfb549e8557e33af9f61e3f32dac2871b5ab222fce152568b5724022559bb"
+  }
+}

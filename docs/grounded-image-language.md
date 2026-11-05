@@ -92,3 +92,17 @@ Core interfaces in `ilm/visual_lm/grounded_image_actor.py`:
 The preflight's two-update image is noise. Actual writing/instruction training,
 independent quality tests, foundation-engine equivalence and final standalone
 offline export remain outstanding. The general image-language goal stays open.
+
+The subsequent [offline source check](../references/inherited_context_check_result.md)
+matches all eight first-token choices and nine returned reference positions,
+with 0.000264-nat mean coarsened distribution difference. Its tokenizer and
+temporary source head exist only in that helper, never in the actor. This
+small text-only sanity check supports the initialization; full equivalence
+and image-language quality remain unproved.
+
+The [writing-stage protocol](../references/grounded_writer_learning_protocol.md)
+specifies 10,000 actual updates over Chinese/English image blocks before
+instruction learning. `scripts/train_grounded_writer.py` includes checkpoint
+resume verification, EMA, deterministic sampling and a fixed final component
+evaluation. Reconstruction is a prerequisite output-path test, not a language
+answer qualification.
