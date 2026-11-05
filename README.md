@@ -53,6 +53,8 @@ exactly**, with 99.9967% original-image F1. All answers stop correctly.
 This is a training-set capacity check after 2,000 passes, with an externally
 pretrained reader; **unseen language understanding is still unproved**.
 [Paired control, raw answers and checkpoint location](references/clean_learning_v74_result.md).
+The [clean-writing guide](docs/clean-image-writing.md) gives the PNG inference
+command and full-corpus training/audit entry point.
 See the [training, inference and data-location guide](docs/semantic-image-language-v72.md),
 [verified reader diagnostic](references/native_visual_transfer_v71_result.md)
 and [current manuscript](publication/ilm-nature/README.md).

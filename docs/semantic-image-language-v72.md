@@ -1,5 +1,9 @@
 # Training a causal image-language writer
 
+The commands here reproduce the failed V72 velocity candidate. For the
+separately trained clean writer, its 32-example learning result and the
+next full-corpus run, use the [clean image-writing guide](clean-image-writing.md).
+
 This candidate reads a prompt image and generates an answer as physical
 32-by-64 image blocks. A frozen inherited vision/contextual body supplies
 prompt semantics. A 38,651,649-parameter causal writer predicts a joint
