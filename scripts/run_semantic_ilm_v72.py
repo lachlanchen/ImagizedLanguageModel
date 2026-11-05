@@ -2,6 +2,7 @@
 """Persistent, serial cache -> train -> autonomous-audit pipeline on GPU 0."""
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -16,6 +17,43 @@ def atomic(path,value):
     temporary = path.with_suffix(".partial")
     temporary.write_text(json.dumps(value,indent=2)+"\n")
     temporary.replace(path)
+
+
+def sha(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda:stream.read(1024**2),b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def phase_already_complete(out,stage):
+    """Never rewrite completed prerequisite reports during pipeline restart."""
+    if stage=="cache" and (out/"cache/report.json").exists():
+        report = json.loads((out/"cache/report.json").read_text())
+        if report["complete"]:
+            if report["completed"]!=12976 or len(report["files_sha256"])!=12976:
+                raise ValueError("completed cache has the wrong admitted inventory")
+            if sha(out/"cache/recipe.json")!=report["recipe_sha256"]:
+                raise ValueError("completed cache recipe changed")
+            for name,digest in report["files_sha256"].items():
+                if sha(out/"cache"/name)!=digest:
+                    raise ValueError("completed cache payload changed")
+            return True
+    if stage=="train" and (out/"training/training_report.json").exists():
+        report = json.loads((out/"training/training_report.json").read_text())
+        if (report["updates"]!=40000 or report["draws"]!=640000
+                or sha(out/"training/checkpoint_latest.pt")!=report["checkpoint_sha256"]
+                or sha(out/"cache/report.json")!=report["identity"]["cache_report_sha256"]):
+            raise ValueError("completed training identity changed")
+        return True
+    if stage=="audit" and (out/"development/report.json").exists():
+        report = json.loads((out/"development/report.json").read_text())
+        if (report["generations"]!=384 or sha(out/"training/training_report.json")!=report["identity"]["training_report_sha256"]):
+            raise ValueError("completed audit identity changed")
+        # The next mandatory CPU verification authenticates every raw output.
+        return True
+    return False
 
 
 def main():
@@ -42,6 +80,9 @@ def main():
     completed = []
     for stage,command in phases:
         begun = time.time()
+        if phase_already_complete(out,stage):
+            completed.append(dict(stage=stage,reused_verified_prerequisite=True))
+            continue
         env = environment if stage!="verify" else dict(environment,CUDA_VISIBLE_DEVICES="")
         with (out/(stage+".log")).open("a") as log:
             child = subprocess.Popen([sys.executable,*command],cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
