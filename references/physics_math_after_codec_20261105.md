@@ -311,3 +311,24 @@ The new work strengthens the rationale for this bounded experiment. The
 required result remains useful unseen prompt-to-answer images from an
 independent actor. It does not become a singularity claim, a frontier-parity
 claim or a claim that foundation training has been reduced to one GPU.
+
+## Completed linear recoverability test
+
+The [V69 readout study](conditional_readout_v69_result.md) now removes iterative
+optimization from a bounded linear prediction test. Training-only calibration
+selects centered ridge maps on frozen contextual states; a joint head also
+allows each output to depend on both writing queries. On the existing Chinese
+development prompts, first-block F1 improves from 38.012% to 44.726% for the
+shared head and 45.228% for the joint head. Neither predicts an exact block.
+The controls retain resolved question sensitivity. All 3,584 physical outputs
+are independently replayed on CPU.
+
+These results establish a limited recoverable signal, not semantic sufficiency
+or a lower bound against other nonlinear readouts. The selected regularized
+maps do not test arbitrary linear interpolation either. A source-bound
+supplied-code control preserves almost all foreground ink on the same images.
+Further work must improve the conditional prediction path. Before choosing a
+new density or semantic-distillation objective, a native visual-question
+baseline should distinguish inherited source-model capability from its
+transfer through the current image-only interface. The existing source-engine
+sanity check covers eight text prompts, not this visual task.

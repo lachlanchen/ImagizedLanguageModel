@@ -20,6 +20,20 @@ generated-history drift; the conditional prediction path needs repair. No
 diagnostic optimizer updates are made. General useful language remains
 unachieved.
 
+The completed [V69 conditional readout diagnostic](../references/conditional_readout_v69_result.md)
+fits centered shared and joint linear heads on 512 training records, with
+training-only calibration. The frozen actor supplies 896 prompt states;
+all 192 original first-stop decisions and first blocks replay exactly.
+Shared ridge raises Chinese first-block F1 from 38.012% to 44.726%, while
+joint ridge reaches 45.228%. Both retain zero exact Chinese and English
+development blocks. Independent CPU verification checks all 3,584 decoded
+predictions. This first-block test ignores stopping and does not qualify
+complete answers. A post-hoc supplied-code control reconstructs 114/128 Chinese
+and 64/64 English blocks exactly, preserving the distinction between physical
+writing and conditional prediction. GPU 0 is released. The next intervention
+must improve accurate conditional writing; nonlinear readouts, feature
+learning and offline semantic supervision remain possibilities to test.
+
 The actual [grounded writer learning stage](../references/grounded_writer_v64_result.md)
 has completed 10,000 updates on GPU 0 and fails both reconstruction gates.
 Correct-condition foreground F1 is 34.000% versus 21.420% shuffled, with no
