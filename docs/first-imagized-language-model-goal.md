@@ -43,6 +43,15 @@ These are preparation results for a later full-line comparison, not data
 adopted by the active V63 run or a new language pass. See the
 [complete-writing guide](complete-writing-data.md).
 
+A separate CPU-only [cached-backbone check](cached-language-trunks.md)
+authenticates the existing local Qwen archives. Their 1.409B and 3.634B plain
+transformer trunks match every installed parameter shape after excluding
+vocabulary input/output matrices. The bounded weight source needs no model
+service or new download. This is a possible externally pretrained
+initialization, not an image-language actor or a language result. Image/state
+alignment, generation, suitable optimizer memory and independent evaluation
+still require real training. The current V63 experiment remains unchanged.
+
 V62's matched experiment is now complete. Eight whole-image experts improve
 held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
 0.815%, but both arms still have zero exact primary answers and zero correct

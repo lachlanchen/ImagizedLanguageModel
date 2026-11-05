@@ -1,0 +1,258 @@
+{
+  "sources": {
+    "qwen3/1.7b": {
+      "manifest_sha256": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+      "model_sha256": "3d0b790534fe4b79525fc3692950408dca41171676ed7e21db57af5c65ef6ab6",
+      "model_bytes": 1359279776
+    },
+    "qwen3/4b-q4_K_M": {
+      "manifest_sha256": "2bfd38a7daaf4b1037efe517ccb73d1a3bbd4822cf89f1a82be1569050a114e0",
+      "model_sha256": "163553aea1b1de62de7c5eb2ef5afb756b4b3133308d9ae7e42e951d8d696ef5",
+      "model_bytes": 2620774592
+    },
+    "qwen3-vl/8b-instruct-q4_K_M": {
+      "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+      "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+      "model_bytes": 6140392672
+    }
+  },
+  "cpu_only": true,
+  "model_generation_calls": 0,
+  "gpu_allocations": 0,
+  "teacher_service_calls": 0,
+  "model_weights_downloaded_or_copied": false,
+  "training_environment_modified": false,
+  "active_V63_modified": false,
+  "language_quality_claim": false,
+  "elapsed_seconds": 65.37131258659065,
+  "process_peak_rss_mib": 1194.3046875,
+  "gguf_source_sha256": {
+    "gguf/__init__.py": "3ccfc0104cd7ea88c6028743b7bf3f2c89b5f474425de03a217a6072320d7c2f",
+    "gguf/constants.py": "639112849d10744833d25ec5659403407bc13504bb1a596cab897f1508577793",
+    "gguf/gguf.py": "f0c0eeedad0911784b52ffed8e162a0eb5ae6d535ce35705bc16196e46597a72",
+    "gguf/gguf_reader.py": "f1784b59de0f6ef5454091acd0997214a0c3151c0f33ee1f6394eca8441a0002",
+    "gguf/gguf_writer.py": "ea21da6125bcadde7afee10659d2c3b1b2806a85f5047f2038cdc61346cdb313",
+    "gguf/lazy.py": "ec35541320443e1bdc293e39c699fa5d1adb7fb594f3f87af093b4c756a4ebe2",
+    "gguf/metadata.py": "c871748f49f7fb8e67aa9a18867adf8a8ba862f0f1f4a89a0a0e285daa52a312",
+    "gguf/quants.py": "2c927a1b3d9f0920dcf4007fb686e1b0999333e9f65ce43dcc689900c0beae8b",
+    "gguf/tensor_mapping.py": "3e51b1e21eb13d6dd389629608a70d7305cbcf4aa943deb4fbfdc16373a33f5b",
+    "gguf/utility.py": "da920e2c62166ec9f30e407e9fb35ec29fda671310ffbf0f8ce856b62f1c70d7",
+    "gguf/vocab.py": "16cddd93700f86c8b72e6f9e741e2362189155b9f96aa9e3bbb0995060095f1a"
+  },
+  "installed_qwen3_source_sha256": "d96eeea4c000abaa70a7c0277437d0843b5b2d005ab233e0ffcaf860a357f1aa",
+  "limitations": "Inventory, meta-shape compatibility and bounded dequantization only. No image-language interface is trained, no full model executes, and dense BF16 storage is not measured training VRAM. Stored scalar totals can count duplicated tied matrices.",
+  "models": {
+    "qwen3/1.7b": {
+      "architecture": "qwen3",
+      "groups": {
+        "transformer": {
+          "tensors": 309,
+          "stored_scalar_entries": 1409410048,
+          "packed_tensor_bytes": 923045888
+        },
+        "vision": {
+          "tensors": 0,
+          "stored_scalar_entries": 0,
+          "packed_tensor_bytes": 0
+        },
+        "vocabulary": {
+          "tensors": 2,
+          "stored_scalar_entries": 622329856,
+          "packed_tensor_bytes": 430282752
+        }
+      },
+      "quantization_tensor_counts": {
+        "Q6_K": 15,
+        "F32": 113,
+        "Q4_K": 155,
+        "F16": 28
+      },
+      "tensor_inventory_sha256": "18e0dd1634b2232b1ff86b31a8b940736716662eb4e70ae8783e1c3cc3456033",
+      "configuration": {
+        "vocab_size": 0,
+        "hidden_size": 2048,
+        "intermediate_size": 6144,
+        "num_hidden_layers": 28,
+        "num_attention_heads": 16,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 40960,
+        "rope_theta": 1000000.0,
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "all_trunk_names_and_shapes_match": true,
+      "meta_vocabulary_rows": 0,
+      "retained_trunk_parameters": 1409410048,
+      "calculated_dense_bf16_trunk_gib": 2.6252307891845703,
+      "bounded_real_weight_checks": [
+        {
+          "name": "norm.weight",
+          "shape": [
+            2048
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 102.92913055419922,
+          "sha256": "092f1babd33c6b1892f113fbad61fdb12f80bf45470849c8d9f6c83d9c8a2602"
+        },
+        {
+          "name": "layers.0.self_attn.q_proj.weight",
+          "shape": [
+            2048,
+            2048
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 72.02362060546875,
+          "sha256": "d5c896c0fdf4e2e1e3630760e8f4d99683b68546632c9442940b62b9818a7c60"
+        },
+        {
+          "name": "layers.27.mlp.down_proj.weight",
+          "shape": [
+            2048,
+            6144
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 123.98976135253906,
+          "sha256": "5db20cfc25040c0c75170ea45e8ff269715872c8bbf23e0687942d27fc505008"
+        }
+      ],
+      "vocabulary_accessor_rejected": true,
+      "calculated_five_FP32_state_arrays_gib": 26.252307891845703
+    },
+    "qwen3/4b-q4_K_M": {
+      "architecture": "qwen3",
+      "groups": {
+        "transformer": {
+          "tensors": 397,
+          "stored_scalar_entries": 3633511936,
+          "packed_tensor_bytes": 2295752704
+        },
+        "vision": {
+          "tensors": 0,
+          "stored_scalar_entries": 0,
+          "packed_tensor_bytes": 0
+        },
+        "vocabulary": {
+          "tensors": 1,
+          "stored_scalar_entries": 388956160,
+          "packed_tensor_bytes": 319065600
+        }
+      },
+      "quantization_tensor_counts": {
+        "F32": 145,
+        "Q6_K": 19,
+        "Q4_K": 198,
+        "F16": 36
+      },
+      "tensor_inventory_sha256": "d2ee96c805f99fa7f2180ca73d43a95a3aaed22f275e0ece1302b6f52e5462e9",
+      "configuration": {
+        "vocab_size": 0,
+        "hidden_size": 2560,
+        "intermediate_size": 9728,
+        "num_hidden_layers": 36,
+        "num_attention_heads": 32,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 40960,
+        "rope_theta": 1000000.0,
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "all_trunk_names_and_shapes_match": true,
+      "meta_vocabulary_rows": 0,
+      "retained_trunk_parameters": 3633511936,
+      "calculated_dense_bf16_trunk_gib": 6.767943382263184,
+      "bounded_real_weight_checks": [
+        {
+          "name": "norm.weight",
+          "shape": [
+            2560
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 141.52671813964844,
+          "sha256": "46732ad8578cbf523fc22f4d5b3933d2ff15b8b3ef9f13cbf67036dccf5bda6f"
+        },
+        {
+          "name": "layers.0.self_attn.q_proj.weight",
+          "shape": [
+            4096,
+            2560
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 75.38114929199219,
+          "sha256": "6ba896cc1f2e36a2ec9d41367f216ed1bd140658fd5cdced9dc7543afd40766c"
+        },
+        {
+          "name": "layers.35.mlp.down_proj.weight",
+          "shape": [
+            2560,
+            9728
+          ],
+          "dtype": "float32",
+          "finite": true,
+          "norm": 113.4848403930664,
+          "sha256": "3245bf8c31a0b37ec215f9971230d0b2605f7634f7a0d3474504e3e0ea4cf9ec"
+        }
+      ],
+      "vocabulary_accessor_rejected": true,
+      "calculated_five_FP32_state_arrays_gib": 67.67943382263184
+    },
+    "qwen3-vl/8b-instruct-q4_K_M": {
+      "architecture": "qwen3vl",
+      "groups": {
+        "transformer": {
+          "tensors": 397,
+          "stored_scalar_entries": 6946075648,
+          "packed_tensor_bytes": 4159098880
+        },
+        "vision": {
+          "tensors": 459,
+          "stored_scalar_entries": 576388336,
+          "packed_tensor_bytes": 1114136512
+        },
+        "vocabulary": {
+          "tensors": 2,
+          "stored_scalar_entries": 1244659712,
+          "packed_tensor_bytes": 860565504
+        }
+      },
+      "quantization_tensor_counts": {
+        "Q4_K": 219,
+        "F32": 432,
+        "Q6_K": 35,
+        "F16": 145,
+        "Q8_0": 15,
+        "Q5_0": 12
+      },
+      "tensor_inventory_sha256": "4a47b40f992fb6702508454e021d7c89b188e8ec5afc7300c7a07c1ed61d9950",
+      "trunk_mapping_tested": false
+    }
+  },
+  "full_report": "artifacts/cached_language_trunks_20261105/report.json",
+  "full_report_sha256": "79446322ec80d22b5d888ad8badcf41d6b84bb7a65deec085293fb514fe7cc75",
+  "provenance": {
+    "scripts/inspect_cached_language_trunks.py": "c03996694148023641e88eb9419ac8794f664e340111613987d42fad7ae7e3b2",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "references/cached_language_trunk_feasibility_plan.md": "ac29c98da1c1f0b585893b6f76146d46e4539242acec18d629b021aaedd98059"
+  },
+  "mapping_tests": {
+    "path": "tests/test_gguf_language_trunk.py",
+    "sha256": "2923de99e5fdc878da60459547c9ef4b5abc004152a1725e3c1d7399a18b5c6f",
+    "passed": 2,
+    "retained_mappings_checked": 706,
+    "comparison": "llama.cpp official Qwen3 tensor name map on the real two cached archives; source-dependent tests skip if those archives are absent"
+  }
+}
