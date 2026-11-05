@@ -6,6 +6,13 @@ case selection or threshold. The training process must complete all 10,000
 updates and release GPU 0 before an evaluator can load the final adaptation.
 Do not run a second owned model job while training is live.
 
+The [pre-generation layout correction](codec_language_v68_layout_control_correction.md)
+fixes a measured control confound before any answers are generated. Fold the
+normal prompt once and place its blank control in the identical source ranges;
+erasing ink must not reflow the page. Preserve the original CPU preflight and
+use corrected `audit_preflight/attempt02`. All cases, references, metrics and
+quality gates below remain unchanged.
+
 Pin prepared-data report
 `4f90406b51670e4e82327d1396e1c954e62bfb5d7b31c437b5c59e88a9180fe5`.
 Run all 192 questions under normal and blank controls: 384 actual image

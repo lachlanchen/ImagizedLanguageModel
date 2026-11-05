@@ -18,7 +18,8 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 WATCHED = ("scripts/queue_codec_language_audit_v68.py", "scripts/eval_codec_language_v68.py",
     "scripts/verify_codec_language_v68.py", "ilm/visual_lm/codec_language_audit.py",
-    "ilm/visual_lm/codec_language_runtime.py", "references/codec_language_v68_autonomous_audit.md")
+    "ilm/visual_lm/codec_language_runtime.py", "references/codec_language_v68_autonomous_audit.md",
+    "ilm/visual_lm/causal_visual_prefix.py", "references/codec_language_v68_layout_control_correction.md")
 
 
 def sha(path):
@@ -40,7 +41,7 @@ def main():
         original = subprocess.check_output(["git", "show", revision + ":" + name], cwd=ROOT)
         if hashlib.sha256(original).hexdigest() != digest:
             raise ValueError("commit the queued evaluation implementation before launch")
-    preflight = args.run / "audit_preflight/attempt01/report.json"
+    preflight = args.run / "audit_preflight/attempt02/report.json"
     data_check = json.loads(preflight.read_text())
     if not all(data_check["checks"].values()) or data_check["model_calls"] != 0:
         raise ValueError("actual CPU evaluator preflight must pass first")

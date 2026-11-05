@@ -19,10 +19,14 @@ from ilm.visual_lm.codec_language_audit import (
     AUDIT_DATA_SHA, CodecLanguageAuditData, output_strip, reference_scores, sha, summarize,
 )
 from ilm.visual_lm.codec_language_runtime import completed_identity, load_completed_actor
+from ilm.visual_lm.causal_visual_prefix import fold_writing_prompt
 from scripts.check_grounded_image_actor import ROOT, atomic_json
+from scripts.verify_codec_language_v68 import independent_actor_prompt
 
 SOURCES = ("scripts/eval_codec_language_v68.py", "ilm/visual_lm/codec_language_audit.py",
-    "ilm/visual_lm/codec_language_runtime.py", "references/codec_language_v68_autonomous_audit.md")
+    "ilm/visual_lm/codec_language_runtime.py", "references/codec_language_v68_autonomous_audit.md",
+    "scripts/verify_codec_language_v68.py", "ilm/visual_lm/causal_visual_prefix.py",
+    "references/codec_language_v68_layout_control_correction.md")
 DATA = ROOT / "data/general_instructions/codec_language_audit_v68_20261105"
 
 
@@ -41,14 +45,25 @@ def data_preflight(data, out, revision, sources):
         raise ValueError("CPU-only evaluator preflight required")
     out.mkdir(parents=True, exist_ok=False)
     checks = {}
+    legacy_mismatches = dict(cmrc=0, dolly=0)
     for index in range(192):
         value = data.payload(index)
+        normal = data.prompt(index)
+        original = fold_writing_prompt(value["prompt"].float().div(127.5).sub(1)[None, None].clone()).pixels
+        if not torch.equal(normal, original):
+            raise ValueError("normal actor pixels changed during control correction")
         for blank in (False, True):
             prompt = data.prompt(index, blank=blank)
             if (prompt.dtype != torch.float32 or prompt.device.type != "cpu" or prompt._base is not None
                     or prompt.storage_offset() != 0
                     or prompt.untyped_storage().nbytes() != prompt.numel() * prompt.element_size()):
                 raise ValueError("only owning prompt-pixel storage may enter generation")
+            if not torch.equal(prompt, independent_actor_prompt(value, blank=blank)):
+                raise ValueError("actor input does not match independent physical coordinates")
+            if prompt.shape != normal.shape or bool((prompt < normal).any()):
+                raise ValueError("blanking must preserve shape and only erase ink")
+        legacy = fold_writing_prompt(value["blank_prompt"].float().div(127.5).sub(1)[None, None].clone()).pixels
+        legacy_mismatches[data.cases[index]["source"]] += not torch.equal(legacy, data.prompt(index, blank=True))
         reference = value["references"][0]
         exact = reference_scores(reference, (reference,), stopped=True)
         wrong_stop = reference_scores(reference, (reference,), stopped=False)
@@ -62,6 +77,9 @@ def data_preflight(data, out, revision, sources):
     checks["all_192_source_bound_cases"] = True
     checks["all_384_prompt_storage_paths_owning"] = True
     checks["reference_stop_width_empty_distinctions"] = True
+    checks["all_192_normal_actor_inputs_unchanged"] = True
+    checks["all_384_actor_inputs_match_independent_numpy_coordinates"] = True
+    checks["all_192_blank_shapes_match_normal_and_only_erase_ink"] = True
     # Test the registered aggregation with measured physical reference scores,
     # not a mock actor or a claim about generated language.
     ideal = {}
@@ -86,6 +104,8 @@ def data_preflight(data, out, revision, sources):
         raise AssertionError(checks)
     report = dict(checks=checks, source_commit=revision, sources=sources,
         prepared_data_sha256=AUDIT_DATA_SHA, actual_questions=192,
+        input_layout_revision="matched-normal-fold-r2",
+        corrected_legacy_layout_confounds=legacy_mismatches,
         model_calls=0, gpu_allocations=0, metric_validation_only=True,
         language_quality_claim=False, general_ilm_goal_complete=False)
     atomic_json(out / "report.json", report)
@@ -103,14 +123,14 @@ def main():
     revision, sources = committed_sources()
     data = CodecLanguageAuditData(DATA)
     if args.validate_data_only:
-        data_preflight(data, args.out or args.run / "audit_preflight/attempt01", revision, sources)
+        data_preflight(data, args.out or args.run / "audit_preflight/attempt02", revision, sources)
         return
     # Inspect completion before creating an audit directory or CUDA context.
     training = completed_identity(args.run)
     if (os.environ.get("CUDA_DEVICE_ORDER") != "PCI_BUS_ID" or os.environ.get("CUDA_VISIBLE_DEVICES") != "0"
             or os.environ.get("CUBLAS_WORKSPACE_CONFIG") != ":4096:8"):
         raise ValueError("physical GPU 0 and deterministic cuBLAS required")
-    preflight = json.loads((args.run / "audit_preflight/attempt01/report.json").read_text())
+    preflight = json.loads((args.run / "audit_preflight/attempt02/report.json").read_text())
     if preflight["sources"] != sources or not all(preflight["checks"].values()) or preflight["model_calls"] != 0:
         raise ValueError("source-matched evaluator preflight required")
     check_host_memory()
@@ -125,7 +145,8 @@ def main():
     begun = time.perf_counter()
     identity = dict(training_report_sha256=sha(args.run / "training_report.json"),
         checkpoint_sha256=training["final_trainable_sha256"], prepared_data_sha256=AUDIT_DATA_SHA,
-        evaluator_preflight_sha256=sha(args.run / "audit_preflight/attempt01/report.json"),
+        evaluator_preflight_sha256=sha(args.run / "audit_preflight/attempt02/report.json"),
+        input_layout_revision="matched-normal-fold-r2",
         sources=sources, maximum_blocks=128)
     if (out / "identity.json").exists():
         if json.loads((out / "identity.json").read_text()) != identity:

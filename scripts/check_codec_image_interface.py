@@ -20,11 +20,14 @@ from ilm.visual_lm.codec_image_interface import (
     image_bytes, json_file, prepare_image_prompt, save_generation, save_prepared_prompt, sha,
 )
 from ilm.visual_lm.codec_language_audit import AUDIT_DATA_SHA, CodecLanguageAuditData
+from ilm.visual_lm.causal_visual_prefix import fold_writing_prompt
 from scripts.infer_codec_language_v68 import audited_identity
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ("ilm/visual_lm/codec_image_interface.py", "scripts/infer_codec_language_v68.py",
-    "scripts/check_codec_image_interface.py", "references/codec_image_interface_plan.md")
+    "scripts/check_codec_image_interface.py", "references/codec_image_interface_plan.md",
+    "ilm/visual_lm/codec_language_audit.py", "ilm/visual_lm/causal_visual_prefix.py",
+    "references/codec_language_v68_layout_control_correction.md")
 PREFLIGHT_SHA = "960a79cd02eab2b9f084a926dc137bef275356cec3ae9df26a567acc33d7f0ba"
 
 
@@ -62,13 +65,15 @@ def main():
                 strip = payload["blank_prompt" if blank else "prompt"]
                 Image.fromarray(strip.numpy()).save(temporary / "strip.png")
                 folded = prepare_image_prompt(temporary / "strip.png", layout="strip")
-                if not torch.equal(folded.pixels, expected):
-                    raise ValueError("file strip differs from actual training-layout prompt")
+                explicit = fold_writing_prompt(strip.float().div(127.5).sub(1)[None, None].clone()).pixels
+                if not torch.equal(folded.pixels, explicit) or (not blank and not torch.equal(folded.pixels, expected)):
+                    raise ValueError("file strip differs from its explicit observed-pixel fold")
                 Image.fromarray(image_bytes(expected)).save(temporary / "page.png")
                 page = prepare_image_prompt(temporary / "page.png", layout="page")
                 if not torch.equal(page.pixels, expected):
                     raise ValueError("file page differs from actual owning prompt tensor")
-        checks["all_384_real_prompts_exact_in_both_explicit_layouts"] = True
+        checks["all_384_matched_actor_pages_exact_through_page_input"] = True
+        checks["all_384_explicit_strip_folds_exact_and_192_normal_strips_match_actor"] = True
 
         # File-format witnesses only: alpha on white and all grayscale levels.
         # They are not training examples, model output or semantic evidence.
@@ -150,6 +155,7 @@ def main():
     report = dict(checks=checks, source_commit=revision, source_sha256=sources,
         prepared_data_sha256=AUDIT_DATA_SHA, actual_prompt_paths=384,
         explicit_input_layouts=2, actual_prior_execution_blocks_serialized=2,
+        blank_audit_controls_use_precomposed_matched_pages=True,
         original_execution_report_sha256=PREFLIGHT_SHA,
         original_execution_png_sha256=sha(native / "untrained_execution.png"),
         output_serialization_does_not_reexecute_actor=True,

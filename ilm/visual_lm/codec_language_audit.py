@@ -68,10 +68,18 @@ class CodecLanguageAuditData:
         return value
 
     def prompt(self, index, *, blank=False):
-        value = self.payload(index)["blank_prompt" if blank else "prompt"]
-        # Conversion owns storage; the folded image cannot expose references.
-        pixels = value.to(torch.float32).div(127.5).sub(1)[None, None].clone()
-        return fold_writing_prompt(pixels).pixels.clone()
+        value = self.payload(index)
+        pixels = value["prompt"].to(torch.float32).div(127.5).sub(1)[None, None].clone()
+        normal = fold_writing_prompt(pixels)
+        if not blank:
+            return normal.pixels.clone()
+        # Erasure can create new wrap candidates. Keep the observed normal
+        # layout so the intervention changes ink alone, never coordinates.
+        erased = value["blank_prompt"].to(torch.float32).div(127.5).sub(1)[None, None].clone()
+        page = torch.ones_like(normal.pixels)
+        for row, (start, end) in enumerate(normal.source_ranges):
+            page[..., row * 32:(row + 1) * 32, :end - start] = erased[..., start:end]
+        return page
 
     def references(self, index):
         return tuple(x.clone() for x in self.payload(index)["references"])

@@ -54,6 +54,32 @@ def physical_scores(prediction, references, stopped):
         blocks=prediction.shape[-1] // 64, stopped=bool(stopped), references=candidates)
 
 
+def independent_actor_prompt(payload, *, blank=False):
+    """Recreate normal wrap coordinates with NumPy, then place either raster.
+
+    Do not call the actor loader's fold/placement implementation here. In
+    particular, a control's erased ink must not select new wrap boundaries.
+    """
+    normal = payload["prompt"].numpy()
+    source = payload["blank_prompt" if blank else "prompt"].numpy()
+    width = min(1024, ((normal.shape[-1] + 31) // 32) * 32)
+    ranges, start = [], 0
+    while start < normal.shape[-1]:
+        end = min(start + width, normal.shape[-1])
+        if end < normal.shape[-1]:
+            lower = start + width // 2
+            candidates = np.flatnonzero(np.all(normal[:, lower:end] == 255, axis=0))
+            if not len(candidates):
+                raise ValueError("normal prompt has no safe physical wrap")
+            end = lower + int(candidates[-1]) + 1
+        ranges.append((start, end))
+        start = end
+    page = np.full((32 * len(ranges), width), 255, dtype=np.uint8)
+    for row, (start, end) in enumerate(ranges):
+        page[row * 32:(row + 1) * 32, :end - start] = source[:, start:end]
+    return torch.from_numpy(page).to(torch.float32).div(127.5).sub(1)[None, None].clone()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, default=ROOT / "artifacts/codec_language_v68_20261105")
@@ -108,6 +134,9 @@ def main():
             path = audit / relative
             saved = torch.load(path, map_location="cpu", weights_only=True)
             prompt = data.prompt(index, blank=route == "blank")
+            independent = independent_actor_prompt(data.payload(index), blank=route == "blank")
+            if not torch.equal(prompt, independent):
+                raise ValueError("actor prompt/control coordinates differ from independent reconstruction")
             header = dict(id=row["id"], source=row["source"], route=route,
                 prompt_pixels_sha256=hashlib.sha256(prompt.numpy().tobytes()).hexdigest(),
                 checkpoint_sha256=identity["checkpoint_sha256"])
@@ -188,6 +217,7 @@ def main():
     result = dict(report_sha256=sha(audit / "report.json"), cases_sha256=sha(audit / "cases.json"),
         verifier_sha256=sha(Path(__file__)), prepared_data_sha256=AUDIT_DATA_SHA,
         original_first_references_verified=192, raw_generations_verified=384,
+        independently_reconstructed_actor_input_layouts=384,
         raw_files_sha256=files, independently_recomputed_measurements=means,
         independently_recomputed_question_effect=effect, paired_both_correct=both,
         gates=gates, bounded_chinese_development_pass=all(gates.values()),
