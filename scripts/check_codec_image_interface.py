@@ -60,7 +60,7 @@ def main():
             for blank in (False, True):
                 expected = data.prompt(index, blank=blank)
                 strip = payload["blank_prompt" if blank else "prompt"]
-                Image.fromarray(image_bytes(strip)).save(temporary / "strip.png")
+                Image.fromarray(strip.numpy()).save(temporary / "strip.png")
                 folded = prepare_image_prompt(temporary / "strip.png", layout="strip")
                 if not torch.equal(folded.pixels, expected):
                     raise ValueError("file strip differs from actual training-layout prompt")
