@@ -24,10 +24,19 @@ declare a language pass, or replace measured answers with a spectral score.
 | [Yang et al., *Large Language Continuous Diffusion Models* (Sigma), 2 October 2026, v1 preprint](https://arxiv.org/html/2610.02665v1) | Demonstrates large continuous diffusion language models, while retaining a tokenizer and categorical readout. Appendix B identifies fragile continuous decoding. Reported 3B/8B training uses roughly 9,600/19,200 GB200 GPU-hours. | Audit the image decoder away from exact encoded targets. Continuous states alone establish neither vocabulary-free inference nor affordable foundation training. |
 | [Li et al., *Muon Learns Facts Better*, 2 October 2026, v1 preprint](https://arxiv.org/html/2610.02798v1) | Spectral gradient flow balances subject/relation learning in a linear factual-recall model. A 35M Pythia experiment supports faster subject learning, with similar eventual accuracies across optimizers. | A later, matched optimizer ablation may test whether rarely learned relations improve sooner. Orthogonalizing low-rank adapter factors is not equivalent to the theorem's full-matrix update. |
 | [Pracher et al., *A Spectral Theory of Grokking: Weight Decay induces Feature Learning*, 22 September 2026, v1 preprint](https://arxiv.org/html/2609.26679v1) | Studies residual-driven feature growth under homogeneous networks, squared loss, coupled decay and gradient flow; modular-addition transformer experiments support some macroscopic predictions. | Track held-out capability alongside fitting. The theory does not justify waiting indefinitely for ordinary language to “grok,” nor transferring its decay scaling directly to AdamW. |
+| [Jeon et al., *Latent Reasoning in Continuous Space for Unified Multimodal Models* (LARC), 30 October 2026, v1; author record reports NeurIPS proceedings](https://arxiv.org/html/2610.42149v1) | Interleaved language/latent reasoning improves image generation on BAGEL. Training retains next-token supervision and special tokens; Appendix A reports eight A100s and approximately 300 plus 96 GPU-hours. | Continuous internal reasoning is relevant, but these results do not qualify vocabulary-free image-language inference or one-4090 foundation training. |
+| [Nguyen and Barbier, *Sharp feature-learning transitions and Bayes-optimal neural scaling laws in extensive-width networks*, 11 May 2026, v1 preprint](https://arxiv.org/abs/2605.10395) | A noisy teacher–student model links effective learnable width to data. Its Bayes-limit analysis uses a heuristic decoupling argument supported numerically; an Adam-trained student approaches the predicted laws. | Budget useful capacity against available data. The result does not specify an adequate adapter rank or guarantee our visual transformer reaches the Bayes limit. |
 
 These are selected relevant results through the review date, not an exhaustive
 survey or independent reproduction of their experiments. Publication dates,
 preprint dates and demonstrated hardware budgets are kept distinct.
+
+The LARC comparison is especially relevant to continuous image generation,
+but its GenEval improvement is not a writing-comprehension result. A later
+bounded latent-computation ablation would need correct autonomous writing
+first, identical data and weights, and total latency as well as answer quality.
+It should not replace the present causal experiment. Its own reward signal is
+not independent evidence that the generated answer is correct.
 
 ## The local evidence changes the priority
 
@@ -59,7 +68,7 @@ For prompt pixels X and completed answer blocks Y_<t, define
 
 E_r is the visual reader, F is the causal contextual body, A is a small learned
 projection, N is normalization, and D_w is the frozen writing decoder. Training
-targets are detached continuous codes z_t = N(E_w(Y_t)). The physical image
+targets are detached continuous codes z_t = E_w(Y_t). The physical image
 block has 32-by-64 pixels; its writing state contains two 768-vectors. The
 vectors are computed from images, not indices in a character inventory.
 At inference, only the prompt and generated history are available.
@@ -67,7 +76,7 @@ At inference, only the prompt and generated history are available.
 The prepared candidate uses the straightforward objective
 
 \[
- L = \operatorname{MSE}(\widehat z_t,z_t)
+ L = \operatorname{MSE}(N(\widehat z_t),N(z_t))
    + \operatorname{MSE}(D_w(\widehat z_t),Y_t)
    + L_{\mathrm{stop}}.
 \]
@@ -84,10 +93,12 @@ learning theorem. The fixed decoder still transmits gradients:
 
 Freezing decoder weights does not mean detaching its input. The output loss can
 therefore train contextual adapters without paying optimizer-state memory for
-all decoder or inherited backbone parameters. The actual full model's forward,
-backward, memory, causality and resume behavior must still be verified after
-the output interface changes. Earlier checks of a different writer do not
-automatically qualify this candidate.
+all decoder or inherited backbone parameters. The implementation normalizes
+the projection before decoding and normalizes both states again for the state
+loss, as written above. Its complete-model preflight now passes all 24 real GPU
+checks, including backward, causality and exact resume, at 16.953 GiB allocated
+peak. This verifies execution after the interface change; its two-update
+fragmented writing does not qualify language.
 
 For a small latent error delta, differentiability gives a local expansion
 
@@ -103,11 +114,13 @@ it supplies no global robustness certificate. Thresholding is discontinuous,
 so continuous pixel error and exact writing must both be measured. A large
 average image score can coexist with lost decisive strokes.
 
-There is a second constraint: for an unrestricted predictor under squared
-loss, the optimum is E[z|X,Y_<t]. If the conditional writing distribution has
+There is a second constraint: for an unrestricted predictor trained on latent
+squared error alone, the optimum is E[z|X,Y_<t]. If the conditional writing distribution has
 separated modes, its mean need not decode to a valid or intended form. Good
 codec reconstruction therefore does not prove that deterministic latent
-regression is a sufficient language generator. Test this simple candidate
+regression is a sufficient language generator. The decoded-image loss changes
+that optimum; the conditional-mean identity does not characterize the complete
+three-term objective. Test this simple candidate
 first; introduce a conditional multimodal density only if actual generated
 answers reveal that failure. Earlier failed flow experiments remain evidence
 against treating diffusion itself as the missing explanation.
@@ -160,14 +173,16 @@ the high F1 at sigma 0.3 hides an exact-block rate of only 28.5%.
 
 ## The next discriminating experiment
 
-1. Verify the complete reader/context/projection/codec actor on the real GPU:
-   finite gradients into early and late adapters, no future-image leakage,
-   exact resume, generated-history caching and measured memory.
-2. Register full-corpus instruction training with the codec frozen and the
-   simple loss above. Audit autonomous answers using question swaps and
-   blanking, not supplied answer codes. Report complete-stream accuracy,
-   stopping and raw readability separately. Keep a genuinely unscored final
-   split; the 128 reconstruction cases are reused development data.
+1. Preserve the completed actor preflight and the same live V68 trainer. The
+   registered instruction stage uses all 12,976 admitted examples and a fixed
+   10,000-update budget. The codec, sources and objective remain unchanged.
+2. Execute the already frozen autonomous audit after training finishes. It
+   generates 192 prompt-only answers and 192 matched question/prompt-blank
+   controls, preserves full raw streams and stopping, and independently
+   verifies scores. Chinese cases include two distinct questions per passage.
+   CPU evaluator checks pass; no language output has yet been scored. The
+   128 reconstruction cases and this instruction audit are development data;
+   genuinely sealed final data remains unopened.
 3. Diagnose failure before changing architecture. Compare predicted-code
    errors with physical stroke errors. If answers ignore the question, test
    a matched data intervention. If predicted states leave useful writing
