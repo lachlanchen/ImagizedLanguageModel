@@ -42,6 +42,11 @@ affine output span. CPU trajectory checks confirm that this noise remains.
 A [full-dimensional glyph control](references/full_rank_flow_v73_control_protocol.md)
 is implemented for testing the repair; it has no language-success claim.
 See the [completed result and mathematical diagnosis](references/semantic_ilm_v72_result.md).
+
+A subsequent clean-code control reproduces **one learned Chinese image block
+exactly on 256/256 fresh noise draws**, independently scored and re-decoded.
+This is a generation prerequisite; prompt-conditioned language remains
+unproved. [Control result and raw images](references/clean_endpoint_v74_result.md).
 See the [training, inference and data-location guide](docs/semantic-image-language-v72.md),
 [verified reader diagnostic](references/native_visual_transfer_v71_result.md)
 and [current manuscript](publication/ilm-nature/README.md).

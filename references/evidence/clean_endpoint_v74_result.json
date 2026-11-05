@@ -1,0 +1,63 @@
+{
+  "source_run": "artifacts/clean_endpoint_v74_20261106",
+  "source_commit": "3a97d9f5329ee8264bd5aaacfe62beb80716f104",
+  "sources": {
+    "scripts/probe_clean_endpoint_v74.py": "b78a83465689e462f151f30bae7a46e408e1812c97b6c9d8d53dc7b26bcbff5f",
+    "ilm/visual_lm/clean_writing_flow.py": "5e52da7fe71abb4cc214c1de11a591b33d06005e8711583e651a9a7965429889",
+    "ilm/visual_lm/full_rank_writing_flow.py": "3d8ae3856295bb6d84c6392a004153b909b3b91243f416028a7decb51782ff18",
+    "ilm/visual_lm/semantic_writing_model.py": "83a9dbad1867e1b6fc2cce0fd5e95e4f91a482c2ddba85c65be3e78a5a77e479",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "scripts/probe_glyph_denoising_v73.py": "b1a2ba3b2af04dc8b10fed650de2f2837d8c9a6648cc31a987114b5bf78284ee",
+    "scripts/probe_flow_precision_v73.py": "34b9ea18e77d11058db47a9f35a62572686f1ac7bea56f8527419aaa12016bb7",
+    "references/clean_endpoint_v74_protocol.md": "01b3ba94707391d301e437615ebc76adc43096ffc621f3186ce450a140745a0e"
+  },
+  "source_case": {
+    "source": "cmrc/TRAIN_3100_QUERY_2.pt",
+    "source_sha256": "51218f3dbd0b1d82dbf9552d8d530c6dca12464de9ee3a906367b1cc1436941a",
+    "cache_record": "records/00006.pt",
+    "cache_record_sha256": "7ad4a4f66323846b35813fe3813248527bba3684cd0b9d9a8e746f4f83ffeb05",
+    "reference_sha256": "17fa0b0495635b4273aafea8e2509c4133a83649753ef1b0db6344e3e4c4029d"
+  },
+  "parameters": 36403200,
+  "updates": 4000,
+  "evaluation_count": 256,
+  "model_config": {
+    "memory_width": 4096,
+    "width": 512,
+    "layers": 8,
+    "heads": 8,
+    "feedforward": 2048,
+    "flow_width": 1536,
+    "flow_layers": 3,
+    "block_width": 1536,
+    "maximum_blocks": 128,
+    "flow_steps": 32,
+    "prediction_kind": "clean_endpoint",
+    "loss_noise_minimum": 0.05
+  },
+  "measurements": {
+    "mean_foreground_f1": 1.0,
+    "minimum_foreground_f1": 1.0,
+    "original_exact_fraction": 1.0,
+    "supplied_render_exact_fraction": 1.0
+  },
+  "gates": {
+    "mean_original_f1": true,
+    "every_original_f1": true,
+    "repeatable_codec_image": true
+  },
+  "clean_glyph_control_pass": true,
+  "elapsed_seconds": 33.501533281989396,
+  "peak_allocated_vram_gib": 1.3606538772583008,
+  "checkpoint_sha256": "572a3e5ddb60aa20f250013e6030d86078b3929a0028cd8bcd4111cd02306271",
+  "raw_predictions_sha256": "1926c6b456dedec8084f8b5d33d0de7feaa07f5b72851823c0c8d22891842642",
+  "samples_png_sha256": "97ddd0dc26c83a3247f7a307f1cbe00d4d04920b8ab1019e149ce2d9d8d9b94a",
+  "report_sha256": "d5747a9b78dffad1cca5213083b8f8f8bd003fe159a09f82f511a16b4ec681e0",
+  "verification_sha256": "18c91b902833f8835f049699a58eb4cc2320761c22564f53b258ad2386f0311d",
+  "scope": "one learned image; not prompt reading or language generalization",
+  "independent_cpu_physical_scoring": true,
+  "cpu_fixed_decoder_replayed": true,
+  "full_neural_sampler_replayed": false,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
