@@ -6,6 +6,12 @@ V-SPICE v13.7 manuscript template: a two-column article, a matching review
 copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
+The [change-marked supplement](redlined_supplementary_information.pdf) shows
+the completed transcript-sensitivity addition relative to the preserved
+V62 primary baseline. Its [flattened TeX](redlined_supplementary_information.tex)
+and [builder](build_supplement_redline.py) / [verification](verify_supplement_redline.py)
+retain the clean paper and figure assets.
+
 ## Current result
 
 A matched conditional bitmap mixture improves pixel fit while failing the
