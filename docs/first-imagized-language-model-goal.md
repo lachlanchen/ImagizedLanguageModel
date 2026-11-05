@@ -58,6 +58,14 @@ initialization, not an image-language actor or a language result. Image/state
 alignment, generation, suitable optimizer memory and independent evaluation
 still require real training. The current V63 experiment remains unchanged.
 
+The separate [cached visual-language weight interface](cached-visual-language.md)
+now matches all 748 retained native parameter names/shapes from the existing
+Qwen3-VL 8B archive and executes its real image encoder on two fixed training
+crops, retaining all three intermediate visual features. CPU conversion and
+repeatability checks pass. No contextual-body execution, image writer,
+language-quality result or measured GPU-training fit is established. This
+prepares a possible later actor while V63's frozen comparison continues.
+
 A [two-page methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
 and editable training figure now explain the exact four-stream objective using
 the first frozen training pair. Displayed glyphs are observed targets; no new

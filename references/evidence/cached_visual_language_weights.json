@@ -1,0 +1,155 @@
+{
+  "checks": {
+    "all_retained_native_names_and_shapes_match": true,
+    "zero_text_vocabulary_rows": true,
+    "all_vision_weights_loaded_and_finite": true,
+    "three_deepstack_features_retained": true,
+    "full_cpu_vision_encoding_finite": true,
+    "exact_cpu_visual_feature_replay": true,
+    "distinct_real_training_images": true,
+    "vocabulary_accessor_rejected": true,
+    "independent_legacy_operator_contractions": true,
+    "no_cuda_context": true,
+    "active_V63_sources_unchanged": true
+  },
+  "configurations": {
+    "text": {
+      "vocab_size": 0,
+      "hidden_size": 4096,
+      "intermediate_size": 12288,
+      "num_hidden_layers": 36,
+      "num_attention_heads": 32,
+      "num_key_value_heads": 8,
+      "head_dim": 128,
+      "rms_norm_eps": 9.999999974752427e-07,
+      "max_position_embeddings": 262144,
+      "rope_theta": 5000000.0,
+      "rope_scaling": {
+        "rope_type": "default",
+        "mrope_section": [
+          24,
+          20,
+          20
+        ],
+        "mrope_interleaved": true
+      },
+      "attention_bias": false,
+      "bos_token_id": null,
+      "eos_token_id": null,
+      "pad_token_id": null,
+      "tie_word_embeddings": false
+    },
+    "vision": {
+      "depth": 27,
+      "hidden_size": 1152,
+      "intermediate_size": 4304,
+      "num_heads": 16,
+      "in_channels": 3,
+      "patch_size": 16,
+      "spatial_merge_size": 2,
+      "temporal_patch_size": 2,
+      "out_hidden_size": 4096,
+      "num_position_embeddings": 2304,
+      "deepstack_visual_indexes": [
+        8,
+        16,
+        24
+      ],
+      "hidden_act": "gelu_pytorch_tanh"
+    }
+  },
+  "retained_native_tensors": 748,
+  "text_tensors": 397,
+  "vision_tensors": 351,
+  "retained_parameters": 7522463984,
+  "vision_parameters": 576388336,
+  "operator_errors": {
+    "flattened_patch_kernel_max_abs": 7.216449660063518e-16,
+    "layer_0_fused_qkv_max_abs": 0.0,
+    "layer_26_fused_qkv_max_abs": 0.0
+  },
+  "inputs": [
+    {
+      "index": 0,
+      "file": "cmrc/TRAIN_1000_QUERY_0.pt",
+      "crop_x": 4160,
+      "shape": [
+        32,
+        64
+      ],
+      "pixels_sha256": "456b897e70966efd8c707bce3443865f37d2967c9bdc4c0ecc1a53c45dc20ea1",
+      "packed_grid": [
+        [
+          1,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "index": 6488,
+      "file": "dolly/dolly_05097.pt",
+      "crop_x": 2496,
+      "shape": [
+        32,
+        64
+      ],
+      "pixels_sha256": "c7f76b36be006e177d4bb25542bea49f95536a70aa4dd507a5b26feefb31f994",
+      "packed_grid": [
+        [
+          1,
+          2,
+          4
+        ]
+      ]
+    }
+  ],
+  "writing_report_sha256": "0ffcfd101ea26d79c4084bfd166bd146ff5560f5fa83b7aa57c6b48558377d7e",
+  "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+  "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "upstream_compat_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+  "upstream_compat_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+  "features_sha256": "bb8a61cce718c6b3df666a12145cafeafefb3988a517ed515f4ad8b701d4150e",
+  "elapsed_seconds": 28.88562328182161,
+  "process_peak_rss_mib": 4534.63671875,
+  "cpu_only": true,
+  "text_model_forward_calls": 0,
+  "language_or_image_generation_calls": 0,
+  "teacher_service_calls": 0,
+  "model_weights_downloaded_or_copied": false,
+  "language_quality_claim": false,
+  "active_V63_modified": false,
+  "scope": "Legacy storage compatibility and actual CPU vision encoding; no complete actor, semantic calibration, full text-model equivalence or GPU-training fit.",
+  "full_report": "artifacts/cached_visual_language_20261105/report.json",
+  "full_report_sha256": "22deb4394b2e4593d487d00d7b22b69b430e20c856d7c1a8bb9285897d2bdfef",
+  "calculated_dense_bf16_retained_gib": 14.01168105006218,
+  "calculated_fp32_vision_gib": 2.147213876247406,
+  "provenance": {
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "scripts/inspect_cached_visual_language.py": "2de9b890ea9ebdab50cdfd7067f9f3c1cff0899f47f3ce5551dddb2c6b6a3ffb",
+    "references/cached_visual_language_weight_plan.md": "10f6673f7ce92b76d0b881830113ee545bc246b764d5c0969518eedb1f0ed693"
+  },
+  "mapping_tests": {
+    "path": "tests/test_gguf_visual_language.py",
+    "sha256": "0b256b144acf0af0f0e459da357dc27c354f2bd450bf5671abbd8a9f83fa42e4",
+    "passed": 3,
+    "skipped": 0,
+    "warnings": 4,
+    "elapsed_seconds": 9.97,
+    "runtime": {
+      "python": "3.10.13",
+      "torch": "2.11.0+cu130",
+      "transformers": "4.57.6",
+      "pytest": "9.0.3"
+    },
+    "scope": "Real archive schema, independent QKV/kernel contractions and rejected vocabulary/missing position configuration; executed in existing test environment, separate from native encoder run."
+  },
+  "native_execution_runtime": {
+    "python": "3.12.1",
+    "torch": "2.3.0+cu121",
+    "transformers": "4.57.3",
+    "numpy": "1.26.3",
+    "observation": "Same unchanged native interpreter queried after successful encoder execution."
+  },
+  "report_file_written_at_utc": "2026-11-05T02:10:14.230537+00:00"
+}

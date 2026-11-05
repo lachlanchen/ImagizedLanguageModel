@@ -31,9 +31,11 @@ parameter name against llama.cpp's official naming map; both pass.
 
 All three inspected model blobs are authenticated against their local
 manifests. The third, Qwen3-VL 8B, contains 576,388,336 stored vision-tensor
-entries alongside its text trunk. It is inventoried only: the plain-Qwen3
-accessor deliberately rejects that architecture rather than assuming its
-vision/deep-stack/position interfaces are interchangeable.
+entries alongside its text trunk. That original inspection inventories it
+only: the plain-Qwen3 accessor deliberately rejects that architecture.
+A separate [legacy visual-language accessor](cached-visual-language.md) now
+verifies the distinct vision/deep-stack/position mapping and executes the
+real image encoder on CPU. It remains a preparation result, not a new actor.
 
 Stored scalar totals can count duplicated tied matrices. In particular, the
 1.7B archive contains separate stored embedding/output tensors; summing the
