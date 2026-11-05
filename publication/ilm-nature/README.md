@@ -24,19 +24,32 @@ the whole visual forward pass is not independently replayed. This is reader
 evidence, not successful image writing. Supplementary Note 29 reports the
 full comparison and limitations.
 
-A 38.65M-parameter causal joint-flow writer is implemented with prompt-only
-visual memory and re-encoded physical-output feedback. Real-example execution
-checks pass, including exact optimizer/RNG resume. Full-corpus caching,
-40,000-update training and the original autonomous audit are in progress.
-Supplementary Note 30 gives the complete mathematical and deployed path;
-it reports no new language accuracy. Figure S10 shows the measured reader
-comparison and its helper boundary; Figure S11 shows the implemented training
-and physical-feedback computation. Both are native editable slides. The deck
-now has 26 slides, preserving all 24 earlier slides and their canonical PDF
-appearance. The [current figure verifier](verify_semantic_transfer_figures.py)
-checks source scores, chart workbooks, native parts and rendered figures.
-The [current publication builder](build_semantic_figure_publication.py) rebuilds
-the article, supplement and matching redlines.
+A 38.65M-parameter causal velocity writer completes 40,000 updates on all
+12,976 examples and fails the original autonomous audit: 0/128 exact Chinese
+answers, 29.386% foreground F1 and four failed requirements out of six.
+Supplementary Note 30 reports the completed pipeline. Note 31 derives an
+affine-span obstruction that leaves 767 noise directions and records its
+CPU numerical check. Full-dimensional velocity repairs still fail a fresh
+known-image control. Clean-code prediction then reproduces one learned
+Chinese image exactly on 256 fresh noise draws.
+
+The complete clean writer subsequently learns 32 seen training questions,
+producing 29 original answer images exactly and 31 frozen-codec reference
+images exactly, with 99.9967% original-image F1. It stops correctly on all
+32. This is learning capacity after 2,000 training-set passes, not unseen
+reading comprehension or a useful general ILM. Note 32 specifies selection,
+objective, numerical sampler, inference, independent scoring and costs.
+The paper keeps the rejected development result separate from these narrow
+generation and memorization controls.
+
+Figure S10 retains the measured reader comparison and helper boundary.
+Figure S11 retains the actual failed velocity computation, with its status
+corrected to the completed result. Both remain native editable slides.
+All preceding 25 slide parts and canonical appearances are preserved.
+The [figure verifier](verify_semantic_transfer_figures.py) checks source
+scores, chart workbooks, native parts and rendered figures. The
+[current publication builder](build_clean_writing_publication.py) authenticates
+the completed experiment receipts and rebuilds all five paper/redline PDFs.
 
 A complete conditional-writing actor finishes 10,000 updates on all 12,976
 admitted Chinese/English instruction examples. It adapts 9.352M of 7.539B

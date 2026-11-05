@@ -172,8 +172,8 @@ def main():
     method.arrow(525,820,525,745)
     method.shape("Re-encode actual emitted pixels",720,773,620,42,21)
     method.shape("Learned stop ≥ 0.5\nUniform cap: 128 blocks",65,775,400,65,19)
-    method.shape("38.65M trainable writer parameters. External reader pretraining is retained. Full language training and audit are pending.",45,858,1510,36,16)
-    add_slide(26,method,"Figure S11. Implemented V72 candidate, not a completed language result. Sources: references/semantic_ilm_v72_protocol.md; ilm/visual_lm/semantic_image_memory.py; ilm/visual_lm/semantic_writing_model.py; references/evidence/semantic_ilm_v72_execution.json. All 12,976 complete training examples are admitted; only two explicit white termination blocks are removed. Prompt memory is computed without answer labels. The frozen inherited reader supplies all 52 final task-frame states in BF16. The 38,651,649-parameter causal transformer and three-residual-block joint flow train with complete image-code histories and up to 16 sampled target losses per example. Production budget: 40,000 updates, batch 16. Inference has no tokenizer, OCR, language output head, persistent glyph inventory or teacher service. Generated code coordinates receive non-affine LayerNorm, are decoded and thresholded, then actual output pixels are re-encoded for feedback. The structural stop head is checked after every prefix, including after the uniform 128-block cap. Execution checks pass but full autonomous language quality remains unproven. Diagram contains no fabricated generated sample.")
+    method.shape("38.65M trainable writer. External reader pretraining retained. Completed Chinese audit: 0/128 exact; 29.386% foreground F1.",45,858,1510,36,16)
+    add_slide(26,method,"Figure S11. Completed V72 velocity candidate; the autonomous language audit failed. Sources: references/semantic_ilm_v72_protocol.md; ilm/visual_lm/semantic_image_memory.py; ilm/visual_lm/semantic_writing_model.py; references/evidence/semantic_ilm_v72_execution.json. All 12,976 complete training examples are admitted; only two explicit white termination blocks are removed. Prompt memory is computed without answer labels. The frozen inherited reader supplies all 52 final task-frame states in BF16. The 38,651,649-parameter causal transformer and three-residual-block joint flow train with complete image-code histories and up to 16 sampled target losses per example. Production budget: 40,000 updates, batch 16. Inference has no tokenizer, OCR, language output head, persistent glyph inventory or teacher service. Generated code coordinates receive non-affine LayerNorm, are decoded and thresholded, then actual output pixels are re-encoded for feedback. The structural stop head is checked after every prefix, including after the uniform 128-block cap. The completed 40,000-update audit gives 0/128 exact Chinese answers and 29.386% foreground F1. Four of six Chinese requirements fail. Source: references/evidence/semantic_ilm_v72_result.json. Diagram contains no fabricated generated sample.")
 
     for name,node in (("[Content_Types].xml",types),("ppt/presentation.xml",presentation),("ppt/_rels/presentation.xml.rels",relationships)):
         parts[name]=xml(node)
@@ -193,7 +193,7 @@ def main():
         chart=dict(part=chart_part_name,workbook=book_part,categories=categories,values=counts,denominator=8),
         sources_sha256=sources,artifact_tool_available=False,
         implementation="native OOXML append; editable shapes, connectors and chart workbook",
-        existing_slides_preserved=True,language_quality_claim=False,method_status="candidate under training")
+        existing_slides_preserved=True,language_quality_claim=False,method_status="completed language audit failed")
     (HERE/"evidence/semantic_transfer_deck_build.json").write_text(json.dumps(receipt,indent=2)+"\n")
     print("Appended native slides 25-26; retained all preceding slide/chart/media parts.")
 

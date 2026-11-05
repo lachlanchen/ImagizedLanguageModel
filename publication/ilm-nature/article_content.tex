@@ -567,12 +567,29 @@ decisions replay as exact argmax choices (Supplementary Note 29 and Fig.~S10). T
 sample supports bounded reading, without qualifying image writing or
 isolating the scale effect.
 
-The implemented successor conditions a 38.652M-parameter causal writer on
+The successor conditions a 38.652M-parameter causal writer on
 frozen prompt-only visual states. A joint flow predicts two-tile codes;
 the codec emits pixels, which are re-encoded for history. Real-example
 future-target exclusion, bit-exact optimizer/RNG resume and physical feedback
-checks pass. Full-corpus training and the 192-case autonomous audit remain
-prospective (Supplementary Note 30 and Fig.~S11), with no image-language qualification.
+checks pass. Full-corpus training completes 40,000 updates and 640,000 draws
+over 12,976 examples. The autonomous audit gives zero exact Chinese answers
+out of 128 and 29.386\% foreground F1, versus 21.873\% with questions erased.
+Four of six Chinese requirements fail (Supplementary Note 30 and Fig.~S11).
+
+A post-hoc diagnosis identifies an obstruction in the velocity head:
+its final affine span has rank 769 in 1,536 writing coordinates. In real
+arithmetic the remaining 767 components of initial noise are invariant
+before normalization. Actual-weight CPU trajectories support this prediction.
+A full-dimensional velocity control improves fidelity but fails its worst-image
+requirement on fresh noise. Predicting clean writing codes instead, with an
+FP32 final projection and analytic noise contraction, reproduces one learned
+Chinese image exactly on all 256 fresh draws (Supplementary Note 31).
+Clean-data prediction follows prior denoising work\cite{jit}; the known-image
+control establishes neither reading nor conditional language competence.
+The complete clean writer subsequently fits 32 seen training questions:
+29 original answer images are exact, versus 31 frozen-codec reference images,
+with 99.997\% original-image F1. This is a paired learning-capacity control,
+not unseen-question generalization (Supplementary Note 32).
 
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual

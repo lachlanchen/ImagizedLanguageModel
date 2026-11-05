@@ -1407,8 +1407,7 @@ answer is generated in this diagnostic.}{fig:visual-semantics}
 
 \section*{Supplementary Note 30: causal joint flow in writing coordinates}
 Supplementary Fig.~\ref{fig:continuous-writing} shows training and deployment.
-The successor is an implemented candidate with ongoing training, not a
-completed language result. For physical prompt $X$, let
+The completed successor fails the language audit. For physical prompt $X$, let
 \begin{align}
  M &= \operatorname{sg}(F_{\rm frozen}(E_r(R(X));C)),\\
  h_t &= T_\theta(M,b,E_w(Y_{<t})),\qquad z_t=\operatorname{sg}(E_w(Y_t)).
@@ -1460,15 +1459,34 @@ learning rate $10^{-4}$, 500-update warmup and cosine decay to one tenth,
 betas $(0.9,0.95)$, weight decay 0.01 and gradient clipping at one. New
 parameters and optimizer state are FP32; decoder contractions use BF16;
 there is no EMA. Fresh full-corpus permutations support exact resume. This
-exposure and objective differ from the failed earlier actor, so a future
+exposure and objective differ from the failed earlier actor, so this
 comparison cannot isolate one component's contribution. The full original
-192-case audit and matched blank controls follow training automatically;
-sealed cases stay unopened unless the original development gates pass.
+192-case audit and matched blank controls follow training automatically.
+Sealed cases remain unopened because the development requirements fail.
 Training, inference, scoring and independent verification use
 \path{scripts/run_semantic_ilm_v72.py},
 \path{scripts/infer_semantic_ilm_v72.py},
 \path{scripts/audit_semantic_ilm_v72.py} and
 \path{scripts/verify_semantic_ilm_v72.py}.
+
+All 12,976 examples are cached in 15,428.722 seconds. Training completes
+40,000 updates, 640,000 draws and 49 complete corpus passes in 2,510.256
+active seconds, peaking at 1.155 GiB allocated memory without the inherited
+reader. The 384 normal/control autonomous answers take 853.492 seconds,
+including 79.648 seconds setup, at 18.294 GiB with the reader. Earlier
+codec learning and external foundation pretraining are excluded.
+
+Chinese original-image exact answers are 0/128, both-correct pairs 0/64,
+and foreground F1 29.386\% versus 21.873\% when questions are erased.
+The question gain is 7.513 points with 95\% article-bootstrap interval
+[5.727,9.631]. Exact answers, absolute F1, both-correct pairs and minimum
+question gain fail; the positive effect interval and learned stopping pass.
+All normal Chinese outputs stop through the learned decision. English literal
+reference F1 is 14.394\% versus 7.838\%, with 0/64 exact reference images;
+these references do not exhaust semantically valid English answers.
+Independent CPU scoring authenticates all 384 raw outputs and 12,976 cache
+payloads, without replaying full neural generation. File-integrity success
+does not change the language rejection.
 
 \plate{Figure_S11_continuous_writer}{\textbf{Causal joint flow couples visual semantics to physical writing.}
 \textbf{a}, Prompt-only frozen contextual states condition a causal writing
@@ -1480,8 +1498,135 @@ non-affine LayerNorm, decodes and thresholds physical output. Every emitted
 block is encoded again before entering history. Learned stopping uses
 threshold 0.5 and a uniform 128-block capacity. The writer has 38.65M trainable
 parameters; the larger frozen externally pretrained reader remains part of
-the complete actor. This is the implemented candidate under training,
-with no completed autonomous language result or fabricated output example.}{fig:continuous-writing}
+the complete actor. This diagram describes the completed velocity candidate,
+which fails its autonomous language audit; it contains no successful generated
+answer example.}{fig:continuous-writing}
+
+\section*{Supplementary Note 31: a denoising obstruction and clean writing}
+Let $D=1536$ and write the original velocity projection as $v=Ah+b$, with
+$A\in\mathbb R^{D\times768}$. For $S=\operatorname{span}(A,b)$ and the
+orthogonal projector $Q$ onto $S^\perp$, $Qv=0$. Consequently an exact
+trajectory obeys $Qz(u)=Qz(0)$ before its final LayerNorm. For an independent
+standard Gaussian $e$ and clean target $y$, the coordinate-averaged expected
+squared velocity error has the lower bound
+\begin{equation}
+ \mathbb E\|v-(y-e)\|_2^2/D
+ \;\geq\; \bigl(\mathbb E\|Qy\|_2^2+D-\dim S\bigr)/D.
+\end{equation}
+This concerns a fixed affine velocity output span, not all narrow denoisers
+or all image-language architectures. It does not prove that removing the
+obstruction is sufficient for language learning.
+
+The trained BF16-rounded projection has affine rank 769, leaving 767
+directions. On the first 128 sorted authenticated cache examples, containing
+3,619 blocks and weighted equally per example, the noise-only floor is
+0.499349 and target orthogonal energy 0.150753, giving 0.650102 in real
+arithmetic. A QR-based CPU trajectory check uses the actual trained weights,
+the first cached prompt, empty writing history and all 32 midpoint steps.
+Orthogonal-noise RMS changes from 0.699684821 to 0.699684823 in FP32, with
+drift RMS $1.10\times10^{-7}$. CPU BF16 gives 0.699627645 to 0.699614454,
+with drift 0.0002073. Elementwise rounding breaks exact subspace invariance
+slightly; these are CPU numerical checks, not GPU answer-generation replays.
+
+A fixed known-image control then trains narrow and full-dimensional velocity
+heads for 4,000 updates, batch 64, using one original CMRC writing block.
+On 64 fresh noise draws the full head gives 63 exact images, but worst F1
+is 97.053\%, below the unchanged 99\% requirement. A registered precision/
+integration diagnosis selects BF16 with 64 steps on those original draws.
+On one fresh 128-draw confirmation it gives 116 exact images and worst F1
+87.607\%, again failing. The confirmation is not used to select another
+setting. These failed outcomes remain part of the evidence.
+
+The clean model instead predicts $d_\theta(z_u,u,h)\approx y$ directly,
+following clean-data denoising work\cite{jit}. Its final projection executes
+in FP32, rather than casting a BF16 result after rounding. With $K=32$,
+sampling begins at $z_0=e$ and uses
+\begin{equation}
+ z_{i+1}=\frac{K-i-1}{K-i}z_i+
+ \frac{d_\theta(z_i,i/K,h)}{K-i},\qquad 0\leq i<K.
+\end{equation}
+This integrates the linear contraction exactly if the clean estimate is
+constant on the interval. The final update has zero old-state coefficient
+and evaluates no division at $u=1$. A noise-dependent erroneous clean
+estimate can still produce an erroneous endpoint; the formula itself is
+not a fidelity guarantee. Decoding, thresholding and re-encoding actual
+emitted pixels follow Note 30.
+
+The registered one-image clean control trains a fresh 36,403,200-parameter
+head for 4,000 updates, batch 64, using the selected original 32-by-64 CMRC
+block. The sampler receives noise, time and a zero continuous condition;
+the clean code appears only as a supervised training label. All 256 fresh
+draws reproduce the original binary image exactly: mean and worst F1 are
+100\%. Independent CPU scoring and fixed-decoder replay agree for every
+retained output. The phase takes 33.502 seconds after setup and peaks at
+1.361 GiB, excluding earlier codec learning; it loads no inherited reader.
+The complete causal clean writer has 64,520,193 parameters, but the one-image
+control trains only its generation head. This result is known-image
+generation, not conditional reading, generalization or unseen-script writing.
+
+Code and fixed protocols are retained in
+\path{scripts/diagnose_flow_rank_v72.py},
+\path{scripts/probe_glyph_denoising_v73.py},
+\path{scripts/probe_flow_precision_v73.py} and
+\path{scripts/probe_clean_endpoint_v74.py}.
+
+\section*{Supplementary Note 32: paired learning capacity}
+A fixed training-only control selects 16 pairs from the admitted CMRC corpus.
+Each pair has identical visible context but distinct questions, whitespace-
+normalized reference answer texts and physical target digests. Groups are
+sorted by visible-context SHA-256 and candidates by source name; the first
+eligible pair in each of the first 16 groups supplies 32 seen examples.
+Text and identifiers enter offline selection only, not model inputs.
+
+The complete 64,520,193-parameter clean writer starts afresh and trains for
+4,000 updates at batch 16: 64,000 draws and 2,000 complete selected-set passes.
+AdamW uses learning rate $10^{-4}$, 200-update warmup, cosine decay to one
+tenth, betas $(0.9,0.95)$, weight decay 0.01 and gradient clipping at one.
+Model, sampler and noise seeds are 20267410, 20267411 and 20267412.
+For the clean predictor, time is $u=\operatorname{sigmoid}(-0.8+0.8g)$,
+$g\sim\mathcal N(0,1)$, with the clipped velocity-weighted clean objective
+\begin{equation}
+ \mathcal L_{\rm clean}=
+ \mathbb E\frac{\|d_\theta((1-u)e+uy,u,h)-y\|_2^2/D}
+ {\max(1-u,0.05)^2}.
+\end{equation}
+Coordinate loss is averaged equally per example over at most 16 sampled
+blocks; balanced continue/terminal logistic loss is added. The numerical
+body, FP32 projection, physical feedback and sampler follow Note 31.
+Future-target exclusion, exact optimizer/RNG/data-cursor restoration and a
+forced physical-feedback execution branch pass before production. All model
+and optimizer states and random streams are reset after that check.
+
+A fresh inference process receives actual prompt pixels for all 32 questions,
+using seed 20267420 plus pair index, common within each pair. No answer
+length, target code, character identity, OCR or teacher is supplied.
+All actual reader memories exactly match their training-cache counterparts.
+Generation finishes 29/32 original answer images exactly, with mean F1
+99.9967\% and worst F1 99.9518\%. Against frozen supplied-code reference
+images 31/32 are exact and 15/16 pairs have both answers exact. These exact
+counts use different image references and must not be conflated. Every
+answer stops by its learned decision. Mean owning-target F1 minus the
+partner target's F1 is 77.6155 points. Cross scoring does not add model calls.
+
+The six fixed requirements are mean original F1 at least 99\%, every
+original F1 at least 98\%, supplied-code exact fraction at least 90\%,
+both-exact supplied-code pair fraction at least 87.5\%, learned stopping at
+least 95\%, and owning-minus-partner F1 at least 10 points. All pass.
+Training takes 174.653 active seconds at 1.163 GiB without the inherited
+reader. Actual-image generation and evidence capture take 108.558 seconds,
+including 65.923 seconds setup, at 17.742 GiB with the reader. Earlier codec
+learning and external foundation pretraining are excluded.
+
+Independent CPU verification checks source input pixels, every raw output,
+frozen-decoder references and physical scores. It does not replay full
+neural generation or every feedback encoding. The model has repeatedly seen
+every question; fitting them establishes learning capacity, not general
+reading, language knowledge or unseen-form generation. Full-corpus training
+and the original unseen full-answer audit remain required.
+The protocol, runner and standalone image interface are
+\path{references/clean_learning_v74_protocol.md},
+\path{scripts/run_clean_learning_v74.py} and
+\path{scripts/infer_clean_ilm_v74.py}.
 
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use

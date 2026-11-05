@@ -36,6 +36,7 @@ def main():
         raise ValueError("source baseline deck changed")
     baseline_path=QA/"baseline.pptx"
     baseline_path.write_bytes(baseline_deck)
+    current_prefix=(HERE/"ILM_Figures_review.pdf").read_bytes()
     profile=QA/"libreoffice-profile"
     command=["soffice","-env:UserInstallation="+profile.as_uri(),"--headless","--convert-to","pdf",
         "--outdir",str(render),str(HERE/"ILM_Figures_editable.pptx"),str(baseline_path)]
@@ -86,12 +87,21 @@ def main():
                 renderer_differences.append(i+1)
         canonical=fitz.open()
         canonical.insert_pdf(old)
-        canonical.insert_pdf(new,from_page=24,to_page=25)
+        # S10 is unchanged. Preserve its canonical bytes and every existing
+        # export instead of regenerating an unrelated evidence figure.
+        with fitz.open(HERE/"figures/Figure_S10_visual_semantics.pdf") as prior_reader:
+            if prior_reader[0].get_pixmap(alpha=False).samples!=new[24].get_pixmap(alpha=False).samples:
+                raise ValueError("unrelated reader figure changed appearance")
+            canonical.insert_pdf(prior_reader)
+        canonical.insert_pdf(new,from_page=25,to_page=25)
         canonical.save(QA/"canonical_figures.pdf")
         canonical.close()
         figures={}
         for i,name in [(24,"Figure_S10_visual_semantics"),(25,"Figure_S11_continuous_writer")]:
             page=new[i]
+            if i==24:
+                figures[name]={suffix:sha(HERE/"figures"/(name+"."+suffix)) for suffix in ("pdf","png","svg")}
+                continue
             document=fitz.open()
             document.insert_pdf(new,from_page=i,to_page=i)
             path=HERE/"figures"/(name+".pdf")
@@ -103,6 +113,10 @@ def main():
     reference.close()
     target=HERE/"ILM_Figures_review.pdf"
     target.write_bytes((QA/"canonical_figures.pdf").read_bytes())
+    with fitz.open(stream=current_prefix,filetype="pdf") as previous,fitz.open(target) as new:
+        for i in range(25):
+            if previous[i].get_pixmap(alpha=False).samples!=new[i].get_pixmap(alpha=False).samples:
+                raise ValueError("one of the preceding 25 canonical slides changed")
     with fitz.open(stream=original,filetype="pdf") as old,fitz.open(target) as new:
         for i in range(24):
             before=old[i].get_pixmap(alpha=False)
@@ -115,6 +129,7 @@ def main():
         previous_slide_renders_preserved=preserved,new_figures_sha256=figures,
         fresh_baseline_vs_append_preserved=fresh_preserved,older_renderer_difference_slides=renderer_differences,
         canonical_prefix_reused_without_image_changes=True,
+        immediately_previous_canonical_slides_preserved=25,
         visual_review_required=True,headless_profile_exited=True,artifact_tool_available=False,
         source_deck_build_sha256=sha(HERE/"evidence/semantic_transfer_deck_build.json"),language_quality_claim=False)
     (HERE/"evidence/semantic_transfer_figure_render.json").write_text(json.dumps(receipt,indent=2)+"\n")

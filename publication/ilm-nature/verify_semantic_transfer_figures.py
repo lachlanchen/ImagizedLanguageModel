@@ -78,7 +78,7 @@ def verify():
         if any(text not in new_text[0] for text in ("Helper only","Vocabulary module absent","no image answers")):
             raise ValueError("reader helper boundary is missing")
         if any(text not in new_text[1] for text in ("52 × 4096","8 layers, width 512","32 midpoint steps",
-            "Re-encode actual emitted pixels","128 blocks","audit are pending")):
+            "Re-encode actual emitted pixels","128 blocks","0/128 exact; 29.386%")):
             raise ValueError("deployed computation or candidate boundary is missing")
     original_pdf=subprocess.check_output(["git","show",baseline["source_commit"]+":"+source_prefix+"ILM_Figures_review.pdf"],cwd=ROOT)
     with fitz.open(stream=original_pdf,filetype="pdf") as old,fitz.open(HERE/"ILM_Figures_review.pdf") as new:

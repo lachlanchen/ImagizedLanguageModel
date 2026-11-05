@@ -1,7 +1,7 @@
 {
   "baseline_commit": "b159308fca123abe3a09914e2b9fb74eafaae6a4",
   "baseline_pptx_sha256": "e367ef8acf51a4d36b67b1ec3639d20d8663a8158aaf47277fc2a948cfedf46f",
-  "pptx_sha256": "a297e3739b095ce53b90a72c33b868f3937b435af6570b3873a4c0bf7c0d2f14",
+  "pptx_sha256": "f699765e40111ab02f5550ecf9102194d20d5814ab0e8ac600e40f11e9b3e46f",
   "slides": 26,
   "new_slides": [
     25,
@@ -32,11 +32,22 @@
     "references/evidence/semantic_ilm_v72_execution.json": "e64bbce015f43b8c2dce4c24da27c32f3205e72963d34ea82b025f3b03028c21",
     "references/semantic_ilm_v72_protocol.md": "71350c0587a976af2cad57997e4087189e1eb6763759f2fa9804494109502dc8",
     "ilm/visual_lm/semantic_writing_model.py": "83a9dbad1867e1b6fc2cce0fd5e95e4f91a482c2ddba85c65be3e78a5a77e479",
-    "publication/ilm-nature/generate_semantic_transfer_figures.py": "3c5d5a4fb22667e4c2e95ab318a93f84511f510a38ac74a1f12f51f4046a58b3"
+    "publication/ilm-nature/generate_semantic_transfer_figures.py": "bd24250e025760be727fe2f4cdff6922ab92a38be04f27c31e62d9b1071e8908",
+    "publication/ilm-nature/update_completed_flow_figure.py": "f79806adc65759269bd69460865cf0deb8d6fcca33d18d71b1c3155ce3e88509",
+    "references/evidence/semantic_ilm_v72_result.json": "ec7417aa18534062abc5217fb76a9cd8e03287850271c47fa92f487b8813b48b"
   },
   "artifact_tool_available": false,
   "implementation": "native OOXML append; editable shapes, connectors and chart workbook",
   "existing_slides_preserved": true,
   "language_quality_claim": false,
-  "method_status": "candidate under training"
+  "method_status": "completed language audit failed",
+  "status_update": {
+    "baseline_commit": "29ace23",
+    "changed_parts": [
+      "ppt/slides/slide26.xml",
+      "ppt/notesSlides/semantic_transfer_notes26.xml"
+    ],
+    "other_parts_preserved": 225,
+    "prior_native_slides_preserved": 25
+  }
 }
