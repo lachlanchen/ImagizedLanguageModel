@@ -31,6 +31,41 @@ These are selected relevant results through the review date, not an exhaustive
 survey or independent reproduction of their experiments. Publication dates,
 preprint dates and demonstrated hardware budgets are kept distinct.
 
+### Additional findings: physical feedback and learning landscapes
+
+The following primary sources were checked on the same review date. Their
+usefulness lies in particular design constraints, rather than a demonstrated
+breakthrough in one-GPU general intelligence.
+
+| Primary work | Relevant finding and boundary | Decision for ILM |
+| --- | --- | --- |
+| [Hong, *Predictive Latents for Autoregressive Language Models: Possibility, Gauge, and Obstruction*, 20 October 2026, v1 preprint](https://arxiv.org/html/2610.28540v1), Sections 3, 6–7 | Distinguishes prediction on supplied histories from iteration on generated states. Constant states illustrate why a small representation loss can carry no predictive information. Its formal setup concerns finite-alphabet language and a latent transition, not our thresholded pixel-feedback actor. | Measure actual autonomous answers. Normalized states and small one-step errors are insufficient qualification. Use the elementary distinction; do not treat the paper's other theorem statements as a verified certificate for this actor. |
+| [Guo et al., *Cola2: Co-Adaptive Hierarchical Language Modeling with Continuous Semantic Compression and Balanced Discrete Generation*, submitted 22 October 2026, v1 preprint](https://arxiv.org/pdf/2610.31305), Sections 3.2–3.3 | Re-encodes emitted text to keep continuous history consistent with what was generated. It combines predictive and reconstruction supervision, retains a discrete text decoder, and reports a 346.03-billion-source-token run with inherited initialization. | Our corresponding image-only operation already re-encodes emitted binary image blocks. Preserve this physical feedback. The external result motivates consistency, but does not demonstrate our writing quality, vocabulary-free language or affordable foundation training. |
+| [Ersoy, Cardozo Licha and Wiesner, *Phase transitions reveal hierarchical structure in deep neural networks*, Communications AI & Computing, 21 October 2026](https://www.nature.com/articles/s44488-026-00021-z) | Uses a quadratic regularizer to probe transitions and connections between learned solutions. Experiments include MNIST, Fashion-MNIST and a small synthetic convolutional setting. | Consider a later controlled regularization ablation only if optimization is the measured failure. A transition or flat path is not evidence of useful language. The study does not supply a transformer training-speed guarantee. |
+
+There are reasons to check even a relevant mathematical preprint closely.
+For example, Hong's Theorem 17 gives squared rollout risk proportional to the
+horizon H, while its stated Theorem 16 bound at unit Lipschitz constant is on
+root-mean-square error and grows as H. The former alone does not establish
+sharpness of the latter. This is a direct algebraic reading of those statements,
+not an independent verification of the paper. No implementation decision here
+depends on that sharpness claim.
+
+For a quadratic penalty written as beta times the squared Euclidean norm,
+its Hessian contribution is **2 beta I**. A beta I convention instead uses a
+one-half factor in the penalty. Regularizer formulas must keep this convention
+consistent, and an objective penalty must not be silently identified with
+decoupled AdamW decay. Neither this identity nor a landscape visualization
+specifies an effective learning rate or decay for our adapters.
+
+The 2 November
+[thermodynamic-initialization result](https://www.nature.com/articles/s44335-026-00103-2)
+already discussed in the [earlier review](physics_math_routes_20261105.md)
+concerns relaxation of physical computing systems. Its optimized preparation
+is relevant to that hardware setting. It provides no measured acceleration of
+our digital GPU training. A physics-inspired replacement should earn its place
+through matched language quality and total local compute, including preparation.
+
 The LARC comparison is especially relevant to continuous image generation,
 but its GenEval improvement is not a writing-comprehension result. A later
 bounded latent-computation ablation would need correct autonomous writing
@@ -170,6 +205,84 @@ These sampled local directions support keeping the codec frozen for the next
 experiment. They do not cover worst-case or learned prediction errors, unseen
 fonts, free-running history, valid language or historical forms. In particular,
 the high F1 at sigma 0.3 hides an exact-block rate of only 28.5%.
+
+## From a writing codec to a complete answer
+
+The current actor's feedback path is concrete: it thresholds a decoded block,
+reads those emitted pixels through the visual reader and appends their features
+to the causal context. It does not simply feed the predicted writing code back
+as if it were a reader state. This respects the separate spaces used for
+reading and writing. It also means that a smooth latent-transition theorem
+does not automatically describe the complete generator: pixel thresholding
+and learned stopping introduce discontinuities.
+
+An elementary condition makes the remaining requirement explicit. Fix a
+prompt and one reference answer of T binary blocks. Let y_ti in {-1,+1}
+be reference pixel i in block t. Let a_ti be the actor's continuous pixel
+score when its actual inference path is supplied the **exact reference
+history**, with no future blocks. Define
+
+\[
+ m_t=\min_i y_{ti}a_{ti}.
+\]
+
+If every m_t is strictly positive, the actor's hard threshold reproduces each
+block on that history. If its computed stop probability is below 0.5 before
+each required block and at least 0.5 at the terminal decision, induction
+then gives the complete exact answer under autonomous generation: the first
+block is exact, so the second sees the exact history, and so on. This is a
+sufficient condition, not a new learning theorem, a necessary condition, or
+evidence that our trained actor satisfies it. It assumes the same deterministic
+inference arithmetic and cache path for the reference-history comparison.
+Using the actual probability comparison matters because finite-precision
+sigmoid evaluation can round a small negative logit to probability 0.5.
+
+A supplied-code measurement addresses only part of this condition. With
+target writing code z_t and decoder D_w, set
+
+\[
+ m_t^{\mathrm{codec}}=\min_i y_{ti}D_w(z_t)_i.
+\]
+
+If this margin is positive and the predicted state on the exact history obeys
+
+\[
+ \|D_w(\widehat z_t)-D_w(z_t)\|_\infty
+ < m_t^{\mathrm{codec}},
+\]
+
+then the predicted block has the correct signs. This follows from the triangle
+inequality, without estimating a global decoder Lipschitz constant. It is a
+diagnostic sufficient condition; the difference must be evaluated at actual
+predicted states. Random perturbation directions from the existing codec audit
+do not establish this condition. The autonomous audit remains the primary
+measurement, and its fixed scores do not change.
+
+For a probabilistic generator, the chain rule similarly gives
+
+\[
+ P(E_1,\ldots,E_{T+1}\mid X)
+ =\prod_{t=1}^{T+1}P(E_t\mid X,E_{<t}),
+\]
+
+where E_t includes the required no-stop decision and exact block for t <= T,
+and E_{T+1} is the terminal stop. This requires no independence assumption.
+For illustration, if each conditional success probability were 0.99, forty
+such decisions would jointly succeed with probability about 0.669. Our
+supplied-code block scores are not these conditional probabilities. A high
+average reconstruction F1 therefore cannot be substituted for whole-answer
+success or used to forecast it.
+
+These observations support a small, discriminating follow-up **after** the
+frozen autonomous audit, if it fails: compare the same final actor's initial
+block, exact-history next blocks, generated-history blocks and stop decisions.
+Any additional model diagnostic needs its own fixed scope before execution;
+it must preserve the original outputs and cannot revise their scores. Poor
+first-block selection cannot be blamed on accumulated generated history.
+Conversely, good exact-history writing with poor autonomous writing would
+motivate a controlled generated-history training intervention. Neither outcome
+has been observed for V68 yet. This selects a failure mechanism to test before
+adding diffusion steps, recurrent depth or a new optimizer.
 
 ## The next discriminating experiment
 
