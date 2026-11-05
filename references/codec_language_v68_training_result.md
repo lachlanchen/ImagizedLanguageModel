@@ -2,9 +2,10 @@
 
 Checked 5 November 2026. The registered instruction run has completed all
 10,000 optimizer updates on physical GPU 0. This is completed training and
-execution evidence. Autonomous language qualification remains pending the
-separate, source-frozen 384-generation development audit and its independent
-verification. The general ILM goal remains open.
+execution evidence. The separate, source-frozen 384-generation
+[autonomous audit](codec_language_v68_result.md) is now complete and
+independently verified: the actor fails its Chinese answer-quality gates.
+The general ILM goal remains open.
 
 ## Measured execution
 
@@ -70,10 +71,10 @@ The immutable local run is `artifacts/codec_language_v68_20261105/`:
 
 ## Remaining decision
 
-The original trainer has exited. Its queued evaluator has started from the
-fixed final adaptation and uses the
+The original trainer and its queued evaluator have exited. The completed
+audit uses the fixed final adaptation and the
 [matched-layout control correction](codec_language_v68_layout_control_correction.md).
-Retain all normal/control outputs and the original quality gates. The first
-fixed audit example is visibly fragmented; it is not a language success or a
-substitute for the complete scored audit. No standalone bundle has been
+All normal/control outputs and the original quality gates are retained. The
+actor produces 0/128 exact Chinese answers and 32.6713% foreground F1; question
+dependence and stopping pass, while answer quality fails. No standalone bundle has been
 exported, and the genuinely sealed final split remains unopened.
