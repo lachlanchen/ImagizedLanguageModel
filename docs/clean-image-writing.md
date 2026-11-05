@@ -101,6 +101,12 @@ run's terminal receipt, and uses the same shared GPU lock for its model stage.
 An interrupted or failed original run does not trigger a replacement training
 job. Copy-probe scores are descriptive and do not replace the original gates.
 
+A separate [incremental writing-state cache](../references/causal_writing_cache_v76_result.md)
+avoids repeated causal-history computation. It has passed FP32 CPU numerical
+comparison on real histories through 128 blocks. GPU image-output replay and
+end-to-end timing remain untested, so the registered V75 path continues to use
+the existing computation. This optimization supplies no language-quality evidence.
+
 | Location under the full run | Contents |
 | --- | --- |
 | cache/ | Link to the existing authenticated V72 cache |
