@@ -12,7 +12,7 @@ import torch
 
 from .gguf_language_trunk import load_gguf_reader_source
 from .gguf_visual_language import QwenVisualLanguageArchive
-from .grounded_image_actor import GroundedImageActor, GroundedImageConfig
+from .grounded_image_actor import GroundedImageActor, GroundedImageConfig, StableFrozenLinear
 
 
 MODEL_SHA = "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466"
@@ -63,7 +63,8 @@ def load_grounded_image_actor(*, ollama_root, gguf_source, device, config=Ground
         for name, _ in list(model.named_parameters()):
             parent, _, leaf = name.rpartition(".")
             module = model.get_submodule(parent) if parent else model
-            tensor = torch.from_numpy(archive.read(prefix+"."+name)).to(device, torch.bfloat16)
+            dtype = torch.float32 if prefix == "visual" else torch.bfloat16
+            tensor = torch.from_numpy(archive.read(prefix+"."+name)).to(device, dtype)
             setattr(module, leaf, torch.nn.Parameter(tensor, requires_grad=False))
             count += 1
             if progress is not None and count % 32 == 0:
@@ -74,11 +75,18 @@ def load_grounded_image_actor(*, ollama_root, gguf_source, device, config=Ground
     context.rotary_emb = native.Qwen3VLTextRotaryEmbedding(tc, device=device)
     if any(t.is_meta for model in (vision, context) for t in [*model.parameters(), *model.buffers()]):
         raise ValueError("unmaterialized native state")
+    inherited_count = sum(p.numel() for p in vision.parameters())+sum(p.numel() for p in context.parameters())
+    vision.float()
+    for name, module in list(context.named_modules()):
+        if isinstance(module, torch.nn.Linear):
+            parent, _, leaf = name.rpartition(".")
+            target = context.get_submodule(parent) if parent else context
+            setattr(target, leaf, StableFrozenLinear(module))
     actor = GroundedImageActor(vision, context, config)
     provenance = dict(model_sha256=MODEL_SHA, manifest_sha256=MANIFEST_SHA,
-        retained_native_tensors=len(expected), retained_base_parameters=sum(p.numel() for p in vision.parameters())
-        +sum(p.numel() for n, p in context.named_parameters() if ".down" not in n and ".up" not in n),
-        configurations=configs, imported_storage="dequantized existing Q4 archive -> frozen BF16",
+        retained_native_tensors=len(expected), retained_base_parameters=inherited_count,
+        configurations=configs, imported_storage="existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+        contextual_compute="FP32 contractions/activations, layer-local parameter casts",
         mrope_source_commit="a6d33251620eef7629c73b09e672f2df243eb363",
         mrope_source_sha256="795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
         external_pretraining=True, vocabulary_parameters_materialized=0)

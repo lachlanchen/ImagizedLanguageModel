@@ -67,11 +67,30 @@ class ImageAdapterLinear(nn.Module):
         self.scale = alpha/rank
 
     def forward(self, x):
-        # Trainable parameters and optimizer states stay FP32; the frozen base
-        # uses BF16 storage. Autocast may still accelerate both contractions.
-        delta = F.linear(F.linear(x.float(), self.down), self.up)*self.scale
+        # Trainable parameters, optimizer states and adapter contractions stay
+        # FP32. The contextual base retains BF16 storage with stable compute.
+        with torch.autocast(device_type=x.device.type, enabled=False):
+            delta = F.linear(F.linear(x.float(), self.down), self.up)*self.scale
         result = self.base(x)
         return result+delta.to(result.dtype)
+
+
+class StableFrozenLinear(nn.Module):
+    """BF16 parameter storage with FP32 contractions and temporary casts.
+
+    Decoder-layer checkpointing prevents retaining an entire FP32 copy of the
+    body for backward. This does not reconstruct the source's lost precision.
+    """
+
+    def __init__(self, base):
+        super().__init__()
+        self.weight = base.weight.requires_grad_(False)
+        self.bias = base.bias.requires_grad_(False) if base.bias is not None else None
+        self.in_features, self.out_features = base.in_features, base.out_features
+
+    def forward(self, x):
+        with torch.autocast(device_type=x.device.type, enabled=False):
+            return F.linear(x.float(), self.weight.float(), self.bias.float() if self.bias is not None else None)
 
 
 def time_features(t, width=128):
@@ -174,8 +193,9 @@ class GroundedImageActor(nn.Module):
         if not images:
             raise ValueError("at least one observed image is required")
         packed, grids = zip(*(native_image_patches(image) for image in images))
-        values, deep = self.vision(torch.cat(packed).to(self.device, torch.bfloat16),
-            grid_thw=torch.tensor(grids, device=self.device, dtype=torch.long))
+        with torch.autocast(device_type=self.device.type, enabled=False):
+            values, deep = self.vision(torch.cat(packed).to(self.device, torch.float32),
+                grid_thw=torch.tensor(grids, device=self.device, dtype=torch.long))
         counts = [g[0]*g[1]*g[2]//4 for g in grids]
         return list(values.split(counts)), [list(level.split(counts)) for level in deep], grids
 

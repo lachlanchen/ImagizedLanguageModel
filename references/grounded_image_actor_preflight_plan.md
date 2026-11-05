@@ -75,3 +75,26 @@ matched controls. Run real training and autonomous Chinese/English answers.
 Preserve inherited pretraining attribution and the full image-language goal.
 The manuscript must continue to distinguish component execution, bounded
 reading tests and general language capability.
+
+## Preserved precision failure and repair scope
+
+Attempt 01 completes full-row backward at 15.195 GiB allocated memory and
+passes exact optimizer/RNG replay plus same-shape future-pixel isolation.
+Cached versus full-prefix relative maximum error is 0.18524, failing 0.02.
+The failed report remains immutable under `attempt01/`.
+
+A separate actual-weight diagnostic holds visual features and coordinates
+identical and still measures 0.08514 relative cache error. Differences begin
+in the first contextual layer and accumulate. FP32 residuals alone leave
+0.07507 error. Prompt encoder features match exactly in that witness. This
+supports investigating contraction precision rather than weakening the gate;
+it does not prove that every discrepancy has one cause.
+
+The repair may retain BF16 contextual weight storage while evaluating frozen
+linear contractions and contextual activations in FP32, with only a layer's
+temporary casts live during checkpointed backward. Keep the smaller vision
+body and its computation in FP32 to avoid tiny-block versus joint-batch
+rounding differences. Writer contractions may remain BF16 under autocast.
+Measure actual memory and runtime again, keep all original thresholds and
+full depths/rows, and run a new complete attempt. These casts cannot recover
+precision already lost in the imported quantized/BF16 source weights.
