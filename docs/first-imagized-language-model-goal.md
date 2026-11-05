@@ -84,6 +84,15 @@ existing host renderer and new input command. These checks make the final
 actor accessible through image files, but do not execute final-model inference,
 qualify scanned-page understanding or establish standalone deployment.
 
+The [native standalone implementation](codec-standalone-deployment.md) now
+passes eight CPU structural/shard checks: the full 1,053-tensor architecture
+matches all 748 inherited shapes/dtypes, and a fresh guarded process loads the
+actual fixed codec and reproduces two existing supplied-code outputs exactly.
+No foundation weight values are materialized during this preflight. The
+implemented final exporter requires the original autonomous language gates;
+no full weight bundle or complete-actor isolated replay exists yet. The source
+archive dependency at deployment remains an open verification requirement.
+
 The [latest physics/math review](../references/physics_math_after_codec_20261105.md)
 connects recent feature-learning and continuous-generation work to this
 decision. Its registered CPU diagnostic measures frozen-codec robustness at
