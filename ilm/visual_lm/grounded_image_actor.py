@@ -240,7 +240,10 @@ class GroundedImageActor(nn.Module):
                 raise ValueError("completed writing must consist of 32-by-64 physical blocks")
         features, deep, grids = self.encode_images([prompt, *completed_blocks])
         inputs, queries, offset = self.assemble(features, deep, grids)
-        outputs = self.context(**inputs, use_cache=use_cache)
+        # Cover attention products as well as the frozen linear projections;
+        # an outer writer autocast must not silently cast QK or probability-V.
+        with torch.autocast(device_type=self.device.type, enabled=False):
+            outputs = self.context(**inputs, use_cache=use_cache)
         indices = torch.tensor([[i, i+1] for i in queries], device=self.device)
         return outputs.last_hidden_state[0, indices], outputs.past_key_values, offset
 
@@ -282,9 +285,10 @@ class GroundedImageActor(nn.Module):
             [query_offset, query_offset+1]], device=self.device)), dim=1)
         length = past.get_seq_length()
         position_ids = torch.cat((torch.arange(length, length+4, device=self.device)[None], positions), dim=0)[:, None]
-        result = self.context(inputs_embeds=torch.cat((feature, self.queries.to(feature.dtype)))[None],
-            position_ids=position_ids, visual_pos_masks=torch.tensor([[True, True, False, False]], device=self.device),
-            deepstack_visual_embeds=[level[0] for level in deep], past_key_values=past, use_cache=True)
+        with torch.autocast(device_type=self.device.type, enabled=False):
+            result = self.context(inputs_embeds=torch.cat((feature, self.queries.to(feature.dtype)))[None],
+                position_ids=position_ids, visual_pos_masks=torch.tensor([[True, True, False, False]], device=self.device),
+                deepstack_visual_embeds=[level[0] for level in deep], past_key_values=past, use_cache=True)
         return result.last_hidden_state[:, -2:], result.past_key_values, query_offset+2
 
     @torch.no_grad()

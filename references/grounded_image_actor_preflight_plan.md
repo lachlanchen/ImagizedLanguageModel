@@ -98,3 +98,12 @@ rounding differences. Writer contractions may remain BF16 under autocast.
 Measure actual memory and runtime again, keep all original thresholds and
 full depths/rows, and run a new complete attempt. These casts cannot recover
 precision already lost in the imported quantized/BF16 source weights.
+
+Attempt 02 retains all original checks and peaks at 17.210 GiB, but its cache
+error remains 0.09815. Although linear projections and residuals are FP32,
+the outer BF16 autocast still affects native attention matrix products.
+The complete contextual call must disable autocast, including checkpoint
+recomputation and cached continuation. Add an actual attention-entry hook
+to verify that boundary, keep the original numerical tolerance and preserve
+the second failed receipt. A third full attempt must measure the resulting
+memory, gradients, resume and causality rather than accepting a local fix.

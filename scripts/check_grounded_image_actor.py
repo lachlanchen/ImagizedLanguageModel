@@ -158,6 +158,9 @@ def main():
             inherited=sum(p.numel() for p in actor.parameters() if not p.requires_grad),
             trained=sum(p.numel() for p in trainable), writer=sum(p.numel() for p in actor.writer.parameters()))
         actor.context.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        attention_autocast = []
+        precision_hook = actor.context.layers[0].self_attn.register_forward_pre_hook(
+            lambda module, inputs: attention_autocast.append(torch.is_autocast_enabled()))
         optimizer = torch.optim.AdamW(trainable, lr=1e-4, betas=(.9, .95), weight_decay=.01, fused=True)
         generator = torch.Generator(device=device).manual_seed(20266402)
 
@@ -251,6 +254,8 @@ def main():
         checks["future_pixel_intervention_exact"] = future_error == 0
         checks["separate_image_encoder_isolation_exact"] = isolation == 0
         checks["cached_prefix_relative_error"] = cache_relative <= .02
+        checks["contextual_attention_autocast_disabled"] = bool(attention_autocast) and not any(attention_autocast)
+        precision_hook.remove()
         evidence.update(future_pixel_max_abs=future_error, encoder_isolation_max_abs=isolation,
             cached_prefix_max_abs=cache_abs, cached_prefix_relative_max=cache_relative,
             generation=dict(blocks=len(result["images"]), events=result["events"], stopped=result["stopped"],
