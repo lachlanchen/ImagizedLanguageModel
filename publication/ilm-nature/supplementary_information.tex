@@ -1372,6 +1372,8 @@ Matched source text & 3 & 77.110 & 8\\\bottomrule
 \end{tabular}
 \end{center}
 
+Supplementary Fig.~\ref{fig:visual-semantics} separates the measured counts
+from the symbolic helper boundary.
 The source vocabulary projection and tokenizer are local variables in the
 separate diagnostic helper, never registered on the image actor. The helper
 decodes at most 64 source positions per answer with greedy source termination.
@@ -1392,7 +1394,19 @@ cases do not support population estimates, and changes in observer scale and
 task framing are not an isolated causal intervention. The result motivates
 testing a complete image writer rather than qualifying one.
 
+\plate{Figure_S10_visual_semantics}{\textbf{Numeric image controls retain bounded reading in the inherited body.}
+\textbf{a}, Literal exact answers among the same eight reused Chinese questions
+for original images, matched question erasure, declared native-budget images,
+their erased controls and a matched source-text helper. All counts use the
+same denominator; no population accuracy or causal scale advantage is claimed.
+\textbf{b}, The vocabulary-free image interface produces continuous states.
+Only the separate diagnostic helper applies symbolic source decoding.
+All 32 source/transformed images and 742 retained projection decisions verify;
+the complete neural forward pass is not independently replayed. No image
+answer is generated in this diagnostic.}{fig:visual-semantics}
+
 \section*{Supplementary Note 30: causal joint flow in writing coordinates}
+Supplementary Fig.~\ref{fig:continuous-writing} shows training and deployment.
 The successor is an implemented candidate with ongoing training, not a
 completed language result. For physical prompt $X$, let
 \begin{align}
@@ -1455,6 +1469,19 @@ Training, inference, scoring and independent verification use
 \path{scripts/infer_semantic_ilm_v72.py},
 \path{scripts/audit_semantic_ilm_v72.py} and
 \path{scripts/verify_semantic_ilm_v72.py}.
+
+\plate{Figure_S11_continuous_writer}{\textbf{Causal joint flow couples visual semantics to physical writing.}
+\textbf{a}, Prompt-only frozen contextual states condition a causal writing
+transformer. Detached image codes supply past history and a joint
+flow-matching target. The causal mask excludes the current and later target
+blocks; balanced structural-stop loss supervises termination.
+\textbf{b}, Autonomous inference integrates 32 midpoint flow steps, applies
+non-affine LayerNorm, decodes and thresholds physical output. Every emitted
+block is encoded again before entering history. Learned stopping uses
+threshold 0.5 and a uniform 128-block capacity. The writer has 38.65M trainable
+parameters; the larger frozen externally pretrained reader remains part of
+the complete actor. This is the implemented candidate under training,
+with no completed autonomous language result or fabricated output example.}{fig:continuous-writing}
 
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use

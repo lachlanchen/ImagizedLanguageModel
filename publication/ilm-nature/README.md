@@ -29,8 +29,14 @@ visual memory and re-encoded physical-output feedback. Real-example execution
 checks pass, including exact optimizer/RNG resume. Full-corpus caching,
 40,000-update training and the original autonomous audit are in progress.
 Supplementary Note 30 gives the complete mathematical and deployed path;
-it reports no new language accuracy. Existing figures and the 24-slide editable
-deck remain unchanged until new image-output results exist.
+it reports no new language accuracy. Figure S10 shows the measured reader
+comparison and its helper boundary; Figure S11 shows the implemented training
+and physical-feedback computation. Both are native editable slides. The deck
+now has 26 slides, preserving all 24 earlier slides and their canonical PDF
+appearance. The [current figure verifier](verify_semantic_transfer_figures.py)
+checks source scores, chart workbooks, native parts and rendered figures.
+The [current publication builder](build_semantic_figure_publication.py) rebuilds
+the article, supplement and matching redlines.
 
 A complete conditional-writing actor finishes 10,000 updates on all 12,976
 admitted Chinese/English instruction examples. It adapts 9.352M of 7.539B
@@ -66,8 +72,8 @@ coordinates. It retains 7.539B total parameters, trains 9.352M, and passes all
 Note 26 give the image-only feedback loop, detached target-code supervision,
 loss and numerical checks. Two-update output remains fragmented. These are
 execution and reconstruction results; autonomous language is unqualified.
-The current deck has 24 slides, preserving all preceding 22 slide renders
-and original slide/chart parts. Three new native charts have source-matched
+That revision extends the deck to 24 slides, preserving all preceding 22 slide
+renders and original slide/chart parts. Three native charts have source-matched
 embedded workbooks. Earlier source figures remain unchanged.
 
 A matched question--answer assignment term weakens free image writing.

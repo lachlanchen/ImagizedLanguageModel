@@ -22,6 +22,8 @@ reported directly below.*
 
 ## Current run: visual semantics to continuous image answers
 
+![Implemented visual-semantic training and physical image-output feedback](publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
+
 A complete causal writer is implemented and the full-data pipeline is running
 on physical GPU 0. It conditions on frozen image-derived semantic states and
 generates answer pixels through a joint continuous code flow, rereading every

@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 00:08:47 2026
-%DIF ADD new.tex   Fri Nov  6 00:08:47 2026
+%DIF DEL old.tex   Fri Nov  6 00:39:43 2026
+%DIF ADD new.tex   Fri Nov  6 00:39:43 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -1554,7 +1554,9 @@ uses matched source text. There are 40 helper generations in total.
 \end{tabular}
 \end{center}
 
-\DIFadd{The source vocabulary projection and tokenizer are local variables in the
+\DIFadd{Supplementary Fig.~\ref{fig:visual-semantics} separates the measured counts
+from the symbolic helper boundary.
+The source vocabulary projection and tokenizer are local variables in the
 separate diagnostic helper, never registered on the image actor. The helper
 decodes at most 64 source positions per answer with greedy source termination.
 Independent CPU verification checks all 32 source/transformed images and
@@ -1576,8 +1578,20 @@ task framing are not an isolated causal intervention. The result motivates
 testing a complete image writer rather than qualifying one.
 }
 
+\plate{Figure_S10_visual_semantics}{\textbf{Numeric image controls retain bounded reading in the inherited body.}
+\textbf{a}, Literal exact answers among the same eight reused Chinese questions
+for original images, matched question erasure, declared native-budget images,
+their erased controls and a matched source-text helper. All counts use the
+same denominator; no population accuracy or causal scale advantage is claimed.
+\textbf{b}, The vocabulary-free image interface produces continuous states.
+Only the separate diagnostic helper applies symbolic source decoding.
+All 32 source/transformed images and 742 retained projection decisions verify;
+the complete neural forward pass is not independently replayed. No image
+answer is generated in this diagnostic.}{fig:visual-semantics}
+
 \section*{\DIFadd{Supplementary Note 30: causal joint flow in writing coordinates}}
-\DIFadd{The successor is an implemented candidate with ongoing training, not a
+\DIFadd{Supplementary Fig.~\ref{fig:continuous-writing} shows training and deployment.
+The successor is an implemented candidate with ongoing training, not a
 completed language result. For physical prompt $X$, let
 }\begin{align}
  M &= \operatorname{sg}(F_{\rm frozen}(E_r(R(X));C)),\\
@@ -1643,6 +1657,19 @@ Training, inference, scoring and independent verification use
 }\path{scripts/audit_semantic_ilm_v72.py} \DIFadd{and
 }\path{scripts/verify_semantic_ilm_v72.py}\DIFadd{.
 }
+
+\plate{Figure_S11_continuous_writer}{\textbf{Causal joint flow couples visual semantics to physical writing.}
+\textbf{a}, Prompt-only frozen contextual states condition a causal writing
+transformer. Detached image codes supply past history and a joint
+flow-matching target. The causal mask excludes the current and later target
+blocks; balanced structural-stop loss supervises termination.
+\textbf{b}, Autonomous inference integrates 32 midpoint flow steps, applies
+non-affine LayerNorm, decodes and thresholds physical output. Every emitted
+block is encoded again before entering history. Learned stopping uses
+threshold 0.5 and a uniform 128-block capacity. The writer has 38.65M trainable
+parameters; the larger frozen externally pretrained reader remains part of
+the complete actor. This is the implemented candidate under training,
+with no completed autonomous language result or fabricated output example.}{fig:continuous-writing}
 
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use

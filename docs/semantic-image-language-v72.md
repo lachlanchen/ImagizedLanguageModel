@@ -14,6 +14,12 @@ and the earlier trained writing codec remain external foundations. The
 This is a new candidate under training; useful autonomous language generation
 has not yet been established.
 
+![Complete training and image-output computation](../publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
+
+The [native editable deck](../publication/ilm-nature/ILM_Figures_editable.pptx)
+contains the training/inference diagram on slide 26 and the measured reader
+diagnostic on slide 25. Earlier figures remain intact.
+
 ## Measured starting point
 
 The imported vocabulary-free reader, using fixed numeric task controls,
