@@ -60,6 +60,15 @@ are frozen while it runs. Its authoritative state is
 `artifacts/codec_language_v68_20261105/status.json`; inspect the live PID before
 deciding that a stalled observation is a stopped job.
 
+The [first-epoch integrity audit](../references/evidence/codec_language_v68_first_epoch_integrity.json)
+independently verifies the durable update-6,500 state and all 13,000 recorded
+example draws. Every admitted example is consumed exactly once in the first
+epoch: 3,193 Chinese and 9,783 English examples. A fresh seeded permutation,
+its first 24 draws, saved cursor and data RNG state match exactly. All target
+block counts match the accepted manifests, and the trainable parameters and
+optimizer tensors remain finite. This verifies actual full-corpus exposure
+within an unfinished run; it makes no language-quality claim.
+
 The fixed [autonomous audit preparation](../references/codec_language_v68_audit_preparation.md)
 contains 128 Chinese questions from 64 shared-passage pairs and 64 English
 instructions across eight categories. Full prompts and first reference
