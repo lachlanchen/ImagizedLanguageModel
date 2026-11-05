@@ -50,15 +50,16 @@ future-pixel isolation, exact optimizer/RNG replay and cached writing pass.
 Its two-update output is fragmented execution evidence, without a language
 claim.
 
-The [V68 instruction stage](../references/codec_language_learning_v68_protocol.md)
-has started on physical GPU 0 in the single owned session `ilm-codec-language`.
-It learns prompt-conditioned answer codes using all 12,976 admitted training
-examples, fresh full-corpus permutations, two examples per update and a fixed
-10,000-update budget. The production optimizer, data permutation/cursor and
-all RNG states pass exact early replay. Sources, objective and prerequisites
-are frozen while it runs. Its authoritative state is
-`artifacts/codec_language_v68_20261105/status.json`; inspect the live PID before
-deciding that a stalled observation is a stopped job.
+The [V68 instruction stage](../references/codec_language_v68_training_result.md)
+has completed all 10,000 updates on physical GPU 0. It records 20,000 draws
+from all 12,976 admitted training examples, using fresh full-corpus permutations
+and two examples per update. The production optimizer, data permutation/cursor
+and all RNG states pass exact early replay. The completed-training integrity
+check verifies every recorded draw, the final permutation/RNG state and exact
+agreement between the final adaptation and production checkpoint. Peak
+allocated memory is 16.965 GiB. Its trainer has exited and the queued
+autonomous evaluator is running. This establishes completed adaptation and
+execution, with no language-quality claim.
 
 The [first-epoch integrity audit](../references/evidence/codec_language_v68_first_epoch_integrity.json)
 independently verifies the durable update-6,500 state and all 13,000 recorded
@@ -67,30 +68,34 @@ epoch: 3,193 Chinese and 9,783 English examples. A fresh seeded permutation,
 its first 24 draws, saved cursor and data RNG state match exactly. All target
 block counts match the accepted manifests, and the trainable parameters and
 optimizer tensors remain finite. This verifies actual full-corpus exposure
-within an unfinished run; it makes no language-quality claim.
+at that intermediate checkpoint; it makes no language-quality claim. The
+[completed-training receipt](../references/evidence/codec_language_v68_training_integrity.json)
+extends the data-order and saved-state checks through update 10,000 without
+recomputing every neural loss or gradient update.
 
 The fixed [autonomous audit preparation](../references/codec_language_v68_audit_preparation.md)
 contains 128 Chinese questions from 64 shared-passage pairs and 64 English
 instructions across eight categories. Full prompts and first reference
 images match the existing development cache. Chinese question blanking uses
 the same Pango layout with white question ink; it preserves the passage and
-glyph advances. Preparation uses no actor calls. The final trained state and
-actual generated answers are still required before any language decision.
+glyph advances. Preparation uses no actor calls. The final trained state is
+now fixed; the completed autonomous audit and independent verification remain
+required before any language decision.
 
 The implemented [autonomous evaluator](../references/codec_language_v68_autonomous_audit.md)
 passes eight CPU preflight checks covering all 192 cases and 384 owning prompt
 paths, full-width/stopping distinctions and article-grouped scoring. It rejects
-unfinished training before allocating CUDA memory. A lightweight coordinator
-waits for the same trainer to finish, then runs all normal/control generations
-and an independent raw-output verifier. It allocates no model while waiting;
-the evaluator preflight is not a language result.
+unfinished training before allocating CUDA memory. The lightweight coordinator
+has observed the same trainer's completion and launched final normal/control
+generation. It then runs the independent raw-output verifier. The evaluator
+preflight and successful launch are not language results.
 
 A [pre-generation control correction](../references/codec_language_v68_layout_control_correction.md)
 removes reflow in 31 Chinese and one English blank control. Erasure now uses
 the normal prompt's exact fold ranges and padding. Independent NumPy checks
 verify all 384 actor inputs; all normal pixels remain unchanged. Cases,
-references and quality gates are preserved, and the corrected coordinator is
-queued behind the same trainer. The [verification receipt](../references/evidence/codec_language_v68_layout_control_correction.json)
+references and quality gates are preserved, and the corrected coordinator has
+launched the final actor after the same trainer exited. The [verification receipt](../references/evidence/codec_language_v68_layout_control_correction.json)
 and original preflight history distinguish this measurement repair from a
 language result.
 
@@ -127,7 +132,8 @@ current verified Nature package with matching editable figures. The article,
 review, supplement, matching redlines, twenty-two-slide deck and two new
 standalone figures pass build, data and visual checks. All twenty older slides
 render identically, and sixteen displayed raw rasters match their source
-pixels. V68's running state is excluded from language results.
+pixels. V68's training execution is excluded from language-quality results
+until its autonomous audit is complete and independently verified.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine

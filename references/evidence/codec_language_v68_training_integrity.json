@@ -1,0 +1,42 @@
+{
+  "verified_at": "2026-11-05T11:44:52.790849+00:00",
+  "training_report_sha256": "02fe4b868ecb283dd3392acfa63ebd97e731b2462ba616e7633ae6c0c933dc24",
+  "final_trainable_sha256": "39d978ae7eefa4fff5a73084e7dd5b262ceb09ecd09b253e2d3627fe03a4b66c",
+  "final_checkpoint_sha256": "89b67128f1f81e66c6b9544897d1890d2d121086848404821c463324afb4917d",
+  "sample_order_sha256": "ccfeb2fdd2162e08341e141e23ab93c494b0b1c9f059240ef2e609bd3881bf71",
+  "metrics_sha256": "1c365d2878beafc50e629bc56d847a7748bed2b1c14146aa20198cb5dd7d6c36",
+  "training_report_source_commit": "ab43c1ef0ab77b0de2bba622d0372c2c7f69c69a",
+  "training_data_sha256": "0ffcfd101ea26d79c4084bfd166bd146ff5560f5fa83b7aa57c6b48558377d7e",
+  "recorded_updates_verified": 10000,
+  "examples_drawn": 20000,
+  "distinct_examples": 12976,
+  "first_epoch_source_counts": {
+    "dolly": 9783,
+    "cmrc": 3193
+  },
+  "all_draws_by_source": {
+    "dolly": 15074,
+    "cmrc": 4926
+  },
+  "second_epoch_unique_draws": 7024,
+  "selected_block_losses_verified": 219066,
+  "epoch": 1,
+  "cursor": 7024,
+  "trainable_parameters_finite": 9351937,
+  "optimizer_tensors_finite": 663,
+  "checks": {
+    "final_checkpoint_and_final_adaptation_equal": true,
+    "all_training_sources_and_prerequisites_match": true,
+    "all_draws_match_seeded_full_corpus_permutations": true,
+    "target_counts_and_sampled_block_indices_match_manifests": true,
+    "final_permutation_cursor_and_data_rng_exact": true,
+    "all_metric_steps_schedule_and_values_finite": true,
+    "all_trainable_and_optimizer_tensors_finite": true,
+    "production_resume_all_ten_checks_pass": true
+  },
+  "elapsed_verification_seconds": 0.5205496549606323,
+  "model_forward_calls": 0,
+  "gpu_allocations": 0,
+  "autonomous_language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
