@@ -1,0 +1,98 @@
+{
+  "identity": {
+    "source_commit": "a1a8b2e8b73e0fc0876091be83ba4659c4822b8f",
+    "sources": {
+      "scripts/audit_clean_data_v75.py": "c5f4b4f20a3d10962755d9191316fece56797ee0d78d5a5ea78773030f764b73",
+      "ilm/visual_lm/codec_language_audit.py": "05beb4a225948fede87f8aba0a10f2f292bf2daaa53b7c4c33161cdff1e3b8e9",
+      "ilm/visual_lm/complete_writing_data.py": "b787e7d0f14bef27658cab335682a59f5f1390eb95b8f6772f94ae9208df5c2d"
+    }
+  },
+  "training_report_sha256": "0ffcfd101ea26d79c4084bfd166bd146ff5560f5fa83b7aa57c6b48558377d7e",
+  "audit_report_sha256": "4f90406b51670e4e82327d1396e1c954e62bfb5d7b31c437b5c59e88a9180fe5",
+  "training_images_authenticated": 12976,
+  "audit_images_authenticated": 192,
+  "training": {
+    "cmrc": {
+      "examples": 3193,
+      "categories": {
+        "chinese_reading": 3193
+      },
+      "unique_answer_rasters": 2956,
+      "prompt_blocks": {
+        "count": 3193,
+        "minimum": 77,
+        "median": 133.0,
+        "p90": 162.0,
+        "maximum": 180,
+        "mean": 134.68806764797995
+      },
+      "answer_blocks": {
+        "count": 3193,
+        "minimum": 1,
+        "median": 3.0,
+        "p90": 5.0,
+        "maximum": 7,
+        "mean": 3.1208894456623866
+      }
+    },
+    "dolly": {
+      "examples": 9783,
+      "categories": {
+        "closed_qa": 1098,
+        "classification": 1678,
+        "open_qa": 2742,
+        "brainstorming": 1316,
+        "general_qa": 1320,
+        "information_extraction": 751,
+        "summarization": 568,
+        "creative_writing": 310
+      },
+      "unique_answer_rasters": 9744,
+      "prompt_blocks": {
+        "count": 9783,
+        "minimum": 5,
+        "median": 15.0,
+        "p90": 144.0,
+        "maximum": 240,
+        "mean": 44.283450884186855
+      },
+      "answer_blocks": {
+        "count": 9783,
+        "minimum": 1,
+        "median": 26.0,
+        "p90": 87.0,
+        "maximum": 128,
+        "mean": 37.277317796177044
+      }
+    }
+  },
+  "audit_source_counts": {
+    "cmrc": 128,
+    "dolly": 64
+  },
+  "unique_training_prompt_rasters": 12870,
+  "unique_training_answer_rasters": 12700,
+  "exact_record_id_overlap": [],
+  "exact_prompt_raster_overlap": [],
+  "cases_with_a_reference_raster_seen_in_training": [
+    "cmrc/DEV_1536_QUERY_1",
+    "cmrc/DEV_587_QUERY_1",
+    "cmrc/DEV_1564_QUERY_1",
+    "cmrc/DEV_1107_QUERY_0",
+    "cmrc/DEV_351_QUERY_0",
+    "cmrc/DEV_552_QUERY_0",
+    "cmrc/DEV_16_QUERY_0",
+    "cmrc/DEV_1666_QUERY_1",
+    "cmrc/DEV_1067_QUERY_0",
+    "cmrc/DEV_1672_QUERY_0",
+    "dolly/dolly_05704"
+  ],
+  "no_exact_prompt_or_record_overlap": true,
+  "model_calls": 0,
+  "gpu_allocations": 0,
+  "sealed_examples_opened": 0,
+  "external_foundation_contamination_assessed": false,
+  "near_duplicate_passages_assessed": false,
+  "language_quality_claim": false,
+  "elapsed_seconds": 6.403477645479143
+}

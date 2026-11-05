@@ -62,6 +62,26 @@ OCR or teacher service. External language/vision pretraining remains part of
 the provenance; these local costs do not represent training the entire
 foundation from scratch.
 
+A separate [data-only audit](../references/evidence/clean_data_v75_result.json)
+authenticates all 12,976 training images and 192 evaluation images. It finds
+zero shared record IDs and zero exact prompt rasters across those sets.
+Eleven evaluation cases have a reference answer raster also present among
+training answers: ten Chinese and one English. Shared short answers do not
+establish comprehension, and this audit does not assess near-duplicate
+passages or contamination in external foundation pretraining.
+
+The Chinese subset has 3,193 examples, with a median answer length of three
+32-by-64 blocks and a maximum of seven. The 9,783 English examples have a
+median of 26 answer blocks and a maximum of 128. Consequently even a bounded
+Chinese reading pass would not establish Chinese long-form writing. Reproduce
+the exact-data check without a neural model or GPU:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python scripts/audit_clean_data_v75.py \
+  --out artifacts/clean_data_recheck.json
+```
+
 | Location under the full run | Contents |
 | --- | --- |
 | cache/ | Link to the existing authenticated V72 cache |
