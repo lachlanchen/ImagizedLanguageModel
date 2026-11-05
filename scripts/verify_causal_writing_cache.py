@@ -50,12 +50,15 @@ def main():
     long_source=min(json.loads(line)["file"] for line in manifest.read_text().splitlines()
         if json.loads(line)["answer"]["blocks"]==128)
     selected=[first_chinese,source_index[long_source]]
+    flags=next(line for line in Path("/proc/cpuinfo").read_text().splitlines() if line.startswith("flags"))
+    native_bf16=bool({"avx512_bf16","amx_bf16"}.intersection(flags.split()))
+    precisions=("float32","bfloat16") if native_bf16 else ("float32",)
     results=[]
     for index in selected:
         memory,codes=data[index]
         memory=memory[None]
         n=len(codes)
-        for precision in ("float32","bfloat16"):
+        for precision in precisions:
             try:
                 with torch.inference_mode(), torch.autocast("cpu",dtype=torch.bfloat16,enabled=precision=="bfloat16"):
                     begun=time.perf_counter()
@@ -76,6 +79,8 @@ def main():
                     stopping=torch.equal(stop_original>=.5,stop_cached>=.5)
                     if precision=="float32":
                         torch.testing.assert_close(original,cached,rtol=1e-5,atol=2e-5)
+                        if not stopping:
+                            raise AssertionError("FP32 stopping decisions differ")
                     if cache.sequence_length!=memory.shape[1]+n+1:
                         raise AssertionError("cache sequence growth differs")
                     if n==128:
@@ -115,6 +120,7 @@ def main():
             raise AssertionError("parameter mutation did not invalidate the cache")
     report=dict(identity=identity,checkpoint_sha256=receipt["checkpoint_sha256"],
         cache_report_sha256=data.report_sha256,torch_version=str(torch.__version__),results=results,
+        cpu_bf16_skipped_without_native_support=not native_bf16,
         stale_parameter_guard_pass=stale_guard,image_reader_codec_sampler_calls=0,
         autonomous_image_generation_calls=0,gpu_allocations=0,
         assisted_reference_history=True,actual_gpu_generation_replayed=False,

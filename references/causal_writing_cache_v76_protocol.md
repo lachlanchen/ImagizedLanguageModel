@@ -24,7 +24,8 @@ is loaded or run in this check.
 
 FP32 state agreement uses rtol=0.00001 and atol=0.00002; report maximum/RMS
 error and all stopping-threshold decisions. Also report CPU BF16 arithmetic
-when supported, without treating it as GPU replay. Check exact cache growth,
+when native AVX512/AMX BF16 support is present, without treating it as GPU
+replay; record an explicit skip otherwise. Check exact cache growth,
 the registered 128-block capacity and refusal after parameter mutation.
 Record CPU-only timings as informational measurements that exclude the
 reader, denoiser, image codec and GPU execution. Projection-row and attention-
