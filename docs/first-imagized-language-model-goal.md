@@ -4,99 +4,71 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
-V63 now runs a matched question-assignment experiment on GPU 0. It uses 3,793
-training-only pairs from 939 paragraphs, with distinct accepted answer images.
-The same full image generator scores correct and swapped question/answer
-streams; the assignment term trains conditional binding directly while
-positive image likelihood preserves writing. Both 490M-parameter arms start
-from the same learned V62 EMA and run 2,000 matched updates. They retain the
-independent image-only actor and unchanged autonomous-generation gates.
+V63 is complete: both 2,000-update, 489,998,208-parameter arms finish on
+physical GPU 0, pass standalone offline replay and receive the locked audit.
+The assignment intervention is rejected. Control produces 2/256 exact primary
+answers and aligned 1/256; both have zero fully correct pairs out of 393.
+Aligned raster F1 is lower by 0.812 percentage points, article-grouped 95%
+interval [-1.504, -0.202]. Both show resolved normal-minus-blank-question gains,
+but neither meets the absolute answer-quality requirements. General useful
+language remains unachieved. See the [completed result](../references/question_assignment_v63_result.md)
+and [frozen workflow](question-assignment-language.md).
 
-The full-model preflight passes exact optimizer/RNG resume, assignment-only
-gradients, causal masking, physical data assembly and strict-FP32 cached
-inference. The longest pair fits in 9.197 GiB. Actual production has started
-in the persistent `ilm-v63-training` coordinator, control then aligned,
-followed by standalone replay and the locked audit. No V63 development result
-or language pass exists yet. The
-[training guide](question-assignment-language.md) and
-[registered protocol](../references/question_assignment_v63_protocol.md)
-specify the exact comparison. General useful language, books and historical
-writing remain the full objective, beyond this necessary conditional test.
+Both arms consume byte-identical sample journals and peak at 10.301 GiB.
+Training takes 7,355.156 s for control and 6,737.336 s for aligned, excluding
+loading, serialization and inherited foundation pretraining. The timing
+variation does not establish efficiency. The coordinator, trainers, audit and
+owned tmux session have exited normally. There is no current project GPU or
+GUI runtime to preserve as evidence. Models, raw outputs and reports remain
+under `artifacts/question_assignment_v63_20261105/`; sealed final data remains
+unopened.
 
-The latest [learning-theory review](../references/learning_response_and_visual_sufficiency_20261105.md)
-connects recent physical-data susceptibilities and statistical sufficiency to
-the goal: retain answer-relevant information while compressing writing images,
-and measure actual question-dependent generation. A completed CPU-only audit
-of all 3,793 training pairs finds descriptive context-weighted assignment
-accuracy of 53.31% from question width and coarse ink statistics alone.
-This motivates keeping autonomous writing authoritative; it does not measure
-the running actor or alter its frozen comparison. No singularity or general
-language breakthrough is established.
+The immediate direction is **useful contextual understanding coupled to
+coherent autonomous image writing**. Another supplied-answer ranking gain or
+lower pixel loss alone cannot close that requirement. The
+[new primary-source review](../references/physics_math_followup_20261105.md)
+connects recent spectral learning theory and continuous image generation to
+this decision. No physics theorem, optimizer or singularity claim substitutes
+for correct unseen answers.
 
-A [new visual evidence-use review](../references/visual_evidence_use_update_20261105.md)
-checks primary work through 3 November. Recognizing writing and using it to
-answer questions are separate empirical requirements. Causal language-state
-transfer is a candidate after V63, with the physical writing path preserved;
-no additional teacher, architecture or inference dependency is adopted now.
+The next candidate is a grounded visual-language body with vocabulary matrices
+removed and a small continuous image writer. Offline teachers may supply
+semantic and rendering supervision separately, with inherited pretraining
+attributed. Deployment must consume observed pixels and generate writing
+without a tokenizer, Unicode IDs, OCR, glyph inventory or external model call.
+A complete physical forward/backward and measured memory fit precede adoption;
+then actual training and fixed autonomous Chinese/English tests must determine
+whether it works. Frozen base weights plus modest adapters are a candidate,
+not an established fit or language result. Spectral or thermodynamic optimizer
+changes are lower-priority ablations after the actor produces useful language.
 
-The broader Chinese/English data interface now has 12,976 complete training
-images and 2,509 matching development images, covering all eight Dolly
-instruction categories. Every image passes hash and exact bit-round-trip
-checks; no exact prompt rasters overlap across the two caches. The new bit-only
-loader enforces an explicit train/development purpose and returns owning
-prompt-only storage for inference. Sealed Dolly test data remains unopened.
-These are preparation results for a later full-line comparison, not data
-adopted by the active V63 run or a new language pass. See the
-[complete-writing guide](complete-writing-data.md).
+Prepared components reduce integration risk but do not establish this candidate:
 
-A separate CPU-only [cached-backbone check](cached-language-trunks.md)
-authenticates the existing local Qwen archives. Their 1.409B and 3.634B plain
-transformer trunks match every installed parameter shape after excluding
-vocabulary input/output matrices. The bounded weight source needs no model
-service or new download. This is a possible externally pretrained
-initialization, not an image-language actor or a language result. Image/state
-alignment, generation, suitable optimizer memory and independent evaluation
-still require real training. The current V63 experiment remains unchanged.
+- [Complete Chinese/English writing data](complete-writing-data.md): 12,976
+  training and 2,509 development images, all verified by hashes and exact bit
+  round trips. The owning prompt-only loader includes all eight Dolly
+  categories and excludes sealed test data.
+- [Cached visual-language weights](cached-visual-language.md): all 748 retained
+  native names/shapes match; the real 27-layer vision encoder executes on CPU.
+  Calculated retained BF16 weight storage is 14.012 GiB. Full contextual-body
+  execution, activation/optimizer memory and actor quality remain unverified.
+- [Causal visual prefixes](causal-visual-prefix.md): all 12,976 training prompts
+  preserve exact page/strip round trips. A real encoder counterexample shows
+  that jointly encoding future answer blocks leaks their pixels into earlier
+  features. Only observed prompts and completed writing blocks may enter the
+  actor's history.
 
-The separate [cached visual-language weight interface](cached-visual-language.md)
-now matches all 748 retained native parameter names/shapes from the existing
-Qwen3-VL 8B archive and executes its real image encoder on two fixed training
-crops, retaining all three intermediate visual features. CPU conversion and
-repeatability checks pass. No contextual-body execution, image writer,
-language-quality result or measured GPU-training fit is established. This
-prepares a possible later actor while V63's frozen comparison continues.
+The [V63 methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
+is a two-page methods explanation and editable training figure. Its displayed
+forms are observed targets. The main manuscript still reports through V62;
+its V63 result and editable figures require a separate planned, compiled and
+visually verified revision. The completed V62 supplement redline and standalone
+Nutstore package are preserved. General language quality is not inferred from
+publication layout, deployment replay or component verification.
 
-The [causal visual-prefix interface](causal-visual-prefix.md) now preserves all
-12,976 training prompts in exact page/strip round trips and isolates completed
-output storage from future answers. A real CPU encoder counterexample confirms
-that joint answer-image encoding can leak future pixels into prior features;
-independent completed-block encoding replays exactly. This is an input and
-causality preparation result, with no new language pass or V63 source change.
-
-A [two-page methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
-and editable training figure now explain the exact four-stream objective using
-the first frozen training pair. Displayed glyphs are observed targets; no new
-language result is claimed. Pixel, native-object, rendered-page and source-hash
-checks pass. All 240 existing publication files and the five main Nutstore
-LATEST aliases are preserved; the separate methods package is locally
-byte-verified in Nutstore. The full language goal still depends on autonomous
-answers and independent evaluation, beyond methods or implementation checks.
-
-V62's matched experiment is now complete. Eight whole-image experts improve
-held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
-0.815%, but both arms still have zero exact primary answers and zero correct
-question pairs. The eight-expert question effect is unresolved, so the density
-intervention and both bounded reading gates fail. Exact offline deployment
-replay and full optimizer/RNG resume checks pass. These are working runtime
-components, not a useful general language model. See the
-[completed primary result](../references/correlated_native_density_v62_result.md).
-The separately registered vision reader passes calibration; three invalid actor
-responses prevent a complete fixed-case score. Post-hoc missing-score bounds
-retain all cases: K=8 has zero exact transcript agreements and no resolved
-character question gain. The evaluator is stopped and GPU 0 memory released.
-
-The following checkpoints preserve the experimental sequence; statements
-about a then-running V62 phase are superseded by the completed result above.
+The following checkpoints preserve the experimental sequence. Earlier running
+states are superseded by the completed V63 report above and the
+[completed V62 report](../references/correlated_native_density_v62_result.md).
 
 The target remains a useful, high-quality independent image-to-image language
 model trained on one physical RTX 4090. A larger GPU budget is not a substitute

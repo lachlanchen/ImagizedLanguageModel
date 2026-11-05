@@ -1,5 +1,9 @@
 # Recent physics and mathematics for a single-GPU imagized language model
 
+The [post-V63 follow-up](physics_math_followup_20261105.md) adds recent spectral
+learning theory and continuous generation evidence, with the completed negative
+assignment result. The V61/V62 discussion below preserves its original scope.
+
 Evidence reviewed through 5 November 2026. The practical objective is readable,
 question-dependent image-language generation on one RTX 4090, with independent
 inference. None of the work below establishes an AI singularity or removes the

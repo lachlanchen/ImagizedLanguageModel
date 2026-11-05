@@ -1,5 +1,12 @@
 # Training the connection between questions and writing
 
+The [completed V63 result](../references/question_assignment_v63_result.md)
+rejects the assignment intervention: control has 2/256 exact primary answers,
+aligned has 1/256, and neither answers both questions correctly in any of 393
+pairs. Both show resolved question dependence, but neither meets the bounded
+reading requirements. Standalone offline replay passes for both. The commands
+below reproduce the frozen workflow; they are not evidence of a useful model.
+
 V63 trains the conditional likelihood of complete answer images. Two questions
 about the same paragraph supply two accepted answer images. Both the normal
 and swapped combinations are evaluated. The assignment term rewards assigning
@@ -28,7 +35,8 @@ inference. External MIXAR foundation pretraining is still attributed separately.
 The [real preflight](../references/question_assignment_v63_preflight_result.md)
 passes physical data assembly, assignment gradients, full-model memory,
 exact optimizer/RNG resume and future-pixel causality. Its longest training
-pair fits in 9.20 GiB. Production quality is not established by that result.
+pair fits in 9.20 GiB. Production quality is not established by that preflight;
+the completed production audit above supplies the actual negative result.
 
 Run from the repository root using the existing Python 3.12 runtime:
 
