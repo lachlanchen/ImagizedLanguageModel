@@ -78,16 +78,27 @@ glyph advances. Preparation uses no actor calls. The final trained state and
 actual generated answers are still required before any language decision.
 
 The implemented [autonomous evaluator](../references/codec_language_v68_autonomous_audit.md)
-passes five CPU preflight checks covering all 192 cases and 384 owning prompt
+passes eight CPU preflight checks covering all 192 cases and 384 owning prompt
 paths, full-width/stopping distinctions and article-grouped scoring. It rejects
 unfinished training before allocating CUDA memory. A lightweight coordinator
 waits for the same trainer to finish, then runs all normal/control generations
 and an independent raw-output verifier. It allocates no model while waiting;
 the evaluator preflight is not a language result.
 
-The [image-file inference interface](codec-image-inference.md) now passes eight
-CPU checks. All 384 prepared prompt paths match exactly through both explicit
-page and strip input; native block/event serialization and early rejection of
+A [pre-generation control correction](../references/codec_language_v68_layout_control_correction.md)
+removes reflow in 31 Chinese and one English blank control. Erasure now uses
+the normal prompt's exact fold ranges and padding. Independent NumPy checks
+verify all 384 actor inputs; all normal pixels remain unchanged. Cases,
+references and quality gates are preserved, and the corrected coordinator is
+queued behind the same trainer. The [verification receipt](../references/evidence/codec_language_v68_layout_control_correction.json)
+and original preflight history distinguish this measurement repair from a
+language result.
+
+The [image-file inference interface](codec-image-inference.md) now passes nine
+CPU checks. All 384 canonical actor pages match exactly through page input;
+all 384 raw-strip folds are checked separately, with normal strips matching
+their actor pages. Blank controls use precomposed pages to preserve geometry.
+Native block/event serialization and early rejection of
 unfinished training also pass. Typed Chinese/English examples run through the
 existing host renderer and new input command. These checks make the final
 actor accessible through image files, but do not execute final-model inference,

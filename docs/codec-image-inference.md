@@ -1,9 +1,9 @@
 # Prompt images and generated writing
 
 `scripts/infer_codec_language_v68.py` accepts an observed image and saves the
-codec-language actor's physical output stream. The file boundary passes eight
-CPU checks, including exact round trips for all 384 prepared normal/control
-prompts through two explicit layouts. Final-model inference is not yet tested:
+codec-language actor's physical output stream. The file boundary passes nine
+CPU checks, including exact round trips for all 384 canonical actor pages and
+separate checks of all 384 explicit raw-strip folds. Final-model inference is not yet tested:
 the same V68 instruction stage is running, followed by its queued autonomous
 audit. See the [interface receipt](../references/evidence/codec_image_interface_preflight.json).
 
@@ -29,6 +29,13 @@ For a binary 32-pixel-high writing strip, use `--layout strip`. This reproduces
 the training layout, wrapping at white columns without losing pixels. The
 default page width is 1024 pixels. Such wraps need not coincide with word
 boundaries. Do not select strip mode for an ordinary scanned page.
+
+For a matched blanking intervention, pass the already composed control page
+with `--layout page`. Independently re-folding an erased raw strip can change
+wrap boundaries and reflow the control. The [audit correction](../references/codec_language_v68_layout_control_correction.md)
+retains each normal prompt's source ranges for its blank control. Normal
+strip inputs remain unchanged; a white strip alone cannot recover its original
+wrap boundaries.
 
 Preparation writes `prompt.pt`, the exact owning FP32 actor-input tensor;
 `prompt.png`, its physical grayscale image; and an input receipt recording
@@ -95,14 +102,14 @@ No automatic transcription or text fallback is performed.
 
 ## Verification scope
 
-The CPU check runs in 10.552 seconds excluding interpreter startup and makes
+The current CPU check runs in 11.859 seconds excluding interpreter startup and makes
 zero model calls or GPU allocations. Its source identity is commit
-`0ceb58daa8f55693683f81aa58abc8a65b5cec63`. It checks the existing two-block
+`c998db70deb6bc04f467c0c57ff3f5d989766cf2`. It checks the existing two-block
 preflight execution image and its actual probabilities through serialization;
 it does not rerun that actor or claim the fragmented writing has meaning.
 Grayscale/alpha, empty-output and malformed-event fixtures check file formats
-only. The first check attempt failed because its reader treated native byte
-images as normalized tensors; the corrected attempt is retained separately.
+only. Earlier attempts remain preserved, including the first reader type
+failure and the later check predating the matched-control layout correction.
 
 The next language decision remains the frozen autonomous audit. Interface
 correctness, copied pixels and low training loss cannot replace that result.

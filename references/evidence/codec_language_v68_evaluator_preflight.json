@@ -1,23 +1,34 @@
 {
   "actual_questions": 192,
   "checks": {
+    "all_192_blank_shapes_match_normal_and_only_erase_ink": true,
+    "all_192_normal_actor_inputs_unchanged": true,
     "all_192_source_bound_cases": true,
+    "all_384_actor_inputs_match_independent_numpy_coordinates": true,
     "all_384_prompt_storage_paths_owning": true,
     "article_bootstrap_reference_limit": true,
     "reference_stop_width_empty_distinctions": true,
     "zero_question_effect_rejected": true
   },
+  "corrected_legacy_layout_confounds": {
+    "cmrc": 31,
+    "dolly": 1
+  },
   "general_ilm_goal_complete": false,
   "gpu_allocations": 0,
+  "input_layout_revision": "matched-normal-fold-r2",
   "language_quality_claim": false,
   "metric_validation_only": true,
   "model_calls": 0,
   "prepared_data_sha256": "4f90406b51670e4e82327d1396e1c954e62bfb5d7b31c437b5c59e88a9180fe5",
-  "source_commit": "da96b0fa132b9f38944d74c2a2a12b76c97af8ea",
+  "source_commit": "c998db70deb6bc04f467c0c57ff3f5d989766cf2",
   "sources": {
-    "ilm/visual_lm/codec_language_audit.py": "a259f28f11689d2fdef7d4b2690e9d2c9c34ae490a163b0e06a7e87cfbd341de",
+    "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+    "ilm/visual_lm/codec_language_audit.py": "05beb4a225948fede87f8aba0a10f2f292bf2daaa53b7c4c33161cdff1e3b8e9",
     "ilm/visual_lm/codec_language_runtime.py": "81ec8f93b5c33004bee5c9e74bba667b82455130bf3066fc70ee56b1907356a6",
-    "references/codec_language_v68_autonomous_audit.md": "d1fdfd6a1f3aeae26435f2be23cdcbddc8739ca219a5b6d92faf1860a2ec6fe8",
-    "scripts/eval_codec_language_v68.py": "225491b926f900138e2566d58c21c49e89ed8fc3f409c0935e1d60afa5cf77f5"
+    "references/codec_language_v68_autonomous_audit.md": "57924d73246bf2a95354b0c1763690272747ce543542c79826a589366a8199d8",
+    "references/codec_language_v68_layout_control_correction.md": "858a049296ac27363ab93896a3c8c4fe3ca534b3900a8d9931effd0dd9007a91",
+    "scripts/eval_codec_language_v68.py": "e580545bc2d0c051702ecf9c59f50907ac9f70de4d2b73251e0b3e495ab4ecb9",
+    "scripts/verify_codec_language_v68.py": "8753a2ccfe49d9bef27182fb895fbb9154112ea752add965cef71b1a2027a185"
   }
 }
