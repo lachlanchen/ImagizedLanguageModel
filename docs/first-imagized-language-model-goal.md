@@ -15,13 +15,23 @@ no extra training. Exact early optimizer/EMA/RNG replay passes. The run is
 complete, its GPU is released and no owned runtime remains. Faithful writing
 must be repaired before prompt-dependent language can be qualified.
 
-The next [registered writer diagnosis](../references/writer_factorial_v65_protocol.md)
+The completed [writer diagnosis](../references/writer_factorial_v65_result.md)
 crosses inherited versus lossless-pixel conditions with flow versus direct
-image reconstruction, using common initial weights and batch exposure on
-64 training-only images. It tests the actual output architecture and compares
-an existing continuous codec on the same images. Its finite fitting result
-cannot qualify language or held-out generalization. The V64 actor and protocol
-remain frozen.
+image reconstruction, using common initialization and batch exposure on 64
+training-only images. Direct writing reconstructs 63/64 images exactly from
+inherited features and 64/64 from the pixel control; both flow arms have zero
+exact blocks. All 512 images and every batch were independently verified.
+The native continuous codec also reconstructs 64/64 after a documented
+polarity correction; the original invalid comparator is retained. This
+isolates an immediate failure of the tested flow route, without establishing
+language or unseen-image generalization. The V64/V65 sources remain frozen.
+
+The next production stage is [direct-writing bootstrap](../references/direct_writer_learning_v66_protocol.md)
+over all 12,976 Chinese/English training examples, with a fixed 10,000-update
+budget and the unchanged 128-case reused-development component gates. It
+initializes from the verified direct-fitting EMA and keeps the full inherited
+actor resident. Complete prompt-dependent instruction learning remains
+required after faithful writing qualifies.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
