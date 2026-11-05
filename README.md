@@ -47,6 +47,12 @@ A subsequent clean-code control reproduces **one learned Chinese image block
 exactly on 256/256 fresh noise draws**, independently scored and re-decoded.
 This is a generation prerequisite; prompt-conditioned language remains
 unproved. [Control result and raw images](references/clean_endpoint_v74_result.md).
+A full clean writer then learns 32 seen training questions, producing **29/32
+original answer images exactly** and **31/32 frozen-codec reference images
+exactly**, with 99.9967% original-image F1. All answers stop correctly.
+This is a training-set capacity check after 2,000 passes, with an externally
+pretrained reader; **unseen language understanding is still unproved**.
+[Paired control, raw answers and checkpoint location](references/clean_learning_v74_result.md).
 See the [training, inference and data-location guide](docs/semantic-image-language-v72.md),
 [verified reader diagnostic](references/native_visual_transfer_v71_result.md)
 and [current manuscript](publication/ilm-nature/README.md).
