@@ -1,0 +1,48 @@
+{
+  "fit_report_sha256": "6ea7a8700acc5c8a0280e6c3e908ad8354dfe326f7b7cdc2b56a4fee2d02a5b1",
+  "verifier_sha256": "11a17913e8111020b82118bb746ef85f80fb935da39b61690812ea78c5b24d33",
+  "source_cases_reloaded": 704,
+  "physical_predictions_verified": 3584,
+  "independent_calibration": {
+    "shared": {
+      "selected": 1.0,
+      "independent_mse": [
+        1.6023900802002589,
+        1.5944519194827407,
+        1.4078538327654149,
+        1.182733047586088,
+        1.2521982088025732
+      ]
+    },
+    "joint": {
+      "selected": 1.0,
+      "independent_mse": [
+        1.4385266223016764,
+        1.4376431782121186,
+        1.3822269422095719,
+        1.1883876479961006,
+        1.2412661067422033
+      ]
+    }
+  },
+  "normal_equation_residual_max": {
+    "shared": 3.907985046680551e-14,
+    "joint": 2.1760371282653068e-14
+  },
+  "fp32_materialization_error_max": {
+    "shared": 5.820766091346741e-11,
+    "joint": 0.0
+  },
+  "target_encoder_replay_error_max": 6.079673767089844e-06,
+  "numpy_head_prediction_error_max": 4.044028300675961e-06,
+  "decoder_replay_error_max": 0.0,
+  "offline_checks_pass": true,
+  "independent_full_actor_forward_replayed": false,
+  "first_block_only": true,
+  "stopping_evaluated": false,
+  "mean_control_reference_accumulation": "FP64 NumPy; producer uses FP32 Torch",
+  "original_verifier_preserved": true,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false,
+  "elapsed_seconds": 46.52070864010602
+}
