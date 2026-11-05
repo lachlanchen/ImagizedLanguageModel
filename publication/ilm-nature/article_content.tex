@@ -557,6 +557,23 @@ and unmodified generated streams for the first two fixed Chinese cases.
 Images retain their physical width and aspect ratio; no nonblank pixel is
 removed or repaired. These are reused development data.}{fig:codec-language}
 
+\subsection*{Numeric controls retain bounded visual reading}
+We test the original imported body through numeric chat/task vectors with
+its vocabulary absent. A separate helper temporarily applies the source text
+projection. Among eight Chinese development questions, native-budget images
+give four exact answers versus zero with questions erased; original-scale
+images give one, and matched text gives three. All 742 retained helper
+decisions replay as exact argmax choices (Supplementary Note 29). This reused
+sample supports bounded reading, without qualifying image writing or
+isolating the scale effect.
+
+The implemented successor conditions a 38.652M-parameter causal writer on
+frozen prompt-only visual states. A joint flow predicts two-tile codes;
+the codec emits pixels, which are re-encoded for history. Real-example
+future-target exclusion, bit-exact optimizer/RNG resume and physical feedback
+checks pass. Full-corpus training and the 192-case autonomous audit remain
+prospective (Supplementary Note 30), with no image-language qualification.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -749,7 +766,7 @@ resamples, seed 20266329. Reference-energy ranking supplies accepted answers
 and remains a separate diagnostic. One seed, reused development data and
 external foundation training limit both this result and efficiency claims.
 
-\balance
+\relax % Final references may span pages; retain natural column breaks.
 \section*{Data and code availability}
 Implementation, protocols, evidence summaries and scripts are available in
 \url{https://github.com/lachlanchen/ImagizedLanguageModel}. Manifest and

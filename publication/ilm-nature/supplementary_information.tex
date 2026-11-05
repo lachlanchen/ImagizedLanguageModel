@@ -1345,6 +1345,117 @@ reconstruction preserves the source marks; the initial prediction is already
 incorrect before generated history. All 32 initial predicted blocks match
 the autonomous path and none is exact. No image is repaired.}{fig:prediction-diagnosis}
 
+\section*{Supplementary Note 29: visual reading through numeric controls}
+The complete imported vision/contextual body retains its original
+authenticated Qwen3-VL 8B initialization and zero-output contextual adapters.
+Its language embedding module is absent. A one-time compiler converts the
+source chat/task frame into fixed numeric vectors; their deployed payload
+contains floating vectors only. These controls surround physical visual
+features and retain the image-specific rotary coordinates and DeepStack
+features. No source response or development answer enters an optimizer.
+
+The first eight Chinese questions from the existing audit are checked at
+original scale and with a declared factor-32 observer. The latter uses
+minimum area 1,048,576 and maximum area 4,194,304, with Pillow RGB bilinear
+interpolation followed by grayscale conversion. Matched controls erase only
+question ink while preserving the original wrap coordinates. A fifth route
+uses matched source text. There are 40 helper generations in total.
+
+\begin{center}\small
+\begin{tabular}{lrrr}\toprule
+Route & Exact / 8 & Character accuracy (\%) & Stopped / 8\\\midrule
+Original image & 1 & 59.721 & 8\\
+Original, question erased & 0 & 6.057 & 6\\
+Native-budget image & 4 & 69.354 & 8\\
+Native-budget, question erased & 0 & 3.561 & 7\\
+Matched source text & 3 & 77.110 & 8\\\bottomrule
+\end{tabular}
+\end{center}
+
+The source vocabulary projection and tokenizer are local variables in the
+separate diagnostic helper, never registered on the image actor. The helper
+decodes at most 64 source positions per answer with greedy source termination.
+Independent CPU verification checks all 32 source/transformed images and
+replays all 742 retained hidden-state projections. All argmax decisions agree,
+with no near-tie disagreement; maximum selected-logit error is
+$1.526\times10^{-5}$. This does not replay the entire visual/contextual forward
+pass. It also does not establish equality to native C++ resized pixels.
+Generation takes 232.533 seconds including 126.192 seconds of setup, with
+18.983 GiB peak allocated memory including the temporary diagnostic head;
+CPU verification takes 38.511 seconds. No optimizer update or image answer
+is produced. The source-bound receipt is
+\path{references/evidence/native_visual_transfer_v71_result.json}.
+
+Literal exact matching penalizes some valid aliases and formatting changes.
+Reference inclusion is not a semantic correctness measure. The eight reused
+cases do not support population estimates, and changes in observer scale and
+task framing are not an isolated causal intervention. The result motivates
+testing a complete image writer rather than qualifying one.
+
+\section*{Supplementary Note 30: causal joint flow in writing coordinates}
+The successor is an implemented candidate with ongoing training, not a
+completed language result. For physical prompt $X$, let
+\begin{align}
+ M &= \operatorname{sg}(F_{\rm frozen}(E_r(R(X));C)),\\
+ h_t &= T_\theta(M,b,E_w(Y_{<t})),\qquad z_t=\operatorname{sg}(E_w(Y_t)).
+\end{align}
+Here $R$ is the declared observer, $C$ the numeric task frame, $b$ a learned
+structural start vector, and $M$ all 52 final task-frame contextual states.
+Memory is retained in BF16 in both caching and inference. The causal writer
+has width 512, eight layers, eight heads and feed-forward width 2,048.
+Layer-normalized memory and prior image codes project into its writing
+sequence with fixed sinusoidal positions. Query $t$ cannot attend to target
+block $t$ or any subsequent block. There is no character embedding table.
+
+Each $z_t$ comprises two continuous 768-vectors. With independent Gaussian
+$e$ and uniform time $u$, train the joint velocity law
+\begin{align}
+ z_u&=(1-u)e+uz_t,\\
+ \mathcal L_{\rm flow}&=\mathbb E\|v_\theta(z_u,u,h_t)-(z_t-e)\|_2^2.
+\end{align}
+The implemented MSE averages coordinates and up to 16 uniformly sampled
+blocks within each complete example, then averages examples. A balanced
+continue/terminal logistic loss has equal weight. The velocity head has width
+768 and three residual MLP blocks. At inference, 32 explicit midpoint steps
+produce a joint block code. Non-affine LayerNorm restores the codec's
+zero-mean, unit-variance coordinates; unit Euclidean normalization would use
+the wrong scale. Physical decoding and feedback are
+\begin{equation}
+ \widehat Y_t=\operatorname{threshold}(D_w(N(\widehat z_t))),
+ \qquad \widetilde z_t=E_w(\widehat Y_t).
+\end{equation}
+Only $\widetilde z_t$, encoded from actual emitted pixels, enters history.
+The learned stop head uses threshold 0.5 and a uniform 128-block capacity.
+No reference length, code, OCR, tokenizer, persistent glyph inventory or
+teacher service enters autonomous inference. External source pretraining and
+the earlier fixed codec remain part of the provenance.
+
+All 12,976 admitted complete CMRC/Dolly training images are retained. The
+cache removes only two explicit white termination blocks; ordinary padding
+and every real answer block remain. Prompt-only memory is computed before
+answer labels are loaded, and every source/cache payload is hashed. The
+first 128 examples of a fixed full-corpus permutation supply an execution
+preflight. Across 33 optimizer updates, future-target exclusion and exact
+optimizer/RNG/data-cursor resume pass. A separately forced continuation branch
+verifies re-encoding of actual emitted pixels and receives no quality credit.
+The 38,651,649-parameter writer peaks at 1.739 GiB in this execution check;
+this excludes the frozen reader and is not full-model inference memory.
+
+The registered production schedule is 40,000 updates, batch 16, AdamW with
+learning rate $10^{-4}$, 500-update warmup and cosine decay to one tenth,
+betas $(0.9,0.95)$, weight decay 0.01 and gradient clipping at one. New
+parameters and optimizer state are FP32; decoder contractions use BF16;
+there is no EMA. Fresh full-corpus permutations support exact resume. This
+exposure and objective differ from the failed earlier actor, so a future
+comparison cannot isolate one component's contribution. The full original
+192-case audit and matched blank controls follow training automatically;
+sealed cases stay unopened unless the original development gates pass.
+Training, inference, scoring and independent verification use
+\path{scripts/run_semantic_ilm_v72.py},
+\path{scripts/infer_semantic_ilm_v72.py},
+\path{scripts/audit_semantic_ilm_v72.py} and
+\path{scripts/verify_semantic_ilm_v72.py}.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.

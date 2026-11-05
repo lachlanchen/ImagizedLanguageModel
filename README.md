@@ -20,7 +20,23 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current evidence: complete image answers remain limited
+## Current run: visual semantics to continuous image answers
+
+A complete causal writer is implemented and the full-data pipeline is running
+on physical GPU 0. It conditions on frozen image-derived semantic states and
+generates answer pixels through a joint continuous code flow, rereading every
+emitted block. The writer has **38.65M trainable parameters**; the inherited
+reader remains a larger externally pretrained foundation. Runtime inference
+uses no tokenizer, OCR, language output head or teacher service.
+
+Real-example causality, bit-exact resume and physical-feedback checks pass.
+The full 12,976-example cache, 40,000-update run and unchanged autonomous audit
+remain in progress. **Useful image-language generation is not yet proven.**
+See the [training, inference and data-location guide](docs/semantic-image-language-v72.md),
+[verified reader diagnostic](references/native_visual_transfer_v71_result.md)
+and [current manuscript](publication/ilm-nature/README.md).
+
+## Earlier evidence: complete image answers remain limited
 
 ![Observed image-block model, matched reading scores and first two raw answers](publication/ilm-nature/figures/Figure_5_image_blocks.png)
 

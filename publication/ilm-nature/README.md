@@ -8,12 +8,29 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved V67 completed-writing baseline. Their
-[builder](build_codec_language_redlines.py) uses pinned latexdiff and inlines the
+revision with the preserved V68 conditional-writing baseline. Their
+[builder](build_semantic_transfer_redlines.py) uses pinned latexdiff and inlines the
 abstract so its changes are visible. The earlier supplement-only redline and
 builder remain inside the named baseline.
 
 ## Current result
+
+Numeric source-derived task controls retain bounded image reading in the
+imported vocabulary-free contextual body: four of eight checked Chinese
+answers are exact at the declared native sampling budget, versus zero with
+question ink erased. A separate temporary text projection produces these
+diagnostic answers. All 742 helper projection decisions replay exactly;
+the whole visual forward pass is not independently replayed. This is reader
+evidence, not successful image writing. Supplementary Note 29 reports the
+full comparison and limitations.
+
+A 38.65M-parameter causal joint-flow writer is implemented with prompt-only
+visual memory and re-encoded physical-output feedback. Real-example execution
+checks pass, including exact optimizer/RNG resume. Full-corpus caching,
+40,000-update training and the original autonomous audit are in progress.
+Supplementary Note 30 gives the complete mathematical and deployed path;
+it reports no new language accuracy. Existing figures and the 24-slide editable
+deck remain unchanged until new image-output results exist.
 
 A complete conditional-writing actor finishes 10,000 updates on all 12,976
 admitted Chinese/English instruction examples. It adapts 9.352M of 7.539B
