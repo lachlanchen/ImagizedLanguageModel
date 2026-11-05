@@ -77,6 +77,18 @@ new full-model resource/causality result. Label supplied-code reconstruction,
 training fit and untrained execution separately. Keep all earlier slides and
 assets unchanged, adding native editable slides and embedded numeric data.
 
+The executable output unit adds Figure 9 (the fitting diagnosis and same-case
+reconstruction audit) and Figure S8 (the separate continuous writing interface).
+Append slides 21–22 to the current twenty-slide deck. Preserve the complete
+current package in `baselines/v63-completed-actor` before authoring. Deliver
+eight current PDFs: article, review, supplement, both matching redlines,
+twenty-two-slide review deck and the two standalone new figures. The main
+article retains the Lamp+LCD-derived style. Local Artifact Tool dependency
+discovery is unavailable and its package is absent; use the existing native
+OOXML append workflow, with editable shapes, literal-data workbooks and all
+old deck parts unchanged. Do not substitute screenshots for editable figures.
+Document this tool limitation in the validation receipt.
+
 ## Verification and delivery
 
 Use the paper-revision, publisher-voice, PDF and presentation skills when
@@ -89,3 +101,36 @@ outputs, source evidence and unchanged prior assets by hash. Update Nutstore
 Projects/ILM with a new version folder and verified LATEST aliases, with no
 claim that local copying proves cloud propagation. Commit and push only the
 complete verified revision.
+
+## Completed revision, 5 November 2026
+
+The baseline contains 196 files bound to commit
+`14c70cf862d3169163339689c63ad40046d3c670`. The article and supplement now
+separate failed V66 generalization, qualified V67 supplied-code reconstruction
+and complete-actor execution. The running V68 stage contributes no language
+result. Figure 9 and Supplementary Figure 8 append two native editable slides;
+all twenty earlier slides render identically and their 154 original deck parts
+are preserved, apart from the three required package descriptors.
+
+All eight final PDFs compile. The article has 12 pages, review 22, supplement
+20, article redline 23 and supplement redline 20; the deck has 22 slides and
+each new standalone figure has one page. The new long loss equation was split
+after rendered review showed margin overflow, then its final page was checked
+again. Final contact sheets and changed pages were inspected, including the
+blue additions in both redlines. No overfull or unresolved-reference warning
+remains. No further TeX edits followed these checks.
+
+`publication/ilm-nature/evidence/codec_writing_publication_verification.json`
+binds sixteen displayed rasters to their raw source pixels across the editable
+deck, standalone figures, review deck and article. Both new chart workbooks
+and caches match the completed reports; all 44 older figure files remain
+unchanged. Structural and layout checks find zero issues in the native deck.
+Artifact Tool was unavailable; editable OOXML and LibreOffice rendering were
+used, with no claim of native PowerPoint execution.
+
+`publication/ilm-nature/evidence/publication_verification.json` records the
+current PDF hashes, page counts, visual checks and scope. The delivery script
+verifies the version folder `ILM_NatureStyle_20261105_V67_Writing` and five
+LATEST aliases under Nutstore Projects/ILM. This establishes local byte
+identity only; cloud propagation remains unverified. The next scientific
+revision requires completed autonomous language evidence under a new plan.

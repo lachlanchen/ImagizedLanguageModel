@@ -1,0 +1,13 @@
+\section*{Supplementary Table 2: exact raster density audit}
+\begin{center}\begin{tabular}{lrrrr}\toprule
+Condition & Identity (\%) & Exact image (\%) & Pixel F1 & Ink ratio \\
+\midrule
+Ordered sample & 1.562 & 0.781 & 0.35033 & 0.945 \\
+Shuffled sample & 1.172 & 0.391 & 0.35124 & 0.945 \\
+Zero-condition sample & 0.000 & 0.000 & 0.19715 & 0.435 \\
+Ordered greedy & 5.469 & 5.469 & 0.21454 & 0.330 \\
+Supplied image, sample & 100.000 & 81.250 & 0.99949 & 1.000 \\
+Supplied image, greedy & 100.000 & 100.000 & 1.00000 & 1.000 \\
+Deranged image, greedy & 0.391 & 0.391 & 0.35769 & 1.000 \\
+\bottomrule\end{tabular}\end{center}
+Each row uses 256 images. The evaluator bank contains 9,932 distinct rasters and covers every target. Supplied-image rows reveal the intended image and are motor controls, not language results.

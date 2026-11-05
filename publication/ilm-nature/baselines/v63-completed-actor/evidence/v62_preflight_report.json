@@ -1,0 +1,60 @@
+{
+  "arms": {
+    "1": {
+      "cached_prefix_strict_fp32_max_error": 2.09808349609375e-05,
+      "final_ema_sha256": "aeea864883555994c03a02317aebe0c814e38ba723a6aa7e11bf1c1a351d8a28",
+      "future_pixel_max_error": 0.0,
+      "parameters": 477145984,
+      "peak_allocated_vram_gib": 9.898017883300781,
+      "tf32_cached_prefix_max_error": 0.08577919006347656,
+      "tf32_mode_bit_changes": 0
+    },
+    "8": {
+      "cached_prefix_strict_fp32_max_error": 1.52587890625e-05,
+      "final_ema_sha256": "fb6096a00578f6953ea1d072d75ad261ac9bf0d16e437fb440af1e9c223c7981",
+      "future_pixel_max_error": 0.0,
+      "parameters": 489998208,
+      "peak_allocated_vram_gib": 10.168683528900146,
+      "tf32_cached_prefix_max_error": 0.04307889938354492,
+      "tf32_mode_bit_changes": 0
+    }
+  },
+  "checks": {
+    "k1_cached_prefix_equivalence": true,
+    "k1_exact_cpu_rng": true,
+    "k1_exact_cuda_rng": true,
+    "k1_exact_data_rng": true,
+    "k1_exact_ema_model": true,
+    "k1_exact_model": true,
+    "k1_exact_numpy_rng": true,
+    "k1_exact_optimizer": true,
+    "k1_exact_python_rng": true,
+    "k1_full_backward": true,
+    "k1_future_pixel_causality": true,
+    "k1_same_sample_order": true,
+    "k8_cached_prefix_equivalence": true,
+    "k8_exact_cpu_rng": true,
+    "k8_exact_cuda_rng": true,
+    "k8_exact_data_rng": true,
+    "k8_exact_ema_model": true,
+    "k8_exact_model": true,
+    "k8_exact_numpy_rng": true,
+    "k8_exact_optimizer": true,
+    "k8_exact_python_rng": true,
+    "k8_full_backward": true,
+    "k8_future_pixel_causality": true,
+    "k8_same_sample_order": true
+  },
+  "development_examples": 0,
+  "numerical_note": "Initial TF32 2e-4 cache check failed for both arms; strict FP32 verifies cache semantics separately. Training settings unchanged.",
+  "provenance": {
+    "ilm/visual_lm/correlated_native_density.py": "31d4b1c8f21bfa42966283c6cf927aa47860070940dc0aa9f96bd51a1469d150",
+    "ilm/visual_lm/correlated_native_runtime.py": "6acea588aed3670aa82e91e381b4dc32e6ae5b9f1b68982c47bb9d7151393398",
+    "ilm/visual_lm/native_pixel_instruction.py": "bdd4eefa726d3557ca2ec5614d54a7632bef2efbc5c777444e3f8f4c5ce84bf7",
+    "references/correlated_native_density_v62_protocol.md": "646431005f75069ca8313773b512896637c9ec265cc447a2085e91250466d3ba",
+    "scripts/train_correlated_native_density_v62.py": "0c888fc93af26542bd452f6bf33f0e371ea5553d759a2d9f053641e456bde655",
+    "scripts/train_native_pixel_instruction_v61.py": "5d8ee0e97f572f1deb05cd1841c7d8d74469032a0ad553dd3da66555a2b4d661"
+  },
+  "training_only": true,
+  "verifier_sha256": "5086c5f14503146a36ec6510a54cef8b6ed11743c152c4853096f5f842580abe"
+}

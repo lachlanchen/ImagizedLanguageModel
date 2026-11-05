@@ -1,0 +1,160 @@
+{
+  "report_sha256": "960a79cd02eab2b9f084a926dc137bef275356cec3ae9df26a567acc33d7f0ba",
+  "source_commit": "1be6e595c5054a1e1692cace10effa3ccd787389",
+  "source_sha256": {
+    "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "ilm/visual_lm/codec_visual_language_actor.py": "f598f4a3a113840cd70b6b2432bd967986ce3c6ce081d32f84110f2774dcb05a",
+    "ilm/visual_lm/complete_writing_data.py": "b787e7d0f14bef27658cab335682a59f5f1390eb95b8f6772f94ae9208df5c2d",
+    "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "references/codec_visual_language_actor_preflight_plan.md": "e07ac3b93cf1402dc9cd1b28c3b0645d04ba32443d899de459d85edd96312e6e",
+    "references/grounded_image_actor_preflight_plan.md": "72708b6e6007c0517472cedd3570b868ba638c76f63dab060d98180757754c39",
+    "scripts/check_codec_visual_language_actor.py": "5d5a1486e986694437843ae5ce77963eae5d1d3db3157ada6bd99db78abbd61d",
+    "scripts/check_grounded_image_actor.py": "93f5527975a8779616a2a56e0b2763024eb19de5511e42952d4642ab02790280"
+  },
+  "prerequisites_sha256": {
+    "artifacts/codec_output_v67_20261105/report.json": "058cab147a71ce40ae9fc8a327a7265ef145fa1247a9915ab9e60d29b3901a01",
+    "artifacts/grounded_image_actor_preflight_20261105/attempt03/report.json": "2f1cfa22dbdd177a8baf4eca5fe0617fa8a03fbeabe4c51a4fac8c8f825d50fb",
+    "references/evidence/codec_output_v67_result.json": "361d877eec1cb817105e82c81f4bf508272595b6a106adbe39293759f9cfb32b"
+  },
+  "checks": {
+    "actual_image_generation_exercised": true,
+    "actual_trainable_count": true,
+    "all_native_layers_retained": true,
+    "all_real_weights_finite": true,
+    "cached_context_relative_error": true,
+    "cached_plan_relative_error": true,
+    "context_attention_fp32": true,
+    "deterministic_image_generation": true,
+    "encoder_isolation_exact": true,
+    "exact_resume_cpu_rng": true,
+    "exact_resume_cuda_rng": true,
+    "exact_resume_generator": true,
+    "exact_resume_optimizer": true,
+    "exact_resume_trainable": true,
+    "exact_resume_update_metrics": true,
+    "finite_image_generation": true,
+    "fixed_renderer_frozen": true,
+    "full_resource_backward_with_adam_moments": true,
+    "future_output_plan_exact": true,
+    "future_query_exact": true,
+    "future_stop_exact": true,
+    "memory_below_22_gib": true,
+    "no_language_vocabulary": true,
+    "sources_unchanged": true
+  },
+  "parameters": {
+    "codec": 7423361,
+    "total": 7539239282,
+    "trainable": 9351937
+  },
+  "measurements": {
+    "cached_context_max_abs": 0.000537872314453125,
+    "cached_context_relative": 1.2918741300464636e-05,
+    "cached_plan_max_abs": 6.580352783203125e-05,
+    "cached_plan_relative": 1.9028809548711787e-05,
+    "encoder_isolation_max_abs": 0.0,
+    "future_plan_max_abs": 0.0,
+    "future_query_max_abs": 0.0,
+    "future_stop_max_abs": 0.0,
+    "generation": {
+      "blocks": 2,
+      "events": [
+        {
+          "block": 0,
+          "stop_probability": 0.08008166402578354,
+          "stopped": false
+        },
+        {
+          "block": 1,
+          "stop_probability": 0.09515447914600372,
+          "stopped": false
+        }
+      ],
+      "meaning_not_evaluated": true,
+      "training_updates": 2
+    },
+    "peak_allocated_vram_gib": 16.95316457748413,
+    "peak_reserved_vram_gib": 17.380859375
+  },
+  "resource_backward": [
+    {
+      "file": "dolly/dolly_00104.pt",
+      "gradient_norm_before_clip": 36.34862518310547,
+      "gradient_norms": {
+        "actor.context.layers.0.self_attn.q_proj.up": 0.42973122000694275,
+        "actor.context.layers.35.self_attn.v_proj.up": 0.038787927478551865,
+        "actor.queries": 14.672709465026855,
+        "actor.stop.weight": 32.48923873901367,
+        "bridge.projection.weight": 6.984315872192383
+      },
+      "image": 0.7649276256561279,
+      "index": 3264,
+      "loss": 4.164206027984619,
+      "selected_blocks": [
+        25,
+        29,
+        3,
+        17,
+        2,
+        20,
+        10,
+        19,
+        27,
+        6,
+        24,
+        16,
+        0,
+        1,
+        15,
+        14
+      ],
+      "state": 1.9381866455078125,
+      "stop": 1.4610917568206787,
+      "target_blocks": 30
+    },
+    {
+      "file": "dolly/dolly_13239.pt",
+      "gradient_norm_before_clip": 40.88796615600586,
+      "gradient_norms": {
+        "actor.context.layers.0.self_attn.q_proj.up": 0.2134542465209961,
+        "actor.context.layers.35.self_attn.v_proj.up": 0.048823073506355286,
+        "actor.queries": 9.839776039123535,
+        "actor.stop.weight": 39.035682678222656,
+        "bridge.projection.weight": 7.094202041625977
+      },
+      "image": 0.7815998196601868,
+      "index": 11792,
+      "loss": 4.193976402282715,
+      "selected_blocks": [
+        84,
+        38,
+        44,
+        96,
+        21,
+        102,
+        43,
+        41,
+        51,
+        80,
+        59,
+        64,
+        87,
+        88,
+        5,
+        106
+      ],
+      "state": 1.9437272548675537,
+      "stop": 1.4686496257781982,
+      "target_blocks": 109
+    }
+  ],
+  "all_recorded_execution_checks_pass": true,
+  "verification_scope": "CPU source/commit/prerequisite bindings and consistency of the actual GPU execution report; not a separate GPU execution",
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}

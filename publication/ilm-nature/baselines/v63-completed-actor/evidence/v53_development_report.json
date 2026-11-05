@@ -1,0 +1,413 @@
+{
+  "architecture": "causal-visual-block-diffusion-v53",
+  "audit_seed": 20265320,
+  "boundary": {
+    "architecture": "causal-visual-block-diffusion-v53",
+    "combined_parameters": 22177219,
+    "config": {
+      "anchor_dimension": 1024,
+      "base_channels": 64,
+      "cell_size": 32,
+      "classifier_free_scale": 2.0,
+      "condition_dropout": 0.1,
+      "context_cells": 60,
+      "context_dimension": 384,
+      "cosine_offset": 0.008,
+      "diffusion_steps": 100,
+      "future_cells": 4,
+      "sampling_steps": 32,
+      "time_dimension": 128
+    },
+    "denoiser_parameters": 5899970,
+    "external_model_at_runtime": false,
+    "glyph_vocabulary_or_candidate_bank_in_model": false,
+    "ocr_in_model": false,
+    "parameter_names_with_forbidden_fragments": [],
+    "primary_input": "ordered floating writing rasters",
+    "primary_output": "four visible writing rasters",
+    "reader_parameters": 16277249,
+    "sample_parameters": [
+      "context",
+      "generator",
+      "conditioned"
+    ],
+    "text_tokenizer": false,
+    "unicode_or_character_ids_in_model": false,
+    "vector_quantizer_or_codebook": false
+  },
+  "checkpoint": "artifacts/causal_visual_block_diffusion_v53_20261104/checkpoint_final.pt",
+  "checkpoint_sha256": "bd8dd3e58483d4ef527ae9a0fc4db1c0df545d18ec0fa0067ff594256d7cc71b",
+  "comparisons": {
+    "first_position_ordered_minus_shuffled": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "replicates": 2000,
+      "source_records": 136,
+      "windows": 256
+    },
+    "first_position_ordered_minus_zero_condition": {
+      "ci95": [
+        0.0,
+        0.026022304832713755
+      ],
+      "mean": 0.01171875,
+      "replicates": 2000,
+      "source_records": 136,
+      "windows": 256
+    },
+    "ordered_minus_shuffled": {
+      "ci95": [
+        0.0,
+        0.0030737704918032786
+      ],
+      "mean": 0.0009765625,
+      "replicates": 2000,
+      "source_records": 136,
+      "windows": 256
+    },
+    "ordered_minus_zero_condition": {
+      "ci95": [
+        0.0009090085638998682,
+        0.008000803212851402
+      ],
+      "mean": 0.00390625,
+      "replicates": 2000,
+      "source_records": 136,
+      "windows": 256
+    }
+  },
+  "decision": "reject",
+  "denoising": {
+    "ordered": {
+      "field_cosine": 0.8530084490776062,
+      "probe_times": [
+        75,
+        95
+      ]
+    },
+    "shuffled": {
+      "field_cosine": 0.8526355028152466,
+      "probe_times": [
+        75,
+        95
+      ]
+    },
+    "zero_condition": {
+      "field_cosine": 0.850590705871582,
+      "probe_times": [
+        75,
+        95
+      ]
+    }
+  },
+  "elapsed_seconds": 21.205409904010594,
+  "evaluator_sha256": "0916da4e0486d7695647b0472f7ec1d4645252b8e33840208c420e5bf1f6ed6d",
+  "feedback": {
+    "ordered": {
+      "blank_rate": 0.0,
+      "cells": 8,
+      "distinct_evaluator_identities": 297,
+      "evaluator_bank_coverage_by_position": [
+        0.609375,
+        0.578125,
+        0.703125,
+        0.671875,
+        1.0,
+        0.59375,
+        0.625,
+        0.828125
+      ],
+      "examples": 64,
+      "identity_ci95_grouped": {
+        "ci95": [
+          0.001893939393939394,
+          0.016129032258064516
+        ],
+        "mean": 0.0078125,
+        "replicates": 2000,
+        "source_records": 57,
+        "windows": 64
+      },
+      "identity_top1_by_position": [
+        0.015625,
+        0.0,
+        0.0,
+        0.0,
+        0.015625,
+        0.015625,
+        0.0,
+        0.015625
+      ],
+      "ink_ratio": 1.1487493515014648,
+      "isolated_ink_fraction": 0.005076604895293713,
+      "mean_connected_components": 2.138671875,
+      "mean_identity_top1": 0.0078125,
+      "mean_pixel_f1": 0.3164020776748657,
+      "pixel_f1_by_position": [
+        0.3775786757469177,
+        0.29470714926719666,
+        0.29081618785858154,
+        0.31039831042289734,
+        0.38045835494995117,
+        0.2836308181285858,
+        0.2832617163658142,
+        0.3103654384613037
+      ]
+    },
+    "shuffled": {
+      "blank_rate": 0.0,
+      "cells": 8,
+      "distinct_evaluator_identities": 296,
+      "evaluator_bank_coverage_by_position": [
+        0.609375,
+        0.578125,
+        0.703125,
+        0.671875,
+        1.0,
+        0.59375,
+        0.625,
+        0.828125
+      ],
+      "examples": 64,
+      "identity_ci95_grouped": {
+        "ci95": [
+          0.0,
+          0.013257575757575758
+        ],
+        "mean": 0.005859375,
+        "replicates": 2000,
+        "source_records": 57,
+        "windows": 64
+      },
+      "identity_top1_by_position": [
+        0.015625,
+        0.0,
+        0.0,
+        0.0,
+        0.015625,
+        0.0,
+        0.0,
+        0.015625
+      ],
+      "ink_ratio": 1.1667835712432861,
+      "isolated_ink_fraction": 0.005386143922805786,
+      "mean_connected_components": 2.181640625,
+      "mean_identity_top1": 0.005859375,
+      "mean_pixel_f1": 0.3219548165798187,
+      "pixel_disagreement_from_ordered": 0.022670745849609375,
+      "pixel_f1_by_position": [
+        0.38123002648353577,
+        0.2986499071121216,
+        0.29406604170799255,
+        0.31806105375289917,
+        0.383311927318573,
+        0.2944112718105316,
+        0.29629361629486084,
+        0.3096145689487457
+      ]
+    }
+  },
+  "feedback_comparisons": {
+    "first_position_ordered_minus_shuffled": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "replicates": 2000,
+      "source_records": 57,
+      "windows": 64
+    },
+    "ordered_minus_shuffled": {
+      "ci95": [
+        0.0,
+        0.00625
+      ],
+      "mean": 0.001953125,
+      "replicates": 2000,
+      "source_records": 57,
+      "windows": 64
+    }
+  },
+  "frozen_partition_opened": false,
+  "gallery_layout": "4 target | 4 ordered | 4 shuffled | 4 zero condition | first V42 plan",
+  "gates": {
+    "bank_excluded_from_generation": true,
+    "block_identity": false,
+    "finite_and_memory": true,
+    "first_position_condition_advantage": false,
+    "first_position_identity": false,
+    "high_noise_order_advantage": false,
+    "identity_diversity": true,
+    "image_only_boundary_and_hashes": true,
+    "parameter_budget": true,
+    "pixel_f1": false,
+    "surface_quality": true,
+    "visible_feedback_advantage": true
+  },
+  "generation": {
+    "ordered": {
+      "blank_rate": 0.001953125,
+      "cells": 4,
+      "distinct_evaluator_identities": 476,
+      "evaluator_bank_coverage_by_position": [
+        0.609375,
+        0.58984375,
+        0.64453125,
+        0.68359375
+      ],
+      "examples": 256,
+      "identity_ci95_grouped": {
+        "ci95": [
+          0.0019157088122605363,
+          0.01065891472868217
+        ],
+        "mean": 0.005859375,
+        "replicates": 2000,
+        "source_records": 136,
+        "windows": 256
+      },
+      "identity_top1_by_position": [
+        0.01171875,
+        0.00390625,
+        0.0,
+        0.0078125
+      ],
+      "ink_ratio": 1.1958686113357544,
+      "isolated_ink_fraction": 0.005015524569898844,
+      "mean_connected_components": 2.0732421875,
+      "mean_identity_top1": 0.005859375,
+      "mean_pixel_f1": 0.31981390714645386,
+      "pixel_f1_by_position": [
+        0.37608498334884644,
+        0.2911679148674011,
+        0.30206605792045593,
+        0.3099367022514343
+      ]
+    },
+    "shuffled": {
+      "blank_rate": 0.0009765625,
+      "cells": 4,
+      "distinct_evaluator_identities": 479,
+      "evaluator_bank_coverage_by_position": [
+        0.609375,
+        0.58984375,
+        0.64453125,
+        0.68359375
+      ],
+      "examples": 256,
+      "identity_ci95_grouped": {
+        "ci95": [
+          0.0010120437181663838,
+          0.009415612717129446
+        ],
+        "mean": 0.0048828125,
+        "replicates": 2000,
+        "source_records": 136,
+        "windows": 256
+      },
+      "identity_top1_by_position": [
+        0.01171875,
+        0.00390625,
+        0.0,
+        0.00390625
+      ],
+      "ink_ratio": 1.1968492269515991,
+      "isolated_ink_fraction": 0.00528015848249197,
+      "mean_connected_components": 2.0400390625,
+      "mean_identity_top1": 0.0048828125,
+      "mean_pixel_f1": 0.3175690472126007,
+      "pixel_disagreement_from_ordered": 0.01976490020751953,
+      "pixel_f1_by_position": [
+        0.37011635303497314,
+        0.2896299958229065,
+        0.30125486850738525,
+        0.3092750310897827
+      ]
+    },
+    "zero_condition": {
+      "blank_rate": 0.001953125,
+      "cells": 4,
+      "distinct_evaluator_identities": 466,
+      "evaluator_bank_coverage_by_position": [
+        0.609375,
+        0.58984375,
+        0.64453125,
+        0.68359375
+      ],
+      "examples": 256,
+      "identity_ci95_grouped": {
+        "ci95": [
+          0.0,
+          0.005000502008032126
+        ],
+        "mean": 0.001953125,
+        "replicates": 2000,
+        "source_records": 136,
+        "windows": 256
+      },
+      "identity_top1_by_position": [
+        0.0,
+        0.00390625,
+        0.0,
+        0.00390625
+      ],
+      "ink_ratio": 1.1633551120758057,
+      "isolated_ink_fraction": 0.0053381649777293205,
+      "mean_connected_components": 2.09375,
+      "mean_identity_top1": 0.001953125,
+      "mean_pixel_f1": 0.301784485578537,
+      "pixel_disagreement_from_ordered": 0.057272911071777344,
+      "pixel_f1_by_position": [
+        0.28362104296684265,
+        0.29514074325561523,
+        0.3140345513820648,
+        0.31434154510498047
+      ]
+    }
+  },
+  "manifest": {
+    "bytes": 13659628,
+    "path": "data/visual_grammar/chinese_wikisource_public_domain.jsonl",
+    "records": 7017,
+    "rights": {
+      "public-domain historical text; Wikisource CC BY-SA contribution layer": 7017
+    },
+    "sha256": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+    "source_titles": {
+      "三國演義": 1222,
+      "人間詞話": 58,
+      "古文觀止": 567,
+      "嘉祐集": 200,
+      "大唐西域記": 259,
+      "妙法蓮華經": 167,
+      "尚書": 116,
+      "幼學瓊林": 38,
+      "東坡全集": 206,
+      "欒城集": 730,
+      "水滸傳（120回本）": 1845,
+      "洛陽伽藍記": 70,
+      "老子想爾注": 26,
+      "西遊記": 1446,
+      "金剛般若波羅蜜經": 14,
+      "長春真人西遊記": 53
+    },
+    "strict_digest": true
+  },
+  "peak_allocated_vram_gib": 0.1926283836364746,
+  "surface_identity_is_posthoc_nearest_raster_not_ocr": true,
+  "training_provenance": {
+    "protocol": {
+      "references/causal_visual_block_diffusion_v53_protocol.md": "519437023bcb139992a27566fcc22b07ccf6f26f424c14019eb09871c9fc9106",
+      "references/v53_pretraining_corrections_and_article_plan.md": "cb0bcec403de6850bea3a301a4a129224bfede7e82fe95bed80203fbc6256de6"
+    },
+    "source": {
+      "ilm/visual_lm/causal_visual_block_diffusion_v53.py": "749fe0c7f1bf9254c0cd52b702ef5fd5e86e0020d27211240dad704fb1e59639",
+      "ilm/visual_lm/causal_visual_block_diffusion_v53_training.py": "db23a7fe292d5d2d2ff5d43dab43dc5dfc6cbaa39087d7c87e0140e9d9a7fa19",
+      "scripts/train_causal_visual_block_diffusion_v53.py": "5aaa864563ccd9b3c7b4faaeb462e4a3aa132f726d2973b404ce1686b0235b76"
+    }
+  }
+}

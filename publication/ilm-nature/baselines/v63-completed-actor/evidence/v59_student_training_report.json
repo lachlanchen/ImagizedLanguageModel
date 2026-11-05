@@ -1,0 +1,28 @@
+{
+  "architecture": "frozen-visual-foundation-readout-v59",
+  "batch_size": 8,
+  "boundary": {
+    "encoder_frozen": true,
+    "external_model_call": false,
+    "input": "continuous features derived from prompt pixels only",
+    "ocr": false,
+    "output": "observed image block; no persistent glyph bank",
+    "tokenizer": false,
+    "unicode_ids": false
+  },
+  "cache_sha256": "9c9a1ea0a6887df24362334e473e1b88050809365ea5a7426b90f48da1a3602f",
+  "elapsed_seconds": 106.59276805631816,
+  "encoder": "student",
+  "peak_allocated_vram_gib": 0.16980743408203125,
+  "provenance": {
+    "ilm/visual_lm/frozen_visual_foundation.py": "a999dcfd60270315617f59b153e3c7a1a5bdc6d713d81a7fa4528c571db00195",
+    "ilm/visual_lm/frozen_visual_readout_data.py": "8c96196a7293dab1b5b7ba9fa893be4815f5ddb9e8a4390c8ac6ffd6ed2bcc1c",
+    "references/frozen_visual_foundation_v59_protocol.md": "f74998ae06084f6b2c07251b4bcc00ed4422d4a233afe98569f9e52b5a061b33",
+    "scripts/train_frozen_visual_readout_v59.py": "364a4157c7c3b7940a39c665d9a1bf38e34462b4619bd8ab7bce05c8f6a76f53"
+  },
+  "qualification": "frozen-foundation reading probe; general ILM remains unqualified",
+  "smoke_only": false,
+  "steps": 4000,
+  "trained_parameters": 789520,
+  "update": 4000
+}

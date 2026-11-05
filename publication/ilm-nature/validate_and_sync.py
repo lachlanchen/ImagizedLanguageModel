@@ -27,6 +27,8 @@ def digest(path):
 def main():
     from verify_assignment_publication import verify
     verify()
+    from verify_codec_writing_publication import verify as verify_writing
+    verify_writing()
     report = json.loads((HERE / "evidence/v53_development_report.json").read_text())
     density = json.loads((HERE / "evidence/v54_development_report.json").read_text())
     joint_reports = {
@@ -67,8 +69,8 @@ def main():
     figure_info = subprocess.check_output(
         ["pdfinfo", str(HERE / "ILM_Figures_review.pdf")], text=True
     )
-    if not any(line.split() == ["Pages:", "20"] for line in figure_info.splitlines()):
-        raise ValueError("figure render must contain twenty slides")
+    if not any(line.split() == ["Pages:", "22"] for line in figure_info.splitlines()):
+        raise ValueError("figure render must contain twenty-two slides")
     for name in ("manuscript", "manuscript_review", "supplementary_information"):
         pdf = HERE / f"{name}.pdf"
         subprocess.run(["pdfinfo", str(pdf)], check=True, capture_output=True)
@@ -155,7 +157,7 @@ def main():
             raise ValueError("missing native density chart")
         slides = ET.fromstring(deck.read("ppt/presentation.xml"))
         pns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
-        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 20:
+        if len(slides.findall("p:sldIdLst/p:sldId", pns)) != 22:
             raise ValueError("missing current figure slides")
         rels = ET.fromstring(deck.read("ppt/charts/_rels/chart3.xml.rels"))
         relation_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
@@ -256,11 +258,11 @@ def main():
                         )
     for name in ("redlined_manuscript", "redlined_supplementary_information"):
         subprocess.run(["pdfinfo", str(HERE / (name+".pdf"))],check=True,capture_output=True)
-    redlines = json.loads((HERE/"evidence/assignment_redline_build.json").read_text())
+    redlines = json.loads((HERE/"evidence/codec_writing_redline_build.json").read_text())
     for name,row in redlines["documents"].items():
         if digest(HERE/(name+".pdf"))!=row["pdf_sha256"] or digest(HERE/(name+".tex"))!=row["tex_sha256"]:
             raise ValueError("redline differs from verified build")
-    target = DESTINATION / "ILM_NatureStyle_20261105_V63_Assignment"
+    target = DESTINATION / "ILM_NatureStyle_20261105_V67_Writing"
     target.mkdir(parents=True, exist_ok=True)
     copied = {}
     for path in sorted(HERE.rglob("*")):

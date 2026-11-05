@@ -1,0 +1,339 @@
+{
+  "scope": "Training method and observed training targets only",
+  "model_generation_calls": 0,
+  "first_manifest_pair": {
+    "context_hash": "00081ddf0599be196c4a94b4758be126324500bd3c68e446b480767850c6459c",
+    "record_ids": [
+      "TRAIN_2646_QUERY_0",
+      "TRAIN_2646_QUERY_2"
+    ],
+    "maximum_joined_blocks": 235
+  },
+  "protocol_sha256": "c89c43e31602aea5380ee064cc0964513132e41ecc6993b0e4e4053d0f939f6d",
+  "inputs_sha256": {
+    "artifacts/native_pixel_instruction_v61_20261105/data/train/TRAIN_2646_QUERY_0.pt": "4a43ab71a2422e4ff559e5eda4b5fe4651c8e63a8425d971c44251315a3d0750",
+    "artifacts/native_pixel_instruction_v61_20261105/data/train/TRAIN_2646_QUERY_2.pt": "2745277bb7c8054319422e3cbcb6e6c5db342295e4a9ed289ba1459dd172dd55",
+    "references/question_assignment_v63_protocol.md": "c89c43e31602aea5380ee064cc0964513132e41ecc6993b0e4e4053d0f939f6d",
+    "ilm/visual_lm/question_assignment.py": "cf477790e2e4fb7a2a73f3975e82b5d611837c80a3e3ac32c3446e24089e0ad1",
+    "data/visual_qa/cmrc2018_short/train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "artifacts/native_pixel_instruction_v61_20261105/data/report.json": "816d16ae19494ee2090503f39115d5b6eb46a44382fb9d7663112d49e95db6cd",
+    "artifacts/question_assignment_v63_20261105/data/report.json": "55d7e641fe4a51547d7819359cf5a233dbe894d73a7b7ee5feae21a51a17aec6",
+    "artifacts/question_assignment_v63_20261105/data/pairs.jsonl": "861f7c487223d65b5649cb4c33fb1e3de24a7be4663eea5676de4a07b00f2dbb",
+    "artifacts/question_assignment_v63_20261105/preflight/report.json": "1084955dad6b50ae32da3e7d6d4a7b5cdb9f36da2edc5ca40244f59ce7298cdd"
+  },
+  "displayed_images": [
+    {
+      "name": "question_0",
+      "source_id": "TRAIN_2646_QUERY_0",
+      "source_role": "observed training question region",
+      "width": 608,
+      "height": 32,
+      "png_sha256": "bc0b22ff2bbeacc2d81248c08975fb2955563e9cbdd5e7f048386cc9e9657f53",
+      "pixel_sha256": "1d36cea18cdd55540d9cdb8aaf7e5b5fcbed0a7c26095d8cc60ca59da348ddee"
+    },
+    {
+      "name": "answer_0",
+      "source_id": "TRAIN_2646_QUERY_0",
+      "source_role": "observed padded answer; appended termination omitted from display",
+      "width": 64,
+      "height": 32,
+      "png_sha256": "7d816e50c42dc9acaaa0549e0a4285b363bb166e132a3202515d25343e6e06a1",
+      "pixel_sha256": "a638b1155e1046f06d6f12ec7f6201aff623fecfeecbcb7111c4e1ae5abc2d6d"
+    },
+    {
+      "name": "question_1",
+      "source_id": "TRAIN_2646_QUERY_2",
+      "source_role": "observed training question region",
+      "width": 672,
+      "height": 32,
+      "png_sha256": "f2bf0c87e85f07f0151ddec793fca93da5f6708f2e24bc5b711935473508bb3b",
+      "pixel_sha256": "fbbd697963578529d37bd6cfa3b9757f7568cd365877882b1f072e38e0a248f8"
+    },
+    {
+      "name": "answer_1",
+      "source_id": "TRAIN_2646_QUERY_2",
+      "source_role": "observed padded answer; appended termination omitted from display",
+      "width": 128,
+      "height": 32,
+      "png_sha256": "101cca3126dffa7ed80274afa6f29d91d29a5eefca04a7174a0dd8d7edaecb10",
+      "pixel_sha256": "3d4bfc15e1be650892c4c80acecb8883ccc7586f14b5e9d0923fc5989c40366f"
+    }
+  ],
+  "native_objects": [
+    {
+      "kind": "text",
+      "text": "Question-conditioned image-language training",
+      "x": 45,
+      "y": 25,
+      "width": 1510,
+      "height": 60
+    },
+    {
+      "kind": "text",
+      "text": "a   Observed training images: two questions about one paragraph",
+      "x": 65,
+      "y": 115,
+      "width": 1470,
+      "height": 40
+    },
+    {
+      "kind": "text",
+      "text": "Question region Q0",
+      "x": 80,
+      "y": 170,
+      "width": 600,
+      "height": 32
+    },
+    {
+      "kind": "image",
+      "name": "question_0",
+      "x": 80,
+      "y": 212,
+      "width": 608.0,
+      "height": 32.0
+    },
+    {
+      "kind": "text",
+      "text": "Recorded answer Y0",
+      "x": 80,
+      "y": 275,
+      "width": 300,
+      "height": 34
+    },
+    {
+      "kind": "image",
+      "name": "answer_0",
+      "x": 400,
+      "y": 270,
+      "width": 80.0,
+      "height": 40.0
+    },
+    {
+      "kind": "text",
+      "text": "Question region Q1",
+      "x": 850,
+      "y": 170,
+      "width": 600,
+      "height": 32
+    },
+    {
+      "kind": "image",
+      "name": "question_1",
+      "x": 850,
+      "y": 212,
+      "width": 670.0,
+      "height": 31.904761904761905
+    },
+    {
+      "kind": "text",
+      "text": "Recorded answer Y1",
+      "x": 850,
+      "y": 275,
+      "width": 300,
+      "height": 34
+    },
+    {
+      "kind": "image",
+      "name": "answer_1",
+      "x": 1170,
+      "y": 270,
+      "width": 160.0,
+      "height": 40.0
+    },
+    {
+      "kind": "text",
+      "text": "Each full prompt Xi also contains the same paragraph image. Appended white termination blocks are not drawn.",
+      "x": 80,
+      "y": 332,
+      "width": 1450,
+      "height": 30
+    },
+    {
+      "kind": "text",
+      "text": "b   Four causal likelihoods under the same parameters",
+      "x": 65,
+      "y": 390,
+      "width": 1470,
+      "height": 40
+    },
+    {
+      "kind": "box",
+      "x": 80,
+      "y": 465,
+      "width": 355,
+      "height": 115
+    },
+    {
+      "kind": "text",
+      "text": "(X0, Y0)   (X0, Y1)\n(X1, Y0)   (X1, Y1)",
+      "x": 100,
+      "y": 485,
+      "width": 315,
+      "height": 80
+    },
+    {
+      "kind": "box",
+      "x": 535,
+      "y": 465,
+      "width": 410,
+      "height": 115
+    },
+    {
+      "kind": "text",
+      "text": "Shared image generator\n490M parameters, 8 experts",
+      "x": 550,
+      "y": 485,
+      "width": 380,
+      "height": 80
+    },
+    {
+      "kind": "text",
+      "text": "Y0",
+      "x": 1110,
+      "y": 435,
+      "width": 180,
+      "height": 30
+    },
+    {
+      "kind": "text",
+      "text": "Y1",
+      "x": 1290,
+      "y": 435,
+      "width": 180,
+      "height": 30
+    },
+    {
+      "kind": "text",
+      "text": "X0",
+      "x": 1050,
+      "y": 477,
+      "width": 55,
+      "height": 35
+    },
+    {
+      "kind": "box",
+      "x": 1110,
+      "y": 465,
+      "width": 180,
+      "height": 62
+    },
+    {
+      "kind": "text",
+      "text": "e\u2080\u2080",
+      "x": 1110,
+      "y": 475,
+      "width": 180,
+      "height": 44
+    },
+    {
+      "kind": "box",
+      "x": 1290,
+      "y": 465,
+      "width": 180,
+      "height": 62
+    },
+    {
+      "kind": "text",
+      "text": "e\u2080\u2081",
+      "x": 1290,
+      "y": 475,
+      "width": 180,
+      "height": 44
+    },
+    {
+      "kind": "text",
+      "text": "X1",
+      "x": 1050,
+      "y": 539,
+      "width": 55,
+      "height": 35
+    },
+    {
+      "kind": "box",
+      "x": 1110,
+      "y": 527,
+      "width": 180,
+      "height": 62
+    },
+    {
+      "kind": "text",
+      "text": "e\u2081\u2080",
+      "x": 1110,
+      "y": 537,
+      "width": 180,
+      "height": 44
+    },
+    {
+      "kind": "box",
+      "x": 1290,
+      "y": 527,
+      "width": 180,
+      "height": 62
+    },
+    {
+      "kind": "text",
+      "text": "e\u2081\u2081",
+      "x": 1290,
+      "y": 537,
+      "width": 180,
+      "height": 44
+    },
+    {
+      "kind": "text",
+      "text": "eij = mean negative log likelihood of the complete answer suffix, including termination",
+      "x": 80,
+      "y": 605,
+      "width": 1440,
+      "height": 32
+    },
+    {
+      "kind": "text",
+      "text": "c   Positive image likelihood with paired question assignment",
+      "x": 65,
+      "y": 670,
+      "width": 1470,
+      "height": 40
+    },
+    {
+      "kind": "text",
+      "text": "D = e\u2080\u2081 + e\u2081\u2080 \u2212 e\u2080\u2080 \u2212 e\u2081\u2081",
+      "x": 80,
+      "y": 725,
+      "width": 670,
+      "height": 46
+    },
+    {
+      "kind": "text",
+      "text": "L = (e\u2080\u2080 + e\u2081\u2081) / 2 + \u03bb \u00b7 0.01 \u00b7 softplus(\u2212D / 0.01)",
+      "x": 80,
+      "y": 778,
+      "width": 1450,
+      "height": 46
+    },
+    {
+      "kind": "text",
+      "text": "\u03bb = 0: control;  \u03bb = 1: assignment",
+      "x": 820,
+      "y": 730,
+      "width": 670,
+      "height": 32
+    },
+    {
+      "kind": "text",
+      "text": "Observed targets, not model outputs. Both arms start from the same V62 EMA; autonomous answers are evaluated separately.",
+      "x": 65,
+      "y": 850,
+      "width": 1470,
+      "height": 30
+    }
+  ],
+  "template_sha256": "75b8e4fcd9f622dcc266623394e1068513bf6d81b3b75f4dd261f0c4b06872e3",
+  "generator_sha256": "00c9eafc8cf4dd9a4b6ddad9abdc487f827b7752bf1c4273edd577788dc4172f",
+  "language_quality_claim": false,
+  "artifacts": {
+    "question_assignment_method.pdf": "3a25d4721091a4c7c0862bfbdf1a67090dfd1ee2105f59b7a7dc605ceb746e76",
+    "question_assignment_method.svg": "6ac73c9458f360b42d85357dbc6d587bc1edb443d62adcf1bd2775722779fcb0",
+    "question_assignment_method.png": "1501662e5e58c2ba76dd933f2012047a40cf767ccae1d805daa39c8d856f8df9",
+    "question_assignment_method_editable.pptx": "c4e40009edf5555ee48d0497c538934fb15dfde5bf654ff0ed89d3faa378cfa8"
+  }
+}

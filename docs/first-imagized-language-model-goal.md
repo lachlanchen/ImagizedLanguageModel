@@ -68,6 +68,14 @@ the same Pango layout with white question ink; it preserves the passage and
 glyph advances. Preparation uses no actor calls. The final trained state and
 actual generated answers are still required before any language decision.
 
+The implemented [autonomous evaluator](../references/codec_language_v68_autonomous_audit.md)
+passes five CPU preflight checks covering all 192 cases and 384 owning prompt
+paths, full-width/stopping distinctions and article-grouped scoring. It rejects
+unfinished training before allocating CUDA memory. A lightweight coordinator
+waits for the same trainer to finish, then runs all normal/control generations
+and an independent raw-output verifier. It allocates no model while waiting;
+the evaluator preflight is not a language result.
+
 The [latest physics/math review](../references/physics_math_after_codec_20261105.md)
 connects recent feature-learning and continuous-generation work to this
 decision. Its registered CPU diagnostic measures frozen-codec robustness at
@@ -75,11 +83,14 @@ sampled perturbations of 64 training images. No new optimization or language
 pass is inferred. Preserve the simple actor experiment before adding spectral
 optimization, posterior-sampling diagnostics or a new generative architecture.
 
-Complete prompt-dependent instruction learning remains required. The next
+Complete prompt-dependent instruction learning remains required. The completed
 [publication revision plan](../references/direct_writer_results_publication_plan.md)
 uses the completed V65–V67 evidence and the qualified new actor to update the
-current verified Nature package with matching editable figures. V68's running
-state cannot be presented as a language result.
+current verified Nature package with matching editable figures. The article,
+review, supplement, matching redlines, twenty-two-slide deck and two new
+standalone figures pass build, data and visual checks. All twenty older slides
+render identically, and sixteen displayed raw rasters match their source
+pixels. V68's running state is excluded from language results.
 
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
@@ -157,9 +168,10 @@ Prepared components reduce integration risk but do not establish this candidate:
 The [V63 methods companion](../publication/ilm-nature/protocol-v63/methods.pdf)
 is a two-page methods explanation and editable training figure. Its displayed
 forms are observed targets. The main manuscript now includes the completed
-V63 result, native editable figures and separate writer failure. The article,
-review, supplement, both redlines and twenty-slide deck pass the current
-verification and are copied byte-for-byte into Nutstore Projects/ILM. Local
+V63 assignment result, V65–V67 writing diagnosis, native editable figures and
+complete-actor execution evidence. The article, review, supplement, both
+redlines and twenty-two-slide deck pass the current verification and are
+copied byte-for-byte into Nutstore Projects/ILM. Local
 copying does not verify cloud propagation. The completed V62 supplement redline and standalone
 Nutstore package are preserved. General language quality is not inferred from
 publication layout, deployment replay or component verification.

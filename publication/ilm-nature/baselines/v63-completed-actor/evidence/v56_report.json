@@ -1,0 +1,241 @@
+{
+  "audit_seed": 20265620,
+  "bank_created_after_generation": true,
+  "beam_width": 8,
+  "checkpoint_sha256": "ae4598c609648ba92a4eaa8680fa0842966a1f11b0757ed4a14b83038c048394",
+  "comparisons": {
+    "beam_minus_greedy": {
+      "bootstrap_seed": 20265719,
+      "ci95": [
+        0.023505392973607875,
+        0.04411837651727357
+      ],
+      "mean": 0.03369140625,
+      "replicates": 2000,
+      "source_records": 188,
+      "windows": 2048
+    },
+    "beam_minus_shuffled": {
+      "bootstrap_seed": 20265719,
+      "ci95": [
+        0.009657588464701126,
+        0.025517630306908047
+      ],
+      "mean": 0.017578125,
+      "replicates": 2000,
+      "source_records": 188,
+      "windows": 2048
+    },
+    "feedback_beam_minus_greedy": {
+      "bootstrap_seed": 20265719,
+      "ci95": [
+        0.0,
+        0.037703698282591694
+      ],
+      "mean": 0.017578125,
+      "replicates": 2000,
+      "source_records": 89,
+      "windows": 128
+    }
+  },
+  "decision": "reject_decoder",
+  "elapsed_seconds": 269.3282794840634,
+  "evaluator_bank_size": 9934,
+  "experiment": "raw-pixel-beam-v56",
+  "float32_matmul_precision": "highest",
+  "gates": {
+    "beam_correctness_gain": true,
+    "boundary_resource": true,
+    "earlier_history_gain": true,
+    "feedback": false,
+    "implementation": true,
+    "surface_and_motor": true
+  },
+  "manifest_sha256": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+  "max_score_consistency_error": 2.104043960571289e-05,
+  "mean_self_nll": {
+    "beam8": 3.107626438140869,
+    "beam8_shuffled": 3.077620267868042,
+    "greedy": 3.5076091289520264
+  },
+  "mean_true_target_nll": {
+    "ordered": 6.835104942321777,
+    "shuffled": 7.025302410125732
+  },
+  "measurements": {
+    "feedback": {
+      "beam8": {
+        "adjacent_repeated_raster_fraction": 0.2544642984867096,
+        "blank_fraction": 0.0,
+        "cells": 8,
+        "distinct_rasters": 62,
+        "exact_known_form": 1.0,
+        "exact_target": 0.06640625,
+        "exact_target_by_step": [
+          0.1328125,
+          0.109375,
+          0.0859375,
+          0.0625,
+          0.0625,
+          0.0078125,
+          0.03125,
+          0.0390625
+        ],
+        "examples": 128,
+        "ink_ratio": 0.6217827796936035,
+        "isolated_ink_fraction": 0.007986616343259811,
+        "mean_distinct_per_stream": 4.7109375,
+        "pixel_f1": 0.2837371528148651
+      },
+      "beam8_shuffled": {
+        "adjacent_repeated_raster_fraction": 0.3236607015132904,
+        "blank_fraction": 0.0,
+        "cells": 8,
+        "distinct_rasters": 50,
+        "exact_known_form": 1.0,
+        "exact_target": 0.0498046875,
+        "exact_target_by_step": [
+          0.1328125,
+          0.0703125,
+          0.0625,
+          0.0390625,
+          0.046875,
+          0.0078125,
+          0.0234375,
+          0.015625
+        ],
+        "examples": 128,
+        "ink_ratio": 0.6060567498207092,
+        "isolated_ink_fraction": 0.009332777932286263,
+        "mean_distinct_per_stream": 4.1171875,
+        "pixel_f1": 0.26791009306907654
+      },
+      "greedy": {
+        "adjacent_repeated_raster_fraction": 0.1774553507566452,
+        "blank_fraction": 0.0,
+        "cells": 8,
+        "distinct_rasters": 52,
+        "exact_known_form": 0.9931640625,
+        "exact_target": 0.048828125,
+        "exact_target_by_step": [
+          0.109375,
+          0.078125,
+          0.046875,
+          0.0390625,
+          0.0390625,
+          0.0078125,
+          0.0390625,
+          0.03125
+        ],
+        "examples": 128,
+        "ink_ratio": 0.4022255837917328,
+        "isolated_ink_fraction": 0.0035962804686278105,
+        "mean_distinct_per_stream": 3.8828125,
+        "pixel_f1": 0.21158467233181
+      }
+    },
+    "generation": {
+      "beam8": {
+        "adjacent_repeated_raster_fraction": 0.0,
+        "blank_fraction": 0.0,
+        "cells": 1,
+        "distinct_rasters": 127,
+        "exact_known_form": 1.0,
+        "exact_target": 0.1162109375,
+        "exact_target_by_step": [
+          0.1162109375
+        ],
+        "examples": 2048,
+        "ink_ratio": 0.5256550312042236,
+        "isolated_ink_fraction": 0.004742685705423355,
+        "mean_distinct_per_stream": 1.0,
+        "pixel_f1": 0.3194447159767151
+      },
+      "beam8_shuffled": {
+        "adjacent_repeated_raster_fraction": 0.0,
+        "blank_fraction": 0.0,
+        "cells": 1,
+        "distinct_rasters": 108,
+        "exact_known_form": 1.0,
+        "exact_target": 0.0986328125,
+        "exact_target_by_step": [
+          0.0986328125
+        ],
+        "examples": 2048,
+        "ink_ratio": 0.4648168683052063,
+        "isolated_ink_fraction": 0.004278699867427349,
+        "mean_distinct_per_stream": 1.0,
+        "pixel_f1": 0.2862898111343384
+      },
+      "greedy": {
+        "adjacent_repeated_raster_fraction": 0.0,
+        "blank_fraction": 0.0,
+        "cells": 1,
+        "distinct_rasters": 116,
+        "exact_known_form": 0.99560546875,
+        "exact_target": 0.08251953125,
+        "exact_target_by_step": [
+          0.08251953125
+        ],
+        "examples": 2048,
+        "ink_ratio": 0.35831567645072937,
+        "isolated_ink_fraction": 0.0018916273256763816,
+        "mean_distinct_per_stream": 1.0,
+        "pixel_f1": 0.23071300983428955
+      }
+    },
+    "motor": {
+      "beam8": {
+        "adjacent_repeated_raster_fraction": 0.0,
+        "blank_fraction": 0.0,
+        "cells": 1,
+        "distinct_rasters": 193,
+        "exact_known_form": 1.0,
+        "exact_target": 1.0,
+        "exact_target_by_step": [
+          1.0
+        ],
+        "examples": 256,
+        "ink_ratio": 1.0,
+        "isolated_ink_fraction": 0.002463161014020443,
+        "mean_distinct_per_stream": 1.0,
+        "pixel_f1": 1.0
+      }
+    },
+    "target_stream": {
+      "adjacent_repeated_raster_fraction": 0.0011160714784637094,
+      "blank_fraction": 0.0,
+      "cells": 8,
+      "distinct_rasters": 509,
+      "exact_known_form": 1.0,
+      "exact_target": 1.0,
+      "exact_target_by_step": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "examples": 128,
+      "ink_ratio": 1.0,
+      "isolated_ink_fraction": 0.003193134441971779,
+      "mean_distinct_per_stream": 7.7890625,
+      "pixel_f1": 1.0
+    }
+  },
+  "model_remains_unqualified_as_general_ilm": true,
+  "peak_allocated_vram_gib": 0.15367746353149414,
+  "provenance": {
+    "scripts/eval_raster_beam_v56.py": "218174df1f4a4c421371784be56c2bc7f6f74f484d8c2bb56ad15031a48a7c13",
+    "ilm/visual_lm/raster_beam.py": "0f2ca2a68d59ac5b66f8ebdfeccaf9ee87d3646467cff78b4715207d27cd0844",
+    "references/raster_beam_v56_precision_amendment.md": "41912bfcd05f8756b7cb880151467997fe3bc58e3345f5ae2abd4e254721a98e",
+    "references/raster_beam_v56_protocol.md": "5b405e7e8cea6d9e57b7670b1f92414e144f3981f9c00813fe60b216e97c74bd"
+  },
+  "sealed_partition_opened": false,
+  "training_updates": 0,
+  "width_one_equal_to_original_greedy": true,
+  "windows": 2048
+}

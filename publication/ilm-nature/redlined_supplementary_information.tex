@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Thu Nov  5 13:32:21 2026
-%DIF ADD new.tex   Thu Nov  5 13:32:21 2026
+%DIF DEL old.tex   Thu Nov  5 15:51:53 2026
+%DIF ADD new.tex   Thu Nov  5 15:51:53 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -119,7 +119,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V62 transcript-bounds baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V63 completed-actor baseline are blue.}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -1068,24 +1068,23 @@ cleanup; maximum resident GPU memory sampled after requests is 7,278 MiB.
 These costs are separate from actor inference and training. The evaluator
 server and runner exit, its port closes and GPU 0 memory is released.
 
-\DIFaddbegin \section*{\DIFadd{Supplementary Note 22: matched question--answer assignment}}
-\DIFadd{For two observed question images $x_0,x_1$ about the same paragraph and two
+\section*{Supplementary Note 22: matched question--answer assignment}
+For two observed question images $x_0,x_1$ about the same paragraph and two
 accepted answer-image streams $y_0,y_1$, define $e_{ij}$ as mean answer and
 termination-pixel NLL for $y_j$ conditioned on $x_i$. Each actor scores all
 four streams using the complete image generator. Let
-}\begin{align}
+\begin{align}
  D &= e_{01}+e_{10}-e_{00}-e_{11},\\
  \mathcal L_{\mathrm{positive}} &= (e_{00}+e_{11})/2,\\
  \mathcal L_{\mathrm{assign}} &= \tau\log(1+\exp[-D/\tau]),\qquad \tau=0.01,\\
  \mathcal L &= \mathcal L_{\mathrm{positive}}+\lambda\mathcal L_{\mathrm{assign}}.
 \end{align}
-\DIFadd{Aligned uses $\lambda=1$ and control $\lambda=0$. Additive question-only and
+Aligned uses $\lambda=1$ and control $\lambda=0$. Additive question-only and
 answer-only energy offsets cancel from $D$. Different answer lengths receive
 their own normalization, so $D$ is not a joint log-odds or mutual-information
 estimate. The algebra does not identify linguistic meaning.
-}
 
-\DIFadd{There are 3,793 training-only pairs from 939 paragraphs and 3,016 questions.
+There are 3,793 training-only pairs from 939 paragraphs and 3,016 questions.
 Accepted answer text sets and canonical reference images are distinct within
 each pair; two pairs with shared references are excluded. Sampling chooses
 paragraphs uniformly, then a pair within the paragraph. Both actors start
@@ -1093,9 +1092,8 @@ from the same learned V62 eight-expert EMA, retain 489,998,208 parameters and
 use the unchanged Noto-26 interface and approximate component-mode decoder.
 No reference bank, OCR or teacher is deployed. All 2,000 update journals,
 containing four pair draws each, match byte for byte.
-}
 
-\DIFadd{Microbatch is one pair with accumulation four. Each pair forms two positive
+Microbatch is one pair with accumulation four. Each pair forms two positive
 and two swapped likelihood streams. AdamW uses learning rate $2\times10^{-5}$,
 betas $(0.9,0.95)$, decay 0.01, 100-update warmup, cosine decay to 10\%, clip
 one and EMA 0.99. Model/optimizer/EMA weights are FP32; forward/backward use
@@ -1103,44 +1101,40 @@ BF16, deterministic eager/math attention and nonreentrant checkpointing.
 Model and data seeds are 20266320 and 20266321. Only final EMA is audited.
 Both arms execute sequentially on physical GPU 0 under eight-hour and
 20-GiB allocated-memory ceilings per phase.
-}
 
 \begin{table}[htbp]\centering\small
 \caption*{\textbf{Supplementary Table 4: completed question--answer assignment.} Image F1 values are percentages.}
 \begin{tabular}{lrrrr}\toprule
-\DIFaddFL{Arm }& \DIFaddFL{Exact / 256 }& \DIFaddFL{Raster F1 }& \DIFaddFL{Foreground F1 }& \DIFaddFL{Both / 393}\\\midrule
-\DIFaddFL{Control }& \DIFaddFL{2 }& \DIFaddFL{3.229 }& \DIFaddFL{20.227 }& \DIFaddFL{0}\\
-\DIFaddFL{Aligned }& \DIFaddFL{1 }& \DIFaddFL{2.417 }& \DIFaddFL{17.219 }& \DIFaddFL{0}\\\bottomrule
+Arm & Exact / 256 & Raster F1 & Foreground F1 & Both / 393\\\midrule
+Control & 2 & 3.229 & 20.227 & 0\\
+Aligned & 1 & 2.417 & 17.219 & 0\\\bottomrule
 \end{tabular}
 \end{table}
 
-\DIFadd{Control and aligned all-development NLLs are 0.113901 and 0.114186 nats per
-pixel. Aligned minus control raster F1 is $-0.812$ points }[\DIFadd{$-1.504$,$-0.202$}]\DIFadd{;
-foreground F1 differs by $-3.008$ points }[\DIFadd{$-3.978$,$-2.014$}]\DIFadd{. Normal-minus-blank
-raster effects are 1.765 points }[\DIFadd{0.504,3.251}] \DIFadd{for control and 1.677
-}[\DIFadd{0.492,3.033}] \DIFadd{for aligned. All intervals resample source articles 2,000 times,
+Control and aligned all-development NLLs are 0.113901 and 0.114186 nats per
+pixel. Aligned minus control raster F1 is $-0.812$ points [$-1.504$,$-0.202$];
+foreground F1 differs by $-3.008$ points [$-3.978$,$-2.014$]. Normal-minus-blank
+raster effects are 1.765 points [0.504,3.251] for control and 1.677
+[0.492,3.033] for aligned. All intervals resample source articles 2,000 times,
 seed 20266329, over the same 256 primary cases from 198 articles.
-}
 
-\DIFadd{Each actor passes seven of ten reading gates. Both fail the unchanged 10\%
+Each actor passes seven of ten reading gates. Both fail the unchanged 10\%
 exact-answer, 25\% raster-F1 and 2\% both-correct-pair requirements. Question
 dependence, capped outputs and implementation checks pass. The intervention
 requires an aligned reading pass and a positive lower interval for
 aligned-minus-control raster F1; both requirements fail. The decision is
 \texttt{reject\_assignment\_intervention}. No decoder, checkpoint selection,
 threshold or primary case changes after scoring.
-}
 
-\DIFadd{The separate accepted-reference diagnostic assigns the pair correctly in
+The separate accepted-reference diagnostic assigns the pair correctly in
 324/393 cases for control and 330/393 for aligned. Both individual energy
 ranks are correct in 82/393 and 109/393. These are descriptive comparisons
 without registered difference intervals, and do not evaluate free writing.
 Training takes 7,355.156 and 6,737.336 s at 10.301 GiB peak allocated memory.
 The audit takes 582.104 s excluding loading, at 1.904 GiB. Timing excludes
 loading, final serialization and external foundation pretraining.
-}
 
-\DIFadd{The preflight passes exact uninterrupted/resumed optimizer, EMA and RNG
+The preflight passes exact uninterrupted/resumed optimizer, EMA and RNG
 comparison, finite complete-backbone and assignment-only gradients, causal
 masking and physical stream assembly. Largest-pair allocation is 9.197 GiB.
 Same-shape future-pixel effects are zero; strict-FP32 cached-prefix error is
@@ -1149,10 +1143,9 @@ reproduce tensors, PNG bytes and stopping events with networking disabled,
 empty caches and no repository source path. Reused development, one seed,
 external pretraining and strict-raster limitations remain explicit. Sealed
 final partitions are unopened.
-}
 
-\section*{\DIFadd{Supplementary Note 23: inherited continuous writing actor}}
-\DIFadd{A separately executed successor retains the existing authenticated Qwen3-VL
+\section*{Supplementary Note 23: inherited continuous writing actor}
+A separately executed successor retains the existing authenticated Qwen3-VL
 vision/contextual archive\cite{qwen3vl}, omits its vocabulary matrices and
 attaches a continuous physical-image writer (Fig.~\ref{fig:grounded-actor}).
 It has 7,548,043,521 parameters: 7,522,463,984 inherited/frozen and 25,579,537
@@ -1162,31 +1155,28 @@ adapters in 36 contextual layers, two continuous writing queries, a
 All 27 vision layers and three DeepStack feature sets remain present.
 The actor accepts observed grayscale image tensors and completed
 $32\times64$ blocks; it requires no character segmentation or alphabet.
-}
 
-\DIFadd{Teacher forcing places each query pair before its answer image. The observed
+Teacher forcing places each query pair before its answer image. The observed
 prompt may be bidirectionally image-encoded, while each completed answer block
 is an independent encoder image. A causal contextual mask prevents current
 and future answer pixels from entering a prediction. Cached generation
 rereads only completed generated blocks. Explicit spatial/temporal rotary
 coordinates preserve image layout; sequential mask coordinates carry no
 character identity.
-}
 
-\DIFadd{The writer models all 2,048 pixels jointly. With Gaussian $U$, uniform $t$ and
+The writer models all 2,048 pixels jointly. With Gaussian $U$, uniform $t$ and
 signed target image $Y$, its flow objective is
-}\begin{equation}
+\begin{equation}
  Y_t=(1-t)U+tY,\qquad
  \mathcal L_{\mathrm{flow}}=\mathbb E\Vert v_\theta(Y_t,t,h)-(Y-U)\Vert_2^2.
 \end{equation}
-\DIFadd{Explicit midpoint integration gives a continuous raster; zero thresholding
+Explicit midpoint integration gives a continuous raster; zero thresholding
 produces binary output. A class-balanced binary stop objective is separate
 from white-space generation. Its sigmoid score has no independent calibration.
 No token IDs, OCR, font renderer, glyph bank or external model call enters
 actor inference. Encoded text remains permissible in offline dataset creation.
-}
 
-\DIFadd{All 19 complete-model execution checks pass on GPU 0 at 17.181 GiB allocated
+All 19 complete-model execution checks pass on GPU 0 at 17.181 GiB allocated
 and 18.053 GiB reserved peak memory. Geometry inspection covers 12,976 complete
 training examples from CMRC and Dolly instructions\cite{cmrc,dolly}. The
 largest contextual case has 918 positions, a $480\times1024$ prompt and
@@ -1198,9 +1188,8 @@ nonzero gradients reach first/last contextual adapters and the writing head.
 Restoring one saved optimizer update reproduces the next writer/adapters,
 optimizer, sampling and global RNG states exactly. Same-shape future-image
 and encoder-isolation interventions have exactly zero effect.
-}
 
-\DIFadd{Two retained attempts fail cached/full-prefix comparison at relative maximum
+Two retained attempts fail cached/full-prefix comparison at relative maximum
 errors 0.18524 and 0.09815. The accepted implementation keeps contextual weight
 storage in BF16 but evaluates contextual projections, attention and residuals
 in FP32. Layer checkpointing avoids retaining a full FP32 body. Vision
@@ -1209,9 +1198,8 @@ The complete contextual call disables ambient autocast, verified at actual
 attention entry. Cached/full-prefix error becomes $3.910\times10^{-4}$
 absolute and $1.210\times10^{-5}$ relative, below the unchanged 0.02 relative
 bound. These casts do not recover precision lost in the source quantization.
-}
 
-\DIFadd{A separate offline helper temporarily reads source token rows and an output
+A separate offline helper temporarily reads source token rows and an output
 head to test the contextual initialization against the source engine. Across
 eight short text-only prompts, it matches 8/8 initial and 9/9 returned token
 choices, with mean KL 0.000264 nat after grouping reference top-ten tokens
@@ -1220,9 +1208,8 @@ image-language understanding. The helper vocabulary is never attached to
 the actor, and its owned reference service exits before native model loading.
 Its 103.832-s runtime and 18.701-GiB allocation include the temporary head
 and are separate from the image-actor preflight.
-}
 
-\DIFadd{The preflight contains two optimizer updates and replay; its output is noise.
+The preflight contains two optimizer updates and replay; its output is noise.
 It provides no writing or language quality score. A separate writer-only
 curriculum then trains 19,374,096 parameters for 10,000 updates on balanced
 Chinese/English blocks from 12,976 training examples. With the final EMA fixed,
@@ -1240,7 +1227,6 @@ development data, not prompt-to-answer language. Independent autonomous
 answers, historical-form behavior and capability-matched efficiency remain
 required. External pretraining is inherited work, not training performed
 from scratch on the local GPU.
-}
 
 \plate{Figure_S7_grounded_actor}{\textbf{An inherited image actor executes within one GPU, with language quality unqualified.}
 Observed prompt images and independently encoded completed blocks enter the
@@ -1250,9 +1236,166 @@ contextual body also retains frozen inherited weights. A separate classifier
 predicts stopping. Parameter counts and memory describe actual complete-model
 execution. The diagram contains no generated-language example or quality claim.}{fig:grounded-actor}
 
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 24: matched writer-fitting diagnosis}}
+\DIFadd{The failure in Note 23 motivates a factorial experiment on 64 fixed training
+blocks. Each block is a physical $32\times64$ crop, which can contain partial
+letters or characters. Conditions are either the inherited reader's two
+4096-dimensional features or a lossless embedding of the actual target
+pixels. The latter is an answer-supplying oracle control. Each condition is
+crossed with Gaussian velocity learning or direct one-pass image MSE, using
+the same writer architecture, initialization and 2,000-update batch exposure.
+All four early optimizer/EMA/RNG replays pass.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrr}\toprule
+\DIFadd{Condition / objective }& \DIFadd{F1 (\%) }& \DIFadd{Exact / 64 }& \DIFadd{Shuffled F1 (\%)}\\\midrule
+\DIFadd{Reader / flow }& \DIFadd{34.567 }& \DIFadd{0 }& \DIFadd{26.716}\\
+\DIFadd{Reader / direct }& \DIFadd{99.995 }& \DIFadd{63 }& \DIFadd{27.466}\\
+\DIFadd{Pixels / flow }& \DIFadd{33.648 }& \DIFadd{0 }& \DIFadd{26.581}\\
+\DIFadd{Pixels / direct }& \DIFadd{100.000 }& \DIFadd{64 }& \DIFadd{27.464}\\\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{All 512 main generated-image scores and all 8,000 batch draws are independently
+verified against the original training pixels. The fitting result rejects an
+immediate flow-writing explanation at this configuration; it does not prove
+generalization from inherited features. Source-feature extraction peaks at
+15.251 GiB. Subsequent writer fits peak near 0.66 GiB after the unused semantic
+body is released, so the latter is not complete language-model memory.
+}
+
+\DIFadd{An auxiliary native-codec comparator initially uses the wrong image polarity,
+giving F1 81.364\%. That original report is retained and invalidated. The
+codec was trained with white-positive input. A separately recorded correction
+using its actual convention reconstructs all 64 training images exactly.
+Both comparator outputs and the correction are independently verified. The
+fixed raw rows in main-text Fig.~9 remain unmodified.
+}
+
+\section*{\DIFadd{Supplementary Note 25: broad direct writing and a fixed output codec}}
+\DIFadd{The broader direct writer retains the full inherited actor in memory but
+trains only its 19,374,096 writer parameters. It initializes from Note 24's
+reader/direct EMA, then makes 10,000 additional updates on balanced
+Chinese/English physical-block draws. Independent replay confirms 160,000
+draws and 12,972 distinct consumed examples out of a 12,976-example pool.
+All 256 final correct/shuffled output scores are recomputed from raw images.
+Aligned foreground F1 is 56.563\%, shuffled 18.520\%, and exact counts are
+3/128 and 0/128. Each route contains two blank blocks. The 38.043-point
+conditioning gain exceeds 20 points, but the unchanged 90\% fidelity gate
+fails. The run is complete and rejected as a writing component.
+}
+
+\DIFadd{Training peaks at 15.804 GiB. The recorded 1,555.127-s interval includes
+training, checkpointing and evaluation after restoration, excluding initial
+loading; it is not full wall-clock or from-scratch language training. The
+fixed fitting-stage initialization and different objective prevent treating
+this as a matched broad-corpus flow comparison.
+}
+
+\DIFadd{The next audit uses the existing V34 continuous glyph codec with its original
+6,000-update EMA, 7,423,361 frozen parameters and no additional optimization.
+Each target block is split into left/right $32\times32$ tiles. Its native
+white-positive encoder produces two continuous 768-vectors; the fixed decoder
+reassembles signed physical pixels. There is no quantization, character index,
+font renderer or stored-form lookup in this decoder. On the identical 128
+reused-development blocks, aligned F1 is 99.998\%, with 126 exact and no blank
+blocks. Shuffled codes give 21.413\% F1, zero exact and no blank blocks.
+The 78.584-point gain and 90\% fidelity requirements both pass.
+}
+
+\DIFadd{The original source images, native codes and all 256 native decoder outputs
+are independently verified. The CPU audit takes 1.684 s, excluding earlier
+codec training and inherited foundation pretraining. This establishes a
+faithful supplied-code output representation. The target encoder sees the
+answer image, so the audit contains no autonomous semantic prediction.
+}
+
+\section*{\DIFadd{Supplementary Note 26: separate writing coordinates in a complete actor}}
+\DIFadd{The complete candidate retains all 27 vision and 36 contextual layers and
+replaces the failed reader-feature inverse with the fixed output codec
+(Fig.~\ref{fig:codec-actor}). A shared $4096\to768$ projection predicts each
+of two writing vectors. Rank-eight query/value/output adapters, two structural
+queries, the stop classifier and output projection contain 9,351,937 trainable
+parameters in a 7,539,239,282-parameter actor. The remaining 7,529,887,345
+parameters, including the entire codec, are frozen. No language vocabulary is
+materialized in this actor. Offline image rendering may use source strings;
+actor generation receives observed pixels alone.
+}
+
+\DIFadd{All 24 actual complete-model checks pass at 16.953 GiB allocated and 17.381 GiB
+reserved peak memory. Adam-state backward executes both the 918-position,
+109-answer-block witness and the $512\times1024$ prompt witness. Finite,
+nonzero gradients reach the projection, queries, stop head and first/last
+contextual adapter outputs. Frozen parameters receive no gradients. A future
+image intervention has exactly zero effect on earlier contextual states,
+predicted writing codes and stop logits. Independent reader-image isolation
+is also exact. Cached/full contextual relative maximum error is
+$1.292\times10^{-5}$; predicted-code error is $1.903\times10^{-5}$, both below
+the unchanged 0.02 requirement. Restored parameters, optimizer, sampling and
+global RNG states replay exactly across a real optimizer update.
+}
+
+\DIFadd{Setup takes 68.949 s and the complete preflight 78.022 s. Its two generated
+blocks are finite and deterministic with actual image feedback, but only two
+distinct optimizer updates precede them. Their strokes are fragmented and no
+language score is evaluated. A CPU source-bound receipt checks the committed
+implementation and GPU-report consistency; it is not a second GPU execution.
+}
+
+\DIFadd{A separate registered CPU diagnostic tests local code perturbations on the
+same 64 training images as Note 24. Four seeded tangent directions per image
+give 256 evaluations at each scale. Codes are re-normalized after perturbation;
+the scale is not their resulting latent RMS error. The original codes and
+all 1,536 perturbed native outputs are retained and independently replayed.
+}\begin{center}\small
+\begin{tabular}{rrrr}\toprule
+\DIFadd{Scale }& \DIFadd{Mean latent MSE }& \DIFadd{F1 (\%) }& \DIFadd{Exact / 256}\\\midrule
+\DIFadd{0 }& \DIFadd{$1.23\times10^{-9}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
+\DIFadd{0.01 }& \DIFadd{$1.00\times10^{-4}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
+\DIFadd{0.03 }& \DIFadd{$8.99\times10^{-4}$ }& \DIFadd{100.0000 }& \DIFadd{256}\\
+\DIFadd{0.1 }& \DIFadd{$9.93\times10^{-3}$ }& \DIFadd{99.9986 }& \DIFadd{253}\\
+\DIFadd{0.3 }& \DIFadd{$8.43\times10^{-2}$ }& \DIFadd{99.7517 }& \DIFadd{73}\\
+\DIFadd{1.0 }& \DIFadd{$5.86\times10^{-1}$ }& \DIFadd{88.3693 }& \DIFadd{0}\\\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{The diagnostic takes 4.577 s on four CPU threads, excluding Python startup.
+It measures sampled local stability, not worst-case error, intrinsic dimension
+or semantic sufficiency. In particular, high foreground F1 can conceal a low
+exact-block rate. Learned prediction errors and free-running history need
+their own evaluation. For small continuous error $\delta$, the familiar local
+expansion
+}\begin{equation}
+ \|D_w(z+\delta)-D_w(z)\|^2
+ =\delta^{\mathsf T}J_{D_w}(z)^{\mathsf T}J_{D_w}(z)\delta
+ +o(\|\delta\|^2)
+\end{equation}
+\DIFadd{explains why equal latent error can cause unequal pixel damage; it supplies
+no global guarantee, especially after thresholding.
+}
+
+\DIFadd{The implemented conditional-learning stage uses the complete CMRC/Dolly
+training corpus with detached codec labels, decoded-image loss and balanced
+structural stopping. No evolving training loss is reported here as a language
+result. Its registered autonomous audit uses paired Chinese questions and
+English instructions, prompt-only generation and fixed blank controls.
+Useful language, historical forms, final held-out evaluation and standalone
+deployment remain unqualified. Inherited semantic pretraining is external.
+}
+
+\plate{Figure_S8_codec_actor}{\textbf{A fixed writing decoder separates physical rendering from conditional code prediction.}
+Blue modules contain trainable components. Prompt and completed generated
+images enter the retained reader/contextual body; a small projection produces
+continuous writing coordinates. The output encoder supplies detached labels
+only during training. Gradients through the fixed decoder train the predicted
+codes and contextual adapters. The displayed parameter and resource counts
+come from actual complete-model execution, without a trained-language claim.}{fig:codec-actor}
+
 \DIFaddend \section*{Reproduction}
-From the repository root, use the following entry points. All use only GPU 0.
-\begin{quote}\small\ttfamily
+From the repository root, use the following entry points. \DIFdelbegin \DIFdel{All use
+only GPU 0.
+}\DIFdelend \DIFaddbegin \DIFadd{GPU stages use
+physical GPU 0; preparation and independent pixel checks run on CPU.
+}\DIFaddend \begin{quote}\small\ttfamily
 CUDA\_VISIBLE\_DEVICES=0 PYTHONPATH=. python\\
 scripts/train\_causal\_visual\_block\_diffusion\_v53.py --device cuda:0
 \end{quote}
@@ -1336,21 +1479,36 @@ the exported bundle's \texttt{run.py} does not need the repository or the
 original foundation checkpoint. The optional, separately calibrated vision
 diagnostic is \texttt{scripts/audit\_correlated\_native\_transcripts\_v62.py}.
 That reader stays outside the actor and changes no primary gate.
-\DIFdelbegin %DIFDELCMD < \begin{thebibliography}{14}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \DIFadd{The complete assignment comparison uses
-}\path{scripts/run_question_assignment_v63.py}\DIFadd{; its independent raw-score
-verification is }\path{scripts/verify_question_assignment_result_v63.py}\DIFadd{.
-The separate successor preflight is }\path{scripts/check_grounded_image_actor.py}\DIFadd{,
-and its helper-only source check is }\path{scripts/check_inherited_context.py}\DIFadd{.
+The complete assignment comparison uses
+\path{scripts/run_question_assignment_v63.py}; its independent raw-score
+verification is \path{scripts/verify_question_assignment_result_v63.py}.
+The separate successor preflight is \path{scripts/check_grounded_image_actor.py},
+and its helper-only source check is \path{scripts/check_inherited_context.py}.
 The writing-only curriculum is specified in
-}\path{references/grounded_writer_learning_protocol.md}\DIFadd{; it is not an
-additional completed language result.
+\path{references/grounded_writer_learning_protocol.md}; it is not an
+additional \DIFaddbegin \DIFadd{completed language result.
 }
+
+\DIFadd{The matched writer diagnosis and broader direct stage use
+}\path{scripts/diagnose_grounded_writer_v65.py} \DIFadd{and
+}\path{scripts/train_direct_grounded_writer_v66.py}\DIFadd{; their independent
+verifiers retain the failed fidelity decisions. The separate output-codec
+audit is }\path{scripts/audit_codec_output_v67.py}\DIFadd{, with native replay in
+}\path{scripts/verify_codec_output_v67.py}\DIFadd{. Complete separate-space actor
+execution is checked by }\path{scripts/check_codec_visual_language_actor.py}\DIFadd{.
+The fixed instruction-learning protocol is
+}\path{references/codec_language_learning_v68_protocol.md}\DIFadd{; its training entry
+point is }\path{scripts/train_codec_language_v68.py}\DIFadd{. Prepared prompt images
+and blank controls use }\path{scripts/prepare_codec_language_audit_v68.py}\DIFadd{.
+The evaluator }\path{scripts/eval_codec_language_v68.py} \DIFadd{accepts only the final
+10,000-update state and has a separate CPU data/metric preflight. Its
+independent raw-stream verifier is }\path{scripts/verify_codec_language_v68.py}\DIFadd{.
+These entry points specify the next language test; their existence does not
+constitute a }\DIFaddend completed language result.
 
 \begin{thebibliography}{18}
 \small
-\DIFaddend \interlinepenalty=5000
+\interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.
 \bibitem{mar} Li, T., Tian, Y., Li, H., Deng, M. \& He, K. Autoregressive Image Generation without Vector Quantization. \emph{Advances in Neural Information Processing Systems} (2024). \url{https://arxiv.org/abs/2406.11838}.
 \bibitem{forcing} Chen, B. et al. Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion. \emph{arXiv} 2407.01392 (2024). \url{https://arxiv.org/abs/2407.01392}.
@@ -1364,11 +1522,11 @@ additional completed language result.
 \bibitem{pointer} See, A., Liu, P. J. \& Manning, C. D. Get To The Point: Summarization with Pointer-Generator Networks. \emph{Proceedings of ACL}, 1073--1083 (2017). \url{https://aclanthology.org/P17-1099/}.
 \bibitem{cmrc} Cui, Y. et al. A Span-Extraction Dataset for Chinese Machine Reading Comprehension. \emph{Proceedings of EMNLP-IJCNLP}, 5883--5889 (2019). \url{https://aclanthology.org/D19-1600/}.
 \bibitem{mgflow} Zhang, C. et al. Unifying Distributional Training for One-Step Visual Generation. \emph{arXiv} 2609.35763v4 (2026). \url{https://arxiv.org/abs/2609.35763v4}.
-\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}\DIFaddbegin \DIFadd{.
-}\bibitem{multimodalflow} \DIFadd{Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). }\url{https://arxiv.org/abs/2609.40362v1}\DIFadd{.
-}\bibitem{ocg} \DIFadd{Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. }\href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{\DIFadd{Author manuscript}} \DIFadd{(2026). Peer-review status unverified.
-}\bibitem{qwen3vl} \DIFadd{Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). }\url{https://arxiv.org/abs/2511.21631v2}\DIFadd{.
-}\bibitem{dolly} \DIFadd{Databricks. Databricks Dolly 15k instruction dataset (2023). }\url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}\DIFaddend .
+\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}.
+\bibitem{multimodalflow} Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). \url{https://arxiv.org/abs/2609.40362v1}.
+\bibitem{ocg} Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. \href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{Author manuscript} (2026). Peer-review status unverified.
+\bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}.
+\bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
 \end{thebibliography}
 
 \end{document}

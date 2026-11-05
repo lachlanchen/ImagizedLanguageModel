@@ -467,6 +467,49 @@ fixed primary references and unmodified generated answers. White padding
 aligns the display; no nonblank output pixel is removed or repaired. Strict
 raster agreement does not credit every readable alternative form.}{fig:assignment}
 
+\section*{Separate output coordinates preserve forms}
+To isolate a writing failure from conditional language selection, we cross
+the inherited reader features and a lossless pixel control with flow and
+direct image reconstruction. All four writers receive the same 64 training
+blocks, initial weights and 2,000-update exposure. Direct reconstruction
+recovers 63/64 blocks exactly from inherited features and 64/64 from pixels;
+neither flow arm recovers an exact block (Fig.~\ref{fig:writing-space}a,c).
+This fitting experiment identifies a failure of the tested flow route, but
+supplies the answer image and cannot demonstrate language.
+
+A broader direct writer then samples 160,000 blocks from a 12,976-example
+Chinese/English pool, consuming 12,972 distinct examples. After 10,000 updates,
+the fixed 128-case reconstruction audit reaches 56.563\% foreground F1 versus
+18.520\% with shuffled conditions, with three exact blocks. The conditioning
+gain passes its original requirement, but fidelity misses 90\%. The run
+uses a fitting-stage warm start and is not a matched broad-corpus comparison
+with the earlier flow writer. Raw outputs and failed criteria are retained.
+
+A separate continuous writing codec removes the requirement to invert the
+semantic reader. With its original frozen weights and no additional learning,
+two 768-dimensional image codes reconstruct the same 128 development blocks
+at 99.998\% F1 and 126 exact blocks, versus 21.413\% F1 and zero exact blocks
+with shuffled codes (Fig.~\ref{fig:writing-space}b,d). The encoder receives
+target images; the decoder receives only continuous coordinates. Thus the
+result qualifies supplied-code fidelity, not prediction of an unknown answer.
+
+The complete successor retains all 27 visual and 36 contextual layers while
+predicting this separate writing space. It has 7,539,239,282 total parameters
+and 9,351,937 trainable parameters, with 16.953 GiB peak allocated memory.
+All 24 actual execution checks pass, including early/late adapter gradients,
+future-image isolation and exact optimizer/RNG replay. Its two-update
+output remains fragmented. Conditional instruction learning and autonomous
+answer evaluation remain required (Supplementary Notes 24--26).
+
+\plate{Figure_9_writing_space}{\textbf{Faithful supplied-code writing does not establish answer selection.}
+\textbf{a}, Foreground F1 for four matched fitting arms on 64 training blocks.
+The pixel condition is an answer-supplying control. \textbf{b}, Direct and
+fixed-codec reconstruction on the same 128 reused-development blocks, with
+their shuffled-condition controls. Training histories differ; this is not a
+matched efficiency comparison. \textbf{c,d}, The first two fixed fitting and
+development rows, with original source pixels and unmodified reconstructions.
+No row is chosen by quality, cropped or repaired.}{fig:writing-space}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -510,7 +553,10 @@ actor trains 25.58M adapter/writer parameters within 17.181 GiB allocated
 memory. Causal, backward and resume checks pass after explicit precision
 repairs. Eight short source-engine sanity cases support the contextual
 initialization; no image-language ability follows from that check. Its
-continuous writer still requires quality evaluation (Supplementary Note 23).
+continuous writer fails its reconstruction test (Supplementary Note 23).
+The separate qualified codec preserves supplied writing, while predicted-code
+selection and free image feedback still require autonomous language tests
+(Supplementary Notes 25--26).
 External pretraining remains part of the model's provenance.
 
 \section*{Methods}
@@ -576,6 +622,35 @@ streams for every sampled pair. AdamW, sample order, update budget and final
 EMA selection match. The auxiliary penalty has temperature 0.01 and weight
 one for aligned, zero for control. Complete details, independent runtime
 replay and the unchanged conjunctive gates appear in Supplementary Note 22.
+
+\subsection*{Separate continuous writing coordinates}
+The successor uses a visual reader $E_r$, contextual body $F_\theta$, output
+projection $A_\theta$ and frozen writing codec $(E_w,D_w)$. For observed prompt
+image $X$ and completed answer blocks $Y_{<t}$,
+\begin{align}
+ h_t &= F_\theta(E_r(X),E_r(Y_{<t})),\\
+ \widehat z_t &= N(A_\theta h_t),\qquad z_t^*=\operatorname{sg}(E_w(Y_t)),\\
+ \widehat Y_t &= D_w(\widehat z_t).
+\end{align}
+Here $h_t$ contains two structural queries, $N$ is nonaffine LayerNorm with
+$\epsilon=10^{-5}$, and $\operatorname{sg}$ stops label gradients. Each writing
+state comprises two continuous 768-vectors for two physical $32\times32$
+tiles, without character segmentation. The encoder already normalizes its
+codes; the state loss explicitly normalizes both arguments again:
+\begin{equation}
+ \begin{aligned}
+ \mathcal L={}&\operatorname{MSE}(N(\widehat z_t),N(z_t^*))\\
+ &+\operatorname{MSE}(D_w(\widehat z_t),Y_t)+\mathcal L_{\rm stop}.
+ \end{aligned}
+\end{equation}
+Uniformly sampled block losses retain the complete teacher-forced history.
+A separate class-balanced stop loss supervises termination after the complete
+answer. Frozen decoder weights still transmit image-loss gradients into
+predicted codes and contextual adapters. Generation uses prompt pixels,
+learned stopping and only its own completed output images. This regression
+objective is not a normalized language likelihood or a guarantee against
+averaging distinct conditional writing modes. Execution and reconstruction
+are evaluated separately from language (Supplementary Note 26).
 
 \subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale

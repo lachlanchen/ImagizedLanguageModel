@@ -1,0 +1,45 @@
+{
+  "architecture": "exact-raster-density-v54",
+  "boundary": {
+    "architecture": "exact-raster-density-v54",
+    "binary_sensor_space_size_log2": 1024,
+    "codebook": false,
+    "config": {
+      "heads": 6,
+      "layers": 4,
+      "pixel_hidden": 256,
+      "plan_logit_scale": 6.0,
+      "width": 192
+    },
+    "density_parameters": 2434592,
+    "external_runtime_model": false,
+    "glyph_inventory": false,
+    "nll_units": "nats per image; divide by 1024*log(2) for bits per pixel",
+    "ocr": false,
+    "probability": "normalized product of 1024 causal Bernoulli image measurements",
+    "reader_frozen": true,
+    "runtime_parameters": 18711841,
+    "symbol_ids": false,
+    "text_tokenizer": false
+  },
+  "elapsed_seconds": 207.84917650185525,
+  "peak_allocated_vram_gib": 0.4001612663269043,
+  "provenance": {
+    "ilm/visual_lm/exact_raster_density_v54.py": "0a0edb191058b3da435f0a0814acff7e8103844b14fe346cfa4ffb58545eb0a3",
+    "references/exact_raster_density_v54_protocol.md": "c5d4a39d70afa649423bdabcec7fc54f25e48e39301156b5581445dcac035f07",
+    "scripts/train_exact_raster_density_v54.py": "1d4cb2375840bceda3427b41da61dde9b94c40833391adc9f4453258acac1bc8"
+  },
+  "smoke_only": false,
+  "training_metrics": {
+    "copy_fraction": 0.265625,
+    "copy_image_nll": 0.14925819635391235,
+    "density_loss": 0.01816251128911972,
+    "elapsed_seconds": 207.84917650185525,
+    "gradient_norm": 0.07413354516029358,
+    "image_nll_nats": 18.598411560058594,
+    "language_image_nll": 25.271507263183594,
+    "learning_rate": 2e-05,
+    "update": 8000
+  },
+  "update": 8000
+}

@@ -8,12 +8,29 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved V62 transcript-bounds baseline. Their
-[builder](build_assignment_redlines.py) uses pinned latexdiff and inlines the
+revision with the preserved V63 completed-actor baseline. Their
+[builder](build_codec_writing_redlines.py) uses pinned latexdiff and inlines the
 abstract so its changes are visible. The earlier supplement-only redline and
 builder remain inside the named baseline.
 
 ## Current result
+
+A separate continuous output space qualifies supplied-code reconstruction.
+The original frozen writing codec reaches 99.998% foreground F1 and 126/128
+exact development blocks, versus 21.413% F1 with shuffled codes. The broader
+direct writer fails fidelity at 56.563% and 3/128 exact blocks, despite fitting
+63/64 training blocks in a smaller diagnostic. Figure 9 and Notes 24–25 show
+the actual training/development distinction and the first fixed raw images.
+The two native charts retain editable, source-matched workbooks.
+
+The complete actor connects contextual states to those separate writing
+coordinates. It retains 7.539B total parameters, trains 9.352M, and passes all
+24 GPU execution checks at 16.953 GiB peak allocated memory. Figure S8 and
+Note 26 give the image-only feedback loop, detached target-code supervision,
+loss and numerical checks. Two-update output remains fragmented. These are
+execution and reconstruction results; autonomous language is unqualified.
+The current deck has 22 slides, preserving all preceding 20 slide renders
+and original slide/chart parts. Earlier source figures remain unchanged.
 
 A matched question--answer assignment term weakens free image writing.
 Control and aligned actors each train 490M parameters for 2,000 updates from

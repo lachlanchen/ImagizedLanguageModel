@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Thu Nov  5 13:32:20 2026
-%DIF ADD new.tex   Thu Nov  5 13:32:20 2026
+%DIF DEL old.tex   Thu Nov  5 15:51:51 2026
+%DIF ADD new.tex   Thu Nov  5 15:51:51 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno}
@@ -124,12 +124,12 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V62 transcript-bounds baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V63 completed-actor baseline are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes historical, handwritten and \DIFdelbegin \DIFdel{regional }\DIFdelend \DIFaddbegin \DIFadd{transitional }\DIFaddend forms that a fixed character inventory cannot faithfully represent. We investigate \DIFaddbegin \DIFadd{independent }\DIFaddend language modelling with writing images as input and output on one consumer GPU. A continuous \DIFdelbegin \DIFdel{image }\DIFdelend interface supports normalized raster likelihood \DIFdelbegin \DIFdel{and independent generation }\DIFdelend without a deployed character vocabulary. \DIFdelbegin \DIFdel{Joint reader--density learning improves target likelihood to \JointNll\ versus \ControlNll\ nats per image, while autonomous streams remain inaccurate. A law over complete }\DIFdelend \DIFaddbegin \DIFadd{Complete }\DIFaddend observed \DIFdelbegin \DIFdel{image answers enables }\DIFdelend \DIFaddbegin \DIFadd{answer blocks enable }\DIFaddend limited Chinese reading: 25 of 256 fixed development answers are exact, versus three with question pixels blanked and 21 after matched additional glyph-answer training. \DIFdelbegin \DIFdel{Raster F1 reaches 27.033\%, a 4.893-point gain }%DIFDELCMD < [%%%
-\DIFdel{0.469, 9.047}%DIFDELCMD < ]%%%
-\DIFdel{, while the exact-match difference remains unresolved. Both questions are correct in only }\DIFdelend \DIFaddbegin \DIFadd{Only }\DIFaddend four of 393 shared-paragraph pairs \DIFdelbegin \DIFdel{. Full adaptation of a 477M-parameter native pixel-language foundation improves pixel likelihood but produces zero exact }\DIFdelend \DIFaddbegin \DIFadd{have both }\DIFaddend answers \DIFaddbegin \DIFadd{correct}\DIFaddend . \DIFaddbegin \DIFadd{Free image generation remains substantially weaker. }\DIFaddend A matched \DIFdelbegin \DIFdel{whole-image mixture further lowers held-out NLL }\DIFdelend \DIFaddbegin \DIFadd{question--answer assignment experiment trains two 490M-parameter actors }\DIFaddend from \DIFdelbegin \DIFdel{0.1542 to 0.1248 nats per pixel, yet still gives zero }\DIFdelend \DIFaddbegin \DIFadd{identical weights. The control returns two }\DIFaddend exact answers and \DIFdelbegin \DIFdel{no }\DIFdelend \DIFaddbegin \DIFadd{the assignment arm one; neither answers any pair fully correctly. Both show }\DIFaddend resolved \DIFdelbegin \DIFdel{question-dependent raster gain}\DIFdelend \DIFaddbegin \DIFadd{question dependence, while the assignment term reduces strict-raster F1 by 0.812 percentage points, with article-bootstrap interval }[\DIFadd{$-1.504$, $-0.202$}]\DIFaddend . Independent \DIFdelbegin \DIFdel{runtimes }\DIFdelend \DIFaddbegin \DIFadd{offline bundles }\DIFaddend reproduce the \DIFdelbegin \DIFdel{raw }\DIFdelend outputs. \DIFdelbegin \DIFdel{Faithful forms and likelihood require }\DIFdelend \DIFaddbegin \DIFadd{A }\DIFaddend separate \DIFdelbegin \DIFdel{tests from useful }\DIFdelend \DIFaddbegin \DIFadd{inherited 7.548B-parameter actor with 25.58M trainable parameters passes complete execution checks at 17.181 GiB, with }\DIFaddend language \DIFdelbegin \DIFdel{; a high-quality }\DIFdelend \DIFaddbegin \DIFadd{quality still unqualified. The results establish working visual interfaces and controlled failure cases. Useful }\DIFaddend general \DIFdelbegin \DIFdel{image-based language model }\DIFdelend \DIFaddbegin \DIFadd{image-language generation, including historical forms, }\DIFaddend remains \DIFdelbegin \DIFdel{unresolved}\DIFdelend \DIFaddbegin \DIFadd{an open objective}\DIFaddend .}\par\bigskip
+\section*{Abstract}{Written language includes historical, handwritten and transitional forms that a fixed character inventory cannot faithfully represent. We investigate independent language modelling with writing images as input and output on one consumer GPU. \DIFdelbegin \DIFdel{A continuous interface supports normalized raster likelihood }\DIFdelend \DIFaddbegin \DIFadd{The deployed actors consume and generate physical rasters }\DIFaddend without a \DIFdelbegin \DIFdel{deployed }\DIFdelend character vocabulary. Complete observed answer blocks enable limited Chinese reading: 25 of 256 \DIFdelbegin \DIFdel{fixed }\DIFdelend development answers are exact, \DIFdelbegin \DIFdel{versus three with question pixels blanked and 21 after matched additional glyph-answer training. Only }\DIFdelend \DIFaddbegin \DIFadd{but only }\DIFaddend four of 393 shared-paragraph pairs have both answers correct. \DIFdelbegin \DIFdel{Free image generation remains substantially weaker. }\DIFdelend A matched \DIFdelbegin \DIFdel{question--answer }\DIFdelend assignment \DIFdelbegin \DIFdel{experiment trains two 490M-parameter actors }\DIFdelend \DIFaddbegin \DIFadd{objective subsequently weakens free writing despite measurable question use. We then separate faithful rendering }\DIFaddend from \DIFdelbegin \DIFdel{identical weights}\DIFdelend \DIFaddbegin \DIFadd{conditional answer selection}\DIFaddend . \DIFdelbegin \DIFdel{The control returns two exact answers and the assignment arm one; neither answers any pair fully correctly. Both show resolved question dependence}\DIFdelend \DIFaddbegin \DIFadd{Direct reconstruction fits 63 of 64 training blocks exactly}\DIFaddend , \DIFdelbegin \DIFdel{while }\DIFdelend \DIFaddbegin \DIFadd{yet reaches only 56.563\% foreground F1 on 128 broader development blocks. An existing frozen continuous writing codec reconstructs }\DIFaddend the \DIFdelbegin \DIFdel{assignment term reduces strict-raster }\DIFdelend \DIFaddbegin \DIFadd{same development cases at 99.998\% }\DIFaddend F1\DIFdelbegin \DIFdel{by 0.812 percentage points}\DIFdelend , with \DIFdelbegin \DIFdel{article-bootstrap interval }%DIFDELCMD < [%%%
+\DIFdel{$-1.504$, $-0.202$}%DIFDELCMD < ]%%%
+\DIFdelend \DIFaddbegin \DIFadd{126 exact blocks}\DIFaddend . \DIFdelbegin \DIFdel{Independent offline bundles reproduce the outputs. }\DIFdelend A \DIFdelbegin \DIFdel{separate }\DIFdelend \DIFaddbegin \DIFadd{complete }\DIFaddend inherited \DIFdelbegin \DIFdel{7.548}\DIFdelend \DIFaddbegin \DIFadd{7.539}\DIFaddend B-parameter actor \DIFdelbegin \DIFdel{with 25.58}\DIFdelend \DIFaddbegin \DIFadd{connects contextual states to this separate output space, trains 9.352}\DIFaddend M \DIFdelbegin \DIFdel{trainable }\DIFdelend parameters \DIFaddbegin \DIFadd{and }\DIFaddend passes \DIFdelbegin \DIFdel{complete }\DIFdelend \DIFaddbegin \DIFadd{24 }\DIFaddend execution checks at \DIFdelbegin \DIFdel{17.181 }\DIFdelend \DIFaddbegin \DIFadd{16.953 }\DIFaddend GiB \DIFdelbegin \DIFdel{, with language quality still unqualified}\DIFdelend \DIFaddbegin \DIFadd{peak allocated memory}\DIFaddend . \DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{These reconstruction and execution }\DIFaddend results \DIFaddbegin \DIFadd{do not }\DIFaddend establish \DIFdelbegin \DIFdel{working visual interfaces and controlled failure cases}\DIFdelend \DIFaddbegin \DIFadd{autonomous language}\DIFaddend . \DIFdelbegin \DIFdel{Useful }\DIFdelend \DIFaddbegin \DIFadd{They identify a usable writing interface and a concrete conditional-learning experiment, while useful }\DIFaddend general image-language generation \DIFdelbegin \DIFdel{, including historical forms, remains an }\DIFdelend \DIFaddbegin \DIFadd{and historical-form reasoning remain }\DIFaddend open objective\DIFaddbegin \DIFadd{s}\DIFaddend  .}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -151,15 +151,14 @@ conditional PixelCNN\cite{pixelrnn,pixelcnn}. Masked autoregressive networks
 provide normalized probabilities without a character dictionary\cite{made}.
 Multilingual generation from pixels has also been studied\cite{mixar}.
 
-\DIFaddbegin \DIFadd{Recent continuous multimodal flow models share a generative objective across
+Recent continuous multimodal flow models share a generative objective across
 embeddings while retaining token-derived language encoders and text
 decoders\cite{multimodalflow}. OCG reports rendered-question and answer-image
 reasoning with teacher assistance on the restricted CLEVR task\cite{ocg}.
 We focus on independent image-only inference and controlled tests linking
 conditional scores to autonomous writing.
-}
 
-\DIFaddend We investigate the conditional generation problem directly. The model
+We investigate the conditional generation problem directly. The model
 receives raster history, predicts a distribution of future writing, emits
 pixels and rereads those pixels. Chinese provides a demanding initial case:
 stroke configurations must remain coherent while context selects among many
@@ -562,8 +561,8 @@ raw outputs, with white display padding only. No nonblank pixel is repaired
 or removed. Parameter counts and output computation differ between arms;
 both use externally pretrained weights.}{fig:correlated-density}
 
-\DIFaddbegin \section*{\DIFadd{Direct assignment changes reference scores but weakens free writing}}
-\DIFadd{To test conditional binding, we continue the eight-expert generator from one
+\section*{Direct assignment changes reference scores but weakens free writing}
+To test conditional binding, we continue the eight-expert generator from one
 shared learned checkpoint. Two questions about a paragraph provide distinct
 accepted answer images. Both matched 489,998,208-parameter actors score all
 four correct and swapped question--answer streams. The control uses positive
@@ -571,19 +570,17 @@ image likelihood alone; the aligned arm adds a smooth penalty on the
 assignment margin. Both consume identical pair draws for 2,000 updates.
 The extra loss cancels additive question-only and answer-only offsets, but
 this property does not guarantee useful conditional generation.
-}
 
-\DIFadd{The aligned actor reaches 2.417\% strict-raster F1 versus 3.229\% for control
+The aligned actor reaches 2.417\% strict-raster F1 versus 3.229\% for control
 (Fig.~\ref{fig:assignment}). The difference is $-0.812$ percentage points,
-article-bootstrap 95\% interval }[\DIFadd{$-1.504$, $-0.202$}]\DIFadd{. Exact answers are one
+article-bootstrap 95\% interval [$-1.504$, $-0.202$]. Exact answers are one
 and two of 256 respectively; both-correct pairs remain zero of 393 for both.
 Normal-minus-blank-question raster gains resolve positively in each arm:
-1.677 points }[\DIFadd{0.492, 3.033}] \DIFadd{for aligned and 1.765 }[\DIFadd{0.504, 3.251}] \DIFadd{for control.
+1.677 points [0.492, 3.033] for aligned and 1.765 [0.504, 3.251] for control.
 Thus both use question pixels, while neither meets the absolute reading
 requirements. The assignment intervention and both reading gates fail.
-}
 
-\DIFadd{When accepted answer images are supplied, control chooses the correct pair
+When accepted answer images are supplied, control chooses the correct pair
 assignment in 324/393 cases and aligned in 330/393. These descriptive scores
 cannot establish a statistically resolved improvement, and supplied answers
 are unavailable to autonomous writing. All-development pixel NLL is 0.113901
@@ -592,7 +589,6 @@ with 10.301 GiB peak allocated memory in both. Complete sample journals match;
 standalone offline tensors, PNG bytes and stopping events replay exactly
 (Supplementary Note 22). Timing variation in one sequential run does not
 establish comparative efficiency.
-}
 
 \plate{Figure_8_question_assignment}{\textbf{Question use and reference compatibility do not establish correct free writing.}
 \textbf{a}, Strict-raster F1 on the fixed 256 primary questions and their
@@ -602,6 +598,53 @@ than control despite positive question effects in both. \textbf{c}, First two
 fixed primary references and unmodified generated answers. White padding
 aligns the display; no nonblank output pixel is removed or repaired. Strict
 raster agreement does not credit every readable alternative form.}{fig:assignment}
+
+\DIFaddbegin \section*{\DIFadd{Separate output coordinates preserve forms}}
+\DIFadd{To isolate a writing failure from conditional language selection, we cross
+the inherited reader features and a lossless pixel control with flow and
+direct image reconstruction. All four writers receive the same 64 training
+blocks, initial weights and 2,000-update exposure. Direct reconstruction
+recovers 63/64 blocks exactly from inherited features and 64/64 from pixels;
+neither flow arm recovers an exact block (Fig.~\ref{fig:writing-space}a,c).
+This fitting experiment identifies a failure of the tested flow route, but
+supplies the answer image and cannot demonstrate language.
+}
+
+\DIFadd{A broader direct writer then samples 160,000 blocks from a 12,976-example
+Chinese/English pool, consuming 12,972 distinct examples. After 10,000 updates,
+the fixed 128-case reconstruction audit reaches 56.563\% foreground F1 versus
+18.520\% with shuffled conditions, with three exact blocks. The conditioning
+gain passes its original requirement, but fidelity misses 90\%. The run
+uses a fitting-stage warm start and is not a matched broad-corpus comparison
+with the earlier flow writer. Raw outputs and failed criteria are retained.
+}
+
+\DIFadd{A separate continuous writing codec removes the requirement to invert the
+semantic reader. With its original frozen weights and no additional learning,
+two 768-dimensional image codes reconstruct the same 128 development blocks
+at 99.998\% F1 and 126 exact blocks, versus 21.413\% F1 and zero exact blocks
+with shuffled codes (Fig.~\ref{fig:writing-space}b,d). The encoder receives
+target images; the decoder receives only continuous coordinates. Thus the
+result qualifies supplied-code fidelity, not prediction of an unknown answer.
+}
+
+\DIFadd{The complete successor retains all 27 visual and 36 contextual layers while
+predicting this separate writing space. It has 7,539,239,282 total parameters
+and 9,351,937 trainable parameters, with 16.953 GiB peak allocated memory.
+All 24 actual execution checks pass, including early/late adapter gradients,
+future-image isolation and exact optimizer/RNG replay. Its two-update
+output remains fragmented. Conditional instruction learning and autonomous
+answer evaluation remain required (Supplementary Notes 24--26).
+}
+
+\plate{Figure_9_writing_space}{\textbf{Faithful supplied-code writing does not establish answer selection.}
+\textbf{a}, Foreground F1 for four matched fitting arms on 64 training blocks.
+The pixel condition is an answer-supplying control. \textbf{b}, Direct and
+fixed-codec reconstruction on the same 128 reused-development blocks, with
+their shuffled-condition controls. Training histories differ; this is not a
+matched efficiency comparison. \textbf{c,d}, The first two fixed fitting and
+development rows, with original source pixels and unmodified reconstructions.
+No row is chosen by quality, cropped or repaired.}{fig:writing-space}
 
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
@@ -640,17 +683,19 @@ preserves the answer-image distribution while answering both incorrectly.
 Conditional supervision and prompt interventions therefore remain necessary;
 natural-image gains do not establish a shortcut to language learning.
 
-\DIFaddbegin \DIFadd{An inherited visual/contextual successor provides a separately measured
+An inherited visual/contextual successor provides a separately measured
 execution route. With its vocabulary module removed, the complete 7.548B
 actor trains 25.58M adapter/writer parameters within 17.181 GiB allocated
 memory. Causal, backward and resume checks pass after explicit precision
 repairs. Eight short source-engine sanity cases support the contextual
 initialization; no image-language ability follows from that check. Its
-continuous writer still requires quality evaluation (Supplementary Note 23).
-External pretraining remains part of the model's provenance.
-}
+continuous writer \DIFdelbegin \DIFdel{still requires quality evaluation }\DIFdelend \DIFaddbegin \DIFadd{fails its reconstruction test }\DIFaddend (Supplementary Note 23).
+\DIFaddbegin \DIFadd{The separate qualified codec preserves supplied writing, while predicted-code
+selection and free image feedback still require autonomous language tests
+(Supplementary Notes 25--26).
+}\DIFaddend External pretraining remains part of the model's provenance.
 
-\DIFaddend \section*{Methods}
+\section*{Methods}
 \subsection*{Data, rendering and partitioning}
 The public Chinese stream contains 7,017 provenance-tracked records. Records
 are assigned deterministically to training, development or a sealed partition
@@ -707,15 +752,45 @@ The maximum production incremental-score/parallel-NLL error is
 $2.10\times10^{-5}$ nat, below the unchanged 0.001 tolerance. The complete
 inference audit takes \BeamSeconds\ s at \BeamMemory\ GiB allocated CUDA memory.
 
-\DIFaddbegin \DIFadd{The assignment experiment keeps the native eight-expert architecture and
+The assignment experiment keeps the native eight-expert architecture and
 trains all parameters from the same V62 EMA. Both arms score the same four
 streams for every sampled pair. AdamW, sample order, update budget and final
 EMA selection match. The auxiliary penalty has temperature 0.01 and weight
 one for aligned, zero for control. Complete details, independent runtime
 replay and the unchanged conjunctive gates appear in Supplementary Note 22.
-}
+\DIFaddbegin 
 
-\DIFaddend \subsection*{Sampling, controls and statistics}
+\subsection*{\DIFadd{Separate continuous writing coordinates}}
+\DIFadd{The successor uses a visual reader $E_r$, contextual body $F_\theta$, output
+projection $A_\theta$ and frozen writing codec $(E_w,D_w)$. For observed prompt
+image $X$ and completed answer blocks $Y_{<t}$,
+}\begin{align}
+ h_t &= F_\theta(E_r(X),E_r(Y_{<t})),\\
+ \widehat z_t &= N(A_\theta h_t),\qquad z_t^*=\operatorname{sg}(E_w(Y_t)),\\
+ \widehat Y_t &= D_w(\widehat z_t).
+\end{align}
+\DIFadd{Here $h_t$ contains two structural queries, $N$ is nonaffine LayerNorm with
+$\epsilon=10^{-5}$, and $\operatorname{sg}$ stops label gradients. Each writing
+state comprises two continuous 768-vectors for two physical $32\times32$
+tiles, without character segmentation. The encoder already normalizes its
+codes; the state loss explicitly normalizes both arguments again:
+}\begin{equation}
+ \begin{aligned}
+ \mathcal L={}&\operatorname{MSE}(N(\widehat z_t),N(z_t^*))\\
+ &+\operatorname{MSE}(D_w(\widehat z_t),Y_t)+\mathcal L_{\rm stop}.
+ \end{aligned}
+\end{equation}
+\DIFadd{Uniformly sampled block losses retain the complete teacher-forced history.
+A separate class-balanced stop loss supervises termination after the complete
+answer. Frozen decoder weights still transmit image-loss gradients into
+predicted codes and contextual adapters. Generation uses prompt pixels,
+learned stopping and only its own completed output images. This regression
+objective is not a normalized language likelihood or a guarantee against
+averaging distinct conditional writing modes. Execution and reconstruction
+are evaluated separately from language (Supplementary Note 26).
+}\DIFaddend 
+
+\subsection*{Sampling, controls and statistics}
 The diffusion experiment uses 32 registered DDIM schedule levels and classifier-free scale
 two. Four future cells start from Gaussian noise. The same noise is reused for
 ordered, suffix-preserving shuffled and zero-condition histories. Only one
@@ -748,14 +823,13 @@ trained checkpoint, not variability across training seeds. The current
 development partition has informed a sequence of experiments and is not a
 final independent generalization test.
 
-\DIFaddbegin \DIFadd{The assignment comparison retains the same fixed 256 primary questions and
+The assignment comparison retains the same fixed 256 primary questions and
 393 paragraph pairs. Its paired 95\% intervals use 2,000 whole-article
 resamples, seed 20266329. Reference-energy ranking supplies accepted answers
 and remains a separate diagnostic. One seed, reused development data and
 external foundation training limit both this result and efficiency claims.
-}
 
-\DIFaddend \relax
+\relax
 \section*{Data and code availability}
 Implementation, protocols, evidence summaries and scripts are available in
 \url{https://github.com/lachlanchen/ImagizedLanguageModel}. Manifest and
@@ -764,11 +838,9 @@ reference books are not redistributed. The complete research record and
 Supplementary Information distinguish earlier foundation provenance from the
 present raster-only deployment experiment.
 
-\DIFdelbegin %DIFDELCMD < \begin{thebibliography}{14}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \begin{thebibliography}{18}
+\begin{thebibliography}{18}
 \small
-\DIFaddend \interlinepenalty=5000
+\interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.
 \bibitem{mar} Li, T., Tian, Y., Li, H., Deng, M. \& He, K. Autoregressive Image Generation without Vector Quantization. \emph{Advances in Neural Information Processing Systems} (2024). \url{https://arxiv.org/abs/2406.11838}.
 \bibitem{forcing} Chen, B. et al. Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion. \emph{arXiv} 2407.01392 (2024). \url{https://arxiv.org/abs/2407.01392}.
@@ -782,11 +854,11 @@ present raster-only deployment experiment.
 \bibitem{pointer} See, A., Liu, P. J. \& Manning, C. D. Get To The Point: Summarization with Pointer-Generator Networks. \emph{Proceedings of ACL}, 1073--1083 (2017). \url{https://aclanthology.org/P17-1099/}.
 \bibitem{cmrc} Cui, Y. et al. A Span-Extraction Dataset for Chinese Machine Reading Comprehension. \emph{Proceedings of EMNLP-IJCNLP}, 5883--5889 (2019). \url{https://aclanthology.org/D19-1600/}.
 \bibitem{mgflow} Zhang, C. et al. Unifying Distributional Training for One-Step Visual Generation. \emph{arXiv} 2609.35763v4 (2026). \url{https://arxiv.org/abs/2609.35763v4}.
-\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}\DIFaddbegin \DIFadd{.
-}\bibitem{multimodalflow} \DIFadd{Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). }\url{https://arxiv.org/abs/2609.40362v1}\DIFadd{.
-}\bibitem{ocg} \DIFadd{Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. }\href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{\DIFadd{Author manuscript}} \DIFadd{(2026). Peer-review status unverified.
-}\bibitem{qwen3vl} \DIFadd{Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). }\url{https://arxiv.org/abs/2511.21631v2}\DIFadd{.
-}\bibitem{dolly} \DIFadd{Databricks. Databricks Dolly 15k instruction dataset (2023). }\url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}\DIFaddend .
+\bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}.
+\bibitem{multimodalflow} Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). \url{https://arxiv.org/abs/2609.40362v1}.
+\bibitem{ocg} Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. \href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{Author manuscript} (2026). Peer-review status unverified.
+\bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}.
+\bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
 \end{thebibliography}
 
 
