@@ -332,3 +332,15 @@ new density or semantic-distillation objective, a native visual-question
 baseline should distinguish inherited source-model capability from its
 transfer through the current image-only interface. The existing source-engine
 sanity check covers eight text prompts, not this visual task.
+
+The [completed V70 native visual check](native_visual_baseline_v70_result.md)
+answers 13/16 fixed Chinese image questions exactly, with no exact blank
+controls. It also exposes an unmatched input scale: the native server uses
+at least 1,024 merged visual positions, compared with 20–352 in the custom
+reader on these same source pages. Its minimum-area resize geometry explains
+all 24 observed image-only prompt counts. Resizing adds no information to
+the source pixels; it changes the observer's presentation relative to its
+pretrained filters and spatial attention. This makes visual sampling and
+task-interface compatibility a concrete experimental priority. The counts
+alone do not prove that resizing repairs language, or that a new output
+density is unnecessary.

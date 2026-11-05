@@ -34,6 +34,22 @@ writing and conditional prediction. GPU 0 is released. The next intervention
 must improve accurate conditional writing; nonlinear readouts, feature
 learning and offline semantic supervision remain possibilities to test.
 
+The [V70 native-source diagnostic](../references/native_visual_baseline_v70_result.md)
+confirms a bounded source capability: 13/16 Chinese image questions and five
+of eight pairs are exact, versus zero exact blank-question controls. All 96
+native replies verify. These are external source-model text outputs, not ILM
+answers. Runtime evidence reveals a visual sampling difference: the source
+uses at least 1,024 visual positions per image, while the custom reader uses
+20–352 on these pages. Native resize geometry explains all 24 observed
+image-only input counts. This has not established a causal resizing effect.
+The next controlled step must check visual preprocessing and native task
+structure while preserving the independent pixel input/output requirement.
+No source-model service or vocabulary head is introduced into ILM inference.
+The [V71 transfer-check plan](../references/native_visual_transfer_v71_plan.md)
+specifies a separate numeric structural wrapper and an offline compatibility
+helper, with raw/native-budget images and matched text controls before further
+continuous-writer adaptation.
+
 The actual [grounded writer learning stage](../references/grounded_writer_v64_result.md)
 has completed 10,000 updates on GPU 0 and fails both reconstruction gates.
 Correct-condition foreground F1 is 34.000% versus 21.420% shuffled, with no
