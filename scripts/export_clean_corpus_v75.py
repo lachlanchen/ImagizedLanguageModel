@@ -7,7 +7,6 @@ import os
 from pathlib import Path
 import shutil
 
-import numpy as np
 from PIL import Image
 import torch
 
@@ -90,6 +89,7 @@ def main():
     passed=verification["bounded_chinese_development_pass"]
     english=verification["measurements"]["dolly"]["normal"]
     outcome="passes" if passed else "fails"
+    decision="pass" if passed else "fail"
     failures=[key for key,value in verification["gates"].items() if not value]
     text=f'''# Full-corpus clean writing {outcome} the original Chinese requirements
 
@@ -97,7 +97,7 @@ The completed clean writer produces **{round(normal['exact']*128)}/128 exact
 Chinese answer images**, with **{normal['foreground_f1']*100:.3f}% foreground
 F1**, versus {blank['foreground_f1']*100:.3f}% with question ink erased.
 Both questions are correct in {round(verification['paired_both_correct']*64)}/64
-article pairs. The fixed Chinese development decision is **{outcome}**.
+article pairs. The fixed Chinese development decision is **{decision}**.
 
 The mean question effect is {effect['mean']*100:.3f} F1 points, with 95%
 article-bootstrap interval [{effect['ci95'][0]*100:.3f}, {effect['ci95'][1]*100:.3f}].
