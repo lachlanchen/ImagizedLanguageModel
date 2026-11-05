@@ -1,0 +1,76 @@
+{
+  "generation_report_sha256": "9d14d294feeabbf134e0c6396754a550d1b873305ac823617f19e58bd41ed74f",
+  "source_model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "source_images_verified": 32,
+  "helper_generations_verified": 40,
+  "helper_projection_positions": 742,
+  "helper_projection_argmax_agreements": 742,
+  "numerical_near_tie_disagreements": 0,
+  "projection_selected_logit_error_max": 1.52587890625e-05,
+  "projection_choice_regret_max": 0.0,
+  "summaries": {
+    "raw/normal": {
+      "count": 8,
+      "exact": 1,
+      "stopped": 8,
+      "character_accuracy": 0.5972095645770046,
+      "reference_included": 5,
+      "selective_reference_included": 5
+    },
+    "raw/blank": {
+      "count": 8,
+      "exact": 0,
+      "stopped": 6,
+      "character_accuracy": 0.06057347036352194,
+      "reference_included": 3,
+      "selective_reference_included": 1
+    },
+    "native_budget/normal": {
+      "count": 8,
+      "exact": 4,
+      "stopped": 8,
+      "character_accuracy": 0.6935361283936652,
+      "reference_included": 6,
+      "selective_reference_included": 6
+    },
+    "native_budget/blank": {
+      "count": 8,
+      "exact": 0,
+      "stopped": 7,
+      "character_accuracy": 0.03561486132914704,
+      "reference_included": 2,
+      "selective_reference_included": 1
+    },
+    "text": {
+      "count": 8,
+      "exact": 3,
+      "stopped": 8,
+      "character_accuracy": 0.7710959383753502,
+      "reference_included": 6,
+      "selective_reference_included": 6
+    }
+  },
+  "offline_checks_pass": true,
+  "whole_vision_context_forward_replayed": false,
+  "helper_only_symbolic_decoding": true,
+  "image_actor_generated_images": 0,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false,
+  "elapsed_verification_seconds": 38.5105698229745,
+  "verification_sha256": "247c36b5e388bb594a22cdfac54bdfd9ba8283f8873251e73f80127a606add5f",
+  "source_commit": "6ca1eed51158710894909005c4365f4d0c0ae522",
+  "sources": {
+    "scripts/check_native_visual_transfer_v71.py": "996d755ab9e0a85e4d67b28f78649a49091141dc3d31970a388ebdf984e71ab5",
+    "scripts/verify_native_visual_transfer_v71.py": "2aed13f53bbb6118726cd009d316687040ba6211116d9700cceac44119b13aa4",
+    "references/native_visual_transfer_v71_plan.md": "ecd90f5105bc8ac8fc6d8b167bde5f65655990ebef234a72751a6c33400f9311",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "scripts/native_visual_baseline_v70.py": "8a6b54ea5f25c602cd5cea69abca3ccfed24fcb8c660179cbc2d754c83ca25df"
+  },
+  "elapsed_generation_seconds": 232.5325935408473,
+  "setup_seconds": 126.19185791816562,
+  "peak_allocated_vram_gib": 18.982877254486084,
+  "optimizer_updates": 0
+}
