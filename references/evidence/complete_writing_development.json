@@ -1,0 +1,122 @@
+{
+  "scope": "Complete Chinese/English image data preparation and interface verification, not model quality",
+  "preparation_report": "data/general_instructions/complete_lines_development_20261105/report.json",
+  "preparation_report_sha256": "14b088cff0c91175570f4635af7363419225cb36c8784d11efa679b0993bb369",
+  "training_report_sha256": "0ffcfd101ea26d79c4084bfd166bd146ff5560f5fa83b7aa57c6b48558377d7e",
+  "development_source_sha256": {
+    "cmrc": "8bef093075ac0715d5878a1abe61aa38092893ade8753b935cdf657551ebc6a7",
+    "dolly": "488785fdb029e5bb79a2d8416c4a46fb2751590fb1d2340e1d92cb8af2358000"
+  },
+  "renderer": {
+    "font_family": "Noto Sans CJK JP",
+    "font_size_px": 24,
+    "height_px": 32,
+    "padding_px": 2,
+    "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "pango_version": "1.52.1",
+    "fallback_selected_fonts_inspected": false,
+    "source_policy": "complete explicit single line, no cropping or font shrinking"
+  },
+  "maximum_prompt_blocks": 240,
+  "maximum_answer_blocks": 128,
+  "termination_blocks": 2,
+  "development_summaries": {
+    "cmrc": {
+      "counts": {
+        "source_records": 1321,
+        "accepted": 1321
+      },
+      "categories": {
+        "chinese_reading": 1321
+      },
+      "accepted_manifest_sha256": "73d8b7918aaf59b8ce69a545adc5e5a895fc4cb68ffcdd19a41bafe8933631c4",
+      "rejected_manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dolly": {
+      "counts": {
+        "source_records": 1470,
+        "accepted": 1188,
+        "rejected": 282,
+        "complete source exceeds maximum image width": 277,
+        "controls or line breaks require an explicit separate layout": 2,
+        "full source ink exceeds the vertical canvas": 3
+      },
+      "categories": {
+        "open_qa": 331,
+        "closed_qa": 123,
+        "classification": 208,
+        "general_qa": 172,
+        "summarization": 82,
+        "information_extraction": 94,
+        "brainstorming": 139,
+        "creative_writing": 39
+      },
+      "accepted_manifest_sha256": "66b838aed8d6cde9e960db74bd0e66a8d514ebb95bee22fd70a278811e607de0",
+      "rejected_manifest_sha256": "908ef6dd8a88e9a872d3bc417b3928970147c698549cda9de036cdff32c967fa"
+    }
+  },
+  "preparation_cpu_seconds": 17.682457199320197,
+  "evaluation_only": true,
+  "all_retained_rows_lossless": true,
+  "verification_report": "artifacts/complete_writing_data_verification_20261105/report.json",
+  "verification_report_sha256": "5c638a2e61d22c17f1fa0642868ef7d0e45cf0d7a2e4cbe7563c6c69f9806956",
+  "image_counts": {
+    "train": 12976,
+    "development": 2509
+  },
+  "packed_file_bytes": {
+    "train": 340894893,
+    "development": 77108703
+  },
+  "all_image_hashes_and_bit_round_trips_verified": true,
+  "all_admission_boundaries_match": true,
+  "original_training_loader_exact": true,
+  "identical_train_development_renderer": true,
+  "wrong_purpose_rejected": true,
+  "owning_prompt_storage_verified": true,
+  "source_png_pairs_exact": {
+    "train": 8,
+    "development": 8
+  },
+  "exact_cross_split_prompt_images": 0,
+  "cross_split_source_ids": 0,
+  "verification_cpu_seconds": 18.102030138485134,
+  "verification_peak_rss_mib": 507.64453125,
+  "termination_audit": "artifacts/complete_writing_data_verification_20261105/termination_classification.json",
+  "termination_audit_sha256": "f9bafca450aa86d1df74f956a640ac74a72c88437d501371e6e40c9903df2f52",
+  "trailing_white_padding_examples": {
+    "train": 737,
+    "development": 99
+  },
+  "white_blocks_followed_by_later_ink": {
+    "train": 0,
+    "development": 0
+  },
+  "training_sources_preserved": {
+    "data/visual_qa/cmrc2018_short/train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "data/general_instructions/dolly15k/train.jsonl": "86cb87ccd8a6742177f2fd6907bd83ee263f4303a4c737c3eaf7c5f296155b3a"
+  },
+  "preparation_provenance": {
+    "scripts/prepare_complete_writing_development.py": "6d85158dfb65c450f591ba96c49def8fa98a7132791894626d8bc33472a29ab7",
+    "references/complete_writing_development_plan.md": "a096cc03d00ac7c66c13c0e9434f9d8b8d3bacc30f9d759883c46bd818dde4e5",
+    "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da"
+  },
+  "verification_provenance": {
+    "scripts/verify_complete_writing_data.py": "2186a45284432ddc02e792804688645a079ff8f7748e57138a72b508625691ff",
+    "ilm/visual_lm/complete_writing_data.py": "b787e7d0f14bef27658cab335682a59f5f1390eb95b8f6772f94ae9208df5c2d",
+    "ilm/visual_lm/complete_line_data.py": "9d958300b1b059df453aebe742ed288d0e6b30bf94ddef576c2f9959da4cd8b3",
+    "references/complete_writing_development_plan.md": "a096cc03d00ac7c66c13c0e9434f9d8b8d3bacc30f9d759883c46bd818dde4e5"
+  },
+  "tests": {
+    "path": "tests/test_complete_writing_data.py",
+    "passed": 5,
+    "sha256": "d678d844ceb0bcd704e4e24c4e568f2e83e7e4a2fc303ce110f0e5b9a70bee75"
+  },
+  "actor_teacher_calls": 0,
+  "gpu_allocations": 0,
+  "sealed_test_opened": false,
+  "active_V63_modified": false,
+  "language_quality_claim": false,
+  "limitations": "Reused CMRC development, exact-source Dolly partitions and fixed flat-line layout. Requires a separately registered full-line model experiment and unscored final language evaluation."
+}

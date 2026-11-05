@@ -33,6 +33,16 @@ This motivates keeping autonomous writing authoritative; it does not measure
 the running actor or alter its frozen comparison. No singularity or general
 language breakthrough is established.
 
+The broader Chinese/English data interface now has 12,976 complete training
+images and 2,509 matching development images, covering all eight Dolly
+instruction categories. Every image passes hash and exact bit-round-trip
+checks; no exact prompt rasters overlap across the two caches. The new bit-only
+loader enforces an explicit train/development purpose and returns owning
+prompt-only storage for inference. Sealed Dolly test data remains unopened.
+These are preparation results for a later full-line comparison, not data
+adopted by the active V63 run or a new language pass. See the
+[complete-writing guide](complete-writing-data.md).
+
 V62's matched experiment is now complete. Eight whole-image experts improve
 held-out pixel NLL from 0.1542 to 0.1248 and strict-raster F1 from 0.234% to
 0.815%, but both arms still have zero exact primary answers and zero correct
