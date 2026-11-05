@@ -73,3 +73,9 @@ is an explicitly assisted diagnostic, not autonomous language performance.
 Select a learning intervention only after this distinction is measured.
 Standalone export remains gated, and the general image-language goal remains
 unachieved.
+
+The [completed 32-case diagnosis](codec_language_v68_diagnosis_result.md)
+now measures this distinction: supplied-code reconstruction is faithful,
+but conditional prediction remains poor with exact history, including on
+training examples. No first predicted block is exact. Generated-history drift
+therefore cannot be the sole explanation.

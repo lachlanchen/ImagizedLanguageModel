@@ -273,33 +273,36 @@ supplied-code block scores are not these conditional probabilities. A high
 average reconstruction F1 therefore cannot be substituted for whole-answer
 success or used to forecast it.
 
-These observations support a small, discriminating follow-up **after** the
-frozen autonomous audit, if it fails: compare the same final actor's initial
+These observations motivate the [completed diagnostic](codec_language_v68_diagnosis_result.md)
+after the frozen autonomous audit failed: compare the same final actor's initial
 block, exact-history next blocks, generated-history blocks and stop decisions.
 Any additional model diagnostic needs its own fixed scope before execution;
 it must preserve the original outputs and cannot revise their scores. Poor
 first-block selection cannot be blamed on accumulated generated history.
 Conversely, good exact-history writing with poor autonomous writing would
 motivate a controlled generated-history training intervention. Neither outcome
-has been observed for V68 yet. This selects a failure mechanism to test before
-adding diffusion steps, recurrent depth or a new optimizer.
+was established when that diagnostic was registered. Its 32-case measurements
+now show poor exact-history prediction even on training examples, and no exact
+first block, despite faithful supplied-code reconstruction. Rollout drift is
+therefore insufficient as the sole explanation. This does not prove that a
+conditional density, a larger readout or a particular optimizer is the repair.
 
 ## The next discriminating experiment
 
-1. Preserve the completed actor preflight and the same live V68 trainer. The
-   registered instruction stage uses all 12,976 admitted examples and a fixed
-   10,000-update budget. The codec, sources and objective remain unchanged.
-2. Execute the already frozen autonomous audit after training finishes. It
-   generates 192 prompt-only answers and 192 matched question/prompt-blank
-   controls, preserves full raw streams and stopping, and independently
-   verifies scores. Chinese cases include two distinct questions per passage.
-   CPU evaluator checks pass; no language output has yet been scored. The
-   128 reconstruction cases and this instruction audit are development data;
-   genuinely sealed final data remains unopened.
-3. Diagnose failure before changing architecture. Compare predicted-code
-   errors with physical stroke errors. If answers ignore the question, test
-   a matched data intervention. If predicted states leave useful writing
-   regions, test an output-distribution change. Neither is established yet.
+1. Preserve the [completed V68 training](codec_language_v68_training_result.md),
+   its final checkpoint and all 20,000 journaled draws. The registered budget,
+   codec, objective and sources remain unchanged.
+2. Preserve the [completed autonomous audit](codec_language_v68_result.md):
+   all 384 raw streams are independently verified. Chinese exactness is 0/128
+   and F1 is 32.6713%, despite a resolved 13.1628-point question effect. The
+   language gates fail. These are reused development data; the genuinely
+   sealed final split remains unopened.
+3. Use the completed exact-history diagnosis to constrain the next change.
+   Poor initial and training-set predictions rule out generated-history drift
+   as a sufficient explanation. Measure whether improved conditional features,
+   readout capacity or a joint output distribution repairs writing, with
+   matched data and original autonomous quality requirements. The diagnostic
+   does not select a unique successful algorithm.
 4. Treat spectral optimization as a subsequent equal-budget ablation, with
    effective adapter updates and inherited pretraining costs disclosed. Do not
    combine a new optimizer, data mixture and decoder in one comparison.

@@ -11,10 +11,14 @@ F1 and 0/64 fully correct question pairs. All 384 normal/control generations,
 Question dependence passes with a 13.1628-point F1 gain, 95% article-bootstrap
 interval [10.9329, 15.7296]; learned stopping is 128/128. These do not establish
 correct answer writing. The evaluator and coordinator have exited and GPU 0
-has been released. A [fixed diagnosis](../references/codec_language_v68_diagnosis_protocol.md)
-will separate supplied-code reconstruction, prediction with exact reference
-history and autonomous writing before another learning intervention. General
-useful language remains unachieved.
+has been released. The [completed fixed diagnosis](../references/codec_language_v68_diagnosis_result.md)
+separates supplied-code reconstruction, prediction with exact reference history
+and autonomous writing on 32 cases. Supplied-code F1 is 99.95–100%, while
+exact-history prediction reaches only 21.8–35.6%, including training examples.
+No first predicted block is exact. The failure is already present before
+generated-history drift; the conditional prediction path needs repair. No
+diagnostic optimizer updates are made. General useful language remains
+unachieved.
 
 The actual [grounded writer learning stage](../references/grounded_writer_v64_result.md)
 has completed 10,000 updates on GPU 0 and fails both reconstruction gates.
