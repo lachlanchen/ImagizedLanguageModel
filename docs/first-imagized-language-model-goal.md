@@ -26,15 +26,32 @@ polarity correction; the original invalid comparator is retained. This
 isolates an immediate failure of the tested flow route, without establishing
 language or unseen-image generalization. The V64/V65 sources remain frozen.
 
-The actual [direct-writing bootstrap](../references/direct_writer_learning_v66_protocol.md)
-is running on GPU 0 in `ilm-direct-writer`, drawing from all 12,976
-Chinese/English training examples, with a fixed 10,000-update budget and the
-unchanged 128-case reused-development component gates. Exact early optimizer,
-EMA, sampling and global RNG replay passes. It initializes from the verified
-direct-fitting EMA and keeps the full inherited actor resident, with measured
-training allocation around 15.804 GiB. Its fixed final quality audit is pending.
-Complete prompt-dependent instruction learning remains required after faithful
-writing qualifies. The next [publication revision plan](../references/direct_writer_results_publication_plan.md)
+The [direct-writing bootstrap](../references/direct_writer_v66_result.md)
+completes all 10,000 updates, with 56.563% foreground F1 versus 18.520%
+shuffled and 3/128 exact blocks. Its conditioning gain passes, but faithful
+writing fails the unchanged 90% requirement. Independent verification replays
+all 160,000 training draws and all 256 output scores. The full inherited actor
+remains resident during training at 15.804 GiB allocated peak. The run and its
+owned tmux session have exited; their completed artifacts are retained.
+
+The separate [V67 audit](../references/codec_output_v67_result.md) qualifies
+the existing frozen writing codec on the same 128 reused-development blocks:
+99.998% F1 and 126 exact blocks, versus 21.413% F1 with shuffled codes. This
+is reconstruction from supplied answer-image codes, not language generation.
+It supports distinct reading and writing representations. A complete causal
+actor must still learn which writing codes to produce from prompt pixels and
+its generated history; the new output interface needs its own full-model
+execution checks and autonomous instruction evaluation.
+
+The [latest physics/math review](../references/physics_math_after_codec_20261105.md)
+connects recent feature-learning and continuous-generation work to this
+decision. Its registered CPU diagnostic measures frozen-codec robustness at
+sampled perturbations of 64 training images. No new optimization or language
+pass is inferred. Preserve the simple actor experiment before adding spectral
+optimization, posterior-sampling diagnostics or a new generative architecture.
+
+Complete prompt-dependent instruction learning remains required. The next
+[publication revision plan](../references/direct_writer_results_publication_plan.md)
 requires the final audited result and matching editable figures before editing
 the current verified Nature package.
 
