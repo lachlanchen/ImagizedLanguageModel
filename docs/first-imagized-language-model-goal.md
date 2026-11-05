@@ -4,6 +4,24 @@ Updated: 2026-11-05
 
 ## Current engineering checkpoint
 
+The actual [grounded writer learning stage](../references/grounded_writer_learning_protocol.md)
+is now running on physical GPU 0 in `ilm-grounded-writer`, with a fixed
+10,000-update budget and balanced Chinese/English image blocks from all 12,976
+prepared training examples. Exact early checkpoint replay passes for writer,
+EMA, optimizer, image/noise sampling and global RNG states. Only the writer
+trains in this stage; the complete actor remains resident, with inherited
+weights frozen. No development generation is inspected before the final EMA.
+The fixed component evaluation is still outstanding. Source-image
+reconstruction cannot qualify prompt-dependent language.
+
+A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
+matches eight of eight source-engine first-token choices and nine of nine
+returned positions, with mean coarsened KL 0.000264 nat. Tokenizer and source
+head use is confined to that helper. This supports the inherited initialization
+on eight short text cases; it does not prove visual understanding or full
+engine equivalence. Instruction training and autonomous language tests remain
+required after coherent writing is established.
+
 The [complete grounded image actor](grounded-image-language.md) now passes all
 19 real-model preflight checks on GPU 0, with 17.181 GiB peak allocated memory.
 It retains all 27 vision and 36 contextual layers, removes the vocabulary

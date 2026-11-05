@@ -106,3 +106,12 @@ instruction learning. `scripts/train_grounded_writer.py` includes checkpoint
 resume verification, EMA, deterministic sampling and a fixed final component
 evaluation. Reconstruction is a prerequisite output-path test, not a language
 answer qualification.
+
+Production is now running in the owned `ilm-grounded-writer` tmux session on
+GPU 0. Artifacts and exact-resume evidence are under
+`artifacts/grounded_writer_learning_v64_20261105/`; `status.json` records the
+live PID/stage, and `report.json` will record completion and the fixed component
+decision. Do not infer completion from a console line or loss decrease. Resume
+an interrupted stage with the same command/environment as the protocol and
+`scripts/train_grounded_writer.py --resume`. Preserve frozen sources and do
+not start a second heavy job while the trainer is live.
