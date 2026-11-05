@@ -15,6 +15,14 @@ no extra training. Exact early optimizer/EMA/RNG replay passes. The run is
 complete, its GPU is released and no owned runtime remains. Faithful writing
 must be repaired before prompt-dependent language can be qualified.
 
+The next [registered writer diagnosis](../references/writer_factorial_v65_protocol.md)
+crosses inherited versus lossless-pixel conditions with flow versus direct
+image reconstruction, using common initial weights and batch exposure on
+64 training-only images. It tests the actual output architecture and compares
+an existing continuous codec on the same images. Its finite fitting result
+cannot qualify language or held-out generalization. The V64 actor and protocol
+remain frozen.
+
 A separate [offline contextual sanity check](../references/inherited_context_check_result.md)
 matches eight of eight source-engine first-token choices and nine of nine
 returned positions, with mean coarsened KL 0.000264 nat. Tokenizer and source
