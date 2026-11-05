@@ -22,7 +22,8 @@ and first stop probability against the free path when a free first image
 exists, since they share prompt, empty history and noise seed.
 
 After all 32 actual-image calls, probe the first-block clean predictor at
-times 0, 0.1, 0.3, 0.5 and 0.9. Use one fresh Gaussian noise vector per case
+times 0, 0.1, 0.3, 0.5, 0.9, 0.96875 and 1. The last two include the actual
+final 32-step sampler input time and the clean-data identity limit. Use one fresh Gaussian noise vector per case
 from seed 20267597, common across times and correct/paired conditions.
 Compare the owning prompt's initial condition against the other question's
 condition from the same visible-passage pair, holding target and noisy input

@@ -28,6 +28,7 @@ from scripts.train_semantic_ilm_v72 import setup
 from scripts.verify_codec_language_v68 import assert_close, independent_actor_prompt, physical_scores
 
 COHORT=ROOT/"references/evidence/clean_learning_v74_result.json"
+TIMES=[0.,.1,.3,.5,.9,.96875,1.]
 SOURCES=("scripts/probe_corpus_fit_v75.py","references/corpus_fit_v75_protocol.md",
     "references/evidence/clean_learning_v74_result.json","ilm/visual_lm/clean_image_actor.py",
     "ilm/visual_lm/clean_writing_flow.py","ilm/visual_lm/full_rank_writing_flow.py",
@@ -210,7 +211,7 @@ def evaluate(args,cases):
             target=torch.stack(targets).to(device).flatten(1)
             noise=torch.randn(target.shape,device=device,generator=torch.Generator(device=device).manual_seed(20267597))
             partner=torch.arange(32,device=device)^1
-            values=dict(times=[0.,.1,.3,.5,.9],target=target.cpu(),noise=noise.cpu(),own=[],paired=[])
+            values=dict(times=TIMES,target=target.cpu(),noise=noise.cpu(),own=[],paired=[])
             for t in values["times"]:
                 time_value=torch.full((32,),t,device=device)
                 noisy=(1-t)*noise+t*target
@@ -305,8 +306,8 @@ def verify(args,cases):
     if replays!=report["reader_cache_replay"] or sha(args.out/"conditioning.pt")!=report["conditioning_sha256"]:
         raise ValueError("reader/conditioning evidence differs")
     values=torch.load(args.out/"conditioning.pt",map_location="cpu",weights_only=True)
-    if (values["times"]!=[0.,.1,.3,.5,.9] or values["own"].shape!=(5,32,1536)
-            or values["paired"].shape!=(5,32,1536) or not torch.equal(values["target"],torch.stack(targets).flatten(1))
+    if (values["times"]!=TIMES or values["own"].shape!=(len(TIMES),32,1536)
+            or values["paired"].shape!=(len(TIMES),32,1536) or not torch.equal(values["target"],torch.stack(targets).flatten(1))
             or not torch.isfinite(values["own"]).all() or not torch.isfinite(values["paired"]).all()):
         raise ValueError("invalid retained latent-prediction probe")
     errors=latent_errors(values,independent=True)
