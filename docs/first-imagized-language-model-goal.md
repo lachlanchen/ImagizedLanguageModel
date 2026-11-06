@@ -26,11 +26,16 @@ executes all 40 normal/blank outputs on one card, but gets 0/12 copy requests
 and 0/8 questions by OCR exact match (reference OCR calibration: 18/20).
 Inspection shows copied instructions and corrupted text. No local optimizer
 updates are made. This rejects its zero-shot composition as an answering
-system; it does not establish whether paired-image learning will work.
-The next learning experiment must train on actual prompt/answer image pairs
-while retaining a visual generative prior, then evaluate new strings and
-held-out prompt-dependent answers. Execution checks and publication updates
-cannot advance the capability stage.
+system. A subsequent [paired-writing run](../references/paired_image_writing_result.md)
+now completes 512 updates on 32 copies and improves the fixed screen from
+0/8 to 2/8 OCR exact matches, including one unseen Chinese string. Three
+clear seen-case errors already rule out its 30/32 training criterion.
+This is limited copying improvement; natural QA has not been optimized and
+useful language understanding remains unproved. A separately specified
+[padding comparison](../references/paired_padding_protocol.md) tests empty-input
+overhead with all source ink and targets preserved. The complete goal still
+requires reliable writing, new-string copying and held-out prompt-dependent
+language. Execution checks and publication updates cannot replace those results.
 
 The [current direction assessment](../references/ilm_direction_assessment_20261107.md)
 sets out the evidence, unresolved causes and decision sequence. The older

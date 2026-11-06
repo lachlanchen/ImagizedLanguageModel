@@ -9,8 +9,10 @@ The complete pretrained generator and image codec remain necessary; locally
 trainable adapters do not make their parameter counts disappear.
 
 This implementation is a learning experiment. The earlier zero-shot baseline
-failed all requested answers. No useful ILM, quality improvement or training
-efficiency is established by adding a trainer or executing two updates. See
+failed all requested answers. The completed 512-update run improves the fixed
+copying screen from 0/8 to 2/8 OCR exact matches, but still fails reliability;
+see [every measured before/after output](../references/paired_image_writing_result.md).
+No useful ILM or efficiency at matched language quality is established. See
 the [declared protocol](../references/paired_image_learning_protocol.md).
 
 Use a Python environment with the installed compatible PyTorch/Diffusers

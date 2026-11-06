@@ -82,9 +82,15 @@ allocated memory. It fails all 12 copying requests and eight questions by
 offline OCR exact match; reference calibration is 18/20. All outputs were
 inspected and retained: copied instructions/passages and corrupted text do
 not constitute the requested answers. There are no local optimizer updates.
-The result rejects zero-shot use of this composition, while paired-image
-learning remains untested. A viable image codec and an executing generator
-do not supply the missing instruction-to-answer behavior automatically.
+The result rejects zero-shot use of this composition. The subsequent
+[paired-writing run](paired_image_writing_result.md) completes 512 updates on
+32 copies: the fixed screen improves from 0/8 to 2/8 OCR exact matches, but
+three clear seen-case errors already rule out its 30/32 training criterion.
+This demonstrates limited copying improvement, not useful language learning.
+Natural QA has not been optimized in that model. A separate
+[lossless-padding comparison](paired_padding_protocol.md) tests measured
+input overhead with all ink and targets preserved; it is not an established
+fidelity correction.
 
 A replacement must be assessed in this order:
 

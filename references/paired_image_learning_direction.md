@@ -4,7 +4,13 @@ The [completed zero-shot baseline](image_edit_baseline_result.md) produces
 copied instructions and corrupted pages, not the requested answers. It
 performs no optimizer updates. Its failure does not establish whether the
 visual generator can learn an instruction-to-answer mapping from paired
-images. The next experiment must test that learning directly.
+images. The subsequent [paired-writing experiment](paired_image_writing_result.md)
+now tests a limited part of that learning: 512 updates improve the fixed
+copying screen from 0/8 to 2/8 OCR exact matches, including one unseen Chinese
+string, while failing the declared reliability criterion. Natural question
+answering remains untrained. The [standalone implementation and commands](../docs/paired-image-learning.md)
+require source assets, data and a fixed generic condition, without earlier
+experimental checkpoints.
 
 Use the undistilled [FLUX.2-klein-base-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4B)
 source at revision `a3b4f4849157f664bdbc776fd7453c2783562f4d`. The inspected

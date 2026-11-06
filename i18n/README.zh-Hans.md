@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+<!-- paired-writing-status:start -->
+外部预训练的4B图像生成器已在32个复制样本上完成512次图像配对训练。固定小样本检查的OCR完全匹配从0/8提高到2/8（训练和验证各1/4），但可见错误仍未达到规定的可靠性标准，语言理解尚未得到验证。[全部训练前后图像](../references/paired_image_writing_result.md) · [训练与推理](../docs/paired-image-learning.md)。
+<!-- paired-writing-status:end -->
+
 当前状态：图像语言生成仍未达到可用标准。最新的解码器损失对照实验使用32道已见训练题，两组逐像素完全一致的自主回答均为0/32；解码器敏感损失使前景F1从对照组的85.984%降至70.009%。即使给出正确的前文，F1也仅为92.430%和75.116%；直接提供答案编码时，两组的解码重建均达到99.9953%。四项修复标准全部未通过，不再扩大这一训练方案。这些是图像一致性指标，不是语义正确率，尚无通过可用性验证的ILM检查点。[完整结果及全部原始图片](../references/decoder_metric_v82_result.md)。 论文已纳入补充说明39和可编辑的图S16。 另一个外部图像生成器基线未经本地训练，OCR完全匹配为复制请求0/12、问答0/8（参考图OCR校准18/20），全部40张原始输出均已保留。 [FLUX.2-klein-4B](../references/image_edit_baseline_result.md).
 
 

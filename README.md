@@ -22,6 +22,10 @@ reported directly below.*
 
 ## Current result: autonomous image-language writing still fails
 
+<!-- paired-writing-status:start -->
+An externally pretrained 4B image generator has now completed 512 paired-image updates on 32 copying examples. OCR exact match improves from 0/8 to 2/8 on the fixed screen (1/4 seen and 1/4 validation), but visible errors still fail the declared reliability criterion. Language understanding remains unproved. [Complete before/after images](references/paired_image_writing_result.md) · [Training and inference](docs/paired-image-learning.md).
+<!-- paired-writing-status:end -->
+
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
 40,000 updates. The latest matched decoder-loss experiment on 32 seen training

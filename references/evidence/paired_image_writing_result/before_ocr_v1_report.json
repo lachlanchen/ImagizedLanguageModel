@@ -1,0 +1,205 @@
+{
+  "stage": "score",
+  "engine": {
+    "binary_sha256": "9f831cab7525c3dab04af41bda35182af7ea1df9dceeaaa2f3bf207ac45c06a5",
+    "version": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+    "languages": [
+      "chi_sim",
+      "eng"
+    ],
+    "psm": 6,
+    "traineddata_sha256": {
+      "chi_sim": "a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730",
+      "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    }
+  },
+  "implementation": {
+    "scripts/score_paired_writing.py": "f7c737ffc11c1bb82861fa473b5baca1207cc8b1bb6c74bfba7aa2a10aee15d5",
+    "scripts/evaluate_image_edit_baseline.py": "99790506c37a4a2f2a6aecf4b4e36d63e2957c00badb50e7ca8d2081c932f2b9"
+  },
+  "manifest_sha256": "e2d6aec134a99e079a9bd42f217559a04e32727bdbc4b09d131b0fb22cf4dfa6",
+  "cohort": [
+    "copy/train/000",
+    "copy/train/001",
+    "copy/train/002",
+    "copy/train/003",
+    "copy/train/004",
+    "copy/train/005",
+    "copy/train/006",
+    "copy/train/007",
+    "copy/train/008",
+    "copy/train/009",
+    "copy/train/010",
+    "copy/train/011",
+    "copy/train/012",
+    "copy/train/013",
+    "copy/train/014",
+    "copy/train/015",
+    "copy/train/016",
+    "copy/train/017",
+    "copy/train/018",
+    "copy/train/019",
+    "copy/train/020",
+    "copy/train/021",
+    "copy/train/022",
+    "copy/train/023",
+    "copy/train/024",
+    "copy/train/025",
+    "copy/train/026",
+    "copy/train/027",
+    "copy/train/028",
+    "copy/train/029",
+    "copy/train/030",
+    "copy/train/031",
+    "copy/validation/000",
+    "copy/validation/001",
+    "copy/validation/002",
+    "copy/validation/003",
+    "copy/validation/004",
+    "copy/validation/005",
+    "copy/validation/006",
+    "copy/validation/007",
+    "copy/validation/008",
+    "copy/validation/009",
+    "copy/validation/010",
+    "copy/validation/011",
+    "copy/validation/012",
+    "copy/validation/013",
+    "copy/validation/014",
+    "copy/validation/015",
+    "copy/validation/016",
+    "copy/validation/017",
+    "copy/validation/018",
+    "copy/validation/019",
+    "copy/validation/020",
+    "copy/validation/021",
+    "copy/validation/022",
+    "copy/validation/023",
+    "copy/validation/024",
+    "copy/validation/025",
+    "copy/validation/026",
+    "copy/validation/027",
+    "copy/validation/028",
+    "copy/validation/029",
+    "copy/validation/030",
+    "copy/validation/031"
+  ],
+  "rows": [
+    {
+      "id": "copy/train/000",
+      "split": "train",
+      "language": "zh",
+      "expected": "花多地地山",
+      "raw_transcript": "#5515 Hattie\n“MAHA SH ir BLO RS:\n",
+      "normalized": "#5515Hattie“MAHASHirBLORS:",
+      "ocr_stderr": "",
+      "png_sha256": "e5e17c446c2ac6e99b35fc23a7d0df9d5f3edf2104fc57801c681532882cf6b1",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/train/001",
+      "split": "train",
+      "language": "en",
+      "expected": "mountain bright blue cloud",
+      "raw_transcript": "Copyonly thmtlle pnenont Dadls.\nUabv itienpbhighe cloud”\n",
+      "normalized": "Copyonly thmtlle pnenont Dadls. Uabv itienpbhighe cloud”",
+      "ocr_stderr": "",
+      "png_sha256": "6967830aad5f6cd6aa08fb46d4579b1ade39783893c356dcbf65f5473ce52e1d",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/train/002",
+      "split": "train",
+      "language": "zh",
+      "expected": "风言外黑目家",
+      "raw_transcript": "“FRA\n",
+      "normalized": "“FRA",
+      "ocr_stderr": "",
+      "png_sha256": "cc449d11a45ed33f87f23cc602df9e355b7a1e0f8880d169119e16587427d4b3",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/train/003",
+      "split": "train",
+      "language": "en",
+      "expected": "paper small winter garden",
+      "raw_transcript": "Coyomnexit nwtem thes ymdindusn\n\"paper small garden\"\n",
+      "normalized": "Coyomnexit nwtem thes ymdindusn \"paper small garden\"",
+      "ocr_stderr": "",
+      "png_sha256": "135f3a9b212ad50747760dcea021d8141cf40d15ed10196122acdb470365b180",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/validation/000",
+      "split": "validation",
+      "language": "zh",
+      "expected": "树田红星风",
+      "raw_transcript": "BAYS IS POPES:\n“SEAR!\n",
+      "normalized": "BAYSISPOPES:“SEAR!",
+      "ocr_stderr": "",
+      "png_sha256": "17545dd3460a14f8523edd4f15941625b84d37e73afa5dc9f0cf3ab6b79dc9dd",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/validation/001",
+      "split": "validation",
+      "language": "en",
+      "expected": "garden silver open blue",
+      "raw_transcript": "Copn sty larten monm'aiie\n\"ocpcive\n",
+      "normalized": "Copn sty larten monm'aiie \"ocpcive",
+      "ocr_stderr": "",
+      "png_sha256": "cac670b938f712310c9c715da7d4c1e9a8ff7fba85c91604bb034914686613be",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/validation/002",
+      "split": "validation",
+      "language": "zh",
+      "expected": "语树石字光河画山雪羊",
+      "raw_transcript": "RAS IAS:\nCITES”\n",
+      "normalized": "RASIAS:CITES”",
+      "ocr_stderr": "",
+      "png_sha256": "343b85ccdfd178e0acee58671e015d72bf9a7059d2afaacc92290ff2c338a02f",
+      "ocr_exact": false
+    },
+    {
+      "id": "copy/validation/003",
+      "split": "validation",
+      "language": "en",
+      "expected": "green blue",
+      "raw_transcript": "IFoprolvohe ity oeotion amnssris:\n‘graho\"\n",
+      "normalized": "IFoprolvohe ity oeotion amnssris: ‘graho\"",
+      "ocr_stderr": "",
+      "png_sha256": "d75f4b54b62d5c103c8f305514b25d2abb0d3d53928b7f7cc44d8f25a4d922a3",
+      "ocr_exact": false
+    }
+  ],
+  "summary": {
+    "train": {
+      "cases": 4,
+      "ocr_exact": 0
+    },
+    "validation": {
+      "cases": 4,
+      "ocr_exact": 0
+    }
+  },
+  "complete_cohort": false,
+  "generated_images_opened": true,
+  "neural_generator_loaded": false,
+  "reference_calibration_sha256": "4ba0fd8da7d495dbfa58b183dac6731e448744772898d57383e3f95b4514e422",
+  "reference_calibration_summary": {
+    "train": {
+      "cases": 32,
+      "ocr_exact": 27
+    },
+    "validation": {
+      "cases": 32,
+      "ocr_exact": 28
+    }
+  },
+  "normalization": "NFC; English whitespace collapsed; Chinese whitespace removed; case and punctuation retained",
+  "limitations": "Exploratory OCR observations; generated typography and uncertain readings require raw-image review",
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}
