@@ -658,6 +658,16 @@ exact images. Thus conditional prediction remains inaccurate under correct
 history; generated-history errors cannot be the sole explanation. These
 physical-image scores are not a separate measurement of semantic accuracy.
 
+A matched readout repair adds an initial continuous query and trains rank-8
+suffix adapters while retaining the full prompt cache. After 2,000 updates
+per arm on those same 32 training questions, free F1 is 71.177\% for continued
+control and 72.748\% for adaptation; neither produces an exact complete image
+(Supplementary Note 38 and Fig.~S15). Correct preceding history gives
+77.372\% and 79.629\%, again with no exact images. Supplied-code fidelity is
+unchanged at 99.9953\%. The adapted model fails three of four declared
+training-fit criteria. The small increase in image agreement does not resolve
+conditional writing or qualify general language capability.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

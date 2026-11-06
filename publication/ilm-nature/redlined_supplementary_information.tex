@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 23:34:41 2026
-%DIF ADD new.tex   Fri Nov  6 23:34:41 2026
+%DIF DEL old.tex   Sat Nov  7 00:53:27 2026
+%DIF ADD new.tex   Sat Nov  7 00:53:27 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -2283,6 +2283,98 @@ The measurements establish a failed image writer, not semantic accuracy or
 general language capability.}{fig:s14-native-failure}
 
 \clearpage
+\section*{\DIFadd{Supplementary Note 38: matched readout repair remains unsuccessful}}
+\DIFadd{The conditional-prediction failure in Note 37 motivates a matched readout
+test on the same 32 training questions in sixteen distinct-answer,
+same-passage pairs. Both arms restore the completed native image interfaces.
+The control continues the frozen native transition. The adapted arm adds one
+continuous initial query and trains rank-8, alpha-16 adapters on the query,
+value and output projections in all 36 inherited contextual layers. This is
+a composite intervention. Adapter effects are enabled inside writing-layer
+calls and their checkpoint recomputation; prompt prefill uses the unchanged
+base weights. Each prompt KV cache remains fixed through optimization.
+}
+
+\DIFadd{Both arms receive 2,000 updates, batch four, the same shuffled case order and
+noise draws: 8,000 draws or 250 exposures per question. Fresh AdamW uses
+$(0.9,0.95)$, weight decay 0.01 and gradient clip one. Learning rate warms to
+$10^{-4}$ over 100 updates and decays by cosine to $10^{-5}$. The objective,
+uniform noise-time law, 32-step sampler, 0.5 learned stop and 128-block cap are
+unchanged. Every emitted image is re-encoded for actual-pixel feedback.
+Autonomous generation receives no target code or reference length.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+\DIFadd{Writing path }& \DIFadd{Control F1 (\%) }& \DIFadd{Adapted F1 (\%) }& \DIFadd{Exact images}\\
+\midrule
+\DIFadd{Autonomous generation }& \DIFadd{71.177 }& \DIFadd{72.748 }& \DIFadd{0/32; 0/32}\\
+\DIFadd{Correct history and length }& \DIFadd{77.372 }& \DIFadd{79.629 }& \DIFadd{0/32; 0/32}\\
+\DIFadd{Supplied target codes }& \DIFadd{99.9953 }& \DIFadd{99.9953 }& \DIFadd{28/32; 28/32}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{All autonomous streams stop. First-block F1 is 99.330\% in the control and
+98.174\% after adaptation. Later writing still deteriorates under correct
+history, so generated-history errors are not the sole explanation. The
+provisional repair criteria require at least 24/32 exact free images, free F1
+at least 0.98 and improvements over control in both quantities. Only the F1
+improvement criterion passes. These are training-fit measurements, not an
+unseen-language qualification or an independently measured semantic score.
+The result does not uniquely select a representation, optimization or loss
+mechanism as the remaining cause.
+}
+
+\DIFadd{The adapted actor has 7,583,225,971 complete parameters, with 53,096,961
+trainable. The control has 7,583,221,875 and 46,899,713 respectively. External
+foundation pretraining and prior codec learning are outside these local
+costs. The added query accounts for the 4,096 additional complete parameters;
+the adapters reuse already allocated tensors. No lightweight-from-scratch
+training or efficiency advantage is established.
+}
+
+\DIFadd{The original execution completes both optimizations but stops final
+evaluation at adapted case 00: its first autonomous and full-history pixels
+are identical, while an exact floating stop-probability check rejects a
+$3.908\times10^{-14}$ difference. That failed execution is preserved.
+A separately specified evaluation restores the same final checkpoints with
+zero optimization and uses the same incremental start for free and
+correct-history controls. All 32 prior control autonomous streams and the
+one retained adapted stream replay exactly. The common incremental first
+pixels and stop are identical in all cases. The retained full-history
+diagnostic gives F1 77.358\% and 79.632\%; its pixels differ from incremental
+control in 50 and 42 positions over 107 blocks per arm. Existing normwise
+hidden-state bounds pass, while the original absolute $10^{-4}$ comparison
+fails on two control cases and one adapted case. These discrepancies are
+reported explicitly and do not account for the large quality shortfall.
+}
+
+\DIFadd{CPU verification independently scores all 64 final autonomous answers,
+decodes 128 retained control-coordinate streams and 64 supplied-code
+streams, and checks owning prompts, targets, raw pixels, PNGs and source
+identities. The complete contextual body and sampler are not independently
+replayed. Evaluation, including model setup and prompt prefill, takes
+221.75\,s and peaks at 17.675\,GiB allocated memory on GPU0; these are not
+training costs. The source receipt and all 320 unaltered PNGs are retained
+under }\path{references/evidence/adaptive_readout_v81_result/}\DIFadd{.
+}
+
+\plate{Figure_S15_readout_failure}{\textbf{Readout adaptation fails the
+autonomous writing requirement.} \textbf{a}, Foreground F1 on the same 32
+training questions after matched continued optimization. \textbf{b}, The
+correct-history and known-length control on those questions. Neither path
+has any exact complete images in either arm. Supplied-code reconstruction
+remains at 99.9953\% F1 and 28/32 exact images. \textbf{c}, Complete raw
+references and adapted autonomous outputs for the first four fixed cohort
+questions, covering two question pairs without selection by outcome. The
+original PNG bytes are embedded with unchanged aspect ratios; all 32 cases
+are retained in the receipt. Native charts, labels and image objects remain
+editable in the matching PowerPoint. Image agreement does not establish
+semantic accuracy or successful general language generation.}{fig:s15-readout-failure}
+
+\clearpage
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2425,6 +2517,20 @@ and retained failure handling are specified in
 }\path{references/native_chinese_v80_protocol.md}\DIFadd{,
 }\path{references/native_corpus_fit_v80_protocol.md} \DIFadd{and
 }\path{docs/native-image-continuation.md}\DIFadd{.
+}
+
+\DIFadd{The matched readout experiment in Note 38 uses
+}\path{scripts/train_adaptive_readout_v81.py} \DIFadd{with separate preflight and
+training stages. Preserve its failed original evaluation and partial output.
+The completed checkpoints are evaluated without optimization using
+}\path{scripts/evaluate_trained_readout_v81.py}\DIFadd{, first with
+\texttt{--stage evaluate} in the deterministic GPU0 environment above, then
+\texttt{--stage verify} with CUDA explicitly hidden. Export all verified
+images and scores with }\path{scripts/export_readout_v81_result.py}\DIFadd{.
+The source-bound execution and numerical criteria are in
+}\path{references/adaptive_readout_v81_protocol.md}\DIFadd{,
+}\path{references/adaptive_readout_v81r2_protocol.md} \DIFadd{and
+}\path{references/adaptive_readout_v81_evaluation_protocol.md}\DIFadd{.
 }
 
 \begin{thebibliography}{19}

@@ -15,6 +15,19 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The [matched readout repair](../../references/adaptive_readout_v81_result.md)
+also fails. On the same 32 training questions, control and adapted models
+produce **0/32 exact autonomous images**, at **71.177% and 72.748% foreground
+F1**. Correct-history prediction reaches 77.372% and 79.629%, again without
+any exact complete images. Supplied-code decoding remains at 99.9953% and
+28/32 exact images. Note 38 and Figure S15 retain this rejected comparison,
+its separate evaluation amendment and the first four unmodified outputs.
+The current builders are `readout_failure_figures.py` and
+`build_readout_failure_publication.py`, for the 30-slide editable deck and
+matching PDFs. Earlier builders reproduce their named historical packages.
+
+![Completed failed readout comparison and the first four raw answer images](figures/Figure_S15_readout_failure.png)
+
 The completed [native-context model](../../references/native_chinese_v80_result.md)
 fails after 40,000 updates over 3,193 Chinese examples: **0/128 exact Chinese
 development images**, **36.504% foreground F1**, and **0/64 both-correct pairs**.
@@ -22,7 +35,7 @@ Question erasure gives 25.404% F1. On the fixed 32 training questions,
 correct-history prediction still gives 0/32 exact images and 50.241% F1,
 compared with 99.9953% from supplied-code reconstruction. Note 37 and Figure
 S14 report this failure, with native editable charts and unmodified output
-images. The current builders are `native_failure_figures.py` and
+images. Its historical builders are `native_failure_figures.py` and
 `build_native_failure_publication.py`. These are image-agreement measurements,
 not a separately measured semantic accuracy score.
 
@@ -53,7 +66,7 @@ The offline source-reader diagnostic recovers **8/12 exact copy answers** and
 memories matching the failed image actor. Later source decoding uses full KV
 history; the compact image-writer memory has not been shown sufficient.
 Note 35 and Figure S12 report this boundary, with both native count charts and
-an editable diagram. The current build entry point is
+an editable diagram. Its historical build entry point is
 build_reader_content_publication.py; reader_content_figures.py appends and
 verifies slide 27 while preserving all earlier 26 native/canonical slides.
 
@@ -90,7 +103,7 @@ corrected to the completed result. Both remain native editable slides.
 All preceding 25 slide parts and canonical appearances are preserved.
 The [figure verifier](verify_semantic_transfer_figures.py) checks source
 scores, chart workbooks, native parts and rendered figures. The
-[current publication builder](build_clean_writing_publication.py) authenticates
+[earlier publication builder](build_clean_writing_publication.py) authenticates
 the completed experiment receipts and rebuilds all five paper/redline PDFs.
 
 A complete conditional-writing actor finishes 10,000 updates on all 12,976

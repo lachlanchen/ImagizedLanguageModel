@@ -39,6 +39,8 @@ agreement measurements, not semantic accuracy. The adapted actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.
 
+![Measured failed readout repair: control and adapted writing scores with complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S15_readout_failure.png)
+
 ## Earlier full clean writer
 
 The earlier **64.52M-parameter writer** completes 40,000 updates on 12,976
