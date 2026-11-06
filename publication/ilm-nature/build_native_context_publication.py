@@ -111,7 +111,7 @@ def main():
         source_receipts_sha256={stem:sha(ROOT/"references/evidence"/(stem+".json"))
             for stem in ("clean_corpus_v75_result","copy_transfer_v75_result","corpus_fit_v75_result","writing_times_v76_result","reader_content_v77_result","native_context_v80")},
         visual_review_required=True,language_quality_claim=False,general_ilm_goal_complete=False)
-    (HERE/"evidence/reader_content_publication_build.json").write_text(json.dumps(receipt,indent=2)+"\n")
+    (HERE/"evidence/native_context_publication_build.json").write_text(json.dumps(receipt,indent=2)+"\n")
     print(json.dumps(dict(pdfs=outputs,preserved_figure_files=len(figures)),indent=2))
 
 
