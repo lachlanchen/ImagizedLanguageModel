@@ -1,8 +1,10 @@
 # Decoder geometry as a possible training preconditioner
 
-Research note, 7 November 2026. This is an unimplemented candidate, motivated
+Research note, 7 November 2026. This candidate is motivated
 by the [retained pixel-margin measurements](readout_pixel_margin_v81_result.md).
-It changes neither the running readout experiment nor its quality criteria.
+Its [decoder-only implementation and derivative checks](decoder_pullback_v82_preflight_result.md)
+are now complete; autonomous learning under this objective remains untested.
+The prior readout experiment and its quality criteria remain unchanged.
 
 The fixed codec reconstructs supplied writing well, but coordinate error and
 physical stroke error are not equivalent. The continued control has mean
@@ -22,7 +24,7 @@ Its quadratic error is computable as η||v||² plus
 α||W^(1/2) J_R(x)v||² using a Jacobian-vector product; the full matrix need not
 be stored. Added compute would involve the small fixed decoder, but actual
 time, memory, derivative support and gradient stability must be measured.
-No implementation or efficiency result is claimed here.
+The measured decoder-only costs do not establish complete-actor efficiency.
 
 For clean target z, condition on x,t,h and minimize the expected quadratic
 loss of c−z in this metric. If G is fixed given those observed variables and
@@ -54,9 +56,24 @@ For ILM, teacher information, geometric distortion and numerical inverse
 accuracy would each need testing. Exact coordinate invertibility alone does
 not guarantee unchanged thresholded glyph pixels after approximate inversion.
 
-The two routes address different problems: physical sensitivity of the output
+Another recent preprint, Ahamed et al.'s
+[Preconditioned Flow Matching, version 3](https://arxiv.org/html/2603.02337v3),
+derives conditioning-dependent regression convergence in Gaussian and
+Gaussian-mixture settings and tests reversible coordinate preconditioning.
+That changes the intermediate distributions. The proposed decoder-sensitive
+error instead reweights residual directions; it has no demonstrated
+isotropization or convergence-rate guarantee.
+
+Jiang et al.'s [TextLDM](https://arxiv.org/html/2605.07748v1) reports that strong
+reconstruction alone does not yield effective diffusion representations, and
+uses alignment to a frozen language model. Its VAE consumes discrete text
+tokens and is not an image-only ILM implementation. Its result motivates
+keeping semantic organization distinct from pixel reconstruction, rather than
+assuming a more accurate decoder supplies linguistic structure.
+
+The routes address different problems: physical sensitivity of the output
 coordinates and semantic organization of the representation. Neither supplies
 missing linguistic evidence or establishes generalization. The immediate
-decision remains the completed matched readout result; any subsequent loss or
-coordinate change requires a new bounded experiment, not another uncontrolled
-long training run.
+readout repair [fails](adaptive_readout_v81_result.md). The separately specified
+physical-metric comparison tests an optimization hypothesis on the same
+cohort; it makes no successful language claim before autonomous verification.

@@ -1,0 +1,513 @@
+{
+  "reports": {
+    "cpu": {
+      "source_report_sha256": "add07522e7d042b16da5c04636abe168ccc86a139db3e43a655e078bbf7d92e2",
+      "report": {
+        "identity": {
+          "source_commit": "ec27bfd1d6b54a46a1aa6b20f63a1326fcb17cc6",
+          "sources": {
+            "scripts/preflight_decoder_pullback_v82.py": "1a7f36c141062a1c901bd612b9233e4b34f6598573921401991b65ee4dd81f5e",
+            "references/decoder_pullback_v82_preflight_protocol.md": "975a710be8997ab44c4b54a9648bb4feb3d8a676751af1b5c286ec927ebec347",
+            "ilm/visual_lm/decoder_pullback.py": "b89db7a29cfb4a680c209c8fc50eca705adfdf7ad6604a1c627638219a080c22",
+            "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+            "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+            "scripts/probe_native_corpus_fit_v80.py": "1824b741e8f16db34ca813242fd9fe6fa5cba2737d9b69a11afd01c8f77362ad",
+            "scripts/train_native_chinese_v80.py": "2d9c7f735994cd17b6d3b42ce58dd78e50b36aa181d09da493cfb45f83caeac0"
+          },
+          "source_report_sha256": "c179a8aa6282b5fed0c44798166b7b98d7930db2d36370c1fea288027fb00076",
+          "source_verification_sha256": "6661fce86f2fd31b590eddf2d9a64c370b925e89dc4aaa6c30b2bad291e38a87",
+          "bindings": [
+            {
+              "case": 0,
+              "source": "cmrc/TRAIN_2646_QUERY_0.pt",
+              "blocks": 1,
+              "trace_sha256": "89c1b34cf4f6aa0a14206d0d448550e8c70bd7347d9719bf87b67b5f5509118a",
+              "header_sha256": "84d4d2719291617be246d0b863d03fe0bb0c1d6f4da869dbe230387989a38ea2"
+            },
+            {
+              "case": 1,
+              "source": "cmrc/TRAIN_2646_QUERY_2.pt",
+              "blocks": 2,
+              "trace_sha256": "04501915614a6a0cdd7732120a1b8149939b9a37824f9523d54ebe1159789254",
+              "header_sha256": "6127a3b75e6560fe93a177cebf22811fa6d71c53a47944e3df195916041ba4b7"
+            },
+            {
+              "case": 2,
+              "source": "cmrc/TRAIN_1613_QUERY_0.pt",
+              "blocks": 3,
+              "trace_sha256": "19ea189b4d00dd9b96fe3fd562f143dcb0aeb52b42876e77a74a2c67347958ac",
+              "header_sha256": "9db9a6efba9832bbbe41d8f4f0972666bf630a3096b51df82d1a33ebae61cbd5"
+            },
+            {
+              "case": 3,
+              "source": "cmrc/TRAIN_1613_QUERY_2.pt",
+              "blocks": 4,
+              "trace_sha256": "d44c0ef880aa84b62feab23bffc05604ec8d69742971a5432d908e340782e2aa",
+              "header_sha256": "80069fc7f5193a36a7aa30f3a2340a969ce6f04dc0bbf7e38e9e45b776592cd3"
+            }
+          ],
+          "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+          "device": "cpu",
+          "torch_version": "2.3.0+cu121",
+          "seed": 20268200,
+          "times": [
+            0.0,
+            0.5,
+            0.9
+          ],
+          "strength": 0.001,
+          "model_updates": 0,
+          "language_quality_claim": false
+        },
+        "rows": [
+          {
+            "time": 0.0,
+            "loss": [
+              0.26915717124938965,
+              0.26855483651161194,
+              2.4699575901031494,
+              0.39656326174736023,
+              5.860821723937988,
+              0.5882431268692017,
+              0.37044718861579895,
+              9.708797454833984,
+              6.192022323608398,
+              9.311184883117676
+            ],
+            "code_mse": [
+              0.03528803959488869,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061119556427,
+              0.49610745906829834,
+              0.08181384205818176,
+              0.057278361171483994,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              233.86912536621094,
+              216.29373168945312,
+              2254.1142578125,
+              347.50213623046875,
+              5364.7138671875,
+              506.4292907714844,
+              313.1688232421875,
+              8985.85546875,
+              5736.19775390625,
+              8736.7392578125
+            ],
+            "gradient_norm": 2.7282016277313232,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.5744683123075783e-07,
+              "maximum_absolute": 5.21540641784668e-08
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 3.5904536646883708e-06,
+                "maximum_absolute": 0.003488795612128115
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 9.541410240885408e-07,
+                "maximum_absolute": 0.0008882241389187584
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.3371764523908496
+          },
+          {
+            "time": 0.5,
+            "loss": [
+              0.7927589416503906,
+              0.46388280391693115,
+              5.142434120178223,
+              0.9580798149108887,
+              16.956937789916992,
+              3.2394797801971436,
+              0.6634435057640076,
+              20.58112907409668,
+              14.2023344039917,
+              21.606454849243164
+            ],
+            "code_mse": [
+              0.03528803959488869,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061119556427,
+              0.49610745906829834,
+              0.08181384205818176,
+              0.057278361171483994,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              757.4708862304688,
+              411.6217041015625,
+              4926.5908203125,
+              909.0186767578125,
+              16460.830078125,
+              3157.665771484375,
+              606.1651611328125,
+              19858.185546875,
+              13746.509765625,
+              21032.0078125
+            ],
+            "gradient_norm": 6.2279510498046875,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.4908248268630374e-07,
+              "maximum_absolute": 1.043081283569336e-07
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 4.106130367678233e-06,
+                "maximum_absolute": 0.009137856355209806
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 1.0602731246505962e-06,
+                "maximum_absolute": 0.0022747028963294724
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.09466965310275555
+          },
+          {
+            "time": 0.9,
+            "loss": [
+              0.5792766809463501,
+              0.3958326280117035,
+              4.102940559387207,
+              0.6419687271118164,
+              12.530339241027832,
+              2.4352340698242188,
+              0.42239823937416077,
+              12.764938354492188,
+              9.150748252868652,
+              16.183135986328125
+            ],
+            "code_mse": [
+              0.03528803959488869,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061119556427,
+              0.49610745906829834,
+              0.08181384205818176,
+              0.057278361171483994,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              543.9886474609375,
+              343.571533203125,
+              3887.09716796875,
+              592.9075927734375,
+              12034.2314453125,
+              2353.420166015625,
+              365.1198425292969,
+              12041.99609375,
+              8694.923828125,
+              15608.689453125
+            ],
+            "gradient_norm": 4.06198787689209,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.4678132681805164e-07,
+              "maximum_absolute": 8.195638656616211e-08
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 1.8476782797996353e-06,
+                "maximum_absolute": 0.0024579846127892324
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 5.497299111141734e-07,
+                "maximum_absolute": 0.0006057182795871086
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.11063697189092636
+          }
+        ],
+        "passed": true,
+        "codec_parameters": 7423361,
+        "codec_frozen_and_unchanged": true,
+        "retained_derivatives_sha256": "f6040269724957c87ad148718322c90abc112717a5d4fa0b5e6198ee78c69b6f",
+        "process_peak_rss_mib": 774.19140625,
+        "peak_allocated_vram_gib": null,
+        "timing_scope": "first actual decoder-only JVP loss and residual-gradient invocation per time; no full actor",
+        "no_optimization_or_new_generation": true,
+        "language_quality_claim": false,
+        "general_ilm_goal_complete": false
+      }
+    },
+    "gpu": {
+      "source_report_sha256": "50f3362c735a4a2cca9a56cb17aebb23c3e040115e70633c9a0a5e9732945d5c",
+      "report": {
+        "identity": {
+          "source_commit": "ec27bfd1d6b54a46a1aa6b20f63a1326fcb17cc6",
+          "sources": {
+            "scripts/preflight_decoder_pullback_v82.py": "1a7f36c141062a1c901bd612b9233e4b34f6598573921401991b65ee4dd81f5e",
+            "references/decoder_pullback_v82_preflight_protocol.md": "975a710be8997ab44c4b54a9648bb4feb3d8a676751af1b5c286ec927ebec347",
+            "ilm/visual_lm/decoder_pullback.py": "b89db7a29cfb4a680c209c8fc50eca705adfdf7ad6604a1c627638219a080c22",
+            "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+            "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+            "scripts/probe_native_corpus_fit_v80.py": "1824b741e8f16db34ca813242fd9fe6fa5cba2737d9b69a11afd01c8f77362ad",
+            "scripts/train_native_chinese_v80.py": "2d9c7f735994cd17b6d3b42ce58dd78e50b36aa181d09da493cfb45f83caeac0"
+          },
+          "source_report_sha256": "c179a8aa6282b5fed0c44798166b7b98d7930db2d36370c1fea288027fb00076",
+          "source_verification_sha256": "6661fce86f2fd31b590eddf2d9a64c370b925e89dc4aaa6c30b2bad291e38a87",
+          "bindings": [
+            {
+              "case": 0,
+              "source": "cmrc/TRAIN_2646_QUERY_0.pt",
+              "blocks": 1,
+              "trace_sha256": "89c1b34cf4f6aa0a14206d0d448550e8c70bd7347d9719bf87b67b5f5509118a",
+              "header_sha256": "84d4d2719291617be246d0b863d03fe0bb0c1d6f4da869dbe230387989a38ea2"
+            },
+            {
+              "case": 1,
+              "source": "cmrc/TRAIN_2646_QUERY_2.pt",
+              "blocks": 2,
+              "trace_sha256": "04501915614a6a0cdd7732120a1b8149939b9a37824f9523d54ebe1159789254",
+              "header_sha256": "6127a3b75e6560fe93a177cebf22811fa6d71c53a47944e3df195916041ba4b7"
+            },
+            {
+              "case": 2,
+              "source": "cmrc/TRAIN_1613_QUERY_0.pt",
+              "blocks": 3,
+              "trace_sha256": "19ea189b4d00dd9b96fe3fd562f143dcb0aeb52b42876e77a74a2c67347958ac",
+              "header_sha256": "9db9a6efba9832bbbe41d8f4f0972666bf630a3096b51df82d1a33ebae61cbd5"
+            },
+            {
+              "case": 3,
+              "source": "cmrc/TRAIN_1613_QUERY_2.pt",
+              "blocks": 4,
+              "trace_sha256": "d44c0ef880aa84b62feab23bffc05604ec8d69742971a5432d908e340782e2aa",
+              "header_sha256": "80069fc7f5193a36a7aa30f3a2340a969ce6f04dc0bbf7e38e9e45b776592cd3"
+            }
+          ],
+          "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+          "device": "cuda:0",
+          "torch_version": "2.3.0+cu121",
+          "seed": 20268200,
+          "times": [
+            0.0,
+            0.5,
+            0.9
+          ],
+          "strength": 0.001,
+          "model_updates": 0,
+          "language_quality_claim": false
+        },
+        "rows": [
+          {
+            "time": 0.0,
+            "loss": [
+              0.26915717124938965,
+              0.26855480670928955,
+              2.4699575901031494,
+              0.39656326174736023,
+              5.860822677612305,
+              0.5882431268692017,
+              0.3704471290111542,
+              9.708799362182617,
+              6.19202184677124,
+              9.31118392944336
+            ],
+            "code_mse": [
+              0.035288043320178986,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061115831136703,
+              0.4961075186729431,
+              0.08181384205818176,
+              0.05727836489677429,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              233.86911010742188,
+              216.293701171875,
+              2254.1142578125,
+              347.50213623046875,
+              5364.71484375,
+              506.4292907714844,
+              313.16876220703125,
+              8985.8564453125,
+              5736.197265625,
+              8736.73828125
+            ],
+            "gradient_norm": 2.7282018661499023,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.317887282311415e-07,
+              "maximum_absolute": 4.470348358154297e-08
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 3.582467402172001e-06,
+                "maximum_absolute": 0.003839747748145328
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 9.361841018770478e-07,
+                "maximum_absolute": 0.0010454871012655076
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.3104657959192991
+          },
+          {
+            "time": 0.5,
+            "loss": [
+              0.7927588224411011,
+              0.46388277411460876,
+              5.142434120178223,
+              0.9580798149108887,
+              16.956937789916992,
+              3.2394795417785645,
+              0.6634435653686523,
+              20.581130981445312,
+              14.2023344039917,
+              21.606454849243164
+            ],
+            "code_mse": [
+              0.035288043320178986,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061115831136703,
+              0.4961075186729431,
+              0.08181384205818176,
+              0.05727836489677429,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              757.4707641601562,
+              411.6216735839844,
+              4926.5908203125,
+              909.0186767578125,
+              16460.830078125,
+              3157.66552734375,
+              606.1651611328125,
+              19858.1875,
+              13746.509765625,
+              21032.0078125
+            ],
+            "gradient_norm": 6.2279510498046875,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.347296075012794e-07,
+              "maximum_absolute": 1.1920928955078125e-07
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 4.113360089652505e-06,
+                "maximum_absolute": 0.009168373990178225
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 1.060083147511872e-06,
+                "maximum_absolute": 0.0023052203749784894
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.016857466660439968
+          },
+          {
+            "time": 0.9,
+            "loss": [
+              0.5792767405509949,
+              0.3958325684070587,
+              4.102940559387207,
+              0.6419687271118164,
+              12.530338287353516,
+              2.4352338314056396,
+              0.422398179769516,
+              12.764938354492188,
+              9.15074634552002,
+              16.183134078979492
+            ],
+            "code_mse": [
+              0.035288043320178986,
+              0.052261095494031906,
+              0.21584320068359375,
+              0.049061115831136703,
+              0.4961075186729431,
+              0.08181384205818176,
+              0.05727836489677429,
+              0.7229418754577637,
+              0.45582425594329834,
+              0.5744450092315674
+            ],
+            "decoder_tangent_mse": [
+              543.9887084960938,
+              343.57147216796875,
+              3887.096923828125,
+              592.9075927734375,
+              12034.23046875,
+              2353.419921875,
+              365.11981201171875,
+              12041.99609375,
+              8694.921875,
+              15608.6875
+            ],
+            "gradient_norm": 4.061988353729248,
+            "gradient_adjoint_check": {
+              "relative_l2": 3.305317902686716e-07,
+              "maximum_absolute": 8.777715265750885e-08
+            },
+            "finite_difference_checks": [
+              {
+                "step": 0.001,
+                "relative_l2": 1.827300872723682e-06,
+                "maximum_absolute": 0.0024274670453223735
+              },
+              {
+                "step": 0.0005,
+                "relative_l2": 5.238478704141792e-07,
+                "maximum_absolute": 0.0005953473357180883
+              }
+            ],
+            "original_mse_exact": true,
+            "noisy_input_gradient_is_none": true,
+            "physical_logits_equal": true,
+            "forward_and_backward_seconds": 0.018453624099493027
+          }
+        ],
+        "passed": true,
+        "codec_parameters": 7423361,
+        "codec_frozen_and_unchanged": true,
+        "retained_derivatives_sha256": "6f8df6be5cb2ad3fc141886018361e78f2163c940ef154f156bc7becb4134356",
+        "process_peak_rss_mib": 1238.23828125,
+        "peak_allocated_vram_gib": 0.16324281692504883,
+        "timing_scope": "first actual decoder-only JVP loss and residual-gradient invocation per time; no full actor",
+        "no_optimization_or_new_generation": true,
+        "language_quality_claim": false,
+        "general_ilm_goal_complete": false
+      }
+    }
+  },
+  "scope": "actual frozen decoder derivative checks; no complete-actor quality result",
+  "training_or_generation_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
