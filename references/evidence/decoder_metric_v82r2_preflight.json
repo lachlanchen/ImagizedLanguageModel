@@ -1,0 +1,245 @@
+{
+  "preflight": {
+    "identity": {
+      "source_commit": "c23f120ecb8b94fe00d670a7eede946ccf8058b5",
+      "sources": {
+        "scripts/train_decoder_metric_v82.py": "879c1a081923179f83ee8e78c6867b9aa065c9cecf7738fd1e1c6bc0a98e6646",
+        "references/decoder_metric_v82_protocol.md": "dceae5ef92f5ead988d786890efea55b95fcd63b826aad9e66d4b12a665f86e7",
+        "references/decoder_metric_v82r2_protocol.md": "92ddc3f64e46732aecb9b139dacf179172693c3b9efffbefb899569b87a994c3",
+        "ilm/visual_lm/ragged_metric_image_continuation.py": "3d5fb5a484d71088c3c863016722bf8bf1d6bc52a4e130a0b240666877c528fe",
+        "ilm/visual_lm/decoder_pullback.py": "b89db7a29cfb4a680c209c8fc50eca705adfdf7ad6604a1c627638219a080c22",
+        "ilm/visual_lm/metric_image_continuation.py": "a0aa5e553557cfd9abf785092e20a9fa05090dbb41353301ee0a4f57deb62bff",
+        "scripts/evaluate_trained_readout_v81.py": "9eb87226dcb445d8ed2460db274b3cb245a1f0b0e426b81986265f17798971b4",
+        "scripts/train_adaptive_readout_v81.py": "f6a4dc08922c539cee990fe9be73b6b187410718416277b88031176ea312b7b9",
+        "references/adaptive_readout_v81r2_protocol.md": "7474bf3141862370c683d028080c1b960dd864b4db6dbca553b64365eef2f61a",
+        "references/adaptive_readout_v81_protocol.md": "2f0df2cc6c00bde99516b09563bcb5a8639b8b84bce0eef7546a7b1f10ac272b",
+        "ilm/visual_lm/adaptive_image_continuation.py": "9d838d371ea34ed3c642d51853f55f2cab8db43772424414e207355f29854b65",
+        "scripts/train_native_chinese_v80.py": "2d9c7f735994cd17b6d3b42ce58dd78e50b36aa181d09da493cfb45f83caeac0",
+        "references/native_chinese_v80_protocol.md": "56a00987d22d46725174dcfc58c7abb037b8720df6ab6f15c5f02c7496f53c0d",
+        "ilm/visual_lm/native_image_actor.py": "8c8a31365c1a2114a713d35af5c2200dfbcf0023be8f9e2f5e9d795891866cf5",
+        "ilm/visual_lm/native_image_continuation.py": "ba5b31bd95b594693ab78140f75170b1367b58ef940c6bfa941633443cb7a5e3",
+        "ilm/visual_lm/suffix_attention_mask.py": "1182d7103759ef75bea1bc414ec2639b71bfee43147dd442f374c451c072f504",
+        "ilm/visual_lm/clean_writing_flow.py": "5e52da7fe71abb4cc214c1de11a591b33d06005e8711583e651a9a7965429889",
+        "ilm/visual_lm/full_rank_writing_flow.py": "3d8ae3856295bb6d84c6392a004153b909b3b91243f416028a7decb51782ff18",
+        "ilm/visual_lm/semantic_writing_model.py": "83a9dbad1867e1b6fc2cce0fd5e95e4f91a482c2ddba85c65be3e78a5a77e479",
+        "ilm/visual_lm/semantic_writing_data.py": "19d83df0fe491ea074f1fa7419ebb52a35df69a69b76259b90e7f37878f6d586",
+        "ilm/visual_lm/complete_writing_data.py": "b787e7d0f14bef27658cab335682a59f5f1390eb95b8f6772f94ae9208df5c2d",
+        "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+        "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+        "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+        "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+        "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+        "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+        "scripts/probe_native_corpus_fit_v80.py": "1824b741e8f16db34ca813242fd9fe6fa5cba2737d9b69a11afd01c8f77362ad",
+        "references/native_corpus_fit_v80_protocol.md": "fd837b94ef8461b466d5d9e30697cd59e2efe917fe1aabcfddc69ffc61b8ed64",
+        "scripts/probe_corpus_fit_v75.py": "5239e5a0e7e4aff08fc0269e6add9af68348452e07c33049bfe68c88e793bee6",
+        "references/evidence/clean_learning_v74_result.json": "86809a7b29bc57c84ee4991d10d320e04031cf56da2ad6d49724e693aa20f884",
+        "scripts/audit_native_chinese_v80.py": "ab346678a69a025102c3ca5c07133177f84fd33e86b17f200eeb9232096328fa",
+        "scripts/audit_native_neural_transcripts_v80.py": "c6ccebe1e6ca7848473cf3910ff145847046cb30e387d80df0894d7932ab0603",
+        "scripts/score_native_training_samples_v80.py": "dfbc78891a4460d95395790399bb490d93b26d1311d3202c9234e59611f11442",
+        "scripts/cache_semantic_images_v72.py": "a9455cdeb0e8bb1f68695ecbadf0f79f49870fd014497f97dcb16d058946a6a0",
+        "scripts/train_clean_corpus_v75.py": "e583a721acf95b72ab5906e2bd87ee200341403101018a4da42e4681001892cf",
+        "scripts/infer_semantic_ilm_v72.py": "38196a45e26e8ab13221d996c30fb5eff3289e2394a9da149da1246d2ee80961",
+        "scripts/verify_codec_language_v68.py": "8753a2ccfe49d9bef27182fb895fbb9154112ea752add965cef71b1a2027a185"
+      },
+      "purpose": "matched_state_only_decoder_metric",
+      "warm_checkpoint_sha256": "7da31d229f4c5cc5bb51a5f5776a2c6e61e444f171ba412de547165911cb532c",
+      "previous_evaluation_verification_sha256": "6661fce86f2fd31b590eddf2d9a64c370b925e89dc4aaa6c30b2bad291e38a87",
+      "derivative_preflight_sha256": {
+        "cpu": "add07522e7d042b16da5c04636abe168ccc86a139db3e43a655e078bbf7d92e2",
+        "gpu": "50f3362c735a4a2cca9a56cb17aebb23c3e040115e70633c9a0a5e9732945d5c"
+      },
+      "arms": {
+        "control": 0.0,
+        "metric": 0.001
+      },
+      "seed": 20268210,
+      "updates_per_arm": 2000,
+      "batch_size": 4,
+      "training_examples": 32,
+      "external_pretraining": true,
+      "training_only": true,
+      "language_quality_claim": false,
+      "general_ilm_goal_complete": false
+    },
+    "passed": true,
+    "arms": {
+      "control": {
+        "future_max_abs_error": 0.0,
+        "padding_max_abs_error": 0.0,
+        "padding_bit_exact": true,
+        "incremental_max_abs_error": 3.62396240234375e-05,
+        "incremental_max_scaled_error": 0.3600120544433594,
+        "comparison": "per-state infinity norm: max(1e-4, 1e-5 * reference infinity norm)",
+        "original_absolute_1e4_check_pass": true,
+        "ragged_owning_history_execution": true,
+        "rows": [
+          {
+            "update": 1,
+            "indices": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "loss": 0.2704589366912842,
+            "flow": 0.2704589068889618,
+            "clean_mse": 0.17522794008255005,
+            "decoder_tangent_mse": 0.0,
+            "metric_strength": 0.0,
+            "stop": 3.512538881977889e-08,
+            "gradient_norm": 2.7587337493896484,
+            "gradient_groups": {},
+            "lr": 0.0001
+          },
+          {
+            "update": 2,
+            "indices": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "loss": 0.3662107288837433,
+            "flow": 0.3662106990814209,
+            "clean_mse": 0.05332251265645027,
+            "decoder_tangent_mse": 0.0,
+            "metric_strength": 0.0,
+            "stop": 2.883629868222215e-08,
+            "gradient_norm": 6.799522876739502,
+            "gradient_groups": {
+              "image_input.": true,
+              "flow.": true,
+              "stop.": true,
+              "start_query": true,
+              "adapter.down": true,
+              "adapter.up": true
+            },
+            "lr": 0.0001
+          },
+          {
+            "update": 3,
+            "indices": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "loss": 0.37280431389808655,
+            "flow": 0.37280428409576416,
+            "clean_mse": 0.07451381534337997,
+            "decoder_tangent_mse": 0.0,
+            "metric_strength": 0.0,
+            "stop": 2.1579108278046988e-08,
+            "gradient_norm": 4.466821193695068,
+            "gradient_groups": {},
+            "lr": 0.0001
+          }
+        ],
+        "strength_zero_objective_exact": true,
+        "exact_model_optimizer_noise_resume": true,
+        "frozen_parameters_bit_exact": true,
+        "prompt_kv_bit_exact": true,
+        "physical_feedback_replayed": true,
+        "generated_blocks": 1,
+        "trainable_parameters": 53096961,
+        "complete_actor_parameters": 7583225971
+      },
+      "metric": {
+        "future_max_abs_error": 0.0,
+        "padding_max_abs_error": 0.0,
+        "padding_bit_exact": true,
+        "incremental_max_abs_error": 4.9591064453125e-05,
+        "incremental_max_scaled_error": 0.27910345792770386,
+        "comparison": "per-state infinity norm: max(1e-4, 1e-5 * reference infinity norm)",
+        "original_absolute_1e4_check_pass": true,
+        "ragged_owning_history_execution": true,
+        "rows": [
+          {
+            "update": 1,
+            "indices": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "loss": 1.9441430568695068,
+            "flow": 1.9441430568695068,
+            "clean_mse": 0.17522794008255005,
+            "decoder_tangent_mse": 859.2315063476562,
+            "metric_strength": 0.001,
+            "stop": 3.512538881977889e-08,
+            "gradient_norm": 53.79745864868164,
+            "gradient_groups": {},
+            "lr": 0.0001
+          },
+          {
+            "update": 2,
+            "indices": [
+              0,
+              1,
+              3,
+              2
+            ],
+            "loss": 10.417089462280273,
+            "flow": 10.417089462280273,
+            "clean_mse": 0.05186346545815468,
+            "decoder_tangent_mse": 1103.3343505859375,
+            "metric_strength": 0.001,
+            "stop": 7.533827783845481e-08,
+            "gradient_norm": 260.8553771972656,
+            "gradient_groups": {
+              "image_input.": true,
+              "flow.": true,
+              "stop.": true,
+              "start_query": true,
+              "adapter.down": true,
+              "adapter.up": true
+            },
+            "lr": 0.0001
+          },
+          {
+            "update": 3,
+            "indices": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "loss": 25.24959945678711,
+            "flow": 25.24959945678711,
+            "clean_mse": 0.07153059542179108,
+            "decoder_tangent_mse": 1875.5792236328125,
+            "metric_strength": 0.001,
+            "stop": 4.932527630785444e-08,
+            "gradient_norm": 588.0537109375,
+            "gradient_groups": {},
+            "lr": 0.0001
+          }
+        ],
+        "strength_zero_objective_exact": null,
+        "exact_model_optimizer_noise_resume": true,
+        "frozen_parameters_bit_exact": true,
+        "prompt_kv_bit_exact": true,
+        "physical_feedback_replayed": true,
+        "generated_blocks": 1,
+        "trainable_parameters": 53096961,
+        "complete_actor_parameters": 7583225971
+      }
+    },
+    "peak_allocated_vram_gib": 18.61500120162964,
+    "training_fit_measured": false,
+    "language_quality_claim": false,
+    "general_ilm_goal_complete": false
+  },
+  "source_preflight_report_sha256": "e3c6095e7ec6f2e0ebef6929443297439f76f12948ef16dfcc195d734b27034b",
+  "preserved_original_failure": {
+    "stage": "preflight",
+    "error": "AssertionError('native causal/normwise-padding/incremental mismatch: (0.0, 1.0037422180175781, 0.6186962127685547)')",
+    "language_quality_claim": false
+  },
+  "source_failure_sha256": "b7ac24184274eb1b2ad1b5aa2b55691a55ac33a328e6f1c431eb14045f288c97",
+  "training_fit_measured": false,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
