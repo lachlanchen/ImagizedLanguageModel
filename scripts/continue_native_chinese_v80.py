@@ -111,6 +111,12 @@ if __name__=="__main__":
         if "--run" in sys.argv:
             path=Path(sys.argv[sys.argv.index("--run")+1]).resolve()
             if path.exists():
-                atomic_json(path/"audit_pipeline.json",dict(stage="watcher_stopped",watcher_pid=None,
-                    child_pid=None,error_type=type(error).__name__,message=str(error)))
+                status_path=path/"audit_pipeline.json"
+                previous=json.loads(status_path.read_text()) if status_path.exists() else {}
+                # A rejected duplicate never owns the live coordinator's
+                # status. Keep an identified failed phase when one exists.
+                if previous.get("watcher_pid") in (None,os.getpid()):
+                    atomic_json(status_path,dict(previous,
+                        stage="failed" if previous.get("stage")=="failed" else "watcher_stopped",
+                        watcher_pid=None,child_pid=None,error_type=type(error).__name__,message=str(error)))
         raise

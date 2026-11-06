@@ -61,6 +61,9 @@ and `CUDA_VISIBLE_DEVICES=''`. The fixed audit reports Chinese gates and English
 as untrained transfer. The optional `scripts/continue_native_chinese_v80.py`
 waits for the owned training job and performs those two phases sequentially.
 Do not launch another training or generation process while this job owns GPU0.
+The coordinator also scores each completed four-answer training diagnostic on
+CPU as it appears, saving `pixel_scores.json` and an unchanged output/target
+contact sheet. This starts no additional model-generation job.
 
 ## Standalone image and typed prompts
 
