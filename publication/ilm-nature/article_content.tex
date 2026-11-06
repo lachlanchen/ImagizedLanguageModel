@@ -637,14 +637,26 @@ prefill, permitting attention only to the final 52 task positions reduces exact
 source-helper copy answers from 8/12 to 0/12 and training answers from 19/32 to
 2/32 (Supplementary Note 36 and Fig.~S13). Original cache positions, rotary
 coordinates and first decisions are preserved. This rejects the tested frozen
-suffix interface without proving a lower bound on learned compression. A new
-continuous image actor retains all 36 native layers and full prompt KV. Actual
-forward, gradient, causal-mask and emitted-image feedback checks use 16.638\,GiB
-on one GPU, but involve no optimization or language qualification. Its first
-writing block still depends on the initial reader state alone. The complete
-7.583B-parameter model includes externally pretrained weights; 46.900M image
-interface parameters are trainable. Training that interface remains an
-experiment, rather than a demonstrated solution to conditional language.
+suffix interface without proving a lower bound on learned compression. The
+next continuous image actor retains all 36 native layers and full prompt KV.
+Initial forward, gradient, causal-mask and emitted-image feedback checks use
+16.638\,GiB on one GPU, with zero optimization updates. Its first writing block
+still depends on the initial reader state alone. The complete trained actor
+has 7.583B parameters including externally pretrained weights; 46.900M image
+interface parameters are trainable.
+
+Subsequent training completes 40,000 updates over all 3,193 Chinese examples,
+using 18.298\,GiB peak allocated memory, but gives 0/128 exact development
+images, 36.504\% foreground F1 and 0/64 both-correct pairs (Supplementary
+Note 37 and Fig.~S14). Erasing the question reduces F1 to 25.404\%; the paired
+gain is 11.101 percentage points, with a 95\% article-bootstrap interval of
+[8.578, 14.018]. All streams stop, but stopping and input sensitivity do not
+establish accurate answers. On the same 32 training questions, free generation
+gives 46.235\% F1 and correct-history prediction gives 50.241\%, with no exact
+images in either path. Supplied-code decoding gives 99.9953\% F1 and 28/32
+exact images. Thus conditional prediction remains inaccurate under correct
+history; generated-history errors cannot be the sole explanation. These
+physical-image scores are not a separate measurement of semantic accuracy.
 
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual

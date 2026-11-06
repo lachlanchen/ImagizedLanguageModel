@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 09:54:50 2026
-%DIF ADD new.tex   Fri Nov  6 09:54:50 2026
+%DIF DEL old.tex   Fri Nov  6 23:34:41 2026
+%DIF ADD new.tex   Fri Nov  6 23:34:41 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -2160,6 +2160,129 @@ with zero optimizer updates, not language quality. Both charts and the diagram
 are native editable PowerPoint objects.}{fig:s13-native-context}
 
 \clearpage
+\section*{\DIFadd{Supplementary Note 37: completed native training and prediction failure}}
+\DIFadd{The native-context actor in Note 36 subsequently completes the declared
+40,000-update Chinese optimization. All 3,193 admitted CMRC training records
+are used, with 160,000 example draws and 10,016 actual prompt prefills. The
+complete trained actor contains 7,583,221,875 parameters, including 46,899,713
+trainable image-input, writing and stopping parameters. The inherited visual
+and contextual weights remain frozen and externally pretrained. This total
+describes the complete trained actor; the earlier execution-fixture count
+in Note 36 remains a distinct historical measurement. Active training time
+is 45,426.51\,s, with 18.298\,GiB peak allocated memory on GPU0.
+}
+
+\DIFadd{The original complete image/code cache, codec and 32-step clean-code sampler
+are unchanged. Training uses batch four, AdamW $(0.9,0.95)$, weight decay
+0.01 and gradient norm clip one. Learning rate warms linearly to $10^{-4}$
+over 500 updates and decays by cosine to $10^{-5}$. A shuffled source sampler
+selects 32 prompt images per CPU RAM pool. Each is prefilled once, checked
+against its original prompt-only memory, and reused for 128 updates with a
+separately shuffled batch sampler. The final pool contributes 64 updates.
+This bounded-memory reuse is not independent sampling from the whole corpus.
+Only true preceding image codes enter the causal training history; the
+current and future answer blocks are excluded from their own conditions.
+Inference re-encodes the actual emitted pixels. Internal white answer regions
+are retained, and only the two structural white termination blocks are removed.
+}
+
+\DIFadd{The original fixed development audit generates 384 streams: normal and
+question-erased versions of 128 Chinese and 64 English questions. The control
+uses the same random numbers and the normal prompt's layout. English examples
+are excluded from this optimization and are reported as untrained transfer.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+\DIFadd{Question images }& \DIFadd{Exact images }& \DIFadd{Foreground F1 (\%) }& \DIFadd{Stopped (\%)}\\
+\midrule
+\DIFadd{Chinese normal ($n=128$) }& \DIFadd{0 }& \DIFadd{36.504 }& \DIFadd{100}\\
+\DIFadd{Chinese question erased ($n=128$) }& \DIFadd{0 }& \DIFadd{25.404 }& \DIFadd{100}\\
+\DIFadd{English normal ($n=64$) }& \DIFadd{0 }& \DIFadd{5.861 }& \DIFadd{100}\\
+\DIFadd{English question erased ($n=64$) }& \DIFadd{0 }& \DIFadd{5.965 }& \DIFadd{100}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{The Chinese both-correct count is 0/64 question pairs. Mean question gain is
+0.111009, with 95\% article-bootstrap interval $[0.085778,0.140177]$, using
+64 articles, 2,000 resamples and seed 20266831. The six unchanged gates require
+exact-image rate at least 0.5, foreground F1 at least 0.8, both-correct rate
+at least 0.35, question gain at least 0.1, a positive lower gain bound and
+stopping rate at least 0.9. The first three fail; the remaining three pass.
+The model therefore fails qualification. Stopping does not establish the
+correct answer length, and question sensitivity does not establish a correct
+answer. This development set has been reused; no sealed evaluation examples
+are opened by this audit. Exact raster agreement and aligned ink overlap
+are not independently measured semantic accuracy.
+}
+
+\DIFadd{The fixed-cohort diagnosis reuses all 32 training questions in the same
+sixteen distinct-answer, same-passage pairs as Note 33. Actual prompt-prefill
+memories and initial states match the authenticated training cache. Each free
+call receives only its prompt prefix. Targets become available to the
+correct-history and supplied-code controls after that free call finishes.
+}
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Path on the 32 training questions }& \DIFadd{Exact images }& \DIFadd{Foreground F1 (\%)}\\
+\midrule
+\DIFadd{Autonomous writing }& \DIFadd{0 }& \DIFadd{46.235}\\
+\DIFadd{Correct history and reference length supplied }& \DIFadd{0 }& \DIFadd{50.241}\\
+\DIFadd{Target codes supplied to the fixed decoder }& \DIFadd{28 }& \DIFadd{99.9953}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{Free first-block F1 is 71.544\%. The first blocks in free and correct-history
+paths are identical in all 32 cases, before their histories differ. All free
+streams stop; all 32 reference-history stop traces agree with the supplied
+continuation and terminal positions. Correct-history images receive no
+autonomous-answer credit. Architecture and training histories differ from
+the earlier writer, so matching this cohort is not a single-factor causal
+comparison. The poor correct-history predictions locate a failure in
+conditional code prediction under the tested representation and training
+procedure, without selecting a unique architectural or optimization cause.
+}
+
+\DIFadd{The first-block conditioning probe keeps the target and one noise draw fixed
+while swapping the owning question state for its same-passage partner. At
+$t=0$, target-code MSE is 0.78324 with the owning state and 1.38188 with the
+partner; at $t=1$, it is 0.03024 and 0.08427. Constructed target-assisted inputs
+are not free sampler trajectories. Conditional sensitivity therefore coexists
+with inaccurate sampled writing.
+}
+
+\DIFadd{Independent CPU checks reconstruct all 384 development prompt layouts and
+rescore the emitted pixels. Aggregation shares the producer's statistical
+implementation. The 32-case verification independently reconstructs prompts,
+replays all supplied-code decodes, decodes retained correct-history coordinates
+and recomputes image agreement. It does not independently replay the complete
+inherited contextual forward pass. The original diagnostic launch error is
+retained and contributes no prediction. Source hashes, every per-case score
+and all 32 unaltered comparison sets remain in
+}\path{references/evidence/native_chinese_v80_result.json} \DIFadd{and
+}\path{references/evidence/native_corpus_fit_v80_result.json}\DIFadd{.
+}
+
+\plate{Figure_S14_native_failure}{\textbf{Full-context training leaves a
+conditional writing failure.} \textbf{a}, Foreground F1 for 128 Chinese
+development questions with normal or erased question ink. Both paths have
+zero exact reference images. \textbf{b}, The same 32 training questions under
+free generation, correct-history prediction with supplied answer length,
+and supplied-code reconstruction. The exact counts are 0/32, 0/32 and 28/32.
+Correct-history images are controls, not autonomous answers. \textbf{c}, The
+first question pair in the fixed cohort, showing complete raw references,
+free answers, correct-history outputs and supplied-code reconstructions.
+All 32 cases are retained in the source receipt; no output repair is applied.
+Charts, labels and image objects are editable in the matching PowerPoint.
+The measurements establish a failed image writer, not semantic accuracy or
+general language capability.}{fig:s14-native-failure}
+
+\clearpage
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2286,7 +2409,25 @@ measurement checks are defined in
 
 \DIFdelbegin %DIFDELCMD < \begin{thebibliography}{18}
 %DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \begin{thebibliography}{19}
+\DIFdelend \DIFaddbegin \DIFadd{The completed native-context run in Note 37 uses the compatible existing
+Python 3.12 environment and authenticated local image, code and weight caches.
+GPU phases require \texttt{CUDA\_VISIBLE\_DEVICES=0} and
+\texttt{CUBLAS\_WORKSPACE\_CONFIG=:4096:8}. Its training and complete audit
+entry points are }\path{scripts/train_native_chinese_v80.py} \DIFadd{and
+}\path{scripts/audit_native_chinese_v80.py}\DIFadd{; the latter's \texttt{--verify}
+phase runs with CUDA hidden. The fixed training-cohort controls use
+}\path{scripts/probe_native_corpus_fit_v80.py}\DIFadd{, with separate
+\texttt{--stage prepare}, \texttt{--stage evaluate} and
+\texttt{--stage verify} invocations, and the same explicit source run and
+fresh output directory. Preparation and verification run with CUDA hidden;
+evaluation uses the GPU environment above. Exact arguments, source identities
+and retained failure handling are specified in
+}\path{references/native_chinese_v80_protocol.md}\DIFadd{,
+}\path{references/native_corpus_fit_v80_protocol.md} \DIFadd{and
+}\path{docs/native-image-continuation.md}\DIFadd{.
+}
+
+\begin{thebibliography}{19}
 \DIFaddend \small
 \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.

@@ -15,13 +15,25 @@ builder remain inside the named baseline.
 
 ## Current result
 
-The [context-visibility diagnostic](../../references/native_context_v80_result.md)
-is now included in Supplementary Note 36 and Figure S13. Masking older source
+The completed [native-context model](../../references/native_chinese_v80_result.md)
+fails after 40,000 updates over 3,193 Chinese examples: **0/128 exact Chinese
+development images**, **36.504% foreground F1**, and **0/64 both-correct pairs**.
+Question erasure gives 25.404% F1. On the fixed 32 training questions,
+correct-history prediction still gives 0/32 exact images and 50.241% F1,
+compared with 99.9953% from supplied-code reconstruction. Note 37 and Figure
+S14 report this failure, with native editable charts and unmodified output
+images. The current builders are `native_failure_figures.py` and
+`build_native_failure_publication.py`. These are image-agreement measurements,
+not a separately measured semantic accuracy score.
+
+The earlier [context-visibility diagnostic](../../references/native_context_v80_result.md)
+is retained in Supplementary Note 36 and Figure S13. Masking older source
 keys reduces exact copy/training answers from 8/12 and 19/32 to 0/12 and 2/32.
 The figure also shows the implemented native-context image actor, explicitly
-labelled as untrained execution. The original failed image-language outcome
-below remains the language result. The current builders are
-`native_context_figures.py` and `build_native_context_publication.py`.
+labelled as its original untrained execution check. The subsequent trained
+native actor also fails, as reported above. The earlier builders
+`native_context_figures.py` and `build_native_context_publication.py` remain
+historical entry points for that execution/visibility package.
 
 The full clean writer fails after 40,000 updates on all 12,976 admitted
 examples: **2/128 exact Chinese answers**, **37.631% foreground F1**, and

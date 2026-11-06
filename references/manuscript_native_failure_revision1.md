@@ -1,6 +1,6 @@
 # Completed native prediction failure: manuscript revision plan
 
-Status: scoped, not yet executed. Baseline: git b4855be. This unit updates the
+Status: executed and verified. Baseline: git b4855be. This unit updates the
 research manuscript with the completed native training, original fixed audit
 and fixed-cohort prediction diagnosis. It does not report the newly running
 adaptive-readout experiment as a language result.
@@ -44,6 +44,9 @@ objective remains unachieved.
   results, reused development status, all32 diagnostic controls, verification
   scope and the original failed diagnostic launch. Preserve Note36 as the
   previous execution/visibility experiment.
+- Add the training, full-audit and fixed-cohort entry points for Note37 to the
+  existing Reproduction section, including deterministic CUDA and CPU-only
+  verification requirements. Do not rewrite unrelated reproduction commands.
 - Add Figure S14 and a 29th slide to the editable figure deck. Panel a shows
   Chinese normal/erased foreground F1 on a 0–100% scale. Panel b shows all32
   free/correct-history/supplied-code F1 and exact counts. Panel c shows the
@@ -78,3 +81,40 @@ shared RAM/swap and project processes before rendering; do not overlap heavy
 builds or a second GPU/model job. Verify local Nutstore copies and five LATEST
 aliases after visual review; cloud propagation is not inferred from a local
 copy. Record actual build/render/sync results here when the unit is executed.
+
+## Completed revision and verification
+
+The abstract and article now report the completed native failure and
+correct-history controls, with external pretraining and complete parameter
+counts preserved. Note37 contains the original optimization, sample reuse,
+six gates, Chinese/English normal/erased results, fixed32 controls and
+verification limits. Reproduction adds the corresponding code entry points.
+A clear page before Note37 flushes the earlier S13 figure before the new
+results, preserving all28 preceding supplement pages pixel-for-pixel.
+
+S14 is slide29. It contains two native editable charts with source-bound
+workbooks, explicit F1 percentage units and integer axis ticks, plus all eight
+unchanged PNGs from the first fixed question pair. Native parts of the earlier
+28 slides, all their fresh-rendered appearances, the canonical PDF prefix and
+all64 earlier individual figure assets are unchanged. The unavailable artifact
+library (`ERR_MODULE_NOT_FOUND`) required retaining the existing native OOXML
+and headless LibreOffice route. The owned converter exited; no desktop was
+started. Inherited structure-tree import warnings do not alter the verified
+pixels or qpdf results; tagged accessibility is not claimed.
+
+The current article/review/supplement have 14/26/33 pages, and the V68-baseline
+redlines have 27/33 pages. All seven paper/figure PDFs pass qpdf, with no
+overfull boxes or undefined references/citations. The article's complete
+14-page layout overview and detailed pages1/11, review pages1/12, supplement
+pages29/30/32, corresponding redline pages and new figure were inspected.
+Final redline-article rebuild pixels match the inspected pages exactly.
+Receipts are under `publication/ilm-nature/evidence/native_failure_*`.
+
+The dated local Nutstore package is
+`ILM_NatureStyle_20261106_V81_NativeFailure`; five LATEST aliases and package
+files are hash-verified after review. Previous aliases are backed up; cloud
+propagation is unverified. Only a small CPU document/conversion workload ran
+beside the existing GPU training job, with shared memory above the required
+limit. No second GPU/model job or idle GUI stack was launched. The running
+adaptive-readout experiment has no language result in this revision, and the
+general ILM objective remains unachieved.
