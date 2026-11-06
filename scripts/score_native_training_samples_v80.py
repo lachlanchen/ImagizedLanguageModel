@@ -91,12 +91,15 @@ def run(run_dir):
                 if (answer_dir/"answer.png").exists():
                     raise ValueError("empty output has a stale preview")
             score=physical_scores(actual<128,[target],result["stopped"])
+            first=physical_scores(actual[:,:64]<128,[target[:,:64]],True)
             rows.append(dict(source=source["source"],update=source["update"],
-                raw_sha256=sha(answer_dir/"answer.pt"),target_blocks=target.shape[1]//64,**score))
+                raw_sha256=sha(answer_dir/"answer.pt"),target_blocks=target.shape[1]//64,
+                first_block_foreground_f1=first["foreground_f1"],first_block_exact=first["exact"],**score))
             views.append(dict(position=int(answer_dir.name),source=source["source"],target=target.numpy(),actual=actual))
         contact_sheet(views,folder/"all_outputs_and_targets.png")
         report=dict(update=rows[0]["update"],cases=4,exact=sum(r["exact"] for r in rows),
             mean_foreground_f1=float(np.mean([r["foreground_f1"] for r in rows])),
+            first_block_mean_foreground_f1=float(np.mean([r["first_block_foreground_f1"] for r in rows])),
             stopped=sum(r["stopped"] for r in rows),rows=rows,training_examples_only=True,
             cohort_varies_with_replay_pool=True,checkpoint_forward_independently_replayed=False,
             raw_pixel_scoring=True,no_output_repair=True,generalization_claim=False,
