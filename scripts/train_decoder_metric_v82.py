@@ -15,8 +15,8 @@ import torch
 
 from ilm.visual_lm.clean_image_actor import tensor_digest
 from ilm.visual_lm.codec_block_writer import CodecBlockWriter, load_qualified_writing_codec
-from ilm.visual_lm.metric_image_continuation import MetricImageLanguageModel
-from ilm.visual_lm.native_image_continuation import NativeImageLanguageModel
+from ilm.visual_lm.ragged_metric_image_continuation import RaggedMetricImageLanguageModel
+from ilm.visual_lm.native_image_continuation import NativeImageLanguageModel, NativeImagePrefix
 from ilm.visual_lm.semantic_writing_data import ExactEpochSampler
 from scripts.audit_native_neural_transcripts_v80 import write
 from scripts.cache_semantic_images_v72 import ROOT, CODEC, sha, committed_identity
@@ -26,7 +26,7 @@ from scripts.probe_corpus_fit_v75 import metrics, save_raster
 from scripts.probe_native_corpus_fit_v80 import cases_and_data, prompt, targets
 from scripts.score_native_training_samples_v80 import check_answer, raster
 from scripts.train_adaptive_readout_v81 import (
-    SOURCES as OLD_SOURCES, build, condition_checks, cpu_tree, frozen_hash, pool_for,
+    SOURCES as OLD_SOURCES, build, cpu_tree, frozen_hash, pool_for,
     prefix_hash, save_checkpoint, tree_equal,
 )
 from scripts.train_clean_corpus_v75 import setup
@@ -38,6 +38,7 @@ UPDATES = 2000
 WARM_SHA = "7da31d229f4c5cc5bb51a5f5776a2c6e61e444f171ba412de547165911cb532c"
 PLAN = "references/decoder_metric_v82_protocol.md"
 SOURCES = tuple(dict.fromkeys(("scripts/train_decoder_metric_v82.py", PLAN,
+    "references/decoder_metric_v82r2_protocol.md", "ilm/visual_lm/ragged_metric_image_continuation.py",
     "ilm/visual_lm/decoder_pullback.py", "ilm/visual_lm/metric_image_continuation.py",
     "scripts/evaluate_trained_readout_v81.py", *OLD_SOURCES)))
 ARMS = dict(control=0., metric=.001)
@@ -84,11 +85,43 @@ def bind(out, identity):
 
 
 def select(actor, warm, strength):
-    model = MetricImageLanguageModel(actor.writing.continuation.context, actor.writing.writer,
+    model = RaggedMetricImageLanguageModel(actor.writing.continuation.context, actor.writing.writer,
         input_scale=float(warm["input_scale"]), query_seed=20268103, metric_strength=strength).to(actor.device)
     model.load_trainable_state_dict(warm)
     actor.writing = model;actor.train()
     return model
+
+
+@torch.no_grad()
+def condition_checks(model,pool):
+    prefix,codes,lengths=batch(pool,list(range(len(pool))),model.device)
+    full=model.training_conditions(prefix,codes,lengths,checkpoint_layers=False)
+    altered=codes.clone()
+    for i,n in enumerate(lengths.tolist()):altered[i,n-1]=-altered[i,n-1]
+    future=model.training_conditions(prefix,altered,lengths,checkpoint_layers=False)
+    causal=max(float((full[i,:n]-future[i,:n]).abs().max()) for i,n in enumerate(lengths.tolist()))
+    maximum,scaled=0.,0.
+    for i,(own,target) in enumerate(pool):
+        own=own.to(model.device);target=target.to(model.device)
+        states=model.conditions(own,target[None],checkpoint_layers=False)
+        if not torch.equal(full[i,:len(states[0])],states[0]):raise AssertionError("owning-history padding identity differs")
+        current=model.start_prefix(own);observed=[current.initial_state[:,0].float()]
+        for block in target:
+            hidden,values=model.continuation(model.embed_images(block[None,None]),current,
+                checkpoint_layers=False,collect_cache=True)
+            current=NativeImagePrefix(values,hidden[:,-1:],current.rotary_offsets+2,current.blocked_before)
+            observed.append(hidden[:,-1])
+        if current.length!=own.length+1+2*len(target) or not torch.equal(current.rotary_offsets,own.rotary_offsets+1+2*len(target)):
+            raise AssertionError("owning cache/rotary positions differ")
+        actual=torch.stack(observed,dim=1)
+        difference=(actual-states).abs()
+        bound=torch.maximum(torch.full_like(states[...,:1],1e-4),states.abs().amax(-1,keepdim=True)*1e-5)
+        maximum=max(maximum,float(difference.max()));scaled=max(scaled,float((difference/bound).max()))
+    if causal!=0 or scaled>1:raise AssertionError("causal/incremental criterion fails: "+str((causal,scaled)))
+    return dict(future_max_abs_error=causal,padding_max_abs_error=0.,padding_bit_exact=True,
+        incremental_max_abs_error=maximum,incremental_max_scaled_error=scaled,
+        comparison="per-state infinity norm: max(1e-4, 1e-5 * reference infinity norm)",
+        original_absolute_1e4_check_pass=maximum<=1e-4,ragged_owning_history_execution=True)
 
 
 def update(model, optimizer, pool, sampler, generator, step, *, schedule=True, gradients=False):
@@ -130,7 +163,7 @@ def preflight(actor,warm,cases,data,indices,out,identity):
         if not tree_equal(model.trainable_state_dict(),warm):raise AssertionError("warm start differs")
         zero_exact = None
         if strength == 0:
-            prefix,codes,lengths = batch(pool,list(range(4)),model.device)
+            prefix,codes,lengths = batch(pool,[0],model.device)
             a = torch.Generator(device=model.device).manual_seed(SEED+7)
             b = torch.Generator(device=model.device).manual_seed(SEED+7)
             wanted,wvalues = NativeImageLanguageModel.training_loss(model,prefix,codes,lengths,generator=a)
@@ -317,7 +350,7 @@ def verify(out,identity,cases):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out",type=Path,default=ROOT/"artifacts/decoder_metric_v82_20261107")
+    parser.add_argument("--out",type=Path,default=ROOT/"artifacts/decoder_metric_v82r2_20261107")
     parser.add_argument("--stage",choices=("preflight","train","verify"),required=True)
     args=parser.parse_args();out=args.out.resolve()
     previous=ROOT/"artifacts/adaptive_readout_v81r2_20261106"

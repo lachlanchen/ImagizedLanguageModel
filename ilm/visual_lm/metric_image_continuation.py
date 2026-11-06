@@ -17,11 +17,14 @@ class MetricImageLanguageModel(AdaptiveImageLanguageModel):
             raise ValueError("finite nonnegative writing metric strength required")
         self.metric_strength = metric_strength
 
+    def training_conditions(self, prefix, codes, lengths):
+        return self.conditions(prefix, codes)
+
     def training_loss(self, prefix, codes, lengths, *, generator, writer_blocks=16):
         if (lengths.shape != (len(codes),) or bool(((lengths<1)|(lengths>codes.shape[1])).any())
                 or writer_blocks<1):
             raise ValueError("complete nonempty image targets and per-example lengths required")
-        states = self.conditions(prefix, codes)
+        states = self.training_conditions(prefix, codes, lengths)
         batches, positions, weights, continuing, terminal = [], [], [], [], []
         with torch.autocast(device_type=self.device.type, enabled=False):
             logits = self.stop(states.float()).squeeze(-1)
