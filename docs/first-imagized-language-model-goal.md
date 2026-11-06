@@ -1,6 +1,32 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-05
+Updated: 2026-11-07
+
+## Immediate decision: demonstrate learning before scaling
+
+The current direction has not produced a useful ILM. The latest completed
+[V81 readout repair](../references/adaptive_readout_v81_result.md) produces
+0/32 pixel-exact autonomous answers on seen training questions, with 72.748%
+foreground F1. Correct answer history raises F1 to only 79.629%; supplied
+target codes decode at 99.9953%. Raw answers visibly deteriorate. This isolates
+inaccurate conditional writing before generated-history drift can explain the
+failure, without uniquely identifying its learning cause.
+
+The actor retains a 7.583B-parameter external foundation and trains 53.10M
+parameters. It does not establish the lightweight independent learner or
+efficiency advantage sought here. The ongoing V82 matched objective comparison
+has no completed quality result yet. Finish and score that fixed comparison;
+the existing criteria determine whether the recipe earns further evaluation.
+If neither arm fits autonomous writing adequately, reject scaling the recipe.
+A training-fit pass must still be followed by new-copy and held-out
+prompt-dependent language evaluation. Execution checks and publication updates
+cannot advance the capability stage.
+
+The [current direction assessment](../references/ilm_direction_assessment_20261107.md)
+sets out the evidence, unresolved causes and decision sequence. The older
+checkpoint ledger below remains historical evidence, not a current success
+claim. The north star remains a useful image-native language model on one
+4090-class GPU, with quality demonstrated through its actual generated answers.
 
 ## Current engineering checkpoint
 
