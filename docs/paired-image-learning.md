@@ -26,9 +26,18 @@ The source snapshot must contain the pinned model index, transformer, VAE
 and scheduler files; hashes are checked before model loading. If acquiring
 it elsewhere, download only these components from the declared revision,
 reuse a verified shared installation, and omit text-encoder/tokenizer weights.
-The generic-condition compiler is documented in the
-[baseline guide](image-edit-language-baseline.md). It runs offline once,
-before any generator process; its external language pretraining is disclosed.
+Compile that constant once from the verified shared encoder if it is absent:
+
+```bash
+env CUDA_VISIBLE_DEVICES=0 PYTHONNOUSERSITE=1 PYTHONPATH=. "$ILM_IMAGE_PYTHON" scripts/prepare_paired_image_condition.py --conditioner ../LocalLLM/.local/models/image-generation/z-image-turbo-f332072a --output artifacts/paired_condition
+export ILM_FIXED_CONDITION=artifacts/paired_condition/condition.pt
+```
+
+This standalone compiler needs no earlier experimental checkpoint or training
+run. It reuses the verified generic-condition implementation and encoder
+weights, runs offline once, and exits before the generator starts. Its external
+language pretraining is disclosed. Reuse an existing verified constant instead
+of recompiling it for every question.
 
 Preparation needs the existing `data/visual_qa/cmrc2018_short/train.jsonl`
 and an installed Noto Sans CJK SC font. It renders complete passages without
