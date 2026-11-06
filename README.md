@@ -56,6 +56,14 @@ the same images, while the image writer remains at zero on both sets. All
 KV history for continuation; this does not prove the compact 52-state memory
 is sufficient. It localizes available content before the new writing path.
 
+A subsequent [context-visibility experiment](references/native_context_v80_result.md)
+reduces those source-helper answers to 0/12 copies and 2/32 training answers when
+older visual keys are masked. The next implementation retains the full native
+context and learns continuous image input/output layers. Its actual forward,
+gradient and physical-feedback checks fit one 4090, but they are untrained
+execution checks. The [Chinese training pipeline](docs/native-image-continuation.md)
+has no language-success claim until its complete autonomous output audit passes.
+
 ## Earlier controls and the failed velocity writer
 
 ![Implemented visual-semantic training and physical image-output feedback](publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
