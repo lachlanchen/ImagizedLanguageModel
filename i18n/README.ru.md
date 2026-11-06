@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Текущее состояние: генерация языка в виде изображений пока не прошла проверку пригодности к практическому использованию. В эксперименте по исправлению на 32 обучающих вопросах обе модели дали 0/32 ответов с полным попиксельным совпадением; F1 штрихов составил 72.748% у адаптированной модели и 71.177% у контрольной. Это показатели совпадения изображений, а не семантической точности. [Результат и все исходные изображения](../references/adaptive_readout_v81_result.md).
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

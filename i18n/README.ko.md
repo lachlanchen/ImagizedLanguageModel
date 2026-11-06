@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+현재 상태: 이미지 기반 언어 생성은 아직 실용 수준을 검증하지 못했습니다. 학습에 사용된 32개 질문으로 실시한 수정 실험에서 두 모델 모두 픽셀 단위로 완전히 일치한 답변은 0/32였습니다. 전경 F1은 적응 모델 72.748%, 대조 모델 71.177%입니다. 이는 이미지 일치도이며 의미 정확도가 아닙니다. [결과 및 모든 원본 이미지](../references/adaptive_readout_v81_result.md).
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

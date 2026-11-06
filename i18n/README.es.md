@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Estado actual: la escritura lingüística mediante imágenes sigue sin estar validada para su uso. En la comparación de reparación con 32 preguntas de entrenamiento, ambos modelos obtuvieron 0/32 respuestas idénticas píxel a píxel; el F1 de los trazos fue 72.748% en el modelo adaptado y 71.177% en el control. Son medidas de coincidencia de imágenes, no de precisión semántica. [Resultado y todas las imágenes originales](../references/adaptive_readout_v81_result.md).
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

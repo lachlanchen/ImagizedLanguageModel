@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den praktischen Einsatz validiert. Im Reparaturvergleich mit 32 bekannten Trainingsfragen liefern beide Modelle 0/32 pixelgenau übereinstimmende Antworten; der Vordergrund-F1 beträgt 72.748% beim angepassten Modell und 71.177% bei der Kontrolle. Das misst Bildübereinstimmung, nicht semantische Richtigkeit. [Ergebnis und sämtliche unveränderten Bilder](../references/adaptive_readout_v81_result.md).
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

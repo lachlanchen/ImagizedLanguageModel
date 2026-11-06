@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+当前状态：图像语言生成仍未达到可用标准。使用32道已见训练题的修复对照实验中，两组逐像素完全一致的自主回答均为0/32；适应模型的前景F1为72.748%，对照模型为71.177%。这些是图像一致性指标，不是语义正确率。[完整结果及全部原始图片](../references/adaptive_readout_v81_result.md)。
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

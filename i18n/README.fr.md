@@ -1,5 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+État actuel : la génération de langage sous forme d’images reste non validée pour un usage réel. Sur les 32 questions d’entraînement du test de réparation, les deux modèles obtiennent 0/32 réponses identiques pixel par pixel ; le F1 des traits est de 72.748% pour le modèle adapté et de 71.177% pour le témoin. Ces mesures portent sur les images, pas sur la justesse sémantique. [Résultat et toutes les images brutes](../references/adaptive_readout_v81_result.md).
+
+
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 

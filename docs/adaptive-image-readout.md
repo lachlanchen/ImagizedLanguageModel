@@ -1,5 +1,15 @@
 # Trainable readout for continuous image-language generation
 
+**Completed result: the repair fails.** Both final checkpoints give 0/32
+pixel-exact autonomous answers. Adapted foreground F1 is 72.748%, versus
+71.177% for the continued control. Correct history raises adapted F1 to
+79.629%; supplied-code reconstruction gives 99.9953%. The original training
+execution stops evaluation at an over-strict floating-point comparison after
+both arms finish their updates. A separate evaluation replays all 33 retained
+autonomous outputs exactly, retains every final answer and independently
+scores all 64. See the [result and raw images](../references/adaptive_readout_v81_result.md).
+This checkpoint is unqualified; the following records the experimental setup.
+
 The native-context model fails to predict clean answer images even when given
 correct answer history. The [completed diagnosis](../references/native_corpus_fit_v80_result.md)
 gives 50.241% foreground F1 under that control, compared with 99.9953% from
@@ -48,17 +58,28 @@ controls are retained too. No best-checkpoint selection or early stopping uses
 these answers. Runtime files stay in
 `artifacts/adaptive_readout_v81r2_20261106/`.
 
-After both arms finish, independently verify on CPU:
+The original evaluation stops at adapted case 00 and remains preserved.
+Do not rerun training or overwrite its partial outputs. Evaluate the completed
+checkpoints through the separately specified incremental controls:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 CUDA_DEVICE_ORDER=PCI_BUS_ID \
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=4 \
+PYTHONPATH=. artifacts/external/mixar_env_py312/bin/python \
+  scripts/evaluate_trained_readout_v81.py --stage evaluate
+```
+
+Independently verify the separate evaluation on CPU:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=4 PYTHONPATH=. \
 artifacts/external/mixar_env_py312/bin/python \
-  scripts/train_adaptive_readout_v81.py --stage verify
+  scripts/evaluate_trained_readout_v81.py --stage verify
 ```
 
 The provisional training-fit requirement is at least 24/32 exact free answer
 images and foreground F1 at least 0.98, with an improvement over the matched
-control. No experimental training-fit result is available at the time of this
-preflight record. Passing that requirement would still leave new-prompt,
+control. The completed comparison fails three of these four criteria.
+Passing that requirement would still leave new-prompt,
 copying and development evaluation necessary. A usable general ILM and an
 efficiency advantage over conventional language models remain unestablished.

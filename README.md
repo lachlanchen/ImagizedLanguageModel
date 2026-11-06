@@ -20,9 +20,28 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current result: the full clean writer still fails
+## Current result: autonomous image-language writing still fails
 
-The latest **64.52M-parameter writer** completes 40,000 updates on 12,976
+The completed native-context model gives **0/128 exact Chinese development
+images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
+40,000 updates. A subsequent matched readout repair on 32 seen training
+questions also fails: **0/32 exact autonomous answers in both arms**, with
+**72.748% F1** for the adapted model and **71.177%** for the continued control.
+Correct answer history raises adapted F1 to only 79.629%, while supplied-code
+reconstruction reaches 99.9953%. The conditional predictor still fails before
+generated-history errors can explain the result. **There is no qualified
+usable ILM checkpoint in this repository.**
+
+See the [completed native result](references/native_chinese_v80_result.md),
+[matched repair and every raw answer](references/adaptive_readout_v81_result.md),
+and [current manuscript](publication/ilm-nature/README.md). These are image
+agreement measurements, not semantic accuracy. The adapted actor retains a
+7.583B-parameter externally pretrained foundation; its 53.10M trainable
+parameters do not establish a lightweight model trained from scratch.
+
+## Earlier full clean writer
+
+The earlier **64.52M-parameter writer** completes 40,000 updates on 12,976
 Chinese/English examples. Its autonomous audit produces **2/128 exact Chinese
 answers**, **37.631% foreground F1**, and **0/64 both-correct question pairs**.
 Three of the six original Chinese requirements fail. Question ink affects
@@ -58,11 +77,10 @@ is sufficient. It localizes available content before the new writing path.
 
 A subsequent [context-visibility experiment](references/native_context_v80_result.md)
 reduces those source-helper answers to 0/12 copies and 2/32 training answers when
-older visual keys are masked. The next implementation retains the full native
-context and learns continuous image input/output layers. Its actual forward,
-gradient and physical-feedback checks fit one 4090, but they are untrained
-execution checks. The [Chinese training pipeline](docs/native-image-continuation.md)
-has no language-success claim until its complete autonomous output audit passes.
+older visual keys are masked. The subsequent implementation retains the full
+native context and learns continuous image input/output layers. Its completed
+[Chinese training pipeline](docs/native-image-continuation.md) also fails the
+autonomous audit reported above; fitting one 4090 is an execution result.
 
 ## Earlier controls and the failed velocity writer
 
