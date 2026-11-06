@@ -184,7 +184,8 @@ def generate(out):
                         if masked:stored["mask"]=mask.cpu()
                         del cache,vector
                     vectors=stored["states"]
-                    if (not torch.equal(vectors["masked_original"],vectors["masked_poisoned"])
+                    if (not all(bool(torch.isfinite(v).all()) for v in vectors.values())
+                            or not torch.equal(vectors["masked_original"],vectors["masked_poisoned"])
                             or float((vectors["full_original"]-vectors["full_poisoned"]).abs().max())<=1e-5
                             or float((vectors["full_original"][0,0]-baseline["result"]["hidden_states"][1]).abs().max())>1e-5):
                         raise AssertionError("native masking/pre-poison or original continuation replay failed")
@@ -194,6 +195,8 @@ def generate(out):
                 for index in range(64):
                     states.append(state[0,-1].float().cpu())
                     logits=F.linear(state[:,-1].float(),head.float())
+                    if not torch.isfinite(logits).all():
+                        raise FloatingPointError("nonfinite masked helper projection")
                     token=int(logits.argmax(-1));ids.append(token);selected.append(float(logits[0,token]));del logits
                     if token in eog:
                         stopped=True;break
@@ -236,6 +239,8 @@ def verify(out):
             or report["preflight_sha256"]!=sha(out/"preflight.pt")):
         raise ValueError("source, native implementation or preflight changed")
     preflight=torch.load(out/"preflight.pt",map_location="cpu",weights_only=True)
+    if preflight["source_call_sha256"]!=sha(SOURCE/"outputs/copy_00_normal.pt"):
+        raise ValueError("preflight comparator identity changed")
     for (k,v),(pk,pv) in zip(preflight["original"],preflight["poisoned"]):
         if (not torch.equal(k[...,-52:,:],pk[...,-52:,:]) or not torch.equal(v[...,-52:,:],pv[...,-52:,:])
                 or not bool((pk[...,:-52,:]==7).all()) or not bool((pv[...,:-52,:]==-11).all())):
@@ -246,12 +251,15 @@ def verify(out):
             or not bool((mask[...,length-52:]==0).all())):
         raise ValueError("preflight additive mask differs from the declared visible regions")
     states=preflight["states"]
-    if not torch.equal(states["masked_original"],states["masked_poisoned"]):
+    if (not all(bool(torch.isfinite(v).all()) for v in states.values())
+            or not torch.equal(states["masked_original"],states["masked_poisoned"])):
         raise ValueError("excluded values affected masked native continuation")
     poison_effect=float((states["full_original"]-states["full_poisoned"]).abs().max())
     if poison_effect<=1e-5:
         raise ValueError("unmasked poison positive control is ineffective")
     baseline=torch.load(SOURCE/"outputs/copy_00_normal.pt",map_location="cpu",weights_only=True)
+    if preflight["source_first_id"]!=baseline["result"]["selected_ids"][0]:
+        raise ValueError("preflight did not use the owning original source decision")
     replay_error=float((states["full_original"][0,0]-baseline["result"]["hidden_states"][1]).abs().max())
     if replay_error>1e-5:
         raise ValueError("original unmasked continuation did not replay")
