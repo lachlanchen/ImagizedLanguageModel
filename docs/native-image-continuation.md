@@ -16,6 +16,12 @@ pretrained weights and has 7.583B complete parameters, including 46.900M
 trainable interface parameters. No tokenizer, OCR or teacher service is needed
 by the deployed actor. These properties alone do not guarantee correct answers.
 
+An exact image answer requires a learned stop and the same complete binary
+raster dimensions and pixel values as the reference. Foreground F1 measures
+aligned ink-pixel overlap. These training snapshots do not include a separate
+semantic-transcription accuracy score; the raw images remain available for
+inspection. The original physical-image evaluation gates are unchanged.
+
 The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
 contains all four scheduled training-example answers: 0/4 exact, 35.217% full
 foreground F1, 69.845% first-block F1 and four stopped streams. Only 256 of the
