@@ -61,22 +61,31 @@ def coordinate(run):
         if missing>=2:
             raise RuntimeError("owned training process is absent; preserve its state and do not audit an incomplete checkpoint")
         time.sleep(10)
-    phases=[("audit",False),("verify",True)]
-    for stage,cpu in phases:
+    phases=[("audit",False,"scripts/audit_native_chinese_v80.py"),
+        ("verify",True,"scripts/audit_native_chinese_v80.py"),
+        ("standalone",False,"scripts/check_completed_native_prompt_routes_v80.py")]
+    for stage,cpu,script in phases:
         env=dict(os.environ,CUDA_VISIBLE_DEVICES="" if cpu else "0")
-        command=[sys.executable,"scripts/audit_native_chinese_v80.py","--run",str(run)]
+        command=[sys.executable,script,"--run",str(run)]
         if cpu: command.append("--verify")
         with (run/(stage+".log")).open("a") as output:
-            process=subprocess.Popen(command,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT)
+            process=subprocess.Popen(command,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT,
+                start_new_session=True)
             atomic_json(run/"audit_pipeline.json",dict(stage=stage,watcher_pid=os.getpid(),child_pid=process.pid))
             try:
                 code=process.wait()
             finally:
+                # The standalone check owns CLI grandchildren in this new
+                # process group. Do not leave their loaded GPU model orphaned
+                # when the coordinator is interrupted or its child exits.
+                try: os.killpg(process.pid,signal.SIGTERM)
+                except ProcessLookupError: pass
                 if process.poll() is None:
-                    process.terminate()
                     try: process.wait(timeout=20)
                     except subprocess.TimeoutExpired:
-                        process.kill();process.wait()
+                        try: os.killpg(process.pid,signal.SIGKILL)
+                        except ProcessLookupError: pass
+                        process.wait()
         if code:
             atomic_json(run/"audit_pipeline.json",dict(stage="failed",failed_phase=stage,
                 exit_code=code,watcher_pid=None,child_pid=None))

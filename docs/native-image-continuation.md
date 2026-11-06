@@ -61,3 +61,58 @@ and `CUDA_VISIBLE_DEVICES=''`. The fixed audit reports Chinese gates and English
 as untrained transfer. The optional `scripts/continue_native_chinese_v80.py`
 waits for the owned training job and performs those two phases sequentially.
 Do not launch another training or generation process while this job owns GPU0.
+
+## Standalone image and typed prompts
+
+`scripts/infer_native_chinese_v80.py` accepts `--prompt page.png`, `--text`, or
+`--text-file prompt.txt`. Typed text uses the same optional host renderer as
+the prepared corpus; only its pixels reach the neural model. Explicit line
+breaks and empty lines are preserved. Unknown font glyphs and oversized inputs
+raise an error. For marks outside available fonts, supply their actual image.
+The image path accepts grayscale pages without recognizing their characters.
+
+Input preparation can run while training is active:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
+artifacts/external/mixar_env_py312/bin/python scripts/infer_native_chinese_v80.py \
+  --text '材料：甲有三本书，乙有五本书。问题：谁有五本书？' \
+  --prepare-only --output artifacts/my_prepared_prompt
+```
+
+This creates `input/prompt.png`, the exact input tensor and an input receipt.
+It does not load a checkpoint, allocate CUDA or produce an answer. The CLI
+configures the existing Linux native font libraries before using the optional
+text renderer. Image-only input does not need those rendering libraries.
+
+After the declared training and queued benchmark have finished, generate from
+an image with an optional visible instruction:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
+PYTHONPATH=. artifacts/external/mixar_env_py312/bin/python \
+  scripts/infer_native_chinese_v80.py --prompt page.png --layout page \
+  --instruction '请执行下方图片中的要求。' --output artifacts/my_image_answer
+```
+
+Replace `--prompt`, `--layout` and `--instruction` with `--text '…'` or
+`--text-file prompt.txt` for typed input. Instructions are rendered above the
+image with a white gap, preserving the prepared image pixels exactly. The
+fixed input budget is 512 visual cells; the output cap defaults to 128 blocks.
+The default checkpoint is the native run's final `checkpoint_latest.pt`.
+The loader rejects partial training and untrained execution fixtures.
+
+The result contains `output/answer.pt`, its exact `output/answer.png` when
+nonempty, input rasters and a provenance/timing report. No glyph repair,
+reference answer or OCR is used during generation. Completion of the training
+budget alone does not qualify language quality.
+
+The sequential coordinator also runs
+`scripts/check_completed_native_prompt_routes_v80.py` after the complete fixed
+audit. It calls the actual CLI separately for the existing first copy image,
+its exact typed prompt and that image with a visible instruction. Typed/image
+pixel and generated-output equivalence is checked with the same random seed.
+All three raw answers and their copy scores are retained under
+`standalone_inference/`. These interface calls are additional diagnostics; the
+original 384-output quality gates remain unchanged.
