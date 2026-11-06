@@ -1,6 +1,6 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-目前狀態：圖像語言生成仍未達到可用標準。使用32道已見訓練題的修復對照實驗中，兩組逐像素完全一致的自主回答均為0/32；適應模型的前景F1為72.748%，對照模型為71.177%。這些是圖像一致性指標，不是語義正確率。[完整結果及全部原始圖片](../references/adaptive_readout_v81_result.md)。
+目前狀態：圖像語言生成仍未達到可用標準。最新的解碼器損失對照實驗使用32道已見訓練題，兩組逐像素完全一致的自主回答均為0/32；解碼器敏感損失使前景F1從對照組的85.984%降至70.009%。即使給出正確的前文，F1也僅為92.430%和75.116%；直接提供答案編碼時，兩組的解碼重建均達到99.9953%。四項修復標準全部未通過，不再擴大這一訓練方案。這些是圖像一致性指標，不是語義正確率，尚無通過可用性驗證的ILM檢查點。[完整結果及全部原始圖片](../references/decoder_metric_v82_result.md)。
 
 
 

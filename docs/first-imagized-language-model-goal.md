@@ -4,23 +4,26 @@ Updated: 2026-11-07
 
 ## Immediate decision: demonstrate learning before scaling
 
-The current direction has not produced a useful ILM. The latest completed
-[V81 readout repair](../references/adaptive_readout_v81_result.md) produces
-0/32 pixel-exact autonomous answers on seen training questions, with 72.748%
-foreground F1. Correct answer history raises F1 to only 79.629%; supplied
-target codes decode at 99.9953%. Raw answers visibly deteriorate. This isolates
-inaccurate conditional writing before generated-history drift can explain the
-failure, without uniquely identifying its learning cause.
+The current direction has not produced a useful ILM. The completed
+[V82 matched comparison](../references/decoder_metric_v82_result.md) produces
+0/32 pixel-exact autonomous answers in both arms on seen training questions.
+The decoder-sensitive treatment lowers foreground F1 from 85.984% to 70.009%.
+Correct answer history reaches 92.430% for the control and 75.116% for the
+treatment; supplied target codes decode at 99.9953% in both. Raw answers
+visibly deteriorate. This isolates inaccurate conditional writing before
+generated-history drift alone can explain the failure, without uniquely
+identifying its learning cause. All four original repair criteria fail.
 
 The actor retains a 7.583B-parameter external foundation and trains 53.10M
 parameters. It does not establish the lightweight independent learner or
-efficiency advantage sought here. The ongoing V82 matched objective comparison
-has no completed quality result yet. Finish and score that fixed comparison;
-the existing criteria determine whether the recipe earns further evaluation.
-If neither arm fits autonomous writing adequately, reject scaling the recipe.
-A training-fit pass must still be followed by new-copy and held-out
-prompt-dependent language evaluation. Execution checks and publication updates
-cannot advance the capability stage.
+efficiency advantage sought here. Reject scaling the current loss-repair
+recipe. A replacement must first demonstrate reliable visual writing without
+supplied answers, then new-string copying and held-out prompt-dependent
+language evaluation, including two different questions about the same passage.
+Readable copying alone does not establish language learning. A prepared image
+generator baseline remains an untested alternative, with external pretraining;
+it is not a demonstrated ILM or a reason to claim success. Execution checks
+and publication updates cannot advance the capability stage.
 
 The [current direction assessment](../references/ilm_direction_assessment_20261107.md)
 sets out the evidence, unresolved causes and decision sequence. The older

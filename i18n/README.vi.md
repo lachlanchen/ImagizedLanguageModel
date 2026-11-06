@@ -1,6 +1,6 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh chưa được xác nhận là có thể sử dụng thực tế. Trong thử nghiệm sửa mô hình với 32 câu hỏi đã dùng để huấn luyện, cả hai mô hình đều đạt 0/32 câu trả lời trùng khớp từng điểm ảnh; F1 nét chữ là 72.748% cho mô hình thích nghi và 71.177% cho mô hình đối chứng. Đây là độ khớp ảnh, không phải độ chính xác ngữ nghĩa. [Kết quả và toàn bộ ảnh gốc](../references/adaptive_readout_v81_result.md).
+Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh chưa được xác nhận là có thể sử dụng thực tế. Trong phép so sánh hàm mất mát bộ giải mã mới nhất với 32 câu hỏi đã dùng để huấn luyện, cả hai mô hình đều có 0/32 câu trả lời tự sinh trùng khớp từng điểm ảnh. Hàm mất mát xét độ nhạy của bộ giải mã làm F1 nét chữ giảm từ 85.984% ở nhóm đối chứng xuống 70.009%. Khi được cung cấp phần trả lời trước đó chính xác, F1 chỉ đạt 92.430% và 75.116%; khi được cung cấp trực tiếp mã ảnh đáp án, cả hai đều tái tạo đạt 99.9953%. Cả bốn tiêu chí sửa mô hình đều thất bại, nên không mở rộng quy mô phương án này. Đây là độ khớp ảnh, không phải độ chính xác ngữ nghĩa; chưa có checkpoint ILM nào được xác nhận là hữu dụng. [Kết quả và toàn bộ ảnh gốc](../references/decoder_metric_v82_result.md).
 
 
 

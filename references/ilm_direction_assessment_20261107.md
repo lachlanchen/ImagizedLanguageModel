@@ -2,20 +2,21 @@
 
 Assessment date: 7 November 2026. The completed experiments do not establish
 a useful ILM. The image-input/image-output research goal remains open; the
-current learning recipe has not earned a scale-up. The unfinished V82 matched
-comparison has no final quality result at this assessment date.
+current learning recipe has not earned a scale-up. The completed V82 matched
+comparison fails all four original repair criteria and is rejected for scaling.
 
-The latest completed [readout comparison](adaptive_readout_v81_result.md)
-provides three distinct measurements on the same 32 seen training questions:
+The latest completed [readout comparison](decoder_metric_v82_result.md)
+provides three distinct measurements on the same 32 seen training questions.
+The metric arm is worse than the continued control (85.984% autonomous F1):
 
-| Path | Adapted model result | What it tests |
+| Path | Metric-arm result | What it tests |
 | --- | --- | --- |
-| Autonomous answer, generated-pixel feedback | 0/32 pixel-exact; 72.748% foreground F1 | Actual complete image generation |
-| Correct preceding answer codes and known length | 0/32 pixel-exact; 79.629% foreground F1 | Conditional prediction with answer-history assistance |
+| Autonomous answer, generated-pixel feedback | 0/32 pixel-exact; 70.009% foreground F1 | Actual complete image generation |
+| Correct preceding answer codes and known length | 0/32 pixel-exact; 75.116% foreground F1 | Conditional prediction with answer-history assistance |
 | Supplied target codes through the decoder | 28/32 pixel-exact; 99.9953% foreground F1 | Physical representation and decoding of known answers |
 
 Pixel equality is stricter than readability, and foreground F1 is not semantic
-accuracy. The [complete raw galleries](evidence/adaptive_readout_v81_result/all_cases_24_31.png)
+accuracy. The [complete raw galleries](evidence/decoder_metric_v82_result/README.md)
 also show visible character corruption. This is not merely a strict score
 rejecting otherwise legible answers. The fixed-case gallery includes short
 outputs that look readable as well as longer outputs that deteriorate; neither
@@ -63,26 +64,34 @@ and attempted [full native adaptation](native_pixel_instruction_v61_result.md);
 that adaptation also failed. Reusing its name or adding an adversarial or
 reinforcement objective is not, by itself, a new solution.
 
-The decision sequence remains capability-first:
+The [PNG-only position diagnosis](evidence/decoder_metric_v82_position_diagnosis.json)
+reproduces all six final summaries from the public pixels. Control writing
+falls from 99.467% F1 on the first block to 76.237% on the remaining stream;
+the metric arm falls from 97.018% to 47.493%. Remaining-stream averages cover
+the 28 longer references; first-block averages cover all 32. Correct history
+raises the longer tails to 87.724% and 56.682%, respectively, still short of
+clean writing. This is a measured prediction failure, not evidence that a
+particular new objective will fix it.
 
-1. Finish the already running V82 comparison without changing its cases,
-   budgets, sampler or criteria. Retain every output. No concurrent second
-   model job is needed.
-2. Apply its original gates: metric-arm autonomous exact answers at least
-   24/32, foreground F1 at least 0.98, and both improved over the matched
-   control. Report absolute fit and the metric's relative effect separately.
-   A control that fits while the metric fails to improve it rejects the
-   metric benefit; it does not erase the control's measured fit.
-3. If neither arm demonstrates adequate autonomous fit, reject scaling this
-   recipe. Choose a bounded diagnostic that distinguishes failure hypotheses,
-   using the existing correct-history and supplied-code controls. Preserve the
-   earlier direct-versus-flow evidence; do not rerun the same failed treatment
-   under a different name.
-4. A training-fit pass only permits further evaluation. Reliable new-string
-   copying and held-out prompt-dependent answers, including different questions
-   about the same passage, remain necessary before claiming language learning.
-   Copying alone cannot pass the language requirement.
-5. Compare efficiency only at matched task quality, including all inherited
+The decision is to stop scaling this repair. More data, a new loss coefficient,
+an image-generator name or another publication figure does not repair an
+unproved conditional learning path. The prepared
+[image-generator baseline](image_edit_baseline_protocol.md) has no executed
+model result and no local learning result; it remains a separate hypothesis.
+
+A replacement must be assessed in this order:
+
+1. Demonstrate accurate, autonomous visual writing from the prompt alone.
+   Keep supplied-code and correct-history controls to distinguish physical
+   rendering from conditional prediction. Preserve the earlier
+   direct-versus-flow evidence rather than relabelling it as a new treatment.
+2. Demonstrate readable new-string copying, including changed strings and
+   lengths. Assess the actual unmodified output, not only latent loss or an
+   aggregate image score. Passing this establishes copying, not semantics.
+3. Demonstrate held-out prompt-dependent answers and both questions about the
+   same passage. Separate answer correctness from legibility. A new-string
+   copy pass or a training-fit pass cannot qualify general language learning.
+4. Compare efficiency only at matched task quality, including all inherited
    model parameters, external pretraining and local training/runtime costs.
 
 Checkpoint replay, reproducible execution, renderer preparation, manuscript

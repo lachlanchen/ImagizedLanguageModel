@@ -24,22 +24,25 @@ reported directly below.*
 
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
-40,000 updates. A subsequent matched readout repair on 32 seen training
-questions also fails: **0/32 exact autonomous answers in both arms**, with
-**72.748% F1** for the adapted model and **71.177%** for the continued control.
-Correct answer history raises adapted F1 to only 79.629%, while supplied-code
-reconstruction reaches 99.9953%. The conditional predictor still fails before
-generated-history errors can explain the result. **There is no qualified
-usable ILM checkpoint in this repository.**
+40,000 updates. The latest matched decoder-loss experiment on 32 seen training
+questions also fails: **0/32 exact autonomous answers in both arms**. The
+decoder-sensitive treatment lowers F1 from **85.984%** to **70.009%**.
+Correct answer history reaches 92.430% for the control and 75.116% for the
+treatment, while supplied-code reconstruction reaches 99.9953% in both.
+The conditional predictor still fails before generated-history errors alone
+can explain the result. All four repair criteria fail; this recipe is rejected
+for scale-up. **There is no qualified usable ILM checkpoint in this repository.**
 
 See the [completed native result](references/native_chinese_v80_result.md),
-[matched repair and every raw answer](references/adaptive_readout_v81_result.md),
-and [current manuscript](publication/ilm-nature/README.md). These are image
+[latest matched comparison and every raw answer](references/decoder_metric_v82_result.md),
+and [current direction assessment](references/ilm_direction_assessment_20261107.md).
+The [current manuscript](publication/ilm-nature/README.md) reports the earlier
+V81 repair; the latest V82 result is in the linked report. These are image
 agreement measurements, not semantic accuracy. The adapted actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.
 
-![Measured failed readout repair: control and adapted writing scores with complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S15_readout_failure.png)
+![Earlier V81 failed readout repair: control and adapted writing scores with complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S15_readout_failure.png)
 
 ## Earlier full clean writer
 
