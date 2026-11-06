@@ -22,6 +22,12 @@ aligned ink-pixel overlap. These training snapshots do not include a separate
 semantic-transcription accuracy score; the raw images remain available for
 inspection. The original physical-image evaluation gates are unchanged.
 
+A [fixed CPU recognition calibration](../references/native_cpu_transcription_v80_result.md)
+fails on the current format: 30/128 Chinese and 78/128 English reference
+transcripts are exact, with additional blank/noise-control failures and one
+oversized-image error. No actor images are transcribed by this unqualified
+instrument. These measurements add no ILM semantic score.
+
 The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
 contains all four scheduled training-example answers: 0/4 exact, 35.217% full
 foreground F1, 69.845% first-block F1 and four stopped streams. Only 256 of the
