@@ -249,7 +249,7 @@ def save_answer(pipe, raw, out):
     # Save those exact pixels; no OCR, character lookup or font replacement.
     out = Path(out); out.mkdir(parents=True, exist_ok=False)
     torch.save(raw, out / "pixels.pt")
-    image = pipe.image_processor.pt_to_pil(raw)[0]
+    image = pipe.image_processor.numpy_to_pil(pipe.image_processor.pt_to_numpy(raw))[0]
     image.save(out / "answer.png")
     return dict(png_sha256=sha(out / "answer.png"), pixels_sha256=sha(out / "pixels.pt"),
         shape=list(raw.shape), output_repair=False)
