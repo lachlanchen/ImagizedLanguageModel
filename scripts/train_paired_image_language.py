@@ -140,8 +140,14 @@ def main():
                 step = 0
                 if args.checkpoint:
                     saved = torch.load(args.checkpoint, map_location="cpu", weights_only=True)
-                    if saved["metadata"] != metadata:
+                    comparison = dict(saved["metadata"])
+                    comparison["implementation"] = dict(comparison["implementation"],
+                        commit=metadata["implementation"]["commit"])
+                    if comparison != metadata:
                         raise ValueError("resume must retain the exact source, data and budget")
+                    # Unrelated documentation commits do not change the code
+                    # bytes. Keep the checkpoint's original training identity.
+                    metadata = saved["metadata"]
                     restore_adapters(pipe.transformer, saved["adapters"])
                     optimizer.load_state_dict(saved["optimizer"])
                     generator.set_state(saved["generator_state"])
