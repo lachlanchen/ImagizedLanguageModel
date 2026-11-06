@@ -15,6 +15,15 @@ pretrained weights and has 7.583B complete parameters, including 46.900M
 trainable interface parameters. No tokenizer, OCR or teacher service is needed
 by the deployed actor. These properties alone do not guarantee correct answers.
 
+The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
+contains all four scheduled training-example answers: 0/4 exact, 35.217% full
+foreground F1, 69.845% first-block F1 and four stopped streams. Only 256 of the
+3,193 training records had been visited at this point. The
+[unaltered output/target comparison](../references/evidence/native_chinese_v80_update01000/all_outputs_and_targets.png)
+shows malformed glyphs and incorrect answer lengths. This is an early training
+diagnostic, not a completed-run or held-out result. Later diagnostics use the
+current replay pool, so their four-example cohorts differ.
+
 The [declared training protocol](../references/native_chinese_v80_protocol.md)
 uses all 3,193 existing Chinese training records, batch four, 40,000 updates and
 a bounded 32-prompt RAM pool. The original data, codec, numeric controls and
