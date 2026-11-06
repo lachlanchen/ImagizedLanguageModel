@@ -15,6 +15,16 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The full clean writer fails after 40,000 updates on all 12,976 admitted
+examples: **2/128 exact Chinese answers**, **37.631% foreground F1**, and
+**0/64 both-correct pairs**. All 12 new Chinese/English/numeric copying
+requests fail. The full model also produces no exact answers on the earlier
+32 training questions, even with correct preceding answer codes and supplied
+answer length. Supplied-code rendering reaches 99.9953% F1. The abstract,
+article and Note 33 report these failures separately from the small-set fit.
+See the [full result](../../references/clean_corpus_v75_result.md) and
+[writing diagnosis](../../references/corpus_fit_v75_result.md).
+
 Numeric source-derived task controls retain bounded image reading in the
 imported vocabulary-free contextual body: four of eight checked Chinese
 answers are exact at the declared native sampling budget, versus zero with

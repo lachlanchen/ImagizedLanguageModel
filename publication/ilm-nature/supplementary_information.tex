@@ -1628,6 +1628,100 @@ The protocol, runner and standalone image interface are
 \path{scripts/run_clean_learning_v74.py} and
 \path{scripts/infer_clean_ilm_v74.py}.
 
+\section*{Supplementary Note 33: full clean writing and exact-history failure}
+The full-corpus successor initializes all 64,520,193 writer parameters
+afresh, independently of the fitted 32-question control. It reuses the
+authenticated prompt-only feature cache for 3,193 CMRC and 9,783 Dolly
+examples, the frozen image/contextual reader and the fixed writing codec.
+Training completes 40,000 updates, 640,000 draws and 49 complete corpus
+passes. Batch size is 16; at most 16 blocks per example contribute equally
+weighted clean-code error. The logit-normal time law and clipped weighting
+follow Note 32. AdamW uses peak $10^{-4}$, warmup 500, cosine decay to one
+tenth, betas $(.9,.95)$, decay .01 and clipping one. Seeds for model, sampler
+and noise are 20267500, 20267501 and 20267502. The body uses BF16 and the
+final writing projection executes in FP32. Execution-only preflight verifies
+future-target exclusion, exact optimizer/RNG resume and physical feedback;
+its weights are discarded.
+
+The final audit retains all 384 autonomous normal/question-erased outputs
+from the original 128 Chinese and 64 English requests, with seed 20267503
+plus case index, shared by each normal/control pair. Only actual prompt
+pixels enter the actor. It receives no target length, codes, character IDs,
+OCR, language vocabulary head, glyph inventory or teacher service. The
+unchanged 32-step clean sampler re-encodes each emitted binary image for
+history, and the learned stop threshold is .5 with a 128-block safety cap.
+
+Chinese original-image F1 is 37.631\%, versus 23.609\% under question erasure;
+exact answers are 2/128 versus 0/128. Both answers are exact in 0/64 shared-
+passage pairs. The original minimum exact, absolute-F1 and both-correct-pair
+requirements fail. Question gain is 14.023 points, with source-article
+bootstrap interval [10.861, 17.487]; all normal Chinese outputs stop by the
+learned rule. The original gain, positive-interval and stopping requirements
+pass. English literal-reference agreement is 0/64 exact and 16.098\% F1;
+the references do not enumerate every semantically valid English answer.
+These are reused development examples, not sealed confirmation.
+
+A separate author-specified copy diagnostic fixes 12 new requests: four
+Chinese, four English and four six-digit strings, arranged in six pairs.
+Their exact prompt rasters are absent from the training inventory. All
+12 actual-image calls stop, but none matches its requested output exactly.
+Foreground F1 is 26.989\%, 15.925\% and 24.543\% in the three groups,
+respectively. Owning-minus-partner reference F1 is only .123 points overall.
+This small diagnostic is descriptive, not a new population benchmark.
+
+The same 32 training cases as Note 32 then diagnose the completed full-data
+model. First, perform actual-image free generation with seed 20267420 plus
+pair index. Only after each free call, use the true answer history and known
+length to construct an assisted stream. A separate fixed-decoder control
+receives the actual target codes. Free and assisted first blocks are equal
+in all 32 cases, and all actual reader memories exactly match the cache.
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Training-case route & Exact streams & Ink F1 (\%)\\
+\midrule
+Free generation & 0/32 & 45.771\\
+Correct history and length & 0/32 & 58.045\\
+Supplied writing codes & 28/32 & 99.9953\\
+\bottomrule
+\end{tabular}
+\end{center}
+Assisted and supplied-code counts measure physical stream agreement at
+provided length, not learned stopping or autonomous answers. Free first-block
+F1 is 59.929\%. These training failures precede corrupted long histories.
+The earlier 32-case fit differs in exposure and initialization; the result
+does not identify one unique cause of the full-data failure.
+
+A retained first-block probe uses $z_t=(1-t)e+ty$ with the true target $y$,
+noise seed 20267597 and the owning prompt condition. At $t=31/32$, the direct
+constructed input decodes to all 32 original blocks exactly. Denoiser
+prediction reduces exactness to 6/32, at 99.1349\% F1. These are assisted
+near-clean probes, not free sampler states; their small stroke errors cannot
+by themselves explain the much larger free-generation deficit. At $t=1$,
+the clean predictor still changes supplied codes. From complete sampler
+metadata and authenticated answer lengths, training sampled 7,007,799 blocks.
+Under its declared time law,
+\begin{equation}
+ \Pr(t\geq31/32)=1-\Phi\!\left(\frac{\log 31+0.8}{0.8}\right)
+ =6.0333\times10^{-8}.
+\end{equation}
+The corresponding expected exposure is .423 blocks. This is a theoretical
+expectation; the actual original tail draws have not been replayed.
+
+Full training takes 2,589.452 active seconds at 1.544 GiB without the
+inherited reader. The 384-output audit takes 679.857 seconds, including
+72.053 seconds setup, at 18.390 GiB including that reader. Original feature
+caching, earlier codec learning and external foundation pretraining are
+excluded. Independent CPU verification authenticates all source/output
+files, reconstructs source references and recomputes physical metrics and
+original gates. The training diagnosis re-decodes all 32 supplied-code
+streams and recomputes retained latent errors. It does not replay the full
+neural actor. All failed outputs remain unchanged; sealed data stays unopened.
+The full-data, copy and diagnosis receipts are
+\path{references/evidence/clean_corpus_v75_result.json},
+\path{references/evidence/copy_transfer_v75_result.json} and
+\path{references/evidence/corpus_fit_v75_result.json}.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.

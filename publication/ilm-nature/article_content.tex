@@ -591,6 +591,28 @@ The complete clean writer subsequently fits 32 seen training questions:
 with 99.997\% original-image F1. This is a paired learning-capacity control,
 not unseen-question generalization (Supplementary Note 32).
 
+\subsection*{Full-corpus clean writing still fails}
+A fresh 64.520M-parameter clean writer trains on all 12,976 examples for
+40,000 updates, completing 49 corpus passes. Its autonomous audit produces
+2/128 exact Chinese answer images and 37.631\% foreground F1, versus
+23.609\% with question ink erased. Both questions are exact in 0/64 passage
+pairs; three original requirements fail. The question effect is resolved
+at 14.023 F1 points [10.861, 17.487], and all normal Chinese answers stop
+by their learned rule. Dependence on question pixels does not establish
+correct answers. A separate 12-request Chinese/English/numeric copy probe
+also gives no exact outputs (Supplementary Note 33).
+
+The full writer fails even on the earlier 32 training questions: free
+generation reaches 45.771\% F1 with no exact answer. Correct prior image
+codes and supplied answer length raise F1 to 58.045\%, still with no exact
+stream. Supplied-code rendering reaches 99.9953\% F1. Thus error is already
+present under correct histories. The clean predictor also slightly corrupts
+constructed near-clean target codes. This identifies an additional writing
+defect, without showing that it causes the much larger free-answer failure.
+The earlier small fit received 2,000 passes over its selected examples;
+neither that memorization result nor theoretical time-coverage calculations
+demonstrate a useful general language model.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
