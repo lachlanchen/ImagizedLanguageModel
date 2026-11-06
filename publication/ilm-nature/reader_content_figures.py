@@ -75,12 +75,17 @@ def generate():
             for child in list(parent):
                 if child.tag==q("c:title"):
                     parent.remove(child)
-        for node in chart.findall(".//c:majorUnit",NS):
+        for axis in chart.findall(".//c:valAx",NS):
+            node=axis.find("c:majorUnit",NS)
+            if node is None:
+                node=element("c:majorUnit",axis)
             node.set("val",str(unit))
         for node in chart.findall(".//a:defRPr",NS):
             node.set("sz","1900")
         for node in chart.findall(".//c:numFmt",NS):
             node.set("formatCode","0");node.set("sourceLinked","0")
+        for node in chart.findall(".//c:formatCode",NS):
+            node.text="0"
         bar=chart.find(".//c:barChart",NS)
         for node in bar.findall("c:dLbls",NS):
             bar.remove(node)
@@ -116,7 +121,7 @@ def generate():
     slide.arrow(650,625,700,625)
     slide.arrow(650,775,700,775)
     slide.shape("Full layerwise\nvisual/context KV cache",700,590,320,70,21,False,True,"F8F1ED")
-    slide.shape("52 final-layer states\nBF16 bytes match: 44/44",700,740,320,70,21,False,True,"F2F4F5")
+    slide.shape("52 final states (BF16)\n44/44 match exactly",700,740,320,70,21,False,True,"F2F4F5")
     slide.arrow(1020,625,1110,625)
     slide.arrow(1020,775,1110,775)
     slide.shape("Offline source helper\nGreedy text output",1110,590,445,70,21,False,True,"F8F1ED")
@@ -175,7 +180,8 @@ def generate():
 def verify_native():
     _,copy_counts,training_counts=evidence()
     build=json.loads((HERE/"evidence/reader_content_deck_build.json").read_text())
-    if sha(HERE/"ILM_Figures_editable.pptx")!=build["pptx_sha256"] or sha(RECEIPT)!=build["source_evidence_sha256"]:
+    if (sha(HERE/"ILM_Figures_editable.pptx")!=build["pptx_sha256"] or sha(RECEIPT)!=build["source_evidence_sha256"]
+            or sha(Path(__file__))!=build["builder_sha256"]):
         raise ValueError("figure source or native deck changed")
     mutable={"[Content_Types].xml","ppt/presentation.xml","ppt/_rels/presentation.xml.rels"}
     with zipfile.ZipFile(io.BytesIO(baseline("ILM_Figures_editable.pptx"))) as old,zipfile.ZipFile(HERE/"ILM_Figures_editable.pptx") as new:
