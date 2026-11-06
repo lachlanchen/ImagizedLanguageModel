@@ -66,3 +66,58 @@ control. All before/after outputs are retained, and all 64 initial streams
 must exactly replay the original warm model. A passing result would still
 require new-prompt/copy and development evaluation. General language ability,
 historical-script transfer and efficiency parity remain unestablished.
+
+## Result export and checkpoint inference
+
+After both arms and the CPU verifier finish, validate and export every saved
+answer with CUDA hidden:
+
+```bash
+CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 PYTHONPATH=. \
+artifacts/external/mixar_env_py312/bin/python \
+  scripts/export_decoder_metric_v82_result.py --check-only
+
+CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 PYTHONPATH=. \
+artifacts/external/mixar_env_py312/bin/python \
+  scripts/export_decoder_metric_v82_result.py
+```
+
+The exporter checks both complete checkpoints and rescoring, retains the
+original four training-fit decisions and copies every before/after PNG
+unchanged. Its plates show all cases in order, including wrong and empty
+answers. The unfinished-run rejection was exercised against the actual live
+experiment without creating an evidence directory. The successful export
+path remains pending until that experiment completes.
+
+The [checkpoint loader](../ilm/visual_lm/metric_image_actor.py) builds the
+inference actor from the final learned checkpoint, shared frozen foundation,
+writing codec and numeric task controls. It records the warm-checkpoint hash
+as ancestry without opening the warm file or loading a training dataset.
+It accepts the declared completed V82 checkpoint format; completion metadata
+does not establish language quality.
+
+The [CLI](../scripts/infer_decoder_metric_v82.py) accepts a prompt PNG,
+optional host-rendered text/text file, or an instruction above an image. An
+example input-only preparation is:
+
+```bash
+CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 PYTHONPATH=. \
+artifacts/external/mixar_env_py312/bin/python scripts/infer_decoder_metric_v82.py \
+  --checkpoint artifacts/decoder_metric_v82r2_20261107/metric/checkpoint_latest.pt \
+  --text '请用中文解释汉字“言”的本义。' \
+  --prepare-only --output artifacts/metric_prompt_preparation
+```
+
+Four actual CPU preparations pass: typed text, a UTF-8 text file with explicit
+newlines, an image, and instruction-plus-image. Tensor/PNG equality and the
+unchanged image region in the mixed prompt are verified. Incomplete and
+incompatible real checkpoints are rejected before CUDA initialization. See
+the [preparation receipt](../references/evidence/decoder_metric_v82_runtime_preparation.json).
+These are input and guard checks. Full restored-model generation and an
+independent checkpoint replay remain pending; no new language result follows.
+
+After the current GPU job finishes, the same CLI performs research inference
+without `--prepare-only`, using the deterministic GPU environment above and
+a completed checkpoint. It saves raw answer tensors, PNGs and provenance.
+Its image output is unmodified, and no transcription or answer correction is
+added. Use a fresh output directory for each invocation.

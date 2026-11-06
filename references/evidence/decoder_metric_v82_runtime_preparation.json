@@ -1,0 +1,399 @@
+{
+  "source_commit": "4fefe7664f46b157099b075de58f797f78650549",
+  "sources": {
+    "ilm/visual_lm/metric_image_actor.py": "800464bb4186139b1843efb04bcaa442f38ab11e0da6e5a3410889fdc9864675",
+    "scripts/infer_decoder_metric_v82.py": "8ad3ed65c3c302ad86982e08d3e451a078196313c1680ef566ded24b06402538",
+    "scripts/export_decoder_metric_v82_result.py": "ab11d0bdfa3a523853030bfe9c3b232ee0688dbfdebf047a6e15542b385d503b"
+  },
+  "routes": {
+    "text": {
+      "input": {
+        "input_layout": "rendered_text_lines",
+        "host_text_adapter": true,
+        "source_text_sha256": "30f3114c1ed369945ba1ee102e062909d736fe1c4f0f58ebaa51beca30dc7445",
+        "source_characters": 15,
+        "normalized_characters": 15,
+        "crlf_normalized": true,
+        "explicit_lines": 1,
+        "line_layout": [
+          {
+            "line": 0,
+            "empty": false,
+            "render": {
+              "source_characters": 15,
+              "logical_width_px": 334,
+              "full_ink_width_px": 318,
+              "full_ink_height_px": 24,
+              "width_px": 384,
+              "blocks": 6,
+              "draw_x": 2,
+              "draw_y": -3,
+              "unknown_glyphs": 0,
+              "complete_source": true
+            },
+            "source_ranges": [
+              [
+                0,
+                384
+              ]
+            ],
+            "height": 32,
+            "width": 384
+          }
+        ],
+        "renderer": {
+          "font_family": "Noto Sans CJK JP",
+          "font_size_px": 24,
+          "height_px": 32,
+          "padding_px": 2,
+          "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+          "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+          "pango_version": "1.52.1",
+          "fallback_selected_fonts_inspected": false,
+          "source_policy": "complete explicit single line, no cropping or font shrinking"
+        },
+        "resized": false,
+        "missing_glyph_substitution": false,
+        "input_truncated": false,
+        "actor_shape": [
+          1,
+          1,
+          32,
+          384
+        ],
+        "actor_pixels_sha256": "dfac84f25cc052cea884682386a6bec334842885e2a9bd4e1b367748d30d6a73",
+        "visual_cells": 12,
+        "ocr_calls": 0,
+        "character_segmentation": false,
+        "neural_input": "physical_pixels_only",
+        "prompt_tensor_sha256": "d3bb3db7fe464daa8ef9abc09fe1e0eef156119a25d026867334657377d3dba5",
+        "prompt_png_sha256": "2e3df1c672a3253a44f7c046421f1c8095c9f89ff720842fa69fbc342939f36d"
+      },
+      "preparation_only": true,
+      "generation_performed": false,
+      "checkpoint_loaded": false,
+      "cuda_initialized": false,
+      "language_quality_claim": false
+    },
+    "text_file": {
+      "input": {
+        "input_layout": "rendered_text_lines",
+        "host_text_adapter": true,
+        "source_text_sha256": "24cf048c2972af25fb360f46dadf9179645f31a989541409603f1fcf52fc6cbf",
+        "source_characters": 25,
+        "normalized_characters": 25,
+        "crlf_normalized": true,
+        "explicit_lines": 3,
+        "line_layout": [
+          {
+            "line": 0,
+            "empty": false,
+            "render": {
+              "source_characters": 8,
+              "logical_width_px": 192,
+              "full_ink_width_px": 177,
+              "full_ink_height_px": 24,
+              "width_px": 256,
+              "blocks": 4,
+              "draw_x": 2,
+              "draw_y": -3,
+              "unknown_glyphs": 0,
+              "complete_source": true
+            },
+            "source_ranges": [
+              [
+                0,
+                256
+              ]
+            ],
+            "height": 32,
+            "width": 256
+          },
+          {
+            "line": 1,
+            "empty": false,
+            "render": {
+              "source_characters": 15,
+              "logical_width_px": 263,
+              "full_ink_width_px": 248,
+              "full_ink_height_px": 24,
+              "width_px": 320,
+              "blocks": 5,
+              "draw_x": 2,
+              "draw_y": -3,
+              "unknown_glyphs": 0,
+              "complete_source": true
+            },
+            "source_ranges": [
+              [
+                0,
+                320
+              ]
+            ],
+            "height": 32,
+            "width": 320
+          },
+          {
+            "line": 2,
+            "empty": true,
+            "height": 32,
+            "width": 64
+          }
+        ],
+        "renderer": {
+          "font_family": "Noto Sans CJK JP",
+          "font_size_px": 24,
+          "height_px": 32,
+          "padding_px": 2,
+          "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+          "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+          "pango_version": "1.52.1",
+          "fallback_selected_fonts_inspected": false,
+          "source_policy": "complete explicit single line, no cropping or font shrinking"
+        },
+        "resized": false,
+        "missing_glyph_substitution": false,
+        "input_truncated": false,
+        "actor_shape": [
+          1,
+          1,
+          96,
+          320
+        ],
+        "actor_pixels_sha256": "cb1dfafe0d0734b41ba9ea385f32dc861b351fc2a75d3e0ae8f65006b2923f71",
+        "visual_cells": 30,
+        "ocr_calls": 0,
+        "character_segmentation": false,
+        "neural_input": "physical_pixels_only",
+        "source_utf8_file_sha256": "24cf048c2972af25fb360f46dadf9179645f31a989541409603f1fcf52fc6cbf",
+        "prompt_tensor_sha256": "037fe46b8c030dbf35e07ec35e06c6b3b0ff3a152b6da92d4777692c3336a1cf",
+        "prompt_png_sha256": "37b62642b30d06c3fd88b06de8ed40cf7d231757e8598ce3d3ad164309d4da24"
+      },
+      "preparation_only": true,
+      "generation_performed": false,
+      "checkpoint_loaded": false,
+      "cuda_initialized": false,
+      "language_quality_claim": false
+    },
+    "image": {
+      "input": {
+        "source_sha256": "c981b1ffd8c6769e0d8e6d6edd32998edd6ede45a473790bfeb2bf6256ce83a6",
+        "source_dimensions_wh": [
+          256,
+          32
+        ],
+        "source_mode": "L",
+        "oriented_grayscale_shape_hw": [
+          32,
+          256
+        ],
+        "input_layout": "strip",
+        "actor_shape": [
+          1,
+          1,
+          32,
+          256
+        ],
+        "visual_cells": 8,
+        "actor_pixels_sha256": "5eebbeb3f47b2b9b8320214c4216a106da5525d809320cb9992b4d37f6f4d091",
+        "strip_source_ranges": [
+          [
+            0,
+            256
+          ]
+        ],
+        "orientation": "EXIF applied",
+        "alpha_background": "white",
+        "color": "grayscale",
+        "resized": false,
+        "ocr_calls": 0,
+        "character_segmentation": false,
+        "prompt_tensor_sha256": "fd2b01115052795fdc7396910fbf46f5cfdc94e257eb44eefd42633ad76684d3",
+        "prompt_png_sha256": "c981b1ffd8c6769e0d8e6d6edd32998edd6ede45a473790bfeb2bf6256ce83a6"
+      },
+      "preparation_only": true,
+      "generation_performed": false,
+      "checkpoint_loaded": false,
+      "cuda_initialized": false,
+      "language_quality_claim": false
+    },
+    "mixed": {
+      "input": {
+        "input_layout": "instruction_above_image",
+        "host_text_adapter": true,
+        "text_input": {
+          "input_layout": "rendered_text_lines",
+          "host_text_adapter": true,
+          "source_text_sha256": "284bf06c89ec4987b38130da45a3f1df89be79dcd516730d6c7d2256c0da7457",
+          "source_characters": 9,
+          "normalized_characters": 9,
+          "crlf_normalized": true,
+          "explicit_lines": 1,
+          "line_layout": [
+            {
+              "line": 0,
+              "empty": false,
+              "render": {
+                "source_characters": 9,
+                "logical_width_px": 216,
+                "full_ink_width_px": 201,
+                "full_ink_height_px": 24,
+                "width_px": 256,
+                "blocks": 4,
+                "draw_x": 2,
+                "draw_y": -3,
+                "unknown_glyphs": 0,
+                "complete_source": true
+              },
+              "source_ranges": [
+                [
+                  0,
+                  256
+                ]
+              ],
+              "height": 32,
+              "width": 256
+            }
+          ],
+          "renderer": {
+            "font_family": "Noto Sans CJK JP",
+            "font_size_px": 24,
+            "height_px": 32,
+            "padding_px": 2,
+            "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+            "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+            "pango_version": "1.52.1",
+            "fallback_selected_fonts_inspected": false,
+            "source_policy": "complete explicit single line, no cropping or font shrinking"
+          },
+          "resized": false,
+          "missing_glyph_substitution": false,
+          "input_truncated": false,
+          "actor_shape": [
+            1,
+            1,
+            32,
+            256
+          ],
+          "actor_pixels_sha256": "4f903cab538bda6ba61708332cc03f6bf6d94adafe327fd6e36081783812148c",
+          "visual_cells": 8,
+          "ocr_calls": 0,
+          "character_segmentation": false,
+          "neural_input": "physical_pixels_only"
+        },
+        "image_input": {
+          "source_sha256": "c981b1ffd8c6769e0d8e6d6edd32998edd6ede45a473790bfeb2bf6256ce83a6",
+          "source_dimensions_wh": [
+            256,
+            32
+          ],
+          "source_mode": "L",
+          "oriented_grayscale_shape_hw": [
+            32,
+            256
+          ],
+          "input_layout": "strip",
+          "actor_shape": [
+            1,
+            1,
+            32,
+            256
+          ],
+          "visual_cells": 8,
+          "actor_pixels_sha256": "5eebbeb3f47b2b9b8320214c4216a106da5525d809320cb9992b4d37f6f4d091",
+          "strip_source_ranges": [
+            [
+              0,
+              256
+            ]
+          ],
+          "orientation": "EXIF applied",
+          "alpha_background": "white",
+          "color": "grayscale",
+          "resized": false,
+          "ocr_calls": 0,
+          "character_segmentation": false
+        },
+        "instruction_image_gap_px": 32,
+        "image_origin_xy": [
+          0,
+          64
+        ],
+        "resized": false,
+        "input_truncated": false,
+        "actor_shape": [
+          1,
+          1,
+          96,
+          256
+        ],
+        "actor_pixels_sha256": "e4839638f33786fbb380b106dc89518043cd9ca74a828b7bec975132975b30f0",
+        "visual_cells": 24,
+        "ocr_calls": 0,
+        "character_segmentation": false,
+        "neural_input": "physical_pixels_only",
+        "prompt_tensor_sha256": "c67222fefcbf72ceb6ccc6090778af44492065a2b6d192c18edce5f3084ef719",
+        "prompt_png_sha256": "f0ab933908d52736d577c1a2a4b7693c4109636892544f335533eae5178b07d4"
+      },
+      "preparation_only": true,
+      "generation_performed": false,
+      "checkpoint_loaded": false,
+      "cuda_initialized": false,
+      "language_quality_claim": false
+    }
+  },
+  "raw_tensor_png_agreement": true,
+  "mixed_image_region_bit_exact": true,
+  "explicit_trailing_blank_line_retained": true,
+  "checkpoint_guard_checks": [
+    {
+      "checkpoint_sha256": "a638f933cabb126f9ef7621b4f09e1ac7f593bd2720379f9d94d3dde8cc37ab2",
+      "metadata": {
+        "update": 2,
+        "purpose": "matched_state_only_decoder_metric",
+        "training_complete": false
+      },
+      "rejected": true
+    },
+    {
+      "checkpoint_sha256": "7da31d229f4c5cc5bb51a5f5776a2c6e61e444f171ba412de547165911cb532c",
+      "metadata": {
+        "update": 2000,
+        "purpose": "matched_adaptive_image_readout",
+        "training_complete": true
+      },
+      "rejected": true
+    }
+  ],
+  "exporter_unfinished_run_guard": {
+    "exporter_sha256": "ab11d0bdfa3a523853030bfe9c3b232ee0688dbfdebf047a6e15542b385d503b",
+    "live_status_observed": {
+      "stage": "training",
+      "pid": 2734078,
+      "arm": "control",
+      "update": 1060,
+      "indices": [
+        4,
+        27,
+        14,
+        2
+      ],
+      "loss": 0.31545960903167725,
+      "flow": 0.31545931100845337,
+      "clean_mse": 0.08189473301172256,
+      "decoder_tangent_mse": 0.0,
+      "metric_strength": 0.0,
+      "stop": 2.9068900175843737e-07,
+      "gradient_norm": 3.97419810295105,
+      "gradient_groups": {},
+      "lr": 5.4330369439533425e-05
+    },
+    "unfinished_run_rejected": true,
+    "destination_or_partial_created": false,
+    "quality_claim": false
+  },
+  "cuda_initialized": false,
+  "full_actor_restore_and_generation_replay_pending": true,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
