@@ -42,17 +42,24 @@ for each language before any corresponding actor answer is transcribed. The
 reader shares the actor's pretrained foundation, so agreement remains an
 auxiliary measurement with correlated errors.
 
-The [native prediction diagnosis](../references/native_corpus_fit_v80_protocol.md)
+The completed [native prediction diagnosis](../references/native_corpus_fit_v80_result.md)
 reuses the same 32 Chinese training questions previously evaluated with V75.
 It compares free generation, generation with correct preceding image codes
 and supplied answer length, and fixed-codec reconstruction. These controls
-will help distinguish errors that persist under correct history from errors
-introduced by free continuation. They provide no autonomous-answer credit.
+find 0/32 exact free answers (46.235% F1), 0/32 exact correct-history images
+(50.241% F1), and 28/32 supplied-code reconstructions (99.9953% F1).
+Conditional prediction is inaccurate even with correct history; generated
+history cannot be the sole explanation. The assisted controls provide no
+autonomous-answer credit.
 The [preparation receipt](../references/evidence/native_corpus_fit_v80_preparation.json)
 authenticates all 32 source images and code records and independently rebuilds
-their targets and prompt layouts. Model evaluation is running on the completed
+their targets and prompt layouts. Model evaluation ran on the completed
 40,000-update checkpoint, after the original 384-output audit, CPU verification
-and three standalone calls have finished.
+and three standalone calls had finished. CPU verification independently
+replayed all 32 supplied-code reconstructions and decoded all retained
+correct-history coordinates. It did not replay the complete inherited neural
+forward pass. The [four comparison pages](../references/native_corpus_fit_v80_result.md)
+retain every case and every failure.
 
 Prepare on CPU with `CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python
 scripts/probe_native_corpus_fit_v80.py --run artifacts/native_chinese_v80_20261106

@@ -50,10 +50,11 @@ statistics share the producer's aggregation implementation. It does not replay
 the entire inherited neural forward pass. The development set has been reused;
 there are no sealed evaluation examples in this result.
 
-The [fixed 32-case diagnosis](native_corpus_fit_v80_protocol.md) compares free
-generation with correct-history prediction and supplied-code reconstruction.
-It is running on the completed checkpoint. Until these controls finish, the
-relative contributions of writing-code prediction, feedback error and
-generalization remain unresolved. Retaining full context has not established
+The completed [fixed 32-case diagnosis](native_corpus_fit_v80_result.md) gives
+0/32 exact free images at 46.235% F1 and 0/32 exact correct-history images at
+50.241% F1, compared with 28/32 supplied-code reconstructions at 99.9953% F1.
+Thus inaccurate conditional code prediction persists with correct history;
+generated-history errors cannot be the sole explanation. These training-set
+controls do not uniquely identify a successful repair. Retaining full context has not established
 a usable ILM, efficiency over a conventional language model, or general
 historical-script understanding.
