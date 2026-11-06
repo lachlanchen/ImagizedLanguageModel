@@ -60,37 +60,45 @@ def coordinate(run):
             confirmed_live_training_pid=pid if alive else None,consecutive_missing_process_checks=missing))
         if missing>=2:
             raise RuntimeError("owned training process is absent; preserve its state and do not audit an incomplete checkpoint")
+        pending=[folder for folder in (run/"diagnostics").glob("update_*")
+            if not (folder/"pixel_scores.json").exists()
+            and len(list(folder.glob("[0-9][0-9]/source.json")))==4]
+        if pending:
+            child(run,"training_diagnostics",True,"scripts/score_native_training_samples_v80.py")
         time.sleep(10)
     phases=[("audit",False,"scripts/audit_native_chinese_v80.py"),
         ("verify",True,"scripts/audit_native_chinese_v80.py"),
         ("standalone",False,"scripts/check_completed_native_prompt_routes_v80.py")]
     for stage,cpu,script in phases:
-        env=dict(os.environ,CUDA_VISIBLE_DEVICES="" if cpu else "0")
-        command=[sys.executable,script,"--run",str(run)]
-        if cpu: command.append("--verify")
-        with (run/(stage+".log")).open("a") as output:
-            process=subprocess.Popen(command,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT,
-                start_new_session=True)
-            atomic_json(run/"audit_pipeline.json",dict(stage=stage,watcher_pid=os.getpid(),child_pid=process.pid))
-            try:
-                code=process.wait()
-            finally:
-                # The standalone check owns CLI grandchildren in this new
-                # process group. Do not leave their loaded GPU model orphaned
-                # when the coordinator is interrupted or its child exits.
-                try: os.killpg(process.pid,signal.SIGTERM)
-                except ProcessLookupError: pass
-                if process.poll() is None:
-                    try: process.wait(timeout=20)
-                    except subprocess.TimeoutExpired:
-                        try: os.killpg(process.pid,signal.SIGKILL)
-                        except ProcessLookupError: pass
-                        process.wait()
-        if code:
-            atomic_json(run/"audit_pipeline.json",dict(stage="failed",failed_phase=stage,
-                exit_code=code,watcher_pid=None,child_pid=None))
-            raise SystemExit(code)
+        child(run,stage,cpu,script,verify=stage=="verify")
     atomic_json(run/"audit_pipeline.json",dict(stage="completed",watcher_pid=None,child_pid=None))
+
+
+def child(run,stage,cpu,script,*,verify=False):
+    env=dict(os.environ,CUDA_VISIBLE_DEVICES="" if cpu else "0")
+    command=[sys.executable,script,"--run",str(run)]
+    if verify: command.append("--verify")
+    with (run/(stage+".log")).open("a") as output:
+        process=subprocess.Popen(command,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT,
+            start_new_session=True)
+        atomic_json(run/"audit_pipeline.json",dict(stage=stage,watcher_pid=os.getpid(),child_pid=process.pid))
+        try:
+            code=process.wait()
+        finally:
+            # Standalone inference owns CLI grandchildren in this process
+            # group. Clean up this exact group, never another project's job.
+            try: os.killpg(process.pid,signal.SIGTERM)
+            except ProcessLookupError: pass
+            if process.poll() is None:
+                try: process.wait(timeout=20)
+                except subprocess.TimeoutExpired:
+                    try: os.killpg(process.pid,signal.SIGKILL)
+                    except ProcessLookupError: pass
+                    process.wait()
+    if code:
+        atomic_json(run/"audit_pipeline.json",dict(stage="failed",failed_phase=stage,
+            exit_code=code,watcher_pid=None,child_pid=None))
+        raise SystemExit(code)
 
 
 if __name__=="__main__":
