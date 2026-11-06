@@ -3,8 +3,11 @@
 The earlier full-corpus image writer (V75) failed to qualify as a usable
 language model: 2/128 exact Chinese development answers and 0/12 exact new copy
 answers.
-Retaining full contextual history is the next tested design direction; it has
-not yet established language capability. The [diagnostic results](../references/native_context_v80_result.md)
+The completed [native-context training and audit](../references/native_chinese_v80_result.md)
+also fail: 0/128 exact Chinese development images, foreground F1 0.3650 and
+0/64 pairs with both images correct. Question erasure lowers F1 to 0.2540;
+input sensitivity and learned stopping do not establish useful answers.
+The [earlier context diagnostics](../references/native_context_v80_result.md)
 explain the distinction between source-reader content, glyph reconstruction and
 actual autonomous image answers.
 
@@ -47,7 +50,9 @@ will help distinguish errors that persist under correct history from errors
 introduced by free continuation. They provide no autonomous-answer credit.
 The [preparation receipt](../references/evidence/native_corpus_fit_v80_preparation.json)
 authenticates all 32 source images and code records and independently rebuilds
-their targets and prompt layouts. Model evaluation remains pending.
+their targets and prompt layouts. Model evaluation is running on the completed
+40,000-update checkpoint, after the original 384-output audit, CPU verification
+and three standalone calls have finished.
 
 Prepare on CPU with `CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python
 scripts/probe_native_corpus_fit_v80.py --run artifacts/native_chinese_v80_20261106
@@ -56,6 +61,19 @@ fixed audit, physical verification and three standalone calls finish, use
 `--stage evaluate` with the GPU environment below, then `--stage verify` with
 CUDA disabled. Run this diagnosis and neural reading sequentially. Preparation
 alone measures neither model predictions nor language capability.
+
+The first evaluation launch omitted `CUBLAS_WORKSPACE_CONFIG` and failed during
+image prefill, before producing any answer. Its error is preserved under
+`corpus_fit_v80/`. The corrected launch uses the unchanged code and byte-exact
+prepared inputs in `corpus_fit_v80r2/`:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
+CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=4 \
+PYTHONPATH=. artifacts/external/mixar_env_py312/bin/python \
+  scripts/probe_native_corpus_fit_v80.py --run artifacts/native_chinese_v80_20261106 \
+  --out artifacts/native_chinese_v80_20261106/corpus_fit_v80r2 --stage evaluate
+```
 
 The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
 contains all four scheduled training-example answers: 0/4 exact, 35.217% full
@@ -105,7 +123,19 @@ matches all 2,001 logged minibatches and finds twenty optimization exposures
 for each of these four cases. The run has used all 3,193 training records and
 80,000 optimization draws. Different cases and exposure counts again prevent
 a matched comparison with earlier snapshots. No held-out language capability
-is established; the original final audit remains pending.
+is established by this training snapshot. The final audit is reported above.
+
+At [update 40,000](../references/evidence/native_chinese_v80_update40000/receipt.json),
+the four final scheduled training outputs give 0/4 pixel-exact images, 60.367%
+full foreground F1 and 83.190% first-block F1. All four stop; output lengths
+are 4/1/2/2 blocks versus targets 6/1/2/3. The
+[unaltered images and targets](../references/evidence/native_chinese_v80_update40000/all_outputs_and_targets.png)
+retain all four cases. The [exposure replay](../references/evidence/native_chinese_v80_update40000/case_exposure.json)
+matches all 4,001 logged minibatches and finds 56 optimization exposures per
+case. Independent NumPy scoring reconstructs targets directly from the
+authenticated bit-packed training records and checks every displayed output
+and target pixel. Readable fragments do not establish semantic accuracy or
+generalization; this cohort again differs from earlier snapshots.
 
 An [exposure audit](../references/evidence/native_case_exposure_v80.json) replays
 the declared sample order and matches all 501 logged minibatches through update

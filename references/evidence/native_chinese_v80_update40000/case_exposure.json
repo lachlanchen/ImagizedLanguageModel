@@ -1,0 +1,178 @@
+{
+  "source_commit": "fec99a4b3dba94146223c6cdd6ee7cac197149d5",
+  "sources": {
+    "scripts/audit_native_case_exposure_v80r2.py": "d55d465ecaf628a779cc72752d0de297a1f5483218073c19f3f13bf910ad3a7c",
+    "scripts/audit_native_case_exposure_v80.py": "834e63b0ec2b3717438996e2ecec657b1c22eb39c2baf7b98222d702c76062c9",
+    "scripts/train_native_chinese_v80.py": "2d9c7f735994cd17b6d3b42ce58dd78e50b36aa181d09da493cfb45f83caeac0",
+    "ilm/visual_lm/semantic_writing_data.py": "19d83df0fe491ea074f1fa7419ebb52a35df69a69b76259b90e7f37878f6d586",
+    "references/native_chinese_v80_protocol.md": "56a00987d22d46725174dcfc58c7abb037b8720df6ab6f15c5f02c7496f53c0d"
+  },
+  "training_identity_sha256": "d7f5bec6b1f3955ba8184d31576ecb318062696421772dae54fdf77478ef2d53",
+  "maximum_replayed_update": 40000,
+  "logged_minibatches_checked": 4001,
+  "every_logged_minibatch_matches_declared_sampler": true,
+  "uses_original_sampler_implementation": true,
+  "independent_sampler_implementation": false,
+  "optimizer_or_model_replayed": false,
+  "model_updated": false,
+  "cuda_initialized": false,
+  "results": [
+    {
+      "update": 1000,
+      "pool_number": 7,
+      "updates_in_current_pool": 104,
+      "optimization_draws": 4000,
+      "unique_optimized_records": 256,
+      "unique_prefilled_records": 256,
+      "diagnostic_report_sha256": "eae958b806b17706ef9408278323169dfe462e411f2da3aac4feab4a4217e88d",
+      "cases": [
+        {
+          "source": "cmrc/TRAIN_112_QUERY_0.pt",
+          "total_optimization_exposures": 13
+        },
+        {
+          "source": "cmrc/TRAIN_3112_QUERY_0.pt",
+          "total_optimization_exposures": 13
+        },
+        {
+          "source": "cmrc/TRAIN_2582_QUERY_3.pt",
+          "total_optimization_exposures": 13
+        },
+        {
+          "source": "cmrc/TRAIN_3804_QUERY_1.pt",
+          "total_optimization_exposures": 13
+        }
+      ],
+      "exact": 0,
+      "foreground_f1": 0.35217299680477265,
+      "cohorts_differ_between_snapshots": true,
+      "causal_learning_trend_claim": false
+    },
+    {
+      "update": 5000,
+      "pool_number": 39,
+      "updates_in_current_pool": 8,
+      "optimization_draws": 20000,
+      "unique_optimized_records": 1280,
+      "unique_prefilled_records": 1280,
+      "diagnostic_report_sha256": "96051e42d9dce276ca1fb5f18b93a152108a0c6d80f9f528898508e6aed51be7",
+      "cases": [
+        {
+          "source": "cmrc/TRAIN_1286_QUERY_3.pt",
+          "total_optimization_exposures": 1
+        },
+        {
+          "source": "cmrc/TRAIN_786_QUERY_0.pt",
+          "total_optimization_exposures": 1
+        },
+        {
+          "source": "cmrc/TRAIN_2599_QUERY_0.pt",
+          "total_optimization_exposures": 1
+        },
+        {
+          "source": "cmrc/TRAIN_2535_QUERY_3.pt",
+          "total_optimization_exposures": 1
+        }
+      ],
+      "exact": 0,
+      "foreground_f1": 0.19500920465662946,
+      "cohorts_differ_between_snapshots": true,
+      "causal_learning_trend_claim": false
+    },
+    {
+      "update": 10000,
+      "pool_number": 78,
+      "updates_in_current_pool": 16,
+      "optimization_draws": 40000,
+      "unique_optimized_records": 2528,
+      "unique_prefilled_records": 2528,
+      "diagnostic_report_sha256": "7175e63de9b7f860e4aecc5a0774395fb5c1e7947692f1e619e064bd30d7e5f1",
+      "cases": [
+        {
+          "source": "cmrc/TRAIN_601_QUERY_0.pt",
+          "total_optimization_exposures": 2
+        },
+        {
+          "source": "cmrc/TRAIN_61_QUERY_1.pt",
+          "total_optimization_exposures": 2
+        },
+        {
+          "source": "cmrc/TRAIN_3544_QUERY_3.pt",
+          "total_optimization_exposures": 2
+        },
+        {
+          "source": "cmrc/TRAIN_3688_QUERY_0.pt",
+          "total_optimization_exposures": 2
+        }
+      ],
+      "exact": 0,
+      "foreground_f1": 0.48319035314973974,
+      "cohorts_differ_between_snapshots": true,
+      "causal_learning_trend_claim": false
+    },
+    {
+      "update": 20000,
+      "pool_number": 156,
+      "updates_in_current_pool": 32,
+      "optimization_draws": 80000,
+      "unique_optimized_records": 3193,
+      "unique_prefilled_records": 3193,
+      "diagnostic_report_sha256": "96c69c94c736c044a25ad222ba55befa28936469d4c7df083295bb29c7bf9635",
+      "cases": [
+        {
+          "source": "cmrc/TRAIN_1310_QUERY_1.pt",
+          "total_optimization_exposures": 20
+        },
+        {
+          "source": "cmrc/TRAIN_2229_QUERY_3.pt",
+          "total_optimization_exposures": 20
+        },
+        {
+          "source": "cmrc/TRAIN_3768_QUERY_1.pt",
+          "total_optimization_exposures": 20
+        },
+        {
+          "source": "cmrc/TRAIN_2155_QUERY_0.pt",
+          "total_optimization_exposures": 20
+        }
+      ],
+      "exact": 0,
+      "foreground_f1": 0.7092606927486804,
+      "cohorts_differ_between_snapshots": true,
+      "causal_learning_trend_claim": false
+    },
+    {
+      "update": 40000,
+      "pool_number": 312,
+      "updates_in_current_pool": 64,
+      "optimization_draws": 160000,
+      "unique_optimized_records": 3193,
+      "unique_prefilled_records": 3193,
+      "diagnostic_report_sha256": "a1f34e55536ad7ab9c8bbb7a41f6f8622874df23ba58e1cab6b13a2fb27c1b4b",
+      "cases": [
+        {
+          "source": "cmrc/TRAIN_2657_QUERY_0.pt",
+          "total_optimization_exposures": 56
+        },
+        {
+          "source": "cmrc/TRAIN_490_QUERY_1.pt",
+          "total_optimization_exposures": 56
+        },
+        {
+          "source": "cmrc/TRAIN_2454_QUERY_2.pt",
+          "total_optimization_exposures": 56
+        },
+        {
+          "source": "cmrc/TRAIN_2166_QUERY_3.pt",
+          "total_optimization_exposures": 56
+        }
+      ],
+      "exact": 0,
+      "foreground_f1": 0.6036706985273322,
+      "cohorts_differ_between_snapshots": true,
+      "causal_learning_trend_claim": false
+    }
+  ],
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
