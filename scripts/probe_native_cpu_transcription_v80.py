@@ -122,6 +122,7 @@ def prepare(run,out):
 
 def recognize(path,out,identity):
     key=sha(path); destination=out/"ocr_responses"/(key+".json")
+    destination.parent.mkdir(parents=True,exist_ok=True)
     request_sha=sha(out/"identity.json")
     if destination.exists():
         result=json.loads(destination.read_text())
