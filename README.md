@@ -20,7 +20,34 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current result: continuous image writing fails qualification
+## Current result: the full clean writer still fails
+
+The latest **64.52M-parameter writer** completes 40,000 updates on 12,976
+Chinese/English examples. Its autonomous audit produces **2/128 exact Chinese
+answers**, **37.631% foreground F1**, and **0/64 both-correct question pairs**.
+Three of the six original Chinese requirements fail. Question ink affects
+the answer, but the answers remain largely wrong. **This checkpoint is not a
+usable image-language model.**
+[Full result and unmodified outputs](references/clean_corpus_v75_result.md).
+
+The same checkpoint fails **all 12 new Chinese, English and numeric copying
+requests**. On 32 seen training questions it gets no complete answer exactly
+right, even when supplied the correct preceding answer history and answer
+length. The fixed image codec reconstructs those supplied codes at 99.9953%
+F1. The learned code predictor is therefore still a bottleneck before long
+free rollouts; codec reconstruction and small-set memorization do not qualify
+language generation. See the [new-copy probe](references/copy_transfer_v75_result.md)
+and [training-fit diagnosis](references/corpus_fit_v75_result.md).
+
+Runtime uses an attributed, externally pretrained frozen image/contextual
+reader; its pretraining cost is outside these local runs. No tokenizer, OCR,
+language vocabulary head, persistent glyph inventory or teacher service enters
+this runtime. The [execution guide](docs/clean-image-writing.md) distinguishes
+the failed full-data model from the earlier seen-case control. A matched
+[writing-head repair](references/writing_time_coverage_v76_protocol.md) tests
+denoising-time coverage; it has no successful outcome or language claim yet.
+
+## Earlier controls and the failed velocity writer
 
 ![Implemented visual-semantic training and physical image-output feedback](publication/ilm-nature/figures/Figure_S11_continuous_writer.png)
 

@@ -1,5 +1,20 @@
 # Clean image writing: results and execution
 
+The full-data clean writer has completed and **fails** the original Chinese
+development requirements: 2/128 exact answers, 37.631% foreground F1 and 0/64
+both-correct pairs. All 384 normal/control generations have been independently
+scored. The separate new-copy probe gets 0/12 exact answers. The
+[full result](../references/clean_corpus_v75_result.md),
+[copy result](../references/copy_transfer_v75_result.md) and
+[training-fit diagnosis](../references/corpus_fit_v75_result.md) retain the
+failed outcomes. This model is not ready for useful language inference.
+
+The latest full-data checkpoint is
+artifacts/clean_corpus_v75_20261106/training/checkpoint_latest.pt;
+its original outputs are under development/predictions/ in that run.
+The older checkpoint in the command below belongs to a different, deliberately
+small training-set control. It must not be substituted for the full-data result.
+
 The completed clean writer learns 32 seen CMRC questions and emits full
 Chinese answer images. It generates 29 original images exactly and 31
 frozen-codec reference images exactly, with 99.9967% original-image
