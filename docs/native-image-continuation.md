@@ -28,6 +28,17 @@ transcripts are exact, with additional blank/noise-control failures and one
 oversized-image error. No actor images are transcribed by this unqualified
 instrument. These measurements add no ILM semantic score.
 
+A separate [neural reading protocol](../references/native_neural_transcription_v80_protocol.md)
+is prepared for execution after the original training, fixed audit, physical
+verification and standalone inference checks finish. Its
+[CPU preparation receipt](../references/evidence/native_neural_transcription_v80_preparation.json)
+verifies all 288 calibration cases, exact preservation of every source pixel,
+repeatable persisted layouts and refusal to start while the original pipeline
+is active. Neural recognition has not run. Calibration must qualify separately
+for each language before any corresponding actor answer is transcribed. The
+reader shares the actor's pretrained foundation, so agreement remains an
+auxiliary measurement with correlated errors.
+
 The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
 contains all four scheduled training-example answers: 0/4 exact, 35.217% full
 foreground F1, 69.845% first-block F1 and four stopped streams. Only 256 of the
