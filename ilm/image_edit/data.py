@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import subprocess
+import unicodedata
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -104,6 +105,30 @@ def font_and_coverage(cases):
         unique_source_characters=len(required))
 
 
+def line_units(paragraph):
+    """Keep Latin/Vietnamese word runs and numbers together when wrapping."""
+    units, word = [], ""
+    for char in paragraph:
+        narrow_word = (char.isalnum() and unicodedata.east_asian_width(char) not in ("W", "F")) or char in "._-'’"
+        if narrow_word:
+            word += char
+        else:
+            if word:
+                units.append(word); word = ""
+            units.append(char)
+    if word:
+        units.append(word)
+    result = []
+    for unit in units:
+        if unit in "，。、；：？！,.?!;:）)》】」』”" and result:
+            result[-1] += unit
+        else:
+            result.append(unit)
+    if "".join(result) != paragraph:
+        raise ValueError("line grouping changed source characters")
+    return result
+
+
 def page(text, size, font):
     """Wrap by physical advance, preserve all non-newline characters and ink."""
     width, height = size
@@ -113,10 +138,12 @@ def page(text, size, font):
     lines = []
     for paragraph in text.split("\n"):
         line = ""
-        for char in paragraph:
-            if line and font.getlength(line + char) > width - 2 * margin:
+        for unit in line_units(paragraph):
+            if font.getlength(unit) > width - 2 * margin:
+                raise ValueError("one source word exceeds the declared page width")
+            if line and font.getlength(line + unit) > width - 2 * margin:
                 lines.append(line); line = ""
-            line += char
+            line += unit
         lines.append(line)
     if "".join(lines) != text.replace("\n", ""):
         raise ValueError("line wrapping discarded source characters")

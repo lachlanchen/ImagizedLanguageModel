@@ -19,6 +19,9 @@ from the source context/question fields, omit HTML formatting tags and put
 the question on a separate labelled line. Keep factual wording, including
 source imperfections, and all reference answers unchanged. Confirm each QA
 answer remains in its displayed passage. Preserve every display-text character
+and keep Latin/Vietnamese word runs and numbers together across line breaks
+when they fit the declared width. Do not place closing punctuation alone at
+the start of a line.
 and check actual ink bounds; fail on missing glyphs or clipping. Question
 pages are 1024 by 1024 and reference answer pages are 512 by 512. Data layout
 preparation does not run a model. Acquisition and all model stages are gated on a completed, verified
@@ -89,3 +92,6 @@ Pre-model data review identifies a literal orphan `</div>` in the first
 passage. The first source-faithful rendering is retained. Display-text
 extraction is specified before any candidate model call and uses a fresh
 preparation directory; no reference, question pair or outcome is selected anew.
+Source-image review also identifies word/number splits under character-only
+wrapping. Word-aware wrapping is fixed before any model call, with source
+characters and targets unchanged. Preserve earlier preparation directories.
