@@ -5,6 +5,8 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
+The latest native-image [copying observation](paired_padding_result.md) also fails: 6/32 training and 10/32 validation OCR-exact strings after 512 updates, with visible omissions and duplicated writing. It has no natural-QA optimization. Reducing blank input space lowers training invocation time from 795.624 to 287.182 seconds without qualifying reliable writing. The failure concerns content as well as appearance.
+
 The latest completed [readout comparison](decoder_metric_v82_result.md)
 provides three distinct measurements on the same 32 seen training questions.
 The metric arm is worse than the continued control (85.984% autonomous F1):
@@ -88,9 +90,9 @@ The result rejects zero-shot use of this composition. The subsequent
 three clear seen-case errors already rule out its 30/32 training criterion.
 This demonstrates limited copying improvement, not useful language learning.
 Natural QA has not been optimized in that model. A separate
-[lossless-padding comparison](paired_padding_protocol.md) tests measured
-input overhead with all ink and targets preserved; it is not an established
-fidelity correction.
+[lossless-padding comparison](paired_padding_result.md) completes the full
+64-case strip observation and fails reliability. All ink and target pixels
+are preserved, but frozen-VAE input features change. It is not a fidelity repair.
 
 A replacement must be assessed in this order:
 
@@ -111,3 +113,8 @@ Checkpoint replay, reproducible execution, renderer preparation, manuscript
 builds and attractive concept figures are useful engineering artifacts. None
 substitutes for legible, correct answers generated from the prompt alone.
 No usable ILM checkpoint or confirmed efficient learning algorithm is claimed.
+
+A [source-level unified-model audit](native_unified_direction_audit.md)
+examines retaining native reading and continuous image generation together.
+It describes a candidate initialization and prerequisite tests, not an acquired
+model, successful training result or established repair.

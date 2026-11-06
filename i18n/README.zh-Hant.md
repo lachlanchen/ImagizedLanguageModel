@@ -1,7 +1,7 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 <!-- paired-writing-status:start -->
-外部預訓練的4B影像生成器已在32個複製樣本上完成512次影像配對訓練。固定小樣本檢查的OCR完全匹配從0/8提高到2/8（訓練和驗證各1/4），但可見錯誤仍未達到規定的可靠性標準，語言理解尚未得到驗證。[全部訓練前後影像](../references/paired_image_writing_result.md) · [訓練與推理](../docs/paired-image-learning.md)。
+完成 512 次更新的去空白對比實驗仍未實現可靠抄寫：OCR 完全匹配為訓練集 6/32、驗證集 10/32（清晰參考圖為 27/32、28/32）。原始輸出可見漏字和字母重複。訓練時間由 795.624 秒降至 287.182 秒，但語言理解及達到實用品質時的效率仍未得到證明。 [全部 64 個原始輸出](../references/paired_padding_result.md).
 <!-- paired-writing-status:end -->
 
 目前狀態：圖像語言生成仍未達到可用標準。最新的解碼器損失對照實驗使用32道已見訓練題，兩組逐像素完全一致的自主回答均為0/32；解碼器敏感損失使前景F1從對照組的85.984%降至70.009%。即使給出正確的前文，F1也僅為92.430%和75.116%；直接提供答案編碼時，兩組的解碼重建均達到99.9953%。四項修復標準全部未通過，不再擴大這一訓練方案。這些是圖像一致性指標，不是語義正確率，尚無通過可用性驗證的ILM檢查點。[完整結果及全部原始圖片](../references/decoder_metric_v82_result.md)。 論文已納入補充說明39和可編輯的圖S16。 另一個外部圖像生成器基線未經本地訓練，OCR完全匹配為複製請求0/12、問答0/8（參考圖OCR校準18/20），全部40張原始輸出均已保留。 [FLUX.2-klein-4B](../references/image_edit_baseline_result.md).

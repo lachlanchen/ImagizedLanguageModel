@@ -674,6 +674,21 @@ autonomous F1 from 85.984\% to 70.009\%, with 0/32 exact in both arms.
 Correct-history F1 is 92.430/75.116\%; supplied codes give 99.9953\%.
 All four repair criteria fail; scaling is rejected.
 
+A separate native image-generator adaptation learns partial copying
+(Supplementary Note 40 and Fig.~S17). Two fresh rank-16 adapters train on the
+same 32 Chinese/English copies for 512 updates. Removing exactly white bottom
+padding preserves every source pixel but changes frozen-VAE features. Training
+invocation time falls from 795.624 to 287.182\,s, with peaks of 9.501 and
+8.437\,GiB. On the matched eight-case screen, OCR exact match changes from
+2/8 to 3/8. Complete strip observation yields 6/32 training and 10/32 validation
+strings, against clean-reference OCR scores of 27/32 and 28/32. Raw omissions,
+repetitions and unwanted marks independently reject the 30/32 reliability
+requirement. All 64 outputs are retained; eight are original observations and
+56 are additional calls. This model has 3.900B deployed transformer parameters
+plus an 84.046M VAE, with 24.359M trained adapter parameters. No natural QA is
+optimized in these copying runs. Faster copying execution therefore does not
+establish language understanding or efficiency at useful language quality.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

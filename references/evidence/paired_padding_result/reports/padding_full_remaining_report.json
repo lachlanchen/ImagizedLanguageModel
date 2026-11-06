@@ -1,0 +1,44 @@
+{
+  "source": {
+    "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+    "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+    "files": {
+      "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+      "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+      "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+      "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+      "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+      "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+    }
+  },
+  "implementation": {
+    "commit": "70fc9341070bf116fa01943092bdf22b6e345c42",
+    "files": {
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/paired_data.py": "7d9d878403a4fa9a2451a81a35e18a4426ce56b652140e7c3752b7bdc03adf99",
+      "scripts/train_paired_image_language.py": "5fc77d1c0844d5ac8068c238b36a0b1c7a6c2c81c421607493a63187a53afc39",
+      "references/paired_image_learning_protocol.md": "7647d57a4dfcc8cacd362ec245ea4c1da5af42dc641b6573e9382b90c4a76c83"
+    }
+  },
+  "runner_sha256": "c5c76452b08382d22c175298e49bc069826e4ce7ef1c5454fecb0362d090275b",
+  "inputs_sha256": "143bacc75d1faf1bf51495c3ab8dfa332f42deee4f80bacf876af58bccfcd909",
+  "complete_generations": 56,
+  "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+  "checkpoint_sha256": "b832b70b2cba0e4d70894577f1f4cf90e3807fbe6e4b210fe3b80bc4dfdbd138",
+  "transformer_parameters": 3899903488,
+  "codec_parameters": 84046115,
+  "peak_allocated_vram_gib": 8.031330585479736,
+  "elapsed_seconds": 450.2794947400689,
+  "steps": 50,
+  "guidance": 1.0,
+  "output_canvas": [
+    512,
+    256
+  ],
+  "training_manifest_loaded": false,
+  "reference_answer_used": false,
+  "question_specific_text_condition": false,
+  "output_repair": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}

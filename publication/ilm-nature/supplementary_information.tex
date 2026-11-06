@@ -2232,6 +2232,114 @@ original repair gates fail. These image scores do not qualify language
 understanding or an efficiency advantage.}{fig:s16-decoder-metric}
 
 \clearpage
+\section*{Supplementary Note 40: native paired-image copying remains unreliable}
+A separate experiment retains the pretrained continuous image-generation path
+rather than attaching a new writing decoder to a contextual language body.
+The source is the undistilled FLUX.2-klein-base-4B, revision
+\texttt{a3b4f4849157f664bdbc776fd7453c2783562f4d}. Its transformer has
+3,875,544,576 parameters. Rank-16, alpha-16 residuals on 103 native linear
+layers add 24,358,912 trained parameters; the deployed transformer therefore
+contains 3,899,903,488 parameters, with an 84,046,115-parameter VAE. External
+source pretraining is retained and excluded from local costs.
+
+The native VAE posterior mode, patch normalization and packing encode source
+and target images. Let $z_Y$ encode the target and $z_X$ the input. For independent
+$\epsilon\sim\mathcal N(0,I)$ and $\sigma\sim\mathcal U[0,1]$, training minimizes
+\[
+ z_\sigma=(1-\sigma)z_Y+\sigma\epsilon,\qquad
+ \mathcal L=\mathbb E\left\|v_\theta(z_\sigma,\sigma;z_X,c)
+                 -(\epsilon-z_Y)\right\|_2^2.
+\]
+The implementation averages squared error over native latent coordinates.
+This is conventional conditional flow matching; no new convergence or
+language-efficiency theorem follows from it. All samples use the same generic
+numeric condition $c$, compiled offline from layers 9, 18 and 27 of a shared
+externally pretrained Qwen3-4B encoder. This hybrid conditioner is not claimed
+identical to the stock FLUX encoder. No changing caption or answer embedding
+enters inference; the variable question content enters through image pixels.
+The deployment path contains no tokenizer, language embedding table, OCR or
+font-based replacement of generated writing.
+
+Readable preparation contains 128 training and 32 validation copies plus
+256 training and 32 validation CMRC question-answer pairs. Article partitions
+for QA are disjoint within preparation. Only the first 32 training copies are
+used in these two optimization runs; no natural QA is optimized. Source pages
+are 1024-square and target pages 512 by 256, with 32-pixel writing and explicit
+clipping checks. Neither an answer-aware crop nor target-dependent layout
+selection is used. Chinese validation targets include 13 characters absent
+from these 32 local training targets; external pretraining remains available.
+
+Both arms start fresh from the pinned source. Training uses batch one,
+accumulation one, AdamW at $10^{-4}$, weight decay 0.01, seed 20268321, FP32
+adapter masters and optimizer state, BF16 native computation and checkpointed
+activations. All 512 sampled IDs and sigma draws match across arms. A
+precision error discovered during the initial preflight is corrected before
+optimization: adapter residuals are cast to the native linear output dtype.
+The corrected zero-adapter prediction matches the native source exactly.
+Two-update preflights execute real optimization and establish finite nonzero
+gradients and parameter changes; these are execution checks, not quality tests.
+
+The padding treatment removes only rows below fixed height 256. Every removed
+pixel is exactly white in all 160 copy inputs; inverse white padding
+reconstructs every source RGB pixel exactly. No source ink is moved and target
+PNG bytes remain identical. Native reference positions decrease from 4,096 to
+1,024; target positions remain 512. However, changing canvas extent changes
+VAE features: all 64 target tensors are bit-exact across caches, while maximum
+input-feature difference in the retained extent is 1.6796875. This is a
+preprocessing comparison, not an identical-latent attention-mask intervention.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Measurement & Square & Strip\\
+\midrule
+Training invocation time (s) & 795.624 & 287.182\\
+Peak allocated GPU memory (GiB) & 9.501 & 8.437\\
+Original eight-case screen, OCR exact & 2/8 & 3/8\\
+Complete training cohort, OCR exact & Not run & 6/32\\
+Complete validation cohort, OCR exact & Not run & 10/32\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The fixed screen uses the first four training and first four validation cases,
+with matched sampling seeds, 50 native steps, guidance one and a 512-by-256
+answer canvas. The unadapted source gives 0/8 exact OCR strings in both input
+formats. Full strip observation preserves the actual eight samples and adds
+56 calls under a separately fixed seed rule, yielding 64 logical outputs,
+not 64 new calls. Fresh generator processes receive only input images, a
+constant condition and learned state. Targets and recognition are separate.
+The recognizer uses Tesseract 5.3.4, \texttt{chi\_sim+eng}, PSM 6, NFC and fixed
+whitespace normalization, retaining case and punctuation. Reference calibration
+is 27/32 training and 28/32 validation, so OCR counts are exploratory and
+uncertain readings require the raw pixels.
+
+Raw inspection independently rejects the unchanged requirement of 30/32
+legible exact requested strings alone per split. Missing Chinese characters,
+doubled English letters, duplicated lines and extra marks remain, including
+on training examples. Correct copies coexist with these errors. All 64 input,
+target and output pages and eight unadapted controls remain publicly retained
+under \path{references/evidence/paired_padding_result/}. CPU export authenticates
+all 72 generated PNGs against retained postprocessed decoder tensors; this
+is not an independent replay of the neural computation. All original failures
+remain in the evidence. The approximately 2.77-fold reduction in one training
+invocation excludes source acquisition, preparation, setup failures and separate
+controls. There is no independent training-seed replication, capability-matched
+text baseline, natural QA result or demonstrated efficiency at language quality.
+
+\plate{Figure_S17_paired_writing}{\textbf{Faster paired-image training still
+fails reliable writing.} \textbf{a}, Wall time for one 512-update training
+invocation per input format. \textbf{b}, OCR exact match on the same eight
+fixed copying cases. \textbf{c}, Complete strip-model observation on 32 training
+and 32 validation cases, with clean-reference OCR calibration shown separately.
+The square model has no complete-cohort result. \textbf{d}, Complete unmodified
+reference and generated canvases for the first four validation cases in the
+original order. All 64 outputs remain in the evidence archive. Native editable
+charts and embedded workbooks retain the measurements; original PNG bytes and
+aspect ratios are preserved. Omissions visibly reject reliability. Copying and
+execution cost do not establish language understanding.}{fig:s17-paired-writing}
+
+\clearpage
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2397,6 +2505,20 @@ the spatial failure diagnosis from the public PNGs using
 \path{scripts/diagnose_writing_failures.py}. Standalone execution uses
 \path{scripts/infer_decoder_metric_v82.py}; the fixed one-case restoration
 check is \path{scripts/check_metric_runtime_replay_v82.py}.
+
+The paired-image experiment in Note 40 uses
+\path{scripts/prepare_paired_image_condition.py} for the standalone offline
+constant, \path{scripts/train_paired_image_language.py} for preparation,
+caching, preflight, optimization and single-image inference, and
+\path{scripts/infer_paired_image_cohort.py} for a fresh input-only cohort.
+The fixed preprocessing is \path{scripts/trim_paired_input_padding.py};
+separate CPU recognition is \path{scripts/score_paired_writing.py}.
+Authenticate the complete export with
+\path{scripts/export_paired_padding_result.py}. Protocols and full command
+examples are in \path{references/paired_image_learning_protocol.md},
+\path{references/paired_padding_protocol.md},
+\path{references/paired_padding_full_cohort_protocol.md} and
+\path{docs/paired-image-learning.md}.
 
 \input{references_main.tex}
 \end{document}

@@ -1,4 +1,6 @@
-# Next learning test: adapt a visual generator with paired writing images
+# Paired-image learning: limited copying, unreliable writing
+
+The subsequent [complete padding result](paired_padding_result.md) is 6/32 training and 10/32 validation OCR-exact copies, with visible omissions, repeated letters and duplicated lines. Reliable writing fails; faster execution is not language efficiency. The recipe below is a measured copying experiment, not an established direction for a useful ILM.
 
 The [completed zero-shot baseline](image_edit_baseline_result.md) produces
 copied instructions and corrupted pages, not the requested answers. It

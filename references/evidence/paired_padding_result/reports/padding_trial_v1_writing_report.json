@@ -1,0 +1,172 @@
+{
+  "updates": 512,
+  "training_examples": 32,
+  "adapted_layers": 103,
+  "trainable_parameters": 24358912,
+  "changed_adapter_tensors": 206,
+  "checkpoint_sha256": "b832b70b2cba0e4d70894577f1f4cf90e3807fbe6e4b210fe3b80bc4dfdbd138",
+  "actual_forward_backward_and_optimizer": true,
+  "quality_qualification": false,
+  "zero_adapter_check": null,
+  "metadata": {
+    "source": {
+      "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+      "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+      "files": {
+        "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+        "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+        "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+        "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+        "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+        "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+      }
+    },
+    "implementation": {
+      "commit": "cf71f08faf018643e6981b58088baa4cc56a2ec2",
+      "files": {
+        "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+        "ilm/image_edit/paired_data.py": "7d9d878403a4fa9a2451a81a35e18a4426ce56b652140e7c3752b7bdc03adf99",
+        "scripts/train_paired_image_language.py": "5fc77d1c0844d5ac8068c238b36a0b1c7a6c2c81c421607493a63187a53afc39",
+        "references/paired_image_learning_protocol.md": "7647d57a4dfcc8cacd362ec245ea4c1da5af42dc641b6573e9382b90c4a76c83"
+      }
+    },
+    "rank": 16,
+    "learning_rate": 0.0001,
+    "updates": 512,
+    "accumulation": 1,
+    "seed": 20268321,
+    "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+    "condition_metadata": {
+      "generic_instruction_sha256": "3b0b8732ec87db5f999cc85b603e4a738f0f4826a77c8aeac668fecd18ca3c1f",
+      "hidden_state_layers": [
+        9,
+        18,
+        27
+      ],
+      "question_specific_information": false,
+      "source_conditioner": "shared Z-Image Qwen3-4B; not claimed identical to FLUX text-encoder files",
+      "source_weight_sha256": {
+        "model-00001-of-00003.safetensors": "328a91d3122359d5547f9d79521205bc0a46e1f79a792dfe650e99fc2d651223",
+        "model-00002-of-00003.safetensors": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5",
+        "model-00003-of-00003.safetensors": "7ca841ee75b9c61267c0c6148fd8d096d3d21b6d3e161256a9b878154f91fc52"
+      },
+      "source_config_sha256": "8ba006f74fecfaaeb392872a60f4a480e7ec9860153d2e1b769ec81f9a147f8a",
+      "source_tokenizer_sha256": {
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "offline_conditioner_parameters": 4022468096,
+      "positive_sha256": "ed8d5f3531091082ebe8e25856c0e61288af560dc8008e45be0646683f394cdc",
+      "negative_sha256": "e752b836f39b09f679f91c58115a693576dc4101df9573312e717326980ea0ca",
+      "positive_shape": [
+        1,
+        512,
+        7680
+      ],
+      "negative_shape": [
+        1,
+        512,
+        7680
+      ]
+    },
+    "training_ids": [
+      "copy/train/000",
+      "copy/train/001",
+      "copy/train/002",
+      "copy/train/003",
+      "copy/train/004",
+      "copy/train/005",
+      "copy/train/006",
+      "copy/train/007",
+      "copy/train/008",
+      "copy/train/009",
+      "copy/train/010",
+      "copy/train/011",
+      "copy/train/012",
+      "copy/train/013",
+      "copy/train/014",
+      "copy/train/015",
+      "copy/train/016",
+      "copy/train/017",
+      "copy/train/018",
+      "copy/train/019",
+      "copy/train/020",
+      "copy/train/021",
+      "copy/train/022",
+      "copy/train/023",
+      "copy/train/024",
+      "copy/train/025",
+      "copy/train/026",
+      "copy/train/027",
+      "copy/train/028",
+      "copy/train/029",
+      "copy/train/030",
+      "copy/train/031"
+    ],
+    "training_cache_manifest_sha256": "782e98275442c99c6bface8a0fdeedbd9e8e8589844203a1a835183198d8f80d",
+    "objective": "native velocity MSE; uniform sigma; fixed generic condition",
+    "question_specific_text_condition": false,
+    "external_pretraining": true,
+    "language_quality_qualified": false,
+    "general_ilm_goal_complete": false,
+    "purpose": "train"
+  },
+  "last_update": {
+    "update": 512,
+    "loss": 0.2623233497142792,
+    "ids": [
+      "copy/train/025"
+    ],
+    "observations": [
+      {
+        "sigma": 0.021100904792547226,
+        "target_patches": 512,
+        "input_patches": 1024
+      }
+    ],
+    "gradient_norm": 0.4355848431587219,
+    "gradients": {
+      "down": {
+        "nonzero": 103,
+        "total": 103,
+        "finite": true
+      },
+      "up": {
+        "nonzero": 103,
+        "total": 103,
+        "finite": true
+      }
+    },
+    "elapsed_seconds": 0.5488191982731223
+  },
+  "source": {
+    "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+    "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+    "files": {
+      "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+      "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+      "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+      "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+      "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+      "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+    }
+  },
+  "implementation": {
+    "commit": "cf71f08faf018643e6981b58088baa4cc56a2ec2",
+    "files": {
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/paired_data.py": "7d9d878403a4fa9a2451a81a35e18a4426ce56b652140e7c3752b7bdc03adf99",
+      "scripts/train_paired_image_language.py": "5fc77d1c0844d5ac8068c238b36a0b1c7a6c2c81c421607493a63187a53afc39",
+      "references/paired_image_learning_protocol.md": "7647d57a4dfcc8cacd362ec245ea4c1da5af42dc641b6573e9382b90c4a76c83"
+    }
+  },
+  "base_transformer_parameters": 3875544576,
+  "codec_parameters": 84046115,
+  "deployed_transformer_parameters": 3899903488,
+  "elapsed_seconds": 287.18171550612897,
+  "peak_allocated_vram_gib": 8.437482833862305,
+  "stage": "train",
+  "general_ilm_goal_complete": false
+}

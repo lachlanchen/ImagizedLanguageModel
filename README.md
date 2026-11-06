@@ -23,7 +23,7 @@ reported directly below.*
 ## Current result: autonomous image-language writing still fails
 
 <!-- paired-writing-status:start -->
-An externally pretrained 4B image generator has now completed 512 paired-image updates on 32 copying examples. OCR exact match improves from 0/8 to 2/8 on the fixed screen (1/4 seen and 1/4 validation), but visible errors still fail the declared reliability criterion. Language understanding remains unproved. [Complete before/after images](references/paired_image_writing_result.md) · [Training and inference](docs/paired-image-learning.md).
+The completed 512-update padding comparison still fails reliable copying: OCR exact match is 6/32 training strings and 10/32 validation strings (clean references: 27/32 and 28/32). Raw outputs visibly omit characters and repeat letters. Training time falls from 795.624 to 287.182 seconds, but language understanding and efficiency at useful quality remain unproved. [All 64 raw outputs](references/paired_padding_result.md).
 <!-- paired-writing-status:end -->
 
 The completed native-context model gives **0/128 exact Chinese development
@@ -41,7 +41,7 @@ See the [completed native result](references/native_chinese_v80_result.md),
 [latest matched comparison and every raw answer](references/decoder_metric_v82_result.md),
 and [current direction assessment](references/ilm_direction_assessment_20261107.md).
 The [current manuscript](publication/ilm-nature/README.md) includes the V82
-objective, failed comparison and editable Figure S16. These are image
+comparison and the completed paired-copying result in Note 40 and editable Figure S17. These are image
 agreement measurements, not semantic accuracy. The adapted actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.

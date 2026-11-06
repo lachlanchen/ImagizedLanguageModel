@@ -32,10 +32,12 @@ now completes 512 updates on 32 copies and improves the fixed screen from
 clear seen-case errors already rule out its 30/32 training criterion.
 This is limited copying improvement; natural QA has not been optimized and
 useful language understanding remains unproved. A separately specified
-[padding comparison](../references/paired_padding_protocol.md) tests empty-input
+[padding comparison](../references/paired_padding_protocol.md) examines empty-input
 overhead with all source ink and targets preserved. The complete goal still
 requires reliable writing, new-string copying and held-out prompt-dependent
 language. Execution checks and publication updates cannot replace those results.
+
+The [completed padding comparison](../references/paired_padding_result.md) gives 6/32 training and 10/32 validation OCR-exact copies. Raw omissions and repetitions reject reliable writing. The 2.77-fold faster training invocation does not qualify language efficiency. These 32-copy runs are not natural-QA training. The next direction must first establish exact content and order, then held-out image-question answering; no current checkpoint is qualified.
 
 The [current direction assessment](../references/ilm_direction_assessment_20261107.md)
 sets out the evidence, unresolved causes and decision sequence. The older

@@ -15,6 +15,8 @@ see [every measured before/after output](../references/paired_image_writing_resu
 No useful ILM or efficiency at matched language quality is established. See
 the [declared protocol](../references/paired_image_learning_protocol.md).
 
+The completed [padding comparison and all 64 outputs](../references/paired_padding_result.md) give 6/32 training and 10/32 validation OCR-exact copies. Visible omissions and repetitions independently fail the writing requirement. The faster 287.182-second training invocation is not a qualified language-efficiency result.
+
 Use a Python environment with the installed compatible PyTorch/Diffusers
 versions. Reuse verified source weights and the existing constant condition:
 

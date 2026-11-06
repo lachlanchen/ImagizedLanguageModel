@@ -15,15 +15,29 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The completed [native paired-copying comparison](../../references/paired_padding_result.md)
+still fails reliable writing: **6/32 training and 10/32 validation strings**
+are OCR-exact, with visible omissions and repetitions. Clean references score
+27/32 and 28/32. Reducing white input padding lowers one 512-update training
+invocation from 795.624 to 287.182 seconds, while changing VAE features.
+There is no QA optimization in these runs and no language-efficiency claim.
+The abstract, article, Note 40 and Figure S17 report the result and retain all
+64 raw outputs. The current editable deck contains 32 slides, preserving all
+31 previous native slides and 73 earlier figure assets. Current entry points
+are `paired_writing_figures.py` and `build_paired_writing_publication.py`.
+
+![Completed paired-copying comparison and the first four complete validation images](figures/Figure_S17_paired_writing.png)
+
 The [matched decoder-sensitive comparison](../../references/decoder_metric_v82_result.md)
 fails all four original repair criteria. Both arms retain **0/32 exact
 autonomous answers** on seen training questions. The added loss lowers
 foreground F1 from **85.984% to 70.009%**; correct history gives 92.430% and
 75.116%, while supplied-code reconstruction remains 99.9953%. The abstract,
 article, Note 39 and Figure S16 report this failed result and reject scaling
-the repair. The editable deck has 31 slides, preserving all 30 earlier native
-slides and 70 earlier figure assets. Current entry points are
-`decoder_metric_figures.py` and `build_decoder_metric_publication.py`.
+the repair. That historical deck has 31 slides, preserving its 30 earlier native
+slides and 70 earlier figure assets. Its historical entry points are
+`decoder_metric_figures.py` and `build_decoder_metric_publication.py`; use
+the paired-writing builders above for the current package.
 
 ![Completed decoder-loss comparison with the first four raw reference, control and metric images](figures/Figure_S16_decoder_metric.png)
 
