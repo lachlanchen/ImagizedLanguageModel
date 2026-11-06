@@ -49,4 +49,5 @@ The matched decoder-sensitive loss experiment continues unchanged.
 The [receipt](evidence/writer_condition_precision_v82_result.json) retains
 every row, source and checkpoint digest, pair distance, spectrum and
 verification scope. The original arrays and projection weights remain under
-the authenticated artifact path. No complete contextual model, optimizer,+sampler, new answer or additional GPU job is used in this audit.
+the authenticated artifact path. No complete contextual model, optimizer,
+sampler, new answer or additional GPU job is used in this audit.
