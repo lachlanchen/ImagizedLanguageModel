@@ -43,8 +43,11 @@ were sampled at different positions within their rotating pools, as well as on
 different questions. Global update count is therefore insufficient to compare
 their case-level learning. The malformed outputs remain failures; the exposure
 audit adds no language-success claim. Reproduce it with
-`PYTHONPATH=. python scripts/audit_native_case_exposure_v80.py --run artifacts/native_chinese_v80_20261106`
-in the compatible CPU environment.
+`PYTHONPATH=. python scripts/audit_native_case_exposure_v80r2.py --run artifacts/native_chinese_v80_20261106`
+in the compatible CPU environment. The revised replay preserves the original
+producing commit when unrelated documentation commits change repository HEAD;
+different inputs or computations still require a separate record. The original
+audit source and receipt remain unchanged.
 
 The [declared training protocol](../references/native_chinese_v80_protocol.md)
 uses all 3,193 existing Chinese training records, batch four, 40,000 updates and
