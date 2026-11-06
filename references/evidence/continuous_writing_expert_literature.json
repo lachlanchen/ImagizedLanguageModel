@@ -1,0 +1,57 @@
+{
+  "scope": "primary_literature_and_existing_code_inspection_only",
+  "created_utc": "2026-11-06T13:03:26.155405+00:00",
+  "primary_papers": [
+    {
+      "title": "pi0: A Vision-Language-Action Flow Model for General Robot Control",
+      "url": "https://arxiv.org/html/2410.24164v1"
+    },
+    {
+      "title": "VLAFlow: A Unified Training Framework for Vision-Language-Action Models via Co-training and Future Latent Alignment",
+      "url": "https://arxiv.org/html/2607.01586v1"
+    }
+  ],
+  "openpi_repository": "https://github.com/Physical-Intelligence/openpi",
+  "openpi_revision": "215abfb217dbac7d5f1273282331b9b1866c0479",
+  "openpi_commit_time": "2026-08-24T16:27:12Z",
+  "openpi_retrieved_utc": "2026-11-06T12:55:23.195115+00:00",
+  "openpi_files": {
+    "README.md": {
+      "sha256": "567fc57766bd736664f50126cab8145af4071ca16cc5e238f2b11e369169c3b5",
+      "bytes": 23254,
+      "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/215abfb217dbac7d5f1273282331b9b1866c0479/README.md"
+    },
+    "src/openpi/models/pi0.py": {
+      "sha256": "24b32d7c6ed5e409459afa8ca5af96a4dae09c2dcdf48e828907e411f4f12342",
+      "bytes": 12887,
+      "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/215abfb217dbac7d5f1273282331b9b1866c0479/src/openpi/models/pi0.py"
+    },
+    "src/openpi/models/pi0_config.py": {
+      "sha256": "d321858c30b398126035ea2b6da09e1c422eeeebb5ebf8df631daf9dc77647fa",
+      "bytes": 4435,
+      "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/215abfb217dbac7d5f1273282331b9b1866c0479/src/openpi/models/pi0_config.py"
+    },
+    "src/openpi/models/gemma.py": {
+      "sha256": "7e42ada4ae7e9995f0ef3e33a0c224758323c2015e2d9d72ec15726a8a001d2a",
+      "bytes": 17146,
+      "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/215abfb217dbac7d5f1273282331b9b1866c0479/src/openpi/models/gemma.py"
+    }
+  },
+  "local_inspection_revision": "c60b0bbcb2de3ad689e530bfa0c6eaf0ae53b27c",
+  "local_files_sha256": {
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/native_image_actor.py": "8c8a31365c1a2114a713d35af5c2200dfbcf0023be8f9e2f5e9d795891866cf5",
+    "ilm/visual_lm/native_image_continuation.py": "ba5b31bd95b594693ab78140f75170b1367b58ef940c6bfa941633443cb7a5e3"
+  },
+  "existing_rank8_attention_adapters_observed": true,
+  "native_training_freezes_context_and_adapters": true,
+  "adapter_reuse_and_start_query_are_hypotheses": true,
+  "noise_conditioned_attention_is_a_separate_intervention": true,
+  "imported_third_party_code_executed": false,
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "primary_protocol_changed": false,
+  "candidate_implemented": false,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}
