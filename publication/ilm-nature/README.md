@@ -15,6 +15,14 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The [context-visibility diagnostic](../../references/native_context_v80_result.md)
+is now included in Supplementary Note 36 and Figure S13. Masking older source
+keys reduces exact copy/training answers from 8/12 and 19/32 to 0/12 and 2/32.
+The figure also shows the implemented native-context image actor, explicitly
+labelled as untrained execution. The original failed image-language outcome
+below remains the language result. The current builders are
+`native_context_figures.py` and `build_native_context_publication.py`.
+
 The full clean writer fails after 40,000 updates on all 12,976 admitted
 examples: **2/128 exact Chinese answers**, **37.631% foreground F1**, and
 **0/64 both-correct pairs**. All 12 new Chinese/English/numeric copying

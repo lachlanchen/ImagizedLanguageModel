@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 08:37:50 2026
-%DIF ADD new.tex   Fri Nov  6 08:37:50 2026
+%DIF DEL old.tex   Fri Nov  6 09:54:50 2026
+%DIF ADD new.tex   Fri Nov  6 09:54:50 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -2061,6 +2061,105 @@ whereas the image writer receives 52 final-layer states. No successful ILM
 image generation or compact-memory sufficiency is inferred. Both count charts
 and the information diagram are native editable PowerPoint objects.}{fig:s12-reader-content}
 
+\section*{\DIFadd{Supplementary Note 36: context visibility and native image continuation}}
+\DIFadd{The source-reader intervention repeats the 44 normal-image cases from Note 35
+after identical prefill. All existing cache positions and native rotary
+coordinates are retained, but subsequent queries can attend only to the last
+52 task-frame keys and newly generated states. The first decision is supplied
+by the same stored BF16 state. Thus the intervention changes key visibility,
+without physically deleting cache entries or moving the remaining keys.
+}
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Exact stopped helper answers }& \DIFadd{Full prompt KV }& \DIFadd{Suffix-visible KV}\\
+\midrule
+\DIFadd{Copy requests ($n=12$) }& \DIFadd{8 }& \DIFadd{0}\\
+\DIFadd{Fixed training questions ($n=32$) }& \DIFadd{19 }& \DIFadd{2}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{All 44 normal-image memory suffixes and first decisions match their full-cache
+counterparts. Replacing the excluded keys and values with fixed poison values
+leaves the masked next state identical. Allowing attention to those poisoned
+keys changes the state, providing a positive control for actual mask exclusion.
+The unpoisoned full-cache state matches its retained source reference exactly.
+All 1,239 retained source projection choices replay as exact CPU argmax.
+This verifies the recorded projection decisions and mask fixture, not an
+independent replay of the entire visual/contextual model. The suffix occupies
+15,335,424 bytes across 36 layers. All eight full-correct copy responses and
+17 of 19 full-correct training responses are lost. The experiment rejects this
+frozen suffix interface; it does not prove that a trained compressor must fail.
+}
+
+\DIFadd{The successor retains the complete native prompt KV, frozen inherited body and
+qualified image codec. Let $E$ encode a physical answer block $Y_j$ into two
+768-dimensional continuous tile vectors. A learned image encoder $A_\phi$
+places those two observations into the frozen native contextual body $F_\psi$.
+With prompt keys and values $K(X)$, the state after $j$ completed blocks is
+}\[
+ h_j=F_\psi\bigl(K(X),A_\phi(E(Y_1)),\ldots,A_\phi(E(Y_j))\bigr)_{2j}.
+\]
+\DIFadd{The first block uses the original initial reader state $h_0$, without another
+cache query. Later blocks use the complete retained context. The causal mask
+excludes future answer observations and right-padded prompt keys while each
+example keeps its original rotary offset. The learned clean predictor outputs
+all 1,536 coordinates; a separate learned stop determines variable length.
+Decoded, thresholded physical pixels are re-encoded for subsequent inference.
+No tokenizer, character inventory, language output projection, OCR or teacher
+service enters this deployed image actor. External source pretraining remains.
+}
+
+\DIFadd{For $z=E(Y_j)$, the new clean prediction objective draws
+$z_t=(1-t)\epsilon+tz$, $t\sim\mathcal U(0,1)$, and minimizes the mean coordinate
+error divided by $\max(1-t,0.05)^2$. Its 32-step sampler uses
+}\[
+ z_{k+1}=\frac{r-1}{r}z_k+\frac{1}{r} C_\theta(z_k,k/32,h_j),\qquad r=32-k.
+\]
+\DIFadd{The last step removes the explicit prior-noise coefficient, not model error.
+Neither this objective nor codec fidelity proves conditional language learning.
+In particular, a correct first source piece need not imply that $h_0$ suffices
+for a full multi-character image block. First-block and full-stream quality
+therefore remain distinct requirements.
+}
+
+\DIFadd{Actual execution checks traverse all 36 native layers and yield zero forward
+error against the retained reference, finite nonzero input gradients and no
+change in frozen parameters or prefix KV. Checkpointed training gradients,
+causal exclusion, padded-prefix equivalence and incremental continuation pass;
+the maximum incremental-state difference is $8.40\times10^{-5}$ against a
+$10^{-4}$ tolerance. Two untrained generated blocks are reread as actual images.
+The complete model contains 7,582,980,210 parameters, including 46,899,713 new
+trainable image-interface parameters. The execution peak is 16.638\,GiB.
+}
+
+\DIFadd{A supplemental verifier authenticates all retained execution artifacts,
+reproduces the original two GPU feedback hashes exactly, and compares retained
+GPU codec vectors with independent CPU encodings. Maximum absolute difference
+is $2.98\times10^{-6}$ against a declared $10^{-4}$ tolerance. Numerical CPU/GPU
+agreement is distinguished from bitwise same-device identity. Checks of retained
+native tensors do not independently replay the full 36-layer forward/gradient
+computation. Original execution and verification errors remain in the source
+evidence record. No optimizer updates occur in these checks, and no trained
+image-language result follows from them.
+}
+
+\plate{Figure_S13_native_context}{\textbf{Context visibility and an untrained
+native image actor.} \textbf{a,b}, Exact canonical stopped source-helper answers
+with full prompt KV or only suffix keys visible, on the same 12 copy requests
+and 32 training questions. Original positions, first decisions and BF16 prefill
+memories are unchanged. These are offline source-decoder diagnostics, not image
+actor language scores. \textbf{c}, The successor retains the externally
+pretrained native body and full context, learns continuous image input, writing
+and stopping, and rereads emitted pixels. It has 7.583B complete parameters and
+46.900M trainable interface parameters. The first output block still uses the
+initial reader state. The 16.638\,GiB measurement qualifies actual execution,
+with zero optimizer updates, not language quality. Both charts and the diagram
+are native editable PowerPoint objects.}{fig:s13-native-context}
+
+\clearpage
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.

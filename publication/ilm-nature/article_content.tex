@@ -632,6 +632,20 @@ the image writer does not receive. These measurements motivate examining
 the compact-memory and conditional-readout boundary; they do not demonstrate
 sufficiency of the compact state or a usable image-language model.
 
+A key-visibility intervention now tests that boundary directly. After identical
+prefill, permitting attention only to the final 52 task positions reduces exact
+source-helper copy answers from 8/12 to 0/12 and training answers from 19/32 to
+2/32 (Supplementary Note 36 and Fig.~S13). Original cache positions, rotary
+coordinates and first decisions are preserved. This rejects the tested frozen
+suffix interface without proving a lower bound on learned compression. A new
+continuous image actor retains all 36 native layers and full prompt KV. Actual
+forward, gradient, causal-mask and emitted-image feedback checks use 16.638\,GiB
+on one GPU, but involve no optimization or language qualification. Its first
+writing block still depends on the initial reader state alone. The complete
+7.583B-parameter model includes externally pretrained weights; 46.900M image
+interface parameters are trainable. Training that interface remains an
+experiment, rather than a demonstrated solution to conditional language.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
