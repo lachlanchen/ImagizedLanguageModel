@@ -35,6 +35,17 @@ held-out or language-success claim. Its different four-example cohort prevents
 interpreting the two snapshots as a matched learning curve. The declared
 40,000-update run and final full audit remain unchanged.
 
+An [exposure audit](../references/evidence/native_case_exposure_v80.json) replays
+the declared sample order and matches all 501 logged minibatches through update
+5,000. Each case in the 1,000-update diagnostic had thirteen optimization
+exposures; each case in the 5,000-update diagnostic had one. The two checkpoints
+were sampled at different positions within their rotating pools, as well as on
+different questions. Global update count is therefore insufficient to compare
+their case-level learning. The malformed outputs remain failures; the exposure
+audit adds no language-success claim. Reproduce it with
+`PYTHONPATH=. python scripts/audit_native_case_exposure_v80.py --run artifacts/native_chinese_v80_20261106`
+in the compatible CPU environment.
+
 The [declared training protocol](../references/native_chinese_v80_protocol.md)
 uses all 3,193 existing Chinese training records, batch four, 40,000 updates and
 a bounded 32-prompt RAM pool. The original data, codec, numeric controls and
