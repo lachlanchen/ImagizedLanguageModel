@@ -63,6 +63,21 @@ with different exposure counts from the earlier snapshots; their scores do
 not form a matched learning curve. No held-out or usable-language result is
 established. Training continues under the original 40,000-update protocol.
 
+At [update 20,000](../references/evidence/native_chinese_v80_update20000/receipt.json),
+the four scheduled training answers give 0/4 pixel-exact images, 70.926% full
+foreground F1 and 80.163% first-block F1. All four streams stop. Output lengths
+are 1/2/2/2 blocks versus targets of 1/3/2/2. The
+[unaltered comparison](../references/evidence/native_chinese_v80_update20000/all_outputs_and_targets.png)
+contains recognizable writing such as “农业” and “1999年”, with visible
+defects, stray marks and a damaged book-title response. This is an unblinded
+qualitative observation, not a separately measured semantic accuracy score.
+The [exposure replay](../references/evidence/native_chinese_v80_update20000/case_exposure.json)
+matches all 2,001 logged minibatches and finds twenty optimization exposures
+for each of these four cases. The run has used all 3,193 training records and
+80,000 optimization draws. Different cases and exposure counts again prevent
+a matched comparison with earlier snapshots. No held-out language capability
+is established; the original final audit remains pending.
+
 An [exposure audit](../references/evidence/native_case_exposure_v80.json) replays
 the declared sample order and matches all 501 logged minibatches through update
 5,000. Each case in the 1,000-update diagnostic had thirteen optimization
