@@ -1,0 +1,31 @@
+{
+  "source_commit": "6b156b5fafa83a35223de7cc807095fd579d2a24",
+  "sources": {
+    "scripts/check_metric_runtime_replay_v82.py": "b7f3fb3f1a85ec3efcd4511feb186764118bc768e39f238d837a5222a560b0c2",
+    "references/decoder_metric_v82_runtime_replay_protocol.md": "be279550819ae4212cad7f4d5fbd863542c955d0290b1a698ce994edd7f5f4c0",
+    "scripts/infer_decoder_metric_v82.py": "8ad3ed65c3c302ad86982e08d3e451a078196313c1680ef566ded24b06402538",
+    "ilm/visual_lm/metric_image_actor.py": "800464bb4186139b1843efb04bcaa442f38ab11e0da6e5a3410889fdc9864675",
+    "ilm/visual_lm/codec_image_interface.py": "82612fb6962749627b3b5e135f192c3cbb2671ef5e652ceb0d566f0a437285d5",
+    "ilm/visual_lm/native_prompt_interface.py": "acc9d01746683bb7531526e06000aa6269b1dd262f734208af0c1903ae70b101"
+  },
+  "fixture_sha256": "81f775982364dd3d27c8264156568732f21eacb394c16a05c9e6eda2613c0e13",
+  "standalone_report_sha256": "ad8207643ff514b0e55cd7dde289c6e6126eac46742e96354d1b93d159e2f72c",
+  "original_answer_sha256": "e50006c9f799c0f6d80a7587ced018b7cefa72202f547935521347d29aabac2b",
+  "matched_verification_sha256": "0a7f88d6d50de70b956e977bee428661af9be1d6d6806401cf4587b8d7e3bc61",
+  "checkpoint_sha256": "124ba13b298575ce83b163929787924115fbd6ef84475081acedced9bd5944a3",
+  "cases": 1,
+  "original_training_case": true,
+  "images_stops_feedback_and_reader_memory_bit_exact": true,
+  "standalone_complete_actor_forward_executed": true,
+  "independent_neural_implementation": false,
+  "asset_access": {
+    "observed": true,
+    "access_log_sha256": "957f991aea917bd4579c80d65c747b9f1153ee104a3e62396e41a6b538030512",
+    "forbidden_path_opens": 0,
+    "internet_family_connect_calls": 0,
+    "raw_trace_retained_privately": true,
+    "coverage": "standalone actor subprocess file opens and connect calls; ordinary libraries/caches/driver sockets allowed"
+  },
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}

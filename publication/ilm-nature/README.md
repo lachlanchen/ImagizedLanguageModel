@@ -15,6 +15,18 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The [matched decoder-sensitive comparison](../../references/decoder_metric_v82_result.md)
+fails all four original repair criteria. Both arms retain **0/32 exact
+autonomous answers** on seen training questions. The added loss lowers
+foreground F1 from **85.984% to 70.009%**; correct history gives 92.430% and
+75.116%, while supplied-code reconstruction remains 99.9953%. The abstract,
+article, Note 39 and Figure S16 report this failed result and reject scaling
+the repair. The editable deck has 31 slides, preserving all 30 earlier native
+slides and 70 earlier figure assets. Current entry points are
+`decoder_metric_figures.py` and `build_decoder_metric_publication.py`.
+
+![Completed decoder-loss comparison with the first four raw reference, control and metric images](figures/Figure_S16_decoder_metric.png)
+
 The [matched readout repair](../../references/adaptive_readout_v81_result.md)
 also fails. On the same 32 training questions, control and adapted models
 produce **0/32 exact autonomous images**, at **71.177% and 72.748% foreground
@@ -22,9 +34,9 @@ F1**. Correct-history prediction reaches 77.372% and 79.629%, again without
 any exact complete images. Supplied-code decoding remains at 99.9953% and
 28/32 exact images. Note 38 and Figure S15 retain this rejected comparison,
 its separate evaluation amendment and the first four unmodified outputs.
-The current builders are `readout_failure_figures.py` and
-`build_readout_failure_publication.py`, for the 30-slide editable deck and
-matching PDFs. Earlier builders reproduce their named historical packages.
+Its historical builders are `readout_failure_figures.py` and
+`build_readout_failure_publication.py`, for that 30-slide package. Use the
+new builders above for the current deck and PDFs.
 
 ![Completed failed readout comparison and the first four raw answer images](figures/Figure_S15_readout_failure.png)
 

@@ -2140,6 +2140,98 @@ editable in the matching PowerPoint. Image agreement does not establish
 semantic accuracy or successful general language generation.}{fig:s15-readout-failure}
 
 \clearpage
+\section*{Supplementary Note 39: decoder-sensitive loss worsens writing}
+The accurate supplied-code control in Note 38 motivates testing whether the
+regression geometry underweights physically important writing errors. Let
+$z\in\mathbb R^{1536}$ be the two-tile target code, $x_t=(1-t)\epsilon+tz$,
+and $c_\theta(x_t,t,h)$ the clean-code prediction under prompt/history state
+$h$. The frozen map $R$ applies the sampler's per-tile normalization and
+decodes 2,048 image logits. The treatment replaces code MSE by
+\[
+ \ell_\alpha(c,z;x_t)=\frac{\|c-z\|^2}{1536}
+ +\frac{\alpha}{2048}\|J_R(x_t)(c-z)\|^2.
+\]
+The Jacobian is evaluated at the observed, detached noisy code, not at the
+target or predicted endpoint. Its product with the residual is computed
+without constructing the full matrix. The time weighting
+$\max(1-t,0.05)^{-2}$, structural stopping loss and autonomous sampler are
+unchanged. For fixed $x_t,t,h$, this positive-definite quadratic loss retains
+the conditional-mean optimum. That function-space identity does not guarantee
+finite-model convergence, physical image fidelity or language learning.
+
+Control ($\alpha=0$) and treatment ($\alpha=0.001$) restore the same adapted
+Note 38 checkpoint and receive 2,000 updates each, batch four, on the same
+32 seen training questions: 8,000 draws per arm. Case sampling and noise RNG
+are matched. The initial padded execution narrowly fails its original state
+comparison. A separate execution computes each owning history at its true
+length in both arms, preserving all budgets, losses, seeds, criteria and
+causal positions. This passes the complete preflight, including exact
+model/optimizer/sampler replay, finite gradients, frozen-prefix checks and
+generated-pixel feedback. No quality threshold is widened.
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+Writing path & Control F1 (\%) & Metric F1 (\%) & Exact (each)\\
+\midrule
+Autonomous generation & 85.984 & 70.009 & 0/32\\
+Correct history and length & 92.430 & 75.116 & 0/32\\
+Supplied-code reconstruction & 99.9953 & 99.9953 & 28/32\\
+\bottomrule
+\end{tabular}
+\end{center}
+Both free streams stop in every case, but learned stopping is not evidence
+of correct length. Six control and eight treatment answers are shorter than
+their references. The treatment fails every original repair criterion:
+at least 24/32 exact free images, F1 at least 0.98, and improvement over
+control on both measures. Neither arm reaches the absolute training-fit
+requirement. Scaling this repair is rejected.
+
+A post-hoc diagnosis authenticates all 388 exported PNGs and independently
+reproduces the six full-output summaries from pixels. First-block F1 is
+99.467\% for control and 97.018\% for treatment. Remaining-stream F1 is
+76.237\% and 47.493\%; correct history raises those tails to 87.724\% and
+56.682\%. First-block averages cover all 32 questions; tails cover the 28
+references longer than one 64-column block. Missing ink and excess generated
+ink remain errors. This localizes inaccurate conditional writing before
+generated-history drift alone explains the outcome; it does not identify a
+unique cause within representation transfer, optimization, objective or
+sampling. Foreground agreement is not semantic accuracy.
+
+Each complete actor retains 7,583,225,971 parameters with external pretraining;
+53,096,961 are trained locally. Peak allocated memory is 18.893\,GiB per arm.
+Recorded control/metric invocation times are 3,894.676/4,053.182\,s, excluding
+shared setup, prefill and initial outputs. An interrupted metric attempt had
+no durable checkpoint and was discarded before restarting from the declared
+warm state. Its additional compute is excluded from those timings. All
+19 logged rows through update 180 reproduce after restart, and all protected
+control/initial files remain unchanged; full model/optimizer equality at
+that interruption point was not measured.
+
+CPU verification scores all 64 final autonomous answers, decodes retained
+assisted/supplied coordinates, matches the case/noise RNG and replays all
+64 initial outputs. It does not independently replay the complete final
+contextual body and sampler. A subsequent fresh checkpoint invocation
+reproduces one original case's pixels, stops, feedback and reader memory
+exactly; file/socket tracing observes no training-data or ancestor-checkpoint
+access and no internet-family connection. That one-case restoration is
+execution evidence, not language qualification. All 384 original PNGs and
+per-case results remain in
+\path{references/evidence/decoder_metric_v82_result/}.
+
+\plate{Figure_S16_decoder_metric}{\textbf{Decoder-sensitive reweighting
+worsens autonomous writing.} \textbf{a}, Free foreground F1 on the same
+32 seen training questions after matched optimization. \textbf{b}, Prediction
+with correct preceding answer history and known length. Both arms retain
+0/32 exact complete images in both paths. Supplied-code reconstruction
+remains at 99.9953\% and 28/32 exact. \textbf{c}, Complete unmodified reference,
+control and metric PNGs for the first four fixed questions. Original image
+bytes and aspect ratios are preserved in editable native PowerPoint objects;
+native chart caches/workbooks retain full-precision measurements. All four
+original repair gates fail. These image scores do not qualify language
+understanding or an efficiency advantage.}{fig:s16-decoder-metric}
+
+\clearpage
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2293,6 +2385,18 @@ The source-bound execution and numerical criteria are in
 \path{references/adaptive_readout_v81_protocol.md},
 \path{references/adaptive_readout_v81r2_protocol.md} and
 \path{references/adaptive_readout_v81_evaluation_protocol.md}.
+
+The matched decoder-sensitive comparison in Note 39 uses
+\path{scripts/train_decoder_metric_v82.py} with separate preflight, training
+and CPU verification stages, under
+\path{references/decoder_metric_v82_protocol.md} and
+\path{references/decoder_metric_v82r2_protocol.md}. Preserve the first failed
+execution and interruption records. Export the verified complete cohort with
+\path{scripts/export_decoder_metric_v82_result.py}. Independently reproduce
+the spatial failure diagnosis from the public PNGs using
+\path{scripts/diagnose_writing_failures.py}. Standalone execution uses
+\path{scripts/infer_decoder_metric_v82.py}; the fixed one-case restoration
+check is \path{scripts/check_metric_runtime_replay_v82.py}.
 
 \input{references_main.tex}
 \end{document}

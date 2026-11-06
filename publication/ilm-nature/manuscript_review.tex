@@ -1,7 +1,8 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
-\usepackage{setspace,lineno}
+\usepackage{setspace,lineno,etoolbox}
+\AtBeginEnvironment{thebibliography}{\singlespacing}
 \input{frontmatter.tex}
 \onehalfspacing\linenumbers
 \begin{document}

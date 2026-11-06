@@ -36,13 +36,13 @@ for scale-up. **There is no qualified usable ILM checkpoint in this repository.*
 See the [completed native result](references/native_chinese_v80_result.md),
 [latest matched comparison and every raw answer](references/decoder_metric_v82_result.md),
 and [current direction assessment](references/ilm_direction_assessment_20261107.md).
-The [current manuscript](publication/ilm-nature/README.md) reports the earlier
-V81 repair; the latest V82 result is in the linked report. These are image
+The [current manuscript](publication/ilm-nature/README.md) includes the V82
+objective, failed comparison and editable Figure S16. These are image
 agreement measurements, not semantic accuracy. The adapted actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.
 
-![Earlier V81 failed readout repair: control and adapted writing scores with complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S15_readout_failure.png)
+![Completed decoder-sensitive loss comparison and complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S16_decoder_metric.png)
 
 ## Earlier full clean writer
 

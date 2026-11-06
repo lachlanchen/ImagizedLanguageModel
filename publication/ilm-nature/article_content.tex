@@ -668,6 +668,12 @@ unchanged at 99.9953\%. The adapted model fails three of four declared
 training-fit criteria. The small increase in image agreement does not resolve
 conditional writing or qualify general language capability.
 
+Decoder-sensitive reweighting also fails (Supplementary Note 39 and
+Fig.~S16). From identical adapted weights, 2,000 matched updates lower
+autonomous F1 from 85.984\% to 70.009\%, with 0/32 exact in both arms.
+Correct-history F1 is 92.430/75.116\%; supplied codes give 99.9953\%.
+All four repair criteria fail; scaling is rejected.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
