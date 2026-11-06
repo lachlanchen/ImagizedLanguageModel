@@ -1,7 +1,12 @@
 # Image-only generator baseline
 
 This is an unqualified candidate using an external pretrained image generator.
-It has not yet passed a model-loading, codec, generation or language test.
+Its [CPU preparation checks](../references/evidence/image_edit_baseline_preparation.json)
+cover real pinned source metadata, 20 questions rendered as 60 page images,
+541 source characters with no missing glyphs, and unfinished-experiment
+rejection. The new package imports without the legacy visual package's
+Torchvision dependency. It has not yet passed a model-loading, codec,
+generation or language test.
 It does not replace the unfinished V82 comparison. The
 [protocol](../references/image_edit_baseline_protocol.md) preserves the full
 ILM objective and distinguishes each preparation/execution stage from learning.
