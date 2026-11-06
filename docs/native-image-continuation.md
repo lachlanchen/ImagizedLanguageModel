@@ -24,6 +24,17 @@ shows malformed glyphs and incorrect answer lengths. This is an early training
 diagnostic, not a completed-run or held-out result. Later diagnostics use the
 current replay pool, so their four-example cohorts differ.
 
+At the [update-5,000 snapshot](../references/evidence/native_chinese_v80_update05000/receipt.json),
+all four scheduled answers still fail: 0/4 exact, 19.501% full foreground F1,
+41.286% first-block F1 and four stopped streams. Generated lengths are
+5/2/12/5 blocks versus target lengths 2/5/3/2. All four
+[raw outputs and owning targets](../references/evidence/native_chinese_v80_update05000/all_outputs_and_targets.png)
+are retained. The run had visited 1,280 of 3,193 training records, with 20,000
+optimization draws. This is another failed training diagnostic, with no
+held-out or language-success claim. Its different four-example cohort prevents
+interpreting the two snapshots as a matched learning curve. The declared
+40,000-update run and final full audit remain unchanged.
+
 The [declared training protocol](../references/native_chinese_v80_protocol.md)
 uses all 3,193 existing Chinese training records, batch four, 40,000 updates and
 a bounded 32-prompt RAM pool. The original data, codec, numeric controls and
