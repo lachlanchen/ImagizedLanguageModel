@@ -66,7 +66,8 @@ def verify(out):
                 if digest!=row["target_sha256"]:raise ValueError("owning target hash differs")
                 target_hashes.append(digest)
         if not np.array_equal(np.concatenate(source_states),arrays["states"]):raise ValueError("retained condition differs from original trace")
-        if not np.array_equal(rounded_bf16(arrays["states"]),arrays["rounded_input"]):raise ValueError("independent BF16 rounding differs")
+        if not np.array_equal(rounded_bf16(arrays["states"]).view(np.uint32),arrays["rounded_input"].view(np.uint32)):
+            raise ValueError("independent BF16 rounding bits differ")
         for name,array in arrays.items():
             groups={}
             for i,row in enumerate(array):groups.setdefault(row.tobytes(),[]).append(i)
@@ -85,8 +86,15 @@ def verify(out):
             denominator=np.sqrt(np.sum(arrays[reference].astype(np.float64)**2,axis=1))
             errors[label]=(np.sqrt(np.sum(difference**2,axis=1))/np.maximum(denominator,1e-30)).tolist()
         close(errors,summary["relative_errors"])
+        expected_pairs={(a,b) for a,ra in enumerate(rows) for b,rb in enumerate(rows)
+            if ra["case"]%2==0 and rb["case"]==ra["case"]+1 and rb["block"]==ra["block"]}
+        actual_pairs=[(p["row_a"],p["row_b"]) for p in summary["matching_pair_blocks"]]
+        if set(actual_pairs)!=expected_pairs or len(actual_pairs)!=len(expected_pairs):
+            raise ValueError("complete matching-pair block population differs")
         for pair in summary["matching_pair_blocks"]:
             a,b=pair["row_a"],pair["row_b"]
+            if (pair["case_a"],pair["case_b"],pair["block"])!=(rows[a]["case"],rows[b]["case"],rows[a]["block"]):
+                raise ValueError("paired metadata differ from owning conditions")
             distances={name:float(np.sqrt(np.sum((v[a].astype(np.float64)-v[b].astype(np.float64))**2))) for name,v in arrays.items()}
             close(distances,pair["distances"])
             if pair["different_targets"]!=(target_hashes[a]!=target_hashes[b]):raise ValueError("paired target identity differs")
