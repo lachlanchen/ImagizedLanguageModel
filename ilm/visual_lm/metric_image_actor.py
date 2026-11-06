@@ -51,4 +51,4 @@ def load_metric_image_actor(*,checkpoint,controls,codec,ollama_root,gguf_source,
     return actor,dict(**provenance,checkpoint_sha256=file_sha(checkpoint),training_identity=identity,
         arm=arm,complete_actor_parameters=complete,trained_parameters=trained,
         ancestor_checkpoints_opened=False,training_dataset_loaded=False,
-        quality_qualification="not assessed by checkpoint completion metadata",language_quality_claim=False)
+        quality_qualification="not assessed by checkpoint completion metadata")
