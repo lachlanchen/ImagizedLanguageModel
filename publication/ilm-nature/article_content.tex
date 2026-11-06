@@ -613,6 +613,13 @@ The earlier small fit received 2,000 passes over its selected examples;
 neither that memorization result nor theoretical time-coverage calculations
 demonstrate a useful general language model.
 
+A matched head-only refinement broadens denoising-time supervision while
+holding the causal body fixed. It improves assisted near-clean block F1 from
+99.0658\% to 99.8602\%, but free-stream F1 falls from 48.726\% to 45.028\%.
+Both arms remain at 0/32 exact training answers. This intervention fails
+all four prespecified repair criteria (Supplementary Note 34); better
+near-clean reconstruction is insufficient for prompt-conditioned generation.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

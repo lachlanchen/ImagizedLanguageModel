@@ -24,6 +24,9 @@ answer length. Supplied-code rendering reaches 99.9953% F1. The abstract,
 article and Note 33 report these failures separately from the small-set fit.
 See the [full result](../../references/clean_corpus_v75_result.md) and
 [writing diagnosis](../../references/corpus_fit_v75_result.md).
+The matched denoising-time repair also fails: assisted near-clean fidelity
+improves, while free-answer F1 falls from 48.726% to 45.028%, with no exact
+answers in either arm. Note 34 retains both outcomes and the rejected decision.
 
 Numeric source-derived task controls retain bounded image reading in the
 imported vocabulary-free contextual body: four of eight checked Chinese

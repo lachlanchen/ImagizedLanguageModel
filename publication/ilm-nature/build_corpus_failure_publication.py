@@ -34,6 +34,12 @@ def main():
         if value["language_quality_claim"] or value["general_ilm_goal_complete"]:
             raise ValueError("failed result acquired a success claim")
         shutil.copy2(source,HERE/"evidence"/source.name)
+    repair=ROOT/"references/evidence/writing_times_v76_result.json"
+    value=json.loads(repair.read_text())
+    if (sha(ROOT/value["source_run"]/"verification.json")!=value["verification_sha256"]
+            or value["verification"]["training_fit_repair_pass"]):
+        raise ValueError("matched repair no longer binds the rejected outcome")
+    shutil.copy2(repair,HERE/"evidence"/repair.name)
     from verify_semantic_transfer_figures import verify
     verify()
     names=subprocess.check_output(["git","ls-tree","-r","--name-only",BASELINE,
@@ -64,6 +70,8 @@ def main():
             raise ValueError("compiled PDF lacks the completed diagnosis: "+name)
         if name=="supplementary_information" and "Supplementary Note 33" not in normalized:
             raise ValueError("compiled supplement lacks the new result note")
+        if "45.028" not in normalized or (name=="supplementary_information" and "Supplementary Note 34" not in normalized):
+            raise ValueError("compiled PDF lacks the rejected matched repair")
         outputs[name+".pdf"]=sha(HERE/(name+".pdf"))
     subprocess.run(["python","build_semantic_transfer_redlines.py"],cwd=HERE,check=True)
     for name in ("redlined_manuscript","redlined_supplementary_information"):
@@ -79,7 +87,7 @@ def main():
     receipt=dict(baseline_commit=BASELINE,pdfs_sha256=outputs,unchanged_figures_sha256=figures,
         preserved_native_slides=26,no_figure_changes=True,all_compiled_without_overfull_or_undefined=True,
         source_receipts_sha256={stem:sha(ROOT/"references/evidence"/(stem+".json"))
-            for stem in ("clean_corpus_v75_result","copy_transfer_v75_result","corpus_fit_v75_result")},
+            for stem in ("clean_corpus_v75_result","copy_transfer_v75_result","corpus_fit_v75_result","writing_times_v76_result")},
         visual_review_required=True,language_quality_claim=False,general_ilm_goal_complete=False)
     (HERE/"evidence/corpus_failure_publication_build.json").write_text(json.dumps(receipt,indent=2)+"\n")
     print(json.dumps(dict(pdfs=outputs,preserved_figure_files=len(figures)),indent=2))

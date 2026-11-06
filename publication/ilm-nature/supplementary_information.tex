@@ -1722,6 +1722,60 @@ The full-data, copy and diagnosis receipts are
 \path{references/evidence/copy_transfer_v75_result.json} and
 \path{references/evidence/corpus_fit_v75_result.json}.
 
+\section*{Supplementary Note 34: broader time coverage does not repair answers}
+A matched intervention starts both arms from the completed clean full-data
+checkpoint. Only the existing 36,403,200-parameter flow head trains; the causal
+body, condition projection, stop head and codec remain fixed. Each arm uses
+all 12,976 training records for 4,000 updates at batch 16, with a fresh AdamW
+optimizer, peak $10^{-4}$, warmup 100, cosine decay to one tenth, betas
+$(.9,.95)$, decay .01 and gradient clipping one. Sample/noise seeds are
+20267601 and 20267602. The control retains $t=\operatorname{sigmoid}(-.8+.8g)$;
+the intervention uses $t=\Phi(g)$, clamped to $[10^{-6},1-10^{-6}]$.
+The same Gaussian variates, noise, example indices and selected blocks are
+used. Nine retained common-draw digests agree exactly across arms. Both
+sample 700,759 writing blocks; the control realizes zero times at or above
+$31/32$, versus 22,067 for the uniform law. Both time exposure and the
+integrated objective weighting change; this is not an isolated sampler test.
+
+Each final head is assessed on the same 32 training questions using their
+verified prompt-derived memory. These are cached-feature calls, with no new
+inherited-reader execution. Free inference receives no answer length or
+target codes and retains the original sampler, physical feedback, learned
+stopping, cap and paired seeds. The separate near-clean diagnostic receives
+noisy target codes and earns no autonomous credit.
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Measure & Logit-normal & Uniform time\\
+\midrule
+Free exact answers & 0/32 & 0/32\\
+Free ink F1 (\%) & 48.726 & 45.028\\
+Learned stopping & 32/32 & 32/32\\
+Near-clean exact blocks & 5/32 & 15/32\\
+Near-clean ink F1 (\%) & 99.0658 & 99.8602\\
+\bottomrule
+\end{tabular}
+\end{center}
+Uniform-time refinement therefore improves target-assisted high-signal
+reconstruction but lowers free-answer F1 by 3.698 points. It fails every
+prespecified training-fit repair criterion: near-clean F1 at least 99.9\%,
+free F1 at least 80\%, at least 16/32 exact free answers and free F1 gain
+of at least five points over control. Neither head advances as a qualified
+model. This failure rejects the bounded intervention, without identifying
+all causes or ruling out different objectives, capacity or training budgets.
+
+The two training stages take 157.554 and 153.230 active seconds, respectively,
+excluding previous writer training, feature preparation, codec learning and
+external foundation pretraining. A discarded real-example execution check
+verifies exact optimizer/RNG/cursor resume and frozen-body preservation.
+Independent CPU verification reconstructs source references, authenticates
+all 64 retained free streams, re-decodes near-clean predictions and checks
+the frozen-body and common-draw hashes. It does not replay the whole neural
+sampler. This experiment uses training examples and makes no unseen-language
+claim. The protocol and result are
+\path{references/writing_time_coverage_v76_protocol.md} and
+\path{references/evidence/writing_times_v76_result.json}.
+
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.

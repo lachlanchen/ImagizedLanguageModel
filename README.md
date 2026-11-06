@@ -44,8 +44,10 @@ reader; its pretraining cost is outside these local runs. No tokenizer, OCR,
 language vocabulary head, persistent glyph inventory or teacher service enters
 this runtime. The [execution guide](docs/clean-image-writing.md) distinguishes
 the failed full-data model from the earlier seen-case control. A matched
-[writing-head repair](references/writing_time_coverage_v76_protocol.md) tests
-denoising-time coverage; it has no successful outcome or language claim yet.
+[writing-head repair](references/writing_times_v76_result.md) improves
+target-assisted near-clean reconstruction, but free-answer F1 falls from
+48.726% to 45.028% and both arms remain at 0/32 exact training answers.
+The repair is rejected; broader denoising-time coverage alone is insufficient.
 
 ## Earlier controls and the failed velocity writer
 

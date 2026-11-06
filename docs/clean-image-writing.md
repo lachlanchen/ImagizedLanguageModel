@@ -9,6 +9,12 @@ scored. The separate new-copy probe gets 0/12 exact answers. The
 [training-fit diagnosis](../references/corpus_fit_v75_result.md) retain the
 failed outcomes. This model is not ready for useful language inference.
 
+The [matched time-coverage repair](../references/writing_times_v76_result.md)
+also fails: both arms get 0/32 exact training answers. Uniform-time refinement
+improves assisted near-clean reconstruction but lowers free-answer F1 relative
+to the matched continuation. Neither refined head is a qualified language
+checkpoint; the original failed full-data result remains the latest full audit.
+
 The latest full-data checkpoint is
 artifacts/clean_corpus_v75_20261106/training/checkpoint_latest.pt;
 its original outputs are under development/predictions/ in that run.
