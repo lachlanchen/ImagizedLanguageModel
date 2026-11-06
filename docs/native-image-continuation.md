@@ -39,6 +39,24 @@ for each language before any corresponding actor answer is transcribed. The
 reader shares the actor's pretrained foundation, so agreement remains an
 auxiliary measurement with correlated errors.
 
+The [native prediction diagnosis](../references/native_corpus_fit_v80_protocol.md)
+reuses the same 32 Chinese training questions previously evaluated with V75.
+It compares free generation, generation with correct preceding image codes
+and supplied answer length, and fixed-codec reconstruction. These controls
+will help distinguish errors that persist under correct history from errors
+introduced by free continuation. They provide no autonomous-answer credit.
+The [preparation receipt](../references/evidence/native_corpus_fit_v80_preparation.json)
+authenticates all 32 source images and code records and independently rebuilds
+their targets and prompt layouts. Model evaluation remains pending.
+
+Prepare on CPU with `CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python
+scripts/probe_native_corpus_fit_v80.py --run artifacts/native_chinese_v80_20261106
+--stage prepare` in the compatible environment. After the original training,
+fixed audit, physical verification and three standalone calls finish, use
+`--stage evaluate` with the GPU environment below, then `--stage verify` with
+CUDA disabled. Run this diagnosis and neural reading sequentially. Preparation
+alone measures neither model predictions nor language capability.
+
 The [update-1,000 snapshot](../references/evidence/native_chinese_v80_update01000/receipt.json)
 contains all four scheduled training-example answers: 0/4 exact, 35.217% full
 foreground F1, 69.845% first-block F1 and four stopped streams. Only 256 of the
