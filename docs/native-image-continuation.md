@@ -1,7 +1,8 @@
 # Native-context image-language training
 
-The current full-corpus image writer is not a usable language model. It gives
-2/128 exact Chinese development answers and 0/12 exact new copy answers.
+The earlier full-corpus image writer (V75) failed to qualify as a usable
+language model: 2/128 exact Chinese development answers and 0/12 exact new copy
+answers.
 Retaining full contextual history is the next tested design direction; it has
 not yet established language capability. The [diagnostic results](../references/native_context_v80_result.md)
 explain the distinction between source-reader content, glyph reconstruction and
@@ -34,6 +35,21 @@ optimization draws. This is another failed training diagnostic, with no
 held-out or language-success claim. Its different four-example cohort prevents
 interpreting the two snapshots as a matched learning curve. The declared
 40,000-update run and final full audit remain unchanged.
+
+The [update-10,000 snapshot](../references/evidence/native_chinese_v80_update10000/receipt.json)
+also gives 0/4 exact training answers, with 48.319% full foreground F1,
+67.056% first-block F1 and four stopped streams. Output lengths are 3/2/4/2
+blocks versus targets of 3/2/2/5. The
+[unmodified images and owning targets](../references/evidence/native_chinese_v80_update10000/all_outputs_and_targets.png)
+show recognizable initial characters in some outputs, followed by damaged
+writing, incorrect continuations or incomplete answers. At this point 2,528 of
+3,193 records had been used, with 40,000 optimization draws. The
+[exposure replay](../references/evidence/native_chinese_v80_update10000/case_exposure.json)
+matches all 1,001 logged minibatches through update 10,000 and finds two
+optimization exposures for each diagnostic case. These are different cases
+with different exposure counts from the earlier snapshots; their scores do
+not form a matched learning curve. No held-out or usable-language result is
+established. Training continues under the original 40,000-update protocol.
 
 An [exposure audit](../references/evidence/native_case_exposure_v80.json) replays
 the declared sample order and matches all 501 logged minibatches through update
