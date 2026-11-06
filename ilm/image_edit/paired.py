@@ -58,8 +58,11 @@ class LowRankLinear(nn.Module):
     def forward(self, value):
         # Autocast supplies BF16 multiplication while FP32 adapter masters and
         # Adam state retain update precision. alpha == rank in this recipe.
+        original = self.base(value)
         delta = F.linear(F.linear(value, self.down), self.up)
-        return self.base(value) + delta.to(value.dtype)
+        # Source RMSNorm can supply FP32 inputs to autocast Linear, whose
+        # native output is BF16. Preserve the output dtype, not input dtype.
+        return original + delta.to(original.dtype)
 
 
 def add_adapters(model, rank):

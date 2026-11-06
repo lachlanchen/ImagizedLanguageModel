@@ -58,6 +58,21 @@ the same arguments in a new output directory; completed budgets are rejected
 instead of silently trained again. No earlier experimental checkpoint chain
 is required.
 
+Before scoring generated writing, calibrate the separate CPU evaluator on
+every reference in the writing cohort:
+
+```bash
+env CUDA_VISIBLE_DEVICES= PYTHONNOUSERSITE=1 PYTHONPATH=. OMP_THREAD_LIMIT=1 "$ILM_IMAGE_PYTHON" scripts/score_paired_writing.py --stage calibrate --manifest artifacts/paired_pages/pairs.jsonl --output artifacts/paired_reference_ocr
+```
+
+For scoring, supply `--stage score --calibration .../report.json
+--generations outputs.json` with a JSON list of `{id, path, sha256}` for the
+actual output PNGs. Paths are relative to that index. The evaluator preserves
+raw transcripts, expected strings and uncertain readings; it does not repair
+the generated images. An eight-case display is explicitly distinguished from
+the complete 64-case writing cohort. OCR scores are observations, not a
+substitute for reviewing the actual pixels.
+
 Deploy a resulting checkpoint with only the input image:
 
 ```bash
@@ -67,6 +82,8 @@ env CUDA_VISIBLE_DEVICES=0 PYTHONNOUSERSITE=1 PYTHONPATH=. "$ILM_IMAGE_PYTHON" s
 Omit `--checkpoint` to measure the same base generator before learning.
 The input page must have dimensions divisible by 16 and at most 1,048,576
 pixels. Declare the answer canvas independently of its expected content.
+Guidance defaults to one, matching the conditional field used by this
+training objective. The source base scheduler still performs 50 steps.
 Both the actual postprocessed pixel tensor and an unrepaired answer PNG are
 saved. Copying validation, natural QA, question-erasure controls and broader
 language/length/style tests remain separate requirements. Use offline OCR
