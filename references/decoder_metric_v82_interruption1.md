@@ -44,3 +44,12 @@ optimizer, loss, data, seeds, sampler, output rule or original quality gate.
 Preserve and report any replay or restart failure. The original full CPU
 verifier and result exporter still require both completed arms. No successful
 language, lightweight-model or efficiency claim follows from this recovery.
+
+Recovery observation: the replacement invocation reaches a saved metric
+checkpoint at update 250, with the original experiment identity and
+`training_complete=false`. All 19 archived journal rows (update 1, then every
+ten updates through 180) match exactly, including recorded loss, gradient
+norm and sampled indices. All 548 protected control and initial-output files
+retain their hashes after the restart. This comparison covers the journal
+values; full cross-process equality of all model and optimizer tensors at
+update 180 was not measured. The running arm has no final quality result.
