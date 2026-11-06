@@ -27,6 +27,7 @@ from scripts.audit_native_pixel_transcripts_v61 import normalize, scores
 from scripts.cache_semantic_images_v72 import ROOT, committed_identity, sha
 
 PLAN = "references/native_neural_transcription_v80_protocol.md"
+OUTPUT = "neural_transcription_v80r2"
 CAL_SHA = "5fed1616f03b9ca4fd6791dda00c5bfb08b8ed0a93c944d2c45a574bc996adf7"
 OPTIONS = dict(temperature=0,top_p=1,seed=20268040,num_ctx=8192,num_predict=1024)
 SOURCES = ("scripts/audit_native_neural_transcripts_v80.py", PLAN,
@@ -55,7 +56,7 @@ def view(pixels,folder):
         if end<pixels.shape[1]:
             lower=start+512;white=np.flatnonzero(np.all(pixels[:,lower:end]==255,axis=0))
             if len(white):end=lower+int(white[-1])+1
-        spans.append((start,end));start=end
+        spans.append([start,end]);start=end
     page=np.full((len(spans)*36-4,width),255,np.uint8)
     for i,(a,b) in enumerate(spans):page[i*36:i*36+32,:b-a]=pixels[:,a:b]
     assert np.array_equal(np.concatenate([page[i*36:i*36+32,:b-a] for i,(a,b) in enumerate(spans)],axis=1),pixels)
@@ -229,7 +230,7 @@ def owned_reader(run,out,local,port,identity):
 
 
 def execute(args):
-    run=args.run.resolve();out=(args.out or run/"neural_transcription_v80").resolve()
+    run=args.run.resolve();out=(args.out or run/OUTPUT).resolve()
     if not out.is_relative_to(run) or out==run:raise ValueError("separate output inside run required")
     if (out/"report.json").exists():raise FileExistsError("completed diagnostic is immutable")
     if args.prepare_only:
@@ -320,7 +321,7 @@ if __name__=="__main__":
     except PipelinePending:
         raise  # An expected sequencing refusal must not create a failure artifact.
     except BaseException as error:
-        if args.out or (args.run/"neural_transcription_v80").exists():
-            target=args.out or args.run/"neural_transcription_v80"
+        if args.out or (args.run/OUTPUT).exists():
+            target=args.out or args.run/OUTPUT
             if target.resolve().is_relative_to(args.run.resolve()) and target.resolve()!=args.run.resolve():write(target/"failure.json",dict(error=repr(error),completed_score=False))
         raise
