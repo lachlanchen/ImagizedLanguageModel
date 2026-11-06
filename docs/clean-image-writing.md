@@ -15,6 +15,12 @@ improves assisted near-clean reconstruction but lowers free-answer F1 relative
 to the matched continuation. Neither refined head is a qualified language
 checkpoint; the original failed full-data result remains the latest full audit.
 
+The [source-reader content probe](../references/reader_content_v77_result.md)
+is a separate offline diagnostic. Its source text decoder recovers 8/12 copy
+answers and 19/32 training answers from identical image-prefill states, using
+full KV history for continuation. It is not an alternative deployed inference
+path, and its answers do not count as ILM-generated images.
+
 The latest full-data checkpoint is
 artifacts/clean_corpus_v75_20261106/training/checkpoint_latest.pt;
 its original outputs are under development/predictions/ in that run.

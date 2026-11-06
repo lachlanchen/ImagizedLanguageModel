@@ -49,6 +49,13 @@ target-assisted near-clean reconstruction, but free-answer F1 falls from
 48.726% to 45.028% and both arms remain at 0/32 exact training answers.
 The repair is rejected; broader denoising-time coverage alone is insufficient.
 
+An [offline source-reader diagnostic](references/reader_content_v77_result.md)
+now recovers 8/12 exact copy answers and 19/32 exact training answers from
+the same images, while the image writer remains at zero on both sets. All
+44 reader memories match exactly. The source helper retains full contextual
+KV history for continuation; this does not prove the compact 52-state memory
+is sufficient. It localizes available content before the new writing path.
+
 ## Earlier controls and the failed velocity writer
 
 ![Implemented visual-semantic training and physical image-output feedback](publication/ilm-nature/figures/Figure_S11_continuous_writer.png)

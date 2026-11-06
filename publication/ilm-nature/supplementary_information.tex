@@ -1776,6 +1776,76 @@ claim. The protocol and result are
 \path{references/writing_time_coverage_v76_protocol.md} and
 \path{references/evidence/writing_times_v76_result.json}.
 
+\section*{Supplementary Note 35: content before the image writer}
+The failed full-corpus image writer is compared with a separate offline source
+decoder on exactly the same 12 copy requests and 32 fixed training questions.
+Every source prompt and canonical reference re-renders to the original
+physical strips exactly. The image helper receives the same folded prompt
+pixels and the unchanged native-budget observer and numeric task controls.
+The normal-image 52-state BF16 suffix exactly matches the original ILM reader
+memory for all 44 cases. The first helper projection uses precisely its last
+stored BF16 vector, without additional FP32 prefill precision.
+
+Each case has a normal-image and source-text helper route. The 12 copy
+requests also have fully blanked prompt-image controls at the same geometry,
+giving 100 fixed calls. Text controls use the owning source prompt and do not
+append an answer. The source helper retains the frozen imported image/context
+body with zero adapter outputs and no registered vocabulary embedding module.
+Only this separate evaluator uses the authenticated source tokenizer, token
+row lookup and temporary output projection. It performs greedy decoding with
+a 64-source-token cap and authenticated source end IDs. Seed 20267710,
+four CPU threads, deterministic cuDNN/math attention and no TF32 are fixed.
+The temporary head is stored in BF16 and contracted in FP32. No optimizer
+updates, new independent image-actor calls or sealed-data access occur.
+
+The image helper returns 8/12 exact copy answers, versus 6/12 for source-text
+controls and 0/12 with all prompt ink blanked. All 12 normal copy responses
+contain the owning reference while excluding the paired reference. Four are
+not exact because additional material, including quotation marks, is retained
+rather than removed by scoring. On the 32 training questions, the image helper
+returns 19/32 exact canonical answers, versus 24/32 for source-text controls.
+Owning-reference inclusion is 22/32 and 25/32, respectively. All 100 responses
+stop by source end IDs. Exactness requires termination and canonical-answer
+equality after outer whitespace trim; inclusion is a separate string measure,
+not semantic accuracy. The original image writer remains at 0/12 and 0/32.
+
+On 22/32 training-image calls the first decoded source piece is a nonempty
+prefix of the owning reference and not of the paired reference. This first
+decision uses a vector already present in the compact ILM memory. It identifies
+some available answer information, without proving complete answer sufficiency.
+Subsequent source decoding retains the complete layerwise visual/context KV
+cache, whereas the image writer sees only 52 final-layer states. Correct full
+helper answers therefore cannot be attributed solely to the compact memory.
+The cases are reused diagnostic/training examples and may have been exposed
+to source pretraining; no new population language or learning claim follows.
+
+Independent CPU checks reconstruct all 56 physical/transformed image inputs,
+recompile controls and authenticate every retained helper response. All 725
+source projection decisions replay as exact argmax from retained hidden
+states, within the fixed selected-logit and regret tolerances. The complete
+vision/context forward pass is not independently replayed. The helper stage
+takes 282.212 seconds, including 134.073 seconds setup, at 19.099 GiB allocated
+memory on GPU 0. External pretraining, earlier feature preparation, codec
+learning and ILM training are excluded. This is a capability diagnostic with
+different decoding information, not an efficiency comparison.
+The fixed protocol, raw-answer receipt and entry point are
+\path{references/reader_content_v77_protocol.md},
+\path{references/evidence/reader_content_v77_result.json} and
+\path{scripts/probe_reader_content_v77.py}.
+
+\plate{Figure_S12_reader_content}{\textbf{Source-reader content and the image-writing boundary.}
+\textbf{a}, Literal exact counts among the same 12 copy requests: original
+ILM image output, source image helper, source text helper and fully blanked
+image helper. \textbf{b}, The same comparison on 32 fixed training questions,
+without a blank route. The original image scores are unchanged physical-raster
+counts. The source decoder uses outer-whitespace-trimmed canonical text
+equality, preserving extra quotations and explanations. \textbf{c}, All 44
+normal-image suffix memories match the original BF16 bytes, but continuation
+information differs: the source text helper retains full layerwise KV history,
+whereas the image writer receives 52 final-layer states. No successful ILM
+image generation or compact-memory sufficiency is inferred. Both count charts
+and the information diagram are native editable PowerPoint objects.}{fig:s12-reader-content}
+
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.

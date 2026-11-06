@@ -620,6 +620,18 @@ Both arms remain at 0/32 exact training answers. This intervention fails
 all four prespecified repair criteria (Supplementary Note 34); better
 near-clean reconstruction is insufficient for prompt-conditioned generation.
 
+An offline source-decoder diagnostic recovers 8/12 exact copy answers and
+19/32 exact training answers from the same physical prompt images, compared
+with zero exact image outputs in both groups (Supplementary Note 35 and
+Fig.~S12). All 44 normal prefill memories match the original 52-state BF16
+suffixes exactly. The first source projection matches the correct answer
+prefix on 22/32 training questions, excluding the paired answer in each case.
+Thus some answer information is available before the new writer. Later
+source decoding uses the full layerwise visual/context KV history, which
+the image writer does not receive. These measurements motivate examining
+the compact-memory and conditional-readout boundary; they do not demonstrate
+sufficiency of the compact state or a usable image-language model.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

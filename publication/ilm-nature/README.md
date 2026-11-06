@@ -28,6 +28,15 @@ The matched denoising-time repair also fails: assisted near-clean fidelity
 improves, while free-answer F1 falls from 48.726% to 45.028%, with no exact
 answers in either arm. Note 34 retains both outcomes and the rejected decision.
 
+The offline source-reader diagnostic recovers **8/12 exact copy answers** and
+**19/32 exact training answers** from the same images, with all 44 prefill
+memories matching the failed image actor. Later source decoding uses full KV
+history; the compact image-writer memory has not been shown sufficient.
+Note 35 and Figure S12 report this boundary, with both native count charts and
+an editable diagram. The current build entry point is
+build_reader_content_publication.py; reader_content_figures.py appends and
+verifies slide 27 while preserving all earlier 26 native/canonical slides.
+
 Numeric source-derived task controls retain bounded image reading in the
 imported vocabulary-free contextual body: four of eight checked Chinese
 answers are exact at the declared native sampling budget, versus zero with
