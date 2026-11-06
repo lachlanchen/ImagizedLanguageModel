@@ -1,0 +1,141 @@
+{
+  "export_identity": {
+    "source_commit": "61c6df458fa11c053525105a2ad92168a7c73a3c",
+    "sources": {
+      "scripts/export_copy_transfer_v75.py": "8fdf4c18bb07c8bcaca14a83e6ab2356126c5698d2cd5d899c0f41e7683f88e3",
+      "scripts/audit_copy_transfer_v75.py": "0d8e813b1919dad1c1f9786dc9c95144451fdd6fe1d43957f66744f8e405efc3",
+      "scripts/prepare_copy_transfer_v75.py": "a93300947ec626abbfc9e6e2e84f3fe706bc67af4bb6d9e276a87b8822d696ed"
+    }
+  },
+  "source_run": "artifacts/copy_transfer_v75_20261106",
+  "report_sha256": "eab3237f787bf9b858fb9026a081edfbbe52e7a5685beaca966b88029c3cca38",
+  "verification_sha256": "90c983b94a09faaff176adb89a59b297cac87c62b6a0228270535ba859aef801",
+  "prepared_report_sha256": "71fdda2aa89cd176965a8bdb5900facce8ead2ad49bbc5bc22f544e75eebda7d",
+  "checkpoint_sha256": "d0cb3aa7923db450dc904269c753e0a4157e704a6da1be487507b168d7612249",
+  "summary": {
+    "groups": {
+      "all": {
+        "cases": 12,
+        "exact": 0,
+        "foreground_f1": 0.22485711544343492,
+        "learned_stopping": 12,
+        "own_minus_partner_f1": 0.0012273458869297982
+      },
+      "zh": {
+        "cases": 4,
+        "exact": 0,
+        "foreground_f1": 0.26989008909850265,
+        "learned_stopping": 4,
+        "own_minus_partner_f1": -0.00250092938179923
+      },
+      "en": {
+        "cases": 4,
+        "exact": 0,
+        "foreground_f1": 0.15925221453976607,
+        "learned_stopping": 4,
+        "own_minus_partner_f1": 0.009605690551968207
+      },
+      "numeric": {
+        "cases": 4,
+        "exact": 0,
+        "foreground_f1": 0.24542904269203603,
+        "learned_stopping": 4,
+        "own_minus_partner_f1": -0.0034227235093795827
+      }
+    },
+    "both_exact_pairs": 0,
+    "pairs": 6
+  },
+  "verification": {
+    "report_sha256": "eab3237f787bf9b858fb9026a081edfbbe52e7a5685beaca966b88029c3cca38",
+    "summary": {
+      "groups": {
+        "all": {
+          "cases": 12,
+          "exact": 0,
+          "foreground_f1": 0.22485711544343492,
+          "learned_stopping": 12,
+          "own_minus_partner_f1": 0.0012273458869297982
+        },
+        "zh": {
+          "cases": 4,
+          "exact": 0,
+          "foreground_f1": 0.26989008909850265,
+          "learned_stopping": 4,
+          "own_minus_partner_f1": -0.00250092938179923
+        },
+        "en": {
+          "cases": 4,
+          "exact": 0,
+          "foreground_f1": 0.15925221453976607,
+          "learned_stopping": 4,
+          "own_minus_partner_f1": 0.009605690551968207
+        },
+        "numeric": {
+          "cases": 4,
+          "exact": 0,
+          "foreground_f1": 0.24542904269203603,
+          "learned_stopping": 4,
+          "own_minus_partner_f1": -0.0034227235093795827
+        }
+      },
+      "both_exact_pairs": 0,
+      "pairs": 6
+    },
+    "all_12_outputs_independently_scored": true,
+    "source_input_pixels_checked": 12,
+    "full_neural_forward_replayed": false,
+    "physical_feedback_hashes_numerically_replayed": false,
+    "descriptive_diagnostic_only": true,
+    "language_quality_claim": false,
+    "general_ilm_goal_complete": false
+  },
+  "runtime": {
+    "model_calls": 12,
+    "elapsed_seconds": 91.35215794108808,
+    "setup_seconds": 74.06992725655437,
+    "peak_allocated_vram_gib": 18.212644577026367
+  },
+  "raw_files_sha256": {
+    "references/evidence/copy_transfer_v75_raw/00_prompt.png": "e4cc5c892ec49eb07b435e06225842d69b70dbd540bf8dd6846eff57d5f903b1",
+    "references/evidence/copy_transfer_v75_raw/00_reference.png": "1aee71934e1cbcb8d9587f33f39f03926dcffff28fba6cd756ef780287e65629",
+    "references/evidence/copy_transfer_v75_raw/00_answer.png": "1d337fc9337236bdbfba1ae101dfdcae15d936a601800e9ef4a5f1ec8f90cc5a",
+    "references/evidence/copy_transfer_v75_raw/01_prompt.png": "15b1ab0dc4fba44cb5935366151831d6468b0ccdfad3b58308e5b673f884c136",
+    "references/evidence/copy_transfer_v75_raw/01_reference.png": "a5773fceb4d15e04f7e61449cf338220382d04c75bb009e0f38729765f9df7ac",
+    "references/evidence/copy_transfer_v75_raw/01_answer.png": "6b65e8f2d3d66f7fc22ccfb0334bb74efb410e7c5ff87c0f5b87b98a5c683694",
+    "references/evidence/copy_transfer_v75_raw/02_prompt.png": "0646969bb90dc45b5a0e065fc91a71aa58885410e92794928a5f155a1f254e43",
+    "references/evidence/copy_transfer_v75_raw/02_reference.png": "6b8d3b530b796f949ac17564bd5c7ec76728643de4f50d4a637121c320df5a92",
+    "references/evidence/copy_transfer_v75_raw/02_answer.png": "67e5bf139e383d164eed2b459649735c34cd4a1162d1f819286dba9cdeb76f26",
+    "references/evidence/copy_transfer_v75_raw/03_prompt.png": "9415b3429703f4d025e51032eae15f45f172e0715180c9fe0818b909f9a0b871",
+    "references/evidence/copy_transfer_v75_raw/03_reference.png": "79b8013ae47f8e38d1ac3c1140c61bcf68d2b6066a12f0f3e02234cd280afbcd",
+    "references/evidence/copy_transfer_v75_raw/03_answer.png": "031b0944ce1b33119bea61bd36925238798c5224b4a0d525cbb2aa83f7e4dd4f",
+    "references/evidence/copy_transfer_v75_raw/04_prompt.png": "c68956de490b44badbd6c8e5df6ccae7fa21f563fb4b01cdd6a21eb64144a796",
+    "references/evidence/copy_transfer_v75_raw/04_reference.png": "d432f57226faf7d16ac0e86b25bc8484d583e53ccdcd452d76be0716738fff97",
+    "references/evidence/copy_transfer_v75_raw/04_answer.png": "8fb97afb4db03704661fd16e160e9cd6e1328d713e5b8f98aa8f1765df4c31a5",
+    "references/evidence/copy_transfer_v75_raw/05_prompt.png": "af6858e4d380adb3ed92a1b914800841bf99fc9631a66a9f348129452c1545b1",
+    "references/evidence/copy_transfer_v75_raw/05_reference.png": "c0de668281e97542e39f010c17725b99211026133cb362bed032da6d17bb1b87",
+    "references/evidence/copy_transfer_v75_raw/05_answer.png": "ea6505ca10258c6e7a3370403eb41bd0696130ca556b288aace0526f971e805d",
+    "references/evidence/copy_transfer_v75_raw/06_prompt.png": "7d1073e4ddb1d525c8e5142792e5f5db80fd9114c79a7fb61763bcabbfce78d7",
+    "references/evidence/copy_transfer_v75_raw/06_reference.png": "37d7263a7f1423023971380636d6c32f68c551221e25aaab0f702b7f9cb282bf",
+    "references/evidence/copy_transfer_v75_raw/06_answer.png": "5990a6804119d84883310c164a6b5a1ca5ba632715ad4725ad77fc98d70c2433",
+    "references/evidence/copy_transfer_v75_raw/07_prompt.png": "6acabdffa660296384cee676ab422999771f9d3647b833c46b26aa484393b20a",
+    "references/evidence/copy_transfer_v75_raw/07_reference.png": "499d2bc3d7b4e9e72a9e5dc4bea681bbb2f91fd6f15646c88f5985ad8129b56e",
+    "references/evidence/copy_transfer_v75_raw/07_answer.png": "c220583b65c39a4adeec305f97ea62cfeb71c6d238a6fe54f2aa299377faa4a5",
+    "references/evidence/copy_transfer_v75_raw/08_prompt.png": "3e8f4ea52e865cca1d5b6f821c20d5faee92ce87697a7652d982600a89e2212b",
+    "references/evidence/copy_transfer_v75_raw/08_reference.png": "f3405f3b2db98ea687485e166d8300af67db2a978876ca932ba45308b408feab",
+    "references/evidence/copy_transfer_v75_raw/08_answer.png": "a01fd35b7fcc051ccf1ad66f435898c1e032e12f15cb2c8d55b259496fd2172a",
+    "references/evidence/copy_transfer_v75_raw/09_prompt.png": "9c48b5d9af73874206b6b6e22ee97c15c9db9f5d389e0219736cc5d5ac6138e7",
+    "references/evidence/copy_transfer_v75_raw/09_reference.png": "ea9d8e9ee4191eada4b35f51040eaacf8fa6a9b3e9bdc665326e49bb11b6245d",
+    "references/evidence/copy_transfer_v75_raw/09_answer.png": "9d61cfc63b016f5925460a1e6efee03e5e98e18d86d2748d291eca8ebfc31ad6",
+    "references/evidence/copy_transfer_v75_raw/10_prompt.png": "d6df835a219b05575b378183c9f2599f8d91c45f83b80d15be450a0142eaaec6",
+    "references/evidence/copy_transfer_v75_raw/10_reference.png": "4306d506e4fbf25b4860882565f99dff7965464d2b09d22798c2fbb028200e0d",
+    "references/evidence/copy_transfer_v75_raw/10_answer.png": "a14ab1424149dff176f05847dac55e54219aa01d7a164a92375d32ffdddd1c83",
+    "references/evidence/copy_transfer_v75_raw/11_prompt.png": "725845c4d40ee2232775a93e14c24d9985b42eeb4a0c6e6da908660daa6a45ee",
+    "references/evidence/copy_transfer_v75_raw/11_reference.png": "80f8737c11bcf47483074b53d6ea3f046a07d50a0b3ab33a4b101c3613990369",
+    "references/evidence/copy_transfer_v75_raw/11_answer.png": "9a3203018d85d266490a201520eddc58bb4afdf60e61f661dd20d4f6f0110e3f"
+  },
+  "descriptive_diagnostic_only": true,
+  "output_pixels_repaired": false,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}

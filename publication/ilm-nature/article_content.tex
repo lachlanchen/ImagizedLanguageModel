@@ -636,8 +636,9 @@ training-seed replication and a capability-matched text-model comparison.
 Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
-Exact copying is now preserved by an aligned inverse-image path. The remaining
-test is whether context selects a coherent written future. Low teacher-forced
+Supplied-target reconstruction is preserved by an aligned inverse-image path;
+new prompt-directed copying still fails. The remaining test is whether
+context selects and generates a coherent written future. Low teacher-forced
 image NLL can reflect dependencies among strokes already revealed within the
 target, while generated output still loses global identity. Joint training
 improves proper likelihood beyond matched extra density training; the raw

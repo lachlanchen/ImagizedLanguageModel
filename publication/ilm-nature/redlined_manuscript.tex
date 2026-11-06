@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 06:27:10 2026
-%DIF ADD new.tex   Fri Nov  6 06:27:10 2026
+%DIF DEL old.tex   Fri Nov  6 08:13:00 2026
+%DIF ADD new.tex   Fri Nov  6 08:13:00 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno}
@@ -134,7 +134,7 @@
 \noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V68 conditional-writing baseline are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes historical \DIFdelbegin \DIFdel{, handwritten }\DIFdelend and \DIFdelbegin \DIFdel{transitional }\DIFdelend \DIFaddbegin \DIFadd{handwritten }\DIFaddend forms that \DIFdelbegin \DIFdel{a }\DIFdelend fixed character \DIFdelbegin \DIFdel{inventory }\DIFdelend \DIFaddbegin \DIFadd{inventories }\DIFaddend cannot faithfully represent. We investigate \DIFdelbegin \DIFdel{independent }\DIFdelend language modelling with writing images as input and output on one consumer GPU. \DIFdelbegin \DIFdel{The actors consume and generate }\DIFdelend \DIFaddbegin \DIFadd{Deployed inference uses }\DIFaddend physical rasters without a character vocabulary. \DIFdelbegin \DIFdel{An earlier compact reader answers 25 of 256 development questions exactly, but only four of 393 shared-paragraph pairs have both answers correct. We then separate physical rendering from conditional answer selection. }\DIFdelend A frozen continuous writing codec reconstructs \DIFaddbegin \DIFadd{126 of }\DIFaddend 128 development blocks \DIFaddbegin \DIFadd{exactly, }\DIFaddend at 99.998\% foreground F1\DIFdelbegin \DIFdel{, with 126 exact blocks}\DIFdelend . An inherited 7.539B-parameter actor \DIFdelbegin \DIFdel{learns to predict this output space by adapting }\DIFdelend \DIFaddbegin \DIFadd{adapts }\DIFaddend 9.352M parameters \DIFdelbegin \DIFdel{for 10,000 updates }\DIFdelend on one RTX 4090 D, \DIFdelbegin \DIFdel{with 16.965 GiB peak allocated memory. Its autonomous }\DIFdelend \DIFaddbegin \DIFadd{yet produces zero exact }\DIFaddend Chinese answers \DIFdelbegin \DIFdel{reach only \CodecLanguageFOne}\DIFdelend \DIFaddbegin \DIFadd{out of 128. A separate diagnostic text projection recovers four of eight answers through a vocabulary-free image interface, without establishing image writing. A successor trains a 38.652M-parameter causal writer on frozen image features for 40,000 updates, reaching 29.386}\DIFaddend \% \DIFaddbegin \DIFadd{foreground }\DIFaddend F1 and \DIFaddbegin \DIFadd{again }\DIFaddend zero exact \DIFdelbegin \DIFdel{matches }\DIFdelend \DIFaddbegin \DIFadd{answers }\DIFaddend out of \DIFdelbegin \DIFdel{128, despite a \CodecLanguageQuestionGain-point effect of question pixels and correct stopping}\DIFdelend \DIFaddbegin \DIFadd{128. Its velocity projection leaves 767 noise directions outside its affine output span}\DIFaddend . \DIFdelbegin \DIFdel{A fixed 32-case diagnostic finds poor initial }\DIFdelend \DIFaddbegin \DIFadd{After full-dimensional }\DIFaddend and \DIFdelbegin \DIFdel{exact-history predictions}\DIFdelend \DIFaddbegin \DIFadd{numerical repairs}\DIFaddend , \DIFdelbegin \DIFdel{including on }\DIFdelend \DIFaddbegin \DIFadd{clean-code prediction reproduces one learned Chinese image exactly in 256 fresh trials. The complete clean writer also fits 29 of 32 seen }\DIFaddend training \DIFdelbegin \DIFdel{examples, while supplied-code reconstruction }\DIFdelend \DIFaddbegin \DIFadd{answers; unseen generalization }\DIFaddend remains \DIFdelbegin \DIFdel{faithful}\DIFdelend \DIFaddbegin \DIFadd{unproved}\DIFaddend . \DIFdelbegin \DIFdel{These results identify }\DIFdelend \DIFaddbegin \DIFadd{The evidence identifies }\DIFaddend a \DIFdelbegin \DIFdel{conditional-prediction failure preceding generated-history drift}\DIFdelend \DIFaddbegin \DIFadd{concrete generation obstruction while separating faithful rendering, bounded reading and conditional language generation}\DIFaddend . Useful \DIFdelbegin \DIFdel{general }\DIFdelend image-language \DIFdelbegin \DIFdel{generation and historical-form reasoning remain }\DIFdelend \DIFaddbegin \DIFadd{modelling remains an }\DIFaddend open objective\DIFdelbegin \DIFdel{s}\DIFdelend  .}\par\bigskip
+\section*{Abstract}{Written language includes historical \DIFdelbegin \DIFdel{, handwritten }\DIFdelend and \DIFdelbegin \DIFdel{transitional }\DIFdelend \DIFaddbegin \DIFadd{handwritten }\DIFaddend forms that \DIFdelbegin \DIFdel{a }\DIFdelend fixed character \DIFdelbegin \DIFdel{inventory }\DIFdelend \DIFaddbegin \DIFadd{inventories }\DIFaddend cannot faithfully represent. We investigate \DIFdelbegin \DIFdel{independent }\DIFdelend language modelling with writing images as input and output on one consumer GPU. \DIFdelbegin \DIFdel{The actors consume and generate }\DIFdelend \DIFaddbegin \DIFadd{Runtime inference uses }\DIFaddend physical rasters without a character vocabulary. \DIFdelbegin \DIFdel{An earlier compact reader answers 25 of 256 development questions exactly, but only four of 393 shared-paragraph pairs have both answers correct. We then separate physical rendering from conditional answer selection. }\DIFdelend A frozen continuous \DIFdelbegin \DIFdel{writing }\DIFdelend codec reconstructs \DIFaddbegin \DIFadd{126 of }\DIFaddend 128 development blocks \DIFaddbegin \DIFadd{exactly, }\DIFaddend at 99.998\% foreground F1\DIFdelbegin \DIFdel{, with 126 exact blocks}\DIFdelend . An \DIFdelbegin \DIFdel{inherited 7.539B-parameter actor learns to predict this }\DIFdelend \DIFaddbegin \DIFadd{initial causal velocity writer has a rank-limited }\DIFaddend output \DIFdelbegin \DIFdel{space by adapting 9.352M parameters }\DIFdelend \DIFaddbegin \DIFadd{span that retains 767 noise directions. Direct clean-code prediction reproduces one learned image in all 256 fresh trials and fits 29 of 32 seen training answers. These controls do not transfer to useful language generation. A fresh 64.520M-parameter writer trained on 12,976 Chinese/English examples }\DIFaddend for \DIFdelbegin \DIFdel{10}\DIFdelend \DIFaddbegin \DIFadd{40}\DIFaddend ,000 updates \DIFdelbegin \DIFdel{on one RTX 4090 D, with 16.965 GiB peak allocated memory. Its autonomous Chinese answers reach }\DIFdelend \DIFaddbegin \DIFadd{produces }\DIFaddend only \DIFdelbegin \DIFdel{\CodecLanguageFOne\% F1 and zero }\DIFdelend \DIFaddbegin \DIFadd{two }\DIFaddend exact \DIFdelbegin \DIFdel{matches }\DIFdelend \DIFaddbegin \DIFadd{Chinese answers }\DIFaddend out of 128, \DIFdelbegin \DIFdel{despite a \CodecLanguageQuestionGain-point effect of question pixels }\DIFdelend \DIFaddbegin \DIFadd{at 37.631\% foreground F1, }\DIFaddend and \DIFdelbegin \DIFdel{correct stopping}\DIFdelend \DIFaddbegin \DIFadd{fails all 12 new copying requests}\DIFaddend . \DIFdelbegin \DIFdel{A fixed 32-case diagnostic finds poor initial and exact-history predictions, including on }\DIFdelend \DIFaddbegin \DIFadd{On 32 }\DIFaddend training \DIFdelbegin \DIFdel{examples}\DIFdelend \DIFaddbegin \DIFadd{questions}\DIFaddend , \DIFaddbegin \DIFadd{supplying correct answer history and length still gives no exact answers and only 58.045\% F1, }\DIFaddend while supplied-code \DIFdelbegin \DIFdel{reconstruction remains faithful}\DIFdelend \DIFaddbegin \DIFadd{decoding reaches 99.9953\%}\DIFaddend . \DIFaddbegin \DIFadd{The model retains an externally pretrained frozen image/contextual reader; local costs exclude that pretraining. }\DIFaddend These \DIFdelbegin \DIFdel{results identify }\DIFdelend \DIFaddbegin \DIFadd{measurements distinguish rendering capacity, small-set memorization and conditional generation, and locate }\DIFaddend a \DIFdelbegin \DIFdel{conditional-prediction }\DIFdelend \DIFaddbegin \DIFadd{writing-prediction }\DIFaddend failure \DIFdelbegin \DIFdel{preceding generated-history drift}\DIFdelend \DIFaddbegin \DIFadd{before long autonomous rollouts}\DIFaddend . Useful \DIFdelbegin \DIFdel{general }\DIFdelend image-language \DIFdelbegin \DIFdel{generation and historical-form reasoning remain open objectives}\DIFdelend \DIFaddbegin \DIFadd{modelling remains unachieved}\DIFaddend .}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -731,6 +731,38 @@ with 99.997\% original-image F1. This is a paired learning-capacity control,
 not unseen-question generalization (Supplementary Note 32).
 }
 
+\subsection*{\DIFadd{Full-corpus clean writing still fails}}
+\DIFadd{A fresh 64.520M-parameter clean writer trains on all 12,976 examples for
+40,000 updates, completing 49 corpus passes. Its autonomous audit produces
+2/128 exact Chinese answer images and 37.631\% foreground F1, versus
+23.609\% with question ink erased. Both questions are exact in 0/64 passage
+pairs; three original requirements fail. The question effect is resolved
+at 14.023 F1 points }[\DIFadd{10.861, 17.487}]\DIFadd{, and all normal Chinese answers stop
+by their learned rule. Dependence on question pixels does not establish
+correct answers. A separate 12-request Chinese/English/numeric copy probe
+also gives no exact outputs (Supplementary Note 33).
+}
+
+\DIFadd{The full writer fails even on the earlier 32 training questions: free
+generation reaches 45.771\% F1 with no exact answer. Correct prior image
+codes and supplied answer length raise F1 to 58.045\%, still with no exact
+stream. Supplied-code rendering reaches 99.9953\% F1. Thus error is already
+present under correct histories. The clean predictor also slightly corrupts
+constructed near-clean target codes. This identifies an additional writing
+defect, without showing that it causes the much larger free-answer failure.
+The earlier small fit received 2,000 passes over its selected examples;
+neither that memorization result nor theoretical time-coverage calculations
+demonstrate a useful general language model.
+}
+
+\DIFadd{A matched head-only refinement broadens denoising-time supervision while
+holding the causal body fixed. It improves assisted near-clean block F1 from
+99.0658\% to 99.8602\%, but free-stream F1 falls from 48.726\% to 45.028\%.
+Both arms remain at 0/32 exact training answers. This intervention fails
+all four prespecified repair criteria (Supplementary Note 34); better
+near-clean reconstruction is insufficient for prompt-conditioned generation.
+}
+
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -747,8 +779,9 @@ training-seed replication and a capability-matched text-model comparison.
 Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
-Exact copying is now preserved by an aligned inverse-image path. The remaining
-test is whether context selects a coherent written future. Low teacher-forced
+\DIFdelbegin \DIFdel{Exact copying is now }\DIFdelend \DIFaddbegin \DIFadd{Supplied-target reconstruction is }\DIFaddend preserved by an aligned inverse-image path\DIFaddbegin \DIFadd{;
+new prompt-directed copying still fails}\DIFaddend . The remaining test is whether
+context selects \DIFaddbegin \DIFadd{and generates }\DIFaddend a coherent written future. Low teacher-forced
 image NLL can reflect dependencies among strokes already revealed within the
 target, while generated output still loses global identity. Joint training
 improves proper likelihood beyond matched extra density training; the raw

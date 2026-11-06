@@ -43,3 +43,25 @@ GPU-0 test has exited. After visual review, copy a new dated package to the
 existing Nutstore Projects/ILM directory, preserve the preceding LATEST alias
 values once, verify every local copy, and state that cloud propagation is
 unverified. Commit and push the completed source/artifact revision unit.
+
+## Completed verification
+
+The matched time-law test finished and passed independent CPU integrity/scoring
+checks, while failing all four registered training-fit criteria. Both arms
+remain at 0/32 exact free answers; uniform-time refinement improves assisted
+near-clean F1 but lowers free F1 from 48.726% to 45.028%. Note 34 reports both
+outcomes. The abstract and Note 33 report the failed original full-data audit,
+new-copy probe and assisted-history diagnosis. The discussion now explicitly
+limits earlier copying claims to supplied-target reconstruction.
+
+All five PDFs compile without overfull boxes or unresolved references/citations
+and pass qpdf structural checks. The article has 14 pages, the review copy 25,
+the supplement 27, and the redlines 26/27. The changed abstract, results,
+discussion, cross-reference and both new measured tables were rendered and
+visually inspected. All 60 previous figure/deck assets remain hash-identical
+to baseline, including all 26 native slides. Build and visual-review receipts
+are in publication/ilm-nature/evidence/. The dated V75_CorpusDiagnosis package
+and five LATEST aliases were copied to the existing local Nutstore ILM folder
+and hash-verified; cloud propagation is not verified. No success claim was
+added, no experiment source/protocol was changed after registration, and no
+new model-output pixels were repaired.

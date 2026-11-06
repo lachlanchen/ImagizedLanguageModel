@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Fri Nov  6 06:27:12 2026
-%DIF ADD new.tex   Fri Nov  6 06:27:12 2026
+%DIF DEL old.tex   Fri Nov  6 08:13:02 2026
+%DIF ADD new.tex   Fri Nov  6 08:13:02 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -1820,12 +1820,170 @@ learning and external foundation pretraining are excluded.
 frozen-decoder references and physical scores. It does not replay full
 neural generation or every feedback encoding. The model has repeatedly seen
 every question; fitting them establishes learning capacity, not general
-reading, language knowledge or unseen-form generation. Full-corpus training
-and the original unseen full-answer audit remain required.
+reading, language knowledge or unseen-form generation. The subsequent
+full-corpus training and original full-answer audit are reported in Note 33.
 The protocol, runner and standalone image interface are
 }\path{references/clean_learning_v74_protocol.md}\DIFadd{,
 }\path{scripts/run_clean_learning_v74.py} \DIFadd{and
 }\path{scripts/infer_clean_ilm_v74.py}\DIFadd{.
+}
+
+\section*{\DIFadd{Supplementary Note 33: full clean writing and exact-history failure}}
+\DIFadd{The full-corpus successor initializes all 64,520,193 writer parameters
+afresh, independently of the fitted 32-question control. It reuses the
+authenticated prompt-only feature cache for 3,193 CMRC and 9,783 Dolly
+examples, the frozen image/contextual reader and the fixed writing codec.
+Training completes 40,000 updates, 640,000 draws and 49 complete corpus
+passes. Batch size is 16; at most 16 blocks per example contribute equally
+weighted clean-code error. The logit-normal time law and clipped weighting
+follow Note 32. AdamW uses peak $10^{-4}$, warmup 500, cosine decay to one
+tenth, betas $(.9,.95)$, decay .01 and clipping one. Seeds for model, sampler
+and noise are 20267500, 20267501 and 20267502. The body uses BF16 and the
+final writing projection executes in FP32. Execution-only preflight verifies
+future-target exclusion, exact optimizer/RNG resume and physical feedback;
+its weights are discarded.
+}
+
+\DIFadd{The final audit retains all 384 autonomous normal/question-erased outputs
+from the original 128 Chinese and 64 English requests, with seed 20267503
+plus case index, shared by each normal/control pair. Only actual prompt
+pixels enter the actor. It receives no target length, codes, character IDs,
+OCR, language vocabulary head, glyph inventory or teacher service. The
+unchanged 32-step clean sampler re-encodes each emitted binary image for
+history, and the learned stop threshold is .5 with a 128-block safety cap.
+}
+
+\DIFadd{Chinese original-image F1 is 37.631\%, versus 23.609\% under question erasure;
+exact answers are 2/128 versus 0/128. Both answers are exact in 0/64 shared-
+passage pairs. The original minimum exact, absolute-F1 and both-correct-pair
+requirements fail. Question gain is 14.023 points, with source-article
+bootstrap interval }[\DIFadd{10.861, 17.487}]\DIFadd{; all normal Chinese outputs stop by the
+learned rule. The original gain, positive-interval and stopping requirements
+pass. English literal-reference agreement is 0/64 exact and 16.098\% F1;
+the references do not enumerate every semantically valid English answer.
+These are reused development examples, not sealed confirmation.
+}
+
+\DIFadd{A separate author-specified copy diagnostic fixes 12 new requests: four
+Chinese, four English and four six-digit strings, arranged in six pairs.
+Their exact prompt rasters are absent from the training inventory. All
+12 actual-image calls stop, but none matches its requested output exactly.
+Foreground F1 is 26.989\%, 15.925\% and 24.543\% in the three groups,
+respectively. Owning-minus-partner reference F1 is only .123 points overall.
+This small diagnostic is descriptive, not a new population benchmark.
+}
+
+\DIFadd{The same 32 training cases as Note 32 then diagnose the completed full-data
+model. First, perform actual-image free generation with seed 20267420 plus
+pair index. Only after each free call, use the true answer history and known
+length to construct an assisted stream. A separate fixed-decoder control
+receives the actual target codes. Free and assisted first blocks are equal
+in all 32 cases, and all actual reader memories exactly match the cache.
+}\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Training-case route }& \DIFadd{Exact streams }& \DIFadd{Ink F1 (\%)}\\
+\midrule
+\DIFadd{Free generation }& \DIFadd{0/32 }& \DIFadd{45.771}\\
+\DIFadd{Correct history and length }& \DIFadd{0/32 }& \DIFadd{58.045}\\
+\DIFadd{Supplied writing codes }& \DIFadd{28/32 }& \DIFadd{99.9953}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{Assisted and supplied-code counts measure physical stream agreement at
+provided length, not learned stopping or autonomous answers. Free first-block
+F1 is 59.929\%. These training failures precede corrupted long histories.
+The earlier 32-case fit differs in exposure and initialization; the result
+does not identify one unique cause of the full-data failure.
+}
+
+\DIFadd{A retained first-block probe uses $z_t=(1-t)e+ty$ with the true target $y$,
+noise seed 20267597 and the owning prompt condition. At $t=31/32$, the direct
+constructed input decodes to all 32 original blocks exactly. Denoiser
+prediction reduces exactness to 6/32, at 99.1349\% F1. These are assisted
+near-clean probes, not free sampler states; their small stroke errors cannot
+by themselves explain the much larger free-generation deficit. At $t=1$,
+the clean predictor still changes supplied codes. From complete sampler
+metadata and authenticated answer lengths, training sampled 7,007,799 blocks.
+Under its declared time law,
+}\begin{equation}
+ \Pr(t\geq31/32)=1-\Phi\!\left(\frac{\log 31+0.8}{0.8}\right)
+ =6.0333\times10^{-8}.
+\end{equation}
+\DIFadd{The corresponding expected exposure is .423 blocks. This is a theoretical
+expectation; the actual original tail draws have not been replayed.
+}
+
+\DIFadd{Full training takes 2,589.452 active seconds at 1.544 GiB without the
+inherited reader. The 384-output audit takes 679.857 seconds, including
+72.053 seconds setup, at 18.390 GiB including that reader. Original feature
+caching, earlier codec learning and external foundation pretraining are
+excluded. Independent CPU verification authenticates all source/output
+files, reconstructs source references and recomputes physical metrics and
+original gates. The training diagnosis re-decodes all 32 supplied-code
+streams and recomputes retained latent errors. It does not replay the full
+neural actor. All failed outputs remain unchanged; sealed data stays unopened.
+The full-data, copy and diagnosis receipts are
+}\path{references/evidence/clean_corpus_v75_result.json}\DIFadd{,
+}\path{references/evidence/copy_transfer_v75_result.json} \DIFadd{and
+}\path{references/evidence/corpus_fit_v75_result.json}\DIFadd{.
+}
+
+\section*{\DIFadd{Supplementary Note 34: broader time coverage does not repair answers}}
+\DIFadd{A matched intervention starts both arms from the completed clean full-data
+checkpoint. Only the existing 36,403,200-parameter flow head trains; the causal
+body, condition projection, stop head and codec remain fixed. Each arm uses
+all 12,976 training records for 4,000 updates at batch 16, with a fresh AdamW
+optimizer, peak $10^{-4}$, warmup 100, cosine decay to one tenth, betas
+$(.9,.95)$, decay .01 and gradient clipping one. Sample/noise seeds are
+20267601 and 20267602. The control retains $t=\operatorname{sigmoid}(-.8+.8g)$;
+the intervention uses $t=\Phi(g)$, clamped to $[10^{-6},1-10^{-6}]$.
+The same Gaussian variates, noise, example indices and selected blocks are
+used. Nine retained common-draw digests agree exactly across arms. Both
+sample 700,759 writing blocks; the control realizes zero times at or above
+$31/32$, versus 22,067 for the uniform law. Both time exposure and the
+integrated objective weighting change; this is not an isolated sampler test.
+}
+
+\DIFadd{Each final head is assessed on the same 32 training questions using their
+verified prompt-derived memory. These are cached-feature calls, with no new
+inherited-reader execution. Free inference receives no answer length or
+target codes and retains the original sampler, physical feedback, learned
+stopping, cap and paired seeds. The separate near-clean diagnostic receives
+noisy target codes and earns no autonomous credit.
+}\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Measure }& \DIFadd{Logit-normal }& \DIFadd{Uniform time}\\
+\midrule
+\DIFadd{Free exact answers }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Free ink F1 (\%) }& \DIFadd{48.726 }& \DIFadd{45.028}\\
+\DIFadd{Learned stopping }& \DIFadd{32/32 }& \DIFadd{32/32}\\
+\DIFadd{Near-clean exact blocks }& \DIFadd{5/32 }& \DIFadd{15/32}\\
+\DIFadd{Near-clean ink F1 (\%) }& \DIFadd{99.0658 }& \DIFadd{99.8602}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{Uniform-time refinement therefore improves target-assisted high-signal
+reconstruction but lowers free-answer F1 by 3.698 points. It fails every
+prespecified training-fit repair criterion: near-clean F1 at least 99.9\%,
+free F1 at least 80\%, at least 16/32 exact free answers and free F1 gain
+of at least five points over control. Neither head advances as a qualified
+model. This failure rejects the bounded intervention, without identifying
+all causes or ruling out different objectives, capacity or training budgets.
+}
+
+\DIFadd{The two training stages take 157.554 and 153.230 active seconds, respectively,
+excluding previous writer training, feature preparation, codec learning and
+external foundation pretraining. A discarded real-example execution check
+verifies exact optimizer/RNG/cursor resume and frozen-body preservation.
+Independent CPU verification reconstructs source references, authenticates
+all 64 retained free streams, re-decodes near-clean predictions and checks
+the frozen-body and common-draw hashes. It does not replay the whole neural
+sampler. This experiment uses training examples and makes no unseen-language
+claim. The protocol and result are
+}\path{references/writing_time_coverage_v76_protocol.md} \DIFadd{and
+}\path{references/evidence/writing_times_v76_result.json}\DIFadd{.
 }
 
 \DIFaddend \section*{Reproduction}
