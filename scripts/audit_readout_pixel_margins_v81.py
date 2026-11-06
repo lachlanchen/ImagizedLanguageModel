@@ -67,6 +67,10 @@ def main():
             or reports['control']['updates'] != 2000 or reports['control']['draws'] != 8000):
         raise ValueError('completed original native diagnosis and frozen-control arm required')
     cases = load(source/'cases.json');_,data,indices = cases_and_data()
+    for arm,root in [('native',source),('control',control)]:
+        for name,digest in reports[arm]['files_sha256'].items():
+            if sha(root/name) != digest:
+                raise ValueError('completed prediction manifest differs')
     identity = dict(**committed_identity(SOURCES),codec_sha256=sha(CODEC),
         cases_sha256=sha(source/'cases.json'),source_report_sha256={
             'native':sha(source/'report.json'),'control':sha(control/'report.json')},
@@ -130,6 +134,8 @@ def main():
                 mean_class_balanced_bce=float(np.mean([r['class_balanced_bce'] for r in values])),
                 wrong_saved_pixel_margin_histogram=np.sum([r['wrong_saved_pixel_margin_histogram'] for r in values],axis=0).astype(int).tolist(),
                 cpu_saved_gpu_bit_disagreements=sum(r['cpu_saved_gpu_bit_disagreements'] for r in values))
+        if abs(summaries[arm]['first']['foreground_f1']-reports[arm]['summary']['first_block_f1'])>1e-12:
+            raise ValueError('independent first-block agreement differs from original report')
     write(out/'report.json',dict(identity=identity,rows=rows,summaries=summaries,
         logits_sha256=sha(out/'decoded_logits.pt'),cuda_initialized=False,model_or_optimizer_updated=False,
         auxiliary_decoder_measurement=True,whole_context_or_sampler_replayed=False,
