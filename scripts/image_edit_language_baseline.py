@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 import time
 
-from ilm.visual_lm.image_edit_baseline import (
+from ilm.image_edit.baseline import (
     CACHE, CONDITIONER, CONDITIONER_WEIGHTS, PREDECESSOR, ROOT, SNAPSHOT, TASK,
     acquire, condition_cache, encoder_free_pipeline, gpu_zero, identity,
     inspect_source, open_page, predecessor_failure, save_json, sha, tensor_sha,
@@ -283,7 +283,7 @@ def main():
         if args.stage == "inspect":
             result = inspect_source()
         else:
-            from ilm.visual_lm.image_edit_baseline_data import prepare_pages
+            from ilm.image_edit.data import prepare_pages
             result = prepare_pages(args.output)
         previous = None
     else:

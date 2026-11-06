@@ -7,7 +7,7 @@ import subprocess
 
 from PIL import Image, ImageDraw, ImageFont
 
-from .image_edit_baseline import ROOT, save_json, sha
+from .baseline import ROOT, save_json, sha
 
 TRAIN = ROOT / "data/visual_qa/cmrc2018_short/train.jsonl"
 TRAIN_SHA = "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c"

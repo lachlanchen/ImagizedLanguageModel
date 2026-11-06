@@ -38,7 +38,7 @@ CONDITIONER_WEIGHTS = {
     "model-00002-of-00003.safetensors": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5",
     "model-00003-of-00003.safetensors": "7ca841ee75b9c61267c0c6148fd8d096d3d21b6d3e161256a9b878154f91fc52",
 }
-SOURCES = ("ilm/visual_lm/image_edit_baseline.py", "ilm/visual_lm/image_edit_baseline_data.py",
+SOURCES = ("ilm/image_edit/__init__.py", "ilm/image_edit/baseline.py", "ilm/image_edit/data.py",
     "scripts/image_edit_language_baseline.py",
     "references/image_edit_baseline_protocol.md")
 
