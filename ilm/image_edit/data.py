@@ -1,6 +1,7 @@
 """Prepare readable fixed Chinese/English question and reference pages on CPU."""
 import ast
 import hashlib
+from html.parser import HTMLParser
 import json
 from pathlib import Path
 import subprocess
@@ -13,6 +14,28 @@ TRAIN = ROOT / "data/visual_qa/cmrc2018_short/train.jsonl"
 TRAIN_SHA = "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c"
 COHORT = ROOT / "artifacts/native_chinese_v80_20261106/corpus_fit_v80r2/cases.json"
 COPY_SOURCE = ROOT / "scripts/prepare_copy_transfer_v75.py"
+
+
+class DisplayText(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+
+    def handle_data(self, text):
+        self.parts.append(text)
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "br":
+            self.parts.append("\n")
+
+    def handle_endtag(self, tag):
+        if tag in ("div", "p"):
+            self.parts.append("\n")
+
+
+def display_text(text):
+    parser = DisplayText(); parser.feed(text); parser.close()
+    return "".join(parser.parts).strip()
 
 
 def fixed_cases():
@@ -50,8 +73,12 @@ def fixed_cases():
     for i, item in enumerate(selected):
         name = item["source"].removeprefix("cmrc/").removesuffix(".pt")
         row = found[name]
+        context, question = display_text(row["context"]), display_text(row["question"])
+        answer = row["references"][0]["text"]
+        if answer not in context:
+            raise ValueError("expected answer is not present in the displayed source passage")
         cases.append(dict(position=12 + i, id=name, pair=f"qa/{i//2}", language="zh",
-            prompt=row["prompt"], reference=row["references"][0]["text"]))
+            prompt=f"资料：{context}\n问题：{question}\n回答：", reference=answer))
     if any(not row["prompt"].strip() or not row["reference"].strip() for row in cases):
         raise ValueError("nonempty questions and expected answers required")
     return cases
@@ -129,6 +156,7 @@ def prepare_pages(out):
         source_data_sha256={str(path.relative_to(ROOT)): sha(path) for path in (TRAIN, COHORT, COPY_SOURCE)},
         prompts=20, normal_control_calls_planned=40, model_calls=0, weights_loaded=False,
         original_case_order_preserved=True, question_pages=[1024, 1024], answer_pages=[512, 512],
+        qa_display_cleanup="HTML display tags omitted; facts, question wording and answer text retained",
         references_kept_separate=True, reused_exploratory_cases=True,
         sealed_test_used=False, language_quality_claim=False)
     save_json(out / "pages.json", report)

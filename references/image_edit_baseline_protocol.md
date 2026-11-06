@@ -14,7 +14,11 @@ The stages are separate. CPU inspection resolves the pinned model's explicit
 configuration/weight allowlist without downloading weights or initializing a
 model. CPU data preparation renders the fixed exploratory questions and
 references as separate pages with a verified CJK font face, 32-pixel type,
-32-pixel page margins and 48-pixel line pitch. Preserve every source character
+32-pixel page margins and 48-pixel line pitch. For QA, extract display text
+from the source context/question fields, omit HTML formatting tags and put
+the question on a separate labelled line. Keep factual wording, including
+source imperfections, and all reference answers unchanged. Confirm each QA
+answer remains in its displayed passage. Preserve every display-text character
 and check actual ink bounds; fail on missing glyphs or clipping. Question
 pages are 1024 by 1024 and reference answer pages are 512 by 512. Data layout
 preparation does not run a model. Acquisition and all model stages are gated on a completed, verified
@@ -80,3 +84,8 @@ metadata and exercising unfinished-experiment rejection. Successful checkpoint
 loading, encoder-free model execution, codec fidelity and all 40 baseline
 answers remain unverified until actually run. Training a learned ILM and its
 broader language/generalization requirements remain the active objective.
+
+Pre-model data review identifies a literal orphan `</div>` in the first
+passage. The first source-faithful rendering is retained. Display-text
+extraction is specified before any candidate model call and uses a fresh
+preparation directory; no reference, question pair or outcome is selected anew.
