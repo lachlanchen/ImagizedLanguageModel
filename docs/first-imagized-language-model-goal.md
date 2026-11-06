@@ -20,10 +20,17 @@ efficiency advantage sought here. Reject scaling the current loss-repair
 recipe. A replacement must first demonstrate reliable visual writing without
 supplied answers, then new-string copying and held-out prompt-dependent
 language evaluation, including two different questions about the same passage.
-Readable copying alone does not establish language learning. A prepared image
-generator baseline remains an untested alternative, with external pretraining;
-it is not a demonstrated ILM or a reason to claim success. Execution checks
-and publication updates cannot advance the capability stage.
+Readable copying alone does not establish language learning. A completed
+[external image-generator baseline](../references/image_edit_baseline_result.md)
+executes all 40 normal/blank outputs on one card, but gets 0/12 copy requests
+and 0/8 questions by OCR exact match (reference OCR calibration: 18/20).
+Inspection shows copied instructions and corrupted text. No local optimizer
+updates are made. This rejects its zero-shot composition as an answering
+system; it does not establish whether paired-image learning will work.
+The next learning experiment must train on actual prompt/answer image pairs
+while retaining a visual generative prior, then evaluate new strings and
+held-out prompt-dependent answers. Execution checks and publication updates
+cannot advance the capability stage.
 
 The [current direction assessment](../references/ilm_direction_assessment_20261107.md)
 sets out the evidence, unresolved causes and decision sequence. The older

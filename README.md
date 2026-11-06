@@ -42,6 +42,13 @@ agreement measurements, not semantic accuracy. The adapted actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.
 
+An external image-generator baseline also fails: **0/12 copying requests and
+0/8 questions by OCR exact match**, with reference OCR calibration at 18/20.
+Its 40 normal/blank generations execute in 91.656 seconds at 8.943 GiB peak
+allocated memory, without local optimization. The outputs often copy the
+instruction or passage instead of answering. See the
+[complete baseline and every raw output](references/image_edit_baseline_result.md).
+
 ![Completed decoder-sensitive loss comparison and complete raw outputs for the first four questions](publication/ilm-nature/figures/Figure_S16_decoder_metric.png)
 
 ## Earlier full clean writer

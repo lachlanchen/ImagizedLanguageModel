@@ -1,0 +1,291 @@
+{
+  "identity": {
+    "source_commit": "af9571cf0b86da3ea6936ea2ae29880136ae1a9c",
+    "sources": {
+      "ilm/image_edit/__init__.py": "cf5f53e20b9d0a39bfe4094af44cfb9afd6b4ffd5c0d2dcbbfcdd6ba96db6874",
+      "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+      "ilm/image_edit/data.py": "6c6cf4eb2d3b12a4d6adffd4b4b2938a523508962f02da85e167fc1e358bc482",
+      "scripts/image_edit_language_baseline.py": "e6c0eb7981878bbe8f22b2f85bbbf037acd7f7a626cd5c66658947d0c4ff9787",
+      "references/image_edit_baseline_protocol.md": "67b3da2b7a31c1aeba716bd2cc9e3d222d9ef83a0abac0fe208a1a918cf65f24"
+    },
+    "repo": "black-forest-labs/FLUX.2-klein-4B",
+    "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+    "packages": {
+      "torch": "2.11.0",
+      "diffusers": "0.39.0",
+      "transformers": "5.14.1",
+      "huggingface-hub": "1.27.0",
+      "pillow": "12.3.0",
+      "numpy": "2.2.6"
+    }
+  },
+  "stage": "cohort",
+  "predecessor": {
+    "run": "artifacts/decoder_metric_v82r2_20261107",
+    "verification_sha256": "0a7f88d6d50de70b956e977bee428661af9be1d6d6806401cf4587b8d7e3bc61",
+    "both_arms_fail_absolute_fit": true
+  },
+  "result": {
+    "prepared_pages_sha256": "488053f494b98364e0166ada12c3bbbf2fcab1ddb71121490bed2e1c6e319fc6",
+    "codec_report_sha256": "96f469c870c7baa9229af7046225518ca2a1e850a7ee09cd1320f0dbc0524751",
+    "generations": [
+      {
+        "position": 0,
+        "route": "normal",
+        "seed": 20268301,
+        "result_sha256": "76f5e127e9b8b7ba50d0c605a7d84b67e5102312d15ba2a43fc1913b819f0c0c"
+      },
+      {
+        "position": 0,
+        "route": "blank",
+        "seed": 20268301,
+        "result_sha256": "4c337d6af892c62a0ecf9b3ce3255b1b7d387e3a70d9bdb0418f0eb4e468e590"
+      },
+      {
+        "position": 1,
+        "route": "normal",
+        "seed": 20268301,
+        "result_sha256": "1ed7082a427534e72977c48876d77adfe267a52d6a76b14135a7319c62a7d3dc"
+      },
+      {
+        "position": 1,
+        "route": "blank",
+        "seed": 20268301,
+        "result_sha256": "ab13003d6d4082528ce780734b9741bce37f87825a699d7aef68331555a10dd4"
+      },
+      {
+        "position": 2,
+        "route": "normal",
+        "seed": 20268302,
+        "result_sha256": "c03c460ce162e43539787b8835025c4c3d6cbeaae5b564bc30d6367ddc84e101"
+      },
+      {
+        "position": 2,
+        "route": "blank",
+        "seed": 20268302,
+        "result_sha256": "643d7484fe6ffe4e145d93f36bd941879f6d744ffc162fba89f199195a76f938"
+      },
+      {
+        "position": 3,
+        "route": "normal",
+        "seed": 20268302,
+        "result_sha256": "42604946ddb6941803839e824d52ae5c0e6f7656e98815666d543f1fdb267b6c"
+      },
+      {
+        "position": 3,
+        "route": "blank",
+        "seed": 20268302,
+        "result_sha256": "8e5b960cc4dd7e060febfea9a46168e0bea9769d7f814ccc8405245c7fdc8188"
+      },
+      {
+        "position": 4,
+        "route": "normal",
+        "seed": 20268303,
+        "result_sha256": "9bd9b64fd505ba98a9f839698aaa4b829bc6560e8d5c3ea7862fa70f097d74b7"
+      },
+      {
+        "position": 4,
+        "route": "blank",
+        "seed": 20268303,
+        "result_sha256": "bacf6531443249d352122e3dbf2ca4789552b64c92a40b93907a3e6f0c178587"
+      },
+      {
+        "position": 5,
+        "route": "normal",
+        "seed": 20268303,
+        "result_sha256": "c183cc6e6889f4239d8f36efdd635541f3e81c77f03ce4669480a27902e751aa"
+      },
+      {
+        "position": 5,
+        "route": "blank",
+        "seed": 20268303,
+        "result_sha256": "80e823dafcf7f3e6d44701c31f4529316eeafec29d642851c8042d7cee502435"
+      },
+      {
+        "position": 6,
+        "route": "normal",
+        "seed": 20268304,
+        "result_sha256": "8dae90aa93bbe78f8ab270821d8a79c56cb19101716d9b2dbc3b951bca5f33c4"
+      },
+      {
+        "position": 6,
+        "route": "blank",
+        "seed": 20268304,
+        "result_sha256": "a41de6610c5d2d616337ab0d84868ecda43160be9ac3a9552b5535f9a4c33505"
+      },
+      {
+        "position": 7,
+        "route": "normal",
+        "seed": 20268304,
+        "result_sha256": "34c1b16b455ca6d35a882d33366d71942b05cbd5a233283ca5b4a11b05079ffb"
+      },
+      {
+        "position": 7,
+        "route": "blank",
+        "seed": 20268304,
+        "result_sha256": "6ccd6e16ce01b1d6c4d318c73865a45a88678cdcfe7db6a36c8d67ac1afaa677"
+      },
+      {
+        "position": 8,
+        "route": "normal",
+        "seed": 20268305,
+        "result_sha256": "dda01991e1a5c6a213882ed5ab6b8a9a43c3fcdd939fe55c8337c5350d8d5692"
+      },
+      {
+        "position": 8,
+        "route": "blank",
+        "seed": 20268305,
+        "result_sha256": "695aa2b300c1a4808885c1553c4559bf47c06c37131a729f9e20b25a6069ae66"
+      },
+      {
+        "position": 9,
+        "route": "normal",
+        "seed": 20268305,
+        "result_sha256": "b2c7d0bcb4e48539a186c36e3d17214cafbda34aaf223f04faa78858d0df9132"
+      },
+      {
+        "position": 9,
+        "route": "blank",
+        "seed": 20268305,
+        "result_sha256": "6e93205edf125ba48cead3146c529efd7cc5d62b5811c42a70d39c49f2f36de1"
+      },
+      {
+        "position": 10,
+        "route": "normal",
+        "seed": 20268306,
+        "result_sha256": "47958c179e6ac42d32545b61386dc02448a116286b494ae7f007a5451f424591"
+      },
+      {
+        "position": 10,
+        "route": "blank",
+        "seed": 20268306,
+        "result_sha256": "1e8ccaa96ff269cf822371373b36dbb5d7fe8936bde82c05d05da8a91c70e927"
+      },
+      {
+        "position": 11,
+        "route": "normal",
+        "seed": 20268306,
+        "result_sha256": "3ba56acee3d4d0e679c30b51c73a879639705e3ee6cfb149cf66da94e2290e42"
+      },
+      {
+        "position": 11,
+        "route": "blank",
+        "seed": 20268306,
+        "result_sha256": "9d0d20fc3148eb02a325c73e7320745513096ca8b2754492465b3a9d14f3c402"
+      },
+      {
+        "position": 12,
+        "route": "normal",
+        "seed": 20268307,
+        "result_sha256": "3a01104fd8164653b7446f396121f7713e08d0ba39342eeb9b5ad57394bd3b52"
+      },
+      {
+        "position": 12,
+        "route": "blank",
+        "seed": 20268307,
+        "result_sha256": "bfa150add86b47b817f558ab702b1b15545745c915ce24ed75e602a944eb4e6a"
+      },
+      {
+        "position": 13,
+        "route": "normal",
+        "seed": 20268307,
+        "result_sha256": "d34d6361b6f0d2270f8812fa8481aa8f63593f1e56898244a2639e547ca53bb5"
+      },
+      {
+        "position": 13,
+        "route": "blank",
+        "seed": 20268307,
+        "result_sha256": "381e3920bcfb8a731f658e4f66af789df23e9f5a9bbb923e0da6751a775ddd02"
+      },
+      {
+        "position": 14,
+        "route": "normal",
+        "seed": 20268308,
+        "result_sha256": "9f6d2532d95622f6de39ef425d4894b92c3b42acb425d2979a42fe0a892b2132"
+      },
+      {
+        "position": 14,
+        "route": "blank",
+        "seed": 20268308,
+        "result_sha256": "25b6ff54bebae102964485cd7a7586703d503e157803ee6d13bcbb82dd679a3e"
+      },
+      {
+        "position": 15,
+        "route": "normal",
+        "seed": 20268308,
+        "result_sha256": "ce5dc45befb28d12e1ea6acd09d0d52d6e6ca7a84ad7a9e107b1af686a1854e2"
+      },
+      {
+        "position": 15,
+        "route": "blank",
+        "seed": 20268308,
+        "result_sha256": "b4b63ec19d42dca52fa54090e7f3fffc3e8b802bacfb7dc7333b004f3aa6f285"
+      },
+      {
+        "position": 16,
+        "route": "normal",
+        "seed": 20268309,
+        "result_sha256": "bb1b4199030d135d747434aaa35e3a58c55907c155b2d47ff071e286b59e6285"
+      },
+      {
+        "position": 16,
+        "route": "blank",
+        "seed": 20268309,
+        "result_sha256": "e51932129c4b308e80127f19a885ba412863ade8c4a63376823c735c33216521"
+      },
+      {
+        "position": 17,
+        "route": "normal",
+        "seed": 20268309,
+        "result_sha256": "9da40a878cc1037fd2cc74be8c7d3155c519b6d0d7c5cf888608cb54da0a64df"
+      },
+      {
+        "position": 17,
+        "route": "blank",
+        "seed": 20268309,
+        "result_sha256": "c875a9174fbb5cbd523e7c2b21dc0667f7772965b10f93d4d4e8c2aae6936a1a"
+      },
+      {
+        "position": 18,
+        "route": "normal",
+        "seed": 20268310,
+        "result_sha256": "e9e003013568e8de16fea4ca52a4fa86c06b48c85207f5a0b727d23a2af31945"
+      },
+      {
+        "position": 18,
+        "route": "blank",
+        "seed": 20268310,
+        "result_sha256": "b7bad955de4137a9c9f0b2c7087a164491ee37ee196df2b06e7baf10a371a1d4"
+      },
+      {
+        "position": 19,
+        "route": "normal",
+        "seed": 20268310,
+        "result_sha256": "d6aa65c60d0aad92b84d2e5d3e3a8eeafa079257465e17d0a2c70a54ec4dba02"
+      },
+      {
+        "position": 19,
+        "route": "blank",
+        "seed": 20268310,
+        "result_sha256": "26e1b5f3827de61fdf3378c6cdc60f75b08ea895fdf9dc88dfac1bf0304a4a48"
+      }
+    ],
+    "complete_generations": 40,
+    "fixed_condition_sha256": "ed8d5f3531091082ebe8e25856c0e61288af560dc8008e45be0646683f394cdc",
+    "condition_cache_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+    "model_loaded_once": true,
+    "all_reference_payload_hashes_checked_after_generation": true,
+    "reference_images_used_by_generator": false,
+    "answer_correctness_not_yet_assessed": true,
+    "transformer_parameters": 3875544576,
+    "codec_parameters": 84046115,
+    "peak_allocated_vram_gib": 8.942554950714111,
+    "device_name": "NVIDIA GeForce RTX 4090 D",
+    "torch_cuda_version": "13.0"
+  },
+  "elapsed_seconds": 91.65552914422005,
+  "local_optimizer_updates": 0,
+  "external_pretraining": true,
+  "language_quality_claim": false,
+  "general_ilm_goal_complete": false
+}

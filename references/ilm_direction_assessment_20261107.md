@@ -76,8 +76,15 @@ particular new objective will fix it.
 The decision is to stop scaling this repair. More data, a new loss coefficient,
 an image-generator name or another publication figure does not repair an
 unproved conditional learning path. The prepared
-[image-generator baseline](image_edit_baseline_protocol.md) has no executed
-model result and no local learning result; it remains a separate hypothesis.
+[image-generator baseline](image_edit_baseline_result.md) now completes all
+40 autonomous normal/blank outputs in 91.656 seconds at 8.943 GiB peak
+allocated memory. It fails all 12 copying requests and eight questions by
+offline OCR exact match; reference calibration is 18/20. All outputs were
+inspected and retained: copied instructions/passages and corrupted text do
+not constitute the requested answers. There are no local optimizer updates.
+The result rejects zero-shot use of this composition, while paired-image
+learning remains untested. A viable image codec and an executing generator
+do not supply the missing instruction-to-answer behavior automatically.
 
 A replacement must be assessed in this order:
 

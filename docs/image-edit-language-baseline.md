@@ -1,13 +1,19 @@
 # Image-only generator baseline
 
-This is an unqualified candidate using an external pretrained image generator.
-Its [CPU preparation checks](../references/evidence/image_edit_baseline_preparation.json)
-cover real pinned source metadata, 20 questions rendered as 60 page images,
-541 source characters with no missing glyphs, and unfinished-experiment
-rejection. The new package imports without the legacy visual package's
-Torchvision dependency. It has not yet passed a model-loading, codec,
-generation or language test.
-It does not replace the unfinished V82 comparison. The
+The completed external image-generator baseline is **not a usable ILM**.
+All 40 image-only normal/blank generations execute on one 4090 D in 91.656 s,
+at 8.943 GiB peak allocated memory, but OCR exact match is 0/12 copy requests
+and 0/8 questions. The outputs often reproduce instructions or corrupt text.
+Reference OCR calibration is 18/20, so inspect the complete raw images and
+retain that evaluation limitation. See the
+[full result and every output](../references/image_edit_baseline_result.md).
+
+Its earlier [CPU preparation checks](../references/evidence/image_edit_baseline_preparation.json)
+cover source metadata and 20 questions rendered as 60 pages, with 541 source
+characters and no missing glyphs. Actual weight loading, offline-condition
+compilation, codec calls and encoder-free generation have now executed.
+No local optimization or successful language learning is demonstrated.
+It follows the completed failed V82 comparison. The
 [protocol](../references/image_edit_baseline_protocol.md) preserves the full
 ILM objective and distinguishes each preparation/execution stage from learning.
 
@@ -78,3 +84,24 @@ preserved on failure; they are not silently overwritten or counted as a
 completed cohort. One project GPU lock and the shared workstation memory
 limits apply to every actual model stage. The running model experiment,
 source weights, checkpoints and other projects' services remain intact.
+
+The measured run uses `artifacts/image_edit_baseline/pages_ready`, `condition`,
+`codec` and `generations`. The progress counter ends at `completed=40`; the
+terminal `report.json` and exited process establish completion, not that
+counter's historical `generating` label. Earlier preparation directories are
+preserved and are not the measured page set.
+
+Offline evaluation is separate from generation:
+
+```bash
+env CUDA_VISIBLE_DEVICES= PYTHONNOUSERSITE=1 PYTHONPATH=. "$ILM_IMAGE_PYTHON" scripts/evaluate_image_edit_baseline.py --stage calibrate --data artifacts/image_edit_baseline/pages_ready --output artifacts/image_edit_baseline/ocr_reference_calibration
+env CUDA_VISIBLE_DEVICES= PYTHONNOUSERSITE=1 PYTHONPATH=. "$ILM_IMAGE_PYTHON" scripts/evaluate_image_edit_baseline.py --stage score --data artifacts/image_edit_baseline/pages_ready --generations artifacts/image_edit_baseline/generations --calibration artifacts/image_edit_baseline/ocr_reference_calibration/report.json --output artifacts/image_edit_baseline/ocr_output_observation
+env CUDA_VISIBLE_DEVICES= PYTHONNOUSERSITE=1 PYTHONPATH=. "$ILM_IMAGE_PYTHON" scripts/export_image_edit_baseline.py
+```
+
+These commands require fresh observation/export paths and the existing
+Tesseract `chi_sim` and `eng` data. They never repair an answer or enter the
+generator runtime. The export authenticates every PNG against its retained
+raw BF16 decoded RGB. Reference OCR calibration is 18/20; retain its two
+failures and inspect every produced image. The actual cohort is exploratory,
+has no local training and does not qualify the general ILM goal.
