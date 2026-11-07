@@ -13,6 +13,9 @@ gives **27/32 exact held-out copies and 0/32 correct natural answers**. Fifteen
 of sixteen paired questions receive the same answer; erasure leaves 29/32
 outputs unchanged. These are temporary text-head readouts. The recipe fails
 question understanding and does not qualify the subsequent image-writing stage.
+The next [full-page alignment experiment](native-visual-alignment.md) reuses
+these images and adapters, adding complete source-page supervision before
+returning to QA. Its execution preflight is separate from language quality.
 
 ## Reuse pinned assets and isolate dependencies
 

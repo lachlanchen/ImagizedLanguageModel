@@ -52,6 +52,11 @@ fails page-level question selection. Visual access is not generally repaired;
 the image-output stage is not admitted on these results. A subsequent learning
 experiment must test better visual-language alignment and conditional selection
 before treating this frontend as a useful language reader.
+The [specified full-page curriculum](native_visual_alignment_protocol.md)
+tests that prerequisite with dense transcription followed by QA/copying, using
+the same source images and adapter architecture. Its preflight is not a
+language result; the completed predecessor failures remain the current quality
+evidence.
 
 ## The required image-output stage
 
