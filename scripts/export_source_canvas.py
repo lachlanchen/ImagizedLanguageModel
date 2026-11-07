@@ -63,7 +63,7 @@ def export(run,output):
         rows=rows,files_sha256=files,overviews=overviews,all512_raw_PNGs_unchanged=True,
         cached_feature_diagnostic=True,native_image_path_qualified=False,
         external_pretraining_retained=True,additional_preflight_optimizer_invocations=10,
-        initial_preparation_index_error=True,initial_preparation_optimizer_updates=0,
+        initial_preparation_index_errors=2,initial_preparation_optimizer_updates=0,
         model_weights_published=False,general_ilm_goal_complete=False,
         attribution='CMRC2018 Cui et al. (2019), CC BY-SA 4.0; Qwen3-VL Alibaba, Apache-2.0; prepared copy requests.')
     # Retain the complete verified records; local coordinate tensors stay private.

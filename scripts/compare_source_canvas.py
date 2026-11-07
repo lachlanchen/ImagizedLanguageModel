@@ -70,6 +70,14 @@ def prepare(run):
     feature_index = {r['id']:r for r in features_report['records']}
     if len(train) != 3257 or len(feature_index) != 3257:
         raise ValueError('all 3257 admitted examples required')
+    dev_inputs=read(DEV/'prepared/inputs.json');dev_refs={r['id']:r for r in read(DEV/'prepared/references.json')}
+    dev_features={r['id']:r for r in read(DEV/'features/report.json')['records']}
+    counts=Counter((r['task'],r.get('condition','normal')) for r in dev_inputs if r['split']=='development')
+    if counts!=Counter({('qa','normal'):64,('qa','question_erased'):64,('qa','passage_erased'):64,('copy','normal'):32}):
+        raise ValueError('all original development conditions required: '+str(counts))
+    for row in dev_inputs:
+        if row['split']=='development' and reference_id(row) not in dev_refs:
+            raise ValueError('development reference binding missing before preparation')
     codec = load_qualified_writing_codec(CODEC,'cpu')
     white = codec.encode(torch.ones(1,1,32,32))[0].detach()
     with torch.no_grad():
@@ -103,8 +111,7 @@ def prepare(run):
         rows.append(dict(**row,feature=str(fp.relative_to(ROOT)),feature_sha256=f['sha256'],
             codes=str(p.relative_to(run)),tiles=tiles,targets=targets))
         if (i+1)%256==0: status(run,'preparing',completed=i+1,total=3257)
-    dev_inputs=read(DEV/'prepared/inputs.json');dev_refs={r['id']:r for r in read(DEV/'prepared/references.json')}
-    dev_features={r['id']:r for r in read(DEV/'features/report.json')['records']}; assessment=[]
+    assessment=[]
     for original in dev_inputs:
         if original['split']!='development':continue
         row=dict(original);row['input']=str((DEV/'prepared'/row['input']).relative_to(ROOT))
@@ -115,15 +122,12 @@ def prepare(run):
         if value['id']!=row['id'] or value['input_sha256']!=row['input_sha256']:
             raise ValueError('development feature/input mismatch')
         targets=[]
-        reference_id=row['id'].removesuffix('/question_erased')
-        if row['id']!=reference_id and row.get('condition')!='question_erased':
-            raise ValueError('unexpected erased-question reference alias')
-        for t in dev_refs[reference_id]['targets']:
+        for t in dev_refs[reference_id(row)]['targets']:
             p=DEV/'prepared'/t['file'];checked_image(p,t['sha256'])
             targets.append(dict(file=str(p.relative_to(ROOT)),sha256=t['sha256']))
         assessment.append(dict(**row,feature=str(fp.relative_to(ROOT)),feature_sha256=f['sha256'],targets=targets))
     counts=Counter((r['task'],r.get('condition','normal')) for r in assessment)
-    if counts!=Counter({('qa','normal'):96,('qa','question_erased'):96,('copy','normal'):32}):
+    if counts!=Counter({('qa','normal'):64,('qa','question_erased'):64,('qa','passage_erased'):64,('copy','normal'):32}):
         raise ValueError('all original development cases required: '+str(counts))
     atomic_json(run/'identity.json',identity)
     atomic_json(run/'prepared.json',dict(identity_sha256=sha(run/'identity.json'),training=rows,
@@ -132,6 +136,15 @@ def prepare(run):
         supplied_code_f1=float(np.mean([x['foreground_f1'] for x in controls])),
         previous_exclusions=read(TRAIN/'report.json')['rejected'],actual_source_model_calls=0))
     status(run,'prepared',training=len(rows),development=len(assessment),maximum_source_units=max_units)
+
+
+def reference_id(row):
+    condition=row.get('condition','normal')
+    if condition in ('question_erased','passage_erased'):
+        if row['task']!='qa' or not row['id'].endswith('/'+condition):
+            raise ValueError('unexpected erased-prompt reference alias')
+        return row['id'].rsplit('/',1)[0]
+    return row['id']
 
 
 def validate_feature(value):
@@ -371,21 +384,22 @@ def verify(run):
             result.append(dict(**row,**measured))
         groups={}
         for cohort,task,condition in [('training','qa','normal'),('development','qa','normal'),
-            ('development','qa','question_erased'),('development','copy','normal')]:
+            ('development','qa','question_erased'),('development','qa','passage_erased'),('development','copy','normal')]:
             selected=[r for r in result if (r['cohort'],r['task'],r['condition'])==(cohort,task,condition)]
             groups[f'{cohort}/{task}/{condition}']=dict(cases=len(selected),exact=sum(r['exact'] for r in selected),
                 foreground_f1=float(np.mean([r['foreground_f1'] for r in selected])))
         pairs={}
         for row in result:
             if row['cohort']=='development' and row['task']=='qa' and row['condition']=='normal':pairs.setdefault(row['pair'],[]).append(row['exact'])
-        if len(pairs)!=48 or any(len(x)!=2 for x in pairs.values()):raise ValueError('complete question pairs required')
+        if len(pairs)!=32 or any(len(x)!=2 for x in pairs.values()):raise ValueError('complete question pairs required')
         all_results[arm]=dict(groups=groups,both_correct_pairs=sum(all(x) for x in pairs.values()),
             question_erasure_f1_gain=groups['development/qa/normal']['foreground_f1']-groups['development/qa/question_erased']['foreground_f1'],
+            passage_erasure_f1_gain=groups['development/qa/normal']['foreground_f1']-groups['development/qa/passage_erased']['foreground_f1'],
             training=training,rows=result,all_coordinates_replayed=True,all_draws_verified=True)
         del saved
     s=all_results['source'];c=all_results['summary'];g=s['groups']
     gates=dict(copy_exact=g['development/copy/normal']['exact']>=24,qa_exact=g['development/qa/normal']['exact']>=32,
-        pairs=s['both_correct_pairs']>=17,question_gain=s['question_erasure_f1_gain']>=.10,
+        pairs=s['both_correct_pairs']>=12,question_gain=s['question_erasure_f1_gain']>=.10,
         copy_f1_lead=g['development/copy/normal']['foreground_f1']-c['groups']['development/copy/normal']['foreground_f1']>=.10,
         qa_f1_lead=g['development/qa/normal']['foreground_f1']-c['groups']['development/qa/normal']['foreground_f1']>=.10)
     receipt=dict(identity=identity,arms=all_results,gates=gates,screen_pass=all(gates.values()),

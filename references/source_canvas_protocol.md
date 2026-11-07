@@ -52,8 +52,9 @@ optimizer/sampler/model resume. Discard preflight updates before both arms.
 Serialize current and immediately previous optimizer, sampler and RNG states.
 
 After each arm finishes, generate all 224 previously prepared development
-cases: 96 normal Chinese questions, their 96 question-erased counterparts,
-and 32 held-out Chinese/English copy requests. Also retain the first 32
+cases: 64 normal Chinese questions, their 64 question-erased and 64
+passage-erased counterparts, and 32 held-out Chinese/English copy requests.
+Also retain the first 32
 training outputs in the fixed inventory order. The development cohort differs
 from the preceding 128-question canvas screen; do not compare their totals as
 the same cohort. This public development has been used repeatedly, not sealed.
@@ -63,8 +64,8 @@ Report exact images, foreground F1, both-correct question pairs and the
 normal-minus-erased gain separately. Inspect fixed complete output sheets.
 
 A source-feature lead alone is not useful language performance. A continuation
-screen requires at least 24/32 exact unseen copies, 32/96 exact normal QA,
-17/48 both-correct QA pairs, at least .10 normal-minus-erased F1 gain, and at
+screen requires at least 24/32 exact unseen copies, 32/64 exact normal QA,
+12/32 both-correct QA pairs, at least .10 normal-minus-question-erased F1 gain, and at
 least .10 F1 improvement over summary-only in both normal QA and copying.
 These are practical decision floors, not statistical significance tests or
 full-ILM qualification. If neither arm clears the screen, do not extend this
@@ -88,3 +89,11 @@ Keep the overall ILM goal active and unachieved.
 
 CMRC2018: Cui et al. (2019), CC BY-SA 4.0,
 <https://github.com/ymcui/cmrc2018>. Qwen3-VL: Alibaba, Apache-2.0.
+
+Pre-training schema correction: the first draft miscounted the existing audit
+as 96 questions with one erasure control. It actually contains 64 questions
+with two erasure controls. Two CPU preparation attempts stopped at reference
+indexing before any GPU training or optimizer update. The complete inventory
+and its reference aliases are now checked before costly preparation. The
+correct cohort and decision denominators above were committed before either
+arm was trained; no outcome was inspected to change them.
