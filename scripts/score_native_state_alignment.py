@@ -26,6 +26,9 @@ def main():
     args = p.parse_args()
     learn = args.learning or args.root / "learning_v1"
     after_path = args.after or args.root / "after_v1"
+    for directory in (learn, after_path, args.root / "cache_v1", args.root / "preflight_v1", args.root / "copy_before_v1"):
+        if read(directory / "status.json")["state"] != "completed":
+            raise ValueError("wait for terminal completed stage: " + str(directory))
     report = read(learn / "report.json")
     if report["updates"] != BUDGET or report["metadata"]["implementation"] != binding():
         raise ValueError("complete unchanged learner required")
@@ -33,7 +36,7 @@ def main():
         raise ValueError("final numeric model changed")
     preparation = read(args.root / "prepared_v1/preparation.json")
     cache = read(args.root / "cache_v1/manifest.json")
-    if cache["training_sha256"] != preparation["training_sha256"] or sha(args.root / "cache_v1/manifest.json") != report["metadata"]["cache_manifest_sha256"]:
+    if cache["implementation"] != binding() or sha(args.root / "prepared_v1/training.json") != preparation["training_sha256"] or cache["training_sha256"] != preparation["training_sha256"] or sha(args.root / "cache_v1/manifest.json") != report["metadata"]["cache_manifest_sha256"]:
         raise ValueError("training data/state cache changed")
     plan = read(learn / "schedule.json")
     journal = [json.loads(line) for line in (learn / "updates.jsonl").read_text().splitlines()]
@@ -56,6 +59,19 @@ def main():
     if read(args.root / "source_replay_complete_v1/status.json")["state"] != "completed":
         raise ValueError("wait for terminal additional source check")
     assessment = args.root / "assessment_v1"
+    if source_proof["evaluator_sha256"] != sha("scripts/check_native_state_source.py") or source_proof["inputs_sha256"] != sha(assessment / "en_inputs.json"):
+        raise ValueError("additional source evaluator or cohort changed")
+    if len(source_proof["checks"]) != 4 or not all(r["source_prefix_bit_exact"] and r["source_mask_bit_exact"] and r["retained_source_replay_exact"] and r["ids"] == r["corrected_ids"] for r in source_proof["checks"]):
+        raise ValueError("additional source case evidence incomplete")
+    assessment_preparation = read(assessment / "preparation.json")
+    if sha(assessment / "inputs.json") != assessment_preparation["inputs_sha256"]:
+        raise ValueError("fixed assessment inventory changed")
+    for cohort, digest in assessment_preparation["cohort_inputs_sha256"].items():
+        if sha(assessment / (cohort + "_inputs.json")) != digest:
+            raise ValueError("fixed cohort inventory changed")
+    for name, digest in assessment_preparation["files_sha256"].items():
+        if sha(assessment / name) != digest:
+            raise ValueError("fixed assessment raster changed")
     inputs = read(assessment / "inputs.json")
     before_report = read(args.root / "copy_before_v1/report.json")
     after_report = read(after_path / "report.json")
@@ -73,6 +89,8 @@ def main():
             if row[key] != out[key]:
                 raise ValueError("input/view/seed differs")
     copy_refs = read(args.root / "prepared_v1/copy_references.json")
+    if sha(args.root / "prepared_v1/copy_references.json") != preparation["copy_references_sha256"]:
+        raise ValueError("fixed copy references changed")
     copy_before = read(args.root / "copy_before_v1/outputs.json")
     copy_inputs = read(assessment / "copy_inputs.json")
     if len(copy_before) != 32 or [r["id"] for r in copy_before] != [r["id"] for r in copy_inputs]:
@@ -86,6 +104,12 @@ def main():
     for cohort, refs_path, source_path, scorer in (
             ("zh", Path("artifacts/native_chinese_interface/prepared_v1/references.json"), Path("references/evidence/native_chinese_interface_result/reports/outputs.json"), score_controls),
             ("en", Path("artifacts/native_english_transfer/prepared_v2/references.json"), Path("references/evidence/native_reader_geometry_result/reports/source_432_outputs.json"), score_english)):
+        source_receipt = read(source_path.parent.parent / "result.json")
+        if sha(source_path) != source_receipt["files_sha256"][str(source_path.relative_to(source_path.parent.parent))]:
+            raise ValueError("retained native source responses changed")
+        reference_export = Path("references/evidence") / ("native_chinese_interface_result" if cohort == "zh" else "native_english_transfer_result") / "result.json"
+        if sha(refs_path) != read(reference_export)["files_sha256"]["references.json"]:
+            raise ValueError("fixed annotated reference alternatives changed")
         rows = [r for r in inputs if r["cohort"] == cohort]
         native_rows = [dict(r, input_sha256=r["coarse_input_sha256"]) for r in rows]
         old = read(source_path)
