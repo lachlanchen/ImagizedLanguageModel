@@ -98,3 +98,26 @@ numeric adapter state and source weights; it does not load training cache or
 reference answers. Its temporary native text head remains a diagnostic. Correct
 held-out image answers, question interventions, reliable Chinese writing and
 eventual vocabulary-free image deployment are still required for the full goal.
+
+## Autonomous assessment
+
+The [assessment protocol](../references/native_visual_access_assessment_protocol.md)
+keeps the twelve-case screen, complete held-out cohort and paired-question
+intervention separate. Prepare the intervention on CPU before observing its
+outputs. All original page pixels and font geometry are verified before the
+question band is erased; the complete context stays unchanged.
+
+```bash
+env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/prepare_native_visual_access_validation.py --output artifacts/native_visual_access
+env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/probe_native_visual_access_controls.py --stage prepare --output artifacts/native_visual_access/question_controls_v1
+env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. "$ILM_NATIVE_PYTHON" scripts/train_native_visual_access.py --stage evaluate --inputs artifacts/native_visual_access/full_validation_inputs.json --checkpoint artifacts/native_visual_access/learning_v1/checkpoint.pt --output artifacts/native_visual_access/full_validation_v1
+env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. "$ILM_NATIVE_PYTHON" scripts/probe_native_visual_access_controls.py --stage evaluate --inputs artifacts/native_visual_access/question_controls_v1/inputs.json --checkpoint artifacts/native_visual_access/learning_v1/checkpoint.pt --output artifacts/native_visual_access/question_readout_v1
+env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/score_native_visual_access.py --full artifacts/native_visual_access/full_validation_v1 --controls artifacts/native_visual_access/question_readout_v1 --output references/evidence/native_visual_access_result
+```
+
+Start those GPU evaluations only after the trainer and its automatic screen
+have finished and the screen improves. The full index is input-only; expected
+answers belong in the separate `full_validation_references.json`. Sixteen
+shared erased pages produce sixteen calls, alongside 32 ordinary questions.
+Changing outputs alone does not establish correct answers. The exporter keeps
+all raw readouts and applies no punctuation or case repair.
