@@ -48,11 +48,24 @@ no foreground is removed. This differs from the earlier learned-stop exact
 metric. It is a composite architecture/initialization/training replacement,
 not an isolated intervention proving that history alignment caused failure.
 
+A [common-metric rescore](evidence/parallel_canvas_prior_pixels.json) preserves
+all original PNGs and confirms identical reference pixels for the 32 cases.
+Under this same exterior-white rule, the preceding control and metric writers
+both score 0/32 exact, at 85.9835% and 70.0094% foreground F1, respectively.
+The canvas improvement is therefore not solely a change in the exact-image
+scoring rule. Different architectures, initialization and training histories
+prevent a causal or matched-efficiency interpretation.
+
 The model makes a deterministic conditional estimate. Ambiguous prompts can
 still produce averaged visual alternatives. The new-copy and unseen-question
 failures show that fitting clean training writing does not establish lexical,
 grammatical or semantic generalization. No historical-script, handwriting,
 etymology, arbitrary-length or general English-answer capability is shown.
+Visual inspection of all twelve new-copy outputs and the first eight normal
+development outputs shows recurring malformed, overlapping glyph-like marks
+in place of the requested writing. These examples remain in the complete
+gallery. Their failure is substantial, not merely the strict pixel metric
+rejecting otherwise correct answers.
 
 ## Pixel error and supplied-code control
 
