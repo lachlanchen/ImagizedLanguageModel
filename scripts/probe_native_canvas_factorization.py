@@ -50,6 +50,9 @@ def cohort(args):
     for short, full in zip(rows["legacy"], rows["square"]):
         if any(short[k] != full[k] for k in ("id", "seed", "readout_seed", "language")):
             raise ValueError("matched source seeds/identity required")
+        for row in (short, full):
+            if sha(args.inputs / "inputs" / row["input"]) != row["input_sha256"]:
+                raise ValueError("source pixels differ from their inventory")
         with Image.open(args.inputs / "inputs" / short["input"]) as s, Image.open(args.inputs / "inputs" / full["input"]) as q:
             if s.size != (1024, 256) or q.size != (1024, 1024):
                 raise ValueError("fixed source geometries required")
@@ -150,8 +153,10 @@ def score(args):
     report = read(args.run / "report.json")
     if read(args.run / "status.json")["state"] != "completed" or report["calls"] != 128 or report["source_decision_replays_exact"] != 64 or report["implementation"] != binding():
         raise ValueError("completed code-bound factorization required")
-    if report["source_result_sha256"] != sha(args.inputs / "result.json") or report["outputs_sha256"] != sha(args.run / "outputs.json") or len(report["checks"]) != 32:
+    if report["source_result_sha256"] != sha(args.inputs / "result.json") or report["outputs_sha256"] != sha(args.run / "outputs.json") or len(report["checks"]) != 32 or report["source_checkpoint_sha256"] != SOURCE:
         raise ValueError("source/output/prefix evidence changed")
+    if [c["id"] for c in report["checks"]] != [r["id"] for r in rows["legacy"]] or not all(c["nonvisual_header_bit_exact"] and c["nonvisual_suffix_bit_exact"] for c in report["checks"]):
+        raise ValueError("complete nonvisual equality checks required")
     reference_root = Path("references/evidence/native_state_alignment_result")
     refs_path = reference_root / "data/training_copy_references.json"
     if sha(refs_path) != read(reference_root / "result.json")["files_sha256"]["data/training_copy_references.json"]:
@@ -165,9 +170,17 @@ def score(args):
         out = [r for r in outputs if r["arm"] == arm]
         if [r["id"] for r in out] != [r["id"] for r in refs]:
             raise ValueError("complete fixed arm order required")
-        for row, value in zip(rows["legacy"], out):
+        for row, square, value in zip(rows["legacy"], rows["square"], out):
             if any(row[k] != value[k] for k in ("seed", "readout_seed", "language")):
                 raise ValueError("matched seed or language changed")
+            expected_hashes = {"legacy": row["input_sha256"], "square": square["input_sha256"]}
+            if arm in ("strip_short", "square_long"):
+                layout = "legacy" if arm == "strip_short" else "square"
+                expected_hashes = {layout: expected_hashes[layout]}
+                if any(value[k] != prior[layout][row["id"]][k] for k in ("ids", "text", "stopped")):
+                    raise ValueError("source replay evidence differs")
+            if value["source_inputs_sha256"] != expected_hashes or value["prefix_positions"] != (1063 if arm.endswith("short") else 4135) or value["hybrid_prefix"] != (arm in ("square_short", "strip_long")):
+                raise ValueError("declared arm input or layout differs")
         cases = [compare(o, ref) for o, ref in zip(out, refs)]
         arms[arm] = dict(summary=totals(cases), cases=cases, languages={lang: totals([r for r in cases if r["language"] == lang]) for lang in ("en", "zh")})
     args.output.mkdir(parents=True, exist_ok=False)
