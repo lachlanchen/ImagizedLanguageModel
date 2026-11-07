@@ -15,79 +15,49 @@ builder remain inside the named baseline.
 
 ## Current result
 
-The [completed full-page curriculum](../../references/native_visual_alignment_result.md)
-gives **29/32 exact stopped copies, 0/32 Chinese QA and 0/32 English QA**
-through the auxiliary text head at the original supplied geometries:
-1024-by-256 copying strips and 1024-square QA pages. Its
-complete-page transcripts improve on four short copying pages but remain
-incorrect on all four full Chinese QA pages.
+The independent image-input/image-output ILM remains unachieved. The
+[completed visual-state learner](../../references/native_state_alignment_result.md)
+improves English QA from **11/32 to 16/32** and English copying from **7/16
+to 16/16**, while Chinese QA remains **0/32** and copying **0/16**. Four of
+six reader requirements fail. A [seen-prompt check](../../references/native_state_fit_result.md)
+corrupts every one of eight tested Chinese training strings.
 
-The subsequent [native-resolution intervention](../../references/native_reader_geometry_result.md)
-recovers **11/32 exact English answers from the frozen source at 432**, versus
-0/32 at 1024, without training. Nine correct answers disappear with passage
-erasure; two remain correct without the passage. Both completed adapters
-score only 5/32 at 432. This identifies a substantial interface effect,
-without isolating its geometric mechanism or validating the learned repair.
-No trained image-answer result is demonstrated.
+A separate [attention-only learner](../../references/native_reader_attention_result.md)
+keeps the calibrated dense visual frontend fixed and trains 4,358,144 new
+attention parameters. Its complete 2,560-update run retains **29/32 copies**
+(13/16 Chinese, 16/16 English), but leaves QA at **0/32 in both languages**.
+All six requirements fail. These are auxiliary Unicode-head observations;
+no continuous image-answer model is qualified.
 
-The abstract, article, Note 42 and Figure S19 retain the complete failures and
-separate inherited source capability from learned visual-language ability.
-Note 41/Figure S18 preserve the earlier 27/32 copying result. The current
-editable deck contains **34 slides**, preserving all 33 earlier native parts
-and rendered appearances plus 79 earlier individual figure assets.
+The [fixed-weight canvas control](../../references/native_canvas_control_result.md)
+replays all 160 original responses exactly. Adding only white bottom padding
+to the original 1024-by-256 copying strips reduces copying from **29/32 to
+7/32**, with Chinese falling from **13/16 to 0/16**. Tight whole-request
+cropping also fails, despite retaining every ink pixel. Layout changes affect
+features and context jointly; their unique internal cause is not isolated.
+The [earlier native-scale English recovery](../../references/native_reader_geometry_result.md)
+and all preceding failures remain in Notes 41–42.
 
-Current entry points are `reader_geometry_figures.py --stage
-generate|verify|render` and `build_reader_geometry_publication.py --stage
-build|sync`. Older builders retain historical slide counts and must not
-overwrite the current deck. The reviewed local delivery is
-`ILM_NatureStyle_20261107_NativeReaderGeometry` with stable `LATEST` aliases.
-Local checksums verify copying; cloud propagation is not independently verified.
+The abstract, article Results, **Note 43 and Figure S20** report these completed
+observations, their actual equations, costs, raw responses and limitations.
+The package has a **15-page article, 28-page review and 46-page supplement**,
+with matching V68 redlines. The native editable deck has **35 slides**;
+all 34 earlier slide parts and rendered appearances, 82 earlier individual
+figure assets and the first 40 supplement pages are preserved.
 
-![Completed curriculum, geometry intervention, complete input pages and first four auxiliary source answers](figures/Figure_S19_reader_geometry.png)
+Current figure/build entry points are `state_alignment_figures.py --stage
+ generate|verify|render` and `build_state_alignment_publication.py --stage
+ build|sync`. `activate_state_alignment_revision.py` records the bounded
+source edit from the preserved baseline; do not rerun it over later edits.
+Older builders retain historical slide counts and must not overwrite this
+package. Source figures are native editable diagrams, charts/workbooks and
+unaltered request pixels. No text readout is presented as a generated page.
 
-## Follow-up reader learning
+The reviewed local delivery is `ILM_NatureStyle_20261107_NativeStateAlignment`
+with five stable `LATEST` aliases in the ILM Nutstore project folder. Local
+checksums verify copying; cloud propagation is not independently verified.
 
-The subsequent [Chinese modality control](../../references/native_chinese_interface_result.md)
-gives 0/32 exact image-input answers at both scales, versus 16/32 from the
-original text. [Native-window feature controls](../../references/native_window_reader_result.md)
-preserve high-resolution codec readability but do not repair natural QA.
-Their complete responses and source-equivalence controls remain available.
-
-The completed [bilingual state-alignment experiment](../../docs/native-state-alignment.md)
-learns a zero-initialized high-resolution correction to the unchanged native
-reader. Its [complete result](../../references/native_state_alignment_result.md)
-improves English QA from 11/32 to 16/32 and English copying from 7/16 to
-16/16. Chinese remains 0/32 QA and 0/16 copying. Four of six requirements
-fail; a separate [seen-prompt check](../../references/native_state_fit_result.md)
-also gives 0/8 Chinese copies with changed characters. The additional source
-check is complete, with its preflight timing deviation retained. No direct
-image-answer result is demonstrated. The bounded manuscript revision will
-incorporate this failed Chinese repair and limited English transfer; the
-current compiled article retains Note 42 as its latest completed revision.
-
-The subsequent [fixed-weight canvas control](../../references/native_canvas_control_result.md)
-replays all 160 earlier responses exactly. Adding only white bottom padding
-reduces copying from 29/32 to 7/32; Chinese falls from 13/16 to 0/16.
-The earlier copying inputs were 1024 by 256 strips, while the QA inputs
-were square. Tight whole-request cropping also fails, despite preserving
-every ink pixel. This clarifies a layout confound in cross-model comparisons.
-
-The prepared `state_alignment_note.tex` and `state_alignment_figures.py`
-cover the completed learning, seen-fit and canvas results under the bounded
-Note 43/Figure S20 plan. Its 35-slide draft and chart/workbook verification
-remain private pending rendering. The canonical 34-slide deck and current
-PDFs are preserved. `build_state_alignment_publication.py` must run only
-after the current GPU work is terminal, followed by PDF/slide visual review
-before delivery. Do not use the older geometry builder after that promotion.
-The bounded source activation is `activate_state_alignment_revision.py`,
-after the new figure has been rendered; it preserves baseline checks before
-changing the abstract, Results paragraph and supplement.
-
-The [completed attention-learning experiment](../../references/native_reader_attention_result.md)
-preserves the calibrated dense visual frontend and learns only contextual
-attention. Its 2,560-update run retains 29/32 copies but leaves Chinese and
-English QA at 0/32. All six requirements fail. Its passed preflight does not
-override this outcome, and no image-answer model is qualified.
+![Measured visual-state learner, geometry control and unmodified seen copying response](figures/Figure_S20_state_alignment.png)
 
 ## Earlier paired copying
 

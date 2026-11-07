@@ -122,7 +122,7 @@ def generate():
     slide.shape("Visual-state learning and canvas dependence", 45, 24, 1510, 58, 31, True)
     slide.shape("a  Learned correction to a frozen native reader", 45, 92, 1500, 42, 23, True)
     for words, x, y, w, h, fill in (
-        ("Complete prompt\n1024-square pixels",45,157,200,105,"EDF2F6"),
+        ("Prompt image\n1024 × 1024",45,157,200,105,"EDF2F6"),
         ("432 view → frozen encoder\nCoarse features C",300,138,350,62,"EDF2F6"),
         ("1024 view → 9 fine windows\nLearned adapters → pooled F",300,226,350,68,"FFF1DA"),
         ("C + G(F − C)\nG starts exactly at zero",715,179,350,76,"FFF1DA"),
@@ -134,7 +134,7 @@ def generate():
     slide.shape("b  Held-out QA: exact stopped answers / 32",45,361,725,40,22,True)
     slide.chart(slide.relation("chart","../charts/chart40.xml"),45,407,700,224)
     slide.shape("Copying: English 7/16 → 16/16; Chinese 0/16 → 0/16",45,640,740,36,19)
-    slide.shape("c  Separate fixed dense source: Chinese copies / 16",835,361,720,40,22,True)
+    slide.shape("c  Separate dense source: Chinese copies / 16",835,361,720,40,22,True)
     slide.chart(slide.relation("chart","../charts/chart41.xml"),835,407,700,224)
     slide.shape("English copies: 16/16 → 7/16 → 0/16; QA stays 0/32",835,640,720,36,19)
     source_image = ROOT / "artifacts/image_edit_learning/strip_pages/0000_input.png"
@@ -152,7 +152,7 @@ def generate():
     pictures = [dict(part=part,source=str(stable.relative_to(ROOT)),sha256=sha(stable))]
     slide.shape("Raw auxiliary text readout (not an answer image)",835,697,720,35,19,True)
     slide.shape("Requested: 花多地地山\nLearner: 花多梅树山\nAll 8 tested seen Chinese strings change characters",835,742,720,106,21)
-    slide.shape("State correction fails 4/6 requirements. Separate attention-only\\nrepair: 0/32 QA in both languages; all 6 requirements fail.",835,852,720,48,16)
+    slide.shape("State correction: 4/6 requirements fail.\nAttention-only: QA 0/32 both languages; 6/6 fail.",835,850,720,48,15)
     for prop in slide.root.findall(".//a:rPr",NS):
         element("a:ea",prop,typeface="Noto Sans CJK SC")
     slide.relation("slideLayout", next(n.get("Target") for n in source_rels if n.get("Type").endswith("/slideLayout")))
@@ -168,7 +168,8 @@ def generate():
         "The learner received the full square; this display crop preserves all requested characters. Raw readout 花多梅树山 changes requested 花多地地山. "
         "Separate fixed dense checkpoint canvas control: copying Chinese13/16 on1024x256 strips,0/16 after white square padding,0/16 tight; English16,7,0/16. All480 calls retained,160 legacy IDs replayexact. "
         "VAE features/positions/context change with geometry despite preserved pixels. Four of six state-reader gates fail. No continuous image answers or general ILM qualification. "
-        "Sources: references/evidence/native_state_alignment_result, native_state_fit_result, native_canvas_control_result. CMRC2018/SQuAD1.1 CC-BY-SA4.0; Show-o2 NUS Show Lab Apache2.0. " + json.dumps(dict(chart_values=values),ensure_ascii=False))
+        "Separate attention-only intervention: 4,358,144 new parameters, 2560 updates, copying29/32 retained, QA0/32 in each language, allsix reader requirements fail. "
+        "Sources: references/evidence/native_state_alignment_result, native_state_fit_result, native_canvas_control_result, native_reader_attention_result. CMRC2018/SQuAD1.1 CC-BY-SA4.0; Show-o2 NUS Show Lab Apache2.0. " + json.dumps(dict(chart_values=values),ensure_ascii=False))
     for shape in notes.findall("p:cSld/p:spTree/p:sp", NS):
         ph = shape.find("p:nvSpPr/p:nvPr/p:ph", NS)
         if ph is not None and ph.get("type") == "body":

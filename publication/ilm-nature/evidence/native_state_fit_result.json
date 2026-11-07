@@ -1,0 +1,1464 @@
+{
+  "groups": {
+    "source_image/copy/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 0,
+      "annotation_exact_stopped": 0,
+      "stopped": 8
+    },
+    "source_image/copy/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 2,
+      "annotation_exact_stopped": 2,
+      "stopped": 8
+    },
+    "source_image/qa/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 0,
+      "annotation_exact_stopped": 0,
+      "stopped": 8
+    },
+    "source_image/qa/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 2,
+      "annotation_exact_stopped": 3,
+      "stopped": 8
+    },
+    "learner_image/copy/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 0,
+      "annotation_exact_stopped": 0,
+      "stopped": 8
+    },
+    "learner_image/copy/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 8,
+      "annotation_exact_stopped": 8,
+      "stopped": 8
+    },
+    "learner_image/qa/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 0,
+      "annotation_exact_stopped": 0,
+      "stopped": 8
+    },
+    "learner_image/qa/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 5,
+      "annotation_exact_stopped": 6,
+      "stopped": 8
+    },
+    "source_text/copy/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 3,
+      "annotation_exact_stopped": 3,
+      "stopped": 8
+    },
+    "source_text/copy/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 7,
+      "annotation_exact_stopped": 7,
+      "stopped": 8
+    },
+    "source_text/qa/zh": {
+      "cases": 8,
+      "training_target_exact_stopped": 1,
+      "annotation_exact_stopped": 1,
+      "stopped": 8
+    },
+    "source_text/qa/en": {
+      "cases": 8,
+      "training_target_exact_stopped": 6,
+      "annotation_exact_stopped": 7,
+      "stopped": 8
+    }
+  },
+  "cases": [
+    {
+      "id": "copy/train/000",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"在多瑙山\"",
+      "expected": "花多地地山",
+      "alternatives": [
+        "花多地地山"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/002",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"风生水起\"",
+      "expected": "风言外黑目家",
+      "alternatives": [
+        "风言外黑目家"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/004",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "“国家工业政策中‘小而精’”",
+      "expected": "雪明江雨左晚外中门画小禾",
+      "alternatives": [
+        "雪明江雨左晚外中门画小禾"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/006",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"人要人就只能干下去\"",
+      "expected": "人学耳人短旧下天田下木",
+      "alternatives": [
+        "人学耳人短旧下天田下木"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/008",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "“石钟山题字大”",
+      "expected": "石河秋白草晚大心",
+      "alternatives": [
+        "石河秋白草晚大心"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/010",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"小李将被解职\"",
+      "expected": "心字秋湖新田",
+      "alternatives": [
+        "心字秋湖新田"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/012",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"此题及正解\"",
+      "expected": "北夏风左星目",
+      "alternatives": [
+        "北夏风左星目"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/014",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"红遍天涯\"",
+      "expected": "红海鱼树秋书月",
+      "alternatives": [
+        "红海鱼树秋书月"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/001",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "mountain bright blue cloud",
+      "expected": "mountain bright blue cloud",
+      "alternatives": [
+        "mountain bright blue cloud"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/003",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "paper small winter garden\"",
+      "expected": "paper small winter garden",
+      "alternatives": [
+        "paper small winter garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/005",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "\"window quiet small\"",
+      "expected": "window quiet small",
+      "alternatives": [
+        "window quiet small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/007",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "'winter river book paper'",
+      "expected": "winter river book paper",
+      "alternatives": [
+        "winter river book paper"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/009",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "green open",
+      "expected": "green open",
+      "alternatives": [
+        "green open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/011",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "blue garden\"",
+      "expected": "blue garden",
+      "alternatives": [
+        "blue garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/013",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "river open\"",
+      "expected": "river open",
+      "alternatives": [
+        "river open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/015",
+      "arm": "source_image",
+      "task": "copy",
+      "language": "en",
+      "text": "river mountain small\"",
+      "expected": "river mountain small",
+      "alternatives": [
+        "river mountain small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "问：大清成法，是香港特别行政区《大清律例》有关的法律问题吗？",
+      "expected": "第四部",
+      "alternatives": [
+        "第四部"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "问：大清政府对这样的答案是什么态度？",
+      "expected": "唐太宗李世民如何成为天子",
+      "alternatives": [
+        "唐太宗李世民如何成为天子"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_2",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1981年3月24日，发生了化学事故。",
+      "expected": "2亿港元",
+      "alternatives": [
+        "2亿港元"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_3",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1981年3月24日，发生了化学事故。",
+      "expected": "爱丁堡公爵菲腊亲王",
+      "alternatives": [
+        "爱丁堡公爵菲腊亲王"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_0",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "DVD of the movie \"Variety\"",
+      "expected": "于2007年11月21日发行。",
+      "alternatives": [
+        "于2007年11月21日发行。"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_2",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "DVD of the movie \"Variety\"",
+      "expected": "于2007年10月19日",
+      "alternatives": [
+        "于2007年10月19日"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_2",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1655年",
+      "expected": "因为地处「三轮」",
+      "alternatives": [
+        "因为地处「三轮」"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_3",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1885年",
+      "expected": "1655年（明历元年）",
+      "alternatives": [
+        "1655年（明历元年）"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84082",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q",
+      "expected": "Sky Q Hub",
+      "alternatives": [
+        "Sky Q Hub"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84083",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q",
+      "expected": "Sky Q Silver set top boxes",
+      "alternatives": [
+        "Sky Q Silver set top boxes",
+        "the Sky Q Silver set top boxes",
+        "Sky Q Silver"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da188",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Common Core",
+      "expected": "the Common Core",
+      "alternatives": [
+        "the Common Core",
+        "Common Core"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da189",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "17",
+      "expected": "17",
+      "alternatives": [
+        "17"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac038",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Apollo 11",
+      "expected": "Gemini",
+      "alternatives": [
+        "Gemini",
+        "all-Gemini veteran",
+        "all-Gemini veteran crew"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac039",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "July 1969",
+      "expected": "July 1969",
+      "alternatives": [
+        "July 1969",
+        "July",
+        "July 20, 1969"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e194",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Diamond Strip",
+      "expected": "Collingwood Street",
+      "alternatives": [
+        "Collingwood Street",
+        "Collingwood Street,"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e195",
+      "arm": "source_image",
+      "task": "qa",
+      "language": "en",
+      "text": "The Gate",
+      "expected": "indoor complex",
+      "alternatives": [
+        "indoor complex",
+        "a new indoor complex"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/000",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "花多梅树山",
+      "expected": "花多地地山",
+      "alternatives": [
+        "花多地地山"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/002",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "风车外黑白色",
+      "expected": "风言外黑目家",
+      "alternatives": [
+        "风言外黑目家"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/004",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "“orny的红左肩外中下小天”",
+      "expected": "雪明江雨左晚外中门画小禾",
+      "alternatives": [
+        "雪明江雨左晚外中门画小禾"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/006",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "人多至人潮日下天色下天",
+      "expected": "人学耳人短旧下天田下木",
+      "alternatives": [
+        "人学耳人短旧下天田下木"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/008",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "石青林日志篇大字",
+      "expected": "石河秋白草晚大心",
+      "alternatives": [
+        "石河秋白草晚大心"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/010",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "心字旁湖畔旧居",
+      "expected": "心字秋湖新田",
+      "alternatives": [
+        "心字秋湖新田"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/012",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "北夏风正直目",
+      "expected": "北夏风左星目",
+      "alternatives": [
+        "北夏风左星目"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/014",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "zh",
+      "text": "江英春明水牛马牛",
+      "expected": "红海鱼树秋书月",
+      "alternatives": [
+        "红海鱼树秋书月"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/001",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "mountain bright blue cloud",
+      "expected": "mountain bright blue cloud",
+      "alternatives": [
+        "mountain bright blue cloud"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/003",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "paper small winter garden",
+      "expected": "paper small winter garden",
+      "alternatives": [
+        "paper small winter garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/005",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "window quiet small",
+      "expected": "window quiet small",
+      "alternatives": [
+        "window quiet small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/007",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "winter river book paper",
+      "expected": "winter river book paper",
+      "alternatives": [
+        "winter river book paper"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/009",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "green open",
+      "expected": "green open",
+      "alternatives": [
+        "green open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/011",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "blue garden",
+      "expected": "blue garden",
+      "alternatives": [
+        "blue garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/013",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "river open",
+      "expected": "river open",
+      "alternatives": [
+        "river open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/015",
+      "arm": "learner_image",
+      "task": "copy",
+      "language": "en",
+      "text": "river mountain small",
+      "expected": "river mountain small",
+      "alternatives": [
+        "river mountain small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "大清国",
+      "expected": "第四部",
+      "alternatives": [
+        "第四部"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "大清国定都北京",
+      "expected": "唐太宗李世民如何成为天子",
+      "alternatives": [
+        "唐太宗李世民如何成为天子"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_2",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1011年",
+      "expected": "2亿港元",
+      "alternatives": [
+        "2亿港元"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_3",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1981年3月24日",
+      "expected": "爱丁堡公爵菲腊亲王",
+      "alternatives": [
+        "爱丁堡公爵菲腊亲王"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_0",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "2007年11月21日发行",
+      "expected": "于2007年11月21日发行。",
+      "alternatives": [
+        "于2007年11月21日发行。"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_2",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "5DVD",
+      "expected": "于2007年10月19日",
+      "alternatives": [
+        "于2007年10月19日"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_2",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1655年",
+      "expected": "因为地处「三轮」",
+      "alternatives": [
+        "因为地处「三轮」"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_3",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "zh",
+      "text": "1655年",
+      "expected": "1655年（明历元年）",
+      "alternatives": [
+        "1655年（明历元年）"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84082",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q Hub",
+      "expected": "Sky Q Hub",
+      "alternatives": [
+        "Sky Q Hub"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84083",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q Hub",
+      "expected": "Sky Q Silver set top boxes",
+      "alternatives": [
+        "Sky Q Silver set top boxes",
+        "the Sky Q Silver set top boxes",
+        "Sky Q Silver"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da188",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Common Core",
+      "expected": "the Common Core",
+      "alternatives": [
+        "the Common Core",
+        "Common Core"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da189",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "17",
+      "expected": "17",
+      "alternatives": [
+        "17"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac038",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "G",
+      "expected": "Gemini",
+      "alternatives": [
+        "Gemini",
+        "all-Gemini veteran",
+        "all-Gemini veteran crew"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac039",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "July 1969",
+      "expected": "July 1969",
+      "alternatives": [
+        "July 1969",
+        "July",
+        "July 20, 1969"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e194",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "Collingwood Street",
+      "expected": "Collingwood Street",
+      "alternatives": [
+        "Collingwood Street",
+        "Collingwood Street,"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e195",
+      "arm": "learner_image",
+      "task": "qa",
+      "language": "en",
+      "text": "indoor complex",
+      "expected": "indoor complex",
+      "alternatives": [
+        "indoor complex",
+        "a new indoor complex"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/000",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"花多地地山\"",
+      "expected": "花多地地山",
+      "alternatives": [
+        "花多地地山"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/002",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"风言外黑目家\"",
+      "expected": "风言外黑目家",
+      "alternatives": [
+        "风言外黑目家"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/004",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"Snowy clear rain, left evening, small gate, and middle door\"",
+      "expected": "雪明江雨左晚外中门画小禾",
+      "alternatives": [
+        "雪明江雨左晚外中门画小禾"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/006",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "人学耳人短旧下天田下木",
+      "expected": "人学耳人短旧下天田下木",
+      "alternatives": [
+        "人学耳人短旧下天田下木"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/008",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "石河秋白草晚大心",
+      "expected": "石河秋白草晚大心",
+      "alternatives": [
+        "石河秋白草晚大心"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/010",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "心字秋湖新田",
+      "expected": "心字秋湖新田",
+      "alternatives": [
+        "心字秋湖新田"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/012",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"北夏风左星目\"",
+      "expected": "北夏风左星目",
+      "alternatives": [
+        "北夏风左星目"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/014",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "zh",
+      "text": "\"红海鱼树秋书月\"",
+      "expected": "红海鱼树秋书月",
+      "alternatives": [
+        "红海鱼树秋书月"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/001",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "mountain bright blue cloud",
+      "expected": "mountain bright blue cloud",
+      "alternatives": [
+        "mountain bright blue cloud"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/003",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "paper small winter garden",
+      "expected": "paper small winter garden",
+      "alternatives": [
+        "paper small winter garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/005",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "window quiet small",
+      "expected": "window quiet small",
+      "alternatives": [
+        "window quiet small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/007",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "winter river book paper",
+      "expected": "winter river book paper",
+      "alternatives": [
+        "winter river book paper"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/009",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "green open",
+      "expected": "green open",
+      "alternatives": [
+        "green open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/011",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "blue garden",
+      "expected": "blue garden",
+      "alternatives": [
+        "blue garden"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "copy/train/013",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "river",
+      "expected": "river open",
+      "alternatives": [
+        "river open"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "copy/train/015",
+      "arm": "source_text",
+      "task": "copy",
+      "language": "en",
+      "text": "river mountain small",
+      "expected": "river mountain small",
+      "alternatives": [
+        "river mountain small"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "Fourth",
+      "expected": "第四部",
+      "alternatives": [
+        "第四部"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "大唐威龙讲述的是一个关于唐太宗李世民如何成为天子的故事。",
+      "expected": "唐太宗李世民如何成为天子",
+      "alternatives": [
+        "唐太宗李世民如何成为天子"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_2",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "2000万港元",
+      "expected": "2亿港元",
+      "alternatives": [
+        "2亿港元"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_3",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "爱丁堡公爵菲腊亲王",
+      "expected": "爱丁堡公爵菲腊亲王",
+      "alternatives": [
+        "爱丁堡公爵菲腊亲王"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "TRAIN_686_QUERY_0",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "2007年11月21日",
+      "expected": "于2007年11月21日发行。",
+      "alternatives": [
+        "于2007年11月21日发行。"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_2",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "10月19日",
+      "expected": "于2007年10月19日",
+      "alternatives": [
+        "于2007年10月19日"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_2",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "Because it is located at the intersection of three roads.",
+      "expected": "因为地处「三轮」",
+      "alternatives": [
+        "因为地处「三轮」"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_3",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "zh",
+      "text": "1655年",
+      "expected": "1655年（明历元年）",
+      "alternatives": [
+        "1655年（明历元年）"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84082",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q Hub",
+      "expected": "Sky Q Hub",
+      "alternatives": [
+        "Sky Q Hub"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57096505ed30961900e84083",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "Sky Q Silver set top boxes",
+      "expected": "Sky Q Silver set top boxes",
+      "alternatives": [
+        "Sky Q Silver set top boxes",
+        "the Sky Q Silver set top boxes",
+        "Sky Q Silver"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da188",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "Common Core",
+      "expected": "the Common Core",
+      "alternatives": [
+        "the Common Core",
+        "Common Core"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/572853e8ff5b5019007da189",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "17",
+      "expected": "17",
+      "alternatives": [
+        "17"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac038",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "Gemini",
+      "expected": "Gemini",
+      "alternatives": [
+        "Gemini",
+        "all-Gemini veteran",
+        "all-Gemini veteran crew"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/5725e36f89a1e219009ac039",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "July 1969",
+      "expected": "July 1969",
+      "alternatives": [
+        "July 1969",
+        "July",
+        "July 20, 1969"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e194",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "Collingwood Street",
+      "expected": "Collingwood Street",
+      "alternatives": [
+        "Collingwood Street",
+        "Collingwood Street,"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": true,
+      "annotation_exact_stopped": true
+    },
+    {
+      "id": "squad_train/57267de1f1498d1400e8e195",
+      "arm": "source_text",
+      "task": "qa",
+      "language": "en",
+      "text": "A new indoor complex consisting of bars, upmarket clubs, restaurants and a 12-screen Empire multiplex cinema.",
+      "expected": "indoor complex",
+      "alternatives": [
+        "indoor complex",
+        "a new indoor complex"
+      ],
+      "stopped": true,
+      "training_target_exact_stopped": false,
+      "annotation_exact_stopped": false
+    }
+  ],
+  "files_sha256": {
+    "data/preparation.json": "ead7161c0885e1d4b9cdfc11a4d9eb32b2de122b7d29e58723a7aaa50707187b",
+    "data/inputs.json": "c6a4f64cb4e5d7e7ecb6d3f0f09354f2cf5ebaea97edc42e0b20fa07b5dfa687",
+    "data/references.json": "e2ada8cebd27cf1b221b6b4e4aef38e61c64a8fa0f814f5e0eb483b78ce6b4ca",
+    "data/text_inputs.json": "59b14ce25962ca2c5d84e5b0df37f580e280efab206368a0536d4cf9ef92c599",
+    "reports/report.json": "ed6a1d7620219e5951f210fb22dc2a1a9a9e657074f28cf17e9366bd26e4910b",
+    "reports/outputs.json": "9fa2269cbdb306c0b6e1f2e666122266687cbb169c5203fe0595d410be8795db"
+  },
+  "checkpoint_sha256": "916d172c5e18a0f201c1e94e5ba0e42ad74f5c615114eb60781dcdd38f90b98f",
+  "implementation_sha256": "864072692574c229bc11f099debf1114108b82e95fb1dbbbe0f459acdf5f0fc9",
+  "new_optimizer_updates": 0,
+  "seen_training_prompts": true,
+  "generalization_demonstrated": false,
+  "image_answer_generation_demonstrated": false,
+  "general_ilm_goal_complete": false
+}

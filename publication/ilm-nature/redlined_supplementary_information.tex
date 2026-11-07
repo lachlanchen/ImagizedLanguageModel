@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sat Nov  7 11:47:31 2026
-%DIF ADD new.tex   Sat Nov  7 11:47:31 2026
+%DIF DEL old.tex   Sat Nov  7 14:50:28 2026
+%DIF ADD new.tex   Sat Nov  7 14:50:28 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -2842,6 +2842,205 @@ order. Exact assessment accepts any annotated alternative and requires EOS;
 extra wording and capitalization remain significant. These are auxiliary
 text readouts, not answer images written by the learner. All 320 model calls
 and failed answers remain available.}\label{fig:s19-reader-geometry}\end{minipage}
+
+\clearpage
+\section*{\DIFadd{Supplementary Note 43: state alignment and dependence on the canvas}}
+\DIFadd{The frozen source's native-resolution English result in Note 42 does not
+transfer to Chinese. On the fixed 32 Chinese questions, the source gives
+0/32 exact stopped answers from either the original 1024-square image or its
+432-square whole-image resize, versus 16/32 from the original visible text.
+The latter is a privileged source-language control. Independent full-page
+recognition of sampled codec reconstructions gives character errors 0.086875
+at 1024 and 0.705221 at 432; these are readability observations, not proofs
+of latent information loss. Native-scale semantic windows retain resolution
+but give 0/32 Chinese and 2/32 English QA; pooling them to the native prefix
+gives 0/32 in both languages. Neither frozen replacement qualifies reading.
+}
+
+\paragraph{\DIFadd{A source-preserving learned correction.}}
+\DIFadd{For a complete image $X$, let $C(X)$ be the native 729-position visual feature
+sequence from its whole-image 432-square resize. Let $F_A(X)$ encode the
+original 1024-square image using nine overlapping native semantic windows,
+with learned visual/fusion adapters $A$, then pool the fused 64-by-64 field
+to 27 by 27. Both sequences have width 1,536. The corrected features are
+}\[
+ Z(X)=C(X)+G\bigl(F_A(X)-C(X)\bigr),\qquad G_0=0.
+\]
+\DIFadd{The bias-free full-rank $G$ has 2,359,296 parameters; 158 gated rank-16
+visual/fusion adapters add 8,489,984. All original weights, the coarse
+frontend, language body/head and image generator remain frozen. At zero
+correction the complete native source prefix is exact. Pooling is lossy;
+retaining all input pixels before pooling is not a lossless-context claim.
+}
+
+\DIFadd{The same frozen language body supplies offline original-text targets before
+any correct answer history. For its final assistant-role state at layers
+$\mathcal L=\{4,8,12,16,20,24,28\}$, define
+}\[
+ N(h)=\frac{h}{\sqrt{1536^{-1}\sum_d h_d^2+10^{-6}}},\qquad
+ \mathcal L_{\rm state}=\frac{1}{7\cdot1536}
+ \sum_{\ell\in\mathcal L}\|N(s_\ell)-N(t_\ell)\|_2^2.
+\]
+\DIFadd{Optimization minimizes answer cross entropy plus $\mathcal L_{\rm state}$,
+with unit coefficients. Correct preceding answer history enters only the
+cross-entropy term. The native mask blocks every future answer position
+from the pre-answer states. The temporary FP32 causal check has normalized
+maximum error $7.6294\times10^{-6}$, below $2\times10^{-5}$.
+}
+
+\DIFadd{All 640 training records appear four times: 128 copies, 256 Chinese questions
+and 256 English questions from 128 paragraphs in 32 articles excluding all
+sixteen English assessment articles. Preparation rejects only missing font
+coverage or complete-page overflow, without teacher-outcome selection.
+AdamW uses $(0.9,0.95)$, decay 0.01, norm clipping at one, 64-update warm-up
+to $2\times10^{-5}$ and cosine decay to $2\times10^{-6}$. There is no
+validation checkpoint selection. All 2,560 observations and finite gradients
+are retained. The invocation takes 3,112.084\,s at 6.370\,GiB peak allocated
+VRAM, excluding loading and the 238.713\,s offline cache. The complete adapted
+model has 2,841,626,336 parameters plus the 126,892,531-parameter codec and
+external pretraining; 10,849,280 trainable parameters do not define the full
+model size.
+}
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Fixed primary assessment }& \DIFadd{Native source }& \DIFadd{Learned correction}\\
+\midrule
+\DIFadd{English copying }& \DIFadd{7/16 }& \DIFadd{16/16}\\
+\DIFadd{Chinese copying }& \DIFadd{0/16 }& \DIFadd{0/16}\\
+\DIFadd{English QA }& \DIFadd{11/32 }& \DIFadd{16/32}\\
+\DIFadd{Both English questions correct }& \DIFadd{3/16 }& \DIFadd{4/16}\\
+\DIFadd{Chinese QA }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Both Chinese questions correct }& \DIFadd{0/16 }& \DIFadd{0/16}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{English gains six correct answers and loses one on the same small, repeatedly
+inspected cohort. Fifteen of sixteen correct learned answers become incorrect
+without the passage; one remains correct without it. Chinese remains
+unreliable: eleven of sixteen pairs give identical responses to different
+questions. The first two references, \emph{India--West Pacific region} and
+\emph{India Pondicherry}, both receive the shorter Chinese answer \emph{India}.
+All normal Chinese responses stop, but stopping and related fragments are
+not correctness. Four of the six declared reader requirements fail.
+}
+
+\DIFadd{The original preflight replays four native-source readouts, but compares the
+corrected prefix/mask on only one training probe. The additional complete
+four-case corrected-path check is performed after optimization, before final
+scoring: four prefixes/masks and eight readouts match exactly. This timing
+deviation is retained. The controller reuses the completed optimizer and
+160 after-readouts; neither is restarted. No transcript, teacher state,
+correct history or recognition output conditions autonomous assessment.
+}
+
+\paragraph{\DIFadd{Seen-prompt fit.}}
+\DIFadd{A separate prospective diagnosis selects the first eight training records
+per task and language before the primary after-readouts. All 96 calls
+(source image, learner image and original-text source) stop. The learner
+copies 8/8 English but 0/8 Chinese strings; all eight Chinese failures change
+characters, including the first fixed case in Fig.~S20. Seen English QA
+is 6/8 against original annotation alternatives, or 5/8 against its particular
+cross-entropy target; strict Chinese QA is 0/8. The original-text control has
+three exact Chinese copies, four further strings intact inside quotes and
+one translated string. Several QA responses differ in language, surrounding
+text or date formatting, while others give wrong quantities. Its strict 1/8
+Chinese QA count is not a count of every semantically related answer.
+No criteria are changed after inspection. The observed copying errors
+establish a fit obstruction in this recipe, without identifying its unique
+architectural or optimization cause. These are seen data, not generalization.
+}
+
+\paragraph{\DIFadd{A separate attention-only intervention.}}
+\DIFadd{Starting instead from the dense checkpoint of Note 42, a second learner
+freezes the complete calibrated visual frontend and trains fresh rank-16
+residuals only in the 112 native q/k/v/o projections. Copying retains its
+original strips and QA its complete square pages; no pooling or image resize
+is introduced. All 640 bilingual records appear four times. The 4,358,144
+new parameters receive answer cross entropy, with AdamW, 64-update warm-up
+to $5\times10^{-5}$ and cosine decay to $5\times10^{-6}$. There is no
+text-state teacher or validation selection. The complete adapted model has
+2,843,625,184 parameters plus the same codec and external pretraining.
+The 2,560-update invocation takes 1,667.861\,s at 6.345\,GiB peak allocated
+memory, excluding loading and its 262.431\,s prefix cache. The real
+three-update preflight preserves disabled-source logits exactly, changes
+all 112 zero output matrices and gives finite nonzero gradients in all
+224 residual tensors. Four disabled/zero source pairs replay exactly;
+the normalized FP32 causal check has zero error. Nevertheless, the complete
+160-call assessment retains 29/32 copies (Chinese 13/16, English 16/16)
+but gives 0/32 QA in both languages, with no both-correct pairs. The first
+English title and person questions both receive the unrelated year 1961.
+All six reader requirements fail. These costs and outcomes belong to this
+separate attention learner, not to the coarse/fine correction above. Its
+complete export is }\path{references/evidence/native_reader_attention_result/}\DIFadd{.
+}
+
+\paragraph{\DIFadd{A controlled canvas failure.}}
+\DIFadd{The 13/16 Chinese copying result in Note 42 uses 1024-by-256 strips, whereas
+the correction study above uses complete 1024-square copying inputs. The
+cross-model difference therefore cannot be attributed to pooling alone.
+An independent 480-call control fixes the earlier dense checkpoint, its
+seeds, generic instruction and all ink. All 160 original-layout decision
+sequences replay exactly before altered layouts are evaluated. For every
+copying request, white bottom padding gives the original square exactly:
+}\[
+ X_{\rm square}=\operatorname{pad}_{\rm white}(X_{\rm strip}).
+\]
+\DIFadd{The visual field changes from 1,024 to 4,096 positions. Exact copying falls
+from 29/32 to 7/32: Chinese 13/16 to 0/16 and English 16/16 to 7/16.
+No request character is resized, removed or moved. Ten padded copies fail
+to stop within the 96-decision cap. A separate tight crop retains all pixels
+unequal to white, adds a 16-pixel margin and rounds outward to multiples
+of 16. It uses no recognition, transcript, font metric, answer or semantic
+role. Replacing its white exterior reconstructs every source exactly, but
+copying is 0/32. Fewer visual positions, 161--304 for these copies, do not
+guarantee correct reading.
+}
+
+\DIFadd{Natural QA remains 0/32 in both languages in all three arms. The legacy and
+square QA inputs are identical. Tight cropping changes their visual features,
+positions and context lengths despite preserving the full visible request.
+Pixel-level invertibility does not imply invariance of the learned mapping
+$R(E(X))$. This control demonstrates geometric brittleness, not the unique
+mechanism of failure. The three 160-call arms take 86.856, 120.337 and
+64.060\,s excluding loading, with peaks 11.161, 11.161 and 10.506\,GiB.
+Faster incorrect inference is not efficiency at matched useful quality.
+}
+
+\DIFadd{The full exports preserve all raw responses, input rasters, original
+alternatives, seeds, executed-code hashes and reconstruction checks:
+}\begin{quote}\footnotesize
+\path{references/evidence/native_state_alignment_result/}\\
+\path{references/evidence/native_state_fit_result/}\\
+\path{references/evidence/native_canvas_control_result/}
+\end{quote}
+\DIFadd{The state study's public per-update journal is compact; its full per-parameter
+gradient journal remains local with SHA256. The canvas export binds all 480
+source PNGs. CMRC 2018 and SQuAD 1.1 retain CC-BY-SA-4.0 attribution; the
+Show-o2 source/model are NUS Show Lab, Apache-2.0. These auxiliary Unicode
+head results do not demonstrate continuous image answers. The failed Chinese
+requirements do not admit scaling or a writing-stage qualification.
+}
+
+\plate{Figure_S20_state_alignment}{\textbf{Limited English transfer and a
+controlled failure of geometric invariance.} \textbf{a}, Source-preserving
+coarse/fine correction; orange layers learn, while the native language
+body and temporary text head remain frozen. Offline text-state targets
+and correct answer history are training supervision only. \textbf{b}, Exact
+stopped English/Chinese QA on the same 32 questions before and after the
+2,560-update correction. Copying counts are shown separately. \textbf{c},
+The separate earlier dense checkpoint under three whole-request layouts;
+all weights and sampling seeds are fixed, and every ink pixel is preserved.
+This is not a cross-model comparison. \textbf{d}, The first fixed seen
+Chinese copying request and raw auxiliary text response. Only white
+exterior is omitted for display; the learner receives the complete square.
+The visible request pixels are retained exactly. The separately labelled
+attention-only result in the footer belongs to a different learner, which
+retains copying but fails QA. The editable text is a
+Unicode-head readout, not an answer image generated by the learner.
+All failures remain in the complete exports.}{fig:s20-state-alignment}
+
 
 \clearpage
 \DIFaddend \section*{Reproduction}

@@ -1,10 +1,10 @@
 # State-alignment outcome: bounded future manuscript revision
 
-Status: ready for the bounded manuscript revision. The optimizer, all 160
-primary after-readouts, additional source replay and 96 separate seen-prompt
-diagnostic calls are terminal. No TeX/deck changes have been applied under
-this plan yet. The compiled package still ends with Note 42/Figure S19.
-Do not replace quality results with loss, memory or preflight observations.
+Status: completed, compiled and visually reviewed. The canonical package now
+includes Note 43/Figure S20. The state-correction optimizer, all 160 primary
+after-readouts, additional source replay, 96 seen-prompt calls, 480 canvas
+calls and the separate attention learner's complete training/assessment are
+terminal. No independent image-answer or general-ILM claim is qualified.
 
 The completed result is frozen in commits 9315240 and c2dffcd. English QA
 improves 11/32 to 16/32, with six gains and one loss on the fixed cohort;
@@ -122,3 +122,27 @@ to Results/abstract and a small labelled figure-footer observation. Do not
 change the coarse/fine diagram into the different attention-learning model,
 merge costs or attribute one model's scores to the other. This is a completed
 negative intervention, not a working-language claim.
+
+## Executed revision audit
+
+- Current PDF pages: article 15, review 28, supplement 46, redlines 28/46,
+  full figure review 35 and standalone Figure S20 one page.
+- Verified locations: abstract article/review page 1; appended Results
+  article page 13 and review page 14; Note 43 supplement pages 41–42 and
+  Figure S20 page 43. Matching redlines show those changes.
+- All 34 previous native slide parts and rendered appearances, 82 earlier
+  figure assets and the first 40 supplement pages remain unchanged.
+- Visually inspected the new plate and all changed article/review/SI/redline
+  pages. Fixed input-node wrapping, the canvas title/axis overlap and a literal
+  newline in the draft before final rendering. Current labels, equations,
+  raw request image and Chinese readouts are legible and unclipped.
+- Seven final PDFs pass structural checks and compile without overfull or
+  undefined-reference/citation errors. Native chart values and embedded
+  workbooks match all source receipts. The displayed request image remains
+  pixel-identical inside the rendered figure and manuscript PDFs.
+- The local Nutstore package and five `LATEST` aliases are hash-verified;
+  cloud propagation is not verified. No native PowerPoint application
+  inspection is claimed; rendering uses LibreOffice.
+- The full ILM goal remains active and unachieved. The next scientific step
+  must distinguish the visual-feature change from the context-length change
+  caused by padding, before another learning or writing recipe is scaled.
