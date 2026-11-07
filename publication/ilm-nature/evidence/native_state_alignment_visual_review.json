@@ -1,51 +1,50 @@
 {
   "visual_review_completed": true,
   "pdfs_sha256": {
-    "manuscript.pdf": "1aa22524eb190bf7a11a56b81225416c822d6f587c50958c53d38c528712c082",
-    "manuscript_review.pdf": "f6e255af3ca8a0c439bf0e9c4a67f978cf79b17ea18fd458e64b43f3588f2171",
-    "supplementary_information.pdf": "6705a62e3fb08f5fac9fb7b0d55588a6a6f8635c8b24f9a0068427a2bf99b2fc",
-    "redlined_manuscript.pdf": "7f4a256a8a4c177aecbe6f5399d2631eb726cad5d70f94340a331396293b425e",
-    "redlined_supplementary_information.pdf": "068c72f946be19548c5cbc05af1c8535988b38be6c80b079ad7a57d2ac6b772a",
+    "manuscript.pdf": "57f490544a279245c60097023b0441a7cd8866b3e5765e87d17b87b79d2e2f38",
+    "manuscript_review.pdf": "0ac363b9b07e971eaf5bc6491213e54e06631d0a8314e9ea3cc57a44949e28d0",
+    "supplementary_information.pdf": "ed18d327a9d0dab002e430a4bd45ba6bab6521477ba21471d433a043acddd332",
+    "redlined_manuscript.pdf": "436468a90a3c9f87fecb1fd7e011c6a84dacaa3e2f74084e58c46e261a23354c",
+    "redlined_supplementary_information.pdf": "209599720354c1e8836bf04a46b6a6e18e08086368a336674ea155e59793b447",
     "ILM_Figures_review.pdf": "dd6ecc9b49b39f23454900bc9f3073620c874bc0e56ddd96518feee7375f92a3",
     "figures/Figure_S20_state_alignment.pdf": "eb69e50766a0b7353e13f29ca261bb93de63c730b13e957080a5302d94853faa"
   },
   "figure_png_sha256": "ed79a48a31524cd648b5335570ec96259935576d5733f8f360acb93d6184596b",
   "reviewed_pages": {
     "manuscript.pdf": [
-      1,
-      13
+      13,
+      14
     ],
     "manuscript_review.pdf": [
-      1,
-      14
+      14,
+      15
     ],
     "supplementary_information.pdf": [
       41,
       42,
-      43
+      43,
+      44
     ],
     "redlined_manuscript.pdf": [
-      1,
-      14
+      14,
+      15
     ],
     "redlined_supplementary_information.pdf": [
       41,
       42,
-      43
-    ],
-    "ILM_Figures_review.pdf": [
-      35
-    ],
-    "figures/Figure_S20_state_alignment.pdf": [
-      1
+      43,
+      44
     ]
   },
-  "observed": "Inspected rendered pages and the new plate. Corrected initial input-box wrapping, title/axis overlap and literal newline in the draft before final rendering. Current text, equations, bars, raw request and CJK readouts are legible and unclipped. Data plots and diagram are native/editable; no text readout is described as generated answer pixels.",
-  "preserved_previous_slide_appearances": 34,
+  "observed": "Inspected current changed and adjacent PDF pages. Four-arm counts match the complete factorization export; source/QA/image-output limits remain explicit. Added a clear page before FigureS20 to keep the float from interrupting the interpretation. Text, equations, table, original request and auxiliary readouts are legible and unclipped.",
+  "preserved_current_slide_parts": 35,
+  "preserved_current_slide_appearances": 35,
   "preserved_previous_supplement_pages": 40,
-  "preserved_individual_figures": 82,
+  "preserved_current_individual_figures": 86,
+  "current_revision_baseline": "db370a4",
+  "preservation_receipt": "artifacts/native_canvas_factorization_publication_20261107/preservation.json",
   "native_powerpoint_application_inspected": false,
-  "renderer": "LibreOffice headless with native OOXML and embedded-workbook checks",
+  "renderer": "pdflatex; PyMuPDF visual review; unchanged native deck retains prior LibreOffice render",
   "image_answer_qualification": false,
   "general_ilm_goal_complete": false
 }

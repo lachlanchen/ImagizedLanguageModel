@@ -5,6 +5,20 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
+The later [attention-only learner](native_reader_attention_result.md) also
+fails all six reader requirements: 29/32 copies, but 0/32 Chinese and 0/32
+English QA answers after 2,560 updates. Its frozen dense visual frontend
+retains calibrated strip copying; this does not establish semantic learning.
+The subsequent [128-call feature/context comparison](native_canvas_factorization_result.md)
+replays all 64 original strip/square outputs exactly. Using the square's top
+features in the short context still gives 0/16 Chinese and 6/16 English
+copies; using strip features in the long context gives 2/16 Chinese and
+16/16 English copies. Shortening context alone fails, and restoring the
+strip feature block alone is insufficient for Chinese in that long layout.
+These are hybrid representation controls, not image encodings or a unique
+internal-cause diagnosis. There is still no demonstrated reader repair or
+usable image-answer ILM.
+
 The completed [bilingual state-alignment experiment](native_state_alignment_result.md)
 now gives limited English transfer: QA improves from 11/32 to 16/32, and
 English copying from 7/16 to 16/16. Chinese remains 0/32 QA and 0/16 copying.

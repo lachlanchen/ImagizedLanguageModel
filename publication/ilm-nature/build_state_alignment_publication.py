@@ -15,6 +15,8 @@ from state_alignment_figures import BASE, FIGURE, HERE, QA, RESULT, SOURCE, FIT,
 from build_paired_writing_publication import build_slot
 
 DEST = Path("/home/lachlan/Nutstore Files/Projects/ILM")
+FACTORIZATION = ROOT / "references/evidence/native_canvas_factorization_result/result.json"
+DELIVERY = "ILM_NatureStyle_20261107_NativeCanvasFactorization"
 
 
 def build():
@@ -25,7 +27,17 @@ def build():
         rendered = json.loads((HERE / "evidence/native_state_alignment_figure_render.json").read_text())
         if rendered["review_pdf_sha256"] != sha(HERE / "ILM_Figures_review.pdf") or len(rendered["preserved_prior_slide_pixels"]) != 34:
             raise ValueError("current 35-slide render with preserved baseline required")
-        sources = {"native_state_alignment_result": RESULT, "native_canvas_control_result": SOURCE, "native_state_fit_result": FIT, "native_reader_attention_result": ATTENTION}
+        sources = {"native_state_alignment_result": RESULT, "native_canvas_control_result": SOURCE, "native_state_fit_result": FIT, "native_reader_attention_result": ATTENTION, "native_canvas_factorization_result": FACTORIZATION}
+        factor = json.loads(FACTORIZATION.read_text())
+        if factor["actual_calls"] != 128 or factor["execution"]["source_decision_replays_exact"] != 64:
+            raise ValueError("completed source-bound feature/context intervention required")
+        expected = {"strip_short": (13, 16), "square_long": (0, 7), "square_short": (0, 6), "strip_long": (2, 16)}
+        for arm, counts in expected.items():
+            if tuple(factor["arms"][arm]["languages"][lang]["exact_stopped"] for lang in ("zh", "en")) != counts:
+                raise ValueError("feature/context table differs from scored evidence")
+        for name, digest in factor["files_sha256"].items():
+            if sha(FACTORIZATION.parent / name) != digest:
+                raise ValueError("feature/context evidence changed")
         for name, path in sources.items():
             shutil.copy2(path, HERE / "evidence" / (name + ".json"))
         names = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", BASE, "--", "publication/ilm-nature/figures"], cwd=ROOT, text=True).splitlines()
@@ -55,6 +67,8 @@ def build():
                     raise ValueError("completed evidence missing from PDF: " + name)
             if name == "supplementary_information" and "Supplementary Note 43" not in normalized:
                 raise ValueError("new supplement note absent")
+            if "128-call" not in normalized:
+                raise ValueError("completed feature/context intervention absent: " + name)
             outputs[name + ".pdf"] = sha(HERE / (name + ".pdf"))
         result = subprocess.run(["python", "build_semantic_transfer_redlines.py"], cwd=HERE, capture_output=True, text=True)
         (QA / "redlines.build.log").write_text(result.stdout + result.stderr)
@@ -101,6 +115,7 @@ def build():
                 raise ValueError("supplement before Note 43 changed: page " + str(i + 1))
             preserved_si.append(hashlib.sha256(b.samples).hexdigest())
         record = dict(baseline_commit=BASE, pdfs_sha256=outputs,
+            current_revision_baseline="db370a4", current_revision="native_canvas_factorization",
             source_receipts_sha256={name: sha(path) for name, path in sources.items()},
             preserved_individual_figures_sha256=preserved, preserved_supplement_pages=preserved_si,
             preserved_native_slides=34, current_native_slides=35,
@@ -120,7 +135,7 @@ def sync():
     for name, digest in built["pdfs_sha256"].items():
         if sha(HERE / name) != digest:
             raise ValueError("reviewed PDF changed")
-    package = DEST / "ILM_NatureStyle_20261107_NativeStateAlignment"
+    package = DEST / DELIVERY
     files = {}
     for source in sorted(HERE.rglob("*")):
         if not source.is_file() or any(p.startswith(".") or p in ("__pycache__", "baselines") for p in source.relative_to(HERE).parts):
@@ -138,7 +153,7 @@ def sync():
     for source, name in aliases.items():
         target = DEST / name
         if target.exists() and sha(target) != sha(HERE / source):
-            backup = DEST / (target.stem + "_before_native_state_alignment" + target.suffix)
+            backup = DEST / (target.stem + "_before_native_canvas_factorization_" + sha(target)[:12] + target.suffix)
             if backup.exists() and sha(backup) != sha(target):
                 raise ValueError("prior alias backup differs; preserve before continuing")
             if not backup.exists():

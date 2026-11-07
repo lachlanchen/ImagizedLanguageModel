@@ -38,12 +38,22 @@ features and context jointly; their unique internal cause is not isolated.
 The [earlier native-scale English recovery](../../references/native_reader_geometry_result.md)
 and all preceding failures remain in Notes 41–42.
 
+The subsequent [128-call feature/context intervention](../../references/native_canvas_factorization_result.md)
+replays all 64 original strip/square responses before its hybrids. Square
+top features in the short context still give **0/16 Chinese and 6/16 English
+copies**. Strip features in the long context give **2/16 Chinese and 16/16
+English copies**. Shortening context alone fails, and restoring the strip
+feature block alone is insufficient for Chinese in this layout. Note 43
+retains all four arms and their limitations; the hybrids need not encode
+real images. No natural QA or image answers are measured in this comparison.
+
 The abstract, article Results, **Note 43 and Figure S20** report these completed
 observations, their actual equations, costs, raw responses and limitations.
-The package has a **15-page article, 28-page review and 46-page supplement**,
+The package has a **15-page article, 28-page review and 47-page supplement**,
 with matching V68 redlines. The native editable deck has **35 slides**;
 all 34 earlier slide parts and rendered appearances, 82 earlier individual
-figure assets and the first 40 supplement pages are preserved.
+figure assets and the first 40 supplement pages are preserved. This table-only
+revision also preserves all 35 current slides and all 86 current figure assets.
 
 Current figure/build entry points are `state_alignment_figures.py --stage
  generate|verify|render` and `build_state_alignment_publication.py --stage
@@ -53,7 +63,7 @@ Older builders retain historical slide counts and must not overwrite this
 package. Source figures are native editable diagrams, charts/workbooks and
 unaltered request pixels. No text readout is presented as a generated page.
 
-The reviewed local delivery is `ILM_NatureStyle_20261107_NativeStateAlignment`
+The reviewed local delivery is `ILM_NatureStyle_20261107_NativeCanvasFactorization`
 with five stable `LATEST` aliases in the ILM Nutstore project folder. Local
 checksums verify copying; cloud propagation is not independently verified.
 

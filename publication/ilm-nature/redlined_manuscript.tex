@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sat Nov  7 14:50:26 2026
-%DIF ADD new.tex   Sat Nov  7 14:50:26 2026
+%DIF DEL old.tex   Sat Nov  7 15:21:27 2026
+%DIF ADD new.tex   Sat Nov  7 15:21:27 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 %DIF 4c4-5
@@ -879,7 +879,7 @@ the existing adaptation as a demonstrated repair. Direct image answers and
 useful independent image-language learning remain unachieved.
 }
 
-\DIFadd{A subsequent source-preserving visual-state correction improves English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, but Chinese QA remains 0/32 and copying 0/16 (Supplementary Note 43 and Fig.~S20). Four of six reader requirements fail. A separate seen-prompt check corrupts all eight Chinese strings despite previous training exposure. The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. All 480 layout-control calls are retained, including exact replay of the 160 original responses. A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.
+\DIFadd{A subsequent source-preserving visual-state correction improves English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, but Chinese QA remains 0/32 and copying 0/16 (Supplementary Note 43 and Fig.~S20). Four of six reader requirements fail. A separate seen-prompt check corrupts all eight Chinese strings despite previous training exposure. The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. All 480 layout-control calls are retained, including exact replay of the 160 original responses. A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. A further 128-call feature/context intervention does not restore Chinese copying by shortening the square context alone; strip features in the long context recover 16/16 English but only 2/16 Chinese copies (Note 43). These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.
 }
 
 \DIFaddend \section*{Discussion}

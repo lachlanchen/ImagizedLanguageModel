@@ -153,12 +153,47 @@ mechanism of failure. The three 160-call arms take 86.856, 120.337 and
 64.060\,s excluding loading, with peaks 11.161, 11.161 and 10.506\,GiB.
 Faster incorrect inference is not efficiency at matched useful quality.
 
+\paragraph{Separating source features from context layout.}
+A prospectively fixed 128-call intervention uses the same frozen dense
+checkpoint and all 32 copying requests. Let $S$ be the 1,024 strip features
+and $Q$ the 4,096 square features; $Q_{\rm top}$ denotes its first 1,024
+positions, covering the same upper 256 pixels. All request ink lies inside
+that strip. Before any hybrid call, all 64 original strip and square
+decision sequences replay exactly. Every pair has bit-identical nonvisual
+headers and suffixes. The two hybrids use the native short or long mask,
+respectively, without changing model parameters, instructions or readout.
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+Visual features & Prefix length & Chinese copies & English copies\\
+\midrule
+$S$ & 1,063 & 13/16 & 16/16\\
+$Q$ & 4,135 & 0/16 & 7/16\\
+$Q_{\rm top}$ & 1,063 & 0/16 & 6/16\\
+$[S;Q_{\rm tail}]$ & 4,135 & 2/16 & 16/16\\
+\bottomrule
+\end{tabular}
+\end{center}
+Short context alone does not restore copying from the square's features.
+Substituting strip features into the long context restores English copying,
+but Chinese remains substantially below the strip source. These hybrid
+prefixes need not encode real images. Nominally blank-region features can
+contain global information; context changes also move the suffix and change
+positions and available keys. Thus the comparison narrows the representation
+failure without isolating a unique internal cause. All 128 raw responses
+are retained. The invocation takes 68.220\,s after loading at 11.161\,GiB
+peak allocated memory; the complete frozen model has 2,839,267,040 parameters
+plus the same codec and external pretraining. There are no optimizer updates,
+natural-QA measurements or image answers in this intervention.
+
 The full exports preserve all raw responses, input rasters, original
 alternatives, seeds, executed-code hashes and reconstruction checks:
 \begin{quote}\footnotesize
 \path{references/evidence/native_state_alignment_result/}\\
 \path{references/evidence/native_state_fit_result/}\\
-\path{references/evidence/native_canvas_control_result/}
+\path{references/evidence/native_canvas_control_result/}\\
+\path{references/evidence/native_canvas_factorization_result/}
 \end{quote}
 The state study's public per-update journal is compact; its full per-parameter
 gradient journal remains local with SHA256. The canvas export binds all 480
@@ -167,6 +202,7 @@ Show-o2 source/model are NUS Show Lab, Apache-2.0. These auxiliary Unicode
 head results do not demonstrate continuous image answers. The failed Chinese
 requirements do not admit scaling or a writing-stage qualification.
 
+\clearpage
 \plate{Figure_S20_state_alignment}{\textbf{Limited English transfer and a
 controlled failure of geometric invariance.} \textbf{a}, Source-preserving
 coarse/fine correction; orange layers learn, while the native language
