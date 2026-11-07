@@ -1,0 +1,43 @@
+{
+  "cases": 144,
+  "costs": {
+    "source_1024": {
+      "elapsed_seconds": 109.82978654745966,
+      "peak_allocated_vram_gib": 11.129425525665283,
+      "includes_codec_reconstruction": false
+    },
+    "source_432": {
+      "elapsed_seconds": 23.708072489127517,
+      "peak_allocated_vram_gib": 7.242138385772705,
+      "includes_codec_reconstruction": true
+    },
+    "source_text": {
+      "elapsed_seconds": 9.539323396980762,
+      "peak_allocated_vram_gib": 5.829658508300781,
+      "includes_codec_reconstruction": false
+    }
+  },
+  "counts": {
+    "native_model": 2830777056,
+    "language_body": 1543304192,
+    "vae": 126892531,
+    "parameters_requiring_grad": 0
+  },
+  "source_model_sha256": "58870f9d31bf6be71113301c3402a506938e963b9bd6da7f78aadae6ce812852",
+  "implementation_sha256": "4f2c3f7aa324e04ac5a9fc3894791f3187dee91388ec4bcf397963d4f7233e37",
+  "preparation_sha256": "60cd82a4f509ec65168d1abeb16363b15ad8227d6c4f19713f4b6e98091e2d2e",
+  "inputs_sha256": {
+    "source_1024": "ffdd4780f83465e945c2dc702ce18840b8f8ec9a346beb4ff7831634c8e091c4",
+    "source_432": "0b77bd5ac2eed2306619ed08ad480c928cff101afd636ce42bdba7fe087a1d00",
+    "source_text": "9b7090fdc95071959f6be6d384237edbbe02ceef60aa4d04c4c48b7b1f90c137"
+  },
+  "cap": 96,
+  "body_dtype": "bfloat16",
+  "codec_dtype": "float32",
+  "optimizer_updates": 0,
+  "adapters_added": 0,
+  "auxiliary_unicode_head": true,
+  "reference_answers_loaded": false,
+  "image_answer_generation_demonstrated": false,
+  "general_ilm_goal_complete": false
+}
