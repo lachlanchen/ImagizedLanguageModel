@@ -18,7 +18,9 @@ assets, and the first 47 supplement pages. Current editable files are
 and their included note files; keep their filenames stable. The existing
 V68 redline baseline remains unchanged.
 
-The contextual comparison and its completion supervisor are running. Do not
+At plan creation, the contextual comparison and supervisor were running. They
+have now completed and their owned runtime has been removed; the final
+evidence amendment below governs authoring. During execution, do not
 change their bound source/protocol files, stop them, launch a duplicate model
 job, or build the publication while they are active. A live status or completed
 optimization journal is not an assessed outcome. No TeX, PPTX or PDF authoring
@@ -45,7 +47,8 @@ existing workflow and preserve the completed training and partial evidence.
    UTF-8. The two matched state distances do not establish a cause or repair.
    The audit makes zero neural calls and trains no parameters.
 3. The final, independently verified export from
-   `artifacts/contextual_pixel_adaptation_completion_v1/verified_export`.
+   `artifacts/contextual_pixel_adaptation_completion_v5/verified_export`, copied
+   byte-for-byte to `references/evidence/contextual_pixel_adaptation_result/`.
    Before use, inspect the producer, verifier, raw PNGs, source identities,
    complete schedules, final checkpoints and all standalone replay outcomes.
    Report both arms and every registered gate, including failures. This plan
@@ -149,7 +152,72 @@ authorize new training or a claim of useful free image-language generation.
 
 ## Current state
 
-Plan prepared before authoring; final comparison outcome, manuscript edits,
-figure authoring, PDF builds and new local delivery are pending. Existing
-publication files have not been changed by this planning unit. The current
-model remains unqualified for free image-language generation.
+The final comparison and standalone verification are complete. Manuscript
+edits, figure authoring, PDF builds and new local delivery remain pending.
+Existing publication files have not changed. The current model remains
+unqualified for free image-language generation.
+
+## Verified evidence amendment before authoring
+
+The full exporter authenticates 927 retained files, all 512 unmodified answer
+rasters, both complete optimizers and eight exact standalone pixel/event
+replays. Each arm has exactly 3,257 optimizer invocations with no replayed
+updates. The 328 images saved before the final recovery retain their complete
+index records and pixels. All model and completion processes are terminal;
+the sole owned tmux session was removed. GPU0 is free. Do not relaunch these
+completed experiments for this publication unit.
+
+The final control/adapted counts are: new copies 32/32 and 32/32; seen QA
+28/32 and 27/32; unseen QA 23/64 and 26/64; both-correct paragraphs 3/32 in
+each; question-erased 1/64 and 0/64; passage-erased 0/64 in each. Both pass
+copying and question-erasure gain, fail the two reader floors, and remain
+unqualified. The adaptation gains of three answers, zero pairs and zero
+copies miss the fixed improvement rule. On the matched 64 questions, 20 are
+correct in both arms, six only after adaptation, three only in control, and
+35 in neither. Preserve this paired outcome table. Do not describe the rule
+as a significance test or pixel equality as a semantic/readability rating.
+
+Original source setup takes 93.118 seconds and feature preparation 3,387.907
+seconds; 2,937 payloads are newly encoded and 320 authenticated prior payloads
+are reused. Control/adapted optimization takes 126.665/30,856.570 seconds,
+with 15.265/18.075 GiB peak allocated and 15.504/22.082 GiB reserved.
+Four standalone calls take 77.695+5.022 and 76.854+5.056 seconds for setup and
+inference, with 17.948 GiB peak allocated in both arms. All use one RTX 4090 D.
+These are local stage costs, excluding external pretraining.
+
+Assessment was interrupted four times and recovered across five controller
+invocations. Target-call counts are 218 control, then 38 control/72 adapted,
+then 184 adapted, totalling 512 without repeated optimization. Complete
+assessment/reload duration is unavailable. The measured 45.634-second control
+interval covers only 38 calls; 223.855 seconds covers only the final 184
+adapted calls. A completed-control resume overwrites its current-invocation
+time with almost no work. The prior report was preserved; never present that
+near-zero value as full-cohort inference time. Use public `execution_notes.json`
+for the complete measured/unmeasured boundary. The termination sender is
+unknown; successful persistent execution does not establish its original cause.
+Do not include private process IDs, host paths or coordination in the paper.
+
+Figure S22 must distinguish the earlier task-memory intervention's original
+9/64 head from this comparison's newly trained control. The intervention is
+not a third arm. Its 53/64 changed selections and hybrid-feature limitation
+belong in a separate labelled panel or Note 45 table. Figure S23 retains the
+history-prefix audit's full denominators and both eligible intermediate
+matches; it supplies no alignment-learning result. First-pair comparison
+images must show the common-name answer's extra comma and the correct ocean
+answer for both arms. Keep every original pixel.
+
+Before text in `PaperSummary` includes the earlier source-pixel component's
+32/32 new copies, 32/32 seen QA, 9/64 held-out QA and 1/32 paired paragraphs.
+Keep those results in the existing Results and Note 44, but replace the
+abstract's component discussion with the latest matched result. The specified
+200-word replacement summary is:
+
+> Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.
+
+The Results addition reports the two arm counts, unchanged pairs and failed
+prospective gain rule with a Note 45/Figure S22 reference. Keep all earlier
+numerical results intact. The Discussion may state that this complete
+adaptation regimen does not qualify for scale-up; it must still distinguish
+the unachieved free writer from the tested source-copy motor. The public
+report is `references/contextual_pixel_adaptation_result.md`. No new general
+ILM, novelty, historical-script or matched-quality efficiency claim is allowed.

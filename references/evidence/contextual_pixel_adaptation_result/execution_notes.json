@@ -1,0 +1,102 @@
+{
+  "source_result_sha256": "ddecc1ae58e3bc5719ac4d5c6e57ce591b3d44cc9f9d48e0731d1eff63624b7c",
+  "matched_qa_outcomes": {
+    "both_correct": 20,
+    "control_only_correct": 3,
+    "adapted_only_correct": 6,
+    "both_wrong": 35
+  },
+  "full_runtime_parameters": 7531277171,
+  "original_setup_seconds": 93.1182508924976,
+  "source_feature_encoding_seconds": 3387.9067618018016,
+  "source_features": {
+    "new_native_encodings": 2937,
+    "authenticated_prior_payloads_reused": 320
+  },
+  "optimization": {
+    "frozen": {
+      "updates": 3257,
+      "draws": 13028,
+      "elapsed_seconds": 126.66507038846612,
+      "all_invoked_update_seconds": 117.3230726197362,
+      "optimizer_invocations_including_replays": 3257,
+      "optimized_parameters": 2378370,
+      "peak_allocated_vram_gib": 15.264603614807129,
+      "peak_reserved_vram_gib": 15.50390625,
+      "checkpoint_sha256": "1f8f5b0f98cec7e8b6e3e3c7508d3ce7f3de9654e0c407c61ac6e1876f046624"
+    },
+    "adapted": {
+      "updates": 3257,
+      "draws": 13028,
+      "elapsed_seconds": 30856.56995573826,
+      "all_invoked_update_seconds": 30838.390659958124,
+      "optimizer_invocations_including_replays": 3257,
+      "optimized_parameters": 8571522,
+      "peak_allocated_vram_gib": 18.075230598449707,
+      "peak_reserved_vram_gib": 22.08203125,
+      "checkpoint_sha256": "d0e0fc4d6688c447fdc6a8489af9c6731bd5e21b0affc48e5450983f6698ce91"
+    }
+  },
+  "native_assessment_invocations": [
+    {
+      "phase": "original",
+      "new_control_calls": 218,
+      "new_adapted_calls": 0,
+      "complete_duration_seconds": null,
+      "termination_exit_code": 143
+    },
+    {
+      "phase": "initial_resume",
+      "new_control_calls": 0,
+      "new_adapted_calls": 0,
+      "complete_duration_seconds": null,
+      "termination_exit_code": 143
+    },
+    {
+      "phase": "driver_matched_resume",
+      "new_control_calls": 38,
+      "new_adapted_calls": 72,
+      "control_only_seconds": 45.63421423640102,
+      "complete_duration_seconds": null,
+      "termination_exit_code": 143
+    },
+    {
+      "phase": "instrumented_direct_resume",
+      "new_control_calls": 0,
+      "new_adapted_calls": 0,
+      "complete_duration_seconds": null,
+      "termination_exit_code": 143
+    },
+    {
+      "phase": "persistent_resume",
+      "new_control_calls": 0,
+      "new_adapted_calls": 184,
+      "adapted_only_seconds": 223.855384956114,
+      "completed": true
+    }
+  ],
+  "interrupted_assessment_total_seconds_measured": false,
+  "additional_reader_reload_seconds_complete": false,
+  "termination_sender_identified": false,
+  "runtime_driver_compatibility_used": "595.84 userspace matching loaded kernel module",
+  "system_driver_changed": false,
+  "prior328_indexed_outputs_preserved": true,
+  "standalone": {
+    "frozen": {
+      "setup_seconds": 77.6954332459718,
+      "inference_seconds": 5.0216010911390185,
+      "peak_allocated_vram_gib": 17.948184967041016,
+      "native_image_calls": 4
+    },
+    "adapted": {
+      "setup_seconds": 76.85440273582935,
+      "inference_seconds": 5.056382913142443,
+      "peak_allocated_vram_gib": 17.948184967041016,
+      "native_image_calls": 4
+    }
+  },
+  "independent_cpu_verification_duration_measured": false,
+  "external_source_pretraining_included_in_local_times": false,
+  "efficiency_at_matched_language_quality_demonstrated": false,
+  "general_ilm_goal_complete": false
+}

@@ -1,0 +1,122 @@
+{
+  "identity": {
+    "source_commit": "4c96082d9ce5a4b9cff89362d4e850620a1942e5",
+    "sources": {
+      "scripts/check_contextual_pixel_learning.py": "ac9b482c8d3d45425504ed2ed8602d54c935edef2c23104babcb0f88187534a5",
+      "ilm/visual_lm/contextual_pixel_learning.py": "5a1f9a74a4957180f62a79ed27c29262cfcface638e4866282568423c0cb0c1e",
+      "references/contextual_pixel_learning_protocol.md": "260c1b937d823d1c5c95b3646a4e4647786272ddbd05f17a128495f4d032ba90",
+      "ilm/visual_lm/contextual_pixel_encoder.py": "eb3b86aec0747f8c4a659615bdaaf92489886dbab5b7da06cd2fb026dbff8eaf",
+      "ilm/visual_lm/contextual_pixel_spans.py": "6e28a1b4e71389ff7b9d0560735bfb22153d57c6f65064559ee9bcaec5d762e0",
+      "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+      "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+      "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+      "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+      "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+      "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da",
+      "scripts/run_contextual_pixel_spans.py": "f4d92a46b5ad9c6a6a9bbea71407fbb3315f0fe8df0f4c14c23684337dd3007c"
+    }
+  },
+  "inputs_sha256": "2079e22177e35fdf9a6e083d71419a07265cf2e4d13dca7c486452d8ee972e30",
+  "references_sha256": "bf06e439aa82aa5f77c82bb38ed48ebc4ae40826aab2597137e1105576a7a811",
+  "training_qa": 3193,
+  "training_copies": 64,
+  "source_training_rows": 3211,
+  "rejected": [
+    {
+      "id": "TRAIN_1172_QUERY_0",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1172_QUERY_1",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1172_QUERY_2",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1670_QUERY_0",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1670_QUERY_1",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1670_QUERY_2",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1670_QUERY_3",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_1670_QUERY_4",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2062_QUERY_0",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2062_QUERY_1",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2062_QUERY_2",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2239_QUERY_1",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2239_QUERY_2",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2239_QUERY_3",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2239_QUERY_4",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2759_QUERY_0",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2759_QUERY_1",
+      "reason": "full source ink exceeds the vertical canvas"
+    },
+    {
+      "id": "TRAIN_2759_QUERY_3",
+      "reason": "full source ink exceeds the vertical canvas"
+    }
+  ],
+  "renderer": {
+    "font_family": "Noto Sans CJK JP",
+    "font_size_px": 24,
+    "height_px": 32,
+    "padding_px": 2,
+    "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "pango_version": "1.52.1",
+    "fallback_selected_fonts_inspected": false,
+    "source_policy": "complete explicit single line, no cropping or font shrinking"
+  },
+  "gradient_case_ids": [
+    "TRAIN_1000_QUERY_0",
+    "TRAIN_1000_QUERY_1"
+  ],
+  "resource_case_ids": {
+    "largest_sequence": "copy/train/002",
+    "most_ink_units": "TRAIN_973_QUERY_0"
+  },
+  "development_inputs_sha256": "c896a74d19162a03409a102f562567094009ec5884db8f507bebdd6e22c97392",
+  "source_articles_disjoint": true,
+  "source_paragraphs_disjoint": true,
+  "outcomes_used_to_select_examples": false,
+  "general_ilm_goal_complete": false
+}

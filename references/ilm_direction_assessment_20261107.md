@@ -5,8 +5,19 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
-The later [contextual pixel-span component](contextual_pixel_spans_result.md)
-now copies 32/32 new Chinese/English strings and fits 32/32 seen QA images
+Update, 8 November: the completed [matched contextual adaptation comparison](contextual_pixel_adaptation_result.md)
+gives 26/64 exact unseen Chinese answers versus 23/64 in its frozen control,
+with 3/32 both-correct paragraph pairs in each arm. Both retain 32/32 new
+copies but fail the natural-answer and paired-answer requirements. The gain
+of three answers and zero complete pairs fails the prospective improvement
+rule. All 512 outputs are independently rescored and reconstructed, and eight
+standalone native calls replay exactly. The complete model remains 7.531B,
+externally pretrained and source-copy-only. This qualifies execution and
+retained copying; it does not qualify a reader or free image-language model.
+Do not scale this unchanged regimen merely because optimization completed.
+
+The earlier [contextual pixel-span component](contextual_pixel_spans_result.md)
+copies 32/32 new Chinese/English strings and fits 32/32 seen QA images
 exactly. Held-out reading remains inadequate: 9/64 exact Chinese answers,
 1/32 both-correct pairs, versus 2/64 with question ink erased and 0/64 with
 passage ink erased. Three of four component requirements fail. All256 raw
