@@ -51,7 +51,8 @@ See the [completed native result](references/native_chinese_v80_result.md),
 and [current direction assessment](references/ilm_direction_assessment_20261107.md).
 The [current manuscript](publication/ilm-nature/README.md) includes the V82
 comparison, the completed paired-copying result in Note 40/Figure S17 and
-the auxiliary reading failure in Note 41/Figure S18. Earlier image-writer
+the auxiliary reading failure in Note 41/Figure S18, and the completed
+curriculum and geometry intervention in Note 42/Figure S19. Earlier image-writer
 results measure image agreement; auxiliary QA correctness is assessed separately.
 The earlier native actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable

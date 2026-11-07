@@ -15,24 +15,34 @@ builder remain inside the named baseline.
 
 ## Current result
 
-The completed [visual-access experiment](../../references/native_visual_access_result.md)
-gives **27/32 exact stopped copies and 0/32 correct natural answers** through
-the frozen auxiliary text head. English copying is 16/16 and Chinese copying
-11/16. Fifteen of sixteen question pairs receive the same answer; erasure
-leaves 29/32 outputs unchanged. These are temporary text readouts, with no
-trained image-answer result. The abstract, article, Note 41 and Figure S18
-retain the failed question-selection result and distinguish assisted source
-writing from the trained reader. The current editable deck contains 33 slides,
-preserving all 32 previous native slides and 76 earlier figure assets.
+The [completed full-page curriculum](../../references/native_visual_alignment_result.md)
+gives **29/32 exact stopped copies, 0/32 Chinese QA and 0/32 English QA**
+through the auxiliary text head at the original 1024-square geometry. Its
+complete-page transcripts improve on four short copying pages but remain
+incorrect on all four full Chinese QA pages.
 
-Current entry points are `native_visual_access_figures.py --stage
-generate|verify|render` and `build_native_visual_access_publication.py --stage
-build|sync`. Use them for this package; older builders retain historical counts
-and must not overwrite the current deck. The reviewed local delivery is
-`ILM_NatureStyle_20261107_NativeVisualAccess` with stable `LATEST` aliases.
+The subsequent [native-resolution intervention](../../references/native_reader_geometry_result.md)
+recovers **11/32 exact English answers from the frozen source at 432**, versus
+0/32 at 1024, without training. Nine correct answers disappear with passage
+erasure; two remain correct without the passage. Both completed adapters
+score only 5/32 at 432. This identifies a substantial interface effect,
+without isolating its geometric mechanism or validating the learned repair.
+No trained image-answer result is demonstrated.
+
+The abstract, article, Note 42 and Figure S19 retain the complete failures and
+separate inherited source capability from learned visual-language ability.
+Note 41/Figure S18 preserve the earlier 27/32 copying result. The current
+editable deck contains **34 slides**, preserving all 33 earlier native parts
+and rendered appearances plus 79 earlier individual figure assets.
+
+Current entry points are `reader_geometry_figures.py --stage
+generate|verify|render` and `build_reader_geometry_publication.py --stage
+build|sync`. Older builders retain historical slide counts and must not
+overwrite the current deck. The reviewed local delivery is
+`ILM_NatureStyle_20261107_NativeReaderGeometry` with stable `LATEST` aliases.
 Local checksums verify copying; cloud propagation is not independently verified.
 
-![Visual-access results with original assisted source writing and auxiliary text readouts](figures/Figure_S18_visual_access.png)
+![Completed curriculum, geometry intervention, complete input pages and first four auxiliary source answers](figures/Figure_S19_reader_geometry.png)
 
 ## Earlier paired copying
 
@@ -46,7 +56,7 @@ The abstract, article, Note 40 and Figure S17 report the result and retain all
 64 raw outputs. That historical editable deck contains 32 slides, preserving all
 31 previous native slides and 73 earlier figure assets. Its entry points
 are `paired_writing_figures.py` and `build_paired_writing_publication.py`;
-use the visual-access builders above for the current package.
+use the geometry builders above for the current package.
 
 ![Completed paired-copying comparison and the first four complete validation images](figures/Figure_S17_paired_writing.png)
 

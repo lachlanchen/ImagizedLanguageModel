@@ -1,0 +1,4191 @@
+{
+  "models": {
+    "source_1024": {
+      "summary": {
+        "normal_cases": 32,
+        "normal_exact_stopped": 0,
+        "passage_erased_cases": 32,
+        "passage_erased_exact_stopped": 0,
+        "question_erased_independent_calls": 16,
+        "both_correct_pairs": 0,
+        "normal_outputs_differ_pairs": 3,
+        "normal_answers_changed_after_question_erasure": 13,
+        "shared_question_erased_matches_either": 0,
+        "correct_normal_retained_without_passage": 0,
+        "correct_normal_lost_without_passage": 0
+      },
+      "cases": [
+        {
+          "id": "squad/57280f0d3acd2414000df35b",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "An Unearthly Child"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Yes.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/57280f0d3acd2414000df35c",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "Susan Foreman"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Yes.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5727500f708984140094dbfd",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "7.5",
+            "7.5%"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfe",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "32",
+            "32%"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "SOS",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa739",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "Immunodeficiencies"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa73a",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "the young and the elderly",
+            "young and the elderly"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8e",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "plastoglobulus, sometimes spelled plastoglobule(s)",
+            "plastoglobulus"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sum_{k=1}^{n} \\sum_{l=1}^{n} \\sum_{m=1}^{n} \\sum_{p=1}^{n} \\sum_{q=1}^{n} \\sum_{r=1}^{n} \\sum_{s=1}^{n} \\sum_{t=",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8f",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "spherical bubbles",
+            "spherical"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sum_{k=1}^{n} \\sum_{l=1}^{n} \\sum_{m=1}^{n} \\sum_{p=1}^{n} \\sum_{q=1}^{n} \\sum_{r=1}^{n} \\sum_{s=1}^{n} \\sum_{t=",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf7",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "influence"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\alpha",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf8",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "\"Formal imperialism\"",
+            "formal",
+            "\"Formal imperialism",
+            "Formal imperialism",
+            "Formal"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "199",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/572973f76aef051400154f0a",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "2"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Asterisk",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/572973f76aef051400154f0b",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "1, 2, and n"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sum_{k=1}^{n} \\sum_{l=1}^{n} \\sum_{m=1}^{n} \\sum_{p=1}^{n} \\sum_{q=1}^{n} \\sum_{r=1}^{n} \\sum_{s=1}^{n} \\sum_{t=",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86d",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "North",
+            "North Sea",
+            "the North Sea"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\chi \\in \\mathcal{C}^1\\)",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86e",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "\"It's Scotland's oil\"",
+            "It's Scotland's oil"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\alpha \\beta \\gamma \\delta \\epsilon \\zeta",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/56f84485aef2371900625f71",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "summer of 1521",
+            "1521"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "C++",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/56f84485aef2371900625f72",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "condemned as idolatry",
+            "idolatry",
+            "gift"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "35",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b0",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "ulemas"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\alpha \\leq \\beta \\leq \\gamma \\leq \\delta \\leq \\epsilon",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b2",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "Sufism"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A^2 + 2A + 1",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca25",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "between September and November 1946",
+            "between September and November 1946,"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sum_{i=1}^{n} \\sum_{j=1}^{n} \\sum_{k=1}^{n} \\sum_{l=1}^{n} \\sum_{m=1}^{n} \\sum_{n=1}^{n} \\sum_{o=1}^{n} \\sum_{p=1}^{n} \\sum_{q=1}^{n} \\sum_{r=",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/57268f2c708984140094ca26",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "nearly a million and a half",
+            "nearly a million and a half visitors"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c1",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "Braddock (with George Washington as one of his aides) led about 1,500 army troops",
+            "Braddock",
+            "Braddock (with George Washington"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sum \\sigma \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\mu \\sum \\nu \\sum \\",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c2",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "The expedition was a disaster",
+            "disaster",
+            "was a disaster"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\pi \\sigma",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7dd",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "Fresno"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "158",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7de",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "1950s",
+            "in the 1950s"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A38.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad5",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "feed water",
+            "water"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad6",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "British"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\(\\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\pi \\sigma \\",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfac",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "Ali Shariati"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "\\sigma _{s} \\sigma _{b} \\sigma _{a} \\sigma _{n} \\sigma _{r}",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfad",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "ideological"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Dsgs",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40c",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "applied mathematics to the construction of calendars",
+            "applied mathematics"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "C++: void Goto(int x, int y)",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40d",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "a cubic interpolation formula",
+            "cubic interpolation formula",
+            "derived a cubic interpolation formula"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "C++: void GotoFunction()",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8863",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "Hulagu Khan"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Yes",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/572754cd5951b619008f8864",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "the Mamluks of Egypt",
+            "Mamluks"
+          ],
+          "normal": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Yes.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The answer is 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        }
+      ],
+      "pairs": [
+        {
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        }
+      ],
+      "normal_stopped": 3
+    },
+    "source_432": {
+      "summary": {
+        "normal_cases": 32,
+        "normal_exact_stopped": 11,
+        "passage_erased_cases": 32,
+        "passage_erased_exact_stopped": 2,
+        "question_erased_independent_calls": 16,
+        "both_correct_pairs": 3,
+        "normal_outputs_differ_pairs": 14,
+        "normal_answers_changed_after_question_erasure": 30,
+        "shared_question_erased_matches_either": 0,
+        "correct_normal_retained_without_passage": 2,
+        "correct_normal_lost_without_passage": 9
+      },
+      "cases": [
+        {
+          "id": "squad/57280f0d3acd2414000df35b",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "An Unearthly Child"
+          ],
+          "normal": {
+            "text": "The name of the first Doctor Who serial is An Unearthly Child.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "The name of the first Doctor Who serial is \"The Daleks\".",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57280f0d3acd2414000df35c",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "Susan Foreman"
+          ],
+          "normal": {
+            "text": "SUSAN FOREMAN",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Doctor Who",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfd",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "7.5",
+            "7.5%"
+          ],
+          "normal": {
+            "text": "7.5%",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "10",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfe",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "32",
+            "32%"
+          ],
+          "normal": {
+            "text": "32%",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "20",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa739",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "Immunodeficiencies"
+          ],
+          "normal": {
+            "text": "Disorders",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "diseases",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa73a",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "the young and the elderly",
+            "young and the elderly"
+          ],
+          "normal": {
+            "text": "The young and the elderly",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "elderly",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8e",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "plastoglobulus, sometimes spelled plastoglobule(s)",
+            "plastoglobulus"
+          ],
+          "normal": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8f",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "spherical bubbles",
+            "spherical"
+          ],
+          "normal": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Plastoglobuli",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf7",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "influence"
+          ],
+          "normal": {
+            "text": "power and influence through diplomacy or military force",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "What is the answer?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Imperialism is defined as \"a policy of extending a country's power and influence through diplomacy or military force.\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf8",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "\"Formal imperialism\"",
+            "formal",
+            "\"Formal imperialism",
+            "Formal imperialism",
+            "Formal"
+          ],
+          "normal": {
+            "text": "informal",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "imperialism",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Imperialism is defined as \"a policy of extending a country's power and influence through diplomacy or military force.\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0a",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "2"
+          ],
+          "normal": {
+            "text": "No even number greater than 2 is prime",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "No",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "12",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0b",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "1, 2, and n"
+          ],
+          "normal": {
+            "text": "1, 2, 4",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "4",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "12",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86d",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "North",
+            "North Sea",
+            "the North Sea"
+          ],
+          "normal": {
+            "text": "North Sea",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Passage: Question: Which sea was oil discovered in? Answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It's Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86e",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "\"It's Scotland's oil\"",
+            "It's Scotland's oil"
+          ],
+          "normal": {
+            "text": "It's Scotland's oil",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "What campaign did the Scottish National Party (SNP) run?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It's Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f71",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "summer of 1521",
+            "1521"
+          ],
+          "normal": {
+            "text": "November",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "When did Luther broaden his attacks to include core doctrines?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In November, Luther wrote The Judgement of Martin Luther on Monastic Vows.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f72",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "condemned as idolatry",
+            "idolatry",
+            "gift"
+          ],
+          "normal": {
+            "text": "The mass",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Mass",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In November, Luther wrote The Judgement of Martin Luther on Monastic Vows.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b0",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "ulemas"
+          ],
+          "normal": {
+            "text": "Ulemas",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b2",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "Sufism"
+          ],
+          "normal": {
+            "text": "Sufism",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Sufism",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca25",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "between September and November 1946",
+            "between September and November 1946,"
+          ],
+          "normal": {
+            "text": "1946",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "When was the British Can Make It exhibition held?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage: Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 \"to promote by all practical means the improvement of design in the products of British industry\". The success of this exhibition led to the planning of the Festival of Britain (195",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca26",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "nearly a million and a half",
+            "nearly a million and a half visitors"
+          ],
+          "normal": {
+            "text": "Nearly a million",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage: Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 \"to promote by all practical means the improvement of design in the products of British industry\". The success of this exhibition led to the planning of the Festival of Britain (195",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c1",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "Braddock (with George Washington as one of his aides) led about 1,500 army troops",
+            "Braddock",
+            "Braddock (with George Washington"
+          ],
+          "normal": {
+            "text": "Braddock",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Fort Duquesne",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c2",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "The expedition was a disaster",
+            "disaster",
+            "was a disaster"
+          ],
+          "normal": {
+            "text": "1000",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7dd",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "Fresno"
+          ],
+          "normal": {
+            "text": "Fresno",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest U.S. city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7de",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "1950s",
+            "in the 1950s"
+          ],
+          "normal": {
+            "text": "1950s",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "1956",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest U.S. city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad5",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "feed water",
+            "water"
+          ],
+          "normal": {
+            "text": "feed water",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "water",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad6",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "British"
+          ],
+          "normal": {
+            "text": "Britain",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "England",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfac",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "Ali Shariati"
+          ],
+          "normal": {
+            "text": "Ali Shariati",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Khomeini",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resemblance with Mohammad Jolani, ideological father of the State of Pakistan.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfad",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "ideological"
+          ],
+          "normal": {
+            "text": "Mohammad Iqbal",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "father",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resemblance with Mohammad Jolani, ideological father of the State of Pakistan.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40c",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "applied mathematics to the construction of calendars",
+            "applied mathematics"
+          ],
+          "normal": {
+            "text": "Guan Shoujing",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: invented the first solar calendar",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouxi applied mathematics to the construction of calendars.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40d",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "a cubic interpolation formula",
+            "cubic interpolation formula",
+            "derived a cubic interpolation formula"
+          ],
+          "normal": {
+            "text": "Gou Shoujing",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Gou used a telescope for astronomy.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouxi applied mathematics to the construction of calendars.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8863",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "Hulagu Khan"
+          ],
+          "normal": {
+            "text": "Hulagu Khan",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Genghis Khan",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The Mongols destroyed and annihilated all of the major cities of Eastern Europe with the exceptions of Novgorod and Pskov.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8864",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "the Mamluks of Egypt",
+            "Mamluks"
+          ],
+          "normal": {
+            "text": "Hulagu Khan",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Hulagu Khan",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The Mongols destroyed and annihilated all of the major cities of Eastern Europe with the exceptions of Novgorod and Pskov.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        }
+      ],
+      "pairs": [
+        {
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "both_correct": true,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "both_correct": true,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "both_correct": true,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        }
+      ],
+      "normal_stopped": 32
+    },
+    "predecessor_432": {
+      "summary": {
+        "normal_cases": 32,
+        "normal_exact_stopped": 5,
+        "passage_erased_cases": 32,
+        "passage_erased_exact_stopped": 0,
+        "question_erased_independent_calls": 16,
+        "both_correct_pairs": 1,
+        "normal_outputs_differ_pairs": 15,
+        "normal_answers_changed_after_question_erasure": 31,
+        "shared_question_erased_matches_either": 0,
+        "correct_normal_retained_without_passage": 0,
+        "correct_normal_lost_without_passage": 5
+      },
+      "cases": [
+        {
+          "id": "squad/57280f0d3acd2414000df35b",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "An Unearthly Child"
+          ],
+          "normal": {
+            "text": "The Ninth Doctor",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The programme's first serial, An Unearthly Child, shows that the Doctor has a granddau",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57280f0d3acd2414000df35c",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "Susan Foreman"
+          ],
+          "normal": {
+            "text": "Doctor Who",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: Doctor Who granddughter",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The programme's first serial, An Unearthly Child, shows that the Doctor has a granddau",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfd",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "7.5",
+            "7.5%"
+          ],
+          "normal": {
+            "text": "7.5%",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "8",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the Philippines, the private sector has been a major provider of educational services, accounting for about 7.5% of primary enrollment, 32% of secondary enrollment, and about 80% of tertiary enrollment. Private schools have proven to be efficient in resource utilization. Per unit costs in private schools are generally lower when compared to public schools. This situation is more evident at the tertiary level. Government regulations have given private education more flexibility and autonomy in recent years,",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfe",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "32",
+            "32%"
+          ],
+          "normal": {
+            "text": "2%",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "passage: In the Philippines, what percentage of secondary school students attend private schools? Answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the Philippines, the private sector has been a major provider of educational services, accounting for about 7.5% of primary enrollment, 32% of secondary enrollment, and about 80% of tertiary enrollment. Private schools have proven to be efficient in resource utilization. Per unit costs in private schools are generally lower when compared to public schools. This situation is more evident at the tertiary level. Government regulations have given private education more flexibility and autonomy in recent years,",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa739",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "Immunodeficiencies"
+          ],
+          "normal": {
+            "text": "Immunodeficiencies occur when one or more of the components of the immune system are inactive. The ability of the immune system to respond to pathogens is diminished in both the young and the elderly, with immune response beginning to decline at around 50 years of age due to immunosenescence. In developed countries, obesity, alcoholism, and drug use are common causes of poor immune function. However, malnutrition is the most common cause of immunodeficiency in developing countries",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "passage: What kind of disorder occur when part of the immune system isn't active? answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "immunodeficiency occurs when one or more of the components of the immune system are inactive. The ability of the immune system to respond to pathogens is diminished in both the young and the elderly, with immune response beginning to decline at around 50 years of age due to immunosenescence. In developed countries, obesity, alcoholism, and drug use are common causes of poor immune function. However, malnutrition is the most common cause of immunodeficiency in developing countries",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa73a",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "the young and the elderly",
+            "young and the elderly"
+          ],
+          "normal": {
+            "text": "In what two age groups is the strength of the immune system reduced?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "in what two age group is the strength of the immune system reduced?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "immunodeficiency occurs when one or more of the components of the immune system are inactive. The ability of the immune system to respond to pathogens is diminished in both the young and the elderly, with immune response beginning to decline at around 50 years of age due to immunosenescence. In developed countries, obesity, alcoholism, and drug use are common causes of poor immune function. However, malnutrition is the most common cause of immunodeficiency in developing countries",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8e",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "plastoglobulus, sometimes spelled plastoglobule(s)",
+            "plastoglobulus"
+          ],
+          "normal": {
+            "text": "Plastoglobulus",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Plastoglobull (singular plastoglobull, sometimes spelled plastoglobule(s)) are spherical bubbles of lipid and protein about 45-60 nanometers across. They are surrounded by a lipid monolayer. Plastoglobuli are found in all chloroplasts, but become more common when the chloroplast is under oxidative stress, or when it ages and transitions into a gerontoplast. Plastoglobuli also exhibit a greater size variation under these conditions",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8f",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "spherical bubbles",
+            "spherical"
+          ],
+          "normal": {
+            "text": "Plastoglobulus",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Plastglobi",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Plastoglobull (singular plastoglobull, sometimes spelled plastoglobule(s)) are spherical bubbles of lipid and protein about 45-60 nanometers across. They are surrounded by a lipid monolayer. Plastoglobuli are found in all chloroplasts, but become more common when the chloroplast is under oxidative stress, or when it ages and transitions into a gerontoplast. Plastoglobuli also exhibit a greater size variation under these conditions",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf7",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "influence"
+          ],
+          "normal": {
+            "text": "imperialism extends a country's power and influence through diplomacy or military force",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Question: Imperialism extends a country's power and what?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "imperialism is defined as \"a politics of extending a country's power and influence through diplomacy or military force\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf8",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "\"Formal imperialism\"",
+            "formal",
+            "\"Formal imperialism",
+            "Formal imperialism",
+            "Formal"
+          ],
+          "normal": {
+            "text": "imperialism",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: colonial rule would be considered what type of imperialism?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "imperialism is defined as \"a politics of extending a country's power and influence through diplomacy or military force\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0a",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "2"
+          ],
+          "normal": {
+            "text": "No even number greater than 2 is prime",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "No",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Hence, 6 is not prime. The image at the right illustrates that 12 is not prime; 12 = 3 × 4. No even number greater than 2 is prime because by definition, any such number has at least three distinct divisors, namely 1, 2, and n. This implies that 12 is not prime. According to the term odd prime, any prime number greater than 2. Similarly, when written",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0b",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "1, 2, and n"
+          ],
+          "normal": {
+            "text": "0 or 5 are multiple of 5",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: 2,4,6,8",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Hence, 6 is not prime. The image at the right illustrates that 12 is not prime; 12 = 3 × 4. No even number greater than 2 is prime because by definition, any such number has at least three distinct divisors, namely 1, 2, and n. This implies that 12 is not prime. According to the term odd prime, any prime number greater than 2. Similarly, when written",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86d",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "North",
+            "North Sea",
+            "the North Sea"
+          ],
+          "normal": {
+            "text": "North Sea",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP. The party argued that the revenues from the oil were not benefiting Scotland as much as they should. The combined effect of these events led to Prime Minister Wilson committing his government to some form of developed legislature in 1974. However, it was not",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86e",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "\"It's Scotland's oil\"",
+            "It's Scotland's oil"
+          ],
+          "normal": {
+            "text": "campaign",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: What campaign did the Scottish National Party (SNP) run?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP. The party argued that the revenues from the oil were not benefiting Scotland as much as they should. The combined effect of these events led to Prime Minister Wilson committing his government to some form of developed legislature in 1974. However, it was not",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f71",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "summer of 1521",
+            "1521"
+          ],
+          "normal": {
+            "text": "In the summer of 1521, Luther widened his target from individual piety like indulgences and pilgrimages to doctrines at the heart of Church practices. In On the Ablation of the Private Mass, he condemned an idyllic idea that the mass is a sacrifice, instead that it is a gift, to be received with thanksgiving by the whole congregation. His essay On Confession, Whether the Pope has the Power to Require It Rehearsed Comp",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the summer of 1521, Luther widened his target from individual piety like indulgences and pilgrimages to doctrines at the heart of Church practices. In On the Aporagion of the Private Mass, he condemned as idolatry the idea that the mass is a sacrifice, instead that it is a gift, to be received with thanksgiving by the whole congregation. His essay On Confession, Whether the Pope has the Power to Require It Rejected",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f72",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "condemned as idolatry",
+            "idolatry",
+            "gift"
+          ],
+          "normal": {
+            "text": "The Judgement of Martin Luther on Monastic Vows",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the summer of 1521, Luther widened his target from individual piety like indulgences and pilgrimages to doctrines at the heart of Church practices. In On the Aporagion of the Private Mass, he condemned as idolatry the idea that the mass is a sacrifice, instead that it is a gift, to be received with thanksgiving by the whole congregation. His essay On Confession, Whether the Pope has the Power to Require It Rejected",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b0",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "ulemas"
+          ],
+          "normal": {
+            "text": "Ulema",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Ahmed",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "There are many concepts of teachers in Islam, ranging from mullahs (the teachers at madrasa) to ulama, who teach of the laws of Islam for the proper way of Islamic living according to the Sunni and Shia, and can render legal verdicts upon matters of Islamic law in accordance with the teaching of one of the Four Schools of Jurisprudence. In the more spiritual or mystical Islamic tradition of Sufism, the position of spiritual teacher and an ecstatic",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b2",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "Sufism"
+          ],
+          "normal": {
+            "text": "Five Pillars of Islam",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Amir",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "There are many concepts of teachers in Islam, ranging from mullahs (the teachers at madrasa) to ulama, who teach of the laws of Islam for the proper way of Islamic living according to the Sunni and Shia, and can render legal verdicts upon matters of Islamic law in accordance with the teaching of one of the Four Schools of Jurisprudence. In the more spiritual or mystical Islamic tradition of Sufism, the position of spiritual teacher and an ecstatic",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca25",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "between September and November 1946",
+            "between September and November 1946,"
+          ],
+          "normal": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 to promote by all practical means the improvement of design in the products of British industry. The success of this exhibition led to the planning of the Festival of Britain in 1951. By",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 to promote by all practical means the improvement of design in the products of British industry. The success of this exhibition led to the planning of the Festival of Britain (1951). By ",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca26",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "nearly a million and a half",
+            "nearly a million and a half visitors"
+          ],
+          "normal": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: 1",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 to promote by all practical means the improvement of design in the products of British industry. The success of this exhibition led to the planning of the Festival of Britain (1951). By ",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c1",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "Braddock (with George Washington as one of his aides) led about 1,500 army troops",
+            "Braddock",
+            "Braddock (with George Washington"
+          ],
+          "normal": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster; it was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat, he was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Fort Duquesne in June 1737",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster. It was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat. He was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c2",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "The expedition was a disaster",
+            "disaster",
+            "was a disaster"
+          ],
+          "normal": {
+            "text": "How much success did this expedition with Bradock find?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: how much success did this expedition with Bradock find?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster. It was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat. He was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7dd",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "Fresno"
+          ],
+          "normal": {
+            "text": "Fresno",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest US city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7de",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "1950s",
+            "in the 1950s"
+          ],
+          "normal": {
+            "text": "1950s",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest US city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad5",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "feed water",
+            "water"
+          ],
+          "normal": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: The frequent availability of what substance allowed land-based steam engines to exhale a great deal of steam?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad6",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "British"
+          ],
+          "normal": {
+            "text": "People of what nationality invented the steam turbine?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: People of what nationality invented the steam turbine?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfac",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "Ali Shariati"
+          ],
+          "normal": {
+            "text": "Ali Shariati",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer: Who was the ideologue of the Iranian Revolution?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resonance with Mohammad Iqbal, ideological father of the State of Pakistan, but Iqbal's beliefs are perceived to be placed somewhere between beliefs of Sunni Islamic thinkers like Mawdudi and Qutb. He believed that complete imitation of the Prophet Mohammad and his successors such as Ali for restoration of Shari law was essential to Islam, that many secular, Westernizing Muslims were actually",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfad",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "ideological"
+          ],
+          "normal": {
+            "text": "Mollah Iqbal",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: Mohammad Iqbal was what type of father to the State of Pakistan?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resonance with Mohammad Iqbal, ideological father of the State of Pakistan, but Iqbal's beliefs are perceived to be placed somewhere between beliefs of Sunni Islamic thinkers like Mawdudi and Qutb. He believed that complete imitation of the Prophet Mohammad and his successors such as Ali for restoration of Shari law was essential to Islam, that many secular, Westernizing Muslims were actually",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40c",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "applied mathematics to the construction of calendars",
+            "applied mathematics"
+          ],
+          "normal": {
+            "text": "What did Guo Shoujing do for calendars?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A person",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouqing applied mathematics to the construction of calendar. He was one of the first mathematicians in China to work on spherical trigonometry. Guo derived a cubic interpolation formula for his astronomical calculations. His calendar, the Shoushi (顺夏) or Calendar for fixing the Seasons, was dismissed in 1281 as the official calendar of the Yuan dynasty. The calendar may have been influenced solely by the work of Song dynasty astronomer Shen K",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40d",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "a cubic interpolation formula",
+            "cubic interpolation formula",
+            "derived a cubic interpolation formula"
+          ],
+          "normal": {
+            "text": "Gou Shoujing applied mathematics to the construction of calendar.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Astronomy",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouqing applied mathematics to the construction of calendar. He was one of the first mathematicians in China to work on spherical trigonometry. Guo derived a cubic interpolation formula for his astronomical calculations. His calendar, the Shoushi (顺夏) or Calendar for fixing the Seasons, was dismissed in 1281 as the official calendar of the Yuan dynasty. The calendar may have been influenced solely by the work of Song dynasty astronomer Shen K",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8863",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "Hulagu Khan"
+          ],
+          "normal": {
+            "text": "Baghdad",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "A",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The invasions of Baghdad, Samarkand, Urgench, Kiev, Vladimir among others caused mass murders, such as when portions of southern Khuzestan were completely destroyed. His descendant Hulagu Khan destroyed much of Iran's northern part and sacked Baghdad although his forces were halted by the Mamluks of Egypt, but Hulagu's descendant Ghazan Khan would return to behead the Egyptian Mamluks right out of Levant, Palestine",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8864",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "the Mamluks of Egypt",
+            "Mamluks"
+          ],
+          "normal": {
+            "text": "Hulagu Khan",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Who halted the advance of Hulagu Khan across the Persian East? Answer",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The invasions of Baghdad, Samarkand, Urgench, Kiev, Vladimir among others caused mass murders, such as when portions of southern Khuzestan were completely destroyed. His descendant Hulagu Khan destroyed much of Iran's northern part and sacked Baghdad although his forces were halted by the Mamluks of Egypt, but Hulagu's descendant Ghazan Khan would return to behead the Egyptian Mamluks right out of Levant, Palestine",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        }
+      ],
+      "pairs": [
+        {
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "both_correct": true,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        }
+      ],
+      "normal_stopped": 27
+    },
+    "dense_432": {
+      "summary": {
+        "normal_cases": 32,
+        "normal_exact_stopped": 5,
+        "passage_erased_cases": 32,
+        "passage_erased_exact_stopped": 0,
+        "question_erased_independent_calls": 16,
+        "both_correct_pairs": 1,
+        "normal_outputs_differ_pairs": 14,
+        "normal_answers_changed_after_question_erasure": 28,
+        "shared_question_erased_matches_either": 0,
+        "correct_normal_retained_without_passage": 0,
+        "correct_normal_lost_without_passage": 5
+      },
+      "cases": [
+        {
+          "id": "squad/57280f0d3acd2414000df35b",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "An Unearthly Child"
+          ],
+          "normal": {
+            "text": "The name of the first Doctor Who serial is \"An Unearthly Child\".",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: Doctor Who",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The programme's first serial, An Unearthly Child, shows that the Doctor has a granddaughter, Susan Foreman, in the 1967 serial.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57280f0d3acd2414000df35c",
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "article": "Doctor_Who",
+          "alternatives": [
+            "Susan Foreman"
+          ],
+          "normal": {
+            "text": "Doctor Who",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: Doctor Who",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The programme's first serial, An Unearthly Child, shows that the Doctor has a granddaughter, Susan Foreman, in the 1967 serial.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfd",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "7.5",
+            "7.5%"
+          ],
+          "normal": {
+            "text": "7.5%",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "answer: 60",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the Philippines, the private sector has been a major provider of educational services, accounting for about 7.5% of primary enrollment, 32% of secondary enrollment, and about 80% of tertiary enrollment. Private schools have proven to be efficient in resource utilization. Per unit costs in private schools are generally lower when compared to public schools. This situation is more evident at the tertiary level. Government regulations have given private education more flexibility and autonomy in recent years,",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5727500f708984140094dbfe",
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "article": "Private_school",
+          "alternatives": [
+            "32",
+            "32%"
+          ],
+          "normal": {
+            "text": "32%",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "passage: In the Philippines, what percentage of secondary school students attend private schools? Answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the Philippines, the private sector has been a major provider of educational services, accounting for about 7.5% of primary enrollment, 32% of secondary enrollment, and about 80% of tertiary enrollment. Private schools have proven to be efficient in resource utilization. Per unit costs in private schools are generally lower when compared to public schools. This situation is more evident at the tertiary level. Government regulations have given private education more flexibility and autonomy in recent years,",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa739",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "Immunodeficiencies"
+          ],
+          "normal": {
+            "text": "immunodeficiencies",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "passage: What kind of disorder occur when part of the immune system isn't active? answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "immunodeficiency",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5729fefbaf94a219006aa73a",
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "article": "Immune_system",
+          "alternatives": [
+            "the young and the elderly",
+            "young and the elderly"
+          ],
+          "normal": {
+            "text": "in what two age groups is the strength of the immune system reduced?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "passage: In what two age groups is the strength of the immune system reduced? Answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "immunodeficiency",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8e",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "plastoglobulus, sometimes spelled plastoglobule(s)",
+            "plastoglobulus"
+          ],
+          "normal": {
+            "text": "Plastoglobulus",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: single",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "plastoglobulus (singular plastoglobus), sometimes spelled plastoglobule (singular plastoglobule) are spherical bubbles of lipids and protein about 45–60 nanometers across. They are surrounded by a lipid monolayer. Plastoglobuli are found in all chloroplasts, but become more common when the chloroplast is under oxidative stress, or when it ages and transitions into a gerontoplast. Plast",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57296eee6aef051400154e8f",
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "article": "Chloroplast",
+          "alternatives": [
+            "spherical bubbles",
+            "spherical"
+          ],
+          "normal": {
+            "text": "plastoglobulus",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: rectangle",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "plastoglobulus (singular plastoglobus), sometimes spelled plastoglobule (singular plastoglobule) are spherical bubbles of lipids and protein about 45–60 nanometers across. They are surrounded by a lipid monolayer. Plastoglobuli are found in all chloroplasts, but become more common when the chloroplast is under oxidative stress, or when it ages and transitions into a gerontoplast. Plast",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf7",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "influence"
+          ],
+          "normal": {
+            "text": "imperialism extends a country's power and influence through diplomacy or military force",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: what",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "imperialism is defined as \"a policy of extending a country's power and influence through diplomacy or military force\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/573062662461fd1900a9cdf8",
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "article": "Imperialism",
+          "alternatives": [
+            "\"Formal imperialism\"",
+            "formal",
+            "\"Formal imperialism",
+            "Formal imperialism",
+            "Formal"
+          ],
+          "normal": {
+            "text": "imperialism",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: imperialism",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "imperialism is defined as \"a policy of extending a country's power and influence through diplomacy or military force\"",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0a",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "2"
+          ],
+          "normal": {
+            "text": "0 or 5 are multiples of 5",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: any even number larger than what cannot be considered prime?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Hence, 6 is not prime. The image at the right illustrates that 12 is not prime: 12 = 3 × 4. No even number greater than 2 is prime because by definition, any such number has at least three distinct divisors, namely 1, 2, and n. This implies that 12 is not prime. Accordingly, the term odd prime refers to any prime number greater than 2. Similarly, when",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572973f76aef051400154f0b",
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "article": "Prime_number",
+          "alternatives": [
+            "1, 2, and n"
+          ],
+          "normal": {
+            "text": "0 or 5 are multiples of 5",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: 2,4,6,8,10",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Hence, 6 is not prime. The image at the right illustrates that 12 is not prime: 12 = 3 × 4. No even number greater than 2 is prime because by definition, any such number has at least three distinct divisors, namely 1, 2, and n. This implies that 12 is not prime. Accordingly, the term odd prime refers to any prime number greater than 2. Similarly, when",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86d",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "North",
+            "North Sea",
+            "the North Sea"
+          ],
+          "normal": {
+            "text": "North Sea",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer: oil",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It's Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP. The party argued that the revenues from the oil were not benefiting Scotland as much as they should. The combination of these events led to Prime Minister Wilson committing his government to some form of devolved legislature in 1974. However, it was",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572fad30a23a5019007fc86e",
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "article": "Scottish_Parliament",
+          "alternatives": [
+            "\"It's Scotland's oil\"",
+            "It's Scotland's oil"
+          ],
+          "normal": {
+            "text": "campaign",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: run",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "During this time, the discovery of oil in the North Sea and the following \"It's Scotland's oil\" campaign of the Scottish National Party (SNP) resulted in rising support for Scottish independence, as well as the SNP. The party argued that the revenues from the oil were not benefiting Scotland as much as they should. The combination of these events led to Prime Minister Wilson committing his government to some form of devolved legislature in 1974. However, it was",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f71",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "summer of 1521",
+            "1521"
+          ],
+          "normal": {
+            "text": "In the summer of 1521, Luther widened his target from individual pietes like indulgences and pilgrimages to doctrines at the heart of church practices. In On the Abrogation of the Private Mass, he concluded as idolatry the idea that the mass is a sacrifice, as opposed to a gift, to be received within the whole congregation. His essay On Confession, Whether the Pope has the Power to Require it Reformed compulsory confession and encouraged",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "answer: when did luther broaden his attacks to include core doctrine?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the summer of 1521, Luther widened his target from individual pietes like indulgences and pilgrimages to doctrines at the heart of Church practices. In On the Abrogation of the Private Mass, he concluded as idolatry the idea that the mass is a sacrifice, as opposed to that it is a gift, to be received within the whole congregation. His essay On Confession, Whether the Pope has the Power to Require it Reformed compulsory",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56f84485aef2371900625f72",
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "article": "Martin_Luther",
+          "alternatives": [
+            "condemned as idolatry",
+            "idolatry",
+            "gift"
+          ],
+          "normal": {
+            "text": "private confession",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "passage",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "In the summer of 1521, Luther widened his target from individual pietes like indulgences and pilgrimages to doctrines at the heart of Church practices. In On the Abrogation of the Private Mass, he concluded as idolatry the idea that the mass is a sacrifice, as opposed to that it is a gift, to be received within the whole congregation. His essay On Confession, Whether the Pope has the Power to Require it Reformed compulsory",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b0",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "ulemas"
+          ],
+          "normal": {
+            "text": "ulama, who teach of the laws of Islam for the proper way of Islamic living according to the Sunnah and Hadith, and can render legal verdicts upon matters of Islamic law in accordance with the teaching of one of the Four Schools of Jurisprudence. In the more spiritual or mystical Islamic tradition of Sufism, the position of spiritual teacher and an ecstatic (as opposed to ecstasy, or actions-oriented, eg. the Five Pillars of Islam) spiritual knowledge",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Passage:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "There are many concepts of teachers in Islam, ranging from mullahs (the teachers at madrasas) to ulama, who teach of the laws of Islam for the proper way of Islamic living according to the Sunni and Shia, and can render legal verdicts upon matters of Islamic law in accordance with the teaching of one of the Four Schools of Jurisprudence. In the more spiritual or mystical Islamic tradition of Sufism, the position of spiritual teacher and an ecstatic",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/56e77e4a00c9c71400d771b2",
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "article": "Teacher",
+          "alternatives": [
+            "Sufism"
+          ],
+          "normal": {
+            "text": "Quran",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Passage: What is the name of the mythical type of Islam? Answer:",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "There are many concepts of teachers in Islam, ranging from mullahs (the teachers at madrasas) to ulama, who teach of the laws of Islam for the proper way of Islamic living according to the Sunni and Shia, and can render legal verdicts upon matters of Islamic law in accordance with the teaching of one of the Four Schools of Jurisprudence. In the more spiritual or mystical Islamic tradition of Sufism, the position of spiritual teacher and an ecstatic",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/57268f2c708984140094ca25",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "between September and November 1946",
+            "between September and November 1946,"
+          ],
+          "normal": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 \"to promote by all practical means the improvement of design in the products of British industry\". The success of this exhibition led to the planning of the Festival of Britain (1951). By",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: when was the british can make it exhibition held?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 \"to promote by all practical means the improvement of design in the products of British industry\". The success of this exhibition led to the planning of the Festival of Britain (1951). By",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/57268f2c708984140094ca26",
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "article": "Victoria_and_Albert_Museum",
+          "alternatives": [
+            "nearly a million and a half",
+            "nearly a million and a half visitors"
+          ],
+          "normal": {
+            "text": "The answer is 1 million",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: 1",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Before the return of the collections after the war, the British Can Make It exhibition was held between September and November 1946, attracting nearly a million and a half visitors. This was organised by the Council of Industrial Design established by the British government in 1944 \"to promote by all practical means the improvement of design in the products of British industry\". The success of this exhibition led to the planning of the Festival of Britain (1951). By",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c1",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "Braddock (with George Washington as one of his aides) led about 1,500 army troops",
+            "Braddock",
+            "Braddock (with George Washington"
+          ],
+          "normal": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster. It was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat. He was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Fort Dusqueene",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster. It was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat. He was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5733f5f24776f419006615c2",
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "article": "French_and_Indian_War",
+          "alternatives": [
+            "The expedition was a disaster",
+            "disaster",
+            "was a disaster"
+          ],
+          "normal": {
+            "text": "1500",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: find?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Braddock (with George Washington as one of his aides) led about 1,500 army troops and provincial militia on an expedition in June 1755 to take Fort Duquesne. The expedition was a disaster. It was attacked by French and Indian soldiers ambushing them from up in trees and behind logs. Braddock called for a retreat. He was killed. Approximately 1,000 British soldiers were killed or injured. The remaining 5",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7dd",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "Fresno"
+          ],
+          "normal": {
+            "text": "Fresno",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "highway",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest US city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5725fe63ec44d21400f3d7de",
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "article": "Fresno,_California",
+          "alternatives": [
+            "1950s",
+            "in the 1950s"
+          ],
+          "normal": {
+            "text": "Fresno is the largest US city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "question: in what year was the interstate highway system created? answer: question",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Fresno is the largest US city not directly linked to an interstate highway.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad5",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "feed water",
+            "water"
+          ],
+          "normal": {
+            "text": "land-based steam engines could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the Dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: land-based steam engines to exhause a great deal of steam",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the Dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5711658e50c2381900b54ad6",
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "article": "Steam_engine",
+          "alternatives": [
+            "British"
+          ],
+          "normal": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the Dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: steam turbine",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "land-based steam engine could exhaust much of their steam, as feed water was usually readily available. Prior to and during World War I, the expansion engine dominated marine applications where high vessel speed was not essential. It was however superseded by the British invention steam turbine where speed was required, for instance in warships, such as the Dreadnought battleships, and ocean liners. HMS Dreadnought of 1905 was the first major warship to replace the proven",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": false
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfac",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "Ali Shariati"
+          ],
+          "normal": {
+            "text": "Ali Shariati",
+            "stopped": true,
+            "canonical_exact": true,
+            "exact_stopped": true
+          },
+          "passage_erased": {
+            "text": "Answer: Who was the ideologue of the Iranian Revolution?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resonance with Mohammad Iqbal, ideological father of the State of Pakistan, but Iqbal's beliefs are perceived to be placed somewhere between beliefs of Sunni Islamic thinkers like Mawdudi and Qutb. He believed that complete imitation of the Prophet Muhammad and his successors such as Ali far restoration of Shari law was essential to Islam, that many secularizing Muslims were actually agents of",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5730088e947a6a140053cfad",
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "article": "Islamism",
+          "alternatives": [
+            "ideological"
+          ],
+          "normal": {
+            "text": "Ali Shariati",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: of Pakistani",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The views of Ali Shariati, ideologue of the Iranian Revolution, had resonance with Mohammad Iqbal, ideological father of the State of Pakistan, but Iqbal's beliefs are perceived to be placed somewhere between beliefs of Sunni Islamic thinkers like Mawdudi and Qutb. He believed that complete imitation of the Prophet Muhammad and his successors such as Ali far restoration of Shari law was essential to Islam, that many secularizing Muslims were actually agents of",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40c",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "applied mathematics to the construction of calendars",
+            "applied mathematics"
+          ],
+          "normal": {
+            "text": "What did Guo Shoujing do for calendars?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "What did Gua Shoujing do for calendars?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouxi applied mathematics to the construction of calendars. He was one of the first mathematicians in China to work on spherical trigonometry. Guo derived a cubic interpolation formula for his astronomical calculations. His calendar, the Shoushi (顺夏) or Calendar for fixing the Seasons, was dismissed in 1281 as the official calendar of the Yuan dynasty. The calendar may have been influenced solely by the work of Song dynasty astronomer Shen Kuo",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/5728809f2ca10214002da40d",
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "article": "Yuan_dynasty",
+          "alternatives": [
+            "a cubic interpolation formula",
+            "cubic interpolation formula",
+            "derived a cubic interpolation formula"
+          ],
+          "normal": {
+            "text": "Gou Shoujing applied mathematics to the construction of calendar.",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "What did Gou use for astronomy?",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "Guan Shouxi applied mathematics to the construction of calendars. He was one of the first mathematicians in China to work on spherical trigonometry. Guo derived a cubic interpolation formula for his astronomical calculations. His calendar, the Shoushi (顺夏) or Calendar for fixing the Seasons, was dismissed in 1281 as the official calendar of the Yuan dynasty. The calendar may have been influenced solely by the work of Song dynasty astronomer Shen Kuo",
+            "stopped": false,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8863",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "Hulagu Khan"
+          ],
+          "normal": {
+            "text": "Barghad",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Baqhad",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The invasions of Bughad, Samarkand, Urgench, Kiev, Vladimir",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        },
+        {
+          "id": "squad/572754cd5951b619008f8864",
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "article": "Genghis_Khan",
+          "alternatives": [
+            "the Mamluks of Egypt",
+            "Mamluks"
+          ],
+          "normal": {
+            "text": "Hulagu Khan",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "passage_erased": {
+            "text": "Answer: Who halted the advance of Hulagu Khan across the",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "question_erased": {
+            "text": "The invasions of Bughad, Samarkand, Urgench, Kiev, Vladimir",
+            "stopped": true,
+            "canonical_exact": false,
+            "exact_stopped": false
+          },
+          "changed_after_question_erasure": true
+        }
+      ],
+      "pairs": [
+        {
+          "pair": "squad/a7d16a5dd40a8427c0ae8c8f62ffb46b082dbc3cd256589dd84c554217e562b2",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/c17ef7adcab459b968e2ef462f3cf4de687b01b702916f09322386dd59bebd28",
+          "both_correct": true,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/81ba9c103184caabf51fa7a6f0ba2856254a93dd30897f55cc1cd699bd203a42",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2076d785dd6dc2f918f86bae168f0e5b5492819117bd487ae2b0c2a2e13b3f97",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/95d3b7479d4d43d7873edd7611bb743b131da7e7a4a5448aa98742e182b2ddf8",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/9eb39676db175f0c94d503b3226389be2c375893fb86b70554e208cebd37f6d7",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/dee2c52f4da8052dfc4b6450b3f6ed3756a0d92188a28cf15a427acd227772fd",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/759908655a101e3b65a590f13dd4e06179c97d6c61a9cba327339988f509e2f6",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/2ef0b23b65edbdece441e5461972181f534eed550cf8596815a349434aecc9a9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/03684091e9c54f3225eec95a2f7e6a9f3c74f544f5df288d49d9eda4539b19ea",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e26d3a98154d79e4fb93dfbc9b446801d4e38dc1c4681b39878f40025a6b4fce",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/613ea613b64743a4b6c6c5cad6341afdc153a55dba222f368d35cc60e20ef4dd",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/240c8b1f49cd836bd7a59eadd8b71f086502b482c10f8600748cf4a7146abbca",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/060f4efa09fb73e4fb2d8efae87df8f79d0d553cdecfb983e3502b774d0bb037",
+          "both_correct": false,
+          "normal_outputs_differ": false,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/e83796106923fb4c041f48e03aac86a7ce1c0ca388e14d335f5261ec964785b9",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        },
+        {
+          "pair": "squad/86c9f787d0f3c56404d7b3f6efaea7310c3ef75f65a8912a72a4481ea8634bd6",
+          "both_correct": false,
+          "normal_outputs_differ": true,
+          "shared_question_erased_matches_either": false
+        }
+      ],
+      "normal_stopped": 26
+    }
+  },
+  "files_sha256": {
+    "reports/source_1024_outputs.json": "eb1e6d625e2e0e322c7eeddb6777c0ba4c6e76ab8d74837081474f69f0e2bbfb",
+    "reports/source_1024_report.json": "059d6b5f593205874799d5a2e4a5b30e2ab2f82050a6cf40d83aa922cd1c4be2",
+    "reports/source_432_outputs.json": "edab2a8bdd8b38814c9452f2c348444fa040204b5b832ea5a34425634f59ea7a",
+    "reports/source_432_report.json": "52ab41ee8f09beab5386e5f0db02585b58842ff44d1f72122d1872100dffe635",
+    "reports/predecessor_432_outputs.json": "15c386996a0124516ebcc27b4fa2b480000b1d8c928a3029ffbb202b38781ecd",
+    "reports/predecessor_432_report.json": "7047f2b00128b117644fae25bec5ef967bcf722b84c91c17bd6ca1cac6eabf54",
+    "reports/dense_432_outputs.json": "52f59488f2417bfed9e9608584633d396ad48a0bca8e5f6231a5a7f875618fb8",
+    "reports/dense_432_report.json": "63b53feee9f59d35f0040ffd97acb1a1e9215fb5175cc0c1b2aab99e28426bf7",
+    "inputs/00_0.png": "025aaa9e1fb4aa71c735c9441b8e0cdc4babf80a6d006f9d53a2ada33c60897b",
+    "erased/00_0_passage.png": "208ae128999e9095b52c401a6d4b9bdc348317b431b417975c64f5c2918aae65",
+    "inputs/00_1.png": "c917819fc6ba83510021dce38d2cc642e308fb952d5c23893e0be08a4eb1eccc",
+    "erased/00_1_passage.png": "4c6553a618f9af03a6bdd109557d1acb4265f2bf9db7dd94e99fa5cdc1830512",
+    "erased/00_question.png": "0af83354c7fdaca12ab8dc7f72cd78137dd4caddc76f5525b84524f5c41f5928",
+    "inputs/01_0.png": "27e02e1618e319b806f7d5a20fb65122bdbac2280e9a2912a114e396c907d849",
+    "erased/01_0_passage.png": "2e112aa7a75aa1d2cc50100c448c88fda7bbabd76d24bb82f1326c0d77af36db",
+    "inputs/01_1.png": "8dc0483210d88beae0aac3c8afceb2c521dbb03f4a17bb0695f5d2d66984dc32",
+    "erased/01_1_passage.png": "36a98a47b58cf1c00c4f3d36d50d0df945aa65c2ea1d1c1c8c6356b5701066f2",
+    "erased/01_question.png": "04130e874d541c4def4eec164607807c9d1808d5565c9836b799501edfe02b5f",
+    "inputs/02_0.png": "c858f7adc427ba3a6f437bc256107e2476cb7f4674ec05a4ed54b0aebb171fff",
+    "erased/02_0_passage.png": "d7e4c65645ab34fb57ab325e0745790ef2fa11e9e8db22dacdb092ebfb01b1d2",
+    "inputs/02_1.png": "c817d37eb59be57b2aa6af316616690ac6f74b1acc09c4ec798e20500033217c",
+    "erased/02_1_passage.png": "109c1e7888810a64a4c549e4dc517d33e7274fb0b2ec2c4667614d146dd3021c",
+    "erased/02_question.png": "f91ff5e734b2303dc2b0bfdd282514819396e85fb4785fe4bb1a7370c2486cb8",
+    "inputs/03_0.png": "54335704e759ae00611884114e05fa1fd78a708a649c865db95edfa52677e7a4",
+    "erased/03_0_passage.png": "0dbeab7d4b051e31dff6ac931b02ba4e5f421052a057dd89a66012316072a9de",
+    "inputs/03_1.png": "56e0a14c102f705049b9b9d0a70a6d60b85d5b21877485b349a4acd77d520b16",
+    "erased/03_1_passage.png": "016135d67cb1cafc7709b1cf4223f485b55691e0ebbb6894778417a243744276",
+    "erased/03_question.png": "f81369bb5bc88b86ce624a1668adf077be482f8ecb7d6075f0bbe624c16233c4",
+    "inputs/04_0.png": "d315be8119e24906f3112e26f018afb18496eca03ab0386b8aef077b2032b7d7",
+    "erased/04_0_passage.png": "2f1c25e42981f1fec93f8c281d1d5adf44582e5a9787feac9a46f72398fc12cf",
+    "inputs/04_1.png": "07317059f4262de5468e8fe3d6df6e4a068b772a4ed425cbabed75a0b755dc9f",
+    "erased/04_1_passage.png": "48761ba4aaece2b0bda6d675a7008f41918c6a5df53eb9d31cbcb9b4f2354dfd",
+    "erased/04_question.png": "76f3f7413ff18465febd7973cf474e1d17d6c7d069c5245f6db2b89490fb68e2",
+    "inputs/05_0.png": "d0f9aecae4cecc2638b0ab510a9bba80596b7a7d3d9ef3de4d421ee0c6f424ee",
+    "erased/05_0_passage.png": "49d3d65b2ad5694a6c2ffffa209abfc96e3ed045e351c115afd2d946fba9095b",
+    "inputs/05_1.png": "3f4e683e5158f9c62d82c2b23f08bf2c70c884f25215959051a3f5269b1ede31",
+    "erased/05_1_passage.png": "d25fa22f3fa2a5a9d1a86a7a163eb3f5a03f039677215a8c522aca5114f71bac",
+    "erased/05_question.png": "63fd93524783c56b4df090a579743c6ef10cf0ea24f2b2ead7361ab667cba45f",
+    "inputs/06_0.png": "b7e360d5a0a8f10615e3541464a20a226ffc4ebb9cea5d6172ff6edfa532bc19",
+    "erased/06_0_passage.png": "f639c36d2bcac0b0fe6c3a3f6dc728f0372de0433f7689252ed0be8864bc85ef",
+    "inputs/06_1.png": "33a4760a7290876ae009e5983d9a5bdc592abaf1cc2eede83bcee42921dd4747",
+    "erased/06_1_passage.png": "78cba8919efb99d3e017b2a36465c8780213703aa67f98e4c3666f21c48b1113",
+    "erased/06_question.png": "4ed35f70d489f3705a173815c6171bbbc3823a1fcba49556384d3b994e39e62d",
+    "inputs/07_0.png": "81fd63fb0c5110299e6e17c23cb084a71122d7c621efcf99673cf3b22235070c",
+    "erased/07_0_passage.png": "dd2d1cc7716cc4e56783dbd68917e120269501f08932d74521f8d3b95eab9ca9",
+    "inputs/07_1.png": "6932df41e8e166a2e6c80ef1c5dbdf63663d038ad326b7a9082c5bbc9b88463c",
+    "erased/07_1_passage.png": "6af1e25adc8a22449483d14bea3873293d96c56e541385128480bc7362099d77",
+    "erased/07_question.png": "52ec4c8bda966d622935bbb8cb6746751dae5c16cdefd4b41ffbcd2502aa55c6",
+    "inputs/08_0.png": "a4b181fe5ab9918b100a4a7fe2c054444fc44662af780b3f73e0ecc9cb22f698",
+    "erased/08_0_passage.png": "4ad3ebf8854f0cc13143b4ac699246d23d35f06de99c86cb4f756867fc7686b5",
+    "inputs/08_1.png": "d800962c9e39ea2ede9073803dbd2e9f7bb4b1a87ea70bc3d9289e78f143fece",
+    "erased/08_1_passage.png": "05b0774c92bf679d49f14a389be93b23a4a112e4c15a314355bde3dacc4a4764",
+    "erased/08_question.png": "c6d6ce8a88f52303b185b476737cfcd228f087824ed56709e5d84a048e2d9ea9",
+    "inputs/09_0.png": "b6ecd7f78215d34e9647277278dd75e64cca8267376aae515b671046768c1c60",
+    "erased/09_0_passage.png": "cc652cadd6ecfcde507813997f7e473d69fc70fb5bafe2552e2b81e5ec2e8821",
+    "inputs/09_1.png": "dd296db92a7b40f19a8b21c93e061e8db100fc0f1d6f6fbacb9512a559f67bec",
+    "erased/09_1_passage.png": "2d13aa7d977df2fbe5ba3281691c61dff1ad776b49f62a583abacd9a26741764",
+    "erased/09_question.png": "9adab71564d1ff00f96385dd3f3e245d9605d4aa46b1b1944d03338d58a4b9bd",
+    "inputs/10_0.png": "344b3dcb9585779ecf87d7aca9eab4d7fb3e753139aeaa58d762f0ae71417ca6",
+    "erased/10_0_passage.png": "f2b9d1d762969460777977506bd5e618a4606422e3604e8e3372ccbfac99ed4e",
+    "inputs/10_1.png": "bde43ab86aa6473cb52751993aa9519c737e1ea1d2c64c9ed4827d0829ac93c1",
+    "erased/10_1_passage.png": "49538230d2321c58673cd2fbbf8db03f45e5a22cdab34de29da6709ca010535c",
+    "erased/10_question.png": "c1d67f453e1d41bd6befb96e9f1e98bcf92860b2ef08347a5dd2f3caccd94766",
+    "inputs/11_0.png": "6bf567cad2e9a421d837fb88ebcfab5d9b121ee6715192494ffc2bf182b15891",
+    "erased/11_0_passage.png": "1f0dfb05fa481fbd8c1d5d1ecf66cf8c35197c280d488bbb4bad708a6acef97b",
+    "inputs/11_1.png": "c787de0d095c2d1b3e4dea30afa0f0630d3e07ea5c345f3fa82bee5a0a659080",
+    "erased/11_1_passage.png": "6b952a2795b3014c4c19f89215d01f392d58b974a290f58eaed0197a47f48d63",
+    "erased/11_question.png": "d56a1efd1eafbb88bf8a0777fd1ca652e3f4f85951023766e0b5e1b5a054cd7d",
+    "inputs/12_0.png": "2114c83afd795ce5031ac4ac9ff428f7382145432034f3709509a07ffc73f91f",
+    "erased/12_0_passage.png": "7d4cb99e9de682219d457032f615a796235d560f7f225134c703cdc1ef16bf20",
+    "inputs/12_1.png": "1a378006bab75e4b2c3a5c8edbe9a59aa3887cf2fc483fae3c50c35d2ca06249",
+    "erased/12_1_passage.png": "f895c4697355ef9ba50fbe00c9c7199f3d00b203a1fa6c0c451d41d428854a49",
+    "erased/12_question.png": "415f5bb033602fd7454b2381ba89aad71b580ec55ff23720a731a174e3401165",
+    "inputs/13_0.png": "fdf36c325d7704eeb8dbc1ed949d89124f0474ea191fcdd31fcbda440a4ac880",
+    "erased/13_0_passage.png": "d2b7279f876e568011af708526f9105e2b685d74f2d669b96a01053660e16a67",
+    "inputs/13_1.png": "2cf0e88315e76ef6642c6721b09e16e1c36a4aed5f29ee9c050e69a768cb7404",
+    "erased/13_1_passage.png": "4d689badd05d7996396c48ae0ff626ef7389393bc0c8b99dc0af1c2b2803672e",
+    "erased/13_question.png": "718c7a94bdb4bb83c8e2cd4419b4952ca8502938b12c4b08c2ca9cdbda5f42d8",
+    "inputs/14_0.png": "c48d1c565ec526f4c3c053de5981b7feaa47b3a1f39c9e70e943affb20ef1ed1",
+    "erased/14_0_passage.png": "163e4a2f3171cb60ff6e6eac7f139f64341998a70b9823156e22ec15c8a51fe3",
+    "inputs/14_1.png": "b7bddb732cd8929277be34fef7bfa840efdfdc6abf64f2703e92fa3d004f3702",
+    "erased/14_1_passage.png": "8a22a601f5c85c2713f485f8ab783949f2363fa80955ce4477bad87bc71e159f",
+    "erased/14_question.png": "6c4588da4117f13da8cb51217eecb58126740071a90d28b680cd89e54402d020",
+    "inputs/15_0.png": "7c6674603715fd75f4bd9857a79885575766cbe0e906548f2f33125404fe28d2",
+    "erased/15_0_passage.png": "61aad38c5bb4819ba2fe17c1c8b9ed76ab37b6c3addfea1d7045d4113c66c86b",
+    "inputs/15_1.png": "d7729269b162eba183398ad7adb242cf7e0353c0ab6383cc46319317acd1ddd4",
+    "erased/15_1_passage.png": "d982137ed64da7bf8b6b8c215ede99ed36977c7f72c76c1d361aa3c74d48226b",
+    "erased/15_question.png": "ae9fd2d283922133c260a733ccfd45e3fbe3ef60de219c04524eb6ffe1e37f15",
+    "inputs.json": "4bcb4a3c00b65a65310639648a7f0834e1cedf3ca46e8a1b9aca2a41b73dcdba",
+    "preparation.json": "9ad8a87fc2b042c0c9133636270b665777767c4c52637f946d4a91190fbe2d47",
+    "recognition.json": "e0481b3c4d5a46639d15562676a4a409eef6ebf68c3efcbad6ec51277af53b17",
+    "codec/00.png": "b07a084878af4216b324744630dc6cbfdc0d3409195d90fcc77827fceccb1d8b",
+    "codec/01.png": "391d36adbde9a54e7df4822104a726d2c9c0e328072eb60576ceda50412f3263",
+    "codec/02.png": "936263821463404f0fab8b2c46b7b9d5a5fb8d84c065793bea0d4d0159a36511",
+    "codec/03.png": "4684a83c473eafd36602b3008b315f8ff206adf7e00e94a38c22a3ae5cf66025",
+    "codec/04.png": "56ca55cbe20564953f1e5d2bb84ac0eea9680689f17a86f03fb7b23f644efdde",
+    "codec/05.png": "0c05609351c0d25b39eedcf944280f0784638da9c68e548678f3ed032b6ca24b",
+    "codec/06.png": "f71323f0390189d3192467fa82bf013e6770bbd5c45ca3f3006d913985edbf85",
+    "codec/07.png": "8577c425060e9464362acb1b3d2d4efd9772f60a5ef07905ee2d78de50fa7ec6",
+    "codec/08.png": "dd9816561e495958ba4dc4168fd82dffbc217d9ab70cac84c872ca457e9e8b9e",
+    "codec/09.png": "31923e3fa522a8b00d951d11b7b4d478801c9d69a297b1b875a53933db69550c",
+    "codec/10.png": "cc1efd4230c38dba133bef59738df8140bcc43eaae706e502dfc406126f27cfe",
+    "codec/11.png": "ccc53394cba41811d5dbdcce7ffb8ad811e2989a4017a5ce0296f5e86d4ff242",
+    "codec/12.png": "4c8eb3c3c432e074741c976abb6980627368d122d7783b88271a097df57c53bc",
+    "codec/13.png": "32c3c597bf7eacee15e73128b6379791b947a6779dfc705ebe474ec9f0c51ca5",
+    "codec/14.png": "c5f020e31ddeff1de78cde950e06c3374dc42a41ac2ba5e4f668bfc57e2bf891",
+    "codec/15.png": "3c5996bcaa312b40267552b0edca8b898dc8f71a9e7b6815e56a8f5fd9f3fb67",
+    "codec/16.png": "e0f5f0ba4adbf7d86736b20ed6c868a859faf40c7e1d01b4269f68bc3b651c65",
+    "codec/17.png": "ad0dec91ae943688e230135f397bbae3c3ef85d36238722bbbb690c98f325bbe",
+    "codec/18.png": "3935b5653fceebbaf87f5bbc692ee51b67e5acf327e8a2ce5d611b01ab640f88",
+    "codec/19.png": "d822f0c399aa59b0bf0527021100511604ca2baf5e9e067eada90c7c8df099b0",
+    "codec/20.png": "c1921387362db82fc63ad32df152ad4d550ed3094e56b0c2dc4c56c7f4930b83",
+    "codec/21.png": "72539e50518166767c7755f986e1090c3797ac85772a5803118c9bdfccce78fc",
+    "codec/22.png": "e1b23bb738ccab47356dc3a0b1224f349eba3543ccc08ab25be26bbd62ed8f04",
+    "codec/23.png": "11ed1a0522273889266dba776b771858cbdd40dec109a63b4b07597c608a8c2a",
+    "codec/24.png": "bab15a656150fa3e5294b6af909dbd6abe90d244d787b91c9134775c9348711d",
+    "codec/25.png": "c1d383e5b0019f559e7c47d069e34896d709e0cd916ebbfc10b15c6d3f7ae889",
+    "codec/26.png": "db710d63064831a9e6e61130313cf10b100125286ef480f0dd66c72ebca57b1c",
+    "codec/27.png": "44609123cb117ca9bf08da2addb097f813e848657d93748d2843958e721e0196",
+    "codec/28.png": "9da861726f0ba53e779048cd4d6a17d2c3b87ac5a36baadf121bde909348746e",
+    "codec/29.png": "2a1540e5a5a221b226da3ec4c9e6717842c51e9b5afcac6559d9f5847f0aa096",
+    "codec/30.png": "23b69ddf633ff0b91928a63942a1541c98c3d79c830c447bc607e5a29791aadf",
+    "codec/31.png": "0a48e991e921e805b9e61300dd5afb2b65a4f6cf8c0279dd4135d6c3c6a91483",
+    "codec/report.json": "a9946ed767731c777bab7564dd9985560d4c633c6bde0a69cbf946e7be5f7b54",
+    "codec/recognition.json": "935245bb1f245903819f52ad91f413d3e7a5d20dec53a8f2777626cf83f10188",
+    "implementation/probe_native_unadapted_reader.py": "298191f10760d2a3ecac8709727ec9d98737a983b237a7f7210c9bd35e0b4413",
+    "implementation/check_native_reader_geometry.py": "22fa6f457585eac6e074e867f83bfcc5c53671792d468d7b14331f69770e9c96",
+    "implementation/score_native_reader_geometry.py": "cbe94abdae83b9559d195b7adc3b6102e2b3355b51e262e1b089808c4ae8bc4f"
+  },
+  "source_readability": {
+    "cases": 32,
+    "exact": 10,
+    "character_edit_error": 0.004206730769230769
+  },
+  "codec_readability": {
+    "cases": 32,
+    "exact": 0,
+    "character_edit_error": 0.006209935897435897
+  },
+  "original_input_evidence": "../native_english_transfer_result/result.json",
+  "original_input_result_sha256": "586ecde5c9eff1cb686d155f2737095a3504d9a72e1533095412134f54daaee4",
+  "original_references_sha256": "fc93a675f245cf654f5b2cd9020889cdf4cce20a19e8fac6a7a59ee9f10353a5",
+  "source_model_sha256": "58870f9d31bf6be71113301c3402a506938e963b9bd6da7f78aadae6ce812852",
+  "implementation_sha256": "cbe94abdae83b9559d195b7adc3b6102e2b3355b51e262e1b089808c4ae8bc4f",
+  "calls_per_model": 80,
+  "model_calls": 320,
+  "same_cases_and_matched_seeds": true,
+  "full_square_pixels_resized": true,
+  "content_cropped": false,
+  "cases_filtered_using_ocr": false,
+  "optimizer_updates_in_diagnostic": 0,
+  "official_benchmark_replication": false,
+  "unique_failure_cause_proved": false,
+  "auxiliary_unicode_head": true,
+  "image_answer_generation_demonstrated": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false,
+  "copyright": "SQuAD 1.1, Rajpurkar et al., EMNLP 2016; CC-BY-SA-4.0."
+}

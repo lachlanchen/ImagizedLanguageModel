@@ -706,6 +706,23 @@ contains 2.839B parameters plus a 126.893M codec. These are auxiliary text-head
 measurements, with no trained image-answer result. Improved short-string
 reading therefore coexists with failed question-dependent answer selection.
 
+The subsequent full-page curriculum and geometry intervention refine this
+interpretation (Supplementary Note 42 and Fig.~S19). Another 2,560 updates
+raise exact copying to 29/32, but Chinese and English natural QA remain 0/32
+at the original geometry. Full transcription improves on four short copying
+pages and fails on all four complete Chinese QA pages. The source interface
+had extended the official 432-square reading configuration to 1024-square
+pages with interpolated spatial positions. Resizing the same whole English
+pages to 432 recovers 11/32 exact stopped answers from the frozen source,
+versus 0/32 at 1024, without optimization. Nine of these eleven correct
+answers disappear when the passage is erased; two remain correct without it.
+Both learned adapter checkpoints reach only 5/32 at 432. All eighty calls per
+condition retain the same questions, references, seeds and decoding. The
+pixel/position change is joint, so the particular geometric mechanism remains
+unresolved. This recovers inherited source reading capability, while rejecting
+the existing adaptation as a demonstrated repair. Direct image answers and
+useful independent image-language learning remain unachieved.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

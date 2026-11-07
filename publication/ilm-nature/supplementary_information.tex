@@ -2461,6 +2461,125 @@ order, PNG bytes and aspect ratios are preserved; all observations remain
 available.}{fig:s18-visual-access}
 
 \clearpage
+\section*{Supplementary Note 42: dense supervision and native image geometry}
+The completed curriculum extends the adapters in Note 41 by 2,560 updates,
+with the same 384 training images and all 64 held-out images excluded.
+The first 1,024 updates supervise complete-page transcription; the remaining
+1,536 cycle transcription, QA and requested-only copying. Totals are 1,536
+transcription updates (four passes), 512 QA updates (two passes) and 512
+copying updates (four passes). Every optimizer record is present and finite,
+and exact per-ID coverage follows the saved schedule. The 8,489,984 learned
+visual/fusion parameters and frozen source components are unchanged. This
+invocation takes 1,946.753\,s with 7.072\,GiB peak allocated VRAM on one
+RTX 4090 D, excluding source pretraining and separate assessments.
+
+Complete requested copying improves from 27/32 to 29/32 exact stopped answers
+(Chinese 13/16, English 16/16), still below the declared 30/32 requirement.
+Chinese natural QA remains 0/32; outputs are twenty instances of
+\texttt{1998} followed by the Chinese year marker and twelve of \texttt{1990}
+with that marker. No paired questions are both correct. Erasing the question
+leaves 30/32 normal responses unchanged. The independent eight-page
+transcription screen improves from 0/4 to 4/4 exact complete short copying
+pages, with aggregate Levenshtein character error falling from 0.603 to zero.
+The four full Chinese QA-page transcripts remain 0/4 exact; error increases
+from 0.999 to 1.734, with two reaching the 1,024-decision cap. Insertions can
+make this error exceed one. Unrelated repeated paragraphs do not constitute
+transcription of the source pages. No matched continuation arm isolates the
+curriculum from ordinary continued optimization.
+
+\paragraph{Prospective English transfer.}
+Sixteen SQuAD 1.1 articles\cite{squad} supply two fixed questions each, with
+all annotated alternatives and verified answer offsets retained. Whole
+passages and questions are rendered in 32-pixel type on 1024-square pages.
+Each model receives all 32 normal pages, 32 passage-erased pages and sixteen
+shared question-erased pages. No English passage enters the optimizer.
+All conditions for a passage share latent/readout seeds. Original source-page
+OCR is exact on 22/32 pages, with aggregate character error 0.001522; primary
+reference images are 31/32 OCR-exact. OCR is offline calibration only.
+Both completed adapter checkpoints answer 0/32 normal questions correctly.
+They produce unrelated Chinese years rather than the requested English facts.
+Their paired-question scores are both 0/16. These public development cases
+may occur in foundation pretraining; this is not an official benchmark score
+or an uncontaminated foundation-model test. The source release is CC-BY-SA-4.0.
+
+\paragraph{An effective source-interface correction.}
+The same frozen HQ source also answers 0/32 of these questions at the original
+1024-square geometry, with only three normal outputs reaching EOS. The
+pinned official MMU configuration instead uses a whole-image bicubic resize
+and centre crop to 432 square. Since all eighty English inputs are square,
+resizing crops no content. The spatial sequence length changes from
+\[
+ P_s=(s/16)^2,\qquad P_{1024}=4096,\quad P_{432}=729.
+\]
+The image path changes from $R_A(E(X))$ to $R_A(E(T_{432}X))$, where
+$T_{432}$ resizes the complete image. Source pixels, latent features and
+spatial positions therefore change jointly. No answer-aware crop or supplied
+answer conditions inference. All source/transformed hashes, original
+references, per-passage seeds, generic instruction, BF16 body, FP32 codec
+and top-one 96-decision readout are fixed.
+
+Without new training or adapters, the source now gives 11/32 exact stopped
+normal answers, all 32 terminate, and 3/16 passage pairs have both answers
+correct. Fourteen normal pairs differ and question erasure changes 30/32
+outputs. Passage erasure leaves two answers correct; nine of the eleven
+correct normal answers become incorrect. Correctness lost without the passage
+supports passage dependence on those cases, whereas the two retained answers
+cannot establish use of it. Different outputs alone do not establish accuracy.
+The original 4,096-update adapters and final curriculum checkpoint each give
+only 5/32 exact answers at 432, with 1/16 both-correct pairs. They are weaker
+than the unadapted source in this intervention, not a validated repair.
+
+Resized normal-page OCR has 0.004207 character error, with 10/32 complete
+pages exact; sampled FP32 native-codec reconstructions have 0.006210 error
+and 0/32 complete pages exact. No recognition result filters cases or enters
+model conditioning. The source's eighty calls take 131.576\,s at 1024 and
+14.872\,s at 432, excluding loading, with 11.129 and 6.738\,GiB peak
+allocated VRAM. These are costs of the specific interface intervention, not
+LLM parity or efficiency at matched useful language quality.
+
+\paragraph{Scope and evidence.}
+The intervention identifies a substantial interface effect on this fixed
+English cohort; it does not isolate spatial interpolation, image scale or
+sequence length as the unique mechanism. It does not establish native-scale
+Chinese transfer or explain every earlier image-writer failure. All original
+failed outcomes remain unchanged. Source and adapter readouts use an auxiliary
+Unicode head, not generated answer images. Complete model and codec counts
+and inherited external pretraining remain as specified in Note 41.
+
+Three exports bind 13, 121 and 128 files, respectively:
+\begin{quote}\footnotesize
+\path{references/evidence/native_visual_alignment_result/}\\
+\path{references/evidence/native_english_transfer_result/}\\
+\path{references/evidence/native_reader_geometry_result/}
+\end{quote}
+They retain the complete optimizer schedule/journal,
+all transcription, QA and control responses, full English source/reference
+images, all eighty resized images and 32 codec reconstructions. Original
+source PNGs are reused by explicit hashes. The completed curriculum state is
+identified by checkpoint SHA256:
+\begin{quote}\footnotesize\ttfamily
+016429ec5454cdd681693d881df4c6b7d52fb43dcae7b9e15857d2d9cd32b483
+\end{quote}
+These observations require calibration
+of the source image interface before another learning run; they do not
+qualify the independent image-input/image-output ILM goal.
+
+\noindent\begin{minipage}{\textwidth}\centering\includegraphics[width=\textwidth]{figures/Figure_S19_reader_geometry.pdf}\captionof{figure}{\textbf{Native image geometry recovers
+source reading, while learned adapters remain weaker.} \textbf{a}, Complete
+requested copying and Chinese QA at the original geometry before and after
+the dense curriculum. \textbf{b}, Exact stopped English answers on the same
+32 questions for frozen-source 1024, frozen-source 432 and the two completed
+adapter states at 432. \textbf{c}, Complete first English page at both input
+scales, shown at matched display size; full original canvases and PNG bytes
+are embedded without cropping. This comparison documents the geometric
+intervention rather than two independent samples. \textbf{d}, The first four
+native-source text answers and their primary references, retained in fixed
+order. Exact assessment accepts any annotated alternative and requires EOS;
+extra wording and capitalization remain significant. These are auxiliary
+text readouts, not answer images written by the learner. All 320 model calls
+and failed answers remain available.}\label{fig:s19-reader-geometry}\end{minipage}
+
+\clearpage
 \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2652,6 +2771,20 @@ and matched question interventions use
 runtime, exact commands and the remaining image-writing requirement are in
 \path{docs/native-visual-access.md} and
 \path{references/native_visual_access_assessment_protocol.md}.
+
+The full-page curriculum in Note 42 uses
+\path{scripts/prepare_native_visual_alignment.py},
+\path{scripts/train_native_visual_alignment.py} and
+\path{scripts/score_native_visual_alignment.py}. Prospective English pages and
+source readability checks use \path{scripts/prepare_native_english_transfer.py}
+and \path{scripts/score_native_english_transfer.py}. The geometry intervention
+uses \path{scripts/check_native_reader_geometry.py},
+\path{scripts/probe_native_unadapted_reader.py} and
+\path{scripts/score_native_reader_geometry.py}. All inference indexes exclude
+answer strings. Exact commands, fresh output paths and sequential GPU stages
+are specified in \path{docs/native-visual-alignment.md},
+\path{docs/native-english-transfer.md} and
+\path{references/native_reader_geometry_result.md}.
 
 \input{references_main.tex}
 \end{document}
