@@ -1,0 +1,202 @@
+{
+  "cases": 4,
+  "native_readout_calls": 8,
+  "all_exact": true,
+  "checks": [
+    {
+      "id": "squad/57280f0d3acd2414000df35b",
+      "input_sha256": "025aaa9e1fb4aa71c735c9441b8e0cdc4babf80a6d006f9d53a2ada33c60897b",
+      "prefix_error": 0.0,
+      "mask_bit_exact": true,
+      "native_source_ids": [
+        785,
+        829,
+        315,
+        279,
+        1156,
+        18635,
+        10479,
+        6146,
+        374,
+        1527,
+        1230,
+        27541,
+        398,
+        9391,
+        13,
+        151645
+      ],
+      "window_ids": [
+        785,
+        829,
+        315,
+        279,
+        1156,
+        18635,
+        10479,
+        6146,
+        374,
+        1527,
+        1230,
+        27541,
+        398,
+        9391,
+        13,
+        151645
+      ],
+      "retained_source_ids_exact": true,
+      "geometry": {
+        "grid": [
+          27,
+          27
+        ],
+        "window": [
+          27,
+          27
+        ],
+        "rows": [
+          0
+        ],
+        "columns": [
+          0
+        ],
+        "semantic_windows": 1,
+        "output_visual_positions": 729,
+        "patches_dropped": 0,
+        "averaging": "uniform FP32 sum and coverage, then cast to source dtype"
+      }
+    },
+    {
+      "id": "squad/57280f0d3acd2414000df35c",
+      "input_sha256": "c917819fc6ba83510021dce38d2cc642e308fb952d5c23893e0be08a4eb1eccc",
+      "prefix_error": 0.0,
+      "mask_bit_exact": true,
+      "native_source_ids": [
+        50,
+        2034,
+        1093,
+        43923,
+        22310,
+        151645
+      ],
+      "window_ids": [
+        50,
+        2034,
+        1093,
+        43923,
+        22310,
+        151645
+      ],
+      "retained_source_ids_exact": true,
+      "geometry": {
+        "grid": [
+          27,
+          27
+        ],
+        "window": [
+          27,
+          27
+        ],
+        "rows": [
+          0
+        ],
+        "columns": [
+          0
+        ],
+        "semantic_windows": 1,
+        "output_visual_positions": 729,
+        "patches_dropped": 0,
+        "averaging": "uniform FP32 sum and coverage, then cast to source dtype"
+      }
+    },
+    {
+      "id": "squad/5727500f708984140094dbfd",
+      "input_sha256": "27e02e1618e319b806f7d5a20fb65122bdbac2280e9a2912a114e396c907d849",
+      "prefix_error": 0.0,
+      "mask_bit_exact": true,
+      "native_source_ids": [
+        22,
+        13,
+        20,
+        4,
+        151645
+      ],
+      "window_ids": [
+        22,
+        13,
+        20,
+        4,
+        151645
+      ],
+      "retained_source_ids_exact": true,
+      "geometry": {
+        "grid": [
+          27,
+          27
+        ],
+        "window": [
+          27,
+          27
+        ],
+        "rows": [
+          0
+        ],
+        "columns": [
+          0
+        ],
+        "semantic_windows": 1,
+        "output_visual_positions": 729,
+        "patches_dropped": 0,
+        "averaging": "uniform FP32 sum and coverage, then cast to source dtype"
+      }
+    },
+    {
+      "id": "squad/5727500f708984140094dbfe",
+      "input_sha256": "8dc0483210d88beae0aac3c8afceb2c521dbb03f4a17bb0695f5d2d66984dc32",
+      "prefix_error": 0.0,
+      "mask_bit_exact": true,
+      "native_source_ids": [
+        18,
+        17,
+        4,
+        151645
+      ],
+      "window_ids": [
+        18,
+        17,
+        4,
+        151645
+      ],
+      "retained_source_ids_exact": true,
+      "geometry": {
+        "grid": [
+          27,
+          27
+        ],
+        "window": [
+          27,
+          27
+        ],
+        "rows": [
+          0
+        ],
+        "columns": [
+          0
+        ],
+        "semantic_windows": 1,
+        "output_visual_positions": 729,
+        "patches_dropped": 0,
+        "averaging": "uniform FP32 sum and coverage, then cast to source dtype"
+      }
+    }
+  ],
+  "implementation": {
+    "scripts/probe_native_window_reader.py": "bf5127fceb52cbfb579903e3a1523562328a4e31dae76aa4900931b8865a5805",
+    "ilm/native_unified/windowed.py": "581d17feac51e902718bfb0f8047ad28704f3f58f1b5d352554aaf044bc2ec91",
+    "ilm/native_unified/showo2_source.py": "9a84bad9d5575937372470ea72b95d2093c1d5fc75a4ca33c9861d5072ec8944",
+    "ilm/native_unified/reading.py": "8c3c8dad8e6273e968cec64b642378bcb790dd5b76fa640db1fcb67e91c3d53a"
+  },
+  "source_parameters_changed": false,
+  "independent_image_answers": false,
+  "general_ilm_goal_complete": false
+}

@@ -1,0 +1,44 @@
+{
+  "cases": 128,
+  "costs": {
+    "zh": {
+      "cases": 48,
+      "inputs_sha256": "ffdd4780f83465e945c2dc702ce18840b8f8ec9a346beb4ff7831634c8e091c4",
+      "elapsed_seconds": 64.03329498693347,
+      "peak_allocated_vram_gib": 13.733917713165283,
+      "includes_codec_reconstruction": true
+    },
+    "en": {
+      "cases": 80,
+      "inputs_sha256": "656e3a430d68f66c375f621d27764d4c7cdc2899eb895615e41ceb17cc685caa",
+      "elapsed_seconds": 101.66149181313813,
+      "peak_allocated_vram_gib": 11.129425525665283,
+      "includes_codec_reconstruction": false
+    }
+  },
+  "implementation": {
+    "scripts/probe_native_window_reader.py": "bf5127fceb52cbfb579903e3a1523562328a4e31dae76aa4900931b8865a5805",
+    "ilm/native_unified/windowed.py": "581d17feac51e902718bfb0f8047ad28704f3f58f1b5d352554aaf044bc2ec91",
+    "ilm/native_unified/showo2_source.py": "9a84bad9d5575937372470ea72b95d2093c1d5fc75a4ca33c9861d5072ec8944",
+    "ilm/native_unified/reading.py": "8c3c8dad8e6273e968cec64b642378bcb790dd5b76fa640db1fcb67e91c3d53a"
+  },
+  "preflight_sha256": "719f8dda768192c50b9c31bee73cdcf335389c0a958b7be5e63c855ed79d3507",
+  "source_counts": {
+    "native_model": 2830777056,
+    "language_body": 1543304192,
+    "vae": 126892531,
+    "parameters_requiring_grad": 0
+  },
+  "source_model_sha256": "58870f9d31bf6be71113301c3402a506938e963b9bd6da7f78aadae6ce812852",
+  "body_dtype": "bfloat16",
+  "codec_dtype": "float32",
+  "cap": 96,
+  "optimizer_updates": 0,
+  "parameters_added": 0,
+  "source_pixels_resized": false,
+  "source_context_pruned": false,
+  "auxiliary_unicode_head": true,
+  "reference_answers_loaded": false,
+  "image_answer_generation_demonstrated": false,
+  "general_ilm_goal_complete": false
+}

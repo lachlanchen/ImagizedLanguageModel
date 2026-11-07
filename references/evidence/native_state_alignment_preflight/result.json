@@ -1,0 +1,366 @@
+{
+  "files_sha256": {
+    "training_preparation.json": "c9029d3c4702e1ddafed24fa6a3cad4928c7a59403d760462b12b9311446bde9",
+    "english_selected.json": "3fb480d9ac3e91529d4728aa28d09d67d07fb09ca270b771b11061482abf54d2",
+    "cache_manifest.json": "6ed191ce5795674d3907500d04fcbb5d09579d4cc6bf2eb2fe9a69821adf3fc3",
+    "assessment_preparation.json": "b72176578d93228679dd6815b68e15d6e2ce54b03290b91b523af5ec5c3bb617",
+    "assessment_inputs.json": "e121b16bcec884b09a7ca2d72a59202dbdd51959f3277888e314454e99eb3b98",
+    "preflight_report.json": "258fcbe5a30e93a195477fe7f8809601c909f1ff9a6565d5e4ca1b14b1dfdb27",
+    "preflight_updates.jsonl": "9d586e237b9dfe5a53d616b5a2f23ef0df6919320186068d9c95ef1f0c02133d",
+    "copy_before_report.json": "65b1d1bb318348e82a752e31a667c5d3e393dc13f45115fc65e9650a13967073",
+    "copy_before_outputs.json": "8734f1ada163fabdd9e740e3c136e3ae8d9b740a8f3cfc834fe676e8210a838e"
+  },
+  "source_copy_baseline": {
+    "summary": {
+      "cases": 32,
+      "canonical_exact": 7,
+      "exact_stopped": 7,
+      "stopped": 32,
+      "mean_character_multiset_f1": 0.5617489802651113
+    },
+    "cases": [
+      {
+        "id": "copy/validation/000",
+        "expected": "树田红星风",
+        "text": "“对因此是风”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.16666666666666666,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/001",
+        "expected": "garden silver open blue",
+        "text": "'garden silver open blue'",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9583333333333334,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/002",
+        "expected": "语树石字光河画山雪羊",
+        "text": "“我将不再为朋友而战”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.0,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/003",
+        "expected": "green blue",
+        "text": "green blue",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/004",
+        "expected": "河日中风目",
+        "text": "“四月风里”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.18181818181818182,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/005",
+        "expected": "evening close",
+        "text": "\"evening close\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9285714285714286,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/006",
+        "expected": "光文友地月金土花",
+        "text": "\"光文说他想当\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.25,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/007",
+        "expected": "small mountain quiet",
+        "text": "small mountain quiet\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.975609756097561,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/008",
+        "expected": "土风土月文",
+        "text": "\"上阵父子兵\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.0,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/009",
+        "expected": "book silver",
+        "text": "book silver",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/010",
+        "expected": "红雨中友小长水秋河土",
+        "text": "\"江河中长小长成的上\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.38095238095238093,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/011",
+        "expected": "open small",
+        "text": "open small\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9523809523809523,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/012",
+        "expected": "石草云人大春火画高学月",
+        "text": "“五世以来大都督李明”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.09090909090909091,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/013",
+        "expected": "quiet small open quiet",
+        "text": "quiet small open quiet",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/014",
+        "expected": "冬青大水文白海江文",
+        "text": "”老牛大发工资”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.11764705882352941,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/015",
+        "expected": "close winter evening morning",
+        "text": "' close winter evening morning'",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9491525423728814,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/016",
+        "expected": "高上下朋下春心湖",
+        "text": "“上面打下落脚点”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.23529411764705882,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/017",
+        "expected": "silver window",
+        "text": "silver window",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/018",
+        "expected": "光绿月石书青鸟新西",
+        "text": "\"放兵石\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.14285714285714285,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/019",
+        "expected": "book close bright",
+        "text": "\"book close bright\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9444444444444444,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/020",
+        "expected": "新外语草手语冬月左",
+        "text": "“你做题手笔是否还”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.10526315789473684,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/021",
+        "expected": "book river",
+        "text": "book river",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/022",
+        "expected": "小雪手新风青木山早金",
+        "text": "“小李飞刀取小山羊”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.2,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/023",
+        "expected": "green spring small garden",
+        "text": "green spring small garden\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9803921568627451,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/024",
+        "expected": "长田火手江",
+        "text": "\"长风大义\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.18181818181818182,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/025",
+        "expected": "window cloud window spring",
+        "text": "\"window cloud window spring\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9629629629629629,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/026",
+        "expected": "风新云春早画田地",
+        "text": "\"风流无罪罪国何\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.11764705882352941,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/027",
+        "expected": "spring river open",
+        "text": "spring river open\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.9714285714285714,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/028",
+        "expected": "北牛少水雨",
+        "text": "\"让步为原\"",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.0,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/029",
+        "expected": "silver garden",
+        "text": "silver garden",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      },
+      {
+        "id": "copy/validation/030",
+        "expected": "左人手字鱼",
+        "text": "”七人平分”",
+        "stopped": true,
+        "canonical_exact": false,
+        "exact_stopped": false,
+        "character_multiset_f1": 0.18181818181818182,
+        "language": "zh"
+      },
+      {
+        "id": "copy/validation/031",
+        "expected": "cloud evening",
+        "text": "cloud evening",
+        "stopped": true,
+        "canonical_exact": true,
+        "exact_stopped": true,
+        "character_multiset_f1": 1.0,
+        "language": "en"
+      }
+    ]
+  },
+  "cache_examples_verified": 640,
+  "cache_elapsed_seconds": 238.7129833828658,
+  "real_preflight_updates": 3,
+  "finite_nonzero_gradients_on_third_update": 317,
+  "trainable_parameters": 10849280,
+  "complete_model_parameters": 2841626336,
+  "causal_history_control": {
+    "normalized_max_error": 7.62939453125e-06,
+    "tolerance": 2e-05,
+    "dtype": "float32",
+    "future_answer_attention_blocked": true
+  },
+  "disabled_source_prefix_error": 0,
+  "initially_zero_tensors_changed": 159,
+  "first_four_native_readouts_replayed": true,
+  "four_case_corrected_path_replay_pending": true,
+  "preflight_scope_deviation_recorded": true,
+  "completed_language_learning_result": false,
+  "autonomous_image_answers_demonstrated": false,
+  "general_ilm_goal_complete": false,
+  "exporter_sha256": "c7924e5730d4af545bccffa32b1d7bb217d3a7aced8b8cc528f2191f9fba51b3",
+  "copyright": "CMRC 2018 and SQuAD 1.1: CC-BY-SA-4.0, Cui et al. 2019 and Rajpurkar et al. 2016."
+}

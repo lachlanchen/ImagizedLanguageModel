@@ -44,6 +44,24 @@ Local checksums verify copying; cloud propagation is not independently verified.
 
 ![Completed curriculum, geometry intervention, complete input pages and first four auxiliary source answers](figures/Figure_S19_reader_geometry.png)
 
+## Follow-up reader learning
+
+The subsequent [Chinese modality control](../../references/native_chinese_interface_result.md)
+gives 0/32 exact image-input answers at both scales, versus 16/32 from the
+original text. [Native-window feature controls](../../references/native_window_reader_result.md)
+preserve high-resolution codec readability but do not repair natural QA.
+Their complete responses and source-equivalence controls remain available.
+
+The new [bilingual state-alignment experiment](../../docs/native-state-alignment.md)
+learns a zero-initialized high-resolution correction to the unchanged native
+reader. Its 640 offline text-state targets, three real preflight updates and
+32-case source copying baseline are complete; the 2,560-update main run is
+active. The protocol records the additional corrected-path replay that must
+precede final qualification. No completed learning-quality or image-answer
+result is claimed. A bounded manuscript revision will incorporate the complete
+before/after assessment once that observation is terminal; the current
+compiled article retains Note 42 as its latest completed revision.
+
 ## Earlier paired copying
 
 The completed [native paired-copying comparison](../../references/paired_padding_result.md)
