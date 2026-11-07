@@ -1,0 +1,144 @@
+{
+  "stage": "before",
+  "cohorts": {
+    "transcription_before": {
+      "cases": [
+        {
+          "id": "copy/validation/000",
+          "task": "copy",
+          "language": "zh",
+          "expected": "请只抄写引号内的内容：\n“树田红星风”",
+          "text": "树田红星风",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 13,
+          "reference_characters": 18,
+          "character_edit_error": 0.7222222222222222
+        },
+        {
+          "id": "copy/validation/001",
+          "task": "copy",
+          "language": "en",
+          "expected": "Copy only the text in quotation marks:\n\"garden silver open blue\"",
+          "text": "garden silver open blue",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 41,
+          "reference_characters": 64,
+          "character_edit_error": 0.640625
+        },
+        {
+          "id": "copy/validation/002",
+          "task": "copy",
+          "language": "zh",
+          "expected": "请只抄写引号内的内容：\n“语树石字光河画山雪羊”",
+          "text": "语树比云东青的印第",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 21,
+          "reference_characters": 23,
+          "character_edit_error": 0.9130434782608695
+        },
+        {
+          "id": "copy/validation/003",
+          "task": "copy",
+          "language": "en",
+          "expected": "Copy only the text in quotation marks:\n\"green blue\"",
+          "text": "Copy the text in the image: green blue",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 19,
+          "reference_characters": 51,
+          "character_edit_error": 0.37254901960784315
+        },
+        {
+          "id": "TRAIN_2295_QUERY_0",
+          "task": "qa",
+          "language": "zh",
+          "expected": "资料：四线天竺鲷（学名：），为辐鳍鱼纲鲈形目鲈亚目天竺鲷科天竺鲷属的一种。本鱼分布于印度西太平洋区，包括马达加斯加、留尼旺、塞席尔群岛、斯里兰卡、台湾、泰国、越南、印度、日本、马来西亚、印度尼西亚、菲律宾以及中国南海及东海、澳洲、斐济等海域。该物种的模式产地在印度Pondicherry。水深0至80公尺。本鱼体延长而侧扁，眼大，口大略下位。鱼体黄褐色，腹部银白色，体侧具4条深色细纵带，其中一条从吻部穿过眼睛延伸至尾鳍底。背鳍硬棘8枚；背鳍软条9枚；臀鳍硬棘2枚；臀鳍软条8枚，体长可达13公分。本鱼栖息于珊瑚礁或岩礁区，白天躲藏于岩架下或岩洞中，夜间出来觅食。繁殖期时，雄鱼具有口孵习性，卵约7日化成仔鱼，由雄鱼吐出，具短暂的仔鱼飘浮期。不具经济价值。\n问题：四线天竺鲷一般分布在什么地方？\n回答：",
+          "text": "gōngfēi",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 348,
+          "reference_characters": 349,
+          "character_edit_error": 0.997134670487106
+        },
+        {
+          "id": "TRAIN_2295_QUERY_1",
+          "task": "qa",
+          "language": "zh",
+          "expected": "资料：四线天竺鲷（学名：），为辐鳍鱼纲鲈形目鲈亚目天竺鲷科天竺鲷属的一种。本鱼分布于印度西太平洋区，包括马达加斯加、留尼旺、塞席尔群岛、斯里兰卡、台湾、泰国、越南、印度、日本、马来西亚、印度尼西亚、菲律宾以及中国南海及东海、澳洲、斐济等海域。该物种的模式产地在印度Pondicherry。水深0至80公尺。本鱼体延长而侧扁，眼大，口大略下位。鱼体黄褐色，腹部银白色，体侧具4条深色细纵带，其中一条从吻部穿过眼睛延伸至尾鳍底。背鳍硬棘8枚；背鳍软条9枚；臀鳍硬棘2枚；臀鳍软条8枚，体长可达13公分。本鱼栖息于珊瑚礁或岩礁区，白天躲藏于岩架下或岩洞中，夜间出来觅食。繁殖期时，雄鱼具有口孵习性，卵约7日化成仔鱼，由雄鱼吐出，具短暂的仔鱼飘浮期。不具经济价值。\n问题：四线天竺鲷的模式产地是哪里？\n回答：",
+          "text": "gōngfēi",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 347,
+          "reference_characters": 348,
+          "character_edit_error": 0.9971264367816092
+        },
+        {
+          "id": "TRAIN_1313_QUERY_1",
+          "task": "qa",
+          "language": "zh",
+          "expected": "资料：水力资源，是由水流体含有的能量天然资源，转化为人类利用的能源，例如水力发电。自古以来，人类就使用各种形式的水车等工具利用水利资源里的可再生能源，进行农田灌溉和各种机械装置的操作，例如面粉厂，锯木厂，织布，码头起重机，升降机和矿石磨等。从19世纪末期开始，人类开始建造水电站利用水利资源发电。在诺森伯兰郡的克拉格塞德是第一个住宅于1878年以水力发电供电，而第一个商用水力发电厂在尼亚加拉大瀑布于1879年建成。在1881年，在尼亚加拉瀑布城的路灯是由水力发电供电。自20世纪初，水力资源这个术语已被用于几乎完全结合水力发电的现代化发展。国际机构例如世界银行检视水电作为促进经济发展的手段而无需添加大量的碳到大气中，但在某些情况下有大坝的环境问题。水力资源的水能蕴藏在河流的水位落差和流量，其数值成正比例。单位数为电力常用的千瓦或马力。此外，自然的水力资源还有来自潮汐和海浪的流体力学。现时，人类十分依赖非再生能源，所以水力资源多数有待开发。\n问题：古时候人们利用水力资源做什么？\n回答：",
+          "text": "gōngfēi",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 444,
+          "reference_characters": 444,
+          "character_edit_error": 1.0
+        },
+        {
+          "id": "TRAIN_1313_QUERY_2",
+          "task": "qa",
+          "language": "zh",
+          "expected": "资料：水力资源，是由水流体含有的能量天然资源，转化为人类利用的能源，例如水力发电。自古以来，人类就使用各种形式的水车等工具利用水利资源里的可再生能源，进行农田灌溉和各种机械装置的操作，例如面粉厂，锯木厂，织布，码头起重机，升降机和矿石磨等。从19世纪末期开始，人类开始建造水电站利用水利资源发电。在诺森伯兰郡的克拉格塞德是第一个住宅于1878年以水力发电供电，而第一个商用水力发电厂在尼亚加拉大瀑布于1879年建成。在1881年，在尼亚加拉瀑布城的路灯是由水力发电供电。自20世纪初，水力资源这个术语已被用于几乎完全结合水力发电的现代化发展。国际机构例如世界银行检视水电作为促进经济发展的手段而无需添加大量的碳到大气中，但在某些情况下有大坝的环境问题。水力资源的水能蕴藏在河流的水位落差和流量，其数值成正比例。单位数为电力常用的千瓦或马力。此外，自然的水力资源还有来自潮汐和海浪的流体力学。现时，人类十分依赖非再生能源，所以水力资源多数有待开发。\n问题：人们是从什么时候开始利用水力资源发电的？\n回答：",
+          "text": "gōngfēi",
+          "stopped": true,
+          "canonical_exact": false,
+          "exact_stopped": false,
+          "edit_errors": 449,
+          "reference_characters": 449,
+          "character_edit_error": 1.0
+        }
+      ],
+      "groups": {
+        "copy": {
+          "cases": 4,
+          "exact_stopped": 0,
+          "stopped": 4,
+          "aggregate_character_edit_error": 0.6025641025641025
+        },
+        "qa": {
+          "cases": 4,
+          "exact_stopped": 0,
+          "stopped": 4,
+          "aggregate_character_edit_error": 0.9987421383647799
+        }
+      }
+    }
+  },
+  "training": null,
+  "files_sha256": {
+    "reports/transcription_before_outputs.json": "abcd4468738f8e4e36f8baf8912eea6294ad53b82c413f9a6c8af4f637698fd4",
+    "reports/transcription_before_report.json": "a4f9d3bdbde28790c0b8d7dbcead582fa89e291185fa3624dd56de07e0092bae",
+    "reports/preparation.json": "e6ecd2f9ea0b2656a7a974249d19ddecda3ea499fded512bacb92795fb43e913",
+    "reports/transcription_references.json": "1277457ac61fde328143b40e626080f0c69c644e58987a02930e0fee40a501f2"
+  },
+  "scorer_sha256": "c3b661e555802718c904fefd4a6fe762a2f9cb9527fae2434525f244956a629c",
+  "reused_input_raster_evidence": "references/evidence/native_visual_access_result/validation/ and erased/; source pages are unchanged",
+  "input_raster_source_result_sha256": "e6017877e17e4a8bf54e5a53a6143c19f4828a8c4a7f558de42e9d2469a010d0",
+  "character_error": "Levenshtein distance divided by reference characters after NFC/declared whitespace canonicalization; insertion errors can exceed one. Order-sensitive, without case/punctuation/quote repair.",
+  "matched_continuation_arm_executed": false,
+  "auxiliary_unicode_head": true,
+  "image_answer_generation_demonstrated": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false,
+  "copyright": "CMRC 2018 passage text/images: CC-BY-SA-4.0, Cui et al., EMNLP-IJCNLP 2019; copy strings synthetic; native source/model NUS Show Lab, Apache-2.0."
+}

@@ -48,6 +48,7 @@ env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. 
 env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. "$ILM_NATIVE_PYTHON" scripts/train_native_visual_alignment.py --stage evaluate --mode transcribe --inputs artifacts/native_visual_alignment/prepared_v1/transcription_screen_inputs.json --checkpoint artifacts/native_visual_alignment/learning_v1/checkpoint.pt --output artifacts/native_visual_alignment/transcription_after_v1
 env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. "$ILM_NATIVE_PYTHON" scripts/train_native_visual_alignment.py --stage evaluate --inputs artifacts/native_visual_access/full_validation_inputs.json --checkpoint artifacts/native_visual_alignment/learning_v1/checkpoint.pt --output artifacts/native_visual_alignment/full_validation_v1
 env CUDA_VISIBLE_DEVICES=0 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. "$ILM_NATIVE_PYTHON" scripts/train_native_visual_alignment.py --stage evaluate --inputs artifacts/native_visual_access/question_controls_v1/inputs.json --checkpoint artifacts/native_visual_alignment/learning_v1/checkpoint.pt --output artifacts/native_visual_alignment/question_readout_v1
+env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/score_native_visual_alignment.py --stage complete --output references/evidence/native_visual_alignment_result
 ```
 
 The three-update preflight first reproduces all twelve predecessor readouts,
@@ -76,3 +77,23 @@ both-correct question pairs and the erased-question controls. Even accurate
 transcription does not establish image-answer generation. The current
 [manuscript](../publication/ilm-nature/README.md) retains the completed failed
 experiment; this new experiment has no completed learning result yet.
+
+The completed before-transcription control gives 0/8 exact full transcripts.
+Aggregate character edit error is 0.603 on the four copy pages and 0.999 on
+the four QA pages. Copy-page transcription includes the complete visible
+instruction and quoted content, so it differs from requested-only copying.
+All four QA-page readouts collapse to `gōngfēi`. These immutable observations
+measure the starting point, not a curriculum improvement. Before/after
+transcription assessment uses order-sensitive Levenshtein error, with no case,
+punctuation or quotation repair. Raw responses remain in the evidence.
+
+The scorer authenticates all source evidence, the complete 2,560-update
+journal and exact per-ID curriculum coverage. It keeps the full QA and
+48-call question controls separate from transcription, reuses the existing
+unmodified public input rasters and retains every new response/report. It
+refuses incomplete optimizer schedules or assessments. To preserve only the
+completed starting control before the learner finishes:
+
+```bash
+env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/score_native_visual_alignment.py --stage before --output references/evidence/native_visual_alignment_before
+```
