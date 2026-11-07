@@ -77,6 +77,17 @@ requires these eight native calls to reproduce the controller's answer pixels
 and selected events exactly. Those deployment checks are pending until the
 training controller has finished and released GPU0.
 
+`scripts/complete_contextual_pixel_comparison.py` can wait for an already
+running controller and chain these checks after its actual process exit.
+Pass the comparison root, its verified controller PID and a fresh work
+directory. The supervisor records the PID's start time, binds the source
+hashes and checks host/GPU resources before launching each standalone call.
+It keeps one child at a time, preserves failed logs/partial outputs and saves
+the independent export inside its work directory. While waiting it uses only
+the Python standard library. Stopping it terminates only its own child, never
+the original training controller. The verified export still requires review
+before publication or any language-quality claim.
+
 The original component requirements remain 30/32 new copies, 48/64 normal
 answers, 20/32 both-correct pairs and a 25-point question-erasure gap. Passing
 them would qualify this prepared-strip extraction component only. It would
