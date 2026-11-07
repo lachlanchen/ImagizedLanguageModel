@@ -74,9 +74,11 @@ Evaluation loads fresh images and numeric model state, without training labels,
 answer histories or a teacher service. The text head remains a diagnostic.
 Report all raw responses, exact stopped copying, natural QA correctness,
 both-correct question pairs and the erased-question controls. Even accurate
-transcription does not establish image-answer generation. The current
-[manuscript](../publication/ilm-nature/README.md) retains the completed failed
-experiment; this new experiment has no completed learning result yet.
+transcription does not establish image-answer generation. The completed [result](../references/native_visual_alignment_result.md) gives
+29/32 exact requested-only copies, 0/32 Chinese QA and 0/32 English QA.
+The four short full-page transcripts become exact, while the four complete
+Chinese QA transcripts remain incorrect (aggregate character error 1.734).
+The complete optimizer, all responses and failures remain in the evidence.
 
 The completed before-transcription control gives 0/8 exact full transcripts.
 Aggregate character edit error is 0.603 on the four copy pages and 0.999 on
@@ -99,6 +101,9 @@ env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/score_native_visual_alignm
 ```
 
 A separate [prospective English transfer check](native-english-transfer.md)
-is prepared while this learner runs. It adds question- and passage-erasure
-controls without changing training or replacing any registered assessment.
-Its GPU calls must wait until this controller and its assessments are terminal.
+completed after this learner and all registered assessments were terminal.
+It adds question- and passage-erasure controls without changing training or
+replacing any assessment. Both models fail all 32 English questions at the
+original 1024-square geometry. A separate
+[native-resolution diagnostic](../references/native_reader_geometry_result.md)
+tests that source interface without changing these completed observations.

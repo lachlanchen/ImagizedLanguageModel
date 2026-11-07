@@ -23,6 +23,11 @@ ILM investiga cómo aprender y generar lenguaje como **escritura visible**: de
 imagen a estado visual continuo y de nuevo a imagen, sin un canal simbólico
 oculto.
 
+
+La última comprobación de la interfaz recupera 11/32 respuestas exactas en inglés del modelo preentrenado congelado al redimensionar las mismas páginas de 1024 a 432, frente a 0/32 en el tamaño original. Los dos adaptadores entrenados logran solo 5/32 cada uno a 432. Aún no hay un ILM independiente que genere respuestas como imágenes.
+
+[2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
+
 ## Evidencia actual: V35 cierra el bucle ráster, pero falla la vinculación semántica
 
 ![Resultado medido de V35: el modelo ráster completo de entrada y salida produce trazos sensibles al prompt, pero falla en copia y vinculación de instrucciones](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

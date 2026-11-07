@@ -23,6 +23,11 @@ ILM étudie l'apprentissage et la génération du langage comme **écriture
 visible** : de l'image vers un état visuel continu, puis de nouveau vers
 l'image, sans canal symbolique caché.
 
+
+Le dernier contrôle de l’interface donne 11/32 réponses anglaises exactes avec le modèle préentraîné gelé après redimensionnement des mêmes pages de 1024 à 432, contre 0/32 au format initial. Les deux adaptateurs entraînés obtiennent seulement 5/32 chacun à 432. Un ILM indépendant générant ses réponses en images reste à démontrer.
+
+[2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
+
 ## État actuel : V35 ferme la boucle raster mais échoue à lier le sens
 
 ![Résultat mesuré de V35 : le modèle raster entrée-sortie complet produit des marques sensibles à l'instruction, mais échoue en copie et en liaison sémantique](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

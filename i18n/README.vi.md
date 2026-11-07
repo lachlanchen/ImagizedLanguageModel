@@ -23,6 +23,11 @@ ILM nghiên cứu cách học và sinh ngôn ngữ dưới dạng **chữ viết
 từ ảnh sang trạng thái thị giác liên tục rồi trở lại ảnh, không có kênh ký hiệu
 ẩn làm lõi.
 
+
+Kiểm tra giao diện mới nhất cho thấy mô hình tiền huấn luyện đóng băng đạt 11/32 câu trả lời tiếng Anh khớp chính xác khi thu nhỏ cùng các trang từ 1024 xuống 432, so với 0/32 ở kích thước ban đầu. Hai bộ điều chỉnh đã huấn luyện chỉ đạt 5/32 mỗi bộ ở kích thước 432. ILM độc lập sinh câu trả lời dưới dạng ảnh vẫn chưa được chứng minh.
+
+[2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
+
 ## Bằng chứng hiện tại: V35 khép kín vòng raster nhưng thất bại ở liên kết ngữ nghĩa
 
 ![Kết quả đo V35: mô hình raster vào-ra hoàn chỉnh tạo nét phản ứng theo prompt nhưng thất bại ở sao chép và liên kết chỉ dẫn](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

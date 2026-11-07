@@ -22,6 +22,11 @@
 ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图像进入连续视觉状态，
 再直接回到图像，不把隐藏的符号序列当作语言核心。
 
+
+最新接口检查：将同一批页面从1024缩放到原生432尺寸后，冻结的预训练模型英文回答完全正确数从0/32升到11/32；两个已训练适配器在432尺寸下均只有5/32。接口存在实质问题，但仍未实现独立生成图像答案的ILM。
+
+[2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
+
 ## 当前证据：V35 闭合了栅格回路，但语义绑定失败
 
 ![V35 实测结果：完整的栅格输入与栅格输出模型生成了会随提示变化的痕迹，但复制和指令绑定均未通过](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

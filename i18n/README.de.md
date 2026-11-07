@@ -21,6 +21,11 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 ILM ist eine Forschungscodebasis für **Text-als-Bild-Generierung**: Sie kodiert Sprache in kompakte, bildähnliche Tensoren und erzeugt Text mit iterativer Diffusions-verstärkter Verfeinerung. Die Repräsentation zerlegt Sätze in Meta-Elemente (Grammatik, Semantik, Tonfall, Emotion) sowie hierarchische, speicherartige Codes für Wörter und Zeichen. Das vereint Ideen aus diskreter Diffusion, Superposition/Disentanglement, strukturierten Einbettungen und glyph-bewusster Zeichenerkennung.
 
+
+Der jüngste Schnittstellentest liefert beim eingefrorenen vortrainierten Modell 11/32 exakt richtige englische Antworten, wenn dieselben Seiten von 1024 auf 432 verkleinert werden, statt 0/32 in der ursprünglichen Größe. Die beiden trainierten Adapter erreichen bei 432 jeweils nur 5/32. Ein unabhängiges ILM, das Antworten als Bilder erzeugt, ist weiterhin nicht nachgewiesen.
+
+[2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
+
 ## Neuester Prompt-Test: V23-Relationsschaltung bestanden
 
 ![Gemessenes V23-Ergebnis: Sechs Bild-Promptframes durchlaufen visuellen Abgleich, Operationsgatter, Quellglyphen-Routing und einen eingefrorenen Bildnormalisierer und erzeugen ein Antwortbild](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)

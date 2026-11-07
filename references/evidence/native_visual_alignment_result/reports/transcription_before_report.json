@@ -1,0 +1,22 @@
+{
+  "cases": 8,
+  "inputs_sha256": "0d9162d1c62cdaffa37d2952ea3b818995e838c4cf3b0c7c05a43ddb3e419aa2",
+  "checkpoint_sha256": "e2937d2fa986fac0e7ca1964607d5dca06194b698b6a25ad0644635f585427fb",
+  "mode": "transcribe",
+  "cap": 1024,
+  "implementation": {
+    "scripts/train_native_visual_alignment.py": "b372f42ec54c178e9fdecb351e65c03ba89afd58622e6dd7310afddffb68b5bb",
+    "scripts/train_native_visual_access.py": "1d01bce44ab78b62b7b872a8929a45b9afcd22a776b3adfbfb65b5e33ad264fc",
+    "scripts/probe_native_unified_source.py": "132af714c0138c252bea147629d24cbaa013b48448fdd7ac439155717550ece8",
+    "ilm/native_unified/reading.py": "8c3c8dad8e6273e968cec64b642378bcb790dd5b76fa640db1fcb67e91c3d53a",
+    "ilm/native_unified/showo2_source.py": "9a84bad9d5575937372470ea72b95d2093c1d5fc75a4ca33c9861d5072ec8944",
+    "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7"
+  },
+  "initializer_control": true,
+  "elapsed_seconds": 4.479262433946133,
+  "peak_allocated_vram_gib": 11.160580158233643,
+  "auxiliary_unicode_head": true,
+  "teacher_answers_loaded": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}

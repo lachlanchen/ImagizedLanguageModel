@@ -2,7 +2,7 @@
 
 This prospective diagnostic tests English question answering after the
 [full-page visual-alignment experiment](native-visual-alignment.md). It is
-evaluation-only. The ongoing training and its registered Chinese assessments
+evaluation-only. The completed training and its registered Chinese assessments
 stay unchanged. No English passage or answer enters that optimizer.
 
 The source is the official [SQuAD 1.1 release](https://rajpurkar.github.io/SQuAD-explorer/),
@@ -63,5 +63,8 @@ are allowed; case, punctuation, quotes and word boundaries remain significant.
 
 These remain auxiliary native text-head readouts. English transfer cannot
 qualify Chinese understanding, direct image-answer generation, historical
-writing or the complete ILM goal. There are no completed student results for
-this cohort yet.
+writing or the complete ILM goal. Both completed adapter checkpoints answer 0/32 normal questions correctly
+at the original 1024-square geometry. The first model emits `1999年` or
+`1998年`; the dense curriculum emits `1990年` or `1998年`. No paired questions
+are both correct. See the [complete result](../references/native_visual_alignment_result.md)
+and the subsequent [native-resolution check](../references/native_reader_geometry_result.md).

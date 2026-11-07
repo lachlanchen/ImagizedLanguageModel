@@ -5,6 +5,19 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
+The later [full-page curriculum](native_visual_alignment_result.md) improves
+requested copying to 29/32 but leaves Chinese and English QA at 0/32 on the
+original 1024-square pages. A subsequent
+[matched geometry check](native_reader_geometry_result.md) changes that source
+interpretation: the same frozen pretrained reader recovers 11/32 exact English
+answers at the official 432-square interface, without training. Nine of those
+correct answers disappear without the passage. Existing adapters give 5/32
+each at 432, below the source. This identifies an effective interface correction
+on this cohort and rejects the learned adapters as a demonstrated repair.
+It does not isolate the geometric mechanism, qualify Chinese native-scale
+reading or establish direct image answers. A calibrated source baseline must
+precede another optimizer. The historical failures below remain unchanged.
+
 The latest native-image [copying observation](paired_padding_result.md) also fails: 6/32 training and 10/32 validation OCR-exact strings after 512 updates, with visible omissions and duplicated writing. It has no natural-QA optimization. Reducing blank input space lowers training invocation time from 795.624 to 287.182 seconds without qualifying reliable writing. The failure concerns content as well as appearance.
 
 The latest completed [readout comparison](decoder_metric_v82_result.md)

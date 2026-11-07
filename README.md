@@ -22,12 +22,14 @@ reported directly below.*
 
 ## Current result: autonomous image-language writing still fails
 
-The latest [visual-access experiment](references/native_visual_access_result.md)
-learns **27/32 exact held-out copies through an auxiliary text head**, but
-answers **0/32 natural questions correctly**. Fifteen of sixteen question
-pairs receive the same answer, and erasing the question leaves 29/32 outputs
-unchanged. This is short-string reading progress, with failed question
-understanding and no trained image-answer result.
+The [completed curriculum](references/native_visual_alignment_result.md) gives
+**29/32 exact copies, 0/32 Chinese QA and 0/32 English QA** through its auxiliary
+text head at the original image geometry. A subsequent
+[interface check](references/native_reader_geometry_result.md) recovers **11/32
+exact English answers from the frozen source** by resizing the same whole
+pages from 1024 to the native 432 square. The two trained adapter checkpoints
+score only 5/32 each at 432. This identifies a substantial interface problem,
+without establishing a successful learned repair or direct image answers.
 
 <!-- paired-writing-status:start -->
 The completed 512-update padding comparison still fails reliable copying: OCR exact match is 6/32 training strings and 10/32 validation strings (clean references: 27/32 and 28/32). Raw outputs visibly omit characters and repeat letters. Training time falls from 795.624 to 287.182 seconds, but language understanding and efficiency at useful quality remain unproved. [All 64 raw outputs](references/paired_padding_result.md).
