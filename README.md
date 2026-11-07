@@ -31,6 +31,12 @@ F1 from **30.27% to 25.49%**. The raw outputs contain malformed repeated marks.
 Small-set fit has not become language generalization; no usable ILM is
 qualified. [All 512 comparison outputs](references/evidence/source_canvas_result/README.md).
 
+A subsequent [native-history diagnostic](references/visual_history_reading_result.md)
+finds prefix-sensitive auxiliary text continuation, but stopping and the
+cross-fitted state repair still fail. A [visible-cursor image history](references/cursor_history_result.md)
+fixes a verified whitespace-state collision; learned cursor recognition and
+autonomous image-language generation remain unproved.
+
 The [completed curriculum](references/native_visual_alignment_result.md) gives
 **29/32 exact copies, 0/32 Chinese QA and 0/32 English QA** through its auxiliary
 text head at the original image geometry. A subsequent
