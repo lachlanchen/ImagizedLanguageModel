@@ -50,6 +50,13 @@ the wrong image. Correlation, reconstruction and lower likelihood losses
 therefore cannot substitute for autonomous conditional-answer tests. The
 observations do not identify one unique internal cause.
 
+The [retained-history audit](history_prefix_alignment_result.md) also finds
+that only 2/75 intermediate image-history boundaries have a matching saved
+source-language state. Most 64-column prefixes do not equal a complete
+reference-text prefix raster. A state comparison by ordinal step alone is
+therefore invalid here. Causal history alignment remains an untested
+intervention, not an established explanation or repair.
+
 ## Copying has a strict support limit
 
 Let \(\Omega(X)\) contain all admissible complete source crops of image \(X\).
