@@ -49,7 +49,7 @@ private book, browser profile, session history or credential enters publication.
    the next question's correct raw image. Preserve complete PNG pixels;
    source cropping/white display margins must not conceal output content.
    State source-copy-only and failed qualification in the caption/figure.
-3. `abstract_text.tex` and the active article Results: a brief evidence-sized
+3. `frontmatter.tex` (the active `PaperSummary`) and article Results: a brief evidence-sized
    observation, never a new general-language, novelty or efficiency claim.
    Add a new `contextual_pixel_spans_note.tex` as Supplementary Note 44 after
    the current Note 43/plate, before references. Include the actual probability
