@@ -114,7 +114,12 @@ builds and attractive concept figures are useful engineering artifacts. None
 substitutes for legible, correct answers generated from the prompt alone.
 No usable ILM checkpoint or confirmed efficient learning algorithm is claimed.
 
-A [source-level unified-model audit](native_unified_direction_audit.md)
-examines retaining native reading and continuous image generation together.
-It describes a candidate initialization and prerequisite tests, not an acquired
-model, successful training result or established repair.
+A [completed native unified source diagnostic](native_unified_source_result.md)
+now tests that initialization: image prompts give 0/12 canonical exact source
+answers, while original text gives 5/12, with all eight copy contents present
+and extra quotation marks on four. Supplied-input codec images remain readable.
+This motivates a [visual-access learning experiment](native_visual_access_learning_protocol.md),
+whose real two-update preflight passes at 6.899 GiB and whose 4,096-update run
+has started. It is auxiliary language-head supervision, not a deployed
+image-answer model. The [full direction](native_visual_language_learning_direction.md)
+still requires direct continuous image output and vocabulary-free deployment.

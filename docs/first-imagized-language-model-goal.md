@@ -45,6 +45,17 @@ checkpoint ledger below remains historical evidence, not a current success
 claim. The north star remains a useful image-native language model on one
 4090-class GPU, with quality demonstrated through its actual generated answers.
 
+A [completed native-source diagnostic](../references/native_unified_source_result.md)
+now separates failed image access from remaining text-language capability.
+The [visual-access learning experiment](../references/native_visual_access_learning_protocol.md)
+uses 8.49M gated input adapters and a frozen auxiliary language head on all
+384 training examples. Its real two-step preflight passes at 6.899 GiB; the
+4,096-update run has started. This is a necessary intermediate test, not the
+requested final model. The [full direction](../references/native_visual_language_learning_direction.md)
+still requires direct continuous image answers and removal of the runtime
+language lookup/output head. No usable ILM or matched-quality efficiency
+advantage is established.
+
 ## Current engineering checkpoint
 
 The completed [V68 autonomous audit](../references/codec_language_v68_result.md)

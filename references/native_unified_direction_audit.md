@@ -1,7 +1,9 @@
 # Candidate audit: retain native reading and continuous image generation
 
-Reviewed 7 November 2026. This is a source-level candidate audit, not an
-acquired model, an executed experiment or a proven repair. The complete
+Reviewed 7 November 2026. This original source-level candidate audit is followed
+by the [completed native-source experiment](native_unified_source_result.md)
+and a [visual-access learning protocol](native_visual_access_learning_protocol.md).
+Neither establishes a working ILM or a proven repair. The complete
 [paired-copying observation](paired_padding_result.md) fails reliable writing.
 The existing [native contextual writer](decoder_metric_v82_result.md) also fails
 even with correct answer history. Those failures do not identify one universal
