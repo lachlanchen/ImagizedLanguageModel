@@ -35,6 +35,11 @@ reference occurrences. It also measures whether question/passage erasure
 changes folding ranges, retained ink positions or observer dimensions.
 Erasure controls should not automatically be interpreted as isolating a
 unique semantic mechanism. This audit does not invoke or train a model.
+The completed [physical data audit](../references/contextual_pixel_data_audit.md)
+finds all 3,257 training references admissible. Question erasure preserves
+answer coordinates, while moving other retained ink in 11/64 cases. Passage
+erasure removes every possible correct source span, so zero exact copying
+there is mechanically forced and does not establish understanding.
 
 After both arms finish, `scripts/export_contextual_pixel_comparison.py`
 independently checks the complete four-pass schedule, every recorded Adam
