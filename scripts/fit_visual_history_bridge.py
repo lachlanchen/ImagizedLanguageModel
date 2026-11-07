@@ -55,9 +55,15 @@ def run(source,out):
         restored=VisualHistoryBridge(**torch.load(p,map_location='cpu',weights_only=True))
         states=torch.stack([v['state'] for v in test])
         with torch.no_grad():
-            factorized=restored(states);explicit=unit_rms(states)+restored.mean_delta+(unit_rms(states)-restored.mean_x)@(restored.left@restored.right)
-            maximum=float((factorized-explicit).abs().max())
-            if maximum>2e-5:raise ValueError('factorized/explicit affine evaluations differ')
+            factorized=restored(states)
+            x64=unit_rms(states).double();mx=restored.mean_x.double();delta=restored.mean_delta.double()
+            left,right=restored.left.double(),restored.right.double()
+            reference=x64+delta+((x64-mx)@left)@right
+            explicit=x64+delta+(x64-mx)@(left@right)
+            maximum=float((reference-explicit).abs().max())
+            forward_error=float((factorized.double()-reference).abs().max())
+            if maximum>1e-10 or forward_error>2e-4*max(1.,float(reference.abs().max())):
+                raise ValueError('affine equivalence or float32 forward error check failed')
             for kind in predicted:
                 values=restored(states,kind=kind)
                 for row,value in zip(test,values):
@@ -65,7 +71,7 @@ def run(source,out):
                     predicted[kind][row['index']]=value.clone()
         folds.append(dict(holdout=list(holdout),training_indices=[v['index'] for v in train],test_indices=[v['index'] for v in test],
             model=str(p.relative_to(out)),model_sha256=sha(p),numeric_parameters=sum(p.numel() for p in model.parameters()),
-            explicit_affine_maximum_error=maximum))
+            explicit_affine_float64_maximum_error=maximum,float32_forward_maximum_error=forward_error))
     keys=sorted(features)
     if any(set(v)!=set(keys) for v in predicted.values()):raise ValueError('one held-out prediction per image call required')
     tensors={kind:torch.stack([v[k] for k in keys]) for kind,v in predicted.items()}
@@ -121,7 +127,7 @@ def run(source,out):
         folds=folds,rows=rows,metrics=metrics,gates=gates,writer_trial_admitted=all(gates.values()),
         predictions_sha256=sha(out/'predictions.pt'),analytic_fits=22,optimizer_updates=0,new_source_body_calls=0,
         features=216,fit_and_factor_checks_seconds=fit_seconds,total_seconds=time.monotonic()-started,
-        all_heldout_groups_excluded=True,reference_strings_used_to_fit=False,
+        all_heldout_groups_excluded=True,reference_strings_used_to_fit=False,additional_discarded_pre_readout_fits=3,
         source_output_projection_instrument_only=True,new_image_outputs=0,independent_ILM_qualified=False,general_ilm_goal_complete=False))
     print(json.dumps(dict(metrics=metrics,gates=gates,writer_trial_admitted=all(gates.values())),indent=2))
 

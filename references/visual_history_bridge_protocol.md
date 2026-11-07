@@ -69,3 +69,12 @@ check factorized versus explicit affine evaluation, fold exclusions, finite
 coefficients and report reconstruction. There is no independently deployable
 image generator here: the remaining requirement is correct continuous image
 emission and actual image-only feedback, evaluated on unseen inputs.
+
+Pre-readout numerical correction: the first fit stopped after saving three
+folds because an absolute 2e-5 comparison of two float32 matrix multiplication
+orders was too strict. The model, ridge penalty, folds and decision gates are
+unchanged. Check mathematical factor equivalence in float64 (1e-10 absolute),
+and retain the actual float32 forward with a scale-relative 2e-4 numerical
+check. Independent coefficient checks allow relative 2e-6 after float32
+storage. Report all measured numerical errors and the three discarded fits.
+These tolerances concern floating-point evaluation, not language accuracy.

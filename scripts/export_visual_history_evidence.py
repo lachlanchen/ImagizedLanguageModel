@@ -37,6 +37,7 @@ def verify_bridge(source,bridge):
     normal=[v for v in features.values() if metadata[v['index']]['route']=='visual']
     saved=torch.load(bridge/'predictions.pt',map_location='cpu',weights_only=True)
     offsets={key:i for i,key in enumerate(saved['indices'])};counts=Counter();max_coefficient_error=0.;max_forward_error=0.
+    max_coefficient_relative_error=0.;max_forward_relative_error=0.
 
     def rms(x):return x/np.maximum((x*x).mean(-1,keepdims=True),1e-12)**.5
 
@@ -54,15 +55,19 @@ def verify_bridge(source,bridge):
         right=np.linalg.solve(xc@xc.T/4096+.1*np.eye(len(x)),(y-x)-delta)
         expected={'mean_x':mx,'mean_delta':delta,'left':xc.T/4096,'right':right}
         error=max(float(np.max(np.abs(model[k]-v))) for k,v in expected.items())
-        if error>2e-5:raise ValueError('stored coefficients differ from independent NumPy fit')
+        relative=max(float(np.max(np.abs(model[k]-v)/(1+np.abs(v)))) for k,v in expected.items())
+        if relative>2e-6:raise ValueError('stored coefficients differ from independent NumPy fit')
         max_coefficient_error=max(max_coefficient_error,error)
+        max_coefficient_relative_error=max(max_coefficient_relative_error,relative)
         z=rms(np.stack([v['state'] for v in test]).astype(np.float32))
         values={'identity':z,'mean':z+model['mean_delta'],
             'ridge':z+model['mean_delta']+(z-model['mean_x'])@model['left']@model['right']}
         for kind,value in values.items():
             actual=saved['predictions'][kind][[offsets[v['index']] for v in test]].numpy()
             error=float(np.max(np.abs(value-actual)));max_forward_error=max(max_forward_error,error)
-            if error>2e-5:raise ValueError('held-out saved vectors differ from independent affine forward')
+            relative=error/max(1.,float(np.max(np.abs(value))))
+            max_forward_relative_error=max(max_forward_relative_error,relative)
+            if relative>2e-4:raise ValueError('held-out saved vectors differ from independent affine forward')
         for v in test:counts[v['index']]+=1
     if set(counts)!=set(features) or set(counts.values())!={1}:raise ValueError('each visual/erased call must be withheld exactly once')
     # Independent scalar reconstruction; no answer string is used in fitting.
@@ -89,6 +94,7 @@ def verify_bridge(source,bridge):
     receipt=dict(result_sha256=sha(bridge/'result.json'),source_verification_sha256=sha(source/'verification.json'),
         predictions_sha256=sha(bridge/'predictions.pt'),analytic_fits_reconstructed=22,heldout_calls_verified=len(counts),
         maximum_coefficient_error=max_coefficient_error,maximum_forward_error=max_forward_error,
+        maximum_coefficient_relative_error=max_coefficient_relative_error,maximum_forward_relative_error=max_forward_relative_error,
         all_fold_exclusions_verified=True,metrics_reconstructed=True,source_body_calls=0,
         native_projection_replayed=False,new_image_outputs=0,general_ilm_goal_complete=False)
     atomic_json(bridge/'verification.json',receipt)
