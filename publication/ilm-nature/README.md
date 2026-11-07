@@ -17,7 +17,8 @@ builder remain inside the named baseline.
 
 The [completed full-page curriculum](../../references/native_visual_alignment_result.md)
 gives **29/32 exact stopped copies, 0/32 Chinese QA and 0/32 English QA**
-through the auxiliary text head at the original 1024-square geometry. Its
+through the auxiliary text head at the original supplied geometries:
+1024-by-256 copying strips and 1024-square QA pages. Its
 complete-page transcripts improve on four short copying pages but remain
 incorrect on all four full Chinese QA pages.
 
@@ -63,6 +64,26 @@ check is complete, with its preflight timing deviation retained. No direct
 image-answer result is demonstrated. The bounded manuscript revision will
 incorporate this failed Chinese repair and limited English transfer; the
 current compiled article retains Note 42 as its latest completed revision.
+
+The subsequent [fixed-weight canvas control](../../references/native_canvas_control_result.md)
+replays all 160 earlier responses exactly. Adding only white bottom padding
+reduces copying from 29/32 to 7/32; Chinese falls from 13/16 to 0/16.
+The earlier copying inputs were 1024 by 256 strips, while the QA inputs
+were square. Tight whole-request cropping also fails, despite preserving
+every ink pixel. This clarifies a layout confound in cross-model comparisons.
+
+The prepared `state_alignment_note.tex` and `state_alignment_figures.py`
+cover the completed learning, seen-fit and canvas results under the bounded
+Note 43/Figure S20 plan. Its 35-slide draft and chart/workbook verification
+remain private pending rendering. The canonical 34-slide deck and current
+PDFs are preserved. `build_state_alignment_publication.py` must run only
+after the current GPU work is terminal, followed by PDF/slide visual review
+before delivery. Do not use the older geometry builder after that promotion.
+
+The new [attention-learning experiment](../../docs/native-reader-attention.md)
+preserves the calibrated dense visual frontend and learns only contextual
+attention. Its real preflight passes; its 2,560-update run is active. It has
+no completed language-quality or image-answer result.
 
 ## Earlier paired copying
 

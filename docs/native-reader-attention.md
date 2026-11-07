@@ -16,7 +16,19 @@ selection can improve without degrading the existing visual features.
 The model remains an externally pretrained full source with a temporary
 Unicode head. This is a reader prerequisite; it does not generate image
 answers or establish a lightweight foundation model trained from scratch.
-There is no completed learning-quality result yet.
+There is no completed learning-quality result yet. The actual configuration
+trains 4,358,144 parameters in 112 attention projections; the complete adapted
+model has 2,843,625,184 parameters plus the 126,892,531-parameter codec.
+
+The [execution export](../references/evidence/native_reader_attention_preflight/result.json)
+retains all 640 cached image prefixes' metadata and the real three-update
+preflight. Caching takes 262.431 seconds. All 224 residual tensors have finite
+nonzero gradients by the third update; all 112 zero output matrices change.
+Four disabled/zero-enabled source pairs replay their retained decisions exactly.
+The normalized FP32 causal error and disabled-source logit error are both zero.
+The 6.345 GiB peak and 1.952 seconds measure the three updates after the
+counter reset, excluding the earlier FP32 causal check and source replay.
+These are execution checks; the main run and its assessment remain separate.
 
 ## Execute the fixed experiment
 
