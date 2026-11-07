@@ -689,6 +689,23 @@ plus an 84.046M VAE, with 24.359M trained adapter parameters. No natural QA is
 optimized in these copying runs. Faster copying execution therefore does not
 establish language understanding or efficiency at useful language quality.
 
+A native unified backbone provides a separate visual-access diagnostic
+(Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source
+gives no exact answers on twelve image prompts, while the same body recovers
+all eight requested copy contents from their original text. Gated visual-only
+adaptation then trains 8.490M parameters for 4,096 updates on 128 copies and
+256 natural questions. The native language body and Unicode output head stay
+frozen. Complete held-out text readout gives 27/32 exact stopped copies
+(11/16 Chinese and 16/16 English), but 0/32 correct natural answers. All
+32 question responses collapse to two unrelated years. With matched passage
+seeds, 15/16 question pairs receive the same answer and erasing the question
+leaves 29/32 normal outputs unchanged; no pair is both correct. Training takes
+2,758.904\,s at 6.894\,GiB allocated peak on one RTX 4090 D, excluding source
+pretraining, cache preparation and separate evaluations. The adapted source
+contains 2.839B parameters plus a 126.893M codec. These are auxiliary text-head
+measurements, with no trained image-answer result. Improved short-string
+reading therefore coexists with failed question-dependent answer selection.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

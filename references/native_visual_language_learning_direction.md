@@ -44,7 +44,14 @@ two-update preflight trains 8,489,984 residual parameters across 158 native
 linear layers at 6.899 GiB allocated peak. Gradients reach every up/down residual
 on the second step, the zero-residual prefix matches, and the disabled prefix
 is unchanged after the updates. These checks qualify execution only. The
-4,096-update experiment is ongoing; no trained reading result is claimed here.
+completed [4,096-update experiment](native_visual_access_result.md) gives 27/32
+exact stopped held-out copies and 0/32 correct natural answers. In paired
+controls, 15/16 question pairs receive the same answer and removing the question
+leaves 29/32 normal outputs unchanged. This recipe improves short copying but
+fails page-level question selection. Visual access is not generally repaired;
+the image-output stage is not admitted on these results. A subsequent learning
+experiment must test better visual-language alignment and conditional selection
+before treating this frontend as a useful language reader.
 
 ## The required image-output stage
 

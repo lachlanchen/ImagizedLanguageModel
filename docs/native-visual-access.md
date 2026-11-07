@@ -3,10 +3,16 @@
 The [source diagnostic](../references/native_unified_source_result.md) fails on
 the actual glyph prompts despite retained text-language capability. The
 [learning direction](../references/native_visual_language_learning_direction.md)
-first repairs visual access through a frozen auxiliary language head, then
+tests visual access through a frozen auxiliary language head, then
 requires direct continuous image-answer learning. The current implementation
 is the source diagnostic and visual-access learner. It does not yet provide
 the required independent image-answer ILM.
+
+The [completed 4,096-update observation](../references/native_visual_access_result.md)
+gives **27/32 exact held-out copies and 0/32 correct natural answers**. Fifteen
+of sixteen paired questions receive the same answer; erasure leaves 29/32
+outputs unchanged. These are temporary text-head readouts. The recipe fails
+question understanding and does not qualify the subsequent image-writing stage.
 
 ## Reuse pinned assets and isolate dependencies
 

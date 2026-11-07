@@ -22,6 +22,13 @@ reported directly below.*
 
 ## Current result: autonomous image-language writing still fails
 
+The latest [visual-access experiment](references/native_visual_access_result.md)
+learns **27/32 exact held-out copies through an auxiliary text head**, but
+answers **0/32 natural questions correctly**. Fifteen of sixteen question
+pairs receive the same answer, and erasing the question leaves 29/32 outputs
+unchanged. This is short-string reading progress, with failed question
+understanding and no trained image-answer result.
+
 <!-- paired-writing-status:start -->
 The completed 512-update padding comparison still fails reliable copying: OCR exact match is 6/32 training strings and 10/32 validation strings (clean references: 27/32 and 28/32). Raw outputs visibly omit characters and repeat letters. Training time falls from 795.624 to 287.182 seconds, but language understanding and efficiency at useful quality remain unproved. [All 64 raw outputs](references/paired_padding_result.md).
 <!-- paired-writing-status:end -->
@@ -41,8 +48,10 @@ See the [completed native result](references/native_chinese_v80_result.md),
 [latest matched comparison and every raw answer](references/decoder_metric_v82_result.md),
 and [current direction assessment](references/ilm_direction_assessment_20261107.md).
 The [current manuscript](publication/ilm-nature/README.md) includes the V82
-comparison and the completed paired-copying result in Note 40 and editable Figure S17. These are image
-agreement measurements, not semantic accuracy. The adapted actor retains a
+comparison, the completed paired-copying result in Note 40/Figure S17 and
+the auxiliary reading failure in Note 41/Figure S18. Earlier image-writer
+results measure image agreement; auxiliary QA correctness is assessed separately.
+The earlier native actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable
 parameters do not establish a lightweight model trained from scratch.
 

@@ -119,7 +119,11 @@ now tests that initialization: image prompts give 0/12 canonical exact source
 answers, while original text gives 5/12, with all eight copy contents present
 and extra quotation marks on four. Supplied-input codec images remain readable.
 This motivates a [visual-access learning experiment](native_visual_access_learning_protocol.md),
-whose real two-update preflight passes at 6.899 GiB and whose 4,096-update run
-has started. It is auxiliary language-head supervision, not a deployed
-image-answer model. The [full direction](native_visual_language_learning_direction.md)
+whose real two-update preflight passes at 6.899 GiB. Its
+[completed 4,096-update result](native_visual_access_result.md) gives 27/32 exact
+held-out copies through the auxiliary text head, but 0/32 correct natural
+answers. Fifteen of sixteen paired questions receive the same answer; erasure
+leaves 29/32 outputs unchanged. This visual-adapter recipe fails language
+selection and does not admit image-writing adaptation or scale-up. It is not
+a deployed image-answer model. The [full direction](native_visual_language_learning_direction.md)
 still requires direct continuous image output and vocabulary-free deployment.

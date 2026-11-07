@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sat Nov  7 07:43:06 2026
-%DIF ADD new.tex   Sat Nov  7 07:43:06 2026
+%DIF DEL old.tex   Sat Nov  7 10:03:50 2026
+%DIF ADD new.tex   Sat Nov  7 10:03:50 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -2588,6 +2588,135 @@ aspect ratios are preserved. Omissions visibly reject reliability. Copying and
 execution cost do not establish language understanding.}{fig:s17-paired-writing}
 
 \clearpage
+\section*{\DIFadd{Supplementary Note 41: visual copying improves without question understanding}}
+\DIFadd{The native Show-o2-1.5B-HQ source\cite{showo2} retains a language body,
+semantic image frontend, continuous image velocity head and Wan codec. The
+complete checkpoint contains 2,830,777,056 parameters, of which
+1,543,304,192 belong to the language body; the codec adds 126,892,531.
+The 1.5B source label is not the complete deployed footprint. Source revision,
+model and codec hashes are pinned in
+}\path{references/native_unified_assets.lock.json}\DIFadd{. Constructor-only component
+hydration avoids redundant base-weight downloads, then strictly loads the
+complete checkpoint and checks its tied language embeddings. The source neural
+functions are unchanged. Existing external pretraining is retained and excluded
+from the local resource measurements.
+}
+
+\DIFadd{On the fixed twelve-case source diagnostic, image prompts give 0/12 canonical
+exact text answers. Eight copying-prompt transcriptions also fail. Original
+text gives 5/12 canonical exact answers, including four English copies and
+one natural question; all eight requested copy contents occur, with unwanted
+quotation marks on four Chinese responses. Readable source-image codec
+reconstructions preserve the marks. These observations separate useful
+text-language access from unreliable access through this visual composition,
+without selecting a unique cause. They do not replicate the source authors'
+published benchmark conditions. Separately supplying eight desired strings to
+the native image generator gives 0/8 strict OCR-exact outputs, against 10/12
+on the diagnostic reference images. Some English outputs remain legible;
+Chinese outputs are blank or incorrect. These are assisted source-writing
+controls, not autonomous image answers.
+}
+
+\DIFadd{The visual-access experiment adds gated rank-16, alpha-16 residuals to
+158 native semantic-encoder and fusion linear layers. All source weights,
+including the language body/head and image generator, remain frozen. The
+8,489,984 learned parameters affect only clean source-image prefix formation.
+The disabled gate retains the base generator path. A real two-update preflight
+verifies finite gradients through all up/down residuals, exact zero-residual
+prefix equivalence and an unchanged disabled-gate prefix after those updates.
+The complete learning run starts from fresh residuals rather than that
+preflight checkpoint.
+}
+
+\DIFadd{Let $E(X)$ be the continuous source-image encoding, $R_A$ the adapted visual
+frontend, $H$ the native contextual body and $U$ its frozen language head.
+For target answer labels $y_1,\ldots,y_m$, the auxiliary objective is
+}\begin{equation}
+\mathcal L_{\rm access}=-\frac{1}{m}\sum_{j=1}^{m}
+\log\operatorname{softmax}\!\left(UH[C,R_A(E(X)),y_{<j}]\right)_{y_j}.
+\end{equation}
+\DIFadd{The generic control $C$ is constant; the changing question enters through
+pixels. Correct preceding answer labels are available during this loss, while
+autonomous evaluation receives neither answer histories nor references.
+This explicitly uses Unicode/token supervision and a temporary text readout.
+It is not vocabulary-free training or the required image-only output model.
+}
+
+\DIFadd{All 128 prepared copying examples and 256 natural questions enter training;
+32 copies and 32 questions are held out. QA articles are disjoint between
+these splits. Native FP32 VAE samples are cached once without resizing or
+answer-aware cropping; the twelve original diagnostic latent tensors match
+their retained observations exactly. Input copy strips retain all original
+ink, and QA pages retain complete passages at $1024\times1024$. FP32 adapter
+masters and AdamW states use BF16 native computation, batch one, alternating
+copy/QA lists, seed 20268921, learning rate $10^{-4}$ with 100-step warm-up
+and cosine decay to $10^{-5}$, betas $(0.9,0.95)$, weight decay 0.01 and
+gradient clipping at one. All 4,096 optimizer records are contiguous and
+finite; all 384 declared training IDs occur and no validation ID is optimized.
+The single training invocation takes 2,758.904\,s with 6.894\,GiB allocated
+peak, excluding acquisition, source pretraining, cache construction and
+subsequent evaluations. The adapted native model contains 2,839,267,040
+parameters plus the codec; trained parameters alone do not describe its size.
+}
+
+\DIFadd{Native incremental KV and last-position logits reproduce all 512 decisions
+across the twenty original FP32 diagnostic calls before use in assessment.
+The matched BF16 before/after screen gives training-copy exact scores 0/4
+and 4/4, held-out copy scores 0/4 and 3/4, and natural-question scores 0/4
+and 0/4. The separate complete 64-case observation gives 27/32 exact stopped
+copies: 11/16 Chinese and 16/16 English. Its remaining five copies substitute,
+insert or omit characters. Natural QA gives 0/32: 27 outputs are the year 1999
+and five are 1998, unrelated to the requested answers. All streams stop.
+Exact match uses NFC and declared whitespace canonicalization, preserving
+case, punctuation, quotation marks and every written character. These are
+direct native text readouts, not OCR scores of generated images. The overlapping
+screen cases are retained separately and never added to the 64-case denominator.
+}
+
+\DIFadd{The question intervention uses all sixteen distinct-answer held-out passage
+pairs. Original font geometry and every source pixel are checked before
+erasing from the question paragraph to the bottom, including the constant
+answer marker. Every context pixel remains unchanged; both erased versions
+of a passage are identical. Each pair receives the same latent and readout
+seeds across its two normal pages and one shared erased page. There are 32
+normal calls and sixteen independent erased calls. Normal QA again gives
+0/32; no pair has both answers correct. Only 1/16 normal pairs gives different
+outputs. Erasure changes 3/32 normal outputs, leaving 29/32 unchanged, and
+none of the sixteen shared erased answers matches either reference. Thus
+generic stopped output cannot be interpreted as following the question.
+The separate 64-call and 48-call invocations take 26.916 and 33.030\,s,
+respectively, excluding source loading; these are not quality-matched
+efficiency comparisons.
+}
+
+\DIFadd{All raw readouts, complete input/reference pages, sixteen erased pages and
+the optimizer journal remain in
+}\path{references/evidence/native_visual_access_result/}\DIFadd{; the export binds
+179 files. The learned checkpoint hash is
+}\path{e2937d2fa986fac0e7ca1964607d5dca06194b698b6a25ad0644635f585427fb}\DIFadd{.
+Source writing controls and input codec reconstructions remain separately
+retained. CMRC passage images and references preserve their CC-BY-SA-4.0
+attribution\cite{cmrc}; copying strings are synthetic. These public exploratory
+cases are not a sealed test, and there is no independent training-seed
+replication. Short visual copying improves, while page-level question
+selection and independent image-answer generation remain unqualified.
+}
+
+\plate{Figure_S18_visual_access}{\textbf{Visual copying does not establish
+question understanding.} \textbf{a}, Exact stopped auxiliary text readouts on
+four held-out copies and four held-out questions before and after adaptation.
+\textbf{b}, Complete held-out copying and QA observations, 32 cases per task.
+\textbf{c}, Sixteen passage-pair controls: both questions correct, normal
+outputs different, and the shared erased output matching either reference.
+Different outputs alone are not correct answers. \textbf{d}, Complete first
+two original supplied-string source-writing outputs; desired strings are
+explicitly provided, so these are assisted controls. \textbf{e}, First four
+held-out copying responses, displayed as editable text from the temporary
+Unicode head. They are not answer images generated by the learner. Raw case
+order, PNG bytes and aspect ratios are preserved; all observations remain
+available.}{fig:s18-visual-access}
+
+\clearpage
 \DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
@@ -2774,7 +2903,20 @@ examples are in }\path{references/paired_image_learning_protocol.md}\DIFadd{,
 }\path{docs/paired-image-learning.md}\DIFadd{.
 }
 
-\begin{thebibliography}{19}
+\DIFadd{The native source and visual-access observation in Note 41 use
+}\path{scripts/acquire_native_unified_source.py}\DIFadd{,
+}\path{scripts/probe_native_unified_source.py} \DIFadd{and
+}\path{scripts/train_native_visual_access.py}\DIFadd{. Complete held-out preparation
+and matched question interventions use
+}\path{scripts/prepare_native_visual_access_validation.py} \DIFadd{and
+}\path{scripts/probe_native_visual_access_controls.py}\DIFadd{. CPU export uses
+}\path{scripts/score_native_visual_access.py}\DIFadd{. Fixed protocols, the isolated
+runtime, exact commands and the remaining image-writing requirement are in
+}\path{docs/native-visual-access.md} \DIFadd{and
+}\path{references/native_visual_access_assessment_protocol.md}\DIFadd{.
+}
+
+\begin{thebibliography}{20}
 \DIFaddend \small
 \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.
@@ -2795,7 +2937,8 @@ examples are in }\path{references/paired_image_learning_protocol.md}\DIFadd{,
 \bibitem{ocg} Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. \href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{Author manuscript} (2026). Peer-review status unverified.
 \bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}.
 \bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}\DIFaddbegin \DIFadd{.
-}\bibitem{jit} \DIFadd{Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). }\url{https://arxiv.org/abs/2511.13720v1}\DIFaddend .
+}\bibitem{jit} \DIFadd{Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). }\url{https://arxiv.org/abs/2511.13720v1}\DIFadd{.
+}\bibitem{showo2} \DIFadd{Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). }\url{https://arxiv.org/abs/2506.15564v3}\DIFaddend .
 \end{thebibliography}
 
 \end{document}

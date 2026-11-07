@@ -64,9 +64,11 @@ therefore tests supervision of the visual frontend through the frozen native
 language head. Its [real two-update preflight](evidence/native_visual_access_preflight.json) reaches every one of 158 up/down
 residual pairs, with 8,489,984 trainable parameters and 6.899 GiB allocated peak.
 The zero-residual prefix matches, and disabling the gate restores the original
-prefix exactly after updates. The 4,096-update run on all 384 training examples
-has started; 64 validation examples are excluded. There is no trained reading
-or image-answer result yet. The [complete direction](native_visual_language_learning_direction.md)
+prefix exactly after updates. The [completed 4,096-update run](native_visual_access_result.md)
+on all 384 training examples excludes 64 validation examples. It gives 27/32
+exact stopped held-out copies but 0/32 correct natural answers, collapsing to
+two unrelated years. No trained image-answer result is established. The
+[complete direction](native_visual_language_learning_direction.md)
 keeps direct continuous image writing and removal of the runtime language head
 as required subsequent work.
 

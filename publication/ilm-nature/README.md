@@ -15,6 +15,27 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The completed [visual-access experiment](../../references/native_visual_access_result.md)
+gives **27/32 exact stopped copies and 0/32 correct natural answers** through
+the frozen auxiliary text head. English copying is 16/16 and Chinese copying
+11/16. Fifteen of sixteen question pairs receive the same answer; erasure
+leaves 29/32 outputs unchanged. These are temporary text readouts, with no
+trained image-answer result. The abstract, article, Note 41 and Figure S18
+retain the failed question-selection result and distinguish assisted source
+writing from the trained reader. The current editable deck contains 33 slides,
+preserving all 32 previous native slides and 76 earlier figure assets.
+
+Current entry points are `native_visual_access_figures.py --stage
+generate|verify|render` and `build_native_visual_access_publication.py --stage
+build|sync`. Use them for this package; older builders retain historical counts
+and must not overwrite the current deck. The reviewed local delivery is
+`ILM_NatureStyle_20261107_NativeVisualAccess` with stable `LATEST` aliases.
+Local checksums verify copying; cloud propagation is not independently verified.
+
+![Visual-access results with original assisted source writing and auxiliary text readouts](figures/Figure_S18_visual_access.png)
+
+## Earlier paired copying
+
 The completed [native paired-copying comparison](../../references/paired_padding_result.md)
 still fails reliable writing: **6/32 training and 10/32 validation strings**
 are OCR-exact, with visible omissions and repetitions. Clean references score
@@ -22,9 +43,10 @@ are OCR-exact, with visible omissions and repetitions. Clean references score
 invocation from 795.624 to 287.182 seconds, while changing VAE features.
 There is no QA optimization in these runs and no language-efficiency claim.
 The abstract, article, Note 40 and Figure S17 report the result and retain all
-64 raw outputs. The current editable deck contains 32 slides, preserving all
-31 previous native slides and 73 earlier figure assets. Current entry points
-are `paired_writing_figures.py` and `build_paired_writing_publication.py`.
+64 raw outputs. That historical editable deck contains 32 slides, preserving all
+31 previous native slides and 73 earlier figure assets. Its entry points
+are `paired_writing_figures.py` and `build_paired_writing_publication.py`;
+use the visual-access builders above for the current package.
 
 ![Completed paired-copying comparison and the first four complete validation images](figures/Figure_S17_paired_writing.png)
 
@@ -37,7 +59,7 @@ article, Note 39 and Figure S16 report this failed result and reject scaling
 the repair. That historical deck has 31 slides, preserving its 30 earlier native
 slides and 70 earlier figure assets. Its historical entry points are
 `decoder_metric_figures.py` and `build_decoder_metric_publication.py`; use
-the paired-writing builders above for the current package.
+the visual-access builders above for the current package.
 
 ![Completed decoder-loss comparison with the first four raw reference, control and metric images](figures/Figure_S16_decoder_metric.png)
 
@@ -50,7 +72,7 @@ any exact complete images. Supplied-code decoding remains at 99.9953% and
 its separate evaluation amendment and the first four unmodified outputs.
 Its historical builders are `readout_failure_figures.py` and
 `build_readout_failure_publication.py`, for that 30-slide package. Use the
-new builders above for the current deck and PDFs.
+visual-access builders above for the current deck and PDFs.
 
 ![Completed failed readout comparison and the first four raw answer images](figures/Figure_S15_readout_failure.png)
 
