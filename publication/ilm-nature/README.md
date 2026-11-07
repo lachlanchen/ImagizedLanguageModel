@@ -79,6 +79,9 @@ remain private pending rendering. The canonical 34-slide deck and current
 PDFs are preserved. `build_state_alignment_publication.py` must run only
 after the current GPU work is terminal, followed by PDF/slide visual review
 before delivery. Do not use the older geometry builder after that promotion.
+The bounded source activation is `activate_state_alignment_revision.py`,
+after the new figure has been rendered; it preserves baseline checks before
+changing the abstract, Results paragraph and supplement.
 
 The new [attention-learning experiment](../../docs/native-reader-attention.md)
 preserves the calibrated dense visual frontend and learns only contextual

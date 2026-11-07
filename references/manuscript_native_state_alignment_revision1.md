@@ -91,3 +91,27 @@ Use publisher-voice, paper-revision-skill, PDF and presentation workflows,
 with fresh artifact-operation markers for that authoring unit. Record any
 Artifact Tool limitation and preserve the existing native OOXML workflow when
 required; do not claim native PowerPoint application validation.
+
+Prepared execution state: both artifact-operation markers have run exactly
+once for this unit (one PPTX, seven PDFs). Artifact Tool and its dependency
+loader are unavailable; the native OOXML workflow is retained. The new
+35-slide draft is at `artifacts/native_state_alignment_publication_20261107/draft.pptx`.
+Its native parts and chart/workbooks verify, while the canonical 34-slide
+deck, current PDFs and active article/SI sources still match the baseline.
+Do not deliver the unrendered draft or rerun the operation markers.
+
+After the attention controller and every child are authoritative terminal:
+
+1. Run `state_alignment_figures.py --stage render` from the publication folder.
+   It preserves all 34 previous rendered slides and promotes the matching PPTX.
+2. Run `activate_state_alignment_revision.py`; it checks the baseline source
+   and rendered figure before applying the bounded abstract/Results/Note 43 edits.
+3. Run `build_state_alignment_publication.py --stage build` and inspect the
+   new slide and changed article/review/SI/redline pages as PNGs. Record actual
+   PDF locations and visual review with their current hashes.
+4. Run its `--stage sync` only after that review, then commit/push the completed
+   unit. The local package is `ILM_NatureStyle_20261107_NativeStateAlignment`.
+
+The new attention-learning result is a separate, still-unmeasured observation;
+preserve it in its own result record after its complete assessment. It must
+not be silently folded into the completed state-correction experiment above.
