@@ -1,9 +1,33 @@
 # State-alignment outcome: bounded future manuscript revision
 
-Status: awaiting the active optimizer and all complete autonomous assessments.
-Do not fill missing quality results from loss, memory, preflight, source
-controls or expectations. No TeX/deck changes belong to this plan until the
-current GPU work is terminal and the final result is scored.
+Status: ready for the bounded manuscript revision. The optimizer, all 160
+primary after-readouts, additional source replay and 96 separate seen-prompt
+diagnostic calls are terminal. No TeX/deck changes have been applied under
+this plan yet. The compiled package still ends with Note 42/Figure S19.
+Do not replace quality results with loss, memory or preflight observations.
+
+The completed result is frozen in commits 9315240 and c2dffcd. English QA
+improves 11/32 to 16/32, with six gains and one loss on the fixed cohort;
+English copying improves 7/16 to 16/16. Chinese remains 0/32 QA and 0/16
+copying. Four of six reader gates fail. Eleven of sixteen Chinese question
+pairs receive identical answers; all normal Chinese responses stop. Preserve
+the first fixed wrong answers (`印度` to two different fish questions) and
+do not characterize stopping or related fragments as correctness.
+
+The separate seen-prompt diagnosis selects eight records per task/language
+before the primary after-readouts. The learner gives 0/8 Chinese copies,
+0/8 strict Chinese QA, 8/8 English copies and 6/8 English QA against original
+annotation alternatives (5/8 against the CE target). All eight Chinese
+copying failures change actual characters. The original-text helper's strict
+Chinese scores include format/language differences: its copies are 3/8 exact,
+four additional strings are intact inside quotes, and one is translated.
+Do not use its strict 1/8 Chinese QA score to claim total language incapacity.
+
+Permitted addition to the scope below: a small seen-fit table and the first
+fixed copying failure in Note 43/Figure S20, labelled as seen training data
+and text-head output. These diagnose fit and do not establish generalization.
+No new optimizer, generated answer image, concept art or model-parity claim
+belongs to this publication revision.
 
 The current package has 34 native editable slides, 82 individual figure
 assets, a 15-page article, 28-page review and 43-page supplement. Note42 and
