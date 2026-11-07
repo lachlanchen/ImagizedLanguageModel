@@ -115,7 +115,10 @@ def prepare(run):
         if value['id']!=row['id'] or value['input_sha256']!=row['input_sha256']:
             raise ValueError('development feature/input mismatch')
         targets=[]
-        for t in dev_refs[row['id']]['targets']:
+        reference_id=row['id'].removesuffix('/question_erased')
+        if row['id']!=reference_id and row.get('condition')!='question_erased':
+            raise ValueError('unexpected erased-question reference alias')
+        for t in dev_refs[reference_id]['targets']:
             p=DEV/'prepared'/t['file'];checked_image(p,t['sha256'])
             targets.append(dict(file=str(p.relative_to(ROOT)),sha256=t['sha256']))
         assessment.append(dict(**row,feature=str(fp.relative_to(ROOT)),feature_sha256=f['sha256'],targets=targets))
