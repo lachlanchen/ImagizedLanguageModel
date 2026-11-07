@@ -1,0 +1,150 @@
+\clearpage
+\section*{Supplementary Note 44: exact source-pixel copying and weak reading}
+The free-writing failures leave open whether accurate physical writing and
+answer selection can be separated. A new component predicts a contiguous
+region of the current writing image and copies its original columns. It is
+an extractive component, related to pointer-based copying\cite{pointer} and
+the earlier image-block model in Note 17. It cannot write an answer absent
+from its input and does not replace the independent free-generation objective.
+
+\paragraph{An image-only conditional distribution.}
+Let $X\in\{0,255\}^{32\times W}$ be a complete prepared writing strip.
+Its anonymous units $u_i=[a_i,b_i)$ are maximal consecutive columns containing
+black ink. Units need not be characters: a radical or letter can occupy
+several units. The calibrated image/context body\cite{qwen3vl} encodes the
+whole strip after white-column folding and native image-budget resizing.
+Nine bilinear samples at each unit's original folded location supply a
+contextual descriptor $\nu_i\in\mathbb R^{4096}$. All final numeric task-frame
+states $q_k\in\mathbb R^{4096}$ are retained. The contextual computation is
+FP32 with frozen BF16 language weights and FP32 vision weights imported from
+the shared Q4 archive; descriptors are cached in BF16. The language vocabulary
+module and output projection are absent. Neither source text, tokenizer,
+recognition nor a teacher service supplies inference answers.
+
+The learned head has width 256. With trainable layer normalizations and
+projections, define $v_i=P_v(\operatorname{LN}(\nu_i))$ and
+$\bar q=K^{-1}\sum_k P_q(\operatorname{LN}(q_k))$. A shared nonlinear network
+maps $[v_i;\bar q;v_i\odot\bar q;g_i]$ to start and end scores $(s_i,e_i)$;
+$g_i$ contains four physical position/width features. Two 256-wide GELU
+layers precede the two scores. For all visible spans
+$\mathcal A(X)=\{(i,\ell):1\leq\ell\leq128,\ i+\ell-1\leq n(X)\}$,
+\[
+ p_\theta(i,\ell\mid X)=
+ \frac{\exp(s_i+e_{i+\ell-1}+b_\ell)}
+ {\sum_{(j,m)\in\mathcal A(X)}\exp(s_j+e_{j+m-1}+b_m)}.
+\]
+The motor $C_{i,\ell}(X)$ copies every original pixel between $a_i$ and
+$b_{i+\ell-1}$ and adds a two-pixel horizontal white frame. All 32 rows are
+unchanged. Identical complete images share probability mass:
+\[
+ P_\theta(Y\mid X)=\sum_{(i,\ell):C_{i,\ell}(X)\equiv Y}
+                         p_\theta(i,\ell\mid X).
+\]
+Equality removes only all-white horizontal exterior. Training minimizes
+the negative log total mass of all reference-image alternatives and their
+matching source occurrences. No gold answer offset or candidate whitelist
+enters neural conditioning. Inference selects the image of maximum marginal
+mass, not necessarily the single most likely span. Its predicted end boundary
+terminates the copied block; finite candidate selection is not learned
+free-stream stopping or a density for arbitrary new images.
+
+\paragraph{Data and complete execution.}
+The fixed training set contains two different-reference questions about each
+of 128 CMRC paragraphs (256 requests), plus 64 random copying strings, half
+Chinese and half English. Development uses 32 disjoint-article paragraphs
+with two questions each and 32 new copying strings. Question- and
+passage-erased views add 128 inputs without changing layout. All 544 inputs
+are encoded; assessment produces 224 development answers and the first
+32 training-QA answers. The source and targets use complete 24-pixel Noto Sans
+CJK JP writing inside 32-pixel strips. Pango logical positions and original
+annotations prepare source-rendered reference crops offline; optimization
+receives their pixels and marginalizes every matching occurrence. One
+training paragraph pair is excluded before model calls because its source
+ink exceeds the vertical canvas. All 160 selected paragraph pairs have
+different reference images. Training/development article titles do not
+overlap. This is reused public development, not a sealed foundation test.
+The interface supports prepared binary strips, not arbitrary scan segmentation.
+
+Before new encodings, four retained V77 task-frame memories replay exactly.
+The full frozen source has 7,528,898,801 parameters; the head adds 2,378,370,
+giving 7,531,277,171 runtime parameters and inherited external pretraining.
+AdamW uses peak rate $3\times10^{-4}$, 100-update linear warm-up, cosine
+decay to $3\times10^{-5}$, $(0.9,0.95)$ moments, decay 0.01 and clipping at
+one. FP32 optimization completes 3,200 updates at batch eight. Every one of
+320 training IDs appears 80 times, for 25,600 draws; all losses and gradient
+norms are finite. Only the final checkpoint is assessed. No held-out outcome
+selects data, hyperparameters or weights.
+
+Source setup and calibration take 139.548\,s; encoding takes 637.448\,s with
+18.031\,GiB peak allocated VRAM. Head optimization takes 37.689\,s at
+0.316\,GiB after caching; this is not the memory or cost of the full model.
+The 256 cached-feature readouts take 17.289\,s. Four additional actual PNG
+calls load the complete runtime in 78.726\,s, then take 5.198\,s at
+17.948\,GiB. Their visual descriptors, task memories, geometry, units and
+answer pixels reproduce cached inference exactly. They include both the
+first wrong question and next correct question, plus the first new Chinese
+and English copies. No source weights are downloaded or duplicated.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Fixed image assessment & Exact & Unordered column F1\\
+\midrule
+New Chinese copies & 16/16 & 100\%\\
+New English copies & 16/16 & 100\%\\
+Seen Chinese QA, first 32 & 32/32 & 100\%\\
+Held-out Chinese QA & 9/64 & 36.114\%\\
+Question ink erased & 2/64 & 18.868\%\\
+Passage ink erased & 0/64 & 9.422\%\\
+\bottomrule
+\end{tabular}
+\end{center}
+Only one of 32 held-out paragraph pairs has both questions correct. The
+normal-minus-question-erased exact gain is $7/64=10.938$ percentage points,
+below the declared 25-point floor. New copying passes its 30/32 requirement;
+natural answers (48/64), paired answers (20/32) and question dependence fail.
+Column F1 is an unordered diagnostic, not semantic accuracy. Exact image
+agreement is stricter than semantic equivalence; the visible wrong spans
+also show substantive errors. The first common-name question receives a
+taxonomic description rather than its two reference names (Fig.~S21).
+Other failures extend a correct prefix or cut through a character. Ink-unit
+boundaries do not guarantee character or answer boundaries.
+
+The export \path{references/evidence/contextual_pixel_spans_result/} binds
+657 files, every raw answer/input/reference image, all optimizer records and
+the native calls. Independent PNG scoring reproduces all 256 outcomes and
+reconstructs each answer from its declared original source columns. All 544
+feature files authenticate. All 128 erasure controls leave no partly erased
+ink runs. The final checkpoint SHA256 is
+\path{85369b1c1547f6fd02e5cc7ea601e202bb03ed8360e6e4964e94b5beec476a91}.
+Execution uses \path{scripts/run_contextual_pixel_spans.py}; actual image
+inference uses \path{scripts/infer_contextual_pixel_spans.py}; independent
+export uses \path{scripts/export_contextual_pixel_spans.py}.
+
+This establishes accurate copying on its tests and a registered seen-data
+fit, while rejecting this frozen-context head as a qualified natural reader.
+It identifies a generalization gap in selection/boundaries, without selecting
+a unique cause or demonstrating that more frozen-head training repairs it.
+V58 is not a matched control: source, units, data, pretraining, budget and
+assessment differ. The full ILM still requires grounded language learning
+and independent free image generation. CMRC retains Cui et al.\cite{cmrc},
+CC-BY-SA-4.0 attribution; Qwen3-VL retains Alibaba, Apache-2.0 attribution.
+
+\clearpage
+\plate{Figure_S21_contextual_pixel_spans}{\textbf{Exact source-pixel copying
+does not qualify general reading.} \textbf{a}, Complete input writing pixels
+enter the frozen contextual source and the original-pixel motor. Only the
+span head learns; source descriptors and numeric task-frame states condition
+its normalized dynamic image distribution. There is no language vocabulary
+module or text answer decoder. \textbf{b}, Exact image-answer percentages;
+categories show the actual numerators and denominators. New copies include
+16 Chinese and 16 English strings; seen QA is the registered first 32 training
+questions. Held-out QA uses 64 questions from 32 paragraphs. Only one pair
+is both correct, and three of four requirements fail. \textbf{c}, The first
+two fixed held-out questions concern the same fish. English question labels
+describe the original Chinese requests; all reference and output images are
+unaltered source-rendered PNGs. The wrong first output is a taxonomic passage,
+while the second matches its ocean-region reference. The model copies visible
+source regions and cannot synthesize an absent answer. The complete 7.531B
+runtime includes external pretraining; the 2.38M learned head is not a small
+foundation trained from scratch.}{fig:s21-contextual-pixel-spans}

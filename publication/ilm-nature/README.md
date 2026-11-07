@@ -15,8 +15,43 @@ builder remain inside the named baseline.
 
 ## Current result
 
-The independent image-input/image-output ILM remains unachieved. The
-[completed visual-state learner](../../references/native_state_alignment_result.md)
+The independent image-language goal remains unachieved. The completed
+[contextual source-pixel component](../../references/contextual_pixel_spans_result.md)
+copies **32/32 new Chinese/English strings** and fits **32/32 seen QA images**,
+but gives only **9/64 exact held-out Chinese answers** and **1/32 both-correct
+paragraph pairs**. Question erasure gives 2/64 and passage erasure 0/64.
+Three of four component requirements fail. Its output is an original source
+crop; it cannot synthesize an answer absent from the image.
+
+The full runtime retains **7.531B parameters** and external pretraining;
+**2.378M parameters** learn. All 256 raw answers are independently rescored
+and reconstructed from their actual source columns. Four complete native PNG
+calls reproduce cached descriptors and answer pixels exactly, including the
+wrong first question. Head-only training time excludes source encoding and
+pretraining; no matched-quality efficiency advantage is established.
+
+The 213-word abstract, Results, **Note 44 and Figure S21** report this copying/
+reading distinction, its probability law, actual costs and failed requirements.
+The current package has a **15-page article, 28-page review and 50-page
+supplement**, with matching V68 redlines (28/50 pages). The editable native deck
+has **36 slides**. All 35 prior slide parts and rendered appearances, all 86
+prior figure assets and the first 44 supplement pages are preserved.
+
+Current entry points are `pixel_span_figures.py --stage generate|verify|render`
+and `build_pixel_span_publication.py --stage build|sync`. The historical
+builders below retain earlier slide counts and must not overwrite the current
+36-slide package. The figure uses editable shapes, a native chart/workbook
+and unaltered reference/output PNGs. No image is presented as free synthesis.
+
+Local delivery uses `ILM_NatureStyle_20261107_ContextualPixelSpans` and five
+`LATEST` aliases in the ILM Nutstore project folder. Source/destination hashes
+verify the local copy; cloud propagation is not independently verified.
+
+![Exact source-pixel copying with weak held-out question answering](figures/Figure_S21_contextual_pixel_spans.png)
+
+## Earlier state and canvas controls
+
+The [completed visual-state learner](../../references/native_state_alignment_result.md)
 improves English QA from **11/32 to 16/32** and English copying from **7/16
 to 16/16**, while Chinese QA remains **0/32** and copying **0/16**. Four of
 six reader requirements fail. A [seen-prompt check](../../references/native_state_fit_result.md)
@@ -47,27 +82,12 @@ feature block alone is insufficient for Chinese in this layout. Note 43
 retains all four arms and their limitations; the hybrids need not encode
 real images. No natural QA or image answers are measured in this comparison.
 
-The abstract, article Results, **Note 43 and Figure S20** report these completed
-observations, their actual equations, costs, raw responses and limitations.
-The package has a **15-page article, 28-page review and 47-page supplement**,
-with matching V68 redlines. The native editable deck has **35 slides**;
-all 34 earlier slide parts and rendered appearances, 82 earlier individual
-figure assets and the first 40 supplement pages are preserved. This table-only
-revision also preserves all 35 current slides and all 86 current figure assets.
+The earlier observations remain in Note 43 and Figure S20. Historical entry
+points are `state_alignment_figures.py` and
+`build_state_alignment_publication.py`. Their 35-slide package is preserved
+in Git and its named local delivery; use the current entry points above.
 
-Current figure/build entry points are `state_alignment_figures.py --stage
- generate|verify|render` and `build_state_alignment_publication.py --stage
- build|sync`. `activate_state_alignment_revision.py` records the bounded
-source edit from the preserved baseline; do not rerun it over later edits.
-Older builders retain historical slide counts and must not overwrite this
-package. Source figures are native editable diagrams, charts/workbooks and
-unaltered request pixels. No text readout is presented as a generated page.
-
-The reviewed local delivery is `ILM_NatureStyle_20261107_NativeCanvasFactorization`
-with five stable `LATEST` aliases in the ILM Nutstore project folder. Local
-checksums verify copying; cloud propagation is not independently verified.
-
-![Measured visual-state learner, geometry control and unmodified seen copying response](figures/Figure_S20_state_alignment.png)
+![Measured visual-state learner and canvas controls](figures/Figure_S20_state_alignment.png)
 
 ## Earlier paired copying
 

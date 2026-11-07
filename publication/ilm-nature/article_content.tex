@@ -725,6 +725,18 @@ useful independent image-language learning remain unachieved.
 
 A subsequent source-preserving visual-state correction improves English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, but Chinese QA remains 0/32 and copying 0/16 (Supplementary Note 43 and Fig.~S20). Four of six reader requirements fail. A separate seen-prompt check corrupts all eight Chinese strings despite previous training exposure. The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. All 480 layout-control calls are retained, including exact replay of the 160 original responses. A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. A further 128-call feature/context intervention does not restore Chinese copying by shortening the square context alone; strip features in the long context recover 16/16 English but only 2/16 Chinese copies (Note 43). These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.
 
+A separate contextual source-pixel component copies all 32 new Chinese/English
+strings and fits all 32 tested training questions exactly, but gives only
+9/64 exact held-out Chinese answers and 1/32 both-correct paragraph pairs
+(Supplementary Note 44 and Fig.~S21). Question erasure gives 2/64 and passage
+erasure 0/64. Three of four registered component requirements fail. Four
+actual native-image calls reproduce its cached descriptors and answer pixels,
+including the wrong first question. This is learned source-region selection
+with exact pixel copying, rather than free glyph synthesis. Its 2.378M trained
+head retains a 7.531B externally pretrained runtime. The clean copying and
+seen-data fit therefore expose a remaining selection/boundary generalization
+gap without qualifying a lightweight general image-language model.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -742,8 +754,10 @@ Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
 Supplied-target reconstruction is preserved by an aligned inverse-image path;
-new prompt-directed copying still fails. The remaining test is whether
-context selects and generates a coherent written future. Low teacher-forced
+the free image writers still fail new prompt-directed copying. The separate
+source-pixel component passes its new-copy test but fails natural-reading
+qualification. The remaining test is whether context selects and generates a
+coherent written future. Low teacher-forced
 image NLL can reflect dependencies among strokes already revealed within the
 target, while generated output still loses global identity. Joint training
 improves proper likelihood beyond matched extra density training; the raw

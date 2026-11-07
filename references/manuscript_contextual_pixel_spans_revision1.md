@@ -83,3 +83,60 @@ No response letter applies. The full ILM goal remains unachieved. Subsequent
 research must improve grounded semantic learning while preserving this motor,
 and still demonstrate free image-language generation. Do not scale the
 unchanged frozen-context head merely because it fits training data.
+
+## Layout amendment before final build
+
+The first compiled review shows that the accumulated abstract has become an
+overlong block of individual run histories. Condense the active PaperSummary
+to roughly 230 words centred on the image-language goal, the codec/writer
+contrast, the measured copying/QA contrast, inherited pretraining and the
+unachieved full objective. Preserve all detailed earlier outcomes in Results
+and the supplement; no numeric result or claim boundary changes. This is
+authorized manuscript maintenance, not a new scientific outcome. Rebuild and
+visually inspect the article/review/redline reflow as well as Note 44.
+Qualify the Discussion sentence about failed new copying as applying to the
+free image writers. The separate source-pixel component now passes its copy
+test while failing reading qualification, so a blanket failure statement
+would misstate the current evidence.
+
+
+## Executed verification and local delivery
+
+The completed unit adds Note 44 and Figure S21, condenses the abstract to
+213 words, and qualifies the Discussion's failed-copying statement. No
+experiment is rerun or relabelled. The new raw examples include the wrong
+common-name answer and correct ocean-region answer.
+
+- Current clean article/review/supplement: 15/28/50 pages. V68 redlines:
+  28/50 pages. Native figure review: 36 pages; standalone S21: one page.
+- All seven PDFs pass qpdf; clean and redline builds complete without
+  overfull boxes or undefined references/citations.
+- Native package verification passes with zero structural findings, 36
+  slides and 42 charts. Separate builder checks authenticate chart/workbook
+  values. All 35 prior native slide parts/appearances, 86 old individual
+  assets and the first 44 clean supplement pages remain unchanged.
+- Original reference/output pixel arrays survive all four PDF destinations.
+  New figure ticks and question-label alignment were corrected before the
+  final render; the final PNG has been visually inspected.
+- All reflowed article/review/redline pages were inspected in overview
+  contact sheets. Full-page checks cover the cover, new Results, final
+  Discussion correction, Note 44 and figure plate. This does not claim
+  full-size reading of every changed page. Exact scope and seven current
+  PDF hashes are in `contextual_pixel_spans_visual_review.json`.
+- Native OOXML/LibreOffice and pdflatex/PyMuPDF were used; Artifact Tool is
+  unavailable. No native PowerPoint application review is claimed. The
+  already executed operation markers were not repeated.
+- The local Nutstore package
+  `ILM_NatureStyle_20261107_ContextualPixelSpans` contains 409 hash-verified
+  files. Five current aliases match source hashes, and prior differing
+  aliases have digest-qualified backups. This verifies local delivery only,
+  not cloud propagation. The private sync receipt is under
+  `artifacts/contextual_pixel_spans_publication_20261107/sync.json`.
+
+The result remains negative for general reading and free image-language
+creation. There is no qualified lightweight independent model, matched-quality
+efficiency advantage, historical-script understanding or general instruction
+following. The next research step must address question-conditioned semantic
+learning with a matched control, while preserving accurate image copying;
+free generation remains an additional unmet requirement. No new long training
+run is justified merely by the 32/32 seen-data fit.
