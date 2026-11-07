@@ -30,3 +30,8 @@ score exists. Failure on seen prompts indicates a training-fit obstruction;
 success there with held-out failure instead indicates a transfer/generalization
 obstruction. Neither result identifies a unique mechanism. No arm supplies
 continuous image answers or completes the independent ILM goal.
+
+CMRC 2018 and SQuAD 1.1 passages and annotations retain CC-BY-SA-4.0
+attribution to Cui et al. (2019) and Rajpurkar et al. (2016). The source
+model and implementation are NUS Show Lab's Show-o2, Apache-2.0. Source
+pretraining may include public evaluation material; this is a local diagnostic.

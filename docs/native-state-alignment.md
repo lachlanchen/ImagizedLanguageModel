@@ -1,10 +1,17 @@
 # Learn a fine-image correction to the native reader
 
-This is a complete runnable **reader-learning experiment**, with a fixed
+This is a completed **reader-learning experiment**, with a fixed
 protocol and autonomous assessment. It is one prerequisite of the independent
 image-input/image-output ILM. Its temporary native Unicode head does not
 provide image answers. The [protocol](../references/native_state_alignment_protocol.md)
 defines the model, data, objective, optimizer and six quality gates.
+
+The [completed result](../references/native_state_alignment_result.md)
+improves English QA from 11/32 to 16/32 and English copying from 7/16 to
+16/16. Chinese QA remains 0/32 and copying 0/16. Four of six reader gates
+fail. A [seen-prompt check](../references/native_state_fit_result.md) also
+finds 0/8 exact Chinese copies, with changed characters in every response.
+This checkpoint is not a usable Chinese or independent image-answer ILM.
 
 The frozen low-resolution source retains its measured initial behavior.
 A zero-initialized full-rank linear bridge adds a correction derived from the
@@ -66,11 +73,12 @@ not measure the earlier temporary FP32 control's peak.
 The [protocol deviation](../references/native_state_alignment_protocol.md#execution-deviation-and-additional-source-check)
 records that the initial worker replayed four native readouts but compared
 the corrected prefix/mask only on its training probe. The additional complete
-four-case corrected-path check is required before final scoring. The current
-controller was launched before that extra stage was added: after it is
-terminal, rerun the updated controller to reuse completed stages and execute
-the missing source check and final scorer. Never launch a successor while
-the existing training or assessment child is live.
+four-case corrected-path check was required before final scoring. The original
+controller was launched before that extra stage was added. After it terminated,
+the updated controller reused every completed stage and executed the missing
+source check and final scorer. All four prefixes/masks and eight readouts
+matched exactly. The current controller includes that stage for fresh runs.
+Never launch a successor while an existing training or assessment child is live.
 
 Inspect `artifacts/native_state_alignment/controller_status.json` and the
 stage logs. Numeric weights, optimizer/cache files and private runtime handoff
@@ -110,4 +118,7 @@ is retained locally with SHA256. No failed response is repaired or replaced.
 Passing all six reader gates would admit a separate continuous image-writing
 experiment. It cannot complete the ILM goal, establish historical-form
 capability or demonstrate efficiency relative to a conventional LLM. There is
-no completed learning-quality result from this experiment yet.
+no completed learned repair for Chinese in this experiment. The main optimizer
+takes 3,112.084 seconds at 6.370 GiB peak allocated memory, excluding the
+offline cache and loading. The complete primary assessment is 160 calls;
+the separate seen-prompt diagnosis adds 96, with no further optimization.

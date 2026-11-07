@@ -52,15 +52,17 @@ original text. [Native-window feature controls](../../references/native_window_r
 preserve high-resolution codec readability but do not repair natural QA.
 Their complete responses and source-equivalence controls remain available.
 
-The new [bilingual state-alignment experiment](../../docs/native-state-alignment.md)
+The completed [bilingual state-alignment experiment](../../docs/native-state-alignment.md)
 learns a zero-initialized high-resolution correction to the unchanged native
-reader. Its 640 offline text-state targets, three real preflight updates and
-32-case source copying baseline are complete; the 2,560-update main run is
-active. The protocol records the additional corrected-path replay that must
-precede final qualification. No completed learning-quality or image-answer
-result is claimed. A bounded manuscript revision will incorporate the complete
-before/after assessment once that observation is terminal; the current
-compiled article retains Note 42 as its latest completed revision.
+reader. Its [complete result](../../references/native_state_alignment_result.md)
+improves English QA from 11/32 to 16/32 and English copying from 7/16 to
+16/16. Chinese remains 0/32 QA and 0/16 copying. Four of six requirements
+fail; a separate [seen-prompt check](../../references/native_state_fit_result.md)
+also gives 0/8 Chinese copies with changed characters. The additional source
+check is complete, with its preflight timing deviation retained. No direct
+image-answer result is demonstrated. The bounded manuscript revision will
+incorporate this failed Chinese repair and limited English transfer; the
+current compiled article retains Note 42 as its latest completed revision.
 
 ## Earlier paired copying
 

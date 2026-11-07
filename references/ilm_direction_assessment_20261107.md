@@ -5,6 +5,17 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
+The completed [bilingual state-alignment experiment](native_state_alignment_result.md)
+now gives limited English transfer: QA improves from 11/32 to 16/32, and
+English copying from 7/16 to 16/16. Chinese remains 0/32 QA and 0/16 copying.
+Four of six reader requirements fail. A separate
+[seen-prompt check](native_state_fit_result.md) gives 0/8 Chinese copies with
+changed characters even on training inputs. This is a fit obstruction in
+the current recipe, not evidence that more held-out data or a cleaner image
+writer will repair it. No unique cause or validated general ILM direction
+has been established; the English gain does not qualify Chinese or image
+answers. Further book-scale training with this unchanged recipe is not admitted.
+
 The later [full-page curriculum](native_visual_alignment_result.md) improves
 requested copying to 29/32 but leaves Chinese and English QA at 0/32 on the
 original 1024-square pages. A subsequent
