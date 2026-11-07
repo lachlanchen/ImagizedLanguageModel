@@ -1,0 +1,125 @@
+\clearpage
+\section*{Supplementary Note 46. Matched image and text-prefix histories}
+
+The image writer and source-language helper use different physical history
+units. This audit joins their existing traces on all 32 shared training
+questions. It tests whether a comparison by writing position is supported
+by identical visible content. It performs no new contextual model forward,
+vocabulary projection, optimizer update or alignment treatment.
+
+Let $Y$ be the complete canonical answer raster, padded to 64-column blocks,
+and let $P_j(Y)$ preserve its first $64j$ columns while setting the remaining
+canvas to white. Let $R_o(t_{:k})$ render a complete reference-text prefix
+with the full reference's original font, canvas and draw origin. The
+eligible prefixes at boundary $j$ are
+\[
+ \mathcal K_j=\{k:R_o(t_{:k})=P_j(Y)\}.
+\]
+A saved helper state can be compared only when its decoded preceding text
+equals an eligible complete prefix. The image writer consumes two learned
+image embeddings per block; the helper consumes native language pieces.
+Equal ordinal indices therefore do not identify equal histories.
+Independently centering each prefix would also move its vertical origin;
+the audit retains the complete reference's origin.
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+Position & Image boundaries & Exact prefix raster & Saved matching state\\
+\midrule
+Initial & 32 & 32 & 32\\
+Intermediate & 75 & 7 & 2\\
+Terminal & 32 & 32 & 19\\
+\bottomrule
+\end{tabular}
+\end{center}
+At 68/75 intermediate boundaries there is no complete canonical text-prefix
+raster. Five further boundaries admit such a raster but have no matching
+retained helper state. All terminal rasters are representable; thirteen
+lack a corresponding saved state. Missing states and different helper
+answers remain in the denominator. All 216 eligible saved source-prefix
+positions decode to complete UTF-8, so split-byte prefixes do not explain
+the missing correspondences in this cohort.
+
+All owning prompt hashes and BF16 reader-memory hashes agree. The 32 initial
+states agree after common BF16 rounding. These controls do not imply that
+later image-history states retain the helper's original language behavior.
+Only two intermediate correspondences can be evaluated from the retained
+traces:
+\begin{center}\small
+\begin{tabular}{lrrrr}
+\toprule
+Question & Image blocks & Image positions & Helper positions & Distance\\
+\midrule
+\texttt{TRAIN\_1779\_QUERY\_1} & 3 & 6 & 6 & 1.497\\
+\texttt{TRAIN\_2146\_QUERY\_1} & 1 & 2 & 6 & 1.407\\
+\bottomrule
+\end{tabular}
+\end{center}
+Figure S23 retains both preceding prefix images. For states $h,g$ of width
+$d$, the reported distance is
+\[
+ \delta(h,g)=
+ \sqrt{\frac{1}{d}\left\|
+ \frac{h}{\sqrt{\operatorname{mean}(h^2)+10^{-6}}}
+ -
+ \frac{g}{\sqrt{\operatorname{mean}(g^2)+10^{-6}}}
+ \right\|_2^2}.
+\]
+The first correspondence has equal position counts; the second does not.
+Neither distance is calibrated as a language score or establishes a cause
+of the corrupted answers. Nineteen terminal matches have median distance
+1.404, with the same interpretation limit.
+
+The earlier state-alignment learner in Note 43 supervised Show-o2's
+pre-answer prompt states. It did not test alignment of these Qwen
+image-history transitions. The present result supplies neither a complete
+teacher-state dataset at the existing block boundaries nor an evaluated
+repair. A future treatment must define how teacher and actor histories
+correspond before comparing their states. Future-conditioned targets can
+serve as predictive supervision, but cannot be described as states of an
+identical preceding history or supplied to autonomous inference.
+
+The audit reads saved states and tokenizer-string metadata only. It
+materializes no neural source weights. The string table is hashed; the
+complete shared source archive is not rehashed in this metadata-only
+operation. The invocation takes 13.270 seconds and about 1.000 GiB process
+RSS. An independent NumPy/PIL check reconstructs UTF-8 prefixes, rescans
+physical correspondences and recomputes BF16 rounding, distances and all
+totals. It verifies stored arrays rather than rerunning either contextual
+model or the font renderer. The 361 retained prefix/state files occupy
+5.18 MB and are bound by the public receipt. The renderer is not a universal
+character-segmentation rule.
+
+Execution uses \path{scripts/audit_history_prefix_alignment.py}, with its
+separate \texttt{--verify} stage. The protocol and producer precede the
+audit at \texttt{bfa8026}; the verified public result is
+\path{references/evidence/history_prefix_alignment_result.json}.
+The fixed task-memory diagnostic in Note 45 uses
+\path{scripts/audit_contextual_query_memory.py} and its independent verifier.
+The matched comparison uses \path{scripts/compare_contextual_pixel_learning.py};
+standalone inference uses \path{scripts/infer_adapted_pixel_spans.py};
+complete independent export uses
+\path{scripts/export_contextual_pixel_comparison.py}. Completed data,
+protocols, checkpoints and failed invocations remain preserved. These
+observations add no natural-language capability or free image generation.
+
+\clearpage
+\plate{Figure_S23_history_prefix}{\textbf{Most retained image steps lack
+a matching complete text-prefix state.} \textbf{a}, The image writer
+consumes two continuous tile observations per 64-column block; the helper
+consumes a variable number of native language pieces. A state comparison
+requires identical preceding pixels under the full reference's rendering
+origin, rather than an equal ordinal step. \textbf{b}, Complete initial,
+intermediate and terminal counts. Seven of 75 intermediate boundaries have
+a canonical complete-prefix raster; only two have an eligible retained
+helper state. Sixty-eight have no such raster and five lack the corresponding
+state. All 32 initial states agree after common BF16 rounding; thirteen
+terminal boundaries have no retained matching state. \textbf{c}, Both
+eligible intermediate matches, with their complete canonical prefix
+rasters. The Chinese example has six image positions and six helper
+positions; the numeric example has two image positions and six helper
+positions. Their normalized distances are uncalibrated representation
+measurements. All 216 saved source-prefix positions in this cohort decode
+to complete UTF-8. The audit uses existing traces, makes no new neural
+calls and does not train an alignment or establish a reader/writer repair.}{fig:s23-history-prefix}

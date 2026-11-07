@@ -737,6 +737,21 @@ head retains a 7.531B externally pretrained runtime. The clean copying and
 seen-data fit therefore expose a remaining selection/boundary generalization
 gap without qualifying a lightweight general image-language model.
 
+A matched continuation uses the same four-pass schedule over 3,193 admitted
+Chinese QA images and 64 copies, with 3,257 updates per arm. Head-only
+control gives 23/64 exact unseen answers; additionally adapting 6.193M
+contextual attention parameters gives 26/64. Both retain 32/32 new copies,
+but answer both questions correctly in only 3/32 paragraph pairs
+(Supplementary Note 45 and Fig.~S22). Both fail two of four reader floors,
+and the three-answer gain with no additional complete pairs misses the
+prospective improvement rule. Independent scoring reconstructs all 512
+native outputs, and eight standalone calls replay pixels and events
+exactly. These checks verify execution and the failed comparison rather
+than free image-language synthesis. A separate retained-history audit
+finds only 2/75 intermediate image boundaries with a matching saved
+text-prefix state (Note 46 and Fig.~S23); the distances do not establish
+an alignment repair.
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent

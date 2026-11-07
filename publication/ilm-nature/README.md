@@ -15,39 +15,67 @@ builder remain inside the named baseline.
 
 ## Current result
 
-The independent image-language goal remains unachieved. The completed
-[contextual source-pixel component](../../references/contextual_pixel_spans_result.md)
-copies **32/32 new Chinese/English strings** and fits **32/32 seen QA images**,
-but gives only **9/64 exact held-out Chinese answers** and **1/32 both-correct
-paragraph pairs**. Question erasure gives 2/64 and passage erasure 0/64.
-Three of four component requirements fail. Its output is an original source
-crop; it cannot synthesize an answer absent from the image.
+The independent image-language goal remains unachieved. In the completed
+[matched contextual-learning comparison](../../references/contextual_pixel_adaptation_result.md),
+control and adaptation copy **32/32 new Chinese/English strings**, but answer
+only **23/64 and 26/64 unseen Chinese questions** exactly. Both solve both
+questions in just **3/32 paragraph pairs**. Both fail the natural-answer and
+paired-answer requirements; gains of three answers and zero complete pairs
+miss the prospective improvement rule. Outputs remain original source crops,
+so this component cannot compose answers absent from its input.
 
-The full runtime retains **7.531B parameters** and external pretraining;
-**2.378M parameters** learn. All 256 raw answers are independently rescored
-and reconstructed from their actual source columns. Four complete native PNG
-calls reproduce cached descriptors and answer pixels exactly, including the
-wrong first question. Head-only training time excludes source encoding and
-pretraining; no matched-quality efficiency advantage is established.
+Each arm completes **3,257 updates and 13,028 training draws**. The complete
+runtime retains **7.531B externally pretrained parameters**; control learns
+2.378M head parameters and adaptation learns 8.572M head/attention parameters.
+Optimization takes 126.665 and 30,856.570 seconds on one RTX 4090 D, excluding
+source preparation and external pretraining. The
+[execution receipt](evidence/contextual_pixel_adaptation_execution_notes.json)
+separates measured stage costs from incomplete assessment/reload timing.
+All 512 raw answer images are independently reconstructed and scored; eight
+standalone calls reproduce pixels and events exactly. None of these checks
+establishes free writing or an efficiency advantage at matched language quality.
 
-The 213-word abstract, Results, **Note 44 and Figure S21** report this copying/
-reading distinction, its probability law, actual costs and failed requirements.
-The current package has a **15-page article, 28-page review and 50-page
-supplement**, with matching V68 redlines (28/50 pages). The editable native deck
-has **36 slides**. All 35 prior slide parts and rendered appearances, all 86
-prior figure assets and the first 44 supplement pages are preserved.
+The separate [earlier-head memory substitution](../../references/contextual_query_memory_result.md)
+changes 53/64 development selections while its original score remains 9/64.
+These are hybrid features, not native new prompts. The
+[history-prefix audit](../../references/history_prefix_alignment_result.md)
+finds only 2/75 intermediate image boundaries with matching saved helper
+states. It makes no new neural calls and tests no alignment repair.
+**Notes 45–46 and Figures S22–S23** retain both diagnostics, all comparison
+counts, original example rasters and their limitations. The earlier source-pixel
+result remains in Note 44/Figure S21 and is distinct from the new control.
 
-Current entry points are `pixel_span_figures.py --stage generate|verify|render`
-and `build_pixel_span_publication.py --stage build|sync`. The historical
-builders below retain earlier slide counts and must not overwrite the current
-36-slide package. The figure uses editable shapes, a native chart/workbook
-and unaltered reference/output PNGs. No image is presented as free synthesis.
+The current package contains a **15-page article, 28-page review and 55-page
+supplement**, with matching V68 redlines (29/56 pages). The editable deck has
+**38 slides and 44 native charts**. All 36 earlier slide parts and rendered
+appearances, all 93 prior figure assets and the first 47 supplement pages
+are preserved. The abstract is 200 words.
 
-Local delivery uses `ILM_NatureStyle_20261107_ContextualPixelSpans` and five
+Current entry points, run from this directory, are:
+
+```bash
+python conditional_learning_figures.py --stage generate
+python conditional_learning_figures.py --stage verify
+python conditional_learning_figures.py --stage render
+python build_conditional_learning_publication.py --stage build
+# After actual PDF/PNG inspection and its bound visual-review receipt:
+python build_conditional_learning_publication.py --stage sync
+```
+
+Figure generation uses the authenticated repository evidence and two retained
+history-prefix PNGs. The new slides contain native editable shapes, charts,
+embedded workbooks and unchanged evidence PNGs. Rendering uses LibreOffice;
+Arial is substituted with Liberation Sans. Artifact Tool and PowerPoint-app
+inspection were unavailable. Historical builders retain earlier slide counts
+and must not overwrite the current 38-slide deck.
+
+Local delivery uses `ILM_NatureStyle_20261108_ConditionalLearning` and five
 `LATEST` aliases in the ILM Nutstore project folder. Source/destination hashes
-verify the local copy; cloud propagation is not independently verified.
+verify local copying; cloud propagation is not independently verified.
 
-![Exact source-pixel copying with weak held-out question answering](figures/Figure_S21_contextual_pixel_spans.png)
+![Matched source-pixel learning and failed reader requirements](figures/Figure_S22_contextual_learning.png)
+
+![Physical image-history and helper-prefix correspondences](figures/Figure_S23_history_prefix.png)
 
 ## Earlier state and canvas controls
 

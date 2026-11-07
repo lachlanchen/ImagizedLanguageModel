@@ -152,10 +152,12 @@ authorize new training or a claim of useful free image-language generation.
 
 ## Current state
 
-The final comparison and standalone verification are complete. Manuscript
-edits, figure authoring, PDF builds and new local delivery remain pending.
-Existing publication files have not changed. The current model remains
-unqualified for free image-language generation.
+The final comparison, standalone verification and this bounded manuscript unit
+are complete. The article, review, supplement, V68 redlines, editable deck and
+two new standalone figures have been built and inspected. The local Nutstore
+package and five latest aliases have been hash-verified. The current model
+remains unqualified for free image-language generation; no new training was
+performed in this publication unit.
 
 ## Verified evidence amendment before authoring
 
@@ -221,3 +223,44 @@ adaptation regimen does not qualify for scale-up; it must still distinguish
 the unachieved free writer from the tested source-copy motor. The public
 report is `references/contextual_pixel_adaptation_result.md`. No new general
 ILM, novelty, historical-script or matched-quality efficiency claim is allowed.
+
+## Completed publication verification
+
+The authoring freeze is repository commit `11f2edce0d2f25e21f597217e02afe70f36c1cf8`;
+publication sources are identical to those at the earlier plan baseline. Fresh
+operation markers ran once for one edited PPTX and eight PDFs. Artifact Tool
+and its dependency loader were unavailable; native OOXML plus LibreOffice
+were used. No PowerPoint-app inspection is claimed. Arial renders with
+Liberation Sans in this environment.
+
+The final article/review/supplement have 15/28/55 pages; V68 redlines have
+29/56 pages; the figure-review deck has 38 pages and both new standalone
+figures have one page. The editable deck has 38 slides and 44 native charts.
+All eight PDFs pass qpdf structural checks, and all TeX builds finish without
+overfull boxes or undefined citations/references. Native package-integrity
+and layout-geometry checks report zero findings. Their scope is structural
+and geometric, not factual or PowerPoint-runtime qualification. Chart caches,
+embedded workbooks and displayed counts independently agree with the bound
+experimental receipts.
+
+All 36 earlier native slide parts and their fresh rendered appearances are
+preserved, as are all 93 earlier figure assets and the first 47 supplement
+pages. The eight displayed raw reference/output/prefix PNGs retain their
+original pixels in the editable deck, standalone figures, figure-review deck,
+supplement and supplement redline. The scientific raw outputs, model source,
+training protocols and decisions are unchanged.
+
+The complete 256-row paired-output cohort was inspected in eight overview
+sheets, with one accepted reference shown per row; these previews are not
+full-resolution reading of every long output. All accepted references remain
+in the independent scorer. Every changed PDF page was reviewed in overview.
+The new figures, new note pages, Results/Discussion transition, abstract and
+corresponding redline pages were also inspected at readable size. Exact
+review scope and file bindings are recorded in
+`publication/ilm-nature/evidence/conditional_learning_visual_review.json`.
+
+The local delivery is `ILM_NatureStyle_20261108_ConditionalLearning`. All
+package files and five latest aliases are locally hash-verified; differing
+previous aliases have digest-qualified backups. Cloud propagation remains
+unverified. The bounded evidence update does not complete the independent
+ILM goal or admit unchanged book-scale training.

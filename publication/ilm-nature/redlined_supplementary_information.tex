@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sat Nov  7 16:52:20 2026
-%DIF ADD new.tex   Sat Nov  7 16:52:20 2026
+%DIF DEL old.tex   Sun Nov  8 04:59:34 2026
+%DIF ADD new.tex   Sun Nov  8 04:59:34 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -3237,6 +3237,320 @@ while the second matches its ocean-region reference. The model copies visible
 source regions and cannot synthesize an absent answer. The complete 7.531B
 runtime includes external pretraining; the 2.38M learned head is not a small
 foundation trained from scratch.}{fig:s21-contextual-pixel-spans}
+
+\clearpage
+\section*{\DIFadd{Supplementary Note 45. Task memory and contextual image-answer learning}}
+
+\DIFadd{The component in Note 44 separates physical source-pixel reproduction from
+selection of an appropriate answer. Two subsequent observations examine the
+conditioning path: a fixed-head task-memory substitution, followed by a
+matched comparison of frozen and adapted contextual features. The former
+uses the earlier head, whose normal development score is 9/64. It is not a
+third arm of the later comparison.
+}
+
+\subsection*{\DIFadd{Task-memory substitution with the earlier head}}
+\DIFadd{Let $H_\phi(V,M,G)$ denote the learned distribution over source spans, where
+$V$ contains contextual visual descriptors, $M$ contains task-frame memory,
+and $G$ contains physical geometry. For two questions $i,j$ about one
+passage, the intervention is
+}\[
+ H_\phi(V_i,M_i,G_i)\ \longrightarrow\ H_\phi(V_i,M_j,G_i).
+\]
+\DIFadd{Weights, source pixels, unit boundaries and $V_i,G_i$ remain fixed. This
+constructs hybrid features rather than a native encoding of a new image.
+Moreover, $V_i$ can contain question information, so the substitution does
+not isolate one internal cause of the original errors.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrrr}
+\toprule
+\DIFadd{Cohort }& \DIFadd{Original correct }& \DIFadd{Swap: own }& \DIFadd{Swap: partner }& \DIFadd{Image changes}\\
+\midrule
+\DIFadd{Seen questions }& \DIFadd{32/32 }& \DIFadd{5/32 }& \DIFadd{26/32 }& \DIFadd{27/32}\\
+\DIFadd{Development }& \DIFadd{9/64 }& \DIFadd{1/64 }& \DIFadd{9/64 }& \DIFadd{53/64}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{Paired reference-image sets are disjoint and both remain available in each
+owning source. Mean span-index total variation is 0.8423 on training and
+0.8556 on development. The log odds of the owning versus partner reference
+move toward the partner in every one of 32 training and 64 development
+substitutions. Original owning references outrank their partners in 45/64
+development cases, but only 9/64 selections beat all competing spans.
+Two-reference preference therefore cannot replace complete-answer scoring.
+}
+
+\DIFadd{The diagnostic replays all 96 original selected images and boundaries and
+retains all 192 original/substituted images. A separate NumPy/PIL check
+reconstructs them from source columns and recomputes probabilities, paired
+counts and total variation. Cached CPU probabilities differ from the native
+GPU values by at most $4.293\times10^{-6}$; they are not bit-identical.
+The audit makes 192 head calls, no source-encoder calls and no optimizer
+updates. Its 39.644-second invocation includes 1.631 seconds setup and peaks
+at 0.551 GiB RSS, excluding the earlier 7.531B source encoding and the
+separate verification duration. It rejects exact insensitivity of this
+memory branch on these cases without repairing the reader.
+}
+
+\subsection*{\DIFadd{Matched contextual adaptation}}
+\DIFadd{The later comparison fixes the source-pixel motor, admitted data, draw
+schedule, initial head and final-checkpoint rule. Both arms optimize the
+image-level likelihood from Note 44, summing probability over all admissible
+source crops that equal a target under the declared exterior-white
+normalization. Control learns the 2,378,370 head parameters from authenticated
+frozen features. Adaptation also learns rank-eight query, value and output
+adapters in all 36 contextual layers:
+}\[
+ W_\ell^{\mathrm{eff}}
+   =W_\ell+\frac{\alpha}{r}U_\ell D_\ell,
+ \qquad r=8,\quad \alpha=16 .
+\]
+\DIFadd{The up matrices initially vanish. The 6,193,152 additional parameters give
+8,571,522 optimized parameters in adaptation. Both complete runtimes contain
+7,531,277,171 parameters and external Qwen3-VL pretraining. Vision and base
+weights remain fixed. Contextual base storage is BF16, with FP32 contextual
+computation and learned parameters; the original BF16 feature boundary is
+preserved.
+}
+
+\DIFadd{Each arm sees the same four shuffled passes over 3,193 admitted Chinese QA
+images and 64 training copies: 13,028 draws, batch four by sequential
+accumulation, and 3,257 updates. Eighteen QA records are excluded before model
+calls. Head/adapter peak learning rates are $10^{-4}/10^{-5}$, with 100
+warm-up updates and cosine decay to one tenth of peak. AdamW uses
+$(0.9,0.95)$, decay 0.01 and joint norm clipping at one. The intervention is
+this complete regimen, including the changed clipping parameter set.
+Development does not select a checkpoint.
+}
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Fixed cohort }& \DIFadd{Control }& \DIFadd{Adapted}\\
+\midrule
+\DIFadd{New Chinese/English copies }& \DIFadd{32/32 }& \DIFadd{32/32}\\
+\DIFadd{Seen Chinese questions }& \DIFadd{28/32 }& \DIFadd{27/32}\\
+\DIFadd{Unseen Chinese questions }& \DIFadd{23/64 }& \DIFadd{26/64}\\
+\DIFadd{Both questions correct per paragraph }& \DIFadd{3/32 }& \DIFadd{3/32}\\
+\DIFadd{Question erased }& \DIFadd{1/64 }& \DIFadd{0/64}\\
+\DIFadd{Passage erased }& \DIFadd{0/64 }& \DIFadd{0/64}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{Of the 64 matched normal questions, 20 are correct in both arms, six only
+after adaptation, three only in control, and 35 in neither. Both pass the
+30/32 copy floor and 25-percentage-point question-erasure gain floor, but
+fail the 48/64 natural-answer and 20/32 paragraph-pair floors. Gains of
+three answers, zero pairs and zero copies miss the separate improvement
+rule of at least eight extra answers, four extra pairs and no more than
+two lost copies. These floors are decision rules, not significance tests.
+Normal unordered-column F1 is 61.622\% and 67.444\%; it does not measure
+semantic correctness or readability.
+}
+
+\DIFadd{Question erasure preserves the correct ink but moves other ink in 11/64
+inputs. Passage erasure removes every correct source crop, so its zero
+score is forced by this motor's support. Public development is repeatedly
+reused and is not a sealed test.
+}
+
+\subsection*{\DIFadd{Execution, costs and scope}}
+\DIFadd{Independent verification authenticates all schedules, four draws per
+training ID, finite final Adam moments at step 3,257, and both final
+checkpoints. Fifteen head tensors change in each arm. Control changes no
+contextual tensor; adaptation changes all 216 adapter tensors. No optimizer
+update is replayed. All 512 native arm/input calls retain original PNGs.
+Independent scoring reconstructs every output from declared source columns
+and reproduces the aggregate and paired decisions. Eight additional
+standalone calls reproduce pixels and events exactly without opening
+training manifests, a feature cache or the original head checkpoint.
+}
+
+\DIFadd{Original setup takes 93.118 seconds. Feature preparation takes 3,387.907
+seconds, with 2,937 new encodings and 320 authenticated reused payloads.
+Control/adapted optimization takes 126.665/30,856.570 seconds, at
+15.265/18.075 GiB peak allocated and 15.504/22.082 GiB reserved memory.
+Control retains the full resident body during its cached-head optimization.
+For four standalone calls, setup plus inference is $77.695+5.022$ seconds
+for control and $76.854+5.056$ seconds for adaptation; both peak at 17.948
+GiB allocated. These local costs exclude external pretraining.
+}
+
+\DIFadd{Assessment is interrupted four times across five controller invocations.
+The prescribed calls accumulate as 218 control, then 38 control and 72
+adapted, then 184 adapted. All 328 prior indexed outputs survive the final
+recovery unchanged. Complete assessment and additional reload duration are
+unmeasured. The retained 45.634-second control interval covers only 38 calls;
+223.855 seconds covers only the last 184 adapted calls. A completed-control
+resume records almost no current-invocation work, not the cost of 256 calls.
+The public execution notes retain these timing boundaries. The termination
+sender remains unknown. All model stages use one RTX 4090 D.
+}
+
+\DIFadd{The source-copy law assigns zero probability to answers absent from its
+admissible crops. Neither arm qualifies a general reader or independent free
+image-language generator, and this regimen does not qualify for scale-up.
+Historical writing and handwriting remain untested. CMRC2018 retains
+Cui et al.\cite{cmrc}, CC-BY-SA-4.0 attribution; Qwen3-VL retains Alibaba,
+Apache-2.0 attribution.
+}
+
+\clearpage
+\plate{Figure_S22_contextual_learning}{\textbf{Contextual adaptation misses
+the registered reader improvement.} \textbf{a}, Both arms retain the same
+externally pretrained source and original-pixel motor. Control learns the
+head; adaptation additionally learns contextual query, value and output
+adapters. Each receives 3,257 updates on the same schedule. \textbf{b}, Exact
+image-answer percentages with counts and denominators. New copies include
+16 Chinese and 16 English requests; seen QA contains 32 training questions.
+Unseen QA contains 64 questions in 32 paragraph pairs. Both arms pass copy
+and question-erasure-gain floors but fail natural-answer and pair floors.
+The three-answer gain and unchanged three complete pairs miss the prospective
+improvement rule. Passage erasure removes the correct answer from source
+support and cannot isolate comprehension. \textbf{c}, The first fixed
+question pair, shown with complete unmodified reference and output PNGs.
+Both arms add a trailing comma to the common-name answer and reproduce the
+ocean-region reference. English labels describe the Chinese requests.
+\textbf{d}, A separate earlier-head intervention changes 53/64 development
+selections when paired-question task memory is substituted. Its original
+normal score is 9/64, distinct from the new 23/64 control. Hybrid features
+do not encode native new prompts or establish a repaired reader. The full
+runtime is 7.531B and pretrained; outputs are source crops.}{fig:s22-contextual-learning}
+
+\clearpage
+\section*{\DIFadd{Supplementary Note 46. Matched image and text-prefix histories}}
+
+\DIFadd{The image writer and source-language helper use different physical history
+units. This audit joins their existing traces on all 32 shared training
+questions. It tests whether a comparison by writing position is supported
+by identical visible content. It performs no new contextual model forward,
+vocabulary projection, optimizer update or alignment treatment.
+}
+
+\DIFadd{Let $Y$ be the complete canonical answer raster, padded to 64-column blocks,
+and let $P_j(Y)$ preserve its first $64j$ columns while setting the remaining
+canvas to white. Let $R_o(t_{:k})$ render a complete reference-text prefix
+with the full reference's original font, canvas and draw origin. The
+eligible prefixes at boundary $j$ are
+}\[
+ \mathcal K_j=\{k:R_o(t_{:k})=P_j(Y)\}.
+\]
+\DIFadd{A saved helper state can be compared only when its decoded preceding text
+equals an eligible complete prefix. The image writer consumes two learned
+image embeddings per block; the helper consumes native language pieces.
+Equal ordinal indices therefore do not identify equal histories.
+Independently centering each prefix would also move its vertical origin;
+the audit retains the complete reference's origin.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+\DIFadd{Position }& \DIFadd{Image boundaries }& \DIFadd{Exact prefix raster }& \DIFadd{Saved matching state}\\
+\midrule
+\DIFadd{Initial }& \DIFadd{32 }& \DIFadd{32 }& \DIFadd{32}\\
+\DIFadd{Intermediate }& \DIFadd{75 }& \DIFadd{7 }& \DIFadd{2}\\
+\DIFadd{Terminal }& \DIFadd{32 }& \DIFadd{32 }& \DIFadd{19}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{At 68/75 intermediate boundaries there is no complete canonical text-prefix
+raster. Five further boundaries admit such a raster but have no matching
+retained helper state. All terminal rasters are representable; thirteen
+lack a corresponding saved state. Missing states and different helper
+answers remain in the denominator. All 216 eligible saved source-prefix
+positions decode to complete UTF-8, so split-byte prefixes do not explain
+the missing correspondences in this cohort.
+}
+
+\DIFadd{All owning prompt hashes and BF16 reader-memory hashes agree. The 32 initial
+states agree after common BF16 rounding. These controls do not imply that
+later image-history states retain the helper's original language behavior.
+Only two intermediate correspondences can be evaluated from the retained
+traces:
+}\begin{center}\small
+\begin{tabular}{lrrrr}
+\toprule
+\DIFadd{Question }& \DIFadd{Image blocks }& \DIFadd{Image positions }& \DIFadd{Helper positions }& \DIFadd{Distance}\\
+\midrule
+\DIFadd{\texttt{TRAIN\_1779\_QUERY\_1} }& \DIFadd{3 }& \DIFadd{6 }& \DIFadd{6 }& \DIFadd{1.497}\\
+\DIFadd{\texttt{TRAIN\_2146\_QUERY\_1} }& \DIFadd{1 }& \DIFadd{2 }& \DIFadd{6 }& \DIFadd{1.407}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\DIFadd{Figure S23 retains both preceding prefix images. For states $h,g$ of width
+$d$, the reported distance is
+}\[
+ \delta(h,g)=
+ \sqrt{\frac{1}{d}\left\|
+ \frac{h}{\sqrt{\operatorname{mean}(h^2)+10^{-6}}}
+ -
+ \frac{g}{\sqrt{\operatorname{mean}(g^2)+10^{-6}}}
+ \right\|_2^2}.
+\]
+\DIFadd{The first correspondence has equal position counts; the second does not.
+Neither distance is calibrated as a language score or establishes a cause
+of the corrupted answers. Nineteen terminal matches have median distance
+1.404, with the same interpretation limit.
+}
+
+\DIFadd{The earlier state-alignment learner in Note 43 supervised Show-o2's
+pre-answer prompt states. It did not test alignment of these Qwen
+image-history transitions. The present result supplies neither a complete
+teacher-state dataset at the existing block boundaries nor an evaluated
+repair. A future treatment must define how teacher and actor histories
+correspond before comparing their states. Future-conditioned targets can
+serve as predictive supervision, but cannot be described as states of an
+identical preceding history or supplied to autonomous inference.
+}
+
+\DIFadd{The audit reads saved states and tokenizer-string metadata only. It
+materializes no neural source weights. The string table is hashed; the
+complete shared source archive is not rehashed in this metadata-only
+operation. The invocation takes 13.270 seconds and about 1.000 GiB process
+RSS. An independent NumPy/PIL check reconstructs UTF-8 prefixes, rescans
+physical correspondences and recomputes BF16 rounding, distances and all
+totals. It verifies stored arrays rather than rerunning either contextual
+model or the font renderer. The 361 retained prefix/state files occupy
+5.18 MB and are bound by the public receipt. The renderer is not a universal
+character-segmentation rule.
+}
+
+\DIFadd{Execution uses }\path{scripts/audit_history_prefix_alignment.py}\DIFadd{, with its
+separate \texttt{--verify} stage. The protocol and producer precede the
+audit at \texttt{bfa8026}; the verified public result is
+}\path{references/evidence/history_prefix_alignment_result.json}\DIFadd{.
+The fixed task-memory diagnostic in Note 45 uses
+}\path{scripts/audit_contextual_query_memory.py} \DIFadd{and its independent verifier.
+The matched comparison uses }\path{scripts/compare_contextual_pixel_learning.py}\DIFadd{;
+standalone inference uses }\path{scripts/infer_adapted_pixel_spans.py}\DIFadd{;
+complete independent export uses
+}\path{scripts/export_contextual_pixel_comparison.py}\DIFadd{. Completed data,
+protocols, checkpoints and failed invocations remain preserved. These
+observations add no natural-language capability or free image generation.
+}
+
+\clearpage
+\plate{Figure_S23_history_prefix}{\textbf{Most retained image steps lack
+a matching complete text-prefix state.} \textbf{a}, The image writer
+consumes two continuous tile observations per 64-column block; the helper
+consumes a variable number of native language pieces. A state comparison
+requires identical preceding pixels under the full reference's rendering
+origin, rather than an equal ordinal step. \textbf{b}, Complete initial,
+intermediate and terminal counts. Seven of 75 intermediate boundaries have
+a canonical complete-prefix raster; only two have an eligible retained
+helper state. Sixty-eight have no such raster and five lack the corresponding
+state. All 32 initial states agree after common BF16 rounding; thirteen
+terminal boundaries have no retained matching state. \textbf{c}, Both
+eligible intermediate matches, with their complete canonical prefix
+rasters. The Chinese example has six image positions and six helper
+positions; the numeric example has two image positions and six helper
+positions. Their normalized distances are uncalibrated representation
+measurements. All 216 saved source-prefix positions in this cohort decode
+to complete UTF-8. The audit uses existing traces, makes no new neural
+calls and does not train an alignment or establish a reader/writer repair.}{fig:s23-history-prefix}
 
 
 \clearpage
