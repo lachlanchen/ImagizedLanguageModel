@@ -97,3 +97,8 @@ completed starting control before the learner finishes:
 ```bash
 env CUDA_VISIBLE_DEVICES= PYTHONPATH=. python scripts/score_native_visual_alignment.py --stage before --output references/evidence/native_visual_alignment_before
 ```
+
+A separate [prospective English transfer check](native-english-transfer.md)
+is prepared while this learner runs. It adds question- and passage-erasure
+controls without changing training or replacing any registered assessment.
+Its GPU calls must wait until this controller and its assessments are terminal.
