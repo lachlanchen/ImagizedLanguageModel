@@ -27,8 +27,10 @@ and 256 English QA from article-disjoint paragraphs. The copying strips
 must reconstruct their original square inputs exactly when white bottom
 padding is restored. Prepare frozen native image prefixes offline, using
 the original per-record seeds. All other training input pixels stay exact.
-Cache no annotated answer inside a visual prefix; transcripts and text-state
-teachers are absent. The same source vocabulary head supplies training
+Cache no annotated answer inside a visual prefix; no transcript or text-state
+teacher conditions the model. The source training JSON also contains unused
+transcript fields, which are parsed but never passed to a text pathway.
+The same source vocabulary head supplies training
 cross entropy and a temporary diagnostic readout.
 
 For a visible prompt image X, fixed image prefix E(X), correct answer y,
