@@ -31,7 +31,8 @@ def main():
         replacement = ("A source-preserving visual-state learner raises English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, "
             "but Chinese QA remains 0/32 and copying 0/16. Four of six reader requirements fail; all eight tested seen Chinese copies change characters. "
             "A separate fixed-weight control reduces copying from 29/32 to 7/32 by adding only white input padding. "
-            "Preserving visible marks therefore does not guarantee reading invariance. These are auxiliary text readouts, not generated answer images. ")
+            "Preserving visible marks therefore does not guarantee reading invariance. A separate contextual-attention adaptation also fails natural QA. "
+            "These are auxiliary text readouts, not generated answer images. ")
         front = front[:start] + replacement + front[end:]
         article = before["article_content.tex"]
         marker = "\\section*{Discussion}"
@@ -41,6 +42,7 @@ def main():
             "The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying "
             "from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. "
             "All 480 layout-control calls are retained, including exact replay of the 160 original responses. "
+            "A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. "
             "These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.\n\n")
         if article.count(marker) != 1:
             raise ValueError("unique Results/Discussion boundary required")

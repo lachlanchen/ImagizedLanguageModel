@@ -16,7 +16,9 @@ selection can improve without degrading the existing visual features.
 The model remains an externally pretrained full source with a temporary
 Unicode head. This is a reader prerequisite; it does not generate image
 answers or establish a lightweight foundation model trained from scratch.
-There is no completed learning-quality result yet. The actual configuration
+The [completed result](../references/native_reader_attention_result.md) retains
+29/32 copies but leaves Chinese and English QA at 0/32. All six reader
+requirements fail. The actual configuration
 trains 4,358,144 parameters in 112 attention projections; the complete adapted
 model has 2,843,625,184 parameters plus the 126,892,531-parameter codec.
 
@@ -28,7 +30,9 @@ Four disabled/zero-enabled source pairs replay their retained decisions exactly.
 The normalized FP32 causal error and disabled-source logit error are both zero.
 The 6.345 GiB peak and 1.952 seconds measure the three updates after the
 counter reset, excluding the earlier FP32 causal check and source replay.
-These are execution checks; the main run and its assessment remain separate.
+These are execution checks; the main run and its assessment are separate.
+The main optimizer takes 1,667.861 seconds at 6.345 GiB peak allocated memory,
+excluding loading and caching. All 160 final autonomous responses are retained.
 
 ## Execute the fixed experiment
 

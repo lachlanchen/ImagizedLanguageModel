@@ -27,8 +27,8 @@ Permitted addition to the scope below: a small seen-fit table and the first
 fixed copying failure in Note 43/Figure S20, labelled as seen training data
 and text-head output. These diagnose fit and do not establish generalization.
 No generated answer image, concept art or model-parity claim belongs to this
-publication revision. The separately running attention learner must not be
-described as successful or included as a completed quality observation.
+publication revision. The separately assessed attention learner must not be
+described as successful or conflated with the state-correction learner.
 
 Scope amendment after the completed 480-call canvas control: include its
 fixed-weight layout comparison in the same Note 43/Figure S20 unit. All
@@ -112,6 +112,13 @@ After the attention controller and every child are authoritative terminal:
 4. Run its `--stage sync` only after that review, then commit/push the completed
    unit. The local package is `ILM_NatureStyle_20261107_NativeStateAlignment`.
 
-The new attention-learning result is a separate, still-unmeasured observation;
-preserve it in its own result record after its complete assessment. It must
-not be silently folded into the completed state-correction experiment above.
+The attention learner is now completely assessed and frozen in its separate
+result export. It retains 29/32 copies (13/16 Chinese, 16/16 English), gives
+0/32 QA in both languages and fails all six reader gates. Its 4,358,144 new
+parameters, 2,560 updates, 1,667.861-second optimizer and 6.345 GiB peak must
+remain distinct from the state-correction learner. Allowed scope amendment:
+add one explicitly separate attention-only paragraph to Note 43, one sentence
+to Results/abstract and a small labelled figure-footer observation. Do not
+change the coarse/fine diagram into the different attention-learning model,
+merge costs or attribute one model's scores to the other. This is a completed
+negative intervention, not a working-language claim.

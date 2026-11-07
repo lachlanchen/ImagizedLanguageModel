@@ -83,10 +83,11 @@ The bounded source activation is `activate_state_alignment_revision.py`,
 after the new figure has been rendered; it preserves baseline checks before
 changing the abstract, Results paragraph and supplement.
 
-The new [attention-learning experiment](../../docs/native-reader-attention.md)
+The [completed attention-learning experiment](../../references/native_reader_attention_result.md)
 preserves the calibrated dense visual frontend and learns only contextual
-attention. Its real preflight passes; its 2,560-update run is active. It has
-no completed language-quality or image-answer result.
+attention. Its 2,560-update run retains 29/32 copies but leaves Chinese and
+English QA at 0/32. All six requirements fail. Its passed preflight does not
+override this outcome, and no image-answer model is qualified.
 
 ## Earlier paired copying
 

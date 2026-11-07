@@ -100,6 +100,29 @@ No criteria are changed after inspection. The observed copying errors
 establish a fit obstruction in this recipe, without identifying its unique
 architectural or optimization cause. These are seen data, not generalization.
 
+\paragraph{A separate attention-only intervention.}
+Starting instead from the dense checkpoint of Note 42, a second learner
+freezes the complete calibrated visual frontend and trains fresh rank-16
+residuals only in the 112 native q/k/v/o projections. Copying retains its
+original strips and QA its complete square pages; no pooling or image resize
+is introduced. All 640 bilingual records appear four times. The 4,358,144
+new parameters receive answer cross entropy, with AdamW, 64-update warm-up
+to $5\times10^{-5}$ and cosine decay to $5\times10^{-6}$. There is no
+text-state teacher or validation selection. The complete adapted model has
+2,843,625,184 parameters plus the same codec and external pretraining.
+The 2,560-update invocation takes 1,667.861\,s at 6.345\,GiB peak allocated
+memory, excluding loading and its 262.431\,s prefix cache. The real
+three-update preflight preserves disabled-source logits exactly, changes
+all 112 zero output matrices and gives finite nonzero gradients in all
+224 residual tensors. Four disabled/zero source pairs replay exactly;
+the normalized FP32 causal check has zero error. Nevertheless, the complete
+160-call assessment retains 29/32 copies (Chinese 13/16, English 16/16)
+but gives 0/32 QA in both languages, with no both-correct pairs. The first
+English title and person questions both receive the unrelated year 1961.
+All six reader requirements fail. These costs and outcomes belong to this
+separate attention learner, not to the coarse/fine correction above. Its
+complete export is \path{references/evidence/native_reader_attention_result/}.
+
 \paragraph{A controlled canvas failure.}
 The 13/16 Chinese copying result in Note 42 uses 1024-by-256 strips, whereas
 the correction study above uses complete 1024-square copying inputs. The

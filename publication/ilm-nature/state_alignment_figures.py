@@ -24,6 +24,7 @@ FIGURE = "Figure_S20_state_alignment"
 RESULT = ROOT / "references/evidence/native_state_alignment_result/result.json"
 SOURCE = ROOT / "references/evidence/native_canvas_control_result/result.json"
 FIT = ROOT / "references/evidence/native_state_fit_result/result.json"
+ATTENTION = ROOT / "references/evidence/native_reader_attention_result/result.json"
 
 
 def sha(path):
@@ -36,7 +37,8 @@ def baseline(name):
 
 def evidence():
     result, canvas, fit = [json.loads(path.read_text()) for path in (RESULT, SOURCE, FIT)]
-    for path, value in ((RESULT, result), (SOURCE, canvas), (FIT, fit)):
+    attention = json.loads(ATTENTION.read_text())
+    for path, value in ((RESULT, result), (SOURCE, canvas), (FIT, fit), (ATTENTION, attention)):
         if value["general_ilm_goal_complete"]:
             raise ValueError("no independent ILM claim admitted")
         for name, digest in value["files_sha256"].items():
@@ -49,6 +51,8 @@ def evidence():
         raise ValueError("completed primary values changed")
     if fit["groups"]["learner_image/copy/zh"]["training_target_exact_stopped"] != 0:
         raise ValueError("seen Chinese fit result changed")
+    if attention["actual_updates"] != 2560 or any(attention["gates"].values()):
+        raise ValueError("separate attention-only outcome changed")
     return result, canvas, values
 
 
@@ -148,7 +152,7 @@ def generate():
     pictures = [dict(part=part,source=str(stable.relative_to(ROOT)),sha256=sha(stable))]
     slide.shape("Raw auxiliary text readout (not an answer image)",835,697,720,35,19,True)
     slide.shape("Requested: 花多地地山\nLearner: 花多梅树山\nAll 8 tested seen Chinese strings change characters",835,742,720,106,21)
-    slide.shape("Four of six reader gates fail. No independent image-answer model is qualified.",835,860,720,35,17)
+    slide.shape("State correction fails 4/6 requirements. Separate attention-only\\nrepair: 0/32 QA in both languages; all 6 requirements fail.",835,852,720,48,16)
     for prop in slide.root.findall(".//a:rPr",NS):
         element("a:ea",prop,typeface="Noto Sans CJK SC")
     slide.relation("slideLayout", next(n.get("Target") for n in source_rels if n.get("Type").endswith("/slideLayout")))
@@ -189,7 +193,7 @@ def generate():
             archive.writestr(name, data)
     record = dict(baseline_commit=BASE, pptx_sha256=sha(target), preserved_native_slides=34, slides=35,
         charts=specs, pictures=pictures, builder_sha256=sha(__file__), source_result_sha256=sha(RESULT),
-        source_control_sha256=sha(SOURCE), fit_result_sha256=sha(FIT), artifact_tool_available=False, general_ilm_goal_complete=False)
+        source_control_sha256=sha(SOURCE), fit_result_sha256=sha(FIT), attention_result_sha256=sha(ATTENTION), artifact_tool_available=False, general_ilm_goal_complete=False)
     (QA / "deck_build.json").write_text(json.dumps(record, indent=2) + "\n")
 
 
@@ -198,7 +202,7 @@ def verify():
     record_path = QA / "deck_build.json" if (QA / "deck_build.json").exists() else HERE / "evidence/native_state_alignment_deck_build.json"
     record = json.loads(record_path.read_text())
     target = QA / "draft.pptx" if (QA / "draft.pptx").exists() else HERE / "ILM_Figures_editable.pptx"
-    if record["pptx_sha256"] != sha(target) or record["builder_sha256"] != sha(__file__) or record["source_result_sha256"] != sha(RESULT) or record["source_control_sha256"] != sha(SOURCE) or record["fit_result_sha256"] != sha(FIT):
+    if record["pptx_sha256"] != sha(target) or record["builder_sha256"] != sha(__file__) or record["source_result_sha256"] != sha(RESULT) or record["source_control_sha256"] != sha(SOURCE) or record["fit_result_sha256"] != sha(FIT) or record["attention_result_sha256"] != sha(ATTENTION):
         raise ValueError("source/deck binding changed")
     mutable = {"[Content_Types].xml", "ppt/presentation.xml", "ppt/_rels/presentation.xml.rels"}
     with zipfile.ZipFile(io.BytesIO(baseline("ILM_Figures_editable.pptx"))) as old, zipfile.ZipFile(target) as new:

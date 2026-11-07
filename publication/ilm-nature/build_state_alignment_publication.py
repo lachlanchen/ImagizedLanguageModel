@@ -11,7 +11,7 @@ import subprocess
 import fitz
 from PIL import Image
 
-from state_alignment_figures import BASE, FIGURE, HERE, QA, RESULT, SOURCE, FIT, ROOT, baseline, evidence, sha, verify
+from state_alignment_figures import BASE, FIGURE, HERE, QA, RESULT, SOURCE, FIT, ATTENTION, ROOT, baseline, evidence, sha, verify
 from build_paired_writing_publication import build_slot
 
 DEST = Path("/home/lachlan/Nutstore Files/Projects/ILM")
@@ -25,7 +25,7 @@ def build():
         rendered = json.loads((HERE / "evidence/native_state_alignment_figure_render.json").read_text())
         if rendered["review_pdf_sha256"] != sha(HERE / "ILM_Figures_review.pdf") or len(rendered["preserved_prior_slide_pixels"]) != 34:
             raise ValueError("current 35-slide render with preserved baseline required")
-        sources = {"native_state_alignment_result": RESULT, "native_canvas_control_result": SOURCE, "native_state_fit_result": FIT}
+        sources = {"native_state_alignment_result": RESULT, "native_canvas_control_result": SOURCE, "native_state_fit_result": FIT, "native_reader_attention_result": ATTENTION}
         for name, path in sources.items():
             shutil.copy2(path, HERE / "evidence" / (name + ".json"))
         names = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", BASE, "--", "publication/ilm-nature/figures"], cwd=ROOT, text=True).splitlines()
