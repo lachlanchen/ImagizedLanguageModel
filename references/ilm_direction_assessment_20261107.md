@@ -17,6 +17,15 @@ head, and outputs source crops rather than unseen images. This is a reliable
 copying component on its tests, not a qualified reader, free image-language
 generator, small from-scratch foundation or matched-quality efficiency result.
 
+A [completed task-memory intervention](contextual_query_memory_result.md)
+reproduces all 96 assessed normal answers through the cached CPU head.
+Swapping task memory between paired questions changes 53/64 development
+selections and moves reference log odds toward the partner in all 64 cases.
+The original path still selects only 9/64 correct answers. This rejects exact
+insensitivity of that memory branch on these cases; it does not establish
+generalization or isolate a unique cause of the wrong competing spans.
+The hybrid features are not native encodings of new questions.
+
 The later [attention-only learner](native_reader_attention_result.md) also
 fails all six reader requirements: 29/32 copies, but 0/32 Chinese and 0/32
 English QA answers after 2,560 updates. Its frozen dense visual frontend
