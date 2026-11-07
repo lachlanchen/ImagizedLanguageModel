@@ -48,8 +48,10 @@ def physical(image):
     return torch.from_numpy(image.copy()).float().div(127.5).sub(1)[None,None]
 
 
-def same_retained_coordinates(a,b,fa,fb):
-    y,x=np.nonzero((a==0)&(b==0))
+def same_retained_coordinates(a,b,fa,fb,columns=None):
+    common=(a==0)&(b==0)
+    if columns is not None:common&=columns[None]
+    y,x=np.nonzero(common)
     def coordinates(f):
         ends=np.array([end for _,end in f.source_ranges])
         starts=np.array([start for start,_ in f.source_ranges])
@@ -101,6 +103,12 @@ def audit(prepared,previous):
             path=previous/target["file"]
             if sha(path)!=target["sha256"]:raise ValueError("development reference changed")
             targets.append(pixels(path))
+        edge=np.diff(np.r_[False,(a==0).any(0),False].astype(np.int8))
+        left,right=np.flatnonzero(edge==1),np.flatnonzero(edge==-1)
+        reference_columns=np.zeros(a.shape[1],dtype=bool)
+        for target in targets:
+            for start,length in physical_occurrences(a,target):
+                reference_columns[left[start]:right[start+length-1]]=True
         for condition in ("question_erased","passage_erased"):
             other=by_id[row["id"]+"/"+condition];path=previous/other["input"]
             if sha(path)!=other["input_sha256"]:raise ValueError("erased development input changed")
@@ -108,11 +116,14 @@ def audit(prepared,previous):
             if a.shape!=b.shape or not np.all((b==a)|(b==255)):
                 raise ValueError("control changes source ink beyond erasure")
             fb=fold_writing_prompt(physical(b))
+            ref_motion=same_retained_coordinates(a,b,fa,fb,reference_columns)
             controls.append(dict(id=row["id"],condition=condition,raw_shape_equal=True,
                 folded_shape_equal=fa.pixels.shape==fb.pixels.shape,
                 fold_ranges_equal=fa.source_ranges==fb.source_ranges,
                 observer_shape_equal=shape(fa)==shape(fb),
                 reference_still_admissible=any(physical_occurrences(b,t) for t in targets),
+                reference_common_ink_pixels=ref_motion["common_ink_pixels"],
+                shifted_reference_ink_pixels=ref_motion["shifted_common_ink_pixels"],
                 **same_retained_coordinates(a,b,fa,fb)))
     if len(rows)!=3257 or len(normal)!=64 or len(controls)!=128:raise ValueError("complete declared cohort required")
     summaries={}
@@ -121,7 +132,10 @@ def audit(prepared,previous):
         summaries[condition]=dict(cases=len(group),**{key:sum(bool(r[key]) for r in group) for key in
             ("raw_shape_equal","folded_shape_equal","fold_ranges_equal","observer_shape_equal","reference_still_admissible")},
             cases_with_shifted_retained_ink=sum(r["shifted_common_ink_pixels"]>0 for r in group),
-            shifted_retained_ink_pixels=sum(r["shifted_common_ink_pixels"] for r in group))
+            shifted_retained_ink_pixels=sum(r["shifted_common_ink_pixels"] for r in group),
+            cases_with_shifted_reference_ink=sum(r["shifted_reference_ink_pixels"]>0 for r in group),
+            reference_common_ink_pixels=sum(r["reference_common_ink_pixels"] for r in group),
+            shifted_reference_ink_pixels=sum(r["shifted_reference_ink_pixels"] for r in group))
     return dict(preparation_sha256=sha(prepared/"report.json"),training_inputs=len(rows),
         reference_checks=dict(matches),authenticated_files=len(source_files),
         controls=summaries,control_cases=controls,source_files_sha256=source_files,
