@@ -21,13 +21,19 @@ impossibility theorem for visual language learning. More training cannot
 recover information deliberately removed from the observation.
 
 Represent self-generated history as actual ordered 32-by-32 uint8 image tiles.
-Each physical row has a 32-pixel writing band and a separate 32-pixel gutter.
+Each physical row has a 32-pixel writing band and a separate four-pixel gutter.
 Mark the **next** writable cell in that gutter, using a fixed black rectangle.
 The marker encodes the already-emitted position, not a target length, language
 symbol, reference or glyph identity. A white emission advances the marker.
 No marker overwrites output pixels. Arbitrary written forms remain image
 payloads; there is no font, tokenizer, OCR or character lookup in the runtime
 state class. The image observer may consume the complete history page directly.
+Pad only the bottom of the completed page to a multiple of 32 for the native
+observer. Since the row pitch is 36 and this padding is at most 31, the row
+count is recovered as `floor(page_height/36)`. Validate canonical page height
+and white padding before recovering the cursor. The gutter adds 12.5% to the
+writing-band height, plus the next-cursor row and observer padding; this is a
+physical layout cost, not a measured neural efficiency improvement.
 
 Implement immutable append, lossless page construction and inverse recovery
 of the complete ordered payload and emitted length from the cursor pixels.

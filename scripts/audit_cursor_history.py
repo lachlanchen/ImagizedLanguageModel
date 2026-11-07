@@ -73,7 +73,7 @@ def run(out):
         key=fingerprint(observed)
         if key in unique:raise ValueError('declared bounded observer states alias: '+str((n,unique[key])))
         unique[key]=n;raw[str(n)]=dict(raw_sha256=fingerprint(physical),observer_sha256=key,observer_shape=list(observed.shape))
-    corrupted=first.page().copy();corrupted[40,0]=0
+    corrupted=first.page().copy();corrupted[32,0]=0
     try:WritingCanvas.from_page(corrupted)
     except ValueError:pass
     else:raise ValueError('invalid gutter was accepted')
