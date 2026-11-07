@@ -43,7 +43,9 @@ def main():
         for index,(path,image,input_sha256) in enumerate(images):
             answer,event=model.generate(image)
             destination=args.output/f"{index:03d}.png";Image.fromarray(answer).save(destination)
-            outputs.append(dict(input=str(path),input_sha256=input_sha256,output=destination.name,
+            absolute=path.absolute()
+            display=str(absolute.relative_to(ROOT)) if absolute.is_relative_to(ROOT) else path.name
+            outputs.append(dict(input=display,input_sha256=input_sha256,output=destination.name,
                 output_sha256=sha(destination),**event))
         atomic_json(args.output/"report.json",dict(outputs=outputs,setup_seconds=setup_seconds,
             inference_seconds=time.monotonic()-began,peak_allocated_vram_gib=torch.cuda.max_memory_allocated()/1024**3,
