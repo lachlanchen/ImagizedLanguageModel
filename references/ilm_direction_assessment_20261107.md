@@ -5,6 +5,18 @@ a useful ILM. The image-input/image-output research goal remains open; the
 current learning recipe has not earned a scale-up. The completed V82 matched
 comparison fails all four original repair criteria and is rejected for scaling.
 
+The later [contextual pixel-span component](contextual_pixel_spans_result.md)
+now copies 32/32 new Chinese/English strings and fits 32/32 seen QA images
+exactly. Held-out reading remains inadequate: 9/64 exact Chinese answers,
+1/32 both-correct pairs, versus 2/64 with question ink erased and 0/64 with
+passage ink erased. Three of four component requirements fail. All256 raw
+images are independently rescored and reconstructed from actual source pixels;
+four full native-image calls reproduce source features and answers exactly.
+The runtime retains a 7.531B externally pretrained foundation and learned
+head, and outputs source crops rather than unseen images. This is a reliable
+copying component on its tests, not a qualified reader, free image-language
+generator, small from-scratch foundation or matched-quality efficiency result.
+
 The later [attention-only learner](native_reader_attention_result.md) also
 fails all six reader requirements: 29/32 copies, but 0/32 Chinese and 0/32
 English QA answers after 2,560 updates. Its frozen dense visual frontend

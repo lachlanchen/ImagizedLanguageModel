@@ -1,0 +1,49 @@
+{
+  "identity": {
+    "source_commit": "5dc75d8b88f4b7d1d7551c2f13a50dbc24f57d9a",
+    "sources": {
+      "scripts/run_contextual_pixel_spans.py": "f4d92a46b5ad9c6a6a9bbea71407fbb3315f0fe8df0f4c14c23684337dd3007c",
+      "ilm/visual_lm/contextual_pixel_spans.py": "6e28a1b4e71389ff7b9d0560735bfb22153d57c6f65064559ee9bcaec5d762e0",
+      "references/contextual_pixel_spans_protocol.md": "6df57f513459c4d976d3837ad10849e80d29aaee0af90ae8a43aa221de7e86f7",
+      "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da",
+      "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+      "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+      "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+      "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+      "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7"
+    }
+  },
+  "inputs_sha256": "c896a74d19162a03409a102f562567094009ec5884db8f507bebdd6e22c97392",
+  "references_sha256": "36b99409f16e530f5d4b779e0dcb9d6a331a7cc883466dead62eda0c47269d11",
+  "inputs": 544,
+  "training_inputs": 320,
+  "primary_questions": 64,
+  "copies": 32,
+  "rejected_pairs": [
+    {
+      "split": "train",
+      "pair": "313fac575d1723ac9dd11622d7938a7b5914f726b9f01fb96a03a1e8b7c5db40",
+      "reason": "full source ink exceeds the vertical canvas"
+    }
+  ],
+  "renderer": {
+    "font_family": "Noto Sans CJK JP",
+    "font_size_px": 24,
+    "height_px": 32,
+    "padding_px": 2,
+    "primary_font_path": "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "primary_font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "pango_version": "1.52.1",
+    "fallback_selected_fonts_inspected": false,
+    "source_policy": "complete explicit single line, no cropping or font shrinking"
+  },
+  "data_sha256": {
+    "train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "development.jsonl": "8bef093075ac0715d5878a1abe61aa38092893ade8753b935cdf657551ebc6a7",
+    "counterfactual_pairs.jsonl": "3bcb2e0534290ed9cf3dd1a4e378bbaa5a7eb4903dce0b4b0befb8f3ce58029d"
+  },
+  "source_model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+  "evaluation_is_reused_public_development": true,
+  "general_ilm_goal_complete": false
+}

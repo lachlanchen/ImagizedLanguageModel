@@ -6,6 +6,11 @@ It cannot write an answer absent from that image. The full ILM objective
 still requires independent free image-language generation; this component
 does not establish that capability.
 
+The [completed experiment](../references/contextual_pixel_spans_result.md)
+gets 32/32 new copies and 32/32 seen QA images exactly right, but only 9/64
+held-out answers and 1/32 both-correct pairs. Three of four requirements fail.
+It is not a qualified reader. Every raw output and reference is retained.
+
 The earlier image writer fails even when the source decoder can answer
 the same request. The [V77 control](../references/reader_content_v77_result.md)
 gives 19/32 exact source-helper answers on seen questions and 8/12 new-copy
@@ -78,6 +83,27 @@ optimizer state, RNG states and the exact schedule cursor; automatic resume
 of an incomplete pipeline is not implemented.
 
 ## Artifacts and assessment
+
+The complete runtime also accepts supplied PNGs directly, without the feature
+cache or reference files. The following reproduces the first fixed new Chinese
+copy; the output directory must be fresh:
+
+```bash
+env CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
+  CUBLAS_WORKSPACE_CONFIG=:4096:8 OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
+  HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python \
+  scripts/infer_contextual_pixel_spans.py --run artifacts/contextual_pixel_spans_v1 \
+  --images artifacts/contextual_pixel_spans_v1/prepared/inputs/0512.png \
+  --output artifacts/contextual_pixel_spans_copy_demo
+```
+
+Replace the image path with a binary 32-pixel-high writing strip to test a
+new input. `--images` accepts several paths so the source need only load once.
+The command saves unmodified answer PNGs and source-feature hashes. Four real
+PNG calls reproduce cached features and answer pixels exactly, including a
+failed question. Actual full-runtime size is 7,531,277,171 parameters. This
+check does not make the failed reader suitable for general use.
 
 - `prepared/inputs.json` and input PNGs contain the image inventory.
   `prepared/references.json` and reference PNGs are separate supervision.
