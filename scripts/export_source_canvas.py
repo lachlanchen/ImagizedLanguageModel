@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from scripts.cache_semantic_images_v72 import ROOT, sha, atomic_json, committed_identity
-from scripts.compare_source_canvas import prepared, checked_image
+from scripts.compare_source_canvas import prepared, checked_image, TRAIN, FEATURES, DEV
 
 
 def export(run,output):
@@ -18,6 +18,22 @@ def export(run,output):
     identity,prep=prepared(run)
     verified=json.loads((run/'verification.json').read_text())
     if verified['identity']!=identity:raise ValueError('verification belongs to a different run')
+    original=json.loads((TRAIN/'report.json').read_text())
+    original_check=json.loads((TRAIN.parent/'preflight/report.json').read_text())
+    if (original['inputs_sha256']!=sha(TRAIN/'inputs.json')
+            or original['references_sha256']!=sha(TRAIN/'references.json')
+            or not original_check['passed']
+            or original_check['preparation_sha256']!=sha(TRAIN/'report.json')):
+        raise ValueError('earlier admitted data provenance changed')
+    cached=json.loads((FEATURES/'report.json').read_text())
+    if not cached['initial_model_only'] or not cached['complete']:
+        raise ValueError('features must belong to the unchanged original observer')
+    dev_cache=json.loads((DEV/'features/report.json').read_text())
+    if dev_cache['preparation_sha256']!=sha(DEV/'prepared/report.json'):
+        raise ValueError('original development cache provenance changed')
+    train_inputs={r['input_sha256'] for r in prep['training']}
+    dev_inputs={r['input_sha256'] for r in prep['assessment']}
+    if train_inputs&dev_inputs:raise ValueError('training and development contain identical complete inputs')
     if output.exists():raise ValueError('preserve earlier exported evidence')
     output.mkdir(parents=True);files={};references={};rows=[]
     index={r['id']:r for r in prep['assessment']+prep['training']}
@@ -40,7 +56,7 @@ def export(run,output):
                 if name not in files:copy(p,name)
                 names.append(name)
             p=copy(run/r['output'],'raw/'+r['output'])
-            rows.append(dict(**r,arm=arm,output=p,reference_images=names))
+            rows.append({**r,'arm':arm,'output':p,'reference_images':names})
     if Counter(r['arm'] for r in rows)!=Counter(summary=256,source=256):
         raise ValueError('retain all 512 raw canvases')
     # Fixed inventory order; all output width remains on each review sheet.
@@ -62,6 +78,7 @@ def export(run,output):
         supplied_code_exact=verified['supplied_code_exact'],supplied_code_f1=verified['supplied_code_f1'],
         rows=rows,files_sha256=files,overviews=overviews,all512_raw_PNGs_unchanged=True,
         cached_feature_diagnostic=True,native_image_path_qualified=False,
+        original_admitted_data_provenance_checked=True,complete_input_digest_overlap=0,
         external_pretraining_retained=True,additional_preflight_optimizer_invocations=10,
         initial_preparation_index_errors=2,initial_preparation_optimizer_updates=0,
         model_weights_published=False,general_ilm_goal_complete=False,
