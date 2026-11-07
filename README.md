@@ -22,6 +22,15 @@ reported directly below.*
 
 ## Current result: autonomous image-language writing still fails
 
+The [latest whole-canvas writer](references/parallel_canvas_result.md) gets
+**26/32 seen training answers exact**, but **0/128 unseen answers and 0/12 new
+copies**. A subsequent [matched source-feature comparison](references/source_canvas_result.md)
+uses all **3,257 admitted pairs**: both arms still get **0/64 unseen answers
+and 0/32 unseen copies**. Adding pooled source features lowers QA foreground
+F1 from **30.27% to 25.49%**. The raw outputs contain malformed repeated marks.
+Small-set fit has not become language generalization; no usable ILM is
+qualified. [All 512 comparison outputs](references/evidence/source_canvas_result/README.md).
+
 The [completed curriculum](references/native_visual_alignment_result.md) gives
 **29/32 exact copies, 0/32 Chinese QA and 0/32 English QA** through its auxiliary
 text head at the original image geometry. A subsequent
