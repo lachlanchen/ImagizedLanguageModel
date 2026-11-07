@@ -74,3 +74,8 @@ optimization is not established as the solution. Either outcome still requires
 free answers on prompts whose references are absent from their inputs, raw
 image inspection, held-out semantic evaluation and complete cost accounting.
 There is no new model run or download associated with this review.
+
+The companion [visual-reader and glyph-source review](visual_reader_and_glyph_source_review_20261107.md)
+checks newer source papers and the already attempted PIXEL-M4 initialization.
+An encoder, a character classifier and a supplied-character font generator
+each leave the conditional free-writing requirement unresolved.
