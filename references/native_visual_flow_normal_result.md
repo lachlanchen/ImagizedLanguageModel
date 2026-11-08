@@ -63,6 +63,15 @@ noise, testing whether the predicted field moves toward the corresponding
 answer. It separates a conditional-field observation from readable autonomous
 sampling. More unchanged training is not justified by this failed cohort alone.
 
+A separate [positive-branch sampling diagnostic](native_flow_positive_sampling_protocol.md)
+tests the mismatch between positive-only optimization and guidance-4 inference.
+It fixes the first passage pair in each split, requires exact native execution
+replay, and changes only guidance to one. Its
+[actual CPU preparation](evidence/native_flow_positive_sampling_preparation.json)
+passes image bindings and refuses premature neural execution. The lightweight
+coordinator waits behind the complete assessment and field probe. No new
+sampling or answer-quality observation follows from this preparation.
+
 Reproduce the complete-cohort audit after recording actual raw inspection:
 
 ```bash

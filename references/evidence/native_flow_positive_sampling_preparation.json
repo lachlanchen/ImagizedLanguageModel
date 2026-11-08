@@ -1,0 +1,76 @@
+{
+  "recorded_UTC": "2026-11-08T18:47:42.872404+00:00",
+  "stage": "prepared_and_verified_waiting",
+  "implementation_and_protocol_sha256": {
+    "scripts/run_native_flow_positive_sampling_probe.py": "81fec55c510e1c08fc725d020721caca454d43995dd8862caacf2e5c4961158f",
+    "references/native_flow_positive_sampling_protocol.md": "a4b13c27e42030919bc70d731e372787d936225cf796c741745e0d708ff3317c"
+  },
+  "private_preparation_sha256": "0577068d3a45b4195d17a8f53cc2e85cc81d261dfbc7bb796e01b45db9339113",
+  "fixed_original_positions": [
+    0,
+    1,
+    32,
+    33
+  ],
+  "input_cases": 4,
+  "cases": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "input_sha256": "e1b36dd154e800a3c52f204b2f8899bd078a5c24575b607ca6be1cbf09b70a4f",
+      "seed": 20268701,
+      "target_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "input_sha256": "71a011fe43778434befb6a095101d28ee8d7a1d9fdc4cf2ad9e63ab237f2e509",
+      "seed": 20268701,
+      "target_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    },
+    {
+      "id": "TRAIN_2295_QUERY_0",
+      "split": "validation",
+      "input_sha256": "02bd90f60129faac8e84933e390327246cb872449e84a903a19455a932ff1c7d",
+      "seed": 20268702,
+      "target_sha256": "837fb315194d96dd5dfb8a2889eeb88aef1e3970d052edf8cccbd4688873d8e7"
+    },
+    {
+      "id": "TRAIN_2295_QUERY_1",
+      "split": "validation",
+      "input_sha256": "026b8c2f383e601526a46bdad937452a95c8e5699f53b088f61a0c9a4b9ac9e9",
+      "seed": 20268702,
+      "target_sha256": "0a7bdee5a2aa3ad273a61b93fe5866847ca07bbcfc5c57c410f1bdd755d5ce52"
+    }
+  ],
+  "all_original_input_and_target_checksums_verified": true,
+  "generator_index_has_exactly_four_input_only_fields": true,
+  "preparation_torch_module_imported": false,
+  "preparation_neural_models_loaded": 0,
+  "actual_arm_admission_rejection": {
+    "reason": "complete384-image assessment must finish first",
+    "actual_arm_entry_point_called": true,
+    "no_arm_folder_created": true,
+    "torch_imported": false,
+    "neural_calls": 0,
+    "output_or_noise_reroll": false
+  },
+  "live_waiting_coordinator_verified_from_proc": true,
+  "neural_child_present": false,
+  "all19_current_and_queued_sources_unchanged": true,
+  "scheduled_future_autonomous_generations": 10,
+  "scheduled_guidance1_answers": 8,
+  "scheduled_guidance4_replays": 2,
+  "scheduled_denoiser_calls": 500,
+  "scheduled_denoiser_batch_elements": 600,
+  "actual_new_neural_calls": 0,
+  "actual_new_generated_images": 0,
+  "optimizer_updates": 0,
+  "reused_known_failing_diagnostic_cases": true,
+  "model_or_language_quality_result_available": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false,
+  "actual_publication_check_admission_ready": false,
+  "actual_publication_check_admission_detected_new_waiting_coordinator": true,
+  "Office_or_LaTeX_started": false
+}
