@@ -1,0 +1,66 @@
+{
+  "source": {
+    "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+    "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+    "files": {
+      "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+      "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+      "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+      "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+      "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+      "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+    }
+  },
+  "implementation": {
+    "commit": "12a15ad609c3091335b5694865ecafb994364817",
+    "files": {
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/paired_data.py": "7d9d878403a4fa9a2451a81a35e18a4426ce56b652140e7c3752b7bdc03adf99",
+      "scripts/train_paired_image_language.py": "5fc77d1c0844d5ac8068c238b36a0b1c7a6c2c81c421607493a63187a53afc39",
+      "references/paired_image_learning_protocol.md": "7647d57a4dfcc8cacd362ec245ea4c1da5af42dc641b6573e9382b90c4a76c83"
+    }
+  },
+  "runner_sha256": "400836f96d39829458b7a5e03bff69c085ba10fe8bb3759c67819642221ba58a",
+  "source_dependencies_sha256": {
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+    "ilm/image_edit/autonomous.py": "fdc9026e07132bfb5cf937d7fa08f0d584ecb4b02632de146b28e20ded0f9a74"
+  },
+  "native_implementation": {
+    "pipeline": {
+      "file": "pipeline_flux2_klein.py",
+      "sha256": "8a57a8a7f1c22fc0c5bc5d3fd1bd9bc76c17c1f4d6644cc73370651dd955358e"
+    },
+    "scheduler": {
+      "file": "scheduling_flow_match_euler_discrete.py",
+      "sha256": "8b96f25a6170480fb02decb58904e026250d6d68be5de8a7b8785b4c721e9d80"
+    },
+    "image_processor": {
+      "file": "image_processor.py",
+      "sha256": "d2cdc003444c8599e89789dfede8636d2534697bb3fe60d4b48cc0656b3b4e83"
+    }
+  },
+  "source_commit_at_finish": "3e91e79e9fe21e8e452647a4553407b4f3847b18",
+  "inference_source_files_unchanged": true,
+  "unrelated_commit_changes_allowed": true,
+  "inputs_sha256": "1945b39a728f636c88ea59eecb9dc78fd07a32b2ddc0b08ef6046ce426701331",
+  "complete_generations": 64,
+  "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+  "checkpoint_sha256": "0e292f58621875538c7802d71b5c389b87c4eca24891217a81dee113fb3a3cd5",
+  "transformer_parameters": 3899903488,
+  "codec_parameters": 84046115,
+  "peak_allocated_vram_gib": 9.535725116729736,
+  "elapsed_seconds": 1456.9011468058452,
+  "steps": 50,
+  "guidance": 1.0,
+  "output_canvas": [
+    512,
+    256
+  ],
+  "training_manifest_loaded": false,
+  "reference_answer_used": false,
+  "question_specific_text_condition": false,
+  "output_repair": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}

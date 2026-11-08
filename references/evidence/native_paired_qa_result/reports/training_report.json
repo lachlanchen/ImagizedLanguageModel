@@ -1,0 +1,155 @@
+{
+  "stage": "completed",
+  "metadata": {
+    "source": {
+      "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+      "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+      "files": {
+        "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+        "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+        "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+        "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+        "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+        "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+      }
+    },
+    "rank": 16,
+    "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+    "implementation": {
+      "ilm/image_edit/qa_learning.py": "4c6248d5d2b2400c790b37d24673ca61f3b1910ecad710440ddee5e727f44324",
+      "scripts/train_native_paired_qa.py": "d52142bab54ea8bc133f77e8d2b9f9eb1353a1f23f2b9c27e63bc9a870e31fe3",
+      "scripts/run_native_paired_qa.py": "cfb793ff12d8b4257a226b8928ba71128134138ef6425cf5ee13982ae519b170",
+      "scripts/assess_native_paired_qa.py": "a21030f1b2dbbc943bebed52e61d3a705d6483dcc839ca7094ebfcb6592858c1",
+      "references/native_paired_qa_learning_protocol.md": "8e7b72885fde6d16058d3a3efaba651e96d8c22458066f0bb645612953d2c579",
+      "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/autonomous.py": "fdc9026e07132bfb5cf937d7fa08f0d584ecb4b02632de146b28e20ded0f9a74",
+      "ilm/image_edit/recognition.py": "e36af38f1700052dfad97055941e1b513a4c61088d183f351a175e919c8c8adc",
+      "ilm/image_edit/ink_mass.py": "536c86d343001e56e909fdab2e2ed3c222e7dc1c010d51d80d5b8f39ef25a035",
+      "scripts/infer_paired_image_cohort_v2.py": "400836f96d39829458b7a5e03bff69c085ba10fe8bb3759c67819642221ba58a",
+      "scripts/score_paired_writing.py": "f7c737ffc11c1bb82861fa473b5baca1207cc8b1bb6c74bfba7aa2a10aee15d5",
+      "scripts/evaluate_image_edit_baseline.py": "99790506c37a4a2f2a6aecf4b4e36d63e2957c00badb50e7ca8d2081c932f2b9"
+    },
+    "initial_checkpoint_sha256": "166409db4f87af87393576195251527f1fcf54d5fe12812d75f6d1491674717d",
+    "manifest_sha256": "e2d6aec134a99e079a9bd42f217559a04e32727bdbc4b09d131b0fb22cf4dfa6",
+    "source_qa_sha256": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "control_preparation_sha256": "d942b1e52a7c11c0f0284e5ab808fcc8dd30363cc51b3b2b6de554056f84406a",
+    "training_ids": [
+      "TRAIN_3802_QUERY_0",
+      "TRAIN_3802_QUERY_1",
+      "TRAIN_660_QUERY_2",
+      "TRAIN_660_QUERY_3",
+      "TRAIN_686_QUERY_0",
+      "TRAIN_686_QUERY_2",
+      "TRAIN_2381_QUERY_2",
+      "TRAIN_2381_QUERY_3",
+      "TRAIN_1291_QUERY_0",
+      "TRAIN_1291_QUERY_1",
+      "TRAIN_2272_QUERY_1",
+      "TRAIN_2272_QUERY_2",
+      "TRAIN_1621_QUERY_2",
+      "TRAIN_1621_QUERY_3",
+      "TRAIN_1638_QUERY_0",
+      "TRAIN_1638_QUERY_1",
+      "TRAIN_2720_QUERY_0",
+      "TRAIN_2720_QUERY_1",
+      "TRAIN_1234_QUERY_1",
+      "TRAIN_1234_QUERY_2",
+      "TRAIN_267_QUERY_0",
+      "TRAIN_267_QUERY_2",
+      "TRAIN_3698_QUERY_0",
+      "TRAIN_3698_QUERY_1",
+      "TRAIN_2115_QUERY_1",
+      "TRAIN_2115_QUERY_2",
+      "TRAIN_2270_QUERY_1",
+      "TRAIN_2270_QUERY_3",
+      "TRAIN_498_QUERY_0",
+      "TRAIN_498_QUERY_2",
+      "TRAIN_1337_QUERY_1",
+      "TRAIN_1337_QUERY_2"
+    ],
+    "schedule_sha256": "f923c6acf959bf1202c8b1f231df7b181b57cf9e15cb8f0867088990c586b70c",
+    "purpose": "complete_native_paired_QA_learning",
+    "optimizer_restored_from_copying": false,
+    "fresh_optimizer": true,
+    "updates": 128,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "model_seed": 20268901,
+    "order_seed": 20268902,
+    "noise_seed": 20268903,
+    "training_only_reader_source": {
+      "repo": "stepfun-ai/GOT-OCR-2.0-hf",
+      "revision": "d3017ef2c2c1395888c8d635c5e0508bcb0ac78d",
+      "files": {
+        "model.safetensors": "6175ac7868a4e75735f5d59f78c465081ad3427eb4f312d072a0f1d16b333ba4",
+        "tokenizer.json": "36b382a3c48c9a143c30139dac6c8230ddfb0b46a3dc43082af6052abe99d9de",
+        "config.json": "cbe8aacd6cd84a2d58eafcd0045c6ac40e02e3a448f24b8cee51cc81d8bdccf2",
+        "generation_config.json": "31915c5a692f43c5765a20cfc5f9403bcd250f5721a0d931bb703169c08993b4",
+        "preprocessor_config.json": "ef9a0dc0935cac11f4230ca30d00a52bedfa52b6633e409e9fbd2ea56373aa7e",
+        "special_tokens_map.json": "7c2368a3889fdfb37c24cabeb031b53f47934f357b54e56e8e389909a338ea47",
+        "tokenizer_config.json": "8b0542937d32a67da8ea2d1288b870e325be383a962c65d201864299560a2b8e"
+      }
+    },
+    "physical_coefficient": 0.4035679875746343,
+    "objective": "final native image recognition CE plus fixed target-mass KL",
+    "steps": 50,
+    "guidance": 1.0,
+    "output_canvas": [
+      512,
+      256
+    ],
+    "input_canvas": [
+      1024,
+      1024
+    ],
+    "target_in_sampler": false,
+    "teacher_at_inference": false,
+    "output_repair": false,
+    "external_pretraining": true,
+    "general_ilm_goal_complete": false
+  },
+  "updates": 128,
+  "changed_adapter_tensors": 206,
+  "native_implementation": {
+    "pipeline": {
+      "file": "pipeline_flux2_klein.py",
+      "sha256": "8a57a8a7f1c22fc0c5bc5d3fd1bd9bc76c17c1f4d6644cc73370651dd955358e"
+    },
+    "scheduler": {
+      "file": "scheduling_flow_match_euler_discrete.py",
+      "sha256": "8b96f25a6170480fb02decb58904e026250d6d68be5de8a7b8785b4c721e9d80"
+    },
+    "image_processor": {
+      "file": "image_processor.py",
+      "sha256": "d2cdc003444c8599e89789dfede8636d2534697bb3fe60d4b48cc0656b3b4e83"
+    }
+  },
+  "initial_check": {
+    "id": "TRAIN_3698_QUERY_0",
+    "seed": 1659285684,
+    "native_forward_equal": true,
+    "native_output": {
+      "png_sha256": "33c1c8db553d7d87b6039df700b01cb203f06c923913ab12c43916b7910aabce",
+      "pixels_sha256": "e4917fcb7b7ec92019b077fa83dc4f1ebdd99d640a75c6fb6b3aed9cb824f921",
+      "shape": [
+        1,
+        3,
+        256,
+        512
+      ],
+      "output_repair": false
+    }
+  },
+  "checkpoint_sha256": "0e292f58621875538c7802d71b5c389b87c4eca24891217a81dee113fb3a3cd5",
+  "elapsed_seconds_this_invocation": 12782.358161636628,
+  "cumulative_invocation_seconds": 12782.358163071796,
+  "peak_allocated_vram_gib_this_invocation": 12.203979969024658,
+  "transformer_parameters": 3899903488,
+  "vae_parameters": 84046115,
+  "trainable_parameters": 24358912,
+  "training_only_reader_parameters": 560528640,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

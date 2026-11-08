@@ -28,9 +28,9 @@ Le dernier contrôle de l’interface donne 11/32 réponses anglaises exactes av
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
-Résultat du 2026-11-08 : l’entraînement aux questions-réponses a achevé 128 mises à jour, mais le modèle final obtient 0/32 réponses exactes selon l’OCR sur les questions vues et 0/32 sur les questions réservées, même en acceptant les variantes de la source. Les 64 images originales ont été examinées ; des fragments déformés et de l’écriture superflue persistent. L’évaluation du modèle initial, des entrées partiellement effacées et de la copie continue. L’apprentissage du langage reste non démontré.
+Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à jour est terminée et les 384 images originales de réponse ont été examinées. Le modèle initial comme le modèle final obtiennent 0/32 réponses exactes selon l’OCR dans chacun des groupes de questions vues et réservées, même avec les variantes acceptées par la source. La copie exacte sur le groupe réservé passe de 19/32 à 16/32. Les six critères fixés à l’avance échouent ; l’apprentissage du langage reste non démontré.
 
-[Résultat et portée des observations](../references/native_paired_qa_final_normal_cohort.md)
+[Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
 ## État actuel : V35 ferme la boucle raster mais échoue à lier le sens
 

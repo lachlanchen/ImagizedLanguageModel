@@ -1,7 +1,8 @@
 # Complete native QA learning result: manuscript revision plan
 
-Stage: internal research revision, awaiting the complete registered experiment.
-No TeX, PPT or PDF edits are admitted by the current partial training record.
+Stage: complete registered experiment and raw review available; publication
+build waits for the separate active native flow training job to finish.
+No heavy manuscript/figure build is admitted alongside that model stage.
 This plan prepares one result unit; it does not qualify the independent ILM.
 
 ## Baseline and current evidence
@@ -25,7 +26,18 @@ Third-pass training-page inspection shows faint, corrupted source fragments.
 Those changing-weight/changing-noise training outputs are not a final or
 held-out result. Their loss trajectory cannot populate any answer-accuracy
 claim. The separate visual-semantic candidate and single-step preflight have
-not yet generated results; neither belongs in this result revision.
+now completed execution checks; a separate 1,536-update learning run is active.
+Those experiments remain outside this result revision.
+
+The [complete result](native_paired_qa_learning_result.md) now retains all
+384 original answer pages and 128 training pages. Both initial and final
+models score 0/32 seen and 0/32 held-out source-accepted OCR-exact answers,
+0/16 both-correct held-out passage pairs and zero in both erased-input cohorts.
+Held-out copying falls from 19/32 to 16/32. All six prospective requirements
+fail. Independent export authenticates the actual tensors, and bound raw
+inspection covers all 384 original answers without transcript or score repair.
+These complete observations can populate the scoped revision after model
+execution releases the shared resource lock.
 
 ## Required evidence before execution
 

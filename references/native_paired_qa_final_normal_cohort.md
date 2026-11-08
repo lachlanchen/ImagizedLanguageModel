@@ -30,17 +30,18 @@ held-out answers by canonical and source-accepted OCR matching. All 64 initial
 pages were also inspected; corrupted passage/question fragments and extra
 writing persist. Thus there is no OCR-exact normal-answer gain after the
 128 updates. The remaining erasure and copying cohorts are still needed for
-the complete registered experiment.
+the complete registered experiment, which is now [available with all cohorts](native_paired_qa_learning_result.md).
 
 This is the completed **normal-input comparison**, not the complete
-registered experiment. Erased-input and copying assessment continues under
-the fixed protocol. No comparative improvement, semantic
+registered experiment. The complete result includes all erased-input and
+copying cohorts under the fixed protocol. No comparative improvement, semantic
 understanding or efficiency advantage is established by this partial result.
 
 A separate [native visual flow-learning implementation](native_visual_flow_learning_protocol.md)
 is now committed. Its [CPU preparation](evidence/native_visual_flow_training_preparation.json)
 includes 384 training image pairs, 64 held-out pairs and 192 fixed assessment
-inputs per model. Its full-model training and language quality remain
+inputs per model. Native replay, codec and one real gradient update have now
+completed, and longer training is running. Language quality remains
 unverified. Existing language and image pretraining is retained in that
 candidate and must be counted when evaluating its capabilities and cost.
 The [reference-page calibration](native_visual_flow_reference_calibration.md)

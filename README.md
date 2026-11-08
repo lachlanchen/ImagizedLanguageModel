@@ -44,9 +44,11 @@ optimizer step. The successful invocation took **3.55 hours** at **12.204 GiB
 peak allocated memory**. The completed [final normal-answer cohort](references/native_paired_qa_final_normal_cohort.md)
 gets **0/32 seen and 0/32 held-out OCR-exact answers**, including all
 source-accepted alternatives. All 64 raw pages were inspected; malformed
-passage fragments and extra writing persist. Initial-model, erased-input and
-copying assessment continues. Training completion and changed weights have
-not established language understanding.
+passage fragments and extra writing persist. The [complete assessment](references/native_paired_qa_learning_result.md)
+now retains all **384 initial/final answer pages**: QA remains 0/32 in both
+splits and both arms, while held-out copying falls from **19/32 to 16/32**.
+All six prospective requirements fail. Training completion and changed weights
+have not established language understanding.
 
 The earlier [balanced continuation](references/balanced_autonomous_writer_result.md)
 gets 13/32 seen and 17/32 held-out copies, including 4/16 Chinese, and fails
