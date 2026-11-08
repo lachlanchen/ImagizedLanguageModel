@@ -28,6 +28,10 @@ Le dernier contrôle de l’interface donne 11/32 réponses anglaises exactes av
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+Résultat du 2026-11-08 : l’entraînement aux questions-réponses a achevé 128 mises à jour, mais le modèle final obtient 0/32 réponses exactes selon l’OCR sur les questions vues et 0/32 sur les questions réservées, même en acceptant les variantes de la source. Les 64 images originales ont été examinées ; des fragments déformés et de l’écriture superflue persistent. L’évaluation du modèle initial, des entrées partiellement effacées et de la copie continue. L’apprentissage du langage reste non démontré.
+
+[Résultat et portée des observations](../references/native_paired_qa_final_normal_cohort.md)
+
 ## État actuel : V35 ferme la boucle raster mais échoue à lier le sens
 
 ![Résultat mesuré de V35 : le modèle raster entrée-sortie complet produit des marques sensibles à l'instruction, mais échoue en copie et en liaison sémantique](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

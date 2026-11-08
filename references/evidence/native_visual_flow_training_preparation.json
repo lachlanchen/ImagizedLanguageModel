@@ -1,0 +1,44 @@
+{
+  "preparation_sha256": "137df14a85b6ef6c23ce7ad152c678d285814206e871b405769f4f4790fd2982",
+  "code_sha256": {
+    "ilm/image_edit/native_flow_run.py": "1ba00020ec573c63690e05500b9d7c51c5abcd5bc971d4a7bf6b84458c0bf5a2",
+    "scripts/train_native_visual_flow.py": "a4257694dbf058f27301829ccecd7ac7f09d1b0cdb442c8e1dc3fd4ab275ee8a",
+    "scripts/infer_native_visual_flow.py": "c330e3eb07d5865dcf05269841536473633183039c3fda26c6e5d9fc9add5976",
+    "ilm/image_edit/native_flow_step.py": "4754198d9f5bd51d73bfda1a6e8a3bc2c635767a564e5545277b69d4bd47749f",
+    "ilm/image_edit/visual_flow_learning.py": "23f1831d4a2209e2799434074fb772b9e64f9e31d6b9237a090b00fc27fcb01f",
+    "ilm/image_edit/visual_semantic.py": "f49bc8ee472617d2ada73d40bb9f8200548c91a5eac63bf8ba9941fdecc006ce",
+    "ilm/image_edit/compiled_visual_condition.py": "29d6054d98d7b8965b19474eab971c0303900cb912318dc12130a878f51a6319",
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "references/native_visual_flow_learning_protocol.md": "2d9e29f7df3e7fc4379f3544f77df019f038455f849ce18f888eec4cc523cdba"
+  },
+  "source_revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+  "training_pairs": 384,
+  "heldout_pairs": 64,
+  "schedule_sha256": "2497391bb6a0d2505d0fd6a9af004076ea5553bdfb94ba0023edac0cbf390cb2",
+  "planned_updates": 1536,
+  "adapter_trainable_parameters": 37380992,
+  "training_QA_articles": 128,
+  "heldout_QA_articles": 16,
+  "evaluation": {
+    "files_sha256": {
+      "normal_inputs.json": "ea110f749f17e0a56fd9fe3bd2056fc56edf5d93fb1b1c24c66a8af4f970fd6b",
+      "normal_references.jsonl": "1e6da3174b7f5a2db9d8c996209e56245de3ab2c68b960f908980784211aa045",
+      "question_erased_inputs.json": "1be788ed9554fed9cf4a23c3d5bcc2a202950b114e2dbf3e8c0a6904f0116eb6",
+      "question_erased_references.jsonl": "97170b2fb434d3874d6dea983d672506b87bd4d908813e84bd67b30a408ea2f9",
+      "passage_erased_inputs.json": "5f6a4c291b8d44bebd3c6d55a84303d54f12efcd833bc751b3eeac03251a14e0",
+      "passage_erased_references.jsonl": "517beb1c916d3317ab895d01b71d94b9c172fc86579e730913b50dc2d349c44b",
+      "copy_inputs.json": "a59e7de39f2ac7197024d4681f9969c810a8aaefccf3ad3fd66e15acb4a47f86",
+      "copy_references.jsonl": "3f70dd18f92aeed75cd42b58be321459fcf585f5a17ad32663998f44253fe63c"
+    },
+    "control_preparation_sha256": "d942b1e52a7c11c0f0284e5ab808fcc8dd30363cc51b3b2b6de554056f84406a",
+    "original_reference_manifest_sha256": "e2d6aec134a99e079a9bd42f217559a04e32727bdbc4b09d131b0fb22cf4dfa6",
+    "calls_per_model": 192,
+    "input_indices_contain_answers": false,
+    "reference_manifests_for_offline_evaluation_only": true
+  },
+  "source_pretraining_retained": true,
+  "model_loaded": false,
+  "model_updates_executed": 0,
+  "language_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

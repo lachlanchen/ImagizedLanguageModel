@@ -28,6 +28,10 @@ La última comprobación de la interfaz recupera 11/32 respuestas exactas en ing
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+Resultado del 2026-11-08: el entrenamiento de preguntas y respuestas completó 128 actualizaciones, pero el modelo final obtuvo 0/32 respuestas exactas según OCR en preguntas vistas y 0/32 en las reservadas, incluso aceptando las alternativas de la fuente. Se revisaron las 64 imágenes originales; persisten fragmentos deformados y escritura adicional. Continúa la evaluación del modelo inicial, de las entradas con partes borradas y de la copia. El aprendizaje del lenguaje sigue sin demostrarse.
+
+[Resultado y alcance de la evidencia](../references/native_paired_qa_final_normal_cohort.md)
+
 ## Evidencia actual: V35 cierra el bucle ráster, pero falla la vinculación semántica
 
 ![Resultado medido de V35: el modelo ráster completo de entrada y salida produce trazos sensibles al prompt, pero falla en copia y vinculación de instrucciones](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

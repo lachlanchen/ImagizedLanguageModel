@@ -26,6 +26,10 @@ Der jüngste Schnittstellentest liefert beim eingefrorenen vortrainierten Modell
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+Ergebnis vom 2026-11-08: Das Frage-Antwort-Training hat 128 Updates abgeschlossen, doch das finale Modell erreicht laut OCR 0/32 exakt richtige Antworten auf gesehene und 0/32 auf zurückgehaltene Fragen, auch unter Einbeziehung der von der Quelle akzeptierten Alternativen. Alle 64 Originalbilder wurden geprüft; verformte Textfragmente und zusätzliche Schrift bleiben bestehen. Die Auswertung des Ausgangsmodells, teilweise gelöschter Eingaben und des Abschreibens läuft weiter. Sprachlernen ist weiterhin nicht nachgewiesen.
+
+[Ergebnis und Aussagegrenzen](../references/native_paired_qa_final_normal_cohort.md)
+
 ## Neuester Prompt-Test: V23-Relationsschaltung bestanden
 
 ![Gemessenes V23-Ergebnis: Sechs Bild-Promptframes durchlaufen visuellen Abgleich, Operationsgatter, Quellglyphen-Routing und einen eingefrorenen Bildnormalisierer und erzeugen ein Antwortbild](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)

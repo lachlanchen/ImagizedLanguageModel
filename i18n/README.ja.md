@@ -27,6 +27,10 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+2026-11-08の結果：質問応答の学習は128回の更新を完了しましたが、最終モデルのOCR完全一致は学習済みの質問で0/32、保留した質問で0/32でした。元データが認める別解を含めても同じです。64枚すべての元画像を確認したところ、崩れた本文の断片や余分な文字が残っています。初期モデル、部分消去した入力、書き写しの評価は継続中です。言語学習はまだ実証できていません。
+
+[結果と証拠の範囲](../references/native_paired_qa_final_normal_cohort.md)
+
 ## 現在の証拠：V35 はラスターループを閉じたが意味の束縛に失敗
 
 ![V35 の実測結果：完全なラスター入力・出力モデルはプロンプトに反応する描線を生成したが、複写と指示の束縛には失敗](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

@@ -27,6 +27,10 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+2026-11-08 결과: 질의응답 학습은 128회 업데이트를 마쳤지만 최종 모델의 OCR 완전 일치는 학습한 질문 0/32, 보류한 질문 0/32입니다. 원본 데이터가 허용하는 대체 정답을 포함해도 같습니다. 원본 출력 이미지 64장을 모두 검토했으며, 깨진 지문 조각과 불필요한 글쓰기가 여전히 나타납니다. 초기 모델, 일부를 지운 입력, 베껴 쓰기에 대한 평가는 계속 진행 중입니다. 언어 학습은 아직 입증되지 않았습니다.
+
+[결과와 근거의 범위](../references/native_paired_qa_final_normal_cohort.md)
+
 ## 현재 증거: V35는 래스터 루프를 닫았지만 의미 결합에는 실패
 
 ![V35 실측 결과: 완전한 래스터 입력 및 출력 모델이 프롬프트에 반응하는 흔적을 생성했지만 복사와 지시 결합에는 실패함](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

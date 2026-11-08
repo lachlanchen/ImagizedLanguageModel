@@ -27,6 +27,10 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+2026-11-08 實測：問答訓練已完成128次更新，但最終模型在已見問題與保留問題上的OCR答案完全一致數均為0/32；納入原始資料允許的其他答案後仍為零。已檢查全部64張原始輸出，仍有畸形的段落碎片與多餘書寫。初始模型、部分內容擦除及複製任務的評估仍在進行。尚未證明模型學會了語言。
+
+[結果與證據範圍](../references/native_paired_qa_final_normal_cohort.md)
+
 ## 目前證據：V35 閉合了柵格迴路，但語義綁定失敗
 
 ![V35 實測結果：完整的柵格輸入與柵格輸出模型產生會隨提示改變的痕跡，但複製與指令綁定均未通過](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

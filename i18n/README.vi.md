@@ -28,6 +28,10 @@ Kiểm tra giao diện mới nhất cho thấy mô hình tiền huấn luyện �
 
 [2026-11-07: English result and full evidence](../references/native_reader_geometry_result.md)
 
+Kết quả ngày 2026-11-08: quá trình học hỏi đáp đã hoàn thành 128 lần cập nhật, nhưng mô hình cuối chỉ đạt 0/32 câu trả lời khớp chính xác theo OCR ở nhóm đã học và 0/32 ở nhóm giữ lại, kể cả khi chấp nhận các đáp án thay thế của nguồn. Cả 64 ảnh gốc đã được xem xét; vẫn còn các mảnh văn bản méo và chữ thừa. Đánh giá mô hình ban đầu, đầu vào bị xóa một phần và khả năng chép lại vẫn tiếp tục. Khả năng học ngôn ngữ chưa được chứng minh.
+
+[Kết quả và phạm vi bằng chứng](../references/native_paired_qa_final_normal_cohort.md)
+
 ## Bằng chứng hiện tại: V35 khép kín vòng raster nhưng thất bại ở liên kết ngữ nghĩa
 
 ![Kết quả đo V35: mô hình raster vào-ra hoàn chỉnh tạo nét phản ứng theo prompt nhưng thất bại ở sao chép và liên kết chỉ dẫn](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)

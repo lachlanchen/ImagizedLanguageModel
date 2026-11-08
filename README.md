@@ -41,9 +41,12 @@ has completed training on GPU0 with 32 natural Chinese questions in sixteen
 passage pairs. The [final training verification](references/evidence/native_paired_qa_training_completed.json)
 authenticates all 128 actual training pages, the fixed schedule and every
 optimizer step. The successful invocation took **3.55 hours** at **12.204 GiB
-peak allocated memory**. Complete initial/final paired-question, erased-input
-and copying assessment is running. Training completion and changed weights
-are not evidence of answer quality.
+peak allocated memory**. The completed [final normal-answer cohort](references/native_paired_qa_final_normal_cohort.md)
+gets **0/32 seen and 0/32 held-out OCR-exact answers**, including all
+source-accepted alternatives. All 64 raw pages were inspected; malformed
+passage fragments and extra writing persist. Initial-model, erased-input and
+copying assessment continues. Training completion and changed weights have
+not established language understanding.
 
 The earlier [balanced continuation](references/balanced_autonomous_writer_result.md)
 gets 13/32 seen and 17/32 held-out copies, including 4/16 Chinese, and fails
