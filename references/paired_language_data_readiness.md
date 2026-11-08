@@ -59,3 +59,28 @@ PYTHONPATH=. python scripts/audit_paired_language_data.py \
 This command checks neither OCR legibility, defects inside glyphs, neural
 memory fit nor semantic understanding. It does not change the active training
 schedule, source pages, language requirements or current failed qualification.
+
+## Prepared native controls
+
+The [complete control preparation](evidence/paired_language_controls_preparation.json)
+now reproduces all 288 normal question pages exactly and prepares all 32
+held-out question-erased and passage-erased inputs. Every passage pixel is
+retained in question erasure; every question pixel is retained in passage
+erasure. The 16 question-erased pairs have identical input pixels and seeds.
+Their constant answer-label position is normalized within each pair, so
+question length cannot remain as a pair-specific cue. This label-position
+intervention is disclosed in the [native preflight protocol](paired_language_native_preflight_protocol.md).
+The first held-out pair's two control types were visually inspected.
+
+[Independent CPU reference OCR](evidence/paired_language_reference_ocr.json)
+recognizes 23/32 seen and 26/32 held-out clean answer images. This is a
+calibration limitation, not a neural model score. Some missed pages are
+readable Chinese strings; punctuation and a full-width percent sign also
+cause exact-match disagreements. Preserve these failures and require raw
+answer review rather than selecting expected transcripts.
+
+Reproduction uses `scripts/prepare_paired_language_controls.py`; its outputs
+remain in the ignored `artifacts/paired_language_controls_v1/` directory.
+The current ink-mass copying comparison continues unchanged. No full-page
+native generation, encoder reconstruction or QA optimizer update has yet
+been performed for this prepared control cohort.
