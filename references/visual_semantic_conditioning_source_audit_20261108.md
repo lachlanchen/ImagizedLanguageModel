@@ -190,3 +190,13 @@ requires the complete existing assessment and acquires the project GPU lock
 before candidate loading. Header/state checks and source acquisition do not
 establish that this runner can generate a useful answer; actual generation
 and complete raw review are still required.
+
+The [executed CPU preparation](evidence/visual_semantic_native_preflight_preparation.json)
+checks the complete actual weight-file headers against 909 transformer,
+244 VAE, 824 VLM and 103 connector state entries. All shapes match after the
+explicit legacy VLM name translations; the constructor's unused output head
+is the only absent VLM entry. Property aliases retain the same body objects
+without duplicate module registration. Removing lexical modules from the
+meta prototype leaves 6,202,898,783 parameters. This is a structural count,
+not an actual loaded-runtime or memory result. The ten input-only pages are
+prepared, and generation is queued behind the current QA assessment.
