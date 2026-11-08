@@ -41,9 +41,10 @@ if that evidence is missing. Do not render or compile while a model job is live.
   examples. Preserve all prior slide parts, rendered appearances, original
   charts and measured images. Do not alter historical producer scripts.
 - Change the now-outdated lack-of-control wording in the existing Results
-  paragraph and Note 48 to a statement about the initial pilot assessment,
-  referencing the later control in Note 49. Preserve absent independent-seed
-  replication and the retrospective nature of that comparison.
+  paragraph to a statement about the initial pilot assessment. Preserve
+  historical Note 48 verbatim to retain the first 57 supplement pages;
+  explicitly explain its assessment date at the start of Note 49. Preserve
+  absent independent-seed replication and the retrospective comparison.
 - Refresh current PDFs and matching redlines against the frozen baseline,
   then current README, local Nutstore package/latest aliases and evidence
   receipts. No unrelated Methods, Introduction or earlier experiments change.
@@ -69,3 +70,21 @@ and changed scientific page. Record actual page anchors and build limits.
 Sync only the reviewed final artifact set, verify local hashes and distinguish
 them from cloud propagation. Commit and push the completed revision unit;
 leave the independent ILM goal active unless its full language scope is proved.
+
+## Completed verification
+
+The complete 128-update result and raw review were retained before execution.
+Note 49 is on supplement page 58; Figure S26 is on page 59. The article's
+new comparison spans pages 12–13; the review's comparison is on page 13 and
+the abstract on page 1. Both redlines were refreshed against d8b2aa5; their
+new comparison is on page 13 / supplement page 58. Article/review/SI page
+counts are 16/29/63, redlines 29/63, figures 41. All builds and qpdf checks
+pass without overfull or undefined-reference errors. A redline orphan was
+removed by shortening only the new reproduction paragraph.
+
+Native charts 48–49 and their embedded workbooks match all three complete
+source results. All 40 prior slide parts/appearances, 121 prior figure assets,
+original evidence pixels and the first 57 supplement pages are preserved.
+Changed-page layout overviews and new scientific pages were actually inspected;
+the bound visual-review receipt records the scope and renderer limitations.
+The independent model goal remains active and unachieved.

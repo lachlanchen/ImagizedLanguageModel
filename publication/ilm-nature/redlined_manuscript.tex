@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov  8 10:14:36 2026
-%DIF ADD new.tex   Sun Nov  8 10:14:36 2026
+%DIF DEL old.tex   Sun Nov  8 12:37:40 2026
+%DIF ADD new.tex   Sun Nov  8 12:37:40 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -132,10 +132,10 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 5c458a2 native-preflight baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the d8b2aa5 40-slide writing baseline are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. \DIFaddbegin \DIFadd{A separate 32-update image-writer continuation raises held-out OCR-exact copying from 9/32 to 13/32 but still fails writing reliability. }\DIFaddend Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}\par\bigskip
+\section*{Abstract}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. A separate \DIFdelbegin \DIFdel{32-update image-writer continuation raises }\DIFdelend \DIFaddbegin \DIFadd{image writer followed by 128 balanced updates reaches 17/32 }\DIFaddend held-out OCR-exact \DIFdelbegin \DIFdel{copying from 9}\DIFdelend \DIFaddbegin \DIFadd{copies, including 4}\DIFaddend /\DIFdelbegin \DIFdel{32 }\DIFdelend \DIFaddbegin \DIFadd{16 Chinese, but seen copying regresses }\DIFaddend to 13/32 \DIFdelbegin \DIFdel{but still fails writing reliability}\DIFdelend \DIFaddbegin \DIFadd{and two continuation requirements fail}\DIFaddend . Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -827,7 +827,7 @@ plus an 84.046M VAE, with 24.359M trained adapter parameters. No natural QA is
 optimized in these copying runs. Faster copying execution therefore does not
 establish language understanding or efficiency at useful language quality.
 
-\DIFdelbegin \DIFdel{A native }\DIFdelend \DIFaddbegin \DIFadd{Frozen recognition supervision also fails reliable copying: a matched
+Frozen recognition supervision also fails reliable copying: a matched
 512-update treatment gives 6/32 seen and 9/32 held-out OCR-exact strings
 (Supplementary Note 47 and Fig.~S24). A subsequent 32-update continuation
 supervises actual final images generated from independent noise, combining
@@ -835,13 +835,28 @@ reader CE with balanced pixel error and differentiating through all 50
 native steps\cite{draft}. Seen copying rises from 6/32 to 15/32 and held-out
 copying from 9/32 to 13/32, meeting an exploratory progress rule but failing
 the 30/32 writing floor (Note 48 and Fig.~S25). Training takes 1,135.452\,s
-at 12.057\,GiB peak allocation. The before/after continuation lacks a matched
-extra-training control and changes input-encoding precision as well as the
-loss. Raw omissions and repetitions remain. It establishes neither semantic
-answering nor a quality-matched efficiency advantage.
+at 12.057\,GiB peak allocation. \DIFdelbegin \DIFdel{The before/after continuation lacks
+a matched
+extra-training }\DIFdelend \DIFaddbegin \DIFadd{At initial assessment, the continuation lacks
+an additional-training }\DIFaddend control and changes input-encoding precision as well
+as the loss\DIFaddbegin \DIFadd{; the later comparison below holds precision common}\DIFaddend . Raw omissions
+and repetitions remain. It establishes neither semantic answering nor a
+quality-matched efficiency advantage\DIFaddbegin \DIFadd{.
 }
 
-\DIFadd{A native }\DIFaddend unified backbone provides a separate visual-access diagnostic
+\DIFadd{The subsequent old-objective continuation gives 5/32 seen and 10/32 held-out
+OCR-exact copies on matched example draws; both it and the final-image pilot
+retain only 3/16 held-out Chinese copies (Note 49 and Fig.~S26). This
+retrospective comparison differs in objective and compute. Continuing the
+pilot for 128 balanced updates, four per training input, raises held-out
+copying to 17/32, including 4/16 Chinese, but reduces seen copying to 13/32.
+The prospective Chinese and seen-retention conditions fail; only English
+retention passes. Training takes 4,500.117\,s at 12.032\,GiB. Omissions,
+repeated letters and duplicated lines still reject reliable writing, and
+semantic QA remains untested. This result does not support further unchanged
+copying-budget scale-up}\DIFaddend .
+
+A native unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source
 gives no exact answers on twelve image prompts, while the same body recovers
 all eight requested copy contents from their original text. Gated visual-only
@@ -921,7 +936,7 @@ Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
 Supplied-target reconstruction is preserved by an aligned inverse-image path;
-the free image writers still fail \DIFaddbegin \DIFadd{reliable }\DIFaddend new prompt-directed copying. The separate
+the free image writers still fail reliable new prompt-directed copying. The separate
 source-pixel component passes its new-copy test but fails natural-reading
 qualification. The remaining test is whether context selects and generates a
 coherent written future. Low teacher-forced
@@ -1131,9 +1146,9 @@ present raster-only deployment experiment.
 \bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
 \bibitem{jit} Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). \url{https://arxiv.org/abs/2511.13720v1}.
 \bibitem{showo2} Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). \url{https://arxiv.org/abs/2506.15564v3}.
-\bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}\DIFaddbegin \DIFadd{.
-}\bibitem{gotocr} \DIFadd{Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). }\url{https://arxiv.org/abs/2409.01704}\DIFadd{.
-}\bibitem{draft} \DIFadd{Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). }\url{https://arxiv.org/abs/2309.17400}\DIFaddend .
+\bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}.
+\bibitem{gotocr} Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). \url{https://arxiv.org/abs/2409.01704}.
+\bibitem{draft} Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). \url{https://arxiv.org/abs/2309.17400}.
 \end{thebibliography}
 
 

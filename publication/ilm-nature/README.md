@@ -8,71 +8,62 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved `5c458a2` native-preflight baseline. Their
-[builder](build_autonomous_writing_redlines.py) uses pinned latexdiff and inlines the
+revision with the preserved `d8b2aa5` 40-slide writing baseline. Their
+[builder](build_balanced_writing_redlines.py) uses pinned latexdiff and inlines the
 abstract so its changes are visible. The earlier supplement-only redline and
 builder remain inside the named baseline.
 
 ## Current result
 
-The [subsequent additional-training control](../../references/autonomous_writing_control_result.md)
-has now completed: 5/32 seen and 10/32 held-out OCR-exact copies, versus
-15/32 and 13/32 for the final-image pilot. Both give 3/16 held-out Chinese
-copies. This newer result is available with all raw outputs; incorporation
-into the TeX/PDF figures remains pending. The package below reports the
-preceding completed manuscript revision.
+The [completed balanced continuation](../../references/balanced_autonomous_writer_result.md)
+gets **13/32 seen and 17/32 held-out OCR-exact copies**, including **4/16
+held-out Chinese**. Seen copying regresses from 15/32. The Chinese and
+seen-retention conditions fail; only held-out English retention passes.
+Raw omitted characters, repeated letters and duplicated lines still reject
+the unchanged 30/32 writing floor. No semantic QA is trained or evaluated.
+This result does not support further unchanged copying-budget scale-up.
 
-The independent image-language goal remains unachieved. The completed
-[32-update autonomous-writing continuation](../../references/autonomous_writer_result.md)
-raises OCR-exact copying from **6/32 to 15/32 seen** and **9/32 to 13/32 held
-out**. Held-out Chinese reaches only **3/16**; English reaches **10/16**.
-Raw omissions, repetitions and copied instructions still reject reliable
-writing. This continuation has no matched extra-training control, independent
-seed replication or natural-QA evaluation. It meets an exploratory progress
-rule, not the 30/32 writing requirement or a language-understanding claim.
+The [additional-training control](../../references/autonomous_writing_control_result.md)
+gives 5/32 seen and 10/32 held-out copies versus 15/32 and 13/32 in the
+final-image pilot, both with 3/16 held-out Chinese. This retrospective
+comparison matches exposure and native input precision, not computation.
+**Note 49 and Figure S26** report both completed experiments and their limits.
+The independent image-language goal remains unachieved.
 
-The preceding [recognition-loss comparison](../../references/recognition_guided_writing_result.md)
-gives **6/32 seen and 9/32 held out**, versus 6/32 and 10/32 with flow alone.
-The [complete reader diagnostic](../../references/autonomous_writing_loss_result.md)
-also exposes missed duplicate writing. **Notes 47–48 and Figures S24–S25**
-report these results, the precise final-image objective and native 50-step
-gradient checks. Training the continuation takes **1,135.452 seconds** at
-**12.057 GiB** peak allocated memory. The deployed transformer has **3.900B
-parameters**, plus an **84.046M VAE**; its **24.359M locally trained adapter
-parameters** do not establish a small model trained from scratch. External
-pretraining remains. All 64 unmodified before/after pages are retained.
+Balanced training takes **4,500.117 seconds** at **12.032 GiB**; separate
+64-case native inference takes 512.959 seconds at 8.031 GiB. The runtime
+retains the externally pretrained 3.900B transformer plus 84.046M VAE;
+24.359M trained adapters do not establish a small foundation model.
 
-The current package contains a **16-page article, 29-page review and 61-page
-supplement**, with matching `5c458a2` redlines (29/61 pages). The editable deck
-has **40 slides and 47 native charts**. All 38 earlier slide parts and rendered
-appearances, all 107 prior figure assets and the first 52 supplement pages
-are preserved.
+The package contains a **16-page article, 29-page review and 63-page
+supplement**, with matching redlines (29/63 pages). The editable deck has
+**41 slides and 49 native charts**. All 40 prior slide parts and rendered
+appearances, 121 prior figure assets and the first 57 supplement pages
+are preserved. Historical Note 48 remains verbatim; Note 49 explains the
+subsequent availability of its additional-training control.
 
 Current entry points, run from this directory, are:
 
 ```bash
-python autonomous_writing_figures.py --stage generate
-python autonomous_writing_figures.py --stage verify
-python autonomous_writing_figures.py --stage render
-python build_autonomous_writing_publication.py --stage build
+python balanced_writing_figures.py --stage generate
+python balanced_writing_figures.py --stage verify
+python balanced_writing_figures.py --stage render
+python build_balanced_writing_publication.py --stage build
 # After actual PDF/PNG inspection and its bound visual-review receipt:
-python build_autonomous_writing_publication.py --stage sync
+python build_balanced_writing_publication.py --stage sync
 ```
 
-The two new slides use native editable charts, embedded workbooks, diagram
-objects and unchanged evidence PNGs. Rendering uses LibreOffice; Arial is
-substituted with Liberation Sans. Artifact Tool and PowerPoint-app inspection
-were unavailable. Earlier builders retain historical slide counts and must
-not overwrite the current 40-slide deck. The redline baseline manifest is
-recreated from immutable Git sources on a fresh checkout.
+The new slide uses native editable charts, embedded workbooks and unchanged
+actual evidence PNGs. Rendering uses LibreOffice; Arial is substituted with
+Liberation Sans. Artifact Tool and PowerPoint-app inspection were unavailable.
+Earlier builders retain historical slide counts and must not overwrite the
+current 41-slide deck. Redlines use the immutable Git baseline.
 
-Local delivery uses `ILM_NatureStyle_20261108_AutonomousWriting` and five
+Local delivery uses `ILM_NatureStyle_20261108_BalancedWriting` and five
 `LATEST` aliases in the ILM Nutstore project folder. Source/destination hashes
 verify local copying; cloud propagation is not independently verified.
 
-![Recognition loss and a visible duplicated line missed by the reader](figures/Figure_S24_recognition_loss.png)
-
-![Actual final-image learning and incomplete copying improvement](figures/Figure_S25_autonomous_writing.png)
+![Measured control and failed balanced-writing continuation](figures/Figure_S26_balanced_writing.png)
 
 ## Earlier contextual reading and history controls
 

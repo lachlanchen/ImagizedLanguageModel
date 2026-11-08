@@ -697,10 +697,23 @@ reader CE with balanced pixel error and differentiating through all 50
 native steps\cite{draft}. Seen copying rises from 6/32 to 15/32 and held-out
 copying from 9/32 to 13/32, meeting an exploratory progress rule but failing
 the 30/32 writing floor (Note 48 and Fig.~S25). Training takes 1,135.452\,s
-at 12.057\,GiB peak allocation. The before/after continuation lacks a matched
-extra-training control and changes input-encoding precision as well as the
-loss. Raw omissions and repetitions remain. It establishes neither semantic
-answering nor a quality-matched efficiency advantage.
+at 12.057\,GiB peak allocation. At initial assessment, the continuation lacks
+an additional-training control and changes input-encoding precision as well
+as the loss; the later comparison below holds precision common. Raw omissions
+and repetitions remain. It establishes neither semantic answering nor a
+quality-matched efficiency advantage.
+
+The subsequent old-objective continuation gives 5/32 seen and 10/32 held-out
+OCR-exact copies on matched example draws; both it and the final-image pilot
+retain only 3/16 held-out Chinese copies (Note 49 and Fig.~S26). This
+retrospective comparison differs in objective and compute. Continuing the
+pilot for 128 balanced updates, four per training input, raises held-out
+copying to 17/32, including 4/16 Chinese, but reduces seen copying to 13/32.
+The prospective Chinese and seen-retention conditions fail; only English
+retention passes. Training takes 4,500.117\,s at 12.032\,GiB. Omissions,
+repeated letters and duplicated lines still reject reliable writing, and
+semantic QA remains untested. This result does not support further unchanged
+copying-budget scale-up.
 
 A native unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source

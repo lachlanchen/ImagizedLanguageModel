@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov  8 10:14:39 2026
-%DIF ADD new.tex   Sun Nov  8 10:14:39 2026
+%DIF DEL old.tex   Sun Nov  8 12:37:41 2026
+%DIF ADD new.tex   Sun Nov  8 12:37:41 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -126,7 +126,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 5c458a2 native-preflight baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the d8b2aa5 40-slide writing baseline are blue.}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -3427,20 +3427,19 @@ to complete UTF-8. The audit uses existing traces, makes no new neural
 calls and does not train an alignment or establish a reader/writer repair.}{fig:s23-history-prefix}
 
 \clearpage
-\DIFaddbegin \section*{\DIFadd{Supplementary Note 47. Recognition supervision and autonomous writing loss}}
+\section*{Supplementary Note 47. Recognition supervision and autonomous writing loss}
 
-\DIFadd{The paired-image writer in Note 40 uses the externally pretrained undistilled
+The paired-image writer in Note 40 uses the externally pretrained undistilled
 FLUX.2-klein-base-4B and its native VAE. A fixed generic condition is compiled
 offline; changing question content enters only through the image branch.
 The next experiment adds a frozen training-only reader, a pinned GOT-OCR
 conversion\cite{gotocr}. Its measured parameter count is 560,528,640; it is
 absent from native inference. Its vocabulary and teacher-forced labels are
 supervision tools, not the student's deployed output interface.
-}
 
-\DIFadd{For normalized native target features $y$, image-reference features $x$ and
+For normalized native target features $y$, image-reference features $x$ and
 independent $\epsilon\sim\mathcal N(0,I)$, the assisted objective is
-}\begin{align}
+\begin{align}
  z_s&=(1-s)y+s\epsilon,\qquad s\sim U[0,1],\\
  \widehat y_s&=z_s-sv_\theta(z_s,x,s),\\
  \mathcal L_{\mathrm{assisted}}
@@ -3448,14 +3447,13 @@ independent $\epsilon\sim\mathcal N(0,I)$, the assisted objective is
  &\quad+0.05\,\mathbf1_{s\leq0.5}
  \operatorname{CE}\!\left(R(D_{\rm disp}(\widehat y_s)),t+\mathrm{EOS}\right).
 \end{align}
-\DIFadd{Here $D_{\rm disp}$ uses native unpatchification, inverse batch normalization,
+Here $D_{\rm disp}$ uses native unpatchification, inverse batch normalization,
 frozen VAE decoding, RGB normalization and clipping. $R$ is the frozen reader,
 and $t$ is the training reference
 string. CE scores only answer positions, including EOS. Differentiable image
 preprocessing permits input gradients without updating reader weights.
-}
 
-\DIFadd{Both arms start with fresh rank-16 adapters, use the same first 32 copying
+Both arms start with fresh rank-16 adapters, use the same first 32 copying
 pairs for 512 updates, and retain batch one, seed 20268321, AdamW learning
 rate $10^{-4}$, decay .01 and clipping one. All 512 sampled IDs and noise
 times match the earlier flow-only control. A preflight reproduces its native
@@ -3467,27 +3465,24 @@ One run per arm does not establish that all recognition supervision is
 ineffective. The treatment takes 374.748\,s and 12.268\,GiB peak allocated
 memory, versus 287.182\,s and 8.437\,GiB for control; acquisition and separate
 assessment are excluded.
-}
 
-\DIFadd{Complete clean-reader calibration reads 62/64 targets exactly, Chinese 32/32
+Complete clean-reader calibration reads 62/64 targets exactly, Chinese 32/32
 and English 30/32. Mean blank-minus-clean target NLL is 9.785251 nats. The
 first calibration fails preprocessing agreement. A recorded correction
 matches native Pillow's intermediate clipping with a continuous separable
 resize surrogate, preserving the original thresholds. Both calibration
 reports remain available. Frozen-reader pixel gradients and the student's
 recognition-to-velocity gradients are finite and nonzero.
-}
 
-\DIFadd{The added recognition term is active on 255/512 updates and averages
+The added recognition term is active on 255/512 updates and averages
 .031519 nats. A separate complete diagnostic scores actual autonomous
 decoder tensors without changing any writer weights. Mean target NLL is
 1.041635 on seen outputs and .574959 on held-out outputs, against .033706
 and .043822 on the clean references. Assisted updates have noisy correct
 answers and changing checkpoint states; free outputs use the final state
 and independent noise. These measurements do not isolate one causal factor.
-}
 
-\DIFadd{The reader is not an independent judge. Its greedy transcripts are exact
+The reader is not an independent judge. Its greedy transcripts are exact
 on 14/32 seen and 19/32 held-out outputs, exceeding the separate CPU counts
 without making the pages correct. In held-out case 026 it returns the
 expected string despite a visibly duplicated line; target NLL is .042427
@@ -3496,7 +3491,6 @@ character in case 002. These blind spots motivate retaining direct physical
 image supervision rather than treating reader reward as writing accuracy.
 All 64 raw outputs, all transcripts and hashes of actual neural pixels are
 retained. No natural QA is optimized or assessed in this copying experiment.
-}
 
 \clearpage
 \plate{Figure_S24_recognition_loss}{\textbf{Recognition supervision does not
@@ -3512,31 +3506,30 @@ while the page duplicates its line. Its more permissive transcripts must
 not replace the independent evaluator or raw-image review.}{fig:s24-recognition}
 
 \clearpage
-\section*{\DIFadd{Supplementary Note 48. Direct supervision of autonomous answer images}}
+\section*{Supplementary Note 48. Direct supervision of autonomous answer images}
 
-\DIFadd{We next optimize the final page produced by the native sampling procedure,
+We next optimize the final page produced by the native sampling procedure,
 following the differentiable-sampling principle of DRaFT\cite{draft}.
 This is an application of an established method, not a new backpropagation
 algorithm. Let $x$ be the native encoding of the input image and $c_0$ the
 same generic condition for every example. With independent initial noise,
 the deterministic native Euler trajectory is
-}\begin{align}
+\begin{align}
  z_{50}&\sim\mathcal N(0,I),\\
  z_{k-1}&=z_k+(\sigma_{k-1}-\sigma_k)
              v_\theta(z_k,x,c_0,\sigma_k),\quad k=50,\ldots,1.
 \end{align}
-\DIFadd{The implementation preserves the source scheduler's native BF16/FP32
+The implementation preserves the source scheduler's native BF16/FP32
 arithmetic, image-position IDs, time schedule and output casts. No answer-reference
 image, target code, target/noise mixture or varying text condition enters
 this sampler. A mutable scheduler counter is kept outside checkpointed
 neural evaluations, avoiding repeated state advances during backward replay.
-}
 
-\DIFadd{Let $d=D(z_0)$ be the native VAE output before display normalization, let
+Let $d=D(z_0)$ be the native VAE output before display normalization, let
 $p=(d+1)/2$ be its unclipped RGB field, and let $q$ be the exact native
 clipped display pixels. For target page $y$, define $m_i=1$ when its mean
 RGB is below .9. Both target classes are nonempty. The final-image objective is
-}\begin{align}
+\begin{align}
  E_i&=\tfrac13\sum_{c=1}^{3}|p_{ic}-y_{ic}|,\\
  B(p,y)&=\tfrac12\left(
        \frac{\sum_i m_iE_i}{\sum_i m_i}
@@ -3544,14 +3537,13 @@ RGB is below .9. Both target classes are nonempty. The final-image objective is
  \mathcal L_{\mathrm{final}}&=
        \operatorname{CE}(R(q),t+\mathrm{EOS})+10B(p,y).
 \end{align}
-\DIFadd{Targets enter only these losses after generation. The unclipped physical
+Targets enter only these losses after generation. The unclipped physical
 branch retains a gradient when white output is saturated. The recognition
 and inference paths retain native clipping. The target page fixes a canonical
 writing style; this test does not establish style-invariant or historical
 script generation.
-}
 
-\DIFadd{Before optimization, both complete 50-step trajectories and final images for
+Before optimization, both complete 50-step trajectories and final images for
 the first Chinese and English seen examples reproduce native inference
 bit-exactly, including the retained starting checkpoint's outputs. The first
 preflight fails this check before any update: historical input features were
@@ -3559,17 +3551,15 @@ encoded outside autocast, whereas native inference uses BF16 autocast. The
 maximum feature difference is .0625 for both checked inputs. Fresh native
 encoding restores equality without relaxing the criterion; this does not
 establish that the difference caused prior content errors.
-}
 
-\DIFadd{Two real preflight updates verify finite nonzero gradients on predictions
+Two real preflight updates verify finite nonzero gradients on predictions
 at steps 0, 24 and 49 and on the image-reference features. The first actual
 autograd/checkpointed forward also reproduces native pixels exactly. All
 206 adapter tensors change while base, VAE and reader weights remain frozen
 and without parameter gradients. Peak allocation is 12.033\,GiB. These
 updates are discarded before the pilot and do not establish writing quality.
-}
 
-\DIFadd{The pilot starts again from the completed recognition-treatment checkpoint
+The pilot starts again from the completed recognition-treatment checkpoint
 and runs 32 additional updates. CPU RNG seeds 20268402 and 20268403 determine
 example selection and independent noise seeds; every draw reproduces.
 Sampling with replacement visits 22 of the 32 previously seen examples.
@@ -3578,22 +3568,21 @@ Every update differentiates through all 50 steps. A fresh process then uses
 the original 64 input-only cases and seeds, 50 native steps, guidance one
 and a $512\times256$ output canvas. It loads no reader, target images,
 tokenizer or varying text condition.
-}
 
 \begin{center}\small
 \begin{tabular}{lrr}
 \toprule
-\DIFadd{Independent OCR observation }& \DIFadd{Starting }& \DIFadd{After 32 updates}\\
+Independent OCR observation & Starting & After 32 updates\\
 \midrule
-\DIFadd{Seen, all strings }& \DIFadd{6/32 }& \DIFadd{15/32}\\
-\DIFadd{Held out, all strings }& \DIFadd{9/32 }& \DIFadd{13/32}\\
-\DIFadd{Seen Chinese / English }& \DIFadd{1/16; 5/16 }& \DIFadd{3/16; 12/16}\\
-\DIFadd{Held-out Chinese / English }& \DIFadd{2/16; 7/16 }& \DIFadd{3/16; 10/16}\\
+Seen, all strings & 6/32 & 15/32\\
+Held out, all strings & 9/32 & 13/32\\
+Seen Chinese / English & 1/16; 5/16 & 3/16; 12/16\\
+Held-out Chinese / English & 2/16; 7/16 & 3/16; 10/16\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\DIFadd{Fifteen outputs become OCR exact and two cease to be exact. OCR is not
+Fifteen outputs become OCR exact and two cease to be exact. OCR is not
 manual reading accuracy, but some corrections are visible: the first
 held-out English example restores the missing letter in \texttt{open}; seen
 case 015 removes an extra line. Failures also remain visible, including
@@ -3604,9 +3593,8 @@ before/after galleries reject the 30/32 writing requirement in both splits.
 All final PNGs equal their quantized retained neural tensors; no output is
 repaired or selected from rerolls. This authenticates artifacts, not an
 independent neural replay.
-}
 
-\DIFadd{The gain meets the prospective exploratory rule of at least three additional
+The gain meets the prospective exploratory rule of at least three additional
 held-out OCR-exact strings with no aggregate seen regression
 (Fig.~\ref{fig:s25-autonomous}). It permits consideration of another controlled
 learning experiment, not writing admission or unchanged large scale-up.
@@ -3614,9 +3602,8 @@ There is no matched continuation using 32 additional updates of the old
 objective and no independent-seed replication. Extra optimization, corrected
 input precision, the recognition term and the physical term are not isolated.
 Improved font recognition can contribute to the measured gain.
-}
 
-\DIFadd{Training takes 1,135.452\,s at 12.057\,GiB peak allocated memory. The separate
+Training takes 1,135.452\,s at 12.057\,GiB peak allocated memory. The separate
 64-case native inference invocation takes 518.400\,s at 8.031\,GiB. These
 exclude acquisition, preceding training, preflight and separate CPU evaluation.
 The deployed transformer has 3,899,903,488 parameters, including 24,358,912
@@ -3625,20 +3612,18 @@ has 560,528,640 training-only parameters. External pretraining is retained.
 No small from-scratch foundation or efficiency gain at matched language
 quality is established. Natural QA, etymology, general language understanding
 and broader writing forms remain unproved.
-}
 
-\DIFadd{The complete source records are
-}\path{references/evidence/recognition_guided_writing_result/result.json}\DIFadd{,
-}\path{references/evidence/autonomous_writing_loss_result/report.json}\DIFadd{,
-}\path{references/evidence/autonomous_writer_preflight_result/result.json}
-\DIFadd{and }\path{references/evidence/autonomous_writer_result/result.json}\DIFadd{.
-Reproduction uses }\path{scripts/train_recognition_guided_writer.py}\DIFadd{,
-}\path{scripts/probe_autonomous_writing_loss.py}\DIFadd{,
-}\path{scripts/train_autonomous_writer.py}\DIFadd{, the unchanged native inference
-entry point }\path{scripts/infer_paired_image_cohort.py}\DIFadd{, and separate CPU
-evaluation }\path{scripts/score_paired_writing.py}\DIFadd{. Every actual output is
+The complete source records are
+\path{references/evidence/recognition_guided_writing_result/result.json},
+\path{references/evidence/autonomous_writing_loss_result/report.json},
+\path{references/evidence/autonomous_writer_preflight_result/result.json}
+and \path{references/evidence/autonomous_writer_result/result.json}.
+Reproduction uses \path{scripts/train_recognition_guided_writer.py},
+\path{scripts/probe_autonomous_writing_loss.py},
+\path{scripts/train_autonomous_writer.py}, the unchanged native inference
+entry point \path{scripts/infer_paired_image_cohort.py}, and separate CPU
+evaluation \path{scripts/score_paired_writing.py}. Every actual output is
 authenticated by the corresponding export script and retained tensor hash.
-}
 
 \clearpage
 \plate{Figure_S25_autonomous_writing}{\textbf{Direct final-image continuation
@@ -3653,6 +3638,127 @@ two held-out cases, fixed before evaluation, with unmodified target,
 starting-state and final-state pages. Chinese still contains unwanted
 punctuation; English restores a missing letter. These are copying examples,
 not semantic QA. All 64 cases and their failures are retained.}{fig:s25-autonomous}
+
+\clearpage
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 49. Additional-training control and balanced exposure}}
+
+\DIFadd{Statements about missing control in Note 48 and Fig.~S25 describe the initial
+pilot assessment. The final-image pilot is next compared with additional optimization of the
+old assisted objective. Both continuations start from the same recognition
+checkpoint, use fresh AdamW with learning rate $10^{-5}$, decay .01 and
+gradient clipping one, and reproduce the same 32 example IDs and noise seeds.
+Native input encoding under BF16 autocast is held common. The control retains
+the old velocity-MSE objective and its recognition term, active only when
+$\sigma\leq .5$. It does not differentiate through final noise-to-image sampling.
+All 206 adapter tensors change; base, VAE and reader parameters stay frozen.
+The first Chinese and English starting trajectories reproduce native pixels.
+}
+
+\DIFadd{The control gives 5/32 seen and 10/32 held-out OCR-exact strings, compared
+with 15/32 and 13/32 in the final-image pilot. Held-out Chinese remains 3/16
+in both. On held-out examples, four become exact only in the pilot and one
+only in control; all five are English. The comparison meets its exploratory
+rule of at least three additional held-out exact strings without aggregate
+seen regression. That rule was specified after observing the pilot and before
+observing control. This is a retrospective comparison of objective bundles,
+not an independently replicated or compute-matched causal estimate. It does
+not isolate recognition, physical error or trajectory differentiation.
+}
+
+\DIFadd{The control training invocation takes 56.962\,s at 12.251\,GiB peak allocation,
+including two initial native replays taking 16.192\,s. Its optimization loop
+takes 33.790\,s. Separate native inference takes 513.381\,s at 8.031\,GiB.
+An initial inference invocation was interrupted after 19 outputs when a
+legacy whole-repository identity check detected an unrelated source commit.
+All interrupted artifacts are preserved; the replacement invocation uses
+identical inputs and seeds and reproduces all 19 PNGs and retained tensors
+exactly. The complete 64-case cohort is assessed without quality selection.
+}
+
+\DIFadd{We then continue the final-image pilot for 128 additional updates under the
+unchanged objective in Note 48. Unlike the pilot's sampling with replacement,
+the registered schedule makes four complete permutations of its 32 training
+inputs: four updates per input, 64 Chinese and 64 English draws. CPU seeds
+20268502 and 20268503 fix order and noise seeds; model seed is 20268501.
+The pilot's weights and AdamW states are retained. Every optimizer state
+reaches step 160. No resume is used. All updates differentiate through all
+50 native steps; independent noise, guidance one and the $512\times256$
+output canvas are unchanged. No QA example is optimized.
+}
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+\DIFadd{Independent OCR }& \DIFadd{Old loss +32 }& \DIFadd{Final image +32 }& \DIFadd{Then +128}\\
+\midrule
+\DIFadd{Seen, all }& \DIFadd{5/32 }& \DIFadd{15/32 }& \DIFadd{13/32}\\
+\DIFadd{Held out, all }& \DIFadd{10/32 }& \DIFadd{13/32 }& \DIFadd{17/32}\\
+\DIFadd{Seen Chinese }& \DIFadd{0/16 }& \DIFadd{3/16 }& \DIFadd{4/16}\\
+\DIFadd{Held-out Chinese }& \DIFadd{3/16 }& \DIFadd{3/16 }& \DIFadd{4/16}\\
+\DIFadd{Seen English }& \DIFadd{5/16 }& \DIFadd{12/16 }& \DIFadd{9/16}\\
+\DIFadd{Held-out English }& \DIFadd{7/16 }& \DIFadd{10/16 }& \DIFadd{13/16}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{The balanced continuation's prospective rule requires all three conditions:
+at least 6/16 held-out Chinese, 15/32 seen strings and 10/16 held-out English.
+The Chinese and seen-retention conditions fail; only English retention passes
+(Fig.~\ref{fig:s26-balanced}). More exposure under this recipe is therefore
+not admitted by that rule. Seen case 002 becomes OCR exact, while 003, 025
+and 027 cease to be exact. Held-out cases 007, 015, 022, 023 and 028 become
+exact, while 010 ceases to be exact. These are reused development inputs;
+font recognition can contribute to the observations. Clean-reference OCR
+remains 27/32 seen and 28/32 held out, rather than perfect accuracy.
+}
+
+\DIFadd{Complete original-order target/pilot/final galleries are inspected. Seen
+case 004 still omits characters; 012 copies instructions and 025 repeats a
+letter in \texttt{small}. Held-out case 000 adds a quotation mark, 002 repeats
+a character, 026 duplicates its line and 030 copies instructions. More than
+two obvious failures in each split independently reject the unchanged 30/32
+requirement for correct, legible requested strings alone. This is not a
+quantitative manual annotation of every glyph. No PNG is repaired or rerolled.
+}
+
+\DIFadd{All 128 updates have finite nonzero gradients and change all 206 adapter
+tensors, with frozen parameters without gradients. Initial native replays
+and the first actual differentiable forward reproduce pilot pixels exactly.
+The first checked prediction-gradient norms at steps 0, 24 and 49 are .020289,
+.024817 and .145401. Export authenticates all 128 pre-update PNGs and all
+64 final PNGs against retained neural tensors. This verifies artifact bindings;
+it is not a second independent neural replay. Training takes 4,500.117\,s at
+12.032\,GiB peak allocation; separate native inference takes 512.959\,s at
+8.031\,GiB. Acquisition, preceding training and separate CPU OCR are excluded.
+The inherited transformer, VAE, reader and trainable counts remain those in
+Note 48. No lightweight foundation training, semantic learning, historical
+writing or efficiency at matched language quality is established.
+}
+
+{\footnotesize\raggedright
+\DIFadd{Complete assessments, protocols, raw outputs and source hashes are in
+}\path{references/autonomous_writing_control_result.md} \DIFadd{and
+}\path{references/balanced_autonomous_writer_result.md}\DIFadd{.
+Reproduction uses }\path{scripts/train_autonomous_writing_control.py}\DIFadd{,
+}\path{scripts/train_balanced_autonomous_writer.py}\DIFadd{,
+}\path{scripts/infer_paired_image_cohort_v2.py} \DIFadd{and separate CPU scoring/export.
+Native v2 checks inference sources and data dependencies while permitting
+unrelated Git commits. Each result retains the subsequent raw-review receipt.
+}\par}
+
+\clearpage
+\plate{Figure_S26_balanced_writing}{\textbf{Balanced exposure improves some
+held-out copies but fails its continuation requirements.} \textbf{a}, Complete
+independent OCR-exact counts on 32 seen and 32 held-out inputs: old-objective
+32-update control, final-image 32-update pilot, and the pilot followed by 128
+balanced updates. The first two match example draws and native input precision,
+but differ in objective and compute. \textbf{b}, Held-out counts by language,
+16 each. Chinese reaches only 4/16; seen aggregate performance also falls.
+Two of the three prospective continuation requirements fail. \textbf{c}, The
+fixed first two held-out cases, with unchanged target, pilot and final pages.
+All 64 actual outputs, including failures outside these examples, are retained.
+These are copying observations with external pretraining and reused development
+inputs, without independent-seed replication or semantic QA.}{fig:s26-balanced}
 
 
 \clearpage
@@ -3885,9 +3991,9 @@ are specified in \path{docs/native-visual-alignment.md},
 \bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
 \bibitem{jit} Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). \url{https://arxiv.org/abs/2511.13720v1}.
 \bibitem{showo2} Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). \url{https://arxiv.org/abs/2506.15564v3}.
-\bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}\DIFaddbegin \DIFadd{.
-}\bibitem{gotocr} \DIFadd{Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). }\url{https://arxiv.org/abs/2409.01704}\DIFadd{.
-}\bibitem{draft} \DIFadd{Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). }\url{https://arxiv.org/abs/2309.17400}\DIFaddend .
+\bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}.
+\bibitem{gotocr} Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). \url{https://arxiv.org/abs/2409.01704}.
+\bibitem{draft} Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). \url{https://arxiv.org/abs/2309.17400}.
 \end{thebibliography}
 
 \end{document}

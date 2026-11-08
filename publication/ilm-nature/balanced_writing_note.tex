@@ -1,0 +1,113 @@
+\clearpage
+\section*{Supplementary Note 49. Additional-training control and balanced exposure}
+
+Statements about missing control in Note 48 and Fig.~S25 describe the initial
+pilot assessment. The final-image pilot is next compared with additional optimization of the
+old assisted objective. Both continuations start from the same recognition
+checkpoint, use fresh AdamW with learning rate $10^{-5}$, decay .01 and
+gradient clipping one, and reproduce the same 32 example IDs and noise seeds.
+Native input encoding under BF16 autocast is held common. The control retains
+the old velocity-MSE objective and its recognition term, active only when
+$\sigma\leq .5$. It does not differentiate through final noise-to-image sampling.
+All 206 adapter tensors change; base, VAE and reader parameters stay frozen.
+The first Chinese and English starting trajectories reproduce native pixels.
+
+The control gives 5/32 seen and 10/32 held-out OCR-exact strings, compared
+with 15/32 and 13/32 in the final-image pilot. Held-out Chinese remains 3/16
+in both. On held-out examples, four become exact only in the pilot and one
+only in control; all five are English. The comparison meets its exploratory
+rule of at least three additional held-out exact strings without aggregate
+seen regression. That rule was specified after observing the pilot and before
+observing control. This is a retrospective comparison of objective bundles,
+not an independently replicated or compute-matched causal estimate. It does
+not isolate recognition, physical error or trajectory differentiation.
+
+The control training invocation takes 56.962\,s at 12.251\,GiB peak allocation,
+including two initial native replays taking 16.192\,s. Its optimization loop
+takes 33.790\,s. Separate native inference takes 513.381\,s at 8.031\,GiB.
+An initial inference invocation was interrupted after 19 outputs when a
+legacy whole-repository identity check detected an unrelated source commit.
+All interrupted artifacts are preserved; the replacement invocation uses
+identical inputs and seeds and reproduces all 19 PNGs and retained tensors
+exactly. The complete 64-case cohort is assessed without quality selection.
+
+We then continue the final-image pilot for 128 additional updates under the
+unchanged objective in Note 48. Unlike the pilot's sampling with replacement,
+the registered schedule makes four complete permutations of its 32 training
+inputs: four updates per input, 64 Chinese and 64 English draws. CPU seeds
+20268502 and 20268503 fix order and noise seeds; model seed is 20268501.
+The pilot's weights and AdamW states are retained. Every optimizer state
+reaches step 160. No resume is used. All updates differentiate through all
+50 native steps; independent noise, guidance one and the $512\times256$
+output canvas are unchanged. No QA example is optimized.
+
+\begin{center}\small
+\begin{tabular}{lrrr}
+\toprule
+Independent OCR & Old loss +32 & Final image +32 & Then +128\\
+\midrule
+Seen, all & 5/32 & 15/32 & 13/32\\
+Held out, all & 10/32 & 13/32 & 17/32\\
+Seen Chinese & 0/16 & 3/16 & 4/16\\
+Held-out Chinese & 3/16 & 3/16 & 4/16\\
+Seen English & 5/16 & 12/16 & 9/16\\
+Held-out English & 7/16 & 10/16 & 13/16\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The balanced continuation's prospective rule requires all three conditions:
+at least 6/16 held-out Chinese, 15/32 seen strings and 10/16 held-out English.
+The Chinese and seen-retention conditions fail; only English retention passes
+(Fig.~\ref{fig:s26-balanced}). More exposure under this recipe is therefore
+not admitted by that rule. Seen case 002 becomes OCR exact, while 003, 025
+and 027 cease to be exact. Held-out cases 007, 015, 022, 023 and 028 become
+exact, while 010 ceases to be exact. These are reused development inputs;
+font recognition can contribute to the observations. Clean-reference OCR
+remains 27/32 seen and 28/32 held out, rather than perfect accuracy.
+
+Complete original-order target/pilot/final galleries are inspected. Seen
+case 004 still omits characters; 012 copies instructions and 025 repeats a
+letter in \texttt{small}. Held-out case 000 adds a quotation mark, 002 repeats
+a character, 026 duplicates its line and 030 copies instructions. More than
+two obvious failures in each split independently reject the unchanged 30/32
+requirement for correct, legible requested strings alone. This is not a
+quantitative manual annotation of every glyph. No PNG is repaired or rerolled.
+
+All 128 updates have finite nonzero gradients and change all 206 adapter
+tensors, with frozen parameters without gradients. Initial native replays
+and the first actual differentiable forward reproduce pilot pixels exactly.
+The first checked prediction-gradient norms at steps 0, 24 and 49 are .020289,
+.024817 and .145401. Export authenticates all 128 pre-update PNGs and all
+64 final PNGs against retained neural tensors. This verifies artifact bindings;
+it is not a second independent neural replay. Training takes 4,500.117\,s at
+12.032\,GiB peak allocation; separate native inference takes 512.959\,s at
+8.031\,GiB. Acquisition, preceding training and separate CPU OCR are excluded.
+The inherited transformer, VAE, reader and trainable counts remain those in
+Note 48. No lightweight foundation training, semantic learning, historical
+writing or efficiency at matched language quality is established.
+
+{\footnotesize\raggedright
+Complete assessments, protocols, raw outputs and source hashes are in
+\path{references/autonomous_writing_control_result.md} and
+\path{references/balanced_autonomous_writer_result.md}.
+Reproduction uses \path{scripts/train_autonomous_writing_control.py},
+\path{scripts/train_balanced_autonomous_writer.py},
+\path{scripts/infer_paired_image_cohort_v2.py} and separate CPU scoring/export.
+Native v2 checks inference sources and data dependencies while permitting
+unrelated Git commits. Each result retains the subsequent raw-review receipt.
+\par}
+
+\clearpage
+\plate{Figure_S26_balanced_writing}{\textbf{Balanced exposure improves some
+held-out copies but fails its continuation requirements.} \textbf{a}, Complete
+independent OCR-exact counts on 32 seen and 32 held-out inputs: old-objective
+32-update control, final-image 32-update pilot, and the pilot followed by 128
+balanced updates. The first two match example draws and native input precision,
+but differ in objective and compute. \textbf{b}, Held-out counts by language,
+16 each. Chinese reaches only 4/16; seen aggregate performance also falls.
+Two of the three prospective continuation requirements fail. \textbf{c}, The
+fixed first two held-out cases, with unchanged target, pilot and final pages.
+All 64 actual outputs, including failures outside these examples, are retained.
+These are copying observations with external pretraining and reused development
+inputs, without independent-seed replication or semantic QA.}{fig:s26-balanced}
