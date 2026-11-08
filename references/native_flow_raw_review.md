@@ -53,3 +53,14 @@ Repeat `--cohort` to combine complete cohorts. Existing packets and source
 images are never overwritten. Review completion must be recorded separately,
 bound to the actual packet hashes, without inferring uncertain glyphs or
 silently repairing scores. No neural model is loaded during preparation.
+
+## Completed final normal-cohort inspection
+
+Assessment mode has subsequently packaged the complete final normal cohort:
+64 original answer pages in sixteen contact sheets. Every sheet and every
+embedded answer page has now been visually inspected. The
+[cohort result](native_visual_flow_normal_result.md) retains the complete
+input/answer/reference evidence and per-page inspection bindings. This review
+has source and OCR access and assigns no manual answer-accuracy score.
+The remaining source, erasure and copying cohorts still require their own
+complete assessment and raw review.

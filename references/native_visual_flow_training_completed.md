@@ -2,8 +2,10 @@
 
 The fixed image-pair run completes all **1,536 optimizer updates** on one
 RTX 4090 D. Its final two monitored training answers remain incorrect.
-The separate complete initial/final assessment has started; no held-out
-answer score is reported here.
+The separate complete initial/final assessment has started. Its first completed
+[final normal-question cohort](native_visual_flow_normal_result.md) gives
+0/32 seen and 0/32 held-out source-accepted OCR-exact answers. The complete
+source/final controls remain in progress.
 
 The [complete training evidence](evidence/native_visual_flow_training/README.md)
 retains every original fixed monitoring image, both complete input/reference
