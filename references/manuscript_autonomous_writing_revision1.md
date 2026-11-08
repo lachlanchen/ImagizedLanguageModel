@@ -1,8 +1,9 @@
 # Recognition and autonomous-writing manuscript revision
 
 Stage: internal research manuscript revision, under the continuing ILM goal.
-Status: plan prepared before TeX changes; complete pilot evaluation and raw
-review are now available. Manuscript execution and builds remain pending.
+Status: manuscript, review, supplement, two editable figures and matching
+redlines built and visually checked on 8 November 2026. Local delivery and
+commit verification are recorded below.
 
 ## Scope and reason
 
@@ -28,6 +29,10 @@ TeX files are `frontmatter.tex`, `article_content.tex`, and
   (6/32 seen, 10/32 held out), recognition loss (6/32, 9/32), and the pilot's
   actual counts. Avoid implying this is a matched-from-scratch comparison:
   the pilot continues the recognition checkpoint for 32 additional updates.
+- Update the one outdated Discussion summary of free copying to say that
+  reliable copying remains unproved; preserve its separation from the
+  source-crop component. Add the two primary method citations to the shared
+  bibliography. No other interpretation or earlier experiment is rewritten.
 - Add Supplementary Notes 47 and 48 as separate included files, after the
   existing history-prefix note and before Reproduction. Note 47 covers the
   recognition comparison and complete autonomous reader diagnostic. Note 48
@@ -101,3 +106,51 @@ OCR limitations, absent matched additional-training control, corrected input
 precision and lack of semantic QA. Do not call this a validated causal repair,
 usable language model or matched-quality efficiency gain. Full source evidence
 is in `references/evidence/autonomous_writer_result/result.json`.
+
+## Execution and verified locations
+
+The result sentence appears in the article abstract on page 1. The new
+Results paragraph begins “Frozen recognition supervision also fails reliable
+copying” on page 12, right column, and on page 13 of the line-numbered review.
+The Discussion now says free writers fail *reliable* copying. Note 47 is on
+supplement page 53 and Figure S24 on page 54. Note 48 occupies pages 55–56,
+with Figure S25 on page 57. Equations 24–31 give both objectives and the
+full native sampling trajectory. The two new primary citations are 22–23.
+
+The final article/review/SI have 16/29/61 pages; current-baseline redlines have
+29/61 pages. All compile without overfull boxes or unresolved references or
+citations and pass qpdf checks. Complete changed-page overviews and the new
+scientific pages were rendered; the visual-review receipt distinguishes
+overview inspection from full-size reading. New figures retain native charts,
+embedded workbook values and original evidence PNGs. Native package and
+geometry checks find zero defects, with 40 slides and 47 charts. All 38 prior
+slide appearances, all 107 prior figure assets and the first 52 supplement
+pages are unchanged. Actual PowerPoint-app inspection and Artifact Tool are
+unavailable; Arial renders with Liberation Sans.
+
+Dedicated current builders are `autonomous_writing_figures.py`,
+`build_autonomous_writing_publication.py` and
+`build_autonomous_writing_redlines.py`. The old producers remain unchanged.
+The baseline manifest can be reconstructed from Git on a fresh checkout.
+An initial build check expected a different caption prefix; it was corrected
+to the actual `Fig. S24`/`Fig. S25` captions without changing the figures.
+The early S25 layout was refined to separate the noise and backward-gradient
+arrows and enlarge the two complete example pages. No model outputs changed.
+
+The publication README and engineering goal now expose the current failure
+boundary. `references/ilm_direction_assessment_20261108.md` explains why losses
+and execution checks have not qualified a model; its proposed matched
+continuation remains unrun and requires a separate protocol. No new model
+optimization or repaired outputs were introduced in this revision unit.
+There is no reviewer response letter for this internal revision.
+
+Delivery target: `ILM_NatureStyle_20261108_AutonomousWriting` with the five
+stable latest aliases in the local Nutstore ILM folder. Hash verification
+establishes local copying only; cloud propagation is not asserted. The ILM
+goal remains active and unachieved.
+
+Out-of-scope discovery: the repository-profile checker fails for missing
+`CITATION.cff`, funding metadata and incomplete translation parity. A separate
+check on the unchanged HEAD versions confirms these gaps predate this unit.
+No profile, funding or translation-completeness claim is made here. The
+research artifact checks above pass; the profile check does not.

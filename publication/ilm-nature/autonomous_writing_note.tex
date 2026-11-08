@@ -1,0 +1,133 @@
+\clearpage
+\section*{Supplementary Note 48. Direct supervision of autonomous answer images}
+
+We next optimize the final page produced by the native sampling procedure,
+following the differentiable-sampling principle of DRaFT\cite{draft}.
+This is an application of an established method, not a new backpropagation
+algorithm. Let $x$ be the native encoding of the input image and $c_0$ the
+same generic condition for every example. With independent initial noise,
+the deterministic native Euler trajectory is
+\begin{align}
+ z_{50}&\sim\mathcal N(0,I),\\
+ z_{k-1}&=z_k+(\sigma_{k-1}-\sigma_k)
+             v_\theta(z_k,x,c_0,\sigma_k),\quad k=50,\ldots,1.
+\end{align}
+The implementation preserves the source scheduler's native BF16/FP32
+arithmetic, image-position IDs, time schedule and output casts. No answer-reference
+image, target code, target/noise mixture or varying text condition enters
+this sampler. A mutable scheduler counter is kept outside checkpointed
+neural evaluations, avoiding repeated state advances during backward replay.
+
+Let $d=D(z_0)$ be the native VAE output before display normalization, let
+$p=(d+1)/2$ be its unclipped RGB field, and let $q$ be the exact native
+clipped display pixels. For target page $y$, define $m_i=1$ when its mean
+RGB is below .9. Both target classes are nonempty. The final-image objective is
+\begin{align}
+ E_i&=\tfrac13\sum_{c=1}^{3}|p_{ic}-y_{ic}|,\\
+ B(p,y)&=\tfrac12\left(
+       \frac{\sum_i m_iE_i}{\sum_i m_i}
+       +\frac{\sum_i(1-m_i)E_i}{\sum_i(1-m_i)}\right),\\
+ \mathcal L_{\mathrm{final}}&=
+       \operatorname{CE}(R(q),t+\mathrm{EOS})+10B(p,y).
+\end{align}
+Targets enter only these losses after generation. The unclipped physical
+branch retains a gradient when white output is saturated. The recognition
+and inference paths retain native clipping. The target page fixes a canonical
+writing style; this test does not establish style-invariant or historical
+script generation.
+
+Before optimization, both complete 50-step trajectories and final images for
+the first Chinese and English seen examples reproduce native inference
+bit-exactly, including the retained starting checkpoint's outputs. The first
+preflight fails this check before any update: historical input features were
+encoded outside autocast, whereas native inference uses BF16 autocast. The
+maximum feature difference is .0625 for both checked inputs. Fresh native
+encoding restores equality without relaxing the criterion; this does not
+establish that the difference caused prior content errors.
+
+Two real preflight updates verify finite nonzero gradients on predictions
+at steps 0, 24 and 49 and on the image-reference features. The first actual
+autograd/checkpointed forward also reproduces native pixels exactly. All
+206 adapter tensors change while base, VAE and reader weights remain frozen
+and without parameter gradients. Peak allocation is 12.033\,GiB. These
+updates are discarded before the pilot and do not establish writing quality.
+
+The pilot starts again from the completed recognition-treatment checkpoint
+and runs 32 additional updates. CPU RNG seeds 20268402 and 20268403 determine
+example selection and independent noise seeds; every draw reproduces.
+Sampling with replacement visits 22 of the 32 previously seen examples.
+AdamW uses learning rate $10^{-5}$, decay .01 and global clipping one.
+Every update differentiates through all 50 steps. A fresh process then uses
+the original 64 input-only cases and seeds, 50 native steps, guidance one
+and a $512\times256$ output canvas. It loads no reader, target images,
+tokenizer or varying text condition.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Independent OCR observation & Starting & After 32 updates\\
+\midrule
+Seen, all strings & 6/32 & 15/32\\
+Held out, all strings & 9/32 & 13/32\\
+Seen Chinese / English & 1/16; 5/16 & 3/16; 12/16\\
+Held-out Chinese / English & 2/16; 7/16 & 3/16; 10/16\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Fifteen outputs become OCR exact and two cease to be exact. OCR is not
+manual reading accuracy, but some corrections are visible: the first
+held-out English example restores the missing letter in \texttt{open}; seen
+case 015 removes an extra line. Failures also remain visible, including
+omitted characters in seen case 004, copied instructions in case 012 and
+held-out case 030, and a duplicated line in held-out case 026. Held-out case
+028 adds a previously absent quotation mark. The complete original-order
+before/after galleries reject the 30/32 writing requirement in both splits.
+All final PNGs equal their quantized retained neural tensors; no output is
+repaired or selected from rerolls. This authenticates artifacts, not an
+independent neural replay.
+
+The gain meets the prospective exploratory rule of at least three additional
+held-out OCR-exact strings with no aggregate seen regression
+(Fig.~\ref{fig:s25-autonomous}). It permits consideration of another controlled
+learning experiment, not writing admission or unchanged large scale-up.
+There is no matched continuation using 32 additional updates of the old
+objective and no independent-seed replication. Extra optimization, corrected
+input precision, the recognition term and the physical term are not isolated.
+Improved font recognition can contribute to the measured gain.
+
+Training takes 1,135.452\,s at 12.057\,GiB peak allocated memory. The separate
+64-case native inference invocation takes 518.400\,s at 8.031\,GiB. These
+exclude acquisition, preceding training, preflight and separate CPU evaluation.
+The deployed transformer has 3,899,903,488 parameters, including 24,358,912
+locally trained parameters, plus an 84,046,115-parameter VAE. The frozen reader
+has 560,528,640 training-only parameters. External pretraining is retained.
+No small from-scratch foundation or efficiency gain at matched language
+quality is established. Natural QA, etymology, general language understanding
+and broader writing forms remain unproved.
+
+The complete source records are
+\path{references/evidence/recognition_guided_writing_result/result.json},
+\path{references/evidence/autonomous_writing_loss_result/report.json},
+\path{references/evidence/autonomous_writer_preflight_result/result.json}
+and \path{references/evidence/autonomous_writer_result/result.json}.
+Reproduction uses \path{scripts/train_recognition_guided_writer.py},
+\path{scripts/probe_autonomous_writing_loss.py},
+\path{scripts/train_autonomous_writer.py}, the unchanged native inference
+entry point \path{scripts/infer_paired_image_cohort.py}, and separate CPU
+evaluation \path{scripts/score_paired_writing.py}. Every actual output is
+authenticated by the corresponding export script and retained tensor hash.
+
+\clearpage
+\plate{Figure_S25_autonomous_writing}{\textbf{Direct final-image continuation
+improves some copies but remains below reliable writing.} \textbf{a}, The
+complete native noise-to-image sampling procedure. Input-image features and
+one fixed generic condition supply context; targets enter only the final
+training loss. Gradients traverse all 50 steps. \textbf{b}, Complete
+independent CPU OCR observations before and after the registered pilot. The
+exploratory progress rule passes, while the writing floor fails. This is one
+continuation without a matched extra-training control. \textbf{c}, The first
+two held-out cases, fixed before evaluation, with unmodified target,
+starting-state and final-state pages. Chinese still contains unwanted
+punctuation; English restores a missing letter. These are copying examples,
+not semantic QA. All 64 cases and their failures are retained.}{fig:s25-autonomous}

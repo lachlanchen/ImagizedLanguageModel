@@ -689,6 +689,19 @@ plus an 84.046M VAE, with 24.359M trained adapter parameters. No natural QA is
 optimized in these copying runs. Faster copying execution therefore does not
 establish language understanding or efficiency at useful language quality.
 
+Frozen recognition supervision also fails reliable copying: a matched
+512-update treatment gives 6/32 seen and 9/32 held-out OCR-exact strings
+(Supplementary Note 47 and Fig.~S24). A subsequent 32-update continuation
+supervises actual final images generated from independent noise, combining
+reader CE with balanced pixel error and differentiating through all 50
+native steps\cite{draft}. Seen copying rises from 6/32 to 15/32 and held-out
+copying from 9/32 to 13/32, meeting an exploratory progress rule but failing
+the 30/32 writing floor (Note 48 and Fig.~S25). Training takes 1,135.452\,s
+at 12.057\,GiB peak allocation. The before/after continuation lacks a matched
+extra-training control and changes input-encoding precision as well as the
+loss. Raw omissions and repetitions remain. It establishes neither semantic
+answering nor a quality-matched efficiency advantage.
+
 A native unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source
 gives no exact answers on twelve image prompts, while the same body recovers
@@ -769,7 +782,7 @@ Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
 Supplied-target reconstruction is preserved by an aligned inverse-image path;
-the free image writers still fail new prompt-directed copying. The separate
+the free image writers still fail reliable new prompt-directed copying. The separate
 source-pixel component passes its new-copy test but fails natural-reading
 qualification. The remaining test is whether context selects and generates a
 coherent written future. Low teacher-forced

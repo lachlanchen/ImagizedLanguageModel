@@ -1,0 +1,78 @@
+\clearpage
+\section*{Supplementary Note 47. Recognition supervision and autonomous writing loss}
+
+The paired-image writer in Note 40 uses the externally pretrained undistilled
+FLUX.2-klein-base-4B and its native VAE. A fixed generic condition is compiled
+offline; changing question content enters only through the image branch.
+The next experiment adds a frozen training-only reader, a pinned GOT-OCR
+conversion\cite{gotocr}. Its measured parameter count is 560,528,640; it is
+absent from native inference. Its vocabulary and teacher-forced labels are
+supervision tools, not the student's deployed output interface.
+
+For normalized native target features $y$, image-reference features $x$ and
+independent $\epsilon\sim\mathcal N(0,I)$, the assisted objective is
+\begin{align}
+ z_s&=(1-s)y+s\epsilon,\qquad s\sim U[0,1],\\
+ \widehat y_s&=z_s-sv_\theta(z_s,x,s),\\
+ \mathcal L_{\mathrm{assisted}}
+ &=\operatorname{mean}\bigl[(v_\theta-(\epsilon-y))^2\bigr]\nonumber\\
+ &\quad+0.05\,\mathbf1_{s\leq0.5}
+ \operatorname{CE}\!\left(R(D_{\rm disp}(\widehat y_s)),t+\mathrm{EOS}\right).
+\end{align}
+Here $D_{\rm disp}$ uses native unpatchification, inverse batch normalization,
+frozen VAE decoding, RGB normalization and clipping. $R$ is the frozen reader,
+and $t$ is the training reference
+string. CE scores only answer positions, including EOS. Differentiable image
+preprocessing permits input gradients without updating reader weights.
+
+Both arms start with fresh rank-16 adapters, use the same first 32 copying
+pairs for 512 updates, and retain batch one, seed 20268321, AdamW learning
+rate $10^{-4}$, decay .01 and clipping one. All 512 sampled IDs and noise
+times match the earlier flow-only control. A preflight reproduces its native
+flow term exactly before adding recognition. Complete independent CPU OCR
+scores are 6/32 seen and 9/32 held out, versus 6/32 and 10/32 for flow only
+(Fig.~\ref{fig:s24-recognition}). Clean references score 27/32 and 28/32.
+Visible omissions and repetitions independently fail the 30/32 writing floor.
+One run per arm does not establish that all recognition supervision is
+ineffective. The treatment takes 374.748\,s and 12.268\,GiB peak allocated
+memory, versus 287.182\,s and 8.437\,GiB for control; acquisition and separate
+assessment are excluded.
+
+Complete clean-reader calibration reads 62/64 targets exactly, Chinese 32/32
+and English 30/32. Mean blank-minus-clean target NLL is 9.785251 nats. The
+first calibration fails preprocessing agreement. A recorded correction
+matches native Pillow's intermediate clipping with a continuous separable
+resize surrogate, preserving the original thresholds. Both calibration
+reports remain available. Frozen-reader pixel gradients and the student's
+recognition-to-velocity gradients are finite and nonzero.
+
+The added recognition term is active on 255/512 updates and averages
+.031519 nats. A separate complete diagnostic scores actual autonomous
+decoder tensors without changing any writer weights. Mean target NLL is
+1.041635 on seen outputs and .574959 on held-out outputs, against .033706
+and .043822 on the clean references. Assisted updates have noisy correct
+answers and changing checkpoint states; free outputs use the final state
+and independent noise. These measurements do not isolate one causal factor.
+
+The reader is not an independent judge. Its greedy transcripts are exact
+on 14/32 seen and 19/32 held-out outputs, exceeding the separate CPU counts
+without making the pages correct. In held-out case 026 it returns the
+expected string despite a visibly duplicated line; target NLL is .042427
+versus .000192 for its clean reference. It similarly overlooks a repeated
+character in case 002. These blind spots motivate retaining direct physical
+image supervision rather than treating reader reward as writing accuracy.
+All 64 raw outputs, all transcripts and hashes of actual neural pixels are
+retained. No natural QA is optimized or assessed in this copying experiment.
+
+\clearpage
+\plate{Figure_S24_recognition_loss}{\textbf{Recognition supervision does not
+ensure correct visible writing.} \textbf{a}, The complete independent OCR
+observations after matched 512-update learning on the same 32 copying pairs.
+Both fail the writing requirement. \textbf{b}, Recognition loss on assisted
+training updates and on the final checkpoint's full autonomous output cohort.
+The conditions and checkpoint states differ, so the gap is not a controlled
+causal decomposition. Plot data are rounded to six decimals; displayed
+labels give three. \textbf{c}, Unmodified reference and actual generated
+page for held-out case 026. The training reader returns the expected string
+while the page duplicates its line. Its more permissive transcripts must
+not replace the independent evaluator or raw-image review.}{fig:s24-recognition}

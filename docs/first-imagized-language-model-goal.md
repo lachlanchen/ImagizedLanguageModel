@@ -1,8 +1,17 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-07
+Updated: 2026-11-08
 
 ## Immediate decision: demonstrate learning before scaling
+
+The latest [full-trajectory image-writer continuation](../references/autonomous_writer_result.md)
+improves held-out OCR-exact copying from 9/32 to 13/32, including only 3/16
+Chinese copies. It still fails reliable writing and has no semantic-QA
+evaluation. It retains a 3.900B externally pretrained transformer and an
+84.046M VAE. A matched extra-training control has not been run. The
+[current direction assessment](../references/ilm_direction_assessment_20261108.md)
+requires that comparison and reliable new writing before book-scale training.
+This limited copying gain does not qualify the independent language goal.
 
 The current direction has not produced a useful ILM. The completed
 [V82 matched comparison](../references/decoder_metric_v82_result.md) produces
@@ -49,8 +58,10 @@ A [completed native-source diagnostic](../references/native_unified_source_resul
 now separates failed image access from remaining text-language capability.
 The [visual-access learning experiment](../references/native_visual_access_learning_protocol.md)
 uses 8.49M gated input adapters and a frozen auxiliary language head on all
-384 training examples. Its real two-step preflight passes at 6.899 GiB; the
-4,096-update run has started. This is a necessary intermediate test, not the
+384 training examples. Its real two-step preflight passes at 6.899 GiB; the completed
+4,096-update run retains 27/32 held-out copies through its auxiliary text
+head but gives 0/32 correct natural answers, failing its requirements.
+This is an intermediate test, not the
 requested final model. The [full direction](../references/native_visual_language_learning_direction.md)
 still requires direct continuous image answers and removal of the runtime
 language lookup/output head. No usable ILM or matched-quality efficiency

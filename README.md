@@ -22,6 +22,12 @@ reported directly below.*
 
 ## Current result: autonomous image-language writing still fails
 
+The [current direction assessment](references/ilm_direction_assessment_20261108.md)
+finds no validated usable ILM. The latest full-trajectory continuation reaches
+13/32 held-out OCR-exact copies, including only 3/16 Chinese copies, and has
+no semantic-QA evaluation. The next requirement is a matched extra-training
+control and reliable new writing before book-scale training.
+
 The [latest whole-canvas writer](references/parallel_canvas_result.md) gets
 **26/32 seen training answers exact**, but **0/128 unseen answers and 0/12 new
 copies**. A subsequent [matched source-feature comparison](references/source_canvas_result.md)
@@ -91,7 +97,9 @@ and [current direction assessment](references/ilm_direction_assessment_20261107.
 The [current manuscript](publication/ilm-nature/README.md) includes the V82
 comparison, the completed paired-copying result in Note 40/Figure S17 and
 the auxiliary reading failure in Note 41/Figure S18, and the completed
-curriculum and geometry intervention in Note 42/Figure S19. Earlier image-writer
+curriculum and geometry intervention in Note 42/Figure S19. Notes 47–48 and
+Figures S24–S25 add the complete recognition-loss comparison, reader blind
+spots and the still-unreliable autonomous-writing continuation. Earlier image-writer
 results measure image agreement; auxiliary QA correctness is assessed separately.
 The earlier native actor retains a
 7.583B-parameter externally pretrained foundation; its 53.10M trainable

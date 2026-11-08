@@ -1,15 +1,11 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov  8 04:59:32 2026
-%DIF ADD new.tex   Sun Nov  8 04:59:32 2026
+%DIF DEL old.tex   Sun Nov  8 10:14:36 2026
+%DIF ADD new.tex   Sun Nov  8 10:14:36 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
-%DIF 4c4-5
-%DIF < \usepackage{setspace,lineno}
-%DIF -------
-\usepackage{setspace,lineno,etoolbox} %DIF >
-\AtBeginEnvironment{thebibliography}{\singlespacing} %DIF >
-%DIF -------
+\usepackage{setspace,lineno,etoolbox}
+\AtBeginEnvironment{thebibliography}{\singlespacing}
 % Generated from pinned audit evidence.
 \newcommand{\TrainSeconds}{361.6}
 \newcommand{\TrainMemory}{0.543}
@@ -136,10 +132,10 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the V68 conditional-writing baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 5c458a2 native-preflight baseline are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes historical \DIFdelbegin \DIFdel{, handwritten }\DIFdelend and \DIFdelbegin \DIFdel{transitional }\DIFdelend \DIFaddbegin \DIFadd{handwritten }\DIFaddend forms that \DIFaddbegin \DIFadd{cannot always be specified by }\DIFaddend a \DIFdelbegin \DIFdel{fixed }\DIFdelend character \DIFdelbegin \DIFdel{inventory cannot faithfully represent}\DIFdelend \DIFaddbegin \DIFadd{code}\DIFaddend . We investigate \DIFaddbegin \DIFadd{an }\DIFaddend independent \DIFdelbegin \DIFdel{language modelling with }\DIFdelend \DIFaddbegin \DIFadd{model that reads }\DIFaddend writing images \DIFdelbegin \DIFdel{as input }\DIFdelend and \DIFdelbegin \DIFdel{output }\DIFdelend \DIFaddbegin \DIFadd{produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments }\DIFaddend on one consumer GPU \DIFdelbegin \DIFdel{. The actors consume and generate }\DIFdelend \DIFaddbegin \DIFadd{distinguish }\DIFaddend physical \DIFdelbegin \DIFdel{rasters without a character vocabulary. An earlier compact reader answers 25 of 256 development questions exactly}\DIFdelend \DIFaddbegin \DIFadd{reconstruction}\DIFaddend , \DIFdelbegin \DIFdel{but only four of 393 shared-paragraph pairs have both answers correct. We then separate physical rendering from }\DIFdelend conditional \DIFaddbegin \DIFadd{prediction and }\DIFaddend answer selection. A frozen continuous \DIFdelbegin \DIFdel{writing }\DIFdelend codec reconstructs \DIFaddbegin \DIFadd{126 of }\DIFaddend 128 development blocks \DIFdelbegin \DIFdel{at 99.998\% foreground F1}\DIFdelend \DIFaddbegin \DIFadd{exactly}\DIFaddend , \DIFaddbegin \DIFadd{but a 64.520M-parameter writing module }\DIFaddend with \DIFdelbegin \DIFdel{126 }\DIFdelend \DIFaddbegin \DIFadd{a frozen pretrained reader yields only two }\DIFaddend exact \DIFdelbegin \DIFdel{blocks. An inherited 7.539B-parameter actor learns to predict this output space by adapting 9.352M parameters for 10,000 updates on one RTX 4090 D, with 16.965 GiB peak allocated memory. Its autonomous }\DIFdelend Chinese answers \DIFdelbegin \DIFdel{reach only \CodecLanguageFOne\% F1 and zero exact matches }\DIFdelend out of 128 \DIFaddbegin \DIFadd{after training on 12}\DIFaddend ,\DIFdelbegin \DIFdel{despite a \CodecLanguageQuestionGain-point effect of question pixels and correct stopping}\DIFdelend \DIFaddbegin \DIFadd{976 examples}\DIFaddend . \DIFdelbegin \DIFdel{A fixed 32-case diagnostic finds poor initial and exact-history predictions}\DIFdelend \DIFaddbegin \DIFadd{Retaining full native context gives no exact development answers after 40}\DIFaddend ,\DIFdelbegin \DIFdel{including on training examples}\DIFdelend \DIFaddbegin \DIFadd{000 updates. Correct answer history does not repair writing}\DIFaddend , \DIFdelbegin \DIFdel{while }\DIFdelend \DIFaddbegin \DIFadd{although }\DIFaddend supplied-code \DIFdelbegin \DIFdel{reconstruction remains faithful}\DIFdelend \DIFaddbegin \DIFadd{decoding reaches 99.9953\% foreground F1}\DIFaddend . \DIFdelbegin \DIFdel{These results identify }\DIFdelend \DIFaddbegin \DIFadd{A source-pixel component copies 32/32 new strings. In }\DIFaddend a \DIFdelbegin \DIFdel{conditional-prediction failure preceding generated-history drift}\DIFdelend \DIFaddbegin \DIFadd{matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs}\DIFaddend . \DIFdelbegin \DIFdel{Useful general }\DIFdelend \DIFaddbegin \DIFadd{Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. Exact copying and faithful reconstruction have not established reliable conditional }\DIFaddend image-language generation\DIFaddbegin \DIFadd{. Historical-script understanding, general instruction following }\DIFaddend and \DIFdelbegin \DIFdel{historical-form reasoning }\DIFdelend \DIFaddbegin \DIFadd{efficiency at matched language quality }\DIFaddend remain \DIFdelbegin \DIFdel{open objectives}\DIFdelend \DIFaddbegin \DIFadd{unachieved}\DIFaddend .}\par\bigskip
+\section*{Abstract}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. \DIFaddbegin \DIFadd{A separate 32-update image-writer continuation raises held-out OCR-exact copying from 9/32 to 13/32 but still fails writing reliability. }\DIFaddend Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -699,8 +695,8 @@ and unmodified generated streams for the first two fixed Chinese cases.
 Images retain their physical width and aspect ratio; no nonblank pixel is
 removed or repaired. These are reused development data.}{fig:codec-language}
 
-\DIFaddbegin \subsection*{\DIFadd{Numeric controls retain bounded visual reading}}
-\DIFadd{We test the original imported body through numeric chat/task vectors with
+\subsection*{Numeric controls retain bounded visual reading}
+We test the original imported body through numeric chat/task vectors with
 its vocabulary absent. A separate helper temporarily applies the source text
 projection. Among eight Chinese development questions, native-budget images
 give four exact answers versus zero with questions erased; original-scale
@@ -708,9 +704,8 @@ images give one, and matched text gives three. All 742 retained helper
 decisions replay as exact argmax choices (Supplementary Note 29 and Fig.~S10). This reused
 sample supports bounded reading, without qualifying image writing or
 isolating the scale effect.
-}
 
-\DIFadd{The successor conditions a 38.652M-parameter causal writer on
+The successor conditions a 38.652M-parameter causal writer on
 frozen prompt-only visual states. A joint flow predicts two-tile codes;
 the codec emits pixels, which are re-encoded for history. Real-example
 future-target exclusion, bit-exact optimizer/RNG resume and physical feedback
@@ -718,9 +713,8 @@ checks pass. Full-corpus training completes 40,000 updates and 640,000 draws
 over 12,976 examples. The autonomous audit gives zero exact Chinese answers
 out of 128 and 29.386\% foreground F1, versus 21.873\% with questions erased.
 Four of six Chinese requirements fail (Supplementary Note 30 and Fig.~S11).
-}
 
-\DIFadd{A post-hoc diagnosis identifies an obstruction in the velocity head:
+A post-hoc diagnosis identifies an obstruction in the velocity head:
 its final affine span has rank 769 in 1,536 writing coordinates. In real
 arithmetic the remaining 767 components of initial noise are invariant
 before normalization. Actual-weight CPU trajectories support this prediction.
@@ -734,21 +728,19 @@ The complete clean writer subsequently fits 32 seen training questions:
 29 original answer images are exact, versus 31 frozen-codec reference images,
 with 99.997\% original-image F1. This is a paired learning-capacity control,
 not unseen-question generalization (Supplementary Note 32).
-}
 
-\subsection*{\DIFadd{Full-corpus clean writing still fails}}
-\DIFadd{A fresh 64.520M-parameter clean writer trains on all 12,976 examples for
+\subsection*{Full-corpus clean writing still fails}
+A fresh 64.520M-parameter clean writer trains on all 12,976 examples for
 40,000 updates, completing 49 corpus passes. Its autonomous audit produces
 2/128 exact Chinese answer images and 37.631\% foreground F1, versus
 23.609\% with question ink erased. Both questions are exact in 0/64 passage
 pairs; three original requirements fail. The question effect is resolved
-at 14.023 F1 points }[\DIFadd{10.861, 17.487}]\DIFadd{, and all normal Chinese answers stop
+at 14.023 F1 points [10.861, 17.487], and all normal Chinese answers stop
 by their learned rule. Dependence on question pixels does not establish
 correct answers. A separate 12-request Chinese/English/numeric copy probe
 also gives no exact outputs (Supplementary Note 33).
-}
 
-\DIFadd{The full writer fails even on the earlier 32 training questions: free
+The full writer fails even on the earlier 32 training questions: free
 generation reaches 45.771\% F1 with no exact answer. Correct prior image
 codes and supplied answer length raise F1 to 58.045\%, still with no exact
 stream. Supplied-code rendering reaches 99.9953\% F1. Thus error is already
@@ -758,17 +750,15 @@ defect, without showing that it causes the much larger free-answer failure.
 The earlier small fit received 2,000 passes over its selected examples;
 neither that memorization result nor theoretical time-coverage calculations
 demonstrate a useful general language model.
-}
 
-\DIFadd{A matched head-only refinement broadens denoising-time supervision while
+A matched head-only refinement broadens denoising-time supervision while
 holding the causal body fixed. It improves assisted near-clean block F1 from
 99.0658\% to 99.8602\%, but free-stream F1 falls from 48.726\% to 45.028\%.
 Both arms remain at 0/32 exact training answers. This intervention fails
 all four prespecified repair criteria (Supplementary Note 34); better
 near-clean reconstruction is insufficient for prompt-conditioned generation.
-}
 
-\DIFadd{An offline source-decoder diagnostic recovers 8/12 exact copy answers and
+An offline source-decoder diagnostic recovers 8/12 exact copy answers and
 19/32 exact training answers from the same physical prompt images, compared
 with zero exact image outputs in both groups (Supplementary Note 35 and
 Fig.~S12). All 44 normal prefill memories match the original 52-state BF16
@@ -779,9 +769,8 @@ source decoding uses the full layerwise visual/context KV history, which
 the image writer does not receive. These measurements motivate examining
 the compact-memory and conditional-readout boundary; they do not demonstrate
 sufficiency of the compact state or a usable image-language model.
-}
 
-\DIFadd{A key-visibility intervention now tests that boundary directly. After identical
+A key-visibility intervention now tests that boundary directly. After identical
 prefill, permitting attention only to the final 52 task positions reduces exact
 source-helper copy answers from 8/12 to 0/12 and training answers from 19/32 to
 2/32 (Supplementary Note 36 and Fig.~S13). Original cache positions, rotary
@@ -793,23 +782,21 @@ Initial forward, gradient, causal-mask and emitted-image feedback checks use
 still depends on the initial reader state alone. The complete trained actor
 has 7.583B parameters including externally pretrained weights; 46.900M image
 interface parameters are trainable.
-}
 
-\DIFadd{Subsequent training completes 40,000 updates over all 3,193 Chinese examples,
+Subsequent training completes 40,000 updates over all 3,193 Chinese examples,
 using 18.298\,GiB peak allocated memory, but gives 0/128 exact development
 images, 36.504\% foreground F1 and 0/64 both-correct pairs (Supplementary
 Note 37 and Fig.~S14). Erasing the question reduces F1 to 25.404\%; the paired
 gain is 11.101 percentage points, with a 95\% article-bootstrap interval of
-}[\DIFadd{8.578, 14.018}]\DIFadd{. All streams stop, but stopping and input sensitivity do not
+[8.578, 14.018]. All streams stop, but stopping and input sensitivity do not
 establish accurate answers. On the same 32 training questions, free generation
 gives 46.235\% F1 and correct-history prediction gives 50.241\%, with no exact
 images in either path. Supplied-code decoding gives 99.9953\% F1 and 28/32
 exact images. Thus conditional prediction remains inaccurate under correct
 history; generated-history errors cannot be the sole explanation. These
 physical-image scores are not a separate measurement of semantic accuracy.
-}
 
-\DIFadd{A matched readout repair adds an initial continuous query and trains rank-8
+A matched readout repair adds an initial continuous query and trains rank-8
 suffix adapters while retaining the full prompt cache. After 2,000 updates
 per arm on those same 32 training questions, free F1 is 71.177\% for continued
 control and 72.748\% for adaptation; neither produces an exact complete image
@@ -818,16 +805,14 @@ control and 72.748\% for adaptation; neither produces an exact complete image
 unchanged at 99.9953\%. The adapted model fails three of four declared
 training-fit criteria. The small increase in image agreement does not resolve
 conditional writing or qualify general language capability.
-}
 
-\DIFadd{Decoder-sensitive reweighting also fails (Supplementary Note 39 and
+Decoder-sensitive reweighting also fails (Supplementary Note 39 and
 Fig.~S16). From identical adapted weights, 2,000 matched updates lower
 autonomous F1 from 85.984\% to 70.009\%, with 0/32 exact in both arms.
 Correct-history F1 is 92.430/75.116\%; supplied codes give 99.9953\%.
 All four repair criteria fail; scaling is rejected.
-}
 
-\DIFadd{A separate native image-generator adaptation learns partial copying
+A separate native image-generator adaptation learns partial copying
 (Supplementary Note 40 and Fig.~S17). Two fresh rank-16 adapters train on the
 same 32 Chinese/English copies for 512 updates. Removing exactly white bottom
 padding preserves every source pixel but changes frozen-VAE features. Training
@@ -841,9 +826,22 @@ requirement. All 64 outputs are retained; eight are original observations and
 plus an 84.046M VAE, with 24.359M trained adapter parameters. No natural QA is
 optimized in these copying runs. Faster copying execution therefore does not
 establish language understanding or efficiency at useful language quality.
+
+\DIFdelbegin \DIFdel{A native }\DIFdelend \DIFaddbegin \DIFadd{Frozen recognition supervision also fails reliable copying: a matched
+512-update treatment gives 6/32 seen and 9/32 held-out OCR-exact strings
+(Supplementary Note 47 and Fig.~S24). A subsequent 32-update continuation
+supervises actual final images generated from independent noise, combining
+reader CE with balanced pixel error and differentiating through all 50
+native steps\cite{draft}. Seen copying rises from 6/32 to 15/32 and held-out
+copying from 9/32 to 13/32, meeting an exploratory progress rule but failing
+the 30/32 writing floor (Note 48 and Fig.~S25). Training takes 1,135.452\,s
+at 12.057\,GiB peak allocation. The before/after continuation lacks a matched
+extra-training control and changes input-encoding precision as well as the
+loss. Raw omissions and repetitions remain. It establishes neither semantic
+answering nor a quality-matched efficiency advantage.
 }
 
-\DIFadd{A native unified backbone provides a separate visual-access diagnostic
+\DIFadd{A native }\DIFaddend unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source
 gives no exact answers on twelve image prompts, while the same body recovers
 all eight requested copy contents from their original text. Gated visual-only
@@ -859,9 +857,8 @@ pretraining, cache preparation and separate evaluations. The adapted source
 contains 2.839B parameters plus a 126.893M codec. These are auxiliary text-head
 measurements, with no trained image-answer result. Improved short-string
 reading therefore coexists with failed question-dependent answer selection.
-}
 
-\DIFadd{The subsequent full-page curriculum and geometry intervention refine this
+The subsequent full-page curriculum and geometry intervention refine this
 interpretation (Supplementary Note 42 and Fig.~S19). Another 2,560 updates
 raise exact copying to 29/32, but Chinese and English natural QA remain 0/32
 at the original geometry. Full transcription improves on four short copying
@@ -877,12 +874,10 @@ pixel/position change is joint, so the particular geometric mechanism remains
 unresolved. This recovers inherited source reading capability, while rejecting
 the existing adaptation as a demonstrated repair. Direct image answers and
 useful independent image-language learning remain unachieved.
-}
 
-\DIFadd{A subsequent source-preserving visual-state correction improves English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, but Chinese QA remains 0/32 and copying 0/16 (Supplementary Note 43 and Fig.~S20). Four of six reader requirements fail. A separate seen-prompt check corrupts all eight Chinese strings despite previous training exposure. The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. All 480 layout-control calls are retained, including exact replay of the 160 original responses. A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. A further 128-call feature/context intervention does not restore Chinese copying by shortening the square context alone; strip features in the long context recover 16/16 English but only 2/16 Chinese copies (Note 43). These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.
-}
+A subsequent source-preserving visual-state correction improves English QA from 11/32 to 16/32 and English copying from 7/16 to 16/16, but Chinese QA remains 0/32 and copying 0/16 (Supplementary Note 43 and Fig.~S20). Four of six reader requirements fail. A separate seen-prompt check corrupts all eight Chinese strings despite previous training exposure. The earlier dense checkpoint retains 13/16 Chinese copies on its original 1024-by-256 strips; adding only white bottom padding reduces copying from 29/32 to 7/32 overall, with every ink pixel and model weight fixed. Tight whole-request cropping also fails. All 480 layout-control calls are retained, including exact replay of the 160 original responses. A separate contextual-attention learner retains 29/32 copies but leaves QA at 0/32 in both languages. A further 128-call feature/context intervention does not restore Chinese copying by shortening the square context alone; strip features in the long context recover 16/16 English but only 2/16 Chinese copies (Note 43). These observations identify geometric brittleness and failed Chinese fit, without isolating a unique internal cause or qualifying image-answer generation.
 
-\DIFadd{A separate contextual source-pixel component copies all 32 new Chinese/English
+A separate contextual source-pixel component copies all 32 new Chinese/English
 strings and fits all 32 tested training questions exactly, but gives only
 9/64 exact held-out Chinese answers and 1/32 both-correct paragraph pairs
 (Supplementary Note 44 and Fig.~S21). Question erasure gives 2/64 and passage
@@ -893,9 +888,8 @@ with exact pixel copying, rather than free glyph synthesis. Its 2.378M trained
 head retains a 7.531B externally pretrained runtime. The clean copying and
 seen-data fit therefore expose a remaining selection/boundary generalization
 gap without qualifying a lightweight general image-language model.
-}
 
-\DIFadd{A matched continuation uses the same four-pass schedule over 3,193 admitted
+A matched continuation uses the same four-pass schedule over 3,193 admitted
 Chinese QA images and 64 copies, with 3,257 updates per arm. Head-only
 control gives 23/64 exact unseen answers; additionally adapting 6.193M
 contextual attention parameters gives 26/64. Both retain 32/32 new copies,
@@ -909,9 +903,8 @@ than free image-language synthesis. A separate retained-history audit
 finds only 2/75 intermediate image boundaries with a matching saved
 text-prefix state (Note 46 and Fig.~S23); the distances do not establish
 an alignment repair.
-}
 
-\DIFaddend \section*{Discussion}
+\section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
 next-writing information, while subsequent writers can erase that information
@@ -927,10 +920,10 @@ training-seed replication and a capability-matched text-model comparison.
 Small allocated memory in a bounded experiment establishes feasibility on one
 GPU, rather than a general efficiency advantage over language models.
 
-\DIFdelbegin \DIFdel{Exact copying is now }\DIFdelend \DIFaddbegin \DIFadd{Supplied-target reconstruction is }\DIFaddend preserved by an aligned inverse-image path\DIFdelbegin \DIFdel{. The }\DIFdelend \DIFaddbegin \DIFadd{;
-the free image writers still fail new prompt-directed copying. The separate
+Supplied-target reconstruction is preserved by an aligned inverse-image path;
+the free image writers still fail \DIFaddbegin \DIFadd{reliable }\DIFaddend new prompt-directed copying. The separate
 source-pixel component passes its new-copy test but fails natural-reading
-qualification. The }\DIFaddend remaining test is whether context selects \DIFaddbegin \DIFadd{and generates }\DIFaddend a
+qualification. The remaining test is whether context selects and generates a
 coherent written future. Low teacher-forced
 image NLL can reflect dependencies among strokes already revealed within the
 target, while generated output still loses global identity. Joint training
@@ -1106,7 +1099,7 @@ resamples, seed 20266329. Reference-energy ranking supplies accepted answers
 and remains a separate diagnostic. One seed, reused development data and
 external foundation training limit both this result and efficiency claims.
 
-\relax %DIF >  Final references may span pages; retain natural column breaks.
+\relax % Final references may span pages; retain natural column breaks.
 \section*{Data and code availability}
 Implementation, protocols, evidence summaries and scripts are available in
 \url{https://github.com/lachlanchen/ImagizedLanguageModel}. Manifest and
@@ -1115,10 +1108,8 @@ reference books are not redistributed. The complete research record and
 Supplementary Information distinguish earlier foundation provenance from the
 present raster-only deployment experiment.
 
-\DIFdelbegin %DIFDELCMD < \begin{thebibliography}{18}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \begin{thebibliography}{21}
-\DIFaddend \small
+\begin{thebibliography}{21}
+\small
 \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.
 \bibitem{mar} Li, T., Tian, Y., Li, H., Deng, M. \& He, K. Autoregressive Image Generation without Vector Quantization. \emph{Advances in Neural Information Processing Systems} (2024). \url{https://arxiv.org/abs/2406.11838}.
@@ -1137,10 +1128,12 @@ present raster-only deployment experiment.
 \bibitem{multimodalflow} Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). \url{https://arxiv.org/abs/2609.40362v1}.
 \bibitem{ocg} Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. \href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{Author manuscript} (2026). Peer-review status unverified.
 \bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}.
-\bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}\DIFaddbegin \DIFadd{.
-}\bibitem{jit} \DIFadd{Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). }\url{https://arxiv.org/abs/2511.13720v1}\DIFadd{.
-}\bibitem{showo2} \DIFadd{Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). }\url{https://arxiv.org/abs/2506.15564v3}\DIFadd{.
-}\bibitem{squad} \DIFadd{Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). }\url{https://aclanthology.org/D16-1264/}\DIFaddend .
+\bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
+\bibitem{jit} Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). \url{https://arxiv.org/abs/2511.13720v1}.
+\bibitem{showo2} Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). \url{https://arxiv.org/abs/2506.15564v3}.
+\bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}\DIFaddbegin \DIFadd{.
+}\bibitem{gotocr} \DIFadd{Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). }\url{https://arxiv.org/abs/2409.01704}\DIFadd{.
+}\bibitem{draft} \DIFadd{Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). }\url{https://arxiv.org/abs/2309.17400}\DIFaddend .
 \end{thebibliography}
 
 
