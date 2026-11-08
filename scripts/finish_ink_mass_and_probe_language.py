@@ -97,8 +97,31 @@ def main():
         # No more GPU children. Authenticate the actual tensors on CPU, including
         # the identical-input/identical-seed erased-question pair.
         os.environ["CUDA_VISIBLE_DEVICES"]=""
+        import numpy as np
+        from PIL import Image
         import torch
         from scripts.export_balanced_autonomous_writer import tensor_png
+        codec=json.loads((output/"codec/report.json").read_text())
+        backward=json.loads((output/"backward/report.json").read_text())
+        expected=json.loads(indexes["normal"].read_text())
+        if ([r["id"] for r in codec["observations"]]!=[r["id"] for r in expected]
+                or codec["metadata"]["optimizer_updates"]!=0
+                or [r["id"] for r in backward["observations"]]!=[r["id"] for r in expected[:2]]
+                or backward["metadata"]["optimizer_updates"]!=2 or not backward["metadata"]["updates_discarded"]
+                or backward["metadata"]["all_optimizer_steps"]!=2 or not backward["metadata"]["changed_adapter_tensors"]):
+            raise ValueError("complete fixed codec/gradient probes required")
+        for i,row in enumerate(codec["observations"]):
+            folder=output/"codec"/f"{i:03}_reconstruction"
+            if sha(folder/"pixels.pt")!=row["reconstruction"]["pixels_sha256"] or sha(folder/"answer.png")!=row["reconstruction"]["png_sha256"]:
+                raise ValueError("codec artifact hash differs")
+            raw=torch.load(folder/"pixels.pt",map_location="cpu",weights_only=True)
+            if raw.shape!=(1,3,1024,1024) or not torch.isfinite(raw).all():raise ValueError("invalid full reconstruction tensor")
+            values=(raw[0].permute(1,2,0).float().numpy()*255).round().astype(np.uint8)
+            if not np.array_equal(values,np.asarray(Image.open(folder/"answer.png").convert("RGB"))):
+                raise ValueError("codec PNG differs from actual quantized neural pixels")
+        for i,row in enumerate(backward["observations"]):
+            folder=output/"backward"/f"update_{i+1:03}_before"
+            tensor_png(folder/"pixels.pt",folder/"answer.png",row["output"]["pixels_sha256"],row["output"]["png_sha256"])
         reports={}
         for name,index in indexes.items():
             folder=output/(name+"_inference")
@@ -121,6 +144,8 @@ def main():
         save_json(output/"assessment.json",dict(reports=reports,actual_native_generations=8,
             all_eight_pngs_equal_retained_neural_tensors=True,erased_question_pair_outputs_bit_exact=True,
             discarded_optimizer_updates=2,full_page_reconstructions=4,raw_review_completed=False,
+            all_four_codec_pngs_equal_retained_neural_tensors=True,
+            codec_report_sha256=sha(output/"codec/report.json"),backward_report_sha256=sha(output/"backward/report.json"),
             semantic_learning_validated=False,language_quality_qualified=False,general_ilm_goal_complete=False))
         phase="ready_for_raw_review";status(owned_children_exited=True)
     except BaseException as error:
