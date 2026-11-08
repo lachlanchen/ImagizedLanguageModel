@@ -63,8 +63,11 @@ The [complete autonomous-output loss diagnostic](references/autonomous_writing_l
 finds much larger recognition loss on actual generated pages than during
 assisted training, and reader blind spots for repeated glyphs and duplicate
 lines. A [separately specified direct-output learning test](references/autonomous_writing_protocol.md)
-uses the full native noise-to-image trajectory; its execution and language
-quality require separate verification.
+uses the full native noise-to-image trajectory. Its
+[two-update execution check](references/autonomous_writer_preflight_result.md)
+replays all 50 native steps exactly for two inputs and verifies early/middle/late
+gradients at 12.03 GiB peak allocation. Writing and language quality remain
+unqualified pending the separate complete pilot evaluation.
 
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
