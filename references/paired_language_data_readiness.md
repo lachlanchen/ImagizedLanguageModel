@@ -83,5 +83,5 @@ Reproduction uses `scripts/prepare_paired_language_controls.py`; its outputs
 remain in the ignored `artifacts/paired_language_controls_v1/` directory.
 The current ink-mass copying comparison continues unchanged. The subsequent [native preflight](native_paired_language_preflight_result.md)
 now completes four source-page reconstructions, two real discarded updates and
-eight native generations. The fixed earlier checkpoint answers0/4normal
+eight native generations. The fixed earlier checkpoint answers 0/4 normal
 questions correctly; this does not establish language learning.

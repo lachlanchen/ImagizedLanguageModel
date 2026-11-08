@@ -156,7 +156,9 @@ def generate():
     s = Slide(parts[source_part])
     s.shape("Fixed target ink mass improves some copies",45,24,1510,60,31,True)
     s.shape("a  Duplicate / deletion physical cost (%)",45,105,745,40,22,True)
-    ratios=[100*a["summary"][key]["duplicate_to_blank_ratio_median"] for key in ("balanced_l1","ink_mass_kl")]
+    # Declare chart precision so native XML and XLSX retain exactly the same
+    # values; full-precision audit measurements remain in the bound source.
+    ratios=[round(100*a["summary"][key]["duplicate_to_blank_ratio_median"],6) for key in ("balanced_l1","ink_mass_kl")]
     chart(s,["Balanced L1","Ink-mass KL"],[("Median on 64 reference pages",ratios)],
         [[f"{v:.2f}%" for v in ratios]],100,25,45,155,725,280)
     s.shape("b  Complete OCR-exact copies (%)",825,105,730,40,22,True)
@@ -165,8 +167,8 @@ def generate():
     chart(s,["Seen (32)","Held (32)","Held ZH (16)","Held EN (16)"],
         [(name,[100*v/n for v,n in zip(values,denoms)]) for name,values in counts],
         [[f"{v}/{n}" for v,n in zip(values,denoms)] for _,values in counts],100,25,825,155,730,280)
-    s.shape("One matched permutation: 32 updates\nSame weights, Adam state, inputs and noise\nOnly physical loss changes; reader CE stays",45,490,450,110,18)
-    s.shape("KL scale: 0.403568; temperature: 0.05\nFixed target ink mass; unclipped RGB\nTraining peaks: 12.032 / 12.033 GiB",45,620,450,105,17)
+    s.shape("32 matched updates; same input order\nSame weights, Adam state and noise\nOnly physical loss changes\nReader CE is unchanged",45,490,450,130,17)
+    s.shape("KL scale: 0.403568; temperature: 0.05\nFixed target ink mass; unclipped RGB\nTraining peaks: 12.032 / 12.033 GiB",45,635,450,105,17)
     s.shape("Exploratory rule passes; writing floor fails.\nCPU corruptions are not model outputs.\nNo semantic QA in these two arms.",45,750,450,105,17)
     s.shape("c  Fixed first two held-out cases: complete actual pages",530,470,1025,38,21,True)
     for col,label in enumerate(("Target","Control","Ink-mass")):
@@ -179,6 +181,7 @@ def generate():
     s.shape("Single seed; reused development; inherited 3.900B transformer + 84.046M VAE; all 128 final outputs retained.",530,873,1025,25,14)
     append(s,42,"Figure S27. CPU diagnostic corruptions and complete matched model assessment. "
         "Control uses reader CE +10balanced L1; treatment replaces only physical term with0.403568ink-mass Bernoulli KL. "
+        "Diagnostic bars rounded to six decimal percentage points; displayed labels to two. "
         "Both32updates from identical optimizer160to192; identical schedules/seeds. "
         "Full raw first2heldout cases fixed before evaluation; all128outputs retained. "
         "All exploratory gates pass but reliable writing remains unqualified; no QA trained/evaluated. "+json.dumps(r["summary"]))
@@ -195,17 +198,17 @@ def generate():
     s.shape("First input question region (display inset only)",45,716,980,28,17,True)
     picture(s,SOURCES["preflight"].parent/codec["original"]["file"],"ink_mass_qa_question_inset",43,45,748,940,crop=(0,552,1024,648))
     s.shape("Two real QA updates discarded: 12.203 GiB. Fresh inference reloads the fixed earlier checkpoint.\n0/4 normal answers; eight raw normal/control pages retained. Small preflight, not language learning.",45,846,980,51,15)
-    s.shape("b  First two natural questions\nReference versus fixed baseline",1070,105,490,55,21,True)
+    s.shape("b  First two natural questions\nUnoptimized baseline",1070,105,490,65,20,True)
     normal=[row for row in qdata["rows"] if row["variant"]=="normal"]
     if [row["id"] for row in normal[:2]] != ["TRAIN_3802_QUERY_0","TRAIN_3802_QUERY_1"]:
         raise ValueError("fixed first QA pair differs")
     for i,row in enumerate(normal[:2]):
-        y=150+365*i
-        s.shape(f"Q{i+1} reference answer (whitespace cropped)",1070,y,490,22,16,True)
+        y=195+350*i
+        s.shape(f"Q{i+1} reference (whitespace cropped)",1070,y,490,30,15,True)
         picture(s,SOURCES["preflight"].parent/row["files"]["reference"]["file"],f"ink_mass_qa{i}_reference_crop",43,
-            1070,y+22,500,crop=(0,24,512,80))
-        s.shape("Unrepaired native output: complete 512 x 256 page",1070,y+81,500,22,14)
-        picture(s,SOURCES["preflight"].parent/row["files"]["answer"]["file"],f"ink_mass_qa{i}_answer",43,1070,y+106,500)
+            1070,y+32,460,crop=(0,24,512,80))
+        s.shape("Actual output: complete 512 x 256 page",1070,y+91,490,20,13)
+        picture(s,SOURCES["preflight"].parent/row["files"]["answer"]["file"],f"ink_mass_qa{i}_answer",43,1070,y+112,460)
     append(s,43,"Figure S28. Full first source page and native VAE reconstruction; actual first two unoptimized QA outputs. "
         "Both model outputs shown complete. Canonical reference whitespace cropped at(0,24,512,80); original input question inset(0,552,1024,648). "
         "Model always receives complete1024square inputs. Four codec pages and eight standalone native outputs authenticated. "

@@ -8,71 +8,75 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved `d8b2aa5` 40-slide writing baseline. Their
-[builder](build_balanced_writing_redlines.py) uses pinned latexdiff and inlines the
-abstract so its changes are visible. The earlier supplement-only redline and
-builder remain inside the named baseline.
+revision with the preserved `b5501de` 41-slide writing baseline. Their
+[builder](build_ink_mass_writing_redlines.py) uses pinned latexdiff and inlines
+the abstract so its changes are visible. Earlier builders and baselines remain
+available for historical reproduction.
 
 ## Current result
 
-The newer [matched ink-mass comparison](../../references/ink_mass_comparison_result.md)
-gets 18/32 seen and 19/32 held-out OCR-exact copies, including 6/16 held-out
-Chinese, versus 16/32, 16/32 and 4/16 in control. The
-[full-page preflight](../../references/native_paired_language_preflight_result.md)
-fits actual gradients but gives no correct normal answers in four fixed
-baseline questions. Incorporation into the manuscript is pending; the
-published package below still reports the earlier balanced continuation.
+The [matched ink-mass comparison](../../references/ink_mass_comparison_result.md)
+gives **18/32 seen and 19/32 held-out OCR-exact copies**, including **6/16
+held-out Chinese**, versus 16/32, 16/32 and 4/16 in control. Both arms use
+identical weights, optimizer states, examples and noise for 32 updates; only
+the physical loss changes. All three prospective exploratory conditions pass,
+but raw omissions, repetitions and copied instructions still reject reliable
+writing. This single schedule uses development data already inspected.
+**Note 50 and Figure S27** distinguish the numerical loss audit from actual
+model improvement. Neither arm trains or evaluates natural QA.
 
+The [full-page preflight](../../references/native_paired_language_preflight_result.md)
+reconstructs four complete 1024-square pages with 97.834–98.180% foreground F1.
+Two actual gradient updates fit at **12.203 GiB**, then are discarded.
+Independent inference reloads the fixed earlier checkpoint: **0/4 normal
+questions** are answered correctly, and all four erased-input controls fail.
+**Note 51 and Figure S28** report execution feasibility and this failed small
+baseline; they do not establish semantic learning.
 
-The [completed balanced continuation](../../references/balanced_autonomous_writer_result.md)
-gets **13/32 seen and 17/32 held-out OCR-exact copies**, including **4/16
-held-out Chinese**. Seen copying regresses from 15/32. The Chinese and
-seen-retention conditions fail; only held-out English retention passes.
-Raw omitted characters, repeated letters and duplicated lines still reject
-the unchanged 30/32 writing floor. No semantic QA is trained or evaluated.
-This result does not support further unchanged copying-budget scale-up.
+The earlier [balanced continuation](../../references/balanced_autonomous_writer_result.md)
+gets 13/32 seen and 17/32 held-out copies, including 4/16 held-out Chinese.
+Its Chinese and seen-retention conditions fail. The separate
+[additional-training control](../../references/autonomous_writing_control_result.md)
+gives 5/32 seen and 10/32 held-out copies. Note 49 retains both results.
+Its case-026 description is corrected: the balanced output already has one
+line; the duplicated-line example belongs to the earlier pilot. No measured
+score or output pixel changes.
 
-The [additional-training control](../../references/autonomous_writing_control_result.md)
-gives 5/32 seen and 10/32 held-out copies versus 15/32 and 13/32 in the
-final-image pilot, both with 3/16 held-out Chinese. This retrospective
-comparison matches exposure and native input precision, not computation.
-**Note 49 and Figure S26** report both completed experiments and their limits.
-The independent image-language goal remains unachieved.
+The current runtime retains an externally pretrained **3.900B transformer
+plus 84.046M VAE**. Its 24.359M trained adapters do not establish a small
+foundation model. The independent image-language goal remains unachieved.
 
-Balanced training takes **4,500.117 seconds** at **12.032 GiB**; separate
-64-case native inference takes 512.959 seconds at 8.031 GiB. The runtime
-retains the externally pretrained 3.900B transformer plus 84.046M VAE;
-24.359M trained adapters do not establish a small foundation model.
-
-The package contains a **16-page article, 29-page review and 63-page
-supplement**, with matching redlines (29/63 pages). The editable deck has
-**41 slides and 49 native charts**. All 40 prior slide parts and rendered
-appearances, 121 prior figure assets and the first 57 supplement pages
-are preserved. Historical Note 48 remains verbatim; Note 49 explains the
-subsequent availability of its additional-training control.
+The package contains a **16-page article, 29-page review and 68-page
+supplement**, with matching redlines (29/68 pages). The editable deck has
+**43 slides and 51 native charts**. All 41 prior slide parts and appearances,
+130 prior figure assets, the first 57 supplement pages and old Figure S26
+on page 59 are preserved. Page 58 is the explicit factual-correction exception.
 
 Current entry points, run from this directory, are:
 
 ```bash
-python balanced_writing_figures.py --stage generate
-python balanced_writing_figures.py --stage verify
-python balanced_writing_figures.py --stage render
-python build_balanced_writing_publication.py --stage build
+python ink_mass_writing_figures.py --stage generate
+python ink_mass_writing_figures.py --stage verify
+python ink_mass_writing_figures.py --stage render
+python build_ink_mass_writing_publication.py --stage build
 # After actual PDF/PNG inspection and its bound visual-review receipt:
-python build_balanced_writing_publication.py --stage sync
+python build_ink_mass_writing_publication.py --stage sync
 ```
 
-The new slide uses native editable charts, embedded workbooks and unchanged
-actual evidence PNGs. Rendering uses LibreOffice; Arial is substituted with
-Liberation Sans. Artifact Tool and PowerPoint-app inspection were unavailable.
-Earlier builders retain historical slide counts and must not overwrite the
-current 41-slide deck. Redlines use the immutable Git baseline.
+The new slides use native editable charts, embedded workbooks and unchanged
+actual evidence pixels. Only declared reference whitespace and a question
+inset are cropped; every displayed model output is complete. Rendering uses
+LibreOffice; Arial is substituted with Liberation Sans. Artifact Tool and
+PowerPoint-app inspection were unavailable. Earlier builders retain historical
+slide counts and must not overwrite the current 43-slide deck.
 
-Local delivery uses `ILM_NatureStyle_20261108_BalancedWriting` and five
-`LATEST` aliases in the ILM Nutstore project folder. Source/destination hashes
-verify local copying; cloud propagation is not independently verified.
+Local delivery uses `ILM_NatureStyle_20261108_InkMass` and five `LATEST`
+aliases in the ILM Nutstore project folder. Source/destination hashes verify
+local copying; cloud propagation is not independently verified.
 
-![Measured control and failed balanced-writing continuation](figures/Figure_S26_balanced_writing.png)
+![Matched physical-loss comparison](figures/Figure_S27_ink_mass.png)
+
+![Complete page representation and failed fixed QA baseline](figures/Figure_S28_full_page_preflight.png)
 
 ## Earlier contextual reading and history controls
 

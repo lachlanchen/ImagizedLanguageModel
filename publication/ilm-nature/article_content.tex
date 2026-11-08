@@ -711,9 +711,21 @@ pilot for 128 balanced updates, four per training input, raises held-out
 copying to 17/32, including 4/16 Chinese, but reduces seen copying to 13/32.
 The prospective Chinese and seen-retention conditions fail; only English
 retention passes. Training takes 4,500.117\,s at 12.032\,GiB. Omissions,
-repeated letters and duplicated lines still reject reliable writing, and
+repeated characters and copied instructions still reject reliable writing, and
 semantic QA remains untested. This result does not support further unchanged
 copying-budget scale-up.
+
+A matched physical-loss replacement then increases held-out OCR-exact copying
+from 16/32 in control to 19/32, including 4/16 to 6/16 Chinese; seen copying
+is 16/32 versus 18/32 (Note 50 and Fig.~S27). Both arms use identical starting
+weights, optimizer states, inputs and noise over 32 updates. The prospective
+exploratory rule passes, but raw omissions, repetitions and copied instructions
+still reject reliable writing. No semantic QA is optimized in these arms.
+A separate full-page preflight fits two real discarded updates at
+12.203\,GiB; four native source reconstructions retain 97.834--98.180\%
+foreground F1, while the fixed earlier checkpoint answers none of four normal
+questions correctly (Note 51 and Fig.~S28). Physical representation and actual
+gradients have not established language learning.
 
 A native unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source

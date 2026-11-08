@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov  8 12:37:40 2026
-%DIF ADD new.tex   Sun Nov  8 12:37:40 2026
+%DIF DEL old.tex   Sun Nov  8 14:36:47 2026
+%DIF ADD new.tex   Sun Nov  8 14:36:47 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -132,10 +132,10 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the d8b2aa5 40-slide writing baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the b5501de 41-slide writing baseline are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. A separate \DIFdelbegin \DIFdel{32-update image-writer continuation raises }\DIFdelend \DIFaddbegin \DIFadd{image writer followed by 128 balanced updates reaches 17/32 }\DIFaddend held-out OCR-exact \DIFdelbegin \DIFdel{copying from 9}\DIFdelend \DIFaddbegin \DIFadd{copies, including 4}\DIFaddend /\DIFdelbegin \DIFdel{32 }\DIFdelend \DIFaddbegin \DIFadd{16 Chinese, but seen copying regresses }\DIFaddend to 13/32 \DIFdelbegin \DIFdel{but still fails writing reliability}\DIFdelend \DIFaddbegin \DIFadd{and two continuation requirements fail}\DIFaddend . Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}\par\bigskip
+\section*{Abstract}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. A \DIFdelbegin \DIFdel{separate image writer followed by 128 balanced updates reaches 17}\DIFdelend \DIFaddbegin \DIFadd{matched physical-loss replacement gives 19}\DIFaddend /32 held-out OCR-exact copies \DIFaddbegin \DIFadd{versus 16/32 in control}\DIFaddend , including \DIFaddbegin \DIFadd{6/16 versus }\DIFaddend 4/16 Chinese, but \DIFdelbegin \DIFdel{seen copying regresses to 13/32 and two continuation requirements fail}\DIFdelend \DIFaddbegin \DIFadd{still fails reliable writing}\DIFaddend . Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -835,16 +835,13 @@ reader CE with balanced pixel error and differentiating through all 50
 native steps\cite{draft}. Seen copying rises from 6/32 to 15/32 and held-out
 copying from 9/32 to 13/32, meeting an exploratory progress rule but failing
 the 30/32 writing floor (Note 48 and Fig.~S25). Training takes 1,135.452\,s
-at 12.057\,GiB peak allocation. \DIFdelbegin \DIFdel{The before/after continuation lacks
-a matched
-extra-training }\DIFdelend \DIFaddbegin \DIFadd{At initial assessment, the continuation lacks
-an additional-training }\DIFaddend control and changes input-encoding precision as well
-as the loss\DIFaddbegin \DIFadd{; the later comparison below holds precision common}\DIFaddend . Raw omissions
+at 12.057\,GiB peak allocation. At initial assessment, the continuation lacks
+an additional-training control and changes input-encoding precision as well
+as the loss; the later comparison below holds precision common. Raw omissions
 and repetitions remain. It establishes neither semantic answering nor a
-quality-matched efficiency advantage\DIFaddbegin \DIFadd{.
-}
+quality-matched efficiency advantage.
 
-\DIFadd{The subsequent old-objective continuation gives 5/32 seen and 10/32 held-out
+The subsequent old-objective continuation gives 5/32 seen and 10/32 held-out
 OCR-exact copies on matched example draws; both it and the final-image pilot
 retain only 3/16 held-out Chinese copies (Note 49 and Fig.~S26). This
 retrospective comparison differs in objective and compute. Continuing the
@@ -852,9 +849,22 @@ pilot for 128 balanced updates, four per training input, raises held-out
 copying to 17/32, including 4/16 Chinese, but reduces seen copying to 13/32.
 The prospective Chinese and seen-retention conditions fail; only English
 retention passes. Training takes 4,500.117\,s at 12.032\,GiB. Omissions,
-repeated letters and duplicated lines still reject reliable writing, and
+repeated \DIFdelbegin \DIFdel{letters and duplicated lines }\DIFdelend \DIFaddbegin \DIFadd{characters and copied instructions }\DIFaddend still reject reliable writing, and
 semantic QA remains untested. This result does not support further unchanged
-copying-budget scale-up}\DIFaddend .
+copying-budget scale-up\DIFaddbegin \DIFadd{.
+}
+
+\DIFadd{A matched physical-loss replacement then increases held-out OCR-exact copying
+from 16/32 in control to 19/32, including 4/16 to 6/16 Chinese; seen copying
+is 16/32 versus 18/32 (Note 50 and Fig.~S27). Both arms use identical starting
+weights, optimizer states, inputs and noise over 32 updates. The prospective
+exploratory rule passes, but raw omissions, repetitions and copied instructions
+still reject reliable writing. No semantic QA is optimized in these arms.
+A separate full-page preflight fits two real discarded updates at
+12.203\,GiB; four native source reconstructions retain 97.834--98.180\%
+foreground F1, while the fixed earlier checkpoint answers none of four normal
+questions correctly (Note 51 and Fig.~S28). Physical representation and actual
+gradients have not established language learning}\DIFaddend .
 
 A native unified backbone provides a separate visual-access diagnostic
 (Show-o2\cite{showo2}; Supplementary Note 41 and Fig.~S18). Its frozen source

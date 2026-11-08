@@ -1,0 +1,131 @@
+\clearpage
+\section*{Supplementary Note 50. Fixed target ink mass and matched writing improvement}
+
+The balanced continuation fails its Chinese and seen-retention requirements.
+We next examine a specific weakness of its physical objective. For a binary
+unit error, balanced L1 assigns missing ink weight $1/(2N_{\rm ink})$ and extra
+ink weight $1/(2N_{\rm background})$. A large blank page therefore weakens the
+relative cost of extra writing. This objective still has the exact reference
+as a minimum; it does not mathematically require a duplicate line. A frozen
+recognition reader can also ignore extra writing (Note 47).
+
+A CPU-only audit constructs a nonoverlapping duplicate of the complete target
+line on each of 64 reference pages, and compares its physical cost with deleting
+the answer. These are explicit reference-derived corruptions, not generated
+pages. Duplicate-to-deletion cost under balanced L1 has median 1.790\%, range
+.837--3.447\%. This diagnoses relative weighting, not a unique cause of the
+model's errors. The diagnostic uses clipped, quantized PNGs; actual physical
+supervision uses unclipped decoded RGB.
+
+Let $p_j$ be an unclipped predicted RGB sample and $y_j$ its reference, with
+$j$ indexing spatial positions and colour channels. Define
+\begin{align}
+ a(v)&=(1/2-v)/\tau,\qquad t_j=\operatorname{sigmoid}(a(y_j)),\quad \tau=.05,\\
+ K(p,y)&=\frac{\sum_j\left[
+ \operatorname{BCELogits}(a(p_j),t_j)
+ -\operatorname{BCELogits}(a(y_j),t_j)\right]}{\sum_j t_j},\\
+ \frac{\partial K}{\partial p_j}
+ &=\frac{t_j-\operatorname{sigmoid}(a(p_j))}{\tau\sum_k t_k}.
+\end{align}
+This is summed Bernoulli KL normalized by fixed target ink mass. The same
+invertible transformation is applied to prediction and reference; the
+reference remains the unique optimum in real arithmetic. No predicted mass
+enters the denominator, and unclipped errors retain gradients. Finite differences
+agree with autograd, with zero loss and gradient at the reference. These are
+standard loss calculations, not a new learning theorem. The new diagnostic
+duplicate/deletion ratio is 85.857\% at the median, range 82.079--91.566\%.
+This does not prove that optimization will correct writing.
+
+We test the complete replacement in two matched 32-update arms. Both restore
+the balanced checkpoint's weights and step-160 AdamW states, then execute the
+same full permutation of 32 inputs: sixteen Chinese and sixteen English.
+Model seed is 20268601; CPU order and noise streams use 20268602 and 20268603.
+Every optimizer state ends at step 192. Source weights, frozen VAE and reader,
+rank-16 adapters, rate $10^{-5}$, decay .01, clipping one, native input encoding,
+all 50 differentiable steps, guidance one and $512\times256$ output remain
+common. Targets enter only the final losses after independent-noise generation.
+No natural QA, extra font or new writing string is optimized.
+
+Control retains reader CE plus $10B(p,y)$ from Note 48. Treatment replaces only
+the physical term with $\lambda K(p,y)$, keeping reader CE unchanged.
+The coefficient $\lambda=.4035679875746343$ is fixed before optimization as the
+median training-reference ratio $10B(\mathrm{blank},y)/K(\mathrm{blank},y)$.
+No held-out score selects it. This calibration matches a deletion-cost scale,
+not parameter-gradient norms. The comparison isolates this replacement bundle;
+normalization, curvature and interaction with clipping are not separated.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Independent OCR observation & Control & Ink-mass replacement\\
+\midrule
+Seen, all & 16/32 & 18/32\\
+Held out, all & 16/32 & 19/32\\
+Seen Chinese & 5/16 & 8/16\\
+Held-out Chinese & 4/16 & 6/16\\
+Seen English & 11/16 & 10/16\\
+Held-out English & 12/16 & 13/16\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All prospective exploratory conditions pass: at least 6/16 held-out Chinese
+and two above control; at least 13/32 seen strings without control regression;
+and at least 13/16 held-out English without control regression
+(Fig.~\ref{fig:s27-ink-mass}). Seen English nevertheless decreases by one.
+Seen paired changes are four treatment-only and two control-only exact strings;
+held-out changes are six and three. This is one deterministic schedule on
+reused development data without independent-seed replication. OCR and font
+recognition can contribute to measured changes; clean-reference calibration
+remains 27/32 seen and 28/32 held out.
+
+All 64 target/starting/control/treatment panels are inspected. Treatment removes
+the control's extra instruction line in seen case 012 and quotation mark in
+held-out case 000. Errors remain: seen 004 omits characters, 013 and 027 retain
+quotation marks; held-out 002 repeats a character, 005 corrupts English letters,
+015 loses \texttt{morning} and corrupts \texttt{evening}, 016 retains a quotation
+mark, 026 adds a character and 030 copies instructions. More than two obvious
+failures per split independently reject the unchanged 30/32 writing floor.
+The inspection is not a quantitative manual annotation of every glyph. A
+passing exploratory rule permits bounded investigation, not reliable writing
+or a semantic-language claim.
+
+Both initial native replay checks pass. The first actual pre-update page is
+bit-identical across arms at the same input and seed, with recognition loss
+.07570605. Pre-clipping gradient norm is 8.79523 in control and 15.20039 in
+treatment. Finite nonzero gradients traverse early, middle and final sampling
+steps. All 206 adapter tensors change; frozen parameters have no gradients.
+Export reproduces both schedules and authenticates all 64 training PNGs and
+128 final PNGs against retained neural tensors. This is artifact verification,
+not a second independent neural replay.
+
+Control and treatment training invocations take 1,146.423 and 1,145.598\,s,
+at 12.032 and 12.033\,GiB allocated peaks. Separate 64-case inference takes
+513.746 and 514.150\,s, at 8.031\,GiB each. Earlier learning, acquisition and
+CPU OCR are excluded. The inherited 3.900B transformer, 84.046M VAE, 24.359M
+trained parameters and 560.529M training-only reader remain unchanged. Neither
+foundation training nor efficiency at matched language quality is established.
+
+{\footnotesize\raggedright
+Complete protocols, raw outputs and source bindings are in
+\path{references/ink_mass_writing_protocol.md},
+\path{references/ink_mass_comparison_result.md} and
+\path{references/writing_physical_loss_audit.md}.
+Reproduction uses \path{scripts/train_ink_mass_writer.py},
+\path{ilm/image_edit/ink_mass.py},
+\path{scripts/run_ink_mass_comparison.py} and
+\path{scripts/export_ink_mass_comparison.py}.\par}
+
+\clearpage
+\plate{Figure_S27_ink_mass}{\textbf{A matched physical-loss replacement improves
+some copies but remains below reliable writing.} \textbf{a}, Median physical
+cost of a reference-derived duplicate line relative to deleting the answer,
+over all 64 reference pages. These CPU diagnostic corruptions are not model
+outputs; full-precision values are retained. \textbf{b}, Complete independent
+OCR observations after matched 32-update control and treatment arms. Bars show
+percentages; labels retain counts and denominators. Seen English is reported
+separately in Note 50 and decreases by one. All three exploratory conditions
+pass, while the writing floor fails. \textbf{c}, Fixed first two held-out cases,
+with complete, unrepaired target/control/treatment pages. All 128 final model
+outputs and their failures are retained. No semantic QA is optimized in these
+arms.}{fig:s27-ink-mass}

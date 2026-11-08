@@ -73,3 +73,18 @@ verification; distinguish local copying from cloud propagation. Commit and
 push the completed revision unit. No new Introduction, old experiment, benchmark
 claim, historical-script result or unexecuted DeepGen hypothesis enters this
 revision.
+
+## Completed verification
+
+Article/review/SI compile to 16/29/68 pages; redlines to 29/68 pages.
+Note 50 is on SI pages 60–61, Figure S27 on page 62, Note 51 on page 63,
+and Figure S28 on page 64. The corrected Note 49 is on page 58. Current
+abstract is on article page 1 and the new Results paragraphs on page 13.
+All 41 prior native slide parts/appearances, all 130 prior figure assets,
+style and SI pages 1–57 and 59 are verified unchanged. Native slide count
+is 43, chart count 51. Original model PNG pixels remain intact in final PDFs.
+Rendered labels were separated after actual visual inspection found overlap.
+All outputs pass PDF structure and LaTeX overfull/undefined checks. Bound
+visual-review and delivery receipts record the final bytes and scope.
+The scientific qualification remains unchanged: writing is unreliable and
+no semantic-learning success is established.

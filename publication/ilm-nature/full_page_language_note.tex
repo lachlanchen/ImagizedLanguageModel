@@ -1,0 +1,99 @@
+\clearpage
+\section*{Supplementary Note 51. Full-page execution and a failed unoptimized QA baseline}
+
+We next check the native interface on complete natural-question pages rather
+than extrapolating from copying strips. The existing CMRC-derived preparation
+has 256 training and 32 article-disjoint held-out questions, paired by passage
+with distinct accepted answers. All 288 normal question pages reproduce their
+source pixels and geometry exactly. Question-erased controls preserve every
+passage pixel and fixed labels; their answer-label height is normalized within
+the pair so both erased inputs and seeds are identical. This also changes
+layout relative to a shorter original question. Passage-erased controls
+preserve the complete original question pixels and position. These interventions
+do not establish that the generator reads the remaining content.
+
+The fixed preflight selects the first future-training pair and first held-out
+pair in manifest order. Each complete input is $1024\times1024$ at the existing
+32-pixel font; no answer-aware crop or text transcript enters generation.
+Its earlier balanced checkpoint is specified before observing any QA output,
+regardless of the subsequent ink-mass comparison. Native inference reloads
+that fixed checkpoint, which has no QA optimizer exposure. Partition labels
+identify the prepared future data splits, not prior QA exposure of this model.
+
+The four full input pages encode to $1\times128\times64\times64$ native feature
+fields. Posterior mode, patchification and normalization remain unchanged.
+Complete reconstructions have thresholded foreground F1 of 97.834--98.180\%
+and mean RGB absolute error of 1.039--1.071\%. All four decoded pages are
+visually inspected and remain readable. This checks physical representation
+on four pages, not perfect preservation of every character, learned reading
+by the generator or general script invariance. Codec execution takes
+5.401\,s at 3.574\,GiB peak allocation (Fig.~\ref{fig:s28-full-page}).
+
+The real gradient probe uses only the first future-training question pair.
+It restores the fixed adapters, starts fresh AdamW at rate $10^{-5}$ and decay
+.01, clips at one and executes two actual updates under Note 48's unchanged
+objective. Model seed is 20268801; independent trajectory seeds are 20268802
+and 20268803. The first differentiable forward is pixel-exact with native
+inference before its target is loaded. Prediction-gradient norms at sampling
+steps 0, 24 and 49 are .78508, 1.44972 and .12166. Pre-clipping adapter norms
+are 2,026.184 and 123.281. All are finite; all 206 adapter tensors change and
+optimizer states reach step two. Frozen parameters have no gradients. This
+takes 228.879\,s at 12.203\,GiB, and the resulting weights are explicitly
+discarded. It verifies actual execution, not semantic improvement.
+
+Separate input-only processes then reload the prospectively fixed earlier
+checkpoint, never the discarded weights. They use 50 native steps, guidance
+one, one generic condition and $512\times256$ output, without a training
+manifest, reference answer, per-question text embedding or recognition reader.
+Four normal calls and four held-out control calls are completed. The two
+question-erased inputs share pixels and seeds; their actual output tensors
+and PNGs are bit-exact. Normal inference takes 94.888\,s, question-erased
+inference 48.952\,s and passage-erased inference 48.753\,s, each at
+9.536\,GiB allocated peak. Acquisition, earlier training and CPU OCR are excluded.
+
+None of the four normal answers is correct by independent OCR or raw inspection;
+all four controls also fail. Outputs copy and corrupt portions of the input
+instead of producing the requested answer. The first pair requests the manga
+series installment and story description; the second requests a fish's
+distribution and type locality. All eight outputs are retained. This is a
+small unoptimized baseline, not a complete QA benchmark or a before/after
+language-learning comparison. Reference OCR on the broader first-32-training
+and 32-held-out canonical answers is only 23/32 and 26/32. Recognizer failures
+must not be confused with model errors; raw pages remain necessary.
+
+The completion worker waits for the exact comparison owner to exit before
+exporting that complete result and launching these probes sequentially.
+All eight generated PNGs and four codec PNGs are authenticated against actual
+neural tensors. Raw review follows the immutable producer assessment. No
+output is repaired, rerolled or selected from intermediate checkpoints. All
+owned processes exit and GPU0 is released. The deployed generator still
+retains its externally pretrained 3.900B transformer and 84.046M VAE.
+Meaningful QA training, complete held-out paired-question assessment, reliable
+writing, historical forms and efficiency at matched language quality remain
+unachieved by this writer.
+
+{\footnotesize\raggedright
+Protocol and complete assessment are
+\path{references/paired_language_native_preflight_protocol.md} and
+\path{references/native_paired_language_preflight_result.md}.
+Reproduction uses \path{scripts/prepare_paired_language_controls.py},
+\path{scripts/probe_native_paired_language.py},
+\path{scripts/finish_ink_mass_and_probe_language.py}, the native input-only
+inference entry point and separate CPU scoring. The full-page inference
+checkpoint SHA256 is
+\path{fc031796540a4b6ca4c86774a5033e94ae32b415e825b6a221128756748d3575}.\par}
+
+\clearpage
+\plate{Figure_S28_full_page_preflight}{\textbf{Full-page representation and
+gradient feasibility do not establish question answering.} \textbf{a}, The
+first complete natural-question input and its native frozen-VAE reconstruction.
+The displayed question inset is cropped from the original at
+$(0,552,1024,648)$ for readability; the model receives the complete page.
+Four full pages have 97.834--98.180\% foreground F1 after reconstruction.
+Two real discarded QA updates fit at 12.203\,GiB. \textbf{b}, The first two
+fixed questions' canonical reference answers and complete unrepaired native
+outputs. Only reference whitespace is cropped, at $(0,24,512,80)$; no model
+output is cropped. Fresh inference restores the earlier checkpoint rather
+than the discarded updates. The four normal and four control calls all fail.
+Every raw input, reference, reconstruction and native output is retained.
+This small execution preflight does not demonstrate language learning.}{fig:s28-full-page}
