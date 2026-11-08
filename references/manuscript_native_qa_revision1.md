@@ -13,6 +13,14 @@ start Office/LaTeX, modify active manuscript/figure files or update Nutstore
 aliases. This staging is not a rendered publication or a visual approval.
 The final locked build and PDF review below remain required.
 
+A successor `publication/ilm-nature/render_native_qa_publication.py` may be
+implemented and its admission check exercised during training. Its render
+stage must reject live project model or assessment processes, then acquire
+the shared lock before invoking Office. It may render only the isolated
+staging folder, verify all 43 prior slide appearances and original evidence
+pixels, and leave active paper/figure files unchanged. Rendering is distinct
+from visual review and publication promotion.
+
 ## Baseline and current evidence
 
 Freeze publication commit `daef4bf`: 43 native slides, 51 native charts,
@@ -178,3 +186,23 @@ CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_native_qa_publicat
 
 Use the existing publication Python environment and a fresh output directory.
 The model Python is separate and need not be changed for publication tools.
+
+The isolated renderer is implemented. Its actual `render` entry point has
+been called while the trainer and queued assessment are live: it rejects both
+observed process identities before creating a render directory or starting
+Office. The [admission check](evidence/native_qa_publication_render_admission.json)
+records that observation. The separate `verify` command also authenticates
+the staged deck and every source/cropped evidence image. Office conversion,
+prior-slide appearance comparison and the PDF image checks are implemented
+but remain unexecuted until project model work has exited. No PDF completion
+or visual-approval claim follows from the admission test.
+
+```bash
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/render_native_qa_publication.py \
+  --stage check-admission
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/render_native_qa_publication.py \
+  --stage verify --input artifacts/native_qa_publication_stage_v1
+# Only after the project model and assessment jobs have ended:
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/render_native_qa_publication.py \
+  --stage render --input artifacts/native_qa_publication_stage_v1
+```
