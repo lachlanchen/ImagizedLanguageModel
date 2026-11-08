@@ -15,6 +15,14 @@ fits real two-update gradients but its fixed earlier checkpoint answers 0/4
 normal questions correctly. No complete language-learning experiment has yet
 been demonstrated by this writer; the broader goal remains unachieved.
 
+The next concrete experiment is [complete native paired QA learning](native_paired_qa_learning_protocol.md).
+It uses the audited full-page input geometry and measured physical loss, then
+optimizes answers to actual Chinese questions for 128 updates. Both initial
+and final weights face all fixed paired-question and erased-input cohorts.
+This tests the remaining semantic gap directly; passing a gradient probe or
+reducing copying loss cannot substitute for its results. No book-scale run
+or alternative foundation model is launched alongside it.
+
 ## What the actual outputs establish
 
 The [complete 32-update continuation](autonomous_writer_result.md) changes

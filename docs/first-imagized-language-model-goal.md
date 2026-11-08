@@ -12,6 +12,16 @@ passes, but reliable writing and semantic language remain unproved. A separate
 fits two real, discarded QA updates within 12.203 GiB; the fixed unoptimized
 QA baseline still gets 0/4 normal answers. Preserve the complete language goal.
 
+The [registered full-page QA learning experiment](../references/native_paired_qa_learning_protocol.md)
+now tests actual question-dependent learning: 128 complete native-trajectory
+updates on 32 natural questions in sixteen passage pairs, starting from the
+fixed ink-mass checkpoint. Only the image conveys each question. Complete
+initial/final assessment covers unseen paired questions and erased-input
+controls, with independent CPU scoring and copying-retention checks. No result
+is available yet. The final checkpoint is fixed by budget, not validation score.
+This is a developmental test of the current writer, not a replacement for the
+full language goal or a claim that the route is already working.
+
 Earlier evidence: The [completed balanced image-writer continuation](../references/balanced_autonomous_writer_result.md)
 gets 17/32 held-out OCR-exact copies, including 4/16 Chinese, but seen copying
 falls from 15/32 to 13/32. It fails the Chinese and seen-retention requirements;
