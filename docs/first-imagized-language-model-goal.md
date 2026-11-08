@@ -15,6 +15,17 @@ training adapters on one GPU does not establish efficient language acquisition.
 The [current direction assessment](../references/ilm_direction_assessment_20261108.md)
 requires actual new writing and held-out question-dependent language learning.
 
+The [physical-loss audit](../references/writing_physical_loss_audit.md) finds
+that a complete duplicate line costs a median 1.790% of deleting the answer
+under the current physical term. The [registered matched comparison](../references/ink_mass_writing_protocol.md)
+tests one correction with identical starting weights, optimizer state, examples
+and noise. A better numerical loss is not a demonstrated writing repair.
+The [full-page language preflight](../references/paired_language_native_preflight_protocol.md)
+then checks actual 1024-square image access and gradients on natural questions,
+with separately prepared paired-question controls. Its two discarded updates
+and eight inference calls cannot substitute for a complete language-learning
+experiment or the broader independent ILM goal.
+
 The current direction has not produced a useful ILM. The completed
 [V82 matched comparison](../references/decoder_metric_v82_result.md) produces
 0/32 pixel-exact autonomous answers in both arms on seen training questions.

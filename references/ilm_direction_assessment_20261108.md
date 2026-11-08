@@ -82,3 +82,19 @@ repair, and keep the independent paired-question language test separate from
 copying. The [existing data audit](paired_language_data_readiness.md) verifies
 256 training and 32 held-out Chinese questions with article-disjoint passages;
 it does not establish that this writer can read those pages or answer them.
+
+The subsequent [complete physical-loss audit](writing_physical_loss_audit.md)
+identifies weak relative weighting of extra ink: a reference-derived duplicate
+line costs a median 1.790% of deleting the answer. A fixed-target-mass
+Bernoulli KL raises that diagnostic ratio to 85.857%, while retaining the
+exact-reference optimum. These are CPU calculations on explicit corruptions,
+not new model outputs. The [registered matched experiment](ink_mass_writing_protocol.md)
+tests whether replacing that term improves real writing; low loss alone will
+not qualify the repair.
+
+The [next native language preflight](paired_language_native_preflight_protocol.md)
+preserves full passages and uses normal, erased-question and erased-passage
+images. Its fixed checkpoint and first cases are selected before observing
+any QA output. It checks execution, representation and gradient feasibility;
+meaningful language learning still requires complete unseen paired-question
+answers and appropriate controls after substantial real training.
