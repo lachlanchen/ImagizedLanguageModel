@@ -1,0 +1,62 @@
+{
+  "check": "actual_released_projection_CPU_resume",
+  "implementation_sha256": "b3fe5873df49076795eacd55ce706375f0ec7fa00f1b387d25e2ca3852f5af42",
+  "metadata": {
+    "check": "actual_released_projection_CPU_resume",
+    "source_sha256": "54078ee51ab477275e94b610249ea912d6f80d24256c4197fe48945eef706883",
+    "config": {
+      "epochs": 4,
+      "updates": 1536,
+      "batch_size": 1,
+      "rank": 16,
+      "learning_rate": 5e-05,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "weight_decay": 0.05,
+      "clip_norm": 1.0,
+      "save_every": 32,
+      "preview_every": 128,
+      "initialization_seed": 20269401,
+      "order_seed": 20269402,
+      "time_seed": 20269403,
+      "noise_seed": 20269404,
+      "codec_seed": 20269405,
+      "maximum_allocated_vram_gib": 23.0,
+      "training_branch": "positive_fixed_task",
+      "objective": "native_unweighted_velocity_MSE",
+      "input_canvas": [
+        1024,
+        1024
+      ],
+      "output_canvas": [
+        1024,
+        1024
+      ],
+      "inference_steps": 50,
+      "guidance": 4.0
+    },
+    "helper_sha256": "1ba00020ec573c63690e05500b9d7c51c5abcd5bc971d4a7bf6b84458c0bf5a2"
+  },
+  "source_projection": "context_embedder",
+  "source_dtype": "torch.bfloat16",
+  "projection_updates_executed": 3,
+  "second_update_loss": 7.692526340484619,
+  "replayed_update_loss": 7.692526340484619,
+  "adapter_tensors_exact": true,
+  "AdamW_tensors_exact": true,
+  "CPU_time_and_noise_RNG_exact": true,
+  "frozen_source_tensors_unchanged": true,
+  "previous_checkpoint_byte_exact": true,
+  "invalid_schedule_rejected": true,
+  "current_checkpoint_sha256": "bed5cef5c94d40271703c477ffc35279b956ef727bb6fd797c9d91868e8c621f",
+  "previous_checkpoint_sha256": "9fe015a4599b9ae2f2a6a26008d13ddda6cf37e1ae9d7313b69664d44abf00e1",
+  "checkpoint_has_actual_optimizer_state": true,
+  "full_training_schedule_updates": 1536,
+  "cuda_initialized": false,
+  "CUDA_RNG_replay_tested": false,
+  "full_model_forward_exercised": false,
+  "language_learning_established": false,
+  "general_ilm_goal_complete": false
+}
