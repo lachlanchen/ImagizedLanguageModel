@@ -15,7 +15,8 @@ INITIAL_CHECKPOINT = "23332544624497e12b1c9b18f21b65a0543bea025a44eb18fa933caa5a
 def implementation():
     return {name: sha(ROOT / name) for name in ("ilm/image_edit/autonomous.py",
         "ilm/image_edit/recognition.py", "ilm/image_edit/paired.py",
-        "scripts/train_autonomous_writer.py", "references/autonomous_writing_protocol.md")}
+        "scripts/train_autonomous_writer.py", "references/autonomous_writing_protocol.md",
+        "references/autonomous_sampler_correction.md")}
 
 
 def main():
@@ -29,7 +30,7 @@ def main():
     import numpy as np
     from PIL import Image
     import torch
-    from ilm.image_edit.autonomous import final_image_loss, native_implementation, sample_page
+    from ilm.image_edit.autonomous import encode_reference, final_image_loss, native_implementation, sample_page
     from ilm.image_edit.paired import (adapter_state, add_adapters, load_pair,
         load_pipeline, read_manifest, restore_adapters, save_answer, save_checkpoint, verify_source)
     from ilm.image_edit.recognition import RecognitionTeacher, verify_teacher
@@ -92,6 +93,9 @@ def main():
             if args.stage == "preflight":
                 for row in training[:2]:
                     pair = load_pair(args.cache, by_id[row["id"]], device)
+                    native_reference = encode_reference(pipe, row["input_path"])
+                    feature_difference = float((native_reference - pair["input"]).abs().max())
+                    del pair
                     retained = baseline[row["id"]]
                     if retained["input_sha256"] != row["input_sha256"]:
                         raise ValueError("retained native baseline input differs")
@@ -112,10 +116,10 @@ def main():
                             width=512, height=256, num_inference_steps=50, guidance_scale=1.,
                             callback_on_step_end=observe, callback_on_step_end_tensor_inputs=["latents"],
                             output_type="pt").images
-                        actual = sample_page(pipe, pair["input"], fixed["positive"],
+                        actual = sample_page(pipe, native_reference, fixed["positive"],
                             seed=inputs[row["id"]]["seed"], capture=True)
                     retained_pixels = torch.load(prior_tensor, map_location="cpu", weights_only=True)
-                    checks = dict(id=row["id"], steps=50,
+                    checks = dict(id=row["id"], steps=50, historical_input_feature_max_difference=feature_difference,
                         all_step_tensors_exact=len(reference_trace) == len(actual["traces"]) == 50
                             and all(torch.equal(a, b) for a, b in zip(reference_trace, actual["traces"])),
                         final_pixels_exact=torch.equal(native, actual["rgb"]),
@@ -127,7 +131,7 @@ def main():
                     if not all(checks[k] for k in ("all_step_tensors_exact", "final_pixels_exact", "retained_native_pixels_exact")):
                         raise AssertionError("differentiable sampler does not reproduce actual native generation")
                     equivalence.append(checks)
-                    del pair, native, actual, retained_pixels, reference_trace
+                    del native_reference, native, actual, retained_pixels, reference_trace
             reader = RecognitionTeacher(args.teacher, device)
             reader.model.train()
             pipe.transformer.train(); pipe.transformer.enable_gradient_checkpointing()
@@ -153,15 +157,13 @@ def main():
                 index = step if args.stage == "preflight" else int(torch.randint(32, (1,), generator=sampler))
                 row = training[index]
                 seed = inputs[row["id"]]["seed"] if args.stage == "preflight" else int(torch.randint(2**31 - 1, (1,), generator=noise_sampler))
-                pair = load_pair(args.cache, by_id[row["id"]], device)
-                # The sampler receives only the input features. Do not pass pair
-                # or the target image through a closure into its trajectory.
-                input_features = pair["input"].detach().requires_grad_(args.stage == "preflight")
-                del pair
-                target = torch.from_numpy(np.array(Image.open(row["target_path"]).convert("RGB")).copy()).permute(2, 0, 1)[None].to(device).float() / 255
+                # Encode the input exactly as native inference does. No answer
+                # image or target code is loaded into the sampler's trajectory.
+                input_features = encode_reference(pipe, row["input_path"]).requires_grad_(args.stage == "preflight")
                 optimizer.zero_grad(set_to_none=True)
                 result = sample_page(pipe, input_features, fixed["positive"], seed=seed,
                     differentiable=True, capture=args.stage == "preflight")
+                target = torch.from_numpy(np.array(Image.open(row["target_path"]).convert("RGB")).copy()).permute(2, 0, 1)[None].to(device).float() / 255
                 loss, values = final_image_loss(result, target, row["reference_text"], reader)
                 if not bool(torch.isfinite(loss)):
                     raise FloatingPointError("nonfinite autonomous final-image loss")
@@ -204,10 +206,10 @@ def main():
             if args.stage == "preflight":
                 with torch.no_grad():
                     for row in training[:2]:
-                        pair = load_pair(args.cache, by_id[row["id"]], device)
-                        observed = sample_page(pipe, pair["input"], fixed["positive"], seed=inputs[row["id"]]["seed"])
+                        features = encode_reference(pipe, row["input_path"])
+                        observed = sample_page(pipe, features, fixed["positive"], seed=inputs[row["id"]]["seed"])
                         save_answer(pipe, observed["rgb"].cpu(), args.output / ("after_" + row["language"]))
-                        del observed, pair
+                        del observed, features
             report = dict(stage=args.stage, updates=updates, metadata=metadata,
                 checkpoint_sha256=sha(args.output / "checkpoint.pt"), equivalence=equivalence,
                 changed_adapter_tensors=changed, trainable_parameters=sum(p.numel() for p in parameters),

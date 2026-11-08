@@ -10,13 +10,27 @@ import numpy as np
 import torch
 from torch.utils.checkpoint import checkpoint
 
-from .baseline import sha
+from .baseline import open_page, sha
 
 
 def native_implementation(pipe):
     return {name: dict(file=Path(inspect.getfile(type(obj))).name,
         sha256=sha(inspect.getfile(type(obj)))) for name, obj in
         (("pipeline", pipe), ("scheduler", pipe.scheduler), ("image_processor", pipe.image_processor))}
+
+
+@torch.no_grad()
+def encode_reference(pipe, path):
+    """Match the native image branch inside its BF16 autocast context.
+
+    The historical paired cache was encoded outside autocast. It remains
+    historical evidence, but is not a bit-exact native sampling reference.
+    """
+    page = open_page(path)
+    pixels = pipe.image_processor.preprocess(page, height=page.height,
+        width=page.width, resize_mode="crop").to(device=pipe.device, dtype=pipe.vae.dtype)
+    with torch.autocast("cuda", dtype=torch.bfloat16):
+        return pipe._encode_vae_image(pixels, generator=None).detach()
 
 
 def sample_page(pipe, input_features, positive, *, seed, differentiable=False,
