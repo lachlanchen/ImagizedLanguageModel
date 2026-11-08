@@ -58,6 +58,8 @@ def main():
             if row["size"]!=expected[name]["file_bytes"] or row["lfs"]["sha256"]!=expected[name]["expected_full_file_sha256"]:
                 raise ValueError("published weight metadata differs from audited source")
         save_json(output/"hub_metadata.json",metadata)
+        # Hub environment constants are evaluated at import time.
+        os.environ.update(HF_HUB_DISABLE_TELEMETRY="1",HF_HUB_DISABLE_XET="1",HF_XET_HIGH_PERFORMANCE="0")
         from huggingface_hub import constants,hf_hub_download
         shared=Path(constants.HF_HUB_CACHE)/("models--"+REPO.replace("/","--"))/"snapshots"/REVISION
         snapshot=CACHE/("models--"+REPO.replace("/","--"))/"snapshots"/REVISION
@@ -71,7 +73,6 @@ def main():
         missing=sum(r["size"] for r in rows if not check_file(snapshot/r["rfilename"],r))
         if shutil.disk_usage(CACHE).free<100*1024**3+missing:
             raise RuntimeError("acquisition must leave 100 GiB free on the project volume")
-        os.environ.update(HF_HUB_DISABLE_TELEMETRY="1",HF_HUB_DISABLE_XET="1",HF_XET_HIGH_PERFORMANCE="0")
         for row in rows:
             name=row["rfilename"];target=snapshot/name;existed=check_file(target,row)
             status("verifying_cache" if existed else "downloading",current_file=name,missing_payload_bytes_at_start=missing)
@@ -81,7 +82,7 @@ def main():
                 raise ValueError("complete acquired source checksum differs: "+name)
             if name=="deepgen_pipeline.py" and sha(target)!=CODE_SHA:
                 raise ValueError("audited executable source differs")
-            verified.append(dict(file=name,bytes=row["size"],sha256=sha(target),
+            verified.append(dict(file=name,bytes=row["size"],sha256=row["lfs"]["sha256"] if row.get("lfs") else sha(target),
                 reused_before_download=existed,shared_cache_link=name in reused))
             save_json(output/"verified_files.json",verified)
             print(f"Verified {len(verified)}/{len(rows)}: {name}",flush=True)
