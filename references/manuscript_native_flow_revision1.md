@@ -88,3 +88,46 @@ unverified. The existing QA renderer intentionally requires 45 slides and
 must not be used to certify the 46-slide successor. Implement a successor
 locked renderer, preserve all 45 prior appearances and inspect the new slide
 before promotion. Active TeX/PDF/deck files and Nutstore aliases remain unchanged.
+
+## Add the completed copying cohort to the isolated stage
+
+The final copying export is now complete, tensor-authenticated and inspected
+for all 64 pages. Extend this same revision unit to bind
+`references/evidence/native_visual_flow_final_copy/report.json`. Its seen and
+held-out OCR-exact counts are 2/32 and 3/32; owning clean-reference counts are
+27/32 and 29/32. Chinese counts are 2/16 in each split; English counts are
+0/16 seen and 1/16 held out. These synthetic strings test writing fidelity,
+not sentence understanding, and their vocabulary/font/template are shared.
+
+Update only the existing staging builder, S31's native count table and notes,
+and the staged Results/Note53 fragments. Preserve all45 predecessor slides,
+all52 charts, both original S31 input/output PNGs and the method diagram.
+Keep the existing three QA counts visible; append seen/held copying counts
+and owning OCR calibration, using the available right-column space. Add a
+compact Note53 table for both copying languages and reference calibration.
+Write to fresh ignored `artifacts/native_flow_publication_stage_v2/` and
+retain the immediately previous v1 stage. Store a separate preparation
+receipt under `references/evidence/`; do not overwrite the v1 receipt.
+
+Recompute every table entry from all original copying rows and reject changed
+checkpoint or source-file bindings. Check old package bytes, new XML/relations,
+all object bounds, the five editable counts and both source-image hashes.
+Actual rendering, changed-page PDF review, redlines, active-file promotion
+and Nutstore synchronization remain pending under the existing runtime lock.
+No new model experiment or causal interpretation is authorized by this update.
+
+The copying update has executed in v2 with CUDA hidden. The new
+[preparation receipt](evidence/native_flow_copy_publication_preparation.json)
+binds the completed copying export and revised builder. Independent package
+inspection confirms 46 slides, 52 native charts, five editable result counts,
+unchanged original evidence PNGs and all45 predecessor slide parts preserved.
+The copying language/reference table is present in staged Note53. Object bounds
+and slide/notes relationships pass structural checks; they do not substitute
+for rendered text-fit or visual review. No active TeX, PDF, deck or Nutstore
+file has been promoted. The v1 draft/receipt remains as the immediate predecessor.
+
+```bash
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_native_flow_publication.py \
+  --source artifacts/native_qa_publication_stage_v1 \
+  --output artifacts/native_flow_publication_stage_v2
+```

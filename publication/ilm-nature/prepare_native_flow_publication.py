@@ -15,6 +15,7 @@ from render_native_qa_publication import verify_stage
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 COHORT = ROOT/'references/evidence/native_visual_flow_final_normal'
+COPY = ROOT/'references/evidence/native_visual_flow_final_copy'
 TRAINING = ROOT/'references/evidence/native_visual_flow_training'
 
 
@@ -22,11 +23,34 @@ def stage(source, output):
     before = active_manifest()
     verify_stage(source)
     cohort = json.loads((COHORT/'report.json').read_text())
+    copying = json.loads((COPY/'report.json').read_text())
     trained = json.loads((TRAINING/'training_report.json').read_text())
     audit = json.loads((TRAINING/'training_audit.json').read_text())
     for name, digest in cohort['files_sha256'].items():
         if sha(COHORT/name) != digest:
             raise ValueError('complete cohort evidence changed: '+name)
+    for name, digest in copying['files_sha256'].items():
+        if sha(COPY/name) != digest:
+            raise ValueError('complete copying evidence changed: '+name)
+    if (copying['cases'] != 64 or not copying['complete_copy_cohort_raw_review']
+            or copying['semantic_learning_validated'] or copying['full384_assessment_completed']
+            or copying['final_checkpoint_sha256'] != cohort['final_checkpoint_sha256']
+            or copying['deployment_sha256'] != cohort['deployment_sha256']):
+        raise ValueError('owning complete final copying cohort required')
+    for split, exact, reference, english in [('train', 2, 27, 0), ('validation', 3, 29, 1)]:
+        rows = [r for r in copying['rows'] if r['split'] == split]
+        if (len(rows) != 32 or sum(r['canonical_exact'] for r in rows) != exact
+                or sum(r['reference_OCR_exact'] for r in rows) != reference
+                or copying['summary'][split]['canonical_exact'] != exact
+                or copying['summary'][split]['reference_OCR_exact'] != reference):
+            raise ValueError('complete copying counts differ')
+        for language, count, clean_count in [('zh', 2, 14), ('en', english, reference-14)]:
+            selected = [r for r in rows if r['language'] == language]
+            if (len(selected) != 16 or sum(r['canonical_exact'] for r in selected) != count
+                    or sum(r['reference_OCR_exact'] for r in selected) != clean_count
+                    or copying['summary'][split]['languages'][language] != dict(cases=16,
+                        canonical_exact=count, reference_OCR_exact=clean_count)):
+                raise ValueError('complete copying language counts differ')
     if (cohort['cases'] != 64 or not cohort['complete_normal_cohort_raw_review']
             or cohort['full384_assessment_completed'] or cohort['semantic_learning_validated']
             or audit['completed_report_sha256'] != sha(TRAINING/'training_report.json')
@@ -103,12 +127,15 @@ def stage(source, output):
     slide.shape('Loss = MSE(vθ(zσ, t, x), v*)', 45, 662, 880, 40, 23)
     slide.shape('One logical denoiser call per update; positive task branch.\nLoss updates connector / writer adapters; reader and VAE stay frozen.',
                 45, 720, 895, 75, 18)
-    slide.shape('c  Complete final normal cohort', 975, 510, 580, 36, 22, True)
-    for i, (label, count) in enumerate([('Seen questions', '0/32'), ('Held-out questions', '0/32'), ('Both held-out answers correct', '0/16')]):
-        slide.shape(label, 975, 560+48*i, 420, 38, 18)
-        slide.shape(count, 1400, 560+48*i, 150, 38, 21, True)
+    slide.shape('c  Final question and copying cohorts', 975, 510, 580, 36, 22, True)
+    for i, (label, count) in enumerate([('Seen questions', '0/32'), ('Held-out questions', '0/32'),
+            ('Both held-out answers correct', '0/16'), ('Seen copying strings', '2/32'),
+            ('Held-out copying strings', '3/32')]):
+        slide.shape(label, 975, 556+32*i, 420, 30, 18)
+        slide.shape(count, 1400, 556+32*i, 150, 30, 21, True)
     slide.shape(f'{trained["elapsed_seconds_this_attempt"]/3600:.2f} h training; {trained["peak_allocated_vram_gib_this_attempt"]:.3f} GiB peak\n'
-                '37.381M trained adapters; 6.240B retained runtime\nReference OCR: 23/32 seen; 26/32 held out', 975, 720, 580, 90, 17)
+                '37.381M trained adapters; 6.240B retained runtime\nQA reference OCR: 23/32 seen; 26/32 held out\n'
+                'Copy reference OCR: 27/32 seen; 29/32 held out', 975, 728, 580, 100, 17)
     slide.shape('1,536 updates on 384 pairs. Inherited language/image pretraining; source/control comparison pending. Zero counts use source-accepted OCR; no reliable language learning established.',
                 45, 844, 1510, 48, 15)
     layout = next(n.get('Target') for n in template_rels if n.get('Type').endswith('/slideLayout'))
@@ -119,14 +146,17 @@ def stage(source, output):
     slide.relation('notesSlide', '../notesSlides/'+Path(note).name)
     old_note = next(resolve(template, n.get('Target')) for n in template_rels if n.get('Type').endswith('/notesSlide'))
     notes = ET.fromstring(parts[old_note])
-    caption = ('Figure S31. Actual retained DeepGen image-answer path and completed failed final normal cohort. '
+    caption = ('Figure S31. Actual retained DeepGen image-answer path and completed final question/copying cohorts. '
         'The input image supplies semantic features and a separate reference-image latent. The same frozen VAE encodes supervised target images and decodes sampled images. '
         'One native positive-branch velocity MSE call is used per update; fifty-step guidance-four inference is separate. Only connector/writer low-rank adapters learn. '
         'First held-out case TRAIN_2295_QUERY_0, selected by original index, is shown as complete unmodified input/output PNGs. '
-        'All64 final normal pages were inspected with source access; no quantitative manual accuracy is assigned. '
+        'All64 final normal pages and all64 final copying pages were inspected with source access; no quantitative manual accuracy is assigned. '
         '0/32 seen,0/32 held,0/16 both-correct held pairs are source-accepted offline OCR counts. Reference OCR23/32 and26/32 remains imperfect. '
+        'Final copying OCR counts are2/32 seen and3/32 held out; clean references give27/32 and29/32. '
+        'Copying uses synthetic strings sharing vocabulary, font and prompt template; it does not test sentence understanding. '
         'Full initial/final erasure/copying comparison and later diagnostics are pending. No foundation-training, historical-script, novelty or language-efficiency claim. '
-        'Sources: references/evidence/native_visual_flow_training/training_report.json and references/evidence/native_visual_flow_final_normal/report.json.')
+        'Sources: references/evidence/native_visual_flow_training/training_report.json, references/evidence/native_visual_flow_final_normal/report.json '
+        'and references/evidence/native_visual_flow_final_copy/report.json.')
     for shape in notes.findall('p:cSld/p:spTree/p:sp', NS):
         placeholder = shape.find('p:nvSpPr/p:nvPr/p:ph', NS)
         if placeholder is not None and placeholder.get('type') == 'body':
@@ -157,11 +187,12 @@ def stage(source, output):
 6.240B-parameter pretrained system (Supplementary Note 53; Fig.~S31).
 The complete final normal-question cohort yields 0/32 source-accepted
 OCR-exact seen answers, 0/32 held-out answers and 0/16 both-correct held-out
-passage pairs. All 64 original outputs are inspected. Training takes
+passage pairs. Copying gives 2/32 seen and 3/32 held-out exact strings;
+both complete 64-page output cohorts are inspected. Training takes
 3.18\,h at 15.697\,GiB peak allocation, including loading, saving and fixed
 monitoring. Reference OCR remains imperfect. Initial/source controls and
 later field/sampling diagnostics are separate pending observations; this
-completed normal cohort does not establish useful language learning.
+completed cohorts do not establish useful language learning.
 ''')
     (output/'supplementary_note_53.tex').write_text(r'''\section*{Supplementary Note 53 | Native image-answer flow adaptation}
 \label{note:native-visual-flow}
@@ -206,12 +237,33 @@ review claim, and no manual answer-accuracy score is assigned. Clean reference
 OCR gives 23/32 seen and 26/32 held out. Development cases have been reused;
 these observations are not a new untouched benchmark.
 
+The completed final copying cohort contains 32 seen strings and 32 held-out
+strings, each split balanced between Chinese and English. Every original
+output page was inspected and authenticated against its actual decoder tensor.
+Counts under the unchanged OCR exact-match rule are:
+\begin{center}
+\begin{tabular}{lrrrr}
+ & Seen & Held out & Reference seen & Reference held out \\
+\hline
+Chinese & 2/16 & 2/16 & 14/16 & 14/16 \\
+English & 0/16 & 1/16 & 13/16 & 15/16 \\
+Combined & 2/32 & 3/32 & 27/32 & 29/32 \\
+\end{tabular}
+\end{center}
+The copying strings share a character/word inventory, rendering font and
+instruction template. Held-out strings do not enter optimizer updates, but
+these reused development examples do not test unseen scripts or sentence
+understanding. Visible errors include omitted forms, merged strokes and extra
+punctuation. No manual accuracy or repaired OCR score is assigned.
+
 The complete source/final erasure/copying assessment and subsequent diagnostics
-are pending and cannot be inferred from this cohort. In particular, it supplies
+are pending and cannot be inferred from these final cohorts. They supply
 no complete initial/final learning-gain estimate or causal attribution.
 The original complete evidence remains under
 \texttt{references/evidence/native\_visual\_flow\_final\_normal/}, with
-all input, answer and reference PNG bytes and the full training audit retained.
+the corresponding copying export under
+\texttt{references/evidence/native\_visual\_flow\_final\_copy/}.
+All input, answer and reference PNG bytes and the full training audit are retained.
 Historical-script semantics and efficiency at matched language quality remain
 unverified. Figure~S31 distinguishes the implemented training path from these
 unachieved goals.
@@ -233,6 +285,7 @@ unachieved goals.
         raise ValueError('active publication files changed during isolated preparation')
     record = dict(builder_sha256=sha(__file__), source_stage_preparation_sha256=sha(source/'preparation.json'),
         source_cohort_sha256=sha(COHORT/'report.json'), source_training_report_sha256=sha(TRAINING/'training_report.json'),
+        source_copy_cohort_sha256=sha(COPY/'report.json'),
         source_training_audit_sha256=sha(TRAINING/'training_audit.json'), preserved_native_slides=45,
         staged_native_slides=46, preserved_native_charts=52, new_native_chart=False,
         new_figure='S31_native_visual_flow', pictures=pictures, native_diagram_and_count_table=True,
