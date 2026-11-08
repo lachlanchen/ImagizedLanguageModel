@@ -55,6 +55,12 @@ def main():
         raise ValueError("recognition-active update count differs")
     if len(trained["initial_replays"]) != 2 or not all(r["native_pixels_bit_exact"] for r in trained["initial_replays"]):
         raise ValueError("two original native starting checks required")
+    pilot_by_id = {r["id"]: r for r in pilot["rows"]}
+    for row in trained["initial_replays"]:
+        prior = pilot_by_id[row["id"]]
+        folder = run / "training" / ("starting_" + prior["language"])
+        if sha(folder / "pixels.pt") != row["pixels_sha256"] or sha(folder / "answer.png") != prior["starting_png_sha256"]:
+            raise ValueError("initial replay artifacts differ from retained starting pixels")
     inference = load(run / "inference/report.json")
     prior_inference = load(args.pilot / "inference_report.json")
     if (inference["checkpoint_sha256"] != trained["checkpoint_sha256"]
@@ -81,6 +87,21 @@ def main():
     if (inference["complete_generations"] != 64 or len(inputs) != 64 or any(
             [r["id"] for r in rows] != expected for rows in (outputs, inputs, scores["rows"], pilot["rows"]))):
         raise ValueError("all original ordered cases required")
+    interrupted = None
+    interruption = run / "identity_interruption.json"
+    if interruption.exists():
+        interrupted = load(interruption)
+        original = run / "inference_interrupted_identity_r1"
+        replayed = []
+        for name, digest in interrupted["partial_outputs_sha256"].items():
+            a, b = original / name, run / "inference" / name
+            if sha(a) != digest or a.read_bytes() != b.read_bytes() or not torch.equal(
+                    torch.load(a.parent / "pixels.pt", map_location="cpu", weights_only=True),
+                    torch.load(b.parent / "pixels.pt", map_location="cpu", weights_only=True)):
+                raise ValueError("same-seed restart changed an overlapping actual output")
+            replayed.append(name)
+        interrupted = dict(reason=interrupted["reason"], source_sha256=sha(interruption),
+            same_seed_overlapping_png_and_pt_pixels_exact=True, overlapping_outputs=len(replayed))
     source = {r["id"]: r for r in lines(args.manifest)}
     out.mkdir(parents=True, exist_ok=False)
     rows = []
@@ -151,6 +172,9 @@ def main():
             ("inference_report.json", run / "inference/report.json"), ("output_ocr_report.json", run / "output_ocr/report.json"),
             ("reference_ocr_report.json", calibration)):
         shutil.copyfile(file, out / name); reports[name] = sha(file)
+    if interrupted is not None:
+        shutil.copyfile(interruption, out / "identity_interruption.json")
+        reports["identity_interruption.json"] = sha(interruption)
     save_json(out / "result.json", dict(rows=rows, summary=summary, comparison=comparison,
         language_summary=language_summary, complete_outputs=64, reports=reports, galleries=galleries,
         initial_checkpoint_sha256=meta["initial_sha256"], control_checkpoint_sha256=trained["checkpoint_sha256"],
@@ -158,6 +182,8 @@ def main():
         same_complete_exposure_and_seed_keys=True, all_control_pngs_equal_actual_neural_tensors=True,
         independent_neural_replay=False, matched_compute=False, matched_realized_noise=False,
         retrospective_pilot_with_new_control=True, objective_bundle_exploratory_support=support,
+        interrupted_invocation_and_exact_overlap=interrupted,
+        exporter_sha256=sha(__file__),
         output_repair=False, writing_qualification=False, general_ilm_goal_complete=False))
     print(json.dumps(dict(summary=summary, language_summary=language_summary,
         objective_bundle_exploratory_support=support, comparison=comparison), indent=2))
