@@ -1,0 +1,2110 @@
+{
+  "cohort": "final_copy",
+  "cases": 64,
+  "summary": {
+    "train": {
+      "cases": 32,
+      "canonical_exact": 2,
+      "reference_OCR_exact": 27,
+      "languages": {
+        "zh": {
+          "cases": 16,
+          "canonical_exact": 2,
+          "reference_OCR_exact": 14
+        },
+        "en": {
+          "cases": 16,
+          "canonical_exact": 0,
+          "reference_OCR_exact": 13
+        }
+      }
+    },
+    "validation": {
+      "cases": 32,
+      "canonical_exact": 3,
+      "reference_OCR_exact": 29,
+      "languages": {
+        "zh": {
+          "cases": 16,
+          "canonical_exact": 2,
+          "reference_OCR_exact": 14
+        },
+        "en": {
+          "cases": 16,
+          "canonical_exact": 1,
+          "reference_OCR_exact": 15
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "copy/train/000",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269450,
+      "input_sha256": "346454670f09252b203496eb82792b094d2a901df366c2b90370349989decbe9",
+      "PNG_sha256": "9bbd0aac1968209fbd5d1a1de146e1bf1a91cd70fb4a118b8355f1a6581f9927",
+      "tensor_sha256": "945eaeca5b7a1d01880b07ba6e10448c525bb081a96804435367c42a9c1b928d",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e8f2750298e519feacda8001e08214464303ef1d9b8d94b2d70dce32f6997f48"
+      },
+      "images": {
+        "input": "images/000_input.png",
+        "answer": "images/000_answer.png",
+        "reference": "images/000_reference.png"
+      },
+      "expected": "花多地地山",
+      "raw_transcript": "花多地地山\n",
+      "normalized": "花多地地山",
+      "canonical_exact": true,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/001",
+      "split": "train",
+      "language": "en",
+      "seed": 20269451,
+      "input_sha256": "bb2d4513392855b28ad319ef07a7ce7fbbd6c61347bed7b100f186cd3a3a4559",
+      "PNG_sha256": "a577fd1fb33051f9daea05d860205f71afab7fa6e75389a820857913575ec53c",
+      "tensor_sha256": "96e9c208e9020b8f0dac1ba91fe94fe0a07419a9627fdb1cb171a6f11dc09291",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "89dbbb803dee949efba0dc703c7ef535ad7a18863c2c7d9580a60ca6320c9c4f"
+      },
+      "images": {
+        "input": "images/001_input.png",
+        "answer": "images/001_answer.png",
+        "reference": "images/001_reference.png"
+      },
+      "expected": "mountain bright blue cloud",
+      "raw_transcript": "nnuntain cloud\"\n",
+      "normalized": "nnuntain cloud\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/002",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269452,
+      "input_sha256": "ae9a41246b50ed5628672ec24998ca095e514da688eab742503dd3746e994ee4",
+      "PNG_sha256": "d25f18fb71c697bb3f193a6521949eea616b2228814f8bc696d1a7b22aebf832",
+      "tensor_sha256": "756a9f216670d92f09dcb62c5e3151b454442560f25ed3ef9267d2b63e958b82",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "35d4b2d16897b46ab2ed4f2b2f29392aee8f988f5c1888932436cdec0354e011"
+      },
+      "images": {
+        "input": "images/002_input.png",
+        "answer": "images/002_answer.png",
+        "reference": "images/002_reference.png"
+      },
+      "expected": "风言外黑目家",
+      "raw_transcript": "RU; SBA RR\n",
+      "normalized": "RU;SBARR",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/003",
+      "split": "train",
+      "language": "en",
+      "seed": 20269453,
+      "input_sha256": "f7a1013665dca67ded7a41da6943eae861dc3124b31eeda90eba5e5d7b51ac7e",
+      "PNG_sha256": "35dea36021009d933d7062892f8cd23fc33c78b588d993fd19102b36dce0f3a2",
+      "tensor_sha256": "4c043ef81e344219a77594af334d4baa91c17a6b1dccf03ead9995c43f887287",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "11df5f49d59130fe4583971d86282a2f1d846b00708229b776a35f9ad24ef4e8"
+      },
+      "images": {
+        "input": "images/003_input.png",
+        "answer": "images/003_answer.png",
+        "reference": "images/003_reference.png"
+      },
+      "expected": "paper small winter garden",
+      "raw_transcript": "paper ville vwre earcder\n",
+      "normalized": "paper ville vwre earcder",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/train/004",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269454,
+      "input_sha256": "4ce84c7f94fdd7348e99fe14ef63d9a3a6d80f2f768d360d31a83ec41bd3a046",
+      "PNG_sha256": "0c372d5836f833ad4e1f135e4a67e8247e7c01c5342d1c3cd44a1783323dab60",
+      "tensor_sha256": "9407cc1d9346fb85d12664ee76fe4d39e8568477d90d1b00c3070a386107b974",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bc8c8b53b60294a80bc87f5d48d18c9b8ea4e066367f276fd2d12bf1716d0a92"
+      },
+      "images": {
+        "input": "images/004_input.png",
+        "answer": "images/004_answer.png",
+        "reference": "images/004_reference.png"
+      },
+      "expected": "雪明江雨左晚外中门画小禾",
+      "raw_transcript": "SAAT LAE BA:\n",
+      "normalized": "SAATLAEBA:",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/train/005",
+      "split": "train",
+      "language": "en",
+      "seed": 20269455,
+      "input_sha256": "f443f31f633258876a398d8a609b45fa2f83a24dc1fb532eb4da34a38ac7f771",
+      "PNG_sha256": "faaad4d61ca0b902dc4586c3314e283559ca67f72b89c8e7cb6d749da1bda140",
+      "tensor_sha256": "a2bce6d015741c119852166a86a5a5e1ecf8515c4d2628cb5a78b78f327e185f",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a02f06459b56880e7cee764db8ca2dd35cc7afd864539ae1c353ec43a282e9b7"
+      },
+      "images": {
+        "input": "images/005_input.png",
+        "answer": "images/005_answer.png",
+        "reference": "images/005_reference.png"
+      },
+      "expected": "window quiet small",
+      "raw_transcript": "wiltouSmall\n",
+      "normalized": "wiltouSmall",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/006",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269456,
+      "input_sha256": "5b6551d9f8e3fd943e31b45b32e3bfaf4f2df6174715197b22f3b23319da3889",
+      "PNG_sha256": "0accd6949d75c195b74dfe2ea1e4ae80c08ae03a969bcc44d0169b397f1371f6",
+      "tensor_sha256": "377ccd108199c8348ce3bbf4e8bb3e2cb0bd6cbd29b197411629d5417ba2aafa",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "020c2c80cd9ab46913a5e174a2e8ac96560b94bfeea611f7b4040ed38f295666"
+      },
+      "images": {
+        "input": "images/006_input.png",
+        "answer": "images/006_answer.png",
+        "reference": "images/006_reference.png"
+      },
+      "expected": "人学耳人短旧下天田下木",
+      "raw_transcript": "AFH/ASIA BRERA\n",
+      "normalized": "AFH/ASIABRERA",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/007",
+      "split": "train",
+      "language": "en",
+      "seed": 20269457,
+      "input_sha256": "5f7bebb025bc09a52a8c88ba156290ed40c71875e17a53ca5f2a9f2f70f23692",
+      "PNG_sha256": "5cb79813fd1a44b652c6ade734064ba9d287bb9b8b54eaeae16bc4333c4a6892",
+      "tensor_sha256": "b3946be8a21eba99ee9406a083f210040c95402d52e366f32e1c45d14dedcd53",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "13cd11156b3246c4bc41953509f6d1c9eb305d51d8cb7e7401da691de27209c1"
+      },
+      "images": {
+        "input": "images/007_input.png",
+        "answer": "images/007_answer.png",
+        "reference": "images/007_reference.png"
+      },
+      "expected": "winter river book paper",
+      "raw_transcript": "winter rlorok pook paper\"\n",
+      "normalized": "winter rlorok pook paper\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/008",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269458,
+      "input_sha256": "fa994fee6b98f68d0ae64f2cec586c6bae45b98a6c5cba21dbd297c1acfa272a",
+      "PNG_sha256": "7a88e6452297e8f8ad606b5c7257c4a2f9bd9edf7e4734466d21c9bce6ed5072",
+      "tensor_sha256": "0c027d1436baca06b1196f6b24f2fe806964a5ff2a6bd1decba9f8f25ed8dfac",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "0a7f780aeef5c82e149b613dbf68ff7be3948be674daf1360c2d6ee8d83a00af"
+      },
+      "images": {
+        "input": "images/008_input.png",
+        "answer": "images/008_answer.png",
+        "reference": "images/008_reference.png"
+      },
+      "expected": "石河秋白草晚大心",
+      "raw_transcript": "BARES BRAD\n",
+      "normalized": "BARESBRAD",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/009",
+      "split": "train",
+      "language": "en",
+      "seed": 20269459,
+      "input_sha256": "b93d85bfe25732c66889034df4e89c2e10618c6c4182396293e432cc0a4a47ea",
+      "PNG_sha256": "96c83060a4efd7324762b657f0f7e956a5ef97e68da4865bfeddf3bdcf62b192",
+      "tensor_sha256": "c9793504195af5ac5efcd44decfedbca40cd51283de9fa9faa1c9eb17b88b0bc",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a75bc4bd8be6cd5015f1f04fa5baf3a5e6e103e6cb7c99ee889a64c14bd9a2e1"
+      },
+      "images": {
+        "input": "images/009_input.png",
+        "answer": "images/009_answer.png",
+        "reference": "images/009_reference.png"
+      },
+      "expected": "green open",
+      "raw_transcript": "grqooten\n",
+      "normalized": "grqooten",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/010",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269460,
+      "input_sha256": "892b25310f830b84648bc32a0a06aa96309b7154b1663641d393a2b8712bcb9d",
+      "PNG_sha256": "d9cba3fce30b0a3c4dd56a820859e87b227ae145cf775d438d8147bc319f78d4",
+      "tensor_sha256": "17ad6a8124761ec3b3d5a8597d51b530a5a01ab5f08c133c69f0b45f56a5681f",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "47ce1ca2b1b533cd371f1abd25b05016fd8184e12d0c23ff1b58857f46957cd7"
+      },
+      "images": {
+        "input": "images/010_input.png",
+        "answer": "images/010_answer.png",
+        "reference": "images/010_reference.png"
+      },
+      "expected": "心字秋湖新田",
+      "raw_transcript": "心字移秋湖新由田\n",
+      "normalized": "心字移秋湖新由田",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/011",
+      "split": "train",
+      "language": "en",
+      "seed": 20269461,
+      "input_sha256": "ab153100f322bc4be593fbd6a9e44ad1dd5471bbbf36c7f79f917343584f66cf",
+      "PNG_sha256": "1e1039298f8c1781a1699401e650f0a9d6cf366d0d85959a65aa559023bae49e",
+      "tensor_sha256": "cce94baab37ca1d21bbd12b7d070dabe338a22c6c75494020ab6aaced0f26f9c",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3cc05658513cfe71e3eea4ea8c7e41d14c41577dcaef209a21b08e8ea7170e16"
+      },
+      "images": {
+        "input": "images/011_input.png",
+        "answer": "images/011_answer.png",
+        "reference": "images/011_reference.png"
+      },
+      "expected": "blue garden",
+      "raw_transcript": "bluigarden\n",
+      "normalized": "bluigarden",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/012",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269462,
+      "input_sha256": "637b6f73889b5d6ffc0a39d9d6fc4db825bdea4fe27c58182bddec39c58644b8",
+      "PNG_sha256": "2e281c6a128cb717e4d63cecf6e0f362993aad90e20653cc27e8c483f262e0a9",
+      "tensor_sha256": "0f80feb89e22265bae1657d68b669eda2a3de45d7fa6e9b05b9d74cf8c6b333a",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "60421862f17e4f7079d65fbe3c08a00c5c05725897b2b92c21c954774d596c17"
+      },
+      "images": {
+        "input": "images/012_input.png",
+        "answer": "images/012_answer.png",
+        "reference": "images/012_reference.png"
+      },
+      "expected": "北夏风左星目",
+      "raw_transcript": "北夏奋目\n",
+      "normalized": "北夏奋目",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/013",
+      "split": "train",
+      "language": "en",
+      "seed": 20269463,
+      "input_sha256": "0487a8ee66d72bc4313ad118c56a99d148b8e9c09b5bc195501290331ec515b8",
+      "PNG_sha256": "6d68eaa70c728357709af317927d03535ba4c378d93045f4bda5ec551c3725ff",
+      "tensor_sha256": "ba8eb2caee3a6af9b0bbdfee1ffb3184db761b4982182d856dbd35ac3bc623f8",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "230e6e3a17f7e72fd1c08d50f265b68a8ee0cd1b177c1c2b5d8a06d36e483450"
+      },
+      "images": {
+        "input": "images/013_input.png",
+        "answer": "images/013_answer.png",
+        "reference": "images/013_reference.png"
+      },
+      "expected": "river open",
+      "raw_transcript": "tiver apen\n",
+      "normalized": "tiver apen",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/train/014",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269464,
+      "input_sha256": "74e28527b9a01b18f0de795002d1f1c61c963562bb23576ba51cf088be1cbd0a",
+      "PNG_sha256": "055dc0d83ca13531a37089d07dab8bb799dd6e3355f5a4b31de49f5b65d1e490",
+      "tensor_sha256": "a335ccbb4e6a7953435ebc356b4a525c3c667674987aeb035c6cd7e27e2f633c",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "87b7938d9c13889d455cf9dba96d3ee41649dd5cb9dbaf0754522dd1529007d5"
+      },
+      "images": {
+        "input": "images/014_input.png",
+        "answer": "images/014_answer.png",
+        "reference": "images/014_reference.png"
+      },
+      "expected": "红海鱼树秋书月",
+      "raw_transcript": "红海鱼树秋秋书节月\n",
+      "normalized": "红海鱼树秋秋书节月",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/015",
+      "split": "train",
+      "language": "en",
+      "seed": 20269465,
+      "input_sha256": "b4b273baa6a284129a7dc0a439f3289ab51c7b8127408616d2caa225e26e7307",
+      "PNG_sha256": "b8aa2f0b70fb72d1ed010831b9140b999cc48165c1aadeb26dd6d718e5b9d743",
+      "tensor_sha256": "eb912f4ebf803a5772da82f5e63592b4d56395e404691c5e5c0e1e3de0cbf8de",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7e8c252d8d847c222edd460230be73afda2d5906ccff3e8aa363d5cfc4f74e44"
+      },
+      "images": {
+        "input": "images/015_input.png",
+        "answer": "images/015_answer.png",
+        "reference": "images/015_reference.png"
+      },
+      "expected": "river mountain small",
+      "raw_transcript": "river neumall\n",
+      "normalized": "river neumall",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/016",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269466,
+      "input_sha256": "43b0c0529ad2d033337b2a742019bc55e5e63478f23a818ab4b770932a8f8633",
+      "PNG_sha256": "9a2cf9ae59e2d77486f5d8604ae28a2a1123dfb76dedcf8274cc43f6e966eeb6",
+      "tensor_sha256": "20bb0b5ea72b64280cf813ff42ad6605cd8a30ea80aa029d7148bb3bc7b2d00c",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7b42abd28d49d5a828d32a8f59d18cdd64b8a3c2b422ef1809eea72dde1ad840"
+      },
+      "images": {
+        "input": "images/016_input.png",
+        "answer": "images/016_answer.png",
+        "reference": "images/016_reference.png"
+      },
+      "expected": "北语短田海目",
+      "raw_transcript": "北语乌亲紫目\n",
+      "normalized": "北语乌亲紫目",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/017",
+      "split": "train",
+      "language": "en",
+      "seed": 20269467,
+      "input_sha256": "037adcfe9028a431e169c77a70ee7c321745ef55268064d329a1049cd6059838",
+      "PNG_sha256": "9b181f7ba5752eb7f23f246bc5f514e0e023423a66cea51d079fca0387113bb4",
+      "tensor_sha256": "c161573c443c2d58e0fd8caecaa63082625ad4c290310aaea5d01b1b88d56427",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "97023dddb94f56ba9aa2053a6adcf2fc41534922e0c5f3a14bcd86fd88873d99"
+      },
+      "images": {
+        "input": "images/017_input.png",
+        "answer": "images/017_answer.png",
+        "reference": "images/017_reference.png"
+      },
+      "expected": "small spring silver",
+      "raw_transcript": "emall spig ilver\n",
+      "normalized": "emall spig ilver",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/train/018",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269468,
+      "input_sha256": "52b7d9958439a33b3b1d7a1623de231066da49d17b9d213f7b205c30708dc973",
+      "PNG_sha256": "a404fbef9ef8a679f0cd2f15a46c9a9d432ea0826232405a865cebfc562747d1",
+      "tensor_sha256": "a0c3460c3f9e4b2d38b95bbb95c3187e1d3d2428e138c012d59e8a40b830641a",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "6db2297c9dc178aa4029dc7681d096c3944f36d8716d0d279b191eadd92d338b"
+      },
+      "images": {
+        "input": "images/018_input.png",
+        "answer": "images/018_answer.png",
+        "reference": "images/018_reference.png"
+      },
+      "expected": "旧雨河河禾水雪水风",
+      "raw_transcript": "ABAAKS A\n",
+      "normalized": "ABAAKSA",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/019",
+      "split": "train",
+      "language": "en",
+      "seed": 20269469,
+      "input_sha256": "1e57feb889f985bbc3454574ea14b684cf7385b7a04055016c207bc4477fb58b",
+      "PNG_sha256": "521449fe5404b9cb6979cc73c1bdd3a8548dbb679df79abf77406ae6f848de7b",
+      "tensor_sha256": "bd2643e3eb305cab3c64f991c2180c8fa75f5a01f9e0df7a2d5ac7472999c9c7",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d96efc2bb6511585926495fcf3fe6f4969935df0ad09d7d9a62f5cf76a052628"
+      },
+      "images": {
+        "input": "images/019_input.png",
+        "answer": "images/019_answer.png",
+        "reference": "images/019_reference.png"
+      },
+      "expected": "evening mountain",
+      "raw_transcript": "evening mounain\n",
+      "normalized": "evening mounain",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/020",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269470,
+      "input_sha256": "01bc75a08629eac841632b20aeb94b18b10358d12d33af024e895c34dc6b5f56",
+      "PNG_sha256": "70737689d24251923c2fd7b55fd599975847478994a4723f369aa789c6eea0f5",
+      "tensor_sha256": "d4a5f85d85d00561c69ac3b040424c2b1d34fd32a660e19fe049238d7fa412b2",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "20a692752c2f96bb59f3311a7580b64082b28ee0e7dd221ec283fa70dcae12aa"
+      },
+      "images": {
+        "input": "images/020_input.png",
+        "answer": "images/020_answer.png",
+        "reference": "images/020_reference.png"
+      },
+      "expected": "海小云短书田目草东黑门青",
+      "raw_transcript": "“Sh oe BH ESR IRS\n",
+      "normalized": "“ShoeBHESRIRS",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/021",
+      "split": "train",
+      "language": "en",
+      "seed": 20269471,
+      "input_sha256": "bd9adea2147dfb03960deed2b44e165a5b2332a40863afd22890c87b57f20be1",
+      "PNG_sha256": "591f17693e8ac3fde1560780c7d8a4e58993a5b170a88a054aed7d1e35816371",
+      "tensor_sha256": "5ed5f15c9f592b87b528c9d712b8a30b27259e8afdaa86eea7036397a9a7e806",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a93ad9e18cbfe65804619afc4919c11636d3274e3fe2fdd3fafc0bbfb9fe000e"
+      },
+      "images": {
+        "input": "images/021_input.png",
+        "answer": "images/021_answer.png",
+        "reference": "images/021_reference.png"
+      },
+      "expected": "bright winter winter",
+      "raw_transcript": "bight wirmtel\n",
+      "normalized": "bight wirmtel",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/022",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269472,
+      "input_sha256": "4e871a75e7e2185305bcf73ab06fca583e18a8b06c17f93a682a019b5c8ae4f3",
+      "PNG_sha256": "a3bf34b8dc55073e8902f588448293cce60b105dd9548fe4c12076681ac5954f",
+      "tensor_sha256": "dac91a9adcd6c285480d5f77773f456eaa337fa66de4f27f80e8a68a4f243853",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "416e549fcbe6a4137379ddb8f9d18c8b69566114e4def2a31e0665965ac08336"
+      },
+      "images": {
+        "input": "images/022_input.png",
+        "answer": "images/022_answer.png",
+        "reference": "images/022_reference.png"
+      },
+      "expected": "白云旧湖山友鱼金秋草语",
+      "raw_transcript": "ABIAMLNA Ske is\n",
+      "normalized": "ABIAMLNASkeis",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/023",
+      "split": "train",
+      "language": "en",
+      "seed": 20269473,
+      "input_sha256": "a60c5908877255fec336ba6a9153f8b2ffbb578be7e8d30af1e219224d3ea66e",
+      "PNG_sha256": "839ee1699d740a549a8a34c57b3f9a3fcf55029b6c3467b3acfda61c2532bd3b",
+      "tensor_sha256": "fbcaf54a585e377592f901ba87435579aadfa56a3240083e3d5387bbc2407bec",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "41b3f73b233bb739450e12ed4814bae4252577992dff712d1f81fd2be22c7a20"
+      },
+      "images": {
+        "input": "images/023_input.png",
+        "answer": "images/023_answer.png",
+        "reference": "images/023_reference.png"
+      },
+      "expected": "stone cloud",
+      "raw_transcript": "stoe clud\"\n",
+      "normalized": "stoe clud\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/024",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269474,
+      "input_sha256": "c6b674e6c55dbefde3f01f7d07f8983c24c93d8131daad47163d3540da99e943",
+      "PNG_sha256": "0955de61aba9c17219f9c0dc4cc48d63f6f9738ab49e9afb98765bcff75d5ef4",
+      "tensor_sha256": "163beeab9ff0b16848fefa973a9c198d246caa63e8a53daee7edf2cf08eaf196",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "49013b4adcb6d0eb45ff261bfa46b085792801afb55bc452e3f199bc50f7dfbf"
+      },
+      "images": {
+        "input": "images/024_input.png",
+        "answer": "images/024_answer.png",
+        "reference": "images/024_reference.png"
+      },
+      "expected": "下夏旧木禾红画右左朋",
+      "raw_transcript": "下夏旧z禾丝[画右左B朋\n",
+      "normalized": "下夏旧z禾丝[画右左B朋",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/train/025",
+      "split": "train",
+      "language": "en",
+      "seed": 20269475,
+      "input_sha256": "0ebea5fdcedbf5a1df93613f5f6e5dce5d982db801b83f801e460ac62ba47548",
+      "PNG_sha256": "07a19697b9f3c66796596c371422829a592a7e60555cd5442e41d5f77be4ec80",
+      "tensor_sha256": "f0817bd12c1c88086884531467bba17da9e3b74df1f7d74ff2cbc182dc5dd92c",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bf78783b6c300cd66ed62abc3010ca8d35eab3086ef94bb05a889c70bbd73dad"
+      },
+      "images": {
+        "input": "images/025_input.png",
+        "answer": "images/025_answer.png",
+        "reference": "images/025_reference.png"
+      },
+      "expected": "small stone",
+      "raw_transcript": "snall stone\n",
+      "normalized": "snall stone",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/026",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269476,
+      "input_sha256": "68a998a42b22b4c0ec1b0f1191b036d8d91d2845f2ed06260a74234a36602764",
+      "PNG_sha256": "94f7e470fa3b6eefa7c46f239e3f50b23b80658a3cc33cd89dfb1d0317ca808f",
+      "tensor_sha256": "d23ec24d7da7d599823f896000b980aa4179a146ddeff5175ba7a23caf978199",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b3ac856a052f793b9ca7887a4c99a4b890206420044537a8917d05b41b053d0b"
+      },
+      "images": {
+        "input": "images/026_input.png",
+        "answer": "images/026_answer.png",
+        "reference": "images/026_reference.png"
+      },
+      "expected": "手少冬左目木河夏低日鱼",
+      "raw_transcript": "FI SRA Be\n",
+      "normalized": "FISRABe",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/027",
+      "split": "train",
+      "language": "en",
+      "seed": 20269477,
+      "input_sha256": "385e18fce901c4befd3967763641dadfbbbc135c42bb7e331514a0fe84519be2",
+      "PNG_sha256": "4c4d88e3cdee6c9068388679627f478e162d1e909df27422effb44400e76603c",
+      "tensor_sha256": "35f445e25c13657c94f3c5fcb063d383b426a794a2170e5cd29861faa3257537",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "535c64e262b401972355f0ff34a3175e920a2b6ba02116537f99e6e250a5bf0f"
+      },
+      "images": {
+        "input": "images/027_input.png",
+        "answer": "images/027_answer.png",
+        "reference": "images/027_reference.png"
+      },
+      "expected": "morning close",
+      "raw_transcript": "morning closee\n",
+      "normalized": "morning closee",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/028",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269478,
+      "input_sha256": "f8a77fa9202efdf6cf9b4d0f1a74c3271b5f7aa4824fee460551a443b869f314",
+      "PNG_sha256": "6e6504409b7fe639837262a2ab4b3d14f2b182ec6fa7e53ae0e18f3d717553cf",
+      "tensor_sha256": "2ec5bc32c6f6e8b8a0a58a498cc581432c2bf35330dfd68ff6f3fdd8471f274f",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ec210cf38e8228046fb180b02081787c838982e363206585c338356008fd57eb"
+      },
+      "images": {
+        "input": "images/028_input.png",
+        "answer": "images/028_answer.png",
+        "reference": "images/028_reference.png"
+      },
+      "expected": "地学友光",
+      "raw_transcript": "地学友光\n",
+      "normalized": "地学友光",
+      "canonical_exact": true,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/029",
+      "split": "train",
+      "language": "en",
+      "seed": 20269479,
+      "input_sha256": "31e51084dd6112d7916a73e2230013a941578827da015eb67d01b221b04f2879",
+      "PNG_sha256": "23ff47dd7ba0465ce5561316e0c35e1a9b1e3c478944071849c23ecc07529ee6",
+      "tensor_sha256": "85ebb5180a6e60e7b5fc24710c8d896ffcec998397b0dd36a7259c42ac97e218",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "da48e5186ab52ae6c742849d1cd8daba26c67486481069229e7082702d38e6c5"
+      },
+      "images": {
+        "input": "images/029_input.png",
+        "answer": "images/029_answer.png",
+        "reference": "images/029_reference.png"
+      },
+      "expected": "stone green cloud window",
+      "raw_transcript": "Snceeon clene window\"\n",
+      "normalized": "Snceeon clene window\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/030",
+      "split": "train",
+      "language": "zh",
+      "seed": 20269480,
+      "input_sha256": "7829913cef645478b87da74043dd494fa248b236e4b3ec61123a32e26ba6e211",
+      "PNG_sha256": "bad327718fe8b58a6a675aa875f34455aa34ea0cc35a449f9ece1c60f501b3de",
+      "tensor_sha256": "1c5ed80e8a4210c9a44502cefe8939cce18a0c10125218131d46750e94d1efc6",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "346d3d983feed2034a0c5b9cd664f85c7fc7ed858ae401841b713bf802605edd"
+      },
+      "images": {
+        "input": "images/030_input.png",
+        "answer": "images/030_answer.png",
+        "reference": "images/030_reference.png"
+      },
+      "expected": "海家语字风月",
+      "raw_transcript": "Be=KA\n",
+      "normalized": "Be=KA",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/train/031",
+      "split": "train",
+      "language": "en",
+      "seed": 20269481,
+      "input_sha256": "9ab372d8542b7cb86a33ad99d87b243b7ee32e1a34b8e65e3c283df9803e05db",
+      "PNG_sha256": "d91da6eddd5c56a7308eea42f6d5e96516b2ff16932133d0549b813595e9b80f",
+      "tensor_sha256": "eab90cd98a8156065e6e5845d7f3836adaace95d34bbc73209f4e08c8fb91336",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fbe75e8dec9bc5eebb9f35a52c82be44f5cd1a336483cf7250a0197533a40343"
+      },
+      "images": {
+        "input": "images/031_input.png",
+        "answer": "images/031_answer.png",
+        "reference": "images/031_reference.png"
+      },
+      "expected": "green mountain",
+      "raw_transcript": "greeimontaain\n",
+      "normalized": "greeimontaain",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/000",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269482,
+      "input_sha256": "1f5dcb5348519a1e759fdbf469a7fb9e4036c143da68f9c49456baeb2ca2b702",
+      "PNG_sha256": "bc7a51d8ae4e67339f657c81ab018f290bbea0c68dae17bef5ada1fb4ab23142",
+      "tensor_sha256": "883a15222e646638f5a75bacb16508dfe59f41b457ff9e747f49a61c9e5cbda4",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "9fef55f80f4b1be4990a8f9563b9c07095948fd51d0cd1cc87f6434cfd2e07d1"
+      },
+      "images": {
+        "input": "images/032_input.png",
+        "answer": "images/032_answer.png",
+        "reference": "images/032_reference.png"
+      },
+      "expected": "树田红星风",
+      "raw_transcript": "树田红星风\n",
+      "normalized": "树田红星风",
+      "canonical_exact": true,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/001",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269483,
+      "input_sha256": "2987d6d82ff069e8b0e2d3ba1d27e48effc56e5fb37f07a55966bf1db2e881a1",
+      "PNG_sha256": "49f443c7867529b894f142a82d2662b1405e20857e7a272bb0b632f3a36332f5",
+      "tensor_sha256": "ae07ba39cc005e38c7f2d5d39f03f18aafbc48726a5702c0096498ee95873e82",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e1ac1e358a7e53b905f766471a527e70338ac175db969ace8e38ddd163b097fb"
+      },
+      "images": {
+        "input": "images/033_input.png",
+        "answer": "images/033_answer.png",
+        "reference": "images/033_reference.png"
+      },
+      "expected": "garden silver open blue",
+      "raw_transcript": "gaden unanove blue\"\n",
+      "normalized": "gaden unanove blue\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/002",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269484,
+      "input_sha256": "8114b630be2718eeb76b049c157c4ab5c965f70846d9cf298ee667184c943818",
+      "PNG_sha256": "b1d91249ea042a559e31c4f799de11ac5e314763908e6a2c5752079d6942a1b7",
+      "tensor_sha256": "32b634777dcd6626baf0d7e56bd8518bd8b60b16b4f9d51c7e3c705ba29ea7b3",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "aa5f97caa81c80f3b68d9fcba1721478849629fcec5c201d7f448ffab4fc3e26"
+      },
+      "images": {
+        "input": "images/034_input.png",
+        "answer": "images/034_answer.png",
+        "reference": "images/034_reference.png"
+      },
+      "expected": "语树石字光河画山雪羊",
+      "raw_transcript": "NaS IA ee US\n",
+      "normalized": "NaSIAeeUS",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/003",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269485,
+      "input_sha256": "e20b724f98abb45df21a4dff1d834d3ffd431fe9982648614be42ba9da847004",
+      "PNG_sha256": "6f0a0997582d346e0f3ba8e2cc01307dd750482db51a578ae35aaf804c6d320b",
+      "tensor_sha256": "a0d4eadae80fe5ee734aa2c1817baf54af082a71976e638f5f1a3d6030b73c38",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "add57be2c537ef42f9c45439016d38af2a6890cdb1b561dec323d0e58888616a"
+      },
+      "images": {
+        "input": "images/035_input.png",
+        "answer": "images/035_answer.png",
+        "reference": "images/035_reference.png"
+      },
+      "expected": "green blue",
+      "raw_transcript": "aeenmue\n",
+      "normalized": "aeenmue",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/004",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269486,
+      "input_sha256": "9b28aca56094ac8b3af8639a7303ddb80100510f9355c831f84197ff5fddba31",
+      "PNG_sha256": "0b6ab4807cb5f4fccea033a9b4085ad454a068d7023499d027274d3a0a9cf7f8",
+      "tensor_sha256": "cc21a21c263db37bbc31b52284d8389ea23e07fa065a3b7befe22e10c692d449",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fa0091e729fb4d2a4cae2f74e5d8fc1d67d35b6e8ea0ad6f74c25d813a706103"
+      },
+      "images": {
+        "input": "images/036_input.png",
+        "answer": "images/036_answer.png",
+        "reference": "images/036_reference.png"
+      },
+      "expected": "河日中风目",
+      "raw_transcript": "河日h风风目\n",
+      "normalized": "河日h风风目",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/005",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269487,
+      "input_sha256": "2834d4dc6727c8e7c36282a06b62542c910ed294e991e7163dea3d4bbe85a627",
+      "PNG_sha256": "84388dfe534e285e5dc639c706825dd734b9aa27e476ad440fd315dafd1e0ee1",
+      "tensor_sha256": "24cc572689c2116512a56715fa26567c6762cb741d8a212654e170eba1b89e86",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "94905a96a4a205400443f419e91a9f68234a01f0bb5299e40ce951eed445421d"
+      },
+      "images": {
+        "input": "images/037_input.png",
+        "answer": "images/037_answer.png",
+        "reference": "images/037_reference.png"
+      },
+      "expected": "evening close",
+      "raw_transcript": "evehing close\n",
+      "normalized": "evehing close",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/006",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269488,
+      "input_sha256": "89a988786eaa60263d8afc860e9dd1a754f3cf51237dd9803ce258de6af8bb4f",
+      "PNG_sha256": "d5006cf2898ffcbd82d8cd030e167ccc313f5b3fffb842366f8538076d0ca3d3",
+      "tensor_sha256": "b325bfbdbfd0e53a10a94697970af0fa93006cdaff393c17331b7ef745addefe",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "da54ca1170fedf18e9b01dfc79779e04daf68601e90d83a544e849828c4c9451"
+      },
+      "images": {
+        "input": "images/038_input.png",
+        "answer": "images/038_answer.png",
+        "reference": "images/038_reference.png"
+      },
+      "expected": "光文友地月金土花",
+      "raw_transcript": "TRH ELTE\n",
+      "normalized": "TRHELTE",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/validation/007",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269489,
+      "input_sha256": "a365b0db9fe8a9d48b14f3569ad4ae1b351ce3647108538da4f00dc44f03020d",
+      "PNG_sha256": "7adb556f7ee5a0ce4e6ecaca6443cc1c72359506999188a9c5fdcbe6889c586a",
+      "tensor_sha256": "c188bf0b51d4f09c091c11f24621b71d56673e1c0e5b54084325909937102ddf",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e0ea5e1d3c0e6fb8639162c85302d434b5c8a7e23733f5ee780c96e76da33995"
+      },
+      "images": {
+        "input": "images/039_input.png",
+        "answer": "images/039_answer.png",
+        "reference": "images/039_reference.png"
+      },
+      "expected": "small mountain quiet",
+      "raw_transcript": "snnuiet\n",
+      "normalized": "snnuiet",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/008",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269490,
+      "input_sha256": "55068e7deaef0f2a537a54cb054e083e4e593928c8ed066a0ea19ce6e4d58753",
+      "PNG_sha256": "60bcd2d4e3f1e91497159c295ab0f65258b262f5b42c92f7fe33937975c51308",
+      "tensor_sha256": "f9955530657fb4232c5aca7ea5edb142798691c8a24f9ed3f65d578ee77d0b54",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1d78a550d761946fdc47c12985aa42956f49a5af2295a5220e471aa142f88e86"
+      },
+      "images": {
+        "input": "images/040_input.png",
+        "answer": "images/040_answer.png",
+        "reference": "images/040_reference.png"
+      },
+      "expected": "土风土月文",
+      "raw_transcript": "土风土月文\n",
+      "normalized": "土风土月文",
+      "canonical_exact": true,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/009",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269491,
+      "input_sha256": "5a7aa84f7b92e77ef4faae2c9ac7a0a1c5054dc811c1e37648e943d63d668517",
+      "PNG_sha256": "4061bb7a8db93e942251a49172ee6e79603a82c5894d966de4ca82af51240bff",
+      "tensor_sha256": "6d24beb6c40e338e06d6e31e396fb2ecdea072fc3fd51c5f371e722689c5b6de",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "47e2d88cb4b6603324a55ec476c816cc8cb28a4ed47c576136b20b392411be5a"
+      },
+      "images": {
+        "input": "images/041_input.png",
+        "answer": "images/041_answer.png",
+        "reference": "images/041_reference.png"
+      },
+      "expected": "book silver",
+      "raw_transcript": "bodlver\n",
+      "normalized": "bodlver",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/010",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269492,
+      "input_sha256": "8d733513cff3bb605a0fdf9f11194796407d32f1c742243d99c8ee5676783037",
+      "PNG_sha256": "03722a20df528e74f9a1deee017d3f1f2042c064bac0434fc95f026efb3f88d7",
+      "tensor_sha256": "e2d81a4bf3d148dccbf2aeb65e4a8ce26fe129dc9ac3dbc7b1a7c256d91ba41a",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b729d8896f67d4fe1c9ce6005aae5b38d75db8d9ce14cad4682bff35a52dacb0"
+      },
+      "images": {
+        "input": "images/042_input.png",
+        "answer": "images/042_answer.png",
+        "reference": "images/042_reference.png"
+      },
+      "expected": "红雨中友小长水秋河土",
+      "raw_transcript": "BTR PRL MOVE A AB\n",
+      "normalized": "BTRPRLMOVEAAB",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/011",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269493,
+      "input_sha256": "b36cf19ca36236f8c8b7629aee717613e8de1c925cefaacbb94e56aad04fe462",
+      "PNG_sha256": "97245978ec518d5621388ad4b32d7d52e8d65ed0a9858a8ad0f152d6546bff55",
+      "tensor_sha256": "d5b968ca972e0e64098742404ac6af996aef84281702a23a58b5ef48bf203acd",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ee98a6e3b1006fb9385f94751f8b08361b06d9e0db7af7e4c92390754ed12f43"
+      },
+      "images": {
+        "input": "images/043_input.png",
+        "answer": "images/043_answer.png",
+        "reference": "images/043_reference.png"
+      },
+      "expected": "open small",
+      "raw_transcript": "open small\n",
+      "normalized": "open small",
+      "canonical_exact": true,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/012",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269494,
+      "input_sha256": "45ebfb02ddcf36847c2ecf16bb0118bac5a545503c4cfb1e059559c11e861855",
+      "PNG_sha256": "59ac0952ab98aa3f62f24370dc91436337dafa070ab2afb970db22507d7deedb",
+      "tensor_sha256": "0d9bb7103991e395b5ee6a359305f01ea1231b8b0f7ec161aaa682d66a90fc9b",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b696e0c1363f8870fdedd6dd4e1636d4af9f18a7ba909f3676bb2a7c54cdf121"
+      },
+      "images": {
+        "input": "images/044_input.png",
+        "answer": "images/044_answer.png",
+        "reference": "images/044_reference.png"
+      },
+      "expected": "石草云人大春火画高学月",
+      "raw_transcript": "石划云人大画高旦\n",
+      "normalized": "石划云人大画高旦",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/013",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269495,
+      "input_sha256": "eb100c71e72a600c11bee8ea13111b9f398f1d54a9e5a78a2fc97f99d11ac723",
+      "PNG_sha256": "c6b6e156286a5878979507a50408987ab32612aed2bb97ecff63e78da33e2ac7",
+      "tensor_sha256": "7ceedad692f9b6e0eac8634ca40874e66d7cb816185054abe3e515ed9f6bdab3",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5c06ae39f3734699f43ab4ff097caba7ccecedbeb88f0d2a5261ce994a3b6573"
+      },
+      "images": {
+        "input": "images/045_input.png",
+        "answer": "images/045_answer.png",
+        "reference": "images/045_reference.png"
+      },
+      "expected": "quiet small open quiet",
+      "raw_transcript": "quieona cnen autiet\n",
+      "normalized": "quieona cnen autiet",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/014",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269496,
+      "input_sha256": "5509d762149236407aa9f716d9eabcc73a74fccd803506ca979bc067602e22ce",
+      "PNG_sha256": "544e2fade5cfa48281e80adab014643905f6636ad0ccacf1f9d71fe29d10f842",
+      "tensor_sha256": "e2c107425bf013caac821394e11909adfdeaa6d18f4a544c67dda325c66bcc72",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c8ff609fbca0c7c66b64895c4e62faf5d3d92be05421d21df7039a550df89858"
+      },
+      "images": {
+        "input": "images/046_input.png",
+        "answer": "images/046_answer.png",
+        "reference": "images/046_reference.png"
+      },
+      "expected": "冬青大水文白海江文",
+      "raw_transcript": "冬青大大水F白海江\n",
+      "normalized": "冬青大大水F白海江",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/015",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269497,
+      "input_sha256": "343532947528366485f0a2aaa47dd110310c5b62849fe24c18c50fbdf12d221a",
+      "PNG_sha256": "fc9ccb85d6f28a63be80712107e626a958185531392492991fb325448f2aaa8a",
+      "tensor_sha256": "19dda036a795019b006806c7d4a15b829cdb19bd82b4d522e486f38e2d1a9a91",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "64c2fc801c07dc0ec3fb4d76dfeeca6227fa039362d7bd93f061e58ec07c9257"
+      },
+      "images": {
+        "input": "images/047_input.png",
+        "answer": "images/047_answer.png",
+        "reference": "images/047_reference.png"
+      },
+      "expected": "close winter evening morning",
+      "raw_transcript": "cloe witteenaiing\n",
+      "normalized": "cloe witteenaiing",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/016",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269498,
+      "input_sha256": "5af97a46557c88f7875dd73dbdce39e293343917d999fd0c5da5e08ffd441978",
+      "PNG_sha256": "18d69d0c9e6729e6d88cbde31c7537bf3316366d36e744887f59ef744ec3e6fd",
+      "tensor_sha256": "388e097b596312c73918470d2750ad00a5c92b02d4d89f74c27d4c651937ccf8",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "eb619f718e613764d2229dcba7ee481e42dfcef102c48dfc63724b0f7636795c"
+      },
+      "images": {
+        "input": "images/048_input.png",
+        "answer": "images/048_answer.png",
+        "reference": "images/048_reference.png"
+      },
+      "expected": "高上下朋下春心湖",
+      "raw_transcript": "Bit FAR at\n",
+      "normalized": "BitFARat",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/017",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269499,
+      "input_sha256": "1cc9113e494cae618afdd7f3a2dfc4e08d56a52e2cd02591716eb3ab9f2503cb",
+      "PNG_sha256": "1f0ded0487515b51edc9667dc5d2f1a1e6951eb52ed3736a7143b35f839d4df8",
+      "tensor_sha256": "d230a40a31d8a07313f261bb488fc9e56dc2febb462fd55c582185d6ab21e9fe",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "82238b438b856752a07d07b63a34c40a0a68d36c2fb54614bdc39be83d64bddd"
+      },
+      "images": {
+        "input": "images/049_input.png",
+        "answer": "images/049_answer.png",
+        "reference": "images/049_reference.png"
+      },
+      "expected": "silver window",
+      "raw_transcript": "silver winddow\n",
+      "normalized": "silver winddow",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/018",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269500,
+      "input_sha256": "a406aac670dc8457d8e64e333994f5fc4fd208b998f415e4aeb3ccd700dad947",
+      "PNG_sha256": "44cd405baf112bac65db7c12448600e10bc5fda13de345e12672b50fab11a3e9",
+      "tensor_sha256": "d3375b377abf13fd309fde53560e0b3d15f3135fabbe75a7fd568d42330e21ed",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "07c0e33ed1b20f479f36666a4cba43d3b015aa6282ea0bbe5e65c3b7d6ff1835"
+      },
+      "images": {
+        "input": "images/050_input.png",
+        "answer": "images/050_answer.png",
+        "reference": "images/050_reference.png"
+      },
+      "expected": "光绿月石书青鸟新西",
+      "raw_transcript": "tas Sea”\n",
+      "normalized": "tasSea”",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/019",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269501,
+      "input_sha256": "11e18990b5df4e038a7923bce33b07d05c644d0fcc4139ee6ef383c4a6606641",
+      "PNG_sha256": "5a62bf48f81cb846cc2a511fbda5d621798a9217a51aaaa47d5aea00fde8fe1c",
+      "tensor_sha256": "8e77b27a5c963615ecc32fb65b1673a099f9de3ff479c68ca691852f19ab7e10",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d13c5215d5f56dae731f4f695e518467c30dab52fa66adc8702de82df958de39"
+      },
+      "images": {
+        "input": "images/051_input.png",
+        "answer": "images/051_answer.png",
+        "reference": "images/051_reference.png"
+      },
+      "expected": "book close bright",
+      "raw_transcript": "boo close bright™\n",
+      "normalized": "boo close bright™",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/020",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269502,
+      "input_sha256": "fdb1df276fa71e72849d7a441394f366abb3c20087890106f18c9e259fb97930",
+      "PNG_sha256": "08cc45254654e7b45263e139ad2c7e360ff338af3f1d3f7271599cb032573047",
+      "tensor_sha256": "3b3bc6cb0146393f5da27730b51912fb5380fe62ec97979028ff6ea2081d69bf",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "4460bdc229ffdc5140746086777ed61efcb44aa1ec8ce28fd08bc1919d07e235"
+      },
+      "images": {
+        "input": "images/052_input.png",
+        "answer": "images/052_answer.png",
+        "reference": "images/052_reference.png"
+      },
+      "expected": "新外语草手语冬月左",
+      "raw_transcript": "HeiPS Be ARE\n",
+      "normalized": "HeiPSBeARE",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/021",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269503,
+      "input_sha256": "29b2d0c7b84f38313b97ce455446b8e5ff2c1bec2b6ae831e8bd91184e398d51",
+      "PNG_sha256": "ca54453cf22b7aee81b2f5d7c56823f651dc61ada2b2edd8cd37725d9eac4de6",
+      "tensor_sha256": "d86a09d1ed2f88daceac7af9404ebdcee56b17841bff4f94cae6abb006a571b3",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "20f0275c2f414e9822a42f72975021179f67fe91f405f6fbd7c59b9bc9eb6e6f"
+      },
+      "images": {
+        "input": "images/053_input.png",
+        "answer": "images/053_answer.png",
+        "reference": "images/053_reference.png"
+      },
+      "expected": "book river",
+      "raw_transcript": "book river\"\n",
+      "normalized": "book river\"",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/022",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269504,
+      "input_sha256": "f0141f3a2ff20a347f8d2d2052cb042bc4d38e7215a6e3a26af739e6d6544e44",
+      "PNG_sha256": "8e56f30b4f85fb03a8674187b744a016ca92cc74d660f3f25328fcd119de82f5",
+      "tensor_sha256": "99a705e1bbeb5a82ac373d82d54a6dc605ccb764758a4b19b9c87ec9a8fcb9e7",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "16c79fe1e06639416e442517387f74216bc8f7b93dd61c337a6a15b8ad9cae56"
+      },
+      "images": {
+        "input": "images/054_input.png",
+        "answer": "images/054_answer.png",
+        "reference": "images/054_reference.png"
+      },
+      "expected": "小雪手新风青木山早金",
+      "raw_transcript": "SRA ON Fae\n",
+      "normalized": "SRAONFae",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/023",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269505,
+      "input_sha256": "ce8b88c71c3a84e0c54734fb0f6288304ec422f6223e2f6406f36f04cd30792f",
+      "PNG_sha256": "c05ea74b2401ff5eca8d7ced6d08b2e473d6e00ad845c09d1634a97dd197b52f",
+      "tensor_sha256": "b84c794e25bf3309fb9930b6cd9ac6794fe09bfd28ed8203e2f7eb034fe864e0",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "85dd95b43af2a860c971491be374dc4624b6b98f10084e8e5b76e964db586293"
+      },
+      "images": {
+        "input": "images/055_input.png",
+        "answer": "images/055_answer.png",
+        "reference": "images/055_reference.png"
+      },
+      "expected": "green spring small garden",
+      "raw_transcript": "8leen sein eranall airden\n",
+      "normalized": "8leen sein eranall airden",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/024",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269506,
+      "input_sha256": "621bab9abd7114c973983417b1c2007b7eafceeefd1ef26f525eec640f861ada",
+      "PNG_sha256": "69a4ffefe1af3c8b82fef8b5a0ea96db07c8e4720c9950440962da70c03fae5d",
+      "tensor_sha256": "3292cd729ea05199394048cc653f74ea2995302bba5f5bc2d3e87f14f3f9e3f7",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e46fe70412e80d08ca3c01789ba2fd4f8bdd35298c443031d396c68d585549b8"
+      },
+      "images": {
+        "input": "images/056_input.png",
+        "answer": "images/056_answer.png",
+        "reference": "images/056_reference.png"
+      },
+      "expected": "长田火手江",
+      "raw_transcript": "长田火手江”\n",
+      "normalized": "长田火手江”",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/025",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269507,
+      "input_sha256": "774a811c3bec12ffa915465b0c941342801b4eff36480a05695431bef895fbdd",
+      "PNG_sha256": "bb163927449cf3a2fc9a3eee228323589f0dcd04da3b614f8aa6722072ecbe04",
+      "tensor_sha256": "d9328cee86cc6774a1e19eb04a9a4a43dd377dec16c00e5ef7054bce0d88bd19",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d72782f006210cd8226d8fefab409a3b120a5177a498fff7d17f58c87ebc9591"
+      },
+      "images": {
+        "input": "images/057_input.png",
+        "answer": "images/057_answer.png",
+        "reference": "images/057_reference.png"
+      },
+      "expected": "window cloud window spring",
+      "raw_transcript": "wiaal omu cle eforing\n",
+      "normalized": "wiaal omu cle eforing",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/026",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269508,
+      "input_sha256": "8598a3bba783111d2e5149b72760c756e278a272366475e62c74dcced872f587",
+      "PNG_sha256": "0ce0da70b110e81d0b678e7ec48280797e5c44edcbb264a37851c4c20ce7c989",
+      "tensor_sha256": "caa5b91c7d0da40ee780e6be72955f3f4676877a6113da8e9a294f8e8f41bad9",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "37f3fb691e7c88cff50242045da268774be92e40f91049568a13fce69d3cb1e9"
+      },
+      "images": {
+        "input": "images/058_input.png",
+        "answer": "images/058_answer.png",
+        "reference": "images/058_reference.png"
+      },
+      "expected": "风新云春早画田地",
+      "raw_transcript": "are Ste\n",
+      "normalized": "areSte",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/027",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269509,
+      "input_sha256": "c268421131da777b82ad889307e6c157560feeec276a006e16e80c250956284d",
+      "PNG_sha256": "02d8896150339d0b839498edd47be8ee1e71b804d6620f76e5873f99fc426023",
+      "tensor_sha256": "02beeb91a04a94e83245d10adb10b976320454f1569fd589b295a21be51928c8",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c84581e720e4c5d447d9ec7cb200bdedbaae60109776b42c6a9fbce07a52b251"
+      },
+      "images": {
+        "input": "images/059_input.png",
+        "answer": "images/059_answer.png",
+        "reference": "images/059_reference.png"
+      },
+      "expected": "spring river open",
+      "raw_transcript": "oungSnosnm'\n",
+      "normalized": "oungSnosnm'",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/validation/028",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269510,
+      "input_sha256": "03d96eeb14bda9e0ca122383e7e1263d6d3f519f61629bcf6dc2cc2702f0cc5e",
+      "PNG_sha256": "4051741f59b51d94546ac9f04357c80f75c57ad0ff30f7fffddc784f1cd9ea7b",
+      "tensor_sha256": "a13e294a66699d0573fe2709499fdc22422558a7f633466469c6ce7f65e3bd95",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "416efd8baca3d6fda8390996fdd5fcdd5d533d90df5bc31f9884a8f6f7ad5ff1"
+      },
+      "images": {
+        "input": "images/060_input.png",
+        "answer": "images/060_answer.png",
+        "reference": "images/060_reference.png"
+      },
+      "expected": "北牛少水雨",
+      "raw_transcript": "AGED ais\n",
+      "normalized": "AGEDais",
+      "canonical_exact": false,
+      "reference_OCR_exact": false
+    },
+    {
+      "id": "copy/validation/029",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269511,
+      "input_sha256": "8d232e4275e8b3306d06aa4de3a79ba8b38d6d5ae761c77e56b3009235277bfe",
+      "PNG_sha256": "e946debe9dc70cea5399f76559fd5844cc523356176e4b083c5b5d7c3a479057",
+      "tensor_sha256": "08014ce9bbead8a03b75f87a65a4dc94552c5d9187e825f4242ec3cffe07d6b3",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b4948b27752a20bfa41650f267acc8f9661f3fa3e8aedec276a9af1257475c3f"
+      },
+      "images": {
+        "input": "images/061_input.png",
+        "answer": "images/061_answer.png",
+        "reference": "images/061_reference.png"
+      },
+      "expected": "silver garden",
+      "raw_transcript": "siner gaden\n",
+      "normalized": "siner gaden",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/030",
+      "split": "validation",
+      "language": "zh",
+      "seed": 20269512,
+      "input_sha256": "8320adad9e7f4c5361a3325528c178daed73b266fa986cb857ffa8851554ff52",
+      "PNG_sha256": "3376263dbc9f537ec15a4ba0a8e1522b92b12d7c2260140d26090a8c222301b0",
+      "tensor_sha256": "dda74a6227ece999d2fbc379af5394fdc58a2187bc35c51f51bfde6bc367b58d",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b3c8b9e18241612488bbc131332d5287244284f0c1410b734231103f7ad08f61"
+      },
+      "images": {
+        "input": "images/062_input.png",
+        "answer": "images/062_answer.png",
+        "reference": "images/062_reference.png"
+      },
+      "expected": "左人手字鱼",
+      "raw_transcript": "ELAS SSN WA\n",
+      "normalized": "ELASSSNWA",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    },
+    {
+      "id": "copy/validation/031",
+      "split": "validation",
+      "language": "en",
+      "seed": 20269513,
+      "input_sha256": "f2affcd89af77a8697fedfef2364dc6decf976059005ffed443698e3d4d36489",
+      "PNG_sha256": "15256878d4c5fbe27b68d9161523ad385539a8e964f0a95cda83b403d9379ec2",
+      "tensor_sha256": "ce85310f9883c8344a90c9bc0e37eda4677a7bf66294c7aa00a543328043952b",
+      "actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "98e80d09348fa702f50e3d6121f62b7ae6a7b1258a7999bdcd9d2ef49428d8e6"
+      },
+      "images": {
+        "input": "images/063_input.png",
+        "answer": "images/063_answer.png",
+        "reference": "images/063_reference.png"
+      },
+      "expected": "cloud evening",
+      "raw_transcript": "cloud eeming\n",
+      "normalized": "cloud eeming",
+      "canonical_exact": false,
+      "reference_OCR_exact": true
+    }
+  ],
+  "implementation_sha256": "7129df79cf8b0141ad801c038a94e86553d59b3be70377ff78693728ac339203",
+  "review_binding_utility_sha256": "18f0613186bd0d89f1519f96cd9dd77456ce9fa6300981db07dcf113bbede561",
+  "assessment_preparation_sha256": "69dd61a96ae61c1736ea293569be10f9949271185f3c68865d0439aaa481437d",
+  "native_report_sha256": "e361e695807f95ddf1c72771115239943eae3f0b4bf548c536c55d85b498fae3",
+  "output_index_sha256": "d29a8654c28a2fab51168668dd632dbdd3e52042dc91f884b0f69cd48884d1ff",
+  "OCR_report_sha256": "876dff43b97782332379d6a95b495470c4317b61832cf36711c99b833ba9163a",
+  "calibration_sha256": "5b5b5a76ddda28af56ebafd55f5512be5c12ec6d69b2f2b5c6e3481e4d546a2b",
+  "deployment_sha256": "d37977e241b91d10a5355c870577b71919e3d8cf6d34b07c4778065d5a765f91",
+  "final_checkpoint_sha256": "87a1420b200c892e99224b37f4dffa878dd24eab2b08508c7ecdc03821ad3ae8",
+  "files_sha256": {
+    "images/000_input.png": "346454670f09252b203496eb82792b094d2a901df366c2b90370349989decbe9",
+    "images/000_answer.png": "9bbd0aac1968209fbd5d1a1de146e1bf1a91cd70fb4a118b8355f1a6581f9927",
+    "images/000_reference.png": "634994953d3dbfd6325a44eda07c747b55600a7fef6310321e1b863b67bca145",
+    "images/001_input.png": "bb2d4513392855b28ad319ef07a7ce7fbbd6c61347bed7b100f186cd3a3a4559",
+    "images/001_answer.png": "a577fd1fb33051f9daea05d860205f71afab7fa6e75389a820857913575ec53c",
+    "images/001_reference.png": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6",
+    "images/002_input.png": "ae9a41246b50ed5628672ec24998ca095e514da688eab742503dd3746e994ee4",
+    "images/002_answer.png": "d25f18fb71c697bb3f193a6521949eea616b2228814f8bc696d1a7b22aebf832",
+    "images/002_reference.png": "c42289b2a0d94f654ed057196971c84141555ab62e6e9f1ba3fec7d16f9d3dfd",
+    "images/003_input.png": "f7a1013665dca67ded7a41da6943eae861dc3124b31eeda90eba5e5d7b51ac7e",
+    "images/003_answer.png": "35dea36021009d933d7062892f8cd23fc33c78b588d993fd19102b36dce0f3a2",
+    "images/003_reference.png": "106bf3edb40f5c118f8d099ec286cbe4b543c5afc7c470b4d3335da428e8f230",
+    "images/004_input.png": "4ce84c7f94fdd7348e99fe14ef63d9a3a6d80f2f768d360d31a83ec41bd3a046",
+    "images/004_answer.png": "0c372d5836f833ad4e1f135e4a67e8247e7c01c5342d1c3cd44a1783323dab60",
+    "images/004_reference.png": "d2bd0314113fe867b333bbd1c5900e71160ad6c5f5e219a238e25f8698387103",
+    "images/005_input.png": "f443f31f633258876a398d8a609b45fa2f83a24dc1fb532eb4da34a38ac7f771",
+    "images/005_answer.png": "faaad4d61ca0b902dc4586c3314e283559ca67f72b89c8e7cb6d749da1bda140",
+    "images/005_reference.png": "934ea06798ce1708e8a789456a7e6df50e11efbf9b4654e76f78a44e64c8cbaa",
+    "images/006_input.png": "5b6551d9f8e3fd943e31b45b32e3bfaf4f2df6174715197b22f3b23319da3889",
+    "images/006_answer.png": "0accd6949d75c195b74dfe2ea1e4ae80c08ae03a969bcc44d0169b397f1371f6",
+    "images/006_reference.png": "96085c638e12440eed9d2a8a5627e5ff3854b2294bc376c33e33ca2fdd3eb25e",
+    "images/007_input.png": "5f7bebb025bc09a52a8c88ba156290ed40c71875e17a53ca5f2a9f2f70f23692",
+    "images/007_answer.png": "5cb79813fd1a44b652c6ade734064ba9d287bb9b8b54eaeae16bc4333c4a6892",
+    "images/007_reference.png": "0d0583787dbf667aaa32c8c9ba65dc28466d83595ca31723457ec3b665f98bdc",
+    "images/008_input.png": "fa994fee6b98f68d0ae64f2cec586c6bae45b98a6c5cba21dbd297c1acfa272a",
+    "images/008_answer.png": "7a88e6452297e8f8ad606b5c7257c4a2f9bd9edf7e4734466d21c9bce6ed5072",
+    "images/008_reference.png": "72a4e869df61c9dbfe1b28ccc948affedbb5e0793bddeca1820b660da661021b",
+    "images/009_input.png": "b93d85bfe25732c66889034df4e89c2e10618c6c4182396293e432cc0a4a47ea",
+    "images/009_answer.png": "96c83060a4efd7324762b657f0f7e956a5ef97e68da4865bfeddf3bdcf62b192",
+    "images/009_reference.png": "f145c74ca0f9ebb31be4e833b90696c649d7d506eae2e263de306f549189c276",
+    "images/010_input.png": "892b25310f830b84648bc32a0a06aa96309b7154b1663641d393a2b8712bcb9d",
+    "images/010_answer.png": "d9cba3fce30b0a3c4dd56a820859e87b227ae145cf775d438d8147bc319f78d4",
+    "images/010_reference.png": "83ac9b9f059f47c08454f38e3b1fbb649a664638e24972244ea0e00fe2c789e0",
+    "images/011_input.png": "ab153100f322bc4be593fbd6a9e44ad1dd5471bbbf36c7f79f917343584f66cf",
+    "images/011_answer.png": "1e1039298f8c1781a1699401e650f0a9d6cf366d0d85959a65aa559023bae49e",
+    "images/011_reference.png": "d8852bcf3fc282d3946cc0dd37b419b25504cd8087e6a23dfaf5225cde064568",
+    "images/012_input.png": "637b6f73889b5d6ffc0a39d9d6fc4db825bdea4fe27c58182bddec39c58644b8",
+    "images/012_answer.png": "2e281c6a128cb717e4d63cecf6e0f362993aad90e20653cc27e8c483f262e0a9",
+    "images/012_reference.png": "3f7c0a0220708000e9147314148ac5da91146b383d7d2160ca4751bcf51b0e58",
+    "images/013_input.png": "0487a8ee66d72bc4313ad118c56a99d148b8e9c09b5bc195501290331ec515b8",
+    "images/013_answer.png": "6d68eaa70c728357709af317927d03535ba4c378d93045f4bda5ec551c3725ff",
+    "images/013_reference.png": "c0c82cf2938cb36c7714a5207351b7417cc3be4945a51e001f3894d045bd8272",
+    "images/014_input.png": "74e28527b9a01b18f0de795002d1f1c61c963562bb23576ba51cf088be1cbd0a",
+    "images/014_answer.png": "055dc0d83ca13531a37089d07dab8bb799dd6e3355f5a4b31de49f5b65d1e490",
+    "images/014_reference.png": "f5807e7610114fce1303907c55262734e6df55338743aead0a74551a4e469f46",
+    "images/015_input.png": "b4b273baa6a284129a7dc0a439f3289ab51c7b8127408616d2caa225e26e7307",
+    "images/015_answer.png": "b8aa2f0b70fb72d1ed010831b9140b999cc48165c1aadeb26dd6d718e5b9d743",
+    "images/015_reference.png": "e7dc9dab859bf7c4ef0ca3bcdbb610eddf7d58e02213432fc55a29027f5f7532",
+    "images/016_input.png": "43b0c0529ad2d033337b2a742019bc55e5e63478f23a818ab4b770932a8f8633",
+    "images/016_answer.png": "9a2cf9ae59e2d77486f5d8604ae28a2a1123dfb76dedcf8274cc43f6e966eeb6",
+    "images/016_reference.png": "4ac7796757c875e84d8ecff3ea6198f937d1dc7853c51a0921f25b3d5f20f0d4",
+    "images/017_input.png": "037adcfe9028a431e169c77a70ee7c321745ef55268064d329a1049cd6059838",
+    "images/017_answer.png": "9b181f7ba5752eb7f23f246bc5f514e0e023423a66cea51d079fca0387113bb4",
+    "images/017_reference.png": "20fbe5cf746a99a015204eccbef10a292ab728d1aada2b6bcd6aabb5bb9070be",
+    "images/018_input.png": "52b7d9958439a33b3b1d7a1623de231066da49d17b9d213f7b205c30708dc973",
+    "images/018_answer.png": "a404fbef9ef8a679f0cd2f15a46c9a9d432ea0826232405a865cebfc562747d1",
+    "images/018_reference.png": "e3a5b85276e7bce125315c32bd420aa8af395123a0521836e9ede2fd251a6978",
+    "images/019_input.png": "1e57feb889f985bbc3454574ea14b684cf7385b7a04055016c207bc4477fb58b",
+    "images/019_answer.png": "521449fe5404b9cb6979cc73c1bdd3a8548dbb679df79abf77406ae6f848de7b",
+    "images/019_reference.png": "31f84cb65035b54cdaad06b6211ba7923cd98ed7bef177ccd6454990a86cf540",
+    "images/020_input.png": "01bc75a08629eac841632b20aeb94b18b10358d12d33af024e895c34dc6b5f56",
+    "images/020_answer.png": "70737689d24251923c2fd7b55fd599975847478994a4723f369aa789c6eea0f5",
+    "images/020_reference.png": "e8ec3f4b748742cdfa9b95028c30474cfd1d2d89cb385ce5f2e2164d6a69358c",
+    "images/021_input.png": "bd9adea2147dfb03960deed2b44e165a5b2332a40863afd22890c87b57f20be1",
+    "images/021_answer.png": "591f17693e8ac3fde1560780c7d8a4e58993a5b170a88a054aed7d1e35816371",
+    "images/021_reference.png": "36b1a95d4f20971af1a8e38a470c7d667eae4e577c0942b61a486d0886ce2bc5",
+    "images/022_input.png": "4e871a75e7e2185305bcf73ab06fca583e18a8b06c17f93a682a019b5c8ae4f3",
+    "images/022_answer.png": "a3bf34b8dc55073e8902f588448293cce60b105dd9548fe4c12076681ac5954f",
+    "images/022_reference.png": "596892884ecc9ae2eb5cd666d2e8c287e2ab7bf11ee0097bd0c1dd2e94659a0f",
+    "images/023_input.png": "a60c5908877255fec336ba6a9153f8b2ffbb578be7e8d30af1e219224d3ea66e",
+    "images/023_answer.png": "839ee1699d740a549a8a34c57b3f9a3fcf55029b6c3467b3acfda61c2532bd3b",
+    "images/023_reference.png": "ce2e62f2ededb8beef8e88de6f1ac65aaf5bdaf8f76d7dc454e66c5536212ad4",
+    "images/024_input.png": "c6b674e6c55dbefde3f01f7d07f8983c24c93d8131daad47163d3540da99e943",
+    "images/024_answer.png": "0955de61aba9c17219f9c0dc4cc48d63f6f9738ab49e9afb98765bcff75d5ef4",
+    "images/024_reference.png": "14f3d16755e0808b2c766a25aa2fccca4d9b778d99689791c0ca159a31b243c7",
+    "images/025_input.png": "0ebea5fdcedbf5a1df93613f5f6e5dce5d982db801b83f801e460ac62ba47548",
+    "images/025_answer.png": "07a19697b9f3c66796596c371422829a592a7e60555cd5442e41d5f77be4ec80",
+    "images/025_reference.png": "d25ab2c2801ab0c95e0ec37f88cb12b54ec1e933ace0f5759c358d3ef8f7cf02",
+    "images/026_input.png": "68a998a42b22b4c0ec1b0f1191b036d8d91d2845f2ed06260a74234a36602764",
+    "images/026_answer.png": "94f7e470fa3b6eefa7c46f239e3f50b23b80658a3cc33cd89dfb1d0317ca808f",
+    "images/026_reference.png": "46eaefa37281091915483e450b5daa565fbf7be8997db5516289051218a2dd00",
+    "images/027_input.png": "385e18fce901c4befd3967763641dadfbbbc135c42bb7e331514a0fe84519be2",
+    "images/027_answer.png": "4c4d88e3cdee6c9068388679627f478e162d1e909df27422effb44400e76603c",
+    "images/027_reference.png": "fdec8ec5127c5285fabf1f98e997ce36fe1dd9eac0bc7d953361b39871c24374",
+    "images/028_input.png": "f8a77fa9202efdf6cf9b4d0f1a74c3271b5f7aa4824fee460551a443b869f314",
+    "images/028_answer.png": "6e6504409b7fe639837262a2ab4b3d14f2b182ec6fa7e53ae0e18f3d717553cf",
+    "images/028_reference.png": "1aecfb953869a96107257da567a8c35f020cbae1c08f01f5b5a2bacc0b64b2ab",
+    "images/029_input.png": "31e51084dd6112d7916a73e2230013a941578827da015eb67d01b221b04f2879",
+    "images/029_answer.png": "23ff47dd7ba0465ce5561316e0c35e1a9b1e3c478944071849c23ecc07529ee6",
+    "images/029_reference.png": "c2dc45309baa83eafeb944eeb9f389879938c1b10879f4d9ce46c2094a8f46bb",
+    "images/030_input.png": "7829913cef645478b87da74043dd494fa248b236e4b3ec61123a32e26ba6e211",
+    "images/030_answer.png": "bad327718fe8b58a6a675aa875f34455aa34ea0cc35a449f9ece1c60f501b3de",
+    "images/030_reference.png": "fbd321d8edcb2cf676913bacf280388a6b758510465197cb10387935f899f4e4",
+    "images/031_input.png": "9ab372d8542b7cb86a33ad99d87b243b7ee32e1a34b8e65e3c283df9803e05db",
+    "images/031_answer.png": "d91da6eddd5c56a7308eea42f6d5e96516b2ff16932133d0549b813595e9b80f",
+    "images/031_reference.png": "13ab66490deda049a9c1528ce00fc0d91f8bcc0ea660f1a231b914dcda83ba93",
+    "images/032_input.png": "1f5dcb5348519a1e759fdbf469a7fb9e4036c143da68f9c49456baeb2ca2b702",
+    "images/032_answer.png": "bc7a51d8ae4e67339f657c81ab018f290bbea0c68dae17bef5ada1fb4ab23142",
+    "images/032_reference.png": "d3218e9e4fe9bc3efb6e67d69b5f4e5c5c04cbc8ff5d025c7fffce6d04b3e7b3",
+    "images/033_input.png": "2987d6d82ff069e8b0e2d3ba1d27e48effc56e5fb37f07a55966bf1db2e881a1",
+    "images/033_answer.png": "49f443c7867529b894f142a82d2662b1405e20857e7a272bb0b632f3a36332f5",
+    "images/033_reference.png": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637",
+    "images/034_input.png": "8114b630be2718eeb76b049c157c4ab5c965f70846d9cf298ee667184c943818",
+    "images/034_answer.png": "b1d91249ea042a559e31c4f799de11ac5e314763908e6a2c5752079d6942a1b7",
+    "images/034_reference.png": "ff4351560d0d32741a4282eee7f0b8f4db28056297f7e02fb98bc995c57b2d81",
+    "images/035_input.png": "e20b724f98abb45df21a4dff1d834d3ffd431fe9982648614be42ba9da847004",
+    "images/035_answer.png": "6f0a0997582d346e0f3ba8e2cc01307dd750482db51a578ae35aaf804c6d320b",
+    "images/035_reference.png": "4adf3ccd33436459f7ef85b4651cc49519323ab838fb3d15b2e23ca97cfecc5f",
+    "images/036_input.png": "9b28aca56094ac8b3af8639a7303ddb80100510f9355c831f84197ff5fddba31",
+    "images/036_answer.png": "0b6ab4807cb5f4fccea033a9b4085ad454a068d7023499d027274d3a0a9cf7f8",
+    "images/036_reference.png": "e4fd142a97ff89485a7699a90c309448e63725ade3dafa4762ad3a2d03ae79c7",
+    "images/037_input.png": "2834d4dc6727c8e7c36282a06b62542c910ed294e991e7163dea3d4bbe85a627",
+    "images/037_answer.png": "84388dfe534e285e5dc639c706825dd734b9aa27e476ad440fd315dafd1e0ee1",
+    "images/037_reference.png": "573af95fe7f918b611d270a36257ae77a71725dabebb4c8c8f7980b8c8716a72",
+    "images/038_input.png": "89a988786eaa60263d8afc860e9dd1a754f3cf51237dd9803ce258de6af8bb4f",
+    "images/038_answer.png": "d5006cf2898ffcbd82d8cd030e167ccc313f5b3fffb842366f8538076d0ca3d3",
+    "images/038_reference.png": "c9cddb61a346e7305f3d3d1c4a4c8fe599777ed31892710a37550c9b20117d16",
+    "images/039_input.png": "a365b0db9fe8a9d48b14f3569ad4ae1b351ce3647108538da4f00dc44f03020d",
+    "images/039_answer.png": "7adb556f7ee5a0ce4e6ecaca6443cc1c72359506999188a9c5fdcbe6889c586a",
+    "images/039_reference.png": "d8604fa0c5ff3239391ed4a5c31bbcee3c0dcacc71815bdeddd27ffb3628aff3",
+    "images/040_input.png": "55068e7deaef0f2a537a54cb054e083e4e593928c8ed066a0ea19ce6e4d58753",
+    "images/040_answer.png": "60bcd2d4e3f1e91497159c295ab0f65258b262f5b42c92f7fe33937975c51308",
+    "images/040_reference.png": "2fe6c9ed7a952fdea69b715b29cf2e4a10ffe21a821aa0880b35b10f79f0f36e",
+    "images/041_input.png": "5a7aa84f7b92e77ef4faae2c9ac7a0a1c5054dc811c1e37648e943d63d668517",
+    "images/041_answer.png": "4061bb7a8db93e942251a49172ee6e79603a82c5894d966de4ca82af51240bff",
+    "images/041_reference.png": "180b768f1ed3f6086a67972185c4f3142823b2e6431d91369bbc731127e42a4e",
+    "images/042_input.png": "8d733513cff3bb605a0fdf9f11194796407d32f1c742243d99c8ee5676783037",
+    "images/042_answer.png": "03722a20df528e74f9a1deee017d3f1f2042c064bac0434fc95f026efb3f88d7",
+    "images/042_reference.png": "9fce41f0b57c3744d10da21ede1a55ad18b08f20a0906dd3c7660723197dc982",
+    "images/043_input.png": "b36cf19ca36236f8c8b7629aee717613e8de1c925cefaacbb94e56aad04fe462",
+    "images/043_answer.png": "97245978ec518d5621388ad4b32d7d52e8d65ed0a9858a8ad0f152d6546bff55",
+    "images/043_reference.png": "1c396c569da2bcec8d1640061b3b0399bfb7469814a3b6c19b800d71d3613ce2",
+    "images/044_input.png": "45ebfb02ddcf36847c2ecf16bb0118bac5a545503c4cfb1e059559c11e861855",
+    "images/044_answer.png": "59ac0952ab98aa3f62f24370dc91436337dafa070ab2afb970db22507d7deedb",
+    "images/044_reference.png": "99e2db7957b80c9e759e455ad55eb0a0fc58e20de2729c34674155efd6c1db02",
+    "images/045_input.png": "eb100c71e72a600c11bee8ea13111b9f398f1d54a9e5a78a2fc97f99d11ac723",
+    "images/045_answer.png": "c6b6e156286a5878979507a50408987ab32612aed2bb97ecff63e78da33e2ac7",
+    "images/045_reference.png": "12977b7cef0d1b691a62062e46cf709ec3b1dc67310e51163b9cf22d450030cb",
+    "images/046_input.png": "5509d762149236407aa9f716d9eabcc73a74fccd803506ca979bc067602e22ce",
+    "images/046_answer.png": "544e2fade5cfa48281e80adab014643905f6636ad0ccacf1f9d71fe29d10f842",
+    "images/046_reference.png": "751e113aa9453fa7854364d7a5591b4b1f940b96ab760a637429627f06b9865f",
+    "images/047_input.png": "343532947528366485f0a2aaa47dd110310c5b62849fe24c18c50fbdf12d221a",
+    "images/047_answer.png": "fc9ccb85d6f28a63be80712107e626a958185531392492991fb325448f2aaa8a",
+    "images/047_reference.png": "ae655c585f0591e64eb053ddf1c0efdbe3e227ad95bb4af4be553478a1079fe9",
+    "images/048_input.png": "5af97a46557c88f7875dd73dbdce39e293343917d999fd0c5da5e08ffd441978",
+    "images/048_answer.png": "18d69d0c9e6729e6d88cbde31c7537bf3316366d36e744887f59ef744ec3e6fd",
+    "images/048_reference.png": "4ed14dda167dc2b28a42e91cb09d2f89412fd171a08352c5abe829447fefc09d",
+    "images/049_input.png": "1cc9113e494cae618afdd7f3a2dfc4e08d56a52e2cd02591716eb3ab9f2503cb",
+    "images/049_answer.png": "1f0ded0487515b51edc9667dc5d2f1a1e6951eb52ed3736a7143b35f839d4df8",
+    "images/049_reference.png": "9ffac827691fb43ca3a57977dee710412ea81b348bb21181bbce6ca3d6dae847",
+    "images/050_input.png": "a406aac670dc8457d8e64e333994f5fc4fd208b998f415e4aeb3ccd700dad947",
+    "images/050_answer.png": "44cd405baf112bac65db7c12448600e10bc5fda13de345e12672b50fab11a3e9",
+    "images/050_reference.png": "d3661323e07f2ecbaa28238ed7f8b3a460dcba463db09edf8f482b2d9f4af2cd",
+    "images/051_input.png": "11e18990b5df4e038a7923bce33b07d05c644d0fcc4139ee6ef383c4a6606641",
+    "images/051_answer.png": "5a62bf48f81cb846cc2a511fbda5d621798a9217a51aaaa47d5aea00fde8fe1c",
+    "images/051_reference.png": "bb857cc1ec495e4f7268a894d8f2f0e53ecf0f7b361ba0c1d88b79f6a964189c",
+    "images/052_input.png": "fdb1df276fa71e72849d7a441394f366abb3c20087890106f18c9e259fb97930",
+    "images/052_answer.png": "08cc45254654e7b45263e139ad2c7e360ff338af3f1d3f7271599cb032573047",
+    "images/052_reference.png": "723241f80211b3a7a585de8f8d25547090789fdce2f6e9fb02a0f0ae7cf5cbbb",
+    "images/053_input.png": "29b2d0c7b84f38313b97ce455446b8e5ff2c1bec2b6ae831e8bd91184e398d51",
+    "images/053_answer.png": "ca54453cf22b7aee81b2f5d7c56823f651dc61ada2b2edd8cd37725d9eac4de6",
+    "images/053_reference.png": "01abac3b452823f067e0207b3eb4e83f730ab855d3b7874e978712150e67f6e1",
+    "images/054_input.png": "f0141f3a2ff20a347f8d2d2052cb042bc4d38e7215a6e3a26af739e6d6544e44",
+    "images/054_answer.png": "8e56f30b4f85fb03a8674187b744a016ca92cc74d660f3f25328fcd119de82f5",
+    "images/054_reference.png": "c97096b3b0b730f9d3b5856763563d628334e67b79677c82567a521192e3e398",
+    "images/055_input.png": "ce8b88c71c3a84e0c54734fb0f6288304ec422f6223e2f6406f36f04cd30792f",
+    "images/055_answer.png": "c05ea74b2401ff5eca8d7ced6d08b2e473d6e00ad845c09d1634a97dd197b52f",
+    "images/055_reference.png": "1475525a1799d7407d2e9cbf9bdd8a33d157caca669df6f147025395245cc572",
+    "images/056_input.png": "621bab9abd7114c973983417b1c2007b7eafceeefd1ef26f525eec640f861ada",
+    "images/056_answer.png": "69a4ffefe1af3c8b82fef8b5a0ea96db07c8e4720c9950440962da70c03fae5d",
+    "images/056_reference.png": "e6337e550edb8e61069316787e0bc987dbf2b7974d9b68b5e5ffdc9206733dcd",
+    "images/057_input.png": "774a811c3bec12ffa915465b0c941342801b4eff36480a05695431bef895fbdd",
+    "images/057_answer.png": "bb163927449cf3a2fc9a3eee228323589f0dcd04da3b614f8aa6722072ecbe04",
+    "images/057_reference.png": "8b2a96363a77a7315a1aeb03a0966cdd9b0b7245b887b18941276b91ae035b68",
+    "images/058_input.png": "8598a3bba783111d2e5149b72760c756e278a272366475e62c74dcced872f587",
+    "images/058_answer.png": "0ce0da70b110e81d0b678e7ec48280797e5c44edcbb264a37851c4c20ce7c989",
+    "images/058_reference.png": "b6fa0d79f397b49f3ab501ee1fb24db5b01a897d06b6b58d6eeb7c13cf2b3a17",
+    "images/059_input.png": "c268421131da777b82ad889307e6c157560feeec276a006e16e80c250956284d",
+    "images/059_answer.png": "02d8896150339d0b839498edd47be8ee1e71b804d6620f76e5873f99fc426023",
+    "images/059_reference.png": "e748e45fd277c5f0a511697e3e9b1264962ac8f37a3ee62a79f8dcf1c3110bbb",
+    "images/060_input.png": "03d96eeb14bda9e0ca122383e7e1263d6d3f519f61629bcf6dc2cc2702f0cc5e",
+    "images/060_answer.png": "4051741f59b51d94546ac9f04357c80f75c57ad0ff30f7fffddc784f1cd9ea7b",
+    "images/060_reference.png": "d9f372e1d1e59cfbef91f1252687f2c2c8369d20bbe7992ac17e449da9ec5e8c",
+    "images/061_input.png": "8d232e4275e8b3306d06aa4de3a79ba8b38d6d5ae761c77e56b3009235277bfe",
+    "images/061_answer.png": "e946debe9dc70cea5399f76559fd5844cc523356176e4b083c5b5d7c3a479057",
+    "images/061_reference.png": "60825793c124f70902e32f6c0629d9fb98eb0dbb79d88f1051de242921ca3fb6",
+    "images/062_input.png": "8320adad9e7f4c5361a3325528c178daed73b266fa986cb857ffa8851554ff52",
+    "images/062_answer.png": "3376263dbc9f537ec15a4ba0a8e1522b92b12d7c2260140d26090a8c222301b0",
+    "images/062_reference.png": "0e306b81285dd8fce227d3249d14fab0a5354ef5b82112b074d936427055d328",
+    "images/063_input.png": "f2affcd89af77a8697fedfef2364dc6decf976059005ffed443698e3d4d36489",
+    "images/063_answer.png": "15256878d4c5fbe27b68d9161523ad385539a8e964f0a95cda83b403d9379ec2",
+    "images/063_reference.png": "1b07918469a2ca674a58981a6af4f3a47f164fd6bc508b5902227b4ece2bb6b6",
+    "raw_inspection.json": "3b94b7f8e2d2980fb6cbb8d9f0b311d6c48568408b750e830ba490f02194e19d"
+  },
+  "all_original_input_answer_reference_PNG_bytes_unchanged": true,
+  "all_answer_PNGs_authenticated_against_actual_decoder_tensors": true,
+  "complete_copy_cohort_raw_review": true,
+  "manual_accuracy_assigned": false,
+  "full384_assessment_completed": false,
+  "initial_final_learning_gain_established": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

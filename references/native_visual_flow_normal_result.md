@@ -7,6 +7,11 @@ leaves both counts at zero. The complete initial/source, erasure and copying
 comparison remains in progress; this interim result supplies no learning-gain
 estimate or causal explanation of the failure.
 
+The completed [copying cohort](native_visual_flow_copy_result.md) also fails
+to establish reliable writing: 2/32 seen strings and 3/32 held-out strings
+match exactly under the registered OCR rule. All 64 copying outputs have
+been inspected and authenticated against their actual decoder tensors.
+
 | Completed final normal cohort | Seen | Held out |
 | --- | ---: | ---: |
 | Questions | 32 | 32 |
