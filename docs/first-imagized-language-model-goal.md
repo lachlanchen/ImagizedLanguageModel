@@ -4,11 +4,19 @@ Updated: 2026-11-08
 
 ## Immediate decision: demonstrate learning before scaling
 
-The [completed balanced image-writer continuation](../references/balanced_autonomous_writer_result.md)
+The [completed matched physical-loss replacement](../references/ink_mass_comparison_result.md)
+gives 18/32 seen and 19/32 held-out OCR-exact copies versus 16/32 and 16/32 in
+control. Held-out Chinese improves from 4/16 to 6/16. Its exploratory rule
+passes, but reliable writing and semantic language remain unproved. A separate
+[full-page preflight](../references/native_paired_language_preflight_result.md)
+fits two real, discarded QA updates within 12.203 GiB; the fixed unoptimized
+QA baseline still gets 0/4 normal answers. Preserve the complete language goal.
+
+Earlier evidence: The [completed balanced image-writer continuation](../references/balanced_autonomous_writer_result.md)
 gets 17/32 held-out OCR-exact copies, including 4/16 Chinese, but seen copying
 falls from 15/32 to 13/32. It fails the Chinese and seen-retention requirements;
 only held-out English retention passes. Raw omissions, repeated letters and
-duplicated lines reject the unchanged 30/32 writing floor. No semantic QA was
+copied instructions reject the unchanged 30/32 writing floor. No semantic QA was
 trained or evaluated. Do not scale this unchanged copying recipe further.
 It retains a 3.900B externally pretrained transformer and an 84.046M VAE;
 training adapters on one GPU does not establish efficient language acquisition.

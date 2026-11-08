@@ -1,0 +1,41 @@
+{
+  "result_sha256": "56136f05338c02ef8196515e8e31535e80022590beace3bc0c539a6fc5a45b46",
+  "complete_cohort_reviewed": true,
+  "all_four_original_order_galleries_inspected": true,
+  "scope": "All64target/starting/control/treatment panels inspected at original gallery resolution; listed individual512x256PNGs also opened. Not a quantitative manual accuracy annotation.",
+  "full_resolution_cases": [
+    "copy/train/000",
+    "copy/train/004",
+    "copy/train/012",
+    "copy/validation/002",
+    "copy/validation/015",
+    "copy/validation/026",
+    "copy/validation/030"
+  ],
+  "treatment_visible_failures": {
+    "train": [
+      "000 repeats a character",
+      "004 omits characters",
+      "013 extra quotation mark",
+      "027 extra quotation mark",
+      "028 extra quotation mark"
+    ],
+    "validation": [
+      "002 repeats a character",
+      "005 malformed evening/close",
+      "015 missing morning and malformed evening",
+      "016 extra quotation mark",
+      "026 extra character",
+      "030 copies instructions"
+    ]
+  },
+  "verified_visible_improvements": [
+    "train012 removes extra instruction line relative to control",
+    "validation000 removes extra quotation mark relative to control"
+  ],
+  "writing_floor_met": false,
+  "ocr_is_not_manual_accuracy": true,
+  "outputs_repaired": false,
+  "semantic_QA_trained_or_evaluated": false,
+  "general_ilm_goal_complete": false
+}

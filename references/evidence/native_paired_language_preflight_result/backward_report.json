@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "stage": "backward",
+    "source": {
+      "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+      "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+      "files": {
+        "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+        "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+        "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+        "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+        "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+        "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+      }
+    },
+    "implementation": {
+      "scripts/probe_native_paired_language.py": "253876beb9e54122120575cd8f6b3c48dad21a8a966a7b3871cb9e451c0e076f",
+      "references/paired_language_native_preflight_protocol.md": "602420c61d0fa846eeeaeb6b8de7bb48d28b6ab39dc293bf5c70cc43df5fe152",
+      "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/autonomous.py": "fdc9026e07132bfb5cf937d7fa08f0d584ecb4b02632de146b28e20ded0f9a74",
+      "ilm/image_edit/recognition.py": "e36af38f1700052dfad97055941e1b513a4c61088d183f351a175e919c8c8adc"
+    },
+    "native_implementation": {
+      "pipeline": {
+        "file": "pipeline_flux2_klein.py",
+        "sha256": "8a57a8a7f1c22fc0c5bc5d3fd1bd9bc76c17c1f4d6644cc73370651dd955358e"
+      },
+      "scheduler": {
+        "file": "scheduling_flow_match_euler_discrete.py",
+        "sha256": "8b96f25a6170480fb02decb58904e026250d6d68be5de8a7b8785b4c721e9d80"
+      },
+      "image_processor": {
+        "file": "image_processor.py",
+        "sha256": "d2cdc003444c8599e89789dfede8636d2534697bb3fe60d4b48cc0656b3b4e83"
+      }
+    },
+    "input_index_sha256": "2778853484f969b134ccad09fc04b01b67d0b72325f738d080b822605b806dd1",
+    "manifest_sha256": "e2d6aec134a99e079a9bd42f217559a04e32727bdbc4b09d131b0fb22cf4dfa6",
+    "original_input_canvas": [
+      1024,
+      1024
+    ],
+    "answer_canvas": [
+      512,
+      256
+    ],
+    "independent_language_goal_complete": false,
+    "initial_checkpoint_sha256": "fc031796540a4b6ca4c86774a5033e94ae32b415e825b6a221128756748d3575",
+    "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+    "training_only_reader_source": {
+      "repo": "stepfun-ai/GOT-OCR-2.0-hf",
+      "revision": "d3017ef2c2c1395888c8d635c5e0508bcb0ac78d",
+      "files": {
+        "model.safetensors": "6175ac7868a4e75735f5d59f78c465081ad3427eb4f312d072a0f1d16b333ba4",
+        "tokenizer.json": "36b382a3c48c9a143c30139dac6c8230ddfb0b46a3dc43082af6052abe99d9de",
+        "config.json": "cbe8aacd6cd84a2d58eafcd0045c6ac40e02e3a448f24b8cee51cc81d8bdccf2",
+        "generation_config.json": "31915c5a692f43c5765a20cfc5f9403bcd250f5721a0d931bb703169c08993b4",
+        "preprocessor_config.json": "ef9a0dc0935cac11f4230ca30d00a52bedfa52b6633e409e9fbd2ea56373aa7e",
+        "special_tokens_map.json": "7c2368a3889fdfb37c24cabeb031b53f47934f357b54e56e8e389909a338ea47",
+        "tokenizer_config.json": "8b0542937d32a67da8ea2d1288b870e325be383a962c65d201864299560a2b8e"
+      }
+    },
+    "objective": "unchanged final-image recognition CE + 10 balanced L1",
+    "parameters": 24358912,
+    "updates_discarded": true,
+    "optimizer_updates": 2,
+    "changed_adapter_tensors": 206,
+    "all_optimizer_steps": 2,
+    "discarded_adapters_sha256": "74774df942fc2999ca62b839cdb41fa172bc9c64e329fd3820f076c480247b5b"
+  },
+  "observations": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "seed": 20268802,
+      "input_sha256": "e1b36dd154e800a3c52f204b2f8899bd078a5c24575b607ca6be1cbf09b70a4f",
+      "target_sha256": "7c1d4dd4ed682a5f95fe7d36c87e7f26be4d600cafa01af13373d20e797afab9",
+      "loss": 10.478460311889648,
+      "recognition": 7.674609661102295,
+      "balanced_pixel_l1": 0.2803850769996643,
+      "target_ink_pixels": 1275,
+      "gradient_norm": 2026.1844482421875,
+      "prediction_gradient_norms": {
+        "0": 0.7850812077522278,
+        "24": 1.449723482131958,
+        "49": 0.1216556653380394
+      },
+      "output": {
+        "png_sha256": "fe1cb69bba7edb561e18d63f9fb56e36b9b5facba8bf83481c5e02a796331a68",
+        "pixels_sha256": "eb8c3629a2cc5d24bb6be9e134cf33b029b1bf00f30fc90e167fd64d2a0644e2",
+        "shape": [
+          1,
+          3,
+          256,
+          512
+        ],
+        "output_repair": false
+      },
+      "initial_native_forward_equal": true
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "seed": 20268803,
+      "input_sha256": "71a011fe43778434befb6a095101d28ee8d7a1d9fdc4cf2ad9e63ab237f2e509",
+      "target_sha256": "983ea43a5e10f5a6308936bfab9b377de3a83ae2285fc69fb5953113029e6609",
+      "loss": 10.873495101928711,
+      "recognition": 7.902994155883789,
+      "balanced_pixel_l1": 0.2970500588417053,
+      "target_ink_pixels": 4424,
+      "gradient_norm": 123.28094482421875,
+      "prediction_gradient_norms": {},
+      "output": {
+        "png_sha256": "e23750d8bbe5998f79ecd98012acae5b4608457d49adbecb88e94afb7365ae73",
+        "pixels_sha256": "aa25815bad5b1a4d583ff6df35bcaabca65e293aceba4af31f769e30411add6d",
+        "shape": [
+          1,
+          3,
+          256,
+          512
+        ],
+        "output_repair": false
+      },
+      "initial_native_forward_equal": null
+    }
+  ],
+  "elapsed_seconds": 228.87889877147973,
+  "peak_allocated_vram_gib": 12.202743530273438,
+  "model_execution_completed": true,
+  "raw_review_completed": false,
+  "semantic_learning_validated": false,
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}

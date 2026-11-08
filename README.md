@@ -23,12 +23,23 @@ reported directly below.*
 ## Current result: autonomous image-language writing still fails
 
 The [current direction assessment](references/ilm_direction_assessment_20261108.md)
-finds no validated usable ILM. The [completed balanced continuation](references/balanced_autonomous_writer_result.md)
-gets **17/32 held-out OCR-exact copies**, including **4/16 Chinese**, but seen
-copying falls from 15/32 to **13/32**. It fails two of three preset continuation
-requirements and has no semantic-QA evaluation. Raw repeated letters, omitted
-characters and duplicated lines still reject reliable writing. Further
-unchanged scaling is not supported by this result.
+finds no validated usable ILM. The [matched physical-loss replacement](references/ink_mass_comparison_result.md)
+gets **18/32 seen and 19/32 held-out OCR-exact copies**, versus **16/32 and
+16/32** in control. Held-out Chinese improves from **4/16 to 6/16**. All three
+prospective exploratory conditions pass, while raw omissions, repeated
+characters and copied instructions still reject reliable writing. No semantic
+QA is trained or evaluated in those two arms.
+
+A separate [full-page preflight](references/native_paired_language_preflight_result.md)
+executes two real, discarded QA updates at **12.203 GiB**, but its fixed earlier
+checkpoint answers **0/4 normal questions** correctly. The eight raw normal/control
+outputs and four full-page reconstructions are retained. Execution and copying
+gains have not established language understanding.
+
+The earlier [balanced continuation](references/balanced_autonomous_writer_result.md)
+gets 13/32 seen and 17/32 held-out copies, including 4/16 Chinese, and fails
+two of its three requirements. The new comparison starts from those exact
+weights and optimizer states rather than selecting an intermediate checkpoint.
 
 The [completed additional-training control](references/autonomous_writing_control_result.md)
 now gives **5/32 seen and 10/32 held-out OCR-exact copies**, versus **15/32

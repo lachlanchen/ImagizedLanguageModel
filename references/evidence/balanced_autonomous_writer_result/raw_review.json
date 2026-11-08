@@ -23,7 +23,6 @@
       "000 extra quotation mark",
       "002 repeated character",
       "016 extra quotation mark",
-      "026 duplicated line",
       "030 copied instruction"
     ]
   },
@@ -32,5 +31,14 @@
   "raw_outputs_repaired": false,
   "scope": "All64cases inspected in original-order target/starting/final galleries; listed raw final PNGs also inspected at original size. Not a quantitative manual accuracy annotation of every glyph. More than two obvious failures per split reject the30/32writing floor.",
   "semantic_QA_trained_or_evaluated": false,
-  "general_ilm_goal_complete": false
+  "general_ilm_goal_complete": false,
+  "description_correction": {
+    "case": "copy/validation/026",
+    "original_description": "duplicated line",
+    "corrected_description": "one line; the duplicated-line statement belonged to the earlier pilot output",
+    "image_sha256": "ee619ec131a1f622a122e4d1dd86174567a84c00fdab7822bebc42d1de8338e9",
+    "prior_review_sha256": "a460960b84f8c4e14b3ee35976c027a344317cbb26beaac669db663e35becf23",
+    "scores_unchanged": true,
+    "writing_floor_still_failed": true
+  }
 }

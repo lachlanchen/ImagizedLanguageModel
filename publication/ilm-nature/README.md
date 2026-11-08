@@ -15,6 +15,15 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The newer [matched ink-mass comparison](../../references/ink_mass_comparison_result.md)
+gets 18/32 seen and 19/32 held-out OCR-exact copies, including 6/16 held-out
+Chinese, versus 16/32, 16/32 and 4/16 in control. The
+[full-page preflight](../../references/native_paired_language_preflight_result.md)
+fits actual gradients but gives no correct normal answers in four fixed
+baseline questions. Incorporation into the manuscript is pending; the
+published package below still reports the earlier balanced continuation.
+
+
 The [completed balanced continuation](../../references/balanced_autonomous_writer_result.md)
 gets **13/32 seen and 17/32 held-out OCR-exact copies**, including **4/16
 held-out Chinese**. Seen copying regresses from 15/32. The Chinese and

@@ -25,7 +25,10 @@ All 64 final outputs were inspected in original-order target/starting/final
 galleries. Selected failures were also inspected at original size. Seen case
 004 omits characters; case 012 copies instructions; case 025 repeats a letter
 in `small`. Held-out case 000 has an extra quotation mark, 002 repeats a
-character, 026 duplicates a line, and 030 copies instructions. More than two
+character and 030 copies instructions. Case 026 has a single line; an earlier
+description incorrectly carried forward the pilot's duplicated-line failure.
+The corrected review preserves the initial receipt and leaves all scores
+unchanged. More than two
 obvious failures in each split independently reject the writing floor. These
 are unrepaired model pixels, not typeset substitutes.
 

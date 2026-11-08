@@ -5,6 +5,15 @@ image writer improves some copies, but cannot yet write requested Chinese
 reliably. No natural-question answering has been trained or evaluated in this
 writer. Scaling this checkpoint to books would get ahead of the evidence.
 
+The [complete matched ink-mass comparison](ink_mass_comparison_result.md)
+now gives 19/32 held-out OCR-exact copies, including 6/16 Chinese, versus
+16/32 and 4/16 in control. The prospective exploratory rule passes. Reliable
+writing still fails, including visible omitted and repeated characters.
+The [complete native full-page preflight](native_paired_language_preflight_result.md)
+fits real two-update gradients but its fixed earlier checkpoint answers 0/4
+normal questions correctly. No complete language-learning experiment has yet
+been demonstrated by this writer; the broader goal remains unachieved.
+
 ## What the actual outputs establish
 
 The [complete 32-update continuation](autonomous_writer_result.md) changes
@@ -75,7 +84,7 @@ executes all 128 updates with four complete passes: 64 Chinese and 64 English
 draws. Held-out OCR exact match rises to 17/32, but seen copying falls to 13/32.
 Held-out Chinese reaches only 4/16, below its 6/16 requirement. English reaches
 13/16. Two of three prospective requirements fail, and raw extra marks,
-omissions and duplicated lines still reject reliable writing. This result does
+omissions and copied instructions still reject reliable writing. This result does
 not support further unchanged copying-budget scale-up. Full exposure did not
 repair the writer. Diagnose the objective's physical errors before another
 repair, and keep the independent paired-question language test separate from

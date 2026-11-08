@@ -1,0 +1,118 @@
+{
+  "stage": "completed",
+  "updates": 32,
+  "metadata": {
+    "arm": "ink_mass",
+    "physical_coefficient": 0.4035679875746343,
+    "audit_sha256": "cd1e5f81587eddd1ad83a624a5611876d489b3d539e03bda3d1bc4830a293f4f",
+    "source": {
+      "repo": "black-forest-labs/FLUX.2-klein-base-4B",
+      "revision": "a3b4f4849157f664bdbc776fd7453c2783562f4d",
+      "files": {
+        "model_index.json": "de1fef01845f0af3e1e2f2581cd5e86f2dfa4a4776f7f0b26b4c77feac4ee70f",
+        "transformer/config.json": "c8a88c1433f24e52c01f46766c9f519e76d91d1c00bfb43fe0db2e4ed3c84d70",
+        "transformer/diffusion_pytorch_model.safetensors": "e109674697ffa1a3983126e32512f5428a9442bd8df59f9c95566ee90a473bb6",
+        "scheduler/scheduler_config.json": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e",
+        "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+        "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+      }
+    },
+    "rank": 16,
+    "implementation": {
+      "scripts/train_ink_mass_writer.py": "5b35b2888febc99feda56cf2135f26f5eaa89a7efc3a86d42e9d0c38c967a3d8",
+      "ilm/image_edit/ink_mass.py": "536c86d343001e56e909fdab2e2ed3c222e7dc1c010d51d80d5b8f39ef25a035",
+      "references/ink_mass_writing_protocol.md": "ecbfda51e9e863f8d25d9131e80544be1144b1cf6cbb1699cf185244f8bf19e1",
+      "ilm/image_edit/autonomous.py": "fdc9026e07132bfb5cf937d7fa08f0d584ecb4b02632de146b28e20ded0f9a74",
+      "ilm/image_edit/paired.py": "d5796aeececeaa35c88ecc4369d1281e69a7a8a511e5b9bee9dcda0c162f85c7",
+      "ilm/image_edit/recognition.py": "e36af38f1700052dfad97055941e1b513a4c61088d183f351a175e919c8c8adc"
+    },
+    "initial_sha256": "fc031796540a4b6ca4c86774a5033e94ae32b415e825b6a221128756748d3575",
+    "condition_sha256": "106b34069067c537c0d47c308f15693aca8295773e1ed80563ea19feb1e8c9a4",
+    "manifest_sha256": "8a6a0ad0f8754237194873d7a32fc518145e55a22c956aad71ea747549153f04",
+    "inputs_sha256": "df2735b1e7bf78ab8fa9311dc410ec99f06592f7ddc20ad6b7bac60fd43b816e",
+    "baseline_index_sha256": "2f2325cbf2e318f3af8132a2d278d720c697327129c013038db588b7e347f516",
+    "admission_sha256": "6657e37560ce681b9a00d40abc63728bbed56a9127270516db133636d5ebaf8e",
+    "training_ids": [
+      "copy/train/000",
+      "copy/train/001",
+      "copy/train/002",
+      "copy/train/003",
+      "copy/train/004",
+      "copy/train/005",
+      "copy/train/006",
+      "copy/train/007",
+      "copy/train/008",
+      "copy/train/009",
+      "copy/train/010",
+      "copy/train/011",
+      "copy/train/012",
+      "copy/train/013",
+      "copy/train/014",
+      "copy/train/015",
+      "copy/train/016",
+      "copy/train/017",
+      "copy/train/018",
+      "copy/train/019",
+      "copy/train/020",
+      "copy/train/021",
+      "copy/train/022",
+      "copy/train/023",
+      "copy/train/024",
+      "copy/train/025",
+      "copy/train/026",
+      "copy/train/027",
+      "copy/train/028",
+      "copy/train/029",
+      "copy/train/030",
+      "copy/train/031"
+    ],
+    "purpose": "matched_physical_loss_replacement",
+    "updates": 32,
+    "starting_optimizer_step": 160,
+    "optimizer_restored": true,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "seed": 20268601,
+    "schedule_seed": 20268602,
+    "noise_seed_sampler_seed": 20268603,
+    "schedule_sha256": "ad4926dd974ec6d1390e70b212217aa66f5be02000154dbfdc7979a98c0c21e7",
+    "steps": 50,
+    "guidance": 1.0,
+    "output_canvas": [
+      512,
+      256
+    ],
+    "objective": "reader CE + fixed training-calibrated ink-mass KL",
+    "teacher_at_inference": false,
+    "target_in_sampler": false,
+    "question_specific_text_condition": false,
+    "external_pretraining": true,
+    "output_repair": false,
+    "general_ilm_goal_complete": false,
+    "native_implementation": {
+      "pipeline": {
+        "file": "pipeline_flux2_klein.py",
+        "sha256": "8a57a8a7f1c22fc0c5bc5d3fd1bd9bc76c17c1f4d6644cc73370651dd955358e"
+      },
+      "scheduler": {
+        "file": "scheduling_flow_match_euler_discrete.py",
+        "sha256": "8b96f25a6170480fb02decb58904e026250d6d68be5de8a7b8785b4c721e9d80"
+      },
+      "image_processor": {
+        "file": "image_processor.py",
+        "sha256": "d2cdc003444c8599e89789dfede8636d2534697bb3fe60d4b48cc0656b3b4e83"
+      }
+    }
+  },
+  "checkpoint_sha256": "166409db4f87af87393576195251527f1fcf54d5fe12812d75f6d1491674717d",
+  "changed_adapter_tensors": 206,
+  "elapsed_seconds": 1145.5982957296073,
+  "peak_allocated_vram_gib_this_invocation": 12.033314228057861,
+  "trainable_parameters": 24358912,
+  "deployed_transformer_parameters": 3899903488,
+  "codec_parameters": 84046115,
+  "training_only_reader_parameters": 560528640,
+  "writing_qualification": false,
+  "general_ilm_goal_complete": false
+}
