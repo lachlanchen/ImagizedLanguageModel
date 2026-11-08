@@ -5,6 +5,14 @@ build waits for the separate active native flow training job to finish.
 No heavy manuscript/figure build is admitted alongside that model stage.
 This plan prepares one result unit; it does not qualify the independent ILM.
 
+Lightweight preparation may run while the separate model job owns GPU0:
+an isolated CPU builder may validate the completed QA export, append native
+OOXML slides to immutable baseline bytes and write draft TeX fragments under
+`artifacts/native_qa_publication_stage_v1/`. It must not load a neural model,
+start Office/LaTeX, modify active manuscript/figure files or update Nutstore
+aliases. This staging is not a rendered publication or a visual approval.
+The final locked build and PDF review below remain required.
+
 ## Baseline and current evidence
 
 Freeze publication commit `daef4bf`: 43 native slides, 51 native charts,
@@ -106,6 +114,11 @@ qualification and reused-development/single-schedule limits. A separate
 training-loss diagnostic, if needed, must identify changing weights/noise
 and must not be labelled semantic accuracy.
 
+Use an editable count table for the five identically zero QA measures and
+a native chart with embedded workbook for copying. Zero-height bars obscure
+the QA counts without adding a useful comparison. This layout preserves all
+five QA denominators, both checkpoints and the complete copying result.
+
 Figure S30: the fixed first held-out passage pair, its complete question
 inputs, references and original normal/control answers. Choose by the
 registered index, never by correctness or visual appeal. Keep every displayed
@@ -136,3 +149,32 @@ Nutstore ILM project folder, with hash verification and prior alias backups.
 Local copy verification does not establish cloud propagation. Commit and
 push the completed result/publication unit. Until all conditions above are
 met, leave the existing manuscript and its qualification unchanged.
+
+## Isolated preparation completed
+
+`publication/ilm-nature/prepare_native_qa_publication.py` has run on CPU with
+CUDA hidden. It authenticates the complete public evidence, recomputes every
+displayed QA/copy count, preserves all 43 baseline slides and 51 chart parts,
+and stages a 45-slide deck with one additional native chart/workbook. Figure
+S29 uses the zero-count QA table and copying chart. Figure S30 retains all
+twelve normal/erased initial/final answer images of the first held-out pair,
+both complete inputs and labelled source/reference display insets. Neither
+model pages nor their contrast are edited.
+
+The same preparation writes an abstract result sentence, compact Results
+paragraph and draft Supplementary Note 52 under the ignored staging folder.
+The [preparation record](evidence/native_qa_publication_preparation.json)
+binds the builder, evidence, original images, chart data and staged bytes.
+Native XML, displayed counts and embedded workbook values have been checked.
+It has not started Office/LaTeX, rendered slides, visually verified a new PDF,
+included these fragments in the active manuscript or updated Nutstore.
+All active publication files remain unchanged. Do not promote the staged
+deck or TeX until the locked build and visual review above are complete.
+
+```bash
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_native_qa_publication.py \
+  --output artifacts/native_qa_publication_stage_v1
+```
+
+Use the existing publication Python environment and a fresh output directory.
+The model Python is separate and need not be changed for publication tools.
