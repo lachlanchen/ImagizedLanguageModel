@@ -5,7 +5,10 @@ FLUX image generator. It tests exact copying before attempting semantic QA.
 Neither a passing gradient check nor lower training loss qualifies a useful
 ILM. The [prospective protocol](../references/recognition_guided_writing_protocol.md)
 and [resize correction](../references/recognition_resize_correction.md) retain
-the admission criteria and the first failed calibration.
+the admission criteria and the first failed calibration. The
+[completed 512-update comparison](../references/recognition_guided_writing_result.md)
+still fails: 6/32 seen and 9/32 held-out OCR-exact copies, with visible content
+errors. This recipe is not qualified for use or scale-up.
 
 The student receives an input image, noisy answer image and the same generic
 numeric condition for every example. The frozen reader scores the student's

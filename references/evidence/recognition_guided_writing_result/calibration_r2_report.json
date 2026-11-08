@@ -1,0 +1,775 @@
+{
+  "stage": "calibrate",
+  "source": {
+    "repo": "stepfun-ai/GOT-OCR-2.0-hf",
+    "revision": "d3017ef2c2c1395888c8d635c5e0508bcb0ac78d",
+    "files": {
+      "model.safetensors": "6175ac7868a4e75735f5d59f78c465081ad3427eb4f312d072a0f1d16b333ba4",
+      "tokenizer.json": "36b382a3c48c9a143c30139dac6c8230ddfb0b46a3dc43082af6052abe99d9de",
+      "config.json": "cbe8aacd6cd84a2d58eafcd0045c6ac40e02e3a448f24b8cee51cc81d8bdccf2",
+      "generation_config.json": "31915c5a692f43c5765a20cfc5f9403bcd250f5721a0d931bb703169c08993b4",
+      "preprocessor_config.json": "ef9a0dc0935cac11f4230ca30d00a52bedfa52b6633e409e9fbd2ea56373aa7e",
+      "special_tokens_map.json": "7c2368a3889fdfb37c24cabeb031b53f47934f357b54e56e8e389909a338ea47",
+      "tokenizer_config.json": "8b0542937d32a67da8ea2d1288b870e325be383a962c65d201864299560a2b8e"
+    }
+  },
+  "implementation": {
+    "ilm/image_edit/recognition.py": "e36af38f1700052dfad97055941e1b513a4c61088d183f351a175e919c8c8adc",
+    "scripts/calibrate_writing_reader.py": "219788ac1ac6ad80a2190511ec7eecd1215605da6596b4e2ba9b6cc5d2e72c77",
+    "references/recognition_guided_writing_protocol.md": "d2ab7a2a1bf504ca9b0d89ec37d7209419b85d98acfc8a389e21c1804dd256eb",
+    "references/recognition_resize_correction.md": "e6ac32f01cc102bd4d1ed3ffdccc68f55a6e6c616517cb9fc2d531de8f58ea6e"
+  },
+  "manifest_sha256": "8a6a0ad0f8754237194873d7a32fc518145e55a22c956aad71ea747549153f04",
+  "rows": [
+    {
+      "id": "copy/train/000",
+      "language": "zh",
+      "split": "train",
+      "expected": "花多地地山",
+      "raw_transcript": "花多地地山",
+      "exact": true,
+      "clean_nll": 0.01485531311482191,
+      "blank_nll": 9.531761169433594,
+      "target_png_sha256": "0ae00a2bb7ebceb4099f82039f0bc27d4b622d471178cc148175f297c65f8eb5"
+    },
+    {
+      "id": "copy/train/001",
+      "language": "en",
+      "split": "train",
+      "expected": "mountain bright blue cloud",
+      "raw_transcript": "mountain bright blue cloud",
+      "exact": true,
+      "clean_nll": 0.02488398551940918,
+      "blank_nll": 7.497799396514893,
+      "target_png_sha256": "8dc80989453ad53fb68e1cc732cdd16def56b63fb7c440a1b764a8bb2c6132a3"
+    },
+    {
+      "id": "copy/train/002",
+      "language": "zh",
+      "split": "train",
+      "expected": "风言外黑目家",
+      "raw_transcript": "风言外黑目家",
+      "exact": true,
+      "clean_nll": 0.048790186643600464,
+      "blank_nll": 10.488889694213867,
+      "target_png_sha256": "5bac224d518b46a78352bebfcf365b2d26f58d60ee37f5313a81f6dc66ce4f83"
+    },
+    {
+      "id": "copy/train/003",
+      "language": "en",
+      "split": "train",
+      "expected": "paper small winter garden",
+      "raw_transcript": "paper small winter garden",
+      "exact": true,
+      "clean_nll": 0.007791316602379084,
+      "blank_nll": 10.867596626281738,
+      "target_png_sha256": "4d09e52ae92a3b2d9a2e6b2bfa80680e596f4e487b76688776a88d6ff61614df"
+    },
+    {
+      "id": "copy/train/004",
+      "language": "zh",
+      "split": "train",
+      "expected": "雪明江雨左晚外中门画小禾",
+      "raw_transcript": "雪明江雨左晚外中门画小禾",
+      "exact": true,
+      "clean_nll": 0.0009491020464338362,
+      "blank_nll": 9.845219612121582,
+      "target_png_sha256": "e4f2283e1d844503fbec1a6334084cd17150bae2001e6e1877d8b6e84c42f872"
+    },
+    {
+      "id": "copy/train/005",
+      "language": "en",
+      "split": "train",
+      "expected": "window quiet small",
+      "raw_transcript": "window quiet small",
+      "exact": true,
+      "clean_nll": 0.035530589520931244,
+      "blank_nll": 12.057088851928711,
+      "target_png_sha256": "435d93522606467a9d14bde6af223e5763f628cad5d201c44adcca2cf5a98440"
+    },
+    {
+      "id": "copy/train/006",
+      "language": "zh",
+      "split": "train",
+      "expected": "人学耳人短旧下天田下木",
+      "raw_transcript": "人学耳人短旧下天田下木",
+      "exact": true,
+      "clean_nll": 0.006279827561229467,
+      "blank_nll": 9.148781776428223,
+      "target_png_sha256": "de4a2ebea21abc9b14dde3e2c3aceb6ae0de1836264409756f16a90da49c82a1"
+    },
+    {
+      "id": "copy/train/007",
+      "language": "en",
+      "split": "train",
+      "expected": "winter river book paper",
+      "raw_transcript": "winter river book paper",
+      "exact": true,
+      "clean_nll": 0.007721282541751862,
+      "blank_nll": 10.035534858703613,
+      "target_png_sha256": "645642e487a42187295ba94ab9929f0b50e9e49bb83d3431ba02013993a82356"
+    },
+    {
+      "id": "copy/train/008",
+      "language": "zh",
+      "split": "train",
+      "expected": "石河秋白草晚大心",
+      "raw_transcript": "石河秋白草晚大心",
+      "exact": true,
+      "clean_nll": 0.059978384524583817,
+      "blank_nll": 9.752739906311035,
+      "target_png_sha256": "6e43982b7f17c7513645ccc2ce3f78106bfe12db922d534d829c5c61315783b7"
+    },
+    {
+      "id": "copy/train/009",
+      "language": "en",
+      "split": "train",
+      "expected": "green open",
+      "raw_transcript": "green open",
+      "exact": true,
+      "clean_nll": 0.048834580928087234,
+      "blank_nll": 9.926748275756836,
+      "target_png_sha256": "ed02049a004677f2a60f6f88889f9a4dd196d3eb52746e811127c73c8b05e6b9"
+    },
+    {
+      "id": "copy/train/010",
+      "language": "zh",
+      "split": "train",
+      "expected": "心字秋湖新田",
+      "raw_transcript": "心字秋湖新田",
+      "exact": true,
+      "clean_nll": 0.009109771810472012,
+      "blank_nll": 9.053889274597168,
+      "target_png_sha256": "9cf6b14884c34e4f803fbb23a18f2e5c5e46d0a451c364e335904637428bed8e"
+    },
+    {
+      "id": "copy/train/011",
+      "language": "en",
+      "split": "train",
+      "expected": "blue garden",
+      "raw_transcript": "blue garden",
+      "exact": true,
+      "clean_nll": 0.024740146473050117,
+      "blank_nll": 8.542986869812012,
+      "target_png_sha256": "5a5fac3cc125df16dab741c9eb8f6cc3450ed45a61f585109293d4e62240d83f"
+    },
+    {
+      "id": "copy/train/012",
+      "language": "zh",
+      "split": "train",
+      "expected": "北夏风左星目",
+      "raw_transcript": "北夏风左星目",
+      "exact": true,
+      "clean_nll": 0.0008769211126491427,
+      "blank_nll": 9.614794731140137,
+      "target_png_sha256": "b4c35b754b0621905ddfefd29bb061a98a692442ff04ee20cd6fc189e7879beb"
+    },
+    {
+      "id": "copy/train/013",
+      "language": "en",
+      "split": "train",
+      "expected": "river open",
+      "raw_transcript": "river open",
+      "exact": true,
+      "clean_nll": 0.025860900059342384,
+      "blank_nll": 9.997631072998047,
+      "target_png_sha256": "127623fb1ad177077be1ac7f267fe47ff0fe884318b42f4831f200dd93e6ccbd"
+    },
+    {
+      "id": "copy/train/014",
+      "language": "zh",
+      "split": "train",
+      "expected": "红海鱼树秋书月",
+      "raw_transcript": "红海鱼树秋书月",
+      "exact": true,
+      "clean_nll": 0.0006839811103418469,
+      "blank_nll": 10.413780212402344,
+      "target_png_sha256": "0d95259b6ea19b06b2794227e77f26cee67ed01c4d8ff82bf390c442e25f5f1a"
+    },
+    {
+      "id": "copy/train/015",
+      "language": "en",
+      "split": "train",
+      "expected": "river mountain small",
+      "raw_transcript": "river mountain small",
+      "exact": true,
+      "clean_nll": 0.006675883196294308,
+      "blank_nll": 11.613011360168457,
+      "target_png_sha256": "b99e186381183f38c18c456869c2ad636d874b3969b3325e1c13793520854b3a"
+    },
+    {
+      "id": "copy/train/016",
+      "language": "zh",
+      "split": "train",
+      "expected": "北语短田海目",
+      "raw_transcript": "北语短田海目",
+      "exact": true,
+      "clean_nll": 0.00453696446493268,
+      "blank_nll": 9.418309211730957,
+      "target_png_sha256": "454a259bc8c2a4ab7c9ba60317361890bd236ecd7bcb6b6125fc6e28579e8f1c"
+    },
+    {
+      "id": "copy/train/017",
+      "language": "en",
+      "split": "train",
+      "expected": "small spring silver",
+      "raw_transcript": "small spring silver",
+      "exact": true,
+      "clean_nll": 0.046393297612667084,
+      "blank_nll": 11.43704605102539,
+      "target_png_sha256": "9e6e066ea3d6843352fa6de835938a30093edcce50295ee5e83fd6a33fb026b1"
+    },
+    {
+      "id": "copy/train/018",
+      "language": "zh",
+      "split": "train",
+      "expected": "旧雨河河禾水雪水风",
+      "raw_transcript": "旧雨河河禾水雪水风",
+      "exact": true,
+      "clean_nll": 0.0019476388115435839,
+      "blank_nll": 10.521743774414062,
+      "target_png_sha256": "99a98b783f8ddcd6af54d03102ae010cf38ed33c060ab127d432dae38b1586bf"
+    },
+    {
+      "id": "copy/train/019",
+      "language": "en",
+      "split": "train",
+      "expected": "evening mountain",
+      "raw_transcript": "evening mountain",
+      "exact": true,
+      "clean_nll": 0.006167460232973099,
+      "blank_nll": 8.987689018249512,
+      "target_png_sha256": "8fd78e0a78571fffd3e34f1005702871475c128fffed593109906b6e85198ff1"
+    },
+    {
+      "id": "copy/train/020",
+      "language": "zh",
+      "split": "train",
+      "expected": "海小云短书田目草东黑门青",
+      "raw_transcript": "海小云短书田目草东黑门青",
+      "exact": true,
+      "clean_nll": 0.004723281599581242,
+      "blank_nll": 10.226889610290527,
+      "target_png_sha256": "5d1d631a8f074eba62d677336277e758e86e9f118d0e2fdc4cfc4e667df93f3f"
+    },
+    {
+      "id": "copy/train/021",
+      "language": "en",
+      "split": "train",
+      "expected": "bright winter winter",
+      "raw_transcript": "brightwinterwinter",
+      "exact": false,
+      "clean_nll": 0.4018833637237549,
+      "blank_nll": 11.932924270629883,
+      "target_png_sha256": "a4d78e3decca647c9c62151b3793cf95b2f47453a457b165881df071820310f7"
+    },
+    {
+      "id": "copy/train/022",
+      "language": "zh",
+      "split": "train",
+      "expected": "白云旧湖山友鱼金秋草语",
+      "raw_transcript": "白云旧湖山友鱼金秋草语",
+      "exact": true,
+      "clean_nll": 0.0015624765073880553,
+      "blank_nll": 9.975051879882812,
+      "target_png_sha256": "e58f2a967ebd7c621f4dc5b489616ff7159f5995d6dc3bdb60767f09d90811e5"
+    },
+    {
+      "id": "copy/train/023",
+      "language": "en",
+      "split": "train",
+      "expected": "stone cloud",
+      "raw_transcript": "stone cloud",
+      "exact": true,
+      "clean_nll": 0.108708955347538,
+      "blank_nll": 7.8706817626953125,
+      "target_png_sha256": "bf43e0bfde70029cd3607b04fbd7edfed6e06151e0bf0566a87e8ee7689c635b"
+    },
+    {
+      "id": "copy/train/024",
+      "language": "zh",
+      "split": "train",
+      "expected": "下夏旧木禾红画右左朋",
+      "raw_transcript": "下夏旧木禾红画右左朋",
+      "exact": true,
+      "clean_nll": 0.006064568180590868,
+      "blank_nll": 9.859892845153809,
+      "target_png_sha256": "10b84676a8707d7379b88f1edc3e1e25ece28883dbb229977a8ebd35308d5744"
+    },
+    {
+      "id": "copy/train/025",
+      "language": "en",
+      "split": "train",
+      "expected": "small stone",
+      "raw_transcript": "small stone",
+      "exact": true,
+      "clean_nll": 0.07483376562595367,
+      "blank_nll": 9.624436378479004,
+      "target_png_sha256": "9d8bbd66d370b7db1600cb339bd7ed834d33b5849f16e4d75c782ca15b867970"
+    },
+    {
+      "id": "copy/train/026",
+      "language": "zh",
+      "split": "train",
+      "expected": "手少冬左目木河夏低日鱼",
+      "raw_transcript": "手少冬左目木河夏低日鱼",
+      "exact": true,
+      "clean_nll": 0.004245643503963947,
+      "blank_nll": 8.869909286499023,
+      "target_png_sha256": "70dd43949dc8f7e92ed1d916c128e5fe36b6b409a209e0cfa26774a112d487ab"
+    },
+    {
+      "id": "copy/train/027",
+      "language": "en",
+      "split": "train",
+      "expected": "morning close",
+      "raw_transcript": "morning close",
+      "exact": true,
+      "clean_nll": 0.03781300038099289,
+      "blank_nll": 8.430122375488281,
+      "target_png_sha256": "6a499d3292601dacb8089ac291739043b990b1baf5cc168c6842838746150bd8"
+    },
+    {
+      "id": "copy/train/028",
+      "language": "zh",
+      "split": "train",
+      "expected": "地学友光",
+      "raw_transcript": "地学友光",
+      "exact": true,
+      "clean_nll": 0.0009477529674768448,
+      "blank_nll": 9.502917289733887,
+      "target_png_sha256": "531294700ada361aa5e9c115cbade24aeb771a4b90c9796223e174463bf90958"
+    },
+    {
+      "id": "copy/train/029",
+      "language": "en",
+      "split": "train",
+      "expected": "stone green cloud window",
+      "raw_transcript": "stone green cloud window",
+      "exact": true,
+      "clean_nll": 0.005650606006383896,
+      "blank_nll": 10.2669038772583,
+      "target_png_sha256": "0f244392b7cf6ad27771ccf723c0f8b476c2f22564b5d3c776682df49b4fcf7f"
+    },
+    {
+      "id": "copy/train/030",
+      "language": "zh",
+      "split": "train",
+      "expected": "海家语字风月",
+      "raw_transcript": "海家语字风月",
+      "exact": true,
+      "clean_nll": 0.0007228066097013652,
+      "blank_nll": 10.446675300598145,
+      "target_png_sha256": "308439420ccd3dd0c3aedbaa6e4e55508dbd98de7f5e391dddbc1c1299bd2614"
+    },
+    {
+      "id": "copy/train/031",
+      "language": "en",
+      "split": "train",
+      "expected": "green mountain",
+      "raw_transcript": "green mountain",
+      "exact": true,
+      "clean_nll": 0.0488344170153141,
+      "blank_nll": 9.511160850524902,
+      "target_png_sha256": "96315ec346919bd643b54f2338a280dfa4a33016f50e069cf7a54adac607e06c"
+    },
+    {
+      "id": "copy/validation/000",
+      "language": "zh",
+      "split": "validation",
+      "expected": "树田红星风",
+      "raw_transcript": "树田红星风",
+      "exact": true,
+      "clean_nll": 0.00036498685949482024,
+      "blank_nll": 10.933629989624023,
+      "target_png_sha256": "41a06eeefd4a9dc74f7a81924a767a00d30781c26becd0d90ebb4cd2954d95d7"
+    },
+    {
+      "id": "copy/validation/001",
+      "language": "en",
+      "split": "validation",
+      "expected": "garden silver open blue",
+      "raw_transcript": "garden silver open blue",
+      "exact": true,
+      "clean_nll": 0.02644745446741581,
+      "blank_nll": 9.50892162322998,
+      "target_png_sha256": "679eb1a2198aa244ed72f2e31f3d9680ac2c423ef9670b1164d2450ab9fd0d91"
+    },
+    {
+      "id": "copy/validation/002",
+      "language": "zh",
+      "split": "validation",
+      "expected": "语树石字光河画山雪羊",
+      "raw_transcript": "语树石字光河画山雪羊",
+      "exact": true,
+      "clean_nll": 0.0003460186708252877,
+      "blank_nll": 9.878708839416504,
+      "target_png_sha256": "d15f9d7e57a5df48cad724edde5daea3876d52dfe505555be9db56dc1816817e"
+    },
+    {
+      "id": "copy/validation/003",
+      "language": "en",
+      "split": "validation",
+      "expected": "green blue",
+      "raw_transcript": "green blue",
+      "exact": true,
+      "clean_nll": 0.10696067661046982,
+      "blank_nll": 7.5653300285339355,
+      "target_png_sha256": "76d74873e81471b9b5e3dfd4a845921fcfcb61cef170d859b438eee0f88c8e1a"
+    },
+    {
+      "id": "copy/validation/004",
+      "language": "zh",
+      "split": "validation",
+      "expected": "河日中风目",
+      "raw_transcript": "河日中风目",
+      "exact": true,
+      "clean_nll": 0.0019491016864776611,
+      "blank_nll": 9.619307518005371,
+      "target_png_sha256": "0a522f350f76e713e7c5d92e60c939e5be82e805ce9bd5191f90d8eefa00a3b6"
+    },
+    {
+      "id": "copy/validation/005",
+      "language": "en",
+      "split": "validation",
+      "expected": "evening close",
+      "raw_transcript": "evening close",
+      "exact": true,
+      "clean_nll": 0.021220233291387558,
+      "blank_nll": 7.134535789489746,
+      "target_png_sha256": "d9839d5c3e74a683cefbabd08deb760458705e8dace615d4eb90a98183e11455"
+    },
+    {
+      "id": "copy/validation/006",
+      "language": "zh",
+      "split": "validation",
+      "expected": "光文友地月金土花",
+      "raw_transcript": "光文友地月金土花",
+      "exact": true,
+      "clean_nll": 0.0002918671234510839,
+      "blank_nll": 10.72647476196289,
+      "target_png_sha256": "137493639afc3d7075c85b9c4b6f2d49ea85c907b6384dbf92ba7a040bed243e"
+    },
+    {
+      "id": "copy/validation/007",
+      "language": "en",
+      "split": "validation",
+      "expected": "small mountain quiet",
+      "raw_transcript": "small mountain quiet",
+      "exact": true,
+      "clean_nll": 0.023096710443496704,
+      "blank_nll": 10.207036972045898,
+      "target_png_sha256": "1cb23eec1784a38b12bb236e36e47de81ce1a13592284a9c5681efea2688f77a"
+    },
+    {
+      "id": "copy/validation/008",
+      "language": "zh",
+      "split": "validation",
+      "expected": "土风土月文",
+      "raw_transcript": "土风土月文",
+      "exact": true,
+      "clean_nll": 0.0006441987934522331,
+      "blank_nll": 9.828068733215332,
+      "target_png_sha256": "a1d39b72859f8d907a89b18a6015679cee97022d050c1b7f4516b5c8589b76e4"
+    },
+    {
+      "id": "copy/validation/009",
+      "language": "en",
+      "split": "validation",
+      "expected": "book silver",
+      "raw_transcript": "book silver",
+      "exact": true,
+      "clean_nll": 0.06968299299478531,
+      "blank_nll": 10.662028312683105,
+      "target_png_sha256": "f42e745f4ac49aa73a7c3786f0d66abbcfd29b757feb5bbab4cd9309cf3d7402"
+    },
+    {
+      "id": "copy/validation/010",
+      "language": "zh",
+      "split": "validation",
+      "expected": "红雨中友小长水秋河土",
+      "raw_transcript": "红雨中友小长水秋河土",
+      "exact": true,
+      "clean_nll": 0.0013782064197584987,
+      "blank_nll": 9.298664093017578,
+      "target_png_sha256": "00df0026ebdc94121c1de5f8c5b337c71d85fae79845d7e362c35ece6611bada"
+    },
+    {
+      "id": "copy/validation/011",
+      "language": "en",
+      "split": "validation",
+      "expected": "open small",
+      "raw_transcript": "opensmall",
+      "exact": false,
+      "clean_nll": 0.3558364808559418,
+      "blank_nll": 10.85883617401123,
+      "target_png_sha256": "350d544202ebb994a139d62d4041929ae3a12075f6e39ed9e58408da546ebc38"
+    },
+    {
+      "id": "copy/validation/012",
+      "language": "zh",
+      "split": "validation",
+      "expected": "石草云人大春火画高学月",
+      "raw_transcript": "石草云人大春火画高学月",
+      "exact": true,
+      "clean_nll": 0.0031471096444875,
+      "blank_nll": 10.259306907653809,
+      "target_png_sha256": "ae11d95d5c50a7c6db605851820809548011aa76898d951fa02e1840e82bf955"
+    },
+    {
+      "id": "copy/validation/013",
+      "language": "en",
+      "split": "validation",
+      "expected": "quiet small open quiet",
+      "raw_transcript": "quiet small open quiet",
+      "exact": true,
+      "clean_nll": 0.09954961389303207,
+      "blank_nll": 11.4293851852417,
+      "target_png_sha256": "eb2d45776152c0c0dce24c92bb1b5d337aa1fb5ea96d57e37a65d2335e5a214f"
+    },
+    {
+      "id": "copy/validation/014",
+      "language": "zh",
+      "split": "validation",
+      "expected": "冬青大水文白海江文",
+      "raw_transcript": "冬青大水文白海江文",
+      "exact": true,
+      "clean_nll": 0.002633353229612112,
+      "blank_nll": 10.319069862365723,
+      "target_png_sha256": "a9854d2ae1d681d34b768b5aeb94dca652be23cd27b219f542dba880124b288f"
+    },
+    {
+      "id": "copy/validation/015",
+      "language": "en",
+      "split": "validation",
+      "expected": "close winter evening morning",
+      "raw_transcript": "close winter evening morning",
+      "exact": true,
+      "clean_nll": 0.00795372948050499,
+      "blank_nll": 12.40577220916748,
+      "target_png_sha256": "f6bceb82b9decb1c54041fc283b093472f3acca272c4c78d9eb4666c29bb02ac"
+    },
+    {
+      "id": "copy/validation/016",
+      "language": "zh",
+      "split": "validation",
+      "expected": "高上下朋下春心湖",
+      "raw_transcript": "高上下朋下春心湖",
+      "exact": true,
+      "clean_nll": 0.0012367067392915487,
+      "blank_nll": 9.05396556854248,
+      "target_png_sha256": "81408f40c3d1877191ae99833eabb6d8e58d8d4f2fe0657b64a6e4776107fcb6"
+    },
+    {
+      "id": "copy/validation/017",
+      "language": "en",
+      "split": "validation",
+      "expected": "silver window",
+      "raw_transcript": "silver window",
+      "exact": true,
+      "clean_nll": 0.1785847395658493,
+      "blank_nll": 8.1170654296875,
+      "target_png_sha256": "db2c1130102696528dac8784b67a5fa272b5ef5589d93b77e7ef1ada294eb3e3"
+    },
+    {
+      "id": "copy/validation/018",
+      "language": "zh",
+      "split": "validation",
+      "expected": "光绿月石书青鸟新西",
+      "raw_transcript": "光绿月石书青鸟新西",
+      "exact": true,
+      "clean_nll": 0.00781366229057312,
+      "blank_nll": 10.342865943908691,
+      "target_png_sha256": "43eefa5c8957512569f34e9f01f329e2543098c22adc6420ff352fb5891fbb0c"
+    },
+    {
+      "id": "copy/validation/019",
+      "language": "en",
+      "split": "validation",
+      "expected": "book close bright",
+      "raw_transcript": "book close bright",
+      "exact": true,
+      "clean_nll": 0.00950814038515091,
+      "blank_nll": 10.860821723937988,
+      "target_png_sha256": "41976bc31094e91889c084d4524ab334121d40c4d8be167328e3c04c6764a1ed"
+    },
+    {
+      "id": "copy/validation/020",
+      "language": "zh",
+      "split": "validation",
+      "expected": "新外语草手语冬月左",
+      "raw_transcript": "新外语草手语冬月左",
+      "exact": true,
+      "clean_nll": 0.003009186824783683,
+      "blank_nll": 11.835628509521484,
+      "target_png_sha256": "fed23af37e754fcff58eb91ad0f8c31acef1934e61b0f7f8104680f00c479ea6"
+    },
+    {
+      "id": "copy/validation/021",
+      "language": "en",
+      "split": "validation",
+      "expected": "book river",
+      "raw_transcript": "book river",
+      "exact": true,
+      "clean_nll": 0.008571279235184193,
+      "blank_nll": 9.186354637145996,
+      "target_png_sha256": "b3d25fb22db9a7cccb8afbcfcb9a9fb1e3185aeee3fee3c5e50b64f2b4db96bc"
+    },
+    {
+      "id": "copy/validation/022",
+      "language": "zh",
+      "split": "validation",
+      "expected": "小雪手新风青木山早金",
+      "raw_transcript": "小雪手新风青木山早金",
+      "exact": true,
+      "clean_nll": 0.0023000603541731834,
+      "blank_nll": 9.351058959960938,
+      "target_png_sha256": "642a65c2840a8ac829cf38ba418f649e0d84fb352bf925edcd394bcabdf2be32"
+    },
+    {
+      "id": "copy/validation/023",
+      "language": "en",
+      "split": "validation",
+      "expected": "green spring small garden",
+      "raw_transcript": "green spring small garden",
+      "exact": true,
+      "clean_nll": 0.13303183019161224,
+      "blank_nll": 9.948720932006836,
+      "target_png_sha256": "b53a17c1342febf930e9929c89e49af3b005aecaeda683b6aa943f9097357e57"
+    },
+    {
+      "id": "copy/validation/024",
+      "language": "zh",
+      "split": "validation",
+      "expected": "长田火手江",
+      "raw_transcript": "长田火手江",
+      "exact": true,
+      "clean_nll": 0.00650147907435894,
+      "blank_nll": 8.337906837463379,
+      "target_png_sha256": "9e867f611d84231362eb52530e9cbdff65b1add6464559722812ff3f7b65e481"
+    },
+    {
+      "id": "copy/validation/025",
+      "language": "en",
+      "split": "validation",
+      "expected": "window cloud window spring",
+      "raw_transcript": "window cloud window spring",
+      "exact": true,
+      "clean_nll": 0.028950851410627365,
+      "blank_nll": 11.056978225708008,
+      "target_png_sha256": "c7bf6edf6c426f15c071fee15dfb2091369bf74fe8d23c7070c9ae8829d402ba"
+    },
+    {
+      "id": "copy/validation/026",
+      "language": "zh",
+      "split": "validation",
+      "expected": "风新云春早画田地",
+      "raw_transcript": "风新云春早画田地",
+      "exact": true,
+      "clean_nll": 0.00019171567691955715,
+      "blank_nll": 9.137981414794922,
+      "target_png_sha256": "e9f460b1cf8ff291e78b099ce1228b44409184731a41f706e985d7b3582729ab"
+    },
+    {
+      "id": "copy/validation/027",
+      "language": "en",
+      "split": "validation",
+      "expected": "spring river open",
+      "raw_transcript": "spring river open",
+      "exact": true,
+      "clean_nll": 0.0022673190105706453,
+      "blank_nll": 10.233160018920898,
+      "target_png_sha256": "d6613ab94164ee7ac5473108d07c9a82f9f15106daa8ce289f834c8ad3b0638c"
+    },
+    {
+      "id": "copy/validation/028",
+      "language": "zh",
+      "split": "validation",
+      "expected": "北牛少水雨",
+      "raw_transcript": "北牛少水雨",
+      "exact": true,
+      "clean_nll": 0.0715789645910263,
+      "blank_nll": 9.260034561157227,
+      "target_png_sha256": "0d8a6a0b00315b7d8ce437b9041b8f1e7f97e88a41cee84b129e89e70faf6267"
+    },
+    {
+      "id": "copy/validation/029",
+      "language": "en",
+      "split": "validation",
+      "expected": "silver garden",
+      "raw_transcript": "silver garden",
+      "exact": true,
+      "clean_nll": 0.13452474772930145,
+      "blank_nll": 7.91668701171875,
+      "target_png_sha256": "6553d6eece3674f8ce912e698fcf40d6f09a0d669f0a8524e2d0df6fadea8b14"
+    },
+    {
+      "id": "copy/validation/030",
+      "language": "zh",
+      "split": "validation",
+      "expected": "左人手字鱼",
+      "raw_transcript": "左人手字鱼",
+      "exact": true,
+      "clean_nll": 0.03928209841251373,
+      "blank_nll": 8.38052749633789,
+      "target_png_sha256": "6349eef8b4b48f58e3fb93351ea105c24ee20dc3c985c5d57817a430a04efda9"
+    },
+    {
+      "id": "copy/validation/031",
+      "language": "en",
+      "split": "validation",
+      "expected": "cloud evening",
+      "raw_transcript": "cloud evening",
+      "exact": true,
+      "clean_nll": 0.05344047024846077,
+      "blank_nll": 9.811534881591797,
+      "target_png_sha256": "4dedb245f2f098e8a6668ff801fcd88b42353207fcb98bf657b351c9bc3bd27e"
+    }
+  ],
+  "exact": 62,
+  "by_language": {
+    "zh": 32,
+    "en": 30
+  },
+  "mean_blank_minus_clean_nll": 9.785251288530844,
+  "gradients": [
+    {
+      "id": "copy/train/000",
+      "finite_nonzero": true,
+      "norm": 0.021164901554584503,
+      "teacher_weights_without_gradients": true
+    },
+    {
+      "id": "copy/train/001",
+      "finite_nonzero": true,
+      "norm": 0.05452277138829231,
+      "teacher_weights_without_gradients": true
+    }
+  ],
+  "processor_errors": [
+    {
+      "id": "copy/train/000",
+      "mean": 0.003078754525631666,
+      "maximum": 0.01895308494567871
+    },
+    {
+      "id": "copy/train/001",
+      "mean": 0.0030936244875192642,
+      "maximum": 0.02035832405090332
+    }
+  ],
+  "gates": {
+    "clean_reading": true,
+    "each_language": true,
+    "image_dependence": true,
+    "pixel_gradients": true,
+    "native_preprocessing": true,
+    "memory": true
+  },
+  "teacher_admitted": true,
+  "parameters": 560528640,
+  "peak_allocated_vram_gib": 4.300975322723389,
+  "elapsed_seconds": 31.004099272191525,
+  "general_ilm_goal_complete": false,
+  "student_optimized": false
+}

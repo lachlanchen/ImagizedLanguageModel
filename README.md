@@ -50,6 +50,15 @@ without establishing a successful learned repair or direct image answers.
 The completed 512-update padding comparison still fails reliable copying: OCR exact match is 6/32 training strings and 10/32 validation strings (clean references: 27/32 and 28/32). Raw outputs visibly omit characters and repeat letters. Training time falls from 795.624 to 287.182 seconds, but language understanding and efficiency at useful quality remain unproved. [All 64 raw outputs](references/paired_padding_result.md).
 <!-- paired-writing-status:end -->
 
+A subsequent [recognition-supervised writing test](references/recognition_guided_writing_result.md)
+uses the same 32 training pairs, all 512 sampled examples/noise times and the
+same 64-case autonomous evaluation. OCR exact match remains **6/32 seen and
+9/32 held out**, versus 6/32 and 10/32 without the added loss. Raw outputs still
+omit and repeat characters and copy instructions. The frozen training reader
+passes its calibration and gradients reach the writer, but the repair fails
+the writing requirement. **This is not a working ILM or a demonstrated path to
+LLM parity.** All raw outputs and the reproducible code are retained.
+
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
 40,000 updates. The latest matched decoder-loss experiment on 32 seen training
