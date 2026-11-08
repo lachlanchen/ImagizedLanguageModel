@@ -114,3 +114,12 @@ admitting its learning stage. Its codec must also reconstruct the actual
 answer glyphs at this geometry, followed by a real differentiated training
 step and autonomous generation. Only subsequent complete training and
 unrepaired held-out answer pages can establish whether this path works.
+
+The [native step preflight](visual_flow_step_preflight_protocol.md) now
+registers that next test. It uses 37,380,992 adapter parameters across the
+generator and connector, preserving the frozen pretrained reader. The
+[executed preparation](evidence/visual_flow_step_preflight_preparation.json)
+covers real source-projection dtype/gradient checks and the complete meta
+adapter graph. Its full native codec, forward/backward and autonomous answer
+calls are queued behind the earlier experiments; no model-level learning
+or training-speed result has been observed yet.

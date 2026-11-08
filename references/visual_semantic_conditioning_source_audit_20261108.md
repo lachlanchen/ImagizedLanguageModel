@@ -207,3 +207,32 @@ checks establish native flow-loss algebra and scheduler direction, with no
 neural training or speed result. Actual native replay, answer-codec fidelity,
 a real differentiated step and independent-noise answer pages remain the
 admission checks before a longer learning experiment.
+
+## Corrected return containers and queued differentiated step
+
+Further inspection of the installed vision encoder found an API change
+beyond the body aliases: it returns `BaseModelOutputWithPooling`, whereas
+the released wrapper expects the merged feature tensor. The compatibility
+adapter now selects the actual `pooler_output` tensor, preserving its object
+identity; the unmerged `last_hidden_state` is not substituted. Loading reports
+also contain sets under Transformers 5.14.1, so their contents are normalized
+for durable JSON recording. Neither change alters encoder weights or adds
+an external reader.
+
+The [corrected CPU preparation](evidence/visual_semantic_native_preflight_preparation_v2.json)
+checks these container boundaries, component shapes and aliases. The earlier
+waiting job was superseded before any candidate neural call; its original
+preparation remains available. Full native numerical replay and answer
+quality are still unverified.
+
+The [differentiated-step protocol](visual_flow_step_preflight_protocol.md)
+registers codec reconstruction, exact zero-adapter generation, one actual
+flow-learning update and fresh autonomous generation. Its
+[CPU preparation](evidence/visual_flow_step_preflight_preparation.json)
+selects 32,728,064 generator and 4,652,928 connector adapter parameters, all
+with FP32 masters. Two actual released projection weights pass zero-adapter
+equivalence and numerical gradient/update checks without changing their
+frozen weights. These layer checks do not establish a successful whole-model
+backward pass, GPU memory fit or language learning. The actual model job is
+queued after the complete native candidate preflight, with both jobs sharing
+the exclusive project GPU lock.

@@ -1,0 +1,153 @@
+{
+  "recorded_at_utc": "2026-11-08T10:12:53.933453+00:00",
+  "scope": "Corrected CPU preparation; merged-vision return and JSON loading-info containers checked without a model forward.",
+  "preparation": {
+    "code_sha256": {
+      "scripts/preflight_visual_semantic.py": "fd017406cbe4263a697653f6c4a23c23099c32e038480e150d95b115bb20cc91",
+      "ilm/image_edit/visual_semantic.py": "f49bc8ee472617d2ada73d40bb9f8200548c91a5eac63bf8ba9941fdecc006ce",
+      "ilm/image_edit/compiled_visual_condition.py": "29d6054d98d7b8965b19474eab971c0303900cb912318dc12130a878f51a6319",
+      "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+      "references/visual_semantic_native_preflight_protocol.md": "022571ca8cb9a96ea9a44a1859f437043c2be35685569970fe55107c049b52d2"
+    },
+    "source_sha256": {
+      "README.md": "2db749b63910b8b05e3c962c79eaeb92a65fe69ffe15749f104c4890f1a2d9ff",
+      "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+      "connector/model.safetensors": "425ce59f596eeb573f9cd52138b775df47ce69c60d2782fb32cac5498ed208f3",
+      "deepgen_pipeline.py": "41e0f263d9ad55940426a4b2092688a74711395499c12a71ee69dc378ec9d3a9",
+      "model_index.json": "c6a2a917886e55549497fd6d027f30a6bfc89e5ea1c61ebaafcff086e7f4183f",
+      "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+      "scheduler/scheduler_config.json": "3d0ec27d3bf788b49b2ced5bc0f0999881e80d06e7e2e06550148b13b374b8cc",
+      "tokenizer/added_tokens.json": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+      "tokenizer/chat_template.jinja": "a0bc6f6fc7a29a80017a433e8f03a1cc1236e838a944a2d034295a60c4f2fddb",
+      "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "tokenizer/special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+      "tokenizer/tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+      "tokenizer/tokenizer_config.json": "11d20a741a0eda1e7482d29b5d17553328922ed9e7391ec6f44d390215390f3d",
+      "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "transformer/config.json": "e8cc4cfae099425181236be04924979672b9f62c94b5a11d47a305f89c372300",
+      "transformer/diffusion_pytorch_model.safetensors": "54078ee51ab477275e94b610249ea912d6f80d24256c4197fe48945eef706883",
+      "vae/config.json": "05eec56c19e8b4b7500eafe31b69006a9f75b2b2fcce3f7ebb10a248cb69d67e",
+      "vae/diffusion_pytorch_model.safetensors": "5a170129752b4ad4ab98996d2e59097c8c693afc31a5964bd2ad60896686c1e2",
+      "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+      "vlm/generation_config.json": "bc068f56ab9b6eb5eec7a27ab284fae6fd25c0752e2d0e6e8fd7916eecffe43a",
+      "vlm/model-00001-of-00002.safetensors": "d6f11cc9c30184ce92605f25ac1e6b6644ee217e7b86a28282b3c9b17de3e609",
+      "vlm/model-00002-of-00002.safetensors": "c675c19a231b0ead141d8d3a05fe930892ddf17f1324d75bb94d2a42a79f7ebc",
+      "vlm/model.safetensors.index.json": "3926d103f74c183f387097ac4d00e7fff7dae7cd0ab24427f585b84c6feea9d6"
+    },
+    "revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+    "condition_folder": "artifacts/visual_task_condition_1024_v1/runtime",
+    "condition_manifest_sha256": "2385b6bc0e09bb9c1021d59d8a7a21eb1b80046710d77822ddbe1b89ad8d39fb",
+    "condition_payload_sha256": "cc3912e7d9c408f742daf5ea097d77cbaef6e81c17f5cb990df723369e3fb19e",
+    "inputs_sha256": "4084714247f8b9b9bad449ad7aa4f0f9514e3512372a73846a3c329955f47b4a",
+    "complete_input_cases": 10,
+    "actual_generation_calls_planned": 12,
+    "steps": 50,
+    "guidance": 4.0,
+    "width": 1024,
+    "height": 1024,
+    "source_index_sha256": {
+      "preflight_normal_inputs.json": "2778853484f969b134ccad09fc04b01b67d0b72325f738d080b822605b806dd1",
+      "preflight_question_erased_inputs.json": "7c7e2d00f67edf9800ec16db5862166dd00830738a2cdb4bd4863fe475bd8be9",
+      "preflight_passage_erased_inputs.json": "a950fdbe51f0123e7c21b220baf8380d5a8e6c93a232e70c8608eca259e25352"
+    },
+    "preparation_source_manifest_sha256": "e2d6aec134a99e079a9bd42f217559a04e32727bdbc4b09d131b0fb22cf4dfa6",
+    "structure_sha256": "b18c631e6aa2ba89e812454031457ab21bf4fec57f0c7c6830baa058169c4e62",
+    "source_prep_has_answer_access": true,
+    "generation_index_has_answers": false,
+    "generation_index_fields": [
+      "id",
+      "input",
+      "input_sha256",
+      "seed"
+    ],
+    "task_or_model_selected_from_output_quality": false,
+    "no_checkpoint_training_in_this_preflight": true,
+    "qa_run_must_complete": "artifacts/native_paired_qa_learning_v2",
+    "generation_performed": false,
+    "language_learning_established": false,
+    "general_ilm_goal_complete": false
+  },
+  "structure": {
+    "component_checks": {
+      "transformer": {
+        "stored_tensor_keys": 909,
+        "expected_state_keys": 909,
+        "source_keys_and_shapes_match": true,
+        "explicit_legacy_key_translations": 0,
+        "unused_output_head_absent": false,
+        "real_parameters_all_meta": true
+      },
+      "vae": {
+        "stored_tensor_keys": 244,
+        "expected_state_keys": 244,
+        "source_keys_and_shapes_match": true,
+        "explicit_legacy_key_translations": 0,
+        "unused_output_head_absent": false,
+        "real_parameters_all_meta": true
+      },
+      "vlm": {
+        "stored_tensor_keys": 824,
+        "expected_state_keys": 825,
+        "source_keys_and_shapes_match": true,
+        "explicit_legacy_key_translations": 824,
+        "unused_output_head_absent": true,
+        "real_parameters_all_meta": true
+      },
+      "connector": {
+        "stored_tensor_keys": 103,
+        "expected_state_keys": 103,
+        "source_keys_and_shapes_match": true,
+        "explicit_legacy_key_translations": 0,
+        "unused_output_head_absent": false,
+        "real_parameters_all_meta": true
+      }
+    },
+    "compatibility_alias_checks": {
+      "visual_same_object": true,
+      "language_body_same_object": true,
+      "no_duplicate_registered_modules": true
+    },
+    "prototype_removal": {
+      "before": {
+        "components": {
+          "transformer": 2243171520,
+          "vae": 83819683,
+          "lmm": 4065787904,
+          "connector_module": 432449532
+        },
+        "total": 6825228639,
+        "persistent_and_nonpersistent_buffer_elements": 226492564
+      },
+      "after": {
+        "components": {
+          "transformer": 2243171520,
+          "vae": 83819683,
+          "lmm": 3443458048,
+          "connector_module": 432449532
+        },
+        "total": 6202898783,
+        "persistent_and_nonpersistent_buffer_elements": 226492564
+      },
+      "input_output_weights_were_tied": false,
+      "vocabulary_table_removed": true,
+      "output_word_head_removed": true,
+      "tokenizer_removed": true,
+      "language_body_pretraining_retained": true,
+      "numerical_equivalence_not_yet_checked": true
+    },
+    "vision_return_envelope_check_only": true,
+    "vision_return_merged_tensor_identity_preserved": true,
+    "vision_return_unmerged_hidden_state_not_substituted": true,
+    "actual_loading_report_container_serializable_without_content_loss": true,
+    "transformer_native_class_upgraded": true,
+    "model_weight_tensors_loaded": false,
+    "model_forward_performed": false,
+    "cuda_initialized": false,
+    "parameter_counts_are_meta_prototypes": true,
+    "loaded_runtime_fit_or_quality_established": false
+  },
+  "superseded_idle_queue_had_zero_model_calls": true,
+  "native_neural_replay_completed": false,
+  "language_learning_established": false,
+  "general_ilm_goal_complete": false
+}
