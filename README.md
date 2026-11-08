@@ -59,6 +59,13 @@ passes its calibration and gradients reach the writer, but the repair fails
 the writing requirement. **This is not a working ILM or a demonstrated path to
 LLM parity.** All raw outputs and the reproducible code are retained.
 
+The [complete autonomous-output loss diagnostic](references/autonomous_writing_loss_result.md)
+finds much larger recognition loss on actual generated pages than during
+assisted training, and reader blind spots for repeated glyphs and duplicate
+lines. A [separately specified direct-output learning test](references/autonomous_writing_protocol.md)
+uses the full native noise-to-image trajectory; its execution and language
+quality require separate verification.
+
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
 40,000 updates. The latest matched decoder-loss experiment on 32 seen training
