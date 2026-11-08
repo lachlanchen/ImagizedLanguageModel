@@ -200,3 +200,10 @@ without duplicate module registration. Removing lexical modules from the
 meta prototype leaves 6,202,898,783 parameters. This is a structural count,
 not an actual loaded-runtime or memory result. The ten input-only pages are
 prepared, and generation is queued behind the current QA assessment.
+
+The [one-forward learning note](visual_flow_learning_math.md) prepares the
+subsequent image-answer objective and all 448 existing image pairs. Its CPU
+checks establish native flow-loss algebra and scheduler direction, with no
+neural training or speed result. Actual native replay, answer-codec fidelity,
+a real differentiated step and independent-noise answer pages remain the
+admission checks before a longer learning experiment.

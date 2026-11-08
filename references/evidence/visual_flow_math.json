@@ -1,0 +1,108 @@
+{
+  "source_url": "https://raw.githubusercontent.com/deepgenteam/deepgen/fbaaaf4ae1c79450d6a34b30beb4f59840568c69/src/models/sd3_kontext/qwen2_5_vl_sd3_hf_dynamic_fusion.py",
+  "source_sha256": "a9f5188fe9c3570ccb0fd32d89870add575b0845b99255c57d3c0388cafb2148",
+  "code_sha256": "e8c71820cdc123a4e5f03fa96602c538ee4aaa8241bfdeffefce50bfcd400aa3",
+  "training_module_sha256": "23f1831d4a2209e2799434074fb772b9e64f9e31d6b9237a090b00fc27fcb01f",
+  "scheduler_config_sha256": "3d0ec27d3bf788b49b2ced5bc0f0999881e80d06e7e2e06550148b13b374b8cc",
+  "installed_scheduler_class_source_sha256": "f77bf215950c334c2adeccba6fa04af4b59a6179dd06aeb6329a93aab3a70342",
+  "diffusers_version": "0.39.0",
+  "actual_existing_answer_image_sha256": {
+    "artifacts/image_edit_learning/pages_v2/0160_target.png": "7c1d4dd4ed682a5f95fe7d36c87e7f26be4d600cafa01af13373d20e797afab9",
+    "artifacts/image_edit_learning/pages_v2/0162_target.png": "7c1cb37f0e616e9c493a5845804e878d327b69d41377393640a5d0ae1ee449f5"
+  },
+  "data_are_actual_RGB_pages_not_VAE_latents": true,
+  "native_source_AST_executed": true,
+  "native_algebra_dtype_checks": [
+    {
+      "dtype": "torch.float32",
+      "indices": [
+        891,
+        495
+      ],
+      "timesteps": [
+        268.472900390625,
+        753.7313232421875
+      ],
+      "sigmas": [
+        0.26847290992736816,
+        0.7537313103675842
+      ],
+      "source_get_sigmas_exact": true,
+      "explicit_rng_replay_exact": true,
+      "probes": [
+        {
+          "numeric_offset": 0.0,
+          "exact_fields": {
+            "noisy_input": true,
+            "velocity_target": true,
+            "scalar_loss": true,
+            "velocity_gradient": true
+          },
+          "loss": 0.0
+        },
+        {
+          "numeric_offset": 0.25,
+          "exact_fields": {
+            "noisy_input": true,
+            "velocity_target": true,
+            "scalar_loss": true,
+            "velocity_gradient": true
+          },
+          "loss": 0.0625
+        }
+      ]
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "indices": [
+        891,
+        495
+      ],
+      "timesteps": [
+        268.472900390625,
+        753.7313232421875
+      ],
+      "sigmas": [
+        0.267578125,
+        0.75390625
+      ],
+      "source_get_sigmas_exact": true,
+      "explicit_rng_replay_exact": true,
+      "probes": [
+        {
+          "numeric_offset": 0.0,
+          "exact_fields": {
+            "noisy_input": true,
+            "velocity_target": true,
+            "scalar_loss": true,
+            "velocity_gradient": true
+          },
+          "loss": 0.0
+        },
+        {
+          "numeric_offset": 0.25,
+          "exact_fields": {
+            "noisy_input": true,
+            "velocity_target": true,
+            "scalar_loss": true,
+            "velocity_gradient": true
+          },
+          "loss": 0.06250013411045074
+        }
+      ]
+    }
+  ],
+  "native_reverse_oracle_steps": 50,
+  "native_reverse_oracle_dtype": "torch.float32",
+  "native_reverse_oracle_max_abs_error": 1.5497207641601562e-06,
+  "deliberately_wrong_velocity_sign_max_abs_error": 11.375895500183105,
+  "rejects_inference_mutated_training_schedule": true,
+  "training_denoiser_forward_helper_present": true,
+  "training_denoiser_forward_helper_exercised": false,
+  "neural_model_loaded": false,
+  "neural_forward_performed": false,
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "language_learning_or_training_speed_established": false,
+  "general_ilm_goal_complete": false
+}
