@@ -22,9 +22,19 @@ OCR is imperfect: the unchanged reference-image calibration recognizes
 zero scores are OCR observations, not an assertion of perfect manual scoring.
 The complete raw-page review independently fails to establish useful answering.
 
-This is the completed final **normal-input cohort**, not the complete
-initial/final comparison. Initial-model, erased-input and copying assessment
-continues under the fixed protocol. No comparative improvement, semantic
+The initial model has subsequently completed the same normal-input cohort.
+The [matched normal-cohort comparison](evidence/native_paired_qa_normal_comparison.json)
+authenticates all 128 initial/final PNGs against their actual decoder tensors,
+with identical input images and seeds. Both models get 0/32 seen and 0/32
+held-out answers by canonical and source-accepted OCR matching. All 64 initial
+pages were also inspected; corrupted passage/question fragments and extra
+writing persist. Thus there is no OCR-exact normal-answer gain after the
+128 updates. The remaining erasure and copying cohorts are still needed for
+the complete registered experiment.
+
+This is the completed **normal-input comparison**, not the complete
+registered experiment. Erased-input and copying assessment continues under
+the fixed protocol. No comparative improvement, semantic
 understanding or efficiency advantage is established by this partial result.
 
 A separate [native visual flow-learning implementation](native_visual_flow_learning_protocol.md)
@@ -33,3 +43,5 @@ includes 384 training image pairs, 64 held-out pairs and 192 fixed assessment
 inputs per model. Its full-model training and language quality remain
 unverified. Existing language and image pretraining is retained in that
 candidate and must be counted when evaluating its capabilities and cost.
+The [reference-page calibration](native_visual_flow_reference_calibration.md)
+documents the offline evaluator's limits before candidate model execution.

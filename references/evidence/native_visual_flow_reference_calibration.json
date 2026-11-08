@@ -1,0 +1,96 @@
+{
+  "scope": "offline_reference_page_OCR_before_candidate_training",
+  "training_preparation_sha256": "137df14a85b6ef6c23ce7ad152c678d285814206e871b405769f4f4790fd2982",
+  "cohorts": {
+    "normal": {
+      "report_sha256": "9c2937e8652f9e16d3f77340231f527a28364b08d5c823245276a36987b7d048",
+      "reference_manifest_sha256": "1e6da3174b7f5a2db9d8c996209e56245de3ab2c68b960f908980784211aa045",
+      "summary": {
+        "train": {
+          "cases": 32,
+          "ocr_exact": 23
+        },
+        "validation": {
+          "cases": 32,
+          "ocr_exact": 26
+        }
+      },
+      "cases": 64,
+      "all_reference_image_bytes_checked": true
+    },
+    "question_erased": {
+      "report_sha256": "495303e640ce97fee7679bdfedadfddfb5436be0a54f9e66bb5d43e2fd7ecd19",
+      "reference_manifest_sha256": "97170b2fb434d3874d6dea983d672506b87bd4d908813e84bd67b30a408ea2f9",
+      "summary": {
+        "train": {
+          "cases": 0,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 32,
+          "ocr_exact": 26
+        }
+      },
+      "cases": 32,
+      "all_reference_image_bytes_checked": true
+    },
+    "passage_erased": {
+      "report_sha256": "a008b514f9f892006383f5235b9d768b623374dd48d6c0d41ab85eb5075443ab",
+      "reference_manifest_sha256": "517beb1c916d3317ab895d01b71d94b9c172fc86579e730913b50dc2d349c44b",
+      "summary": {
+        "train": {
+          "cases": 0,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 32,
+          "ocr_exact": 26
+        }
+      },
+      "cases": 32,
+      "all_reference_image_bytes_checked": true
+    },
+    "copy": {
+      "report_sha256": "5b5b5a76ddda28af56ebafd55f5512be5c12ec6d69b2f2b5c6e3481e4d546a2b",
+      "reference_manifest_sha256": "3f70dd18f92aeed75cd42b58be321459fcf585f5a17ad32663998f44253fe63c",
+      "summary": {
+        "train": {
+          "cases": 32,
+          "ocr_exact": 27
+        },
+        "validation": {
+          "cases": 32,
+          "ocr_exact": 29
+        }
+      },
+      "cases": 64,
+      "all_reference_image_bytes_checked": true
+    }
+  },
+  "engine": {
+    "binary_sha256": "9f831cab7525c3dab04af41bda35182af7ea1df9dceeaaa2f3bf207ac45c06a5",
+    "version": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+    "languages": [
+      "chi_sim",
+      "eng"
+    ],
+    "psm": 6,
+    "traineddata_sha256": {
+      "chi_sim": "a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730",
+      "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    }
+  },
+  "implementation": {
+    "scripts/score_paired_writing.py": "f7c737ffc11c1bb82861fa473b5baca1207cc8b1bb6c74bfba7aa2a10aee15d5",
+    "scripts/evaluate_image_edit_baseline.py": "99790506c37a4a2f2a6aecf4b4e36d63e2957c00badb50e7ca8d2081c932f2b9"
+  },
+  "reference_cases_scored_across_cohorts": 192,
+  "normal_and_copy_cases": 128,
+  "erasure_cohorts_reuse_held_QA_reference_pages": true,
+  "complete_prepared_cohorts": true,
+  "model_loaded": false,
+  "candidate_codec_reconstructions_evaluated": false,
+  "candidate_autonomous_outputs_evaluated": false,
+  "language_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
