@@ -15,6 +15,13 @@ builder remain inside the named baseline.
 
 ## Current result
 
+The [subsequent additional-training control](../../references/autonomous_writing_control_result.md)
+has now completed: 5/32 seen and 10/32 held-out OCR-exact copies, versus
+15/32 and 13/32 for the final-image pilot. Both give 3/16 held-out Chinese
+copies. This newer result is available with all raw outputs; incorporation
+into the TeX/PDF figures remains pending. The package below reports the
+preceding completed manuscript revision.
+
 The independent image-language goal remains unachieved. The completed
 [32-update autonomous-writing continuation](../../references/autonomous_writer_result.md)
 raises OCR-exact copying from **6/32 to 15/32 seen** and **9/32 to 13/32 held

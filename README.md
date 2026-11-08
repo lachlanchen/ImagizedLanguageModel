@@ -28,6 +28,12 @@ finds no validated usable ILM. The latest full-trajectory continuation reaches
 no semantic-QA evaluation. The next requirement is a matched extra-training
 control and reliable new writing before book-scale training.
 
+The [completed additional-training control](references/autonomous_writing_control_result.md)
+now gives **5/32 seen and 10/32 held-out OCR-exact copies**, versus **15/32
+and 13/32** in the final-image pilot. Both remain at **3/16 held-out Chinese
+copies**. The small comparative gain supports further investigation, with no
+reliable-writing, semantic-understanding or matched-compute claim.
+
 The [latest whole-canvas writer](references/parallel_canvas_result.md) gets
 **26/32 seen training answers exact**, but **0/128 unseen answers and 0/12 new
 copies**. A subsequent [matched source-feature comparison](references/source_canvas_result.md)
