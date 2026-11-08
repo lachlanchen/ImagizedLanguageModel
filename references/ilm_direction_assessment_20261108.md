@@ -2,7 +2,8 @@
 
 The current evidence does not establish a working ILM design. The latest
 image writer improves some copies, but cannot yet write requested Chinese
-reliably. No natural-question answering has been trained or evaluated in this
+reliably. A full-page QA preflight now checks actual gradients and a small fixed
+baseline; no successful language-learning experiment is established by this
 writer. Scaling this checkpoint to books would get ahead of the evidence.
 
 The [complete matched ink-mass comparison](ink_mass_comparison_result.md)
