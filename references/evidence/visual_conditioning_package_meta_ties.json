@@ -1,0 +1,73 @@
+{
+  "repo": "deepgenteam/DeepGen-1.0-diffusers",
+  "revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+  "configs_sha256": {
+    "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+    "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+    "transformer/config.json": "e8cc4cfae099425181236be04924979672b9f62c94b5a11d47a305f89c372300",
+    "vae/config.json": "05eec56c19e8b4b7500eafe31b69006a9f75b2b2fcce3f7ebb10a248cb69d67e",
+    "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+    "vlm/model.safetensors.index.json": "3926d103f74c183f387097ac4d00e7fff7dae7cd0ab24427f585b84c6feea9d6"
+  },
+  "component_stored_elements": {
+    "connector": 432449532,
+    "transformer": 2469663936,
+    "vae": 83819683,
+    "vlm": 3754622976
+  },
+  "total_stored_elements": 6740556127,
+  "meta_structure": {
+    "transformer": {
+      "parameters": 2243171520,
+      "buffers": 226492416,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {
+        "pos_embed.pos_embed": 226492416
+      },
+      "persistent_buffer_elements": 226492416
+    },
+    "vae": {
+      "parameters": 83819683,
+      "buffers": 0,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {},
+      "persistent_buffer_elements": 0
+    },
+    "connector": {
+      "parameters": 432449532,
+      "buffers": 0,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {},
+      "persistent_buffer_elements": 0
+    },
+    "vlm": {
+      "parameters": 4065787904,
+      "buffers": 148,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {
+        "model.visual.rotary_pos_emb.inv_freq": 20,
+        "model.language_model.rotary_emb.inv_freq": 64,
+        "model.language_model.rotary_emb.original_inv_freq": 64
+      },
+      "persistent_buffer_elements": 0,
+      "output_head_tied_to_input": false,
+      "parameters_after_native_tie": 4065787904,
+      "output_head_tied_after_native_tie": false
+    }
+  },
+  "meta_architecture_parameter_total": 6825228639,
+  "meta_architecture_buffer_total": 226492564,
+  "meta_parameter_total_after_native_tie": 6825228639,
+  "meta_unique_parameters_plus_persistent_buffers_after_native_tie": 7051721055,
+  "implementation_sha256": "806cd99dd5e98190b5f1fa600ae9571f7a774a39bb28c4430926d1b5c7fc5eaf",
+  "weights_loaded": false,
+  "neural_forward_performed": false,
+  "runtime_parameter_counts_from_loaded_weights_established": false,
+  "native_tie_method_called": true,
+  "packaged_vlm_stored_lm_head_present": false,
+  "interpretation": "Meta construction and an explicit native tie_weights call leave the head untied in the current API. This is not an actual checkpoint-loading test; loader-time handling and runtime counts remain unverified."
+}

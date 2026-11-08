@@ -1,9 +1,10 @@
 # Does the image generator actually receive visual language features?
 
 The current writer supplies VAE reference features and one fixed generic
-condition to a pretrained generator. It has not optimized natural QA. Its
-interface does not by itself provide an already trained visual-language
-reading path. Better copying cannot establish that this body understands a
+condition to a pretrained generator. The initially inspected checkpoint had
+not optimized natural QA; a subsequent registered full-page QA learning run
+is now in progress. Its interface does not by itself provide an already
+trained visual-language reading path. Better copying cannot establish that this body understands a
 paragraph or its question. This audit checks a possible warm start for that
 specific gap; it does not replace the running controlled experiment.
 
@@ -56,7 +57,8 @@ The retained language-body pretraining must remain counted and disclosed.
 The [self-contained release](https://huggingface.co/deepgenteam/DeepGen-1.0-diffusers)
 is pinned at `85c2ed257b9406d8531965c68e140dc7fdb81382`. Its downloaded Python
 source has SHA256 `41e0f263d9ad55940426a4b2092688a74711395499c12a71ee69dc378ec9d3a9`;
-no model weights were downloaded. Inspection finds three material details:
+the initial static inspection downloaded no model weights. Inspection finds
+three material details:
 
 - The wrapper resizes the input image to the **output** width and height.
   Using a 512×256 answer canvas would therefore squash a 1024-square book
@@ -90,9 +92,12 @@ state includes a 226,492,416-element transformer positional buffer, so this
 is not automatically a count of learned model parameters. Meta construction
 of all four real component configurations also exposes a VLM head-sharing
 distinction: its constructor initially creates an untied head absent from
-the stored shard index. Weight tying/loading must be reconciled before
-reporting a loaded runtime count. This is not evidence that the published
-weights are corrupt or that the head is used by image generation.
+the stored shard index. The [explicit meta weight-tying check](evidence/visual_conditioning_package_meta_ties.json)
+leaves that prototype head untied under the current API. The constructor
+therefore counts 6,825,228,639 parameters before any actual loading or unused
+component removal. This is not a loaded-runtime count. Loader-time handling
+must be checked; the observation does not prove that published weights are
+corrupt or that the head is used by image generation.
 
 The audit reads bounded header prefixes and configuration files only;
 no tensor payload or weights are loaded. Entire weight-file checksums are
@@ -110,10 +115,13 @@ actual keys and establish native replay with its resolved VLM/adapters.
 
 ## Decision
 
-Finish and assess the active physical-loss comparison and the already specified
-full-page probes. If a visual-language warm start is needed, DeepGen merits a
-bounded source-consistent baseline because the inspected path actually carries
-image semantics into generation. Do not assume it is a solution from its name,
+The physical-loss comparison and full-page probes are complete. Finish the
+registered native QA learning run and its complete assessment. A separate
+`acquire_visual_semantic_source.py` helper prepares the pinned complete release
+in the project cache, verifying whole-file checksums and reusing matching
+shared files. Source acquisition is separate from model loading or adoption.
+DeepGen merits a bounded source-consistent baseline because the inspected
+path carries image features through the visual-language body into generation. Do not assume it is a solution from its name,
 benchmarks or nominal parameter count. No local memory fit, training speed,
 Chinese answer quality or strict vocabulary-free deployment has been proved.
 

@@ -120,7 +120,13 @@ def meta_counts(output):
             all_parameters_meta=all(p.is_meta for p in model.parameters()),
             all_buffers_meta=all(p.is_meta for p in model.buffers()),
             buffer_elements={k:v.numel() for k,v in model.named_buffers()})
-        if component=="vlm":results[component]["output_head_tied_to_input"]=model.get_output_embeddings().weight is model.get_input_embeddings().weight
+        state_keys=set(model.state_dict())
+        results[component]["persistent_buffer_elements"]=sum(v.numel() for k,v in model.named_buffers() if k in state_keys)
+        if component=="vlm":
+            results[component]["output_head_tied_to_input"]=model.get_output_embeddings().weight is model.get_input_embeddings().weight
+            model.tie_weights()
+            results[component]["parameters_after_native_tie"]=sum(p.numel() for p in model.parameters())
+            results[component]["output_head_tied_after_native_tie"]=model.get_output_embeddings().weight is model.get_input_embeddings().weight
         del model
     if torch.cuda.is_initialized():raise AssertionError("metadata probe initialized CUDA")
     return results
@@ -160,6 +166,8 @@ def main():
         result["meta_structure"]=meta_counts(output)
         result["meta_architecture_parameter_total"]=sum(v["parameters"] for v in result["meta_structure"].values())
         result["meta_architecture_buffer_total"]=sum(v["buffers"] for v in result["meta_structure"].values())
+        result["meta_parameter_total_after_native_tie"]=sum(v.get("parameters_after_native_tie",v["parameters"]) for v in result["meta_structure"].values())
+        result["meta_unique_parameters_plus_persistent_buffers_after_native_tie"]=result["meta_parameter_total_after_native_tie"]+sum(v["persistent_buffer_elements"] for v in result["meta_structure"].values())
     (output/"result.json").write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps({k:result[k] for k in ("component_stored_elements","total_stored_elements","hub_summary_elements","total_weight_file_bytes","packaged_vlm_present","packaged_vlm_files_identical_to_base_files")},indent=2))
 
