@@ -1,0 +1,22 @@
+{
+  "failed_source_commit": "adb407b",
+  "failed_run": "artifacts/native_paired_qa_learning_v1",
+  "exception": "FileExistsError: save_answer requires a new directory, but its attempt parent had already been created",
+  "optimizer_updates": 0,
+  "checkpoint_created": false,
+  "all_owned_model_processes_exited": true,
+  "failed_training_implementation_sha256": "5a1a2f4e9e17ee13feeecec8c9f4ae42ab10fbb966e788a35d7cda1a1b66f926",
+  "failure_log_sha256": "e15c397a7b687e883f886259086e79f248933ee75163590c4696fc4759cdb3f7",
+  "fix": "Save the actual generated page in a new autonomous_before child directory and bind the authoritative history to that child.",
+  "actual_native_tensor_save_check": {
+    "png_sha256": "33c1c8db553d7d87b6039df700b01cb203f06c923913ab12c43916b7910aabce",
+    "matches_retained_native_png": true,
+    "actual_native_pipeline_image_processor_used": true,
+    "model_optimizer_updates": 0
+  },
+  "successor_run": "artifacts/native_paired_qa_learning_v2",
+  "schedule_sha256": "f923c6acf959bf1202c8b1f231df7b181b57cf9e15cb8f0867088990c586b70c",
+  "initial_checkpoint_sha256": "166409db4f87af87393576195251527f1fcf54d5fe12812d75f6d1491674717d",
+  "schedule_or_learning_rule_changed": false,
+  "semantic_learning_result": false
+}

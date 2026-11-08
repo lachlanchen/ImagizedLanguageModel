@@ -132,13 +132,14 @@ def main():
                     raise ValueError("frozen parameter received a gradient")
                 norm = torch.nn.utils.clip_grad_norm_(parameters, 1., error_if_nonfinite=True)
                 if not bool(norm > 0): raise ValueError("zero adapter gradient")
-                output = save_answer(pipe, result["rgb"].detach().cpu(), attempt)
+                page_folder = attempt / "autonomous_before"
+                output = save_answer(pipe, result["rgb"].detach().cpu(), page_folder)
                 optimizer.step()
                 if any(int(s["step"]) != item["update"] for s in optimizer.state.values()):
                     raise ValueError("actual optimizer steps differ")
                 if torch.cuda.max_memory_allocated() >= 22*1024**3:
                     raise RuntimeError("registered 22 GiB allocation limit exceeded")
-                entry = dict(item, folder=str(attempt.relative_to(args.output)), input_sha256=row["input_sha256"],
+                entry = dict(item, folder=str(page_folder.relative_to(args.output)), input_sha256=row["input_sha256"],
                     target_sha256=row["target_sha256"], loss=float(loss.detach()), **components,
                     gradient_norm=float(norm), prediction_gradient_norms=probes, autonomous_page=output,
                     elapsed_seconds=time.perf_counter() - tick)
