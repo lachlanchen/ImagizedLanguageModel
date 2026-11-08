@@ -1,0 +1,71 @@
+{
+  "implementation_sha256": "36933f399808b1b897bff0319f25fb50194111657557cb21c1d1fbf80f85575d",
+  "native_loss_implementation_sha256": "23f1831d4a2209e2799434074fb772b9e64f9e31d6b9237a090b00fc27fcb01f",
+  "actual_training_tensors_sha256": "fd27984f892a18d5c38e57db026a3336dc647e574528970e97f5b448dbd5dd83",
+  "actual_step_report_sha256": "37c678f36464658840d0ba874922c38a30e221831d004df14b5851b915090312",
+  "target_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34",
+  "source_case_id": "TRAIN_3802_QUERY_0",
+  "source_target_black_pixels": 946,
+  "actual_native_loss": 0.015717074275016785,
+  "actual_sigma": 0.6328125,
+  "prediction_dtype": "torch.bfloat16",
+  "prediction_shape": [
+    1,
+    16,
+    128,
+    128
+  ],
+  "regions": [
+    {
+      "region": "ink_aligned_halo_0",
+      "latent_cells": 48,
+      "area_fraction": 0.0029296875,
+      "squared_error_fraction": 0.2133670300245285,
+      "squared_prediction_gradient_fraction": 0.21338912844657898,
+      "mean_error_inside": 1.1446632146835327,
+      "mean_error_outside": 0.01239989697933197,
+      "mean_error_inside_to_outside": 92.31231689453125
+    },
+    {
+      "region": "ink_aligned_halo_1",
+      "latent_cells": 84,
+      "area_fraction": 0.005126953125,
+      "squared_error_fraction": 0.2530166208744049,
+      "squared_prediction_gradient_fraction": 0.2530209720134735,
+      "mean_error_inside": 0.7756420969963074,
+      "mean_error_outside": 0.011800895445048809,
+      "mean_error_inside_to_outside": 65.7273941040039
+    },
+    {
+      "region": "ink_aligned_halo_3",
+      "latent_cells": 180,
+      "area_fraction": 0.010986328125,
+      "squared_error_fraction": 0.28763964772224426,
+      "squared_prediction_gradient_fraction": 0.287659615278244,
+      "mean_error_inside": 0.41149812936782837,
+      "mean_error_outside": 0.011320593766868114,
+      "mean_error_inside_to_outside": 36.349517822265625
+    },
+    {
+      "region": "fixed_512x256_answer_region",
+      "latent_cells": 2048,
+      "area_fraction": 0.125,
+      "squared_error_fraction": 0.4177360534667969,
+      "squared_prediction_gradient_fraction": 0.41774213314056396,
+      "mean_error_inside": 0.05252470821142197,
+      "mean_error_outside": 0.010458840988576412,
+      "mean_error_inside_to_outside": 5.02203893661499
+    }
+  ],
+  "spatial_alignment": "any target ink in each8x8 image region; optional latent-grid max-pool halo",
+  "gradient_scope": "saved prediction tensor; network parameter-gradient attribution not measured",
+  "one_pre_adaptation_training_draw_only": true,
+  "model_loaded": false,
+  "new_neural_forwards": 0,
+  "optimizer_updates": 0,
+  "actual_autograd_on_saved_prediction": true,
+  "loss_or_training_recipe_changed": false,
+  "causal_bottleneck_identified": false,
+  "language_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
