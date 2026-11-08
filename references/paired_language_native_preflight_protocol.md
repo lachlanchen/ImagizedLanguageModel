@@ -65,7 +65,9 @@ checksums and ink boxes alone do not prove information survived the encoder.
 
 A two-update gradient/memory preflight uses only the first training question
 pair and the unchanged final-image objective, loading targets only after
-generation. These are real optimizer updates, subsequently discarded. Require
+generation. Model seed is 20268801; independent trajectory seeds are 20268802
+and 20268803. Fresh AdamW uses learning rate 1e-5, decay .01 and clipping one.
+These are real optimizer updates, subsequently discarded. Require
 native-forward equality before the first update, finite nonzero adapter and
 early/middle/late trajectory gradients, no frozen parameter gradients, changed
 adapters and peak allocated memory below 22 GiB. Keep the shared GPU0 lock and
