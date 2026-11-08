@@ -1,0 +1,155 @@
+{
+  "repo": "deepgenteam/DeepGen-1.0-diffusers",
+  "revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+  "files": [
+    {
+      "file": "connector/model.safetensors",
+      "file_bytes": 1729809448,
+      "expected_full_file_sha256": "425ce59f596eeb573f9cd52138b775df47ce69c60d2782fb32cac5498ed208f3",
+      "full_file_checksum_verified": false,
+      "header_prefix_sha256": "8f180faa5004f510ef7ab1b9ec9ed37a7a671b93a6882f8980fed4200858cade",
+      "header_prefix_bytes": 11320,
+      "stored_tensors": 103,
+      "stored_elements": 432449532,
+      "elements_by_dtype": {
+        "F32": 432449532
+      },
+      "tensor_payload_bytes": 1729798128,
+      "tensor_payload_downloaded": false
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model.safetensors",
+      "file_bytes": 4939433672,
+      "expected_full_file_sha256": "54078ee51ab477275e94b610249ea912d6f80d24256c4197fe48945eef706883",
+      "full_file_checksum_verified": false,
+      "header_prefix_sha256": "83c8ab68f31613691774ebca96df3dbbc2395fbff4bbe9671d25cb140cc5a19e",
+      "header_prefix_bytes": 105800,
+      "stored_tensors": 909,
+      "stored_elements": 2469663936,
+      "elements_by_dtype": {
+        "BF16": 2469663936
+      },
+      "tensor_payload_bytes": 4939327872,
+      "tensor_payload_downloaded": false
+    },
+    {
+      "file": "vae/diffusion_pytorch_model.safetensors",
+      "file_bytes": 167666902,
+      "expected_full_file_sha256": "5a170129752b4ad4ab98996d2e59097c8c693afc31a5964bd2ad60896686c1e2",
+      "full_file_checksum_verified": false,
+      "header_prefix_sha256": "25b5f9707f2bd4c39904ee1627cac238e9cd8360aa3ab05efb282196c42c4cc4",
+      "header_prefix_bytes": 27536,
+      "stored_tensors": 244,
+      "stored_elements": 83819683,
+      "elements_by_dtype": {
+        "BF16": 83819683
+      },
+      "tensor_payload_bytes": 167639366,
+      "tensor_payload_downloaded": false
+    },
+    {
+      "file": "vlm/model-00001-of-00002.safetensors",
+      "file_bytes": 4997750760,
+      "expected_full_file_sha256": "d6f11cc9c30184ce92605f25ac1e6b6644ee217e7b86a28282b3c9b17de3e609",
+      "full_file_checksum_verified": false,
+      "header_prefix_sha256": "32c5c76a30ba73d5a401abfa985094363812924920c5e3129b2ddf6670dc758e",
+      "header_prefix_bytes": 69608,
+      "stored_tensors": 628,
+      "stored_elements": 2498840576,
+      "elements_by_dtype": {
+        "BF16": 2498840576
+      },
+      "tensor_payload_bytes": 4997681152,
+      "tensor_payload_downloaded": false
+    },
+    {
+      "file": "vlm/model-00002-of-00002.safetensors",
+      "file_bytes": 2511587184,
+      "expected_full_file_sha256": "c675c19a231b0ead141d8d3a05fe930892ddf17f1324d75bb94d2a42a79f7ebc",
+      "full_file_checksum_verified": false,
+      "header_prefix_sha256": "4b44533a0a15e1e304c43819612cfb5c31f6cfa592084ccbe47ab2782bd96895",
+      "header_prefix_bytes": 22384,
+      "stored_tensors": 196,
+      "stored_elements": 1255782400,
+      "elements_by_dtype": {
+        "BF16": 1255782400
+      },
+      "tensor_payload_bytes": 2511564800,
+      "tensor_payload_downloaded": false
+    }
+  ],
+  "configs_sha256": {
+    "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+    "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+    "transformer/config.json": "e8cc4cfae099425181236be04924979672b9f62c94b5a11d47a305f89c372300",
+    "vae/config.json": "05eec56c19e8b4b7500eafe31b69006a9f75b2b2fcce3f7ebb10a248cb69d67e",
+    "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+    "vlm/model.safetensors.index.json": "3926d103f74c183f387097ac4d00e7fff7dae7cd0ab24427f585b84c6feea9d6"
+  },
+  "component_stored_elements": {
+    "connector": 432449532,
+    "transformer": 2469663936,
+    "vae": 83819683,
+    "vlm": 3754622976
+  },
+  "total_stored_elements": 6740556127,
+  "hub_summary_elements": 2469663936,
+  "packaged_vlm_present": true,
+  "packaged_vlm_files_identical_to_base_files": false,
+  "differing_file_hashes_do_not_alone_prove_tensor_value_changes": true,
+  "base_source_repo": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "base_source_revision": "66285546d2b821cf421d4f5eb2576359d3770cd3",
+  "base_file_sha256": {
+    "model-00001-of-00002.safetensors": "41a8895c164b4d32bae6b302f4603fcbc1797f32dafa45c7e9bcda23c6755df8",
+    "model-00002-of-00002.safetensors": "365531ff8752420e89dee707b79d021fb2d6e25abafe486f080555a4fe6972e4"
+  },
+  "total_weight_file_bytes": 14346247966,
+  "tensor_payload_downloaded": false,
+  "weights_loaded": false,
+  "neural_forward_performed": false,
+  "implementation_sha256": "c4184400bf6ab4d9b642c52d6790022bafe1ffb040986de0f715a5569f8a15ff",
+  "runtime_parameter_counts_from_loaded_weights_established": false,
+  "source_candidate_quality_established": false,
+  "meta_structure": {
+    "transformer": {
+      "parameters": 2243171520,
+      "buffers": 226492416,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {
+        "pos_embed.pos_embed": 226492416
+      }
+    },
+    "vae": {
+      "parameters": 83819683,
+      "buffers": 0,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {}
+    },
+    "connector": {
+      "parameters": 432449532,
+      "buffers": 0,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {}
+    },
+    "vlm": {
+      "parameters": 4065787904,
+      "buffers": 148,
+      "all_parameters_meta": true,
+      "all_buffers_meta": true,
+      "buffer_elements": {
+        "model.visual.rotary_pos_emb.inv_freq": 20,
+        "model.language_model.rotary_emb.inv_freq": 64,
+        "model.language_model.rotary_emb.original_inv_freq": 64
+      },
+      "output_head_tied_to_input": false
+    }
+  },
+  "meta_architecture_parameter_total": 6825228639,
+  "meta_architecture_buffer_total": 226492564,
+  "public_summary_excludes_per_tensor_name_listing": true,
+  "packaged_vlm_index_contains_lm_head": false,
+  "hub_metadata_sha256": "17f66cf530237d0ce859101db134c1b3706efa2f4d05b76c29d014cc0d835778"
+}

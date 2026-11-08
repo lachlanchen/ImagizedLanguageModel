@@ -65,15 +65,41 @@ no model weights were downloaded. Inspection finds three material details:
   sampling generator. A replay must bind the global RNG as well as the denoiser
   generator; silently changing posterior sampling to its mode is a different
   experiment.
-- `_load_extras` prefers an optional locally merged VLM but otherwise loads
-  stock Qwen2.5-VL-3B. The actual resolved weights must be recorded. Neither a
-  local path nor the model's approximate size label identifies those weights.
+- `_load_extras` prefers the package's local `vlm/` folder. This pinned
+  release actually includes that configuration and two complete VLM weight
+  shards. The native package therefore resolves those files before its external
+  Qwen fallback. Substituting base Qwen would be a different baseline. The
+  different whole-file hashes do not by themselves prove different tensor
+  values, since serialization and sharding can also change.
 
-Model-hub safetensors metadata lists 2,469,663,936 stored parameters for this
-package and 3,754,622,976 for the separately loaded Qwen source at
-`66285546d2b821cf421d4f5eb2576359d3770cd3`: 6,224,286,912 in their sum, before
-any proposed removal. These are hub metadata counts, not a locally loaded
-parameter audit. A rounded “5B” label must not replace full runtime accounting.
+The [complete bounded-header audit](evidence/visual_conditioning_package_headers.json)
+corrects the earlier incomplete 6,224,286,912 estimate. The hub's summary
+2,469,663,936 count describes only the transformer file; it omits the
+connector, VAE and bundled VLM. Every weight file's header is now checked:
+
+| Packaged component | Stored tensor elements | Storage dtype |
+| --- | ---: | --- |
+| Transformer | 2,469,663,936 | BF16 |
+| Connector | 432,449,532 | FP32 |
+| VAE | 83,819,683 | BF16 |
+| Bundled VLM | 3,754,622,976 | BF16 |
+| Total | 6,740,556,127 | Mixed |
+
+These five files total 14,346,247,966 bytes, including their headers. Stored
+state includes a 226,492,416-element transformer positional buffer, so this
+is not automatically a count of learned model parameters. Meta construction
+of all four real component configurations also exposes a VLM head-sharing
+distinction: its constructor initially creates an untied head absent from
+the stored shard index. Weight tying/loading must be reconciled before
+reporting a loaded runtime count. This is not evidence that the published
+weights are corrupt or that the head is used by image generation.
+
+The audit reads bounded header prefixes and configuration files only;
+no tensor payload or weights are loaded. Entire weight-file checksums are
+recorded from hub metadata, not independently verified by these partial reads.
+`scripts/audit_visual_conditioning_package.py` reproduces the file accounting
+and optional CPU meta-structure checks. No memory fit, native numerical
+replay or language-quality result follows from these observations.
 
 There is also a checkpoint question in the native code: its `state_dict`
 method excludes every `lmm.` key, while the
@@ -107,7 +133,7 @@ fails because `einops` is absent. Importing the checksum-verified einops 0.8.1
 wheel from an isolated path lets the same source module import; no package
 is installed into the training environment.
 
-Constructing Qwen from its pinned configuration on the meta device gives
+Constructing base Qwen from its pinned configuration on the meta device gives
 3,754,622,976 architectural parameters, all without allocated parameter data.
 Its body has `model.language_model` and `model.visual`, but the top-level
 `language_model` and `visual` attributes used by the published wrapper are
