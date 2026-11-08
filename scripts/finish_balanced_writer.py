@@ -7,7 +7,6 @@ import os
 from pathlib import Path
 import signal
 import subprocess
-import sys
 import time
 
 from ilm.image_edit.baseline import ROOT, save_json, sha
@@ -29,6 +28,10 @@ def main():
         p.add_argument("--" + name, type=Path, required=True)
     p.add_argument("--training-pid", type=int, required=True)
     args = p.parse_args()
+    def interrupted(signum, frame):
+        raise InterruptedError("completion worker received signal " + str(signum))
+    signal.signal(signal.SIGTERM, interrupted)
+    signal.signal(signal.SIGHUP, interrupted)
     run = args.run.resolve()
     if not run.is_dir(): raise ValueError("existing owned training run required")
     lock = (run / "assessment.lock").open("a")
