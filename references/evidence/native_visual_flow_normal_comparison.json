@@ -1,0 +1,2312 @@
+{
+  "cases": 64,
+  "summary": {
+    "train": {
+      "cases": 32,
+      "initial": {
+        "cases": 32,
+        "canonical_exact": 0,
+        "accepted_exact": 0,
+        "pairs": 16,
+        "both_correct_pairs": 0
+      },
+      "final": {
+        "cases": 32,
+        "canonical_exact": 0,
+        "accepted_exact": 0,
+        "pairs": 16,
+        "both_correct_pairs": 0
+      },
+      "accepted_exact_change": 0,
+      "canonical_exact_change": 0,
+      "both_correct_pair_change": 0
+    },
+    "validation": {
+      "cases": 32,
+      "initial": {
+        "cases": 32,
+        "canonical_exact": 0,
+        "accepted_exact": 0,
+        "pairs": 16,
+        "both_correct_pairs": 0
+      },
+      "final": {
+        "cases": 32,
+        "canonical_exact": 0,
+        "accepted_exact": 0,
+        "pairs": 16,
+        "both_correct_pairs": 0
+      },
+      "accepted_exact_change": 0,
+      "canonical_exact_change": 0,
+      "both_correct_pair_change": 0
+    }
+  },
+  "rows": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "pair": "35f85d9209ce6ce949650e8765689d4d336b169a32f06e0408fe7e2282da0490",
+      "seed": 20268701,
+      "input_sha256": "e1b36dd154e800a3c52f204b2f8899bd078a5c24575b607ca6be1cbf09b70a4f",
+      "initial_answer": "native_visual_flow_initial_normal/images/000_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/000_answer.png",
+      "initial_PNG_sha256": "201543fe0b47cb3c9d0f467776a0a5b85de662f9d58b4e69349a78a13080ea26",
+      "final_PNG_sha256": "776ec954660f60a4e591a1b98499d156a37713562db695e3c8fbc86825d1566c",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5afd662cf193fb77e84e44eaaa92eb4dfc57b04e8fa287c65efa53bbc2e75c7e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "54953ee5808e85fbdd17a76b209cb2b78b5d159da439dac23c92d077acf45e16"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "pair": "35f85d9209ce6ce949650e8765689d4d336b169a32f06e0408fe7e2282da0490",
+      "seed": 20268701,
+      "input_sha256": "71a011fe43778434befb6a095101d28ee8d7a1d9fdc4cf2ad9e63ab237f2e509",
+      "initial_answer": "native_visual_flow_initial_normal/images/001_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/001_answer.png",
+      "initial_PNG_sha256": "d793a9880987dd4be5f22b6ee805b6070adac06537cbdb28eb09dc2821376eb5",
+      "final_PNG_sha256": "03a3a78dd46f46cc74da471353b37339a6f8e3855f1c5b32b87e0fa1df5efae2",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "cc470db6eb0358fa8b7f14ec84a66fbe883a11b99db4844ad7c7604cbb9ece34"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "cef64fd9ea4af051b33007baf5b7f34b6514f751bc45082019d65fe949e12693"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_2",
+      "split": "train",
+      "pair": "dcaebb720a4758d2add8ebc7ec0502144bb61db4dd5c8952f47dd199adac2735",
+      "seed": 20268703,
+      "input_sha256": "7835b5ed7035bbac5a981451dafd3be725d2298f108aeb2db59cc7a63efd95ed",
+      "initial_answer": "native_visual_flow_initial_normal/images/002_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/002_answer.png",
+      "initial_PNG_sha256": "d0cbd9b758821b99d6627907f51219a8919dca3d1ee1c623228e01e058fd3cd8",
+      "final_PNG_sha256": "4ba42a493bd08a8ea7af695ed3d7d4d826b12e2f0f6bfe2937bbd0e0ba7f2258",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "43c08a865a2f7e800b35b96b1b642c36f3ef959cd5870df17b944dd45c5b97e8"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d2ad7a47e8235c507b46f51dc02630494081c2ae77d05d2b731b2eb5533af8f0"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_660_QUERY_3",
+      "split": "train",
+      "pair": "dcaebb720a4758d2add8ebc7ec0502144bb61db4dd5c8952f47dd199adac2735",
+      "seed": 20268703,
+      "input_sha256": "be6a18a066c97d2e3b9fd0917894833693bedc40a2de67f254e9791d1ff6f812",
+      "initial_answer": "native_visual_flow_initial_normal/images/003_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/003_answer.png",
+      "initial_PNG_sha256": "e0cf98b0b7cb2bb9ff25f176ec4b0301cb8525fb8a32f6a5c87499ae0cfbf987",
+      "final_PNG_sha256": "9a481ad2a8dfcd06c815eae8b14538ec7e33a3558fe9415c94484287a8058536",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "da70d639186a25ece154523581abdaeb0612b5266cd2b2e4ab7f1819af78fd0e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "4cd5e3cc76df4b5c7f2039a478798a450179510acb5ba15c632e8635cb2b3765"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_0",
+      "split": "train",
+      "pair": "ee739c49265ea96e40ec9ccb409a92019abf7b068f9dafec3240594a061702e3",
+      "seed": 20268704,
+      "input_sha256": "c3f584d7910bcb73ab11fada5074c39c17a5230048ce7e4d6ccf5ead3d164d63",
+      "initial_answer": "native_visual_flow_initial_normal/images/004_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/004_answer.png",
+      "initial_PNG_sha256": "ef3d57e8f6649e971261e99e9f6e4998d669b37c3d8fb0e1576b99bbacbb3027",
+      "final_PNG_sha256": "5c039a6fff22ca27b573648a871f1ded049a52ed440bd5ce6bc55752f37186e2",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3d4c751e2032cbb6cf961e4921557e33d9ce181b03347e7ce7e74d16f8aef5b2"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b2cdb2e67bad2155764e0d03646fcaaee3b4074e55b4a0cfab2fe9ad9d5c9f90"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_686_QUERY_2",
+      "split": "train",
+      "pair": "ee739c49265ea96e40ec9ccb409a92019abf7b068f9dafec3240594a061702e3",
+      "seed": 20268704,
+      "input_sha256": "643a6b2caa24f14c5f38500e1256cdbd51ef498db5d93329201230f998f8866f",
+      "initial_answer": "native_visual_flow_initial_normal/images/005_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/005_answer.png",
+      "initial_PNG_sha256": "b88ebffcdd8f2d0bf68e3801ff646c58e2c4954a0948baea1e40946d81087c8e",
+      "final_PNG_sha256": "3ee5bd3c5197fbf09f252377e9e35e576e5b790f0de0ef2f5030daae00bb19ff",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b3dfae8cc58e1f2671eb457de9add3c2d9596c1660b5d21a1e3dac914276c932"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "227e64f98a51260b58fbec3249085febcf7a17aea9c88aad382c2a123b554515"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_2",
+      "split": "train",
+      "pair": "471b5749b72f68f9dc1b8838597b5cc6fd7edd8b02667159075d1536032aa34a",
+      "seed": 20268705,
+      "input_sha256": "4597463ac2895ad5c3b7408bfff32d04473bf3194a1a66091f45e418d8dcac80",
+      "initial_answer": "native_visual_flow_initial_normal/images/006_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/006_answer.png",
+      "initial_PNG_sha256": "e9c961c4683685cf9237992553a022f866ab6911143399ac243905a9d293d448",
+      "final_PNG_sha256": "e9901470a74d58493e37ed4c53ce89f6d38db67dc1bd87d54327f3e6b3b4e77b",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "8c1b8c486cb73cdd666fd75009cfc3b62a1f3c3de2a51dc4150986e7ef6cd407"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2c8fc1dff0034277f9f5486134c396af2ecf7632dd41321a279627e0bae6715e"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2381_QUERY_3",
+      "split": "train",
+      "pair": "471b5749b72f68f9dc1b8838597b5cc6fd7edd8b02667159075d1536032aa34a",
+      "seed": 20268705,
+      "input_sha256": "d633f274dc5e92c1beca0233f4fcfb773c95dc3e63f46739555cc88025175a69",
+      "initial_answer": "native_visual_flow_initial_normal/images/007_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/007_answer.png",
+      "initial_PNG_sha256": "c2ea1a34987c790bbdd53ac261c93ff28c4051305a3f6d9281a836fd9adb04d7",
+      "final_PNG_sha256": "8e41e44a7cef8a5420c4f2ff2b16b047bc93bfcf0268d7e6750a7cc4b325bd54",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "66ac675583dd072c6f3fae7eccc08f418bbdaa776e6cb30300cf8169275d9ed5"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "6f42f9e3f723d2d058aec389a2c4ba06f73f8e375fc9d86e0a0bbc7ac9147747"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1291_QUERY_0",
+      "split": "train",
+      "pair": "45bfcab4abd2158c033b83d581eef75a5eedceb84d6a68e44dea04b533b4fad8",
+      "seed": 20268706,
+      "input_sha256": "1af51d8aa88d5e0bebf7d8ea7d4ced4a8b749cac5e5724601a927a16256ada73",
+      "initial_answer": "native_visual_flow_initial_normal/images/008_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/008_answer.png",
+      "initial_PNG_sha256": "cd1316e5fa5c9cf887824d385a9207686f8158f6f39e19c3f5062d5f70e5f459",
+      "final_PNG_sha256": "cfb008a518dfebac3b6759c4b3a0182d4d4bd7313b3efdf59a48fa5fdf250662",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2d61db71f1ae88f854c6eee37503eacfca92686eb821832b5266e685c6ee1212"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ed7a15e16eb0b9466b89c10ef7c9bbf5c4900f58360083d77b6129c546d413d4"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1291_QUERY_1",
+      "split": "train",
+      "pair": "45bfcab4abd2158c033b83d581eef75a5eedceb84d6a68e44dea04b533b4fad8",
+      "seed": 20268706,
+      "input_sha256": "a126fa85183d2c22deb307237fae9ec6b0e598972d00d87229496e7c5f87854c",
+      "initial_answer": "native_visual_flow_initial_normal/images/009_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/009_answer.png",
+      "initial_PNG_sha256": "6067dbe61d6efc506c54379b64c2e7526bc94891c9fceb3ef4f466a80a517b5b",
+      "final_PNG_sha256": "159a856dd8203ed6dd690c3fcaa5ad25917b91baeaa198c69f1035f2b137a884",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2ac92d3f6e72c624bbe6a7b91e71fca506858490b8ce6d1e871461a9edb7b3f3"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1b2376fc6a00d889b5fe9a54ed7c2c46672ec90afd5e4b0d23d46db75c345d65"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2272_QUERY_1",
+      "split": "train",
+      "pair": "ac51485358ba6194787e0cf5ef507528d8236ffb150cd2e0421339ed355d1d46",
+      "seed": 20268707,
+      "input_sha256": "15e13ea6902429164e8206e01734d578d37e13430ffc4beded65095bfa5af474",
+      "initial_answer": "native_visual_flow_initial_normal/images/010_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/010_answer.png",
+      "initial_PNG_sha256": "d516804610b05dbaebba7a5e0587c99e299ff5d83e7df1abf8c31889ba9d4436",
+      "final_PNG_sha256": "5e180f90a2a8fcf8da934ef9b6e48fe11fa6b1d1a17f640fac5320619bb36981",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "24af43702bd52c22411412c1dfde19baf94a9c20d61da61830149c6630360a7c"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "01c89e3beae34b16dd61d74cc29ffd1d198d21795cc9e47ba04d6c6082b015d6"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2272_QUERY_2",
+      "split": "train",
+      "pair": "ac51485358ba6194787e0cf5ef507528d8236ffb150cd2e0421339ed355d1d46",
+      "seed": 20268707,
+      "input_sha256": "aef99fcae570b92da097d0dab81f7485a2dd0c2ae7fd893a3607f31668d635c4",
+      "initial_answer": "native_visual_flow_initial_normal/images/011_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/011_answer.png",
+      "initial_PNG_sha256": "619501110d3f057473ec882478765cadc73f638c60446772a126e3cce786bef8",
+      "final_PNG_sha256": "93af791d0d1c1b5e320263104e879ddf3fd165a50d45d7e863dff5e8dda26795",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "db0744170774f1b1673602df86332946261e9583d632b6778737b21735b69662"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3a0e37a6c6a376f006b92737fa5eb7d5c21e2afceeba38ca57aac8d03b4b49d7"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1621_QUERY_2",
+      "split": "train",
+      "pair": "52e869fde83f795fd501f022b28983af0148d83efbe18feee5030862e568d911",
+      "seed": 20268708,
+      "input_sha256": "7bce621f007ceaa3f7b759e22bf518cc515cb88704c8724ea0c8f851addb29df",
+      "initial_answer": "native_visual_flow_initial_normal/images/012_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/012_answer.png",
+      "initial_PNG_sha256": "1325a564de8f31316d29bcbd599db725106e642d11d96e4546cba3bc9152e3f9",
+      "final_PNG_sha256": "438a3cca087c49c9d6fde9a5f2fc38f2e3cff3c2332f7f36c673320f4824f4c6",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ebf59df12341e9fbd70998a22e2e8f744d6c8dd9fc7a010977accc9ac111658d"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ce3e70b70a7b4a22a71832c37f6c46a240aa8cddb96b889d8cee5c4efd87edab"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1621_QUERY_3",
+      "split": "train",
+      "pair": "52e869fde83f795fd501f022b28983af0148d83efbe18feee5030862e568d911",
+      "seed": 20268708,
+      "input_sha256": "a684ddc9848c91ad54eebb2e4e6346ce478cd97b0809f2c72d9a7556ca959da7",
+      "initial_answer": "native_visual_flow_initial_normal/images/013_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/013_answer.png",
+      "initial_PNG_sha256": "ad18748ba329204515934c30df83f823b0228d4d85f7327e998b1d04976d5643",
+      "final_PNG_sha256": "36c88331904c06c182b80615e1506e5f3acab6e90bbf1e742cb0c36acf47e80d",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2ce1a4b0a8966bdac915032b4853538e5a3a995edd69337ed98ad0bf7c99b40f"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3bfb6b009116df8808ef7310a656fdb6aecbec056c9eed5eca52b31de6999c27"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1638_QUERY_0",
+      "split": "train",
+      "pair": "65ce9610407e7e638e85ab5dc66b1db4b1a76a3cd8316a5bd5e4cb5b804d0170",
+      "seed": 20268709,
+      "input_sha256": "ed9c29d9c66fb9518c628cc38e3c1e566f5cae8db7b1b41f9112b1d9c49272d9",
+      "initial_answer": "native_visual_flow_initial_normal/images/014_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/014_answer.png",
+      "initial_PNG_sha256": "edc16ed5c370b9f7a49d897c948bc5a1a2b6355301616c7d43618d7152d9062a",
+      "final_PNG_sha256": "47f83023b8c21f1d8725787ff7991f561a863a1bb7819927e09461bfc7406f75",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "4084bfaea5a22d53451694a8148c349f6a75e45b1e19756ea86420494034eae2"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "06b5d1a6cc1b8eee0a95abab24c26bec4f015f8d67bdf2ef5ab1c7f9191a0428"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1638_QUERY_1",
+      "split": "train",
+      "pair": "65ce9610407e7e638e85ab5dc66b1db4b1a76a3cd8316a5bd5e4cb5b804d0170",
+      "seed": 20268709,
+      "input_sha256": "0d3959980eea3f110737124850caa9466a6a9d0accf33a6d3997c53eb446db31",
+      "initial_answer": "native_visual_flow_initial_normal/images/015_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/015_answer.png",
+      "initial_PNG_sha256": "04c89c3566af979278d741f55b3025d57cfb33e88b8104108cb1585d514f715f",
+      "final_PNG_sha256": "6eedf736da9c2801359e5b6c6740f20e7e428ca013100ade1b0e85f8edcdf247",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b8cb15779a1775c4dccaddba85b85abddac3bc8e1fcb2faeb88e3b017924419a"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "136b02f07c19e82c13398746d2b288564690231df2dc85e7e0b88c3f306536bb"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2720_QUERY_0",
+      "split": "train",
+      "pair": "eb4774bf699057cfc5c998e20b9ef5fd7b87525692d97990ca95eaaa23b3ac47",
+      "seed": 20268710,
+      "input_sha256": "3b0c447ddc26f335cd8425d6d35dd711fb8bba04094391dfac737710c1b52620",
+      "initial_answer": "native_visual_flow_initial_normal/images/016_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/016_answer.png",
+      "initial_PNG_sha256": "5f88884a8e76c148847d0498b6b33ff8afbf12fb61995a40f31edb9771ea4c2b",
+      "final_PNG_sha256": "e8d46d48ad37b336200a18deaf9c179274ccc74df8fe85b446ceeb1cf598077f",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f3772814f64e87f8eafdc6cda12edb4e0a6e9483f8647d25faf2228f5b093613"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "4bd7654a8b711d742efbb725dbcaea7de597c2e7f33ce2fed9045eb90de4bbb2"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2720_QUERY_1",
+      "split": "train",
+      "pair": "eb4774bf699057cfc5c998e20b9ef5fd7b87525692d97990ca95eaaa23b3ac47",
+      "seed": 20268710,
+      "input_sha256": "40937e29562264630a75c0f42b7d6207f52b9184bea60ae7d5e9bdc6cb709564",
+      "initial_answer": "native_visual_flow_initial_normal/images/017_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/017_answer.png",
+      "initial_PNG_sha256": "175ddea14a85b304a60bc300a1e2ec85cc0e12a9b069c3883b7f7ef131940909",
+      "final_PNG_sha256": "af25407fef1d8d859f70471f85820bf4ab1b02c25bbbbe55a18dff7e798623bb",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1ea57f43cd7bed323d3dae1aaf77fa89d41b48f09aae0c98cde7f3218b7fb88c"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e526e269b5f6a4207f30a7d55455055d13f7bd01a955824ec70254d5a33363d8"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1234_QUERY_1",
+      "split": "train",
+      "pair": "8417d792666e25f88779b886bbcf37f7a2fdd1a403898ac0e5f89a34b0ed3033",
+      "seed": 20268711,
+      "input_sha256": "0d466ae1ae51ccd7096ae7493dc40404d1f243a236f7b6e3158c0efeba031e69",
+      "initial_answer": "native_visual_flow_initial_normal/images/018_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/018_answer.png",
+      "initial_PNG_sha256": "50011eb75ddcf5eba9d892334baeef862a611bdf7037ef87727c1e34577b479d",
+      "final_PNG_sha256": "485ab91d1d1c3bfc3edb99d98afba6b96ad7676b93e67d3300af2e3a2f16e735",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "987b49ec9b94cb4b3b3767bf909966857bef51e07ca0c2549a0c5dc05331d5b9"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "347fcba01771ca0c922d9b46370595edfbe4b33f601eb2286f634d5d2477ce61"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1234_QUERY_2",
+      "split": "train",
+      "pair": "8417d792666e25f88779b886bbcf37f7a2fdd1a403898ac0e5f89a34b0ed3033",
+      "seed": 20268711,
+      "input_sha256": "d18b4f230b9e74b88518821b4c94e8468a381202a856546b5fcfb998adc73631",
+      "initial_answer": "native_visual_flow_initial_normal/images/019_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/019_answer.png",
+      "initial_PNG_sha256": "de5c1007cbbf1e459354c51a55a80a3f6b6e607825a6d8e11b28607daa553a7a",
+      "final_PNG_sha256": "e9af951e1498805d864afb1f5c2e779c47c44d3ba50d4ba3b961f3df177d1415",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "dd6838b46b87cd606bf431952d5a22224f578889c2f66ed765ec15bdcaad745b"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b85503cc8b150a0e76dec806852796465fddc342d7a90920e2a2d393f3956eb1"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_267_QUERY_0",
+      "split": "train",
+      "pair": "dc866e02bf577b71f0625c863d40a24095aadd547448f0b6b452edd80727a54b",
+      "seed": 20268712,
+      "input_sha256": "0f6d6810bd42fe16084c95226eaadfcbafdc95fad443c1896265128d7842aa46",
+      "initial_answer": "native_visual_flow_initial_normal/images/020_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/020_answer.png",
+      "initial_PNG_sha256": "022dbcd3e42d3c057f9be15aea273517c83eafaf19f27f6aab8a26e6d3f8a6f9",
+      "final_PNG_sha256": "8cdc60f73ff2000bb82424da1be9ce606a4bb7bd648f3424e26be251892dc67c",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "cdf5b41d388bff0ce0c510446acc81f6c8650bdbf14b17e3ac2b1c5c840326c5"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "770e1ce1b3e480eeefc63acfcc1d6ac05263e6cb12efa4a66ea397620346dba0"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_267_QUERY_2",
+      "split": "train",
+      "pair": "dc866e02bf577b71f0625c863d40a24095aadd547448f0b6b452edd80727a54b",
+      "seed": 20268712,
+      "input_sha256": "3646a7ecd7b32d9c52f5312767f5f2195a5fa65276512592a4608e619232921b",
+      "initial_answer": "native_visual_flow_initial_normal/images/021_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/021_answer.png",
+      "initial_PNG_sha256": "2bd85ae2a3a5b8501004006a2a15abead142c787c3ae1762383ff7f5cc5fdab4",
+      "final_PNG_sha256": "ddb26ed04e4fb523caceb5c70d40b8f6692163f0c53d4970890bbd95facf56f3",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3b59bf9ee6e82cb19d98f2a3f00db06642fe9a97e429aa4581a73b0086b3658f"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bccaf7544a5e07d9e4e9e1d7ec242f208a3795568c516000aa481644034be6a3"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3698_QUERY_0",
+      "split": "train",
+      "pair": "187c6cf81ade73ac4a77a72d95e6265719f182f090406636ffe43041d14cfd16",
+      "seed": 20268713,
+      "input_sha256": "37549efbe9d9858bbdf9749a37639b85d930a81215ba41d50c00ac59766146c9",
+      "initial_answer": "native_visual_flow_initial_normal/images/022_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/022_answer.png",
+      "initial_PNG_sha256": "c0c625ecaa3168cc96a8ace782320fb0222b621de677ffcb96fdfb8baa9e4db4",
+      "final_PNG_sha256": "491fad600ab21a9382f72053ff15e0db60372b1d97a25e42079c757daaa51f79",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "6c4771d1303c8163e19ef4dc2f7fd7a28f39f7e74a59e58168ef5e55917385dd"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "207afe51cd02c689b7e967fb0b69d23ef6b9fb2aec3f4fe2a9c1d309075344cd"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3698_QUERY_1",
+      "split": "train",
+      "pair": "187c6cf81ade73ac4a77a72d95e6265719f182f090406636ffe43041d14cfd16",
+      "seed": 20268713,
+      "input_sha256": "527cb75f5243d8d42c3f1a45ce44b12119a20a9948295c04b6b293e95835ffcd",
+      "initial_answer": "native_visual_flow_initial_normal/images/023_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/023_answer.png",
+      "initial_PNG_sha256": "c4d4e6b611a8cf978fff9d694d70bfdfaaada43808f57b8efc2e28f5fa04a9dd",
+      "final_PNG_sha256": "ec86ece7c707cd9477ac9f05e13afeccf2e6248b2101328658ebedac1029f697",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2764250ae3352ac95d53adca3fdcee37d44445a7d889a449806ebf4d4e12b085"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "15498f99bc29c55f9def51609a9e6435427cd112a140d8bb3c5d53056cdf191b"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2115_QUERY_1",
+      "split": "train",
+      "pair": "a46704dd06e7130121991fcc1e778267f0b76478292e3d8927f8662e7be22ba5",
+      "seed": 20268716,
+      "input_sha256": "ff4bdfab8a9de22d63e54ddfab1b61434171b44e7baf32602b4c28b99bb64a92",
+      "initial_answer": "native_visual_flow_initial_normal/images/024_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/024_answer.png",
+      "initial_PNG_sha256": "c1f1f5bc46a8ac00f8b0f08616b3199cbdcd6858e30f6a83aa13b880c4a93875",
+      "final_PNG_sha256": "d6a846eedccb62b036a8cdda67226c2f0f5c2cdc00beef95a245b2d0e1fc5c18",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5bc5a77d034ab0ee8ee86e03283db91387dfe87db157ce794e5bf872fdd91dbd"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ce15b40ce4853c213b70143b9a3205aec6df70d97138bb372a44442c6463fb05"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2115_QUERY_2",
+      "split": "train",
+      "pair": "a46704dd06e7130121991fcc1e778267f0b76478292e3d8927f8662e7be22ba5",
+      "seed": 20268716,
+      "input_sha256": "11e91a558516dc5308f39cc5c6aada6984380d5251bcff75c9e5196057cf5e0f",
+      "initial_answer": "native_visual_flow_initial_normal/images/025_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/025_answer.png",
+      "initial_PNG_sha256": "cf344e9b13eb2fe5783222a5173badd11d1c07ed5413f3542d623ac7c4ac7fcd",
+      "final_PNG_sha256": "97c1299c05204a60697ac8bdd655fbea062c9e674c03d10ebaeaecb519ace72a",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1e92fcf6163b5c19ee83ffe48019f707ff448f3302304cb0fbdb5e3299f976b0"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c7a8ff43338d97854bf155ed9a76b19140becd921dda32e06979ccd90a6a258e"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2270_QUERY_1",
+      "split": "train",
+      "pair": "41dea16cef277113964c6a1b83fc673261aaf71d8c11bbd3e3a606a514bf63fd",
+      "seed": 20268717,
+      "input_sha256": "88392be32136ffd51aacbf18e1e2a4ee35a81cd3491638ed6381e15b34baa0e0",
+      "initial_answer": "native_visual_flow_initial_normal/images/026_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/026_answer.png",
+      "initial_PNG_sha256": "f8736152ad6c48d100f6d9d4a6a25dd957a072c4baeb1a7d8be8fad54e12e51d",
+      "final_PNG_sha256": "e6f0648885deda553d4df271315938e3493564c9d2a1d7fc7fb76d7233c59cff",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c5997374e944768940f35d3c207d8a4666a6d844922d3f59a37a221581c50b22"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "814873b548356d670fc5e8dbd2ceb76183855e73c3cd24e642f953577dff6d4c"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2270_QUERY_3",
+      "split": "train",
+      "pair": "41dea16cef277113964c6a1b83fc673261aaf71d8c11bbd3e3a606a514bf63fd",
+      "seed": 20268717,
+      "input_sha256": "3206b1e197d8423f939c802d639fac2dcc2406d7fd4d1628cf02bcc8ffc65abc",
+      "initial_answer": "native_visual_flow_initial_normal/images/027_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/027_answer.png",
+      "initial_PNG_sha256": "3c8cb13d42c4f51af4c4555b6e348c9db963ba74f7aff58a4c826cdf2e6d16fc",
+      "final_PNG_sha256": "c89b41893b68cc246b840dcf0be264ac8a4f4741aaf2cf39d32853c500b71cbb",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "38cdc83d97f0e6dc3df35238cf4b4e6b9335388b3b6519ed808be8aef14dad73"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b5d058da15cbb9fd74da84611b1fa0662a5073542dc565b6bc6e0d9e4f4a7c26"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_498_QUERY_0",
+      "split": "train",
+      "pair": "7ca449306d1eb123f79c368c598c937691dc25b943a3c1f0f1b840f5c0b97300",
+      "seed": 20268718,
+      "input_sha256": "33474ba7895fa347cabf11ff3eebeb6ea075f35f0306f906d82c29c78295ee81",
+      "initial_answer": "native_visual_flow_initial_normal/images/028_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/028_answer.png",
+      "initial_PNG_sha256": "468b10738c6a5153baaf461a665b7c511153163116fa360e3d1edd4748fa7ea9",
+      "final_PNG_sha256": "0a16d39948f231be1545a648893502bf1ffd308fd41bf208fc15760973b82c0b",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1db36858a7416cd3e61d8580826051a046709e1a571e1718b74269463b25aae9"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "4eb15c1b8818bc94ec75105d680c0cbbd4e80dbc898040356a455b40dad6237f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_498_QUERY_2",
+      "split": "train",
+      "pair": "7ca449306d1eb123f79c368c598c937691dc25b943a3c1f0f1b840f5c0b97300",
+      "seed": 20268718,
+      "input_sha256": "e5f0caa1fde710f0e8e66300319a9c0c3464d36a6feeaefe02cbb3cbbfafa556",
+      "initial_answer": "native_visual_flow_initial_normal/images/029_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/029_answer.png",
+      "initial_PNG_sha256": "a3a49a1c427abb138b6b7399435126815d0f9b73646fa4251122d854d565c7e8",
+      "final_PNG_sha256": "f31731fc788ea6bdae93cf357c865478469dac1fc5a18760bd09406a61fb28df",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1660a1d7e51b869150af793be003563347767c6bf88290402a634b2aca77c8f7"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7626f34b7d0c3d15eb00256aebf09fd08292d155094a05ef55fc7a3727bac0bb"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1337_QUERY_1",
+      "split": "train",
+      "pair": "80513173e69a2857587d2f5c296329112b44d1d4bb3df42085475c85a8c89642",
+      "seed": 20268719,
+      "input_sha256": "e9a014889ed7f6b7679c763efa3aed0bdf135dfd2df3e754eb7c5da4694de85e",
+      "initial_answer": "native_visual_flow_initial_normal/images/030_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/030_answer.png",
+      "initial_PNG_sha256": "ac3a384494a67915ef922546d940f983c3caddebb92b12415e3032d0b2808b3e",
+      "final_PNG_sha256": "8462b678406a76c2323196860d3bc7906e184cf4f9338eb3b417d9bd29db4702",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2a6648f63360b5bff1c477cb329c8646fb36a7ff7d7d4137653a327adb9b45ab"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7f541ef4f7128868d1d01a0f534bca74444d43156b25cd2f57e9cc22096f96d4"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1337_QUERY_2",
+      "split": "train",
+      "pair": "80513173e69a2857587d2f5c296329112b44d1d4bb3df42085475c85a8c89642",
+      "seed": 20268719,
+      "input_sha256": "4b7ea8eee823ba2a00932b316a809a2dabc7d40c8c5465c55a829f2b7a4758a3",
+      "initial_answer": "native_visual_flow_initial_normal/images/031_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/031_answer.png",
+      "initial_PNG_sha256": "d71283f9edf529753038928476e3524d0821f7ba66f9345e5a6a6707f36037b3",
+      "final_PNG_sha256": "7ef3966d803c2cb9d8e9d996b804de702c26fa540559abb4d8a88a17317f76e1",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e1f276912c17dec740e88c10358a8b5bcd0971e78b85575e385ed525f513945e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "6c00c99cbf0b05e74e44c274dc9c7bd0ffbeb911c981fd22ab55a3eca664d6a2"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2295_QUERY_0",
+      "split": "validation",
+      "pair": "9bb044ac3d0930aca2b04fd09219de6bdbdf49124cb2053b34091665632a77ec",
+      "seed": 20268702,
+      "input_sha256": "02bd90f60129faac8e84933e390327246cb872449e84a903a19455a932ff1c7d",
+      "initial_answer": "native_visual_flow_initial_normal/images/032_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/032_answer.png",
+      "initial_PNG_sha256": "422fcc2b6ae58005fcdefb7e0591b4afec86b9da3223ae522a0153f1cdfb27bd",
+      "final_PNG_sha256": "0aa106a8a2635895f7bb702860730ca8f6e692f5e830f2e9529bc70c41fee0ba",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e0a1b790cef387387838c3e04d94dcf4d411d15a6aeebbdebb8c90ae00aa32ee"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "78f3bd855ef4446c31e9f638d8d8fbc9ee1e0955625292d16edb7523504a2aa9"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2295_QUERY_1",
+      "split": "validation",
+      "pair": "9bb044ac3d0930aca2b04fd09219de6bdbdf49124cb2053b34091665632a77ec",
+      "seed": 20268702,
+      "input_sha256": "026b8c2f383e601526a46bdad937452a95c8e5699f53b088f61a0c9a4b9ac9e9",
+      "initial_answer": "native_visual_flow_initial_normal/images/033_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/033_answer.png",
+      "initial_PNG_sha256": "fb1265d4428e8aa6d358140be6e6d7dc8bf61ca08b74451d20aa82acfbdff402",
+      "final_PNG_sha256": "8c4f1805633e48bb477fe362955c72f49ce01ebbf47e3bed7a10ac20d119d369",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "aab0dc4aa6bff5d34f4a06128fafbc1c734816abb2bf1f63b41f6fc8cb2a360e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "427553226fc93411922c749bb7ee4a0b89c0ec81525021ded56347607577f657"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1313_QUERY_1",
+      "split": "validation",
+      "pair": "16f8d03548a12ee6a1ec938f01787c5495098a0343fc5942b6734877df36a162",
+      "seed": 20268714,
+      "input_sha256": "2e0fc1d472c649d719852915f594bc2335cb40e3a0d807528d580173c46728b2",
+      "initial_answer": "native_visual_flow_initial_normal/images/034_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/034_answer.png",
+      "initial_PNG_sha256": "48f8248842dc4f88f6351071867680090b7cc6765bab36e46328098ebda650c0",
+      "final_PNG_sha256": "88d009b95ed1f7eda5f0b469e5cfca1d599f7f77d0c26778b383c6abb305aaac",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "90e1eeb5b148283308a15e42702a931572f1703e8f8740a6a6795aec6de1775b"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e4b9b20ba4dede9429b085a9bae788c12e6c5505d88c8224871efc7f6afa45d9"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_1313_QUERY_2",
+      "split": "validation",
+      "pair": "16f8d03548a12ee6a1ec938f01787c5495098a0343fc5942b6734877df36a162",
+      "seed": 20268714,
+      "input_sha256": "385cc7290272292f781f057f67f48a9fb7133cf6bc995e1cb0980d8f224dfeb8",
+      "initial_answer": "native_visual_flow_initial_normal/images/035_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/035_answer.png",
+      "initial_PNG_sha256": "d0d2093c25ac0c40fae0f9e5bab157ffa2880c21166126809c3e870507a4c8b9",
+      "final_PNG_sha256": "42f3836bd342ea7ee833d9c859cb017df83910102e17160ba94b4a5a1e23b70b",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f685091bf481b53ec16e83329932f0658627c80cb09759c78217ca5adb7ca0cb"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c212d4c804097f358fc2fce9b56325655d8a30e04e0f3ced0b83d53589e37013"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3653_QUERY_0",
+      "split": "validation",
+      "pair": "069bdfe884bd97b7b200550d4deae235755f06c275e652a1730d0f74e3112505",
+      "seed": 20268715,
+      "input_sha256": "663f81714befbb2236e6a7128e1fad675e16efc5c69956f1febf7178c57f5096",
+      "initial_answer": "native_visual_flow_initial_normal/images/036_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/036_answer.png",
+      "initial_PNG_sha256": "e38d72abd4362a8dc017cedc933a3ba07bb967dd5d1d4c9d35ebfb83a1900bd0",
+      "final_PNG_sha256": "863b717c90f8609ec70a56db4122cc0a29e7de6e0d1789837f29e8431f603e1d",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "115dcf217e320979bb4f641381e5582a305b83aaf6616cc943d947f121c1aa58"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "69eb15f002673898b2b6c73dc20f1a98b3f95f5adbfc1db3b0a5e656a0c6acfd"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3653_QUERY_2",
+      "split": "validation",
+      "pair": "069bdfe884bd97b7b200550d4deae235755f06c275e652a1730d0f74e3112505",
+      "seed": 20268715,
+      "input_sha256": "69c3df130c40c2f36aa737e9886f80ac3577660ea396a99cf5304775a65a7805",
+      "initial_answer": "native_visual_flow_initial_normal/images/037_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/037_answer.png",
+      "initial_PNG_sha256": "e1941261f9e811605fda39b9750a96230e5ac5bb247e4fecb39be3a276dd1610",
+      "final_PNG_sha256": "71b84a15e98e7ca4855fbb5324434582098415a0de48179a06b5d8cd4eea3e6d",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d2beb8fe60d8f602b0b637464b6839692aeb107b2b5b6ac9fdcf862bb2d8c37e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c7d1867d7cd9c564207851ff7cce62ea3d602c93781775f2e4b899020e71262f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2662_QUERY_0",
+      "split": "validation",
+      "pair": "0b3ab1244f42884cfbd71110448a3351595e3e41c8a3866cf2caefdf75339547",
+      "seed": 20268722,
+      "input_sha256": "d0d4f0e24d150980c28d0abec14e797c208190025b31d11bf2df0748b1d4e574",
+      "initial_answer": "native_visual_flow_initial_normal/images/038_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/038_answer.png",
+      "initial_PNG_sha256": "ddcf8f74b19a13692deadfa33c5e7716b954fc64fdf9b108a0974f3632846eeb",
+      "final_PNG_sha256": "9ed958017562cd16ba59edb5427c300db2bd94faf9046d86ef66031ee9a653c5",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bd08c3adae97aea0f6e8b5da28026ea8f02301f28cf3445a3c5c9dcd2f54260c"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "94c02d7ef471c31e6800d3b37a2312547390d6cd97a3ab728d9c43456da30a4d"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2662_QUERY_3",
+      "split": "validation",
+      "pair": "0b3ab1244f42884cfbd71110448a3351595e3e41c8a3866cf2caefdf75339547",
+      "seed": 20268722,
+      "input_sha256": "189ca833d7df02c2722bfcfcbbfd8bc260800e1fe1396145ba9ffee27d0b1fd0",
+      "initial_answer": "native_visual_flow_initial_normal/images/039_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/039_answer.png",
+      "initial_PNG_sha256": "c9c8813535db1fb2b4fe2bc69fa64bb4d0530a0f8165899a4010a29213b92557",
+      "final_PNG_sha256": "b544599f42c8f5251a78f96be8726b2019204f35989d2110f69d706184dea539",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a4aefaf8c4c8baa38e2779aa04024219f4ef074b222658bf15213b5c60536f81"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "456a5486d9ba70612d5686ec4c9f3566691b86644b771a39a653f89dc9603965"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3585_QUERY_0",
+      "split": "validation",
+      "pair": "0bd79b38ad6a45efefed62eb34bf66b826a336d5bb5b9a9cbcbf002032ff182b",
+      "seed": 20268723,
+      "input_sha256": "8129a643f84ea5e8ed7603a4e2813b8db185cdb32f7777388d9038cf9392e5bf",
+      "initial_answer": "native_visual_flow_initial_normal/images/040_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/040_answer.png",
+      "initial_PNG_sha256": "e802c57e758c0af7ba54ff2241757b5da173cec0ebbf756a9105d0f12025a73e",
+      "final_PNG_sha256": "1a3e7dfffea843270f2cbfa05b0b2a94638305aab86c6e1c2b3079c546e0a749",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "12d3ca3f3607ab4b54ecc60e074d3dfac8b770a54822dd93d83ac0944e974514"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7c9078f895e7538b4d80b69e7cd4950b3054ce9dca953b35cac30d6c68cf41d3"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3585_QUERY_1",
+      "split": "validation",
+      "pair": "0bd79b38ad6a45efefed62eb34bf66b826a336d5bb5b9a9cbcbf002032ff182b",
+      "seed": 20268723,
+      "input_sha256": "ee43262d2aea7329ae46e2bb54539b9aeb0f3ce17121b4cbe456d1f623d3cf30",
+      "initial_answer": "native_visual_flow_initial_normal/images/041_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/041_answer.png",
+      "initial_PNG_sha256": "1b282814afbd18f929fa199d7f31e7864d28526795592eb600f9bb20cb162e29",
+      "final_PNG_sha256": "a785870425898a51a30a38602033c3284c2606ed963909cb01d07195249f4d57",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1b8ff43a05804e494864ef10da453b21a6681f1b72d94677d2694ed0d5b3c117"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "ba3a929ada4a87b8e4d25ee592b27e3d53a85b64295d72e9abd32198c8402e5d"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2035_QUERY_0",
+      "split": "validation",
+      "pair": "acac5ed5a3255b95bdc3d7fe016b0c477099d4df45e9510acbae38d43c590a4b",
+      "seed": 20268727,
+      "input_sha256": "808f79cdffd8f49304fd45c5521030b93b247ba800228c48bf89f4552572acde",
+      "initial_answer": "native_visual_flow_initial_normal/images/042_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/042_answer.png",
+      "initial_PNG_sha256": "a39c77e6f53fb39e21f5d709bb69ebf9878a61bf2fda875b160fc548b14e45ab",
+      "final_PNG_sha256": "694fe918f9aa3094319bd23458dcb4a34d3c8bdb8b666b2eeaec080e36ad658d",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e8ef822929410c8fc587ec26b25d2c181fd84ec2a6984b6a5c48c6938914be7f"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "200c476ca45093f293a7f3d4033fc3cad03e63dc5ab691b853a050b73fa5c0d1"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2035_QUERY_1",
+      "split": "validation",
+      "pair": "acac5ed5a3255b95bdc3d7fe016b0c477099d4df45e9510acbae38d43c590a4b",
+      "seed": 20268727,
+      "input_sha256": "1a1184bc1ce195c8a903db7f559fb98ee4beb211bd2911270dc3ee2dc23d9c40",
+      "initial_answer": "native_visual_flow_initial_normal/images/043_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/043_answer.png",
+      "initial_PNG_sha256": "3b825cf79bd59910490d3f580f563a5731390c47ca31b1be6f9403591eac02f1",
+      "final_PNG_sha256": "bbb510cb98af0b3ffb72ca978aa101a18f3bf9c755c7ce08e0293efbe0ccccc3",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "0df243caa1bb95ccb2e1394946b2dff549c35c6dc4f51679e4ab9638d657210e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2aea0192e37bcbded985e8c77f000d2a86ab754f6a1aa31307914f54a150bc96"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2710_QUERY_0",
+      "split": "validation",
+      "pair": "22802f52a29292ae0ad79842b3907aedfedfc42b1737b96c92191a4f91a42cd6",
+      "seed": 20268732,
+      "input_sha256": "b9d10b8105ff24fecf895244e6e0b305cd1eb80fcdbf6dbfeb2b7490ee75659a",
+      "initial_answer": "native_visual_flow_initial_normal/images/044_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/044_answer.png",
+      "initial_PNG_sha256": "0e194e17eb46a038644dcf96adb5eff812067301a2201854b2c5ceb03dc292f8",
+      "final_PNG_sha256": "6222fa00f17c4daca1c86ace2eb0fc8d5e79a8ccf1982ec853f7609e9700254b",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e74ef7843b3a9d52755c6f083d7253dc1e751919b8b502772611334d6dae7db2"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3d7fc370eef0b4df7be44ab0f7af7354c2e1b4ffb9d56933185db005e280171c"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2710_QUERY_1",
+      "split": "validation",
+      "pair": "22802f52a29292ae0ad79842b3907aedfedfc42b1737b96c92191a4f91a42cd6",
+      "seed": 20268732,
+      "input_sha256": "3a09eff89efdcd1e7663d0017cd87d287657fa04b3ca533fb4eb13096a7937f2",
+      "initial_answer": "native_visual_flow_initial_normal/images/045_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/045_answer.png",
+      "initial_PNG_sha256": "b499ceb3895ccd6784af67dcb53b74fa39f55cea0fee801f0beab889b8244a97",
+      "final_PNG_sha256": "98ef4406c8bf41da4182078f86bbd635bbe300bfe4b998fafb2813da9db0cdb2",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "57441ba8dbc48280d4b18ff7d0d010ec533719e73fe2dd6a6493e91824fbc923"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2470aace798338ab24f458059380f0cb3ce9baab127f8402d8ebce1463ebc463"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2491_QUERY_1",
+      "split": "validation",
+      "pair": "a749859b1e94af92ddbdbbab4f18addcf24c4d271dad1ef2e33e0c0de7d43edf",
+      "seed": 20268740,
+      "input_sha256": "8b55232c06a84ca286d0a9832e52cf1c4728fcdc5e05ac187fc31cc1e94bb9a5",
+      "initial_answer": "native_visual_flow_initial_normal/images/046_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/046_answer.png",
+      "initial_PNG_sha256": "e74a28d3f3358872f03ce6d13a402799b0643bd99177a85ad9571540b5deaf38",
+      "final_PNG_sha256": "fc37f693392363e81a455695de441fac35427084d4b50b9820eb54408ddd35e1",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fec517999073e29811d5011cbbe80b9d65edade4afa32d082c33d8585bb1051b"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "8c9ebd46d8bca9b23ad4827836c33b1ad4e933192ce7e6a8297097b5725546cf"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2491_QUERY_3",
+      "split": "validation",
+      "pair": "a749859b1e94af92ddbdbbab4f18addcf24c4d271dad1ef2e33e0c0de7d43edf",
+      "seed": 20268740,
+      "input_sha256": "c131793997e34cc0c634cc83ba2294992f52d684f4146d454ed12dee480487b9",
+      "initial_answer": "native_visual_flow_initial_normal/images/047_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/047_answer.png",
+      "initial_PNG_sha256": "c507e6874a5dc594c59ce3afad98cd8f8ef249d5f606fc188663c29a7a7ecc9e",
+      "final_PNG_sha256": "86456edbb0f2c7694788773fad75c86dd120af87b76f236cbe7908bdb827cc68",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "023be35d0de4a37fa3822ed5bca49d7d5bc8abee27d4be83fab1e9d50584167a"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a9a4ac7a9a954516457b850ac078125b6ff10ca560411b483d9896bff1b852c0"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_947_QUERY_1",
+      "split": "validation",
+      "pair": "5dd306ae08dc98d056b8b18593d531fe921273ca0142b0a0541a4361276f947f",
+      "seed": 20268741,
+      "input_sha256": "95177c5ddd234a40ce25f012b317a4930f43cc6025431ab7aa26fc4a2406b321",
+      "initial_answer": "native_visual_flow_initial_normal/images/048_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/048_answer.png",
+      "initial_PNG_sha256": "d4243ea3656f64070ac6af0cd61a3909fa60c3f4172e389103b89b8574f7ef1b",
+      "final_PNG_sha256": "06aed13b9052f17f3d618f1309e02a7d2b2aad74641a3de18fb4624e4a3a4c41",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "17e6ada885ccc48622641146d17b75ac0440c9d64e2e515321f02989394fab4e"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "6e56a53b79c4e2b2695c8dba7508c6fdcc0142f530c205da074fbbffbef3fc2f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_947_QUERY_2",
+      "split": "validation",
+      "pair": "5dd306ae08dc98d056b8b18593d531fe921273ca0142b0a0541a4361276f947f",
+      "seed": 20268741,
+      "input_sha256": "22e86eb9dd6fa5371729bce5a542c2f09e9ae37a996d80eb81ffb66a6bd96acd",
+      "initial_answer": "native_visual_flow_initial_normal/images/049_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/049_answer.png",
+      "initial_PNG_sha256": "ba874fd4fd4ca39c9082aa929d8f064db9a83476fbda307fa4f566b2324e9f41",
+      "final_PNG_sha256": "3c93075512452db61a834f695687851e8e494cf45341f53c7fa7f9673be2667d",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "dade8b69873ac7078e2ee8af9adeffc6a33e4a211f2c602b14cb6ec8faed3dd9"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d5761eb5f80ecabb7c0bc330b0e68772a96a8be88f7e531e2b7dff71897b651f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3807_QUERY_0",
+      "split": "validation",
+      "pair": "ee0c8f897fbfcc86998f1cf88ff2a4df6ba191e300e7985787a7171e902967db",
+      "seed": 20268746,
+      "input_sha256": "62753768c0730e25a26ed9fe6201d36808fd04b226dd84dcbca6661164308ac4",
+      "initial_answer": "native_visual_flow_initial_normal/images/050_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/050_answer.png",
+      "initial_PNG_sha256": "8a482ff3ffbeba07fd039c174835ee05517069d4b327e0026aecab710c5723bb",
+      "final_PNG_sha256": "2b7cba43c871ec565f2f81fb05dfdfae5f7e2e179d32ddad30c173a108447935",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "38bc26dd0eef3072a2e37946753737060d6280824ec58f2369b044e09ec7f342"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "60cf8ae8feb75c561292ab0e85457f56542c9464928a23a4e10bccee2b065eef"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3807_QUERY_1",
+      "split": "validation",
+      "pair": "ee0c8f897fbfcc86998f1cf88ff2a4df6ba191e300e7985787a7171e902967db",
+      "seed": 20268746,
+      "input_sha256": "1553296030de5b8fe76bceaa24a6b9700f49487bbf3cf5683085977d8813af0d",
+      "initial_answer": "native_visual_flow_initial_normal/images/051_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/051_answer.png",
+      "initial_PNG_sha256": "f489ece6ea1684be47cf762a9944abb2b8e98ed7767acf0781e2a856cf8b693f",
+      "final_PNG_sha256": "9accd26642b4c30b9667219605793af25916e3722b97d0d23ae608e2ccb5f42c",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2bfd72c7b03100d86f7cbac537865c9f2f6a26c6ace3b0f35b56db3ad9bed3f4"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "efe60cab5dc4a76c0c947f58cf58492e45bf8fb81abd68b1b279777970279ad1"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3504_QUERY_0",
+      "split": "validation",
+      "pair": "7c1082ade0bf1521f622292a68278367c8b9883a083fe783c080f6dc3f4a8458",
+      "seed": 20268748,
+      "input_sha256": "043dfe69422bf603d468360bc182d5db99e1c4d1d24c14081d5250a8f4c0bf32",
+      "initial_answer": "native_visual_flow_initial_normal/images/052_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/052_answer.png",
+      "initial_PNG_sha256": "3869378a82d483257478251a24b320a4194ec72f757293d5b88e68817fc88966",
+      "final_PNG_sha256": "5a78b50adac7e0c1d1fa28bab98dfa2ae5fe2a19d599cd2090bd98e6253e0fdd",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c2e09fde9ecb9eb1b35c18f70dc2d38e58de581186e8432e0d8adef4da2838b4"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "8a0f7b0b09d4432ba02a4ddbd0ac8e527a479c52566226120d2bc871379b4a12"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3504_QUERY_1",
+      "split": "validation",
+      "pair": "7c1082ade0bf1521f622292a68278367c8b9883a083fe783c080f6dc3f4a8458",
+      "seed": 20268748,
+      "input_sha256": "52390e03a9cf59c06799b67baa7451cf104bfa3e3b56d033f7dc4d4a6fbd464f",
+      "initial_answer": "native_visual_flow_initial_normal/images/053_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/053_answer.png",
+      "initial_PNG_sha256": "ea3deaa152a6fd96ad7714ebd9979ef3ec2f8a4720581b5a4b4fe4f377d3d5b3",
+      "final_PNG_sha256": "de81764437608a4046f69647df8f13d4ef2f57c69f039750d604f6f10a39c52f",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "0edaaa7d8cc4defa39e3f437a76998b3f58f1fde3c08f3817ff2776a0d3d477a"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5851e21660f27536d3c723e2123966216833e9eac7e844f7c24e18534805dac9"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_39_QUERY_0",
+      "split": "validation",
+      "pair": "16d9ec486e77aa6a7b723b360b21eb3ff7e00b1c62292f7fa250865d5d15a066",
+      "seed": 20268749,
+      "input_sha256": "6f0674ea6ea66c12246f39b3fb9ff3cb8223c6f82437fc9b1fef616561ea8024",
+      "initial_answer": "native_visual_flow_initial_normal/images/054_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/054_answer.png",
+      "initial_PNG_sha256": "d2caeb82656284f7b8d48860e437ea1a0a6d161279ec07774335c285135cea49",
+      "final_PNG_sha256": "303b8907dc0f921db85399cd79474cac5dae8aa9529139c41e36b166b149fcb2",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c008714b131900c75c011a535cfbeeb013aefc397055ccb4f19afa43b57c8302"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "2795fd6b35217b50db0cf1da66422c51111f2ce7e94247c07c0c955d1e9b174a"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_39_QUERY_3",
+      "split": "validation",
+      "pair": "16d9ec486e77aa6a7b723b360b21eb3ff7e00b1c62292f7fa250865d5d15a066",
+      "seed": 20268749,
+      "input_sha256": "0c86938329a236b99b7e286aee673e84e9659e3d1d796f5910ac7dba26a555f7",
+      "initial_answer": "native_visual_flow_initial_normal/images/055_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/055_answer.png",
+      "initial_PNG_sha256": "22ca7a539dac6f5c926a69edced438e8ece73edf820497c249596b18912d11ff",
+      "final_PNG_sha256": "65964cf28fe8c0ed37806aa16ad2fc400999662c148dd9d87a02c32f732cff95",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "de2a4ecb0082b7ce3780a8333011b0895a33a45dc4e9432b7514a35ffac64e18"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "0bc25254967d15ca18cab036d15e9ba760a91b32e3f726d288aa02fd1c7487e7"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2084_QUERY_1",
+      "split": "validation",
+      "pair": "7fc0267e1f1496e2bf054dd220e56c2047cefc2a1d3e663573237027c572d244",
+      "seed": 20268755,
+      "input_sha256": "95a1bdeb01724bd543265911361c1332143326201c5c990e08770c5963f80856",
+      "initial_answer": "native_visual_flow_initial_normal/images/056_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/056_answer.png",
+      "initial_PNG_sha256": "84c1787aa7f9a816d17dfcaff1eaf39c2aad40608297bd44993ea635035d8b82",
+      "final_PNG_sha256": "06df2b48602f196593133808f6495b5a23c3ab62f2aceb980c5854d40d57c995",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "669e83f438c8b75f586da9acf50100e55f0a6bae8d08831fb95e3b7cb1ea7161"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "34393917440c16c263ac41b1e63c1a6870fc09f5f88d3d0bf68017b33728f20d"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2084_QUERY_2",
+      "split": "validation",
+      "pair": "7fc0267e1f1496e2bf054dd220e56c2047cefc2a1d3e663573237027c572d244",
+      "seed": 20268755,
+      "input_sha256": "8de54c46ca1308d396b846a5dcd89a98595076cbc66470f7c73c6f4f43902eba",
+      "initial_answer": "native_visual_flow_initial_normal/images/057_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/057_answer.png",
+      "initial_PNG_sha256": "fb841c085143bb3b16bacbe9a502b81a7c0ded035101f5414b4a3f3bbea89eb7",
+      "final_PNG_sha256": "81b36f0e02fca1b08fe535a2b39e90cf25390abc166765a19accff7a1133e616",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c103f81a2d0af67ba812b722abe79fb1030f0f22668f850fce578ed164494aa3"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1189541ad45241a6a414207355fac61eff7c84b70af6c8b843637cc39ffeef32"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2175_QUERY_0",
+      "split": "validation",
+      "pair": "8e07aaaa8364d2762125f3c9377432a35cefed98a5230e5d8c684d73ed2e8005",
+      "seed": 20268756,
+      "input_sha256": "5801f61c3dd630d44d32f0f4446aaf63a5af1b16fb6aa31f364c67a8bfeac963",
+      "initial_answer": "native_visual_flow_initial_normal/images/058_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/058_answer.png",
+      "initial_PNG_sha256": "ab13f99121d05b5003599b1f485f27d542a735c7a1de7b6b5c09955c578989e3",
+      "final_PNG_sha256": "36dacca193d244c6a839d448453e0697beed67a5499ff2359d884a1c6370eb89",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d2632c04bf78fd5b4d399a703288de49a0317b17798648d831464f8e4e8d4603"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "17ee65a7bfe12e9967734da3de0462701e1378ae3bfa49227a2ba36b9f0ba802"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2175_QUERY_1",
+      "split": "validation",
+      "pair": "8e07aaaa8364d2762125f3c9377432a35cefed98a5230e5d8c684d73ed2e8005",
+      "seed": 20268756,
+      "input_sha256": "97e6ceb55cbf733a14d288ba143579b3482224815a62c6781c5057e135b6e071",
+      "initial_answer": "native_visual_flow_initial_normal/images/059_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/059_answer.png",
+      "initial_PNG_sha256": "325281df60442bac7a38b3e648846a8d34e9ec4848b7c5fc53794decc824450f",
+      "final_PNG_sha256": "1b06b5a086bf4f099f31cf5b711af1439e44fed5bff9f97fb28a5dfb90f251d7",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5fb535d5cde920b68d83447f12eec5053201a304cf02e347f191a3e1b7a39726"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e85df795202e7700dfaf0ecfed60fcc6ec7f83889397c6c3da08a66e9d2f6602"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2238_QUERY_0",
+      "split": "validation",
+      "pair": "3511bd83a2bd3f7a4174b6d1ec78b9e03dbbfae4d20384ff7f5ecebd50b5a6b9",
+      "seed": 20268777,
+      "input_sha256": "2d485edb5ccd08fedcad8bf5e3ed54a5076f1d60897582fc7f01f87d40ae4f1f",
+      "initial_answer": "native_visual_flow_initial_normal/images/060_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/060_answer.png",
+      "initial_PNG_sha256": "b61d992d044db282c6740dfc2f914e6964717a1dc1032cdd2ecaad4357231de5",
+      "final_PNG_sha256": "09b57e2c1746b1c0815e9835fdcd198ada55bed37ddae75c14c6d0b25320fe3f",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "3363480e50ca92d119c9d6d4f37c9d05dcea5c5a14605c6bd64a25408828ff9a"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b59f392fafae27fe7aaa622eba5164b4af2a43aa65f3867787c87991d0cd946f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_2238_QUERY_2",
+      "split": "validation",
+      "pair": "3511bd83a2bd3f7a4174b6d1ec78b9e03dbbfae4d20384ff7f5ecebd50b5a6b9",
+      "seed": 20268777,
+      "input_sha256": "8b6573d1e8dfbac1118ef0e6e21d02fdeff56d6fea75123d61a95779c708eaa8",
+      "initial_answer": "native_visual_flow_initial_normal/images/061_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/061_answer.png",
+      "initial_PNG_sha256": "56c0864ea1876e1ccaea191a91e1ca20f01e2f47b1060925cb9bf7090852f0fe",
+      "final_PNG_sha256": "47971c47738f93cff73b2ceb585ac56e1e495bfff871658c40c586a6b47d600e",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "571fa78b754653e1e0b74b2a9c7eeeda6e53c2dff667dfe0cced7d8a2033f030"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "21f66bc6544d84ae652a80380f15ff5d2e8e6d94d7daf787aa56b134f1637f1b"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3614_QUERY_0",
+      "split": "validation",
+      "pair": "d6d2f7440438ba774afdd1d55b104f95a369ba12f95d88c16484416ca88aafb6",
+      "seed": 20268781,
+      "input_sha256": "79523c590c5b74eed7c0617e215f5268bc29588e4ac9b38519c41a4bbce48c86",
+      "initial_answer": "native_visual_flow_initial_normal/images/062_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/062_answer.png",
+      "initial_PNG_sha256": "967cf0a23b08b1b4d35387a98d1ef15fdbf402af5affd4011c131378260a4ffc",
+      "final_PNG_sha256": "3d307389f90ccc9c867d633d1462d934b4d47c92466bacdd050be5f939249902",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "cd1d96dd250da6f9edf7420595b3c4e9e5d7cd9294eacde3309928253c572bd4"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "dca3dae1035a601c9d9ac714cd95cfcffe46e07caf7df1ccb06384a81824811f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    },
+    {
+      "id": "TRAIN_3614_QUERY_1",
+      "split": "validation",
+      "pair": "d6d2f7440438ba774afdd1d55b104f95a369ba12f95d88c16484416ca88aafb6",
+      "seed": 20268781,
+      "input_sha256": "17229ce3ad2a9b20e5d0802344e1ea022674032610b00f7115af3e6942e1b2a9",
+      "initial_answer": "native_visual_flow_initial_normal/images/063_answer.png",
+      "final_answer": "native_visual_flow_final_normal/images/063_answer.png",
+      "initial_PNG_sha256": "7911137a37f9c2457530eddc8555a7233bde19d35d7b551d266a7dc261cbd412",
+      "final_PNG_sha256": "c6eeb5ed024935655a8ea8fd5df74af983a181edc11e6f9f2d12f19dbea826a2",
+      "initial_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f750801c304ccb6cb6bd8903e49129020d4b71ad4025d54f4d82cb05597e339a"
+      },
+      "final_actual_pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a57be1d850f11d3d5963072067816642b5d31dcb701dafd14fc841c0b434700f"
+      },
+      "initial_canonical_exact": false,
+      "final_canonical_exact": false,
+      "initial_accepted_exact": false,
+      "final_accepted_exact": false
+    }
+  ],
+  "source_reports_sha256": {
+    "native_visual_flow_initial_normal/report.json": "a40995a7637481e791cdde287667c618ad7f285f4d6920a0acd1783d822cd624",
+    "native_visual_flow_final_normal/report.json": "f86c32df23e2cca68fb85b074ea08d29dee10cf9e01d9aed956603844ee1e4f2"
+  },
+  "comparison_method": "Original-order join of all64 authenticated normal cases; exact ID, split, pair, input hash, seed, reference bytes, source answers, calibration, deployment and source-audit bindings; subtract final minus initial counts.",
+  "reference_OCR_calibration": {
+    "train": {
+      "cases": 32,
+      "ocr_exact": 23
+    },
+    "validation": {
+      "cases": 32,
+      "ocr_exact": 26
+    }
+  },
+  "all128_original_normal_answer_pages_actually_inspected": true,
+  "manual_accuracy_assigned": false,
+  "all_case_input_seed_and_reference_bindings_identical": true,
+  "bit_identical_actual_output_pairs": 0,
+  "positive_normal_answering_gain_observed": false,
+  "complete_normal_cohort_only": true,
+  "full384_assessment_completed": false,
+  "causal_explanation_established": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

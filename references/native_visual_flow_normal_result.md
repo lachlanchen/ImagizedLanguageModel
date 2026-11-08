@@ -3,9 +3,10 @@
 After 1,536 optimizer updates, the final native visual-flow model obtains
 zero OCR-exact answers on both the 32 seen questions and the 32 article-disjoint
 development questions. Matching against every source-provided acceptable answer
-leaves both counts at zero. The complete initial/source, erasure and copying
-comparison remains in progress; this interim result supplies no learning-gain
-estimate or causal explanation of the failure.
+leaves both counts at zero. The completed
+[matched initial/source normal comparison](native_visual_flow_normal_comparison.md)
+also gives zero exact answers in both arms. The complete erasure/copying
+comparison remains in progress, and a causal explanation is not established.
 
 The completed [copying cohort](native_visual_flow_copy_result.md) also fails
 to establish reliable writing: 2/32 seen strings and 3/32 held-out strings
