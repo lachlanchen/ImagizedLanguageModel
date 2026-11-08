@@ -151,7 +151,7 @@ def generate():
     passed = data["balanced"]["exploratory_progress_rule_met"]
     s.shape("128 additional updates\nFour complete passes over 32 examples\n64 Chinese and 64 English draws", 45, 490, 450, 100, 18)
     s.shape(f"Training: {trained['elapsed_seconds']:,.1f} s\nPeak: {trained['peak_allocated_vram_gib_this_invocation']:.3f} GiB\nFull 50-step trajectory gradient", 45, 615, 450, 100, 18)
-    s.shape("Chinese progress rule: " + ("met" if passed else "not met") +
+    s.shape("Continuation rule: " + ("met" if passed else "not met") +
         "\nCopying does not establish semantic QA.\nExtra updates and exposure change together.", 45, 740, 450, 110, 17)
     s.shape("c  First two held-out inputs: complete actual pages", 530, 470, 1025, 38, 22, True)
     for col, label in enumerate(("Target", "Starting pilot", "After +128")):
