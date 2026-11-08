@@ -53,23 +53,32 @@ The latest final-image loss trains through the actual 50-step sampling path
 and adds balanced ink/background error. It improves the aggregate copying
 observation. That is a reason to investigate further, not proof that the
 loss fixes these problems: extra training, corrected input precision and
-loss terms changed together. There is no matched extra-training control or
-independent-seed replication. Successful differentiable execution is not
-language understanding.
+loss terms changed together. The subsequent additional-training control below
+holds native input precision common, but retains different loss weights and
+computation. There is no independent-seed replication. Successful
+differentiable execution is not language understanding.
 
 ## Next decision
 
-The immediate comparison should continue the same starting checkpoint for
-32 updates using the old objective, while matching native input precision,
-example draws, optimizer settings and final native evaluation inputs/seeds.
-Retain all outputs and unchanged evaluation. This would test whether the
-new continuation improves on additional old-objective optimization, rather
-than only on its own starting checkpoint. Match update exposure and report
-the differing compute costs explicitly. This comparison is not yet run.
+The [completed additional-training control](autonomous_writing_control_result.md)
+continues the same starting checkpoint for 32 updates with the old objective,
+matching native input precision, example draws and optimizer settings. It
+gives 5/32 seen and 10/32 held-out OCR-exact copies, versus 15/32 and 13/32 for
+the final-image pilot. Both give 3/16 held-out Chinese copies; all net held-out
+gains are English. The comparison meets its exploratory rule, specified after
+knowing the pilot and before observing the control. This supports further
+investigation of the objective bundle, not a causal attribution to one term,
+a compute-matched gain or a reliable Chinese writer.
 
-Before execution, register its exact implementation and decision rule in a
-separate protocol. A favourable result would still need replication and
-reliable unseen Chinese copying. It would not establish semantics. A later
+The next [balanced-exposure protocol](balanced_autonomous_writing_protocol.md)
+specifies 128 more full-trajectory updates, with four complete passes over
+the same 32 training examples. It guarantees 64 Chinese and 64 English draws,
+compared with thirteen Chinese draws covering nine unique inputs in the pilot.
+Its criterion requires improved held-out Chinese copying and retained English
+and seen performance before further scaling. It is in progress, not a result,
+and does not isolate additional training from the changed exposure schedule.
+A favourable result would still need replication and reliable new writing.
+It would not establish semantics. A later
 language test must answer two different questions about the same unseen
 passage, and change appropriately when the question or passage changes.
 Keep legibility and answer correctness separate. Neither attractive figures,

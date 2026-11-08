@@ -8,9 +8,12 @@ The latest [full-trajectory image-writer continuation](../references/autonomous_
 improves held-out OCR-exact copying from 9/32 to 13/32, including only 3/16
 Chinese copies. It still fails reliable writing and has no semantic-QA
 evaluation. It retains a 3.900B externally pretrained transformer and an
-84.046M VAE. A matched extra-training control has not been run. The
+84.046M VAE. The [completed additional-training control](../references/autonomous_writing_control_result.md)
+gives 5/32 seen and 10/32 held-out copies; held-out Chinese remains 3/16 in
+both arms. The [balanced-exposure continuation](../references/balanced_autonomous_writing_protocol.md)
+is now running 128 additional updates. The
 [current direction assessment](../references/ilm_direction_assessment_20261108.md)
-requires that comparison and reliable new writing before book-scale training.
+still requires reliable new writing before book-scale training.
 This limited copying gain does not qualify the independent language goal.
 
 The current direction has not produced a useful ILM. The completed

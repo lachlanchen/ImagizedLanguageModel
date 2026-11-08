@@ -25,8 +25,8 @@ reported directly below.*
 The [current direction assessment](references/ilm_direction_assessment_20261108.md)
 finds no validated usable ILM. The latest full-trajectory continuation reaches
 13/32 held-out OCR-exact copies, including only 3/16 Chinese copies, and has
-no semantic-QA evaluation. The next requirement is a matched extra-training
-control and reliable new writing before book-scale training.
+no semantic-QA evaluation. Reliable new Chinese writing remains necessary
+before book-scale training.
 
 The [completed additional-training control](references/autonomous_writing_control_result.md)
 now gives **5/32 seen and 10/32 held-out OCR-exact copies**, versus **15/32
