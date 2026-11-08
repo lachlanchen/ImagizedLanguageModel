@@ -1,0 +1,141 @@
+{
+  "source_model": "Qwen/Qwen-Image-2.1",
+  "source_revision": "d26bb61231c349cf6b7896fa83353113880e1ba3",
+  "diffusers_revision": "84532a058702c74ae5d1dd6ceb05683fc5d5e768",
+  "acquisition_manifest_sha256": "3e12fe74289e454772d3d03cb694606e16a1becbe1774d59b4ac9d2c64b1f68f",
+  "implementation_sha256": "7c6e4876e245251ea520d9c5d88ea355d8891e2745d2958a92037503a3db669a",
+  "source_files": [
+    {
+      "file": "model_index.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/model_index.json",
+      "bytes": 447,
+      "sha256": "cf1ecd104ea090855d60d8cec0895c1e9d6ee41b2f87e231b678beecd1cf7809"
+    },
+    {
+      "file": "transformer/config.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/transformer/config.json",
+      "bytes": 370,
+      "sha256": "56ae3281c4e6c2d1aa3658252d187488071815fd79bef15808bb0205fc1a2241"
+    },
+    {
+      "file": "text_encoder/config.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/text_encoder/config.json",
+      "bytes": 1517,
+      "sha256": "6001331949f7f86ab6d791a80b12246d4f8da5159fa08c3e62368a39f36d63a9"
+    },
+    {
+      "file": "vae/config.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/vae/config.json",
+      "bytes": 2079,
+      "sha256": "9785d527b278cb8b210e9f48a8028d92a4190968ce7e24c8fc85d9d1b82f6ba2"
+    },
+    {
+      "file": "scheduler/scheduler_config.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/scheduler/scheduler_config.json",
+      "bytes": 485,
+      "sha256": "5895f3a167c14a967fe9ac70c64924ae5acc79799e0679fd12907e594a713cd1"
+    },
+    {
+      "file": "transformer/diffusion_pytorch_model.safetensors.index.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/transformer/diffusion_pytorch_model.safetensors.index.json",
+      "bytes": 30283,
+      "sha256": "17987f6623b1c814d0ef55a137d99142b7b3b040eb1bf241b5575dd35af803a2"
+    },
+    {
+      "file": "text_encoder/model.safetensors.index.json",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/text_encoder/model.safetensors.index.json",
+      "bytes": 67795,
+      "sha256": "859146bff8db1d617fca8b457a5223edff963bb70076b3645f2189fe0540a147"
+    },
+    {
+      "file": "README.md",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/README.md",
+      "bytes": 5707,
+      "sha256": "d4aee8d372df2a890b6283e7d1885e3f68b57190c7d3f4b9466a61beffc16016"
+    },
+    {
+      "file": "LICENSE",
+      "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/resolve/d26bb61231c349cf6b7896fa83353113880e1ba3/LICENSE",
+      "bytes": 7831,
+      "sha256": "8dc973f024ff95966bea25866efa443fd16776dcb1001e681e3d467ea572b28d"
+    }
+  ],
+  "library_source_files": [
+    {
+      "file": "src/diffusers/pipelines/qwenimage21/pipeline_qwenimage21.py",
+      "url": "https://raw.githubusercontent.com/huggingface/diffusers/84532a058702c74ae5d1dd6ceb05683fc5d5e768/src/diffusers/pipelines/qwenimage21/pipeline_qwenimage21.py",
+      "bytes": 42974,
+      "sha256": "e75e4ce38d38e194edaac818bba99b2115b4bb2bfdbd15ce03a2813b0fe8856c"
+    },
+    {
+      "file": "src/diffusers/models/transformers/transformer_qwenimage21.py",
+      "url": "https://raw.githubusercontent.com/huggingface/diffusers/84532a058702c74ae5d1dd6ceb05683fc5d5e768/src/diffusers/models/transformers/transformer_qwenimage21.py",
+      "bytes": 48180,
+      "sha256": "7a3393f89b1eb71d79c8669a719a21a616e6c8b188b2c1f5a2faca2cc701f171"
+    },
+    {
+      "file": "src/diffusers/models/autoencoders/autoencoder_kl_qwenimage21.py",
+      "url": "https://raw.githubusercontent.com/huggingface/diffusers/84532a058702c74ae5d1dd6ceb05683fc5d5e768/src/diffusers/models/autoencoders/autoencoder_kl_qwenimage21.py",
+      "bytes": 58515,
+      "sha256": "1e29f252dbddd044b84c8b794589001ce94bb125a8f13eb5b226ef30c1e2ea11"
+    },
+    {
+      "file": "examples/dreambooth/train_dreambooth_lora_qwenimage21_img2img.py",
+      "url": "https://raw.githubusercontent.com/huggingface/diffusers/84532a058702c74ae5d1dd6ceb05683fc5d5e768/examples/dreambooth/train_dreambooth_lora_qwenimage21_img2img.py",
+      "bytes": 93231,
+      "sha256": "3c92bfcea1050003625ab178d2934425ddb667e0b9d105b74b6e97692fd040ca"
+    },
+    {
+      "file": "docs/source/en/api/pipelines/qwenimage21.md",
+      "url": "https://raw.githubusercontent.com/huggingface/diffusers/84532a058702c74ae5d1dd6ceb05683fc5d5e768/docs/source/en/api/pipelines/qwenimage21.md",
+      "bytes": 6290,
+      "sha256": "23cbcc02f42ba40e44687cbcf9b2fb94763a70ef6134e84a20e26e57658fdb73"
+    }
+  ],
+  "source_declared_generator_parameters_from_BF16_index_bytes": 7115124736,
+  "source_declared_encoder_parameters": 8767123696,
+  "source_declared_generator_plus_encoder_parameters": 15882248432,
+  "source_declared_generator_plus_encoder_BF16_bytes": 31764496864,
+  "declared_generator_plus_encoder_BF16_GiB": 29.582993000745773,
+  "VAE_parameters_not_counted": true,
+  "full_all_components_BF16_weights_alone_exceed_24_GiB": true,
+  "source_declared_transformer": {
+    "layers": 32,
+    "context_width": 4096,
+    "causal_condition": true
+  },
+  "source_declared_encoder": {
+    "architecture": [
+      "Qwen3VLForConditionalGeneration"
+    ],
+    "layers": 36,
+    "hidden_width": 4096,
+    "vocabulary_size": 151936,
+    "word_tables_tied": false
+  },
+  "source_declared_VAE": {
+    "channels": 64,
+    "spatial_compression": 16,
+    "input_channels": 4
+  },
+  "pipeline_declared_defaults": {
+    "num_inference_steps": 40,
+    "output_resolution": 1024,
+    "use_kv_cache": true
+  },
+  "prompt_embedding_method_has_one_encoder_forward": true,
+  "prompt_embedding_method_calls_generate": false,
+  "inference_boundary_removal_or_numerical_equivalence_tested": false,
+  "variable_text_prompt_removal_implemented": false,
+  "source_license_file_sha256": "8dc973f024ff95966bea25866efa443fd16776dcb1001e681e3d467ea572b28d",
+  "weights_acquired": 0,
+  "models_loaded": 0,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "whole_weight_checksums_verified": false,
+  "actual_runtime_parameters_counted": false,
+  "local_VRAM_measured": false,
+  "local_answer_quality_measured": false,
+  "autonomous_language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}
