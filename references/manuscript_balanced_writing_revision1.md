@@ -19,6 +19,10 @@ publication baseline: 40 slides, 47 charts and 121 existing figure assets.
 Keep active manuscript filenames, masters and prior figures stable. The
 unrelated `.auto-readme-work/` directory is outside scope.
 
+Native figure-source code may be prepared while the model runs. Execute it only
+after complete assessment and raw review; it must read measured data and fail
+if that evidence is missing. Do not render or compile while a model job is live.
+
 ## Allowed manuscript changes after full assessment
 
 - Update the latest abstract sentence only to the actual final continuation
