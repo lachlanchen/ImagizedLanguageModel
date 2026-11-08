@@ -157,3 +157,21 @@ no forward pass and initializes no CUDA context. It leaves the active QA run
 and its environment unchanged. Native numerical replay, full-page geometry,
 actual memory fit and answer quality remain outstanding before adopting this
 warm start.
+
+## Fixed-task compilation
+
+The [fixed visual task compiler](compiled_visual_task_condition.md) separates
+offline task-template compilation from live image-feature assembly. Actual
+layout checks at 1024 × 1024 and 512 × 256 use the released tokenizer and
+the checkpoint's source-version position algorithm. The installed 5.14.1
+`get_rope_index` additionally requires `mm_token_type_ids`, absent from the
+released call, and initializes masked positions differently from 4.56.1.
+Compilation executes a checksum-pinned copy of the original 4.56.1 method;
+it does not install another Transformers version or silently substitute a
+different position algorithm.
+
+The deployed assembly component contains fixed vectors, masks and positions,
+and accepts live continuous visual features and queries. A complete generation
+model still needs native numerical replay, explicit removal of unused lexical
+components and assessment on actual pages. Successful compilation does not
+demonstrate any of those model-level outcomes.

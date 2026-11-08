@@ -1,0 +1,203 @@
+{
+  "scope": "CPU-only compilation and exact native input assembly; no neural forward or image quality claim.",
+  "checks": {
+    "512x256": {
+      "stage": "vectors",
+      "layout": {
+        "stage": "layout",
+        "revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+        "source_sha256": {
+          "deepgen_pipeline.py": "41e0f263d9ad55940426a4b2092688a74711395499c12a71ee69dc378ec9d3a9",
+          "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+          "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+          "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+          "tokenizer/added_tokens.json": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+          "tokenizer/chat_template.jinja": "a0bc6f6fc7a29a80017a433e8f03a1cc1236e838a944a2d034295a60c4f2fddb",
+          "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "tokenizer/special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+          "tokenizer/tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+          "tokenizer/tokenizer_config.json": "11d20a741a0eda1e7482d29b5d17553328922ed9e7391ec6f44d390215390f3d",
+          "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "transformers_v4.56.1_get_rope_index_source": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f"
+        },
+        "task_sha256": "70d0ef6c8aacb7ed18d1821ce8d158627fdeb8746864039d36407a0f2bd838d3",
+        "width": 512,
+        "height": 256,
+        "branches": 2,
+        "references_per_branch": 1,
+        "visual_features_per_branch": 128,
+        "prompt_length": 186,
+        "queries": 128,
+        "hidden": 2048,
+        "transformers_version": "5.14.1",
+        "compiler_sha256": "860a0543b0dd76eb7aced5754d9ac91527a9987a52e5a577832832faa29fbf7f",
+        "runtime_module_sha256": "29d6054d98d7b8965b19474eab971c0303900cb912318dc12130a878f51a6319",
+        "layout_payload_sha256": "bb628e10b8fe92bf4000c797f98a924f05ee524ab8a5b608f9286ab7b6974817",
+        "source_native_methods_executed": true,
+        "actual_released_tokenizer_used": true,
+        "actual_rope_position_algorithm_used": true,
+        "neural_weights_loaded": false,
+        "neural_forward_performed": false,
+        "source_version_rope_compatibility_required": true,
+        "source_version_rope_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+        "cuda_context_initialized": false,
+        "generated_image_equivalence_established": false,
+        "language_learning_established": false,
+        "deployed_condition_written": false
+      },
+      "native_assembly_checks": [
+        {
+          "probe": 0,
+          "fields_exact": {
+            "inputs_embeds": true,
+            "attention_mask": true,
+            "position_ids": true,
+            "past_key_values": true
+          }
+        },
+        {
+          "probe": 1,
+          "fields_exact": {
+            "inputs_embeds": true,
+            "attention_mask": true,
+            "position_ids": true,
+            "past_key_values": true
+          }
+        }
+      ],
+      "verified_full_table_shard_sha256": "d6f11cc9c30184ce92605f25ac1e6b6644ee217e7b86a28282b3c9b17de3e609",
+      "actual_released_embedding_rows_loaded": 44,
+      "verified_full_connector_sha256": "425ce59f596eeb573f9cd52138b775df47ce69c60d2782fb32cac5498ed208f3",
+      "actual_released_continuous_queries_used": true,
+      "gradient_preserved_for_both_live_features": true,
+      "invalid_inputs_rejected": [
+        "wrong_grid",
+        "wrong_visual_length",
+        "KV_cache"
+      ],
+      "runtime_tensor_keys": [
+        "attention_mask",
+        "image_grid_thw",
+        "image_mask",
+        "position_ids",
+        "prompt_embeds"
+      ],
+      "runtime_contains_tokenizer": false,
+      "runtime_contains_token_ids": false,
+      "runtime_contains_lexical_table_or_head": false,
+      "runtime_payload_bytes": 1540232,
+      "payload_sha256": "8771ce0a382942a340f5c7c423fa77d52c2a32114da558edd32fdc36f3d72462",
+      "source_native_methods_executed": true,
+      "image_features_are_numeric_assembly_probes": true,
+      "neural_forward_performed": false,
+      "cuda_context_initialized": false,
+      "generated_image_equivalence_established": false,
+      "numerical_equality_at_neural_output_established": false,
+      "language_learning_established": false,
+      "generation_model_weights_removed": false,
+      "full_model_parameter_count_reduced": false,
+      "general_ilm_goal_complete": false
+    },
+    "1024x1024": {
+      "stage": "vectors",
+      "layout": {
+        "stage": "layout",
+        "revision": "85c2ed257b9406d8531965c68e140dc7fdb81382",
+        "source_sha256": {
+          "deepgen_pipeline.py": "41e0f263d9ad55940426a4b2092688a74711395499c12a71ee69dc378ec9d3a9",
+          "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+          "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+          "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+          "tokenizer/added_tokens.json": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+          "tokenizer/chat_template.jinja": "a0bc6f6fc7a29a80017a433e8f03a1cc1236e838a944a2d034295a60c4f2fddb",
+          "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "tokenizer/special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+          "tokenizer/tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+          "tokenizer/tokenizer_config.json": "11d20a741a0eda1e7482d29b5d17553328922ed9e7391ec6f44d390215390f3d",
+          "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "transformers_v4.56.1_get_rope_index_source": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f"
+        },
+        "task_sha256": "70d0ef6c8aacb7ed18d1821ce8d158627fdeb8746864039d36407a0f2bd838d3",
+        "width": 1024,
+        "height": 1024,
+        "branches": 2,
+        "references_per_branch": 1,
+        "visual_features_per_branch": 1024,
+        "prompt_length": 1082,
+        "queries": 128,
+        "hidden": 2048,
+        "transformers_version": "5.14.1",
+        "compiler_sha256": "860a0543b0dd76eb7aced5754d9ac91527a9987a52e5a577832832faa29fbf7f",
+        "runtime_module_sha256": "29d6054d98d7b8965b19474eab971c0303900cb912318dc12130a878f51a6319",
+        "layout_payload_sha256": "d289c84f799e4cae39bbd7a580f42c487b42b858cc1d5b0ab0c26de0f22ff392",
+        "source_native_methods_executed": true,
+        "actual_released_tokenizer_used": true,
+        "actual_rope_position_algorithm_used": true,
+        "neural_weights_loaded": false,
+        "neural_forward_performed": false,
+        "source_version_rope_compatibility_required": true,
+        "source_version_rope_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+        "cuda_context_initialized": false,
+        "generated_image_equivalence_established": false,
+        "language_learning_established": false,
+        "deployed_condition_written": false
+      },
+      "native_assembly_checks": [
+        {
+          "probe": 0,
+          "fields_exact": {
+            "inputs_embeds": true,
+            "attention_mask": true,
+            "position_ids": true,
+            "past_key_values": true
+          }
+        },
+        {
+          "probe": 1,
+          "fields_exact": {
+            "inputs_embeds": true,
+            "attention_mask": true,
+            "position_ids": true,
+            "past_key_values": true
+          }
+        }
+      ],
+      "verified_full_table_shard_sha256": "d6f11cc9c30184ce92605f25ac1e6b6644ee217e7b86a28282b3c9b17de3e609",
+      "actual_released_embedding_rows_loaded": 44,
+      "verified_full_connector_sha256": "425ce59f596eeb573f9cd52138b775df47ce69c60d2782fb32cac5498ed208f3",
+      "actual_released_continuous_queries_used": true,
+      "gradient_preserved_for_both_live_features": true,
+      "invalid_inputs_rejected": [
+        "wrong_grid",
+        "wrong_visual_length",
+        "KV_cache"
+      ],
+      "runtime_tensor_keys": [
+        "attention_mask",
+        "image_grid_thw",
+        "image_mask",
+        "position_ids",
+        "prompt_embeds"
+      ],
+      "runtime_contains_tokenizer": false,
+      "runtime_contains_token_ids": false,
+      "runtime_contains_lexical_table_or_head": false,
+      "runtime_payload_bytes": 8926864,
+      "payload_sha256": "cc3912e7d9c408f742daf5ea097d77cbaef6e81c17f5cb990df723369e3fb19e",
+      "source_native_methods_executed": true,
+      "image_features_are_numeric_assembly_probes": true,
+      "neural_forward_performed": false,
+      "cuda_context_initialized": false,
+      "generated_image_equivalence_established": false,
+      "numerical_equality_at_neural_output_established": false,
+      "language_learning_established": false,
+      "generation_model_weights_removed": false,
+      "full_model_parameter_count_reduced": false,
+      "general_ilm_goal_complete": false
+    }
+  },
+  "complete_generation_model_loaded": false,
+  "current_native_QA_run_modified": false,
+  "all_changing_questions_remain_in_input_pixels": true,
+  "general_ilm_goal_complete": false
+}
