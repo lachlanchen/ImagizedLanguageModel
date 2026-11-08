@@ -79,6 +79,25 @@ def attach_body_aliases(model):
         visual=property(lambda self: self.model.visual),
         language_model=property(lambda self: self.model.language_model)))
     model.__class__ = adapted
+    original = model.model.visual.forward
+    def forward(self, *args, **kwargs):
+        return merged_vision_output(original(*args, **kwargs))
+    model.model.visual.forward = types.MethodType(forward, model.model.visual)
+
+
+def merged_vision_output(value):
+    """4.56 returned merged features; 5.14 wraps them in pooler_output.
+
+    last_hidden_state is the unmerged vision sequence and cannot be used as
+    a substitute. This adapter changes the return envelope only.
+    """
+    import torch
+    if torch.is_tensor(value):
+        return value
+    result = getattr(value, "pooler_output", None)
+    if not torch.is_tensor(result):
+        raise TypeError("native semantic path requires the actual merged visual features")
+    return result
 
 
 def connector(module, *, meta=False):
@@ -102,6 +121,12 @@ def check_loading(info, *, unused_head_allowed=False):
         missing -= {"lm_head.weight"}
     if missing or any(info.get(k) for k in ("unexpected_keys", "mismatched_keys", "error_msgs")):
         raise ValueError("semantic/generative source weights did not load strictly: " + repr(info))
+
+
+def loading_record(info):
+    # Transformers 5.14 returns sets even from LoadStateDictInfo.to_dict().
+    # Preserve their contents while making the durable JSON report writable.
+    return {key: sorted(value) if isinstance(value, set) else value for key, value in info.items()}
 
 
 def parameters(pipe):
@@ -155,9 +180,10 @@ def load_pipeline(device):
         return result
     pipe.prepare_forward_input = types.MethodType(prepare, pipe)
     report = dict(loader="pinned components, strict keys; same native constructor and sampling methods",
-        loading_info=dict(transformer=t_info, vae=v_info, vlm=l_info),
+        loading_info=dict(transformer=loading_record(t_info), vae=loading_record(v_info), vlm=loading_record(l_info)),
         source_position_version="4.56.1", source_position_sha256=ROPE_SHA,
         compatibility_aliases=["lmm.visual -> lmm.model.visual", "lmm.language_model -> lmm.model.language_model"],
+        compatibility_vision_return="actual merged pooler_output tensor; no change to encoder computation",
         attention_implementation="sdpa", CPU_offload=False, parameters=parameters(pipe),
         input_output_word_weights_same_object=pipe.lmm.get_input_embeddings().weight is pipe.lmm.get_output_embeddings().weight,
         unused_output_head_called=False, deployed_vocabulary_removed=False)

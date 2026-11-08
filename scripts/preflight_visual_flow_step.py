@@ -12,7 +12,7 @@ import types
 from ilm.image_edit.baseline import ROOT, gpu_zero, save_json, sha
 from ilm.image_edit import visual_semantic as vs
 
-CANDIDATE = ROOT / "artifacts/visual_semantic_native_preflight_v1"
+CANDIDATE = ROOT / "artifacts/visual_semantic_native_preflight_v2"
 DATA = ROOT / "artifacts/visual_flow_pages_v1"
 CONDITION = ROOT / "artifacts/visual_task_condition_1024_v1/runtime"
 FILES = ("scripts/preflight_visual_flow_step.py", "ilm/image_edit/native_flow_step.py",
@@ -108,8 +108,8 @@ def run(output,wait_pid):
     prepared=json.loads((output/'preparation.json').read_text());code=identity()
     if prepared['code_sha256']!=code:raise ValueError('registered preparation implementation changed')
     runtime=output/'execution';runtime.mkdir(exist_ok=False)
-    expected=owner(wait_pid)
-    if expected is None or 'scripts/preflight_visual_semantic.py' not in expected['command'] or CANDIDATE.name not in expected['command']:
+    expected=owner(wait_pid) if wait_pid else None
+    if wait_pid and (expected is None or 'scripts/preflight_visual_semantic.py' not in expected['command'] or CANDIDATE.name not in expected['command']):
         raise ValueError('exact currently live native candidate owner required')
     phase='waiting_candidate';started=time.time()
     def unchanged():
@@ -123,7 +123,7 @@ def run(output,wait_pid):
     for signum in (signal.SIGTERM,signal.SIGINT,signal.SIGHUP):signal.signal(signum,interrupted)
     try:
         status()
-        while owner(wait_pid)==expected:unchanged();time.sleep(15)
+        while expected is not None and owner(wait_pid)==expected:unchanged();time.sleep(15)
         terminal=json.loads((CANDIDATE/'generation/runtime.json').read_text())
         baseline=json.loads((CANDIDATE/'generation/report.json').read_text()) if (CANDIDATE/'generation/report.json').exists() else {}
         if terminal['phase']!='ready_for_raw_review' or baseline.get('complete_original_generations')!=12:

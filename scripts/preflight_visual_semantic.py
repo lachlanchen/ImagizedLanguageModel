@@ -91,8 +91,23 @@ def structure():
         no_duplicate_registered_modules=("visual" not in vlm._modules and "language_model" not in vlm._modules))
     if not all(aliases.values()):
         raise ValueError("compatibility aliases duplicate or replace a real body")
+    from transformers.modeling_outputs import BaseModelOutputWithPooling
+    unmerged=torch.empty((4096,1280),device='meta')
+    merged=torch.empty((1024,2048),device='meta')
+    envelope=BaseModelOutputWithPooling(last_hidden_state=unmerged,pooler_output=merged)
+    if vs.merged_vision_output(envelope) is not merged or vs.merged_vision_output(merged) is not merged:
+        raise ValueError("vision return adapter must preserve the actual merged tensor object")
+    from transformers.utils.loading_report import LoadStateDictInfo
+    info=LoadStateDictInfo(missing_keys={'lm_head.weight'},unexpected_keys=set(),mismatched_keys=set(),
+        error_msgs=[],conversion_errors={}).to_dict()
+    recorded=vs.loading_record(info)
+    if json.loads(json.dumps(recorded))['missing_keys']!=['lm_head.weight']:
+        raise ValueError("actual loading-report set contents lost in JSON normalization")
     removal = vs.remove_lexical_modules(pipe)
     return dict(component_checks=checks, compatibility_alias_checks=aliases, prototype_removal=removal,
+        vision_return_envelope_check_only=True,vision_return_merged_tensor_identity_preserved=True,
+        vision_return_unmerged_hidden_state_not_substituted=True,
+        actual_loading_report_container_serializable_without_content_loss=True,
         transformer_native_class_upgraded=type(pipe.transformer) is module.SD3Transformer2DModel,
         model_weight_tensors_loaded=False, model_forward_performed=False, cuda_initialized=torch.cuda.is_initialized(),
         parameter_counts_are_meta_prototypes=True, loaded_runtime_fit_or_quality_established=False)
@@ -175,10 +190,10 @@ def run(output, wait_pid):
     expected = owner(wait_pid) if wait_pid else None
     if wait_pid and (expected is None or "scripts/run_native_paired_qa.py" not in expected["command"] or QA_RUN.name not in expected["command"]):
         raise ValueError("specified wait owner is not the currently live registered QA coordinator")
-    phase = "waiting_QA"; started = time.time()
+    phase = "waiting_QA"; started = time.time(); gpu_admitted=False
     def status(**extra):
         save_json(folder / "runtime.json", dict(phase=phase, pid=None if phase in ("failed", "ready_for_raw_review") else os.getpid(),
-            wait_owner=expected, started_unix=started, gpu=None if phase == "waiting_QA" else 0,
+            wait_owner=expected, started_unix=started, gpu=0 if gpu_admitted else None,
             novnc_url=None, code_sha256=code, general_ilm_goal_complete=False, **extra))
     def unchanged():
         if identity(clean=True) != code or sha(output / "inputs.json") != prepared["inputs_sha256"]:
@@ -204,6 +219,7 @@ def run(output, wait_pid):
             if set(r) != {"id", "input", "input_sha256", "seed"} or sha(output / r["input"]) != r["input_sha256"]:
                 raise ValueError("input-only page index changed")
         with gpu_zero() as device:
+            gpu_admitted=True
             import torch
             torch.use_deterministic_algorithms(True)
             torch.backends.cuda.matmul.allow_tf32 = False

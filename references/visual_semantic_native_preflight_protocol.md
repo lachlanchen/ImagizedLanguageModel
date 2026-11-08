@@ -23,8 +23,11 @@ generative weights. An initialized unused head, if present, is recorded and
 removed; it must never be called by generation.
 
 The Python compatibility changes are explicit: property aliases for the
-current nested VLM bodies, the checksum-pinned Transformers 4.56.1 rotary
-position method, and SDPA attention. Use the source's native pipeline
+current nested VLM bodies, extraction of the actual merged visual tensor
+from the modern encoder's `pooler_output` return field, the checksum-pinned
+Transformers 4.56.1 rotary position method, and SDPA attention. The unmerged
+`last_hidden_state` must not replace the original merged visual features.
+Use the source's native pipeline
 constructor, transformer upgrade, image preparation, semantic feature path,
 connector, sampling and pixel conversion. The first test uses the standard
 all-on-GPU path, with no CPU-offload variation. Numerical replay through these
