@@ -1,0 +1,67 @@
+{
+  "run": "artifacts/native_paired_qa_learning_v2",
+  "implementation_commit": "341122e",
+  "initial_checkpoint_sha256": "166409db4f87af87393576195251527f1fcf54d5fe12812d75f6d1491674717d",
+  "registered_preparation_sha256": "2c13b84e7712cd85ace38f2b2ba4f3d7fe3f7f1795721318211a8c0f4422c9c2",
+  "observed_checkpoint_sha256": "65d636de36d43c77188323a5ff704c2f5b724c862343f512cbf5d2631cfb67f2",
+  "optimizer_updates_observed": 1,
+  "optimizer_updates_registered": 128,
+  "all_optimizer_steps_match": true,
+  "actual_changed_adapter_tensors": 206,
+  "first_native_forward_bit_exact": true,
+  "save_path_restart_native_tensor_bit_exact": true,
+  "first_actual_preupdate_page_authenticated": true,
+  "first_update": {
+    "update": 1,
+    "epoch": 1,
+    "id": "TRAIN_3698_QUERY_0",
+    "noise_seed": 1659285684,
+    "folder": "update_001/attempt_001/autonomous_before",
+    "input_sha256": "37549efbe9d9858bbdf9749a37639b85d930a81215ba41d50c00ac59766146c9",
+    "target_sha256": "5bc585329ac1de25de0ada221050139c0525b6b37d11758b6faf57a764ca8546",
+    "loss": 19.860450744628906,
+    "recognition": 8.550929069519043,
+    "ink_mass_kl": 28.023828506469727,
+    "physical_coefficient": 0.4035679875746343,
+    "gradient_norm": 261.22271728515625,
+    "prediction_gradient_norms": {
+      "0": 0.05312328413128853,
+      "24": 0.09632306545972824,
+      "49": 0.1430898904800415
+    },
+    "autonomous_page": {
+      "png_sha256": "33c1c8db553d7d87b6039df700b01cb203f06c923913ab12c43916b7910aabce",
+      "pixels_sha256": "e4917fcb7b7ec92019b077fa83dc4f1ebdd99d640a75c6fb6b3aed9cb824f921",
+      "shape": [
+        1,
+        3,
+        256,
+        512
+      ],
+      "output_repair": false
+    },
+    "elapsed_seconds": 122.61600689124316
+  },
+  "initial_check": {
+    "id": "TRAIN_3698_QUERY_0",
+    "seed": 1659285684,
+    "native_forward_equal": true,
+    "native_output": {
+      "png_sha256": "33c1c8db553d7d87b6039df700b01cb203f06c923913ab12c43916b7910aabce",
+      "pixels_sha256": "e4917fcb7b7ec92019b077fa83dc4f1ebdd99d640a75c6fb6b3aed9cb824f921",
+      "shape": [
+        1,
+        3,
+        256,
+        512
+      ],
+      "output_repair": false
+    }
+  },
+  "immutable_snapshot_is_not_final_checkpoint": true,
+  "assessment_pending": true,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false,
+  "checkpoint_snapshot_retained": false,
+  "checkpoint_read_method": "Atomic producer rename followed by one complete byte read; receipt hash describes that observed checkpoint, not the later live file. Final checkpoint history retains the completed update entries."
+}

@@ -36,6 +36,13 @@ checkpoint answers **0/4 normal questions** correctly. The eight raw normal/cont
 outputs and four full-page reconstructions are retained. Execution and copying
 gains have not established language understanding.
 
+A [registered 128-update QA learning run](references/native_paired_qa_learning_protocol.md)
+is now executing on GPU0 with 32 natural Chinese questions in sixteen passage
+pairs. The [first saved update](references/evidence/native_paired_qa_learning_started.json)
+has verified native forward equivalence and changes all 206 adapter tensors.
+Complete initial/final paired-question and erased-input assessment is pending;
+these execution checks are not evidence of answer quality.
+
 The earlier [balanced continuation](references/balanced_autonomous_writer_result.md)
 gets 13/32 seen and 17/32 held-out copies, including 4/16 Chinese, and fails
 two of its three requirements. The new comparison starts from those exact
