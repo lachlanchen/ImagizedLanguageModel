@@ -37,11 +37,13 @@ outputs and four full-page reconstructions are retained. Execution and copying
 gains have not established language understanding.
 
 A [registered 128-update QA learning run](references/native_paired_qa_learning_protocol.md)
-is now executing on GPU0 with 32 natural Chinese questions in sixteen passage
-pairs. The [first saved update](references/evidence/native_paired_qa_learning_started.json)
-has verified native forward equivalence and changes all 206 adapter tensors.
-Complete initial/final paired-question and erased-input assessment is pending;
-these execution checks are not evidence of answer quality.
+has completed training on GPU0 with 32 natural Chinese questions in sixteen
+passage pairs. The [final training verification](references/evidence/native_paired_qa_training_completed.json)
+authenticates all 128 actual training pages, the fixed schedule and every
+optimizer step. The successful invocation took **3.55 hours** at **12.204 GiB
+peak allocated memory**. Complete initial/final paired-question, erased-input
+and copying assessment is running. Training completion and changed weights
+are not evidence of answer quality.
 
 The earlier [balanced continuation](references/balanced_autonomous_writer_result.md)
 gets 13/32 seen and 17/32 held-out copies, including 4/16 Chinese, and fails
