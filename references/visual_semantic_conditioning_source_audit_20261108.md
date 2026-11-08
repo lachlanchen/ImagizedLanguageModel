@@ -97,3 +97,29 @@ paired-question tests with controls. An external pretrained reader becoming
 part of a self-contained model is a warm start, not independent foundation
 training or a new physics result. No active training source, weight, schedule
 or criterion was changed during this audit.
+
+## Executed CPU compatibility check
+
+The [code-only probe](evidence/visual_conditioning_compatibility.json) now
+checks the pinned release in the actual image-generation Python: PyTorch
+2.11.0, Diffusers 0.39.0 and Transformers 5.14.1. The unmodified source first
+fails because `einops` is absent. Importing the checksum-verified einops 0.8.1
+wheel from an isolated path lets the same source module import; no package
+is installed into the training environment.
+
+Constructing Qwen from its pinned configuration on the meta device gives
+3,754,622,976 architectural parameters, all without allocated parameter data.
+Its body has `model.language_model` and `model.visual`, but the top-level
+`language_model` and `visual` attributes used by the published wrapper are
+absent. `model.get_rope_index` is available. Thus successful module import is
+insufficient for this wrapper to run unchanged with the inspected API.
+This does not assess the authors' original environment or establish that a
+compatibility change preserves numerical behavior.
+
+Reproduce with `scripts/probe_visual_conditioning_compatibility.py` in the
+existing model Python, with CUDA hidden. The probe downloads only a small
+pinned configuration and optional dependency wheel, loads no weights, performs
+no forward pass and initializes no CUDA context. It leaves the active QA run
+and its environment unchanged. Native numerical replay, full-page geometry,
+actual memory fit and answer quality remain outstanding before adopting this
+warm start.
