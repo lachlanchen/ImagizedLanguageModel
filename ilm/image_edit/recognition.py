@@ -48,7 +48,7 @@ class RecognitionTeacher:
         from transformers import GotOcr2ForConditionalGeneration, GotOcr2Processor
         self.source = verify_teacher(snapshot)
         self.processor = GotOcr2Processor.from_pretrained(snapshot, local_files_only=True,
-            use_fast=True)
+            backend="pil")
         self.model = GotOcr2ForConditionalGeneration.from_pretrained(snapshot,
             local_files_only=True, torch_dtype=torch.bfloat16).to(device).requires_grad_(False).eval()
         self.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
@@ -66,7 +66,15 @@ class RecognitionTeacher:
     def pixels(self, rgb):
         if rgb.ndim != 4 or rgb.shape[:2] != (1, 3):
             raise ValueError("one RGB page required")
-        value = F.interpolate(rgb.float().clamp(0, 1), size=self.size, mode="bicubic",
+        # Pillow clips its horizontal byte intermediate before the vertical
+        # pass. A single unconstrained 2D tensor resize misses this clipping
+        # and can differ by ~.30 normalized units beside a stroke. Preserve
+        # the native separable clipping with a continuous (unquantized)
+        # surrogate; the measured residual includes byte rounding and BF16.
+        value = F.interpolate(rgb.float().clamp(0, 1),
+            size=(rgb.shape[-2], self.size[1]), mode="bicubic",
+            align_corners=False, antialias=True).clamp(0, 1)
+        value = F.interpolate(value, size=self.size, mode="bicubic",
             align_corners=False, antialias=True).clamp(0, 1)
         return ((value - self.mean) / self.std).to(torch.bfloat16)
 

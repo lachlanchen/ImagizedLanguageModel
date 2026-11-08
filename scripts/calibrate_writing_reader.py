@@ -32,7 +32,8 @@ def main():
     if len(rows) != 64 or {r["language"] for r in rows} != {"zh", "en"}:
         raise ValueError("full unchanged 64-case copying cohort required")
     paths = ("ilm/image_edit/recognition.py", "scripts/calibrate_writing_reader.py",
-        "references/recognition_guided_writing_protocol.md")
+        "references/recognition_guided_writing_protocol.md",
+        "references/recognition_resize_correction.md")
     implementation = {name: sha(ROOT / name) for name in paths}
     args.output.mkdir(parents=True, exist_ok=False)
     save_json(args.output / "status.json", dict(stage="starting", pid=os.getpid()))
