@@ -1,7 +1,8 @@
 # Recognition and autonomous-writing manuscript revision
 
 Stage: internal research manuscript revision, under the continuing ILM goal.
-Status: plan prepared before TeX changes; pilot evaluation is still pending.
+Status: plan prepared before TeX changes; complete pilot evaluation and raw
+review are now available. Manuscript execution and builds remain pending.
 
 ## Scope and reason
 
@@ -83,3 +84,20 @@ unassessed claims. There is no reviewer response letter in this internal unit.
    Nutstore, verify local hashes, and make no unverified cloud-sync claim.
 7. Record any deviations and completed checks here, then commit and push the
    finished revision. Keep the full ILM goal active if language evidence fails.
+
+## Assessed result and permitted wording
+
+The 32-update pilot finishes with all 64 native outputs, unchanged independent
+CPU scoring and complete raw before/after galleries. OCR exact is 15/32 seen
+and 13/32 held out, versus 6/32 and 9/32 at its start. All 32 IDs/noise seeds
+reproduce the prospective streams; 22 distinct seen examples are sampled.
+Training takes 1,135.452 seconds at 12.057 GiB; native assessment takes 518.400
+seconds at 8.031 GiB. Both jobs are terminal and their owned runtimes exited.
+
+Use the result wording: "Direct final-image continuation increases OCR-exact
+copying from 6/32 to 15/32 on seen inputs and from 9/32 to 13/32 on held-out
+inputs, but still fails reliable writing." Preserve the canonical-font scope,
+OCR limitations, absent matched additional-training control, corrected input
+precision and lack of semantic QA. Do not call this a validated causal repair,
+usable language model or matched-quality efficiency gain. Full source evidence
+is in `references/evidence/autonomous_writer_result/result.json`.

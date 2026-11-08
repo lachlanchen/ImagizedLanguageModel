@@ -66,8 +66,13 @@ lines. A [separately specified direct-output learning test](references/autonomou
 uses the full native noise-to-image trajectory. Its
 [two-update execution check](references/autonomous_writer_preflight_result.md)
 replays all 50 native steps exactly for two inputs and verifies early/middle/late
-gradients at 12.03 GiB peak allocation. Writing and language quality remain
-unqualified pending the separate complete pilot evaluation.
+gradients at 12.03 GiB peak allocation. The
+[completed 32-update pilot](references/autonomous_writer_result.md) raises
+OCR-exact copying from **6/32 to 15/32 seen** and **9/32 to 13/32 held out**.
+It meets the exploratory progress rule but fails reliable writing; visible
+omissions, repetitions and instruction copying remain. All 64 before/after
+outputs are retained. This is a continuation without a matched extra-training
+control, and it establishes no semantic-answering or efficiency claim.
 
 The completed native-context model gives **0/128 exact Chinese development
 images**, **36.504% foreground F1**, and **0/64 both-correct pairs** after
