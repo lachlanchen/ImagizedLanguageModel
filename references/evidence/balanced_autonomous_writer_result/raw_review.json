@@ -1,0 +1,36 @@
+{
+  "complete_cohort_reviewed": true,
+  "result_sha256": "bc169ae718dc56616db12101a2685ba906a3bdfad4a55717ebb1dfdc3bc8d03e",
+  "all_original_order_galleries_inspected": true,
+  "full_resolution_cases": [
+    "copy/train/004",
+    "copy/train/012",
+    "copy/train/025",
+    "copy/validation/000",
+    "copy/validation/002",
+    "copy/validation/026",
+    "copy/validation/030"
+  ],
+  "visible_failures": {
+    "train": [
+      "004 omitted characters",
+      "012 copied instruction",
+      "013 extra quotation mark",
+      "025 repeated letter in small",
+      "027 extra quotation mark"
+    ],
+    "validation": [
+      "000 extra quotation mark",
+      "002 repeated character",
+      "016 extra quotation mark",
+      "026 duplicated line",
+      "030 copied instruction"
+    ]
+  },
+  "writing_floor_met": false,
+  "ocr_is_not_manual_accuracy": true,
+  "raw_outputs_repaired": false,
+  "scope": "All64cases inspected in original-order target/starting/final galleries; listed raw final PNGs also inspected at original size. Not a quantitative manual accuracy annotation of every glyph. More than two obvious failures per split reject the30/32writing floor.",
+  "semantic_QA_trained_or_evaluated": false,
+  "general_ilm_goal_complete": false
+}

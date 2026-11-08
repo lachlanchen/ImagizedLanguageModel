@@ -70,17 +70,15 @@ knowing the pilot and before observing the control. This supports further
 investigation of the objective bundle, not a causal attribution to one term,
 a compute-matched gain or a reliable Chinese writer.
 
-The next [balanced-exposure protocol](balanced_autonomous_writing_protocol.md)
-specifies 128 more full-trajectory updates, with four complete passes over
-the same 32 training examples. It guarantees 64 Chinese and 64 English draws,
-compared with thirteen Chinese draws covering nine unique inputs in the pilot.
-Its criterion requires improved held-out Chinese copying and retained English
-and seen performance before further scaling. It is in progress, not a result,
-and does not isolate additional training from the changed exposure schedule.
-A favourable result would still need replication and reliable new writing.
-It would not establish semantics. A later
-language test must answer two different questions about the same unseen
-passage, and change appropriately when the question or passage changes.
-Keep legibility and answer correctness separate. Neither attractive figures,
-a lower reconstruction loss nor a longer training run can qualify a usable
-ILM without those outputs.
+The [completed balanced-exposure continuation](balanced_autonomous_writer_result.md)
+executes all 128 updates with four complete passes: 64 Chinese and 64 English
+draws. Held-out OCR exact match rises to 17/32, but seen copying falls to 13/32.
+Held-out Chinese reaches only 4/16, below its 6/16 requirement. English reaches
+13/16. Two of three prospective requirements fail, and raw extra marks,
+omissions and duplicated lines still reject reliable writing. This result does
+not support further unchanged copying-budget scale-up. Full exposure did not
+repair the writer. Diagnose the objective's physical errors before another
+repair, and keep the independent paired-question language test separate from
+copying. The [existing data audit](paired_language_data_readiness.md) verifies
+256 training and 32 held-out Chinese questions with article-disjoint passages;
+it does not establish that this writer can read those pages or answer them.

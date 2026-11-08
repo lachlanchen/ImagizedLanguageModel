@@ -23,10 +23,12 @@ reported directly below.*
 ## Current result: autonomous image-language writing still fails
 
 The [current direction assessment](references/ilm_direction_assessment_20261108.md)
-finds no validated usable ILM. The latest full-trajectory continuation reaches
-13/32 held-out OCR-exact copies, including only 3/16 Chinese copies, and has
-no semantic-QA evaluation. Reliable new Chinese writing remains necessary
-before book-scale training.
+finds no validated usable ILM. The [completed balanced continuation](references/balanced_autonomous_writer_result.md)
+gets **17/32 held-out OCR-exact copies**, including **4/16 Chinese**, but seen
+copying falls from 15/32 to **13/32**. It fails two of three preset continuation
+requirements and has no semantic-QA evaluation. Raw repeated letters, omitted
+characters and duplicated lines still reject reliable writing. Further
+unchanged scaling is not supported by this result.
 
 The [completed additional-training control](references/autonomous_writing_control_result.md)
 now gives **5/32 seen and 10/32 held-out OCR-exact copies**, versus **15/32

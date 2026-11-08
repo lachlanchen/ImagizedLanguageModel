@@ -4,17 +4,16 @@ Updated: 2026-11-08
 
 ## Immediate decision: demonstrate learning before scaling
 
-The latest [full-trajectory image-writer continuation](../references/autonomous_writer_result.md)
-improves held-out OCR-exact copying from 9/32 to 13/32, including only 3/16
-Chinese copies. It still fails reliable writing and has no semantic-QA
-evaluation. It retains a 3.900B externally pretrained transformer and an
-84.046M VAE. The [completed additional-training control](../references/autonomous_writing_control_result.md)
-gives 5/32 seen and 10/32 held-out copies; held-out Chinese remains 3/16 in
-both arms. The [balanced-exposure continuation](../references/balanced_autonomous_writing_protocol.md)
-is now running 128 additional updates. The
-[current direction assessment](../references/ilm_direction_assessment_20261108.md)
-still requires reliable new writing before book-scale training.
-This limited copying gain does not qualify the independent language goal.
+The [completed balanced image-writer continuation](../references/balanced_autonomous_writer_result.md)
+gets 17/32 held-out OCR-exact copies, including 4/16 Chinese, but seen copying
+falls from 15/32 to 13/32. It fails the Chinese and seen-retention requirements;
+only held-out English retention passes. Raw omissions, repeated letters and
+duplicated lines reject the unchanged 30/32 writing floor. No semantic QA was
+trained or evaluated. Do not scale this unchanged copying recipe further.
+It retains a 3.900B externally pretrained transformer and an 84.046M VAE;
+training adapters on one GPU does not establish efficient language acquisition.
+The [current direction assessment](../references/ilm_direction_assessment_20261108.md)
+requires actual new writing and held-out question-dependent language learning.
 
 The current direction has not produced a useful ILM. The completed
 [V82 matched comparison](../references/decoder_metric_v82_result.md) produces

@@ -1,9 +1,10 @@
 # Additional-training control and balanced writer manuscript revision
 
 Stage: internal research revision. Status: plan prepared before TeX changes.
-The additional-training control is complete; the balanced continuation is
-running. Do not fill in future results or start a publication build while
-the owned GPU/model job is live.
+Both model experiments and full raw review are complete. The balanced result
+is 13/32 seen and 17/32 held out, including 4/16 held-out Chinese. Two of three
+continuation gates fail. All owned model processes have exited; publication
+execution can now proceed. Preserve the unchanged writing failure.
 
 ## Purpose and baseline
 
@@ -12,7 +13,7 @@ additional-training control. The newly completed control improves the
 comparison's interpretation: 5/32 seen and 10/32 held-out OCR-exact copies,
 versus 15/32 and 13/32 in the pilot. Both remain at 3/16 held-out Chinese.
 The balanced continuation tests more complete exposure under the unchanged
-final-image objective. Its result is unknown and must be assessed completely.
+final-image objective. Its complete result fails the prospective combined rule and has been inspected.
 
 Use commit `d8b2aa551a8e3c606e19eeb9f7b96247f9426815` as the immutable
 publication baseline: 40 slides, 47 charts and 121 existing figure assets.
