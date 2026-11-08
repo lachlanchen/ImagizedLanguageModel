@@ -175,3 +175,18 @@ and accepts live continuous visual features and queries. A complete generation
 model still needs native numerical replay, explicit removal of unused lexical
 components and assessment on actual pages. Successful compilation does not
 demonstrate any of those model-level outcomes.
+
+## Complete source acquisition
+
+The [complete acquisition receipt](evidence/visual_semantic_source_acquisition.json)
+now verifies all 23 pinned source files and the five entire weight files,
+14,362,268,117 bytes in total. The cache includes the bundled VLM; no base
+checkpoint was substituted. No model was loaded or run during acquisition.
+
+The [native preflight protocol](visual_semantic_native_preflight_protocol.md)
+registers exact native/compiled/vocabulary-removal replay followed by ten
+original answer pages. Its runner preserves the current QA coordinator,
+requires the complete existing assessment and acquires the project GPU lock
+before candidate loading. Header/state checks and source acquisition do not
+establish that this runner can generate a useful answer; actual generation
+and complete raw review are still required.
