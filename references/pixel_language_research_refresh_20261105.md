@@ -64,3 +64,21 @@ syntax, instruction following or greater task-level efficiency. Compare
 held-out answers and coherent visible continuations at matched quality, record
 the full initialization and local compute, and keep the final student runtime
 independent of the teacher.
+
+## Addendum checked 9 November 2026
+
+[MPIXEL, submitted 21 October](https://arxiv.org/html/2610.29681v1), reports
+86M/307M pixel encoders, five downstream tasks across 83 languages, and 120B
+unique pretraining patches for its sixteen-language models. These use ViT-MAE;
+the reported results do not establish free image-answer generation. Appendix
+A.3 reports approximately 1,350/2,500 H100 GPU-hours for base/large pretraining.
+The authors' linked repository returned 404 through the current web fetch;
+release availability is not established here.
+
+This supports investigating smaller pretrained visual readers, while leaving
+their writing capability and local adaptation cost untested. It supplies no
+evidence that changing the representation alone removes foundation-training
+cost. No weights are downloaded, no second model job is started, and no change
+is made to the running complete-image diversity protocol. Its final outputs
+must determine whether the next problem is conditional selection, glyph
+emission or continuation from the model's own images.
