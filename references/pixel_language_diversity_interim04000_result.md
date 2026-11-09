@@ -91,6 +91,10 @@ criterion remains correct, readable answers to new image prompts. If the
 completed run still fails that criterion, the next diagnostic should compare
 answer likelihood under the two different questions about each passage,
 with identical correct image history, before another architecture change.
+The subsequent [saved-prefix diagnosis](pixel_language_first_block_diagnosis.md)
+localizes a physical error to the first image in every normal development
+response. It specifies a first-block likelihood comparison to separate
+conditional preference from local greedy decoding after the live run exits.
 
 The review is reproducible on CPU after the owning assessment and fixed-state
 receipt exist:
