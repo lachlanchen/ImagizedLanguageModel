@@ -1,0 +1,118 @@
+{
+  "preparation_sha256": "b7a0f49492c80a535af61ec5e292a9aaec5b322c988d05e96b7e8ea172083681",
+  "cases_sha256": "7eb4eabaec5ab7d6876c5741dcfae8ea0f956931cce47258d32199ec10386897",
+  "cases": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "task": "qa",
+      "language": "zh",
+      "input_sha256": "e1b36dd154e800a3c52f204b2f8899bd078a5c24575b607ca6be1cbf09b70a4f",
+      "target_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34",
+      "reference_text": "第四部",
+      "content_prompt": "Replace the reference image with a clean white page. Write exactly the following text in clear black print, preserving every character, word and its order:\n第四部\nOnly this text should appear. Do not add labels, headings, quotation marks, explanations or decoration.",
+      "content_prompt_sha256": "103172d9f684bca0a16422925fec9f5d15bb31ff35ded88eda5a5594ac206376",
+      "content_seed": 20270501
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "task": "qa",
+      "language": "zh",
+      "input_sha256": "71a011fe43778434befb6a095101d28ee8d7a1d9fdc4cf2ad9e63ab237f2e509",
+      "target_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "content_prompt": "Replace the reference image with a clean white page. Write exactly the following text in clear black print, preserving every character, word and its order:\n唐太宗李世民如何成为天子\nOnly this text should appear. Do not add labels, headings, quotation marks, explanations or decoration.",
+      "content_prompt_sha256": "296fb9ea02e5e1ecea6a8b48c528710a565362b13f20bf5d1b283629e3b4ff42",
+      "content_seed": 20270502
+    },
+    {
+      "id": "copy/train/001",
+      "split": "train",
+      "task": "copy",
+      "language": "en",
+      "input_sha256": "bb2d4513392855b28ad319ef07a7ce7fbbd6c61347bed7b100f186cd3a3a4559",
+      "target_sha256": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6",
+      "reference_text": "mountain bright blue cloud",
+      "content_prompt": "Replace the reference image with a clean white page. Write exactly the following text in clear black print, preserving every character, word and its order:\nmountain bright blue cloud\nOnly this text should appear. Do not add labels, headings, quotation marks, explanations or decoration.",
+      "content_prompt_sha256": "a42581fddf08899ed2e5086cbcd6e0ad46091ebe0e6b10eb037c282ca4991bc8",
+      "content_seed": 20270503
+    },
+    {
+      "id": "copy/validation/001",
+      "split": "validation",
+      "task": "copy",
+      "language": "en",
+      "input_sha256": "2987d6d82ff069e8b0e2d3ba1d27e48effc56e5fb37f07a55966bf1db2e881a1",
+      "target_sha256": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637",
+      "reference_text": "garden silver open blue",
+      "content_prompt": "Replace the reference image with a clean white page. Write exactly the following text in clear black print, preserving every character, word and its order:\ngarden silver open blue\nOnly this text should appear. Do not add labels, headings, quotation marks, explanations or decoration.",
+      "content_prompt_sha256": "77d90246ce53cd03500bebc79c92e40ca91820be6a0979fe83bf72c598ad87ff",
+      "content_seed": 20270504
+    }
+  ],
+  "reference_calibration": {
+    "engine": {
+      "binary_sha256": "9f831cab7525c3dab04af41bda35182af7ea1df9dceeaaa2f3bf207ac45c06a5",
+      "version": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "psm": 6,
+      "traineddata_sha256": {
+        "chi_sim": "a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730",
+        "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+      }
+    },
+    "rows": [
+      {
+        "id": "TRAIN_3802_QUERY_0",
+        "language": "zh",
+        "expected": "第四部",
+        "raw_transcript": "第四部\n",
+        "ocr_stderr": "",
+        "normalized": "第四部",
+        "png_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34",
+        "ocr_exact": true
+      },
+      {
+        "id": "TRAIN_3802_QUERY_1",
+        "language": "zh",
+        "expected": "唐太宗李世民如何成为天子",
+        "raw_transcript": "唐太宗李世民如何成为天子\n",
+        "ocr_stderr": "",
+        "normalized": "唐太宗李世民如何成为天子",
+        "png_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654",
+        "ocr_exact": true
+      },
+      {
+        "id": "copy/train/001",
+        "language": "en",
+        "expected": "mountain bright blue cloud",
+        "raw_transcript": "mountain bright blue cloud\n",
+        "ocr_stderr": "",
+        "normalized": "mountain bright blue cloud",
+        "png_sha256": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6",
+        "ocr_exact": true
+      },
+      {
+        "id": "copy/validation/001",
+        "language": "en",
+        "expected": "garden silver open blue",
+        "raw_transcript": "garden silver open blue\n",
+        "ocr_stderr": "",
+        "normalized": "garden silver open blue",
+        "png_sha256": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637",
+        "ocr_exact": true
+      }
+    ],
+    "cases": 4,
+    "ocr_exact": 4,
+    "generator_loaded": false
+  },
+  "model_loaded": false,
+  "supplied_answer_text": true,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
