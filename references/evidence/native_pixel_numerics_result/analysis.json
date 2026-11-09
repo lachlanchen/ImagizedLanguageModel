@@ -1,0 +1,74 @@
+{
+  "GPU_paths": {
+    "max_absolute": 0.00012493133544921875,
+    "rms": 5.7244349356134534e-06,
+    "normwise_relative": 7.202645294032726e-07,
+    "maximum_logit_magnitude": 40.83795928955078,
+    "teacher_argmax_changes": 0,
+    "maximum_log_probability_error": 0.00019986063595922587,
+    "maximum_total_variation": 1.7297544053534175e-05,
+    "worst_coordinate": [
+      0,
+      45,
+      0
+    ],
+    "full_at_worst": 9.275858879089355,
+    "cached_at_worst": 9.275983810424805
+  },
+  "FP64_paths": {
+    "max_absolute": 1.829647544582258e-13,
+    "rms": 1.406903734996456e-14,
+    "normwise_relative": 1.770205926060614e-15,
+    "maximum_logit_magnitude": 40.83796531696723,
+    "teacher_argmax_changes": 0,
+    "maximum_log_probability_error": 3.019806626980426e-13,
+    "maximum_total_variation": 2.7022035459702812e-14,
+    "worst_coordinate": [
+      0,
+      45,
+      0
+    ],
+    "full_at_worst": 9.27592934638746,
+    "cached_at_worst": 9.275929346387278
+  },
+  "GPU_full_vs_FP64": {
+    "max_absolute": 7.280336822290678e-05,
+    "rms": 5.098776866869808e-06,
+    "normwise_relative": 6.41542473793806e-07,
+    "maximum_logit_magnitude": 40.83796531696723,
+    "teacher_argmax_changes": 0,
+    "maximum_log_probability_error": 0.00011690240485151548,
+    "maximum_total_variation": 2.3337131219488024e-05,
+    "worst_coordinate": [
+      0,
+      129,
+      0
+    ],
+    "full_at_worst": 15.944135341773379,
+    "cached_at_worst": 15.944208145141602
+  },
+  "GPU_cached_vs_FP64": {
+    "max_absolute": 6.455514782999217e-05,
+    "rms": 3.3755245603975937e-06,
+    "normwise_relative": 4.247180124512234e-07,
+    "maximum_logit_magnitude": 40.83796531696723,
+    "teacher_argmax_changes": 0,
+    "maximum_log_probability_error": 0.00010123595520283857,
+    "maximum_total_variation": 6.039591635561641e-06,
+    "worst_coordinate": [
+      1,
+      37,
+      0
+    ],
+    "full_at_worst": 24.08139067556506,
+    "cached_at_worst": 24.08145523071289
+  },
+  "greedy_GPU_paths_bit_exact": true,
+  "reference_sha256": "1b3496f90da54bfe5b64e33be85b8ea72ed505cc2b23e9f197d6d3c4774caea2",
+  "elapsed_seconds": 0.5753399692475796,
+  "old_max_absolute_tolerance": 0.0001,
+  "old_gate_passed": false,
+  "automatic_tolerance_change": false,
+  "training_qualified": false,
+  "language_quality_claim": false
+}
