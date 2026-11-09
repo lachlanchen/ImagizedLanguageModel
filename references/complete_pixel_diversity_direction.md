@@ -152,3 +152,35 @@ outcomes were already known, while the current run's final outputs are pending.
 The audit is reproducible with `scripts/audit_pixel_answer_coverage.py` in the
 existing Python 3.12 native rendering environment. It does not modify the
 running training protocol, prepared pixels or checkpoint selection.
+
+The [complete initial assessment review](evidence/pixel_language_diversity_initial_review/audit.json)
+now independently checks all 112 original streams: 64 training examples and
+24 normal plus 24 erased development inputs. Every saved PNG matches its
+emitted tensor, every complete-image score matches, and all stopping/cap
+traces are consistent. Initial exact matches are zero in every group. Chinese
+normal/erased foreground F1 is 0.152883/0.095551; English is
+0.050973/0.053070. Whole-training correct-history image NLL is 9.749791.
+These are pre-learning baselines, not post-training quality measurements.
+
+All 112 [raw output PNGs](evidence/pixel_language_diversity_initial_review/raw_outputs/)
+and output-only sheets are retained. The sheets preserve every original pixel
+and wrap long strips for display. They contain case labels without reference
+answers. The actually viewed source-first Chinese and English sheets show
+broken marks; the [review manifest](evidence/pixel_language_diversity_initial_review/retention_and_review.json)
+records exactly which images were inspected. No formal semantic accuracy is
+assigned. Feedback files are authenticated by their hashes, while CPU encoder
+replay remains part of the required final audit after the model process exits.
+
+Use `scripts/review_pixel_language_assessment.py` to review each completed
+fixed assessment on CPU. At updates 4,000 and 8,000, it also requires the
+owning learned-state receipt from `scripts/capture_pixel_language_milestones.py`.
+The lightweight watcher preserves those two states after their assessment
+reports appear, independently of quality. It shares the current tmux session,
+uses no GPU and exits after both captures or an original-owner failure. No
+checkpoint has yet been captured or a trained-answer quality result claimed.
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_pixel_language_assessment.py \
+  --run artifacts/pixel_language_diversity_training_v2 --update 4000 \
+  --output artifacts/pixel_language_diversity_review04000_v1
+```
