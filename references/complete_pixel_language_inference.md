@@ -7,8 +7,8 @@ binary answer-image blocks with its own image history and learned stopping.
 Its output is saved directly as tensors and PNGs, with no answer font renderer,
 OCR service or reference lookup.
 
-The model is a research checkpoint. At update 2,000,
-[29 of 32 seen training answers are pixel-exact](complete_pixel_language_update2000.md);
+The model is a research checkpoint. At update 4,000,
+[all 32 seen training answers are pixel-exact](complete_pixel_language_update4000.md);
 unseen-prompt capability is not yet qualified.
 Standalone GPU replay has not yet been qualified. Input preparation and
 checkpoint-schema checks alone do not establish inference correctness; that
@@ -75,6 +75,46 @@ The inspection requires the producer's complete 32-case report, validates raw
 streams and stop decisions, independently scores full images and writes four
 plates without resizing the original pixels. It does not recompute the neural
 encoder. The terminal audit performs that separate check after model exit.
+
+After the independent final audit, qualify cold deployment on the first four
+original training PNGs and the first longest complete answer. The selection
+uses source order and target length, without selecting generation quality:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python \
+  scripts/qualify_complete_pixel_runtime.py --stage prepare \
+  --training-run artifacts/complete_pixel_language_v1 \
+  --output artifacts/my_pixel_runtime_qualification
+
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
+  CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python \
+  scripts/qualify_complete_pixel_runtime.py --stage run \
+  --training-run artifacts/complete_pixel_language_v1 \
+  --output artifacts/my_pixel_runtime_qualification
+```
+
+The qualifier reconstructs the actor from its own final state and shared
+frozen weights, then invokes the actual PNG reader. Expected output tensors
+are accessed only after generation is saved. It checks complete pixels, stop
+probabilities, feedback-feature hashes and reader-memory hashes against the
+owning final run. This is an inference reconstruction check, not a test of
+language generalization. Run it only after the original GPU job exits.
+
+For complete held-out review after that run's CPU audit:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. \
+  artifacts/external/mixar_env_py312/bin/python \
+  scripts/inspect_complete_pixel_development.py \
+  --run artifacts/complete_pixel_language_v1 \
+  --output artifacts/my_pixel_development_review
+```
+
+This writes all 24 case plates, each containing the normal and erased prompt,
+both emitted streams and every complete reference. It preserves raw pixels
+and does not assign semantic accuracy or claim that a person reviewed them.
 
 Generation obeys the single project GPU0 lock and workstation admission rules.
 Do not start another model while training owns that lock. Input preparation is
