@@ -115,3 +115,31 @@ replacement with DIFadd. This is a full-paragraph replacement, not a claimed
 word-level diff. Preserve v2/v3 evidence; the v4 build additionally requires a
 blue rendered PDF span containing the opening abstract words. No scientific
 result, current clean source or figure layout changes.
+
+## Completed revision and verification
+
+The v4 package is built, reviewed and promoted. Active PDFs contain 16 article
+pages, 30 review pages and 78 supplement pages; matching redlines have 30 and
+78 pages. The Results insertion appears on article page 14 and review pages
+15--16. Notes 54/55 are on supplement page 71, Note 56 on page 73, and Figures
+S32/S33 on pages 72/74. The abstract is current and its complete replacement
+has verified blue spans in the compiled redline.
+
+All 46 previous native slides render identically, and all 52 prior chart
+parts remain unchanged. The active deck now has 48 slides and 53 editable
+native charts. All 70 unchanged supplement-prefix pages match the baseline
+pixel for pixel. All 89 reflowed/added baseline pages were inspected on six
+contact plates, with new abstract, Results, equations/notes and captions at
+full page. Four final documents match those reviewed counterparts exactly;
+the final 21 reflowed redline pages received two additional contact-plate
+reviews. No layout or reference errors remain in the five builds; all eight
+PDF outputs pass structure checks.
+
+The 20 promoted files are bound by the active evidence receipts. Prior article
+and supplement text is unchanged outside the allowed insertion, and title,
+Introduction and all old figure bytes are preserved. The new abstract replaces
+its old inventory of component counts with the goal and measured limits.
+The verified local Nutstore package is
+`ILM_NatureStyle_20261109_WritingControls`, with five backed-up latest aliases.
+Cloud propagation and native PowerPoint application inspection are not claimed.
+The complete ILM objective remains incomplete.

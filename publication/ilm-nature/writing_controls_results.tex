@@ -1,0 +1,15 @@
+Additional controls separate optimization from useful answering
+(Supplementary Notes 54--56; Figs.~S32 and S33). A 128-update reader-query fit
+still gives no exact answers on two seen and two excluded questions.
+Supplying correct text to the native writer yields 1/4 source pages at
+guidance four, falling to 0/4 when the VAE reference is removed; adapted
+writing remains 0/4. A separate 3.453M-parameter causal pixel head learns
+from frozen image-only contextual states. After 1,200 updates, even correct
+preceding pixels leave Chinese training-piece accuracy at 76.831\%.
+Restoring the same untrained head and extending optimization to 16,000
+updates gives 512/512 exact autonomous training first blocks, but 0/128
+Chinese and 0/64 English development first blocks. Active head training
+takes 279.131\,s at 0.825\,GiB peak allocation, excluding the pretrained
+reader and cache. Thus precise emission for learned conditions is achievable
+in this component; conditional generalization and complete language answering
+remain unresolved. Physical fitting is not a semantic benchmark.

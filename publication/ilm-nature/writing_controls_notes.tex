@@ -1,0 +1,169 @@
+\clearpage
+\section*{Supplementary Note 54 | Continuous reader-query fitting}
+\label{note:query-fit}
+The native flow model of Note~53 receives 128 AdamW updates to 262,144 shared
+continuous reader-query coordinates. Other weights, including the completed
+connector/writer adapters, remain frozen. The retained system has
+6,240,279,775 parameters. Sixteen updates use independent full noise and 112
+use the other registered noise levels. Fifty-step guidance-one inference
+uses image-only questions, without an OCR training loss or changing text
+condition. Both seen questions, both excluded questions and four copying
+cases remain OCR-inexact before and after fitting. Both new-seed seen answers
+and both question-/passage-erased seen answers also fail. All eight unique
+clean reference pages pass the same fixed OCR rule.
+
+Every FP32 query coordinate changes; 251,820 also change after BF16
+conversion. Saved optimizer counters, gradients, frozen-weight versions and
+two-update replay checks pass. Seen velocity MSE changes from 0.003543 to
+0.003429 and from 0.022216 to 0.019156. Unbounded normalized question-field
+alignment changes from 0.074015 to 0.146650 on one passage. This is physical
+optimization, not accuracy. The 18 new and four reused baseline pages are
+authenticated and actually inspected. Whole execution takes 1,447.389\,s at
+15.361\,GiB peak allocated memory. No useful answering or unique failure
+mechanism is established by these small reused cohorts.
+
+\section*{Supplementary Note 55 | Supplied content and reference removal}
+\label{note:writer-controls}
+Four fixed strings contain the two seen Chinese answers and one seen/one
+excluded English copying string. Each native generation receives the complete
+original input page and correct answer text through the original tokenizer
+and lexical table. Targets never enter generation. This is an offline
+supplied-content diagnostic, not independent image-language inference.
+Source and completed 1,536-update adapted arms retain original reader queries;
+the later failed query-fit checkpoint is not loaded. The diagnostic retains
+6,862,609,631 pretrained parameters including lexical modules and an unused
+output head, distinct from the vocabulary-removed system in Note~53.
+
+\begin{center}\begin{tabular}{lrrr}
+Writer / guidance & Chinese & English & Combined\\\hline
+Source / 1 & 0/2 & 0/2 & 0/4\\
+Source / 4 & 0/2 & 1/2 & 1/4\\
+Adapted / 1 & 0/2 & 0/2 & 0/4\\
+Adapted / 4 & 0/2 & 0/2 & 0/4\\
+\end{tabular}\end{center}
+All four clean references pass the fixed OCR rule. Eighteen actual draws
+(sixteen supplied-content pages and two execution replays) take 794.092\,s
+at 16.409\,GiB peak allocation. Both replays and reader-input comparisons
+are exact; all original generated pages are authenticated and inspected.
+
+The separately registered reference-removal control sets only the native
+denoiser's \path{cond_hidden_states} argument to None. The original semantic
+image/text input, prompt bytes and noise seeds remain unchanged. All 400
+ablated calls omit the reference; 100 replay calls retain it. Actual hooks
+verify other arguments, all eight reader-input comparisons and both first-case
+noise/semantic-condition comparisons exactly. Two full-reference execution
+replays are exact. Eight ablated draws plus those two replays take 336.887\,s
+at 16.429\,GiB peak allocation, with no optimizer update. Source exact writing
+changes from 1/4 to 0/4, and adapted writing remains 0/4. All ten new pages,
+eight original counterparts and four references retain actual raw review.
+Removing this reference is insufficient to repair these four cases. It also
+changes appended image-patch attention geometry, so the result does not rule
+out all reference interference or identify a unique repair.
+
+\clearpage
+\plate{Figure_S32_native_writing_controls}{\textbf{Reader-query and supplied-content controls retain failed writing.}
+\textbf{a}, The completed query fit leaves seen/held QA and copying counts
+zero. \textbf{b}, Correct-text source writing at guidance four falls from one
+exact page to zero after reference removal; adapted writing stays inexact.
+\textbf{c}, All four fixed source cases, in original order, include the one
+successful full-reference English page. Full-page thumbnails accompany
+enlarged ink crops, selected by a fixed luminance bound of 224 plus margin.
+Cropped pixel values are unchanged; no contrast or glyph repair enters scoring. These are canonical OCR
+counts on reused small cohorts, not a general semantic benchmark.}{fig:writing-controls}
+
+\clearpage
+\section*{Supplementary Note 56 | Direct physical-pixel likelihood and fitting}
+\label{note:pixel-density}
+The V68 custom image actor supplies two input-only 4,096-dimensional query
+states per case. This interface is not the source's native QA interface and
+must not inherit its 13/16 Chinese text-answer result. A cache of 512 training
+records (256 CMRC, 256 Dolly) and 192 development records (128 CMRC in 64
+article pairs, 64 Dolly) binds all states to their original prompt and target
+hashes. CMRC is a Chinese question cohort; its answers may include Latin names
+or digits. Chinese erasure removes only question ink; English erasure removes
+all prompt ink. Normal page coordinates remain unchanged. No reader is loaded
+or updated in this head probe.
+
+A binary $32\times64$ first block is packed losslessly into 256 adjacent
+$2\times4$ physical pieces. Each piece $b_j$ has 256 possible eight-bit
+patterns. The exact conditional objective is
+\[
+\mathcal L_{\mathrm{pix}}=-\frac{1}{256}\sum_{j=1}^{256}
+\log p_\theta(b_j\mid h,b_{<j}).
+\]
+These patterns are discrete physical outcomes, not Unicode or word identities.
+Packing has no font/glyph inventory and represents all binary blocks, which
+does not establish semantic knowledge of arbitrary scripts. A four-layer,
+width-192, six-head causal decoder uses eight signed input bits, right-shifted
+after a learned start vector, learned positions and an 8,192-to-192 contextual
+projection. Training-only coordinate means and population standard deviations
+(floor $10^{-4}$) normalize the state. The head has 3,453,376 parameters.
+Training supplies correct preceding pieces; greedy generation uses only the
+model's previous emitted patterns. Current/future target pieces cannot enter
+their own logits.
+
+The short fixed fit uses 1,200 FP32 AdamW updates, batch 32, 75 epochs and
+38,400 retained draws. Training NLL falls from 5.7126 to 0.5764 nats per piece.
+Autonomous exact first blocks are 0/256 CMRC training, 12/256 Dolly training,
+0/128 CMRC development and 0/64 Dolly development. A subsequent CPU diagnosis
+of all 896 normal/erased cases supplies correct target prefixes. Training
+piece accuracy is only 76.831\% CMRC and 90.796\% Dolly; complete exact counts
+remain 0/256 and 12/256. Thus generated-prefix drift alone is insufficient to
+explain the shorter fit's training failure.
+
+The longer control restores exactly the original untrained head, same data,
+normalization and first 75 permutations. It uses 16,000 updates, 1,000 epochs
+and 512,000 retained draws. Both use betas $(.9,.95)$, decay $.01$, gradient
+clipping at one, 32-update warmup and peak/final rates $3\times10^{-4}$ and
+$3\times10^{-5}$. Cosine decay spans each run's complete schedule; the
+intervention therefore changes update budget and decay timing. Only final
+checkpoints receive autonomous quality assessment. Matched complete-training
+NLL is recorded at updates 0, 1,200, 4,000, 8,000 and 16,000.
+
+\begin{center}\begin{tabular}{lrr}
+Autonomous first blocks & Short fit & Longer fit\\\hline
+CMRC training exact & 0/256 & 256/256\\
+Dolly training exact & 12/256 & 256/256\\
+CMRC development exact & 0/128 & 0/128\\
+Dolly development exact & 0/64 & 0/64\\
+CMRC development F1 & 33.498\% & 40.040\%\\
+Dolly development F1 & 37.629\% & 38.867\%\\
+\end{tabular}\end{center}
+Longer-fit training NLL is $2.6094\times10^{-8}$ nats per piece. Chinese
+question erasure reduces development F1 from 40.040\% to 31.324\%, a paired
+8.716-point effect with 95\% article-bootstrap interval [6.381,11.447]
+(2,000 resamples). Both questions are exact in 0/64 article pairs. English
+normal/erased F1 is 38.867/25.984\%. The reused development data are not a
+sealed benchmark. Neither exact fitting nor question sensitivity qualifies
+semantic answering, new writing styles, historical scripts or full answers.
+
+Longer active head training takes 279.131\,s, generation of all 896 blocks
+12.721\,s and complete execution 295.602\,s, at 0.825\,GiB allocated peak.
+These exclude external foundation pretraining, the earlier reader and cache,
+and offline preparation/audit. They do not establish efficiency at matched
+useful language quality. Source PNGs are not read by this standalone head;
+complete answer histories and stopping are not evaluated.
+
+Both completed fits pass exact packing, target-suffix causality,
+cached/full-prefix generation and actual update-two/checkpoint/update-three
+replay controls. The replay adds one executed optimizer call and 32 draws
+per fit without retained learning exposure. Two earlier short-fit attempts
+remain failures: an unsupported deterministic fused NLL kernel before any
+update, and an optimizer step-counter device error during replay. Equivalent
+explicit log-softmax likelihood and correct checkpoint placement repair the
+implementation without changing data, criteria or tolerances. Independent
+audits score every original output, verify PNG/emitted-bit identity and source
+bindings. All twelve complete short/long plates are visually inspected.
+These audits do not independently replay every inherited neural forward or
+assign semantic scores. Full data and provenance are retained under
+\path{references/evidence/pixel_density_long_fit_result/}.
+
+\clearpage
+\plate{Figure_S33_conditional_pixel_fitting}{\textbf{A small pixel decoder fits known conditions without held-out language generation.}
+\textbf{a}, Cached image-derived states condition a normalized causal density
+over physical pieces. \textbf{b}, The same untrained head and data reach
+512/512 exact training first blocks under longer optimization, with zero exact
+normal development blocks. The native chart shows matched whole-training NLL
+on a logarithmic scale. \textbf{c}, Original fixed reference/short-fit/long-fit
+blocks retain boundary-clipped forms. Indices follow reference content and
+source order, not output quality. These are first blocks, not complete answers.}{fig:pixel-fitting}
