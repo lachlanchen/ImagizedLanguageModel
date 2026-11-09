@@ -1,0 +1,99 @@
+{
+  "actual_original_generated_pages_inspected": 4,
+  "actual_original_reference_pages_inspected": 2,
+  "full_page_review": true,
+  "cropped_or_repaired_outputs": false,
+  "source_and_OCR_access": true,
+  "blinded": false,
+  "manual_accuracy_assigned": false,
+  "rows": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "images": {
+        "before": {
+          "path": "images/00_before.png",
+          "sha256": "a264d3d08d08560c3a44c0a358d8da2e1d0bb6ab37b227d6bf7765cec2271608",
+          "tensor_file_sha256": "6fe234e37590f7a7aa3c85c1e15b8f46104fbea82a8d46fec9f73c11aed9ba80",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "bdf335bab487febf99cf4d186aa8927291a84ee8483a424c22a91a7736c47b6b"
+          }
+        },
+        "after": {
+          "path": "images/00_after.png",
+          "sha256": "987529d7dc1e792f620fe888bd9c0705db6b7851512d413b1968de80343dc261",
+          "tensor_file_sha256": "90aee03cc969f3031acd6fba0aa4d39bdff604314897ff4177d22853c4a6dfdb",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "6fa4d4e740b530471d3c9772c1b6e67feb116935c572b7f6022690e733c5c2b3"
+          }
+        },
+        "reference": {
+          "path": "images/00_reference.png",
+          "sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+        }
+      },
+      "before_observation": "Short malformed Chinese-like fragment near the upper-left corner; most of the page is blank. It does not match the supplied reference.",
+      "after_observation": "A short malformed fragment remains near the upper-left corner; changed pixels do not supply the requested reference answer. Most of the page is blank.",
+      "reference_observation": "Complete short Chinese reference string is legible on a white page.",
+      "uncertain_manual_transcript": null
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "images": {
+        "before": {
+          "path": "images/01_before.png",
+          "sha256": "33bd97e10e6a6d04815ecd3efa61487f97ab22dd292e301b64985d2028565ff6",
+          "tensor_file_sha256": "91108f6fcb73ee68053526d3b185831462ec520fb8825d9b16c6bf534b75e02c",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "76411d78feac298f197e93c2e61c121e0e62dc44f3cc5143f080aceb06a8edf1"
+          }
+        },
+        "after": {
+          "path": "images/01_after.png",
+          "sha256": "b3531ca324e12b2cc1b0caa1b612520cae46a285e5337510bf8f393c4208ffa7",
+          "tensor_file_sha256": "6e80f78904f0406edac87bf673b93e095c86e18c0db81e71718021bd28698e95",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "c0a0ec2b86d1f40bf637a49ce346f9da01d1d2f8487d1c031ee7fb1a9cfa04e9"
+          }
+        },
+        "reference": {
+          "path": "images/01_reference.png",
+          "sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+        }
+      },
+      "before_observation": "Short malformed Chinese-like fragment near the upper-left corner; most of the page is blank. It does not match the supplied reference.",
+      "after_observation": "A short malformed fragment remains near the upper-left corner; changed pixels do not supply the requested reference answer. Most of the page is blank.",
+      "reference_observation": "Complete short Chinese reference string is legible on a white page.",
+      "uncertain_manual_transcript": null
+    }
+  ],
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

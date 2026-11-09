@@ -1,0 +1,141 @@
+{
+  "implementation_sha256": "606b5398d543bd49e7c33db1302d48191353d44138e52ba2322323b0fa3475b0",
+  "source_preparation_sha256": "eeb3793fc6f18451ab0c5e2ed71ec60be7a2aacb60fa93dabce626ee5fd96954",
+  "source_execution_report_sha256": "c66973beec3bc40fcf70ef592066e4fff9311346ce0fad9cf67c785cb74885b4",
+  "source_checkpoint_sha256": "742812688d1e770e635a30d9fba4ac150513825d767323420493d4e06d14bc4c",
+  "source_cases_sha256": "ee5f5398eb0a733ba7807309caf9335392d6f58435512a030c54f7cc95cf6b4d",
+  "source_scoring_report_sha256": "42cbcccd7741d79341c31e588d546503e74f084d6238be5d1dba76c89a24e93d",
+  "source_calibration_report_sha256": "d1a15e102936be121a3b029182e5991e1577bb5595ce93b7fee8b0923e34e833",
+  "source_matched_baseline_sha256": "271b719dc16f3670785013cd1991c97c3a138f573434738e1d10b58640803a49",
+  "all_22_bound_source_files_unchanged": true,
+  "actual_optimizer_updates": 2,
+  "FP32_changed_query_coordinates": 262144,
+  "BF16_changed_query_coordinates": 153094,
+  "maximum_absolute_query_change": 0.00010000355541706085,
+  "updates": [
+    {
+      "step": 1,
+      "id": "TRAIN_3802_QUERY_0",
+      "actual_tensor_file_sha256": "fda4d50f1c03bf54e32028728c98afa5b21cfa191d4e8bd939f04177c627340e",
+      "nonzero_gradient_coordinates": 262116,
+      "total_query_coordinates": 262144,
+      "actual_velocity_MSE": 0.003543323604390025,
+      "all_saved_tensors_finite": true,
+      "writer_input_exactly_independent_noise": true
+    },
+    {
+      "step": 2,
+      "id": "TRAIN_3802_QUERY_1",
+      "actual_tensor_file_sha256": "93d77589c82c8a36dd61dbb640c6f759162993cab3ccb236b949d1229e2898df",
+      "nonzero_gradient_coordinates": 262107,
+      "total_query_coordinates": 262144,
+      "actual_velocity_MSE": 0.022178594022989273,
+      "all_saved_tensors_finite": true,
+      "writer_input_exactly_independent_noise": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "input_sha256": "e1b36dd154e800a3c52f204b2f8899bd078a5c24575b607ca6be1cbf09b70a4f",
+      "sampling_seed": 20268701,
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "RES\n",
+      "generated_OCR_exact": false,
+      "images": {
+        "before": {
+          "path": "images/00_before.png",
+          "sha256": "a264d3d08d08560c3a44c0a358d8da2e1d0bb6ab37b227d6bf7765cec2271608",
+          "tensor_file_sha256": "6fe234e37590f7a7aa3c85c1e15b8f46104fbea82a8d46fec9f73c11aed9ba80",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "bdf335bab487febf99cf4d186aa8927291a84ee8483a424c22a91a7736c47b6b"
+          }
+        },
+        "after": {
+          "path": "images/00_after.png",
+          "sha256": "987529d7dc1e792f620fe888bd9c0705db6b7851512d413b1968de80343dc261",
+          "tensor_file_sha256": "90aee03cc969f3031acd6fba0aa4d39bdff604314897ff4177d22853c4a6dfdb",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "6fa4d4e740b530471d3c9772c1b6e67feb116935c572b7f6022690e733c5c2b3"
+          }
+        },
+        "reference": {
+          "path": "images/00_reference.png",
+          "sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+        }
+      },
+      "PNG_changed": true
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "input_sha256": "71a011fe43778434befb6a095101d28ee8d7a1d9fdc4cf2ad9e63ab237f2e509",
+      "sampling_seed": 20268701,
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "KE BE\n",
+      "generated_OCR_exact": false,
+      "images": {
+        "before": {
+          "path": "images/01_before.png",
+          "sha256": "33bd97e10e6a6d04815ecd3efa61487f97ab22dd292e301b64985d2028565ff6",
+          "tensor_file_sha256": "91108f6fcb73ee68053526d3b185831462ec520fb8825d9b16c6bf534b75e02c",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "76411d78feac298f197e93c2e61c121e0e62dc44f3cc5143f080aceb06a8edf1"
+          }
+        },
+        "after": {
+          "path": "images/01_after.png",
+          "sha256": "b3531ca324e12b2cc1b0caa1b612520cae46a285e5337510bf8f393c4208ffa7",
+          "tensor_file_sha256": "6e80f78904f0406edac87bf673b93e095c86e18c0db81e71718021bd28698e95",
+          "actual_pixel_signature": {
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              1024,
+              1024
+            ],
+            "decoded_pixel_bytes_sha256": "c0a0ec2b86d1f40bf637a49ce346f9da01d1d2f8487d1c031ee7fb1a9cfa04e9"
+          }
+        },
+        "reference": {
+          "path": "images/01_reference.png",
+          "sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+        }
+      },
+      "PNG_changed": true
+    }
+  ],
+  "generated_OCR_exact": 0,
+  "reference_OCR_exact": 2,
+  "cases": 2,
+  "retained_runtime_parameters": 6240279775,
+  "peak_allocated_vram_GiB": 15.281203269958496,
+  "elapsed_seconds": 99.4234904134646,
+  "neural_models_loaded": 0,
+  "new_optimizer_updates": 0,
+  "new_generations": 0,
+  "raw_image_review_completed": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

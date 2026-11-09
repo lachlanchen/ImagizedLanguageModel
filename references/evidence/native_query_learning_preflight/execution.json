@@ -1,0 +1,148 @@
+{
+  "preparation_sha256": "eeb3793fc6f18451ab0c5e2ed71ec60be7a2aacb60fa93dabce626ee5fd96954",
+  "loader": {
+    "loader": "pinned components, strict keys; same native constructor and sampling methods",
+    "loading_info": {
+      "transformer": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vae": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vlm": {
+        "missing_keys": [
+          "lm_head.weight"
+        ],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      }
+    },
+    "source_position_version": "4.56.1",
+    "source_position_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+    "compatibility_aliases": [
+      "lmm.visual -> lmm.model.visual",
+      "lmm.language_model -> lmm.model.language_model"
+    ],
+    "compatibility_vision_return": "actual merged pooler_output tensor; no change to encoder computation",
+    "attention_implementation": "sdpa",
+    "CPU_offload": false,
+    "parameters": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_word_weights_same_object": false,
+    "unused_output_head_called": false,
+    "deployed_vocabulary_removed": false
+  },
+  "removal": {
+    "before": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "after": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 3443458048,
+        "connector_module": 432449532
+      },
+      "total": 6202898783,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_weights_were_tied": false,
+    "vocabulary_table_removed": true,
+    "output_word_head_removed": true,
+    "tokenizer_removed": true,
+    "language_body_pretraining_retained": true,
+    "numerical_equivalence_not_yet_checked": true
+  },
+  "source": {
+    "README.md": "2db749b63910b8b05e3c962c79eaeb92a65fe69ffe15749f104c4890f1a2d9ff",
+    "connector/config.json": "dbbe184057456b385bb93ce4f088ede6d5a7bd0274a66a284ccdcc18a086b7db",
+    "connector/model.safetensors": "425ce59f596eeb573f9cd52138b775df47ce69c60d2782fb32cac5498ed208f3",
+    "deepgen_pipeline.py": "41e0f263d9ad55940426a4b2092688a74711395499c12a71ee69dc378ec9d3a9",
+    "model_index.json": "c6a2a917886e55549497fd6d027f30a6bfc89e5ea1c61ebaafcff086e7f4183f",
+    "prompt_template.json": "5d94ff0a55f31a7af8abe1a021182fa6fad703a38196734ecf6b23baecc41e9e",
+    "scheduler/scheduler_config.json": "3d0ec27d3bf788b49b2ced5bc0f0999881e80d06e7e2e06550148b13b374b8cc",
+    "tokenizer/added_tokens.json": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+    "tokenizer/chat_template.jinja": "a0bc6f6fc7a29a80017a433e8f03a1cc1236e838a944a2d034295a60c4f2fddb",
+    "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer/special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+    "tokenizer/tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+    "tokenizer/tokenizer_config.json": "11d20a741a0eda1e7482d29b5d17553328922ed9e7391ec6f44d390215390f3d",
+    "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "transformer/config.json": "e8cc4cfae099425181236be04924979672b9f62c94b5a11d47a305f89c372300",
+    "transformer/diffusion_pytorch_model.safetensors": "54078ee51ab477275e94b610249ea912d6f80d24256c4197fe48945eef706883",
+    "vae/config.json": "05eec56c19e8b4b7500eafe31b69006a9f75b2b2fcce3f7ebb10a248cb69d67e",
+    "vae/diffusion_pytorch_model.safetensors": "5a170129752b4ad4ab98996d2e59097c8c693afc31a5964bd2ad60896686c1e2",
+    "vlm/config.json": "260f5e03444d50d1a623d6b8511fdab89e4ab449f1dd25054051c808d15df50b",
+    "vlm/generation_config.json": "bc068f56ab9b6eb5eec7a27ab284fae6fd25c0752e2d0e6e8fd7916eecffe43a",
+    "vlm/model-00001-of-00002.safetensors": "d6f11cc9c30184ce92605f25ac1e6b6644ee217e7b86a28282b3c9b17de3e609",
+    "vlm/model-00002-of-00002.safetensors": "c675c19a231b0ead141d8d3a05fe930892ddf17f1324d75bb94d2a42a79f7ebc",
+    "vlm/model.safetensors.index.json": "3926d103f74c183f387097ac4d00e7fff7dae7cd0ab24427f585b84c6feea9d6"
+  },
+  "query_parameters": 262144,
+  "actual_optimizer_updates": 2,
+  "native_helper_features_exact": true,
+  "differentiated_features_exact": true,
+  "initial_native_field_exact": true,
+  "all_frozen_weight_versions_unchanged_during_updates": true,
+  "query_checkpoint_sha256": "742812688d1e770e635a30d9fba4ac150513825d767323420493d4e06d14bc4c",
+  "actual_autonomous_generations": 2,
+  "outputs_sha256": "22b663bd7be28a716c570b71a1b03a5b37282382780e85bbfbbf5a4381942c40",
+  "history": [
+    {
+      "step": 1,
+      "id": "TRAIN_3802_QUERY_0",
+      "loss": 0.003543323604390025,
+      "gradient_norm": 0.003847590647637844,
+      "finite_nonzero_query_gradient": true,
+      "gradient_max": 0.000499725341796875,
+      "actual_tensor_file": "update_001.pt",
+      "actual_tensor_sha256": "fda4d50f1c03bf54e32028728c98afa5b21cfa191d4e8bd939f04177c627340e"
+    },
+    {
+      "step": 2,
+      "id": "TRAIN_3802_QUERY_1",
+      "loss": 0.022178594022989273,
+      "gradient_norm": 0.018364254385232925,
+      "finite_nonzero_query_gradient": true,
+      "gradient_max": 0.0021209716796875,
+      "actual_tensor_file": "update_002.pt",
+      "actual_tensor_sha256": "93d77589c82c8a36dd61dbb640c6f759162993cab3ccb236b949d1229e2898df"
+    }
+  ],
+  "elapsed_seconds": 99.4234904134646,
+  "peak_allocated_vram_GiB": 15.281203269958496,
+  "retained_runtime_parameters": {
+    "components": {
+      "transformer": 2275899584,
+      "vae": 83819683,
+      "lmm": 3443458048,
+      "connector_module": 437102460
+    },
+    "total": 6240279775,
+    "persistent_and_nonpersistent_buffer_elements": 226492564
+  },
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
