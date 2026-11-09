@@ -22,6 +22,7 @@ CONTROLS=ROOT/'artifacts/native_visual_transfer_v71_20261105/attempt01/structura
 CODEC=ROOT/'artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt'
 SEED=202611092
 FILES=('scripts/preflight_native_pixel_actor.py','ilm/visual_lm/native_pixel_language.py',
+    'ilm/visual_lm/fp64_pixel_density.py',
     'scripts/audit_native_pixel_actor_preflight.py',
     'references/native_pixel_actor_preflight_protocol.md','ilm/visual_lm/conditional_pixel_density.py',
     'ilm/visual_lm/adaptive_image_continuation.py','ilm/visual_lm/native_image_continuation.py',
@@ -58,6 +59,10 @@ def read_png(path):
 def prepare(output):
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','hide CUDA during preparation')
     code=identity()
+    numerical=ROOT/'artifacts/fp64_pixel_density_v1/execution'
+    require(load(numerical/'status.json')['phase']=='completed'
+        and load(numerical/'report.json')['qualified_numerical_repair'],
+        'the completed FP64 physical-head numerical qualification is required')
     require(sha(NATIVE/'training/checkpoint_latest.pt')=='2e267b023118552e2462971c5f8e0dc49b57f4e401ef7ba58082c05fc85fc0f5',
         'completed native checkpoint changed')
     require(sha(RASTER/'execution/final.pt')=='4f91b4129d9eb0129f15dc012bce145ec4c84f3d0c7f386f135d7eedb64d0e02',
@@ -78,7 +83,8 @@ def prepare(output):
     def bind(path):bound[str(path.relative_to(ROOT))]=sha(path)
     for p in (NATIVE/'training/checkpoint_latest.pt',NATIVE/'training/training_report.json',
             NATIVE/'verification.json',RASTER/'execution/final.pt',RASTER/'execution/report.json',
-            CASES/'preparation.json',CASES/'prepared.pt',TRAIN/'report.json',AUDIT/'report.json',CONTROLS,CODEC):bind(p)
+            CASES/'preparation.json',CASES/'prepared.pt',TRAIN/'report.json',AUDIT/'report.json',CONTROLS,CODEC,
+            numerical/'status.json',numerical/'report.json'):bind(p)
     for index in (0,262,512,513,640):
         row=old[index]
         if index<512:
@@ -119,6 +125,7 @@ def prepare(output):
         cases=5,training_cases=2,development_cases=3,seed=SEED,logical_updates=2,
         actual_optimizer_calls=3,maximum_blocks=16,maximum_seconds=1200,maximum_allocated_vram_gib=22.,
         native_prompt_KV_retained=True,condition_width=4096,condition_projection_reset=True,
+        physical_head_arithmetic='float64',physical_head_parameter_storage='float32',
         training_reference_truncation=False,packages={n:version(n) for n in ('torch','torchvision','transformers','numpy')},
         general_ilm_goal_complete=False))
     print(json.dumps(dict(prepared=str(output),cases=cases),indent=2),flush=True)
@@ -162,8 +169,10 @@ def run(output):
     meta=unchanged(output);execution=output/'execution';execution.mkdir(exist_ok=False)
     started=time.perf_counter();completed=0
     def status(phase,**extra):
-        save_json(execution/'status.json',dict(phase=phase,pid=os.getpid(),logical_updates=completed,
-            elapsed_seconds=time.perf_counter()-started,**extra))
+        event=dict(phase=phase,pid=os.getpid(),logical_updates=completed,
+            elapsed_seconds=time.perf_counter()-started,**extra)
+        save_json(execution/'status.json',event)
+        with (execution/'events.jsonl').open('a') as stream:stream.write(json.dumps(event)+'\n')
     def deadline(signum,frame):raise TimeoutError('registered1200-second preflight deadline')
     old_handler=signal.signal(signal.SIGALRM,deadline);signal.alarm(1200)
     try:
@@ -244,6 +253,9 @@ def run(output):
                 evidence['start_state_comparison']=dict(max_absolute=absolute,normwise_relative=relative,
                     emitted_pixels_exact=bool(torch.equal(model.emit_image(actual),model.emit_image(expected))))
                 target=pack_pixels(rows[0]['images'][:2,0].to(device)<0)
+                atomic_tensor(execution/'initial_numerical.pt',dict(
+                    model={k:v.detach().cpu().clone() for k,v in model.density.state_dict().items()},
+                    config=model.density.configuration(),states=model.normalized_conditions(full[0,:2]).cpu(),targets=target.cpu()))
                 numerical=numerical_checks(model.density,model.normalized_conditions(full[0,:2]),target)
                 checks['pixel_causality_and_cache']=True
                 collector=[]
@@ -341,6 +353,8 @@ def run(output):
     finally:
         signal.alarm(0);signal.signal(signal.SIGALRM,old_handler)
         state=load(execution/'status.json') if (execution/'status.json').exists() else {}
+        if 'torch' in locals() and torch.cuda.is_initialized():
+            state['peak_allocated_vram_gib']=torch.cuda.max_memory_allocated()/1024**3
         save_json(execution/'status.json',dict(state,pid=None))
 
 

@@ -1,0 +1,127 @@
+{
+  "checks": {
+    "original_capture_replayed_bit_exact": true,
+    "parameter_keys_shapes_values_identical": true,
+    "unchanged_absolute_gate_passed": true,
+    "both_autonomous_greedy_paths_exact": true,
+    "autonomous_greedy_matches_original": true,
+    "future_target_exclusion_exact": true,
+    "both_paths_closer_to_independent_FP64": true,
+    "all_parameter_gradients_finite_and_present": true
+  },
+  "qualified_numerical_repair": true,
+  "comparisons": {
+    "original": {
+      "max_absolute": 0.00012493133544921875,
+      "rms": 5.7244349356134534e-06,
+      "normwise_relative": 7.202645294032726e-07,
+      "maximum_logit_magnitude": 40.83795928955078,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 0.00019986063595922587,
+      "maximum_total_variation": 1.7297544053534175e-05,
+      "worst_coordinate": [
+        0,
+        45,
+        0
+      ],
+      "full_at_worst": 9.275858879089355,
+      "cached_at_worst": 9.275983810424805
+    },
+    "accurate": {
+      "max_absolute": 1.7497114868092467e-13,
+      "rms": 1.2348681471011324e-14,
+      "normwise_relative": 1.5537459013906318e-15,
+      "maximum_logit_magnitude": 40.83796531696723,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 3.161915174132446e-13,
+      "maximum_total_variation": 2.015513524605836e-14,
+      "worst_coordinate": [
+        1,
+        29,
+        128
+      ],
+      "full_at_worst": -7.855935881722182,
+      "cached_at_worst": -7.855935881722007
+    },
+    "original_full_reference": {
+      "max_absolute": 7.280336822290678e-05,
+      "rms": 5.098776866869808e-06,
+      "normwise_relative": 6.41542473793806e-07,
+      "maximum_logit_magnitude": 40.83796531696723,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 0.00011690240485151548,
+      "maximum_total_variation": 2.3337131219488024e-05,
+      "worst_coordinate": [
+        0,
+        129,
+        0
+      ],
+      "full_at_worst": 15.944135341773379,
+      "cached_at_worst": 15.944208145141602
+    },
+    "original_cached_reference": {
+      "max_absolute": 6.455514782999217e-05,
+      "rms": 3.3755245603975937e-06,
+      "normwise_relative": 4.247180124512234e-07,
+      "maximum_logit_magnitude": 40.83796531696723,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 0.00010123595520283857,
+      "maximum_total_variation": 6.039591635561641e-06,
+      "worst_coordinate": [
+        1,
+        37,
+        0
+      ],
+      "full_at_worst": 24.08139067556506,
+      "cached_at_worst": 24.08145523071289
+    },
+    "accurate_full_reference": {
+      "max_absolute": 2.1338486533295509e-13,
+      "rms": 1.4489657424411217e-14,
+      "normwise_relative": 1.8231295291390725e-15,
+      "maximum_logit_magnitude": 40.83796531696723,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 3.232969447708456e-13,
+      "maximum_total_variation": 3.282782183206408e-14,
+      "worst_coordinate": [
+        1,
+        29,
+        192
+      ],
+      "full_at_worst": 0.7806019640352527,
+      "cached_at_worst": 0.7806019640350393
+    },
+    "accurate_cached_reference": {
+      "max_absolute": 2.0250467969162855e-13,
+      "rms": 1.3431482345325801e-14,
+      "normwise_relative": 1.6899869587405808e-15,
+      "maximum_logit_magnitude": 40.83796531696723,
+      "teacher_argmax_changes": 0,
+      "maximum_log_probability_error": 3.268496584496461e-13,
+      "maximum_total_variation": 2.6309619373297307e-14,
+      "worst_coordinate": [
+        0,
+        35,
+        0
+      ],
+      "full_at_worst": 10.932188439998592,
+      "cached_at_worst": 10.932188439998795
+    }
+  },
+  "timings": {
+    "original_two_block_forward_ms": 2.9032960891723634,
+    "accurate_two_block_forward_ms": 4.701491165161133
+  },
+  "peak_allocated_vram_gib": 0.17926025390625,
+  "elapsed_seconds": 9.001668171025813,
+  "candidate_trace_sha256": "4e02f7cef3a141372fecad42e3bc39a5bb9091592a62e7cada4f76ac9eab4234",
+  "baseline_trace_sha256": "a751ae1bc16c90cde9090cc27bf82dd2c5345f7e33f113bcc8d579c37e4224e7",
+  "parameters": 2666944,
+  "arithmetic": "full",
+  "normalization_accumulation": "float64",
+  "parameter_storage": "float32",
+  "maximum_absolute_tolerance": 0.0001,
+  "optimizer_updates": 0,
+  "complete_language_answers": 0,
+  "language_quality_claim": false
+}

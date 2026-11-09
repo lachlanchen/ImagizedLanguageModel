@@ -11,7 +11,8 @@ from torch import nn
 from torch.nn import functional as F
 
 from .adaptive_image_continuation import AdaptiveImageLanguageModel
-from .conditional_pixel_density import ConditionalPixelDensity, PixelDensityConfig, pack_pixels, unpack_pixels
+from .conditional_pixel_density import PixelDensityConfig, pack_pixels, unpack_pixels
+from .fp64_pixel_density import FP64ConditionalPixelDensity
 from .native_image_continuation import NativeImagePrefix
 
 
@@ -21,7 +22,7 @@ class NativePixelLanguageModel(AdaptiveImageLanguageModel):
         del self.flow
         # The native readout is one 4096-state, not the earlier two-query cache.
         # Reset its condition projection and normalize each observed state.
-        self.density = ConditionalPixelDensity(torch.zeros(4096), torch.ones(4096),
+        self.density = FP64ConditionalPixelDensity(torch.zeros(4096), torch.ones(4096),
             PixelDensityConfig(condition_width=4096))
         state = self.density.state_dict()
         omitted = {'condition.weight', 'condition.bias', 'condition_mean', 'condition_scale'}

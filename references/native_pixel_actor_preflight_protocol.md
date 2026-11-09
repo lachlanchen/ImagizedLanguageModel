@@ -24,6 +24,19 @@ head: physical positions, signed-bit projection, causal layers, start vector
 and normalized pixel-pattern output. Its previous 512/512 fitting result is
 not the performance of this new interface.
 
+The first execution failed the FP32 cache-logit comparison before any update.
+Preserve its original source revision and failure. The separately captured
+states reproduce a 1.24931e-4 discrepancy with identical greedy output. The
+normalization-only control is rejected under its stronger reference criterion.
+The qualified full physical-head FP64 control reduces the discrepancy to
+1.74971e-13 without changing parameter values or emitted greedy pixels.
+The successor uses that exact implementation: FP64 arithmetic only in the
+small physical head, with FP32 stored parameters and the unchanged native
+reader arithmetic. Bind its completed numerical qualification and keep the
+original 1e-4 gate. Save numerical tensors before testing, retain phase events
+and record peak allocation on failure as well as success. This numerical
+repair does not change the earlier language-quality conclusions.
+
 Reuse the completed V80 image-history encoder, input scale and stop weights;
 discard its output-code prediction flow. Add the existing V81 learned start
 query and rank-8 suffix q/v/o adapters. Their scope includes backward
