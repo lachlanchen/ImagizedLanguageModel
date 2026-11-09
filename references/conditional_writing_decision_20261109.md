@@ -24,12 +24,12 @@ with more updates is not a demonstrated route to language generalization.
 The next integration must preserve the full objective: prompt PNGs and
 completed generated images must enter a causal contextual body, which
 conditions a normalized physical-image writer and a structural stop decision.
-For answer blocks $Y_1,\ldots,Y_T$, a complete generative specification is
+For a finite answer $Y_1,\ldots,Y_T$, its probability is specified by
 
 \[
 p(Y,\mathrm{stop}\mid X)=
-s(h_{T+1})\prod_{t=1}^{T}(1-s(h_t))
-\prod_{j=1}^{256}p(b_{t,j}\mid h_t,b_{t,<j}),
+s(h_{T+1})\prod_{t=1}^{T}\left[(1-s(h_t))
+\prod_{j=1}^{256}p(b_{t,j}\mid h_t,b_{t,<j})\right],
 \qquad h_t=R(X,Y_{<t}).
 \]
 
@@ -40,7 +40,9 @@ safety cap counted as failure. No current answer block may condition its own
 state. Native reader geometry, image feedback and source feature parity must
 be checked rather than inferred from a separate text-output source model.
 Any weighting of image and stopping losses must be disclosed separately from
-the exact joint likelihood above.
+the exact finite-answer likelihood above. Normalization over finite answers
+also requires almost-sure stopping; otherwise the process retains mass on
+nontermination. A deployment cap must report that event separately.
 
 Earlier V68/V80/V81 already couple pretrained contexts to image-code writers,
 and V54 already has a normalized correlated image likelihood with a smaller
