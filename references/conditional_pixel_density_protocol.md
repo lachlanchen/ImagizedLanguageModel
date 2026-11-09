@@ -20,7 +20,9 @@ these states or to this probe. No backbone is loaded or updated here.
 The 512 training records contain 256 Chinese CMRC and 256 English Dolly
 examples. The reused development set has 128 Chinese questions in 64 article
 pairs and 64 English questions, each with normal and registered erased-input
-states. Development data are not a sealed test. Former V69 fit/calibration
+states. Chinese erasure removes question ink while retaining the passage;
+English erasure removes all prompt ink. Both preserve the normal page layout.
+Development data are not a sealed test. Former V69 fit/calibration
 records are all training records for this fixed-schedule experiment; no head
 selection uses development images. Retain the owning 32-by-64 first reference
 block, including any clipped character at its physical boundary.
@@ -105,7 +107,8 @@ is separate from the earlier 20 GiB cold-load threshold for full backbones.
 Stop if allocated head VRAM exceeds 4 GiB or the execution exceeds 1,800
 seconds. Record actual memory and wall time. No project GUI is required.
 
-Use the existing LocalLLM image-generation Python runtime and PYTHONPATH=.
+Use the existing `artifacts/external/mixar_env_py312/bin/python` runtime
+(PyTorch 2.3.0, torchvision 0.18.0, Python 3.12.1) and PYTHONPATH=.
 Preparation and audit require CUDA_VISIBLE_DEVICES=''. Execution requires
 CUDA_DEVICE_ORDER=PCI_BUS_ID and CUDA_VISIBLE_DEVICES=0. With a fresh RUN:
 
@@ -118,3 +121,9 @@ python scripts/audit_conditional_pixel_density.py --output RUN
 Commit implementation and protocol before preparation. Bind all source
 hashes, prepared data and the schedule before GPU execution. Preserve failed
 attempts; changes require a new registered execution directory.
+
+An initial CPU preparation in the shared LocalLLM runtime stopped on the
+package's existing torchvision import. It created no run directory, allocated
+no CUDA model and performed no optimization. The already-installed V69
+environment above supplies that dependency; no library installation or neural
+result was needed to make this environment correction.
