@@ -103,3 +103,14 @@ Nutstore Projects/ILM folder under a new dated package name. Back up replaced
 latest aliases and verify local copy hashes. Do not assert cloud propagation.
 Commit and push the completed bounded revision; a passing build never marks
 the overall ILM goal complete.
+
+## Redline correction after the first complete build
+
+The v2 clean PDFs and new figures pass layout review. Its redlined manuscript
+retains the old abstract because latexdiff does not replace this preamble
+macro definition. The successor explicitly puts the actual current abstract
+into that definition and marks the whole replacement with DIFadd. This is a
+full-paragraph replacement, not a claimed word-level diff. Preserve the v2
+build and review evidence; rebuild the v3 package and confirm its redline's
+first-page abstract text matches the clean abstract with visible blue markup.
+No scientific result, current clean source or figure layout changes.

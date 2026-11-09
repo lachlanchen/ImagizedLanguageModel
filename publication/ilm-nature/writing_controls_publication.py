@@ -537,8 +537,28 @@ def redline(stage,source,stem):
     notice=(r'\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved '
         r'46-slide writing-controls baseline (3011de6).}\par\medskip'+'\n')
     text=result.stdout.replace(r'\begin{document}',r'\begin{document}'+'\n'+notice,1)
+    # latexdiff retains the old preamble definition of this macro. Mark the
+    # replaced abstract as a complete added block, using the actual new body.
+    abstract_marked=False
+    if source=='manuscript_review.tex':
+        token=r'\newcommand{\PaperSummary}'
+        def bounds(value):
+            opening=value.index('{',value.index(token)+len(token))
+            depth=1;end=opening+1
+            while depth:
+                require(end<len(value),'unclosed abstract command')
+                if value[end] in '{}':
+                    depth+=1 if value[end]=='{' else -1
+                end+=1
+            return opening,end
+        current=(stage/'paper/frontmatter.tex').read_text()
+        left,right=bounds(current);summary=current[left+1:right-1]
+        left,right=bounds(text)
+        text=text[:left]+'{'+r'\DIFadd{'+summary+'}}'+text[right:]
+        abstract_marked=True
     (stage/'paper'/(stem+'.tex')).write_text(text)
-    return dict(old_inputs_sha256=old,new_inputs_sha256=new,added_text_markers=text.count(r'\DIFadd{'))
+    return dict(old_inputs_sha256=old,new_inputs_sha256=new,added_text_markers=text.count(r'\DIFadd{'),
+        complete_replacement_abstract_marked=abstract_marked)
 
 
 def build(stage):
