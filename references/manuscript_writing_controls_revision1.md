@@ -52,9 +52,12 @@ S32 displays all four fixed source-writing examples with original order,
 alongside complete cohort counts, so the single successful source example
 is not hidden. Whitespace-only display crops, if needed for these padded
 pages, must record exact crop boxes and retain original full-page hashes;
-they never enter scoring. S33 shows the first Chinese/English training and
-development blocks, selected by source order, with reference, shorter-fit
-and longer-fit rows. Its original 32-by-64 blocks remain byte-identical.
+they never enter scoring. S33 shows the first Chinese-script CMRC training
+block (index 1; index 0 answers a Chinese question with a Latin name), first
+Dolly training block (256), first CMRC development block (512) and first Dolly
+development block (640). This reference-content/source-order selection does
+not rank model quality. Reference, shorter-fit and longer-fit rows retain
+original 32-by-64 block bytes.
 The two figures use different inherited reader families and must not imply
 a matched architectural comparison between them.
 
