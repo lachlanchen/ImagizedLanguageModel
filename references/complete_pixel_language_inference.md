@@ -7,13 +7,18 @@ binary answer-image blocks with its own image history and learned stopping.
 Its output is saved directly as tensors and PNGs, with no answer font renderer,
 OCR service or reference lookup.
 
-The model is a research checkpoint. At update 4,000,
-[all 32 seen training answers are pixel-exact](complete_pixel_language_update4000.md);
-unseen-prompt capability is not yet qualified.
-Standalone GPU replay has not yet been qualified. Input preparation and
-checkpoint-schema checks alone do not establish inference correctness; that
-requires restoring a retained model and replaying its original PNG inputs and
-complete emitted streams after GPU0 is free.
+The model is a research checkpoint. The [completed assessment](complete_pixel_language_result.md)
+has all 32 seen training answers pixel-exact, but 0/16 exact unseen Chinese
+answers and 0/8 exact English answers. Raw development outputs contain broken
+glyphs and unrelated training fragments. Useful new-prompt capability remains
+unqualified. Accepting a typed/image input does not establish that capability.
+
+Standalone GPU reconstruction is now qualified on five fixed original PNG
+inputs: complete pixels, stop probabilities, history-feature hashes and reader
+hashes match the owning final run exactly. The
+[actual cold-load receipt](evidence/complete_pixel_runtime_qualification/report.json)
+records restoration from the actor's own state, with no legacy training
+checkpoint or online teacher. This is a deployment check, not generalization.
 
 The [CPU interface receipt](evidence/complete_pixel_inference_cpu/receipt.json)
 records image, typed and mixed-input preparation, exact preservation of the

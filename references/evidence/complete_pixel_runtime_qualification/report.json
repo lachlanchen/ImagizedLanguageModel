@@ -1,0 +1,265 @@
+{
+  "checkpoint": {
+    "checkpoint_sha256": "b68f531bbf56588167bf16f3cd1a133a5e35dbed69f208cb62a8549b900ff9f5",
+    "checkpoint_update": 4000,
+    "checkpoint_training_finished": true,
+    "preparation_sha256": "2d6c4b9573786de0bc33df1585d4dc9a3a0b49797b9d71503dfc3985510234ef",
+    "external_pretraining": true,
+    "language_quality_claim": false
+  },
+  "source": {
+    "inherited": {
+      "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+      "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+      "retained_native_tensors": 748,
+      "retained_base_parameters": 7522463984,
+      "configurations": {
+        "text": {
+          "vocab_size": 0,
+          "hidden_size": 4096,
+          "intermediate_size": 12288,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "rms_norm_eps": 9.999999974752427e-07,
+          "max_position_embeddings": 262144,
+          "rope_theta": 5000000.0,
+          "rope_scaling": {
+            "rope_type": "default",
+            "mrope_section": [
+              24,
+              20,
+              20
+            ],
+            "mrope_interleaved": true
+          },
+          "attention_bias": false,
+          "bos_token_id": null,
+          "eos_token_id": null,
+          "pad_token_id": null,
+          "tie_word_embeddings": false
+        },
+        "vision": {
+          "depth": 27,
+          "hidden_size": 1152,
+          "intermediate_size": 4304,
+          "num_heads": 16,
+          "in_channels": 3,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2,
+          "out_hidden_size": 4096,
+          "num_position_embeddings": 2304,
+          "deepstack_visual_indexes": [
+            8,
+            16,
+            24
+          ],
+          "hidden_act": "gelu_pytorch_tanh"
+        }
+      },
+      "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+      "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+      "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+      "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+      "external_pretraining": true,
+      "vocabulary_parameters_materialized": 0
+    },
+    "source_model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "input_scale": 0.0247902050614357,
+    "all_prompt_keys_retained": true,
+    "tokenizer": false,
+    "ocr": false,
+    "language_vocabulary": false,
+    "teacher_service": false,
+    "persistent_glyph_inventory": false,
+    "external_pretraining": true,
+    "language_quality_claim": false,
+    "own_learned_state_restored": true,
+    "legacy_training_checkpoint_required": false,
+    "legacy_raster_checkpoint_required": false,
+    "physical_head_arithmetic": "float64",
+    "parameter_storage": "float32"
+  },
+  "cases": [
+    {
+      "index": 0,
+      "checks": {
+        "images_bit_exact": true,
+        "stop_probabilities_bit_exact": true,
+        "stop_and_cap_equal": true,
+        "history_feature_hashes_equal": true,
+        "reader_memory_hash_equal": true
+      },
+      "output": {
+        "blocks": 1,
+        "stopped": true,
+        "capped": false,
+        "files_sha256": {
+          "result.pt": "be20533188c4891230cdb3b64cc992d238d00fc43054ebf290e1233d009731e1",
+          "answer.png": "387dfe07d0d1e1b9f0b94cd5ee1e61674a24e1cad10c9dad1e6fd2e23aff7592",
+          "answer_page.png": "387dfe07d0d1e1b9f0b94cd5ee1e61674a24e1cad10c9dad1e6fd2e23aff7592"
+        },
+        "page_source_ranges": [
+          [
+            0,
+            64
+          ]
+        ],
+        "page_layout_error": null,
+        "empty_answer_no_placeholder": false,
+        "output_pixels_repaired": false,
+        "output_font_renderer": false,
+        "output_OCR": false,
+        "reference_images_used": false
+      },
+      "generation_seconds": 2.5608600033447146
+    },
+    {
+      "index": 1,
+      "checks": {
+        "images_bit_exact": true,
+        "stop_probabilities_bit_exact": true,
+        "stop_and_cap_equal": true,
+        "history_feature_hashes_equal": true,
+        "reader_memory_hash_equal": true
+      },
+      "output": {
+        "blocks": 2,
+        "stopped": true,
+        "capped": false,
+        "files_sha256": {
+          "result.pt": "ff40fa6d89af4a5605895b71a93610e686e996954d7bfc10fda6112f9de46865",
+          "answer.png": "678d13a85ba79170342c62eb4954bfc4e9b87de3acb6c08f1b63cbde49f93a1c",
+          "answer_page.png": "678d13a85ba79170342c62eb4954bfc4e9b87de3acb6c08f1b63cbde49f93a1c"
+        },
+        "page_source_ranges": [
+          [
+            0,
+            128
+          ]
+        ],
+        "page_layout_error": null,
+        "empty_answer_no_placeholder": false,
+        "output_pixels_repaired": false,
+        "output_font_renderer": false,
+        "output_OCR": false,
+        "reference_images_used": false
+      },
+      "generation_seconds": 3.1529547153040767
+    },
+    {
+      "index": 2,
+      "checks": {
+        "images_bit_exact": true,
+        "stop_probabilities_bit_exact": true,
+        "stop_and_cap_equal": true,
+        "history_feature_hashes_equal": true,
+        "reader_memory_hash_equal": true
+      },
+      "output": {
+        "blocks": 3,
+        "stopped": true,
+        "capped": false,
+        "files_sha256": {
+          "result.pt": "2194efd603015c4d9b01ba781b64239a63e617547a6c64fced277f253c792aee",
+          "answer.png": "3ab5bd06f73b9067315ae182f77aa59965bb38eb6fbf60ac57477a6a7247cf8e",
+          "answer_page.png": "3ab5bd06f73b9067315ae182f77aa59965bb38eb6fbf60ac57477a6a7247cf8e"
+        },
+        "page_source_ranges": [
+          [
+            0,
+            192
+          ]
+        ],
+        "page_layout_error": null,
+        "empty_answer_no_placeholder": false,
+        "output_pixels_repaired": false,
+        "output_font_renderer": false,
+        "output_OCR": false,
+        "reference_images_used": false
+      },
+      "generation_seconds": 3.5536356661468744
+    },
+    {
+      "index": 3,
+      "checks": {
+        "images_bit_exact": true,
+        "stop_probabilities_bit_exact": true,
+        "stop_and_cap_equal": true,
+        "history_feature_hashes_equal": true,
+        "reader_memory_hash_equal": true
+      },
+      "output": {
+        "blocks": 4,
+        "stopped": true,
+        "capped": false,
+        "files_sha256": {
+          "result.pt": "8fe3922a9bfd77ab56f123839b062bbde2bf497381d37d7658f0ab5b7ee9920e",
+          "answer.png": "c981b1ffd8c6769e0d8e6d6edd32998edd6ede45a473790bfeb2bf6256ce83a6",
+          "answer_page.png": "c981b1ffd8c6769e0d8e6d6edd32998edd6ede45a473790bfeb2bf6256ce83a6"
+        },
+        "page_source_ranges": [
+          [
+            0,
+            256
+          ]
+        ],
+        "page_layout_error": null,
+        "empty_answer_no_placeholder": false,
+        "output_pixels_repaired": false,
+        "output_font_renderer": false,
+        "output_OCR": false,
+        "reference_images_used": false
+      },
+      "generation_seconds": 4.691756994463503
+    },
+    {
+      "index": 28,
+      "checks": {
+        "images_bit_exact": true,
+        "stop_probabilities_bit_exact": true,
+        "stop_and_cap_equal": true,
+        "history_feature_hashes_equal": true,
+        "reader_memory_hash_equal": true
+      },
+      "output": {
+        "blocks": 6,
+        "stopped": true,
+        "capped": false,
+        "files_sha256": {
+          "result.pt": "a4b581c7d35c6c6b92ac77d9232c8bd0658a105c29579c1393065a3f1ff0cb87",
+          "answer.png": "a5c54a409756383a25821bbe301f254c84973b0b6be065012f29dbc6bc60a97e",
+          "answer_page.png": "a5c54a409756383a25821bbe301f254c84973b0b6be065012f29dbc6bc60a97e"
+        },
+        "page_source_ranges": [
+          [
+            0,
+            384
+          ]
+        ],
+        "page_layout_error": null,
+        "empty_answer_no_placeholder": false,
+        "output_pixels_repaired": false,
+        "output_font_renderer": false,
+        "output_OCR": false,
+        "reference_images_used": false
+      },
+      "generation_seconds": 6.139884982258081
+    }
+  ],
+  "all_actual_PNG_replays_bit_exact": true,
+  "actual_PNG_inputs": 5,
+  "peak_allocated_vram_gib": 17.52885103225708,
+  "model_load_seconds": 76.54671195987612,
+  "elapsed_seconds": 96.67472825571895,
+  "reference_answers_supplied": false,
+  "legacy_training_checkpoint_loaded": false,
+  "teacher_service": false,
+  "runtime_OCR": false,
+  "font_answer_renderer": false,
+  "language_generalization_qualified": false
+}

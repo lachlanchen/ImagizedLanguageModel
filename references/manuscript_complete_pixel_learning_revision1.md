@@ -28,6 +28,18 @@ loader replay also waits for that worker to exit. Read-only source inspection,
 CPU image/tensor scoring and this plan do not claim a completed publication
 revision. No new publication skill marker or artifact build has run.
 
+The execution boundary is now satisfied by
+`references/complete_pixel_language_result.md` and its complete evidence
+archive. Final fresh-PNG training is 32/32 exact, F1 1; normal Chinese
+development is 0/16 exact, F1 0.239785, and normal English development is 0/8,
+F1 0.034482. All 80 final normal/erased/training output streams and their
+references have been actually viewed. The independent CPU audit re-encodes
+668 actual feedback records with maximum error 6.914139e-6. Five fixed cold
+deployment calls reproduce complete pixels, stop probabilities, history hashes
+and reader hashes exactly. Both model processes have exited and GPU0 is free.
+These facts are ready for the bounded revision; no active paper/PPT edits,
+builds, promotion or Nutstore update for this result have yet occurred.
+
 ## Scientific changes and claim limits
 
 Replace the abstract's emphasis on only cached first-block fitting with the

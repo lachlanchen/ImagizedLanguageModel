@@ -8,6 +8,12 @@ triggers the registered training-fit stop rule. Fresh-PNG final training and
 held-out generation are separate assessments and remain pending at this
 milestone.
 
+Follow-up: the [completed final assessment](complete_pixel_language_result.md)
+confirms 32/32 exact fresh-PNG training answers, but 0/16 Chinese and 0/8
+English exact development answers. The independent feedback audit and five
+cold-deployment replays also finish. The milestone below retains its original
+scope; it is not evidence of useful unseen-language capability.
+
 | Assessment | Complete training answers exact | Foreground F1 |
 | --- | ---: | ---: |
 | Initial state | 0/32 | 0.130254 |
