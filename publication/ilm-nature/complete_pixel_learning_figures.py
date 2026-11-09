@@ -88,7 +88,7 @@ def append(paper, audit, monitors):
     slide.arrow(1395, 265, 1395, 315, head=False)
     slide.arrow(1395, 315, 570, 315, head=False)
     slide.arrow(570, 315, 570, 265)
-    slide.shape('Read actual emitted pixels through the frozen history encoder and learned input projection',
+    slide.shape('Frozen history encoder and learned input projection read emitted pixels',
                 600, 272, 790, 38, 16, center=True)
     slide.shape('Training supplies true preceding images. Inference receives its own pixels and no desired answer length.',
                 45, 340, 1510, 40, 17)
