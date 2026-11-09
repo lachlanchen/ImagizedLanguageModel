@@ -45,6 +45,11 @@ Add one concise Results subsection describing the actual full native image
 reader, own-image feedback, direct pixel likelihood and complete-answer
 learning. Add Supplementary Note 57 with architecture, supervision, execution
 checks, matched learning trajectory and final normal/erased assessment.
+Add one bounded Discussion clarification after the older teacher-likelihood
+paragraph: complete writing now fits seen questions, while the final held-out
+result determines which generalization limitation remains. Preserve the older
+experiment-specific failure statements and distinguish their scope from the
+new successor. Do not let a general-sounding summary erase either result.
 Report all 16 Chinese development questions and eight English instructions,
 plus erased controls, independently of outcome. They are reused development
 cases; English is untrained transfer here. Separate pixel agreement,
