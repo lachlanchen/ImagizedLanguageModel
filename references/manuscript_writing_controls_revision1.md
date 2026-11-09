@@ -107,10 +107,11 @@ the overall ILM goal complete.
 ## Redline correction after the first complete build
 
 The v2 clean PDFs and new figures pass layout review. Its redlined manuscript
-retains the old abstract because latexdiff does not replace this preamble
-macro definition. The successor explicitly puts the actual current abstract
-into that definition and marks the whole replacement with DIFadd. This is a
-full-paragraph replacement, not a claimed word-level diff. Preserve the v2
-build and review evidence; rebuild the v3 package and confirm its redline's
-first-page abstract text matches the clean abstract with visible blue markup.
-No scientific result, current clean source or figure layout changes.
+has the current abstract text but lacks abstract change highlighting. Initial
+source inspection matched a commented old macro, and the v3 correction also
+wrapped that comment rather than the active definition. The successor anchors
+the active defining line, uses the actual current abstract and marks the whole
+replacement with DIFadd. This is a full-paragraph replacement, not a claimed
+word-level diff. Preserve v2/v3 evidence; the v4 build additionally requires a
+blue rendered PDF span containing the opening abstract words. No scientific
+result, current clean source or figure layout changes.

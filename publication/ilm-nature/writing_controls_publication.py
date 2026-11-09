@@ -537,13 +537,15 @@ def redline(stage,source,stem):
     notice=(r'\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved '
         r'46-slide writing-controls baseline (3011de6).}\par\medskip'+'\n')
     text=result.stdout.replace(r'\begin{document}',r'\begin{document}'+'\n'+notice,1)
-    # latexdiff retains the old preamble definition of this macro. Mark the
-    # replaced abstract as a complete added block, using the actual new body.
+    # latexdiff does not color changes in this preamble definition. Mark the
+    # active replacement, excluding the commented old definition it also keeps.
     abstract_marked=False
     if source=='manuscript_review.tex':
         token=r'\newcommand{\PaperSummary}'
         def bounds(value):
-            opening=value.index('{',value.index(token)+len(token))
+            active=re.search(r'(?m)^'+re.escape(token),value)
+            require(active is not None,'active abstract definition missing')
+            opening=value.index('{',active.start()+len(token))
             depth=1;end=opening+1
             while depth:
                 require(end<len(value),'unclosed abstract command')
@@ -582,6 +584,11 @@ def build(stage):
             path=stage/'paper'/(stem+'.pdf');shutil.copyfile(auxiliary/(stem+'.pdf'),path)
             document=fitz.open(path);text=' '.join(' '.join(p.get_text().split()) for p in document)
             require('512/512' in text and '279.131' in text,'new fitting result absent: '+stem)
+            if stem=='redlined_manuscript':
+                spans=[s for b in document[0].get_text('dict')['blocks'] if 'lines' in b
+                    for line in b['lines'] for s in line['spans']]
+                require(any(s['color']==255 and 'Written language' in s['text'] for s in spans),
+                    'actual replacement abstract lacks blue PDF markup')
             if 'supplementary' in stem:
                 for term in terms[1:6]:require(term in text,'new supplement content absent: '+term)
             owned_command(['qpdf','--check',str(path)],stage/'paper',logs/(stem+'.qpdf.log'),30)
@@ -591,6 +598,7 @@ def build(stage):
         verify(stage)
         save(stage/'build.json',dict(preparation_sha256=sha(stage/'preparation.json'),render_receipt_sha256=sha(stage/'render.json'),
             PDFs_sha256=outputs,pages=pages,locations=locations,redlines=redlines,
+            replacement_abstract_blue_in_compiled_PDF=True,
             no_overfull_or_undefined=True,active_publication_updated=False,actual_pdf_review_pending=True))
 
 
