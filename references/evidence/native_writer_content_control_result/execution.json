@@ -1,0 +1,77 @@
+{
+  "preparation_sha256": "b7a0f49492c80a535af61ec5e292a9aaec5b322c988d05e96b7e8ea172083681",
+  "outputs_sha256": "a82a73b705fc8f795d97587c40a85a0f060afb6fde4e92041c958b33879be1d9",
+  "complete_generations": 18,
+  "supplied_content_generations": 16,
+  "execution_replays": 2,
+  "all_replays_bit_exact": true,
+  "denoiser_calls": 900,
+  "denoiser_batch_elements": 1300,
+  "loader": {
+    "loader": "pinned components, strict keys; same native constructor and sampling methods",
+    "loading_info": {
+      "transformer": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vae": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vlm": {
+        "missing_keys": [
+          "lm_head.weight"
+        ],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      }
+    },
+    "source_position_version": "4.56.1",
+    "source_position_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+    "compatibility_aliases": [
+      "lmm.visual -> lmm.model.visual",
+      "lmm.language_model -> lmm.model.language_model"
+    ],
+    "compatibility_vision_return": "actual merged pooler_output tensor; no change to encoder computation",
+    "attention_implementation": "sdpa",
+    "CPU_offload": false,
+    "parameters": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_word_weights_same_object": false,
+    "unused_output_head_called": false,
+    "deployed_vocabulary_removed": false
+  },
+  "runtime_parameters": {
+    "components": {
+      "transformer": 2275899584,
+      "vae": 83819683,
+      "lmm": 4065787904,
+      "connector_module": 437102460
+    },
+    "total": 6862609631,
+    "persistent_and_nonpersistent_buffer_elements": 226492564
+  },
+  "original_queries_unchanged": true,
+  "unused_vocabulary_output_head_called": false,
+  "tokenizer_and_input_word_table_retained": true,
+  "reference_answer_images_used_by_generator": false,
+  "supplied_answer_text": true,
+  "optimizer_updates": 0,
+  "elapsed_seconds": 794.0924895247445,
+  "peak_allocated_vram_GiB": 16.40900230407715,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

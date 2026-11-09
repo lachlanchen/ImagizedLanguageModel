@@ -1,0 +1,300 @@
+{
+  "auditor_sha256": "fd72392a73172e7efc8999512c3dc50d04053ca50a81a97c15288f07b808e9fc",
+  "source_commit": "3852c0ed0ae2ed0ce79f3d3aa1d63a4383bd7ff2",
+  "preparation_sha256": "b7a0f49492c80a535af61ec5e292a9aaec5b322c988d05e96b7e8ea172083681",
+  "execution_report_sha256": "7844e9ddf1b85e43a4b5713952665c57c38790b5abb388eb280b426e6bf1ff1c",
+  "assessment_sha256": "a389ca65f8e3f69ddcf572f491f03de0083c9efe0721a956046d6d4bf3c9caa4",
+  "actual_original_generations": 18,
+  "actual_supplied_content_generations": 16,
+  "independently_bit_exact_replays": 2,
+  "all4_case_reader_inputs_bit_exact_across_guidance_and_writer_arms": true,
+  "all18_actual_PNGs_tensor_authenticated": true,
+  "source_and_preparation_bindings_unchanged": true,
+  "denoiser_calls": 900,
+  "denoiser_batch_elements": 1300,
+  "reference_OCR_exact": 4,
+  "reference_cases": 4,
+  "summary": {
+    "source_g1": {
+      "cases": 4,
+      "ocr_exact": 0,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      }
+    },
+    "source_g4": {
+      "cases": 4,
+      "ocr_exact": 1,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "ocr_exact": 1
+        }
+      }
+    },
+    "adapted_g1": {
+      "cases": 4,
+      "ocr_exact": 0,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      }
+    },
+    "adapted_g4": {
+      "cases": 4,
+      "ocr_exact": 0,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      }
+    }
+  },
+  "original_images": [
+    {
+      "arm": "source",
+      "kind": "replay",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "source_replay/answer.png",
+      "png_sha256": "10805d3cc21e41107bc114f50c4964a208544abbd54dcdccb774f408127615ce",
+      "tensor_sha256": "e1355f9df1880258994517ae92c2a602bc3cfb9027414e99788df4022cdcea3c",
+      "raw_transcript": "=            2                       a\ne     ‘                   =               *\n4     E\n            手术知人Renci':RizeEn:\nee ue\nPRA TAREE Te aw hae      |\n:        GOERS ERED cpp gs\n     BER RY 77 HS Eo TES Tg iigtes  F\ne pre Ae SCH E45 Pepa : 要让月冯?下和\nes ds Ala eee 1         eH\n:            eM FF rte TRIE cans BLIK\nURE A= DEP ESEN Asta Hae.\nSSATP QE TENS AA 2 RET 5\nBNGPAVULE RAIA Bk 7K Gy AOE\n才该认可1 tt DeRee FLEDER\n| RIRERURG dee aeriawe ebiaee\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "source_g1_000/answer.png",
+      "png_sha256": "38b11872949b71a9176edd5626fbc562629a08092352e615b2114254a6db39ab",
+      "tensor_sha256": "089ee74a1673cdd75d4c7bc178cebd3be1e356bb0742025ecac793b0c64c65c0",
+      "raw_transcript": "BH\nWRIA aia REY ee RT JRE RA EER\n1 BVA SE HEL) PRR Ande, BE Bat EET ERD\n8 BSG PAL Re TOR A FR FB a ZA MS\nFREE 2 RE WRAY\n“EA:                   ea;\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "source_g1_001/answer.png",
+      "png_sha256": "2278457745d137ccbc8dccb53eddec3a9f2675b48e24857d1489293fbd2613d4",
+      "tensor_sha256": "12d62bbafce9fd32a3f2ae7785898c8ecc89a09127cbb318d81c2d74c5eed239",
+      "raw_transcript": "L BERR BRT) PR: HF\nEL EVEL EPA SE PRAT.\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "copy/train/001",
+      "path": "source_g1_002/answer.png",
+      "png_sha256": "e3b9e667b1b6bb46a0dedcd663c20351c54bb05b59a37802892f3880b9c1e7b1",
+      "tensor_sha256": "155520d197da9e8a9366f77c1079699db3a555e35be1417bf5360e55c1df3e76",
+      "raw_transcript": "mountain Cecgnt blue clooud\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "copy/validation/001",
+      "path": "source_g1_003/answer.png",
+      "png_sha256": "286f315b038eb6ac6b54ff3e26726f324b84c92ca0f9684298665a973dd6c3a7",
+      "tensor_sha256": "75dda2f5296a364eb314b83c1601739d8d8d41e7b3122b7b68898f186344ffae",
+      "raw_transcript": "Gzlmroenaakvsilxwr opeen bliue\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "source_g4_000/answer.png",
+      "png_sha256": "9b5b6c10b314d33e05cd44396367a7c2fb231f6e0e09760e7fd191787ee39afa",
+      "tensor_sha256": "3ede8e7dabb5bfec1d1120c73eaf3a8625acef5b2c67d292de5f0a5730d9a435",
+      "raw_transcript": "fe) =\nOnly this\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "source_g4_001/answer.png",
+      "png_sha256": "dfcf035e59db0455e783c0bead74fddd636cb2b33f2211ad37e4f435c4672c0d",
+      "tensor_sha256": "d324487d8e020402f8492100c950439616a8c4fef5f26f8ab486f373f0f2c8a0",
+      "raw_transcript": "Sia wa\nbil 5 AG SS ANS Os\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "copy/train/001",
+      "path": "source_g4_002/answer.png",
+      "png_sha256": "4334dcaa2156b7c785ecbc90c45bff888a4b67c757b99678e68e3876f906ede2",
+      "tensor_sha256": "35dfd3470e48dfba0d7cc72b9fc713a5f8a0f4a150b0da6a5bda667698700f76",
+      "raw_transcript": "rnountnain bright bllue clooud\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "source",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "copy/validation/001",
+      "path": "source_g4_003/answer.png",
+      "png_sha256": "a45e9f3ff69a5a4fe567ac52d5c8c2abb10f161231815056acfdcb6eeded934b",
+      "tensor_sha256": "86962de5b129b6ac78c51fddfc4c7318c96699606fe89e8609bb37009ad62a70",
+      "raw_transcript": "garden silver open blue\n",
+      "ocr_exact": true,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "replay",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "adapted_replay/answer.png",
+      "png_sha256": "a264d3d08d08560c3a44c0a358d8da2e1d0bb6ab37b227d6bf7765cec2271608",
+      "tensor_sha256": "6fe234e37590f7a7aa3c85c1e15b8f46104fbea82a8d46fec9f73c11aed9ba80",
+      "raw_transcript": "RES\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "adapted_g1_000/answer.png",
+      "png_sha256": "26a8b9fc1c5ab7f43fec097cf9205eaee651bd4414a3bb4d34e0ef85b2bb254a",
+      "tensor_sha256": "ea87860c44755e089ee36859179c2fcdf02a9ae021faadd37eba2731a9d91102",
+      "raw_transcript": "KEA,\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "adapted_g1_001/answer.png",
+      "png_sha256": "1940211ace201f5a12e47a46d4415b3d6842061cc3b1694d8c08866499e80bb7",
+      "tensor_sha256": "51442c5e671fcb90c90ac907f7fb8094942a14d9e595e8f4f9046233f28295c8",
+      "raw_transcript": "HEAKSERKARFRES,\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "copy/train/001",
+      "path": "adapted_g1_002/answer.png",
+      "png_sha256": "090bdd65428c368f89b7eee400dc13c0e5d57793631b64c25d7e792a7d426269",
+      "tensor_sha256": "6e0119422df8e3cd496c76a4267b96d5bc469f0482ce85fbc9e4d3e3362419d7",
+      "raw_transcript": "noumtain brigt blue cloud\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 1.0,
+      "id": "copy/validation/001",
+      "path": "adapted_g1_003/answer.png",
+      "png_sha256": "4528780ee37c211957d8d12b32a6a327b89d7f5fa7ccb6f087a9265bcdc48fe7",
+      "tensor_sha256": "faf449cbfc48aeb251cfd5f4bd803ebd48deda9bd4f5ef9c519de44553cdb2db",
+      "raw_transcript": "gerlenneasilvenue blue\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "adapted_g4_000/answer.png",
+      "png_sha256": "dac97fd551b89f84ae94161f37e3959c78980aef6a0c7f2bacc350f2a1321561",
+      "tensor_sha256": "914523ab9aebd1ce85de1f1e4cc93d755bb39a75dd8df27571910478d31c990d",
+      "raw_transcript": "Ae\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "adapted_g4_001/answer.png",
+      "png_sha256": "d6dc69ca9fad592965ede77af21c496b8fa356c9c1650b0f99b94212df5c3eee",
+      "tensor_sha256": "0fbc8cc52b1cfb1817064e13dfebdbcf7d1aedbceb6c475496d6bc04c9e748f7",
+      "raw_transcript": "HEAwWSAK,. ARF RS,\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "copy/train/001",
+      "path": "adapted_g4_002/answer.png",
+      "png_sha256": "40b3c397639f0d1fb92badbdc1f51893d18e6f0c041644d4bf9894b3a4361bdf",
+      "tensor_sha256": "82520ce8b8808c99168431111dcf2fe87831269f8708620f997dca290ef93d17",
+      "raw_transcript": "muutteain brigh bliecloud\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    },
+    {
+      "arm": "adapted",
+      "kind": "supplied_content",
+      "guidance": 4.0,
+      "id": "copy/validation/001",
+      "path": "adapted_g4_003/answer.png",
+      "png_sha256": "f7a782ccc5981da93e4ed6c7f62b3c1e722a3b118b3fa2518649c29eac458251",
+      "tensor_sha256": "bc91554bc02703c05d4d5e23aad202f2073b78617717af5ee156a22f6f479fce",
+      "raw_transcript": "gactem silwevoue blue\n",
+      "ocr_exact": false,
+      "actual_decoded_pixels_authenticated": true
+    }
+  ],
+  "model_calls_added_by_audit": 0,
+  "optimizer_updates": 0,
+  "raw_image_review_completed": false,
+  "supplied_answer_text": true,
+  "autonomous_QA_validated": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
