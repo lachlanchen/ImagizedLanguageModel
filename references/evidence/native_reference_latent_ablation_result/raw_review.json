@@ -1,0 +1,126 @@
+{
+  "model_report_sha256": "2ca0ea9e872963fc77713086437a960a3197513317d596285c5b42aa660c0c16",
+  "audit_report_sha256": "9f01e10136ca458e29e4d29ae2d669c7583c4e2210730a6465ebf39856434f41",
+  "all10_new_original_pages_actually_inspected": true,
+  "all_new_pages_complete_and_unrepaired": true,
+  "original_counterparts_previously_inspected_and_hash_unchanged": 8,
+  "original_reference_pages_previously_inspected_and_hash_unchanged": 4,
+  "source_and_OCR_access_available": true,
+  "blinded_review": false,
+  "manual_accuracy_assigned": false,
+  "rows": [
+    {
+      "arm": "source",
+      "kind": "replay",
+      "id": "TRAIN_3802_QUERY_0",
+      "image": "images/source_replay/answer.png",
+      "png_sha256": "9b5b6c10b314d33e05cd44396367a7c2fb231f6e0e09760e7fd191787ee39afa",
+      "actual_complete_page_inspected": true,
+      "finding": "Incorrect bold Chinese-like forms with the unwanted English line Only this; exact full-reference execution replay.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_0",
+      "image": "images/source_removed_000/answer.png",
+      "png_sha256": "c71e5ef07245d413ea40e720702b75f7e033d907824a2037d9abd34275566f7c",
+      "actual_complete_page_inspected": true,
+      "finding": "Two large incorrect Chinese-like forms centred on the complete page; requested three-character string absent.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_1",
+      "image": "images/source_removed_001/answer.png",
+      "png_sha256": "f3c2f1b8d96201bfb331cf4736330cff981c4e81e534dcf9c5e6a93149125668",
+      "actual_complete_page_inspected": true,
+      "finding": "One large bold line of incorrect Chinese-like forms centred on the page.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "copy/train/001",
+      "image": "images/source_removed_002/answer.png",
+      "png_sha256": "6a46d707663deb7e3976c785dea07d77207c1dc35d6f2c44cd83f09574d5bf58",
+      "actual_complete_page_inspected": true,
+      "finding": "English line with a duplicated letter in the first word and added final punctuation; unchanged source pixels retained.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "copy/validation/001",
+      "image": "images/source_removed_003/answer.png",
+      "png_sha256": "474c4766a817cd3df610454be2b02d3ef5f89c738b8eb5d72d6f7d7f1df041d2",
+      "actual_complete_page_inspected": true,
+      "finding": "English line with duplicated or altered letters in the requested words; original misspellings retained.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "replay",
+      "id": "TRAIN_3802_QUERY_0",
+      "image": "images/adapted_replay/answer.png",
+      "png_sha256": "dac97fd551b89f84ae94161f37e3959c78980aef6a0c7f2bacc350f2a1321561",
+      "actual_complete_page_inspected": true,
+      "finding": "Only two incorrect Chinese-like forms at upper left; exact full-reference execution replay.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_0",
+      "image": "images/adapted_removed_000/answer.png",
+      "png_sha256": "55a5af0c3ad2ce97dd77e34d545d88ad60017dc417b274c082d120f2dcff2b9e",
+      "actual_complete_page_inspected": true,
+      "finding": "Short malformed Chinese-like fragment at upper left.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_1",
+      "image": "images/adapted_removed_001/answer.png",
+      "png_sha256": "528b87ca0fcdd42e769621617238bff52e5c27cbfa258bf08816334456f54f8f",
+      "actual_complete_page_inspected": true,
+      "finding": "Small malformed Chinese-like line at upper left; most of the complete page is blank.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "copy/train/001",
+      "image": "images/adapted_removed_002/answer.png",
+      "png_sha256": "becb09dcf9af38c739cea877967443ec6e59bedbd382dabcc1b6ca16994244d6",
+      "actual_complete_page_inspected": true,
+      "finding": "Very small misspelled English-like line at upper left.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "copy/validation/001",
+      "image": "images/adapted_removed_003/answer.png",
+      "png_sha256": "80da152743998b1ea968b5258cdc3fd00d2c4d5562528d9361edfb6225bf89db",
+      "actual_complete_page_inspected": true,
+      "finding": "Centred English-like line with duplicated or altered letters in several words.",
+      "manual_transcript": null,
+      "quantitative_manual_accuracy_assigned": false
+    }
+  ],
+  "supplied_answer_text": true,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

@@ -1,0 +1,162 @@
+{
+  "auditor_sha256": "276d921a90b4f495715fde99f0944df5cf89b4d5230d34cd1f973d9b38ad978a",
+  "source_commit": "a6dfdda0b85ffc459ec72d7cea7eb4be4f50640c",
+  "preparation_sha256": "c7597dc464b280febd8315f83c57ad34affbda9bee9038c482738954730bf1f0",
+  "execution_report_sha256": "2ca0ea9e872963fc77713086437a960a3197513317d596285c5b42aa660c0c16",
+  "assessment_sha256": "8be1db1c6d68a42ed5663e5dedeefd9f4e92e74c437da1c800de6c436e2da4fa",
+  "actual_new_generations": 10,
+  "actual_removed_reference_generations": 8,
+  "both_full_reference_replays_bit_exact": true,
+  "all8_reader_comparisons_bit_exact": true,
+  "both_first_step_nonreference_and_before_reference_tensors_bit_exact": true,
+  "actual_removed_reference_calls": 400,
+  "actual_preserved_reference_calls": 100,
+  "all10_original_PNGs_tensor_authenticated": true,
+  "source_bindings_unchanged": true,
+  "reference_OCR_exact": 4,
+  "reference_cases": 4,
+  "summary": {
+    "source": {
+      "cases": 4,
+      "full_reference_exact": 1,
+      "removed_reference_exact": 0,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "full_reference_exact": 0,
+          "removed_reference_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "full_reference_exact": 1,
+          "removed_reference_exact": 0
+        }
+      }
+    },
+    "adapted": {
+      "cases": 4,
+      "full_reference_exact": 0,
+      "removed_reference_exact": 0,
+      "per_language": {
+        "zh": {
+          "cases": 2,
+          "full_reference_exact": 0,
+          "removed_reference_exact": 0
+        },
+        "en": {
+          "cases": 2,
+          "full_reference_exact": 0,
+          "removed_reference_exact": 0
+        }
+      }
+    }
+  },
+  "images": [
+    {
+      "arm": "source",
+      "kind": "replay",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "source_replay/answer.png",
+      "png_sha256": "9b5b6c10b314d33e05cd44396367a7c2fb231f6e0e09760e7fd191787ee39afa",
+      "actual_tensors_sha256": "3ede8e7dabb5bfec1d1120c73eaf3a8625acef5b2c67d292de5f0a5730d9a435",
+      "intervention_tensors_sha256": "addda31bbf66fb5a639d3b15ef642acb8fc82dfadccd74b90125b1882c2bf793",
+      "ocr_exact": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "source_removed_000/answer.png",
+      "png_sha256": "c71e5ef07245d413ea40e720702b75f7e033d907824a2037d9abd34275566f7c",
+      "actual_tensors_sha256": "ddadd88c0d963deed04fe798b614ee0efa7030ccef3e138e01c549ae379d2bde",
+      "intervention_tensors_sha256": "b6c7c8e93424d08df310f6dbdcf4624b614aed5aa240e49a401e02976f762690",
+      "ocr_exact": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "source_removed_001/answer.png",
+      "png_sha256": "f3c2f1b8d96201bfb331cf4736330cff981c4e81e534dcf9c5e6a93149125668",
+      "actual_tensors_sha256": "0edecec5adcf84b3f6addd4915f4b19e60f08a3100169a8b6cd342087b7c9b27",
+      "intervention_tensors_sha256": "02dfe811aff5b44240eb8de2135c470a4e2dc8bed7bc29eb7795f93594415035",
+      "ocr_exact": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "copy/train/001",
+      "path": "source_removed_002/answer.png",
+      "png_sha256": "6a46d707663deb7e3976c785dea07d77207c1dc35d6f2c44cd83f09574d5bf58",
+      "actual_tensors_sha256": "79b145f3733d4d1064ed8ee1d9ba5bbe5360f9ca4d13907a9e73e953fc3de186",
+      "intervention_tensors_sha256": "371451ca7ee9741ad07db4c2d36e070838ab4f7d7ee7baf194fd3c5686e5dfd0",
+      "ocr_exact": false
+    },
+    {
+      "arm": "source",
+      "kind": "reference_removed",
+      "id": "copy/validation/001",
+      "path": "source_removed_003/answer.png",
+      "png_sha256": "474c4766a817cd3df610454be2b02d3ef5f89c738b8eb5d72d6f7d7f1df041d2",
+      "actual_tensors_sha256": "28dd10eb798a3306dab6a668cdb485bcf3e91aa0b8fb164728e63c05ad7e7ecd",
+      "intervention_tensors_sha256": "be786b743004dfa4e905d5b4073ee5f9ec41c7a7a3a2aa5d6e6c523d6d323b9f",
+      "ocr_exact": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "replay",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "adapted_replay/answer.png",
+      "png_sha256": "dac97fd551b89f84ae94161f37e3959c78980aef6a0c7f2bacc350f2a1321561",
+      "actual_tensors_sha256": "914523ab9aebd1ce85de1f1e4cc93d755bb39a75dd8df27571910478d31c990d",
+      "intervention_tensors_sha256": "442ba683f3c7410294e5f2f229187ce5da7bacdc35c9f4560ec87133e059d5c5",
+      "ocr_exact": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "adapted_removed_000/answer.png",
+      "png_sha256": "55a5af0c3ad2ce97dd77e34d545d88ad60017dc417b274c082d120f2dcff2b9e",
+      "actual_tensors_sha256": "04fdf86a80151b769c1e16d237aeed3f09d3e3900ca07c2e0b3e5077e0285cee",
+      "intervention_tensors_sha256": "828619f1966e57ca84f69dc25e94852500b4a5aeec01f9e8cfb1e8529a0e3197",
+      "ocr_exact": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "adapted_removed_001/answer.png",
+      "png_sha256": "528b87ca0fcdd42e769621617238bff52e5c27cbfa258bf08816334456f54f8f",
+      "actual_tensors_sha256": "17e1af9ad8ee996c0191e22410bd61de3fa837e8bc1e25e49388e9e8c26999f7",
+      "intervention_tensors_sha256": "d92d3c9cd27f4514e5a75566262f1df54e29a71affed395144004e77af8be393",
+      "ocr_exact": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "copy/train/001",
+      "path": "adapted_removed_002/answer.png",
+      "png_sha256": "becb09dcf9af38c739cea877967443ec6e59bedbd382dabcc1b6ca16994244d6",
+      "actual_tensors_sha256": "e8d07ac29a2c9ba49f1766bbfc5644e3a968f9090802a7346e41bcb624849aaf",
+      "intervention_tensors_sha256": "d26724f265dbb4a7a283f110a6a8e68eb5a820c6bc6c70fb2ffb3a01755d8a7f",
+      "ocr_exact": false
+    },
+    {
+      "arm": "adapted",
+      "kind": "reference_removed",
+      "id": "copy/validation/001",
+      "path": "adapted_removed_003/answer.png",
+      "png_sha256": "80da152743998b1ea968b5258cdc3fd00d2c4d5562528d9361edfb6225bf89db",
+      "actual_tensors_sha256": "7129872898211f6591c1b3bf78ae56716c528b3211c12f6ac9435ec1c6091247",
+      "intervention_tensors_sha256": "5929d80da16b499ed0e44f04686eb7f6e44b84a453efbf6980529ab6715ce0ed",
+      "ocr_exact": false
+    }
+  ],
+  "model_calls_added_by_audit": 0,
+  "optimizer_updates": 0,
+  "raw_image_review_completed": false,
+  "supplied_answer_text": true,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

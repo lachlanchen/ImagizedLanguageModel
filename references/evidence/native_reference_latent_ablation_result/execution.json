@@ -1,0 +1,79 @@
+{
+  "preparation_sha256": "c7597dc464b280febd8315f83c57ad34affbda9bee9038c482738954730bf1f0",
+  "outputs_sha256": "571199f286353a1f596dd27496c9841cff333b3ed565824aebbea1f884797487",
+  "complete_generations": 10,
+  "reference_removed_draws": 8,
+  "execution_replays": 2,
+  "denoiser_calls": 500,
+  "denoiser_batch_elements": 1000,
+  "removed_reference_calls": 400,
+  "preserved_reference_calls": 100,
+  "all_reader_inputs_bit_exact_to_counterparts": true,
+  "first_case_first_step_nonreference_tensors_bit_exact": true,
+  "loader": {
+    "loader": "pinned components, strict keys; same native constructor and sampling methods",
+    "loading_info": {
+      "transformer": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vae": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vlm": {
+        "missing_keys": [
+          "lm_head.weight"
+        ],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      }
+    },
+    "source_position_version": "4.56.1",
+    "source_position_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+    "compatibility_aliases": [
+      "lmm.visual -> lmm.model.visual",
+      "lmm.language_model -> lmm.model.language_model"
+    ],
+    "compatibility_vision_return": "actual merged pooler_output tensor; no change to encoder computation",
+    "attention_implementation": "sdpa",
+    "CPU_offload": false,
+    "parameters": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_word_weights_same_object": false,
+    "unused_output_head_called": false,
+    "deployed_vocabulary_removed": false
+  },
+  "runtime_parameters": {
+    "components": {
+      "transformer": 2275899584,
+      "vae": 83819683,
+      "lmm": 4065787904,
+      "connector_module": 437102460
+    },
+    "total": 6862609631,
+    "persistent_and_nonpersistent_buffer_elements": 226492564
+  },
+  "elapsed_seconds": 336.8871251642704,
+  "peak_allocated_vram_GiB": 16.428647994995117,
+  "original_queries_unchanged": true,
+  "supplied_answer_text": true,
+  "tokenizer_and_word_table_retained": true,
+  "target_PNG_used_by_generator": false,
+  "optimizer_updates": 0,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
