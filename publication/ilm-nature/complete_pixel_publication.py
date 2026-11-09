@@ -169,6 +169,9 @@ def redline(stage, source, stem):
     text = result.stdout.replace(r'\begin{document}', r'\begin{document}' + '\n' + notice, 1)
     marked = False
     if source == 'manuscript_review.tex':
+        text, count = re.subn(r'(\\begin\{thebibliography\}\{[^}]+\})',
+            lambda match: match[0] + '\n' + r'\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}', text)
+        require(count == 1, 'unique redline bibliography required for compact spacing')
         token = r'\newcommand{\PaperSummary}'
         match = re.search(r'(?m)^' + re.escape(token), text)
         require(match is not None, 'active abstract missing from redline')

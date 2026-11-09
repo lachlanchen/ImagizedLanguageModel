@@ -166,3 +166,8 @@ latest aliases and verifying local copy hashes. Do not assert cloud propagation.
 Commit and push the completed revision unit. The broader ILM goal remains active
 unless useful independent language generation and all requested deliverables
 are separately proven.
+
+The change-marked review copy may use compact bibliography item spacing to
+prevent an isolated final URL fragment on a separate page. This is a repeatable
+redline-only formatting repair in the builder. Bibliography content and the
+clean manuscript sources remain unchanged.
