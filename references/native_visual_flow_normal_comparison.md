@@ -41,13 +41,12 @@ development questions have been reused across experiments.
 | Question 1 | [Input](evidence/native_visual_flow_initial_normal/images/032_input.png) | [Initial](evidence/native_visual_flow_initial_normal/images/032_answer.png) | [Final](evidence/native_visual_flow_final_normal/images/032_answer.png) | [Reference](evidence/native_visual_flow_initial_normal/images/032_reference.png) |
 | Question 2 | [Input](evidence/native_visual_flow_initial_normal/images/033_input.png) | [Initial](evidence/native_visual_flow_initial_normal/images/033_answer.png) | [Final](evidence/native_visual_flow_final_normal/images/033_answer.png) | [Reference](evidence/native_visual_flow_initial_normal/images/033_reference.png) |
 
-The complete erasure/copying comparison remains in progress. This completed
-normal cohort supplies no causal explanation for the failure. The already
-registered [conditional-field probe](native_flow_condition_probe_protocol.md)
-and [positive-branch sampling diagnostic](native_flow_positive_sampling_protocol.md)
-remain separate pending observations. Useful language learning from glyphs,
-historical-script semantics and efficiency at matched answer quality remain
-unverified.
+The [complete erasure/copying comparison and both diagnostics](native_visual_flow_complete_result.md)
+are now available. The field diagnostic measures a small conditional signal;
+the guidance-1 diagnostic still produces no correct answers. These observations
+remain separate from this normal-cohort comparison and supply no unique causal
+explanation. Useful language learning from glyphs, historical-script semantics
+and efficiency at matched answer quality remain unverified.
 
 Reproduce the initial export with the unchanged audit used for the final arm:
 

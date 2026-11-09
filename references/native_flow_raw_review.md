@@ -62,5 +62,7 @@ embedded answer page has now been visually inspected. The
 [cohort result](native_visual_flow_normal_result.md) retains the complete
 input/answer/reference evidence and per-page inspection bindings. This review
 has source and OCR access and assigns no manual answer-accuracy score.
-The remaining source, erasure and copying cohorts still require their own
-complete assessment and raw review.
+The source, erasure and copying cohorts have subsequently completed their own
+assessment and raw review. The [combined inspection record](evidence/native_visual_flow_complete_result/raw_review.json)
+binds all 384 original pages, without assigning manual accuracy or correcting
+uncertain glyphs.

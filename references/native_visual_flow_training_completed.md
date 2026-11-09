@@ -2,10 +2,11 @@
 
 The fixed image-pair run completes all **1,536 optimizer updates** on one
 RTX 4090 D. Its final two monitored training answers remain incorrect.
-The separate complete initial/final assessment has started. Its first completed
+The separate complete initial/final assessment has finished. Its completed
 [final normal-question cohort](native_visual_flow_normal_result.md) gives
 0/32 seen and 0/32 held-out source-accepted OCR-exact answers. The complete
-source/final controls remain in progress.
+[source/final controls and diagnostics](native_visual_flow_complete_result.md)
+give no answering gain and a small exact-copying gain from 0/64 to 5/64.
 
 The [complete training evidence](evidence/native_visual_flow_training/README.md)
 retains every original fixed monitoring image, both complete input/reference
@@ -72,9 +73,9 @@ unique causal bottleneck or quantify unseen-question accuracy.
 
 The [complete assessment protocol](native_visual_flow_assessment_protocol.md)
 fixes 384 fresh generations across final/source normal questions, erased-input
-controls and copying. Its input-only generator has started from the exported
-final checkpoint. Final/source counts, question dependence and copying
-retention must wait for the complete authenticated cohorts and raw review.
+controls and copying. All 384 original pages are now authenticated and inspected.
+Final/source counts, question dependence, copying retention and the two
+registered diagnostics are [reported together](native_visual_flow_complete_result.md).
 Optimization, finite gradients and glyph-like appearance cannot qualify the
 independent ILM objective.
 

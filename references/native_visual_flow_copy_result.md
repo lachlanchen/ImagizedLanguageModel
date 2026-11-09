@@ -4,8 +4,10 @@ The final checkpoint reproduces 2 of 32 seen strings and 3 of 32 held-out
 strings under the unchanged OCR exact-match rule. This completed copying
 cohort tests basic writing fidelity. Its random character and word sequences
 do not test sentence understanding, grammar or meaningful question answering.
-The initial/source comparison is still running, so these counts do not
-establish a training gain or identify the cause of failure.
+The subsequently completed [initial/source comparison](native_visual_flow_complete_result.md)
+gives zero exact copies in both splits before adaptation. The five exact final
+copies establish a small gain on this fixed task, while reliable writing and
+question answering remain unqualified.
 
 | Copying task | Seen outputs | Held-out outputs | Seen clean references | Held-out clean references |
 | --- | ---: | ---: | ---: | ---: |
@@ -53,7 +55,8 @@ The [complete assessment](native_visual_flow_assessment_protocol.md) retains
 its original initial/final, question-erased, passage-erased and copying
 comparisons. The final normal-question result is separately
 [reported with all original pages](native_visual_flow_normal_result.md).
-The registered field and positive-branch sampling diagnostics remain pending.
+The registered field and positive-branch sampling diagnostics have completed
+and are [reported separately](native_visual_flow_complete_result.md).
 The current checkpoint has not demonstrated useful language learning from
 glyphs, and the copying result does not justify a general ILM claim.
 

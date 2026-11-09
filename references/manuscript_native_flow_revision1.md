@@ -131,3 +131,39 @@ CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_native_flow_public
   --source artifacts/native_qa_publication_stage_v1 \
   --output artifacts/native_flow_publication_stage_v2
 ```
+
+## Complete assessment and diagnostic evidence is now available
+
+The [complete result](native_visual_flow_complete_result.md) supersedes the
+pending-control wording for the next staging revision. All 384 original
+assessment pages have completed numerical authentication and actual raw
+inspection. Both arms score zero on seen/held-out QA and both erasure cohorts;
+copying changes from 0/32 seen and held out to 2/32 seen and 3/32 held out.
+Five answer/dependence gates fail; copying retention alone passes. The exact
+offline assessor name-collision correction and both execution hashes are
+disclosed separately, with no regenerated assessment image or changed gate.
+
+The 144-forward field diagnostic has small mean normalized alignment: seen
+0.006717 to 0.010039 and held-out 0.003767 to 0.009684, four pairs per split.
+It is unbounded, not accuracy, and does not prove semantic learning. The
+guidance-1 diagnostic has zero correct answers on all four fixed cases per
+arm; both guidance-4 replays match exactly. All ten diagnostic pages were
+inspected. The eight existing preflight codec reconstructions pass exact OCR
+on four seen targets; they are target reconstructions, not generated answers.
+
+The next bounded preparation may update the existing S31 count table to
+show matched initial/final outcomes, and extend Results/Note53 with the
+complete erasure, field, guidance and codec results. Preserve the actual model
+diagram and original evidence images. Keep small diagnostics and codec
+reconstruction clearly separate from autonomous answer accuracy. A compact
+additional editable control figure is allowed only if those distinctions
+cannot remain readable in the existing slide; preserve all prior package
+parts except the explicitly revised S31 and its notes. Use a fresh ignored
+stage and receipt, then implement the still-required successor renderer.
+
+All original neural/coordinator processes have now ended and GPU0 is released.
+Rendering is admissible under the existing resource lock after rechecking
+current ownership. Inspect the revised figures and all changed PDF pages,
+build matched article/review/supplement/redlines, and only then update active
+files and verified Nutstore copies. This plan addition does not claim those
+rendering, TeX promotion or synchronization steps have been performed.

@@ -5,8 +5,10 @@ zero OCR-exact answers on both the 32 seen questions and the 32 article-disjoint
 development questions. Matching against every source-provided acceptable answer
 leaves both counts at zero. The completed
 [matched initial/source normal comparison](native_visual_flow_normal_comparison.md)
-also gives zero exact answers in both arms. The complete erasure/copying
-comparison remains in progress, and a causal explanation is not established.
+also gives zero exact answers in both arms. The
+[complete erasure/copying comparison and diagnostics](native_visual_flow_complete_result.md)
+now preserve all 384 assessed and inspected pages. A unique causal explanation
+is not established.
 
 The completed [copying cohort](native_visual_flow_copy_result.md) also fails
 to establish reliable writing: 2/32 seen strings and 3/32 held-out strings
