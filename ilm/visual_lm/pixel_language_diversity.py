@@ -14,6 +14,15 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def state_digest(state):
+    """Canonical bytes of owning tensors, including scalar buffers."""
+    value = hashlib.sha256()
+    for name, tensor in sorted(state.items()):
+        value.update(name.encode())
+        value.update(tensor.detach().cpu().contiguous().reshape(-1).view(torch.uint8).numpy().tobytes())
+    return value.hexdigest()
+
+
 class PixelLanguageCorpus:
     def __init__(self, root):
         self.root = Path(root)

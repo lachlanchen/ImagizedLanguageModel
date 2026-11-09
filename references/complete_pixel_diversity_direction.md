@@ -95,17 +95,22 @@ retain these implementation checks. They do not measure language quality.
 The main run starts freshly from the declared initial state and must replay
 the qualification's first two updates exactly, after initial whole-cohort loss
 measurement and autonomous image generation. Its unseen-answer results remain
-pending. Run preparation and the two GPU stages separately:
+pending. The first execution stopped before its initial assessment or any
+training update because state fingerprinting rejected a scalar buffer. The
+corrected fingerprint now matches an independent NumPy byte hash of all 286
+actual initial tensors. Preserve that failed execution and use a new prepared
+directory with newly qualified source. Run preparation and the two GPU stages
+separately:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/train_pixel_language_diversity.py \
-  --stage prepare --output artifacts/pixel_language_diversity_training_v1
+  --stage prepare --output artifacts/pixel_language_diversity_training_v2
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
   python scripts/train_pixel_language_diversity.py --stage qualify \
-  --output artifacts/pixel_language_diversity_training_v1
+  --output artifacts/pixel_language_diversity_training_v2
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
   python scripts/train_pixel_language_diversity.py --stage run \
-  --output artifacts/pixel_language_diversity_training_v1
+  --output artifacts/pixel_language_diversity_training_v2
 ```
 
 Preparation requires a new directory and committed source. A completed
@@ -116,5 +121,5 @@ After completion, run the independent CPU audit:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/audit_pixel_language_diversity.py \
-  --output artifacts/pixel_language_diversity_training_v1
+  --output artifacts/pixel_language_diversity_training_v2
 ```

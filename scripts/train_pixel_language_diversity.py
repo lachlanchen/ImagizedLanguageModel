@@ -16,7 +16,7 @@ import subprocess
 import time
 
 from ilm.image_edit.baseline import ROOT, gpu_zero, save_json, sha
-from ilm.visual_lm.pixel_language_diversity import PixelLanguageCorpus, WindowSampler, native_batch
+from ilm.visual_lm.pixel_language_diversity import PixelLanguageCorpus, WindowSampler, native_batch, state_digest
 from ilm.visual_lm.complete_pixel_runtime import RUNTIME_CORE
 from scripts.preflight_native_pixel_actor import CONTROLS, CODEC, prefix_identity, save_output
 from scripts.train_conditional_pixel_density import atomic_tensor, equal_tree, require
@@ -246,11 +246,7 @@ class Learner:
         atomic_tensor(latest, self.snapshot(step, complete=complete))
 
     def model_digest(self):
-        digest = hashlib.sha256()
-        for name, value in sorted(self.writer.trainable_state_dict().items()):
-            digest.update(name.encode())
-            digest.update(value.contiguous().view(self.torch.uint8).numpy().tobytes())
-        return digest.hexdigest()
+        return state_digest(self.writer.trainable_state_dict())
 
     def assess(self, step, *, resume):
         self.actor.eval()

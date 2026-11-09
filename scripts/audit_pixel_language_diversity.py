@@ -52,6 +52,15 @@ def audit(output):
     checkpoint = torch.load(execution/'checkpoint_latest.pt', map_location='cpu', weights_only=True)
     require(checkpoint['training_complete'] and checkpoint['update'] == report['updates'] == meta['maximum_updates'], 'fixed update budget not completed')
     require(checkpoint['preparation_sha256'] == sha(output/'preparation.json'), 'checkpoint source identity differs')
+    model_hashes = {}
+    initial_path = next(root/name for name, digest in meta['bound_sha256'].items() if digest == meta['initial_state_sha256'])
+    for step, state in ((0, torch.load(initial_path, map_location='cpu', weights_only=True)),
+                        (meta['maximum_updates'], checkpoint['model'])):
+        digest = hashlib.sha256()
+        for name, tensor in sorted(state.items()):
+            digest.update(name.encode())
+            digest.update(tensor.numpy().tobytes())
+        model_hashes[step] = digest.hexdigest()
     history = rows(execution/'history.jsonl')
     require(len(history) == report['updates'] and all(r['update'] == i+1 for i, r in enumerate(history)), 'retained learning history differs')
     # Independent regeneration of the declared schedule, without the learner sampler.
@@ -82,6 +91,8 @@ def audit(output):
     for step in meta['assessment_updates']:
         parent = execution/f'assessment_{step:05}'
         producer = load(parent/'report.json')
+        if step in model_hashes:
+            require(producer['model_sha256'] == model_hashes[step], 'assessment fingerprint differs from actual owning model tensors')
         monitor = load(parent/'teacher_history.json')
         require(monitor['questions'] == 512 and monitor['model_sha256'] == producer['model_sha256'], 'correct-history assessment state differs')
         jobs = [(False, i, 'normal') for i in range(512 if step == meta['maximum_updates'] else 64)]
