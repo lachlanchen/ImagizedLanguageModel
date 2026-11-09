@@ -5,6 +5,14 @@ executed training protocol. The goal remains independent image-question to
 image-answer language generation, including forms outside a language font
 inventory. None of the component controls qualifies that goal.
 
+Follow-up: the [registered direct-pixel head probe](conditional_pixel_density_result.md)
+has now completed. Its 3.453M-parameter head learns the supplied-prefix image
+objective but gives no exact Chinese or English development first blocks;
+Chinese training is also 0/256 exact. The proposed combination below was
+untested when this decision was written. Its bounded cached-state version is
+now tested and fails the component criteria. That outcome does not justify
+promoting the head or launching a larger full-actor run under this recipe.
+
 ## What the existing evidence already establishes
 
 The [reference-removal control](native_reference_latent_ablation_result.md)
