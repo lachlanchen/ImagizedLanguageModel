@@ -14,8 +14,9 @@ from scripts.train_conditional_pixel_density import atomic_tensor,require
 
 CAPTURE=ROOT/'artifacts/native_pixel_numerics_v1'
 FILES=('scripts/validate_accurate_pixel_density.py','ilm/visual_lm/accurate_pixel_density.py',
+    'ilm/visual_lm/fp64_pixel_density.py',
     'ilm/visual_lm/conditional_pixel_density.py','ilm/visual_lm/pixel_density_numerics.py',
-    'references/accurate_pixel_density_protocol.md')
+    'references/accurate_pixel_density_protocol.md','references/fp64_pixel_density_protocol.md')
 
 
 def load(path):return json.loads(Path(path).read_text())
@@ -29,7 +30,7 @@ def identity():
     return code
 
 
-def prepare(output):
+def prepare(output, *, arithmetic='normalization'):
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','hide CUDA for preparation')
     code=identity();report=load(CAPTURE/'execution/report.json');analysis=load(CAPTURE/'analysis.json')
     require(load(CAPTURE/'execution/status.json')['phase']=='completed','complete numerical capture required')
@@ -44,6 +45,7 @@ def prepare(output):
     output.mkdir(parents=True,exist_ok=False)
     save_json(output/'preparation.json',dict(code_sha256=code,bound_sha256=bound,
         source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        arithmetic=arithmetic,
         maximum_seconds=120,maximum_allocated_vram_gib=2.,unchanged_absolute_tolerance=1e-4,
         condition_examples=2,physical_positions_per_example=256,optimizer_updates=0,
         language_quality_claim=False))
@@ -62,6 +64,7 @@ def run(output):
             import torch
             from ilm.visual_lm.conditional_pixel_density import ConditionalPixelDensity,PixelDensityConfig
             from ilm.visual_lm.accurate_pixel_density import AccurateConditionalPixelDensity
+            from ilm.visual_lm.fp64_pixel_density import FP64ConditionalPixelDensity
             from ilm.visual_lm.pixel_density_numerics import trace_density,differences
             torch.set_num_threads(4);torch.use_deterministic_algorithms(True)
             torch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False
@@ -72,7 +75,8 @@ def run(output):
             captured=torch.load(CAPTURE/'execution/GPU_trace.pt',map_location='cpu',weights_only=True)
             config=PixelDensityConfig(**payload['config'])
             baseline=ConditionalPixelDensity(torch.zeros(config.condition_width),torch.ones(config.condition_width),config).to(device)
-            candidate=AccurateConditionalPixelDensity(torch.zeros(config.condition_width),torch.ones(config.condition_width),config).to(device)
+            factory={'normalization':AccurateConditionalPixelDensity,'full':FP64ConditionalPixelDensity}[meta['arithmetic']]
+            candidate=factory(torch.zeros(config.condition_width),torch.ones(config.condition_width),config).to(device)
             baseline.load_state_dict(payload['model']);candidate.load_state_dict(payload['model'])
             require(all(torch.equal(baseline.state_dict()[n],v) for n,v in candidate.state_dict().items()),'parameter parity failed')
             x,y=payload['states'].to(device),payload['targets'].to(device)
@@ -112,7 +116,7 @@ def run(output):
             result=dict(checks=checks,qualified_numerical_repair=all(checks.values()),comparisons=comparisons,
                 timings=timing,peak_allocated_vram_gib=peak,elapsed_seconds=time.perf_counter()-started,
                 candidate_trace_sha256=sha(execution/'candidate_trace.pt'),baseline_trace_sha256=sha(execution/'baseline_trace.pt'),
-                parameters=sum(p.numel() for p in candidate.parameters()),normalization_accumulation='float64',
+                parameters=sum(p.numel() for p in candidate.parameters()),arithmetic=meta['arithmetic'],normalization_accumulation='float64',
                 parameter_storage='float32',maximum_absolute_tolerance=1e-4,optimizer_updates=0,
                 complete_language_answers=0,language_quality_claim=False)
             save_json(execution/'report.json',result)
@@ -129,4 +133,7 @@ def run(output):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--stage',choices=('prepare','run'),required=True)
-    p.add_argument('--output',type=Path,required=True);a=p.parse_args();globals()[a.stage](a.output.resolve())
+    p.add_argument('--arithmetic',choices=('normalization','full'),default='normalization')
+    p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    if a.stage=='prepare':prepare(a.output.resolve(),arithmetic=a.arithmetic)
+    else:run(a.output.resolve())
