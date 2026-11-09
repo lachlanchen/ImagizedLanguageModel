@@ -87,3 +87,9 @@ reader on actual input PNGs, learn from complete answer-image histories, stop
 appropriately and answer held-out prompts. Fitted first blocks cannot replace
 those requirements. Historical forms, novel writing styles and general
 independent language generation remain unqualified.
+
+The current [supplement](../publication/ilm-nature/supplementary_information.pdf)
+reports the architecture, likelihood, correct-prefix diagnosis and matched
+shorter/longer fits in Note 56 (page 73). Figure S33 (page 74) shows the
+editable method diagram, matched full-training NLL and fixed training/
+development images. The main Results paragraph is on article page 14.

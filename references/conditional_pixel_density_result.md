@@ -96,5 +96,9 @@ The result rejects this fixed recipe as a qualified writing component. It
 does not establish an impossibility theorem for image-based language
 learning or uniquely identify the remaining repair. A sharper image
 likelihood alone has not solved conditional language writing. The general
-ILM objective remains unachieved, and this result has not yet been promoted
-into the manuscript or used to replace its existing figures.
+ILM objective remains unachieved. This shorter fit and the subsequent
+[longer optimization control](pixel_density_long_fit_result.md) are now
+reported together in Supplementary Note 56 and Figure S33 of the current
+manuscript. Longer optimization fits all 512 training blocks exactly while
+retaining zero exact normal development blocks; it does not change this
+shorter execution's failed criteria.
