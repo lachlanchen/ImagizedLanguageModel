@@ -1,0 +1,92 @@
+{
+  "stage": "calibrate",
+  "engine": {
+    "binary_sha256": "9f831cab7525c3dab04af41bda35182af7ea1df9dceeaaa2f3bf207ac45c06a5",
+    "version": "tesseract 5.3.4\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 8d (libjpeg-turbo 2.1.5) : libpng 1.6.43 : libtiff 4.5.1 : zlib 1.3 : libwebp 1.3.2 : libopenjp2 2.5.0\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.7.2 zlib/1.3 liblzma/5.4.5 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.5\n Found libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10\n",
+    "languages": [
+      "chi_sim",
+      "eng"
+    ],
+    "psm": 6,
+    "traineddata_sha256": {
+      "chi_sim": "a5fcb6f0db1e1d6d8522f39db4e848f05984669172e584e8d76b6b3141e1f730",
+      "eng": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    }
+  },
+  "implementation": {
+    "scripts/score_paired_writing.py": "f7c737ffc11c1bb82861fa473b5baca1207cc8b1bb6c74bfba7aa2a10aee15d5",
+    "scripts/evaluate_image_edit_baseline.py": "99790506c37a4a2f2a6aecf4b4e36d63e2957c00badb50e7ca8d2081c932f2b9"
+  },
+  "manifest_sha256": "5b06bde446c2b787ccb78a6fbe87ad40eb8038164d79ff59ab895b661d0a6b9c",
+  "cohort": [
+    "copy/train/000",
+    "copy/train/001",
+    "copy/validation/000",
+    "copy/validation/001"
+  ],
+  "rows": [
+    {
+      "id": "copy/train/000",
+      "split": "train",
+      "language": "zh",
+      "expected": "花多地地山",
+      "raw_transcript": "花多地地山\n",
+      "normalized": "花多地地山",
+      "ocr_stderr": "",
+      "png_sha256": "634994953d3dbfd6325a44eda07c747b55600a7fef6310321e1b863b67bca145",
+      "ocr_exact": true
+    },
+    {
+      "id": "copy/train/001",
+      "split": "train",
+      "language": "en",
+      "expected": "mountain bright blue cloud",
+      "raw_transcript": "mountain bright blue cloud\n",
+      "normalized": "mountain bright blue cloud",
+      "ocr_stderr": "",
+      "png_sha256": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6",
+      "ocr_exact": true
+    },
+    {
+      "id": "copy/validation/000",
+      "split": "validation",
+      "language": "zh",
+      "expected": "树田红星风",
+      "raw_transcript": "树田红星风\n",
+      "normalized": "树田红星风",
+      "ocr_stderr": "",
+      "png_sha256": "d3218e9e4fe9bc3efb6e67d69b5f4e5c5c04cbc8ff5d025c7fffce6d04b3e7b3",
+      "ocr_exact": true
+    },
+    {
+      "id": "copy/validation/001",
+      "split": "validation",
+      "language": "en",
+      "expected": "garden silver open blue",
+      "raw_transcript": "garden silver open blue\n",
+      "normalized": "garden silver open blue",
+      "ocr_stderr": "",
+      "png_sha256": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637",
+      "ocr_exact": true
+    }
+  ],
+  "summary": {
+    "train": {
+      "cases": 2,
+      "ocr_exact": 2
+    },
+    "validation": {
+      "cases": 2,
+      "ocr_exact": 2
+    }
+  },
+  "complete_cohort": true,
+  "generated_images_opened": false,
+  "neural_generator_loaded": false,
+  "reference_calibration_sha256": null,
+  "reference_calibration_summary": null,
+  "normalization": "NFC; English whitespace collapsed; Chinese whitespace removed; case and punctuation retained",
+  "limitations": "Exploratory OCR observations; generated typography and uncertain readings require raw-image review",
+  "language_quality_qualified": false,
+  "general_ilm_goal_complete": false
+}

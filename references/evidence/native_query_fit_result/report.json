@@ -1,0 +1,810 @@
+{
+  "auditor_sha256": "0277b66d9247c88c8590d408f668351886d518be1000cb99636db18ca536c7f9",
+  "preparation_sha256": "e68a356385bb11babe34de5283eb6a1ffb4c6aeceac847ed9bd9f1efbc91e7ea",
+  "source_execution_report_sha256": "e385916b350a2883f8e5bf05c4f65b872ef6ac0329179809ecb5ad25bc108cee",
+  "source_scoring_report_sha256": "7bcae8e0ab47712f8635adcb1078e4b0893cc3cc7b0c80143c0b64ddb0c7ef20",
+  "actual_updates": 128,
+  "registered_and_actual_schedule_match": true,
+  "checkpoints": [
+    {
+      "step": 32,
+      "sha256": "5a244c2dd3b10fac809f6a989ec15d618cc6e54edc317944dc17502f10cd1c1d",
+      "optimizer_step": 32,
+      "changed_FP32_coordinates": 262144,
+      "changed_BF16_coordinates": 243409,
+      "maximum_absolute_query_change": 0.001265544444322586,
+      "all_saved_optimizer_tensors_finite": true
+    },
+    {
+      "step": 64,
+      "sha256": "a5b40cf0d3d5bd76e4b087867f2d4e8f4236e039a095a7b8f32a5dc71aef867f",
+      "optimizer_step": 64,
+      "changed_FP32_coordinates": 262144,
+      "changed_BF16_coordinates": 247707,
+      "maximum_absolute_query_change": 0.0022529466077685356,
+      "all_saved_optimizer_tensors_finite": true
+    },
+    {
+      "step": 96,
+      "sha256": "cf4137679de48a4e30e46df29d54d6b28869bb052c7c51af65f00944a91d782e",
+      "optimizer_step": 96,
+      "changed_FP32_coordinates": 262144,
+      "changed_BF16_coordinates": 251315,
+      "maximum_absolute_query_change": 0.0031530819833278656,
+      "all_saved_optimizer_tensors_finite": true
+    },
+    {
+      "step": 128,
+      "sha256": "021b6eb76294d2b638b09671339ff5b2fec64bd3f1dd6064a1195b161e33c1a7",
+      "optimizer_step": 128,
+      "changed_FP32_coordinates": 262144,
+      "changed_BF16_coordinates": 251820,
+      "maximum_absolute_query_change": 0.004153560847043991,
+      "all_saved_optimizer_tensors_finite": true
+    }
+  ],
+  "independently_verified_saved_update_tensors": [
+    {
+      "step": 1,
+      "actual_tensor_file_sha256": "fda4d50f1c03bf54e32028728c98afa5b21cfa191d4e8bd939f04177c627340e",
+      "registered_grid_index": 0,
+      "producer_MSE": 0.003543323604390025,
+      "CPU_recomputed_MSE": 0.003543323604390025,
+      "allowed_absolute_MSE_difference": 3.543323604390025e-09,
+      "actual_nonzero_gradient_coordinates": 262116,
+      "full_noise_writer_input_exactly_noise": true,
+      "all_saved_tensors_finite": true
+    },
+    {
+      "step": 2,
+      "actual_tensor_file_sha256": "93d77589c82c8a36dd61dbb640c6f759162993cab3ccb236b949d1229e2898df",
+      "registered_grid_index": 0,
+      "producer_MSE": 0.022178594022989273,
+      "CPU_recomputed_MSE": 0.022178594022989273,
+      "allowed_absolute_MSE_difference": 2.217859402298927e-08,
+      "actual_nonzero_gradient_coordinates": 262107,
+      "full_noise_writer_input_exactly_noise": true,
+      "all_saved_tensors_finite": true
+    },
+    {
+      "step": 32,
+      "actual_tensor_file_sha256": "8f461df384bb0dec8d3befe97b2e2c4c748568aa0962a462a69e20b9dbe32c1e",
+      "registered_grid_index": 238,
+      "producer_MSE": 0.009488910436630249,
+      "CPU_recomputed_MSE": 0.009488909505307674,
+      "allowed_absolute_MSE_difference": 9.488910436630249e-09,
+      "actual_nonzero_gradient_coordinates": 262119,
+      "full_noise_writer_input_exactly_noise": false,
+      "all_saved_tensors_finite": true
+    },
+    {
+      "step": 64,
+      "actual_tensor_file_sha256": "6f6f0c0407459d97aa3ba92fead05164a02c344717b8fab0230eccaff58b8f00",
+      "registered_grid_index": 255,
+      "producer_MSE": 0.009867814369499683,
+      "CPU_recomputed_MSE": 0.009867813438177109,
+      "allowed_absolute_MSE_difference": 9.867814369499683e-09,
+      "actual_nonzero_gradient_coordinates": 262105,
+      "full_noise_writer_input_exactly_noise": false,
+      "all_saved_tensors_finite": true
+    },
+    {
+      "step": 96,
+      "actual_tensor_file_sha256": "8161d5cf3d455b42765fab6a444e2b7b97d510bd6119ba7363cd6b4d71befb83",
+      "registered_grid_index": 208,
+      "producer_MSE": 0.00933082215487957,
+      "CPU_recomputed_MSE": 0.00933082215487957,
+      "allowed_absolute_MSE_difference": 9.33082215487957e-09,
+      "actual_nonzero_gradient_coordinates": 262115,
+      "full_noise_writer_input_exactly_noise": false,
+      "all_saved_tensors_finite": true
+    },
+    {
+      "step": 128,
+      "actual_tensor_file_sha256": "bfa4f9ee6f11f448b23384f873af436cfff430d44fb859ccdbd23a2c02936beb",
+      "registered_grid_index": 762,
+      "producer_MSE": 0.0016905309166759253,
+      "CPU_recomputed_MSE": 0.0016905309166759253,
+      "allowed_absolute_MSE_difference": 1.6905309166759252e-09,
+      "actual_nonzero_gradient_coordinates": 262104,
+      "full_noise_writer_input_exactly_noise": false,
+      "all_saved_tensors_finite": true
+    }
+  ],
+  "matched_seen_endpoint_fields": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "before_MSE": 0.003543323604390025,
+      "after_MSE": 0.003429315984249115,
+      "actual_tensor_file_sha256": "d75275de3627fc598fe1701f2d9e9ba13a0dd7f8a8b77a3d82889b9d55b78e8d"
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "before_MSE": 0.022215809673070908,
+      "after_MSE": 0.019155893474817276,
+      "actual_tensor_file_sha256": "cacb8faa6c6598aa1e1965691f84f5f80b5ca95c152e97839842fa16ee8cddef"
+    }
+  ],
+  "matched_seen_field_alignment": {
+    "before": {
+      "normalized_alignment": 0.07401459643391607,
+      "loss_advantages": [
+        0.0007900818685858289,
+        0.0035803663859620798
+      ],
+      "target_field_MSE_distance": 0.029524232145547558,
+      "dot_product_alignment": 0.07401459643391609
+    },
+    "after": {
+      "normalized_alignment": 0.14664964603341352,
+      "loss_advantages": [
+        0.0019524636801996481,
+        0.006706972706906109
+      ],
+      "target_field_MSE_distance": 0.029524232145547558,
+      "dot_product_alignment": 0.14664964603341352
+    },
+    "cases": 2,
+    "passages": 1,
+    "split": "seen",
+    "unbounded_field_measure_not_accuracy": true
+  },
+  "cohorts": {
+    "initial_normal": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      }
+    },
+    "initial_copy": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      }
+    },
+    "final_normal": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      }
+    },
+    "final_copy": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      }
+    },
+    "final_new_noise": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 0,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 0
+      }
+    },
+    "final_question_erased": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 0,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 0
+      }
+    },
+    "final_passage_erased": {
+      "train": {
+        "cases": 2,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 2
+      },
+      "validation": {
+        "cases": 0,
+        "OCR_exact": 0,
+        "reference_OCR_exact": 0
+      }
+    }
+  },
+  "developmental_gates": {
+    "seen_fit": false,
+    "second_noise_seen_fit": false,
+    "held_pair": false,
+    "question_dependence": false,
+    "passage_dependence": false,
+    "copying_retention": true
+  },
+  "rows": [
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "RES\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_normal_00.png",
+      "PNG_sha256": "a264d3d08d08560c3a44c0a358d8da2e1d0bb6ab37b227d6bf7765cec2271608",
+      "actual_tensor_file_sha256": "6fe234e37590f7a7aa3c85c1e15b8f46104fbea82a8d46fec9f73c11aed9ba80",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bdf335bab487febf99cf4d186aa8927291a84ee8483a424c22a91a7736c47b6b"
+      },
+      "reference": "references/00.png",
+      "reference_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "KEE\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_normal_01.png",
+      "PNG_sha256": "33bd97e10e6a6d04815ecd3efa61487f97ab22dd292e301b64985d2028565ff6",
+      "actual_tensor_file_sha256": "91108f6fcb73ee68053526d3b185831462ec520fb8825d9b16c6bf534b75e02c",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "76411d78feac298f197e93c2e61c121e0e62dc44f3cc5143f080aceb06a8edf1"
+      },
+      "reference": "references/01.png",
+      "reference_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_2295_QUERY_0",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "印度西太平洋区",
+      "raw_OCR_transcript": "SU BAR Pa\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_normal_02.png",
+      "PNG_sha256": "94f470e3f4df3f11e8bfa6de70aef21182814b19d20582a1a257bada8bc766f2",
+      "actual_tensor_file_sha256": "2cd28cd4d3b7ddcde80ca70362ba0743f52168e92824521cf82b3ded9e35be3d",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "9baae51b9e8193c56f0394e9fe8ebe4c7523b36202b157287eeb0c3b05d06a68"
+      },
+      "reference": "references/02.png",
+      "reference_sha256": "837fb315194d96dd5dfb8a2889eeb88aef1e3970d052edf8cccbd4688873d8e7"
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_2295_QUERY_1",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "印度Pondicherry",
+      "raw_OCR_transcript": "SU SAR 2\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_normal_03.png",
+      "PNG_sha256": "9abbeca36268ed1845bd1cbe1d5e3d4319b47bbe6946b240bc97b7de371fd515",
+      "actual_tensor_file_sha256": "fe92a011f26d7723cfc456c037b3dc00a14356f572b7860c1b4d8a8180a733b7",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c726102a6361bb73986e0c89ec1b708753302c1417f32d9400103c8621e4565b"
+      },
+      "reference": "references/03.png",
+      "reference_sha256": "0a7bdee5a2aa3ad273a61b93fe5866847ca07bbcfc5c57c410f1bdd755d5ce52"
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/train/000",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "花多地地山",
+      "raw_OCR_transcript": "老多地山\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_copy_00.png",
+      "PNG_sha256": "741ee93ab8cf209dc14b47879b5eb696d611a9784d50a1196300a9f03cb3dd7d",
+      "actual_tensor_file_sha256": "7297341a39446c93dd39d8ed1dd050e083b7291cd771ced19d32a3564deaab90",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b3a6512964d44e078821f3236734de9f9c6f577d177856f64dbd1919433877cc"
+      },
+      "reference": "references/04.png",
+      "reference_sha256": "634994953d3dbfd6325a44eda07c747b55600a7fef6310321e1b863b67bca145"
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/train/001",
+      "split": "train",
+      "language": "en",
+      "reference_text": "mountain bright blue cloud",
+      "raw_OCR_transcript": "moounain brigh brtlue thoud\"\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_copy_01.png",
+      "PNG_sha256": "31a53434f3846bc7a8962228c89a679e4f6d12cb42c4a4099fd45f1687759c65",
+      "actual_tensor_file_sha256": "632963f0701395b4ded255e0a77eda8a786704a9b0df117706f34bfbd417d452",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f58fdec8a8b6b1e61197b572f26fabf55e105167eb46c350c5727c4021f70891"
+      },
+      "reference": "references/05.png",
+      "reference_sha256": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6"
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/validation/000",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "树田红星风",
+      "raw_OCR_transcript": "树田丝[星内和内容\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_copy_02.png",
+      "PNG_sha256": "709b160d5882b8807961c069191de0d5d78b13ba4b65bd39bfad345d916e4f20",
+      "actual_tensor_file_sha256": "2b2c346926f512b102a2aaa4ab714b9707677e2f0392101b8775f167a21e21c3",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fdffcdc75743b0f1da0f0d788faa567579107681823c6ec90a03046a62cec4b6"
+      },
+      "reference": "references/06.png",
+      "reference_sha256": "d3218e9e4fe9bc3efb6e67d69b5f4e5c5c04cbc8ff5d025c7fffce6d04b3e7b3"
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/validation/001",
+      "split": "validation",
+      "language": "en",
+      "reference_text": "garden silver open blue",
+      "raw_OCR_transcript": "gaalctn silwes open dwe'\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/initial_copy_03.png",
+      "PNG_sha256": "f738c461c6f0b1bc4b3d5689aac7926b4d38fb0d2c4a7dc4bf584325abad6d2e",
+      "actual_tensor_file_sha256": "279ff7db8bc4061083cacbf85111cd2e507eb53fbc8dc29cb7d585d6e78dfb7a",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d3743c6d9a63c357014cc62e5ec5aac362c6ce59bc0cdddc0596f796f41dd6d1"
+      },
+      "reference": "references/07.png",
+      "reference_sha256": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637"
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "RES\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_normal_00.png",
+      "PNG_sha256": "fe7bf5be5550c01e99c09c8ea45712497b4dc286597beff4298277bd2e6162c1",
+      "actual_tensor_file_sha256": "20a3e7ca292da976fd644b59c77a457980477cf0b276cb73b776b1b1292e19b0",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f9125617e442cdf02b63542f6684e582420467ad8856b139717ec16598d5678d"
+      },
+      "reference": "references/00.png",
+      "reference_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "ABBA Craig\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_normal_01.png",
+      "PNG_sha256": "21aca39cae1fb711ccb1e8540ebaacbba6191a0051f34725b4b946a234c2b426",
+      "actual_tensor_file_sha256": "c12e4125234017cc2f639a7345864992d0ba3dd45dc5a68f759347c734d5a8b3",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e969c9a42ad333168e283483687e3396f8e0b47981f76d48eb7ea77ceb91a38c"
+      },
+      "reference": "references/01.png",
+      "reference_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_2295_QUERY_0",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "印度西太平洋区",
+      "raw_OCR_transcript": "SU BAR ea\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_normal_02.png",
+      "PNG_sha256": "d68eb6de4a107bd76e54854622a012e87e17e05b2c449889feb9b28054b7bdc0",
+      "actual_tensor_file_sha256": "9e2c8c6f047e72cca8fb9c03446a9d2b3cc13955f460e0278dfb3d6becb7bd60",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fedc79e7887503fb26e669a45e54e339642c334fbb525f57713635aa62a82e85"
+      },
+      "reference": "references/02.png",
+      "reference_sha256": "837fb315194d96dd5dfb8a2889eeb88aef1e3970d052edf8cccbd4688873d8e7"
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_2295_QUERY_1",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "印度Pondicherry",
+      "raw_OCR_transcript": "ET\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_normal_03.png",
+      "PNG_sha256": "387ea959a742fd17c434779c79252bf71f64fac9418741e65ef50caebcf766b2",
+      "actual_tensor_file_sha256": "0687b7fb484441340be150e2780bf816765dea191eedc3725ea167e580487f80",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7072c7a0c2c8ddb066c084e556966c109a61ee13ec7d4eaf4e1c32f121e023c3"
+      },
+      "reference": "references/03.png",
+      "reference_sha256": "0a7bdee5a2aa3ad273a61b93fe5866847ca07bbcfc5c57c410f1bdd755d5ce52"
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/train/000",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "花多地地山",
+      "raw_OCR_transcript": "Esto\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_copy_00.png",
+      "PNG_sha256": "1e8c64bc62683a51dff0aaeca38d9a7521f84224bf363ca844b36d308361f89c",
+      "actual_tensor_file_sha256": "e31d5f25cbda30eea882ce3fed4eac94ffac5f9c9761eb5c554ecd354472563f",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "9e5a18ba1bee6eddda512aec363da1b82857da0b67035f647b607d8a095a21f8"
+      },
+      "reference": "references/04.png",
+      "reference_sha256": "634994953d3dbfd6325a44eda07c747b55600a7fef6310321e1b863b67bca145"
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/train/001",
+      "split": "train",
+      "language": "en",
+      "reference_text": "mountain bright blue cloud",
+      "raw_OCR_transcript": "moounain brigh brglue daoud\"”\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_copy_01.png",
+      "PNG_sha256": "b845095c40a257069661bbc760d8d18caa707f308b3d19f42805e853550d886b",
+      "actual_tensor_file_sha256": "899e059dea854ca2e3821ddb5f24a30870529b28d273b6f747380a42c68bd4cf",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e3fcf51aaa3ab80394464ee037dd71c5db5fbdba06521a8121de2b1056ef93fd"
+      },
+      "reference": "references/05.png",
+      "reference_sha256": "b92ba394e8bb5aa59b2ddd0c4b9f72704f08a8f746f41798695db51b7557eeb6"
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/validation/000",
+      "split": "validation",
+      "language": "zh",
+      "reference_text": "树田红星风",
+      "raw_OCR_transcript": "NRE AINE\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_copy_02.png",
+      "PNG_sha256": "1035d3140c117f94bca551e85ed8a5fb2eb71a7554fee4bed795b51692d288dd",
+      "actual_tensor_file_sha256": "76c76037cd15d0a87bb598899853aaec02282afad935b5875dc6a8483afa681a",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "900ce5657fc83cea3b5ad7a79e5aff111a06d7419a96abe9576fcc54504dbe51"
+      },
+      "reference": "references/06.png",
+      "reference_sha256": "d3218e9e4fe9bc3efb6e67d69b5f4e5c5c04cbc8ff5d025c7fffce6d04b3e7b3"
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/validation/001",
+      "split": "validation",
+      "language": "en",
+      "reference_text": "garden silver open blue",
+      "raw_OCR_transcript": "gaaictn silwes open dwe'\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_copy_03.png",
+      "PNG_sha256": "be23bf968f6f761eee3cbb8c3112f5cd08a7f35d7cc30c3134fff21c24f3cea0",
+      "actual_tensor_file_sha256": "732f57c3c2be981adb133392e44785b748f24aebb2fc7fed6b0741d1258ef3fe",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a57f62cdff381ba80cf9ed4549e6ddd2a9167267d3cc03ca9a44733456a62c64"
+      },
+      "reference": "references/07.png",
+      "reference_sha256": "32a0405c6211c14cf93273157288e554536666c9f8182889a63701a2487ab637"
+    },
+    {
+      "cohort": "final_new_noise",
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "BABE\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_new_noise_00.png",
+      "PNG_sha256": "fab31f9e0916e7ec0bf9ff9609016a8b0998f2e37eedcaf5e4064273f72ade0d",
+      "actual_tensor_file_sha256": "5e6587fecc0d63bb2b51c8906f6a17ae12b82235644de9f8650eebeac91a77a3",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "53e3b7b8dcfc1664f1d19558647686aa21381efb47731963e7963120cd6f79ba"
+      },
+      "reference": "references/00.png",
+      "reference_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "cohort": "final_new_noise",
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "BREKE\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_new_noise_01.png",
+      "PNG_sha256": "4aa528d947da0d4a7a5519fa249daf150a222eb39c2d087445287e3182d80965",
+      "actual_tensor_file_sha256": "c7e2d7b2c02bdd7c3e894f4a30d5d804427b1467842e150ddd228dde7e1f1585",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5ba47141254fb83b08051c34a986c5b57376e5896f8ba2257a7793f34f1bc9cf"
+      },
+      "reference": "references/01.png",
+      "reference_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    },
+    {
+      "cohort": "final_question_erased",
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "REBES\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_question_erased_00.png",
+      "PNG_sha256": "a387cca94cec7a5968d9cf6c6ed5f844f7317360faef8d241f4933999033becd",
+      "actual_tensor_file_sha256": "b06a4f50784354e31b61da0d22b06f1618eeec28b77a81c1749bc12162d87401",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "57ca106af13526c98e2bf72fd1f745ef19ff68e7e0349ee616650eb395f9a19b"
+      },
+      "reference": "references/00.png",
+      "reference_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "cohort": "final_question_erased",
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "REBES\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_question_erased_01.png",
+      "PNG_sha256": "a387cca94cec7a5968d9cf6c6ed5f844f7317360faef8d241f4933999033becd",
+      "actual_tensor_file_sha256": "b06a4f50784354e31b61da0d22b06f1618eeec28b77a81c1749bc12162d87401",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "57ca106af13526c98e2bf72fd1f745ef19ff68e7e0349ee616650eb395f9a19b"
+      },
+      "reference": "references/01.png",
+      "reference_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    },
+    {
+      "cohort": "final_passage_erased",
+      "id": "TRAIN_3802_QUERY_0",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "第四部",
+      "raw_OCR_transcript": "RES\nfl\n回\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_passage_erased_00.png",
+      "PNG_sha256": "9db71e207f67ef5fdc8b577f7550c6bb9054cecedb34ff3b768b669b57d94dcc",
+      "actual_tensor_file_sha256": "23fc62e942dbf6e99d42276379082373baf17cb304895ea0de90f3936be6166a",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1d460f4ef9eff619492892b9255b3253ad7392ec21640572f951475867a3802a"
+      },
+      "reference": "references/00.png",
+      "reference_sha256": "bb05fd5bed5d3eef68e7d6bac060ed7f09bd00a923c4a23d6da2a1caf0868a34"
+    },
+    {
+      "cohort": "final_passage_erased",
+      "id": "TRAIN_3802_QUERY_1",
+      "split": "train",
+      "language": "zh",
+      "reference_text": "唐太宗李世民如何成为天子",
+      "raw_OCR_transcript": "AS\nli:. ABRARH NS? RRM\n回答:\n",
+      "OCR_exact": false,
+      "reference_OCR_exact": true,
+      "image": "images/final_passage_erased_01.png",
+      "PNG_sha256": "69dbeff0df517235f1afdaf39fc29364dcc86eb3809c26c178ed52c153b89e58",
+      "actual_tensor_file_sha256": "2cb87a1a8dade220e17c288a4d812ec8f1cf9954ddc8175734405bcdb527ab29",
+      "pixel_signature": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "de094679899af4585a522268d32faded7644255a2f2340577f6b7b546b583ac9"
+      },
+      "reference": "references/01.png",
+      "reference_sha256": "f1d83dc43720f42ea620717993f8512ce43abc7248b199867a7fd6d190b3d654"
+    }
+  ],
+  "actual_new_generations": 18,
+  "reused_original_baseline_generations": 4,
+  "all22_original_pages_authenticated": true,
+  "query_parameters": 262144,
+  "retained_runtime_parameters": 6240279775,
+  "elapsed_seconds": 1447.3889952050522,
+  "peak_allocated_vram_GiB": 15.36101484298706,
+  "new_optimizer_updates": 0,
+  "new_neural_calls": 0,
+  "raw_image_review_completed": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

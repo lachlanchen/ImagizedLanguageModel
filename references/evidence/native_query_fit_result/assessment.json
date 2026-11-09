@@ -1,0 +1,496 @@
+{
+  "preparation_sha256": "e68a356385bb11babe34de5283eb6a1ffb4c6aeceac847ed9bd9f1efbc91e7ea",
+  "execution_report_sha256": "e385916b350a2883f8e5bf05c4f65b872ef6ac0329179809ecb5ad25bc108cee",
+  "cohorts": {
+    "initial_normal": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "17f1da477f1101c0f048461493f6af5a943177075eb9314a120315dc99f02f56",
+      "calibration_sha256": "8084b55d28fb7e15e0a7b9e6c7672ccb4e167b591e8ae3d9ffdd1f6e9d5ec149"
+    },
+    "initial_copy": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "093bf220b6057b56e497795d3570d742a0a9407488fea7564c03a23d79f1ced0",
+      "calibration_sha256": "f90b56e3316df2c0c52bd09b900c9619f018de40af44ee8838a6380b14212138"
+    },
+    "final_normal": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "c2a99e4483ef59dc0f17b2d8e41f8cea8805d1d84b75dce7cc9d5296f9b68313",
+      "calibration_sha256": "8084b55d28fb7e15e0a7b9e6c7672ccb4e167b591e8ae3d9ffdd1f6e9d5ec149"
+    },
+    "final_copy": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 2,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "4fe0207d6f13f1b4753b0307ddad39f95722140a26f29037e05876b672625cf2",
+      "calibration_sha256": "f90b56e3316df2c0c52bd09b900c9619f018de40af44ee8838a6380b14212138"
+    },
+    "final_new_noise": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 0,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "712377541b72b76cb164ff35204f45d068b6a463745d66c8dedb269f6391d7ed",
+      "calibration_sha256": "44a00789653c05e59b66c8b2f9fc594620cc655f70ce62e40803cdb98c2a0ed0"
+    },
+    "final_question_erased": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 0,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "31164971197bd6c574c4bad504c73e0f42432851899b737d811d1e925b1bbdbf",
+      "calibration_sha256": "d63b1c8c1950d945b15fc34ada83a2faef1bf0b6652f4b491cd89242a34e51ac"
+    },
+    "final_passage_erased": {
+      "summary": {
+        "train": {
+          "cases": 2,
+          "ocr_exact": 0
+        },
+        "validation": {
+          "cases": 0,
+          "ocr_exact": 0
+        }
+      },
+      "report_sha256": "987e19d51da94214368a5e3a7511772119404b3e5283d5c0321d1550f6b5922b",
+      "calibration_sha256": "801c0b1b6fab2e2627662b4d17c16f6d3cad72cde1d58075f8307fcab555b070"
+    }
+  },
+  "authenticated_original_pages": [
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "artifacts/native_flow_positive_sampling_probe_v1/final/000/answer.png",
+      "PNG_sha256": "a264d3d08d08560c3a44c0a358d8da2e1d0bb6ab37b227d6bf7765cec2271608",
+      "actual_tensor_file_sha256": "6fe234e37590f7a7aa3c85c1e15b8f46104fbea82a8d46fec9f73c11aed9ba80",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "bdf335bab487febf99cf4d186aa8927291a84ee8483a424c22a91a7736c47b6b"
+      }
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "artifacts/native_flow_positive_sampling_probe_v1/final/001/answer.png",
+      "PNG_sha256": "33bd97e10e6a6d04815ecd3efa61487f97ab22dd292e301b64985d2028565ff6",
+      "actual_tensor_file_sha256": "91108f6fcb73ee68053526d3b185831462ec520fb8825d9b16c6bf534b75e02c",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "76411d78feac298f197e93c2e61c121e0e62dc44f3cc5143f080aceb06a8edf1"
+      }
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_2295_QUERY_0",
+      "path": "artifacts/native_flow_positive_sampling_probe_v1/final/002/answer.png",
+      "PNG_sha256": "94f470e3f4df3f11e8bfa6de70aef21182814b19d20582a1a257bada8bc766f2",
+      "actual_tensor_file_sha256": "2cd28cd4d3b7ddcde80ca70362ba0743f52168e92824521cf82b3ded9e35be3d",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "9baae51b9e8193c56f0394e9fe8ebe4c7523b36202b157287eeb0c3b05d06a68"
+      }
+    },
+    {
+      "cohort": "initial_normal",
+      "id": "TRAIN_2295_QUERY_1",
+      "path": "artifacts/native_flow_positive_sampling_probe_v1/final/003/answer.png",
+      "PNG_sha256": "9abbeca36268ed1845bd1cbe1d5e3d4319b47bbe6946b240bc97b7de371fd515",
+      "actual_tensor_file_sha256": "fe92a011f26d7723cfc456c037b3dc00a14356f572b7860c1b4d8a8180a733b7",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "c726102a6361bb73986e0c89ec1b708753302c1417f32d9400103c8621e4565b"
+      }
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/train/000",
+      "path": "artifacts/native_query_fit_v1/execution/initial_copy/000/answer.png",
+      "PNG_sha256": "741ee93ab8cf209dc14b47879b5eb696d611a9784d50a1196300a9f03cb3dd7d",
+      "actual_tensor_file_sha256": "7297341a39446c93dd39d8ed1dd050e083b7291cd771ced19d32a3564deaab90",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "b3a6512964d44e078821f3236734de9f9c6f577d177856f64dbd1919433877cc"
+      }
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/train/001",
+      "path": "artifacts/native_query_fit_v1/execution/initial_copy/001/answer.png",
+      "PNG_sha256": "31a53434f3846bc7a8962228c89a679e4f6d12cb42c4a4099fd45f1687759c65",
+      "actual_tensor_file_sha256": "632963f0701395b4ded255e0a77eda8a786704a9b0df117706f34bfbd417d452",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f58fdec8a8b6b1e61197b572f26fabf55e105167eb46c350c5727c4021f70891"
+      }
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/validation/000",
+      "path": "artifacts/native_query_fit_v1/execution/initial_copy/002/answer.png",
+      "PNG_sha256": "709b160d5882b8807961c069191de0d5d78b13ba4b65bd39bfad345d916e4f20",
+      "actual_tensor_file_sha256": "2b2c346926f512b102a2aaa4ab714b9707677e2f0392101b8775f167a21e21c3",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fdffcdc75743b0f1da0f0d788faa567579107681823c6ec90a03046a62cec4b6"
+      }
+    },
+    {
+      "cohort": "initial_copy",
+      "id": "copy/validation/001",
+      "path": "artifacts/native_query_fit_v1/execution/initial_copy/003/answer.png",
+      "PNG_sha256": "f738c461c6f0b1bc4b3d5689aac7926b4d38fb0d2c4a7dc4bf584325abad6d2e",
+      "actual_tensor_file_sha256": "279ff7db8bc4061083cacbf85111cd2e507eb53fbc8dc29cb7d585d6e78dfb7a",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "d3743c6d9a63c357014cc62e5ec5aac362c6ce59bc0cdddc0596f796f41dd6d1"
+      }
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "artifacts/native_query_fit_v1/execution/final_normal/000/answer.png",
+      "PNG_sha256": "fe7bf5be5550c01e99c09c8ea45712497b4dc286597beff4298277bd2e6162c1",
+      "actual_tensor_file_sha256": "20a3e7ca292da976fd644b59c77a457980477cf0b276cb73b776b1b1292e19b0",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "f9125617e442cdf02b63542f6684e582420467ad8856b139717ec16598d5678d"
+      }
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "artifacts/native_query_fit_v1/execution/final_normal/001/answer.png",
+      "PNG_sha256": "21aca39cae1fb711ccb1e8540ebaacbba6191a0051f34725b4b946a234c2b426",
+      "actual_tensor_file_sha256": "c12e4125234017cc2f639a7345864992d0ba3dd45dc5a68f759347c734d5a8b3",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e969c9a42ad333168e283483687e3396f8e0b47981f76d48eb7ea77ceb91a38c"
+      }
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_2295_QUERY_0",
+      "path": "artifacts/native_query_fit_v1/execution/final_normal/002/answer.png",
+      "PNG_sha256": "d68eb6de4a107bd76e54854622a012e87e17e05b2c449889feb9b28054b7bdc0",
+      "actual_tensor_file_sha256": "9e2c8c6f047e72cca8fb9c03446a9d2b3cc13955f460e0278dfb3d6becb7bd60",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "fedc79e7887503fb26e669a45e54e339642c334fbb525f57713635aa62a82e85"
+      }
+    },
+    {
+      "cohort": "final_normal",
+      "id": "TRAIN_2295_QUERY_1",
+      "path": "artifacts/native_query_fit_v1/execution/final_normal/003/answer.png",
+      "PNG_sha256": "387ea959a742fd17c434779c79252bf71f64fac9418741e65ef50caebcf766b2",
+      "actual_tensor_file_sha256": "0687b7fb484441340be150e2780bf816765dea191eedc3725ea167e580487f80",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "7072c7a0c2c8ddb066c084e556966c109a61ee13ec7d4eaf4e1c32f121e023c3"
+      }
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/train/000",
+      "path": "artifacts/native_query_fit_v1/execution/final_copy/000/answer.png",
+      "PNG_sha256": "1e8c64bc62683a51dff0aaeca38d9a7521f84224bf363ca844b36d308361f89c",
+      "actual_tensor_file_sha256": "e31d5f25cbda30eea882ce3fed4eac94ffac5f9c9761eb5c554ecd354472563f",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "9e5a18ba1bee6eddda512aec363da1b82857da0b67035f647b607d8a095a21f8"
+      }
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/train/001",
+      "path": "artifacts/native_query_fit_v1/execution/final_copy/001/answer.png",
+      "PNG_sha256": "b845095c40a257069661bbc760d8d18caa707f308b3d19f42805e853550d886b",
+      "actual_tensor_file_sha256": "899e059dea854ca2e3821ddb5f24a30870529b28d273b6f747380a42c68bd4cf",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "e3fcf51aaa3ab80394464ee037dd71c5db5fbdba06521a8121de2b1056ef93fd"
+      }
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/validation/000",
+      "path": "artifacts/native_query_fit_v1/execution/final_copy/002/answer.png",
+      "PNG_sha256": "1035d3140c117f94bca551e85ed8a5fb2eb71a7554fee4bed795b51692d288dd",
+      "actual_tensor_file_sha256": "76c76037cd15d0a87bb598899853aaec02282afad935b5875dc6a8483afa681a",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "900ce5657fc83cea3b5ad7a79e5aff111a06d7419a96abe9576fcc54504dbe51"
+      }
+    },
+    {
+      "cohort": "final_copy",
+      "id": "copy/validation/001",
+      "path": "artifacts/native_query_fit_v1/execution/final_copy/003/answer.png",
+      "PNG_sha256": "be23bf968f6f761eee3cbb8c3112f5cd08a7f35d7cc30c3134fff21c24f3cea0",
+      "actual_tensor_file_sha256": "732f57c3c2be981adb133392e44785b748f24aebb2fc7fed6b0741d1258ef3fe",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "a57f62cdff381ba80cf9ed4549e6ddd2a9167267d3cc03ca9a44733456a62c64"
+      }
+    },
+    {
+      "cohort": "final_new_noise",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "artifacts/native_query_fit_v1/execution/final_new_noise/000/answer.png",
+      "PNG_sha256": "fab31f9e0916e7ec0bf9ff9609016a8b0998f2e37eedcaf5e4064273f72ade0d",
+      "actual_tensor_file_sha256": "5e6587fecc0d63bb2b51c8906f6a17ae12b82235644de9f8650eebeac91a77a3",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "53e3b7b8dcfc1664f1d19558647686aa21381efb47731963e7963120cd6f79ba"
+      }
+    },
+    {
+      "cohort": "final_new_noise",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "artifacts/native_query_fit_v1/execution/final_new_noise/001/answer.png",
+      "PNG_sha256": "4aa528d947da0d4a7a5519fa249daf150a222eb39c2d087445287e3182d80965",
+      "actual_tensor_file_sha256": "c7e2d7b2c02bdd7c3e894f4a30d5d804427b1467842e150ddd228dde7e1f1585",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "5ba47141254fb83b08051c34a986c5b57376e5896f8ba2257a7793f34f1bc9cf"
+      }
+    },
+    {
+      "cohort": "final_question_erased",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "artifacts/native_query_fit_v1/execution/final_question_erased/000/answer.png",
+      "PNG_sha256": "a387cca94cec7a5968d9cf6c6ed5f844f7317360faef8d241f4933999033becd",
+      "actual_tensor_file_sha256": "b06a4f50784354e31b61da0d22b06f1618eeec28b77a81c1749bc12162d87401",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "57ca106af13526c98e2bf72fd1f745ef19ff68e7e0349ee616650eb395f9a19b"
+      }
+    },
+    {
+      "cohort": "final_question_erased",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "artifacts/native_query_fit_v1/execution/final_question_erased/001/answer.png",
+      "PNG_sha256": "a387cca94cec7a5968d9cf6c6ed5f844f7317360faef8d241f4933999033becd",
+      "actual_tensor_file_sha256": "b06a4f50784354e31b61da0d22b06f1618eeec28b77a81c1749bc12162d87401",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "57ca106af13526c98e2bf72fd1f745ef19ff68e7e0349ee616650eb395f9a19b"
+      }
+    },
+    {
+      "cohort": "final_passage_erased",
+      "id": "TRAIN_3802_QUERY_0",
+      "path": "artifacts/native_query_fit_v1/execution/final_passage_erased/000/answer.png",
+      "PNG_sha256": "9db71e207f67ef5fdc8b577f7550c6bb9054cecedb34ff3b768b669b57d94dcc",
+      "actual_tensor_file_sha256": "23fc62e942dbf6e99d42276379082373baf17cb304895ea0de90f3936be6166a",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "1d460f4ef9eff619492892b9255b3253ad7392ec21640572f951475867a3802a"
+      }
+    },
+    {
+      "cohort": "final_passage_erased",
+      "id": "TRAIN_3802_QUERY_1",
+      "path": "artifacts/native_query_fit_v1/execution/final_passage_erased/001/answer.png",
+      "PNG_sha256": "69dbeff0df517235f1afdaf39fc29364dcc86eb3809c26c178ed52c153b89e58",
+      "actual_tensor_file_sha256": "2cb87a1a8dade220e17c288a4d812ec8f1cf9954ddc8175734405bcdb527ab29",
+      "pixels": {
+        "dtype": "torch.bfloat16",
+        "shape": [
+          1,
+          3,
+          1024,
+          1024
+        ],
+        "decoded_pixel_bytes_sha256": "de094679899af4585a522268d32faded7644255a2f2340577f6b7b546b583ac9"
+      }
+    }
+  ],
+  "total_original_pages": 22,
+  "newly_generated_pages": 18,
+  "reused_original_baseline_pages": 4,
+  "question_erased_decoded_pixels_bit_exact": true,
+  "developmental_gates": {
+    "seen_fit": false,
+    "second_noise_seen_fit": false,
+    "held_pair": false,
+    "question_dependence": false,
+    "passage_dependence": false,
+    "copying_retention": true
+  },
+  "fixed_canonical_OCR_only": true,
+  "raw_image_review_completed": false,
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}

@@ -1,0 +1,115 @@
+{
+  "preparation_sha256": "e68a356385bb11babe34de5283eb6a1ffb4c6aeceac847ed9bd9f1efbc91e7ea",
+  "actual_optimizer_updates": 128,
+  "query_parameters": 262144,
+  "native_helper_features_exact": true,
+  "checkpointed_features_exact": true,
+  "initial_native_field_exact": true,
+  "all_frozen_weight_versions_unchanged_during_training": true,
+  "fields": [
+    {
+      "id": "TRAIN_3802_QUERY_0",
+      "loss": 0.003429315984249115,
+      "actual_tensor_file": "final_field_000.pt",
+      "sha256": "d75275de3627fc598fe1701f2d9e9ba13a0dd7f8a8b77a3d82889b9d55b78e8d"
+    },
+    {
+      "id": "TRAIN_3802_QUERY_1",
+      "loss": 0.019155895337462425,
+      "actual_tensor_file": "final_field_001.pt",
+      "sha256": "cacb8faa6c6598aa1e1965691f84f5f80b5ca95c152e97839842fa16ee8cddef"
+    }
+  ],
+  "checkpoint_sha256": "021b6eb76294d2b638b09671339ff5b2fec64bd3f1dd6064a1195b161e33c1a7",
+  "actual_new_generations": 18,
+  "updates_sha256": "cbf079ec2098dd14b35c47c70bc71cbafee34ad4b8957b8d7f415865a6ef20a6",
+  "elapsed_seconds": 1447.3889952050522,
+  "peak_allocated_vram_GiB": 15.36101484298706,
+  "retained_runtime_parameters": {
+    "components": {
+      "transformer": 2275899584,
+      "vae": 83819683,
+      "lmm": 3443458048,
+      "connector_module": 437102460
+    },
+    "total": 6240279775,
+    "persistent_and_nonpersistent_buffer_elements": 226492564
+  },
+  "loader": {
+    "loader": "pinned components, strict keys; same native constructor and sampling methods",
+    "loading_info": {
+      "transformer": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vae": {
+        "missing_keys": [],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      },
+      "vlm": {
+        "missing_keys": [
+          "lm_head.weight"
+        ],
+        "unexpected_keys": [],
+        "mismatched_keys": [],
+        "error_msgs": []
+      }
+    },
+    "source_position_version": "4.56.1",
+    "source_position_sha256": "ace34ffe3b98347665ba05b3e260a24370e9c8f66f0210ff0bc41100e1c8087f",
+    "compatibility_aliases": [
+      "lmm.visual -> lmm.model.visual",
+      "lmm.language_model -> lmm.model.language_model"
+    ],
+    "compatibility_vision_return": "actual merged pooler_output tensor; no change to encoder computation",
+    "attention_implementation": "sdpa",
+    "CPU_offload": false,
+    "parameters": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_word_weights_same_object": false,
+    "unused_output_head_called": false,
+    "deployed_vocabulary_removed": false
+  },
+  "removal": {
+    "before": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 4065787904,
+        "connector_module": 432449532
+      },
+      "total": 6825228639,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "after": {
+      "components": {
+        "transformer": 2243171520,
+        "vae": 83819683,
+        "lmm": 3443458048,
+        "connector_module": 432449532
+      },
+      "total": 6202898783,
+      "persistent_and_nonpersistent_buffer_elements": 226492564
+    },
+    "input_output_weights_were_tied": false,
+    "vocabulary_table_removed": true,
+    "output_word_head_removed": true,
+    "tokenizer_removed": true,
+    "language_body_pretraining_retained": true,
+    "numerical_equivalence_not_yet_checked": true
+  },
+  "semantic_learning_validated": false,
+  "general_ilm_goal_complete": false
+}
