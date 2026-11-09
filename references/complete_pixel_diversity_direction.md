@@ -1,0 +1,60 @@
+# Return the next experiment to unseen-language learning
+
+The complete actor now fits 32 training answers exactly and reproduces five
+cold-loaded streams, but its 24 normal development answers remain unusable.
+This supports the physical input/output implementation and training capacity.
+It does not establish a successful language-learning recipe. The 7.54B source
+body also supplies inherited language/vision knowledge; this is not a small
+foundation learned from glyphs from scratch. More unchanged fitting of the
+same questions and further manuscript expansion are not the next experiment.
+
+The next hypothesis is that a varied conditional writing curriculum can teach
+reusable glyph generation and answer selection through the now-working path.
+More data is not a demonstrated repair: earlier larger-corpus image-code
+writers already failed. Preserve the current normalized pixel architecture
+and complete-image objective so that this test does not simultaneously change
+the representation, decoder family and loss. Do not infer a semantic mechanism
+from lower teacher-forced image loss.
+
+Prepare a fixed Chinese cohort of 512 natural questions in 256 passage pairs.
+Keep the original 32 questions as visible positive controls. Add 240 different
+training articles with two distinct-answer questions each, selected by a fixed
+hash order before any new model call. Exclude the original 16 articles from
+the added group. Select eligible questions by source order and distinct
+complete reference pixels, never by generated quality or helper performance.
+Retain exact existing prompt/answer images, including original source noise,
+for this first diversity test. Cleaning, new fonts and new prompt templates
+would be additional interventions and need separate accounting.
+
+The preparation must independently verify all original 32 inputs and targets
+against the completed run, deduplicate complete prompt pixels, bind every
+source payload and save complete PNG inputs/targets without an OCR or lexical
+interface. Preserve the same 24 normal/erased development cases and every
+reference alternative for a comparable reused-development assessment. Keep
+development paths separate from training records. This is not a sealed test.
+No source strings, character inventory or answer IDs may enter deployed
+generation.
+
+The CPU preparation is implemented by
+`scripts/prepare_pixel_language_diversity.py`. It does not train, load model
+weights or qualify generalization. Inspect the actual selected prompt/answer
+lengths before registering a GPU schedule. The old four-case length preflight
+does not cover potentially longer new answers. A new actual variable-length
+batch and memory qualification is necessary before sustained optimization.
+Use one GPU0 owner, existing RAM/swap admission and the 22 GiB allocation cap.
+Do not restart a live job on an observation timeout.
+
+The training decision must retain complete autonomous outputs, actual image
+feedback, learned stopping, original initial-state identity and matched
+whole-cohort loss measurements. Report exposure per question and active
+compute; a larger update budget is not a data-only causal comparison. New
+prompt answer quality is the primary criterion. Exact training reproduction
+is only a capacity control. English remains untrained transfer in this Chinese
+stage, and historical forms remain outside its capability claims.
+
+If varied training still fails to generate readable, correct unseen answers,
+do not keep extending the same fit or add speculative physics terminology.
+Examine the learned coupling of native context, visual history and glyph
+emission with a controlled alternative, potentially using an offline teacher
+that is absent from inference. Useful behavior must precede compression into
+a smaller independent model or claims about LLM-equivalent efficiency.
