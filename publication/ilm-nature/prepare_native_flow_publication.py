@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Stage an editable actual-model diagram and bounded failed-cohort result."""
 import argparse
+from collections import Counter
 import hashlib
 import json
 from pathlib import Path
@@ -17,6 +18,7 @@ ROOT = HERE.parents[1]
 COHORT = ROOT/'references/evidence/native_visual_flow_final_normal'
 COPY = ROOT/'references/evidence/native_visual_flow_final_copy'
 TRAINING = ROOT/'references/evidence/native_visual_flow_training'
+COMPLETE = ROOT/'references/evidence/native_visual_flow_complete_result'
 
 
 def stage(source, output):
@@ -26,6 +28,49 @@ def stage(source, output):
     copying = json.loads((COPY/'report.json').read_text())
     trained = json.loads((TRAINING/'training_report.json').read_text())
     audit = json.loads((TRAINING/'training_audit.json').read_text())
+    provenance = json.loads((COMPLETE/'provenance.json').read_text())
+    for name, digest in provenance['all_results_file_sha256'].items():
+        if sha(COMPLETE/name) != digest:
+            raise ValueError('complete assessment or diagnostic evidence changed: '+name)
+    complete = json.loads((COMPLETE/'assessment.json').read_text())
+    review = json.loads((COMPLETE/'raw_review.json').read_text())
+    fields = json.loads((COMPLETE/'condition_probe.json').read_text())
+    sampling = json.loads((COMPLETE/'positive_sampling_probe.json').read_text())
+    codec = json.loads((COMPLETE/'codec/report.json').read_text())
+    if (complete['actual_new_generations'] != 384 or not complete['all_PNGs_authenticated_against_actual_decoder_tensors']
+            or not review['all384_original_pages_actually_viewed'] or review['manual_accuracy_assigned']
+            or complete['semantic_learning_validated'] or complete['developmental_rule_met']
+            or complete['final_checkpoint_sha256'] != cohort['final_checkpoint_sha256']):
+        raise ValueError('complete authenticated and inspected failed comparison required')
+    expected = Counter({(a,v):n for a in ('initial','final') for v,n in
+        [('normal',64),('question_erased',32),('passage_erased',32),('copy',64)]})
+    if Counter((r['arm'],r['variant']) for r in complete['rows']) != expected:
+        raise ValueError('all384 original observations required')
+    reviewed = {(r['group'],r['id']):r for r in review['records']}
+    if len(reviewed) != 384 or any(reviewed[(r['arm']+'_'+r['variant'],r['id'])]['image_sha256'] != r['png_sha256']
+                                  for r in complete['rows']):
+        raise ValueError('actual complete raw inspection bindings differ')
+    for arm in ('initial','final'):
+        for variant in ('normal','question_erased','passage_erased','copy'):
+            for split in ('train','validation'):
+                selected = [r for r in complete['rows'] if (r['arm'],r['variant'],r['split']) == (arm,variant,split)]
+                counts = complete['summaries'][arm][variant][split]
+                if counts['cases'] != len(selected) or counts['accepted_exact'] != sum(r['accepted_exact'] for r in selected):
+                    raise ValueError('complete matched counts do not reproduce')
+                wanted = (2 if split=='train' else 3) if arm=='final' and variant=='copy' else 0
+                if counts['accepted_exact'] != wanted:
+                    raise ValueError('registered complete failed answer/copy comparison differs')
+    if (fields['actual_denoiser_forwards'] != 144 or not fields['all_full_noise_predictions_swap_exactly']
+            or not fields['all_erased_control_fields_exact'] or sampling['actual_autonomous_generations'] != 10
+            or not sampling['all_original_guidance4_replays_bit_exact']
+            or not provenance['all10_diagnostic_images_actually_reviewed']
+            or codec['actual_saved_reconstructions'] != 8 or codec['reconstructed_OCR_exact'] != 8
+            or codec['reference_OCR_exact'] != 4):
+        raise ValueError('complete field/sampling/codec diagnostics required')
+    for arm in ('initial','final'):
+        for guidance in ('guidance1','guidance4'):
+            if any(r['accepted_exact'] for r in sampling['results'][arm][guidance].values()):
+                raise ValueError('small guidance diagnostic counts differ')
     for name, digest in cohort['files_sha256'].items():
         if sha(COHORT/name) != digest:
             raise ValueError('complete cohort evidence changed: '+name)
@@ -99,7 +144,7 @@ def stage(source, output):
 
     slide.shape('Native image-answer flow: trained execution, failed answering', 45, 24, 1510, 60, 30, True)
     slide.shape('a  Actual input and sampling path', 45, 108, 1510, 35, 22, True)
-    slide.shape('Complete input page x', 45, 155, 235, 35, 18, True)
+    slide.shape('Input page x', 45, 155, 235, 35, 18, True)
     row = cohort['rows'][32]
     if row['id'] != 'TRAIN_2295_QUERY_0':
         raise ValueError('first fixed held-out case differs')
@@ -127,16 +172,19 @@ def stage(source, output):
     slide.shape('Loss = MSE(vθ(zσ, t, x), v*)', 45, 662, 880, 40, 23)
     slide.shape('One logical denoiser call per update; positive task branch.\nLoss updates connector / writer adapters; reader and VAE stay frozen.',
                 45, 720, 895, 75, 18)
-    slide.shape('c  Final question and copying cohorts', 975, 510, 580, 36, 22, True)
-    for i, (label, count) in enumerate([('Seen questions', '0/32'), ('Held-out questions', '0/32'),
-            ('Both held-out answers correct', '0/16'), ('Seen copying strings', '2/32'),
-            ('Held-out copying strings', '3/32')]):
-        slide.shape(label, 975, 556+32*i, 420, 30, 18)
-        slide.shape(count, 1400, 556+32*i, 150, 30, 21, True)
+    slide.shape('c  Matched source / trained results', 975, 510, 580, 36, 22, True)
+    slide.shape('Initial', 1300, 552, 110, 30, 18, True)
+    slide.shape('Final', 1430, 552, 110, 30, 18, True)
+    for i, (label, initial, final) in enumerate([('Seen questions', '0/32', '0/32'),
+            ('Held-out questions', '0/32', '0/32'), ('Both held-out correct', '0/16', '0/16'),
+            ('Seen copying strings', '0/32', '2/32'), ('Held-out copying strings', '0/32', '3/32')]):
+        slide.shape(label, 975, 586+28*i, 320, 28, 18)
+        slide.shape(initial, 1300, 586+28*i, 110, 28, 20)
+        slide.shape(final, 1430, 586+28*i, 110, 28, 20, True)
     slide.shape(f'{trained["elapsed_seconds_this_attempt"]/3600:.2f} h training; {trained["peak_allocated_vram_gib_this_attempt"]:.3f} GiB peak\n'
                 '37.381M trained adapters; 6.240B retained runtime\nQA reference OCR: 23/32 seen; 26/32 held out\n'
                 'Copy reference OCR: 27/32 seen; 29/32 held out', 975, 728, 580, 100, 17)
-    slide.shape('1,536 updates on 384 pairs. Inherited language/image pretraining; source/control comparison pending. Zero counts use source-accepted OCR; no reliable language learning established.',
+    slide.shape('All 384 fixed initial/final outputs authenticated and inspected. Inherited language/image pretraining. Zero QA counts use source-accepted OCR; useful language learning remains unproved.',
                 45, 844, 1510, 48, 15)
     layout = next(n.get('Target') for n in template_rels if n.get('Type').endswith('/slideLayout'))
     slide.relation('slideLayout', layout)
@@ -150,13 +198,15 @@ def stage(source, output):
         'The input image supplies semantic features and a separate reference-image latent. The same frozen VAE encodes supervised target images and decodes sampled images. '
         'One native positive-branch velocity MSE call is used per update; fifty-step guidance-four inference is separate. Only connector/writer low-rank adapters learn. '
         'First held-out case TRAIN_2295_QUERY_0, selected by original index, is shown as complete unmodified input/output PNGs. '
-        'All64 final normal pages and all64 final copying pages were inspected with source access; no quantitative manual accuracy is assigned. '
-        '0/32 seen,0/32 held,0/16 both-correct held pairs are source-accepted offline OCR counts. Reference OCR23/32 and26/32 remains imperfect. '
-        'Final copying OCR counts are2/32 seen and3/32 held out; clean references give27/32 and29/32. '
+        'All 384 fixed initial/final output pages were inspected with source access; no quantitative manual accuracy is assigned. '
+        '0/32 seen, 0/32 held, 0/16 both-correct held pairs are source-accepted offline OCR counts. Reference OCR at 23/32 and 26/32 remains imperfect. '
+        'Final copying OCR counts are 2/32 seen and 3/32 held out; clean references give 27/32 and 29/32. '
         'Copying uses synthetic strings sharing vocabulary, font and prompt template; it does not test sentence understanding. '
-        'Full initial/final erasure/copying comparison and later diagnostics are pending. No foundation-training, historical-script, novelty or language-efficiency claim. '
+        'Initial copying is 0/32 seen and 0/32 held out. Both initial/final erasure cohorts score 0/32. '
+        'The 144-forward conditional-field diagnostic has small normalized alignment, not accuracy. Guidance 1 fails all four selected questions per arm; guidance 4 replays exactly. '
+        'Eight existing codec reconstructions pass OCR on four seen target answers, not autonomous generation. No foundation-training, historical-script, novelty or language-efficiency claim. '
         'Sources: references/evidence/native_visual_flow_training/training_report.json, references/evidence/native_visual_flow_final_normal/report.json '
-        'and references/evidence/native_visual_flow_final_copy/report.json.')
+        'and references/evidence/native_visual_flow_complete_result/assessment.json.')
     for shape in notes.findall('p:cSld/p:spTree/p:sp', NS):
         placeholder = shape.find('p:nvSpPr/p:nvPr/p:ph', NS)
         if placeholder is not None and placeholder.get('type') == 'body':
@@ -185,14 +235,15 @@ def stage(source, output):
     (output/'results_native_flow.tex').write_text(r'''A separate native image-answer flow adaptation completes 1,536 updates on
 384 image pairs using 37.381M low-rank adapter parameters within a retained
 6.240B-parameter pretrained system (Supplementary Note 53; Fig.~S31).
-The complete final normal-question cohort yields 0/32 source-accepted
-OCR-exact seen answers, 0/32 held-out answers and 0/16 both-correct held-out
-passage pairs. Copying gives 2/32 seen and 3/32 held-out exact strings;
-both complete 64-page output cohorts are inspected. Training takes
+The complete matched comparison yields 0/32 source-accepted OCR-exact seen
+answers, 0/32 held-out answers and 0/16 both-correct held-out passage pairs
+in both arms. Copying rises from zero to 2/32 seen and 3/32 held-out exact
+strings. All 384 output pages are authenticated and inspected. Training takes
 3.18\,h at 15.697\,GiB peak allocation, including loading, saving and fixed
-monitoring. Reference OCR remains imperfect. Initial/source controls and
-later field/sampling diagnostics are separate pending observations; this
-completed cohorts do not establish useful language learning.
+monitoring. Reference OCR remains imperfect. A small conditional-field signal
+and failed guidance-one diagnostic do not qualify answer generation; eight
+saved target-codec reconstructions preserve four seen answers. These results
+do not establish useful language learning.
 ''')
     (output/'supplementary_note_53.tex').write_text(r'''\section*{Supplementary Note 53 | Native image-answer flow adaptation}
 \label{note:native-visual-flow}
@@ -256,14 +307,50 @@ these reused development examples do not test unseen scripts or sentence
 understanding. Visible errors include omitted forms, merged strokes and extra
 punctuation. No manual accuracy or repaired OCR score is assigned.
 
-The complete source/final erasure/copying assessment and subsequent diagnostics
-are pending and cannot be inferred from these final cohorts. They supply
-no complete initial/final learning-gain estimate or causal attribution.
+The complete initial/source control scores zero on seen and held-out QA and
+copying. Both question-erased and passage-erased held-out cohorts score 0/32
+in both arms. All 384 output pages have numerical authentication and actual
+raw review; identical erased inputs and seeds produce bit-exact decoded pages.
+Five answer/dependence gates fail. Copying retention passes against zero
+initial copies, which does not qualify reliable writing.
+
+The registered 144-forward field diagnostic uses four seen and four held-out
+normal question pairs and one erased control pair. At sigma one, the actual
+writer input is exactly independent noise. For native target velocities
+$u_0,u_1$ and corresponding predicted fields $p_0,p_1$, normalized alignment is
+\[
+A=\frac{\langle u_1-u_0,p_1-p_0\rangle}{\|u_1-u_0\|^2}.
+\]
+It is unbounded and is not accuracy. Perfect matching gives one; a predicted
+field unchanged by the question gives zero. Mean seen alignment changes from
+0.006717 to 0.010039; held-out alignment changes from 0.003767 to 0.009684. Individual
+negative pairs remain. Exact field swapping and zero erased-control alignment
+pass; these small descriptive signals do not prove semantic acquisition.
+
+The separate guidance-one test uses four reused questions per arm and produces
+zero correct answers in both arms at guidance one and four. Two new native
+guidance-four replays match their original fields, decoder tensors and pixels
+exactly. All ten diagnostic pages are inspected. This small diagnostic does
+not repair the tested answers or exclude all possible sampling effects.
+
+All eight existing preflight target reconstructions, covering posterior modes
+and samples for four seen answers, reproduce the original ink measurements
+and pass the fixed OCR exact rule. Foreground F1 ranges from 0.966741 to
+0.988286. Their full pages were inspected. These are supplied-target codec
+reconstructions, not autonomous answers or a historical-script test.
+
+The original offline assessor fails on a checksum-loop name collision after
+all 384 draws and OCR reports finish. The disclosed correction aliases only
+the schedule-digest function and its call. All 19 registered source files and
+all model draws remain unchanged; the corrected CPU execution authenticates
+the complete saved comparison and applies the original scores and gates.
 The original complete evidence remains under
 \texttt{references/evidence/native\_visual\_flow\_final\_normal/}, with
 the corresponding copying export under
 \texttt{references/evidence/native\_visual\_flow\_final\_copy/}.
 All input, answer and reference PNG bytes and the full training audit are retained.
+The complete comparison, diagnostics and correction provenance are under
+\texttt{references/evidence/native\_visual\_flow\_complete\_result/}.
 Historical-script semantics and efficiency at matched language quality remain
 unverified. Figure~S31 distinguishes the implemented training path from these
 unachieved goals.
@@ -286,6 +373,8 @@ unachieved goals.
     record = dict(builder_sha256=sha(__file__), source_stage_preparation_sha256=sha(source/'preparation.json'),
         source_cohort_sha256=sha(COHORT/'report.json'), source_training_report_sha256=sha(TRAINING/'training_report.json'),
         source_copy_cohort_sha256=sha(COPY/'report.json'),
+        source_complete_result_sha256=sha(COMPLETE/'assessment.json'),
+        source_complete_provenance_sha256=sha(COMPLETE/'provenance.json'),
         source_training_audit_sha256=sha(TRAINING/'training_audit.json'), preserved_native_slides=45,
         staged_native_slides=46, preserved_native_charts=52, new_native_chart=False,
         new_figure='S31_native_visual_flow', pictures=pictures, native_diagram_and_count_table=True,
@@ -294,7 +383,7 @@ unachieved goals.
         active_publication_files_unchanged=True, bundled_artifact_tool_available=False,
         Office_or_LaTeX_started=False, neural_models_loaded=0, rendered=False,
         visual_review_completed=False, active_manuscript_updated=False, Nutstore_updated=False,
-        full_model_assessment_complete=False, semantic_learning_validated=False, general_ilm_goal_complete=False)
+        full_model_assessment_complete=True, semantic_learning_validated=False, general_ilm_goal_complete=False)
     (output/'preparation.json').write_text(json.dumps(record, indent=2)+'\n')
     print(json.dumps({k: record[k] for k in ('preserved_native_slides', 'staged_native_slides', 'preserved_native_charts', 'rendered')}, indent=2))
 

@@ -167,3 +167,40 @@ current ownership. Inspect the revised figures and all changed PDF pages,
 build matched article/review/supplement/redlines, and only then update active
 files and verified Nutstore copies. This plan addition does not claim those
 rendering, TeX promotion or synchronization steps have been performed.
+
+## Completed comparison staged and figures rendered
+
+The complete comparison and diagnostics are now incorporated into the
+isolated Results/Note53 fragments and S31's matched initial/final table.
+The current reproducible stage is
+`artifacts/native_flow_publication_stage_v5/`. The
+[preparation receipt](evidence/native_flow_complete_publication_preparation.json)
+binds the full assessment, predecessor deck, builder and staged bytes.
+
+The successor renderer runs with CUDA hidden under the project resource
+lock. An earlier v2 attempt stopped before Office started when shared swap
+use exceeded the existing threshold. Later admission passed without changing
+that threshold or terminating another project's processes. The v3 render
+revealed a wrapped input label clipped by its image. The shorter label passes
+visual review in v4 and remains unchanged in v5; v5 also corrects spacing in
+the staged notes and describes zero alignment as a field unchanged by the
+question. No model inference or optimizer update is performed for these edits.
+
+The [render receipt](evidence/native_flow_complete_publication_render.json)
+records 46 rendered pages with all 45 predecessor appearances pixel-identical.
+All 52 native charts and original S31 evidence-image pixels remain intact.
+The [visual review](evidence/native_flow_complete_publication_review.json)
+records actual inspection of all three appended figure PNGs (S29--S31),
+editable count labels, object bounds and count extraction from the rendered
+S31 PDF. The [reviewed S31 preview](evidence/native_flow_complete_publication_figure.png)
+shows the implemented path and failed answering result. Native PowerPoint
+application inspection has not been performed; rendering substitutes
+Liberation Sans for Arial.
+
+This completes isolated figure/source preparation. Active manuscript,
+supplement, editable deck and PDFs remain at the preserved baseline. Full
+article/review/supplement compilation, matching redlines, changed-page review,
+active-file promotion and Nutstore synchronization remain required before a
+new complete paper package can be claimed. The separate two-update query
+preflight is recorded in its own result note and is not merged into S31's
+completed 1,536-update experiment.
