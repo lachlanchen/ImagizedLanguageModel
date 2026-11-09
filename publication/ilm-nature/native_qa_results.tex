@@ -1,0 +1,11 @@
+A complete natural-QA adaptation of the image writer fails all six prospective
+exploratory conditions (Supplementary Note 52 and Fig.~S29). Four permutations
+of 32 training questions give 128 updates. Initial and final models each
+produce 0/32 source-accepted OCR-exact seen answers, 0/32 held-out answers
+and 0/16 both-correct held-out passage pairs. Both erased-input controls
+also give 0/32. Held-out copying falls from 19/32 to 16/32, exceeding the
+allowed loss of two exact strings. Training takes 12,782.358\,s at 12.204\,GiB
+peak allocation. All 384 original assessment pages are inspected, with
+malformed writing, extra fragments and omissions retained (Fig.~S30).
+Imperfect reference OCR remains material. These observations reject scaling
+the unchanged recipe and do not establish an independent language model.

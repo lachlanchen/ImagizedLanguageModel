@@ -1,0 +1,12 @@
+A separate native image-answer flow adaptation completes 1,536 updates on
+384 image pairs using 37.381M low-rank adapter parameters within a retained
+6.240B-parameter pretrained system (Supplementary Note 53; Fig.~S31).
+The complete matched comparison yields 0/32 source-accepted OCR-exact seen
+answers, 0/32 held-out answers and 0/16 both-correct held-out passage pairs
+in both arms. Copying rises from zero to 2/32 seen and 3/32 held-out exact
+strings. All 384 output pages are authenticated and inspected. Training takes
+3.18\,h at 15.697\,GiB peak allocation, including loading, saving and fixed
+monitoring. Reference OCR remains imperfect. A small conditional-field signal
+and failed guidance-one diagnostic do not qualify answer generation; eight
+saved target-codec reconstructions preserve four seen answers. These results
+do not establish useful language learning.

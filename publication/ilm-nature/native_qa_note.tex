@@ -1,0 +1,105 @@
+\clearpage
+\section*{Supplementary Note 52 | Complete natural-question image-answer learning}
+\label{note:native-qa-learning}
+The continuous image writer starts from the fixed ink-mass checkpoint selected
+before QA adaptation. A fresh rank-16 AdamW optimizer uses rate $10^{-5}$,
+decay .01 and gradient clipping at one. Four complete permutations of the
+first 32 training questions from sixteen passages give 128 updates. All 32
+held-out questions come from sixteen disjoint articles. The public cases have
+been reused during development, so this is a developmental comparison with
+one schedule rather than a pristine benchmark or seed replication.
+
+The entire $1024\times1024$ passage/question image conditions a native
+$512\times256$ answer image. The same generic condition applies to every
+example. Generation begins from independent noise. No varying text embedding,
+answer crop, transcription, teacher or font lookup enters deployment. The
+target is loaded only after generation during training. Gradients traverse
+all fifty native steps and the frozen decoder. The objective is frozen-reader
+recognition cross-entropy plus $.4035679875746343$ times target-mass Bernoulli
+KL at temperature .05. Recognition vocabulary and answer text supply training
+supervision only. External image/language pretraining remains inherited.
+
+The first actual differentiable output matches native generation exactly at
+the same seed. Finite nonzero gradients reach early, middle and final steps.
+All 206 adapter tensors change, actual optimizer counters reach 128 and the
+complete schedule, RNG states and all 128 pre-update images authenticate.
+An earlier save-path failure occurs before any update. Its preserved attempt
+is an execution correction, not a restart selected by answer quality. Only
+the final fixed-budget checkpoint enters assessment. The initial checkpoint
+is assessed afterwards under the same prospectively fixed inputs and seeds.
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+Complete independent OCR observation & Initial & Final\\
+\midrule
+Seen Chinese answers & 0/32 & 0/32\\
+Held-out Chinese answers & 0/32 & 0/32\\
+Held-out pairs, both answers correct & 0/16 & 0/16\\
+Held out, question erased & 0/32 & 0/32\\
+Held out, passage erased & 0/32 & 0/32\\
+Seen Chinese/English copies & 18/32 & 19/32\\
+Held-out Chinese/English copies & 19/32 & 16/32\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Canonical and source-accepted QA exact counts agree at zero. Matching uses
+NFC/whitespace normalization, preserving case and punctuation. Each passage
+pair has disjoint source-accepted answer sets. All 32 question-erased pairs
+have identical inputs and seeds and yield bit-identical tensors at each
+checkpoint. This execution equality is not evidence of answering.
+
+All six prospective conditions fail: seen fit of at least 24/32; at least
+12/32 held-out answers and a gain of four; at least 4/16 both-correct pairs
+and a gain of two; a normal-answer advantage of four over question-erased
+control; the same advantage over passage-erased control; and loss of at most
+two held-out copies from the initial 19/32. The observed copy loss is three.
+The one-case seen-copy gain does not establish semantic learning.
+
+Reference OCR recognizes only 23/32 seen and 26/32 held-out canonical QA
+images exactly. The seen requirement of 24/32 therefore exceeds recognition
+of these clean reference images. That limitation is not a strict ceiling on
+another output style. It remains disclosed without changing the registered
+rule or repairing scores. Raw review covers every original answer: natural
+QA contains malformed writing, unwanted passage/question fragments and extra
+labels. Copies retain omissions, substitutions, repeats and unwanted quotes.
+Some final pages are faint. No contrast enhancement, rerendered transcription
+or quantitative manual replacement of OCR accuracy is used.
+
+Training takes 12,782.358\,s (3.55\,h) at 12.204\,GiB peak allocated memory.
+The runtime retains a 3,899,903,488-parameter image transformer, including
+24,358,912 trained adapter parameters, and an 84,046,115-parameter VAE.
+The 560,528,640-parameter recognition reader supervises training only.
+The assessment comprises 320 new native calls and 64 authenticated reused
+initial-copy outputs. All 384 complete original answers and 128 training
+pages remain available. Neither the training time nor the adapter count is
+a foundation-training or quality-matched efficiency result. The failure
+does not identify a unique causal bottleneck or rule out image-language
+learning with a different method.
+
+{\footnotesize\raggedright
+Protocol: \path{references/native_paired_qa_learning_protocol.md}.
+Complete evidence: \path{references/evidence/native_paired_qa_result/README.md}.
+Training: \path{scripts/train_native_paired_qa.py}.
+Assessment: \path{scripts/assess_native_paired_qa.py}.
+Export: \path{scripts/publish_native_qa_evidence.py}.\par}
+
+
+\clearpage
+\plate{Figure_S29_native_qa_learning}{\textbf{Complete natural-QA adaptation fails the prospective conditions.}
+\textbf{a}, Matched source-accepted OCR-exact answers after 128 updates on
+32 questions remain zero on seen questions, held-out questions and complete
+held-out pairs. Erased controls also give zero. \textbf{b}, Exact copying
+increases by one seen string but loses three held-out strings. The count
+labels show the complete cohorts. The inherited pretrained image writer,
+all original failures and imperfect reference OCR are retained.}{fig:native-qa-learning}
+
+\clearpage
+\plate{Figure_S30_native_qa_pages}{\textbf{Fixed held-out inputs and unrepaired answer pages.}
+\textbf{a}, Complete first held-out question pair and cropped source-question
+insets for display only. \textbf{b}, Complete initial and final answer pages
+for normal, question-erased and passage-erased inputs. Reference whitespace
+alone is cropped for legibility. All twelve model pages remain complete;
+no transcription, contrast repair or replacement writing is applied.
+This fixed pair is selected by original order, not by output appearance.}{fig:native-qa-pages}

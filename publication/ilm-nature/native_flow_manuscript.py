@@ -70,7 +70,7 @@ def prepare(stage):
     anchor=r'\section*{Discussion}'
     require(article.count(anchor)==1,'unique Discussion insertion point required')
     addition=(r'\subsection*{Full-page answer learning remains unsuccessful}'+'\n'
-        +r'\input{native_qa_results.tex}'+'\n'+r'\input{native_flow_results.tex}'+'\n\n')
+        +r'\input{native_qa_results.tex}'+'\n\n'+r'\input{native_flow_results.tex}'+'\n\n')
     (paper/'article_content.tex').write_text(article.replace(anchor,addition+anchor))
     qa_note='\\clearpage\n'+(QA/'supplementary_note_52.tex').read_text()+r'''
 
@@ -218,7 +218,7 @@ def build(stage):
             for term in ('12,782.358','15.697','1,536','0/32','0/16'):
                 require(term in text,'compiled paper lacks completed result '+term+': '+stem)
             if 'supplementary' in stem:
-                for term in ('Supplementary Note 52','Supplementary Note 53','Figure S29','Figure S30','Figure S31'):
+                for term in ('Supplementary Note 52','Supplementary Note 53','Fig. S29','Fig. S30','Fig. S31'):
                     require(term in text,'compiled supplement lacks '+term)
             if stem.startswith('redlined_'):
                 require('43-slide manuscript baseline' in text,'redline baseline notice absent')
@@ -226,12 +226,13 @@ def build(stage):
             outputs[stem+'.pdf']=sha(target);pages[stem]=len(document)
             locations[stem]={term:[i+1 for i,page in enumerate(document) if term in ' '.join(page.get_text().split())]
                 for term in ('Full-page answer learning remains unsuccessful','Supplementary Note 52',
-                    'Supplementary Note 53','12,782.358','15.697','Figure S29','Figure S30','Figure S31')}
+                    'Supplementary Note 53','12,782.358','15.697','Fig. S29','Fig. S30','Fig. S31')}
             print('Built '+stem+': '+str(len(document))+' pages',flush=True)
         require(protected()==meta['active_publication_sha256'],'active files changed during isolated build')
         verify(stage)
         save(stage/'build.json',dict(builder_sha256=sha(__file__),preparation_sha256=sha(stage/'preparation.json'),
             PDFs_sha256=outputs,pages=pages,locations=locations,redlines=marked,resources=resources,
+            document_sources_sha256={stem+'.tex':sha(paper/(stem+'.tex')) for stem in DOCS},
             all_compiled_without_overfull_or_undefined=True,all_PDF_structure_checks_passed=True,
             active_publication_unchanged=True,active_publication_updated=False,
             raw_PDF_page_review_completed=False,Nutstore_updated=False,general_ilm_goal_complete=False))

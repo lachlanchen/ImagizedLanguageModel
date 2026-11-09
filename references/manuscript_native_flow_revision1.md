@@ -260,3 +260,52 @@ started. The [admission record](evidence/native_flow_manuscript_build_admission.
 documents that no LaTeX or Office process was started and no active file
 changed. Compilation and the subsequent PDF review remain pending; resume
 the same source-bound stage after the model owner releases the lock.
+
+## Complete manuscript package built, reviewed and promoted
+
+After the model worker released the project lock, the v1 compilation reached
+the numerical/reference checks. A checker incorrectly required the literal
+label `Figure S29`; the established style prints `Fig. S29`. The compiled
+documents were retained, and the checker was corrected in a fresh v2 stage.
+All five v2 documents passed compilation and PDF structure checks. Visual
+inspection then identified two new Results paragraphs running together.
+A paragraph break was added before preparing the fresh final v3 stage.
+Scientific wording, quantities, equations and prior figure bytes did not
+change in either correction.
+
+The complete v3 package passes compilation with no overfull boxes or undefined
+references/citations: article 16 pages, line-numbered review article 30 pages,
+supplement 74 pages, and matched article/supplement redlines 30/74 pages.
+Actual full-resolution inspection covers added Results, Notes52/53, captions,
+S29--S31 and reflowed Methods/references in both clean and change-marked PDFs.
+The latest supplement pages65--70 are byte-identical to the already inspected
+v2 renders. All earlier article pages1--12, review pages1--14 and supplement
+pages1--64 preserve their original rendered pixels. Supplement pages71--74
+preserve the former pages65--68 body pixels, allowing only changed page
+numbers. Every embedded image pixel from S29--S31 is preserved in the compiled
+supplement. These checks do not establish language competence.
+
+The [build](../publication/ilm-nature/evidence/native_flow_manuscript_build.json),
+[actual review](../publication/ilm-nature/evidence/native_flow_manuscript_review.json)
+and [promotion](../publication/ilm-nature/evidence/native_flow_manuscript_promotion.json)
+receipts bind the exact source/PDF/figure/deck bytes. The reviewed 46-slide,
+52-chart deck, five PDFs and matching TeX/figure inputs are now active.
+A named `baselines/pre-native-flow-daef4bf/baseline_manifest.json` preserves
+the previous file hashes and their recoverable Git baseline. Title, abstract,
+Introduction, bibliography, prior results and prior figure/style bytes remain
+unchanged. The complete 128-update continuous-query fit completed separately
+and is reported in [its own result note](native_query_fit_result.md); its
+outcomes are not merged into these two earlier experiment descriptions.
+The final [preparation](../publication/ilm-nature/evidence/native_flow_manuscript_v3_preparation.json),
+[rendered-page manifest](../publication/ilm-nature/evidence/native_flow_manuscript_v3_preview_manifest.json),
+[body preservation](../publication/ilm-nature/evidence/native_flow_manuscript_v3_body_preservation.json)
+and [additional pixel checks](../publication/ilm-nature/evidence/native_flow_manuscript_v3_additional_verification.json)
+are retained separately from the unsuccessful v1 stage.
+
+The [synchronization receipt](../publication/ilm-nature/evidence/native_flow_manuscript_sync.json)
+verifies the local Nutstore package
+`ILM_NatureStyle_20261109_CompleteFlow`, including reproducible source inputs,
+and all five latest aliases. Replaced aliases have hash-named backups.
+Cloud propagation and native PowerPoint application inspection remain
+unverified. This manuscript maintenance unit is complete; autonomous
+image-language answering and the general ILM goal remain unachieved.

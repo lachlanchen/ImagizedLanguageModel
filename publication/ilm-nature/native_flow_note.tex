@@ -1,0 +1,124 @@
+\clearpage
+\section*{Supplementary Note 53 | Native image-answer flow adaptation}
+\label{note:native-visual-flow}
+The retained pretrained reader supplies image-derived semantic conditions;
+a separate frozen VAE encoding supplies reference latents from the input page.
+Changing questions enter only as image pixels, with a fixed generic task
+condition and removed unused lexical table, output head and tokenizer.
+The frozen language/image body retains its external pretraining. This is
+adapter learning on an existing system, not foundation training from pixels.
+
+For supervised answer image $y$, the frozen VAE gives $z_y=E(y)$.
+The native shifted schedule defines
+\[
+z_\sigma=(1-\sigma)z_y+\sigma\epsilon,\qquad
+v^*=\epsilon-z_y,\qquad
+\mathcal L=\operatorname{MSE}(v_\theta(z_\sigma,t_\sigma,x),v^*).
+\]
+Each update uses one logical positive-task denoiser call, with native
+checkpoint recomputation in backward. Independent-noise inference uses
+fifty native steps and guidance four; it is not denoising a supplied answer.
+No answer transcript, teacher, OCR engine or font lookup enters deployment.
+Supervised targets are loaded separately from input-only conditions.
+
+Rank-16 connector/writer adapters use AdamW with rate $5\times10^{-5}$,
+betas $(.9,.95)$, decay $.05$ and norm clipping at one. Four complete
+permutations of 384 image pairs give 1,536 updates: 256 Chinese QA pairs from 128
+articles and 128 Chinese/English copying pairs. Sixteen held-out QA articles
+never enter this optimizer schedule. Both canvases are $1024\times1024$; original
+$512\times256$ answer images are padded with white without resizing their writing.
+There are 852 verified adapter tensors and optimizer states, all at step 1,536.
+The complete retained runtime has 6,240,279,775 parameters; 37,380,992 adapt.
+Whole-attempt time is 11,450.839\,s at 15.697\,GiB peak allocated memory,
+including source loading, saving and 24 fixed seen monitoring images.
+
+The completed final normal cohort contains 32 seen questions and 32 questions
+from disjoint development articles. Canonical and source-accepted OCR exact
+counts are zero in both splits; both-correct passage-pair counts are 0/16 in
+both. Every generated PNG authenticates against its actual decoder tensor.
+All 64 complete pages were inspected, with malformed writing and repeated
+fragments retained. Source and OCR access prevent an independent blinded
+review claim, and no manual answer-accuracy score is assigned. Clean reference
+OCR gives 23/32 seen and 26/32 held out. Development cases have been reused;
+these observations are not a new untouched benchmark.
+
+The completed final copying cohort contains 32 seen strings and 32 held-out
+strings, each split balanced between Chinese and English. Every original
+output page was inspected and authenticated against its actual decoder tensor.
+Counts under the unchanged OCR exact-match rule are:
+\begin{center}
+\begin{tabular}{lrrrr}
+ & Seen & Held out & Reference seen & Reference held out \\
+\hline
+Chinese & 2/16 & 2/16 & 14/16 & 14/16 \\
+English & 0/16 & 1/16 & 13/16 & 15/16 \\
+Combined & 2/32 & 3/32 & 27/32 & 29/32 \\
+\end{tabular}
+\end{center}
+The copying strings share a character/word inventory, rendering font and
+instruction template. Held-out strings do not enter optimizer updates, but
+these reused development examples do not test unseen scripts or sentence
+understanding. Visible errors include omitted forms, merged strokes and extra
+punctuation. No manual accuracy or repaired OCR score is assigned.
+
+The complete initial/source control scores zero on seen and held-out QA and
+copying. Both question-erased and passage-erased held-out cohorts score 0/32
+in both arms. All 384 output pages have numerical authentication and actual
+raw review; identical erased inputs and seeds produce bit-exact decoded pages.
+Five answer/dependence gates fail. Copying retention passes against zero
+initial copies, which does not qualify reliable writing.
+
+The registered 144-forward field diagnostic uses four seen and four held-out
+normal question pairs and one erased control pair. At sigma one, the actual
+writer input is exactly independent noise. For native target velocities
+$u_0,u_1$ and corresponding predicted fields $p_0,p_1$, normalized alignment is
+\[
+A=\frac{\langle u_1-u_0,p_1-p_0\rangle}{\|u_1-u_0\|^2}.
+\]
+It is unbounded and is not accuracy. Perfect matching gives one; a predicted
+field unchanged by the question gives zero. Mean seen alignment changes from
+0.006717 to 0.010039; held-out alignment changes from 0.003767 to 0.009684. Individual
+negative pairs remain. Exact field swapping and zero erased-control alignment
+pass; these small descriptive signals do not prove semantic acquisition.
+
+The separate guidance-one test uses four reused questions per arm and produces
+zero correct answers in both arms at guidance one and four. Two new native
+guidance-four replays match their original fields, decoder tensors and pixels
+exactly. All ten diagnostic pages are inspected. This small diagnostic does
+not repair the tested answers or exclude all possible sampling effects.
+
+All eight existing preflight target reconstructions, covering posterior modes
+and samples for four seen answers, reproduce the original ink measurements
+and pass the fixed OCR exact rule. Foreground F1 ranges from 0.966741 to
+0.988286. Their full pages were inspected. These are supplied-target codec
+reconstructions, not autonomous answers or a historical-script test.
+
+The original offline assessor fails on a checksum-loop name collision after
+all 384 draws and OCR reports finish. The disclosed correction aliases only
+the schedule-digest function and its call. All 19 registered source files and
+all model draws remain unchanged; the corrected CPU execution authenticates
+the complete saved comparison and applies the original scores and gates.
+The original complete evidence remains under
+\path{references/evidence/native_visual_flow_final_normal/}, with
+the corresponding copying export under
+\path{references/evidence/native_visual_flow_final_copy/}.
+All input, answer and reference PNG bytes and the full training audit are retained.
+The complete comparison, diagnostics and correction provenance are under
+\path{references/evidence/native_visual_flow_complete_result/}.
+Historical-script semantics and efficiency at matched language quality remain
+unverified. Figure~S31 distinguishes the implemented training path from these
+unachieved goals.
+
+
+\clearpage
+\plate{Figure_S31_native_visual_flow}{\textbf{Native image-answer flow executes within one GPU but fails answering.}
+\textbf{a}, A complete original input supplies frozen reader features and
+a separate frozen-VAE reference latent. Connector and writer adapters learn;
+the frozen VAE decodes the sampled answer. The first fixed held-out output
+is shown unrepaired. \textbf{b}, Answer-image supervision defines the native
+velocity loss; inference starts from independent noise and uses fifty steps.
+\textbf{c}, Matched initial/final QA counts remain zero, while copying rises
+from zero to five of 64 strings. All 384 original assessment pages are
+authenticated and inspected. The 37.381M trainable adapters remain inside a
+6.240B-parameter pretrained runtime; these costs do not establish efficient
+language learning at matched quality. Reference OCR remains imperfect.}{fig:native-visual-flow}

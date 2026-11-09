@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov  8 14:36:48 2026
-%DIF ADD new.tex   Sun Nov  8 14:36:48 2026
+%DIF DEL old.tex   Mon Nov  9 12:38:17 2026
+%DIF ADD new.tex   Mon Nov  9 12:38:17 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -126,7 +126,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the b5501de 41-slide writing baseline are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the preserved 43-slide manuscript baseline (daef4bf) are blue.}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -3710,7 +3710,7 @@ remains 27/32 seen and 28/32 held out, rather than perfect accuracy.
 Complete original-order target/pilot/final galleries are inspected. Seen
 case 004 still omits characters; 012 copies instructions and 025 repeats a
 letter in \texttt{small}. Held-out case 000 adds a quotation mark, 002 repeats
-a character \DIFdelbegin \DIFdel{, 026 duplicates its line }\DIFdelend and 030 copies instructions\DIFaddbegin \DIFadd{; 026 now has one line}\DIFaddend . More than
+a character and 030 copies instructions; 026 now has one line. More than
 two obvious failures in each split independently reject the unchanged 30/32
 requirement for correct, legible requested strings alone. This is not a
 quantitative manual annotation of every glyph. No PNG is repaired or rerolled.
@@ -3752,32 +3752,29 @@ fixed first two held-out cases, with unchanged target, pilot and final pages.
 All 64 actual outputs, including failures outside these examples, are retained.
 These are copying observations with external pretraining and reused development
 inputs, without independent-seed replication or semantic QA.}{fig:s26-balanced}
-\DIFaddbegin
 
 \clearpage
-\section*{\DIFadd{Supplementary Note 50. Fixed target ink mass and matched writing improvement}}
+\section*{Supplementary Note 50. Fixed target ink mass and matched writing improvement}
 
-\DIFadd{The balanced continuation fails its Chinese and seen-retention requirements.
+The balanced continuation fails its Chinese and seen-retention requirements.
 We next examine a specific weakness of its physical objective. For a binary
 unit error, balanced L1 assigns missing ink weight $1/(2N_{\rm ink})$ and extra
 ink weight $1/(2N_{\rm background})$. A large blank page therefore weakens the
 relative cost of extra writing. This objective still has the exact reference
 as a minimum; it does not mathematically require a duplicate line. A frozen
 recognition reader can also ignore extra writing (Note 47).
-}
 
-\DIFadd{A CPU-only audit constructs a nonoverlapping duplicate of the complete target
+A CPU-only audit constructs a nonoverlapping duplicate of the complete target
 line on each of 64 reference pages, and compares its physical cost with deleting
 the answer. These are explicit reference-derived corruptions, not generated
 pages. Duplicate-to-deletion cost under balanced L1 has median 1.790\%, range
 .837--3.447\%. This diagnoses relative weighting, not a unique cause of the
 model's errors. The diagnostic uses clipped, quantized PNGs; actual physical
 supervision uses unclipped decoded RGB.
-}
 
-\DIFadd{Let $p_j$ be an unclipped predicted RGB sample and $y_j$ its reference, with
+Let $p_j$ be an unclipped predicted RGB sample and $y_j$ its reference, with
 $j$ indexing spatial positions and colour channels. Define
-}\begin{align}
+\begin{align}
  a(v)&=(1/2-v)/\tau,\qquad t_j=\operatorname{sigmoid}(a(y_j)),\quad \tau=.05,\\
  K(p,y)&=\frac{\sum_j\left[
  \operatorname{BCELogits}(a(p_j),t_j)
@@ -3785,7 +3782,7 @@ $j$ indexing spatial positions and colour channels. Define
  \frac{\partial K}{\partial p_j}
  &=\frac{t_j-\operatorname{sigmoid}(a(p_j))}{\tau\sum_k t_k}.
 \end{align}
-\DIFadd{This is summed Bernoulli KL normalized by fixed target ink mass. The same
+This is summed Bernoulli KL normalized by fixed target ink mass. The same
 invertible transformation is applied to prediction and reference; the
 reference remains the unique optimum in real arithmetic. No predicted mass
 enters the denominator, and unclipped errors retain gradients. Finite differences
@@ -3793,9 +3790,8 @@ agree with autograd, with zero loss and gradient at the reference. These are
 standard loss calculations, not a new learning theorem. The new diagnostic
 duplicate/deletion ratio is 85.857\% at the median, range 82.079--91.566\%.
 This does not prove that optimization will correct writing.
-}
 
-\DIFadd{We test the complete replacement in two matched 32-update arms. Both restore
+We test the complete replacement in two matched 32-update arms. Both restore
 the balanced checkpoint's weights and step-160 AdamW states, then execute the
 same full permutation of 32 inputs: sixteen Chinese and sixteen English.
 Model seed is 20268601; CPU order and noise streams use 20268602 and 20268603.
@@ -3804,33 +3800,31 @@ rank-16 adapters, rate $10^{-5}$, decay .01, clipping one, native input encoding
 all 50 differentiable steps, guidance one and $512\times256$ output remain
 common. Targets enter only the final losses after independent-noise generation.
 No natural QA, extra font or new writing string is optimized.
-}
 
-\DIFadd{Control retains reader CE plus $10B(p,y)$ from Note 48. Treatment replaces only
+Control retains reader CE plus $10B(p,y)$ from Note 48. Treatment replaces only
 the physical term with $\lambda K(p,y)$, keeping reader CE unchanged.
 The coefficient $\lambda=.4035679875746343$ is fixed before optimization as the
 median training-reference ratio $10B(\mathrm{blank},y)/K(\mathrm{blank},y)$.
 No held-out score selects it. This calibration matches a deletion-cost scale,
 not parameter-gradient norms. The comparison isolates this replacement bundle;
 normalization, curvature and interaction with clipping are not separated.
-}
 
 \begin{center}\small
 \begin{tabular}{lrr}
 \toprule
-\DIFadd{Independent OCR observation }& \DIFadd{Control }& \DIFadd{Ink-mass replacement}\\
+Independent OCR observation & Control & Ink-mass replacement\\
 \midrule
-\DIFadd{Seen, all }& \DIFadd{16/32 }& \DIFadd{18/32}\\
-\DIFadd{Held out, all }& \DIFadd{16/32 }& \DIFadd{19/32}\\
-\DIFadd{Seen Chinese }& \DIFadd{5/16 }& \DIFadd{8/16}\\
-\DIFadd{Held-out Chinese }& \DIFadd{4/16 }& \DIFadd{6/16}\\
-\DIFadd{Seen English }& \DIFadd{11/16 }& \DIFadd{10/16}\\
-\DIFadd{Held-out English }& \DIFadd{12/16 }& \DIFadd{13/16}\\
+Seen, all & 16/32 & 18/32\\
+Held out, all & 16/32 & 19/32\\
+Seen Chinese & 5/16 & 8/16\\
+Held-out Chinese & 4/16 & 6/16\\
+Seen English & 11/16 & 10/16\\
+Held-out English & 12/16 & 13/16\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\DIFadd{All prospective exploratory conditions pass: at least 6/16 held-out Chinese
+All prospective exploratory conditions pass: at least 6/16 held-out Chinese
 and two above control; at least 13/32 seen strings without control regression;
 and at least 13/16 held-out English without control regression
 (Fig.~\ref{fig:s27-ink-mass}). Seen English nevertheless decreases by one.
@@ -3839,9 +3833,8 @@ held-out changes are six and three. This is one deterministic schedule on
 reused development data without independent-seed replication. OCR and font
 recognition can contribute to measured changes; clean-reference calibration
 remains 27/32 seen and 28/32 held out.
-}
 
-\DIFadd{All 64 target/starting/control/treatment panels are inspected. Treatment removes
+All 64 target/starting/control/treatment panels are inspected. Treatment removes
 the control's extra instruction line in seen case 012 and quotation mark in
 held-out case 000. Errors remain: seen 004 omits characters, 013 and 027 retain
 quotation marks; held-out 002 repeats a character, 005 corrupts English letters,
@@ -3851,9 +3844,8 @@ failures per split independently reject the unchanged 30/32 writing floor.
 The inspection is not a quantitative manual annotation of every glyph. A
 passing exploratory rule permits bounded investigation, not reliable writing
 or a semantic-language claim.
-}
 
-\DIFadd{Both initial native replay checks pass. The first actual pre-update page is
+Both initial native replay checks pass. The first actual pre-update page is
 bit-identical across arms at the same input and seed, with recognition loss
 .07570605. Pre-clipping gradient norm is 8.79523 in control and 15.20039 in
 treatment. Finite nonzero gradients traverse early, middle and final sampling
@@ -3861,25 +3853,23 @@ steps. All 206 adapter tensors change; frozen parameters have no gradients.
 Export reproduces both schedules and authenticates all 64 training PNGs and
 128 final PNGs against retained neural tensors. This is artifact verification,
 not a second independent neural replay.
-}
 
-\DIFadd{Control and treatment training invocations take 1,146.423 and 1,145.598\,s,
+Control and treatment training invocations take 1,146.423 and 1,145.598\,s,
 at 12.032 and 12.033\,GiB allocated peaks. Separate 64-case inference takes
 513.746 and 514.150\,s, at 8.031\,GiB each. Earlier learning, acquisition and
 CPU OCR are excluded. The inherited 3.900B transformer, 84.046M VAE, 24.359M
 trained parameters and 560.529M training-only reader remain unchanged. Neither
 foundation training nor efficiency at matched language quality is established.
-}
 
 {\footnotesize\raggedright
-\DIFadd{Complete protocols, raw outputs and source bindings are in
-}\path{references/ink_mass_writing_protocol.md}\DIFadd{,
-}\path{references/ink_mass_comparison_result.md} \DIFadd{and
-}\path{references/writing_physical_loss_audit.md}\DIFadd{.
-Reproduction uses }\path{scripts/train_ink_mass_writer.py}\DIFadd{,
-}\path{ilm/image_edit/ink_mass.py}\DIFadd{,
-}\path{scripts/run_ink_mass_comparison.py} \DIFadd{and
-}\path{scripts/export_ink_mass_comparison.py}\DIFadd{.}\par}
+Complete protocols, raw outputs and source bindings are in
+\path{references/ink_mass_writing_protocol.md},
+\path{references/ink_mass_comparison_result.md} and
+\path{references/writing_physical_loss_audit.md}.
+Reproduction uses \path{scripts/train_ink_mass_writer.py},
+\path{ilm/image_edit/ink_mass.py},
+\path{scripts/run_ink_mass_comparison.py} and
+\path{scripts/export_ink_mass_comparison.py}.\par}
 
 \clearpage
 \plate{Figure_S27_ink_mass}{\textbf{A matched physical-loss replacement improves
@@ -3896,9 +3886,9 @@ outputs and their failures are retained. No semantic QA is optimized in these
 arms.}{fig:s27-ink-mass}
 
 \clearpage
-\section*{\DIFadd{Supplementary Note 51. Full-page execution and a failed unoptimized QA baseline}}
+\section*{Supplementary Note 51. Full-page execution and a failed unoptimized QA baseline}
 
-\DIFadd{We next check the native interface on complete natural-question pages rather
+We next check the native interface on complete natural-question pages rather
 than extrapolating from copying strips. The existing CMRC-derived preparation
 has 256 training and 32 article-disjoint held-out questions, paired by passage
 with distinct accepted answers. All 288 normal question pages reproduce their
@@ -3908,18 +3898,16 @@ the pair so both erased inputs and seeds are identical. This also changes
 layout relative to a shorter original question. Passage-erased controls
 preserve the complete original question pixels and position. These interventions
 do not establish that the generator reads the remaining content.
-}
 
-\DIFadd{The fixed preflight selects the first future-training pair and first held-out
+The fixed preflight selects the first future-training pair and first held-out
 pair in manifest order. Each complete input is $1024\times1024$ at the existing
 32-pixel font; no answer-aware crop or text transcript enters generation.
 Its earlier balanced checkpoint is specified before observing any QA output,
 regardless of the subsequent ink-mass comparison. Native inference reloads
 that fixed checkpoint, which has no QA optimizer exposure. Partition labels
 identify the prepared future data splits, not prior QA exposure of this model.
-}
 
-\DIFadd{The four full input pages encode to $1\times128\times64\times64$ native feature
+The four full input pages encode to $1\times128\times64\times64$ native feature
 fields. Posterior mode, patchification and normalization remain unchanged.
 Complete reconstructions have thresholded foreground F1 of 97.834--98.180\%
 and mean RGB absolute error of 1.039--1.071\%. All four decoded pages are
@@ -3927,9 +3915,8 @@ visually inspected and remain readable. This checks physical representation
 on four pages, not perfect preservation of every character, learned reading
 by the generator or general script invariance. Codec execution takes
 5.401\,s at 3.574\,GiB peak allocation (Fig.~\ref{fig:s28-full-page}).
-}
 
-\DIFadd{The real gradient probe uses only the first future-training question pair.
+The real gradient probe uses only the first future-training question pair.
 It restores the fixed adapters, starts fresh AdamW at rate $10^{-5}$ and decay
 .01, clips at one and executes two actual updates under Note 48's unchanged
 objective. Model seed is 20268801; independent trajectory seeds are 20268802
@@ -3940,9 +3927,8 @@ are 2,026.184 and 123.281. All are finite; all 206 adapter tensors change and
 optimizer states reach step two. Frozen parameters have no gradients. This
 takes 228.879\,s at 12.203\,GiB, and the resulting weights are explicitly
 discarded. It verifies actual execution, not semantic improvement.
-}
 
-\DIFadd{Separate input-only processes then reload the prospectively fixed earlier
+Separate input-only processes then reload the prospectively fixed earlier
 checkpoint, never the discarded weights. They use 50 native steps, guidance
 one, one generic condition and $512\times256$ output, without a training
 manifest, reference answer, per-question text embedding or recognition reader.
@@ -3951,9 +3937,8 @@ question-erased inputs share pixels and seeds; their actual output tensors
 and PNGs are bit-exact. Normal inference takes 94.888\,s, question-erased
 inference 48.952\,s and passage-erased inference 48.753\,s, each at
 9.536\,GiB allocated peak. Acquisition, earlier training and CPU OCR are excluded.
-}
 
-\DIFadd{None of the four normal answers is correct by independent OCR or raw inspection;
+None of the four normal answers is correct by independent OCR or raw inspection;
 all four controls also fail. Outputs copy and corrupt portions of the input
 instead of producing the requested answer. The first pair requests the manga
 series installment and story description; the second requests a fish's
@@ -3962,9 +3947,8 @@ small unoptimized baseline, not a complete QA benchmark or a before/after
 language-learning comparison. Reference OCR on the broader first-32-training
 and 32-held-out canonical answers is only 23/32 and 26/32. Recognizer failures
 must not be confused with model errors; raw pages remain necessary.
-}
 
-\DIFadd{The completion worker waits for the exact comparison owner to exit before
+The completion worker waits for the exact comparison owner to exit before
 exporting that complete result and launching these probes sequentially.
 All eight generated PNGs and four codec PNGs are authenticated against actual
 neural tensors. Raw review follows the immutable producer assessment. No
@@ -3974,18 +3958,17 @@ retains its externally pretrained 3.900B transformer and 84.046M VAE.
 Meaningful QA training, complete held-out paired-question assessment, reliable
 writing, historical forms and efficiency at matched language quality remain
 unachieved by this writer.
-}
 
 {\footnotesize\raggedright
-\DIFadd{Protocol and complete assessment are
-}\path{references/paired_language_native_preflight_protocol.md} \DIFadd{and
-}\path{references/native_paired_language_preflight_result.md}\DIFadd{.
-Reproduction uses }\path{scripts/prepare_paired_language_controls.py}\DIFadd{,
-}\path{scripts/probe_native_paired_language.py}\DIFadd{,
-}\path{scripts/finish_ink_mass_and_probe_language.py}\DIFadd{, the native input-only
+Protocol and complete assessment are
+\path{references/paired_language_native_preflight_protocol.md} and
+\path{references/native_paired_language_preflight_result.md}.
+Reproduction uses \path{scripts/prepare_paired_language_controls.py},
+\path{scripts/probe_native_paired_language.py},
+\path{scripts/finish_ink_mass_and_probe_language.py}, the native input-only
 inference entry point and separate CPU scoring. The full-page inference
 checkpoint SHA256 is
-}\path{fc031796540a4b6ca4c86774a5033e94ae32b415e825b6a221128756748d3575}\DIFadd{.}\par}
+\path{fc031796540a4b6ca4c86774a5033e94ae32b415e825b6a221128756748d3575}.\par}
 
 \clearpage
 \plate{Figure_S28_full_page_preflight}{\textbf{Full-page representation and
@@ -4001,11 +3984,259 @@ output is cropped. Fresh inference restores the earlier checkpoint rather
 than the discarded updates. The four normal and four control calls all fail.
 Every raw input, reference, reconstruction and native output is retained.
 This small execution preflight does not demonstrate language learning.}{fig:s28-full-page}
-\DIFaddend
 
 
 \clearpage
-\section*{Reproduction}
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 52 | Complete natural-question image-answer learning}}
+\label{note:native-qa-learning}
+\DIFadd{The continuous image writer starts from the fixed ink-mass checkpoint selected
+before QA adaptation. A fresh rank-16 AdamW optimizer uses rate $10^{-5}$,
+decay .01 and gradient clipping at one. Four complete permutations of the
+first 32 training questions from sixteen passages give 128 updates. All 32
+held-out questions come from sixteen disjoint articles. The public cases have
+been reused during development, so this is a developmental comparison with
+one schedule rather than a pristine benchmark or seed replication.
+}
+
+\DIFadd{The entire $1024\times1024$ passage/question image conditions a native
+$512\times256$ answer image. The same generic condition applies to every
+example. Generation begins from independent noise. No varying text embedding,
+answer crop, transcription, teacher or font lookup enters deployment. The
+target is loaded only after generation during training. Gradients traverse
+all fifty native steps and the frozen decoder. The objective is frozen-reader
+recognition cross-entropy plus $.4035679875746343$ times target-mass Bernoulli
+KL at temperature .05. Recognition vocabulary and answer text supply training
+supervision only. External image/language pretraining remains inherited.
+}
+
+\DIFadd{The first actual differentiable output matches native generation exactly at
+the same seed. Finite nonzero gradients reach early, middle and final steps.
+All 206 adapter tensors change, actual optimizer counters reach 128 and the
+complete schedule, RNG states and all 128 pre-update images authenticate.
+An earlier save-path failure occurs before any update. Its preserved attempt
+is an execution correction, not a restart selected by answer quality. Only
+the final fixed-budget checkpoint enters assessment. The initial checkpoint
+is assessed afterwards under the same prospectively fixed inputs and seeds.
+}
+
+\begin{center}\small
+\begin{tabular}{lrr}
+\toprule
+\DIFadd{Complete independent OCR observation }& \DIFadd{Initial }& \DIFadd{Final}\\
+\midrule
+\DIFadd{Seen Chinese answers }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Held-out Chinese answers }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Held-out pairs, both answers correct }& \DIFadd{0/16 }& \DIFadd{0/16}\\
+\DIFadd{Held out, question erased }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Held out, passage erased }& \DIFadd{0/32 }& \DIFadd{0/32}\\
+\DIFadd{Seen Chinese/English copies }& \DIFadd{18/32 }& \DIFadd{19/32}\\
+\DIFadd{Held-out Chinese/English copies }& \DIFadd{19/32 }& \DIFadd{16/32}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\DIFadd{Canonical and source-accepted QA exact counts agree at zero. Matching uses
+NFC/whitespace normalization, preserving case and punctuation. Each passage
+pair has disjoint source-accepted answer sets. All 32 question-erased pairs
+have identical inputs and seeds and yield bit-identical tensors at each
+checkpoint. This execution equality is not evidence of answering.
+}
+
+\DIFadd{All six prospective conditions fail: seen fit of at least 24/32; at least
+12/32 held-out answers and a gain of four; at least 4/16 both-correct pairs
+and a gain of two; a normal-answer advantage of four over question-erased
+control; the same advantage over passage-erased control; and loss of at most
+two held-out copies from the initial 19/32. The observed copy loss is three.
+The one-case seen-copy gain does not establish semantic learning.
+}
+
+\DIFadd{Reference OCR recognizes only 23/32 seen and 26/32 held-out canonical QA
+images exactly. The seen requirement of 24/32 therefore exceeds recognition
+of these clean reference images. That limitation is not a strict ceiling on
+another output style. It remains disclosed without changing the registered
+rule or repairing scores. Raw review covers every original answer: natural
+QA contains malformed writing, unwanted passage/question fragments and extra
+labels. Copies retain omissions, substitutions, repeats and unwanted quotes.
+Some final pages are faint. No contrast enhancement, rerendered transcription
+or quantitative manual replacement of OCR accuracy is used.
+}
+
+\DIFadd{Training takes 12,782.358\,s (3.55\,h) at 12.204\,GiB peak allocated memory.
+The runtime retains a 3,899,903,488-parameter image transformer, including
+24,358,912 trained adapter parameters, and an 84,046,115-parameter VAE.
+The 560,528,640-parameter recognition reader supervises training only.
+The assessment comprises 320 new native calls and 64 authenticated reused
+initial-copy outputs. All 384 complete original answers and 128 training
+pages remain available. Neither the training time nor the adapter count is
+a foundation-training or quality-matched efficiency result. The failure
+does not identify a unique causal bottleneck or rule out image-language
+learning with a different method.
+}
+
+{\footnotesize\raggedright
+\DIFadd{Protocol: }\path{references/native_paired_qa_learning_protocol.md}\DIFadd{.
+Complete evidence: }\path{references/evidence/native_paired_qa_result/README.md}\DIFadd{.
+Training: }\path{scripts/train_native_paired_qa.py}\DIFadd{.
+Assessment: }\path{scripts/assess_native_paired_qa.py}\DIFadd{.
+Export: }\path{scripts/publish_native_qa_evidence.py}\DIFadd{.}\par}
+
+
+\clearpage
+\plate{Figure_S29_native_qa_learning}{\textbf{Complete natural-QA adaptation fails the prospective conditions.}
+\textbf{a}, Matched source-accepted OCR-exact answers after 128 updates on
+32 questions remain zero on seen questions, held-out questions and complete
+held-out pairs. Erased controls also give zero. \textbf{b}, Exact copying
+increases by one seen string but loses three held-out strings. The count
+labels show the complete cohorts. The inherited pretrained image writer,
+all original failures and imperfect reference OCR are retained.}{fig:native-qa-learning}
+
+\clearpage
+\plate{Figure_S30_native_qa_pages}{\textbf{Fixed held-out inputs and unrepaired answer pages.}
+\textbf{a}, Complete first held-out question pair and cropped source-question
+insets for display only. \textbf{b}, Complete initial and final answer pages
+for normal, question-erased and passage-erased inputs. Reference whitespace
+alone is cropped for legibility. All twelve model pages remain complete;
+no transcription, contrast repair or replacement writing is applied.
+This fixed pair is selected by original order, not by output appearance.}{fig:native-qa-pages}
+
+\clearpage
+\section*{\DIFadd{Supplementary Note 53 | Native image-answer flow adaptation}}
+\label{note:native-visual-flow}
+\DIFadd{The retained pretrained reader supplies image-derived semantic conditions;
+a separate frozen VAE encoding supplies reference latents from the input page.
+Changing questions enter only as image pixels, with a fixed generic task
+condition and removed unused lexical table, output head and tokenizer.
+The frozen language/image body retains its external pretraining. This is
+adapter learning on an existing system, not foundation training from pixels.
+}
+
+\DIFadd{For supervised answer image $y$, the frozen VAE gives $z_y=E(y)$.
+The native shifted schedule defines
+}\[
+z_\sigma=(1-\sigma)z_y+\sigma\epsilon,\qquad
+v^*=\epsilon-z_y,\qquad
+\mathcal L=\operatorname{MSE}(v_\theta(z_\sigma,t_\sigma,x),v^*).
+\]
+\DIFadd{Each update uses one logical positive-task denoiser call, with native
+checkpoint recomputation in backward. Independent-noise inference uses
+fifty native steps and guidance four; it is not denoising a supplied answer.
+No answer transcript, teacher, OCR engine or font lookup enters deployment.
+Supervised targets are loaded separately from input-only conditions.
+}
+
+\DIFadd{Rank-16 connector/writer adapters use AdamW with rate $5\times10^{-5}$,
+betas $(.9,.95)$, decay $.05$ and norm clipping at one. Four complete
+permutations of 384 image pairs give 1,536 updates: 256 Chinese QA pairs from 128
+articles and 128 Chinese/English copying pairs. Sixteen held-out QA articles
+never enter this optimizer schedule. Both canvases are $1024\times1024$; original
+$512\times256$ answer images are padded with white without resizing their writing.
+There are 852 verified adapter tensors and optimizer states, all at step 1,536.
+The complete retained runtime has 6,240,279,775 parameters; 37,380,992 adapt.
+Whole-attempt time is 11,450.839\,s at 15.697\,GiB peak allocated memory,
+including source loading, saving and 24 fixed seen monitoring images.
+}
+
+\DIFadd{The completed final normal cohort contains 32 seen questions and 32 questions
+from disjoint development articles. Canonical and source-accepted OCR exact
+counts are zero in both splits; both-correct passage-pair counts are 0/16 in
+both. Every generated PNG authenticates against its actual decoder tensor.
+All 64 complete pages were inspected, with malformed writing and repeated
+fragments retained. Source and OCR access prevent an independent blinded
+review claim, and no manual answer-accuracy score is assigned. Clean reference
+OCR gives 23/32 seen and 26/32 held out. Development cases have been reused;
+these observations are not a new untouched benchmark.
+}
+
+\DIFadd{The completed final copying cohort contains 32 seen strings and 32 held-out
+strings, each split balanced between Chinese and English. Every original
+output page was inspected and authenticated against its actual decoder tensor.
+Counts under the unchanged OCR exact-match rule are:
+}\begin{center}
+\begin{tabular}{lrrrr}
+ & \DIFadd{Seen }& \DIFadd{Held out }& \DIFadd{Reference seen }& \DIFadd{Reference held out }\\
+\hline
+\DIFadd{Chinese }& \DIFadd{2/16 }& \DIFadd{2/16 }& \DIFadd{14/16 }& \DIFadd{14/16 }\\
+\DIFadd{English }& \DIFadd{0/16 }& \DIFadd{1/16 }& \DIFadd{13/16 }& \DIFadd{15/16 }\\
+\DIFadd{Combined }& \DIFadd{2/32 }& \DIFadd{3/32 }& \DIFadd{27/32 }& \DIFadd{29/32 }\\
+\end{tabular}
+\end{center}
+\DIFadd{The copying strings share a character/word inventory, rendering font and
+instruction template. Held-out strings do not enter optimizer updates, but
+these reused development examples do not test unseen scripts or sentence
+understanding. Visible errors include omitted forms, merged strokes and extra
+punctuation. No manual accuracy or repaired OCR score is assigned.
+}
+
+\DIFadd{The complete initial/source control scores zero on seen and held-out QA and
+copying. Both question-erased and passage-erased held-out cohorts score 0/32
+in both arms. All 384 output pages have numerical authentication and actual
+raw review; identical erased inputs and seeds produce bit-exact decoded pages.
+Five answer/dependence gates fail. Copying retention passes against zero
+initial copies, which does not qualify reliable writing.
+}
+
+\DIFadd{The registered 144-forward field diagnostic uses four seen and four held-out
+normal question pairs and one erased control pair. At sigma one, the actual
+writer input is exactly independent noise. For native target velocities
+$u_0,u_1$ and corresponding predicted fields $p_0,p_1$, normalized alignment is
+}\[
+A=\frac{\langle u_1-u_0,p_1-p_0\rangle}{\|u_1-u_0\|^2}.
+\]
+\DIFadd{It is unbounded and is not accuracy. Perfect matching gives one; a predicted
+field unchanged by the question gives zero. Mean seen alignment changes from
+0.006717 to 0.010039; held-out alignment changes from 0.003767 to 0.009684. Individual
+negative pairs remain. Exact field swapping and zero erased-control alignment
+pass; these small descriptive signals do not prove semantic acquisition.
+}
+
+\DIFadd{The separate guidance-one test uses four reused questions per arm and produces
+zero correct answers in both arms at guidance one and four. Two new native
+guidance-four replays match their original fields, decoder tensors and pixels
+exactly. All ten diagnostic pages are inspected. This small diagnostic does
+not repair the tested answers or exclude all possible sampling effects.
+}
+
+\DIFadd{All eight existing preflight target reconstructions, covering posterior modes
+and samples for four seen answers, reproduce the original ink measurements
+and pass the fixed OCR exact rule. Foreground F1 ranges from 0.966741 to
+0.988286. Their full pages were inspected. These are supplied-target codec
+reconstructions, not autonomous answers or a historical-script test.
+}
+
+\DIFadd{The original offline assessor fails on a checksum-loop name collision after
+all 384 draws and OCR reports finish. The disclosed correction aliases only
+the schedule-digest function and its call. All 19 registered source files and
+all model draws remain unchanged; the corrected CPU execution authenticates
+the complete saved comparison and applies the original scores and gates.
+The original complete evidence remains under
+}\path{references/evidence/native_visual_flow_final_normal/}\DIFadd{, with
+the corresponding copying export under
+}\path{references/evidence/native_visual_flow_final_copy/}\DIFadd{.
+All input, answer and reference PNG bytes and the full training audit are retained.
+The complete comparison, diagnostics and correction provenance are under
+}\path{references/evidence/native_visual_flow_complete_result/}\DIFadd{.
+Historical-script semantics and efficiency at matched language quality remain
+unverified. Figure~S31 distinguishes the implemented training path from these
+unachieved goals.
+}
+
+
+\clearpage
+\plate{Figure_S31_native_visual_flow}{\textbf{Native image-answer flow executes within one GPU but fails answering.}
+\textbf{a}, A complete original input supplies frozen reader features and
+a separate frozen-VAE reference latent. Connector and writer adapters learn;
+the frozen VAE decodes the sampled answer. The first fixed held-out output
+is shown unrepaired. \textbf{b}, Answer-image supervision defines the native
+velocity loss; inference starts from independent noise and uses fifty steps.
+\textbf{c}, Matched initial/final QA counts remain zero, while copying rises
+from zero to five of 64 strings. All 384 original assessment pages are
+authenticated and inspected. The 37.381M trainable adapters remain inside a
+6.240B-parameter pretrained runtime; these costs do not establish efficient
+language learning at matched quality. Reference OCR remains imperfect.}{fig:native-visual-flow}
+
+
+\clearpage
+\DIFaddend \section*{Reproduction}
 From the repository root, use the following entry points. GPU stages use
 physical GPU 0; preparation and independent pixel checks run on CPU.
 \begin{quote}\small\ttfamily
