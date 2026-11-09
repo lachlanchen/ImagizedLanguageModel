@@ -74,6 +74,47 @@ The [manifest](evidence/pixel_language_diversity_preparation/manifest.json),
 [bitstream audit](evidence/pixel_language_diversity_preparation/audit.json)
 and [sample review](evidence/pixel_language_diversity_preparation/review.json)
 retain this preparation. It has zero model calls and zero optimizer updates.
-No improved generalization is claimed. Actual variable-length/memory
-qualification and a registered learning schedule remain necessary before
-training this cohort.
+No improved generalization is claimed by preparation.
+
+The [registered learning protocol](pixel_language_diversity_training_protocol.md)
+now specifies 16,000 batch-four updates, bounded 32-question native-context
+windows, fixed autonomous assessments and complete answer-image supervision.
+Actual GPU qualification has completed from the original initial state. The
+1/3/4/7-block batch matches independent owning states with maximum normwise
+error 3.135e-6; its objective is 10.195171870 versus independent mean
+10.195172463. Future-image and padded-history exclusions are exact. Both the
+largest-prompt and longest-answer stress batches give finite, nonzero required
+gradient groups. Restoring the first update and executing the second again
+reproduces model, Adam, sampler, RNG, losses and gradient measurements bit for
+bit. This uses three actual optimizer calls and retains none for the main run.
+Peak allocated GPU memory is 17.8857 GiB. The
+[qualification record](evidence/pixel_language_diversity_qualification/report.json)
+and [actual call ledger](evidence/pixel_language_diversity_qualification/optimizer_calls.jsonl)
+retain these implementation checks. They do not measure language quality.
+
+The main run starts freshly from the declared initial state and must replay
+the qualification's first two updates exactly, after initial whole-cohort loss
+measurement and autonomous image generation. Its unseen-answer results remain
+pending. Run preparation and the two GPU stages separately:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/train_pixel_language_diversity.py \
+  --stage prepare --output artifacts/pixel_language_diversity_training_v1
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
+  python scripts/train_pixel_language_diversity.py --stage qualify \
+  --output artifacts/pixel_language_diversity_training_v1
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
+  python scripts/train_pixel_language_diversity.py --stage run \
+  --output artifacts/pixel_language_diversity_training_v1
+```
+
+Preparation requires a new directory and committed source. A completed
+qualification cannot be rerun in its existing directory. Only explicitly
+resume an interrupted main execution after its owner has exited, using
+`--stage run --resume`; observation timeouts never authorize restarting it.
+After completion, run the independent CPU audit:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/audit_pixel_language_diversity.py \
+  --output artifacts/pixel_language_diversity_training_v1
+```
