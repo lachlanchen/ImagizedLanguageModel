@@ -131,4 +131,8 @@ test reusable glyph generation and conditional language selection on varied
 examples, with new-prompt output quality as the criterion. More diverse data
 is a testable candidate, not a demonstrated repair; earlier larger-corpus
 writers already failed under different recipes. The general image-language
-objective and the bounded manuscript/figure revision remain unfinished.
+objective remains unfinished. The [manuscript](../publication/ilm-nature/manuscript.pdf)
+and Supplementary Note 57 now record the completed result, with editable
+Figures S34/S35, preserved earlier evidence and matching redlines. The reviewed
+package and five latest aliases are hash-verified in the authorized local
+Nutstore ILM folder; cloud propagation is not verified.

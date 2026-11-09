@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Mon Nov  9 16:57:30 2026
-%DIF ADD new.tex   Mon Nov  9 16:57:30 2026
+%DIF DEL old.tex   Mon Nov  9 21:09:33 2026
+%DIF ADD new.tex   Mon Nov  9 21:09:33 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -89,9 +89,9 @@
 
 \newcommand{\PaperTitle}{Learning conditional language\\in continuous image space}
 %DIF 88c88
-%DIF < \newcommand{\PaperSummary}{Written language includes historical and handwritten forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and produces answer images, with encoded text used for offline preparation or separate diagnostics. Experiments on one consumer GPU distinguish physical reconstruction, conditional prediction and answer selection. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, but a 64.520M-parameter writing module with a frozen pretrained reader yields only two exact Chinese answers out of 128 after training on 12,976 examples. Retaining full native context gives no exact development answers after 40,000 updates. Correct answer history does not repair writing, although supplied-code decoding reaches 99.9953\% foreground F1. A source-pixel component copies 32/32 new strings. In a matched comparison with 3,257 updates per arm, contextual attention adaptation gives 26/64 exact unseen answers versus 23/64 in control; each arm answers both questions correctly in 3/32 paragraph pairs. Both fail reading requirements, and adaptation misses the prospective improvement rule. This component's complete 7.531B-parameter runtime retains external pretraining and cannot compose absent answers. A matched physical-loss replacement gives 19/32 held-out OCR-exact copies versus 16/32 in control, including 6/16 versus 4/16 Chinese, but still fails reliable writing. Exact copying and faithful reconstruction have not established reliable conditional image-language generation. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}
+%DIF < \newcommand{\PaperSummary}{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, yet retaining full pretrained context gives no exact development answers after 40,000 updates. Exact copying and constrained source-pixel answer selection do not establish composition of absent answers. Native reader-query learning and supplied-correct-text writer controls also retain inaccurate outputs. A separate 3.453M-parameter causal pixel head reaches 512/512 exact training first blocks after 4.65 minutes of optimization, but none of 192 development first blocks. These head costs exclude the pretrained reader and its cached states. Accurate emission for learned conditions is therefore achievable, while generalization from visual language to complete correct answers remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}
 %DIF -------
-\newcommand{\PaperSummary}{\DIFadd{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, yet retaining full pretrained context gives no exact development answers after 40,000 updates. Exact copying and constrained source-pixel answer selection do not establish composition of absent answers. Native reader-query learning and supplied-correct-text writer controls also retain inaccurate outputs. A separate 3.453M-parameter causal pixel head reaches 512/512 exact training first blocks after 4.65 minutes of optimization, but none of 192 development first blocks. These head costs exclude the pretrained reader and its cached states. Accurate emission for learned conditions is therefore achievable, while generalization from visual language to complete correct answers remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}} %DIF > 
+\newcommand{\PaperSummary}{\DIFadd{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, while earlier complete image writers fail useful answering. We couple full native visual context and emitted-image history to a normalized causal density over physical pixel patterns. The externally pretrained 7.544B actor adapts 13.856M parameters and reaches 32/32 pixel-exact complete training answers after 4,000 updates, at 18.191 GiB peak allocation. Fresh-PNG evaluation gives no exact answers on 16 Chinese development questions or eight English transfer instructions, and the outputs retain broken glyphs. A separate cold deployment reproduces five complete streams exactly without a runtime teacher, OCR or answer font renderer. Complete emission for learned conditions is achievable, but useful language generalization remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}} %DIF > 
 %DIF -------
 
 \onehalfspacing\linenumbers
@@ -136,7 +136,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved 46-slide writing-controls baseline (3011de6).}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved writing-controls baseline (d387a49).}\par\medskip
 
 {\sffamily\bfseries\Large\PaperTitle\par}\medskip Imagized Language Model Project\par\medskip
 \section*{Abstract}\PaperSummary\par\bigskip
@@ -960,8 +960,8 @@ saved target-codec reconstructions preserve four seen answers. These results
 do not establish useful language learning.
 
 
-\DIFaddbegin \subsection*{\DIFadd{Precise image fitting does not establish language generalization}}
-\DIFadd{Additional controls separate optimization from useful answering
+\subsection*{Precise image fitting does not establish language generalization}
+Additional controls separate optimization from useful answering
 (Supplementary Notes 54--56; Figs.~S32 and S33). A 128-update reader-query fit
 still gives no exact answers on two seen and two excluded questions.
 Supplying correct text to the native writer yields 1/4 source pages at
@@ -976,6 +976,26 @@ takes 279.131\,s at 0.825\,GiB peak allocation, excluding the pretrained
 reader and cache. Thus precise emission for learned conditions is achievable
 in this component; conditional generalization and complete language answering
 remain unresolved. Physical fitting is not a semantic benchmark.
+
+
+\DIFaddbegin \subsection*{\DIFadd{Complete image-answer fitting and failed transfer}}
+\DIFadd{The native actor learns complete answer images
+(Supplementary Note 57; Figs.~S34 and S35). Full prompt context conditions a
+causal pixel density and learned stop; emitted images become history.
+The externally pretrained 7.544B actor adapts 13.856M parameters on 32 natural
+Chinese questions from 16 passages. Exact complete training answers increase
+from 0/32 to 17/32, 29/32 and 32/32 at updates 0, 1,000, 2,000 and 4,000.
+The registered exact-fit stop triggers at 4,000; fresh-PNG evaluation confirms
+all 32 answers and all 16 passage pairs. However, reused development gives
+0/16 exact Chinese answers and 0/8 English transfer answers, with foreground
+F1 0.240 and 0.034. Development outputs contain broken glyphs and unrelated
+training fragments. All outputs stop below the
+safety cap. Active optimization takes 63.2\,min and total execution 81.6\,min,
+at 18.191\,GiB peak allocated memory, excluding inherited pretraining.
+Five cold-loaded PNG replays preserve complete pixels and stopping exactly.
+Complete image fitting succeeds; new-prompt answering fails.
+Changes in initialization, decoder, precision and schedules preclude attributing
+this gain to the likelihood alone.
 }
 
 
@@ -1009,7 +1029,15 @@ context effect during autonomous sampling and visible feedback.
 Broader books and offline teacher-generated exercises can supply later
 training data while leaving the final inference path independent. A larger
 corpus or longer training requires improvement on the intended generation
-task, beyond the conditional-likelihood gain established here.
+task, beyond the conditional-likelihood gain established here\DIFaddbegin \DIFadd{.
+}
+
+\DIFadd{Complete pixel learning reproduces all 32 seen answers, but none of 24
+normal development answers. Further unchanged fitting of those questions is
+therefore unwarranted. Varied visual-language supervision must be tested against
+readable, correct new-prompt answers, retaining independent image generation
+and accounting for external pretraining}\DIFaddend .
+
 
 Recent visual generators study mixture assignment and the geometry of
 distribution matching\cite{mgflow,semot}. These results motivate more expressive
@@ -1184,6 +1212,7 @@ Supplementary Information distinguish earlier foundation provenance from the
 present raster-only deployment experiment.
 
 \begin{thebibliography}{21}
+\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}
 \small
 \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.

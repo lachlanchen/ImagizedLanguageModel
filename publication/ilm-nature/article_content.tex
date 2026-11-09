@@ -798,6 +798,9 @@ an alignment repair.
 \subsection*{Precise image fitting does not establish language generalization}
 \input{writing_controls_results.tex}
 
+\subsection*{Complete image-answer fitting and failed transfer}
+\input{complete_pixel_learning_results.tex}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -829,6 +832,13 @@ Broader books and offline teacher-generated exercises can supply later
 training data while leaving the final inference path independent. A larger
 corpus or longer training requires improvement on the intended generation
 task, beyond the conditional-likelihood gain established here.
+
+Complete pixel learning reproduces all 32 seen answers, but none of 24
+normal development answers. Further unchanged fitting of those questions is
+therefore unwarranted. Varied visual-language supervision must be tested against
+readable, correct new-prompt answers, retaining independent image generation
+and accounting for external pretraining.
+
 
 Recent visual generators study mixture assignment and the geometry of
 distribution matching\cite{mgflow,semot}. These results motivate more expressive

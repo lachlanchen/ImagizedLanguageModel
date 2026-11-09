@@ -171,3 +171,19 @@ The change-marked review copy may use compact bibliography item spacing to
 prevent an isolated final URL fragment on a separate page. This is a repeatable
 redline-only formatting repair in the builder. Bibliography content and the
 clean manuscript sources remain unchanged.
+
+Execution completed in `artifacts/complete_pixel_publication_v5/`. The active
+manuscript/review/supplement and matching redlines are 16/30/82/30/82 pages.
+Both new native figures retain original evidence pixels; all prior 48 slide
+appearances and 53 native chart/workbook parts are preserved. The deck now
+contains 50 slides and 54 charts. All new/reflowed PDF pages are visually
+reviewed directly or through contact sheets, with pixel-identity maps for
+previously reviewed pages. The abstract, new mathematics, results, tables
+and both figures additionally receive page/figure resolution review. Builds
+have no overfull boxes or undefined references/citations. The rejected earlier
+drafts had a feedback-label overlap or an orphan reference fragment; the
+promoted revision resolves both. The new local Nutstore package is
+`ILM_NatureStyle_20261109_CompletePixelLearning`, with five latest aliases
+and retained prior copies. Local file hashes match; cloud propagation and
+PowerPoint application inspection are not claimed. The general ILM objective
+remains unachieved, and the next work returns to unseen-language learning.
