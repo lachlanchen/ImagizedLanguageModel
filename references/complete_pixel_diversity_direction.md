@@ -131,3 +131,24 @@ three actual qualification optimizer calls. Both qualification attempts are
 retained, totaling six such calls; the first failed main execution has zero.
 The main v2 execution starts from the original initial state. These records
 establish reproducible execution, not improved unseen-answer quality.
+
+An additional [CPU source-coverage audit](evidence/pixel_language_answer_coverage/report.json)
+reproduces every one of the 512 training answer PNGs and all sixteen Chinese
+development reference sets by rendering their owning source text with the
+authenticated original renderer. It makes 529 rendering calls and zero model
+calls. The first 32 answers contain 174 distinct source code points in 265
+occurrences; the full 512 contain 1,084 in 3,896 occurrences. Two of the sixteen
+Chinese development cases have an entire reference composed of source code
+points present in the old answer set. Eight do in the expanded set.
+
+These counts describe current answer supervision, not prior foundation/raster
+exposure or a visual glyph inventory. Code-point identity does not imply glyph
+identity. Full supervision coverage cannot establish correct selection,
+composition or readable generation. Missing coverage also does not remove a
+case from the objective of generating unfamiliar forms. Every registered case
+remains in the evaluation; no output is inspected or selected by this audit,
+and no source text enters model inference. The original 32-question development
+outcomes were already known, while the current run's final outputs are pending.
+The audit is reproducible with `scripts/audit_pixel_answer_coverage.py` in the
+existing Python 3.12 native rendering environment. It does not modify the
+running training protocol, prepared pixels or checkpoint selection.
