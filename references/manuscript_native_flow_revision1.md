@@ -204,3 +204,59 @@ active-file promotion and Nutstore synchronization remain required before a
 new complete paper package can be claimed. The separate two-update query
 preflight is recorded in its own result note and is not merged into S31's
 completed 1,536-update experiment.
+
+## Integrate and compile the reviewed comparison package
+
+Continue this authorized revision with a separate preparation/build utility,
+`publication/ilm-nature/native_flow_manuscript.py`. Prepare a fresh ignored
+package under `artifacts/native_flow_manuscript_v1/`, copying the current
+publication's TeX/style/figure inputs and the reviewed 46-slide stage. Verify
+the current editable manuscript inputs against the preserved `daef4bf`
+baseline before insertion. No model source or experiment binding may change.
+
+Insert one Results subsection immediately before Discussion, containing the
+already staged Note52 and Note53 result paragraphs. Append the corresponding
+supplementary notes immediately before Reproduction, with the reviewed S29,
+S30 and S31 figures and captions. Captions must identify the two distinct
+experiments, inherited pretraining, original unrepaired evidence, imperfect
+reference OCR and unsuccessful answering. Long evidence paths may use
+breakable `\path` formatting; scientific quantities and equations stay fixed.
+Title, abstract, Introduction, existing results, bibliography and all prior
+figure/style bytes are outside this revision's editing scope.
+
+Build the two-column article, line-numbered review article, supplement and
+two matched redlines against the complete 43-slide baseline. Expand TeX inputs
+deterministically for the pinned official latexdiff. Keep active filenames
+and baseline files untouched during preparation, compilation and review.
+Check new numerical strings and figure/note references in the compiled PDFs;
+reject introduced overfull boxes, undefined references/citations or changed
+old figures. Render and inspect all added or reflowed result/note/caption
+pages, and matching change-marked pages before promotion.
+
+The existing GPU0 lock also serializes this CPU publication build with the
+queued model worker. A confirmed resource-wait coordinator may remain live;
+no GPU child may coexist with the build. Acquire the lock without waiting,
+require at least 24 GiB available RAM and at most 75% swap use, hide CUDA and
+release the lock after the owned build exits. Do not change the older Office
+renderer guard, start Office, terminate another project's work, or start a
+second model/build job. The pending query-fit experiment contributes no result
+to this package.
+
+Only a fully built and visually reviewed matching package may replace active
+TeX/PDF/deck/figure files. Preserve a named baseline manifest, refresh current
+redlines and verify local Nutstore package and latest-alias hashes with backups
+before reporting synchronization. Cloud propagation and PowerPoint-app
+inspection remain separate unverified claims. If any build/review step fails,
+retain the stage and failure logs, fix only errors introduced by this revision
+under a new stage, and leave the active publication unchanged.
+
+The full source package is prepared in
+`artifacts/native_flow_manuscript_v1/`, with the two completed result
+paragraphs, Notes52/53 and the three reviewed supplementary figures.
+Its [preparation receipt](evidence/native_flow_manuscript_preparation.json)
+binds the active baseline and every staged input. The first build call
+stopped at shared-lock admission: the queued query-fit GPU child had just
+started. The [admission record](evidence/native_flow_manuscript_build_admission.json)
+documents that no LaTeX or Office process was started and no active file
+changed. Compilation and the subsequent PDF review remain pending; resume
+the same source-bound stage after the model owner releases the lock.
