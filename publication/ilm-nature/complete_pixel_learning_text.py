@@ -27,18 +27,16 @@ training fragments. All outputs stop below the
 safety cap. Active optimization takes 63.2\,min and total execution 81.6\,min,
 at 18.191\,GiB peak allocated memory, excluding inherited pretraining.
 Five cold-loaded PNG replays preserve complete pixels and stopping exactly.
-Complete-image fitting and deployment pass; new-prompt answering fails.
+Complete image fitting succeeds; new-prompt answering fails.
 Changes in initialization, decoder, precision and schedules preclude attributing
 this gain to the likelihood alone.
 '''
 
-DISCUSSION = r'''The subsequent complete pixel actor does reproduce all 32 seen answers
-from their original prompt images. Its failure on all 24 normal development
-cases therefore separates exact training emission from useful conditional
-generalization. More unchanged fitting of those 32 questions is not supported
-as the next learning step. Varied visual-language supervision must be tested
-against readable, correct answers to new prompts, while preserving the
-independent image generation path and accounting for external pretraining.
+DISCUSSION = r'''Complete pixel learning reproduces all 32 seen answers, but none of 24
+normal development answers. Further unchanged fitting of those questions is
+therefore unwarranted. Varied visual-language supervision must be tested against
+readable, correct new-prompt answers, retaining independent image generation
+and accounting for external pretraining.
 '''
 
 NOTE = r'''\clearpage
