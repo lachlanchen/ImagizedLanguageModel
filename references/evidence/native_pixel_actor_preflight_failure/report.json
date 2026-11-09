@@ -1,0 +1,51 @@
+{
+  "classification": "execution_preflight_failed_before_learning",
+  "run": "artifacts/native_pixel_actor_preflight_v1",
+  "source_commit": "13e32bbdc9bdd2cf667b53b3e298369c49654365",
+  "execution_commit": "a16dfab9ad5a064eb3ed7b467c23f72f536dd230",
+  "failure": {
+    "phase": "failed",
+    "pid": null,
+    "logical_updates": 0,
+    "elapsed_seconds": 209.25703017506748,
+    "reason": "ValueError('cached/whole-prefix logits differ beyond fixed tolerance')"
+  },
+  "all_bound_sources_unchanged": true,
+  "owning_input_reference_PNG_hashes_verified": true,
+  "retained_logical_updates": 0,
+  "actual_optimizer_step_calls": 0,
+  "autonomous_complete_answers_generated": 0,
+  "forced_feedback_control_reached": false,
+  "independent_output_auditor_executed": false,
+  "failed_check": "maximum absolute teacher-prefix cached versus whole-prefix logits <= 1e-4",
+  "failed_check_absolute_tolerance": 0.0001,
+  "actual_maximum_error_recorded": false,
+  "cached_uncached_greedy_agreement_checked": false,
+  "reason_unique_cause_identified": false,
+  "local_prefix_artifact": {
+    "path": "artifacts/native_pixel_actor_preflight_v1/execution/prefixes.pt",
+    "sha256": "06f2a3f5509048814cb5edbde4f288dcc46f2d02dc93b5fb2dc1a98ff0d64002"
+  },
+  "public_files_sha256": {
+    "preparation.json": "993b76bf40a34d31c3c7070a5b5e0ad45a37a6066d4da26ffe19619b17e15e88",
+    "cases.json": "001ec5d0b70c533608fa0db5aa2b885fd2821b2d4db91a97f12e1cea65facd73",
+    "execution/status.json": "615ebedf982ada92643118eeb69e9033122a21a9cff08b2347a2a6727ddc4129",
+    "execution.log": "db9a1b7fe4cbfd408fcfa96dbbdcc476b299df30216cd1a8e1d7adfaaf8e670b",
+    "inputs/00.png": "4eaa664654e727571dbdcb034deccf8f6ebe25daf6f5a748e26b5cdaa30d51e5",
+    "references/00.png": "3eb124087c415bc8a9bc885bec226790240627dccdf0b3df2af8cffd7b0abad3",
+    "inputs/01.png": "a561c0ce3116770fcf4339e6e62dafb3eccc76661c89be433e5dc582aa09d09b",
+    "references/01.png": "2da6709ab3c677cf42b796030dd8ebb3bd39cd03f92208811c934d8596cf869d",
+    "inputs/02.png": "bb82d230eea55c5848f4a813089e0ec2894adbe7ef394bea9ade8f2fee9b2a29",
+    "references/02.png": "0137320d602bd4935095c49c8b175269c1fa9012c85cceb55c97618da81bbbc0",
+    "inputs/03.png": "25e91df2fbb36286cbc3671bb7f4266fca1c44cd6dcdb7921a598415392536f7",
+    "references/03.png": "60f7024b428c4f7bf6b4f7bc86e8a89e6b6fb9292071a3a2766c5853d1e1bd0a",
+    "inputs/04.png": "f517f8b41635b0c4ba3b76bb2defee6143b2044fa85ad7dbbe08fb8fb6368728",
+    "references/04.png": "8d51a77ff1536e76f86f3b10fc1252429da233c5c907e8764fa18279a17ea9d1"
+  },
+  "GPU0_released": true,
+  "GPU1_preserved": true,
+  "model_process_exited": true,
+  "measured_peak_allocated_vram_available": false,
+  "language_training_qualified": false,
+  "general_ilm_goal_complete": false
+}

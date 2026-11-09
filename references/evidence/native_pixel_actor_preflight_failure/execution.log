@@ -1,0 +1,16 @@
+/home/lachlan/miniconda3/envs/llama/lib/python3.12/site-packages/torch/cuda/__init__.py:619: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/home/lachlan/miniconda3/envs/llama/lib/python3.12/site-packages/torch/nn/modules/conv.py:456: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv2d(input, weight, bias, self.stride,
+Traceback (most recent call last):
+  File "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/scripts/preflight_native_pixel_actor.py", line 351, in <module>
+    args=parser.parse_args();globals()[args.stage](args.output.resolve())
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/scripts/preflight_native_pixel_actor.py", line 247, in run
+    numerical=numerical_checks(model.density,model.normalized_conditions(full[0,:2]),target)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/scripts/train_conditional_pixel_density.py", line 184, in numerical_checks
+    require(cache_error <= 1e-4, 'cached/whole-prefix logits differ beyond fixed tolerance')
+  File "/home/lachlan/ProjectsLFS/ImagizedLanguageModel/scripts/train_conditional_pixel_density.py", line 27, in require
+    raise ValueError(message)
+ValueError: cached/whole-prefix logits differ beyond fixed tolerance
