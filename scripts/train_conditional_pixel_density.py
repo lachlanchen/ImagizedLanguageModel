@@ -247,8 +247,10 @@ def run(output):
                         losses = []
                         for i in range(0, len(features), 64):
                             logits = model(features[i:i+64], truth[i:i+64])
-                            losses.append(F.cross_entropy(logits.transpose(1, 2), truth[i:i+64],
-                                reduction='none').mean(1).cpu())
+                            # Explicit normalized likelihood avoids the old runtime's
+                            # nondeterministic fused 3-D NLL CUDA kernel.
+                            losses.append(-F.log_softmax(logits, dim=-1).gather(-1,
+                                truth[i:i+64, :, None]).squeeze(-1).mean(1).cpu())
                         values.append(torch.cat(losses))
                 return torch.cat(values)
             initial_nll = measure_nll()
@@ -264,7 +266,8 @@ def run(output):
                     for group in optimizer.param_groups:
                         group['lr'] = rate
                     logits = model(h[indices], target[indices])
-                    loss = F.cross_entropy(logits.transpose(1, 2), target[indices])
+                    loss = -F.log_softmax(logits, dim=-1).gather(-1,
+                        target[indices, :, None]).mean()
                     require(bool(torch.isfinite(loss)), 'nonfinite training loss')
                     loss.backward()
                     norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.)

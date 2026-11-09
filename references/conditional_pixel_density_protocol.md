@@ -127,3 +127,12 @@ package's existing torchvision import. It created no run directory, allocated
 no CUDA model and performed no optimization. The already-installed V69
 environment above supplies that dependency; no library installation or neural
 result was needed to make this environment correction.
+
+The first GPU execution (`conditional_pixel_density_v1`) passes the registered
+pixel-causality and cache checks, then stops before any optimizer update:
+PyTorch 2.3 rejects its fused three-dimensional NLL kernel under deterministic
+execution. Its status, log, initial checkpoint and numerical checks are
+preserved. A new execution uses explicit log-softmax and target gather for
+the same normalized likelihood, with determinism, tolerances, cohort and
+training schedule unchanged. The failed execution is not resumed or scored
+as a learned model.
