@@ -58,3 +58,22 @@ Examine the learned coupling of native context, visual history and glyph
 emission with a controlled alternative, potentially using an offline teacher
 that is absent from inference. Useful behavior must precede compression into
 a smaller independent model or claims about LLM-equivalent efficiency.
+
+CPU preparation has now completed at `artifacts/pixel_language_diversity_v1/`.
+It contains 512 questions, 256 passage pairs and 1,657 complete target blocks,
+with 498 unique complete answer images. Answers span one to seven blocks;
+the largest prepared prompt has 393,216 pixels. All 32 original positive
+controls preserve their exact input/target pixels. An independent NumPy
+unpacking of all 512 original source bitstreams reproduces every complete
+target, and all prepared PNG hashes, binary shapes, prompt uniqueness and
+pairwise target distinctions pass. Prompt folding is not independently
+reimplemented in this audit. The first two added passage pairs are actually
+viewed, not every prompt in the corpus.
+
+The [manifest](evidence/pixel_language_diversity_preparation/manifest.json),
+[bitstream audit](evidence/pixel_language_diversity_preparation/audit.json)
+and [sample review](evidence/pixel_language_diversity_preparation/review.json)
+retain this preparation. It has zero model calls and zero optimizer updates.
+No improved generalization is claimed. Actual variable-length/memory
+qualification and a registered learning schedule remain necessary before
+training this cohort.
