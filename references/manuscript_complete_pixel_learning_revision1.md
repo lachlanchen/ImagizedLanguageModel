@@ -101,15 +101,17 @@ without expanding the main paper into a cache-debugging chronology.
 
 ## Figures and editable sources
 
-Append Figure S34 to the existing native deck. Use native editable text,
+Append Figures S34 and S35 to the existing native deck. Final evidence needs
+separate method/quantitative and raw-example plates to retain legible writing.
+This replaces the single-figure allowance before authoring. Use native editable text,
 connectors, tables and charts with the established white/blue/grey scientific
 style. Show the full prompt-image to context to physical-image to observed-
 history path; distinguish frozen source, trained modules and offline labels.
-Add a native editable chart with its embedded workbook for matched whole-
+S34 has a native editable chart with its embedded workbook for matched whole-
 cohort image NLL and a compact table of autonomous training/development
 counts. Do not call teacher-prefix likelihood an autonomous accuracy curve.
 
-Use original model pixels for examples. The training illustration is the
+S35 uses original model pixels for examples. The training illustration is the
 first passage pair in the pre-existing source order. The development
 illustration is the first prepared Chinese passage pair in its original
 order, with its erasure controls if space permits. Neither selection ranks
@@ -119,6 +121,12 @@ and output dimensions; preserve original pixels and distinguish any reversible
 display wrapping or crops from the streams used for scoring. If one figure
 cannot retain legible labels and glyphs, revise this plan before adding a
 second figure rather than shrinking the material into an unreadable panel.
+For S35, show the last 64 physical input rows as explicitly labelled display
+excerpts with recorded crop boxes. These include the final question lines.
+The actor receives the complete original page; all full inputs and controls
+remain in the archive. Keep complete output/reference strips at consistent
+display scaling. The four source-order cases are 00/01 and 32/33, without
+selection by output quality.
 
 Check the actual current artifact/renderer environment before authoring.
 Reuse the existing native ZIP/XML append workflow if the bundled artifact
@@ -134,7 +142,7 @@ Allowed active changes after review are `frontmatter.tex`,
 `article_content.tex`, `supplementary_information.tex`, new
 `complete_pixel_learning_results.tex` and `complete_pixel_learning_note.tex`,
 their needed values/table includes, matching article/review/supplement and
-redlined sources/PDFs, the native editable deck and its review PDF, new S34
+redlined sources/PDFs, the native editable deck and its review PDF, new S34/S35
 exports and evidence receipts. A bounded new builder/render/build/promote
 helper may be added under `publication/ilm-nature/`. Keep the title,
 Introduction, bibliography, unrelated manuscript bodies, prior figures,
