@@ -13,6 +13,43 @@ untested when this decision was written. Its bounded cached-state version is
 now tested and fails the component criteria. That outcome does not justify
 promoting the head or launching a larger full-actor run under this recipe.
 
+A subsequent [fixed longer fit](pixel_density_long_fit_result.md) changes the
+evidence about training capacity. The same head and exact original
+initialization now produce 512/512 training first blocks exactly, while normal
+development remains 0/128 CMRC and 0/64 Dolly. Correct-prefix training-piece
+errors in the shorter head were therefore not an architectural impossibility.
+The cached-state recipe still fails the development criteria. Repeating it
+with more updates is not a demonstrated route to language generalization.
+
+The next integration must preserve the full objective: prompt PNGs and
+completed generated images must enter a causal contextual body, which
+conditions a normalized physical-image writer and a structural stop decision.
+For answer blocks $Y_1,\ldots,Y_T$, a complete generative specification is
+
+\[
+p(Y,\mathrm{stop}\mid X)=
+s(h_{T+1})\prod_{t=1}^{T}(1-s(h_t))
+\prod_{j=1}^{256}p(b_{t,j}\mid h_t,b_{t,<j}),
+\qquad h_t=R(X,Y_{<t}).
+\]
+
+This is a model specification, not a new executed result or a proof that its
+optimization will succeed. Training may supply correct past images; final
+assessment must use only emitted images and learned stopping, with a hard
+safety cap counted as failure. No current answer block may condition its own
+state. Native reader geometry, image feedback and source feature parity must
+be checked rather than inferred from a separate text-output source model.
+Any weighting of image and stopping losses must be disclosed separately from
+the exact joint likelihood above.
+
+Earlier V68/V80/V81 already couple pretrained contexts to image-code writers,
+and V54 already has a normalized correlated image likelihood with a smaller
+reader. A proposed successor must specifically test **joint conditional
+learning with this direct pixel density and complete image histories**, not
+rename either earlier combination. The longer fit is a working emission
+control for learned states. It is not a complete actor, new-prompt capability,
+historical-script understanding or an efficiency result at useful quality.
+
 ## What the existing evidence already establishes
 
 The [reference-removal control](native_reference_latent_ablation_result.md)
