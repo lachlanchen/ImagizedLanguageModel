@@ -277,7 +277,9 @@ def run(output):
                 loss, norm = update()
                 if step == 2:
                     atomic_tensor(execution/'update0002.pt', dict(model=model.state_dict(), optimizer=optimizer.state_dict(), step=2))
-                    checkpoint = torch.load(execution/'update0002.pt', map_location=device, weights_only=True)
+                    # AdamW's non-capturable step counters belong on CPU. Its
+                    # loader places moment tensors on their parameter devices.
+                    checkpoint = torch.load(execution/'update0002.pt', map_location='cpu', weights_only=True)
                 if step == 3:
                     expected_model, expected_optimizer = copy.deepcopy(model.state_dict()), copy.deepcopy(optimizer.state_dict())
                     model.load_state_dict(checkpoint['model'])

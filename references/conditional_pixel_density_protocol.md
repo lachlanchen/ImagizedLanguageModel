@@ -136,3 +136,12 @@ preserved. A new execution uses explicit log-softmax and target gather for
 the same normalized likelihood, with determinism, tolerances, cohort and
 training schedule unchanged. The failed execution is not resumed or scored
 as a learned model.
+
+The second execution passes the numerical checks and reaches its actual
+update-three replay. Loss, gradient norm and model-parameter comparisons pass;
+comparing optimizer states raises a CPU/CUDA device error. Loading the
+checkpoint directly onto CUDA had moved AdamW's normally CPU step counters.
+The saved update-two checkpoint, error and partial execution are preserved.
+A third execution restores the checkpoint on CPU and lets the optimizer's
+loader place moment tensors on parameter devices. No equality criterion,
+training schedule, likelihood or quality threshold changes.
