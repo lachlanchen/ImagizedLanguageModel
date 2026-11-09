@@ -117,3 +117,64 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/analyze_pixel_language_prefi
 
 Use a new output directory. This diagnosis does not qualify the ILM, establish
 LLM-equivalent efficiency or replace the final registered assessment.
+
+## First-block likelihood runner
+
+[`scripts/score_pixel_language_first_blocks.py`](../scripts/score_pixel_language_first_blocks.py)
+implements the subsequent scoring test. CPU preparation has authenticated the
+initial and 4,000-update states, 112 source-fixed common streams, 88 distinct
+reference first images and 40 same-passage question pairs. The saved reader
+fingerprints agree between those two states for every prepared input. An
+actual invocation of its neural command against the live trainer refuses
+before importing PyTorch and creates no scoring execution directory. The
+[preparation receipt](evidence/pixel_first_block_likelihood_preparation.json)
+records these checks. **The neural path has not yet been executed or validated.**
+
+Preparation binds source files, owning learned states, original prompt PNGs,
+saved output receipts and all selected references. No frozen model weights
+are copied. Neural execution also requires the bound source files to match
+committed code. The implementation uses the existing GPU0 lock and RAM,
+swap, free-VRAM and 22 GiB allocation limits. It checks both current status
+and the last recorded process identity, including the interval after the
+trainer clears its status PID but before that process exits.
+
+The model stage first captures prompt-only queries and reproduces each
+saved reader fingerprint and initial stop probability. It retains the
+queries, releases the large contextual body, then scores first images through
+the small normalized density. Every nonempty saved first image must pass a
+full-forward, saved-prefix replay of all 256 greedy argmax decisions. No
+reference image enters prompt reading or query capture. Reference pixels
+enter only teacher-forced likelihood scoring, and no new answer image is
+generated or selected from references.
+
+The output records individual reference probabilities, their deduplicated
+event probability, the maximum individual-reference-minus-greedy gap, owning
+versus other-question margins, paired assignments and question-erasure effects.
+Raw scores remain available alongside summaries. A 1e-8 comparison tolerance
+labels numerical ties; it is not a semantic-accuracy threshold or a proved
+uniform error bound. The common 64 training examples support comparisons
+between states without replacing the full final 512-question evaluation.
+
+Prepare a new diagnostic directory on CPU:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/score_pixel_language_first_blocks.py \
+  --stage prepare --updates 0 4000 \
+  --output artifacts/pixel_first_block_likelihood_new
+```
+
+Run neural scoring only after the original trainer process exits:
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
+CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=. \
+python scripts/score_pixel_language_first_blocks.py --stage run \
+  --output artifacts/pixel_first_block_likelihood_new
+```
+
+The command refuses to overlap a live training owner. It does not queue or
+restart that owner. To compare all four registered states after completion,
+create a fresh preparation with `--updates 0 4000 8000 16000`; `--updates`
+applies only to preparation. Preserve any earlier or interrupted execution.
+Successful numerical replay or a positive likelihood margin would still
+leave useful autonomous language generation to be demonstrated.
