@@ -1,0 +1,215 @@
+{
+  "preparation_sha256": "2d196d862502fe1a6d13a5e697884d6dcf00c87f3ad790025ff890b8414abca0",
+  "batch": {
+    "indices": [
+      232,
+      170,
+      16,
+      286
+    ],
+    "lengths": [
+      1,
+      3,
+      4,
+      7
+    ],
+    "normwise_error": 3.1349338769359747e-06,
+    "absolute_error": 0.00014972686767578125,
+    "batch_loss": 10.195171869735304,
+    "mean_independent_loss": 10.195172463424342,
+    "future_image_exclusion_exact": true,
+    "future_padding_exclusion_exact": true
+  },
+  "stress": [
+    {
+      "name": "largest_prompt_indices",
+      "indices": [
+        76,
+        77,
+        232,
+        233
+      ],
+      "loss": 10.785964026317915,
+      "gradients": {
+        "density": 68.55188733315313,
+        "image_input": 0.9054733185366939,
+        "start_query": 0.3640028921013464,
+        "suffix": 1.732113828186518,
+        "stop": 2.816168489164621e-07
+      }
+    },
+    {
+      "name": "longest_answer_indices",
+      "indices": [
+        51,
+        128,
+        172,
+        208
+      ],
+      "loss": 10.64516131462564,
+      "gradients": {
+        "density": 57.45187717344929,
+        "image_input": 1.9552201002098264,
+        "start_query": 0.10214200778427718,
+        "suffix": 1.9653136379816578,
+        "stop": 0.003068311486909366
+      }
+    }
+  ],
+  "first": {
+    "update": 1,
+    "indices": [
+      303,
+      249,
+      215,
+      179
+    ],
+    "loss": 10.473731029836902,
+    "image_nll": 10.473730642073665,
+    "stop": 3.8776323663114454e-07,
+    "complete_blocks": 14,
+    "gradient_norm": 57.286842346191406,
+    "gradient_components": {
+      "density": 57.219559675132565,
+      "image_input": 2.1367919376974696,
+      "start_query": 0.2176697101839653,
+      "suffix": 1.7580945431989634,
+      "stop": 4.137966688962243e-06
+    },
+    "density_learning_rate": 2.9999999999999997e-06,
+    "other_learning_rate": 1.0000000000000002e-06
+  },
+  "second": {
+    "update": 2,
+    "indices": [
+      282,
+      365,
+      94,
+      189
+    ],
+    "loss": 10.026748865782595,
+    "image_nll": 10.026748782237094,
+    "stop": 8.354550118383486e-08,
+    "complete_blocks": 15,
+    "gradient_norm": 43.740230560302734,
+    "gradient_components": {
+      "density": 43.70440693358614,
+      "image_input": 1.3691254606013423,
+      "start_query": 0.2555029787977368,
+      "suffix": 1.0921336514359388,
+      "stop": 1.4459546430772379e-06
+    },
+    "density_learning_rate": 5.999999947946752e-06,
+    "other_learning_rate": 1.9999999826489175e-06
+  },
+  "repeated": {
+    "update": 2,
+    "indices": [
+      282,
+      365,
+      94,
+      189
+    ],
+    "loss": 10.026748865782595,
+    "image_nll": 10.026748782237094,
+    "stop": 8.354550118383486e-08,
+    "complete_blocks": 15,
+    "gradient_norm": 43.740230560302734,
+    "gradient_components": {
+      "density": 43.70440693358614,
+      "image_input": 1.3691254606013423,
+      "start_query": 0.2555029787977368,
+      "suffix": 1.0921336514359388,
+      "stop": 1.4459546430772379e-06
+    },
+    "density_learning_rate": 5.999999947946752e-06,
+    "other_learning_rate": 1.9999999826489175e-06
+  },
+  "actual_optimizer_calls": 3,
+  "step_two_sha256": "424b61c3a32b7b443d08f661261dfb13c4e477bf260d799eaa595c5d86205a16",
+  "checks": {
+    "variable_batch_matches": true,
+    "future_and_padding_excluded": true,
+    "stress_backward_finite_nonzero": true,
+    "actual_replay_bit_exact": true
+  },
+  "peak_allocated_vram_gib": 17.885698795318604,
+  "source": {
+    "inherited": {
+      "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+      "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+      "retained_native_tensors": 748,
+      "retained_base_parameters": 7522463984,
+      "configurations": {
+        "text": {
+          "vocab_size": 0,
+          "hidden_size": 4096,
+          "intermediate_size": 12288,
+          "num_hidden_layers": 36,
+          "num_attention_heads": 32,
+          "num_key_value_heads": 8,
+          "head_dim": 128,
+          "rms_norm_eps": 9.999999974752427e-07,
+          "max_position_embeddings": 262144,
+          "rope_theta": 5000000.0,
+          "rope_scaling": {
+            "rope_type": "default",
+            "mrope_section": [
+              24,
+              20,
+              20
+            ],
+            "mrope_interleaved": true
+          },
+          "attention_bias": false,
+          "bos_token_id": null,
+          "eos_token_id": null,
+          "pad_token_id": null,
+          "tie_word_embeddings": false
+        },
+        "vision": {
+          "depth": 27,
+          "hidden_size": 1152,
+          "intermediate_size": 4304,
+          "num_heads": 16,
+          "in_channels": 3,
+          "patch_size": 16,
+          "spatial_merge_size": 2,
+          "temporal_patch_size": 2,
+          "out_hidden_size": 4096,
+          "num_position_embeddings": 2304,
+          "deepstack_visual_indexes": [
+            8,
+            16,
+            24
+          ],
+          "hidden_act": "gelu_pytorch_tanh"
+        }
+      },
+      "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+      "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+      "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+      "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+      "external_pretraining": true,
+      "vocabulary_parameters_materialized": 0
+    },
+    "source_model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "input_scale": 0.0247902050614357,
+    "all_prompt_keys_retained": true,
+    "tokenizer": false,
+    "ocr": false,
+    "language_vocabulary": false,
+    "teacher_service": false,
+    "persistent_glyph_inventory": false,
+    "external_pretraining": true,
+    "language_quality_claim": false,
+    "own_learned_state_restored": true,
+    "legacy_training_checkpoint_required": false,
+    "legacy_raster_checkpoint_required": false,
+    "physical_head_arithmetic": "float64",
+    "parameter_storage": "float32"
+  },
+  "qualification_updates_retained_for_main_run": false
+}

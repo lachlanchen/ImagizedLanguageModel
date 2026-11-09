@@ -123,3 +123,11 @@ After completion, run the independent CPU audit:
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/audit_pixel_language_diversity.py \
   --output artifacts/pixel_language_diversity_training_v2
 ```
+
+The [corrected-runner qualification](evidence/pixel_language_diversity_qualification/corrected_runner/report.json)
+also passes every actual GPU check and repeats the original qualification's
+first two update measurements exactly. Its peak is again 17.8857 GiB, with
+three actual qualification optimizer calls. Both qualification attempts are
+retained, totaling six such calls; the first failed main execution has zero.
+The main v2 execution starts from the original initial state. These records
+establish reproducible execution, not improved unseen-answer quality.
