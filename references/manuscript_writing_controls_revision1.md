@@ -50,9 +50,14 @@ font, restrained blue/grey blocks and scientific figure proportions.
 
 S32 displays all four fixed source-writing examples with original order,
 alongside complete cohort counts, so the single successful source example
-is not hidden. Whitespace-only display crops, if needed for these padded
-pages, must record exact crop boxes and retain original full-page hashes;
-they never enter scoring. S33 shows the first Chinese-script CMRC training
+is not hidden. The first render's strict nonwhite bounding boxes retain
+near-white decoder background noise across the full page and leave writing
+illegible. The successor uses full-page thumbnails plus enlarged ink crops.
+One fixed display-only threshold (luminance below 224) selects bounds with
+an eight-pixel margin. Cropped pixel values remain unchanged; excluded pale
+background remains visible in the full-page thumbnail and original archive.
+Record crop boxes, selection threshold and original hashes. These crops
+never enter scoring. S33 shows the first Chinese-script CMRC training
 block (index 1; index 0 answers a Chinese question with a Latin name), first
 Dolly training block (256), first CMRC development block (512) and first Dolly
 development block (640). This reference-content/source-order selection does

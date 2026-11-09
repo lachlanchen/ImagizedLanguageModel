@@ -83,7 +83,7 @@ def append_figures(paper,stage):
             image=opened.convert('RGB')
         box=None
         if crop:
-            ink=ImageChops.difference(image,Image.new('RGB',image.size,'white')).getbbox()
+            ink=image.convert('L').point(lambda value:255 if value<224 else 0).getbbox()
             if ink:
                 box=(max(0,ink[0]-8),max(0,ink[1]-8),min(image.width,ink[2]+8),min(image.height,ink[3]+8))
                 image=image.crop(box)
@@ -97,6 +97,7 @@ def append_figures(paper,stage):
         slide.picture(slide.relation('image','../media/'+Path(part).name),name,x,y,w,h)
         media.append(dict(part=part,source=str(path.relative_to(ROOT)),source_sha256=sha(path),
             embedded_sha256=hashlib.sha256(raw).hexdigest(),crop_box=box,
+            display_crop_luminance_bound=224 if crop else None,
             RGB_size=list(image.size),RGB_pixels_sha256=hashlib.sha256(image.tobytes()).hexdigest()))
 
     def table(slide,rows,x,y,widths,line=31,size=18):
@@ -156,26 +157,28 @@ def append_figures(paper,stage):
         x=260+320*i
         slide.shape(('Chinese ' if i<2 else 'English ')+str(i%2+1),x,477,300,32,18,True)
         picture(slide,WRITER/'references'/f'{i:02}.png',f'target_{i}',x,520,290,83,True)
-        picture(slide,WRITER/'images'/row['path'],f'full_{i}',x,625,290,83,True)
-        picture(slide,ABLATION/'images'/removed[row['id']]['path'],f'removed_{i}',x,730,290,83,True)
-    slide.shape('All four fixed cases shown in original order. Display crops retain every nonwhite pixel. Supplied text is an offline control, not independent image-language inference.',45,844,1510,48,15)
+        for y,folder,path,kind in [(625,WRITER/'images',row['path'],'full'),
+                (730,ABLATION/'images',removed[row['id']]['path'],'removed')]:
+            picture(slide,folder/path,f'{kind}_page_{i}',x,y,38,83,False)
+            picture(slide,folder/path,f'{kind}_ink_{i}',x+48,y,242,83,True)
+    slide.shape('All four cases in original order. Full-page thumbnails accompany fixed ink crops (display threshold 224). Pixel values and scores are unchanged. Supplied text is an offline control.',45,844,1510,48,15)
     register(slide,47,'Figure S32. Completed reader-query fit and native supplied-content/reference-removal controls. '
         'All query-fit answer counts remain zero; clean reference OCR is 8/8. Source supplied-content writing is 1/4 with the full reference and 0/4 after removal; adapted writing remains 0/4. '
-        'The one successful source English page is included among all four fixed cases. Whitespace display crops retain all nonwhite pixels; crop boxes and complete original hashes are bound in preparation. '
+        'The one successful source English page is included among all four fixed cases. Full-page thumbnails accompany enlarged crops selected by luminance below224 with margin8. Cropped pixel values are unchanged; complete original hashes and crop boxes are bound in preparation. '
         'These reused small controls do not identify a unique repair or establish autonomous language understanding. '
         'Sources: references/evidence/native_query_fit_result/assessment.json, native_writer_content_control_result/assessment.json, native_reference_latent_ablation_result/assessment.json.')
 
     slide=Slide(parts[template])
     slide.shape('Direct pixel likelihood fits known blocks but fails held-out writing',45,24,1510,60,29,True)
     slide.shape('a  Conditional physical-image density',45,108,1510,35,22,True)
-    for x,w,text in [(45,280,'Cached image-only states h\n2 × 4096, frozen V68 actor'),
+    for x,w,text in [(45,280,'Cached state h\n2 × 4096\nFrozen V68 actor'),
         (405,350,'Causal pixel decoder\n4 layers, 3.453M learned parameters'),
         (835,300,'256 eight-pixel patterns\n2 × 4 physical pieces'),(1215,340,'32 × 64 emitted image\nExact inverse packing')]:
-        slide.shape(text,x,162,w,90,18,center=True,fill='EAF1F6' if x==405 else 'F0F3F5')
+        slide.shape(text,x,155,w,100,18,center=True,fill='EAF1F6' if x==405 else 'F0F3F5')
     for a,b in [(330,400),(760,830),(1140,1210)]:slide.arrow(a,205,b,205)
     slide.shape('Training supplies preceding target pieces. Generation uses only its own emitted pieces. No lexical output inventory or font renderer.',45,270,1510,40,17)
     slide.shape('b  Exact autonomous first blocks',45,325,640,35,21,True)
-    table(slide,[['Cohort','1,200 updates','16,000 updates'],['CMRC training','0/256','256/256'],
+    table(slide,[['Cohort / updates','1,200','16,000'],['CMRC training','0/256','256/256'],
         ['Dolly training','12/256','256/256'],['CMRC development','0/128','0/128'],['Dolly development','0/64','0/64']],
         45,370,[300,170,170],line=30,size=17)
     slide.shape('Whole-training-set NLL per eight-pixel piece (log scale)',45,540,640,35,18,True)
@@ -338,8 +341,9 @@ out all reference interference or identify a unique repair.
 zero. \textbf{b}, Correct-text source writing at guidance four falls from one
 exact page to zero after reference removal; adapted writing stays inexact.
 \textbf{c}, All four fixed source cases, in original order, include the one
-successful full-reference English page. Display crops retain every nonwhite
-pixel; no contrast or glyph repair enters scoring. These are canonical OCR
+successful full-reference English page. Full-page thumbnails accompany
+enlarged ink crops, selected by a fixed luminance bound of 224 plus margin.
+Cropped pixel values are unchanged; no contrast or glyph repair enters scoring. These are canonical OCR
 counts on reused small cohorts, not a general semantic benchmark.}{fig:writing-controls}
 
 \clearpage
