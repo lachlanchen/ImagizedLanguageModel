@@ -13,25 +13,23 @@ SUMMARY = (
     'Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.'
 )
 
-RESULTS = r'''A subsequent native actor learns complete answer images rather than only
-cached first blocks (Supplementary Note 57; Figs.~S34 and S35). Full native
-prompt context conditions a causal physical-pixel density and learned stop
-decision; each generated image is re-encoded as the next observed history.
+RESULTS = r'''The native actor learns complete answer images
+(Supplementary Note 57; Figs.~S34 and S35). Full prompt context conditions a
+causal pixel density and learned stop; emitted images become history.
 The externally pretrained 7.544B actor adapts 13.856M parameters on 32 natural
 Chinese questions from 16 passages. Exact complete training answers increase
 from 0/32 to 17/32, 29/32 and 32/32 at updates 0, 1,000, 2,000 and 4,000.
 The registered exact-fit stop triggers at 4,000; fresh-PNG evaluation confirms
 all 32 answers and all 16 passage pairs. However, reused development gives
 0/16 exact Chinese answers and 0/8 English transfer answers, with foreground
-F1 0.240 and 0.034. Original outputs show broken glyphs and unrelated training
-fragments, beyond minor rendering discrepancies. All outputs stop below the
+F1 0.240 and 0.034. Development outputs contain broken glyphs and unrelated
+training fragments. All outputs stop below the
 safety cap. Active optimization takes 63.2\,min and total execution 81.6\,min,
-at 18.191\,GiB peak allocated memory, excluding inherited pretraining. Five
-fixed cold-loaded PNG replays preserve complete pixels and stopping exactly.
-These results establish complete-image fitting and deployment reconstruction,
-while failing useful new-prompt language generation. Different initialization,
-decoder, precision and schedules prevent an isolated causal attribution to
-the likelihood objective.
+at 18.191\,GiB peak allocated memory, excluding inherited pretraining.
+Five cold-loaded PNG replays preserve complete pixels and stopping exactly.
+Complete-image fitting and deployment pass; new-prompt answering fails.
+Changes in initialization, decoder, precision and schedules preclude attributing
+this gain to the likelihood alone.
 '''
 
 DISCUSSION = r'''The subsequent complete pixel actor does reproduce all 32 seen answers
