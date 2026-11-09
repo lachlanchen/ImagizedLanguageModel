@@ -30,6 +30,14 @@ The fixed 16,000-update run continues; these interim observations neither
 select a checkpoint nor reject all possible longer or different learning
 recipes.
 
+The run subsequently encountered a host RAM/swap guard after update 12,128.
+The original process exited; an explicit resume from the durable 12,000-update
+checkpoint preserves the same protocol and cumulative time limit. All 128
+replayed history records match the preserved originals exactly. The
+[recovery record](pixel_language_diversity_resource_recovery.md) retains this
+bounded verification and accounts for the additional executed optimizer calls.
+Final unseen-answer assessment remains pending.
+
 Prepare a fixed Chinese cohort of 512 natural questions in 256 passage pairs.
 Keep the original 32 questions as visible positive controls. Add 240 different
 training articles with two distinct-answer questions each, selected by a fixed
