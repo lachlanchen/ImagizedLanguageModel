@@ -42,9 +42,11 @@ known development states, not complete-answer or fresh language accuracies.
 
 Broader source-unit coverage and freeing the decoder-input MLP are insufficient
 under this recipe. Verified source argmax alone does not make a synthetic state
-a useful training context. Many projected vectors sit very close to a source
-decision boundary: the minimum accepted top-two gaps are 7.06e-5, 8.39e-5 and
-3.24e-5. Their relevance to natural image-conditioned states is unproven.
+a useful training context. A subsequent [margin summary](evidence/glyph_first_function_transfer_margin_v1.json)
+finds a withheld median top-two gap of 0.99998, with 2.51% below 0.1 and a
+minimum of 3.24e-5. Near-boundary cases exist, but these measurements do not
+establish boundary proximity as the cause of failure. The synthetic states'
+relevance to natural image-conditioned states remains unproven.
 The result motivates collecting more real image-conditioned training states;
 it does not establish that this next repair will succeed.
 

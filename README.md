@@ -47,9 +47,11 @@ passes physical qualification but gives **18/32** clear answers versus **19/32**
 for its unchanged parent on a different new cohort. Better training glyphs did
 not improve new-context answers. An offline [first-decision audit](references/glyph_first_policy_audit_result.md)
 finds substantially more correct source first-character decisions than faithful
-first output images. The next [function-transfer experiment](references/glyph_first_function_transfer_protocol.md)
-tests that readout gap with broader training states. No general working ILM or
-matched-quality efficiency advantage is claimed.
+first output images. Broader [synthetic function transfer](references/glyph_first_function_transfer_result.md)
+also fails qualification and damages real first outputs. The next
+[natural-state experiment](references/natural_first_image_protocol.md) expands
+to the full CMRC training partition and caches actual complete-image prefills.
+No general working ILM or matched-quality efficiency advantage is claimed.
 
 ## Earlier bounded results
 
