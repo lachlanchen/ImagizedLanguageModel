@@ -53,11 +53,11 @@ def build_slot():
     with (ROOT/'artifacts/ilm_gpu0.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         observed=host_resources();surface=audit_surface()
-        require(observed['available_gib']>=64.,'CPU publication needs64 GiB reserve under high global swap')
+        require(observed['available_gib']>=48.,'CPU publication needs48 GiB reserve under high global swap')
         require(observed['some_pressure_avg10']<=.5 and observed['full_pressure_avg10']<=.1,
                 'CPU publication needs low actual memory pressure')
-        admission=dict(mode='post_terminal_CPU_publication_64GiB_reserve_and_PSI',entry=observed,
-            minimum_entry_available_gib=64.,minimum_live_available_gib=24.,same_project_GPU_lock_held=True,
+        admission=dict(mode='post_terminal_CPU_publication_48GiB_reserve_and_PSI',entry=observed,
+            minimum_entry_available_gib=48.,minimum_live_available_gib=24.,same_project_GPU_lock_held=True,
             original_RAM_swap_helper_unchanged=True,other_project_processes_modified=False,CUDA_hidden=True)
         record('entry',dict(admission=admission,surface=surface));yield admission
 

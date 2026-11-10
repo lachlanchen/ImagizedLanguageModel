@@ -55,6 +55,15 @@ Record actual admission privately; do not change swap settings or foreign
 services. No publication stage may run alongside the current neural job.
 This resource-only mode does not change any model or physical quality gate.
 
+Resource amendment after the first real57-slide export: the owned Office child
+completed in10.01s while available RAM remained at least65.095GiB. The next
+preparation was rejected before creating a stage because global available RAM
+was just below the initially conservative64GiB entry reserve, with zero measured
+memory pressure and no project neural/Office process. Use48GiB entry for the
+bounded CPU build, retaining the24GiB live reserve, strict low-PSI admission,
+same exclusive mutex and exact-child cleanup. The original helper and prior
+receipts remain unchanged; no foreign process or swap setting is modified.
+
 The balanced-writer comparison has now completed and been reviewed/scored.
 Expand Note62, the Results paragraph and abstract to include its separate new
 context cohort:18/32 clear complete matches versus19/32 for the unchanged
