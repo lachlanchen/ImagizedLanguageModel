@@ -2,6 +2,7 @@
 """Authenticate and inspect every adapted-model stream before reference scoring."""
 import argparse
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -35,6 +36,9 @@ def review(run):
     report=load(run/'assessment/report.json'); require(len(report['records'])==72,'incomplete fixed cohort')
     folder=run/'raw_review'; folder.mkdir(exist_ok=False)
     for row in report['records']:
+        elapsed=row['generation_wall_seconds']; waited=row['recorded_generation_pressure_wait_seconds']
+        require(math.isfinite(elapsed) and math.isfinite(waited) and elapsed>0 and 0<=waited<=elapsed+1e-6,
+                'invalid per-answer generation timing')
         path=run/'assessment'/row['file']; require(sha(path)==row['sha256'],'raw tensor changed')
         v=torch.load(path,weights_only=True,map_location='cpu'); pixels=v['images']
         require(tuple(pixels.shape)==(row['glyphs'],1,32,32)
@@ -144,7 +148,12 @@ def score(run):
             manual_clear_complete_exact=sum(r['manual_clear_complete_exact'] for r in rows),
             mean_foreground_f1_supported=float(np.mean(supported)) if supported else None,
             cases_with_supported_reference=len(supported),stopped=sum(r['stopped'] for r in rows),
-            capped=sum(r['capped'] for r in rows))
+            capped=sum(r['capped'] for r in rows),
+            total_generation_wall_seconds=sum(r['generation_wall_seconds'] for r in rows),
+            total_generation_pressure_wait_seconds=sum(r['recorded_generation_pressure_wait_seconds'] for r in rows))
+        elapsed=groups[split+'/'+route]['total_generation_wall_seconds']
+        groups[split+'/'+route]['clear_complete_answers_per_generation_wall_second']=(
+            groups[split+'/'+route]['manual_clear_complete_exact']/elapsed if elapsed>0 else None)
     fresh={int(r['key'].split('/')[1]):r for r in measurements if r['key'].startswith('fresh/')}
     pairs=sum(all(fresh[i]['manual_clear_complete_exact'] for i in [2*p,2*p+1]) for p in range(16))
     pilot=groups['fresh/normal']['manual_clear_complete_exact']>=24 and pairs>=10

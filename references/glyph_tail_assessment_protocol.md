@@ -52,3 +52,9 @@ question-discrimination check does not filter the cohort or change the pilot
 criterion. Equal answers to two questions with overlapping references are not
 by themselves evidence that the model used the question. The paired readout
 control's complete output review is still required before either score.
+
+Before either final candidate produces any answer, the separate
+`glyph_reader_execution_protocol.md` fixes a shared resource-wait amendment
+and per-answer timing boundaries. Timing never changes which answers count,
+the fixed cohort or the correctness thresholds. Failed and capped streams
+remain in the total generation wall time.

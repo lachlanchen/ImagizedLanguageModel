@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 
 import numpy as np
 from PIL import Image, ImageDraw
@@ -23,6 +24,8 @@ def identity():
     names = [OWN, 'references/glyph_tail_assessment_protocol.md',
              'scripts/infer_glyph_tail_language.py', 'ilm/visual_lm/glyph_tail_adapter.py',
              'ilm/visual_lm/glyph_runtime_resources.py',
+             'ilm/visual_lm/glyph_reader_monitor.py',
+             'references/glyph_reader_execution_protocol.md',
              'ilm/visual_lm/semantic_glyph_loop.py']
     for name in names:
         require(subprocess.check_output(['git', 'show', 'HEAD:' + name], cwd=ROOT)
@@ -82,7 +85,8 @@ def boards(folder, name, rows):
 def qualify(run):
     code=identity(); m, checkpoint=candidate(run)
     import torch
-    from scripts.train_semantic_glyph_language import Monitor, numerics, image, atomic_tensor
+    from scripts.train_semantic_glyph_language import numerics, image, atomic_tensor
+    from ilm.visual_lm.glyph_reader_monitor import GlyphReaderMonitor as Monitor
     from scripts.infer_glyph_tail_language import load_actor
     from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     from ilm.visual_lm.semantic_image_memory import native_budget_image
@@ -99,6 +103,7 @@ def qualify(run):
         samples=set(np.linspace(0,len(source)-1,16,dtype=int).tolist())
         tf_records=[]; tf_images=[]; tf_labels=[]; tf_preview=[]
         terminals=continues=terminal_ok=continue_ok=0
+        monitor.guard()
         with full_reader_gpu() as (device,admission), torch.no_grad():
             monitor.admission=admission; numerics(); monitor.guard()
             actor,provenance=load_actor(checkpoint,device); tail=tail_view(actor.interface.actor.context)
@@ -167,7 +172,8 @@ def assess(run):
             and review['all8_qualification_boards_actually_viewed'],'actually review physical qualification first')
     for name in report['boards']: require(sha(run/'qualify'/name)==review['boards_sha256'][name],'reviewed board changed')
     import torch
-    from scripts.train_semantic_glyph_language import Monitor,image,numerics,atomic_tensor
+    from scripts.train_semantic_glyph_language import image,numerics,atomic_tensor
+    from ilm.visual_lm.glyph_reader_monitor import GlyphReaderMonitor as Monitor
     from scripts.infer_glyph_tail_language import load_actor,output_png
     from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     old=load(ROOT/'artifacts/pixel_language_diversity_v1/manifest.json')
@@ -182,19 +188,28 @@ def assess(run):
     monitor=Monitor(folder,1800.); monitor.status('admitting')
     try:
         records=[]
+        monitor.guard()
         with full_reader_gpu() as (device,admission),torch.no_grad():
             monitor.admission=admission; numerics(); monitor.guard()
+            loading_started=time.perf_counter()
             actor,provenance=load_actor(checkpoint,device)
+            torch.cuda.synchronize(); loading_seconds=time.perf_counter()-loading_started
             hook=actor.interface.actor.context.register_forward_pre_hook(lambda module,args:monitor.guard())
             for index,job in enumerate(jobs):
                 monitor.position=dict(completed=index,total=72,key=job['key']); monitor.guard()
                 prompt=ROOT/job['prompt']
-                value=actor.generate(image(prompt),maximum_glyphs=64)
+                prompt_pixels=image(prompt)
+                torch.cuda.synchronize(); started=time.perf_counter(); waited_before=monitor.waited
+                value=actor.generate(prompt_pixels,maximum_glyphs=64)
+                torch.cuda.synchronize(); generation_seconds=time.perf_counter()-started
+                generation_wait=monitor.waited-waited_before
                 stem=job['key'].replace('/','_')
                 atomic_tensor(folder/(stem+'.pt'),value); output_png(value,folder/(stem+'.png'))
                 records.append(dict(**job,input_sha256=sha(prompt),file=stem+'.pt',sha256=sha(folder/(stem+'.pt')),
                     png=stem+'.png',png_sha256=sha(folder/(stem+'.png')),glyphs=len(value['images']),
-                    stopped=value['stopped'],capped=value['capped']))
+                    stopped=value['stopped'],capped=value['capped'],
+                    generation_wall_seconds=generation_seconds,recorded_generation_pressure_wait_seconds=generation_wait,
+                    generation_wall_excluding_recorded_pressure_wait_seconds=generation_seconds-generation_wait))
                 monitor.status('generating_actual_image_answers'); print(json.dumps(records[-1]),flush=True)
             hook.remove()
             save_json(folder/'report.json',dict(records=records,code_sha256=code,
@@ -202,7 +217,11 @@ def assess(run):
                 fixed_physical_gate_passed=report['readout_gate_passed'],
                 assessment_does_not_override_failed_component_gate=True,
                 source_lexical_head=False,tokenizer=False,font=False,glyph_bank=False,
-                actual_emitted_pixel_feedback=True,quality_not_yet_reviewed=True,**monitor.receipt()))
+                actual_emitted_pixel_feedback=True,quality_not_yet_reviewed=True,
+                actor_loading_wall_seconds=loading_seconds,
+                generation_timing_includes_image_prefill_pixel_feedback_and_stop=True,
+                generation_timing_excludes_prompt_file_read_output_serialization_and_actor_loading=True,
+                matched_text_LLM_efficiency_demonstrated=False,**monitor.receipt()))
         monitor.status('completed')
     except BaseException as error:
         monitor.status('failed',reason=repr(error)); raise

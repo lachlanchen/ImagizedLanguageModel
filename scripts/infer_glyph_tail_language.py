@@ -3,6 +3,7 @@
 import argparse
 import json
 from pathlib import Path
+import time
 
 import numpy as np
 from PIL import Image
@@ -43,19 +44,27 @@ def main():
     args = parser.parse_args()
     import torch
     from ilm.image_edit.baseline import save_json, sha
-    from scripts.train_semantic_glyph_language import image, numerics, atomic_tensor, Monitor
+    from scripts.train_semantic_glyph_language import image, numerics, atomic_tensor
+    from ilm.visual_lm.glyph_reader_monitor import GlyphReaderMonitor as Monitor
     from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     args.output.mkdir(parents=True, exist_ok=False)
     monitor=Monitor(args.output,1800.)
     monitor.status('admitting')
     try:
+        monitor.guard()
         with full_reader_gpu() as (device, admission), torch.no_grad():
             monitor.admission=admission
             numerics()
             monitor.guard()
+            loading_started=time.perf_counter()
             actor, provenance = load_actor(args.checkpoint, device)
+            torch.cuda.synchronize(); loading_seconds=time.perf_counter()-loading_started
             hook=actor.interface.actor.context.register_forward_pre_hook(lambda module,args:monitor.guard())
-            value = actor.generate(image(args.image), maximum_glyphs=args.maximum_glyphs)
+            prompt_pixels=image(args.image)
+            torch.cuda.synchronize(); started=time.perf_counter(); waited_before=monitor.waited
+            value = actor.generate(prompt_pixels, maximum_glyphs=args.maximum_glyphs)
+            torch.cuda.synchronize(); generation_seconds=time.perf_counter()-started
+            generation_wait=monitor.waited-waited_before
             hook.remove()
             atomic_tensor(args.output / 'output.pt', value)
             output_png(value, args.output / 'output.png')
@@ -63,6 +72,11 @@ def main():
                 checkpoint_sha256=sha(args.checkpoint), output_sha256=sha(args.output / 'output.pt'),
                 glyphs=len(value['images']), stopped=value['stopped'], capped=value['capped'],
                 source=provenance, actual_emitted_pixel_feedback=True,
+                actor_loading_wall_seconds=loading_seconds,generation_wall_seconds=generation_seconds,
+                recorded_generation_pressure_wait_seconds=generation_wait,
+                generation_wall_excluding_recorded_pressure_wait_seconds=generation_seconds-generation_wait,
+                generation_timing_includes_image_prefill_pixel_feedback_and_stop=True,
+                generation_timing_excludes_prompt_file_read_output_serialization_and_actor_loading=True,
                 tokenizer=False, font=False, glyph_bank=False, source_lexical_head=False,
                 training_or_evaluation_corpus_opened=False,**monitor.receipt()))
         monitor.status('completed')
