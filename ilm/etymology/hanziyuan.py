@@ -388,9 +388,15 @@ def parse_page(
             continue
         ul = h3.find_next_sibling()
         while ul and ul.name != "ul":
-            # skip non-list nodes until the UL
+            # An empty stage has a paragraph instead of a list. Never borrow
+            # the following stage's list across a new section heading.
+            if ul.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
+                ul = None
+                break
             ul = ul.find_next_sibling()
         if not ul:
+            if debug is not None:
+                debug.append(f"stage_section_without_list={stage}")
             continue
         labels: List[str] = []
         for li in ul.find_all("li"):
