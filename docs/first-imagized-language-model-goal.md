@@ -53,6 +53,37 @@ unrepaired complete outputs, rather than inferred from lower loss or a proposed
 mathematical mechanism. The [run instructions](natural-first-writer.md) cover
 the currently implemented experiment and its explicit unrun stages.
 
+## Whole-sequence model and publication criteria
+
+Use substantial authentic writing corpora for the next model. Prepare full
+passages, their continuations and complete question-answer sequences as glyph
+images. Retain source provenance and keep whole works or passage groups
+together in evaluation. Report unique documents and supervised glyph and
+span positions, alongside repeated training exposures and preparation cost.
+Use the local teacher offline to supervise context and continuation.
+
+Train a compact causal body over groups of visual glyphs. A shared image
+encoder should turn the observed or emitted span into continuous feedback.
+An image decoder should generate complete spans and learn when to end an
+answer. Test the teacher's original update sequence against that same
+sequence with learned image-span feedback before relying on this transfer.
+Measure both context decisions and actual generated images. Continue toward
+a smaller standalone body once the image feedback and generation work. See
+the [visual span measurements](../references/visual_chunk_coverage_result.md).
+
+Measure complete answers, passage continuation, question dependence and
+historical form handling on independent groups. Measure peak VRAM, total
+preparation and training time, and inference latency on one 4090. Compare
+costs at similar task quality with a conventional local language model.
+First-glyph reconstruction remains a diagnosis within the running experiment.
+
+Maintain the Nature-style TeX manuscript and editable PowerPoint figures.
+Show actual complete-answer quality at fixed training steps and display
+unrepaired generated images from the same inputs across those steps. Report
+physical pixel metrics, language scores and resource use separately. Bind
+every plotted point to measured runs. See the
+[registered learning trajectory](../references/natural_writer_learning_trajectory.md).
+
 ## Earlier direction record
 
 The sections below retain decisions and observations from 8 November and

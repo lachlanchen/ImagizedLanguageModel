@@ -15,13 +15,14 @@ from ilm.image_edit.baseline import ROOT,sha,save_json
 from scripts.score_pixel_language_first_blocks import require
 
 OWN='scripts/train_natural_first_writer.py'
+FIGURE_STEPS=(9000,18000,27000)
 
 
 def load(p):return json.loads(Path(p).read_text())
 
 
 def identity():
-    names=[OWN,'references/natural_first_image_protocol.md',
+    names=[OWN,'references/natural_first_image_protocol.md','references/natural_writer_learning_trajectory.md',
            'scripts/cache_natural_first_states.py','ilm/visual_lm/semantic_glyph_loop.py',
            'scripts/train_genuine_glyph_readout.py','scripts/train_semantic_glyph_bridge.py',
            'scripts/train_semantic_glyph_language.py','scripts/distill_semantic_glyph_readout.py']
@@ -54,7 +55,7 @@ def prepare(run):
         initial_checkpoint=c['checkpoint'],inherited_checkpoint_sha256=c['checkpoint_sha256'],
         natural_data=c['data'],primitive=p['primitive'],genuine=p['genuine'],
         original_pool=str((parent/'cache/pools.pt').relative_to(ROOT)),
-        fit_steps=36000,seed=202611123,learning_rate=.0001,
+        fit_steps=36000,figure_writer_steps=list(FIGURE_STEPS),seed=202611123,learning_rate=.0001,
         maximum_stage_seconds=3600.,maximum_pressure_wait_seconds=1800.,maximum_vram_gib=14.,
         minimum_entry_ram_gib=48.,minimum_runtime_ram_gib=32.,
         held_contexts_not_used_for_fitting=True,body_and_stopping_frozen=True,
@@ -96,6 +97,8 @@ def fit(run,m,monitor,device):
     initial=torch.load(ROOT/m['initial_checkpoint'],weights_only=True,map_location='cpu')
     opt=torch.optim.AdamW(params,lr=m['learning_rate'],weight_decay=.01)
     sampler=hashlib.sha256();counts=dict(natural=0,first=0,later=0,copy=0)
+    snapshots=[]
+    preparation_sha256=sha(run/'writer_preparation.json')
     for step in range(m['fit_steps']):
         monitor.position=dict(step=step,total=m['fit_steps']);monitor.guard();opt.zero_grad(set_to_none=True)
         ix=torch.randint(len(h),(128,),device=device);a=torch.randint(len(p['first']),(64,),device=device)
@@ -111,6 +114,12 @@ def fit(run,m,monitor,device):
         loss.backward();torch.nn.utils.clip_grad_norm_(params,1.);opt.step()
         for group in opt.param_groups:group['lr']=m['learning_rate']*(.1+.9*.5*(1+math.cos(math.pi*(step+1)/m['fit_steps'])))
         require(all(v._version==ver for v,ver in frozen),'frozen image/stop parameters changed')
+        if step+1 in m['figure_writer_steps']:
+            path=monitor.path/f'writer_step_{step+1:05}.pt'
+            atomic_tensor(path,dict(step=step+1,preparation_sha256=preparation_sha256,
+                parent_checkpoint_sha256=m['inherited_checkpoint_sha256'],
+                readout={name:value.detach().cpu() for name,value in model.readout.state_dict().items()}))
+            snapshots.append(dict(step=step+1,file=path.name,sha256=sha(path),sampled_counts=dict(counts)))
         if (step+1)%100==0:
             row=dict(step=step+1,loss=float(loss.detach()),pixel_groups=[float(v.detach()) for v in groups])
             with (monitor.path/'history.jsonl').open('a') as stream:stream.write(json.dumps(row)+'\n')
@@ -124,14 +133,15 @@ def fit(run,m,monitor,device):
                 writer_training_family='natural_first_image_v1',
                 language_training_complete=step+1==m['fit_steps'],optimizer=opt.state_dict(),
                 torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state(),
-                preparation_sha256=sha(run/'writer_preparation.json'),usable_language_demonstrated=False))
+                preparation_sha256=preparation_sha256,usable_language_demonstrated=False))
     require(counts==dict(natural=4608000,first=2304000,later=1152000,copy=1152000),'actual exposure counts differ')
+    require([row['step'] for row in snapshots]==m['figure_writer_steps'],'learning-trajectory snapshots missing')
     for name,value in model.state_dict().items():
         if not name.startswith('readout.'):require(torch.equal(value.cpu(),initial['model'][name]),'non-readout model changed')
     require(all(torch.isfinite(v).all() for v in model.state_dict().values()),'nonfinite final writer')
     save_json(monitor.path/'report.json',dict(checkpoint_sha256=sha(monitor.path/'checkpoint_latest.pt'),
         actual_optimizer_updates=m['fit_steps'],sampled_counts=counts,sampler_sha256=sampler.hexdigest(),
-        all_checks_passed=True,
+        all_checks_passed=True,figure_writer_snapshots=snapshots,
         natural_training_states=len(h),natural_training_forms=len(labels.unique()),
         natural_unsupported_training_excluded=sum(r['split']=='train' and r['label']<0 for r in rows),
         held_contexts_used_for_training=False,all_non_readout_parameters_bit_exact=True,
