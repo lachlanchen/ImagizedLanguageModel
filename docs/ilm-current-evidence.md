@@ -29,6 +29,15 @@ first form nearest in semantic cosine on9/16normal questions, while only1/16
 first images is pixel-exact. Nearest-anchor ranks are evaluator diagnostics;
 they never replace generated output.
 
+A [coverage join](../references/glyph_target_coverage_result.md) puts eleven of
+those sixteen cases in the group with an allowed first form already seen at
+an initial training position. All nine nearest-code successes and the one
+exact first image occur there. Two other cases have a form seen only later
+in training answers; three have no form seen as a language target. All five
+lack a first image reaching F1 0.95. These are small descriptive strata, not
+evidence that coverage alone causes the failures. Known-form motor errors and
+transfer to new initial targets both need testing.
+
 The trained semantic output span has uniform anchor-regression residual0.30518.
 The best possible rank2048affine span could reach0.060109. This identifies a
 measurable latent fitting limit and a poor fit of the current span to the wider
