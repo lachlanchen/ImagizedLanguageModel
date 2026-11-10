@@ -7,6 +7,7 @@ import json
 import math
 import os
 from pathlib import Path
+import shutil
 import subprocess
 
 import numpy as np
@@ -44,10 +45,32 @@ def identity():
     return {n: sha(ROOT / n) for n in SOURCES}
 
 
-def prepare(output):
+def prepare(output, reuse=None):
     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CPU-only preparation')
     require(not output.exists(), 'preserve prior preparations')
     code = identity()
+    if reuse is not None:
+        old = load(reuse / 'preparation.json')
+        for name, digest in old['code_sha256'].items():
+            if name not in (OWN, 'references/glyph_tail_adaptation_protocol.md'):
+                require(sha(ROOT / name) == digest, 'prepared-data ancestor implementation changed')
+        for name, digest in old['bindings_sha256'].items():
+            require(sha(ROOT / name) == digest, 'prepared-data ancestor input changed')
+        output.mkdir(parents=True)
+        for row in old['input_preview_boards']:
+            require(sha(reuse / row['file']) == row['sha256'], 'viewed preview changed')
+            shutil.copy2(reuse / row['file'], output / row['file'])
+        require(sha(reuse / 'evaluation_references.json') == old['evaluation_references_sha256'], 'held references changed')
+        shutil.copy2(reuse / 'evaluation_references.json', output / 'evaluation_references.json')
+        bindings = dict(old['bindings_sha256'])
+        bindings[rel(reuse / 'preparation.json')] = sha(reuse / 'preparation.json')
+        save_json(output / 'preparation.json', dict(old, code_sha256=code, bindings_sha256=bindings,
+            body_layers=36, tail_start_layer=32, prepared_data_ancestor=rel(reuse),
+            prepared_data_ancestor_sha256=sha(reuse / 'preparation.json'),
+            prior_preflight_weights_reused=False, prepared_images_and_selection_unchanged=True))
+        print(json.dumps(dict(training_questions=len(old['training_jobs']), reused_input_images=True,
+                              fresh_questions=len(old['fresh_cases']), prior_optimizer_state_used=False)))
+        return
     import torch
     from ilm.visual_lm.complete_writing_data import CompleteWritingImageData
     from ilm.visual_lm.causal_visual_prefix import fold_writing_prompt
@@ -178,6 +201,7 @@ def cache(output, preflight):
                 capture['lower'] = args[0].detach().cpu().clone()
 
             start_layer = len(interface.actor.context.layers) - m['tail_layers']
+            require(len(interface.actor.context.layers) == 36 and start_layer == 32, 'authenticated body layer identity differs')
             handle = interface.actor.context.layers[start_layer].register_forward_pre_hook(hook, with_kwargs=True)
             jobs = m['training_jobs'][:4] if preflight else m['training_jobs']
             zero_error = causal_error = None
@@ -218,7 +242,7 @@ def cache(output, preflight):
                 files.append(dict(id=job['id'],file=rel(path),sha256=sha(path),states=n+1,
                                   cache_bytes=path.stat().st_size))
                 del args, response, lower, wanted
-                monitor.status('caching_frozen_layer28_inputs')
+                monitor.status('caching_frozen_prefix_inputs')
                 if index%16==0: print(json.dumps(monitor.position),flush=True)
             handle.remove()
             save_json(folder / 'report.json',dict(preparation_sha256=sha(output/'preparation.json'),files=files,
@@ -305,7 +329,7 @@ def fit(output, preflight):
                 for group,rate in zip(opt.param_groups,[m['adapter_learning_rate'],m['readout_learning_rate']]): group['lr']=rate*decay
                 require(all(p._version==version for p,version in frozen),'frozen parameter changed')
                 if (step+1)%100==0 or preflight:
-                    item=dict(step=step+1,loss=float(loss),pixel=float(pixel),stop=float(stop))
+                    item=dict(step=step+1,loss=float(loss.detach()),pixel=float(pixel.detach()),stop=float(stop.detach()))
                     with (folder/'history.jsonl').open('a') as f: f.write(json.dumps(item)+'\n')
                     monitor.status('training_glyph_context_and_readout',**item); print(json.dumps(item),flush=True)
                 if (step+1)%1000==0 or step+1==steps:
@@ -341,7 +365,8 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage',choices=['prepare','cache-preflight','fit-preflight','cache','fit'],required=True)
     parser.add_argument('--output',type=Path,default=Path('artifacts/glyph_tail_adaptation_v1'))
+    parser.add_argument('--reuse-prepared-data',type=Path)
     args=parser.parse_args(); output=args.output.resolve()
-    if args.stage=='prepare': prepare(output)
+    if args.stage=='prepare': prepare(output,args.reuse_prepared_data.resolve() if args.reuse_prepared_data else None)
     elif args.stage in ['cache-preflight','cache']: cache(output,args.stage=='cache-preflight')
     else: fit(output,args.stage=='fit-preflight')

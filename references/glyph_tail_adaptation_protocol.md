@@ -7,9 +7,9 @@ candidate therefore adapts the final four contextual attention layers jointly
 with the existing glyph writer and stopping head. It does not add a new motor,
 lexical classifier, vocabulary table or runtime teacher.
 
-The inherited body has 32 layers. Layers 0–27, vision, numeric task controls,
+The authenticated inherited body has 36 layers. Layers 0–31, vision, numeric task controls,
 the whole-glyph encoder E, decoder D and affine normalization stay frozen.
-Only rank-8 q/v/o adapters in layers 28–31, G and stop train. The existing
+Only rank-8 q/v/o adapters in layers 32–35, G and stop train. The existing
 zero-initialized adapter convention is retained. Start from the qualified
 pixel-only bridge; do not import diagnostic trajectories or C3 labels.
 
@@ -20,7 +20,7 @@ than silently substituting glyphs. Each reference prepares a complete target
 image sequence. The prompt API receives prompt pixels only. During teacher
 forcing, a target image enters only after the state predicting that image.
 
-Cache the frozen layer-28 input for each full prompt-plus-gold-image sequence.
+Cache the frozen layer-32 input for each full prompt-plus-gold-image sequence.
 The prefix cache includes positional coordinates and target positions, not a
 precomputed prediction from the changing final layers. Final-layer self-attention
 still processes the complete causal prefix during fitting. This is exact
@@ -79,3 +79,13 @@ weights. Inference installs those deltas in the full image body and re-encodes
 actual emitted pixels. No source lexical head, tokenizer, font or glyph bank
 is permitted in that runtime. A successful fit or preflight is not the usable
 language proof; that requires the complete autonomous assessment.
+
+The first preflight in `glyph_tail_adaptation_v1` revealed an incorrect static
+layer count in the initial protocol and progress label. The implementation
+already selected the actual final four layers dynamically, recorded boundary
+32, matched the full body exactly, and completed two real optimizer updates.
+Its source snapshot and original preparation remain preserved at commit
+`cd8f6c4d`. The corrected run uses a fresh output directory and reuses only the
+identical prepared input images and selection. It repeats both preflights
+before any long cache or main fit. No language result or checkpoint was selected
+by this metadata correction.
