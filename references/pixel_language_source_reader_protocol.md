@@ -34,7 +34,11 @@ It makes no model calls or weight copies. The GPU stage requires the training
 owner to have exited and uses the same global GPU0 lock and bounded
 read-only admission as the completed likelihood diagnostic. Enforce the
 22 GiB allocation cap and monitor host reserves and memory pressure during
-decoding. Preserve partial and failed executions rather than overwriting them.
+decoding. A pressure spike pauses further reader computation until the same
+limits recover, with at most 300 seconds of waiting across the whole job.
+Available RAM below 24 GiB causes immediate exit. No other process or kernel
+setting is changed. Preserve partial and failed executions rather than
+overwriting them; include actual waiting time in the recorded runtime.
 
 The result distinguishes three possibilities: usable native image reading
 with a failing image readout, a gap between source text and image reading, or

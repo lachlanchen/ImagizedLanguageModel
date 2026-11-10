@@ -84,7 +84,7 @@ def prepare(output):
         ['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(), code_sha256=code,
         bindings_sha256=bindings, controls=rel(controls), compiler=rel(compiler),
         jobs=jobs, routes=['normal','blank','text'], maximum_tokens=64,
-        maximum_allocated_vram_gib=22., model_calls=0, optimizer_updates=0,
+        maximum_allocated_vram_gib=22., maximum_resource_wait_seconds=300., model_calls=0, optimizer_updates=0,
         helper_only_symbolic_decoding=True, ILM_image_answers_generated=0,
         development_sealed=False, development_training_allowed=False))
     print(json.dumps(dict(prepared=True,cases=len(jobs),routes=3,model_calls=0)))
@@ -145,14 +145,30 @@ def run(output):
             eog=set(compiler['eog_ids'])
             measurements=[]
             resources=[]
+            resource_wait_seconds=0.
+            runtime_position={}
             def guard():
+                nonlocal resource_wait_seconds
                 require(torch.cuda.max_memory_allocated()/1024**3 <= prepared['maximum_allocated_vram_gib'],
                         'reader diagnostic exceeds22GiB allocation')
-                v=host_resources()
-                if admission['mode']=='post_terminal_RAM_reserve_and_PSI': reserve_check(v)
-                resources.append(v)
+                while True:
+                    v=host_resources()
+                    resources.append(v)
+                    require(v['available_gib']>=24,'reader runtime RAM reserve reached')
+                    pressure_ok=v['some_pressure_avg10']<=.5 and v['full_pressure_avg10']<=.1
+                    if admission['mode']!='post_terminal_RAM_reserve_and_PSI' or pressure_ok:
+                        break
+                    remaining=prepared['maximum_resource_wait_seconds']-resource_wait_seconds
+                    require(remaining>0,'reader total memory-pressure wait budget exhausted')
+                    status('waiting_for_memory_pressure',completed=len(measurements),total=48,
+                        resource_wait_seconds=resource_wait_seconds,resources=v,**runtime_position)
+                    waited=time.perf_counter()
+                    time.sleep(min(10.,remaining))
+                    resource_wait_seconds+=time.perf_counter()-waited
             for job in prepared['jobs']:
                 for route in prepared['routes']:
+                    runtime_position=dict(index=job['index'],route=route,decoded_steps=0)
+                    guard()
                     if route=='text':
                         encode=lambda s:tokenizer.encode(s,add_special_tokens=False).ids
                         ids=[markers['im_start'],*encode('user\n'),*encode(TASK+'\n\n'+job['source_prompt']),
@@ -182,6 +198,7 @@ def run(output):
                         require(bool(torch.isfinite(logits).all()),'nonfinite source projection')
                         token=int(logits.argmax(-1)); ids.append(token); selected.append(float(logits[0,token]))
                         del logits
+                        runtime_position['decoded_steps']=step+1
                         guard()
                         if token in eog:
                             stopped=True
@@ -217,6 +234,7 @@ def run(output):
                 optimizer_updates=0,development_training_allowed=False,formal_semantic_accuracy_measured=False,
                 peak_allocated_vram_gib=torch.cuda.max_memory_allocated()/1024**3,
                 elapsed_seconds=time.perf_counter()-began,resource_admission=admission,
+                resource_wait_seconds=resource_wait_seconds,
                 minimum_available_gib=min(v['available_gib'] for v in resources),
                 maximum_memory_pressure_some_avg10=max(v['some_pressure_avg10'] for v in resources),
                 maximum_memory_pressure_full_avg10=max(v['full_pressure_avg10'] for v in resources)))
