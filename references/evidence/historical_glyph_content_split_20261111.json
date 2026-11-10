@@ -1,0 +1,102 @@
+{
+  "namespace": "historical-glyph-content-v1",
+  "source_entries_sha256": "9e4564a3b93fb930224e8ca5aef1cb268c67245073785ac06d142a2c32f4aa66",
+  "raster_cache": {
+    "database_sha256": "c563e8587d7dcacf73704c0fb7816f6d830db11122e0a3da62678b3a7119f738",
+    "manifest_sha256": "3c4064441563c88dffe0c36d42cce0c381bf8b401b764b87484edfb4aa7db99c",
+    "identifiers_sha256": "ac0a2409ed7076eb21197eee66794bec9eaa9910400897fec2c5562dc3e17a99",
+    "records": 84626,
+    "source_svg_files": 84627,
+    "cache_sha256": "8902a8d79a3cad0af8ee98531383301ecd02e365ed300533b008a0701def0f0e"
+  },
+  "grouped_by": [
+    "query character",
+    "traditional and simplified forms",
+    "source entry ID",
+    "identical SVG bytes",
+    "identical nonblank 32×32 binary pixels"
+  ],
+  "largest_family_characters": 4,
+  "partitions": {
+    "train": {
+      "families": 5898,
+      "characters": 6176,
+      "source_entries": 6835,
+      "glyph_records": 56442,
+      "unique_binary_rasters": 54245,
+      "glyph_records_by_stage": {
+        "seal": 4114,
+        "bronze": 15534,
+        "liushutong": 17697,
+        "oracle": 19097
+      },
+      "entries_with_meaning_pronunciation_and_glyphs": 4421,
+      "file_sha256": "037578db0565c16616e0e91d84b8ccc60e5e3175f117e79ac9b09c41a3e07ce2"
+    },
+    "development": {
+      "families": 756,
+      "characters": 795,
+      "source_entries": 893,
+      "glyph_records": 5460,
+      "unique_binary_rasters": 5233,
+      "glyph_records_by_stage": {
+        "oracle": 1195,
+        "bronze": 1587,
+        "seal": 533,
+        "liushutong": 2145
+      },
+      "entries_with_meaning_pronunciation_and_glyphs": 576,
+      "file_sha256": "191745255f4d3b0ff398b0f712eeb29241edc1f3201cbc23dc46b9e913d287f6"
+    },
+    "sealed": {
+      "families": 750,
+      "characters": 784,
+      "source_entries": 866,
+      "glyph_records": 5966,
+      "unique_binary_rasters": 5650,
+      "glyph_records_by_stage": {
+        "oracle": 1932,
+        "bronze": 1439,
+        "seal": 514,
+        "liushutong": 2081
+      },
+      "entries_with_meaning_pronunciation_and_glyphs": 553,
+      "file_sha256": "abaef5fd966e52b87f84589e4d499414681f001a5030c4524d23542cffb08a36"
+    }
+  },
+  "blank_rasters_excluded": 5,
+  "blank_rasters_sha256": "b92e885cadd7ba784c082b8c91c3ff28bb2b05f0f00cacd9593e92185ccdbc32",
+  "earlier_character_only_split_overlap": {
+    "development": {
+      "partition_records": 4789,
+      "partition_records_with_nonblank_training_raster": 524,
+      "evaluated_records": 4096,
+      "evaluated_records_with_nonblank_training_raster": 500,
+      "evaluation_report_sha256": "7d5cdfac5ea59c67817c7c0e4e9c4f58ba2321b330ef59c0c0da729f2adcb401"
+    },
+    "sealed": {
+      "partition_records": 4726,
+      "partition_records_with_nonblank_training_raster": 361,
+      "evaluated_records": 4096,
+      "evaluated_records_with_nonblank_training_raster": 314,
+      "evaluation_report_sha256": "2eda8d0ea306ca7df5e3435f82f19dd16490c19cefbf51b49625b74cf914a5bf"
+    }
+  },
+  "cross_partition_source_or_exact_raster_overlap": false,
+  "near_duplicate_raster_comparison_performed": false,
+  "inherited_pretraining_exposure_known": false,
+  "new_rasterization_or_neural_evaluation_performed": false,
+  "source_code_sha256": "18ec60e8a4e8bdcdcf281c6f53ad6de6ada18027363761f4d4ee6aec2520bc01",
+  "independent_verification": {
+    "authenticated_manifest_count": 3,
+    "exact_raster_records_rechecked": 67868,
+    "cross_partition_keys": {
+      "train/development": {},
+      "train/sealed": {},
+      "development/sealed": {}
+    },
+    "report_sha256": "2fddb5e8222fe5bba27c143006966caf2075dd503cbd1b1fa3cbd1160b3d3084",
+    "cuda_initialized": false
+  },
+  "independent_verification_sha256": "1eccd97db96e2b29908c2f17cc20ee8d393958623c8d0d9cb96542118b187faa"
+}

@@ -4,6 +4,14 @@ Date completed: 2026-08-14
 
 Decision: `continuous-codec-qualified`
 
+The 11 November retrospective audit found that 500 of the 4,096 evaluated
+development rasters and 314 of the 4,096 evaluated sealed rasters matched
+nonblank rasters in the training partition. The character-level split held
+out modern labels while allowing these repeated physical inputs. The
+historical scores below describe that original split. A later split groups
+the repeated rasters and recorded source variants together. See the
+[historical split audit](historical_glyph_content_split_result.md).
+
 ## Claim Tested
 
 V34 tested whether a compact, codebook-free convolutional codec can encode
@@ -150,9 +158,10 @@ character substitutions or blank collapse.
 ## Decision and Limits
 
 V34 qualifies the continuous visual codec as a candidate interface for a
-separately preregistered causal model. It establishes that this 7.4M-parameter
-component can preserve unseen modern and historical writing at low compute
-without a discrete visual vocabulary.
+separately preregistered causal model. This 7.4M-parameter component preserves
+supplied modern and historical rasters in the measured sets at low compute
+without a discrete visual vocabulary. The historical result includes the
+shared training rasters quantified above.
 
 It does **not** establish that a causal model can predict the next visual
 representation, understand a prompt, generate coherent language, answer an

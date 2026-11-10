@@ -40,10 +40,10 @@ database connection. The complete entries and source receipts are in
 counts and hashes. See the [recovery evidence](evidence/historic_entry_metadata_20261111.json).
 
 The associations preserve the site's claims and images. Independent
-verification of meanings and dates remains a separate research task.
-Historical evaluation splits should keep shared SVG content and related
-entry variants together to reduce overlap between training and evaluation.
-The active CMRC writer experiment uses its separately registered corpus.
+verification of meanings and dates remains a separate research task. The
+historical training split now keeps shared SVG content, exact rasters and
+recorded variants together. The active CMRC writer experiment uses its
+separately registered corpus. See the [partition audit](historical_glyph_content_split_result.md).
 
 To reproduce the recovery with the legacy cache and curated inventory
 available, choose a new output directory.
