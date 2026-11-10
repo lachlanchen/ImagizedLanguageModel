@@ -17,18 +17,17 @@ and complete-image objective so that this test does not simultaneously change
 the representation, decoder family and loss. Do not infer a semantic mechanism
 from lower teacher-forced image loss.
 
-The [8,000-update interim assessment](pixel_language_diversity_interim08000_result.md)
-of the broader run retains all 112 autonomous streams. Twenty-one of the
-64 assessed training answers are pixel-exact, compared with three at
-[4,000 updates](pixel_language_diversity_interim04000_result.md). No normal
-development answer is pixel-exact. Actual inspection of all 24 normal
-development outputs identifies no usable correct complete answer. Two
-date-like outputs now contain damaged final digits; they are not reconstructed
-toward the reference years. Whole-training correct-history image NLL improves
-to 0.020290, while useful unseen language generation remains unestablished.
-The fixed 16,000-update run continues; these interim observations neither
-select a checkpoint nor reject all possible longer or different learning
-recipes.
+The [completed 16,000-update assessment](pixel_language_diversity_final_result.md)
+fits 495 of 512 complete training answers and every training first image.
+No normal development answer or first image is pixel-exact, and inspection
+of all 24 normal development outputs identifies no usable correct complete
+answer. Whole-training correct-history image NLL is 0.000259. The substantial
+generalization gap remains despite improved fitting. The earlier
+[4,000](pixel_language_diversity_interim04000_result.md) and
+[8,000](pixel_language_diversity_interim08000_result.md)-update results remain
+available. All 896 streams and 2,731 actual feedback records now pass the
+independent CPU audit. The fixed-state likelihood diagnostic must guide the
+next change; more unchanged fitting is not the next intervention.
 
 The run subsequently encountered a host RAM/swap guard after update 12,128.
 The original process exited; an explicit resume from the durable 12,000-update
@@ -36,7 +35,8 @@ checkpoint preserves the same protocol and cumulative time limit. All 128
 replayed history records match the preserved originals exactly. The
 [recovery record](pixel_language_diversity_resource_recovery.md) retains this
 bounded verification and accounts for the additional executed optimizer calls.
-Final unseen-answer assessment remains pending.
+The final assessment and independent audit have now completed; useful unseen
+language generation remains unestablished.
 
 Prepare a fixed Chinese cohort of 512 natural questions in 256 passage pairs.
 Keep the original 32 questions as visible positive controls. Add 240 different
@@ -117,7 +117,7 @@ retain these implementation checks. They do not measure language quality.
 The main run starts freshly from the declared initial state and must replay
 the qualification's first two updates exactly, after initial whole-cohort loss
 measurement and autonomous image generation. Its final unseen-answer results
-remain pending; the interim assessments are linked above. The first execution
+are linked above. The first execution
 stopped before its initial assessment or any
 training update because state fingerprinting rejected a scalar buffer. The
 corrected fingerprint now matches an independent NumPy byte hash of all 286
@@ -202,7 +202,8 @@ reports appear, independently of quality. It uses no GPU and exits after both
 captures or an original-owner failure. Both owning interim states are now
 captured and authenticated against their complete assessments, and the
 watcher has exited normally. The 16,000-update assessment and final independent
-audit remain pending. Interim review does not qualify a useful language model.
+audit have now completed; their numerical checks do not qualify a useful
+language model.
 
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_pixel_language_assessment.py \
