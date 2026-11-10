@@ -178,3 +178,28 @@ create a fresh preparation with `--updates 0 4000 8000 16000`; `--updates`
 applies only to preparation. Preserve any earlier or interrupted execution.
 Successful numerical replay or a positive likelihood margin would still
 leave useful autonomous language generation to be demonstrated.
+
+The [completed broader run](pixel_language_diversity_final_result.md) now
+provides all four fixed states. Every training first image is exact, while
+every normal development first image differs from its references. The
+likelihood diagnostic remains separate from the completed training protocol.
+
+Post-terminal diagnostic admission retains the global GPU0 lock, 20 GiB free
+GPU requirement and 22 GiB allocation cap. The original RAM/swap admission
+is used when global swap occupancy is at most 75%. When occupancy is higher,
+after checking this project's obsolete processes, the read-only diagnostic
+requires at least 64 GiB available RAM and low measured memory pressure:
+`some avg10 <= 0.5` and `full avg10 <= 0.1`. It checks a 24 GiB RAM reserve
+and the same pressure limits after loading, each query and each scoring case.
+An exceeded limit terminates this diagnostic; it never changes swap, kernel
+settings or another project's processes. The training admission is unchanged.
+
+These pressure values measure recent memory stalls, whereas `MemAvailable`
+estimates memory available for new applications. See the
+[Linux PSI documentation](https://docs.kernel.org/accounting/psi.html) and
+[/proc documentation](https://docs.kernel.org/filesystems/proc.html).
+Thresholds are conservative engineering choices for this read-only test,
+not guarantees of resource isolation. The execution records its actual
+admission mode, available-memory minimum, swap occupancy and pressure maxima.
+Its alternate admission must be bound into a new CPU preparation; previous
+preparations remain preserved and cannot silently change source.

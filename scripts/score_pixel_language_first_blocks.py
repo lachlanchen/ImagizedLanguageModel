@@ -6,6 +6,8 @@ CPU. Neural scoring requires the original training owner to have exited and
 the existing exclusive GPU0 admission. No answer image is generated or repaired.
 """
 import argparse
+from contextlib import contextmanager
+import fcntl
 import gc
 import hashlib
 import json
@@ -22,6 +24,61 @@ from PIL import Image
 from ilm.image_edit.baseline import ROOT, gpu_zero, save_json, sha
 
 EPSILON = 1e-8
+
+
+def host_resources():
+    info = {line.split(':')[0]: int(line.split()[1])
+            for line in Path('/proc/meminfo').read_text().splitlines()}
+    pressure = {}
+    for line in Path('/proc/pressure/memory').read_text().splitlines():
+        fields = line.split()
+        pressure[fields[0]] = dict(field.split('=') for field in fields[1:])
+    return dict(available_gib=info['MemAvailable']/1024**2,
+                swap_fraction=(info['SwapTotal']-info['SwapFree'])/info['SwapTotal'] if info['SwapTotal'] else 0.,
+                some_pressure_avg10=float(pressure['some']['avg10']),
+                full_pressure_avg10=float(pressure['full']['avg10']))
+
+
+def reserve_check(observed, *, entry=False):
+    require(observed['available_gib'] >= (64 if entry else 24),
+            'read-only diagnostic RAM reserve unavailable')
+    require(observed['some_pressure_avg10'] <= .5 and observed['full_pressure_avg10'] <= .1,
+            'read-only diagnostic memory pressure limit reached')
+
+
+@contextmanager
+def diagnostic_gpu():
+    """Keep training admission intact; admit a bounded post-terminal reader.
+
+    After checking that this project has no obsolete jobs, high global swap
+    occupancy can coexist with ample available RAM. The alternate diagnostic
+    admission requires a 64 GiB entry reserve and low actual memory stalls.
+    It never changes swap, kernel settings, or another project's processes.
+    """
+    entry = host_resources()
+    if entry['swap_fraction'] <= .75:
+        with gpu_zero() as device:
+            yield device, dict(mode='original_RAM_swap_admission', entry=entry)
+        return
+    require(os.environ.get('CUDA_VISIBLE_DEVICES') == '0', 'physical GPU0 required')
+    with (ROOT/'artifacts/ilm_gpu0.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        entry = host_resources()
+        reserve_check(entry, entry=True)
+        free = subprocess.check_output(['nvidia-smi', '-i', '0', '--query-gpu=memory.free',
+            '--format=csv,noheader,nounits'], text=True).strip()
+        require(int(free) >= 20*1024, 'GPU0 needs20 GiB free before diagnostic loading')
+        for name in ('HF_HUB_OFFLINE', 'TRANSFORMERS_OFFLINE', 'HF_HUB_DISABLE_TELEMETRY'):
+            os.environ[name] = '1'
+        import torch
+        require(torch.cuda.is_available(), 'selected runtime cannot useGPU0')
+        torch.cuda.set_device(0)
+        torch.cuda.reset_peak_memory_stats(0)
+        torch.set_num_threads(4)
+        yield torch.device('cuda:0'), dict(mode='post_terminal_RAM_reserve_and_PSI', entry=entry,
+            minimum_entry_available_gib=64, minimum_runtime_available_gib=24,
+            maximum_some_pressure_avg10=.5, maximum_full_pressure_avg10=.1,
+            global_swap_fraction_gate=False, training_admission_unchanged=True)
 
 
 def require(value, message):
@@ -202,7 +259,8 @@ def prepare(output, run, steps):
         references=references, pairs=by_pair, decoder_gap_tolerance=EPSILON, head_batch=4,
         maximum_allocated_vram_gib=22., post_hoc_diagnostic=True, development_sealed=False,
         neural_forward_calls=0, optimizer_updates=0, CUDA_initialized=torch.cuda.is_initialized(),
-        neural_scoring_executed=False, language_quality_claim=False))
+        neural_scoring_executed=False, language_quality_claim=False,
+        diagnostic_admission='Original GPU0 admission, or post-terminal64GiB entry reserve plus low memory PSI;24GiB runtime reserve; same GPU0 lock,20GiB cold free GPU and22GiB allocated cap. Training guard unchanged.'))
     print(json.dumps(dict(prepared=True, jobs=len(jobs), states=[s['update'] for s in specs],
         unique_reference_first_images=len(references), pairs=len(by_pair), neural_forward_calls=0), indent=2))
 
@@ -256,11 +314,17 @@ def run(output):
         save_json(execution/'status.json', dict(phase=phase, **pid, seconds=time.perf_counter()-began, **fields))
     queries, scores = {}, {}
     calls = dict(native_prefill=0, writing_query=0, head_forward=0, autonomous_generation=0, optimizer_update=0)
+    resource_samples = []
     def memory_check():
         require(torch.cuda.max_memory_allocated()/1024**3 <= prepared['maximum_allocated_vram_gib'],
                 'diagnostic exceeds its allocation cap')
+        sample = host_resources()
+        if admission['mode'] == 'post_terminal_RAM_reserve_and_PSI':
+            reserve_check(sample)
+        resource_samples.append(sample)
     try:
-        with gpu_zero() as device, torch.no_grad():
+        with diagnostic_gpu() as (device, admission), torch.no_grad():
+            save_json(execution/'admission.json', admission)
             torch.use_deterministic_algorithms(True)
             torch.backends.cudnn.benchmark = False
             torch.backends.cudnn.deterministic = True
@@ -280,6 +344,7 @@ def run(output):
                 controls=control, codec=codec, ollama_root=local/'models/ollama',
                 gguf_source=local/'tools/llama.cpp/gguf-py', device=device)
             writer = actor.writing
+            memory_check()
             for done, job in enumerate(prepared['jobs'], 1):
                 prompt = torch.from_numpy(pixels(ROOT/job['prompt'])).float()[None, None]/127.5-1
                 prefix, geometry = actor.prefill(prompt)
@@ -381,6 +446,12 @@ def run(output):
                 provenance=provenance, states=prepared['states'], queries_sha256=sha(execution/'queries.pt'),
                 scores_sha256={str(s): sha(execution/f'scores_{s:05}.json') for s in states},
                 calls=calls, peak_allocated_vram_gib=peak, elapsed_seconds=time.perf_counter()-began,
+                resource_admission=admission,
+                resource_observations=dict(samples=len(resource_samples),
+                    minimum_available_gib=min(v['available_gib'] for v in resource_samples),
+                    maximum_swap_fraction=max(v['swap_fraction'] for v in resource_samples),
+                    maximum_some_pressure_avg10=max(v['some_pressure_avg10'] for v in resource_samples),
+                    maximum_full_pressure_avg10=max(v['full_pressure_avg10'] for v in resource_samples)),
                 summaries={step: summarize(rows, prepared['jobs'], prepared['decoder_gap_tolerance']) for step, rows in scores.items()},
                 paired_question_margins=pairwise, decoder_gap_tolerance=prepared['decoder_gap_tolerance'],
                 all_reader_fingerprints_and_initial_stop_probabilities_exact=True,
