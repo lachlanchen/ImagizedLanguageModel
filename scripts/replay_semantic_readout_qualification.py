@@ -18,7 +18,11 @@ from scripts.score_pixel_language_first_blocks import require
 
 def run(output):
     import torch
-    meta=check(output)
+    prepared=load(output/'preparation.json')
+    if prepared.get('variant')=='contrastive_loss_only':
+        from scripts.train_contrastive_glyph_readout import check as check_variant
+        meta=check_variant(output)
+    else:meta=check(output)
     own='scripts/replay_semantic_readout_qualification.py'
     require(subprocess.check_output(['git','show','HEAD:'+own],cwd=ROOT)==(ROOT/own).read_bytes(),'commit replay source first')
     q=output/'qualify';require(load(q/'status.json')['phase']=='completed','complete original qualification first')
