@@ -35,8 +35,10 @@ The independent check read all three manifests and verified all 67,868 raster
 references against the cached pixels. It found zero shared exact rasters,
 SVG digests, source labels, source entry IDs, linked modern forms or character
 groups across partitions. Oracle, bronze, seal and Liushutong forms occur in
-each partition. The source manifest retains the 877 glyph links that still
-require recovery from the HTML cache. See the [partition evidence](evidence/historical_glyph_content_split_20261111.json).
+each partition. The base manifest records 877 additional glyph links that
+were subsequently recovered from the HTML cache. See the
+[partition evidence](evidence/historical_glyph_content_split_20261111.json)
+and [raster addendum](historical_glyph_raster_addendum_result.md).
 
 This partition controls exact duplication for a subsequent fit. Near-duplicate
 shapes require further study. Prior checkpoints trained with other historical

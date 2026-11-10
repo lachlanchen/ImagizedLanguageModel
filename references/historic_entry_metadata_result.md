@@ -27,12 +27,13 @@ See the [stage curation](historic_stage_curation_result.md).
 | Source glyph links without a matching saved asset | 877 |
 
 All 877 unmatched links occur in later entries for 272 characters. The cache
-contains their SVG data, and the manifest records their digests for a future
-asset recovery. For example, the legacy assets for 只 cover 135 glyphs in
+contains their SVG data, and the manifest records their digests. For example,
+the legacy assets for 只 cover 135 glyphs in
 its first entry. The cached fragment supplies another 71 across its later
 entries. The recovered entry for 言 links all 66 saved glyphs to its own
 description. The audit found zero differing SVG digests among source links
-with the same character, stage and glyph label.
+with the same character, stage and glyph label. All 877 links were recovered
+and rasterized in the [historical glyph addendum](historical_glyph_raster_addendum_result.md).
 
 The recovery runs locally from the existing cache and uses a read-only
 database connection. The complete entries and source receipts are in
