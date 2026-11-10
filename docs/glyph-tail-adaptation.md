@@ -87,6 +87,12 @@ with CPU `--stage audit` before GPU `--stage run`, an unused recovery folder,
 and no live fit or coordinator. The 18,000-step schedule and assessment remain
 unchanged. An intermediate checkpoint is rejected by standalone inference.
 
+During this recovery, live progress is in
+`artifacts/glyph_tail_adaptation_v2/fit_recovery_02/status.json` and its
+`history.jsonl`. The original failed `fit/status.json` and coordinator receipt
+stay preserved until recovery publishes the completed final fit. Periodic
+recovery checkpoints are training state, not qualified inference releases.
+
 The matched broader-data control is prepared at
 `artifacts/glyph_tail_readout_control_v2`. It uses the same cached questions
 with G and stopping trained, and zero body-adapter updates. Its execution
