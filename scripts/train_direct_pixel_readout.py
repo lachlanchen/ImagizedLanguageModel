@@ -44,6 +44,9 @@ def prepare(output):
             and language.load(PARENT / 'qualify/status.json')['pid'] is None, 'parent qualification still active')
     m = genuine.check(PARENT)
     result = language.load(PARENT / 'qualify/report.json')
+    review = language.load(PARENT / 'qualify/visual_review.json')
+    require(review['report_sha256'] == sha(PARENT / 'qualify/report.json')
+            and review['all_three_boards_actually_viewed'], 'inspect the actual parent failure images first')
     require(not result['readout_gate_passed'], 'parent passed; assess its autonomous language first')
     s = result['summary']
     gate = m['gate']
@@ -59,6 +62,7 @@ def prepare(output):
         genuine_data_preparation_sha256=sha(PARENT / 'preparation.json'),
         genuine_cache_report_sha256=sha(PARENT / 'cache/report.json'),
         parent_qualification_sha256=sha(PARENT / 'qualify/report.json'),
+        parent_visual_review_sha256=sha(PARENT / 'qualify/visual_review.json'),
         primitive=m['primitive'], baseline=m['baseline'], baseline_sha256=m['baseline_sha256'],
         seed=m['seed'], fit_steps=m['fit_steps'], batch_size=m['batch_size'],
         learning_rate=m['learning_rate'], gate=gate,
@@ -89,7 +93,8 @@ def check(folder):
     old = genuine.check(parent)
     for file, key in [('preparation.json', 'genuine_data_preparation_sha256'),
                       ('cache/report.json', 'genuine_cache_report_sha256'),
-                      ('qualify/report.json', 'parent_qualification_sha256')]:
+                      ('qualify/report.json', 'parent_qualification_sha256'),
+                      ('qualify/visual_review.json', 'parent_visual_review_sha256')]:
         require(sha(parent / file) == m[key], 'genuine source changed: ' + file)
     require(sha(ROOT / m['baseline']) == m['baseline_sha256'], 'preserved baseline changed')
     require(m['arm'] in ARMS, 'unknown fixed arm')

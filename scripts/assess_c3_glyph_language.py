@@ -104,6 +104,7 @@ def prepare(cohort, candidate, output):
         code_sha256=code, cohort=relative(cohort), cohort_sha256=sha(cohort / 'preparation.json'),
         input_review_sha256=sha(cohort / 'input_review.json'), versions=versions,
         candidate_run=relative(candidate), candidate_preparation_sha256=sha(candidate / 'preparation.json'),
+        candidate_qualification_sha256=sha(candidate / 'qualify/report.json'),
         candidate_original_assessment_sha256=sha(candidate / 'assessment/report.json'),
         candidate_original_manual_review_sha256=sha(candidate / 'raw_review/manual_review.json'),
         candidate_original_scores_sha256=sha(candidate / 'raw_review/canonical_scores.json'),
@@ -121,6 +122,13 @@ def verify(output):
             and sha(cohort / 'input_review.json') == meta['input_review_sha256'], 'input preparation changed')
     for row in meta['versions'].values():
         require(sha(ROOT / row['checkpoint']) == row['checkpoint_sha256'], 'checkpoint changed')
+    candidate = ROOT / meta['candidate_run']
+    for filename, key in [('preparation.json', 'candidate_preparation_sha256'),
+                          ('qualify/report.json', 'candidate_qualification_sha256'),
+                          ('assessment/report.json', 'candidate_original_assessment_sha256'),
+                          ('raw_review/manual_review.json', 'candidate_original_manual_review_sha256'),
+                          ('raw_review/canonical_scores.json', 'candidate_original_scores_sha256')]:
+        require(sha(candidate / filename) == meta[key], 'registered candidate lineage changed: ' + filename)
     return meta, cohort, inputs(cohort)
 
 
