@@ -1,0 +1,133 @@
+{
+  "source_sha256": "2008418cd819fb1aef9e10d490420d7455e4bf139b7f6479f140f05152343706",
+  "compiler_preparation_sha256": "42c6c5992fb08b5627154854241218d8c5c401c5b15d8ea6eba6fe0c2f911ab0",
+  "calibration_report_sha256": "0df54fd04db8703db80b91165603e551c5acd37a6b363130da181679c3bd340d",
+  "native_labels_sha256": "cef6af6428e8e62f101b11d844f2baf155b1c706ea2f0f9ac1f89d8a4827ad9c",
+  "original_cache_report_sha256": "d1023b9d68fe7641607f8216e948aee78c96656038d2a1be2a1bd416d1870658",
+  "original_states_and_reference_labels_exactly_aligned": true,
+  "training_questions": 508,
+  "states": 4363,
+  "groups": {
+    "first_glyph": {
+      "states": 508,
+      "reference_form_matches": 368,
+      "reference_form_agreement": 0.7244094488188977,
+      "native_terminal_winners": 0,
+      "unsupported_native_winners": 0
+    },
+    "continuation_glyph": {
+      "states": 3347,
+      "reference_form_matches": 2632,
+      "reference_form_agreement": 0.7863758589781894,
+      "native_terminal_winners": 97,
+      "unsupported_native_winners": 190
+    },
+    "terminal": {
+      "states": 508,
+      "reference_form_matches": 434,
+      "reference_form_agreement": 0.8543307086614174,
+      "native_terminal_winners": 434,
+      "unsupported_native_winners": 0
+    }
+  },
+  "prefix_bins": {
+    "0": {
+      "states": 508,
+      "reference_form_matches": 368,
+      "reference_form_agreement": 0.7244094488188977,
+      "native_terminal_winners": 0,
+      "unsupported_native_winners": 0,
+      "represented_cases": 508,
+      "first_states_of_same_cases": {
+        "states": 508,
+        "reference_form_matches": 368,
+        "reference_form_agreement": 0.7244094488188977,
+        "native_terminal_winners": 0,
+        "unsupported_native_winners": 0
+      }
+    },
+    "1": {
+      "states": 507,
+      "reference_form_matches": 328,
+      "reference_form_agreement": 0.6469428007889546,
+      "native_terminal_winners": 7,
+      "unsupported_native_winners": 64,
+      "represented_cases": 507,
+      "first_states_of_same_cases": {
+        "states": 507,
+        "reference_form_matches": 367,
+        "reference_form_agreement": 0.7238658777120316,
+        "native_terminal_winners": 0,
+        "unsupported_native_winners": 0
+      }
+    },
+    "2-3": {
+      "states": 891,
+      "reference_form_matches": 756,
+      "reference_form_agreement": 0.8484848484848485,
+      "native_terminal_winners": 17,
+      "unsupported_native_winners": 26,
+      "represented_cases": 471,
+      "first_states_of_same_cases": {
+        "states": 471,
+        "reference_form_matches": 333,
+        "reference_form_agreement": 0.7070063694267515,
+        "native_terminal_winners": 0,
+        "unsupported_native_winners": 0
+      }
+    },
+    "4-7": {
+      "states": 1166,
+      "reference_form_matches": 939,
+      "reference_form_agreement": 0.8053173241852487,
+      "native_terminal_winners": 36,
+      "unsupported_native_winners": 62,
+      "represented_cases": 373,
+      "first_states_of_same_cases": {
+        "states": 373,
+        "reference_form_matches": 249,
+        "reference_form_agreement": 0.6675603217158177,
+        "native_terminal_winners": 0,
+        "unsupported_native_winners": 0
+      }
+    },
+    "8+": {
+      "states": 783,
+      "reference_form_matches": 609,
+      "reference_form_agreement": 0.7777777777777778,
+      "native_terminal_winners": 37,
+      "unsupported_native_winners": 38,
+      "represented_cases": 190,
+      "first_states_of_same_cases": {
+        "states": 190,
+        "reference_form_matches": 109,
+        "reference_form_agreement": 0.5736842105263158,
+        "native_terminal_winners": 0,
+        "unsupported_native_winners": 0
+      }
+    }
+  },
+  "first_matching_cases_continuation": {
+    "states": 2149,
+    "reference_form_matches": 1702,
+    "reference_form_agreement": 0.7919962773382969,
+    "native_terminal_winners": 71,
+    "unsupported_native_winners": 125
+  },
+  "cases_all_reference_forms_and_stop_match": 138,
+  "records_sha256": "b86a689596c63f1c282cf33718606754f82f282265419e409fc1714679b076c5",
+  "cases_sha256": "38b172cb267b8d3ec5deae25bc6f12b90c4c685a65f23c8c01bf9a421cb1245e",
+  "elapsed_seconds": 1.093202163465321,
+  "CPU_threads": 4,
+  "model_forward_calls": 0,
+  "optimizer_updates": 0,
+  "CUDA_calls": 0,
+  "new_teacher_calls": 0,
+  "native_head_labels_computed_in_prior_calibration": true,
+  "runtime_changed": false,
+  "development_inputs_used": false,
+  "autonomous_answers_generated": 0,
+  "semantic_accuracy_measured": false,
+  "causal_effect_of_image_encoder_established": false,
+  "interpretation": "Every state follows the original gold glyph-image prefix. The prior native-head winner is mapped to its first complete form, terminal, or unsupported label. Disagreement can reflect an alternate answer, formatting, source-unit segmentation, or image-feedback effects. Position comparisons alone isolate none of those causes."
+}

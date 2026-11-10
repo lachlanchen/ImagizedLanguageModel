@@ -55,6 +55,18 @@ is insufficient to resolve an uncertain semantic code. Repeated neural E/D
 passes do not improve the five normal first images reaching0.95F1. More motor
 architectures alone have not supplied a reliable language model.
 
+## What about image-feedback drift?
+
+An [audit of existing native-head labels](../references/cached_glyph_teacher_agreement_result.md)
+on all4,363gold-history training states finds next-form agreement72.44%at the
+first glyph and78.64%across continuation glyphs. Agreement dips to64.69%after
+one glyph, then reaches84.85%after two or three. Later positions represent
+different question subsets; the report includes their matched first-state
+baselines. This is neither an autonomous answer test nor a causal comparison
+against exact-source feedback. It does not support assuming that cumulative
+image-feedback damage alone explains the failures. The audit uses previously
+cached labels, makes no neural call, and leaves the current experiment intact.
+
 ## Next controlled intervention
 
 The [genuine copy curriculum](../references/genuine_glyph_readout_protocol.md)
