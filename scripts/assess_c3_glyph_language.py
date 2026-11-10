@@ -85,8 +85,32 @@ def prepare(cohort, candidate, output):
         status = load(candidate / stage / 'status.json')
         require(status['phase'] == 'completed' and status['pid'] is None, 'candidate stage still active: ' + stage)
     require(load(candidate / 'qualify/report.json')['readout_gate_passed'], 'genuine readout gate failed')
-    require(sha(candidate / 'preparation.json') == m['prospective_genuine_preparation_sha256'],
-            'candidate differs from the prospectively fixed curriculum')
+    candidate_meta = load(candidate / 'preparation.json')
+    data_preparation = candidate_meta.get('genuine_data_preparation_sha256', sha(candidate / 'preparation.json'))
+    require(data_preparation == m['prospective_genuine_preparation_sha256'],
+            'candidate does not descend from the prospectively fixed data')
+    lineage = {}
+    training_sources = {}
+    ancestors = [candidate_meta]
+    if 'genuine_data_preparation_sha256' in candidate_meta:
+        parent = ROOT / candidate_meta['genuine_run']
+        require(candidate_meta['C3_inputs_or_references_used'] is False
+                and candidate_meta['development_training'] is False, 'child used evaluation data')
+        for filename, key in [('preparation.json', 'genuine_data_preparation_sha256'),
+                              ('cache/report.json', 'genuine_cache_report_sha256'),
+                              ('qualify/report.json', 'parent_qualification_sha256'),
+                              ('qualify/visual_review.json', 'parent_visual_review_sha256')]:
+            path = parent / filename
+            require(sha(path) == candidate_meta[key], 'fixed data ancestry changed')
+            lineage[relative(path)] = candidate_meta[key]
+        ancestors.append(load(parent / 'preparation.json'))
+    for ancestor in ancestors:
+        for key, bindings in ancestor.items():
+            if key.endswith('code_sha256') and isinstance(bindings, dict):
+                for name, digest in bindings.items():
+                    require(sha(ROOT / name) == digest and training_sources.get(name, digest) == digest,
+                            'registered training source differs: ' + name)
+                    training_sources[name] = digest
     require(load(candidate / 'assessment/status.json')['phase'] == 'completed',
             'complete original40stream assessment first')
     manual = load(candidate / 'raw_review/manual_review.json')
@@ -104,6 +128,8 @@ def prepare(cohort, candidate, output):
         code_sha256=code, cohort=relative(cohort), cohort_sha256=sha(cohort / 'preparation.json'),
         input_review_sha256=sha(cohort / 'input_review.json'), versions=versions,
         candidate_run=relative(candidate), candidate_preparation_sha256=sha(candidate / 'preparation.json'),
+        candidate_data_preparation_sha256=data_preparation, candidate_data_lineage_sha256=lineage,
+        candidate_training_sources_sha256=training_sources,
         candidate_qualification_sha256=sha(candidate / 'qualify/report.json'),
         candidate_original_assessment_sha256=sha(candidate / 'assessment/report.json'),
         candidate_original_manual_review_sha256=sha(candidate / 'raw_review/manual_review.json'),
@@ -123,6 +149,9 @@ def verify(output):
     for row in meta['versions'].values():
         require(sha(ROOT / row['checkpoint']) == row['checkpoint_sha256'], 'checkpoint changed')
     candidate = ROOT / meta['candidate_run']
+    for name, digest in {**meta['candidate_data_lineage_sha256'],
+                         **meta['candidate_training_sources_sha256']}.items():
+        require(sha(ROOT / name) == digest, 'registered training ancestry changed: ' + name)
     for filename, key in [('preparation.json', 'candidate_preparation_sha256'),
                           ('qualify/report.json', 'candidate_qualification_sha256'),
                           ('assessment/report.json', 'candidate_original_assessment_sha256'),

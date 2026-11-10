@@ -65,3 +65,8 @@ preserved baseline. `generate` evaluates both through the image-only runtime
 under the shared GPU mutex; `review` validates and displays all 128 raw streams.
 `score` requires an actual output-first review before opening reference labels.
 No C3 generation is started by preparation or by the current supervisor.
+The registration can also admit a qualified direct-pixel child trained on the
+same frozen genuine-copy data, after that child's original forty-stream review.
+It verifies the data ancestor, training sources, parent qualification/review and
+current checkpoint hashes. The C3 cohort itself remains fixed; it supplies no
+training or model-selection score.
