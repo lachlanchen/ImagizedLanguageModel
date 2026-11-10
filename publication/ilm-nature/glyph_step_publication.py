@@ -15,7 +15,8 @@ import fitz
 import openpyxl
 from PIL import Image
 
-from native_flow_manuscript import build_slot, owned_command, protected, expanded, TOOL, TOOL_SHA
+from native_flow_manuscript import protected, expanded, TOOL, TOOL_SHA
+from publication_cpu_reserve import build_slot, owned_command
 from render_native_qa_publication import pdf_pixels
 import motor_gate_publication as previous
 import motor_gate_figures as motor_figure
@@ -30,7 +31,7 @@ BASE = previous.BASE
 DOCS = previous.DOCS
 CODE = (*previous.CODE, 'glyph_step_publication.py', 'glyph_step_data.py',
         'glyph_step_figures.py', 'glyph_step_text.py',
-        'contextual_answer_figures.py', 'contextual_answer_text.py')
+        'contextual_answer_figures.py', 'contextual_answer_text.py', 'publication_cpu_reserve.py')
 NAMES = (*previous.NAMES, 'frontmatter.tex', 'glyph_step_results.tex', 'glyph_step_note.tex',
          *('figures/'+FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')),
          'contextual_answer_results.tex', 'contextual_answer_note.tex',

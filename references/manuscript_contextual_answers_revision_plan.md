@@ -44,3 +44,13 @@ running. Inspect exports, verify numeric workbooks and unchanged raw embedded
 pixels, build article/review/SI/redlines, inspect every changed page, then
 promote and sync locally to the authorized Nutstore ILM directory. Record
 local hashes and do not claim cloud propagation. The main goal remains active.
+
+For the combined new build only, retain the original CPU admission helper and
+add an explicit post-terminal mode when other projects occupy more than75%
+of global swap. Require the same exclusive model/build mutex, at least64 GiB
+available RAM, low measured memory pressure and no existing project build.
+Inspect memory, owned processes, tmux and listener inventory before admission.
+Keep a24 GiB live reserve and bounded, individually owned child process groups.
+Record actual admission privately; do not change swap settings or foreign
+services. No publication stage may run alongside the current neural job.
+This resource-only mode does not change any model or physical quality gate.
