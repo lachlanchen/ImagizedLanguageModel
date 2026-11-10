@@ -84,6 +84,9 @@ def score(run):
     import torch
     torch.set_num_threads(2)
     primitive=ROOT/m['primitive']
+    for name in ['training.pt','inventory.json']:
+        path=primitive/name
+        require(sha(path)==m['bindings_sha256'][str(path.relative_to(ROOT))],'canonical evaluator primitive changed')
     data=torch.load(primitive/'training.pt',weights_only=True,map_location='cpu')
     charmap={c:i for i,row in enumerate(load(primitive/'inventory.json')['records']) for c in row['chars']}
     measurements=[]

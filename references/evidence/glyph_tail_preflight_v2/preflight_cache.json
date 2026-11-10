@@ -1,0 +1,101 @@
+{
+  "preparation_sha256": "2d594931ce50864a280735d6d09ee4baa762f5c23d8f125f3a9b435a126d8bfa",
+  "files": [
+    {
+      "id": "TRAIN_36_QUERY_1",
+      "file": "artifacts/glyph_tail_adaptation_v2/preflight_cache/case_0000.pt",
+      "sha256": "2e7b936621b24c3eb7406497e2eb580827191e2c593006eaf486b43270870722",
+      "states": 9,
+      "cache_bytes": 18010831
+    },
+    {
+      "id": "TRAIN_36_QUERY_3",
+      "file": "artifacts/glyph_tail_adaptation_v2/preflight_cache/case_0001.pt",
+      "sha256": "5e3ecaab4d944c5015a07a9f88dcde936f9ea62ab0fb4b5d65a5305f069959a6",
+      "states": 10,
+      "cache_bytes": 18043599
+    },
+    {
+      "id": "TRAIN_614_QUERY_0",
+      "file": "artifacts/glyph_tail_adaptation_v2/preflight_cache/case_0002.pt",
+      "sha256": "37b0bedf498c0bc1c90abd4ae7f781b0da94f58b6b85034023da61cfe1f222c8",
+      "states": 4,
+      "cache_bytes": 18191503
+    },
+    {
+      "id": "TRAIN_614_QUERY_1",
+      "file": "artifacts/glyph_tail_adaptation_v2/preflight_cache/case_0003.pt",
+      "sha256": "90c01f421ca82cd264b23086caf4d35090fbf5999ce1c7453950b87f7c74cc5f",
+      "states": 10,
+      "cache_bytes": 18388367
+    }
+  ],
+  "tail_start_layer": 32,
+  "zero_tail_maximum_absolute_error": 0.0,
+  "future_glyph_prior_state_maximum_error": 0.0,
+  "provenance": {
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "retained_native_tensors": 748,
+    "retained_base_parameters": 7522463984,
+    "configurations": {
+      "text": {
+        "vocab_size": 0,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "num_hidden_layers": 36,
+        "num_attention_heads": 32,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 262144,
+        "rope_theta": 5000000.0,
+        "rope_scaling": {
+          "rope_type": "default",
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "mrope_interleaved": true
+        },
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "vision": {
+        "depth": 27,
+        "hidden_size": 1152,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "in_channels": 3,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2,
+        "out_hidden_size": 4096,
+        "num_position_embeddings": 2304,
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "hidden_act": "gelu_pytorch_tanh"
+      }
+    },
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "external_pretraining": true,
+    "vocabulary_parameters_materialized": 0
+  },
+  "source_vocabulary_parameters": 0,
+  "lower_body_frozen": true,
+  "cache_FP32": true,
+  "elapsed_seconds": 144.4937993204221,
+  "resource_wait_seconds": 20.01860102172941,
+  "peak_allocated_vram_gib": 17.723718643188477,
+  "minimum_available_gib": 50.407779693603516
+}

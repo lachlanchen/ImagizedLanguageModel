@@ -31,6 +31,8 @@ def identity():
 
 def candidate(run):
     m = load(run / 'preparation.json')
+    for name, digest in m['code_sha256'].items():
+        require(sha(ROOT/name)==digest,'registered training source changed: '+name)
     require(load(run / 'fit/status.json')['phase'] == 'completed', 'complete main adaptation first')
     report = load(run / 'fit/report.json')
     require(report['actual_optimizer_updates'] == m['fit_steps'] and report['all_checks_passed'], 'incomplete fit')
@@ -86,7 +88,10 @@ def qualify(run):
     try:
         source=load(run/'cache/report.json')['files']
         for row in source: require(sha(ROOT/row['file'])==row['sha256'],'frozen prefix changed')
-        primitive=torch.load(ROOT/m['primitive']/'training.pt',weights_only=True,map_location='cpu')
+        primitive_path=ROOT/m['primitive']/'training.pt'
+        require(sha(primitive_path)==m['bindings_sha256'][str(primitive_path.relative_to(ROOT))],
+                'physical target primitive changed')
+        primitive=torch.load(primitive_path,weights_only=True,map_location='cpu')
         ink=primitive['ink'][:,0].numpy()
         samples=set(np.linspace(0,len(source)-1,16,dtype=int).tolist())
         tf_records=[]; tf_images=[]; tf_labels=[]; tf_preview=[]
