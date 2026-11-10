@@ -20,7 +20,8 @@ def load(path):
 
 
 def identity():
-    names = [OWN, 'scripts/infer_glyph_tail_language.py', 'ilm/visual_lm/glyph_tail_adapter.py',
+    names = [OWN, 'references/glyph_tail_assessment_protocol.md',
+             'scripts/infer_glyph_tail_language.py', 'ilm/visual_lm/glyph_tail_adapter.py',
              'ilm/visual_lm/semantic_glyph_loop.py']
     for name in names:
         require(subprocess.check_output(['git', 'show', 'HEAD:' + name], cwd=ROOT)
@@ -154,8 +155,8 @@ def qualify(run):
 def assess(run):
     code=identity(); m,checkpoint=candidate(run)
     report=load(run/'qualify/report.json'); review=load(run/'qualify/visual_review.json')
-    require(report['readout_gate_passed'] and review['report_sha256']==sha(run/'qualify/report.json')
-            and review['all8_qualification_boards_actually_viewed'],'pass physical qualification and actual review first')
+    require(review['report_sha256']==sha(run/'qualify/report.json')
+            and review['all8_qualification_boards_actually_viewed'],'actually review physical qualification first')
     for name in report['boards']: require(sha(run/'qualify'/name)==review['boards_sha256'][name],'reviewed board changed')
     import torch
     from scripts.train_semantic_glyph_language import Monitor,image,numerics,atomic_tensor
@@ -190,6 +191,8 @@ def assess(run):
             hook.remove()
             save_json(folder/'report.json',dict(records=records,code_sha256=code,
                 checkpoint_sha256=sha(checkpoint),provenance=provenance,references_read=False,
+                fixed_physical_gate_passed=report['readout_gate_passed'],
+                assessment_does_not_override_failed_component_gate=True,
                 source_lexical_head=False,tokenizer=False,font=False,glyph_bank=False,
                 actual_emitted_pixel_feedback=True,quality_not_yet_reviewed=True,**monitor.receipt()))
         monitor.status('completed')
