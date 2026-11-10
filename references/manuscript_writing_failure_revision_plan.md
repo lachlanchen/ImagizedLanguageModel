@@ -75,3 +75,38 @@ propagation. This plan authorizes no success claim before actual evidence.
 
 Status: plan recorded; TeX files and current publication artifacts have not
 yet been changed by this revision.
+
+## Scope amendment after completed glyph-language inference
+
+The language stage and the frozen date intervention have now completed.
+Extend the same bounded revision to these retained results, without changing
+any training/inference implementation or protocol. Stage B fits508supported
+training questions; eight fixed training controls are exact. Normal Chinese
+development is1/16canonical-exact with11caps; erased is0/16. Two readable
+new complete strings,288条and1874年, have imperfect pixels. The one exact
+year string2001年occurs in training. Do not turn these examples into a formal
+semantic-accuracy claim.
+
+The prospectively fixed date variants use two parents selected from these
+observed outputs. New normal dates give11/14clear output-first transcription
+matches,2/14canonical-exact and14/14naturalstops. Three uncertain/wrong digit
+forms remain failures; erased controls give no correct date. Six clear
+outputs compose complete strings absent from supported training answers.
+All72streams and2,781glyphs pass cold GPU feedback-hash replay, with maximum
+CPUerror1.79e-7. The two original date inputs also replay complete pixels,
+stopprobabilities and feedback hashes exactly in a separate process.
+
+Add FigureS38 with all sixteen normal date outputs in preparation order,
+including the damaged examples. Retain every erased output in public evidence;
+state the selected-parent and non-independent manual-reading limits in the
+caption, note and abstract. FigureS37 now describes the evaluated loop and
+separates primitive reconstruction from the failed broad assessment and the
+restricted successful intervention. The deck should contain53slides and
+57nativecharts, with all prior50slide parts and appearances preserved.
+
+The contribution is a controlled separation of failed general writing from
+bounded input-dependent date composition through a vocabulary-free image
+interface, not a claim of general ILM success, novelty priority, biological
+equivalence, or matched-quality LLM efficiency. Include actual code/weight
+provenance and unchanged original training sources. The active TeX/PDF files
+remain untouched until staged build and review succeed.
