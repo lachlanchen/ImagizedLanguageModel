@@ -133,6 +133,14 @@ def main(run, output):
     torch.set_num_threads(4)
     began = time.monotonic()
     meta, report, rows, states = read_cache(run)
+    target_file = ROOT / meta['primitive'] / 'training.pt'
+    require(sha(target_file) == meta['bindings_sha256'][str(target_file.relative_to(ROOT))],
+            'canonical training bitmaps changed')
+    target_data = torch.load(target_file, map_location='cpu', weights_only=True)
+    forms = sorted({r['label'] for r in rows})
+    bitmaps = [target_data['ink'][i].numpy().tobytes() for i in forms]
+    require(len(set(bitmaps)) == len(forms), 'different target IDs do not identify distinct bitmaps')
+    del target_data, bitmaps
     collisions = identical_states(states, rows)
     by_template = []
     for template in range(3):
@@ -170,6 +178,7 @@ def main(run, output):
         batch_single_maximum_error=report['batch_single_maximum_error'],
         summaries=summaries, records_sha256=sha(output / 'records.json'),
         identical_recorded_state_check=collisions,
+        canonical_training_sha256=sha(target_file), distinct_target_bitmaps_verified=True,
         elapsed_seconds=time.monotonic() - began, CPU_threads=4,
         model_forward_calls=0, optimizer_updates=0, CUDA_calls=0,
         labels_used_only_for_offline_evaluation=True,

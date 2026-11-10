@@ -38,8 +38,10 @@ The present document specifies a diagnostic, not a completed result.
 
 Before computing similarities, group all recorded FP32 state byte strings by
 SHA-256, checking tensor equality on any matching hash. Record groups containing
-different target forms. A deterministic readout gives one output for one such
-state. Since the primitive's canonical bitmaps are distinct, an exact-copy
+different target forms. Authenticate the canonical training tensor and verify
+that the target IDs in this cohort have distinct bitmap bytes. Loading these
+CPU tensors is not a neural forward. A deterministic readout gives one output
+for one such state. With distinct canonical targets, an exact-copy
 upper bound on this fixed pool is
 
 \[
