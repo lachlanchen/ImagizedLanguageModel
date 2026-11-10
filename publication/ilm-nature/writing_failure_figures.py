@@ -86,7 +86,7 @@ def append(paper):
     s=Slide(parts[template]);s.shape('The reader retains answers that the learned pixel writer loses',45,24,1510,60,28,True)
     s.shape('a  Complete pixel-exact training answers / 64',45,105,730,40,21,True)
     chart(s,55,['0','4,000','8,000','16,000'],[0,3,21,60],'Same 64 training questions',0,64,45,153,710,250)
-    s.shape('Final full training: 495/512 exact.\nNormal development: 0/16 Chinese, 0/8 English.\nAll512 training first images exact; all24 normal development first images inexact.',
+    s.shape('Final full training: 495/512 exact.\nNormal development: 0/16 Chinese, 0/8 English.\nAll 512 training first images exact; all 24 normal development first images inexact.',
             60,405,695,92,17)
     s.shape('b  Correct first image loses likelihood',820,105,735,40,21,True)
     values=[]
@@ -96,11 +96,11 @@ def append(paper):
         values.append(sum(r['maximum_reference_minus_greedy'] for r in rows)/16)
     require(abs(values[-1]+751.243727)<1e-5,'likelihood source differs')
     chart(s,56,['0','4,000','8,000','16,000'],values,'Best reference minus emitted image, nats',-2800,0,820,153,735,250)
-    s.shape('Final Chinese mean: -751.24 nats. Every reference loses.\nRelative preferences still transfer:14/16 favor the owning question; all8 paired assignments positive.',
+    s.shape('Final Chinese mean: -751.24 nats. Every reference loses.\nRelative preferences still transfer: 14/16 favor the owning question; all 8 paired assignments positive.',
             835,405,710,88,17)
     s.shape('c  Native reader: literal text matches / 16',45,525,730,40,21,True)
     chart(s,57,['Normal image','Question erased','Source text'],[12,0,11],'Helper-only native reader',0,16,45,573,710,225)
-    s.shape('Same32 image-memory fingerprints as the ILM.\nA symbolic diagnostic baseline, not an image-output solution.',60,800,700,57,16)
+    s.shape('Same 32 image-memory fingerprints as the ILM.\nA symbolic diagnostic baseline, not an image-output solution.',60,800,700,57,16)
     s.shape('d  Actual pixel outputs remain damaged',820,525,735,40,21,True)
     base=ROOT/'references/evidence/pixel_language_diversity_final16000/raw_outputs'
     for y,index,answer in [(585,12,'1874'),(690,15,'2001')]:
@@ -126,13 +126,13 @@ def append(paper):
     s.shape('b  Completed primitive training',45,365,730,40,21,True)
     s.shape('Offline source anchors + canonical glyph images\nPrimitive: train E/D; freeze readout/stopping.\nLater: fit readout/stopping on 508 question-image histories.\n4,096 anchored characters → 4,087 distinct image forms.',
             45,415,730,135,18)
-    s.shape('Direct:4,048/4,087 exact; F1 0.999940\nRoundtrip:3,697/4,087 exact; F1 0.999634\nSemantic cosine:0.77735 on first128; alignment remains weaker.\n80.22s / 0.728GiB for the primitive only.',
+    s.shape('Direct: 4,048/4,087 exact; F1 0.999940\nRoundtrip: 3,697/4,087 exact; F1 0.999634\nSemantic cosine: 0.77735 on first 128; alignment remains weaker.\n80.22 s / 0.728 GiB for the primitive only.',
             820,415,735,135,18)
     s.shape('c  Gold / direct decode / actual-image roundtrip',45,560,1510,35,21,True)
     picture(s,ROOT/'references/evidence/semantic_glyph_bridge/glyph_reconstruction_board.png',
-            'glyph_triplets',45,603,1510)
+            'glyph_triplets',60,603,1480)
     s.shape('64 evenly spaced indices; all physical pixels retained. This is reconstruction, not answer accuracy.\nBroader Chinese assessment: 1/16 exact, 11 caps. No runtime tokenizer, source text head, font renderer or glyph lookup.',
-            45,850,1510,45,15)
+            45,850,1510,45,14)
     register(s,52,'Figure S37. Continuous complete-glyph loop and completed primitive. '
         'The native assistant state is preserved; actual emitted images determine feedback. '
         'Primitive E/D results are separate from the later 508-question readout fit. The 64 image triplets use evenly spaced inventory indices, without quality selection. '

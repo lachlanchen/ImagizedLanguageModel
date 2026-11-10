@@ -110,3 +110,11 @@ interface, not a claim of general ILM success, novelty priority, biological
 equivalence, or matched-quality LLM efficiency. Include actual code/weight
 provenance and unchanged original training sources. The active TeX/PDF files
 remain untouched until staged build and review succeed.
+
+Visual review of stage `artifacts/writing_failure_publication_v1` inspected
+all three new figures. Values, raw images, prior slide appearances and native
+chart workbooks pass. Tight footer spacing and missing spaces in several
+metric labels require a typography pass. Preserve that stage as an unapproved
+review; prepare `writing_failure_publication_v2` with identical measurements
+and source pixels, a slightly smaller glyph sheet and clearer metric labels.
+Build only after the matching actual figure review explicitly approves it.

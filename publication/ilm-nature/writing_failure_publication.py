@@ -160,7 +160,8 @@ def redline(stage,source,stem):
 def build(stage):
     with build_slot():
         verify(stage);r=load(stage/'figure_review.json')
-        require(r['render_sha256']==sha(stage/'render.json') and r['all3_new_figures_actually_viewed'],'review new figures first')
+        require(r['render_sha256']==sha(stage/'render.json') and r['all3_new_figures_actually_viewed']
+                and r.get('approved_for_build') is True,'review and approve actual new figures first')
         logs=stage/'build_logs';logs.mkdir(exist_ok=False)
         redlines={stem:redline(stage,source,stem) for source,stem in [('manuscript_review.tex','redlined_manuscript'),
             ('supplementary_information.tex','redlined_supplementary_information')]}
