@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage S39/S40 and their completed results together; promote only reviewed PDFs."""
+"""Stage S39--S41 completed results together; promote only reviewed PDFs."""
 import argparse
 import hashlib
 import io
@@ -23,15 +23,22 @@ import motor_gate_text as motor_text
 from glyph_step_data import HERE, ROOT, collect, load, require, sha
 from glyph_step_figures import append, FIGURE, NS
 from glyph_step_text import RESULTS, NOTE
+import contextual_answer_figures as contextual_figure
+import contextual_answer_text as contextual_text
 
 BASE = previous.BASE
 DOCS = previous.DOCS
 CODE = (*previous.CODE, 'glyph_step_publication.py', 'glyph_step_data.py',
-        'glyph_step_figures.py', 'glyph_step_text.py')
+        'glyph_step_figures.py', 'glyph_step_text.py',
+        'contextual_answer_figures.py', 'contextual_answer_text.py')
 NAMES = (*previous.NAMES, 'glyph_step_results.tex', 'glyph_step_note.tex',
-         *('figures/'+FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')))
+         *('figures/'+FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')),
+         'contextual_answer_results.tex', 'contextual_answer_note.tex',
+         *('figures/'+contextual_figure.FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')))
 RESULT_INSERT = '\\input{glyph_step_results.tex}\n\n'
 NOTE_INSERT = '\\input{glyph_step_note.tex}\n\n'
+CONTEXT_RESULT_INSERT = '\\input{contextual_answer_results.tex}\n\n'
+CONTEXT_NOTE_INSERT = '\\input{contextual_answer_note.tex}\n\n'
 
 
 def save(path, value):
@@ -50,7 +57,7 @@ def identity():
 
 def source_audit():
     code = identity(); motor = motor_figure.source_data(); previous.measure_check(motor)
-    glyph = collect()
+    glyph = collect(); contextual = contextual_figure.source_data()
     for token in ['0.951778', '0.972856', '194/256', '229/256', '0.341013', '0.354426',
                   '12/16', '3/16', '688,128', '17,848,833', '3.208']:
         require(token in NOTE, 'measured result absent from Note 61: '+token)
@@ -59,12 +66,15 @@ def source_audit():
     require('No main-fit complete-answer result' in NOTE, 'unfinished candidate must remain explicit')
     bound = dict(motor['source_files_sha256'])
     bound.update(glyph['source_files_sha256'])
+    bound.update(contextual['source_files_sha256'])
     for path in motor_figure.SOURCES.iterdir():
         if path.is_file(): bound[str(path.relative_to(ROOT))] = sha(path)
     for name in previous.EXTRA:
         path = ROOT/'references/evidence'/name; bound[str(path.relative_to(ROOT))] = sha(path)
     for name in ['references/manuscript_motor_gate_revision_plan.md',
-                 'references/manuscript_glyph_step_revision_plan.md']:
+                 'references/manuscript_glyph_step_revision_plan.md',
+                 'references/manuscript_contextual_answers_revision_plan.md',
+                 'references/glyph_tail_paired_answers_result.md']:
         bound[name] = sha(ROOT/name)
     for name in ['scripts/audit_cached_glyph_teacher_labels.py', 'scripts/audit_glyph_target_coverage.py',
                  'references/cached_glyph_teacher_agreement_result.md', 'references/glyph_target_coverage_result.md',
@@ -72,7 +82,10 @@ def source_audit():
                     'contrastive_glyph_readout_protocol.md', 'robust_glyph_decoder_protocol.md',
                     'semantic_motor_flow_protocol.md', 'spatial_semantic_motor_protocol.md'])]:
         bound[name] = sha(ROOT/name)
-    return dict(code_sha256=code, evidence_sha256=bound, motor=motor, glyph=glyph,
+    require('16/32' in contextual_text.NOTE and '11/32' in contextual_text.NOTE
+            and '0.893582' in contextual_text.NOTE and 'Neither condition passes' in contextual_text.NOTE,
+            'completed paired results or failure boundary absent')
+    return dict(code_sha256=code, evidence_sha256=bound, motor=motor, glyph=glyph, contextual=contextual,
                 neural_calls=0, Office_calls=0, LaTeX_calls=0, active_publication_changed=False)
 
 
@@ -88,23 +101,27 @@ def prepare(stage):
         shutil.copytree(HERE/'figures', paper/'figures')
         old_figure = motor_figure.append(paper)
         new_figure = append(paper)
+        contextual = contextual_figure.append(paper)
         for name, text in [('motor_gate_results.tex', motor_text.RESULTS), ('motor_gate_note.tex', motor_text.NOTE),
-                           ('glyph_step_results.tex', RESULTS), ('glyph_step_note.tex', NOTE)]:
+                           ('glyph_step_results.tex', RESULTS), ('glyph_step_note.tex', NOTE),
+                           ('contextual_answer_results.tex', contextual_text.RESULTS),
+                           ('contextual_answer_note.tex', contextual_text.NOTE)]:
             (paper/name).write_text(text)
         article = (paper/'article_content.tex').read_text(); anchor = r'\section*{Discussion}'
         require(article.count(anchor) == 1, 'unique main Results boundary required')
         (paper/'article_content.tex').write_text(article.replace(anchor,
-            previous.RESULT_INSERT+RESULT_INSERT+anchor))
+            previous.RESULT_INSERT+RESULT_INSERT+CONTEXT_RESULT_INSERT+anchor))
         supplement = (paper/'supplementary_information.tex').read_text()
         anchor = '\\clearpage\n\\section*{Reproduction}'
         require(supplement.count(anchor) == 1, 'unique SI Reproduction boundary required')
         (paper/'supplementary_information.tex').write_text(supplement.replace(anchor,
-            previous.NOTE_INSERT+NOTE_INSERT+anchor))
+            previous.NOTE_INSERT+NOTE_INSERT+CONTEXT_NOTE_INSERT+anchor))
         require(protected() == before, 'active publication changed during staging')
         save(stage/'preparation.json', dict(baseline_commit=BASE, code_sha256=data['code_sha256'],
             evidence_sha256=data['evidence_sha256'], active_before_sha256=before,
-            figures=[old_figure, new_figure], abstract_unchanged=True,
-            completed_copy_C3_and_helper_results_included=True, unfinished_tail_language_results_included=False,
+            figures=[old_figure, new_figure, contextual], abstract_unchanged=True,
+            completed_copy_C3_and_helper_results_included=True, completed_tail_language_results_included=True,
+            subsequent_balanced_writer_results_included=False,
             prepared_sha256={str(p.relative_to(paper)): sha(p) for p in sorted(paper.rglob('*')) if p.is_file()},
             delivery_date=time.strftime('%Y%m%d'), active_publication_updated=False, general_ILM_goal_complete=False))
 
@@ -129,7 +146,7 @@ def render(stage):
             '--outdir', str(folder), str(predecessor), str(stage/'paper/ILM_Figures_editable.pptx')],
             stage, stage/'office.log', 180)
         old = fitz.open(folder/'predecessor.pdf'); new = fitz.open(folder/'ILM_Figures_editable.pdf')
-        require((len(old), len(new)) == (53, 55), 'actual slide counts differ')
+        require((len(old), len(new)) == (53, 56), 'actual slide counts differ')
         for index in range(53):
             a, b = old[index].get_pixmap(alpha=False), new[index].get_pixmap(alpha=False)
             require((a.width, a.height, a.samples) == (b.width, b.height, b.samples),
@@ -151,21 +168,22 @@ def render(stage):
                             'embedded raw source PNG changed')
         raw_paths = [ROOT/row['source'] for row in meta['figures'][0]['media']]
         raw_paths += [ROOT/row['file'] for row in meta['figures'][1]['media']]
+        raw_paths += [ROOT/row['file'] for row in meta['figures'][2]['media']]
         expected = {(Image.open(p).size, hashlib.sha256(Image.open(p).convert('RGB').tobytes()).hexdigest())
                     for p in raw_paths}
         require(expected <= pdf_pixels(new), 'rendered PDF did not retain the complete raw image objects')
         review = fitz.open(HERE/'ILM_Figures_review.pdf'); require(len(review) == 53, 'review baseline differs')
-        review.insert_pdf(new, from_page=53, to_page=54); review.save(stage/'paper/ILM_Figures_review.pdf')
+        review.insert_pdf(new, from_page=53, to_page=55); review.save(stage/'paper/ILM_Figures_review.pdf')
         figures = {}
-        for index, name in [(53, motor_figure.FIGURE), (54, FIGURE)]:
+        for index, name in [(53, motor_figure.FIGURE), (54, FIGURE), (55, contextual_figure.FIGURE)]:
             doc = fitz.open(); doc.insert_pdf(new, from_page=index, to_page=index)
             doc.save(stage/'paper/figures'/(name+'.pdf'))
             new[index].get_pixmap(matrix=fitz.Matrix(1.3, 1.3), alpha=False).save(stage/'paper/figures'/(name+'.png'))
             (stage/'paper/figures'/(name+'.svg')).write_text(new[index].get_svg_image())
             figures[name] = {suffix: sha(stage/'paper/figures'/(name+'.'+suffix)) for suffix in ['pdf', 'png', 'svg']}
-        save(stage/'render.json', dict(preparation_sha256=sha(stage/'preparation.json'), native_slides=55,
-            native_charts=61, prior53_slide_appearances_exact=True, prior57_chart_parts_exact=True,
-            four_native_chart_workbooks_exact=True, complete_embedded_output_pixels_preserved=True,
+        save(stage/'render.json', dict(preparation_sha256=sha(stage/'preparation.json'), native_slides=56,
+            native_charts=63, prior53_slide_appearances_exact=True, prior57_chart_parts_exact=True,
+            six_native_chart_workbooks_exact=True, complete_embedded_output_pixels_preserved=True,
             PowerPoint_application_inspected=False, actual_visual_review_pending=True,
             font_substitution='Arial rendered with Liberation Sans', figure_files_sha256=figures))
 
@@ -188,8 +206,8 @@ def build(stage):
     with build_slot():
         verify(stage); reviewed = load(stage/'figure_review.json')
         require(reviewed['render_sha256'] == sha(stage/'render.json') and reviewed['S39_actually_viewed']
-                and reviewed['S40_actually_viewed'] and reviewed['approved_for_build'],
-                'actually inspect both figure exports before building')
+                and reviewed['S40_actually_viewed'] and reviewed['S41_actually_viewed'] and reviewed['approved_for_build'],
+                'actually inspect all three figure exports before building')
         logs = stage/'build_logs'; logs.mkdir(exist_ok=False)
         redlines = {stem: redline(stage, source, stem) for source, stem in
                     [('manuscript_review.tex', 'redlined_manuscript'),
@@ -207,12 +225,15 @@ def build(stage):
             doc = fitz.open(pdf); text = ' '.join(' '.join(p.get_text().split()) for p in doc)
             require('0.972856' in text and '0.951778' in text, 'completed copy comparison absent')
             if stem in ['supplementary_information', 'redlined_supplementary_information']:
-                require('Supplementary Note 61' in text and '0.810537' in text and '0.341013' in text,
+                require('Supplementary Note 61' in text and 'Supplementary Note 62' in text
+                        and '0.810537' in text and '0.341013' in text and '0.893582' in text,
                         'new SI controls absent')
+            require('16/32' in text and '11/32' in text, 'completed contextual answer results absent')
             pdfs[pdf.name] = sha(pdf); pages[stem] = len(doc)
             locations[stem] = {token: [i+1 for i, page in enumerate(doc) if token in ' '.join(page.get_text().split())]
                 for token in ['Improved glyph copying', 'Sharp known-form', 'Supplementary Note 60',
-                              'Supplementary Note 61', '0.972856', '0.810537', 'Fig. S40']}
+                              'Supplementary Note 61', 'Supplementary Note 62', '0.972856', '0.810537',
+                              'Fig. S40', 'Fig. S41', 'Contextual adaptation improves']}
             print('Built '+stem+': '+str(len(doc))+' pages', flush=True)
         verify(stage)
         save(stage/'build.json', dict(PDFs_sha256=pdfs, pages=pages, locations=locations, redlines=redlines,
@@ -231,9 +252,9 @@ def promote(stage):
             require(sha(stage/'paper'/name) == digest, 'reviewed artifact changed')
         article = (stage/'paper/article_content.tex').read_text()
         supplement = (stage/'paper/supplementary_information.tex').read_text()
-        require(article.replace(previous.RESULT_INSERT, '').replace(RESULT_INSERT, '')
+        require(article.replace(previous.RESULT_INSERT, '').replace(RESULT_INSERT, '').replace(CONTEXT_RESULT_INSERT, '')
                 == previous.baseline('article_content.tex').decode(), 'unplanned main-text change')
-        require(supplement.replace(previous.NOTE_INSERT, '').replace(NOTE_INSERT, '')
+        require(supplement.replace(previous.NOTE_INSERT, '').replace(NOTE_INSERT, '').replace(CONTEXT_NOTE_INSERT, '')
                 == previous.baseline('supplementary_information.tex').decode(), 'unplanned SI change')
         require((stage/'paper/frontmatter.tex').read_bytes() == previous.baseline('frontmatter.tex'), 'abstract changed')
         folder = HERE/'baselines/pre-glyph-step-2ca07ea0'; folder.mkdir(exist_ok=False)
