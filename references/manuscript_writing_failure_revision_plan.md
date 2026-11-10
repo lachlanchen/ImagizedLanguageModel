@@ -118,3 +118,17 @@ metric labels require a typography pass. Preserve that stage as an unapproved
 review; prepare `writing_failure_publication_v2` with identical measurements
 and source pixels, a slightly smaller glyph sheet and clearer metric labels.
 Build only after the matching actual figure review explicitly approves it.
+
+Stage v2 builds all five PDFs cleanly (17/32/88 pages with32/88-page
+redlines). Article overview inspection finds an editorial ambiguity: the
+first mechanism still describes the earlier denoising control, and a
+Discussion paragraph still treats the32-question study as the latest
+experiment. Do not promote that version. A bounded text correction may add
+an experiment-sequence roadmap, identify the initial section/Figure1 as
+historical controls, and replace that one stale Discussion paragraph with
+the512-question failure and restricted glyph-loop result. Preserve all
+measurements and earlier architectures. Stage v3 must verify these exact
+replacements against the baseline. Its unchanged native slide package may
+reuse the reviewed v2 render only after exact equality of every ZIP part and
+all rendered-file hashes; record that reuse explicitly. Rebuild/review the
+TeX/PDF/redlines, including the changed prose, before promotion.

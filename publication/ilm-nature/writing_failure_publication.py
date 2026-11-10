@@ -18,7 +18,7 @@ from PIL import Image
 from native_flow_manuscript import build_slot,owned_command,protected,expanded,TOOL,TOOL_SHA
 from render_native_qa_publication import pdf_pixels
 from writing_failure_figures import HERE,ROOT,FIGURES,append,require,sha,load,NS
-from writing_failure_text import SUMMARY,RESULTS,NOTE
+from writing_failure_text import SUMMARY,RESULTS,NOTE,ARTICLE_REPLACEMENTS
 
 BASE='947058e7'
 CODE=('writing_failure_publication.py','writing_failure_figures.py','writing_failure_text.py')
@@ -72,7 +72,11 @@ def prepare(stage):
         (paper/'frontmatter.tex').write_text(front[:front.index(anchor)]+anchor+'{'+SUMMARY+'}\n')
         article=(paper/'article_content.tex').read_text();anchor=r'\section*{Discussion}'
         require(article.count(anchor)==1,'unique Results/Discussion boundary required')
-        (paper/'article_content.tex').write_text(article.replace(anchor,RESULT_INSERT+anchor))
+        article=article.replace(anchor,RESULT_INSERT+anchor)
+        for old,new in ARTICLE_REPLACEMENTS:
+            require(article.count(old)==1,'bounded article replacement not unique: '+old[:70])
+            article=article.replace(old,new)
+        (paper/'article_content.tex').write_text(article)
         supplement=(paper/'supplementary_information.tex').read_text()
         anchor='\\clearpage\n\\section*{Reproduction}'
         require(supplement.count(anchor)==1,'unique Reproduction boundary required')
@@ -132,6 +136,24 @@ def render(stage):
             font_substitution='Arial rendered with Liberation Sans',
             figure_files_sha256={name+'.'+s:sha(stage/'paper/figures'/(name+'.'+s)) for name in FIGURES for s in ('pdf','png','svg')},
             actual_visual_review_pending=True))
+
+
+def reuse_render(stage,previous):
+    with build_slot():
+        verify(stage);old=load(previous/'preparation.json');receipt=load(previous/'render.json')
+        require(sha(previous/'paper/ILM_Figures_editable.pptx')==old['prepared_sha256']['ILM_Figures_editable.pptx'],
+                'previous rendered package changed')
+        with zipfile.ZipFile(stage/'paper/ILM_Figures_editable.pptx') as a,zipfile.ZipFile(previous/'paper/ILM_Figures_editable.pptx') as b:
+            require(set(a.namelist())==set(b.namelist()) and all(a.read(n)==b.read(n) for n in a.namelist()),
+                    'native package content differs; rerender instead')
+        for name,digest in receipt['figure_files_sha256'].items():
+            require(sha(previous/'paper/figures'/name)==digest,'previous rendered figure changed')
+            shutil.copy2(previous/'paper/figures'/name,stage/'paper/figures'/name)
+        shutil.copy2(previous/'paper/ILM_Figures_review.pdf',stage/'paper/ILM_Figures_review.pdf')
+        save(stage/'render.json',dict(receipt,preparation_sha256=sha(stage/'preparation.json'),
+            reused_verified_render_from=str(previous.relative_to(ROOT)),
+            reused_render_receipt_sha256=sha(previous/'render.json'),
+            all_native_package_parts_bit_exact_to_rendered_source=True,actual_visual_review_pending=True))
 
 
 def redline(stage,source,stem):
@@ -195,7 +217,11 @@ def promote(stage):
         require(review['PDFs_sha256']==built['PDFs_sha256'],'reviewed PDFs differ')
         for name,digest in review['staged_files_sha256'].items():require(sha(stage/'paper'/name)==digest,'reviewed artifact changed')
         require(set(review['staged_files_sha256'])==set(NAMES),'complete promotion set required')
-        require((stage/'paper/article_content.tex').read_text().replace(RESULT_INSERT,'')==baseline('article_content.tex').decode(),
+        article=(stage/'paper/article_content.tex').read_text().replace(RESULT_INSERT,'')
+        for old,new in reversed(ARTICLE_REPLACEMENTS):
+            require(article.count(new)==1,'bounded replacement changed')
+            article=article.replace(new,old)
+        require(article==baseline('article_content.tex').decode(),
                 'article changed outside bounded insertion')
         require((stage/'paper/supplementary_information.tex').read_text().replace(NOTE_INSERT,'')==baseline('supplementary_information.tex').decode(),
                 'supplement changed outside bounded insertion')
@@ -232,6 +258,9 @@ def sync(stage):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--stage',choices=['prepare','render','build','promote','sync'],required=True)
-    parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
-    globals()[args.stage](args.output.resolve())
+    parser.add_argument('--stage',choices=['prepare','render','reuse-render','build','promote','sync'],required=True)
+    parser.add_argument('--output',type=Path,required=True);parser.add_argument('--render-from',type=Path);args=parser.parse_args()
+    if args.stage=='reuse-render':
+        require(args.render_from is not None,'supply prior verified render')
+        reuse_render(args.output.resolve(),args.render_from.resolve())
+    else:globals()[args.stage](args.output.resolve())

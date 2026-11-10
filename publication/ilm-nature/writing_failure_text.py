@@ -19,6 +19,37 @@ SUMMARY = (
     'Historical-script understanding and an efficiency advantage at matched language quality remain unresolved.'
 )
 
+ARTICLE_REPLACEMENTS = [
+    ('The present study uses one canonical font to isolate\nthis coupling before introducing handwriting or historical scripts.\n',
+     'The present study uses one canonical font to isolate\nthis coupling before introducing handwriting or historical scripts.\n\n'
+     'The experiments progress from initial raster readers and denoisers to\n'
+     'an inherited visual/contextual body and a separately learned glyph\n'
+     'interface. The earlier architectures provide controls; the final\n'
+     'experiments evaluate the complete-glyph loop shown in Fig.~S37.\n'),
+    (r'\subsection*{A continuous visual interface preserves the written signal}',
+     r'\subsection*{An initial continuous visual interface preserves the written signal}'),
+    ('Each observed cell is a $32\\times32$ ink image.',
+     'In the initial control, each observed cell is a $32\\times32$ ink image.'),
+    (r'\textbf{A visual language interface and its conditional generation test.}',
+     r'\textbf{Initial visual language interface and its conditional generation test.}'),
+    ('The schematic\nshows the implemented experimental contract, without claiming that its\ngenerated content is already correct.',
+     'The schematic\nshows the initial denoising control. Its generated content remains incorrect;\n'
+     'the later complete-glyph runtime is shown in Fig.~S37.'),
+    ('''Complete pixel learning reproduces all 32 seen answers, but none of 24
+normal development answers. Further unchanged fitting of those questions is
+therefore unwarranted. Varied visual-language supervision must be tested against
+readable, correct new-prompt answers, retaining independent image generation
+and accounting for external pretraining.
+''', '''Broader pixel training reproduces 495 of 512 answers but still fails the
+supplied unseen reference images. The matched native reader retains useful
+answer capability, directing the intervention toward the learned writing
+interface. The complete-glyph loop supports restricted input-dependent date
+composition, with actual-image feedback independently replayed. It remains
+unreliable on broader questions: eleven of sixteen normal Chinese streams cap.
+Wider semantic readout coverage and robust generated histories remain
+necessary; clear familiar glyphs and low training loss are insufficient.
+''')]
+
 RESULTS = r'''\subsection*{The learned writing interface loses usable reading capability}
 Increasing the cohort from 32 to 512 questions gives 495/512 complete
 pixel-exact training answers after 16,000 updates, but no exact normal
