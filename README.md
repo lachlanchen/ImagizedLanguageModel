@@ -47,6 +47,21 @@ re-encoding, with bit-exact GPU hashes. That audit checks execution, not meaning
 
 [Run an arbitrary image prompt, train, and inspect the model](docs/semantic-glyph-language.md).
 
+Subsequent tests still reject general answering. A
+[better copying readout](references/genuine_pixel_readout_result.md) reaches
+held-wording F1 **0.972856**, but neither frozen checkpoint gives a correct
+complete phrase in the **32-stream C3 phrase test**. The
+[matched feedback diagnosis](references/glyph_feedback_ceiling_result.md)
+gets **12/16** literal source answers with native steps versus **3/16** with
+character steps, even using exact character vectors. Simply replacing a source
+unit with one glyph does not preserve that source policy.
+
+The [current training candidate](docs/glyph-tail-adaptation.md) adapts the final
+four attention layers and writer on **3,176 Chinese training questions**. Its
+causal split and two real gradient updates pass preflight at **3.208 GiB**;
+that is a resource check, not a language result. Full training and the reserved
+complete-answer assessment remain required. No general working ILM is claimed.
+
 ## Earlier writing experiments
 
 The [earlier direction assessment](references/ilm_direction_assessment_20261108.md)
