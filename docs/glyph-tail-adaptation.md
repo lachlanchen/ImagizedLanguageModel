@@ -93,6 +93,16 @@ During this recovery, live progress is in
 stay preserved until recovery publishes the completed final fit. Periodic
 recovery checkpoints are training state, not qualified inference releases.
 
+The fixed fit has now completed. An independent CPU
+[checkpoint audit](../references/evidence/glyph_tail_final_fit_v2/checkpoint_audit.json)
+confirms 18,000 real writer updates and 13,500 body/stopping updates: 13,500
+question batches alternate with 4,500 writer-only copy batches. The frozen
+encoder, decoder and normalization tensors are bit-identical to the starting
+bridge. The resumed attempt peaks at 3.357 GiB allocated GPU memory; that
+receipt covers 16,000 retained continuation updates and four discarded replay
+checks, rather than the whole cache, fitting history or inherited pretraining.
+Full-body qualification and complete answers still determine usefulness.
+
 The matched broader-data control is prepared at
 `artifacts/glyph_tail_readout_control_v2`. It uses the same cached questions
 with G and stopping trained, and zero body-adapter updates. Its execution
