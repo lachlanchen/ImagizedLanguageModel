@@ -122,7 +122,7 @@ def fit(run,m,monitor,device):
                 body_tail_adapters=initial['body_tail_adapters'],tail_start_layer=32,step=step+1,
                 inherited_bridge_updates=36000,new_optimizer_updates=step+1,
                 writer_training_family='natural_first_image_v1',
-                language_training_complete=True,optimizer=opt.state_dict(),
+                language_training_complete=step+1==m['fit_steps'],optimizer=opt.state_dict(),
                 torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state(),
                 preparation_sha256=sha(run/'writer_preparation.json'),usable_language_demonstrated=False))
     require(counts==dict(natural=4608000,first=2304000,later=1152000,copy=1152000),'actual exposure counts differ')
