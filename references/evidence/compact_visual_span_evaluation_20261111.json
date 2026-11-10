@@ -1,0 +1,65 @@
+{
+  "held_out_preparation": {
+    "visual_corpus_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "corpus_verification_sha256": "a3818ecf68b20bbfb5fa7dab6442bea8168481ffb15545043a4b74717f841eb9",
+    "input_manifest_sha256": "73076060c8d48638886ed329aca2a667877e07776e4597313f1ceb48e7ec0afc",
+    "references_sha256": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+    "paired_qa_groups": 16,
+    "qa_questions": 32,
+    "whole_held_out_books": [
+      "欒城集",
+      "西遊記"
+    ],
+    "book_continuations": 12,
+    "all_inputs": 120,
+    "normal_inputs": 44,
+    "pixel_roundtrips_exact": 120,
+    "model_calls": 0,
+    "source_sha256": {
+      "scripts/prepare_compact_visual_span_evaluation.py": "879f6bb191b575be6aea9fbab0a6ddc9e5d6a6228cdf8180d26e5e50af3f45ec",
+      "scripts/infer_compact_visual_span.py": "f6366efb94b1efbfcf3e0fa8764186ecd32f2345b5b17fd83af7a55494f8948c",
+      "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+      "scripts/prepare_visual_sequence_corpus.py": "267280b21231eb8eb9c78f7b9c8b93c15e4d42e5fd7bdd5d612ee4fdfe776d50"
+    }
+  },
+  "preparation_sha256": "cfa18a7c351f1751fa654cf062acd722509a34e606f36a6e8fc5c6beca92229b",
+  "actual_input_previews_viewed": [
+    "qa_01_a_normal",
+    "qa_01_b_normal",
+    "book_01_normal"
+  ],
+  "cold_cpu_interface": {
+    "registered_case": "book_01_normal",
+    "input_glyphs": 393,
+    "input_sha256": "0053db91c31f04862412eeb1daef74da97c9c87ac7c985f309ea9879454d284d",
+    "prompt_spans": 223,
+    "emitted_glyphs": 0,
+    "optimizer_updates": 0,
+    "checkpoint_load_seconds": 19.4582836991176,
+    "generation_seconds": 65.87725643999875,
+    "generation_glyph_cap": 16,
+    "flow_steps_configured": 2,
+    "pixel_feedback_events": 0,
+    "initial_heads_sha256": "56c976f3b2097233718d0c20d29fbd6cc365316fdb4aede50430ccd77f4cbcf4",
+    "actual_output_raw_sha256": "31f6d1fc4f8d6bbb9aab7f774dcad30b64be424f32394ef576f522baae9acf7d",
+    "actual_output_png_sha256": "e7bdc527afd649f51950b4524b0c15aecaf7f484448a6cdfcdc2ecd9bba0f5a7",
+    "cold_report_sha256": "4a00b004ed98b16999a0fe900b6eb7c01d5def76c8760bdda110696455a45973",
+    "lexical_parameters_materialized": 0,
+    "language_quality_measured": false,
+    "trained_gpu_cold_replay_executed": false,
+    "opened_path_count": 8232,
+    "forbidden_paths": [],
+    "IP_connection_attempts": [],
+    "exact_input_file_exempted": true,
+    "source_GGUF_metadata_may_contain_unused_vocabulary": true,
+    "required_model_and_prompt_opens_verified": true,
+    "other_project_artifacts_read": false,
+    "trace_files": 8,
+    "trace_manifest_sha256": "14adb89082c9b0e705c0d1bf1f8378b5dd75f59ff7ecafdb57fcd1c6709f2503",
+    "predicted_stop": true
+  },
+  "verification_source_sha256": {
+    "scripts/review_compact_visual_span.py": "c046d3a8f3565c945478a1899d4f9a8776b2ed327c2114258362fb39c7a8a323",
+    "scripts/verify_compact_visual_span_cold.py": "c86927faa7856e41234e5aaa105538147e59d264bc7d40352c9c1c4e9a73efd9"
+  }
+}

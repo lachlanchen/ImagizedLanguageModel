@@ -62,3 +62,32 @@ Evaluate complete answers with learned lengths, stopping and feedback
 throughout generation. Preserve the original image stream and score
 question dependence, legibility and correctness on held-out groups. See the
 [engineering goal](first-imagized-language-model-goal.md).
+
+## Standalone generation and held-out evaluation
+
+Run inference with a gapless PNG grid of 32 × 32 tiles in row-major reading
+order. If the last row has padding, give the actual tile count. The runtime
+loads the contextual and codec weights plus the specified image heads. It
+writes the original generated glyph stream, a display PNG and a record of
+length, stopping and pixel feedback.
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
+  python scripts/infer_compact_visual_span.py --image prompt.png --glyph-count 393 \
+    --checkpoint path/to/image_heads_step_0000000.pt --output artifacts/compact_inference
+```
+
+The example checkpoint name illustrates the snapshot format. Select a trained
+step for meaningful answers. An actual fresh CPU process loaded the initial
+heads and read a 393-tile book prefix. The untrained length head stopped
+immediately, emitting zero tiles. The system-call trace verifies the standalone
+input and weight boundary for that invocation. It provides no evidence about
+trained writing. See the [preparation and cold interface evidence](../references/evidence/compact_visual_span_evaluation_20261111.json).
+
+The prepared evaluation suite uses 16 paired CMRC contexts, 12 book prefixes
+and blanked controls. Its input manifest is in
+`artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json`. Use
+`--manifest` in place of `--image` and `--glyph-count`. Use `--normal-only` for
+intermediate checkpoints. The normal and control routes, blind image review,
+scoring and trained cold replay are specified in the
+[evaluation protocol](../references/compact_visual_span_evaluation_protocol.md).

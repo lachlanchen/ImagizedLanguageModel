@@ -94,7 +94,11 @@ attributing any gain to visual learning. See the [teacher preparation](visual-se
 and [visual span measurements](../references/visual_chunk_coverage_result.md).
 The [compact implementation](compact-visual-span-model.md) has passed CPU
 gradient and pixel-feedback checks. GPU fitting and held-out language scores
-are pending.
+are pending. Its [registered evaluation](../references/compact_visual_span_evaluation_protocol.md)
+has 32 questions from 16 held-out contexts and 12 continuations from two
+held-out books. Standalone generation reads only the prompt image and model
+weights. The first fresh CPU invocation used the initial weights and stopped
+without writing.
 
 Measure complete answers, passage continuation, question dependence and
 historical form handling on independent groups. Measure peak VRAM, total
