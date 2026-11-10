@@ -55,8 +55,10 @@ def prepare(parent,output):
 
 
 def fit(output):
-    from scripts.train_glyph_tail_adapter import verify
-    m=verify(output); require(m['readout_only_control'],'readout-control preparation required')
+    m=load(output/'preparation.json')
+    for name,digest in {**m['code_sha256'],**m['bindings_sha256']}.items():
+        require(sha(ROOT/name)==digest,'bound control source/input changed: '+name)
+    require(m['readout_only_control'],'readout-control preparation required')
     require(identity()=={k:m['code_sha256'][k] for k in [OWN,PROTOCOL]},'control implementation changed')
     parent=ROOT/m['comparison_parent']
     require(load(parent/'fit/status.json')['phase']=='completed'
