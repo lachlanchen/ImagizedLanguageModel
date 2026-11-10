@@ -50,6 +50,14 @@ completed fit, not general language qualification. New arbitrary questions
 can produce malformed repetitions; inspect raw images rather than treating
 the file's successful creation as a correct answer.
 
+A [cold CLI qualification](../references/evidence/semantic_glyph_cli_cold/verification.json)
+repeats the changed-2019 question image with bit-exact complete pixels,
+stop probabilities and feedback hashes. Its system-call trace opens no
+training-corpus, glyph-inventory or font files and makes no IP socket
+connections. The raw trace stays local; its hash and source-bound receipt
+are public. This qualifies the tested independent input path, not arbitrary
+question accuracy.
+
 ## Train and inspect the complete experiment
 
 CPU preparation uses fonts and source embeddings as offline supervision.

@@ -12,7 +12,7 @@ from generate_assignment_editable_figures import NS,Slide,chart_part,element,q,r
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
-FIGURES=('Figure_S36_writing_failure','Figure_S37_semantic_glyph_loop')
+FIGURES=('Figure_S36_writing_failure','Figure_S37_semantic_glyph_loop','Figure_S38_date_interventions')
 
 
 def require(value,message):
@@ -115,7 +115,7 @@ def append(paper):
         'The helper is not an ILM image answer. Sources: pixel_language_diversity_final16000, pixel_language_first_block_likelihood, pixel_language_source_reader.')
 
     s=Slide(parts[template]);s.shape('A complete-glyph semantic loop separates writing from continuation',45,24,1510,60,28,True)
-    s.shape('a  Proposed language runtime: one whole glyph per event',45,105,1510,40,21,True)
+    s.shape('a  Evaluated language runtime: one whole glyph per event',45,105,1510,40,21,True)
     for x,w,text in [(45,240,'Question image\nNative visual reader'),(345,280,'Original assistant state h\nFull native context'),
                      (685,245,'Continuous readout G\nSemantic vector z'),(990,245,'Neural decoder D\n32 × 32 glyph pixels'),
                      (1295,260,'Image encoder E\nActual emitted pixels')]:
@@ -124,19 +124,48 @@ def append(paper):
     s.arrow(1425,280,1425,320,head=False);s.arrow(1425,320,480,320,head=False);s.arrow(480,320,480,280)
     s.shape('Feedback uses generated pixels. Learned stop; no reference answer length.',570,285,825,32,16)
     s.shape('b  Completed primitive training',45,365,730,40,21,True)
-    s.shape('Offline source anchors + canonical glyph images\nTrain E and D; freeze language readout and stopping.\n4,096 anchored characters → 4,087 distinct image forms.\nOne font, seen identities; no historical/OOV claim.',
+    s.shape('Offline source anchors + canonical glyph images\nPrimitive: train E/D; freeze readout/stopping.\nLater: fit readout/stopping on 508 question-image histories.\n4,096 anchored characters → 4,087 distinct image forms.',
             45,415,730,135,18)
     s.shape('Direct:4,048/4,087 exact; F1 0.999940\nRoundtrip:3,697/4,087 exact; F1 0.999634\nSemantic cosine:0.77735 on first128; alignment remains weaker.\n80.22s / 0.728GiB for the primitive only.',
             820,415,735,135,18)
     s.shape('c  Gold / direct decode / actual-image roundtrip',45,560,1510,35,21,True)
     picture(s,ROOT/'references/evidence/semantic_glyph_bridge/glyph_reconstruction_board.png',
             'glyph_triplets',45,603,1510)
-    s.shape('64 evenly spaced indices; all physical pixels retained. This is reconstruction, not language validation.\nThe proposed runtime has no tokenizer, source vocabulary head, font renderer or glyph lookup table.',
+    s.shape('64 evenly spaced indices; all physical pixels retained. This is reconstruction, not answer accuracy.\nBroader Chinese assessment: 1/16 exact, 11 caps. No runtime tokenizer, source text head, font renderer or glyph lookup.',
             45,850,1510,45,15)
     register(s,52,'Figure S37. Continuous complete-glyph loop and completed primitive. '
         'The native assistant state is preserved; actual emitted images determine feedback. '
-        'Only primitive E/D training is completed in this figure. The 64image triplets use evenly spaced inventory indices, without quality selection. '
-        'Mean cosine is reported on the first128prepared forms. No unseen language, unknown-glyph or historical-script success is claimed.')
+        'Primitive E/D results are separate from the later 508-question readout fit. The 64 image triplets use evenly spaced inventory indices, without quality selection. '
+        'Mean cosine is reported on the first 128 prepared forms. Broader normal Chinese assessment has 1/16 pixel-exact and 11 capped responses. Unknown glyphs and historical scripts remain unvalidated.')
+
+    s=Slide(parts[template]);s.shape('Changed passage dates produce changed answer images',45,24,1510,60,28,True)
+    s.shape('a  Frozen model, two selected question templates, zero further updates',45,105,1510,40,21,True)
+    s.shape('Replace the passage year\n1874/2001 → fixed counterfactual year\nKeep original geometry and question ink',45,155,680,112,19,
+            center=True,fill='F0F3F5')
+    s.arrow(735,208,810,208)
+    s.shape('Read the complete image and emit glyph pixels\nSame 64-glyph cap and learned stopping\nErased-question controls use the same passage',820,155,735,112,19,
+            center=True,fill='EAF1F6')
+    s.shape('b  All normal outputs in fixed order. Labels state requested years; images are actual model output.',45,295,1510,40,19,True)
+    evidence=ROOT/'references/evidence/semantic_glyph_counterfactual'
+    normal=[r for r in load(evidence/'report.json')['records'] if r['route']=='normal']
+    require(len(normal)==16,'all 16 normal date outputs required')
+    for i,row in enumerate(normal):
+        x=45+(i%4)*385;y=350+(i//4)*119
+        label=('Treaty' if row['parent']==12 else 'Coast')+' | requested '+row['year']
+        s.shape(label,x,y,355,35,18,True)
+        path=evidence/'raw_outputs'/row['png']
+        require(Image.open(path).size==(160,32),'complete five-glyph image required')
+        picture(s,path,'counter_'+str(i),x+8,y+41,320)
+    score=load(evidence/'review_scores.json')['groups']['normal_new_dates']
+    require((score['cases'],score['canonical_pixel_exact'],score['output_first_manual_transcription_matches'])==(14,2,11),
+            'date score source differs')
+    s.shape('New dates: 11/14 clear output-first readings, 2/14 pixel-exact, 14/14 natural stops. Three damaged/wrong digit forms remain failures.\nTwo parents were chosen from prior successes; no sealed or independent semantic accuracy claim. All 32 raw outputs and controls retained.',
+            45,838,1510,59,15)
+    register(s,53,'Figure S38. Sixteen normal date outputs in fixed preparation order, including two original-input cold reruns. '
+        'Labels indicate requested years and do not transcribe or repair output. Both 1789 variants and the coast 1648 variant have uncertain/wrong digits and are not counted as correct. '
+        'Eleven of 14 new conditions have clear matching output-first manual transcriptions; two are canonical pixel-exact; all 14 stop without target length. '
+        'Six clear changed-date outputs compose complete strings absent from supported training answers. All erased controls fail date answering. '
+        'Two parents are selected from previously observed successes; no independent human grading or sealed test. Source: references/evidence/semantic_glyph_counterfactual/.')
 
     for name,node in [('[Content_Types].xml',types),('ppt/presentation.xml',presentation),
                       ('ppt/_rels/presentation.xml.rels',relationships)]:parts[name]=xml(node)
@@ -144,5 +173,5 @@ def append(paper):
     require(all(parts[n]==raw for n,raw in original.items() if n not in mutable),'old package part changed')
     with zipfile.ZipFile(paper/'ILM_Figures_editable.pptx','w',zipfile.ZIP_DEFLATED) as archive:
         for n,raw in parts.items():archive.writestr(n,raw)
-    return dict(native_slides=52,native_charts=57,prior50_slide_parts_preserved=True,
+    return dict(native_slides=53,native_charts=57,prior50_slide_parts_preserved=True,
                 prior54_charts_preserved=True,charts=chart_data,media=media)

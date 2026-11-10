@@ -11,11 +11,12 @@ SUMMARY = (
     'A matched diagnostic reader reproduces all 32 image-memory fingerprints and returns literal '
     'reference answers on 12 of 16 normal Chinese questions, versus zero with the question erased. '
     'This helper-only text baseline localizes substantial lost capability to the learned writing interface; '
-    'it is not an image-output solution. A separate continuous semantic glyph interface reconstructs '
-    '4,048 of 4,087 prepared forms exactly, establishing clear glyph formation but not language generation. '
-    'These controlled results distinguish answer fitting from useful generalization and motivate '
-    'a complete-glyph semantic loop. Unseen image-language answering, historical-script understanding '
-    'and an efficiency advantage at matched language quality remain unresolved.'
+    'it is not an image-output solution. A continuous complete-glyph loop then produces some readable '
+    'new short answers, but eleven of sixteen normal development streams still cap. On two selected '
+    'question templates, eleven of fourteen prospective date changes yield clearly matching answer '
+    'images, with two pixel-exact; all fourteen stop naturally. These non-independent manual readings '
+    'support restricted input-dependent composition, not general language qualification. '
+    'Historical-script understanding and an efficiency advantage at matched language quality remain unresolved.'
 )
 
 RESULTS = r'''\subsection*{The learned writing interface loses usable reading capability}
@@ -58,8 +59,21 @@ excluding the large contextual body and its pretraining. Semantic alignment
 is weaker than reconstruction, with mean cosine 0.77735 on the first 128
 forms. Clear reconstruction neither validates unseen glyphs nor demonstrates
 language understanding. The proposed continuation loop preserves the native
-assistant state, predicts one complete glyph and re-encodes its actual pixels;
-useful autonomous new-prompt answers remain the required test.
+assistant state, predicts one complete glyph and re-encodes its actual pixels.
+Fitting only its readout/stopping on 508 supported questions yields readable
+new complete strings corresponding to 288 items and the year 1874
+(Supplementary Note 59). Nevertheless, only 1/16 normal Chinese development
+images is canonical-exact, and eleven cap; the one exact full year string
+occurs in training. These are partial examples, not a semantic-accuracy estimate.
+
+A frozen intervention replaces passage dates on two templates selected from
+those outputs (Fig.~S38). Eleven of fourteen prospectively fixed new dates
+have clear matching output-first transcriptions, two are canonical-exact and
+all fourteen stop naturally without a target length. Three damaged/wrong
+digit streams remain failures. Erased-question controls give no correct date.
+Six clear outputs compose full year strings absent from supported training
+answers. This supports restricted input-dependent composition through actual
+image feedback, while broader unseen-answer reliability remains unresolved.
 '''
 
 NOTE = r'''\clearpage
@@ -171,18 +185,18 @@ decoding and 0.956835 for roundtrip. The displayed 64 indices are evenly
 spaced, with unrepaired target/direct/roundtrip triplets. This is seen-identity,
 single-font rendering, not historical or unseen-character generalization.
 
-The proposed language loop is
-\[
-h_0=T(I_{\rm prompt}),\quad z_t=G(h_t),\quad
-I_t={\bf1}[\sigma(D(z_t))\geq\tfrac12],\quad
-h_{t+1}=T(E(I_t);\mathrm{KV}_{\leq t}),
-\]
+The evaluated language loop is
+\begin{align*}
+h_0&=T(I_{\rm prompt}),\qquad z_t=G(h_t),\\
+I_t&={\bf1}[\sigma(D(z_t))\geq\tfrac12],\\
+h_{t+1}&=T(E(I_t);\mathrm{KV}_{\leq t}),
+\end{align*}
 with the global affine restoration of E's normalized semantic coordinates
 before contextual input. A learned stop receives no reference length. The
 native assistant state replaces the earlier learned initial writing query.
-This specifies a repair hypothesis; the primitive checkpoint explicitly
-refuses language generation. Autonomous unseen-answer testing is still
-required before claiming the repair works.
+The primitive-only checkpoint explicitly refuses language generation.
+Supplementary Note 59 distinguishes its reconstruction from the subsequent
+language fitting and frozen intervention.
 
 \clearpage
 \plate{Figure_S36_writing_failure}{\textbf{Training fit does not recover useful unseen writing.}
@@ -202,8 +216,96 @@ and pixel exactness have distinct denominators and interpretations.}{fig:writing
 assistant state; E re-encodes the actual emitted pixels before continuation.
 No runtime glyph table, tokenizer, source output head or font renderer is
 present. \textbf{b}, Primitive encoder/decoder training uses offline semantic
-anchors and images; language readout/stopping remain untrained in this stage.
+anchors and images; the later 508-question stage fits only readout/stopping.
 \textbf{c}, Target/direct/roundtrip triplets at 64 evenly spaced indices from
 4,087 prepared forms. Direct reconstruction is 4,048/4,087 exact. Sharp
-familiar glyphs do not establish autonomous answering or unseen forms.}{fig:semantic-glyph-loop}
+familiar glyphs do not establish answer accuracy or unseen forms. The broader
+Chinese assessment still has eleven capped failures.}{fig:semantic-glyph-loop}
+'''
+
+NOTE += r'''\clearpage
+\section*{Supplementary Note 59 | Partial glyph-language transfer and changed dates}
+\label{note:glyph-language}
+Four training questions contain unsupported anchor characters and are
+explicitly recorded rather than substituted; development cases are not
+filtered. The 508 supported questions supply 3,855 gold glyph events and
+508 terminal states. The contextual body and primitive encoder/decoder stay
+frozen. Cache the original FP32 assistant state, followed by native causal
+states after E encodes each gold previous glyph image. The current target
+never enters the state predicting it. Bulk and one-glyph-at-a-time states
+agree within $2.29\times10^{-5}$ on the first sequence. Caching takes
+731.67\,s at 17.789\,GiB peak; all 4,363 states are retained by hash.
+
+Train 17,848,833 readout/stopping parameters for 6,000 batch-128 AdamW updates,
+learning rate $2\times10^{-4}$ with cosine decay to one tenth, and seed
+202611102. Sample glyph and terminal events uniformly from the cache. The
+loss sums semantic MSE, cosine discrepancy weighted 0.2, balanced pixel BCE
+through D, and unweighted stop BCE. This is a reconstruction/continuation
+objective, not a normalized language likelihood. Fit time is 42.47\,s at
+0.658\,GiB peak, excluding native caching and inherited pretraining.
+
+All eight fixed training controls are exact and stop. Normal Chinese
+development gives 1/16 canonical-exact (F1 0.354426), five stops and eleven
+caps; erased gives 0/16 (F1 0.075368), one stop and fifteen caps. All forty
+raw streams are inspected before the current canonical-reference comparison.
+Readable complete answers corresponding to 288 items and 1874 with Chinese
+suffixes have F1 0.987315 and 0.986612, respectively; neither is pixel-exact.
+Those full strings are absent from supported training answers. The exact
+2001 year string appears in training. Canonical images are evaluator-only.
+Damaged Latin forms and the channel-name response are not repaired or graded
+correct. Autonomous assessment takes 332.59\,s, including 10.01\,s of pressure
+waiting, at 17.646\,GiB peak. These are reused development data without
+independent human grading.
+
+For the frozen date test, choose the two previously observed year-question
+parents, then fix all values before inference: 1874, 1936, 1648, 1789, 2001,
+2007, 2019 and 1993. Replace every occurrence of the answer year in each
+passage, preserving question ink and original wrapping. Verify exact original
+rendered PNGs and unchanged strip width. Altered passages are counterfactual
+reading conditions, not historical claims. Keep all sixteen normal and
+sixteen erased images; fourteen normal conditions are new date interventions
+and two are original baselines. The frozen actor receives only the image and
+its unchanged 64-glyph safety cap, performs zero updates and never receives
+the requested year or desired length.
+
+All sixteen normal streams stop after five glyphs. Among fourteen new dates,
+eleven have clear matching output-first manual transcriptions, two are
+canonical-exact and mean F1 is 0.970408. Both 1789 variants have a damaged
+second digit, and the coast 1648 variant has wrong/damaged digits; none is
+corrected toward gold. Nine new conditions request complete strings absent
+from supported training answers; six of these produce clear matches. No new
+erased condition gives a correct date; thirteen cap and one stops after an
+entity-name-like response. Mean erased F1 is 0.048683. The parents are
+selected from prior outputs, and manual readings are non-independent; this
+is not a sealed or general semantic benchmark. Runtime is 229.23\,s at
+17.605\,GiB peak. Repeating the original two PNGs in this cold process
+preserves complete pixels, stop probabilities and feedback hashes exactly.
+
+A separate small-bridge audit re-encodes all 2,781 actual emitted glyphs from
+the seventy-two language/intervention streams. Every cold GPU embedding hash
+is bit-exact; maximum CPU/GPU error is $1.79\times10^{-7}$, below $10^{-4}$.
+The audit loads no native contextual body or teacher, takes 30.80\,s and peaks
+at 0.351\,GiB. Its 48\,GiB host-entry, 32\,GiB runtime and 5\,GiB GPU cap are
+separate small-stage limits, not changes to completed training protocols.
+These checks establish execution/feedback consistency, not semantic correctness.
+
+All model weights and external pretraining remain part of the provenance.
+The bridge's small fitting cost does not include acquiring the large body's
+knowledge. Broad answer reliability, English, unknown glyph identities and
+historical writing remain unvalidated. The evidence supports a restricted
+image-input/image-output composition mechanism that can be improved, not a
+general-purpose model equivalent to a contemporary LLM.
+
+\clearpage
+\plate{Figure_S38_date_interventions}{\textbf{A frozen glyph loop follows changed dates on two selected templates.}
+\textbf{a}, Replace every answer-year occurrence in the passage, preserve
+the question and geometry, and perform zero updates. Original PNG baselines
+reproduce exactly. \textbf{b}, All sixteen normal outputs, including two
+baselines, in fixed preparation order. Labels state requested years, not
+transcriptions. Fourteen new date conditions give eleven clear output-first
+readings, two canonical-exact images and fourteen natural stops. Both 1789
+variants and the coast 1648 variant remain uncertain/wrong and count as
+failures. All erased outputs are retained; none gives a correct date.
+Parent selection uses prior successes and manual readings are non-independent,
+limiting this result to exploratory input-dependent date composition.}{fig:date-interventions}
 '''

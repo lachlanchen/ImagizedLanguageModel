@@ -1,0 +1,99 @@
+{
+  "checkpoint_sha256": "3a81b4e6f4306b218d08e6988f84d688f4267a773356a8d4c9c470e496ae5141",
+  "controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+  "original_prompt_sha256": "f3e1dbd97dc5d33515c685e9efe44452af59eed73d16a238886100f8a313f219",
+  "observed_prompt_sha256": "f3e1dbd97dc5d33515c685e9efe44452af59eed73d16a238886100f8a313f219",
+  "original_size": [
+    1024,
+    224
+  ],
+  "observed_size": [
+    1024,
+    224
+  ],
+  "glyphs": 5,
+  "stopped": true,
+  "capped": false,
+  "maximum_glyphs": 64,
+  "answer_sha256": "d82d321a8817e79ee6977784b347e4cf66e0afe79a400c9a27cf41e8b388a54e",
+  "answer_PNG_sha256": "55c09f2c10f357f9f0b200661e0d10a3064aa2359d562a028598012e7cec0ef1",
+  "runtime_font": false,
+  "runtime_tokenizer": false,
+  "runtime_training_corpus": false,
+  "runtime_glyph_inventory": false,
+  "source_vocabulary_parameters": false,
+  "external_teacher": false,
+  "actual_pixels_feedback": true,
+  "known_general_language_reliability": false,
+  "provenance": {
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "retained_native_tensors": 748,
+    "retained_base_parameters": 7522463984,
+    "configurations": {
+      "text": {
+        "vocab_size": 0,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "num_hidden_layers": 36,
+        "num_attention_heads": 32,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 262144,
+        "rope_theta": 5000000.0,
+        "rope_scaling": {
+          "rope_type": "default",
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "mrope_interleaved": true
+        },
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "vision": {
+        "depth": 27,
+        "hidden_size": 1152,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "in_channels": 3,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2,
+        "out_hidden_size": 4096,
+        "num_position_embeddings": 2304,
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "hidden_act": "gelu_pytorch_tanh"
+      }
+    },
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "external_pretraining": true,
+    "vocabulary_parameters_materialized": 0
+  },
+  "elapsed_seconds": 89.95100793242455,
+  "resource_wait_seconds": 0.0,
+  "peak_allocated_vram_gib": 17.604161739349365,
+  "minimum_available_gib": 59.99266052246094,
+  "admission": {
+    "mode": "original_RAM_swap_admission",
+    "entry": {
+      "available_gib": 60.944889068603516,
+      "swap_fraction": 0.7393042327997805,
+      "some_pressure_avg10": 0.0,
+      "full_pressure_avg10": 0.0
+    }
+  }
+}
