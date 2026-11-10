@@ -101,3 +101,17 @@ Keep source-unit/formatting ambiguity, changing question subsets and the absent
 exact-source-feedback counterfactual explicit. The genuine curriculum remains
 unfinished and excluded. This amendment authorizes source preparation only
 while its cache owns the mutex; Office/LaTeX/render/promotion remain deferred.
+
+## Completed target-coverage join amendment
+
+Add the completed metadata-only `glyph_target_coverage_result.md` analysis to
+Note60's first-form subsection. Eleven of sixteen cases have an allowed initial
+reference form seen initially in the508-question language fit; two have one
+seen only later and three have none seen as a language target. All9nearest-code
+successes and the1exact first image occur in the initially seen group. This
+does not establish a causal coverage effect or complete-answer accuracy.
+Bind the complete join report and audit source. Keep the sixteen reused-case
+denominator, any-allowed-reference grouping and known primitive-form distinction
+explicit. No new figure, abstract, main result or unfinished direct-pixel result
+is introduced. Static source checks may run while caching; heavy stages remain
+deferred under the existing mutex.

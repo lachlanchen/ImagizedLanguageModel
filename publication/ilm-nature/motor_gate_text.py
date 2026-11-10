@@ -41,6 +41,18 @@ evaluator-only diagnostic: it never selects, repairs or replaces an
 image produced by the runtime. It is neither complete-answer accuracy nor
 an independently graded semantic score.
 
+An evaluator-only coverage join separates missing initial-target exposure
+from damage to familiar forms. The original 508 questions contain 1,074 total
+target forms and 266 initial forms. In 11/16 cases, an allowed first reference
+form was already seen at an initial training position; in 2/16 it was seen
+only later in an answer, and in 3/16 none was seen as a language target.
+All nine nearest-reference successes, the one exact first image and the five
+first images reaching F1 0.95 occur in the initially seen group. The primitive
+encoder/decoder already trained on all 4,087 forms, so a missing language
+target is not an unseen primitive glyph. The groups use any allowed reference
+initial form. These small reused-case strata do not isolate a causal effect
+of coverage, and they do not score a complete answer.
+
 \subsection*{An affine output span limits exact anchor regression}
 The original readout ends in
 \[
@@ -192,6 +204,8 @@ The fixed-state and spectral diagnostics are in
 \path{references/evidence/glyph_readout_rank_v1/}.
 The cached-label audit retains every state and question summary under
 \path{references/evidence/cached_glyph_teacher_audit_v1/}.
+The coverage join is retained under
+\path{references/evidence/glyph_target_coverage_v1/}.
 These controls reject the specified recipes, not every possible transfer,
 normalizing flow or pixel model. They motivate real contextual coverage and
 continued autonomous-image validation, while leaving broad language generation,

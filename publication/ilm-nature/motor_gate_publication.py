@@ -39,7 +39,7 @@ EXTRA=('semantic_readout_distillation_v1/calibrate/report.json',
     'contrastive_glyph_readout_v1/retention.json',
     'glyph_motor_states_v1/report.json','glyph_motor_states_v1/visual_review.json',
     'cached_glyph_teacher_audit_v1/report.json','cached_glyph_teacher_audit_v1/records.json',
-    'cached_glyph_teacher_audit_v1/cases.json')
+    'cached_glyph_teacher_audit_v1/cases.json','glyph_target_coverage_v1/report.json')
 
 
 def save(path,value):path.write_text(json.dumps(value,indent=2)+'\n')
@@ -65,6 +65,11 @@ def measure_check(data):
     require(f"{teacher['cases_all_reference_forms_and_stop_match']}/{teacher['training_questions']}" in plain
             and teacher['model_forward_calls']==0 and not teacher['semantic_accuracy_measured'],
             'cached-label audit scope differs')
+    coverage=load(ROOT/'references/evidence/glyph_target_coverage_v1/report.json')
+    for row in coverage['summary'].values():
+        require(f"{row['cases']}/16" in NOTE,'coverage denominator absent from note')
+    require(f"{coverage['positive_target_forms']:,}" in NOTE and str(coverage['initial_target_forms']) in NOTE
+            and coverage['model_forward_calls']==0,'coverage scope differs')
     # These results remain the only completed language evidence. New glyph
     # component controls must not silently change the abstract.
     require('genuine' not in RESULTS.lower(),'unfinished genuine-curriculum result entered main text')
@@ -83,7 +88,8 @@ def prepare(stage):
         for n in EXTRA:
             p=ROOT/'references/evidence'/n;bound[str(p.relative_to(ROOT))]=sha(p)
         for n in ['scripts/audit_cached_glyph_teacher_labels.py',
-                  'references/cached_glyph_teacher_agreement_result.md']:
+                  'references/cached_glyph_teacher_agreement_result.md',
+                  'scripts/audit_glyph_target_coverage.py','references/glyph_target_coverage_result.md']:
             bound[n]=sha(ROOT/n)
         for n in ['semantic_readout_distillation_protocol.md','contrastive_glyph_readout_protocol.md',
                   'robust_glyph_decoder_protocol.md','semantic_motor_flow_protocol.md','spatial_semantic_motor_protocol.md']:
