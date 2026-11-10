@@ -69,3 +69,20 @@ propagation remains separately unverified. No user approval question is needed
 for this already authorized bounded update.
 
 Status: plan only. No active TeX/PDF change or new publication build performed.
+
+## Preparation while the reader cache runs
+
+Lightweight source authoring, JSON/pixel audits and exporting twenty32x32raw
+cells may proceed while caching. Do not invoke Office, LaTeX, a PDF build or
+write active manuscript/deck files. The future builder must acquire the same
+mutex before staging/rendering/building. Fix the evidence-grid indices before
+export as1,1362,2724,4086: four evenly spaced non-empty inventory indices,
+chosen without inspecting their output quality. FigureS39will append slide54
+and two native charts58–59, giving54slides/59charts while retaining every prior
+part. Its table compares separate training recipes and explicitly reports
+failed mixed-condition gates. A raw-pixel preflight may establish whether the
+three original-decoder baselines are identical; do not assume it.
+
+The new genuine-context cache remains unfinished. Initial text/data modules
+must include only completed evidence. Add any future genuine-fit/QA results
+under a separate recorded amendment after their actual outputs are reviewed.
