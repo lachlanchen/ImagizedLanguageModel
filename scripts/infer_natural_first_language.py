@@ -64,6 +64,7 @@ def main():
             torch.cuda.synchronize();generation_seconds=time.perf_counter()-began;generation_wait=monitor.waited-waited
             hook.remove();atomic_tensor(a.output/'output.pt',value);output_png(value,a.output/'output.png')
             save_json(a.output/'report.json',dict(**observed,checkpoint_sha256=sha(a.checkpoint),
+                observed_prompt_sha256=sha(a.output/'observed_prompt.png'),
                 output_sha256=sha(a.output/'output.pt'),glyphs=len(value['images']),stopped=value['stopped'],
                 capped=value['capped'],source=provenance,actual_emitted_pixel_feedback=True,
                 actor_loading_wall_seconds=load_seconds,generation_wall_seconds=generation_seconds,

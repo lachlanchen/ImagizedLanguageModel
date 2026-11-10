@@ -141,3 +141,22 @@ reviewer's `--stage score`. The registration links both reviews and preserves
 canonical equality, clear literal readings, natural stopping and caps as
 separate measures. None of these new 36,000-update inference/answer stages has
 yet run: the real-state cache is still in progress.
+
+After all 72 candidate streams finish and the project GPU worker exits, run
+the separate standalone verifier with CUDA hidden in its parent process:
+
+```bash
+CUDA_VISIBLE_DEVICES='' python scripts/verify_natural_first_cold_inference.py \
+  --run artifacts/natural_first_answer_assay_v1/natural_writer \
+  --output artifacts/natural_first_writer_cold_v1
+```
+
+It selects the first reserved input regardless of its answer quality, traces
+the actual inference child, and compares all images, states, stop decisions,
+feedback records and PNG bytes with that assessment stream. Its
+[protocol](../references/natural_first_cold_inference_protocol.md) additionally
+rejects undeclared files under the project artifact tree. The access checker
+has been run against the preserved real parent's cold trace, and unfinished
+candidate rejection has been verified without a model call or output directory.
+Those checks do not constitute a new candidate replay. The completed natural
+checkpoint must still undergo actual standalone generation and answer review.
