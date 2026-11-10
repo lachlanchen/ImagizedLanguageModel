@@ -24,7 +24,8 @@ def audit_surface():
             command=(path/'cmdline').read_bytes().replace(b'\0',b' ').decode(errors='replace')
         except (FileNotFoundError,PermissionError,ProcessLookupError):continue
         if cwd==ROOT or ROOT in cwd.parents:
-            if any(word in command.split()[:2] for word in ['soffice','latexmk','pdflatex','xelatex','lualatex','blender']):
+            if any(Path(word).name in ['soffice','soffice.bin','latexmk','pdflatex','xelatex','lualatex','blender']
+                   for word in command.split()[:2]):
                 owned.append(int(path.name))
     require(not owned,'preserve an already running project publication/GUI job')
     def probe(command):
@@ -63,9 +64,11 @@ def build_slot():
 
 def owned_command(command,cwd,log,timeout=180):
     """Bound and clean up only this exact command's new process group."""
+    minimum=host_resources()['available_gib']
+    require(minimum>=24.,'publication child needs24 GiB live RAM reserve')
     with Path(log).open('x') as stream:
         process=subprocess.Popen(command,cwd=cwd,stdout=stream,stderr=subprocess.STDOUT,start_new_session=True)
-        began=time.monotonic();minimum=float('inf')
+        began=time.monotonic()
         try:
             while process.poll() is None:
                 observed=host_resources();minimum=min(minimum,observed['available_gib'])
