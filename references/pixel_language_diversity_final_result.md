@@ -89,9 +89,10 @@ historical forms and long-form writing are not evaluated here.
 
 More unchanged fitting is not the next intervention. The
 [first-image likelihood diagnostic](pixel_language_first_block_diagnosis.md)
-is CPU-prepared for all four fixed states. Neural execution is pending. It
-will compare reference-image likelihood under paired questions and compare
-each reference with the saved greedy image. This tests conditional preference
-and a possible greedy-decoding failure before selecting a new learning or
-decoding method. The criterion remains readable, correct, complete answers
-to unseen image prompts.
+has now [completed at all four fixed states](pixel_language_first_block_likelihood_result.md).
+Every provided correct development first image is less likely than the saved
+emission, despite some transferred paired-question preference. This does not
+support a decoding-only repair for the fixed references. The next controlled
+check measures the inherited reader itself before changing the learned
+readout. The criterion remains readable, correct, complete answers to unseen
+image prompts.

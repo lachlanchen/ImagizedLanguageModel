@@ -1,0 +1,76 @@
+{
+  "preparation_sha256": "cd2848640368b9388d553e9527ad89ae8c690bd709084697f3d614f3364c87f2",
+  "source_commit": "a7ce718642f5567a6c374c67478e0d2a2abe0f9d",
+  "code_sha256": {
+    "ilm/visual_lm/native_pixel_language.py": "249d47b01b06f51605ffbd6c9955e13cc1a9697f4b6eedf42f34f0227e295fef",
+    "ilm/visual_lm/fp64_pixel_density.py": "cf587f5b26d3063b97c577d508c85aba10d16445c2e09c57627bb95585b5a911",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/adaptive_image_continuation.py": "9d838d371ea34ed3c642d51853f55f2cab8db43772424414e207355f29854b65",
+    "ilm/visual_lm/native_image_continuation.py": "ba5b31bd95b594693ab78140f75170b1367b58ef940c6bfa941633443cb7a5e3",
+    "ilm/visual_lm/native_image_actor.py": "8c8a31365c1a2114a713d35af5c2200dfbcf0023be8f9e2f5e9d795891866cf5",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+    "ilm/visual_lm/suffix_attention_mask.py": "1182d7103759ef75bea1bc414ec2639b71bfee43147dd442f374c451c072f504",
+    "ilm/visual_lm/clean_writing_flow.py": "5e52da7fe71abb4cc214c1de11a591b33d06005e8711583e651a9a7965429889",
+    "ilm/visual_lm/semantic_writing_model.py": "83a9dbad1867e1b6fc2cce0fd5e95e4f91a482c2ddba85c65be3e78a5a77e479",
+    "ilm/visual_lm/complete_pixel_runtime.py": "c2d89d6ce757ba7145ca1fc4471b94a58a04ce056642dbf971806fb13acf37a8",
+    "ilm/visual_lm/pixel_language_diversity.py": "c117aaebd86e41b8ac06bc2a3ee7bdd87403cb82c5f4cd75af24ee8524b70fd9",
+    "ilm/visual_lm/complete_pixel_training.py": "4263e8a3b3982301a8c32c9f2ddc62d949fb0a1f177468d9e49751a162e59c19",
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "scripts/train_pixel_language_diversity.py": "ce2fe610d021157be964eabca7bfc4ef185a35c0cbd086d5fe220aa847e11eb3",
+    "scripts/audit_pixel_language_diversity.py": "a3eedef93db6eea155f1f3a09261a15917a32766356a35aa00d121741879be8a",
+    "scripts/train_complete_pixel_language.py": "4f3cb6c4113c063b2c0d7234e0626654acfaeed69d282a0b063f2cd3be494772",
+    "scripts/train_conditional_pixel_density.py": "32f5a0767ac0161220f944cc4746995871d3d5a65ce61687b0110aa24c142d74",
+    "scripts/preflight_native_pixel_actor.py": "a45aa74ad250975763309cf2aa65e8d06654fb229f0b074a8812f9cb69ff7da2",
+    "references/pixel_language_diversity_training_protocol.md": "4de0b5252727e629d8612da941a26d1fad4268be24541094acdb61e0a59a7606",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c"
+  },
+  "states": [
+    {
+      "update": 0,
+      "checkpoint": "artifacts/native_pixel_numerics_v1/execution/initial_actor.pt",
+      "checkpoint_sha256": "e3949fc68937affb19e0ec22386b577f702dfb9e45b07f10c6d6cca735a160d6",
+      "assessment": "artifacts/pixel_language_diversity_training_v2/execution/assessment_00000/report.json",
+      "assessment_sha256": "2ae443ddea5602c5dab478d6abd737c473cf98195952113896f612808fba9140",
+      "model_sha256": "e9e18112296bb553fd78569d564c7a0a1ecf8e4b3476cd0eb67402051ac2da07"
+    },
+    {
+      "update": 4000,
+      "checkpoint": "artifacts/pixel_language_diversity_training_v2/milestone_models/actor_update04000.pt",
+      "checkpoint_sha256": "d7350337541c27253ab0f2a85afb531747f17679023468f64328ffebc7760a1f",
+      "assessment": "artifacts/pixel_language_diversity_training_v2/execution/assessment_04000/report.json",
+      "assessment_sha256": "ca0da0f82949167e4818b3e224237decb922d9c026e501db418484bb4cd0df78",
+      "model_sha256": "5b803f65fc5e52b8d91d68602f6b565a4982d14f551f9cd648a7c29489082bed"
+    },
+    {
+      "update": 8000,
+      "checkpoint": "artifacts/pixel_language_diversity_training_v2/milestone_models/actor_update08000.pt",
+      "checkpoint_sha256": "126f232de39e0344baaa898b608ef3c0751b38da9084485056e1646a1b55662d",
+      "assessment": "artifacts/pixel_language_diversity_training_v2/execution/assessment_08000/report.json",
+      "assessment_sha256": "a62436a9d093e218945fa674c7763433ff1994b5e42b49940102ead1fbd65838",
+      "model_sha256": "e1dd7ab599b80798e4e3f73d493979ed0cb1dc19ce553b745fb4b647868aa829"
+    },
+    {
+      "update": 16000,
+      "checkpoint": "artifacts/pixel_language_diversity_training_v2/execution/checkpoint_latest.pt",
+      "checkpoint_sha256": "766f8d5138f5d52c4678ea4d831b5462aa67d629d399bd7e2b80df58c55febc5",
+      "assessment": "artifacts/pixel_language_diversity_training_v2/execution/assessment_16000/report.json",
+      "assessment_sha256": "65ca110d535ab46ee5248706bc2cca79c2b9ce69a32a79a049266d2566e751e9",
+      "model_sha256": "0a86cb0b796ab0b10c8e2e57fa38c7b6ee1b3bfb65db059f36d1b72875566328"
+    }
+  ],
+  "common_jobs": 112,
+  "training_jobs": 64,
+  "development_jobs": 48,
+  "unique_reference_first_images": 88,
+  "paired_passages": 40,
+  "prepared_reference_image_paths_never_used_as_model_inputs": true,
+  "queries_sha256": "94f35d834cb4105a4be6a56b7dc78ce7cf695c922d5ddab261817b9416d52a4f",
+  "queries_retained_locally_not_duplicated": true
+}

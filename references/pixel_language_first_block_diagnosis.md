@@ -99,7 +99,7 @@ candidates under the same condition, but not between different questions.
 Stopping after an emitted image is a separate, image-dependent decision and
 is not included in this first-block head likelihood.
 
-The current CPU analysis makes zero neural forward calls, optimizer updates
+The saved-prefix CPU analysis makes zero neural forward calls, optimizer updates
 or new output images. It consumes the earlier complete tensor/PNG audits,
 checks the original PNG receipts and reference hashes, and compares every
 registered saved response. The
@@ -128,7 +128,9 @@ fingerprints agree between those two states for every prepared input. An
 actual invocation of its neural command against the live trainer refuses
 before importing PyTorch and creates no scoring execution directory. The
 [preparation receipt](evidence/pixel_first_block_likelihood_preparation.json)
-records these checks. **The neural path has not yet been executed or validated.**
+records those original CPU-only checks. The neural path has now completed at
+all four fixed states; the [actual likelihood results](pixel_language_first_block_likelihood_result.md)
+retain its cold-query and greedy-decision replay checks and measured scores.
 
 Preparation binds source files, owning learned states, original prompt PNGs,
 saved output receipts and all selected references. No frozen model weights
