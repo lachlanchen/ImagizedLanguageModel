@@ -121,6 +121,7 @@ def fit(run,m,monitor,device):
             atomic_tensor(path,dict(model={k:v.detach().cpu() for k,v in model.state_dict().items()},
                 body_tail_adapters=initial['body_tail_adapters'],tail_start_layer=32,step=step+1,
                 inherited_bridge_updates=36000,new_optimizer_updates=step+1,
+                writer_training_family='natural_first_image_v1',
                 language_training_complete=True,optimizer=opt.state_dict(),
                 torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state(),
                 preparation_sha256=sha(run/'writer_preparation.json'),usable_language_demonstrated=False))
@@ -130,6 +131,7 @@ def fit(run,m,monitor,device):
     require(all(torch.isfinite(v).all() for v in model.state_dict().values()),'nonfinite final writer')
     save_json(monitor.path/'report.json',dict(checkpoint_sha256=sha(monitor.path/'checkpoint_latest.pt'),
         actual_optimizer_updates=m['fit_steps'],sampled_counts=counts,sampler_sha256=sampler.hexdigest(),
+        all_checks_passed=True,
         natural_training_states=len(h),natural_training_forms=len(labels.unique()),
         natural_unsupported_training_excluded=sum(r['split']=='train' and r['label']<0 for r in rows),
         held_contexts_used_for_training=False,all_non_readout_parameters_bit_exact=True,

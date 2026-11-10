@@ -27,14 +27,14 @@ def main(run):
             elapsed_seconds=time.monotonic()-began,**extra))
     try:
         while True:
-            require(time.monotonic()-began<36000,'pipeline waiting deadline')
+            require(time.monotonic()-began<50400,'pipeline waiting deadline')
             attempts=sorted((run/'cache/attempts').glob('*/status.json'))
             require(attempts,'start the registered real-cache job first')
             cache_status=load(attempts[-1])
             if cache_status['phase']=='failed' and cache_status['pid'] is None:
                 reason=cache_status.get('reason','')
                 resumable=any(s in reason for s in ['distillation stage time cap','distillation pressure wait exhausted'])
-                require(resumable and len(attempts)<3,'cache failed; preserve attempt and inspect: '+reason)
+                require(resumable and len(attempts)<4,'cache failed; preserve attempt and inspect: '+reason)
                 # The original cache verifies identical frozen model/data/code
                 # hashes and every retained shard. No optimizer state exists.
                 waiting=time.monotonic();stable=0
