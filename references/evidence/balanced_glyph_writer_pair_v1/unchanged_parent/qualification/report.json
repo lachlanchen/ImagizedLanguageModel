@@ -1,0 +1,104 @@
+{
+  "code_sha256": {
+    "scripts/assess_glyph_tail_adapter.py": "d2d487622b912d9e43b70b1593034293a3882c2130075bb51dc9d17878118011",
+    "references/glyph_tail_assessment_protocol.md": "716a95590a3d59a16c63552ad35adec21c37fd5304c2b264707936344f1641c7",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "ilm/visual_lm/glyph_tail_adapter.py": "b0be8681d8ecfbc6f0c0bdc8f61ed0969b4bdf336cffab9119afaa83603532f0",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "references/glyph_reader_execution_protocol.md": "3f4720b844573a82a3219f20cd5ff8d1a2063495e777370fa8861b8a87f9dafa",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae"
+  },
+  "checkpoint_sha256": "5c434a9a9b0c6ddc0c3fe4005265e4f8ca5b7d0add9a74a80ed371806fa71085",
+  "training_mean_f1": 0.9635243432998283,
+  "copy_held_mean_f1": 0.9573656740765941,
+  "copy_held_fraction095": 0.8125,
+  "terminal_correct": 3130,
+  "terminal_cases": 3176,
+  "continue_correct": 23030,
+  "continue_cases": 23262,
+  "copy_nonstop_fraction": 0.99609375,
+  "readout_gate_passed": false,
+  "copy_inputs_run_through_actual_adapted_full_body": true,
+  "raw_outputs_sha256": {
+    "training_outputs.pt": "f661cf16c6b188a2d73ab7ae8ca53a89bb13da9b2475c311ac15d07d3680facb",
+    "copy_held_outputs.pt": "eef1f3681ba3e3ddf875beb8b4a85f7d356db0921b6fd2c49536472c3acbbecb"
+  },
+  "boards": [
+    "training_00.png",
+    "training_01.png",
+    "training_02.png",
+    "training_03.png",
+    "copy_held_00.png",
+    "copy_held_01.png",
+    "copy_held_02.png",
+    "copy_held_03.png"
+  ],
+  "autonomous_language_accuracy": false,
+  "provenance": {
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "retained_native_tensors": 748,
+    "retained_base_parameters": 7522463984,
+    "configurations": {
+      "text": {
+        "vocab_size": 0,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "num_hidden_layers": 36,
+        "num_attention_heads": 32,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 262144,
+        "rope_theta": 5000000.0,
+        "rope_scaling": {
+          "rope_type": "default",
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "mrope_interleaved": true
+        },
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "vision": {
+        "depth": 27,
+        "hidden_size": 1152,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "in_channels": 3,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2,
+        "out_hidden_size": 4096,
+        "num_position_embeddings": 2304,
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "hidden_act": "gelu_pytorch_tanh"
+      }
+    },
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "external_pretraining": true,
+    "vocabulary_parameters_materialized": 0,
+    "fixed_controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "source_derived_fixed_task_controls": true
+  },
+  "elapsed_seconds": 971.317544057034,
+  "resource_wait_seconds": 200.18909866455942,
+  "peak_allocated_vram_gib": 17.786023139953613,
+  "minimum_available_gib": 67.24662017822266,
+  "pressure_wait_allowance_seconds": 1800.0,
+  "stage_deadline_checked_during_pressure_wait": true
+}
