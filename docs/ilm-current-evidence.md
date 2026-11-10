@@ -84,6 +84,14 @@ A CPU supervisor waits for the exact cache process to exit, then runs fitting
 and qualification sequentially. It stops before image review and never retries
 failed stages or weakens their gates.
 
+A [separate C3 reading cohort](../references/c3_visual_reading_preparation.md)
+was prepared before this run's qualification:16passages,64image inputs, with
+original/rotated options and letter/full-phrase instructions. All input preview
+boards were inspected. It is excluded from current adaptation and has no model
+result yet; inherited-body pretraining exposure is unknown. It is intended to
+check broader reading and complete phrase writing after the current gates,
+without treating letter selection as a substitute for image-language generation.
+
 [Failure localization](../references/pixel_language_source_reader_result.md) ·
 [Motor diagnosis](../references/semantic_glyph_motor_diagnosis.md) ·
 [Decoder test](../references/robust_glyph_decoder_result.md) ·
