@@ -27,11 +27,29 @@ def main(run):
             elapsed_seconds=time.monotonic()-began,**extra))
     try:
         while True:
-            require(time.monotonic()-began<14400,'pipeline waiting deadline')
+            require(time.monotonic()-began<36000,'pipeline waiting deadline')
             attempts=sorted((run/'cache/attempts').glob('*/status.json'))
             require(attempts,'start the registered real-cache job first')
             cache_status=load(attempts[-1])
-            if cache_status['phase']=='failed':raise RuntimeError('cache failed; preserve attempt and inspect: '+cache_status.get('reason',''))
+            if cache_status['phase']=='failed' and cache_status['pid'] is None:
+                reason=cache_status.get('reason','')
+                resumable=any(s in reason for s in ['distillation stage time cap','distillation pressure wait exhausted'])
+                require(resumable and len(attempts)<3,'cache failed; preserve attempt and inspect: '+reason)
+                # The original cache verifies identical frozen model/data/code
+                # hashes and every retained shard. No optimizer state exists.
+                waiting=time.monotonic();stable=0
+                while stable<3:
+                    require(time.monotonic()-waiting<1800,'cache recovery pre-admission deadline')
+                    r=host_resources();stable=stable+1 if (r['available_gib']>=48 and r['some_pressure_avg10']<=.5 and r['full_pressure_avg10']<=.1) else 0
+                    status('waiting_for_frozen_cache_resume',resources=r,previous_attempt=str(attempts[-1].relative_to(run)))
+                    time.sleep(5)
+                command=[sys.executable,str(ROOT/'scripts/cache_natural_first_states.py'),'--stage','cache','--run',str(run)]
+                with (folder/f'cache_resume_{len(attempts):02}.log').open('x') as stream:
+                    active=subprocess.Popen(command,cwd=ROOT,env=dict(os.environ),stdout=stream,stderr=subprocess.STDOUT)
+                    while active.poll() is None:
+                        status('resuming_frozen_cache',child_pid=active.pid);time.sleep(2)
+                    active=None
+                continue
             if cache_status['phase']=='completed' and cache_status['pid'] is None:
                 require((run/'cache/report.json').exists(),'cache completed without final report');break
             status('waiting_for_existing_cache',cache_attempt=str(attempts[-1].relative_to(run)),
