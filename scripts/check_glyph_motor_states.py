@@ -71,9 +71,9 @@ def main(output,decoder):
         atomic_tensor(output/'all_outputs.pt',dict(ink=emitted))
         methods=list(emitted);boards=[]
         for start in range(0,len(states),10):
-            canvas=Image.new('L',(720,10*78),245);draw=ImageDraw.Draw(canvas)
+            canvas=Image.new('L',(720,10*104),245);draw=ImageDraw.Draw(canvas)
             for j in range(start,min(start+10,len(states))):
-                r=report['records'][j];y=(j-start)*78
+                r=report['records'][j];y=(j-start)*104
                 draw.text((4,y),f"{r['split']} {r['index']} {r['route']}",fill=0)
                 for col,key in enumerate(methods):
                     x=col*176;draw.text((x+4,y+13),key,fill=0)
