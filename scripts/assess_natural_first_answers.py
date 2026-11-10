@@ -51,6 +51,8 @@ def verify_registration(common):
 def bind(common):
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','CPU-only checkpoint binding')
     m=verify_registration(common);code=identity();writer=ROOT/m['candidate_run']
+    require(all((writer/name).is_file() for name in ['writer_preparation.json','fit/report.json','qualify/report.json']),
+            'complete the registered natural writer fit and first-image qualification before binding answers')
     from scripts.train_natural_first_writer import verify
     w=verify(writer);fit=load(writer/'fit/report.json');q=load(writer/'qualify/report.json')
     require(load(writer/'fit/status.json')['phase']=='completed' and fit['actual_optimizer_updates']==36000
@@ -68,12 +70,15 @@ def bind(common):
     require(a['writer_training_family']=='natural_first_image_v1' and a['step']==36000
         and a['new_optimizer_updates']==36000 and a['language_training_complete'],'wrong candidate family or completion')
     trained=[n for n in a['model'] if n.startswith('readout.')]
+    changed=[n for n in trained if not torch.equal(a['model'][n],b['model'][n])]
+    require(changed,'no trained writer tensor changed')
     require(all(torch.equal(v,b['model'][n]) for n,v in a['model'].items() if n not in trained),'frozen bridge changed')
     require(all(torch.equal(v,b['body_tail_adapters'][n]) for n,v in a['body_tail_adapters'].items()),'body adapters changed')
     steps=[int(v['step']) for v in a['optimizer']['state'].values()]
     require(len(steps)==len(trained) and set(steps)=={36000},'actual writer optimizer counters differ')
     audit=dict(checkpoint_sha256=sha(candidate),parent_sha256=sha(parent/'fit/checkpoint_latest.pt'),
         actual_AdamW_tensor_steps=steps,only_readout_changed=True,body_deltas_bit_exact=True)
+    audit['changed_readout_tensors']=changed
     bindings=dict(m['bindings_sha256'])
     for p in [common/'registration.json',common/'input_review.json',writer/'writer_preparation.json',
               writer/'fit/report.json',writer/'qualify/report.json',writer/'qualify/visual_review.json',
