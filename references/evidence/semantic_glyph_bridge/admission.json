@@ -5,46 +5,11 @@
     "some_pressure_avg10": 0.0,
     "full_pressure_avg10": 0.0
   },
-  "project_processes": [
-    {
-      "pid": 2097918,
-      "command": "bash "
-    },
-    {
-      "pid": 2104242,
-      "command": "python3 /home/lachlan/.local/lib/agentshell/codex-startup /home/lachlan/.nvm/versions/node/v22.21.0/lib/node_modules/@openai/codex/bin/codex.js -s danger-full-access -a never resume --cd /home/lachlan/ProjectsLFS/ImagizedLanguageModel 0199ccd2-4fa9-7f22-a459-d06d33a1569e "
-    },
-    {
-      "pid": 2104622,
-      "command": "/home/lachlan/.nvm/versions/node/v22.21.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex --no-daemon -s danger-full-access -a never resume --cd /home/lachlan/ProjectsLFS/ImagizedLanguageModel 0199ccd2-4fa9-7f22-a459-d06d33a1569e "
-    },
-    {
-      "pid": 2106230,
-      "command": "/usr/lib/chatgpt/resources/cua_node/bin/node_repl "
-    },
-    {
-      "pid": 2106231,
-      "command": "/usr/lib/chatgpt/resources/cua_node/bin/node /home/lachlan/.local/share/agentshell/profiles/lab/codex-shared-home/plugins/cache/openai-bundled/unified-computer-use/26.903.71938/scripts/launch.mjs "
-    },
-    {
-      "pid": 2106311,
-      "command": "/usr/lib/chatgpt/resources/cua_node/bin/node_repl "
-    },
-    {
-      "pid": 2120483,
-      "command": "/home/lachlan/.nvm/versions/node/v22.21.0/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host "
-    },
-    {
-      "pid": 2531908,
-      "command": "/bin/bash -c CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python -u scripts/train_semantic_glyph_bridge.py --stage train --output artifacts/semantic_glyph_bridge_v1 > artifacts/semantic_glyph_bridge_v1_train.log 2>&1 "
-    },
-    {
-      "pid": 2531909,
-      "command": "python -u scripts/train_semantic_glyph_bridge.py --stage train --output artifacts/semantic_glyph_bridge_v1 "
-    }
-  ],
   "mode": "separate_small_bridge_training_RAM_and_pressure_protocol",
   "original_training_admission_unchanged": true,
   "foreign_processes_changed": false,
-  "high_global_swap_occupancy_recorded": true
+  "high_global_swap_occupancy_recorded": true,
+  "original_local_admission_sha256": "e1a1baea0e395b46181f7254df15aa700a057a97f81afab60ec6250a1d5b730d",
+  "project_process_inventory_checked": true,
+  "project_processes_observed": 9
 }
