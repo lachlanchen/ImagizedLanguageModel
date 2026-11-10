@@ -1,10 +1,15 @@
 # Contextual adaptation for image-language generation
 
-The current candidate trains the final four attention layers and the glyph
-writer together. Its purpose is to repair the mismatch exposed by the
-[native-step comparison](../references/glyph_feedback_ceiling_result.md).
-It is not yet a demonstrated usable language model. The main cache, fit,
-qualification and complete-answer assessment have separate receipts.
+The completed candidate trains the final four attention layers and the glyph
+writer together. It gives **16/32 clear complete answers**, versus **11/32**
+for the fixed-body control, on prospectively reserved Chinese questions.
+Both miss the preset pilot and training-pixel gate. The
+[paired result](../references/glyph_tail_paired_answers_result.md) retains
+every answer and failure. This is partial language transfer, not a validated
+usable general model. The main cache, fit, qualification and complete-answer
+assessment have separate receipts. The earlier
+[native-step comparison](../references/glyph_feedback_ceiling_result.md)
+diagnoses feedback mismatch but does not explain all initial-glyph errors.
 
 The authenticated body has 36 layers. Let the full causal sequence contain the
 prompt image features followed by the reference glyph images' feedback vectors.
@@ -87,11 +92,11 @@ with CPU `--stage audit` before GPU `--stage run`, an unused recovery folder,
 and no live fit or coordinator. The 18,000-step schedule and assessment remain
 unchanged. An intermediate checkpoint is rejected by standalone inference.
 
-During this recovery, live progress is in
+Historical recovery progress remains in
 `artifacts/glyph_tail_adaptation_v2/fit_recovery_02/status.json` and its
-`history.jsonl`. The original failed `fit/status.json` and coordinator receipt
-stay preserved until recovery publishes the completed final fit. Periodic
-recovery checkpoints are training state, not qualified inference releases.
+`history.jsonl`. The original failed attempts remain preserved; the completed
+canonical `fit/status.json` now reports completion. Partial checkpoints are
+training state, not qualified inference releases.
 
 The fixed fit has now completed. An independent CPU
 [checkpoint audit](../references/evidence/glyph_tail_final_fit_v2/checkpoint_audit.json)
@@ -145,7 +150,10 @@ it can run the real standalone CLI with empty working/model-cache directories,
 audit file/network access and compare all output tensors, stopping, feedback
 and PNG bytes. The [cold replay protocol](../references/glyph_tail_cold_inference_protocol.md)
 separates that independence check from answer accuracy. A replay verification
-is not yet claimed for the still-training candidate.
+has actually completed for `glyph_tail_adaptation_v2`, with all pixels,
+states, stop decisions, feedback and PNG bytes identical. Its trace contains
+no prohibited bank/font/corpus access or IP connection attempt. This result
+is limited to the fixed first reserved input.
 
 After both conditions are reviewed and scored,
 `scripts/archive_glyph_tail_pair.py --output references/evidence/my_glyph_pair`
@@ -153,3 +161,15 @@ packages all 144 actual answer images, 52 review boards and losslessly packed
 qualification pixels. It verifies all saved physical F1/exact scores and
 copies the dataset notice. Failed cases remain present; large state tensors
 and raw system-call traces remain local with their recorded hashes.
+
+The subsequent [balanced writer protocol](../references/balanced_glyph_writer_protocol.md)
+freezes the learned reader and gives first and later target positions equal
+loss weight in larger batches. Its complete cache reproduces all 23,262 parent
+training pixel scores and stopping counts. The 18,000-update refinement at
+`artifacts/balanced_glyph_writer_v1` takes 156.38 s, including 20.02 s pressure
+waiting, at 1.096 GiB peak allocation. The inherited model and earlier fitting
+costs remain part of the method. An independent tensor audit confirms actual
+optimizer counters and bit-identical frozen image modules and body adapters.
+Qualification and a newly reserved context cohort still determine whether it
+improves language generation. The original reserved cohort is now development
+evidence and is not relabelled as a fresh test for this repair.

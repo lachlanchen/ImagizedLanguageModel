@@ -20,7 +20,34 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current result: a bounded image-language loop works; general answering remains unreliable
+## Current result: partial image-language transfer, with substantial failures
+
+The completed [paired Chinese answer test](references/glyph_tail_paired_answers_result.md)
+produces **16/32 clear complete correct answers** with contextual adaptation,
+versus **11/32** when only the image writer and stopping head train. Both
+questions are correct within **5/16 versus 2/16** new contexts. Strict canonical
+image equality is **2/32 versus 1/32**. Neither condition passes the preset
+answer pilot or training-pixel qualification. All **144 actual answer streams**,
+including damaged and capped failures, are [archived](references/evidence/glyph_tail_paired_answers_v2/archive.json).
+
+![The first four reserved outputs, including damaged forms and a capped failure](references/evidence/glyph_tail_paired_answers_v2/contextual/fresh_normal_00.png)
+
+*Actual unrepaired pixels in fixed question order. Readability, literal answer
+matching, canonical pixel equality and natural stopping are separate measures.
+The model retains a **7.522B externally pretrained visual/contextual body**;
+small adapted parameter counts do not make it a small foundation trained from
+scratch. Standalone image-only inference passes a one-input cold replay with
+no runtime lexical, font or answer-bank access.*
+
+[Run image-only inference and reproduce training](docs/glyph-tail-adaptation.md).
+The [failure diagnosis](references/glyph_generation_diagnosis_20261111.md)
+separates initial answer selection, coherent glyph writing and feedback drift.
+A new [balanced writer experiment](references/balanced_glyph_writer_protocol.md)
+has completed its fixed fit and is under qualification; new-context language
+results are not yet available. No general working ILM or matched-quality
+efficiency advantage is claimed.
+
+## Earlier bounded results
 
 The [complete-glyph model](references/semantic_glyph_language_result.md) reads
 question images and generates answer pixels with learned stopping. It produces
@@ -56,11 +83,9 @@ gets **12/16** literal source answers with native steps versus **3/16** with
 character steps, even using exact character vectors. Simply replacing a source
 unit with one glyph does not preserve that source policy.
 
-The [current training candidate](docs/glyph-tail-adaptation.md) adapts the final
-four attention layers and writer on **3,176 Chinese training questions**. Its
-causal split and two real gradient updates pass preflight at **3.208 GiB**;
-that is a resource check, not a language result. Full training and the reserved
-complete-answer assessment remain required. No general working ILM is claimed.
+The subsequent contextual adaptation uses **3,176 Chinese training questions**
+and **18,000 updates**. Its completed paired language result is reported above;
+the **3.208 GiB** two-update preflight is a separate implementation check.
 
 ## Earlier writing experiments
 
