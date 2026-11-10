@@ -1,0 +1,36 @@
+{
+  "summary": {
+    "baseline/synthetic": {
+      "count": 4087,
+      "mean_f1": 0.3339692172299271,
+      "pixel_exact": 1,
+      "fraction_f1_at_least_095": 0.00024467824810374357
+    },
+    "baseline/genuine": {
+      "count": 774,
+      "mean_f1": 0.8960066083674283,
+      "pixel_exact": 638,
+      "fraction_f1_at_least_095": 0.8320413436692506
+    },
+    "distilled/synthetic": {
+      "count": 4087,
+      "mean_f1": 0.489500271973132,
+      "pixel_exact": 0,
+      "fraction_f1_at_least_095": 0.00024467824810374357
+    },
+    "distilled/genuine": {
+      "count": 774,
+      "mean_f1": 0.795106214752724,
+      "pixel_exact": 115,
+      "fraction_f1_at_least_095": 0.3875968992248062
+    }
+  },
+  "compiler_gate_passed": false,
+  "records_sha256": "392f681c09d3f599356f3473457309310c5aa13353fa66ef68b5cfdc082d0f70",
+  "language_assessed": false,
+  "heldout_calibration_is_not_language_understanding": true,
+  "elapsed_seconds": 3.332114076241851,
+  "resource_wait_seconds": 0.0,
+  "peak_allocated_vram_gib": 0.22992992401123047,
+  "minimum_available_gib": 56.96034240722656
+}
