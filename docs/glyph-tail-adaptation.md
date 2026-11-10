@@ -128,3 +128,11 @@ binds both original bytes and observed pixels. This preprocessing uses no OCR,
 font or language interpretation. The registered assessment continues to use
 its identical prepared images. Fixed numeric source-derived task controls
 are authenticated before the body loads; they are not a glyph inventory.
+
+`scripts/verify_glyph_tail_cold_inference.py` fixes its replay input as the
+first reserved question, before outputs are known. After the complete assay,
+it can run the real standalone CLI with empty working/model-cache directories,
+audit file/network access and compare all output tensors, stopping, feedback
+and PNG bytes. The [cold replay protocol](../references/glyph_tail_cold_inference_protocol.md)
+separates that independence check from answer accuracy. A replay verification
+is not yet claimed for the still-training candidate.
