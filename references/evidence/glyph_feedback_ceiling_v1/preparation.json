@@ -1,0 +1,242 @@
+{
+  "code_sha256": {
+    "scripts/diagnose_glyph_feedback_ceiling.py": "890a5a1456eecc075dd8c5ae7a3bf38737fd0c283bab40aecb9ae3da571108d0",
+    "references/glyph_feedback_ceiling_protocol.md": "1ad444e837312458c3ca207d73b4e5e18ea674061b7c48e7cb4cb2dfc3347878",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "scripts/check_native_visual_transfer_v71.py": "996d755ab9e0a85e4d67b28f78649a49091141dc3d31970a388ebdf984e71ab5",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c"
+  },
+  "bindings_sha256": {
+    "artifacts/semantic_glyph_language_v1/preparation.json": "4e7dc741ce38d4e6b3d10c20b0271b8980ca308d372a8a3df8e5f2955ab22b69",
+    "artifacts/pixel_language_diversity_v1/manifest.json": "f4b75deb2f20ff9eeffa3b0dfacb9fc376adf9754d2b420416951b2fd0d9fb79",
+    "artifacts/semantic_glyph_readout_distillation_v1/mapping.json": "cf0a0d3ed785ee70b14f8ba537b2d9a6ef7106d91342ac451202f8794b1d9e49",
+    "artifacts/direct_pixel_readout_v1/g_only/preparation.json": "ec9d47cb0183f1ef2026b4ff0e10b9f792cf67c87775670f186d631b70baa7f6",
+    "artifacts/direct_pixel_readout_v1/g_only/fit/report.json": "0237b62aa50f4cdae15c480e48307e8527a0dc651cecdcce2250490dd72fa571",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/report.json": "ba159d7e00eb6fe788f7319b9ec92d688f1d4045131707513127e0f91ae77908",
+    "artifacts/direct_pixel_readout_v1/g_only/raw_review/manual_review.json": "2ba4e638e7723726c8841abcd7f5aede74ea76f7b731af5168dff141f7c2b554",
+    "artifacts/direct_pixel_readout_v1/g_only/raw_review/canonical_scores.json": "c785ff384c2375c670307ff0440f3601c5e2a9925e5dcda5c667d169a59165fc",
+    "artifacts/semantic_glyph_bridge_v1/training.pt": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+    "artifacts/semantic_glyph_bridge_v1/inventory.json": "da21053e92f2ed17adfc6e970c2e20a3624a0af5fabb671aa48a3141a65dec1f",
+    "artifacts/semantic_glyph_bridge_v1/preparation.json": "6784e57c5aeab4cbe4a812523a753256f47f7a1378c3f11d0d8ad9cb16daaba4",
+    "artifacts/direct_pixel_readout_v1/g_only/fit/checkpoint_latest.pt": "c19431b2935fcbdca8ae71dd362f747ed7aeb571744c363ae97536eb4edb1c33",
+    "artifacts/pixel_language_diversity_v1/train/0000/prompt.png": "4653856c74aa3c05205273cc4d66ef61c67d86b58b59bdc3eb0a4ec634a92a0b",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0000_normal.pt": "f366929c3108ceacbe688dcdb8eaaccc37308ba4ca7e5b456e66961d7303c089",
+    "artifacts/pixel_language_diversity_v1/train/0001/prompt.png": "6d12d11455269d6a0d09f1c7af1dadbe96a6d8914db901b675d0362ec53f2118",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0001_normal.pt": "9a48f679e5a9d478e513b41ddf9e32e885daa0549b90e4decccff71277e4ad3e",
+    "artifacts/pixel_language_diversity_v1/train/0002/prompt.png": "041a25c0fa8792768ab63f258f37900b66bd2a798eab826190b23e8fa88ba8cd",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0002_normal.pt": "769e69df4274b621630aba58555c5ed0b214bb6e42e0ba56fc70888946b373ce",
+    "artifacts/pixel_language_diversity_v1/train/0003/prompt.png": "d7ed6ccb5580e4847bc1027875b0f22041bb50b9ea657b3aa95e6e09f50b3de3",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0003_normal.pt": "bf5a2b72481567523603856a9c15d143839043535f87427f691a96e3f2e76f2c",
+    "artifacts/pixel_language_diversity_v1/train/0004/prompt.png": "5646e3e4339c68bb9157321a207480b5307c7533c069505b369eee51f172ba8f",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0004_normal.pt": "dd0c3d8425fc5182d1c581bbe04ccc2e6ecbd32354cfd372c0cbe6dd7b4721e6",
+    "artifacts/pixel_language_diversity_v1/train/0005/prompt.png": "c638196042691866c6967c510f154ca55d576b5fe1ad16c142d1794736a3f78b",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0005_normal.pt": "ae227fc88a2b3ca17e60b6c407ff9c5c64f7e3b863aed95906641c00b3535c6c",
+    "artifacts/pixel_language_diversity_v1/train/0006/prompt.png": "bee1f2301f376a6fce5a72aaef2543ca005ae1a9128fd6f076f6679937d1ce13",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0006_normal.pt": "b3762b3964ae279f395899c16513e3399688d364dbb61c5047603387e2c32be1",
+    "artifacts/pixel_language_diversity_v1/train/0007/prompt.png": "796537ab9070ec636055f9ac85c4866f14b0e9588e8588da11a8072a40e2f9d8",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0007_normal.pt": "9a7c0a01b328122e3650632b60005575f5642b36a4683c2e848e2a796c652a86",
+    "artifacts/pixel_language_diversity_v1/development/32/normal.png": "bb82d230eea55c5848f4a813089e0ec2894adbe7ef394bea9ade8f2fee9b2a29",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0000_normal.pt": "ea772b9d6b9ae75b868fac752cda9b4172fa99d789241eecdaac64abc03ebbba",
+    "artifacts/pixel_language_diversity_v1/development/33/normal.png": "25e91df2fbb36286cbc3671bb7f4266fca1c44cd6dcdb7921a598415392536f7",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0001_normal.pt": "1c90b8e364640cdd3e5c31f0fd91eba59b9af4c52c9f906a0385c2679b91c91b",
+    "artifacts/pixel_language_diversity_v1/development/34/normal.png": "47669e2efc3f8ec14c99579cb08dc64cdafa4e7604ccb3f3d77d50f91955a686",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0002_normal.pt": "630ee7c8917b5ea8b74f88120bf1554cefe9d2bf530dc712e6c43aa091273bd5",
+    "artifacts/pixel_language_diversity_v1/development/35/normal.png": "d03ce05ee633e11dedd4abd9f09fa03234207840753a734ba4b0e7cf55a7f260",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0003_normal.pt": "57e073d6d1b6b313d3b6637c16112d2d5fa6d2e82eee7a5ebc6e4c2ed60f7ba3",
+    "artifacts/pixel_language_diversity_v1/development/36/normal.png": "f9f4d1a92d7ddcd52fe8fcc56472ac4a1859b56de02a353c188b8ca23fdf57bb",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0004_normal.pt": "af91f874fdd2618e7585656352076c4a99d50d1353e3dc5cd573c1627f5a8429",
+    "artifacts/pixel_language_diversity_v1/development/37/normal.png": "e16ccb198559751ff6f8a95157ee72d5ef9b35ec4ba91a7491b8e02361eca739",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0005_normal.pt": "e950d6326633e38989f30db23565dea50cb2594527307181e0d27b03a9b69fbf",
+    "artifacts/pixel_language_diversity_v1/development/38/normal.png": "16c7e7fdd8edda34f9c5b46b5e48fb119e9586b7967676e274193056d801c2ff",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0006_normal.pt": "8db50b7d179a75af6972bbed40391dad0b5d5b880c543ef5296d79d6e3837144",
+    "artifacts/pixel_language_diversity_v1/development/39/normal.png": "aad7433e6b8866db196a2077f7197455a4f26b15f5cba8c56905393ae8c2ef3e",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0007_normal.pt": "4f2a6be7dd9c95eb3ed9c248c7511fb538cd3cc8df8f9061a559c93ed76bcd64",
+    "artifacts/pixel_language_diversity_v1/development/40/normal.png": "f0d97815a6cd53e86292ec86d7a38c648ea64ee47ea3a76cf665a6dc64dee445",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0008_normal.pt": "288d9748cf27ec0df33625dd78e907a985aa94f4522663d2e0840ddae77acd25",
+    "artifacts/pixel_language_diversity_v1/development/41/normal.png": "0fbffb95f5797e83a2cfa51b401826cb427747ce013792f5c9b5c3d63c7e5388",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0009_normal.pt": "41167957dd5622bc943610de9c4243f3d73bc894673f1aa2d3b16b74eb38f48c",
+    "artifacts/pixel_language_diversity_v1/development/42/normal.png": "67f79c4b0eb151c7b4621049b78e649c661e80569729149ad5c9fb7fc42b49dd",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0010_normal.pt": "2c2d6813dd908009a3ded22584b5941c0f0f3cae801a0e9a2ea7bf23d76294da",
+    "artifacts/pixel_language_diversity_v1/development/43/normal.png": "33283bef83e848a5e4a073bbab191b55dc5dde8ba65fe69575cfcda1bade91f2",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0011_normal.pt": "cd192afb87970128112f4064ffcf97fc6cca4e305f746c5d8069580c9eadd192",
+    "artifacts/pixel_language_diversity_v1/development/44/normal.png": "ff08bd769a9825a71b1db31d6bc684d77eb1118bc5c1e28bd5291cc45eaa91b9",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0012_normal.pt": "246bd20d5cb378a9d1ebe7bdfe29cb6e87365ccc9692204297b1b0db7a591188",
+    "artifacts/pixel_language_diversity_v1/development/45/normal.png": "95fc84fe1f1389f5916fd0c66d4692c33b33177b541f3c33e7af559e48184641",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0013_normal.pt": "460334541874de2e2530da995db806f2fcd4d697332470cfa95cec87672e9cdb",
+    "artifacts/pixel_language_diversity_v1/development/46/normal.png": "30a0ebf23e976d8381866534818fd0f0c4fc51f9c5b935bf6f0b5b4aeddda982",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0014_normal.pt": "0d1bfce42d724705c1670bb95e20f17bebe0a5ea77bcfed169d816194e351fee",
+    "artifacts/pixel_language_diversity_v1/development/47/normal.png": "42c36cf6a6de70663fef15fe68559aaea08997c5f41cc3d84ad4305c21b404d3",
+    "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0015_normal.pt": "28efa7e643ea444216bf4bf203d032c132ae001202a65872af73116e81cdcf17"
+  },
+  "primitive": "artifacts/semantic_glyph_bridge_v1",
+  "checkpoint": "artifacts/direct_pixel_readout_v1/g_only/fit/checkpoint_latest.pt",
+  "mapping": "artifacts/semantic_glyph_readout_distillation_v1/mapping.json",
+  "jobs": [
+    {
+      "split": "train",
+      "index": 0,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0000/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0000_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 1,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0001/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0001_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 2,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0002/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0002_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 3,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0003/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0003_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 4,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0004/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0004_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 5,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0005/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0005_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 6,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0006/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0006_normal.pt"
+    },
+    {
+      "split": "train",
+      "index": 7,
+      "prompt": "artifacts/pixel_language_diversity_v1/train/0007/prompt.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/train_0007_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 0,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/32/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0000_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 1,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/33/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0001_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 2,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/34/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0002_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 3,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/35/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0003_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 4,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/36/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0004_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 5,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/37/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0005_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 6,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/38/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0006_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 7,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/39/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0007_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 8,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/40/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0008_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 9,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/41/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0009_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 10,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/42/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0010_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 11,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/43/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0011_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 12,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/44/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0012_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 13,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/45/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0013_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 14,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/46/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0014_normal.pt"
+    },
+    {
+      "split": "development",
+      "index": 15,
+      "prompt": "artifacts/pixel_language_diversity_v1/development/47/normal.png",
+      "first_state_file": "artifacts/direct_pixel_readout_v1/g_only/assessment/development_0015_normal.pt"
+    }
+  ],
+  "routes": [
+    "native_units",
+    "exact_character_vector",
+    "canonical_image_encoder"
+  ],
+  "maximum_steps": 64,
+  "maximum_seconds": 2400.0,
+  "prefill_maximum_absolute_error": 0.002,
+  "source_head_rounding": "BF16 then FP32, as prior reader helper",
+  "unsupported_source_action": "record and terminate that route; never replace or reject the case",
+  "evaluation_references_read": false,
+  "training_data_reuse_allowed": false,
+  "C3_used": false,
+  "optimizer_updates": 0,
+  "helper_only_symbolic_decoding": true,
+  "ILM_image_answers_generated": 0,
+  "usable_language_demonstrated": false
+}
