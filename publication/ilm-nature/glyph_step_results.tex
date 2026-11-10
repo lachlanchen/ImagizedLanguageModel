@@ -1,0 +1,16 @@
+\subsection*{Improved glyph copying does not restore complete-answer generation}
+Training on genuine copy-prompt states separates physical writing from language
+decisions (Supplementary Note 61; Fig.~S40). Removing source-anchor regression from the
+writer objective improves held-wording glyph F1 from 0.951778 to 0.972856 and
+the number reaching F1 0.95 from 194/256 to 229/256. Complete development-answer
+transfer nevertheless fails: the resulting image-feedback model gives no
+canonical exact answer among sixteen reused questions. On a fresh C3 cohort,
+neither the original nor the improved writer produces a clearly correct
+complete answer phrase among 32 conditions. A separate source-policy diagnostic
+isolates a sequence-interface problem: with identical image prefills, native
+source-unit feedback gives twelve literal matches among sixteen questions,
+whereas both exact-character and image-encoded character feedback give three.
+These helper trajectories use a source lexical head and are not ILM answers.
+The comparison motivates adapting sequence dynamics, but does not establish
+that frozen contextual states cannot support an independently trained writer.
+

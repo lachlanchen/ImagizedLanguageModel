@@ -1,0 +1,25 @@
+\subsection*{Contextual adaptation improves autonomous image answers}
+Adapting the final four contextual layers, together with the image writer and
+stopping head, improves complete answers relative to a broader-data readout-only
+control (Supplementary Note 62; Fig.~S41). Both conditions use 3,176 training
+questions and 18,000 updates. On 32 prospectively reserved questions from 16
+contexts, conservative clear complete literal matches are 16/32 versus 11/32;
+both different questions are correct in 5/16 versus 2/16 contexts. Canonical
+pixel-exact complete answers are 2/32 and 1/32. Neither condition meets the
+predefined pilot requirement of 24/32 matches and 10/16 paired contexts, and
+both retain a failed training-pixel qualification. The result demonstrates
+partial image-conditioned answer transfer, not a reliable general language
+model. Training first-glyph fidelity is lower than later reference-conditioned
+fidelity, so generated-image feedback cannot explain every failure. A separate
+cold replay reproduces the full image-feedback execution on one fixed input
+without runtime lexical, font or answer-bank access.
+
+An additional balanced writer refinement isolates a training-fit problem.
+With the learned reader fixed, batched first/later supervision raises training
+F1 from 0.963524 to 0.999811 and passes physical qualification. On a different
+reserved cohort, however, clear complete answers are 18/32 versus 19/32 for the
+unchanged parent, with two canonical exact answers each. The one-case reading
+difference is a damaged initial glyph, not an established semantic regression.
+Neither passes the answer pilot (Supplementary Note 62; Fig.~S42). Stronger
+reference-conditioned fitting alone has not established a generalization gain.
+

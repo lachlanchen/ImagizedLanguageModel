@@ -1,0 +1,17 @@
+\subsection*{Sharp known-form generation does not recover uncertain glyph identity}
+Additional controls distinguish a useful motor from correct conditional
+writing (Supplementary Note 60; Fig.~S39). On sixteen
+normal Chinese initial states, an allowed reference first form is nearest
+in semantic cosine for nine, but only one first image is pixel-exact.
+A spectral calculation gives a 0.060109 lower bound on uniform anchor-code
+MSE for a rank-2048 affine output; distance to the trained output span and
+bias is 0.305180. These are regression limits, not pixel-error bounds.
+Synthetic-state readout transfer and an added contrastive loss both fail
+their physical glyph requirements. Noise-trained decoding and two joint
+motor flows also fail fixed mixed-code tests. A 3.89M-parameter spatial
+flow generates the 4,087 known clean-condition forms with mean foreground
+F1 0.998260, but mixed-condition F1 is 0.810537. None of these rejected
+motors undergoes autonomous language assessment. Confident known-form
+generation remains distinct from recovering the intended form and producing
+a correct complete answer.
+
