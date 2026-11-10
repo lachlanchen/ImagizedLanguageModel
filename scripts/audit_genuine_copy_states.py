@@ -5,6 +5,7 @@ Gallery labels are evaluator-only. Retrieval is never an ILM output or a
 runtime repair. Both fixed geometries are reported, without selecting one.
 """
 import argparse
+from collections import Counter
 import hashlib
 import json
 import os
@@ -100,6 +101,30 @@ def evaluate(query, labels, gallery, gallery_labels, center):
                 mean_pessimistic_identity_rank=sum(r['rank_pessimistic'] for r in records) / n), records
 
 
+def identical_states(states, rows):
+    """A necessary-condition check, not evidence of useful representation."""
+    groups = {}
+    for i, vector in enumerate(states):
+        digest = hashlib.sha256(vector.numpy().tobytes()).hexdigest()
+        group = groups.setdefault(digest, [])
+        if group:
+            require(torch.equal(vector, states[group[0]]), 'unexpected state-hash collision')
+        group.append(i)
+    conflicts = []
+    maximum_correct = 0
+    for digest, indices in groups.items():
+        counts = Counter(rows[i]['label'] for i in indices)
+        maximum_correct += max(counts.values())
+        if len(counts) > 1:
+            conflicts.append(dict(state_sha256=digest, record_indices=[rows[i]['index'] for i in indices],
+                                  form_counts=dict(counts)))
+    return dict(records=len(rows), unique_recorded_state_byte_strings=len(groups),
+                different_target_collision_groups=len(conflicts), conflicts=conflicts,
+                deterministic_exact_copy_upper_bound=maximum_correct / len(rows),
+                absence_of_collisions_does_not_prove_semantics_or_learnability=True,
+                bound_does_not_apply_to_approximate_pixel_F1=True)
+
+
 def main(run, output):
     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CPU-only audit requires CUDA hidden')
     require(not output.exists(), 'preserve previous audits')
@@ -108,6 +133,7 @@ def main(run, output):
     torch.set_num_threads(4)
     began = time.monotonic()
     meta, report, rows, states = read_cache(run)
+    collisions = identical_states(states, rows)
     by_template = []
     for template in range(3):
         ids = [i for i, r in enumerate(rows) if r['template'] == template]
@@ -143,6 +169,7 @@ def main(run, output):
         cache_report_sha256=sha(run / 'cache/report.json'),
         batch_single_maximum_error=report['batch_single_maximum_error'],
         summaries=summaries, records_sha256=sha(output / 'records.json'),
+        identical_recorded_state_check=collisions,
         elapsed_seconds=time.monotonic() - began, CPU_threads=4,
         model_forward_calls=0, optimizer_updates=0, CUDA_calls=0,
         labels_used_only_for_offline_evaluation=True,

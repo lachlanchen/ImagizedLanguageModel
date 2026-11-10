@@ -35,3 +35,19 @@ The calculation uses at most four CPU threads, query batches of 32 and a
 120-second wall budget. It validates all cache shard hashes and record ordering.
 No GPU, model loading, output-head inference, teacher or new dataset is required.
 The present document specifies a diagnostic, not a completed result.
+
+Before computing similarities, group all recorded FP32 state byte strings by
+SHA-256, checking tensor equality on any matching hash. Record groups containing
+different target forms. A deterministic readout gives one output for one such
+state. Since the primitive's canonical bitmaps are distinct, an exact-copy
+upper bound on this fixed pool is
+
+\[
+\frac{1}{N}\sum_{\text{identical-state group }g}\max_c n_{g,c}.
+\]
+
+This optimistic bound says nothing about foreground F1 or generalization. No
+conflicts would not prove semantic information, practical distinguishability,
+learnability or language understanding. This is an additional CPU recording
+check, fixed before the held-wording states or new readout results exist; it
+changes no training, model, similarity geometry or qualification threshold.
