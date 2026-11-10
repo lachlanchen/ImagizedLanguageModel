@@ -97,7 +97,7 @@ def append(paper,*,balanced=False):
     annotation=('New cohort: both questions correct 6/16 vs 5/16.\nThe one-answer difference is a conservative glyph reading.' if balanced
         else 'Both questions correct: 5/16 vs 2/16 contexts.\nNeither meets the fixed 24/32 and 10/16 pilot.')
     slide.shape(annotation,45,309,720,60,14)
-    slide.shape('b  Training pixel fidelity' if balanced else 'b  Training first decision versus continuation',820,78,720,32,20,True)
+    slide.shape('b  Training foreground F1 (%)' if balanced else 'b  First/later training foreground F1 (%)',820,78,720,32,20,True)
     c=data['conditions']
     if balanced:
         vals=[100*c[k]['qualification']['training_mean_f1'] for k in names]
