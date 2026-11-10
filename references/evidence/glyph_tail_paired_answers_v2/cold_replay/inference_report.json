@@ -1,0 +1,97 @@
+{
+  "input_sha256": "51afed697090f3cd30638b1ac4489198fc2b6e3086aa1a5a28f5a8e1c46ba541",
+  "original_size": [
+    1024,
+    256
+  ],
+  "observed_size": [
+    1024,
+    256
+  ],
+  "host_preparation_OCR_or_font": false,
+  "host_preparation": "EXIF orientation, white alpha composite, grayscale, bounded resize, right/bottom white padding",
+  "observed_prompt_sha256": "51afed697090f3cd30638b1ac4489198fc2b6e3086aa1a5a28f5a8e1c46ba541",
+  "checkpoint_sha256": "5c434a9a9b0c6ddc0c3fe4005265e4f8ca5b7d0add9a74a80ed371806fa71085",
+  "output_sha256": "857b75f1480ab0a53cf1303cfd0d0e131bd13ab86576257e8c65f0168410a98a",
+  "glyphs": 4,
+  "stopped": true,
+  "capped": false,
+  "source": {
+    "model_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "manifest_sha256": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+    "retained_native_tensors": 748,
+    "retained_base_parameters": 7522463984,
+    "configurations": {
+      "text": {
+        "vocab_size": 0,
+        "hidden_size": 4096,
+        "intermediate_size": 12288,
+        "num_hidden_layers": 36,
+        "num_attention_heads": 32,
+        "num_key_value_heads": 8,
+        "head_dim": 128,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "max_position_embeddings": 262144,
+        "rope_theta": 5000000.0,
+        "rope_scaling": {
+          "rope_type": "default",
+          "mrope_section": [
+            24,
+            20,
+            20
+          ],
+          "mrope_interleaved": true
+        },
+        "attention_bias": false,
+        "bos_token_id": null,
+        "eos_token_id": null,
+        "pad_token_id": null,
+        "tie_word_embeddings": false
+      },
+      "vision": {
+        "depth": 27,
+        "hidden_size": 1152,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "in_channels": 3,
+        "patch_size": 16,
+        "spatial_merge_size": 2,
+        "temporal_patch_size": 2,
+        "out_hidden_size": 4096,
+        "num_position_embeddings": 2304,
+        "deepstack_visual_indexes": [
+          8,
+          16,
+          24
+        ],
+        "hidden_act": "gelu_pytorch_tanh"
+      }
+    },
+    "imported_storage": "existing Q4 -> frozen BF16 contextual and FP32 vision weights",
+    "contextual_compute": "FP32 contractions/activations, layer-local parameter casts",
+    "mrope_source_commit": "a6d33251620eef7629c73b09e672f2df243eb363",
+    "mrope_source_sha256": "795376470e5e77e89033a0efe9ec295ddddeca6ed7b57c073206867466f7bae8",
+    "external_pretraining": true,
+    "vocabulary_parameters_materialized": 0,
+    "fixed_controls_sha256": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "source_derived_fixed_task_controls": true
+  },
+  "actual_emitted_pixel_feedback": true,
+  "actor_loading_wall_seconds": 70.27751338388771,
+  "generation_wall_seconds": 1.897094457410276,
+  "recorded_generation_pressure_wait_seconds": 0.0,
+  "generation_wall_excluding_recorded_pressure_wait_seconds": 1.897094457410276,
+  "generation_timing_includes_image_prefill_pixel_feedback_and_stop": true,
+  "generation_timing_excludes_prompt_file_read_output_serialization_and_actor_loading": true,
+  "tokenizer": false,
+  "font": false,
+  "glyph_bank": false,
+  "source_lexical_head": false,
+  "training_or_evaluation_corpus_opened": false,
+  "elapsed_seconds": 73.12256689183414,
+  "resource_wait_seconds": 0.0,
+  "peak_allocated_vram_gib": 17.557220935821533,
+  "minimum_available_gib": 73.61247253417969,
+  "pressure_wait_allowance_seconds": 1800.0,
+  "stage_deadline_checked_during_pressure_wait": true
+}

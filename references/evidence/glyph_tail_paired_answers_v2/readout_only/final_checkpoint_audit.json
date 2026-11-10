@@ -1,0 +1,98 @@
+{
+  "source_sha256": "5172177cdc3d91e11868850e409e1f5c8c8f4d3f1b78c37a872efe3b64e90bd4",
+  "checkpoint_sha256": "5460e00942b98c8705ab9dda305e89eda2b4f198905a7768bb670ede63dcdeaa",
+  "starting_bridge_sha256": "c19431b2935fcbdca8ae71dd362f747ed7aeb571744c363ae97536eb4edb1c33",
+  "preparation_sha256": "0e9e24bf9005775e3d0982c3ff2b9cda6239c7a1290826be81391ef54f173454",
+  "global_retained_optimizer_updates": 18000,
+  "question_updates": 13500,
+  "copy_rehearsal_updates": 4500,
+  "optimizer_counters": [
+    {
+      "group": "bridge",
+      "name": "readout.0.weight",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "readout.0.bias",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "readout.1.weight",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "readout.1.bias",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "readout.3.weight",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "readout.3.bias",
+      "actual_updates": 18000,
+      "expected_updates": 18000
+    },
+    {
+      "group": "bridge",
+      "name": "stop.0.weight",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    },
+    {
+      "group": "bridge",
+      "name": "stop.0.bias",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    },
+    {
+      "group": "bridge",
+      "name": "stop.1.weight",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    },
+    {
+      "group": "bridge",
+      "name": "stop.1.bias",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    },
+    {
+      "group": "bridge",
+      "name": "stop.3.weight",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    },
+    {
+      "group": "bridge",
+      "name": "stop.3.bias",
+      "actual_updates": 13500,
+      "expected_updates": 13500
+    }
+  ],
+  "frozen_bridge_tensor_count": 26,
+  "frozen_encoder_decoder_and_normalization_bit_identical": true,
+  "changed_coordinates": {
+    "readout.": 16791551,
+    "stop.": 1057281
+  },
+  "nonzero_contextual_up_coordinates": 0,
+  "trained_body_parameters": 0,
+  "trained_bridge_parameters": 17848833,
+  "readout_only_control": true,
+  "all_checkpoint_and_optimizer_tensors_finite": true,
+  "neural_forward_calls": 0,
+  "CUDA_initialized": false,
+  "language_accuracy_proven": false,
+  "full_cross_attempt_compute_cost_not_inferred": true
+}
