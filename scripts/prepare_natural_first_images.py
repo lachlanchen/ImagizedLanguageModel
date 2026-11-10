@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 
 import numpy as np
 from PIL import Image
@@ -47,12 +48,14 @@ def main(output):
         excluded_contexts.update(digest(visible(p['context'])) for p in a['paragraphs'])
     inventory=ROOT/'artifacts/semantic_glyph_bridge_v1/inventory.json'
     charmap={c:i for i,row in enumerate(load(inventory)['records']) for c in row['chars']}
-    output.mkdir(parents=True);(output/'inputs').mkdir();rows=[];failures=[];counts=Counter();seen={}
+    output.mkdir(parents=True);(output/'inputs').mkdir();rows=[];failures=[];counts=Counter();seen={};began=time.monotonic()
     for article in load(train)['data']:
         for paragraph in article['paragraphs']:
             original=paragraph['context'];context=visible(original);ch=digest(context)
             for q in paragraph['qas']:
                 counts['source_questions']+=1
+                if counts['source_questions']%100==0:
+                    require(host_resources()['available_gib']>=24 and time.monotonic()-began<3600,'CPU preparation live reserve/deadline')
                 if article['title'] in excluded_titles or ch in excluded_contexts:
                     counts['development_overlap_removed']+=1;continue
                 refs=[]
