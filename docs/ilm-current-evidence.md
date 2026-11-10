@@ -108,17 +108,36 @@ geometry, not a runtime glyph bank or a generated answer.
 A [separate C3 reading cohort](../references/c3_visual_reading_preparation.md)
 was prepared before this run's qualification: 16 passages, 64 image inputs, with
 original/rotated options and letter/full-phrase instructions. All input preview
-boards were inspected. It is excluded from current adaptation and has no model
-result yet; inherited-body pretraining exposure is unknown. It is intended to
-check broader reading and complete phrase writing after the current gates,
-without treating letter selection as a substitute for image-language generation.
+boards were inspected. Its [completed frozen-checkpoint assessment](../references/c3_glyph_language_result.md)
+has zero correct complete phrases out of 32 for either checkpoint. The candidate
+gives eleven conservative clear letter matches out of 32, with only three
+documents correct under both option orders. These agent readings have no
+independent human grade; damaged and ambiguous letters remain uncertain.
+Every raw output is retained. This is not general language competence, and
+inherited-body pretraining exposure is unknown.
 
 The [matched feedback diagnostic](../references/glyph_feedback_ceiling_protocol.md)
-next compares native source units, exact character input vectors and learned
+compares native source units, exact character input vectors and learned
 canonical-image input vectors with a temporary complete source head. It makes
 no autonomous ILM images. Its purpose is to distinguish state-to-glyph writing,
 character segmentation and feedback alignment before further fitting. No C3
-input is used, and diagnostic trajectories are excluded from training.
+input is used, and diagnostic trajectories are excluded from training. The
+[completed result](../references/glyph_feedback_ceiling_result.md) gives 12/16
+literal matches with native units versus 3/16 with either character route.
+All 72 initial states match exactly. Source units can span multiple characters;
+substituting one character per native step does not preserve the source policy.
+This does not prove that its hidden state cannot support a separately trained
+glyph policy, and encoder error remains possible.
+
+The [next training candidate](../references/glyph_tail_adaptation_protocol.md)
+therefore trains the final four contextual attention layers together with G and
+stop on 3,176 supported training questions. Its lower 32 layers stay frozen and
+their causal prefix states can be cached. Two real preflight updates use 3.208
+GiB peak allocation, change 294,912 adapter-up coordinates and retain all frozen
+parameters. A protocol layer-count correction is explicitly preserved; the
+implementation selected the actual final four layers throughout. This preflight
+is a compute/gradient check, not a language-learning result. The complete fit and
+autonomous assessment remain required.
 
 [Failure localization](../references/pixel_language_source_reader_result.md) ·
 [Motor diagnosis](../references/semantic_glyph_motor_diagnosis.md) ·
