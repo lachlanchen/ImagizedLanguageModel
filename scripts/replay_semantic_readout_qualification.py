@@ -45,10 +45,10 @@ def run(output):
                     for start in range(0,len(states),64):
                         monitor.position=dict(model=version,route=route,start=start,total=len(states));monitor.guard()
                         logits,_,_=model.predict(states[start:start+64].to(device))
-                        pixels=(logits>=0).cpu();gold=data['ink'][targets[start:start+64]].bool()
-                        intersection=(pixels&gold).flatten(1).sum(-1);denominator=pixels.flatten(1).sum(-1)+gold.flatten(1).sum(-1)
+                        bits=logits>=0;gold=data['ink'][targets[start:start+64]].to(device).bool()
+                        intersection=(bits&gold).flatten(1).sum(-1);denominator=bits.flatten(1).sum(-1)+gold.flatten(1).sum(-1)
                         f1=torch.where(denominator==0,torch.ones_like(denominator).float(),2*intersection/denominator)
-                        exact=(pixels==gold).flatten(1).all(-1)
+                        exact=(bits==gold).flatten(1).all(-1);pixels=bits.cpu()
                         for i in range(len(pixels)):
                             old=expected[start+i]
                             require(old['index']==start+i and old['label']==int(targets[start+i]) and
