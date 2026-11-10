@@ -96,6 +96,14 @@ def score(run):
                 and companion['raw_review_report_sha256']==sha(other/'report.json'),
                 'registered companion review is incomplete')
     m=load(run/'preparation.json')
+    assessment=load(run/'assessment/report.json')
+    require(sha(run/'assessment/report.json')==report['assessment_report_sha256'],'assessment cohort changed')
+    for name,digest in assessment['case_index_sources_sha256'].items():
+        require(sha(ROOT/name)==digest,'assessed question mapping changed before reference scoring')
+    for split in ['train','development']:
+        path=ROOT/f'data/visual_qa/cmrc2018_short/{split}.jsonl'
+        require(sha(path)==m['bindings_sha256'][str(path.relative_to(ROOT))],
+                'registered reference source changed before scoring')
     require(sha(run/'evaluation_references.json')==m['evaluation_references_sha256'],'fixed new references changed')
     expected=load(run/'evaluation_references.json')
     source={split:{r['id']:r for r in map(json.loads,(ROOT/f'data/visual_qa/cmrc2018_short/{split}.jsonl').read_text().splitlines())}

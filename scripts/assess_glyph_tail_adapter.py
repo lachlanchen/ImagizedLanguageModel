@@ -213,6 +213,9 @@ def assess(run):
                 monitor.status('generating_actual_image_answers'); print(json.dumps(records[-1]),flush=True)
             hook.remove()
             save_json(folder/'report.json',dict(records=records,code_sha256=code,
+                case_index_sources_sha256={str(p.relative_to(ROOT)):sha(p) for p in [
+                    ROOT/'artifacts/pixel_language_diversity_v1/manifest.json',
+                    ROOT/'artifacts/semantic_glyph_language_v1/preparation.json',run/'preparation.json']},
                 checkpoint_sha256=sha(checkpoint),provenance=provenance,references_read=False,
                 fixed_physical_gate_passed=report['readout_gate_passed'],
                 assessment_does_not_override_failed_component_gate=True,

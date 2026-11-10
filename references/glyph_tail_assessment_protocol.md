@@ -58,3 +58,11 @@ Before either final candidate produces any answer, the separate
 and per-answer timing boundaries. Timing never changes which answers count,
 the fixed cohort or the correctness thresholds. Failed and capped streams
 remain in the total generation wall time.
+
+Assessment binds the source files used to map every stream to its question.
+Scoring authenticates those mappings and the registered training/development
+reference-file hashes after output review and before opening reference strings.
+The paired archive must retain both conditions together: all 144 output PNGs,
+52 actually viewed boards and every qualification glyph. Pixel F1 and exact
+flags are recomputed from saved qualification pixels. Publishing one favourable
+condition or omitting caps is not an accepted result package.

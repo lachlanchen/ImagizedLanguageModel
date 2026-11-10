@@ -136,3 +136,10 @@ audit file/network access and compare all output tensors, stopping, feedback
 and PNG bytes. The [cold replay protocol](../references/glyph_tail_cold_inference_protocol.md)
 separates that independence check from answer accuracy. A replay verification
 is not yet claimed for the still-training candidate.
+
+After both conditions are reviewed and scored,
+`scripts/archive_glyph_tail_pair.py --output references/evidence/my_glyph_pair`
+packages all 144 actual answer images, 52 review boards and losslessly packed
+qualification pixels. It verifies all saved physical F1/exact scores and
+copies the dataset notice. Failed cases remain present; large state tensors
+and raw system-call traces remain local with their recorded hashes.
