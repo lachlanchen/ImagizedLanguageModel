@@ -79,8 +79,8 @@ cached labels, makes no neural call, and leaves the current experiment intact.
 ## Genuine contexts and the direct-pixel result
 
 The [genuine copy curriculum](../references/genuine_glyph_readout_protocol.md)
-uses8,172training images covering4,086visible forms under two instructions,
-plus256held-wording images. One empty form is explicitly excluded. Each target
+uses 8,172 training images covering 4,086 visible forms under two instructions,
+plus 256 held-wording images. One empty form is explicitly excluded. Each target
 bitmap appears only as part of the image shown to the frozen reader; no class
 label enters its forward pass. Batch-versus-single states must pass their
 numerical check before caching continues.
@@ -93,20 +93,32 @@ cases (89.45%), retaining original-history quality. Both use the same architectu
 and 18,000-update schedule; E, D, stop and body stay fixed. All raw glyphs are
 archived and all three sampled boards for each candidate were actually viewed.
 
-The pixel-only candidate passes the unchanged physical gate and is now in the
-original forty-stream autonomous assessment. No improved complete-answer result
-is yet claimed. Its extra-capacity comparison did not train because shared
+The pixel-only candidate passes the unchanged physical gate. Its completed
+forty-stream assessment retains all eight training controls, but yields zero
+exact canonical development images, mean foreground F1 0.341013 and eleven
+capped streams out of sixteen. The prior baseline has one exact image, F1
+0.354426 and the same eleven caps. Better copying has not improved complete
+answering. All forty raw outputs were viewed before current reference scoring;
+[every stream and score is retained](../references/evidence/direct_pixel_language_g_only_v1/archive.json).
+Its extra-capacity comparison did not train because shared
 memory pressure exceeded that arm's entry limit; the failed admission remains
 preserved. The CPU identity audit's 252/256 held retrieval result is evaluator
 geometry, not a runtime glyph bank or a generated answer.
 
 A [separate C3 reading cohort](../references/c3_visual_reading_preparation.md)
-was prepared before this run's qualification:16passages,64image inputs, with
+was prepared before this run's qualification: 16 passages, 64 image inputs, with
 original/rotated options and letter/full-phrase instructions. All input preview
 boards were inspected. It is excluded from current adaptation and has no model
 result yet; inherited-body pretraining exposure is unknown. It is intended to
 check broader reading and complete phrase writing after the current gates,
 without treating letter selection as a substitute for image-language generation.
+
+The [matched feedback diagnostic](../references/glyph_feedback_ceiling_protocol.md)
+next compares native source units, exact character input vectors and learned
+canonical-image input vectors with a temporary complete source head. It makes
+no autonomous ILM images. Its purpose is to distinguish state-to-glyph writing,
+character segmentation and feedback alignment before further fitting. No C3
+input is used, and diagnostic trajectories are excluded from training.
 
 [Failure localization](../references/pixel_language_source_reader_result.md) ·
 [Motor diagnosis](../references/semantic_glyph_motor_diagnosis.md) ·
