@@ -39,6 +39,15 @@ this constant-weight formula; the missing joint objective remains. Conversely,
 unique physical training inputs and damaged output do not prove irreducible
 multimodality: inadequate fitting is still a competing explanation.
 
+The repository's earlier [joint exact raster experiment](joint_exact_raster_v55_result.md)
+already used a normalized dependent pixel law and still failed its visible
+language-generation requirements. The [released MIXAR baseline](mixar477_baseline_result.md)
+and subsequent native instruction fit also failed useful Chinese answering.
+The marginal argument describes the present glyph loss; it does not explain
+every earlier model or establish that adding a joint pixel decoder is the
+missing solution. A new intervention must use and test the actual language
+states, rather than repeat those failed motor-only arguments.
+
 [PIXAR (ACL 2024)](https://aclanthology.org/2024.findings-acl.874/)
 documents noisy pixel-language generations under its likelihood objective
 and uses adversarial training. This motivates checking a coherent-generation
