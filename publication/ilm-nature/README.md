@@ -8,12 +8,26 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved `947058e7` 50-slide baseline. Their
-[builder](writing_failure_publication.py) uses pinned latexdiff and inlines
+revision with the preserved `2ca07ea0` baseline. Their
+[builder](glyph_step_publication.py) uses pinned latexdiff and inlines
 the abstract so its changes are visible. Earlier builders and baselines remain
 available for historical reproduction.
 
 ## Current result
+
+Contextual adaptation gives **16/32 clear complete answers versus 11/32** for
+a fixed-body readout control, on sixteen reserved contexts with two questions
+each. Both questions are correct in 5/16 versus 2/16 contexts. Neither arm
+passes the preset answer pilot or training-pixel qualification. A subsequent
+balanced writer passes physical qualification but gives **18/32 versus 19/32**
+for its unchanged parent on a different new cohort; training fidelity alone
+does not establish answer generalization. All actual streams, damaged glyphs,
+caps, qualification results and cold-replay receipts remain available in the
+[paired adaptation result](../../references/glyph_tail_paired_answers_result.md)
+and [writer refinement result](../../references/balanced_glyph_writer_result.md).
+**Notes 60–62 and Figures S39–S42** add the completed controls and results.
+
+## Earlier experiments
 
 The [512-question study](../../references/pixel_language_diversity_final_result.md)
 fits **495/512 complete training answers** but **0/24 normal development
@@ -41,10 +55,10 @@ body's acquisition and pretraining. Historical scripts, English transfer,
 unknown glyphs and an efficiency advantage at matched language quality remain
 unvalidated. **Notes 58–59 and Figures S36–S38** report the measurements.
 
-The package contains a **17-page article, 32-page review and 88-page
-supplement**, with matching redlines (32/88 pages). The editable deck has
-**53 slides and 57 native charts**. All fifty previous slide appearances and
-54 chart parts are preserved. The new figures use actual unrepaired model
+The package contains an **18-page article, 33-page review and 100-page
+supplement**, with matching redlines (33/100 pages). The editable deck has
+**57 slides and 65 native charts**. All 53 previous slide appearances and
+57 chart parts are preserved. The new figures use actual unrepaired model
 outputs and editable charts with linked workbooks. LibreOffice rendering uses
 Liberation Sans in place of Arial; PowerPoint-app inspection is not claimed.
 
@@ -57,9 +71,13 @@ The current staged build is `artifacts/writing_failure_publication_v3`.
 a source-bound package; promotion requires actual figure/PDF review receipts.
 Earlier builders retain historical slide counts and must not overwrite the
 current deck. The local delivery package is
-`ILM_NatureStyle_20261110_SemanticGlyphLoop`, with five `LATEST` aliases.
+`ILM_NatureStyle_20261111_GlyphFeedbackControls`, with five `LATEST` aliases.
 Source/destination hashes verify local copying; cloud propagation is not
 independently verified.
+
+The two supplement PDFs use Git LFS because their losslessly retained figure
+evidence exceeds GitHub's per-file limit. After cloning, run `git lfs pull` to
+retrieve them. The main article is available directly as [manuscript.pdf](manuscript.pdf).
 
 ## Earlier ink-mass and full-page controls
 
