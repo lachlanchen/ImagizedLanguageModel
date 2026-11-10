@@ -44,7 +44,7 @@ def baseline(name):
     return subprocess.check_output(['git','show',BASE+':publication/ilm-nature/'+name],cwd=ROOT)
 
 
-def prepare(stage):
+def prepare(stage,native_from=None):
     with build_slot():
         before=protected()
         for name in before:require((HERE/name).read_bytes()==baseline(name),'active baseline changed: '+name)
@@ -64,7 +64,15 @@ def prepare(stage):
             if source.is_file() and source.suffix in ('.tex','.sty') and not source.name.startswith('redlined_'):
                 shutil.copy2(source,paper/source.name)
         shutil.copytree(HERE/'figures',paper/'figures')
-        figures=append(paper)
+        if native_from is None:
+            figures=append(paper)
+        else:
+            previous=load(native_from/'preparation.json')
+            require(previous['code_sha256']['writing_failure_figures.py']==code['writing_failure_figures.py']
+                    and previous['evidence_sha256']==bound,'figure source/evidence changed; regenerate native package')
+            path=native_from/'paper/ILM_Figures_editable.pptx'
+            require(sha(path)==previous['prepared_sha256']['ILM_Figures_editable.pptx'],'verified native package changed')
+            shutil.copy2(path,paper/path.name);figures=previous['figures']
         (paper/'writing_failure_results.tex').write_text(RESULTS)
         (paper/'writing_failure_note.tex').write_text(NOTE)
         front=(paper/'frontmatter.tex').read_text();anchor=r'\newcommand{\PaperSummary}'
@@ -259,8 +267,10 @@ def sync(stage):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage',choices=['prepare','render','reuse-render','build','promote','sync'],required=True)
-    parser.add_argument('--output',type=Path,required=True);parser.add_argument('--render-from',type=Path);args=parser.parse_args()
-    if args.stage=='reuse-render':
+    parser.add_argument('--output',type=Path,required=True);parser.add_argument('--render-from',type=Path)
+    parser.add_argument('--native-from',type=Path);args=parser.parse_args()
+    if args.stage=='prepare':prepare(args.output.resolve(),args.native_from.resolve() if args.native_from else None)
+    elif args.stage=='reuse-render':
         require(args.render_from is not None,'supply prior verified render')
         reuse_render(args.output.resolve(),args.render_from.resolve())
     else:globals()[args.stage](args.output.resolve())
