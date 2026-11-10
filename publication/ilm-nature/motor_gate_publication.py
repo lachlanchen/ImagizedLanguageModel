@@ -37,7 +37,9 @@ EXTRA=('semantic_readout_distillation_v1/calibrate/report.json',
     'semantic_readout_distillation_v1/visual_review.json',
     'contrastive_glyph_readout_v1/visual_replay/report.json',
     'contrastive_glyph_readout_v1/retention.json',
-    'glyph_motor_states_v1/report.json','glyph_motor_states_v1/visual_review.json')
+    'glyph_motor_states_v1/report.json','glyph_motor_states_v1/visual_review.json',
+    'cached_glyph_teacher_audit_v1/report.json','cached_glyph_teacher_audit_v1/records.json',
+    'cached_glyph_teacher_audit_v1/cases.json')
 
 
 def save(path,value):path.write_text(json.dumps(value,indent=2)+'\n')
@@ -51,6 +53,18 @@ def measure_check(data):
             f"{data['regression']['best_span_mse']:.6f}" in NOTE,'measured rank bound absent')
     for version in data['compilers'].values():
         for row in version.values():require(f"{row['mean_f1']:.6f}" in NOTE,'compiler value absent from note')
+    teacher=load(ROOT/'references/evidence/cached_glyph_teacher_audit_v1/report.json')
+    plain=NOTE.replace(',','')
+    for row in teacher['groups'].values():
+        require(f"{row['reference_form_matches']}/{row['states']}" in plain,
+                'cached-label denominator absent from note')
+    for key in ['1','2-3']:
+        row=teacher['prefix_bins'][key]
+        require(f"{row['reference_form_matches']}/{row['states']}" in plain,
+                'prefix comparison absent from note')
+    require(f"{teacher['cases_all_reference_forms_and_stop_match']}/{teacher['training_questions']}" in plain
+            and teacher['model_forward_calls']==0 and not teacher['semantic_accuracy_measured'],
+            'cached-label audit scope differs')
     # These results remain the only completed language evidence. New glyph
     # component controls must not silently change the abstract.
     require('genuine' not in RESULTS.lower(),'unfinished genuine-curriculum result entered main text')
@@ -68,6 +82,9 @@ def prepare(stage):
             if p.is_file():bound[str(p.relative_to(ROOT))]=sha(p)
         for n in EXTRA:
             p=ROOT/'references/evidence'/n;bound[str(p.relative_to(ROOT))]=sha(p)
+        for n in ['scripts/audit_cached_glyph_teacher_labels.py',
+                  'references/cached_glyph_teacher_agreement_result.md']:
+            bound[n]=sha(ROOT/n)
         for n in ['semantic_readout_distillation_protocol.md','contrastive_glyph_readout_protocol.md',
                   'robust_glyph_decoder_protocol.md','semantic_motor_flow_protocol.md','spatial_semantic_motor_protocol.md']:
             p=ROOT/'references'/n;bound[str(p.relative_to(ROOT))]=sha(p)

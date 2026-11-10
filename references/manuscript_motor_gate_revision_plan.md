@@ -86,3 +86,18 @@ three original-decoder baselines are identical; do not assume it.
 The new genuine-context cache remains unfinished. Initial text/data modules
 must include only completed evidence. Add any future genuine-fit/QA results
 under a separate recorded amendment after their actual outputs are reviewed.
+
+## Completed cached-label audit amendment
+
+The CPU audit in `references/cached_glyph_teacher_agreement_result.md` now
+covers all4,363original gold-image training-history states. Include a bounded
+subsection in Note60reporting mapped native-head/reference agreement and its
+nonmonotonic prefix-position pattern. These are previously saved labels, not
+new neural predictions or autonomous answers. Bind the complete report,
+per-state/per-case data and audit source in the staged preparation. Numeric
+preflight must check its three denominators and all-position sequence count.
+No figure panel, main Results paragraph or abstract changes for this amendment.
+Keep source-unit/formatting ambiguity, changing question subsets and the absent
+exact-source-feedback counterfactual explicit. The genuine curriculum remains
+unfinished and excluded. This amendment authorizes source preparation only
+while its cache owns the mutex; Office/LaTeX/render/promotion remain deferred.

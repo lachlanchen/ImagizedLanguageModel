@@ -101,6 +101,26 @@ An independent cold replay reproduces all 9,722 physical measurements for
 each variant bit-exactly. Their fixed raw-image sheets contain damaged
 composites; no lexical correction is applied.
 
+\subsection*{Mapped native agreement along gold image histories}
+An offline audit reuses the earlier native-head winners on all 4,363 original
+training-history states, verifying their exact alignment with the causal
+cache. A winner is mapped to its first complete form, a terminal label or an
+unsupported label. Reference-form agreement is 368/508 (72.44\%) before the
+first glyph and 2632/3347 (78.64\%) across continuation states; terminal
+agreement is 434/508 (85.43\%). After one gold glyph, next-form agreement is
+328/507 (64.69\%); after two or three it is 756/891 (84.85\%). Later positions
+represent different question subsets, whose first-state baselines are retained
+in the report. No neural forward or new teacher call is made by this audit.
+
+All mapped reference forms and the stop label agree in 138/508 gold-history
+sequences. Correct preceding glyph images were supplied at every position:
+these are not 138 autonomous answers. Alternative wording, formatting,
+source-unit segmentation and image-feedback errors remain possible causes of
+disagreement. No matched exact-source-embedding counterfactual is evaluated.
+The pattern does not establish cumulative feedback damage as a sufficient
+explanation, nor does it establish reliable image encoding or semantic accuracy.
+It leaves the genuine-input readout intervention and all its gates unchanged.
+
 \subsection*{Motor formation under known clean and mixed conditions}
 The original D is accurate near individual anchors. A decoder-only control
 trains 10,792,449 parameters for 6,000 batch-128 updates, leaving G, E, affine
@@ -170,6 +190,8 @@ The fixed-state and spectral diagnostics are in
 \path{references/evidence/semantic_glyph_geometry/},
 \path{references/evidence/glyph_motor_states_v1/} and
 \path{references/evidence/glyph_readout_rank_v1/}.
+The cached-label audit retains every state and question summary under
+\path{references/evidence/cached_glyph_teacher_audit_v1/}.
 These controls reject the specified recipes, not every possible transfer,
 normalizing flow or pixel model. They motivate real contextual coverage and
 continued autonomous-image validation, while leaving broad language generation,
