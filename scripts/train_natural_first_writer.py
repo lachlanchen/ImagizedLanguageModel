@@ -148,6 +148,7 @@ def qualify(run,m,monitor,device):
     primitive=torch.load(ROOT/m['primitive']/'training.pt',weights_only=True,map_location='cpu')['ink'][:,0].numpy().astype(np.uint8)
     p=torch.load(ROOT/m['original_pool'],weights_only=True,map_location='cpu')
     copies=copy_pool(m)['copy_held'];routes=[]
+    natural_train_forms={r['label'] for r in rows if r['split']=='train' and r['label']>=0}
     for split in ['train','held_context']:
         ix=[i for i,r in enumerate(rows) if r['split']==split]
         routes.append(('natural_'+split,h[ix],[rows[i]['reference_labels'] for i in ix],ix))
@@ -177,6 +178,21 @@ def qualify(run,m,monitor,device):
                     fraction095=float(np.mean(np.array(scores)>=.95)),pixel_exact=sum(exact),
                     nonstop=sum(nonstop),unsupported_reference_cases=sum(not any(y>=0 for y in ys) for ys in targets),
                     raw_sha256=sha(raw))
+                if name=='natural_held_context':
+                    strata={};questions={};contexts={}
+                    for j,index in enumerate(original_indices):
+                        row=rows[index];label=row['label']
+                        bucket='unsupported_primary' if label<0 else ('seen_natural_first' if label in natural_train_forms else 'absent_natural_first')
+                        strata.setdefault(bucket,[]).append(scores[j])
+                        questions.setdefault(row['id'],[]).append(scores[j])
+                        contexts.setdefault(row['context_hash'],[]).append(scores[j])
+                    summary[version+'/'+name].update(
+                        primary_first_strata={k:dict(images=len(v),mean_f1=float(np.mean(v)),fraction095=float(np.mean(np.array(v)>=.95))) for k,v in strata.items()},
+                        unique_questions=len(questions),unique_contexts=len(contexts),
+                        question_macro_f1=float(np.mean([np.mean(v) for v in questions.values()])),
+                        context_macro_f1=float(np.mean([np.mean(v) for v in contexts.values()])),
+                        repeated_prompt_styles_not_independent=True,
+                        absent_natural_first_does_not_mean_unseen_in_copy_or_inherited_training=True)
                 canvas=Image.new('L',(600,580),255);draw=ImageDraw.Draw(canvas)
                 draw.text((4,4),version+' / '+name+'; reference | actual',fill=0)
                 for j,index in enumerate(np.linspace(0,len(ink)-1,32,dtype=int)):
