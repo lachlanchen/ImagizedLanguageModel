@@ -8,6 +8,11 @@ On 774 supported genuine held-out states, F1 falls from **0.896007 to
 meets the required mean F1 >=0.95 and 80% reaching F1 >=0.95. No new language
 inference is run and the verified language/date checkpoint is unchanged.
 
+The genuine histories are held out only from the additional compiler fitting.
+The initial language checkpoint previously trained on all 508 questions,
+including these histories. This route measures retention of teacher-associated
+glyph rendering, not independently held-out language generalization.
+
 All 20,435 requested synthetic states pass the full temporary teacher's
 argmax check: four fitting and one held-out base for each of 4,087 forms.
 Median standardized RMS displacement is 0.151012 (maximum 0.323332).
