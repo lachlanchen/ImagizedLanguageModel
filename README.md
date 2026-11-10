@@ -42,10 +42,14 @@ no runtime lexical, font or answer-bank access.*
 [Run image-only inference and reproduce training](docs/glyph-tail-adaptation.md).
 The [failure diagnosis](references/glyph_generation_diagnosis_20261111.md)
 separates initial answer selection, coherent glyph writing and feedback drift.
-A new [balanced writer experiment](references/balanced_glyph_writer_protocol.md)
-has completed its fixed fit and is under qualification; new-context language
-results are not yet available. No general working ILM or matched-quality
-efficiency advantage is claimed.
+The completed [balanced writer refinement](references/balanced_glyph_writer_result.md)
+passes physical qualification but gives **18/32** clear answers versus **19/32**
+for its unchanged parent on a different new cohort. Better training glyphs did
+not improve new-context answers. An offline [first-decision audit](references/glyph_first_policy_audit_result.md)
+finds substantially more correct source first-character decisions than faithful
+first output images. The next [function-transfer experiment](references/glyph_first_function_transfer_protocol.md)
+tests that readout gap with broader training states. No general working ILM or
+matched-quality efficiency advantage is claimed.
 
 ## Earlier bounded results
 

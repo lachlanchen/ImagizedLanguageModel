@@ -170,6 +170,11 @@ training pixel scores and stopping counts. The 18,000-update refinement at
 waiting, at 1.096 GiB peak allocation. The inherited model and earlier fitting
 costs remain part of the method. An independent tensor audit confirms actual
 optimizer counters and bit-identical frozen image modules and body adapters.
-Qualification and a newly reserved context cohort still determine whether it
-improves language generation. The original reserved cohort is now development
-evidence and is not relabelled as a fresh test for this repair.
+It passes physical qualification, but on a newly reserved context cohort gives
+18/32 clear complete answers versus 19/32 for the unchanged parent; both give
+2/32 canonical exact images. The one-answer difference is an uncertain initial
+glyph, not an established semantic regression. All 144 new streams were viewed
+before scoring. See the [complete result](../references/balanced_glyph_writer_result.md).
+The original reserved cohort is development evidence and is not relabelled as
+a fresh test for this repair. Further fitting the same states is not supported
+as the sole remedy.

@@ -1,0 +1,4180 @@
+{
+  "code_sha256": {
+    "scripts/audit_glyph_normalization.py": "17da7beee1636978c7d3425460aed499bee86fef455d173c19b41a7015e84e12",
+    "references/glyph_normalization_audit_protocol.md": "f43f126191256922f857836a0be278de383ea93cf0f45046fc1a21f807a84921",
+    "scripts/check_native_visual_transfer_v71.py": "996d755ab9e0a85e4d67b28f78649a49091141dc3d31970a388ebdf984e71ab5",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae"
+  },
+  "bindings_sha256": {
+    "artifacts/glyph_first_policy_audit_v1.json": "08c3cb0303a69c45627185f5d73950e63ec55f710aff20d22204625e4e28edf1",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0000_normal.pt": "fe6889272da8f55bc43ac486540d44bf58142a4f3f403d2e73edcbb095274ba0",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0001_normal.pt": "4c45aba015365e55aae3d07da8e15e07c6c9494daf8f9de8f884c796bb14f569",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0002_normal.pt": "961a306294ddd92f2412ac900ee23e640beb19c09662d0a9857a79eb73cd8473",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0003_normal.pt": "e593f2c3638e689137012e094887b74e7150978e9f89121d7ddd60dfaaffd371",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0004_normal.pt": "0bcedc0bb63c285ace74135b97af431e30fe3ce5d27069eb86447b9a41bb2207",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0005_normal.pt": "5bb41e60d6e42645a0cf96bd5ac159f8f1a81db513745cff8660800f0894c9d9",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0006_normal.pt": "d6d75c189492ae52f6f46bf6d498a43535affa57414664538bff2094f2996023",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0007_normal.pt": "dc65f55a8a308b69434c98786c3e1a82285ae6f866d6af22abed4fb12185c26c",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0008_normal.pt": "438df614fcd04d2268a989d837326f9b9cf2d2797f302a1a006eb895f6c28c19",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0009_normal.pt": "971c77b875f2a7d4f5ddd63d5a66e84661f951a9230d63a360269ad02334e7c1",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0010_normal.pt": "c15c1cacd56b36deec5582bccdafd800480866fb4836d0a3e18291f2be49d8b6",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0011_normal.pt": "d862f3f2698036672224faff2240970bb63f139aec6233ee05241a0339c6b9bc",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0012_normal.pt": "001edaddaeb53cb6d78bc6920c026f40d916b8d928baf176a6de9b7bcc25d91b",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0013_normal.pt": "b6568040d437e6ebebdc69354594f8eea5cbd8885a0d085bea44f5bf9cf900f2",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0014_normal.pt": "8c97fd786e3fd416a003125b90fab1f8918270e87a84f58dc9193585243ae32e",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0015_normal.pt": "a0cb502386839145fc5850ea52d77f755129abea43244b4a6aa035958e4a9333",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0016_normal.pt": "2809bd4c785c8ac261be23aeb01fa58a7e64a187309dc9767ee25b7366d58677",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0017_normal.pt": "ec53f22ab1afd4bdb50d1f1272fef93f114c0931b720338d875d1d1d44ff5d73",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0018_normal.pt": "84806fd52b818d569a7adfe1447398aa0a6cff543175748f129d3366ef0a00e3",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0019_normal.pt": "c2cc8717588811b499a34fccc89a1d0f8fa8ca1188e64e8bb703643cafa779fc",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0020_normal.pt": "b11bb58f0741858d222e3edf343150b95c76b383f5d64817f4896c3d1dcdef24",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0021_normal.pt": "df7f6f32460ad1e3757b1f79296c94a4ae169203700ffac83ad4dfe4c581d03f",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0022_normal.pt": "b7795f39f5cc638f741232e80790eb81510121a17effbc5fdd489da731496813",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0023_normal.pt": "88e40b2e3e1df40a9a1446e1392e43798c0e61e91219476b8f02249949181b58",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0024_normal.pt": "7125acd445f75323aa189aa88aa0d093dea9f807872974f86d03390e78b7291a",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0025_normal.pt": "4e24ba0b7ce5cf67f6917fb86c45b4867d58e7f4661174ace19f32dccc200ccf",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0026_normal.pt": "2ed600a92801f95f842376aec7902ac9eb9f0095332391784ef2a11e14fc86f7",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0027_normal.pt": "c53b58fbf4b13283bd22b701b40c3a3148b5d2d99ae35da8b7c8d3502091246a",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0028_normal.pt": "8eab8cd2bf853dc0f643a9ffe488774756dd75d07e385c6632b48da10baa1e89",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0029_normal.pt": "186712f6f219102b8b24e022ae09fd66d793ce362e0f54688c3121edb77abe44",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0030_normal.pt": "b0279a5fdefcb97119e63cd1e6869aa098eda9f7ee3faf17c599d5f94e721171",
+    "artifacts/glyph_tail_adaptation_v2/assessment/fresh_0031_normal.pt": "fd1e616ebd884db470ec488d04767e121d4832a75562ebf12c148b2a44074c90",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0000_normal.pt": "81d8c14933347a557e8755517e4ec65cf389878fb65e868c75175e04175a6ed7",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0001_normal.pt": "14b02a289f10d31d3e8db6ab07e4240939c3fa127ca842549ded38da72f932c2",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0002_normal.pt": "2684eaadaa34e12ad1646b4a3d5b34eda5362b9e533b1b5fce01f1268b5a78ec",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0003_normal.pt": "fc207796dfa84d8ac5396e24d435db04d367fc5d2ebca5afc44a7a7040b3c564",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0004_normal.pt": "45229f773096f9c3d82cd297fa24d4068a150d1184515104fa1ef3d2d4bce6f1",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0005_normal.pt": "2a2ec6f5b1f3e691a14ed4c2b6bac4534f7ebda6dd986764e82453bcd4999a26",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0006_normal.pt": "0e410575f15cf1cd321b86141ce9ebd4b90509bcd2b692db9736d525e4b2ab50",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0007_normal.pt": "55df908a424686158cdc2661364c4605656d94ff5ffd6cc96f479580c3c7626d",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0008_normal.pt": "c3ed27cf9b4c89a73525c50c48797b31356d84981c1d980717b87a6da7c2bf13",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0009_normal.pt": "0818931c6b4bf09111ad0d3495e6d743747f9f1f29a46cb9826824fbcaa0dd85",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0010_normal.pt": "f81eaf65cbd6a8897d600c8ab399d984393d05fc465f86f90e9bdbafcaab6d52",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0011_normal.pt": "48acbd99c8e0bd4b146d2940583ab01594786e78f52609a1b6a37fc5a6a9ae11",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0012_normal.pt": "8433b10d5ef7b4894acdb69006885822d5c9af33f2d7fb42d27ae4488c511b5f",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0013_normal.pt": "3939119e9fa54e560a0c3e4419fda233dcbbc3b9b4a188dfcdf9b901b00aa5f3",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0014_normal.pt": "32b9f0a77721eafdcd3eb8151f551642f621ad4c6cdbe24cf88af0f7afd4d6ec",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0015_normal.pt": "09872ee6a2610e700fa9bb15ac8086099dbe12a93b6be90798e5948b62fcc021",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0016_normal.pt": "32da9953b3b69fb18f1a5180178c48d5067a41ef5563c4431912951166196da6",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0017_normal.pt": "bb4209a97c6c9c4739fd4e0480f129636b26c52f45443a8142d37798d9969ac6",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0018_normal.pt": "7fcffcc842a4ac309f06748c3285ee7d94d2b635a8de659459d241fa173e0732",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0019_normal.pt": "13394c5a7fe0e14ae2a29f1994da32568e85c5ecdd4d47d8fa99bbd4784a4b6c",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0020_normal.pt": "5ab78227c923045eec2e56badc39d7cbf1f9818a59cd47e2b458ce86a78d58eb",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0021_normal.pt": "abd9a037edf82edf524cdc661c26f4561c55521a1060759964263380da0be8fa",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0022_normal.pt": "9918937749d8a0192f7f2dde27a807f98ca7ef9f5c5254960b85f29f104725cf",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0023_normal.pt": "52078b56eb26d230f13ea18818e3513c1cc5681a59d2ecaa011c0c6ab732e7cd",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0024_normal.pt": "34adcfacaaf90339af2b5b7b3acfb5c0500b91ed63dffdd336d993f15858f6df",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0025_normal.pt": "038e51e9e28819bb06b18d9cd363eddc510ff2ebabddb2e9a570bceded12cf3c",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0026_normal.pt": "cd024909d6315a9ffc0cfb263fedf9933115facb629cba0c90f37fd903fe7495",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0027_normal.pt": "29414c6258b1127fc070c9a9de255db6d20af9fb1da36255fc2a91a762a3b617",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0028_normal.pt": "3153ba5c2da6068587e73791c9c4a28baaffe24ad66ca3feb537eaf75ea31d07",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0029_normal.pt": "72f3613490ce8c72ac3078c815b579c173b350d0d4109811b34ac61b5001eb74",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0030_normal.pt": "80aafc222ef49e46b84271716d02caabc489176e24b326c461b84bb960e53343",
+    "artifacts/glyph_tail_readout_control_v2/assessment/fresh_0031_normal.pt": "01647c2776558aea6b92d6928d49ba55390c66131ad5cb6a32ee981930cf7567",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0000_normal.pt": "cbb50fc1ce9814bfc9bc630d9e60d2fe9aeb1eb1d72e30722900e2f976114c49",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0001_normal.pt": "d2e3f716772110f1542109e995273fdd3144850e86ce6a04417fb1ee432fab6b",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0002_normal.pt": "0e0630444ae83443857e488ece54fa8bde36b3980e44de4f3a6158e4022e9390",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0003_normal.pt": "26e4b77a4af5574e83cf1513d372844662fc748ba655b3b72b877de36c9de24b",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0004_normal.pt": "691a06e64d7b80dac267125617aa2b20350274440f29695608dbb673f8e8ab11",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0005_normal.pt": "e19cdb0b069df7ad6a8b40c4975d25f1bda3ce36abb6327eee60f609caf5e51f",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0006_normal.pt": "4071bc3f263f750e6dcc3fff93d597b271d58020cfc2ffb45621cb1b3cf580a1",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0007_normal.pt": "2b8d5acc8981915c2bf6dc10abb559640f95e2ffdf10638b988f58cc63a07d6f",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0008_normal.pt": "9eb5bb8bbb8a30069b44a968c147e6f635b119d7883428698d0f74619a4fd5f8",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0009_normal.pt": "f66ca76f237e0c3c7e66f0981aa61ec7d30f2b4cfaa37a1dda231d2c753ed9c3",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0010_normal.pt": "9a7c68ddd6800423354dcae972e33fdd58239d59b969f44cb6bc3528721d9f08",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0011_normal.pt": "7d93d864145e74303bf85626e60336fd5974c4765243d3e3b18874da7a40eaa0",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0012_normal.pt": "758b7146bbf636f55fbb36dfec113085a9a0489e4e3948b8cb0558bfa4f5f37f",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0013_normal.pt": "329ab53c24d2e9a6e762793a4e1c09ca426ea547b67e42c7cf6b3538ba9127cd",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0014_normal.pt": "58e380fe35df329ba719afc8b6125b8659f68b26de36815d653a953ed02f74fb",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0015_normal.pt": "f0ef585c079f5f1edae938548ff96ea61eaa1d348588fd382d7fd4db014da86f",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0016_normal.pt": "77936f2ad2dc19325f158cc8fdcea88b180839787be711a45cdd6f6248fd2549",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0017_normal.pt": "b2e641de6b113c205a8c2a408d3951893e135f966719341a03271ffae271c021",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0018_normal.pt": "40329ddf6f2b2122dd4e5fa15b5b7e3e5264dd2756228be3bff503a3c6b166a2",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0019_normal.pt": "7359d108c1be55afffd2238f6ae3996d0e93b5bfec8fe0d2c886cf6dc1f8f80e",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0020_normal.pt": "6b6f023dcda76c2999adfe3e2964603303e4567a8c0d3cb9c92fb885ab4ebb2a",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0021_normal.pt": "4cafe28c2a039fc31ca8752b714f862ecbbf5f5a43d8b43d223e0989f8619429",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0022_normal.pt": "5eea73c820af0192e7994d37eed2f477d235084045fba08354b218b58c1b3e48",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0023_normal.pt": "3a0bac6c8bbec561d3e2a21e21dd563b964440b5fc43322c7be7952fea78ac49",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0024_normal.pt": "efe4a38b198c13eb3850fa39a4026db46995a31736e8e9cb9c2c1bd63a4d1daa",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0025_normal.pt": "5482aeb42ec3076dbe116636cc0cc2f7ec43fc74c12c5eec05d7b9a210265851",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0026_normal.pt": "d36e2b96d56d8b920080c63a5646448935413d2cb0c9fffd4dfb7a312ea5aa8a",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0027_normal.pt": "42b4bd7f4a9eba2f3b86f486447836fa0655144cdc86e124a84fdb42434234ff",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0028_normal.pt": "fe2f99e11fe1613b1fe8ba2b21ddc8d0276ee4be366673fca9aa5468032b8533",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0029_normal.pt": "519bb5c709381b6c6d0d63170f4e02061a6777c510a85132b0c00e9d8e801133",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0030_normal.pt": "4407a20e868bac487d2bfac940a55f82e9959f135e4f9b1b2c8485d7d1ce76e7",
+    "artifacts/balanced_glyph_writer_v1/assessment/fresh_0031_normal.pt": "42f91dd45b077b889b17d51ec7683c4c58e1c4c86634584515c1c0b9200b7981",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0000_normal.pt": "fdb7e8ede04b7183ae6280a99d0aa7990a34190b918d11144a3ef20dab0590ae",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0001_normal.pt": "4c2ac626a01e57697d592fa5679db008ea8e5c9a1dcb412e6c866219cea8f168",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0002_normal.pt": "84baa197a26fd8521954a36f702b3497b9e9af4d5ffdd805e9a797a683176fe3",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0003_normal.pt": "eb1377e745a162a556c32f61ecdba47581359d704dbd5707db6e6368bf4c9247",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0004_normal.pt": "29638c542dc31a2757d0e8e786acc33342f46cab18206bcd680e5ae06e3c2a3d",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0005_normal.pt": "6e468cd9796479ff98c04d9df60cce9eb1bbb8c91417a866835cfcc5132d6a7f",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0006_normal.pt": "8ee2d20d9751b9fee42edb8d28ae1c0b51f1c289c7f7f4516f5cf8cdadbf88d5",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0007_normal.pt": "8a2fc7a625f0f4b5b83dd47a7ae03b92ce3a666cf8aef7c2c69ec46d91dbaee5",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0008_normal.pt": "c13fbf91f53ec600bbc0dc55e5e2bbe943bcabe8f9a97034e9728b4c66db547b",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0009_normal.pt": "2815e1d52aa58fb4b98ef7c0b70e4c08a691c7a17ebd4e8a0f239b097d384416",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0010_normal.pt": "44d802064f122621311663334e5a8d32ecaa35854e1cce158b7fca6199548ddd",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0011_normal.pt": "354d50d2851080103d89d80912009ad482a0d855acbbd19c002afdb3f8a85cbd",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0012_normal.pt": "d285517c69d510599ac33444bf211d2f9b0b5cbf8adf385dd5eecef8f63446f2",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0013_normal.pt": "4bf98c5c8942cacf84a969281c5b2bba9e7545436ecb644c2b1248553b44274e",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0014_normal.pt": "c618868fea8e884b80e8269c587f6c7d88547c511d8fb20bb75a27505a444c1b",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0015_normal.pt": "d22f6d1f14d62f8071524f1d3e9a4712da1dce2a4d4bd21a76d9fcf6d6dcf643",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0016_normal.pt": "e91563cac9a749e6d5e05c532a1f6b9c2f60871b881b091e348a7e66bf431a8d",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0017_normal.pt": "a97b29c69c39d92209c85958a98449b3258bd6d463b90d7fd591e8cca5f7e894",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0018_normal.pt": "9f69071ea6164640e0a1512d6af3bb199921fb9f1dc2e15f588c04af73249b09",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0019_normal.pt": "9bd5bbf5ad8925a6f445795d6ef439e25290427af5790b1d44511ebaffcce240",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0020_normal.pt": "50a73acd3c87cab5226ebb282daf00005c77de28eed8d88b3a3ea2bd8893e311",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0021_normal.pt": "2c548d944219ba0538175c5dd35d9efacbceeeb97c38521947229ad018040da7",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0022_normal.pt": "4576c1ffe0a1ff976b2ce288205736de81ba060e26f16abae268fe59e646290f",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0023_normal.pt": "0724f9586ffc8d7d85b7a5c8b7a80c071e48fa97f54eff07b8b6bb69977345cc",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0024_normal.pt": "df5c65b6f84555b6e73e28da33f6f19ca26e3726c845498a987cb472f6719cbd",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0025_normal.pt": "6c400fa328a4fdb5139ad39ffc099e92440146179695ba684e640eda3570f7f1",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0026_normal.pt": "3dbb4e0fc514066b01822c77b107dde53654f6048b44fb5e6adee7cb46d74a3f",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0027_normal.pt": "13305b999579bafa907449066a9de5f15942dd28ad73d43a2f195b40982aaf36",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0028_normal.pt": "170a8cd901b3768f9817749da983a50bfd55532d43589030ff29230badf2c7c3",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0029_normal.pt": "19605e2d86a301cb91790b4de0d9c154d03d901a94017ac4d43ddcc45694b09c",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0030_normal.pt": "e437f1c87e367adf992b0d6f82e0256d63e132375f2b2379b2e986fa94087054",
+    "artifacts/balanced_glyph_parent_v1/assessment/fresh_0031_normal.pt": "b9b67524c1af864f7ca8a0d0150fc7f4f865075da71c7a26cc14779a7236073a",
+    "artifacts/balanced_glyph_writer_v1/cache/pools.pt": "201db406d906a2a1eaff916c14d24e256e77c24e9140c51c6e73cb42ab6aab5c"
+  },
+  "records": [
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0000/normal",
+      "raw": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.467145919799805
+      },
+      "centered": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.631725311279297
+      },
+      "reflected": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.476795196533203
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.11069650786120633,
+      "actual_weighted_mean": -0.003241682264467849,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0001/normal",
+      "raw": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 16.64593505859375
+      },
+      "centered": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 16.738494873046875
+      },
+      "reflected": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 16.655044555664062
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.059477293566629896,
+      "actual_weighted_mean": -0.0029250574573750697,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0002/normal",
+      "raw": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 17.4881591796875
+      },
+      "centered": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 17.50012969970703
+      },
+      "reflected": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 17.492950439453125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.015770410025538695,
+      "actual_weighted_mean": -0.0031518081740232596,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0003/normal",
+      "raw": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 10.954231262207031
+      },
+      "centered": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 11.068565368652344
+      },
+      "reflected": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 10.963085174560547
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06150548442224135,
+      "actual_weighted_mean": -0.002376819970492869,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0004/normal",
+      "raw": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 8.068317413330078
+      },
+      "centered": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 8.101619720458984
+      },
+      "reflected": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 8.075546264648438
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.027627012458523836,
+      "actual_weighted_mean": -0.003002086597336997,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0005/normal",
+      "raw": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 11.497085571289062
+      },
+      "centered": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 11.436973571777344
+      },
+      "reflected": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 11.487571716308594
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04187536661875413,
+      "actual_weighted_mean": -0.003317477737382905,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0006/normal",
+      "raw": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 5.8373870849609375
+      },
+      "centered": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 5.834991455078125
+      },
+      "reflected": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 5.837074279785156
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.041033630707829616,
+      "actual_weighted_mean": -0.0025556793408547424,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.7755575615628914e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0007/normal",
+      "raw": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 15.393840789794922
+      },
+      "centered": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 15.587715148925781
+      },
+      "reflected": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 15.41555404663086
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05806955437714123,
+      "actual_weighted_mean": -0.003252268507108652,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0008/normal",
+      "raw": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 8.226287841796875
+      },
+      "centered": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 8.176475524902344
+      },
+      "reflected": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 8.21795654296875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03247929816764028,
+      "actual_weighted_mean": -0.0027132499311394104,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0009/normal",
+      "raw": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 14.369796752929688
+      },
+      "centered": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 14.39756965637207
+      },
+      "reflected": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 14.373027801513672
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04458866695054553,
+      "actual_weighted_mean": -0.0026039784770072274,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0010/normal",
+      "raw": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 5.416145324707031
+      },
+      "centered": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 5.117950439453125
+      },
+      "reflected": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 5.397380828857422
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07514245848683743,
+      "actual_weighted_mean": -0.00236563956825944,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.7755575615628914e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0011/normal",
+      "raw": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 9.104606628417969
+      },
+      "centered": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 8.940959930419922
+      },
+      "reflected": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 9.087738037109375
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04442273603054048,
+      "actual_weighted_mean": -0.0022891025916754798,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0012/normal",
+      "raw": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 7.212852478027344
+      },
+      "centered": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 7.239406585693359
+      },
+      "reflected": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 7.216205596923828
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.036561046332178826,
+      "actual_weighted_mean": -0.002314192697157194,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0013/normal",
+      "raw": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 2.7914657592773438
+      },
+      "centered": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 3.085468292236328
+      },
+      "reflected": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 2.828277587890625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03818463815090922,
+      "actual_weighted_mean": -0.002390961167096933,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0014/normal",
+      "raw": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 24.50415802001953
+      },
+      "centered": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 24.479412078857422
+      },
+      "reflected": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 24.515121459960938
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.013174842470265347,
+      "actual_weighted_mean": -0.0029167557005483143,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0015/normal",
+      "raw": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 15.1907958984375
+      },
+      "centered": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 15.192214965820312
+      },
+      "reflected": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 15.197208404541016
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.00140540258947075,
+      "actual_weighted_mean": -0.0031936395252842214,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0016/normal",
+      "raw": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 12.862064361572266
+      },
+      "centered": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 12.85141372680664
+      },
+      "reflected": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 12.832870483398438
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0016568530308305185,
+      "actual_weighted_mean": -0.0022709386161919812,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0017/normal",
+      "raw": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 13.11224365234375
+      },
+      "centered": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 13.080192565917969
+      },
+      "reflected": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 13.12319564819336
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.018359127726057523,
+      "actual_weighted_mean": -0.0031366899013813253,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0018/normal",
+      "raw": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 15.434013366699219
+      },
+      "centered": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 15.423450469970703
+      },
+      "reflected": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 15.43057632446289
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.020465189799125483,
+      "actual_weighted_mean": -0.0033330635273376924,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0019/normal",
+      "raw": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 12.887161254882812
+      },
+      "centered": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 12.875984191894531
+      },
+      "reflected": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 12.89133071899414
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.018175972097211,
+      "actual_weighted_mean": -0.0033984972298399746,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0020/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.415670394897461
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.600296020507812
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.427480697631836
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.10123262952476075,
+      "actual_weighted_mean": -0.0032353614571768562,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0021/normal",
+      "raw": {
+        "source_id": 99316,
+        "source_unit": "克",
+        "first": "克",
+        "margin": 0.15937042236328125
+      },
+      "centered": {
+        "source_id": 99316,
+        "source_unit": "克",
+        "first": "克",
+        "margin": 0.17529296875
+      },
+      "reflected": {
+        "source_id": 99316,
+        "source_unit": "克",
+        "first": "克",
+        "margin": 0.1658935546875
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.009079383143658859,
+      "actual_weighted_mean": -0.0018634051124847028,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0022/normal",
+      "raw": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 10.758800506591797
+      },
+      "centered": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 10.759635925292969
+      },
+      "reflected": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 10.761611938476562
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0018265724768511404,
+      "actual_weighted_mean": -0.0031010529800134566,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0023/normal",
+      "raw": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 8.314556121826172
+      },
+      "centered": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 8.376060485839844
+      },
+      "reflected": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 8.324256896972656
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03634040999671839,
+      "actual_weighted_mean": -0.0028628690208565588,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0024/normal",
+      "raw": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 10.78704833984375
+      },
+      "centered": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 10.74774169921875
+      },
+      "reflected": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 10.782356262207031
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.046822018836593315,
+      "actual_weighted_mean": -0.0027943662702610067,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0025/normal",
+      "raw": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 15.202329635620117
+      },
+      "centered": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 15.198738098144531
+      },
+      "reflected": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 15.203912734985352
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.009136052940249328,
+      "actual_weighted_mean": -0.002011292042029278,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0026/normal",
+      "raw": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 12.29387092590332
+      },
+      "centered": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 12.355276107788086
+      },
+      "reflected": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 12.309207916259766
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02103805110894541,
+      "actual_weighted_mean": -0.002629477588460488,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0027/normal",
+      "raw": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 10.288570404052734
+      },
+      "centered": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 10.228622436523438
+      },
+      "reflected": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 10.271232604980469
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.018538446152675192,
+      "actual_weighted_mean": -0.0026807418002363905,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.7755575615628914e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0028/normal",
+      "raw": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 7.611667633056641
+      },
+      "centered": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 7.389484405517578
+      },
+      "reflected": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 7.591922760009766
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07871935913033923,
+      "actual_weighted_mean": -0.0034977723192713504,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0029/normal",
+      "raw": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 12.414934158325195
+      },
+      "centered": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 12.47208023071289
+      },
+      "reflected": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 12.422744750976562
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04883881837550841,
+      "actual_weighted_mean": -0.003340161112436861,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.7755575615628914e-17
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0030/normal",
+      "raw": {
+        "source_id": 101202,
+        "source_unit": "塞",
+        "first": "塞",
+        "margin": 2.7490386962890625
+      },
+      "centered": {
+        "source_id": 101202,
+        "source_unit": "塞",
+        "first": "塞",
+        "margin": 2.7097206115722656
+      },
+      "reflected": {
+        "source_id": 101202,
+        "source_unit": "塞",
+        "first": "塞",
+        "margin": 2.7462158203125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06701843925955586,
+      "actual_weighted_mean": -0.002409830251390978,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_adaptation_v2",
+      "key": "fresh/0031/normal",
+      "raw": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 7.641895294189453
+      },
+      "centered": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 7.944133758544922
+      },
+      "reflected": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 7.6773223876953125
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.059515974893827206,
+      "actual_weighted_mean": -0.003489122495073049,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0000/normal",
+      "raw": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.403072357177734
+      },
+      "centered": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.534446716308594
+      },
+      "reflected": {
+        "source_id": 22,
+        "source_unit": "7",
+        "first": "7",
+        "margin": 14.410629272460938
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.08835186006308504,
+      "actual_weighted_mean": -0.00254160152431041,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0001/normal",
+      "raw": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 4.655330657958984
+      },
+      "centered": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 4.751483917236328
+      },
+      "reflected": {
+        "source_id": 99369,
+        "source_unit": "半",
+        "first": "半",
+        "margin": 4.664302825927734
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.061796025605076466,
+      "actual_weighted_mean": -0.002879279074746356,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0002/normal",
+      "raw": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 19.793865203857422
+      },
+      "centered": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 19.84096908569336
+      },
+      "reflected": {
+        "source_id": 100181,
+        "source_unit": "唐",
+        "first": "唐",
+        "margin": 19.8026123046875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.022059990755550984,
+      "actual_weighted_mean": -0.0020490285403607328,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.7755575615628914e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0003/normal",
+      "raw": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 5.191314697265625
+      },
+      "centered": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 5.308982849121094
+      },
+      "reflected": {
+        "source_id": 39165,
+        "source_unit": "当",
+        "first": "当",
+        "margin": 5.197483062744141
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06330065206578439,
+      "actual_weighted_mean": -0.0016578882312902497,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0004/normal",
+      "raw": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 4.352527618408203
+      },
+      "centered": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 4.385425567626953
+      },
+      "reflected": {
+        "source_id": 99273,
+        "source_unit": "赛",
+        "first": "赛",
+        "margin": 4.355339050292969
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02728483802225412,
+      "actual_weighted_mean": -0.0011765394949782176,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.0658141036401503e-14
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0005/normal",
+      "raw": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 12.611869812011719
+      },
+      "centered": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 12.73019790649414
+      },
+      "reflected": {
+        "source_id": 99363,
+        "source_unit": "第一",
+        "first": "第",
+        "margin": 12.617176055908203
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0587022544125233,
+      "actual_weighted_mean": -0.0013147675479446396,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0006/normal",
+      "raw": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 6.100818634033203
+      },
+      "centered": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 6.098838806152344
+      },
+      "reflected": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 6.100643157958984
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03411774629370257,
+      "actual_weighted_mean": -0.001528090649880826,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0007/normal",
+      "raw": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 11.86678695678711
+      },
+      "centered": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 12.047199249267578
+      },
+      "reflected": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 11.883544921875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05403577747330246,
+      "actual_weighted_mean": -0.0025104392181483476,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0008/normal",
+      "raw": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 12.057533264160156
+      },
+      "centered": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 12.101020812988281
+      },
+      "reflected": {
+        "source_id": 86341,
+        "source_unit": "张",
+        "first": "张",
+        "margin": 12.061866760253906
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03250836638338228,
+      "actual_weighted_mean": -0.0016133213260179488,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0009/normal",
+      "raw": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 10.000411987304688
+      },
+      "centered": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 10.061054229736328
+      },
+      "reflected": {
+        "source_id": 104109,
+        "source_unit": "台湾",
+        "first": "台",
+        "margin": 10.00571060180664
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.039623132453996845,
+      "actual_weighted_mean": -0.0017300795151817215,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0010/normal",
+      "raw": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 4.694091796875
+      },
+      "centered": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 4.4947509765625
+      },
+      "reflected": {
+        "source_id": 106154,
+        "source_unit": "多元化",
+        "first": "多",
+        "margin": 4.68011474609375
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05594212473036464,
+      "actual_weighted_mean": -0.0019613112156643083,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0011/normal",
+      "raw": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 6.190166473388672
+      },
+      "centered": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 6.0813140869140625
+      },
+      "reflected": {
+        "source_id": 114314,
+        "source_unit": "三项",
+        "first": "三",
+        "margin": 6.174034118652344
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.029545637057310614,
+      "actual_weighted_mean": -0.002187982337215602,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0012/normal",
+      "raw": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 3.60693359375
+      },
+      "centered": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 3.6420669555664062
+      },
+      "reflected": {
+        "source_id": 12881,
+        "source_unit": "「",
+        "first": "「",
+        "margin": 3.61065673828125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04837275940703023,
+      "actual_weighted_mean": -0.0025668213004958057,
+      "RMS_shell_squared_sum_error": 1.3642420526593924e-12,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0013/normal",
+      "raw": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 4.460987091064453
+      },
+      "centered": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 4.893321990966797
+      },
+      "reflected": {
+        "source_id": 104025,
+        "source_unit": "英国",
+        "first": "英",
+        "margin": 4.492046356201172
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05614910931011252,
+      "actual_weighted_mean": -0.002017766813765498,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0014/normal",
+      "raw": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 17.903268814086914
+      },
+      "centered": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 17.91973876953125
+      },
+      "reflected": {
+        "source_id": 100785,
+        "source_unit": "楚",
+        "first": "楚",
+        "margin": 17.90019989013672
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.015922299115434413,
+      "actual_weighted_mean": -0.0014862976193864036,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0015/normal",
+      "raw": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 19.525901794433594
+      },
+      "centered": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 19.55030059814453
+      },
+      "reflected": {
+        "source_id": 100625,
+        "source_unit": "美国",
+        "first": "美",
+        "margin": 19.528583526611328
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.024307536549464714,
+      "actual_weighted_mean": -0.001341652513359865,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0016/normal",
+      "raw": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 8.529438018798828
+      },
+      "centered": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 8.495277404785156
+      },
+      "reflected": {
+        "source_id": 110887,
+        "source_unit": "恶心",
+        "first": "恶",
+        "margin": 8.521636962890625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.014350485924085277,
+      "actual_weighted_mean": -0.0016400638861149388,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.3877787807814457e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0017/normal",
+      "raw": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 10.733295440673828
+      },
+      "centered": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 10.753536224365234
+      },
+      "reflected": {
+        "source_id": 99759,
+        "source_unit": "射",
+        "first": "射",
+        "margin": 10.74276351928711
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.011600190893355622,
+      "actual_weighted_mean": -0.0027131293895951442,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0018/normal",
+      "raw": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 16.396148681640625
+      },
+      "centered": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 16.390052795410156
+      },
+      "reflected": {
+        "source_id": 100349,
+        "source_unit": "罗",
+        "first": "罗",
+        "margin": 16.393936157226562
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.01179261541776011,
+      "actual_weighted_mean": -0.0021157838390040333,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0019/normal",
+      "raw": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 11.284400939941406
+      },
+      "centered": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 11.284908294677734
+      },
+      "reflected": {
+        "source_id": 100177,
+        "source_unit": "时代",
+        "first": "时",
+        "margin": 11.28814697265625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0008488122105418938,
+      "actual_weighted_mean": -0.0030409686757392252,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0020/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 17.064960479736328
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 17.187591552734375
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 17.070823669433594
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0876891989707711,
+      "actual_weighted_mean": -0.0020928760555569016,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0021/normal",
+      "raw": {
+        "source_id": 104899,
+        "source_unit": "失去",
+        "first": "失",
+        "margin": 1.3455696105957031
+      },
+      "centered": {
+        "source_id": 104899,
+        "source_unit": "失去",
+        "first": "失",
+        "margin": 1.3236846923828125
+      },
+      "reflected": {
+        "source_id": 104899,
+        "source_unit": "失去",
+        "first": "失",
+        "margin": 1.3395042419433594
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.012490797253018826,
+      "actual_weighted_mean": -0.0017288402696350592,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0022/normal",
+      "raw": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 9.326377868652344
+      },
+      "centered": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 9.330795288085938
+      },
+      "reflected": {
+        "source_id": 106536,
+        "source_unit": "黄河",
+        "first": "黄",
+        "margin": 9.32781982421875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.009776538782212185,
+      "actual_weighted_mean": -0.0016050725077260718,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0023/normal",
+      "raw": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 4.51849365234375
+      },
+      "centered": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 4.561977386474609
+      },
+      "reflected": {
+        "source_id": 64817,
+        "source_unit": "右",
+        "first": "右",
+        "margin": 4.528629302978516
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.025701626896786678,
+      "actual_weighted_mean": -0.002993593049926918,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0024/normal",
+      "raw": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 6.781974792480469
+      },
+      "centered": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 6.751792907714844
+      },
+      "reflected": {
+        "source_id": 33983,
+        "source_unit": "格",
+        "first": "格",
+        "margin": 6.778106689453125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0359503940475534,
+      "actual_weighted_mean": -0.0023115075690288084,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0025/normal",
+      "raw": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 18.933046340942383
+      },
+      "centered": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 18.961301803588867
+      },
+      "reflected": {
+        "source_id": 121510,
+        "source_unit": "漩",
+        "first": "漩",
+        "margin": 18.931745529174805
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.025443881247369404,
+      "actual_weighted_mean": -0.0005859306723004205,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0026/normal",
+      "raw": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 10.958053588867188
+      },
+      "centered": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 11.058387756347656
+      },
+      "reflected": {
+        "source_id": 23,
+        "source_unit": "8",
+        "first": "8",
+        "margin": 10.968536376953125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.034362580586694946,
+      "actual_weighted_mean": -0.001795368167560462,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0027/normal",
+      "raw": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 4.686824798583984
+      },
+      "centered": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 4.538028717041016
+      },
+      "reflected": {
+        "source_id": 104618,
+        "source_unit": "水果",
+        "first": "水",
+        "margin": 4.672523498535156
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.0391106780035102,
+      "actual_weighted_mean": -0.0018811002363778692,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0028/normal",
+      "raw": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 9.857841491699219
+      },
+      "centered": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 9.659210205078125
+      },
+      "reflected": {
+        "source_id": 109033,
+        "source_unit": "东南亚",
+        "first": "东",
+        "margin": 9.849525451660156
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07038231405224948,
+      "actual_weighted_mean": -0.001473266260389714,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0029/normal",
+      "raw": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 15.10977554321289
+      },
+      "centered": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 15.023849487304688
+      },
+      "reflected": {
+        "source_id": 104345,
+        "source_unit": "海南",
+        "first": "海",
+        "margin": 15.103713989257812
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06070132926367933,
+      "actual_weighted_mean": -0.0021385026235583053,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 6.938893903907228e-18
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0030/normal",
+      "raw": {
+        "source_id": 113595,
+        "source_unit": "塞尔",
+        "first": "塞",
+        "margin": 5.773109436035156
+      },
+      "centered": {
+        "source_id": 113595,
+        "source_unit": "塞尔",
+        "first": "塞",
+        "margin": 5.800697326660156
+      },
+      "reflected": {
+        "source_id": 113595,
+        "source_unit": "塞尔",
+        "first": "塞",
+        "margin": 5.773624420166016
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04702433421042329,
+      "actual_weighted_mean": -0.00042912584377841523,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.329070518200751e-15
+    },
+    {
+      "run": "glyph_tail_readout_control_v2",
+      "key": "fresh/0031/normal",
+      "raw": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 6.190864562988281
+      },
+      "centered": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 6.536476135253906
+      },
+      "reflected": {
+        "source_id": 26288,
+        "source_unit": "大",
+        "first": "大",
+        "margin": 6.218330383300781
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06805631300412252,
+      "actual_weighted_mean": -0.0027059067398789113,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0000/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 7.847156524658203
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 8.047443389892578
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 7.8614959716796875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.09495862623656492,
+      "actual_weighted_mean": -0.0033993952450180197,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0001/normal",
+      "raw": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.930290222167969
+      },
+      "centered": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.92348861694336
+      },
+      "reflected": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.917022705078125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.003901420646510445,
+      "actual_weighted_mean": -0.003809657479696975,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0002/normal",
+      "raw": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.088842391967773
+      },
+      "centered": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.174808502197266
+      },
+      "reflected": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.118873596191406
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.013719277492775461,
+      "actual_weighted_mean": -0.002396252298135555,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0003/normal",
+      "raw": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.95075035095215
+      },
+      "centered": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.928136825561523
+      },
+      "reflected": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.948211669921875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.053717090495055686,
+      "actual_weighted_mean": -0.003023835108208932,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0004/normal",
+      "raw": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.915300369262695
+      },
+      "centered": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.994220733642578
+      },
+      "reflected": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.927349090576172
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.040360407354881556,
+      "actual_weighted_mean": -0.0030809469937832217,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0005/normal",
+      "raw": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.538112640380859
+      },
+      "centered": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.691551208496094
+      },
+      "reflected": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.570686340332031
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.027804934459808806,
+      "actual_weighted_mean": -0.002952844301474694,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0006/normal",
+      "raw": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.460765838623047
+      },
+      "centered": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.468097686767578
+      },
+      "reflected": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.4659423828125
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.007795679732566896,
+      "actual_weighted_mean": -0.0027558263234049685,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0007/normal",
+      "raw": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.0126495361328125
+      },
+      "centered": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.056190490722656
+      },
+      "reflected": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.0045013427734375
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.021136597892990494,
+      "actual_weighted_mean": -0.001974318623945196,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0008/normal",
+      "raw": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.05571746826172
+      },
+      "centered": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.112964630126953
+      },
+      "reflected": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.072437286376953
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.027348044989015108,
+      "actual_weighted_mean": -0.0039913084404507,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0009/normal",
+      "raw": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.053947448730469
+      },
+      "centered": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.0933837890625
+      },
+      "reflected": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.0685272216796875
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02292560226916862,
+      "actual_weighted_mean": -0.00423656015637528,
+      "RMS_shell_squared_sum_error": 1.8189894035458565e-12,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0010/normal",
+      "raw": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.65707015991211
+      },
+      "centered": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.367029190063477
+      },
+      "reflected": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.621150970458984
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.051739322948751,
+      "actual_weighted_mean": -0.0032037261235199426,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 8.881784197001252e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0011/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.956872940063477
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 13.0804443359375
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.970220565795898
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07229200143676451,
+      "actual_weighted_mean": -0.0039069045651022845,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0012/normal",
+      "raw": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 13.053977966308594
+      },
+      "centered": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 12.902511596679688
+      },
+      "reflected": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 13.031700134277344
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04568577131701357,
+      "actual_weighted_mean": -0.0033583751692239663,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0013/normal",
+      "raw": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.620639801025391
+      },
+      "centered": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.641502380371094
+      },
+      "reflected": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.623146057128906
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04530374745883847,
+      "actual_weighted_mean": -0.0027237397484984748,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.3877787807814457e-17
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0014/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.40957260131836
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.641336441040039
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.430484771728516
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07880628958932334,
+      "actual_weighted_mean": -0.0035549706446542234,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0015/normal",
+      "raw": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.387214660644531
+      },
+      "centered": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.500032424926758
+      },
+      "reflected": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.3966827392578125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06142371149855563,
+      "actual_weighted_mean": -0.0025794281687195075,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 8.881784197001252e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0016/normal",
+      "raw": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.181922912597656
+      },
+      "centered": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.723274230957031
+      },
+      "reflected": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.23080825805664
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06905938233990128,
+      "actual_weighted_mean": -0.003117927429651214,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0017/normal",
+      "raw": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 9.662498474121094
+      },
+      "centered": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 10.036018371582031
+      },
+      "reflected": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 9.688438415527344
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07753148584340863,
+      "actual_weighted_mean": -0.002691589535812316,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0018/normal",
+      "raw": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.4632568359375
+      },
+      "centered": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.564960479736328
+      },
+      "reflected": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.48883056640625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02728049358150031,
+      "actual_weighted_mean": -0.0034292425576880627,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0019/normal",
+      "raw": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.9888248443603516
+      },
+      "centered": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.8936271667480469
+      },
+      "reflected": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.9837455749511719
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06123798007800474,
+      "actual_weighted_mean": -0.001637302279190171,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0020/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.38709831237793
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.509675979614258
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.406684875488281
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.041785983860549436,
+      "actual_weighted_mean": -0.003338125299593073,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0021/normal",
+      "raw": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.328704833984375
+      },
+      "centered": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.405839920043945
+      },
+      "reflected": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.345069885253906
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03484568054250303,
+      "actual_weighted_mean": -0.0036975324195688613,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0022/normal",
+      "raw": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 1.1004714965820312
+      },
+      "centered": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 0.9540786743164062
+      },
+      "reflected": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 1.0815391540527344
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04977758875523364,
+      "actual_weighted_mean": -0.0032185709263547945,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0023/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.07579803466797
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.08380126953125
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.07923126220703
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.011874972031261422,
+      "actual_weighted_mean": -0.0025519791667382176,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0024/normal",
+      "raw": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.79854393005371
+      },
+      "centered": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.603727340698242
+      },
+      "reflected": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.798566818237305
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05601355354131954,
+      "actual_weighted_mean": -0.003302324472522448,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0025/normal",
+      "raw": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.406131744384766
+      },
+      "centered": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.397960662841797
+      },
+      "reflected": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.401691436767578
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.01139440060479302,
+      "actual_weighted_mean": -0.003094888083698761,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0026/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.035106658935547
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.068656921386719
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.056507110595703
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.009406471488617285,
+      "actual_weighted_mean": -0.0030000171440219144,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0027/normal",
+      "raw": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.119285583496094
+      },
+      "centered": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.115280151367188
+      },
+      "reflected": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.118904113769531
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07982120537442228,
+      "actual_weighted_mean": -0.0038112674305578573,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0028/normal",
+      "raw": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.640949249267578
+      },
+      "centered": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.644691467285156
+      },
+      "reflected": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.616254806518555
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.000567989736424579,
+      "actual_weighted_mean": -0.0018768013790328186,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0029/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.134698867797852
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.171424865722656
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.142730712890625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.024151165843191436,
+      "actual_weighted_mean": -0.0026390997494056333,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0030/normal",
+      "raw": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6027145385742188
+      },
+      "centered": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6317653656005859
+      },
+      "reflected": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6051292419433594
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06659919911291468,
+      "actual_weighted_mean": -0.0027612836296112327,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_writer_v1",
+      "key": "fresh/0031/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.134841918945312
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.210399627685547
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.143417358398438
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04567637605912367,
+      "actual_weighted_mean": -0.002591022612960896,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0000/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 7.847156524658203
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 8.047443389892578
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 7.8614959716796875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.09495862623656492,
+      "actual_weighted_mean": -0.0033993952450180197,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0001/normal",
+      "raw": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.930290222167969
+      },
+      "centered": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.92348861694336
+      },
+      "reflected": {
+        "source_id": 40542,
+        "source_unit": "周",
+        "first": "周",
+        "margin": 10.917022705078125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.003901420646510445,
+      "actual_weighted_mean": -0.003809657479696975,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0002/normal",
+      "raw": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.088842391967773
+      },
+      "centered": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.174808502197266
+      },
+      "reflected": {
+        "source_id": 101639,
+        "source_unit": "弥",
+        "first": "弥",
+        "margin": 12.118873596191406
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.013719277492775461,
+      "actual_weighted_mean": -0.002396252298135555,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0003/normal",
+      "raw": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.95075035095215
+      },
+      "centered": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.928136825561523
+      },
+      "reflected": {
+        "source_id": 101059,
+        "source_unit": "日本",
+        "first": "日",
+        "margin": 17.948211669921875
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.053717090495055686,
+      "actual_weighted_mean": -0.003023835108208932,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0004/normal",
+      "raw": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.915300369262695
+      },
+      "centered": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.994220733642578
+      },
+      "reflected": {
+        "source_id": 46944,
+        "source_unit": "一个",
+        "first": "一",
+        "margin": 9.927349090576172
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.040360407354881556,
+      "actual_weighted_mean": -0.0030809469937832217,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0005/normal",
+      "raw": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.538112640380859
+      },
+      "centered": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.691551208496094
+      },
+      "reflected": {
+        "source_id": 58695,
+        "source_unit": "中国",
+        "first": "中",
+        "margin": 4.570686340332031
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.027804934459808806,
+      "actual_weighted_mean": -0.002952844301474694,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0006/normal",
+      "raw": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.460765838623047
+      },
+      "centered": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.468097686767578
+      },
+      "reflected": {
+        "source_id": 61191,
+        "source_unit": "额",
+        "first": "额",
+        "margin": 13.4659423828125
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.007795679732566896,
+      "actual_weighted_mean": -0.0027558263234049685,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0007/normal",
+      "raw": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.0126495361328125
+      },
+      "centered": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.056190490722656
+      },
+      "reflected": {
+        "source_id": 106787,
+        "source_unit": "提起",
+        "first": "提",
+        "margin": 7.0045013427734375
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.021136597892990494,
+      "actual_weighted_mean": -0.001974318623945196,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0008/normal",
+      "raw": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.05571746826172
+      },
+      "centered": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.112964630126953
+      },
+      "reflected": {
+        "source_id": 26940,
+        "source_unit": "《",
+        "first": "《",
+        "margin": 20.072437286376953
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.027348044989015108,
+      "actual_weighted_mean": -0.0039913084404507,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0009/normal",
+      "raw": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.053947448730469
+      },
+      "centered": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.0933837890625
+      },
+      "reflected": {
+        "source_id": 2073,
+        "source_unit": "“",
+        "first": "“",
+        "margin": 7.0685272216796875
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02292560226916862,
+      "actual_weighted_mean": -0.00423656015637528,
+      "RMS_shell_squared_sum_error": 1.8189894035458565e-12,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0010/normal",
+      "raw": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.65707015991211
+      },
+      "centered": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.367029190063477
+      },
+      "reflected": {
+        "source_id": 101441,
+        "source_unit": "两种",
+        "first": "两",
+        "margin": 11.621150970458984
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.051739322948751,
+      "actual_weighted_mean": -0.0032037261235199426,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 8.881784197001252e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0011/normal",
+      "raw": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.956872940063477
+      },
+      "centered": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 13.0804443359375
+      },
+      "reflected": {
+        "source_id": 16,
+        "source_unit": "1",
+        "first": "1",
+        "margin": 12.970220565795898
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07229200143676451,
+      "actual_weighted_mean": -0.0039069045651022845,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0012/normal",
+      "raw": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 13.053977966308594
+      },
+      "centered": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 12.902511596679688
+      },
+      "reflected": {
+        "source_id": 102232,
+        "source_unit": "第四",
+        "first": "第",
+        "margin": 13.031700134277344
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04568577131701357,
+      "actual_weighted_mean": -0.0033583751692239663,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0013/normal",
+      "raw": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.620639801025391
+      },
+      "centered": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.641502380371094
+      },
+      "reflected": {
+        "source_id": 100012,
+        "source_unit": "为了",
+        "first": "为",
+        "margin": 4.623146057128906
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04530374745883847,
+      "actual_weighted_mean": -0.0027237397484984748,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.3877787807814457e-17
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0014/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.40957260131836
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.641336441040039
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 15.430484771728516
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07880628958932334,
+      "actual_weighted_mean": -0.0035549706446542234,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0015/normal",
+      "raw": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.387214660644531
+      },
+      "centered": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.500032424926758
+      },
+      "reflected": {
+        "source_id": 105507,
+        "source_unit": "西北",
+        "first": "西",
+        "margin": 7.3966827392578125
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06142371149855563,
+      "actual_weighted_mean": -0.0025794281687195075,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 8.881784197001252e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0016/normal",
+      "raw": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.181922912597656
+      },
+      "centered": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.723274230957031
+      },
+      "reflected": {
+        "source_id": 100685,
+        "source_unit": "孙",
+        "first": "孙",
+        "margin": 8.23080825805664
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06905938233990128,
+      "actual_weighted_mean": -0.003117927429651214,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0017/normal",
+      "raw": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 9.662498474121094
+      },
+      "centered": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 10.036018371582031
+      },
+      "reflected": {
+        "source_id": 25150,
+        "source_unit": "Spring",
+        "first": "S",
+        "margin": 9.688438415527344
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07753148584340863,
+      "actual_weighted_mean": -0.002691589535812316,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 7.105427357601002e-15
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0018/normal",
+      "raw": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.4632568359375
+      },
+      "centered": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.564960479736328
+      },
+      "reflected": {
+        "source_id": 99897,
+        "source_unit": "汉",
+        "first": "汉",
+        "margin": 10.48883056640625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.02728049358150031,
+      "actual_weighted_mean": -0.0034292425576880627,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0019/normal",
+      "raw": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.9888248443603516
+      },
+      "centered": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.8936271667480469
+      },
+      "reflected": {
+        "source_id": 116046,
+        "source_unit": "笃",
+        "first": "笃",
+        "margin": 0.9837455749511719
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06123798007800474,
+      "actual_weighted_mean": -0.001637302279190171,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0020/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.38709831237793
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.509675979614258
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 14.406684875488281
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.041785983860549436,
+      "actual_weighted_mean": -0.003338125299593073,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0021/normal",
+      "raw": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.328704833984375
+      },
+      "centered": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.405839920043945
+      },
+      "reflected": {
+        "source_id": 15946,
+        "source_unit": "中",
+        "first": "中",
+        "margin": 18.345069885253906
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.03484568054250303,
+      "actual_weighted_mean": -0.0036975324195688613,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0022/normal",
+      "raw": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 1.1004714965820312
+      },
+      "centered": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 0.9540786743164062
+      },
+      "reflected": {
+        "source_id": 31914,
+        "source_unit": "体",
+        "first": "体",
+        "margin": 1.0815391540527344
+      },
+      "raw_first_match": false,
+      "centered_first_match": false,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04977758875523364,
+      "actual_weighted_mean": -0.0032185709263547945,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0023/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.07579803466797
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.08380126953125
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 16.07923126220703
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.011874972031261422,
+      "actual_weighted_mean": -0.0025519791667382176,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0024/normal",
+      "raw": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.79854393005371
+      },
+      "centered": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.603727340698242
+      },
+      "reflected": {
+        "source_id": 25807,
+        "source_unit": "建",
+        "first": "建",
+        "margin": 21.798566818237305
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.05601355354131954,
+      "actual_weighted_mean": -0.003302324472522448,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 4.440892098500626e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0025/normal",
+      "raw": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.406131744384766
+      },
+      "centered": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.397960662841797
+      },
+      "reflected": {
+        "source_id": 16744,
+        "source_unit": "文",
+        "first": "文",
+        "margin": 21.401691436767578
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.01139440060479302,
+      "actual_weighted_mean": -0.003094888083698761,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0026/normal",
+      "raw": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.035106658935547
+      },
+      "centered": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.068656921386719
+      },
+      "reflected": {
+        "source_id": 17,
+        "source_unit": "2",
+        "first": "2",
+        "margin": 4.056507110595703
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.009406471488617285,
+      "actual_weighted_mean": -0.0030000171440219144,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 5.551115123125783e-17
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0027/normal",
+      "raw": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.119285583496094
+      },
+      "centered": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.115280151367188
+      },
+      "reflected": {
+        "source_id": 113453,
+        "source_unit": "南非",
+        "first": "南",
+        "margin": 12.118904113769531
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.07982120537442228,
+      "actual_weighted_mean": -0.0038112674305578573,
+      "RMS_shell_squared_sum_error": 4.547473508864641e-13,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0028/normal",
+      "raw": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.640949249267578
+      },
+      "centered": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.644691467285156
+      },
+      "reflected": {
+        "source_id": 110818,
+        "source_unit": "藻",
+        "first": "藻",
+        "margin": 5.616254806518555
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": 0.000567989736424579,
+      "actual_weighted_mean": -0.0018768013790328186,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.1102230246251565e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0029/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.134698867797852
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.171424865722656
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 11.142730712890625
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.024151165843191436,
+      "actual_weighted_mean": -0.0026390997494056333,
+      "RMS_shell_squared_sum_error": 0.0,
+      "LayerNorm_maximum_error_float64": 1.7763568394002505e-15
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0030/normal",
+      "raw": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6027145385742188
+      },
+      "centered": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6317653656005859
+      },
+      "reflected": {
+        "source_id": 30440,
+        "source_unit": "可",
+        "first": "可",
+        "margin": 0.6051292419433594
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.06659919911291468,
+      "actual_weighted_mean": -0.0027612836296112327,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 2.220446049250313e-16
+    },
+    {
+      "run": "balanced_glyph_parent_v1",
+      "key": "fresh/0031/normal",
+      "raw": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.134841918945312
+      },
+      "centered": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.210399627685547
+      },
+      "reflected": {
+        "source_id": 104456,
+        "source_unit": "印度",
+        "first": "印",
+        "margin": 15.143417358398438
+      },
+      "raw_first_match": true,
+      "centered_first_match": true,
+      "source_unit_changed_after_centering": false,
+      "reflected_first_changed": false,
+      "reflected_unit_changed": false,
+      "actual_mean": -0.04567637605912367,
+      "actual_weighted_mean": -0.002591022612960896,
+      "RMS_shell_squared_sum_error": 9.094947017729282e-13,
+      "LayerNorm_maximum_error_float64": 3.552713678800501e-15
+    }
+  ],
+  "groups": {
+    "balanced_glyph_parent_v1": {
+      "cases": 32,
+      "raw_first_matches": 29,
+      "centered_first_matches": 29,
+      "changed_units_after_centering": 0,
+      "contrived_reflection_first_character_changes": 0,
+      "contrived_reflection_source_unit_changes": 0,
+      "actual_weighted_mean_range": [
+        -0.00423656015637528,
+        -0.001637302279190171
+      ]
+    },
+    "balanced_glyph_writer_v1": {
+      "cases": 32,
+      "raw_first_matches": 29,
+      "centered_first_matches": 29,
+      "changed_units_after_centering": 0,
+      "contrived_reflection_first_character_changes": 0,
+      "contrived_reflection_source_unit_changes": 0,
+      "actual_weighted_mean_range": [
+        -0.00423656015637528,
+        -0.001637302279190171
+      ]
+    },
+    "glyph_tail_adaptation_v2": {
+      "cases": 32,
+      "raw_first_matches": 30,
+      "centered_first_matches": 30,
+      "changed_units_after_centering": 0,
+      "contrived_reflection_first_character_changes": 0,
+      "contrived_reflection_source_unit_changes": 0,
+      "actual_weighted_mean_range": [
+        -0.0034977723192713504,
+        -0.0018634051124847028
+      ]
+    },
+    "glyph_tail_readout_control_v2": {
+      "cases": 32,
+      "raw_first_matches": 31,
+      "centered_first_matches": 31,
+      "changed_units_after_centering": 0,
+      "contrived_reflection_first_character_changes": 0,
+      "contrived_reflection_source_unit_changes": 0,
+      "actual_weighted_mean_range": [
+        -0.0030409686757392252,
+        -0.00042912584377841523
+      ]
+    }
+  },
+  "training_actual_first_weighted_mean_range": [
+    -0.004786295647527819,
+    -0.0008449795515463841
+  ],
+  "training_actual_first_positive_weighted_mean": 0,
+  "training_first_cases": 3176,
+  "maximum_LayerNorm_reflection_error": 1.0658141036401503e-14,
+  "maximum_RMS_shell_squared_sum_error": 1.8189894035458565e-12,
+  "contrived_pairs_not_proven_reachable_by_real_image_prompts": true,
+  "normalization_proven_cause_of_answer_failure": false,
+  "new_heldout_evidence": false,
+  "body_forward_calls": 0,
+  "writer_forward_calls": 0,
+  "optimizer_updates": 0,
+  "new_images": 0,
+  "source_head_offline_only": true,
+  "training_data_reuse_allowed": false,
+  "minimum_available_gib": 62.82448196411133,
+  "elapsed_seconds": 120.12126722373068,
+  "CUDA_initialized": false
+}
