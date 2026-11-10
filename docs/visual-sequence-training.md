@@ -54,6 +54,10 @@ drift, then evaluate actual complete generated images. Track compute per
 answer and per passage along with correctness. See the
 [model decision and math](../references/visual_chunk_coverage_result.md).
 
+The teacher cache now has a verified schedule for 2,380,620 continuation,
+answer and terminal states. Its source loader and resumable GPU stage are
+available. See the [teacher context stage](visual-sequence-teacher-states.md).
+
 The experiment should retain fixed training checkpoints and evaluate the
 same reserved prompts at those checkpoints. The TeX and PowerPoint figures
 can then pair actual complete-answer scores with the corresponding output
