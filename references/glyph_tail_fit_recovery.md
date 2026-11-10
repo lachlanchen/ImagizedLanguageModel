@@ -15,6 +15,12 @@ This execution-resource amendment leaves the neural recipe unchanged. The new
 attempt retains its own wall-time receipt; it must not be presented as the
 complete cross-attempt time or memory history.
 
+The first recovery attempt is retained as an admission-only failure: after
+authenticating the complete feature cache it encounters the strict pressure
+entry limit, before loading the tail or executing any update. A later attempt
+waits for low pressure after that integrity read, before requesting the same
+strict admission. It does not weaken the pressure threshold.
+
 Before continuing the long fit, execute four genuine training updates, save an
 actual checkpoint, execute the following four updates, then reload that saved
 checkpoint and repeat the latter four. A four-update interval includes three

@@ -88,6 +88,10 @@ def run_fit(run, folder):
         rows = load(run / 'cache/report.json')['files']
         for row in rows:
             require(sha(ROOT / row['file']) == row['sha256'], 'frozen prefix changed')
+        # The complete 55-GiB integrity read can itself coincide with host I/O
+        # pressure. Wait before strict admission instead of failing without
+        # any optimizer work; retain all live resource floors and the mutex.
+        monitor.guard()
         with bridge_gpu(dict(minimum_entry_ram_gib=48.)) as (device, admission):
             numerics(); torch.manual_seed(m['seed']); torch.cuda.manual_seed_all(m['seed'])
             tail, start = load_tail(device); tail.train()
