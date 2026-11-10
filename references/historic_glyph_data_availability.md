@@ -7,6 +7,12 @@ a second copy. The [read-only audit](evidence/historic_glyph_inventory_20261111.
 checks the existing database and file paths without recrawling the website or
 changing that source workspace.
 
+**These are the original source-row counts, before curation.** A subsequent
+[stage-boundary correction](historic_stage_curation_result.md) identifies
+16,753 wrong-stage duplicates caused by the old parser. Use the derived,
+hashed stage-checked inventory for future preparation; do not interpret the
+raw table below as validated stage assignments.
+
 The database has 9,055 character records and 84,642 glyph records. Of those
 characters, **5,553 have glyph records**; a database character row alone does
 not establish the presence of a historical form. Every recorded file exists

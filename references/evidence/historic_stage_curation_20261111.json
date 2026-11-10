@@ -1,0 +1,42 @@
+{
+  "source_inventory_report_sha256": "1b5c9e21e5dfd39573858a7ce0de61cbb50c8354b3e1d4f7f57189c7ed6b7891",
+  "source_records_sha256": "bee4fe73bbac30cadb18783a8f5e1a288376ad8ac90e7e7809b3141c52d8c347",
+  "input_records": 84642,
+  "accepted_records": 67873,
+  "accepted_characters": 5553,
+  "accepted_stages": {
+    "oracle": 22224,
+    "bronze": 18565,
+    "seal": 5161,
+    "liushutong": 21923
+  },
+  "accepted_characters_by_stage": {
+    "oracle": 828,
+    "bronze": 1437,
+    "seal": 5161,
+    "liushutong": 3450
+  },
+  "quarantined_records": 16769,
+  "quarantine_reasons": {
+    "non_SVG_source_record": 16,
+    "wrong_stage_duplicate": 16753
+  },
+  "accepted_unique_SVG_hashes": 65133,
+  "accepted_cross_character_label_groups": 2696,
+  "accepted_cross_character_identical_SVG_groups": 2701,
+  "all_accepted_records_content_hashed_and_XML_checked": true,
+  "records_sha256": "6f031698f5ba597dab7d2c6b2e889ba92802503bbe88cf354064879bea0deef3",
+  "quarantine_sha256": "73e5a0345231222c14a518b076d58caba970261347be31005675db04f2fde17b",
+  "source_assets_copied": false,
+  "legacy_database_modified": false,
+  "network_requests": 0,
+  "model_calls": 0,
+  "rasterization_performed": false,
+  "linguistic_meanings_or_dates_verified": false,
+  "trained_or_evaluated_model": false,
+  "elapsed_seconds": 25.35230503976345,
+  "source_code_sha256": {
+    "scripts/curate_historic_stage_inventory.py": "a533f740ca1ecc5a361f2c051a750283c74d5bd678e5b57574dc97af0be9dd95",
+    "scripts/audit_historic_glyph_inventory.py": "3fee14ffd574c67978d55b33ad54b49813f4cdae144be14908da808d6acc3449"
+  }
+}
