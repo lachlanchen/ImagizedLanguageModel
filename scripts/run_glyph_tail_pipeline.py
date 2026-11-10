@@ -9,7 +9,7 @@ import subprocess
 import time
 
 from ilm.image_edit.baseline import ROOT, save_json, sha
-from scripts.score_pixel_language_first_blocks import host_resources, require
+from scripts.score_pixel_language_first_blocks import host_resources, require, owner_live
 
 
 def load(path):
@@ -23,11 +23,24 @@ def ticks(pid):
         return None
 
 
-def main(run):
+def main(run, after_completed_cache=False):
     own='scripts/run_glyph_tail_pipeline.py'
     require(subprocess.check_output(['git','show','HEAD:'+own],cwd=ROOT)==(ROOT/own).read_bytes(),
             'commit supervisor first')
-    require(not (run/'pipeline.json').exists(),'preserve previous coordinator state')
+    previous=None
+    if after_completed_cache:
+        previous=load(run/'pipeline.json')
+        for prefix in ['supervisor','child']:
+            require(not owner_live(dict(pid=previous.get(prefix+'_pid'),
+                start_ticks=previous.get(prefix+'_start_ticks'),boot_id=previous.get('boot_id'))),
+                'previous coordinator or child is still active')
+        require(load(run/'cache/status.json')['phase']=='completed' and not (run/'fit').exists(),
+                'resume only after the complete cache and before main fitting')
+        number=0
+        while (run/f'pipeline_attempt_{number:02}.json').exists(): number+=1
+        save_json(run/f'pipeline_attempt_{number:02}.json',previous)
+    else:
+        require(not (run/'pipeline.json').exists(),'preserve previous coordinator state')
     meta=load(run/'preparation.json')
     for stage in ['preflight_cache','preflight_fit']:
         require(load(run/stage/'status.json')['phase']=='completed','finish preflight first')
@@ -39,6 +52,7 @@ def main(run):
     state=dict(supervisor_pid=os.getpid(),supervisor_start_ticks=ticks(os.getpid()),
         boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
         source_sha256=sha(ROOT/own),preparation_sha256=sha(run/'preparation.json'),
+        continued_after_completed_cache=after_completed_cache,
         source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         stages=[],child_pid=None,child_start_ticks=None,entry_wait_seconds=0.)
 
@@ -57,9 +71,9 @@ def main(run):
     signal.signal(signal.SIGTERM,interrupt); signal.signal(signal.SIGINT,interrupt)
     save('preparing_serial_stages')
     try:
-        for stage,script in [('cache','scripts/train_glyph_tail_adapter.py'),
-                             ('fit','scripts/train_glyph_tail_adapter.py'),
-                             ('qualify','scripts/assess_glyph_tail_adapter.py')]:
+        stages=[('fit','scripts/train_glyph_tail_adapter.py'),('qualify','scripts/assess_glyph_tail_adapter.py')]
+        if not after_completed_cache: stages.insert(0,('cache','scripts/train_glyph_tail_adapter.py'))
+        for stage,script in stages:
             require(not (run/stage).exists(),'preserve prior or partial stage: '+stage)
             waited=0.
             while True:
@@ -106,4 +120,5 @@ def main(run):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run',type=Path,default=Path('artifacts/glyph_tail_adaptation_v2'))
-    args=parser.parse_args(); main(args.run.resolve())
+    parser.add_argument('--after-completed-cache',action='store_true')
+    args=parser.parse_args(); main(args.run.resolve(),args.after_completed_cache)
