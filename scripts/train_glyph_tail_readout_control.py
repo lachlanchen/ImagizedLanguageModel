@@ -31,6 +31,9 @@ def prepare(parent,output):
     require(not output.exists(),'preserve previous controls')
     from scripts.train_glyph_tail_adapter import verify
     m=verify(parent); code=identity()
+    input_review=load(parent/'input_review.json')
+    require(input_review['preparation_sha256']==sha(parent/'preparation.json')
+            and input_review['all32_fresh_input_images_actually_viewed'],'parent inputs need actual review')
     require(load(parent/'cache/status.json')['phase']=='completed','complete the common prefix cache first')
     cached=load(parent/'cache/report.json')
     require(len(cached['files'])==len(m['training_jobs']),'incomplete common cache')
@@ -52,6 +55,8 @@ def prepare(parent,output):
     review['identical_images_previously_viewed']=True
     review['parent_input_review_sha256']=sha(parent/'input_review.json')
     save_json(output/'input_review.json',review)
+    save_json(output/'comparison_registration.json',dict(companion_run=str(parent.relative_to(ROOT)),
+        protocol_sha256=sha(ROOT/PROTOCOL),all_outputs_reviewed_before_reference_scoring=True))
 
 
 def fit(output):

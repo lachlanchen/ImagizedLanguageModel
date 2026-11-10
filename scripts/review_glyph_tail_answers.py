@@ -69,6 +69,16 @@ def score(run):
             'record actual complete output-first review before scoring')
     for row in report['boards']: require(sha(folder/row['file'])==row['sha256'],'viewed board changed')
     require(set(manual['output_first_readings'])=={r['key'] for r in report['records']},'retain readings/uncertainty for every stream')
+    registration=run/'comparison_registration.json'
+    if registration.exists():
+        paired=load(registration)
+        require(paired['all_outputs_reviewed_before_reference_scoring'],'invalid paired assessment registration')
+        other=ROOT/paired['companion_run']/'raw_review'
+        require((other/'manual_review.json').exists(),'complete the registered companion output review before scoring either model')
+        companion=load(other/'manual_review.json')
+        require(companion['all72_actual_streams_viewed'] and companion['all18_boards_actually_viewed']
+                and companion['raw_review_report_sha256']==sha(other/'report.json'),
+                'registered companion review is incomplete')
     m=load(run/'preparation.json')
     require(sha(run/'evaluation_references.json')==m['evaluation_references_sha256'],'fixed new references changed')
     expected=load(run/'evaluation_references.json')
