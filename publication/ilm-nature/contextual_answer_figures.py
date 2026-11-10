@@ -71,6 +71,8 @@ def append(paper,*,balanced=False):
     charts=[];media=[]
     def chart(number,categories,values,series,maximum,unit,x):
         node,workbook=chart_part(ct,categories,values,series,0,maximum,'527A98')
+        for item in node.findall('.//c:numFmt',NS):item.set('formatCode','0');item.set('sourceLinked','0')
+        for item in node.findall('.//c:formatCode',NS):item.text='0'
         for item in node.findall('.//a:defRPr',NS):item.set('sz','1400')
         for axis in node.findall('c:chart/c:plotArea/c:valAx',NS):
             major=axis.find('c:majorUnit',NS)
@@ -108,7 +110,7 @@ def append(paper,*,balanced=False):
         annotation='First: 3,176; later: 20,086 reference-conditioned targets.\nThe first image is decided before any generated feedback.'
     chart(first_chart+1,categories,vals,'Foreground F1 (%)',100,25,820)
     slide.shape(annotation,820,309,720,60,14)
-    slide.shape('c  Fixed learned reader' if balanced else 'c  Image prompt',45,382,250,43,17,True,center=True,fill='EAF1F6')
+    slide.shape('c  Fixed reader' if balanced else 'c  Image prompt',45,382,250,43,17,True,center=True,fill='EAF1F6')
     slide.arrow(299,403,329,403)
     slide.shape('Exact training-state cache' if balanced else 'V + learned context',335,382,320,43,17,True,center=True,fill='EAF1F6')
     slide.arrow(659,403,689,403)

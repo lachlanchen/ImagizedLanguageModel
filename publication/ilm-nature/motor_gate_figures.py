@@ -92,10 +92,10 @@ def append(paper):
         45,782,710,63,15)
     slide.shape('d  Actual 55/45-mixture outputs, unrepaired',820,495,735,40,21,True)
     names=['Target','D','Noise D','Dense flow','Spatial flow']
-    for i,name in enumerate(names):slide.shape(name,845+i*135,539,125,34,16,True,center=True)
+    for i,name in enumerate(names):slide.shape(name,845+i*135,539,125,34,14,True,center=True)
     for i,index in enumerate(data['indices']):
         y=580+i*70
-        slide.shape(str(index),810,y+20,48,35,13)
+        slide.shape(str(index),790,y+20,70,35,13)
         for j,name in enumerate(names):
             row=next(v for v in data['cells'] if v['index']==index and v['column']==name)
             picture(row,875+j*135,y)
