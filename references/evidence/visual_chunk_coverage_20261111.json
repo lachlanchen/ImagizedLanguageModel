@@ -1,0 +1,95 @@
+{
+  "source_archive_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "input_hashes": {
+    "artifacts/balanced_glyph_writer_v1/preparation.json": "c0e00ad532849e35f4abefaf172ab3608bf308228c70ce997eb0a2e4271f8dd8",
+    "data/visual_qa/cmrc2018_short/train.jsonl": "742a473db53d1a55e319f0b52befc8da5fa3d884df395b37e66581e882d1496c",
+    "artifacts/semantic_glyph_bridge_v1/inventory.json": "da21053e92f2ed17adfc6e970c2e20a3624a0af5fabb671aa48a3141a65dec1f",
+    "artifacts/semantic_glyph_bridge_v1/training.pt": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621"
+  },
+  "source_code_sha256": "ab748907d2cab8f07c8d3fd2f29c0c52ae86fd0152968787c72d592e789db1d4",
+  "canonical_glyph_patterns": 4087,
+  "native_vocabulary_units": 151936,
+  "units_with_all_glyphs": 114501,
+  "multi_glyph_units_with_all_glyphs": 110405,
+  "exact_pixel_alias_groups": 20,
+  "units_in_exact_pixel_alias_groups": 41,
+  "maximum_glyphs_per_supported_unit": 128,
+  "source_only_train_answers": {
+    "examples": 3176,
+    "native_steps": 17853,
+    "character_steps": 23262,
+    "whole_source_roundtrips": 3176,
+    "individual_unit_roundtrips": 3176,
+    "all_characters_have_glyphs": 3176,
+    "lossless_unambiguous_examples": 3103,
+    "lossless_unambiguous_examples_with_maximum_8_glyphs": 3101,
+    "eligible_native_steps": 17286,
+    "eligible_character_steps": 22597,
+    "distinct_native_units": 4201,
+    "eligible_step_glyph_lengths": {
+      "1": 13282,
+      "2": 3795,
+      "3": 530,
+      "4": 129,
+      "5": 14,
+      "6": 11,
+      "7": 4,
+      "8": 2,
+      "10": 2
+    },
+    "ineligible_steps_by_reason": {
+      "same_pixels_as_another_native_unit": 84
+    }
+  },
+  "source_only_unique_original_train_paragraphs": {
+    "examples": 1128,
+    "native_steps": 299193,
+    "character_steps": 404604,
+    "whole_source_roundtrips": 1128,
+    "individual_unit_roundtrips": 881,
+    "all_characters_have_glyphs": 897,
+    "lossless_unambiguous_examples": 580,
+    "lossless_unambiguous_examples_with_maximum_8_glyphs": 523,
+    "eligible_native_steps": 152602,
+    "eligible_character_steps": 205177,
+    "distinct_native_units": 16644,
+    "eligible_step_glyph_lengths": {
+      "1": 212143,
+      "2": 71964,
+      "3": 9203,
+      "4": 2207,
+      "5": 581,
+      "6": 327,
+      "7": 251,
+      "8": 166,
+      "9": 83,
+      "10": 66,
+      "11": 37,
+      "12": 13,
+      "13": 12,
+      "14": 11,
+      "15": 3
+    },
+    "ineligible_steps_by_reason": {
+      "empty_or_replacement_character": 1204,
+      "same_pixels_as_another_native_unit": 693,
+      "missing_canonical_glyph": 229
+    }
+  },
+  "observed_multi_glyph_unit_anchor_composition": {
+    "distinct_observed_multi_glyph_units": 2294,
+    "total_occurrences": 4487,
+    "mean_glyph_anchor_cosine_median": 0.1456088423728943,
+    "first_glyph_anchor_cosine_median": 0.09510084241628647,
+    "mean_glyph_anchor_cosine_occurrence_weighted": 0.1572851836681366,
+    "mean_glyph_anchor_relative_l2_error_median": 1.1615110635757446,
+    "mean_glyph_anchor_cosine_at_least_point9": 0,
+    "train_only_teacher_embedding_geometry": true,
+    "actual_model_trajectory_tested": false
+  },
+  "canonical_raster_ids_are_deduplicated_binary_images": true,
+  "uses_training_records_only": true,
+  "analysis_uses_source_tokenizer": true,
+  "neural_model_forward_or_fit_performed": false,
+  "cuda_initialized": false
+}
