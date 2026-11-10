@@ -6,6 +6,9 @@ Purpose: Operating conventions for agents and collaborators working in this repo
 
 Note on precedence: If direct system/developer/user instructions conflict with this file, follow those direct instructions first.
 
+For model development and publication work, read the current acceptance criteria
+and experiment decision in [the engineering goal](docs/first-imagized-language-model-goal.md).
+
 ## Always Commit and Push After Change
 
 Policy: After making any change to files in this repository (e.g., via `apply_patch` or manual edits), create an atomic commit and push it to the tracked branch.
