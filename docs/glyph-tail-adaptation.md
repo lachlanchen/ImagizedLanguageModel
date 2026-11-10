@@ -119,3 +119,12 @@ That entry point accepts an image, weights and an output directory. It opens no
 training or evaluation corpus and does not decode a lexical ID into a font.
 The emitted image determines its own next feedback embedding. Historic-form,
 open-ended language and efficiency claims still require their own evidence.
+
+The standalone command accepts ordinary raster image sizes and transparent
+screenshots. It applies EXIF orientation, composites transparency onto white,
+converts to grayscale, bounds large inputs and pads the right/bottom edges to
+32-pixel alignment. `observed_prompt.png` records that preparation; the report
+binds both original bytes and observed pixels. This preprocessing uses no OCR,
+font or language interpretation. The registered assessment continues to use
+its identical prepared images. Fixed numeric source-derived task controls
+are authenticated before the body loads; they are not a glyph inventory.
