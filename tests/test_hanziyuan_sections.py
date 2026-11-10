@@ -1,7 +1,7 @@
 """Stage boundaries must preserve the source's empty historical sections."""
 import unittest
 
-from ilm.etymology.hanziyuan import parse_page
+from ilm.etymology.hanziyuan import parse_hanziyuan_entries, parse_page
 
 
 def page(body):
@@ -36,6 +36,39 @@ class HistoricalSectionTests(unittest.TestCase):
         _,glyphs=parse_page(html,'https://hanziyuan.net/etymology')
         self.assertEqual([(g.stage,g.label) for g in glyphs],
                          [('oracle','J00886'),('bronze','B00610'),('liushutong','L00585')])
+
+    def test_ajax_entries_keep_separate_fields_and_stylesheets(self):
+        first_svg = "data:image/svg+xml;base64,PHN2Zy8+"
+        second_svg = "data:image/svg+xml;base64,PHN2Zz48L3N2Zz4="
+        html = f"""
+        <div class="etymology-nav" id="&#x53EA;">
+          <div id="E08169">
+            <p><b>Main pronunciation 主要发音:</b> zhǐ</p>
+            <p><b>Original meaning 本义:</b> First description.</p>
+            <div id="etymologyCharacters">
+              <h3>Bronze characters (1)</h3>{glyph_list('B00610')}
+            </div>
+            <style>#B00610 {{ background-image: url('{first_svg}') }}</style>
+          </div>
+          <div id="E08172">
+            <p><b>Main pronunciation 主要发音:</b> zhī</p>
+            <p><b>Original meaning 本义:</b> Second description.</p>
+            <div id="etymologyCharacters">
+              <h3>Bronze characters (1)</h3>{glyph_list('B00610')}
+            </div>
+            <style>#B00610 {{ background-image: url('{second_svg}') }}</style>
+          </div>
+        </div>
+        """
+        entries = parse_hanziyuan_entries(html)
+        self.assertEqual([entry.entry_id for entry in entries], ["E08169", "E08172"])
+        self.assertEqual([entry.fields["original_meaning"] for entry in entries],
+                         ["First description.", "Second description."])
+        self.assertEqual([entry.glyphs[0].src for entry in entries], [first_svg, second_svg])
+        meta, glyphs = parse_page(html, "https://hanziyuan.net/etymology")
+        self.assertEqual((meta.char, meta.codepoint, meta.pinyin, meta.main_meaning),
+                         ("只", "U+53EA", "zhǐ", "First description."))
+        self.assertEqual([glyph.src for glyph in glyphs], [first_svg, second_svg])
 
 
 if __name__=='__main__':unittest.main()

@@ -68,6 +68,14 @@ class CharInfo:
     importance_freq: Optional[int] = None
 
 
+@dataclass
+class HanziyuanEntry:
+    query_char: str
+    entry_id: str
+    fields: Dict[str, str]
+    glyphs: List[Glyph]
+
+
 def _sanitize_filename(name: str, *, fallback: str = "glyph") -> str:
     name = (name or "").strip()
     if not name:
@@ -262,6 +270,19 @@ def _nearest_stage_for(el: Tag) -> Optional[str]:
 
 
 def _extract_char_info(soup: BeautifulSoup) -> Optional[CharInfo]:
+    source_entry = next(_hanziyuan_rows(soup), None)
+    if source_entry:
+        char, row = source_entry
+        fields = _hanziyuan_fields(row)
+        frequency = fields.get("importance_frequency", "")
+        return CharInfo(
+            char=char,
+            codepoint=f"U+{ord(char):04X}",
+            pinyin=fields.get("main_pronunciation"),
+            main_meaning=fields.get("original_meaning"),
+            importance_freq=int(frequency) if re.fullmatch(r"[0-9]+", frequency) else None,
+        )
+
     # Try <title>
     title = (soup.title.string if soup.title and soup.title.string else "").strip()
     m = re.search(r"([\u4e00-\u9fff])", title)
@@ -313,6 +334,108 @@ def _extract_char_info(soup: BeautifulSoup) -> Optional[CharInfo]:
     return CharInfo(char=ch, codepoint=codepoint, pinyin=pinyin, main_meaning=meaning)
 
 
+_HANZIYUAN_FIELDS = {
+    "traditional in your browser": "traditional",
+    "older traditional characters": "older_forms",
+    "simplified in your browser": "simplified",
+    "main pronunciation": "main_pronunciation",
+    "other pronunciations": "other_pronunciations",
+    "original meaning": "original_meaning",
+    "english senses": "english_senses",
+    "usage example": "usage_example",
+    "importance by frequency": "importance_frequency",
+    "shuowen": "shuowen",
+    "character decomposition": "decomposition",
+    "decomposition notes": "decomposition_notes",
+}
+
+
+def _hanziyuan_rows(soup: BeautifulSoup) -> Iterable[Tuple[str, Tag]]:
+    for result in soup.select("div.etymology-nav[id]"):
+        char = result["id"].strip()
+        if len(char) != 1:
+            continue
+        for row in result.find_all("div", id=re.compile(r"^E[0-9]+$"), recursive=False):
+            yield char, row
+
+
+def _hanziyuan_fields(row: Tag) -> Dict[str, str]:
+    fields = {}
+    for paragraph in row.find_all("p"):
+        label = paragraph.find("b", recursive=False)
+        if label is None:
+            continue
+        label_text = label.get_text(" ", strip=True)
+        heading = re.match(r"[A-Za-z ]+", label_text)
+        field = _HANZIYUAN_FIELDS.get(heading.group().strip().lower()) if heading else None
+        if field:
+            value = paragraph.get_text(" ", strip=True).removeprefix(label_text).strip()
+            if value:
+                fields.setdefault(field, value)
+    return fields
+
+
+def _css_backgrounds(root: Tag) -> Dict[str, str]:
+    backgrounds = {}
+    for style in root.find_all("style"):
+        css = style.string or style.get_text() or ""
+        for match in re.finditer(
+            r"#([A-Za-z0-9_\-]+)[^{}]*\{[^{}]*background(?:-image)?:\s*url\(([^)]+)\)",
+            css, re.I | re.S,
+        ):
+            backgrounds[match.group(1)] = match.group(2).strip().strip('\"\'')
+    return backgrounds
+
+
+def _stage_labels(root: Tag, debug: Optional[List[str]] = None) -> Dict[str, List[str]]:
+    labels_by_stage: Dict[str, List[str]] = {}
+    for heading in root.find_all("h3"):
+        stage = canonical_stage_from_text(heading.get_text(" ", strip=True))
+        if not stage:
+            continue
+        ul = heading.find_next_sibling()
+        while ul and ul.name != "ul":
+            # An empty stage has a paragraph instead of a list.
+            if ul.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
+                ul = None
+                break
+            ul = ul.find_next_sibling()
+        if ul is None:
+            if debug is not None:
+                debug.append(f"stage_section_without_list={stage}")
+            continue
+        for item in ul.find_all("li"):
+            match = re.search(r"\b([JBSL][0-9]{3,6})\b", item.get_text(" ", strip=True))
+            if match is None:
+                glyph = item.find(id=re.compile(r"^(etymology)?[JBSL][0-9]{3,6}$"))
+                if glyph:
+                    match = re.search(r"([JBSL][0-9]{3,6})", glyph["id"])
+            if match:
+                labels_by_stage.setdefault(stage, []).append(match.group(1))
+    return labels_by_stage
+
+
+def _css_glyphs(labels_by_stage: Dict[str, List[str]], backgrounds: Dict[str, str]) -> List[Glyph]:
+    glyphs = []
+    for stage, labels in labels_by_stage.items():
+        for label in labels:
+            url = backgrounds.get(label) or backgrounds.get(f"etymology{label}")
+            if url:
+                glyphs.append(Glyph(stage=stage, label=label, src=url))
+    return glyphs
+
+
+def parse_hanziyuan_entries(html: str) -> List[HanziyuanEntry]:
+    """Keep source meanings, pronunciations, and glyphs scoped to each entry."""
+    soup = BeautifulSoup(html, "html.parser")
+    entries = []
+    for char, row in _hanziyuan_rows(soup):
+        section = row.find(id="etymologyCharacters")
+        glyphs = _css_glyphs(_stage_labels(section), _css_backgrounds(row)) if section else []
+        entries.append(HanziyuanEntry(char, row["id"], _hanziyuan_fields(row), glyphs))
+    return entries
+
+
 def parse_page(
     html: str,
     base_url: Optional[str] = None,
@@ -334,20 +457,6 @@ def parse_page(
             debug.append("char_detected=None")
 
     glyphs: List[Glyph] = []
-
-    # 0) CSS <style> blocks with background-image rules
-    css_map: Dict[str, str] = {}
-    css_count = 0
-    for style_tag in soup.find_all("style"):
-        text = style_tag.string or style_tag.get_text() or ""
-        # Match selectors like #J00886, #etymologyJ00886 { background-image: url('data:...') }
-        for m in re.finditer(r"#([A-Za-z0-9_\-]+)[^{}]*\{[^{}]*background(?:-image)?:\s*url\(([^)]+)\)", text, re.I | re.S):
-            sel_id = m.group(1)
-            url = m.group(2).strip().strip('"\'')
-            css_map[sel_id] = url
-            css_count += 1
-    if debug is not None:
-        debug.append(f"css_background_entries={css_count}")
 
     # 1) IMG tags
     for img in soup.find_all("img"):
@@ -379,54 +488,23 @@ def parse_page(
 
     # 3) Build glyphs from CSS map + stage sections (Oracle/Bronze/Seal/Liushutong)
     # Sections live under #etymologyCharacters; headings are <h3> text with stage names.
-    section_root = soup.find(id="etymologyCharacters") or soup
-    labels_by_stage: Dict[str, List[str]] = {}
-    total_labels = 0
-    for h3 in section_root.find_all("h3"):
-        stage = canonical_stage_from_text(h3.get_text(" ", strip=True)) or None
-        if not stage:
-            continue
-        ul = h3.find_next_sibling()
-        while ul and ul.name != "ul":
-            # An empty stage has a paragraph instead of a list. Never borrow
-            # the following stage's list across a new section heading.
-            if ul.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
-                ul = None
-                break
-            ul = ul.find_next_sibling()
-        if not ul:
-            if debug is not None:
-                debug.append(f"stage_section_without_list={stage}")
-            continue
-        labels: List[str] = []
-        for li in ul.find_all("li"):
-            text = li.get_text(" ", strip=True)
-            # Labels look like J00886, B00610, S00273, L00585, etc.
-            m = re.search(r"\b([JBSL][0-9]{3,6})\b", text)
-            if not m:
-                # sometimes label is in an element id like etymologyJ00886
-                div = li.find(id=re.compile(r"^(etymology)?[JBSL][0-9]{3,6}$"))
-                if div:
-                    m = re.search(r"([JBSL][0-9]{3,6})", div.get("id"))
-            if m:
-                labels.append(m.group(1))
-        if labels:
-            labels_by_stage.setdefault(stage, []).extend(labels)
-            total_labels += len(labels)
+    scopes = [row for _, row in _hanziyuan_rows(soup)] or [soup]
+    stage_counts: Dict[str, int] = {}
+    css_glyphs = []
+    css_count = 0
+    for scope in scopes:
+        section = scope.find(id="etymologyCharacters") or scope
+        labels = _stage_labels(section, debug)
+        for stage, values in labels.items():
+            stage_counts[stage] = stage_counts.get(stage, 0) + len(values)
+        backgrounds = _css_backgrounds(scope)
+        css_count += len(backgrounds)
+        css_glyphs.extend(_css_glyphs(labels, backgrounds))
     if debug is not None:
-        debug.append(f"stage_labels_total={total_labels} stage_breakdown={ {k: len(v) for k,v in labels_by_stage.items()} }")
-
-    # Resolve labels to CSS images
-    css_hits = 0
-    for stage, labels in labels_by_stage.items():
-        for label in labels:
-            # Try both bare and with etymology prefix selectors seen in CSS
-            url = css_map.get(label) or css_map.get(f"etymology{label}")
-            if url:
-                glyphs.append(Glyph(stage=stage, label=label, src=url))
-                css_hits += 1
-    if debug is not None:
-        debug.append(f"glyphs_from_css={css_hits}")
+        debug.append(f"css_background_entries={css_count}")
+        debug.append(f"stage_labels_total={sum(stage_counts.values())} stage_breakdown={stage_counts}")
+        debug.append(f"glyphs_from_css={len(css_glyphs)}")
+    glyphs.extend(css_glyphs)
 
     # Deduplicate identical sources within same stage/label
     seen = set()
