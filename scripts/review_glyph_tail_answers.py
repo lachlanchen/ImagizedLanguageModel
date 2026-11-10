@@ -4,12 +4,21 @@ import argparse
 import json
 import os
 from pathlib import Path
+import subprocess
 
 import numpy as np
 from PIL import Image, ImageDraw
 
 from ilm.image_edit.baseline import ROOT, sha, save_json
 from scripts.score_pixel_language_first_blocks import require
+
+OWN = 'scripts/review_glyph_tail_answers.py'
+
+
+def identity():
+    require(subprocess.check_output(['git', 'show', 'HEAD:' + OWN], cwd=ROOT)
+            == (ROOT / OWN).read_bytes(), 'commit complete-answer evaluator before use')
+    return sha(ROOT / OWN)
 
 
 def load(path):
@@ -18,6 +27,7 @@ def load(path):
 
 def review(run):
     require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CPU review requires hidden CUDA')
+    code = identity()
     import torch
     from ilm.visual_lm.semantic_glyph_loop import tensor_hash
     torch.set_num_threads(2)
@@ -54,7 +64,7 @@ def review(run):
             name=f'{split}_{route}_{start//4:02}.png'; canvas.save(folder/name)
             boards.append(dict(file=name,sha256=sha(folder/name)))
     require(len(boards)==18,'unexpected board count')
-    save_json(folder/'report.json',dict(assessment_report_sha256=sha(run/'assessment/report.json'),
+    save_json(folder/'report.json',dict(evaluator_sha256=code,assessment_report_sha256=sha(run/'assessment/report.json'),
         records=report['records'],boards=boards,evaluator_references_read=False,
         all_output_PNG_and_feedback_image_hashes_verified=True,
         feedback_embeddings_cold_recomputed=False,output_pixels_repaired=False))
@@ -64,6 +74,8 @@ def review(run):
 def score(run):
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','CPU scorer requires hidden CUDA')
     folder=run/'raw_review'; report=load(folder/'report.json'); manual=load(folder/'manual_review.json')
+    require(identity()==report['evaluator_sha256'],'evaluator changed after raw-output review')
+    require(not (folder/'scores.json').exists(),'preserve the completed reference-scoring report')
     require(manual['raw_review_report_sha256']==sha(folder/'report.json')
             and manual['all72_actual_streams_viewed'] and manual['all18_boards_actually_viewed'],
             'record actual complete output-first review before scoring')
@@ -136,13 +148,30 @@ def score(run):
     fresh={int(r['key'].split('/')[1]):r for r in measurements if r['key'].startswith('fresh/')}
     pairs=sum(all(fresh[i]['manual_clear_complete_exact'] for i in [2*p,2*p+1]) for p in range(16))
     pilot=groups['fresh/normal']['manual_clear_complete_exact']>=24 and pairs>=10
+    # Descriptive only: answering both questions is stronger evidence of using
+    # the question when their allowed reference sets do not overlap. Preserve
+    # all sixteen pairs; do not filter the cohort or alter the pilot criterion.
+    pair_records=[]
+    for p in range(16):
+        left,right=[fresh[i] for i in [2*p,2*p+1]]
+        disjoint=set(left['references']).isdisjoint(right['references'])
+        both=left['manual_clear_complete_exact'] and right['manual_clear_complete_exact']
+        pixels_differ=left['png_sha256']!=right['png_sha256']
+        pair_records.append(dict(pair=p,keys=[left['key'],right['key']],
+            allowed_reference_sets_disjoint=disjoint,actual_output_pixels_differ=pixels_differ,
+            both_clear_complete_answers_correct=bool(both),
+            question_discrimination_witness=bool(disjoint and both and pixels_differ)))
     save_json(folder/'scores.json',dict(records=measurements,groups=groups,fresh_both_questions_correct_contexts=pairs,
+        fresh_context_pairs=pair_records,
+        fresh_question_discrimination_witnesses=sum(r['question_discrimination_witness'] for r in pair_records),
+        fresh_pairs_with_disjoint_allowed_references=sum(r['allowed_reference_sets_disjoint'] for r in pair_records),
+        descriptive_pair_analysis_changes_primary_criterion=False,
         pilot_complete_answer_requirement_passed=pilot,
         fixed_component_gate_passed=load(run/'qualify/report.json')['readout_gate_passed'],
         general_ILM_goal_achieved=False,independent_human_grading=False,
         inherited_pretraining_exposure_unknown=True,checkpoint_selection_performed=False,
         runtime_outputs_replaced=False,approximate_nearest_glyph_decoding_used=False,
-        manual_review_sha256=sha(folder/'manual_review.json')))
+        evaluator_sha256=report['evaluator_sha256'],manual_review_sha256=sha(folder/'manual_review.json')))
     print(json.dumps(dict(groups=groups,both_questions_correct=pairs,pilot=pilot),ensure_ascii=False,indent=2))
 
 

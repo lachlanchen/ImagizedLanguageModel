@@ -42,3 +42,13 @@ forms, alternate wording and ambiguous strokes remain explicit; they are not
 removed to improve the denominator. Report old normal/erased controls and
 training controls as well. Passing a copy gate, gradient preflight or pilot
 criterion alone does not complete the broad independent-ILM objective.
+
+An evaluation-only amendment, recorded while the main fit is running and before
+any new answer is generated, binds the evaluator source hash at raw-output
+review and checks it again before reference scoring. It also reports all sixteen
+fresh context pairs, marking which have disjoint allowed reference strings and
+which produce two distinct, correct complete image answers. This descriptive
+question-discrimination check does not filter the cohort or change the pilot
+criterion. Equal answers to two questions with overlapping references are not
+by themselves evidence that the model used the question. The paired readout
+control's complete output review is still required before either score.
