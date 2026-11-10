@@ -80,11 +80,14 @@ def fit(output):
     from scripts import distill_semantic_glyph_readout as base
     folder=output/'fit'; folder.mkdir(exist_ok=False)
     monitor=base.Monitor(folder,dict(maximum_stage_seconds=m['fit_seconds'],maximum_vram_gib=8.,
-        minimum_runtime_ram_gib=32.,maximum_pressure_wait_seconds=300.))
+        minimum_runtime_ram_gib=32.,maximum_pressure_wait_seconds=1800.))
     monitor.status('admitting')
     try:
         rows=load(output/'cache/report.json')['files']
         for row in rows: require(sha(ROOT/row['file'])==row['sha256'],'common frozen state changed')
+        # Match the resumed primary's resource allowance, and let pressure
+        # subside after the large integrity read before strict admission.
+        monitor.guard()
         with bridge_gpu(dict(minimum_entry_ram_gib=48.)) as (device,admission):
             numerics(); torch.manual_seed(m['seed']); torch.cuda.manual_seed_all(m['seed'])
             # Match the main fit's initializer calls, then release the unused
@@ -127,8 +130,9 @@ def fit(output):
                 fraction=(step+1)/m['fit_steps']; decay=.1+.9*.5*(1+math.cos(math.pi*fraction))
                 for group in optimizer.param_groups: group['lr']=m['readout_learning_rate']*decay
                 require(all(p._version==version for p,version in frozen),'frozen bridge parameter changed')
-                if (step+1)%100==0:
-                    item=dict(step=step+1,loss=float(loss.detach()),pixel=float(pixel.detach()),stop=float(stop.detach()))
+                if (step+1)%100==0 or step%100==0:
+                    item=dict(step=step+1,loss=float(loss.detach()),pixel=float(pixel.detach()),stop=float(stop.detach()),
+                              route='copy' if step%4==3 else 'question')
                     with (folder/'history.jsonl').open('a') as f: f.write(json.dumps(item)+'\n')
                     monitor.status('training_readout_only',**item); print(json.dumps(item),flush=True)
                 if (step+1)%1000==0:
@@ -136,12 +140,14 @@ def fit(output):
                     if path.exists(): path.replace(folder/'checkpoint_previous.pt')
                     atomic_tensor(path,dict(model={k:v.detach().cpu() for k,v in model.state_dict().items()},
                         body_tail_adapters=initial_adapters,tail_start_layer=start,
-                        optimizer=optimizer.state_dict(),step=step+1,language_training_complete=True,
+                        optimizer=optimizer.state_dict(),step=step+1,language_training_complete=step+1==m['fit_steps'],
                         preparation_sha256=sha(output/'preparation.json'),readout_only_control=True,
                         trained_body_parameters=0,usable_language_demonstrated=False,
                         torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state()))
             path=folder/'sampled_indices.pt'
             atomic_tensor(path,dict(question_or_copy=torch.tensor(sampled),copy_indices=torch.stack(copy_indices)))
+            require(sha(parent/'fit/checkpoint_latest.pt')==load(parent/'fit/report.json')['checkpoint_sha256'],
+                    'completed primary checkpoint changed')
             main=torch.load(parent/'fit/checkpoint_latest.pt',weights_only=True,map_location='cpu')
             rng_match=dict(cpu=torch.equal(torch.get_rng_state(),main['torch_rng']),
                            cuda=torch.equal(torch.cuda.get_rng_state().cpu(),main['cuda_rng'].cpu()))
@@ -165,7 +171,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--stage',choices=['prepare','fit'],required=True)
     p.add_argument('--parent',type=Path,default=Path('artifacts/glyph_tail_adaptation_v2'))
-    p.add_argument('--output',type=Path,default=Path('artifacts/glyph_tail_readout_control_v1'))
+    p.add_argument('--output',type=Path,default=Path('artifacts/glyph_tail_readout_control_v2'))
     a=p.parse_args()
     if a.stage=='prepare': prepare(a.parent.resolve(),a.output.resolve())
     else: fit(a.output.resolve())

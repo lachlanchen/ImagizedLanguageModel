@@ -87,6 +87,15 @@ with CPU `--stage audit` before GPU `--stage run`, an unused recovery folder,
 and no live fit or coordinator. The 18,000-step schedule and assessment remain
 unchanged. An intermediate checkpoint is rejected by standalone inference.
 
+The matched broader-data control is prepared at
+`artifacts/glyph_tail_readout_control_v2`. It uses the same cached questions
+with G and stopping trained, and zero body-adapter updates. Its execution
+resource allowance matches the resumed primary; the unused v1 preparation is
+retained. Both final models must complete their raw-output review before either
+reserved-reference score is opened. The
+[control protocol](../references/glyph_tail_data_control_protocol.md) defines
+the comparison and its interpretation.
+
 After qualification review, `scripts/assess_glyph_tail_adapter.py --stage assess`
 generates the fixed 72 complete streams. The
 [assessment protocol](../references/glyph_tail_assessment_protocol.md) fixes the

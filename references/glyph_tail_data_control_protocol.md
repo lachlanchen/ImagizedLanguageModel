@@ -47,3 +47,13 @@ If neither improves, the proposed repair has failed. None of these outcomes
 alone proves general language learning from scratch, historical-script reading,
 LLM parity or a new physics-based principle. The experiment must report both
 final conditions and all uncertainty, not select a favourable explanation.
+
+Before either final model generates assessment answers, a resource-only
+amendment gives this control the primary recovery's 1,800-second cumulative
+pressure-wait allowance and waits after feature-file authentication before
+requesting unchanged strict GPU admission. The 48-GiB entry, 32-GiB runtime
+and 8-GiB allocation limits stay fixed. Logging now includes both question
+and copy batches. The sole checkpoint eligible for inference remains update
+18,000. These changes affect neither data, sampled updates nor optimization.
+The unused v1 preparation is preserved; v2 reuses the identical images and
+prefix files, and becomes the explicitly registered companion before scoring.
