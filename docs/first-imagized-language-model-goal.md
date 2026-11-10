@@ -2,24 +2,43 @@
 
 Updated: 2026-11-11
 
-## Current target and decision
+## Goal and acceptance criteria
 
-Build a usable language model that reads a physical prompt image and generates
-meaningful writing as images on one 4090-class GPU. Chinese is the first
-language test; historical forms, handwriting and forms without Unicode codes
-remain part of the intended scope. Text may be rendered for input preparation.
-Teachers, aligned text and fonts may prepare training data, but the deployed
-answer must come from learned image generation and actual image feedback.
-An external text service, lexical classifier, font renderer or answer bank
-cannot supply it at inference. Retained pretrained foundations and their costs
-must be reported. Neither a lightweight model trained from scratch nor an
-efficiency advantage over a comparable LLM has been demonstrated.
+Train and run a compact, standalone language model on one RTX 4090. Start with
+Chinese. It reads visible writing and a question, understands their relation,
+and generates a readable, complete answer as an image. The same model should
+continue a passage from its visible prefix. Render typed questions at the
+input boundary. Use the generated pixels as feedback for continuation, and
+offer text transcription as an optional downstream operation.
 
-Success requires correct new complete answers, question dependence within a
-shared passage, coherent writing, natural stopping and reproducible standalone
-execution. Copying, training-set reconstruction and first-character accuracy
-are necessary diagnostics; each leaves substantial language requirements
-untested. A small answer pilot also cannot certify general language competence.
+Use substantial authentic books and complete question-answer sequences.
+Offline teachers and existing pretrained weights can speed up training.
+Report their contribution, along with corpus size, target coverage and
+preparation cost. The deployed model generates from continuous visual states
+with no tokenizer, OCR, teacher service, font renderer, lexical head or answer
+lookup in the answer path.
+
+1. Run held-out prompts from independent works and passage groups. Test
+   readable complete answers, coherent continuation and learned stopping.
+   Ask different questions about the same passage to measure whether the
+   answer responds to the question. Score raw outputs against preregistered
+   controls and retain failures alongside successes.
+2. Establish transfer across written forms. Include held-out fonts and
+   handwritten or historical examples. For a glyph-origin task, check that
+   the answer identifies the historical stages and renders the attested forms,
+   including shapes unavailable in Unicode. Record source evidence for each
+   historical claim and label reconstructed forms accordingly.
+3. Reproduce training and cold inference within the memory of one 4090.
+   Report total and trainable parameters, peak VRAM, elapsed time and latency.
+   Compare with a named local Qwen baseline on the same tasks. Establish
+   comparable quality before claiming a compute advantage.
+4. Maintain the Nature-style TeX and PDF with editable PowerPoint figures.
+   Plot complete-answer and paired-question performance at fixed training
+   checkpoints. Show the same raw output images across checkpoints. Record
+   pixel fidelity and copying as diagnostics and disclose inherited weights
+   and evaluation limits.
+
+## Current decision
 
 The completed [contextual comparison](../references/glyph_tail_paired_answers_result.md)
 gives 16/32 clear complete answers versus 11/32 for its writer-only control.
@@ -64,14 +83,15 @@ Use the local teacher offline to supervise context and continuation.
 The prepared corpus now contains 13,785 training sequences with 2.58
 million target glyph positions. See the [visual sequence data](visual-sequence-training.md).
 
-Train a compact causal body over groups of visual glyphs. A shared image
-encoder should turn the observed or emitted span into continuous feedback.
-An image decoder should generate complete spans and learn when to end an
-answer. Test the teacher's original update sequence against that same
-sequence with learned image-span feedback before relying on this transfer.
-Measure both context decisions and actual generated images. Continue toward
-a smaller standalone body once the image feedback and generation work. See
-the [visual span measurements](../references/visual_chunk_coverage_result.md).
+Fit the compact visual span model on complete sequences. Its shared encoder
+maps observed or emitted glyph spans to continuous updates. The writer
+generates the next span and learns when to stop. The offline teacher schedule
+contains 2,380,620 context targets and awaits its GPU slot. The compact route
+uses a 1.409B-parameter pretrained contextual body and must demonstrate
+held-out language quality with generated-image feedback. Compare its original
+source updates with learned image-span updates under the same context before
+attributing any gain to visual learning. See the [teacher preparation](visual-sequence-teacher-states.md)
+and [visual span measurements](../references/visual_chunk_coverage_result.md).
 
 Measure complete answers, passage continuation, question dependence and
 historical form handling on independent groups. Measure peak VRAM, total
