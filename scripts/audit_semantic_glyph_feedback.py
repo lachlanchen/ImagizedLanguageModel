@@ -38,7 +38,10 @@ def run(output):
                 'commit feedback verifier first')
     output.mkdir(parents=True);began=time.perf_counter();count=0;maximum_error=0.;records=[]
     try:
-        with bridge_gpu(dict(minimum_entry_ram_gib=64.)) as (device,admission),torch.no_grad():
+        # The completed primitive measured <1GiB allocation. This verifier
+        # loads two small bridge copies, never the17.8GiB native reader.
+        # Its separate entry reserve is48GiB; runtime reserve remains32GiB.
+        with bridge_gpu(dict(minimum_entry_ram_gib=48.)) as (device,admission),torch.no_grad():
             torch.use_deterministic_algorithms(True)
             torch.backends.cudnn.deterministic=True;torch.backends.cudnn.benchmark=False
             torch.backends.cuda.matmul.allow_tf32=torch.backends.cudnn.allow_tf32=False
@@ -60,6 +63,7 @@ def run(output):
                 records.append(dict(**job,emitted_glyphs=len(value['images']),
                     all_actual_images_and_GPU_feedback_embeddings_bit_exact=True))
                 resources=host_resources()
+                require(torch.cuda.max_memory_allocated()/1024**3<=5.,'small feedback auditor allocation cap')
                 require(resources['available_gib']>=32 and resources['some_pressure_avg10']<=.5
                         and resources['full_pressure_avg10']<=.1,'feedback audit resource reserve')
                 save_json(output/'status.json',dict(phase='verifying',streams=len(records),glyphs=count,pid=os.getpid()))
@@ -68,6 +72,7 @@ def run(output):
                 maximum_CPU_GPU_feedback_error=maximum_error,CPU_tolerance=1e-4,
                 all_cold_GPU_embedding_hashes_bit_exact=True,
                 checkpoint_sha256=sha(checkpoint),code_sha256=code,admission=admission,
+                minimum_entry_available_gib=48.,minimum_runtime_available_gib=32.,maximum_allocated_vram_gib=5.,
                 elapsed_seconds=time.perf_counter()-began,
                 peak_allocated_vram_gib=torch.cuda.max_memory_allocated()/1024**3,
                 native_context_body_loaded=False,teacher_loaded=False,optimizer_updates=0,

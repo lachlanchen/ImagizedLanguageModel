@@ -64,7 +64,8 @@ def score(output):
         gold=np.stack([data['ink'][cmap[c],0].numpy() for c in job['expected_answer']])
         n=max(len(actual),len(gold));a=np.zeros((n,32,32),dtype=np.uint8);g=a.copy();a[:len(actual)]=actual;g[:len(gold)]=gold
         denom=int(a.sum()+g.sum());f1=2*int((a&g).sum())/denom if denom else 1.
-        transcription=manual['normal_transcriptions'].get(f"{job['parent']}_{i//2%8}") if job['route']=='normal' else None
+        transcription=manual['normal_transcriptions' if job['route']=='normal' else 'blank_transcriptions'].get(
+            f"{job['parent']}_{i//2%8}")
         measurements.append(dict(parent=job['parent'],year=job['year'],route=job['route'],intervention=job['intervention'],
             stopped=row['stopped'],capped=row['capped'],foreground_f1=f1,
             canonical_pixel_exact=bool(row['stopped'] and len(actual)==len(gold) and np.array_equal(a,g)),
