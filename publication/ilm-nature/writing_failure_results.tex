@@ -1,0 +1,55 @@
+\subsection*{The learned writing interface loses usable reading capability}
+Increasing the cohort from 32 to 512 questions gives 495/512 complete
+pixel-exact training answers after 16,000 updates, but no exact normal
+development answers (0/16 Chinese and 0/8 English; Supplementary Note 58,
+Fig.~S36). All 512 training first images are exact; none of the 24 normal
+development first images matches a reference. The mismatch is therefore
+already present before feedback from an earlier complete generated image,
+although within-image autoregression remains a possible contributor.
+
+Scoring fixed owning checkpoints separates an erroneous learned distribution
+from a decoding-only explanation. Every supplied correct development first
+image is less likely than the corresponding saved emission. At the final
+state, the mean best-reference minus emitted-image log probability is
+$-751.24$\,nat for Chinese and $-941.82$\,nat for English. A maximum-likelihood
+decoder cannot select any of these supplied references over the existing
+emission. This does not rule out other correct wordings or fonts. Relative
+question conditioning nevertheless transfers: 14/16 Chinese reference events
+favor their owning question and all eight paired assignment contrasts are
+positive. Relative preference alone does not establish useful output.
+
+The original source reader, using the same normal and question-erased PNGs,
+reproduces all 32 ILM image-memory fingerprints. A temporary helper-only
+source text head then gives 12/16 literal normal answers, zero erased answers
+and 11/16 source-text answers. The two date questions receive the correct
+years; the learned pixel writer's corresponding forms remain damaged.
+Some literal mismatches are aliases or longer relevant wording. These are
+reused development cases without independent semantic grading, and the
+symbolic helper generates no ILM images. The comparison localizes substantial
+lost capability to the writing interface without uniquely separating its
+initial query, conditional density and image-history projection.
+
+We consequently separate glyph formation from language continuation
+(Fig.~S37). A continuous CNN encoder and decoder learn training-only semantic
+anchors for 4,087 distinct canonical forms. Direct decoding is exact for
+4,048 forms (foreground F1 0.999940); actual-image roundtrip is exact for
+3,697 (F1 0.999634). The 80.22-second primitive run peaks at 0.728\,GiB,
+excluding the large contextual body and its pretraining. Semantic alignment
+is weaker than reconstruction, with mean cosine 0.77735 on the first 128
+forms. Clear reconstruction neither validates unseen glyphs nor demonstrates
+language understanding. The proposed continuation loop preserves the native
+assistant state, predicts one complete glyph and re-encodes its actual pixels.
+Fitting only its readout/stopping on 508 supported questions yields readable
+new complete strings corresponding to 288 items and the year 1874
+(Supplementary Note 59). Nevertheless, only 1/16 normal Chinese development
+images is canonical-exact, and eleven cap; the one exact full year string
+occurs in training. These are partial examples, not a semantic-accuracy estimate.
+
+A frozen intervention replaces passage dates on two templates selected from
+those outputs (Fig.~S38). Eleven of fourteen prospectively fixed new dates
+have clear matching output-first transcriptions, two are canonical-exact and
+all fourteen stop naturally without a target length. Three damaged/wrong
+digit streams remain failures. Erased-question controls give no correct date.
+Six clear outputs compose full year strings absent from supported training
+answers. This supports restricted input-dependent composition through actual
+image feedback, while broader unseen-answer reliability remains unresolved.

@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Mon Nov  9 21:09:33 2026
-%DIF ADD new.tex   Mon Nov  9 21:09:33 2026
+%DIF DEL old.tex   Tue Nov 10 14:28:31 2026
+%DIF ADD new.tex   Tue Nov 10 14:28:31 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -89,9 +89,9 @@
 
 \newcommand{\PaperTitle}{Learning conditional language\\in continuous image space}
 %DIF 88c88
-%DIF < \newcommand{\PaperSummary}{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, yet retaining full pretrained context gives no exact development answers after 40,000 updates. Exact copying and constrained source-pixel answer selection do not establish composition of absent answers. Native reader-query learning and supplied-correct-text writer controls also retain inaccurate outputs. A separate 3.453M-parameter causal pixel head reaches 512/512 exact training first blocks after 4.65 minutes of optimization, but none of 192 development first blocks. These head costs exclude the pretrained reader and its cached states. Accurate emission for learned conditions is therefore achievable, while generalization from visual language to complete correct answers remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}
+%DIF < \newcommand{\PaperSummary}{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, while earlier complete image writers fail useful answering. We couple full native visual context and emitted-image history to a normalized causal density over physical pixel patterns. The externally pretrained 7.544B actor adapts 13.856M parameters and reaches 32/32 pixel-exact complete training answers after 4,000 updates, at 18.191 GiB peak allocation. Fresh-PNG evaluation gives no exact answers on 16 Chinese development questions or eight English transfer instructions, and the outputs retain broken glyphs. A separate cold deployment reproduces five complete streams exactly without a runtime teacher, OCR or answer font renderer. Complete emission for learned conditions is achievable, but useful language generalization remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}
 %DIF -------
-\newcommand{\PaperSummary}{\DIFadd{Written language includes handwritten and historical forms that cannot always be specified by a character code. We investigate an independent model that reads writing images and generates answer images, using encoded text only for offline preparation or separate diagnostics. Controlled experiments distinguish faithful reconstruction, answer selection and autonomous writing on one consumer GPU. A frozen continuous codec reconstructs 126 of 128 development blocks exactly, while earlier complete image writers fail useful answering. We couple full native visual context and emitted-image history to a normalized causal density over physical pixel patterns. The externally pretrained 7.544B actor adapts 13.856M parameters and reaches 32/32 pixel-exact complete training answers after 4,000 updates, at 18.191 GiB peak allocation. Fresh-PNG evaluation gives no exact answers on 16 Chinese development questions or eight English transfer instructions, and the outputs retain broken glyphs. A separate cold deployment reproduces five complete streams exactly without a runtime teacher, OCR or answer font renderer. Complete emission for learned conditions is achievable, but useful language generalization remains unresolved. Historical-script understanding, general instruction following and efficiency at matched language quality remain unachieved.}} %DIF > 
+\newcommand{\PaperSummary}{\DIFadd{Written language includes historical and handwritten forms outside fixed character inventories. We investigate independent image-input, image-output language generation on one consumer GPU, separating reconstruction, conditional preference and autonomous answering. A normalized causal pixel writer above an externally pretrained 7.544B visual contextual body fits 495 of 512 Chinese training answers exactly after 16,000 updates, but none of 24 normal development answers. All supplied correct development first images have lower likelihood than the corresponding erroneous emission, despite transferred paired-question preferences. A matched diagnostic reader reproduces all 32 image-memory fingerprints and returns literal reference answers on 12 of 16 normal Chinese questions, versus zero with the question erased. This helper-only text baseline localizes substantial lost capability to the learned writing interface; it is not an image-output solution. A continuous complete-glyph loop then produces some readable new short answers, but eleven of sixteen normal development streams still cap. On two selected question templates, eleven of fourteen prospective date changes yield clearly matching answer images, with two pixel-exact; all fourteen stop naturally. These non-independent manual readings support restricted input-dependent composition, not general language qualification. Historical-script understanding and an efficiency advantage at matched language quality remain unresolved.}} %DIF > 
 %DIF -------
 
 \onehalfspacing\linenumbers
@@ -136,7 +136,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved writing-controls baseline (d387a49).}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved 50-slide baseline (947058e7).}\par\medskip
 
 {\sffamily\bfseries\Large\PaperTitle\par}\medskip Imagized Language Model Project\par\medskip
 \section*{Abstract}\PaperSummary\par\bigskip
@@ -175,9 +175,15 @@ stroke configurations must remain coherent while context selects among many
 similar written forms. The present study uses one canonical font to isolate
 this coupling before introducing handwriting or historical scripts.
 
-\section*{Results}
-\subsection*{A continuous visual interface preserves the written signal}
-Each observed cell is a $32\times32$ ink image. An orthonormal transform maps
+\DIFaddbegin \DIFadd{The experiments progress from initial raster readers and denoisers to
+an inherited visual/contextual body and a separately learned glyph
+interface. The earlier architectures provide controls; the final
+experiments evaluate the complete-glyph loop shown in Fig.~S37.
+}
+
+\DIFaddend \section*{Results}
+\subsection*{\DIFdelbegin \DIFdel{A }\DIFdelend \DIFaddbegin \DIFadd{An initial }\DIFaddend continuous visual interface preserves the written signal}
+\DIFdelbegin \DIFdel{Each }\DIFdelend \DIFaddbegin \DIFadd{In the initial control, each }\DIFaddend observed cell is a $32\times32$ ink image. An orthonormal transform maps
 its signed pixels into a 1,024-dimensional continuous field. The transform is
 invertible and contains no learned character dictionary. An ordered sequence
 of these fields enters a causal transformer. The deployed model receives no
@@ -187,7 +193,18 @@ data preparation. This distinction matters: the current benchmark studies
 learning from rendered Chinese, rather than discovering a script from raw
 archaeological photographs.
 
-\plate{Figure_1_mechanism}{\textbf{A visual language interface and its conditional generation test.}
+\DIFdelbegin %DIFDELCMD < \plate{Figure_1_mechanism}{\textbf{A visual language interface and its conditional generation test.}
+%DIFDELCMD < \textbf{a}, Rendered or native writing supplies ordered image cells to a causal
+%DIFDELCMD < visual reader. Text rendering is an optional host interface. \textbf{b}, A
+%DIFDELCMD < conditional denoiser uses the frozen reader state and a noisy four-cell strip
+%DIFDELCMD < to predict diffusion velocity. Future cells exchange information through
+%DIFDELCMD < convolutions and pooled-cell attention. \textbf{c}, Sampling starts from noise,
+%DIFDELCMD < emits four visible cells and appends their pixels to the next context. Optional
+%DIFDELCMD < transcription follows generation and is absent from the model. The schematic
+%DIFDELCMD < shows the implemented experimental contract, without claiming that its
+%DIFDELCMD < generated content is already correct.}{fig:mechanism}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \plate{Figure_1_mechanism}{\textbf{Initial visual language interface and its conditional generation test.}
 \textbf{a}, Rendered or native writing supplies ordered image cells to a causal
 visual reader. Text rendering is an optional host interface. \textbf{b}, A
 conditional denoiser uses the frozen reader state and a noisy four-cell strip
@@ -195,8 +212,9 @@ to predict diffusion velocity. Future cells exchange information through
 convolutions and pooled-cell attention. \textbf{c}, Sampling starts from noise,
 emits four visible cells and appends their pixels to the next context. Optional
 transcription follows generation and is absent from the model. The schematic
-shows the implemented experimental contract, without claiming that its
-generated content is already correct.}{fig:mechanism}
+shows the initial denoising control. Its generated content remains incorrect;
+the later complete-glyph runtime is shown in Fig.~S37.}{fig:mechanism}
+\DIFaddend 
 
 \subsection*{Ordered image history contains next-writing information}
 The strongest established reader result uses 2,048 deterministic development
@@ -978,8 +996,8 @@ in this component; conditional generalization and complete language answering
 remain unresolved. Physical fitting is not a semantic benchmark.
 
 
-\DIFaddbegin \subsection*{\DIFadd{Complete image-answer fitting and failed transfer}}
-\DIFadd{The native actor learns complete answer images
+\subsection*{Complete image-answer fitting and failed transfer}
+The native actor learns complete answer images
 (Supplementary Note 57; Figs.~S34 and S35). Full prompt context conditions a
 causal pixel density and learned stop; emitted images become history.
 The externally pretrained 7.544B actor adapts 13.856M parameters on 32 natural
@@ -996,6 +1014,67 @@ Five cold-loaded PNG replays preserve complete pixels and stopping exactly.
 Complete image fitting succeeds; new-prompt answering fails.
 Changes in initialization, decoder, precision and schedules preclude attributing
 this gain to the likelihood alone.
+
+
+\DIFaddbegin \subsection*{\DIFadd{The learned writing interface loses usable reading capability}}
+\DIFadd{Increasing the cohort from 32 to 512 questions gives 495/512 complete
+pixel-exact training answers after 16,000 updates, but no exact normal
+development answers (0/16 Chinese and 0/8 English; Supplementary Note 58,
+Fig.~S36). All 512 training first images are exact; none of the 24 normal
+development first images matches a reference. The mismatch is therefore
+already present before feedback from an earlier complete generated image,
+although within-image autoregression remains a possible contributor.
+}
+
+\DIFadd{Scoring fixed owning checkpoints separates an erroneous learned distribution
+from a decoding-only explanation. Every supplied correct development first
+image is less likely than the corresponding saved emission. At the final
+state, the mean best-reference minus emitted-image log probability is
+$-751.24$\,nat for Chinese and $-941.82$\,nat for English. A maximum-likelihood
+decoder cannot select any of these supplied references over the existing
+emission. This does not rule out other correct wordings or fonts. Relative
+question conditioning nevertheless transfers: 14/16 Chinese reference events
+favor their owning question and all eight paired assignment contrasts are
+positive. Relative preference alone does not establish useful output.
+}
+
+\DIFadd{The original source reader, using the same normal and question-erased PNGs,
+reproduces all 32 ILM image-memory fingerprints. A temporary helper-only
+source text head then gives 12/16 literal normal answers, zero erased answers
+and 11/16 source-text answers. The two date questions receive the correct
+years; the learned pixel writer's corresponding forms remain damaged.
+Some literal mismatches are aliases or longer relevant wording. These are
+reused development cases without independent semantic grading, and the
+symbolic helper generates no ILM images. The comparison localizes substantial
+lost capability to the writing interface without uniquely separating its
+initial query, conditional density and image-history projection.
+}
+
+\DIFadd{We consequently separate glyph formation from language continuation
+(Fig.~S37). A continuous CNN encoder and decoder learn training-only semantic
+anchors for 4,087 distinct canonical forms. Direct decoding is exact for
+4,048 forms (foreground F1 0.999940); actual-image roundtrip is exact for
+3,697 (F1 0.999634). The 80.22-second primitive run peaks at 0.728\,GiB,
+excluding the large contextual body and its pretraining. Semantic alignment
+is weaker than reconstruction, with mean cosine 0.77735 on the first 128
+forms. Clear reconstruction neither validates unseen glyphs nor demonstrates
+language understanding. The proposed continuation loop preserves the native
+assistant state, predicts one complete glyph and re-encodes its actual pixels.
+Fitting only its readout/stopping on 508 supported questions yields readable
+new complete strings corresponding to 288 items and the year 1874
+(Supplementary Note 59). Nevertheless, only 1/16 normal Chinese development
+images is canonical-exact, and eleven cap; the one exact full year string
+occurs in training. These are partial examples, not a semantic-accuracy estimate.
+}
+
+\DIFadd{A frozen intervention replaces passage dates on two templates selected from
+those outputs (Fig.~S38). Eleven of fourteen prospectively fixed new dates
+have clear matching output-first transcriptions, two are canonical-exact and
+all fourteen stop naturally without a target length. Three damaged/wrong
+digit streams remain failures. Erased-question controls give no correct date.
+Six clear outputs compose full year strings absent from supported training
+answers. This supports restricted input-dependent composition through actual
+image feedback, while broader unseen-answer reliability remains unresolved.
 }
 
 
@@ -1029,14 +1108,20 @@ context effect during autonomous sampling and visible feedback.
 Broader books and offline teacher-generated exercises can supply later
 training data while leaving the final inference path independent. A larger
 corpus or longer training requires improvement on the intended generation
-task, beyond the conditional-likelihood gain established here\DIFaddbegin \DIFadd{.
-}
+task, beyond the conditional-likelihood gain established here.
 
-\DIFadd{Complete pixel learning reproduces all 32 seen answers, but none of 24
-normal development answers. Further unchanged fitting of those questions is
+\DIFdelbegin \DIFdel{Complete pixel learning reproduces all 32 seen answers, but none of 24
+normal development answers . Further unchanged fitting of those questions is
 therefore unwarranted. Varied visual-language supervision must be tested against
 readable, correct new-prompt answers, retaining independent image generation
-and accounting for external pretraining}\DIFaddend .
+and accounting for external pretraining}\DIFdelend \DIFaddbegin \DIFadd{Broader pixel training reproduces 495 of 512 answers but still fails the
+supplied unseen reference images. The matched native reader retains useful
+answer capability, directing the intervention toward the learned writing
+interface. The complete-glyph loop supports restricted input-dependent date
+composition, with actual-image feedback independently replayed. It remains
+unreliable on broader questions: eleven of sixteen normal Chinese streams cap.
+Wider semantic readout coverage and robust generated histories remain
+necessary; clear familiar glyphs and low training loss are insufficient}\DIFaddend .
 
 
 Recent visual generators study mixture assignment and the geometry of
@@ -1212,7 +1297,6 @@ Supplementary Information distinguish earlier foundation provenance from the
 present raster-only deployment experiment.
 
 \begin{thebibliography}{21}
-\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}
 \small
 \interlinepenalty=5000
 \bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \emph{arXiv} 2401.03321 (2024). \url{https://arxiv.org/abs/2401.03321}.

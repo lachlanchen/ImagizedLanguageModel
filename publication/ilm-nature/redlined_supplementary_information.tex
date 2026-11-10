@@ -1,7 +1,7 @@
 \documentclass[10pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Mon Nov  9 21:09:33 2026
-%DIF ADD new.tex   Mon Nov  9 21:09:33 2026
+%DIF DEL old.tex   Tue Nov 10 14:28:32 2026
+%DIF ADD new.tex   Tue Nov 10 14:28:32 2026
 \usepackage[margin=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{longtable}
@@ -126,7 +126,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved writing-controls baseline (d387a49).}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved 50-slide baseline (947058e7).}\par\medskip
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 {\sffamily\bfseries\Large Supplementary Information\par}
@@ -4390,9 +4390,9 @@ source order, not output quality. These are first blocks, not complete answers.}
 
 
 \clearpage
-\DIFaddbegin \section*{\DIFadd{Supplementary Note 57 | Complete native pixel-language learning}}
+\section*{Supplementary Note 57 | Complete native pixel-language learning}
 \label{note:complete-pixel}
-\DIFadd{The complete actor retains the native source's full image-prompt key/value
+The complete actor retains the native source's full image-prompt key/value
 context. Scoped suffix adapters operate only after prefill; original prompt
 states remain unchanged. A learned start query and image-history projection
 condition one 4,096-dimensional causal state. A normalized physical density
@@ -4402,40 +4402,37 @@ disabled in output generation. The actor contains 7,543,984,691 parameters,
 of which 13,855,681 train, including 2,666,944 in the physical density and
 6,193,152 suffix-adapter parameters. External foundation pretraining and prior
 image-interface/raster learning remain part of initialization.
-}
 
-\DIFadd{Let $X$ denote the observed prompt image, $Y_t$ a binary $32\times64$ answer
+Let $X$ denote the observed prompt image, $Y_t$ a binary $32\times64$ answer
 block and $h_t=R(X,Y_{<t})$ the causal contextual state. Lossless packing
 maps each block to 256 adjacent $2\times4$ pieces, $b_{tj}\in\{0,\ldots,255\}$.
 These are eight-bit physical patterns, not character or word identities.
 The four-layer width-192 causal head gives
-}\[
+\[
  p_\theta(Y_t\mid h_t)=\prod_{j=1}^{256}
  p_\theta(b_{tj}\mid h_t,b_{t,<j}).
 \]
-\DIFadd{Each conditional is normalized over all 256 patterns. Exact inverse packing
+Each conditional is normalized over all 256 patterns. Exact inverse packing
 contains no font or glyph inventory. The state receives per-state layer
 normalization and a learned 4,096-to-192 projection. Small-head arithmetic
 uses FP64 with FP32 stored parameters after a separately qualified numerical
 repair; the large native body retains its source precision. Cached/full
 piece logits agree within $1.75\times10^{-13}$ in that qualification. This
 numerical check is not evidence for a language-learning mechanism.
-}
 
-\DIFadd{With $s_t=\sigma(w^\top h_t+c)$, a finite stopped answer has probability
-}\[
+With $s_t=\sigma(w^\top h_t+c)$, a finite stopped answer has probability
+\[
  s_{T+1}\prod_{t=1}^{T}(1-s_t)\,p_\theta(Y_t\mid h_t).
 \]
-\DIFadd{Normalization over finite answers additionally requires almost-sure stopping;
+Normalization over finite answers additionally requires almost-sure stopping;
 this study does not prove that condition. Deployment uses threshold 0.5 and
 a uniform 128-block cap, recording a cap event as failure. No desired answer
 length enters generation. Every next state reads the actual emitted image,
 not the desired target, source character ID or predicted latent image code.
-}
 
-\DIFadd{For question $i$ with $T_i$ target blocks and pre-decision stop logit $a_{it}$,
+For question $i$ with $T_i$ target blocks and pre-decision stop logit $a_{it}$,
 the implemented objective is
-}\[
+\[
 \begin{split}
 \mathcal L={1\over B}\sum_{i=1}^{B}\bigg[&
  -{1\over256T_i}\sum_{t=1}^{T_i}\sum_{j=1}^{256}
@@ -4444,14 +4441,13 @@ the implemented objective is
  +{1\over2}\operatorname{softplus}(-a_{i,T_i+1})\bigg].
 \end{split}
 \]
-\DIFadd{Question/block means and balanced continue/end terms are explicit weights,
+Question/block means and balanced continue/end terms are explicit weights,
 not the unscaled joint finite-answer NLL. Training supplies correct preceding
 images and shifted physical pieces. All complete target pieces are scored.
 Owning native coordinates and padding masks preserve variable-length
 causality. Tested future-image and future-code padding exclusion are exact.
-}
 
-\DIFadd{The fixed cohort reuses 32 natural Chinese CMRC questions, with two distinct
+The fixed cohort reuses 32 natural Chinese CMRC questions, with two distinct
 questions per each of 16 passages and 107 complete answer blocks. Development
 contains the first eight prepared CMRC article pairs (16 questions) and one
 English Dolly question from each of eight categories, fixed before learning.
@@ -4460,9 +4456,8 @@ not sealed tests; English receives no training in this stage. Chinese controls
 erase question ink and English controls erase prompt ink while keeping normal
 page geometry. No development targets or case identities enter generation or
 optimization.
-}
 
-\DIFadd{Batch four uses AdamW $(.9,.95)$, decay .01, gradient clipping at one and
+Batch four uses AdamW $(.9,.95)$, decay .01, gradient clipping at one and
 fresh full-cohort permutations. Physical-head and other peak rates are
 $3\times10^{-4}$ and $10^{-4}$, with 100-update warmup and a cosine schedule
 declared over at most 8,000 updates, ending at one tenth of peak. The only
@@ -4471,34 +4466,31 @@ updates 1,000/2,000/4,000/8,000. It triggers at 4,000, independently of
 development quality. This retains 16,000 draws and 500 exposures per question.
 Actual update-two model/Adam/sampler/loss/gradient restore-replay is bit-exact,
 adding one executed call and four examples: 4,001 calls and 16,004 examples.
-}
 
-\DIFadd{Matched whole-cohort correct-history image NLL is 9.883952, 0.006959,
+Matched whole-cohort correct-history image NLL is 9.883952, 0.006959,
 0.001138 and $8.659788\times10^{-9}$ at updates 0/1,000/2,000/4,000.
 Autonomous exact training answers are respectively 0/32, 17/32, 29/32 and
 32/32, with F1 .130254/.943528/.996086/1. All 32 original prompt-prefill
 states are bit-exact after learning. Intermediate generation uses that
 authenticated replay pool; final training and all development generation
 invoke the complete PNG reader again.
-}
 
 \begin{center}\begin{tabular}{lrrrr}
-\DIFadd{Final complete answers }& \DIFadd{Cases }& \DIFadd{Exact }& \DIFadd{F1 }& \DIFadd{Stops}\\\hline
-\DIFadd{Training, fresh PNG }& \DIFadd{32 }& \DIFadd{32 }& \DIFadd{1.000000 }& \DIFadd{32}\\
-\DIFadd{Chinese development }& \DIFadd{16 }& \DIFadd{0 }& \DIFadd{.239785 }& \DIFadd{16}\\
-\DIFadd{Chinese, question erased }& \DIFadd{16 }& \DIFadd{0 }& \DIFadd{.172495 }& \DIFadd{16}\\
-\DIFadd{English transfer }& \DIFadd{8 }& \DIFadd{0 }& \DIFadd{.034482 }& \DIFadd{8}\\
-\DIFadd{English, prompt erased }& \DIFadd{8 }& \DIFadd{0 }& \DIFadd{.048394 }& \DIFadd{8}\\
+Final complete answers & Cases & Exact & F1 & Stops\\\hline
+Training, fresh PNG & 32 & 32 & 1.000000 & 32\\
+Chinese development & 16 & 0 & .239785 & 16\\
+Chinese, question erased & 16 & 0 & .172495 & 16\\
+English transfer & 8 & 0 & .034482 & 8\\
+English, prompt erased & 8 & 0 & .048394 & 8\\
 \end{tabular}\end{center}
-\DIFadd{Both answers match in 16/16 training pairs and 0/8 development pairs. There
+Both answers match in 16/16 training pairs and 0/8 development pairs. There
 are no cap failures. Chinese normal-minus-erased F1 is .067290 and English
 is $-.013913$. These physical differences do not certify semantic question
 use. Original development outputs contain broken glyphs and some unrelated
 training-answer fragments; all 80 final training/normal/erased streams and
 their owning references are actually reviewed without repair.
-}
 
-\DIFadd{Active optimizer time is 3,789.292\,s and full execution is 4,893.048\,s at
+Active optimizer time is 3,789.292\,s and full execution is 4,893.048\,s at
 18.191\,GiB peak allocated memory on one RTX 4090 D. These exclude inherited
 pretraining and prior raster learning. The independent CPU audit authenticates
 all sources, complete images, stop events, permutation/exposure ledgers and
@@ -4506,9 +4498,8 @@ all sources, complete images, stop events, permutation/exposure ledgers and
 records, with maximum CPU/GPU feature error $6.914139\times10^{-6}$ under
 the registered $10^{-4}$ tolerance. It does not independently replay every
 inherited neural forward or optimizer update, or assign semantic accuracy.
-}
 
-\DIFadd{A separate cold deployment reconstructs the actor from its own final state,
+A separate cold deployment reconstructs the actor from its own final state,
 authenticated frozen body, image-history encoder and numeric controls. The
 first four original inputs plus the first longest training answer are fixed
 without quality selection (indices 0/1/2/3/28). All five fresh-PNG replays
@@ -4519,7 +4510,6 @@ tokenizer or answer font renderer. It peaks at 17.529\,GiB and takes
 96.675\,s including 76.547\,s loading. Deployment replay verifies restoration,
 not language generalization. No historical-script, arbitrary writing-style,
 lightweight-foundation or matched-quality efficiency claim follows.
-}
 
 \clearpage
 \plate{Figure_S34_complete_pixel_learning}{\textbf{Complete image fitting and failed transfer.}
@@ -4541,14 +4531,263 @@ the same display scale and retain original pixel values. Training answers
 match exactly, while unseen answers contain broken glyphs. No output quality
 selects these examples. All erased controls and every failure are retained.}{fig:complete-pixel-examples}
 
-\DIFadd{Exact preparation, training, audit and inference commands are in
-}\path{references/complete_pixel_language_protocol.md}\DIFadd{,
-}\path{references/complete_pixel_language_result.md} \DIFadd{and
-}\path{references/complete_pixel_language_inference.md}\DIFadd{.
+Exact preparation, training, audit and inference commands are in
+\path{references/complete_pixel_language_protocol.md},
+\path{references/complete_pixel_language_result.md} and
+\path{references/complete_pixel_language_inference.md}.
 Original images and audit receipts are in
-}\path{references/evidence/complete_pixel_language_result/} \DIFadd{and
-}\path{references/evidence/complete_pixel_runtime_qualification/}\DIFadd{.
+\path{references/evidence/complete_pixel_language_result/} and
+\path{references/evidence/complete_pixel_runtime_qualification/}.
+
+
+\clearpage
+\DIFaddbegin \section*{\DIFadd{Supplementary Note 58 | Localizing the image-writing failure}}
+\label{note:writing-failure}
+\DIFadd{The larger cohort contains 512 Chinese questions from 256 passages, with
+1,657 complete answer blocks and 498 distinct full answer images. It reuses
+the earlier 32 controls and adds 480 source-hash-selected questions. The
+architecture and externally pretrained 7,543,984,691-parameter body are
+unchanged; 13,855,681 parameters train. Batch four retains 64,000 draws over
+16,000 updates. Each question has 124 or 128 exposures. The original
+initialization, schedules, source-image bindings and numeric task vectors
+are fixed before execution. The 24 Chinese/English development cases are
+reused rather than sealed, and English is untrained transfer.
 }
+
+\DIFadd{Final complete-answer foreground F1 is 0.978044 on the original 32 controls,
+0.990639 on the 480 additions, 0.336570 on normal Chinese development and
+0.059018 on English. Chinese and English erased controls give 0.225725 and
+0.040126. Both training answers are exact for 239/256 passage pairs. The same
+64 training questions assessed throughout yield 0, 3, 21 and 60 exact answers
+at updates 0, 4,000, 8,000 and 16,000. Whole-training correct-history image
+NLL falls from 9.749791 to 0.251025, 0.020290 and 0.000259; this averages
+piece losses within blocks and questions, not an unscaled answer likelihood.
+}
+
+\DIFadd{A resource guard ends the original process after 12,128 actual updates.
+Recovery resumes the durable update-12,000 checkpoint, with optimizer,
+sampler and RNG states intact. All 128 discarded per-update history records
+and bytes replay exactly, but full discarded model/Adam tensor identity is
+not independently established. The ledger therefore records 16,128 actual
+optimizer calls. Cumulative primary active time is 42,549.17\,s, including
+both processes and assessments; the completed process peaks at
+18.138\,GiB. That peak is process-local rather than an independently measured
+maximum over both processes. External pretraining and independent audit
+compute are outside this timing.
+}
+
+\DIFadd{An independent CPU audit authenticates all 896 streams from four assessments,
+their PNGs and stopping events, and 2,731 actual-image feedback records.
+Maximum CPU/GPU feedback error is $7.57\times10^{-6}$, below $10^{-4}$.
+All 32 original control prompt prefixes remain bit-exact. Numerical and
+recording consistency does not establish semantics. All 24 normal and
+24 erased final development images are inspected. Source-first notes precede
+the current reference comparison, but the cases are not fully blinded or
+independently graded. All 560 final raw outputs and 140 display sheets remain
+available, including failures. No malformed strokes are repaired.
+}
+
+\subsection*{\DIFadd{Fixed-state normalized image likelihood}}
+\DIFadd{For a complete first block $I$ with 256 physical eight-bit pieces,
+}\[
+\ell(I\mid q)=\sum_{j=1}^{256}\log p(u_j\mid h(q),u_{<j}).
+\]
+\DIFadd{At each owning state, compare the maximum likelihood of an individual allowed
+reference with the likelihood of the actual saved emission. Do not substitute
+the log-sum probability of multiple references for this MAP witness. The
+same-question pre-image continuation factor cancels. No supplied development
+reference wins at any of the four states. Final normal-case differences
+range from $-1651.68$ to $-6.05$\,nat. This establishes a failure of the learned
+first-image distribution relative to these references, not a guarantee that
+all other correct renderings are impossible.
+}
+
+\DIFadd{Owning-question preferences rise from 7/16 to 12/16, 13/16 and 14/16.
+Positive paired assignments rise from 2/8 to 8/8, 8/8 and 8/8. All eight
+paired first-image reference events are disjoint. Additive question-independent
+event terms cancel in the paired contrast; an image prior inside a
+multiple-reference log-sum need not cancel separately. The diagnostic makes
+112 fresh PNG prefills, 448 writing queries and 896 physical-head forward
+calls, with no optimizer updates or new answer generation. All reader
+fingerprints and initial stop probabilities match; every saved nonempty
+first image reproduces all 256 original greedy decisions. Runtime is
+299.82\,s at 17.999\,GiB peak allocation.
+}
+
+\subsection*{\DIFadd{Matched native reader}}
+\DIFadd{Run the unmodified source reader on all sixteen Chinese normal PNGs,
+question-erased PNGs and original source-text prompts. Numeric controls and
+visual/contextual computation match the image actor; source adapter outputs
+are zero. All 32 image-memory fingerprints match the actual ILM path before
+decoding. A helper-local source projection and previous-symbol embedding
+lookup produce 48 text responses, capped at 64 source units. They are never
+attached as runtime image-writer components. All normal and text streams
+stop; one erased stream reaches the cap. Literal counts are 12/16, 0/16 and
+11/16 for normal, erased and text routes. Raw aliases and longer answers
+are retained without assigning formal semantic scores. The helper uses
+233.37\,s including 40.04\,s of pressure waiting, at 18.970\,GiB peak allocation.
+Its outputs and hidden states are prohibited as development training data.
+}
+
+\subsection*{\DIFadd{A continuous semantic glyph primitive}}
+\DIFadd{Training-only source character frequency and ASCII supply 4,096 anchored
+characters; nine identical bitmap aliases merge, leaving 4,087 forms. The
+initial anchor requires font coverage and an exact single-source-unit round
+trip. The canonical Noto CJK form uses a common baseline on a binary
+$32\times32$ canvas. Font and source IDs occur only in preparation.
+The CNN encoder E, convolutional decoder D, continuous contextual readout G
+and stop predictor contain 47,127,810 neural parameters in total. Only E and
+D train in this primitive stage. The checkpoint contains global affine
+statistics but no character-indexed prototype or image table.
+}
+
+\DIFadd{Let $v_c$ be a training-only inherited input vector and $z_c$ its normalized
+coordinate. E learns MSE and cosine alignment to $z_c$ from one-pixel-shifted
+images. D reconstructs canonical pixels from $z_c$ plus small Gaussian noise
+and from E's predictions. Foreground/background-balanced BCE weights ink
+and background separately; it is a reconstruction loss rather than a
+normalized full language likelihood. AdamW uses 6,000 batch-128 updates,
+learning rate $3\times10^{-4}$ with cosine decay to one tenth, FP32 parameters
+and BF16 small-network autocast. Seed and all source bindings are retained.
+}
+
+\DIFadd{The completed run takes 80.22\,s including 20.02\,s of pressure waiting,
+peaking at 0.728\,GiB. Direct and roundtrip mean F1 exceed 0.999, but exactness
+and semantic alignment remain imperfect. Minimum F1 is 0.974359 for direct
+decoding and 0.956835 for roundtrip. The displayed 64 indices are evenly
+spaced, with unrepaired target/direct/roundtrip triplets. This is seen-identity,
+single-font rendering, not historical or unseen-character generalization.
+}
+
+\DIFadd{The evaluated language loop is
+}\begin{align*}
+h_0&=T(I_{\rm prompt}),\qquad z_t=G(h_t),\\
+I_t&={\bf1}[\sigma(D(z_t))\geq\tfrac12],\\
+h_{t+1}&=T(E(I_t);\mathrm{KV}_{\leq t}),
+\end{align*}
+\DIFadd{with the global affine restoration of E's normalized semantic coordinates
+before contextual input. A learned stop receives no reference length. The
+native assistant state replaces the earlier learned initial writing query.
+The primitive-only checkpoint explicitly refuses language generation.
+Supplementary Note 59 distinguishes its reconstruction from the subsequent
+language fitting and frozen intervention.
+}
+
+\clearpage
+\plate{Figure_S36_writing_failure}{\textbf{Training fit does not recover useful unseen writing.}
+\textbf{a}, Exact complete images on the same 64 training examples at four
+states; all 24 normal development answers remain inexact. \textbf{b}, Mean
+best-reference minus actual-emission first-image log probability for sixteen
+Chinese cases, in nats. All supplied references lose. \textbf{c}, Matched
+native-reader literal counts, with all 32 image-memory fingerprints identical
+to the ILM path. This is a helper text baseline, not image generation.
+\textbf{d}, Two unrepaired final date-like pixel outputs; the helper's correct
+years do not repair them. Relative question preference, literal text matching
+and pixel exactness have distinct denominators and interpretations.}{fig:writing-failure}
+
+\clearpage
+\plate{Figure_S37_semantic_glyph_loop}{\textbf{Clear glyph formation precedes language validation.}
+\textbf{a}, A continuous readout predicts one complete glyph from the native
+assistant state; E re-encodes the actual emitted pixels before continuation.
+No runtime glyph table, tokenizer, source output head or font renderer is
+present. \textbf{b}, Primitive encoder/decoder training uses offline semantic
+anchors and images; the later 508-question stage fits only readout/stopping.
+\textbf{c}, Target/direct/roundtrip triplets at 64 evenly spaced indices from
+4,087 prepared forms. Direct reconstruction is 4,048/4,087 exact. Sharp
+familiar glyphs do not establish answer accuracy or unseen forms. The broader
+Chinese assessment still has eleven capped failures.}{fig:semantic-glyph-loop}
+\clearpage
+\section*{\DIFadd{Supplementary Note 59 | Partial glyph-language transfer and changed dates}}
+\label{note:glyph-language}
+\DIFadd{Four training questions contain unsupported anchor characters and are
+explicitly recorded rather than substituted; development cases are not
+filtered. The 508 supported questions supply 3,855 gold glyph events and
+508 terminal states. The contextual body and primitive encoder/decoder stay
+frozen. Cache the original FP32 assistant state, followed by native causal
+states after E encodes each gold previous glyph image. The current target
+never enters the state predicting it. Bulk and one-glyph-at-a-time states
+agree within $2.29\times10^{-5}$ on the first sequence. Caching takes
+731.67\,s at 17.789\,GiB peak; all 4,363 states are retained by hash.
+}
+
+\DIFadd{Train 17,848,833 readout/stopping parameters for 6,000 batch-128 AdamW updates,
+learning rate $2\times10^{-4}$ with cosine decay to one tenth, and seed
+202611102. Sample glyph and terminal events uniformly from the cache. The
+loss sums semantic MSE, cosine discrepancy weighted 0.2, balanced pixel BCE
+through D, and unweighted stop BCE. This is a reconstruction/continuation
+objective, not a normalized language likelihood. Fit time is 42.47\,s at
+0.658\,GiB peak, excluding native caching and inherited pretraining.
+}
+
+\DIFadd{All eight fixed training controls are exact and stop. Normal Chinese
+development gives 1/16 canonical-exact (F1 0.354426), five stops and eleven
+caps; erased gives 0/16 (F1 0.075368), one stop and fifteen caps. All forty
+raw streams are inspected before the current canonical-reference comparison.
+Readable complete answers corresponding to 288 items and 1874 with Chinese
+suffixes have F1 0.987315 and 0.986612, respectively; neither is pixel-exact.
+Those full strings are absent from supported training answers. The exact
+2001 year string appears in training. Canonical images are evaluator-only.
+Damaged Latin forms and the channel-name response are not repaired or graded
+correct. Autonomous assessment takes 332.59\,s, including 10.01\,s of pressure
+waiting, at 17.646\,GiB peak. These are reused development data without
+independent human grading.
+}
+
+\DIFadd{For the frozen date test, choose the two previously observed year-question
+parents, then fix all values before inference: 1874, 1936, 1648, 1789, 2001,
+2007, 2019 and 1993. Replace every occurrence of the answer year in each
+passage, preserving question ink and original wrapping. Verify exact original
+rendered PNGs and unchanged strip width. Altered passages are counterfactual
+reading conditions, not historical claims. Keep all sixteen normal and
+sixteen erased images; fourteen normal conditions are new date interventions
+and two are original baselines. The frozen actor receives only the image and
+its unchanged 64-glyph safety cap, performs zero updates and never receives
+the requested year or desired length.
+}
+
+\DIFadd{All sixteen normal streams stop after five glyphs. Among fourteen new dates,
+eleven have clear matching output-first manual transcriptions, two are
+canonical-exact and mean F1 is 0.970408. Both 1789 variants have a damaged
+second digit, and the coast 1648 variant has wrong/damaged digits; none is
+corrected toward gold. Nine new conditions request complete strings absent
+from supported training answers; six of these produce clear matches. No new
+erased condition gives a correct date; thirteen cap and one stops after an
+entity-name-like response. Mean erased F1 is 0.048683. The parents are
+selected from prior outputs, and manual readings are non-independent; this
+is not a sealed or general semantic benchmark. Runtime is 229.23\,s at
+17.605\,GiB peak. Repeating the original two PNGs in this cold process
+preserves complete pixels, stop probabilities and feedback hashes exactly.
+}
+
+\DIFadd{A separate small-bridge audit re-encodes all 2,781 actual emitted glyphs from
+the seventy-two language/intervention streams. Every cold GPU embedding hash
+is bit-exact; maximum CPU/GPU error is $1.79\times10^{-7}$, below $10^{-4}$.
+The audit loads no native contextual body or teacher, takes 30.80\,s and peaks
+at 0.351\,GiB. Its 48\,GiB host-entry, 32\,GiB runtime and 5\,GiB GPU cap are
+separate small-stage limits, not changes to completed training protocols.
+These checks establish execution/feedback consistency, not semantic correctness.
+}
+
+\DIFadd{All model weights and external pretraining remain part of the provenance.
+The bridge's small fitting cost does not include acquiring the large body's
+knowledge. Broad answer reliability, English, unknown glyph identities and
+historical writing remain unvalidated. The evidence supports a restricted
+image-input/image-output composition mechanism that can be improved, not a
+general-purpose model equivalent to a contemporary LLM.
+}
+
+\clearpage
+\plate{Figure_S38_date_interventions}{\textbf{A frozen glyph loop follows changed dates on two selected templates.}
+\textbf{a}, Replace every answer-year occurrence in the passage, preserve
+the question and geometry, and perform zero updates. Original PNG baselines
+reproduce exactly. \textbf{b}, All sixteen normal outputs, including two
+baselines, in fixed preparation order. Labels state requested years, not
+transcriptions. Fourteen new date conditions give eleven clear output-first
+readings, two canonical-exact images and fourteen natural stops. Both 1789
+variants and the coast 1648 variant remain uncertain/wrong and count as
+failures. All erased outputs are retained; none gives a correct date.
+Parent selection uses prior successes and manual readings are non-independent,
+limiting this result to exploratory input-dependent date composition.}{fig:date-interventions}
 
 
 \clearpage

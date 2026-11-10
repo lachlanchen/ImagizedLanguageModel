@@ -132,3 +132,27 @@ replacements against the baseline. Its unchanged native slide package may
 reuse the reviewed v2 render only after exact equality of every ZIP part and
 all rendered-file hashes; record that reuse explicitly. Rebuild/review the
 TeX/PDF/redlines, including the changed prose, before promotion.
+
+## Completed revision and delivery
+
+Stage v3 passed all five PDF builds without overfull boxes, undefined references
+or qpdf errors. All changed pages were actually inspected on 31 contact sheets;
+twelve new-content pages received additional detailed inspection. The first
+78 clean supplement pages remain raster-identical to the baseline. The article
+results occur on pages 14–15; Notes 58–59 on pages 79–80 and 83; Figures
+S36–S38 on pages 81, 82 and 84. These are PDF page anchors, not journal lines.
+
+Stable filenames now contain the reviewed 17/32/88-page package and matching
+32/88-page redlines. The native deck has 53 slides and 57 charts. All previous
+50 slide appearances and 54 chart parts remain exact. V3 reused the actually
+reviewed identical V2 native render; this is recorded rather than presented as
+a new PowerPoint-app inspection. The publication README now identifies the
+current experiment separately from earlier controls.
+
+The authorized local Nutstore package is
+`ILM_NatureStyle_20261110_SemanticGlyphLoop`; its files and all five LATEST
+aliases pass SHA-256 checks. Cloud propagation is not independently verified.
+Build, figure/PDF review, preparation, render and sync receipts are retained in
+`publication/ilm-nature/evidence/writing_failure_*.json`. No source weights,
+training protocol, raw evidence pixels or earlier experiment scores changed.
+The general ILM objective remains incomplete.

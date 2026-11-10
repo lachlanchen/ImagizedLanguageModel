@@ -8,12 +8,60 @@ The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) and
 [supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved `b5501de` 41-slide writing baseline. Their
-[builder](build_ink_mass_writing_redlines.py) uses pinned latexdiff and inlines
+revision with the preserved `947058e7` 50-slide baseline. Their
+[builder](writing_failure_publication.py) uses pinned latexdiff and inlines
 the abstract so its changes are visible. Earlier builders and baselines remain
 available for historical reproduction.
 
 ## Current result
+
+The [512-question study](../../references/pixel_language_diversity_final_result.md)
+fits **495/512 complete training answers** but **0/24 normal development
+answers**. A [matched diagnostic reader](../../references/pixel_language_source_reader_result.md)
+recovers literal reference answers on **12/16 Chinese questions**, using the
+same image-memory fingerprints. This helper-only text baseline localizes
+substantial lost capability to the learned writing interface.
+
+The subsequent [complete-glyph loop](../../references/semantic_glyph_language_result.md)
+uses a neural readout and decoder, with feedback encoded from actual emitted
+pixels. It produces readable new short answers, but **11/16 broader Chinese
+streams still reach the safety cap**; only one is canonical pixel-exact.
+On two question templates selected from these successes,
+[frozen date interventions](../../references/semantic_glyph_counterfactual_result.md)
+give **11/14 clear matching output-first transcriptions**, two canonical-exact
+images and fourteen natural stops. All three damaged/wrong date outputs are
+retained. Manual readings are non-independent; this is restricted composition,
+not general language qualification. The independent
+[PNG inference interface](../../docs/semantic-glyph-language.md) loads no
+training corpus, font, lexical output head or external teacher.
+
+The runtime retains an externally pretrained **7.5B visual/contextual body**
+and a **47.1M neural bridge**. The small bridge training costs exclude this
+body's acquisition and pretraining. Historical scripts, English transfer,
+unknown glyphs and an efficiency advantage at matched language quality remain
+unvalidated. **Notes 58–59 and Figures S36–S38** report the measurements.
+
+The package contains a **17-page article, 32-page review and 88-page
+supplement**, with matching redlines (32/88 pages). The editable deck has
+**53 slides and 57 native charts**. All fifty previous slide appearances and
+54 chart parts are preserved. The new figures use actual unrepaired model
+outputs and editable charts with linked workbooks. LibreOffice rendering uses
+Liberation Sans in place of Arial; PowerPoint-app inspection is not claimed.
+
+![Complete-glyph language loop](figures/Figure_S37_semantic_glyph_loop.png)
+
+![All normal date interventions, including damaged outputs](figures/Figure_S38_date_interventions.png)
+
+The current staged build is `artifacts/writing_failure_publication_v3`.
+`writing_failure_publication.py` prepares, renders, builds, promotes and syncs
+a source-bound package; promotion requires actual figure/PDF review receipts.
+Earlier builders retain historical slide counts and must not overwrite the
+current deck. The local delivery package is
+`ILM_NatureStyle_20261110_SemanticGlyphLoop`, with five `LATEST` aliases.
+Source/destination hashes verify local copying; cloud propagation is not
+independently verified.
+
+## Earlier ink-mass and full-page controls
 
 The [matched ink-mass comparison](../../references/ink_mass_comparison_result.md)
 gives **18/32 seen and 19/32 held-out OCR-exact copies**, including **6/16
@@ -42,17 +90,17 @@ Its case-026 description is corrected: the balanced output already has one
 line; the duplicated-line example belongs to the earlier pilot. No measured
 score or output pixel changes.
 
-The current runtime retains an externally pretrained **3.900B transformer
+This earlier runtime retains an externally pretrained **3.900B transformer
 plus 84.046M VAE**. Its 24.359M trained adapters do not establish a small
 foundation model. The independent image-language goal remains unachieved.
 
-The package contains a **16-page article, 29-page review and 68-page
+That earlier package contains a **16-page article, 29-page review and 68-page
 supplement**, with matching redlines (29/68 pages). The editable deck has
 **43 slides and 51 native charts**. All 41 prior slide parts and appearances,
 130 prior figure assets, the first 57 supplement pages and old Figure S26
 on page 59 are preserved. Page 58 is the explicit factual-correction exception.
 
-Current entry points, run from this directory, are:
+Its historical entry points, run from this directory, are:
 
 ```bash
 python ink_mass_writing_figures.py --stage generate
@@ -68,7 +116,7 @@ actual evidence pixels. Only declared reference whitespace and a question
 inset are cropped; every displayed model output is complete. Rendering uses
 LibreOffice; Arial is substituted with Liberation Sans. Artifact Tool and
 PowerPoint-app inspection were unavailable. Earlier builders retain historical
-slide counts and must not overwrite the current 43-slide deck.
+slide counts and must not overwrite the current 53-slide deck.
 
 Local delivery uses `ILM_NatureStyle_20261108_InkMass` and five `LATEST`
 aliases in the ILM Nutstore project folder. Source/destination hashes verify

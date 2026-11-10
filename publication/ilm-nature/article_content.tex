@@ -33,9 +33,14 @@ stroke configurations must remain coherent while context selects among many
 similar written forms. The present study uses one canonical font to isolate
 this coupling before introducing handwriting or historical scripts.
 
+The experiments progress from initial raster readers and denoisers to
+an inherited visual/contextual body and a separately learned glyph
+interface. The earlier architectures provide controls; the final
+experiments evaluate the complete-glyph loop shown in Fig.~S37.
+
 \section*{Results}
-\subsection*{A continuous visual interface preserves the written signal}
-Each observed cell is a $32\times32$ ink image. An orthonormal transform maps
+\subsection*{An initial continuous visual interface preserves the written signal}
+In the initial control, each observed cell is a $32\times32$ ink image. An orthonormal transform maps
 its signed pixels into a 1,024-dimensional continuous field. The transform is
 invertible and contains no learned character dictionary. An ordered sequence
 of these fields enters a causal transformer. The deployed model receives no
@@ -45,7 +50,7 @@ data preparation. This distinction matters: the current benchmark studies
 learning from rendered Chinese, rather than discovering a script from raw
 archaeological photographs.
 
-\plate{Figure_1_mechanism}{\textbf{A visual language interface and its conditional generation test.}
+\plate{Figure_1_mechanism}{\textbf{Initial visual language interface and its conditional generation test.}
 \textbf{a}, Rendered or native writing supplies ordered image cells to a causal
 visual reader. Text rendering is an optional host interface. \textbf{b}, A
 conditional denoiser uses the frozen reader state and a noisy four-cell strip
@@ -53,8 +58,8 @@ to predict diffusion velocity. Future cells exchange information through
 convolutions and pooled-cell attention. \textbf{c}, Sampling starts from noise,
 emits four visible cells and appends their pixels to the next context. Optional
 transcription follows generation and is absent from the model. The schematic
-shows the implemented experimental contract, without claiming that its
-generated content is already correct.}{fig:mechanism}
+shows the initial denoising control. Its generated content remains incorrect;
+the later complete-glyph runtime is shown in Fig.~S37.}{fig:mechanism}
 
 \subsection*{Ordered image history contains next-writing information}
 The strongest established reader result uses 2,048 deterministic development
@@ -801,6 +806,8 @@ an alignment repair.
 \subsection*{Complete image-answer fitting and failed transfer}
 \input{complete_pixel_learning_results.tex}
 
+\input{writing_failure_results.tex}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -833,11 +840,14 @@ training data while leaving the final inference path independent. A larger
 corpus or longer training requires improvement on the intended generation
 task, beyond the conditional-likelihood gain established here.
 
-Complete pixel learning reproduces all 32 seen answers, but none of 24
-normal development answers. Further unchanged fitting of those questions is
-therefore unwarranted. Varied visual-language supervision must be tested against
-readable, correct new-prompt answers, retaining independent image generation
-and accounting for external pretraining.
+Broader pixel training reproduces 495 of 512 answers but still fails the
+supplied unseen reference images. The matched native reader retains useful
+answer capability, directing the intervention toward the learned writing
+interface. The complete-glyph loop supports restricted input-dependent date
+composition, with actual-image feedback independently replayed. It remains
+unreliable on broader questions: eleven of sixteen normal Chinese streams cap.
+Wider semantic readout coverage and robust generated histories remain
+necessary; clear familiar glyphs and low training loss are insufficient.
 
 
 Recent visual generators study mixture assignment and the geometry of
