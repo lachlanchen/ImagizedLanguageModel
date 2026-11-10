@@ -24,13 +24,14 @@ generated-history learning, not evidence of instruction-following parity with
 a large text model or of cheap foundation training.
 [Primary paper, section 4 and appendix K](https://arxiv.org/html/2604.11575v2).
 
-The current 477M stage-2 author release has the **same weight SHA256, config and
-two model-code files** as the already tested local release. The repository
+The current 477M stage-2 author release has the **same weight SHA256, config,
+all five Python files and rendering assets** as the already tested local release. The repository
 revision differs, but this recheck supplies no new neural candidate to rerun.
 No additional weights are downloaded. The card describes GRPO; the existing
 local baseline must not be relabelled as an obsolete GAN checkpoint.
 [Author release](https://huggingface.co/TYTTYTTYT/llama-pixar-477m-p32-stage2),
-[local metadata/hash recheck](evidence/mixar_release_recheck_20261111.json).
+[local metadata/hash recheck](evidence/mixar_release_recheck_20261111.json),
+[complete rendering/code recheck](evidence/mixar_rendering_release_recheck_20261111.json).
 
 ## Font synthesis does not choose a linguistic answer
 
