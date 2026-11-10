@@ -8,6 +8,32 @@ context in the wrong way. A reliable image-language model must solve both.
 This note describes the current construction and its limits. It does not
 claim a new physical law or establish a successful language-learning method.
 
+## What a visual representation can change
+
+For a finite string-valued random variable T and an injective deterministic
+renderer R, every possible string has exactly one corresponding image in the
+rendered support. Consequently
+
+\[
+H(R(T))=-\sum_t p(t)\log p(t)=H(T).
+\]
+
+This elementary identity concerns discrete entropy, not differential entropy
+of arbitrary continuous images. Rasterization can change locality, parameter
+sharing, robustness and computational cost; it does not erase the information
+that must be learned. If low resolution merges distinct strings, the rendering
+instead loses information. This does not rule out a more efficient visual
+architecture, but such efficiency must be measured at comparable language
+quality, including rendering/encoding and pretraining costs.
+
+Unobserved glyph meanings are also not uniquely determined by their shapes.
+Relabelling those meanings leaves an unlabelled collection of glyph images
+unchanged. Corpus use, translations, aligned explanations or other grounding
+must supply the missing relationships. Visual similarities can provide useful
+statistical clues without guaranteeing that an unseen historical script is
+automatically readable. This is a motivation for learning from actual books
+and aligned historical forms, not for a fixed runtime character inventory.
+
 ## A source-unit decision is not a glyph distribution
 
 Let the offline source model predict native units v with probabilities
@@ -107,6 +133,14 @@ generated histories still requires honest sampling/alignment accounting; it
 does not automatically provide an unbiased policy-gradient estimator or
 guarantee language improvement. The completed adaptation gives only partial
 answer transfer, and the stronger first-image fit still needs verification.
+
+Learning on model-visited states has an established precedent in
+[DAgger](https://proceedings.mlr.press/v15/ross11a.html). Its guarantees require
+the stated imitation-learning and no-regret assumptions. They do not transfer
+automatically to an image writer: a reference next glyph after an erroneous
+image prefix must be a valid supervisory action, and the losses and trajectory
+sampling must match the analysis. Replaying damaged prefixes alone is not a
+proof of a DAgger guarantee for this model.
 
 The full objective remains an independently usable image-input/image-output
 language model. A first-glyph gate, a small answer pilot or the inherited
