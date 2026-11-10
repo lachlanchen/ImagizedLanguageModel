@@ -18,7 +18,8 @@ from scripts.score_pixel_language_first_blocks import require
 
 OWN='scripts/assess_natural_first_answers.py'
 PROTOCOL='references/natural_answer_assay_protocol.md'
-NAMES=[OWN,PROTOCOL,'scripts/infer_natural_first_language.py',
+ADMISSION='references/natural_answer_assay_admission_amendment.md'
+NAMES=[OWN,PROTOCOL,ADMISSION,'scripts/infer_natural_first_language.py',
        'scripts/review_glyph_tail_answers.py','scripts/assess_glyph_tail_adapter.py',
        'ilm/visual_lm/semantic_glyph_loop.py','ilm/visual_lm/glyph_runtime_resources.py',
        'ilm/visual_lm/glyph_reader_monitor.py']
@@ -56,12 +57,16 @@ def bind(common):
     from scripts.train_natural_first_writer import verify
     w=verify(writer);fit=load(writer/'fit/report.json');q=load(writer/'qualify/report.json')
     require(load(writer/'fit/status.json')['phase']=='completed' and fit['actual_optimizer_updates']==36000
-        and fit['all_checks_passed'] and q['natural_first_gate_passed'],'complete and qualify the natural writer first')
+        and fit['all_checks_passed'],'complete the registered natural writer fit first')
+    require(load(writer/'qualify/status.json')['phase']=='completed',
+            'finish measuring the natural writer first-image results')
     review=load(writer/'qualify/visual_review.json')
     require(review['report_sha256']==sha(writer/'qualify/report.json') and review['all10_boards_actually_viewed'],
             'actually review every first-image qualification board')
     for b in q['boards']:require(sha(writer/'qualify'/b['file'])==b['sha256'],'first-image board changed')
-    candidate=writer/'fit/checkpoint_latest.pt';require(sha(candidate)==fit['checkpoint_sha256'],'natural candidate changed')
+    candidate=writer/'fit/checkpoint_latest.pt'
+    require(sha(candidate)==fit['checkpoint_sha256']==q['checkpoint_sha256'],
+            'natural candidate or first-image checkpoint identity changed')
     parent=ROOT/'artifacts/balanced_glyph_writer_v1';require(sha(parent/'fit/checkpoint_latest.pt')==m['initial_checkpoint_sha256'],'parent changed')
     import torch
     torch.set_num_threads(2)
@@ -77,7 +82,8 @@ def bind(common):
     steps=[int(v['step']) for v in a['optimizer']['state'].values()]
     require(len(steps)==len(trained) and set(steps)=={36000},'actual writer optimizer counters differ')
     audit=dict(checkpoint_sha256=sha(candidate),parent_sha256=sha(parent/'fit/checkpoint_latest.pt'),
-        actual_AdamW_tensor_steps=steps,only_readout_changed=True,body_deltas_bit_exact=True)
+        actual_AdamW_tensor_steps=steps,only_readout_changed=True,body_deltas_bit_exact=True,
+        natural_first_gate_passed=q['natural_first_gate_passed'],admission_amendment_sha256=code[ADMISSION])
     audit['changed_readout_tensors']=changed
     bindings=dict(m['bindings_sha256'])
     for p in [common/'registration.json',common/'input_review.json',writer/'writer_preparation.json',
@@ -96,6 +102,7 @@ def bind(common):
             evaluation_references_sha256=m['evaluation_references_sha256'],condition=role,
             comparison_common=rel(common),original_pool=rel(parent/'cache/pools.pt'),
             natural_first_report=rel(writer/'qualify/report.json'),
+            natural_first_gate_passed=q['natural_first_gate_passed'],
             candidate_weights_selected_by_final_step_only=True,pretraining_exposure_unknown=True))
         other='balanced_parent' if role=='natural_writer' else 'natural_writer'
         save_json(folder/'comparison_registration.json',dict(companion_run=rel(common/other),
@@ -175,7 +182,7 @@ def qualify(run):
             save_json(folder/'report.json',dict(code_sha256=code,checkpoint_sha256=sha(checkpoint),boards=names,
                 training_mean_f1=train_f1,copy_held_mean_f1=copy_f1,copy_held_fraction095=fraction,copy_nonstop_fraction=nonstop,
                 terminal_correct=terminal,terminal_cases=3176,continue_correct=continues,continue_cases=23262,
-                readout_gate_passed=bool(gate),natural_first_gate_previously_passed=True,
+                readout_gate_passed=bool(gate),natural_first_gate_passed=m['natural_first_gate_passed'],
                 raw_outputs_sha256=raw,copy_inputs_run_through_actual_adapted_full_body=True,
                 training_states_cached_from_unchanged_adapted_body=True,autonomous_language_accuracy=False,
                 provenance=provenance,**monitor.receipt()))

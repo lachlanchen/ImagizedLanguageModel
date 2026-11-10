@@ -36,10 +36,11 @@ The active [natural-image experiment](../references/natural_first_image_protocol
 collects actual complete-prompt states for 30,030 images, then trains G alone
 for 36,000 updates with fixed reader, decoder, feedback encoder and stopping
 head. The real-state cache is running; there is no completed candidate result.
-All ten fixed qualification boards must be inspected. If its first-image gate
-passes, the [reserved complete-answer comparison](../references/natural_answer_assay_protocol.md)
-tests both final checkpoints on the same 32 new paired questions and preserves
-all 144 full streams including controls. Review actual outputs before either
+After the first-image measurements and ten-board inspection, test both final
+checkpoints on the same 32 new paired questions and preserve all 144 full
+streams including controls. Record either first-image threshold result in the
+comparison receipt. See the [admission amendment](../references/natural_answer_assay_admission_amendment.md).
+Review actual outputs before either
 reference score. Then run the [standalone replay](../references/natural_first_cold_inference_protocol.md)
 before any model promotion. A passed first-image gate alone cannot change the
 project's success status.

@@ -107,8 +107,10 @@ exhaustive audit of historical exposure or source pretraining. The
 [complete-answer protocol](../references/natural_answer_assay_protocol.md)
 fixes its full-stream criteria before the natural writer's outcomes.
 
-After the first-image qualification passes and its actual ten-board review is
-recorded, bind the completed weights and run the actual-reader copy check:
+After first-image measurement and the ten-board review, bind the completed
+weights and run the actual-reader copy check. The
+[admission amendment](../references/natural_answer_assay_admission_amendment.md)
+allows answer measurement with either first-image result.
 
 ```bash
 CUDA_VISIBLE_DEVICES='' python scripts/assess_natural_first_answers.py \
