@@ -67,17 +67,22 @@ and independent review. The
 remain separate.
 
 The CPU review verifies every PNG against its actual binary tensor, all
-emitted-image hashes and every stop/cap decision. This verifies the tested
-recording paths; independent re-encoding of the saved feedback embeddings
-has not yet been completed. All raw tensors remain local and are identified
+emitted-image hashes and every stop/cap decision. The subsequent
+[cold feedback audit](evidence/semantic_glyph_feedback_audit/report.json)
+re-encodes all 2,781 emitted glyphs across this assessment and the date
+intervention. Every GPU embedding hash is bit-exact; maximum CPU/GPU error
+is 1.79e-7. These checks verify the tested recording and feedback paths,
+not semantics. All raw tensors remain local and are identified
 by hash. Public resource receipts omit controller command lines while
 retaining the local originals' hashes and measured admission information.
 
-The next frozen test changes passage years without further training. Its
+The subsequent frozen test changes passage years without further training. Its
 two parents are explicitly selected from these observed successes; it is
 an exploratory intervention, not a sealed benchmark. The
 [prospective protocol](semantic_glyph_counterfactual_protocol.md) fixes
 fourteen new normal date conditions and their controls before inference.
-Tracking those changes would strengthen evidence for input-dependent
-composition. It would not resolve the eleven capped normal development
+The [completed result](semantic_glyph_counterfactual_result.md) gives eleven
+clear output-first transcription matches, two pixel-exact images and natural
+stops on all fourteen changed normal inputs. This supports restricted
+input-dependent composition. It does not resolve the eleven capped normal development
 streams, open-ended language, English or historical writing.
