@@ -1,7 +1,7 @@
 """Completed motor/geometry controls; no unfinished curriculum result included."""
 RESULTS=r'''\subsection*{Sharp known-form generation does not recover uncertain glyph identity}
 Additional controls distinguish a useful motor from correct conditional
-writing (Supplementary Note 60; Fig.~\ref{fig:motor-uncertainty}). On sixteen
+writing (Supplementary Note 60; Fig.~S39). On sixteen
 normal Chinese initial states, an allowed reference first form is nearest
 in semantic cosine for nine, but only one first image is pixel-exact.
 A spectral calculation gives a 0.060109 lower bound on uniform anchor-code

@@ -68,12 +68,12 @@ def append(paper):
         media.append(dict(part=part,source=str(path.relative_to(ROOT)),sha256=sha(path),original_size=[32,32],
             cell_crop=None,upstream_source=row['source'],upstream_sha256=row['source_sha256'],upstream_crop=row['crop']))
 
-    slide.shape('Sharp known-form motors fail when semantic conditions mix glyphs',45,24,1510,62,28,True)
+    slide.shape('Sharp glyph generation does not resolve uncertain semantic codes',45,24,1510,62,28,True)
     slide.shape('a  Same 16 question-image initial states',45,105,710,40,21,True)
     a=data['first_state']
     chart(58,['Latent nearest','Image exact'],[a['normal_top_reference_form'],a['normal_first_image_exact']],
         'Allowed reference first forms / 16',16,4,'0',45,153,710,250)
-    slide.shape('Reference-first-form diagnostics, not complete answer accuracy.\nNo nearest-form selection is used by the runtime; 5/16 first images reach F1 0.95.',
+    slide.shape('Same 16 initial states; complete answers are not scored here.\nNo form lookup at inference. First image F1 at least 0.95: 5/16.',
         55,410,700,62,15)
     slide.shape('b  Semantic output-span regression limits',820,105,735,40,21,True)
     r=data['regression']
