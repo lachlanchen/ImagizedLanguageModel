@@ -61,6 +61,8 @@ images. Retain source provenance and keep whole works or passage groups
 together in evaluation. Report unique documents and supervised glyph and
 span positions, alongside repeated training exposures and preparation cost.
 Use the local teacher offline to supervise context and continuation.
+The prepared corpus now contains 13,785 training sequences with 2.58
+million target glyph positions. See the [visual sequence data](visual-sequence-training.md).
 
 Train a compact causal body over groups of visual glyphs. A shared image
 encoder should turn the observed or emitted span into continuous feedback.

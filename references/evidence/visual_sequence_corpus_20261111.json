@@ -1,0 +1,89 @@
+{
+  "source_sha256": {
+    "data/visual_grammar/chinese_wikisource_public_domain.jsonl": "76048753b52735d14c98f0d9e4eb8d751401fe8810e82eaaaebff517f6866c03",
+    "data/visual_grammar/chinese_wikisource_public_domain.jsonl.provenance.json": "291cf109ae8c0a1cc255ee10692161436424bbb5ae064c7c5f14bce45d81ca86",
+    "data/raw/cmrc2018/cmrc2018_train.json": "5497aa2f81908e31d6b0e27d99b1f90ab63a8f58fa92fffe5d17cf62eba0c212",
+    "data/raw/cmrc2018/cmrc2018_dev.json": "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f",
+    "data/visual_qa/natural_first_images_v1/records.json": "5bf31c8cbb6f0af0cb72fe068e28bf78dfd3ba8486b5a49fabd16a396659a5a3"
+  },
+  "source_teacher_archive_sha256": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "font_face": 2,
+  "source_code_sha256": "267280b21231eb8eb9c78f7b9c8b93c15e4d42e5fd7bdd5d612ee4fdfe776d50",
+  "totals": {
+    "train/book/records": 4762,
+    "train/book/glyphs": 2404782,
+    "train/book/spans": 2248294,
+    "train/book/native_units": 2335587,
+    "train/book/target_glyphs": 2404782,
+    "train/book/multi_unit_spans": 85094,
+    "development/book/records": 2112,
+    "development/book/glyphs": 1076021,
+    "development/book/spans": 990114,
+    "development/book/native_units": 1028254,
+    "development/book/target_glyphs": 1076021,
+    "development/book/multi_unit_spans": 36943,
+    "train/qa/records": 9023,
+    "train/qa/glyphs": 4850441,
+    "train/qa/spans": 3501284,
+    "train/qa/native_units": 3509392,
+    "train/qa/target_glyphs": 171457,
+    "train/qa/multi_unit_spans": 6496,
+    "development/qa/records": 941,
+    "development/qa/glyphs": 646595,
+    "development/qa/spans": 463554,
+    "development/qa/native_units": 464801,
+    "development/qa/target_glyphs": 22394,
+    "development/qa/multi_unit_spans": 1016,
+    "train/qa/source_groups": 2127,
+    "development/qa/source_groups": 233,
+    "train/book/source_groups": 14,
+    "development/book/source_groups": 2
+  },
+  "rejected_records": 321,
+  "rejections_sha256": "ffe323a6e7305fbc8ccfe225e593442c485b38fa5aaefa30b1baf42b4b93c958",
+  "pixels": "32×32 binary ink; 128 bytes per glyph; high-bit first",
+  "teacher_unit_ids_stored_separately_for_training": true,
+  "official_development_answers_used": false,
+  "teacher_model_forward_performed": false,
+  "shards": 132,
+  "corpus_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+  "rejections_by_category": {
+    "font lacks": 300,
+    "no valid complete target": 21
+  },
+  "verification": {
+    "report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "verified_shards": 132,
+    "totals": {
+      "train/records": 13785,
+      "train/glyphs": 7255223,
+      "train/spans": 5749578,
+      "train/native_units": 5844979,
+      "development/records": 3053,
+      "development/glyphs": 1722616,
+      "development/spans": 1453668,
+      "development/native_units": 1493055
+    },
+    "cross_partition_exact_input_or_source_group_overlap": 0,
+    "training_input_previews": [
+      {
+        "kind": "book",
+        "index": 3,
+        "file": "preview_book.png",
+        "sha256": "d839a23623f28de0dea2b17e95b98a0c2d98b5276bf9c0e1ae1b34dca8c7fed8"
+      },
+      {
+        "kind": "qa",
+        "index": 4774,
+        "file": "preview_qa.png",
+        "sha256": "f9ee5634e763193298ea895f71c99373e5f9730c8d00afee90163e55a7dc784a"
+      }
+    ]
+  },
+  "verification_sha256": "a3818ecf68b20bbfb5fa7dab6442bea8168481ffb15545043a4b74717f841eb9",
+  "both_actual_training_previews_inspected": true,
+  "student_fit_performed": false,
+  "loader_source_sha256": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+  "verifier_source_sha256": "ccc42d8a6e7f7507234461423c66baf5fdaf2c103e35a6ad34b8c785ddba616d"
+}
