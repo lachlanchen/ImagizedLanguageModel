@@ -96,3 +96,48 @@ stopping, a new reserved context cohort and unrepaired output inspection before
 reference scoring. See the [readout/clock analysis](../references/glyph_readout_and_clock_math.md)
 for that distinction. Historical writing, unknown forms, etymological
 explanations and general language competence remain part of the full objective.
+
+## Complete-answer comparison
+
+The next cohort is already reserved in
+`artifacts/natural_first_answer_assay_v1/`: sixteen paired contexts, two
+questions each, excluding the two recent reserved cohorts and earlier diversity
+controls. All sixteen input boards have been inspected. This is not an
+exhaustive audit of historical exposure or source pretraining. The
+[complete-answer protocol](../references/natural_answer_assay_protocol.md)
+fixes its full-stream criteria before the natural writer's outcomes.
+
+After the first-image qualification passes and its actual ten-board review is
+recorded, bind the completed weights and run the actual-reader copy check:
+
+```bash
+CUDA_VISIBLE_DEVICES='' python scripts/assess_natural_first_answers.py \
+  --stage bind --run artifacts/natural_first_answer_assay_v1
+python scripts/assess_natural_first_answers.py --stage qualify \
+  --run artifacts/natural_first_answer_assay_v1/natural_writer
+```
+
+The binding independently checks the six writer AdamW counters, unchanged
+frozen tensors and body deltas, and final checkpoint identity. An invocation
+against the current unfinished run has been verified to refuse without
+creating model-condition directories. The unchanged parent's earlier full
+physical qualification is reused; no new parent fit is invented.
+
+After inspecting the eight actual full-reader qualification boards and
+recording their matching review, generate both conditions sequentially:
+
+```bash
+python scripts/assess_natural_first_answers.py --stage assess \
+  --run artifacts/natural_first_answer_assay_v1/natural_writer
+python scripts/assess_natural_first_answers.py --stage assess \
+  --run artifacts/natural_first_answer_assay_v1/balanced_parent
+```
+
+Use `scripts/review_glyph_tail_answers.py --stage review --run <condition>`
+with CUDA hidden to authenticate and display every output. View all 144 raw
+streams before scoring either condition; record uncertain readings without
+repairing them from the questions or references. Only then use that unchanged
+reviewer's `--stage score`. The registration links both reviews and preserves
+canonical equality, clear literal readings, natural stopping and caps as
+separate measures. None of these new 36,000-update inference/answer stages has
+yet run: the real-state cache is still in progress.
