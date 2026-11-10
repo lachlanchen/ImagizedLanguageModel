@@ -57,3 +57,13 @@ viewports with full length and stop/cap metadata; complete unchanged source
 PNGs remain embedded. Native editable shapes explain the source-step mismatch.
 This remains source-only until chart workbooks, exports and changed PDF pages
 have passed the existing render-and-review workflow under the project mutex.
+
+`glyph_step_publication.py` composes S39 and S40 in one isolated stage, so their
+five article/review/SI/redline PDFs need only one build cycle. It checks all
+53 predecessor slide appearances and original chart parts, all four new chart
+workbooks, embedded raw output bytes, exported PDF image objects and unchanged
+abstract source. Each figure and every changed PDF page still requires actual
+inspection before promotion. Source audit runs without Office, LaTeX or neural
+calls. Preparation, rendering, building, promotion and local Nutstore delivery
+all use the existing project build mutex and resource checks. No current PDF
+or alias changes during source preparation.
