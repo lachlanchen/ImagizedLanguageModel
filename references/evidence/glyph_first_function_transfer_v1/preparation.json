@@ -1,0 +1,63 @@
+{
+  "code_sha256": {
+    "scripts/transfer_glyph_first_function.py": "7d8ad39aab29632ee59b4935313192aa1a065590b6afbf7686a32abedf7e2199",
+    "references/glyph_first_function_transfer_protocol.md": "f5acd0b4bfdc6f598e4d85397b16135008425f92060cba8b239467a23d75c9df",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae",
+    "scripts/distill_semantic_glyph_readout.py": "372db5a0d5abbeba4e33a18bed032079be90101da807b4a6f35c3ff1da0e520d",
+    "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201"
+  },
+  "bindings_sha256": {
+    "artifacts/balanced_glyph_writer_v1/fit/checkpoint_latest.pt": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+    "artifacts/balanced_glyph_writer_v1/preparation.json": "c0e00ad532849e35f4abefaf172ab3608bf308228c70ce997eb0a2e4271f8dd8",
+    "artifacts/balanced_glyph_writer_v1/cache/pools.pt": "201db406d906a2a1eaff916c14d24e256e77c24e9140c51c6e73cb42ab6aab5c",
+    "artifacts/balanced_glyph_writer_v1/cache/report.json": "25a75e83483e84e31f761a2b12c70422b350dffd27db54a6ad08230189470782",
+    "artifacts/semantic_glyph_readout_distillation_v1/mapping.json": "cf0a0d3ed785ee70b14f8ba537b2d9a6ef7106d91342ac451202f8794b1d9e49",
+    "artifacts/semantic_glyph_bridge_v1/training.pt": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621"
+  },
+  "parent": "artifacts/balanced_glyph_writer_v1",
+  "initial_checkpoint": "artifacts/balanced_glyph_writer_v1/fit/checkpoint_latest.pt",
+  "inherited_checkpoint_sha256": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+  "inherited_bridge_updates": 36000,
+  "pool": "artifacts/balanced_glyph_writer_v1/cache/pools.pt",
+  "mapping": "artifacts/semantic_glyph_readout_distillation_v1/mapping.json",
+  "primitive": "artifacts/semantic_glyph_bridge_v1",
+  "genuine": "artifacts/genuine_glyph_readout_v1",
+  "seed": 202611122,
+  "synthetic_training_rounds": 2,
+  "synthetic_held_rounds": 1,
+  "projection_iterations": 24,
+  "calibration_batch": 128,
+  "margin": 1.0,
+  "fit_steps": 18000,
+  "learning_rate": 0.0001,
+  "fit_batch": {
+    "synthetic": 128,
+    "first": 64,
+    "later": 32,
+    "copy": 32
+  },
+  "synthetic_sampling": "uniform form, then uniform accepted unit/base within form",
+  "source_projection": "BF16-rounded matrix, FP32 multiplication without TF32",
+  "maximum_stage_seconds": 3600.0,
+  "maximum_pressure_wait_seconds": 1800.0,
+  "maximum_vram_gib": 14.0,
+  "minimum_entry_ram_gib": 48.0,
+  "minimum_runtime_ram_gib": 32.0,
+  "gate": {
+    "synthetic_mean_f1": 0.95,
+    "synthetic_form_macro_f1": 0.95,
+    "synthetic_fraction095": 0.8,
+    "training_mean_f1": 0.98,
+    "cached_copy_mean_f1": 0.95,
+    "cached_copy_fraction095": 0.8
+  },
+  "body_frozen": true,
+  "encoder_frozen": true,
+  "convolutional_decoder_frozen": true,
+  "stopping_frozen": true,
+  "readout_and_decoder_input_trainable": true,
+  "development_or_reserved_states_used": false,
+  "lexical_head_deployed": false,
+  "usable_language_demonstrated": false
+}
