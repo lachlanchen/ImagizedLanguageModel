@@ -30,6 +30,15 @@ lengths; embed every complete original PNG. Preserve every prior slide/chart
 part. The concept diagram uses editable native shapes, with actual emitted
 pixels returning through E. Never redraw an evidence glyph with AI.
 
+Replace only the final abstract macro with a concise account of the completed
+paired result and its limits. State the image-language goal, actual inherited
+7.522B body, exact frozen-prefix training, 16/32 versus 11/32 literal matches,
+failed qualification/pilot, and unresolved generalization. Preserve the title
+and every other frontmatter macro. This supersedes the earlier S40-only
+unchanged-abstract constraint and does not introduce the active refinement as
+a successful result. Include the updated frontmatter in review, redlines and
+promotion so source and PDF remain consistent.
+
 Build S39/S40/S41 together under the single project mutex with no neural job
 running. Inspect exports, verify numeric workbooks and unchanged raw embedded
 pixels, build article/review/SI/redlines, inspect every changed page, then

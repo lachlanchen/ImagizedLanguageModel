@@ -31,7 +31,7 @@ DOCS = previous.DOCS
 CODE = (*previous.CODE, 'glyph_step_publication.py', 'glyph_step_data.py',
         'glyph_step_figures.py', 'glyph_step_text.py',
         'contextual_answer_figures.py', 'contextual_answer_text.py')
-NAMES = (*previous.NAMES, 'glyph_step_results.tex', 'glyph_step_note.tex',
+NAMES = (*previous.NAMES, 'frontmatter.tex', 'glyph_step_results.tex', 'glyph_step_note.tex',
          *('figures/'+FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')),
          'contextual_answer_results.tex', 'contextual_answer_note.tex',
          *('figures/'+contextual_figure.FIGURE+'.'+suffix for suffix in ('pdf', 'png', 'svg')))
@@ -107,6 +107,7 @@ def prepare(stage):
                            ('contextual_answer_results.tex', contextual_text.RESULTS),
                            ('contextual_answer_note.tex', contextual_text.NOTE)]:
             (paper/name).write_text(text)
+        (paper/'frontmatter.tex').write_text(contextual_text.frontmatter(previous.baseline('frontmatter.tex').decode()))
         article = (paper/'article_content.tex').read_text(); anchor = r'\section*{Discussion}'
         require(article.count(anchor) == 1, 'unique main Results boundary required')
         (paper/'article_content.tex').write_text(article.replace(anchor,
@@ -119,7 +120,8 @@ def prepare(stage):
         require(protected() == before, 'active publication changed during staging')
         save(stage/'preparation.json', dict(baseline_commit=BASE, code_sha256=data['code_sha256'],
             evidence_sha256=data['evidence_sha256'], active_before_sha256=before,
-            figures=[old_figure, new_figure, contextual], abstract_unchanged=True,
+            figures=[old_figure, new_figure, contextual], abstract_unchanged=False,
+            abstract_updated_from_completed_paired_answers_only=True,
             completed_copy_C3_and_helper_results_included=True, completed_tail_language_results_included=True,
             subsequent_balanced_writer_results_included=False,
             prepared_sha256={str(p.relative_to(paper)): sha(p) for p in sorted(paper.rglob('*')) if p.is_file()},
@@ -256,7 +258,8 @@ def promote(stage):
                 == previous.baseline('article_content.tex').decode(), 'unplanned main-text change')
         require(supplement.replace(previous.NOTE_INSERT, '').replace(NOTE_INSERT, '').replace(CONTEXT_NOTE_INSERT, '')
                 == previous.baseline('supplementary_information.tex').decode(), 'unplanned SI change')
-        require((stage/'paper/frontmatter.tex').read_bytes() == previous.baseline('frontmatter.tex'), 'abstract changed')
+        require((stage/'paper/frontmatter.tex').read_text()
+                == contextual_text.frontmatter(previous.baseline('frontmatter.tex').decode()), 'unplanned abstract change')
         folder = HERE/'baselines/pre-glyph-step-2ca07ea0'; folder.mkdir(exist_ok=False)
         save(folder/'baseline_manifest.json', dict(source_commit=BASE,
             files_sha256=meta['active_before_sha256'], recoverable_from_Git=True))

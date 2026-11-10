@@ -1,5 +1,17 @@
 """Completed paired image answers, with failed gates and scope intact."""
 
+SUMMARY = r'''Written language includes handwritten and historical forms outside fixed character inventories. We investigate language generation that reads and emits images, using continuous glyph feedback without a runtime tokenizer, lexical output head, font renderer or glyph bank. An externally pretrained 7.522B visual contextual body supplies inherited language knowledge; exact frozen-prefix caching permits final-layer adaptation on one consumer GPU. Across 3,176 short-answer training questions, 688,128 contextual adapter parameters and 17,848,833 writer/stopping parameters are trained for 18,000 updates. On 32 prospectively reserved questions from sixteen new contexts, contextual adaptation gives sixteen clear complete literal matches, versus eleven for a fixed-body readout control. Both different questions are correct in five versus two contexts; canonical pixel-exact complete answers number two and one. Neither condition passes the predefined complete-answer pilot or training-pixel qualification. First-glyph training F1 remains below later reference-conditioned fidelity, showing that feedback drift cannot explain every failure. A cold standalone replay verifies actual emitted-pixel feedback without answer-bank or lexical access on one fixed input. These results support partial image-conditioned answer transfer and identify distinct initial-decision and autonomous-continuation bottlenecks. Reliable open-ended writing, historical-script generalization and an efficiency advantage at matched language quality remain unresolved.'''
+
+
+def frontmatter(baseline):
+    marker = r'\newcommand{\PaperSummary}{'
+    if baseline.count(marker) != 1:
+        raise ValueError('unique final abstract macro required')
+    prefix, old = baseline.split(marker)
+    if not old.endswith('}\n') or '\n' in old[:-2]:
+        raise ValueError('preserve the complete one-line abstract boundary')
+    return prefix+marker+SUMMARY+'}\n'
+
 RESULTS = r'''\subsection*{Contextual adaptation improves autonomous image answers}
 Adapting the final four contextual layers, together with the image writer and
 stopping head, improves complete answers relative to a broader-data readout-only
