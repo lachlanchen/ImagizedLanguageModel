@@ -29,7 +29,8 @@ def identity():
     names=[OWN,PROTOCOL,'scripts/check_native_visual_transfer_v71.py',
         'scripts/train_semantic_glyph_language.py','ilm/visual_lm/semantic_glyph_loop.py',
         'ilm/visual_lm/image_context_interface.py','ilm/visual_lm/glyph_runtime_resources.py',
-        'ilm/visual_lm/glyph_reader_monitor.py']
+        'ilm/visual_lm/glyph_reader_monitor.py','ilm/visual_lm/grounded_image_weights.py',
+        'ilm/visual_lm/grounded_image_actor.py','ilm/visual_lm/gguf_visual_language.py']
     for name in names:
         require(subprocess.check_output(['git','show','HEAD:'+name],cwd=ROOT)==(ROOT/name).read_bytes(),
                 'commit line-step diagnostic sources first')
@@ -64,10 +65,21 @@ def prepare(output):
     torch.save(dict(before=embed_rows(archive,before),after=embed_rows(archive,after),
         line_advance=embed_rows(archive,lf)),output/'structural_vectors.pt')
     bindings={rel(PARENT/'preparation.json'):sha(PARENT/'preparation.json')}
-    for name in ['training.pt','inventory.json']:bindings[rel(primitive/name)]=sha(primitive/name)
-    checkpoint=ROOT/parent['checkpoint'];bindings[rel(checkpoint)]=sha(checkpoint)
+    for name in ['training.pt','inventory.json']:
+        path=primitive/name;require(sha(path)==parent['bindings_sha256'][rel(path)],'parent physical primitive changed')
+        bindings[rel(path)]=sha(path)
+    checkpoint=ROOT/parent['checkpoint']
+    require(sha(checkpoint)==parent['bindings_sha256'][rel(checkpoint)],'parent encoder checkpoint changed')
+    bindings[rel(checkpoint)]=sha(checkpoint)
     jobs=[{k:r[k] for k in ['split','index','prompt']} for r in parent['jobs']]
-    for row in jobs:bindings[row['prompt']]=sha(ROOT/row['prompt'])
+    for row in jobs:
+        digest=sha(ROOT/row['prompt'])
+        require(digest==parent['bindings_sha256'][row['prompt']],'parent input pixels changed')
+        bindings[row['prompt']]=digest
+    for path in [ROOT/'artifacts/pixel_language_diversity_v1/manifest.json',
+                 ROOT/'artifacts/semantic_glyph_language_v1/preparation.json',
+                 *(ROOT/f'data/visual_qa/cmrc2018_short/{split}.jsonl' for split in ['train','development'])]:
+        bindings[rel(path)]=sha(path)
     require(len(jobs)==24,'fixed earlier image cohort required')
     save_json(output/'compiler.json',dict(task=TASK,before_ids=before,after_ids=after,newline_ids=lf,
         eog_ids=list(map(int,archive.field('tokenizer.ggml.eos_token_ids'))),
