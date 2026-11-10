@@ -1,6 +1,62 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-08
+Updated: 2026-11-11
+
+## Current target and decision
+
+Build a usable language model that reads a physical prompt image and generates
+meaningful writing as images on one 4090-class GPU. Chinese is the first
+language test; historical forms, handwriting and forms without Unicode codes
+remain part of the intended scope. Text may be rendered for input preparation.
+Teachers, aligned text and fonts may prepare training data, but the deployed
+answer must come from learned image generation and actual image feedback.
+An external text service, lexical classifier, font renderer or answer bank
+cannot supply it at inference. Retained pretrained foundations and their costs
+must be reported. Neither a lightweight model trained from scratch nor an
+efficiency advantage over a comparable LLM has been demonstrated.
+
+Success requires correct new complete answers, question dependence within a
+shared passage, coherent writing, natural stopping and reproducible standalone
+execution. Copying, training-set reconstruction and first-character accuracy
+are necessary diagnostics; each leaves substantial language requirements
+untested. A small answer pilot also cannot certify general language competence.
+
+The completed [contextual comparison](../references/glyph_tail_paired_answers_result.md)
+gives 16/32 clear complete answers versus 11/32 for its writer-only control.
+The [balanced writer](../references/balanced_glyph_writer_result.md) subsequently
+passes physical qualification, but gives 18/32 versus its unchanged parent's
+19/32 on a different reserved cohort. It retains a 7.522B externally pretrained
+body. Better training-image fitting therefore has not established a useful
+language improvement. A [first-decision audit](../references/glyph_first_policy_audit_result.md)
+finds correct source first-character signals that the image writer fails to
+preserve. [Broad synthetic transfer](../references/glyph_first_function_transfer_result.md)
+fails its physical test and is rejected.
+
+The active [natural-image experiment](../references/natural_first_image_protocol.md)
+collects actual complete-prompt states for 30,030 images, then trains G alone
+for 36,000 updates with fixed reader, decoder, feedback encoder and stopping
+head. The real-state cache is running; there is no completed candidate result.
+All ten fixed qualification boards must be inspected. If its first-image gate
+passes, the [reserved complete-answer comparison](../references/natural_answer_assay_protocol.md)
+tests both final checkpoints on the same 32 new paired questions and preserves
+all 144 full streams including controls. Review actual outputs before either
+reference score. Then run the [standalone replay](../references/natural_first_cold_inference_protocol.md)
+before any model promotion. A passed first-image gate alone cannot change the
+project's success status.
+
+The [readout and clock analysis](../references/glyph_readout_and_clock_math.md)
+separates writing the next glyph from correctly advancing the language state.
+If broader real-state fitting improves only the first image, continuation
+remains a separate learning problem. Its solution must be tested through
+unrepaired complete outputs, rather than inferred from lower loss or a proposed
+mathematical mechanism. The [run instructions](natural-first-writer.md) cover
+the currently implemented experiment and its explicit unrun stages.
+
+## Earlier direction record
+
+The sections below retain decisions and observations from 8 November and
+earlier. References described there as pending are historical statuses; the
+current experiment and completed evidence are identified above.
 
 ## Immediate decision: demonstrate learning before scaling
 
