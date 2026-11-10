@@ -74,6 +74,19 @@ model job. The current corrected run is `artifacts/glyph_tail_adaptation_v2`;
 its preparation reuses the identical input images from v1, with the initial
 layer-count error and first preflight preserved explicitly.
 
+The original main fit stops at its cumulative memory-pressure wait allowance
+after 2,926 updates. Recovery restores the complete update-2,000 optimizer
+checkpoint and replays the 926 unsaved updates. Its actual four-update
+checkpoint round trip is bit-identical across question and copying batches,
+including all trained weights, optimizer tensors and CPU/CUDA random states.
+Four extra verification updates are discarded. The
+[recovery receipt](../references/evidence/glyph_tail_fit_recovery_v1/roundtrip.json)
+and [execution protocol](../references/glyph_tail_fit_recovery.md) preserve the
+failed attempts and resource amendment. Use `scripts/resume_glyph_tail_fit.py`
+with CPU `--stage audit` before GPU `--stage run`, an unused recovery folder,
+and no live fit or coordinator. The 18,000-step schedule and assessment remain
+unchanged. An intermediate checkpoint is rejected by standalone inference.
+
 After qualification review, `scripts/assess_glyph_tail_adapter.py --stage assess`
 generates the fixed 72 complete streams. The
 [assessment protocol](../references/glyph_tail_assessment_protocol.md) fixes the

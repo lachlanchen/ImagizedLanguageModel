@@ -37,6 +37,8 @@ def candidate(run):
     require(load(run / 'fit/status.json')['phase'] == 'completed', 'complete main adaptation first')
     report = load(run / 'fit/report.json')
     require(report['actual_optimizer_updates'] == m['fit_steps'] and report['all_checks_passed'], 'incomplete fit')
+    for name, digest in report.get('recovery_code_sha256', {}).items():
+        require(sha(ROOT/name)==digest,'completed fit recovery source changed: '+name)
     checkpoint = run / 'fit/checkpoint_latest.pt'
     require(sha(checkpoint) == report['checkpoint_sha256'], 'candidate changed')
     return m, checkpoint
