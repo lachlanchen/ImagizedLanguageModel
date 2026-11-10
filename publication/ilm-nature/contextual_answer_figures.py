@@ -49,16 +49,22 @@ def source_data():
         all144_outputs_preserved=True,fixed_example_indices=list(range(8)),new_balanced_fit_results_included=False)
 
 
-def append(paper):
+def append(paper,*,balanced=False):
     require(paper.resolve()!=HERE.resolve(),'stage outside active publication')
-    data=source_data()
+    if balanced:
+        from balanced_writer_figures import source_data as balanced_data
+        data=balanced_data();predecessor=56;first_chart=64
+        names=['unchanged_parent','balanced_writer'];labels=['Parent','Balanced']
+    else:
+        data=source_data();predecessor=55;first_chart=62
+        names=['contextual','readout_only'];labels=['Adapted','Fixed']
     with zipfile.ZipFile(paper/'ILM_Figures_editable.pptx') as source:
         original={n:source.read(n) for n in source.namelist()}
     parts=dict(original);presentation=ET.fromstring(parts['ppt/presentation.xml'])
     ids=presentation.find('p:sldIdLst',NS)
-    require(len(ids)==55 and sum(bool(re.fullmatch(r'ppt/charts/chart\d+\.xml',n)) for n in parts)==61,
-            'stage S39 and S40 first')
-    template='ppt/slides/slide55.xml';slide=Slide(parts[template]);trels=ET.fromstring(parts[relpath(template)])
+    require(len(ids)==predecessor and sum(bool(re.fullmatch(r'ppt/charts/chart\d+\.xml',n)) for n in parts)==first_chart-1,
+            'stage the complete predecessor deck first')
+    template=f'ppt/slides/slide{predecessor}.xml';slide=Slide(parts[template]);trels=ET.fromstring(parts[relpath(template)])
     types=ET.fromstring(parts['[Content_Types].xml']);relationships=ET.fromstring(parts['ppt/_rels/presentation.xml.rels'])
     ct=next(raw for n,raw in parts.items() if re.fullmatch(r'ppt/charts/chart\d+\.xml',n)
         and ET.fromstring(raw).find('c:chart/c:plotArea/c:barChart',NS) is not None)
@@ -80,21 +86,33 @@ def append(paper):
         slide.chart(slide.relation('chart','../charts/'+Path(part).name),x,116,720,190)
         charts.append(dict(part=part,workbook=book,categories=categories,values=values,series=series,
             axis_range=[0,maximum],major_unit=unit))
-    slide.shape('Contextual adaptation improves image answers; reliability remains limited',45,20,1510,50,26,True)
+    title=('Better training fidelity does not improve new-context image answers' if balanced
+        else 'Contextual adaptation improves image answers; reliability remains limited')
+    slide.shape(title,45,20,1510,50,26,True)
     slide.shape('a  Clear complete answers on new contexts',45,78,720,32,20,True)
-    chart(62,['Adapted context','Readout only'],[16,11],'Clear complete matches / 32',32,8,45)
-    slide.shape('Both questions correct: 5/16 vs 2/16 contexts.\nNeither meets the fixed 24/32 and 10/16 pilot.',45,309,720,60,14)
-    slide.shape('b  Training first decision versus continuation',820,78,720,32,20,True)
+    chart(first_chart,['Parent','Balanced writer'] if balanced else ['Adapted context','Readout only'],
+        [19,18] if balanced else [16,11],'Clear complete matches / 32',32,8,45)
+    annotation=('New cohort: both questions correct 6/16 vs 5/16.\nThe one-answer difference is a conservative glyph reading.' if balanced
+        else 'Both questions correct: 5/16 vs 2/16 contexts.\nNeither meets the fixed 24/32 and 10/16 pilot.')
+    slide.shape(annotation,45,309,720,60,14)
+    slide.shape('b  Training pixel fidelity' if balanced else 'b  Training first decision versus continuation',820,78,720,32,20,True)
     c=data['conditions']
-    vals=[100*c[k]['position'][p]['mean_f1'] for k,p in
-        [('contextual','first'),('contextual','later'),('readout_only','first'),('readout_only','later')]]
-    chart(63,['Adapt first','Adapt later','Fixed first','Fixed later'],vals,'Foreground F1 (%)',100,25,820)
-    slide.shape('First: 3,176; later: 20,086 reference-conditioned targets.\nThe first image is decided before any generated feedback.',820,309,720,60,14)
-    slide.shape('c  Image prompt',45,382,250,43,17,True,center=True,fill='EAF1F6')
+    if balanced:
+        vals=[100*c[k]['qualification']['training_mean_f1'] for k in names]
+        categories=['Parent','Balanced writer']
+        annotation='Training F1 0.963524 -> 0.999811; physical gate passes.\nNew-context canonical exact answers remain 2/32 each.'
+    else:
+        vals=[100*c[k]['position'][p]['mean_f1'] for k,p in
+            [('contextual','first'),('contextual','later'),('readout_only','first'),('readout_only','later')]]
+        categories=['Adapt first','Adapt later','Fixed first','Fixed later']
+        annotation='First: 3,176; later: 20,086 reference-conditioned targets.\nThe first image is decided before any generated feedback.'
+    chart(first_chart+1,categories,vals,'Foreground F1 (%)',100,25,820)
+    slide.shape(annotation,820,309,720,60,14)
+    slide.shape('c  Fixed learned reader' if balanced else 'c  Image prompt',45,382,250,43,17,True,center=True,fill='EAF1F6')
     slide.arrow(299,403,329,403)
-    slide.shape('V + learned context',335,382,320,43,17,True,center=True,fill='EAF1F6')
+    slide.shape('Exact training-state cache' if balanced else 'V + learned context',335,382,320,43,17,True,center=True,fill='EAF1F6')
     slide.arrow(659,403,689,403)
-    slide.shape('Continuous G + image D',695,382,335,43,17,True,center=True,fill='EAF1F6')
+    slide.shape('Balanced first/later writer fit' if balanced else 'Continuous G + image D',695,382,335,43,17,True,center=True,fill='EAF1F6')
     slide.arrow(1034,403,1064,403)
     slide.shape('Actual pixels -> E -> next state',1070,382,485,43,17,True,center=True,fill='EAF1F6')
     slide.shape('d  First eight reserved questions, both conditions, all outcomes retained',45,443,1510,32,19,True)
@@ -104,9 +122,9 @@ def append(paper):
         for pair in range(2):
             index=col*2+pair;y=486+pair*178
             slide.shape(f'Question {index:02}',x,y,365,26,15,True)
-            for j,name in enumerate(['contextual','readout_only']):
+            for j,name in enumerate(names):
                 row=lookup[index,name];top=y+31+j*64
-                label=('Adapted' if name=='contextual' else 'Fixed')+f" | n={row['glyphs']} "+('cap' if row['capped'] else 'stop')
+                label=labels[j]+f" | n={row['glyphs']} "+('cap' if row['capped'] else 'stop')
                 if row['display_is_prefix_excerpt']:label+=' | first 10'
                 slide.shape(label,x,top,365,23,12)
                 path=ROOT/row['file'];part=f'ppt/media/contextual_answer_{name}_{path.name}'
@@ -117,10 +135,11 @@ def append(paper):
                     fill=list(slide.tree)[-1].find('p:blipFill',NS)
                     fill.insert(1,element('a:srcRect',r=round(100000*(1-10/row['glyphs']))))
                 media.append(dict(part=part,**row))
-    slide.shape('Unrepaired output pixels. Prefixes only where marked; full PNGs embedded. Agent reading is not independent human grading. Gates remain failed.',
+    slide.shape('Unrepaired output pixels. Prefixes only where marked; full PNGs embedded. Agent reading is not independent human grading. Answer pilot remains failed.',
                 45,866,1510,31,12)
     slide.relation('slideLayout',next(n.get('Target') for n in trels if n.get('Type').endswith('/slideLayout')))
-    part='ppt/slides/slide56.xml';note='ppt/notesSlides/contextual_answer_notes56.xml'
+    number=predecessor+1
+    part=f'ppt/slides/slide{number}.xml';note=f'ppt/notesSlides/contextual_answer_notes{number}.xml'
     slide.relation('notesSlide','../notesSlides/'+Path(note).name)
     oldnote=next(resolve(template,n.get('Target')) for n in trels if n.get('Type').endswith('/notesSlide'))
     notes=ET.fromstring(parts[oldnote]);nrels=ET.fromstring(parts[relpath(oldnote)])
@@ -129,12 +148,18 @@ def append(paper):
         'Training first/later scores are reference-conditioned, not autonomous accuracy. The first eight reserved questions '
         'in both conditions are fixed examples, including caps; full original output bytes are embedded. '
         'No new balanced-writer experiment result is included. The model retains a7.522B inherited body.')
+    if balanced:
+        caption=('Figure S42. The additional balanced writer fit passes physical qualification but gives18/32 clear '
+            'complete new-context matches versus19/32 in the unchanged parent. Both have2/32 canonical exact answers. '
+            'The one-case reading difference is an uncertain damaged initial glyph. All144 actual streams and all '
+            'review boards are retained; the displayed first eight questions include capped and damaged failures. '
+            'The frozen learned reader and inherited training cost are preserved. No language pilot passes.')
     for shape in notes.findall('p:cSld/p:spTree/p:sp',NS):
         ph=shape.find('p:nvSpPr/p:nvPr/p:ph',NS)
         if ph is not None and ph.get('type')=='body':
             for i,node in enumerate(shape.findall('.//a:t',NS)):node.text=caption if i==0 else ''
     for node in nrels:
-        if node.get('Type').endswith('/slide'):node.set('Target','../slides/slide56.xml')
+        if node.get('Type').endswith('/slide'):node.set('Target',f'../slides/slide{number}.xml')
     for name,kind in [(part,'slide'),(note,'notesSlide')]:
         require(name not in parts,'new slide/note collision')
         element('ct:Override',types,PartName='/'+name,
@@ -142,7 +167,7 @@ def append(paper):
     parts[part],parts[relpath(part)]=xml(slide.root),xml(slide.rels)
     parts[note],parts[relpath(note)]=xml(notes),xml(nrels)
     rid=next(f'rId{i}' for i in range(1,1000) if f'rId{i}' not in {n.get('Id') for n in relationships})
-    element('pkg:Relationship',relationships,Id=rid,Type=NS['r']+'/slide',Target='slides/slide56.xml')
+    element('pkg:Relationship',relationships,Id=rid,Type=NS['r']+'/slide',Target=f'slides/slide{number}.xml')
     element('p:sldId',ids,id=max(int(n.get('id')) for n in ids)+1).set(q('r:id'),rid)
     mutable={'[Content_Types].xml','ppt/presentation.xml','ppt/_rels/presentation.xml.rels'}
     for name,node in [('[Content_Types].xml',types),('ppt/presentation.xml',presentation),
@@ -150,6 +175,6 @@ def append(paper):
     require(all(parts[n]==raw for n,raw in original.items() if n not in mutable),'predecessor part changed')
     with zipfile.ZipFile(paper/'ILM_Figures_editable.pptx','w',zipfile.ZIP_DEFLATED) as output:
         for name,raw in parts.items():output.writestr(name,raw)
-    return dict(native_slides=56,native_charts=63,charts=charts,media=media,sources=data,
-        prior55_slide_parts_preserved=True,prior61_chart_parts_preserved=True,runtime_outputs_repaired=False,
-        subsequent_balanced_fit_results_included=False)
+    return dict(native_slides=number,native_charts=first_chart+1,charts=charts,media=media,sources=data,
+        predecessor_slide_count=predecessor,predecessor_slide_and_chart_parts_preserved=True,
+        runtime_outputs_repaired=False,subsequent_balanced_fit_results_included=balanced)

@@ -54,3 +54,15 @@ Keep a24 GiB live reserve and bounded, individually owned child process groups.
 Record actual admission privately; do not change swap settings or foreign
 services. No publication stage may run alongside the current neural job.
 This resource-only mode does not change any model or physical quality gate.
+
+The balanced-writer comparison has now completed and been reviewed/scored.
+Expand Note62, the Results paragraph and abstract to include its separate new
+context cohort:18/32 clear complete matches versus19/32 for the unchanged
+parent, two canonical exact answers each, despite training F1 rising to0.999811
+and passing the original physical gate. Explain the one uncertain first-glyph
+reading rather than asserting a semantic regression. Report the additional
+training and cache costs separately from inherited work. Add native FigureS42
+with these paired counts and the first eight new raw examples from both models.
+Build S39--S42 in one stage; include all four actual figure reviews. This
+supersedes the earlier exclusion of the then-unfinished balanced refinement.
+No subsequent source-only alignment diagnostic is claimed as a working ILM.
