@@ -1,0 +1,75 @@
+{
+  "cpu_model_interface": {
+    "context": {
+      "context_archive_sha256": "3d0b790534fe4b79525fc3692950408dca41171676ed7e21db57af5c65ef6ab6",
+      "context_parameters": 1409410048,
+      "trainable_image_parameters": 12872213,
+      "codec": {
+        "path": "artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt",
+        "sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+        "architecture": "continuous-glyph-representation-codec-v34",
+        "update": 6000,
+        "selection": "ema-shadow",
+        "tensors": 84
+      },
+      "lexical_parameters_materialized": 0,
+      "visual_span_heads_initialized_for_training": true
+    },
+    "input_corpus_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "actual_complete_book_record_index": 27,
+    "glyphs": 50,
+    "spans": 46,
+    "native_alignment_rows": 48,
+    "complete_sequence_objectives": {
+      "feedback_vectors": 1.4263304471969604,
+      "feedback_counts": 1.1910350322723389,
+      "span_boundaries": 0.7113770842552185,
+      "output_length": 3.007596254348755,
+      "output_flow": 2.3350090980529785
+    },
+    "actual_image_head_gradient_norms": {
+      "encoder": 23.851808547973633,
+      "writer": 35.40530014038086
+    },
+    "gradient_checkpointed_context_backward": true,
+    "feedback_initialization": {
+      "source_units": 26710,
+      "mean_rms": 0.006544419832329162,
+      "scale_rms": 0.03575678077169064
+    },
+    "training_plan_sha256": "2d12ebccfe03b39167abb9e93f41b26a1ae1333171fa705f743a26237550f91c",
+    "actual_generated_feedback_spans_checked": 1,
+    "actual_feedback_glyphs_checked": 1,
+    "feedback_check_used_reference_span_length": true,
+    "feedback_check_ink_sha256": "78ebb622be103af483390ab04dad6c1e785e99ebc98770e4405595d9ea7fa7a7",
+    "actual_feedback_vectors_bit_exact": true,
+    "untrained_image_span_heads": true,
+    "optimizer_updates": 0,
+    "language_quality_measured": false,
+    "teacher_state_loss_executed": false,
+    "cuda_initialized": false,
+    "elapsed_seconds": 293.04630701616406,
+    "maximum_process_rss_gib": 4.710243225097656,
+    "source_sha256": {
+      "scripts/check_compact_visual_span_model.py": "6640f217465be40a1bba2360deea4b146bb181d1913675e9fdd99a2452209d82",
+      "ilm/visual_lm/compact_visual_span_model.py": "1a4cbf7546daaeb9142f46f27f968e7b5561490d738e3dc80bcf4ea8285e111f",
+      "ilm/visual_lm/compact_visual_span_training.py": "ac26fa4019b7396cec4e868789f77fc20611fb7b7d3f73dd6a1c8e8b2c55b6b1",
+      "ilm/visual_lm/compact_visual_span_weights.py": "d5017b9dc1a82ef28e0606a7f5643f54f184732d8b84bb705bdf73222cdda1ae"
+    }
+  },
+  "verified_complete_sequence_schedule": {
+    "data_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "teacher_preparation_sha256": "2d12ebccfe03b39167abb9e93f41b26a1ae1333171fa705f743a26237550f91c",
+    "shards": 108,
+    "records": 13785,
+    "native_context_positions": 5844979,
+    "supervised_context_positions": 2380620,
+    "scheduled_optimizer_batches": 8172,
+    "padded_context_positions": 5877546,
+    "largest_padded_batch_positions": 1024,
+    "padded_batch_budget": 1024,
+    "gpu_steps_executed": 0,
+    "teacher_states_loaded": false,
+    "fit_source_sha256": "df377889fb3e606c6e9fe625dfbfa7c7e5d090b8f1b1dd7456323faec6243986"
+  }
+}

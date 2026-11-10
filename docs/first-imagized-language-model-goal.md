@@ -92,6 +92,9 @@ held-out language quality with generated-image feedback. Compare its original
 source updates with learned image-span updates under the same context before
 attributing any gain to visual learning. See the [teacher preparation](visual-sequence-teacher-states.md)
 and [visual span measurements](../references/visual_chunk_coverage_result.md).
+The [compact implementation](compact-visual-span-model.md) has passed CPU
+gradient and pixel-feedback checks. GPU fitting and held-out language scores
+are pending.
 
 Measure complete answers, passage continuation, question dependence and
 historical form handling on independent groups. Measure peak VRAM, total
