@@ -1,0 +1,420 @@
+{
+  "first_state": {
+    "normal_cases": 16,
+    "normal_top_reference_form": 9,
+    "normal_reference_in_top3": 11,
+    "normal_first_image_exact": 1
+  },
+  "regression": {
+    "coordinates": 4096,
+    "affine_rank": 2048,
+    "best_span_mse": 0.06010909420059825,
+    "trained_span_mse": 0.30518002355215196
+  },
+  "compilers": {
+    "original": {
+      "baseline/synthetic": {
+        "count": 4087,
+        "mean_f1": 0.3339692172299271,
+        "pixel_exact": 1,
+        "fraction_f1_at_least_095": 0.00024467824810374357
+      },
+      "baseline/genuine": {
+        "count": 774,
+        "mean_f1": 0.8960066083674283,
+        "pixel_exact": 638,
+        "fraction_f1_at_least_095": 0.8320413436692506
+      },
+      "distilled/synthetic": {
+        "count": 4087,
+        "mean_f1": 0.5225724036597282,
+        "pixel_exact": 0,
+        "fraction_f1_at_least_095": 0.00024467824810374357
+      },
+      "distilled/genuine": {
+        "count": 774,
+        "mean_f1": 0.829770242251475,
+        "pixel_exact": 180,
+        "fraction_f1_at_least_095": 0.5155038759689923
+      }
+    },
+    "contrastive": {
+      "baseline/synthetic": {
+        "count": 4087,
+        "mean_f1": 0.3339692172299271,
+        "pixel_exact": 1,
+        "fraction_f1_at_least_095": 0.00024467824810374357
+      },
+      "baseline/genuine": {
+        "count": 774,
+        "mean_f1": 0.8960066083674283,
+        "pixel_exact": 638,
+        "fraction_f1_at_least_095": 0.8320413436692506
+      },
+      "distilled/synthetic": {
+        "count": 4087,
+        "mean_f1": 0.489500271973132,
+        "pixel_exact": 0,
+        "fraction_f1_at_least_095": 0.00024467824810374357
+      },
+      "distilled/genuine": {
+        "count": 774,
+        "mean_f1": 0.795106214752724,
+        "pixel_exact": 115,
+        "fraction_f1_at_least_095": 0.3875968992248062
+      }
+    }
+  },
+  "motor_tests": [
+    {
+      "folder": "robust_glyph_decoder_v1",
+      "name": "Noise-trained D",
+      "trained_parameters": 10792449,
+      "forms": 4087,
+      "clean_f1": 0.9997516731075999,
+      "mixed_f1": 0.8227509585664255,
+      "primitive_gate_passed": false,
+      "fit_seconds": 26.60034222435206,
+      "peak_allocated_vram_gib": 0.5483412742614746
+    },
+    {
+      "folder": "semantic_motor_flow_v1",
+      "name": "Dense motor flow",
+      "trained_parameters": 168366080,
+      "forms": 4087,
+      "clean_f1": 0.9062836571255435,
+      "mixed_f1": 0.7154489232285086,
+      "primitive_gate_passed": false,
+      "fit_seconds": 129.67425980698317,
+      "peak_allocated_vram_gib": 3.3128299713134766
+    },
+    {
+      "folder": "spatial_semantic_motor_v1",
+      "name": "Spatial image flow",
+      "trained_parameters": 3892737,
+      "forms": 4087,
+      "clean_f1": 0.9982602148555385,
+      "mixed_f1": 0.810536632013986,
+      "primitive_gate_passed": false,
+      "fit_seconds": 136.35449271649122,
+      "peak_allocated_vram_gib": 0.8893442153930664
+    }
+  ],
+  "original_decoder_mixed_baselines_pixel_identical": true,
+  "indices": [
+    1,
+    1362,
+    2724,
+    4086
+  ],
+  "cells": [
+    {
+      "row": 0,
+      "index": 1,
+      "column": "Target",
+      "file": "row0_target.png",
+      "sha256": "b08ff6ad1cb78ba9fbc468ffbe711e569b640ff8d2db2c1b015f192ed5fe3e8d",
+      "source": "artifacts/semantic_glyph_bridge_v1/training.pt",
+      "source_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+      "crop": null
+    },
+    {
+      "row": 0,
+      "index": 1,
+      "column": "D",
+      "file": "row0_d.png",
+      "sha256": "00d11e10e20bd4b22e273ca4277abc80a9198991f663630538297c6e4056dcfb",
+      "source": "references/evidence/robust_glyph_decoder_v1/baseline_mixture045_all.png",
+      "source_sha256": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+      "crop": [
+        32,
+        0,
+        64,
+        32
+      ]
+    },
+    {
+      "row": 0,
+      "index": 1,
+      "column": "Noise D",
+      "file": "row0_noise_d.png",
+      "sha256": "900996c81dc46689c9893cbcdca5bdba7eb349dca08395d75d5f81f4715c6f24",
+      "source": "references/evidence/robust_glyph_decoder_v1/robust_mixture045_all.png",
+      "source_sha256": "d7b1e43fa5afe2886914fc7ba91e5b2f8dfadaa8e7a8921deea8bab3a68a0171",
+      "crop": [
+        32,
+        0,
+        64,
+        32
+      ]
+    },
+    {
+      "row": 0,
+      "index": 1,
+      "column": "Dense flow",
+      "file": "row0_dense_flow.png",
+      "sha256": "4fbc0c9c7c00baa512e571ec41a64a4323672e23d9fd1d9af7ce4a1b1b1088e9",
+      "source": "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "4de0312b29ad8f3d93cea159efc008b6494e63ef446326a54c2432b47c7ef768",
+      "crop": [
+        32,
+        0,
+        64,
+        32
+      ]
+    },
+    {
+      "row": 0,
+      "index": 1,
+      "column": "Spatial flow",
+      "file": "row0_spatial_flow.png",
+      "sha256": "5c3589e578121bfb54724757f9b22e7e7c6e9a30d4486e3cae5489e761b3536a",
+      "source": "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "54400888ebe2043be409dc8145d42fedf3995233102dd7b80cd3bc87f7c460a6",
+      "crop": [
+        32,
+        0,
+        64,
+        32
+      ]
+    },
+    {
+      "row": 1,
+      "index": 1362,
+      "column": "Target",
+      "file": "row1_target.png",
+      "sha256": "a7a0eef6c038af90b3dda8deaf100e4ec14de96882af865b3f180fb0c83ae2bb",
+      "source": "artifacts/semantic_glyph_bridge_v1/training.pt",
+      "source_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+      "crop": null
+    },
+    {
+      "row": 1,
+      "index": 1362,
+      "column": "D",
+      "file": "row1_d.png",
+      "sha256": "b50960fbce478920bd1818912e5cacef2e72a0e9636425ffde3b4d03ce69be03",
+      "source": "references/evidence/robust_glyph_decoder_v1/baseline_mixture045_all.png",
+      "source_sha256": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+      "crop": [
+        576,
+        672,
+        608,
+        704
+      ]
+    },
+    {
+      "row": 1,
+      "index": 1362,
+      "column": "Noise D",
+      "file": "row1_noise_d.png",
+      "sha256": "46a305d06fbce5609dcfe9989d28986e53a1af94d3b96d6d2293f25010f850a7",
+      "source": "references/evidence/robust_glyph_decoder_v1/robust_mixture045_all.png",
+      "source_sha256": "d7b1e43fa5afe2886914fc7ba91e5b2f8dfadaa8e7a8921deea8bab3a68a0171",
+      "crop": [
+        576,
+        672,
+        608,
+        704
+      ]
+    },
+    {
+      "row": 1,
+      "index": 1362,
+      "column": "Dense flow",
+      "file": "row1_dense_flow.png",
+      "sha256": "47885a8feeb5f6426db1eb3b87e53df799f3bb03f62a7a365eb6924f4eefa834",
+      "source": "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "4de0312b29ad8f3d93cea159efc008b6494e63ef446326a54c2432b47c7ef768",
+      "crop": [
+        576,
+        672,
+        608,
+        704
+      ]
+    },
+    {
+      "row": 1,
+      "index": 1362,
+      "column": "Spatial flow",
+      "file": "row1_spatial_flow.png",
+      "sha256": "ef6eb83bffc3ac5e159e6d6421b8e505df5021995b2b2bb72ffad6507eafacc5",
+      "source": "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "54400888ebe2043be409dc8145d42fedf3995233102dd7b80cd3bc87f7c460a6",
+      "crop": [
+        576,
+        672,
+        608,
+        704
+      ]
+    },
+    {
+      "row": 2,
+      "index": 2724,
+      "column": "Target",
+      "file": "row2_target.png",
+      "sha256": "80630d94091d0f5285b2dc6089dce5df48477abf91282963fd3f7d11a63cfad3",
+      "source": "artifacts/semantic_glyph_bridge_v1/training.pt",
+      "source_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+      "crop": null
+    },
+    {
+      "row": 2,
+      "index": 2724,
+      "column": "D",
+      "file": "row2_d.png",
+      "sha256": "e29b46edac5f352256290d48b6610683406a9ed3d7483449f13e6d10a11fc82e",
+      "source": "references/evidence/robust_glyph_decoder_v1/baseline_mixture045_all.png",
+      "source_sha256": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+      "crop": [
+        1152,
+        1344,
+        1184,
+        1376
+      ]
+    },
+    {
+      "row": 2,
+      "index": 2724,
+      "column": "Noise D",
+      "file": "row2_noise_d.png",
+      "sha256": "958765565943f0be2fbb6521044ffad60d51c21cb20e9a62c60bead4e2ac7bff",
+      "source": "references/evidence/robust_glyph_decoder_v1/robust_mixture045_all.png",
+      "source_sha256": "d7b1e43fa5afe2886914fc7ba91e5b2f8dfadaa8e7a8921deea8bab3a68a0171",
+      "crop": [
+        1152,
+        1344,
+        1184,
+        1376
+      ]
+    },
+    {
+      "row": 2,
+      "index": 2724,
+      "column": "Dense flow",
+      "file": "row2_dense_flow.png",
+      "sha256": "80ccd48cf263a25bbc10cd599cecaa3caebdc5d3b8a26b8f1d9c9c83ad1173f6",
+      "source": "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "4de0312b29ad8f3d93cea159efc008b6494e63ef446326a54c2432b47c7ef768",
+      "crop": [
+        1152,
+        1344,
+        1184,
+        1376
+      ]
+    },
+    {
+      "row": 2,
+      "index": 2724,
+      "column": "Spatial flow",
+      "file": "row2_spatial_flow.png",
+      "sha256": "08b1ea7b6f0728dda5183e05f43464b43fb4463a738e5d35975a27f2861a41c6",
+      "source": "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "54400888ebe2043be409dc8145d42fedf3995233102dd7b80cd3bc87f7c460a6",
+      "crop": [
+        1152,
+        1344,
+        1184,
+        1376
+      ]
+    },
+    {
+      "row": 3,
+      "index": 4086,
+      "column": "Target",
+      "file": "row3_target.png",
+      "sha256": "608a7df92af4c4289b57f706db1abfe5fbd8e8c99efc4ab2da715bb26dafee85",
+      "source": "artifacts/semantic_glyph_bridge_v1/training.pt",
+      "source_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+      "crop": null
+    },
+    {
+      "row": 3,
+      "index": 4086,
+      "column": "D",
+      "file": "row3_d.png",
+      "sha256": "1617da6195a6a6dca9cbeb4306c8f08be0d124fb3d85907c50e8adbf30693e8c",
+      "source": "references/evidence/robust_glyph_decoder_v1/baseline_mixture045_all.png",
+      "source_sha256": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+      "crop": [
+        1728,
+        2016,
+        1760,
+        2048
+      ]
+    },
+    {
+      "row": 3,
+      "index": 4086,
+      "column": "Noise D",
+      "file": "row3_noise_d.png",
+      "sha256": "c16a2286a0528855d5929dee96b4da5b72d8f7b467b96008d02f6d8bc1633a23",
+      "source": "references/evidence/robust_glyph_decoder_v1/robust_mixture045_all.png",
+      "source_sha256": "d7b1e43fa5afe2886914fc7ba91e5b2f8dfadaa8e7a8921deea8bab3a68a0171",
+      "crop": [
+        1728,
+        2016,
+        1760,
+        2048
+      ]
+    },
+    {
+      "row": 3,
+      "index": 4086,
+      "column": "Dense flow",
+      "file": "row3_dense_flow.png",
+      "sha256": "80858cf77e6cd2b5159286276c42e8a564b9fabb1d447ac32627ed6bca0e5dc1",
+      "source": "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "4de0312b29ad8f3d93cea159efc008b6494e63ef446326a54c2432b47c7ef768",
+      "crop": [
+        1728,
+        2016,
+        1760,
+        2048
+      ]
+    },
+    {
+      "row": 3,
+      "index": 4086,
+      "column": "Spatial flow",
+      "file": "row3_spatial_flow.png",
+      "sha256": "92a502a9cf84ad8f9ce4a21aacb57b7535b184e23bb4fb28a11e3b3dc780b977",
+      "source": "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_ink.png",
+      "source_sha256": "54400888ebe2043be409dc8145d42fedf3995233102dd7b80cd3bc87f7c460a6",
+      "crop": [
+        1728,
+        2016,
+        1760,
+        2048
+      ]
+    }
+  ],
+  "source_files_sha256": {
+    "references/evidence/semantic_glyph_geometry/report.json": "85b20e8a927cf3f3539bdf75082c0480b4ca8aa677d694a3571dd2070d7e0f06",
+    "references/evidence/glyph_readout_rank_v1/report.json": "dcf49d9a27bef7a22f275affc32e67e4c9f71c9bd818f01eedbba2194be13699",
+    "references/evidence/semantic_readout_distillation_v1/qualify/report.json": "9cf99f72d6a88dde0e510dd57af9c73cfd52d0475c3bd60b98e1d824e7f3572b",
+    "references/evidence/contrastive_glyph_readout_v1/qualify/report.json": "479eafeff4cf56d7ee7d459aafa1da4ac76f7d21b0109bef39db6d1657128c65",
+    "references/evidence/robust_glyph_decoder_v1/qualify/report.json": "64d1440acc4744f32011d26831974ba47fbabfec4eb33b61c930b35d0a99d700",
+    "references/evidence/robust_glyph_decoder_v1/fit/report.json": "d17082c70816f41da99ba65df76d791dedad3bc9337f6c943843ae1a0150cf91",
+    "references/evidence/semantic_motor_flow_v1/qualify/report.json": "54b496170296bd34f07ca65184db89a621a5c90177d53b23c60c3e375e4b0496",
+    "references/evidence/semantic_motor_flow_v1/fit/report.json": "892d125ffb5c323352ddfc3bc0bc8f01ae336ef41eaa205069501f33d0832f22",
+    "references/evidence/spatial_semantic_motor_v1/qualify/report.json": "f042989708183602cc94e89cf49e16fcad015ef95a39d68479d15ff0256d36ba",
+    "references/evidence/spatial_semantic_motor_v1/fit/report.json": "bb51da825ff2e83af6dff0ddabb6af37f67f5f4f0ca4981410281ca824b559c9",
+    "references/evidence/robust_glyph_decoder_v1/visual_review.json": "0c10c56f18f5ccdcb440468e6acdb7c544a6a5b706179d7263c814a02b47ace3",
+    "references/evidence/robust_glyph_decoder_v1/baseline_mixture045_all.png": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+    "references/evidence/robust_glyph_decoder_v1/robust_mixture045_all.png": "d7b1e43fa5afe2886914fc7ba91e5b2f8dfadaa8e7a8921deea8bab3a68a0171",
+    "references/evidence/semantic_motor_flow_v1/retention.json": "37efafccddbf305d1660213e97c015556e75171617ec2d7bbdf0b09c3454d97c",
+    "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_ink.png": "4de0312b29ad8f3d93cea159efc008b6494e63ef446326a54c2432b47c7ef768",
+    "references/evidence/spatial_semantic_motor_v1/visual_review.json": "5f1c4efd1c9b518c8a2d2b0a66e5076b1d256091331421768a3e6c78addf3293",
+    "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_ink.png": "54400888ebe2043be409dc8145d42fedf3995233102dd7b80cd3bc87f7c460a6",
+    "references/evidence/semantic_motor_flow_v1/mixture045_all_outputs_baseline_ink.png": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+    "references/evidence/spatial_semantic_motor_v1/mixture045_all_outputs_baseline_ink.png": "39d4a1b544fc5b077fbfb722e10157956f79ccacdcdeac70de346b8c61bb0798",
+    "references/evidence/semantic_glyph_bridge/preparation.json": "6784e57c5aeab4cbe4a812523a753256f47f7a1378c3f11d0d8ad9cb16daaba4"
+  },
+  "canonical_training_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+  "collector_sha256": "dada4e5136915fd364ad0749197d5c133a017e6688cb2d0c641c81fb694bb89f",
+  "neural_forward_calls": 0,
+  "images_repaired": false,
+  "cells_are_complete_32x32_glyphs": true,
+  "genuine_curriculum_results_included": false
+}
