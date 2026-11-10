@@ -28,7 +28,10 @@ def rel(path):
 def identity():
     require(subprocess.check_output(['git','show','HEAD:'+OWN],cwd=ROOT)==(ROOT/OWN).read_bytes(),
             'commit recovery code first')
-    return sha(ROOT/OWN)
+    resource='ilm/visual_lm/glyph_runtime_resources.py'
+    require(subprocess.check_output(['git','show','HEAD:'+resource],cwd=ROOT)==(ROOT/resource).read_bytes(),
+            'commit resource admission first')
+    return {'recovery':sha(ROOT/OWN),'resource_admission':sha(ROOT/resource)}
 
 
 def validate(path, job):
@@ -112,12 +115,12 @@ def run_recovery(run, recovery):
     import torch
     from ilm.visual_lm.semantic_image_memory import native_budget_image
     from scripts.train_semantic_glyph_language import reader,bridge_model,image,numerics,Monitor,atomic_tensor
-    from scripts.score_pixel_language_first_blocks import diagnostic_gpu
+    from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     folder=recovery/'parts'; folder.mkdir(exist_ok=False)
     monitor=Monitor(recovery,m['cache_seconds']); monitor.status('admitting')
     try:
         files={int(i):row for i,row in receipt['adopted'].items()}
-        with diagnostic_gpu() as (device,admission),torch.no_grad():
+        with full_reader_gpu() as (device,admission),torch.no_grad():
             monitor.admission=admission; numerics(); monitor.guard()
             interface,provenance=reader(device); bridge=bridge_model({},device,ROOT/m['bridge'])
             primitive=torch.load(ROOT/m['primitive']/'training.pt',weights_only=True,map_location='cpu')

@@ -42,13 +42,18 @@ def main():
     args = parser.parse_args()
     import torch
     from ilm.image_edit.baseline import save_json, sha
-    from scripts.train_semantic_glyph_language import image, numerics, atomic_tensor
-    from scripts.score_pixel_language_first_blocks import diagnostic_gpu
+    from scripts.train_semantic_glyph_language import image, numerics, atomic_tensor, Monitor
+    from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     args.output.mkdir(parents=True, exist_ok=False)
-    with diagnostic_gpu() as (device, admission), torch.no_grad():
+    monitor=Monitor(args.output,1800.)
+    with full_reader_gpu() as (device, admission), torch.no_grad():
+        monitor.admission=admission
         numerics()
+        monitor.guard()
         actor, provenance = load_actor(args.checkpoint, device)
+        hook=actor.interface.actor.context.register_forward_pre_hook(lambda module,args:monitor.guard())
         value = actor.generate(image(args.image), maximum_glyphs=args.maximum_glyphs)
+        hook.remove()
         atomic_tensor(args.output / 'output.pt', value)
         output_png(value, args.output / 'output.png')
         save_json(args.output / 'report.json', dict(input_sha256=sha(args.image),
@@ -56,7 +61,7 @@ def main():
             glyphs=len(value['images']), stopped=value['stopped'], capped=value['capped'],
             source=provenance, actual_emitted_pixel_feedback=True,
             tokenizer=False, font=False, glyph_bank=False, source_lexical_head=False,
-            training_or_evaluation_corpus_opened=False))
+            training_or_evaluation_corpus_opened=False,**monitor.receipt()))
 
 
 if __name__ == '__main__':

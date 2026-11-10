@@ -22,6 +22,7 @@ def load(path):
 def identity():
     names = [OWN, 'references/glyph_tail_assessment_protocol.md',
              'scripts/infer_glyph_tail_language.py', 'ilm/visual_lm/glyph_tail_adapter.py',
+             'ilm/visual_lm/glyph_runtime_resources.py',
              'ilm/visual_lm/semantic_glyph_loop.py']
     for name in names:
         require(subprocess.check_output(['git', 'show', 'HEAD:' + name], cwd=ROOT)
@@ -81,7 +82,7 @@ def qualify(run):
     import torch
     from scripts.train_semantic_glyph_language import Monitor, numerics, image, atomic_tensor
     from scripts.infer_glyph_tail_language import load_actor
-    from scripts.score_pixel_language_first_blocks import diagnostic_gpu
+    from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     from ilm.visual_lm.semantic_image_memory import native_budget_image
     folder=run/'qualify'; folder.mkdir(exist_ok=False)
     monitor=Monitor(folder,3600.); monitor.status('admitting')
@@ -96,7 +97,7 @@ def qualify(run):
         samples=set(np.linspace(0,len(source)-1,16,dtype=int).tolist())
         tf_records=[]; tf_images=[]; tf_labels=[]; tf_preview=[]
         terminals=continues=terminal_ok=continue_ok=0
-        with diagnostic_gpu() as (device,admission), torch.no_grad():
+        with full_reader_gpu() as (device,admission), torch.no_grad():
             monitor.admission=admission; numerics(); monitor.guard()
             actor,provenance=load_actor(checkpoint,device); tail=tail_view(actor.interface.actor.context)
             for index,row in enumerate(source):
@@ -166,7 +167,7 @@ def assess(run):
     import torch
     from scripts.train_semantic_glyph_language import Monitor,image,numerics,atomic_tensor
     from scripts.infer_glyph_tail_language import load_actor,output_png
-    from scripts.score_pixel_language_first_blocks import diagnostic_gpu
+    from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     old=load(ROOT/'artifacts/pixel_language_diversity_v1/manifest.json')
     controls=load(ROOT/'artifacts/semantic_glyph_language_v1/preparation.json')['jobs'][:8]
     jobs=[dict(key=f'train/{i:04}/normal',prompt=r['prompt']) for i,r in enumerate(controls)]
@@ -179,7 +180,7 @@ def assess(run):
     monitor=Monitor(folder,1800.); monitor.status('admitting')
     try:
         records=[]
-        with diagnostic_gpu() as (device,admission),torch.no_grad():
+        with full_reader_gpu() as (device,admission),torch.no_grad():
             monitor.admission=admission; numerics(); monitor.guard()
             actor,provenance=load_actor(checkpoint,device)
             hook=actor.interface.actor.context.register_forward_pre_hook(lambda module,args:monitor.guard())

@@ -78,7 +78,7 @@ def main(run, after_completed_cache=False):
             waited=0.
             while True:
                 observed=host_resources()
-                minimum=48. if stage=='fit' else (64. if observed['swap_fraction']>.75 else 24.)
+                minimum=48. if stage in ['fit','qualify'] else (64. if observed['swap_fraction']>.75 else 24.)
                 ready=(observed['available_gib']>=minimum and observed['some_pressure_avg10']<=.5
                        and observed['full_pressure_avg10']<=.1)
                 if ready: break
