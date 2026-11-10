@@ -1,0 +1,13 @@
+{
+  "report_sha256": "a5cc0899ad29350ffec9920dc43b466c6cadfe6c75697185bad5880610f2473c",
+  "all_three_boards_actually_viewed": true,
+  "boards_sha256": {
+    "copy_train_gold_baseline_genuine.png": "d48c518e0693f996943290f16f539edfe79968e1b3162d55fc3db48150c83069",
+    "copy_held_gold_baseline_genuine.png": "f0a3c8de752d0c58ea0451e69a640c7847f16bbec79d28dd67c78368a8da301a",
+    "original_histories_gold_baseline_genuine.png": "29662415d31e39ffb9e455814c6c55f218469de6d04d573be1315a913ea7e05b"
+  },
+  "readout_gate_passed": false,
+  "autonomous_assessment_authorized_by_this_gate": false,
+  "reviewed_unix": 1794309306.018493,
+  "finding": "Training-copy triplets show strong recovery of whole glyphs relative to the damaged baseline. Held-wording outputs mostly resemble the gold forms but include a badly damaged initial punctuation form and visible missing/changed strokes in other cells. Original-history triplets remain clear and match their baseline/gold counterparts in this fixed sample. No strokes are repaired or inferred. Numerical gate fails because194of256held outputs reachF1.95, belowthe required80percent; no language assessment is run from this checkpoint."
+}

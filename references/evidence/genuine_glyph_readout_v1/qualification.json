@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "baseline/copy_train": {
+      "cases": 8172,
+      "mean_f1": 0.5916765306623151,
+      "pixel_exact": 0,
+      "fraction_f1_at_least095": 0.013093489965736662,
+      "nonstop_fraction": 1.0
+    },
+    "baseline/copy_held": {
+      "cases": 256,
+      "mean_f1": 0.6069112517288886,
+      "pixel_exact": 0,
+      "fraction_f1_at_least095": 0.0234375,
+      "nonstop_fraction": 1.0
+    },
+    "baseline/original_histories": {
+      "cases": 3855,
+      "mean_f1": 0.9999956777742092,
+      "pixel_exact": 3851,
+      "fraction_f1_at_least095": 1.0,
+      "nonstop_fraction": 1.0
+    },
+    "genuine/copy_train": {
+      "cases": 8172,
+      "mean_f1": 0.998226977341384,
+      "pixel_exact": 6683,
+      "fraction_f1_at_least095": 0.9922907488986784,
+      "nonstop_fraction": 1.0
+    },
+    "genuine/copy_held": {
+      "cases": 256,
+      "mean_f1": 0.9517782326438464,
+      "pixel_exact": 6,
+      "fraction_f1_at_least095": 0.7578125,
+      "nonstop_fraction": 1.0
+    },
+    "genuine/original_histories": {
+      "cases": 3855,
+      "mean_f1": 0.9999926894709913,
+      "pixel_exact": 3849,
+      "fraction_f1_at_least095": 1.0,
+      "nonstop_fraction": 1.0
+    }
+  },
+  "readout_gate_passed": false,
+  "raw_outputs_sha256": {
+    "baseline_copy_train.pt": "d06141972ca0ab2ff9dee845cc49c855e8bce011caabfb96537da7acba93fb61",
+    "baseline_copy_held.pt": "95dd4846d6aecbbd6dbae28847ef5aea8d9467af5f460254866282072a79ac7d",
+    "baseline_original_histories.pt": "e7e1f8348902ae842394d4be5c3a75af96659546c9026b5bb0b3208e493f3370",
+    "genuine_copy_train.pt": "ec1ecfed709d880ba8892fd5c3c6906f624fd4d56c2e287b886d8c801fce69ac",
+    "genuine_copy_held.pt": "a7a8fff01fae65cc469595de6b0dda22dd674dc2e3849b97c21af85ec0f10192",
+    "genuine_original_histories.pt": "4a6e821f8d356e109bfb966ad5b7b8628dceefa352f48c01dc8990729efa6f90"
+  },
+  "boards": [
+    "copy_train_gold_baseline_genuine.png",
+    "copy_held_gold_baseline_genuine.png",
+    "original_histories_gold_baseline_genuine.png"
+  ],
+  "held_template_is_not_unseen_glyph_identity": true,
+  "full_language_assessed": false,
+  "teacher_loaded": false,
+  "body_loaded": false,
+  "actual_PNG_review_pending": true,
+  "elapsed_seconds": 5.73139504622668,
+  "resource_wait_seconds": 0.0,
+  "peak_allocated_vram_gib": 0.23090648651123047,
+  "minimum_available_gib": 47.39404296875
+}

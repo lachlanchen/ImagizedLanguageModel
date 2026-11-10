@@ -1,0 +1,69 @@
+{
+  "source_sha256": "47d8125f0c270a7ce6c057b505c79d2fc94f5014333704cdc71b7249ccc7de6b",
+  "preparation_sha256": "b33246b07e52463f594cf547404db259a937b4f4603ed3e8fc16d0f41767faa8",
+  "cache_report_sha256": "162af3207fa6a39832ed70215dba310a7f39f4581706e0467838cb9f1302c8ec",
+  "batch_single_maximum_error": 0.000324249267578125,
+  "summaries": {
+    "training_wording1_against_wording0/raw_cosine": {
+      "cases": 256,
+      "gallery_forms": 4086,
+      "gallery_views": 1,
+      "identity_top1": 245,
+      "identity_top5": 250,
+      "mean_optimistic_identity_rank": 2.91796875,
+      "mean_pessimistic_identity_rank": 2.91796875
+    },
+    "training_wording1_against_wording0/training_gallery_centered_cosine": {
+      "cases": 256,
+      "gallery_forms": 4086,
+      "gallery_views": 1,
+      "identity_top1": 243,
+      "identity_top5": 248,
+      "mean_optimistic_identity_rank": 3.94921875,
+      "mean_pessimistic_identity_rank": 3.94921875
+    },
+    "held_wording2_against_both_training_wordings/raw_cosine": {
+      "cases": 256,
+      "gallery_forms": 4086,
+      "gallery_views": 2,
+      "identity_top1": 252,
+      "identity_top5": 254,
+      "mean_optimistic_identity_rank": 9.2265625,
+      "mean_pessimistic_identity_rank": 9.2265625
+    },
+    "held_wording2_against_both_training_wordings/training_gallery_centered_cosine": {
+      "cases": 256,
+      "gallery_forms": 4086,
+      "gallery_views": 2,
+      "identity_top1": 252,
+      "identity_top5": 255,
+      "mean_optimistic_identity_rank": 1.08203125,
+      "mean_pessimistic_identity_rank": 1.08203125
+    }
+  },
+  "records_sha256": "c95322d5850e44b85db7962b3b94e1677deff65d9eb455379eca06acc6c0d312",
+  "identical_recorded_state_check": {
+    "records": 8428,
+    "unique_recorded_state_byte_strings": 8428,
+    "different_target_collision_groups": 0,
+    "conflicts": [],
+    "deterministic_exact_copy_upper_bound": 1.0,
+    "absence_of_collisions_does_not_prove_semantics_or_learnability": true,
+    "bound_does_not_apply_to_approximate_pixel_F1": true
+  },
+  "canonical_training_sha256": "3dc3263a52f2e62238c10b0079b9d2dabc19f88198891632150f1829cf434621",
+  "distinct_target_bitmaps_verified": true,
+  "elapsed_seconds": 2.2213976942002773,
+  "CPU_threads": 4,
+  "model_forward_calls": 0,
+  "optimizer_updates": 0,
+  "CUDA_calls": 0,
+  "labels_used_only_for_offline_evaluation": true,
+  "geometry_selected_after_results": false,
+  "held_statistics_used_for_centering": false,
+  "runtime_modified": false,
+  "emitted_images": 0,
+  "language_accuracy_assessed": false,
+  "held_forms_seen_in_training": true,
+  "interpretation": "Success shows identity recoverable by this fixed offline similarity rule; failure does not prove the states lack nonlinear identity information. Neither is generated-image or language accuracy."
+}

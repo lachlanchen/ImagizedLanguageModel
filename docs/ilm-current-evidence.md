@@ -76,7 +76,7 @@ against exact-source feedback. It does not support assuming that cumulative
 image-feedback damage alone explains the failures. The audit uses previously
 cached labels, makes no neural call, and leaves the current experiment intact.
 
-## Next controlled intervention
+## Genuine contexts and the direct-pixel result
 
 The [genuine copy curriculum](../references/genuine_glyph_readout_protocol.md)
 uses8,172training images covering4,086visible forms under two instructions,
@@ -85,13 +85,20 @@ bitmap appears only as part of the image shown to the frozen reader; no class
 label enters its forward pass. Batch-versus-single states must pass their
 numerical check before caching continues.
 
-The existing G will train on these genuine states mixed with the original
-language histories, with E,D,stop and body fixed. Only after its physical
-qualification and actual image review can it enter the full40-stream autonomous
-language assessment. This experiment is in progress; no result is claimed.
-A CPU supervisor waits for the exact cache process to exit, then runs fitting
-and qualification sequentially. It stops before image review and never retries
-failed stages or weakens their gates.
+The [completed fits](../references/genuine_pixel_readout_result.md) show strong
+copying improvement. With the anchor losses, held-wording mean F1 reaches
+0.951778, but only 194/256 cases reach F1 0.95, missing the declared 80% gate.
+The same G trained with pixel loss only reaches mean F1 0.972856 and 229/256
+cases (89.45%), retaining original-history quality. Both use the same architecture
+and 18,000-update schedule; E, D, stop and body stay fixed. All raw glyphs are
+archived and all three sampled boards for each candidate were actually viewed.
+
+The pixel-only candidate passes the unchanged physical gate and is now in the
+original forty-stream autonomous assessment. No improved complete-answer result
+is yet claimed. Its extra-capacity comparison did not train because shared
+memory pressure exceeded that arm's entry limit; the failed admission remains
+preserved. The CPU identity audit's 252/256 held retrieval result is evaluator
+geometry, not a runtime glyph bank or a generated answer.
 
 A [separate C3 reading cohort](../references/c3_visual_reading_preparation.md)
 was prepared before this run's qualification:16passages,64image inputs, with

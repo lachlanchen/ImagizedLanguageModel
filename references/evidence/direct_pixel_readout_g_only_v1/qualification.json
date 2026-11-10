@@ -1,0 +1,68 @@
+{
+  "arm": "g_only",
+  "summary": {
+    "baseline/copy_train": {
+      "cases": 8172,
+      "mean_f1": 0.5916765306623151,
+      "pixel_exact": 0,
+      "fraction_f1_at_least095": 0.013093489965736662,
+      "nonstop_fraction": 1.0
+    },
+    "baseline/copy_held": {
+      "cases": 256,
+      "mean_f1": 0.6069112517288886,
+      "pixel_exact": 0,
+      "fraction_f1_at_least095": 0.0234375,
+      "nonstop_fraction": 1.0
+    },
+    "baseline/original_histories": {
+      "cases": 3855,
+      "mean_f1": 0.9999956777742092,
+      "pixel_exact": 3851,
+      "fraction_f1_at_least095": 1.0,
+      "nonstop_fraction": 1.0
+    },
+    "candidate/copy_train": {
+      "cases": 8172,
+      "mean_f1": 0.9984467340650596,
+      "pixel_exact": 7652,
+      "fraction_f1_at_least095": 0.9911894273127754,
+      "nonstop_fraction": 1.0
+    },
+    "candidate/copy_held": {
+      "cases": 256,
+      "mean_f1": 0.972856290085474,
+      "pixel_exact": 42,
+      "fraction_f1_at_least095": 0.89453125,
+      "nonstop_fraction": 1.0
+    },
+    "candidate/original_histories": {
+      "cases": 3855,
+      "mean_f1": 0.99999735748103,
+      "pixel_exact": 3852,
+      "fraction_f1_at_least095": 1.0,
+      "nonstop_fraction": 1.0
+    }
+  },
+  "readout_gate_passed": true,
+  "raw_outputs_sha256": {
+    "baseline_copy_train.pt": "d06141972ca0ab2ff9dee845cc49c855e8bce011caabfb96537da7acba93fb61",
+    "baseline_copy_held.pt": "95dd4846d6aecbbd6dbae28847ef5aea8d9467af5f460254866282072a79ac7d",
+    "baseline_original_histories.pt": "e7e1f8348902ae842394d4be5c3a75af96659546c9026b5bb0b3208e493f3370",
+    "candidate_copy_train.pt": "360c4e45296c58476e99d3e2866f4ae390751ea29fc34bca102ccba3f584a496",
+    "candidate_copy_held.pt": "2fbc60e2f1f7373f3a42d03034d520c1f76ae209a983906842d0eff54ce42238",
+    "candidate_original_histories.pt": "4b8f0b58465de129f558d68f96b64cef6c4d86a8fd97e47ff6611c8bc7ea253d"
+  },
+  "boards": [
+    "copy_train_gold_baseline_candidate.png",
+    "copy_held_gold_baseline_candidate.png",
+    "original_histories_gold_baseline_candidate.png"
+  ],
+  "parent_baseline_pixels_cold_replay_exact": true,
+  "full_language_assessed": false,
+  "actual_PNG_review_pending": true,
+  "elapsed_seconds": 5.170058563351631,
+  "resource_wait_seconds": 0.0,
+  "peak_allocated_vram_gib": 0.23090600967407227,
+  "minimum_available_gib": 46.495540618896484
+}
