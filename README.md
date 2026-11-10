@@ -20,10 +20,37 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current result: autonomous image-language writing still fails
+## Current result: a bounded image-language loop works; general answering remains unreliable
 
-The [current direction assessment](references/ilm_direction_assessment_20261108.md)
-finds no validated usable ILM. The [matched physical-loss replacement](references/ink_mass_comparison_result.md)
+The [complete-glyph model](references/semantic_glyph_language_result.md) reads
+question images and generates answer pixels with learned stopping. It produces
+readable new complete strings such as **288条** and **1874年**. In a frozen
+[date-change test](references/semantic_glyph_counterfactual_result.md), **11/14**
+new passage dates yield clearly matching answer images; **2/14** are
+pixel-exact, all fourteen stop naturally, and erased-question controls yield
+no correct dates. The two templates were selected from earlier outputs;
+these are restricted, exploratory results, not a sealed general benchmark.
+
+![Actual generated dates, including a damaged digit in the fourth row](references/evidence/semantic_glyph_counterfactual/parent12_normal_00.png)
+
+*Actual unrepaired outputs in fixed preparation order. The fourth date has an
+uncertain digit and is counted as a failure. Every input, output and erased
+control is retained in the linked result.*
+
+The wider Chinese assessment remains **1/16 pixel-exact with 11 capped
+failures**. The runtime has no tokenizer, glyph lookup, output font renderer
+or external teacher; it retains a **7.5B externally pretrained visual/contextual
+body** and a **47.128M continuous glyph bridge**. This does not establish a
+small foundation trained from scratch or an efficiency advantage over an LLM.
+All **2,781 emitted glyphs across 72 streams** pass independent cold feedback
+re-encoding, with bit-exact GPU hashes. That audit checks execution, not meaning.
+
+[Run an arbitrary image prompt, train, and inspect the model](docs/semantic-glyph-language.md).
+
+## Earlier writing experiments
+
+The [earlier direction assessment](references/ilm_direction_assessment_20261108.md)
+found no validated usable ILM. The [matched physical-loss replacement](references/ink_mass_comparison_result.md)
 gets **18/32 seen and 19/32 held-out OCR-exact copies**, versus **16/32 and
 16/32** in control. Held-out Chinese improves from **4/16 to 6/16**. All three
 prospective exploratory conditions pass, while raw omissions, repeated
