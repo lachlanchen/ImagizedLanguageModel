@@ -21,7 +21,9 @@ SOURCES = (OWN, 'scripts/train_semantic_glyph_language.py',
            'ilm/visual_lm/semantic_glyph_loop.py', 'ilm/visual_lm/image_context_interface.py',
            'ilm/visual_lm/semantic_image_memory.py', 'ilm/visual_lm/grounded_image_weights.py',
            'ilm/visual_lm/grounded_image_actor.py', 'scripts/score_pixel_language_first_blocks.py',
-           'ilm/image_edit/baseline.py')
+           'ilm/image_edit/baseline.py', 'ilm/visual_lm/gguf_visual_language.py',
+           'ilm/visual_lm/gguf_language_trunk.py', 'scripts/check_native_visual_transfer_v71.py',
+           'scripts/train_semantic_glyph_bridge.py')
 
 
 def require(ok, message):
@@ -63,6 +65,10 @@ def inputs(cohort):
             'fixed cohort must contain exactly64distinct cases')
     require(m['genuine_qualification_available_at_preparation'] is False,
             'cohort was not prospective to the readout result')
+    for name, digest in m['code_sha256'].items():
+        require(sha(ROOT / name) == digest, 'input preparation source changed')
+    for name, digest in review['preview_files_sha256'].items():
+        require(sha(cohort / name) == digest, 'reviewed input preview changed')
     for row in m['cases']:
         require(sha(cohort / row['prompt']) == row['prompt_sha256'], 'input PNG changed')
         require(row['maximum_glyphs'] == (8 if row['style'] == 'letter' else 128), 'output cap changed')
@@ -75,6 +81,9 @@ def prepare(cohort, candidate, output):
     m = inputs(cohort)
     require(not output.exists(), 'preserve earlier assessments')
     require((candidate / 'qualify/report.json').exists(), 'finish genuine readout qualification first')
+    for stage in ['fit', 'qualify', 'assessment']:
+        status = load(candidate / stage / 'status.json')
+        require(status['phase'] == 'completed' and status['pid'] is None, 'candidate stage still active: ' + stage)
     require(load(candidate / 'qualify/report.json')['readout_gate_passed'], 'genuine readout gate failed')
     require(sha(candidate / 'preparation.json') == m['prospective_genuine_preparation_sha256'],
             'candidate differs from the prospectively fixed curriculum')
@@ -179,6 +188,10 @@ def review(output):
     report = load(output / 'generation/report.json')
     require(len(report['records']) == 128, 'incomplete assessment')
     cases = {r['case_id']: r for r in cohort_meta['cases']}
+    require(report['preparation_sha256'] == sha(output / 'preparation.json')
+            and {r['key'] for r in report['records']} ==
+            {version + '/' + case for version in meta['versions'] for case in cases},
+            'generation does not cover the fixed models and cases exactly')
     displays = {}
     for row in report['records']:
         p = output / 'generation' / row['tensor']
@@ -232,6 +245,8 @@ def score(output):
     folder = output / 'raw_review'
     report = load(folder / 'report.json')
     manual = load(folder / 'manual_review.json')
+    require(report['generation_report_sha256'] == sha(output / 'generation/report.json'),
+            'reviewed generation report changed')
     require(manual['raw_review_report_sha256'] == sha(folder / 'report.json')
             and manual['all16_boards_actually_viewed'], 'record actual output-first board review')
     for row in report['boards']:
@@ -291,7 +306,7 @@ def score(output):
         manual_review_sha256=sha(folder / 'manual_review.json'), reference_bank_evaluator_only=True,
         runtime_answers_replaced=False, approximate_nearest_glyph_decoding=False,
         independent_human_grading=False, formal_general_language_accuracy_established=False,
-        source_pretraining_exposure_unknown=True, glyph_image_model_not_selected_using_this_score=True))
+        source_pretraining_exposure_unknown=True, model_selection_not_performed_by_evaluator=True))
     print(json.dumps(summaries, indent=2))
 
 
