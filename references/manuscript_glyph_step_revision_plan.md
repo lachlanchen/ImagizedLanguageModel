@@ -46,3 +46,14 @@ inspect figure exports and all changed PDF pages, then promote the article,
 review manuscript, SI and redlines together. Sync only the reviewed package to
 the authorized Nutstore ILM folder and verify local hashes. Do not describe an
 unbuilt source amendment as a delivered new PDF or a cloud-synced artifact.
+
+The source modules `glyph_step_data.py`, `glyph_step_text.py` and
+`glyph_step_figures.py` implement the completed-result extension without
+changing the active publication. S40 expects the staged S39 deck: it appends
+slide 55 and native charts 60--61, preserving every predecessor slide/chart
+part. The fixed C3 examples retain all eight model/order/instruction conditions
+per document. Streams longer than ten glyphs use explicitly labelled prefix
+viewports with full length and stop/cap metadata; complete unchanged source
+PNGs remain embedded. Native editable shapes explain the source-step mismatch.
+This remains source-only until chart workbooks, exports and changed PDF pages
+have passed the existing render-and-review workflow under the project mutex.
