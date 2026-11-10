@@ -68,9 +68,10 @@ available host RAM and zero sampled 10-second memory-pressure averages.
 The completed training protocol and its admission thresholds are unchanged.
 
 The evidence localizes the immediate failure to the first conditional image
-distribution. It does not establish that the inherited reader answers every
-question correctly. The next controlled check should measure that reader on
-the same normal and erased image inputs, alongside a source-text baseline,
-before choosing an input-reading or visual-readout intervention. Helper text
-decoding in that check is a reader baseline, not an ILM answer. Useful,
-autonomous image-language generation remains the required outcome.
+distribution. The subsequent [matched reader check](pixel_language_source_reader_result.md)
+finds 12 of 16 Chinese normal-image responses literally correct, compared
+with zero for question-erased images. The inherited image reader retains
+answer capability that the learned image writer loses. This does not isolate
+each writing component or validate the ILM: helper text decoding is a reader
+baseline. Useful, autonomous image-language generation remains the required
+outcome.

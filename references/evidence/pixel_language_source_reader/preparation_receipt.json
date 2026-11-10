@@ -1,0 +1,405 @@
+{
+  "source_preparation_sha256": "2a71275fc6c36142682e9d02bca51e1b8609dc627f4e51a6838aaf7b8d3d3f72",
+  "source_commit": "7dcde47f0894b070f2fe775a5c141a9de2a20d3d",
+  "code_sha256": {
+    "scripts/check_native_visual_transfer_v71.py": "996d755ab9e0a85e4d67b28f78649a49091141dc3d31970a388ebdf984e71ab5",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/adaptive_image_continuation.py": "9d838d371ea34ed3c642d51853f55f2cab8db43772424414e207355f29854b65",
+    "ilm/visual_lm/semantic_writing_model.py": "83a9dbad1867e1b6fc2cce0fd5e95e4f91a482c2ddba85c65be3e78a5a77e479",
+    "ilm/visual_lm/native_pixel_language.py": "249d47b01b06f51605ffbd6c9955e13cc1a9697f4b6eedf42f34f0227e295fef",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "scripts/train_pixel_language_diversity.py": "ce2fe610d021157be964eabca7bfc4ef185a35c0cbd086d5fe220aa847e11eb3",
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "scripts/train_complete_pixel_language.py": "4f3cb6c4113c063b2c0d7234e0626654acfaeed69d282a0b063f2cd3be494772",
+    "scripts/check_pixel_language_source_reader.py": "0a9277edaba9eb89442b2b3925cc014a1b84a615dc230127c561b4ad91c65b85",
+    "ilm/visual_lm/suffix_attention_mask.py": "1182d7103759ef75bea1bc414ec2639b71bfee43147dd442f374c451c072f504",
+    "ilm/visual_lm/complete_pixel_runtime.py": "c2d89d6ce757ba7145ca1fc4471b94a58a04ce056642dbf971806fb13acf37a8",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+    "scripts/audit_pixel_language_diversity.py": "a3eedef93db6eea155f1f3a09261a15917a32766356a35aa00d121741879be8a",
+    "scripts/native_visual_baseline_v70.py": "8a6b54ea5f25c602cd5cea69abca3ccfed24fcb8c660179cbc2d754c83ca25df",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "scripts/train_conditional_pixel_density.py": "32f5a0767ac0161220f944cc4746995871d3d5a65ce61687b0110aa24c142d74",
+    "ilm/visual_lm/fp64_pixel_density.py": "cf587f5b26d3063b97c577d508c85aba10d16445c2e09c57627bb95585b5a911",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "ilm/visual_lm/clean_writing_flow.py": "5e52da7fe71abb4cc214c1de11a591b33d06005e8711583e651a9a7965429889",
+    "ilm/visual_lm/complete_pixel_training.py": "4263e8a3b3982301a8c32c9f2ddc62d949fb0a1f177468d9e49751a162e59c19",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "ilm/visual_lm/native_image_continuation.py": "ba5b31bd95b594693ab78140f75170b1367b58ef940c6bfa941633443cb7a5e3",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c",
+    "ilm/visual_lm/native_image_actor.py": "8c8a31365c1a2114a713d35af5c2200dfbcf0023be8f9e2f5e9d795891866cf5",
+    "ilm/visual_lm/pixel_language_diversity.py": "c117aaebd86e41b8ac06bc2a3ee7bdd87403cb82c5f4cd75af24ee8524b70fd9",
+    "scripts/preflight_native_pixel_actor.py": "a45aa74ad250975763309cf2aa65e8d06654fb229f0b074a8812f9cb69ff7da2",
+    "references/pixel_language_source_reader_protocol.md": "bd8a3b185b8e13ab94ff092e1e459115f597f461e7b8ce7c4485650614d52edd",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "references/pixel_language_diversity_training_protocol.md": "4de0b5252727e629d8612da941a26d1fad4268be24541094acdb61e0a59a7606"
+  },
+  "bindings_sha256": {
+    "artifacts/pixel_language_diversity_training_v2/preparation.json": "2d196d862502fe1a6d13a5e697884d6dcf00c87f3ad790025ff890b8414abca0",
+    "artifacts/pixel_language_diversity_v1/manifest.json": "f4b75deb2f20ff9eeffa3b0dfacb9fc376adf9754d2b420416951b2fd0d9fb79",
+    "data/visual_qa/cmrc2018_short/development.jsonl": "8bef093075ac0715d5878a1abe61aa38092893ade8753b935cdf657551ebc6a7",
+    "artifacts/pixel_first_block_likelihood_final_v3/preparation.json": "cd2848640368b9388d553e9527ad89ae8c690bd709084697f3d614f3364c87f2",
+    "artifacts/native_visual_transfer_v71_20261105/attempt01/structural_vectors.pt": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "artifacts/native_visual_transfer_v71_20261105/attempt01/compiler.json": "bb57556ef05460b2338ef26e88e72d1732cc2a6b1bd3c31fe71c77a84b293034",
+    "artifacts/pixel_language_diversity_v1/development/32/normal.png": "bb82d230eea55c5848f4a813089e0ec2894adbe7ef394bea9ade8f2fee9b2a29",
+    "artifacts/pixel_language_diversity_v1/development/32/blank.png": "049899f151ad10fe4214947efcbd14c8490c60604e835e4ed74f5cc4373e330c",
+    "artifacts/pixel_language_diversity_v1/development/33/normal.png": "25e91df2fbb36286cbc3671bb7f4266fca1c44cd6dcdb7921a598415392536f7",
+    "artifacts/pixel_language_diversity_v1/development/33/blank.png": "31a113476bcb9c63ea1d10948ab950bae15917a00696e9e93fe38abb543952f7",
+    "artifacts/pixel_language_diversity_v1/development/34/normal.png": "47669e2efc3f8ec14c99579cb08dc64cdafa4e7604ccb3f3d77d50f91955a686",
+    "artifacts/pixel_language_diversity_v1/development/34/blank.png": "1d897f0e1a732bc3b65f3764a6f38cee21b9dc171f239a21d9b648446ea941f3",
+    "artifacts/pixel_language_diversity_v1/development/35/normal.png": "d03ce05ee633e11dedd4abd9f09fa03234207840753a734ba4b0e7cf55a7f260",
+    "artifacts/pixel_language_diversity_v1/development/35/blank.png": "cf94270306141516f14e7fa01c28e50155206e47c472be0e33c483b3a178ce7c",
+    "artifacts/pixel_language_diversity_v1/development/36/normal.png": "f9f4d1a92d7ddcd52fe8fcc56472ac4a1859b56de02a353c188b8ca23fdf57bb",
+    "artifacts/pixel_language_diversity_v1/development/36/blank.png": "050285b1be4089f36342947a34964009f71ea0699817e37883950e204793672a",
+    "artifacts/pixel_language_diversity_v1/development/37/normal.png": "e16ccb198559751ff6f8a95157ee72d5ef9b35ec4ba91a7491b8e02361eca739",
+    "artifacts/pixel_language_diversity_v1/development/37/blank.png": "6b030d3d420eb9742d58cdead4121b938f659199aca4e62750d7d512bcc58256",
+    "artifacts/pixel_language_diversity_v1/development/38/normal.png": "16c7e7fdd8edda34f9c5b46b5e48fb119e9586b7967676e274193056d801c2ff",
+    "artifacts/pixel_language_diversity_v1/development/38/blank.png": "cd7a16d4c4007b63f8ade0528d685f9aea85741cceb834d16288229812bd7a85",
+    "artifacts/pixel_language_diversity_v1/development/39/normal.png": "aad7433e6b8866db196a2077f7197455a4f26b15f5cba8c56905393ae8c2ef3e",
+    "artifacts/pixel_language_diversity_v1/development/39/blank.png": "a443d16c6bf47ddad9a3a5fcce5d7000e39f340ffd70165ab2ef51ea3ffdd515",
+    "artifacts/pixel_language_diversity_v1/development/40/normal.png": "f0d97815a6cd53e86292ec86d7a38c648ea64ee47ea3a76cf665a6dc64dee445",
+    "artifacts/pixel_language_diversity_v1/development/40/blank.png": "1e67d2bc6caa66f398de935153ce5724e8466a1775365b910d220d55c2f06ec7",
+    "artifacts/pixel_language_diversity_v1/development/41/normal.png": "0fbffb95f5797e83a2cfa51b401826cb427747ce013792f5c9b5c3d63c7e5388",
+    "artifacts/pixel_language_diversity_v1/development/41/blank.png": "5e0a32577fc5cb164e2d5a10189996ce2f97733bbfbbbdbc2dd0e4603b85ad9e",
+    "artifacts/pixel_language_diversity_v1/development/42/normal.png": "67f79c4b0eb151c7b4621049b78e649c661e80569729149ad5c9fb7fc42b49dd",
+    "artifacts/pixel_language_diversity_v1/development/42/blank.png": "408a035bc3adc5e5204595b15c32de0f4fb7caa0f0b51d978102f532ac0ad216",
+    "artifacts/pixel_language_diversity_v1/development/43/normal.png": "33283bef83e848a5e4a073bbab191b55dc5dde8ba65fe69575cfcda1bade91f2",
+    "artifacts/pixel_language_diversity_v1/development/43/blank.png": "004f564944aa3ffaf9138869df10196f15ac9bd2499e30b7a30232cafe1f2fd9",
+    "artifacts/pixel_language_diversity_v1/development/44/normal.png": "ff08bd769a9825a71b1db31d6bc684d77eb1118bc5c1e28bd5291cc45eaa91b9",
+    "artifacts/pixel_language_diversity_v1/development/44/blank.png": "43f6c77127de99dac341bd59ee040198ab8c6e2b6b06e6f4cf3918701abccdb1",
+    "artifacts/pixel_language_diversity_v1/development/45/normal.png": "95fc84fe1f1389f5916fd0c66d4692c33b33177b541f3c33e7af559e48184641",
+    "artifacts/pixel_language_diversity_v1/development/45/blank.png": "5c35e7ba8eb7ded6dd68bb3882cca69469aa6c8fa5ccf4a6c420361cac8e488b",
+    "artifacts/pixel_language_diversity_v1/development/46/normal.png": "30a0ebf23e976d8381866534818fd0f0c4fc51f9c5b935bf6f0b5b4aeddda982",
+    "artifacts/pixel_language_diversity_v1/development/46/blank.png": "f2ea2b14a7de19afa29b9928e8d9bf7771dab398d1cf1c2f236a9b4bea8eeaa3",
+    "artifacts/pixel_language_diversity_v1/development/47/normal.png": "42c36cf6a6de70663fef15fe68559aaea08997c5f41cc3d84ad4305c21b404d3",
+    "artifacts/pixel_language_diversity_v1/development/47/blank.png": "feb715899626ad879d4cdee061c0ace8fa4cef7a3b4834ed514f8ce5b2a3c048"
+  },
+  "cases": [
+    {
+      "index": 0,
+      "id": "DEV_477_QUERY_0",
+      "pair": 0,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/32/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/32/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "02fd625029df45dc546d7074f174e468dd57a0cc14b8ce8d93c7a654e625174d",
+        "blank": "f8c2163f64ed205e5c0499acb51f1fee3793f8364180cdbce8dcc5cca7733049"
+      },
+      "source_prompt": "资料：AntichristSuperstar是玛丽莲·曼森第二张个人专辑\"AntichristSuperstar\"中的主打歌曲。这首歌阐明了这张专辑的主旨，与基督教的上帝做斗争，狂怒地毁掉一切反对力量。这一点可以从狂躁不安的旋律，类似纳粹集权集会中体现出来，这首歌同时也是MarilynManson对批评他的人的回应。非常有趣的是Marilynmanson经常在演唱这首歌之前，在舞台顶端挂上一面非常类似纳粹德国国旗的旗帜（只是中间的卐标志被换成了AntichristSuperstarShock标志），借以嘲笑独裁者和传教士。Rover'sMorningGlory在他们的节目中使用这首歌的前奏作为节目主题曲。问题：AntichristSuperstar是谁的个人专辑?回答：",
+      "references": [
+        "玛丽莲·曼森"
+      ]
+    },
+    {
+      "index": 1,
+      "id": "DEV_477_QUERY_1",
+      "pair": 0,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/33/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/33/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "2339e20eb8db5a4f739ca3d1abb588957ebb4cca7545e699ac928a79b090c004",
+        "blank": "a30a85426ddb64b00b771d4f7d19d1cb0812e653fa5742a78663a2711fde0658"
+      },
+      "source_prompt": "资料：AntichristSuperstar是玛丽莲·曼森第二张个人专辑\"AntichristSuperstar\"中的主打歌曲。这首歌阐明了这张专辑的主旨，与基督教的上帝做斗争，狂怒地毁掉一切反对力量。这一点可以从狂躁不安的旋律，类似纳粹集权集会中体现出来，这首歌同时也是MarilynManson对批评他的人的回应。非常有趣的是Marilynmanson经常在演唱这首歌之前，在舞台顶端挂上一面非常类似纳粹德国国旗的旗帜（只是中间的卐标志被换成了AntichristSuperstarShock标志），借以嘲笑独裁者和传教士。Rover'sMorningGlory在他们的节目中使用这首歌的前奏作为节目主题曲。问题：AntichristSuperstar是作者对于哪些人的回应？回答：",
+      "references": [
+        "批评他的人"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "DEV_335_QUERY_0",
+      "pair": 1,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/34/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/34/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "82fceb9ecb47f209d96b405dfc4abb555c2071ccba7db43ad23bd61580593264",
+        "blank": "00c40c649325480a9020d208d8b50aa4db4c272e0936c3a98586039b35e50386"
+      },
+      "source_prompt": "资料：PukiWiki是一套Wiki软体，以PHP写成，为日文的Wiki网站所普遍使用。此软体是从日本人结城浩所写的YukiWiki所分支发展的，从1.4版起由PukiWikiDevelopersTeam接续开发维护工作。由于PukiWiki原自于日本，因此对于双位元字（DBCS）的支援较许多由英语系所开发的Wiki软体为佳。另外日本国内使用手机上网十分普遍，因此PukiWiki也支援了手机网页功能。PukiWiki支援PHP4或5。与MediaWiki一样支援跨Wiki连结（interwiki）与扩充套件。PukiWiki基于PHP+TXT的方式实现，不需要任何数据库程序支援，原生程序也未支援任何数据库系统，但是可以借助名为PukiWiki+DB的修改补丁来得到对MySQL、SQLite、ORACLEOci8、PostgreSQL的支援。问题：PukiWiki主要在什么网站上普遍使用？回答：",
+      "references": [
+        "Wiki网站",
+        "日文的Wiki网站"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "DEV_335_QUERY_2",
+      "pair": 1,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/35/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/35/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "9a87730eae1c743630e9e8420d70982262c080f702a4f036fe659ca9974e427a",
+        "blank": "0479f04a1b4ac224c9138d48e07a8fcc9585376ee21930a7cd4898fd43574f36"
+      },
+      "source_prompt": "资料：PukiWiki是一套Wiki软体，以PHP写成，为日文的Wiki网站所普遍使用。此软体是从日本人结城浩所写的YukiWiki所分支发展的，从1.4版起由PukiWikiDevelopersTeam接续开发维护工作。由于PukiWiki原自于日本，因此对于双位元字（DBCS）的支援较许多由英语系所开发的Wiki软体为佳。另外日本国内使用手机上网十分普遍，因此PukiWiki也支援了手机网页功能。PukiWiki支援PHP4或5。与MediaWiki一样支援跨Wiki连结（interwiki）与扩充套件。PukiWiki基于PHP+TXT的方式实现，不需要任何数据库程序支援，原生程序也未支援任何数据库系统，但是可以借助名为PukiWiki+DB的修改补丁来得到对MySQL、SQLite、ORACLEOci8、PostgreSQL的支援。问题：PukiWiki为什么在日本支援了手机网页功能？回答：",
+      "references": [
+        "日本国内使用手机上网十分普遍"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "DEV_500_QUERY_0",
+      "pair": 2,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/36/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/36/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "6b2cf15eb1b29792581855e600ad0466893e3bfb1029a96a1a04f3c38d8894d9",
+        "blank": "91973944ce6b625b12a77fcd5c3d1203dcf590e9285b0aebb2d16397757a13a2"
+      },
+      "source_prompt": "资料：三氯化氮，也称为三氯胺，是化学式为NCl的化合物。这个黄色、油状、具有刺激性气味的液体经常可以在氨的衍生物与氯的反应的副产物中见到。纯的NCl是非常活泼的。把自来水用一氯胺消毒，就会有少量三氯化氮产生。三氯化氮可由氯气与铵盐（例如硝酸铵）的反应来制备：反应中间体包括一氯胺（NHCl）和二氯胺（NHCl）。NCl分子具有三角锥结构，N-Cl键长为1.76Â，Cl-N-Cl键角为107°。氮（3.04）和氯（3.16）的电负性相差不大。三氯化氮水解生成氨和次氯酸：三氯化氮非常容易爆炸，对光、热和有机化合物都非常敏感。皮埃尔·路易·杜隆在1812年首先制得三氯化氮，在制备的过程中丢掉了两个手指和一只眼睛。汉弗里·戴维也因制备三氯化氮而导致视力受损，因此雇用麦可·法拉第作为合作者。比利时的研究人员报告，NCl和儿童哮喘(气喘)病例的上升有潜在的联系。2017年，香港亦有研究指三氯化氮作为一种含氨的尿液与用作游泳池消毒的氯气混合后的副产物之一，普遍存在于泳池水里，刺激泳客而使他们眼红及流鼻涕。问题：三氯化氮的化学式是什么？回答：",
+      "references": [
+        "NCl"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "DEV_500_QUERY_1",
+      "pair": 2,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/37/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/37/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "98f75514c445df541c6593a57d4eae3b44ada707052104599a2b5557fd5b95a7",
+        "blank": "08530d94cce2a239fecb807dcd33c0681c35b0598ce4a7a5d82651399a48be77"
+      },
+      "source_prompt": "资料：三氯化氮，也称为三氯胺，是化学式为NCl的化合物。这个黄色、油状、具有刺激性气味的液体经常可以在氨的衍生物与氯的反应的副产物中见到。纯的NCl是非常活泼的。把自来水用一氯胺消毒，就会有少量三氯化氮产生。三氯化氮可由氯气与铵盐（例如硝酸铵）的反应来制备：反应中间体包括一氯胺（NHCl）和二氯胺（NHCl）。NCl分子具有三角锥结构，N-Cl键长为1.76Â，Cl-N-Cl键角为107°。氮（3.04）和氯（3.16）的电负性相差不大。三氯化氮水解生成氨和次氯酸：三氯化氮非常容易爆炸，对光、热和有机化合物都非常敏感。皮埃尔·路易·杜隆在1812年首先制得三氯化氮，在制备的过程中丢掉了两个手指和一只眼睛。汉弗里·戴维也因制备三氯化氮而导致视力受损，因此雇用麦可·法拉第作为合作者。比利时的研究人员报告，NCl和儿童哮喘(气喘)病例的上升有潜在的联系。2017年，香港亦有研究指三氯化氮作为一种含氨的尿液与用作游泳池消毒的氯气混合后的副产物之一，普遍存在于泳池水里，刺激泳客而使他们眼红及流鼻涕。问题：三氯化氮在什么情况下比较常见？回答：",
+      "references": [
+        "氨的衍生物与氯的反应的副产物中"
+      ]
+    },
+    {
+      "index": 6,
+      "id": "DEV_1831_QUERY_0",
+      "pair": 3,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/38/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/38/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "df3a7b1017578ee78b5e52ad52143bbc7e213729a7a7d116e203a869ba04c72f",
+        "blank": "849e284d66081898cafa49106659c93fdc11fe9eac1df9911b3b9d6cacd40179"
+      },
+      "source_prompt": "资料：中国旺旺控股有限公司（）是中国最大的食品和饮料制造商之一，也是台资旺旺集团的中国子公司。产品包括旺旺品牌的米果、乳品、饮料、休闲食品及酒类。集团共经营31个生产基地及90家工厂，合共288条生产线。公司于2008年3月26日在香港交易所股票上市，招股价每股3.0港元。2009年4月28日，中国旺旺台湾存托凭证（TDR）在台湾证券交易所上市，募集32.55亿元新台币，存托凭证代号为9151。2011年11月5日，恒生指数有限公司宣布把康师傅和中国旺旺加入恒生指数成份股，2011年12月5日实施。2013年，英国《经济学人》报导，研究人员发现，中国政府对中国旺旺的补贴，占其2011年净利的11.3%，估计为4700万美元（约台币13.92亿）。2013年8月，中国旺旺宣布因流通台湾存托凭证单位数少于1千万个单位，申请台湾存托凭证下市。问题：中国旺旺控股有限公司的产品包括哪些？回答：",
+      "references": [
+        "米果、乳品、饮料、休闲食品及酒类"
+      ]
+    },
+    {
+      "index": 7,
+      "id": "DEV_1831_QUERY_1",
+      "pair": 3,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/39/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/39/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "0277e3291b14d6f08d8c4ef0d3c2a5daabc65b96e52062378a1d60ab0696a64a",
+        "blank": "daff66faa51b9a977d9b9c5bdb233f98626391af6efae2ca34953d4115bffd20"
+      },
+      "source_prompt": "资料：中国旺旺控股有限公司（）是中国最大的食品和饮料制造商之一，也是台资旺旺集团的中国子公司。产品包括旺旺品牌的米果、乳品、饮料、休闲食品及酒类。集团共经营31个生产基地及90家工厂，合共288条生产线。公司于2008年3月26日在香港交易所股票上市，招股价每股3.0港元。2009年4月28日，中国旺旺台湾存托凭证（TDR）在台湾证券交易所上市，募集32.55亿元新台币，存托凭证代号为9151。2011年11月5日，恒生指数有限公司宣布把康师傅和中国旺旺加入恒生指数成份股，2011年12月5日实施。2013年，英国《经济学人》报导，研究人员发现，中国政府对中国旺旺的补贴，占其2011年净利的11.3%，估计为4700万美元（约台币13.92亿）。2013年8月，中国旺旺宣布因流通台湾存托凭证单位数少于1千万个单位，申请台湾存托凭证下市。问题：集团合共有多少条生产线？回答：",
+      "references": [
+        "288条"
+      ]
+    },
+    {
+      "index": 8,
+      "id": "DEV_1168_QUERY_0",
+      "pair": 4,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/40/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/40/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "c4f384247da672f724a9801eb3f07e1d0edf7a6e1123de099158546bb7243ae7",
+        "blank": "8abaf1ab2bdc8d59c91112ddedcd73f39a9943c9e03d31c5b954121d35235bd7"
+      },
+      "source_prompt": "资料：乍浦镇是隶属于中国浙江省嘉兴平湖市的一个镇，位于杭州湾北岸，毗邻上海市金山区。面积54平方公里，常住人口5万余人。乍浦镇地处杭嘉湖平原，宋、元两代亦曾开港贸易，设立市舶司。由于有若干山丘，倚山面海，形成海防要地。明嘉靖年间和和清道光年间在此进行抵抗倭寇和英军的战役。乍浦古城历经多次战争，曾经数次被毁。民国年间，沪杭公路途经此地，并开辟海滨浴场。1990年代以后，上海石化总厂在此建造原油码头。乍浦镇也开发滨海新城，作为嘉兴市城市体系“一主、五副、一新城”的组成部分。该镇辖有：南大街社区、四牌楼社区、长安桥社区、山湾社区、嘉电新村社区、西巷社区、南湾社区、长丰社区、天妃社区、港龙社区、雅山社区、黄山村、王家村、长安桥村、八字村、马家荡村、雅山村、王店桥村、亭子桥村、建利村、染店桥村、先锋村。问题：乍浦镇在哪里？回答：",
+      "references": [
+        "中国浙江省嘉兴平湖市"
+      ]
+    },
+    {
+      "index": 9,
+      "id": "DEV_1168_QUERY_1",
+      "pair": 4,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/41/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/41/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "e9c268d245cb3dfdcdd63f3a4ef5826fced899230d25ce998d5467f7475b8355",
+        "blank": "49c6d5c3d09d84e9882f9f4adcf4490071c186e8dfd1eba181c4bf7d2b1fbaba"
+      },
+      "source_prompt": "资料：乍浦镇是隶属于中国浙江省嘉兴平湖市的一个镇，位于杭州湾北岸，毗邻上海市金山区。面积54平方公里，常住人口5万余人。乍浦镇地处杭嘉湖平原，宋、元两代亦曾开港贸易，设立市舶司。由于有若干山丘，倚山面海，形成海防要地。明嘉靖年间和和清道光年间在此进行抵抗倭寇和英军的战役。乍浦古城历经多次战争，曾经数次被毁。民国年间，沪杭公路途经此地，并开辟海滨浴场。1990年代以后，上海石化总厂在此建造原油码头。乍浦镇也开发滨海新城，作为嘉兴市城市体系“一主、五副、一新城”的组成部分。该镇辖有：南大街社区、四牌楼社区、长安桥社区、山湾社区、嘉电新村社区、西巷社区、南湾社区、长丰社区、天妃社区、港龙社区、雅山社区、黄山村、王家村、长安桥村、八字村、马家荡村、雅山村、王店桥村、亭子桥村、建利村、染店桥村、先锋村。问题：乍浦镇毗邻什么地方？回答：",
+      "references": [
+        "上海市金山区"
+      ]
+    },
+    {
+      "index": 10,
+      "id": "DEV_1089_QUERY_0",
+      "pair": 5,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/42/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/42/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "602e6c03a612b8ab54400b054811408d0b5555312a663b7e25db33fe4c1b89f6",
+        "blank": "aa4d2e42e746c58f27ca1d635bd542d95d9dee30b5bef71785c95fd3d6f1f2d8"
+      },
+      "source_prompt": "资料：乐坛风云50年（英文：），是亚洲电视的音乐节目，为aTV亚洲音乐成立后，首个制作之节目，逢星期日晚上20:30于亚洲电视本港台播出，另从4月19日开始，逢星期六晚上20:30于亚洲电视高清频道以高清制式重播(从第一集开始)，每集大约85分钟（连广告），主持为王贤志。节目主要邀请不同年代的音乐人回顾由1958年至2008年50年来，各香港乐坛的大小事件。乐坛风云50年为电视风云50年及选美风云50年之姊妹作品，同样由王贤志主持。口号为「延续真好音乐」，目的是为了与市民共同集体回忆。现时，节目由直销中心有限公司冠名赞助。以下为该剧于亚洲电视本港台首播之收视纪录：资料来源：CSM媒介研究(一个收视点代表64,820名观众)问题：乐坛风云50年是哪个电视台的节目？回答：",
+      "references": [
+        "亚洲电视"
+      ]
+    },
+    {
+      "index": 11,
+      "id": "DEV_1089_QUERY_1",
+      "pair": 5,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/43/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/43/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "25caad5ce29f8dbe30729a61389562bfbf1299797361d547e1341ee15bb8979a",
+        "blank": "05c03655f0b5cf85c9230b0cbd123d187b772f1f4f7d81bc56a9db38801ea831"
+      },
+      "source_prompt": "资料：乐坛风云50年（英文：），是亚洲电视的音乐节目，为aTV亚洲音乐成立后，首个制作之节目，逢星期日晚上20:30于亚洲电视本港台播出，另从4月19日开始，逢星期六晚上20:30于亚洲电视高清频道以高清制式重播(从第一集开始)，每集大约85分钟（连广告），主持为王贤志。节目主要邀请不同年代的音乐人回顾由1958年至2008年50年来，各香港乐坛的大小事件。乐坛风云50年为电视风云50年及选美风云50年之姊妹作品，同样由王贤志主持。口号为「延续真好音乐」，目的是为了与市民共同集体回忆。现时，节目由直销中心有限公司冠名赞助。以下为该剧于亚洲电视本港台首播之收视纪录：资料来源：CSM媒介研究(一个收视点代表64,820名观众)问题：亚洲电视高清制式的该节目每集大约多少分钟？回答：",
+      "references": [
+        "85分钟"
+      ]
+    },
+    {
+      "index": 12,
+      "id": "DEV_438_QUERY_0",
+      "pair": 6,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/44/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/44/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "f2137336eaae0f02013b48a9bac78ef99d8bc69f84f250988144f1ad02de63dc",
+        "blank": "aaa5563b5e3a80fe35900d25b79c2e9c1a0ee3aef967ae8511667647ffbe3912"
+      },
+      "source_prompt": "资料：伯尔尼条约于1874年签署，它成立了邮政总联盟。邮政总联盟后来改称为万国邮政联盟。伯尔尼条约因在瑞士城市伯尔尼签署而得名，是瑞士政府在1874年9月15日召开的国际会议的成果。该会议由22个国家派出代表参与。会议计划由德国邮政大臣海因里希·冯·施特凡（HeinrichvonStephan）起草。条约在10月9日签署，它所成立的组织名为邮政总联盟，后因成员国大增而于1878年改名为万国邮政联盟。条约的目的是要统一各国不同的邮政服务及规定，好让国际邮件能自由地互相交换。10月9日定为世界邮政日（WorldPostDay），以纪念该条约的签署。万国邮政联盟问题：《伯尔尼条约》是哪一年签署的？回答：",
+      "references": [
+        "1874年"
+      ]
+    },
+    {
+      "index": 13,
+      "id": "DEV_438_QUERY_1",
+      "pair": 6,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/45/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/45/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "231699a0c252324a0564f45d0c2a5caa7b8ea620c468d906eccc08290c187e37",
+        "blank": "4333b98f5a7e4f78d6578f51cc88ae51f3f108e79b0411c0e3975d3a85c82be5"
+      },
+      "source_prompt": "资料：伯尔尼条约于1874年签署，它成立了邮政总联盟。邮政总联盟后来改称为万国邮政联盟。伯尔尼条约因在瑞士城市伯尔尼签署而得名，是瑞士政府在1874年9月15日召开的国际会议的成果。该会议由22个国家派出代表参与。会议计划由德国邮政大臣海因里希·冯·施特凡（HeinrichvonStephan）起草。条约在10月9日签署，它所成立的组织名为邮政总联盟，后因成员国大增而于1878年改名为万国邮政联盟。条约的目的是要统一各国不同的邮政服务及规定，好让国际邮件能自由地互相交换。10月9日定为世界邮政日（WorldPostDay），以纪念该条约的签署。万国邮政联盟问题：伯尔尼条约的名字如何得来？回答：",
+      "references": [
+        "因在瑞士城市伯尔尼签署而得名"
+      ]
+    },
+    {
+      "index": 14,
+      "id": "DEV_1536_QUERY_0",
+      "pair": 7,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/46/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/46/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "7d420b3f3038def686c61005b29ef975c3c5313cf6bf02ddf3240bca26bea0ef",
+        "blank": "da214fc981d09a6db1a500ddec63e851deecfcfe6bafbc5905ad434e18a6e578"
+      },
+      "source_prompt": "资料：侏罗纪海岸（JurassicCoast）位于英国南部英吉利海峡，从东德文埃克斯茅斯奥科姆岩石群一直延伸到东多塞特斯沃尼奇老哈里巨石，总长153千米。2001年入选联合国教科文组织世界遗产。侏罗纪海岸由三叠纪、侏罗纪和白垩纪的悬崖组成，跨越中生代时期，记载了1亿8千年的地理史。该地区有很多独一无二的地理特性，并展现了不同的地形构造，包括天然拱门杜德尔门（DurdleDoor）、拉尔沃思湾的石灰岩折曲和波特兰岛。切瑟尔浅滩是连岛沙洲和风暴海滩的一个绝佳典型。由于地形多变，因此这里是国际野外考察的对象。该地区是古生物学家玛丽·安宁的故乡，她研究海岸线上的化石并发现了第一个完整的鱼龙目化石。问题：侏罗纪海岸位于哪个海峡？回答：",
+      "references": [
+        "英吉利海峡"
+      ]
+    },
+    {
+      "index": 15,
+      "id": "DEV_1536_QUERY_1",
+      "pair": 7,
+      "images": {
+        "normal": "artifacts/pixel_language_diversity_v1/development/47/normal.png",
+        "blank": "artifacts/pixel_language_diversity_v1/development/47/blank.png"
+      },
+      "expected_reader_memory": {
+        "normal": "089b155217c6b3b76e7c2c894087f1b345d5f48fc0a53c13a73e91499ae6a420",
+        "blank": "7f0c10062a07723c1cce2cc912261d91e833aee9b9d85c97fb9b329248d2de73"
+      },
+      "source_prompt": "资料：侏罗纪海岸（JurassicCoast）位于英国南部英吉利海峡，从东德文埃克斯茅斯奥科姆岩石群一直延伸到东多塞特斯沃尼奇老哈里巨石，总长153千米。2001年入选联合国教科文组织世界遗产。侏罗纪海岸由三叠纪、侏罗纪和白垩纪的悬崖组成，跨越中生代时期，记载了1亿8千年的地理史。该地区有很多独一无二的地理特性，并展现了不同的地形构造，包括天然拱门杜德尔门（DurdleDoor）、拉尔沃思湾的石灰岩折曲和波特兰岛。切瑟尔浅滩是连岛沙洲和风暴海滩的一个绝佳典型。由于地形多变，因此这里是国际野外考察的对象。该地区是古生物学家玛丽·安宁的故乡，她研究海岸线上的化石并发现了第一个完整的鱼龙目化石。问题：侏罗纪海岸哪一年入选联合国教科文组织世界遗产？回答：",
+      "references": [
+        "2001年"
+      ]
+    }
+  ],
+  "raw_hidden_states_retained_locally": true,
+  "raw_tensor_sha256": {
+    "case_0000_normal.pt": "89eecad8149303e299fc28d81085192d4f998a7dc66c2ab8ca0c9c1aee222b25",
+    "case_0000_blank.pt": "9d39a76f534ef40fd324ef30a28bc41a628b3fb10ba6dc168f4ccc353328af7a",
+    "case_0000_text.pt": "cfa78e7565441d9b0b39610e9b7fe8cd2eaf0373f7cc550580b75ea3f0701b3f",
+    "case_0001_normal.pt": "3cc05bf34bffc67c9a7a3c1f1b66e99a8e0a346995166945fc24d8df00dd2368",
+    "case_0001_blank.pt": "bb3ffdf1a6d954175f12b7d227e9b9ecd1facf1f7a2220078baea435d1461b2a",
+    "case_0001_text.pt": "c88aa085d0d3d80e8521745f21dedf593d4fc1be71b06fd06a38fe72e2b6a513",
+    "case_0002_normal.pt": "ed0ad042e12e33adb5a1f37aaff48678714dd9de06e3f815749f5131b0cc4113",
+    "case_0002_blank.pt": "48b5a68998d19c5bd0f4733719abae8a72db4a115584a83946a0d1fdbf6d9b06",
+    "case_0002_text.pt": "0ba4b1bae1a06fca4b219a72881b18ef6ad8aac498c6cc0ea9821d37bd5e411a",
+    "case_0003_normal.pt": "94f86bbb37657ae570cce210ac03c91f7226e61835bf91f4eea256ae37156067",
+    "case_0003_blank.pt": "d5989829487700ef4b575ed4e02de36ecf834b617200ad83c1713587f3f8b125",
+    "case_0003_text.pt": "39bf646f01db4cb8a8ca1cd3031911a50d1af21179e0433965c8b9317530ce07",
+    "case_0004_normal.pt": "aa14b697680d603a5d5cd0c1e70d1af22087ecb6f97150da03dcaaf062913982",
+    "case_0004_blank.pt": "1161419000df1a1ad2dc07312ac3684f3a1ae5f079c876229e79d5e8c36a1d8e",
+    "case_0004_text.pt": "6dcc0db99d08945accd393bc0f6bfe9c49e749cf74f5f06d48aa6aa58534964a",
+    "case_0005_normal.pt": "9fc6093b053575b88a90cd87fcbaf75aa536b3c4f70f64d15c34d6f362c5ae47",
+    "case_0005_blank.pt": "a716e64047fd98402784f3cb6d5e53d722550845ac3b043a2b95d3a0c13a3dc5",
+    "case_0005_text.pt": "501c5eb844a3331acafc0ea762bb59a858a17e5088fd49c933de8f54b49563f9",
+    "case_0006_normal.pt": "44b1135a7a96920126744ceeccb6c5eafd623d4eeeee5766efa575e37a3dce55",
+    "case_0006_blank.pt": "648de8164b43bcc0bfc8412711463fb110c4a0ddec2f4da04eaf281e56fb17c0",
+    "case_0006_text.pt": "c22fce7e358a26782fdc117b9f4176366c335919acfa04b864968317d0bf1b93",
+    "case_0007_normal.pt": "fc13eff83a686724210dff3d04f77b9d7a63f4132775f68b50a145d486d6d53e",
+    "case_0007_blank.pt": "a9bbecc4a116604af8ea4b5a66ad36342726756ea8c30e0f807991dda4856285",
+    "case_0007_text.pt": "6971fc34fcd09f60a1134ff5d8ecd32e96b7932958295e31704556f2e93ffb0f",
+    "case_0008_normal.pt": "2589c720e1a69cded49da7fcd59173e1dbdd2ef50f9555d39499a03cb6292d80",
+    "case_0008_blank.pt": "2c4cfa0275e578f50f2e86e48d0612f01378d6fa06003b54043b107ef214271a",
+    "case_0008_text.pt": "3de46609a925f1578dd18d94b77e10008157e60bb438e0af63cdaa275af524ab",
+    "case_0009_normal.pt": "24b85aa3371f4ac520b82489dd11c49ceedf19c5747ae15fd43ffa7b73733f76",
+    "case_0009_blank.pt": "f5ada349d007117b21e840ae103a28e5cf84eb130fc59b1f7a5d5aceb6d09f6b",
+    "case_0009_text.pt": "5ba8a371077aecc34527f7e9e1226e56a4da7d99fe3480312f53fabfe1e20c9d",
+    "case_0010_normal.pt": "ccfffe90c6dd1ad95efc04b41f87c1f14fc0f7d5c84c6afebec6d13b4f2bc010",
+    "case_0010_blank.pt": "3a85e9e21d3f06cbc2184870472f1be29c2946f871241b197bd7e17b1cacee1c",
+    "case_0010_text.pt": "16741526004565c8ba7c1ddeae33cb04014b51785200ac7347dfb2edf1c4ea37",
+    "case_0011_normal.pt": "1fd185a002c1fb911d13b03fe2d578ab00e8ed25af1563bf538a2ba1c6dfe306",
+    "case_0011_blank.pt": "90aa1194e65b72d699d4d7ce444315ff0f385dde7f3118d27d97bf72c01fcd45",
+    "case_0011_text.pt": "eb46fe00fffd676a195757e3cf7d295bd79147746dca9c1d800051a1debb3e79",
+    "case_0012_normal.pt": "b47d8ac70dd6ca43e504c003735bd22676f8cefb10d43efb7d0bf8c8dc25d3c1",
+    "case_0012_blank.pt": "9823a72a4731e9c6bd6ec4f7e3c5f9f663691642a65469ab181a9fead44cd3f9",
+    "case_0012_text.pt": "5d052b592a3a5420b622d0875168dd60c4679435d2e80355428cd3f9e82d2ade",
+    "case_0013_normal.pt": "3b3a44ed30e0eac5d88c52925cdfff7c250dd3c1a535bc0f8a383cc5391786f3",
+    "case_0013_blank.pt": "1dd5d9e1e338f8b97cabf5ab68594dc71870ae128bddb18ee516e8276913c70b",
+    "case_0013_text.pt": "eb40f5072cbfae84f73bef925ff4684bb9e21dd2ba0733b2902b42b8795cecfd",
+    "case_0014_normal.pt": "2802156cad03a164918e42b8790db62b8bb2570e4d865ea8617d5fa1fe8be8e7",
+    "case_0014_blank.pt": "a92e0919357d320baba2316daf6e7c1e0b818a689b4a90e25aa5b7936cd8c5ca",
+    "case_0014_text.pt": "caa10bfabd22329ac2f5c2e1ced19c3777fb573f315fa114ce5ea1bc43fb5581",
+    "case_0015_normal.pt": "74a6bf665e40821d286c82a2a04a544329b5a46fb882b26ce005067db19e92b9",
+    "case_0015_blank.pt": "0e3afce71c0453102297ee3412a1055890dd57c8624f62db13e5a69d86553050",
+    "case_0015_text.pt": "f09af728b9b403e5f541f88c79eeb65632520f9e79ef112ed4dfbf3e834ec068"
+  },
+  "development_training_allowed": false
+}
