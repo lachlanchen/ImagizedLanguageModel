@@ -80,7 +80,11 @@ def source_audit():
                  'references/manuscript_glyph_step_revision_plan.md',
                  'references/manuscript_contextual_answers_revision_plan.md',
                  'references/glyph_tail_paired_answers_result.md',
-                 'references/balanced_glyph_writer_result.md', 'references/balanced_glyph_writer_protocol.md']:
+                 'references/balanced_glyph_writer_result.md', 'references/balanced_glyph_writer_protocol.md',
+                 'references/glyph_line_step_probe_result.md',
+                 'references/evidence/glyph_line_step_probe_v1/scores.json',
+                 'references/glyph_first_policy_audit_result.md',
+                 'references/evidence/glyph_first_policy_audit_v1/report.json']:
         bound[name] = sha(ROOT/name)
     for name in ['scripts/audit_cached_glyph_teacher_labels.py', 'scripts/audit_glyph_target_coverage.py',
                  'references/cached_glyph_teacher_agreement_result.md', 'references/glyph_target_coverage_result.md',

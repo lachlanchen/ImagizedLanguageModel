@@ -66,3 +66,11 @@ with these paired counts and the first eight new raw examples from both models.
 Build S39--S42 in one stage; include all four actual figure reviews. This
 supersedes the earlier exclusion of the then-unfinished balanced refinement.
 No subsequent source-only alignment diagnostic is claimed as a working ILM.
+
+The completed line-clock probe and retrospective first-policy audit may be
+reported as offline instruments within Note62. Explicitly reject the line
+framing (7/16 native versus1/16 forced-character/image matches). State that
+first-character source matches30/32 and29/32 do not establish complete answers,
+and physical F1 is not Unicode identity. Preserve CPU accumulation and adapted
+state limitations. These diagnostics provide no runtime lexical component or
+training examples and do not change any autonomous answer grade.

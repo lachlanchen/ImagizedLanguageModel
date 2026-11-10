@@ -250,6 +250,41 @@ autonomous language. Sequence alignment and learning on actual generated
 histories remain separate tests; further fitting of G on the same fixed states
 is not supported as the sole repair.
 
+\subsection*{Fixed line framing does not repair source advancement}
+A separate source-head-only probe requests one character per line with a
+newline after every character. It uses the original body, the same eight
+training and sixteen earlier normal development images, and three feedback
+routes. Native source units give 7/16 complete literal development matches;
+exact-character-plus-LF and canonical-image-plus-LF feedback each give 1/16.
+All initial states match within each image across routes. Compilation checks
+4,096 primitive character/source-ID pairs and retains forty two-unit codec
+exceptions. No native output obeys the strict final-LF format. Unsupported
+events and caps remain failures. The preset mechanical criterion fails, so
+this framing is rejected. The diagnostic executes no optimizer update,
+generates no learned answer image and changes no deployed control vector.
+
+\subsection*{Retrospective first-policy separation}
+Projecting all saved first-answer states through the original lexical matrix
+provides another offline instrument. On the first reserved cohort, its first
+decoded character matches an allowed reference first character for 30/32
+adapted states and 31/32 readout-only states. Actual first-image F1 reaches
+0.95 for 14/32 and 11/32, with five and three canonical exact first images.
+On the second cohort, the unchanged parent and balanced writer have identical
+first states and 29/32 source first-character matches. Their physical first
+images reach 0.95 for 16/32 and 17/32, with five and six exact first images.
+For the balanced writer, twelve cases have a matching source first character
+but fail the physical threshold.
+
+This is retrospective analysis of already scored states, not new held-out
+evidence. It generates no new image or training example. The original lexical
+matrix acts on actual possibly adapted states and remains outside deployment.
+CPU FP32 accumulation after BF16 matrix rounding can differ from GPU arithmetic;
+the smallest recorded top-two margin is 0.15937, and CPU/GPU winner equivalence
+is not independently proved. A first-character match is not complete-answer
+accuracy, and physical F1 is not a Unicode identity classifier. The gap supports
+testing broader multi-unit function transfer for the image writer without
+establishing that such a repair will work.
+
 '''
 
 NOTE=NOTE.replace('No result from that\nsubsequent repair is included here.',
