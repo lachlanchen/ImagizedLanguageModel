@@ -55,8 +55,15 @@ def checkpoint(folder,actor,optimizer,step,r,run,cost,attempt):
     atomic_json(pointer,dict(latest=record,previous=old['latest'] if old else None))
     keep={x['file'] for x in snapshots.values()}|{record['file']}
     if old:keep.add(old['latest']['file'])
-    for candidate in (folder/'checkpoints').glob('step_*.pt'):
-        if rel(candidate) not in keep:candidate.unlink()  # Generated, superseded optimizer state only.
+    # Only the previous pointer proves that an optimizer file was superseded.
+    # Unreferenced files may be interrupted writes or evidence from another
+    # attempt; a directory glob cannot establish that they are disposable.
+    superseded=old.get('previous') if old else None
+    if superseded and superseded['file'] not in keep:
+        candidate=ROOT/superseded['file']
+        require(candidate.parent.resolve()==(folder/'checkpoints').resolve(),'Checkpoint outside owned directory')
+        require(sha(candidate)==superseded['sha256'],'Superseded checkpoint changed; preserve it')
+        candidate.unlink()
     return record
 
 
@@ -74,7 +81,9 @@ def train(run,resume):
     if (folder/'status.json').exists():require(not owner_live(load(folder/'status.json')),'Original training worker still live')
     if (folder/'report.json').exists() and load(folder/'report.json')['complete']:return
     require(resume==(folder/'checkpoint.json').exists(),'Use --resume exactly when a valid checkpoint exists')
-    attempts=folder/'attempts';attempts.mkdir(exist_ok=True);number=len(list(attempts.glob('attempt_*.json')))+1
+    attempts=folder/'attempts';attempts.mkdir(exist_ok=True)
+    numbers=[int(p.stem.split('_')[1]) for p in attempts.glob('attempt_*.json')]
+    number=max(numbers,default=0)+1
     previous=None;prior_cost=0.
     if resume:
         pointer=load(folder/'checkpoint.json')['latest'];previous=checked_checkpoint(ROOT/pointer['file'],r,run,pointer['sha256'])
@@ -83,6 +92,15 @@ def train(run,resume):
             # Every terminated attempt includes loading, waiting and unsaved work.
             prior_cost=max(prior_cost,load(p).get('cumulative_elapsed_seconds',0.))
     monitor=TrainingMonitor(folder,r['training_maximum_seconds']-prior_cost,r['training_pressure_wait_seconds'])
+    # Reserve an immutable identity before CUDA admission. SIGKILL can prevent
+    # finally from writing an end receipt, but must never reuse that ledger.
+    start=dict(attempt=number,pid=os.getpid(),
+        start_ticks=Path('/proc/self/stat').read_text().rsplit(')',1)[1].split()[19],
+        boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),began_unix=time.time(),
+        prior_accounted_elapsed_seconds=prior_cost,resume=resume,
+        resumed_step=previous['step'] if previous else 0)
+    with (attempts/f'attempt_{number:03}_start.json').open('x') as f:
+        json.dump(start,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
     monitor.status('admitting');ledger=None;hooks=[];start_step=previous['step'] if previous else 0
     try:
         from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu

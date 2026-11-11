@@ -25,12 +25,21 @@ def main():
         for action,directory in [('train','fit'),('evaluate','evaluation'),('parent-long-books','parent_long_books')]:
             report=run/directory/'report.json'
             if report.exists() and load(report)['complete']:continue
+            child_status=run/directory/'status.json'
+            if child_status.exists():require(not owner_live(load(child_status)),'Original stage worker is still live')
             command=[sys.executable,'-u','scripts/train_visual_continuation.py',action,'--run',str(run)]
             if action=='train' and (run/'fit/checkpoint.json').exists():command.append('--resume')
             with (run/(action+'_console.log')).open('a') as log:
+                began=time.perf_counter()
                 child=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT,cwd=Path.cwd())
                 atomic_json(status,dict(base,phase=action,active_child_pid=child.pid))
-                result=child.wait()
+                with (run/'controller_children.jsonl').open('a',buffering=1) as journal:
+                    journal.write(json.dumps(dict(event='started',action=action,child_pid=child.pid,
+                        controller=base,unix=time.time()))+'\n');journal.flush();os.fsync(journal.fileno())
+                    result=child.wait()
+                    journal.write(json.dumps(dict(event='ended',action=action,child_pid=child.pid,
+                        controller=base,unix=time.time(),elapsed_seconds=time.perf_counter()-began,returncode=result))+'\n')
+                    journal.flush();os.fsync(journal.fileno())
             require(result==0 and report.exists() and load(report)['complete'],'Child incomplete; preserve evidence before any retry')
         if not (run/'review/mapping.json').exists():
             env=dict(os.environ,CUDA_VISIBLE_DEVICES='')

@@ -25,6 +25,13 @@ Read `references/visual_continuation_preflight_result.md`. Do not repeat the
 completed preflight or reuse its four updates for the full fit. Prepare and
 register the substantial-corpus comparison before training, with complete QA
 and book targets, both layouts, fixed snapshots and original language controls.
+The full pipeline is implemented; indexing has authenticated 13,766 eligible
+sequences and 2,036,247 target positions per epoch. Finish natural rendering and
+registration, then execute `scripts/run_visual_continuation.py` in one owned
+session. Read `references/visual_continuation_full_protocol.md`; its three epochs,
+five snapshots, 732 output streams and final pilot are fixed before training.
+Verify the real first-six-update resume check. Do not rerun indexing or launch
+another worker merely because an observation handle has expired.
 Preserve the failed mixtures, first-function transfer and writer-only controls.
 Do not prioritize manuscript polish over the unresolved model failure.
 

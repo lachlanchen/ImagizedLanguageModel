@@ -145,16 +145,33 @@ after updates; causal checks pass. Independent audit verifies four AdamW steps
 for all 85 optimizer tensors and authentic complete targets. The source retains
 its 7.522B inherited body and frozen image interfaces. Preflight is not language.
 
-The next work is the full complete-sequence training/evaluation pipeline and
-prospective registration, using the substantial source corpus and explicit
-diagnostic exclusions. The old 3,176-question subset's targets end at sixteen
-glyphs; do not substitute it for full QA answers and book continuations. Discard
-the four preflight updates before fitting. Preserve both prompt layouts, the
-216-stream comparison, fixed checkpoints, all existing successful cases and
-untouched confirmation. Prompt rendering/layout and exact source exposure must
-be fixed before training. Do not repeat the completed preflight or interpret
-its one-glyph training-case runtime exercise as a usable model. A full fit and
-complete-language evaluation are not yet registered or run. Keep the full goal.
+The [complete-sequence pipeline and fixed protocol](../references/visual_continuation_full_protocol.md)
+are implemented. Source indexing has authenticated 13,766 eligible sequences:
+9,004 complete QA records and 4,762 book records. Nineteen diagnostic records or
+source-group exclusions are recorded. After the book-prefix split there are
+2,036,247 target glyph positions per epoch, with complete targets up to 513
+glyphs. The prescribed three epochs give 41,298 updates and 6,108,741 scheduled
+target positions. These are data exposure counts, not measured language results.
+
+The immediate work is to finish natural-layout preparation, bind the actual
+pixels and schedule in a committed registration, and run this single comparison.
+Discard all four preflight updates. Each source gets one fixed and two natural
+presentations. Save initial, quarter, half, three-quarter and final weights;
+verify real optimizer/RNG recovery during the first six updates. Evaluate all
+732 prescribed image streams, including the unchanged 216-input cohort and
+matched long-book controls, before applying the frozen pilot criteria.
+The final proportional pilot requires 12/32 exact answers, 4/16 both-correct
+pairs, 24/32 readable answers, 4/12 coherent complete long-book continuations,
+all eight union proportional and both fixed successes, and the registered
+erasure checks. A pass must then survive untouched source-group confirmation.
+
+Do not substitute the old 3,176-question, sixteen-glyph-target subset, repeat
+the completed preflight, extend an unchanged failed recipe, or turn a working
+checkpoint into a language claim. Full training is not yet started. Keep the
+one unresolved decision explicit: does adapting all answer layers over complete
+visual sequences improve autonomous complete language while preserving source
+prompt interpretation? The architecture, data and evaluation must answer that
+question before another model branch or presentation-only revision.
 
 ## Training and evaluation contract
 

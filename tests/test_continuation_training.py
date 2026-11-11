@@ -44,3 +44,20 @@ def test_saved_weights_optimizer_and_rng_replay_exactly(tmp_path):
 def test_corrupt_parameter_map_is_rejected():
     model=nn.Linear(3,2);state=trainable_state(model);state.pop('bias')
     with pytest.raises(RuntimeError):restore_trainable(model,state)
+
+
+def test_checkpoint_retention_preserves_unrecognized_files(tmp_path,monkeypatch):
+    from scripts import train_visual_continuation as trainer
+    monkeypatch.setattr(trainer,'rel',lambda p:str(p.resolve()))
+    folder=tmp_path/'fit';(folder/'checkpoints').mkdir(parents=True)
+    (tmp_path/'preparation.json').write_text('{}')
+    model=nn.Linear(3,2);optimizer=torch.optim.AdamW(model.parameters())
+    r=dict(source_sha256={},seed=7,runtime={},total_steps=10,
+        initial_bridge_sha256='unused-for-retention-test',snapshot_steps=[0,10])
+    orphan=folder/'checkpoints/step_999999_unknown.pt';orphan.write_bytes(b'preserve unknown evidence')
+    records=[trainer.checkpoint(folder,model,optimizer,i,r,tmp_path,float(i),1) for i in range(4)]
+    from pathlib import Path
+    assert Path(records[0]['file']).exists()  # Immutable initial snapshot.
+    assert not Path(records[1]['file']).exists()  # Known superseded pointer only.
+    assert Path(records[2]['file']).exists() and Path(records[3]['file']).exists()
+    assert orphan.read_bytes()==b'preserve unknown evidence'
