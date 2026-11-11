@@ -1,0 +1,534 @@
+{
+  "schema": "balanced-writer-matched-language-v1",
+  "source_sha256": "ae695cc2b07ce83bcf886b9c8b8792a22249735d2b0a93e3daf6c21cfec8e91d",
+  "registration_sha256": "f3d6221d7ce35b91e0c994c34a50ac0a0637a7f92f8c4e5a8a278166d102ce06",
+  "checkpoint_sha256": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+  "results": {
+    "fixed_cells": [
+      {
+        "step": 18000,
+        "kind": "book",
+        "condition": "normal",
+        "cases": 12,
+        "readable": 0,
+        "stopped": 4,
+        "complete_exact": 0,
+        "paired_both_correct": null,
+        "coherent_complete": 0
+      },
+      {
+        "step": 18000,
+        "kind": "book",
+        "condition": "prefix_blank",
+        "cases": 12,
+        "readable": 0,
+        "stopped": 12,
+        "complete_exact": 0,
+        "paired_both_correct": null,
+        "coherent_complete": null
+      },
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "normal",
+        "cases": 32,
+        "readable": 3,
+        "stopped": 6,
+        "complete_exact": 2,
+        "paired_both_correct": 1,
+        "coherent_complete": null
+      },
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "passage_blank",
+        "cases": 32,
+        "readable": 0,
+        "stopped": 1,
+        "complete_exact": 0,
+        "paired_both_correct": 0,
+        "coherent_complete": null
+      },
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "question_blank",
+        "cases": 32,
+        "readable": 0,
+        "stopped": 4,
+        "complete_exact": 0,
+        "paired_both_correct": 0,
+        "coherent_complete": null
+      }
+    ],
+    "proportional": [
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "normal",
+        "cases": 32,
+        "readable": 16,
+        "stopped": 18,
+        "complete_exact": 6,
+        "paired_both_correct": 0,
+        "coherent_complete": null
+      },
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "passage_blank",
+        "cases": 32,
+        "readable": 0,
+        "stopped": 8,
+        "complete_exact": 0,
+        "paired_both_correct": 0,
+        "coherent_complete": null
+      },
+      {
+        "step": 18000,
+        "kind": "qa",
+        "condition": "question_blank",
+        "cases": 32,
+        "readable": 1,
+        "stopped": 7,
+        "complete_exact": 0,
+        "paired_both_correct": 0,
+        "coherent_complete": null
+      }
+    ]
+  },
+  "pointwise_passage_group_intervals": {
+    "fixed_cells": [
+      {
+        "step": 18000,
+        "condition": "normal",
+        "metric": "qa_complete_exact",
+        "count": 2,
+        "cases": 32,
+        "mean": 0.0625,
+        "ci95": [
+          0.0,
+          0.1875
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "normal",
+        "metric": "qa_both_correct",
+        "count": 1,
+        "cases": 16,
+        "mean": 0.0625,
+        "ci95": [
+          0.0,
+          0.1875
+        ],
+        "groups": 16,
+        "observations": 16
+      },
+      {
+        "step": 18000,
+        "condition": "passage_blank",
+        "metric": "qa_complete_exact",
+        "count": 0,
+        "cases": 32,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "passage_blank",
+        "metric": "qa_both_correct",
+        "count": 0,
+        "cases": 16,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 16
+      },
+      {
+        "step": 18000,
+        "condition": "question_blank",
+        "metric": "qa_complete_exact",
+        "count": 0,
+        "cases": 32,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "question_blank",
+        "metric": "qa_both_correct",
+        "count": 0,
+        "cases": 16,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 16
+      }
+    ],
+    "proportional": [
+      {
+        "step": 18000,
+        "condition": "normal",
+        "metric": "qa_complete_exact",
+        "count": 6,
+        "cases": 32,
+        "mean": 0.1875,
+        "ci95": [
+          0.0625,
+          0.3125
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "normal",
+        "metric": "qa_both_correct",
+        "count": 0,
+        "cases": 16,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 16
+      },
+      {
+        "step": 18000,
+        "condition": "passage_blank",
+        "metric": "qa_complete_exact",
+        "count": 0,
+        "cases": 32,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "passage_blank",
+        "metric": "qa_both_correct",
+        "count": 0,
+        "cases": 16,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 16
+      },
+      {
+        "step": 18000,
+        "condition": "question_blank",
+        "metric": "qa_complete_exact",
+        "count": 0,
+        "cases": 32,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 32
+      },
+      {
+        "step": 18000,
+        "condition": "question_blank",
+        "metric": "qa_both_correct",
+        "count": 0,
+        "cases": 16,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "groups": 16,
+        "observations": 16
+      }
+    ]
+  },
+  "candidate_minus_controls_intervals": {
+    "fixed_cells": {
+      "parent": [
+        {
+          "metric": "complete_exact",
+          "comparison": "balanced_minus_parent",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 32
+        },
+        {
+          "metric": "both_correct",
+          "comparison": "balanced_minus_parent",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 16
+        }
+      ],
+      "original_flow": [
+        {
+          "metric": "complete_exact",
+          "comparison": "balanced_minus_original_flow",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 32
+        },
+        {
+          "metric": "both_correct",
+          "comparison": "balanced_minus_original_flow",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 16
+        }
+      ]
+    },
+    "proportional": {
+      "parent": [
+        {
+          "metric": "complete_exact",
+          "comparison": "balanced_minus_parent",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 32
+        },
+        {
+          "metric": "both_correct",
+          "comparison": "balanced_minus_parent",
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 16
+        }
+      ],
+      "original_flow": [
+        {
+          "metric": "complete_exact",
+          "comparison": "balanced_minus_original_flow",
+          "mean": -0.03125,
+          "ci95": [
+            -0.125,
+            0.0625
+          ],
+          "groups": 16,
+          "observations": 32
+        },
+        {
+          "metric": "both_correct",
+          "comparison": "balanced_minus_original_flow",
+          "mean": -0.0625,
+          "ci95": [
+            -0.1875,
+            0.0
+          ],
+          "groups": 16,
+          "observations": 16
+        }
+      ]
+    }
+  },
+  "original_exact_retention": {
+    "fixed_cells": {
+      "required": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "retained": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "lost": [],
+      "all_retained": true
+    },
+    "proportional": {
+      "required": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_b_normal",
+        "qa_10_a_normal",
+        "qa_14_b_normal",
+        "qa_16_b_normal"
+      ],
+      "retained": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_b_normal",
+        "qa_10_a_normal",
+        "qa_14_b_normal",
+        "qa_16_b_normal"
+      ],
+      "lost": [],
+      "all_retained": true
+    }
+  },
+  "flow_exact_retention": {
+    "fixed_cells": {
+      "required": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "retained": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "lost": [],
+      "all_retained": true
+    },
+    "proportional": {
+      "required": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_a_normal",
+        "qa_09_b_normal",
+        "qa_14_b_normal",
+        "qa_15_b_normal",
+        "qa_16_b_normal"
+      ],
+      "retained": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_b_normal",
+        "qa_14_b_normal",
+        "qa_16_b_normal"
+      ],
+      "lost": [
+        "qa_09_a_normal",
+        "qa_15_b_normal"
+      ],
+      "all_retained": false
+    }
+  },
+  "union_exact_retention": {
+    "fixed_cells": {
+      "required": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "retained": [
+        "qa_09_a_normal",
+        "qa_09_b_normal"
+      ],
+      "lost": [],
+      "all_retained": true
+    },
+    "proportional": {
+      "required": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_a_normal",
+        "qa_09_b_normal",
+        "qa_10_a_normal",
+        "qa_14_b_normal",
+        "qa_15_b_normal",
+        "qa_16_b_normal"
+      ],
+      "retained": [
+        "qa_04_a_normal",
+        "qa_07_a_normal",
+        "qa_09_b_normal",
+        "qa_10_a_normal",
+        "qa_14_b_normal",
+        "qa_16_b_normal"
+      ],
+      "lost": [
+        "qa_09_a_normal",
+        "qa_15_b_normal"
+      ],
+      "all_retained": false
+    }
+  },
+  "prospective_development_pilot_passed": false,
+  "all216_initial_context_states_bit_exact_to_parent": true,
+  "initial_state_comparison_sha256": "a543a51b79831ad8b530768a48aa947340904ec4fabda60a3852a89a148a422b",
+  "independent_per_answer_and_aggregate_recount_passed": true,
+  "actual_outputs": 216,
+  "clear_whole_readings": 20,
+  "uncertain_whole_readings": 196,
+  "opaque_boards_viewed": 54,
+  "book_prefixes_viewed": 12,
+  "readings_sha256": "74115e497f15fbad804c2ab2e92b70bed38586e467cf1fb77b3887b862e1f6d4",
+  "reading_audit_sha256": "3c81112e6e3850ccf2c7efeda10350e6653d1aa9ef5c112f8a74b2866ef9f4d1",
+  "comparison_sha256": "488d1d2a07cf3b09debe41a87e0b2f76787a4a8fece962ceb34dc174899874b4",
+  "generation_report_sha256": {
+    "fixed_cells": "93cfe6561747fc79d57e2453ce9976ed39e400e1a7e08002d2c59dd93446da62",
+    "proportional": "1d2bce918a2939f77ee2572315db9897379f0786d3d5415b37ce53ab0feaa324"
+  },
+  "generation_resources": {
+    "fixed_cells": {
+      "elapsed_seconds": 1534.5265481853858,
+      "actor_loading_seconds": 82.05485408660024,
+      "total_generation_seconds": 1426.7118773162365,
+      "resource_wait_seconds": 0.0,
+      "peak_allocated_vram_gib": 17.786398887634277,
+      "minimum_available_gib": 53.24121856689453
+    },
+    "proportional": {
+      "elapsed_seconds": 1140.4823425551876,
+      "actor_loading_seconds": 77.20061342511326,
+      "total_generation_seconds": 1041.9589041573927,
+      "resource_wait_seconds": 0.0,
+      "peak_allocated_vram_gib": 17.786398887634277,
+      "minimum_available_gib": 52.51280212402344
+    }
+  },
+  "inherited_visual_contextual_parameters": 7522463984,
+  "trained_readout_and_stop_bundle": true,
+  "new_optimizer_updates": 0,
+  "reused_development_cohort": true,
+  "untouched_confirmation_complete": false,
+  "independent_human_adjudication": false,
+  "model_reviewer_prior_cohort_familiarity": true,
+  "strict_canonical_mismatch_not_semantic_falsity": true,
+  "new128glyph_book_cold_replay_not_run": true,
+  "earlier_different_cohort64glyph_replay_not_substituted": true,
+  "uncertainty": "Pointwise95% percentile bootstrap,10000draws/seed202611154,16paired passages; reused development, no independent seed or simultaneous coverage. Twelve book prefixes from two works have no generalization interval.",
+  "generalized_language_learning_proven": false,
+  "task_efficiency_advantage_proven": false,
+  "goal_achieved": false
+}

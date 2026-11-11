@@ -17,14 +17,15 @@ running model before claiming language acquisition from images alone. A small
 trainable head attached to an inherited 7.522B body is not a lightweight
 foundation model, and fitting that head is not evidence of Qwen 8B parity.
 
-The next decision comes from the registered, frozen balanced-writer
-comparison: finish all 216 complete-response streams, read every actual
-output before reference scoring, compare both earlier controls and verify all
-216 initial contextual states. Its already completed exact writing on 64
-sampled training positions does not establish language transfer. Keep the
-prospective language thresholds, erased inputs, book failures and retention
-requirements unchanged. Do not start another writer fit while this language
-measurement is unfinished.
+The frozen balanced-writer comparison is complete and fails its language
+pilot: 2/32 fixed and 6/32 proportional strict exact QA, with 0/16 proportional
+both-correct pairs and no credited complete book continuation. All 216 outputs,
+54 opaque boards, twelve book prefixes, frozen readings, independent scores
+and initial-state comparisons are complete. Exact sampled training writing
+does not establish language transfer. Before another fit, localize conditional
+transfer, reader access, generated-history drift and stopping using these
+saved failures and the existing native control. Do not extend a failed writer
+recipe or replace the complete-response criteria with reconstruction.
 
 Accept progress from readable complete answers, paired question dependence,
 coherent continuation and natural stopping on held-out source groups. Confirm
@@ -89,28 +90,31 @@ under the fixed gate. Do not extend the fit or substitute its first-only pass
 for stable writing or language. The verified PDFs remain the prior baseline;
 this new result awaits a bounded revision with the next matched control.
 
-The next [registered comparison](../references/balanced_writer_matched_decision.md)
-uses the already physically qualified balanced writer, with no new fit. Its earlier 18/32 clear-answer
-result comes from another cohort and metric. Evaluate its actual writing on
-the same saved states and its complete language on the current unchanged
-cohort, preserving the original parent and flow controls. Make no new fit,
-checkpoint selection or favorable resampling. This can distinguish a flow-
-writer limitation from remaining reading, stopping and feedback failures;
-The trained readout and stopping predictor are compared as one frozen bundle;
-reading, image encoding/decoding and normalization remain unchanged. No new
-complete-response outcome is yet measured. Finish that language evidence before proposing
-another writer-only repair. Any development improvement still requires
-untouched source-group confirmation and independent review.
+The [registered frozen comparison](../references/balanced_writer_matched_result.md)
+is complete, with no new fit. Balanced results are 2/32 fixed and 6/32
+proportional exact QA, 1/16 and 0/16 correct pairs, and 3/32 and 16/32 readable
+answers. It retains all parent exact answers but only 6/8 union proportional
+cases, failing the prospective pilot. All four QA erasures score zero exact;
+one proportional question-erased output is readable. No complete book
+continuation is credited. Every initial reader state matches the parent
+bit-for-bit. All 216 outputs, 54 boards and twelve book prefixes are reviewed
+before new mapping/reference scoring; twenty whole readings are clear and
+196 uncertain. Independent recount and public export are complete. The earlier
+18/32 clear result remains a different cohort/metric. Readout and stopping
+change together as a frozen bundle. Do not call exact sampled training glyphs
+a language result or begin another writer-only repair from this comparison.
 
 The [matched saved-state diagnosis](../references/balanced_writer_matched_diagnosis_result.md)
 is complete: all 64 selected training glyphs are pixel-exact, both per-pool
 gates pass, and all 128 positions/512 displayed tiles are independently
 recounted and viewed. Development first-image mean F1 is 0.479076 fixed and
 0.658382 proportional, with 0/32 and 4/32 exact canonical first tiles.
-This gap and the current full-language test remain separate. The fixed-cell
-language stage is running; scores and retention remain unmeasured. Reuse the
-exact live worker and handoff, then complete the proportional stage and
-output-first review. No new fit is authorized by this physical pass.
+This gap and the completed language failure remain separate. Fixed/proportional
+generation takes 1,534.527/1,140.482 seconds at 17.786 GiB, with zero pressure
+waiting. Both workers have exited. Preserve their exact identities and files;
+no repeat generation is pending. The combined Figure 22/TeX/PDF revision is
+bounded in the manuscript plan, with source/data preparation implemented and
+native export/build pending. The goal remains active and unachieved.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted

@@ -96,11 +96,21 @@ reviewed tiles. The candidate passes the first gate (0.990581 median, 31/32
 at 0.95) but fails later (0.978614, 25/32); the matched control fails both.
 Its complete language trial is withheld and unmeasured. See
 `references/rollout_endpoint_motor_result.md`. Do not extend or tune that fit.
-Before another writer fit, complete the frozen balanced-writer comparison
-in `references/balanced_writer_matched_decision.md` on the current cohort.
-That writer's earlier physical pass and 18/32 clear
-answers use a different cohort/metric. Preserve those results and the current
-controls; complete the new actual-language comparison before another repair.
+The frozen balanced-writer comparison is now complete on the current cohort:
+2/32 fixed and 6/32 proportional exact QA, 1/16 and 0/16 correct pairs,
+3/32 and 16/32 readable answers, with no credited complete book continuation.
+All216 outputs,54boards,12prefixes,frozen readings and independent scores are
+complete. Every initial reader state matches the parent bit-for-bit. All
+parent exact answers remain, but union proportional retention is6/8 and the
+registered pilot fails. The earlier18/32 clear result uses another cohort.
+All QA erasures score zero exact; one proportional question-erased output is
+readable. Both GPU workers exited. Preserve all public output boards and the
+complete result at `references/balanced_writer_matched_result.md`.
+Before another fit, localize conditional transfer, reader access, generated
+history and stopping from saved trajectories and the existing native control.
+Do not extend failed writer fits. The combined realized-writer manuscript
+revision has a committed bounded plan and figure sources; native export and
+matching PDFs remain pending. Keep the current verified PDF baseline.
 Preserve the completed diagnosis, public pixel archive and original language
 scores. Do not rerun this audit as pending work or call it usable language.
 
