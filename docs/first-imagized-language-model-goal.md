@@ -100,6 +100,12 @@ held-out books. Standalone generation reads only the prompt image and model
 weights. The first fresh CPU invocation used the initial weights and stopped
 without writing.
 
+The [historical evaluation](../references/historical_visual_evaluation_protocol.md)
+adds source-verified oracle, bronze and seal input and output images. The
+fixed codec reproduced 20 of 27 single-tile examples exactly. Thin strokes
+still break in the tiled tall forms. The historical reading and paired stage
+questions await trained visual generation.
+
 Measure complete answers, passage continuation, question dependence and
 historical form handling on independent groups. Measure peak VRAM, total
 preparation and training time, and inference latency on one 4090. Compare

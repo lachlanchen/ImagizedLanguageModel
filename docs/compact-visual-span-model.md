@@ -115,3 +115,10 @@ prompts. It matched eight of 32 QA answers and both questions in two of sixteen
 pairs under exact scoring. Its CPU results provide the text baseline for
 this cohort. The visual checkpoint scores and the same-GPU cost comparison
 are pending. See the [text reference and scoring](../references/compact_visual_span_qwen_reference_protocol.md).
+
+The historical suite presents authentic oracle, bronze and seal glyphs as
+pixels. It tests modern-character reading and selection of an attested stage
+from a shared visual reference. The fixed codec reproduced 20 of 27 historical
+tiles exactly. Five tall bronze forms decoded from four tiles averaged 0.939
+foreground F1. The historical answer generation stage awaits the trained
+checkpoint. See the [historical evaluation and reconstruction panels](../references/historical_visual_evaluation_protocol.md).

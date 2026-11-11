@@ -46,3 +46,34 @@ Run the suite after obtaining a trained compact checkpoint. Pass its input
 manifest to `scripts/infer_compact_visual_span.py` with `--maximum-glyphs 4`.
 Use `scripts/eval_historical_visual_transfer.py answers` for the resulting
 answer images. The `codec` stage measures the fixed physical representation.
+
+## Measured source and codec fidelity
+
+The 36 normal prompts use 27 distinct historical rasters from 18 sealed
+source families. All 72 images reload to the original tiles. Each of the
+nine stage-selection pairs has byte-identical question-erased controls.
+The selected historical rasters have zero exact overlap with the original
+V34 historical training partition. Near-duplicate exposure is unknown.
+
+| Representation | Forms | Exact codec round trips | Mean foreground F1 |
+| --- | ---: | ---: | ---: |
+| Oracle, one 32 × 32 tile | 6 | 6 | 1.0000 |
+| Bronze, one 32 × 32 tile | 9 | 9 | 1.0000 |
+| Seal, one 32 × 32 tile | 12 | 5 | 0.9958 |
+| Tall bronze, four tiles | 5 | 0 | 0.9389 |
+
+The single-tile panel shows the original raster and its decoded form for
+each selected image. The tall panel shows breaks in thin strokes after
+decoding and vertically reassembling the four tiles. Both use the same
+authenticated codec as the compact language model. See the
+[single-tile panel](evidence/historical_visual_historical_32_20261111.png)
+and [tall bronze panel](evidence/historical_visual_bronze_tall_128_20261111.png).
+
+The sparsest selected source, bronze glyph `B12643`, retains ten ink pixels
+at 32 × 32. The codec reproduces those pixels exactly. Rendering the same
+authenticated SVG at 128 × 128 shows the longer strokes and contains 407 ink
+pixels. This post-hoc inspection identifies lost detail in the input raster.
+The case remains in the registered suite. Historical reading and autonomous
+answer generation await the trained checkpoint. See the
+[resolution panel](evidence/historical_visual_sparse_source_resolution_20261111.png)
+and [measured evidence](evidence/historical_visual_evaluation_20261111.json).
