@@ -1,0 +1,38 @@
+{
+  "schema": "visual-continuation-protocol-audit-registration-v1",
+  "recorded_unix": 1794431599.3633456,
+  "training_registration_sha256": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+  "source_sha256": {
+    "scripts/audit_visual_continuation_protocol.py": "18df944b403ffa5c12e7bd40b47ed4940ed17a1916b9359c59ddb19dc5632d4c",
+    "tests/test_continuation_protocol.py": "2d2acda235ad4f08fcf23a6e80a6b56a1486df2ca16a1098fe34b18f332e0ae9",
+    "scripts/review_visual_continuation.py": "d6afd6130c978ad85535650dbe3ffd5137324e9730e655d173e62216a2091f74",
+    "scripts/review_compact_visual_span.py": "c046d3a8f3565c945478a1899d4f9a8776b2ed327c2114258362fb39c7a8a323",
+    "references/visual_continuation_protocol_audit.md": "6d9474b08c327a97420e8b9e9cc44d0c8e44434a3be4710d870da1ca2b4628c1"
+  },
+  "original_training_sources_unchanged": true,
+  "new_language_outputs_available": 0,
+  "scope": "Independently apply the registered each-QA-erasure rule to all four arms; preserve original scores and summary.",
+  "conditions": [
+    "question_blank",
+    "passage_blank"
+  ],
+  "layouts": [
+    "fixed_cells",
+    "proportional"
+  ],
+  "numeric_thresholds_unchanged": {
+    "proportional_exact_minimum": 12,
+    "proportional_pairs_minimum": 4,
+    "proportional_readable_minimum": 24,
+    "long_book_coherent_complete_minimum": 4,
+    "retain_union_proportional_exact": 8,
+    "retain_original_fixed_exact": 2,
+    "each_QA_erasure_exact_maximum": 2,
+    "normal_minus_best_erased_exact_minimum": 8
+  },
+  "training_data_schedule_weights_and_generation_unchanged": true,
+  "original_review_script_unmodified": true,
+  "corpus_or_scoring_outcomes_used_to_relax_thresholds": false,
+  "new_model_calls": 0,
+  "goal_achieved": false
+}
