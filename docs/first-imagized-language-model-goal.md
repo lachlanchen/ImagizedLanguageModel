@@ -24,6 +24,35 @@ Optional transcription may read the finished image without changing its pixels.
 Transferring inherited language capability and learning language from images
 alone are separate claims.
 
+## Direction check for every work unit
+
+The immediate question is whether complete-sequence adaptation of all answer
+layers improves autonomous, prompt-dependent visual language while preserving
+the frozen prompt reader. Finish the registered comparison before changing that
+question. The current implementation is an experiment toward the objective;
+its 7.578B deployed parameters do not establish the desired compact model.
+
+- Tie each work unit to training progress, complete-output evaluation, a
+  failure-specific intervention or a verified wait. For a live, progressing
+  worker within its resource limits, preserve the run and record a verified
+  wait. Extra fits, repeated audits and publication-only changes do not advance
+  the pending language measurement.
+- Keep model, data, checkpoints and acceptance rules fixed through the current
+  comparison. Evaluate all prescribed outputs and erasure controls. A completed
+  fit, decreasing loss or attractive glyph samples cannot replace this decision.
+- If the pilot passes, test untouched source groups before claiming usability.
+  If it fails, identify the measured failure in reading, writing, question or
+  passage dependence, continuation, stopping or generalization. Register one
+  bounded change and an unchanged control; do not extend the same failed recipe
+  or lower its thresholds. Several causes may remain unresolved.
+- Require every mathematical or architectural proposal to name a testable
+  prediction, its control and an outcome that would reject it. Select the next
+  method from the evidence rather than novelty or an assumed physical analogy.
+
+Keep the goal active through these decisions. Completion requires the language,
+independence, resource and written-form evidence specified below; neither a
+development pilot nor a manuscript revision closes it.
+
 ## What counts as success
 
 The unit of success is a **complete answer or coherent continuation**. Evaluate
