@@ -158,6 +158,6 @@ def analyze(run,output):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--run',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v1')
-    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_analysis_v1')
+    parser.add_argument('--run',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v2')
+    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_analysis_v2')
     args=parser.parse_args();analyze(args.run,args.output)

@@ -133,7 +133,7 @@ def affine_geometry(state, vectors):
             "cases": result}
 
 
-def prepare(output):
+def prepare(output, reuse=None):
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "" or output.exists():
         raise ValueError("Prepare on CPU with a new output directory")
     torch.set_num_threads(2)
@@ -198,7 +198,16 @@ def prepare(output):
         checkpoints[name] = {"path": str(path.relative_to(ROOT)), "sha256": sha(path)}
         del state
     output.mkdir(parents=True)
-    torch.save(vectors, output / "source_vectors.pt")
+    if reuse is not None:
+        parent = load(reuse / "registration.json")
+        if parent["cases"] != cases or parent["checkpoints"] != checkpoints or sha(reuse / "source_vectors.pt") != parent["native_vectors_sha256"]:
+            raise ValueError("Reused native targets differ from this registration")
+        saved_vectors = torch.load(reuse / "source_vectors.pt", weights_only=True, map_location="cpu")
+        if saved_vectors.keys() != vectors.keys() or any(not torch.equal(vectors[k], saved_vectors[k]) for k in vectors):
+            raise ValueError("Reused native vector values differ from authenticated archives")
+        os.link(reuse / "source_vectors.pt", output / "source_vectors.pt")
+    else:
+        torch.save(vectors, output / "source_vectors.pt")
     save_json(output / "feedback_geometry.json", geometry)
     request = dict(schema=NAMESPACE, sources_sha256=code, checkpoints=checkpoints,
                    corpus_report_sha256=sha(DATA / "report.json"), corpus_verification_sha256=sha(DATA / "verification.json"),
@@ -209,7 +218,10 @@ def prepare(output):
                    seed=SEED, arms=list(ARMS), reference_lengths_supplied=True, maximum_target_spans_per_record=8,
                    integration_steps=[8,64], maximum_seconds=1800, pressure_wait_allowance_seconds=300,
                    maximum_velocity_calls=2*104*sum(case['target_spans'] for case in cases),
-                   maximum_body_calls=2*sum(5+2*case['target_spans'] for case in cases),
+                   maximum_body_calls=2*sum(7+4*case['target_spans'] for case in cases),
+                   reference_history_execution="Identical prefix prefill followed by cached correct-image updates; same arithmetic path as emitted history",
+                   supersedes_stopped_execution=sha(reuse / "execution/status.json") if reuse is not None else None,
+                   reused_native_vectors_parent=sha(reuse / "registration.json") if reuse is not None else None,
                    minimum_entry_host_ram_gib=48, minimum_runtime_host_ram_gib=24,
                    maximum_allocated_vram_gib=22, minimum_free_gpu_gib=20,
                    primary_measurements=["foreground_f1", "exact_glyphs", "relative_latent_mse", "feedback_relative_mse",
@@ -278,9 +290,31 @@ def diagnose_model(model, name, cases, vectors, output, monitor, device, request
                       grouping_exact=grouping==[len(s) for s in spans[:prefix]],
                       image_vs_native_context_cosine=context_cosine(observation.contexts[prefix-1],native_states[prefix-1]),
                       learned_vs_reference_context_cosine=context_cosine(learned_state,observation.contexts[prefix-1]))
+        # Reference history follows the same prefix-prefill/cache schedule
+        # as emitted history. Full-versus-truncated BF16 passes were measured
+        # to differ numerically, despite a bit-equal same-shape causality check.
+        prefix_vectors, _ = model.encode_ink_spans(spans[:prefix])
+        prefix_mask = torch.arange(3, device=device)[None] < counts[:prefix, None]
+        reference_response = model._body(prefix_vectors[prefix_mask][None], use_cache=True)
+        native_end = int(aligned["span_unit_ends"][prefix - 1])
+        native_response = model._body(native[:native_end][None], use_cache=True)
+        reference_states, native_reference_states = [], []
+        for si in range(prefix, case["stop_span"]):
+            monitor.guard()
+            reference_states.append(reference_response.last_hidden_state[0, -1].cpu())
+            native_reference_states.append(native_response.last_hidden_state[0, -1].cpu())
+            v, _ = model.encode_ink_spans([spans[si]])
+            reference_response = model._body(v[:, :int(counts[si])], past_key_values=reference_response.past_key_values, use_cache=True)
+            left = int(aligned["span_unit_ends"][si - 1])
+            right = int(aligned["span_unit_ends"][si])
+            native_response = model._body(native[left:right][None], past_key_values=native_response.past_key_values, use_cache=True)
+        reference_states = torch.stack(reference_states)
+        reader["cached_vs_full_reference_first_context_cosine"] = context_cosine(reference_states[0].to(device), observation.contexts[prefix-1])
         cached.append(dict(case=case,spans=[s.cpu() for s in spans],counts=counts.cpu(),
                            latents=[v.cpu() for v in observation.glyph_latents],
-                           states=observation.contexts.cpu(),native_states=native_states.cpu(),reader=reader))
+                           states=observation.contexts.cpu(),native_states=native_states.cpu(),reader=reader,
+                           reference_states=reference_states,native_reference_states=torch.stack(native_reference_states)))
+        del reference_response, native_response, prefix_vectors
         del spans,observation,native_states,native,predicted,learned,learned_state,prefix_ink
     # Wrong contexts come from the next complete record's first target state,
     # without consulting any diagnostic error or output quality.
@@ -296,7 +330,7 @@ def diagnose_model(model, name, cases, vectors, output, monitor, device, request
         reconstruction=(model.codec.decode(target_latent)<0).to(torch.uint8).cpu()
         save_grid(reconstruction,directory/'codec.png')
         codec_metrics=image_metrics(reconstruction,gold)
-        other=cached[(ci+1)%len(cached)];wrong=other['states'][other['case']['prefix_spans']-1].to(device)[None]
+        other=cached[(ci+1)%len(cached)];wrong=other['reference_states'][0].to(device)[None]
         arms={};first_context_errors={}
         for arm in ARMS:
             monitor.position={'model':name,'phase':arm,'case':key};monitor.guard()
@@ -311,7 +345,7 @@ def diagnose_model(model, name, cases, vectors, output, monitor, device, request
                     inputs=v[mask][None]
                 current=model._body(inputs,use_cache=True)
                 if arm=='emitted_fixed_counts_8':
-                    err=relative_mse(current.last_hidden_state[:,-1],data['states'][prefix-1].to(device)[None])
+                    err=relative_mse(current.last_hidden_state[:,-1],data['reference_states'][0].to(device)[None])
                     first_context_errors[arm]=err
                     if err**.5>request['first_state_relative_rms_tolerance']:
                         raise ValueError('Reference prefix state does not match causal target indexing')
@@ -319,9 +353,9 @@ def diagnose_model(model, name, cases, vectors, output, monitor, device, request
             for span_index in range(prefix,stop):
                 monitor.guard()
                 if current is not None:state=current.last_hidden_state[:,-1]
-                elif arm=='native_reference_8':state=data['native_states'][span_index-1].to(device)[None]
+                elif arm=='native_reference_8':state=data['native_reference_states'][span_index-prefix].to(device)[None]
                 elif arm=='shuffled_reference_8':state=wrong
-                else:state=data['states'][span_index-1].to(device)[None]
+                else:state=data['reference_states'][span_index-prefix].to(device)[None]
                 count=len(data['spans'][span_index]);steps=64 if arm=='visual_reference_64' else 8
                 length_correct+=int(int(model.writer.length(state.float()).argmax(-1)[0])==count)
                 seed=noise_seed(key,span_index)
@@ -334,7 +368,7 @@ def diagnose_model(model, name, cases, vectors, output, monitor, device, request
                 latent=model.writer.sample(state,count,steps,generator)
                 ink=(model.codec.decode(latent)<0).to(torch.uint8)
                 event=dict(span=span_index,glyphs=count,noise_sha256=noise_sha,ink_sha256=digest_tensor(ink),
-                           context_vs_reference_cosine=context_cosine(state,data['states'][span_index-1].to(device)[None]))
+                           context_vs_reference_cosine=context_cosine(state,data['reference_states'][span_index-prefix].to(device)[None]))
                 if current is not None:
                     v,counts=model.encode_ink_spans([ink])
                     updates=int(data['counts'][span_index]) if arm=='emitted_fixed_counts_8' else int(counts.argmax(-1)[0])+1
@@ -404,7 +438,7 @@ def run(output):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('phase',choices=('prepare','run'))
-    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v1')
+    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v2')
     args=parser.parse_args()
     if args.phase=='prepare':prepare(args.output)
     else:run(args.output)

@@ -120,3 +120,31 @@ centered affine map has rank 383 in 2,048 output dimensions. The
 [per-record geometry](evidence/compact_visual_span_feedback_geometry_20261111.json)
 is retained separately. These capacity/target-error measurements do not
 complete the neural diagnostic or identify the sole language failure cause.
+
+## Causal-cache execution amendment
+
+The first registered neural attempt stopped after 125.07 seconds at its fixed
+prefix consistency check. It retained 25 completed V1 case reports and four
+reference arms of the following book case; the wider model had not loaded.
+Do not treat the partial run as a completed comparison or alter its outputs.
+
+A separately registered one-case probe made twelve body calls and 24 velocity
+calls. With exactly identical prefix embeddings, BF16 full-sequence versus
+prefix-only context has 0.050291 relative RMS difference; FP32 arithmetic on
+the same BF16-rounded weights reduces it to 0.000002592. Erasing future inputs
+at the same sequence shape is bit-equal at the tested prefix in both dtypes.
+The prefix mask/cache flags are also bit-equal in the BF16 comparison. Tiny
+codec/encoder batch differences are measured separately. This identifies a
+shape/precision-dependent numerical discrepancy for this case, without proving
+that it explains the language failure or all other prefixes.
+
+For the replacement diagnostic, compute reference contexts through the same
+prefix prefill and cached updates as generated-image history. Correct reference
+images are fed one span at a time with supplied counts; the native bypass uses
+the matching native prefix and cached updates. Retain the full-record reader
+metrics separately. Keep cases, checkpoints, seeds, eight/64-step sampling,
+other interventions, metrics and the original 0.02 prefix consistency tolerance.
+Do not relax that tolerance. The body-call ceiling becomes 2,056; the velocity
+ceiling remains 41,808. Reuse the exact authenticated native vector payload
+through a hard link after value equality checks. The stopped attempt and
+32.51-second precision probe remain in total diagnostic cost reporting.
