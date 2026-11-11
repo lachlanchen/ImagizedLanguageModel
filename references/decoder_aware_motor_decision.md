@@ -85,7 +85,7 @@ A pilot pass still requires untouched source-group confirmation and the
 full engineering acceptance criteria. A failure requires a different tested
 mechanism, not indefinite continuation of this recipe.
 
-This decision is written after the complete negative language comparison and
-all 128 physical positions are reviewed. The new objective is not implemented,
-registered or trained yet. Maintain the existing verified manuscript while
+This decision was written after the complete negative language comparison and
+all 128 physical positions were reviewed, before implementation, registration
+or fitting of the new objective. Maintain the existing verified manuscript while
 preparing one bounded results/figure revision from these completed comparisons.

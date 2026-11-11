@@ -26,8 +26,9 @@ remains distinct from character/semantic error.
 
 The [next bounded intervention](../references/decoder_aware_motor_decision.md)
 tests a late-time decoded-image loss with the existing continuous flow, frozen
-neural decoder and unchanged data/exposure. Implement and register it before
-fitting. First test the same 128 physical positions; only if both training
+neural decoder and unchanged data/exposure. The loss and paired trainer are
+implemented; register their source/data identities before fitting. First
+test the same 128 physical positions; only if both training
 writing gates pass, run all 216 language streams with the stronger registered
 retention pilot. No new fit has run yet. This physical repair is a hypothesis,
 not a solution to the development transfer gap, input-reading brittleness or

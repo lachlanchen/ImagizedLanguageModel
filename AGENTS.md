@@ -84,7 +84,8 @@ first/later median F1 is 0.986408/0.974518; both fixed physical gates fail.
 The codec remains nearly exact. Many development first-image errors predate
 feedback, and one later nonterminal training state already predicts stopping.
 See the engineering goal and `references/decoder_aware_motor_decision.md` for
-the next bounded objective change; no new fit is implemented or run yet.
+the next bounded objective change. Its decoded endpoint loss and paired
+trainer are implemented; registration and the actual fit remain pending.
 Preserve the completed diagnosis, public pixel archive and original language
 scores. Do not rerun this audit as pending work or call it usable language.
 
