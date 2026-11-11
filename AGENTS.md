@@ -37,6 +37,10 @@ five snapshots, 732 output streams and final pilot are fixed before training.
 The real first-six-update resume check and independent 85-state/initialization
 audit pass; retain their evidence rather than repeating them. Do not rerun indexing or launch
 another worker merely because an observation handle has expired.
+After original complete review/scoring, require the independent four-arm
+QA-erasure audit in `scripts/audit_visual_continuation_protocol.py` before a
+pilot-pass claim. Read `references/visual_continuation_protocol_audit.md`;
+the bound scorer and live training/evaluation sources remain unchanged.
 Preserve the failed mixtures, first-function transfer and writer-only controls.
 Do not prioritize manuscript polish over the unresolved model failure.
 

@@ -181,6 +181,14 @@ pairs, 24/32 readable answers, 4/12 coherent complete long-book continuations,
 all eight union proportional and both fixed successes, and the registered
 erasure checks. A pass must then survive untouched source-group confirmation.
 
+After the original frozen-review scoring, run the
+[independent protocol audit](../references/visual_continuation_protocol_audit.md).
+The bound scorer's pilot expression checks proportional erasures only; the
+registered wording covers all four QA-erasure arms. The supplemental report
+enforces that literal rule while preserving original scores and thresholds.
+Do not claim a pilot pass from the original summary alone. The live pipeline
+and its model/data/schedule stay unchanged.
+
 Do not substitute the old 3,176-question, sixteen-glyph-target subset, repeat
 the completed preflight, extend an unchanged failed recipe, or turn a working
 checkpoint into a language claim. Full training and evaluation are incomplete. Keep the
