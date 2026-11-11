@@ -1,12 +1,36 @@
 # ILM goal and decision history
 
-Archived: 2026-11-11
+Updated: 2026-11-12. Entries retain their original dates.
 
 The active objective, acceptance criteria and experiment priority are in the
 [engineering goal](first-imagized-language-model-goal.md). This archive retains
 earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
+
+## 12 November: active goal consolidated after the balanced-writer result
+
+The [active goal](first-imagized-language-model-goal.md) now separates the full
+objective, acceptance criteria, completed evidence and next model decision.
+It replaces repeated historical scheduling notes that described completed
+reviews, generation and publication work as pending. The complete preceding
+623-line goal remains in Git at
+[20e97f69](https://github.com/lachlanchen/ImagizedLanguageModel/blob/20e97f69/docs/first-imagized-language-model-goal.md).
+Earlier entries below retain their original temporal meaning.
+
+The balanced comparison is complete: proportional QA is 6/32 exact, 0/16
+both-correct pairs and 16/32 readable, with no credited complete book
+continuation. All 64 sampled training tiles in the matched diagnosis are
+pixel-exact. This is a transfer failure to investigate, not usable language.
+All 216 output streams and their review are complete. The publication now has
+35/62/63-page reading/review/redline PDFs and verified Figure 22; local delivery
+is complete, with cloud propagation unverified.
+
+The next plan compares correct preceding glyph images with saved autonomous
+histories under frozen weights, distinguishing conditional transfer, feedback
+and stopping. It is not yet a registered or executed experiment. No new model
+calls, optimizer updates or language scores accompany this goal revision.
+The full one-4090, independently running visual-language objective remains active.
 
 ## 11 November: fixed motor stage completed; native-reader paper updated
 
