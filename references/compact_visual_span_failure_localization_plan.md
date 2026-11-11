@@ -148,3 +148,10 @@ Do not relax that tolerance. The body-call ceiling becomes 2,056; the velocity
 ceiling remains 41,808. Reuse the exact authenticated native vector payload
 through a hard link after value equality checks. The stopped attempt and
 32.51-second precision probe remain in total diagnostic cost reporting.
+
+The replacement's [cached-execution request](evidence/compact_visual_span_diagnosis_cached_registration_20261111.json)
+retains all 32 cases, 201 target spans, checkpoint identities and matched seeds.
+Its native-vector file shares the original authenticated inode. The full
+[precision probe](compact_visual_prefix_precision_result.md) records the
+stopped attempt's cause investigation. The replacement's language outcome
+remains unmeasured until the whole diagnostic is complete and scored.
