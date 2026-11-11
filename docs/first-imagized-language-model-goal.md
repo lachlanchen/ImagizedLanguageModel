@@ -69,6 +69,16 @@ outcome is yet measured. Finish that language evidence before proposing
 another writer-only repair. Any development improvement still requires
 untouched source-group confirmation and independent review.
 
+The [matched saved-state diagnosis](../references/balanced_writer_matched_diagnosis_result.md)
+is complete: all 64 selected training glyphs are pixel-exact, both per-pool
+gates pass, and all 128 positions/512 displayed tiles are independently
+recounted and viewed. Development first-image mean F1 is 0.479076 fixed and
+0.658382 proportional, with 0/32 and 4/32 exact canonical first tiles.
+This gap and the current full-language test remain separate. The fixed-cell
+language stage is running; scores and retention remain unmeasured. Reuse the
+exact live worker and handoff, then complete the proportional stage and
+output-first review. No new fit is authorized by this physical pass.
+
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
 pixels as continuation history. Demonstrate modern Chinese on one RTX 4090
