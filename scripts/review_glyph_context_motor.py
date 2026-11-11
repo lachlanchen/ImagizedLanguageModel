@@ -59,10 +59,13 @@ def prepare(run):
             stopped=actual['stopped'], emitted_glyphs=actual['emitted_glyphs'], elapsed_seconds=actual['elapsed_seconds'],
             source=str((generation/row['id']/'answer.png').relative_to(ROOT)), input_image=row['image'])
     review.mkdir(); pages = review/'pages'; pages.mkdir()
+    prefixes = []
     for opaque, row in mapping.items():
         shutil.copy2(ROOT/row['source'], pages/(opaque+'.png'))
         if row['case'].startswith('book_') and row['condition'] == 'normal':
             shutil.copy2(ROOT/row['input_image'], pages/(opaque+'_prefix.png'))
+            prefixes.append(dict(file=opaque+'_prefix.png', sha256=sha(pages/(opaque+'_prefix.png')),
+                                 original_input=row['input_image']))
     save_json(review/'mapping.json', dict(training_registration_sha256=sha(run/'registration.json'), rows=mapping))
     readings = {k:dict(text=None, uncertain=None, coherent_continuation=None) for k in sorted(mapping)}
     save_json(review/'readings_template.json', dict(evaluator=None, readings=readings))
@@ -85,7 +88,8 @@ def prepare(run):
     require(len(boards) == 54 and len(list(pages.glob('*_prefix.png'))) == 12, 'Complete display coverage required')
     save_json(review/'manifest.json', dict(source_sha256=code, mapping_sha256=sha(review/'mapping.json'),
         generation_reports_sha256={layout:sha(run/('generation_'+layout)/'report.json') for layout in LAYOUTS},
-        original_images=216, opaque_boards=boards, book_prefixes=12,
+        original_images=216, opaque_boards=boards, book_prefixes=12, prefix_bindings=prefixes,
+        unchanged_scorer_sha256=sha(ROOT/'scripts/review_compact_visual_span.py'),
         references_opened=False, original_pixels_repaired=False,
         review_disclosure='One model review with prior cohort familiarity; opaque layout/case identities; no independent human adjudication.'))
     print(json.dumps(dict(actual_output_images=216, opaque_boards=54, book_prefixes=12, references_opened=False)))
@@ -96,6 +100,8 @@ def authenticate_review(run, readings):
     review = run/'review'; manifest = load(review/'manifest.json'); audit = load(review/'reading_audit.json')
     require(code == manifest['source_sha256'] and sha(review/'mapping.json') == manifest['mapping_sha256'],
             'Review source/mapping changed')
+    require(sha(ROOT/'scripts/review_compact_visual_span.py') == manifest['unchanged_scorer_sha256'],
+            'Whole-answer scoring rule changed after review preparation')
     require(audit['readings_sha256'] == sha(readings) and audit['mapping_sha256'] == sha(review/'mapping.json')
             and audit['review_manifest_sha256'] == sha(review/'manifest.json')
             and audit['all216_actual_output_images_viewed'] and audit['all54_boards_actually_viewed']
@@ -107,6 +113,10 @@ def authenticate_review(run, readings):
         require(sha(run/('generation_'+layout)/'report.json') == expected, 'Generation changed after review')
     for key, row in mapping.items():
         require(sha(review/'pages'/(key+'.png')) == row['image_sha256'], 'Viewed output changed')
+    require(len(manifest['prefix_bindings']) == 12, 'Missing book-prefix binding')
+    for prefix in manifest['prefix_bindings']:
+        require(sha(review/'pages'/prefix['file']) == prefix['sha256']
+                == sha(ROOT/prefix['original_input']), 'Viewed book prefix differs from original input')
     for board in manifest['opaque_boards']:
         require(sha(review/board['file']) == board['sha256'], 'Viewed board changed')
         with Image.open(review/board['file']) as surface:
