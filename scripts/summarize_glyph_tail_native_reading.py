@@ -73,13 +73,17 @@ def analyze(run,output):
                     delta=qa_values(rows,references,'normal',paired)-values
                     differences.append(dict(comparison='normal_minus_'+condition,arm=arm,
                         metric='qa_both_correct' if paired else 'qa_complete_exact',**clustered_interval(delta)))
-    glyphs={}
+    glyphs={};glyph_bindings={}
     for layout,receipt,score in [
         ('fixed_cells','glyph_tail_compact_learning_20261111.json','glyph_tail_compact_cohort_v1'),
         ('proportional','glyph_tail_input_presentation_learning_20261111.json','glyph_tail_input_presentation_v1')]:
         public=ROOT/'references/evidence'/receipt;bound=load(public)
         path=ROOT/'artifacts'/score/'review/scores.json'
-        if sha(path)!=bound['scores_sha256']:raise ValueError('Frozen glyph scores changed')
+        expected=(bound['bindings']['review/scores.json'] if layout=='fixed_cells'
+                  else bound['scores_sha256'])
+        if sha(path)!=expected:raise ValueError('Frozen glyph scores changed')
+        glyph_bindings[layout]=dict(public_receipt=receipt,public_receipt_sha256=sha(public),
+            original_scores_sha256=expected)
         glyphs[layout]=[x for x in load(path)['records'] if x['kind']=='qa']
     for layout in ['fixed_cells','proportional']:
         for paired in [False,True]:
@@ -125,7 +129,8 @@ def analyze(run,output):
     result=dict(schema='actual-glyph-native-reading-analysis-v1',registration_sha256=registration_sha,
         generation_report_sha256=sha(run/'execution/report.json'),analysis_source_sha256=sha(Path(__file__)),
         checkpoint_sha256=r['checkpoint_sha256'],expected_prefills_sha256=r['expected_prefills_sha256'],
-        references_sha256=sha(EVALUATION/'references.json'),metrics=metrics,output_counts=counts,
+        references_sha256=sha(EVALUATION/'references.json'),glyph_control_bindings=glyph_bindings,
+        metrics=metrics,output_counts=counts,
         paired_differences=differences,records=records,casewise_native_glyph_contrasts=contrasts,
         adapted_source_prefill_effects=prefill_effects,all448_cases_authenticated=True,
         actual_adapted_image_prefills_bit_exact=192,raw_IDs_text_states_stops_verified=True,
