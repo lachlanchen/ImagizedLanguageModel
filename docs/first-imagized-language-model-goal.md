@@ -103,17 +103,26 @@ objective, with the actual batch weights. It neither predicts language quality
 nor establishes that the fitted encoder reaches that bound. Proceed with the
 registered fit and interpret the actual outputs.
 
+The [flow-head audit](../references/compact_visual_flow_rank_result.md) finds a
+separate architectural restriction: a 384-channel linear output predicts a
+768-dimensional velocity. In the continuous model, 384 Gaussian-noise directions
+remain uncontrolled. Complete the unchanged registered image evaluation. If
+writing fails, test a full-dimensional velocity path before spending more on
+the same narrow writer. Preserve the present model as a control. Removing this
+restriction still requires actual image and language evaluation.
+
 ## Current evidence and unresolved tests
 
 The compact implementation passes CPU gradient and emitted-pixel feedback
 checks. The first fresh CPU invocation of its untrained heads stopped without
-writing. The teacher cache is complete, and the compact GPU fit has started.
-An independently opened checkpoint verifies 1,030 optimizer updates across
-fourteen complete training shards, with finite parameters and all six
-objectives. The observed peak in those shard receipts is 3.820 GiB allocated
-GPU memory. Full training completion, trained standalone replay and held-out
-visual language scores remain pending. See the
-[GPU start evidence](../references/evidence/compact_visual_span_gpu_start_20261111.json).
+writing. The teacher cache and the 8,172-update compact fit are complete. The
+fit covers all 13,785 sequences and 2,380,620 state targets, with five retained
+snapshots and 3.930 GiB peak allocated GPU memory. It took 1,759.83 seconds,
+including 110.11 seconds waiting for host memory pressure. The five-checkpoint
+image evaluation is running; trained standalone replay and held-out language
+scores remain pending. See the
+[complete fit evidence](../references/evidence/compact_visual_span_fit_completed_20261111.json)
+and [earlier independent optimizer check](../references/evidence/compact_visual_span_gpu_start_20261111.json).
 
 The source-matched [Qwen3 1.7B text reference](../references/compact_visual_span_qwen_reference_protocol.md)
 ran the same 44 normal prompts on CPU. Exact scoring gives 8/32 QA answers

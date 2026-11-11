@@ -49,7 +49,7 @@ batches and 2,380,620 supervised state positions. The fit requires the completed
 offline teacher cache. It saves an initial snapshot and four equally spaced
 checkpoints by shard exposure, recording each actual optimizer step. A rerun
 with the same fit configuration resumes at the last completed shard. The
-one-GPU fit has started; held-out evaluation remains pending. See the
+one-GPU fit is complete; held-out scoring remains pending. See the
 [CPU evidence](../references/evidence/compact_visual_span_interface_20261111.json).
 
 An independently opened live checkpoint contains 1,030 completed AdamW updates
@@ -59,8 +59,24 @@ from the initial snapshot, while the fixed feedback normalization buffers
 are unchanged. All six objectives and the saved parameters are finite. The
 largest allocated GPU peak in those fourteen shard receipts is 3.820 GiB.
 This checks actual training execution. Full-pass completion, learned image
-generation and held-out language quality remain unproved. See the
+generation and held-out language quality were unproved at that checkpoint.
+See the
 [GPU start evidence](../references/evidence/compact_visual_span_gpu_start_20261111.json).
+
+The complete pass subsequently finished all 8,172 updates and 108 shards in
+1,759.83 seconds, with 3.930 GiB peak allocated GPU memory. Its 21,260,821
+trainable parameters include the 12,872,213 image parameters and the
+8,388,608-parameter training-only teacher projection. All 13,785 sequences and
+2,380,620 state targets are accounted for. The five saved steps are 0, 1,956,
+4,049, 6,152 and 8,172. See the
+[complete fit receipt](../references/evidence/compact_visual_span_fit_completed_20261111.json).
+
+The trained output projection has rank 384 in the 768-dimensional codec space.
+The [flow-head analysis](../references/compact_visual_flow_rank_result.md)
+shows that its continuous velocity cannot remove Gaussian variation in the
+384-dimensional complement. Actual image readability and answer quality still
+require the registered evaluation. The present model remains the baseline for
+a subsequent test of a full-dimensional velocity path.
 
 ## Run the fit
 
