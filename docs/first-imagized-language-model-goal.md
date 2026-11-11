@@ -4,6 +4,14 @@ Updated: 2026-11-11
 
 ## Immediate direction
 
+The next unresolved measurement is **complete language generation from the
+registered final actual-context motor**, not another architecture proposal.
+Finish both layouts, read every original answer image before reference scoring,
+and decide from complete answers, paired questions, stopping and continuation.
+Keep this order when resuming work. The private handoff records the live owner;
+an interrupted observation must not create a second GPU worker. A failed pilot
+requires a changed, evidence-based hypothesis before further fitting.
+
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
 pixels as continuation history. Demonstrate modern Chinese on one RTX 4090
@@ -269,7 +277,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: localize first writing and target-form coverage
+## Preserved compact baseline and completed measurements
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image

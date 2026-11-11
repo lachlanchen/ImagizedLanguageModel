@@ -30,3 +30,27 @@ case is capped or damaged, retain that exact failure. Do not choose another
 case for a better demonstration. Keep one heavy project worker and the
 existing full-reader resource ceiling; do not launch this replay while either
 generation stage is live. Cold inference is not yet run or passed.
+
+The CPU verifier is `scripts/verify_glyph_context_motor_cold.py`. It refuses
+incomplete generation stages or a remaining project GPU owner, requires its
+sources to be committed, and launches the standalone child from an empty
+working directory with an empty offline model cache. The shared authenticated
+source archive remains available. Every nested event/tensor is compared,
+including the unused final sample produced at a cap. All other project
+training/reference artifact opens are rejected except the exact input, two
+checkpoints, fixed numerical controls and GPU mutex. The file trace cannot
+alone prove tensor-level exclusion of vocabulary payloads inside the shared
+archive; the bound loader and runtime provenance supply that separate check.
+
+Run only after both generation processes have exited:
+
+```bash
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 PYTHONPATH=. \
+  python scripts/verify_glyph_context_motor_cold.py \
+  --output artifacts/glyph_context_motor_cold_v1
+```
+
+The verifier saves the invocation, child log, raw access traces, exact replay
+outputs and verification receipt. An existing destination is preserved. Unit
+checks exercise deep sampled-noise mismatches and directory-relative syscall
+paths; those checks do not substitute for the actual GPU replay.
