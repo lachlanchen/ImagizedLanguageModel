@@ -117,6 +117,12 @@ intermediate checkpoints. The normal and control routes, blind image review,
 scoring and trained cold replay are specified in the
 [evaluation protocol](../references/compact_visual_span_evaluation_protocol.md).
 
+The [learning analysis](../references/compact_visual_span_learning_analysis.md)
+authenticates completed readings and all five checkpoint outputs, then exports
+the language counts, paired passage-group intervals and unchanged example PNGs
+for publication. It requires the completed fit and review. The visual learning
+curve remains unmeasured.
+
 The source-matched Qwen3 1.7B text reference has run on the same 44 normal
 prompts. It matched eight of 32 QA answers and both questions in two of sixteen
 pairs under exact scoring. Its CPU results provide the text baseline for

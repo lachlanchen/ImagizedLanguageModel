@@ -1,0 +1,48 @@
+{
+  "mode": "native_text_reference",
+  "metrics": [
+    {
+      "step": null,
+      "condition": "normal",
+      "metric": "qa_complete_exact",
+      "count": 8,
+      "cases": 32,
+      "mean": 0.25,
+      "ci95": [
+        0.09375,
+        0.4375
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "step": null,
+      "condition": "normal",
+      "metric": "qa_both_correct",
+      "count": 2,
+      "cases": 16,
+      "mean": 0.125,
+      "ci95": [
+        0.0,
+        0.3125
+      ],
+      "groups": 16,
+      "observations": 16
+    }
+  ],
+  "book_coherence_rated": false,
+  "scores_sha256": "d592f01955bf577df699b3eda6d7ad53314f1041f69191a3e9ac9e2aee77d376",
+  "report_sha256": "3fa39d61a6591747215c96042cd8481ee7da6f681565a0399dd6bc31c07d3166",
+  "model": "qwen3:1.7b",
+  "same_gpu_efficiency_measured": false,
+  "evaluation_preparation_sha256": "cfa18a7c351f1751fa654cf062acd722509a34e606f36a6e8fc5c6beca92229b",
+  "source_sha256": "d90953f9e881b5374229d5e4d2940c76e051dcae931294c71c5ade97b042287b",
+  "bootstrap_seed": 202611154,
+  "bootstrap_replicates": 10000,
+  "interval_method": "pointwise percentile bootstrap of sixteen paired passage groups",
+  "interval_limitations": "Small development cohort; no simultaneous coverage or pretraining-exposure guarantee. Constant observations give a degenerate bootstrap interval, not proof of zero population error.",
+  "book_interval_reported": false,
+  "book_interval_reason": "Only two held-out works",
+  "qualification_verdict": "not assessed by this analysis",
+  "trained_visual_language_result": false
+}
