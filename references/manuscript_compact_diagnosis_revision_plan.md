@@ -27,9 +27,13 @@ about the impossibility of visual language.
 - Update `frontmatter.tex` and the relevant introduction/discussion scope
   statements to include the wider negative result. Preserve the distinction
   from the earlier 16/32 clear-answer result on another cohort and metric.
-- Add two native editable PowerPoint figure slides and corresponding PDF/PNG
+- Update the publication README's current result, artifact counts and delivery
+  links after verification. Preserve its explicitly historical result sections.
+- Add three native editable PowerPoint figure slides and corresponding PDF/PNG
   panels: the five-checkpoint V1/wider comparison with the CPU text reference,
-  and the diagnostic physical-writing/reader-alignment measurements. Include
+  and separate diagnostic physical-writing and reader-alignment measurements.
+  Three slides keep the seven native charts and original diagnostic glyphs
+  readable at the existing 1,600-pixel square figure size. Include
   the same fixed wider raw examples or a separately labeled diagnostic display
   as space permits. Preserve every existing figure. Use source CSV/JSON values
   and original PNGs; never draw repaired outputs or infer language curves
@@ -55,5 +59,15 @@ owned Nutstore ILM folder. Retain the previous package. Update the two owned
 latest aliases after checking previous hashes; verify local copies and leave
 cloud propagation unclaimed. Commit and push the completed revision.
 
-Current stage: plan recorded; this revision has not yet changed TeX, figures
-or PDFs. The existing compact V1 paper remains the latest verified package.
+Current stage: TeX and three native editable figure slides are complete.
+Reading/review/redline PDFs compile to 27/47/47 pages without overfull boxes
+or undefined references. All layouts, new panels and changed reading text,
+equations and representative redline pages have been inspected. Seven native
+chart caches match the declared 12-significant-digit workbook snapshots;
+full source values remain bound separately. The original glyph pixels match
+the final PPT and all three PDFs. All prior figure/style bytes, supplement
+and composite deck remain preserved. Local Nutstore verification is recorded
+separately; cloud propagation is not claimed.
+
+The matched-cohort earlier-actor inference is a separately registered model
+comparison. Its as-yet unreviewed outputs are outside this paper revision.

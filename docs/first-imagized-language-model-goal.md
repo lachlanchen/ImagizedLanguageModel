@@ -50,6 +50,16 @@ calling the cohort held out. Preserve the compact failed controls and disclose
 the larger inherited body. This comparison must precede another training branch, so a
 lower parameter count does not replace demonstrated capability.
 
+The [matched-cohort control](../references/glyph_tail_compact_cohort_protocol.md)
+is registered and running with the unchanged earlier actor, all 120 endpoint
+inputs and a 128-glyph cap. CPU preparation authenticates every original input
+and finds zero question-ID, normalized-passage and training-PNG overlap with
+its recorded adaptation data. Inherited pretraining and all earlier ancestors
+remain outside that certification. Generation is not yet reviewed or scored.
+Complete the opaque output review, fixed-case cold replay and authenticated
+scoring before selecting another fit. Keep the 7.522B inherited visual/contextual
+parameter cost visible; this is not a controlled test of model size alone.
+
 Reject the unchanged compact joint recipe and a sampler-only repair. Choose
 one bounded reader/writer intervention from the completed diagnostics and
 matched-cohort control. A native-context writing fit remains a possible
@@ -59,11 +69,12 @@ trained semantic glyph loop before repeating the same approach. A development
 improvement needs untouched source groups before broader claims. Copying,
 finite losses, rank checks and presentation quality do not replace language.
 
-The V1 Nature-style article revision and its four editable measured figures
-are complete. The wider result and completed failure-localization diagnostic now have
-authenticated measurements and raw examples. Incorporate both in a bounded
-revision with editable measured charts and matched TeX/PDFs. Model diagnosis takes priority over
-additional cover art or presentation work.
+The Nature-style article now includes both failed fits and the completed
+failure-localization diagnostic. Reading/review/redline PDFs have 27/47/47
+pages, with three additional native PowerPoint figures containing seven
+measured charts and original diagnostic glyphs. The current unreviewed
+matched-cohort outputs are outside that revision. Model diagnosis and readable
+held-out answers take priority over additional presentation work.
 
 ## Goal and acceptance criteria
 

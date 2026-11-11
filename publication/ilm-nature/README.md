@@ -6,13 +6,39 @@ V-SPICE v13.7 manuscript template: a two-column article, a matching review
 copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
-The [change-marked article](redlined_manuscript.pdf) compares the Figure 11
-revision with the glyph-feedback draft at `f7f91826`. The
+The [change-marked article](redlined_manuscript.pdf) compares the completed
+compact diagnostics with the compact-sequence draft at `97aa1588`. The
 [supplement redline](redlined_supplementary_information.pdf) uses the
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
 and earlier baselines remain available for reproduction.
 
 ## Current result
+
+Both compact complete-sequence fits give **0/32 complete exact QA answers**
+and **0/16 both-correct pairs** at all five checkpoints. The wider writer
+removes a measured rank restriction but does not repair language. A frozen
+diagnostic finds writing failure before generated feedback, despite near-exact
+codec reconstruction. Additional sampling steps do not fix it. The reader
+also has a measured affine target-alignment restriction. These results do not
+establish a usable visual language model.
+
+The current package contains a **27-page article**, **47-page review** and
+**47-page article redline**. Figures 12–15 preserve the compact V1 trajectory
+and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
+add three editable slides with seven native measured charts and original
+diagnostic glyphs. The supplied-reference diagnostic scores remain separate
+from autonomous language accuracy. See the
+[wider result](../../references/compact_visual_span_full_rank_result.md) and
+[failure localization](../../references/compact_visual_span_diagnosis_result.md).
+The 100-page supplement and 57-slide composite deck remain unchanged.
+
+![Frozen conditional-writing diagnostic](figures/Figure_17_compact_writing_diagnosis.png)
+
+The current local delivery is `ILM_NatureStyle_20261111_CompactDiagnosis` in
+Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
+The previous versioned packages remain available.
+
+## Earlier restricted answer results
 
 Contextual adaptation gives **16/32 clear complete answers versus 11/32** for
 a fixed-body readout control, on sixteen reserved contexts with two questions
@@ -60,7 +86,7 @@ body's acquisition and pretraining. Historical scripts, English transfer,
 unknown glyphs and an efficiency advantage at matched language quality remain
 unvalidated. **Notes 58–59 and Figures S36–S38** report the measurements.
 
-The package contains an **18-page article, 34-page review and 100-page
+That earlier package contains an **18-page article, 34-page review and 100-page
 supplement**, with matching redlines (34/100 pages). The composite editable deck has
 **57 slides and 65 native charts**. All 53 previous slide appearances and
 57 chart parts are preserved. The new figures use actual unrepaired model

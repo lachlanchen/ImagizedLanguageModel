@@ -65,8 +65,7 @@ contracted or conditioned by this continuous velocity model. Terminal
 normalization can restrict the varying output further. The result is an
 exact-arithmetic capacity statement, not a hardware-exact sampler identity or
 proof of the sole cause of failed answers. A separately registered 1,024-channel
-writer comparison checks the centered output map and velocity Jacobians;
-its trained language outcome remains unmeasured here.
+writer comparison removes this tested restriction, as evaluated below.
 
 \plate{Figure_12_compact_trajectory}{\textbf{Complete-answer performance across the compact full-sequence fit.}
 \textbf{a}, Complete exact QA answers among 32 questions at five fixed
@@ -101,3 +100,101 @@ original outputs are retained, including the three early blank responses.
 Later nonblank writing does not establish readable coherent continuation.
 The complete input, original pixel streams, source hashes and all endpoint
 controls remain in the evidence.}{fig:compact-book}
+
+\subsection*{Removing the writer rank restriction is insufficient}
+The controlled comparison changes the writer width from 384 to 1,024 while
+preserving the corpus, exposure, six objectives, optimizer schedule and seed.
+The initial encoder, length head and teacher projection match the compact
+control. The wider writer's output projection, centered map and three tested
+local velocity Jacobians have rank 768 before and after fitting. Its image
+parameters increase to 48,547,733, with the same 8,388,608-parameter
+training-only projection. One pass again completes 8,172 updates. Fitting
+takes 1,945.56 seconds, including 150.14 seconds of resource waiting, with
+4.889 GiB peak allocated GPU memory.
+
+All five wider-writer checkpoints still give 0/32 complete exact QA answers
+and 0/16 both-correct pairs (Fig.~\ref{fig:compact-wider}). Another opaque
+review retains all 372 outputs: twenty-four are blank and 348 have uncertain
+whole transcriptions. No readable complete book continuation is established.
+The final normal cohort contains thirteen predicted stops, thirty-one
+budget-limited streams and four blanks. All erased-input QA scores remain
+zero. The separate trained cold child reproduces its fixed pixel stream and
+feedback without observed forbidden accesses. Its wrapper terminated before
+writing verification, for an unknown reason; the completed original child
+traces permit CPU-only recovery without rerunning inference. Removing the
+rank restriction therefore does not solve language under this recipe.
+
+\subsection*{Conditional writing fails before emitted feedback}
+We localize the failure with frozen weights in both final checkpoints.
+The fixed diagnostic contains eight QA and eight book records from each of
+the training and development partitions. At most eight following spans per
+record give 201 spans, containing 122 training and 131 development glyphs.
+Every writer arm receives the reference next-span length. Controlled history
+and count supplies separate physical writing from autonomous inference.
+
+Correct image history with eight sampling steps gives foreground F1 of
+0.3801/0.3477 on training/development targets for V1 and 0.3720/0.3518 for
+the wider writer (Fig.~\ref{fig:compact-writing-diagnosis}). Direct codec
+reconstruction exceeds 0.9998 F1 and exactly reconstructs 117/122 and
+128/131 glyphs. Increasing the writer to 64 sampling steps does not repair
+writing. A native-embedding bypass, which changes the conditioning
+distribution, also remains poor. These supplied-target F1 values measure
+pixel reconstruction, not semantic answer quality.
+
+The first target spans contain twenty training and twenty-six development
+glyphs. Both models have zero exact matches under correct history. Their
+first outputs are identical to the emitted-history arm, before feedback can
+diverge. Generated-history drift alone cannot explain these failures.
+Later emitted-history arms deteriorate further. All reference lengths remain
+supplied, so none of these arms is a new autonomous language result.
+
+The reader has a separate restriction. Its 384-channel terminal-normalized
+feedback head has a 383-dimensional affine family for 2,048-dimensional
+native targets. Even after relaxing preceding image-network constraints,
+the best possible relative squared error on selected source positions is
+0.5705/0.5768 for V1 and 0.5685/0.5754 for the wider fit, compared with
+achieved errors around 0.75 (Fig.~\ref{fig:compact-reader-diagnosis}).
+These are target-alignment bounds under the fixed trained heads, not
+language-quality bounds. No complete prompt grouping exactly matches the
+reference in either model, despite high local count accuracy and contextual
+cosines. Those representation diagnostics do not establish comprehension.
+
+An initial prefix-consistency interruption led to a separate one-case
+precision probe. Full versus truncated BF16 evaluation gives relative RMS
+error 0.05029; FP32 arithmetic on the same rounded weights reduces it to
+$2.59\times10^{-6}$. Same-shape future erasure is bit-equal. The completed
+diagnostic uses matching cached execution and retains the original
+consistency tolerance. It takes 260.16 seconds with 3.401 GiB peak allocation
+and no optimizer updates. The stopped attempt, probe and CPU preparations
+bring these registered stages to 467.24 seconds. The evidence rejects an
+unchanged compact fit or a sampler-only repair, without identifying a single
+cause of all failed answers.
+
+\plate{Figure_16_compact_wider}{\textbf{The wider writer preserves the complete-answer failure.}
+\textbf{a,b}, Complete exact QA and both-correct passage pairs at all five
+fixed checkpoints. The two visual curves overlap at zero. The same native-text
+CPU reference is shown for task quality. Constant group-bootstrap observations
+give [0, 0] intervals, without establishing zero population success.
+\textbf{c}, Predicted stops and budget-limited streams in all 44 normal inputs
+per model/checkpoint. Blanks remain included. Both fits retain all 372 outputs;
+each review has one model reviewer with prior dataset familiarity and no
+independent human adjudication.}{fig:compact-wider}
+
+\plate{Figure_17_compact_writing_diagnosis}{\textbf{Frozen-weight writing with explicit reference supplies.}
+\textbf{a,b}, Aggregate foreground F1 against the 122 training and 131
+development target glyphs. Every writer arm receives reference output lengths.
+History and update counts vary as labeled. Native history is an explicit
+source-embedding diagnostic bypass, not deployed image inference. Both
+models fail the first target span before emitted feedback. Codec fidelity
+and the supplied-reference measurements are separate from autonomous
+language accuracy. These selected diagnostics have no generalization interval.}{fig:compact-writing-diagnosis}
+
+\plate{Figure_18_compact_reader_diagnosis}{\textbf{Reader alignment and unrepaired diagnostic outputs.}
+\textbf{a,b}, Native-position-weighted achieved relative squared error and
+the best affine-family error floor for each trained head. The floor relaxes
+preceding image-network constraints and is not a language bound.
+\textbf{c}, The first registered development QA example, showing original
+reference, codec and writer pixels at exact nearest-neighbour enlargement.
+The deterministic display rule was added during analysis, not preregistered.
+Reference supplies and incorrect glyphs remain visible. No OCR replacement
+or output repair was applied.}{fig:compact-reader-diagnosis}
