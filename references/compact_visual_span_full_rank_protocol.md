@@ -148,3 +148,22 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/verify_full_rank_visual_span
 
 It uses the same fixed book input, syscall access audit and exact pixel/PNG,
 stopping and feedback comparison as V1. The wider-writer replay is not yet run.
+
+## Complete fit, before language scoring
+
+The registered pass has completed all 8,172 optimizer updates and 108 unique
+shards, with all 13,785 sequence exposures and 2,380,620 causal state targets
+accounted for. Final optimizer counters all equal 8,172; the six objectives
+and saved image parameters are finite. Its five snapshot steps remain
+0, 1,956, 4,049, 6,152 and 8,172. The final image-head SHA-256 is
+`c54e6ac462c112eac1ba36f5b0d51b7b05d86fbedf53da6702a0f82976533f85`.
+
+Elapsed fit time is 1,945.56 seconds, including 150.14 seconds of resource
+waiting. Peak allocated GPU memory is 4.889 GiB. The actual trained projection,
+LayerNorm-centered map and three fixed local velocity Jacobians retain rank
+768 in the same float64 mathematical audit. Those checks remove the identified
+fixed dimensional restriction; they do not establish readable conditional
+writing, global invertibility or a hardware sampler guarantee. See the
+[complete fit receipt](evidence/compact_visual_span_full_rank_completed_20261111.json).
+The five-checkpoint image evaluation is running; language scoring and trained
+cold replay remain pending.

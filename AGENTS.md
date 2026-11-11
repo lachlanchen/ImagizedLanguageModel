@@ -25,6 +25,12 @@ before launching. If that comparison fails, diagnose visual access, conditional
 writing and emitted-history drift before choosing another change. Reuse the
 completed corpus and teacher cache unless measured evidence requires new data.
 
+The registered 1,024-channel writer fit is now complete. Its fixed image
+evaluation is in progress. Finish that comparison, its opaque review and
+trained cold replay before starting another model branch. Capacity and finite
+losses do not establish language success; use the engineering goal for the
+current measured state.
+
 ## Always Commit and Push After Change
 
 Policy: After making any change to files in this repository (e.g., via `apply_patch` or manual edits), create an atomic commit and push it to the tracked branch.

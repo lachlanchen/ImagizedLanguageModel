@@ -35,9 +35,16 @@ single-GPU fit has started. An independent saved-state inspection verified 419
 optimizer updates over six shards, finite parameters and all six losses, and
 the exact registered initial encoder and wider writer. See the
 [training execution evidence](../references/evidence/compact_visual_span_full_rank_start_20261111.json).
-Full-pass completion and generated-language results for the new writer remain
-unproved. Finish the same full corpus and five-checkpoint evaluation before
-another model change. Treat its final checkpoint as the primary comparison.
+The wider fit has subsequently completed all 8,172 updates over 108 unique
+shards and the same 13,785 sequences. It took 1,945.56 seconds, including
+150.14 seconds of resource waiting, with 4.889 GiB peak allocated GPU memory.
+All final optimizer counters equal 8,172. The trained output projection,
+LayerNorm-centered map and three tested local velocity Jacobians retain rank
+768. See the [complete fit and capacity evidence](../references/evidence/compact_visual_span_full_rank_completed_20261111.json).
+The fixed five-checkpoint image evaluation is running; generated-language
+results for this writer remain unproved. Finish all 372 outputs, opaque review,
+scoring and trained cold replay before another model change. Treat its final
+checkpoint as the primary comparison.
 
 ## Goal and acceptance criteria
 
