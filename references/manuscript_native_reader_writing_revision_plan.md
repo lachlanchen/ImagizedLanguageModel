@@ -22,7 +22,7 @@ deck changes. Preserve source baselines and prior delivery packages.
 - `article_content.tex`: extend the experiment-map introduction and Discussion
   with these completed diagnoses. Keep inherited-weight disclosure, unknown
   pretraining exposure and unproved usable-language/efficiency claims.
-- `compact_sequence_results.tex`: append one subsection and Figure20. Report
+- `compact_sequence_results.tex`: append one subsection and Figure 20. Report
   every native arm, erasures, mixed adapter effects, pointwise uncertainty,
   matched-prefill identity and complete target coverage. Explain that a
   canonical first-pixel mismatch can reflect valid wording or readable strokes.
@@ -70,5 +70,39 @@ versioned local Projects/ILM package and update only the owned latest aliases
 under hash guards. Verify local copies; cloud propagation remains unverified.
 Commit and push the completed revision unit, and record actual page counts.
 
-Status: plan recorded before manuscript or figure authoring. Builds, visual
-verification and local delivery are not yet complete.
+Status: authoring, builds and visual verification are complete. The article,
+review and redline have 31/54/55 pages. All 25 selected changed/continuation pages
+were visually inspected. The new slide was inspected in Artifact Tool and a
+lossless Office PDF export. The
+[build receipt](../publication/ilm-nature/evidence/native_reader_writing_publication_build.json)
+binds the checked files. Local delivery status comes from the separately
+verified selected-package receipt, without claiming cloud propagation.
+
+During the first draft, the native Excel-workbook snapshot rejects the full
+17-digit binary floating-point literals for physical F1. The second figure
+stage therefore plots F1 rounded explicitly to six decimal places, matching
+its displayed labels. Full-precision measured values remain in the bound JSON
+and figure receipt. All integer counts and every source pixel remain exact.
+This is display rounding, not changed scoring. Preserve the first failed
+export and verify the second chart cache/workbook against the declared rounded
+snapshot. Shorten the outcome note and use two-line category labels to keep
+the middle panels aligned without reducing the scientific content.
+The authoring API does not expose numeric data-label formatting. An explicit
+native-XML formatting step sets the physical-F1 chart labels to six decimal
+places before finalization, preventing LibreOffice from inheriting a two-place
+axis format and displaying0.999934as1.00. It leaves all values, formulas,
+workbooks and image bytes unchanged; verify the native format and exported PDF.
+Default Office PDF export applies JPEG compression even to the binary glyph
+tiles. The exact-pixel audit rejects that export. The final conversion must
+set `UseLosslessCompression=true` and `ReduceImageResolution=false`; retain
+the rejected draft and verify all twelve original tile occurrences before
+rebuilding the matching article PDFs. Build commands run from the manuscript
+directory so its relative style/input paths resolve consistently.
+Two source-baseline entries are Git LFS pointers. Their immutable content
+OIDs, sizes and pointer hashes bind the actual unchanged supplement PDFs;
+comparing a pointer-file hash to a materialized PDF is invalid. The corrected
+baseline snapshot preserves both identities. All 218 prior assets match.
+The Artifact Tool object preview abbreviates fractional F1 labels in milli
+notation; the final native chart's explicit six-place format and Office PDF
+show 0.999934, 0.492173 and 0.632918. The delivered PNG comes from that lossless PDF,
+not the object preview. No native PowerPoint application test is claimed.

@@ -8,6 +8,37 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: fixed motor stage completed; native-reader paper updated
+
+The actual-context candidate completes and authenticates all 120 fixed-cell
+streams in 3,442.608 seconds, with 12 predicted stops and 108 caps. Whole-answer
+readings and language scores remain unmade. The 96 proportional streams run
+next under the same registered EMA, sample seeds and algorithm. A complete
+output-first review, unchanged scoring, retention and untouched confirmation
+remain required. No second fit or sampler adaptation is authorized by these
+endpoint observations. The full independent usable-language goal stays active.
+
+The separate completed native 448-call diagnosis and 192-stream first-writing
+audit enter the Nature-style manuscript under the
+[bounded revision](../references/manuscript_native_reader_writing_revision_plan.md).
+Article/review/redline PDFs have 31/54/55pages. Figure 20 contains four editable
+charts and twelve original first-tile excerpts, keeping physical support
+distinct from complete language. All 25 selected text/math/caption/figure pages
+are visually checked. Four chart caches and literal workbooks match; every
+source-tile occurrence survives losslessly in the figure and all three article
+PDFs. All 218 checked prior assets, the 100-page supplement and 57-slide composite
+deck remain unchanged. The redline keeps the immutable 0f14fa3f baseline.
+
+The versioned local package `ILM_NatureStyle_20261111_NativeReading` has 472
+verified files plus its separately verified receipt. Owned latest aliases
+match the new PDFs and all 443 prior package files are unchanged. Cloud
+propagation is unverified. Default JPEG export is rejected by the exact-pixel
+audit; lossless export fixes it without modifying source strokes. A chart-label
+format step retains six decimal places in native/Office rendering. Full F1
+precision remains in source evidence, and LFS baseline pointers resolve to
+their immutable content OIDs. The running motor trial is outside this paper
+revision; its unmeasured quality is not presented as a learning result.
+
 ## 11 November: actual-context conditional motor fitted and audited
 
 The next motor is implemented and registered before fitting. It conditions on

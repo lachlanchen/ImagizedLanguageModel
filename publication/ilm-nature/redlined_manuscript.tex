@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 11 17:15:29 2026
-%DIF ADD new.tex   Wed Nov 11 17:15:29 2026
+%DIF DEL old.tex   Wed Nov 11 19:47:30 2026
+%DIF ADD new.tex   Wed Nov 11 19:47:30 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -135,7 +135,7 @@
 \noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 0f14fa3f compact-diagnosis draft are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous interfaces that read and emit glyph images, with generated pixels supplying subsequent history. Externally pretrained foundations provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. A \DIFdelbegin \DIFdel{restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its qualification. A separate }\DIFdelend compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions. Two 8,172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory\DIFdelbegin \DIFdel{. Both }\DIFdelend \DIFaddbegin \DIFadd{, yet }\DIFaddend score zero complete exact QA answers out of 32 at all five checkpoints. A wider writer removes a measured velocity-rank restriction without solving language. Frozen\DIFdelbegin \DIFdel{-weight}\DIFdelend  diagnostics \DIFdelbegin \DIFdel{show that writing fails }\DIFdelend \DIFaddbegin \DIFadd{expose conditional-writing failure }\DIFaddend before generated feedback \DIFdelbegin \DIFdel{, despite near-exact codec reconstruction; additional sampling steps do not repair it. The reader also has }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment }\DIFdelend \DIFaddbegin \DIFadd{separate reader-alignment }\DIFaddend restriction. \DIFaddbegin \DIFadd{On the same question cohort, an earlier actor retaining 7.522B visual and contextual parameters gives two exact answers. Full-prompt proportional input raises this to six with unchanged weights, but loses the one fully correct question pair and an earlier readable answer. }\DIFaddend Cold replays verify independent pixel-feedback execution for fixed cases. These \DIFdelbegin \DIFdel{results separate execution}\DIFdelend \DIFaddbegin \DIFadd{controls distinguish limited inherited transfer}\DIFaddend , \DIFdelbegin \DIFdel{physical writing }\DIFdelend \DIFaddbegin \DIFadd{execution }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend \DIFaddbegin \DIFadd{reliable }\DIFaddend language \DIFdelbegin \DIFdel{success}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{Reliable }\DIFdelend \DIFaddbegin \DIFadd{Usable }\DIFaddend open-ended \DIFdelbegin \DIFdel{generation}\DIFdelend \DIFaddbegin \DIFadd{writing}\DIFaddend , historical-form transfer and a matched-quality efficiency advantage remain unresolved.}\par\bigskip
+\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous interfaces that read and emit glyph images, with generated pixels supplying subsequent history. Externally pretrained foundations provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. A \DIFdelbegin \DIFdel{restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its qualification. A separate }\DIFdelend compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions. Two 8,172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory\DIFdelbegin \DIFdel{. Both }\DIFdelend \DIFaddbegin \DIFadd{, yet }\DIFaddend score zero complete exact QA answers out of 32 at all five checkpoints. A wider writer removes a measured velocity-rank restriction without solving language. Frozen\DIFdelbegin \DIFdel{-weight}\DIFdelend  diagnostics \DIFdelbegin \DIFdel{show that writing fails }\DIFdelend \DIFaddbegin \DIFadd{expose conditional-writing failure }\DIFaddend before generated feedback \DIFdelbegin \DIFdel{, despite near-exact codec reconstruction; additional sampling steps do not repair it. The reader also has }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment }\DIFdelend \DIFaddbegin \DIFadd{separate reader-alignment }\DIFaddend restriction. \DIFaddbegin \DIFadd{On the same question cohort, an earlier actor retaining 7.522B visual and contextual parameters gives two exact answers. Proportional input raises this to six with unchanged weights, but loses the one fully correct pair and an earlier readable answer. External native decoding gives ten exact proportional answers from matched first states. All 32 first target forms have training coverage, and supplied-image reconstruction is pixel-exact for 31, without establishing correct conditional writing. }\DIFaddend Cold replays verify independent pixel-feedback execution for fixed cases. These \DIFdelbegin \DIFdel{results separate execution}\DIFdelend \DIFaddbegin \DIFadd{controls distinguish inherited answer access}\DIFaddend , physical \DIFdelbegin \DIFdel{writing }\DIFdelend \DIFaddbegin \DIFadd{support }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend language \DIFdelbegin \DIFdel{success}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{Reliable }\DIFdelend \DIFaddbegin \DIFadd{Usable }\DIFaddend open-ended \DIFdelbegin \DIFdel{generation}\DIFdelend \DIFaddbegin \DIFadd{writing}\DIFaddend , historical-form transfer and a matched-quality efficiency advantage remain unresolved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -179,8 +179,10 @@ experiment then fits complete book and question--answer sequences and measures
 all five saved checkpoints. A controlled wider writer and frozen-weight
 interventions then test the sources of failure. \DIFaddbegin \DIFadd{A matched earlier-actor
 control and full-prompt presentation comparison subsequently test retained
-image-answer transfer on the same question cohort. Their partial gains and
-lost question pair remain distinct from new language learning. }\DIFaddend The contributions are the
+image-answer transfer on the same question cohort. Matched native decoding
+and a first-writing audit then distinguish retained answer access from
+physical form support. Their partial gains and lost question pair remain
+distinct from new language learning. }\DIFaddend The contributions are the
 explicit emitted-pixel interface, controlled language tests, reproducible
 single-GPU execution and measured writer/reader restrictions. None establishes a generally
 usable visual language model or a from-scratch language learner.
@@ -1419,6 +1421,82 @@ or OCR replacement. Opaque readings come from one model reviewer with prior
 cohort familiarity and no independent human adjudication. The registered
 retention rule fails, and no new training is performed.}{fig:glyph-input-transfer}
 
+\subsection*{\DIFadd{Native answer access exceeds glyph strict matching}}
+\DIFadd{The completed native-reader diagnosis authenticates 448 calls and reproduces
+all 192 adapted image-prefill states bit-for-bit from actual glyph generation.
+An external native lexical decoder receives those states; its tokenizer,
+output projection and previous-symbol embeddings never enter the ILM.
+Adapted native continuation gives 4/32 exact fixed-cell answers and 10/32
+proportional answers, versus the glyph actor's 2/32 and 6/32
+(Fig.~\ref{fig:native-reader-writing}a,b). Both-correct pairs are 1/16 in
+each adapted native image arm, versus 1/16 and 0/16 through glyph output.
+The proportional native-minus-glyph exact difference is 12.5 percentage
+points, with a pointwise 95\% passage-group interval of 0--25 points.
+These are reused-development contrasts, not untouched confirmation.
+}
+
+\DIFadd{Seven proportional cases are exact only through native continuation, three
+only through glyph output, three through both and nineteen through neither.
+Six native-only cases have uncertain whole glyph readings; the seventh omits
+a canonical alias. The three glyph-only cases instead have native wording or
+punctuation differences, without establishing native semantic error. The lost
+area answer remains exact through native continuation while its proportional
+glyph stream is unreadable. Retained native access therefore exposes a
+writing/continuation gap without identifying a unique mechanism.
+}
+
+\DIFadd{Disabling contextual adapter outputs changes native exact scores to 2/32
+fixed-cell and 13/32 proportional. Complete text controls give 11/32 adapted
+and 10/32 with adapter outputs disabled. Proportional-minus-fixed native gains
+are 18.75 points }[\DIFadd{6.25, 31.25}] \DIFadd{adapted and 34.375 points }[\DIFadd{21.875, 50}] \DIFadd{with
+adapter outputs disabled. Layout brittleness thus extends to native reading;
+mixed adapter effects do not justify globally replacing the deployed body.
+All eight question- or passage-erased image arms give zero exact answers.
+The helper produces no new ILM images or optimizer updates.
+}
+
+\DIFadd{The subsequent CPU audit authenticates all 192 original QA glyph streams and
+their first-state bindings. Before scoring, the rasterizer reproduces every
+one of 4,096 primitive characters and all 745 canonical target tiles exactly.
+All 32 first forms have primitive coverage. Supplied-image reconstruction is
+31/32 pixel-exact at those first positions, with mean foreground F1 0.999934.
+Original normal first images instead have mean canonical F1 0.492173 fixed-cell
+and 0.632918 proportional, with 0/32 and 3/32 exact bitmaps. These are physical
+comparisons, not character or semantic accuracy: both exact complete fixed-cell
+answers have nonidentical first pixels, and valid alternative wording can
+begin with another form.
+}
+
+\DIFadd{Across full canonical answers, 743/745 positions have training-primitive
+coverage; two absent forms occur later, leaving thirty complete answers fully
+covered. Supplied reconstruction is exact at 726/745 positions, with mean
+F1 0.999220. The covered subset has mean F1 0.999933; the two absent forms
+give 0.734417. Coverage describes exposure rather than a hard decoder
+vocabulary. No stream stops before its first image. These controls reject
+missing first forms or poor direct reconstruction as a general explanation
+for initial damage, while retaining wording, later writing, stopping and
+feedback limitations. Complete glyph-language scores remain unchanged.
+}
+
+\plate{Figure_20_native_reader_writing}{\textbf{Retained answer access and physical support do not ensure glyph language.}
+\textbf{a,b}, Complete strict QA and both-correct pairs for the external native
+decoder and original glyph actor. Native source disables contextual adapter
+outputs; it is not a separately evaluated image-output model. All original
+questions remain. Native source-unit and glyph budgets use different units.
+\textbf{c}, Mean foreground F1 of the first image against its canonical tile.
+The supplied-image encoder/decoder receives the answer. First-pixel agreement
+does not grade character identity, meaning or complete-answer quality.
+\textbf{d}, Strict native/glyph outcome groups for the 32 proportional cases.
+Native-only includes six uncertain glyph readings and one alias omission;
+glyph-only includes native wording/punctuation differences. \textbf{e}, Twelve
+original first-tile excerpts for three retrospectively selected cases: early
+damage, an exact first image with a later alias omission, and a different
+answer prefix. Tiles retain original pixels at a common scale, without stroke
+repair. All 32 labelled first-image comparisons and 192 complete original
+streams remain in the evidence. There is one model reviewer with prior cohort
+familiarity and no independent human adjudication. No new ILM generation or
+training is performed by these controls.}{fig:native-reader-writing}
+
 
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
@@ -1437,17 +1515,22 @@ wider-writer comparison removes the tested restriction but retains zero
 complete exact QA answers at every checkpoint. Correct-history diagnostics
 show writing failure before generated feedback, while a separate reader
 restriction limits native-target alignment. These results reject the unchanged
-joint recipe and a sampler-only repair. The \DIFdelbegin \DIFdel{next model decision requires a
-matched-cohort readable control
-, followed by fresh }\DIFdelend \DIFaddbegin \DIFadd{matched earlier-actor control
+joint recipe and a sampler-only repair. The \DIFdelbegin \DIFdel{next model decision requires a matched-cohort readable control, followed by fresh }\DIFdelend \DIFaddbegin \DIFadd{matched earlier-actor control
 retains two exact answers and one fully correct question pair on the same
 cohort. Full proportional prompts raise exact answers to six but lose that
 pair and an earlier readable answer, failing the registered retention rule.
 This establishes presentation sensitivity and limited inherited transfer,
 without establishing a consistently better interface or new learning.
-Further model changes require separate tests of visual access, conditional
-writing and generated-history feedback, followed by untouched }\DIFaddend source groups
-and independent review after any development improvement.
+The matched native continuation gives ten exact proportional answers from
+the same adapted first states, while its lexical decoder remains outside the
+ILM. Native reading also depends strongly on layout. All first target forms
+have primitive coverage and supplied reconstruction is nearly exact, yet some
+original first forms are already damaged. Canonical pixel mismatch can also
+reflect readable strokes or different wording. Neither missing first forms
+nor later feedback alone explains every failed answer. Further model changes
+require controlled tests of conditional writing, stopping and generated-history
+feedback, followed by untouched }\DIFaddend source groups and independent review after
+any development improvement.
 
 An image interface enlarges the representable output space, including the
 possibility of forms absent from a character encoding. It does not remove the
@@ -1748,7 +1831,79 @@ signed pixels, states, stopping and feedback. The unchanged command-line
 viewer lays out a long row rather than the suite grid; exact tensors and
 display pixels, rather than PNG layout bytes, verify the proportional replay.
 No observed forbidden corpus, reference or font access or IP connection occurs.
-These are fixed-case boundary checks, separate from language accuracy}\DIFaddend .
+These are fixed-case boundary checks, separate from language accuracy.
+}
+
+\subsection*{\DIFadd{Matched native continuation and first-writing audit}}
+\DIFadd{The native diagnostic keeps all 32 questions, both full image presentations,
+normal inputs and both erased controls. Each image case runs with the learned
+contextual adapters and with their output matrices set to zero, giving 384
+image calls. Complete text prompts give 32 calls per adapter condition,
+for 448 calls total. One shared body executes the conditions serially.
+All 192 adapted image-prefill vectors match the actual glyph actor's saved
+first states exactly. The source-adapter control changes that contextual
+condition; it does not authorize replacing the deployed image-output actor.
+}
+
+\DIFadd{The native tokenizer, vocabulary projection and previous-symbol embedding
+lookup remain helper-only variables. The BF16 source projection contracts
+with each FP32 contextual vector in ascending 4,096-row chunks using FP32
+arithmetic, with lower source index breaking exact ties. Greedy continuation
+ends at a source terminal symbol or 128 source units. This cap differs from
+the glyph actor's 128 emitted images, so neither output lengths nor costs
+form a matched-unit efficiency comparison. Raw source IDs, selected logits, decoded
+texts, hidden states and ending decisions are retained. CPU scoring verifies
+every case and original glyph-score binding. A score-receipt schema lookup
+is corrected without regeneration or any change in references or matching.
+Whitespace-only normalization, natural ending and distinct paired answers
+retain the original strict scoring rules. No semantic regrading is added.
+}
+
+\DIFadd{Native and glyph differences use 10,000 paired whole-passage bootstrap draws
+with seed 202611154 and pointwise 95\% intervals. The same sixteen passage
+groups define all comparisons. Unknown inherited pretraining exposure,
+development reuse and prior output familiarity remain limitations. Native
+execution takes 2,838.924\,seconds, including 158.819\,seconds setup and 180.172\,seconds
+pressure waiting, at 18.947\,GiB peak allocated GPU memory. It makes no optimizer
+update or new ILM image; acquisition and earlier adaptation remain excluded
+costs.
+}
+
+\DIFadd{The subsequent CPU preparation authenticates all 192 original QA streams,
+first states, stop decisions and signed-image/PNG/feedback bindings. Canonical
+target compatibility is checked against the original Noto CJK SC collection
+face 2, size 26, baseline 26 and 32-square binary rasterization. All 4,096 selected
+primitive characters reproduce their 4,087 unique image arrays, and all 745
+source target tiles reproduce exactly before neural scoring. Character and
+exact-bitmap membership are counted separately over all first and later
+targets, without removing absent forms. The evaluator-only inventory never
+enters inference.
+}
+
+\DIFadd{For target ink image $I$, the answer-supplied physical control computes
+}\[
+ \widetilde I=\mathbf 1\!\left[
+ \sigma\!\left(D(E(1-2I))\right)\geq\tfrac12\right],
+\]
+\DIFadd{where $E$ is the frozen image encoder and $D$ includes the frozen motor
+projection and image decoder. Batches of 32 use FP32 CPU arithmetic and two
+threads. Original GPU emissions are never replaced by this reconstruction.
+Per-image foreground F1 is $2\mathrm{TP}/(2\mathrm{TP}+\mathrm{FP}+\mathrm{FN})$;
+means average images rather than pooling pixels. Two empty arrays receive one;
+an absent emission receives zero and is distinct from a blank tile. Pixel
+exactness requires identical arrays. First-pixel disagreement can reflect
+different wording or readable learned strokes and does not imply semantic
+error. All original whole-answer readings and strict scores remain fixed.
+}
+
+\DIFadd{An independent CPU recount verifies every counter, coverage flag and outcome
+subgroup from saved arrays, plus all 128 tiles in the two labelled comparison
+boards. Those boards are inspected with prior cohort familiarity, without
+independent human review. Preparation takes 6.539\,seconds without a neural call;
+supplied reconstruction takes 1.502\,seconds at 1.078\,GiB peak process RSS. CUDA
+remains uninitialized, and there is no contextual call or new optimizer
+update. Figure 20's first-tile examples are retrospective selections from
+these completed controls and are explicitly excerpts rather than full answers}\DIFaddend .
 
 
 \subsection*{Initial raster control data}

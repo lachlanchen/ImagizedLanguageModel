@@ -5,13 +5,14 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 import numpy as np
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-STAGE = ROOT/'artifacts/native_reader_writing_publication_v1'
+STAGE = ROOT/'artifacts/native_reader_writing_publication_v2'
 EVIDENCE = ROOT/'references/evidence'
 
 
@@ -21,6 +22,25 @@ def sha(path):
 
 def load(path):
     return json.loads(Path(path).read_text())
+
+
+def freeze_preserved_assets():
+    baseline={};pointers={}
+    names=subprocess.check_output(['git','ls-tree','-r','--name-only','75080984','--','publication/ilm-nature'],cwd=ROOT,text=True).splitlines()
+    for name in names:
+        relative=str(Path(name).relative_to('publication/ilm-nature'))
+        if (relative.startswith('figures/') or relative=='nature_reading.sty'
+                or relative.startswith('supplementary_information') or relative.startswith('redlined_supplementary')):
+            raw=subprocess.check_output(['git','show','75080984:'+name],cwd=ROOT)
+            if raw.startswith(b'version https://git-lfs.github.com/spec/v1\n'):
+                lines=raw.decode().splitlines();oid=next(x.split('sha256:',1)[1] for x in lines if x.startswith('oid sha256:'))
+                baseline[relative]=oid
+                pointers[relative]=dict(pointer_sha256=hashlib.sha256(raw).hexdigest(),content_sha256=oid,
+                    size=int(next(x.split()[1] for x in lines if x.startswith('size '))))
+            else:baseline[relative]=hashlib.sha256(raw).hexdigest()
+    (STAGE/'preserved_assets.json').write_text(json.dumps(dict(baseline_commit='75080984',
+        files_sha256=baseline,large_file_pointer_bindings=pointers),indent=2)+'\n')
+    return baseline
 
 
 def main():
@@ -94,15 +114,11 @@ def main():
         first_pixel_mismatch_not_semantic_error=True,all448_native_calls_preserved=True,
         all192_glyph_streams_preserved=True,new_optimizer_updates=0,new_ILM_images=0)
     (STAGE/'measured_data.json').write_text(json.dumps(data,indent=2)+'\n')
-    baseline={}
-    names=subprocess.check_output(['git','ls-tree','-r','--name-only','75080984','--','publication/ilm-nature'],cwd=ROOT,text=True).splitlines()
-    for name in names:
-        relative=str(Path(name).relative_to('publication/ilm-nature'))
-        if (relative.startswith('figures/') or relative=='nature_reading.sty'
-                or relative.startswith('supplementary_information') or relative.startswith('redlined_supplementary')):
-            baseline[relative]=hashlib.sha256(subprocess.check_output(['git','show','75080984:'+name],cwd=ROOT)).hexdigest()
-    (STAGE/'preserved_assets.json').write_text(json.dumps(dict(baseline_commit='75080984',files_sha256=baseline),indent=2)+'\n')
+    baseline=freeze_preserved_assets()
     print(json.dumps(dict(charts=4,original_tiles=12,preserved_assets=len(baseline),native_calls=448,first_streams=192)))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    if sys.argv[1:]==['--baseline-only']:
+        print(json.dumps(dict(preserved_assets=len(freeze_preserved_assets()),LFS_content_identity_used=True)))
+    else:main()

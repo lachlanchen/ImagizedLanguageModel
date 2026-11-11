@@ -7,7 +7,7 @@ copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) compares the matched
-image-answer and input-presentation controls with the compact-diagnosis draft
+image-answer, native-reader and first-writing controls with the compact-diagnosis draft
 at `0f14fa3f`. The
 [supplement redline](redlined_supplementary_information.pdf) uses the
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
@@ -34,23 +34,40 @@ intervals include zero; neither presentation qualifies a usable ILM. See the
 [presentation comparison](../../references/glyph_tail_input_presentation_result.md).
 This is frozen inference transfer, with zero new training updates.
 
-The current package contains a **29-page article**, **51-page review** and
-**51-page article redline**. Figures 12–15 preserve the compact V1 trajectory
+The completed external native diagnostic gives **10/32 exact proportional
+answers** from the same adapted first states, versus the glyph actor's 6/32.
+All 448 calls are authenticated and 192 adapted image prefills match actual
+glyph-generation states bit-for-bit. This lexical diagnostic stays outside
+the ILM. All 32 first target forms have primitive coverage; supplying their
+images to the frozen encoder/decoder gives **31/32 pixel-exact reconstructions**.
+Canonical pixel disagreement does not by itself establish semantic error.
+See the [native result](../../references/glyph_tail_native_reader_result.md)
+and [first-writing audit](../../references/glyph_tail_first_writing_result.md).
+
+![Native answer access and unrepaired first-image writing](figures/Figure_20_native_reader_writing.png)
+
+The current package contains a **31-page article**, **54-page review** and
+**55-page article redline**. Figures 12–15 preserve the compact V1 trajectory
 and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
 add three editable slides with seven native measured charts and original
 diagnostic glyphs. The supplied-reference diagnostic scores remain separate
 from autonomous language accuracy. See the
 [wider result](../../references/compact_visual_span_full_rank_result.md) and
 [failure localization](../../references/compact_visual_span_diagnosis_result.md).
-The new [Figure 19 PowerPoint](figures/Glyph_input_transfer_figures.pptx) adds
+The [Figure 19 PowerPoint](figures/Glyph_input_transfer_figures.pptx) contains
 one editable slide with four native charts and six complete original output
 images. Its retrospective examples retain the lost area answer, retained
 location and newly exact quantity answer without stroke repair. The
+[Figure 20 PowerPoint](figures/Native_reader_writing_figures.pptx) adds four
+editable charts and twelve original first-tile excerpts, with full source
+precision retained alongside explicitly rounded chart values. Independent
+checks verify native chart/workbook agreement and all twelve source-tile
+occurrences in each compiled article PDF. The
 100-page supplement and 57-slide composite deck remain unchanged.
 
 ![Matched input presentation and original glyph outputs](figures/Figure_19_glyph_input_transfer.png)
 
-The current local delivery is `ILM_NatureStyle_20261111_InputTransfer` in
+The current local delivery is `ILM_NatureStyle_20261111_NativeReading` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
 The previous versioned packages remain available.
 

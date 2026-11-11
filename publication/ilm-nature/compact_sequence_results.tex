@@ -259,3 +259,74 @@ fitted at a common physical scale with no image crop, stroke reconstruction
 or OCR replacement. Opaque readings come from one model reviewer with prior
 cohort familiarity and no independent human adjudication. The registered
 retention rule fails, and no new training is performed.}{fig:glyph-input-transfer}
+
+\subsection*{Native answer access exceeds glyph strict matching}
+The completed native-reader diagnosis authenticates 448 calls and reproduces
+all 192 adapted image-prefill states bit-for-bit from actual glyph generation.
+An external native lexical decoder receives those states; its tokenizer,
+output projection and previous-symbol embeddings never enter the ILM.
+Adapted native continuation gives 4/32 exact fixed-cell answers and 10/32
+proportional answers, versus the glyph actor's 2/32 and 6/32
+(Fig.~\ref{fig:native-reader-writing}a,b). Both-correct pairs are 1/16 in
+each adapted native image arm, versus 1/16 and 0/16 through glyph output.
+The proportional native-minus-glyph exact difference is 12.5 percentage
+points, with a pointwise 95\% passage-group interval of 0--25 points.
+These are reused-development contrasts, not untouched confirmation.
+
+Seven proportional cases are exact only through native continuation, three
+only through glyph output, three through both and nineteen through neither.
+Six native-only cases have uncertain whole glyph readings; the seventh omits
+a canonical alias. The three glyph-only cases instead have native wording or
+punctuation differences, without establishing native semantic error. The lost
+area answer remains exact through native continuation while its proportional
+glyph stream is unreadable. Retained native access therefore exposes a
+writing/continuation gap without identifying a unique mechanism.
+
+Disabling contextual adapter outputs changes native exact scores to 2/32
+fixed-cell and 13/32 proportional. Complete text controls give 11/32 adapted
+and 10/32 with adapter outputs disabled. Proportional-minus-fixed native gains
+are 18.75 points [6.25, 31.25] adapted and 34.375 points [21.875, 50] with
+adapter outputs disabled. Layout brittleness thus extends to native reading;
+mixed adapter effects do not justify globally replacing the deployed body.
+All eight question- or passage-erased image arms give zero exact answers.
+The helper produces no new ILM images or optimizer updates.
+
+The subsequent CPU audit authenticates all 192 original QA glyph streams and
+their first-state bindings. Before scoring, the rasterizer reproduces every
+one of 4,096 primitive characters and all 745 canonical target tiles exactly.
+All 32 first forms have primitive coverage. Supplied-image reconstruction is
+31/32 pixel-exact at those first positions, with mean foreground F1 0.999934.
+Original normal first images instead have mean canonical F1 0.492173 fixed-cell
+and 0.632918 proportional, with 0/32 and 3/32 exact bitmaps. These are physical
+comparisons, not character or semantic accuracy: both exact complete fixed-cell
+answers have nonidentical first pixels, and valid alternative wording can
+begin with another form.
+
+Across full canonical answers, 743/745 positions have training-primitive
+coverage; two absent forms occur later, leaving thirty complete answers fully
+covered. Supplied reconstruction is exact at 726/745 positions, with mean
+F1 0.999220. The covered subset has mean F1 0.999933; the two absent forms
+give 0.734417. Coverage describes exposure rather than a hard decoder
+vocabulary. No stream stops before its first image. These controls reject
+missing first forms or poor direct reconstruction as a general explanation
+for initial damage, while retaining wording, later writing, stopping and
+feedback limitations. Complete glyph-language scores remain unchanged.
+
+\plate{Figure_20_native_reader_writing}{\textbf{Retained answer access and physical support do not ensure glyph language.}
+\textbf{a,b}, Complete strict QA and both-correct pairs for the external native
+decoder and original glyph actor. Native source disables contextual adapter
+outputs; it is not a separately evaluated image-output model. All original
+questions remain. Native source-unit and glyph budgets use different units.
+\textbf{c}, Mean foreground F1 of the first image against its canonical tile.
+The supplied-image encoder/decoder receives the answer. First-pixel agreement
+does not grade character identity, meaning or complete-answer quality.
+\textbf{d}, Strict native/glyph outcome groups for the 32 proportional cases.
+Native-only includes six uncertain glyph readings and one alias omission;
+glyph-only includes native wording/punctuation differences. \textbf{e}, Twelve
+original first-tile excerpts for three retrospectively selected cases: early
+damage, an exact first image with a later alias omission, and a different
+answer prefix. Tiles retain original pixels at a common scale, without stroke
+repair. All 32 labelled first-image comparisons and 192 complete original
+streams remain in the evidence. There is one model reviewer with prior cohort
+familiarity and no independent human adjudication. No new ILM generation or
+training is performed by these controls.}{fig:native-reader-writing}

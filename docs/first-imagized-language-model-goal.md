@@ -160,6 +160,11 @@ CUBLAS setting is preserved separately; the same recipe succeeds with the
 required setting. The full inherited reader is not loaded during head fitting.
 Language quality remains unmeasured for this candidate. Do not rerun the fit
 or select a checkpoint/seed from development output.
+The fixed-cell stage now completes and authenticates all 120 streams in
+3,442.608 seconds: 12 predicted stops and 108 caps. These endpoint counts do not
+establish readable or correct answers. The 96 proportional streams follow
+with the same final EMA, seeds, stopping rule and sampler; complete output-first
+review and unchanged scoring remain required before the next model decision.
 
 The candidate must face all current complete QA/control streams and book
 prefixes. The prospectively chosen development pilot requires at least 8/32
@@ -180,17 +185,24 @@ before broader claims. Copying, finite losses, rank checks and presentation
 quality do not replace language.
 
 The Nature-style article now includes both compact failed fits, their frozen
-failure localization and the completed matched-cohort/presentation controls.
-Reading/review/redline PDFs have **29/51/51 pages**. Figure 19 adds four native
+failure localization, the completed matched-cohort/presentation controls,
+the 448-call native diagnosis and the CPU first-writing audit.
+Reading/review/redline PDFs have **31/54/55 pages**. Figure 19 preserves four native
 editable charts and six complete original output images, preserving the lost
-pair and failed retention rule. All six original rasters survive in each
-compiled PDF. The prior figures, style, 100-page supplement and composite
-deck remain unchanged. The [bounded revision](../references/manuscript_glyph_input_transfer_revision_plan.md)
-and [build receipt](../publication/ilm-nature/evidence/glyph_input_transfer_publication_build.json)
-record the inspected changes; the redline uses the immutable `0f14fa3f`
-baseline. The newly completed helper-only native diagnosis remains outside
-that scoped paper revision; its manuscript update and the CPU audit's figure
-update are pending. Model diagnosis and readable held-out answers take priority
+pair and failed retention rule. Figure 20 adds four native charts and twelve
+original first-tile excerpts, keeping pixel fidelity distinct from language.
+All twelve tile occurrences survive exactly in each matching PDF through
+lossless export; all 218 checked prior figure/style/supplement assets remain
+unchanged. The [bounded native-reader revision](../references/manuscript_native_reader_writing_revision_plan.md)
+records source, numerical, raster and visual verification; the redline keeps
+the immutable `0f14fa3f` baseline. The running actual-context motor trial remains
+outside this paper revision until its complete language evaluation is scored.
+The [build receipt](../publication/ilm-nature/evidence/native_reader_writing_publication_build.json)
+and [local delivery receipt](../publication/ilm-nature/evidence/native_reader_writing_local_sync.json)
+bind the 31/54/55-page PDFs and 472 selected package files, plus the separately
+verified receipt. Owned latest-PDF aliases match the delivered files; all 443
+previous package files remain unchanged. Cloud propagation is unverified.
+Model diagnosis and readable held-out answers take priority
 over additional presentation work.
 
 ## Goal and acceptance criteria

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
+import {execFileSync} from 'node:child_process';
 import sharp from 'sharp';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
 
@@ -42,19 +43,19 @@ for(const [i,[field,title,max]] of [['exact','Complete exact QA (32)',32],['pair
 text('Native decoding is an external diagnostic. All 192 adapted image prefills match actual glyph states.\nProportional native minus glyph exact QA: +12.5 points (95% interval 0 to 25).',80,580,1470,88,28);
 text('c',42,700,40,50,34,true);
 chart({position:{left:80,top:700,width:700,height:335},title:'Mean first-tile foreground F1',titlePlacement:'aboveChart',titleTextStyle,
-  categories:['Supplied AE\n0.999934','Fixed original\n0.492173','Proportional\n0.632918'],
-  series:[{name:'Canonical pixel agreement',values:data.mean_first_F1,fill:blue}],
+  categories:['Supplied\nAE','Fixed\noriginal','Proportional\noriginal'],
+  series:[{name:'Canonical pixel agreement',values:data.mean_first_F1.map(x=>Number(x.toFixed(6))),fill:blue}],
   barOptions:{direction:'column',grouping:'clustered',gapWidth:95},hasLegend:false,xAxis:axis,
   yAxis:{...axis,min:0,max:1,majorUnit:.25,numberFormatCode:'0.00',majorGridlines:{fill:grid,width:1}},
-  dataLabels:{showValue:false}});
+  dataLabels:{showValue:true,position:'outEnd',textStyle:{typeface:font,fontSize:25,fill:ink}}});
 text('d',832,700,40,50,34,true);
 chart({position:{left:870,top:700,width:680,height:335},title:'Proportional strict outcomes (32)',titlePlacement:'aboveChart',titleTextStyle,
-  categories:Object.keys(data.proportional_outcomes),series:[{name:'Cases',values:Object.values(data.proportional_outcomes),fill:brown}],
-  barOptions:{direction:'column',grouping:'clustered',gapWidth:85},hasLegend:false,xAxis:{...axis,textStyle:{...axis.textStyle,fontSize:23}},
+  categories:['Native\nonly','Glyph\nonly','Both\nroutes','Neither\nroute'],series:[{name:'Cases',values:Object.values(data.proportional_outcomes),fill:brown}],
+  barOptions:{direction:'column',grouping:'clustered',gapWidth:85},hasLegend:false,xAxis:axis,
   yAxis:{...axis,min:0,max:32,majorUnit:8,numberFormatCode:'0',majorGridlines:{fill:grid,width:1}},
   dataLabels:{showValue:true,position:'outEnd',textStyle:{typeface:font,fontSize:29,fill:ink}}});
 text('Supplied images reveal physical support, not language.\nFirst pixel-exact: 31/32 supplied, 0/32 fixed, 3/32 proportional.',80,1042,710,75,25);
-text('Native-only: six uncertain glyph readings and one alias omission.\nGlyph-only: native wording or punctuation differs from the reference.',870,1042,680,75,25);
+text('Native only: six uncertain readings, one alias omission.\nGlyph only: native wording or punctuation differs.',870,1042,680,75,25);
 text('e   Original first tiles',48,1140,750,55,32,true);
 for(const [x,title] of [[500,'Canonical'],[760,'Supplied AE'],[1020,'Fixed original'],[1280,'Proportional']])text(title,x-35,1200,235,45,26,true);
 for(const [j,[key,title]] of [['qa_09_a','Area answer: damaged form'],['qa_05_b','Exact first; alias omitted'],['qa_13_a','Different answer prefix']].entries()){
@@ -71,14 +72,16 @@ for(const [j,[key,title]] of [['qa_09_a','Area answer: damaged form'],['qa_05_b'
     pictures.push({...binding,position,original_bytes_supplied:true,raster_resampled_before_embedding:false});
   }
 }
-text('First-tile excerpts selected retrospectively. All 32 comparisons and 192 original streams remain available.\nPixel differences do not grade meaning. One model reviewer; no independent human adjudication.',50,1520,1500,72,25);
+text('First-tile excerpts selected retrospectively. All 32 comparisons and 192 original streams remain available.\nPixel differences do not grade meaning. One model reviewer, no independent human adjudication.',50,1520,1500,72,25);
 s.speakerNotes.textFrame.setText('Sources: references/evidence/glyph_tail_native_reader_learning_20261111.json; glyph_tail_first_writing_learning_20261111.json; glyph_tail_first_writing_registration_20261111.json; glyph_tail_first_writing_20261111/pixels.npz. Four hundred forty-eight helper calls, including image and complete-text controls; all192 adapted image prefills reproduce actual glyph-generation states bit-for-bit. Native source disables contextual adapter outputs. Native decoder tokenizer, lexical projection and previous-symbol embeddings remain outside the image-output actor. Native source-unit cap128 and image glyph cap128 have different units. Image-erasure arms score0/32 exact throughout. Text native exact scores11/32 adapted and10/32 source. Mixed adapter effects do not justify replacing the deployed body. Native-glyph contrast is a reused-development pointwise group-bootstrap interval with10000draws/seed202611154, not an untouched or independent-seed result. Physical F1 is per-image foreground mean against canonical first tiles, not character or semantic accuracy. All32 first forms have primitive coverage; supplied reconstruction31/32pixel-exact. Full references743/745covered; two later absent forms remain in denominators. Examples qa09a,qa05b,qa13a selected retrospectively after completed diagnostics to expose early damage, alias omission despite an exact first image and a different answer prefix. These are explicitly first-tile excerpts, not complete answers. No pixels repaired, cropped or resampled before embedding. The12originalPNGtileobjects remain editable. No optimizer update, new ILM image or usable-language claim follows from these controls.');
 await fs.mkdir(path.join(stage,'output'),{recursive:true});
 const candidate=path.join(stage,'candidate.pptx');await(await PresentationFile.exportPptx(deck)).save(candidate);
+execFileSync(python,[path.join(root,'publication/ilm-nature/format_native_reader_chart_labels.py'),candidate]);
 const preview=await s.export({format:'png',scale:1});
 await fs.writeFile(path.join(stage,'artifact-slide-1.png'),new Uint8Array(await preview.arrayBuffer()));
 await fs.writeFile(path.join(stage,'figure_bindings.json'),JSON.stringify({measured_data_sha256:hash(await fs.readFile(path.join(stage,'measured_data.json'))),
   source_sha256:data.source_sha256,charts,pictures,native_charts:4,original_first_tile_images:12,
+  full_precision_mean_first_F1:data.mean_first_F1,chart_F1_decimal_places:6,
   first_tile_selection_retrospective:true,first_pixel_error_not_semantic_accuracy:true,new_optimizer_updates:0},null,2)+'\n');
 await finalizePresentation({workspaceDir:stage,candidatePath:candidate,finalPath:path.join(stage,'output/Native_reader_writing_figures.pptx'),
   explicitTotalSlideCount:1,requiredNativeChartOwnerSlides:[1],materializeLiteralChartWorkbooks:true,
