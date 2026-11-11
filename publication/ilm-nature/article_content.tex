@@ -34,9 +34,14 @@ similar written forms. The present study uses one canonical font to isolate
 this coupling before introducing handwriting or historical scripts.
 
 The experiments progress from initial raster readers and denoisers to
-an inherited visual/contextual body and a separately learned glyph
-interface. The earlier architectures provide controls; the final
-experiments evaluate the complete-glyph loop shown in Fig.~S37.
+inherited contextual bodies with separately learned glyph interfaces. The
+earlier architectures provide controls. Restricted short-answer experiments
+evaluate the complete-glyph loop shown in Fig.~S37; a separate compact
+experiment then fits complete book and question--answer sequences and measures
+all five saved checkpoints. The contributions are the explicit emitted-pixel
+interface, controlled language tests, reproducible single-GPU execution and
+an identified velocity-capacity restriction. None establishes a generally
+usable visual language model or a from-scratch language learner.
 
 \section*{Results}
 \subsection*{An initial continuous visual interface preserves the written signal}
@@ -816,12 +821,24 @@ an alignment repair.
 
 \input{historical_forms_results.tex}
 
+\input{compact_sequence_results.tex}
+
 \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
 next-writing information, while subsequent writers can erase that information
 or model the marginal appearance of glyphs. A complete visual language model
 must bind meaning and sequence to the exact marks it generates.
+
+The compact complete-sequence fit adds a larger authentic target stream while
+keeping the contextual foundation fixed. It completes training within one
+4090 but does not produce a credited readable complete answer on its fixed
+development cohort. Its independent cold replay verifies execution boundaries,
+not comprehension. The velocity projection has a provable noise subspace;
+terminal normalization also matters when repairing its width. A registered
+wider-writer comparison addresses that restriction while preserving the
+remaining recipe. Correcting capacity must still be followed by actual
+conditional-image evaluation, fresh source groups and independent review.
 
 An image interface enlarges the representable output space, including the
 possibility of forms absent from a character encoding. It does not remove the
@@ -884,7 +901,9 @@ select a successful density, optimizer or semantic-transfer method.
 External pretraining remains part of the model's provenance.
 
 \section*{Methods}
-\subsection*{Data, rendering and partitioning}
+\input{compact_sequence_methods.tex}
+
+\subsection*{Initial raster control data}
 The public Chinese stream contains 7,017 provenance-tracked records. Records
 are assigned deterministically to training, development or a sealed partition
 before rendering. Original and simplified views inherit their source split.
@@ -894,7 +913,7 @@ supplies the first 60 cells as context and cells 61--64 as future writing.
 The remaining cell is unused. No string, source identifier or symbolic target
 enters a model method. Sealed records remain unopened.
 
-\subsection*{Training and numerical verification}
+\subsection*{Initial raster control training}
 In the diffusion experiment, the reader is frozen. Copied glyph-prior weights initialize the denoiser,
 which is then optimized as a velocity predictor. AdamW uses a learning rate of
 $5\times10^{-5}$ for transferred layers and $2\times10^{-4}$ for new modules,

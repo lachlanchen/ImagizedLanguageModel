@@ -1,0 +1,105 @@
+\subsection*{Compact continuous glyph feedback}
+The compact experiment receives ordered $32\times32$ binary ink tiles, with
+one fixed Noto Sans CJK face during data preparation. The fixed codec maps
+each tile $I_j$ to $z_j\in\mathbb R^{768}$. A 384-channel image encoder uses
+learned boundaries to group at most sixteen glyphs. It predicts one to three
+continuous updates $u_{i,r}\in\mathbb R^{2048}$ per span. The frozen 28-layer
+contextual body consumes those vectors directly and supplies the state $c_i$
+after each span. During training, native source alignment supplies span ends
+and update counts; at inference both are derived from visible pixels.
+
+The writer predicts length $K\in\{0,\ldots,16\}$ from $c_i$. Length zero ends
+generation. For a nonempty span, a conditional rectified flow starts from
+$z_0\sim\mathcal N(0,I)$ and applies eight Euler steps,
+\begin{equation}
+ z_{k+1}=z_k+\tfrac18 v_\theta(z_k,k/8,c_i),\qquad k=0,\ldots,7.
+\end{equation}
+The codec decodes the endpoint into binary ink. The same image encoder reads
+these actual emitted pixels to update contextual history. No font renderer,
+OCR service, lexical head or answer lookup supplies generated content. The
+128-glyph budget can stop before a full predicted span would exceed the cap;
+that stream is recorded as budget-limited rather than naturally stopped.
+Raw page segmentation and arbitrary reading order are outside this tile-stream
+experiment.
+
+\subsection*{Six complete-sequence objectives}
+The reference-image training history differs from generated-image history at
+inference. Each complete sequence supplies all continuation/answer spans and
+its terminal decision. For predicted feedback vector $\hat u$ and compact
+source embedding $e$, the relative regression objective is
+\begin{equation}
+ \mathcal L_{\rm fb}=\mathbb E
+ \frac{\|\hat u-e\|^2}{\max(\|e\|^2,10^{-8})}.
+\end{equation}
+Training-only source embeddings and native span alignment come from the
+authenticated source archive; they do not enter deployed inference. The
+encoder also minimizes update-count cross entropy $\mathcal L_{\rm count}$
+and binary span-boundary cross entropy $\mathcal L_{\rm boundary}$. The writer
+minimizes span-length cross entropy $\mathcal L_{\rm length}$, including the
+zero-length terminal. For clean codec span $y$, fresh noise $\epsilon$ and
+$t\sim U(0,1)$, its velocity objective is
+\begin{align}
+ z_t&=(1-t)\epsilon+ty,\\
+ \mathcal L_{\rm flow}&=\mathbb E\|v_\theta(z_t,t,c)-(y-\epsilon)\|^2/d,
+ \qquad d=768.
+\end{align}
+Only valid glyph positions contribute. An offline Qwen3-VL teacher\cite{qwen3vl} supplies causal
+context states $h^{T}\in\mathbb R^{4096}$. A training-only linear projection
+$A:\mathbb R^{2048}\rightarrow\mathbb R^{4096}$ gives
+\begin{equation}
+ \mathcal L_{\rm teacher}=\mathbb E[1-\cos(Ac,h^{T})].
+\end{equation}
+The implemented objective is the equal-weight sum
+\begin{align}
+ \mathcal L={}&\mathcal L_{\rm fb}+\mathcal L_{\rm count}
+ +\mathcal L_{\rm boundary}+\mathcal L_{\rm length}\nonumber\\
+ &+\mathcal L_{\rm flow}+\mathcal L_{\rm teacher}.
+\end{align}
+The corpus has 7,255,223 training glyph positions including repeated QA
+passages, and 2,576,239 continuation/answer target glyph positions. Its
+13,785 sequences cover fourteen training works and 9,023 QA pairs. Two whole
+works and separate CMRC passage groups form the development partition.
+Exact source, text and input-pixel overlap checks pass. Pretraining exposure
+of either inherited foundation remains unknown.
+
+The offline teacher body supplies 2,380,620 state targets in 108 authenticated
+shards. The fit uses seed 202611152, AdamW at learning rate $2\times10^{-4}$,
+weight decay 0.01, gradient norm capped at 1.0 and a 1,024-position padded
+batch budget. Trainable parameters remain FP32. Frozen contextual matrices
+are dequantized from the authenticated GGUF archive into BF16, and neural
+computation uses BF16 autocast. All 8,172 updates complete one pass. Five snapshots preserve
+initial, quarter, half, three-quarter and final shard exposure, recording
+their actual optimizer steps. Training resumes only with the original source,
+corpus, teacher-cache and configuration identities.
+
+\subsection*{Compact evaluation, review and provenance}
+The prospective development cohort contains 32 QA prompts from sixteen passage
+groups and twelve prefixes from two whole-held-out works. The five snapshots
+use seed 202611153, eight flow steps, the same normal prompts and a 128-glyph
+budget. The initial and final snapshots additionally run question-erased,
+passage-erased and book-prefix-erased controls, giving 372 pages. One model
+reviewer transcribes opaque original images before their mapping and scoring
+references are opened. Prior dataset familiarity is disclosed. Uncertain
+whole transcriptions, blank responses and caps stay in the original complete
+answer denominators. This is not independent human adjudication.
+
+Exact QA success requires a reliable nonempty transcription matching the
+canonical answer and a learned stop. Both-correct pairs require both answers
+and distinct output images. Book coherence is judged against the visible
+prefix; an uncertain whole transcription cannot establish readable coherent
+continuation. Pointwise 95\% intervals use 10,000 whole-passage-group bootstrap
+replicates, seed 202611154, retaining both questions per group. The same groups
+are resampled for final-minus-initial and normal-minus-erased differences.
+With constant zero observations the interval degenerates; it cannot establish
+zero population success. Two book works do not support a book-level interval.
+This small development cohort also requires fresh confirmation after any
+model-selection improvement.
+
+The unchanged native-text reference uses the same 44 normal prompts with
+Qwen3 1.7B on CPU; its book coherence remains unrated. A traced fresh-process
+replay separately checks the final image actor's fixed book output, exact
+display pixels, termination and emitted-pixel feedback against its suite run.
+The child receives only the visible input, authenticated foundation/codec and
+deployable image heads. Access auditing distinguishes an unused vocabulary
+inside source-archive metadata from materialized lexical model modules or
+answer access. Preparation, fit and inference costs are recorded separately.

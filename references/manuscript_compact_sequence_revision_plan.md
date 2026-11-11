@@ -80,3 +80,58 @@ project folder and update only the two owned latest manuscript aliases after
 checking their previous hashes. Verify local copies; cloud propagation needs
 separate evidence. Commit and push the completed revision. The current step
 records this plan; it does not claim that the revised article or figures exist.
+
+## Execution specification after completed review
+
+The V1 review and authenticated analysis are complete in
+`references/evidence/compact_visual_span_learning_20261111.json`. All five
+checkpoints have zero complete exact QA matches and zero both-correct pairs;
+no readable complete continuation was credited. Preserve the reviewer limits
+and degenerate-bootstrap interpretation. The separate wider-writer fit is
+active; do not infer its outcome or change its frozen sources.
+
+Use Git `d9bd6ba6fa7c1f36a7e53bd5513575a89153a8ac` as the pre-revision article
+baseline. Article/figure files are unchanged from the preceding historical
+revision. Preserve their hashes in a private baseline manifest and build
+the manuscript redline against that exact commit.
+
+Author one standalone four-slide editable PowerPoint source package. Slide 1
+contains native complete-answer, question-pair and stop/cap charts. Slides 2--4
+show all five raw outputs for the fixed first QA pair and first book prefix,
+one case per slide for legibility. Add Figure 12 for the measurements and
+Figures 13--15 for the raw streams. Input previews may show the last three
+rows of the actual source PNG; identify this crop explicitly and retain the
+full input. Never crop or repair the answer images. The existing 57-slide
+composite deck and supplement remain unchanged.
+
+Add `compact_sequence_results.tex` before Discussion and
+`compact_sequence_methods.tex` at the start of Methods. Update the abstract
+and the introduction's final scope paragraph, and add one Discussion paragraph.
+The abstract will state the compact full-sequence failure alongside the earlier
+restricted contextual result, with different cohorts and metrics made explicit.
+The new Methods source gives the continuous feedback and six implemented
+objectives, actual preparation/fit costs, frozen foundations and review limits.
+Rename the two adjacent legacy Methods headings to identify the initial raster
+controls, so their 7,017-record stream and optimizer are not mistaken for the
+new compact corpus and fit. Preserve those legacy methods themselves.
+The rank argument is a conditional-velocity capacity result, not a diagnosis
+of every wrong answer. Mention the registered wider comparison as unfinished.
+
+Use bounded CPU figure and article builds during the active model job, with
+host memory rechecked. Do not invoke a full package builder that competes for
+the project GPU mutex. Verify every new chart's native workbook values, all
+fifteen raw-image pixels, all changed PDF pages and the redline. Copy only the
+verified revision into a new owned Nutstore package, retain the previous
+package and update the two owned manuscript aliases after checking their
+previous hashes. Cloud propagation remains unverified.
+
+## Completed revision
+
+The compact V1 Results, Methods, abstract and measured figures are built and
+reviewed. The reading/review/redline PDFs have 23/42/42 pages. Native chart
+data and all fifteen original answer-image bindings pass their checks; prior
+figures, style, supplement and composite deck remain unchanged. The verified
+local Nutstore copy and two owned latest aliases are updated. See the
+[revision audit](manuscript_compact_sequence_revision_audit.md) and its bound
+build/sync receipts. The wider-writer language result is not part of this
+revision, and the usable-ILM objective remains unachieved.

@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 11 08:51:03 2026
-%DIF ADD new.tex   Wed Nov 11 08:56:21 2026
+%DIF DEL old.tex   Wed Nov 11 12:12:52 2026
+%DIF ADD new.tex   Wed Nov 11 12:12:52 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -87,8 +87,8 @@
 \newcommand{\CodecLanguageCILow}{10.933}
 \newcommand{\CodecLanguageCIHigh}{15.730}
 
-\newcommand{\PaperTitle}{Learning conditional language\\in continuous image space}
-\newcommand{\PaperSummary}{Written language includes handwritten and historical forms outside fixed character inventories. We investigate language generation that reads and emits images, using continuous glyph feedback without a runtime tokenizer, lexical output head, font renderer or glyph bank. An externally pretrained 7.522B visual contextual body supplies inherited language knowledge; exact frozen-prefix caching permits final-layer adaptation on one consumer GPU. Across 3,176 short-answer training questions, 688,128 contextual adapter parameters and 17,848,833 writer/stopping parameters are trained for 18,000 updates. On 32 prospectively reserved questions from sixteen new contexts, contextual adaptation gives sixteen clear complete literal matches, versus eleven for a fixed-body readout control. Both different questions are correct in five versus two contexts; canonical pixel-exact complete answers number two and one. Neither condition passes the predefined complete-answer pilot or training-pixel qualification. A further balanced writer fit passes physical qualification but gives eighteen clear answers versus nineteen for its parent on a different reserved cohort, separating training fidelity from generalization. A cold standalone replay verifies actual emitted-pixel feedback without answer-bank or lexical access on one fixed input. These results support partial image-conditioned answer transfer and identify distinct initial-decision and autonomous-continuation bottlenecks. Reliable open-ended writing, historical-script generalization and an efficiency advantage at matched language quality remain unresolved.}
+
+
 
 \onehalfspacing\linenumbers
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -132,9 +132,10 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved glyph-feedback draft (f7f91826).}\par\medskip
-{\sffamily\bfseries\Large\PaperTitle\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}\PaperSummary\par\bigskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the d9bd6ba6 pre-compact-sequence draft are blue.}\par\medskip
+
+{\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
+\section*{Abstract}{Written language includes \DIFdelbegin \DIFdel{handwritten and historical }\DIFdelend forms outside \DIFdelbegin \DIFdel{fixed }\DIFdelend \DIFaddbegin \DIFadd{standard }\DIFaddend character \DIFdelbegin \DIFdel{inventories}\DIFdelend \DIFaddbegin \DIFadd{encodings}\DIFaddend . We investigate \DIFdelbegin \DIFdel{language generation }\DIFdelend \DIFaddbegin \DIFadd{continuous visual interfaces }\DIFaddend that read\DIFdelbegin \DIFdel{s}\DIFdelend  and \DIFdelbegin \DIFdel{emits }\DIFdelend \DIFaddbegin \DIFadd{emit glyph }\DIFaddend images, \DIFdelbegin \DIFdel{using continuous glyph feedback without a runtime tokenizer, lexical output head, font renderer or glyph bank}\DIFdelend \DIFaddbegin \DIFadd{with generated pixels supplying subsequent history}\DIFaddend . \DIFdelbegin \DIFdel{An externally }\DIFdelend \DIFaddbegin \DIFadd{Externally }\DIFaddend pretrained \DIFdelbegin \DIFdel{7.522B visual }\DIFdelend contextual \DIFdelbegin \DIFdel{body supplies }\DIFdelend \DIFaddbegin \DIFadd{bodies provide }\DIFaddend inherited language knowledge; \DIFdelbegin \DIFdel{exact frozen-prefix caching permits final-layer adaptation on one consumer GPU. Across 3}\DIFdelend \DIFaddbegin \DIFadd{tokenizers}\DIFaddend , \DIFdelbegin \DIFdel{176 short-answer training questions, 688,128 contextual adapter parameters }\DIFdelend \DIFaddbegin \DIFadd{lexical heads }\DIFaddend and \DIFdelbegin \DIFdel{17,848,833 writer/stopping parameters }\DIFdelend \DIFaddbegin \DIFadd{font rendering }\DIFaddend are \DIFdelbegin \DIFdel{trained for 18,000 updates. On 32 prospectively reserved questions }\DIFdelend \DIFaddbegin \DIFadd{absent }\DIFaddend from \DIFdelbegin \DIFdel{sixteen new contexts, }\DIFdelend \DIFaddbegin \DIFadd{the deployed answer path. In a restricted 7.522B }\DIFaddend contextual \DIFaddbegin \DIFadd{experiment, }\DIFaddend adaptation gives sixteen clear complete literal \DIFdelbegin \DIFdel{matches}\DIFdelend \DIFaddbegin \DIFadd{answers among 32 reserved questions}\DIFaddend , versus eleven for a fixed-body \DIFdelbegin \DIFdel{readout }\DIFdelend control. \DIFdelbegin \DIFdel{Both different questions are correct in five versus two contexts; canonical pixel-exact complete answers number two and one. }\DIFdelend Neither \DIFdelbegin \DIFdel{condition }\DIFdelend \DIFaddbegin \DIFadd{arm }\DIFaddend passes \DIFdelbegin \DIFdel{the predefined }\DIFdelend \DIFaddbegin \DIFadd{its }\DIFaddend complete-answer \DIFdelbegin \DIFdel{pilot or training-pixel }\DIFdelend qualification. A \DIFdelbegin \DIFdel{further balanced writer fit passes physical qualification but gives eighteen clear answers versus nineteen for its parent on }\DIFdelend \DIFaddbegin \DIFadd{separate compact experiment freezes }\DIFaddend a \DIFdelbegin \DIFdel{different reserved cohort}\DIFdelend \DIFaddbegin \DIFadd{1.409B contextual body and fits image interfaces on 13}\DIFaddend ,\DIFdelbegin \DIFdel{separating training fidelity from generalization}\DIFdelend \DIFaddbegin \DIFadd{785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions}\DIFaddend . \DIFaddbegin \DIFadd{Its 8,172-update fit uses 3.930 GiB peak allocated GPU memory. All five checkpoints score zero complete exact QA answers out of 32; one model-based review of 372 pages establishes no readable complete response. }\DIFaddend A \DIFaddbegin \DIFadd{separate }\DIFaddend cold \DIFdelbegin \DIFdel{standalone }\DIFdelend replay verifies actual emitted-pixel feedback \DIFdelbegin \DIFdel{without answer-bank or lexical access on }\DIFdelend \DIFaddbegin \DIFadd{and independent inference for }\DIFaddend one fixed \DIFdelbegin \DIFdel{input}\DIFdelend \DIFaddbegin \DIFadd{case}\DIFaddend . \DIFaddbegin \DIFadd{We identify a velocity-output subspace that leaves at least 384 Gaussian directions uncontrolled, motivating a registered capacity repair. }\DIFaddend These results \DIFdelbegin \DIFdel{support partial image-conditioned answer transfer }\DIFdelend \DIFaddbegin \DIFadd{distinguish single-GPU execution, physical writing }\DIFaddend and \DIFdelbegin \DIFdel{identify distinct initial-decision and autonomous-continuation bottlenecks}\DIFdelend \DIFaddbegin \DIFadd{conditional language success}\DIFaddend . Reliable open-ended \DIFdelbegin \DIFdel{writing}\DIFdelend \DIFaddbegin \DIFadd{visual language generation}\DIFaddend , \DIFdelbegin \DIFdel{historical-script generalization }\DIFdelend \DIFaddbegin \DIFadd{historical-form transfer }\DIFaddend and an efficiency advantage at matched \DIFdelbegin \DIFdel{language }\DIFdelend quality remain unresolved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -171,9 +172,17 @@ similar written forms. The present study uses one canonical font to isolate
 this coupling before introducing handwriting or historical scripts.
 
 The experiments progress from initial raster readers and denoisers to
-an inherited visual/contextual body and a separately learned glyph
-interface. The earlier architectures provide controls; the final
-experiments evaluate the complete-glyph loop shown in Fig.~S37.
+\DIFdelbegin \DIFdel{an inherited visual/contextual body and a }\DIFdelend \DIFaddbegin \DIFadd{inherited contextual bodies with }\DIFaddend separately learned glyph interface\DIFaddbegin \DIFadd{s}\DIFaddend  . The
+earlier architectures provide controls\DIFdelbegin \DIFdel{; the final
+}\DIFdelend \DIFaddbegin \DIFadd{. Restricted short-answer }\DIFaddend experiments
+evaluate the complete-glyph loop shown in Fig.~S37\DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{; a separate compact
+experiment then fits complete book and question--answer sequences and measures
+all five saved checkpoints. The contributions are the explicit emitted-pixel
+interface, controlled language tests, reproducible single-GPU execution and
+an identified velocity-capacity restriction. None establishes a generally
+usable visual language model or a from-scratch language learner.
+}\DIFaddend
 
 \section*{Results}
 \subsection*{An initial continuous visual interface preserves the written signal}
@@ -1119,20 +1128,18 @@ reference-conditioned fitting alone has not established a generalization gain.
 
 
 
-\DIFaddbegin \subsection*{\DIFadd{Historical glyph fidelity and resolution}}
-\DIFadd{We encoded and decoded 27 catalogued oracle, bronze and seal glyph rasters
+\subsection*{Historical glyph fidelity and resolution}
+We encoded and decoded 27 catalogued oracle, bronze and seal glyph rasters
 from sealed source families. The rasters had no exact match in the original
 historical training partition for the fixed codec. Twenty round trips were
 pixel-exact, and mean foreground $F_1$ was 0.9981 (Fig.~\ref{fig:historical-forms}).
-}
 
-\DIFadd{The bronze source B12643 retains only ten ink pixels at $32\times32$ even
+The bronze source B12643 retains only ten ink pixels at $32\times32$ even
 though its codec reconstruction is exact. Its $128\times128$ raster reveals
 thin strokes lost at the smaller size. Five tall bronze forms represented as
 four vertically stacked tiles averaged foreground $F_1=0.9389$ after decoding
 and reassembly. All five changed pixels. The historical reading and
 stage-selection tests remain unevaluated with a trained language checkpoint.
-}
 
 \plate{Figure_11_historical_forms}{\textbf{Historical forms through the fixed glyph codec.}
 \textbf{a}, Exact reconstruction fraction and mean foreground $F_1$ for the
@@ -1145,6 +1152,118 @@ historical images. The source identities and measurements are recorded in the
 \href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/references/evidence/historical_visual_evaluation_20261111.json}{archived evaluation receipt}.}{fig:historical-forms}
 
 
+\DIFaddbegin \subsection*{\DIFadd{Complete-sequence adaptation exposes a compact writing failure}}
+\DIFadd{We next test a smaller contextual foundation on complete continuation and
+question--answer sequences. The deployed contextual layers contain 1,409,410,048
+externally pretrained parameters from a Qwen3 1.7B archive\cite{qwen3}, with vocabulary
+embeddings and the lexical output head absent. A frozen 7.42M-parameter codec
+maps each visible glyph to 768 continuous coordinates. A learned image
+interface groups up to sixteen glyphs, supplies one to three contextual
+updates per span, predicts the next span's length and writes its image.
+Subsequent context receives the emitted pixels. This experiment transfers
+inherited language knowledge to a visual interface; it does not establish
+language acquisition from images alone.
+}
+
+\DIFadd{The corpus contains 13,785 training sequences: 4,762 public-domain book
+passages from fourteen works and 9,023 complete CMRC question--answer pairs\cite{cmrc}.
+The targets contain 2,576,239 glyph positions. Whole works and passage groups
+define the development partition; exact source, text and pixel overlap checks
+pass, while exposure during inherited pretraining is unknown. Offline teacher
+extraction supplies 2,380,620 causal state targets. One complete fit makes
+8,172 updates over all 108 shards, adapting 12,872,213 image parameters and
+an 8,388,608-parameter training-only projection. The contextual body and codec
+remain frozen. Extraction and fitting take 1,783.41 and 1,759.83 seconds,
+including resource waits of 770.72 and 110.11 seconds. Peak allocated GPU
+memory is 13.396 and 3.930 GiB, respectively. These are preparation and
+adaptation costs; they exclude the inherited foundation's original training.
+}
+
+\DIFadd{The fixed evaluation uses 32 questions in sixteen held-out passage groups and
+twelve prefixes from two held-out books. All normal inputs run at steps 0,
+1,956, 4,049, 6,152 and 8,172. Endpoint erased-input controls bring the total
+to 372 generated pages. Every checkpoint scores 0/32 complete exact QA
+answers and 0/16 both-correct pairs (Fig.~\ref{fig:compact-trajectory}).
+The source-matched Qwen3 1.7B native-text reference gives 8/32 exact answers
+and 2/16 both-correct pairs on the same normal prompts. Its run is on CPU;
+the comparison does not establish a matched-hardware efficiency advantage.
+}
+
+\DIFadd{One model-based reviewer inspected opaque answer images before opening the
+mapping to cases and checkpoints or the scoring references. The reviewer had prior dataset
+familiarity; no independent human adjudication was performed. Thirty pages
+were blank and 342 had uncertain whole-response transcriptions. Individual
+characters or punctuation were sometimes recognizable, but no reliable
+complete reading was credited. Consequently, no readable complete book
+continuation was established. This limits the interpretation of its coherence
+score. All raw streams remain in the denominators. The same first QA pair and
+book prefix, fixed before fitting, are shown at every checkpoint in
+Figs.~\ref{fig:compact-qa-a}--\ref{fig:compact-book}.
+}
+
+\DIFadd{The final normal cohort has seventeen predicted stops and twenty-seven
+budget-limited streams, compared with forty-four predicted stops initially.
+Blank normal responses decrease from nine to two. Neither change establishes
+language learning. Endpoint question-erased and passage-erased QA counts also
+remain zero. The registered passage-group bootstrap returns }[\DIFadd{0, 0}] \DIFadd{intervals
+for the constant complete-answer observations and their paired differences.
+These degenerate sample intervals do not establish zero population success.
+}
+
+\DIFadd{A separate traced final-checkpoint process reproduces the fixed 128-glyph
+book stream, its PNG, stopping/cap status and all 128 emitted-pixel feedback
+events. Required prompt and weight opens are verified, with no forbidden
+training/reference paths or IP connections observed. This checks the standalone
+boundary for that invocation, while its answer remains a language failure.
+}
+
+\DIFadd{The writer has an identifiable capacity restriction. Its final linear
+velocity projection has rank 384 in a 768-dimensional codec space. For a
+complementary projector $P$, $PW=0$ gives $Pv=Pb$, so the eight-step Euler
+endpoint satisfies $Pz_1=Pz_0+Pb$. At least 384 Gaussian directions cannot be
+contracted or conditioned by this continuous velocity model. Terminal
+normalization can restrict the varying output further. The result is an
+exact-arithmetic capacity statement, not a hardware-exact sampler identity or
+proof of the sole cause of failed answers. A separately registered 1,024-channel
+writer comparison checks the centered output map and velocity Jacobians;
+its trained language outcome remains unmeasured here.
+}
+
+\plate{Figure_12_compact_trajectory}{\textbf{Complete-answer performance across the compact full-sequence fit.}
+\textbf{a}, Complete exact QA answers among 32 questions at five fixed
+checkpoints. \textbf{b}, Both different questions correct within sixteen
+passage groups. The native-text reference ran on CPU and is shown for task
+quality. Its displayed intervals resample whole passage groups. Every visual
+complete-answer interval is [0, 0], which does not imply zero population
+success. \textbf{c}, Predicted stops and budget-limited streams for 44 normal
+inputs. Blank responses are included among stops. All 372 generated pages
+were retained. Readability judgments come from one model reviewer without
+independent human adjudication.}{fig:compact-trajectory}
+
+\plate{Figure_13_compact_qa_a}{\textbf{Raw writing for the first fixed QA question.}
+The input preview shows its last three rows; the complete input is retained
+in the evidence. All five original answer PNGs are shown, including the blank
+initial response. Labels give actual update, emitted glyph count and predicted
+stop or budget status. The case was selected before fitting. No answer pixels
+were cropped, reconstructed, replaced by OCR or repaired. Recognizable
+fragments do not establish a readable complete answer.}{fig:compact-qa-a}
+
+\plate{Figure_14_compact_qa_b}{\textbf{Raw writing for a different question about the same passage.}
+The second member of the first fixed QA pair changes the question while
+retaining the passage. All five original answer PNGs and termination labels
+are shown. The input preview contains its last three rows, with the complete
+input preserved separately. Similar output prefixes are visible across the
+two questions. This display supplies the registered examples, without
+selecting successes or repairing ambiguous marks.}{fig:compact-qa-b}
+
+\plate{Figure_15_compact_book}{\textbf{Raw writing for the first fixed book continuation.}
+The preview contains the last three rows of the visible prefix. All five
+original outputs are retained, including the three early blank responses.
+Later nonblank writing does not establish readable coherent continuation.
+The complete input, original pixel streams, source hashes and all endpoint
+controls remain in the evidence.}{fig:compact-book}
+
+
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -1152,7 +1271,18 @@ next-writing information, while subsequent writers can erase that information
 or model the marginal appearance of glyphs. A complete visual language model
 must bind meaning and sequence to the exact marks it generates.
 
-An image interface enlarges the representable output space, including the
+\DIFaddbegin \DIFadd{The compact complete-sequence fit adds a larger authentic target stream while
+keeping the contextual foundation fixed. It completes training within one
+4090 but does not produce a credited readable complete answer on its fixed
+development cohort. Its independent cold replay verifies execution boundaries,
+not comprehension. The velocity projection has a provable noise subspace;
+terminal normalization also matters when repairing its width. A registered
+wider-writer comparison addresses that restriction while preserving the
+remaining recipe. Correcting capacity must still be followed by actual
+conditional-image evaluation, fresh source groups and independent review.
+}
+
+\DIFaddend An image interface enlarges the representable output space, including the
 possibility of forms absent from a character encoding. It does not remove the
 need to learn syntax, knowledge or long-range dependencies. This study has not
 demonstrated general instruction following, etymology answers, handwriting
@@ -1213,8 +1343,124 @@ select a successful density, optimizer or semantic-transfer method.
 External pretraining remains part of the model's provenance.
 
 \section*{Methods}
-\subsection*{Data, rendering and partitioning}
-The public Chinese stream contains 7,017 provenance-tracked records. Records
+\subsection*{\DIFdelbegin \DIFdel{Data}\DIFdelend \DIFaddbegin \DIFadd{Compact continuous glyph feedback}}
+\DIFadd{The compact experiment receives ordered $32\times32$ binary ink tiles, with
+one fixed Noto Sans CJK face during data preparation. The fixed codec maps
+each tile $I_j$ to $z_j\in\mathbb R^{768}$. A 384-channel image encoder uses
+learned boundaries to group at most sixteen glyphs. It predicts one to three
+continuous updates $u_{i,r}\in\mathbb R^{2048}$ per span. The frozen 28-layer
+contextual body consumes those vectors directly and supplies the state $c_i$
+after each span. During training, native source alignment supplies span ends
+and update counts; at inference both are derived from visible pixels.
+}
+
+\DIFadd{The writer predicts length $K\in\{0,\ldots,16\}$ from $c_i$. Length zero ends
+generation. For a nonempty span, a conditional rectified flow starts from
+$z_0\sim\mathcal N(0,I)$ and applies eight Euler steps,
+}\begin{equation}
+ z_{k+1}=z_k+\tfrac18 v_\theta(z_k,k/8,c_i),\qquad k=0,\ldots,7.
+\end{equation}
+\DIFadd{The codec decodes the endpoint into binary ink. The same image encoder reads
+these actual emitted pixels to update contextual history. No font renderer,
+OCR service, lexical head or answer lookup supplies generated content. The
+128-glyph budget can stop before a full predicted span would exceed the cap;
+that stream is recorded as budget-limited rather than naturally stopped.
+Raw page segmentation and arbitrary reading order are outside this tile-stream
+experiment.
+}
+
+\subsection*{\DIFadd{Six complete-sequence objectives}}
+\DIFadd{The reference-image training history differs from generated-image history at
+inference. Each complete sequence supplies all continuation/answer spans and
+its terminal decision. For predicted feedback vector $\hat u$ and compact
+source embedding $e$, the relative regression objective is
+}\begin{equation}
+ \mathcal L_{\rm fb}=\mathbb E
+ \frac{\|\hat u-e\|^2}{\max(\|e\|^2,10^{-8})}.
+\end{equation}
+\DIFadd{Training-only source embeddings and native span alignment come from the
+authenticated source archive; they do not enter deployed inference. The
+encoder also minimizes update-count cross entropy $\mathcal L_{\rm count}$
+and binary span-boundary cross entropy $\mathcal L_{\rm boundary}$. The writer
+minimizes span-length cross entropy $\mathcal L_{\rm length}$, including the
+zero-length terminal. For clean codec span $y$, fresh noise $\epsilon$ and
+$t\sim U(0,1)$, its velocity objective is
+}\begin{align}
+ z_t&=(1-t)\epsilon+ty,\\
+ \mathcal L_{\rm flow}&=\mathbb E\|v_\theta(z_t,t,c)-(y-\epsilon)\|^2/d,
+ \qquad d=768.
+\end{align}
+\DIFadd{Only valid glyph positions contribute. An offline Qwen3-VL teacher\cite{qwen3vl} supplies causal
+context states $h^{T}\in\mathbb R^{4096}$. A training-only linear projection
+$A:\mathbb R^{2048}\rightarrow\mathbb R^{4096}$ gives
+}\begin{equation}
+ \mathcal L_{\rm teacher}=\mathbb E[1-\cos(Ac,h^{T})].
+\end{equation}
+\DIFadd{The implemented objective is the equal-weight sum
+}\begin{align}
+ \mathcal L={}&\mathcal L_{\rm fb}+\mathcal L_{\rm count}
+ +\mathcal L_{\rm boundary}+\mathcal L_{\rm length}\nonumber\\
+ &+\mathcal L_{\rm flow}+\mathcal L_{\rm teacher}.
+\end{align}
+\DIFadd{The corpus has 7}\DIFaddend ,\DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{255,223 training glyph positions including repeated QA
+passages, and 2,576,239 continuation/answer target glyph positions. Its
+13,785 sequences cover fourteen training works and 9,023 QA pairs. Two whole
+works and separate CMRC passage groups form the development partition.
+Exact source, text and input-pixel overlap checks pass. Pretraining exposure
+of either inherited foundation remains unknown.
+}
+
+\DIFadd{The offline teacher body supplies 2,380,620 state targets in 108 authenticated
+shards. The fit uses seed 202611152, AdamW at learning rate $2\times10^{-4}$,
+weight decay 0.01, gradient norm capped at 1.0 and a 1,024-position padded
+batch budget. Trainable parameters remain FP32. Frozen contextual matrices
+are dequantized from the authenticated GGUF archive into BF16, and neural
+computation uses BF16 autocast. All 8,172 updates complete one pass. Five snapshots preserve
+initial, quarter, half, three-quarter and final shard exposure, recording
+their actual optimizer steps. Training resumes only with the original source,
+corpus, teacher-cache and configuration identities.
+}
+
+\subsection*{\DIFadd{Compact evaluation, review and provenance}}
+\DIFadd{The prospective development cohort contains 32 QA prompts from sixteen passage
+groups and twelve prefixes from two whole-held-out works. The five snapshots
+use seed 202611153, eight flow steps, the same normal prompts and a 128-glyph
+budget. The initial and final snapshots additionally run question-erased,
+passage-erased }\DIFaddend and \DIFdelbegin \DIFdel{partitioning}%DIFDELCMD < \MBLOCKRIGHTBRACE
+%DIFDELCMD < %%%
+\DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{book-prefix-erased controls, giving 372 pages. One model
+reviewer transcribes opaque original images before their mapping and scoring
+references are opened. Prior dataset familiarity is disclosed. Uncertain
+whole transcriptions, blank responses and caps stay in the original complete
+answer denominators. This is not independent human adjudication.
+}
+
+\DIFadd{Exact QA success requires a reliable nonempty transcription matching the
+canonical answer and a learned stop. Both-correct pairs require both answers
+and distinct output images. Book coherence is judged against the visible
+prefix; an uncertain whole transcription cannot establish readable coherent
+continuation. Pointwise 95\% intervals use 10,000 whole-passage-group bootstrap
+replicates, seed 202611154, retaining both questions per group. The same groups
+are resampled for final-minus-initial and normal-minus-erased differences.
+With constant zero observations the interval degenerates; it cannot establish
+zero population success. Two book works do not support a book-level interval.
+This small development cohort also requires fresh confirmation after any
+model-selection improvement.
+}
+
+\DIFadd{The unchanged native-text reference uses the same 44 normal prompts with
+Qwen3 1.7B on CPU; its book coherence remains unrated. A traced fresh-process
+replay separately checks the final image actor's fixed book output, exact
+display pixels, termination and emitted-pixel feedback against its suite run.
+The child receives only the visible input, authenticated foundation/codec and
+deployable image heads. Access auditing distinguishes an unused vocabulary
+inside source-archive metadata from materialized lexical model modules or
+answer access. Preparation, fit and inference costs are recorded separately.
+}
+
+
+\subsection*{\DIFadd{Initial raster control data}}
+\DIFadd{The }\DIFaddend public Chinese stream contains 7,017 provenance-tracked records. Records
 are assigned deterministically to training, development or a sealed partition
 before rendering. Original and simplified views inherit their source split.
 Both generation experiments use one fixed Noto Sans CJK font, 26-pixel writing
@@ -1223,7 +1469,7 @@ supplies the first 60 cells as context and cells 61--64 as future writing.
 The remaining cell is unused. No string, source identifier or symbolic target
 enters a model method. Sealed records remain unopened.
 
-\subsection*{Training and numerical verification}
+\subsection*{\DIFdelbegin \DIFdel{Training and numerical verification}\DIFdelend \DIFaddbegin \DIFadd{Initial raster control training}\DIFaddend }
 In the diffusion experiment, the reader is frozen. Copied glyph-prior weights initialize the denoiser,
 which is then optimized as a velocity predictor. AdamW uses a learning rate of
 $5\times10^{-5}$ for transferred layers and $2\times10^{-4}$ for new modules,
@@ -1378,7 +1624,8 @@ present raster-only deployment experiment.
 \bibitem{semot} Van Assel, H., De Brouwer, E., Saremi, S., Scalia, G. \& Regev, A. Generate in Reconstruction Space, Match in Semantic Space: Transport Geometry for One-Step Generation. \emph{arXiv} 2606.00514v2 (2026). \url{https://arxiv.org/abs/2606.00514v2}.
 \bibitem{multimodalflow} Tao, H. et al. Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces. \emph{arXiv} 2609.40362v1 (2026). \url{https://arxiv.org/abs/2609.40362v1}.
 \bibitem{ocg} Huang, L. \& Wu, X. OCG: Optical Character Grounded Visual Reasoning with Flow Matching. \href{https://www.alphaxiv.org/abs/2608.ocg-optical-character-grounded-reasoning}{Author manuscript} (2026). Peer-review status unverified.
-\bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}.
+\bibitem{qwen3vl} Bai, S. et al. Qwen3-VL Technical Report. \emph{arXiv} 2511.21631v2 (2025). \url{https://arxiv.org/abs/2511.21631v2}\DIFaddbegin \DIFadd{.
+}\bibitem{qwen3} \DIFadd{Yang, A. et al. Qwen3 Technical Report. \emph{arXiv} 2505.09388 (2025). }\url{https://arxiv.org/abs/2505.09388}\DIFaddend .
 \bibitem{dolly} Databricks. Databricks Dolly 15k instruction dataset (2023). \url{https://huggingface.co/datasets/databricks/databricks-dolly-15k}.
 \bibitem{jit} Li, T. \& He, K. Back to Basics: Let Denoising Generative Models Denoise. \emph{arXiv} 2511.13720v1 (2025). \url{https://arxiv.org/abs/2511.13720v1}.
 \bibitem{showo2} Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). \url{https://arxiv.org/abs/2506.15564v3}.

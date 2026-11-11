@@ -1,0 +1,103 @@
+\subsection*{Complete-sequence adaptation exposes a compact writing failure}
+We next test a smaller contextual foundation on complete continuation and
+question--answer sequences. The deployed contextual layers contain 1,409,410,048
+externally pretrained parameters from a Qwen3 1.7B archive\cite{qwen3}, with vocabulary
+embeddings and the lexical output head absent. A frozen 7.42M-parameter codec
+maps each visible glyph to 768 continuous coordinates. A learned image
+interface groups up to sixteen glyphs, supplies one to three contextual
+updates per span, predicts the next span's length and writes its image.
+Subsequent context receives the emitted pixels. This experiment transfers
+inherited language knowledge to a visual interface; it does not establish
+language acquisition from images alone.
+
+The corpus contains 13,785 training sequences: 4,762 public-domain book
+passages from fourteen works and 9,023 complete CMRC question--answer pairs\cite{cmrc}.
+The targets contain 2,576,239 glyph positions. Whole works and passage groups
+define the development partition; exact source, text and pixel overlap checks
+pass, while exposure during inherited pretraining is unknown. Offline teacher
+extraction supplies 2,380,620 causal state targets. One complete fit makes
+8,172 updates over all 108 shards, adapting 12,872,213 image parameters and
+an 8,388,608-parameter training-only projection. The contextual body and codec
+remain frozen. Extraction and fitting take 1,783.41 and 1,759.83 seconds,
+including resource waits of 770.72 and 110.11 seconds. Peak allocated GPU
+memory is 13.396 and 3.930 GiB, respectively. These are preparation and
+adaptation costs; they exclude the inherited foundation's original training.
+
+The fixed evaluation uses 32 questions in sixteen held-out passage groups and
+twelve prefixes from two held-out books. All normal inputs run at steps 0,
+1,956, 4,049, 6,152 and 8,172. Endpoint erased-input controls bring the total
+to 372 generated pages. Every checkpoint scores 0/32 complete exact QA
+answers and 0/16 both-correct pairs (Fig.~\ref{fig:compact-trajectory}).
+The source-matched Qwen3 1.7B native-text reference gives 8/32 exact answers
+and 2/16 both-correct pairs on the same normal prompts. Its run is on CPU;
+the comparison does not establish a matched-hardware efficiency advantage.
+
+One model-based reviewer inspected opaque answer images before opening the
+mapping to cases and checkpoints or the scoring references. The reviewer had prior dataset
+familiarity; no independent human adjudication was performed. Thirty pages
+were blank and 342 had uncertain whole-response transcriptions. Individual
+characters or punctuation were sometimes recognizable, but no reliable
+complete reading was credited. Consequently, no readable complete book
+continuation was established. This limits the interpretation of its coherence
+score. All raw streams remain in the denominators. The same first QA pair and
+book prefix, fixed before fitting, are shown at every checkpoint in
+Figs.~\ref{fig:compact-qa-a}--\ref{fig:compact-book}.
+
+The final normal cohort has seventeen predicted stops and twenty-seven
+budget-limited streams, compared with forty-four predicted stops initially.
+Blank normal responses decrease from nine to two. Neither change establishes
+language learning. Endpoint question-erased and passage-erased QA counts also
+remain zero. The registered passage-group bootstrap returns [0, 0] intervals
+for the constant complete-answer observations and their paired differences.
+These degenerate sample intervals do not establish zero population success.
+
+A separate traced final-checkpoint process reproduces the fixed 128-glyph
+book stream, its PNG, stopping/cap status and all 128 emitted-pixel feedback
+events. Required prompt and weight opens are verified, with no forbidden
+training/reference paths or IP connections observed. This checks the standalone
+boundary for that invocation, while its answer remains a language failure.
+
+The writer has an identifiable capacity restriction. Its final linear
+velocity projection has rank 384 in a 768-dimensional codec space. For a
+complementary projector $P$, $PW=0$ gives $Pv=Pb$, so the eight-step Euler
+endpoint satisfies $Pz_1=Pz_0+Pb$. At least 384 Gaussian directions cannot be
+contracted or conditioned by this continuous velocity model. Terminal
+normalization can restrict the varying output further. The result is an
+exact-arithmetic capacity statement, not a hardware-exact sampler identity or
+proof of the sole cause of failed answers. A separately registered 1,024-channel
+writer comparison checks the centered output map and velocity Jacobians;
+its trained language outcome remains unmeasured here.
+
+\plate{Figure_12_compact_trajectory}{\textbf{Complete-answer performance across the compact full-sequence fit.}
+\textbf{a}, Complete exact QA answers among 32 questions at five fixed
+checkpoints. \textbf{b}, Both different questions correct within sixteen
+passage groups. The native-text reference ran on CPU and is shown for task
+quality. Its displayed intervals resample whole passage groups. Every visual
+complete-answer interval is [0, 0], which does not imply zero population
+success. \textbf{c}, Predicted stops and budget-limited streams for 44 normal
+inputs. Blank responses are included among stops. All 372 generated pages
+were retained. Readability judgments come from one model reviewer without
+independent human adjudication.}{fig:compact-trajectory}
+
+\plate{Figure_13_compact_qa_a}{\textbf{Raw writing for the first fixed QA question.}
+The input preview shows its last three rows; the complete input is retained
+in the evidence. All five original answer PNGs are shown, including the blank
+initial response. Labels give actual update, emitted glyph count and predicted
+stop or budget status. The case was selected before fitting. No answer pixels
+were cropped, reconstructed, replaced by OCR or repaired. Recognizable
+fragments do not establish a readable complete answer.}{fig:compact-qa-a}
+
+\plate{Figure_14_compact_qa_b}{\textbf{Raw writing for a different question about the same passage.}
+The second member of the first fixed QA pair changes the question while
+retaining the passage. All five original answer PNGs and termination labels
+are shown. The input preview contains its last three rows, with the complete
+input preserved separately. Similar output prefixes are visible across the
+two questions. This display supplies the registered examples, without
+selecting successes or repairing ambiguous marks.}{fig:compact-qa-b}
+
+\plate{Figure_15_compact_book}{\textbf{Raw writing for the first fixed book continuation.}
+The preview contains the last three rows of the visible prefix. All five
+original outputs are retained, including the three early blank responses.
+Later nonblank writing does not establish readable coherent continuation.
+The complete input, original pixel streams, source hashes and all endpoint
+controls remain in the evidence.}{fig:compact-book}
