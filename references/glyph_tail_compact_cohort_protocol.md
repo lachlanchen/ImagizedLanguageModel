@@ -101,3 +101,19 @@ resource claim. Run no concurrent heavy project job. GPU0 and any owned GUI
 must be released after execution. The model comparison is implemented in
 `scripts/compare_glyph_tail_compact_cohort.py`; CPU preparation and generation
 are separate phases. This protocol records no completed result.
+
+## Prepared request
+
+The [CPU registration](evidence/glyph_tail_compact_cohort_registration_20261111.json)
+binds all 120 inputs and the retained final checkpoint. The
+[overlap audit](evidence/glyph_tail_compact_cohort_overlap_20261111.json) finds
+zero question-ID, normalized original-passage or original-training-PNG overlap
+with the recorded local tail-training data; the complete 3,211-question source
+pool also has zero current QA question/passage overlap. Inherited pretraining
+and all earlier book/copy ancestors remain outside that certification.
+
+A [CPU serialization check](evidence/glyph_tail_compact_cohort_serialization_20261111.json)
+uses an actual retained 64-glyph capped output, verifies every original
+emitted-image feedback hash, and round-trips signed pixels through binary ink
+and the wrapped PNG grid exactly. It makes no new neural model call and does
+not measure language. Model generation has not yet run for the new cohort.
