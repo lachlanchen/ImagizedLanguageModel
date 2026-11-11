@@ -1,0 +1,415 @@
+{
+  "measured_data_sha256": "92f851989128523fc4e316632ef3f91b08d5aa408451cb885116c7286d758b27",
+  "source_sha256": {
+    "balanced_language": "34d84294a62983d6ce9bd684afff1db4365b9077bee3a7aff55f1d8fdcd461f5",
+    "flow_language": "fe791e1640127034a5a1f369998d315dd687c9c49f8cb630413a1a22172b0913",
+    "parent_language": "30309a15bf781a6e4ca6da436cc3957b3f8daa266a65e6518533943c3139c331",
+    "rollout": "53f46f51ab1acd762bdbe8ce35f17e8a8386ec7cc5165d4e399d73297027aca0",
+    "balanced_physical": "400dd8a70215f53c94f3af72ac3c5368c864525126bbf45ae34f848a6fd959fe"
+  },
+  "charts": [
+    {
+      "categories": [
+        "Original flow",
+        "Extra FM",
+        "Full rollout"
+      ],
+      "series": [
+        {
+          "name": "First",
+          "values": [
+            0.986408,
+            0.98635,
+            0.990581
+          ]
+        },
+        {
+          "name": "Later",
+          "values": [
+            0.974518,
+            0.97709,
+            0.978614
+          ]
+        }
+      ],
+      "position": {
+        "left": 75,
+        "top": 135,
+        "width": 710,
+        "height": 495
+      }
+    },
+    {
+      "categories": [
+        "Train first",
+        "Train later",
+        "Dev fixed first",
+        "Dev prop. first"
+      ],
+      "series": [
+        {
+          "name": "Exact pixels",
+          "values": [
+            32,
+            32,
+            0,
+            4
+          ]
+        }
+      ],
+      "position": {
+        "left": 865,
+        "top": 135,
+        "width": 685,
+        "height": 495
+      }
+    },
+    {
+      "categories": [
+        "Fixed cells",
+        "Proportional"
+      ],
+      "series": [
+        {
+          "name": "Parent",
+          "values": [
+            2,
+            6
+          ]
+        },
+        {
+          "name": "Flow",
+          "values": [
+            2,
+            7
+          ]
+        },
+        {
+          "name": "Balanced",
+          "values": [
+            2,
+            6
+          ]
+        }
+      ],
+      "position": {
+        "left": 75,
+        "top": 795,
+        "width": 710,
+        "height": 475
+      }
+    },
+    {
+      "categories": [
+        "Fixed cells",
+        "Proportional"
+      ],
+      "series": [
+        {
+          "name": "Parent",
+          "values": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "Flow",
+          "values": [
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Balanced",
+          "values": [
+            1,
+            0
+          ]
+        }
+      ],
+      "position": {
+        "left": 865,
+        "top": 795,
+        "width": 710,
+        "height": 475
+      }
+    }
+  ],
+  "native_charts": 4,
+  "full_precision_rollout": {
+    "train_first": {
+      "candidate": {
+        "cases": 32,
+        "exact": 6,
+        "mean_foreground_f1": 0.9876876948638184,
+        "median_foreground_f1": 0.9905811799982362,
+        "at_least_095": 31
+      },
+      "control": {
+        "cases": 32,
+        "exact": 5,
+        "mean_foreground_f1": 0.9844521311558418,
+        "median_foreground_f1": 0.9863498169634548,
+        "at_least_095": 32
+      },
+      "original_flow": {
+        "cases": 32,
+        "exact": 4,
+        "mean_foreground_f1": 0.9842370590206475,
+        "median_foreground_f1": 0.9864075281382618,
+        "at_least_095": 32
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 13,
+        "mean_foreground_f1": 0.872790276557618,
+        "median_foreground_f1": 0.9902765977532333,
+        "at_least_095": 20
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999322125813449,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "train_later": {
+      "candidate": {
+        "cases": 32,
+        "exact": 2,
+        "mean_foreground_f1": 0.9610131542714849,
+        "median_foreground_f1": 0.9786138097411489,
+        "at_least_095": 25
+      },
+      "control": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.9549055332154972,
+        "median_foreground_f1": 0.9770902220122815,
+        "at_least_095": 24
+      },
+      "original_flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.9545348989597855,
+        "median_foreground_f1": 0.9745181583202521,
+        "at_least_095": 23
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 15,
+        "mean_foreground_f1": 0.9636192243408271,
+        "median_foreground_f1": 0.9975225019069413,
+        "at_least_095": 27
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 32,
+        "mean_foreground_f1": 1,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "fixed_cells": {
+      "candidate": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.46275876748847256,
+        "median_foreground_f1": 0.4157551150386116,
+        "at_least_095": 2
+      },
+      "control": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.44889110989875003,
+        "median_foreground_f1": 0.3823541537827252,
+        "at_least_095": 1
+      },
+      "original_flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.4477708546553908,
+        "median_foreground_f1": 0.3764468514388871,
+        "at_least_095": 1
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.4921725700825069,
+        "median_foreground_f1": 0.5064320297951583,
+        "at_least_095": 1
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999336518046709,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "proportional": {
+      "candidate": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.6671703365629764,
+        "median_foreground_f1": 0.6900981933455324,
+        "at_least_095": 9
+      },
+      "control": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.6606026024356746,
+        "median_foreground_f1": 0.6801671732522796,
+        "at_least_095": 9
+      },
+      "original_flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.6615577559059167,
+        "median_foreground_f1": 0.6842713231648915,
+        "at_least_095": 9
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 3,
+        "mean_foreground_f1": 0.6329177606069181,
+        "median_foreground_f1": 0.631571382944746,
+        "at_least_095": 5
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999336518046709,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    }
+  },
+  "full_precision_balanced": {
+    "train_first": {
+      "candidate": {
+        "cases": 32,
+        "exact": 32,
+        "mean_foreground_f1": 1,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 13,
+        "mean_foreground_f1": 0.872790276557618,
+        "median_foreground_f1": 0.9902765977532333,
+        "at_least_095": 20
+      },
+      "flow": {
+        "cases": 32,
+        "exact": 4,
+        "mean_foreground_f1": 0.9842370590206475,
+        "median_foreground_f1": 0.9864075281382618,
+        "at_least_095": 32
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999322125813449,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "train_later": {
+      "candidate": {
+        "cases": 32,
+        "exact": 32,
+        "mean_foreground_f1": 1,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 15,
+        "mean_foreground_f1": 0.9636192243408271,
+        "median_foreground_f1": 0.9975225019069413,
+        "at_least_095": 27
+      },
+      "flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.9545348989597855,
+        "median_foreground_f1": 0.9745181583202521,
+        "at_least_095": 23
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 32,
+        "mean_foreground_f1": 1,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "fixed_cells": {
+      "candidate": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.479075773259679,
+        "median_foreground_f1": 0.45438596491228067,
+        "at_least_095": 1
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.4921725700825069,
+        "median_foreground_f1": 0.5064320297951583,
+        "at_least_095": 1
+      },
+      "flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.4477708546553908,
+        "median_foreground_f1": 0.3764468514388871,
+        "at_least_095": 1
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999336518046709,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    },
+    "proportional": {
+      "candidate": {
+        "cases": 32,
+        "exact": 4,
+        "mean_foreground_f1": 0.6583823546749501,
+        "median_foreground_f1": 0.6832523835222162,
+        "at_least_095": 7
+      },
+      "parent": {
+        "cases": 32,
+        "exact": 3,
+        "mean_foreground_f1": 0.6329177606069181,
+        "median_foreground_f1": 0.631571382944746,
+        "at_least_095": 5
+      },
+      "flow": {
+        "cases": 32,
+        "exact": 0,
+        "mean_foreground_f1": 0.6615577559059167,
+        "median_foreground_f1": 0.6842713231648915,
+        "at_least_095": 9
+      },
+      "codec": {
+        "cases": 32,
+        "exact": 31,
+        "mean_foreground_f1": 0.9999336518046709,
+        "median_foreground_f1": 1,
+        "at_least_095": 32
+      }
+    }
+  },
+  "chart_F1_decimal_places": 6,
+  "new_optimizer_updates": 0,
+  "unmeasured_language_score_not_zero": true,
+  "model_comparison_not_learning_curve": true
+}

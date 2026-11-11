@@ -103,6 +103,19 @@ acceptance criteria remain unproved.
 
 ## Status
 
-Plan recorded before TeX or figure changes. New balanced language scores,
-Figure 22 and manuscript build are pending. The live model worker and its
-exact process identity remain in the private runtime handoff.
+All balanced language generation, 54 opaque boards, twelve prefixes, frozen
+readings, independent scoring and all 216 initial-state comparisons are now
+complete. The result fails its pilot and is public in
+`references/balanced_writer_matched_result.md`. Both GPU workers have exited.
+
+Standalone Figure 22 is complete in native PPT, PDF and PNG. Four chart caches
+and literal workbooks match the bound values, all six physical F1 labels
+remain visible in PDF, and all 224 prior assets remain unchanged. Both
+Artifact Tool and lossless LibreOffice exports are visually inspected. Native
+PowerPoint-app review is not claimed. The first finalization attempt lacks
+`RUNTIME_NODE_MODULES`; its source, candidate and log remain private. The
+source-identical retry supplies the verified runtime and passes. The audit
+explicitly verifies only the standalone figure, with matching article PDFs
+still unverified. Active TeX and all three current PDFs remain the preserved
+MotorDiagnostics baseline. Completing the scoped text/build/redline/sync
+revision is the next publication action.

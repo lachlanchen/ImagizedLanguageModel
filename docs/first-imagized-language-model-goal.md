@@ -112,9 +112,11 @@ recounted and viewed. Development first-image mean F1 is 0.479076 fixed and
 This gap and the completed language failure remain separate. Fixed/proportional
 generation takes 1,534.527/1,140.482 seconds at 17.786 GiB, with zero pressure
 waiting. Both workers have exited. Preserve their exact identities and files;
-no repeat generation is pending. The combined Figure 22/TeX/PDF revision is
-bounded in the manuscript plan, with source/data preparation implemented and
-native export/build pending. The goal remains active and unachieved.
+no repeat generation is pending. Standalone Figure 22 is verified in native
+PPT/PDF/PNG, with four editable charts and all 224 earlier assets preserved.
+The bounded article TeX/PDF/redline integration remains pending; current
+article PDFs retain the verified MotorDiagnostics baseline. The goal remains
+active and unachieved.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted

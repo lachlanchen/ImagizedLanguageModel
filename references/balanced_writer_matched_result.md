@@ -92,6 +92,8 @@ bind all 216 outputs, 54 boards and twelve book prefixes. The
 [physical diagnosis](balanced_writer_matched_diagnosis_result.md) remains
 separate. The [bounded manuscript plan](manuscript_realized_writer_revision_plan.md)
 will combine this result with the completed rollout pair in Figure 22.
-Its source and data loader are implemented and the physical arrays recounted;
-the native figure export and matching PDFs are pending. The verified
-33/58/59-page MotorDiagnostics manuscript remains the current PDF baseline.
+The standalone [native figure](../publication/ilm-nature/figures/Realized_writer_figures.pptx)
+and [PDF](../publication/ilm-nature/figures/Figure_22_realized_writer.pdf) are
+verified against complete records and original physical arrays. Matching
+article TeX/PDF/redline integration is pending. The verified 33/58/59-page
+MotorDiagnostics manuscript remains the current PDF baseline.

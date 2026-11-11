@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check Figure 22 native values, literal workbooks and preserved prior assets."""
 from collections import Counter
+import argparse
 from io import BytesIO
 import hashlib
 import json
@@ -46,7 +47,7 @@ def locate_figure(path, expected_labels):
                 physical_F1_labels_verified=True, visual_QA_still_required=True)
 
 
-def main():
+def main(figure_only=False):
     bindings_path = STAGE / 'figure_bindings.json'
     if not bindings_path.exists():
         bindings_path = HERE / 'evidence/realized_writer_figure_bindings.json'
@@ -95,9 +96,10 @@ def main():
             charts.append(dict(part=chart_part, workbook=book_part,
                                cache_and_literal_cells_match=True, series=len(series)))
     labels = Counter(f'{value:.6f}' for series in bindings['charts'][0]['series'] for value in series['values'])
-    paths = [HERE / 'figures/Figure_22_realized_writer.pdf',
-             STAGE / 'reading/manuscript.pdf', STAGE / 'review/manuscript_review.pdf',
-             STAGE / 'redlines/redlined_manuscript/redlined_manuscript.pdf']
+    paths = [HERE / 'figures/Figure_22_realized_writer.pdf']
+    if not figure_only:
+        paths += [STAGE / 'reading/manuscript.pdf', STAGE / 'review/manuscript_review.pdf',
+                  STAGE / 'redlines/redlined_manuscript/redlined_manuscript.pdf']
     PDFs = {str(path.relative_to(ROOT)): locate_figure(path, labels) for path in paths}
     preserved = load(STAGE / 'preserved_assets.json')
     for name, expected in preserved['files_sha256'].items():
@@ -107,10 +109,15 @@ def main():
         source_sha256=sha(Path(__file__)), figure_binding_sha256=sha(bindings_path),
         prior_assets_preserved=len(preserved['files_sha256']), previous_assets_unchanged=True,
         native_PowerPoint_application_opened=False, structural_verification_only=True,
-        visual_QA_still_required=True, comparisons_not_learning_curve=True)
-    (STAGE / 'figure_audit.json').write_text(json.dumps(result, indent=2) + '\n')
+        visual_QA_still_required=True, comparisons_not_learning_curve=True,
+        matched_article_PDFs_verified=not figure_only)
+    name = 'figure_only_audit.json' if figure_only else 'figure_audit.json'
+    (STAGE / name).write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(dict(native_charts=4, PDFs=len(PDFs), prior_assets_preserved=len(preserved['files_sha256']))))
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--figure-only', action='store_true',
+                        help='Verify the native figure; leave matching article PDFs explicitly unverified')
+    main(parser.parse_args().figure_only)

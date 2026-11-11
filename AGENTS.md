@@ -109,8 +109,9 @@ complete result at `references/balanced_writer_matched_result.md`.
 Before another fit, localize conditional transfer, reader access, generated
 history and stopping from saved trajectories and the existing native control.
 Do not extend failed writer fits. The combined realized-writer manuscript
-revision has a committed bounded plan and figure sources; native export and
-matching PDFs remain pending. Keep the current verified PDF baseline.
+revision has a committed bounded plan and verified standalone Figure22 in
+native PPT/PDF/PNG. Article TeX/PDF/redline integration remains pending. Keep
+the current verified PDF baseline until that bounded build is complete.
 Preserve the completed diagnosis, public pixel archive and original language
 scores. Do not rerun this audit as pending work or call it usable language.
 
