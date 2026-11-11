@@ -206,6 +206,17 @@ def run(output):
     from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
     from scripts.train_semantic_glyph_language import numerics, atomic_tensor
     from ilm.visual_lm.semantic_glyph_loop import tensor_hash
+    from scripts.score_pixel_language_first_blocks import owner_live
+    if (folder/'status.json').exists() and owner_live(load(folder/'status.json')):
+        raise ValueError('The previous generation owner is still live')
+    if (folder/'report.json').exists() and load(folder/'report.json').get('all_inputs_completed'):
+        for row in registration['inputs']:
+            verify_case(folder/row['id'],row)
+        return
+    attempts=folder/'attempts';attempts.mkdir(exist_ok=True)
+    attempt_index=len(list(attempts.glob('attempt_*.json')))+1
+    earlier_attempts={p.name:sha(p) for p in sorted(attempts.glob('attempt_*.json'))}
+    loading=None
     monitor = GlyphReaderMonitor(folder,registration['maximum_seconds'])
     monitor.pressure_wait_allowance_seconds=registration['pressure_wait_allowance_seconds']
     monitor.status('admitting')
@@ -258,12 +269,20 @@ def run(output):
             save_json(folder/'report.json',dict(request_sha256=sha(folder/'request.json'),optimizer_updates=18000,
                 new_optimizer_updates=0,records=records,provenance=provenance,checkpoint_load_seconds=loading,
                 total_generation_seconds=sum(r['elapsed_seconds'] for r in records),reference_inputs=False,
-                output_repaired=False,all_inputs_completed=len(records)==120,**monitor.receipt()))
+                output_repaired=False,all_inputs_completed=len(records)==120,
+                attempt_index=attempt_index,earlier_attempts_sha256=earlier_attempts,**monitor.receipt()))
             monitor.status('complete')
     except BaseException as error:
         monitor.status('failed',error=repr(error));raise
     finally:
         status=load(folder/'status.json');status['pid']=None;save_json(folder/'status.json',status)
+        save_json(attempts/f'attempt_{attempt_index:04d}.json',dict(
+            registration_sha256=sha(output/'registration.json'),attempt=attempt_index,
+            terminal_status=status,elapsed_seconds=time.perf_counter()-monitor.began,
+            resource_wait_seconds=monitor.waited,checkpoint_load_seconds=loading,
+            peak_allocated_vram_gib=torch.cuda.max_memory_allocated()/1024**3 if torch.cuda.is_initialized() else None,
+            complete_case_reports=len(list(folder.glob('*/report.json'))),
+            complete_report_sha256=sha(folder/'report.json') if (folder/'report.json').exists() else None))
 
 
 def review(output):
