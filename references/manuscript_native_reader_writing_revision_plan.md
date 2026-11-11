@@ -106,3 +106,17 @@ The Artifact Tool object preview abbreviates fractional F1 labels in milli
 notation; the final native chart's explicit six-place format and Office PDF
 show 0.999934, 0.492173 and 0.632918. The delivered PNG comes from that lossless PDF,
 not the object preview. No native PowerPoint application test is claimed.
+
+A final cache-independent check builds all three article PDFs in a new
+directory from committed figure assets and public bindings. Check-only mode
+does not replace the active PDFs or redline sources. The baseline manifest is
+recreated from immutable Git inputs when absent. Compare every rendered page
+with the verified PDFs, then refresh only the owned current package's changed
+build helpers/receipts under the existing manifest hashes. This fixes a
+reproduction dependency introduced by this revision without changing science.
+The check passes from an empty publication build directory using committed
+figure assets and public bindings with the same pinned external tools.
+All 140 rendered pages are pixel-identical to the visually verified PDFs, and
+the active PDFs remain unchanged. The current owned package's helper/receipt
+refresh is hash-guarded; prior package contents and scientific outputs stay
+unchanged.

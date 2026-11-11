@@ -199,9 +199,13 @@ the immutable `0f14fa3f` baseline. The running actual-context motor trial remain
 outside this paper revision until its complete language evaluation is scored.
 The [build receipt](../publication/ilm-nature/evidence/native_reader_writing_publication_build.json)
 and [local delivery receipt](../publication/ilm-nature/evidence/native_reader_writing_local_sync.json)
-bind the 31/54/55-page PDFs and 472 selected package files, plus the separately
+bind the 31/54/55-page PDFs and 473 selected package files, plus the separately
 verified receipt. Owned latest-PDF aliases match the delivered files; all 443
 previous package files remain unchanged. Cloud propagation is unverified.
+An empty-publication-cache check rebuilds all three PDFs from committed figure
+assets/public bindings using the pinned external tools. All 140 rendered pages
+match the verified PDFs exactly; active PDFs remain untouched. The current
+package's guarded helper/receipt refresh records this reproduction repair.
 Model diagnosis and readable held-out answers take priority
 over additional presentation work.
 

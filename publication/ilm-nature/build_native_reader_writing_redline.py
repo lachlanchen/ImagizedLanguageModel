@@ -11,8 +11,9 @@ import subprocess
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-BASELINE = ROOT / "artifacts/native_reader_writing_publication_v2/baseline_sources"
-QA = ROOT / "artifacts/native_reader_writing_publication_v2/redlines"
+STAGE = Path(os.environ.get('ILM_NATIVE_PAPER_STAGE',str(ROOT/'artifacts/native_reader_writing_publication_v2')))
+BASELINE = STAGE / "baseline_sources"
+QA = STAGE / "redlines"
 TOOL = ROOT / "artifacts/external/latexdiff-1.4.0/latexdiff"
 TOOL_SHA = "bbf7567f48ae6d52887ebce0a390eac0718508b5e1e3ee158bffd4280dca8723"
 INPUT = re.compile(r"\\input\{([^{}]+)\}")
@@ -123,7 +124,8 @@ def main():
         source = marked.stdout.replace(r"\begin{document}",
             r"\begin{document}"+"\n"+notice,1)
         source = "\n".join(line.rstrip() for line in source.splitlines()) + "\n"
-        target = HERE/(output+".tex")
+        check_only = os.environ.get('ILM_NATIVE_PAPER_CHECK_ONLY') == '1'
+        target = (folder if check_only else HERE)/(output+".tex")
         target.write_text(source)
         env = dict(os.environ,TEXINPUTS=str(HERE)+os.pathsep+os.environ.get("TEXINPUTS",""))
         build = subprocess.run(["latexmk","-pdf","-interaction=nonstopmode",
@@ -135,12 +137,12 @@ def main():
         log = (folder/(output+".log")).read_text()
         if any(x in log for x in ("Overfull","undefined references","undefined citations","LaTeX Error")):
             raise ValueError("redline layout/reference error: "+str(folder))
-        shutil.copy2(folder/(output+".pdf"),HERE/(output+".pdf"))
+        if not check_only:shutil.copy2(folder/(output+".pdf"),HERE/(output+".pdf"))
         if source.count(r"\DIFadd{") == 0:
             raise ValueError("no visible added text")
         results[output] = dict(old_inputs_sha256=old_hashes,new_inputs_sha256=new_hashes,
             added_text_markers=source.count(r"\DIFadd{"),
-            tex_sha256=sha(target.read_bytes()),pdf_sha256=sha((HERE/(output+".pdf")).read_bytes()))
+            tex_sha256=sha(target.read_bytes()),pdf_sha256=sha((folder/(output+".pdf")).read_bytes()))
     receipt = dict(baseline_commit=revision,baseline_manifest_sha256=sha((BASELINE/"baseline_manifest.json").read_bytes()),
         latexdiff_sha256=TOOL_SHA,markup="CFONT / SAFE / IDENTICAL floats; math-markup=0",
         abstract_inlined_before_comparison=True,bibliography_interline_penalty_normalized=5000,
@@ -149,7 +151,9 @@ def main():
         article_redline_layout="matching line-numbered single-column review source",
         baseline_figures_and_style_unchanged=True,
         documents=results,builder_sha256=sha(Path(__file__).read_bytes()))
-    (HERE/"evidence/native_reader_writing_redline_build.json").write_text(json.dumps(receipt,indent=2)+"\n")
+    receipt_path=(STAGE/'redline_build.json' if os.environ.get('ILM_NATIVE_PAPER_CHECK_ONLY')=='1'
+                  else HERE/'evidence/native_reader_writing_redline_build.json')
+    receipt_path.write_text(json.dumps(receipt,indent=2)+"\n")
     print("Built manuscript redline against "+revision)
 
 

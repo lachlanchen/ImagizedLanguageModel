@@ -9,10 +9,11 @@ import sys
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
-STAGE=ROOT/'artifacts/native_reader_writing_publication_v2'
+STAGE=Path(os.environ.get('ILM_NATIVE_PAPER_STAGE',str(ROOT/'artifacts/native_reader_writing_publication_v2')))
 
 
 def main():
+    STAGE.mkdir(parents=True,exist_ok=True)
     env=dict(os.environ,OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2')
     for directory,name in [('reading','manuscript'),('review','manuscript_review')]:
         folder=STAGE/directory;folder.mkdir(exist_ok=True)
@@ -31,8 +32,9 @@ def main():
         cwd=HERE,env=env,capture_output=True,text=True)
     (STAGE/'native_reader_figure_audit.log').write_text(result.stdout+result.stderr)
     if result.returncode:raise RuntimeError('Native chart/pixel preservation audit failed')
-    for directory,name in [('reading','manuscript'),('review','manuscript_review')]:
-        shutil.copy2(STAGE/directory/(name+'.pdf'),HERE/(name+'.pdf'))
+    if os.environ.get('ILM_NATIVE_PAPER_CHECK_ONLY')!='1':
+        for directory,name in [('reading','manuscript'),('review','manuscript_review')]:
+            shutil.copy2(STAGE/directory/(name+'.pdf'),HERE/(name+'.pdf'))
     data=json.loads((STAGE/'figure_audit.json').read_text())
     print(json.dumps(dict(builds_complete=True,original_pixels_preserved=True,
         PDF_pages={k:v['pages'] for k,v in data['PDFs'].items()},manual_visual_QA_still_required=True)))

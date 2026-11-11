@@ -10,6 +10,12 @@ they do not select the current model or authorize an additional GPU job.
 
 ## 11 November: fixed motor stage completed; native-reader paper updated
 
+The subsequent empty-publication-cache check reproduces all 140 rendered pages
+from committed figure assets/public bindings using the pinned external tools,
+without replacing the active PDFs. Guarded helper/receipt refresh brings the
+current package to 473 files plus its separate receipt. Scientific PDF/image
+pixels and all previous InputTransfer-package files remain unchanged.
+
 The actual-context candidate completes and authenticates all 120 fixed-cell
 streams in 3,442.608 seconds, with 12 predicted stops and 108 caps. Whole-answer
 readings and language scores remain unmade. The 96 proportional streams run

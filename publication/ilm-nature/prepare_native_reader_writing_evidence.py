@@ -3,6 +3,7 @@
 from collections import defaultdict
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -12,7 +13,7 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-STAGE = ROOT/'artifacts/native_reader_writing_publication_v2'
+STAGE = Path(os.environ.get('ILM_NATIVE_PAPER_STAGE',str(ROOT/'artifacts/native_reader_writing_publication_v2')))
 EVIDENCE = ROOT/'references/evidence'
 
 

@@ -4,6 +4,7 @@ from collections import Counter
 from io import BytesIO
 import hashlib
 import json
+import os
 from pathlib import Path, PurePosixPath
 import posixpath
 from xml.etree import ElementTree as ET
@@ -16,7 +17,7 @@ from PIL import Image
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
-STAGE=ROOT/'artifacts/native_reader_writing_publication_v2'
+STAGE=Path(os.environ.get('ILM_NATIVE_PAPER_STAGE',str(ROOT/'artifacts/native_reader_writing_publication_v2')))
 FIGURE=STAGE/'figure_v5'
 NS=dict(c='http://schemas.openxmlformats.org/drawingml/2006/chart',
     a='http://schemas.openxmlformats.org/drawingml/2006/main',
@@ -64,7 +65,9 @@ def pdf_pixels(path,expected):
 
 
 def main():
-    bindings=load(FIGURE/'figure_bindings.json')
+    binding_path=FIGURE/'figure_bindings.json'
+    if not binding_path.exists():binding_path=HERE/'evidence/native_reader_writing_figure_bindings.json'
+    bindings=load(binding_path)
     ppt=HERE/'figures/Native_reader_writing_figures.pptx'
     charts=[];images=[]
     with ZipFile(ppt) as archive:
@@ -115,14 +118,19 @@ def main():
                 if abs(int(values[axis])-round(source['position'][key]*9525))>1:raise ValueError('Image geometry changed')
             images.append(dict(case=source['case'],kind=source['kind'],PNG_bytes_and_pixels_preserved=True))
     expected=Counter(x['gray_pixels_sha256'] for x in bindings['pictures'])
+    redline=(STAGE/'redlines/redlined_manuscript/redlined_manuscript.pdf'
+             if os.environ.get('ILM_NATIVE_PAPER_CHECK_ONLY')=='1' else HERE/'redlined_manuscript.pdf')
     paths=[HERE/'figures/Figure_20_native_reader_writing.pdf',STAGE/'reading/manuscript.pdf',
-           STAGE/'review/manuscript_review.pdf',HERE/'redlined_manuscript.pdf']
+           STAGE/'review/manuscript_review.pdf',redline]
     PDFs={str(p.relative_to(ROOT)):pdf_pixels(p,expected) for p in paths}
+    if not (STAGE/'preserved_assets.json').exists():
+        from prepare_native_reader_writing_evidence import freeze_preserved_assets
+        freeze_preserved_assets()
     preserved=load(STAGE/'preserved_assets.json')
     for name,expected_sha in preserved['files_sha256'].items():
         if sha(HERE/name)!=expected_sha:raise ValueError('Prior figure/style/supplement asset changed: '+name)
     result=dict(native_charts=charts,original_images=images,PDFs=PDFs,preserved_previous_assets=len(preserved['files_sha256']),
-        prior_assets_unchanged=True,PPT_sha256=sha(ppt),figure_source_bindings_sha256=sha(FIGURE/'figure_bindings.json'),
+        prior_assets_unchanged=True,PPT_sha256=sha(ppt),figure_source_bindings_sha256=sha(binding_path),
         source_sha256=sha(Path(__file__)),chart_F1_display_decimal_places=6,
         full_precision_F1_retained=bindings['full_precision_mean_first_F1'],native_PowerPoint_application_opened=False,
         structural_and_pixel_verification_only=True,manual_visual_review_required=True)

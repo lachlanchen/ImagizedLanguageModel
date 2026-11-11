@@ -71,6 +71,13 @@ The current local delivery is `ILM_NatureStyle_20261111_NativeReading` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
 The previous versioned packages remain available.
 
+Rebuild the matching article PDFs from the committed figure assets with
+`python build_native_reader_writing_publication.py` from this directory.
+To check a fresh build without replacing the verified PDFs, set
+`ILM_NATIVE_PAPER_CHECK_ONLY=1` and `ILM_NATIVE_PAPER_STAGE` to a new absolute
+build directory under this repository's `artifacts/` tree. This uses LaTeX, the pinned redline tool and the CPU chart/pixel
+auditor. It needs no model inference or private figure-generation cache.
+
 ## Earlier restricted answer results
 
 Contextual adaptation gives **16/32 clear complete answers versus 11/32** for
