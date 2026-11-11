@@ -167,3 +167,17 @@ writing, global invertibility or a hardware sampler guarantee. See the
 [complete fit receipt](evidence/compact_visual_span_full_rank_completed_20261111.json).
 The five-checkpoint image evaluation is running; language scoring and trained
 cold replay remain pending.
+
+All five generation runs have subsequently completed: 120/44/44/44/120 pages
+at the registered checkpoints, with their full controls and original streams.
+A fresh traced child replayed the fixed final book case with 128 glyphs and
+128 actual emitted-pixel feedback events. Pixels, PNG, termination and feedback
+hashes match the suite; no forbidden training/reference paths or IP connections
+were observed. The wrapper session ended with code 143 before saving its
+verification receipt, while every retained child trace ends with exit zero.
+CPU-only post-processing used the unchanged access audit and comparison
+functions to recover the receipt from those original completed outputs.
+Inference was not rerun. The wrapper's termination cause is not established.
+See the [generation and cold receipt](evidence/compact_visual_span_full_rank_cold_20261111.json).
+Opaque review and language scoring remain pending; cold reproducibility does
+not establish a correct answer.

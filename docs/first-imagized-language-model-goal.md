@@ -41,9 +41,16 @@ shards and the same 13,785 sequences. It took 1,945.56 seconds, including
 All final optimizer counters equal 8,172. The trained output projection,
 LayerNorm-centered map and three tested local velocity Jacobians retain rank
 768. See the [complete fit and capacity evidence](../references/evidence/compact_visual_span_full_rank_completed_20261111.json).
-The fixed five-checkpoint image evaluation is running; generated-language
-results for this writer remain unproved. Finish all 372 outputs, opaque review,
-scoring and trained cold replay before another model change. Treat its final
+All five fixed generations are complete, retaining 372 pages. The trained
+cold child reproduced the fixed 128-glyph book stream, stop/cap decision and
+all 128 emitted-pixel feedback hashes, with no forbidden training/reference
+opens or IP connections observed. Its wrapper ended before saving a receipt;
+the unchanged retained child traces all end with exit zero, and CPU-only
+verification recovered the receipt without rerunning inference. The wrapper's
+termination cause is unknown. See the
+[generation and cold evidence](../references/evidence/compact_visual_span_full_rank_cold_20261111.json).
+Generated-language quality for this writer remains unproved. Complete the
+opaque review and scoring before another model change. Treat its final
 checkpoint as the primary comparison.
 
 ## Goal and acceptance criteria
