@@ -439,8 +439,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('phase',choices=('prepare','run'))
     parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v2')
+    parser.add_argument('--reuse-preparation',type=Path)
     args=parser.parse_args()
-    if args.phase=='prepare':prepare(args.output)
+    if args.phase=='prepare':prepare(args.output,args.reuse_preparation)
     else:run(args.output)
 
 
