@@ -21,13 +21,22 @@ def load(path):return json.loads(Path(path).read_text())
 
 
 def totals(rows):
-    keys=('glyphs','exact_glyphs','tp','fp','fn')
+    keys=('glyphs','exact_glyphs','tp','fp','fn','nonblank_target_glyphs','nonblank_exact_glyphs','blank_target_glyphs','blank_exact_glyphs')
     value={k:sum(row[k] for row in rows) for k in keys}
     value['foreground_f1']=2*value['tp']/max(2*value['tp']+value['fp']+value['fn'],1)
     value['exact_glyph_rate']=value['exact_glyphs']/max(value['glyphs'],1)
     value['records']=len(rows)
     value['mean_record_foreground_f1']=float(np.mean([r['foreground_f1'] for r in rows])) if rows else None
     return value
+
+
+def detailed_pixels(predicted,gold):
+    result=image_metrics(predicted,gold)
+    nonblank=gold.bool().flatten(1).any(1)
+    exact=(predicted==gold).flatten(1).all(1)
+    result.update(nonblank_target_glyphs=int(nonblank.sum()),nonblank_exact_glyphs=int((nonblank & exact).sum()),
+                  blank_target_glyphs=int((~nonblank).sum()),blank_exact_glyphs=int((~nonblank & exact).sum()))
+    return result
 
 
 def analyze(run,output):
@@ -65,7 +74,7 @@ def analyze(run,output):
             codec=read_image(directory/'codec.png',len(gold))
             cm=image_metrics(codec,gold)
             if cm!=row['codec']:raise ValueError('Codec metrics differ from actual pixels')
-            groups[model,case['split'],case['kind'],'codec','all'].append(cm)
+            groups[model,case['split'],case['kind'],'codec','all'].append(detailed_pixels(codec,gold))
             rr=row['reader']
             if rr['feedback_relative_mse']+1e-5<floor[key]['minimum_relative_error_mean']:
                 raise ValueError('Actual reader error violates the computed affine bound')
@@ -87,8 +96,8 @@ def analyze(run,output):
                 for j,event in enumerate(saved['trace']):
                     if event['span']!=prefix+j or digest_tensor(ink[offsets[j]:offsets[j+1]])!=event['ink_sha256']:
                         raise ValueError('Trace differs from emitted pixels')
-                case_arms[arm]={'all':measured,'first':image_metrics(ink[:first],gold[:first]),
-                                'later':image_metrics(ink[first:],gold[first:]) if first<len(gold) else None,
+                case_arms[arm]={'all':detailed_pixels(ink,gold),'first':detailed_pixels(ink[:first],gold[:first]),
+                                'later':detailed_pixels(ink[first:],gold[first:]) if first<len(gold) else None,
                                 'reported_relative_latent_mse':saved['relative_latent_mse'],
                                 'predicted_length_correct':saved['predicted_length_correct'],'target_spans':case['target_spans']}
                 arrays[arm]=(ink.numpy(),latent)
@@ -159,5 +168,5 @@ def analyze(run,output):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_v2')
-    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_analysis_v2')
+    parser.add_argument('--output',type=Path,default=ROOT/'artifacts/compact_visual_span_diagnosis_analysis_v3')
     args=parser.parse_args();analyze(args.run,args.output)
