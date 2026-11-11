@@ -52,3 +52,59 @@ answers and paired-question dependence after any repair, retaining the
 unchanged failed control. Development improvements need fresh source groups
 for confirmation. The full goal also requires historical and unencoded forms,
 usable task quality and measured consumer-GPU costs.
+
+## Fixed implementation specification
+
+`scripts/diagnose_compact_visual_span.py` prepares an immutable request on CPU,
+then runs the two final checkpoints serially. Select eight QA and eight book
+records from each of the training and development partitions: 32 records in
+total. Sort source groups and records by the fixed namespace hash and take
+one per group in rounds. The two development works each contribute four book
+records. These are diagnostic development samples, not a fresh confirmation
+set. For QA, the full question is the prefix. For books, use the first half
+of the reference spans. Test at most eight following spans per record and
+retain all selected targets and failures.
+
+Use seed namespace `compact-visual-span-failure-localization-v1` and base seed
+202611156, deriving a separate fixed seed per case/span. Six arms share the
+exact initial noise at every target span: reference-image context with eight
+or 64 Euler steps, native-embedding reference context with eight steps, a
+wrong reference context from the next selected record with eight steps,
+emitted-image history with supplied update counts, and learned prompt grouping
+with emitted-image history and learned update counts. All arms receive the
+reference next-span length. This is reconstruction under diagnostic inputs;
+it does not produce new autonomous language scores or test learned stopping.
+
+Compare target latents and original ink, foreground F1, exact glyph counts,
+context sensitivity, feedback error, update counts and boundaries. Direct
+codec decoding is the supplied-target positive control. Verify the causal
+reference-prefix state against the full causal reference-history state before
+interpreting the history comparison; require relative RMS difference at most
+0.02. Check and retain actual initial-noise hashes and emitted-pixel feedback
+hashes. Save raw PNGs, binary ink, continuous endpoints and per-case metrics.
+
+Before neural execution, check that every selected and training-used native
+unit has the same vocabulary row string in the compact and teacher archives.
+For each trained encoder, measure the closest point in its fixed feedback
+head's affine family. With final LayerNorm, let
+
+\[
+ A=D W\operatorname{diag}(\gamma)C,\quad
+ a=\mu+D(W\beta+b),\quad C=I-\mathbf1\mathbf1^	op/m.
+\]
+
+For target embedding \(e\), the squared distance to
+\(a+\operatorname{col}(A)\), divided by \(\|e\|^2\), is a lower bound
+for that head's relative error in exact arithmetic. Compute the projector
+from the actual float64 SVD. Aggregate uniformly over the selected source
+positions. This relaxes the preceding network and does not measure the full
+training objective's batch weighting or imply a language-quality bound.
+
+The run makes zero optimizer updates. Its deadline is 1,800 seconds with at
+most 300 seconds waiting on pressure. Reuse the existing full-reader admission
+of 48 GiB host RAM, low memory stalls, 20 GiB free GPU memory, the exclusive
+GPU0 mutex, a 24 GiB runtime host reserve and a 22 GiB allocation ceiling.
+This is the same frozen body/codec workload as the measured fits and inference;
+no other project's process is changed. Bind the implementation and exact
+case/call budget before launch. Complete and interpret the recorded comparison
+before registering another fit.
