@@ -1,0 +1,42 @@
+{
+  "checkpoint_sha256": "3697bbdebced876c2f1bd7771fad90e1392be2cb9cd16cbd232a0ac975f10303",
+  "optimizer_updates": 4049,
+  "checkpoint_was_live_latest": false,
+  "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+  "flow_latent_dimensions": 768,
+  "flow_hidden_channels": 384,
+  "actual_output_rank": 384,
+  "rank_tolerance_float64": 3.9772091560138973e-13,
+  "smallest_output_singular_value": 0.09764517022555068,
+  "invariant_noise_dimensions": 384,
+  "fresh_gaussian_expected_velocity_mse_floor": 0.5,
+  "bound_scope": "Expected fresh-noise loss of the fixed linear-output model in exact arithmetic; finite-batch loss need not exceed this number",
+  "matrix_calculation_dtype": "float64",
+  "hardware_sampler_identity_measured": false,
+  "projection_annihilation_max_error": 6.409803243734302e-16,
+  "projection_idempotence_max_error": 7.771561172376096e-16,
+  "eight_step_endpoint_invariant_max_error": 3.774758283725532e-15,
+  "decoder_first_projection_shape": [
+    3072,
+    768
+  ],
+  "decoder_first_projection_noise_energy_fraction": 0.4900924616194419,
+  "decoder_measure_is_pixel_quality": false,
+  "feedback_linear_output_shape": [
+    2048,
+    384
+  ],
+  "feedback_affine_dimension_upper_bound": 384,
+  "feedback_target_approximation_error_measured": false,
+  "neural_generation_performed": false,
+  "language_quality_measured": false,
+  "training_or_bound_pipeline_source_changed": false,
+  "cuda_initialized": false,
+  "elapsed_seconds": 0.2762349648401141,
+  "maximum_rss_gib": 1.3542976379394531,
+  "source_sha256": {
+    "scripts/audit_compact_visual_flow_rank.py": "a6b796b9dd385d35e0f091c195db0f6d5c4736fc829f103243e98b7d946cbaab",
+    "ilm/visual_lm/compact_visual_span_model.py": "1a4cbf7546daaeb9142f46f27f968e7b5561490d738e3dc80bcf4ea8285e111f"
+  },
+  "analyzed_checkpoint": "artifacts/compact_visual_span_fit_v1/image_heads_step_0004049.pt"
+}
