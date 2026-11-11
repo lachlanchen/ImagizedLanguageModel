@@ -4,54 +4,52 @@ Updated: 2026-11-11
 
 ## Immediate direction
 
-The objective is an independently running visual language model: visible
-questions and passages in, readable and relevant answer images out, with its
-own generated pixels as continuation history. Begin with modern Chinese on one
-4090; demonstrate that behavior before expanding scripts, modalities or size.
-Using pretrained language weights is allowed and must be disclosed. Learning
-a visual interface to inherited language knowledge and learning language from
-images alone are separate research claims.
+Build an independently running visual language model: visible questions and
+passages in, readable and relevant answer images out, with its own emitted
+pixels as continuation history. Demonstrate modern Chinese on one RTX 4090
+before expanding scripts, modalities or size. Keep historical, handwritten
+and unencoded forms in the full objective. Using pretrained language weights
+is allowed and must be disclosed; transferring inherited language capability
+and acquiring language from images alone are different claims.
 
-The first complete compact experiment has now failed its registered language
-test. All five checkpoints received zero complete exact QA matches; none of
-the 372 reviewed outputs established a readable complete response. The trained
-cold replay passed. This establishes an executable, independent inference
-path, while the usable-language objective remains unmet. See the
-[complete result](../references/compact_visual_span_learning_result.md).
+**Current verdict: the usable-language goal is not achieved.** Both completed
+compact fits received 0/32 complete exact QA answers, 0/16 both-correct question
+pairs and no credited readable complete book continuation at every fixed
+checkpoint. Each fit covers all 13,785 training sequences and 8,172 updates.
+The wider writer removed the measured rank restriction but did not solve
+writing. See the [V1 result](../references/compact_visual_span_learning_result.md)
+and [controlled wider-writer result](../references/compact_visual_span_full_rank_result.md).
 
-The next model experiment must test the identified writer restriction: a
-384-channel linear velocity output cannot control all 768 codec dimensions.
-Test a full-dimensional velocity path against the preserved compact baseline.
-Keep the encoder, contextual foundation, codec, corpus, supervision, optimizer
-settings and evaluation fixed initially. Register the implementation, seed,
-exposure and resource budget before training. Improving the writer's rank is
-the hypothesis to test; readable conditional writing is the required outcome.
+The wider review is complete: all 372 opaque pages were inspected before their
+mapping and references were opened for scoring. Twenty-four pages were blank;
+348 had uncertain whole-response transcriptions. This is one model review
+with prior dataset familiarity and no independent human adjudication. The
+trained cold child passes the access/pixel audit. Its wrapper ended before
+saving verification, for an unknown reason; the original completed child
+traces support CPU-only recovery without rerunning generation. Execution and
+capacity checks do not establish usable language.
 
-The [registered comparison](../references/compact_visual_span_full_rank_protocol.md)
-uses a 1,024-channel writer. Its initial projection, LayerNorm-centered map and
-three tested local velocity Jacobians have rank 768. The trainer verifies the
-unchanged encoder/length initialization and noise-stream preservation. The
-single-GPU fit has started. An independent saved-state inspection verified 419
-optimizer updates over six shards, finite parameters and all six losses, and
-the exact registered initial encoder and wider writer. See the
-[training execution evidence](../references/evidence/compact_visual_span_full_rank_start_20261111.json).
-The wider fit has subsequently completed all 8,172 updates over 108 unique
-shards and the same 13,785 sequences. It took 1,945.56 seconds, including
-150.14 seconds of resource waiting, with 4.889 GiB peak allocated GPU memory.
-All final optimizer counters equal 8,172. The trained output projection,
-LayerNorm-centered map and three tested local velocity Jacobians retain rank
-768. See the [complete fit and capacity evidence](../references/evidence/compact_visual_span_full_rank_completed_20261111.json).
-All five fixed generations are complete, retaining 372 pages. The trained
-cold child reproduced the fixed 128-glyph book stream, stop/cap decision and
-all 128 emitted-pixel feedback hashes, with no forbidden training/reference
-opens or IP connections observed. Its wrapper ended before saving a receipt;
-the unchanged retained child traces all end with exit zero, and CPU-only
-verification recovered the receipt without rerunning inference. The wrapper's
-termination cause is unknown. See the
-[generation and cold evidence](../references/evidence/compact_visual_span_full_rank_cold_20261111.json).
-Generated-language quality for this writer remains unproved. Complete the
-opaque review and scoring before another model change. Treat its final
-checkpoint as the primary comparison.
+**Next required work: localize the failure using frozen weights.** Follow the
+[failure-localization plan](../references/compact_visual_span_failure_localization_plan.md).
+Measure visual access and grouping, conditional writing under correct
+reference-image history, eight-step sampler sensitivity and emitted-history
+drift separately. Include direct codec reconstruction and shuffled-context
+controls. Bind cases, noise, source identities, metrics and resource limits
+before model calls. Supplied reference lengths or history must be labeled
+as diagnostics and excluded from autonomous language scores.
+
+No new architecture, longer fit, larger foundation or additional data
+collection is selected yet. Use the earliest measured failure to choose one
+bounded intervention, then test complete autonomous answers again against
+the preserved failed control. A development improvement requires new untouched
+source groups before broader claims. Do not replace the goal with copying,
+finite losses, a rank audit or an attractive manuscript figure.
+
+The V1 Nature-style article revision and its four editable measured figures
+are complete. The wider result now has authenticated measurements and all
+fifteen fixed raw examples; incorporating that comparison into the manuscript
+is a separate evidence-backed revision. Model diagnosis takes priority over
+additional cover art or presentation work.
 
 ## Goal and acceptance criteria
 
@@ -113,7 +111,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: repair the measured writing failure
+## Current decision: diagnose the remaining writing failure
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
@@ -157,15 +155,27 @@ nor establishes that the fitted encoder reaches that bound. Interpret it
 alongside the completed fit and actual output review.
 
 The [flow-head audit](../references/compact_visual_flow_rank_result.md) finds a
-separate architectural restriction: a 384-channel linear output predicts a
+separate architectural restriction in V1: a 384-channel linear output predicts a
 768-dimensional velocity. In the continuous model, 384 Gaussian-noise directions
-remain uncontrolled. The unchanged registered image evaluation now records a
-writing failure. Test a full-dimensional velocity path before spending more on
-the same narrow writer. Preserve the present model as a control. Removing this
-restriction still requires actual image and language evaluation; the audit
-does not establish the sole cause of failed answers.
+remain uncontrolled. The registered wider comparison removes this tested
+capacity restriction but still fails the complete-response evaluation. Preserve both models as
+controls. The restriction is not a sufficient explanation for the failed
+answers; localize the remaining visual and conditional-writing errors before
+another fit.
 
 ## Current evidence and unresolved tests
+
+The [completed wider-writer comparison](../references/compact_visual_span_full_rank_result.md)
+uses 48.55M trainable image parameters and an 8.39M training-only projection.
+Its trained projection, centered output map and three tested local Jacobians
+retain rank 768. The fit takes 1,945.56 seconds, including 150.14 seconds of
+resource waiting, with 4.889 GiB peak allocated GPU memory. Its five-checkpoint
+review and authenticated analysis are complete. Final normal generation has
+13/44 stops, 31/44 budget-limited streams and 4/44 empty responses. All QA
+controls also score zero. These measurements reject the rank repair as a
+sufficient solution under this recipe. The zero sample differences and
+degenerate bootstrap intervals do not prove zero population success.
+See the [bound language evidence](../references/evidence/compact_visual_span_full_rank_learning_20261111.json).
 
 The compact implementation passes CPU gradient and emitted-pixel feedback
 checks. The first fresh CPU invocation of its untrained heads stopped without
@@ -215,6 +225,19 @@ large-model parity.
 
 ## Rules that keep the work on track
 
+At the start of each work unit, read this goal and the private runtime
+handoff, verify the latest completed evidence, and name the next unresolved
+measurement. At its end, record the actual result, retained artifacts, current
+process ownership and the next decision. Replace stale run statuses. The
+session goal remains active while any required capability is unproved.
+
+Every next experiment needs a short decision record: observed failure, one
+change, preserved control, fixed evaluation and success/failure rule, data and
+checkpoint identities, GPU/time budget, and the action for either outcome.
+Register it before execution. Finish scoring that comparison before choosing
+another branch. If the result is negative, change the hypothesis from the
+evidence; do not keep extending the same run without a new bounded reason.
+
 - Before each experiment, write down the observed failure, one bounded change,
   the unchanged control, the primary language measurement and the resource
   ceiling. Freeze the prompts and quality criteria before generation. Finish
@@ -231,7 +254,7 @@ large-model parity.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
-- If a repaired writer still fails, localize the next failure using matched
+- The repaired writer still fails. Localize the next failure using matched
   reference-image history versus generated-image history and visual-input
   controls. Measure visual access, conditional writing and feedback drift
   separately. A reference-supplied diagnostic is not autonomous inference.

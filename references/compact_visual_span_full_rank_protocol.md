@@ -147,7 +147,7 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/verify_full_rank_visual_span
 ```
 
 It uses the same fixed book input, syscall access audit and exact pixel/PNG,
-stopping and feedback comparison as V1. The wider-writer replay is not yet run.
+stopping and feedback comparison as V1. The replay was pending at registration; its completed audit is recorded below.
 
 ## Complete fit, before language scoring
 
@@ -181,3 +181,15 @@ Inference was not rerun. The wrapper's termination cause is not established.
 See the [generation and cold receipt](evidence/compact_visual_span_full_rank_cold_20261111.json).
 Opaque review and language scoring remain pending; cold reproducibility does
 not establish a correct answer.
+
+## Completed language decision
+
+All five generations, the trained cold audit, all 372 opaque image readings
+and authenticated scoring are complete. Every checkpoint has 0/32 complete
+exact QA answers, 0/16 both-correct pairs and no credited readable complete
+book continuation. Twenty-four pages are blank; 348 have uncertain whole-output
+transcriptions. The rank repair is not sufficient under this recipe. Preserve
+both fits and use the [failure-localization plan](compact_visual_span_failure_localization_plan.md)
+before another model branch. The [complete result](compact_visual_span_full_rank_result.md)
+and [bound evidence](evidence/compact_visual_span_full_rank_learning_20261111.json)
+retain the review limits, controls and original examples.

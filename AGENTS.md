@@ -16,20 +16,20 @@ as distinct claims. Record new evidence and the next decision in the goal and
 private runtime handoff; keep the goal active while its acceptance criteria
 remain unproved.
 
-The compact V1 full-sequence evaluation is complete and failed the language
-criteria. Preserve its five checkpoints, raw outputs and source identities.
-The next model comparison must address the measured velocity-output rank
-restriction, with the remaining recipe held fixed initially. Register a
-bounded hypothesis, unchanged control, language metric and resource budget
-before launching. If that comparison fails, diagnose visual access, conditional
-writing and emitted-history drift before choosing another change. Reuse the
-completed corpus and teacher cache unless measured evidence requires new data.
+Both compact complete-sequence fits have failed the language criteria.
+The registered 1,024-channel writer fit, five generations, all 372 opaque
+readings and authenticated scoring are complete. Its rank repair gives no
+complete exact QA improvement. Preserve both controls, their five checkpoints,
+raw failures and source identities. The trained cold child passes the
+recovered access/pixel audit; this is an execution result.
 
-The registered 1,024-channel writer fit and all five generations are complete.
-The trained cold child passes the recovered access/pixel audit. Finish the
-opaque review and scoring before starting another model branch. Capacity and finite
-losses do not establish language success; use the engineering goal for the
-current measured state.
+Before another training branch, follow the goal's failure-localization plan:
+measure visual access, conditional writing under supplied reference history,
+sampler sensitivity and emitted-history drift with frozen weights. Register
+actual cases, matched noise, metric and resource limits before model calls.
+Keep reference-supplied diagnostics separate from autonomous language scores.
+Choose the next bounded intervention from these measurements. Reuse the
+completed corpus and teacher cache unless measured evidence requires new data.
 
 ## Always Commit and Push After Change
 
