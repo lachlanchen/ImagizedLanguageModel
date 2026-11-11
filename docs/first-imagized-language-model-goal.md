@@ -56,14 +56,16 @@ under the fixed gate. Do not extend the fit or substitute its first-only pass
 for stable writing or language. The verified PDFs remain the prior baseline;
 this new result awaits a bounded revision with the next matched control.
 
-Before another writer fit, make a prospective matched comparison using the
-already physically qualified balanced writer. Its earlier 18/32 clear-answer
+The next [registered comparison](../references/balanced_writer_matched_decision.md)
+uses the already physically qualified balanced writer, with no new fit. Its earlier 18/32 clear-answer
 result comes from another cohort and metric. Evaluate its actual writing on
 the same saved states and its complete language on the current unchanged
 cohort, preserving the original parent and flow controls. Make no new fit,
 checkpoint selection or favorable resampling. This can distinguish a flow-
 writer limitation from remaining reading, stopping and feedback failures;
-no outcome is yet measured. Finish that language evidence before proposing
+The trained readout and stopping predictor are compared as one frozen bundle;
+reading, image encoding/decoding and normalization remain unchanged. No new
+outcome is yet measured. Finish that language evidence before proposing
 another writer-only repair. Any development improvement still requires
 untouched source-group confirmation and independent review.
 

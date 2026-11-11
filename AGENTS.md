@@ -89,14 +89,16 @@ assessment are complete: first/later median F1 is 0.987034/0.976561 and both
 physical gates fail. Preserve matched initialization/data/RNG evidence and
 all 512 checked/reviewed tiles. No full language trial is run for this recipe.
 Do not extend or tune it. The motor-diagnostics manuscript and native Figure21
-revision are complete, with 33/58/59-page verified PDFs. The full-sampler endpoint pair is also complete: both2,000-update fits,
-matched initial EMA/data/finalRNG audit and all128 positions/512 original
-reviewed tiles. The candidate passes the first gate (0.990581 median,31/32
-at0.95) but fails later (0.978614,25/32); the matched control fails both.
+revision are complete, with 33/58/59-page verified PDFs. The full-sampler
+endpoint pair is also complete: both 2,000-update fits,
+matched initial EMA/data/finalRNG audit and all 128 positions/512 original
+reviewed tiles. The candidate passes the first gate (0.990581 median, 31/32
+at 0.95) but fails later (0.978614, 25/32); the matched control fails both.
 Its complete language trial is withheld and unmeasured. See
 `references/rollout_endpoint_motor_result.md`. Do not extend or tune that fit.
-Before another writer fit, register a matched frozen balanced-writer control
-on the current cohort. That writer's earlier physical pass and18/32 clear
+Before another writer fit, complete the frozen balanced-writer comparison
+in `references/balanced_writer_matched_decision.md` on the current cohort.
+That writer's earlier physical pass and 18/32 clear
 answers use a different cohort/metric. Preserve those results and the current
 controls; complete the new actual-language comparison before another repair.
 Preserve the completed diagnosis, public pixel archive and original language
