@@ -56,11 +56,19 @@ Pixel mismatch is not character/semantic error, and complete language scores
 remain unchanged. Do not repeat this audit as pending work.
 
 The actual-context conditional motor is implemented, registered and fitted:
-24.478M parameters,12,000 verified updates in109.485s at0.989GiB peak allocated
+24.478M parameters,12,000 verified updates in 109.485s at 0.989 GiB peak allocated
 GPU memory. Its independent CPU optimizer audit passes. Keep the zero-update
 CUBLAS admission failure and successful same-recipe retry. Do not refit or
-interpret finite loss as language. Complete the registered216-stream
-generation, raw-output review and scoring next. Preserve the reader, adapters,
+interpret finite loss as language. Its 216 streams, 54 opaque boards and 12 book
+prefixes are now reviewed and independently recounted: fixed 2/32 exact,
+1/16 pairs, 4/32 readable; proportional 7/32 exact,1/16 pairs, 14/32 readable.
+No complete book continuation is credited. The prospective pilot fails and
+one of six prior exact proportional answers is lost. All 216 initial reader
+states match the parent bit-for-bit. The fixed standalone replay passes after
+removing old training-ledger reads from standalone admission; preserve the
+original failed-access attempt and its exact pixels. The goal remains active.
+Localize initial writing, generated-history drift and stopping from the saved
+failures before another fit. Preserve the reader, adapters,
 encoder, decoder, stop predictor and unchanged complete-response controls.
 Earlier synthetic semantic flows and balanced deterministic fitting already
 failed relevant gates; a new flow is a hypothesis, not a successful solution.

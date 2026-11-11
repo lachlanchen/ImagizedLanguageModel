@@ -4,13 +4,21 @@ Updated: 2026-11-11
 
 ## Immediate direction
 
-The next unresolved measurement is **complete language generation from the
-registered final actual-context motor**, not another architecture proposal.
-Finish both layouts, read every original answer image before reference scoring,
-and decide from complete answers, paired questions, stopping and continuation.
-Keep this order when resuming work. The private handoff records the live owner;
-an interrupted observation must not create a second GPU worker. A failed pilot
-requires a changed, evidence-based hypothesis before further fitting.
+The actual-context motor comparison is complete and **fails its registered
+language pilot**. Interpret its unrepaired output and feedback failures before
+another fit. The next decision must distinguish initial writing, later
+generated-history drift and stopping, using saved complete streams and the
+completed native-reader diagnosis. Preserve the parent controls and failures.
+Do not extend the same head fit, select favorable samples or substitute a
+reconstruction metric. The private handoff records live ownership; an
+interrupted observation must not create a second GPU worker.
+
+The [next bounded diagnosis](../references/glyph_context_motor_failure_decision.md)
+tests whether the final motor reliably writes even its own cached training
+states, with the parent and direct codec as controls. It reuses all normal
+development first images and makes no new fit or contextual-body call. Use
+that result to choose between conditional writing, transfer and later
+feedback/stopping work. A larger corpus alone is not a demonstrated remedy.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
@@ -148,8 +156,8 @@ of independent human adjudication remain disclosed. Reconstruction takes
 contextual-model call, optimizer update or new autonomous ILM image. Complete
 language scores remain unchanged.
 
-**Next required work: finish the registered actual-context writer's
-216-stream complete-response comparison.** The
+The [actual-context writer comparison](../references/glyph_context_motor_result.md)
+is complete. The
 [bounded decision](../references/glyph_tail_context_writer_decision.md) keeps
 the inherited reader, adapters, encoder, neural decoder and stopping fixed.
 It tests a conditional distribution over the existing continuous motor
@@ -166,21 +174,44 @@ CPU audit verifies every optimizer parameter step and unchanged training-only
 normalization. A zero-update launch failure from an omitted deterministic
 CUBLAS setting is preserved separately; the same recipe succeeds with the
 required setting. The full inherited reader is not loaded during head fitting.
-Language quality remains unmeasured for this candidate. Do not rerun the fit
-or select a checkpoint/seed from development output.
-The fixed-cell stage now completes and authenticates all 120 streams in
-3,442.608 seconds: 12 predicted stops and 108 caps. These endpoint counts do not
-establish readable or correct answers. The 96 proportional streams follow
-with the same final EMA, seeds, stopping rule and sampler; complete output-first
-review and unchanged scoring remain required before the next model decision.
+All 216 streams, 54 opaque boards and 12 book prefixes have been reviewed before
+reference scoring. Twenty whole outputs are clear and 196 uncertain to one
+model reviewer, with prior cohort familiarity and no independent human
+adjudication. The unchanged scores and independent per-answer/aggregate recount
+give **2/32 exact fixed answers, 1/16 correct pairs and 4/32 readable answers**,
+versus 2/32, 1/16 and 3/32 for the parent. Proportional results are **7/32 exact,
+1/16 correct pairs and 14/32 readable**, versus 6/32, 0/16 and 11/32. All QA-erased
+arms remain zero exact. No complete book continuation is credited. The exact
+proportional difference is 3.125 points [minus 6.25,12.5], a pointwise 95%
+passage-group bootstrap interval. It does not establish reliable improvement.
 
-The candidate must face all current complete QA/control streams and book
-prefixes. The prospectively chosen development pilot requires at least 8/32
+The candidate retains both fixed exact answers and five of six proportional
+exact answers, losing `qa_10_a_normal`. The pilot fails its exact, paired and
+proportional-retention requirements. Do not rerun this fit, select another
+checkpoint/seed or use untouched confirmation to rescue a failed development
+gate. All 216 initial reader states match the parent bit-for-bit; later states
+use the candidate's own changed pixels. This identifies where the intervention
+begins without separating later motor, feedback and stopping errors.
+
+Full generation takes 3,442.507 seconds for 120 fixed streams (12 stops/108 caps)
+and 2,720.582 seconds for 96 proportional streams (25 stops/71 caps), at 17.777 GiB
+peak allocation. The fixed cold book replay passes exact nested-value/display
+and access checks in 100.755 seconds at 17.748 GiB, preserving its capped,
+unreadable output. The first 125.884-second replay is retained as an access
+failure: shared admission opens old training ownership ledgers. Standalone
+admission now checks live resources instead. Model numerics, weights, inputs,
+seeds and all 216 completed streams are unchanged. No forbidden artifact opens
+or IP connections are observed in the new trace. Execution independence does
+not qualify language quality. The
+[complete evidence](../references/evidence/glyph_context_motor_learning_20261111.json)
+binds both attempts, all scores and the matched initial-state comparison.
+
+The prospectively chosen development pilot required at least 8/32
 exact proportional answers, 2/16 both-correct pairs, 11/32 readable outputs,
 retention of all six earlier exact proportional answers and both exact fixed
-answers. Report every failure, stop, cap and book continuation. A pilot pass
-still needs untouched source-group confirmation and does not complete this
-goal. Preserve the substantial full corpus for a later registered expansion;
+answers. It failed. Preserve every failure, stop, cap and book continuation.
+A future pilot pass would still need untouched source-group confirmation.
+Preserve the substantial full corpus for a later registered expansion;
 do not present a short-QA motor intervention as broad book language learning.
 
 Reject an unchanged compact joint fit and a sampler-only repair. Check the
@@ -203,8 +234,9 @@ All twelve tile occurrences survive exactly in each matching PDF through
 lossless export; all 218 checked prior figure/style/supplement assets remain
 unchanged. The [bounded native-reader revision](../references/manuscript_native_reader_writing_revision_plan.md)
 records source, numerical, raster and visual verification; the redline keeps
-the immutable `0f14fa3f` baseline. The running actual-context motor trial remains
-outside this paper revision until its complete language evaluation is scored.
+the immutable `0f14fa3f` baseline. The newly scored motor trial remains outside
+this paper revision. Incorporate its failed pilot and original outputs in the
+next bounded manuscript/figure update, preserving these verified PDFs.
 The [build receipt](../publication/ilm-nature/evidence/native_reader_writing_publication_build.json)
 and [local delivery receipt](../publication/ilm-nature/evidence/native_reader_writing_local_sync.json)
 bind the 31/54/55-page PDFs and 473 selected package files, plus the separately
