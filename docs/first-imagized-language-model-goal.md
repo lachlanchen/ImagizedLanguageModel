@@ -113,7 +113,7 @@ package and latest aliases are verified; cloud propagation is unverified.
 No repeat publication build or completed-cohort generation is pending.
 The correct-image-history study below is newer than these PDFs. Include it in
 the next bounded results revision; do not imply it is already in the article.
-The model preflight takes priority over another presentation-only work unit.
+The ongoing model comparison takes priority over another presentation-only work unit.
 
 ## Next model decision
 
@@ -162,10 +162,18 @@ changes logging and registration identity handling, with unchanged model, pixels
 targets, schedule and quality criteria. Its fresh worker has started in
 `artifacts/visual_continuation_full_logger_recovery_v2`; the earlier run must not
 be overwritten or restarted. Read the [recovery record](../references/visual_continuation_logger_recovery.md).
-The immediate work is to finish this single comparison and evaluate its outputs.
+The [independent launch audit](../references/evidence/visual_continuation_full_launch_20261112.json)
+verifies exact fresh initial parameters, optimizer and RNG against the original
+step-zero checkpoint. Restoring four and replaying five/six matches the actual
+uninterrupted step-six state bit-for-bit, with all 85 Adam counters at six.
+The first six scheduled updates cover 1,367 target positions; two discarded
+replay updates cover another 437 positions. These checks establish execution
+and recovery, with no complete-language score. Training continues in the same
+owned worker. The immediate work is to finish this single comparison and
+evaluate its outputs, rather than repeat the verified launch checks.
 Discard all four preflight updates. Each source gets one fixed and two natural
 presentations. Save initial, quarter, half, three-quarter and final weights;
-verify real optimizer/RNG recovery during the first six updates. Evaluate all
+retain the verified real optimizer/RNG recovery evidence. Evaluate all
 732 prescribed image streams, including the unchanged 216-input cohort and
 matched long-book controls, before applying the frozen pilot criteria.
 The final proportional pilot requires 12/32 exact answers, 4/16 both-correct

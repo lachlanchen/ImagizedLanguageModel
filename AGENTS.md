@@ -34,7 +34,8 @@ worker uses `artifacts/visual_continuation_full_logger_recovery_v2` in the singl
 do not start the obsolete default run. Read the recovery record and
 `references/visual_continuation_full_protocol.md`; its three epochs,
 five snapshots, 732 output streams and final pilot are fixed before training.
-Verify the real first-six-update resume check. Do not rerun indexing or launch
+The real first-six-update resume check and independent 85-state/initialization
+audit pass; retain their evidence rather than repeating them. Do not rerun indexing or launch
 another worker merely because an observation handle has expired.
 Preserve the failed mixtures, first-function transfer and writer-only controls.
 Do not prioritize manuscript polish over the unresolved model failure.
