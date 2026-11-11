@@ -1,0 +1,144 @@
+{
+  "architecture": "compact-visual-span-full-rank-writer-v1",
+  "writer_width": 1024,
+  "baseline_writer_width": 384,
+  "latent_dimensions": 768,
+  "corpus_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+  "training_sequences": 13785,
+  "teacher_shards": 108,
+  "causal_state_targets": 2380620,
+  "training_configuration": {
+    "epochs": 1,
+    "padded_unit_budget": 1024,
+    "learning_rate": 0.0002,
+    "seed": 202611152,
+    "seconds": 10800.0
+  },
+  "evaluation_configuration": {
+    "seed": 202611153,
+    "flow_steps": 8,
+    "maximum_glyphs": 128,
+    "all_endpoint_cases": 120,
+    "intermediate_normal_cases": 44
+  },
+  "initial_encoder_sha256": "f36e0643e437493aed3c33588193d83912d565aed9915989d307ef74fff2127b",
+  "initial_length_head_sha256": "622ddf03bf0b05a78651a17a5890bfcf4de63278a46c320e7e5ea51c5571f36b",
+  "initial_wide_writer_sha256": "0bac578405ad8938efcd5f74ab5c9a93401cd4424e416acadcfaccd7b80843a0",
+  "writer_parameters": 42575633,
+  "baseline_writer_parameters": 6900113,
+  "initial_capacity_audit": {
+    "actual_fp32_velocity_matches_audited_expression": true,
+    "output_projection": {
+      "shape": [
+        768,
+        1024
+      ],
+      "rank": 768,
+      "smallest_singular_value": 0.07638116375258582,
+      "largest_singular_value": 1.0750894343286919,
+      "float64_rank_tolerance": 2.4444703611349993e-13
+    },
+    "layernorm_centered_output": {
+      "shape": [
+        768,
+        1024
+      ],
+      "rank": 768,
+      "smallest_singular_value": 0.0763789888744637,
+      "largest_singular_value": 1.0750665951523444,
+      "float64_rank_tolerance": 2.444418430860297e-13
+    },
+    "single_glyph_velocity_jacobians": [
+      {
+        "time": 0.0,
+        "shape": [
+          768,
+          768
+        ],
+        "rank": 768,
+        "smallest_singular_value": 7.935212806491246e-05,
+        "largest_singular_value": 1.455054220561982,
+        "float64_rank_tolerance": 2.4813076957377386e-13
+      },
+      {
+        "time": 0.5,
+        "shape": [
+          768,
+          768
+        ],
+        "rank": 768,
+        "smallest_singular_value": 6.119335590206247e-05,
+        "largest_singular_value": 1.456002008140381,
+        "float64_rank_tolerance": 2.4829239603270387e-13
+      },
+      {
+        "time": 0.875,
+        "shape": [
+          768,
+          768
+        ],
+        "rank": 768,
+        "smallest_singular_value": 2.44780806187819e-05,
+        "largest_singular_value": 1.4343839329572654,
+        "float64_rank_tolerance": 2.44605860124909e-13
+      }
+    ],
+    "jacobian_dtype": "float64 mathematical expression with actual initial weights",
+    "global_invertibility_or_hardware_sampler_proved": false,
+    "training_or_language_quality_measured": false
+  },
+  "sources_sha256": {
+    "scripts/train_compact_visual_span.py": "df377889fb3e606c6e9fe625dfbfa7c7e5d090b8f1b1dd7456323faec6243986",
+    "scripts/cache_visual_sequence_teacher_states.py": "fd26c1bd849b1cac400e92e41c680aa5efbb17427ee5468d4a5baea1c65a50a1",
+    "ilm/visual_lm/compact_visual_span_model.py": "1a4cbf7546daaeb9142f46f27f968e7b5561490d738e3dc80bcf4ea8285e111f",
+    "ilm/visual_lm/compact_visual_span_weights.py": "d5017b9dc1a82ef28e0606a7f5643f54f184732d8b84bb705bdf73222cdda1ae",
+    "ilm/visual_lm/compact_visual_span_training.py": "ac26fa4019b7396cec4e868789f77fc20611fb7b7d3f73dd6a1c8e8b2c55b6b1",
+    "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+    "ilm/visual_lm/full_rank_visual_span.py": "9151b935f51e9bc5bc5be4bf96bf4bc263d90b0d34aed58dc3ca7f9202eed7b3",
+    "scripts/prepare_full_rank_visual_span.py": "6269b2c3d8e8e7561e671f4392d2f0fd15bd65595f82128c49ab0845455104ae",
+    "scripts/train_full_rank_visual_span.py": "8cbeb2b1f1ecaef3322b66e6fabe1a43a4d6cfe8c0e662106e3c5029321bb787",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/infer_full_rank_visual_span.py": "bfd945567a2b6fbe957577e507f51181fdb5b2822e028eb416a26591be29ff4c",
+    "scripts/run_compact_visual_span_pipeline.py": "4d4608d77d6bf72f53950cda85f52f9fb196358f941a0de2f8acb13d45be432c",
+    "scripts/run_full_rank_visual_span_pipeline.py": "687c31454a3c4fba168c79c393f57d63a7976af8b5b4962ec625cf6d0682d951"
+  },
+  "files_sha256": {
+    "artifacts/visual_sequence_teacher_v1/preparation.json": "2d12ebccfe03b39167abb9e93f41b26a1ae1333171fa705f743a26237550f91c",
+    "artifacts/visual_sequence_teacher_v1/cache/report.json": "19ce0e7ebf9fa74d4c75f7fcc1e6ffacf950fded2e49fb76bfd86801aad6cb49",
+    "artifacts/compact_visual_span_fit_v1/report.json": "5b46b382858a35a1f68e3be2298e59e1d71249029c0d24f5d0ef3ccd3f877919",
+    "artifacts/compact_visual_span_fit_v1/image_heads_step_0000000.pt": "1f85229522b2934628946ad8fbbc0fb85b0a36e7e2d842464ae4abb62128881b",
+    "artifacts/compact_visual_span_evaluation_v1/preparation.json": "cfa18a7c351f1751fa654cf062acd722509a34e606f36a6e8fc5c6beca92229b",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json": "73076060c8d48638886ed329aca2a667877e07776e4597313f1ceb48e7ec0afc",
+    "artifacts/compact_visual_span_evaluation_v1/references.json": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+    "references/evidence/compact_visual_span_learning_20261111.json": "c8b06d5178c5ecc75bd0c40d010045cc0c785a8b8d0240ea98332086308e9dfd"
+  },
+  "gpu_resource_limits": {
+    "device": 0,
+    "maximum_allocated_gib": 22.0,
+    "minimum_entry_available_ram_gib": 48.0,
+    "minimum_runtime_available_ram_gib": 24.0,
+    "fit_stage_seconds": 10800.0,
+    "pressure_wait_seconds": 1800.0
+  },
+  "primary_measurement": "Final-step complete exact QA/32 and both-correct question pairs/16, with raw-image readability and normal-minus-erased controls; same 12 book continuations and five checkpoints.",
+  "decision_rule": "No credited readable conditional complete answers means the repair has not solved writing/language. Preserve failure and diagnose visual access, conditional writing and generated-history drift before another change. A development improvement requires new untouched confirmation groups before a generalization claim.",
+  "remaining_recipe_unchanged": true,
+  "length_and_encoder_initialization_bound_to_actual_control": true,
+  "new_writer_construction_restores_cpu_rng": true,
+  "offline_teacher_reextracted": false,
+  "language_success_claimed": false,
+  "registered_unix": 1794367262.2081752,
+  "cpu_preparation_seconds": 5.28508541919291,
+  "maximum_rss_gib": 1.3542976379394531,
+  "cuda_initialized": false,
+  "teacher_run": "artifacts/visual_sequence_teacher_v1",
+  "baseline_fit": "artifacts/compact_visual_span_fit_v1",
+  "evaluation": "artifacts/compact_visual_span_evaluation_v1",
+  "runtime_registration_sha256": "56592404e7bf4b255628ff5b6520ecc54687ac4e054b015d913cbad008ceaac5",
+  "training_started_at_export": false,
+  "retained_preliminary_cpu_audit_seconds": 4.20269139111042,
+  "total_cpu_registration_attempt_seconds": 9.48777681030333,
+  "trainable_image_parameters": 48547733,
+  "trainable_including_teacher_projection_parameters": 56936341,
+  "unchanged_training_loop_ast_checked": true
+}

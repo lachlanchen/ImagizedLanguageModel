@@ -60,19 +60,23 @@ that separate question as unmeasured.
 
 ## Consequence for the experiment
 
-Complete the registered five-checkpoint image evaluation with the unchanged
-model. Preserve every raw output and compare the actual answer behavior.
+The registered five-checkpoint image evaluation of the unchanged model is now
+complete and failed its language criteria. See the
+[complete output result](compact_visual_span_learning_result.md).
+Preserve every raw output and compare the actual answer behavior.
 Additional epochs alone cannot remove the writer's invariant component in
 the continuous model. The next writer should provide a full-dimensional
-velocity path. A direct bounded repair is to set its input and hidden width
-at least to the 768-dimensional latent width and verify the resulting output
-rank. Keep the encoder, codec, contextual foundation, corpus, optimizer and
+velocity path. The final LayerNorm also removes the hidden mean direction,
+so a width of exactly 768 and a full-rank bare projection would still leave
+an affine restriction. The [registered repair](compact_visual_span_full_rank_protocol.md)
+uses width 1,024 and checks the centered output map and velocity Jacobians.
+Keep the encoder, codec, contextual foundation, corpus, optimizer and
 evaluation fixed for the first comparison. Report the extra parameters,
 compute and all initialization differences. A full-rank head still needs
 actual training and language evaluation; it is not sufficient by itself.
 
 Preserve the present implementation and checkpoint loader as the baseline.
-The audited run and its queued evaluation sources remain unchanged. The
+The audited run and its completed evaluation sources remain unchanged. The
 CPU matrix calculation took 0.276 seconds at 1.35 GiB peak process RSS and
 initialized no CUDA context.
 

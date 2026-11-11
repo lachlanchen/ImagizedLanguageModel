@@ -27,6 +27,14 @@ settings and evaluation fixed initially. Register the implementation, seed,
 exposure and resource budget before training. Improving the writer's rank is
 the hypothesis to test; readable conditional writing is the required outcome.
 
+The [registered comparison](../references/compact_visual_span_full_rank_protocol.md)
+uses a 1,024-channel writer. Its initial projection, LayerNorm-centered map and
+three tested local velocity Jacobians have rank 768. The trainer verifies the
+unchanged encoder/length initialization and noise-stream preservation. These
+capacity checks are complete; training and generated-language results for the
+new writer remain unproved. Preserve the same full corpus and five-checkpoint
+evaluation. Treat its final checkpoint as the primary comparison.
+
 ## Goal and acceptance criteria
 
 Train and run a compact, standalone language model on one RTX 4090. Start with
