@@ -1,0 +1,725 @@
+{
+  "schema": "glyph-tail-input-presentation-v1",
+  "checkpoint": "artifacts/glyph_tail_adaptation_v2/fit_recovery_02/checkpoint_latest.pt",
+  "checkpoint_sha256": "5c434a9a9b0c6ddc0c3fe4005265e4f8ca5b7d0add9a74a80ed371806fa71085",
+  "source_sha256": {
+    "scripts/compare_glyph_tail_compact_cohort.py": "bd0256767c9aca397ea49aefa4d95ed53a09e06700a4676edae20ceda75340d1",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "ilm/visual_lm/glyph_tail_adapter.py": "b0be8681d8ecfbc6f0c0bdc8f61ed0969b4bdf336cffab9119afaa83603532f0",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/review_compact_visual_span.py": "c046d3a8f3565c945478a1899d4f9a8776b2ed327c2114258362fb39c7a8a323",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "scripts/compare_glyph_tail_input_presentation.py": "11b8d97ff7a24084a47e044027de9b23c07dc67f204e34095c4188876e3f7771",
+    "references/glyph_tail_input_presentation_protocol.md": "09ec06a77cac508d8e4e1c68aabee0faea09648b72572f4eb3320f9c006a9772",
+    "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da",
+    "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+    "scripts/prepare_compact_visual_span_evaluation.py": "879f6bb191b575be6aea9fbab0a6ddc9e5d6a6228cdf8180d26e5e50af3f45ec",
+    "scripts/prepare_visual_sequence_corpus.py": "267280b21231eb8eb9c78f7b9c8b93c15e4d42e5fd7bdd5d612ee4fdfe776d50",
+    "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a"
+  },
+  "inputs": [
+    {
+      "id": "qa_01_a_normal",
+      "condition": "normal",
+      "image": "qa_01_a_normal.png",
+      "glyphs": 784,
+      "sha256": "53269e382038b9ecd2821d58ef39c45e57f99a59a39187d7280800058f2063d0"
+    },
+    {
+      "id": "qa_01_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_01_a_question_blank.png",
+      "glyphs": 784,
+      "sha256": "12e78f2f95c978c61ed76b20bbeed9a584351d7e6afb58ee7a995d38ea0056d3"
+    },
+    {
+      "id": "qa_01_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_01_a_passage_blank.png",
+      "glyphs": 784,
+      "sha256": "a90405bf8df48fe1d0751faf91dca1cec1f90ab4fd4c30e6ac7fd91ed8283e63"
+    },
+    {
+      "id": "qa_01_b_normal",
+      "condition": "normal",
+      "image": "qa_01_b_normal.png",
+      "glyphs": 781,
+      "sha256": "78c9524a70178e7a14bdf64d903b2b0b042527c83841d6e1f5759b2162183bd6"
+    },
+    {
+      "id": "qa_01_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_01_b_question_blank.png",
+      "glyphs": 781,
+      "sha256": "518ad0f0a38ad265addc1ebb4f084395d11b351aa1c270eddfee277d8a6a4cf1"
+    },
+    {
+      "id": "qa_01_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_01_b_passage_blank.png",
+      "glyphs": 781,
+      "sha256": "4c71ce970511bdf1471972969f67954558b6be87d0ebbe1ea3a5bdfad8d41c67"
+    },
+    {
+      "id": "qa_02_a_normal",
+      "condition": "normal",
+      "image": "qa_02_a_normal.png",
+      "glyphs": 833,
+      "sha256": "9bacfec205a4bbf9cca397cc7ad1b4337bf22d4d98bd4be33d69c9f59f84b278"
+    },
+    {
+      "id": "qa_02_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_02_a_question_blank.png",
+      "glyphs": 833,
+      "sha256": "e465ef5a0fd77a9361a5c98ad5e20d9cdc3b7b91c1138a7a00c7fdf8ef3bd8f3"
+    },
+    {
+      "id": "qa_02_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_02_a_passage_blank.png",
+      "glyphs": 833,
+      "sha256": "1bf71e59672fe57fb53b559a090044ca279cb43f3bfff21301524e3c4533c961"
+    },
+    {
+      "id": "qa_02_b_normal",
+      "condition": "normal",
+      "image": "qa_02_b_normal.png",
+      "glyphs": 829,
+      "sha256": "b6602674639307842298933ff4c870d5ccd5d86e916c6a36f2a3acb21e732340"
+    },
+    {
+      "id": "qa_02_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_02_b_question_blank.png",
+      "glyphs": 829,
+      "sha256": "9102e0370273a3f8d33c25cec8fac90108676183ccde40cedf3f612e13272247"
+    },
+    {
+      "id": "qa_02_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_02_b_passage_blank.png",
+      "glyphs": 829,
+      "sha256": "3f3bdc47f9cec3ef9bf06e2b3b2de95fc4276abb629bb693a26cef051c44a268"
+    },
+    {
+      "id": "qa_03_a_normal",
+      "condition": "normal",
+      "image": "qa_03_a_normal.png",
+      "glyphs": 690,
+      "sha256": "7043be5bad8955f7c4c70c84ad9a422befb5032e7facbdbf8f416a82cb2bf3c8"
+    },
+    {
+      "id": "qa_03_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_03_a_question_blank.png",
+      "glyphs": 690,
+      "sha256": "4d62faae8907b5009e9829d5e6f88356205c6d62ea43f34b051f46bccce6fda0"
+    },
+    {
+      "id": "qa_03_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_03_a_passage_blank.png",
+      "glyphs": 690,
+      "sha256": "68388810d29563839775da51bd72b4d4c81cf91c96c4ea490d7d3d47d58360ad"
+    },
+    {
+      "id": "qa_03_b_normal",
+      "condition": "normal",
+      "image": "qa_03_b_normal.png",
+      "glyphs": 682,
+      "sha256": "f8bafe7222ec9dcc93b769a83b3ce85465298243d1263ebf3b00f005bd510fee"
+    },
+    {
+      "id": "qa_03_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_03_b_question_blank.png",
+      "glyphs": 682,
+      "sha256": "664801eec90eb950129de85b494280d2741b251401ea5237564197603be8fff5"
+    },
+    {
+      "id": "qa_03_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_03_b_passage_blank.png",
+      "glyphs": 682,
+      "sha256": "6344272abe98fa5ad4d11446873fac75860a596b038ea67201a349fc8549c614"
+    },
+    {
+      "id": "qa_04_a_normal",
+      "condition": "normal",
+      "image": "qa_04_a_normal.png",
+      "glyphs": 672,
+      "sha256": "6e7d99ecd3b94ed4c2a4de81dff3d2ccd129ec031828400659bc8364a0fc475d"
+    },
+    {
+      "id": "qa_04_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_04_a_question_blank.png",
+      "glyphs": 672,
+      "sha256": "7407c14a165428a920f967d2a5a0d335a81e01c6024be869b7dc9af106ec8665"
+    },
+    {
+      "id": "qa_04_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_04_a_passage_blank.png",
+      "glyphs": 672,
+      "sha256": "d73b8ce7719f0dc1ecf2e632654ce0c09f1296bd0dd9c44d5ab5b59e1e00d0c5"
+    },
+    {
+      "id": "qa_04_b_normal",
+      "condition": "normal",
+      "image": "qa_04_b_normal.png",
+      "glyphs": 665,
+      "sha256": "059b3d422a9c0cf8af195fe9435d0e5bf9a060df4d667f71dacc1d56abc353e3"
+    },
+    {
+      "id": "qa_04_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_04_b_question_blank.png",
+      "glyphs": 665,
+      "sha256": "2febb05d2f268612f0c1a5ffba0b76ba2517478d1ef660ccfbcf802b7210c59a"
+    },
+    {
+      "id": "qa_04_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_04_b_passage_blank.png",
+      "glyphs": 665,
+      "sha256": "d888734104a890475498f7eb7a21bd739cabd68729508419f2d1b9035a1e52d9"
+    },
+    {
+      "id": "qa_05_a_normal",
+      "condition": "normal",
+      "image": "qa_05_a_normal.png",
+      "glyphs": 528,
+      "sha256": "fb5fc138703ee80039f18c56e2d0a7bbd3580af9dd1af9d76ad529cbd4b05575"
+    },
+    {
+      "id": "qa_05_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_05_a_question_blank.png",
+      "glyphs": 528,
+      "sha256": "3d7c62ebb42c8adf18df5b164819f9a197ae77e557214ff31258e1ea79e9ec13"
+    },
+    {
+      "id": "qa_05_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_05_a_passage_blank.png",
+      "glyphs": 528,
+      "sha256": "c1c4da3789a846690cf48646900347af31c234de33a6ff365e96e0e4890e925e"
+    },
+    {
+      "id": "qa_05_b_normal",
+      "condition": "normal",
+      "image": "qa_05_b_normal.png",
+      "glyphs": 530,
+      "sha256": "d6ac415c07748045a90cf25abdfbd2cd039d4109084021883c2eb24d16162479"
+    },
+    {
+      "id": "qa_05_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_05_b_question_blank.png",
+      "glyphs": 530,
+      "sha256": "e9a68ac0ce7722e754f57e6caf7d53d29bdeebfa191bd60444a2e9b317e0fd7a"
+    },
+    {
+      "id": "qa_05_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_05_b_passage_blank.png",
+      "glyphs": 530,
+      "sha256": "b01c79bba301d41e9b3d49fd024f6e50e83ec061e5299ff19cfb1b298010dabc"
+    },
+    {
+      "id": "qa_06_a_normal",
+      "condition": "normal",
+      "image": "qa_06_a_normal.png",
+      "glyphs": 961,
+      "sha256": "129742ea0ad9156a1583ba6dca32aa9cb4986c0ea05080a8d164bb5d133b806d"
+    },
+    {
+      "id": "qa_06_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_06_a_question_blank.png",
+      "glyphs": 961,
+      "sha256": "b8d8f4cc232fc0e22945c5b1359df7040547e99dde7c847d7f787dfe99fc221f"
+    },
+    {
+      "id": "qa_06_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_06_a_passage_blank.png",
+      "glyphs": 961,
+      "sha256": "a485bffb532c13164f0ef9666a76e0de38c6bfe4b99bbfe3fc36fa27bc9f6384"
+    },
+    {
+      "id": "qa_06_b_normal",
+      "condition": "normal",
+      "image": "qa_06_b_normal.png",
+      "glyphs": 954,
+      "sha256": "640280e95a946c61ebaf08712fdd49b81e02dac34a5e2338f283cceb43da1cef"
+    },
+    {
+      "id": "qa_06_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_06_b_question_blank.png",
+      "glyphs": 954,
+      "sha256": "a380f12d5f9202b25ef0d27747f986d3a0b1b11f6939cebdc7c3ef42766c211d"
+    },
+    {
+      "id": "qa_06_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_06_b_passage_blank.png",
+      "glyphs": 954,
+      "sha256": "3cc0c62ab4c82142ba01d915ace92440aa49a347e98a3c95becd1cf0162114c9"
+    },
+    {
+      "id": "qa_07_a_normal",
+      "condition": "normal",
+      "image": "qa_07_a_normal.png",
+      "glyphs": 617,
+      "sha256": "f31196b2c9fc4f3d70159e357fba95bcea8f077726fcb767aac6b76c7734c36c"
+    },
+    {
+      "id": "qa_07_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_07_a_question_blank.png",
+      "glyphs": 617,
+      "sha256": "d5ed89081731cf77141881e071f25b75274a12f780051165b6bc3d2d7cc691a2"
+    },
+    {
+      "id": "qa_07_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_07_a_passage_blank.png",
+      "glyphs": 617,
+      "sha256": "0c92c26603231ba401714fbc3fedd168d9b3dbb8b70a22dd7a6089ee0afd68c6"
+    },
+    {
+      "id": "qa_07_b_normal",
+      "condition": "normal",
+      "image": "qa_07_b_normal.png",
+      "glyphs": 618,
+      "sha256": "940aa84bb18dac4c63a61ba2eda96acaa8609addba4de3e01a006214a9e4968a"
+    },
+    {
+      "id": "qa_07_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_07_b_question_blank.png",
+      "glyphs": 618,
+      "sha256": "9683d9372c8fcc8503502eecbfa3fba39e992424a296424dda2a837d216c1246"
+    },
+    {
+      "id": "qa_07_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_07_b_passage_blank.png",
+      "glyphs": 618,
+      "sha256": "cb46a336efd9dfa420400cd334dfed72d31a026974b27af3d42878c0187a11e0"
+    },
+    {
+      "id": "qa_08_a_normal",
+      "condition": "normal",
+      "image": "qa_08_a_normal.png",
+      "glyphs": 642,
+      "sha256": "b56ebca0f79c1ea29f6ef81083021ac6e24bb34def9890c50f449869b447b81b"
+    },
+    {
+      "id": "qa_08_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_08_a_question_blank.png",
+      "glyphs": 642,
+      "sha256": "7e5f2bee6a5a91ebcd23a1c382729a2dd7d49322f6f8971ac1151d570daba506"
+    },
+    {
+      "id": "qa_08_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_08_a_passage_blank.png",
+      "glyphs": 642,
+      "sha256": "d17230417b6839f8e617ba26a87a6f73812aa75eef9841c358f73abca4c7724d"
+    },
+    {
+      "id": "qa_08_b_normal",
+      "condition": "normal",
+      "image": "qa_08_b_normal.png",
+      "glyphs": 640,
+      "sha256": "48f43bbeb472b36f0200fd40046fd7d7eb63aec48e7b8217cbd59567b205db36"
+    },
+    {
+      "id": "qa_08_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_08_b_question_blank.png",
+      "glyphs": 640,
+      "sha256": "b2ed7d10ccb87f60a7e8805ea257183c69a5294488913f9b8441fd81e07e1f42"
+    },
+    {
+      "id": "qa_08_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_08_b_passage_blank.png",
+      "glyphs": 640,
+      "sha256": "577cf00d463844424bf7840a7eafa0c4fcc7682866e3db360e295703d624f3d1"
+    },
+    {
+      "id": "qa_09_a_normal",
+      "condition": "normal",
+      "image": "qa_09_a_normal.png",
+      "glyphs": 522,
+      "sha256": "e9daf0e71d7d182edc98ba22bc0dda3342e610ba4a238b9d838333d53a998a20"
+    },
+    {
+      "id": "qa_09_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_09_a_question_blank.png",
+      "glyphs": 522,
+      "sha256": "d7682c2d88b99ee289eafc0e18ff659192db059394ae095a1d12371fef8496d8"
+    },
+    {
+      "id": "qa_09_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_09_a_passage_blank.png",
+      "glyphs": 522,
+      "sha256": "25d00cff5932e4c438ec980e853480c4f2f2b1ccf2fbfa2e7c6493e529664e9e"
+    },
+    {
+      "id": "qa_09_b_normal",
+      "condition": "normal",
+      "image": "qa_09_b_normal.png",
+      "glyphs": 525,
+      "sha256": "0f5a5229affe94903acd9476d511a2f0a43dbcbb2924735b23f3ec5f814e9f82"
+    },
+    {
+      "id": "qa_09_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_09_b_question_blank.png",
+      "glyphs": 525,
+      "sha256": "c4fce24086f15591f4e6feb1fa3c00d05086da21225bdaeb01159b0a155a8824"
+    },
+    {
+      "id": "qa_09_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_09_b_passage_blank.png",
+      "glyphs": 525,
+      "sha256": "8e411c9b3a80b341eb75d8cee97a5cbc14e80c6a245ce8f4e75e45183f6864d3"
+    },
+    {
+      "id": "qa_10_a_normal",
+      "condition": "normal",
+      "image": "qa_10_a_normal.png",
+      "glyphs": 714,
+      "sha256": "7bf94e5ebd907ec4f0f92f9717ac642c6646cf080273c8949c10db2abcc57d2e"
+    },
+    {
+      "id": "qa_10_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_10_a_question_blank.png",
+      "glyphs": 714,
+      "sha256": "603af41e617ef520c355d33d95ec1387eda94e492f1b3ebe2c5672972692c44d"
+    },
+    {
+      "id": "qa_10_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_10_a_passage_blank.png",
+      "glyphs": 714,
+      "sha256": "3f02e6572dd59a7bd6aa2fd33abda96a12dbf4d298c6661f79b2aefb9b8f028b"
+    },
+    {
+      "id": "qa_10_b_normal",
+      "condition": "normal",
+      "image": "qa_10_b_normal.png",
+      "glyphs": 710,
+      "sha256": "97b7e7dafa33299bef9dee92ac715b8ec665ee64c90a609e129c4371837cc276"
+    },
+    {
+      "id": "qa_10_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_10_b_question_blank.png",
+      "glyphs": 710,
+      "sha256": "6369aab6f6ff451d8ac60dddb14fb3e34bb3b65c9d616543751afe823d26bdbc"
+    },
+    {
+      "id": "qa_10_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_10_b_passage_blank.png",
+      "glyphs": 710,
+      "sha256": "92e9e871ea10808c46a34f2a3e3835147bc0da5f17e083d9b120b51f677f4a0f"
+    },
+    {
+      "id": "qa_11_a_normal",
+      "condition": "normal",
+      "image": "qa_11_a_normal.png",
+      "glyphs": 441,
+      "sha256": "7aa4e2c2c3b57f955456a9d9736d5d8a4ea7e24f2ee355227c759d72902724ca"
+    },
+    {
+      "id": "qa_11_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_11_a_question_blank.png",
+      "glyphs": 441,
+      "sha256": "431d2dd41087ca4f244622d52a94d60097fdc8bb54eefc226921680c299bc51f"
+    },
+    {
+      "id": "qa_11_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_11_a_passage_blank.png",
+      "glyphs": 441,
+      "sha256": "aba08d92bbfe5cfea8d63b7b625fd76c2f8b9f24f2b32ffa2bb8348bdd35d7e4"
+    },
+    {
+      "id": "qa_11_b_normal",
+      "condition": "normal",
+      "image": "qa_11_b_normal.png",
+      "glyphs": 444,
+      "sha256": "fa8de314a7da448c05bda53200d99e6b65cb7d1fd5c31723d77bc7e12a108d8d"
+    },
+    {
+      "id": "qa_11_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_11_b_question_blank.png",
+      "glyphs": 444,
+      "sha256": "aa641dc0ebdd86b312cddac6a595adbee0df7d11d831b6a97469003d618d845a"
+    },
+    {
+      "id": "qa_11_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_11_b_passage_blank.png",
+      "glyphs": 444,
+      "sha256": "23e92c99efc1f98f3e3a7c7f01295f3cde6733e66cd7031f3a1fff7311350a2b"
+    },
+    {
+      "id": "qa_12_a_normal",
+      "condition": "normal",
+      "image": "qa_12_a_normal.png",
+      "glyphs": 922,
+      "sha256": "4549c22cae2956676371aa109b14a685dc909f91bc1f90c540a36f3134c862fb"
+    },
+    {
+      "id": "qa_12_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_12_a_question_blank.png",
+      "glyphs": 922,
+      "sha256": "233024e8c1e4bb62c5bcdeb4311e77494d8f6c47b66b0a57a461f79ee41b3af3"
+    },
+    {
+      "id": "qa_12_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_12_a_passage_blank.png",
+      "glyphs": 922,
+      "sha256": "27d0ff441b90d35f892290f0126f9e9fec5427e8706289d4eb9858b7899c1a6c"
+    },
+    {
+      "id": "qa_12_b_normal",
+      "condition": "normal",
+      "image": "qa_12_b_normal.png",
+      "glyphs": 925,
+      "sha256": "ca1d1b3ae5236f7609d1c33bcebd78eeda2e067362c754d35770f9f985083be9"
+    },
+    {
+      "id": "qa_12_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_12_b_question_blank.png",
+      "glyphs": 925,
+      "sha256": "8d2f55ac7b2bbb8e43a0be0324329d3a11785c3fac6c86706da4ef2ea478de4f"
+    },
+    {
+      "id": "qa_12_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_12_b_passage_blank.png",
+      "glyphs": 925,
+      "sha256": "ebb4d2585b572fb6c9b04a8306ca452c86256ced1baadeaf4f70de9e68ede538"
+    },
+    {
+      "id": "qa_13_a_normal",
+      "condition": "normal",
+      "image": "qa_13_a_normal.png",
+      "glyphs": 497,
+      "sha256": "cdbd48845dd5bd7c2f4dafaa3517df1fc40fea223024f9a61bb02636476743de"
+    },
+    {
+      "id": "qa_13_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_13_a_question_blank.png",
+      "glyphs": 497,
+      "sha256": "cb9c491b8ac464734a556f1e808b70b7db943f139417bac86d3a9905e15843a3"
+    },
+    {
+      "id": "qa_13_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_13_a_passage_blank.png",
+      "glyphs": 497,
+      "sha256": "90b1a3623001def8785dd18336a1747f0b2c7bf4cd5c96a55dbacb92eda3951d"
+    },
+    {
+      "id": "qa_13_b_normal",
+      "condition": "normal",
+      "image": "qa_13_b_normal.png",
+      "glyphs": 488,
+      "sha256": "80b1f448cfc4ede986d5bf282bbd05a741dcda572ccf46f6f47b54eb0051c917"
+    },
+    {
+      "id": "qa_13_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_13_b_question_blank.png",
+      "glyphs": 488,
+      "sha256": "b924f7a9c53923d8097aab89c9c5a85fc2553ba5bf412f8c21bf34fbf151ba46"
+    },
+    {
+      "id": "qa_13_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_13_b_passage_blank.png",
+      "glyphs": 488,
+      "sha256": "1913b80ba4e3090b2715d00aaccf3df803a3e8c4b9b097e317b8a7d9102ef981"
+    },
+    {
+      "id": "qa_14_a_normal",
+      "condition": "normal",
+      "image": "qa_14_a_normal.png",
+      "glyphs": 692,
+      "sha256": "60b97f48245f697b84c74204592f9dfdbc89109a0aeb5d839256e192a6feb38c"
+    },
+    {
+      "id": "qa_14_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_14_a_question_blank.png",
+      "glyphs": 692,
+      "sha256": "b12064965011d592b53a0e33f3f86fb3862b361666cb76441ee9b436cdc995c2"
+    },
+    {
+      "id": "qa_14_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_14_a_passage_blank.png",
+      "glyphs": 692,
+      "sha256": "650a21694056cacba014a6f96976fe4980e73ee159d054b42feff4eda1403fe9"
+    },
+    {
+      "id": "qa_14_b_normal",
+      "condition": "normal",
+      "image": "qa_14_b_normal.png",
+      "glyphs": 694,
+      "sha256": "210b29baefd0e282785cd610d17279cdd13ac66ad8a234c13ce7e7dbfb2131ef"
+    },
+    {
+      "id": "qa_14_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_14_b_question_blank.png",
+      "glyphs": 694,
+      "sha256": "3cfeb76cc095d051263a90f52eba9b86d164cbb6801aafb035f298c3391c486c"
+    },
+    {
+      "id": "qa_14_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_14_b_passage_blank.png",
+      "glyphs": 694,
+      "sha256": "9d04d238ba531b72c2c35eb9af569009e1081935023d8b95da34eafd0479c797"
+    },
+    {
+      "id": "qa_15_a_normal",
+      "condition": "normal",
+      "image": "qa_15_a_normal.png",
+      "glyphs": 674,
+      "sha256": "972b42aca6d5f2ed4b97106759df071d1534f0b490b141341bc1e4a9fc167059"
+    },
+    {
+      "id": "qa_15_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_15_a_question_blank.png",
+      "glyphs": 674,
+      "sha256": "2aa37c3b8b3ae8f77cd81c970c276dbc04544568f8599a29c184de648abfd38a"
+    },
+    {
+      "id": "qa_15_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_15_a_passage_blank.png",
+      "glyphs": 674,
+      "sha256": "315c14302d78b6f0a86f74a142481cea57cd1132534f46cb31a5bd124ec276cc"
+    },
+    {
+      "id": "qa_15_b_normal",
+      "condition": "normal",
+      "image": "qa_15_b_normal.png",
+      "glyphs": 659,
+      "sha256": "a8970839709edb13e860820f41530350edc9f5b265d51dc65b2c0cde9e2cefed"
+    },
+    {
+      "id": "qa_15_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_15_b_question_blank.png",
+      "glyphs": 659,
+      "sha256": "eed9e139c8070e839fe6891aaabc1a0c4d11d97cd292f4c25dc8aea69ac72b4d"
+    },
+    {
+      "id": "qa_15_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_15_b_passage_blank.png",
+      "glyphs": 659,
+      "sha256": "e24ae2f452b7df45eca355c3681c0b30cd92d4ce9d897a6f6124ce9a658f825e"
+    },
+    {
+      "id": "qa_16_a_normal",
+      "condition": "normal",
+      "image": "qa_16_a_normal.png",
+      "glyphs": 909,
+      "sha256": "ba0e2492e048da1b1abc4ddf8b7e0f8e5de521d55e75d5e0ccff72747df567ef"
+    },
+    {
+      "id": "qa_16_a_question_blank",
+      "condition": "question_blank",
+      "image": "qa_16_a_question_blank.png",
+      "glyphs": 909,
+      "sha256": "28361f3e1dff6f2a97869c6775a0e946b243c07b99e92c83dd2b723164442624"
+    },
+    {
+      "id": "qa_16_a_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_16_a_passage_blank.png",
+      "glyphs": 909,
+      "sha256": "c76daee7672a534f2761a7162ec3744b32c03f81d5aa8ada2a780b5a88ded198"
+    },
+    {
+      "id": "qa_16_b_normal",
+      "condition": "normal",
+      "image": "qa_16_b_normal.png",
+      "glyphs": 914,
+      "sha256": "b0b9f04ec51ef55d0cad8ab6ec4c7b032b14a3dbff9dd446de4df47a45d0977e"
+    },
+    {
+      "id": "qa_16_b_question_blank",
+      "condition": "question_blank",
+      "image": "qa_16_b_question_blank.png",
+      "glyphs": 914,
+      "sha256": "858f9a59c4d6c8cbadb58a5178de6ae92330b7ce0ffd0e8bb0b8794181edf8c2"
+    },
+    {
+      "id": "qa_16_b_passage_blank",
+      "condition": "passage_blank",
+      "image": "qa_16_b_passage_blank.png",
+      "glyphs": 914,
+      "sha256": "8f9857f34ffa2dfd7c9f77a572528aae73ea847ccdd116eb540a9833ef345086"
+    }
+  ],
+  "preparation_sha256": "82a25c7e1c682af764c4ed9b808124c2f6cf5fdb3e76466bc91e7d6a59e1ce8f",
+  "input_manifest_sha256": "fed2abb039972ccc361414e28a2196483b68aeb4969d5e2fea9bc634dbd31b8a",
+  "rendering_audit_sha256": "4918040a07de74c78ede203e4955b062618812f046a467b171c0d704f0f38e0e",
+  "references_sha256": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+  "original_control_registration_sha256": "04f36b3c581f162ca93aa775ffb33d5234e313337d0e0ee929199c0e2044d247",
+  "original_control_analysis_sha256": "6d03df07125836cd5617e20e0839f474ec3da7ad08612eb82e5ae2751b209349",
+  "maximum_glyphs": 128,
+  "maximum_seconds": 3600,
+  "pressure_wait_allowance_seconds": 600,
+  "minimum_entry_host_ram_gib": 48,
+  "minimum_runtime_host_ram_gib": 24,
+  "minimum_free_gpu_gib": 20,
+  "maximum_allocated_vram_gib": 22,
+  "seed": null,
+  "flow_steps": null,
+  "device": "cuda:0",
+  "deterministic_writer": true,
+  "new_optimizer_updates": 0,
+  "retained_native_parameters": 7522463984,
+  "references_allowed_during_generation": false,
+  "fixed_cold_replay_case": "qa_01_a_normal",
+  "decision_rule": "Increase exact QA, both-correct pairs and whole readability over2/32,1/16,3/32; retain all three original readable successes and do not increase24 normal QA caps. Development decision only."
+}
