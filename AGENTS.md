@@ -14,13 +14,16 @@ work unit. Use the goal for current acceptance criteria and the private handoff
 for verified live ownership. Historical result files are evidence, not current
 scheduling instructions.
 
-The compact fits, writer comparisons, native-reader diagnosis and latest
-realized-writer publication are complete. The usable-language goal remains
-unachieved. The next model decision is failure localization with saved
-trajectories and correct image history before another fit. Register the bounded
-comparison before execution; reference-conditioned results are diagnostics.
-Do not rerun completed audits, extend rejected writer fits or prioritize
-publication polish over the unresolved complete-language failure.
+The compact fits, writer comparisons, native-reader diagnosis, correct-image-
+history comparison and latest realized-writer publication are complete. The
+usable-language goal remains unachieved. Both correct-history physical gates
+fail; reference history does not qualify autonomous language. The next direction
+is continuation-only contextual adaptation with frozen prompt prefilling. Read
+`references/generation_only_adaptation_direction.md` and the earlier feedback
+ceiling before implementation. Verify a real causal/gradient/memory preflight
+before registering a full fit. Preserve the failed mixtures, first-function
+transfer and writer-only controls; do not repeat them as new solutions.
+Do not prioritize manuscript polish over the unresolved model failure.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and

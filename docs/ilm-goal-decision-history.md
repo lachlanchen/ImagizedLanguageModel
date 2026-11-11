@@ -8,6 +8,24 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 12 November: correct-image-history comparison completed
+
+All 64 frozen traces and 1,490 reference positions complete in 460.834 seconds
+at 17.786 GiB peak allocated VRAM. Initial states and every saved autonomous
+pixel/stop replay are exact. Independent recount and actual sixteen-board review
+cover all 8,561 displayed original tiles. Both later-writing physical gates fail;
+proportional median F1 is 0.985185 and fixed is 0.573840. Correct history helps
+later writing but supplies answer information; original language scores stay
+unchanged. Four close but nonidentical first forms all continue readably, limiting
+an explanation based on small pixel errors alone. See the
+[complete result](../references/reference_image_history_result.md).
+
+The next unimplemented direction tests continuation-only contextual adaptation
+with frozen source prompt prefilling, after a real causal/gradient/memory
+preflight. Read the earlier source-step ceiling, mixture and first-function
+transfer failures before selecting the fit. No new training or autonomous answer
+is made by this diagnostic. GPU0 is released; the full goal remains active.
+
 ## 12 November: active goal consolidated after the balanced-writer result
 
 The [active goal](first-imagized-language-model-goal.md) now separates the full

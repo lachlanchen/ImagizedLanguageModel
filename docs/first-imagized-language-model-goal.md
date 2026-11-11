@@ -111,47 +111,40 @@ is complete: 35/62/63-page reading/review/redline PDFs, verified native Figure 2
 and a reproduced 160-page combined raster comparison. The local RealizedWriting
 package and latest aliases are verified; cloud propagation is unverified.
 No repeat publication build or completed-cohort generation is pending.
+The correct-image-history study below is newer than these PDFs. Include it in
+the next bounded results revision; do not imply it is already in the article.
+The model preflight takes priority over another presentation-only work unit.
 
 ## Next model decision
 
-**Before another fit, distinguish conditional writing failure from failure after
-pixel feedback.** Use the saved balanced, parent and flow trajectories and the
-existing native-reader controls. A new measurement must change the training
-decision; another first-tile audit or generic loss curve is insufficient.
+The [correct-image-history comparison](../references/reference_image_history_result.md)
+is complete: all 64 traces, 1,490 target positions, sixteen reviewed boards and
+8,561 independently checked displayed tiles. Every initial state and saved
+pixel/stop replay is exact. Proportional later median F1 is 0.985185, with
+475/713 positions at least 0.95; fixed is 0.573840 and 139/713. Both registered
+physical gates fail. Original complete-language scores remain unchanged.
 
-The next measurement plan is a frozen-weight, correct-image-history comparison
-on all 32 existing normal QA cases in both layouts. Reproduce the actual initial
-states. At each reference position, measure the predicted image and stopping
-probability while feeding the correct preceding glyph images through the same
-image encoder and contextual cache. Compare with the saved autonomous histories;
-retain unmatched lengths, alternate wording and all failures. Record terminal
-positions explicitly. Reference history and supplied lengths make this a
-**diagnostic, not autonomous language generation**.
+Correct history improves later writing, but initial and conditional errors
+persist. A feedback-only explanation is insufficient. All four nearly exact
+but nonidentical first images have readable original autonomous answers, so
+mere state divergence does not establish a harmful pixel-feedback error.
+Canonical mismatch and different answer lengths remain distinct from semantics.
+Do not repeat the completed comparison or substitute it for autonomous language.
 
-Before execution, commit a bounded protocol, source/checkpoint/input hashes,
-resource ceiling and interpretation rules. This plan is not a completed or
-registered experiment. Any native-head readout is an external diagnostic and
-must remain separate from the image actor. Reuse existing native outputs before
-considering more helper calls; they are not a ground-truth oracle.
+The earlier [feedback ceiling](../references/glyph_feedback_ceiling_result.md)
+already shows that native-unit and first-character steps are not interchangeable,
+even with exact feedback vectors. Preserve its different cohort and exclude its
+diagnostic records from training. Read the completed mixture-density and
+first-function-transfer results before proposing those routes again.
 
-Choose the next intervention from the observed pattern:
-
-- Failure already at the initial state or under correct image history directs
-  attention to conditional transfer or reader/writer alignment. Training only
-  on generated histories cannot by itself repair that demonstrated failure.
-- Readable conditional writing under correct history followed by deterioration
-  with emitted-pixel history motivates one controlled feedback-training change.
-  It does not authorize adding a runtime teacher or replacing images with IDs.
-- Premature or missing stops under correct history require a separately measured
-  stopping change. A glyph cap or supplied target length is not learned stopping.
-- Failures shared with the existing native control also require reader-access
-  investigation. A writer-only change cannot be assumed to supply missing
-  understanding. Ambiguous cases remain ambiguous until evidence resolves them.
-
-Do not infer a unique cause from canonical pixel mismatch. Prefer one
-mechanism-based change with a preserved control over adding model components,
-more epochs, new modalities or unrelated physics terminology. The implementation
-may be replaced when the evidence warrants it; preserve the rejected recipes.
+The [selected next direction](../references/generation_only_adaptation_direction.md)
+is to test stronger adaptation of visual continuation dynamics while preserving
+frozen source prompt prefilling. First implement and measure one continuation-only
+adapter design, including its first answer query. Verify real causality,
+prefill identity, gradients and one-4090 memory before registering a full fit.
+Only frozen prompt memory may be reused: changed answer dynamics must be
+recomputed. This is an unimplemented hypothesis, not a working solution.
+Retain the current controls and full complete-response acceptance criteria.
 
 ## Training and evaluation contract
 
