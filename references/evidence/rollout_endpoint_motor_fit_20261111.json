@@ -1,0 +1,44 @@
+{
+  "schema": "rollout-endpoint-independent-fit-audit-v1",
+  "source_sha256": "350a4e36bd456b4fabfe9f9c32c2768db6cae4e674d5644d0c69266809192a96",
+  "registration_sha256": "007f9b77fc302c148dcad3f83fcb7f357c96970cef62647fdc3681b636a3521d",
+  "starting_flow_checkpoint_sha256": "79160d69ecd8559a939cba144566610e61f3582b92e9ff3e8e141eb39bcdd976",
+  "arms": {
+    "control": {
+      "checkpoint_sha256": "55e408155ca6d9e1ce24807fe79901e556a9ccd6a982a33a4a0515791a9dc7b9",
+      "report_sha256": "9091100b4801c5366a5aa60d30f3fb0c1e1250184d2f2cd72bef3d7e95bed4c1",
+      "actual_parameter_optimizer_steps": 2000,
+      "changed_parameters": 30,
+      "finite_model_EMA_and_optimizer_moments": true,
+      "sampled_target_counts": {
+        "first": 32000,
+        "later": 32000
+      },
+      "previous_checkpoint_step": 1750,
+      "elapsed_seconds": 103.77456535957754,
+      "resource_wait_seconds": 80.07232729252428,
+      "peak_allocated_vram_gib": 1.1648101806640625
+    },
+    "rollout": {
+      "checkpoint_sha256": "b45e9022e4fe69d16d642e6b58bf15bc71c57934085cce5b7f8b865e4d97cca0",
+      "report_sha256": "c231677be35027965d4647f65eada8169a17d761ea365310e92cd0f1b1abca99",
+      "actual_parameter_optimizer_steps": 2000,
+      "changed_parameters": 30,
+      "finite_model_EMA_and_optimizer_moments": true,
+      "sampled_target_counts": {
+        "first": 32000,
+        "later": 32000
+      },
+      "previous_checkpoint_step": 1750,
+      "elapsed_seconds": 875.9616169473156,
+      "resource_wait_seconds": 80.07302196882665,
+      "peak_allocated_vram_gib": 1.1660308837890625
+    }
+  },
+  "actual_initialization_bound": true,
+  "paired_indices_and_final_CPU_CUDA_RNG_bit_exact": true,
+  "actual_checkpoint_optimizer_states_audited": true,
+  "language_quality_unmeasured": true,
+  "goal_achieved": false,
+  "CPU_CUDA_initialized": false
+}

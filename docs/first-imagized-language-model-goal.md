@@ -44,22 +44,28 @@ is invented. The versioned local delivery is
 `ILM_NatureStyle_20261111_MotorDiagnostics`. Local hashes are verified; cloud
 propagation is not claimed. Earlier figures, supplement and packages remain.
 
-The next work unit returns to the model. The
-[full-sampler endpoint decision](../references/rollout_endpoint_motor_decision.md)
-tests gradients through all 32 deployed integration intervals, with an
-equal-update flow-only control from the same original EMA. It keeps the
-reader, stopping and deployment boundary fixed. Both arms use 2,000 updates
-on authentic first/later states; only the objective differs. Implementation
-and numerical gradient checks precede source-bound registration and fitting.
-This is a new hypothesis, not a successful repair. First test faithful writing
-from the fixed actual-context states, then complete the unchanged autonomous
-language comparison if the prerequisite passes. Keep the original flow and
-parent controls, all adverse cases, fixed seeds and complete denominators.
-A physical pass alone does not qualify language. Reading, conditional transfer,
-stopping and feedback remain distinct unresolved parts. Any pilot gain needs
-untouched source-group confirmation and independent review. The substantial
-corpus remains available for complete-sequence learning; additional books or
-sharper glyphs alone do not establish that capability.
+The [full-sampler endpoint pair](../references/rollout_endpoint_motor_result.md)
+is now complete. Both arms make 2,000 audited updates from the same original
+EMA, with matching sampled indices and final CPU/CUDA random states. The
+candidate passes the first-position gate (median 0.990581, 31/32 at 0.95) but
+fails later (0.978614, 25/32). Its matched extra-FM control fails both. All 128
+positions and 512 original displayed tiles are independently checked and
+viewed. Fitting takes 103.775/875.962 seconds at 1.165/1.166 GiB; assessment
+39.623 seconds at 0.402 GiB. Both complete language trials remain unmeasured
+under the fixed gate. Do not extend the fit or substitute its first-only pass
+for stable writing or language. The verified PDFs remain the prior baseline;
+this new result awaits a bounded revision with the next matched control.
+
+Before another writer fit, make a prospective matched comparison using the
+already physically qualified balanced writer. Its earlier 18/32 clear-answer
+result comes from another cohort and metric. Evaluate its actual writing on
+the same saved states and its complete language on the current unchanged
+cohort, preserving the original parent and flow controls. Make no new fit,
+checkpoint selection or favorable resampling. This can distinguish a flow-
+writer limitation from remaining reading, stopping and feedback failures;
+no outcome is yet measured. Finish that language evidence before proposing
+another writer-only repair. Any development improvement still requires
+untouched source-group confirmation and independent review.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
