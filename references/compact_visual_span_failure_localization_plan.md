@@ -155,3 +155,14 @@ Its native-vector file shares the original authenticated inode. The full
 [precision probe](compact_visual_prefix_precision_result.md) records the
 stopped attempt's cause investigation. The replacement's language outcome
 remains unmeasured until the whole diagnostic is complete and scored.
+
+## Completed diagnostic and interpretation
+
+The corrected two-model execution completed all 64 case assessments in
+260.16 seconds, including 20.02 seconds waiting for pressure, at 3.401 GiB peak
+allocated GPU memory. Original pixel metrics, matched noise and feedback hashes
+have been independently checked. The [complete diagnostic](compact_visual_span_diagnosis_result.md)
+records failure before generated feedback, the near-exact codec control,
+no sampler-resolution repair and the remaining feedback alignment restriction.
+It adds no autonomous language success. The current decision is to compare the
+earlier model with readable outputs on this same cohort before another fit.

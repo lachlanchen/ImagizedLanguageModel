@@ -29,26 +29,40 @@ saving verification, for an unknown reason; the original completed child
 traces support CPU-only recovery without rerunning generation. Execution and
 capacity checks do not establish usable language.
 
-**Next required work: localize the failure using frozen weights.** Follow the
-[failure-localization plan](../references/compact_visual_span_failure_localization_plan.md).
-Measure visual access and grouping, conditional writing under correct
-reference-image history, eight-step sampler sensitivity and emitted-history
-drift separately. Include direct codec reconstruction and shuffled-context
-controls. Bind cases, noise, source identities, metrics and resource limits
-before model calls. Supplied reference lengths or history must be labeled
-as diagnostics and excluded from autonomous language scores.
+The [frozen-weight diagnostic](../references/compact_visual_span_diagnosis_result.md)
+is now complete for both final checkpoints. Correct history and supplied
+lengths still produce zero exact first-span glyphs among twenty training and
+twenty-six development targets per model. Direct codec reconstruction exceeds
+0.9998 foreground F1, while increasing sampling from eight to 64 steps does
+not repair writing. Both encoders have 383-dimensional feedback affine families
+for 2,048-dimensional native targets, imposing about 0.57 minimum relative
+squared error on selected positions. This is a target-alignment restriction,
+not a language-quality bound. A separate one-case precision probe identifies
+BF16 sequence-shape sensitivity; the completed diagnostic uses matched cached
+execution and retains the original consistency tolerance.
 
-No new architecture, longer fit, larger foundation or additional data
-collection is selected yet. Use the earliest measured failure to choose one
-bounded intervention, then test complete autonomous answers again against
-the preserved failed control. A development improvement requires new untouched
-source groups before broader claims. Do not replace the goal with copying,
-finite losses, a rank audit or an attractive manuscript figure.
+**Next required work: compare with the earlier model that produced readable
+answers on this same fixed cohort.** Its earlier 16/32 clear-answer result
+uses different questions and a different metric. Register its actual checkpoint,
+inputs, generation settings, quality measurements and resource budget before
+inference. Audit overlap with that model's training/source groups before
+calling the cohort held out. Preserve the compact failed controls and disclose
+the larger inherited body. This comparison must precede another training branch, so a
+lower parameter count does not replace demonstrated capability.
+
+Reject the unchanged compact joint recipe and a sampler-only repair. Choose
+one bounded reader/writer intervention from the completed diagnostics and
+matched-cohort control. A native-context writing fit remains a possible
+training diagnostic, with source embeddings confined to that diagnostic;
+it cannot qualify deployed visual reading. Check the earlier separately
+trained semantic glyph loop before repeating the same approach. A development
+improvement needs untouched source groups before broader claims. Copying,
+finite losses, rank checks and presentation quality do not replace language.
 
 The V1 Nature-style article revision and its four editable measured figures
-are complete. The wider result now has authenticated measurements and all
-fifteen fixed raw examples; incorporating that comparison into the manuscript
-is a separate evidence-backed revision. Model diagnosis takes priority over
+are complete. The wider result and completed failure-localization diagnostic now have
+authenticated measurements and raw examples. Incorporate both in a bounded
+revision with editable measured charts and matched TeX/PDFs. Model diagnosis takes priority over
 additional cover art or presentation work.
 
 ## Goal and acceptance criteria
@@ -111,7 +125,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: diagnose the remaining writing failure
+## Current decision: retain a readable control before another fit
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
@@ -160,8 +174,9 @@ separate architectural restriction in V1: a 384-channel linear output predicts a
 remain uncontrolled. The registered wider comparison removes this tested
 capacity restriction but still fails the complete-response evaluation. Preserve both models as
 controls. The restriction is not a sufficient explanation for the failed
-answers; localize the remaining visual and conditional-writing errors before
-another fit.
+answers. The completed diagnostic also finds conditional-writing failure
+before emitted feedback. Compare the earlier readable model on the same cohort
+before choosing another fit.
 
 ## Current evidence and unresolved tests
 

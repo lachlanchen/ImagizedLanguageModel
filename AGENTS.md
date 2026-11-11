@@ -23,13 +23,18 @@ complete exact QA improvement. Preserve both controls, their five checkpoints,
 raw failures and source identities. The trained cold child passes the
 recovered access/pixel audit; this is an execution result.
 
-Before another training branch, follow the goal's failure-localization plan:
-measure visual access, conditional writing under supplied reference history,
-sampler sensitivity and emitted-history drift with frozen weights. Register
-actual cases, matched noise, metric and resource limits before model calls.
-Keep reference-supplied diagnostics separate from autonomous language scores.
-Choose the next bounded intervention from these measurements. Reuse the
-completed corpus and teacher cache unless measured evidence requires new data.
+The frozen-weight diagnostic is complete for both final checkpoints. Correct
+reference history and lengths still fail first-span writing; eight-to-64-step
+sampling does not repair it. The image encoder's native-target alignment also
+has a measured affine restriction. Use the goal and complete diagnostic receipt;
+keep these supplied-reference results separate from autonomous language scores.
+
+Before another training branch, register and run the earlier model with
+readable image answers on the current fixed cohort. Its earlier 16/32 result
+uses another cohort/metric. Keep its larger inherited-body cost visible and
+preserve both compact failed controls. Then choose one bounded intervention
+from the measured comparison. Reuse completed corpus/cache assets and inspect
+prior semantic-glyph-loop results before repeating a failed approach.
 
 ## Always Commit and Push After Change
 
