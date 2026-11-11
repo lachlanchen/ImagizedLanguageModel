@@ -48,3 +48,19 @@ def test_actual_network_receives_flow_gradient():
     loss.backward()
     assert torch.isfinite(loss) and flow.output.weight.grad.abs().sum() > 0
     assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in flow.parameters())
+
+
+def test_parameter_versions_remain_auditable_during_inference():
+    torch.set_num_threads(2)
+    with torch.no_grad():
+        base = SemanticGlyphBridge().eval().requires_grad_(False)
+        base.stop[-1].weight.zero_(); base.stop[-1].bias.fill_(-20)
+        bridge = ContextMotorBridge(base, ContextMotorFlow(), torch.zeros(1024), torch.ones(1024))
+        bridge.eval().requires_grad_(False)
+    versions = [(p, p._version) for p in bridge.parameters()]
+    bridge.begin_case(37)
+    with torch.inference_mode():
+        logits, motor, stop = bridge.predict(torch.zeros(1, 4096))
+    assert logits.shape == (1, 1, 32, 32) and motor.shape == (1, 1024)
+    assert stop.sigmoid().item() < .5 and len(bridge.motor_trace) == 1
+    assert all(p._version == version for p, version in versions)

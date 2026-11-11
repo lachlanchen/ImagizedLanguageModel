@@ -60,9 +60,52 @@ def register(run):
 
 def study(run):
     r = validate(run); s = load(run/'study_registration.json')
-    require(s['training_registration_sha256'] == sha(run/'registration.json')
-            and s['runtime_source_sha256'] == identity(), 'Study registration changed')
+    require(s['training_registration_sha256'] == sha(run/'registration.json'), 'Training registration changed')
+    current = identity()
+    if s['runtime_source_sha256'] != current:
+        amendment = load(run/'execution_amendment.json')
+        require(amendment['original_study_sha256'] == sha(run/'study_registration.json')
+                and amendment['original_runtime_source_sha256'] == s['runtime_source_sha256']
+                and amendment['updated_runtime_source_sha256'] == current
+                and amendment['changed_runtime_sources'] == [OWN]
+                and amendment['answers_emitted_before_amendment'] == 0,
+                'Unregistered runtime change')
+        s = dict(s, runtime_source_sha256=current, execution_amendment_sha256=sha(run/'execution_amendment.json'))
     return r, s
+
+
+def amend_loading(run):
+    require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CPU-only recovery registration')
+    validate(run); original = load(run/'study_registration.json'); current = identity()
+    changed = [n for n in current if current[n] != original['runtime_source_sha256'][n]]
+    require(changed == [OWN] and not (run/'execution_amendment.json').exists(), 'One explicit loading correction only')
+    folder = run/'generation_fixed_cells'; status = load(folder/'status.json')
+    require(status['phase'] == 'failed' and status['pid'] is None and not owner_live(status)
+            and status['error'] == "RuntimeError('Inference tensors do not track version counter.')"
+            and not list(folder.rglob('legacy_output.pt')) and not (run/'generation_proportional').exists(),
+            'Only a terminal, zero-answer loading failure can use this amendment')
+    attempt = load(folder/'attempts/attempt_0001.json')
+    archive = run/'generation_attempts/fixed_cells_0001_setup_failure'
+    archive.parent.mkdir(exist_ok=True); require(not archive.exists(), 'Preserve previous recovery')
+    folder.rename(archive)
+    (run/'generation_fixed_console.log').rename(archive/'console.log')
+    amendment = dict(schema='glyph-context-motor-execution-recovery-v1',
+        original_study_sha256=sha(run/'study_registration.json'),
+        original_runtime_source_sha256=original['runtime_source_sha256'], updated_runtime_source_sha256=current,
+        changed_runtime_sources=changed, answers_emitted_before_amendment=0,
+        failed_attempt_receipt_sha256=sha(archive/'attempts/attempt_0001.json'),
+        failed_console_sha256=sha(archive/'console.log'), failed_attempt_elapsed_seconds=attempt['elapsed_seconds'],
+        failed_attempt_peak_allocated_vram_gib=attempt['peak_allocated_vram_gib'],
+        failed_attempt_retained=str(archive.relative_to(ROOT)),
+        correction='Construct frozen parameter modules under no_grad, then generate under inference_mode; parameter version counters remain available.',
+        same_model_weights_training_sampler_inputs_stop_cap_and_pilot=True, optimizer_updates=0,
+        prefill_or_answer_quality_observed_before_correction=False)
+    save_json(run/'execution_amendment.json', amendment)
+    public = ROOT/'references/evidence/glyph_context_motor_execution_recovery_20261111.json'
+    require(not public.exists(), 'Preserve earlier public recovery')
+    save_json(public, amendment)
+    print(json.dumps(dict(execution_amendment_sha256=sha(run/'execution_amendment.json'),
+                         answers_emitted_before_correction=0, model_recipe_unchanged=True)))
 
 
 def verified_case(directory, row):
@@ -92,7 +135,8 @@ def run_generation(run, layout):
     folder = run/('generation_'+layout); folder.mkdir(exist_ok=True)
     request = dict(study_registration_sha256=sha(run/'study_registration.json'),
         fit_checkpoint_sha256=fit['checkpoint_sha256'], layout=layout, inputs=rows,
-        maximum_glyphs=128, source_sha256=s['runtime_source_sha256'])
+        maximum_glyphs=128, source_sha256=s['runtime_source_sha256'],
+        execution_amendment_sha256=s.get('execution_amendment_sha256'))
     if (folder/'request.json').exists():
         require(load(folder/'request.json') == request, 'Resume request changed')
     else:
@@ -113,7 +157,7 @@ def run_generation(run, layout):
     monitor.status('admitting')
     loading = None
     try:
-        with full_reader_gpu() as (device, admission), torch.inference_mode():
+        with full_reader_gpu() as (device, admission), torch.no_grad():
             monitor.admission = admission; numerics(); torch.set_num_threads(2); monitor.guard()
             began = time.perf_counter()
             actor, provenance = load_actor(CHECKPOINT, device)
@@ -138,7 +182,8 @@ def run_generation(run, layout):
                 prompt = torch.from_numpy(np.asarray(canvas).copy()).float()[None, None]/127.5-1
                 actor.bridge.begin_case(row['seed'])
                 torch.cuda.synchronize(); began = time.perf_counter()
-                value = actor.generate(prompt, maximum_glyphs=128)
+                with torch.inference_mode():
+                    value = actor.generate(prompt, maximum_glyphs=128)
                 torch.cuda.synchronize(); elapsed = time.perf_counter()-began
                 value.update(context_motor_flow=True, motor_trace=actor.bridge.motor_trace,
                              case_seed=row['seed'], sampling_candidates=1, sampling_intervals=32)
@@ -184,12 +229,14 @@ def run_generation(run, layout):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('stage', choices=['register', 'run'])
+    parser.add_argument('stage', choices=['register', 'amend-loading', 'run'])
     parser.add_argument('--layout', choices=['fixed_cells', 'proportional'])
     parser.add_argument('--run', type=Path, default=ROOT/'artifacts/glyph_context_motor_v1')
     args = parser.parse_args()
     if args.stage == 'register':
         register(args.run.resolve())
+    elif args.stage == 'amend-loading':
+        amend_loading(args.run.resolve())
     else:
         require(args.layout is not None, 'Choose one complete presentation stage')
         run_generation(args.run.resolve(), args.layout)
