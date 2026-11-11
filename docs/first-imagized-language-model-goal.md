@@ -1,6 +1,39 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-11
+Updated: 2026-11-12
+
+## Working objective
+
+Build a usable language model that reads visible writing and generates its
+answer as visible writing on one RTX 4090. Start with complete modern-Chinese
+answers and book continuation. Typed prompts may be rendered at the input
+boundary; the answer path must learn to emit glyph images and reread its own
+pixels. Historical, handwritten and unencoded forms remain the later target,
+including a sourced Chinese/English word-origin application.
+
+Use the substantial existing corpus and permitted offline teachers. Disclose
+inherited language weights and preparation costs. Establish an independently
+running model before claiming language acquisition from images alone. A small
+trainable head attached to an inherited 7.522B body is not a lightweight
+foundation model, and fitting that head is not evidence of Qwen 8B parity.
+
+The next decision comes from the registered, frozen balanced-writer
+comparison: finish all 216 complete-response streams, read every actual
+output before reference scoring, compare both earlier controls and verify all
+216 initial contextual states. Its already completed exact writing on 64
+sampled training positions does not establish language transfer. Keep the
+prospective language thresholds, erased inputs, book failures and retention
+requirements unchanged. Do not start another writer fit while this language
+measurement is unfinished.
+
+Accept progress from readable complete answers, paired question dependence,
+coherent continuation and natural stopping on held-out source groups. Confirm
+development improvements on untouched groups. Report copying and pixel
+fidelity separately; measure efficiency against a useful matched-quality
+baseline. Maintain the manuscript and editable figures from those actual
+measurements. Keep the session goal active until the full acceptance criteria
+below are demonstrated; an experiment or publication milestone does not
+complete the model.
 
 ## Immediate direction
 
@@ -65,7 +98,7 @@ checkpoint selection or favorable resampling. This can distinguish a flow-
 writer limitation from remaining reading, stopping and feedback failures;
 The trained readout and stopping predictor are compared as one frozen bundle;
 reading, image encoding/decoding and normalization remain unchanged. No new
-outcome is yet measured. Finish that language evidence before proposing
+complete-response outcome is yet measured. Finish that language evidence before proposing
 another writer-only repair. Any development improvement still requires
 untouched source-group confirmation and independent review.
 
