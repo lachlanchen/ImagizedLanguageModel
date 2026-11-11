@@ -49,8 +49,18 @@ batches and 2,380,620 supervised state positions. The fit requires the completed
 offline teacher cache. It saves an initial snapshot and four equally spaced
 checkpoints by shard exposure, recording each actual optimizer step. A rerun
 with the same fit configuration resumes at the last completed shard. The
-one-GPU fit and held-out evaluation are pending. See the
+one-GPU fit has started; held-out evaluation remains pending. See the
 [CPU evidence](../references/evidence/compact_visual_span_interface_20261111.json).
+
+An independently opened live checkpoint contains 1,030 completed AdamW updates
+across fourteen shards, including book continuations and complete QA. Every
+optimizer state counter equals 1,030. Ninety-nine image-head tensors differ
+from the initial snapshot, while the fixed feedback normalization buffers
+are unchanged. All six objectives and the saved parameters are finite. The
+largest allocated GPU peak in those fourteen shard receipts is 3.820 GiB.
+This checks actual training execution. Full-pass completion, learned image
+generation and held-out language quality remain unproved. See the
+[GPU start evidence](../references/evidence/compact_visual_span_gpu_start_20261111.json).
 
 ## Run the fit
 

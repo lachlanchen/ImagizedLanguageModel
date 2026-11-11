@@ -1,11 +1,21 @@
 # Teacher context states for full visual sequences
 
-The prepared run covers all 13,785 training sequences. A local Qwen3-VL
-teacher will perform 3,337 batched causal forwards over their aligned source
+The completed run covers all 13,785 training sequences. A local Qwen3-VL
+teacher performed 3,337 production causal forward batches over their aligned source
 units. Batches keep each passage independent, with right padding masked out.
 The schedule covers 5,844,979 real input positions and 103,253 padded positions.
-Preparation verified every position on CPU. The teacher forwards await the
-GPU slot. See the [preparation evidence](../references/evidence/visual_sequence_teacher_preparation_20261111.json).
+The resulting 108 shards contain 2,380,620 BF16 context states. Preparation
+verified every position on CPU. See the
+[preparation evidence](../references/evidence/visual_sequence_teacher_preparation_20261111.json)
+and [completed cache evidence](../references/evidence/compact_visual_span_gpu_start_20261111.json).
+
+The cache stage took 1,783.41 seconds, including 770.72 seconds waiting for host
+memory pressure, with 13.396 GiB peak allocated GPU memory. Two additional
+diagnostic forward calls checked causal isolation and padding. Perturbing the
+reference suffix left the earlier states bit-identical; right padding gave
+0.01250 relative RMS difference, within the fixed 0.02 tolerance. The teacher
+receives source text offline. These measurements concern training preparation;
+visual language ability requires the student's generated answers.
 
 | State supervision | Rows |
 | --- | ---: |
@@ -27,7 +37,7 @@ trajectory, and later training must test transfer from actual image input.
 The authenticated model loader retains the 36 contextual layers and reads
 embeddings for the observed training units. It uses the existing shared
 archive and leaves the vocabulary output projection out of the cache stage.
-Every saved state has width 4,096. The planned BF16 state arrays occupy about
+Every saved state has width 4,096. The BF16 state arrays occupy about
 19.5 GB before file metadata. A subsequent fit can read them by shard.
 
 The GPU stage verifies causal isolation by perturbing the actual reference
@@ -45,8 +55,8 @@ figure excludes training state, activations and the image encoder and writer.
 The inspected archives have identical merge tables and equal spellings for
 all 26,710 training units. Their complete spelling tables differ. The
 observed match supports reusing this corpus alignment for source-derived
-training targets. Actual learned visual feedback, full answer quality and
-4090 memory still need measurement.
+training targets. The compact fit has started on one 4090. Its completed
+language evaluation remains pending.
 
 Use the teacher states to supervise the smaller visual body over complete
 spans. The image encoder must learn from visible glyphs and the writer must
@@ -65,11 +75,12 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/cache_visual_sequence_teache
   --stage prepare --run artifacts/visual_sequence_teacher_reproduction
 ```
 
-When the current project GPU work finishes, run the prepared cache on GPU0.
+For a new prepared run, execute its cache on an available project GPU0.
 The optional `--maximum-shards` bounds the number of newly collected shards
 in an attempt. A later invocation resumes the same preparation.
 
 ```bash
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
-  python scripts/cache_visual_sequence_teacher_states.py --stage cache
+  python scripts/cache_visual_sequence_teacher_states.py --stage cache \
+    --run artifacts/visual_sequence_teacher_reproduction
 ```

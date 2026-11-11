@@ -107,8 +107,13 @@ registered fit and interpret the actual outputs.
 
 The compact implementation passes CPU gradient and emitted-pixel feedback
 checks. The first fresh CPU invocation of its untrained heads stopped without
-writing. Compact GPU fitting, trained standalone replay and held-out visual
-language scores remain unmeasured at this goal revision.
+writing. The teacher cache is complete, and the compact GPU fit has started.
+An independently opened checkpoint verifies 1,030 optimizer updates across
+fourteen complete training shards, with finite parameters and all six
+objectives. The observed peak in those shard receipts is 3.820 GiB allocated
+GPU memory. Full training completion, trained standalone replay and held-out
+visual language scores remain pending. See the
+[GPU start evidence](../references/evidence/compact_visual_span_gpu_start_20261111.json).
 
 The source-matched [Qwen3 1.7B text reference](../references/compact_visual_span_qwen_reference_protocol.md)
 ran the same 44 normal prompts on CPU. Exact scoring gives 8/32 QA answers
