@@ -52,8 +52,12 @@ def host_ready_for_stage(stage, host):
         # admitting only with the RAM reserve and low actual memory stalls.
         return (host["available_gib"] >= 48 and host["some_pressure_avg10"] <= .5
                 and host["full_pressure_avg10"] <= .1)
-    # Standalone inference currently uses gpu_zero's original RAM/swap gate.
-    return host["available_gib"] >= 24 and host["swap_fraction"] <= .75
+    # Match diagnostic_gpu: ordinary RAM/swap admission or the existing
+    # post-terminal 64-GiB reserve with low actual memory pressure.
+    if host["swap_fraction"] <= .75:
+        return host["available_gib"] >= 24
+    return (host["available_gib"] >= 64 and host["some_pressure_avg10"] <= .5
+            and host["full_pressure_avg10"] <= .1)
 
 
 class Pipeline:
@@ -191,7 +195,7 @@ def main():
     parser.add_argument("--teacher", type=Path, default=artifacts / "visual_sequence_teacher_v1")
     parser.add_argument("--fit", type=Path, default=artifacts / "compact_visual_span_fit_v1")
     parser.add_argument("--evaluation", type=Path, default=artifacts / "compact_visual_span_evaluation_v1")
-    parser.add_argument("--pipeline", type=Path, default=artifacts / "compact_visual_span_pipeline_v2")
+    parser.add_argument("--pipeline", type=Path, default=artifacts / "compact_visual_span_pipeline_v3")
     parser.add_argument("--after-pid", type=int)
     args = parser.parse_args()
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "0" or os.environ.get("CUDA_DEVICE_ORDER") != "PCI_BUS_ID":

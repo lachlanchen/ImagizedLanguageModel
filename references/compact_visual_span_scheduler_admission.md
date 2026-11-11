@@ -18,20 +18,39 @@ there was no obsolete project model or GUI process to clean up.
 
 The corrected controller uses the worker's RAM and pressure checks for teacher
 and fit stages. The child still repeats its exclusive admission and owned
-process audit. Standalone inference retains its original 24 GiB and 75% swap
-gate. This change does not alter a model, optimizer, target, batching budget,
-checkpoint schedule, inference setting or evaluation cohort.
+process audit. This change does not alter a model, optimizer, target, batching
+budget, checkpoint schedule, generation setting or evaluation cohort.
 
 The corrected default run directory is
-`artifacts/compact_visual_span_pipeline_v2`. Preserve the earlier controller's
+`artifacts/compact_visual_span_pipeline_v3`. Preserve the earlier controllers'
 request and terminal log. The successor must wait for that controller to exit.
-A separate ownership-checked handoff waits for the active teacher to terminate
+A separate ownership-checked handoff waits for the current worker to terminate
 and verifies that no live child remains before stopping the old controller.
-The active teacher is not restarted for this controller change. The successor
-authenticates retained cache shards and resumes only missing work.
+The first handoff preserved uninterrupted teacher extraction and the second
+preserves the active fit. The successor authenticates retained cache shards
+and checkpoints and resumes only missing work.
 
-CPU checks cover the exact RAM and pressure boundaries, rejection below the
-reserve or above either pressure limit, high-swap teacher/fit admission and
-continued high-swap inference rejection. The actual resource sample passes
-the corrected fit check and fails the original controller check. These are
-scheduler checks; compact GPU fitting and language quality remain unmeasured.
+CPU checks cover the exact RAM and pressure boundaries and rejection below
+the reserve or above either pressure limit. The actual resource sample passes
+the corrected fit check and fails the original controller check. The fit then
+started and saved real optimizer updates; its
+[early checkpoint evidence](evidence/compact_visual_span_gpu_start_20261111.json)
+reports execution separately from unmeasured language quality.
+
+## Standalone generation admission
+
+The second controller initially retained standalone generation's original
+global-swap gate. Current generation uses the existing `diagnostic_gpu` path
+after auditing project-owned runtimes. At swap occupancy above 75%, it
+requires at least 64 GiB available host RAM and the same low pressure limits.
+At ordinary swap occupancy, it retains the original 24 GiB admission. Both
+routes require the exclusive project GPU mutex and 20 GiB free device memory.
+The report records the actual admission. No swap setting, kernel policy or
+foreign service is changed. Model arithmetic, flow steps, seed, budgets and
+the standalone input boundary remain unchanged.
+
+Checks cover both inference admission branches, their RAM and pressure
+boundaries, and actual occupied-mutex rejection while the registered fit owns
+GPU0. The rejected call did not initialize CUDA or allocate a second model.
+Trained image generation and cold replay remain pending; those executions
+must verify the final runtime and generated pixels.

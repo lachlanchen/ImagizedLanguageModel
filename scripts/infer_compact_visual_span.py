@@ -2,7 +2,7 @@
 """Generate raw glyph images from a standalone compact image-head checkpoint."""
 
 import argparse
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 import hashlib
 import json
 import os
@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image
 import torch
 
-from ilm.image_edit.baseline import ROOT, gpu_zero, save_json, sha
+from ilm.image_edit.baseline import ROOT, save_json, sha
 from ilm.visual_lm.compact_visual_span_weights import load_compact_visual_span_model
 from ilm.visual_lm.visual_cell_data import pack_visual_cells
 
@@ -23,6 +23,22 @@ MODEL_SOURCES = (
     "ilm/visual_lm/compact_visual_span_model.py",
     "ilm/visual_lm/compact_visual_span_weights.py",
 )
+
+
+@contextmanager
+def inference_gpu():
+    from scripts.score_pixel_language_first_blocks import diagnostic_gpu
+    from scripts.train_semantic_glyph_bridge import project_processes
+
+    inventory = project_processes()
+    obsolete = [row for row in inventory if any(name in row["command"] for name in (
+        "Xvfb ", "x11vnc ", "websockify ", "train_pixel_language_diversity.py --stage run",
+    ))]
+    if obsolete:
+        raise RuntimeError("Inspect owned project runtimes before compact inference")
+    os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+    with diagnostic_gpu() as (device, admission):
+        yield device, {**admission, "project_processes": inventory, "obsolete_project_runtimes": False}
 
 
 def read_image(path, glyph_count=None):
@@ -135,7 +151,7 @@ def generate_case(model, device, args, case, output):
     return report
 
 
-def run(args, cases, device):
+def run(args, cases, device, admission=None):
     identity = {
         "checkpoint_sha256": sha(args.checkpoint),
         "inputs": [{"id": key, "glyphs": count, "sha256": digest} for key, _, count, digest in cases],
@@ -162,7 +178,8 @@ def run(args, cases, device):
     report = {"request_sha256": sha(request), "optimizer_updates": updates, "provenance": provenance,
               "checkpoint_load_seconds": load_seconds, "total_generation_seconds": sum(r["elapsed_seconds"] for r in rows),
               "peak_allocated_vram_gib": torch.cuda.max_memory_allocated(device) / 1024**3 if device.type == "cuda" else None,
-              "reference_inputs": False, "output_repaired": False, "records": rows}
+              "reference_inputs": False, "output_repaired": False, "records": rows,
+              "resource_admission": admission}
     save_json(output / "report.json", report)
 
 
@@ -191,9 +208,9 @@ def main():
     os.environ["HF_HUB_OFFLINE"] = os.environ["TRANSFORMERS_OFFLINE"] = "1"
     cases = input_cases(args)
     torch.set_num_threads(2)
-    runtime = gpu_zero() if args.device == "cuda" else nullcontext(torch.device("cpu"))
-    with runtime as device:
-        run(args, cases, device)
+    runtime = inference_gpu() if args.device == "cuda" else nullcontext((torch.device("cpu"), None))
+    with runtime as (device, admission):
+        run(args, cases, device, admission)
 
 
 if __name__ == "__main__":

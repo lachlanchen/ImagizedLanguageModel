@@ -38,8 +38,8 @@ After the pipeline completes and every blind reading is recorded and scored:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/summarize_compact_visual_span_learning.py \
-  --pipeline artifacts/compact_visual_span_pipeline_v2 \
-  --readings artifacts/compact_visual_span_pipeline_v2/review/readings.json \
+  --pipeline artifacts/compact_visual_span_pipeline_v3 \
+  --readings artifacts/compact_visual_span_pipeline_v3/review/readings.json \
   --output artifacts/compact_visual_span_learning_v1
 ```
 
