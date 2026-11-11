@@ -61,3 +61,13 @@ def test_checkpoint_retention_preserves_unrecognized_files(tmp_path,monkeypatch)
     assert not Path(records[1]['file']).exists()  # Known superseded pointer only.
     assert Path(records[2]['file']).exists() and Path(records[3]['file']).exists()
     assert orphan.read_bytes()==b'preserve unknown evidence'
+
+
+def test_event_serialization_preserves_source_kind_and_event_identity():
+    import json
+    from scripts.train_visual_continuation import training_event
+    result=dict(kind='book',step=1,target_glyphs=420,loss=.5)
+    for kind in ('scheduled','discarded_resume_verification'):
+        event=training_event(result,kind,1)
+        assert json.loads(json.dumps(event))==dict(result,event_kind=kind,attempt=1)
+    with pytest.raises(RuntimeError):training_event(dict(result,event_kind='corrupt'),'scheduled',1)

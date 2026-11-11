@@ -189,7 +189,8 @@ def validate(run,images=False):
     r=load(run/'preparation.json');require(r['source_sha256']==sources(),'Registered pipeline source changed')
     from scripts.preflight_visual_continuation import runtime
     require(r['runtime']==runtime(),'Registered numerical runtime changed')
-    require(PUBLIC.read_bytes()==(run/'preparation.json').read_bytes()==subprocess.check_output(['git','show','HEAD:'+rel(PUBLIC)],cwd=ROOT),
+    public=ROOT/r.get('public_registration',rel(PUBLIC))
+    require(public.read_bytes()==(run/'preparation.json').read_bytes()==subprocess.check_output(['git','show','HEAD:'+rel(public)],cwd=ROOT),
             'Commit full training registration before neural calls')
     for key,name in [('index_sha256','index.json'),('rendering_sha256','rendering.json'),('training_manifest_sha256','training_manifest.json'),('schedule_sha256','schedule.npy')]:
         require(sha(run/name)==r[key],'Prepared dataset differs: '+name)

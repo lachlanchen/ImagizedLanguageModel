@@ -30,6 +30,11 @@ def atomic_json(path,value):
     tmp.replace(path)
 
 
+def training_event(result,event_kind,attempt,**identity):
+    require(not ({'event_kind','attempt'}|identity.keys())&result.keys(),'Training event fields overlap')
+    return dict(result,event_kind=event_kind,attempt=attempt,**identity)
+
+
 def payload(actor,optimizer,step,r,run,cost):
     return dict(schema='visual-continuation-training-checkpoint-v1',preflight_only=False,
         registration_sha256=sha(run/'preparation.json'),source_sha256=r['source_sha256'],seed=r['seed'],runtime=r['runtime'],
@@ -84,7 +89,7 @@ def train(run,resume):
     attempts=folder/'attempts';attempts.mkdir(exist_ok=True)
     numbers=[int(p.stem.split('_')[1]) for p in attempts.glob('attempt_*.json')]
     number=max(numbers,default=0)+1
-    previous=None;prior_cost=0.
+    previous=None;prior_cost=float(r.get('prior_execution_elapsed_seconds',0.))
     if resume:
         pointer=load(folder/'checkpoint.json')['latest'];previous=checked_checkpoint(ROOT/pointer['file'],r,run,pointer['sha256'])
         prior_cost=previous['cumulative_elapsed_seconds']
@@ -125,7 +130,7 @@ def train(run,resume):
             for position in range(start_step+1,total+1):
                 monitor.status('training',attempt=number,cumulative_elapsed_seconds=prior_cost+time.perf_counter()-monitor.began)
                 result=update(actor,optimizer,data,position,total,monitor);step=position
-                event=dict(kind='scheduled',attempt=number,previous_event_sha256=chain,**result);chain=canonical_digest(event)
+                event=training_event(result,'scheduled',number,previous_event_sha256=chain);chain=canonical_digest(event)
                 ledger.write(json.dumps(dict(event,event_sha256=chain),ensure_ascii=False)+'\n')
                 if position<=6 or position%25==0:print(json.dumps(result,ensure_ascii=False),flush=True)
                 if position==4 and not (folder/'resume_roundtrip.json').exists():
@@ -142,7 +147,7 @@ def train(run,resume):
                     restore_trainable(actor,saved['trainable_weights']);optimizer.load_state_dict(saved['optimizer']);set_rng_state(saved['rng']);checks=[]
                     for replay_step in (5,6):
                         replay=update(actor,optimizer,data,replay_step,total,monitor);checks.append(replay)
-                        ledger.write(json.dumps(dict(kind='discarded_resume_verification',attempt=number,**replay),ensure_ascii=False)+'\n')
+                        ledger.write(json.dumps(training_event(replay,'discarded_resume_verification',number),ensure_ascii=False)+'\n')
                     same_nested(trainable_state(actor),expected['trainable_weights']);same_nested(optimizer.state_dict(),expected['optimizer'])
                     same_nested(rng_state(),expected['rng'])
                     atomic_json(folder/'resume_roundtrip.json',dict(step4_sha256=sha(resume4),control_step6_sha256=sha(control6),
