@@ -96,5 +96,8 @@ boards [1](evidence/rollout_endpoint_motor_20261111/board_01.png),
 [7](evidence/rollout_endpoint_motor_20261111/board_07.png) and
 [8](evidence/rollout_endpoint_motor_20261111/board_08.png)
 preserve all positions without repair. The current verified manuscript
-remains the preceding 33/58/59-page negative-result baseline; this new result
-awaits a bounded scientific revision alongside the next matched control.
+now includes this result and the subsequent matched balanced-writer failure
+in the verified 35/62/63-page RealizedWriting revision. The earlier 33/58/59-page
+MotorDiagnostics package remains preserved. See the
+[completed balanced comparison](balanced_writer_matched_result.md) and
+[revision record](manuscript_realized_writer_revision_plan.md).

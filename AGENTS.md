@@ -109,9 +109,12 @@ complete result at `references/balanced_writer_matched_result.md`.
 Before another fit, localize conditional transfer, reader access, generated
 history and stopping from saved trajectories and the existing native control.
 Do not extend failed writer fits. The combined realized-writer manuscript
-revision has a committed bounded plan and verified standalone Figure22 in
-native PPT/PDF/PNG. Article TeX/PDF/redline integration remains pending. Keep
-the current verified PDF baseline until that bounded build is complete.
+revision is complete in 35/62/63-page reading/review/redline PDFs, with verified
+native Figure22 on reading page28. All160article-page rasters reproduce in a
+separate build; all224earlier assets and528previous-package files remain.
+The new local RealizedWriting package and owned latest aliases are verified;
+cloud propagation is unverified. No publication build or repeat generation
+is pending. Return to saved-trajectory failure localization before another fit.
 Preserve the completed diagnosis, public pixel archive and original language
 scores. Do not rerun this audit as pending work or call it usable language.
 

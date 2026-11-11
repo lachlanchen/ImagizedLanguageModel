@@ -410,3 +410,85 @@ agreeing prefix and an area-answer initial. QA rows are first-tile excerpts,
 not whole answers. All 216 flow streams and sixteen complete diagnostic
 boards remain available. No pixels are repaired. There is one model reviewer
 and no independent human adjudication.}{fig:motor-diagnostics}
+
+\subsection*{Realized writing gains do not establish complete-answer transfer}
+A paired continuation supervises the endpoint actually reached by the glyph
+sampler, rather than a local endpoint estimate on a training interpolant.
+Both arms start from the same original flow EMA and receive 2,000 additional
+updates with matched samples and random states. The candidate adds balanced
+decoded-image loss through all 32 sampling intervals; its control retains
+velocity loss alone. First/later training median F1 is 0.990581/0.978614 for
+the candidate versus 0.986350/0.977090 for the matched control
+(Fig.~\ref{fig:realized-writer}a). Candidate counts at F1 at least 0.95 are
+31/32 and 25/32, versus 32/32 and 24/32 for the control. Each pool requires
+median at least 0.99 and thirty qualifying tiles. The candidate passes first
+only; its control fails both. Exact bitmaps are 6/32 and 2/32 versus 5/32 and
+0/32. Neither complete-language trial is run under the fixed prerequisite;
+its whole-answer quality remains unmeasured. The full-sampler objective is
+insufficient for stable writing under this recipe.
+
+An earlier deterministic balanced writer already passes its full physical
+qualification. Its previously reported clear-answer result uses another
+cohort and metric. We therefore freeze that checkpoint before evaluating it
+on the current unchanged inputs, with no new fit or sample selection. On the
+same supplied states, all 32 first and 32 later training glyphs are pixel-exact
+(Fig.~\ref{fig:realized-writer}b). Development first-image means are 0.479076
+fixed and 0.658382 proportional, with 0/32 and 4/32 exact canonical tiles.
+Canonical disagreement can include different wording or stroke variation,
+so these first-image measurements do not score answer meaning. Sampled
+nonterminal states no longer cross its stopping threshold, including the
+previous false stop, but this does not test ending on generated histories.
+
+The complete 216-stream balanced comparison gives 2/32 exact fixed-layout
+answers, 1/16 both-correct pairs and 3/32 readable answers. Proportional
+inputs give 6/32 exact, 0/16 pairs and 16/32 readable
+(Fig.~\ref{fig:realized-writer}c,d). These compare with 2/32, 1/16 and 3/32
+fixed, and 6/32, 0/16 and 11/32 proportional for the unchanged parent.
+Against the original flow's seven proportional exact answers and one correct
+pair, greater readability does not improve complete-answer accuracy. All
+216 initial reader states match the parent bit-for-bit. Readout and stopping
+change together; the result does not isolate a writer-only effect.
+
+All parent exact cases remain, but only 5/7 flow proportional cases and 6/8
+union cases are retained. Two flow successes are lost while a parent success
+missing from the flow is recovered. The prospectively fixed pilot requires
+at least ten proportional exact answers, two both-correct pairs, sixteen
+readable answers and complete union/fixed retention. It fails. The
+proportional exact difference from the original flow is minus 3.125 percentage
+points, with pointwise 95\% passage-group bootstrap interval $[-12.5,6.25]$;
+the paired difference is minus 6.25 points, interval $[-18.75,0]$. Exact
+outcomes are identical to the parent on this sample; a degenerate zero
+bootstrap difference does not establish population equivalence.
+
+Fixed-layout normal QA has 6 stops and 26 caps among 32 inputs. Proportional
+QA has 18 stops and 14 caps. None of twelve
+normal book continuations is credited as readable, coherent and complete;
+four stop and eight cap. All twelve erased book prefixes stop after unreadable
+output. Every QA-erasure arm scores zero exact; one proportional response
+with the question erased is readable, while the other arms have no readable response.
+All 54 opaque boards and twelve original book prefixes are inspected before
+new mapping/reference scoring. The 216 frozen readings contain twenty clear
+and 196 uncertain transcriptions, including uncertain readable fragments
+followed by damaged continuation. Pixel repetition for enlarged inspection
+does not repair outputs. One model reviewer has prior cohort familiarity,
+without independent human adjudication or untouched confirmation. Strict
+canonical mismatch alone does not establish semantic falsity.
+
+\plate{Figure_22_realized_writer}{\textbf{Faithful sampled training glyphs do not establish autonomous language transfer.}
+\textbf{a}, Median foreground F1 for 32 first and 32 later training states.
+Extra FM and full rollout are matched 2,000-update continuations from the
+original flow EMA. Full rollout differentiates decoded loss through every
+sampling interval. The first-only median/count pass leaves both new arms'
+complete-language quality unmeasured; no language bar is assigned to them.
+\textbf{b}, Exact balanced-writer tiles across four unchanged 32-position
+pools. Training fidelity and canonical development agreement are distinct
+from semantic accuracy. \textbf{c,d}, All 32 normal QA questions and sixteen
+pairs per layout compare the parent, original flow and frozen balanced bundle.
+The balanced model retains all parent exact answers but only six of eight
+required proportional union cases, failing its pilot. Its readout and stopping
+predictor differ together; reader, codec and normalization stay unchanged.
+All 216 initial states match the parent. Values and workbook cells derive
+from complete records, with F1 displayed to six decimals. These fixed model
+comparisons are not a measured language-learning trajectory. One model review
+has prior cohort familiarity, without independent human adjudication or
+untouched confirmation.}{fig:realized-writer}

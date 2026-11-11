@@ -23,7 +23,7 @@ reviewer response letter for this update.
 
 ## Evidence dependency and allowed edits
 
-The proportional language worker is currently live. Finish all 216 outputs,
+The original prerequisite, now complete, was to finish all 216 outputs,
 54 opaque boards, twelve book prefixes, frozen whole-response readings,
 independent scoring and all 216 initial-state comparisons before inserting
 the new balanced language result or rendering its charts. Preserve uncertain
@@ -115,7 +115,29 @@ Artifact Tool and lossless LibreOffice exports are visually inspected. Native
 PowerPoint-app review is not claimed. The first finalization attempt lacks
 `RUNTIME_NODE_MODULES`; its source, candidate and log remain private. The
 source-identical retry supplies the verified runtime and passes. The audit
-explicitly verifies only the standalone figure, with matching article PDFs
-still unverified. Active TeX and all three current PDFs remain the preserved
-MotorDiagnostics baseline. Completing the scoped text/build/redline/sync
-revision is the next publication action.
+initially verifies only the standalone figure. The scoped text/build/redline/
+sync revision is now complete. Active PDFs have 35 reading, 62 review and 63
+cumulative-redline pages. Figure 22 appears on reading page 28, review page 62
+and redline page 63. The new Results span reading pages 23--27; the extended
+Discussion is on page 29 and realized-sampler Methods/equations on page 33.
+Summary and experiment-map changes appear on page 1. The full page maps and
+35 actually inspected changed/continued/citation/figure rasters are bound in
+`publication/ilm-nature/evidence/realized_writer_publication_build.json`.
+
+Both full figure audits pass. All twenty original Figure 21 tile occurrences
+remain intact in each article PDF, and all 224 previous assets are unchanged.
+The final three PDFs have no overflow or unresolved citations/references.
+An initial compact stop-count expression and a broken compound are clarified
+before final rendering; the earlier build is retained privately. An independent
+build without private figure-authoring cache inputs reproduces all 160 article
+page rasters exactly at the audited resolution. The cumulative baseline remains
+immutable. Used primary flow-matching/pathwise-gradient references are checked;
+the pre-existing bibliography is not comprehensively reverified.
+
+The selected local delivery `ILM_NatureStyle_20261112_RealizedWriting` contains
+645 manifest files plus its separately verified receipt. All 528 preceding
+MotorDiagnostics package files remain unchanged. Owned latest aliases match
+the new PDFs. Local hashes are verified; cloud propagation is unverified.
+No model fitting or new language generation is performed by this publication
+unit. The full ILM goal remains active and unachieved. Return to saved-trajectory
+failure localization before choosing another bounded training mechanism.

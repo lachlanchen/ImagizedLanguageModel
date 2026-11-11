@@ -91,9 +91,10 @@ The [prospective decision](balanced_writer_matched_decision.md),
 bind all 216 outputs, 54 boards and twelve book prefixes. The
 [physical diagnosis](balanced_writer_matched_diagnosis_result.md) remains
 separate. The [bounded manuscript plan](manuscript_realized_writer_revision_plan.md)
-will combine this result with the completed rollout pair in Figure 22.
+combines this result with the completed rollout pair in Figure 22.
 The standalone [native figure](../publication/ilm-nature/figures/Realized_writer_figures.pptx)
 and [PDF](../publication/ilm-nature/figures/Figure_22_realized_writer.pdf) are
 verified against complete records and original physical arrays. Matching
-article TeX/PDF/redline integration is pending. The verified 33/58/59-page
-MotorDiagnostics manuscript remains the current PDF baseline.
+article TeX/PDF/redline integration is complete in the verified 35/62/63-page
+RealizedWriting package, with Figure 22 on reading page 28. The preceding
+33/58/59-page MotorDiagnostics package remains preserved.

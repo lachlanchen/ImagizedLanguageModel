@@ -402,3 +402,72 @@ observed forbidden artifact access or IP connections. It takes
 actor; the source archive's unused vocabulary payload remains disclosed.
 A file trace alone cannot prove tensor-level exclusion. The reproduced book
 is still capped and unreadable, so cold execution does not establish language.
+
+\subsection*{Realized-sampler supervision and the qualified-writer control}
+Full-sampler endpoint supervision uses pathwise differentiation through the
+numerical generation procedure, as in direct differentiable-reward
+fine-tuning\cite{draft}, while retaining the original conditional velocity
+loss\cite{flowmatching}. Let $x_0=e$, $\delta=1/32$ and $t_j=j\delta$.
+For $j=0,\ldots,30$, the deployed Heun update is
+\begin{align}
+ a_j&=v_\theta(x_j,t_j,h),\\
+ \widetilde x_{j+1}&=x_j+\delta a_j,\\
+ b_j&=v_\theta(\widetilde x_{j+1},t_{j+1},h),\\
+ x_{j+1}&=x_j+\tfrac{\delta}{2}(a_j+b_j).
+\end{align}
+The last interval is Euler: $x_{32}=x_{31}+\delta
+v_\theta(x_{31},t_{31},h)$. Writing $S_\theta(e,h)=x_{32}$, the candidate
+minimizes
+\[
+ \mathcal L_\mathrm{FM}+\ell_\mathrm{bal}
+ \bigl(D(\mu+sS_\theta(e,h)),I\bigr).
+\]
+The balanced BCE coefficient is one. The sampler receives $e,h$ only, without
+reference pixels, target motors or target lengths. Its forward uses 63
+velocity calls. Nonreentrant checkpointing recomputes activations during
+backward; gradients traverse all intervals and the frozen decoder without a
+detached prefix, truncated gradient or binary straight-through estimator.
+Seven numerical/runtime checks include actual-network finite differences,
+bit-exact recomputed gradients and transmission through the frozen decoder.
+Both GPU arms verify the differentiable forward against the deployed sampler.
+
+Both arms begin from the same completed original-flow EMA. Seed 202611181,
+batch 32 with sixteen first and sixteen later positions, AdamW learning rate
+$2\times10^{-5}$, 100-update warm-up, cosine decay to 10\% and EMA decay 0.99
+are fixed for 2,000 updates. Each arm receives 32,000 first and 32,000 later
+exposures. Sampled-index digests and final CPU/CUDA random states match exactly.
+An independent CPU audit checks all thirty optimizer parameter steps, finite
+weights/moments and unchanged normalization. Reader, contextual adapters,
+encoder/decoder and stopping remain frozen. The same 128-position diagnosis
+and both per-pool median/count gates apply. Neither arm passes both gates;
+full 216-stream language generation is withheld and unmeasured.
+
+The frozen qualified-writer comparison authenticates its earlier 18,000-update
+fit and full physical qualification before any new output. Only twelve
+readout/stop tensors differ from the parent; 26 codec/normalization tensors
+and all contextual adapter tensors remain bit-exact. This trial performs
+zero new updates and deterministic writing with no seed selection. The same
+128 supplied states and all 216 original image inputs are retained. Generated
+binary pixels alone provide subsequent history, with stop threshold 0.5 and
+cap 128. No lexical decoder, tokenizer, font, reference length or teacher
+enters its answer path. Every actual initial state is compared with its
+bound parent tensor. Its prospective language pilot requires ten proportional
+exact answers, two correct pairs, sixteen readable answers, all eight union
+proportional exact cases and both original fixed cases. Review precedes
+reference scoring, with uncertain partials unrepaired. Both scoring and
+per-answer aggregates are independently recounted. Pointwise intervals retain
+the earlier 10,000 passage-group draws and seed 202611154. There is no broad
+book interval from twelve prefixes in two works. No new book cold replay is
+performed; the earlier different-cohort 64-glyph replay is not substituted.
+
+Matched extra-FM/full-rollout fitting takes 103.775/875.962 seconds, including
+80.072/80.073 seconds pressure waiting, at 1.165/1.166\,GiB peak allocated GPU
+memory. Their shared assessment takes 39.623 seconds at 0.402\,GiB; terminal
+wall time including boards is 40.027 seconds. Balanced supplied-state
+assessment takes 1.301 seconds at 0.217\,GiB, or 1.677 seconds including board
+export. Its fixed/proportional complete generation takes
+1,534.527/1,140.482 seconds at 17.786\,GiB, including 82.055/77.201 seconds
+loading, with zero recorded pressure waiting. Actual generation sums to
+1,426.712/1,041.959 seconds. The inherited 7.522B body, earlier fits, preparation,
+CPU validation and review remain excluded costs. These measurements do not
+establish a foundation-training or matched-quality efficiency advantage.

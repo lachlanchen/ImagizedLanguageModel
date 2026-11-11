@@ -70,8 +70,8 @@ are independently recounted and reviewed. The assessment takes 22.577 seconds
 at 0.311 GiB. No full language generation is run because its prerequisite
 gates fail. Do not tune or resample it, or call small tile gains language.
 
-The [manuscript/figure revision](../references/manuscript_motor_diagnostics_revision_plan.md)
-now incorporates these comparisons in verified 33/58/59-page reading, review
+The preceding [manuscript/figure revision](../references/manuscript_motor_diagnostics_revision_plan.md)
+incorporates those comparisons in preserved 33/58/59-page reading, review
 and cumulative-redline PDFs. Figure 21 has four editable native charts and
 twenty original glyph tiles; no language-learning curve or unmeasured score
 is invented. The versioned local delivery is
@@ -87,8 +87,8 @@ positions and 512 original displayed tiles are independently checked and
 viewed. Fitting takes 103.775/875.962 seconds at 1.165/1.166 GiB; assessment
 39.623 seconds at 0.402 GiB. Both complete language trials remain unmeasured
 under the fixed gate. Do not extend the fit or substitute its first-only pass
-for stable writing or language. The verified PDFs remain the prior baseline;
-this new result awaits a bounded revision with the next matched control.
+for stable writing or language. The combined manuscript revision now includes
+this result alongside the completed matched balanced-writer comparison.
 
 The [registered frozen comparison](../references/balanced_writer_matched_result.md)
 is complete, with no new fit. Balanced results are 2/32 fixed and 6/32
@@ -114,9 +114,15 @@ generation takes 1,534.527/1,140.482 seconds at 17.786 GiB, with zero pressure
 waiting. Both workers have exited. Preserve their exact identities and files;
 no repeat generation is pending. Standalone Figure 22 is verified in native
 PPT/PDF/PNG, with four editable charts and all 224 earlier assets preserved.
-The bounded article TeX/PDF/redline integration remains pending; current
-article PDFs retain the verified MotorDiagnostics baseline. The goal remains
-active and unachieved.
+The bounded article TeX/PDF/redline integration is complete: 35/62/63 pages,
+with Figure 22 on reading page 28. All 160 article-page rasters reproduce in
+a separate build without private figure-authoring cache inputs. Thirty-five
+changed/continued/figure/citation pages are visually inspected. The selected
+local `ILM_NatureStyle_20261112_RealizedWriting` delivery has 645 manifest files
+plus its verified receipt; all 528 preceding package files are unchanged.
+Latest aliases match locally, with cloud propagation unverified. The next
+model action is saved-trajectory failure localization before another fit.
+The goal remains active and unachieved.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted

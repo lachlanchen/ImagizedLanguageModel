@@ -59,8 +59,22 @@ and [decoded-loss result](../../references/decoder_aware_motor_result.md).
 
 ![Native answer access and unrepaired first-image writing](figures/Figure_20_native_reader_writing.png)
 
-The current package contains a **33-page article**, **58-page review** and
-**59-page article redline**. Figures 12–15 preserve the compact V1 trajectory
+The realized-sampler continuation passes its first-position physical gate
+but fails the later-position gate. Both new arms' whole-answer quality remains
+unmeasured. A frozen physically qualified balanced writer reproduces all 64
+sampled training glyphs exactly, yet gives **2/32 fixed and 6/32 proportional
+exact answers**, **1/16 and 0/16 correct pairs**, and no credited complete book
+continuation on the current cohort. It retains all parent exact cases but
+only **6/8** required proportional union cases, failing its language pilot.
+All 216 initial reader states match the parent bit-for-bit. Greater sampled
+training fidelity does not establish autonomous language transfer. See the
+[rollout result](../../references/rollout_endpoint_motor_result.md) and
+[complete balanced comparison](../../references/balanced_writer_matched_result.md).
+
+![Realized writing and complete-answer transfer](figures/Figure_22_realized_writer.png)
+
+The current package contains a **35-page article**, **62-page review** and
+**63-page article redline**. Figures 12–15 preserve the compact V1 trajectory
 and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
 add three editable slides with seven native measured charts and original
 diagnostic glyphs. The supplied-reference diagnostic scores remain separate
@@ -84,31 +98,46 @@ in each article PDF, including repeated identical images. These comparisons
 do not constitute a measured language-learning curve. Both Artifact Tool and
 lossless LibreOffice renders were inspected; native PowerPoint-app review
 is not claimed.
+The [Figure 22 PowerPoint](figures/Realized_writer_figures.pptx) adds four
+native measured charts. Full-sampler writing, exact training tiles and
+complete-answer performance remain separate measurements. Its native values,
+literal workbooks and six-decimal F1 labels agree with the bound evidence in
+all three article PDFs. All 224 earlier figure/style/supplement assets remain
+unchanged. This is a fixed model comparison, not a language-learning curve.
 
 ![Matched input presentation and original glyph outputs](figures/Figure_19_glyph_input_transfer.png)
 
-The current local delivery is `ILM_NatureStyle_20261111_MotorDiagnostics` in
+The current local delivery is `ILM_NatureStyle_20261112_RealizedWriting` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
 The previous versioned packages remain available.
 
 Rebuild the matching article PDFs from the committed figure assets with
-`python build_motor_diagnostics_publication.py` from this directory.
+`python build_realized_writer_publication.py` from this directory.
+Run rebuilds in a repository checkout with the immutable Git baseline and
+pinned redline tool available. The selected local delivery is an inspection
+copy and does not duplicate that Git history or tool installation.
 To check a fresh build without replacing the verified PDFs, set
-`ILM_MOTOR_PAPER_CHECK_ONLY=1` and `ILM_MOTOR_PAPER_STAGE` to a new absolute
+`ILM_REALIZED_PAPER_CHECK_ONLY=1` and `ILM_REALIZED_PAPER_STAGE` to a new absolute
 build directory under this repository's `artifacts/` tree. This uses LaTeX, the pinned redline tool and the CPU chart/pixel
 auditor. It needs no model inference or private figure-generation cache.
-The [build receipt](evidence/motor_diagnostics_publication_build.json) binds
+The [build receipt](evidence/realized_writer_publication_build.json) binds
 the reviewed PDFs, source files and verification. The
-[measured data](evidence/motor_diagnostics_measured_data.json),
-[figure bindings](evidence/motor_diagnostics_figure_bindings.json) and
-[chart/pixel audit](evidence/motor_diagnostics_figure_audit.json) retain
+[measured data](evidence/realized_writer_measured_data.json),
+[figure bindings](evidence/realized_writer_figure_bindings.json) and
+[chart audit](evidence/realized_writer_figure_audit.json) retain
 full precision alongside six-decimal native chart values.
-The new figure sources are `prepare_motor_diagnostics_evidence.py`,
-`motor_diagnostics_figures.mjs` and `format_motor_chart_labels.py`.
+The new figure sources are `prepare_realized_writer_evidence.py`,
+`realized_writer_figures.mjs` and `format_motor_chart_labels.py`.
 Figure authoring uses the bundled Artifact Tool runtime, the public pixel
-archives and the reference deck. Its staged PNGs preserve source pixels.
-The earlier native-reader build helpers remain available for that historical
-package; use the motor builder for the current article.
+archives and the reference deck. Figure 22 has no synthetic glyph illustration.
+The [original-pixel audit](evidence/realized_writer_original_glyph_audit.json)
+also verifies all twenty Figure 21 tile occurrences in each new PDF.
+`python reproduce_realized_writer_publication.py` builds in a separate stage
+and checks every article-page raster against the current PDFs. The completed
+independent build reproduces all 160 pages bit-for-bit at the audited raster
+resolution, without private figure-authoring cache inputs. The earlier build
+helpers remain available for historical packages; use the realized-writer
+builder for the current article.
 
 ## Earlier restricted answer results
 
