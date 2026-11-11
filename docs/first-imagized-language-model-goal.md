@@ -87,33 +87,54 @@ paired decrease is 6.25 points with an interval of minus 18.75 to zero.
 This reused development cohort supplies no untouched confirmation. Font,
 spacing and wrapping change together, so the cause is not isolated further.
 
-**Current required work: finish the registered helper-only native-reader
-diagnosis before another fit.** The [bounded decision](../references/glyph_tail_native_reader_decision.md)
-compares all 32 questions and 64 erased controls in both presentations, with
-and without the learned tail adapters, plus the same complete text prompts:
-384 image and 64 text calls (448 total). Adapted image prefills must reproduce
-the actual glyph actor's first saved contextual states bit-for-bit. The source lexical
-decoder and previous-symbol lookup are temporary diagnostic tools outside
-the ILM. Their outputs and development answers must not become training data
-or deployed answers. The [protocol](../references/glyph_tail_native_reader_protocol.md)
-and [448-call registration](../references/evidence/glyph_tail_native_reader_registration_20261111.json)
-are committed. CPU preparation authenticates all 192 original image prefills;
-the serial GPU diagnosis has started. Complete generation and independent CPU
-scoring remain pending. Early exact state checks verify execution, not useful
-native answering or usable ILM language. Inspect the private runtime handoff
-and live owner before resuming; do not launch a duplicate or infer termination
-from an observation timeout.
+The [native-reader diagnosis](../references/glyph_tail_native_reader_result.md)
+is complete: all **448 calls** are authenticated, with all **192 actual adapted
+image prefills reproduced bit-for-bit**. The helper vocabulary projection,
+tokenizer and previous-symbol lookup stay outside the ILM. Adapted native
+decoding gives 4/32 exact fixed-cell answers and **10/32 proportional answers**,
+versus the glyph actor's 2/32 and **6/32**. Native decoding gets seven exact
+proportional answers missing from glyph exact matches, including the lost
+area answer; six have uncertain whole glyph readings. Three glyph-only strict
+matches instead have native wording/punctuation differences, without proving
+native semantic error. All eight image-erasure arms remain zero exact.
 
-Useful native image answers with damaged glyph output direct the next bounded
-intervention toward writing/feedback. Better unadapted than adapted native
-answers identify an adaptation tradeoff; good text but poor image results
-identify an input gap. If all routes fail, examine the source/task and
-implementation before another fit. These are conditional decisions, not
-causes already proved. Reject the unchanged compact joint recipe and a
-sampler-only repair. Check the completed semantic glyph loop and frozen
-diagnostics before repeating a training approach. A development improvement
-needs untouched source groups before broader claims. Copying, finite losses,
-rank checks and presentation quality do not replace language.
+Source-adapter-zero native scores are 2/32 with fixed cells and 13/32 with
+proportional images; text controls give 10/32, versus 11/32 with adaptation.
+Adapter effects are mixed and do not authorize swapping the deployed body.
+Native proportional-minus-fixed gains are 18.75 points [6.25, 31.25] adapted
+and 34.375 points [21.875, 50] with source adapters zeroed. Thus layout
+brittleness also affects native reading. The adapted proportional native
+versus glyph gain is 12.5 points [0, 25], a pointwise development interval
+including zero. The result exposes retained image-answer access and an
+additional writing/feedback gap, without proving a unique failure mechanism
+or general usability. The independent image-output model still scores 6/32
+under proportional input; helper text is not its generated language.
+
+One attempt takes 2,838.92 seconds, including 158.82 seconds setup and 180.17
+seconds pressure waiting, at 18.947 GiB peak allocation. It makes no optimizer
+update or new ILM image. All raw source IDs, logits, states and decoded texts
+are retained; CPU scoring authenticates every case and original glyph score
+binding. A receipt-schema lookup error is corrected without regeneration or
+changing any score rule. The worker has exited and GPU 0 is released. See the
+[complete evidence](../references/evidence/glyph_tail_native_reader_learning_20261111.json).
+
+**Next required work: register and complete the CPU first-writing/coverage
+audit before another fit.** The [bounded decision](../references/glyph_tail_first_writing_decision.md)
+uses all 192 saved QA glyph streams, with 64 normal cases primary. Authenticate
+first pixels, first states, stopping and physical target compatibility. Measure
+first-form errors and full target primitive coverage, with supplied-image
+encoder/decoder reconstruction kept separate from autonomous writing. Keep
+missing forms and failures in every denominator. A wrong first image precedes
+feedback drift; a correct first image with failed continuation requires later
+writing, stopping and feedback tests. Do not infer either outcome before this
+cheap measurement, introduce helper/development answers into training or
+replace complete-answer acceptance with a first-image score.
+
+Reject an unchanged compact joint fit and a sampler-only repair. Check the
+completed semantic glyph loop and frozen diagnostics before repeating a
+training approach. A development improvement needs untouched source groups
+before broader claims. Copying, finite losses, rank checks and presentation
+quality do not replace language.
 
 The Nature-style article now includes both compact failed fits, their frozen
 failure localization and the completed matched-cohort/presentation controls.
@@ -124,8 +145,8 @@ compiled PDF. The prior figures, style, 100-page supplement and composite
 deck remain unchanged. The [bounded revision](../references/manuscript_glyph_input_transfer_revision_plan.md)
 and [build receipt](../publication/ilm-nature/evidence/glyph_input_transfer_publication_build.json)
 record the inspected changes; the redline uses the immutable `0f14fa3f`
-baseline. The running native-reader diagnosis remains outside that revision
-while unscored. Model diagnosis and readable held-out answers take priority
+baseline. The newly completed helper-only native diagnosis remains outside
+that scoped paper revision; its manuscript update is pending. Model diagnosis and readable held-out answers take priority
 over additional presentation work.
 
 ## Goal and acceptance criteria
@@ -188,7 +209,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: separate visual reading from glyph generation
+## Current decision: localize first writing and target-form coverage
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
@@ -241,8 +262,9 @@ answers. The completed diagnostic also finds conditional-writing failure
 before emitted feedback. The earlier actor retains two exact current answers
 with fixed cells and six with proportional prompts, but loses its exact pair
 under the latter presentation. Preserve both actual output sets. Diagnose
-native reading, tail adaptation and glyph continuation before another fit;
-neither representation is qualified as a generally useful language interface.
+first writing versus later continuation using the completed native diagnosis
+and saved actual pixels before another fit. Neither representation is
+qualified as a generally useful language interface.
 
 ## Current evidence and unresolved tests
 
@@ -335,10 +357,10 @@ evidence; do not keep extending the same run without a new bounded reason.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
-- The repaired writer still fails. Complete the selected native-reader
-  comparison with the actual image prefills before another fit. Use its
-  unchanged controls to separate visual access, tail-adaptation effects,
-  conditional writing and generated-history drift. Helper-decoded or
+- The repaired writer still fails. The actual-prefill native comparison is
+  complete. Use its unchanged controls and the selected CPU first-writing/
+  coverage audit to distinguish physical form coverage, conditional writing,
+  stopping and generated-history drift before another fit. Helper-decoded or
   reference-supplied results are not autonomous ILM answers. Do not infer
   that a larger model, more epochs or unrelated physics will repair the
   failure without a testable mechanism.

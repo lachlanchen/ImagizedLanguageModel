@@ -8,6 +8,43 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: matched native reading completed; first writing unresolved
+
+All 448 helper calls are authenticated, with 192 adapted image prefills
+bitwise equal to actual glyph-generation states. Adapted native exact QA is
+4/32 fixed-cell, 10/32 proportional and 11/32 text; source-adapter-zero scores
+are 2/32, 13/32 and 10/32. Both-correct pairs are 1/16, 1/16 and 2/16 adapted,
+and 1/16, 2/16 and 2/16 source-adapter-zero. All eight image-erasure arms give
+zero exact. No new ILM images or optimizer updates are made.
+
+The adapted proportional native path has seven exact answers absent from
+glyph exact matches, including the previously lost area answer. Six have
+uncertain whole glyph readings; the other omits an alias. Three glyph-only
+strict matches have native wording/punctuation differences, without proving
+semantic error. The native-versus-glyph exact gain is 12.5 points [0, 25].
+Native proportional-minus-fixed gains are 18.75 [6.25, 31.25] adapted and
+34.375 [21.875, 50] with source adapters zeroed. These reused-development
+contrasts expose retained native access and writing/feedback limitations,
+with layout brittleness and mixed adapter effects. They do not prove a
+unique repair, general image/text equivalence or usable ILM language.
+
+One attempt takes 2,838.92 seconds including 158.82 setup and 180.17 pressure
+waiting, at 18.947 GiB peak allocation. The worker exits and GPU 0 is released.
+The first CPU analysis stops on an older receipt-schema lookup before saving
+scores; the corrected retry authenticates the same original hashes, without
+regeneration, changed canonical references or changed score rules. All source
+IDs, logits, states and raw decoded texts are retained. See the
+[result](../references/glyph_tail_native_reader_result.md) and
+[complete evidence](../references/evidence/glyph_tail_native_reader_learning_20261111.json).
+
+The [next decision](../references/glyph_tail_first_writing_decision.md) is a
+registered CPU audit of first writing, target-rendering compatibility and
+primitive coverage over every saved QA stream. Keep normal and erased cases
+separate and retain the complete-answer acceptance criteria. No new fit is
+chosen yet. The full independent language goal remains active. The verified
+29/51/51-page paper includes the earlier completed presentation controls;
+these newly completed helper results require a later scoped evidence update.
+
 ## 11 November: measured input transfer added to the manuscript
 
 The bounded revision adds the completed matched-cohort and proportional-input

@@ -101,5 +101,5 @@ package receipt remain unchanged. An initially overbroad copy included archived
 source baselines; only those newly generated extra copies were removed before
 final verification. The repository source and previous packages were preserved.
 `glyph_input_transfer_local_sync.json` records the final selection and hashes.
-Cloud propagation remains unverified. The running native diagnosis is outside
-this paper revision.
+Cloud propagation remains unverified. The subsequently completed helper-only
+native diagnosis remains outside this scoped paper revision.

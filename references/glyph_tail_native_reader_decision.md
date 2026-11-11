@@ -73,8 +73,11 @@ before repeating a writer or alignment recipe.
 
 Status: the [implementation protocol](glyph_tail_native_reader_protocol.md)
 and [448-call registration](evidence/glyph_tail_native_reader_registration_20261111.json)
-are committed. CPU preparation authenticates 192 actual actor prefills;
-serial model execution has started. Complete generation and independent
-scoring remain pending. Early state checks do not qualify language or a
-training repair. The independent image-input/image-output language goal
-remains unachieved.
+are committed. All 448 calls and independent scoring are complete; all 192
+adapted image prefills match actual actor states. The
+[result](glyph_tail_native_reader_result.md) records 10/32 proportional native
+exact answers versus 6/32 glyph exact answers, mixed adapter effects and
+substantial layout sensitivity. The helper is outside the ILM. The
+[next CPU decision](glyph_tail_first_writing_decision.md) localizes first
+writing and target coverage before another fit. The independent
+image-input/image-output language goal remains unachieved.
