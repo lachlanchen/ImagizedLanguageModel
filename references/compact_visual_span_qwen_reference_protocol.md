@@ -27,3 +27,18 @@ low priority, with zero GPU model residency. It supplies a task quality
 reference. A GPU speed or efficiency comparison requires measurements of
 both routes on the same RTX 4090. Comparison with Qwen3 8B also remains a
 separate experiment.
+
+## Measured reference
+
+The Q4_K_M model produced all 44 responses. Eight of 32 QA responses matched
+the complete canonical span, and both questions matched in two of sixteen
+contexts. Of the 24 misses, 14 responses were strict substrings of the
+canonical span and three contained the canonical span. The remaining seven
+had neither relation. These counts use whitespace-normalized strings.
+Alternate answers still require a contextual correctness judgment.
+
+None of the twelve book outputs exactly reproduced the original continuation.
+Eleven ended naturally and one reached the token cap. Coherence remains
+unrated. The 44 CPU requests took 454.36 seconds in total, including model
+loading and reuse of prompt prefixes. The service reported zero GPU model
+residency in every case. See the [run evidence](evidence/compact_visual_span_qwen_reference_20261111.json).

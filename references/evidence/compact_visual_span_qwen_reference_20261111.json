@@ -1,0 +1,59 @@
+{
+  "request": {
+    "model": "qwen3:1.7b",
+    "manifest_sha256": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+    "archive_sha256": "3d0b790534fe4b79525fc3692950408dca41171676ed7e21db57af5c65ef6ab6",
+    "ollama_binary_sha256": "a094ad449d3cc4352af89802cf1fc076c6fdd15a5e0f0bbe37f2f1563b0e1882",
+    "prompts_sha256": "5ff7c9cb79d69a15957904cbc11d24d666912647cef55b9666f1f6ca8cb0f2b3",
+    "tasks": {
+      "qa": "請根據給定資料摘錄最短而完整的答案。只輸出原文答案。",
+      "book": "請延續以下段落的內容與文體，續寫約一百字。只輸出接續文字。"
+    },
+    "options": {
+      "num_ctx": 2048,
+      "num_predict": 128,
+      "temperature": 0,
+      "seed": 202611153,
+      "num_gpu": 0,
+      "num_thread": 2
+    },
+    "think": false,
+    "device": "cpu",
+    "source_sha256": "428be104be41215b217cd5aa2bbef3eff73913ce7a517f24e8b52652a6a24988"
+  },
+  "ollama_version": "0.32.6",
+  "quantization": "Q4_K_M",
+  "registered_input_manifest_sha256": "73076060c8d48638886ed329aca2a667877e07776e4597313f1ceb48e7ec0afc",
+  "text_to_registered_png_pixel_roundtrips_exact": 44,
+  "references_sha256": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+  "raw_report_sha256": "3fa39d61a6591747215c96042cd8481ee7da6f681565a0399dd6bc31c07d3166",
+  "scores_sha256": "d592f01955bf577df699b3eda6d7ad53314f1041f69191a3e9ac9e2aee77d376",
+  "summary": {
+    "qa": {
+      "cases": 32,
+      "exact": 8,
+      "stopped": 31,
+      "nonempty": 32
+    },
+    "book": {
+      "cases": 12,
+      "exact": 0,
+      "stopped": 11,
+      "nonempty": 12
+    }
+  },
+  "paired_qa_both_exact": 2,
+  "paired_qa_contexts": 16,
+  "qa_nonmatch_strict_containment_after_whitespace_removal": {
+    "reference_strict_substring_of_response": 3,
+    "response_strict_substring_of_reference": 14,
+    "neither_strict_containment": 7
+  },
+  "completed_requests": 44,
+  "cpu_api_seconds_total": 454.3631592122838,
+  "maximum_reported_resident_model_bytes": 1645446429,
+  "maximum_reported_vram_bytes": 0,
+  "references_opened_during_generation": false,
+  "coherence_or_semantic_equivalence_rated": false,
+  "single_gpu_efficiency_measured": false
+}

@@ -109,3 +109,9 @@ and blanked controls. Its input manifest is in
 intermediate checkpoints. The normal and control routes, blind image review,
 scoring and trained cold replay are specified in the
 [evaluation protocol](../references/compact_visual_span_evaluation_protocol.md).
+
+The source-matched Qwen3 1.7B text reference has run on the same 44 normal
+prompts. It matched eight of 32 QA answers and both questions in two of sixteen
+pairs under exact scoring. Its CPU results provide the text baseline for
+this cohort. The visual checkpoint scores and the same-GPU cost comparison
+are pending. See the [text reference and scoring](../references/compact_visual_span_qwen_reference_protocol.md).
