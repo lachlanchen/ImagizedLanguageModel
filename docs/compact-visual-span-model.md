@@ -58,6 +58,24 @@ The run directory is `artifacts/compact_visual_span_fit_v1`. It contains the
 resumable optimizer checkpoint and separate image-head snapshots. A standalone
 model pairs the image heads with the verified contextual and codec weights.
 
+The serial pipeline runs teacher extraction, fitting, and fixed-checkpoint
+evaluation on GPU0. Pass the PID of the current project worker with
+`--after-pid` to queue the pipeline behind it. The wait uses a Linux process
+handle and allocates no model. Each GPU stage acquires the existing project
+mutex. Teacher and fit attempts resume after a resource deadline when the
+attempt saved a new shard or checkpoint.
+
+```bash
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
+  python scripts/run_compact_visual_span_pipeline.py --after-pid "$ACTIVE_ILM_PID"
+```
+
+The pipeline writes its status and logs under
+`artifacts/compact_visual_span_pipeline_v1`. It generates all controls at
+the two endpoints and the normal cohort at the intermediate checkpoints.
+The resulting review directory contains the original answer PNGs under
+opaque names and a readings template.
+
 Evaluate complete answers with learned lengths, stopping and feedback
 throughout generation. Preserve the original image stream and score
 question dependence, legibility and correctness on held-out groups. See the
