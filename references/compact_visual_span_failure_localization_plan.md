@@ -108,3 +108,15 @@ This is the same frozen body/codec workload as the measured fits and inference;
 no other project's process is changed. Bind the implementation and exact
 case/call budget before launch. Complete and interpret the recorded comparison
 before registering another fit.
+
+## Prepared request
+
+The [CPU request](evidence/compact_visual_span_diagnosis_registration_20261111.json)
+binds 32 actual records and 201 target spans, with a maximum of 41,808 velocity
+calls and 1,124 contextual-body calls across both final checkpoints. No neural
+model call was made during preparation. All 26,733 training-used or selected
+native vocabulary rows match between the two archives. Each feedback head's
+centered affine map has rank 383 in 2,048 output dimensions. The
+[per-record geometry](evidence/compact_visual_span_feedback_geometry_20261111.json)
+is retained separately. These capacity/target-error measurements do not
+complete the neural diagnostic or identify the sole language failure cause.
