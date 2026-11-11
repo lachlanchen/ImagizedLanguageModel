@@ -115,16 +115,18 @@ diagnostics before repeating a training approach. A development improvement
 needs untouched source groups before broader claims. Copying, finite losses,
 rank checks and presentation quality do not replace language.
 
-The Nature-style article now includes both failed fits and the completed
-failure-localization diagnostic. Reading/review/redline PDFs have 27/47/47
-pages, with three additional native PowerPoint figures containing seven
-measured charts and original diagnostic glyphs. Both newly completed
-matched-cohort and proportional-input controls remain outside that verified
-revision. The [bounded manuscript plan](../references/manuscript_glyph_input_transfer_revision_plan.md)
-records their measured gains, lost pair and retention failure for the next
-TeX/PDF and editable-figure update. No new figure or paper result is claimed
-from that plan alone. Model diagnosis and readable held-out answers take
-priority over additional presentation work.
+The Nature-style article now includes both compact failed fits, their frozen
+failure localization and the completed matched-cohort/presentation controls.
+Reading/review/redline PDFs have **29/51/51 pages**. Figure 19 adds four native
+editable charts and six complete original output images, preserving the lost
+pair and failed retention rule. All six original rasters survive in each
+compiled PDF. The prior figures, style, 100-page supplement and composite
+deck remain unchanged. The [bounded revision](../references/manuscript_glyph_input_transfer_revision_plan.md)
+and [build receipt](../publication/ilm-nature/evidence/glyph_input_transfer_publication_build.json)
+record the inspected changes; the redline uses the immutable `0f14fa3f`
+baseline. The running native-reader diagnosis remains outside that revision
+while unscored. Model diagnosis and readable held-out answers take priority
+over additional presentation work.
 
 ## Goal and acceptance criteria
 

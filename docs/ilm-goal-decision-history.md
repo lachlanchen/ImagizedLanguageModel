@@ -8,6 +8,34 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: measured input transfer added to the manuscript
+
+The bounded revision adds the completed matched-cohort and proportional-input
+controls, with zero new optimizer updates. The abstract, introduction, Results
+and Discussion retain the 2/32 to 6/32 exact-answer increase, loss of the one
+correct passage pair and failure of the retention requirement. Methods keep
+the full-prompt masks, original review limits, uncertainty and costs distinct
+from new language learning. The running native-reader diagnosis is excluded
+while incomplete and unscored.
+
+The article/review/redline now have 29/51/51 pages. Figure 19 adds one native
+editable PowerPoint slide with four measured charts and six original complete
+answer PNGs. Chart caches and embedded workbook cells match the evidence;
+all six original raster arrays survive on the new figure page of all three
+PDFs. The slide and changed text, equations, captions and redline pages were
+visually inspected. All 217 checked previous figure/style/supplement/composite
+assets remain identical to the immutable `0f14fa3f` baseline. Native PowerPoint
+application opening is unverified; LibreOffice export and its final rendering
+were checked. This updates the evidence record without qualifying a usable
+independent ILM. See the [build receipt](../publication/ilm-nature/evidence/glyph_input_transfer_publication_build.json).
+The new versioned local Nutstore package and both owned latest PDF aliases
+are hash-verified. Its final manifest contains 443 current publication/reference
+files; the receipt is verified separately. All 372 previously bound package
+files remain unchanged. Archived source baselines from an initial overbroad
+copy were excluded from the final delivery. The
+[local copy receipt](../publication/ilm-nature/evidence/glyph_input_transfer_local_sync.json)
+does not establish cloud propagation.
+
 ## 11 November: actual-prefill reader diagnosis registered and started
 
 The helper-only implementation now registers all 448 calls: 384 image calls

@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 11 14:08:45 2026
-%DIF ADD new.tex   Wed Nov 11 14:08:45 2026
+%DIF DEL old.tex   Wed Nov 11 17:15:29 2026
+%DIF ADD new.tex   Wed Nov 11 17:15:29 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -132,10 +132,10 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 97aa1588 compact-sequence draft are blue.}\par\medskip
+\noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 0f14fa3f compact-diagnosis draft are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous \DIFdelbegin \DIFdel{visual }\DIFdelend interfaces that read and emit glyph images, with generated pixels supplying subsequent history. Externally pretrained \DIFdelbegin \DIFdel{contextual bodies }\DIFdelend \DIFaddbegin \DIFadd{foundations }\DIFaddend provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. \DIFdelbegin \DIFdel{In a }\DIFdelend \DIFaddbegin \DIFadd{A }\DIFaddend restricted \DIFaddbegin \DIFadd{actor retaining }\DIFaddend 7.522B \DIFaddbegin \DIFadd{visual and }\DIFaddend contextual \DIFdelbegin \DIFdel{experiment, adaptation }\DIFdelend \DIFaddbegin \DIFadd{parameters }\DIFaddend gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its \DIFdelbegin \DIFdel{complete-answer }\DIFdelend qualification. A separate compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions. \DIFdelbegin \DIFdel{Its }\DIFdelend \DIFaddbegin \DIFadd{Two }\DIFaddend 8,172-update \DIFdelbegin \DIFdel{fit uses }\DIFdelend \DIFaddbegin \DIFadd{fits use }\DIFaddend 3.930 \DIFaddbegin \DIFadd{and 4.889 }\DIFaddend GiB peak allocated GPU memory. \DIFdelbegin \DIFdel{All five checkpoints }\DIFdelend \DIFaddbegin \DIFadd{Both }\DIFaddend score zero complete exact QA answers out of 32 \DIFdelbegin \DIFdel{; one model-based review of 372 pages establishes no readable complete response}\DIFdelend \DIFaddbegin \DIFadd{at all five checkpoints}\DIFaddend . A \DIFdelbegin \DIFdel{separate cold replay verifies actual emitted-pixel feedback and independent inference for one fixed case. We identify }\DIFdelend \DIFaddbegin \DIFadd{wider writer removes }\DIFaddend a \DIFdelbegin \DIFdel{velocity-output subspace }\DIFdelend \DIFaddbegin \DIFadd{measured velocity-rank restriction without solving language. Frozen-weight diagnostics show }\DIFaddend that \DIFdelbegin \DIFdel{leaves at least 384 Gaussian directions uncontrolled}\DIFdelend \DIFaddbegin \DIFadd{writing fails before generated feedback}\DIFaddend , \DIFdelbegin \DIFdel{motivating a registered capacity }\DIFdelend \DIFaddbegin \DIFadd{despite near-exact codec reconstruction; additional sampling steps do not }\DIFaddend repair \DIFaddbegin \DIFadd{it}\DIFaddend . \DIFaddbegin \DIFadd{The reader also has a measured affine target-alignment restriction. Cold replays verify independent pixel-feedback execution for fixed cases. }\DIFaddend These results \DIFdelbegin \DIFdel{distinguish single-GPU }\DIFdelend \DIFaddbegin \DIFadd{separate }\DIFaddend execution, physical writing and conditional language success. Reliable open-ended \DIFdelbegin \DIFdel{visual language }\DIFdelend generation, historical-form transfer and \DIFdelbegin \DIFdel{an }\DIFdelend \DIFaddbegin \DIFadd{a matched-quality }\DIFaddend efficiency advantage \DIFdelbegin \DIFdel{at matched quality }\DIFdelend remain unresolved.}\par\bigskip
+\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous interfaces that read and emit glyph images, with generated pixels supplying subsequent history. Externally pretrained foundations provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. A \DIFdelbegin \DIFdel{restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its qualification. A separate }\DIFdelend compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions. Two 8,172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory\DIFdelbegin \DIFdel{. Both }\DIFdelend \DIFaddbegin \DIFadd{, yet }\DIFaddend score zero complete exact QA answers out of 32 at all five checkpoints. A wider writer removes a measured velocity-rank restriction without solving language. Frozen\DIFdelbegin \DIFdel{-weight}\DIFdelend  diagnostics \DIFdelbegin \DIFdel{show that writing fails }\DIFdelend \DIFaddbegin \DIFadd{expose conditional-writing failure }\DIFaddend before generated feedback \DIFdelbegin \DIFdel{, despite near-exact codec reconstruction; additional sampling steps do not repair it. The reader also has }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment }\DIFdelend \DIFaddbegin \DIFadd{separate reader-alignment }\DIFaddend restriction. \DIFaddbegin \DIFadd{On the same question cohort, an earlier actor retaining 7.522B visual and contextual parameters gives two exact answers. Full-prompt proportional input raises this to six with unchanged weights, but loses the one fully correct question pair and an earlier readable answer. }\DIFaddend Cold replays verify independent pixel-feedback execution for fixed cases. These \DIFdelbegin \DIFdel{results separate execution}\DIFdelend \DIFaddbegin \DIFadd{controls distinguish limited inherited transfer}\DIFaddend , \DIFdelbegin \DIFdel{physical writing }\DIFdelend \DIFaddbegin \DIFadd{execution }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend \DIFaddbegin \DIFadd{reliable }\DIFaddend language \DIFdelbegin \DIFdel{success}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{Reliable }\DIFdelend \DIFaddbegin \DIFadd{Usable }\DIFaddend open-ended \DIFdelbegin \DIFdel{generation}\DIFdelend \DIFaddbegin \DIFadd{writing}\DIFaddend , historical-form transfer and a matched-quality efficiency advantage remain unresolved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -176,10 +176,13 @@ inherited contextual bodies with separately learned glyph interfaces. The
 earlier architectures provide controls. Restricted short-answer experiments
 evaluate the complete-glyph loop shown in Fig.~S37; a separate compact
 experiment then fits complete book and question--answer sequences and measures
-all five saved checkpoints. \DIFaddbegin \DIFadd{A controlled wider writer and frozen-weight
-interventions then test the sources of failure. }\DIFaddend The contributions are the
+all five saved checkpoints. A controlled wider writer and frozen-weight
+interventions then test the sources of failure. \DIFaddbegin \DIFadd{A matched earlier-actor
+control and full-prompt presentation comparison subsequently test retained
+image-answer transfer on the same question cohort. Their partial gains and
+lost question pair remain distinct from new language learning. }\DIFaddend The contributions are the
 explicit emitted-pixel interface, controlled language tests, reproducible
-single-GPU execution and \DIFdelbegin \DIFdel{an identified velocity-capacity restriction}\DIFdelend \DIFaddbegin \DIFadd{measured writer/reader restrictions}\DIFaddend . None establishes a generally
+single-GPU execution and measured writer/reader restrictions. None establishes a generally
 usable visual language model or a from-scratch language learner.
 
 \section*{Results}
@@ -1217,9 +1220,7 @@ contracted or conditioned by this continuous velocity model. Terminal
 normalization can restrict the varying output further. The result is an
 exact-arithmetic capacity statement, not a hardware-exact sampler identity or
 proof of the sole cause of failed answers. A separately registered 1,024-channel
-writer comparison \DIFdelbegin \DIFdel{checks the centered output map and velocity Jacobians;
-its trained language outcome remains unmeasured here. }\DIFdelend \DIFaddbegin \DIFadd{removes this tested restriction, as evaluated below.
-}\DIFaddend
+writer comparison removes this tested restriction, as evaluated below.
 
 \plate{Figure_12_compact_trajectory}{\textbf{Complete-answer performance across the compact full-sequence fit.}
 \textbf{a}, Complete exact QA answers among 32 questions at five fixed
@@ -1255,8 +1256,8 @@ Later nonblank writing does not establish readable coherent continuation.
 The complete input, original pixel streams, source hashes and all endpoint
 controls remain in the evidence.}{fig:compact-book}
 
-\DIFaddbegin \subsection*{\DIFadd{Removing the writer rank restriction is insufficient}}
-\DIFadd{The controlled comparison changes the writer width from 384 to 1,024 while
+\subsection*{Removing the writer rank restriction is insufficient}
+The controlled comparison changes the writer width from 384 to 1,024 while
 preserving the corpus, exposure, six objectives, optimizer schedule and seed.
 The initial encoder, length head and teacher projection match the compact
 control. The wider writer's output projection, centered map and three tested
@@ -1265,9 +1266,8 @@ parameters increase to 48,547,733, with the same 8,388,608-parameter
 training-only projection. One pass again completes 8,172 updates. Fitting
 takes 1,945.56 seconds, including 150.14 seconds of resource waiting, with
 4.889 GiB peak allocated GPU memory.
-}
 
-\DIFadd{All five wider-writer checkpoints still give 0/32 complete exact QA answers
+All five wider-writer checkpoints still give 0/32 complete exact QA answers
 and 0/16 both-correct pairs (Fig.~\ref{fig:compact-wider}). Another opaque
 review retains all 372 outputs: twenty-four are blank and 348 have uncertain
 whole transcriptions. No readable complete book continuation is established.
@@ -1278,18 +1278,16 @@ feedback without observed forbidden accesses. Its wrapper terminated before
 writing verification, for an unknown reason; the completed original child
 traces permit CPU-only recovery without rerunning inference. Removing the
 rank restriction therefore does not solve language under this recipe.
-}
 
-\subsection*{\DIFadd{Conditional writing fails before emitted feedback}}
-\DIFadd{We localize the failure with frozen weights in both final checkpoints.
+\subsection*{Conditional writing fails before emitted feedback}
+We localize the failure with frozen weights in both final checkpoints.
 The fixed diagnostic contains eight QA and eight book records from each of
 the training and development partitions. At most eight following spans per
 record give 201 spans, containing 122 training and 131 development glyphs.
 Every writer arm receives the reference next-span length. Controlled history
 and count supplies separate physical writing from autonomous inference.
-}
 
-\DIFadd{Correct image history with eight sampling steps gives foreground F1 of
+Correct image history with eight sampling steps gives foreground F1 of
 0.3801/0.3477 on training/development targets for V1 and 0.3720/0.3518 for
 the wider writer (Fig.~\ref{fig:compact-writing-diagnosis}). Direct codec
 reconstruction exceeds 0.9998 F1 and exactly reconstructs 117/122 and
@@ -1297,17 +1295,15 @@ reconstruction exceeds 0.9998 F1 and exactly reconstructs 117/122 and
 writing. A native-embedding bypass, which changes the conditioning
 distribution, also remains poor. These supplied-target F1 values measure
 pixel reconstruction, not semantic answer quality.
-}
 
-\DIFadd{The first target spans contain twenty training and twenty-six development
+The first target spans contain twenty training and twenty-six development
 glyphs. Both models have zero exact matches under correct history. Their
 first outputs are identical to the emitted-history arm, before feedback can
 diverge. Generated-history drift alone cannot explain these failures.
 Later emitted-history arms deteriorate further. All reference lengths remain
 supplied, so none of these arms is a new autonomous language result.
-}
 
-\DIFadd{The reader has a separate restriction. Its 384-channel terminal-normalized
+The reader has a separate restriction. Its 384-channel terminal-normalized
 feedback head has a 383-dimensional affine family for 2,048-dimensional
 native targets. Even after relaxing preceding image-network constraints,
 the best possible relative squared error on selected source positions is
@@ -1317,9 +1313,8 @@ These are target-alignment bounds under the fixed trained heads, not
 language-quality bounds. No complete prompt grouping exactly matches the
 reference in either model, despite high local count accuracy and contextual
 cosines. Those representation diagnostics do not establish comprehension.
-}
 
-\DIFadd{An initial prefix-consistency interruption led to a separate one-case
+An initial prefix-consistency interruption led to a separate one-case
 precision probe. Full versus truncated BF16 evaluation gives relative RMS
 error 0.05029; FP32 arithmetic on the same rounded weights reduces it to
 $2.59\times10^{-6}$. Same-shape future erasure is bit-equal. The completed
@@ -1329,7 +1324,6 @@ and no optimizer updates. The stopped attempt, probe and CPU preparations
 bring these registered stages to 467.24 seconds. The evidence rejects an
 unchanged compact fit or a sampler-only repair, without identifying a single
 cause of all failed answers.
-}
 
 \plate{Figure_16_compact_wider}{\textbf{The wider writer preserves the complete-answer failure.}
 \textbf{a,b}, Complete exact QA and both-correct passage pairs at all five
@@ -1360,6 +1354,71 @@ The deterministic display rule was added during analysis, not preregistered.
 Reference supplies and incorrect glyphs remain visible. No OCR replacement
 or output repair was applied.}{fig:compact-reader-diagnosis}
 
+\DIFaddbegin \subsection*{\DIFadd{Input presentation changes retained answers but fails retention}}
+\DIFadd{To test whether the compact failures discard previously demonstrated image
+answers, we evaluate the unchanged earlier contextual-tail actor on the same
+cohort. This actor retains 7,522,463,984 inherited visual/contextual parameters
+and uses a deterministic complete-glyph writer with actual emitted-pixel
+feedback. It gives 2/32 strict complete exact QA answers, both from one
+passage pair, and 3/32 readable QA outputs. Neither compact final checkpoint
+retains the two exact answers. The third readable output omits a canonical
+parenthetical alias and fails unchanged strict matching; this does not
+establish semantic falsity. All twelve book continuations reach the cap,
+with no credited readable coherent complete continuation. Different bodies,
+writers and adaptation histories prevent a causal model-size comparison.
+}
+
+\DIFadd{The frozen full-prompt comparison changes input font, spacing and wrapping
+together while preserving every passage and question. There are no new
+optimizer updates or answer-centered crops, and the output cap remains 128
+glyphs. Median page height changes from 704 to 512 pixels at 1,024-pixel width.
+Complete exact QA rises to 6/32, with a pointwise 95\% passage-group bootstrap
+interval of 6.25--31.25\%. Whole-response readability rises from 3/32 to 11/32,
+and QA caps decrease from 24/32 to 13/32 (Fig.~\ref{fig:glyph-input-transfer}).
+However, both-correct pairs fall from 1/16 to 0/16. The exact-answer gain is
+12.5 percentage points, with interval 0--25; the paired difference is minus
+6.25 points, with interval minus 18.75 to zero. Both difference intervals
+include zero. The previously exact area answer becomes unreadable, while
+the location answer and shorter instrument list remain readable. The
+registered retention rule therefore fails.
+}
+
+\DIFadd{All 120 fixed-cell and 96 proportional-input outputs are retained. Separate
+opaque reviews freeze their complete readings before reference scoring, with
+prior cohort familiarity and no independent human adjudication. Both erased
+QA conditions give zero exact and zero readable answers in both layouts.
+Readable concise answers, omitted aliases and one digit/letter discrepancy
+are preserved without post-hoc transcription repair or a substituted semantic
+metric. This repeated development cohort supplies no untouched confirmation
+or independent training-seed replication. The comparison tests presentation
+transfer of inherited capability, not language acquisition from images alone.
+}
+
+\DIFadd{The fixed-cell run takes 1,589.88 seconds for 120 inputs; the proportional
+run takes 1,179.29 seconds for 96. Both peak at 17.786 GiB allocated memory.
+Their different input counts prevent a matched speed comparison. Separate
+fixed-book and fixed-question cold invocations reproduce signed pixels,
+contextual states, stopping and actual feedback, with no observed forbidden
+input access or IP connection. Those replay checks establish execution for
+the tested cases, not reliable language. Neither input presentation qualifies
+a usable visual language interface.
+}
+
+\plate{Figure_19_glyph_input_transfer}{\textbf{Proportional prompts increase exact answers but lose a correct pair.}
+\textbf{a--c}, Complete exact QA, both-correct question pairs and whole-response
+readability on the same 32 questions. Input presentation changes with weights,
+full passage content and actual-pixel output feedback fixed. Counts retain
+every registered case. The displayed pointwise difference intervals resample
+sixteen whole passage groups; both include zero. \textbf{d}, Predicted stops
+and caps for the 32 normal QA inputs. Neither layout has an empty normal
+answer. \textbf{e}, Complete original outputs for the lost area answer,
+retained location and a newly exact quantity answer. These three matched
+examples were chosen retrospectively after complete scoring. Each pair is
+fitted at a common physical scale with no image crop, stroke reconstruction
+or OCR replacement. Opaque readings come from one model reviewer with prior
+cohort familiarity and no independent human adjudication. The registered
+retention rule fails, and no new training is performed.}{fig:glyph-input-transfer}
+
 
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
@@ -1373,16 +1432,22 @@ keeping the contextual foundation fixed. It completes training within one
 4090 but does not produce a credited readable complete answer on its fixed
 development cohort. Its independent cold replay verifies execution boundaries,
 not comprehension. The velocity projection has a provable noise subspace;
-terminal normalization also matters when repairing its width. \DIFdelbegin \DIFdel{A registered
-}\DIFdelend \DIFaddbegin \DIFadd{The completed
-}\DIFaddend wider-writer comparison \DIFdelbegin \DIFdel{addresses that restriction while preserving the remaining recipe . Correcting capacity must still be followed by actual
-conditional-image evaluation, }\DIFdelend \DIFaddbegin \DIFadd{removes the tested restriction but retains zero
+terminal normalization also matters when repairing its width. The completed
+wider-writer comparison removes the tested restriction but retains zero
 complete exact QA answers at every checkpoint. Correct-history diagnostics
 show writing failure before generated feedback, while a separate reader
 restriction limits native-target alignment. These results reject the unchanged
-joint recipe and a sampler-only repair. The next model decision requires a
-matched-cohort readable control, followed by }\DIFaddend fresh source groups and
-independent review \DIFaddbegin \DIFadd{after any development improvement}\DIFaddend .
+joint recipe and a sampler-only repair. The \DIFdelbegin \DIFdel{next model decision requires a
+matched-cohort readable control
+, followed by fresh }\DIFdelend \DIFaddbegin \DIFadd{matched earlier-actor control
+retains two exact answers and one fully correct question pair on the same
+cohort. Full proportional prompts raise exact answers to six but lose that
+pair and an earlier readable answer, failing the registered retention rule.
+This establishes presentation sensitivity and limited inherited transfer,
+without establishing a consistently better interface or new learning.
+Further model changes require separate tests of visual access, conditional
+writing and generated-history feedback, followed by untouched }\DIFaddend source groups
+and independent review after any development improvement.
 
 An image interface enlarges the representable output space, including the
 possibility of forms absent from a character encoding. It does not remove the
@@ -1549,11 +1614,10 @@ display pixels, termination and emitted-pixel feedback against its suite run.
 The child receives only the visible input, authenticated foundation/codec and
 deployable image heads. Access auditing distinguishes an unused vocabulary
 inside source-archive metadata from materialized lexical model modules or
-answer access. Preparation, fit and inference costs are recorded separately\DIFaddbegin \DIFadd{.
-}
+answer access. Preparation, fit and inference costs are recorded separately.
 
-\subsection*{\DIFadd{Wider writer and frozen failure localization}}
-\DIFadd{The controlled wider writer uses 1,024 hidden channels for a 768-dimensional
+\subsection*{Wider writer and frozen failure localization}
+The controlled wider writer uses 1,024 hidden channels for a 768-dimensional
 velocity. All other registered training choices remain fixed, including
 seed, initial encoder, length head and teacher projection. CPU-only
 construction preserves the GPU random state. Initial and final output,
@@ -1562,9 +1626,8 @@ language quality. The same five-checkpoint protocol, 372 opaque images and
 complete-answer definitions apply. The cold child's original traces are
 retained, including its parent-wrapper interruption and CPU-only verification
 recovery. No inference rerun supplies that receipt.
-}
 
-\DIFadd{For failure localization, source groups are ordered by a fixed hash, taking
+For failure localization, source groups are ordered by a fixed hash, taking
 eight QA and eight book records per partition. The two development works
 contribute four records each. Both final checkpoints remain frozen. The
 six writer arms use correct image history at eight or 64 flow steps, native
@@ -1575,9 +1638,8 @@ noise. The direct codec control reconstructs the targets without the writer.
 Native history is an explicit distribution-changing bypass. Gold history,
 span lengths and counts are diagnostic supplies, not available autonomous
 answer information. First-span measurements precede generated feedback.
-}
 
-\DIFadd{Pixel metrics are independently recomputed from persisted binary targets and
+Pixel metrics are independently recomputed from persisted binary targets and
 outputs, including blank-target and nonblank-target exact counts. Original
 PNGs, noise hashes and feedback hashes are authenticated. Latent errors are
 not independently recomputed because separate target latents were not saved.
@@ -1585,28 +1647,26 @@ The first registered case of each split/kind supplies the raw displays;
 that deterministic display rule was introduced during analysis, not
 preregistered. These selected diagnostics have no semantic grading or
 generalization interval.
-}
 
-\DIFadd{For the reader, write $D$ for the fixed output scaling and $\mu$ for its mean.
+For the reader, write $D$ for the fixed output scaling and $\mu$ for its mean.
 With the final LayerNorm parameters $\gamma,\beta$, projection $W,b$ and
 $C=I-\mathbf1\mathbf1^\top/384$, every feedback vector lies in
-}\begin{align}
+\begin{align}
  a+\operatorname{col}(A),\qquad
  A&=DW\operatorname{diag}(\gamma)C,\\
  a&=\mu+D(W\beta+b).
 \end{align}
-\DIFadd{Both final heads have $\operatorname{rank}(A)=383$. If $Q$ is an
+Both final heads have $\operatorname{rank}(A)=383$. If $Q$ is an
 orthonormal basis of its column space, relaxing all preceding network
 constraints gives the target error floor
-}\begin{equation}
+\begin{equation}
  \ell_{\min}(e)=
  \frac{\|(I-QQ^\top)(e-a)\|^2}{\max(\|e\|^2,10^{-8})}.
 \end{equation}
-\DIFadd{The reported mean weights selected source positions uniformly. It is not
+The reported mean weights selected source positions uniformly. It is not
 the original objective's batch weighting or a lower bound on language error.
-}
 
-\DIFadd{The first diagnostic stops at its original prefix-consistency tolerance.
+The first diagnostic stops at its original prefix-consistency tolerance.
 A separate one-prefix probe compares full and truncated sequence execution,
 same-shape future erasure, cache/mask controls and FP32 arithmetic using the
 same BF16-rounded weights. Its twelve contextual calls and twenty-four
@@ -1614,7 +1674,81 @@ velocity calls are recorded separately. The completed diagnostic uses
 matching prefix prefill and cached updates for reference and generated
 history, retaining the original tolerance. The stopped attempt, probe,
 completed run and CPU preparation costs remain in the evidence. No optimizer
-update or new autonomous language result is attributed to this diagnostic}\DIFaddend .
+update or new autonomous language result is attributed to this diagnostic\DIFaddbegin \DIFadd{.
+}
+
+\subsection*{\DIFadd{Matched earlier actor and full-prompt presentation}}
+\DIFadd{The earlier actor uses a separate inherited 36-layer visual/contextual body,
+four adapted tail layers and a complete-glyph CNN encoder/decoder. Its
+previously fitted checkpoint remains fixed throughout these comparisons.
+All 32 compact-cohort QA questions, both erased-input controls and twelve
+book prefixes with their erased controls give 120 fixed-cell inputs. All
+32 QA questions and their 64 erased controls give the 96 proportional inputs.
+No earlier successful pair, short reference or favorable font-coverage subset
+is selected. Recorded adaptation data contain 3,176 admitted questions, with
+no current question, normalized passage or exact training-PNG overlap.
+Inherited pretraining and all earlier ancestors remain uncertified.
+}
+
+\DIFadd{CPU preparation authenticates each original complete source prompt. The
+proportional view reuses the exact earlier Pango renderer and Noto CJK face,
+24-pixel font size and 32-pixel strip height. Each source newline becomes one
+ordinary space; all non-whitespace codepoints remain unchanged. Capacity is
+measured from the full prompt without shrinking or truncation. Blank-column
+wrapping preserves and exactly recovers the complete rendered strip. Passage,
+question and structural ink masks are isolated without changing shaping,
+must be disjoint and must reconstruct every normal ink pixel. Erased views
+whiten only the original field pixels in place, retaining the normal wrap
+ranges, canvas and all other ink. All 96 images pass exact strip/page
+roundtrips and the unchanged host preparation. Preparation takes 4.16 seconds.
+}
+
+\DIFadd{The native visual observer, numeric task frame, deterministic contextual
+numerics, learned stop threshold and 128-glyph cap remain unchanged. The
+deterministic writer produces binary glyph images and rereads their actual
+pixels. Each complete output retains its original signed tensors, displayed
+PNG, states, feedback hashes and cap/stop decision. The deployed answer path
+has no lexical output module, tokenizer, font renderer, reference answer or
+external teacher. Zero new optimizer updates occur in either comparison.
+}
+
+\DIFadd{One model reviewer inspects all opaque outputs and ambiguous enlargements
+before the corresponding mapping or references are opened. Proportional
+outputs use presentation-specific opaque identifiers, preventing reuse of
+the earlier display mapping. Frozen readings give three complete readable
+fixed-cell outputs and eleven proportional outputs; the remaining 117 and
+85 whole responses are uncertain, with no blank outputs. Reviewers have
+prior dataset and earlier-output familiarity. No independent human
+adjudication is performed. The original complete canonical exact-match,
+learned-stop and distinct-pair requirements remain fixed. Noncanonical
+wording is not relabeled as factually false, and no favorable semantic score
+is added after inspecting answers.
+}
+
+\DIFadd{Pointwise intervals use 10,000 whole-passage-group paired bootstrap draws,
+seed 202611154. Constant zero groups give degenerate sample intervals,
+without proving zero population success. The registered development rule
+requires gains in exact answers, correct pairs and readability while retaining
+the three original readable cases and not increasing QA caps. Its paired
+gain and exact-answer retention conditions fail. An additional conservative
+core-prefix retention check was implemented during generation before new
+output inspection; it is not described as preregistered and is unnecessary
+to reject the original rule. Figure 19's three raw example pairs were chosen
+after scoring to show the lost area, retained location and first newly exact
+quantity answer. They do not substitute for all registered denominators.
+}
+
+\DIFadd{The fixed-cell and proportional runs include 80.20 and 97.89 seconds loading,
+with 1,484.92 and 1,060.67 seconds of generation, respectively. Both record
+zero resource-pressure wait. Earlier adaptation, inherited pretraining and
+corpus preparation remain excluded costs. The fixed-book cold replay takes
+84.89 seconds at 17.757 GiB, and the proportional fixed-question replay takes
+79.08 seconds at 17.693 GiB. Each independent traced invocation checks actual
+signed pixels, states, stopping and feedback. The unchanged command-line
+viewer lays out a long row rather than the suite grid; exact tensors and
+display pixels, rather than PNG layout bytes, verify the proportional replay.
+No observed forbidden corpus, reference or font access or IP connection occurs.
+These are fixed-case boundary checks, separate from language accuracy}\DIFaddend .
 
 
 \subsection*{Initial raster control data}

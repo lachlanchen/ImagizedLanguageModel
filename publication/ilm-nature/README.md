@@ -6,8 +6,9 @@ V-SPICE v13.7 manuscript template: a two-column article, a matching review
 copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
-The [change-marked article](redlined_manuscript.pdf) compares the completed
-compact diagnostics with the compact-sequence draft at `97aa1588`. The
+The [change-marked article](redlined_manuscript.pdf) compares the matched
+image-answer and input-presentation controls with the compact-diagnosis draft
+at `0f14fa3f`. The
 [supplement redline](redlined_supplementary_information.pdf) uses the
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
 and earlier baselines remain available for reproduction.
@@ -22,19 +23,34 @@ codec reconstruction. Additional sampling steps do not fix it. The reader
 also has a measured affine target-alignment restriction. These results do not
 establish a usable visual language model.
 
-The current package contains a **27-page article**, **47-page review** and
-**47-page article redline**. Figures 12–15 preserve the compact V1 trajectory
+On the same 32-question development cohort, the unchanged earlier actor
+retaining 7.522B inherited visual/contextual parameters gives **2/32 strict
+exact answers** and **1/16 both-correct pairs**. Proportional input with full
+passages and unchanged weights raises exact answers to **6/32** and readable
+outputs from **3/32 to 11/32**, but loses the correct pair and an earlier
+readable answer. The registered retention rule fails. Both difference
+intervals include zero; neither presentation qualifies a usable ILM. See the
+[matched-cohort result](../../references/glyph_tail_compact_cohort_result.md) and
+[presentation comparison](../../references/glyph_tail_input_presentation_result.md).
+This is frozen inference transfer, with zero new training updates.
+
+The current package contains a **29-page article**, **51-page review** and
+**51-page article redline**. Figures 12–15 preserve the compact V1 trajectory
 and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
 add three editable slides with seven native measured charts and original
 diagnostic glyphs. The supplied-reference diagnostic scores remain separate
 from autonomous language accuracy. See the
 [wider result](../../references/compact_visual_span_full_rank_result.md) and
 [failure localization](../../references/compact_visual_span_diagnosis_result.md).
-The 100-page supplement and 57-slide composite deck remain unchanged.
+The new [Figure 19 PowerPoint](figures/Glyph_input_transfer_figures.pptx) adds
+one editable slide with four native charts and six complete original output
+images. Its retrospective examples retain the lost area answer, retained
+location and newly exact quantity answer without stroke repair. The
+100-page supplement and 57-slide composite deck remain unchanged.
 
-![Frozen conditional-writing diagnostic](figures/Figure_17_compact_writing_diagnosis.png)
+![Matched input presentation and original glyph outputs](figures/Figure_19_glyph_input_transfer.png)
 
-The current local delivery is `ILM_NatureStyle_20261111_CompactDiagnosis` in
+The current local delivery is `ILM_NatureStyle_20261111_InputTransfer` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
 The previous versioned packages remain available.
 
