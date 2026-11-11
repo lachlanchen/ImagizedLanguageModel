@@ -6,7 +6,6 @@ import fcntl
 import json
 import os
 from pathlib import Path
-import select
 import signal
 import subprocess
 import sys
@@ -27,6 +26,14 @@ GPU_LOCK = ROOT / "artifacts/ilm_gpu0.lock"
 
 def load(path):
     return json.loads(path.read_text())
+
+
+def live_start_ticks(process):
+    try:
+        fields = (process / "stat").read_text().rsplit(")", 1)[1].split()
+    except (FileNotFoundError, ProcessLookupError):
+        return None
+    return fields[19] if fields[0] not in {"Z", "X"} else None
 
 
 def stage_progress(stage, path):
@@ -52,26 +59,20 @@ class Pipeline:
         })
 
     def wait_for_predecessor(self, pid):
-        # A pidfd stays tied to the original process even if its numeric PID is reused.
-        try:
-            handle = os.pidfd_open(pid)
-        except ProcessLookupError:
+        process = Path("/proc") / str(pid)
+        start_ticks = live_start_ticks(process)
+        if start_ticks is None:
             return
         try:
-            try:
-                workdir = (Path("/proc") / str(pid) / "cwd").resolve(strict=True)
-            except FileNotFoundError:
-                return
-            if not workdir.is_relative_to(ROOT):
-                raise ValueError("The predecessor must be a process in this project")
-            poller = select.poll()
-            poller.register(handle, select.POLLIN)
-            while True:
-                self.status("waiting_for_predecessor", predecessor_pid=pid)
-                if poller.poll(30000):
-                    return
-        finally:
-            os.close(handle)
+            workdir = (process / "cwd").resolve(strict=True)
+        except (FileNotFoundError, ProcessLookupError):
+            return
+        if not workdir.is_relative_to(ROOT):
+            raise ValueError("The predecessor must be a process in this project")
+        # The start time distinguishes the original process from a reused PID.
+        while live_start_ticks(process) == start_ticks:
+            self.status("waiting_for_predecessor", predecessor_pid=pid, predecessor_start_ticks=start_ticks)
+            time.sleep(30)
 
     def wait_for_gpu(self, stage):
         while True:

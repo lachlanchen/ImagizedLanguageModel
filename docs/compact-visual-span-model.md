@@ -61,9 +61,9 @@ model pairs the image heads with the verified contextual and codec weights.
 The serial pipeline runs teacher extraction, fitting, and fixed-checkpoint
 evaluation on GPU0. Pass the PID of the current project worker with
 `--after-pid` to queue the pipeline behind it. The wait uses a Linux process
-handle and allocates no model. Each GPU stage acquires the existing project
-mutex. Teacher and fit attempts resume after a resource deadline when the
-attempt saved a new shard or checkpoint.
+ID and kernel start time and allocates no model. Each GPU stage acquires
+the existing project mutex. Teacher and fit attempts resume after a resource
+deadline when the attempt saved a new shard or checkpoint.
 
 ```bash
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
