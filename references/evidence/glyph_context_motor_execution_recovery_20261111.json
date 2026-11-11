@@ -1,0 +1,37 @@
+{
+  "schema": "glyph-context-motor-execution-recovery-v1",
+  "original_study_sha256": "7a846fa8820ee7c368975786ea21e89736fe756fa133de3dc5289459345e0bbd",
+  "original_runtime_source_sha256": {
+    "scripts/infer_glyph_context_motor.py": "46b4048241d20bb78b3d809f091dd858e66f1101d76b810fe3dde39aaadc6207",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/compare_glyph_tail_compact_cohort.py": "bd0256767c9aca397ea49aefa4d95ed53a09e06700a4676edae20ceda75340d1",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/context_motor_flow.py": "9818c9b800c6cdd8cc3b5b961aa2038e17a65b5860cf964656a61053f53f1b97",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae"
+  },
+  "updated_runtime_source_sha256": {
+    "scripts/infer_glyph_context_motor.py": "e0309c6d30d5ac68c70ad2efdc9d7cfe3276005397f3f9b4334a7d757d5845c5",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/compare_glyph_tail_compact_cohort.py": "bd0256767c9aca397ea49aefa4d95ed53a09e06700a4676edae20ceda75340d1",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/context_motor_flow.py": "9818c9b800c6cdd8cc3b5b961aa2038e17a65b5860cf964656a61053f53f1b97",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae"
+  },
+  "changed_runtime_sources": [
+    "scripts/infer_glyph_context_motor.py"
+  ],
+  "answers_emitted_before_amendment": 0,
+  "failed_attempt_receipt_sha256": "65b8939e1577f059695cfe4e4663d746701502dac405940277cc1471fc3e115f",
+  "failed_console_sha256": "3b46c1aa1c8e07f1d2d12cb33f6f060c3f8a3559eae1b382c727a1e08788d5e1",
+  "failed_attempt_elapsed_seconds": 74.90206611622125,
+  "failed_attempt_peak_allocated_vram_gib": 15.402419090270996,
+  "failed_attempt_retained": "artifacts/glyph_context_motor_v1/generation_attempts/fixed_cells_0001_setup_failure",
+  "correction": "Construct frozen parameter modules under no_grad, then generate under inference_mode; parameter version counters remain available.",
+  "same_model_weights_training_sampler_inputs_stop_cap_and_pilot": true,
+  "optimizer_updates": 0,
+  "prefill_or_answer_quality_observed_before_correction": false
+}
