@@ -1,0 +1,269 @@
+{
+  "registration_sha256": "a6bd7c47c7583d196462fc2e88d33f3f925a9271688a796e56a61b183ff431b7",
+  "case": "development_book_25",
+  "prefix_glyphs": 312,
+  "prefix_native_updates": 305,
+  "total_glyphs": 632,
+  "comparisons": {
+    "codec_prefix_batch_extent": {
+      "relative_mse": 1.4839976578313874e-13,
+      "relative_rms": 3.852269016867056e-07,
+      "cosine": 1.0,
+      "maximum_absolute_error": 2.86102294921875e-06,
+      "bit_equal": false,
+      "shape": [
+        312,
+        768
+      ]
+    },
+    "encoder_same_latents_batch_extent": {
+      "relative_mse": 2.2116729563211035e-13,
+      "relative_rms": 4.702842710872971e-07,
+      "cosine": 1.0,
+      "maximum_absolute_error": 1.1920928955078125e-07,
+      "bit_equal": false,
+      "shape": [
+        1,
+        305,
+        2048
+      ]
+    },
+    "encoder_own_prefix_batch_extent": {
+      "relative_mse": 2.558079887238912e-13,
+      "relative_rms": 5.057746422309952e-07,
+      "cosine": 1.0,
+      "maximum_absolute_error": 9.685754776000977e-08,
+      "bit_equal": false,
+      "shape": [
+        1,
+        305,
+        2048
+      ]
+    },
+    "full_vs_identical_prefix_BF16": {
+      "relative_mse": 0.002529176650568843,
+      "relative_rms": 0.05029092016029179,
+      "cosine": 0.9987843036651611,
+      "maximum_absolute_error": 1.75,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "prefix_mask_cache_BF16": {
+      "relative_mse": 0.0,
+      "relative_rms": 0.0,
+      "cosine": 1.0000001192092896,
+      "maximum_absolute_error": 0.0,
+      "bit_equal": true,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "encoder_batch_effect_on_context_BF16": {
+      "relative_mse": 9.859697456704453e-05,
+      "relative_rms": 0.0099296009268774,
+      "cosine": 0.9999522566795349,
+      "maximum_absolute_error": 0.5,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "original_diagnostic_difference_BF16": {
+      "relative_mse": 0.0025066756643354893,
+      "relative_rms": 0.05006671213826098,
+      "cosine": 0.9987585544586182,
+      "maximum_absolute_error": 1.75,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "same_shape_future_erasure_BF16": {
+      "relative_mse": 0.0,
+      "relative_rms": 0.0,
+      "cosine": 1.0,
+      "maximum_absolute_error": 0.0,
+      "bit_equal": true,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "native_full_vs_prefix_BF16": {
+      "relative_mse": 0.00016960329958237708,
+      "relative_rms": 0.013023183158597481,
+      "cosine": 0.9999152421951294,
+      "maximum_absolute_error": 0.5,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "full_vs_identical_prefix_FP32": {
+      "relative_mse": 6.719375490044088e-12,
+      "relative_rms": 2.5921758215916e-06,
+      "cosine": 0.9999998807907104,
+      "maximum_absolute_error": 6.866455078125e-05,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "original_diagnostic_difference_FP32": {
+      "relative_mse": 1.1237192600044299e-11,
+      "relative_rms": 3.3521922080996936e-06,
+      "cosine": 0.9999998807907104,
+      "maximum_absolute_error": 7.62939453125e-05,
+      "bit_equal": false,
+      "shape": [
+        1,
+        2048
+      ]
+    },
+    "same_shape_future_erasure_FP32": {
+      "relative_mse": 0.0,
+      "relative_rms": 0.0,
+      "cosine": 0.9999998211860657,
+      "maximum_absolute_error": 0.0,
+      "bit_equal": true,
+      "shape": [
+        1,
+        2048
+      ]
+    }
+  },
+  "first_span_images": {
+    "full_reference": {
+      "glyphs": 2,
+      "exact_glyphs": 0,
+      "tp": 1,
+      "fp": 164,
+      "fn": 28,
+      "foreground_f1": 0.010309278350515464,
+      "pixel_equal": 0.90625,
+      "sha256": "82f2d4b00002e1f6fd746d2052e1f5e0f902bb0182dbffcb3b254a5924866508"
+    },
+    "identical_prefix": {
+      "glyphs": 2,
+      "exact_glyphs": 0,
+      "tp": 1,
+      "fp": 173,
+      "fn": 28,
+      "foreground_f1": 0.009852216748768473,
+      "pixel_equal": 0.90185546875,
+      "sha256": "818ae46650d4f734ce04c1db9619e4fb3b1498c94631cdbb41b66dd7ff2335ad"
+    },
+    "reencoded_prefix": {
+      "glyphs": 2,
+      "exact_glyphs": 0,
+      "tp": 1,
+      "fp": 178,
+      "fn": 28,
+      "foreground_f1": 0.009615384615384616,
+      "pixel_equal": 0.8994140625,
+      "sha256": "156764b58e818340e035f1eadc3a739f658579ea963ff8d832433de2cfe3aa85"
+    }
+  },
+  "optimizer_updates": 0,
+  "body_calls": 12,
+  "velocity_calls": 24,
+  "float32_matmul_precision": "highest",
+  "allow_tf32": false,
+  "elapsed_seconds": 32.50850553344935,
+  "resource_wait_seconds": 10.009711857885122,
+  "peak_allocated_vram_gib": 5.530428886413574,
+  "minimum_available_gib": 62.53965759277344,
+  "pressure_wait_allowance_seconds": 60,
+  "stage_deadline_checked_during_pressure_wait": true,
+  "admission": {
+    "entry": {
+      "available_gib": 63.446781158447266,
+      "swap_fraction": 0.7628255746309139,
+      "some_pressure_avg10": 0.0,
+      "full_pressure_avg10": 0.0
+    },
+    "mode": "glyph_full_reader_48GiB_entry_24GiB_runtime",
+    "original_training_admission_unchanged": true,
+    "foreign_processes_changed": false,
+    "high_global_swap_occupancy_recorded": true,
+    "minimum_entry_available_gib": 48.0,
+    "minimum_runtime_available_gib": 24.0,
+    "maximum_allocated_vram_gib": 22.0,
+    "recovery_resource_admission_amendment": true,
+    "original_parent_admission_functions_unchanged": true
+  },
+  "original_execution_report_sha256": "d97702ac212890f9793b25b902622e3dab6b815d3f0a7013c67f19cd2d90fd64",
+  "registration": {
+    "parent_registration_sha256": "e7d994b6a47635efd77507443246ef6e807f8c4e2335aa5a6cd58d564f7ba466",
+    "case": {
+      "id": "development_book_25",
+      "split": "development",
+      "kind": "book",
+      "record_index": 2068,
+      "source_id": "wikisource:c21ab29c1c8d036560e5",
+      "source_group": "\u6b12\u57ce\u96c6",
+      "source_text_sha256": "a2a63d59843b75bef6eb83e354079545da48f1e87288ed28d1dc7efa42c00985",
+      "ink_sha256": "b613036e409bccd03d2419ea11305b3bb9d390b234b2a77b91cdc31695b01081",
+      "unit_ids_sha256": "bc061d73a4ffa9cf55303c1b9b0f662059505e94548d99c964fdd44a0608cc0f",
+      "glyph_ends_sha256": "9d4901a1780d995f8a912e7a67377b85c00360172cab060de6657f9c5d699b30",
+      "unit_ends_sha256": "f66faca48d63000d076bee01dd3cc624e5a72f0a19ee5aa420a12ea592c0aae5",
+      "prefix_spans": 287,
+      "stop_span": 295,
+      "target_spans": 8,
+      "target_glyphs": 9
+    },
+    "checkpoint": {
+      "path": "artifacts/compact_visual_span_fit_v1/image_heads_step_0008172.pt",
+      "sha256": "c4fae3f7769d159d73926476708aebcc0763b524f3afab94adfe54cdc241f6f6"
+    },
+    "sources_sha256": {
+      "scripts/audit_compact_prefix_consistency.py": "56b8a0fa77ae87106ca8ae7a06c51ced20cf0bc3eb1f798b1c99db33448553dd",
+      "scripts/diagnose_compact_visual_span.py": "0ac07a043c4785aa07c102c542a36fc9dc30ad96768ecc4a2e379ef7be359ac3",
+      "ilm/visual_lm/compact_visual_span_model.py": "1a4cbf7546daaeb9142f46f27f968e7b5561490d738e3dc80bcf4ea8285e111f",
+      "ilm/visual_lm/compact_visual_span_weights.py": "d5017b9dc1a82ef28e0606a7f5643f54f184732d8b84bb705bdf73222cdda1ae",
+      "ilm/visual_lm/compact_visual_span_training.py": "ac26fa4019b7396cec4e868789f77fc20611fb7b7d3f73dd6a1c8e8b2c55b6b1",
+      "ilm/visual_lm/full_rank_visual_span.py": "9151b935f51e9bc5bc5be4bf96bf4bc263d90b0d34aed58dc3ca7f9202eed7b3",
+      "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+      "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+      "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+      "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c"
+    },
+    "codec_sha256": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "corpus_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "source_vectors_sha256": "34e52c5bb704077ab3e8c636e22ed6cd52dbb8e6b30a55683124b3fedd2b8efe",
+    "previous_execution_exit_code": 1,
+    "previous_execution_elapsed_seconds": 125.0705576017499,
+    "interventions": [
+      "full_vs_prefix_body",
+      "mask_and_cache_flags",
+      "encoder_batch_extent",
+      "codec_batch_extent",
+      "same_shape_future_erasure",
+      "BF16_vs_FP32_context_arithmetic"
+    ],
+    "maximum_body_calls": 16,
+    "maximum_velocity_calls": 32,
+    "maximum_seconds": 240,
+    "precision_note": "FP32 body uses the same BF16-rounded weights cast to FP32; other weights unchanged",
+    "seed": 202611157,
+    "optimizer_updates": 0,
+    "autonomous_language_test": false,
+    "model_calls_during_preparation": 0
+  },
+  "source_statement": "One fixed failed-consistency case; numerical precision diagnostic, not an autonomous language result",
+  "goal_achieved": false,
+  "raw_png_sha256": {
+    "identical_prefix.png": "818ae46650d4f734ce04c1db9619e4fb3b1498c94631cdbb41b66dd7ff2335ad",
+    "full_reference.png": "82f2d4b00002e1f6fd746d2052e1f5e0f902bb0182dbffcb3b254a5924866508",
+    "reencoded_prefix.png": "156764b58e818340e035f1eadc3a739f658579ea963ff8d832433de2cfe3aa85",
+    "reference.png": "3acc5fd00974d64cec8296c85d1ad561982a245b1d9df552c7d57df9ad56c4eb"
+  }
+}
