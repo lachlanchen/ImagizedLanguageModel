@@ -1,0 +1,320 @@
+{
+  "measured_data_sha256": "e3bce776d4629a957d7e59ae7f7dff9ff93cf66969288b4f7da9f333622309fa",
+  "source_sha256": {
+    "references/evidence/reference_image_history_learning_20261112.json": "e9754ac947d8a52a3d669b18d2fc88004f79a7ad54a92be2cd8bb1e1c62d9026",
+    "references/evidence/reference_image_history_review_20261112.json": "eeae0447e31d1bd135e45b6da3393e1ad97d8586da7856930306e6c43479457d",
+    "references/evidence/visual_continuation_preflight_20261112/execution_report.json": "5cab23c56792146ae6ac25d34efe00163ffeaf04fcde013545290953ab18fed7",
+    "references/evidence/visual_continuation_preflight_20261112/audit.json": "02e18af6f8dc5909ac782d9aa1cc8ec57868b7e4d0bbed020a68d1ad4d08688e",
+    "references/evidence/visual_continuation_preflight_registration_20261112.json": "bdfa0267d8450485ed960d7d02fc6048dc974501d764f6f36165c90d92f1ef07",
+    "references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+    "references/evidence/visual_continuation_full_launch_20261112.json": "a305eb3370ff923bd67118b889dc4823adc40ec9af7aa7eede6e61cac639c471"
+  },
+  "builder_sha256": "a1efe91b8b0219d20cf33f5b12ab9163014ff2659b52d3a573ae96da58b5fe24",
+  "label_formatter_sha256": "c4115a8bddc63b3ce439ac189c090c4fc406551c9262dfdc9ef220c538496092",
+  "charts": [
+    {
+      "title": "Mean F1 on shared indices",
+      "categories": [
+        "Fixed cells",
+        "Proportional"
+      ],
+      "series": [
+        {
+          "name": "Generated history",
+          "values": [
+            0.393464,
+            0.445851
+          ]
+        },
+        {
+          "name": "Reference history",
+          "values": [
+            0.614716,
+            0.912711
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Later writing with reference history",
+      "categories": [
+        "Fixed cells",
+        "Proportional"
+      ],
+      "series": [
+        {
+          "name": "Median F1",
+          "values": [
+            0.57384,
+            0.985185
+          ]
+        },
+        {
+          "name": "Fraction F1 ≥0.95",
+          "values": [
+            0.194951,
+            0.666199
+          ]
+        }
+      ]
+    }
+  ],
+  "tableValues": [
+    [
+      "Case",
+      "Prompt",
+      "Target"
+    ],
+    [
+      "Shortest QA",
+      "328",
+      "1"
+    ],
+    [
+      "Largest prompt",
+      "1,027",
+      "74"
+    ],
+    [
+      "Longest QA",
+      "695",
+      "184"
+    ],
+    [
+      "Longest book",
+      "128",
+      "513"
+    ]
+  ],
+  "nodes": [
+    {
+      "id": "prompt_pixels",
+      "shape_id": "10",
+      "label": "Prompt pixels X",
+      "trainable": false,
+      "position": {
+        "left": 80,
+        "top": 885,
+        "width": 195,
+        "height": 80
+      }
+    },
+    {
+      "id": "frozen_prefill",
+      "shape_id": "12",
+      "label": "Frozen image\nprompt prefill",
+      "trainable": false,
+      "position": {
+        "left": 325,
+        "top": 885,
+        "width": 230,
+        "height": 80
+      }
+    },
+    {
+      "id": "immutable_KV",
+      "shape_id": "14",
+      "label": "Prompt K,V\nfixed for each X",
+      "trainable": false,
+      "position": {
+        "left": 325,
+        "top": 1015,
+        "width": 230,
+        "height": 90
+      }
+    },
+    {
+      "id": "initial_query",
+      "shape_id": "16",
+      "label": "Learned\nstart query q",
+      "trainable": true,
+      "position": {
+        "left": 80,
+        "top": 1155,
+        "width": 195,
+        "height": 110
+      }
+    },
+    {
+      "id": "continuation",
+      "shape_id": "18",
+      "label": "36 frozen layers\n+ rank-8\nresiduals",
+      "trainable": true,
+      "position": {
+        "left": 325,
+        "top": 1155,
+        "width": 230,
+        "height": 110
+      }
+    },
+    {
+      "id": "writer_stop",
+      "shape_id": "20",
+      "label": "Readout R\nDecoder D\nStop",
+      "trainable": true,
+      "position": {
+        "left": 615,
+        "top": 1155,
+        "width": 170,
+        "height": 110
+      }
+    },
+    {
+      "id": "emitted_pixels",
+      "shape_id": "22",
+      "label": "Emitted\nbitmap I_t",
+      "trainable": false,
+      "position": {
+        "left": 615,
+        "top": 1300,
+        "width": 170,
+        "height": 80
+      }
+    },
+    {
+      "id": "image_feedback",
+      "shape_id": "24",
+      "label": "Frozen image\nencoder + S",
+      "trainable": false,
+      "position": {
+        "left": 325,
+        "top": 1300,
+        "width": 230,
+        "height": 80
+      }
+    }
+  ],
+  "links": [
+    {
+      "from": "10",
+      "to": "12",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "from": "12",
+      "to": "14",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "14",
+      "to": "18",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "16",
+      "to": "18",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "from": "18",
+      "to": "20",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "from": "20",
+      "to": "22",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "22",
+      "to": "24",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "from": "24",
+      "to": "18",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "native_charts": 2,
+  "native_tables": 1,
+  "chart_decimal_places": 6,
+  "full_precision_history": {
+    "fixed_cells": {
+      "first": {
+        "positions": 32,
+        "exact": 0,
+        "mean_f1": 0.479075773259679,
+        "median_f1": 0.45438596491228067,
+        "at_least_095": 1
+      },
+      "later": {
+        "positions": 713,
+        "exact": 59,
+        "mean_f1": 0.6241303889240363,
+        "median_f1": 0.5738396624472574,
+        "at_least_095": 139
+      },
+      "all": {
+        "positions": 745,
+        "exact": 59,
+        "mean_f1": 0.6178998550968424,
+        "median_f1": 0.5675146771037182,
+        "at_least_095": 140
+      },
+      "autonomous_shared": {
+        "positions": 738,
+        "exact": 11,
+        "mean_f1": 0.3934636072614565,
+        "median_f1": 0.41725355002872855,
+        "at_least_095": 23
+      },
+      "forced_shared": {
+        "positions": 738,
+        "exact": 56,
+        "mean_f1": 0.6147157687315712,
+        "median_f1": 0.55990391352217,
+        "at_least_095": 135
+      }
+    },
+    "proportional": {
+      "first": {
+        "positions": 32,
+        "exact": 4,
+        "mean_f1": 0.6583823546749501,
+        "median_f1": 0.6832523835222162,
+        "at_least_095": 7
+      },
+      "later": {
+        "positions": 713,
+        "exact": 251,
+        "mean_f1": 0.9264825742010891,
+        "median_f1": 0.9851851851851852,
+        "at_least_095": 475
+      },
+      "all": {
+        "positions": 745,
+        "exact": 255,
+        "mean_f1": 0.9149668600737919,
+        "median_f1": 0.9828571428571429,
+        "at_least_095": 482
+      },
+      "autonomous_shared": {
+        "positions": 598,
+        "exact": 35,
+        "mean_f1": 0.4458510966819512,
+        "median_f1": 0.42166292733856103,
+        "at_least_095": 55
+      },
+      "forced_shared": {
+        "positions": 598,
+        "exact": 200,
+        "mean_f1": 0.9127109727634665,
+        "median_f1": 0.9822375570256046,
+        "at_least_095": 379
+      }
+    }
+  },
+  "new_model_calls": 0,
+  "unmeasured_language_score_not_zero": true,
+  "semantic_alignment_claimed": false,
+  "preflight_not_language_evidence": true
+}

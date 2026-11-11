@@ -1,0 +1,123 @@
+{
+  "schema": "continuation-history-reviewed-native-figure-v1",
+  "PPT_sha256": "eeb04bef5e154532c4f8d0eca9a49947ac7208e57b600031fd93575aa1c83862",
+  "verifier_sha256": "793639a7d3c4d063c652dc7a15ed9c2389eb86ac76d1578bc7022a9158db5e17",
+  "binding_sha256": "8c93abefbe75342d324398813adc746c00922dee908dc06bbf42d3ef11c4e566",
+  "measured_data_sha256": "e3bce776d4629a957d7e59ae7f7dff9ff93cf66969288b4f7da9f333622309fa",
+  "native_charts": [
+    {
+      "part": "ppt/slides/charts/chart1.xml",
+      "workbook": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+      "series": 2,
+      "source_cache_literal_cells_match": true
+    },
+    {
+      "part": "ppt/slides/charts/chart2.xml",
+      "workbook": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+      "series": 2,
+      "source_cache_literal_cells_match": true
+    }
+  ],
+  "native_table_exact": true,
+  "native_table_values": [
+    [
+      "Case",
+      "Prompt",
+      "Target"
+    ],
+    [
+      "Shortest QA",
+      "328",
+      "1"
+    ],
+    [
+      "Largest prompt",
+      "1,027",
+      "74"
+    ],
+    [
+      "Longest QA",
+      "695",
+      "184"
+    ],
+    [
+      "Longest book",
+      "128",
+      "513"
+    ]
+  ],
+  "native_directed_connections": [
+    [
+      "continuation",
+      "writer_stop"
+    ],
+    [
+      "emitted_pixels",
+      "image_feedback"
+    ],
+    [
+      "frozen_prefill",
+      "immutable_KV"
+    ],
+    [
+      "image_feedback",
+      "continuation"
+    ],
+    [
+      "immutable_KV",
+      "continuation"
+    ],
+    [
+      "initial_query",
+      "continuation"
+    ],
+    [
+      "prompt_pixels",
+      "frozen_prefill"
+    ],
+    [
+      "writer_stop",
+      "emitted_pixels"
+    ]
+  ],
+  "native_chart_points": 8,
+  "six_decimal_native_labels": true,
+  "native_screenshot_objects": 0,
+  "prior_assets_preserved": 227,
+  "active_article_PDFs_unchanged": true,
+  "native_package_and_import_checks_pass": true,
+  "visual_QA_still_required": false,
+  "import_check_is_recorded_validation": true,
+  "new_ArtifactTool_import_performed": false,
+  "Office_export_verified": false,
+  "native_PowerPoint_application_opened": false,
+  "article_activation_and_full_build_pending": true,
+  "new_model_calls": 0,
+  "goal_achieved": false,
+  "recorded_unix": 1794429913.3957198,
+  "structural_audit_sha256": "402563cfd4c14adbf42d9491ee5825bb0d23965573a7221a1ca79b42536b2acc",
+  "native_validation_sha256": "3fb28deba9a0176c3f2480b9d264ee3d5d76c02c6c512c4dde410d87bb3ac99c",
+  "published_files_sha256": {
+    "figures/Continuation_history_figures.pptx": "eeb04bef5e154532c4f8d0eca9a49947ac7208e57b600031fd93575aa1c83862",
+    "figures/Figure_23_continuation_history.png": "ba18ac2464d8d37f3c711483ab6e2a5034beab849007080256e9a3214232380f",
+    "evidence/continuation_history_figure_bindings.json": "8c93abefbe75342d324398813adc746c00922dee908dc06bbf42d3ef11c4e566"
+  },
+  "source_files_sha256": {
+    "continuation_history_figures.mjs": "a1efe91b8b0219d20cf33f5b12ab9163014ff2659b52d3a573ae96da58b5fe24",
+    "format_continuation_history_chart_labels.py": "c4115a8bddc63b3ce439ac189c090c4fc406551c9262dfdc9ef220c538496092",
+    "verify_continuation_history_figure.py": "793639a7d3c4d063c652dc7a15ed9c2389eb86ac76d1578bc7022a9158db5e17",
+    "continuation_history_caption.tex": "bc9466374b69c0154aa6a504cd370c61cdfc6fd2b86fd8ffb775f58b056062e2"
+  },
+  "authoring_render_sha256": "9bb7216697c10f63853fd0c9f4dcaaab8afbd32ca08847beadafd041d08151bd",
+  "finalized_file_reimport_render_sha256": "ba18ac2464d8d37f3c711483ab6e2a5034beab849007080256e9a3214232380f",
+  "authoring_and_finalized_reimport_renders_actually_viewed": true,
+  "diagram_arrows_and_labels_visually_checked": true,
+  "chart_labels_table_and_no_clipping_visually_checked": true,
+  "builder_final_rasters_bit_exact": false,
+  "visual_QA_scope": "Artifact Tool authoring and actual finalized-PPTX reimport renders; vector Office export remains unverified.",
+  "Office_visual_QA_pending": true,
+  "Figure23_vector_PDF_created": false,
+  "staged_caption_not_activated": true,
+  "full_fit_quality_unmeasured": true,
+  "all_bound_complete_study_hashes_verified": true
+}

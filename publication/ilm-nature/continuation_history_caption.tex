@@ -1,0 +1,28 @@
+% Staged caption. Activate after vector Office export and matched article builds.
+\plate{Figure_23_continuation_history}{\textbf{Correct prior images improve canonical writing without qualifying autonomous language.}
+\textbf{a}, Mean foreground F1 at target indices present under both generated
+and supplied reference-image history: 738 fixed-layout and 598 proportional
+positions. Missing and extra autonomous positions remain in the complete
+records. Numeric index agreement does not align alternative semantic answers.
+Reference history supplies answer information and length, with stopping bypassed.
+\textbf{b}, Median later F1 and the fraction of later positions reaching 0.95,
+using all 713 later reference positions per layout. Both layouts fail the joint
+median/count gate. These canonical image metrics are not language accuracies.
+\textbf{c}, Implemented continuation computation. Frozen prompt prefill creates
+immutable prompt keys and values. The query and all 36 native answer layers
+continue from visible glyph images; new residuals, readout and stopping train,
+while the inherited body, image encoder/decoder and affine transform remain
+frozen. The stopping head is separate from decoded pixels. Only actually emitted
+images supply subsequent inputs; every answer layer is recomputed during fitting.
+\textbf{d}, Four complete preflight cases retain all 772 target positions and
+four terminal boundaries. Four real optimizer updates peak at 18.122546\,GiB
+allocated GPU memory. Independent audits check targets, optimizer states and
+numerical boundaries; prompt/frozen-body checks come from the registered GPU
+execution. Initial residual-down tensors were not archived in that preflight.
+The 7.522B inherited body and frozen interfaces remain deployed costs beyond
+the 20,212,225 trainable parameters. F1 chart cells and labels round to six
+decimals; complete precision remains in bound records. The supplied-history
+diagnosis and preflight do not change original whole-answer scores or assign
+a language score to the ongoing full fit. Reused development data and one model
+reviewer with prior familiarity lack independent human adjudication or untouched
+confirmation.}{fig:continuation-history}

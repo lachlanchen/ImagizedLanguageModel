@@ -13,6 +13,34 @@ at `0f14fa3f`. The
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
 and earlier baselines remain available for reproduction.
 
+## Staged continuation update
+
+The new [Figure 23](figures/Figure_23_continuation_history.png) has an
+[editable PowerPoint source](figures/Continuation_history_figures.pptx), two
+native charts, a native preflight table and a directed pixel-feedback diagram.
+Its complete-record values, literal workbooks and connections pass the
+[native audit](evidence/continuation_history_reviewed_native_figure.json).
+The finalized PPTX is re-imported and visually inspected in Artifact Tool;
+native PowerPoint-app review and vector Office export are unverified.
+
+The [staged Results](continuation_history_results.tex) and
+[Methods](continuation_history_methods.tex) describe the completed reference-image
+history study and the real 36-layer preflight. The three-page source check
+inspects five equations and preserves all 227 earlier assets. These are
+conditional-writing and feasibility results; the ongoing full fit has no
+language score. Its model and data remain unchanged.
+
+The active 35-page reading, 62-page review and 63-page redline PDFs still predate
+this staged update. Figure PDF export, article integration, full builds,
+redline verification and local package synchronization remain pending under the
+[revision plan](../../references/manuscript_continuation_history_revision_plan.md).
+The figure can be checked from repository files without a private authoring
+cache or model weights:
+
+```bash
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/verify_continuation_history_figure.py
+```
+
 ## Current result
 
 Both compact complete-sequence fits give **0/32 complete exact QA answers**

@@ -131,9 +131,25 @@ The [staged validation](../publication/ilm-nature/evidence/continuation_history_
 binds source hashes, rendering and numeric checks. This is a staged source check,
 not the final article layout.
 
-The active article inputs and all three current PDFs remain unchanged. Figure 23
-authoring, native/Office figure validation, article activation, full builds,
-cumulative redline, clean reproduction and local synchronization remain pending.
+Figure 23 native authoring is complete. The two native charts, their literal
+workbooks, the complete preflight table and all eight directed connections are
+checked against bound source data. Authoring and actual finalized-PPTX reimport
+renders are visually inspected. The first render's reversed arrowheads and
+overlong labels are corrected before acceptance; the final table names the
+longest QA case explicitly and the legend identifies its F1 threshold.
+Earlier candidates remain private. The published preview is the actual
+finalized-file reimport render, not an unexported authoring image. Those two
+renderer rasters are not asserted bit-exact. Native PowerPoint-app review is
+not claimed.
+
+The [reviewed native figure](../publication/ilm-nature/evidence/continuation_history_reviewed_native_figure.json)
+binds the verified deck, data, diagram and preview. A portable figure check
+reads public repository files rather than a private authoring cache.
+The caption is staged and not yet included in the article.
+
+The active article inputs and all three current PDFs remain unchanged. Vector
+Office export/validation, article activation, full builds, cumulative redline,
+clean reproduction and local synchronization remain pending.
 The registered full-corpus worker continues unchanged on GPU0. Resume this
 publication work from the bound evidence and staged TeX rather than repeating
 the completed diagnosis, preflight or source check.
