@@ -8,6 +8,26 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: actual-context conditional motor fitted and audited
+
+The next motor is implemented and registered before fitting. It conditions on
+authentic4096-dimensional reader states and predicts a distribution over the
+frozen decoder's1024 motor features. The24,477,696-parameter fit completes
+12,000 actual updates in109.485s at0.989GiB peak allocated GPU memory. It
+samples768,000 first and768,000 later targets from the existing3176-question
+training cache. FinalEMA only is eligible for the bound216-stream evaluation.
+The independent CPU audit verifies all optimizer steps, changed parameters,
+normalization, source labels and original parent identity. See the
+[fit result](../references/glyph_context_motor_fit_result.md).
+
+The initial attempt exits at step0 because the deterministic CUBLAS environment
+setting was omitted. No writer was loaded or update made. Its status/log and
+admission remain; the same registered recipe succeeds with the required setting.
+The fit does not establish language quality, copying fidelity or an efficiency
+advantage. Complete generation, opaque review and authenticated scoring before
+choosing the next intervention. The full independent usable-language goal
+remains unachieved.
+
 ## 11 November: first-writing audit completed; actual-context writer selected
 
 The registered CPU audit preserves all 192 original QA streams and bitwise

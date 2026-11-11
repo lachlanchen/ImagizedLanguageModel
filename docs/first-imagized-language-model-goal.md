@@ -140,17 +140,26 @@ of independent human adjudication remain disclosed. Reconstruction takes
 contextual-model call, optimizer update or new autonomous ILM image. Complete
 language scores remain unchanged.
 
-**Next required work: implement and register one actual-context conditional
-writer intervention, then finish its complete-response comparison.** The
+**Next required work: finish the registered actual-context writer's
+216-stream complete-response comparison.** The
 [bounded decision](../references/glyph_tail_context_writer_decision.md) keeps
 the inherited reader, adapters, encoder, neural decoder and stopping fixed.
 It tests a conditional distribution over the existing continuous motor
 features directly from actual reader states, using the authenticated 3,176
 first and 20,086 later training states. It bypasses the old predicted semantic
 point; synthetic semantic mixtures and this diagnostic's answers are excluded.
-This is a hypothesis, not a working model or an established failure cause.
-The exact implementation and sampler must be committed and registered before
-fitting; no fit is started by this decision record.
+This remains a hypothesis, not a qualified model or established failure cause.
+The [implementation/protocol](../references/glyph_context_motor_protocol.md)
+and all 216 inputs are committed and registered before fitting. The
+[fit](../references/glyph_context_motor_fit_result.md) is complete: 24,477,696
+parameters, 12,000 actual updates, 768,000 first and 768,000 later target
+exposures, 109.485 seconds and 0.989 GiB peak allocated GPU memory. Independent
+CPU audit verifies every optimizer parameter step and unchanged training-only
+normalization. A zero-update launch failure from an omitted deterministic
+CUBLAS setting is preserved separately; the same recipe succeeds with the
+required setting. The full inherited reader is not loaded during head fitting.
+Language quality remains unmeasured for this candidate. Do not rerun the fit
+or select a checkpoint/seed from development output.
 
 The candidate must face all current complete QA/control streams and book
 prefixes. The prospectively chosen development pilot requires at least 8/32

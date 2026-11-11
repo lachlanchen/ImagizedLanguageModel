@@ -55,9 +55,12 @@ All first forms are covered; supplied reconstruction is 31/32 pixel-exact.
 Pixel mismatch is not character/semantic error, and complete language scores
 remain unchanged. Do not repeat this audit as pending work.
 
-Follow the goal's actual-context conditional-writer decision next. Implement
-and register it before fitting; reuse authenticated training-state caches and
-keep helper/development answers excluded. Preserve the reader, adapters,
+The actual-context conditional motor is implemented, registered and fitted:
+24.478M parameters,12,000 verified updates in109.485s at0.989GiB peak allocated
+GPU memory. Its independent CPU optimizer audit passes. Keep the zero-update
+CUBLAS admission failure and successful same-recipe retry. Do not refit or
+interpret finite loss as language. Complete the registered216-stream
+generation, raw-output review and scoring next. Preserve the reader, adapters,
 encoder, decoder, stop predictor and unchanged complete-response controls.
 Earlier synthetic semantic flows and balanced deterministic fitting already
 failed relevant gates; a new flow is a hypothesis, not a successful solution.
