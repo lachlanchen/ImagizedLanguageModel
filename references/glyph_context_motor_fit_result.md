@@ -39,3 +39,15 @@ and cold runtime reproduction remain unmeasured for this candidate. The
 unchanged actor's 6/32 proportional exact answers are still the current
 language result. Finish the registered 216-stream comparison before choosing
 another model change or drawing a learning-quality trend in the manuscript.
+
+The first generation launch also stops during setup, after74.902seconds and
+before any answer or prefill is produced: tensors constructed under PyTorch
+inference mode do not expose the parameter version counters used by the
+frozen-weight audit. The correction constructs modules under `no_grad` and
+runs generation under `inference_mode`. Four numerical/runtime tests pass,
+including this version-counter path. The
+[explicit execution amendment](evidence/glyph_context_motor_execution_recovery_20261111.json)
+binds the changed runner source, retains the failed attempt and fixes all
+weights, sampler, inputs, stopping and pilot criteria. No quality result or
+optimizer update motivates the correction. Include this failed setup in
+subsequent cost reporting; it is not a generated-answer result.
