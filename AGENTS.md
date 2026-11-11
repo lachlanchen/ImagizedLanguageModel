@@ -8,6 +8,13 @@ Note on precedence: If direct system/developer/user instructions conflict with t
 
 For model development and publication work, read the current acceptance criteria
 and experiment decision in [the engineering goal](docs/first-imagized-language-model-goal.md).
+Before starting another model experiment, identify the unresolved language
+measurement it will address and check the current GPU owner and saved progress.
+Prioritize completion and held-out evaluation of the registered full-sequence
+experiment. Keep copying, codec fidelity, language quality and resource savings
+as distinct claims. Record new evidence and the next decision in the goal and
+private runtime handoff; keep the goal active while its acceptance criteria
+remain unproved.
 
 ## Always Commit and Push After Change
 

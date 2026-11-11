@@ -1,10 +1,18 @@
 # Natural first-image writer experiment
 
-This is an ongoing repair experiment. It expands real first-image training
+This is a secondary repair experiment. It expands real first-image training
 after stronger training-set fitting and broad synthetic transfer both fail to
 improve useful writing. It has not established a robust language model or a
 matched-quality efficiency advantage. The deployed research checkpoint remains
 unchanged while this experiment runs.
+
+The cache was deliberately interrupted at a committed shard boundary to give
+the [compact complete-sequence experiment](compact-visual-span-model.md) the
+GPU. Its 247 completed shards retain 15,808 of 30,030 input states. Every
+retained shard hash was verified after the worker exited; no unindexed shard
+remained. Fitting and qualification have not run. The terminal cache attempt
+records `KeyboardInterrupt()`, and its original controller exited. This is a
+scheduling decision, with no language verdict for the unfinished experiment.
 
 The prepared dataset contains 30,030 complete prompt images from the pinned
 CMRC training partition: 27,099 training images from 9,033 questions and 2,132
@@ -37,6 +45,13 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export PYTHONPATH=.
 python scripts/cache_natural_first_states.py --stage cache
 ```
+
+The same cache command resumes the retained prefix after the compact pipeline
+releases the GPU. It verifies the frozen preparation and shard identities and
+creates a new attempt. Continue with the three explicit commands below after
+the cache completes. Preserve the original controller's terminal logs; its
+existing `pipeline/` directory cannot be reused by the controller's new-run
+entry point.
 
 Run preparation first only for a new run, using
 `CUDA_VISIBLE_DEVICES='' python scripts/cache_natural_first_states.py --stage prepare`
@@ -142,7 +157,7 @@ repairing them from the questions or references. Only then use that unchanged
 reviewer's `--stage score`. The registration links both reviews and preserves
 canonical equality, clear literal readings, natural stopping and caps as
 separate measures. None of these new 36,000-update inference/answer stages has
-yet run: the real-state cache is still in progress.
+yet run: the real-state cache is incomplete and retained for later resumption.
 
 After all 72 candidate streams finish and the project GPU worker exits, run
 the separate standalone verifier with CUDA hidden in its parent process:
