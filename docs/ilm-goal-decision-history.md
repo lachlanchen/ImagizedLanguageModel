@@ -17,7 +17,7 @@ frozen decoder's1024 motor features. The24,477,696-parameter fit completes
 samples768,000 first and768,000 later targets from the existing3176-question
 training cache. FinalEMA only is eligible for the bound216-stream evaluation.
 The independent CPU audit verifies all optimizer steps, changed parameters,
-normalization, source labels and original parent identity. See the
+normalization, bound training inputs and original parent identity. See the
 [fit result](../references/glyph_context_motor_fit_result.md).
 
 The initial attempt exits at step0 because the deterministic CUBLAS environment

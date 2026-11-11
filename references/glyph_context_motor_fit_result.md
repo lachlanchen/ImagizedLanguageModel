@@ -24,9 +24,10 @@ a changed training recipe. The
 [recovery receipt](evidence/glyph_context_motor_admission_recovery_20261111.json)
 preserves that distinction.
 
-The [independent CPU audit](../scripts/audit_glyph_context_motor_fit.py) checks
-the actual final and previous checkpoints, all optimizer parameter steps,
-both source label orderings, every changed parameter tensor, finite fitted
+Preparation checks both source label orderings against the original training
+jobs. The [independent CPU audit](../scripts/audit_glyph_context_motor_fit.py)
+authenticates those bound training inputs and checks the actual final and
+previous checkpoints, all optimizer parameter steps, every changed parameter tensor, finite fitted
 and EMA parameters, exact training-only normalization and the unchanged
 parent checkpoint. Final EMA weights alone are eligible for generation.
 The [complete execution evidence](evidence/glyph_context_motor_fit_20261111.json)
