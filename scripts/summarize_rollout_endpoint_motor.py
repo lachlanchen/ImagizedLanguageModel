@@ -86,6 +86,11 @@ def main(reviewed=False):
         visual_review_complete=reviewed,independent_human_adjudication=False,
         canonical_pixel_agreement_not_language_accuracy=True,full_language_generation_run=False)
     if reviewed:
+        # Keep raw process/session arguments in the private assessment receipt.
+        admission=dict(value['admission']);inventory=admission.pop('project_processes',[])
+        admission['project_process_inventory_count']=len(inventory)
+        admission['raw_process_arguments_retained_privately']=True
+        value['admission']=admission
         value['visual_review']=dict(boards_viewed=8,original_displayed_tiles=512,
             reviewer='Model-based labelled review with prior cohort familiarity',
             whole_language_quality_unmeasured=True)
