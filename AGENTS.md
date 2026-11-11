@@ -42,13 +42,17 @@ QA, 11/32 readable answers and 0/16 both-correct pairs, versus 2/32, 3/32 and
 registered retention rule fails. All 96 outputs, scoring and fixed cold replay
 are complete. Preserve both presentations and their unrepaired outputs.
 
-Before another fit, register the helper-only native-reader diagnosis in the
+Before another fit, finish the registered helper-only native-reader diagnosis in the
 goal: the same full QA prompts and erased controls in both presentations,
 with actual adapted versus zero-output source adapters and separate complete
 text controls. Match adapted image prefills to the actual actor's saved state.
 Keep the source lexical decoder outside the ILM; no helper answer or development
 reference becomes training data. Finish this measurement before choosing a
-training branch. Reuse completed assets and inspect prior semantic-glyph-loop
+training branch. The 448-call registration and CPU preparation are complete;
+the serial execution has started, with quality results pending. Check the
+private handoff and live process identity before resuming or starting work.
+An observation timeout does not authorize restarting a live worker.
+Reuse completed assets and inspect prior semantic-glyph-loop
 results before repeating a failed approach. A failed strict canonical match
 does not authorize repairing the reading or substituting a post-hoc metric.
 

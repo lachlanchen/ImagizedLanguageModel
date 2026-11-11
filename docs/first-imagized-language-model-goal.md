@@ -87,16 +87,22 @@ paired decrease is 6.25 points with an interval of minus 18.75 to zero.
 This reused development cohort supplies no untouched confirmation. Font,
 spacing and wrapping change together, so the cause is not isolated further.
 
-**Next required work: register the helper-only native-reader diagnosis before
-another fit.** The [bounded decision](../references/glyph_tail_native_reader_decision.md)
+**Current required work: finish the registered helper-only native-reader
+diagnosis before another fit.** The [bounded decision](../references/glyph_tail_native_reader_decision.md)
 compares all 32 questions and 64 erased controls in both presentations, with
 and without the learned tail adapters, plus the same complete text prompts:
 384 image and 64 text calls (448 total). Adapted image prefills must reproduce
 the actual glyph actor's first saved contextual states bit-for-bit. The source lexical
 decoder and previous-symbol lookup are temporary diagnostic tools outside
 the ILM. Their outputs and development answers must not become training data
-or deployed answers. Register source identities, scoring and resource limits
-before execution; this diagnostic is not yet implemented or run.
+or deployed answers. The [protocol](../references/glyph_tail_native_reader_protocol.md)
+and [448-call registration](../references/evidence/glyph_tail_native_reader_registration_20261111.json)
+are committed. CPU preparation authenticates all 192 original image prefills;
+the serial GPU diagnosis has started. Complete generation and independent CPU
+scoring remain pending. Early exact state checks verify execution, not useful
+native answering or usable ILM language. Inspect the private runtime handoff
+and live owner before resuming; do not launch a duplicate or infer termination
+from an observation timeout.
 
 Useful native image answers with damaged glyph output direct the next bounded
 intervention toward writing/feedback. Better unadapted than adapted native

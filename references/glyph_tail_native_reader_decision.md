@@ -71,6 +71,10 @@ student training. None of these helper outcomes qualifies the ILM itself.
 Inspect the completed semantic-glyph-loop and compact frozen diagnostics
 before repeating a writer or alignment recipe.
 
-Status: next decision recorded. This diagnostic has not been implemented,
-registered or run. The independent image-input/image-output language goal
+Status: the [implementation protocol](glyph_tail_native_reader_protocol.md)
+and [448-call registration](evidence/glyph_tail_native_reader_registration_20261111.json)
+are committed. CPU preparation authenticates 192 actual actor prefills;
+serial model execution has started. Complete generation and independent
+scoring remain pending. Early state checks do not qualify language or a
+training repair. The independent image-input/image-output language goal
 remains unachieved.

@@ -8,6 +8,33 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: actual-prefill reader diagnosis registered and started
+
+The helper-only implementation now registers all 448 calls: 384 image calls
+covering both presentations, three input conditions and two tail conditions,
+plus 64 complete-text controls. CPU preparation extracts 192 first contextual
+states from authenticated original glyph-generation archives. The registered
+model run must reproduce each adapted image prefill bit-for-bit before its
+native decoding is interpreted. The source vocabulary projection and
+previous-symbol lookup remain temporary helper variables outside the ILM.
+There are no new image answers or optimizer updates.
+
+The source projection uses ascending 4,096-row BF16-head chunks with FP32
+contractions and smaller-ID tie breaking. A CPU chunk-boundary check agrees
+with an unchunked calculation and guards each temporary chunk. This is a
+numerical execution check, not language evidence. The complete CPU scorer
+authenticates raw IDs, decoded text, states, stopping and all denominators,
+then retains the unchanged strict QA/pair measures and matched glyph controls.
+
+The registered serial GPU run has started under the existing mutex and
+resource limits. Complete generation and independent scoring are pending;
+inspect the live owner in the private handoff before resuming. Do not infer a
+language outcome from early state matches or incomplete responses. The
+independent language goal remains active. See the
+[prospective protocol](../references/glyph_tail_native_reader_protocol.md) and
+[registration](../references/evidence/glyph_tail_native_reader_registration_20261111.json).
+The planned manuscript revision remains unexecuted.
+
 ## 11 November: full-prompt presentation gains fail answer retention
 
 The frozen proportional-input comparison completes all 32 QA prompts and 64
