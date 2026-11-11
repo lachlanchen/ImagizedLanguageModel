@@ -54,3 +54,19 @@ The verifier saves the invocation, child log, raw access traces, exact replay
 outputs and verification receipt. An existing destination is preserved. Unit
 checks exercise deep sampled-noise mismatches and directory-relative syscall
 paths; those checks do not substitute for the actual GPU replay.
+
+The first actual replay completes its selected book stream and reproduces all
+nested tensors and PNG bytes, but fails the access gate. The common training
+admission calls `owner_gone`, opening an old trainer's `status.json` and
+`events.jsonl`. They are ownership metadata, but remain forbidden project
+training artifacts under this protocol. Keep that attempt and its failed
+verification; do not exempt those paths to pass the audit.
+
+The standalone entry point now uses the same GPU mutex,48GiB entry reserve,
+24GiB runtime reserve,20GiB free-device entry and22GiB allocation ceiling,
+checking live processes and memory pressure instead of old training ledgers.
+Only standalone admission changes; the candidate weights, image preparation,
+sampler, seed, stopping, feedback and all216 completed streams are preserved.
+Repeat the same fixed case into a new destination
+`artifacts/glyph_context_motor_cold_v2`. A completed retry still needs its full
+access/pixel audit before being described as passed.

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Standalone image-to-image motor inference; no training manifest or glyph bank."""
 import argparse
+from contextlib import contextmanager
+import fcntl
+import os
 from pathlib import Path
+import subprocess
 import time
 
 import numpy as np
@@ -10,14 +14,46 @@ import torch
 from ilm.image_edit.baseline import ROOT, save_json, sha
 from ilm.visual_lm.context_motor_flow import ContextMotorFlow, ContextMotorBridge
 from ilm.visual_lm.glyph_reader_monitor import GlyphReaderMonitor
-from ilm.visual_lm.glyph_runtime_resources import full_reader_gpu
 from scripts.infer_glyph_tail_language import load_actor, prepare_prompt
 from scripts.infer_compact_visual_span import save_grid
 from scripts.train_semantic_glyph_bridge import atomic_tensor
 from scripts.train_semantic_glyph_language import numerics
-from scripts.score_pixel_language_first_blocks import require
+from scripts.score_pixel_language_first_blocks import host_resources, require
 
 PARENT_SHA = '5c434a9a9b0c6ddc0c3fe4005265e4f8ca5b7d0add9a74a80ed371806fa71085'
+
+
+@contextmanager
+def standalone_reader_gpu():
+    """Keep full-reader reserves using live resources, without training ledgers.
+
+    The shared training admission reads a terminal trainer's status/event files.
+    Cold inference must instead establish ownership from the mutex and live
+    process/device inventory. Numerical execution and resource ceilings match
+    the registered full-reader stages; their original admission is unchanged.
+    """
+    from scripts.train_semantic_glyph_bridge import project_processes
+    require(os.environ.get('CUDA_VISIBLE_DEVICES') == '0', 'Physical GPU0 only')
+    with (ROOT/'artifacts/ilm_gpu0.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        entry = host_resources()
+        require(entry['available_gib'] >= 48., 'Standalone reader RAM entry reserve unavailable')
+        require(entry['some_pressure_avg10'] <= .5 and entry['full_pressure_avg10'] <= .1,
+                'Standalone reader memory pressure entry limit')
+        inventory = project_processes()
+        obsolete = [p for p in inventory if any(s in p['command'] for s in
+            ('Xvfb ', 'x11vnc ', 'websockify ', 'train_pixel_language_diversity.py --stage run'))]
+        require(not obsolete, 'Inspect project runtimes before standalone admission')
+        free = int(subprocess.check_output(['nvidia-smi', '-i', '0', '--query-gpu=memory.free',
+                                           '--format=csv,noheader,nounits'], text=True).strip())
+        require(free >= 20*1024, 'GPU0 needs20GiB free before standalone loading')
+        torch.set_num_threads(4); torch.cuda.set_device(0); torch.cuda.reset_peak_memory_stats()
+        yield torch.device('cuda:0'), dict(entry=entry, project_processes=inventory,
+            mode='standalone_live_inventory_no_training_ledger', minimum_entry_available_gib=48.,
+            minimum_runtime_available_gib=24., maximum_allocated_vram_gib=22.,
+            high_global_swap_occupancy_recorded=entry['swap_fraction'] > .75,
+            training_status_or_events_opened=False, original_training_admission_unchanged=True,
+            foreign_processes_changed=False)
 
 
 def main():
@@ -41,7 +77,7 @@ def main():
         canvas, observation = prepare_prompt(args.image)
         prompt = torch.from_numpy(np.asarray(canvas).copy()).float()[None, None]/127.5-1
         canvas.save(args.output/'observed_prompt.png')
-        with full_reader_gpu() as (device, admission), torch.no_grad():
+        with standalone_reader_gpu() as (device, admission), torch.no_grad():
             monitor.admission = admission; numerics(); torch.set_num_threads(2); monitor.guard()
             began = time.perf_counter()
             actor, provenance = load_actor(args.parent_checkpoint, device)

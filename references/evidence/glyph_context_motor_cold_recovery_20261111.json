@@ -1,0 +1,27 @@
+{
+  "schema": "glyph-context-motor-cold-recovery-v1",
+  "fixed_case": "fixed_cells__book_01_normal",
+  "first_attempt_status_sha256": "173b5ba277ace817b80f1d84ba1a578040020e05dfed62185ca4e3dfd8bd0679",
+  "first_attempt_inference_report_sha256": "4540400eb615586309d7846dfceed0d23706e8a2d9d5d53d97906535c31b3068",
+  "first_attempt_pixel_check_sha256": "0d77a73bf909d383074f69666d4ad30e17c9877fe7b045374fb12260e702617e",
+  "all_original_nested_values_and_PNG_bytes_equal": true,
+  "access_audit_passed": false,
+  "forbidden_opens": [
+    "artifacts/pixel_language_diversity_training_v2/execution/status.json",
+    "artifacts/pixel_language_diversity_training_v2/execution/events.jsonl"
+  ],
+  "cause": "Shared bridge_gpu admission calls owner_gone on a terminal training ledger.",
+  "repair": "Standalone admission uses live processes, GPU mutex, actual free memory and PSI; no training-ledger access. Original training/generation admission unchanged.",
+  "same_input_weights_seed_sampler_stop_feedback_and_cap_required": true,
+  "earlier_failed_attempt_preserved": true,
+  "retry_destination": "artifacts/glyph_context_motor_cold_v2",
+  "retry_completed": false,
+  "language_quality_qualified": false,
+  "resources": {
+    "elapsed_seconds": 125.883654772304,
+    "actor_loading_seconds": 93.04491657949984,
+    "complete_generation_seconds": 32.09181421902031,
+    "peak_allocated_vram_gib": 17.7476863861084,
+    "resource_wait_seconds": 0.0
+  }
+}
