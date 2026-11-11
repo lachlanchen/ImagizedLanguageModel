@@ -25,6 +25,13 @@ body and codec remain frozen during this fit, so training adapts inherited
 weights to visual writing. See the [visual sequence corpus](visual-sequence-training.md)
 and [teacher cache](visual-sequence-teacher-states.md).
 
+An audit of the actual training schedule found nine groups of identical
+span pixels with different source targets. Their minimum contribution to
+relative squared feedback error is 0.0007492. The calculation uses all
+8,172 scheduled batches and the trainer's loss weights. It records the
+unavoidable alias error for interpreting this auxiliary loss. See the
+[identifiability calculation](../references/visual_feedback_identifiability_result.md).
+
 ## Verified interfaces
 
 A CPU check used one complete book record with 50 glyphs and 46 spans. All
