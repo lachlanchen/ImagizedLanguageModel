@@ -24,16 +24,24 @@ All 64 development first images are reused without resampling; many errors
 already occur before generated-history feedback. Canonical pixel mismatch
 remains distinct from character/semantic error.
 
-The [next bounded intervention](../references/decoder_aware_motor_decision.md)
-tests a late-time decoded-image loss with the existing continuous flow, frozen
-neural decoder and unchanged data/exposure. The loss and paired trainer are
-implemented; register their source/data identities before fitting. First
-test the same 128 physical positions; only if both training
-writing gates pass, run all 216 language streams with the stronger registered
-retention pilot. No new fit has run yet. This physical repair is a hypothesis,
-not a solution to the development transfer gap, input-reading brittleness or
-stopping failures. Preserve the substantial corpus for later complete-sequence
-learning; do not assume that more books or sharper glyphs alone establish it.
+The [late-time decoded-image objective](../references/decoder_aware_motor_result.md)
+is implemented, registered, fitted and rejected under its fixed physical
+gates. All 12,000 updates, paired initialization, exposure and final CPU/CUDA
+random states are verified. The fit takes 130.299 seconds at 1.169 GiB.
+First/later training median F1 is 0.987034/0.976561, with 32/32 and 23/32 at
+least 0.95. All 128 positions, 512 displayed tiles and normalized motor scores
+are independently recounted and reviewed. The assessment takes 22.577 seconds
+at 0.311 GiB. No full language generation is run because its prerequisite
+gates fail. Do not tune or resample it, or call small tile gains language.
+
+Next, incorporate these completed comparisons into the
+[bounded manuscript/figure revision](../references/manuscript_motor_diagnostics_revision_plan.md),
+preserving the verified current PDFs. Before another fit, make a different
+bounded decision addressing realized conditional endpoints rather than
+extending the failed local loss. Initial writing, transfer, native reading
+and stopping remain distinct unresolved parts. Preserve the substantial
+corpus for complete-sequence learning; neither more books nor sharper glyphs
+alone establishes that capability.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
