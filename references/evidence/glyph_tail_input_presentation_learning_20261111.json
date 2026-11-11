@@ -1,0 +1,1053 @@
+{
+  "schema": "frozen-glyph-input-presentation-analysis-v1",
+  "registration_sha256": "4c2bb2c84c5bbbb93f2b4f3caea7c4ae16bcc131ebea3ce0815081601c7cf8ec",
+  "generation_report_sha256": "ca529f67629caa5dcab1955b9913a55147e95efce13ef8beba0883482fe517ca",
+  "checkpoint_sha256": "5c434a9a9b0c6ddc0c3fe4005265e4f8ca5b7d0add9a74a80ed371806fa71085",
+  "rendering_audit_sha256": "4918040a07de74c78ede203e4955b062618812f046a467b171c0d704f0f38e0e",
+  "references_sha256": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+  "input_manifest_sha256": "fed2abb039972ccc361414e28a2196483b68aeb4969d5e2fea9bc634dbd31b8a",
+  "original_control_registration_sha256": "04f36b3c581f162ca93aa775ffb33d5234e313337d0e0ee929199c0e2044d247",
+  "scores_sha256": "fe4582aff684491753ae4f26704ae9d9eae13deb13a41fb28f94af6695cce451",
+  "readings_sha256": "c0322b0f81a364738397b4dfe95238cddc3231a03ec7e0584159ce3c99d0820e",
+  "review_audit_sha256": "bcc9cb953b30472f9fce4d29d938b3f64d36e22690e1ccae64d65c84214c1262",
+  "cold_verification_sha256": "01d3b171da7d3b6c8ea775a4d2d0bb92c335861d56bec35740c42e5e9de21c58",
+  "metrics": [
+    {
+      "step": 18000,
+      "condition": "normal",
+      "metric": "qa_complete_exact",
+      "count": 6,
+      "cases": 32,
+      "mean": 0.1875,
+      "ci95": [
+        0.0625,
+        0.3125
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "step": 18000,
+      "condition": "normal",
+      "metric": "qa_both_correct",
+      "count": 0,
+      "cases": 16,
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "step": 18000,
+      "condition": "passage_blank",
+      "metric": "qa_complete_exact",
+      "count": 0,
+      "cases": 32,
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "step": 18000,
+      "condition": "passage_blank",
+      "metric": "qa_both_correct",
+      "count": 0,
+      "cases": 16,
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "step": 18000,
+      "condition": "question_blank",
+      "metric": "qa_complete_exact",
+      "count": 0,
+      "cases": 32,
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "step": 18000,
+      "condition": "question_blank",
+      "metric": "qa_both_correct",
+      "count": 0,
+      "cases": 16,
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    }
+  ],
+  "paired_differences": [
+    {
+      "comparison": "normal_minus_question_blank",
+      "metric": "qa_complete_exact",
+      "mean": 0.1875,
+      "ci95": [
+        0.0625,
+        0.3125
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "comparison": "normal_minus_passage_blank",
+      "metric": "qa_complete_exact",
+      "mean": 0.1875,
+      "ci95": [
+        0.0625,
+        0.3125
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "normal",
+      "metric": "qa_complete_exact",
+      "mean": 0.125,
+      "ci95": [
+        0.0,
+        0.25
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "question_blank",
+      "metric": "qa_complete_exact",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "passage_blank",
+      "metric": "qa_complete_exact",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 32
+    },
+    {
+      "comparison": "normal_minus_question_blank",
+      "metric": "qa_both_correct",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "comparison": "normal_minus_passage_blank",
+      "metric": "qa_both_correct",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "normal",
+      "metric": "qa_both_correct",
+      "mean": -0.0625,
+      "ci95": [
+        -0.1875,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "question_blank",
+      "metric": "qa_both_correct",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    },
+    {
+      "comparison": "proportional_minus_fixed_cells",
+      "condition": "passage_blank",
+      "metric": "qa_both_correct",
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "groups": 16,
+      "observations": 16
+    }
+  ],
+  "normal_output_counts": {
+    "cases": 32,
+    "stopped": 19,
+    "capped": 13,
+    "empty": 0,
+    "readable": 11
+  },
+  "retention": [
+    {
+      "case": "qa_05_b_normal",
+      "old_reading": {
+        "text": "大广弦、台湾月琴、台湾品仔",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "new_reading": {
+        "text": "大广弦、台湾月琴、台湾品仔",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "old_complete_exact": false,
+      "new_complete_exact": false,
+      "readable_case_retained": true,
+      "original_readable_core_retained": true
+    },
+    {
+      "case": "qa_09_a_normal",
+      "old_reading": {
+        "text": "169平方公里",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "new_reading": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "old_complete_exact": true,
+      "new_complete_exact": false,
+      "readable_case_retained": false,
+      "original_readable_core_retained": false
+    },
+    {
+      "case": "qa_09_b_normal",
+      "old_reading": {
+        "text": "湖南省长沙县中南部",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "new_reading": {
+        "text": "湖南省长沙县中南部",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "old_complete_exact": true,
+      "new_complete_exact": true,
+      "readable_case_retained": true,
+      "original_readable_core_retained": true
+    }
+  ],
+  "decision_conditions": {
+    "exact_QA_increases": true,
+    "both_correct_pairs_increase": false,
+    "complete_readability_increases": true,
+    "original_exact_answers_retained": false,
+    "original_readable_cases_retained": false,
+    "original_readable_core_retained": false,
+    "normal_QA_caps_do_not_increase": true
+  },
+  "retain_adapter_development_rule_passed": false,
+  "all_condition_counts": [
+    {
+      "step": 18000,
+      "kind": "qa",
+      "condition": "normal",
+      "cases": 32,
+      "readable": 11,
+      "stopped": 19,
+      "complete_exact": 6,
+      "paired_both_correct": 0,
+      "coherent_complete": null
+    },
+    {
+      "step": 18000,
+      "kind": "qa",
+      "condition": "passage_blank",
+      "cases": 32,
+      "readable": 0,
+      "stopped": 3,
+      "complete_exact": 0,
+      "paired_both_correct": 0,
+      "coherent_complete": null
+    },
+    {
+      "step": 18000,
+      "kind": "qa",
+      "condition": "question_blank",
+      "cases": 32,
+      "readable": 0,
+      "stopped": 10,
+      "complete_exact": 0,
+      "paired_both_correct": 0,
+      "coherent_complete": null
+    }
+  ],
+  "frozen_review": {
+    "boards_viewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "images_reviewed": 96,
+    "board_files_sha256": {
+      "board_01.png": "57dfdf59731a3e5b9d368ea918919cea09b7370267eb9b997bbd4337bd8cdaf8",
+      "board_02.png": "9711cff0f00d40706e5915de21bae3d0a5122e289683be9ae2a003396863b494",
+      "board_03.png": "657211a6afe2e30bb462d429f93d45813c159988ec3a619a6cc5b59c333f31be",
+      "board_04.png": "d3d020f87d4a351227258d19fb4519a11f14d7cd126a590d281005cdc3d8e2b9",
+      "board_05.png": "98bcc283a0c53afd8fb352109edc19e5bbc2108510cf083a9d38fc84aab3e542",
+      "board_06.png": "67dd44ac1853af9606b73fa70d2d597f6aeefa338537ae47d8d27983db8d7a6b",
+      "board_07.png": "9e15bbc79c636b72aabd1d148aa373b0ac8936b0f84b38e47a7c503362b395ea",
+      "board_08.png": "d2bbb39821086bc7eb275e86ff7506dedf2a3d3057b8aad37ed851f4bbe285d3"
+    },
+    "notes": {
+      "1": "All nonblank; damaged short marks/forms and long repeated sequences have uncertain whole readings.",
+      "2": "All nonblank; mixed Chinese/Latin row examined enlarged, but multiple Latin glyph identities remain ambiguous. Other rows also uncertain.",
+      "3": "Clear location,1972年4月1日 and45名. Enlarged sentence contains unresolved altered glyphs and cannot be transcribed confidently in full. Other rows uncertain.",
+      "4": "Clear第一位 and1189年. Enlarged complex/partial glyphs and long repeating rows uncertain.",
+      "5": "Clear英格兰东南部. Short four-glyph row examined enlarged, but its first/third identities remain unresolved. Other rows uncertain.",
+      "6": "Clear full Hong Kong location. Two other short rows and the four-glyph row examined enlarged; damaged forms prevent complete confident readings. Long rows uncertain.",
+      "7": "Clear属都湖、碧塔海和高原牧场等 and中国致公党, confirmed enlarged. Personal-name list examined enlarged has unresolved glyph identities. Other short and long forms uncertain.",
+      "8": "Clear大广弦、台湾月琴、台湾品仔 and8.54万人, confirmed enlarged. Other five pages have unresolved whole readings."
+    },
+    "readings_sha256": "c0322b0f81a364738397b4dfe95238cddc3231a03ec7e0584159ce3c99d0820e",
+    "frozen_unix": 1794384336.2016053,
+    "mapping_opened_during_review": false,
+    "references_opened_during_review": false,
+    "previous_cohort_and_output_familiarity": true,
+    "presentation_specific_IDs": true,
+    "all_display_and_original_hashes_verified": true,
+    "frozen_before_reference_scoring": true,
+    "whole_response_readable_count": 11,
+    "nonblank_outputs_uncertain": 85,
+    "blank_outputs": 0,
+    "independent_human_adjudication": false
+  },
+  "readings": {
+    "evaluator": "Codex model visual review of presentation-specific opaque raw images; prior cohort and fixed-cell output familiarity; no independent human adjudication",
+    "readings": {
+      "0562427c16fb72780757": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "0699ec1f830d6e6302a1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "07a6667c6813799d1b0e": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "08b6f1215c3f7c91a47d": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "08ba0740fcffacfec16d": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "0d8440f490262b6ba36c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "0f2b8bd3f37107cb348c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "10f138058d0ca2f6afdf": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "117cbd20ed1d59ecff11": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "14199dbe2f6cfc3b6477": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "145db1328baa4679c246": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "16c73195b259ca5dc7f1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "16e5b238e10ed4c5910f": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "1adb79af6e055daa527b": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "1c45183bf3a6aa84b769": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "2026a7fb76c49451f716": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "20e3ae9930300258d1a4": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "234c892406a9bc10ed20": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "23d1ab52ad01f2f4238d": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "2542a66065adaf226116": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "283a05dcc27a824439db": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "296ae8d92ebca490a079": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "2b4957f03ece6a514dc9": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "2bbe21b3b4c7e2abec32": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "2e7319210b41e074f25a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "31550cb8612c886b5bde": {
+        "text": "湖南省长沙县中南部",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "34030466faf72ae492aa": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "3583f9c5630f3864376a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "36eb40f39681d9b67b9e": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "38429843cab7de99d331": {
+        "text": "1972年4月1日",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "38b9e01cb8a1f41cb3a3": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "395e205c4bf8df79aeed": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "39bf7d0cfde3a25bd996": {
+        "text": "45名",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "3b8c3484c4eb75e07b60": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "4505ad991d8d087cd3d1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "46fd1204b941ecf872bc": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "490fcb2943e54eb0b940": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "4a52def48e977c79912a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "5235ebc9d1387d003ef0": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "54890d6abb1135a2f08c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "581020a83514414e9bb9": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "59573f14823e6c09c73d": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "5b16c9f43a29571ea810": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "60d52a5abc5cf7728a98": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "63a3caa7f6164e9c8321": {
+        "text": "第一位",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "65c59d7351212f9e95d8": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "6aeef3e47145f1f356e2": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "6b3025cf4f93ee8ca189": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "6d35849c82aae5a75da3": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "726b683a5e4062e12c78": {
+        "text": "1189年",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "775c33905f81e735be10": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "7b28560c4a98716125b0": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "7c3bdac1185ebe2b988a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "7c5bd3f0a8bdc75fa7f1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "7e71dc90bfab43d66b01": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "7f5825f749a1710f1137": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "80ffc3ae6a6aed8bad9c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "82860d976d2874ecd63f": {
+        "text": "英格兰东南部",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "86cbe8d501770f63b438": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "89ce09bf762328be92f6": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "8bc15525e63e8ae2f542": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "8ca5be78c3c88de3a6a3": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "8d84d7a3f56da04ad185": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "929d419d5045f19789f2": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "97dbbde075c4efba8012": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "9c7cfe4df845943f12e3": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "9f262e68017a9881290c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "a4c07bea88dc785bf547": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "a62bc955abdb3177f10e": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "a6dadf4b9817be1e9db6": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "a7c1083d76df9858efad": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "a8eb5b2c45e47739e821": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "aba0024ebead0f7e520b": {
+        "text": "香港新界西元朗天水围新市镇第248区",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "b44eb378df794fc4f606": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "b7829e0e150afa40b24e": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "c2057f66fb568353e231": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "c303ba48b2f0dfbfe4ec": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "c37632fc04f9d5080e7d": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "c64021e976047df5ce71": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "c94aef6aaf4ee0f9986f": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "ca669f21a794b75ef72e": {
+        "text": "属都湖、碧塔海和高原牧场等",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "cebde1801fb1122aab98": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "dc2c9283f8b364f6b57c": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "dc8e4ed0d7ec74e78d01": {
+        "text": "中国致公党",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "e19f5520e7a2a14464f2": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "e38a5efe159d54b17a19": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "e47a06bdff75f5013a1a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "e61a3be3e9f4729f962e": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "e67c1054d7cdaf295ea1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "e8c332368b6b1b0d259a": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "ebc7cf03f6a5e84d85f4": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "ee82c70ae09a9e96bde5": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "f2bc9d340a46e7c55984": {
+        "text": "大广弦、台湾月琴、台湾品仔",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "f78fc4e3f65958f75911": {
+        "text": "8.54万人",
+        "uncertain": false,
+        "coherent_continuation": null
+      },
+      "f8fe2f012a7eeacb0ec1": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      },
+      "fca7432dc7b016459094": {
+        "text": "",
+        "uncertain": true,
+        "coherent_continuation": null
+      }
+    }
+  },
+  "raw_examples": [
+    {
+      "case": "qa_01_a_normal",
+      "file": "raw_examples/qa_01_a_normal/answer.png",
+      "input_sha256": "53269e382038b9ecd2821d58ef39c45e57f99a59a39187d7280800058f2063d0",
+      "image_sha256": "5db934ce51ec07ff6516e32b8cac359733ab958a5c64973073a69f71a0baaa87",
+      "prospective_first_pair": true,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": false,
+      "matched_fixed_cell_image_sha256": "e70d5b48cfc301834bcadd48012d50f47b05917fb0201d56c1e70dcd0aae6946",
+      "matched_fixed_cell_input_sha256": "7f23847a2706c2212c4c8066fee6c38677288ed5417d1c6460719a3a2398a360"
+    },
+    {
+      "case": "qa_01_b_normal",
+      "file": "raw_examples/qa_01_b_normal/answer.png",
+      "input_sha256": "78c9524a70178e7a14bdf64d903b2b0b042527c83841d6e1f5759b2162183bd6",
+      "image_sha256": "1eaf00f73b2dbb8e79bc0f6ae3c35221814fdce37ff6f37f35ed0d9e607eb131",
+      "prospective_first_pair": true,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "37ea056aa1712f1ddf07e3ce30b674333d0e3553cbdb8defdf958fee0aa9a05e",
+      "matched_fixed_cell_input_sha256": "e616394bd50f9aea1b9f891b09b541c058b1d0496e95bcfb6e59a888c7d6738b"
+    },
+    {
+      "case": "qa_04_a_normal",
+      "file": "raw_examples/qa_04_a_normal/answer.png",
+      "input_sha256": "6e7d99ecd3b94ed4c2a4de81dff3d2ccd129ec031828400659bc8364a0fc475d",
+      "image_sha256": "10cb9995abcb6082c6742b3f90b9329dd3339b8eb423487f53eb8c8c01bb3d23",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "3ac8de74f7bb0cf12ad0626bf2dcd03b380aff4f458c94c8d05eb6744506fee1",
+      "matched_fixed_cell_input_sha256": "7acec483e98d7afb404972bf567dc00fe02f97af7fe19d080c2f2f3ed0bb26a3"
+    },
+    {
+      "case": "qa_05_b_normal",
+      "file": "raw_examples/qa_05_b_normal/answer.png",
+      "input_sha256": "d6ac415c07748045a90cf25abdfbd2cd039d4109084021883c2eb24d16162479",
+      "image_sha256": "27ea7ae4f77d88f9f3e338e97c0ffda365b2436d7ba2faac9670b73ce286fc0d",
+      "prospective_first_pair": false,
+      "original_clear_case": true,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "e2850d4e42570df87ce9b6c09b2993dd833f6be486ddb901115df537d600280c",
+      "matched_fixed_cell_input_sha256": "479c0efa97ce4318cc42e4e943d39b80e28e1d3c11625788bc6e71039ef3837e"
+    },
+    {
+      "case": "qa_07_a_normal",
+      "file": "raw_examples/qa_07_a_normal/answer.png",
+      "input_sha256": "f31196b2c9fc4f3d70159e357fba95bcea8f077726fcb767aac6b76c7734c36c",
+      "image_sha256": "1a4b68eb70d670ddf77ce49317865fff6e1b66b536e7da4d57549ad93d529f31",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "ccbc66cc30b7c9815fa3f102aa2d448c1ffbb6fb04538163f5dc8318d56121b4",
+      "matched_fixed_cell_input_sha256": "58870a6338d7294bd9212bbf3868d63558b9692718c7c1e521dd9a4d52696202"
+    },
+    {
+      "case": "qa_08_b_normal",
+      "file": "raw_examples/qa_08_b_normal/answer.png",
+      "input_sha256": "48f43bbeb472b36f0200fd40046fd7d7eb63aec48e7b8217cbd59567b205db36",
+      "image_sha256": "a8cadb6065f5e8356ca2f990480a4386252600ecd453ad01eb6098f49486607b",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "32f8d8efd1bd35803c9f1df11d87c4eb3d921474b8be455f4d51cd36275f5921",
+      "matched_fixed_cell_input_sha256": "4237603602f565368b1db0c927d92412cc14f0b0d7c93813c07dba542fd4e8fb"
+    },
+    {
+      "case": "qa_09_a_normal",
+      "file": "raw_examples/qa_09_a_normal/answer.png",
+      "input_sha256": "e9daf0e71d7d182edc98ba22bc0dda3342e610ba4a238b9d838333d53a998a20",
+      "image_sha256": "790a2e3c63fcc5e4fb69fb86d43e01495eaa5e88e3b23b470249c3a4ccd32794",
+      "prospective_first_pair": false,
+      "original_clear_case": true,
+      "retrospective_complete_readable_case": false,
+      "matched_fixed_cell_image_sha256": "3b2e21e91be42f2c0599ec3833423aebc085d1a46611f6f6adee0b189caf7c84",
+      "matched_fixed_cell_input_sha256": "b1718aff5ec0deb38785858281881e056369c37adf6b391b0dcfb6b60945f7da"
+    },
+    {
+      "case": "qa_09_b_normal",
+      "file": "raw_examples/qa_09_b_normal/answer.png",
+      "input_sha256": "0f5a5229affe94903acd9476d511a2f0a43dbcbb2924735b23f3ec5f814e9f82",
+      "image_sha256": "b8a0f1b46f81bb1c533be7bc9a3fb8f7d4b046d07418feea9b950ed8c48d58c5",
+      "prospective_first_pair": false,
+      "original_clear_case": true,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "2bad38d105ede2fa3e100f2abbaf0cf29862c220d3e5cd75c306321f2b8b8de4",
+      "matched_fixed_cell_input_sha256": "85485094897a4a622b829ffedecdff243232503291a33e383eb70b333da4a162"
+    },
+    {
+      "case": "qa_10_a_normal",
+      "file": "raw_examples/qa_10_a_normal/answer.png",
+      "input_sha256": "7bf94e5ebd907ec4f0f92f9717ac642c6646cf080273c8949c10db2abcc57d2e",
+      "image_sha256": "3c48d44cd25837adf2e7f22ae36ad2c5c6b2706ca4782d046cd4bf67fc9356e5",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "4483a70502808250d74b567af0da9f90c798cc15a1afe5b08a49c78cc1c4aee6",
+      "matched_fixed_cell_input_sha256": "e28736342b4801a136b24ae0251c294b23cb4f267b2760714f46dd8fffa0531f"
+    },
+    {
+      "case": "qa_13_a_normal",
+      "file": "raw_examples/qa_13_a_normal/answer.png",
+      "input_sha256": "cdbd48845dd5bd7c2f4dafaa3517df1fc40fea223024f9a61bb02636476743de",
+      "image_sha256": "3f91c206d47527f4f7ec607b9840a2bad3cdbd97d494f22a6773ce51ec5a0030",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "7471bed779747487e786438d0a6d27898ec65a49a4d79c7ef948cde764643bff",
+      "matched_fixed_cell_input_sha256": "0771e6ababfe043e6c1915c8fef81ee07089f2ba3236ac354b255f567f27f9f1"
+    },
+    {
+      "case": "qa_14_a_normal",
+      "file": "raw_examples/qa_14_a_normal/answer.png",
+      "input_sha256": "60b97f48245f697b84c74204592f9dfdbc89109a0aeb5d839256e192a6feb38c",
+      "image_sha256": "84307d6c7d27c2a14ec57e97a5ddee7aea65ac49498082a497447ee8f138de3f",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "91cacf5b25c6217c1b39211098e21a7ee86e6331a7537e9006f614564ca4a236",
+      "matched_fixed_cell_input_sha256": "2d21c58ca075ce121d7574a6c3b617a0a9b56a165337032c31cb2f47c741b74f"
+    },
+    {
+      "case": "qa_14_b_normal",
+      "file": "raw_examples/qa_14_b_normal/answer.png",
+      "input_sha256": "210b29baefd0e282785cd610d17279cdd13ac66ad8a234c13ce7e7dbfb2131ef",
+      "image_sha256": "e50ab4c30948f22ae28a1fa2823faee0824bffe71c978c838ea349869e3eb740",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "4d0685cd114181172d74a423e21c73386111175c3ca0f452f5d337d31e988460",
+      "matched_fixed_cell_input_sha256": "042a13659b16c6fe298466636a61e36c20ae7f6a83d468bfd797036dd11a5519"
+    },
+    {
+      "case": "qa_16_b_normal",
+      "file": "raw_examples/qa_16_b_normal/answer.png",
+      "input_sha256": "b0b9f04ec51ef55d0cad8ab6ec4c7b032b14a3dbff9dd446de4df47a45d0977e",
+      "image_sha256": "4f6cca1cb803e02fa1e1328597d09cf7cd7b3cebc8724982ff64a3226f8ea93c",
+      "prospective_first_pair": false,
+      "original_clear_case": false,
+      "retrospective_complete_readable_case": true,
+      "matched_fixed_cell_image_sha256": "357718b9456fcaf49c075ea322d26a6224238b949ca6a60f79e3955b27f84ca4",
+      "matched_fixed_cell_input_sha256": "8d5731ddfbb328c745f5adf46b2a7365a40ccb81e2933f6c98182db0c5cfeee3"
+    }
+  ],
+  "source_sha256": "4ef0db91505222daf2f296d6bc2323b26f34f6b3a503237ce764113dccd7439e",
+  "new_optimizer_updates": 0,
+  "retained_native_parameters": 7522463984,
+  "generation_resources": {
+    "request_sha256": "1e527d58dd1c4b6037642ce164637d0261e42eeb3eda910d1a5879c7482252a4",
+    "optimizer_updates": 18000,
+    "new_optimizer_updates": 0,
+    "checkpoint_load_seconds": 97.89352774154395,
+    "total_generation_seconds": 1060.665245023556,
+    "reference_inputs": false,
+    "output_repaired": false,
+    "all_inputs_completed": true,
+    "attempt_index": 1,
+    "earlier_attempts_sha256": {},
+    "elapsed_seconds": 1179.2891792636365,
+    "resource_wait_seconds": 0.0,
+    "peak_allocated_vram_gib": 17.786398887634277,
+    "minimum_available_gib": 54.97535705566406,
+    "pressure_wait_allowance_seconds": 600,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "attempt_resources": [
+    {
+      "registration_sha256": "4c2bb2c84c5bbbb93f2b4f3caea7c4ae16bcc131ebea3ce0815081601c7cf8ec",
+      "attempt": 1,
+      "elapsed_seconds": 1179.3536606747657,
+      "resource_wait_seconds": 0.0,
+      "checkpoint_load_seconds": 97.89352774154395,
+      "peak_allocated_vram_gib": 17.786398887634277,
+      "complete_case_reports": 96,
+      "complete_report_sha256": "ca529f67629caa5dcab1955b9913a55147e95efce13ef8beba0883482fe517ca",
+      "terminal_phase": "complete",
+      "original_attempt_sha256": "22bacce009e3b5b3fcaff4050db9821aac43ff47f931dddd60a563dc98cdccd3"
+    }
+  ],
+  "analysis_retention_implementation": "Written during generation before any new output inspection: retain original exact answers and readable case coverage; original readable core-prefix retention reported separately and also required conservatively.",
+  "bootstrap_seed": 202611154,
+  "bootstrap_replicates": 10000,
+  "interval_scope": "Pointwise percentile bootstrap of16 paired passage groups, same paired draws; no independent seed replication or untouched confirmation.",
+  "comparison_scope": "Presentation changes font face/layout/spacing together. Same full prompt content, weights, native observer and output rules. Not a pure font or length causal isolation.",
+  "interpretation": "Development transfer diagnostic, no new training or broad language qualification",
+  "independent_human_adjudication": false,
+  "goal_achieved": false,
+  "cold_replay_passed": true,
+  "all_original_pixels_states_feedback_verified": true,
+  "scores_independently_recomputed": true,
+  "original_analysis_sha256": "80f32a1258dcf2bf93d5954824f1899db23e567a016487e56e8df2ff3ff28203",
+  "raw_examples_directory": "glyph_tail_input_presentation_learning_20261111",
+  "public_cold_receipt": "glyph_tail_input_presentation_cold_20261111.json",
+  "public_cold_receipt_sha256": "0dd847478d7c87fb43da054aa821d58e01bc798492a5c95fe4ec6d06142196e8",
+  "prior_control_public_receipt_sha256": "a8e0b6b38b96666ac4ea702b4d258fb3fbd9e192d0d7f0503b66d9cc4e39932e",
+  "retrospective_example_selection_disclosed": true,
+  "all_original_display_and_feedback_pixels_preserved": true,
+  "registration_public_sha256": "4c2bb2c84c5bbbb93f2b4f3caea7c4ae16bcc131ebea3ce0815081601c7cf8ec",
+  "export_source_sha256": "7d1023052f5f816dbbb4177de647daff0ac24330283872879544148ebb3f7933"
+}

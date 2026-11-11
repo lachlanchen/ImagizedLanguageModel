@@ -63,33 +63,62 @@ Its earlier 16/32 clear-answer result uses a different cohort and metric.
 Bodies, observers, adaptation histories and writers differ, so this is not a
 causal model-size or matched-quality efficiency comparison.
 
-**Next required work: register the frozen input-presentation comparison before
-another fit.** The [bounded decision](../references/glyph_tail_input_presentation_decision.md)
-preserves all 32 current questions and their erased-input controls, full
-passages, actual-pixel feedback, weights, cap and scoring. Earlier training
-pages have median height 288 pixels versus 704 here; target answers are at
-most sixteen glyphs versus 118 in the current references. These observed
-distribution shifts motivate a test, not an explanation already proved.
-No reference-answer crop, truncation, supplied output length or successful-pair
-selection is allowed. If the adapter fails to broaden retained readable
-capability, localize native visual reading versus writer/feedback failure
-with an explicitly helper-only diagnostic before choosing a training change.
+The [full input-presentation comparison](../references/glyph_tail_input_presentation_result.md)
+is complete: **6/32 complete exact QA answers and 11/32 readable outputs**,
+versus 2/32 and 3/32 with fixed glyph cells. Both-correct pairs fall from
+**1/16 to 0/16**, and the previously exact **169平方公里** answer becomes
+unreadable. The registered retention rule fails. Keep both presentations;
+do not adopt the proportional interface as a uniformly better adapter.
+All 96 outputs, including 64 erased controls, were reviewed before scoring.
+Both erased conditions have zero exact and zero readable answers. This is
+one model review with prior cohort familiarity, without independent human
+adjudication. Strict canonical mismatch does not by itself establish semantic
+falsity; no favorable semantic score is substituted after generation.
 
-Reject the unchanged compact joint recipe and a sampler-only repair. Complete
-the selected input-transfer measurement before choosing a reader/writer
-training intervention. A native-context writing fit remains a possible
-training diagnostic, with source embeddings confined to that diagnostic;
-it cannot qualify deployed visual reading. Check the earlier separately
-trained semantic glyph loop before repeating the same approach. A development
-improvement needs untouched source groups before broader claims. Copying,
-finite losses, rank checks and presentation quality do not replace language.
+Every full passage and question is preserved, with no answer-centered crop,
+truncation or supplied output length. Median input height changes from 704
+to 512 pixels. The frozen weights and actual-pixel output loop make zero
+optimizer updates. Neural execution takes 1,179.29 seconds at 17.786 GiB
+peak allocation. The fixed-question cold replay verifies signed pixels,
+states, stopping and feedback in a separate traced invocation. Normal caps
+fall from 24/32 to 13/32. The exact-answer increase is 12.5 percentage points
+with a pointwise 95% passage-group bootstrap interval of 0–25 points; the
+paired decrease is 6.25 points with an interval of minus 18.75 to zero.
+This reused development cohort supplies no untouched confirmation. Font,
+spacing and wrapping change together, so the cause is not isolated further.
+
+**Next required work: register the helper-only native-reader diagnosis before
+another fit.** The [bounded decision](../references/glyph_tail_native_reader_decision.md)
+compares all 32 questions and 64 erased controls in both presentations, with
+and without the learned tail adapters, plus the same complete text prompts:
+384 image and 64 text calls (448 total). Adapted image prefills must reproduce
+the actual glyph actor's first saved contextual states bit-for-bit. The source lexical
+decoder and previous-symbol lookup are temporary diagnostic tools outside
+the ILM. Their outputs and development answers must not become training data
+or deployed answers. Register source identities, scoring and resource limits
+before execution; this diagnostic is not yet implemented or run.
+
+Useful native image answers with damaged glyph output direct the next bounded
+intervention toward writing/feedback. Better unadapted than adapted native
+answers identify an adaptation tradeoff; good text but poor image results
+identify an input gap. If all routes fail, examine the source/task and
+implementation before another fit. These are conditional decisions, not
+causes already proved. Reject the unchanged compact joint recipe and a
+sampler-only repair. Check the completed semantic glyph loop and frozen
+diagnostics before repeating a training approach. A development improvement
+needs untouched source groups before broader claims. Copying, finite losses,
+rank checks and presentation quality do not replace language.
 
 The Nature-style article now includes both failed fits and the completed
 failure-localization diagnostic. Reading/review/redline PDFs have 27/47/47
 pages, with three additional native PowerPoint figures containing seven
-measured charts and original diagnostic glyphs. The newly completed
-matched-cohort control is outside that revision. Model diagnosis and readable
-held-out answers take priority over additional presentation work.
+measured charts and original diagnostic glyphs. Both newly completed
+matched-cohort and proportional-input controls remain outside that verified
+revision. The [bounded manuscript plan](../references/manuscript_glyph_input_transfer_revision_plan.md)
+records their measured gains, lost pair and retention failure for the next
+TeX/PDF and editable-figure update. No new figure or paper result is claimed
+from that plan alone. Model diagnosis and readable held-out answers take
+priority over additional presentation work.
 
 ## Goal and acceptance criteria
 
@@ -151,7 +180,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: retain the measured answers and test input transfer
+## Current decision: separate visual reading from glyph generation
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
@@ -201,9 +230,11 @@ remain uncontrolled. The registered wider comparison removes this tested
 capacity restriction but still fails the complete-response evaluation. Preserve both models as
 controls. The restriction is not a sufficient explanation for the failed
 answers. The completed diagnostic also finds conditional-writing failure
-before emitted feedback. The completed earlier-actor comparison retains only
-two exact current answers. Preserve those pixels and test input-presentation
-transfer before choosing another fit.
+before emitted feedback. The earlier actor retains two exact current answers
+with fixed cells and six with proportional prompts, but loses its exact pair
+under the latter presentation. Preserve both actual output sets. Diagnose
+native reading, tail adaptation and glyph continuation before another fit;
+neither representation is qualified as a generally useful language interface.
 
 ## Current evidence and unresolved tests
 
@@ -296,12 +327,13 @@ evidence; do not keep extending the same run without a new bounded reason.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
-- The repaired writer still fails. Localize the next failure using matched
-  reference-image history versus generated-image history and visual-input
-  controls. Measure visual access, conditional writing and feedback drift
-  separately. A reference-supplied diagnostic is not autonomous inference.
-  Do not infer that a larger model, more epochs or unrelated physics will
-  repair the failure without a testable mechanism.
+- The repaired writer still fails. Complete the selected native-reader
+  comparison with the actual image prefills before another fit. Use its
+  unchanged controls to separate visual access, tail-adaptation effects,
+  conditional writing and generated-history drift. Helper-decoded or
+  reference-supplied results are not autonomous ILM answers. Do not infer
+  that a larger model, more epochs or unrelated physics will repair the
+  failure without a testable mechanism.
 - Keep inference independent. Offline teachers, OCR and text corpora may prepare
   or supervise training; they must not supply answers during deployed inference.
   Describe the inherited weights and training-only native-unit supervision.

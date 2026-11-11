@@ -8,6 +8,51 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: full-prompt presentation gains fail answer retention
+
+The frozen proportional-input comparison completes all 32 QA prompts and 64
+erased controls with unchanged weights, full passages and the actual-pixel
+answer loop. Strict exact QA rises from 2/32 to 6/32, readable outputs from
+3/32 to 11/32 and stops from 8/32 to 19/32. Both-correct pairs fall from
+1/16 to 0/16. The previously exact area answer becomes unreadable; the
+location and shorter noncanonical instrument list remain readable. The
+registered retention rule fails, and neither presentation is adopted as a
+generally useful interface. Both erased conditions score zero exact and zero
+readable answers. No optimizer update is made.
+
+All 96 outputs were inspected under presentation-specific opaque identities
+before references and mappings were opened. Eleven complete readings and
+85 uncertain pages are frozen; prior same-cohort familiarity and the absence
+of independent human adjudication are disclosed. Canonical mismatch remains
+distinct from semantic falsity. No post-hoc transcription repair or favorable
+semantic score is substituted. Thirteen matched original input/output cases
+preserve the first fixed pair, all previous readable cases and all newly
+readable cases; the new-readable display selection is retrospective.
+
+The exact-rate difference is 12.5 percentage points with pointwise 95%
+passage-group bootstrap interval 0–25 points. The paired difference is minus
+6.25 points with interval minus 18.75 to zero. These intervals include zero,
+and no untouched confirmation is available. Font, spacing and wrapping change
+together. Neural execution takes 1,179.29 seconds at 17.786 GiB peak; CPU
+preparation takes 4.16 seconds. The fixed-question cold replay takes 79.08
+seconds at 17.693 GiB and reproduces pixels, states, stopping and feedback
+without observed forbidden input or IP access. Workers have exited and
+GPU 0 is released. See the [completed result](../references/glyph_tail_input_presentation_result.md).
+
+The [next decision](../references/glyph_tail_native_reader_decision.md) requires
+a registered helper-only comparison of actual adapted versus unadapted native
+reading, both image presentations and complete text controls: 384 image and
+64 text calls (448 total). Match adapted image prefills to the actual actor
+state. Keep the source lexical decoder outside the ILM and exclude diagnostic development
+answers from training. The diagnostic is not implemented or run. It must
+localize visual access, tail-adaptation effects or writing/feedback before
+another fit. The independent language goal remains active and unachieved.
+
+The verified 27/47/47-page paper remains at `0f14fa3f`. A
+[bounded revision plan](../references/manuscript_glyph_input_transfer_revision_plan.md)
+records both new controls for a later TeX/PDF and native-figure update; no new
+manuscript result is claimed from the plan alone.
+
 ## 11 November: matched-cohort answers retained, input transfer unresolved
 
 The unchanged earlier glyph actor completes all 120 compact-cohort endpoint

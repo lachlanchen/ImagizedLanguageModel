@@ -36,12 +36,21 @@ the fixed cold replay are complete. Its earlier 16/32 result uses another
 cohort/metric. Preserve the current exact pair and the larger inherited-body
 cost, alongside both compact failed controls.
 
-Before another fit, follow the bounded input-presentation decision in the goal:
-register the full current QA cohort and erased controls with unchanged weights,
-full passages, output cap and scoring. Do not crop around reference answers or
-truncate to the earlier answer lengths. Finish that measurement before choosing
-a training branch. Reuse completed assets and inspect prior semantic-glyph-loop
-results before repeating a failed approach.
+The frozen full-prompt presentation comparison is complete: 6/32 strict exact
+QA, 11/32 readable answers and 0/16 both-correct pairs, versus 2/32, 3/32 and
+1/16 with fixed cells. One earlier exact answer becomes unreadable, so the
+registered retention rule fails. All 96 outputs, scoring and fixed cold replay
+are complete. Preserve both presentations and their unrepaired outputs.
+
+Before another fit, register the helper-only native-reader diagnosis in the
+goal: the same full QA prompts and erased controls in both presentations,
+with actual adapted versus zero-output source adapters and separate complete
+text controls. Match adapted image prefills to the actual actor's saved state.
+Keep the source lexical decoder outside the ILM; no helper answer or development
+reference becomes training data. Finish this measurement before choosing a
+training branch. Reuse completed assets and inspect prior semantic-glyph-loop
+results before repeating a failed approach. A failed strict canonical match
+does not authorize repairing the reading or substituting a post-hoc metric.
 
 ## Always Commit and Push After Change
 
