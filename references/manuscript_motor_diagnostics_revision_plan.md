@@ -89,4 +89,41 @@ NativeReading package until guarded replacement; update only owned latest
 PDF aliases after hash checks. Verify local copies without claiming cloud
 propagation. No new GUI stack or second model worker; close one-shot Office
 processes. Commit/push and record actual PDF counts and verification receipts.
-No TeX edit or figure authoring has started under this plan yet.
+
+## Completed verification
+
+The bounded revision is complete. Reading/review/redline PDFs have 33/58/59
+pages. Figure 21 is on reading page 27, review page 58 and redline page 59.
+Reading pages 20–23 contain the added Results, pages 24–25 the extended
+Discussion, pages 30–31 the motor Methods and page 33 the new reference.
+The summary and experiment map are on page 1. Review and redline page maps,
+actual inspected raster hashes and source identities are in
+`publication/ilm-nature/evidence/motor_diagnostics_publication_build.json`.
+
+All four native chart caches and literal workbooks match the rounded figure
+data; full precision is preserved in bound JSON. Twenty editable original
+32-square PNG objects and all twenty image occurrences in every PDF pass the
+pixel audit. Both Artifact Tool and lossless LibreOffice slide renders are
+inspected. Crowded vertical F1 labels are repaired with a horizontal panel;
+earlier drafts are retained privately. A first unrounded cache is rejected
+by the workbook precision guard, so native values and labels explicitly round
+to six decimals. Native PowerPoint-app review is not claimed.
+
+All 221 preserved assets, including 216 prior figure files, remain unchanged.
+The pinned cumulative redline baseline is preserved. Builds contain no
+overflow or unresolved citation/reference errors. A separate directory with
+no private figure-authoring cache reproduces all 150 article-page rasters
+bit-for-bit. The first check-only attempt precedes the binding receipt export
+and fails at that missing file; the completed fresh rebuild needs no source
+or PDF change. Model-based visual inspection covers all changed and continued
+text, equations, captions, figures and the new bibliography entry, without
+independent human review. The pre-existing bibliography is outside this
+bounded citation check.
+
+The selected local delivery has 528 manifest files plus its separately
+verified receipt. All 473 previous NativeReading files remain unchanged.
+Owned latest-PDF aliases match current PDFs. Local copies are verified;
+cloud propagation is unverified. No model fitting or new language generation
+is performed by the publication unit. The ILM goal remains active and
+unachieved. The next unit must register a different realized-endpoint
+hypothesis before another fit, then measure complete autonomous language.

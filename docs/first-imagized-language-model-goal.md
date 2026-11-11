@@ -5,10 +5,12 @@ Updated: 2026-11-11
 ## Immediate direction
 
 The actual-context motor comparison is complete and **fails its registered
-language pilot**. Interpret its unrepaired output and feedback failures before
-another fit. The next decision must distinguish initial writing, later
-generated-history drift and stopping, using saved complete streams and the
-completed native-reader diagnosis. Preserve the parent controls and failures.
+language pilot**: 2/32 fixed and 7/32 proportional exact QA, with only 5/6
+earlier proportional exact answers retained. The subsequent cached-state and
+paired decoded-loss diagnoses are also complete. Before another fit, use
+these measured failures to distinguish initial writing, conditional transfer,
+generated-history drift and stopping. Neither better reconstruction nor a
+working replay establishes usable language. Preserve the parent controls and failures.
 Do not extend the same head fit, select favorable samples or substitute a
 reconstruction metric. The private handoff records live ownership; an
 interrupted observation must not create a second GPU worker.
@@ -34,14 +36,25 @@ are independently recounted and reviewed. The assessment takes 22.577 seconds
 at 0.311 GiB. No full language generation is run because its prerequisite
 gates fail. Do not tune or resample it, or call small tile gains language.
 
-Next, incorporate these completed comparisons into the
-[bounded manuscript/figure revision](../references/manuscript_motor_diagnostics_revision_plan.md),
-preserving the verified current PDFs. Before another fit, make a different
-bounded decision addressing realized conditional endpoints rather than
-extending the failed local loss. Initial writing, transfer, native reading
-and stopping remain distinct unresolved parts. Preserve the substantial
-corpus for complete-sequence learning; neither more books nor sharper glyphs
-alone establishes that capability.
+The [manuscript/figure revision](../references/manuscript_motor_diagnostics_revision_plan.md)
+now incorporates these comparisons in verified 33/58/59-page reading, review
+and cumulative-redline PDFs. Figure 21 has four editable native charts and
+twenty original glyph tiles; no language-learning curve or unmeasured score
+is invented. The versioned local delivery is
+`ILM_NatureStyle_20261111_MotorDiagnostics`. Local hashes are verified; cloud
+propagation is not claimed. Earlier figures, supplement and packages remain.
+
+The next work unit returns to the model. Before another fit, register one
+different bounded decision addressing the realized conditional endpoint,
+rather than extending the failed local loss. First test faithful writing
+from the fixed actual-context states, then complete the unchanged autonomous
+language comparison if the prerequisite passes. Keep the original flow and
+parent controls, all adverse cases, fixed seeds and complete denominators.
+A physical pass alone does not qualify language. Reading, conditional transfer,
+stopping and feedback remain distinct unresolved parts. Any pilot gain needs
+untouched source-group confirmation and independent review. The substantial
+corpus remains available for complete-sequence learning; additional books or
+sharper glyphs alone do not establish that capability.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted
@@ -480,10 +493,12 @@ evidence; do not keep extending the same run without a new bounded reason.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
-- The repaired writer still fails. The actual-prefill native comparison and
-  CPU first-writing/coverage audit are complete. Do not rerun either as pending
-  work. Test the registered actual-context writer intervention against the
-  unchanged actor, preserving reading, stopping and generated-history limits.
+- The actual-context writer, native comparison, coverage audit, 128-position
+  conditional diagnosis and paired decoded-loss experiment are complete. Their
+  gates fail. Do not rerun them as pending work or extend their fits. Register
+  a different mechanism that trains the realized conditional output, with the
+  unchanged actor and original flow as controls. Preserve reading, stopping,
+  fixed diagnostic positions and generated-history limits.
   Helper-decoded or reference-supplied results are not autonomous ILM answers.
   Canonical first-pixel mismatch is not a semantic-error label. Do not infer
   that a larger model, more epochs or unrelated physics will repair the

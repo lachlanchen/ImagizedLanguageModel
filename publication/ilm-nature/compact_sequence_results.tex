@@ -330,3 +330,83 @@ repair. All 32 labelled first-image comparisons and 192 complete original
 streams remain in the evidence. There is one model reviewer with prior cohort
 familiarity and no independent human adjudication. No new ILM generation or
 training is performed by these controls.}{fig:native-reader-writing}
+
+
+\subsection*{Direct-context motor and decoded loss fail their gates}
+The next writer conditions directly on the retained 4,096-dimensional state
+and generates the frozen decoder's 1,024-dimensional motor feature. This
+bypasses the old predicted semantic point while preserving reading, adapters,
+image encoding, decoding and stopping. All 216 initial states match their
+parent states bit-for-bit. Under unchanged output rules, fixed-cell exact QA
+remains 2/32 and both-correct pairs remain 1/16. Proportional exact answers
+change from 6/32 to 7/32 and pairs from 0/16 to 1/16
+(Fig.~\ref{fig:motor-diagnostics}a,b). Readable QA changes from 3 to 4 fixed
+and 11 to 14 proportional; natural stops change from 8 to 4 and 19 to 18,
+respectively. Both original fixed exact answers remain, but only five of six
+proportional answers remain. Two newly exact answers do not compensate for
+this loss under the registered retention rule. The pilot requires at least
+eight exact answers, two correct pairs, eleven readable answers and retention
+of all earlier exact cases; it fails. No normal book continuation is credited
+as readable, coherent and complete, and all QA erasures score zero exact.
+
+The proportional exact difference is 3.125 percentage points, with pointwise
+95\% passage-group bootstrap interval $[-6.25,12.5]$; the paired difference is
+6.25 points $[0,18.75]$. These small reused-development comparisons have no
+untouched confirmation or independent training-seed replication. All 54 opaque
+boards and twelve book prefixes are viewed before reference scoring. Of the
+216 whole readings, twenty are clear and 196 uncertain. One model reviewer
+has prior cohort familiarity, without independent human adjudication. Strict
+canonical mismatch does not establish semantic falsity, and partial uncertain
+readings are not repaired after reference access.
+
+A separate cached-state diagnosis selects 32 first and 32 later training
+positions and reuses all 64 retained development first images. First/later
+training median foreground F1 is 0.986408/0.974518 for the flow writer versus
+0.990277/0.997523 for its parent; 32/32 and 23/32 flow tiles reach 0.95,
+versus 20/32 and 27/32 parent tiles. Supplied reconstruction is exact for
+31/32 and 32/32. Each training pool must have median F1 at least 0.99 and at
+least 30/32 tiles reaching 0.95. The flow writer fails both gates
+(Fig.~\ref{fig:motor-diagnostics}c,d). One later nonterminal training state
+also predicts stopping with probability 0.99542. The diagnosis explicitly
+writes one glyph regardless of that decision. It tests supplied-state
+writing rather than autonomous language.
+
+Conditional target exposure differs from codec coverage: the first/later
+pools contain 870/2,141 unique target forms, with 2,245 combined versus 4,087
+codec bitmaps. Six canonical development first positions lack first-pool
+targets, and one lacks a target in either pool. Exposure counts alone do not
+explain failures on common forms. Canonical development first-image mean F1
+is 0.447771 fixed and 0.661558 proportional. Native/canonical first characters
+agree in 5/32 and 18/32 cases; their corresponding means are 0.770103 and
+0.817164. Different wording and learned stroke variation remain possible,
+but visible damage also precedes generated feedback.
+
+A paired objective adds late-time balanced decoded-image BCE while preserving
+initialization, data exposure, random draws, architecture and sampling. It
+raises first/later training medians to 0.987034/0.976561 but leaves counts at
+0.95 unchanged at 32/32 and 23/32. Exact bitmaps change from 4 to 6 first
+and 0 to 1 later, while later mean F1 falls from 0.954535 to 0.953115.
+Both gates still fail. Its canonical development first-image means are
+0.451322 fixed and 0.658197 proportional. These local changes do not qualify
+consistent writing or language. The registered prerequisite withholds its
+full language trial; whole-answer scores are unmeasured. Neither extending
+the same fit nor selecting another sampling seed follows from this result.
+
+\plate{Figure_21_motor_diagnostics}{\textbf{Conditional writing remains a restriction after retained answer access.}
+\textbf{a,b}, Complete exact QA and both-correct passage pairs compare the
+unchanged parent with the original direct-context flow writer. All original
+questions remain. The gain loses one earlier proportional exact answer and
+fails the registered pilot. The pointwise interval resamples sixteen passage
+groups; it does not establish a general improvement. \textbf{c,d}, Median
+foreground F1 and counts reaching 0.95 for 32 first and 32 later training
+states. Pixel loss is the paired late-time decoded objective. Codec receives
+the target image. Both new writers fail the per-pool median/count gates.
+F1 values display six decimals; full precision remains in the bound data.
+These are model comparisons, not a measured language-learning trajectory.
+The pixel-loss model's complete-answer quality is unmeasured.
+\textbf{e}, Twenty original 32-square tiles at equal geometry, selected
+retrospectively to expose training recovery, later damage, a damaged native-
+agreeing prefix and an area-answer initial. QA rows are first-tile excerpts,
+not whole answers. All 216 flow streams and sixteen complete diagnostic
+boards remain available. No pixels are repaired. There is one model reviewer
+and no independent human adjudication.}{fig:motor-diagnostics}

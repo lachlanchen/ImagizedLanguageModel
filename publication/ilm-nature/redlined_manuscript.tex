@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 11 19:47:30 2026
-%DIF ADD new.tex   Wed Nov 11 19:47:30 2026
+%DIF DEL old.tex   Wed Nov 11 22:30:09 2026
+%DIF ADD new.tex   Wed Nov 11 22:30:09 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -135,7 +135,7 @@
 \noindent{\color{blue}\footnotesize Change-marked copy: additions relative to the 0f14fa3f compact-diagnosis draft are blue.}\par\medskip
 
 {\sffamily\bfseries\Large{Learning conditional language\\in continuous image space}\par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous interfaces that read and emit glyph images, with generated pixels supplying subsequent history. Externally pretrained foundations provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. A \DIFdelbegin \DIFdel{restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its qualification. A separate }\DIFdelend compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions. Two 8,172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory\DIFdelbegin \DIFdel{. Both }\DIFdelend \DIFaddbegin \DIFadd{, yet }\DIFaddend score zero complete exact QA answers out of 32 at all five checkpoints. A wider writer removes a measured velocity-rank restriction without solving language. Frozen\DIFdelbegin \DIFdel{-weight}\DIFdelend  diagnostics \DIFdelbegin \DIFdel{show that writing fails }\DIFdelend \DIFaddbegin \DIFadd{expose conditional-writing failure }\DIFaddend before generated feedback \DIFdelbegin \DIFdel{, despite near-exact codec reconstruction; additional sampling steps do not repair it. The reader also has }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment }\DIFdelend \DIFaddbegin \DIFadd{separate reader-alignment }\DIFaddend restriction. \DIFaddbegin \DIFadd{On the same question cohort, an earlier actor retaining 7.522B visual and contextual parameters gives two exact answers. Proportional input raises this to six with unchanged weights, but loses the one fully correct pair and an earlier readable answer. External native decoding gives ten exact proportional answers from matched first states. All 32 first target forms have training coverage, and supplied-image reconstruction is pixel-exact for 31, without establishing correct conditional writing. }\DIFaddend Cold replays verify independent pixel-feedback execution for fixed cases. These \DIFdelbegin \DIFdel{results separate execution}\DIFdelend \DIFaddbegin \DIFadd{controls distinguish inherited answer access}\DIFaddend , physical \DIFdelbegin \DIFdel{writing }\DIFdelend \DIFaddbegin \DIFadd{support }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend language \DIFdelbegin \DIFdel{success}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{Reliable }\DIFdelend \DIFaddbegin \DIFadd{Usable }\DIFaddend open-ended \DIFdelbegin \DIFdel{generation}\DIFdelend \DIFaddbegin \DIFadd{writing}\DIFaddend , historical-form transfer and a matched-quality efficiency advantage remain unresolved.}\par\bigskip
+\section*{Abstract}{Written language includes forms outside standard character encodings. We investigate continuous interfaces that read and emit glyph images, with \DIFdelbegin \DIFdel{generated }\DIFdelend \DIFaddbegin \DIFadd{emitted }\DIFaddend pixels supplying subsequent history. \DIFdelbegin \DIFdel{Externally pretrained }\DIFdelend \DIFaddbegin \DIFadd{Pretrained }\DIFaddend foundations provide inherited \DIFdelbegin \DIFdel{language }\DIFdelend knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path. \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear complete literal answers among 32 reserved questions, versus eleven for a fixed-body control. Neither arm passes its qualification. A separate }\DIFdelend \DIFaddbegin \DIFadd{Two }\DIFaddend compact \DIFdelbegin \DIFdel{experiment freezes a 1.409B contextual body and }\DIFdelend fits \DIFdelbegin \DIFdel{image interfaces on }\DIFdelend \DIFaddbegin \DIFadd{use }\DIFaddend 13,785 complete Chinese \DIFdelbegin \DIFdel{book and question--answer }\DIFdelend sequences, \DIFdelbegin \DIFdel{covering }\DIFdelend 2.576 million target glyph positions \DIFdelbegin \DIFdel{. Two 8,172-update fits use 3.930 }\DIFdelend and \DIFaddbegin \DIFadd{3.930/}\DIFaddend 4.889 GiB peak allocated GPU memory\DIFdelbegin \DIFdel{. Both score }\DIFdelend \DIFaddbegin \DIFadd{, but yield }\DIFaddend zero complete exact \DIFdelbegin \DIFdel{QA }\DIFdelend answers out of 32 at \DIFdelbegin \DIFdel{all }\DIFdelend five checkpoints. A wider writer removes a measured velocity-rank restriction without solving language. \DIFdelbegin \DIFdel{Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{An earlier actor retaining 7.522B visual and contextual parameters gives two exact answers; proportional prompts raise this to six with lost retention. External native decoding gives ten from matched first states}\DIFaddend , \DIFdelbegin \DIFdel{despite near-exact codec }\DIFdelend \DIFaddbegin \DIFadd{while supplied }\DIFaddend reconstruction \DIFdelbegin \DIFdel{; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{is exact for 31/32 first forms}\DIFaddend . \DIFdelbegin \DIFdel{The reader }\DIFdelend \DIFaddbegin \DIFadd{A direct-context motor yields seven proportional exact answers but retains only five of the earlier six, failing its pilot. Cached-state tests expose residual writing errors even on training states. A paired decoded-image objective }\DIFaddend also \DIFdelbegin \DIFdel{has a measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{fails both physical gates; its whole-answer quality is unmeasured}\DIFaddend . Cold replays verify \DIFaddbegin \DIFadd{fixed-case }\DIFaddend independent pixel-feedback execution\DIFdelbegin \DIFdel{for fixed cases}\DIFdelend . These \DIFdelbegin \DIFdel{results }\DIFdelend \DIFaddbegin \DIFadd{controls }\DIFaddend separate \DIFdelbegin \DIFdel{execution}\DIFdelend \DIFaddbegin \DIFadd{inherited answer access}\DIFaddend , physical \DIFdelbegin \DIFdel{writing }\DIFdelend \DIFaddbegin \DIFadd{form support }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend \DIFaddbegin \DIFadd{autonomous }\DIFaddend language \DIFdelbegin \DIFdel{success}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{Reliable }\DIFdelend \DIFaddbegin \DIFadd{Usable }\DIFaddend open-ended \DIFdelbegin \DIFdel{generation}\DIFdelend \DIFaddbegin \DIFadd{writing}\DIFaddend , historical-form transfer and a matched-quality efficiency advantage remain unresolved.}\par\bigskip
 Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history. Modern character encodings provide a powerful interface to
@@ -181,8 +181,10 @@ interventions then test the sources of failure. \DIFaddbegin \DIFadd{A matched e
 control and full-prompt presentation comparison subsequently test retained
 image-answer transfer on the same question cohort. Matched native decoding
 and a first-writing audit then distinguish retained answer access from
-physical form support. Their partial gains and lost question pair remain
-distinct from new language learning. }\DIFaddend The contributions are the
+physical form support. A direct-context motor and a paired decoded-image
+objective subsequently test conditional writing while preserving the reader.
+Their failed retention and physical gates remain distinct from new language
+learning. }\DIFaddend The contributions are the
 explicit emitted-pixel interface, controlled language tests, reproducible
 single-GPU execution and measured writer/reader restrictions. None establishes a generally
 usable visual language model or a from-scratch language learner.
@@ -1498,6 +1500,91 @@ familiarity and no independent human adjudication. No new ILM generation or
 training is performed by these controls.}{fig:native-reader-writing}
 
 
+\subsection*{\DIFadd{Direct-context motor and decoded loss fail their gates}}
+\DIFadd{The next writer conditions directly on the retained 4,096-dimensional state
+and generates the frozen decoder's 1,024-dimensional motor feature. This
+bypasses the old predicted semantic point while preserving reading, adapters,
+image encoding, decoding and stopping. All 216 initial states match their
+parent states bit-for-bit. Under unchanged output rules, fixed-cell exact QA
+remains 2/32 and both-correct pairs remain 1/16. Proportional exact answers
+change from 6/32 to 7/32 and pairs from 0/16 to 1/16
+(Fig.~\ref{fig:motor-diagnostics}a,b). Readable QA changes from 3 to 4 fixed
+and 11 to 14 proportional; natural stops change from 8 to 4 and 19 to 18,
+respectively. Both original fixed exact answers remain, but only five of six
+proportional answers remain. Two newly exact answers do not compensate for
+this loss under the registered retention rule. The pilot requires at least
+eight exact answers, two correct pairs, eleven readable answers and retention
+of all earlier exact cases; it fails. No normal book continuation is credited
+as readable, coherent and complete, and all QA erasures score zero exact.
+}
+
+\DIFadd{The proportional exact difference is 3.125 percentage points, with pointwise
+95\% passage-group bootstrap interval $[-6.25,12.5]$; the paired difference is
+6.25 points $[0,18.75]$. These small reused-development comparisons have no
+untouched confirmation or independent training-seed replication. All 54 opaque
+boards and twelve book prefixes are viewed before reference scoring. Of the
+216 whole readings, twenty are clear and 196 uncertain. One model reviewer
+has prior cohort familiarity, without independent human adjudication. Strict
+canonical mismatch does not establish semantic falsity, and partial uncertain
+readings are not repaired after reference access.
+}
+
+\DIFadd{A separate cached-state diagnosis selects 32 first and 32 later training
+positions and reuses all 64 retained development first images. First/later
+training median foreground F1 is 0.986408/0.974518 for the flow writer versus
+0.990277/0.997523 for its parent; 32/32 and 23/32 flow tiles reach 0.95,
+versus 20/32 and 27/32 parent tiles. Supplied reconstruction is exact for
+31/32 and 32/32. Each training pool must have median F1 at least 0.99 and at
+least 30/32 tiles reaching 0.95. The flow writer fails both gates
+(Fig.~\ref{fig:motor-diagnostics}c,d). One later nonterminal training state
+also predicts stopping with probability 0.99542. The diagnosis explicitly
+writes one glyph regardless of that decision. It tests supplied-state
+writing rather than autonomous language.
+}
+
+\DIFadd{Conditional target exposure differs from codec coverage: the first/later
+pools contain 870/2,141 unique target forms, with 2,245 combined versus 4,087
+codec bitmaps. Six canonical development first positions lack first-pool
+targets, and one lacks a target in either pool. Exposure counts alone do not
+explain failures on common forms. Canonical development first-image mean F1
+is 0.447771 fixed and 0.661558 proportional. Native/canonical first characters
+agree in 5/32 and 18/32 cases; their corresponding means are 0.770103 and
+0.817164. Different wording and learned stroke variation remain possible,
+but visible damage also precedes generated feedback.
+}
+
+\DIFadd{A paired objective adds late-time balanced decoded-image BCE while preserving
+initialization, data exposure, random draws, architecture and sampling. It
+raises first/later training medians to 0.987034/0.976561 but leaves counts at
+0.95 unchanged at 32/32 and 23/32. Exact bitmaps change from 4 to 6 first
+and 0 to 1 later, while later mean F1 falls from 0.954535 to 0.953115.
+Both gates still fail. Its canonical development first-image means are
+0.451322 fixed and 0.658197 proportional. These local changes do not qualify
+consistent writing or language. The registered prerequisite withholds its
+full language trial; whole-answer scores are unmeasured. Neither extending
+the same fit nor selecting another sampling seed follows from this result.
+}
+
+\plate{Figure_21_motor_diagnostics}{\textbf{Conditional writing remains a restriction after retained answer access.}
+\textbf{a,b}, Complete exact QA and both-correct passage pairs compare the
+unchanged parent with the original direct-context flow writer. All original
+questions remain. The gain loses one earlier proportional exact answer and
+fails the registered pilot. The pointwise interval resamples sixteen passage
+groups; it does not establish a general improvement. \textbf{c,d}, Median
+foreground F1 and counts reaching 0.95 for 32 first and 32 later training
+states. Pixel loss is the paired late-time decoded objective. Codec receives
+the target image. Both new writers fail the per-pool median/count gates.
+F1 values display six decimals; full precision remains in the bound data.
+These are model comparisons, not a measured language-learning trajectory.
+The pixel-loss model's complete-answer quality is unmeasured.
+\textbf{e}, Twenty original 32-square tiles at equal geometry, selected
+retrospectively to expose training recovery, later damage, a damaged native-
+agreeing prefix and an area-answer initial. QA rows are first-tile excerpts,
+not whole answers. All 216 flow streams and sixteen complete diagnostic
+boards remain available. No pixels are repaired. There is one model reviewer
+and no independent human adjudication.}{fig:motor-diagnostics}
+
+
 \DIFaddend \section*{Discussion}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
@@ -1527,7 +1614,14 @@ ILM. Native reading also depends strongly on layout. All first target forms
 have primitive coverage and supplied reconstruction is nearly exact, yet some
 original first forms are already damaged. Canonical pixel mismatch can also
 reflect readable strokes or different wording. Neither missing first forms
-nor later feedback alone explains every failed answer. Further model changes
+nor later feedback alone explains every failed answer. A direct-context
+conditional motor gives seven proportional exact answers but retains only
+five of the earlier six, failing its registered pilot. Its cached-state
+writing errors persist on training positions. The paired late-time decoded
+loss also fails both physical gates. Its local endpoint estimator is trained
+on noise/target interpolants; this does not directly supervise the endpoint
+reached by its own numerical rollout. The tested objective is insufficient,
+without identifying a unique failure mechanism. Further model changes
 require controlled tests of conditional writing, stopping and generated-history
 feedback, followed by untouched }\DIFaddend source groups and independent review after
 any development improvement.
@@ -1757,10 +1851,9 @@ velocity calls are recorded separately. The completed diagnostic uses
 matching prefix prefill and cached updates for reference and generated
 history, retaining the original tolerance. The stopped attempt, probe,
 completed run and CPU preparation costs remain in the evidence. No optimizer
-update or new autonomous language result is attributed to this diagnostic\DIFaddbegin \DIFadd{.
-}
+update or new autonomous language result is attributed to this diagnostic.
 
-\subsection*{\DIFadd{Matched earlier actor and full-prompt presentation}}
+\DIFaddbegin \subsection*{\DIFadd{Matched earlier actor and full-prompt presentation}}
 \DIFadd{The earlier actor uses a separate inherited 36-layer visual/contextual body,
 four adapted tail layers and a complete-glyph CNN encoder/decoder. Its
 previously fitted checkpoint remains fixed throughout these comparisons.
@@ -1903,10 +1996,122 @@ independent human review. Preparation takes 6.539\,seconds without a neural call
 supplied reconstruction takes 1.502\,seconds at 1.078\,GiB peak process RSS. CUDA
 remains uninitialized, and there is no contextual call or new optimizer
 update. Figure 20's first-tile examples are retrospective selections from
-these completed controls and are explicitly excerpts rather than full answers}\DIFaddend .
+these completed controls and are explicitly excerpts rather than full answers.
+}
 
 
-\subsection*{Initial raster control data}
+\subsection*{\DIFadd{Direct-context motor, physical gates and decoded objective}}
+\DIFadd{For target ink image $I$, the frozen encoder and motor projection provide
+$z_\mathrm{raw}\in\mathbb R^{64\times4\times4}$. Coordinate means $\mu$ and
+scales $s$ use training targets only, giving $z=(z_\mathrm{raw}-\mu)/s$.
+A 24,477,696-parameter conditional head receives actual reader state
+$h\in\mathbb R^{4096}$, Gaussian noise $e$ and uniform $t\in[0,1]$.
+The probability-path regression follows flow matching\cite{flowmatching}:
+}\begin{align}
+ x_t&=(1-t)e+tz,\\
+ \mathcal L_\mathrm{FM}&=\mathbb E\!\left[
+ \|v_\theta(x_t,t,h)-(z-e)\|_2^2/1024\right].
+\end{align}
+\DIFadd{The 1,536-wide head sums projected noisy motor, layer-normalized context
+and a 128-to-512-to-1,536 time branch, then applies three residual
+layer-normalized SiLU blocks and a full 1,024-coordinate output projection.
+Training-coordinate standard deviations have floor 0.05. This bypasses the
+earlier deterministic semantic point. A head fit reuses 3,176 first and 20,086 later authentic
+training states from 3,176 training questions. Each batch contains 64 first
+and 64 later samples. AdamW, seed 202611171, learning rate $2\times10^{-4}$,
+Adam coefficients $(0.9,0.99)$, weight decay 0.01, gradient-norm cap one,
+200-update warm-up, cosine decay to 10\% and EMA decay
+$\min(0.999,(1+k)/(10+k))$ run for 12,000 updates. Each pool supplies 768,000
+exposures. Only final EMA weights are evaluated. The inherited 7.522B visual/
+contextual parameters, learned adapters, encoder/decoder and stop predictor
+remain fixed; no development or native-helper answer supplies training.
+}
+
+\DIFadd{One fixed per-case SHA-derived seed supplies one sample per emitted glyph.
+Sampling uses 32 integration intervals with Heun updates and a final Euler
+step. The unchanged stop decision and 128-glyph cap supply no target length.
+Only actual emitted binary pixels enter subsequent history. All 120 fixed
+and 96 proportional streams include normal inputs and their existing erased
+controls. The complete language pilot requires proportional exact QA at least
+8/32, both-correct pairs at least 2/16, readable QA at least 11/32, and retention
+of all six earlier proportional and both fixed exact cases. Frozen whole
+readings precede reference scoring. Bootstrap intervals use 10,000 whole-
+passage draws and seed 202611154, with the same sixteen groups and strict
+scoring rules as earlier comparisons.
+}
+
+\DIFadd{The physical diagnosis orders training indices by SHA-256 of the fixed
+\texttt{motor-capacity-v1}, pool and index tuple, retaining 32 first and 32
+later positions. Position-bound seeds are fixed before sampling. It reuses
+all 64 saved normal development first emissions without resampling. Targets,
+parent, sampled flow and supplied reconstruction are compared by integer
+foreground counts and exact arrays. Medians and counts at F1 at least 0.95
+are reported separately for each 32-position pool. Each pool requires median
+at least 0.99 and at least thirty qualifying tiles. These fixed training-state
+gates test writing sufficiency, not semantic accuracy. Stopping is recorded
+but bypassed for this one-glyph diagnosis. All 128 scores and 512 displayed
+tiles are independently recounted, and all eight boards are inspected.
+}
+
+\DIFadd{For the paired decoded objective, let $D$ return frozen ink logits and set
+}\begin{align}
+ \widehat z_1&=x_t+(1-t)v_\theta(x_t,t,h),\\
+ \mathcal L&=\mathcal L_\mathrm{FM}+
+ \mathbb E[\ell_\mathrm{bal}(D(\mu+s\widehat z_1),I)\mid t\geq0.75].
+\end{align}
+\DIFadd{Writing $b_p$ for per-pixel binary cross entropy with logits, the balanced
+per-image term is
+}\[
+ \ell_\mathrm{bal}=\tfrac12\left[
+ \frac{\sum_p I_pb_p}{\max(1,\sum_p I_p)}+
+ \frac{\sum_p(1-I_p)b_p}{\max(1,\sum_p(1-I_p))}\right].
+\]
+\DIFadd{Its coefficient is one. Eligible images are averaged per batch; an empty set
+contributes differentiable zero. Gradients pass through $D$ without updating
+its parameters. The endpoint is an estimator on a noise/target interpolant,
+not the endpoint of a numerical rollout. This auxiliary objective need not
+preserve the original flow optimum or improve language. Initialization,
+12,000-update schedule, EMA, targets and all per-position sampling remain
+paired. Actual sampled-index digests and final CPU/CUDA random states match
+the original control exactly; all optimizer parameter steps and finite
+weights are checked. Frozen decoder parameter versions are unchanged.
+The same 128 supplied states are assessed once. Either failed training gate
+withholds the full 216-stream language trial, leaving that quality unmeasured.
+The second eight boards and every tile are independently checked.
+}
+
+\DIFadd{The original head fit takes 109.485\,seconds at 0.989\,GiB peak allocated GPU
+memory. Fixed/proportional generation takes 3,442.507/2,720.582\,seconds at
+17.777\,GiB, including 73.438/74.581\,seconds actor loading. Pressure waiting
+is 0/260.247\,seconds. Their endpoints are 12 stops/108 caps and 25 stops/71
+caps. A missing deterministic CUBLAS setting causes a zero-update first
+launch (0.299\,seconds after stage creation; full validation wall time
+unmeasured). A separate tensor-version setup failure takes 74.902\,seconds
+before any answer; both failed attempts are retained. Cached-state diagnosis
+takes 7.815\,seconds at 0.311\,GiB. The paired fit takes 130.299\,seconds at
+1.169\,GiB; its 128-position assessment takes 22.577\,seconds at 0.311\,GiB.
+All these small-head/diagnostic stages record zero pressure wait. The full
+reader is not loaded for head fitting or supplied-state diagnosis. Inherited
+pretraining, original adaptation and offline cache construction are excluded
+from these stage costs, precluding a foundation-training efficiency claim.
+}
+
+\DIFadd{A cold replay of the fixed first book initially reproduces pixels and nested
+values but fails its access gate because shared admission opens old ownership
+ledgers. The retained attempt takes 125.884\,seconds. Standalone admission is
+then changed to live process/memory/pressure and mutex checks, leaving input,
+weights, seed and sampling fixed. The independent invocation reproduces all
+pixels, reader states, stopping, feedback, noise and motor values without
+observed forbidden artifact access or IP connections. It takes
+100.755\,seconds, including 68.654 loading and 31.435 generation, at
+17.748\,GiB. Bound loader provenance excludes lexical parameters from the
+actor; the source archive's unused vocabulary payload remains disclosed.
+A file trace alone cannot prove tensor-level exclusion. The reproduced book
+is still capped and unreadable, so cold execution does not establish language.
+}
+
+
+\DIFaddend \subsection*{Initial raster control data}
 The public Chinese stream contains 7,017 provenance-tracked records. Records
 are assigned deterministically to training, development or a sealed partition
 before rendering. Original and simplified views inherit their source split.
@@ -2078,7 +2283,8 @@ present raster-only deployment experiment.
 \bibitem{showo2} Xie, J., Yang, Z. \& Shou, M. Z. Show-o2: Improved Native Unified Multimodal Models. \emph{arXiv} 2506.15564v3 (2025). \url{https://arxiv.org/abs/2506.15564v3}.
 \bibitem{squad} Rajpurkar, P., Zhang, J., Lopyrev, K. \& Liang, P. SQuAD: 100,000+ Questions for Machine Comprehension of Text. \emph{Proceedings of EMNLP}, 2383--2392 (2016). \url{https://aclanthology.org/D16-1264/}.
 \bibitem{gotocr} Wei, H. et al. General OCR Theory: Towards OCR-2.0 via a Unified End-to-end Model. \emph{arXiv} 2409.01704 (2024). \url{https://arxiv.org/abs/2409.01704}.
-\bibitem{draft} Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). \url{https://arxiv.org/abs/2309.17400}.
+\bibitem{draft} Clark, K., Vicol, P., Swersky, K. \& Fleet, D. J. Directly Fine-Tuning Diffusion Models on Differentiable Rewards. \emph{International Conference on Learning Representations} (2024). \url{https://arxiv.org/abs/2309.17400}\DIFaddbegin \DIFadd{.
+}\bibitem{flowmatching} \DIFadd{Lipman, Y., Chen, R. T. Q., Ben-Hamu, H., Nickel, M. \& Le, M. Flow Matching for Generative Modeling. \emph{arXiv} 2210.02747v2 (2023). }\url{https://arxiv.org/abs/2210.02747v2}\DIFaddend .
 \end{thebibliography}
 
 

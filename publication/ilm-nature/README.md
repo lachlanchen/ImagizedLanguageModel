@@ -7,7 +7,7 @@ copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
 The [change-marked article](redlined_manuscript.pdf) compares the matched
-image-answer, native-reader and first-writing controls with the compact-diagnosis draft
+image-answer, native-reader, first-writing and conditional motor controls with the compact-diagnosis draft
 at `0f14fa3f`. The
 [supplement redline](redlined_supplementary_information.pdf) uses the
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
@@ -44,10 +44,23 @@ Canonical pixel disagreement does not by itself establish semantic error.
 See the [native result](../../references/glyph_tail_native_reader_result.md)
 and [first-writing audit](../../references/glyph_tail_first_writing_result.md).
 
+The direct-context motor completes its 216-stream comparison with **2/32 fixed
+and 7/32 proportional exact QA**, versus 2/32 and 6/32 for its parent. It
+retains only five of the earlier six proportional exact answers and fails its
+registered language pilot. Neither normal book continuation nor erased QA
+receives credit. Two 128-position diagnostics expose conditional writing
+errors even on training states. A paired late-time decoded-image objective
+also fails both physical gates, so its complete-answer quality is
+**unmeasured**. See the [motor result](../../references/glyph_context_motor_result.md),
+[cached-state diagnosis](../../references/glyph_context_motor_capacity_result.md)
+and [decoded-loss result](../../references/decoder_aware_motor_result.md).
+
+![Conditional motor comparison and original writing](figures/Figure_21_motor_diagnostics.png)
+
 ![Native answer access and unrepaired first-image writing](figures/Figure_20_native_reader_writing.png)
 
-The current package contains a **31-page article**, **54-page review** and
-**55-page article redline**. Figures 12–15 preserve the compact V1 trajectory
+The current package contains a **33-page article**, **58-page review** and
+**59-page article redline**. Figures 12–15 preserve the compact V1 trajectory
 and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
 add three editable slides with seven native measured charts and original
 diagnostic glyphs. The supplied-reference diagnostic scores remain separate
@@ -64,19 +77,38 @@ precision retained alongside explicitly rounded chart values. Independent
 checks verify native chart/workbook agreement and all twelve source-tile
 occurrences in each compiled article PDF. The
 100-page supplement and 57-slide composite deck remain unchanged.
+The [Figure 21 PowerPoint](figures/Motor_diagnostics_figures.pptx) adds four
+editable charts and twenty unchanged 32-square tile objects. All chart
+caches and literal workbook cells agree. All twenty tile occurrences survive
+in each article PDF, including repeated identical images. These comparisons
+do not constitute a measured language-learning curve. Both Artifact Tool and
+lossless LibreOffice renders were inspected; native PowerPoint-app review
+is not claimed.
 
 ![Matched input presentation and original glyph outputs](figures/Figure_19_glyph_input_transfer.png)
 
-The current local delivery is `ILM_NatureStyle_20261111_NativeReading` in
+The current local delivery is `ILM_NatureStyle_20261111_MotorDiagnostics` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
 The previous versioned packages remain available.
 
 Rebuild the matching article PDFs from the committed figure assets with
-`python build_native_reader_writing_publication.py` from this directory.
+`python build_motor_diagnostics_publication.py` from this directory.
 To check a fresh build without replacing the verified PDFs, set
-`ILM_NATIVE_PAPER_CHECK_ONLY=1` and `ILM_NATIVE_PAPER_STAGE` to a new absolute
+`ILM_MOTOR_PAPER_CHECK_ONLY=1` and `ILM_MOTOR_PAPER_STAGE` to a new absolute
 build directory under this repository's `artifacts/` tree. This uses LaTeX, the pinned redline tool and the CPU chart/pixel
 auditor. It needs no model inference or private figure-generation cache.
+The [build receipt](evidence/motor_diagnostics_publication_build.json) binds
+the reviewed PDFs, source files and verification. The
+[measured data](evidence/motor_diagnostics_measured_data.json),
+[figure bindings](evidence/motor_diagnostics_figure_bindings.json) and
+[chart/pixel audit](evidence/motor_diagnostics_figure_audit.json) retain
+full precision alongside six-decimal native chart values.
+The new figure sources are `prepare_motor_diagnostics_evidence.py`,
+`motor_diagnostics_figures.mjs` and `format_motor_chart_labels.py`.
+Figure authoring uses the bundled Artifact Tool runtime, the public pixel
+archives and the reference deck. Its staged PNGs preserve source pixels.
+The earlier native-reader build helpers remain available for that historical
+package; use the motor builder for the current article.
 
 ## Earlier restricted answer results
 
