@@ -31,7 +31,11 @@ ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图
 
 [结果及证据范围](../references/native_paired_qa_learning_result.md)
 
-## 当前证据：V35 闭合了栅格回路，但语义绑定失败
+2026年11月12日更新：36层延续适配器已在真实GPU上通过预检，完整目标含513个字形，峰值显存为18.123 GiB。完整训练尚未开始，可用ILM仍未得到验证。下方为较早的实验结果。
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## 较早的 V35 结果
 
 ![V35 实测结果：完整的栅格输入与栅格输出模型生成了会随提示变化的痕迹，但复制和指令绑定均未通过](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

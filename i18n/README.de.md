@@ -30,7 +30,11 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
-## Neuester Prompt-Test: V23-Relationsschaltung bestanden
+Stand 12. November 2026: Die Fortsetzungsadapter über 36 Schichten bestehen den realen GPU-Vortest mit einer vollständigen Zielsequenz von 513 Glyphen bei maximal 18,123 GiB VRAM. Das vollständige Training hat noch nicht begonnen; ein nutzbares ILM ist weiterhin nicht nachgewiesen. Die folgenden Ergebnisse stammen aus früheren Experimenten.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## Frühere V23-Ergebnisse
 
 ![Gemessenes V23-Ergebnis: Sechs Bild-Promptframes durchlaufen visuellen Abgleich, Operationsgatter, Quellglyphen-Routing und einen eingefrorenen Bildnormalisierer und erzeugen ein Antwortbild](../publication/ilm-image-native/figures/visual_relation_circuit_v23_result.png)
 

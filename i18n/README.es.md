@@ -32,7 +32,11 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
-## Evidencia actual: V35 cierra el bucle ráster, pero falla la vinculación semántica
+Actualización del 12 de noviembre de 2026: la adaptación de continuación en 36 capas supera la prueba real con una secuencia objetivo completa de 513 glifos y un pico de 18.123 GiB de VRAM. El entrenamiento completo aún no ha comenzado y no se ha demostrado un ILM utilizable. Los resultados siguientes corresponden a experimentos anteriores.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## Resultados anteriores de V35
 
 ![Resultado medido de V35: el modelo ráster completo de entrada y salida produce trazos sensibles al prompt, pero falla en copia y vinculación de instrucciones](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

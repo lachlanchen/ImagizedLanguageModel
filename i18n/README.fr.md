@@ -32,7 +32,11 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
-## État actuel : V35 ferme la boucle raster mais échoue à lier le sens
+Mise à jour du 12 novembre 2026 : l’adaptation de continuation sur 36 couches passe le prétest réel avec une cible complète de 513 glyphes et un pic de VRAM de 18,123 GiB. L’entraînement complet n’a pas commencé et un ILM utilisable reste à démontrer. Les résultats ci-dessous concernent des expériences antérieures.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## Résultats antérieurs de V35
 
 ![Résultat mesuré de V35 : le modèle raster entrée-sortie complet produit des marques sensibles à l'instruction, mais échoue en copie et en liaison sémantique](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

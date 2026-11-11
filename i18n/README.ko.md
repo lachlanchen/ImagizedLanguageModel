@@ -31,7 +31,11 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [결과와 근거의 범위](../references/native_paired_qa_learning_result.md)
 
-## 현재 증거: V35는 래스터 루프를 닫았지만 의미 결합에는 실패
+2026년 11월 12일 업데이트: 36개 층의 연속 생성 어댑터가 513개 글리프로 구성된 전체 목표 시퀀스로 실제 GPU 사전 검증을 통과했으며, 최대 VRAM 사용량은 18.123 GiB였습니다. 전체 학습은 아직 시작하지 않았고 실용적인 ILM은 입증되지 않았습니다. 아래 내용은 이전 실험 결과입니다.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## 이전 V35 결과
 
 ![V35 실측 결과: 완전한 래스터 입력 및 출력 모델이 프롬프트에 반응하는 흔적을 생성했지만 복사와 지시 결합에는 실패함](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

@@ -31,7 +31,11 @@ ILM مشروع بحثي لتعلّم اللغة وتوليدها بوصفها **
 
 [النتيجة وحدود الدليل](../references/native_paired_qa_learning_result.md)
 
-## الدليل الحالي: يغلق V35 حلقة الصور النقطية لكنه يفشل في الربط الدلالي
+تحديث 12 نوفمبر 2026: اجتاز تكييف الاستمرار عبر 36 طبقة اختبارًا تمهيديًا فعليًا بهدف كامل من 513 شكلًا كتابيًا، وبذروة ذاكرة رسومية قدرها 18.123 GiB. لم تبدأ بعد تجربة التدريب الكاملة، ولم تثبت صلاحية ILM للاستخدام. النتائج أدناه تخص تجارب أقدم.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## نتائج V35 السابقة
 
 ![نتيجة V35 المقاسة: يولد نموذج كامل بمدخلات ومخرجات نقطية علامات تتأثر بالتوجيه، لكنه يفشل في النسخ وربط التعليمات](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

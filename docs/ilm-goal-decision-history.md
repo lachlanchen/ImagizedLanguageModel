@@ -8,6 +8,25 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 12 November: continuation-only full-body preflight passes
+
+The implemented answer dynamics use a learned continuous first query and
+rank-eight residuals after all 36 native layers; source prompt prefilling stays
+frozen. The real GPU preflight trains complete 1/74/184/513-glyph targets and
+passes at 18.123 GiB peak allocation. All36layers receive gradients and run
+forward/recomputation. Source prompt states and every prompt KV remain bit-exact
+after four updates. Target-future causal checks and serial/parallel inference
+pass. The independent CPU audit verifies all 85 AdamW states at step 4, FP32
+moments, original full targets and source prompt pixels. See the
+[complete result](../references/visual_continuation_preflight_result.md).
+
+Total execution is 150.811 s including 20.020 s pressure waiting, with 113.573 s
+loading reported separately and potentially overlapping. Four preflight updates
+are discarded before the full fit. The runtime exercise emits one glyph and
+stops on a training case; no language score is assigned. The substantial-corpus
+fit and complete-response comparison are the next work and are not yet
+registered. GPU0 is released, and the full ILM objective remains active.
+
 ## 12 November: correct-image-history comparison completed
 
 All 64 frozen traces and 1,490 reference positions complete in 460.834 seconds

@@ -1,7 +1,8 @@
 # Adapt visual continuation while preserving prompt reading
 
-Status: direction selected after the correct-image-history comparison;
-not implemented, registered, fitted or qualified.
+Status: implemented and real full-body preflight passed. The full training
+comparison is not registered or fitted; usable language remains unqualified.
+See [the complete preflight result](visual_continuation_preflight_result.md).
 
 ## Why this is the next model question
 
@@ -23,11 +24,11 @@ changing an output density alone is not a new untested idea: the completed
 decoded-loss and direct-context flow results must be read before choosing a fit.
 Do not repeat them as new solutions or project their scores onto this cohort.
 
-## Candidate to implement and test
+## Implemented candidate
 
-Keep source visual prompt prefilling frozen. Test trainable continuation
-adapters activated after that prefill, including a learned continuous first
-answer query, at more than the current four final contextual layers. They
+The implementation freezes source visual prompt prefilling and activates
+trainable continuation adapters after it, including a learned continuous first
+answer query, at all 36 contextual layers. They
 condition on the prompt memory and actual preceding glyph images. The neural
 image writer and learned stop decision still produce the answer. This tests
 adaptation of the state transition to visual steps, rather than pretending that
@@ -35,14 +36,15 @@ one glyph is one native source unit.
 
 For a candidate residual adapter, write the transition schematically as
 \[
- h^{\ell+1}_t = F_\ell(h^\ell_t; C_\ell(x), h^\ell_{<t})
-                 + g_t B_\ell A_\ell h^\ell_t,
+ u^\ell_t = F_\ell(h^\ell_t; C_\ell(x), h^\ell_{<t}),\qquad
+ h^{\ell+1}_t = u^\ell_t + g_t\frac{\alpha}{r} B_\ell A_\ell u^\ell_t,
 \]
 where source prompt memory \(C_\ell(x)\) is fixed, \(g_t=0\) during prompt
 prefilling and \(g_t=1\) for the answer query and visual continuation. The
-low-rank maps are training parameters, not a glyph inventory. This specifies
-the intervention to implement; it does not establish a successful loss,
-memory footprint or language result. The query alone is not the proposed repair.
+low-rank maps are training parameters, not a glyph inventory. The implementation
+places the residual after each native layer, with rank eight and alpha sixteen.
+Its measured footprint is 18.123 GiB for the registered complete cases; a
+successful language objective remains unproved. The query alone is not the proposed repair.
 
 The generation gate must leave source prompt states and memory bit-exact when
 its adapters are disabled during prefill. It must permit the first output state
@@ -62,17 +64,17 @@ This is a hypothesis about adaptation capacity and sequencing. It is not proof
 that the source body's language is inaccessible, that all layers are needed,
 or that this change will outperform the retained model.
 
-## Required next work
+## Completed prerequisite and next work
 
-Implement one continuation-gating design and a real preflight on training cases.
-Verify disabled-prefill identity, causal exclusion of the current/future target,
-nonzero gradients through every selected trainable answer layer and the writer,
-and unchanged frozen weights. Measure actual allocated memory and wall time on
-GPU0 under the existing mutex and 22-GiB ceiling. Do not claim feasibility from
-parameter counts or a mock network. Preserve any failed admission or memory test.
+The complete preflight and independent optimizer/data audit pass: disabled-prefill
+identity, causal target exclusion, nonzero answer-layer/writer gradients and
+frozen-weight checks are verified by the registered execution. Peak allocation
+is 18.123 GiB for the measured complete cases. Preserve this evidence and do not
+repeat the preflight as pending work.
 
-Register a single full comparison only after this preflight passes. Select and
-account for authentic full training sequences from the existing corpus; keep
+Next prepare and register the single full comparison from the substantial
+authenticated corpus. Discard the four preflight updates before the full fit. Select
+and account for authentic full training sequences from the existing corpus; keep
 whole-work and passage-group splits and exclude all diagnostic development
 records from training. Establish exact data exposure, optimizer steps, snapshots,
 resource ceiling and failure action in advance. Preserve the parent, balanced
@@ -82,6 +84,6 @@ both fixed exact answers.
 Judge the model with complete readable image answers, paired question dependence,
 book continuation, natural stopping and erased-input controls. A pilot needs
 untouched confirmation; copying and reference-conditioned writing remain separate.
-If this candidate fails its preflight or full language gates, record that result
+If the full comparison fails its language gates, record that result
 and change the hypothesis. Do not extend an unchanged failed fit or replace the
 full independent visual-language objective with a small-head demonstration.

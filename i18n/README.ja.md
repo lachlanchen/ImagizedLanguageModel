@@ -31,7 +31,11 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [結果と証拠の範囲](../references/native_paired_qa_learning_result.md)
 
-## 現在の証拠：V35 はラスターループを閉じたが意味の束縛に失敗
+2026年11月12日更新：36層の継続アダプターは、513字形の完全な教師系列を使った実機事前検証に合格し、最大VRAM使用量は18.123 GiBでした。本格的な学習はまだ始まっておらず、実用的なILMは実証されていません。以下は以前の実験結果です。
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## 以前の V35 の結果
 
 ![V35 の実測結果：完全なラスター入力・出力モデルはプロンプトに反応する描線を生成したが、複写と指示の束縛には失敗](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

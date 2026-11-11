@@ -32,7 +32,11 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
-## Bằng chứng hiện tại: V35 khép kín vòng raster nhưng thất bại ở liên kết ngữ nghĩa
+Cập nhật ngày 12 tháng 11 năm 2026: bộ thích nghi sinh tiếp ở 36 lớp đã vượt qua kiểm tra sơ bộ trên GPU thật với toàn bộ chuỗi đích gồm 513 hình chữ, dùng tối đa 18.123 GiB VRAM. Huấn luyện đầy đủ chưa bắt đầu và ILM có thể sử dụng vẫn chưa được chứng minh. Các kết quả bên dưới thuộc những thí nghiệm trước đây.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+
+## Kết quả V35 trước đây
 
 ![Kết quả đo V35: mô hình raster vào-ra hoàn chỉnh tạo nét phản ứng theo prompt nhưng thất bại ở sao chép và liên kết chỉ dẫn](../publication/ilm-image-native/figures/causal_glyph_flow_v35_result.png)
 

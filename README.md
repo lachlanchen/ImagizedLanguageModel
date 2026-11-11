@@ -20,7 +20,23 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Current result: partial image-language transfer, with substantial failures
+## Latest status: full-body preflight passes; usable language remains unproved
+
+The [current balanced-writer evaluation](references/balanced_writer_matched_result.md)
+gives **6/32 strict complete QA matches, 0/16 both-correct pairs and no credited
+complete book continuation** with proportional prompts. These scores use a
+different cohort and metric from the earlier clear-answer results below.
+
+The new [continuation-only implementation](docs/visual-continuation-model.md)
+passes its [real 36-layer preflight](references/visual_continuation_preflight_result.md)
+on complete targets up to **513 glyphs**,
+with **18.123 GiB** peak allocated VRAM. Frozen prompt memory stays bit-exact;
+all answer layers receive gradients. The independent optimizer/data audit passes.
+This is a capacity and correctness result. The full fit is not yet registered,
+and no new held-out language score is assigned. The inherited body remains
+7.522B parameters. See the [active engineering goal](docs/first-imagized-language-model-goal.md).
+
+## Earlier paired Chinese-answer experiment
 
 The completed [paired Chinese answer test](references/glyph_tail_paired_answers_result.md)
 produces **16/32 clear complete correct answers** with contextual adaptation,
@@ -48,9 +64,9 @@ for its unchanged parent on a different new cohort. Better training glyphs did
 not improve new-context answers. An offline [first-decision audit](references/glyph_first_policy_audit_result.md)
 finds substantially more correct source first-character decisions than faithful
 first output images. Broader [synthetic function transfer](references/glyph_first_function_transfer_result.md)
-also fails qualification and damages real first outputs. The next
-[natural-state experiment](references/natural_first_image_protocol.md) expands
-to the full CMRC training partition and caches actual complete-image prefills.
+also fails qualification and damages real first outputs. The preserved
+[natural-state experiment](references/natural_first_image_protocol.md) is a
+secondary diagnostic; the active complete-sequence direction is tracked above.
 No general working ILM or matched-quality efficiency advantage is claimed.
 
 ## Earlier bounded results

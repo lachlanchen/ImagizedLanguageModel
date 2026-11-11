@@ -137,14 +137,24 @@ even with exact feedback vectors. Preserve its different cohort and exclude its
 diagnostic records from training. Read the completed mixture-density and
 first-function-transfer results before proposing those routes again.
 
-The [selected next direction](../references/generation_only_adaptation_direction.md)
-is to test stronger adaptation of visual continuation dynamics while preserving
-frozen source prompt prefilling. First implement and measure one continuation-only
-adapter design, including its first answer query. Verify real causality,
-prefill identity, gradients and one-4090 memory before registering a full fit.
-Only frozen prompt memory may be reused: changed answer dynamics must be
-recomputed. This is an unimplemented hypothesis, not a working solution.
-Retain the current controls and full complete-response acceptance criteria.
+The [continuation-only implementation and real preflight](../references/visual_continuation_preflight_result.md)
+now pass. All 36 answer layers receive real gradients through complete targets
+of 1, 74, 184 and 513 glyphs, with 20,212,225 trainable parameters and 18.123 GiB
+peak allocated VRAM. Prompt states and all prompt keys/values remain bit-exact
+after updates; causal checks pass. Independent audit verifies four AdamW steps
+for all 85 optimizer tensors and authentic complete targets. The source retains
+its 7.522B inherited body and frozen image interfaces. Preflight is not language.
+
+The next work is the full complete-sequence training/evaluation pipeline and
+prospective registration, using the substantial source corpus and explicit
+diagnostic exclusions. The old 3,176-question subset's targets end at sixteen
+glyphs; do not substitute it for full QA answers and book continuations. Discard
+the four preflight updates before fitting. Preserve both prompt layouts, the
+216-stream comparison, fixed checkpoints, all existing successful cases and
+untouched confirmation. Prompt rendering/layout and exact source exposure must
+be fixed before training. Do not repeat the completed preflight or interpret
+its one-glyph training-case runtime exercise as a usable model. A full fit and
+complete-language evaluation are not yet registered or run. Keep the full goal.
 
 ## Training and evaluation contract
 

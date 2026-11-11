@@ -18,11 +18,14 @@ The compact fits, writer comparisons, native-reader diagnosis, correct-image-
 history comparison and latest realized-writer publication are complete. The
 usable-language goal remains unachieved. Both correct-history physical gates
 fail; reference history does not qualify autonomous language. The next direction
-is continuation-only contextual adaptation with frozen prompt prefilling. Read
-`references/generation_only_adaptation_direction.md` and the earlier feedback
-ceiling before implementation. Verify a real causal/gradient/memory preflight
-before registering a full fit. Preserve the failed mixtures, first-function
-transfer and writer-only controls; do not repeat them as new solutions.
+is complete-sequence training and evaluation of the continuation-only model.
+The real all 36-layer preflight passes at 18.123 GiB with complete 513-glyph targets,
+bit-exact frozen prompt memory and independently checked four-step optimizer.
+Read `references/visual_continuation_preflight_result.md`. Do not repeat the
+completed preflight or reuse its four updates for the full fit. Prepare and
+register the substantial-corpus comparison before training, with complete QA
+and book targets, both layouts, fixed snapshots and original language controls.
+Preserve the failed mixtures, first-function transfer and writer-only controls.
 Do not prioritize manuscript polish over the unresolved model failure.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
