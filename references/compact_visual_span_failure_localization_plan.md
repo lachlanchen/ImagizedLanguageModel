@@ -90,7 +90,7 @@ head's affine family. With final LayerNorm, let
 
 \[
  A=D W\operatorname{diag}(\gamma)C,\quad
- a=\mu+D(W\beta+b),\quad C=I-\mathbf1\mathbf1^	op/m.
+ a=\mu+D(W\beta+b),\quad C=I-\mathbf1\mathbf1^\top/m.
 \]
 
 For target embedding \(e\), the squared distance to
