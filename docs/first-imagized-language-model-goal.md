@@ -44,9 +44,14 @@ is invented. The versioned local delivery is
 `ILM_NatureStyle_20261111_MotorDiagnostics`. Local hashes are verified; cloud
 propagation is not claimed. Earlier figures, supplement and packages remain.
 
-The next work unit returns to the model. Before another fit, register one
-different bounded decision addressing the realized conditional endpoint,
-rather than extending the failed local loss. First test faithful writing
+The next work unit returns to the model. The
+[full-sampler endpoint decision](../references/rollout_endpoint_motor_decision.md)
+tests gradients through all 32 deployed integration intervals, with an
+equal-update flow-only control from the same original EMA. It keeps the
+reader, stopping and deployment boundary fixed. Both arms use 2,000 updates
+on authentic first/later states; only the objective differs. Implementation
+and numerical gradient checks precede source-bound registration and fitting.
+This is a new hypothesis, not a successful repair. First test faithful writing
 from the fixed actual-context states, then complete the unchanged autonomous
 language comparison if the prerequisite passes. Keep the original flow and
 parent controls, all adverse cases, fixed seeds and complete denominators.

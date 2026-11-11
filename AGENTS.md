@@ -88,8 +88,13 @@ the tested objective change. Its 12,000-update paired fit and 128-position
 assessment are complete: first/later median F1 is 0.987034/0.976561 and both
 physical gates fail. Preserve matched initialization/data/RNG evidence and
 all 512 checked/reviewed tiles. No full language trial is run for this recipe.
-Do not extend or tune it. Next apply the bounded motor-diagnostics manuscript
-plan, then make a different evidence-driven model decision before fitting.
+Do not extend or tune it. The motor-diagnostics manuscript and native Figure21
+revision are complete, with 33/58/59-page verified PDFs. The next decision is
+`references/rollout_endpoint_motor_decision.md`: paired original-flow versus
+full-sampler decoded-endpoint training, with all32 interval gradients and
+unchanged deployment. Commit/bind source and registration before fitting;
+complete both arms and the unchanged128-position diagnosis before any eligible
+full language comparison. No outcome is established by the proposed method.
 Preserve the completed diagnosis, public pixel archive and original language
 scores. Do not rerun this audit as pending work or call it usable language.
 
