@@ -78,10 +78,19 @@ CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. \
 ```
 
 The pipeline writes its status and logs under
-`artifacts/compact_visual_span_pipeline_v1`. It generates all controls at
+`artifacts/compact_visual_span_pipeline_v2`. It generates all controls at
 the two endpoints and the normal cohort at the intermediate checkpoints.
 The resulting review directory contains the original answer PNGs under
 opaque names and a readings template.
+
+The current scheduler matches the existing training worker's admission:
+48 GiB available host RAM, low memory pressure, an owned-process audit, the
+GPU mutex and 20 GiB free device memory before loading. Global swap occupancy
+is recorded by that worker. The earlier scheduler additionally required it
+below 75%, which could stall an otherwise admitted fit. The successor preserves
+the existing teacher cache and model recipe. Standalone inference retains its
+original RAM/swap admission. See the
+[scheduler correction](../references/compact_visual_span_scheduler_admission.md).
 
 Evaluate complete answers with learned lengths, stopping and feedback
 throughout generation. Preserve the original image stream and score

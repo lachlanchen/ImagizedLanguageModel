@@ -45,6 +45,17 @@ def stage_progress(stage, path):
     return 0
 
 
+def host_ready_for_stage(stage, host):
+    if stage in {"teacher", "fit"}:
+        # These workers repeat full_reader_gpu admission, including the owned
+        # process audit. That established path records high global swap while
+        # admitting only with the RAM reserve and low actual memory stalls.
+        return (host["available_gib"] >= 48 and host["some_pressure_avg10"] <= .5
+                and host["full_pressure_avg10"] <= .1)
+    # Standalone inference currently uses gpu_zero's original RAM/swap gate.
+    return host["available_gib"] >= 24 and host["swap_fraction"] <= .75
+
+
 class Pipeline:
     def __init__(self, directory, identity):
         self.directory = directory
@@ -88,11 +99,7 @@ class Pipeline:
                     idle = False
             # Match the stage's existing admission checks. The child repeats
             # them and owns the mutex throughout its use of the device.
-            fit = stage in {"teacher", "fit"}
-            host_ready = (host["available_gib"] >= 48 and host["some_pressure_avg10"] <= .5
-                          and host["full_pressure_avg10"] <= .1) if fit else (
-                              host["available_gib"] >= 24 and host["swap_fraction"] <= .75)
-            if idle and free >= 20 * 1024 and host_ready and host["swap_fraction"] <= .75:
+            if idle and free >= 20 * 1024 and host_ready_for_stage(stage, host):
                 return
             self.status("waiting_for_gpu", stage=stage, free_vram_mib=free, gpu_mutex_free=idle, resources=host)
             time.sleep(30)
@@ -184,7 +191,7 @@ def main():
     parser.add_argument("--teacher", type=Path, default=artifacts / "visual_sequence_teacher_v1")
     parser.add_argument("--fit", type=Path, default=artifacts / "compact_visual_span_fit_v1")
     parser.add_argument("--evaluation", type=Path, default=artifacts / "compact_visual_span_evaluation_v1")
-    parser.add_argument("--pipeline", type=Path, default=artifacts / "compact_visual_span_pipeline_v1")
+    parser.add_argument("--pipeline", type=Path, default=artifacts / "compact_visual_span_pipeline_v2")
     parser.add_argument("--after-pid", type=int)
     args = parser.parse_args()
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "0" or os.environ.get("CUDA_DEVICE_ORDER") != "PCI_BUS_ID":
