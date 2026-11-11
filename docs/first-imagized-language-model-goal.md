@@ -41,28 +41,43 @@ not a language-quality bound. A separate one-case precision probe identifies
 BF16 sequence-shape sensitivity; the completed diagnostic uses matched cached
 execution and retains the original consistency tolerance.
 
-**Next required work: compare with the earlier model that produced readable
-answers on this same fixed cohort.** Its earlier 16/32 clear-answer result
-uses different questions and a different metric. Register its actual checkpoint,
-inputs, generation settings, quality measurements and resource budget before
-inference. Audit overlap with that model's training/source groups before
-calling the cohort held out. Preserve the compact failed controls and disclose
-the larger inherited body. This comparison must precede another training branch, so a
-lower parameter count does not replace demonstrated capability.
+The [earlier actor's matched-cohort evaluation](../references/glyph_tail_compact_cohort_result.md)
+is complete: **2/32 complete exact QA answers, 1/16 both-correct pairs and
+3/32 readable normal QA outputs**. Neither compact final model retains those
+exact answers. One readable output omits the reference's parenthetical alias;
+it fails unchanged strict matching without establishing factual falsity.
+All 120 outputs were reviewed opaquely and rescored independently from the
+frozen readings. The 44 normal inputs contain 36 caps, including all twelve
+book continuations. No readable coherent complete book output is established.
+The two exact answers belong to one passage pair; this remains limited
+development evidence. Both QA-erased conditions score zero. The pointwise
+95% interval for either normal primary rate is 0–18.75%.
 
-The [matched-cohort control](../references/glyph_tail_compact_cohort_protocol.md)
-is registered and running with the unchanged earlier actor, all 120 endpoint
-inputs and a 128-glyph cap. CPU preparation authenticates every original input
-and finds zero question-ID, normalized-passage and training-PNG overlap with
-its recorded adaptation data. Inherited pretraining and all earlier ancestors
-remain outside that certification. Generation is not yet reviewed or scored.
-Complete the opaque output review, fixed-case cold replay and authenticated
-scoring before selecting another fit. Keep the 7.522B inherited visual/contextual
-parameter cost visible; this is not a controlled test of model size alone.
+The fixed-book cold replay reproduces actual pixels, states, stopping and
+feedback without observed forbidden input access. Inference takes 1,589.88
+seconds for 120 cases at 17.786 GiB peak allocation, with zero new updates.
+The actor retains 7.522B inherited visual/contextual parameters. No source
+question, passage or training-PNG overlap is found in its recorded adaptation
+data; inherited pretraining and all earlier ancestors remain uncertified.
+Its earlier 16/32 clear-answer result uses a different cohort and metric.
+Bodies, observers, adaptation histories and writers differ, so this is not a
+causal model-size or matched-quality efficiency comparison.
 
-Reject the unchanged compact joint recipe and a sampler-only repair. Choose
-one bounded reader/writer intervention from the completed diagnostics and
-matched-cohort control. A native-context writing fit remains a possible
+**Next required work: register the frozen input-presentation comparison before
+another fit.** The [bounded decision](../references/glyph_tail_input_presentation_decision.md)
+preserves all 32 current questions and their erased-input controls, full
+passages, actual-pixel feedback, weights, cap and scoring. Earlier training
+pages have median height 288 pixels versus 704 here; target answers are at
+most sixteen glyphs versus 118 in the current references. These observed
+distribution shifts motivate a test, not an explanation already proved.
+No reference-answer crop, truncation, supplied output length or successful-pair
+selection is allowed. If the adapter fails to broaden retained readable
+capability, localize native visual reading versus writer/feedback failure
+with an explicitly helper-only diagnostic before choosing a training change.
+
+Reject the unchanged compact joint recipe and a sampler-only repair. Complete
+the selected input-transfer measurement before choosing a reader/writer
+training intervention. A native-context writing fit remains a possible
 training diagnostic, with source embeddings confined to that diagnostic;
 it cannot qualify deployed visual reading. Check the earlier separately
 trained semantic glyph loop before repeating the same approach. A development
@@ -72,8 +87,8 @@ finite losses, rank checks and presentation quality do not replace language.
 The Nature-style article now includes both failed fits and the completed
 failure-localization diagnostic. Reading/review/redline PDFs have 27/47/47
 pages, with three additional native PowerPoint figures containing seven
-measured charts and original diagnostic glyphs. The current unreviewed
-matched-cohort outputs are outside that revision. Model diagnosis and readable
+measured charts and original diagnostic glyphs. The newly completed
+matched-cohort control is outside that revision. Model diagnosis and readable
 held-out answers take priority over additional presentation work.
 
 ## Goal and acceptance criteria
@@ -136,7 +151,7 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: retain a readable control before another fit
+## Current decision: retain the measured answers and test input transfer
 
 The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
@@ -186,8 +201,9 @@ remain uncontrolled. The registered wider comparison removes this tested
 capacity restriction but still fails the complete-response evaluation. Preserve both models as
 controls. The restriction is not a sufficient explanation for the failed
 answers. The completed diagnostic also finds conditional-writing failure
-before emitted feedback. Compare the earlier readable model on the same cohort
-before choosing another fit.
+before emitted feedback. The completed earlier-actor comparison retains only
+two exact current answers. Preserve those pixels and test input-presentation
+transfer before choosing another fit.
 
 ## Current evidence and unresolved tests
 

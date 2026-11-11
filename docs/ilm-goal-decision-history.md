@@ -8,6 +8,42 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: matched-cohort answers retained, input transfer unresolved
+
+The unchanged earlier glyph actor completes all 120 compact-cohort endpoint
+inputs and a fixed-book cold replay. Opaque review freezes three readable
+normal QA outputs before scoring. Two match the complete canonical answer,
+forming one successful passage pair: 2/32 exact QA and 1/16 both-correct
+pairs, versus zero for both compact final checkpoints. The third omits a
+parenthetical alias and fails unchanged strict matching; that does not
+establish factual falsity. Both erased QA conditions score zero. Thirty-six
+of 44 normal streams, including all twelve books, reach the cap. No coherent
+complete book continuation is established.
+
+The retained 7.522B visual/contextual actor uses 17.786 GiB peak allocation
+and 1,589.88 seconds for the frozen 120-case run, with zero new updates.
+The replay verifies exact signed pixels, contextual states, stopping and
+actual feedback in a separate traced invocation. The workers have exited.
+The completed source audit has no adaptation question/passage/PNG overlap;
+inherited pretraining and all earlier book/copy ancestors remain uncertified.
+
+The CPU audit authenticates all 3,176 adaptation PNGs and records input/answer
+distribution differences. Old training pages have median height 288 pixels,
+versus 704 for the current normal QA cohort. Old targets are at most sixteen
+glyphs; current references extend to 118. The next bounded decision is a
+frozen input-presentation comparison on the full 32-question cohort and its
+erased controls, preserving every passage/question and all runtime output
+rules. There is no answer-centered crop or reference-length supply. No new
+training branch is chosen. See the [result](../references/glyph_tail_compact_cohort_result.md)
+and [prospective requirements](../references/glyph_tail_input_presentation_decision.md).
+
+The paper revision at `0f14fa3f` includes both compact failures and frozen
+diagnostics: 27/47/47 reading/review/redline pages, three additional editable
+figure slides and seven native charts. The locally verified 372-file Nutstore
+package preserves all prior figures, supplement and composite deck. The newer
+matched-cohort result remains outside that scoped manuscript revision.
+The usable independent visual-language goal remains active and unachieved.
+
 ## Earlier direction record
 
 The sections below retain decisions and observations from 8 November and

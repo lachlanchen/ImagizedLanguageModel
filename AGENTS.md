@@ -29,12 +29,19 @@ sampling does not repair it. The image encoder's native-target alignment also
 has a measured affine restriction. Use the goal and complete diagnostic receipt;
 keep these supplied-reference results separate from autonomous language scores.
 
-Before another training branch, register and run the earlier model with
-readable image answers on the current fixed cohort. Its earlier 16/32 result
-uses another cohort/metric. Keep its larger inherited-body cost visible and
-preserve both compact failed controls. Then choose one bounded intervention
-from the measured comparison. Reuse completed corpus/cache assets and inspect
-prior semantic-glyph-loop results before repeating a failed approach.
+The earlier actor's current-cohort evaluation is complete: 2/32 strict exact
+QA answers, 1/16 both-correct pairs, three readable QA outputs and no credited
+complete book continuation. All 120 opaque outputs, authenticated scoring and
+the fixed cold replay are complete. Its earlier 16/32 result uses another
+cohort/metric. Preserve the current exact pair and the larger inherited-body
+cost, alongside both compact failed controls.
+
+Before another fit, follow the bounded input-presentation decision in the goal:
+register the full current QA cohort and erased controls with unchanged weights,
+full passages, output cap and scoring. Do not crop around reference answers or
+truncate to the earlier answer lengths. Finish that measurement before choosing
+a training branch. Reuse completed assets and inspect prior semantic-glyph-loop
+results before repeating a failed approach.
 
 ## Always Commit and Push After Change
 
