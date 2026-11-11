@@ -107,8 +107,8 @@ def analyze(run,output):
             sensitivity_groups[model,case['split'],case['kind']].append(sensitivity)
             case_results.append(dict(model=model,case=key,split=case['split'],kind=case['kind'],
                                      glyphs=len(gold),first_span_glyphs=first,arms=case_arms,sensitivity=sensitivity))
-            # Prospectively fixed by the registration's order: first of each
-            # split and kind. Keep every intervention and both models.
+            # Display the first case of each split/kind in registered order.
+            # This display rule was added during execution, not preregistered.
             bucket=(case['split'],case['kind'])
             if bucket not in fixed_cases:
                 fixed_cases.add(bucket)
@@ -140,6 +140,7 @@ def analyze(run,output):
                  execution_report_sha256=sha(run/'execution/report.json'),record_files_sha256=bindings,
                  source_sha256=sha(Path(__file__)),geometry_sha256=sha(run/'feedback_geometry.json'),
                  records=case_results,metrics=metrics,reader_metrics=readers,sensitivity=sensitivity,raw_examples=raw,
+                 example_selection='First registered case of each split/kind; deterministic analysis-time display rule, not preregistered examples',
                  original_pixel_metrics_independently_recomputed=True,original_noise_and_feedback_hashes_verified=True,
                  reported_latent_errors_independently_recomputed=False,
                  latent_error_limit='Target codec latents were not persisted separately; these values come from the bound neural execution, while pixel measurements are recomputed from original targets.',
