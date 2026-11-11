@@ -125,3 +125,26 @@ registration is not completed training. Fit artifacts go to
 opaque review go to `artifacts/compact_visual_span_full_rank_pipeline_v1`.
 Standalone deployment uses `scripts/infer_full_rank_visual_span.py` and only
 the authenticated foundation, codec, input image and image-head snapshot.
+
+The registered fit has started on GPU0. An independent inspection of one
+atomically opened live checkpoint verified 419 AdamW updates over six shards,
+with all optimizer counters equal to 419. Forty-four encoder tensors and
+fifty-five writer tensors had changed; the feedback normalization buffers
+were unchanged. All six saved objectives and parameters were finite. The
+peak allocated GPU memory recorded in those shards was 4.222 GiB. Initial
+encoder and writer hashes matched registration, and the runtime's GPU RNG
+preservation check passed before its first snapshot. This verifies training
+execution, not language quality or full-pass completion. See the
+[saved-state evidence](evidence/compact_visual_span_full_rank_start_20261111.json).
+
+After the fixed suite is complete, use the wider writer's traced replay:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/verify_full_rank_visual_span_cold.py \
+  --run artifacts/compact_visual_span_full_rank_pipeline_v1/image_heads_step_0008172 \
+  --checkpoint artifacts/compact_visual_span_full_rank_fit_v1/image_heads_step_0008172.pt \
+  --output artifacts/compact_visual_span_full_rank_cold_v1
+```
+
+It uses the same fixed book input, syscall access audit and exact pixel/PNG,
+stopping and feedback comparison as V1. The wider-writer replay is not yet run.

@@ -30,10 +30,14 @@ the hypothesis to test; readable conditional writing is the required outcome.
 The [registered comparison](../references/compact_visual_span_full_rank_protocol.md)
 uses a 1,024-channel writer. Its initial projection, LayerNorm-centered map and
 three tested local velocity Jacobians have rank 768. The trainer verifies the
-unchanged encoder/length initialization and noise-stream preservation. These
-capacity checks are complete; training and generated-language results for the
-new writer remain unproved. Preserve the same full corpus and five-checkpoint
-evaluation. Treat its final checkpoint as the primary comparison.
+unchanged encoder/length initialization and noise-stream preservation. The
+single-GPU fit has started. An independent saved-state inspection verified 419
+optimizer updates over six shards, finite parameters and all six losses, and
+the exact registered initial encoder and wider writer. See the
+[training execution evidence](../references/evidence/compact_visual_span_full_rank_start_20261111.json).
+Full-pass completion and generated-language results for the new writer remain
+unproved. Finish the same full corpus and five-checkpoint evaluation before
+another model change. Treat its final checkpoint as the primary comparison.
 
 ## Goal and acceptance criteria
 
