@@ -1,0 +1,4894 @@
+{
+  "schema": "reference-image-history-v1",
+  "source_sha256": {
+    "scripts/compare_glyph_tail_compact_cohort.py": "bd0256767c9aca397ea49aefa4d95ed53a09e06700a4676edae20ceda75340d1",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "ilm/visual_lm/glyph_tail_adapter.py": "b0be8681d8ecfbc6f0c0bdc8f61ed0969b4bdf336cffab9119afaa83603532f0",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/review_compact_visual_span.py": "c046d3a8f3565c945478a1899d4f9a8776b2ed327c2114258362fb39c7a8a323",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "scripts/diagnose_reference_image_history.py": "827cccd1476a7183f7060de30e7379344ac698027da062e01076df07529bfd13",
+    "scripts/summarize_reference_image_history.py": "c877c353bec5ec3765700b69de72c67e6979e8d0e234566adb098dec5d2ccd6f",
+    "scripts/compare_balanced_writer_matched.py": "e20327494fae768605e545593c3a742a0070afb36a2e81c57724eea4809dc2a6",
+    "ilm/visual_lm/reference_image_history.py": "55ce92320510c2c73ea17bcb6ac3632c13d0f568f8ec1219ec39e8ff3c47b0b4",
+    "tests/test_reference_image_history.py": "ebc55afb7d869db05ac80fb85c9ce09c1c5bab8ee7fbcae4cbd25ac82f5a34aa",
+    "references/reference_image_history_decision.md": "6c3de1d50cb4c17b125ee4bc0e64190b7cd06cc65e9c8ce337a48a2dad097cbc",
+    "scripts/audit_glyph_tail_first_writing.py": "1fd8325b786ed98c0022e2a5ad163fbfd76f83997b36d1542db76e76f871bb6e"
+  },
+  "bindings_sha256": {
+    "artifacts/balanced_glyph_writer_v1/fit/checkpoint_latest.pt": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+    "artifacts/glyph_tail_first_writing_v1/registration.json": "d529a4211921c0afcabb3d368a8dd94b0bbac660e759619b162951b1c2861d70",
+    "artifacts/glyph_tail_first_writing_v1/prepared_pixels.pt": "6dcf296ea5fe8723ac347746b0727bd5d386027f8fdef3694241e57934c22d14",
+    "artifacts/balanced_writer_matched_v1/registration.json": "f3d6221d7ce35b91e0c994c34a50ac0a0637a7f92f8c4e5a8a278166d102ce06",
+    "references/evidence/glyph_tail_native_reader_learning_20261111.json": "1d7acb90c11dcc5037bd4ab60379bf343b69258215fdfc7776d554f9484a2510",
+    "references/evidence/balanced_writer_matched_learning_20261111.json": "34d84294a62983d6ce9bd684afff1db4365b9077bee3a7aff55f1d8fdcd461f5",
+    "references/evidence/glyph_context_motor_learning_20261111.json": "fe791e1640127034a5a1f369998d315dd687c9c49f8cb630413a1a22172b0913",
+    "artifacts/balanced_writer_matched_v1/review/fixed_cells/scores.json": "244205cda01442e68ed85f2cb3f5408412f039b1113ae77d9306a8b4cf879449",
+    "artifacts/glyph_context_motor_v1/review/fixed_cells/scores.json": "97e560b6ad0188460ca1ea68098c1d88b39da51d92145e99f8d39f694a9e2077",
+    "artifacts/glyph_tail_compact_cohort_v1/review/scores.json": "8b27d8323793db09c04993985c7e664238954c47e4027be1370d0db417abac90",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/report.json": "93cfe6561747fc79d57e2453ce9976ed39e400e1a7e08002d2c59dd93446da62",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_a_normal.png": "7f23847a2706c2212c4c8066fee6c38677288ed5417d1c6460719a3a2398a360",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_01_a_normal/legacy_output.pt": "0c21001104fb6b17ca7228b979ae7997d220478fe562090c49d3c37cffeffd32",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_b_normal.png": "e616394bd50f9aea1b9f891b09b541c058b1d0496e95bcfb6e59a888c7d6738b",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_01_b_normal/legacy_output.pt": "7404839c59bf24e804f71fba1aa809e23e6c917a15204458172134feb0e13145",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_a_normal.png": "2e9247f7b0835d73e16e7d621624aad70e64271f940828e3e390b7216d069182",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_02_a_normal/legacy_output.pt": "f0d92e5f519f0e691415222ab8fd984ac4029f28a2947ec6e4b7ef72e66b30d4",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_b_normal.png": "fcc5775e2e778381922bc3d34d061bea291d15f3d877f750d19277c36fd485fb",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_02_b_normal/legacy_output.pt": "58b16956fbad2b9f52f580d61a6d3e4760947f3beb10f07cb381917fc61c39b4",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_a_normal.png": "2202e58fa533cde72d014930c19110ef9de9040f9973c88d455e4edca2a81349",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_03_a_normal/legacy_output.pt": "6cb0b7fa93922e23ae5a567a9f70ad2646beadc6a7e73e3c283d9471937fbb82",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_b_normal.png": "2ffeef43740ccdd69cd38fd474eea5a77494f24f68d26826d83471932acd4fb0",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_03_b_normal/legacy_output.pt": "689c763e9380e14e803ae727e6f267be8d889629d360de8f0856047fe1080540",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_a_normal.png": "7acec483e98d7afb404972bf567dc00fe02f97af7fe19d080c2f2f3ed0bb26a3",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_04_a_normal/legacy_output.pt": "1b16f0246f6d269583990068953cfc52d0ead16a254b5d0c33ad456f7231b176",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_b_normal.png": "34aa0184c84319748347e4c3f748fc3b9e91c117cea66969e11b17ecf92f4a48",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_04_b_normal/legacy_output.pt": "6164d25e8becd5cc90ea7dc60b2204d135002b342e90a13cb14afdc967873b86",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_a_normal.png": "453680818fb3a723d6be7e52b1ffb7fa2efef09ca72d3b02deb5f8fffa02e3a4",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_05_a_normal/legacy_output.pt": "aeafe39672b788665e3f1bfca8ff939ccbdd2b0401db86061b10b3961e1c3bef",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_b_normal.png": "479c0efa97ce4318cc42e4e943d39b80e28e1d3c11625788bc6e71039ef3837e",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_05_b_normal/legacy_output.pt": "f625bda7a05e8545441b19ed9e65e6c562499c2a8770f11e09f9465b052f989e",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_a_normal.png": "3dbe0f6515b6544388aa22e00fec4e9f639ba35f8d476451177fbda2dc251c07",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_06_a_normal/legacy_output.pt": "57ed60c4ed85003c350a51de50f8637a8113dcc42e9ebcf66279f2999f53d8cf",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_b_normal.png": "f172fd0c39c9ef7571f6ddd079b4b1ffb8b4329378e666476bfd4f2de240f51a",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_06_b_normal/legacy_output.pt": "445c47d591a7a40e2050cc4412ddb66966552282d3c20c5f81456fa3d2b76bdc",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_a_normal.png": "58870a6338d7294bd9212bbf3868d63558b9692718c7c1e521dd9a4d52696202",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_07_a_normal/legacy_output.pt": "8ae0e24453b0c8ac0ba2f4ea8e184bdb987432bb6a96d1b3bb558b5d27e85090",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_b_normal.png": "14e26397a8fc22f7b42dfdafc43b43a35e8e30e7c448833d17377ec3fe472697",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_07_b_normal/legacy_output.pt": "f08d6643e3de2eb45352f0a93b0d7393311995db5e35f872039089862b0b5172",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_a_normal.png": "69f31a4f0ce4d1592faa7391ca8a577ecfb5c53cec6716bef7fc02a1e1f7ae55",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_08_a_normal/legacy_output.pt": "18efdba769282655f50daa6530d02cb5df14037a5b201559c11250f368365df0",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_b_normal.png": "4237603602f565368b1db0c927d92412cc14f0b0d7c93813c07dba542fd4e8fb",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_08_b_normal/legacy_output.pt": "1d888003ca26b04d3b8d5c9273f8870564e2254e297fe1d4b8b4d3f11ebeeb04",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_a_normal.png": "b1718aff5ec0deb38785858281881e056369c37adf6b391b0dcfb6b60945f7da",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_09_a_normal/legacy_output.pt": "9207d4edfd1fecf488fba7cdb989056b3621b1588cb83f3f26211a0bd10e6199",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_b_normal.png": "85485094897a4a622b829ffedecdff243232503291a33e383eb70b333da4a162",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_09_b_normal/legacy_output.pt": "0606238b235953d44580f57034cb66f335bcae20b584c089f94fb79c5cc80fd5",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_a_normal.png": "e28736342b4801a136b24ae0251c294b23cb4f267b2760714f46dd8fffa0531f",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_10_a_normal/legacy_output.pt": "124087ef261704beb594f33bd0c813e96388064df8ad6a5d32ced00324f6bfa4",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_b_normal.png": "30ff0c06f0a7a512b40b543bc8a9e623cb592dbd19cf35fae72a05dfa54bbf53",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_10_b_normal/legacy_output.pt": "a93ba5337064eb43029c070e9e5c1a5e384c30763720c03bf06e85d0a95681d2",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_a_normal.png": "2e116aa55c3466eae519647e5c5c1c0d79243662d4e886efe610149b3b1abaa0",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_11_a_normal/legacy_output.pt": "405011388cc45a1c963d83a8ca6530c9eebdc4171e67d02f12c61850b6c41575",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_b_normal.png": "db14a0faa904872e33a93510036272c145c24d87e87ec36f3e8406403da53cd8",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_11_b_normal/legacy_output.pt": "09df8e2241826753891baf831df5b4d297de1ab42a491f80a93a5e10ae00a8dd",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_a_normal.png": "cf263caa898966b84bf18959028dec93f19e18ca7c62a5ee6d68954dc0e6a1a0",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_12_a_normal/legacy_output.pt": "3b287291344052183913afa1f63bbf7ffe955d304dd0256c6df4307dae17f358",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_b_normal.png": "29eeedd5e8bf6337ed7918a04606108f202b671a111e5d73da04da23c2314907",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_12_b_normal/legacy_output.pt": "198c9e321a81726ec427d8097e6172ff9c296591203185b8dcb2fd653277cee4",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_a_normal.png": "0771e6ababfe043e6c1915c8fef81ee07089f2ba3236ac354b255f567f27f9f1",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_13_a_normal/legacy_output.pt": "508c7e46ce1c3b23d1db3b3c8205c99dc520db283e98b299d10308004f0bbf87",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_b_normal.png": "2e1a803aeaa52f9adfdd5b85ddd4b46017b4e32bb7ae5ab3f5bcc6c9ab44f94b",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_13_b_normal/legacy_output.pt": "ce4cc1be38b912b61194c7619b01dae4fb13969070c5287f8620368dbe71a182",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_a_normal.png": "2d21c58ca075ce121d7574a6c3b617a0a9b56a165337032c31cb2f47c741b74f",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_14_a_normal/legacy_output.pt": "1184a97acef2778078defe584e788c46803321dde62b2f1e4c246c41a0824406",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_b_normal.png": "042a13659b16c6fe298466636a61e36c20ae7f6a83d468bfd797036dd11a5519",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_14_b_normal/legacy_output.pt": "46071375bb4014f51e25a34f7c103d7d343bbabff3410c509e59e02e4c2a9863",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_a_normal.png": "196f08dc205fca8f8281b1ea1972bf0df5ec8b83e1420701d11b0866959b8130",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_15_a_normal/legacy_output.pt": "9c2b5e1cb6268f8f088f55d6ef75d2d67c5be3bd4035bfc58383ce05e551169e",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_b_normal.png": "5841ce8609d888a14a067f517ceec440c3aba351383df953bfd4355d0d0fbc04",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_15_b_normal/legacy_output.pt": "ad1f04644e720efa8c67ef892cf70343bb8f0a0610b0cb13313efc7422b0ba25",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_a_normal.png": "3516c7c06d81d5c517a22703ecd10a3051614079bea2db1aa67b854f61652416",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_16_a_normal/legacy_output.pt": "9a9f32fa0be7687b31f57c14177909423777972f18d94b5f3c0bb2c6b2a37a33",
+    "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_b_normal.png": "8d5731ddfbb328c745f5adf46b2a7365a40ccb81e2933f6c98182db0c5cfeee3",
+    "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_16_b_normal/legacy_output.pt": "10dc69e5ffc1a47341b6b1abf78c11a97292d67125f38474d34cd32264d07a1a",
+    "artifacts/balanced_writer_matched_v1/review/proportional/scores.json": "b48bff8b6faf875a53b5e42d34200a6e14c29ea95497ebec17fbbb4b86d462ba",
+    "artifacts/glyph_context_motor_v1/review/proportional/scores.json": "35bfc4c147e4bc2fa2498e288cb10553733c552f7ebf930ebea700d815b25cf0",
+    "artifacts/glyph_tail_input_presentation_v1/review/scores.json": "fe4582aff684491753ae4f26704ae9d9eae13deb13a41fb28f94af6695cce451",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/report.json": "1d2bce918a2939f77ee2572315db9897379f0786d3d5415b37ce53ab0feaa324",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_a_normal.png": "53269e382038b9ecd2821d58ef39c45e57f99a59a39187d7280800058f2063d0",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_01_a_normal/legacy_output.pt": "850156e4f2b327cef87f5e65ce2e6cfd7e5221de68398f4cc587d984c6c78480",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_b_normal.png": "78c9524a70178e7a14bdf64d903b2b0b042527c83841d6e1f5759b2162183bd6",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_01_b_normal/legacy_output.pt": "c7d026bc3e4633e9737908516a9cb1444a03ddbd63ad87ec69a6264921f310df",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_a_normal.png": "9bacfec205a4bbf9cca397cc7ad1b4337bf22d4d98bd4be33d69c9f59f84b278",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_02_a_normal/legacy_output.pt": "dd18ce331344b2b7e6e75ddc0cfae30aee97279671d145d9742f1836c9d07c40",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_b_normal.png": "b6602674639307842298933ff4c870d5ccd5d86e916c6a36f2a3acb21e732340",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_02_b_normal/legacy_output.pt": "8606f368ad90b45eeb0611cda753eccc18d1a1e57b144c26852c105416f6d1a1",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_a_normal.png": "7043be5bad8955f7c4c70c84ad9a422befb5032e7facbdbf8f416a82cb2bf3c8",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_03_a_normal/legacy_output.pt": "8808ce54c877fb250b2f23635bd6ca9e36693f521b0e3f4e18a0b2e4f7a191db",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_b_normal.png": "f8bafe7222ec9dcc93b769a83b3ce85465298243d1263ebf3b00f005bd510fee",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_03_b_normal/legacy_output.pt": "f26e352d27497e6db01d768164d84d3c62267fcdbe11fcc88971369506d57333",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_a_normal.png": "6e7d99ecd3b94ed4c2a4de81dff3d2ccd129ec031828400659bc8364a0fc475d",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_04_a_normal/legacy_output.pt": "5b27ca541005cb4b8c21b514d39b8d866a96916a1c2ba32284c937bf8075ab44",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_b_normal.png": "059b3d422a9c0cf8af195fe9435d0e5bf9a060df4d667f71dacc1d56abc353e3",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_04_b_normal/legacy_output.pt": "e800454e9e09351143051aec8d6c9222148c3be8105cb13934bbb1c4ee91b222",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_a_normal.png": "fb5fc138703ee80039f18c56e2d0a7bbd3580af9dd1af9d76ad529cbd4b05575",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_05_a_normal/legacy_output.pt": "5423f860e9c15ff369df948496be4739860b5d4a19cdc17eb401b7f51cce2a6d",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_b_normal.png": "d6ac415c07748045a90cf25abdfbd2cd039d4109084021883c2eb24d16162479",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_05_b_normal/legacy_output.pt": "40a09b6bc2e894355994e9276c0d1b1ccf5948abd869f435cf22c8e00a4c3eab",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_a_normal.png": "129742ea0ad9156a1583ba6dca32aa9cb4986c0ea05080a8d164bb5d133b806d",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_06_a_normal/legacy_output.pt": "662b93225b4941b083555e2759ceb34ec8c0dec188258f3e67c9fcca8b383ad9",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_b_normal.png": "640280e95a946c61ebaf08712fdd49b81e02dac34a5e2338f283cceb43da1cef",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_06_b_normal/legacy_output.pt": "f19486e3d93e10ba37c425dd542f93147ae8b073017928fb220354ab906a3c40",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_a_normal.png": "f31196b2c9fc4f3d70159e357fba95bcea8f077726fcb767aac6b76c7734c36c",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_07_a_normal/legacy_output.pt": "50388b2c74c0b281aef1a3fba2f9d5aeb2558b9fff56f57b5c8272f3c3a7c222",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_b_normal.png": "940aa84bb18dac4c63a61ba2eda96acaa8609addba4de3e01a006214a9e4968a",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_07_b_normal/legacy_output.pt": "0d4dd541151fab5fb94116c23b73cb38393f2eb21300cb7ad1da53b34cb0c33f",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_a_normal.png": "b56ebca0f79c1ea29f6ef81083021ac6e24bb34def9890c50f449869b447b81b",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_08_a_normal/legacy_output.pt": "78c88dd6d8cd60d25be2e26f19f9b4c634c5761bfce8d92df04e84ac9081dbcb",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_b_normal.png": "48f43bbeb472b36f0200fd40046fd7d7eb63aec48e7b8217cbd59567b205db36",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_08_b_normal/legacy_output.pt": "a954230ca4120c057a94860c1f48ea06bb219ee6c06403a8633b380ed220f7ab",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_a_normal.png": "e9daf0e71d7d182edc98ba22bc0dda3342e610ba4a238b9d838333d53a998a20",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_09_a_normal/legacy_output.pt": "5f2a05db0314ecdcbdf1b364dc2dd8dbf399eb2cae5e8308dabd60391fb4916d",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_b_normal.png": "0f5a5229affe94903acd9476d511a2f0a43dbcbb2924735b23f3ec5f814e9f82",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_09_b_normal/legacy_output.pt": "1ea5cf2fbf343bc22d2e2a3af5bc89bdfdfb60354438c5163a079c3a5188efdc",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_a_normal.png": "7bf94e5ebd907ec4f0f92f9717ac642c6646cf080273c8949c10db2abcc57d2e",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_10_a_normal/legacy_output.pt": "90a33a61434a2523319a55acc4df81b88a662dc273efe8fa14afefb9092817dd",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_b_normal.png": "97b7e7dafa33299bef9dee92ac715b8ec665ee64c90a609e129c4371837cc276",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_10_b_normal/legacy_output.pt": "52301a906a661a5e5be2fd1e89750fda29e32e7c76d8838b7400955ff5c05338",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_a_normal.png": "7aa4e2c2c3b57f955456a9d9736d5d8a4ea7e24f2ee355227c759d72902724ca",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_11_a_normal/legacy_output.pt": "adef07a751fee2faba9e2b02a97aa4b018a78bf7c72f4ea0ee0e10521bb0608a",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_b_normal.png": "fa8de314a7da448c05bda53200d99e6b65cb7d1fd5c31723d77bc7e12a108d8d",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_11_b_normal/legacy_output.pt": "9ce0972b94efc55c802a71f0f6f3dfe2df42e16bed21453aa556cafbb81918db",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_a_normal.png": "4549c22cae2956676371aa109b14a685dc909f91bc1f90c540a36f3134c862fb",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_12_a_normal/legacy_output.pt": "122e5bcde361db3866f8982132d87206ad9414fec0c195dad51e8a833e51c8d8",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_b_normal.png": "ca1d1b3ae5236f7609d1c33bcebd78eeda2e067362c754d35770f9f985083be9",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_12_b_normal/legacy_output.pt": "c40fcc86b8eb470f0155b987b57ab6b86cc1ae6a1843f80c9f6da5153a508f90",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_a_normal.png": "cdbd48845dd5bd7c2f4dafaa3517df1fc40fea223024f9a61bb02636476743de",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_13_a_normal/legacy_output.pt": "0637a07cdadba3df512ec384fd5ffd4940491cff8622c8d596a4edd7432856fd",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_b_normal.png": "80b1f448cfc4ede986d5bf282bbd05a741dcda572ccf46f6f47b54eb0051c917",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_13_b_normal/legacy_output.pt": "5a66c9e9123772d37b1e2007bf637b7be718c888f70aeb7947ae95ad7b051bab",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_a_normal.png": "60b97f48245f697b84c74204592f9dfdbc89109a0aeb5d839256e192a6feb38c",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_14_a_normal/legacy_output.pt": "83f4b2922bddbf29468f2a223addad9f2f2155205b2922269f11fad2d4a92d16",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_b_normal.png": "210b29baefd0e282785cd610d17279cdd13ac66ad8a234c13ce7e7dbfb2131ef",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_14_b_normal/legacy_output.pt": "4d347c04d8f428582b4f14588f7631b24cee383b5e950184dc8dd8918503becb",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_a_normal.png": "972b42aca6d5f2ed4b97106759df071d1534f0b490b141341bc1e4a9fc167059",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_15_a_normal/legacy_output.pt": "8ef5d79cfae61d28ebfae3d37fdff6ce67f0bfb0d54a8c46660c9516be44acaa",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_b_normal.png": "a8970839709edb13e860820f41530350edc9f5b265d51dc65b2c0cde9e2cefed",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_15_b_normal/legacy_output.pt": "5e38bb6b8d94ec87105ae781d44e214d97944771a905a6a5df299827821282cb",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_a_normal.png": "ba0e2492e048da1b1abc4ddf8b7e0f8e5de521d55e75d5e0ccff72747df567ef",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_16_a_normal/legacy_output.pt": "5737fc88aeb44c5b4ebe3681cc579fe3925b56251061a252889b5dc2704fa586",
+    "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_b_normal.png": "b0b9f04ec51ef55d0cad8ab6ec4c7b032b14a3dbff9dd446de4df47a45d0977e",
+    "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_16_b_normal/legacy_output.pt": "cc457dce98d58d90197c59532041b8c0dd73d18e5837dc66214b14482c2f4b71"
+  },
+  "source_commit": "64a05b3803890e6d54bdc9076a51957000eaaa97",
+  "checkpoint": "artifacts/balanced_glyph_writer_v1/fit/checkpoint_latest.pt",
+  "checkpoint_sha256": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+  "jobs": [
+    {
+      "id": "fixed_cells__qa_01_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_01_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_a_normal.png",
+      "image_sha256": "7f23847a2706c2212c4c8066fee6c38677288ed5417d1c6460719a3a2398a360",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_01_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1073,
+        "sequence_length": 1129,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 93,
+        "grid": [
+          1,
+          58,
+          74
+        ]
+      },
+      "reference_offset": 0,
+      "reference_glyphs": 118,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_01_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_01_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_b_normal.png",
+      "image_sha256": "e616394bd50f9aea1b9f891b09b541c058b1d0496e95bcfb6e59a888c7d6738b",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_01_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1073,
+        "sequence_length": 1129,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 93,
+        "grid": [
+          1,
+          58,
+          74
+        ]
+      },
+      "reference_offset": 118,
+      "reference_glyphs": 8,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 87
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_02_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_02_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_a_normal.png",
+      "image_sha256": "2e9247f7b0835d73e16e7d621624aad70e64271f940828e3e390b7216d069182",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_02_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1050,
+        "sequence_length": 1106,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 91,
+        "grid": [
+          1,
+          60,
+          70
+        ]
+      },
+      "reference_offset": 126,
+      "reference_glyphs": 21,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_02_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_02_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_b_normal.png",
+      "image_sha256": "fcc5775e2e778381922bc3d34d061bea291d15f3d877f750d19277c36fd485fb",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_02_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1044,
+        "sequence_length": 1100,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 92,
+        "grid": [
+          1,
+          58,
+          72
+        ]
+      },
+      "reference_offset": 147,
+      "reference_glyphs": 48,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_03_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_03_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_a_normal.png",
+      "image_sha256": "2202e58fa533cde72d014930c19110ef9de9040f9973c88d455e4edca2a81349",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_03_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 195,
+      "reference_glyphs": 49,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_03_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_03_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_b_normal.png",
+      "image_sha256": "2ffeef43740ccdd69cd38fd474eea5a77494f24f68d26826d83471932acd4fb0",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_03_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 244,
+      "reference_glyphs": 39,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_04_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_04_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_a_normal.png",
+      "image_sha256": "7acec483e98d7afb404972bf567dc00fe02f97af7fe19d080c2f2f3ed0bb26a3",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_04_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1040,
+        "sequence_length": 1096,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 96,
+        "grid": [
+          1,
+          52,
+          80
+        ]
+      },
+      "reference_offset": 283,
+      "reference_glyphs": 3,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 2
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 107
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_04_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_04_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_b_normal.png",
+      "image_sha256": "34aa0184c84319748347e4c3f748fc3b9e91c117cea66969e11b17ecf92f4a48",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_04_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1040,
+        "sequence_length": 1096,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 96,
+        "grid": [
+          1,
+          52,
+          80
+        ]
+      },
+      "reference_offset": 286,
+      "reference_glyphs": 7,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 1
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 1
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_05_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_05_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_a_normal.png",
+      "image_sha256": "453680818fb3a723d6be7e52b1ffb7fa2efef09ca72d3b02deb5f8fffa02e3a4",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_05_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 293,
+      "reference_glyphs": 19,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_05_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_05_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_b_normal.png",
+      "image_sha256": "479c0efa97ce4318cc42e4e943d39b80e28e1d3c11625788bc6e71039ef3837e",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_05_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 312,
+      "reference_glyphs": 18,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_06_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_06_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_a_normal.png",
+      "image_sha256": "3dbe0f6515b6544388aa22e00fec4e9f639ba35f8d476451177fbda2dc251c07",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_06_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 89,
+        "grid": [
+          1,
+          64,
+          66
+        ]
+      },
+      "reference_offset": 330,
+      "reference_glyphs": 72,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 116
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_06_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_06_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_b_normal.png",
+      "image_sha256": "f172fd0c39c9ef7571f6ddd079b4b1ffb8b4329378e666476bfd4f2de240f51a",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_06_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1054,
+        "sequence_length": 1110,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 90,
+        "grid": [
+          1,
+          62,
+          68
+        ]
+      },
+      "reference_offset": 402,
+      "reference_glyphs": 9,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_07_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_07_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_a_normal.png",
+      "image_sha256": "58870a6338d7294bd9212bbf3868d63558b9692718c7c1e521dd9a4d52696202",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_07_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 411,
+      "reference_glyphs": 13,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_07_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_07_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_b_normal.png",
+      "image_sha256": "14e26397a8fc22f7b42dfdafc43b43a35e8e30e7c448833d17377ec3fe472697",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_07_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 424,
+      "reference_glyphs": 10,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 49
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_08_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_08_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_a_normal.png",
+      "image_sha256": "69f31a4f0ce4d1592faa7391ca8a577ecfb5c53cec6716bef7fc02a1e1f7ae55",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_08_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1040,
+        "sequence_length": 1096,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 96,
+        "grid": [
+          1,
+          52,
+          80
+        ]
+      },
+      "reference_offset": 434,
+      "reference_glyphs": 16,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_08_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_08_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_b_normal.png",
+      "image_sha256": "4237603602f565368b1db0c927d92412cc14f0b0d7c93813c07dba542fd4e8fb",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_08_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 450,
+      "reference_glyphs": 20,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_09_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_09_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_a_normal.png",
+      "image_sha256": "b1718aff5ec0deb38785858281881e056369c37adf6b391b0dcfb6b60945f7da",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_09_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 470,
+      "reference_glyphs": 7,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 7
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 7
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 7
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_09_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_09_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_b_normal.png",
+      "image_sha256": "85485094897a4a622b829ffedecdff243232503291a33e383eb70b333da4a162",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_09_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 477,
+      "reference_glyphs": 9,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_10_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_10_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_a_normal.png",
+      "image_sha256": "e28736342b4801a136b24ae0251c294b23cb4f267b2760714f46dd8fffa0531f",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_10_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1064,
+        "sequence_length": 1120,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 94,
+        "grid": [
+          1,
+          56,
+          76
+        ]
+      },
+      "reference_offset": 486,
+      "reference_glyphs": 5,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_10_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_10_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_b_normal.png",
+      "image_sha256": "30ff0c06f0a7a512b40b543bc8a9e623cb592dbd19cf35fae72a05dfa54bbf53",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_10_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1064,
+        "sequence_length": 1120,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 94,
+        "grid": [
+          1,
+          56,
+          76
+        ]
+      },
+      "reference_offset": 491,
+      "reference_glyphs": 10,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_11_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_11_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_a_normal.png",
+      "image_sha256": "2e116aa55c3466eae519647e5c5c1c0d79243662d4e886efe610149b3b1abaa0",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_11_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1078,
+        "sequence_length": 1134,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 105,
+        "grid": [
+          1,
+          44,
+          98
+        ]
+      },
+      "reference_offset": 501,
+      "reference_glyphs": 48,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_11_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_11_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_b_normal.png",
+      "image_sha256": "db14a0faa904872e33a93510036272c145c24d87e87ec36f3e8406403da53cd8",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_11_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1078,
+        "sequence_length": 1134,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 105,
+        "grid": [
+          1,
+          44,
+          98
+        ]
+      },
+      "reference_offset": 549,
+      "reference_glyphs": 23,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_12_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_12_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_a_normal.png",
+      "image_sha256": "cf263caa898966b84bf18959028dec93f19e18ca7c62a5ee6d68954dc0e6a1a0",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_12_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1054,
+        "sequence_length": 1110,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 90,
+        "grid": [
+          1,
+          62,
+          68
+        ]
+      },
+      "reference_offset": 572,
+      "reference_glyphs": 22,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_12_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_12_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_b_normal.png",
+      "image_sha256": "29eeedd5e8bf6337ed7918a04606108f202b671a111e5d73da04da23c2314907",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_12_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1054,
+        "sequence_length": 1110,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 90,
+        "grid": [
+          1,
+          62,
+          68
+        ]
+      },
+      "reference_offset": 594,
+      "reference_glyphs": 15,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_13_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_13_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_a_normal.png",
+      "image_sha256": "0771e6ababfe043e6c1915c8fef81ee07089f2ba3236ac354b255f567f27f9f1",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_13_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 609,
+      "reference_glyphs": 18,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_13_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_13_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_b_normal.png",
+      "image_sha256": "2e1a803aeaa52f9adfdd5b85ddd4b46017b4e32bb7ae5ab3f5bcc6c9ab44f94b",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_13_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 627,
+      "reference_glyphs": 17,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_14_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_14_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_a_normal.png",
+      "image_sha256": "2d21c58ca075ce121d7574a6c3b617a0a9b56a165337032c31cb2f47c741b74f",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_14_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 644,
+      "reference_glyphs": 51,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_14_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_14_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_b_normal.png",
+      "image_sha256": "042a13659b16c6fe298466636a61e36c20ae7f6a83d468bfd797036dd11a5519",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_14_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 695,
+      "reference_glyphs": 5,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_15_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_15_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_a_normal.png",
+      "image_sha256": "196f08dc205fca8f8281b1ea1972bf0df5ec8b83e1420701d11b0866959b8130",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_15_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 700,
+      "reference_glyphs": 3,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 49
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_15_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_15_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_b_normal.png",
+      "image_sha256": "5841ce8609d888a14a067f517ceec440c3aba351383df953bfd4355d0d0fbc04",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_15_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1040,
+        "sequence_length": 1096,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 96,
+        "grid": [
+          1,
+          52,
+          80
+        ]
+      },
+      "reference_offset": 703,
+      "reference_glyphs": 9,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 7
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_16_a_normal",
+      "layout": "fixed_cells",
+      "case": "qa_16_a",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_a_normal.png",
+      "image_sha256": "3516c7c06d81d5c517a22703ecd10a3051614079bea2db1aa67b854f61652416",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_16_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1054,
+        "sequence_length": 1110,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 90,
+        "grid": [
+          1,
+          62,
+          68
+        ]
+      },
+      "reference_offset": 712,
+      "reference_glyphs": 30,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "fixed_cells__qa_16_b_normal",
+      "layout": "fixed_cells",
+      "case": "qa_16_b",
+      "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_b_normal.png",
+      "image_sha256": "8d5731ddfbb328c745f5adf46b2a7365a40ccb81e2933f6c98182db0c5cfeee3",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_fixed_cells/fixed_cells__qa_16_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1054,
+        "sequence_length": 1110,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 90,
+        "grid": [
+          1,
+          62,
+          68
+        ]
+      },
+      "reference_offset": 742,
+      "reference_glyphs": 3,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 57
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_01_a_normal",
+      "layout": "proportional",
+      "case": "qa_01_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_a_normal.png",
+      "image_sha256": "53269e382038b9ecd2821d58ef39c45e57f99a59a39187d7280800058f2063d0",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_01_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 0,
+      "reference_glyphs": 118,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 59
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 55
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 60
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_01_b_normal",
+      "layout": "proportional",
+      "case": "qa_01_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_b_normal.png",
+      "image_sha256": "78c9524a70178e7a14bdf64d903b2b0b042527c83841d6e1f5759b2162183bd6",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_01_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 118,
+      "reference_glyphs": 8,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_02_a_normal",
+      "layout": "proportional",
+      "case": "qa_02_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_a_normal.png",
+      "image_sha256": "9bacfec205a4bbf9cca397cc7ad1b4337bf22d4d98bd4be33d69c9f59f84b278",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_02_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1050,
+        "sequence_length": 1106,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 98,
+        "grid": [
+          1,
+          50,
+          84
+        ]
+      },
+      "reference_offset": 126,
+      "reference_glyphs": 21,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 21
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_02_b_normal",
+      "layout": "proportional",
+      "case": "qa_02_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_b_normal.png",
+      "image_sha256": "b6602674639307842298933ff4c870d5ccd5d86e916c6a36f2a3acb21e732340",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_02_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1050,
+        "sequence_length": 1106,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 98,
+        "grid": [
+          1,
+          50,
+          84
+        ]
+      },
+      "reference_offset": 147,
+      "reference_glyphs": 48,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 108
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_03_a_normal",
+      "layout": "proportional",
+      "case": "qa_03_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_a_normal.png",
+      "image_sha256": "7043be5bad8955f7c4c70c84ad9a422befb5032e7facbdbf8f416a82cb2bf3c8",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_03_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 195,
+      "reference_glyphs": 49,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 20
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_03_b_normal",
+      "layout": "proportional",
+      "case": "qa_03_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_b_normal.png",
+      "image_sha256": "f8bafe7222ec9dcc93b769a83b3ce85465298243d1263ebf3b00f005bd510fee",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_03_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 244,
+      "reference_glyphs": 39,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_04_a_normal",
+      "layout": "proportional",
+      "case": "qa_04_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_a_normal.png",
+      "image_sha256": "6e7d99ecd3b94ed4c2a4de81dff3d2ccd129ec031828400659bc8364a0fc475d",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_04_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1034,
+        "sequence_length": 1090,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 103,
+        "grid": [
+          1,
+          44,
+          94
+        ]
+      },
+      "reference_offset": 283,
+      "reference_glyphs": 3,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_04_b_normal",
+      "layout": "proportional",
+      "case": "qa_04_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_b_normal.png",
+      "image_sha256": "059b3d422a9c0cf8af195fe9435d0e5bf9a060df4d667f71dacc1d56abc353e3",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_04_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1034,
+        "sequence_length": 1090,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 103,
+        "grid": [
+          1,
+          44,
+          94
+        ]
+      },
+      "reference_offset": 286,
+      "reference_glyphs": 7,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 3
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_05_a_normal",
+      "layout": "proportional",
+      "case": "qa_05_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_a_normal.png",
+      "image_sha256": "fb5fc138703ee80039f18c56e2d0a7bbd3580af9dd1af9d76ad529cbd4b05575",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_05_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1071,
+        "sequence_length": 1127,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 107,
+        "grid": [
+          1,
+          42,
+          102
+        ]
+      },
+      "reference_offset": 293,
+      "reference_glyphs": 19,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 18
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 18
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_05_b_normal",
+      "layout": "proportional",
+      "case": "qa_05_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_b_normal.png",
+      "image_sha256": "d6ac415c07748045a90cf25abdfbd2cd039d4109084021883c2eb24d16162479",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_05_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1071,
+        "sequence_length": 1127,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 107,
+        "grid": [
+          1,
+          42,
+          102
+        ]
+      },
+      "reference_offset": 312,
+      "reference_glyphs": 18,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 18
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_06_a_normal",
+      "layout": "proportional",
+      "case": "qa_06_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_a_normal.png",
+      "image_sha256": "129742ea0ad9156a1583ba6dca32aa9cb4986c0ea05080a8d164bb5d133b806d",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_06_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 330,
+      "reference_glyphs": 72,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_06_b_normal",
+      "layout": "proportional",
+      "case": "qa_06_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_b_normal.png",
+      "image_sha256": "640280e95a946c61ebaf08712fdd49b81e02dac34a5e2338f283cceb43da1cef",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_06_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1053,
+        "sequence_length": 1109,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 95,
+        "grid": [
+          1,
+          54,
+          78
+        ]
+      },
+      "reference_offset": 402,
+      "reference_glyphs": 9,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_07_a_normal",
+      "layout": "proportional",
+      "case": "qa_07_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_a_normal.png",
+      "image_sha256": "f31196b2c9fc4f3d70159e357fba95bcea8f077726fcb767aac6b76c7734c36c",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_07_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1034,
+        "sequence_length": 1090,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 103,
+        "grid": [
+          1,
+          44,
+          94
+        ]
+      },
+      "reference_offset": 411,
+      "reference_glyphs": 13,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 13
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_07_b_normal",
+      "layout": "proportional",
+      "case": "qa_07_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_b_normal.png",
+      "image_sha256": "940aa84bb18dac4c63a61ba2eda96acaa8609addba4de3e01a006214a9e4968a",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_07_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1034,
+        "sequence_length": 1090,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 103,
+        "grid": [
+          1,
+          44,
+          94
+        ]
+      },
+      "reference_offset": 424,
+      "reference_glyphs": 10,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 10
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 9
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_08_a_normal",
+      "layout": "proportional",
+      "case": "qa_08_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_a_normal.png",
+      "image_sha256": "b56ebca0f79c1ea29f6ef81083021ac6e24bb34def9890c50f449869b447b81b",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_08_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1078,
+        "sequence_length": 1134,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 105,
+        "grid": [
+          1,
+          44,
+          98
+        ]
+      },
+      "reference_offset": 434,
+      "reference_glyphs": 16,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 22
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 23
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_08_b_normal",
+      "layout": "proportional",
+      "case": "qa_08_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_b_normal.png",
+      "image_sha256": "48f43bbeb472b36f0200fd40046fd7d7eb63aec48e7b8217cbd59567b205db36",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_08_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1078,
+        "sequence_length": 1134,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 105,
+        "grid": [
+          1,
+          44,
+          98
+        ]
+      },
+      "reference_offset": 450,
+      "reference_glyphs": 20,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 18
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 18
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 18
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_09_a_normal",
+      "layout": "proportional",
+      "case": "qa_09_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_a_normal.png",
+      "image_sha256": "e9daf0e71d7d182edc98ba22bc0dda3342e610ba4a238b9d838333d53a998a20",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_09_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1060,
+        "sequence_length": 1116,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 109,
+        "grid": [
+          1,
+          40,
+          106
+        ]
+      },
+      "reference_offset": 470,
+      "reference_glyphs": 7,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 11
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 7
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 41
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_09_b_normal",
+      "layout": "proportional",
+      "case": "qa_09_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_b_normal.png",
+      "image_sha256": "0f5a5229affe94903acd9476d511a2f0a43dbcbb2924735b23f3ec5f814e9f82",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_09_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1060,
+        "sequence_length": 1116,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 109,
+        "grid": [
+          1,
+          40,
+          106
+        ]
+      },
+      "reference_offset": 477,
+      "reference_glyphs": 9,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_10_a_normal",
+      "layout": "proportional",
+      "case": "qa_10_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_a_normal.png",
+      "image_sha256": "7bf94e5ebd907ec4f0f92f9717ac642c6646cf080273c8949c10db2abcc57d2e",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_10_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 486,
+      "reference_glyphs": 5,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 7
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_10_b_normal",
+      "layout": "proportional",
+      "case": "qa_10_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_b_normal.png",
+      "image_sha256": "97b7e7dafa33299bef9dee92ac715b8ec665ee64c90a609e129c4371837cc276",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_10_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1056,
+        "sequence_length": 1112,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 100,
+        "grid": [
+          1,
+          48,
+          88
+        ]
+      },
+      "reference_offset": 491,
+      "reference_glyphs": 10,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_11_a_normal",
+      "layout": "proportional",
+      "case": "qa_11_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_a_normal.png",
+      "image_sha256": "7aa4e2c2c3b57f955456a9d9736d5d8a4ea7e24f2ee355227c759d72902724ca",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_11_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1045,
+        "sequence_length": 1101,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 111,
+        "grid": [
+          1,
+          38,
+          110
+        ]
+      },
+      "reference_offset": 501,
+      "reference_glyphs": 48,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_11_b_normal",
+      "layout": "proportional",
+      "case": "qa_11_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_b_normal.png",
+      "image_sha256": "fa8de314a7da448c05bda53200d99e6b65cb7d1fd5c31723d77bc7e12a108d8d",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_11_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1045,
+        "sequence_length": 1101,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 111,
+        "grid": [
+          1,
+          38,
+          110
+        ]
+      },
+      "reference_offset": 549,
+      "reference_glyphs": 23,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_12_a_normal",
+      "layout": "proportional",
+      "case": "qa_12_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_a_normal.png",
+      "image_sha256": "4549c22cae2956676371aa109b14a685dc909f91bc1f90c540a36f3134c862fb",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_12_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 572,
+      "reference_glyphs": 22,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_12_b_normal",
+      "layout": "proportional",
+      "case": "qa_12_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_b_normal.png",
+      "image_sha256": "ca1d1b3ae5236f7609d1c33bcebd78eeda2e067362c754d35770f9f985083be9",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_12_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 594,
+      "reference_glyphs": 15,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_13_a_normal",
+      "layout": "proportional",
+      "case": "qa_13_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_a_normal.png",
+      "image_sha256": "cdbd48845dd5bd7c2f4dafaa3517df1fc40fea223024f9a61bb02636476743de",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_13_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1060,
+        "sequence_length": 1116,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 109,
+        "grid": [
+          1,
+          40,
+          106
+        ]
+      },
+      "reference_offset": 609,
+      "reference_glyphs": 18,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 6
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_13_b_normal",
+      "layout": "proportional",
+      "case": "qa_13_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_b_normal.png",
+      "image_sha256": "80b1f448cfc4ede986d5bf282bbd05a741dcda572ccf46f6f47b54eb0051c917",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_13_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1060,
+        "sequence_length": 1116,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 109,
+        "grid": [
+          1,
+          40,
+          106
+        ]
+      },
+      "reference_offset": 627,
+      "reference_glyphs": 17,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_14_a_normal",
+      "layout": "proportional",
+      "case": "qa_14_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_a_normal.png",
+      "image_sha256": "60b97f48245f697b84c74204592f9dfdbc89109a0aeb5d839256e192a6feb38c",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_14_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 644,
+      "reference_glyphs": 51,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 13
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_14_b_normal",
+      "layout": "proportional",
+      "case": "qa_14_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_b_normal.png",
+      "image_sha256": "210b29baefd0e282785cd610d17279cdd13ac66ad8a234c13ce7e7dbfb2131ef",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_14_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 695,
+      "reference_glyphs": 5,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_15_a_normal",
+      "layout": "proportional",
+      "case": "qa_15_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_a_normal.png",
+      "image_sha256": "972b42aca6d5f2ed4b97106759df071d1534f0b490b141341bc1e4a9fc167059",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_15_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 700,
+      "reference_glyphs": 3,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 5
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 5
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_15_b_normal",
+      "layout": "proportional",
+      "case": "qa_15_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_b_normal.png",
+      "image_sha256": "a8970839709edb13e860820f41530350edc9f5b265d51dc65b2c0cde9e2cefed",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_15_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1058,
+        "sequence_length": 1114,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 102,
+        "grid": [
+          1,
+          46,
+          92
+        ]
+      },
+      "reference_offset": 703,
+      "reference_glyphs": 9,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 9
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": true,
+          "emitted_glyphs": 9
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_16_a_normal",
+      "layout": "proportional",
+      "case": "qa_16_a",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_a_normal.png",
+      "image_sha256": "ba0e2492e048da1b1abc4ddf8b7e0f8e5de521d55e75d5e0ccff72747df567ef",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_16_a_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 712,
+      "reference_glyphs": 30,
+      "native_complete_exact": false,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "flow": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        },
+        "parent": {
+          "complete_exact": false,
+          "readable": false,
+          "stopped": false,
+          "emitted_glyphs": 128
+        }
+      }
+    },
+    {
+      "id": "proportional__qa_16_b_normal",
+      "layout": "proportional",
+      "case": "qa_16_b",
+      "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_b_normal.png",
+      "image_sha256": "b0b9f04ec51ef55d0cad8ab6ec4c7b032b14a3dbff9dd446de4df47a45d0977e",
+      "original_output": "artifacts/balanced_writer_matched_v1/generation_proportional/proportional__qa_16_b_normal/legacy_output.pt",
+      "expected_geometry": {
+        "visual_positions": 1066,
+        "sequence_length": 1122,
+        "before_positions": 4,
+        "after_positions": 52,
+        "rotary_offset": 97,
+        "grid": [
+          1,
+          52,
+          82
+        ]
+      },
+      "reference_offset": 742,
+      "reference_glyphs": 3,
+      "native_complete_exact": true,
+      "original_scores": {
+        "balanced": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        },
+        "flow": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        },
+        "parent": {
+          "complete_exact": true,
+          "readable": true,
+          "stopped": true,
+          "emitted_glyphs": 3
+        }
+      }
+    }
+  ],
+  "targets": [
+    {
+      "case": "qa_01_a",
+      "source_id": "TRAIN_3029_QUERY_2",
+      "group": "de17bc484e0bf3250b1e3c7b97911e7424027c8d21ed09985cb7236e147bd23c",
+      "answer": "实际管辖5个非都市区：黑斯廷斯（Hastings）、罗瑟（Rother）、威尔登（Wealden）、伊斯特本（Eastbourne）、刘易斯；如看待成名誉郡，它名义上包含多1个单一管理区：布莱顿-霍夫（Brighton & Hove）。",
+      "offset": 0,
+      "glyphs": 118,
+      "first_character": "实",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "5215a487ad3e2742f4feee2bfee749e36aac23dc98bffefd673290e2f5011e0e"
+    },
+    {
+      "case": "qa_01_b",
+      "source_id": "TRAIN_3029_QUERY_0",
+      "group": "de17bc484e0bf3250b1e3c7b97911e7424027c8d21ed09985cb7236e147bd23c",
+      "answer": "英国英格兰东南部",
+      "offset": 118,
+      "glyphs": 8,
+      "first_character": "英",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "dfc07cf66dfb6907b19a19df4f6d53d2708a5d4a6b7e4bcb580f840e83ad2f21"
+    },
+    {
+      "case": "qa_02_a",
+      "source_id": "TRAIN_240_QUERY_1",
+      "group": "fd53a8adf6220d2a1a5434fe874e6ea49ba8684b64720fe6b9eccaac19536a27",
+      "answer": "生长于海拔2,200米至3,200米的地区",
+      "offset": 126,
+      "glyphs": 21,
+      "first_character": "生",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "28ccb3966edca644f89e0faa7b3912260d37b938f26f0efd52c679c886fd159a"
+    },
+    {
+      "case": "qa_02_b",
+      "source_id": "TRAIN_240_QUERY_3",
+      "group": "fd53a8adf6220d2a1a5434fe874e6ea49ba8684b64720fe6b9eccaac19536a27",
+      "answer": "雄蕊着生于冠筒中部，整齐，花丝丝状钻形，长4-4.5毫米，花药直立，稀微弯曲，矩圆形，长约1毫米",
+      "offset": 147,
+      "glyphs": 48,
+      "first_character": "雄",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "7b0ccfa14d81b398594858db0d99a8694cc2c895eacdedb91a6ae0196ad0657a"
+    },
+    {
+      "case": "qa_03_a",
+      "source_id": "TRAIN_96_QUERY_2",
+      "group": "721b78b125527495a59726adc99b537563f42354c891b8c3feb506e8c1b71072",
+      "answer": "在埃塞克斯县，其刑事诉讼案件是由东区区域律师负责；而在米德尔塞克斯县，案件则是由北区区域律师负责。",
+      "offset": 195,
+      "glyphs": 49,
+      "first_character": "在",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "f3f5d98524e88f2734dcce827c23ac503fc754bea7caa560e5da02eed829b03b"
+    },
+    {
+      "case": "qa_03_b",
+      "source_id": "TRAIN_96_QUERY_4",
+      "group": "721b78b125527495a59726adc99b537563f42354c891b8c3feb506e8c1b71072",
+      "answer": "大部分马萨诸塞州的县份取名自英国地名，全因马萨诸塞州在早期是大英帝国的殖民地。",
+      "offset": 244,
+      "glyphs": 39,
+      "first_character": "大",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "79fab688de524b7e004cb604feba6b1fc1a01a2fefdd5abc0794639469f71eb3"
+    },
+    {
+      "case": "qa_04_a",
+      "source_id": "TRAIN_603_QUERY_0",
+      "group": "c02772840a52cd676ef12c1c4bb7dc7b54c3d7395bed65b1d5016da50e9625f5",
+      "answer": "45名",
+      "offset": 283,
+      "glyphs": 3,
+      "first_character": "4",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "091e715666ab2c17833c2e436e518d55ba523629e6091039f10ab29940f6530e"
+    },
+    {
+      "case": "qa_04_b",
+      "source_id": "TRAIN_603_QUERY_1",
+      "group": "c02772840a52cd676ef12c1c4bb7dc7b54c3d7395bed65b1d5016da50e9625f5",
+      "answer": "南韩选手秦钟午",
+      "offset": 286,
+      "glyphs": 7,
+      "first_character": "南",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "b8444915f6453fa6b8e182315b67089bd1334246837bb9cc0fc275f3a2e4e795"
+    },
+    {
+      "case": "qa_05_a",
+      "source_id": "TRAIN_3735_QUERY_3",
+      "group": "357322d4ca3db7db189360978c991335365b71dd787211780ae4045e8a3c6388",
+      "answer": "有洪尧进、陈冠华、陈冠华的学生林水泉等",
+      "offset": 293,
+      "glyphs": 19,
+      "first_character": "有",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "d223368adf3318b3dcad12338803a6b64d3ddaa9135fb08a10b717be6d1b5d1c"
+    },
+    {
+      "case": "qa_05_b",
+      "source_id": "TRAIN_3735_QUERY_2",
+      "group": "357322d4ca3db7db189360978c991335365b71dd787211780ae4045e8a3c6388",
+      "answer": "大广弦、台湾月琴、台湾品仔（台湾笛）",
+      "offset": 312,
+      "glyphs": 18,
+      "first_character": "大",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "f1848c1f820a9b7b5c32850495f3117ff6a78588c4cc5ca69802373e22fd431b"
+    },
+    {
+      "case": "qa_06_a",
+      "source_id": "TRAIN_3027_QUERY_1",
+      "group": "f2204a27292116db11a40cf6feb07eeedcf7b5d66dd9b99345f83ccb917cb5a2",
+      "answer": "12号线于1955年投入服务后，下一条路线本应为13，但当时中巴管理层却指「十三不祥」，故跳过本编号，1960年开设的新线由14号线继续排下去。",
+      "offset": 330,
+      "glyphs": 72,
+      "first_character": "1",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "044d6d85de1fd27f5a37c1a39652e5c190c0d22938de27bfcc3e05db0c87c343"
+    },
+    {
+      "case": "qa_06_b",
+      "source_id": "TRAIN_3027_QUERY_0",
+      "group": "f2204a27292116db11a40cf6feb07eeedcf7b5d66dd9b99345f83ccb917cb5a2",
+      "answer": "香港新世界第一巴士",
+      "offset": 402,
+      "glyphs": 9,
+      "first_character": "香",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "8336dddb09bdd59e1c67481dbd309506f1c8fde198bf288b9266e6d3c26d8eaa"
+    },
+    {
+      "case": "qa_07_a",
+      "source_id": "TRAIN_3700_QUERY_3",
+      "group": "1ce1cddc770372ca3de2db5168cc03471592535a54a050a212a0071e8c7a82b8",
+      "answer": "属都湖、碧塔海和高原牧场等",
+      "offset": 411,
+      "glyphs": 13,
+      "first_character": "属",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "448def09024be2a699fb3089db13dbae88ea0b6463cee1588521fac5003598e6"
+    },
+    {
+      "case": "qa_07_b",
+      "source_id": "TRAIN_3700_QUERY_2",
+      "group": "1ce1cddc770372ca3de2db5168cc03471592535a54a050a212a0071e8c7a82b8",
+      "answer": "神助乘舟到达湖的彼岸",
+      "offset": 424,
+      "glyphs": 10,
+      "first_character": "神",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "27f42f6c5991bb0c78f288adac8fae790aecea77632b2a7d98162336c53156c8"
+    },
+    {
+      "case": "qa_08_a",
+      "source_id": "TRAIN_2105_QUERY_4",
+      "group": "698e171e5bf0203d178f8aaf4bd26a1cfa5805f13b4280d1c4f85e46126ad249",
+      "answer": "基本可达全港各处以及深圳湾口岸。",
+      "offset": 434,
+      "glyphs": 16,
+      "first_character": "基",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "d1c2826a3ac079321269bcab747ffbfd74394d70af806d53544082d15f19b096"
+    },
+    {
+      "case": "qa_08_b",
+      "source_id": "TRAIN_2105_QUERY_0",
+      "group": "698e171e5bf0203d178f8aaf4bd26a1cfa5805f13b4280d1c4f85e46126ad249",
+      "answer": "位于香港新界西元朗天水围新市镇第24B区",
+      "offset": 450,
+      "glyphs": 20,
+      "first_character": "位",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "379cb76e63f36375fc6d6fe9101036052b8075695f41accf4d1ede6aca528c49"
+    },
+    {
+      "case": "qa_09_a",
+      "source_id": "TRAIN_622_QUERY_1",
+      "group": "b7361b8d3d80215ca78bfd65ffb968e808665eb5fe2c0f5e983c10497524a858",
+      "answer": "169平方公里",
+      "offset": 470,
+      "glyphs": 7,
+      "first_character": "1",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "d45e0bced7613d4f844c5587459a5b53c7ed5e6e3c26c907dfc710dba4e10b1c"
+    },
+    {
+      "case": "qa_09_b",
+      "source_id": "TRAIN_622_QUERY_0",
+      "group": "b7361b8d3d80215ca78bfd65ffb968e808665eb5fe2c0f5e983c10497524a858",
+      "answer": "湖南省长沙县中南部",
+      "offset": 477,
+      "glyphs": 9,
+      "first_character": "湖",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "1d9420abe818c2ba709ac882608aa0d2ee76b300dc5454f74b42aa6844a5907b"
+    },
+    {
+      "case": "qa_10_a",
+      "source_id": "TRAIN_1263_QUERY_1",
+      "group": "117001cd2cab9d0bfad6f1dbde109c1f4716fc568d2f1674b38377dd6979920e",
+      "answer": "中国致公党",
+      "offset": 486,
+      "glyphs": 5,
+      "first_character": "中",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "e91b73f0a8ceec7850029fe512d9a86044ba922d5888c6a4873a327a632c6002"
+    },
+    {
+      "case": "qa_10_b",
+      "source_id": "TRAIN_1263_QUERY_0",
+      "group": "117001cd2cab9d0bfad6f1dbde109c1f4716fc568d2f1674b38377dd6979920e",
+      "answer": "广西宣化人（今南宁）",
+      "offset": 491,
+      "glyphs": 10,
+      "first_character": "广",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "a45c0f00f27f26fe487765c2e060a190dda302df3b60ad8d970d3c16734286e7"
+    },
+    {
+      "case": "qa_11_a",
+      "source_id": "TRAIN_1090_QUERY_1",
+      "group": "0a39311d7cdd9d4033a1909706b2d777cdcc4c4c099221278ce976cb0c9f8ab0",
+      "answer": "夫天下至贵，而金玉珠宝至贱也。积金玉珠宝若泰山，不可市天下尺寸地；而失天下，又何用金玉珠宝为哉！",
+      "offset": 501,
+      "glyphs": 48,
+      "first_character": "夫",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "source_glyphs_sha256": "03157f7dcf3c01493c4d4c581fd68a3555ace0d91293b280d7ca0d2b458aa1ce"
+    },
+    {
+      "case": "qa_11_b",
+      "source_id": "TRAIN_1090_QUERY_3",
+      "group": "0a39311d7cdd9d4033a1909706b2d777cdcc4c4c099221278ce976cb0c9f8ab0",
+      "answer": "概时帝倦勤，上章着虽千万言，大率屏置勿阅故也。",
+      "offset": 549,
+      "glyphs": 23,
+      "first_character": "概",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "42cc2f9f52ab46821806c210b2cf3211a46eb4774a6035d6c4926323fc6e5627"
+    },
+    {
+      "case": "qa_12_a",
+      "source_id": "TRAIN_147_QUERY_0",
+      "group": "fb35de7a0a7591f0b32ed014529075a0e1687ec13222e34d13e5f8772ba178e6",
+      "answer": "绝对收敛是数学中无穷级数和广义积分的一种性质",
+      "offset": 572,
+      "glyphs": 22,
+      "first_character": "绝",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "6f47e9adf891e967051f8be81d192883040a6ccaf21d8247f4ea5fb6c9a0af75"
+    },
+    {
+      "case": "qa_12_b",
+      "source_id": "TRAIN_147_QUERY_2",
+      "group": "fb35de7a0a7591f0b32ed014529075a0e1687ec13222e34d13e5f8772ba178e6",
+      "answer": "绝对值、模长都是范数概念的特例",
+      "offset": 594,
+      "glyphs": 15,
+      "first_character": "绝",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "b50e5dda2b118b51ed269d5997d8134cd3f353ea682e781d936bcec7abaaee11"
+    },
+    {
+      "case": "qa_13_a",
+      "source_id": "TRAIN_612_QUERY_0",
+      "group": "6ee1667e01cf5dc35cf0a5d98f9b180d42fccecbd37bf9b994597f2caa2a49bd",
+      "answer": "户籍人口8.54万人（2008年）。",
+      "offset": 609,
+      "glyphs": 18,
+      "first_character": "户",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "2389a518f1de1b04189f8222e42411bc434b8db32c37876ebcc7af5c4a31eef5"
+    },
+    {
+      "case": "qa_13_b",
+      "source_id": "TRAIN_612_QUERY_2",
+      "group": "6ee1667e01cf5dc35cf0a5d98f9b180d42fccecbd37bf9b994597f2caa2a49bd",
+      "answer": "以东地区传统上为石库门里弄密集区。",
+      "offset": 627,
+      "glyphs": 17,
+      "first_character": "以",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "9822083ce64b1ac02452c5e940196dc950ec0dca59db411001bd7c97d46266b9"
+    },
+    {
+      "case": "qa_14_a",
+      "source_id": "TRAIN_3028_QUERY_2",
+      "group": "baad7b68d3acca9af4dd447e551ecf3b1ea343a6997d42f4358a3d11493bd894",
+      "answer": "《1972年地方政府法案》在1972年4月1日生效后，萨塞克斯郡连仅有的名誉郡地位也丧失掉，被正式废除",
+      "offset": 644,
+      "glyphs": 51,
+      "first_character": "《",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "6e2ee457068c97c3d0e063b92c478a19dc467bee09437cadd6474e9060ebaf56"
+    },
+    {
+      "case": "qa_14_b",
+      "source_id": "TRAIN_3028_QUERY_0",
+      "group": "baad7b68d3acca9af4dd447e551ecf3b1ea343a6997d42f4358a3d11493bd894",
+      "answer": "1189年",
+      "offset": 695,
+      "glyphs": 5,
+      "first_character": "1",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "91146c8a396ab07ac41e1a572515e49d98f44caff0843f142a8d3d441c66132e"
+    },
+    {
+      "case": "qa_15_a",
+      "source_id": "TRAIN_3564_QUERY_2",
+      "group": "144cc72e4a90162b2c6123b3adae3468b684fd1afa1b90274a5e5ae575f5443e",
+      "answer": "千颂伊",
+      "offset": 700,
+      "glyphs": 3,
+      "first_character": "千",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "eaca8c86a6b36cd5d170cdcae78e7b23204a64402b527eec39e3dfa8e491b2e7"
+    },
+    {
+      "case": "qa_15_b",
+      "source_id": "TRAIN_3564_QUERY_0",
+      "group": "144cc72e4a90162b2c6123b3adae3468b684fd1afa1b90274a5e5ae575f5443e",
+      "answer": "唱歌、游泳、羽毛球",
+      "offset": 703,
+      "glyphs": 9,
+      "first_character": "唱",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "c7a5a44455ddf6a3590c2c5bfedc654e5e55232ce8f60c74130377bb362fb6d6"
+    },
+    {
+      "case": "qa_16_a",
+      "source_id": "TRAIN_2269_QUERY_0",
+      "group": "85f3119c0844df1f1004f33baf41d3c92cc07f8c09eb79826e1cca8b5c0c0fbe",
+      "answer": "是由美国足球联盟（）运营，代表美国出战国际比赛的女子足球队。",
+      "offset": 712,
+      "glyphs": 30,
+      "first_character": "是",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "a86cb1a73dda0023d0884cbe04c01e642b6d516d6cff6ec4bec901a74ce2bca8"
+    },
+    {
+      "case": "qa_16_b",
+      "source_id": "TRAIN_2269_QUERY_1",
+      "group": "85f3119c0844df1f1004f33baf41d3c92cc07f8c09eb79826e1cca8b5c0c0fbe",
+      "answer": "第一位",
+      "offset": 742,
+      "glyphs": 3,
+      "first_character": "第",
+      "primitive_character_coverage": [
+        true,
+        true,
+        true
+      ],
+      "primitive_bitmap_coverage": [
+        true,
+        true,
+        true
+      ],
+      "source_glyphs_sha256": "c58fa091537cf8c75acd46e741633c365b10bf50af6b97ed3f7d63ee8a65020d"
+    }
+  ],
+  "prepared_sha256": "809f3fed5825108daa2d6e11d8bedf452cd6b76d92a6e9d3f6e0c974c4353cc1",
+  "correct_history_target_positions": 1490,
+  "terminal_boundaries": 64,
+  "new_optimizer_updates": 0,
+  "new_autonomous_generations": 0,
+  "maximum_seconds": 3600,
+  "pressure_wait_allowance_seconds": 600,
+  "minimum_entry_host_ram_gib": 48,
+  "minimum_runtime_host_ram_gib": 24,
+  "minimum_free_gpu_gib": 20,
+  "maximum_allocated_vram_gib": 22,
+  "later_physical_gate": {
+    "median_f1": 0.99,
+    "fraction_at_least_095": 0.9
+  },
+  "stop_diagnostic": {
+    "maximum_nonterminal_false_stop_fraction": 0.05,
+    "minimum_terminal_recognition_fraction": 0.8
+  },
+  "supplied_reference_images": true,
+  "supplied_target_length": true,
+  "autonomous_language_evidence": false,
+  "prior_development_familiarity": true,
+  "independent_human_adjudication": false,
+  "goal_achieved": false
+}
