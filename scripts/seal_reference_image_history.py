@@ -23,6 +23,9 @@ def main():
     require(not REVIEW.exists(),'Preserve prior completed review')
     torch.set_num_threads(2)
     evidence=load(LEARNING);manifest=load(PUBLIC/'display_manifest.json');export=load(PUBLIC/'export.json')
+    registration=load(RUN/'registration.json')
+    require(sum(len(b['cells']) for b in manifest['boards'])==evidence['displayed_original_tiles']==8561
+        and manifest['all_displayed_pixels_verified'], 'Displayed-tile coverage is not verified')
     visual=load(RUN/'visual_review.json')
     require(visual['learning_sha256']==sha(LEARNING) and visual['display_manifest_sha256']==sha(PUBLIC/'display_manifest.json'),
             'Actual review input binding differs')
@@ -38,6 +41,8 @@ def main():
         trace_path=RUN/'execution'/job['id']/'trace.pt'
         require(sha(trace_path)==record['trace_sha256'],'Correct-history trace differs')
         trace=torch.load(trace_path,weights_only=True,map_location='cpu')
+        require(sha(ROOT/job['original_output'])==registration['bindings_sha256'][job['original_output']],
+                'Original autonomous state binding differs')
         original=torch.load(ROOT/job['original_output'],weights_only=True,map_location='cpu')
         n=min(len(raw['gold_ink']),len(raw['autonomous_ink']));prefix=0
         while prefix<n and np.array_equal(raw['gold_ink'][prefix],raw['autonomous_ink'][prefix]):prefix+=1
