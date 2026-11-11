@@ -30,9 +30,11 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
-Stand 12. November 2026: Die Fortsetzungsadapter über 36 Schichten bestehen den realen GPU-Vortest mit einer vollständigen Zielsequenz von 513 Glyphen bei maximal 18,123 GiB VRAM. Das vollständige Training hat noch nicht begonnen; ein nutzbares ILM ist weiterhin nicht nachgewiesen. Die folgenden Ergebnisse stammen aus früheren Experimenten.
+Stand 12. November 2026: Das Training auf dem vollständigen Korpus hat begonnen. Geplant sind drei Durchläufe mit 13.766 Sequenzen, 41.298 Aktualisierungen und 6.108.741 Zielpositionen für Glyphen. Beide Eingabelayouts und die vollständigen Antwort- und Buchzielsequenzen bleiben erhalten. Der reale Vortest über 36 Schichten besteht bei maximal 18,123 GiB VRAM. Training und Sprachbewertung sind noch nicht abgeschlossen; ein nutzbares ILM ist weiterhin nicht nachgewiesen. Die folgenden Ergebnisse stammen aus früheren Experimenten.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+Der erste Lauf brach wegen kollidierender Protokollfelder ab; nach der Korrektur wurde dasselbe Experiment mit unveränderten Daten und unverändertem Zeitplan neu gestartet.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## Frühere V23-Ergebnisse
 

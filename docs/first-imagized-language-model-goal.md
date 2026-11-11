@@ -153,8 +153,16 @@ source-group exclusions are recorded. After the book-prefix split there are
 glyphs. The prescribed three epochs give 41,298 updates and 6,108,741 scheduled
 target positions. These are data exposure counts, not measured language results.
 
-The immediate work is to finish natural-layout preparation, bind the actual
-pixels and schedule in a committed registration, and run this single comparison.
+Preparation and the committed registration are complete. All 13,766 prompts
+are preserved; 45 natural-layout rejections use their complete original raster.
+The first execution stopped on an event-logging field collision after one unsaved
+update. Its initial checkpoint, failure and 139.558657-second child cost remain
+preserved. The [registered recovery](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+changes logging and registration identity handling, with unchanged model, pixels,
+targets, schedule and quality criteria. Its fresh worker has started in
+`artifacts/visual_continuation_full_logger_recovery_v2`; the earlier run must not
+be overwritten or restarted. Read the [recovery record](../references/visual_continuation_logger_recovery.md).
+The immediate work is to finish this single comparison and evaluate its outputs.
 Discard all four preflight updates. Each source gets one fixed and two natural
 presentations. Save initial, quarter, half, three-quarter and final weights;
 verify real optimizer/RNG recovery during the first six updates. Evaluate all
@@ -167,7 +175,7 @@ erasure checks. A pass must then survive untouched source-group confirmation.
 
 Do not substitute the old 3,176-question, sixteen-glyph-target subset, repeat
 the completed preflight, extend an unchanged failed recipe, or turn a working
-checkpoint into a language claim. Full training is not yet started. Keep the
+checkpoint into a language claim. Full training and evaluation are incomplete. Keep the
 one unresolved decision explicit: does adapting all answer layers over complete
 visual sequences improve autonomous complete language while preserving source
 prompt interpretation? The architecture, data and evaluation must answer that

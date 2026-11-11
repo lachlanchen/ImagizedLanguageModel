@@ -32,9 +32,11 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
-Mise à jour du 12 novembre 2026 : l’adaptation de continuation sur 36 couches passe le prétest réel avec une cible complète de 513 glyphes et un pic de VRAM de 18,123 GiB. L’entraînement complet n’a pas commencé et un ILM utilisable reste à démontrer. Les résultats ci-dessous concernent des expériences antérieures.
+Mise à jour du 12 novembre 2026 : l’entraînement sur le corpus complet a commencé, avec 13 766 séquences sur trois passages, soit 41 298 mises à jour et 6 108 741 positions de glyphes cibles prévues. Les deux mises en page et les cibles complètes des réponses et des passages de livres sont conservées. Le prétest réel sur 36 couches est réussi, avec un pic de 18,123 GiB de VRAM. L’entraînement et l’évaluation linguistique restent incomplets ; un ILM utilisable reste à démontrer. Les résultats ci-dessous concernent des expériences antérieures.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+La première exécution s’est arrêtée à cause d’un conflit de noms dans le journal ; l’expérience corrigée reprend avec les mêmes données et le même calendrier.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## Résultats antérieurs de V35
 

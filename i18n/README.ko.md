@@ -31,9 +31,11 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [결과와 근거의 범위](../references/native_paired_qa_learning_result.md)
 
-2026년 11월 12일 업데이트: 36개 층의 연속 생성 어댑터가 513개 글리프로 구성된 전체 목표 시퀀스로 실제 GPU 사전 검증을 통과했으며, 최대 VRAM 사용량은 18.123 GiB였습니다. 전체 학습은 아직 시작하지 않았고 실용적인 ILM은 입증되지 않았습니다. 아래 내용은 이전 실험 결과입니다.
+2026년 11월 12일 업데이트: 전체 말뭉치 학습을 시작했습니다. 13,766개 시퀀스를 3에포크에 걸쳐 학습하며, 예정된 업데이트는 41,298회이고 목표 글리프 위치는 총 6,108,741개입니다. 두 입력 레이아웃과 전체 질문·답변 및 책의 목표 시퀀스를 보존합니다. 36개 층의 실제 GPU 사전 검증은 최대 18.123 GiB VRAM으로 통과했습니다. 학습과 언어 평가는 아직 완료되지 않았으며 실용적인 ILM은 입증되지 않았습니다. 아래 내용은 이전 실험 결과입니다.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+첫 실행은 로그 필드 이름 충돌로 중단되었으며, 수정 후 같은 데이터와 계획으로 다시 시작했습니다.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## 이전 V35 결과
 

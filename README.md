@@ -20,7 +20,7 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Latest status: full-body preflight passes; usable language remains unproved
+## Latest status: complete-corpus fit started; language quality remains unproved
 
 The [current balanced-writer evaluation](references/balanced_writer_matched_result.md)
 gives **6/32 strict complete QA matches, 0/16 both-correct pairs and no credited
@@ -32,9 +32,15 @@ passes its [real 36-layer preflight](references/visual_continuation_preflight_re
 on complete targets up to **513 glyphs**,
 with **18.123 GiB** peak allocated VRAM. Frozen prompt memory stays bit-exact;
 all answer layers receive gradients. The independent optimizer/data audit passes.
-This is a capacity and correctness result. The full fit is not yet registered,
-and no new held-out language score is assigned. The inherited body remains
-7.522B parameters. See the [active engineering goal](docs/first-imagized-language-model-goal.md).
+This is a capacity and correctness result. The [registered complete-corpus fit](references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+started on 12 November 2026: **13,766 sequences**, three epochs, **41,298 scheduled
+updates** and **6,108,741 target positions**. Both prompt layouts and complete QA
+and book targets are preserved. Five fixed snapshots and 732 image-output
+evaluations are prescribed by the [protocol](references/visual_continuation_full_protocol.md).
+The [logging correction](references/visual_continuation_logger_recovery.md) preserves
+the failed first execution and restarts the same experiment.
+Training and language evaluation are incomplete; no new held-out score is assigned.
+The inherited body remains 7.522B parameters. See the [active engineering goal](docs/first-imagized-language-model-goal.md).
 
 ## Earlier paired Chinese-answer experiment
 

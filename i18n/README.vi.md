@@ -32,9 +32,11 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
-Cập nhật ngày 12 tháng 11 năm 2026: bộ thích nghi sinh tiếp ở 36 lớp đã vượt qua kiểm tra sơ bộ trên GPU thật với toàn bộ chuỗi đích gồm 513 hình chữ, dùng tối đa 18.123 GiB VRAM. Huấn luyện đầy đủ chưa bắt đầu và ILM có thể sử dụng vẫn chưa được chứng minh. Các kết quả bên dưới thuộc những thí nghiệm trước đây.
+Cập nhật ngày 12 tháng 11 năm 2026: đã bắt đầu huấn luyện trên toàn bộ tập dữ liệu gồm 13.766 chuỗi trong ba lượt, với 41.298 bước cập nhật và 6.108.741 vị trí hình chữ mục tiêu theo kế hoạch. Cả hai bố cục đầu vào và toàn bộ chuỗi đích của câu trả lời, đoạn sách đều được giữ lại. Kiểm tra sơ bộ 36 lớp đã đạt, dùng tối đa 18.123 GiB VRAM. Huấn luyện và đánh giá ngôn ngữ chưa hoàn tất; ILM có thể sử dụng vẫn chưa được chứng minh. Các kết quả bên dưới thuộc những thí nghiệm trước đây.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+Lần chạy đầu dừng do trùng tên trường trong nhật ký; sau khi sửa, thí nghiệm được khởi động lại với cùng dữ liệu và lịch huấn luyện.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## Kết quả V35 trước đây
 

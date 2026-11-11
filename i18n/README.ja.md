@@ -31,9 +31,11 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [結果と証拠の範囲](../references/native_paired_qa_learning_result.md)
 
-2026年11月12日更新：36層の継続アダプターは、513字形の完全な教師系列を使った実機事前検証に合格し、最大VRAM使用量は18.123 GiBでした。本格的な学習はまだ始まっておらず、実用的なILMは実証されていません。以下は以前の実験結果です。
+2026年11月12日更新：全コーパスの学習を開始しました。13,766系列を3エポック、計41,298回の更新と6,108,741字形位置で学習する計画です。2種類の入力レイアウトと、質問応答・書籍の完全な教師系列を保持しています。36層の実機事前検証は最大18.123 GiBのVRAMで合格しました。学習と評価は未完了で、実用的なILMはまだ実証されていません。以下は以前の実験結果です。
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+初回実行はログのフィールド名衝突で停止し、修正後に同じデータと計画で再開しました。
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## 以前の V35 の結果
 

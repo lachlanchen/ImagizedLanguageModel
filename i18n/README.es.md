@@ -32,9 +32,11 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
-Actualización del 12 de noviembre de 2026: la adaptación de continuación en 36 capas supera la prueba real con una secuencia objetivo completa de 513 glifos y un pico de 18.123 GiB de VRAM. El entrenamiento completo aún no ha comenzado y no se ha demostrado un ILM utilizable. Los resultados siguientes corresponden a experimentos anteriores.
+Actualización del 12 de noviembre de 2026: comenzó el entrenamiento con el corpus completo de 13.766 secuencias durante tres pasadas, con 41.298 actualizaciones y 6.108.741 posiciones de glifos objetivo previstas. Se conservan ambos diseños de entrada y las secuencias objetivo completas de las respuestas y los pasajes de libros. La prueba real de las 36 capas se superó con un pico de 18.123 GiB de VRAM. El entrenamiento y la evaluación lingüística siguen incompletos; todavía no se ha demostrado un ILM utilizable. Los resultados siguientes corresponden a experimentos anteriores.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+La primera ejecución se detuvo por un conflicto de nombres en el registro; tras corregirlo, el experimento se reinició con los mismos datos y el mismo calendario.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## Resultados anteriores de V35
 

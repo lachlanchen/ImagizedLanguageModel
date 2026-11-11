@@ -31,9 +31,11 @@ ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图
 
 [结果及证据范围](../references/native_paired_qa_learning_result.md)
 
-2026年11月12日更新：36层延续适配器已在真实GPU上通过预检，完整目标含513个字形，峰值显存为18.123 GiB。完整训练尚未开始，可用ILM仍未得到验证。下方为较早的实验结果。
+2026年11月12日更新：完整语料训练已启动，共13,766条序列、3轮、41,298次预定更新和6,108,741个目标字形位置，保留两种提示布局及完整问答和书籍目标。36层预检已通过，峰值显存18.123 GiB。训练和语言评估尚未完成，可用ILM仍未得到验证。下方为较早的实验结果。
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+首次执行因事件日志字段冲突中止，修正后以相同数据和计划重新启动。
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## 较早的 V35 结果
 

@@ -31,9 +31,11 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [結果與證據範圍](../references/native_paired_qa_learning_result.md)
 
-2026年11月12日更新：36層延續適配器已在真實GPU上通過預檢，完整目標含513個字形，峰值顯示記憶體為18.123 GiB。完整訓練尚未開始，可用ILM仍未得到驗證。下方為較早的實驗結果。
+2026年11月12日更新：完整語料訓練已啟動，共13,766條序列、3輪、41,298次預定更新和6,108,741個目標字形位置，保留兩種提示版面及完整問答和書籍目標。36層預檢已通過，峰值顯示記憶體18.123 GiB。訓練和語言評估尚未完成，可用ILM仍未得到驗證。下方為較早的實驗結果。
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+首次執行因事件日誌欄位衝突中止，修正後以相同資料和計畫重新啟動。
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## 較早的 V35 結果
 

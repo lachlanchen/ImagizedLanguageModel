@@ -31,9 +31,11 @@ ILM مشروع بحثي لتعلّم اللغة وتوليدها بوصفها **
 
 [النتيجة وحدود الدليل](../references/native_paired_qa_learning_result.md)
 
-تحديث 12 نوفمبر 2026: اجتاز تكييف الاستمرار عبر 36 طبقة اختبارًا تمهيديًا فعليًا بهدف كامل من 513 شكلًا كتابيًا، وبذروة ذاكرة رسومية قدرها 18.123 GiB. لم تبدأ بعد تجربة التدريب الكاملة، ولم تثبت صلاحية ILM للاستخدام. النتائج أدناه تخص تجارب أقدم.
+تحديث 12 نوفمبر 2026: بدأ التدريب على كامل المجموعة، التي تضم 13,766 تسلسلاً، لثلاث دورات وبإجمالي مقرر قدره 41,298 تحديثًا و6,108,741 موضعًا للأشكال الكتابية المستهدفة. يحتفظ التدريب بتخطيطي الإدخال وبالتسلسلات المستهدفة الكاملة للإجابات ومقاطع الكتب. اجتاز الاختبار التمهيدي الفعلي للطبقات الـ36 بذروة ذاكرة رسومية قدرها 18.123 GiB. لم يكتمل التدريب أو التقييم اللغوي، ولم تثبت صلاحية ILM للاستخدام بعد. النتائج أدناه تخص تجارب أقدم.
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md)
+توقفت المحاولة الأولى بسبب تعارض اسم حقل في سجل الأحداث، ثم أُعيد تشغيل التجربة بعد التصحيح بالبيانات والجدول نفسيهما.
+
+[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
 
 ## نتائج V35 السابقة
 

@@ -26,9 +26,13 @@ completed preflight or reuse its four updates for the full fit. Prepare and
 register the substantial-corpus comparison before training, with complete QA
 and book targets, both layouts, fixed snapshots and original language controls.
 The full pipeline is implemented; indexing has authenticated 13,766 eligible
-sequences and 2,036,247 target positions per epoch. Finish natural rendering and
-registration, then execute `scripts/run_visual_continuation.py` in one owned
-session. Read `references/visual_continuation_full_protocol.md`; its three epochs,
+sequences and 2,036,247 target positions per epoch. Natural rendering and
+registration are complete. The first execution failed on a duplicate logging
+field after one unsaved update; its evidence is preserved. A fresh recovery
+worker uses `artifacts/visual_continuation_full_logger_recovery_v2` in the single
+`ilm_continuation_full_v1` session. Check the private owner receipt before acting;
+do not start the obsolete default run. Read the recovery record and
+`references/visual_continuation_full_protocol.md`; its three epochs,
 five snapshots, 732 output streams and final pilot are fixed before training.
 Verify the real first-six-update resume check. Do not rerun indexing or launch
 another worker merely because an observation handle has expired.
