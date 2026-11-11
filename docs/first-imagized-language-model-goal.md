@@ -13,12 +13,26 @@ Do not extend the same head fit, select favorable samples or substitute a
 reconstruction metric. The private handoff records live ownership; an
 interrupted observation must not create a second GPU worker.
 
-The [next bounded diagnosis](../references/glyph_context_motor_failure_decision.md)
-tests whether the final motor reliably writes even its own cached training
-states, with the parent and direct codec as controls. It reuses all normal
-development first images and makes no new fit or contextual-body call. Use
-that result to choose between conditional writing, transfer and later
-feedback/stopping work. A larger corpus alone is not a demonstrated remedy.
+The [cached-state writing diagnosis](../references/glyph_context_motor_capacity_result.md)
+is complete: all 128 positions and 512 displayed tiles are independently
+recounted and visually inspected. First/later training median F1 is
+0.986408/0.974518; 32/32 and 23/32 reach 0.95. Both registered physical gates
+fail, although many training forms are recognizable. Supplied reconstruction
+is 31/32 and 32/32 exact. One later nonterminal state predicts stopping above 0.5.
+The test takes 7.815 seconds at 0.311 GiB, with no new fit or contextual-body call.
+All 64 development first images are reused without resampling; many errors
+already occur before generated-history feedback. Canonical pixel mismatch
+remains distinct from character/semantic error.
+
+The [next bounded intervention](../references/decoder_aware_motor_decision.md)
+tests a late-time decoded-image loss with the existing continuous flow, frozen
+neural decoder and unchanged data/exposure. Implement and register it before
+fitting. First test the same 128 physical positions; only if both training
+writing gates pass, run all 216 language streams with the stronger registered
+retention pilot. No new fit has run yet. This physical repair is a hypothesis,
+not a solution to the development transfer gap, input-reading brittleness or
+stopping failures. Preserve the substantial corpus for later complete-sequence
+learning; do not assume that more books or sharper glyphs alone establish it.
 
 Build an independently running visual language model: visible questions and
 passages in, readable and relevant answer images out, with its own emitted

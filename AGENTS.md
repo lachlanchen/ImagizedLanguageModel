@@ -78,6 +78,16 @@ strict canonical match does not authorize repairing the reading or changing
 the metric. Verify live process identity before resuming work; an observation
 timeout does not authorize a duplicate worker.
 
+The cached-state conditional diagnosis is also complete: all 128 positions,
+eight raw boards and 512 displayed tiles are verified and reviewed. Training
+first/later median F1 is 0.986408/0.974518; both fixed physical gates fail.
+The codec remains nearly exact. Many development first-image errors predate
+feedback, and one later nonterminal training state already predicts stopping.
+See the engineering goal and `references/decoder_aware_motor_decision.md` for
+the next bounded objective change; no new fit is implemented or run yet.
+Preserve the completed diagnosis, public pixel archive and original language
+scores. Do not rerun this audit as pending work or call it usable language.
+
 ## Always Commit and Push After Change
 
 Policy: After making any change to files in this repository (e.g., via `apply_patch` or manual edits), create an atomic commit and push it to the tracked branch.
