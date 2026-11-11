@@ -118,21 +118,55 @@ binding. A receipt-schema lookup error is corrected without regeneration or
 changing any score rule. The worker has exited and GPU 0 is released. See the
 [complete evidence](../references/evidence/glyph_tail_native_reader_learning_20261111.json).
 
-**Next required work: register and complete the CPU first-writing/coverage
-audit before another fit.** The [bounded decision](../references/glyph_tail_first_writing_decision.md)
-uses all 192 saved QA glyph streams, with 64 normal cases primary. Authenticate
-first pixels, first states, stopping and physical target compatibility. Measure
-first-form errors and full target primitive coverage, with supplied-image
-encoder/decoder reconstruction kept separate from autonomous writing. Keep
-missing forms and failures in every denominator. A wrong first image precedes
-feedback drift; a correct first image with failed continuation requires later
-writing, stopping and feedback tests. Do not infer either outcome before this
-cheap measurement, introduce helper/development answers into training or
-replace complete-answer acceptance with a first-image score.
+The [CPU first-writing/coverage audit](../references/glyph_tail_first_writing_result.md)
+is complete and independently recounted. All 192 original QA streams and
+first-state bindings are authenticated. Target rendering reproduces all 4,096
+primitive characters and 745 original target tiles exactly. All 32 first
+target forms have training coverage; supplied-image reconstruction is
+31/32 pixel-exact with mean foreground F1 0.999934. Across complete references,
+743/745 positions are covered; 哉 and 倦 are the two uncovered later forms.
+Their supplied reconstructions are poorer, without explaining first-writing
+damage. Missing coverage is not a hard output-vocabulary limit.
+
+Original normal first images have canonical foreground F1 0.492173 fixed-cell
+and 0.632918 proportional, with 0/32 and 3/32 exact bitmaps. **These are not
+character or language accuracies:** valid alternative wording can start with
+another character, and readable learned strokes need not be pixel-identical.
+Both original exact fixed-cell answers have nonidentical first pixels. The
+two complete labelled boards preserve all 32 rows; all 128 displayed tiles
+are verified against saved arrays. Prior cohort familiarity and the absence
+of independent human adjudication remain disclosed. Reconstruction takes
+1.502 seconds on CPU at 1.078 GiB peak RSS, with no CUDA initialization,
+contextual-model call, optimizer update or new autonomous ILM image. Complete
+language scores remain unchanged.
+
+**Next required work: implement and register one actual-context conditional
+writer intervention, then finish its complete-response comparison.** The
+[bounded decision](../references/glyph_tail_context_writer_decision.md) keeps
+the inherited reader, adapters, encoder, neural decoder and stopping fixed.
+It tests a conditional distribution over the existing continuous motor
+features directly from actual reader states, using the authenticated 3,176
+first and 20,086 later training states. It bypasses the old predicted semantic
+point; synthetic semantic mixtures and this diagnostic's answers are excluded.
+This is a hypothesis, not a working model or an established failure cause.
+The exact implementation and sampler must be committed and registered before
+fitting; no fit is started by this decision record.
+
+The candidate must face all current complete QA/control streams and book
+prefixes. The prospectively chosen development pilot requires at least 8/32
+exact proportional answers, 2/16 both-correct pairs, 11/32 readable outputs,
+retention of all six earlier exact proportional answers and both exact fixed
+answers. Report every failure, stop, cap and book continuation. A pilot pass
+still needs untouched source-group confirmation and does not complete this
+goal. Preserve the substantial full corpus for a later registered expansion;
+do not present a short-QA motor intervention as broad book language learning.
 
 Reject an unchanged compact joint fit and a sampler-only repair. Check the
 completed semantic glyph loop and frozen diagnostics before repeating a
-training approach. A development improvement needs untouched source groups
+training approach. The earlier dense and spatial semantic flows failed
+uncertain-condition gates; the balanced writer's near-perfect training forms
+did not improve new-context answers. A new flow head or more training is not
+automatically a solution. A development improvement needs untouched source groups
 before broader claims. Copying, finite losses, rank checks and presentation
 quality do not replace language.
 
@@ -146,7 +180,8 @@ deck remain unchanged. The [bounded revision](../references/manuscript_glyph_inp
 and [build receipt](../publication/ilm-nature/evidence/glyph_input_transfer_publication_build.json)
 record the inspected changes; the redline uses the immutable `0f14fa3f`
 baseline. The newly completed helper-only native diagnosis remains outside
-that scoped paper revision; its manuscript update is pending. Model diagnosis and readable held-out answers take priority
+that scoped paper revision; its manuscript update and the CPU audit's figure
+update are pending. Model diagnosis and readable held-out answers take priority
 over additional presentation work.
 
 ## Goal and acceptance criteria
@@ -357,11 +392,12 @@ evidence; do not keep extending the same run without a new bounded reason.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
-- The repaired writer still fails. The actual-prefill native comparison is
-  complete. Use its unchanged controls and the selected CPU first-writing/
-  coverage audit to distinguish physical form coverage, conditional writing,
-  stopping and generated-history drift before another fit. Helper-decoded or
-  reference-supplied results are not autonomous ILM answers. Do not infer
+- The repaired writer still fails. The actual-prefill native comparison and
+  CPU first-writing/coverage audit are complete. Do not rerun either as pending
+  work. Test the registered actual-context writer intervention against the
+  unchanged actor, preserving reading, stopping and generated-history limits.
+  Helper-decoded or reference-supplied results are not autonomous ILM answers.
+  Canonical first-pixel mismatch is not a semantic-error label. Do not infer
   that a larger model, more epochs or unrelated physics will repair the
   failure without a testable mechanism.
 - Keep inference independent. Offline teachers, OCR and text corpora may prepare

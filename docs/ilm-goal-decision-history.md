@@ -8,6 +8,38 @@ earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
 
+## 11 November: first-writing audit completed; actual-context writer selected
+
+The registered CPU audit preserves all 192 original QA streams and bitwise
+first-state bindings. The rasterizer reproduces all 4,096 primitive characters
+and all 745 canonical target tiles. All 32 first targets have primitive
+coverage; supplied-image reconstruction is 31/32 pixel-exact with mean F1
+0.999934. The full answers have 743/745 covered positions, with 哉 and 倦
+missing only later. Coverage and direct reconstruction do not explain broad
+initial writing damage. First-image pixel mismatch does not establish wrong
+character identity or semantic error; valid alternate prefixes remain.
+
+The independent scorer recounts every pixel counter, coverage flag and outcome
+subgroup, and verifies all 128 displayed tiles. Reconstruction takes 1.502 CPU
+seconds at 1.078 GiB peak RSS, with no contextual call, new autonomous image or
+optimizer update. Full language scores remain 6/32 proportional exact and
+0/16 both-correct pairs. Both labelled boards were viewed with prior cohort
+familiarity; independent human review is absent. See the
+[result](../references/glyph_tail_first_writing_result.md) and
+[complete evidence](../references/evidence/glyph_tail_first_writing_learning_20261111.json).
+
+The next [decision](../references/glyph_tail_context_writer_decision.md) tests
+a conditional motor-feature distribution directly from actual frozen-reader
+states. It preserves E/D, stop, body and adapters, and reuses the authenticated
+3,176 first/20,086 later training-state cache. Earlier dense/spatial flows used
+uncertain semantic mixtures and failed their gates; balanced deterministic
+fitting improved training glyphs without new-context answer gains. These
+failures remain constraints, not evidence that a new flow must work. The
+specific new intervention is not implemented, registered or run. Its complete
+response pilot, retention requirements, 216-stream comparison and one-GPU
+resource ceiling are written before execution. A pass needs untouched
+confirmation; the independent usable-language goal stays active.
+
 ## 11 November: matched native reading completed; first writing unresolved
 
 All 448 helper calls are authenticated, with 192 adapted image prefills

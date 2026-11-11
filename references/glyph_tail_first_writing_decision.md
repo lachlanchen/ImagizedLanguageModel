@@ -55,4 +55,8 @@ answers, correct paired questions, coherent book continuation, natural
 stopping, untouched confirmation and one-GPU cost reporting. The full goal
 is unchanged; this first-image diagnostic is not a substitute benchmark.
 
-Status: decision recorded. Not implemented, registered or run.
+Status: implemented, registered and completed. The
+[result](glyph_tail_first_writing_result.md) preserves every original stream,
+confirms target compatibility and reports independently recounted physical
+measurements. The [next decision](glyph_tail_context_writer_decision.md) is a
+separate actual-context writer intervention; its outcome is not assumed.

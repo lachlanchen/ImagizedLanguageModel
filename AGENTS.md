@@ -49,16 +49,23 @@ decoding gives 13/32; adapter effects are mixed across layouts and text.
 Both erasures remain zero exact in every image arm. The helper lexical decoder
 stays outside the ILM and does not qualify its image output. The worker exited.
 
-Before another fit, register and finish the goal's CPU first-writing/coverage
-audit using all 192 original QA glyph streams and 64 normal cases primary.
-Authenticate target rendering compatibility and primitive coverage before
-interpreting first-glyph error. Supplied-image reconstruction is separate from
-autonomous language; no helper/development answer becomes training data.
-Reuse completed assets and inspect prior semantic-glyph-loop results before
-repeating a failed approach. A failed strict canonical match does not authorize
-repairing the reading or substituting a post-hoc metric. Verify live process
-identity before resuming work; an observation timeout does not authorize a
-duplicate worker.
+The CPU first-writing/coverage audit is complete: all 192 original streams,
+745 target positions and 128 displayed tiles pass the independent recount.
+All first forms are covered; supplied reconstruction is 31/32 pixel-exact.
+Pixel mismatch is not character/semantic error, and complete language scores
+remain unchanged. Do not repeat this audit as pending work.
+
+Follow the goal's actual-context conditional-writer decision next. Implement
+and register it before fitting; reuse authenticated training-state caches and
+keep helper/development answers excluded. Preserve the reader, adapters,
+encoder, decoder, stop predictor and unchanged complete-response controls.
+Earlier synthetic semantic flows and balanced deterministic fitting already
+failed relevant gates; a new flow is a hypothesis, not a successful solution.
+No first-image metric can substitute for readable complete answers, paired
+question dependence, book continuation and untouched confirmation. A failed
+strict canonical match does not authorize repairing the reading or changing
+the metric. Verify live process identity before resuming work; an observation
+timeout does not authorize a duplicate worker.
 
 ## Always Commit and Push After Change
 
