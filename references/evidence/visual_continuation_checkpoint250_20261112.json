@@ -1,0 +1,48 @@
+{
+  "schema": "visual-continuation-first-periodic-checkpoint-audit-v1",
+  "recorded_unix": 1794427269.765594,
+  "run": "artifacts/visual_continuation_full_logger_recovery_v2",
+  "registration_sha256": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+  "checkpoint": {
+    "file": "artifacts/visual_continuation_full_logger_recovery_v2/fit/checkpoints/step_000250_attempt_001_1794427140601778973.pt",
+    "sha256": "e78eabbf20a5d00490acfa04f4ea74549b10b23dbcf90d522237d0be78fd1939",
+    "step": 250,
+    "retention": "rotating current/previous optimizer state; this receipt persists after supersession"
+  },
+  "actual_Adam_tensors": 85,
+  "all_Adam_counters": 250,
+  "all_weights_moments_finite": true,
+  "all_second_moments_nonnegative": true,
+  "trainable_parameters": 20212225,
+  "trainable_tensors_changed_from_initial": 85,
+  "scheduled_updates": 250,
+  "unique_training_records": 250,
+  "scheduled_target_positions": 35919,
+  "case_counts": {
+    "book": 80,
+    "qa": 170
+  },
+  "layout_counts": {
+    "fixed_cells": 85,
+    "proportional": 165
+  },
+  "target_positions_by_kind": {
+    "book": 32695,
+    "qa": 3224
+  },
+  "scheduled_targets_range": [
+    2,
+    513
+  ],
+  "registered_source_identity_layout_target_length_and_lr_verified": true,
+  "all250_scheduled_event_hashes_verified": true,
+  "last_event_sha256": "028080dc8ed16ac40109257d65376b0ef260d6b074cea603eaa75bee427ea3c6",
+  "replay_updates_excluded_from_scheduled_progress": 2,
+  "producer_frozen_parameter_guard_precedes_saved_checkpoint": true,
+  "frozen_full_body_tensors_independently_archived": false,
+  "checkpoint_cumulative_elapsed_seconds": 690.9770724745467,
+  "immutable_first6_replay_checkpoint_preserved": true,
+  "full_fit_complete": false,
+  "language_quality_evaluated": false,
+  "goal_achieved": false
+}
