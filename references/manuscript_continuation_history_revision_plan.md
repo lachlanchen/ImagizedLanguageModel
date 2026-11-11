@@ -117,5 +117,23 @@ propagation without evidence. Commit and push each completed revision unit.
 
 ## Status
 
-Plan established before TeX authoring. Evidence binding and staged text are the
-first work unit; the active article and PDFs remain unchanged during training.
+Evidence binding and staged Results/Methods are complete. The extractor
+reaggregates all 1,490 public reference positions from literal integer counts,
+authenticates the complete 772-position preflight and preserves all 227 prior
+assets. It does not repeat a raw-pixel audit or perform a model call.
+
+The new methods describe the actual immutable cache, answer-only residuals,
+balanced image and stop losses, causal training boundary and emitted-pixel
+inference. A standalone CPU build checks both new sections together in the
+unchanged article style. All three scratch pages are actually viewed, including
+the five numbered equations; there are no overfull boxes or unresolved references.
+The [staged validation](../publication/ilm-nature/evidence/continuation_history_staged_source_validation.json)
+binds source hashes, rendering and numeric checks. This is a staged source check,
+not the final article layout.
+
+The active article inputs and all three current PDFs remain unchanged. Figure 23
+authoring, native/Office figure validation, article activation, full builds,
+cumulative redline, clean reproduction and local synchronization remain pending.
+The registered full-corpus worker continues unchanged on GPU0. Resume this
+publication work from the bound evidence and staged TeX rather than repeating
+the completed diagnosis, preflight or source check.

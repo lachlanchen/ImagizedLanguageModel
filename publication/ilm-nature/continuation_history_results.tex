@@ -1,0 +1,87 @@
+% Staged author update. Activate only after Figure 23 and all article builds pass.
+\subsection*{Correct image history improves conditional writing but leaves failures}
+The frozen balanced writer permits a direct history intervention on the same
+64 normal QA inputs, with 32 questions per layout. At each reference boundary,
+the model predicts the next glyph after receiving the correct preceding glyph
+images. The reference length is supplied and predicted stopping is recorded
+but bypassed. This diagnosis therefore supplies answer information; it is not
+autonomous language generation. All 64 initial states match the saved autonomous
+states bit-for-bit, and the same frozen bridge reproduces every saved autonomous
+pixel and stopping probability.
+
+Across the 713 later reference positions per layout, fixed-cell writing has
+median foreground F1 0.573840, with 139/713 positions reaching 0.95 and 59/713
+exact canonical bitmaps. Proportional inputs give median 0.985185, 475/713 at
+least 0.95 and 251/713 exact bitmaps. Neither layout passes both prospective
+requirements: median at least 0.99 and at least 90\% of later positions at F1
+0.95. First-position mean F1 remains 0.479076 fixed and 0.658382 proportional,
+with 0/32 and 4/32 exact first images. Thus conditional errors persist before
+any generated feedback as well as under supplied correct history.
+
+At indices present in both histories, fixed-cell mean F1 is 0.393464 with
+autonomous history and 0.614716 with reference history over 738 positions.
+Proportional means are 0.445851 and 0.912711 over 598 positions. Seven fixed and
+147 proportional target positions missing from autonomous outputs remain
+missing; extra autonomous output is also retained. These shared-index comparisons
+do not align alternative semantic answers or estimate a language-accuracy gain.
+Whole-response readings and all earlier language scores remain unchanged.
+
+Relative to the supplied boundaries, fixed-cell stopping crosses 0.5 at 27/745
+nonterminal positions in eleven cases and recognizes 24/32 terminals.
+Proportional stopping crosses at 14/745 positions in nine cases and recognizes
+30/32 terminals. The proportional position-rate and terminal-rate diagnostic
+passes, but a supplied-history terminal is not a test of natural autonomous
+ending. Visual review covers all sixteen boards and 8,561 original displayed
+tiles. It shows clearer later proportional writing while retaining damaged
+forms and uncertainty. No reference repairs a transcription.
+
+The descriptive common-prefix analysis verifies identical states while image
+history remains identical. A first differing image precedes the first changed
+state in each of 63 affected traces. This establishes dependence on visible
+history, not that each divergence causes failure. All four cases with nearly
+exact but nonidentical first pixels have readable original autonomous answers.
+A universal account in which small pixel differences necessarily cause
+collapse is unsupported. The supplied-history benefit does not identify a
+unique repair, and a feedback-only explanation is insufficient.
+
+\subsection*{Adapting continuation preserves frozen prompt memory in a real preflight}
+A successor separates source prompt interpretation from answer computation.
+The imported reader prefills the prompt without the new residuals. Its detached
+keys and values remain immutable; a learned continuous query and re-encoded
+glyph images drive all 36 native answer layers, each followed by a trainable
+rank-eight residual. Every answer layer is recomputed during fitting, rather
+than reusing lower-layer answer states computed under older parameters.
+The lexical embedding table and output projection remain absent from inference.
+
+A real single-4090 preflight retains four authentic complete targets of 1, 74,
+184 and 513 glyphs, with prompts of 328, 1,027, 695 and 128 glyphs, respectively.
+All 772 target positions and four terminal boundaries receive supervision.
+All 36 answer layers receive actual gradients. After four updates, recomputed
+prompt states and every prompt key/value fingerprint remain bit-exact.
+Changing a final target leaves all preceding predictor states unchanged;
+changing the first target leaves its initial predictor unchanged while later
+states respond. Zero-residual split/native execution differs by at most
+0.000223160; updated serial/parallel execution differs by 0.000070572, both
+within the fixed 0.002 tolerance. Different execution shapes are not asserted
+to be bit-exact.
+
+The independently opened checkpoint contains 85 Adam states at step four,
+with 20,212,225 trainable parameters. Peak allocated memory is
+18.122546\,GiB. Prompt freezing and full-body version checks are assertions
+from the bound GPU execution; full source tensors are not duplicated for a
+second comparison. Initial residual-down tensors were not archived in this
+preflight, so their updates are evidenced by gradients, moments and the
+execution checks. This is a feasibility and implementation result. A one-glyph
+training-case inference exercise supplies no held-out language evidence.
+
+The registered full fit discards all preflight updates and retains 13,766
+complete sequences: 9,004 QA records and 4,762 book records. Its three epochs
+prescribe 41,298 updates and 6,108,741 target positions across two layouts,
+with five fixed snapshots and 732 evaluation streams. A logging failure in
+the first execution discards one unsaved update; the corrected execution starts
+from bit-exact fresh parameters, optimizer and random state. Actual step-four
+restoration and step-five/six replay match the uninterrupted state exactly.
+These launch checks do not constitute complete training or a language result.
+The full fit and its autonomous quality evaluation remain incomplete.
+
+% Figure 23 is inserted here only after its native deck and both renders pass.

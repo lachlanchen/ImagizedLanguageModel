@@ -1,0 +1,165 @@
+% Staged author update. Existing article inputs remain unchanged until activation.
+\subsection*{Reference-image history intervention}
+The unchanged balanced checkpoint receives each of the 64 normal physical QA
+prompts once, with no optimization or external native decoding. After prompt
+prefill, the next-writing state is computed at every complete reference boundary
+using the canonical preceding glyph images. The supplied reference length
+determines the number of diagnostic steps; the stopping predictor is observed
+without terminating the trace. These teacher-forced traces must not be combined
+with autonomous answer counts. Source images, initial states and the bridge
+remain unchanged.
+
+Each layout contains 745 target glyph positions and 32 terminal boundaries.
+The first position of each case is reported separately, leaving 713 later
+positions. Foreground F1 is $2\mathrm{TP}/(2\mathrm{TP}+\mathrm{FP}+\mathrm{FN})$,
+with value one for two empty ink masks. Exact equality compares the complete
+binary bitmap. Punctuation and spaces remain in the pools. Summaries aggregate
+positions unless explicitly identified as equal-case means. Shared autonomous
+and reference indices are retained only where both predictions exist, with
+missing and extra positions reported separately. A shared numeric index is not
+semantic alignment when wording or output lengths differ.
+
+The later-writing gate requires both median F1 at least 0.99 and at least
+90\% of positions reaching 0.95. The stopping diagnosis separately requires
+the prospectively fixed nonterminal and terminal rates. All 1,490 reference
+positions, initial-state comparisons and saved autonomous pixel/stop replays
+are independently checked. Review then inspects all 8,561 displayed tiles.
+The common-prefix state comparison is post hoc and descriptive. All cases are
+reused development data, with reviewer familiarity and no independent human
+adjudication. The diagnosis takes 460.834 seconds, including 70.067 seconds
+pressure waiting, at 17.786\,GiB peak allocated GPU memory. Loading is 137.167
+seconds; loading and waiting intervals may overlap. Its 1,554 contextual calls
+do not create new autonomous answers or change original language scores.
+
+\subsection*{Immutable prompt memory and visual continuation}
+Let $X$ be the physical prompt image and $Y_0,\ldots,Y_{N-1}$ the complete target
+glyph images. Each signed image has shape $1\times32\times32$, with ink at
+$-1$ and background at $+1$. Source prompt prefill produces detached memory
+$C_\ell(X)=(K^P_\ell,V^P_\ell)$ for each native layer
+$\ell=0,\ldots,35$. The new residuals are bypassed during this computation.
+Source vision, contextual parameters and the original zero-output source
+adapters are frozen. The answer input sequence is
+\begin{equation}
+ a_0=q,\qquad a_{t+1}=S(E(Y_t)),\quad 0\leq t<N,
+ \label{eq:continuation-input}
+\end{equation}
+where $E$ is the frozen image encoder and $S$ its fixed affine denormalization
+into the imported 4,096-dimensional contextual coordinates. The learned query
+$q$ initially copies the final fixed numeric task-control vector. It contains
+no case-specific answer or character identity.
+
+With $h^0_t=a_t$, the answer transition is
+\begin{align}
+ u^\ell_t&=F_\ell(h^\ell_t;C_\ell(X),h^\ell_{<t}),\nonumber\\
+ h^{\ell+1}_t&=u^\ell_t+\frac{\alpha}{r}B_\ell A_\ell u^\ell_t.
+ \label{eq:continuation-residual}
+\end{align}
+Here $F_\ell$ is the frozen native layer,
+$A_\ell\in\mathbb R^{8\times4096}$,
+$B_\ell\in\mathbb R^{4096\times8}$, $r=8$ and $\alpha=16$.
+Each $A_\ell$ uses Kaiming-uniform initialization and each $B_\ell$ begins at
+zero. The residual is applied after the native layer, including to the query.
+Prompt and answer position offsets preserve the imported rotary convention.
+The causal mask allows the complete source prompt and current/preceding answer
+inputs. Thus state $t$ predicts $Y_t$ before that target image enters the history.
+Final native normalization produces $z_t$.
+
+Only frozen prompt keys and values are cached during fitting. The cache update
+is a pure concatenation of prompt memory with the current answer keys/values;
+activation recomputation cannot append to or lengthen the prompt. All 36 answer
+layers are recomputed with their current residuals using nonreentrant
+checkpointing. Incremental inference maintains a separate answer cache for
+the current output stream and leaves the prompt memory untouched. No mutable
+answer cache is captured during gradient-enabled execution.
+
+\subsection*{Physical writing loss and autonomous feedback}
+The trainable readout $R$ and frozen decoder $D$ predict pixel logits
+$L_t=D(R(z_t))$. A separate trainable head predicts stopping logit $s_t$.
+Writing $b_{ti}=(1-Y_{ti})/2$ for reference ink at pixel $i$, the implemented
+balanced reconstruction objective is
+\begin{equation}
+ \begin{split}
+ \mathcal L_{\rm image}=\frac12\biggl[
+ &\frac{\sum_{t,i}b_{ti}\,\operatorname{softplus}(-L_{ti})}
+ {\max(1,\sum_{t,i}b_{ti})}\\
+ +&\frac{\sum_{t,i}(1-b_{ti})\,\operatorname{softplus}(L_{ti})}
+ {\max(1,\sum_{t,i}(1-b_{ti}))}\biggr].
+ \end{split}
+ \label{eq:continuation-image-loss}
+\end{equation}
+The sums cover every pixel of all $N$ complete targets, rather than balancing
+each glyph independently. The final teacher-forced state $z_N$ predicts the
+terminal boundary without an additional image target. The balanced stopping loss is
+\begin{equation}
+ \mathcal L_{\rm stop}=\frac12\left[
+ \frac1N\sum_{t=0}^{N-1}\operatorname{softplus}(s_t)
+ +\operatorname{softplus}(-s_N)\right].
+ \label{eq:continuation-stop-loss}
+\end{equation}
+Training minimizes $\mathcal L_{\rm image}+0.1\mathcal L_{\rm stop}$.
+Frozen encoder, decoder, source weights and affine statistics are not updated.
+Image-loss gradients still pass through the frozen decoder into readout,
+query and residual parameters. No decoded reference identity or lexical output
+projection supplies these gradients.
+
+At autonomous inference, evaluate stopping before another emission. If
+$\sigma(s_t)\geq0.5$, end the answer; otherwise emit
+\begin{equation}
+ \widehat Y_{ti}=1-2\,\mathbf1\{\sigma(L_{ti})\geq0.5\}.
+ \label{eq:continuation-emission}
+\end{equation}
+Only $S(E(\widehat Y_t))$ supplies the next input. An initially stopped stream
+is empty; a stream reaching its image cap is retained as capped. Reference
+length, font rendering, a tokenizer, OCR, lexical logits, a live teacher and an
+answer bank are absent from this path. The physical pixel factorization and
+teacher-forced objective do not by themselves guarantee semantic learning or
+stability under generated histories.
+
+\subsection*{Preflight evidence and the registered complete fit}
+The real preflight selects four complete eligible training cases and excludes
+the earlier feedback-ceiling diagnostic records and source groups. Its authentic
+targets have 1, 74, 184 and 513 glyphs, totaling 772 positions. All 36 answer
+layers receive actual gradients. An independent audit opens the saved checkpoint
+and verifies four Adam steps for all 85 trainable tensors, FP32 moments,
+original targets and prompt pixels. Prompt key/value, causality and frozen-body
+version checks come from the registered GPU execution. Initial residual-down
+tensors are not archived; their gradients, moments and bound update checks
+are retained. Numerical split/native and serial/parallel comparisons use fixed
+absolute tolerance 0.002 rather than asserting shape-independent equality.
+
+Trainable parameters comprise 2,359,296 residual coordinates, a 4,096-coordinate
+query and 17,848,833 readout/stopping parameters. The deployed system also retains
+the 7,522,463,984-parameter inherited visual/contextual body and frozen image
+interfaces. The 150.811-second preflight includes 20.020 seconds pressure waiting
+and peaks at 18.122546\,GiB allocated memory; loading takes 113.573 seconds and
+may overlap waiting. These measurements cover the four complete cases, not
+arbitrary page sizes, complete foundation training or matched-quality efficiency.
+
+The subsequent full trial starts fresh, without the preflight updates. Complete
+eligible QA and book targets provide 2,036,247 positions per epoch. For a book
+record of $n$ glyphs, expose the first
+$\min(128,\max(1,\lfloor n/4\rfloor))$ glyphs and predict
+the remainder. The 13,766 records are presented once per epoch for three epochs;
+each gets one fixed-cell and two proportional prompts. Forty-five font/layout
+rejections retain the complete original raster. All source pixels, target
+boundaries, ordering, exclusions and evaluation controls are registered before
+fitting. With one complete sequence per update, FP32 AdamW uses no weight decay,
+peak learning rate $10^{-4}$, 500-update linear warm-up, cosine decay to $10^{-5}$
+and global norm clipping at one. Initial and 10,324/20,649/30,973/41,298-update
+snapshots are fixed. The 732 prescribed autonomous streams, output-first review,
+complete-language pilot, retained successes and untouched confirmation determine
+any subsequent language claim. The final proportional pilot requires at least
+12/32 exact answers, 4/16 both-correct pairs, 24/32 readable answers and 4/12
+coherent complete long-book continuations, retaining all eight union proportional
+and both fixed exact cases. Each QA-erasure arm may score at most two exact
+answers, with normal minus the better erased arm at least eight. At this update,
+those quality measurements are
+unmeasured; neither the preflight nor a finite training loss substitutes for them.
+
+The single-device fit requires 48\,GiB available host memory and 20\,GiB free
+GPU memory on admission, with 24\,GiB host reserve and a 22\,GiB allocated-device
+ceiling at runtime. These host requirements are separate from the 24-GiB GPU.
+The cumulative fit wall budget is 48 hours, including the failed first child's
+139.558657 seconds. Pressure waiting is bounded within that budget. Offline data
+preparation, inherited pretraining, earlier interface fits, evaluation and review
+remain additional costs; feasibility does not establish an efficiency advantage.
