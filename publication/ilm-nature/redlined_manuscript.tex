@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 11 03:10:28 2026
-%DIF ADD new.tex   Wed Nov 11 03:10:28 2026
+%DIF DEL old.tex   Wed Nov 11 08:51:03 2026
+%DIF ADD new.tex   Wed Nov 11 08:56:21 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -88,11 +88,7 @@
 \newcommand{\CodecLanguageCIHigh}{15.730}
 
 \newcommand{\PaperTitle}{Learning conditional language\\in continuous image space}
-%DIF 88c88
-%DIF < \newcommand{\PaperSummary}{Written language includes historical and handwritten forms outside fixed character inventories. We investigate independent image-input, image-output language generation on one consumer GPU, separating reconstruction, conditional preference and autonomous answering. A normalized causal pixel writer above an externally pretrained 7.544B visual contextual body fits 495 of 512 Chinese training answers exactly after 16,000 updates, but none of 24 normal development answers. All supplied correct development first images have lower likelihood than the corresponding erroneous emission, despite transferred paired-question preferences. A matched diagnostic reader reproduces all 32 image-memory fingerprints and returns literal reference answers on 12 of 16 normal Chinese questions, versus zero with the question erased. This helper-only text baseline localizes substantial lost capability to the learned writing interface; it is not an image-output solution. A continuous complete-glyph loop then produces some readable new short answers, but eleven of sixteen normal development streams still cap. On two selected question templates, eleven of fourteen prospective date changes yield clearly matching answer images, with two pixel-exact; all fourteen stop naturally. These non-independent manual readings support restricted input-dependent composition, not general language qualification. Historical-script understanding and an efficiency advantage at matched language quality remain unresolved.}
-%DIF -------
-\newcommand{\PaperSummary}{Written language includes handwritten and historical forms outside fixed character inventories. We investigate language generation that reads and emits images, using continuous glyph feedback without a runtime tokenizer, lexical output head, font renderer or glyph bank. An externally pretrained 7.522B visual contextual body supplies inherited language knowledge; exact frozen-prefix caching permits final-layer adaptation on one consumer GPU. Across 3,176 short-answer training questions, 688,128 contextual adapter parameters and 17,848,833 writer/stopping parameters are trained for 18,000 updates. On 32 prospectively reserved questions from sixteen new contexts, contextual adaptation gives sixteen clear complete literal matches, versus eleven for a fixed-body readout control. Both different questions are correct in five versus two contexts; canonical pixel-exact complete answers number two and one. Neither condition passes the predefined complete-answer pilot or training-pixel qualification. A further balanced writer fit passes physical qualification but gives eighteen clear answers versus nineteen for its parent on a different reserved cohort, separating training fidelity from generalization. A cold standalone replay verifies actual emitted-pixel feedback without answer-bank or lexical access on one fixed input. These results support partial image-conditioned answer transfer and identify distinct initial-decision and autonomous-continuation bottlenecks. Reliable open-ended writing, historical-script generalization and an efficiency advantage at matched language quality remain unresolved.} %DIF > 
-%DIF -------
+\newcommand{\PaperSummary}{Written language includes handwritten and historical forms outside fixed character inventories. We investigate language generation that reads and emits images, using continuous glyph feedback without a runtime tokenizer, lexical output head, font renderer or glyph bank. An externally pretrained 7.522B visual contextual body supplies inherited language knowledge; exact frozen-prefix caching permits final-layer adaptation on one consumer GPU. Across 3,176 short-answer training questions, 688,128 contextual adapter parameters and 17,848,833 writer/stopping parameters are trained for 18,000 updates. On 32 prospectively reserved questions from sixteen new contexts, contextual adaptation gives sixteen clear complete literal matches, versus eleven for a fixed-body readout control. Both different questions are correct in five versus two contexts; canonical pixel-exact complete answers number two and one. Neither condition passes the predefined complete-answer pilot or training-pixel qualification. A further balanced writer fit passes physical qualification but gives eighteen clear answers versus nineteen for its parent on a different reserved cohort, separating training fidelity from generalization. A cold standalone replay verifies actual emitted-pixel feedback without answer-bank or lexical access on one fixed input. These results support partial image-conditioned answer transfer and identify distinct initial-decision and autonomous-continuation bottlenecks. Reliable open-ended writing, historical-script generalization and an efficiency advantage at matched language quality remain unresolved.}
 
 \onehalfspacing\linenumbers
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
@@ -136,8 +132,7 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved baseline (2ca07ea0).}\par\medskip
-
+\noindent{\color{blue}\footnotesize Change-marked copy relative to the preserved glyph-feedback draft (f7f91826).}\par\medskip
 {\sffamily\bfseries\Large\PaperTitle\par}\medskip Imagized Language Model Project\par\medskip
 \section*{Abstract}\PaperSummary\par\bigskip
 Written language is encountered as marks on paper, screens and historical
@@ -1060,8 +1055,8 @@ answers. This supports restricted input-dependent composition through actual
 image feedback, while broader unseen-answer reliability remains unresolved.
 
 
-\DIFaddbegin \subsection*{\DIFadd{Sharp known-form generation does not recover uncertain glyph identity}}
-\DIFadd{Additional controls distinguish a useful motor from correct conditional
+\subsection*{Sharp known-form generation does not recover uncertain glyph identity}
+Additional controls distinguish a useful motor from correct conditional
 writing (Supplementary Note 60; Fig.~S39). On sixteen
 normal Chinese initial states, an allowed reference first form is nearest
 in semantic cosine for nine, but only one first image is pixel-exact.
@@ -1076,12 +1071,11 @@ F1 0.998260, but mixed-condition F1 is 0.810537. None of these rejected
 motors undergoes autonomous language assessment. Confident known-form
 generation remains distinct from recovering the intended form and producing
 a correct complete answer.
-}
 
 
 
-\subsection*{\DIFadd{Improved glyph copying does not restore complete-answer generation}}
-\DIFadd{Training on genuine copy-prompt states separates physical writing from language
+\subsection*{Improved glyph copying does not restore complete-answer generation}
+Training on genuine copy-prompt states separates physical writing from language
 decisions (Supplementary Note 61; Fig.~S40). Removing source-anchor regression from the
 writer objective improves held-wording glyph F1 from 0.951778 to 0.972856 and
 the number reaching F1 0.95 from 194/256 to 229/256. Complete development-answer
@@ -1095,12 +1089,11 @@ whereas both exact-character and image-encoded character feedback give three.
 These helper trajectories use a source lexical head and are not ILM answers.
 The comparison motivates adapting sequence dynamics, but does not establish
 that frozen contextual states cannot support an independently trained writer.
-}
 
 
 
-\subsection*{\DIFadd{Contextual adaptation improves autonomous image answers}}
-\DIFadd{Adapting the final four contextual layers, together with the image writer and
+\subsection*{Contextual adaptation improves autonomous image answers}
+Adapting the final four contextual layers, together with the image writer and
 stopping head, improves complete answers relative to a broader-data readout-only
 control (Supplementary Note 62; Fig.~S41). Both conditions use 3,176 training
 questions and 18,000 updates. On 32 prospectively reserved questions from 16
@@ -1114,9 +1107,8 @@ model. Training first-glyph fidelity is lower than later reference-conditioned
 fidelity, so generated-image feedback cannot explain every failure. A separate
 cold replay reproduces the full image-feedback execution on one fixed input
 without runtime lexical, font or answer-bank access.
-}
 
-\DIFadd{An additional balanced writer refinement isolates a training-fit problem.
+An additional balanced writer refinement isolates a training-fit problem.
 With the learned reader fixed, batched first/later supervision raises training
 F1 from 0.963524 to 0.999811 and passes physical qualification. On a different
 reserved cohort, however, clear complete answers are 18/32 versus 19/32 for the
@@ -1124,8 +1116,33 @@ unchanged parent, with two canonical exact answers each. The one-case reading
 difference is a damaged initial glyph, not an established semantic regression.
 Neither passes the answer pilot (Supplementary Note 62; Fig.~S42). Stronger
 reference-conditioned fitting alone has not established a generalization gain.
+
+
+
+\DIFaddbegin \subsection*{\DIFadd{Historical glyph fidelity and resolution}}
+\DIFadd{We encoded and decoded 27 catalogued oracle, bronze and seal glyph rasters
+from sealed source families. The rasters had no exact match in the original
+historical training partition for the fixed codec. Twenty round trips were
+pixel-exact, and mean foreground $F_1$ was 0.9981 (Fig.~\ref{fig:historical-forms}).
 }
 
+\DIFadd{The bronze source B12643 retains only ten ink pixels at $32\times32$ even
+though its codec reconstruction is exact. Its $128\times128$ raster reveals
+thin strokes lost at the smaller size. Five tall bronze forms represented as
+four vertically stacked tiles averaged foreground $F_1=0.9389$ after decoding
+and reassembly. All five changed pixels. The historical reading and
+stage-selection tests remain unevaluated with a trained language checkpoint.
+}
+
+\plate{Figure_11_historical_forms}{\textbf{Historical forms through the fixed glyph codec.}
+\textbf{a}, Exact reconstruction fraction and mean foreground $F_1$ for the
+27 single-tile images and five tall bronze crops. Group sizes are in parentheses.
+\textbf{b}, The same source SVG, B12643, rasterized at three resolutions. It is
+the sparsest input among the 27 single-tile images.
+\textbf{c}, B12642 before and after decoding four $32\times32$ tiles. It had
+the lowest foreground $F_1$ of the five tall crops. All panels use supplied
+historical images. The source identities and measurements are recorded in the
+\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/references/evidence/historical_visual_evaluation_20261111.json}{archived evaluation receipt}.}{fig:historical-forms}
 
 
 \DIFaddend \section*{Discussion}

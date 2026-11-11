@@ -1,0 +1,22 @@
+\subsection*{Historical glyph fidelity and resolution}
+We encoded and decoded 27 catalogued oracle, bronze and seal glyph rasters
+from sealed source families. The rasters had no exact match in the original
+historical training partition for the fixed codec. Twenty round trips were
+pixel-exact, and mean foreground $F_1$ was 0.9981 (Fig.~\ref{fig:historical-forms}).
+
+The bronze source B12643 retains only ten ink pixels at $32\times32$ even
+though its codec reconstruction is exact. Its $128\times128$ raster reveals
+thin strokes lost at the smaller size. Five tall bronze forms represented as
+four vertically stacked tiles averaged foreground $F_1=0.9389$ after decoding
+and reassembly. All five changed pixels. The historical reading and
+stage-selection tests remain unevaluated with a trained language checkpoint.
+
+\plate{Figure_11_historical_forms}{\textbf{Historical forms through the fixed glyph codec.}
+\textbf{a}, Exact reconstruction fraction and mean foreground $F_1$ for the
+27 single-tile images and five tall bronze crops. Group sizes are in parentheses.
+\textbf{b}, The same source SVG, B12643, rasterized at three resolutions. It is
+the sparsest input among the 27 single-tile images.
+\textbf{c}, B12642 before and after decoding four $32\times32$ tiles. It had
+the lowest foreground $F_1$ of the five tall crops. All panels use supplied
+historical images. The source identities and measurements are recorded in the
+\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/references/evidence/historical_visual_evaluation_20261111.json}{archived evaluation receipt}.}{fig:historical-forms}

@@ -6,12 +6,11 @@ V-SPICE v13.7 manuscript template: a two-column article, a matching review
 copy, separate Methods and Supplementary Information, and evidence figures.
 The earlier 96-page research record remains in `../ilm-image-native/`.
 
-The [change-marked article](redlined_manuscript.pdf) and
-[supplement](redlined_supplementary_information.pdf) compare the current
-revision with the preserved `2ca07ea0` baseline. Their
-[builder](glyph_step_publication.py) uses pinned latexdiff and inlines
-the abstract so its changes are visible. Earlier builders and baselines remain
-available for historical reproduction.
+The [change-marked article](redlined_manuscript.pdf) compares the Figure 11
+revision with the glyph-feedback draft at `f7f91826`. The
+[supplement redline](redlined_supplementary_information.pdf) uses the
+preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
+and earlier baselines remain available for reproduction.
 
 ## Current result
 
@@ -26,6 +25,12 @@ caps, qualification results and cold-replay receipts remain available in the
 [paired adaptation result](../../references/glyph_tail_paired_answers_result.md)
 and [writer refinement result](../../references/balanced_glyph_writer_result.md).
 **Notes 60–62 and Figures S39–S42** add the completed controls and results.
+
+**Figure 11** records historical glyph reconstruction. Twenty of 27 selected
+single-tile forms round-trip exactly through the fixed codec. The five tiled
+bronze crops average 0.939 foreground F1 and retain visible stroke errors.
+The figure includes actual source and decoded images. Its chart and labels
+are editable in the [Figure 11 PowerPoint file](figures/Figure_11_historical_forms.pptx).
 
 ## Earlier experiments
 
@@ -55,8 +60,8 @@ body's acquisition and pretraining. Historical scripts, English transfer,
 unknown glyphs and an efficiency advantage at matched language quality remain
 unvalidated. **Notes 58–59 and Figures S36–S38** report the measurements.
 
-The package contains an **18-page article, 33-page review and 100-page
-supplement**, with matching redlines (33/100 pages). The editable deck has
+The package contains an **18-page article, 34-page review and 100-page
+supplement**, with matching redlines (34/100 pages). The composite editable deck has
 **57 slides and 65 native charts**. All 53 previous slide appearances and
 57 chart parts are preserved. The new figures use actual unrepaired model
 outputs and editable charts with linked workbooks. LibreOffice rendering uses
@@ -66,14 +71,11 @@ Liberation Sans in place of Arial; PowerPoint-app inspection is not claimed.
 
 ![All normal date interventions, including damaged outputs](figures/Figure_S38_date_interventions.png)
 
-The current staged build is `artifacts/writing_failure_publication_v3`.
-`writing_failure_publication.py` prepares, renders, builds, promotes and syncs
-a source-bound package; promotion requires actual figure/PDF review receipts.
-Earlier builders retain historical slide counts and must not overwrite the
-current deck. The local delivery package is
-`ILM_NatureStyle_20261111_GlyphFeedbackControls`, with five `LATEST` aliases.
-Source/destination hashes verify local copying; cloud propagation is not
-independently verified.
+The Figure 11 source and rendered manuscript are bound by the
+[build receipt](evidence/historical_forms_build.json). The local manuscript
+delivery is `ILM_NatureStyle_20261111_HistoricalForms` in Projects/ILM. The
+supplement and composite deck are also available in
+`ILM_NatureStyle_20261111_GlyphFeedbackControls`.
 
 The two supplement PDFs use Git LFS because their losslessly retained figure
 evidence exceeds GitHub's per-file limit. After cloning, run `git lfs pull` to
