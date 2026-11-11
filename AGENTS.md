@@ -16,6 +16,15 @@ as distinct claims. Record new evidence and the next decision in the goal and
 private runtime handoff; keep the goal active while its acceptance criteria
 remain unproved.
 
+The compact V1 full-sequence evaluation is complete and failed the language
+criteria. Preserve its five checkpoints, raw outputs and source identities.
+The next model comparison must address the measured velocity-output rank
+restriction, with the remaining recipe held fixed initially. Register a
+bounded hypothesis, unchanged control, language metric and resource budget
+before launching. If that comparison fails, diagnose visual access, conditional
+writing and emitted-history drift before choosing another change. Reuse the
+completed corpus and teacher cache unless measured evidence requires new data.
+
 ## Always Commit and Push After Change
 
 Policy: After making any change to files in this repository (e.g., via `apply_patch` or manual edits), create an atomic commit and push it to the tracked branch.

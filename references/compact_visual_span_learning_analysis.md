@@ -39,13 +39,18 @@ After the pipeline completes and every blind reading is recorded and scored:
 ```bash
 CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/summarize_compact_visual_span_learning.py \
   --pipeline artifacts/compact_visual_span_pipeline_v3 \
-  --readings artifacts/compact_visual_span_pipeline_v3/review/readings.json \
+  --readings artifacts/compact_visual_span_blind_review_v1/readings.json \
   --output artifacts/compact_visual_span_learning_v1
 ```
 
-The visual trajectory has not run. Its fit, five checkpoint generations, image
-review and trained cold replay remain pending. Export code and input checks
-are not a measured learning curve.
+The visual trajectory has now run on all 372 generated pages. All five
+checkpoints have zero complete exact QA answers and zero both-correct pairs.
+The review recorded thirty blank pages and 342 uncertain whole transcriptions;
+no readable complete book continuation was credited. A trained cold replay
+passed. See the [complete result](compact_visual_span_learning_result.md) and
+[authenticated analysis](evidence/compact_visual_span_learning_20261111.json).
+The registered examples and denominators remain unchanged. The all-zero
+bootstrap intervals do not establish a zero population success probability.
 
 ## Measured native-text reference
 

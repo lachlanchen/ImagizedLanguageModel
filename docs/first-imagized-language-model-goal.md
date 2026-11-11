@@ -2,6 +2,31 @@
 
 Updated: 2026-11-11
 
+## Immediate direction
+
+The objective is an independently running visual language model: visible
+questions and passages in, readable and relevant answer images out, with its
+own generated pixels as continuation history. Begin with modern Chinese on one
+4090; demonstrate that behavior before expanding scripts, modalities or size.
+Using pretrained language weights is allowed and must be disclosed. Learning
+a visual interface to inherited language knowledge and learning language from
+images alone are separate research claims.
+
+The first complete compact experiment has now failed its registered language
+test. All five checkpoints received zero complete exact QA matches; none of
+the 372 reviewed outputs established a readable complete response. The trained
+cold replay passed. This establishes an executable, independent inference
+path, while the usable-language objective remains unmet. See the
+[complete result](../references/compact_visual_span_learning_result.md).
+
+The next model experiment must test the identified writer restriction: a
+384-channel linear velocity output cannot control all 768 codec dimensions.
+Test a full-dimensional velocity path against the preserved compact baseline.
+Keep the encoder, contextual foundation, codec, corpus, supervision, optimizer
+settings and evaluation fixed initially. Register the implementation, seed,
+exposure and resource budget before training. Improving the writer's rank is
+the hypothesis to test; readable conditional writing is the required outcome.
+
 ## Goal and acceptance criteria
 
 Train and run a compact, standalone language model on one RTX 4090. Start with
@@ -62,9 +87,9 @@ from images alone. Report this distinction in the model description and paper.
 Efficiency and Qwen 8B parity remain hypotheses requiring matched-quality,
 matched-hardware measurement, including data preparation and teacher cost.
 
-## Current decision: complete-sequence training first
+## Current decision: repair the measured writing failure
 
-The primary experiment is the [compact visual span model](compact-visual-span-model.md).
+The baseline is the [compact visual span model](compact-visual-span-model.md).
 It uses a frozen 1.409B-parameter contextual body and 12.87M trainable image
 parameters, plus a training-only teacher projection. Its shared image encoder
 reads observed and generated glyphs; the writer predicts a span and its
@@ -81,14 +106,16 @@ unknown. The offline teacher schedule covers 2,380,620 causal context targets.
 The first complete fit has 8,172 scheduled optimizer batches. Preserve all
 registered targets and the source identities when resuming.
 
-The serial GPU schedule is teacher extraction, the complete fit, and
+The completed serial GPU schedule was teacher extraction, the complete fit, and
 [fixed-checkpoint evaluation](../references/compact_visual_span_evaluation_protocol.md).
 Evaluate 32 questions from sixteen held-out contexts and twelve continuations
 from two held-out books at initial, quarter, half, three-quarter and final
-checkpoints. Run the erased-input controls at both endpoints, retain every raw
-stream, and perform the trained standalone replay. The pipeline runs on one
-4090 under the shared project GPU mutex. Actual progress and process ownership
-belong in the private runtime handoff; scheduled work is not a completed result.
+checkpoints. The erased-input controls at both endpoints, all raw streams and
+the trained standalone replay are complete. The pipeline used one 4090 under
+the shared project GPU mutex. The 372 outputs have been reviewed and scored.
+Preserve these results and checkpoints as the unchanged control for the next
+experiment. Actual progress and process ownership belong in the private
+runtime handoff; scheduled work is not a completed result.
 
 The earlier [natural first-image experiment](natural-first-writer.md) is a
 secondary diagnostic. Preserve its completed cache shards and fixed protocol
@@ -100,16 +127,17 @@ The [pixel-alias audit](../references/visual_feedback_identifiability_result.md)
 finds a minimum relative squared feedback error of 0.0007492351 imposed by
 identical images with different training targets. It measures an auxiliary
 objective, with the actual batch weights. It neither predicts language quality
-nor establishes that the fitted encoder reaches that bound. Proceed with the
-registered fit and interpret the actual outputs.
+nor establishes that the fitted encoder reaches that bound. Interpret it
+alongside the completed fit and actual output review.
 
 The [flow-head audit](../references/compact_visual_flow_rank_result.md) finds a
 separate architectural restriction: a 384-channel linear output predicts a
 768-dimensional velocity. In the continuous model, 384 Gaussian-noise directions
-remain uncontrolled. Complete the unchanged registered image evaluation. If
-writing fails, test a full-dimensional velocity path before spending more on
+remain uncontrolled. The unchanged registered image evaluation now records a
+writing failure. Test a full-dimensional velocity path before spending more on
 the same narrow writer. Preserve the present model as a control. Removing this
-restriction still requires actual image and language evaluation.
+restriction still requires actual image and language evaluation; the audit
+does not establish the sole cause of failed answers.
 
 ## Current evidence and unresolved tests
 
@@ -119,8 +147,20 @@ writing. The teacher cache and the 8,172-update compact fit are complete. The
 fit covers all 13,785 sequences and 2,380,620 state targets, with five retained
 snapshots and 3.930 GiB peak allocated GPU memory. It took 1,759.83 seconds,
 including 110.11 seconds waiting for host memory pressure. The five-checkpoint
-image evaluation is running; trained standalone replay and held-out language
-scores remain pending. See the
+image evaluation and trained standalone replay are complete. On the fixed
+development cohort, every step has 0/32 complete exact QA answers, 0/16
+both-correct question pairs and 0/12 credited readable complete book
+continuations. One model reviewer inspected opaque output pages before opening
+their mapping or references: 342 responses had uncertain whole transcriptions
+and thirty were blank. Recognizable individual glyphs do not supply a complete
+answer. There is no independent human adjudication. Final normal generation
+hit the 128-glyph budget on 27/44 cases, compared with 0/44 initially.
+
+The final checkpoint reproduced a 128-glyph book output, stopping status and
+all emitted-pixel feedback hashes in a separate traced process. No forbidden
+training/reference paths or IP connections were observed. This verifies the
+standalone boundary for that invocation, without establishing language quality.
+See the [language result](../references/compact_visual_span_learning_result.md),
 [complete fit evidence](../references/evidence/compact_visual_span_fit_completed_20261111.json)
 and [earlier independent optimizer check](../references/evidence/compact_visual_span_gpu_start_20261111.json).
 
@@ -149,10 +189,14 @@ large-model parity.
 
 ## Rules that keep the work on track
 
-- Give complete-sequence training and held-out language evaluation priority
-  over additional copying repairs, dataset preparation, architectural variants,
-  cover images and manuscript polish. Prepare new data when a measured failure
-  or the next registered evaluation requires it.
+- Before each experiment, write down the observed failure, one bounded change,
+  the unchanged control, the primary language measurement and the resource
+  ceiling. Freeze the prompts and quality criteria before generation. Finish
+  and interpret that comparison before opening another model branch.
+- Give the current failure-driven model comparison and held-out language
+  evaluation priority over additional copying repairs, dataset preparation,
+  cover images and manuscript polish. Reuse the substantial authenticated
+  corpus and teacher cache unless a measured failure requires new data.
 - Run one heavy project job at a time. Keep resumable shards and optimizer
   checkpoints, authenticate inputs on resume, and include interrupted work in
   cost reporting. Schedule secondary experiments explicitly.
@@ -161,6 +205,12 @@ large-model parity.
   contextual language errors and accumulated generated-history drift. Choose
   the next bounded change from that evidence and compare it with the unchanged
   control. Preserve failures.
+- If a repaired writer still fails, localize the next failure using matched
+  reference-image history versus generated-image history and visual-input
+  controls. Measure visual access, conditional writing and feedback drift
+  separately. A reference-supplied diagnostic is not autonomous inference.
+  Do not infer that a larger model, more epochs or unrelated physics will
+  repair the failure without a testable mechanism.
 - Keep inference independent. Offline teachers, OCR and text corpora may prepare
   or supervise training; they must not supply answers during deployed inference.
   Describe the inherited weights and training-only native-unit supervision.
@@ -168,6 +218,11 @@ large-model parity.
   evidence record. Plot only measured complete-answer and paired-question scores
   at fixed checkpoints. Show the same unrepaired output images at each step.
   Report pixel metrics, language quality and resource costs separately.
+- Accept a development improvement only from the frozen complete-response
+  metrics, including readable writing, paired question dependence, coherent
+  continuation and natural stopping. Confirm it on new untouched source groups
+  before claiming broader generalization. Establish useful task quality before
+  making matched-quality efficiency or large-model parity claims.
 - Keep the goal active until the acceptance criteria are demonstrated. A queued
   job, finite loss, successful build, attractive figure, or newly proposed
   mechanism does not complete it. Historical and unencoded forms remain part

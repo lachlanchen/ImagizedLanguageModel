@@ -5,7 +5,9 @@ passages from fourteen Chinese Wikisource works and 9,023 complete CMRC
 question-answer pairs. All training sequences contain 7,255,223 glyph
 positions, including repeated QA passages. The continuation and answer
 targets contain 2,576,239 glyph positions. Counts refer to prepared data.
-Model training on this corpus remains pending.
+One complete compact-model fit and its five-checkpoint evaluation are complete.
+The fit did not establish readable complete language generation. See the
+[measured result](../references/compact_visual_span_learning_result.md).
 
 | Partition | Book passages | QA pairs | Total glyph positions | Target glyph positions |
 | --- | ---: | ---: | ---: | ---: |
@@ -46,17 +48,18 @@ sample = training[0]
 ink = sample["ink"]  # [glyphs, 1, 32, 32], uint8
 ```
 
-Fit the span feedback encoder and writer using full sequences and actual
-teacher states. The current 4090 run still tests the earlier first-image
-writer. The next fit uses all available continuation targets. Compare the
+The completed compact fit used full sequences and actual teacher states,
+covering all scheduled continuation targets. Its first-image predecessor is
+preserved as a secondary diagnostic. A subsequent controlled fit must address
+the compact writer's measured dimensional restriction. Compare the
 teacher's native sequence with matched visual feedback to measure state
 drift, then evaluate actual complete generated images. Track compute per
 answer and per passage along with correctness. See the
 [model decision and math](../references/visual_chunk_coverage_result.md).
 
-The teacher cache now has a verified schedule for 2,380,620 continuation,
-answer and terminal states. Its source loader and resumable GPU stage are
-available. See the [teacher context stage](visual-sequence-teacher-states.md).
+The completed teacher cache contains 2,380,620 continuation, answer and terminal
+states. Reuse its authenticated shards for the controlled writer comparison.
+See the [teacher context stage](visual-sequence-teacher-states.md).
 
 The experiment should retain fixed training checkpoints and evaluate the
 same reserved prompts at those checkpoints. The TeX and PowerPoint figures

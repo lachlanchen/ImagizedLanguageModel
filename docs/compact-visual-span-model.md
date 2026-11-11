@@ -49,7 +49,7 @@ batches and 2,380,620 supervised state positions. The fit requires the completed
 offline teacher cache. It saves an initial snapshot and four equally spaced
 checkpoints by shard exposure, recording each actual optimizer step. A rerun
 with the same fit configuration resumes at the last completed shard. The
-one-GPU fit is complete; held-out scoring remains pending. See the
+one-GPU fit and held-out scoring are complete. See the
 [CPU evidence](../references/evidence/compact_visual_span_interface_20261111.json).
 
 An independently opened live checkpoint contains 1,030 completed AdamW updates
@@ -74,9 +74,12 @@ trainable parameters include the 12,872,213 image parameters and the
 The trained output projection has rank 384 in the 768-dimensional codec space.
 The [flow-head analysis](../references/compact_visual_flow_rank_result.md)
 shows that its continuous velocity cannot remove Gaussian variation in the
-384-dimensional complement. Actual image readability and answer quality still
-require the registered evaluation. The present model remains the baseline for
-a subsequent test of a full-dimensional velocity path.
+384-dimensional complement. The registered evaluation found no credited
+readable complete response among 372 outputs; all five checkpoints scored
+0/32 complete exact QA answers and 0/16 both-correct pairs. A separate trained
+cold replay passed. The present model remains the failed control for a test
+of a full-dimensional velocity path. See the
+[complete language result and review limits](../references/compact_visual_span_learning_result.md).
 
 ## Run the fit
 
@@ -158,14 +161,16 @@ scoring and trained cold replay are specified in the
 The [learning analysis](../references/compact_visual_span_learning_analysis.md)
 authenticates completed readings and all five checkpoint outputs, then exports
 the language counts, paired passage-group intervals and unchanged example PNGs
-for publication. It requires the completed fit and review. The visual learning
-curve remains unmeasured.
+for publication. It authenticated the completed fit, all 372 reviewed outputs
+and the five measured checkpoints. Complete-answer performance remained zero
+throughout this fit; fewer blank responses did not establish language learning.
 
 The source-matched Qwen3 1.7B text reference has run on the same 44 normal
 prompts. It matched eight of 32 QA answers and both questions in two of sixteen
 pairs under exact scoring. Its CPU results provide the text baseline for
-this cohort. The visual checkpoint scores and the same-GPU cost comparison
-are pending. See the [text reference and scoring](../references/compact_visual_span_qwen_reference_protocol.md).
+this cohort. Visual complete-answer scores are now available; the same-GPU
+cost comparison remains pending. See the
+[text reference and scoring](../references/compact_visual_span_qwen_reference_protocol.md).
 
 The historical suite presents authentic oracle, bronze and seal glyphs as
 pixels. It tests modern-character reading and selection of an attested stage
