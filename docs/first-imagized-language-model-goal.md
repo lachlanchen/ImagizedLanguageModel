@@ -228,6 +228,32 @@ question before another model branch or presentation-only revision.
 
 ## Training and evaluation contract
 
+### Ordered glyph-volume hypothesis
+
+Treat visible writing as an ordered `[T,C,H,W]` stream. Investigate learned
+compression into a shorter volume with explicit order and temporal detail;
+unweighted ink accumulation aliases different orders. The
+[volume analysis](../references/ordered_glyph_volume_research.md) implements an
+invertible reference and checks all 13,766 eligible targets. Exact reconstruction
+qualifies that operator only. Retaining all coefficients does not reduce their
+information content, and fewer temporal positions do not establish fewer bits
+or a model speedup.
+
+The language hypothesis combines ordered visual compression with conditional
+future-block prediction and a coherent image decoder. Evaluate predicted latent
+states and actual emitted-pixel histories, not only clean autoencoder inputs.
+Use completed earlier blocks for causal context; a block containing the target
+must not enter its own prefix. Question/passage dependence, complete answers,
+book continuation and natural stopping remain required.
+
+This hypothesis is a candidate for a failure-specific comparison after the
+current registered trial. Its CPU representation analysis does not alter that
+trial's model, data, schedule or evaluation, and does not authorize another
+concurrent GPU fit. Preserve the full language, independence, historical-form
+and whole-model efficiency objective. Do not replace it with a recovery task.
+
+### Existing data and prospective comparisons
+
 Use the existing authenticated corpus first: 13,785 full training sequences and
 2,576,239 target glyph positions, with whole-work and CMRC passage-group splits.
 See [visual sequence training](visual-sequence-training.md). Training-only teacher
