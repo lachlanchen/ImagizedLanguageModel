@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-12. Status: **active; usable visual language is unproved**.
+Updated: 2026-11-13. Status: **active; usable visual language is unproved**.
 
 ## Objective
 
@@ -197,9 +197,12 @@ step-zero checkpoint. Restoring four and replaying five/six matches the actual
 uninterrupted step-six state bit-for-bit, with all 85 Adam counters at six.
 The first six scheduled updates cover 1,367 target positions; two discarded
 replay updates cover another 437 positions. These checks establish execution
-and recovery, with no complete-language score. Training continues in the same
-owned worker. The immediate work is to finish this single comparison and
-evaluate its outputs, rather than repeat the verified launch checks.
+and recovery, with no complete-language score. The full fit has now finished.
+The [completion audit](../references/visual_continuation_completion_result.md)
+verifies all 41,298 scheduled updates, 6,108,741 target positions, five snapshot
+hashes and all 85 final Adam counters. Evaluation failed before any output at
+its host-RAM entry guard. The immediate work is resource-gated recovery of the
+unchanged evaluators, followed by complete-output review and scoring.
 Discard all four preflight updates. Each source gets one fixed and two natural
 presentations. Save initial, quarter, half, three-quarter and final weights;
 retain the verified real optimizer/RNG recovery evidence. Evaluate all
@@ -220,11 +223,30 @@ and its model/data/schedule stay unchanged.
 
 Do not substitute the old 3,176-question, sixteen-glyph-target subset, repeat
 the completed preflight, extend an unchanged failed recipe, or turn a working
-checkpoint into a language claim. Full training and evaluation are incomplete. Keep the
+checkpoint into a language claim. Full training is complete; language generation,
+review and evaluation remain incomplete. Keep the
 one unresolved decision explicit: does adapting all answer layers over complete
 visual sequences improve autonomous complete language while preserving source
 prompt interpretation? The architecture, data and evaluation must answer that
 question before another model branch or presentation-only revision.
+
+### Completed fit and evaluator admission
+
+The completed fit reports 18.567853 GiB peak allocated VRAM and 75,209.326 seconds
+of cumulative training execution, including the preserved earlier failed child.
+The final tensors and Adam moments are finite; all 85 trainable tensors changed.
+These execution checks do not establish complete language or efficiency.
+
+The first evaluator failed at the unchanged 48-GiB host-RAM entry requirement,
+with zero output streams. Preserve that status, console and controller journal.
+Its 6.520045-second child cost counts toward the candidate evaluation ceiling.
+Use the [recovery launcher](../scripts/recover_visual_continuation_evaluation.py)
+for a single serial attempt after admission. It adds 2 GiB of prelaunch headroom,
+keeps the original evaluator's 48-GiB guard, preserves the GPU/pressure/mutex
+checks and tightens each cumulative child budget with a cleanup margin. Record
+resource-queue time separately; it is not model throughput. A failed new child
+requires evidence preservation before another retry. No training, model, data,
+generation cap, scoring threshold or historical-form objective changes.
 
 ## Training and evaluation contract
 

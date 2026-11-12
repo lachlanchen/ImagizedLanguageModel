@@ -1,0 +1,32 @@
+{
+  "schema": "visual-continuation-evaluation-admission-recovery-v1",
+  "registered_unix": 1794515075.4764633,
+  "training_registration_sha256": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+  "completion_audit_sha256": "bf84894cfdc26129b8e8ffad6ad23d390cf75908ffbbf93801e6470ff32ef3f7",
+  "training_report_sha256": "6b48151c8623c3e8ad2cecf5cd7829fb39ae2d41032fcf60da1671a635a47e99",
+  "new_source_sha256": {
+    "scripts/recover_visual_continuation_evaluation.py": "db5f58ea817cdfb5cbc8388746cd200f069122004ff9e6a628a21885e97c141e",
+    "tests/test_continuation_recovery.py": "45bee8883fdcb1ebf2d27ae11186bff6eeeaf866452e8142b6e712aad80c7a80",
+    "scripts/audit_visual_continuation_completion.py": "b93b94ec5ee3fefd8d4d2de5c2b287c667d69fab035772aa8a4d2cd395507d87",
+    "references/visual_continuation_completion_result.md": "12aa0243a3496a2ef4f309ebad76afc5dece8e23d707f64072563ee7e0834221"
+  },
+  "original_registered_sources_unchanged": true,
+  "generated_outputs_before_registration": 0,
+  "failed_admission_receipt_sha256": "5376d59980cb8efc0ce169161728a5e7cc65bf4e87f249537b809d6188859d64",
+  "prior_candidate_child_wall_seconds": 6.5200451500713825,
+  "registered_child_stage_maximum_seconds": 21600,
+  "candidate_remaining_child_seconds_before_cleanup_margin": 21593.47995484993,
+  "cleanup_margin_seconds": 10,
+  "original_entry_host_ram_gib": 48,
+  "prelaunch_filter_host_ram_gib": 50,
+  "minimum_free_gpu0_gib": 20,
+  "new_neural_training": false,
+  "model_and_generation_rules_changed": false,
+  "automatic_child_retries": false,
+  "expected_candidate_streams": 708,
+  "expected_parent_streams": 24,
+  "original_scoring_and_four_arm_audit_required": true,
+  "language_quality_measured": false,
+  "goal_achieved": false,
+  "recovery_control_tests_passed": 5
+}

@@ -28,10 +28,19 @@ and book targets, both layouts, fixed snapshots and original language controls.
 The full pipeline is implemented; indexing has authenticated 13,766 eligible
 sequences and 2,036,247 target positions per epoch. Natural rendering and
 registration are complete. The first execution failed on a duplicate logging
-field after one unsaved update; its evidence is preserved. A fresh recovery
-worker uses `artifacts/visual_continuation_full_logger_recovery_v2` in the single
-`ilm_continuation_full_v1` session. Check the private owner receipt before acting;
-do not start the obsolete default run. Read the recovery record and
+field after one unsaved update; its evidence is preserved. The recovery run
+`artifacts/visual_continuation_full_logger_recovery_v2` has completed all 41,298
+updates. Its original controller and training worker are terminal. Evaluation
+failed before any output at the unchanged 48-GiB host-RAM entry guard.
+Read `references/visual_continuation_completion_result.md`. The CPU completion
+audit verifies the entire ledger, all five snapshots and all 85 final Adam
+counters. Do not repeat that audit or restart training. A single lightweight
+evaluation-recovery launcher may wait for resource admission, then run the
+unchanged candidate and parent evaluators serially; use the private handoff for
+its actual PID/start/boot identity and tmux name. Preserve the original failed
+admission receipt and count all child-attempt costs. Never lower admission or
+stop foreign services to launch evaluation. Do not start the obsolete default
+run. Read the recovery record and
 `references/visual_continuation_full_protocol.md`; its three epochs,
 five snapshots, 732 output streams and final pilot are fixed before training.
 The real first-six-update resume check and independent 85-state/initialization
