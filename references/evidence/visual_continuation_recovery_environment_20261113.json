@@ -1,0 +1,32 @@
+{
+  "schema": "visual-continuation-recovery-environment-correction-v1",
+  "registered_unix": 1794517006.1484146,
+  "supersedes_launcher_environment_only": true,
+  "initial_recovery_registration_sha256": "1ad949d109c2bc6747bf4818f0742a61731893c103cf9f4b53ca83337144819d",
+  "training_registration_sha256": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+  "preserved_recovery_failure_receipt_sha256": "87998f0231df05ba8920046101a2fc47c3c8661750489b1f6df2f6eb866c5ca8",
+  "new_source_sha256": {
+    "scripts/recover_visual_continuation_evaluation.py": "878136327a76d1ff5a3a66d105ca365cbd687e765369bb4b6605a85b50609b85",
+    "tests/test_continuation_recovery.py": "f2fb9e985d61b20db8f24ed24ff21b641fce3f7d263ab2baa8fdb93b59c4b118",
+    "references/visual_continuation_completion_result.md": "f8d6d074823a5181230e1fe6e8c73b8802e8be41cba12fe0970ffe56a87ef699"
+  },
+  "required_evaluator_environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "PYTHONPATH": "repository root"
+  },
+  "prior_child_cost_seconds": {
+    "evaluate": 12.06428213045001,
+    "parent-long-books": 0.0
+  },
+  "registered_child_stage_maximum_seconds": 21600,
+  "cleanup_margin_seconds": 10,
+  "generated_outputs_before_registration": 0,
+  "original_registered_sources_unchanged": true,
+  "model_and_generation_rules_changed": false,
+  "original_training_restarted": false,
+  "automatic_child_retries": false,
+  "recovery_control_tests_passed": 6,
+  "language_quality_measured": false,
+  "goal_achieved": false
+}

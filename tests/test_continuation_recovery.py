@@ -5,7 +5,9 @@ import sys
 
 import pytest
 
-from scripts.recover_visual_continuation_evaluation import admitted, budget_seconds, prior_costs, stop_owned
+from scripts.recover_visual_continuation_evaluation import (
+    ROOT, admitted, budget_seconds, evaluator_environment, prior_costs, stop_owned,
+)
 
 
 def test_failed_admission_counts_and_interrupted_cost_is_not_reset(tmp_path):
@@ -34,6 +36,17 @@ def test_headroom_does_not_weaken_registered_resource_limits():
     for change in (dict(available_gib=49.99), dict(gpu_free_mib=20479), dict(mutex_free=False),
                    dict(some_avg10=.501), dict(full_avg10=.101)):
         assert not admitted(dict(value, **change), 48, 20480)
+
+
+def test_evaluator_environment_sets_deterministic_cuda_without_shell_exports():
+    for inherited in ({}, {'CUBLAS_WORKSPACE_CONFIG': ':16:8', 'CUDA_VISIBLE_DEVICES': '1',
+                          'PYTHONPATH': '/unrelated'}):
+        base = dict(inherited, OMP_NUM_THREADS='1', RECOVERY_TEST_MARKER='preserved')
+        before = base.copy()
+        actual = evaluator_environment(base)
+        assert base == before
+        assert actual == dict(base, CUDA_VISIBLE_DEVICES='0', PYTHONPATH=str(ROOT),
+                              CUBLAS_WORKSPACE_CONFIG=':4096:8')
 
 
 def test_independent_parent_cost_and_multiple_attempts_are_accumulated(tmp_path):

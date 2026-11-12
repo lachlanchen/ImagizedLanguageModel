@@ -77,13 +77,26 @@ ceiling. An unaccounted interrupted child fails closed. Resource-queue time is
 reported separately from child execution and must remain visible in total cost
 reporting. Another failed child stops the launcher; it is not silently retried.
 
-Five tests check failed-attempt accounting, unmatched interrupted children,
+Six tests check failed-attempt accounting, unmatched interrupted children,
 exhausted budgets, independent parent costs, multiple attempts, resource
 boundaries and cleanup of real owned subprocesses with refusal to kill an
-unowned process group. These tests exercise recovery control; they are not model-quality
+unowned process group. They also verify that the evaluator receives its required
+deterministic CUDA environment even when the launching shell lacks it or exports
+a conflicting value. These tests exercise recovery control; they are not model-quality
 experiments. The prospective
 [recovery registration](evidence/visual_continuation_evaluation_recovery_20261113.json)
-binds the new launcher and tests before new generation.
+binds the initial launcher and tests before new generation.
+
+The first recovery was admitted after workstation cleanup but failed before model
+loading because its child environment omitted `CUBLAS_WORKSPACE_CONFIG=:4096:8`,
+which the unchanged evaluator requires. Its source, journal, console and status
+are preserved privately with byte hashes. It generated zero answers and used
+5.544236980378628 seconds of child execution. The cumulative candidate cost is
+therefore 12.06428213045001 seconds. The launcher now sets the required environment
+explicitly. The prospective
+[environment correction](evidence/visual_continuation_recovery_environment_20261113.json)
+binds that change before the next attempt; the model, registered evaluator and
+generation rules are unchanged. Completed training is not repeated.
 
 ```bash
 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONPATH=. \
@@ -94,7 +107,7 @@ CUDA_VISIBLE_DEVICES= PYTHONPATH=. \
   python -m pytest -q tests/test_continuation_recovery.py
 PYTHONPATH=. python scripts/recover_visual_continuation_evaluation.py \
   --run artifacts/visual_continuation_full_logger_recovery_v2 \
-  --name evaluation_recovery_001
+  --name evaluation_recovery_002
 ```
 
 Check the private owner receipt before running the launcher; a live existing

@@ -96,6 +96,13 @@ def admitted(resources, minimum_ram, minimum_gpu_mib):
             resources['some_avg10'] <= 0.5 and resources['full_avg10'] <= 0.1)
 
 
+def evaluator_environment(base):
+    # Match numerics() in the registered evaluator before it imports CUDA.
+    # A tmux launch must not depend on a particular interactive shell's exports.
+    return dict(base, CUDA_VISIBLE_DEVICES='0', PYTHONPATH=str(ROOT),
+                CUBLAS_WORKSPACE_CONFIG=':4096:8')
+
+
 def resources():
     mem = {x.split(':')[0]: int(x.split()[1]) for x in Path('/proc/meminfo').read_text().splitlines()}
     pressure = {x.split()[0]: float(x.split()[1].split('=')[1]) for x in Path('/proc/pressure/memory').read_text().splitlines()}
@@ -187,7 +194,7 @@ def main():
             for name, expected in p['source_sha256'].items():
                 require(sha(ROOT / name) == expected, f'Registered source changed: {name}')
             limit = budget_seconds(p['evaluation_maximum_seconds'], costs[action])
-            env = dict(os.environ, CUDA_VISIBLE_DEVICES='0', PYTHONPATH=str(ROOT))
+            env = evaluator_environment(os.environ)
             command = [sys.executable, '-u', 'scripts/train_visual_continuation.py', action, '--run', str(run)]
             child_began = time.perf_counter()
             with (destination / f'{action}_console.log').open('x') as log, (destination / 'children.jsonl').open('a') as journal:
