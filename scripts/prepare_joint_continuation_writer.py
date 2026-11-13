@@ -14,6 +14,7 @@ from ilm.visual_lm.joint_writer_training import (ROOT, PARENT, RUN, PUBLIC, SEED
 from ilm.visual_lm.continuation_training import layout_schedule
 from ilm.visual_lm.glyph_joint_density import GlyphJointDensity
 from scripts.train_semantic_glyph_bridge import atomic_tensor
+from scripts.train_semantic_glyph_language import CONTROLS
 from scripts.preflight_visual_continuation import runtime
 from scripts.train_visual_continuation import atomic_json
 
@@ -57,6 +58,8 @@ def register():
                  ROOT/'artifacts/continuation_clean_history_v1/execution/report.json',
                  ROOT/'references/evidence/continuation_clean_history_result_20261113.json']:
         bind(path)
+    require(sha(ROOT/parent['initial_bridge'])==parent['initial_bridge_sha256'], 'Frozen feedback/decoder/affine weights changed')
+    bind(ROOT/parent['initial_bridge']);bind(CONTROLS)
     qualify = load(ROOT/'artifacts/continuation_clean_history_v1/registration.json')['jobs']
     for job in qualify:
         job['positions'] = selected_positions(job['target_glyphs'])
