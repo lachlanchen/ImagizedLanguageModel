@@ -137,3 +137,50 @@ physical-mask bit sign. The new receipt is
 The failed caption build and earlier visual/layout revisions are preserved
 privately. Active article inputs/PDFs and the earlier measured drafts remain
 unchanged; no model experiment or Office export is added.
+
+## Completed-status correction for staged Figure23
+
+The staged history Results/Methods, caption and native Figure23 still describe
+the earlier complete fit as ongoing and its language results as unmeasured.
+Replace those statements with the completed, failed final pilot, referring to
+Figure24 for all checkpoint results. Preserve every earlier diagnostic number,
+preflight measurement, original figure file and historical validation receipt.
+The later joint writer remains unmeasured and is a separate comparison.
+
+Limit this unit to those three staged TeX inputs, a small reproducible native
+Figure23 status editor, a newly named corrected PPTX/PNG, a new validation
+receipt and publication README links. Keep the original Figure23 deck/preview,
+builder, measured data and old receipts unchanged. Preserve its two chart
+workbooks, table, directed geometry and fonts; change only the two obsolete
+status labels and their speaker-note explanation. Reimport/render the exact
+corrected PPTX and inspect the entire slide before promotion. Reuse the
+independent original data/geometry verifier on the new native file.
+
+Compile a light CPU-only standalone check of the corrected staged text and
+caption in the existing article style. Inspect all resulting pages and numbered
+equations, check references/overfull boxes, authenticate the completed result
+source and confirm the active article/PDFs and all 45 bound training sources
+remain unchanged. Record hashes and the distinction between staged validation
+and article activation in a new receipt. Full Office export, article/review/
+redline builds and local synchronization remain deferred while the original
+model pipeline is live. This author update needs no response letter and adds
+no model calls, optimizer updates or new language scores.
+
+This correction is complete in the staged sources and the newly named
+`Continuation_history_completed_figures.pptx` / Figure23 PNG. The finalized
+file's actual reimport is inspected: only the two status-label regions change
+in the raster, and only slide/notes text changes in the native package. The
+original independent verifier passes both native charts and literal workbooks,
+the table, eight directed connections and all 227 preserved assets.
+
+All five pages of the corrected standalone check are inspected, including the
+five numbered equations and both figures. Its last text page has balanced
+columns; no overfull box or undefined reference remains. The first unbalanced
+scratch and the failed finalizer invocation are retained privately. The latter
+failed because its bundled runtime-module environment was missing, before
+final-file delivery; the editor now requires that setting before mutation.
+The new receipt is
+`publication/ilm-nature/evidence/continuation_history_completed_status_validation.json`.
+All active article inputs/PDFs, original figures and historical receipts remain
+unchanged. Article activation, Office export, full/redline builds and local sync
+remain pending. No trained joint-writer result is introduced.

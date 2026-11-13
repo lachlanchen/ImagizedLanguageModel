@@ -49,21 +49,27 @@ and a three-page visual check are recorded in the
 This staged input adds no trained result and is not yet included in the active
 article PDFs.
 
-The new [Figure 23](figures/Figure_23_continuation_history.png) has an
-[editable PowerPoint source](figures/Continuation_history_figures.pptx), two
-native charts, a native preflight table and a directed pixel-feedback diagram.
-Its complete-record values, literal workbooks and connections pass the
-[native audit](evidence/continuation_history_reviewed_native_figure.json).
-The finalized PPTX is re-imported and visually inspected in Artifact Tool;
-native PowerPoint-app review and vector Office export are unverified.
+The corrected [Figure 23](figures/Figure_23_continuation_history_completed.png)
+has an [editable PowerPoint source](figures/Continuation_history_completed_figures.pptx),
+two native charts, a native preflight table and a directed pixel-feedback
+diagram. Its labels now identify the completed full trial's failed language
+pilot. Every chart/workbook byte, geometry and style remains unchanged from the
+[preserved original figure](figures/Continuation_history_figures.pptx).
+The [status correction receipt](evidence/continuation_history_completed_status_validation.json)
+records the native data checks and actual visual inspection of the corrected
+file's reimport. Native PowerPoint-app review and vector Office export remain
+unverified. The original [native audit](evidence/continuation_history_reviewed_native_figure.json)
+and [preview](figures/Figure_23_continuation_history.png) remain available as
+historical evidence.
 
 The [staged Results](continuation_history_results.tex) and
 [Methods](continuation_history_methods.tex) describe the completed reference-image
-history study and the real 36-layer preflight. The three-page source check
-inspects five equations and preserves all 227 earlier assets. These are
-conditional-writing and feasibility results. Figure 23 and its earlier staged
-text retain pre-completion status wording; the completed trial is reported in
-Figure 24 and the new Results/Methods above. Their integration is covered by the
+history study and the real 36-layer preflight, with the completed full trial's
+status corrected in the Results, Methods and caption. The new five-page source
+check includes both figures and all five numbered method equations. It preserves
+the earlier three-page validation and all 227 original assets. Supplied-history
+writing and preflight feasibility remain separate from autonomous language;
+Figure 24 reports the completed checkpoint comparison. Their integration is covered by the
 [completed-trial revision plan](../../references/manuscript_complete_continuation_revision_plan.md).
 
 The active 35-page reading, 62-page review and 63-page redline PDFs still predate
