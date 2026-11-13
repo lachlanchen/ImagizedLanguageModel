@@ -38,7 +38,7 @@
     "scripts/review_visual_continuation.py": "d6afd6130c978ad85535650dbe3ffd5137324e9730e655d173e62216a2091f74",
     "scripts/run_joint_continuation_writer.py": "adabe73c13ded9d0ce19e895e4f9606c238d09537f28f3aff03e84b4d25be2a9",
     "scripts/run_visual_continuation.py": "4c0e7842b2f3ef077339921bb9df7d7789e2023775571def33fb674588409cd9",
-    "scripts/train_joint_continuation_writer.py": "e29b6ba37e7e14fb182f69dfaebd0c7005f7b93e71077e0c37148ff70de93281",
+    "scripts/train_joint_continuation_writer.py": "cddbff8ea905f857980524a1da45364f434b2e45482001fc3d81b077205d18f8",
     "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
     "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
     "scripts/train_visual_continuation.py": "37efa8a31856a9d0eaee0c80e5d9e37567a7bf62b02ff128b147c6117b7a5f0d",
@@ -5295,5 +5295,16 @@
     "new_model_calls": 0,
     "optimizer_updates": 0,
     "model_data_schedule_or_thresholds_changed": false
+  },
+  "execution_recovery_amendment": {
+    "recovery_record": "references/evidence/joint_writer_cache_tuple_recovery_20261113.json",
+    "recovery_record_sha256": "ae9fbd65233983d56b0aa97553aa8f5a8c88428eb6136d27385e8be71db0d138",
+    "original_registration_sha256": "ff6baa6a3e758e12bc86df42b6da6553f0ed29dbdd32dfee828bd2706ded1fd1",
+    "repaired_source": "scripts/train_joint_continuation_writer.py",
+    "original_source_sha256": "e29b6ba37e7e14fb182f69dfaebd0c7005f7b93e71077e0c37148ff70de93281",
+    "repaired_source_sha256": "cddbff8ea905f857980524a1da45364f434b2e45482001fc3d81b077205d18f8",
+    "all_other_original_fields_unchanged": true,
+    "changes_before_manual_resume_only": true,
+    "original_failed_attempt_and_cost_preserved": true
   }
 }

@@ -1,0 +1,85 @@
+{
+  "schema": "joint-writer-cache-qualification-api-recovery-v1",
+  "recorded_unix": 1794577410.7808313,
+  "original_registration_sha256": "ff6baa6a3e758e12bc86df42b6da6553f0ed29dbdd32dfee828bd2706ded1fd1",
+  "pre_recovery_commit": "f4429d7e91254ad22009c3a8c599b9218c683d1e",
+  "observed_failure": {
+    "stage": "cache qualification, before any optimizer update",
+    "error": "ValueError('too many values to unpack (expected 2)')",
+    "first_case": "train_06937_fixed_cells",
+    "qualification_cases_completed": 0,
+    "training_records_saved": 27532,
+    "training_target_positions_saved": 4072494,
+    "training_arrays_gib": 63.05347514152527,
+    "new_head_optimizer_updates": 0
+  },
+  "repair": {
+    "file": "scripts/train_joint_continuation_writer.py",
+    "original_sha256": "e29b6ba37e7e14fb182f69dfaebd0c7005f7b93e71077e0c37148ff70de93281",
+    "repaired_sha256": "cddbff8ea905f857980524a1da45364f434b2e45482001fc3d81b077205d18f8",
+    "change": "Unpack states, physical patterns and record from CachedSequences.get; qualification ignores the unused pattern value.",
+    "remaining_original_bound_sources_unchanged": 44,
+    "neural_algorithm_or_parameters_changed": false,
+    "data_schedule_initialization_or_acceptance_rules_changed": false
+  },
+  "preserved_original_attempt": {
+    "private_archive": "artifacts/continuation_joint_writer_v1/recovery/cache_qualification_tuple_20261113/original",
+    "controller_journal_sha256": "461ddb28b141c8a8d7cc3ace613ac32f75a87a8da0560df26261a6fd74f2575c",
+    "cache_status_sha256": "18c5e7c6b6e54dbf1bdbb53cbb705d92f0d0b4987c6f0d83707852e709c29bb3",
+    "cache_console_sha256": "315455d5e6940748050b88445badec7a2841c2bc6c326dbec0534a95292fd35d",
+    "source_snapshots": 45,
+    "normalization_sha256": "3dc1dcb1dd1df0762bfad43640a6de80b0cecaf3630ecb6769dae4140c5d934f",
+    "no_training_array_copied_or_rewritten": true
+  },
+  "original_cache_cost": {
+    "controller_child_seconds": 39341.9243084006,
+    "worker_reported_seconds": 39334.77632153407,
+    "resource_wait_seconds": 1111.0597579348832,
+    "peak_allocated_vram_gib": 18.301916122436523,
+    "minimum_available_host_gib": 49.60237503051758
+  },
+  "cpu_recovery_verification": {
+    "source": "scripts/verify_joint_writer_cache_recovery.py",
+    "source_sha256": "928947e38959fec3e4b3a14b7ee6237350b780e8867c5a203bf76313c6d0b237",
+    "private_receipt_sha256": "1b4756815cfacf711ff7563a9e3358a92c0bb2de132bc810e2483ab8a06a811d",
+    "baseline_index_sha256": "6aa8153af86f9a473f176c6eef21d3aaf22e85c8ac851c5d7419656835153dd6",
+    "complete": true,
+    "training_records": 27532,
+    "target_positions": 4072494,
+    "training_qualification_cases": 48,
+    "all_array_hashes_shapes_dtypes_and_finite_states_verified": true,
+    "training_qualification_target_hashes_and_pixels_exact": true,
+    "original_unpack_error_reproduced_on_real_cache": true,
+    "model_calls": 0,
+    "cuda_initialized": false,
+    "elapsed_seconds": 136.63630559947342,
+    "peak_rss_gib": 0.6508331298828125,
+    "minimum_available_host_gib": 66.63036346435547
+  },
+  "regression_tests": {
+    "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m pytest -q tests/test_glyph_joint_density.py tests/test_joint_writer_sequence_training.py",
+    "passed": 8,
+    "seconds": 5.58,
+    "warnings": 1
+  },
+  "cumulative_budget_before_manual_resume": {
+    "cache_seconds_debited_including_cpu_verification": 39478.560614000075,
+    "original_cache_limit_seconds": 86400,
+    "cache_seconds_remaining": 46921.439385999925,
+    "original_pressure_limit_seconds": 7200,
+    "pressure_seconds_already_used": 1111.0597579348832,
+    "pressure_seconds_remaining": 6088.940242065117,
+    "all_stage_resource_limits_unchanged": true
+  },
+  "recovery_execution": {
+    "manual_serial_resume_required": true,
+    "started_at_receipt_creation": false,
+    "reuse_all_verified_training_arrays": true,
+    "remaining_qualification_cache_required": true,
+    "fit_41298_updates_required": true,
+    "physical_review_and_full_language_requirements_unchanged": true
+  },
+  "new_writer_physical_output_quality": "unmeasured",
+  "new_writer_autonomous_language_quality": "unmeasured",
+  "goal_achieved": false
+}

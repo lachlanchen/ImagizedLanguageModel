@@ -44,6 +44,12 @@ audit, then conditional writing qualification. An error stops the coordinator;
 there is no automatic retry. Inspect and preserve its attempt before an explicit
 `--resume`, and account for all discarded/repeated work within the original cap.
 
+The [qualification-cache API recovery](../references/joint_writer_cache_tuple_recovery.md)
+records a pre-fit caller failure and the verified reuse of all saved training
+arrays. Its amended source binding preserves the original attempt and debits
+CPU verification to the existing cache budget; it changes no neural or language
+acceptance rule. Use the private handoff for its current execution state.
+
 The fit saves five fixed snapshots and exact periodic resume state. A real
 step-three restore replays steps four and five, checking losses, gradients,
 weights, optimizer and random state. The CPU audit checks the retained event

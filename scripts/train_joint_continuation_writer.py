@@ -143,7 +143,7 @@ def cache(r, resume):
                 monitor.position = dict(completed=i, total=124, case=job['id']); monitor.status('caching_qualification_only')
                 if job['split'] == 'train':
                     directory = cache_directory(int(job['id'].split('_')[1]), job['layout'])
-                    states, record = cached.get(directory)
+                    states, _, record = cached.get(directory)
                 else:
                     directory = folder/'qualification'/job['id']
                     canvas, _ = prepare_prompt(ROOT/job['image'])
