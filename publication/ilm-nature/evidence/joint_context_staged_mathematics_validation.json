@@ -1,0 +1,145 @@
+{
+  "schema": "joint-context-staged-mathematics-validation-v1",
+  "recorded_unix": 1794591123.4326484,
+  "source_sha256": {
+    "publication/ilm-nature/joint_writer_methods.tex": "35ac6424d662421107a178fa4e7c21737abe0c64e73c4bc6180447822627bb79",
+    "publication/ilm-nature/complete_continuation_frontmatter.tex": "6f1a2d53c16c5e9c73c2e5a863b68a9dcb4ae2e2927699088bc3ca79828946a6",
+    "publication/ilm-nature/complete_continuation_introduction.tex": "ca3f3fab9ee4ce60cd7f71dcf2a39335bab83e0f7b125eaa827e416ba4ebafe7",
+    "publication/ilm-nature/complete_continuation_discussion.tex": "17f17d136607c0a52a654952c1b5e5a13ea20c7c6fcf1984167b8f85b5bdeec0",
+    "publication/ilm-nature/joint_writer_caption.tex": "df6aa57d6e58ee95168b3079d30a68f99172709e9c4f2ce43324f6326f81b4b0",
+    "publication/ilm-nature/nature_reading.sty": "4af02a09435ea8aecda61a4bed975bfa627abc36be78b83548714c6670ec2a7d",
+    "publication/ilm-nature/references_main.tex": "d9d94949e6e6ffe2c156f091dadedb77d76f25c3c1e5692d5fabed0126c9d8e7",
+    "publication/ilm-nature/figures/Figure_25_joint_writer_physical.png": "aac4bba3ba832f1766dad8da76f61bec68082e51fcf35ef52ff8be73e034f1ea",
+    "publication/ilm-nature/figures/Joint_writer_physical_figures.pptx": "f46f42272266862c982263a4724a2afbe4230c92f68b856139d4b9d44a47361f",
+    "ilm/visual_lm/joint_continuation_learning.py": "f57a3aecfaeace4f7615e14fc947d40dcc9cbca5052ebe5f02fadfaee48cd705",
+    "ilm/visual_lm/joint_context_model.py": "2098ebe094d0fa7b24e52d243993fe4b1008707472c07284fca9c6f0406584e7",
+    "references/evidence/joint_context_preflight_result_20261114.json": "1a6f17370cff3397f88703bd3d84f466105e996b548e93a99eebd40b816050bd",
+    "references/evidence/joint_writer_physical_result_20261113.json": "5373b96457486d6b38153a8d130e78e0832952e823f8a1c94cca8932426a9e98",
+    "references/evidence/joint_writer_blank_flag_audit_20261114.json": "63e99d4a2dc0bc28ce3c454e9e5288556df2c088e9a3f5ea3161d89e5489464a",
+    "references/evidence/joint_writer_blank_density_result_20261113.json": "44215215020c6e2ec53ff3449ff0805200a062cd8912ceabd89879f9ac506d86",
+    "references/evidence/visual_continuation_learning_20261113.json": "94c4f77615372f37da9454be2e6cf810dd87d96143148644d1b8a54697db68de",
+    "references/evidence/joint_context_learning_registration_20261114.json": "d168b5f24ad2b8dbcf607ab1f0ab06728fe914b1e186dffea93a31535e99c833"
+  },
+  "summary_words": 183,
+  "equation_labels": [
+    [
+      "eq:joint-glyph-history",
+      "1"
+    ],
+    [
+      "eq:joint-glyph-packing",
+      "2"
+    ],
+    [
+      "eq:joint-glyph-density",
+      "3"
+    ],
+    [
+      "eq:joint-glyph-stream",
+      "4"
+    ],
+    [
+      "eq:joint-glyph-sequence-loss",
+      "5"
+    ],
+    [
+      "eq:joint-glyph-layout-loss",
+      "6"
+    ],
+    [
+      "eq:joint-context-training-loss",
+      "7"
+    ],
+    [
+      "eq:joint-context-state-vjp",
+      "8"
+    ]
+  ],
+  "original_six_equation_labels_preserved": true,
+  "new_equations": [
+    "complete-image mean NLL plus balanced stop loss",
+    "exact detached-leaf state vector-Jacobian product"
+  ],
+  "implemented_objective_is_not_unweighted_finite_stream_NLL": true,
+  "fixed_128T_denominator_in_all_microbatches": true,
+  "method_matches_bound_training_implementation": true,
+  "primary_citation_keys": [
+    "pixar",
+    "pixelrnn",
+    "pixelcnn"
+  ],
+  "primary_entries_unchanged": true,
+  "primary_reference_verification": "Earlier source-bound narrative and methods receipts retain verification of these three existing primary references; no new literature claim was introduced.",
+  "quantitative_assertions_passed": [
+    "full point-trial exposure and final proportional7exact14readable0pairs",
+    "head-only original970versus599credits and failed two-group prerequisite",
+    "17blank-flag errors including4creditedemptyimages, original readings/scores unchanged",
+    "16/349source-preferredfalseblanks and15/42developmentbookprefixbounds",
+    "513glyphpreflight computational checks; allupdatesreset",
+    "actual5,005,760trainableswithin7,553,448,370wholeparameters;17.795GiBpreflight"
+  ],
+  "scratch_document": "\\documentclass[10pt,a4paper,twocolumn]{article}\n\\usepackage[left=13.5mm,right=13.5mm,top=17mm,bottom=17mm,columnsep=5mm]{geometry}\n\\usepackage{nature_reading}\n\\input{complete_continuation_frontmatter.tex}\n\\begin{document}\n\\twocolumn[{\\noindent{\\sffamily\\bfseries\\fontsize{23}{26}\\selectfont\\PaperTitle\\par}\n\\vspace{7pt}\\noindent{\\fontsize{11}{13}\\selectfont Imagized Language Model Project\\par}\n\\vspace{12pt}\\noindent{\\bfseries\\fontsize{10.5}{12.2}\\selectfont\\PaperSummary\\par}\\vspace{13pt}}]\n\\input{complete_continuation_introduction.tex}\n\\section*{Discussion}\n\\input{complete_continuation_discussion.tex}\n\\section*{Methods}\n\\input{joint_writer_methods.tex}\n\\balance\n\\begin{thebibliography}{3}\n\\small\n\\bibitem{pixar} Tai, Y., Liao, X., Suglia, A. \\& Vergari, A. PIXAR: Auto-Regressive Language Modeling in Pixel Space. \\emph{arXiv} 2401.03321 (2024). \\url{https://arxiv.org/abs/2401.03321}.\n\\bibitem{pixelrnn} van den Oord, A., Kalchbrenner, N. \\& Kavukcuoglu, K. Pixel Recurrent Neural Networks. \\emph{Proceedings of the 33rd International Conference on Machine Learning} \\textbf{48}, 1747--1756 (2016). \\url{https://proceedings.mlr.press/v48/oord16.html}.\n\\bibitem{pixelcnn} van den Oord, A. et al. Conditional Image Generation with PixelCNN Decoders. \\emph{arXiv} 1606.05328 (2016). \\url{https://arxiv.org/abs/1606.05328}.\n\\end{thebibliography}\n\\clearpage\\onecolumn\n\\section*{Completed conditional-writing comparison}\n\\setcounter{figure}{24}\n\\begin{center}\n\\includegraphics[width=.92\\textwidth]{figures/Figure_25_joint_writer_physical.png}\n\\end{center}\n\\begingroup\\captionsetup{hypcap=false,font={footnotesize,sf}}\\captionof{figure}{\\textbf{Joint image likelihood changes conditional writing but fails physical qualification.}\n\\textbf{a,} Original frozen readability credits for the joint writer and unchanged point-writer control in all seven supplied-history groups. The dashed line is the prespecified 90\\% prerequisite for every candidate group. Exact counts accompany the chart; chart fractions are rounded to six decimal places. Development books and training QA with fixed cells fail. These are retained review counts, not corrected physical accuracy: a subsequent pixel audit finds 17 blank-flag disagreements among 2,080 readings, including four credited empty images. \\textbf{b,} Every uncredited selected development-book output, ordered by case and original zero-based position. Each triplet shows the source, point control and joint output. Original binary $32\\times32$ images are expanded threefold by nearest neighbour, without repair. Fifteen of these seventeen joint outputs are empty and two are nonempty; two other empty book outputs were credited. Among all 108 selected book positions, four source images are blank, three overlapping the seventeen empty outputs, giving fourteen false blanks. \\textbf{c,} Complete-image likelihood prefers the source over the empty image for one of fourteen selected book false blanks and none of four selected training-QA false blanks, below the unchanged requirements of seven and one. Across all 12,597 positions, sixteen of 349 false blanks prefer their source; the prefix bound supports an empty mode in fifteen of 42 development-book false blanks. The finite-precision bound is not a formal certificate. Review used one model reviewer with prior cohort familiarity and no independent human adjudication. Frozen readings, original scores and the failed verdict are preserved. Autonomous language quality remains unmeasured.}\\endgroup\n\\end{document}\n",
+  "scratch_pdf_sha256": "aa993355ec797cb25f13cd90f6d9b2b00c25aa34e897e398849b3e01a85a63e5",
+  "build_log_sha256": "d1cb6569b53b3e68f57ec4177e3cf2e16ab25a7c5b6c411fa7c4dd32f1d8c245",
+  "text_sha256": "cb57ee7d496a953a077a4865d9a59181d380b4144d1be1e0b07d562c509a56d3",
+  "actual_viewed_pages": [
+    {
+      "page": 1,
+      "png_sha256": "c581d25cb1a992c4e782bffdfb8cd41bca407e30e473f81c060643ec52c5e3a4"
+    },
+    {
+      "page": 2,
+      "png_sha256": "006d56df008c0033056d408c7043c8ddca80aa407eb29630958a25c7c6d332a6"
+    },
+    {
+      "page": 3,
+      "png_sha256": "dc60be9316445eba02e94e3315cf92d33bf2e9e297ffb25376cdd139e92c2fc8"
+    },
+    {
+      "page": 4,
+      "png_sha256": "8b29ba850407e578284e1d651e6d1f40e51a006cd14154cb2628568270c99dc6"
+    },
+    {
+      "page": 5,
+      "png_sha256": "1183ab37ee8caf0ff10beb8d7ad8a4fdb880807187edd8e6e0aaeb6aac34849e"
+    }
+  ],
+  "all_eight_equations_actually_viewed": true,
+  "no_overfull_or_unresolved_references": true,
+  "final_text_columns_balanced_within_one_line": true,
+  "embedded_Figure25_RGB_and_alpha_pixel_exact": true,
+  "embedded_Figure25_size": [
+    1600,
+    1800
+  ],
+  "build_resources": {
+    "build_seconds": 3.516270558349788,
+    "peak_observed_child_rss_gib": 0.045806884765625,
+    "rusage_child_maxrss_gib": 0.045013427734375,
+    "minimum_available_host_gib": 64.8310661315918
+  },
+  "resource_limits": {
+    "threads": 2,
+    "cumulative_seconds": 180,
+    "child_RSS_gib": 2,
+    "minimum_available_host_gib": 48,
+    "CUDA_VISIBLE_DEVICES": ""
+  },
+  "historical_receipts_preserved": {
+    "evidence/joint_writer_staged_methods_validation.json": "dd2b768c4ce492f43c3e2fa81b9d2c22f28b300c254130771bc93bb4c66372c9",
+    "evidence/complete_continuation_narrative_validation.json": "612093219a25dfc68d556b9d7e1bf54517b559a7ec44e63520f5a968d45c09dd"
+  },
+  "active_article_pdf_sha256": {
+    "manuscript.pdf": "a44c7858e0f80b9d61a80eaf08c237f3c71bc406c3efda6b1b91d98819759318",
+    "manuscript_review.pdf": "b6c2e6158e3d5ee142497de15f97da4af23d5f25ad4fb494ff1afd16395f316b",
+    "redlined_manuscript.pdf": "04099475d4157621a4c9d24870fbd6ca2a455ff293614fd2c3316fe5ca66312e"
+  },
+  "all59running_model_sources_unchanged": true,
+  "current_context_fit_completed": false,
+  "autonomous_context_language_evaluated": false,
+  "active_article_updated": false,
+  "Office_export_verified": false,
+  "new_model_calls_by_publication_work": 0,
+  "new_optimizer_updates_by_publication_work": 0,
+  "goal_achieved": false
+}

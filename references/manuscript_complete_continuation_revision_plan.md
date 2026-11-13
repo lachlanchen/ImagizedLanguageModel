@@ -331,3 +331,60 @@ The first failed data assertion, literal-workbook precision failure and earlier
 layout variants are preserved privately. All59active model sources and the
 existing article/review/redline PDFs remain unchanged. Active article integration,
 Office export, full builds and versioned local delivery remain pending.
+
+## Completed head-only methods and exact context gradients
+
+The current staged mathematical methods and narrative still describe the
+head-only writer as an untrained future component. That status is obsolete.
+This bounded revision may update `joint_writer_methods.tex`,
+`complete_continuation_frontmatter.tex`, `complete_continuation_introduction.tex`
+and `complete_continuation_discussion.tex`, plus the publication README and a
+new validation receipt. Preserve their prior source bytes and historical
+validation receipts before editing. Keep the active article/PDFs, earlier
+figures and all59registered training sources unchanged while the fit runs.
+
+Retain the six original equation labels and the physical packing and density
+definitions. Clarify frozen prompt memory, feedback and stop parameters versus
+the continuation query/residuals that the new comparison trains. State the
+complete-image objective plus balanced stop loss exactly as implemented, and
+derive the detached-leaf microbatch vector-Jacobian construction. Distinguish
+that weighted training objective from the finite-stream likelihood; it is not
+the unweighted negative log likelihood of the entire variable-length stream.
+The mathematical identity is the chain rule, not a new physical law or a proof
+of semantic learning. Keep the matched normalization, original full schedule,
+initialization, all snapshots and resource ceilings explicit.
+
+The abstract and interpretation may now report the completed head-only failed
+gate, its original nominal credits, detected review errors and the probability
+diagnosis. The context-gradient preflight passes, but the running fit and all
+its autonomous language remain unmeasured. Preserve complete point-trial
+failures, inherited parameter counts and historical-form/efficiency limitations.
+Keep the summary within200words and make no novelty-priority or biological
+equivalence claim. Existing primary citations remain; no new literature claim
+is required for the chain-rule derivation.
+
+Compile one bounded CPU-only standalone check of the revised narrative,
+methods and already-reviewed Figure25 using the existing Nature reading style.
+Include the cited existing bibliography entries. Retain48GiBavailablehostRAM,
+two CPU threads,180seconds cumulative build time and at most2GiBchildRSS.
+Inspect every page and equation, resolve citations/references and check overfull
+boxes. Record exact source/PDF/log/raster hashes, and confirm unchanged active
+article PDFs, prior receipts, original grades and all59model sources. This is
+source/layout validation, with article activation, Office export, full builds,
+redlines and delivery still pending.
+
+The revised narrative and mathematical methods now pass the bounded standalone
+check. All five pages, eight numbered equations, three existing primary
+citations and Figure 25 were actually viewed. The first six equation labels are
+preserved; the two additions describe the implemented balanced stop objective
+and exact state VJP. The 183-word abstract retains the completed failures,
+review errors, inherited model size and unmeasured context-language status.
+The final log has no overfull box or unresolved reference, and the figure's
+embedded RGB and alpha pixels exactly match the reviewed PNG. Compilation and
+rasterization take 3.516 seconds with less than 0.046 GiB child RSS and at least
+64.831 GiB available host RAM. The public receipt is
+`publication/ilm-nature/evidence/joint_context_staged_mathematics_validation.json`.
+Prior source bytes, both historical validation receipts, all 59 running model
+sources, Figure 25 and the active article/review/redline PDFs remain unchanged.
+This completes source/layout validation for this bounded revision. It does not
+activate the article or establish the running model's language quality.

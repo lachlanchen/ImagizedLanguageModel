@@ -1,26 +1,30 @@
-% Prospective methods, staged separately from the active article.
+% Completed head-only methods and the separately registered context-gradient fit.
+% Staged separately from the active article; prior validation is historical.
 % Scope: references/manuscript_complete_continuation_revision_plan.md.
 \subsection*{Conditional joint writing over physical pixels}
-The registered replacement changes the image writer while retaining the final
+The completed head-only comparison changes the image writer while retaining the final
 continuation model's visual reader, answer dynamics, initial query, image
-feedback encoder, affine statistics and stop predictor. Its trained writing
-and autonomous language outcomes are unmeasured. The hypothesis is that a
-conditional joint image distribution can avoid dense marginal pixel mixtures
-without losing the retained contextual information. Autoregressive image
+feedback encoder, affine statistics and stop predictor. Its physical review
+misses the prespecified prerequisite, so its autonomous language remains
+unmeasured. A separately registered comparison trains the continuation query
+and residual adapters through the same image likelihood; its completed fit
+and language result remain unmeasured. Autoregressive image
 densities and vector-conditioned image decoders are established
 formulations\cite{pixelrnn,pixelcnn}; their use here does not guarantee readable
 characters, correct answers or improved efficiency.
 
 Let $X$ denote the visible prompt and $Y_t\in\{0,1\}^{32\times32}$ the $t$th
 emitted image, with one indicating ink. The interface signs its pixels as
-$S_t=1-2Y_t$. With immutable prompt memory $M_\theta(X)$, learned initial query
-$q$ and frozen image-feedback function $F_\kappa$, the next contextual state is
+$S_t=1-2Y_t$. Let $M_0(X)$ be immutable prompt memory and $F_\kappa$ the frozen
+image-feedback function. The next contextual state is
 \begin{equation}
- h_t=D_\theta\!\left(q,F_\kappa(S_{<t});M_\theta(X)\right).
+ h_t=D_\theta\!\left(q_\theta,F_\kappa(S_{<t});M_0(X)\right).
  \label{eq:joint-glyph-history}
 \end{equation}
 Here $F_\kappa$ acts on each preceding image in order, and the notation selects
-the last state of the causal continuation computation.
+the last state of the causal continuation computation. The trainable part of
+$\theta$ comprises the initial query and answer-layer residual adapters; native
+body parameters remain fixed. The head-only control fixes $\theta=\theta_0$.
 The actual feedback is
 $F_\kappa(S)=\sigma_e\odot E_\kappa(S)+\mu_e$, with the existing image encoder
 and fixed semantic affine buffers. A target image does not enter its own
@@ -57,11 +61,11 @@ decisions per glyph; reduced training parameter count does not establish a
 wall-time advantage.
 
 \subsection*{Image history and variable-length outputs}
-Let $s_t=\operatorname{sigmoid}(g_\theta(h_t))$ be the retained stop
+Let $s_t=\operatorname{sigmoid}(g_\psi(h_t))$ be the retained stop
 probability. The likelihood of a finite image stream with an end event is
 \begin{equation}
  \begin{aligned}
- p_\phi(Y_{1:T},{\rm end}\mid X)
+ p_{\theta,\phi}(Y_{1:T},{\rm end}\mid X)
   &=s_{T+1}\prod_{t=1}^{T}
        (1-s_t)p_\phi(Y_t\mid h_t).
  \end{aligned}
@@ -75,14 +79,17 @@ glyphs bound the registered comparisons, with caps retained as failures to
 stop rather than silently converted into natural endings. Reference output
 lengths never enter autonomous generation.
 
-Only the new image head is fitted in this comparison. Its within-image
-likelihood cannot train the frozen reader or stop predictor, and its clean
+Only the image head is fitted in the completed head-only comparison. Its
+within-image likelihood cannot train the fixed continuation state or stop
+predictor. In the new comparison, the parameters $\psi$ remain fixed but the
+stop loss supplies gradients to $h_t$. In either case, clean
 training histories do not establish stability under generated histories.
 The interpretation of the prompt, image-form fidelity and complete-language
 behavior therefore require separate evidence.
 
 \subsection*{Complete-sequence fitting and state normalization}
-For source $i$ with $T_i$ target images and layout $\ell$, cache
+For the head-only control, source $i$ with $T_i$ target images and layout $\ell$
+provides cached
 $h_{it}^{\ell}$ after the query and preceding reference images, before target
 $t$ enters history. Retain all $T_i+1$ states losslessly in FP32, but exclude
 the terminal state from image loss. Both layouts of all 13,766 sources give
@@ -110,7 +117,7 @@ and two proportional layouts overall. Its empirical objective is
  \label{eq:joint-glyph-layout-loss}
 \end{equation}
 Here $N=13{,}766$, $w_f=1/3$ and $w_p=2/3$.
-The registration fixes 41,298 retained updates and 6,108,741 target-image
+The completed comparison retains 41,298 updates and 6,108,741 target-image
 exposures. Development histories contribute to neither fitting nor
 normalization. Compute the head's conditioning mean and second moment from
 training predictor states, giving each source equal weight and the same 1:2
@@ -125,17 +132,103 @@ $\operatorname{bits}$ recovers the eight bits in Eq.~\ref{eq:joint-glyph-packing
 order. Learned start and positional vectors complete the inputs. The component has 2,642,368
 parameters. FP32 AdamW uses a peak learning rate $2\times10^{-4}$, 500-update
 warm-up, cosine decay to $2\times10^{-5}$, weight decay 0.01 and gradient norm
-clipping at one. Five fixed head snapshots are prescribed; no development
-result selects a snapshot or schedule. All retain the same final reader.
+clipping at one. All five fixed head snapshots are retained; no development
+result selects a snapshot or schedule. They retain the same final reader and
+continuation parameters. The subsequent context-gradient comparison reuses
+this exact normalization, fresh head draw, original point-final continuation
+initialization and complete source/layout schedule. Its conditioning statistics
+remain fixed even while the continuation states change; they are not estimated
+from development data or updated during the fit.
 
-\subsection*{Scope of the prospective comparison}
+\subsection*{Exact gradients through the continuation state}
+The head-only control fits $\phi$ on immutable states learned under the earlier
+pixel objective. The new comparison recomputes the differentiable continuation
+graph for every complete source. Write
+$H_\theta^\ell=(h_{i1}^\ell,\ldots,h_{i,T_i+1}^\ell)$ and let
+$a_{it}^\ell=g_\psi(h_{it}^\ell)$. Its implemented training objective is
+\begin{equation}
+ \begin{aligned}
+ \mathcal J_{i\ell}(\theta,\phi)
+ &=\mathcal L_{i\ell}(\phi;H_\theta^\ell)
+       +0.1\,\mathcal S_{i\ell}(\theta),\\
+ \mathcal S_{i\ell}(\theta)
+ &=\frac1{2T_i}\sum_{t=1}^{T_i}
+       \operatorname{softplus}(a_{it}^\ell)\\
+ &\quad+\frac12\operatorname{softplus}(-a_{i,T_i+1}^\ell).
+ \end{aligned}
+ \label{eq:joint-context-training-loss}
+\end{equation}
+Here $\mathcal L_{i\ell}$ is the complete-source mean physical-piece NLL in
+Eq.~\ref{eq:joint-glyph-sequence-loss}, and
+$\operatorname{softplus}(a)=\log(1+e^a)$. The stop term balances the mean
+nonterminal loss against one terminal loss. These reductions and the weight
+0.1 mean that Eq.~\ref{eq:joint-context-training-loss} is not the unweighted
+negative log likelihood of Eq.~\ref{eq:joint-glyph-stream}. Only the image
+density is supervised at target-image positions; the terminal state has no
+image target. Reference images supply history during fitting, never during
+autonomous generation.
+
+The empirical context-gradient objective uses the same source/layout weights
+as Eq.~\ref{eq:joint-glyph-layout-loss}, replacing $\mathcal L_{i\ell}$ by
+$\mathcal J_{i\ell}$. No completed-source or layout exposure is added.
+
+To limit writer activations, create a numerically equal detached FP32 leaf
+$\bar H$ from $H_\theta^\ell$, retaining the original continuation graph.
+Accumulate image-loss microbatches through $\bar H$ and $\phi$, then backpropagate
+the balanced stop loss through $\bar H$. With $\mathcal B$ a disjoint partition
+of the $T_i$ image positions into batches of at most 64, the gradients are
+\begin{equation}
+ \begin{aligned}
+ V&=\nabla_{\bar H}\mathcal J_{i\ell}(\bar H,\phi),\\
+ \nabla_\phi\mathcal J_{i\ell}
+   &=\sum_{B\in\mathcal B}\nabla_\phi\mathcal L_B(\bar H,\phi),\\
+ \nabla_\theta\mathcal J_{i\ell}
+   &=\left(\frac{\partial\operatorname{vec}H_\theta^\ell}
+                    {\partial\theta}\right)^{\!\top}
+       \operatorname{vec}V.
+ \end{aligned}
+ \label{eq:joint-context-state-vjp}
+\end{equation}
+In this expression $\mathcal J_{i\ell}(\bar H,\phi)$ means the loss in
+Eq.~\ref{eq:joint-context-training-loss} with its contextual states replaced by
+the independent leaf $\bar H$. Reverse-mode differentiation applies the final
+vector-Jacobian product without constructing a Jacobian matrix.
+Every $\mathcal L_B$ retains the same denominator $128T_i$; a short last batch
+does not receive extra weight. The stop term has no direct dependence on
+$\phi$ under reference-image history. Apply the accumulated state gradient
+once to the original continuation graph, with checkpointed native answer
+layers. This is the ordinary chain rule, without a learned gradient or a
+gradient through discrete sampling. The actual training path calls the
+teacher-forced density directly; the inference-only greedy writer is not a
+training surrogate. All gradients are accumulated before a single norm clip
+and AdamW update for that complete source.
+
+The real-source preflight compares this construction with unsplit autograd on
+a complete five-glyph QA in both layouts, across all 131 trainable tensors. Its
+maximum relative gradient error is $2.408\times10^{-6}$. Both complete 513-glyph
+book layouts yield finite nonzero gradients and an actual optimizer step.
+The peak allocated VRAM is 17.795 GiB. All preflight trainables are restored
+exactly, and neither preflight update enters the fit. These are computational
+checks, not language demonstrations. The new fit trains 5,005,760 parameters:
+2,363,392 continuation parameters and the 2,642,368-parameter image head.
+The actual construction contains 7,553,448,370 unique parameters, including
+7,522,463,984 inherited visual/contextual parameters. Prompt memory, native body,
+feedback, stop parameters and all four affine buffers remain fixed.
+
+\subsection*{Completed prerequisite and subsequent evaluation}
 Conditional writing first requires frozen opaque review of the prescribed
 positions in all 124 complete cases. At least 90\% of selected candidate forms
 must be confidently readable and nonblank in every training/development,
 source-kind and layout group. A legible alternative book glyph can pass this
 component gate without matching the canonical next glyph. Original pixels,
-uncertainty and all control groups remain intact. Physical qualification does
-not replace the 708-stream autonomous comparison, paired questions, erasures,
+uncertainty and all control groups remain intact. The head-only comparison
+fails this numerical gate. Its original frozen credits are reported with the
+subsequent 17 blank-flag disagreements, including four credited empty images.
+Readings and scores are preserved; they are not corrected physical accuracy.
+The new evaluation additionally verifies that every credited candidate image
+contains ink. That mechanical check cannot establish visual legibility or
+meaning. Physical qualification does not replace the 708-stream autonomous
+comparison, paired questions, erasures,
 retained successes, coherent long books or subsequent untouched confirmation.
 
 The small fitted head retains the inherited 7.522-billion-parameter visual and
@@ -144,4 +237,4 @@ The complete new deployment, cached preparation, inherited pretraining, fitting,
 generation and review must all enter resource accounting. A vocabulary-free
 runtime image boundary does not establish language acquisition from images
 alone. No compact-foundation, matched-quality efficiency or useful complete
-language claim follows from this prospective method.
+language claim follows from the conditional density or computational preflight.

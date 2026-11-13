@@ -66,19 +66,29 @@ A proposed [title and abstract](complete_continuation_frontmatter.tex),
 [introduction](complete_continuation_introduction.tex) and scoped
 [Discussion addition](complete_continuation_discussion.tex) connect these
 results to the visual-language objective. They distinguish inherited knowledge,
-physical pixel variables, complete answers and the still-unmeasured joint
-writer. The [narrative validation](evidence/complete_continuation_narrative_validation.json)
-binds the numerical sources, three existing primary citations and a visually
-checked two-page excerpt. These are staged inputs; the active article and its
-PDFs remain unchanged.
+physical pixel variables, complete answers, the completed head-only failure and
+the separately registered context-gradient fit. The 183-word abstract retains
+the detected review errors and the limits of one-device execution. The earlier
+[narrative validation](evidence/complete_continuation_narrative_validation.json)
+is preserved as a historical receipt for its original source version.
 
-The prospective [joint-writer methods](joint_writer_methods.tex) define the
-physical mask packing, conditional image likelihood, emitted-image feedback,
-stopping and complete-sequence training objective. Source/implementation hashes
-and a three-page visual check are recorded in the
-[methods validation](evidence/joint_writer_staged_methods_validation.json).
-This staged input adds no trained result and is not yet included in the active
-article PDFs.
+The revised [joint-writer methods](joint_writer_methods.tex) retain the six
+physical-packing, image-density, feedback, stopping and source-weighting
+equations. Two further equations specify the implemented image loss plus
+balanced stop loss and its exact microbatch state gradient. This training
+objective differs from the unweighted likelihood of a complete finite stream.
+The derivation explains the actual code's chain rule; computational feasibility
+does not establish language understanding.
+
+The [current source validation](evidence/joint_context_staged_mathematics_validation.json)
+binds the revised narrative and methods to their numerical evidence and
+implementation. All five standalone pages, all eight equations, the three
+existing primary citations and Figure 25 were visually checked, with no
+overfull boxes or unresolved references. The previous
+[methods validation](evidence/joint_writer_staged_methods_validation.json)
+remains a historical receipt for the earlier six-equation version. These inputs
+are staged: the active article, review and redline PDFs remain unchanged, and
+Office export and full publication integration remain pending.
 
 The corrected [Figure 23](figures/Figure_23_continuation_history_completed.png)
 has an [editable PowerPoint source](figures/Continuation_history_completed_figures.pptx),
