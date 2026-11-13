@@ -47,9 +47,15 @@ the search-only criterion fails. No blank-prefix argmax inconsistency is found.
 The next intervention is selected in `references/joint_writer_context_learning_decision.md`:
 train continuation adapters/query through the proper joint image likelihood,
 with the original head-only trial as the unchanged control. Its exact state-VJP
-implementation passes unsplit-autograd checks, but real-source GPU preflight
-and a complete fit are unexecuted. Register and commit/push before new neural
-work; preserve the original45 bound sources and all original frozen readings.
+implementation and real-source GPU preflight now pass; read
+`references/joint_context_preflight_result.md`. All131 trainables match ordinary
+autograd and both complete513-glyph book cases fit within17.795GiB. All updates
+were reset; preserve the original SIGTERM and one traced recovery. Do not repeat
+the completed preflight. The next full fit is defined in
+`references/joint_context_learning_protocol.md`; commit/push its exact registration
+before neural execution. Preserve all50 preflight sources, the original45 control
+sources, and every original frozen reading. Use the new serial controller only
+after checking live ownership; its full fit remains unproved until audited.
 Use the private handoff for current ownership. The old point system's whole
 7,578,390,003 parameters and the joint head's2,642,368 trainables do not establish
 a lightweight foundation; whole-system costs remain required.

@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-13. Status: **active; usable visual language is unproved**.
+Updated: 2026-11-14. Status: **active; usable visual language is unproved**.
 
 ## Objective
 
@@ -57,7 +57,14 @@ whole deployed parameters do not establish the desired compact model.
   trains continuation adapters and the initial query through complete-image
   likelihood, with the completed head-only trial as its unchanged control.
   The exact memory-bounded state-gradient implementation matches unsplit
-  autograd; real complete-source GPU preflight and a full fit remain required.
+  autograd. The [real-source GPU preflight](../references/joint_context_preflight_result.md)
+  now passes all four cases at 17.795 GiB peak allocated VRAM, including both
+  complete 513-glyph books and all 131 trainable gradient comparisons. All
+  updates were reset. Preserve the original SIGTERM and its one recorded
+  recovery; do not repeat this completed check. The
+  [complete context-gradient comparison](../references/joint_context_learning_protocol.md)
+  retains the full source exposure and every original physical/language rule.
+  Its completed fit, audit and language result remain unproved.
   Keep prompt memory, native body, image feedback and stop parameters frozen.
   Register sources, initialization, schedule, gradients, complete evaluation
   and resource limits before neural execution. Do not restart a completed
