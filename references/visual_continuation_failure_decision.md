@@ -17,23 +17,22 @@ checkpoint. The new trial does not isolate whether reading access, alignment
 between language state and writing, uncertain conditional targets, generated
 history or termination dominates the remaining error.
 
-The next model intervention is not yet selected or registered. First use the
-newly frozen trajectories to distinguish damaged initial writing from later
-collapse, question/passage failures, and stopping without readable language.
-Reuse earlier native-reader, physical-copying and history controls as constraints;
-do not repeat their already completed measurements under unchanged conditions.
-Any new neural diagnostic must identify the changed checkpoint or new contrast,
-its expected decision value, fixed cases and resource ceiling before execution.
+The next model intervention is selected in the
+[joint-writer decision](continuation_joint_writer_decision.md), with an
+implemented, untrained 2,642,368-parameter physical writer. Its full fit is not
+yet registered. Preserve earlier native-reader, copying and history controls
+as constraints rather than repeating completed measurements.
 
 The [saved-trajectory analysis](visual_continuation_trajectory_result.md) is now
 complete. Final long-book writing is predominantly dense and close to the
 context-independent balanced-loss template, while first states and images still
 change across all available question/erasure contrasts. This narrows the observed
-failure without isolating its cause. The next measurement is the
-[clean-history control](continuation_clean_history_protocol.md) at the actual
-initial and final full-trial checkpoints, including a long cache-agreement check.
-Its training/development split distinguishes conditional fitting from
-generalization and autonomous-history failure before selecting another fit.
+failure without isolating its cause. The
+[clean-history control](continuation_clean_history_result.md) is also complete
+at the actual initial/final checkpoints, with both long cache checks passing.
+Later proportional QA improves under correct history, while sampled training
+books still fail conditional writing. These results motivate the selected
+joint physical writer; complete autonomous language remains the acceptance unit.
 
 A candidate ordered-block representation remains a hypothesis. Preserving order
 in a shorter visual volume is established only for the invertible CPU operator;

@@ -37,19 +37,22 @@ whole deployed parameters do not establish the desired compact model.
   and [failure decision](../references/visual_continuation_failure_decision.md)
   as the current evidence. Do not repeat the completed fit, generation, opaque
   review, optimizer audit or unchanged earlier diagnoses.
-- The next model intervention is not selected or registered. Distinguish initial
-  writing failures, later collapse, question/passage use and stopping from the
-  newly frozen trajectories. A new diagnostic must name a changed checkpoint
-  or unresolved contrast and explain how either outcome changes the intervention.
+- The next model intervention is selected in the
+  [joint-writer decision](../references/continuation_joint_writer_decision.md).
+  Preserve the final visual reader/context/feedback/stop path and replace the
+  marginal point writer with a conditional joint distribution over physical
+  pixels. Its 2,642,368-parameter component has support/causality/cache/gradient
+  tests but no trained language result. Full-corpus fitting is not yet registered.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
   All 416 first-step contrasts change state; this does not establish language
-  understanding. The next fixed measurement is the
-  [initial/final clean-history control](../references/continuation_clean_history_protocol.md),
-  including full-length parallel/incremental agreement. This is a changed-checkpoint
-  contrast, not a repeat of the old actor's completed diagnosis. No new fit follows
-  until that distinction informs a bounded intervention.
+  understanding. The [initial/final clean-history control](../references/continuation_clean_history_result.md)
+  is also complete, with both long cache checks passing. Final proportional
+  development QA reaches F1 .95 on 656/713 later supplied-history positions;
+  sampled training books reach it on only about 9%. Do not repeat these controls.
+  The selected replacement must address conditional writing without substituting
+  it for complete autonomous language.
 - Register one bounded change and an unchanged control before another fit.
   Preserve the full corpus, complete answers, paired questions, erasures, long
   books, earlier successes and whole-model resource accounting. More unchanged

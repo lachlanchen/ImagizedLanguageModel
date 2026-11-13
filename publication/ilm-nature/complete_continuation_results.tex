@@ -82,6 +82,27 @@ At the final proportional checkpoint, paired-question relative state L2 and
 first-image Hamming distance average 1.0428 and 0.2302. The measured failure
 therefore coexists with representation changes across prompts. These distances
 do not establish question understanding, identify the loss as the unique cause,
-or prove a stable dynamical attractor. A changed-checkpoint clean-history
-control is required to separate conditional fitting and generalization from
-autonomous-feedback failure.
+or prove a stable dynamical attractor.
+
+\subsection*{Correct history separates QA continuation from book prediction}
+The new initial/final control retains 248 complete supplied-history traces and
+25,194 target positions. Long parallel/incremental comparisons pass the fixed
+0.002 state tolerance at both checkpoints. At the final checkpoint, proportional
+development QA has mean first-image F1 0.6942. Across its 713 later positions,
+mean F1 is 0.9827 and 656/713 positions reach 0.95; 512 are exact bitmaps.
+The twelve sampled training QA records give later mean F1 0.9905 and 358/375
+positions reaching 0.95. These supplied-history fractions pass the descriptive
+90\% later-writing condition. They supply answer information and do not
+replace the failed autonomous complete-answer results.
+
+Book prediction remains inaccurate even with reference history. The twelve
+sampled training books have later mean F1 0.6025 with fixed prompts and 0.6022
+with proportional prompts; only 9.03\% and 9.01\% of later positions reach
+0.95. The twelve development books give later mean F1 0.5587, with 4.61\%
+reaching 0.95. Respectively 75.32\%, 75.34\% and 81.91\% of all predicted
+tiles exceed the source-kind clean-ink threshold. Original reference,
+supplied-history and autonomous early/tail images for all twelve development
+books are inspected together, without changing their frozen language grades.
+These results reject a feedback-only explanation of this final model's book
+failure, while exposing a stronger supplied-history QA capability than its
+autonomous writing. They do not identify a unique replacement architecture.

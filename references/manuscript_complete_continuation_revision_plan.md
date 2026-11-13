@@ -75,7 +75,13 @@ separately observed. Commit/push the completed revision unit.
 
 ## Current status
 
-Plan and source evidence are ready. Active TeX/PDF and Figure23 remain unchanged.
-The initial/final clean-history GPU control is running under its separate
-registration. No new manuscript build, Office export or figure activation is
-claimed by this document.
+The initial/final clean-history control is complete and independently recounted.
+The new staged Results/Methods include its measured physical result, the complete
+language checkpoint table and the exact constant-image derivation. Both pages of
+a standalone build in the unchanged article style are actually inspected, with
+no overfull boxes or unresolved references. This checks staged source and layout,
+not activation in the full article. Its evidence is bound in
+`publication/ilm-nature/evidence/complete_continuation_staged_validation.json`.
+Active TeX inputs, all three article PDFs and Figure23 remain unchanged. Native
+Figure24, Office export, article activation, full/redline builds and local sync
+remain pending. No model worker remains live.

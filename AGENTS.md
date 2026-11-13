@@ -30,21 +30,23 @@ native-reader, writer or correct-history diagnoses. Preserve all failures,
 fixed checkpoints, original scores and uncertain readings. No source weights,
 reference answers or images may be used to repair frozen transcriptions.
 
-The next intervention is not selected or registered. Use newly frozen complete
-trajectories to distinguish initial writing, later collapse, question/passage
-use and stopping. A new neural diagnostic must name a changed checkpoint or
-unresolved contrast and its decision value. Register one bounded intervention
+The next intervention is selected in `references/continuation_joint_writer_decision.md`:
+replace the final model's marginal writer with a conditional joint physical-pixel
+writer, preserving its reader, context, feedback encoder and stop head. The new
+component has CPU tests but is untrained; the full fit is not registered. Register
+one bounded intervention
 and an unchanged control before another fit. More unchanged epochs, selecting
 an intermediate checkpoint or relaxing acceptance rules do not address the
 failed final pilot. The whole deployed model is 7,578,390,003 parameters;
 20,212,225 trainables do not establish a lightweight foundation.
 
-The CPU saved-trajectory study is complete; read
-`references/visual_continuation_trajectory_result.md`. The next bounded neural
-control is specified in `references/continuation_clean_history_protocol.md`:
-initial/final full-trial checkpoints, correct preceding images and long
-parallel/incremental agreement. It does not retrain or regrade autonomous answers.
-Respect its committed registration and inspect live ownership before execution.
+The saved-trajectory and initial/final clean-history studies are complete; read
+`references/visual_continuation_trajectory_result.md` and
+`references/continuation_clean_history_result.md`. Both long cache checks pass.
+Final proportional development QA reaches F1 .95 on 656/713 later supplied-history
+positions; sampled training books reach it on only about 9%. No autonomous score
+changes. Do not repeat these completed controls. Use their evidence to prepare
+the selected full-corpus comparison, with resource admission and live ownership.
 
 Update the Nature-style manuscript and native figures from the completed
 checkpoint results. Existing PDFs predate this measurement; preserve their

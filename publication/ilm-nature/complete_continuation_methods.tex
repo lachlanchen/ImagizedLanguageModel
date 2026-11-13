@@ -21,9 +21,11 @@ image at every context and position, define
 \end{equation}
 The sequence-balanced BCE restricted to this family is
 \begin{equation}
- \mathcal L_{\rm const}(q)=-\frac12\sum_j
- \left[a_j\log q_j+b_j\log(1-q_j)\right],
- \qquad q_j^*=\frac{a_j}{a_j+b_j}.
+ \begin{aligned}
+ \mathcal L_{\rm const}(q)&=-\frac12\sum_j
+ \left[a_j\log q_j+b_j\log(1-q_j)\right],\\
+ q_j^*&=\frac{a_j}{a_j+b_j}.
+ \end{aligned}
  \label{eq:constant-writing-optimum}
 \end{equation}
 The expression uses the implemented denominator clamps, including blank targets.
@@ -49,3 +51,34 @@ at least 51.210\,GiB available host memory. A preserved earlier attempt returns
 SIGTERM/143 without a report. Its cause is unknown and its wall-time upper
 bound is 242.049\,s; exact cumulative execution cost is unknown. These costs
 are distinct from model fitting, generation and review.
+
+\subsection*{Initial/final clean-history comparison}
+The new diagnostic fixes 124 complete prompt/history jobs per checkpoint:
+all 32 development QA cases in both layouts, twelve fixed-layout development
+books, and twelve training QA plus twelve training books in both layouts.
+Training sources are selected by source-ID hash, with the longest complete
+training book included. All target rasters are recovered from the authenticated
+corpus; answer text is not rendered. The original initial and final checkpoints
+are fixed before execution. Each supplied-history state predicts the current
+image before that target enters its inputs. Predicted stopping is recorded but
+bypassed, with reference lengths supplied. All 25,194 target positions remain
+in the comparison.
+
+At each checkpoint the complete 513-glyph training book is also evaluated
+incrementally with the identical reference history. Maximum state errors
+0.000534058 and 0.000148773 are below the unchanged 0.002 limit. Every original
+development observer geometry is reproduced; maximum first-state difference
+is 0.000120163. Differences across execution shapes are numerical comparisons,
+not bit-exact identities. All parameters retain their recorded versions.
+
+The physical description of accurate later writing requires at least 90\% of
+later target positions to reach foreground F1 0.95. Training/development,
+QA/book and layout remain separate. Source-kind ink thresholds are the clean
+training 99th percentiles. The independent CPU export recomputes every metric
+from all saved binary predictions and original targets. No new autonomous
+stream, semantic grade, source head, teacher or optimizer update is produced.
+The successful single-GPU stage takes 648.971\,s, including 30.029\,s of
+pressure waiting, with 18.124\,GiB peak allocation and at least 49.819\,GiB
+available host memory. An earlier missing-environment launch fails before
+model loading; its 0.341-second measured stage and unknown whole-process
+overhead are preserved separately.
