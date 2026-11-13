@@ -30,11 +30,15 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
-Stand 12. November 2026: Das Training auf dem vollständigen Korpus hat begonnen. Geplant sind drei Durchläufe mit 13.766 Sequenzen, 41.298 Aktualisierungen und 6.108.741 Zielpositionen für Glyphen. Beide Eingabelayouts und die vollständigen Antwort- und Buchzielsequenzen bleiben erhalten. Der reale Vortest über 36 Schichten besteht bei maximal 18,123 GiB VRAM. Training und Sprachbewertung sind noch nicht abgeschlossen; ein nutzbares ILM ist weiterhin nicht nachgewiesen. Die folgenden Ergebnisse stammen aus früheren Experimenten.
+## Neuestes Ergebnis: Vollständiger Versuch beendet, Sprachkriterien verfehlt
 
-Der erste Lauf brach wegen kollidierender Protokollfelder ab; nach der Korrektur wurde dasselbe Experiment mit unveränderten Daten und unverändertem Zeitplan neu gestartet.
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+Der Versuch mit vollständigen Sequenzen umfasst **13,766 Sequenzen, 41,298 Aktualisierungen und 6,108,741 Zielpositionen für Glyphen**. Alle **732 Ausgabebilder** wurden vor der Bewertung anhand von Referenzantworten geprüft. Mit proportional gesetzten Eingaben erreicht das Endmodell **7/32 strikt exakte vollständige Antworten, 0/16 Paare mit beiden Fragen richtig, 14/32 lesbare Antworten und 0/12 kohärente vollständige lange Buchfortsetzungen**. Sowohl die vorab registrierten Kriterien als auch die unabhängige Prüfung aller vier Kontrollen mit gelöschter Frage oder gelöschtem Text werden verfehlt.
+
+Das Training nutzt eine RTX 4090 mit maximal **18.568 GiB** zugewiesenem VRAM. Das gesamte eingesetzte Modell hat **7,578,390,003 Parameter**, einschließlich übernommener Basisgewichte; **20,212,225** Parameter werden hier aktualisiert. Es handelt sich um wiederverwendete Entwicklungsdaten mit einem Modell als Gutachter und ohne unabhängige menschliche Beurteilung. Ein nutzbares leichtgewichtiges ILM und ein Effizienzvorteil bei gleicher Qualität sind weiterhin nicht nachgewiesen.
+
+[Vollständiges Ergebnis](../references/visual_continuation_learning_result.md) · [Entwicklungsziel](../docs/first-imagized-language-model-goal.md) · [Festes Protokoll](../references/visual_continuation_full_protocol.md)
 
 ## Frühere V23-Ergebnisse
 

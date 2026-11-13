@@ -31,11 +31,15 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [結果與證據範圍](../references/native_paired_qa_learning_result.md)
 
-2026年11月12日更新：完整語料訓練已啟動，共13,766條序列、3輪、41,298次預定更新和6,108,741個目標字形位置，保留兩種提示版面及完整問答和書籍目標。36層預檢已通過，峰值顯示記憶體18.123 GiB。訓練和語言評估尚未完成，可用ILM仍未得到驗證。下方為較早的實驗結果。
+## 最新結果：完整實驗結束，語言能力預設標準未通過
 
-首次執行因事件日誌欄位衝突中止，修正後以相同資料和計畫重新啟動。
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+完整序列實驗已完成 **13,766 條序列、41,298 次更新及 6,108,741 個目標字形位置**。全部 **732 張輸出影像**均在參考答案評分前完成審閱。最終模型在比例排版提示下取得 **7/32 個嚴格完整正確答案、0/16 組雙題同時正確、14/32 個可讀答案，以及 0/12 個連貫完整的長篇書籍續寫**。預先註冊的標準及涵蓋四種問答擦除對照的獨立稽核均未通過。
+
+訓練使用一張 RTX 4090，峰值已配置顯示記憶體為 **18.568 GiB**。部署模型共 **7,578,390,003 個參數**，包含繼承的基礎模型權重；本次訓練更新 **20,212,225 個參數**。結果來自重複使用的開發集，由一名模型審閱者評判，未經獨立人工複核。可用的輕量 ILM 及同等品質下的效率優勢仍未獲證實。
+
+[完整結果](../references/visual_continuation_learning_result.md) · [工程目標](../docs/first-imagized-language-model-goal.md) · [固定實驗方案](../references/visual_continuation_full_protocol.md)
 
 ## 較早的 V35 結果
 

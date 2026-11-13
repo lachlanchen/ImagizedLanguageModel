@@ -20,27 +20,15 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Latest status: complete-corpus fit started; language quality remains unproved
+## Latest result: full trial complete; language pilot failed
 
-The [current balanced-writer evaluation](references/balanced_writer_matched_result.md)
-gives **6/32 strict complete QA matches, 0/16 both-correct pairs and no credited
-complete book continuation** with proportional prompts. These scores use a
-different cohort and metric from the earlier clear-answer results below.
+2026-11-13
 
-The new [continuation-only implementation](docs/visual-continuation-model.md)
-passes its [real 36-layer preflight](references/visual_continuation_preflight_result.md)
-on complete targets up to **513 glyphs**,
-with **18.123 GiB** peak allocated VRAM. Frozen prompt memory stays bit-exact;
-all answer layers receive gradients. The independent optimizer/data audit passes.
-This is a capacity and correctness result. The [registered complete-corpus fit](references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
-started on 12 November 2026: **13,766 sequences**, three epochs, **41,298 scheduled
-updates** and **6,108,741 target positions**. Both prompt layouts and complete QA
-and book targets are preserved. Five fixed snapshots and 732 image-output
-evaluations are prescribed by the [protocol](references/visual_continuation_full_protocol.md).
-The [logging correction](references/visual_continuation_logger_recovery.md) preserves
-the failed first execution and restarts the same experiment.
-Training and language evaluation are incomplete; no new held-out score is assigned.
-The inherited body remains 7.522B parameters. See the [active engineering goal](docs/first-imagized-language-model-goal.md).
+The completed continuation-only trial covers **13,766 sequences, 41,298 updates and 6,108,741 target glyph positions**. All **732 output images** were reviewed before reference scoring. The final model produces **7/32 strict complete proportional answers, 0/16 both-correct pairs, 14/32 readable answers and 0/12 coherent complete long-book continuations**. It fails the registered pilot and the independent audit of all four QA-erasure arms.
+
+Training uses one RTX 4090 with **18.568 GiB** peak allocated VRAM. The complete deployed model has **7,578,390,003 parameters**, including inherited foundation weights; **20,212,225** parameters train in this fit. These are reused development results reviewed by one model reviewer, without independent human adjudication. A useful lightweight ILM and a matched-quality efficiency advantage remain unproved.
+
+[Complete result](references/visual_continuation_learning_result.md) · [Engineering goal](docs/first-imagized-language-model-goal.md) · [Fixed protocol](references/visual_continuation_full_protocol.md)
 
 ## Earlier paired Chinese-answer experiment
 

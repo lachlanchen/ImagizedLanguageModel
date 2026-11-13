@@ -32,11 +32,15 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
-Mise à jour du 12 novembre 2026 : l’entraînement sur le corpus complet a commencé, avec 13 766 séquences sur trois passages, soit 41 298 mises à jour et 6 108 741 positions de glyphes cibles prévues. Les deux mises en page et les cibles complètes des réponses et des passages de livres sont conservées. Le prétest réel sur 36 couches est réussi, avec un pic de 18,123 GiB de VRAM. L’entraînement et l’évaluation linguistique restent incomplets ; un ILM utilisable reste à démontrer. Les résultats ci-dessous concernent des expériences antérieures.
+## Dernier résultat : essai complet terminé, critères linguistiques non atteints
 
-La première exécution s’est arrêtée à cause d’un conflit de noms dans le journal ; l’expérience corrigée reprend avec les mêmes données et le même calendrier.
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+L’essai sur séquences complètes couvre **13,766 séquences, 41,298 mises à jour et 6,108,741 positions de glyphes cibles**. Les **732 images produites** ont toutes été examinées avant la notation avec les réponses de référence. Avec les entrées à composition proportionnelle, le modèle final obtient **7/32 réponses complètes strictement exactes, 0/16 paires correctes aux deux questions, 14/32 réponses lisibles et 0/12 continuations longues de livres cohérentes et complètes**. Il échoue aux critères préenregistrés et à l’audit indépendant des quatre contrôles avec effacement de question ou de passage.
+
+L’entraînement utilise une RTX 4090, avec **18.568 GiB** de VRAM allouée au maximum. Le modèle déployé entier compte **7,578,390,003 paramètres**, poids de fondation hérités compris ; **20,212,225** paramètres sont mis à jour ici. Ces résultats réutilisent un jeu de développement, examiné par un seul modèle évaluateur, sans arbitrage humain indépendant. Un ILM léger utilisable et un avantage d’efficacité à qualité comparable restent à démontrer.
+
+[Résultat complet](../references/visual_continuation_learning_result.md) · [Objectif technique](../docs/first-imagized-language-model-goal.md) · [Protocole fixe](../references/visual_continuation_full_protocol.md)
 
 ## Résultats antérieurs de V35
 

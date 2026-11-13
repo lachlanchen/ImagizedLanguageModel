@@ -31,11 +31,15 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [결과와 근거의 범위](../references/native_paired_qa_learning_result.md)
 
-2026년 11월 12일 업데이트: 전체 말뭉치 학습을 시작했습니다. 13,766개 시퀀스를 3에포크에 걸쳐 학습하며, 예정된 업데이트는 41,298회이고 목표 글리프 위치는 총 6,108,741개입니다. 두 입력 레이아웃과 전체 질문·답변 및 책의 목표 시퀀스를 보존합니다. 36개 층의 실제 GPU 사전 검증은 최대 18.123 GiB VRAM으로 통과했습니다. 학습과 언어 평가는 아직 완료되지 않았으며 실용적인 ILM은 입증되지 않았습니다. 아래 내용은 이전 실험 결과입니다.
+## 최신 결과: 전체 실험 완료, 언어 능력 예비 기준 미달
 
-첫 실행은 로그 필드 이름 충돌로 중단되었으며, 수정 후 같은 데이터와 계획으로 다시 시작했습니다.
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+전체 시퀀스 실험은 **13,766개 시퀀스, 41,298회 업데이트, 6,108,741개 목표 글리프 위치**를 처리했습니다. 참조 정답으로 채점하기 전에 **출력 이미지 732장 전부**를 검토했습니다. 최종 모델의 비례 배치 입력 결과는 **엄격한 완전 정답 7/32, 같은 지문 두 질문 모두 정답 0/16쌍, 읽을 수 있는 답변 14/32, 일관되고 완결된 긴 책 이어쓰기 0/12**입니다. 사전 등록 기준과 질문·지문을 지우는 네 가지 대조군에 대한 독립 감사 모두 통과하지 못했습니다.
+
+RTX 4090 한 장으로 학습했으며 최대 할당 VRAM은 **18.568 GiB**입니다. 물려받은 기반 가중치를 포함한 전체 실행 모델은 **7,578,390,003개 파라미터**이고, 이번 학습에서 갱신한 파라미터는 **20,212,225개**입니다. 재사용한 개발 데이터와 한 명의 모델 평가자가 사용되었으며 독립적인 사람의 판정은 없습니다. 실용적인 경량 ILM과 동일 품질에서의 효율 우위는 아직 입증되지 않았습니다.
+
+[전체 결과](../references/visual_continuation_learning_result.md) · [개발 목표](../docs/first-imagized-language-model-goal.md) · [고정 실험 규약](../references/visual_continuation_full_protocol.md)
 
 ## 이전 V35 결과
 

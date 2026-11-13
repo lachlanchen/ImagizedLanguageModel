@@ -31,11 +31,15 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [結果と証拠の範囲](../references/native_paired_qa_learning_result.md)
 
-2026年11月12日更新：全コーパスの学習を開始しました。13,766系列を3エポック、計41,298回の更新と6,108,741字形位置で学習する計画です。2種類の入力レイアウトと、質問応答・書籍の完全な教師系列を保持しています。36層の実機事前検証は最大18.123 GiBのVRAMで合格しました。学習と評価は未完了で、実用的なILMはまだ実証されていません。以下は以前の実験結果です。
+## 最新結果：全試行が完了、言語能力の予備基準は未達
 
-初回実行はログのフィールド名衝突で停止し、修正後に同じデータと計画で再開しました。
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+完全系列の試行は **13,766 系列、41,298 更新、6,108,741 の目標字形位置**を処理しました。参照回答による採点前に、**732 枚すべての出力画像**を確認しました。最終モデルは比例配置の入力で、**厳密な完全正答 7/32、同一文章の両問正答 0/16 組、読み取れる回答 14/32、首尾一貫した完全な長い書籍続文 0/12**でした。事前登録した基準と、四つの質問・文章消去対照を対象とする独立監査の双方を満たしませんでした。
+
+RTX 4090 1 枚での学習時ピーク割当 VRAM は **18.568 GiB**です。継承した基盤重みを含む実行モデル全体は **7,578,390,003 パラメータ**で、今回更新したのは **20,212,225**です。再利用した開発集合を一つのモデル評価者が判定しており、独立した人間の判定はありません。実用的な軽量 ILM と同等品質での効率優位は未証明です。
+
+[全結果](../references/visual_continuation_learning_result.md) · [開発目標](../docs/first-imagized-language-model-goal.md) · [固定プロトコル](../references/visual_continuation_full_protocol.md)
 
 ## 以前の V35 の結果
 

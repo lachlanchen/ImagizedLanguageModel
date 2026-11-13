@@ -26,28 +26,32 @@ alone are separate claims.
 
 ## Direction check for every work unit
 
-The immediate question is whether complete-sequence adaptation of all answer
-layers improves autonomous, prompt-dependent visual language while preserving
-the frozen prompt reader. Finish the registered comparison before changing that
-question. The current implementation is an experiment toward the objective;
-its 7.578B deployed parameters do not establish the desired compact model.
+The complete-sequence comparison is finished and fails its registered pilot.
+All 732 image streams, 183 opaque boards and 96 visible book prefixes have been
+reviewed; readings were frozen before new mapping/reference scoring. The final
+model gives 7/32 strict proportional answers, 0/16 both-correct pairs, 14/32
+readable answers and no credited coherent long-book continuation. Its 7.578B
+whole deployed parameters do not establish the desired compact model.
 
-- Tie each work unit to training progress, complete-output evaluation, a
-  failure-specific intervention or a verified wait. For a live, progressing
-  worker within its resource limits, preserve the run and record a verified
-  wait. Extra fits, repeated audits and publication-only changes do not advance
-  the pending language measurement.
-- Keep model, data, checkpoints and acceptance rules fixed through the current
-  comparison. Evaluate all prescribed outputs and erasure controls. A completed
-  fit, decreasing loss or attractive glyph samples cannot replace this decision.
-- If the pilot passes, test untouched source groups before claiming usability.
-  If it fails, identify the measured failure in reading, writing, question or
-  passage dependence, continuation, stopping or generalization. Register one
-  bounded change and an unchanged control; do not extend the same failed recipe
-  or lower its thresholds. Several causes may remain unresolved.
+- Use the [completed result](../references/visual_continuation_learning_result.md)
+  and [failure decision](../references/visual_continuation_failure_decision.md)
+  as the current evidence. Do not repeat the completed fit, generation, opaque
+  review, optimizer audit or unchanged earlier diagnoses.
+- The next model intervention is not selected or registered. Distinguish initial
+  writing failures, later collapse, question/passage use and stopping from the
+  newly frozen trajectories. A new diagnostic must name a changed checkpoint
+  or unresolved contrast and explain how either outcome changes the intervention.
+- Register one bounded change and an unchanged control before another fit.
+  Preserve the full corpus, complete answers, paired questions, erasures, long
+  books, earlier successes and whole-model resource accounting. More unchanged
+  epochs, a selected intermediate checkpoint or looser thresholds are not the
+  next experiment.
 - Require every mathematical or architectural proposal to name a testable
-  prediction, its control and an outcome that would reject it. Select the next
-  method from the evidence rather than novelty or an assumed physical analogy.
+  prediction, its control and an outcome that would reject it. Ordered visual
+  blocks remain a candidate representation, with language benefit unmeasured.
+- Update the manuscript and native figures from actual completed measurements.
+  Existing PDFs predate this result. Publication work must not substitute for
+  resolving the measured model failure.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
@@ -88,7 +92,17 @@ model. The desired lightweight model must account for its entire deployed body.
 
 ## Current evidence
 
-The [frozen balanced-writer comparison](../references/balanced_writer_matched_result.md)
+The [complete-sequence continuation trial](../references/visual_continuation_learning_result.md)
+covers 13,766 sources, 41,298 updates and 6,108,741 target glyph positions.
+Proportional exact/readable/pair counts at the five fixed checkpoints are
+4/5/0, 4/8/0, 6/13/0, 9/16/1 and 7/14/0, each over 32 questions and sixteen
+pairs. Every normal book arm has zero credited coherent complete continuations.
+Both the original scorer and the independent four-QA-erasure audit reject the
+final pilot. The [public evidence](../references/evidence/visual_continuation_learning_20261113.json)
+binds the full comparison. Review used one model reviewer with prior cohort
+familiarity and no independent human adjudication.
+
+The earlier [frozen balanced-writer comparison](../references/balanced_writer_matched_result.md)
 is complete: all 216 streams, 54 opaque output boards, twelve book prefixes,
 frozen readings and independent scores. All 216 initial reader states match the
 parent bit-for-bit. The same current development cohort gives:
@@ -140,113 +154,43 @@ is complete: 35/62/63-page reading/review/redline PDFs, verified native Figure 2
 and a reproduced 160-page combined raster comparison. The local RealizedWriting
 package and latest aliases are verified; cloud propagation is unverified.
 No repeat publication build or completed-cohort generation is pending.
-The correct-image-history study below is newer than these PDFs. Include it in
-the next bounded results revision; do not imply it is already in the article.
-The ongoing model comparison takes priority over another presentation-only work unit.
+The correct-image-history study and completed continuation trial are newer than
+these PDFs. Include both in the next bounded results revision; do not imply
+they are already in the article. Failure-driven model work retains priority
+over presentation-only revisions.
 
 ## Next model decision
 
-The [correct-image-history comparison](../references/reference_image_history_result.md)
-is complete: all 64 traces, 1,490 target positions, sixteen reviewed boards and
-8,561 independently checked displayed tiles. Every initial state and saved
-pixel/stop replay is exact. Proportional later median F1 is 0.985185, with
-475/713 positions at least 0.95; fixed is 0.573840 and 139/713. Both registered
-physical gates fail. Original complete-language scores remain unchanged.
+The registered complete-sequence recipe is rejected. All five prescribed
+snapshots, 660 core streams and 72 long-book streams are complete, with unchanged
+scoring and the supplemental four-arm audit. Final fixed results are 2/32 exact,
+4/32 readable and 1/16 both-correct pairs. Final proportional results are 7/32,
+14/32 and 0/16. The three-quarter snapshot gives 9/32 exact but does not replace
+the registered final model. Six of eight required proportional successes and
+both fixed successes remain. Final erased QA exact counts are 0/1 for question/
+passage erasure in each layout; the proportional normal-minus-erased gap is six.
 
-Correct history improves later writing, but initial and conditional errors
-persist. A feedback-only explanation is insufficient. All four nearly exact
-but nonidentical first images have readable original autonomous answers, so
-mere state divergence does not establish a harmful pixel-feedback error.
-Canonical mismatch and different answer lengths remain distinct from semantics.
-Do not repeat the completed comparison or substitute it for autonomous language.
+All twelve final normal 128-cap books reach the cap. The final 640-cap candidate
+stops on eight of twelve normal prefixes, while the matched balanced parent
+stops on seven. Neither produces a readable coherent complete continuation.
+Record-level EOS labels are not proof of a natural whole-document ending.
 
-The earlier [feedback ceiling](../references/glyph_feedback_ceiling_result.md)
-already shows that native-unit and first-character steps are not interchangeable,
-even with exact feedback vectors. Preserve its different cohort and exclude its
-diagnostic records from training. Read the completed mixture-density and
-first-function-transfer results before proposing those routes again.
+All 41,298 optimizer updates and 85 final Adam counters were audited. Cumulative
+training child execution is 75,209.326 seconds at 18.568 GiB peak allocated VRAM.
+Candidate evaluation costs 6,338.799 cumulative child seconds and parent long-book
+evaluation 609.626 seconds, preserving failed attempts. Preparation, admission
+queues, CPU/review work and inherited pretraining are separate. These values
+show one-GPU execution, not matched-quality efficiency over an LLM. No model job
+is live and no retraining or evaluator recovery is pending.
 
-The [continuation-only implementation and real preflight](../references/visual_continuation_preflight_result.md)
-now pass. All 36 answer layers receive real gradients through complete targets
-of 1, 74, 184 and 513 glyphs, with 20,212,225 trainable parameters and 18.123 GiB
-peak allocated VRAM. Prompt states and all prompt keys/values remain bit-exact
-after updates; causal checks pass. Independent audit verifies four AdamW steps
-for all 85 optimizer tensors and authentic complete targets. The source retains
-its 7.522B inherited body and frozen image interfaces. Preflight is not language.
-
-The [complete-sequence pipeline and fixed protocol](../references/visual_continuation_full_protocol.md)
-are implemented. Source indexing has authenticated 13,766 eligible sequences:
-9,004 complete QA records and 4,762 book records. Nineteen diagnostic records or
-source-group exclusions are recorded. After the book-prefix split there are
-2,036,247 target glyph positions per epoch, with complete targets up to 513
-glyphs. The prescribed three epochs give 41,298 updates and 6,108,741 scheduled
-target positions. These are data exposure counts, not measured language results.
-
-Preparation and the committed registration are complete. All 13,766 prompts
-are preserved; 45 natural-layout rejections use their complete original raster.
-The first execution stopped on an event-logging field collision after one unsaved
-update. Its initial checkpoint, failure and 139.558657-second child cost remain
-preserved. The [registered recovery](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
-changes logging and registration identity handling, with unchanged model, pixels,
-targets, schedule and quality criteria. Its fresh worker has started in
-`artifacts/visual_continuation_full_logger_recovery_v2`; the earlier run must not
-be overwritten or restarted. Read the [recovery record](../references/visual_continuation_logger_recovery.md).
-The [independent launch audit](../references/evidence/visual_continuation_full_launch_20261112.json)
-verifies exact fresh initial parameters, optimizer and RNG against the original
-step-zero checkpoint. Restoring four and replaying five/six matches the actual
-uninterrupted step-six state bit-for-bit, with all 85 Adam counters at six.
-The first six scheduled updates cover 1,367 target positions; two discarded
-replay updates cover another 437 positions. These checks establish execution
-and recovery, with no complete-language score. The full fit has now finished.
-The [completion audit](../references/visual_continuation_completion_result.md)
-verifies all 41,298 scheduled updates, 6,108,741 target positions, five snapshot
-hashes and all 85 final Adam counters. Evaluation failed before any output at
-its host-RAM entry guard. The immediate work is resource-gated recovery of the
-unchanged evaluators, followed by complete-output review and scoring.
-Discard all four preflight updates. Each source gets one fixed and two natural
-presentations. Save initial, quarter, half, three-quarter and final weights;
-retain the verified real optimizer/RNG recovery evidence. Evaluate all
-732 prescribed image streams, including the unchanged 216-input cohort and
-matched long-book controls, before applying the frozen pilot criteria.
-The final proportional pilot requires 12/32 exact answers, 4/16 both-correct
-pairs, 24/32 readable answers, 4/12 coherent complete long-book continuations,
-all eight union proportional and both fixed successes, and the registered
-erasure checks. A pass must then survive untouched source-group confirmation.
-
-After the original frozen-review scoring, run the
-[independent protocol audit](../references/visual_continuation_protocol_audit.md).
-The bound scorer's pilot expression checks proportional erasures only; the
-registered wording covers all four QA-erasure arms. The supplemental report
-enforces that literal rule while preserving original scores and thresholds.
-Do not claim a pilot pass from the original summary alone. The live pipeline
-and its model/data/schedule stay unchanged.
-
-Do not substitute the old 3,176-question, sixteen-glyph-target subset, repeat
-the completed preflight, extend an unchanged failed recipe, or turn a working
-checkpoint into a language claim. Full training is complete; language generation,
-review and evaluation remain incomplete. Keep the
-one unresolved decision explicit: does adapting all answer layers over complete
-visual sequences improve autonomous complete language while preserving source
-prompt interpretation? The architecture, data and evaluation must answer that
-question before another model branch or presentation-only revision.
-
-### Completed fit and evaluator admission
-
-The completed fit reports 18.567853 GiB peak allocated VRAM and 75,209.326 seconds
-of cumulative training execution, including the preserved earlier failed child.
-The final tensors and Adam moments are finite; all 85 trainable tensors changed.
-These execution checks do not establish complete language or efficiency.
-
-The first evaluator failed at the unchanged 48-GiB host-RAM entry requirement,
-with zero output streams. Preserve that status, console and controller journal.
-Its 6.520045-second child cost counts toward the candidate evaluation ceiling.
-Use the [recovery launcher](../scripts/recover_visual_continuation_evaluation.py)
-for a single serial attempt after admission. It adds 2 GiB of prelaunch headroom,
-keeps the original evaluator's 48-GiB guard, preserves the GPU/pressure/mutex
-checks and tightens each cumulative child budget with a cleanup margin. Record
-resource-queue time separately; it is not model throughput. A failed new child
-requires evidence preservation before another retry. No training, model, data,
-generation cap, scoring threshold or historical-form objective changes.
+The immediate model work follows the
+[failure decision](../references/visual_continuation_failure_decision.md).
+Use the completed trajectories and existing constraints to select a new
+failure-specific mechanism; its prediction, control, full-language test and
+resource ceiling must be registered before execution. The earlier clean-history
+physical comparison applies to its earlier actor, not this newly trained final
+checkpoint. Do not repeat an identical completed comparison or treat clean
+reconstruction as autonomous language. Keep the full objective active.
 
 ## Training and evaluation contract
 

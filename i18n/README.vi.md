@@ -32,11 +32,15 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
-Cập nhật ngày 12 tháng 11 năm 2026: đã bắt đầu huấn luyện trên toàn bộ tập dữ liệu gồm 13.766 chuỗi trong ba lượt, với 41.298 bước cập nhật và 6.108.741 vị trí hình chữ mục tiêu theo kế hoạch. Cả hai bố cục đầu vào và toàn bộ chuỗi đích của câu trả lời, đoạn sách đều được giữ lại. Kiểm tra sơ bộ 36 lớp đã đạt, dùng tối đa 18.123 GiB VRAM. Huấn luyện và đánh giá ngôn ngữ chưa hoàn tất; ILM có thể sử dụng vẫn chưa được chứng minh. Các kết quả bên dưới thuộc những thí nghiệm trước đây.
+## Kết quả mới nhất: hoàn tất thử nghiệm, chưa đạt tiêu chí ngôn ngữ
 
-Lần chạy đầu dừng do trùng tên trường trong nhật ký; sau khi sửa, thí nghiệm được khởi động lại với cùng dữ liệu và lịch huấn luyện.
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+Thử nghiệm chuỗi đầy đủ đã xử lý **13,766 chuỗi, 41,298 lượt cập nhật và 6,108,741 vị trí chữ đích**. Toàn bộ **732 ảnh đầu ra** được xem trước khi chấm theo đáp án tham chiếu. Với đầu vào dàn chữ theo tỷ lệ, mô hình cuối đạt **7/32 câu trả lời hoàn chỉnh khớp nghiêm ngặt, 0/16 cặp đúng cả hai câu hỏi, 14/32 câu trả lời đọc được và 0/12 phần viết tiếp sách dài vừa mạch lạc vừa hoàn chỉnh**. Cả tiêu chí đăng ký trước và kiểm toán độc lập bốn đối chứng xóa câu hỏi/đoạn văn đều không đạt.
+
+Huấn luyện dùng một RTX 4090 với VRAM cấp phát đỉnh **18.568 GiB**. Toàn bộ mô hình triển khai có **7,578,390,003 tham số**, gồm trọng số nền tảng kế thừa; lần huấn luyện này cập nhật **20,212,225 tham số**. Đây là tập phát triển được dùng lại, do một mô hình đánh giá, chưa có người đánh giá độc lập. ILM nhẹ có thể sử dụng và lợi thế hiệu quả ở cùng chất lượng vẫn chưa được chứng minh.
+
+[Kết quả đầy đủ](../references/visual_continuation_learning_result.md) · [Mục tiêu kỹ thuật](../docs/first-imagized-language-model-goal.md) · [Quy trình cố định](../references/visual_continuation_full_protocol.md)
 
 ## Kết quả V35 trước đây
 

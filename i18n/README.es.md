@@ -32,11 +32,15 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
-Actualización del 12 de noviembre de 2026: comenzó el entrenamiento con el corpus completo de 13.766 secuencias durante tres pasadas, con 41.298 actualizaciones y 6.108.741 posiciones de glifos objetivo previstas. Se conservan ambos diseños de entrada y las secuencias objetivo completas de las respuestas y los pasajes de libros. La prueba real de las 36 capas se superó con un pico de 18.123 GiB de VRAM. El entrenamiento y la evaluación lingüística siguen incompletos; todavía no se ha demostrado un ILM utilizable. Los resultados siguientes corresponden a experimentos anteriores.
+## Resultado más reciente: ensayo completo terminado, criterios lingüísticos no superados
 
-La primera ejecución se detuvo por un conflicto de nombres en el registro; tras corregirlo, el experimento se reinició con los mismos datos y el mismo calendario.
+2026-11-13
 
-[Latest verified results](../references/visual_continuation_preflight_result.md) · [Engineering goal](../docs/first-imagized-language-model-goal.md) · [Training protocol](../references/visual_continuation_full_protocol.md) · [Registration](../references/evidence/visual_continuation_full_logger_recovery_registration_20261112.json)
+El ensayo con secuencias completas abarca **13,766 secuencias, 41,298 actualizaciones y 6,108,741 posiciones de glifos objetivo**. Se revisaron las **732 imágenes de salida** antes de puntuarlas con respuestas de referencia. Con entradas de composición proporcional, el modelo final logra **7/32 respuestas completas estrictamente exactas, 0/16 pares con ambas preguntas correctas, 14/32 respuestas legibles y 0/12 continuaciones largas de libros coherentes y completas**. No supera los criterios prerregistrados ni la auditoría independiente de los cuatro controles de borrado de pregunta o pasaje.
+
+El entrenamiento utiliza una RTX 4090, con un máximo de **18.568 GiB** de VRAM asignada. El modelo desplegado completo tiene **7,578,390,003 parámetros**, incluidos los pesos de base heredados; aquí se actualizan **20,212,225** parámetros. Se reutiliza un conjunto de desarrollo, revisado por un solo modelo evaluador, sin arbitraje humano independiente. Un ILM ligero utilizable y una ventaja de eficiencia a igual calidad siguen sin demostrarse.
+
+[Resultado completo](../references/visual_continuation_learning_result.md) · [Objetivo técnico](../docs/first-imagized-language-model-goal.md) · [Protocolo fijo](../references/visual_continuation_full_protocol.md)
 
 ## Resultados anteriores de V35
 

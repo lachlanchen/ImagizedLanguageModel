@@ -14,44 +14,36 @@ work unit. Use the goal for current acceptance criteria and the private handoff
 for verified live ownership. Historical result files are evidence, not current
 scheduling instructions.
 
-The compact fits, writer comparisons, native-reader diagnosis, correct-image-
-history comparison and latest realized-writer publication are complete. The
-usable-language goal remains unachieved. Both correct-history physical gates
-fail; reference history does not qualify autonomous language. The next direction
-is complete-sequence training and evaluation of the continuation-only model.
-The real all 36-layer preflight passes at 18.123 GiB with complete 513-glyph targets,
-bit-exact frozen prompt memory and independently checked four-step optimizer.
-Read `references/visual_continuation_preflight_result.md`. Do not repeat the
-completed preflight or reuse its four updates for the full fit. Prepare and
-register the substantial-corpus comparison before training, with complete QA
-and book targets, both layouts, fixed snapshots and original language controls.
-The full pipeline is implemented; indexing has authenticated 13,766 eligible
-sequences and 2,036,247 target positions per epoch. Natural rendering and
-registration are complete. The first execution failed on a duplicate logging
-field after one unsaved update; its evidence is preserved. The recovery run
-`artifacts/visual_continuation_full_logger_recovery_v2` has completed all 41,298
-updates. Its original controller and training worker are terminal. Evaluation
-failed before any output at the unchanged 48-GiB host-RAM entry guard.
-Read `references/visual_continuation_completion_result.md`. The CPU completion
-audit verifies the entire ledger, all five snapshots and all 85 final Adam
-counters. Do not repeat that audit or restart training. A single lightweight
-evaluation-recovery launcher may wait for resource admission, then run the
-unchanged candidate and parent evaluators serially; use the private handoff for
-its actual PID/start/boot identity and tmux name. Preserve the original failed
-admission receipt and count all child-attempt costs. Never lower admission or
-stop foreign services to launch evaluation. Do not start the obsolete default
-run. Read the recovery record and
-`references/visual_continuation_full_protocol.md`; its three epochs,
-five snapshots, 732 output streams and final pilot are fixed before training.
-The real first-six-update resume check and independent 85-state/initialization
-audit pass; retain their evidence rather than repeating them. Do not rerun indexing or launch
-another worker merely because an observation handle has expired.
-After original complete review/scoring, require the independent four-arm
-QA-erasure audit in `scripts/audit_visual_continuation_protocol.py` before a
-pilot-pass claim. Read `references/visual_continuation_protocol_audit.md`;
-the bound scorer and live training/evaluation sources remain unchanged.
-Preserve the failed mixtures, first-function transfer and writer-only controls.
-Do not prioritize manuscript polish over the unresolved model failure.
+The full continuation-only trial is complete: 13,766 sequences, 41,298 updates,
+6,108,741 scheduled target positions and all 732 prescribed output streams.
+All 183 opaque boards and 96 visible normal-book prefixes have actual review
+receipts; readings were frozen before new mapping/reference scoring. The final
+model gives 7/32 strict proportional answers, 0/16 both-correct pairs, 14/32
+readable answers and no credited coherent complete long-book continuation.
+Both the original scorer and independent four-QA-erasure audit reject the pilot.
+Read `references/visual_continuation_learning_result.md` and
+`references/visual_continuation_failure_decision.md` before further model work.
+
+Training, generation, review and optimizer/source audits are terminal. Do not
+restart them, launch obsolete evaluator recovery, or repeat unchanged earlier
+native-reader, writer or correct-history diagnoses. Preserve all failures,
+fixed checkpoints, original scores and uncertain readings. No source weights,
+reference answers or images may be used to repair frozen transcriptions.
+
+The next intervention is not selected or registered. Use newly frozen complete
+trajectories to distinguish initial writing, later collapse, question/passage
+use and stopping. A new neural diagnostic must name a changed checkpoint or
+unresolved contrast and its decision value. Register one bounded intervention
+and an unchanged control before another fit. More unchanged epochs, selecting
+an intermediate checkpoint or relaxing acceptance rules do not address the
+failed final pilot. The whole deployed model is 7,578,390,003 parameters;
+20,212,225 trainables do not establish a lightweight foundation.
+
+Update the Nature-style manuscript and native figures from the completed
+checkpoint results. Existing PDFs predate this measurement; preserve their
+baselines and label their status accurately. Model failure resolution retains
+priority over presentation-only work. Use the private handoff for current
+ownership and resources; no model worker is live after this completed trial.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and
