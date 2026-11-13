@@ -37,14 +37,23 @@ whole deployed parameters do not establish the desired compact model.
   and [failure decision](../references/visual_continuation_failure_decision.md)
   as the current evidence. Do not repeat the completed fit, generation, opaque
   review, optimizer audit or unchanged earlier diagnoses.
-- The next model intervention is selected in the
-  [joint-writer decision](../references/continuation_joint_writer_decision.md).
-  Preserve the final visual reader/context/feedback/stop path and replace the
-  marginal point writer with a conditional joint distribution over physical
-  pixels. Its 2,642,368-parameter component has support/causality/cache/gradient
-  tests but no trained language result. Its [full-corpus comparison](../references/continuation_joint_writer_protocol.md)
-  is now registered; use the [execution guide](joint-glyph-writer-training.md)
-  and private handoff for the single current owner.
+- The [joint-writer comparison](../references/joint_writer_physical_result.md)
+  is complete: all 41,298 updates, independent audit, 124 conditional cases,
+  33 opaque boards and 2,080 frozen candidate/control readings. The new head
+  gives 970/1,040 clear nonblank forms versus the point control's 599/1,040,
+  but development books 91/108 and training-fixed QA 90/101 fail the unchanged
+  90% per-group prerequisite. Stop this actor before autonomous evaluation;
+  its complete language is unmeasured. Preserve the fixed reader/context/
+  feedback/stop path, all snapshots and original verdict. Its 2,642,368 new
+  parameters do not establish a small whole model.
+- The next [probability diagnosis](../references/joint_writer_blank_density_protocol.md)
+  addresses an observed new failure: all seventeen uncredited selected
+  development-book forms are empty. Score the fitted density on source,
+  empty and saved images across all 124 complete cached cases before assuming
+  that a decoding change or another fit helps. Four selected book source images
+  are themselves empty; keep whitespace separate without revising the gate.
+  Register and commit/push before new neural computation. Do not restart the
+  completed trial or launch its blocked 708-stream autonomous evaluation.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -200,9 +209,12 @@ work; do not restart the completed continuation recipe or evaluator recovery.
 
 The immediate model work follows the
 [failure decision](../references/visual_continuation_failure_decision.md).
-Execute the registered joint-writer comparison from the final frozen reader,
-with complete sources, sequence-weighted likelihood, unchanged control and
-full-language criteria. The completed initial/final clean-history comparison
+The joint-writer comparison from the final frozen reader is now also complete
+and fails its physical prerequisite, despite improved conditional forms. Use
+its frozen result and the bounded empty-image probability diagnosis for the
+next decision; no complete-language result is available for that actor. Keep
+complete sources, unchanged controls and all full-language criteria. The
+completed initial/final clean-history comparison
 applies to this actual final reader; the older diagnosis remains a different
 actor. Do not repeat either study or treat supplied-history reconstruction as
 autonomous language. Keep the full objective active.

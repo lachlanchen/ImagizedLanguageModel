@@ -30,25 +30,31 @@ native-reader, writer or correct-history diagnoses. Preserve all failures,
 fixed checkpoints, original scores and uncertain readings. No source weights,
 reference answers or images may be used to repair frozen transcriptions.
 
-The next intervention is selected in `references/continuation_joint_writer_decision.md`:
-replace the final model's marginal writer with a conditional joint physical-pixel
-writer, preserving its reader, context, feedback encoder and stop head. The new
-component is untrained; its full-corpus comparison is now registered in
-`references/evidence/continuation_joint_writer_registration_20261113.json`.
-Use `docs/joint-glyph-writer-training.md` and the private handoff to observe the
-single serial cache/fit/audit/qualification pipeline. Do not duplicate its owner
-or change bound sources during execution. More unchanged epochs, selecting
-an intermediate checkpoint or relaxing acceptance rules do not address the
-failed final pilot. The whole deployed model is 7,578,390,003 parameters;
-20,212,225 trainables do not establish a lightweight foundation.
+The joint physical-pixel writer is now trained and terminal. Read
+`references/joint_writer_physical_result.md`: all41,298 retained updates,
+independent source/optimizer audit,124 qualifications,33 opaque boards and2,080
+frozen readings are complete. Candidate readability improves to970/1,040 versus
+599/1,040, but development books91/108 and training-fixed QA90/101 miss the
+unchanged90% per-group prerequisite. Do not resume this fit, repair readings,
+select an intermediate head, relax the gate or launch its708 autonomous streams.
+Its complete language remains unmeasured. All17 uncredited selected development
+book outputs are empty; four source positions in that group are also empty.
+The next bounded question is in `references/joint_writer_blank_density_protocol.md`:
+score the fitted source/empty/saved-image probabilities on all124 complete cached
+cases before assuming search or more training will repair the failure. Register
+and commit/push before new neural work; preserve the original45 bound sources.
+Use the private handoff for current ownership. The old point system's whole
+7,578,390,003 parameters and the joint head's2,642,368 trainables do not establish
+a lightweight foundation; whole-system costs remain required.
 
 The saved-trajectory and initial/final clean-history studies are complete; read
 `references/visual_continuation_trajectory_result.md` and
 `references/continuation_clean_history_result.md`. Both long cache checks pass.
 Final proportional development QA reaches F1 .95 on 656/713 later supplied-history
 positions; sampled training books reach it on only about 9%. No autonomous score
-changes. Do not repeat these completed controls. Use their evidence to prepare
-the selected full-corpus comparison, with resource admission and live ownership.
+changes. Do not repeat these completed controls or the completed joint fit.
+Use their evidence for failure-specific decisions, with resource admission and
+live ownership.
 
 Update the Nature-style manuscript and native figures from the completed
 checkpoint results. Existing PDFs predate this measurement; preserve their

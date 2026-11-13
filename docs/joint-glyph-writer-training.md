@@ -1,5 +1,12 @@
 # Full-corpus joint glyph writer
 
+**Current result:** the fit, independent audit and all 124 qualifications are
+complete. All 33 boards and 2,080 forms were reviewed and sealed before unmasking.
+The [physical gate fails](../references/joint_writer_physical_result.md) in two
+groups. Do not resume this run or launch its autonomous evaluator. The commands
+below document its reproducible recipe; current work follows the separate
+[empty-image diagnosis](../references/joint_writer_blank_density_protocol.md).
+
 This comparison replaces the final continuation model's point image writer with
 a normalized joint distribution over all 1,024 physical pixels. It preserves
 the trained reader, continuation dynamics, query, image feedback and stop head.

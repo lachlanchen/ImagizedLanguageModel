@@ -1,5 +1,13 @@
 # Next intervention: a conditional distribution over complete glyph pixels
 
+**Completed outcome:** the replacement is trained and its full physical review
+is sealed. It improves readability but fails two of seven candidate groups;
+see the [complete result](joint_writer_physical_result.md). This actor is terminal
+and has no autonomous language result. The next bounded measurement is the
+[empty-image probability diagnosis](joint_writer_blank_density_protocol.md),
+not another unchanged fit or a relaxed gate. The design rationale below is
+preserved as the original prospective decision.
+
 The completed initial/final clean-history control separates the current failure.
 Final proportional development QA reaches F1 .95 on 656/713 later supplied-history
 positions, but mean first-image F1 is .6942 and autonomous complete language still

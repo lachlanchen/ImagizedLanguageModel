@@ -231,3 +231,24 @@ earlier figures/receipts and 45 registered model sources remain unchanged.
 No further presentation-only work is required before the original model
 pipeline finishes; its physical review and complete-language decision remain
 the next experimental actions.
+
+## Completed joint-writer result and empty-image diagnosis
+
+The pipeline and all physical review are now complete. The next bounded article
+revision also includes `references/joint_writer_physical_result.md` and its
+source-bound aggregate. Add a measured joint-writer Results subsection and a
+native editable Figure25 comparing all seven candidate/control group fractions
+with the original90% line. Preserve the original failed verdict, all33 reviewed
+boards and source pixels; show the empty-image failure without replacing it with
+decorative generated text. Report training/audit/costs and physical results
+separately from the unexecuted autonomous comparison. Update the prospective
+joint methods' status and abstract/Discussion accordingly, preserving all six
+equations and established-factorization attribution.
+
+The small probability diagnosis is a failure-specific measurement of the fitted
+head, not a new fit or language result. Do not assign it an outcome before actual
+execution. Incorporate its result only once complete. The full reading/review/
+redline builds, native figure exports and versioned local delivery remain required
+after resource admission. Existing PDFs and baseline hashes remain preserved;
+they must not be described as containing this newer measurement before the
+compiled changed pages are actually verified.
