@@ -1,0 +1,31 @@
+{
+  "schema": "continuation-clean-history-launch-recovery-v1",
+  "original_registration_sha256": "54d57aed1bb2a1c03be4342699e2cde51a80b3f346265ad97dc94b1f459f929b",
+  "prior_terminal_sha256": "d924b30b5359526c608739bfd11eb6254cb582d9152014d1fc559c6bc893fc56",
+  "prior_terminal": {
+    "phase": "failed",
+    "pid": 1933447,
+    "start_ticks": "586261981",
+    "boot_id": "5bb12404-85b6-4406-986b-f462d804b3a0",
+    "elapsed_seconds": 0.3406791631132364,
+    "position": {},
+    "error": "RuntimeError('set deterministic CUBLAS workspace')"
+  },
+  "original_worker_confirmed_absent": true,
+  "new_model_calls_before_failure": 0,
+  "optimizer_updates": 0,
+  "whole_failed_process_elapsed_seconds": null,
+  "measured_stage_seconds": 0.3406791631132364,
+  "failure": "Required CUBLAS_WORKSPACE_CONFIG was missing; numerics check rejected launch before build_actor.",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "OMP_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "PYTHONPATH": "."
+  },
+  "model_source_or_checkpoints_changed": false,
+  "cases_or_thresholds_changed": false,
+  "maximum_successor_seconds": 1800,
+  "automatic_retry": false
+}
