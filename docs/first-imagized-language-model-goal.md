@@ -42,7 +42,9 @@ whole deployed parameters do not establish the desired compact model.
   Preserve the final visual reader/context/feedback/stop path and replace the
   marginal point writer with a conditional joint distribution over physical
   pixels. Its 2,642,368-parameter component has support/causality/cache/gradient
-  tests but no trained language result. Full-corpus fitting is not yet registered.
+  tests but no trained language result. Its [full-corpus comparison](../references/continuation_joint_writer_protocol.md)
+  is now registered; use the [execution guide](joint-glyph-writer-training.md)
+  and private handoff for the single current owner.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -192,17 +194,18 @@ training child execution is 75,209.326 seconds at 18.568 GiB peak allocated VRAM
 Candidate evaluation costs 6,338.799 cumulative child seconds and parent long-book
 evaluation 609.626 seconds, preserving failed attempts. Preparation, admission
 queues, CPU/review work and inherited pretraining are separate. These values
-show one-GPU execution, not matched-quality efficiency over an LLM. No model job
-is live and no retraining or evaluator recovery is pending.
+show one-GPU execution, not matched-quality efficiency over an LLM. Those old
+jobs remain terminal. The separate registered joint-writer pipeline is current
+work; do not restart the completed continuation recipe or evaluator recovery.
 
 The immediate model work follows the
 [failure decision](../references/visual_continuation_failure_decision.md).
-Use the completed trajectories and existing constraints to select a new
-failure-specific mechanism; its prediction, control, full-language test and
-resource ceiling must be registered before execution. The earlier clean-history
-physical comparison applies to its earlier actor, not this newly trained final
-checkpoint. Do not repeat an identical completed comparison or treat clean
-reconstruction as autonomous language. Keep the full objective active.
+Execute the registered joint-writer comparison from the final frozen reader,
+with complete sources, sequence-weighted likelihood, unchanged control and
+full-language criteria. The completed initial/final clean-history comparison
+applies to this actual final reader; the older diagnosis remains a different
+actor. Do not repeat either study or treat supplied-history reconstruction as
+autonomous language. Keep the full objective active.
 
 ## Training and evaluation contract
 

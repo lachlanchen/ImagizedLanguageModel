@@ -33,9 +33,11 @@ reference answers or images may be used to repair frozen transcriptions.
 The next intervention is selected in `references/continuation_joint_writer_decision.md`:
 replace the final model's marginal writer with a conditional joint physical-pixel
 writer, preserving its reader, context, feedback encoder and stop head. The new
-component has CPU tests but is untrained; the full fit is not registered. Register
-one bounded intervention
-and an unchanged control before another fit. More unchanged epochs, selecting
+component is untrained; its full-corpus comparison is now registered in
+`references/evidence/continuation_joint_writer_registration_20261113.json`.
+Use `docs/joint-glyph-writer-training.md` and the private handoff to observe the
+single serial cache/fit/audit/qualification pipeline. Do not duplicate its owner
+or change bound sources during execution. More unchanged epochs, selecting
 an intermediate checkpoint or relaxing acceptance rules do not address the
 failed final pilot. The whole deployed model is 7,578,390,003 parameters;
 20,212,225 trainables do not establish a lightweight foundation.
@@ -52,7 +54,8 @@ Update the Nature-style manuscript and native figures from the completed
 checkpoint results. Existing PDFs predate this measurement; preserve their
 baselines and label their status accurately. Model failure resolution retains
 priority over presentation-only work. Use the private handoff for current
-ownership and resources; no model worker is live after this completed trial.
+ownership and resources. The old trial is terminal; current joint-writer runtime
+ownership belongs only in the private handoff.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and
