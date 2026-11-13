@@ -1,0 +1,42 @@
+{
+  "schema": "joint-context-preflight-sigterm-recovery-v1",
+  "recorded_unix": 1794584533.7979913,
+  "original_registration_sha256": "10e96c1982f252c603adf239ebae6a162fda49a8cd80895d0489f0a922377d81",
+  "original_worker": {
+    "pid": 1951199,
+    "start_ticks": "591411727",
+    "tool_exit_code": 143,
+    "phase": "admitting",
+    "completed_cases": 0
+  },
+  "original_signal_sender": "unknown",
+  "oom_event_recorded": false,
+  "driver_library_mismatch_observed": {
+    "userspace": "595.99.02",
+    "loaded_kernel": "595.84",
+    "causal_link_to_sigterm_unproved": true
+  },
+  "preserved_manifest_sha256": "b60c81cf470b5574ae1d691742d0ab29b081fc33bca55d9503893c9427e4b342",
+  "original_model_sources_unchanged": 50,
+  "model_data_initialization_tolerances_and_caps_unchanged": true,
+  "prior_wall_seconds_debit_upper_bound": 155,
+  "prior_pressure_wait_seconds_debit": 0,
+  "remaining_wall_seconds_at_recovery_entry_maximum": 1645,
+  "original_wall_limit_seconds": 1800,
+  "original_pressure_limit_seconds": 300,
+  "original_peak_allocated_vram_gib": null,
+  "original_peak_unmeasured": true,
+  "recovery_source": "scripts/recover_joint_context_preflight.py",
+  "recovery_source_sha256": "f3203aab67654ebbd0a65c8a924b9ce9586db6647badc907e3425b8ab321be50",
+  "external_program_sha256": {
+    "compatibility_wrapper": "8d5071b6f32c1eee301bd0f3850b4e381e82278aed16edd00a7cc842e0d09528",
+    "strace": "28f957c227012de0b18d1bd7fff2d396cb693ea60ed8013be68de071e84b5001",
+    "cuda_driver": "c147185c80a0270d635db626537fc9223b2ad1764f86cb12fd116d26e08b175d",
+    "nvml": "6d8a58eb15a1c2e6067ec977e9de57b42a3d632b4073818ab648370fecfc82b1"
+  },
+  "recovery_launch": "one explicit durable tmux launch, existing NVIDIA compatibility wrapper, strace signals only",
+  "system_libraries_services_and_other_GPU_unchanged": true,
+  "automatic_retry": false,
+  "recovery_started": false,
+  "language_quality_unmeasured": true
+}
