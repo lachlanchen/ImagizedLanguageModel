@@ -95,6 +95,15 @@ The first frozen review and verdict are never overwritten. A failed physical
 gate stops this replacement; a pass still requires the complete autonomous
 comparison and does not establish a usable language model.
 
+The [autonomous execution guide](../references/joint_writer_language_execution.md)
+provides the complete 708-stream plan and the evaluator for the existing
+image-feedback generator with the new joint bridge. Its read-only `plan` action
+is available during training. Registration and generation require the completed
+fit and sealed passing physical review; they do not launch early or change the
+running pipeline. Bind and commit the actual five fitted snapshots before
+generation. GPU integration and complete language quality remain unmeasured
+until execution and output review finish.
+
 All arrays, private logs and weights remain ignored under `artifacts/`. Public
 summaries must report cache/fit/qualification costs as well as the inherited
 body and earlier preparation. Keep the full independent image-input/image-output
