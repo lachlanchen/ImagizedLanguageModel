@@ -39,6 +39,13 @@ an intermediate checkpoint or relaxing acceptance rules do not address the
 failed final pilot. The whole deployed model is 7,578,390,003 parameters;
 20,212,225 trainables do not establish a lightweight foundation.
 
+The CPU saved-trajectory study is complete; read
+`references/visual_continuation_trajectory_result.md`. The next bounded neural
+control is specified in `references/continuation_clean_history_protocol.md`:
+initial/final full-trial checkpoints, correct preceding images and long
+parallel/incremental agreement. It does not retrain or regrade autonomous answers.
+Respect its committed registration and inspect live ownership before execution.
+
 Update the Nature-style manuscript and native figures from the completed
 checkpoint results. Existing PDFs predate this measurement; preserve their
 baselines and label their status accurately. Model failure resolution retains

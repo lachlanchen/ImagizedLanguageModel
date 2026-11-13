@@ -25,6 +25,16 @@ do not repeat their already completed measurements under unchanged conditions.
 Any new neural diagnostic must identify the changed checkpoint or new contrast,
 its expected decision value, fixed cases and resource ceiling before execution.
 
+The [saved-trajectory analysis](visual_continuation_trajectory_result.md) is now
+complete. Final long-book writing is predominantly dense and close to the
+context-independent balanced-loss template, while first states and images still
+change across all available question/erasure contrasts. This narrows the observed
+failure without isolating its cause. The next measurement is the
+[clean-history control](continuation_clean_history_protocol.md) at the actual
+initial and final full-trial checkpoints, including a long cache-agreement check.
+Its training/development split distinguishes conditional fitting from
+generalization and autonomous-history failure before selecting another fit.
+
 A candidate ordered-block representation remains a hypothesis. Preserving order
 in a shorter visual volume is established only for the invertible CPU operator;
 it has not demonstrated compression, faster language learning or meaningful

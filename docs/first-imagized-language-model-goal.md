@@ -41,6 +41,15 @@ whole deployed parameters do not establish the desired compact model.
   writing failures, later collapse, question/passage use and stopping from the
   newly frozen trajectories. A new diagnostic must name a changed checkpoint
   or unresolved contrast and explain how either outcome changes the intervention.
+- The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
+  is complete. Final normal long-book outputs have 98.12% of tiles above clean
+  book ink's 99th percentile, with dense writing visible from the beginning.
+  All 416 first-step contrasts change state; this does not establish language
+  understanding. The next fixed measurement is the
+  [initial/final clean-history control](../references/continuation_clean_history_protocol.md),
+  including full-length parallel/incremental agreement. This is a changed-checkpoint
+  contrast, not a repeat of the old actor's completed diagnosis. No new fit follows
+  until that distinction informs a bounded intervention.
 - Register one bounded change and an unchanged control before another fit.
   Preserve the full corpus, complete answers, paired questions, erasures, long
   books, earlier successes and whole-model resource accounting. More unchanged
