@@ -261,3 +261,73 @@ the joint likelihood is the next controlled intervention. Its state-gradient
 algorithm passes an independent unsplit-autograd check; it has no real-source
 GPU preflight or fitted language result yet. Keep these statuses explicit when
 updating the six joint-method equations, abstract and Figure25.
+
+## Figure25 execution and denominator correction
+
+The real-source context-gradient preflight has now passed and its full fit is
+running under the single owner in the private handoff. Preserve all59 registered
+sources and do not launch a competing model or heavy publication build. This
+unit may prepare the measured Figure25 data, one native PowerPoint slide and a
+rendered preview using bounded CPU work, plus its caption and completed-result
+text. Full Office export, article activation, cumulative redlines and local
+delivery remain a separate serial build after resource admission.
+
+The new figure uses the completed head-only trial, not interim samples from
+the running model. Show every candidate/control group and the original90%
+threshold, with exact numerator/denominator labels. Include all17 selected blank
+development-book outputs with their actual source pixels, grouped in source
+order; do not select only representative successes. The physical grades stay
+frozen. Add the measured complete-image probability diagnosis, with its finite
+precision limitation and no autonomous language score.
+
+An independent array recount finds14 selected false blanks, matching the public
+probability JSON. Earlier prose incorrectly inferred13 by subtracting all four
+blank source images from17 blank outputs. Only three source blanks overlap
+blank outputs; one blank source has a nonblank output. Correct only the unbound
+summary prose to1/14 and record this descriptive correction explicitly. Keep
+the original JSON, registration, source images, readings, scores, minimum seven
+source-preferred cases and failed verdict unchanged. No regrading is permitted.
+
+Verify native chart caches and literal workbook cells against the bound source
+counts, threshold series and all17 embedded source/output rasters. Reimport the
+finalized PPTX and inspect the complete slide at full size. Preserve previous
+figures and PDFs. A preview does not establish Office compatibility or article
+activation. No model call, new optimization, source correction or language
+claim is part of this figure revision.
+
+The extractor's first assertion exposed a second descriptive error: the frozen
+book review's17uncredited outputs and17pixel-empty outputs are not the same set.
+A new audit of all2080images finds17blank-flag disagreements, including4empty
+images credited by the original review (3candidate,1control). In the development
+book group,15of17uncredited outputs are empty,2nonempty;2other empty images were
+credited. Expand the bounded revision to a source-bound CPU-only blank-flag
+audit and its public explanation. Preserve the failed extractor privately.
+Do not alter any original reading, uncertainty flag, grade, JSON result or
+registration. Label chart values as original frozen review credits and disclose
+these detected errors. Include every uncredited book output, including its two
+nonempty images. The old failed gate and current registered fit are unchanged.
+
+A small CPU-only standalone compilation of the completed joint Results, new
+caption and Figure25 PNG is also in scope. Use the existing reading style;
+retain48GiBavailablehostRAM, two threads, a180second wall ceiling and at most
+2GiBchildRSS. Inspect every compiled page and check references/overfull boxes.
+This validates the staged sources and figure layout only. It does not activate
+the article, export through Office, replace a baseline or imply a new model
+result. Record its PDF/source/log/raster hashes separately from full publication.
+
+Figure25 is now complete as a finalized native PPTX and reviewed reimport PNG.
+It contains two native charts, two literal workbooks, one exact-count table and
+51original sample images; the independent verifier matches every embedded raster
+and chart/workbook value, including the native90%line. Candidate labels were
+placed inside bars away from that line, and empty samples retain visible frames.
+The final slide and lower diagnostic panel are actually inspected. No Office
+application or vector-PDF export is claimed.
+
+Both pages of the standalone Results/caption/figure check are actually viewed.
+References resolve, columns balance and no overfull box remains. The complete
+figure RGB pixels in the PDF match the promoted PNG exactly. The public receipt
+is `publication/ilm-nature/evidence/joint_writer_reviewed_native_figure.json`.
+The first failed data assertion, literal-workbook precision failure and earlier
+layout variants are preserved privately. All59active model sources and the
+existing article/review/redline PDFs remain unchanged. Active article integration,
+Office export, full builds and versioned local delivery remain pending.

@@ -33,15 +33,18 @@ reference answers or images may be used to repair frozen transcriptions.
 The joint physical-pixel writer is now trained and terminal. Read
 `references/joint_writer_physical_result.md`: all41,298 retained updates,
 independent source/optimizer audit,124 qualifications,33 opaque boards and2,080
-frozen readings are complete. Candidate readability improves to970/1,040 versus
+frozen readings are complete. Original frozen credits are970/1,040 versus
 599/1,040, but development books91/108 and training-fixed QA90/101 miss the
 unchanged90% per-group prerequisite. Do not resume this fit, repair readings,
 select an intermediate head, relax the gate or launch its708 autonomous streams.
-Its complete language remains unmeasured. All17 uncredited selected development
-book outputs are empty; four source positions in that group are also empty.
+Its complete language remains unmeasured. A later pixel/blank-flag audit finds
+15of17 uncredited selected development-book outputs empty, two nonempty, and
+two other empty book outputs credited. Across2080readings,17blank flags disagree
+with pixels and4emptyimageswerecredited. Preserve original readings/grades and
+disclose these review errors; see `references/joint_writer_blank_flag_audit.md`.
 The probability diagnosis is also complete; read
 `references/joint_writer_blank_density_result.md`. All124 cases/12,597positions
-are scored without optimization or new generation. Only1/13selected devbook
+are scored without optimization or new generation. Only1/14selected devbook
 falseblanks and no selected trainfixedQA falseblank prefer the source image;
 the search-only criterion fails. No blank-prefix argmax inconsistency is found.
 The next intervention is selected in `references/joint_writer_context_learning_decision.md`:

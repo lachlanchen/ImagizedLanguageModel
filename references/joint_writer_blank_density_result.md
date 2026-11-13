@@ -27,12 +27,18 @@ is inconclusive. A source image is a diagnostic comparison, not a runtime
 candidate or a repair for an answer.
 
 Across all positions, only 16/349 false blanks prefer the source image. Across
-the selected physical-review positions, only one of thirteen development-book
+the selected physical-review positions, only one of fourteen development-book
 false blanks and no training-fixed-QA false blank prefer their source. The
 prospective search-only criterion requires seven and one, respectively, and
 fails. All saved empty outputs agree with parallel zero-history argmax checks.
 A better search might change some outputs, but these observations do not
 justify treating search alone as the next repair.
+
+The public probability arrays and JSON contain fourteen selected development-book
+false blanks. An earlier prose denominator of thirteen was incorrect: three,
+rather than all four, blank source positions coincide with the seventeen blank
+outputs. The minimum-seven criterion, original scores and failed decision are
+unchanged by this descriptive correction.
 
 The script reports 9.369 seconds including its neural imports; its resource
 monitor reports 7.933 seconds, no pressure waiting and 0.094 GiB peak allocated

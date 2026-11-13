@@ -1,16 +1,18 @@
 # Train conditional image likelihood through the continuation state
 
-The [completed joint writer](joint_writer_physical_result.md) improves selected
-conditional readability from 599/1,040 to 970/1,040 forms but fails its fixed
+The [completed joint writer](joint_writer_physical_result.md) increases original
+frozen review credits from 599/1,040 to 970/1,040 forms but fails its fixed
 physical prerequisite. Its 124-case [probability diagnosis](evidence/joint_writer_blank_density_result_20261113.json)
 is also complete. Across all 12,597 supplied-history positions there are 349
 empty outputs whose source images contain ink. Only sixteen prefer their source
 image to the empty image by the fixed 0.001-nat margin. For fifteen of the
 42 development-book false blanks, the first-nonzero prefix bound supports the
 empty image as a global mode of the fitted density. This is numerical evidence,
-not a formal floating-point certificate.
+not a formal floating-point certificate. A later [blank-flag audit](joint_writer_blank_flag_audit.md)
+finds17review errors, including4creditedemptyimages. Original scores remain
+frozen with this limitation; they are not corrected physical accuracy.
 
-Only one of thirteen selected development-book false blanks and none of the
+Only one of fourteen selected development-book false blanks and none of the
 selected training-fixed-QA false blanks prefer the source. The registered
 search-only criterion requires at least seven and one, respectively, and fails.
 There is no disagreement between the saved empty outputs and the parallel

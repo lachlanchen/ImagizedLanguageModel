@@ -40,15 +40,21 @@ whole deployed parameters do not establish the desired compact model.
 - The [joint-writer comparison](../references/joint_writer_physical_result.md)
   is complete: all 41,298 updates, independent audit, 124 conditional cases,
   33 opaque boards and 2,080 frozen candidate/control readings. The new head
-  gives 970/1,040 clear nonblank forms versus the point control's 599/1,040,
+  gives 970/1,040 original frozen credits versus the point control's 599/1,040,
   but development books 91/108 and training-fixed QA 90/101 fail the unchanged
   90% per-group prerequisite. Stop this actor before autonomous evaluation;
-  its complete language is unmeasured. Preserve the fixed reader/context/
+  its complete language is unmeasured. A later [pixel/blank-flag audit](../references/joint_writer_blank_flag_audit.md)
+  finds17review inconsistencies, including4creditedemptyimages; original credits
+  are retained with that limitation and are not corrected physical accuracy.
+  Before claiming a new physical pass, independently verify that every credited
+  output contains ink as well as satisfying the frozen visual review. Preserve
+  contradictory readings and disclose them; an ink check cannot establish language.
+  Preserve the fixed reader/context/
   feedback/stop path, all snapshots and original verdict. Its 2,642,368 new
   parameters do not establish a small whole model.
 - The [probability diagnosis](../references/joint_writer_blank_density_result.md)
   is complete on all 124 cases and 12,597 positions. It finds 349 false blanks;
-  only sixteen prefer their source image. Only one of thirteen selected
+  only sixteen prefer their source image. Only one of fourteen selected
   development-book false blanks and no selected training-fixed-QA false blank
   do so, rejecting the registered search-only decision rule. No blank-prefix
   argmax inconsistency is observed. Four selected book source images are

@@ -15,6 +15,27 @@ and earlier baselines remain available for reproduction.
 
 ## Staged continuation update
 
+The completed head-only joint writer now has a measured
+[Figure 25](figures/Figure_25_joint_writer_physical.png) and
+[editable PowerPoint](figures/Joint_writer_physical_figures.pptx): two native
+charts, an exact-count table and all seventeen uncredited selected book outputs,
+each beside its source and point control. Its
+[data and image verifier](verify_joint_writer_figure.py) checks native chart
+caches, literal workbooks, the unchanged 90% line and all 51 source rasters.
+The [new Results](joint_writer_results.tex) and
+[caption](joint_writer_caption.tex) remain staged for article integration.
+
+The accompanying [pixel/blank-flag audit](../../references/joint_writer_blank_flag_audit.md)
+finds seventeen errors in the original 2,080 frozen readings, including four
+credited empty images. Original scores and failed gates are preserved with that
+limitation. Fourteen selected book false blanks, rather than the earlier prose
+count of thirteen, agree with the existing probability JSON. The audit does not
+repair readings or assign a language score. The subsequent context-gradient
+trial is separately registered and running; its complete-language result remains
+unmeasured. The [Figure 25 receipt](evidence/joint_writer_reviewed_native_figure.json)
+distinguishes finalized-file reimport review from the pending Office export,
+active article/review/redline builds and local delivery.
+
 The complete continuation trial now covers **13,766 sources, 41,298 updates and
 6,108,741 scheduled target positions**. Its final proportional model gives
 **7/32 exact complete answers, 14/32 readable answers and 0/16 correct pairs**.

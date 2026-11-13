@@ -1,8 +1,11 @@
 # Joint image likelihood improves forms but misses the physical prerequisite
 
-The complete joint-writer comparison is finished. It gives 970/1,040 confidently
-readable nonblank selected candidate forms (93.27%), compared with 599/1,040
-(57.60%) for the unchanged point-writer control. Its registered rule requires
+The complete joint-writer comparison is finished. Its original frozen review
+credits 970/1,040 selected candidate forms (93.27%), compared with 599/1,040
+(57.60%) for the unchanged point-writer control. A later pixel/blank-flag audit
+finds seventeen review errors, including four empty images that were credited;
+these original counts are not corrected physical accuracy. See the
+[blank-flag audit](joint_writer_blank_flag_audit.md). Its registered rule requires
 at least 90% in **every** candidate group. Development books and training
 fixed-layout QA fail, so this actor stops before autonomous evaluation. Its
 complete-language quality is **unmeasured**, not zero.
@@ -44,9 +47,11 @@ the small new head does not establish a compact foundation or matched-quality
 efficiency. Earlier reader training and inherited pretraining remain separate.
 
 After sealing the readings, an array inventory identifies the changed failure:
-all seventeen uncredited selected development-book outputs are truly empty,
-whereas the earlier point writer predominantly produced dense forms. Four of
-the 108 selected source images are themselves empty. Neither that fact nor a
+fifteen of seventeen uncredited selected development-book outputs are truly
+empty; two nonempty outputs were marked blank, and two other empty book outputs
+were credited. The earlier point writer predominantly produced dense forms.
+Four of the 108 selected source images are themselves empty, three overlapping
+blank outputs. Neither that fact nor a
 recount excluding whitespace changes the registered failed gate. The candidate
 has no output above 500 ink pixels across all 12,597 supplied-history positions;
 many nonempty images are still incorrect. For example, only 236/1,161 complete
