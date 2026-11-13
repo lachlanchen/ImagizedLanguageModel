@@ -60,6 +60,41 @@ complete-answer comparison still requires the fixed QA, erasures, paired
 questions, book continuations, natural stops, retained successes and untouched
 confirmation. No unexecuted score may be recorded as zero.
 
+Use the [separate opaque-review workflow](../references/joint_writer_physical_review_workflow.md)
+after the coordinator finishes qualification. It freezes a complete set of
+readings and a SHA-bound seal **before** opening owner rows, then independently
+recounts all registered positions and verifies source/page/board pixel identity.
+It leaves the bound trainer and its original registration unchanged. For a
+model review by Codex, prepare the session with:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_joint_writer_physical.py \
+  prepare --reviewer Codex --reviewer-kind model
+```
+
+Use the actual reviewer name and kind. View every complete opaque board, fill
+its corresponding JSON template in `qualify/review/templates/`, and retain all
+uncertain or blank readings. Set `all_outputs_actually_viewed` only after actual
+inspection; leave `owner_mapping_opened` false. Record each completed board with:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_joint_writer_physical.py \
+  record --readings path/to/completed_board_001.json
+```
+
+After every board is recorded, freeze first and score separately:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_joint_writer_physical.py freeze
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/review_joint_writer_physical.py score
+```
+
+Preparation refuses a live or unfinished pipeline. Missing boards, altered
+receipts, changed pixels or omitted candidate groups cannot yield a pass.
+The first frozen review and verdict are never overwritten. A failed physical
+gate stops this replacement; a pass still requires the complete autonomous
+comparison and does not establish a usable language model.
+
 All arrays, private logs and weights remain ignored under `artifacts/`. Public
 summaries must report cache/fit/qualification costs as well as the inherited
 body and earlier preparation. Keep the full independent image-input/image-output

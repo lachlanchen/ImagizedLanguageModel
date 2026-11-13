@@ -19,9 +19,12 @@ history or termination dominates the remaining error.
 
 The next model intervention is selected in the
 [joint-writer decision](continuation_joint_writer_decision.md), with an
-implemented, untrained 2,642,368-parameter physical writer. Its full fit is not
-yet registered. Preserve earlier native-reader, copying and history controls
-as constraints rather than repeating completed measurements.
+implemented 2,642,368-parameter physical writer. Its
+[full-corpus comparison is registered](evidence/continuation_joint_writer_registration_20261113.json);
+use the [execution guide](../docs/joint-glyph-writer-training.md) and private
+handoff for the original serial owner. Its language quality is unmeasured.
+Preserve earlier native-reader, copying and history controls as constraints
+rather than repeating completed measurements.
 
 The [saved-trajectory analysis](visual_continuation_trajectory_result.md) is now
 complete. Final long-book writing is predominantly dense and close to the

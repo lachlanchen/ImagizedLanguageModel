@@ -66,5 +66,11 @@ any development pass. A new writer may first be checked on conditional writing,
 but cannot pass the full goal there. If it produces clean forms without better
 complete answers, reject a writer-only explanation and revisit language-clock
 alignment or state generalization. If clean conditional writing still fails,
-stop this replacement before another unqualified autonomous run. A full
-registration and resource-bounded trainer remain required before fitting.
+stop this replacement before another unqualified autonomous run. The full
+[registration](evidence/continuation_joint_writer_registration_20261113.json)
+and [resource-bounded serial trainer](../docs/joint-glyph-writer-training.md)
+are now implemented. Observe their original owner; do not duplicate the live
+pipeline or change its bound sources. The separate
+[opaque-review workflow](joint_writer_physical_review_workflow.md) freezes
+readings before owner-map access after qualification. No new language result
+follows from registration, execution or a physical-only pass.
