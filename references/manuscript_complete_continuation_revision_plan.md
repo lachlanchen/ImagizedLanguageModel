@@ -18,9 +18,11 @@ Allowed files are the staged continuation-history TeX, their measured-data
 extractor/figure builder where they still claim an ongoing fit, new
 `complete_continuation_{results,methods,caption}.tex`, a new bound extractor and
 native figure builder, and the article's frontmatter, experiment map and scoped
-Discussion. Update build/redline/validation/local-sync helpers only as required
-for those additions. Existing earlier numerical results and figures are outside
-this revision's edit scope.
+Discussion. Update the publication README's staged-evidence section to link the
+new figure and distinguish completed measurements from the unchanged article.
+Update build/redline/validation/local-sync helpers only as required for those
+additions. Existing earlier numerical results and figures are outside this
+revision's edit scope.
 
 Use the complete source-bound public evidence:
 
@@ -29,10 +31,10 @@ Use the complete source-bound public evidence:
 - `references/evidence/visual_continuation_trajectories_20261113.json`: every
   saved trajectory, exact balanced-loss constant-image derivation and first-state
   contrasts. This analysis has no new model calls or new semantic grading.
-- Initial/final clean-history results only after their registered execution and
-  raw pixel assessment finish. Until then, label them unmeasured and omit their
-  numerical curves. Supplied history/length with stopping bypassed cannot be
-  described as autonomous language.
+- `references/evidence/continuation_clean_history_result_20261113.json`: the
+  completed initial/final control, all 248 cases and its raw pixel assessment.
+  Supplied history/length with stopping bypassed cannot be described as
+  autonomous language.
 
 Replace “ongoing/unmeasured complete fit” in the staged material with the actual
 failed final pilot. Report all five checkpoints, the quarter-three peak without
@@ -83,5 +85,16 @@ no overfull boxes or unresolved references. This checks staged source and layout
 not activation in the full article. Its evidence is bound in
 `publication/ilm-nature/evidence/complete_continuation_staged_validation.json`.
 Active TeX inputs, all three article PDFs and Figure23 remain unchanged. Native
-Figure24, Office export, article activation, full/redline builds and local sync
-remain pending. No model worker remains live.
+Figure24 authoring and finalized-file reimport are complete. Promote only its
+new PPTX, reviewed reimport PNG, caption, reproducible source and source-bound
+receipts in this unit. Independently check chart caches, literal embedded
+workbook cells and the native table against the measured data. Keep the
+finalizer's private runtime paths out of public receipts.
+
+The separate registered joint-writer pipeline has a live cache worker. Do not
+edit its bound source, duplicate it or interrupt it for publication. Office
+export, article activation, full/redline builds and local sync remain pending
+until that heavy workload is terminal and resource admission is rechecked.
+The new figure reports only completed point-writer and clean-history results;
+joint-writer quality remains unmeasured. Record actual visual reimport review
+separately from the still-unperformed Office review.

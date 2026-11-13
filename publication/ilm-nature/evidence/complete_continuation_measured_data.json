@@ -1,0 +1,171 @@
+{
+  "schema": "complete-continuation-publication-data-v1",
+  "source_sha256": {
+    "references/evidence/visual_continuation_learning_20261113.json": "94c4f77615372f37da9454be2e6cf810dd87d96143148644d1b8a54697db68de",
+    "references/evidence/visual_continuation_trajectories_20261113.json": "0996f8277eee0e99e42eeaa6cf91434086ee25c0065f53efff32fc2af2ad99ad",
+    "references/evidence/continuation_clean_history_result_20261113.json": "d4f49c5fada27060e6c735b2f0f2eb3729090cd55a6333e87879fb6174d7479f"
+  },
+  "extractor_sha256": "91c9183ff5d88a051a3454d644761a1d02eade77fdd8319fdf4931cc2bde2480",
+  "steps": [
+    0,
+    10324,
+    20649,
+    30973,
+    41298
+  ],
+  "qa_series": {
+    "fixed_cells": {
+      "complete_exact": [
+        0,
+        1,
+        2,
+        2,
+        2
+      ],
+      "readable": [
+        0,
+        1,
+        3,
+        4,
+        4
+      ],
+      "paired_both_correct": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "stopped": [
+        9,
+        4,
+        25,
+        28,
+        24
+      ]
+    },
+    "proportional": {
+      "complete_exact": [
+        4,
+        4,
+        6,
+        9,
+        7
+      ],
+      "readable": [
+        5,
+        8,
+        13,
+        16,
+        14
+      ],
+      "paired_both_correct": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "stopped": [
+        14,
+        19,
+        21,
+        24,
+        23
+      ]
+    }
+  },
+  "final_table": [
+    [
+      "Final outcome",
+      "Fixed cells",
+      "Proportional"
+    ],
+    [
+      "Exact QA /32",
+      "2",
+      "7"
+    ],
+    [
+      "Readable QA /32",
+      "4",
+      "14"
+    ],
+    [
+      "Both correct /16",
+      "1",
+      "0"
+    ],
+    [
+      "Retained exact",
+      "2/2",
+      "6/8"
+    ],
+    [
+      "Coherent books /12",
+      "0",
+      "Not run"
+    ]
+  ],
+  "book_density": [
+    {
+      "step": 0,
+      "glyphs": 2122,
+      "above_clean99": 126,
+      "fraction": 0.05937794533459001
+    },
+    {
+      "step": 41298,
+      "glyphs": 6647,
+      "above_clean99": 6522,
+      "fraction": 0.9811945238453438
+    },
+    {
+      "step": 41298,
+      "history": "supplied",
+      "glyphs": 1161,
+      "fraction": 0.8191214470284238
+    }
+  ],
+  "clean_book_ink_99": 276,
+  "later_proportional_QA": {
+    "positions": 713,
+    "fraction_at_least_095": 0.9200561009817672,
+    "exact": 512
+  },
+  "final_long_book_stops": 8,
+  "final_long_book_cases": 12,
+  "training": {
+    "sequences": 13766,
+    "kinds": {
+      "book": 4762,
+      "qa": 9004
+    },
+    "epochs": 3,
+    "updates": 41298,
+    "scheduled_target_positions": 6108741,
+    "snapshots": {
+      "0": "c9b39cf8127750e68c8fa3f449461c227c8543d8c746f8eb8e3ad7585d3f8379",
+      "10324": "cdb9ca4ce4b0732eb040c595550f35d8c8b1c77d43053222e960709b06050cd2",
+      "20649": "1676eb351a52fb6aa6dd1f7c69817286fe5844b82a8833704907dd0b06aab138",
+      "30973": "75b79993d82a6d3dca2f5fc003ac51331972b6fb85141bc7d361863bc05474aa",
+      "41298": "64b575af064c2229cd4b06bb024cf5ca7a8f455cc37d44b14fed9b82a698793d"
+    },
+    "cumulative_child_seconds": 75209.32601993904,
+    "pressure_wait_seconds": 1771.6848261645064,
+    "peak_allocated_vram_gib": 18.567853450775146
+  },
+  "whole_model_parameters": {
+    "total_unique_parameters": 7578390003,
+    "trainable_parameters": 20212225,
+    "inherited_visual_contextual_parameters": 7522463984
+  },
+  "old_language_scores_unchanged": true,
+  "all_values_measured": true,
+  "original_pilot_passed": false,
+  "prior_cohort_familiarity": true,
+  "independent_human_adjudication": false,
+  "new_model_calls": 0,
+  "joint_writer_language_unmeasured": true,
+  "active_article_updated": false
+}

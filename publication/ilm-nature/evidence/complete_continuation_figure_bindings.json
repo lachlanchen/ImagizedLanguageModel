@@ -1,0 +1,138 @@
+{
+  "measured_data_sha256": "2ebde082b3e7e2cf730bfe3a0209b70f8d24037cc940dddb6bc0652224212c17",
+  "source_sha256": {
+    "references/evidence/visual_continuation_learning_20261113.json": "94c4f77615372f37da9454be2e6cf810dd87d96143148644d1b8a54697db68de",
+    "references/evidence/visual_continuation_trajectories_20261113.json": "0996f8277eee0e99e42eeaa6cf91434086ee25c0065f53efff32fc2af2ad99ad",
+    "references/evidence/continuation_clean_history_result_20261113.json": "d4f49c5fada27060e6c735b2f0f2eb3729090cd55a6333e87879fb6174d7479f"
+  },
+  "builder_sha256": "7473a87964539a280fcdbc65514096aaceb6b7d3895db4b07fc90bf20fea0baf",
+  "formatter_sha256": "24518efd0b9be8d39a3a40b5a4baec11b51b179b3bb05e0b3adc538e4c41e83c",
+  "charts": [
+    {
+      "title": "Complete exact answers / 32",
+      "categories": [
+        "0",
+        "10,324",
+        "20,649",
+        "30,973",
+        "41,298"
+      ],
+      "series": [
+        {
+          "name": "Fixed cells",
+          "values": [
+            0,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "name": "Proportional",
+          "values": [
+            4,
+            4,
+            6,
+            9,
+            7
+          ]
+        }
+      ],
+      "maximum": 32,
+      "format": "0"
+    },
+    {
+      "title": "Readable complete answers / 32",
+      "categories": [
+        "0",
+        "10,324",
+        "20,649",
+        "30,973",
+        "41,298"
+      ],
+      "series": [
+        {
+          "name": "Fixed cells",
+          "values": [
+            0,
+            1,
+            3,
+            4,
+            4
+          ]
+        },
+        {
+          "name": "Proportional",
+          "values": [
+            5,
+            8,
+            13,
+            16,
+            14
+          ]
+        }
+      ],
+      "maximum": 32,
+      "format": "0"
+    },
+    {
+      "title": "Book tiles above clean ink threshold",
+      "categories": [
+        "Initial free",
+        "Final free",
+        "Final supplied"
+      ],
+      "series": [
+        {
+          "name": "Fraction of tiles",
+          "values": [
+            0.059378,
+            0.981195,
+            0.819121
+          ]
+        }
+      ],
+      "maximum": 1.05,
+      "format": "0.0%"
+    }
+  ],
+  "tableValues": [
+    [
+      "Final outcome",
+      "Fixed cells",
+      "Proportional"
+    ],
+    [
+      "Exact QA /32",
+      "2",
+      "7"
+    ],
+    [
+      "Readable QA /32",
+      "4",
+      "14"
+    ],
+    [
+      "Both correct /16",
+      "1",
+      "0"
+    ],
+    [
+      "Retained exact",
+      "2/2",
+      "6/8"
+    ],
+    [
+      "Coherent books /12",
+      "0",
+      "Not run"
+    ]
+  ],
+  "native_charts": 3,
+  "native_tables": 1,
+  "plotted_fraction_decimal_places": 6,
+  "new_model_calls": 0,
+  "supplied_history_not_language": true,
+  "joint_writer_quality_unmeasured": true
+}

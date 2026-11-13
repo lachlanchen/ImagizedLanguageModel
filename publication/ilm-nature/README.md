@@ -15,6 +15,32 @@ and earlier baselines remain available for reproduction.
 
 ## Staged continuation update
 
+The complete continuation trial now covers **13,766 sources, 41,298 updates and
+6,108,741 scheduled target positions**. Its final proportional model gives
+**7/32 exact complete answers, 14/32 readable answers and 0/16 correct pairs**.
+No normal book arm receives a coherent complete continuation. Both registered
+pilot audits reject the final model. The
+[complete result](../../references/visual_continuation_learning_result.md)
+preserves all five checkpoints, controls, failures and review limits.
+
+![Complete-answer learning curves and measured writing failure](figures/Figure_24_complete_continuation.png)
+
+The new [Figure 24 PowerPoint](figures/Complete_continuation_figures.pptx)
+contains three native charts and a native table. Its chart caches, embedded
+literal workbook cells and table agree with the
+[source-bound data](evidence/complete_continuation_measured_data.json).
+The [review receipt](evidence/complete_continuation_reviewed_native_figure.json)
+records actual visual inspection of the finalized-file reimport. Office
+application review and vector PDF export remain pending.
+
+The [new Results](complete_continuation_results.tex),
+[Methods](complete_continuation_methods.tex) and
+[caption](complete_continuation_caption.tex) distinguish autonomous language
+from supplied-history writing. The new conditional joint writer is a separate
+registered experiment with no measured language result in this figure. The full
+point-writer deployment retains 7.578B parameters and does not establish a
+compact foundation or an efficiency advantage over an LLM.
+
 The new [Figure 23](figures/Figure_23_continuation_history.png) has an
 [editable PowerPoint source](figures/Continuation_history_figures.pptx), two
 native charts, a native preflight table and a directed pixel-feedback diagram.
@@ -27,8 +53,10 @@ The [staged Results](continuation_history_results.tex) and
 [Methods](continuation_history_methods.tex) describe the completed reference-image
 history study and the real 36-layer preflight. The three-page source check
 inspects five equations and preserves all 227 earlier assets. These are
-conditional-writing and feasibility results; the ongoing full fit has no
-language score. Its model and data remain unchanged.
+conditional-writing and feasibility results. Figure 23 and its earlier staged
+text retain pre-completion status wording; the completed trial is reported in
+Figure 24 and the new Results/Methods above. Their integration is covered by the
+[completed-trial revision plan](../../references/manuscript_complete_continuation_revision_plan.md).
 
 The active 35-page reading, 62-page review and 63-page redline PDFs still predate
 this staged update. Figure PDF export, article integration, full builds,
@@ -39,6 +67,8 @@ cache or model weights:
 
 ```bash
 CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/verify_continuation_history_figure.py
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_complete_continuation_evidence.py --verify
+CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/verify_complete_continuation_figure.py
 ```
 
 ## Current result
