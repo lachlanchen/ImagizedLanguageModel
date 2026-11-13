@@ -1,0 +1,238 @@
+{
+  "schema": "joint-context-real-source-preflight-v1",
+  "source_sha256": {
+    "ilm/visual_lm/causal_visual_prefix.py": "6436213f7f520380a59a2eea98b4b5d2aa5aa38420964d13693d4241c4be0b2e",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/continuation_training.py": "d38953469b139878c72619ed86599b1a72c97d52cf2cf43a8c96fad4dc67eabe",
+    "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da",
+    "ilm/visual_lm/gguf_language_trunk.py": "ad7deb6c6a4f008ac44d72216dfa9b0d0a570f971aac58bcd756cf666b5a1321",
+    "ilm/visual_lm/gguf_visual_language.py": "d675ef6ef4490f940890abe86497ec53eb506f4ae192cdc295296b9dc2135c81",
+    "ilm/visual_lm/glyph_joint_density.py": "215f76c757687f4666eae48897275b20739bf0a2dd1666c52e40287fb2f21a22",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/glyph_tail_adapter.py": "b0be8681d8ecfbc6f0c0bdc8f61ed0969b4bdf336cffab9119afaa83603532f0",
+    "ilm/visual_lm/grounded_image_actor.py": "b1c2da5f7b0c71f2f66365f1925fcb082c9704261d5119b71a95b8b7b377b060",
+    "ilm/visual_lm/grounded_image_weights.py": "8d6381f99493ac88c635fb3c6c5df840937000a05eb9bb97bd99f222ab5bd1ec",
+    "ilm/visual_lm/image_context_interface.py": "ee55e3f4b20d4d47f4b965d3c47250e5aee3d15f4852cb8faddd0c323c1ea70b",
+    "ilm/visual_lm/joint_writer_training.py": "603935fcceb891d115f37c3db114831e24df8ca8bf49c59e8a01fc10ada20952",
+    "ilm/visual_lm/semantic_glyph_loop.py": "f575055a214f211009ec4d2a7e8aa092f18ac5210bcd499b285a3a87644245ae",
+    "ilm/visual_lm/semantic_image_memory.py": "20d5febe1fbe81c11a15846ba80ded98f8d0dce0718d5e8fa9c3e239a7c66fb7",
+    "ilm/visual_lm/visual_continuation.py": "fae17a9b67c47d857d7139747b81e3c958354ec0c5ae8b5613adb203442c4cbd",
+    "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+    "references/continuation_joint_writer_protocol.md": "d12eb3b70e57e899f421c7b81030f70f46bb93d02485b191a1cd6645a43d3af4",
+    "references/visual_continuation_full_protocol.md": "ecea5a977a2a28e969c00f2ca0da063a2c74b75a6b1d25c3eb4d5c94b842e54e",
+    "references/visual_continuation_preflight_protocol.md": "65b36af0f5817e977f2ac7699b02ed8e1233976049c0bb8321869d1581920ddc",
+    "scripts/audit_joint_continuation_writer.py": "bd9ee4b32a3d8e3d4c5dd5f6cb90db63de7523e47286366cc3e5da8ef548ca33",
+    "scripts/compare_balanced_writer_matched.py": "e20327494fae768605e545593c3a742a0070afb36a2e81c57724eea4809dc2a6",
+    "scripts/compare_glyph_tail_compact_cohort.py": "bd0256767c9aca397ea49aefa4d95ed53a09e06700a4676edae20ceda75340d1",
+    "scripts/diagnose_continuation_clean_history.py": "032c7e49f5e5f13a961226beba16b9b562caa23b9221e3ef565a44cd23ad7466",
+    "scripts/infer_compact_visual_span.py": "f649d8b53bc0db174c376a3b30ebd75f62e9063e2baab36247b2f85bdaafe2c3",
+    "scripts/infer_glyph_context_motor_image.py": "62c2afc34aba32247fdcbef882a720231907fcf1f4ac85154b65d2e62f5ec097",
+    "scripts/infer_glyph_tail_language.py": "f5e7412c44c261aab1a6034a2b8346304b45a507d342a81dd08b0eb8b2daa99f",
+    "scripts/infer_visual_continuation.py": "afa954a4f80eea2fbe167233da9870d6526e461bc77c97ecb494137300b44a3b",
+    "scripts/preflight_visual_continuation.py": "f31ccbceb5b8805c2de4c2f1e8e1c00c46021cd4f5fdd536918ef226397973aa",
+    "scripts/prepare_joint_continuation_writer.py": "b0e38a0634647db24b54a53cbdd3870978168416a3c56a011d1f5f7bd8a83895",
+    "scripts/prepare_visual_continuation_training.py": "9f912e12340e41c0d529db7164d9f0332b05c4a6d258cc18e251a80b50353008",
+    "scripts/prepare_visual_sequence_corpus.py": "267280b21231eb8eb9c78f7b9c8b93c15e4d42e5fd7bdd5d612ee4fdfe776d50",
+    "scripts/review_compact_visual_span.py": "c046d3a8f3565c945478a1899d4f9a8776b2ed327c2114258362fb39c7a8a323",
+    "scripts/review_visual_continuation.py": "d6afd6130c978ad85535650dbe3ffd5137324e9730e655d173e62216a2091f74",
+    "scripts/run_joint_continuation_writer.py": "adabe73c13ded9d0ce19e895e4f9606c238d09537f28f3aff03e84b4d25be2a9",
+    "scripts/run_visual_continuation.py": "4c0e7842b2f3ef077339921bb9df7d7789e2023775571def33fb674588409cd9",
+    "scripts/train_joint_continuation_writer.py": "cddbff8ea905f857980524a1da45364f434b2e45482001fc3d81b077205d18f8",
+    "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "scripts/train_visual_continuation.py": "37efa8a31856a9d0eaee0c80e5d9e37567a7bf62b02ff128b147c6117b7a5f0d",
+    "tests/test_continuation_training.py": "da9dc2985ef78e36c0fe9c6b3f827f6821bc3d21e6ff22769900cbde1754068e",
+    "tests/test_glyph_joint_density.py": "6b6ec22b64275d03d1b3f7f1f746589ce9481866437b6f7b8ba2566dc9bc3988",
+    "tests/test_joint_writer_sequence_training.py": "5f980cfffcc0fdfe7dfe9d5b7d210c6187574027efd49381a857f6736859d272",
+    "tests/test_visual_continuation.py": "6bd0c13a8b8c49a29774bcec25b3bc5aa5ba15a311fb48aa3c08eefccb062a41",
+    "ilm/visual_lm/joint_context_model.py": "2098ebe094d0fa7b24e52d243993fe4b1008707472c07284fca9c6f0406584e7",
+    "ilm/visual_lm/joint_continuation_learning.py": "f57a3aecfaeace4f7615e14fc947d40dcc9cbca5052ebe5f02fadfaee48cd705",
+    "scripts/preflight_joint_context_learning.py": "a30389bf3bb9ba349b9a51e09a005329a3400c8d5b9cc28cd5f97f7939b63e27",
+    "tests/test_joint_continuation_learning.py": "c3099c5f0352b3001fafee3ef5c8ba776131ebd8f3dc3cd02a33541d2db3533b",
+    "references/joint_context_preflight_protocol.md": "1845064ca57d3e79b83c5c54fa9296e23e26f5bd1ef9a2da8ea7cdfb88751b2a"
+  },
+  "runtime": {
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.6",
+    "source_sha256": {
+      "qwen3_vl": "dd63ed3b124232735b3dca1bfa28f9d6b0d3f7182afcb75dde8f3e724b2b22da",
+      "cache_utils": "f4e11caf14c75bdefa5e3003b93ef0e8b97fb6103375705ad944b0b344d7da8a",
+      "checkpoint": "bce92715ec3c0d3941dd74c939396686632457a2c7cf98247f3f67b351e97309"
+    }
+  },
+  "input_sha256": {
+    "artifacts/visual_continuation_full_logger_recovery_v2/preparation.json": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+    "artifacts/visual_continuation_full_logger_recovery_v2/training_manifest.json": "c5da267618c6ea5f049b26e6ccfd7f443235d72091641bda5c5b4c7449f2456a",
+    "artifacts/visual_continuation_full_logger_recovery_v2/fit/report.json": "6b48151c8623c3e8ad2cecf5cd7829fb39ae2d41032fcf60da1671a635a47e99",
+    "artifacts/visual_continuation_full_logger_recovery_v2/fit/snapshots.json": "1b31c803b36b512d5879310d4b54cdd48f5141625a936e50c5ab8dc31743ee88",
+    "artifacts/visual_continuation_full_logger_recovery_v2/fit/checkpoints/step_041298_attempt_001_1794501658239492596.pt": "64b575af064c2229cd4b06bb024cf5ca7a8f455cc37d44b14fed9b82a698793d",
+    "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/report.json": "33340fd4b4c6a037f55b05b43207a2fad15be18ad2455cfb90a6c8cd79d64925",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/frozen_readings.json": "c213308eb80dfac48e03f1dbb5ecedebbdbb95695b22eeff82baf54815f554fe",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/summary.json": "478c9462de2e8ca6100d3aa14c463d41b4b7754f952c0f8c695ce7e379d4dd36",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/protocol_pilot_audit.json": "74c2708b7acef5f6c2b307f1751481f9e38bc7f507dee4805b3ad05079c52b0c",
+    "data/visual_sequence_corpus_v1/report.json": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "artifacts/continuation_clean_history_v1/registration.json": "54d57aed1bb2a1c03be4342699e2cde51a80b3f346265ad97dc94b1f459f929b",
+    "artifacts/continuation_clean_history_v1/targets.pt": "8baa4a31eb0e02a7a036326c6412dd0285a18cf176fee29811170cdcf151f2b5",
+    "artifacts/continuation_clean_history_v1/execution/report.json": "6d796eac711f3a31fdacaab0778f8b834ad5811a184deca97728f8e98f7d43e2",
+    "references/evidence/continuation_clean_history_result_20261113.json": "d4f49c5fada27060e6c735b2f0f2eb3729090cd55a6333e87879fb6174d7479f",
+    "artifacts/balanced_glyph_writer_v1/fit/checkpoint_latest.pt": "dcac4ee207614adca78a8b99cc4fe422b3197204d9028192bef30f111d61586d",
+    "artifacts/native_visual_transfer_v71_20261105/attempt01/structural_vectors.pt": "e53cb8d13892aa5de283d55138101ca45527356f73b40a9a965cee77c67167c1",
+    "artifacts/continuation_joint_writer_v1/registration.json": "47dfdc3f0f56b146fc26bbcb868440c517376fbfd6cf6673c328ad21d5bd40bb",
+    "artifacts/continuation_joint_writer_v1/initial_parameters.pt": "c943fa334e56273f0eb82be5f50dd0eceec9c342fa18b24a3f4d8734bc6d498f",
+    "artifacts/continuation_joint_writer_v1/cache/normalization.pt": "3dc1dcb1dd1df0762bfad43640a6de80b0cecaf3630ecb6769dae4140c5d934f",
+    "artifacts/continuation_joint_writer_v1/qualify/gate.json": "71a603ba92adc4cbc69ab5924b318d1ada464a492f9a918da853f9707607b2a2",
+    "references/evidence/joint_writer_blank_density_result_20261113.json": "44215215020c6e2ec53ff3449ff0805200a062cd8912ceabd89879f9ac506d86",
+    "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04762.png": "f20c87ff7e732e622ed73571c59af278dfafa131150487c07edaf727ce56139b",
+    "artifacts/visual_continuation_full_v1/training_inputs/proportional/04762.png": "58bb191fb3cc66f49dadccd40f9d22f33137edb90fe50d2bde4ed39556e9561b",
+    "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/00342.png": "21d65a67c73e5dfcd7bce7f0544fd8c6bd9c5d0e8b332498841672837c33b36c",
+    "artifacts/visual_continuation_full_v1/training_inputs/proportional/00342.png": "3fd9ba813b595155a5985df8a55c70270be9377534d20a1756433178fd7f0cfa"
+  },
+  "cases": [
+    {
+      "id": "qa_fixed_cells",
+      "index": 4762,
+      "layout": "fixed_cells",
+      "source": {
+        "kind": "qa",
+        "id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "source_text_sha256": "0351579527021370407604bc4d0e5378a27949fa43a9186aa6017c56b3762850",
+        "corpus_index": 4762,
+        "index": 4762,
+        "cut": 841,
+        "prompt_glyphs": 841,
+        "target_glyphs": 5,
+        "target_sha256": "a244be0111fb569151e0e994573279d4fc2a71af7cbd34bf2dad9be9121b1c0b",
+        "prompt_text_sha256": "4be30c0d9c00d2b8f34b8ae1a20be85dbd448fee7eb0ef8840aa92e655111f6e",
+        "natural_text_sha256": "673c7912b0256dc4ff8850618d8c8b95aa392513ae092abb9bcdf17a8861ba5d",
+        "images": {
+          "fixed_cells": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04762.png",
+            "sha256": "f20c87ff7e732e622ed73571c59af278dfafa131150487c07edaf727ce56139b"
+          },
+          "proportional": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04762.png",
+            "sha256": "58bb191fb3cc66f49dadccd40f9d22f33137edb90fe50d2bde4ed39556e9561b",
+            "fixed_raster_fallback": null
+          }
+        }
+      }
+    },
+    {
+      "id": "qa_proportional",
+      "index": 4762,
+      "layout": "proportional",
+      "source": {
+        "kind": "qa",
+        "id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "source_text_sha256": "0351579527021370407604bc4d0e5378a27949fa43a9186aa6017c56b3762850",
+        "corpus_index": 4762,
+        "index": 4762,
+        "cut": 841,
+        "prompt_glyphs": 841,
+        "target_glyphs": 5,
+        "target_sha256": "a244be0111fb569151e0e994573279d4fc2a71af7cbd34bf2dad9be9121b1c0b",
+        "prompt_text_sha256": "4be30c0d9c00d2b8f34b8ae1a20be85dbd448fee7eb0ef8840aa92e655111f6e",
+        "natural_text_sha256": "673c7912b0256dc4ff8850618d8c8b95aa392513ae092abb9bcdf17a8861ba5d",
+        "images": {
+          "fixed_cells": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04762.png",
+            "sha256": "f20c87ff7e732e622ed73571c59af278dfafa131150487c07edaf727ce56139b"
+          },
+          "proportional": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04762.png",
+            "sha256": "58bb191fb3cc66f49dadccd40f9d22f33137edb90fe50d2bde4ed39556e9561b",
+            "fixed_raster_fallback": null
+          }
+        }
+      }
+    },
+    {
+      "id": "long_book_fixed_cells",
+      "index": 342,
+      "layout": "fixed_cells",
+      "source": {
+        "kind": "book",
+        "id": "wikisource:319f1fc5d5a0d40eb3e6",
+        "group": "大唐西域記",
+        "source_text_sha256": "d84406b780e2f83d4917988e0554c40f42ca557f26b67e6388fca8bc1c7a95b5",
+        "corpus_index": 342,
+        "index": 342,
+        "cut": 128,
+        "prompt_glyphs": 128,
+        "target_glyphs": 513,
+        "target_sha256": "92cd21fbb1ee6e69616a037118ede028b559003e9e1f3ea6b4c312ca248424a3",
+        "prompt_text_sha256": "5c27ff43e6fff07bd14a85f9c76bcf147a71591dc0b0b0ba8d02afbf6b599b99",
+        "natural_text_sha256": "5c27ff43e6fff07bd14a85f9c76bcf147a71591dc0b0b0ba8d02afbf6b599b99",
+        "images": {
+          "fixed_cells": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/00342.png",
+            "sha256": "21d65a67c73e5dfcd7bce7f0544fd8c6bd9c5d0e8b332498841672837c33b36c"
+          },
+          "proportional": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/proportional/00342.png",
+            "sha256": "3fd9ba813b595155a5985df8a55c70270be9377534d20a1756433178fd7f0cfa",
+            "fixed_raster_fallback": null
+          }
+        }
+      }
+    },
+    {
+      "id": "long_book_proportional",
+      "index": 342,
+      "layout": "proportional",
+      "source": {
+        "kind": "book",
+        "id": "wikisource:319f1fc5d5a0d40eb3e6",
+        "group": "大唐西域記",
+        "source_text_sha256": "d84406b780e2f83d4917988e0554c40f42ca557f26b67e6388fca8bc1c7a95b5",
+        "corpus_index": 342,
+        "index": 342,
+        "cut": 128,
+        "prompt_glyphs": 128,
+        "target_glyphs": 513,
+        "target_sha256": "92cd21fbb1ee6e69616a037118ede028b559003e9e1f3ea6b4c312ca248424a3",
+        "prompt_text_sha256": "5c27ff43e6fff07bd14a85f9c76bcf147a71591dc0b0b0ba8d02afbf6b599b99",
+        "natural_text_sha256": "5c27ff43e6fff07bd14a85f9c76bcf147a71591dc0b0b0ba8d02afbf6b599b99",
+        "images": {
+          "fixed_cells": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/00342.png",
+            "sha256": "21d65a67c73e5dfcd7bce7f0544fd8c6bd9c5d0e8b332498841672837c33b36c"
+          },
+          "proportional": {
+            "file": "artifacts/visual_continuation_full_v1/training_inputs/proportional/00342.png",
+            "sha256": "3fd9ba813b595155a5985df8a55c70270be9377534d20a1756433178fd7f0cfa",
+            "fixed_raster_fallback": null
+          }
+        }
+      }
+    }
+  ],
+  "qa_selection": "first odd-length complete QA, 5..63 glyphs",
+  "book_selection": "first complete book with maximal target length",
+  "maximum_seconds": 1800,
+  "pressure_seconds": 300,
+  "maximum_allocated_vram_gib": 22,
+  "minimum_entry_host_gib": 48,
+  "minimum_free_gpu_gib": 20,
+  "minimum_runtime_host_gib": 24,
+  "gradient_relative_l2_tolerance": 0.01,
+  "gradient_absolute_tolerance": 1e-05,
+  "gradient_maximum_scaled_tolerance": 0.01,
+  "loss_absolute_tolerance": 2e-05,
+  "qa_microbatch_glyphs": 2,
+  "book_microbatch_glyphs": 64,
+  "learning_rate": 4e-07,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "expected_trainable_parameters": 5005760,
+  "stop_head_parameters_frozen": true,
+  "preflight_only": true,
+  "optimizer_updates": 2,
+  "updates_carried_into_fit": false,
+  "new_autonomous_images": 0,
+  "language_evaluation": false,
+  "goal_achieved": false
+}
