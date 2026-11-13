@@ -71,6 +71,12 @@ whole deployed parameters do not establish the desired compact model.
   [complete context-gradient comparison](../references/joint_context_learning_protocol.md)
   retains the full source exposure and every original physical/language rule.
   Its completed fit, audit and language result remain unproved.
+  The [post-qualification evaluator](../references/joint_context_language_execution.md)
+  is implemented with all 131 context/head tensors restored at every snapshot,
+  the complete 708-stream plan and an independent check that credited candidate
+  forms contain ink. Its CPU checks are implementation evidence; full-body
+  generation and language remain unexecuted until qualification and a separately
+  committed execution binding. The failed head-only actor remains unevaluated.
   Keep prompt memory, native body, image feedback and stop parameters frozen.
   Register sources, initialization, schedule, gradients, complete evaluation
   and resource limits before neural execution. Do not restart a completed

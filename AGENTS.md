@@ -59,6 +59,14 @@ the completed preflight. The next full fit is defined in
 before neural execution. Preserve all50 preflight sources, the original45 control
 sources, and every original frozen reading. Use the new serial controller only
 after checking live ownership; its full fit remains unproved until audited.
+The post-qualification evaluator is now implemented in
+`scripts/evaluate_joint_context_language.py`; see
+`references/joint_context_language_execution.md`. It restores all131 learned
+context/head tensors, preserves the full708stream plan and independently checks
+that credited candidate images contain ink. CPU admission/restoration checks do
+not establish full-body generation or language. Do not run it before complete
+fit/audit/physical qualification and a committed post-gate execution binding.
+The old head-only evaluator cannot substitute for this context-aware restore.
 Use the private handoff for current ownership. The old point system's whole
 7,578,390,003 parameters and the joint head's2,642,368 trainables do not establish
 a lightweight foundation; whole-system costs remain required.
