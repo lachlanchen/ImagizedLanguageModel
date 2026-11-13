@@ -184,3 +184,50 @@ The new receipt is
 All active article inputs/PDFs, original figures and historical receipts remain
 unchanged. Article activation, Office export, full/redline builds and local sync
 remain pending. No trained joint-writer result is introduced.
+
+## Staged abstract, introduction and interpretation
+
+Prepare separate `complete_continuation_frontmatter.tex`,
+`complete_continuation_introduction.tex` and
+`complete_continuation_discussion.tex` for the completed-result integration.
+The active abstract predates the complete continuation comparison and its
+diagnoses. The new abstract must foreground the image-input/image-output
+objective, complete-sequence experiment, failed final answer/book criteria,
+whole-model scope and unresolved historical-form/efficiency targets. The
+introduction should explain the motivation without asserting biological
+equivalence, priority or token-free pretraining. The Discussion should connect
+the complete trial and supplied-history controls to the selected, still
+unmeasured joint-writer intervention, without assigning a unique cause.
+
+Use only measured public results and existing primary bibliography entries.
+Make no new language score or efficiency claim. Keep the earlier compact-model
+failures and inherited pretrained body explicit. The new physical writer uses
+discrete masks, so do not call every computation continuous or claim that it
+removes all discrete variables. Preserve font/resolution, reused-cohort and
+single-reviewer limitations. Include a short publication README link and a new
+source-bound validation receipt; keep all earlier receipts.
+
+Compile a small CPU-only standalone excerpt in the existing Nature reading
+layout, containing the proposed title/abstract, introduction, Discussion and
+the actually cited existing bibliography entries. Inspect every page, verify
+citations/overfull boxes and bind all quantitative statements to the completed
+source exports. Do not activate the new text, change existing manuscript inputs,
+edit earlier figures, alter the 45 registered model sources or launch another
+GPU job. Full article/review/redline builds, Office export and local delivery
+remain deferred while the original model pipeline is live. This author update
+requires no response letter and does not qualify the ILM.
+
+The three proposed narrative inputs are complete and remain separate from the
+active article. A 189-word summary leads with the image-language objective and
+the completed failed pilot. Two pages of the final standalone excerpt are
+actually inspected, with balanced final columns and no overfull boxes or
+unresolved citations. The three existing citations are checked against their
+primary pages. All quantitative statements are checked against authenticated
+completed exports, including the earlier compact failures, supplied-history
+fractions, density, whole-model size and GPU allocation. The receipt is
+`publication/ilm-nature/evidence/complete_continuation_narrative_validation.json`.
+The original excerpt is retained privately. All active manuscript inputs/PDFs,
+earlier figures/receipts and 45 registered model sources remain unchanged.
+No further presentation-only work is required before the original model
+pipeline finishes; its physical review and complete-language decision remain
+the next experimental actions.

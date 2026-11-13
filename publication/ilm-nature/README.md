@@ -41,6 +41,16 @@ registered experiment with no measured language result in this figure. The full
 point-writer deployment retains 7.578B parameters and does not establish a
 compact foundation or an efficiency advantage over an LLM.
 
+A proposed [title and abstract](complete_continuation_frontmatter.tex),
+[introduction](complete_continuation_introduction.tex) and scoped
+[Discussion addition](complete_continuation_discussion.tex) connect these
+results to the visual-language objective. They distinguish inherited knowledge,
+physical pixel variables, complete answers and the still-unmeasured joint
+writer. The [narrative validation](evidence/complete_continuation_narrative_validation.json)
+binds the numerical sources, three existing primary citations and a visually
+checked two-page excerpt. These are staged inputs; the active article and its
+PDFs remain unchanged.
+
 The prospective [joint-writer methods](joint_writer_methods.tex) define the
 physical mask packing, conditional image likelihood, emitted-image feedback,
 stopping and complete-sequence training objective. Source/implementation hashes
