@@ -1,0 +1,87 @@
+% Staged measured results; not yet an input of the active article.
+% Scope: references/manuscript_complete_continuation_revision_plan.md.
+\subsection*{Complete continuation adaptation does not establish sustained language}
+The full continuation model completes three epochs over 13,766 complete
+sequences, comprising 9,004 QA and 4,762 book records. The 41,298 updates cover
+6,108,741 scheduled target glyph positions. Evaluation retains all five fixed
+checkpoints and 732 autonomous streams, including erased prompts and matched
+640-glyph book controls. All 183 output boards and 96 visible normal-book
+prefixes are reviewed. Readings are frozen before scoring against the new
+case mapping and canonical references. Review uses one model reviewer with
+prior cohort familiarity, without independent human adjudication.
+
+\begin{table*}[t]
+\centering
+\caption{Complete autonomous QA across the fixed continuation checkpoints.
+Each entry gives exact/readable/both-correct counts. Each layout has 32
+questions and sixteen paired-question groups. All values are measured;
+the intermediate peak does not replace the prescribed final checkpoint.}
+\label{tab:complete-continuation-checkpoints}
+\begin{tabular}{rrr}
+\hline
+Update & Fixed-cell prompts & Proportional prompts \\
+\hline
+0 & 0/0/0 & 4/5/0 \\
+10,324 & 1/1/0 & 4/8/0 \\
+20,649 & 2/3/0 & 6/13/0 \\
+30,973 & 2/4/1 & 9/16/1 \\
+41,298 & 2/4/1 & 7/14/0 \\
+\hline
+\end{tabular}
+\end{table*}
+
+Some short answers improve relative to the actual initial continuation
+checkpoint, but the final model fails the registered complete-language pilot
+(Table~\ref{tab:complete-continuation-checkpoints}). Both fixed successes and
+six of eight required proportional successes remain. Final question-erased
+and passage-erased exact counts are zero and one, respectively, in each layout.
+The proportional normal-minus-better-erased gap is six, below the required
+eight. The original scorer and a separate audit of all four QA-erasure arms
+both reject the pilot. Canonical mismatch is not, by itself, semantic falsity;
+uncertain and unreadable outputs remain uncredited rather than repaired.
+
+No normal book arm at any checkpoint receives a readable coherent complete
+continuation. All twelve final 128-cap books reach the cap. At a 640-glyph cap,
+the final candidate stops on eight of twelve normal prefixes and the matched
+balanced parent stops on seven; neither produces a credited coherent complete
+continuation. Recognizing a prepared record's end is also distinct from a
+natural whole-document ending. Learned stopping without readable language
+does not qualify the model.
+
+The final system retains 7,578,390,003 deployed parameters, including a
+7,522,463,984-parameter inherited body. Its 20,212,225 trainable parameters
+therefore do not define a compact foundation. Cumulative training-child
+execution is 75,209.326\,s, including the preserved failed first attempt;
+peak allocated memory is 18.568\,GiB. Candidate and matched-parent evaluations
+cost 6,338.799 and 609.626 cumulative child seconds, respectively. Preparation,
+admission queues, CPU review and inherited training remain separate. These
+measurements establish bounded single-device execution, not greater efficiency
+than a conventional language model at matched quality.
+
+\subsection*{Saved streams develop dense writing while prompt states still differ}
+A separately registered retrospective analysis authenticates all 732 saved
+streams and all 2,036,247 target positions in the 13,766 eligible training
+records. It makes no model call and changes no language score. Clean QA and
+book glyphs have median ink counts of 188 and 201 of 1,024 pixels; their
+99th percentiles are 267 and 276. The context-independent optimum of the actual
+sequence-balanced writing loss has 504 black pixels after thresholding.
+This is a restricted baseline, not an optimum over conditional models.
+
+For the final normal 640-cap books, 98.12\% of emitted tiles exceed the clean
+book 99th-percentile ink count, compared with 5.94\% initially. Equal-stream
+early/tail ink fractions are 0.4375/0.4718, and foreground F1 against the
+constant-image template is 0.8990/0.9386. These disjoint eight-tile windows use
+streams of at least 32 tiles: twelve final streams and four initial streams.
+The different subsets prevent treating those window averages as a matched
+longitudinal effect. All twelve final early/tail rows are visually inspected;
+dense blocks appear at the beginning and persist later.
+
+All 416 paired-question and normal/erased first-state contrasts are unequal.
+All 413 contrasts in which both streams emit also have unequal first images.
+At the final proportional checkpoint, paired-question relative state L2 and
+first-image Hamming distance average 1.0428 and 0.2302. The measured failure
+therefore coexists with representation changes across prompts. These distances
+do not establish question understanding, identify the loss as the unique cause,
+or prove a stable dynamical attractor. A changed-checkpoint clean-history
+control is required to separate conditional fitting and generalization from
+autonomous-feedback failure.

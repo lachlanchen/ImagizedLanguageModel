@@ -1,0 +1,51 @@
+% Staged measured methods; active article inputs remain unchanged.
+\subsection*{Saved-trajectory measurements and the constant-image baseline}
+The retrospective analysis is registered after complete language scoring and
+before computing its new physical/state statistics. It authenticates each
+saved output tensor and binary raster and retains all 732 streams, including
+empty, short, erased and capped outputs. Equal-stream summaries average a
+metric within each stream before averaging streams. Pooled density counts
+instead divide the number of qualifying emitted tiles by all emitted tiles.
+Early and tail analyses use eight tiles each, with a separate disjoint-window
+population restricted to streams of at least 32 tiles. No new semantic grades
+are assigned.
+
+For complete target sequence $i$, let $n_i$ be its tile count, $c_{ij}$ its
+number of black pixels at coordinate $j$, and $B_i=\sum_j c_{ij}$,
+$W_i=1024n_i-B_i$. For a predictor constrained to emit the same probability
+image at every context and position, define
+\begin{equation}
+ a_j=\frac1M\sum_i\frac{c_{ij}}{\max(B_i,1)},\qquad
+ b_j=\frac1M\sum_i\frac{n_i-c_{ij}}{\max(W_i,1)}.
+ \label{eq:constant-writing-weights}
+\end{equation}
+The sequence-balanced BCE restricted to this family is
+\begin{equation}
+ \mathcal L_{\rm const}(q)=-\frac12\sum_j
+ \left[a_j\log q_j+b_j\log(1-q_j)\right],
+ \qquad q_j^*=\frac{a_j}{a_j+b_j}.
+ \label{eq:constant-writing-optimum}
+\end{equation}
+The expression uses the implemented denominator clamps, including blank targets.
+Common epoch and layout multiplicities cancel because they repeat the same
+targets. All 13,766 complete targets contribute once, not one representative
+glyph per source. Independent autograd tests include unequal ink masses and
+all-white/all-black targets. The measured optimum loss is 0.437380, and its
+binary comparison uses the deployed $q_j\geq0.5$ tie rule. This derivation
+does not characterize the optimum of the conditional neural model.
+
+Physical measurements include ink count, adjacent Hamming distance, exact
+adjacent repetition and foreground F1 against the binary constant template.
+Saved-state measurements include relative adjacent L2 and cosine distance.
+First-state contrasts cover 160 paired-question and 256 erasure comparisons.
+Relative L2 divides the difference norm by the mean of the two state norms,
+with an epsilon denominator clamp. An unavailable first-image comparison
+remains unavailable when either stream is empty. State/image inequality is
+not a semantic test, and a small tail change is not a stability proof.
+
+The CPU analysis uses two threads and no initialized CUDA state. Successful
+execution takes 18.879\,s including its wrapper, with 0.593\,GiB peak RSS and
+at least 51.210\,GiB available host memory. A preserved earlier attempt returns
+SIGTERM/143 without a report. Its cause is unknown and its wall-time upper
+bound is 242.049\,s; exact cumulative execution cost is unknown. These costs
+are distinct from model fitting, generation and review.
