@@ -98,3 +98,42 @@ until that heavy workload is terminal and resource admission is rechecked.
 The new figure reports only completed point-writer and clean-history results;
 joint-writer quality remains unmeasured. Record actual visual reimport review
 separately from the still-unperformed Office review.
+
+## Prospective joint-writer methods staging
+
+While the original cache/fit pipeline remains live, add the separate
+`publication/ilm-nature/joint_writer_methods.tex`, an explicitly prospective
+methods input. Do not change the measured Results/Methods, active frontmatter,
+article inputs, bibliography, PDFs or previous figures. A short publication
+README link and a new source-bound syntax/layout receipt are in scope. Preserve
+the earlier two-page staged validation rather than rewriting its hashes.
+
+Define the exact invertible 2-by-4 physical mask packing, conditional image
+factorization, frozen visual-history state, learned stopping and finite-output
+likelihood. Show the implemented equal-sequence/layout-weighted mean pattern
+NLL, its causal target shift and terminal-state exclusion. Explain training-only
+state normalization, the small head's actual architecture and the retained
+large inherited body. Preserve the distinction between representation support,
+physical readability, complete language, almost-sure stopping and efficiency.
+No fitted result, new theorem or physics mechanism is added.
+
+Cite the existing PixelRNN/conditional PixelCNN bibliography entries for their
+established image-density formulation, verified against their primary pages.
+No earlier bibliography entry is changed by this unit. Compile a light CPU-only
+standalone check of the new methods and already-reviewed Figure24 PNG/caption
+in the existing Nature-style layout. Inspect every resulting page and equation,
+check references/overfull boxes and preserve the source/log/raster hashes in a
+new receipt. This scratch PDF is source/layout validation, not Office export,
+article activation or a new model experiment. Full article/review/redline
+builds and local delivery remain deferred until the heavy pipeline is terminal.
+
+The prospective methods staging is complete: all six equations and three pages
+of the final standalone check are actually inspected. The sixth display's
+number remains on its equation line, and the final text columns are balanced.
+The embedded Figure24 RGB and alpha channels match the published PNG exactly.
+The final methods specify both the full-image feedback sign and the preceding
+physical-mask bit sign. The new receipt is
+`publication/ilm-nature/evidence/joint_writer_staged_methods_validation.json`.
+The failed caption build and earlier visual/layout revisions are preserved
+privately. Active article inputs/PDFs and the earlier measured drafts remain
+unchanged; no model experiment or Office export is added.

@@ -1,0 +1,124 @@
+{
+  "schema": "joint-writer-staged-methods-validation-v1",
+  "recorded_unix": 1794553056.0721645,
+  "source_sha256": {
+    "publication/ilm-nature/joint_writer_methods.tex": "c3bd76c7d7833b237f30df61d7cd5f1a1ed7145388244ce1edbf8034a3230fcd",
+    "publication/ilm-nature/nature_reading.sty": "4af02a09435ea8aecda61a4bed975bfa627abc36be78b83548714c6670ec2a7d",
+    "publication/ilm-nature/references_main.tex": "d9d94949e6e6ffe2c156f091dadedb77d76f25c3c1e5692d5fabed0126c9d8e7",
+    "publication/ilm-nature/complete_continuation_caption.tex": "7bfb5afdd3a050c7567decdc0de13ad9fae3197c68f32a0c140bd7e41263e68f",
+    "publication/ilm-nature/figures/Figure_24_complete_continuation.png": "8e6168a44df6c9f914ba7d122c05b6d25e7838218552d2a8d5612e6b3f4d425d"
+  },
+  "implementation_sha256": {
+    "ilm/visual_lm/glyph_joint_density.py": "215f76c757687f4666eae48897275b20739bf0a2dd1666c52e40287fb2f21a22",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/visual_continuation.py": "fae17a9b67c47d857d7139747b81e3c958354ec0c5ae8b5613adb203442c4cbd",
+    "ilm/visual_lm/joint_writer_training.py": "603935fcceb891d115f37c3db114831e24df8ca8bf49c59e8a01fc10ada20952",
+    "scripts/train_joint_continuation_writer.py": "e29b6ba37e7e14fb182f69dfaebd0c7005f7b93e71077e0c37148ff70de93281"
+  },
+  "joint_registration_sha256": "ff6baa6a3e758e12bc86df42b6da6553f0ed29dbdd32dfee828bd2706ded1fd1",
+  "primary_references_verified": [
+    {
+      "key": "pixelrnn",
+      "url": "https://proceedings.mlr.press/v48/oord16.html",
+      "scope": "Original discrete autoregressive image-density formulation and bibliographic metadata."
+    },
+    {
+      "key": "pixelcnn",
+      "url": "https://arxiv.org/abs/1606.05328",
+      "scope": "Vector-conditioned image decoder and bibliographic metadata."
+    }
+  ],
+  "scratch_document": "\\documentclass[10pt,a4paper,twocolumn]{article}\n\\usepackage[left=13.5mm,right=13.5mm,top=17mm,bottom=17mm,columnsep=5mm]{geometry}\n\\usepackage{nature_reading}\n\\begin{document}\n\\section*{Prospective joint-writer methods}\n\\input{joint_writer_methods.tex}\n\\balance\n\\begin{thebibliography}{2}\n\\small\n\\bibitem{pixelrnn} van den Oord, A., Kalchbrenner, N. \\& Kavukcuoglu, K. Pixel Recurrent Neural Networks. \\emph{Proceedings of the 33rd International Conference on Machine Learning} \\textbf{48}, 1747--1756 (2016). \\url{https://proceedings.mlr.press/v48/oord16.html}.\n\\bibitem{pixelcnn} van den Oord, A. et al. Conditional Image Generation with PixelCNN Decoders. \\emph{arXiv} 1606.05328 (2016). \\url{https://arxiv.org/abs/1606.05328}.\n\\end{thebibliography}\n\\clearpage\\onecolumn\n\\section*{Completed continuation evidence}\n\\setcounter{figure}{23}\n\\begin{center}\n\\includegraphics[width=.96\\textwidth]{Figure_24_complete_continuation.png}\n\\end{center}\n\\begingroup\\captionsetup{hypcap=false}\\captionof{figure}{\\textbf{Complete visual-continuation adaptation improves some short answers\nbut fails sustained writing.}\n\\textbf{a,b,} Frozen whole-response exact and readable counts at all five fixed\ncheckpoints, with 32 questions and sixteen paired passage groups per layout.\nThe three-quarter peak does not replace the prescribed final model.\n\\textbf{c,} Fractions of book tiles above the clean training-book 99th-percentile\nink count, 276 of 1,024 pixels. Initial and final autonomous pools contain 2,122\nand 6,647 tiles; the final supplied-history pool contains 1,161 target positions.\nEach pool retains all twelve prefixes, but lengths differ. Supplied preceding\nanswer images and length, with stopping bypassed, make the third bar a physical\ndiagnosis. Chart fractions round to six decimals for workbook storage and percent\nlabels to one decimal; exact counts and full precision remain in the\nsource data. Excess ink alone does not establish its cause or a stable attractor.\n\\textbf{d,} Final complete-answer, paired and retained-success counts. Book prompts\nuse only the fixed layout; no normal book arm receives a coherent complete\ncontinuation. The 656/713 later QA positions reaching F1 0.95 use supplied history\nand do not replace autonomous answer scores. Both the original pilot and the\nfour-QA-erasure audit reject the final model. The full deployment retains\n7.578 billion parameters; one-GPU execution does not establish a matched-quality\nefficiency advantage. All results use reused development data and one model\nreviewer, with no independent human adjudication. The subsequent joint writer\nhas no language result in this figure.}\\endgroup\n\\end{document}\n",
+  "scratch_pdf_sha256": "8b63dadbea5f5d1b980219b1c1859233812644054c7612676f991a67aa133514",
+  "build_log_sha256": "776dd1e98e32ca21f45286a4d044cf33c4867607998524ec19e370a012655d86",
+  "text_sha256": "701780e306e7bb536179ebea74ed555d755a328dddd01924d74b9eaecca977fe",
+  "actual_viewed_pages": [
+    {
+      "page": 1,
+      "png_sha256": "c879bbd5c0a72e1b66879aa8f818079f49ec1c5329827d8221980119e43e3630"
+    },
+    {
+      "page": 2,
+      "png_sha256": "0124bb48590934d6c9405bdc7d1c3d9785b7514d83458ea06bd2ce723019c4fe"
+    },
+    {
+      "page": 3,
+      "png_sha256": "e1ce15b203aad6cdd42899cb35b14a688d8ddb85cf51f8d78e8c4733c485dbc6"
+    }
+  ],
+  "equation_labels": [
+    [
+      "eq:joint-glyph-history",
+      "1"
+    ],
+    [
+      "eq:joint-glyph-packing",
+      "2"
+    ],
+    [
+      "eq:joint-glyph-density",
+      "3"
+    ],
+    [
+      "eq:joint-glyph-stream",
+      "4"
+    ],
+    [
+      "eq:joint-glyph-sequence-loss",
+      "5"
+    ],
+    [
+      "eq:joint-glyph-layout-loss",
+      "6"
+    ]
+  ],
+  "all_six_equations_actually_viewed": true,
+  "equation_six_number_same_line": true,
+  "no_overfull_or_unresolved_references": true,
+  "ending_columns_balanced": true,
+  "embedded_Figure24_RGB_and_alpha_pixel_exact": true,
+  "embedded_Figure24_size": [
+    1600,
+    1600
+  ],
+  "manual_source_checks": [
+    "causal emitted-image feedback and unchanged affine buffers",
+    "invertible row-major2x4 physical mask bit order",
+    "128 conditional256-way physical masks per glyph",
+    "finite-stream stop factorization distinct from almost-sure termination",
+    "full-source128T reduction and terminal exclusion",
+    "onefixed/twoproportional empirical source weighting",
+    "training-only equal-sequence normalization and fixed head architecture",
+    "head preceding-mask sign2bitsminus1 distinguished from image-feedback sign1minus2ink"
+  ],
+  "original_two_page_staged_validation_preserved": true,
+  "earlier_local_attempts_preserved": [
+    {
+      "name": "source_check_v1",
+      "outcome": "Caption input in a moving argument caused TeX failure; no PDF produced."
+    },
+    {
+      "name": "source_check_v2",
+      "outcome": "Three pages compiled; actual visual review found the sixth equation number below its display. Shortened in v3."
+    },
+    {
+      "name": "source_check_v3",
+      "outcome": "Three reviewed pages and receipt preserved; v4 explicitly defines the preceding-mask bit sign to match implementation."
+    }
+  ],
+  "active_article_pdf_sha256": {
+    "manuscript.pdf": "a44c7858e0f80b9d61a80eaf08c237f3c71bc406c3efda6b1b91d98819759318",
+    "manuscript_review.pdf": "b6c2e6158e3d5ee142497de15f97da4af23d5f25ad4fb494ff1afd16395f316b",
+    "redlined_manuscript.pdf": "04099475d4157621a4c9d24870fbd6ca2a455ff293614fd2c3316fe5ca66312e"
+  },
+  "active_article_pdfs_unchanged": true,
+  "active_article_updated": false,
+  "Office_export_verified": false,
+  "native_PowerPoint_application_opened": false,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "joint_writer_quality_unmeasured": true,
+  "goal_achieved": false,
+  "original_two_page_validation_sha256": "9a4a40956ac35a78c99e1163f160506c6a7bfb1022e7c979a3b0f5b8c4906e29",
+  "final_local_revision": "source_check_v4"
+}

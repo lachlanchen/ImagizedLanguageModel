@@ -41,6 +41,14 @@ registered experiment with no measured language result in this figure. The full
 point-writer deployment retains 7.578B parameters and does not establish a
 compact foundation or an efficiency advantage over an LLM.
 
+The prospective [joint-writer methods](joint_writer_methods.tex) define the
+physical mask packing, conditional image likelihood, emitted-image feedback,
+stopping and complete-sequence training objective. Source/implementation hashes
+and a three-page visual check are recorded in the
+[methods validation](evidence/joint_writer_staged_methods_validation.json).
+This staged input adds no trained result and is not yet included in the active
+article PDFs.
+
 The new [Figure 23](figures/Figure_23_continuation_history.png) has an
 [editable PowerPoint source](figures/Continuation_history_figures.pptx), two
 native charts, a native preflight table and a directed pixel-feedback diagram.

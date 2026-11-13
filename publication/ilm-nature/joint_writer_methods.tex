@@ -1,0 +1,147 @@
+% Prospective methods, staged separately from the active article.
+% Scope: references/manuscript_complete_continuation_revision_plan.md.
+\subsection*{Conditional joint writing over physical pixels}
+The registered replacement changes the image writer while retaining the final
+continuation model's visual reader, answer dynamics, initial query, image
+feedback encoder, affine statistics and stop predictor. Its trained writing
+and autonomous language outcomes are unmeasured. The hypothesis is that a
+conditional joint image distribution can avoid dense marginal pixel mixtures
+without losing the retained contextual information. Autoregressive image
+densities and vector-conditioned image decoders are established
+formulations\cite{pixelrnn,pixelcnn}; their use here does not guarantee readable
+characters, correct answers or improved efficiency.
+
+Let $X$ denote the visible prompt and $Y_t\in\{0,1\}^{32\times32}$ the $t$th
+emitted image, with one indicating ink. The interface signs its pixels as
+$S_t=1-2Y_t$. With immutable prompt memory $M_\theta(X)$, learned initial query
+$q$ and frozen image-feedback function $F_\kappa$, the next contextual state is
+\begin{equation}
+ h_t=D_\theta\!\left(q,F_\kappa(S_{<t});M_\theta(X)\right).
+ \label{eq:joint-glyph-history}
+\end{equation}
+Here $F_\kappa$ acts on each preceding image in order, and the notation selects
+the last state of the causal continuation computation.
+The actual feedback is
+$F_\kappa(S)=\sigma_e\odot E_\kappa(S)+\mu_e$, with the existing image encoder
+and fixed semantic affine buffers. A target image does not enter its own
+predictor. At generation time these inputs are the model's
+emitted pixels, rather than a retrieved glyph or a rendered transcription.
+
+Partition each image into sixteen rows and eight columns of 2-by-4 pieces.
+For $0\leq a<16$, $0\leq b<8$ and $j=8a+b$, encode the piece by
+\begin{equation}
+ r_{t,j}=\sum_{u=0}^{1}\sum_{v=0}^{3}
+       2^{4u+v}Y_t[2a+u,4b+v].
+ \label{eq:joint-glyph-packing}
+\end{equation}
+Each $r_{t,j}$ ranges from zero to 255. The mapping is exactly invertible and
+imposes no glyph inventory: every binary 32-by-32 image has a representation.
+These discrete physical values encode pixels rather than Unicode characters
+or linguistic tokens. Representability alone establishes neither legibility
+at this resolution nor generalization to historical or unencoded writing.
+
+The new head defines a normalized conditional distribution within each image,
+\begin{equation}
+ p_\phi(Y_t\mid h_t)=\prod_{j=0}^{127}
+ p_\phi(r_{t,j}\mid h_t,r_{t,<j}).
+ \label{eq:joint-glyph-density}
+\end{equation}
+Every factor is a 256-way softmax. During fitting, piece $j$ receives only
+preceding target pieces; its own value enters the input at $j+1$. Causal
+attention prevents future pieces from entering that factor. During generation,
+the head chooses each mask greedily from its own emitted prefix. The same
+inverse packing produces the final image without a font, lexical output head,
+OCR, answer lookup or live teacher. Greedy local choices need not yield the
+most probable full image or a valid character. The head makes 128 sequential
+decisions per glyph; reduced training parameter count does not establish a
+wall-time advantage.
+
+\subsection*{Image history and variable-length outputs}
+Let $s_t=\operatorname{sigmoid}(g_\theta(h_t))$ be the retained stop
+probability. The likelihood of a finite image stream with an end event is
+\begin{equation}
+ \begin{aligned}
+ p_\phi(Y_{1:T},{\rm end}\mid X)
+  &=s_{T+1}\prod_{t=1}^{T}
+       (1-s_t)p_\phi(Y_t\mid h_t).
+ \end{aligned}
+ \label{eq:joint-glyph-stream}
+\end{equation}
+This expression permits an empty response when the first decision stops. It
+does not prove almost-sure stopping or a natural document ending. The deployed
+rule stops before appending a glyph when $s_t\geq0.5$; otherwise it appends the
+generated image and rereads it through $F_\kappa$. Fixed caps of 128 and 640
+glyphs bound the registered comparisons, with caps retained as failures to
+stop rather than silently converted into natural endings. Reference output
+lengths never enter autonomous generation.
+
+Only the new image head is fitted in this comparison. Its within-image
+likelihood cannot train the frozen reader or stop predictor, and its clean
+training histories do not establish stability under generated histories.
+The interpretation of the prompt, image-form fidelity and complete-language
+behavior therefore require separate evidence.
+
+\subsection*{Complete-sequence fitting and state normalization}
+For source $i$ with $T_i$ target images and layout $\ell$, cache
+$h_{it}^{\ell}$ after the query and preceding reference images, before target
+$t$ enters history. Retain all $T_i+1$ states losslessly in FP32, but exclude
+the terminal state from image loss. Both layouts of all 13,766 sources give
+27,532 cache records and 4,072,494 target-predicting states. The loss used for
+one complete source presentation is
+\begin{equation}
+ \begin{aligned}
+ \mathcal L_{i\ell}(\phi)
+   &=-\frac{1}{128T_i}\sum_{t=1}^{T_i}\sum_{j=0}^{127}
+       \log p_\phi(r_{it,j}\mid h_{it}^{\ell},r_{it,<j}).
+ \end{aligned}
+ \label{eq:joint-glyph-sequence-loss}
+\end{equation}
+The fixed $1/128$ factor reports mean physical-piece NLL, proportional to the
+complete-image negative log likelihood. Averaging within each full source
+prevents its length from determining its optimizer weight. Accumulating
+microbatches of at most 64 images preserves this exact reduction; a complete
+source presentation makes one optimizer update.
+
+The three-epoch schedule presents every source once per epoch, with one fixed
+and two proportional layouts overall. Its empirical objective is
+\begin{equation}
+ \mathcal L(\phi)=\frac1N\sum_{i=1}^{N}\sum_{\ell\in\{f,p\}}
+       w_\ell\mathcal L_{i\ell}(\phi).
+ \label{eq:joint-glyph-layout-loss}
+\end{equation}
+Here $N=13{,}766$, $w_f=1/3$ and $w_p=2/3$.
+The registration fixes 41,298 retained updates and 6,108,741 target-image
+exposures. Development histories contribute to neither fitting nor
+normalization. Compute the head's conditioning mean and second moment from
+training predictor states, giving each source equal weight and the same 1:2
+layout ratio. Exclude terminal states and floor each resulting standard
+deviation at $10^{-4}$. These conditioning statistics are distinct from
+the retained image-feedback affine buffers $\mu_e,\sigma_e$.
+
+The 4,096-dimensional standardized condition projects to width 192. Four
+causal layers, each with six attention heads, process 128 physical positions.
+Each preceding mask projects from $2\,\operatorname{bits}(r)-1$, where
+$\operatorname{bits}$ recovers the eight bits in Eq.~\ref{eq:joint-glyph-packing}'s
+order. Learned start and positional vectors complete the inputs. The component has 2,642,368
+parameters. FP32 AdamW uses a peak learning rate $2\times10^{-4}$, 500-update
+warm-up, cosine decay to $2\times10^{-5}$, weight decay 0.01 and gradient norm
+clipping at one. Five fixed head snapshots are prescribed; no development
+result selects a snapshot or schedule. All retain the same final reader.
+
+\subsection*{Scope of the prospective comparison}
+Conditional writing first requires frozen opaque review of the prescribed
+positions in all 124 complete cases. At least 90\% of selected candidate forms
+must be confidently readable and nonblank in every training/development,
+source-kind and layout group. A legible alternative book glyph can pass this
+component gate without matching the canonical next glyph. Original pixels,
+uncertainty and all control groups remain intact. Physical qualification does
+not replace the 708-stream autonomous comparison, paired questions, erasures,
+retained successes, coherent long books or subsequent untouched confirmation.
+
+The small fitted head retains the inherited 7.522-billion-parameter visual and
+contextual body and the previously trained continuation/interface components.
+The complete new deployment, cached preparation, inherited pretraining, fitting,
+generation and review must all enter resource accounting. A vocabulary-free
+runtime image boundary does not establish language acquisition from images
+alone. No compact-foundation, matched-quality efficiency or useful complete
+language claim follows from this prospective method.
