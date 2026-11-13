@@ -252,3 +252,12 @@ redline builds, native figure exports and versioned local delivery remain requir
 after resource admission. Existing PDFs and baseline hashes remain preserved;
 they must not be described as containing this newer measurement before the
 compiled changed pages are actually verified.
+
+The probability diagnosis is now complete and independently recounted on all
+124 cases/12,597 positions. Its measured empty-image preference and failed
+search-only criterion may be included, using
+`references/joint_writer_blank_density_result.md`. Context learning through
+the joint likelihood is the next controlled intervention. Its state-gradient
+algorithm passes an independent unsplit-autograd check; it has no real-source
+GPU preflight or fitted language result yet. Keep these statuses explicit when
+updating the six joint-method equations, abstract and Figure25.

@@ -4,8 +4,10 @@
 complete. All 33 boards and 2,080 forms were reviewed and sealed before unmasking.
 The [physical gate fails](../references/joint_writer_physical_result.md) in two
 groups. Do not resume this run or launch its autonomous evaluator. The commands
-below document its reproducible recipe; current work follows the separate
-[empty-image diagnosis](../references/joint_writer_blank_density_protocol.md).
+below document its reproducible recipe. The
+[empty-image diagnosis](../references/joint_writer_blank_density_result.md) is
+also complete; current work follows the separate
+[context-learning decision](../references/joint_writer_context_learning_decision.md).
 
 This comparison replaces the final continuation model's point image writer with
 a normalized joint distribution over all 1,024 physical pixels. It preserves

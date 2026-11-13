@@ -3,9 +3,11 @@
 **Completed outcome:** the replacement is trained and its full physical review
 is sealed. It improves readability but fails two of seven candidate groups;
 see the [complete result](joint_writer_physical_result.md). This actor is terminal
-and has no autonomous language result. The next bounded measurement is the
-[empty-image probability diagnosis](joint_writer_blank_density_protocol.md),
-not another unchanged fit or a relaxed gate. The design rationale below is
+and has no autonomous language result. The
+[empty-image probability diagnosis](joint_writer_blank_density_result.md) is
+also complete and rejects its search-only decision rule. The next intervention
+trains the [continuation state through joint likelihood](joint_writer_context_learning_decision.md).
+The design rationale below is
 preserved as the original prospective decision.
 
 The completed initial/final clean-history control separates the current failure.

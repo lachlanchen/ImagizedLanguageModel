@@ -39,10 +39,17 @@ unchanged90% per-group prerequisite. Do not resume this fit, repair readings,
 select an intermediate head, relax the gate or launch its708 autonomous streams.
 Its complete language remains unmeasured. All17 uncredited selected development
 book outputs are empty; four source positions in that group are also empty.
-The next bounded question is in `references/joint_writer_blank_density_protocol.md`:
-score the fitted source/empty/saved-image probabilities on all124 complete cached
-cases before assuming search or more training will repair the failure. Register
-and commit/push before new neural work; preserve the original45 bound sources.
+The probability diagnosis is also complete; read
+`references/joint_writer_blank_density_result.md`. All124 cases/12,597positions
+are scored without optimization or new generation. Only1/13selected devbook
+falseblanks and no selected trainfixedQA falseblank prefer the source image;
+the search-only criterion fails. No blank-prefix argmax inconsistency is found.
+The next intervention is selected in `references/joint_writer_context_learning_decision.md`:
+train continuation adapters/query through the proper joint image likelihood,
+with the original head-only trial as the unchanged control. Its exact state-VJP
+implementation passes unsplit-autograd checks, but real-source GPU preflight
+and a complete fit are unexecuted. Register and commit/push before new neural
+work; preserve the original45 bound sources and all original frozen readings.
 Use the private handoff for current ownership. The old point system's whole
 7,578,390,003 parameters and the joint head's2,642,368 trainables do not establish
 a lightweight foundation; whole-system costs remain required.

@@ -46,14 +46,22 @@ whole deployed parameters do not establish the desired compact model.
   its complete language is unmeasured. Preserve the fixed reader/context/
   feedback/stop path, all snapshots and original verdict. Its 2,642,368 new
   parameters do not establish a small whole model.
-- The next [probability diagnosis](../references/joint_writer_blank_density_protocol.md)
-  addresses an observed new failure: all seventeen uncredited selected
-  development-book forms are empty. Score the fitted density on source,
-  empty and saved images across all 124 complete cached cases before assuming
-  that a decoding change or another fit helps. Four selected book source images
-  are themselves empty; keep whitespace separate without revising the gate.
-  Register and commit/push before new neural computation. Do not restart the
-  completed trial or launch its blocked 708-stream autonomous evaluation.
+- The [probability diagnosis](../references/joint_writer_blank_density_result.md)
+  is complete on all 124 cases and 12,597 positions. It finds 349 false blanks;
+  only sixteen prefer their source image. Only one of thirteen selected
+  development-book false blanks and no selected training-fixed-QA false blank
+  do so, rejecting the registered search-only decision rule. No blank-prefix
+  argmax inconsistency is observed. Four selected book source images are
+  themselves empty; keep whitespace separate without revising the old gate.
+- The next [controlled change](../references/joint_writer_context_learning_decision.md)
+  trains continuation adapters and the initial query through complete-image
+  likelihood, with the completed head-only trial as its unchanged control.
+  The exact memory-bounded state-gradient implementation matches unsplit
+  autograd; real complete-source GPU preflight and a full fit remain required.
+  Keep prompt memory, native body, image feedback and stop parameters frozen.
+  Register sources, initialization, schedule, gradients, complete evaluation
+  and resource limits before neural execution. Do not restart a completed
+  recipe or launch the failed actor's blocked autonomous comparison.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -211,8 +219,9 @@ The immediate model work follows the
 [failure decision](../references/visual_continuation_failure_decision.md).
 The joint-writer comparison from the final frozen reader is now also complete
 and fails its physical prerequisite, despite improved conditional forms. Use
-its frozen result and the bounded empty-image probability diagnosis for the
-next decision; no complete-language result is available for that actor. Keep
+its frozen result and completed empty-image probability diagnosis for the
+next controlled gradient-reach change; no complete-language result is available
+for that actor. Keep
 complete sources, unchanged controls and all full-language criteria. The
 completed initial/final clean-history comparison
 applies to this actual final reader; the older diagnosis remains a different
