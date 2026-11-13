@@ -5,7 +5,6 @@ This module is a writer component; its existence establishes no language result.
 """
 import torch
 from torch import nn
-from torch.nn import functional as F
 
 from .conditional_pixel_density import ConditionalPixelDensity, PixelDensityConfig, pattern_bits
 
@@ -37,8 +36,7 @@ class GlyphJointDensity(ConditionalPixelDensity):
             raise ValueError('One finite contextual state per target image required')
         patterns = pack_glyphs(ink)
         logits = self(states, patterns)
-        return F.cross_entropy(logits.float().reshape(-1, 256), patterns.reshape(-1),
-                               reduction='none').reshape(len(ink), 128).mean(1)
+        return -logits.float().log_softmax(-1).gather(-1, patterns[..., None]).squeeze(-1).mean(1)
 
     @torch.no_grad()
     def write(self, states):
