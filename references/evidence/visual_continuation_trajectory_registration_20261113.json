@@ -1,0 +1,44 @@
+{
+  "schema": "visual-continuation-trajectory-registration-v1",
+  "runtime": {
+    "python": "3.10.13",
+    "numpy": "2.2.6",
+    "torch": "2.11.0+cu130"
+  },
+  "source_sha256": {
+    "scripts/analyze_visual_continuation_trajectories.py": "e8bc0e87f34a79d0ac905d2bef27ad2221e2c14cbb907243190c93f364fbb7ca",
+    "tests/test_continuation_trajectory_statistics.py": "862030b04a95d55f6eeb2b11a8ab0aedb8678cef54abdfa7509198ed186cf8d9",
+    "references/visual_continuation_trajectory_analysis_plan.md": "18a031ac427b24714abd92dd375aaf3b50b7f950a2e863e185ffdb270b4293f0"
+  },
+  "bindings_sha256": {
+    "artifacts/visual_continuation_full_logger_recovery_v2/preparation.json": "8176d00d541f622c2994c2080999815b9e32e092a1bd4d9dbb96fc1e1333a9d3",
+    "artifacts/visual_continuation_full_logger_recovery_v2/training_manifest.json": "c5da267618c6ea5f049b26e6ccfd7f443235d72091641bda5c5b4c7449f2456a",
+    "artifacts/visual_continuation_full_logger_recovery_v2/fit/report.json": "6b48151c8623c3e8ad2cecf5cd7829fb39ae2d41032fcf60da1671a635a47e99",
+    "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/report.json": "33340fd4b4c6a037f55b05b43207a2fad15be18ad2455cfb90a6c8cd79d64925",
+    "artifacts/visual_continuation_full_logger_recovery_v2/parent_long_books/report.json": "f6350649a3978f71599290a12d7d3fdb0f1a139e857febfa3e2dc448dd2a1c0b",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/mapping.json": "e550282f13a794a902198244de0c42e88a0289ca2f4b87a33bb1aa1e059a15a7",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/frozen_readings.json": "c213308eb80dfac48e03f1dbb5ecedebbdbb95695b22eeff82baf54815f554fe",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/summary.json": "478c9462de2e8ca6100d3aa14c463d41b4b7754f952c0f8c695ce7e379d4dd36",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/protocol_pilot_audit.json": "74c2708b7acef5f6c2b307f1751481f9e38bc7f507dee4805b3ad05079c52b0c",
+    "artifacts/visual_continuation_full_logger_recovery_v2/review/reviewer_pre_unmask_freeze.json": "ab8e576be0b17481fd64dd828555540ab63de0e37b5f9c9faaa80bd5adb5da94",
+    "data/visual_sequence_corpus_v1/report.json": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7"
+  },
+  "retrospective_after_frozen_language_scoring": true,
+  "new_statistics_computed": false,
+  "all_saved_streams": 732,
+  "complete_training_targets": 13766,
+  "windows": [
+    8,
+    32
+  ],
+  "clean_density_quantile": 0.99,
+  "binary_threshold": 0.5,
+  "cpu_threads": 2,
+  "maximum_seconds": 600,
+  "maximum_peak_rss_gib": 8,
+  "minimum_available_host_gib": 24,
+  "new_model_calls": 0,
+  "optimizer_updates": 0,
+  "original_scores_or_readings_modified": false,
+  "goal_achieved": false
+}
