@@ -84,8 +84,10 @@ The Nature-style reading/review/redline PDFs now include the completed
 checkpoint results, failed joint-writer prerequisite and exact context-gradient
 methods, with Figures 23--25 and 45/80/82 pages. The source-bound receipt is
 `publication/ilm-nature/evidence/complete_continuation_article_build.json`.
-Earlier PDFs and native figures remain preserved; Office vector export and
-versioned local delivery are separate pending operations. Model failure resolution retains
+Earlier PDFs and native figures remain preserved. The versioned local delivery
+is recorded in `publication/ilm-nature/evidence/complete_continuation_local_sync.json`;
+local hashes do not establish remote cloud propagation. Office vector export
+remains pending. Model failure resolution retains
 priority over presentation-only work. Use the private handoff for current
 ownership and resources. The old trial is terminal; current joint-writer runtime
 ownership belongs only in the private handoff.

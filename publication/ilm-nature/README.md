@@ -45,8 +45,11 @@ trial is separately registered and running; its complete-language result remains
 unmeasured. The [Figure 25 receipt](evidence/joint_writer_reviewed_native_figure.json)
 preserves the earlier finalized-file reimport review. The article embeds the
 reviewed PNG directly, with exact RGB and alpha pixels authenticated in all
-three PDFs. Office application export and versioned local delivery remain
-separate operations.
+three PDFs. The versioned local package is
+`ILM_NatureStyle_20261114_CompleteContinuation`; its
+[delivery receipt](evidence/complete_continuation_local_sync.json) authenticates
+the copied files and the two owned latest-PDF aliases. Remote cloud propagation
+and Office application export remain unverified.
 
 The complete continuation trial now covers **13,766 sources, 41,298 updates and
 6,108,741 scheduled target positions**. Its final proportional model gives
@@ -130,7 +133,10 @@ recoverable at commit `9f2940d8`; the cumulative comparison still uses the
 immutable `0f14fa3f` baseline. All 230 previous figure assets are unchanged.
 The current PDFs retain all 147 earlier embedded image contents and add
 Figures 23--25 from the reviewed PNGs and preserved native PowerPoint sources.
-Office vector export and local package synchronization remain pending under the
+The [local delivery script](sync_complete_continuation_publication.py) verifies
+the new package while retaining all 645 entries of the earlier package. Its
+`--verify` mode rechecks destination files without rewriting them. Office vector
+export remains pending under the
 [revision plan](../../references/manuscript_complete_continuation_revision_plan.md).
 The figure can be checked from repository files without a private authoring
 cache or model weights:
@@ -201,7 +207,7 @@ training fidelity does not establish autonomous language transfer. See the
 
 ![Realized writing and complete-answer transfer](figures/Figure_22_realized_writer.png)
 
-The current package contains a **35-page article**, **62-page review** and
+The earlier realized-writer package contains a **35-page article**, **62-page review** and
 **63-page article redline**. Figures 12–15 preserve the compact V1 trajectory
 and fixed raw examples. [Figures 16–18](figures/Compact_diagnosis_figures.pptx)
 add three editable slides with seven native measured charts and original
@@ -235,21 +241,28 @@ unchanged. This is a fixed model comparison, not a language-learning curve.
 
 ![Matched input presentation and original glyph outputs](figures/Figure_19_glyph_input_transfer.png)
 
-The current local delivery is `ILM_NatureStyle_20261112_RealizedWriting` in
+The current local delivery is `ILM_NatureStyle_20261114_CompleteContinuation` in
 Projects/ILM. Source and copy receipts verify local files, not cloud propagation.
-The previous versioned packages remain available.
+The earlier `ILM_NatureStyle_20261112_RealizedWriting` package and previous
+versioned packages remain available.
 
-Rebuild the matching article PDFs from the committed figure assets with
-`python build_realized_writer_publication.py` from this directory.
-Run rebuilds in a repository checkout with the immutable Git baseline and
-pinned redline tool available. The selected local delivery is an inspection
-copy and does not duplicate that Git history or tool installation.
+The current article sources can be compiled from this directory with
+`latexmk -pdf manuscript.tex` and `latexmk -pdf manuscript_review.tex`.
+The controlled research build used `build_complete_continuation_article.py`,
+which keeps its baseline, admission records and review journal privately while
+the registered fit runs. The selected local delivery is an inspection copy and
+does not duplicate Git history, model weights or tool installations.
+
+The following builders and receipts belong to the earlier realized-writer
+revision. Run `build_realized_writer_publication.py` in a checkout of that
+revision with its immutable Git baseline and pinned redline tool; its promoter
+must not replace the current article's evidence receipts.
 To check a fresh build without replacing the verified PDFs, set
 `ILM_REALIZED_PAPER_CHECK_ONLY=1` and `ILM_REALIZED_PAPER_STAGE` to a new absolute
 build directory under this repository's `artifacts/` tree. This uses LaTeX, the pinned redline tool and the CPU chart/pixel
 auditor. It needs no model inference or private figure-generation cache.
-The [build receipt](evidence/realized_writer_publication_build.json) binds
-the reviewed PDFs, source files and verification. The
+The historical [build receipt](evidence/realized_writer_publication_build.json) binds
+that revision's reviewed PDFs, source files and verification. The
 [measured data](evidence/realized_writer_measured_data.json),
 [figure bindings](evidence/realized_writer_figure_bindings.json) and
 [chart audit](evidence/realized_writer_figure_audit.json) retain
@@ -260,12 +273,12 @@ Figure authoring uses the bundled Artifact Tool runtime, the public pixel
 archives and the reference deck. Figure 22 has no synthetic glyph illustration.
 The [original-pixel audit](evidence/realized_writer_original_glyph_audit.json)
 also verifies all twenty Figure 21 tile occurrences in each new PDF.
-`python reproduce_realized_writer_publication.py` builds in a separate stage
-and checks every article-page raster against the current PDFs. The completed
+`python reproduce_realized_writer_publication.py` builds that earlier revision in a separate stage
+and checks every article-page raster against its earlier PDFs. The completed
 independent build reproduces all 160 pages bit-for-bit at the audited raster
 resolution, without private figure-authoring cache inputs. The earlier build
-helpers remain available for historical packages; use the realized-writer
-builder for the current article.
+helpers remain available for historical packages. The current article's build
+and visual-review receipt is linked above.
 
 ## Earlier restricted answer results
 

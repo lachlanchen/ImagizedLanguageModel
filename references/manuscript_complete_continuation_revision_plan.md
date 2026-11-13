@@ -467,3 +467,43 @@ of this publication unit. Original physical credits and failed language gates
 remain unchanged. The new article receipt is
 `publication/ilm-nature/evidence/complete_continuation_article_build.json`.
 Office application/vector export and versioned local delivery remain pending.
+
+## Deliver the verified complete-continuation package locally
+
+Copy the reviewed 45/80/82-page article, review and cumulative redline, their
+current sources, Figures 23--25 and native PowerPoint decks to the existing ILM
+Nutstore project folder. Use the new versioned name
+`ILM_NatureStyle_20261114_CompleteContinuation`; preserve the previous
+`ILM_NatureStyle_20261112_RealizedWriting` package and authenticate every one of
+its 645 manifest entries before and after delivery. Verify the new package by
+file hashes, and update only the two manuscript/review latest aliases already
+owned by the previous receipt. Stop if an alias contains an unexpected newer
+value. Do not touch other project files, model weights, browser profiles or
+private runtime records.
+
+Allowed changes are a dedicated local delivery script and receipt, the
+publication README and publication-status sentences in the engineering goal and
+AGENTS.md. Keep paper source, PDF and figure bytes unchanged. Select only the
+previous public publication payload, current compiled inputs, reviewed figures
+and public result/protocol evidence. Exclude caches, raw private artifacts,
+credentials and checkpoints. Treat the receipt itself separately from its
+manifest to avoid a self-referential hash. Record local copying as local copying;
+the presence of a Nutstore client does not establish remote cloud propagation.
+
+The same training controller retains the GPU and all 59 registered sources.
+This operation performs no model call, evaluation, optimization, figure export
+or PDF rebuild. Recheck live ownership and source hashes after copying. Commit
+and push the delivery code, public receipt and accurate status after the copy
+has actually passed its checks; retain any incomplete destination for diagnosis.
+
+Local delivery passes for `ILM_NatureStyle_20261114_CompleteContinuation`:
+779 payload files and the separately copied receipt match their hashes. Both
+owned manuscript/review latest aliases match the reviewed current PDFs. All
+645 manifest entries of the previous realized-writer package remain unchanged.
+The new package contains the current 45/80/82-page PDFs, source inputs, reviewed
+figures, native decks and selected public evidence; it contains no model
+checkpoint or private runtime payload. Live ownership and all 59 registered
+model sources pass before and after copying. The receipt is
+`publication/ilm-nature/evidence/complete_continuation_local_sync.json`.
+This establishes local delivery only; remote cloud propagation and Office
+application/vector export remain unverified.

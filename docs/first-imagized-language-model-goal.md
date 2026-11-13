@@ -104,8 +104,9 @@ whole deployed parameters do not establish the desired compact model.
   and head-only failures, Figures 23--25 and the exact context-gradient methods.
   Their [45/80/82-page build and visual-review receipt](../publication/ilm-nature/evidence/complete_continuation_article_build.json)
   preserves the earlier evidence and distinguishes all-page layout overviews
-  from detailed checks. Office vector export and versioned local delivery remain
-  pending. Publication work must not substitute for resolving the measured model
+  from detailed checks. The [versioned local delivery](../publication/ilm-nature/evidence/complete_continuation_local_sync.json)
+  verifies copying while preserving the earlier package; cloud propagation and
+  Office vector export remain unverified. Publication work must not substitute for resolving the measured model
   failure; the running context-gradient actor's language remains unmeasured.
 
 Keep the goal active through these decisions. Completion requires the language,
