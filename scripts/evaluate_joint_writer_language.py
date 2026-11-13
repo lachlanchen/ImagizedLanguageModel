@@ -26,6 +26,10 @@ NEW_SOURCES = (
     'scripts/recover_visual_continuation_evaluation.py',
     'tests/test_joint_writer_language_evaluation.py',
     'references/joint_writer_language_execution.md',
+    'scripts/review_joint_writer_language.py', 'tests/test_joint_writer_complete_review.py',
+    'scripts/review_compact_visual_span.py', 'scripts/prepare_compact_visual_span_evaluation.py',
+    'scripts/infer_compact_visual_span.py', 'scripts/audit_visual_continuation_protocol.py',
+    'references/joint_writer_complete_review.md',
 )
 EXPECTED_INPUTS = {
     ('fixed_cells', 'normal'): 44, ('fixed_cells', 'question_blank'): 32,

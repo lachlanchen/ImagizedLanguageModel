@@ -43,6 +43,13 @@ unaltered. Each case is saved atomically and authenticated before reuse after
 an explicit manual resume. All outputs require subsequent complete opaque
 review; generation alone assigns no language score.
 
+The [complete-output review workflow](joint_writer_complete_review.md) verifies
+all 708 raw responses, creates opaque boards and visible book-prefix links,
+freezes readings before owner/reference access, and applies the original
+whole-answer scorer plus the full four-QA-erasure audit. Its source and tests
+are included in the post-gate generation bindings. The workflow is prepared;
+actual trained outputs, their review and resulting scores remain unmeasured.
+
 ## Order of execution
 
 The `plan` action is read-only and needs neither Torch nor model weights:

@@ -104,6 +104,11 @@ running pipeline. Bind and commit the actual five fitted snapshots before
 generation. GPU integration and complete language quality remain unmeasured
 until execution and output review finish.
 
+After generation, use the [complete-output review guide](../references/joint_writer_complete_review.md)
+for all 708 answers and 84 visible normal-book prefixes. It seals readings
+before unmasking and retains the full four-arm erasure rule. Its checks and
+fixtures validate the review mechanism, not trained-model language quality.
+
 All arrays, private logs and weights remain ignored under `artifacts/`. Public
 summaries must report cache/fit/qualification costs as well as the inherited
 body and earlier preparation. Keep the full independent image-input/image-output
