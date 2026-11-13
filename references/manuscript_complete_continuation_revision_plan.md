@@ -388,3 +388,82 @@ Prior source bytes, both historical validation receipts, all 59 running model
 sources, Figure 25 and the active article/review/redline PDFs remain unchanged.
 This completes source/layout validation for this bounded revision. It does not
 activate the article or establish the running model's language quality.
+
+## Activate the completed continuation evidence in the article
+
+The active reading/review/redline PDFs still end at the earlier deterministic
+writer comparison. They omit the completed full continuation failure, the
+reference-history diagnosis, the failed joint-writer physical prerequisite and
+the implemented context-gradient mathematics. Integrate the already reviewed
+sources and Figures 23--25 into the existing article while the single registered
+training worker continues. This is publication maintenance, not a new model
+experiment or a substitute for completing its qualification.
+
+Allowed changes: `publication/ilm-nature/frontmatter.tex`,
+`article_content.tex`, the publication README, a new literal-caption figure input,
+a bounded CPU-only article builder and its receipt, and the three active
+reading/review/redline PDFs plus the generated redline TeX. Status comments in
+the now-active continuation narrative, results and methods inputs may be
+corrected; preserve all scientific wording already validated. Replace the old
+opening with the validated introduction, retain the six numeric macro inputs,
+append the completed Results and Methods, and add the new Discussion before the
+preserved earlier interpretation. Keep all earlier controls, failures, original
+grades, references, figures and successful cases. Do not report a language result
+for either the failed head-only writer or the running context-gradient actor.
+
+Before editing, preserve the current active TeX/PDF bytes and all affected input
+hashes privately, with commit `9f2940d8b36b080bd2ad4eb72d25c630f027414d` as the
+immediate baseline. Retain the cumulative redline's immutable `0f14fa3f` baseline
+and previous receipts. Reuse the already reviewed PNGs and native PPTX files;
+their image contents and chart data must remain unchanged. Literal captions
+must match their validated sources. The new PDF can embed those PNGs directly;
+this does not establish an Office application export or alter the native decks.
+
+Use one serial CPU publication process, a separate publication lock and hidden
+CUDA. Do not take the running model's GPU lock, change its 59 bound files or
+launch another training/generation job. Admit with at least 48 GiB available
+RAM, use two CPU threads, retain the 48 GiB reserve, and cap cumulative build
+children at 180 seconds and 2 GiB RSS. Check actual memory pressure and stop only
+the owned publication process group if a limit is exceeded. Reuse the pinned
+official latexdiff and existing cumulative-redline implementation in its
+check-only mode; preserve failed attempts instead of erasing them.
+
+Compile reading, review and cumulative redline outputs privately before
+promotion. Require no unresolved citations/references, duplicate labels or
+overfull boxes; authenticate the new figure pixels and unchanged earlier
+evidence. Render every page for overview inspection, inspect new text, equation,
+table and figure pages at readable size, and check extracted text bounds. Record
+the exact visual-review scope rather than treating a successful build as visual
+verification. Promote only the checked versions, keeping the old active files
+recoverable. Update README status and the build receipt, commit and push.
+Versioned local delivery and Office export remain separate pending operations.
+
+After promotion, the publication-status sentences in `AGENTS.md` and
+`docs/first-imagized-language-model-goal.md` may also be corrected from obsolete
+PDFs to the verified 45/80/82-page versions. Change no model decision, numerical
+gate or acceptance criterion. Both files are outside the running source binding.
+
+The article integration is now complete. The active reading/review/cumulative
+redline PDFs contain 45/80/82 pages. All 207 pages were actually inspected in
+layout overviews; 31 specified pages were inspected at readable size, covering
+the new Results, checkpoint table, Discussion, mathematical methods, title,
+abstract and all three new figures across the PDF variants. The receipt records
+this distinction. Final logs contain no overfull boxes, unresolved references
+or duplicate labels, and every extracted text block stays within its page.
+All three PDFs retain the 147 earlier unique embedded RGB image contents.
+Figures 23--25 match their reviewed PNG RGB and alpha pixels exactly, while all
+230 earlier figure assets and their native PPTX files remain byte-identical.
+
+The first build fails before producing a PDF because the historical Figure 23
+caption is already a complete plate macro. The exact existing caption argument
+is extracted without changing its scientific text; the failed source/logs are
+preserved. Cumulative child execution, including that failure, takes 18.863
+seconds, with 0.084 GiB maximum observed child-tree RSS and at least 62.200 GiB
+available RAM. Automatic image/text checks and overview rendering take a further
+7.406 seconds. Detailed page rendering and visual review are separate work.
+The model's GPU lock is never acquired, its owner remains live, and all 59 bound
+sources are unchanged. No new model call, generation or optimization is part
+of this publication unit. Original physical credits and failed language gates
+remain unchanged. The new article receipt is
+`publication/ilm-nature/evidence/complete_continuation_article_build.json`.
+Office application/vector export and versioned local delivery remain pending.

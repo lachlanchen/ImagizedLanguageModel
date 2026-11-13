@@ -13,7 +13,17 @@ at `0f14fa3f`. The
 preserved `2ca07ea0` baseline. The [glyph-feedback builder](glyph_step_publication.py)
 and earlier baselines remain available for reproduction.
 
-## Staged continuation update
+## Completed continuation update
+
+The active [reading article](manuscript.pdf), [line-numbered review copy](manuscript_review.pdf)
+and [cumulative redline](redlined_manuscript.pdf) now include the completed
+continuation comparison, its history controls, the failed joint-writer
+qualification and the exact context-gradient methods. They contain 45, 80 and
+82 pages, respectively. The
+[article build and review receipt](evidence/complete_continuation_article_build.json)
+records all-page layout overviews, detailed inspection of 31 selected pages,
+resolved references and preserved earlier image contents. The running
+context-gradient model's language remains unmeasured.
 
 The completed head-only joint writer now has a measured
 [Figure 25](figures/Figure_25_joint_writer_physical.png) and
@@ -22,8 +32,8 @@ charts, an exact-count table and all seventeen uncredited selected book outputs,
 each beside its source and point control. Its
 [data and image verifier](verify_joint_writer_figure.py) checks native chart
 caches, literal workbooks, the unchanged 90% line and all 51 source rasters.
-The [new Results](joint_writer_results.tex) and
-[caption](joint_writer_caption.tex) remain staged for article integration.
+The [Results](joint_writer_results.tex) and
+[caption](joint_writer_caption.tex) are included in the active article.
 
 The accompanying [pixel/blank-flag audit](../../references/joint_writer_blank_flag_audit.md)
 finds seventeen errors in the original 2,080 frozen readings, including four
@@ -33,8 +43,10 @@ count of thirteen, agree with the existing probability JSON. The audit does not
 repair readings or assign a language score. The subsequent context-gradient
 trial is separately registered and running; its complete-language result remains
 unmeasured. The [Figure 25 receipt](evidence/joint_writer_reviewed_native_figure.json)
-distinguishes finalized-file reimport review from the pending Office export,
-active article/review/redline builds and local delivery.
+preserves the earlier finalized-file reimport review. The article embeds the
+reviewed PNG directly, with exact RGB and alpha pixels authenticated in all
+three PDFs. Office application export and versioned local delivery remain
+separate operations.
 
 The complete continuation trial now covers **13,766 sources, 41,298 updates and
 6,108,741 scheduled target positions**. Its final proportional model gives
@@ -62,7 +74,7 @@ registered experiment with no measured language result in this figure. The full
 point-writer deployment retains 7.578B parameters and does not establish a
 compact foundation or an efficiency advantage over an LLM.
 
-A proposed [title and abstract](complete_continuation_frontmatter.tex),
+The active [title and abstract](complete_continuation_frontmatter.tex),
 [introduction](complete_continuation_introduction.tex) and scoped
 [Discussion addition](complete_continuation_discussion.tex) connect these
 results to the visual-language objective. They distinguish inherited knowledge,
@@ -80,15 +92,15 @@ objective differs from the unweighted likelihood of a complete finite stream.
 The derivation explains the actual code's chain rule; computational feasibility
 does not establish language understanding.
 
-The [current source validation](evidence/joint_context_staged_mathematics_validation.json)
-binds the revised narrative and methods to their numerical evidence and
-implementation. All five standalone pages, all eight equations, the three
-existing primary citations and Figure 25 were visually checked, with no
-overfull boxes or unresolved references. The previous
+The [standalone source validation](evidence/joint_context_staged_mathematics_validation.json)
+preserves the pre-integration narrative and methods check against their numerical
+evidence and implementation. Its five pages, eight equations, three existing
+primary citations and Figure 25 were visually checked. The active article's
+source hashes and page locations are recorded in the newer article receipt.
+The previous
 [methods validation](evidence/joint_writer_staged_methods_validation.json)
-remains a historical receipt for the earlier six-equation version. These inputs
-are staged: the active article, review and redline PDFs remain unchanged, and
-Office export and full publication integration remain pending.
+remains a historical receipt for the earlier six-equation version. The revised
+inputs are now included in the article, review and cumulative redline PDFs.
 
 The corrected [Figure 23](figures/Figure_23_continuation_history_completed.png)
 has an [editable PowerPoint source](figures/Continuation_history_completed_figures.pptx),
@@ -103,20 +115,23 @@ unverified. The original [native audit](evidence/continuation_history_reviewed_n
 and [preview](figures/Figure_23_continuation_history.png) remain available as
 historical evidence.
 
-The [staged Results](continuation_history_results.tex) and
+The [Results](continuation_history_results.tex) and
 [Methods](continuation_history_methods.tex) describe the completed reference-image
 history study and the real 36-layer preflight, with the completed full trial's
-status corrected in the Results, Methods and caption. The new five-page source
+status corrected in the Results, Methods and caption. The earlier five-page source
 check includes both figures and all five numbered method equations. It preserves
 the earlier three-page validation and all 227 original assets. Supplied-history
 writing and preflight feasibility remain separate from autonomous language;
 Figure 24 reports the completed checkpoint comparison. Their integration is covered by the
 [completed-trial revision plan](../../references/manuscript_complete_continuation_revision_plan.md).
 
-The active 35-page reading, 62-page review and 63-page redline PDFs still predate
-this staged update. Figure PDF export, article integration, full builds,
-redline verification and local package synchronization remain pending under the
-[revision plan](../../references/manuscript_continuation_history_revision_plan.md).
+The earlier 35-page reading, 62-page review and 63-page redline versions remain
+recoverable at commit `9f2940d8`; the cumulative comparison still uses the
+immutable `0f14fa3f` baseline. All 230 previous figure assets are unchanged.
+The current PDFs retain all 147 earlier embedded image contents and add
+Figures 23--25 from the reviewed PNGs and preserved native PowerPoint sources.
+Office vector export and local package synchronization remain pending under the
+[revision plan](../../references/manuscript_complete_continuation_revision_plan.md).
 The figure can be checked from repository files without a private authoring
 cache or model weights:
 
@@ -126,7 +141,7 @@ CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/prepare_complete_continuat
 CUDA_VISIBLE_DEVICES='' python publication/ilm-nature/verify_complete_continuation_figure.py
 ```
 
-## Current result
+## Earlier results and controls
 
 Both compact complete-sequence fits give **0/32 complete exact QA answers**
 and **0/16 both-correct pairs** at all five checkpoints. The wider writer

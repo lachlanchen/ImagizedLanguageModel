@@ -80,9 +80,12 @@ changes. Do not repeat these completed controls or the completed joint fit.
 Use their evidence for failure-specific decisions, with resource admission and
 live ownership.
 
-Update the Nature-style manuscript and native figures from the completed
-checkpoint results. Existing PDFs predate this measurement; preserve their
-baselines and label their status accurately. Model failure resolution retains
+The Nature-style reading/review/redline PDFs now include the completed
+checkpoint results, failed joint-writer prerequisite and exact context-gradient
+methods, with Figures 23--25 and 45/80/82 pages. The source-bound receipt is
+`publication/ilm-nature/evidence/complete_continuation_article_build.json`.
+Earlier PDFs and native figures remain preserved; Office vector export and
+versioned local delivery are separate pending operations. Model failure resolution retains
 priority over presentation-only work. Use the private handoff for current
 ownership and resources. The old trial is terminal; current joint-writer runtime
 ownership belongs only in the private handoff.

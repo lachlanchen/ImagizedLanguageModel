@@ -1,57 +1,4 @@
-Written language is encountered as marks on paper, screens and historical
-surfaces. Its visual form carries information about script, handwriting and
-material history. Modern character encodings provide a powerful interface to
-many such marks, but a finite inventory cannot express every damaged,
-transitional or unencoded form. An image-based language model could retain
-that evidence throughout reading and generation, with transcription offered
-as an optional output view.
-
-Pixel-based language modelling already has substantial precedents.
-PIXAR demonstrates autoregressive language generation in pixel space and
-identifies the difficulty of generating readable text\cite{pixar}. Continuous
-autoregression can use a diffusion loss in place of vector quantization\cite{mar},
-while Diffusion Forcing models continuous sequences under independently chosen
-noise levels\cite{forcing}. These results motivate a visual language interface,
-but do not establish that a small glyph generator acquires linguistic
-knowledge or that image input automatically reduces training cost.
-Exact pixel factorization also has established precedents in PixelRNN and
-conditional PixelCNN\cite{pixelrnn,pixelcnn}. Masked autoregressive networks
-provide normalized probabilities without a character dictionary\cite{made}.
-Multilingual generation from pixels has also been studied\cite{mixar}.
-
-Recent continuous multimodal flow models share a generative objective across
-embeddings while retaining token-derived language encoders and text
-decoders\cite{multimodalflow}. OCG reports rendered-question and answer-image
-reasoning with teacher assistance on the restricted CLEVR task\cite{ocg}.
-We focus on independent image-only inference and controlled tests linking
-conditional scores to autonomous writing.
-
-We investigate the conditional generation problem directly. The model
-receives raster history, predicts a distribution of future writing, emits
-pixels and rereads those pixels. Chinese provides a demanding initial case:
-stroke configurations must remain coherent while context selects among many
-similar written forms. The present study uses one canonical font to isolate
-this coupling before introducing handwriting or historical scripts.
-
-The experiments progress from initial raster readers and denoisers to
-inherited contextual bodies with separately learned glyph interfaces. The
-earlier architectures provide controls. Restricted short-answer experiments
-evaluate the complete-glyph loop shown in Fig.~S37; a separate compact
-experiment then fits complete book and question--answer sequences and measures
-all five saved checkpoints. A controlled wider writer and frozen-weight
-interventions then test the sources of failure. A matched earlier-actor
-control and full-prompt presentation comparison subsequently test retained
-image-answer transfer on the same question cohort. Matched native decoding
-and a first-writing audit then distinguish retained answer access from
-physical form support. A direct-context motor and a paired decoded-image
-objective subsequently test conditional writing while preserving the reader.
-Their failed retention and physical gates remain distinct from new language
-learning. Realized-sampler supervision and a matched physically qualified
-writer then test whether improved training-state writing transfers to
-complete answers. The contributions are the
-explicit emitted-pixel interface, controlled language tests, reproducible
-single-GPU execution and measured writer/reader restrictions. None establishes a generally
-usable visual language model or a from-scratch language learner.
+\input{complete_continuation_introduction.tex}
 
 \section*{Results}
 \subsection*{An initial continuous visual interface preserves the written signal}
@@ -833,7 +780,15 @@ an alignment repair.
 
 \input{compact_sequence_results.tex}
 
+\input{continuation_history_results.tex}
+\input{complete_continuation_results.tex}
+\input{joint_writer_results.tex}
+\input{complete_continuation_figures.tex}
+
 \section*{Discussion}
+\input{complete_continuation_discussion.tex}
+
+\subsection*{Earlier interfaces and conditional-writing controls}
 The results separate a useful visual predictive state from a useful visual
 language generator. The established causal reader learns context-dependent
 next-writing information, while subsequent writers can erase that information
@@ -942,6 +897,9 @@ External pretraining remains part of the model's provenance.
 
 \section*{Methods}
 \input{compact_sequence_methods.tex}
+\input{continuation_history_methods.tex}
+\input{complete_continuation_methods.tex}
+\input{joint_writer_methods.tex}
 
 \subsection*{Initial raster control data}
 The public Chinese stream contains 7,017 provenance-tracked records. Records

@@ -100,8 +100,13 @@ whole deployed parameters do not establish the desired compact model.
   prediction, its control and an outcome that would reject it. Ordered visual
   blocks remain a candidate representation, with language benefit unmeasured.
 - Update the manuscript and native figures from actual completed measurements.
-  Existing PDFs predate this result. Publication work must not substitute for
-  resolving the measured model failure.
+  The active reading/review/redline PDFs now include the completed continuation
+  and head-only failures, Figures 23--25 and the exact context-gradient methods.
+  Their [45/80/82-page build and visual-review receipt](../publication/ilm-nature/evidence/complete_continuation_article_build.json)
+  preserves the earlier evidence and distinguishes all-page layout overviews
+  from detailed checks. Office vector export and versioned local delivery remain
+  pending. Publication work must not substitute for resolving the measured model
+  failure; the running context-gradient actor's language remains unmeasured.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
