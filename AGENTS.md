@@ -67,12 +67,22 @@ increase 349 to 711, including book false blanks 324 to 689. Do not resume this
 fit, select an intermediate checkpoint or launch its 708 autonomous streams.
 Language remains unmeasured. Preserve all 59 running sources, 50 preflight
 sources, 45 original control sources and every original reading.
-The next bounded measurement is selected in
-`references/joint_context_failure_decision.md`: score source, blank and saved
-image probabilities on this new actor's actual learned-context states before
-choosing a representation change or a decoding comparison. Implement and commit
-its separate source/snapshot/resource binding before neural execution. Do not
-reuse old cached states or repeat the old control's completed diagnosis.
+The actual-context probability probe is also complete; read
+`references/joint_context_blank_modes_result.md`. All 124 cases/12,597 positions
+use the actual final 131-tensor state. Source preference 4/93, 26/307 and 27/289
+fails all search-only thresholds; 108 blank global modes are certified and all
+saved argmax choices reproduce with zero disagreement. No optimization or new
+images/answers were generated. Preserve all 78 bound sources and probability
+arrays. Do not rerun this probe or the old head-only diagnosis.
+The next objective comparison is selected in
+`references/global_glyph_ranking_decision.md`: add whole-glyph ranking against
+the blank at nonempty training positions, keeping true-whitespace likelihood,
+the physical density and greedy decoder. Four CPU gradient checks pass; this is
+untrained and proves no language. A fresh real-source preflight is defined in
+`references/global_glyph_ranking_preflight_protocol.md`. Register/commit/push its
+exact binding before GPU work; verify both complete QA layouts and both actual
+513-glyph book updates/reset. Only that proof permits preparing a full-corpus
+comparison. Do not repeat the old preflight, force ink or shrink language gates.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see
 `references/joint_context_language_execution.md`. It restores all131 learned

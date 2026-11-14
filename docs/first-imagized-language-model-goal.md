@@ -80,10 +80,9 @@ whole deployed parameters do not establish the desired compact model.
   likelihood improves, but all-case false blanks increase 349 to 711 and book
   false blanks 324 to 689 relative to unchanged head-only pixels. This rejects
   the tested change as a sufficient repair, not visual language learning in
-  general. The [next bounded decision](../references/joint_context_failure_decision.md)
-  distinguishes density preference from greedy physical-prefix failure on the
-  new learned-context actor, with a separate committed binding before neural
-  execution. Do not repeat the old control's completed probability study.
+  general. Its [bounded probability decision](../references/joint_context_failure_decision.md)
+  has now been executed on the actual learned-context actor; do not repeat it
+  or the old control's completed probability study.
   The [post-qualification evaluator](../references/joint_context_language_execution.md)
   is implemented with all 131 context/head tensors restored at every snapshot,
   the complete 708-stream plan and an independent check that credited candidate
@@ -95,6 +94,22 @@ whole deployed parameters do not establish the desired compact model.
   Register sources, initialization, schedule, gradients, complete evaluation
   and resource limits before neural execution. Do not restart a completed
   recipe or launch the failed actor's blocked autonomous comparison.
+- The [learned-context probability probe](../references/joint_context_blank_modes_result.md)
+  is complete on all 124 cases and 12,597 positions. Source preference is only
+  4/93, 26/307 and 27/289 book false blanks, failing all prospective search-only
+  thresholds. Empty global modes are certified at 108 false blanks; all saved
+  physical argmax choices reproduce without disagreement. All 131 actual
+  tensors were restored and actual new context states recomputed. No optimizer
+  update, new glyph or autonomous answer was generated. Preserve all 78 bound
+  sources, original probabilities, review errors and failed decisions.
+  The next [bounded objective change](../references/global_glyph_ranking_decision.md)
+  adds whole-glyph source-versus-blank ranking to the existing likelihood for
+  nonempty training targets, preserving true-whitespace likelihood and the
+  original greedy decoder. Four CPU gradient checks pass; full-body behavior
+  and language remain unproved. A fresh
+  [real-source preflight](../references/global_glyph_ranking_preflight_protocol.md)
+  must verify the changed loss and all 131 gradients before registering a fit.
+  Do not substitute forced ink, more search, unchanged epochs or smaller data.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -251,8 +266,8 @@ Candidate evaluation costs 6,338.799 cumulative child seconds and parent long-bo
 evaluation 609.626 seconds, preserving failed attempts. Preparation, admission
 queues, CPU/review work and inherited pretraining are separate. These values
 show one-GPU execution, not matched-quality efficiency over an LLM. Those old
-jobs remain terminal. The separate registered joint-writer pipeline is current
-work; do not restart the completed continuation recipe or evaluator recovery.
+jobs remain terminal. The joint-writer pipelines have also finished and failed;
+do not restart completed training or evaluator recovery.
 
 The immediate model work follows the
 [failure decision](../references/visual_continuation_failure_decision.md).
@@ -261,11 +276,12 @@ and fails its physical prerequisite, despite improved conditional forms. Use
 its frozen result and completed empty-image probability diagnosis as the control
 for the now-completed gradient-reach comparison. That comparison also fails its
 physical prerequisite; no complete-language result is available for either
-joint actor. The selected next measurement follows
-[the context-gradient failure decision](../references/joint_context_failure_decision.md).
-Bind its actual learned continuation and final 131 tensors; old cached states
-cannot substitute. No new fit, intermediate selection, repaired reading or
-autonomous evaluation is justified by a lower source-image loss. Keep
+joint actor. The completed learned-context probability probe rejects the
+search-only rule. The next intervention follows
+[the whole-glyph ranking decision](../references/global_glyph_ranking_decision.md).
+Its new real-source preflight and complete-corpus fit each need their own exact
+source/input/resource registration before execution. Neither CPU gradient checks
+nor a lower source-image loss justify autonomous evaluation or a language claim. Keep
 complete sources, unchanged controls and all full-language criteria. The
 completed initial/final clean-history comparison
 applies to this actual final reader; the older diagnosis remains a different
