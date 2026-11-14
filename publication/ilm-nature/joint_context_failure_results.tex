@@ -1,0 +1,55 @@
+\subsection*{Lower image likelihood loss coexists with more empty book outputs}
+
+Allowing the continuation query and residuals to learn through the joint image
+likelihood completes the same 13,766-source, 41,298-update schedule and
+6,108,741 target exposures. The independent source/optimizer audit, five fixed
+snapshots and all 124 conditional cases are complete. Original frozen candidate
+credits are 970/1,040, compared with 978/1,040 for the unchanged head-only pixels
+reviewed in this comparison. Candidate book groups receive 93/108 development
+credits, 95/108 training-fixed credits and 92/108 training-proportional credits;
+all miss the unchanged 90\% prerequisite. QA groups pass numerically, at
+250/257 and 251/257 for development fixed/proportional inputs, and 94/101 and
+95/101 for the corresponding training groups. The actor therefore stops before
+autonomous evaluation. Its complete-language quality remains unmeasured.
+
+All 33 boards and 2,080 readings were frozen before owner unmasking. The
+subsequent pixel audit detects 28 contradictory blank flags, including four
+candidate and two control credited empty images. Original scores and uncertain
+readings remain unchanged. These credits are retained review outcomes rather
+than corrected physical accuracy. The complete-array measurements below use
+actual binary ink and do not repair any transcription.
+
+Source-image likelihood improves while empty output becomes more frequent
+(Fig.~\ref{fig:context-likelihood-failure}a,b). Development-book mean NLL per
+physical mask decreases from 0.107162 to 0.076070, but false blanks increase
+from 42 to 93 among 1,161 positions. Training-fixed NLL decreases from 0.076528
+to 0.055277 while false blanks increase from 137 to 307; training-proportional
+NLL decreases from 0.076529 to 0.055308 while false blanks increase from 145
+to 289. Each training layout retains 4,586 positions. Truly empty sources are
+counted separately: 22 development and 110 per training layout. Across book
+groups, false blanks rise from 324 to 689; across all seven groups, from 349
+to 711. Every third-epoch book presentation also has lower online source NLL
+than its matched head-only presentation. This loss improvement does not
+qualify generated writing or language.
+
+The completed actual-context probability study restores all 131 learned tensors
+and recomputes all 12,597 target-preceding states. Only 57/711 false blanks
+prefer their source image to the empty image by the fixed 0.001-nat margin.
+Observed book counts are 4/93, 26/307 and 27/289, below the prospective
+requirements of 47, 154 and 145 (Fig.~\ref{fig:context-likelihood-failure}c).
+A first-nonzero-mask upper bound supports an empty global mode at 108 false
+blanks, including 102 book positions. All saved physical argmax choices
+reproduce without disagreement; maximum mean source-NLL drift is
+$6.222\times10^{-9}$. The bound remains subject to finite-precision arithmetic.
+These results reject the registered search-only eligibility rule and motivate
+a training-objective comparison; they do not identify a unique cause of failed
+autonomous language. The six original examples in
+Fig.~\ref{fig:context-likelihood-failure}d follow fixed case/position order.
+
+The context-fit worker takes 76,155.600 seconds, including 1,701.612 seconds of
+resource waiting, at 18.281 GiB peak allocated VRAM. Coordinator-measured
+training, audit and qualification child times are 76,158.268, 15.255 and
+477.432 seconds. Inherited pretraining, preparation and prior trials remain
+separate costs. The new whole-glyph ranking objective passes a reset
+real-source preflight at 17.795 GiB, but its separately registered full-corpus
+comparison has no measured writing or complete-language result here.

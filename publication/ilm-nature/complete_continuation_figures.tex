@@ -1,8 +1,8 @@
-% Literal captions copied from their source inputs by build_complete_continuation_article.py.
+% Literal captions copied from their source inputs by build_context_failure_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
-\includegraphics[width=.92\textwidth]{figures/Figure_23_continuation_history_completed.png}
+\includegraphics[width=.84\textwidth]{figures/Figure_23_continuation_history_completed.png}
 \caption{\textbf{Correct prior images improve canonical writing without qualifying autonomous language.}
 \textbf{a}, Mean foreground F1 at target indices present under both generated
 and supplied reference-image history: 738 fixed-layout and 598 proportional
@@ -35,7 +35,7 @@ confirmation.}
 \end{figure*}
 \begin{figure*}[p]
 \centering
-\includegraphics[width=.92\textwidth]{figures/Figure_24_complete_continuation.png}
+\includegraphics[width=.84\textwidth]{figures/Figure_24_complete_continuation.png}
 \caption{\textbf{Complete visual-continuation adaptation improves some short answers
 but fails sustained writing.}
 \textbf{a,b,} Frozen whole-response exact and readable counts at all five fixed
@@ -62,8 +62,38 @@ has no language result in this figure.}
 \end{figure*}
 \begin{figure*}[p]
 \centering
-\includegraphics[width=.92\textwidth]{figures/Figure_25_joint_writer_physical.png}
+\includegraphics[width=.84\textwidth]{figures/Figure_25_joint_writer_physical.png}
 \caption{\textbf{Joint image likelihood changes conditional writing but fails physical qualification.}
 \textbf{a,} Original frozen readability credits for the joint writer and unchanged point-writer control in all seven supplied-history groups. The dashed line is the prespecified 90\% prerequisite for every candidate group. Exact counts accompany the chart; chart fractions are rounded to six decimal places. Development books and training QA with fixed cells fail. These are retained review counts, not corrected physical accuracy: a subsequent pixel audit finds 17 blank-flag disagreements among 2,080 readings, including four credited empty images. \textbf{b,} Every uncredited selected development-book output, ordered by case and original zero-based position. Each triplet shows the source, point control and joint output. Original binary $32\times32$ images are expanded threefold by nearest neighbour, without repair. Fifteen of these seventeen joint outputs are empty and two are nonempty; two other empty book outputs were credited. Among all 108 selected book positions, four source images are blank, three overlapping the seventeen empty outputs, giving fourteen false blanks. \textbf{c,} Complete-image likelihood prefers the source over the empty image for one of fourteen selected book false blanks and none of four selected training-QA false blanks, below the unchanged requirements of seven and one. Across all 12,597 positions, sixteen of 349 false blanks prefer their source; the prefix bound supports an empty mode in fifteen of 42 development-book false blanks. The finite-precision bound is not a formal certificate. Review used one model reviewer with prior cohort familiarity and no independent human adjudication. Frozen readings, original scores and the failed verdict are preserved. Autonomous language quality remains unmeasured.}
 \label{fig:joint-writer-physical}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_26_context_likelihood_failure.png}
+\caption{\textbf{Lower image likelihood loss does not ensure nonempty conditional writing.}
+\textbf{a,b,} Mean source-mask negative log likelihood and false-blank counts
+for the same complete supplied-history book groups, comparing the head-only
+control with learned continuation context. NLL chart/workbook values round to
+three decimals; full precision remains in the bound source data. Counts are
+exact. False blanks exclude genuinely empty sources, counted in the table.
+Every group retains all positions; development has 1,161 and each training
+layout 4,586. \textbf{c,} Complete-image source preference among false blanks,
+using the fixed 0.001-nat margin. The observed counts 4/93, 26/307 and 27/289
+miss the prospective minimum counts 47, 154 and 145. Across all seven groups,
+57/711 false blanks prefer the source; the zero-prefix upper bound supports
+an empty global mode at 108 false blanks, including 102 book positions.
+The numerical inequality is subject to finite precision and is not a formal
+certificate. All saved physical argmax choices reproduce.
+\textbf{d,} The first six of 21 development-book certified empty-mode failures,
+ordered by original case and zero-based position. Each triplet retains source,
+head-only and learned-context binary pixels, expanded threefold by nearest
+neighbour without repair. All source samples contain ink and all shown context
+outputs are empty. The complete probability record retains all eligible cases.
+Original review grades remain frozen despite 28 contradictory blank flags,
+including four candidate and two control credited empty images. One model
+reviewer had prior cohort familiarity; independent human adjudication is absent.
+The failed physical prerequisite prevents autonomous evaluation. Neither lower
+likelihood loss nor this diagnostic establishes complete language, a compact
+foundation or matched-quality efficiency.}
+\label{fig:context-likelihood-failure}
 \end{figure*}

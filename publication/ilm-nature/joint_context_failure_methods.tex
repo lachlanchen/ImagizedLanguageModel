@@ -1,0 +1,78 @@
+\subsection*{A numerical bound on empty-image modes}
+
+Let $Z$ denote the all-white glyph. For the physical-mask factorization in
+Eq.~\ref{eq:joint-glyph-density}, write
+$\ell_j(k;h)=\log q_\phi(b_j=k\mid h,b_{<j}=0)$, where $k\in\{0,\ldots,255\}$.
+The all-zero path gives
+\begin{equation}
+ \begin{aligned}
+ B(h)&=\log q_\phi(Z\mid h)=\sum_{j=1}^{128}\ell_j(0;h),\\
+ U(h)&=\max_{1\le j\le128}\left\{
+       \sum_{r<j}\ell_r(0;h)
+       +\max_{1\le k\le255}\ell_j(k;h)\right\}.
+ \end{aligned}
+ \label{eq:empty-glyph-bound}
+\end{equation}
+Every nonempty image has a first nonzero mask $j$. Its earlier masks follow
+the zero path, and every later conditional log probability is at most zero.
+Thus $\log q_\phi(X\mid h)\le U(h)$ for every nonempty $X$. A computed
+$B(h)>U(h)+0.001$ supports an empty global mode in the measured arithmetic.
+This upper bound may be loose; a failed inequality does not identify the true
+global mode. It is not a formal floating-point certificate.
+
+The actual-context study uses the prescribed final snapshot, all 124 original
+cases, all 12,597 positions and actual supplied-image histories. It scores the
+source, empty and saved emitted image paths without optimization or new image
+generation. Saved physical argmax decisions and source mean NLL provide
+execution checks. Source preference requires
+$\log q_\phi(X\mid h)\ge\log q_\phi(Z\mid h)+0.001$. The prospective search-only
+decision requires source preference at at least half the false blanks in each
+of the three book groups, rounding upward. All three conditions fail. Frozen
+review errors, original outputs and failed verdicts remain intact.
+
+\subsection*{Whole-glyph ranking as a separately tested objective}
+
+For visible-ink indicator $a(X)=\mathbf1\{X\ne Z\}$, the new comparison adds
+\begin{equation}
+ \begin{aligned}
+ \mathcal R_{i\ell}
+ &=\frac1{128T_i}\sum_{t=1}^{T_i} a(X_{it})\,
+     \operatorname{softplus}\!\left(1+\Delta_{it}^{\ell}\right),\\
+ \Delta_{it}^{\ell}
+ &=\log q_\phi(Z\mid h_{it}^{\ell})
+    -\log q_\phi(X_{it}\mid h_{it}^{\ell}),\\
+ \mathcal J^{\mathrm{rank}}_{i\ell}
+ &=\mathcal J_{i\ell}+\mathcal R_{i\ell}.
+ \end{aligned}
+ \label{eq:whole-glyph-ranking}
+\end{equation}
+The strength is one and the complete-image margin one nat. Source and empty
+paths share the actual target-preceding state. True whitespace retains its
+original likelihood and zero ranking penalty. The same normalized image
+density and greedy decoder remain deployed. The combined objective is not
+pure maximum likelihood and supplies no calibration or language guarantee.
+It neither bans empty output nor supplies a character catalogue or forced ink.
+
+The exact state-gradient factorization in Eq.~\ref{eq:joint-context-state-vjp}
+accumulates both density paths in glyph microbatches and differentiates the
+actual continuation graph once. Four CPU fixture checks include mixed and
+all-white targets, zero ranking strength and non-divisible microbatches.
+The separately registered full-body preflight compares both complete
+five-glyph QA layouts against unsplit autograd across all 131 actual learned
+tensors. Maximum relative gradient error is $2.900\times10^{-6}$ and maximum
+absolute error $4.172\times10^{-7}$. Both complete 513-glyph book layouts take
+an actual optimizer step; all updates are reset. Peak allocated VRAM is
+17.795 GiB. These computational checks do not measure writing generalization
+or complete language.
+
+The full ranking comparison retains the identical fresh head, point-final
+context initialization, normalization, 13,766 complete sources, 41,298 updates,
+6,108,741 target exposures, five fixed snapshots, optimizer schedule and
+greedy decoder. Its unchanged control is the completed context-likelihood
+actor. Before its first review freeze, empty/nonempty flags must agree with
+the original opaque pixels, while every board still requires actual visual
+inspection and uncertainty retention. All seven original physical groups,
+independently credited ink, and at most eleven false-ink outputs among 252
+source-white positions must pass before the unchanged 708-stream autonomous
+comparison. The whitespace requirement is prospective and does not repair
+either completed review. No language result is imputed to this running fit.

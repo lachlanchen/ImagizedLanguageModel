@@ -118,18 +118,18 @@ Use their evidence for failure-specific decisions, with resource admission and
 live ownership.
 
 The Nature-style reading/review/redline PDFs now include the completed
-checkpoint results, failed joint-writer prerequisite and exact context-gradient
-methods, with Figures 23--25 and 45/80/82 pages. The source-bound receipt is
-`publication/ilm-nature/evidence/complete_continuation_article_build.json`.
-Earlier PDFs and native figures remain preserved. The versioned local delivery
-is recorded in `publication/ilm-nature/evidence/complete_continuation_local_sync.json`;
-local hashes do not establish remote cloud propagation. Office vector export
-remains pending. Model failure resolution retains
-priority over presentation-only work. Use the private handoff for current
-ownership and resources. These PDFs predate the newly completed context-gradient
-physical failure and loss/output measurement; include them in the next bounded
-results/native-figure revision. All old trials are terminal; prospective runtime
-ownership belongs only in the private handoff.
+continuation, both joint-writer failures, loss/output disconnection, actual-context
+probability bound and limited ranking preflight: Figures 23--26, 48/84/86 pages.
+The receipt is `publication/ilm-nature/evidence/context_failure_article_build.json`.
+All 218 pages received layout overview and 29 affected pages detailed inspection;
+the first build's caption/footer overlap is corrected. Figure 26 has three native
+charts/workbooks, one table and eighteen original image instances. All 281 prior
+figure assets and 150 earlier embedded image contents remain unchanged. Earlier
+PDFs and versioned local packages remain preserved. New local delivery, cloud
+propagation and Office vector export remain unverified. Model failure resolution
+retains priority over presentation-only work. The running ranking fit's quality
+is unmeasured. Use the private handoff for current ownership/resources; all old
+trials remain terminal and their sources/readings must not change.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and

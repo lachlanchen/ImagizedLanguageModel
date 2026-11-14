@@ -148,9 +148,16 @@ whole deployed parameters do not establish the desired compact model.
   verifies copying while preserving the earlier package; cloud propagation and
   Office vector export remain unverified. Publication work must not substitute for resolving the measured model
   failure; the completed context-gradient actor's language remains unmeasured.
-  These PDFs predate its failed physical result and paired loss/output
-  measurement, the completed probability probe and the new ranking preflight;
-  include their distinct scopes in a bounded results-and-native-figure revision.
+  The subsequent [context-failure revision](../publication/ilm-nature/evidence/context_failure_article_build.json)
+  is now promoted: 48/84/86-page reading/review/redline PDFs include the completed
+  context failure, loss/output disconnection, probability bound and limited
+  ranking preflight. Figure 26 contains three native editable charts, their
+  literal workbooks, a table and eighteen original image instances. All 218
+  pages received layout overview and 29 affected pages detailed visual review;
+  the caption/footer overlap found in the first build is corrected. All 281
+  previous figure assets and all 150 prior embedded image contents remain.
+  The ranking fit's quality, Office export and new local delivery remain
+  unverified; this article revision establishes no model success.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
@@ -248,12 +255,14 @@ Other completed controls constrain the next decision:
   Reuse their authenticated artifacts. They do not identify a unique cause of
   failed language, and repeating them is not the next model experiment.
 
-The active 45/80/82-page reading/review/redline PDFs include the completed
-continuation, head-only failures and context-gradient methods, with native
-Figures 23--25. Their versioned local delivery is verified; cloud propagation
-and Office vector export remain unverified. The newly completed context-gradient
-failure, review inconsistencies and loss/output disconnection are newer than
-these PDFs. Include them in the next bounded results revision. Failure-driven
+The active 48/84/86-page reading/review/redline PDFs include the completed
+continuation, both joint-writer failures, actual-context probability diagnosis
+and limited ranking preflight, with native Figures 23--26. The
+[context-failure build receipt](../publication/ilm-nature/evidence/context_failure_article_build.json)
+records all-page layout overview, 29 detailed page checks and unchanged earlier
+image contents. The earlier 45/80/82-page package remains preserved. New local
+delivery, cloud propagation and Office vector export remain unverified.
+The running ranking comparison's language remains unmeasured. Failure-driven
 model work retains priority over presentation-only revisions.
 
 ## Next model decision
