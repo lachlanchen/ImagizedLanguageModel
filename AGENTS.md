@@ -77,12 +77,17 @@ arrays. Do not rerun this probe or the old head-only diagnosis.
 The next objective comparison is selected in
 `references/global_glyph_ranking_decision.md`: add whole-glyph ranking against
 the blank at nonempty training positions, keeping true-whitespace likelihood,
-the physical density and greedy decoder. Four CPU gradient checks pass; this is
-untrained and proves no language. A fresh real-source preflight is defined in
-`references/global_glyph_ranking_preflight_protocol.md`. Register/commit/push its
-exact binding before GPU work; verify both complete QA layouts and both actual
-513-glyph book updates/reset. Only that proof permits preparing a full-corpus
-comparison. Do not repeat the old preflight, force ink or shrink language gates.
+the physical density and greedy decoder. Four CPU gradient checks pass. Its
+fresh full-body preflight is complete; read
+`references/global_glyph_ranking_preflight_result.md`. All 131 actual QA gradients
+match unsplit autograd (max relative error 2.90e-6), and both complete 513-glyph
+book layouts take actual optimizer steps that are fully reset. Peak allocated
+VRAM is17.795GiB. Preserve all64bound sources and do not repeat this proof.
+The full ranking fit remains unexecuted and language unproved. Prepare the
+complete matched training/audit/qualification pipeline and prospective opaque
+pixel-blank review safeguard, then register/commit/push exact sources, inputs,
+schedule and limits before fitting. No intermediate selection, forced ink,
+smaller corpus or relaxed language gates substitutes.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see
 `references/joint_context_language_execution.md`. It restores all131 learned

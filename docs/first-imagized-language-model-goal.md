@@ -105,10 +105,14 @@ whole deployed parameters do not establish the desired compact model.
   The next [bounded objective change](../references/global_glyph_ranking_decision.md)
   adds whole-glyph source-versus-blank ranking to the existing likelihood for
   nonempty training targets, preserving true-whitespace likelihood and the
-  original greedy decoder. Four CPU gradient checks pass; full-body behavior
-  and language remain unproved. A fresh
-  [real-source preflight](../references/global_glyph_ranking_preflight_protocol.md)
-  must verify the changed loss and all 131 gradients before registering a fit.
+  original greedy decoder. Four CPU gradient checks pass. Its new
+  [real-source preflight](../references/global_glyph_ranking_preflight_result.md)
+  now passes both complete QA layouts and both 513-glyph books at 17.795 GiB.
+  All 131 QA gradients match unsplit autograd (maximum relative error 2.90e-6),
+  both actual book updates are reset, and frozen state stays unchanged. Preserve
+  all 64 bound sources and do not repeat this completed proof. The full ranking
+  fit and language remain unexecuted; prepare and commit its complete-corpus
+  source/input/resource binding before training.
   Do not substitute forced ink, more search, unchanged epochs or smaller data.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
@@ -138,7 +142,8 @@ whole deployed parameters do not establish the desired compact model.
   Office vector export remain unverified. Publication work must not substitute for resolving the measured model
   failure; the completed context-gradient actor's language remains unmeasured.
   These PDFs predate its failed physical result and paired loss/output
-  measurement; include them in a bounded results-and-native-figure revision.
+  measurement, the completed probability probe and the new ranking preflight;
+  include their distinct scopes in a bounded results-and-native-figure revision.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
