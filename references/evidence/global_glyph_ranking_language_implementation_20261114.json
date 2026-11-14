@@ -1,0 +1,27 @@
+{
+  "schema": "ranking-language-implementation-checks-v1",
+  "source_sha256": {
+    "scripts/evaluate_global_glyph_ranking_language.py": "e53bfc40dcf34b07cc1137a4c8889f4dd23bb17d95aecd6d156a125ae02317c3",
+    "scripts/review_global_glyph_ranking_language.py": "8320195a66f757f300f0bbe235fba91d85c2683c669dcf20afe775124f0f0ade",
+    "tests/test_global_glyph_ranking_language.py": "96ef117b3033ba7177d013a16f081360f468b16e2cb18945898931e258c807cd",
+    "references/global_glyph_ranking_language_execution.md": "c008cec6147947182dbd7a054661bd385ca88f81a510a6f0e0aba390c1abc355"
+  },
+  "training_registration_sha256": "8e928fdc78a397bfaca9dd3812b836723cffcdc1234772d802e8f815675c6c7f",
+  "tests_passed": 22,
+  "test_seconds": 1.98,
+  "complete_candidate_stream_plan": 708,
+  "actual_CPU_storage_tensors_restored": 131,
+  "actual_CPU_storage_parameters": 5005760,
+  "snapshot_fixture_sha256": "dce3e5f35659658208eb3c6ee265cd25fc03573ee0c1dd7bfd5c2f797834df54",
+  "actual_running_trial_rejected_before_torch_import": true,
+  "evaluation_output_directory_created": false,
+  "post_gate_registration_created": false,
+  "all91_training_sources_unchanged": true,
+  "new_GPU_workers": 0,
+  "new_generated_streams": 0,
+  "new_optimizer_updates": 0,
+  "full_body_neural_checkpoint_restore_executed": false,
+  "language_quality": "unmeasured",
+  "goal_achieved": false,
+  "limitation": "CPU implementation, fixture restoration and rejected admission do not establish full-body neural generation or language."
+}

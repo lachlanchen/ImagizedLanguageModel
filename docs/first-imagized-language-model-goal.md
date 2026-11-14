@@ -120,6 +120,16 @@ whole deployed parameters do not establish the desired compact model.
   Opaque blank flags must agree with pixels before the first freeze. All seven
   original physical groups, independently credited ink and at most 11 false-ink
   outputs among 252 source-white positions must pass before autonomous evaluation.
+  The [ranking-specific evaluator](../references/global_glyph_ranking_language_execution.md)
+  is now implemented with the unchanged 708-stream plan and actual 131-tensor
+  restoration, including restoration after inference freezing. Twenty-two CPU
+  checks pass. It reauthenticates the sealed review and independently recounts
+  complete source-whitespace arrays before neural import. The actual running
+  trial correctly refuses early admission without creating evaluation outputs.
+  These checks use a CPU storage fixture for restoration, not the full inherited
+  body's neural computation. All five actual full-body restores, generation and
+  language remain unexecuted until qualification and a separately committed
+  post-gate execution binding. Preserve the 91 running sources unchanged.
   Do not substitute forced ink, more search, unchanged epochs or smaller data.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean

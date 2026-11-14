@@ -95,6 +95,17 @@ physical groups, independently credited ink and at most 11 false-ink outputs
 among 252 source-white positions must pass before autonomous generation.
 Preserve all 91 bound sources during execution. No intermediate selection, forced ink,
 smaller corpus or relaxed language gates substitutes.
+The ranking-specific evaluator is implemented in
+`scripts/evaluate_global_glyph_ranking_language.py`; see
+`references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks
+cover all 708 planned streams, all 131 actual tensor restores in a CPU storage
+fixture, unchanged review bindings and independent complete-whitespace recount.
+The actual running trial refuses premature admission before Torch import and
+without creating output directories. Full-body restoration and generation remain
+unexecuted. Wait for the original pipeline, sealed physical review and all three
+readability/ink/whitespace conditions, then separately register/commit/push exact
+execution bindings before generation. Do not use an old failed actor's evaluator
+or change any of the 91 running source files.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see
 `references/joint_context_language_execution.md`. It restores all131 learned
