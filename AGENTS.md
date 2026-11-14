@@ -83,10 +83,17 @@ fresh full-body preflight is complete; read
 match unsplit autograd (max relative error 2.90e-6), and both complete 513-glyph
 book layouts take actual optimizer steps that are fully reset. Peak allocated
 VRAM is17.795GiB. Preserve all64bound sources and do not repeat this proof.
-The full ranking fit remains unexecuted and language unproved. Prepare the
-complete matched training/audit/qualification pipeline and prospective opaque
-pixel-blank review safeguard, then register/commit/push exact sources, inputs,
-schedule and limits before fitting. No intermediate selection, forced ink,
+The full ranking pipeline is now implemented and registered in
+`references/evidence/global_glyph_ranking_registration_20261114.json`: 91 source
+hashes, 421 input hashes, the complete original schedule and fixed resource
+ceilings. See `references/global_glyph_ranking_training_protocol.md` and the
+private handoff for its single serial fit/audit/qualification owner. Fourteen CPU
+checks pass; the full comparison and language result remain unproved. The new
+opaque review derives and verifies blank flags from pixels before the first
+freeze, retaining actual board review and uncertainty. All seven original
+physical groups, independently credited ink and at most 11 false-ink outputs
+among 252 source-white positions must pass before autonomous generation.
+Preserve all 91 bound sources during execution. No intermediate selection, forced ink,
 smaller corpus or relaxed language gates substitutes.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see

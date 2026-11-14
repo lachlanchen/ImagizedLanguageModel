@@ -110,9 +110,16 @@ whole deployed parameters do not establish the desired compact model.
   now passes both complete QA layouts and both 513-glyph books at 17.795 GiB.
   All 131 QA gradients match unsplit autograd (maximum relative error 2.90e-6),
   both actual book updates are reset, and frozen state stays unchanged. Preserve
-  all 64 bound sources and do not repeat this completed proof. The full ranking
-  fit and language remain unexecuted; prepare and commit its complete-corpus
-  source/input/resource binding before training.
+  all 64 bound sources and do not repeat this completed proof. The new
+  [complete ranking pipeline](../references/global_glyph_ranking_training_protocol.md)
+  is implemented and registered with 91 bound sources and 421 input hashes.
+  Fourteen CPU gradient/accounting/review checks pass. Its single serial
+  fit/audit/qualification comparison retains all 13,766 sources, 41,298 updates,
+  6,108,741 exposures and five fixed snapshots. Use the private handoff for
+  actual live ownership; training completion and language remain unproved.
+  Opaque blank flags must agree with pixels before the first freeze. All seven
+  original physical groups, independently credited ink and at most 11 false-ink
+  outputs among 252 source-white positions must pass before autonomous evaluation.
   Do not substitute forced ink, more search, unchanged epochs or smaller data.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
@@ -284,8 +291,10 @@ physical prerequisite; no complete-language result is available for either
 joint actor. The completed learned-context probability probe rejects the
 search-only rule. The next intervention follows
 [the whole-glyph ranking decision](../references/global_glyph_ranking_decision.md).
-Its new real-source preflight and complete-corpus fit each need their own exact
-source/input/resource registration before execution. Neither CPU gradient checks
+Its real-source preflight is complete and the new complete-corpus fit has its
+own [exact registration](../references/evidence/global_glyph_ranking_registration_20261114.json).
+Observe its single serial owner through the private handoff; do not repeat
+the completed proof or open a second fit on an observation timeout. Neither CPU gradient checks
 nor a lower source-image loss justify autonomous evaluation or a language claim. Keep
 complete sources, unchanged controls and all full-language criteria. The
 completed initial/final clean-history comparison
