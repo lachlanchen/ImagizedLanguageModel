@@ -59,7 +59,7 @@ whole deployed parameters do not establish the desired compact model.
   do so, rejecting the registered search-only decision rule. No blank-prefix
   argmax inconsistency is observed. Four selected book source images are
   themselves empty; keep whitespace separate without revising the old gate.
-- The next [controlled change](../references/joint_writer_context_learning_decision.md)
+- The [controlled gradient-reach change](../references/joint_writer_context_learning_decision.md)
   trains continuation adapters and the initial query through complete-image
   likelihood, with the completed head-only trial as its unchanged control.
   The exact memory-bounded state-gradient implementation matches unsplit
@@ -70,13 +70,27 @@ whole deployed parameters do not establish the desired compact model.
   recovery; do not repeat this completed check. The
   [complete context-gradient comparison](../references/joint_context_learning_protocol.md)
   retains the full source exposure and every original physical/language rule.
-  Its completed fit, audit and language result remain unproved.
+  Its [complete result](../references/joint_context_physical_result.md) now fails
+  the physical prerequisite after all 41,298 updates, all 124 cases and 33 opaque
+  boards/2,080 frozen readings. Candidate book groups score 93/108, 95/108 and
+  92/108, below 90%; QA groups pass. The independent pixel audit finds 28 review
+  inconsistencies, including four candidate and two control credited empty images.
+  Preserve the readings and failed gate without repair. Complete language is
+  unmeasured; do not launch this actor's 708 autonomous streams. Source-mask
+  likelihood improves, but all-case false blanks increase 349 to 711 and book
+  false blanks 324 to 689 relative to unchanged head-only pixels. This rejects
+  the tested change as a sufficient repair, not visual language learning in
+  general. The [next bounded decision](../references/joint_context_failure_decision.md)
+  distinguishes density preference from greedy physical-prefix failure on the
+  new learned-context actor, with a separate committed binding before neural
+  execution. Do not repeat the old control's completed probability study.
   The [post-qualification evaluator](../references/joint_context_language_execution.md)
   is implemented with all 131 context/head tensors restored at every snapshot,
   the complete 708-stream plan and an independent check that credited candidate
-  forms contain ink. Its CPU checks are implementation evidence; full-body
-  generation and language remain unexecuted until qualification and a separately
-  committed execution binding. The failed head-only actor remains unevaluated.
+  forms contain ink. Its CPU checks are implementation evidence. Both completed
+  joint actors failed qualification and remain unevaluated for autonomous
+  language. Preserve the evaluator for a future qualified actor with a separately
+  committed execution binding.
   Keep prompt memory, native body, image feedback and stop parameters frozen.
   Register sources, initialization, schedule, gradients, complete evaluation
   and resource limits before neural execution. Do not restart a completed
@@ -107,7 +121,9 @@ whole deployed parameters do not establish the desired compact model.
   from detailed checks. The [versioned local delivery](../publication/ilm-nature/evidence/complete_continuation_local_sync.json)
   verifies copying while preserving the earlier package; cloud propagation and
   Office vector export remain unverified. Publication work must not substitute for resolving the measured model
-  failure; the running context-gradient actor's language remains unmeasured.
+  failure; the completed context-gradient actor's language remains unmeasured.
+  These PDFs predate its failed physical result and paired loss/output
+  measurement; include them in a bounded results-and-native-figure revision.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
@@ -205,15 +221,13 @@ Other completed controls constrain the next decision:
   Reuse their authenticated artifacts. They do not identify a unique cause of
   failed language, and repeating them is not the next model experiment.
 
-The [current publication revision](../references/manuscript_realized_writer_revision_plan.md)
-is complete: 35/62/63-page reading/review/redline PDFs, verified native Figure 22
-and a reproduced 160-page combined raster comparison. The local RealizedWriting
-package and latest aliases are verified; cloud propagation is unverified.
-No repeat publication build or completed-cohort generation is pending.
-The correct-image-history study and completed continuation trial are newer than
-these PDFs. Include both in the next bounded results revision; do not imply
-they are already in the article. Failure-driven model work retains priority
-over presentation-only revisions.
+The active 45/80/82-page reading/review/redline PDFs include the completed
+continuation, head-only failures and context-gradient methods, with native
+Figures 23--25. Their versioned local delivery is verified; cloud propagation
+and Office vector export remain unverified. The newly completed context-gradient
+failure, review inconsistencies and loss/output disconnection are newer than
+these PDFs. Include them in the next bounded results revision. Failure-driven
+model work retains priority over presentation-only revisions.
 
 ## Next model decision
 
@@ -244,9 +258,14 @@ The immediate model work follows the
 [failure decision](../references/visual_continuation_failure_decision.md).
 The joint-writer comparison from the final frozen reader is now also complete
 and fails its physical prerequisite, despite improved conditional forms. Use
-its frozen result and completed empty-image probability diagnosis for the
-next controlled gradient-reach change; no complete-language result is available
-for that actor. Keep
+its frozen result and completed empty-image probability diagnosis as the control
+for the now-completed gradient-reach comparison. That comparison also fails its
+physical prerequisite; no complete-language result is available for either
+joint actor. The selected next measurement follows
+[the context-gradient failure decision](../references/joint_context_failure_decision.md).
+Bind its actual learned continuation and final 131 tensors; old cached states
+cannot substitute. No new fit, intermediate selection, repaired reading or
+autonomous evaluation is justified by a lower source-image loss. Keep
 complete sources, unchanged controls and all full-language criteria. The
 completed initial/final clean-history comparison
 applies to this actual final reader; the older diagnosis remains a different

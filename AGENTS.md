@@ -54,18 +54,33 @@ implementation and real-source GPU preflight now pass; read
 `references/joint_context_preflight_result.md`. All131 trainables match ordinary
 autograd and both complete513-glyph book cases fit within17.795GiB. All updates
 were reset; preserve the original SIGTERM and one traced recovery. Do not repeat
-the completed preflight. The next full fit is defined in
-`references/joint_context_learning_protocol.md`; commit/push its exact registration
-before neural execution. Preserve all50 preflight sources, the original45 control
-sources, and every original frozen reading. Use the new serial controller only
-after checking live ownership; its full fit remains unproved until audited.
+the completed preflight. The registered full comparison in
+`references/joint_context_learning_protocol.md` is now complete and terminal.
+Read `references/joint_context_physical_result.md`: all 41,298 updates,
+6,108,741 exposures, five actual snapshots, independent CPU audit, 124 cases and
+33 opaque boards/2,080 frozen readings are complete. All original workers exited.
+Candidate book groups 93/108, 95/108 and 92/108 fail the unchanged 90% rule; QA
+groups pass. The independent pixel audit finds 28 blank-flag inconsistencies,
+including four candidate and two control credited empty images. Preserve the
+frozen readings and failed gate. Source-mask NLL decreases while false blanks
+increase 349 to 711, including book false blanks 324 to 689. Do not resume this
+fit, select an intermediate checkpoint or launch its 708 autonomous streams.
+Language remains unmeasured. Preserve all 59 running sources, 50 preflight
+sources, 45 original control sources and every original reading.
+The next bounded measurement is selected in
+`references/joint_context_failure_decision.md`: score source, blank and saved
+image probabilities on this new actor's actual learned-context states before
+choosing a representation change or a decoding comparison. Implement and commit
+its separate source/snapshot/resource binding before neural execution. Do not
+reuse old cached states or repeat the old control's completed diagnosis.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see
 `references/joint_context_language_execution.md`. It restores all131 learned
 context/head tensors, preserves the full708stream plan and independently checks
 that credited candidate images contain ink. CPU admission/restoration checks do
-not establish full-body generation or language. Do not run it before complete
-fit/audit/physical qualification and a committed post-gate execution binding.
+not establish full-body generation or language. The completed actor now fails
+physical qualification, so do not create its post-gate generation binding or run
+this evaluator. Preserve the implementation for a future qualified actor.
 The old head-only evaluator cannot substitute for this context-aware restore.
 Use the private handoff for current ownership. The old point system's whole
 7,578,390,003 parameters and the joint head's2,642,368 trainables do not establish
@@ -89,7 +104,9 @@ is recorded in `publication/ilm-nature/evidence/complete_continuation_local_sync
 local hashes do not establish remote cloud propagation. Office vector export
 remains pending. Model failure resolution retains
 priority over presentation-only work. Use the private handoff for current
-ownership and resources. The old trial is terminal; current joint-writer runtime
+ownership and resources. These PDFs predate the newly completed context-gradient
+physical failure and loss/output measurement; include them in the next bounded
+results/native-figure revision. All old trials are terminal; prospective runtime
 ownership belongs only in the private handoff.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
