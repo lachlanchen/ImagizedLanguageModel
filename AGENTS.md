@@ -125,8 +125,9 @@ All 218 pages received layout overview and 29 affected pages detailed inspection
 the first build's caption/footer overlap is corrected. Figure 26 has three native
 charts/workbooks, one table and eighteen original image instances. All 281 prior
 figure assets and 150 earlier embedded image contents remain unchanged. Earlier
-PDFs and versioned local packages remain preserved. New local delivery, cloud
-propagation and Office vector export remain unverified. Model failure resolution
+PDFs and versioned local packages remain preserved. The new local copy is
+recorded in `publication/ilm-nature/evidence/context_failure_local_sync.json`;
+cloud propagation and Office vector export remain unverified. Model failure resolution
 retains priority over presentation-only work. The running ranking fit's quality
 is unmeasured. Use the private handoff for current ownership/resources; all old
 trials remain terminal and their sources/readings must not change.

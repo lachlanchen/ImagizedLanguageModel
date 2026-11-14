@@ -112,3 +112,14 @@ preserving the old package and verifying source/destination hashes; local copies
 cannot establish remote cloud propagation.
 
 Status: measured text, native figure and all three reviewed active PDFs promoted.
+
+## Versioned local delivery
+
+Copy the promoted package to `ILM_NatureStyle_20261114_ContextFailure` through
+`sync_context_failure_publication.py`, preserving every manifest file in the
+previous CompleteContinuation package. Verify all new source/destination hashes,
+then replace only the two previously owned latest PDF aliases. Include the
+native Figure 26 deck, samples and public evidence; exclude model weights,
+private runtimes and credentials. Preserve the live ranking owner and all 91
+registered sources. Commit the copy receipt separately. Local hash agreement
+does not establish Nutstore cloud propagation.

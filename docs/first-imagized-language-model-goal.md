@@ -156,7 +156,9 @@ whole deployed parameters do not establish the desired compact model.
   pages received layout overview and 29 affected pages detailed visual review;
   the caption/footer overlap found in the first build is corrected. All 281
   previous figure assets and all 150 prior embedded image contents remain.
-  The ranking fit's quality, Office export and new local delivery remain
+  Its [versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
+  records source/destination hashes while preserving the previous package.
+  The ranking fit's quality, Office export and cloud propagation remain
   unverified; this article revision establishes no model success.
 
 Keep the goal active through these decisions. Completion requires the language,
@@ -260,8 +262,9 @@ continuation, both joint-writer failures, actual-context probability diagnosis
 and limited ranking preflight, with native Figures 23--26. The
 [context-failure build receipt](../publication/ilm-nature/evidence/context_failure_article_build.json)
 records all-page layout overview, 29 detailed page checks and unchanged earlier
-image contents. The earlier 45/80/82-page package remains preserved. New local
-delivery, cloud propagation and Office vector export remain unverified.
+image contents. The earlier 45/80/82-page package remains preserved. The [new versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
+verifies local copying and preserves its predecessor; cloud propagation and
+Office vector export remain unverified.
 The running ranking comparison's language remains unmeasured. Failure-driven
 model work retains priority over presentation-only revisions.
 
