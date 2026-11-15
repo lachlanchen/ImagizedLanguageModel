@@ -168,7 +168,7 @@ changes. Do not repeat these completed controls or the completed joint fit.
 Use their evidence for failure-specific decisions, with resource admission and
 live ownership.
 
-The Nature-style reading/review/redline PDFs now include the completed
+The preserved Nature-style reading/review/redline baseline PDFs include the completed
 continuation, both joint-writer failures, loss/output disconnection, actual-context
 probability bound and limited ranking preflight: Figures 23--26, 48/84/86 pages.
 The receipt is `publication/ilm-nature/evidence/context_failure_article_build.json`.
@@ -179,11 +179,22 @@ figure assets and 150 earlier embedded image contents remain unchanged. Earlier
 PDFs and versioned local packages remain preserved. The new local copy is
 recorded in `publication/ilm-nature/evidence/context_failure_local_sync.json`;
 cloud propagation and Office vector export remain unverified. Model failure resolution
-retains priority over presentation-only work. Those PDFs predate the completed
-ranking, whitespace diagnostic and white-target preflight results; the next bounded revision must distinguish conditional glyph
-improvement, failed whitespace and unmeasured language. Use the private handoff
-for current ownership/resources; all completed trials remain terminal and their
-sources/readings must not change.
+retains priority over presentation-only work. Those baseline PDFs predate the completed
+ranking, whitespace diagnostic and white-target preflight results. The subsequent
+ranking-results revision is now promoted with Figures 23--27 and 50/88/90-page
+reading/review/cumulative-redline PDFs; see
+`publication/ilm-nature/evidence/ranking_completed_article_build.json`.
+All 228 pages received layout overview and 49 affected pages detailed visual
+inspection. Figure 27 contains two native charts/workbooks, a table and 27
+original image instances. All 301 prior figure assets and 151 prior embedded
+image contents remain unchanged. Readability 1,002/1,040 does not require source
+identity: exact source bitmaps change only from 4,603 to 4,609 of 12,597 and
+fixed-order samples include simple wrong marks. Whitespace still fails at
+25/252 versus a limit of11; autonomous language remains unmeasured. The separate
+white-target fit is running, with quality unmeasured. New versioned local
+delivery is pending; Office export and cloud propagation remain unverified.
+Use the private handoff for current ownership/resources; all completed trials
+remain terminal and their sources/readings must not change.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and

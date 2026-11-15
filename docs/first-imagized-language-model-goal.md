@@ -206,11 +206,20 @@ whole deployed parameters do not establish the desired compact model.
   previous figure assets and all 150 prior embedded image contents remain.
   Its [versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
   records source/destination hashes while preserving the previous package.
-  Those PDFs predate the completed ranking, whitespace diagnostic and white-target
-  preflight results above. Their next bounded
-  revision must show the conditional gain and failed whitespace separately from
-  unmeasured autonomous language. Office export and cloud propagation remain
-  unverified; neither article revision nor conditional glyphs establishes success.
+  Those baseline PDFs are preserved. The subsequent
+  [ranking-results revision](../publication/ilm-nature/evidence/ranking_completed_article_build.json)
+  is now promoted: 50/88/90-page reading/review/cumulative-redline PDFs include the
+  completed ranking, whitespace diagnostic and reset white-target preflight.
+  Figure 27 retains fixed-order original source/control/candidate images, two
+  native charts with literal workbooks and a seven-group table. All 228 pages
+  received layout overview and 49 affected pages detailed visual inspection.
+  All 301 prior figure assets and 151 prior embedded image contents remain.
+  The paper distinguishes 1,002/1,040 recognizable shapes from exact source
+  bitmaps, which change only from 4,603 to 4,609 of 12,597, and the failed
+  25/252 whitespace count from unmeasured autonomous language. The separate
+  white-target quality comparison is still running and unmeasured. Its revised
+  PDFs have not yet received a new versioned local delivery. Office export and
+  cloud propagation remain unverified; publication is not model acceptance.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a

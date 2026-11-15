@@ -1,0 +1,73 @@
+\subsection*{Training legitimate blank images without changing the decoder}
+
+The rejected blank-image comparison motivates a separately tested learning
+change. Keep the source-image likelihood and nonempty ranking of
+Eq.~\ref{eq:whole-glyph-ranking}. For genuinely white source images, add
+\begin{equation}
+ \begin{aligned}
+ \mathcal R^{\mathrm{white}}_{i\ell}
+ &=\frac1{128T_i}\sum_{t=1}^{T_i}\bigl[1-a(X_{it})\bigr]\,
+    \operatorname{softplus}\!\left(1+\Gamma_{it}^{\ell}\right),\\
+ \Gamma_{it}^{\ell}
+ &=U(h_{it}^{\ell})-B(h_{it}^{\ell}),\\
+ \mathcal J^{\mathrm{white}}_{i\ell}
+ &=\mathcal J^{\mathrm{rank}}_{i\ell}+\mathcal R^{\mathrm{white}}_{i\ell}.
+ \end{aligned}
+ \label{eq:white-target-ranking}
+\end{equation}
+Both complete-image margins and ranking strengths are one. The terms act on
+disjoint target positions, with emptiness derived from actual binary source
+pixels. The original balanced stop loss is retained. At a white target, the
+source path is already the all-zero path, so its logits supply $B$ and $U$
+without another writer forward pass. Accumulated state gradients differentiate
+the actual continuation graph once, using the same factorization as
+Eq.~\ref{eq:joint-context-state-vjp}.
+
+Every nonempty image has complete log probability at most $U$. Therefore
+$B>U$ is sufficient for blank global optimality in exact arithmetic. The new
+softplus term encourages that inequality at white sources; optimization does
+not guarantee achieving it. A loose upper bound can concentrate excessive
+blank mass and damage nonempty writing. The maximum supplies one subgradient
+at ties. The density, greedy writer, input representation and deployed feedback
+path remain unchanged, with no occupancy override, glyph catalogue or forced
+pixel. This is a candidate objective, not a physical theory or language result.
+
+Nine CPU checks include independent unsplit context/writer gradients on mixed,
+all-white and all-nonempty sources, non-divisible microbatches, exact recovery
+of existing ranking gradients at zero added strength, and exhaustive bounds
+for every path of a four-position, three-mask density including ties. Missing
+execution binding is rejected before neural import. These are implementation
+fixtures, not measurements of full-body language behavior.
+
+The separately registered preflight uses the two original complete five-glyph
+QA layouts, both complete 513-glyph books and both layouts of the first original
+qualification training book containing white and nonempty targets. That source
+is index 4,447, with 314 target images and two actual white images. No span is
+cropped or blank inserted. Both actual QA layouts compare all 131 gradients
+with ordinary unsplit autograd: maximum relative L2 error is
+$2.900\times10^{-6}$ and maximum absolute error $4.172\times10^{-7}$.
+The QA sources contain no whitespace; new-branch gradients are checked by the
+CPU fixtures, while the mixed-white full-body books check complete execution,
+finite gradients, real optimizer updates and reset rather than an unsplit GPU
+comparison of that branch.
+
+All four book cases take an actual optimizer step, with all 131 Adam counters
+at one and changed elements in every trained tensor. Every step is then reset
+to the identical initial weights. Frozen native prompt/body, feedback, stop
+and four affine buffers remain unchanged. These are bound execution assertions,
+not an independent second neural replay. Worker execution takes 86.652 seconds
+with no pressure waiting, at 17.795 GiB peak allocated VRAM and 55.619 GiB
+minimum available host RAM. No preflight weight or optimizer update enters
+the later comparison.
+
+The complete matched comparison is separately registered and in progress.
+It preserves all 13,766 sources, 41,298 updates, 6,108,741 target exposures,
+five fixed snapshots, original fresh initialization, optimizer schedule and
+saved ranked-control pixels. The ledger and independent source audit count
+both ranking terms and the white/nonempty partition. All seven original
+readable-form groups, independently credited ink, at most eleven false-ink
+outputs among 252 true-white positions and at most 37 all-case false blanks
+must pass before a separate autonomous execution binding. The unchanged
+708-stream plan retains actual emitted-pixel feedback, paired questions,
+erasures, natural stopping, earlier successes and complete long books.
+No quality or complete-language result is assigned to the running fit.

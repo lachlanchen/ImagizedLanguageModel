@@ -1,0 +1,353 @@
+{
+  "schema": "ranking-completed-native-figure-data-v1",
+  "source_sha256": {
+    "references/evidence/global_glyph_ranking_physical_result_20261115.json": "13475253122e912f61e6f31b93523bce5f3bfc29b34ee531a4c1c28224321443",
+    "references/evidence/ranked_writer_whitespace_result_20261115.json": "c9e6ba7cae33988b9d6a527075bd70a98e7b68a5aab1b8ab562c56f2d9adf508",
+    "references/evidence/white_target_preflight_result_20261115.json": "7c8d143910883f8befdd0052cd4c479331a211eb70e87519e150e68c64d7aa70",
+    "artifacts/global_glyph_ranking_v1/qualify/report.json": "f3f7431f67fe87dc6ece3b3490403cef4f12efb755cb1d893ff114fe9e910e7d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_01_normal/pixels.npz": "01d674090ba56c8ad278502702512e9856f86e0836b29e614db686661a7f63e4",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_fixed_cells/pixels.npz": "f08ad4a5d553a3cdea04fbd03622f8ff93f0fd9ccab4f2bcc9b6f0feb7a5da1b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_proportional/pixels.npz": "aab9c0338df4484decbb0eb8fb240056b4dc3e372211d0e1e4fe1407e784400e",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01708_fixed_cells/pixels.npz": "51cfa9522562eb3f096d0a0cda8921630e72d2744a80a5d75919441146712272",
+    "references/evidence/white_target_ranking_registration_20261115.json": "04b908f488f5175bff1df8da1a7d38676696c03a3ab5f70faa6a199a1757d828"
+  },
+  "exporter_sha256": "2a86b6cf4d7909fb3765e408ce4526372416beb49bf0aa0c3f1b376890777f66",
+  "groups": [
+    {
+      "key": "development/book/fixed_cells",
+      "label": "Dev book / fixed",
+      "count": 108,
+      "control": 90,
+      "ranking": 106
+    },
+    {
+      "key": "development/qa/fixed_cells",
+      "label": "Dev QA / fixed",
+      "count": 257,
+      "control": 254,
+      "ranking": 250
+    },
+    {
+      "key": "development/qa/proportional",
+      "label": "Dev QA / proportional",
+      "count": 257,
+      "control": 255,
+      "ranking": 255
+    },
+    {
+      "key": "train/book/fixed_cells",
+      "label": "Train book / fixed",
+      "count": 108,
+      "control": 97,
+      "ranking": 100
+    },
+    {
+      "key": "train/book/proportional",
+      "label": "Train book / proportional",
+      "count": 108,
+      "control": 95,
+      "ranking": 98
+    },
+    {
+      "key": "train/qa/fixed_cells",
+      "label": "Train QA / fixed",
+      "count": 101,
+      "control": 94,
+      "ranking": 96
+    },
+    {
+      "key": "train/qa/proportional",
+      "label": "Train QA / proportional",
+      "count": 101,
+      "control": 96,
+      "ranking": 97
+    }
+  ],
+  "totals": {
+    "candidate": {
+      "false_blanks": 37,
+      "false_ink": 25,
+      "positions": 12597,
+      "readable_nonblank_selected": 1002,
+      "selected_positions": 1040,
+      "source_pixel_exact": 4609,
+      "source_whitespace": 252
+    },
+    "parent": {
+      "false_blanks": 711,
+      "false_ink": 11,
+      "positions": 12597,
+      "readable_nonblank_selected": 981,
+      "selected_positions": 1040,
+      "source_pixel_exact": 4603,
+      "source_whitespace": 252
+    }
+  },
+  "samples": [
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 0,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_01_source.png",
+          "sha256": "81169b50904edda659454c95eac0e96ba126092b93b17d7f6937bcaab8bfec23",
+          "original_ink_sha256": "ffb7b4a1cf6ffe3bc5e0502f6927159a036bad31c9f638c99008e54503f40a54",
+          "ink_pixels": 248
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_01_control.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_01_ranking.png",
+          "sha256": "7792418ac4b7690daf55fe4639a70fb0f5c8efe7ccb4310606d0f2d25015c9f4",
+          "original_ink_sha256": "fc07294e5228838da4732bf4ebebb777dedddfd914d144c898163f679971ee7d",
+          "ink_pixels": 48
+        }
+      }
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 1,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_02_source.png",
+          "sha256": "ad6c60f62758cff9aaa045f0da598a7bb7a7d134df42641147b6e4b89a7577a9",
+          "original_ink_sha256": "36f6020ddede9b05b9164c685bf170d4d626f711b11db2096b98d84798d67839",
+          "ink_pixels": 246
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_02_control.png",
+          "sha256": "f4a187b39a117c56594ec9c39689df6f13dac03f7882f7e14790bc14a0918681",
+          "original_ink_sha256": "376c1868e417985df936e3f9cd19b20a81d6f3983751ad14506628965a18b92d",
+          "ink_pixels": 22
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_02_ranking.png",
+          "sha256": "f4a187b39a117c56594ec9c39689df6f13dac03f7882f7e14790bc14a0918681",
+          "original_ink_sha256": "376c1868e417985df936e3f9cd19b20a81d6f3983751ad14506628965a18b92d",
+          "ink_pixels": 22
+        }
+      }
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 13,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_03_source.png",
+          "sha256": "582adb2c5bdc0cec7122b303a1058626227abc129676b6e95b18db41d1c7f94b",
+          "original_ink_sha256": "052f2eecf2c97875fd1294068cc3ee7b1335d091c3f8b6ce45b520f32d9f2ee5",
+          "ink_pixels": 233
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_03_control.png",
+          "sha256": "f4a187b39a117c56594ec9c39689df6f13dac03f7882f7e14790bc14a0918681",
+          "original_ink_sha256": "376c1868e417985df936e3f9cd19b20a81d6f3983751ad14506628965a18b92d",
+          "ink_pixels": 22
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_03_ranking.png",
+          "sha256": "f4a187b39a117c56594ec9c39689df6f13dac03f7882f7e14790bc14a0918681",
+          "original_ink_sha256": "376c1868e417985df936e3f9cd19b20a81d6f3983751ad14506628965a18b92d",
+          "ink_pixels": 22
+        }
+      }
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 25,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_04_source.png",
+          "sha256": "f48313d1b545748c0f760b995b1aa0a5ca700b7e098fb05079d1289e9f8d4d7d",
+          "original_ink_sha256": "48a464d9089018b21b761c7fc8277125ea4ec44de1dd9928dddb75f145352b54",
+          "ink_pixels": 96
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_04_control.png",
+          "sha256": "f48313d1b545748c0f760b995b1aa0a5ca700b7e098fb05079d1289e9f8d4d7d",
+          "original_ink_sha256": "48a464d9089018b21b761c7fc8277125ea4ec44de1dd9928dddb75f145352b54",
+          "ink_pixels": 96
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_04_ranking.png",
+          "sha256": "f48313d1b545748c0f760b995b1aa0a5ca700b7e098fb05079d1289e9f8d4d7d",
+          "original_ink_sha256": "48a464d9089018b21b761c7fc8277125ea4ec44de1dd9928dddb75f145352b54",
+          "ink_pixels": 96
+        }
+      }
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 37,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_05_source.png",
+          "sha256": "851fd078a0343d32b5b0f3360fd1b7dfe7850310261e9d694cdccf6c5c4af55a",
+          "original_ink_sha256": "feff8a65df9098bfa63499a2dddceb063a6223984dc35faab58033b5264cfb21",
+          "ink_pixels": 204
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_05_control.png",
+          "sha256": "f4a187b39a117c56594ec9c39689df6f13dac03f7882f7e14790bc14a0918681",
+          "original_ink_sha256": "376c1868e417985df936e3f9cd19b20a81d6f3983751ad14506628965a18b92d",
+          "ink_pixels": 22
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_05_ranking.png",
+          "sha256": "f48313d1b545748c0f760b995b1aa0a5ca700b7e098fb05079d1289e9f8d4d7d",
+          "original_ink_sha256": "48a464d9089018b21b761c7fc8277125ea4ec44de1dd9928dddb75f145352b54",
+          "ink_pixels": 96
+        }
+      }
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "position": 49,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_06_source.png",
+          "sha256": "1e8ae9eebce9a9527b182c3411f7b3128339edc923dc937978b828ac4b3d753e",
+          "original_ink_sha256": "a37bb57c305fd563095bac9648a8096d8d52f76891ed36aa35cc5123ed69ec16",
+          "ink_pixels": 223
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_06_control.png",
+          "sha256": "b6260b8ef69ed2247d760d84a309a7d16c108cb36f929ba46f9aa2c763c33779",
+          "original_ink_sha256": "e03b3b44f69d17dc378d496fab2c403bade16bcbee09c8bfe2d9d61d1c5db64c",
+          "ink_pixels": 143
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/glyph_06_ranking.png",
+          "sha256": "d425f772515f9b33c3e725937c128f28bf45f9f93b1fc9c9e92efed9dc1ec2bc",
+          "original_ink_sha256": "988c3a5a272b0beb859832857e7b919779aa62615f56beee12aaa2e7c3cc9bfb",
+          "ink_pixels": 84
+        }
+      }
+    }
+  ],
+  "whitespace_failures": [
+    {
+      "case": "train_00179_fixed_cells",
+      "position": 29,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_01_source.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_01_control.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_01_ranking.png",
+          "sha256": "7792418ac4b7690daf55fe4639a70fb0f5c8efe7ccb4310606d0f2d25015c9f4",
+          "original_ink_sha256": "fc07294e5228838da4732bf4ebebb777dedddfd914d144c898163f679971ee7d",
+          "ink_pixels": 48
+        }
+      }
+    },
+    {
+      "case": "train_00179_proportional",
+      "position": 29,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_02_source.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_02_control.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_02_ranking.png",
+          "sha256": "7792418ac4b7690daf55fe4639a70fb0f5c8efe7ccb4310606d0f2d25015c9f4",
+          "original_ink_sha256": "fc07294e5228838da4732bf4ebebb777dedddfd914d144c898163f679971ee7d",
+          "ink_pixels": 48
+        }
+      }
+    },
+    {
+      "case": "train_01708_fixed_cells",
+      "position": 141,
+      "images": {
+        "source": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_03_source.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "control": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_03_control.png",
+          "sha256": "81af265aabe6e7f323a19627c943b656e8cec05f5654269e4c7603fb82d42435",
+          "original_ink_sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "ink_pixels": 0
+        },
+        "ranking": {
+          "file": "publication/ilm-nature/figures/ranking_completed_samples/white_error_03_ranking.png",
+          "sha256": "b4a0aba3d3422b29a57dddcaef56ac742920c96408799eaa0d0e8a8c6342bb7b",
+          "original_ink_sha256": "a4716f3e20cd14902e47e75c1650c33d27a67d8481a85ea53afdc85918a85fb5",
+          "ink_pixels": 116
+        }
+      }
+    }
+  ],
+  "sample_rule": "First six source-ink selected positions in original development-book case/position order, without inspecting candidate success.",
+  "failure_sample_rule": "First three false-ink source-white positions in original complete-case/position order; explicitly failure-selected.",
+  "physical_review": {
+    "blank_flags_verified_against_original_pixels": true,
+    "boards": 33,
+    "credited_empty_candidate_ids": [],
+    "frozen_readings_repaired": false,
+    "images": 2080,
+    "independent_human_adjudication": false,
+    "one_freeze_before_owner_access": true,
+    "original_unfrozen_entry_history_preserved": true,
+    "pixel_empty_readings": 69,
+    "pre_freeze_transcription_correction_sha256": "901f16c7a60821572853bd7ffe62375b3cebae19e8262780b8cb62f2781cc45f",
+    "prior_development_familiarity": true,
+    "reviewer_kind": "model",
+    "uncertain_readings": 28
+  },
+  "original_control_frozen_credits": 970,
+  "fresh_control_review_credits": 981,
+  "control_pixels_unchanged": true,
+  "probability_totals": {
+    "positions": 12597,
+    "source_whitespace": 252,
+    "original_false_ink": 25,
+    "original_false_blanks": 37,
+    "switched_to_blank": 4,
+    "fixed_false_ink": 3,
+    "added_false_blanks": 1,
+    "predicted_false_ink": 22,
+    "predicted_false_blanks": 38,
+    "selected_positions": 1040,
+    "original_readable": 1002,
+    "lost_selected_credits": 0,
+    "lost_nonempty_source_credits": 0,
+    "predicted_readable": 1002,
+    "certified_blank_global_mode": 238,
+    "certified_blank_global_mode_source_white": 218,
+    "certified_blank_global_mode_false_ink": 0
+  },
+  "probability_decoding_eligible": false,
+  "physical_gate_passed": false,
+  "complete_language": "unmeasured",
+  "new_blank_target_fit_quality": "unmeasured",
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "pixel_expansion": "3x nearest-neighbour from original binary32x32 pixels",
+  "elapsed_seconds": 0.07511268276721239
+}
