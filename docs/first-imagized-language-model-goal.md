@@ -217,9 +217,11 @@ whole deployed parameters do not establish the desired compact model.
   The paper distinguishes 1,002/1,040 recognizable shapes from exact source
   bitmaps, which change only from 4,603 to 4,609 of 12,597, and the failed
   25/252 whitespace count from unmeasured autonomous language. The separate
-  white-target quality comparison is still running and unmeasured. Its revised
-  PDFs have not yet received a new versioned local delivery. Office export and
-  cloud propagation remain unverified; publication is not model acceptance.
+  white-target quality comparison is still running and unmeasured. The
+  [separate delivery receipt](../publication/ilm-nature/evidence/ranking_completed_local_sync.json)
+  records the versioned local package and owned latest-PDF aliases. Office
+  export and cloud propagation remain unverified; publication is not model
+  acceptance.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a

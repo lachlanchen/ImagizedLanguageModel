@@ -191,8 +191,11 @@ image contents remain unchanged. Readability 1,002/1,040 does not require source
 identity: exact source bitmaps change only from 4,603 to 4,609 of 12,597 and
 fixed-order samples include simple wrong marks. Whitespace still fails at
 25/252 versus a limit of11; autonomous language remains unmeasured. The separate
-white-target fit is running, with quality unmeasured. New versioned local
-delivery is pending; Office export and cloud propagation remain unverified.
+white-target fit is running, with quality unmeasured. The new versioned local
+delivery is verified in
+`publication/ilm-nature/evidence/ranking_completed_local_sync.json`: 934 payload
+files, both owned latest-PDF aliases and all 876 preceding package files pass
+hash checks. Office export and cloud propagation remain unverified.
 Use the private handoff for current ownership/resources; all completed trials
 remain terminal and their sources/readings must not change.
 
