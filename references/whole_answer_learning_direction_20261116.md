@@ -122,14 +122,56 @@ random-generator replay, stop/censoring accounting, and adversarial reward
 fixtures for blank, reordered, duplicated and similar-but-wrong glyphs. The
 density fixture has random weights. These are implementation controls, not a
 trained model result. Full inherited-body sampling/replay, resource use,
-reward calibration on real generated answers, optimizer replay and language
-benefit remain unexecuted. No neural successor fit is registered or running.
+optimizer replay and language benefit remain unexecuted. The saved-output
+calibration below rejects the first reward. No neural successor fit is
+registered or running.
 
 ```bash
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 \
   OPENBLAS_NUM_THREADS=2 \
   python -m unittest tests.test_on_policy_glyph_learning -v
 ```
+
+## Completed reward falsification
+
+The [preregistered CPU comparison](evidence/whole_answer_reward_calibration_registration_20261116.json)
+binds 235 inputs and all 64 final normal QA outputs, 32 in each presentation,
+from the completed original continuation trial. It reads original packed
+output pixels and authenticated reference images from the prepared corpus;
+it loads no model, teacher alignment or checkpoint and renders no new glyphs.
+The implementation and registration were committed and pushed before scoring.
+Frozen transcriptions and uncertainty remain unchanged.
+
+The [result](evidence/whole_answer_reward_calibration_20261116.json) contains
+9 strict complete-correct answers, 9 readable wrong answers and 46 outputs
+without a credited clear reading. Reward separates the first two groups
+(pairwise AUC 1.0; minimum correct 0.485744, maximum readable-wrong 0.452647).
+However, one proportional output with an uncertain frozen reading receives
+0.492818, above the minimum correct reward. The prospective requirement that
+every correct answer outrank every uncredited output therefore fails. All
+capped outputs receive zero. The decision is **reject this reward for policy
+optimization**. Do not tune the gate or repair the uncertain reading.
+
+This result does not establish that the uncertain output is semantically wrong;
+it establishes that the reward lacks the required conservative separation on
+this reused, model-reviewed cohort. There is no independent human adjudication.
+It neither qualifies a replacement semantic judge nor measures an ILM learning
+gain. Scoring takes 0.539 seconds at 0.631 GiB peak process RSS; imports and
+source authentication precede the scoring timer. There are no new model calls
+or optimizer updates. An independent scalar recount confirms 64 rows, 9 exact,
+18 readable, 46 uncertain and all capped rewards zero.
+
+The remaining candidate needs a trustworthy **training-only** semantic judge
+before a fit. One possible contract is to transcribe only generated answer
+images, abstain on ambiguous writing, and compare the frozen transcript with
+the training answer in a separate matcher. Do not show the question or reference
+to the transcriber. Require agreement on visible glyph count, order, repeated
+glyphs, true spaces and stopping, including adversarial duplicate/missing-stroke
+cases. Earlier recognition losses did not satisfy that contract, so a new
+recognizer is not presumed to do so. Validate it on preserved real outputs
+before using its reward; a failed judge stops the policy proposal. Such a
+judge is absent from deployed generation. Its preparation and runtime costs
+must still be counted. No judge has been implemented or qualified here.
 
 ## Execution decision
 
@@ -139,8 +181,10 @@ comparison. A failure preserves that rejection and does not authorize the
 blocked evaluator, extra epochs or an intermediate checkpoint substitution.
 Neither outcome automatically launches the new code.
 
-Before registering any whole-answer fit, calibrate the fixed reward on actual
-preserved output images and frozen readings, including readable wrong answers,
+The first reward failed calibration; do not run its policy fit or model
+support preflight. Before registering any replacement whole-answer fit,
+calibrate its fixed reward on actual preserved output images and frozen
+readings, including readable wrong answers,
 wrong dates/entities, duplication, whitespace, early stops and caps. Preserve
 all uncertain readings. Use disagreement to reject the reward; never repair
 old readings from references. Register a small **training-only** support and

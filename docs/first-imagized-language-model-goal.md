@@ -31,10 +31,13 @@ separates learning conditional pixel associations from producing correct complet
 answers. A new training-only component samples complete answers, rereads actual
 emitted pixels and accumulates a leave-one-out policy gradient while retaining
 supervised learning as an anchor. Its seventeen CPU checks establish sampler,
-probability and gradient contracts; full-body execution, reward calibration and
-language improvement are unproved. A fixed-font image reward can still favor
-visually similar wrong answers. This is a conditional next experiment, not a
-replacement run or a qualification result. Preserve the live white-target
+probability and gradient contracts; full-body execution and language improvement
+are unproved. The preregistered 64-output CPU calibration rejects its first
+image reward: an output with an uncertain frozen reading ranks above a known
+correct answer. Preserve the uncertainty and do not train that reward. A
+replacement needs calibrated training-only semantic supervision of actual
+written answers. The generic policy component is a conditional candidate,
+not a replacement run or a qualification result. Preserve the live white-target
 sources and serial owner, finish its fixed decision, and do not auto-launch a
 successor. Require a registered training-only support/resource preflight and
 real-output reward calibration before another fit; reject reward gains without
