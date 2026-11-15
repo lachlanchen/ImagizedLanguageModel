@@ -106,4 +106,7 @@ TeX children had exited zero and completed receipts/artifacts were written;
 this observation is preserved and independent inspection passed without a
 repeat build. All 115 model sources and exact original live owners remained
 unchanged. Office application export and independent human review are absent.
-Local delivery is a separate, pending unit. The model goal remains active.
+The separate local delivery is now recorded in
+`publication/ilm-nature/evidence/glyph_score_gap_local_sync.json`: 957 payload
+files, both owned latest-PDF copies and all 934 predecessor manifest files
+are verified. The model goal remains active.

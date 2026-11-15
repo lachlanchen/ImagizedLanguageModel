@@ -226,8 +226,12 @@ table; all 330 prior figure assets and 152 earlier embedded image contents
 remain. The outer build's recorded exit143 does not replace the three successful
 TeX-child receipts and subsequent authenticated artifact inspection; no repeat
 build was launched. No new model call or optimizer update was made. The separate
-white-target fit remains unchanged and unmeasured. Delivery of this new revision
-is pending; earlier local packages and owned aliases remain preserved.
+white-target fit remains unchanged and unmeasured. The new local delivery is
+recorded in `publication/ilm-nature/evidence/glyph_score_gap_local_sync.json`:
+957 payload files, both owned latest-PDF copies and all 934 preceding package
+files pass hash checks. It is a frozen source snapshot preceding these status
+edits; older packages remain preserved. Cloud propagation and Office application
+export remain unverified.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and

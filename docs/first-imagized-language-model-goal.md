@@ -255,8 +255,12 @@ whole deployed parameters do not establish the desired compact model.
   followed three successful TeX children and completed authenticated artifacts;
   subsequent inspection passed without another build. This adds a measured
   canonical-density diagnosis, not a meaningful-language result. The original
-  white-target fit and all 115 bound sources remain unchanged. A new local
-  delivery has not yet been performed.
+  white-target fit and all 115 bound sources remain unchanged. Its
+  [versioned local delivery](../publication/ilm-nature/evidence/glyph_score_gap_local_sync.json)
+  verifies 957 payload files, both owned latest-PDF copies and every file in
+  the preceding 934-file package. The package is a frozen source snapshot;
+  these subsequent goal-status edits do not alter it. Cloud propagation
+  remains unverified.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
@@ -361,9 +365,10 @@ native Figures 23--28. The
 [current build receipt](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
 records all-page layout overview, 47 detailed page checks and unchanged earlier
 image contents. Previous PDFs and versioned local packages remain preserved.
-The [preceding local delivery](../publication/ilm-nature/evidence/ranking_completed_local_sync.json)
-still contains the earlier 50/88/90-page revision; delivery of the new PDFs is
-pending. Cloud propagation and Office application export remain unverified.
+The [current local delivery](../publication/ilm-nature/evidence/glyph_score_gap_local_sync.json)
+contains the new PDFs and native figure in a verified 957-file snapshot,
+preserving the earlier 934-file package. Cloud propagation and Office
+application export remain unverified.
 The current white-target trial's quality and language remain unmeasured.
 Failure-driven model work retains priority over presentation-only revisions.
 
