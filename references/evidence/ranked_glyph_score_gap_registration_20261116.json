@@ -1,0 +1,3983 @@
+{
+  "schema": "ranked-glyph-score-gap-registration-v1",
+  "source_sha256": {
+    "scripts/analyze_ranked_glyph_score_gaps.py": "1db13a9cf300ab460b5fab8aebcd73cfa6f89bb8288f4736faad1d6a23429403",
+    "tests/test_ranked_glyph_score_gaps.py": "e176145e1eb32153612b809088d458248db5e681a9b2d88e1dba4307d4747c7c",
+    "references/ranked_glyph_score_gap_protocol.md": "8cda3f1355d2ac93fa73f07cc0bc3640345d347424ae157fb9fc4f5e1b53a937",
+    "scripts/review_joint_writer_physical.py": "49a8d2385198ae8df66c49fc4fa163f1d99b75a99a1826c45f09513c9e311c15"
+  },
+  "input_sha256": {
+    "references/evidence/ranked_writer_whitespace_result_20261115.json": "c9e6ba7cae33988b9d6a527075bd70a98e7b68a5aab1b8ab562c56f2d9adf508",
+    "references/evidence/ranked_writer_whitespace_registration_20261115.json": "ff39742335d67e1e6822e6985a963bca9c72bbbabf02ae46985f4a63fd5fa97b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/report.json": "6f0f41f64f9a07182d8a1ecebf6c3d9f252de8cc5754bc302a586408de4508e6",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/attempts/start.json": "ac5bb0625b936e65a20801448dd72a44cb09b83bc994d303c2974c09cbc19772",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/attempts/end.json": "ab2f8e9d2bc866ca6a2da421923143b1d80977889195044443ccf091f980d394",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/registration.json": "ff39742335d67e1e6822e6985a963bca9c72bbbabf02ae46985f4a63fd5fa97b",
+    "artifacts/global_glyph_ranking_v1/qualify/report.json": "f3f7431f67fe87dc6ece3b3490403cef4f12efb755cb1d893ff114fe9e910e7d",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06937_fixed_cells/probabilities.npz": "e2b9b4c59fa3d6603de5deb39b8999e180b99ed942e5cf1b7d3c8e09c69723a2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_06937_fixed_cells/pixels.npz": "fea077b98bd3c4c86f52e3e88b9f08ccfb0a5de1f0f081e9d677a89518a7a8a0",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06937_proportional/probabilities.npz": "599330da702a07da6d78149fc15381a660d6334ac33372184ad53d3407a2bf37",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_06937_proportional/pixels.npz": "73d43b75988f7d0e54df1febbbd4f366eaaa7a192a36bac934e72a845535d241",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11045_fixed_cells/probabilities.npz": "ea890298dddb6ba31b8dbf18c1e94d67b067193368d7fe87baaebf56d4bfd0f6",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_11045_fixed_cells/pixels.npz": "a0f7f3c92509ddd76cf457845e7112eb5f92f5c68fabe71941483a63b50d653b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11045_proportional/probabilities.npz": "cdc92a2e0c604709cba4747aec83fc2b7c7fd0e905fc1a4cac64fc098d21f1e5",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_11045_proportional/pixels.npz": "4c5ef789ea3a6b9e4d4031a99899221d9882e945d51ff929bedfcd26a18ef407",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11999_fixed_cells/probabilities.npz": "37c7ded73c109179ebd71db6a4e18c18bf0ed01b071d9055ec4a6f9fbc748200",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_11999_fixed_cells/pixels.npz": "ef2ea4810248f30f45bd54654a9e98ecda35cb59db62304c81f38046aeca8dc6",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11999_proportional/probabilities.npz": "e92dbb16f313018de1937f8e522885deafa1ab78ca550ddf71924f916e9fa65f",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_11999_proportional/pixels.npz": "ab8cf2e8c5c933720f23856830a0d061e3e9b99a5e43a6506c26fc11e767b07e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07885_fixed_cells/probabilities.npz": "6cb26630a9f56b85ee476d028eabfa6c6abc69f1f600deae07c1dde164f446bf",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_07885_fixed_cells/pixels.npz": "66bfb172099ff9090ea63fb2cf26db308979179c29ea5e184329c429af03733e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07885_proportional/probabilities.npz": "b477374aac678051ea411a7a2a59437cc170052c68ecef2189cb32a86098e94b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_07885_proportional/pixels.npz": "66bfb172099ff9090ea63fb2cf26db308979179c29ea5e184329c429af03733e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05130_fixed_cells/probabilities.npz": "f3ffbad66e357b4f036ed468a7349d7e2f0571e3df61c64eaac4c9cfcdb2c300",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05130_fixed_cells/pixels.npz": "87f54109a08e039337a52f500f4edea7d3c66f9320d825cdd4965821ab9b3130",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05130_proportional/probabilities.npz": "1bc9d169facf4e8c011ef7e035143fefb65da57da5e242a7df01493e7f7b1e81",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05130_proportional/pixels.npz": "69196e8ab6a0e39358d60a8fc65f44ab272ab1007cde1417b66df438504c90cb",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07728_fixed_cells/probabilities.npz": "bde1f735ec2507939d8dd95182197ddbdcfd246480017cb02975d8a5f1985545",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_07728_fixed_cells/pixels.npz": "eee5560ddd634b22feab053a290fd141007a7f763c93c75a31b706404c273938",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07728_proportional/probabilities.npz": "c781987e696a4f7073ce00851f05e14a95bb84c96ac4b6e377e3fe4f19932fe3",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_07728_proportional/pixels.npz": "5340f568387e9934fc6e3ef891e8bcff9426d707e032876a09077c889c34ced2",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_09957_fixed_cells/probabilities.npz": "ca880c171df401dd6de6c78ac982b5ddfffb97b744aaabc86770eccaa69165d6",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_09957_fixed_cells/pixels.npz": "b5316641c46c9397f7904e3c8c33f8a3f00dfd75ce5d60a4fc2e216f3ed8c966",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_09957_proportional/probabilities.npz": "737b2ccc84a1e44c5bfc34285d835cca0119ee53a808a24bb1c4f0ce1f60ee42",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_09957_proportional/pixels.npz": "8663ebf6660d883e4297aa4b23646e3c38c3da7fb7dbf73c796cbb4052a8b320",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06045_fixed_cells/probabilities.npz": "357849421c20c6a6ea78cb9bcfffb37b4e4d9264f902a5488d1136682300612b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_06045_fixed_cells/pixels.npz": "7fc16073d429946581cafeb5afdb6b0d2686f88a4bf05cbfe5326eb5743acaf7",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06045_proportional/probabilities.npz": "a78786df5813f0b080c62f625c97acd5b442d0ab81838efcc2fef73d7b8fbad3",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_06045_proportional/pixels.npz": "6440fcea76d49f6330a90083ae4ff6da0e84235f3c8393da2764ec1e20e9308a",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05994_fixed_cells/probabilities.npz": "3adf2c8478a66dff5c5f9fb29fbfc20e600612f1d7f07496b56bdc96dce9ae69",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05994_fixed_cells/pixels.npz": "46867b9ef0e5483440a6a42190a55adcaefc451efee5df290210544b05013aac",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05994_proportional/probabilities.npz": "fffc98b768635cf7dcdcb01e3c123e8cf2fa6e2eb2d4739033892cab0078f15b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05994_proportional/pixels.npz": "1828144fef2fbfb02dfbae595e772a1cf10e145facb2d48d990ea4994ec113ff",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_12477_fixed_cells/probabilities.npz": "560d350319d73126c1cb2acc9ba264c4c95ada455621751170e4aab2d96fcf5d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_12477_fixed_cells/pixels.npz": "7a6a93b09cd83f2396581441d547c40c6b56a6c947b534fb4d62fbbf362198d7",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_12477_proportional/probabilities.npz": "3dc04727a074c9e1d26fdca03dae2f5b4136b729971670d6c795d6a4cb99e525",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_12477_proportional/pixels.npz": "7a6a93b09cd83f2396581441d547c40c6b56a6c947b534fb4d62fbbf362198d7",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05738_fixed_cells/probabilities.npz": "4019fb028e2cf19f979daf4cd8df815af7bd16c1a5e33b6ad2e6031ff09a05b0",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05738_fixed_cells/pixels.npz": "2fc453df3291d17e3a9abfbed68c53a763ae6bef9968f6e6e10283d04958cf92",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05738_proportional/probabilities.npz": "1eb47ce5824d9e457d8b7b6982dc8ea63ade9ef6127c7d3528ecd540218e6649",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05738_proportional/pixels.npz": "2b608b030bf75d742ea98a8b85a084563f787aeee6f70f05bc63ca2704dbbdb2",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05373_fixed_cells/probabilities.npz": "c69fe9ae52a82163eb2bf930fa62f0d390155ff82c6a06b2c24f3e4889454990",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05373_fixed_cells/pixels.npz": "0be70a179f5914854a33fb2c40a0eff579d440790ad60f79ca968fcbe209912b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05373_proportional/probabilities.npz": "36d40a7486040894517e2569502dcead8d5f714c4afb3a17e3d7ef6736e18811",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_05373_proportional/pixels.npz": "86a2455c3cd60537837d93011a65e45aca9b093eed1de6569ebcfecc6f4b2202",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03836_fixed_cells/probabilities.npz": "7446fe04cc12a36994e4a79cfcfcf5eea0fbe19539dc76180fbee7b289e49aa8",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_03836_fixed_cells/pixels.npz": "4a9188532344861cb65e7859b60ef527b7fc9d381f33264e5ee5b995e4beb046",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03836_proportional/probabilities.npz": "a9d7e502ad7056955ef1e9bbff2a07b1b732d897c00023fa0b06ad4fe82e091d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_03836_proportional/pixels.npz": "2f1f8779278e64a1323509a04956695364446f2eb5e8ffd503e9461a3fe87eec",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04447_fixed_cells/probabilities.npz": "2948301099a17b9e892bbe152668b71a0f9ab94d4342d09764648bf6df44688c",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04447_fixed_cells/pixels.npz": "57b1d01b6511e87cf27ff66d1edae29a86349f6ea6ffced20273f6f3fb1c1db3",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04447_proportional/probabilities.npz": "ac2b06c4982a61edcff65a838072f6566904ca976ad14f889287f70ac8e851d4",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04447_proportional/pixels.npz": "3378b0ea5fddcb4bd344c9b824a03c70bc85f539e20b114170b691ecce5f197d",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_00179_fixed_cells/probabilities.npz": "d112e477274c6b5764771fd03fa777c8842ddd434012d7792db4913466cdf3fb",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_fixed_cells/pixels.npz": "f08ad4a5d553a3cdea04fbd03622f8ff93f0fd9ccab4f2bcc9b6f0feb7a5da1b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_00179_proportional/probabilities.npz": "90b5735955ce0645cfc3f3222736741ec6cfa496c16ff5d12c06aace0b764df9",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_proportional/pixels.npz": "aab9c0338df4484decbb0eb8fb240056b4dc3e372211d0e1e4fe1407e784400e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01708_fixed_cells/probabilities.npz": "fee66267b7a3fa372699e434876eeb344ad871cd41bddb928b42c699c633ea46",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01708_fixed_cells/pixels.npz": "51cfa9522562eb3f096d0a0cda8921630e72d2744a80a5d75919441146712272",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01708_proportional/probabilities.npz": "a1f9c398d31c42df676f4ec1a20573039f3866a1c857383f064c94c7001b5a53",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01708_proportional/pixels.npz": "abd180ead877c578826da98e2a78b25f4546f4ed00c157661e8dd8e4aecc5956",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04653_fixed_cells/probabilities.npz": "07f3fa1c742db3311fbef4836d53ad041b03cf9a4f648dae427ec4f45b15cf6a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04653_fixed_cells/pixels.npz": "6d38929e4a1b857ca3579a29f652a8008e92c318e73e5303d21e343e743cce7c",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04653_proportional/probabilities.npz": "d2cd448becea75d3ac6ec3d301cef4d6b75fcec901f9834b806660b49a306f87",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04653_proportional/pixels.npz": "12a9ed98b2731985289c5ead21a2171caf7783ab985fe068149b41f6f912a045",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01464_fixed_cells/probabilities.npz": "b416d777f06bdfe97b93dbe6590a450b2a5bd1f73b9c546015abd9177c71f63c",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01464_fixed_cells/pixels.npz": "6ab0ebd3163e55398c0c3f6cea847af9dd23b3f88827aa847304cc622ec5963b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01464_proportional/probabilities.npz": "87e3436de50fe1acda814635749f7a29f0b11370624991c63c1c316616748d91",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01464_proportional/pixels.npz": "953155ba58f72ac6b876d7f627937f9b8516ad3c9c460a6444b1e77e6641150e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01130_fixed_cells/probabilities.npz": "1f0073f88a7ed79d93bb2d97a2b6c30403b77e4fe57ab5104765146052a603b0",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01130_fixed_cells/pixels.npz": "8fa437f9023adbde7876cadef7e1ad4260b70da81d4cf19050e9264fa1eb5ecc",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01130_proportional/probabilities.npz": "94aefce079a2d4aec9ce2374ddcdf264ec37ea07d7dbe3b9deb75c8cbace9cbd",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01130_proportional/pixels.npz": "e3622e6dd23a657c6cbb7e58fb4970f71cfec93c42a3f8e43bbe9b2afa6238b2",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01554_fixed_cells/probabilities.npz": "f420d59f90fc13bfbb0c63da856aea863a47a429926088062f1f3404cf2e4508",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01554_fixed_cells/pixels.npz": "896f61a33454cf85132f580d52cba2c9e13c7da32a6896f841219e7543f16d4a",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01554_proportional/probabilities.npz": "6bee1c8644010c2f8b7a132948069d5a42fc52b17dc2565990fe715c75dd6c7c",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01554_proportional/pixels.npz": "061d1922bd2decbded48543809b76c1e3f70dd68418a4e8598ac9dcb846b24e9",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04724_fixed_cells/probabilities.npz": "018c4c554e1ee7285a1782c698fab01c09530e9f65f3e96e006653bdf0cd9f72",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04724_fixed_cells/pixels.npz": "7254e14b25da3d4423143f31e45f354c0fce3b53313f7838dbf326dc71033197",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04724_proportional/probabilities.npz": "22a24a7e12e6a395bf9e1a8840bda28ab1c2d1ea4ba7dbe38d7832b5146625e2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04724_proportional/pixels.npz": "75a6b00690f6f01149c954b84a1181400611aab27c0230dbc5351932fd63a2d8",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01552_fixed_cells/probabilities.npz": "7dee9988bab901643fd9d0ed36cb03fc8ca3458163fa6e9c5aa732959b6ef42a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01552_fixed_cells/pixels.npz": "0f1d51552e1b65132881238c3f67e1d1691eb0cee93d2062e1aaa4106c7ee7fd",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01552_proportional/probabilities.npz": "eba55207f9d927d16b7691cb241cff4d7e3e01b0e681a990bf3aae543c339102",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_01552_proportional/pixels.npz": "e1f7ea4aa86de34163feb2bf0bf4047f0a9c1e02f21e64fc8ed4a618baf913d1",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03745_fixed_cells/probabilities.npz": "6c576bcf1ef5e2ace3ea890d0883f143331bf40f5740032d1c0fa68186fd0a8a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_03745_fixed_cells/pixels.npz": "c81c6132c7b25e175a67d8bca0f13f3512457c89a359cca8e7f4052bd8c2dd8b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03745_proportional/probabilities.npz": "5efedb87921de7f2044eb866a600799c32e3d02d4ce76d56cc6d2d3da6c60210",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_03745_proportional/pixels.npz": "f361507a5022db0a1e8b12df9975ddc707fd5af2c697967b2dca58c494ae83e4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04274_fixed_cells/probabilities.npz": "856d4e82c8dd1e8dcb3ffa37bb90dbc4bbe75fe734bb31fe81e3291d37319392",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04274_fixed_cells/pixels.npz": "fb8d8f6ccb0c250bd6962dcb60c0e44f3c73f4ece23738d51907d7e59deb0848",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04274_proportional/probabilities.npz": "e213458e2156e022c67e0cbb71d4ceec10e25ae103a92a57610806a3221a77ce",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/train_04274_proportional/pixels.npz": "b10476206de956271bc90e02b7a5c7be6f5fa3560b0539c25fb8463fdc47c1f4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_01_a_normal/probabilities.npz": "84660d699f05fd33cdce2ce7d49d797e1f398f7f80e946d8aa8d4f7a6c5fc560",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_01_a_normal/pixels.npz": "ec414a931bb99f9d2dd31c05d99eb7f258f856d96e789cfa52b0dba3a24685da",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_01_b_normal/probabilities.npz": "4b29fbe091a0e81587803be08e66822ceba2073ec02fd422e85e5df84207694b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_01_b_normal/pixels.npz": "ba25d9e3e0021194535346a2af2011727d30b4dda54496397d4a331c73d1ad78",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_02_a_normal/probabilities.npz": "27389763bcaa4fa24f7fc4f2fb4b83fe4aa1ea35c5243fd2c593e05c350342ad",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_02_a_normal/pixels.npz": "28b2fad3a00ba3c694cc89e783c3515369e44d9adc142403dafba1b60e431bfd",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_02_b_normal/probabilities.npz": "905f823eea3cf47ca7f6494400a6397861a20bd1d2452b7af9098e92bf767b74",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_02_b_normal/pixels.npz": "8a4209aaf49aecdd17983b8fd7620bb7ab6af99e7515f9bd57252b199147bc76",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_03_a_normal/probabilities.npz": "3a241a32ddf8e60647fb7ea987470623bbc4287ad46ea9c34ac4d93c61d37f64",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_03_a_normal/pixels.npz": "b346a2e561be7fa567b6848d932ac3ac63f07b44892f98d0d6b7bf404fdd2669",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_03_b_normal/probabilities.npz": "189f6d00ece925dffeaef20e860df67021600a106b3cca67e5e28c1f88c3d4a8",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_03_b_normal/pixels.npz": "a9d64f120b46e87f1b5e609396b188c96c48cfa521cf9030fe63c8ea187d5f29",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_04_a_normal/probabilities.npz": "e7f14c5b839185012d17a5f8bdd6b415fd3e6a139104f7a0f8b51846328dca77",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_04_a_normal/pixels.npz": "7156b36307fff4a6b1a1254be214ebf6b84bd869d1742fb1fae6747e277426ea",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_04_b_normal/probabilities.npz": "7a17344d43cec88634a621f4900096833241f0d08bc1b8faacbe0baa7ddc4412",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_04_b_normal/pixels.npz": "5603c4d9d54f2fe971b4938239628d4897d06f39e84d5d3faf4c9b16b592bb91",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_05_a_normal/probabilities.npz": "f04ccde76432e62546704fe0a3bac4af9173ed3b50f898bdc7c8e27951019ed1",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_05_a_normal/pixels.npz": "9e2de1e7e898757fe834b96d7223eaa4b39d3429ed0efb40dcfac62d755ea9bd",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_05_b_normal/probabilities.npz": "26acc751caa8c41b7237ef4b793069d33329249a0c2fd6c9d5d6a6f7397b7bf2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_05_b_normal/pixels.npz": "29bc308e32f20246ac0a708f8774cb62a0802757f4e892c2fc80a39c6c93d5a5",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_06_a_normal/probabilities.npz": "4863f08d3b21e90eafe0b1b79115fdb918365721533f6a9ba7eaccde6d7fe7f2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_06_a_normal/pixels.npz": "04f73a0d1ea7bdc2b0cce8a32da79c34a2077638626c73c8138646136f5a6a55",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_06_b_normal/probabilities.npz": "8573c8166e72cf8dde61be3210d2a3e8fe04b651339803963a52c23e36b1070b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_06_b_normal/pixels.npz": "1141a19fefd4798d36cbc1f46543414bac84e4c65182e43528853aca3658e6ad",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_07_a_normal/probabilities.npz": "9260ed2e8735d16ad9aac978da904e4eed12a8cbb1fe4c2b06ea6176678c6dfd",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_07_a_normal/pixels.npz": "e138debc990abf79a791a3933356a91996eba4578d19eb7782a7234c1725083b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_07_b_normal/probabilities.npz": "14f706e5ed1c39e6c21c3cf036d595856bb131bbf646afe68588bd6a8cd88239",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_07_b_normal/pixels.npz": "581376bed310892be5b57ad96e369c9ceaebaf5c27f0798347f00b5d77cc6b00",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_08_a_normal/probabilities.npz": "71abc174aaaa91fca8ee9802025cad93ad8dbf458753d76655dd0214f4fb9200",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_08_a_normal/pixels.npz": "772328a576c4ab12165261124bb279e2afd9cb0b4035a752170ff258f3d20159",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_08_b_normal/probabilities.npz": "4114b3899905759d85730c552d5cd11b17b17370519611a5618e8fba0ea707a2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_08_b_normal/pixels.npz": "a531de5c5a9f114ea27f1417bb87dbf85ad3ab71aecf731e36172d0ad9cb669e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_09_a_normal/probabilities.npz": "a606e057fbf19176d54214dacf918c542342dc822998b4290b749ff51d17b276",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_09_a_normal/pixels.npz": "8a1f77755a4d8be3c90af3fc0b04662c9528c5e9fe70f2010dd4dc63a8e9f9c4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_09_b_normal/probabilities.npz": "b153022c0ee4712eb5b1dc602534fa0419eac8a0372340d6fea36178e6939ee9",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_09_b_normal/pixels.npz": "a75644da0295fda3aa646fc2c3e3a7fc07df39765fe6ded5b32de129df183e57",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_10_a_normal/probabilities.npz": "10596e25eebe4504d87c5e3468e4674f203fcae6da0124907ad671047f72fa7f",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_10_a_normal/pixels.npz": "161bf2ba5a7cdbb01bd5491b35605f21779adc5ed5c96c8882848c8a16faab6b",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_10_b_normal/probabilities.npz": "b580a71b03d308397d78ce5605bfc28b6667f3d80f7c2470f8fba5fda2d8ad25",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_10_b_normal/pixels.npz": "2b992699628bb52d69c42ace4ffbbdd2b6c6ac76c160d6b8a47e1720024af12f",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_11_a_normal/probabilities.npz": "d95953f778dc167c15d9f026bc901bf1ed4e6ac39b902b00dca33f5a121b4731",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_11_a_normal/pixels.npz": "06fd6549bcb69d576efc22dc928f76cf9b218b23b29b0a7fce479573fa9c2342",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_11_b_normal/probabilities.npz": "f6ad4d77c29d39715eae9ab03e90aa3cc42fd67aea0d2b3c503d1ba95e1774e5",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_11_b_normal/pixels.npz": "1cd6608131e6b77ac65d6fa434344410b1e94d443a737df75ac06df6373ae263",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_12_a_normal/probabilities.npz": "cf0b24c146f16d603f71bf8e984c8bc3a0777bdf56a6f55f2db16318fdfdb1c6",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_12_a_normal/pixels.npz": "6f9127f01c8c323043dfd84a16ad5b435a3a909f44928a582307e3f50bc70db2",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_12_b_normal/probabilities.npz": "28361bb0e0e20b6f6904aa02329d2c60b51aa48c7c340a3cf3d0a2876636e226",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_12_b_normal/pixels.npz": "a598df72e484ce9645c6e357f4b734f83a16cfd66c6b2315a7d8e26ac22ad1e7",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_13_a_normal/probabilities.npz": "6c52900ee24c92c6fc67a1cf7959d0fce5ab05cae6d96bbad6961700d7b964f9",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_13_a_normal/pixels.npz": "607b9262172a79d620e600bce29a8f4eeeb566b14a59c2bab11bfc9b347c0ddf",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_13_b_normal/probabilities.npz": "76e210b6a02edca691cca036d9aa4e0d877c81d61b618059f3c73c0ece6a3e25",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_13_b_normal/pixels.npz": "ad7545f811bd193fbd8bce5e20621601339c4e36b90c50c311a744af8d9f5693",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_14_a_normal/probabilities.npz": "861e99e3221cbe09934e1a0cd0f7cf06cc9ee29085ffd88dca75dcccddf51dc5",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_14_a_normal/pixels.npz": "8d758e7843a9f785a1200c62ceec7484661df4031a9d968faa9513073503b126",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_14_b_normal/probabilities.npz": "d70fea5907080fe4344a432b781d29aa5e89c2c5136de8e2baa0f7346dfabaf9",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_14_b_normal/pixels.npz": "ee0887bcb1089a19fb15ebe2415578d62abfa32ef24df0ffbfdcba2a833907df",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_15_a_normal/probabilities.npz": "89649c842ef894fbcb7a7e6fdd713a75ddbefb2e92726abc465ce66001d2f729",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_15_a_normal/pixels.npz": "c497604d43d7acd6e7f41e6e3ba16825ada1152e3fd4cff70feaa321447d98ce",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_15_b_normal/probabilities.npz": "5f15a3e5ea3d3ff71573081b602f4d59860bd5734c1911b662a9c9febdff69e3",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_15_b_normal/pixels.npz": "b2964ef312602d45e2ffea1257e1263de94e84d3d6679fa8995a428bb77f1d22",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_16_a_normal/probabilities.npz": "7c774e34c64707fd6d92f53f47db26c5bef969abee7ca478d62bd950f2bf24d0",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_16_a_normal/pixels.npz": "ca1a1539876312e04b455430db56d7732108ee70ff8b40787fe7f833ed0037db",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_16_b_normal/probabilities.npz": "a26a5323d50c2f400307ccaf59ac7d261b5f0f595e410575abc4feaa5bb41a5f",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_16_b_normal/pixels.npz": "e8044101dc287c5d23770d6cfcb4ec50161c9e32f228a01bf3979c5be65088ca",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_01_normal/probabilities.npz": "cfedbf53b3d8c705ef1e1ae86081084b25aa493547a3ff8e7d477f4af2cf49ae",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_01_normal/pixels.npz": "01d674090ba56c8ad278502702512e9856f86e0836b29e614db686661a7f63e4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_02_normal/probabilities.npz": "1963d16da0b0e0ed7b9b3479bdd03ae945caecc24879c1c10e15e0d9c618ef1a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_02_normal/pixels.npz": "d0e5efb25b88975ed8e6c0b6b88ec9d33957dc9b4b0baa58a2a5c38abe0d12db",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_03_normal/probabilities.npz": "da0a802c24354dfc0475eb7062b2cb672c7d8889b6ef2b7b15aec7f5a3dc201f",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_03_normal/pixels.npz": "f5a7dd0e91502d63b2776e5424343be7996c2766e45ddee5e24616de1fd8f998",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_04_normal/probabilities.npz": "d99bff0e1206b26fbc38ba52089dae8b28f73ca45b71ba32c12a6765551e2a9e",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_04_normal/pixels.npz": "6cf9d68cf06ff266925e7e5b0d36ba0ad95e58ba87bb89dd3711c794f8850ca8",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_05_normal/probabilities.npz": "6924c0d725971ca5c67531f635fe604addcaddced687b6f8c3f626154b46b2b4",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_05_normal/pixels.npz": "e5261f547a057a2c3dda8062a019854855562f59671c393c009be2450a95627d",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_06_normal/probabilities.npz": "b84bbef3d58f31a3fe33cb6c24f5f4fd970e4119b44819cf054db9e3bcce93e8",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_06_normal/pixels.npz": "7ac3df44598f30ad919821d16d741210635ffbd7ebc0b6671304058267b6ecda",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_07_normal/probabilities.npz": "5aad8ad45cd79c32038ee35433e6f0cb2685ea9d720212a7ac6604cb452ed89a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_07_normal/pixels.npz": "4c5eabafb84e47977375c1aae5b2aeec1cb76bec3fa63e0493980f95770406cf",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_08_normal/probabilities.npz": "2e74ff48bad0a6f670ac0e06d0a39bef59ee47ef9293178075b7df62b78becf0",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_08_normal/pixels.npz": "e746d1be65c6702fce551c4326b1613fd9bb256074eca141686ef89e6aa9c341",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_09_normal/probabilities.npz": "a5e1c6e593de1fd45814e3364bb892704d0006b29ae26bfbb2860f71dcd1385d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_09_normal/pixels.npz": "6455af3e5c42f32c831d1b6ad0bac89ee31af40d6de47a29e8132f2f47cbc194",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_10_normal/probabilities.npz": "0727911467d43aab0e0ce450bdd226d66a800439289a20167d4ac055c129d7fa",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_10_normal/pixels.npz": "75116d3ef6eb24bd2b4e9aeb491db056a1b7b4b23bf4a35534943c45a728fdc6",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_11_normal/probabilities.npz": "eaa8dc8b9b1b2c19e78f5730d59a3e311e92e99c2c4aedf954b1941887529cce",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_11_normal/pixels.npz": "aae831a692dfa5d74b1483f9bd5fb68bbeead79b4cce7429904d8c70e5ebee9f",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_12_normal/probabilities.npz": "a8e40642c44804e0864ba85e8c57ded919be72d7f0f434d4ce044486310ae8d2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_12_normal/pixels.npz": "a29e711a2b157a396bea7052598bf1596600d1012869eee6d8c3fed19a15eda9",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_01_a_normal/probabilities.npz": "26fdc4d34a7d06d52996be48ff45a4c22047bbe1c0d95809fd8c93158b96c3b0",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_01_a_normal/pixels.npz": "62e4cf4e49ce6da32af52a8cccd3252c882d5b1d64f6c183d70359f1da6b46b2",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_01_b_normal/probabilities.npz": "4f110a9ac9435b4df10df6b89a98341c579555ebf2f54567ac535ad37067d4e2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_01_b_normal/pixels.npz": "bedd73289a1b76b4077bddbab72687c5e91affdb6385c219def3e5a64391006c",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_02_a_normal/probabilities.npz": "34948a2d7b2eed2028c020db71b7f045d3a2cace0430bd3dfc58b472ea655584",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_02_a_normal/pixels.npz": "2e37fb0c87b605fd34cb48b75b6e6ac276262154ac871dfa5b00d2b36b952a8e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_02_b_normal/probabilities.npz": "8cbc23df0d30351fa24c519f789dc695bc348839d9a486e6f2807e7d66154a13",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_02_b_normal/pixels.npz": "0f40c32343f668c803a834d9bed6342ef053294fcdf13d2365d60ab832e97493",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_03_a_normal/probabilities.npz": "20ea8a5f844611d069f1f98f3c387e74249d0ebf5ec44edd6989368748624fc4",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_03_a_normal/pixels.npz": "a33364bf7784993f1e5328ef2b328cbb0230532ea336d523a808ef29d55efac3",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_03_b_normal/probabilities.npz": "10e6dc9f725fea2ed99a08266a94ddb322e917f7f8ece6aa4523aabc3063b517",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_03_b_normal/pixels.npz": "e129830a5873f3ac1467e05397f922f11d129d0ee6713738868565d4df789428",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_04_a_normal/probabilities.npz": "52632f23f5b2a048261a7f8d68877829842bb6e5ac403c6ea8599ea35ab3ebcd",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_04_a_normal/pixels.npz": "8a1bb5caef3cda8873eb129655dec1fb89dcb9113fcf110f6b99acc2afd417b5",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_04_b_normal/probabilities.npz": "02367ee1b851d8874ad092b5da8ff64b3a48e7daf96887c0df6caa2fbe51ec8e",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_04_b_normal/pixels.npz": "0904d14171c2ece6bc1fac82817464e31e2729390d71bb83f39ca2b88b398466",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_05_a_normal/probabilities.npz": "be681d604f76cfc34027b4cf3095307a434b2cc941b98f9e639cee90d01da00d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_05_a_normal/pixels.npz": "7b0ae9c71f9cae3c62742018b7a52ddaf81be19bcf93ea63d013b2f39fe142f4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_05_b_normal/probabilities.npz": "cc376e5cb51bc10ee4ed008f6af46e7d2bf9b1c131085aa0a1a0edcc9bde5e9c",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_05_b_normal/pixels.npz": "93dd0be09e9e2983b5ef522957fd83461b4abe187959874d003a30d7e0c2a626",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_06_a_normal/probabilities.npz": "fa854cbe22051755fc8cba10b3c92162d8506572715f27d9d88e5ef37667286e",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_06_a_normal/pixels.npz": "08056714390d2eb8b73dd591b8f2cf6db3721111804801281e7671dfa256a061",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_06_b_normal/probabilities.npz": "2c609193bd426615032e8b5b593bb2247a18346f827561358d2472b55efa791b",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_06_b_normal/pixels.npz": "6662e602e5fca38c9f13bfed759a07807a8f2b9fd75489431f14a198ef40c669",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_07_a_normal/probabilities.npz": "bd492efc846ec41c4412276d30496f1a25a6eedfb1ed117e7c1b54d707166723",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_07_a_normal/pixels.npz": "263aedc7b633d6047cec638ec325173f82a79505226c5bd80cb9fd0fb2b07413",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_07_b_normal/probabilities.npz": "c56fad13a1c5284c63569388dda2054e7b0eb6439924d539eff2216c6b59d957",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_07_b_normal/pixels.npz": "525c95dd7dfae24e2f24e2cf0599647d615c7ad28b6a3d9abbfb93e9f039c831",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_08_a_normal/probabilities.npz": "39934efa764fbd03ac7df04f0a540b5a55d9d53549611a03c9936fae6ce2ba9d",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_08_a_normal/pixels.npz": "afcc3994a12089ba7236239cee8afd3bdc8bff47820d5508f659495e3b466da6",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_08_b_normal/probabilities.npz": "5e12a71bae7834048fee1b1aededed7b733959f00095983daa0b7b8688dc5b65",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_08_b_normal/pixels.npz": "f1760c6486aea5ee43a0ef8dd8b70d1b8d2c462052310aa4212d8152d8e87a06",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_09_a_normal/probabilities.npz": "7b7967eda314cfebade0e78caf8327e20f68100fbb3fdb8714d734a61133c46a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_09_a_normal/pixels.npz": "0284563df06ef66c23931521ee7b0054e4cc8ba09564de9c6f9efa33fb6da232",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_09_b_normal/probabilities.npz": "85302230713f90da31563c10a5490c01a06cfa46b86388b0ca2b2d740e4284f6",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_09_b_normal/pixels.npz": "a75644da0295fda3aa646fc2c3e3a7fc07df39765fe6ded5b32de129df183e57",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_10_a_normal/probabilities.npz": "49cb285f0ac09fa3afeb78992d742bec4e641ae5f137656700526bcc3a6c45b4",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_10_a_normal/pixels.npz": "419526d92a051b21ef94a01ef451581167dcf641fdfadc1bfb88c0900bf7afe4",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_10_b_normal/probabilities.npz": "56f77436c2140c40c57b7d8164a3e0ba51f35f8c571990b9449ce67ef1a7b8a2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_10_b_normal/pixels.npz": "1f2d52960f2a38125f2325e92c94c1aed59b64c5b24007a902b4159faca23144",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_11_a_normal/probabilities.npz": "12cc697589bf4d00a8addc134c18ad26358d46888b0d0cfd206b945b59663ee6",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_11_a_normal/pixels.npz": "d1e0ff162e18d99b30157a2d1574cc7fb1a6b89294958bfacf319de9b7d21bac",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_11_b_normal/probabilities.npz": "5e7d9c7fad46920cf047c2212bffe579763d7339c38bb9047089040523919505",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_11_b_normal/pixels.npz": "5b90e2543006df926a3cf7bad9d9babdd803947f650bb84a5d64ab290a692dcd",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_12_a_normal/probabilities.npz": "23bb646e1cc18887aeaa0b471f0914281784caa927cac14f025f372d045dde3e",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_12_a_normal/pixels.npz": "e7542de533b4119b14f46d65349c080b2f5e0b62528b0bbbc0cf5b2d1602c57e",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_12_b_normal/probabilities.npz": "7c3b32d9fac3614b587cd40012a2c37b5a69076a049c39f92feda5a12db5db98",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_12_b_normal/pixels.npz": "a581f11ac2147c7e562b4b230bccae8017c20c55384b27aa8b7058789ee02304",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_13_a_normal/probabilities.npz": "767b6dd090c6ceeae1948be15eba08ca37cc0a998f02371aa97aa0d50ab0d8bd",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_13_a_normal/pixels.npz": "93cfe11e4e09c882401219f3cec7e502cfc96be4cd44e8eff22baf2e13918b07",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_13_b_normal/probabilities.npz": "83a93b0387de404573be28061dd2e722494cd0bd5a46db862bc5d68ae9068ff2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_13_b_normal/pixels.npz": "c9e6ca13cd483e2caefb2c50f84054cf72f9e6bffc1fd8e5656cfcae17ef1a66",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_14_a_normal/probabilities.npz": "55c9cdb25c835bda4e539c7b6109217eadcd0cb800e5110225a5cca039eea6f7",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_14_a_normal/pixels.npz": "93207400b8ce48edf39f4d488cd36b19cec8d941ff535b03cceda99d0cab58b1",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_14_b_normal/probabilities.npz": "e4bb6c85f5d2ce6bbfe88b0fc3c9e55603d46bfec8084608be9da7b7091a27a9",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_14_b_normal/pixels.npz": "122d2ae3c6c1677cdb85c9600933fe5c6ea4e08edda55b77fb51f22da97daa85",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_15_a_normal/probabilities.npz": "324ef255ca4bbec6d4ba63d46ac888a240ee61464d18cd4c2f53f4d41d64373a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_15_a_normal/pixels.npz": "b8662d9265c498c335c2427d1359f1e76457f83b0d8fd562bcaddea5deb160ad",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_15_b_normal/probabilities.npz": "6668114af00b331421343521dd24f9f134acc98c1a61f586eb4eece8d6c94a3a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_15_b_normal/pixels.npz": "ad988cbd540cde1605cf3226d3792ce812b50c091259eb507e036e45c50baa5a",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_16_a_normal/probabilities.npz": "a48dc075675bf3c7d7783aab153bd48c0b390683990492362ea295551383678a",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_16_a_normal/pixels.npz": "5473a7297681909d25dfcbdc0ce3bd966f758b392ca261155b4aac3f13e32a01",
+    "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_16_b_normal/probabilities.npz": "80e0ef6365484b277e38a8a7a106ede413609f218b72d59ee127cf1b30f511c2",
+    "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_16_b_normal/pixels.npz": "7a51593f0109a1e41309a71f1a02d91a1a052cb62233472edbaa2db2694fffc3"
+  },
+  "cases": [
+    {
+      "case": "train_06937_fixed_cells",
+      "positions": 13,
+      "job": {
+        "id": "train_06937_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/06937.png",
+        "source_id": "TRAIN_1019_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 13,
+        "target_sha256": "bc6473538f87121d9754ae9f22484ad22a1db57613645628092775911a0a6302",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06937_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_06937_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_06937_proportional",
+      "positions": 13,
+      "job": {
+        "id": "train_06937_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/06937.png",
+        "source_id": "TRAIN_1019_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 13,
+        "target_sha256": "bc6473538f87121d9754ae9f22484ad22a1db57613645628092775911a0a6302",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06937_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_06937_proportional/pixels.npz"
+    },
+    {
+      "case": "train_11045_fixed_cells",
+      "positions": 13,
+      "job": {
+        "id": "train_11045_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/11045.png",
+        "source_id": "TRAIN_2379_QUERY_3",
+        "long_agreement": false,
+        "target_glyphs": 13,
+        "target_sha256": "2ab864cc203c515ce129f48cd857074288bc06ddedb2392de495dffa57777196",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11045_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_11045_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_11045_proportional",
+      "positions": 13,
+      "job": {
+        "id": "train_11045_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/11045.png",
+        "source_id": "TRAIN_2379_QUERY_3",
+        "long_agreement": false,
+        "target_glyphs": 13,
+        "target_sha256": "2ab864cc203c515ce129f48cd857074288bc06ddedb2392de495dffa57777196",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11045_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_11045_proportional/pixels.npz"
+    },
+    {
+      "case": "train_11999_fixed_cells",
+      "positions": 28,
+      "job": {
+        "id": "train_11999_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/11999.png",
+        "source_id": "TRAIN_2640_QUERY_3",
+        "long_agreement": false,
+        "target_glyphs": 28,
+        "target_sha256": "4fccbc8f442c8897d46c59fc868be06621222d208dde7628336e0f813e075e21",
+        "positions": [
+          0,
+          1,
+          4,
+          8,
+          12,
+          15,
+          19,
+          23,
+          27
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11999_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_11999_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_11999_proportional",
+      "positions": 28,
+      "job": {
+        "id": "train_11999_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/11999.png",
+        "source_id": "TRAIN_2640_QUERY_3",
+        "long_agreement": false,
+        "target_glyphs": 28,
+        "target_sha256": "4fccbc8f442c8897d46c59fc868be06621222d208dde7628336e0f813e075e21",
+        "positions": [
+          0,
+          1,
+          4,
+          8,
+          12,
+          15,
+          19,
+          23,
+          27
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_11999_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_11999_proportional/pixels.npz"
+    },
+    {
+      "case": "train_07885_fixed_cells",
+      "positions": 2,
+      "job": {
+        "id": "train_07885_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/07885.png",
+        "source_id": "TRAIN_1242_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 2,
+        "target_sha256": "93000f5080a07d24966258436a6ec9e46f44462433867e1054b8d112e0b1eb85",
+        "positions": [
+          0,
+          1
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07885_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_07885_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_07885_proportional",
+      "positions": 2,
+      "job": {
+        "id": "train_07885_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/07885.png",
+        "source_id": "TRAIN_1242_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 2,
+        "target_sha256": "93000f5080a07d24966258436a6ec9e46f44462433867e1054b8d112e0b1eb85",
+        "positions": [
+          0,
+          1
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07885_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_07885_proportional/pixels.npz"
+    },
+    {
+      "case": "train_05130_fixed_cells",
+      "positions": 56,
+      "job": {
+        "id": "train_05130_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/05130.png",
+        "source_id": "TRAIN_351_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 56,
+        "target_sha256": "98f11b34992c2106b3fcde5374147930cdb12e69aa6085a87254df4b27f960b2",
+        "positions": [
+          0,
+          1,
+          8,
+          16,
+          24,
+          31,
+          39,
+          47,
+          55
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05130_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05130_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_05130_proportional",
+      "positions": 56,
+      "job": {
+        "id": "train_05130_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/05130.png",
+        "source_id": "TRAIN_351_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 56,
+        "target_sha256": "98f11b34992c2106b3fcde5374147930cdb12e69aa6085a87254df4b27f960b2",
+        "positions": [
+          0,
+          1,
+          8,
+          16,
+          24,
+          31,
+          39,
+          47,
+          55
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05130_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05130_proportional/pixels.npz"
+    },
+    {
+      "case": "train_07728_fixed_cells",
+      "positions": 15,
+      "job": {
+        "id": "train_07728_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/07728.png",
+        "source_id": "TRAIN_1206_QUERY_2",
+        "long_agreement": false,
+        "target_glyphs": 15,
+        "target_sha256": "bc4d23f33816a4c96d1f342955713a7ef1f5971d5413517e8415e3ffb6e28ded",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07728_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_07728_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_07728_proportional",
+      "positions": 15,
+      "job": {
+        "id": "train_07728_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/07728.png",
+        "source_id": "TRAIN_1206_QUERY_2",
+        "long_agreement": false,
+        "target_glyphs": 15,
+        "target_sha256": "bc4d23f33816a4c96d1f342955713a7ef1f5971d5413517e8415e3ffb6e28ded",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_07728_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_07728_proportional/pixels.npz"
+    },
+    {
+      "case": "train_09957_fixed_cells",
+      "positions": 38,
+      "job": {
+        "id": "train_09957_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/09957.png",
+        "source_id": "TRAIN_2135_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 38,
+        "target_sha256": "db179200dc8a617eb825891db92fef832ac9d0a0ac41d31f442844f06d2b8730",
+        "positions": [
+          0,
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          37
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_09957_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_09957_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_09957_proportional",
+      "positions": 38,
+      "job": {
+        "id": "train_09957_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/09957.png",
+        "source_id": "TRAIN_2135_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 38,
+        "target_sha256": "db179200dc8a617eb825891db92fef832ac9d0a0ac41d31f442844f06d2b8730",
+        "positions": [
+          0,
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          37
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_09957_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_09957_proportional/pixels.npz"
+    },
+    {
+      "case": "train_06045_fixed_cells",
+      "positions": 19,
+      "job": {
+        "id": "train_06045_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/06045.png",
+        "source_id": "TRAIN_653_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 19,
+        "target_sha256": "837b834056d03e62b540f99bc730e9f6689e9c1abf0c51f71226b9826de8078b",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          8,
+          10,
+          13,
+          15,
+          18
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06045_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_06045_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_06045_proportional",
+      "positions": 19,
+      "job": {
+        "id": "train_06045_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/06045.png",
+        "source_id": "TRAIN_653_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 19,
+        "target_sha256": "837b834056d03e62b540f99bc730e9f6689e9c1abf0c51f71226b9826de8078b",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          8,
+          10,
+          13,
+          15,
+          18
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_06045_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_06045_proportional/pixels.npz"
+    },
+    {
+      "case": "train_05994_fixed_cells",
+      "positions": 51,
+      "job": {
+        "id": "train_05994_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/05994.png",
+        "source_id": "TRAIN_31_QUERY_2",
+        "long_agreement": false,
+        "target_glyphs": 51,
+        "target_sha256": "6cc1f51ef52661ba751a48d4ca0885962ac62f7c8b1f832ccb63ad0201f26ff3",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          29,
+          36,
+          43,
+          50
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05994_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05994_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_05994_proportional",
+      "positions": 51,
+      "job": {
+        "id": "train_05994_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/05994.png",
+        "source_id": "TRAIN_31_QUERY_2",
+        "long_agreement": false,
+        "target_glyphs": 51,
+        "target_sha256": "6cc1f51ef52661ba751a48d4ca0885962ac62f7c8b1f832ccb63ad0201f26ff3",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          29,
+          36,
+          43,
+          50
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05994_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05994_proportional/pixels.npz"
+    },
+    {
+      "case": "train_12477_fixed_cells",
+      "positions": 9,
+      "job": {
+        "id": "train_12477_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/12477.png",
+        "source_id": "TRAIN_3031_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 9,
+        "target_sha256": "ad595b7e4c47114067d43637ade5c9f58c48484e7381b3fe67e317ee29dc8b14",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_12477_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_12477_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_12477_proportional",
+      "positions": 9,
+      "job": {
+        "id": "train_12477_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/12477.png",
+        "source_id": "TRAIN_3031_QUERY_0",
+        "long_agreement": false,
+        "target_glyphs": 9,
+        "target_sha256": "ad595b7e4c47114067d43637ade5c9f58c48484e7381b3fe67e317ee29dc8b14",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_12477_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_12477_proportional/pixels.npz"
+    },
+    {
+      "case": "train_05738_fixed_cells",
+      "positions": 90,
+      "job": {
+        "id": "train_05738_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/05738.png",
+        "source_id": "TRAIN_315_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 90,
+        "target_sha256": "cc481ec7ffcb36415087f986b31e1991157a48b459c98e7310104a219ea2b2ae",
+        "positions": [
+          0,
+          1,
+          13,
+          26,
+          38,
+          51,
+          63,
+          76,
+          89
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05738_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05738_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_05738_proportional",
+      "positions": 90,
+      "job": {
+        "id": "train_05738_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/05738.png",
+        "source_id": "TRAIN_315_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 90,
+        "target_sha256": "cc481ec7ffcb36415087f986b31e1991157a48b459c98e7310104a219ea2b2ae",
+        "positions": [
+          0,
+          1,
+          13,
+          26,
+          38,
+          51,
+          63,
+          76,
+          89
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05738_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05738_proportional/pixels.npz"
+    },
+    {
+      "case": "train_05373_fixed_cells",
+      "positions": 53,
+      "job": {
+        "id": "train_05373_fixed_cells",
+        "split": "train",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/05373.png",
+        "source_id": "TRAIN_346_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 53,
+        "target_sha256": "b3695e7f537ac124d103d3ce61692182afe76cc73b85cafb0d5421498bf8a75e",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          30,
+          37,
+          44,
+          52
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05373_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05373_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_05373_proportional",
+      "positions": 53,
+      "job": {
+        "id": "train_05373_proportional",
+        "split": "train",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/05373.png",
+        "source_id": "TRAIN_346_QUERY_1",
+        "long_agreement": false,
+        "target_glyphs": 53,
+        "target_sha256": "b3695e7f537ac124d103d3ce61692182afe76cc73b85cafb0d5421498bf8a75e",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          30,
+          37,
+          44,
+          52
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_05373_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_05373_proportional/pixels.npz"
+    },
+    {
+      "case": "train_03836_fixed_cells",
+      "positions": 475,
+      "job": {
+        "id": "train_03836_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/03836.png",
+        "source_id": "wikisource:984dd355f316b9c9b2c4",
+        "long_agreement": false,
+        "target_glyphs": 475,
+        "target_sha256": "96f98a6652212d89e60b7f88037c0477da197ca656749e157361d46263c99f54",
+        "positions": [
+          0,
+          1,
+          68,
+          136,
+          203,
+          271,
+          338,
+          406,
+          474
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03836_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_03836_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_03836_proportional",
+      "positions": 475,
+      "job": {
+        "id": "train_03836_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/03836.png",
+        "source_id": "wikisource:984dd355f316b9c9b2c4",
+        "long_agreement": false,
+        "target_glyphs": 475,
+        "target_sha256": "96f98a6652212d89e60b7f88037c0477da197ca656749e157361d46263c99f54",
+        "positions": [
+          0,
+          1,
+          68,
+          136,
+          203,
+          271,
+          338,
+          406,
+          474
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03836_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_03836_proportional/pixels.npz"
+    },
+    {
+      "case": "train_04447_fixed_cells",
+      "positions": 314,
+      "job": {
+        "id": "train_04447_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04447.png",
+        "source_id": "wikisource:aae0bef17b699f96d560",
+        "long_agreement": false,
+        "target_glyphs": 314,
+        "target_sha256": "df25fb120467f39d52dbd315925534bd04a4c55e81d5de1db6ecb6d1f12776fd",
+        "positions": [
+          0,
+          1,
+          45,
+          90,
+          134,
+          179,
+          223,
+          268,
+          313
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04447_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04447_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_04447_proportional",
+      "positions": 314,
+      "job": {
+        "id": "train_04447_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04447.png",
+        "source_id": "wikisource:aae0bef17b699f96d560",
+        "long_agreement": false,
+        "target_glyphs": 314,
+        "target_sha256": "df25fb120467f39d52dbd315925534bd04a4c55e81d5de1db6ecb6d1f12776fd",
+        "positions": [
+          0,
+          1,
+          45,
+          90,
+          134,
+          179,
+          223,
+          268,
+          313
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04447_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04447_proportional/pixels.npz"
+    },
+    {
+      "case": "train_00179_fixed_cells",
+      "positions": 285,
+      "job": {
+        "id": "train_00179_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/00179.png",
+        "source_id": "wikisource:aa0c481c135c572e2800",
+        "long_agreement": false,
+        "target_glyphs": 285,
+        "target_sha256": "e43c4f143ca6676f398fc158fe5e7810e87c74a6bf917a7924517ad8b3e46bd8",
+        "positions": [
+          0,
+          1,
+          41,
+          81,
+          122,
+          162,
+          203,
+          243,
+          284
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_00179_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_00179_proportional",
+      "positions": 285,
+      "job": {
+        "id": "train_00179_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/00179.png",
+        "source_id": "wikisource:aa0c481c135c572e2800",
+        "long_agreement": false,
+        "target_glyphs": 285,
+        "target_sha256": "e43c4f143ca6676f398fc158fe5e7810e87c74a6bf917a7924517ad8b3e46bd8",
+        "positions": [
+          0,
+          1,
+          41,
+          81,
+          122,
+          162,
+          203,
+          243,
+          284
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_00179_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_00179_proportional/pixels.npz"
+    },
+    {
+      "case": "train_01708_fixed_cells",
+      "positions": 500,
+      "job": {
+        "id": "train_01708_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/01708.png",
+        "source_id": "wikisource:963a7fe7d1950eeb2030",
+        "long_agreement": false,
+        "target_glyphs": 500,
+        "target_sha256": "14dc496652342e8c91187249bb609536e421d575dbddf9a59683ea70178f05b3",
+        "positions": [
+          0,
+          1,
+          72,
+          143,
+          214,
+          285,
+          356,
+          427,
+          499
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01708_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01708_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_01708_proportional",
+      "positions": 500,
+      "job": {
+        "id": "train_01708_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/01708.png",
+        "source_id": "wikisource:963a7fe7d1950eeb2030",
+        "long_agreement": false,
+        "target_glyphs": 500,
+        "target_sha256": "14dc496652342e8c91187249bb609536e421d575dbddf9a59683ea70178f05b3",
+        "positions": [
+          0,
+          1,
+          72,
+          143,
+          214,
+          285,
+          356,
+          427,
+          499
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01708_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01708_proportional/pixels.npz"
+    },
+    {
+      "case": "train_04653_fixed_cells",
+      "positions": 494,
+      "job": {
+        "id": "train_04653_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04653.png",
+        "source_id": "wikisource:dcf8214916a31484d216",
+        "long_agreement": false,
+        "target_glyphs": 494,
+        "target_sha256": "458c9321a0901d2a3f74c0e9703bb4e45c4f441313421d1a13700d3369aef1de",
+        "positions": [
+          0,
+          1,
+          71,
+          141,
+          211,
+          282,
+          352,
+          422,
+          493
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04653_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04653_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_04653_proportional",
+      "positions": 494,
+      "job": {
+        "id": "train_04653_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04653.png",
+        "source_id": "wikisource:dcf8214916a31484d216",
+        "long_agreement": false,
+        "target_glyphs": 494,
+        "target_sha256": "458c9321a0901d2a3f74c0e9703bb4e45c4f441313421d1a13700d3369aef1de",
+        "positions": [
+          0,
+          1,
+          71,
+          141,
+          211,
+          282,
+          352,
+          422,
+          493
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04653_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04653_proportional/pixels.npz"
+    },
+    {
+      "case": "train_01464_fixed_cells",
+      "positions": 441,
+      "job": {
+        "id": "train_01464_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/01464.png",
+        "source_id": "wikisource:dc1e2b13709df44560af",
+        "long_agreement": false,
+        "target_glyphs": 441,
+        "target_sha256": "92ed5e3575dfa8ac30b115ca6e75a03d41d46ef35813f87a0d28666d7684c9d6",
+        "positions": [
+          0,
+          1,
+          63,
+          126,
+          189,
+          251,
+          314,
+          377,
+          440
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01464_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01464_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_01464_proportional",
+      "positions": 441,
+      "job": {
+        "id": "train_01464_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/01464.png",
+        "source_id": "wikisource:dc1e2b13709df44560af",
+        "long_agreement": false,
+        "target_glyphs": 441,
+        "target_sha256": "92ed5e3575dfa8ac30b115ca6e75a03d41d46ef35813f87a0d28666d7684c9d6",
+        "positions": [
+          0,
+          1,
+          63,
+          126,
+          189,
+          251,
+          314,
+          377,
+          440
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01464_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01464_proportional/pixels.npz"
+    },
+    {
+      "case": "train_01130_fixed_cells",
+      "positions": 511,
+      "job": {
+        "id": "train_01130_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/01130.png",
+        "source_id": "wikisource:7812b1697fabde529945",
+        "long_agreement": false,
+        "target_glyphs": 511,
+        "target_sha256": "d4038b4343ccb7c290aa407a6613be129cfd7995a8b4186d11eeb4c58a3f30c7",
+        "positions": [
+          0,
+          1,
+          73,
+          146,
+          219,
+          291,
+          364,
+          437,
+          510
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01130_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01130_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_01130_proportional",
+      "positions": 511,
+      "job": {
+        "id": "train_01130_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/01130.png",
+        "source_id": "wikisource:7812b1697fabde529945",
+        "long_agreement": false,
+        "target_glyphs": 511,
+        "target_sha256": "d4038b4343ccb7c290aa407a6613be129cfd7995a8b4186d11eeb4c58a3f30c7",
+        "positions": [
+          0,
+          1,
+          73,
+          146,
+          219,
+          291,
+          364,
+          437,
+          510
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01130_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01130_proportional/pixels.npz"
+    },
+    {
+      "case": "train_01554_fixed_cells",
+      "positions": 494,
+      "job": {
+        "id": "train_01554_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/01554.png",
+        "source_id": "wikisource:908498957864abc99bc8",
+        "long_agreement": false,
+        "target_glyphs": 494,
+        "target_sha256": "714bf72d6e28d390debea34cd2112e2a4d4ae0bb30ba53b447918dc367410bef",
+        "positions": [
+          0,
+          1,
+          71,
+          141,
+          211,
+          282,
+          352,
+          422,
+          493
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01554_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01554_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_01554_proportional",
+      "positions": 494,
+      "job": {
+        "id": "train_01554_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/01554.png",
+        "source_id": "wikisource:908498957864abc99bc8",
+        "long_agreement": false,
+        "target_glyphs": 494,
+        "target_sha256": "714bf72d6e28d390debea34cd2112e2a4d4ae0bb30ba53b447918dc367410bef",
+        "positions": [
+          0,
+          1,
+          71,
+          141,
+          211,
+          282,
+          352,
+          422,
+          493
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01554_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01554_proportional/pixels.npz"
+    },
+    {
+      "case": "train_04724_fixed_cells",
+      "positions": 96,
+      "job": {
+        "id": "train_04724_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04724.png",
+        "source_id": "wikisource:c48380863a26db13a420",
+        "long_agreement": false,
+        "target_glyphs": 96,
+        "target_sha256": "208e427727603f2bc4ea60447d7d161e543bc0ecfcada98c054ee5fe0cd2a70b",
+        "positions": [
+          0,
+          1,
+          14,
+          27,
+          41,
+          54,
+          68,
+          81,
+          95
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04724_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04724_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_04724_proportional",
+      "positions": 96,
+      "job": {
+        "id": "train_04724_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04724.png",
+        "source_id": "wikisource:c48380863a26db13a420",
+        "long_agreement": false,
+        "target_glyphs": 96,
+        "target_sha256": "208e427727603f2bc4ea60447d7d161e543bc0ecfcada98c054ee5fe0cd2a70b",
+        "positions": [
+          0,
+          1,
+          14,
+          27,
+          41,
+          54,
+          68,
+          81,
+          95
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04724_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04724_proportional/pixels.npz"
+    },
+    {
+      "case": "train_01552_fixed_cells",
+      "positions": 124,
+      "job": {
+        "id": "train_01552_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/01552.png",
+        "source_id": "wikisource:8737bcacdf634f11352a",
+        "long_agreement": false,
+        "target_glyphs": 124,
+        "target_sha256": "82fe5c3ebe4342ace133ebd874713acd375488dbccf70976e98b9bba453ef164",
+        "positions": [
+          0,
+          1,
+          18,
+          35,
+          53,
+          70,
+          88,
+          105,
+          123
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01552_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01552_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_01552_proportional",
+      "positions": 124,
+      "job": {
+        "id": "train_01552_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/01552.png",
+        "source_id": "wikisource:8737bcacdf634f11352a",
+        "long_agreement": false,
+        "target_glyphs": 124,
+        "target_sha256": "82fe5c3ebe4342ace133ebd874713acd375488dbccf70976e98b9bba453ef164",
+        "positions": [
+          0,
+          1,
+          18,
+          35,
+          53,
+          70,
+          88,
+          105,
+          123
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_01552_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_01552_proportional/pixels.npz"
+    },
+    {
+      "case": "train_03745_fixed_cells",
+      "positions": 339,
+      "job": {
+        "id": "train_03745_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/03745.png",
+        "source_id": "wikisource:e9a5110df9deeb4b1398",
+        "long_agreement": false,
+        "target_glyphs": 339,
+        "target_sha256": "f4b2402490b54842972e53de5a985b638a4396e9cb3b80413bf6f92fbf43f185",
+        "positions": [
+          0,
+          1,
+          49,
+          97,
+          145,
+          193,
+          241,
+          289,
+          338
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03745_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_03745_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_03745_proportional",
+      "positions": 339,
+      "job": {
+        "id": "train_03745_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/03745.png",
+        "source_id": "wikisource:e9a5110df9deeb4b1398",
+        "long_agreement": false,
+        "target_glyphs": 339,
+        "target_sha256": "f4b2402490b54842972e53de5a985b638a4396e9cb3b80413bf6f92fbf43f185",
+        "positions": [
+          0,
+          1,
+          49,
+          97,
+          145,
+          193,
+          241,
+          289,
+          338
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_03745_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_03745_proportional/pixels.npz"
+    },
+    {
+      "case": "train_04274_fixed_cells",
+      "positions": 513,
+      "job": {
+        "id": "train_04274_fixed_cells",
+        "split": "train",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/fixed_cells/04274.png",
+        "source_id": "wikisource:faa3712a9ac6329a2dbf",
+        "long_agreement": true,
+        "target_glyphs": 513,
+        "target_sha256": "9eb2172cbda13842535805d91a160e1b61a695ae16c4cdfef137c04b85c5bda6",
+        "positions": [
+          0,
+          1,
+          74,
+          147,
+          220,
+          293,
+          366,
+          439,
+          512
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04274_fixed_cells/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04274_fixed_cells/pixels.npz"
+    },
+    {
+      "case": "train_04274_proportional",
+      "positions": 513,
+      "job": {
+        "id": "train_04274_proportional",
+        "split": "train",
+        "kind": "book",
+        "layout": "proportional",
+        "image": "artifacts/visual_continuation_full_v1/training_inputs/proportional/04274.png",
+        "source_id": "wikisource:faa3712a9ac6329a2dbf",
+        "long_agreement": false,
+        "target_glyphs": 513,
+        "target_sha256": "9eb2172cbda13842535805d91a160e1b61a695ae16c4cdfef137c04b85c5bda6",
+        "positions": [
+          0,
+          1,
+          74,
+          147,
+          220,
+          293,
+          366,
+          439,
+          512
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/train_04274_proportional/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/train_04274_proportional/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_01_a_normal",
+      "positions": 118,
+      "job": {
+        "id": "fixed_cells__qa_01_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_a_normal.png",
+        "source_id": "TRAIN_3029_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_01_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_01_a_normal/output.pt"
+        },
+        "target_glyphs": 118,
+        "target_sha256": "5215a487ad3e2742f4feee2bfee749e36aac23dc98bffefd673290e2f5011e0e",
+        "positions": [
+          0,
+          1,
+          17,
+          34,
+          50,
+          67,
+          83,
+          100,
+          117
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_01_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_01_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_01_b_normal",
+      "positions": 8,
+      "job": {
+        "id": "fixed_cells__qa_01_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_01_b_normal.png",
+        "source_id": "TRAIN_3029_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_01_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_01_b_normal/output.pt"
+        },
+        "target_glyphs": 8,
+        "target_sha256": "dfc07cf66dfb6907b19a19df4f6d53d2708a5d4a6b7e4bcb580f840e83ad2f21",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_01_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_01_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_02_a_normal",
+      "positions": 21,
+      "job": {
+        "id": "fixed_cells__qa_02_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_a_normal.png",
+        "source_id": "TRAIN_240_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_02_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_02_a_normal/output.pt"
+        },
+        "target_glyphs": 21,
+        "target_sha256": "28ccb3966edca644f89e0faa7b3912260d37b938f26f0efd52c679c886fd159a",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          9,
+          11,
+          14,
+          17,
+          20
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_02_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_02_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_02_b_normal",
+      "positions": 48,
+      "job": {
+        "id": "fixed_cells__qa_02_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_02_b_normal.png",
+        "source_id": "TRAIN_240_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_02_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_02_b_normal/output.pt"
+        },
+        "target_glyphs": 48,
+        "target_sha256": "7b0ccfa14d81b398594858db0d99a8694cc2c895eacdedb91a6ae0196ad0657a",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          20,
+          27,
+          33,
+          40,
+          47
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_02_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_02_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_03_a_normal",
+      "positions": 49,
+      "job": {
+        "id": "fixed_cells__qa_03_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_a_normal.png",
+        "source_id": "TRAIN_96_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_03_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_03_a_normal/output.pt"
+        },
+        "target_glyphs": 49,
+        "target_sha256": "f3f5d98524e88f2734dcce827c23ac503fc754bea7caa560e5da02eed829b03b",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          21,
+          27,
+          34,
+          41,
+          48
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_03_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_03_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_03_b_normal",
+      "positions": 39,
+      "job": {
+        "id": "fixed_cells__qa_03_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_03_b_normal.png",
+        "source_id": "TRAIN_96_QUERY_4",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_03_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_03_b_normal/output.pt"
+        },
+        "target_glyphs": 39,
+        "target_sha256": "79fab688de524b7e004cb604feba6b1fc1a01a2fefdd5abc0794639469f71eb3",
+        "positions": [
+          0,
+          1,
+          6,
+          11,
+          16,
+          22,
+          27,
+          32,
+          38
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_03_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_03_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_04_a_normal",
+      "positions": 3,
+      "job": {
+        "id": "fixed_cells__qa_04_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_a_normal.png",
+        "source_id": "TRAIN_603_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_04_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_04_a_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "091e715666ab2c17833c2e436e518d55ba523629e6091039f10ab29940f6530e",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_04_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_04_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_04_b_normal",
+      "positions": 7,
+      "job": {
+        "id": "fixed_cells__qa_04_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_04_b_normal.png",
+        "source_id": "TRAIN_603_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_04_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_04_b_normal/output.pt"
+        },
+        "target_glyphs": 7,
+        "target_sha256": "b8444915f6453fa6b8e182315b67089bd1334246837bb9cc0fc275f3a2e4e795",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_04_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_04_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_05_a_normal",
+      "positions": 19,
+      "job": {
+        "id": "fixed_cells__qa_05_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_a_normal.png",
+        "source_id": "TRAIN_3735_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_05_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_05_a_normal/output.pt"
+        },
+        "target_glyphs": 19,
+        "target_sha256": "d223368adf3318b3dcad12338803a6b64d3ddaa9135fb08a10b717be6d1b5d1c",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          8,
+          10,
+          13,
+          15,
+          18
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_05_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_05_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_05_b_normal",
+      "positions": 18,
+      "job": {
+        "id": "fixed_cells__qa_05_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_05_b_normal.png",
+        "source_id": "TRAIN_3735_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_05_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_05_b_normal/output.pt"
+        },
+        "target_glyphs": 18,
+        "target_sha256": "f1848c1f820a9b7b5c32850495f3117ff6a78588c4cc5ca69802373e22fd431b",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10,
+          12,
+          14,
+          17
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_05_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_05_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_06_a_normal",
+      "positions": 72,
+      "job": {
+        "id": "fixed_cells__qa_06_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_a_normal.png",
+        "source_id": "TRAIN_3027_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_06_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_06_a_normal/output.pt"
+        },
+        "target_glyphs": 72,
+        "target_sha256": "044d6d85de1fd27f5a37c1a39652e5c190c0d22938de27bfcc3e05db0c87c343",
+        "positions": [
+          0,
+          1,
+          11,
+          21,
+          31,
+          41,
+          51,
+          61,
+          71
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_06_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_06_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_06_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "fixed_cells__qa_06_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_06_b_normal.png",
+        "source_id": "TRAIN_3027_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_06_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_06_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "8336dddb09bdd59e1c67481dbd309506f1c8fde198bf288b9266e6d3c26d8eaa",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_06_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_06_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_07_a_normal",
+      "positions": 13,
+      "job": {
+        "id": "fixed_cells__qa_07_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_a_normal.png",
+        "source_id": "TRAIN_3700_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_07_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_07_a_normal/output.pt"
+        },
+        "target_glyphs": 13,
+        "target_sha256": "448def09024be2a699fb3089db13dbae88ea0b6463cee1588521fac5003598e6",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_07_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_07_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_07_b_normal",
+      "positions": 10,
+      "job": {
+        "id": "fixed_cells__qa_07_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_07_b_normal.png",
+        "source_id": "TRAIN_3700_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_07_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_07_b_normal/output.pt"
+        },
+        "target_glyphs": 10,
+        "target_sha256": "27f42f6c5991bb0c78f288adac8fae790aecea77632b2a7d98162336c53156c8",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_07_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_07_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_08_a_normal",
+      "positions": 16,
+      "job": {
+        "id": "fixed_cells__qa_08_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_a_normal.png",
+        "source_id": "TRAIN_2105_QUERY_4",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_08_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_08_a_normal/output.pt"
+        },
+        "target_glyphs": 16,
+        "target_sha256": "d1c2826a3ac079321269bcab747ffbfd74394d70af806d53544082d15f19b096",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_08_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_08_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_08_b_normal",
+      "positions": 20,
+      "job": {
+        "id": "fixed_cells__qa_08_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_08_b_normal.png",
+        "source_id": "TRAIN_2105_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_08_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_08_b_normal/output.pt"
+        },
+        "target_glyphs": 20,
+        "target_sha256": "379cb76e63f36375fc6d6fe9101036052b8075695f41accf4d1ede6aca528c49",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          8,
+          11,
+          13,
+          16,
+          19
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_08_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_08_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_09_a_normal",
+      "positions": 7,
+      "job": {
+        "id": "fixed_cells__qa_09_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_a_normal.png",
+        "source_id": "TRAIN_622_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_09_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_09_a_normal/output.pt"
+        },
+        "target_glyphs": 7,
+        "target_sha256": "d45e0bced7613d4f844c5587459a5b53c7ed5e6e3c26c907dfc710dba4e10b1c",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_09_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_09_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_09_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "fixed_cells__qa_09_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_09_b_normal.png",
+        "source_id": "TRAIN_622_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_09_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_09_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "1d9420abe818c2ba709ac882608aa0d2ee76b300dc5454f74b42aa6844a5907b",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_09_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_09_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_10_a_normal",
+      "positions": 5,
+      "job": {
+        "id": "fixed_cells__qa_10_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_a_normal.png",
+        "source_id": "TRAIN_1263_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_10_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_10_a_normal/output.pt"
+        },
+        "target_glyphs": 5,
+        "target_sha256": "e91b73f0a8ceec7850029fe512d9a86044ba922d5888c6a4873a327a632c6002",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_10_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_10_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_10_b_normal",
+      "positions": 10,
+      "job": {
+        "id": "fixed_cells__qa_10_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_10_b_normal.png",
+        "source_id": "TRAIN_1263_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_10_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_10_b_normal/output.pt"
+        },
+        "target_glyphs": 10,
+        "target_sha256": "a45c0f00f27f26fe487765c2e060a190dda302df3b60ad8d970d3c16734286e7",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_10_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_10_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_11_a_normal",
+      "positions": 48,
+      "job": {
+        "id": "fixed_cells__qa_11_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_a_normal.png",
+        "source_id": "TRAIN_1090_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_11_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_11_a_normal/output.pt"
+        },
+        "target_glyphs": 48,
+        "target_sha256": "03157f7dcf3c01493c4d4c581fd68a3555ace0d91293b280d7ca0d2b458aa1ce",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          20,
+          27,
+          33,
+          40,
+          47
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_11_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_11_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_11_b_normal",
+      "positions": 23,
+      "job": {
+        "id": "fixed_cells__qa_11_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_11_b_normal.png",
+        "source_id": "TRAIN_1090_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_11_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_11_b_normal/output.pt"
+        },
+        "target_glyphs": 23,
+        "target_sha256": "42cc2f9f52ab46821806c210b2cf3211a46eb4774a6035d6c4926323fc6e5627",
+        "positions": [
+          0,
+          1,
+          4,
+          7,
+          10,
+          13,
+          16,
+          19,
+          22
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_11_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_11_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_12_a_normal",
+      "positions": 22,
+      "job": {
+        "id": "fixed_cells__qa_12_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_a_normal.png",
+        "source_id": "TRAIN_147_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_12_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_12_a_normal/output.pt"
+        },
+        "target_glyphs": 22,
+        "target_sha256": "6f47e9adf891e967051f8be81d192883040a6ccaf21d8247f4ea5fb6c9a0af75",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_12_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_12_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_12_b_normal",
+      "positions": 15,
+      "job": {
+        "id": "fixed_cells__qa_12_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_12_b_normal.png",
+        "source_id": "TRAIN_147_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_12_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_12_b_normal/output.pt"
+        },
+        "target_glyphs": 15,
+        "target_sha256": "b50e5dda2b118b51ed269d5997d8134cd3f353ea682e781d936bcec7abaaee11",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_12_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_12_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_13_a_normal",
+      "positions": 18,
+      "job": {
+        "id": "fixed_cells__qa_13_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_a_normal.png",
+        "source_id": "TRAIN_612_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_13_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_13_a_normal/output.pt"
+        },
+        "target_glyphs": 18,
+        "target_sha256": "2389a518f1de1b04189f8222e42411bc434b8db32c37876ebcc7af5c4a31eef5",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10,
+          12,
+          14,
+          17
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_13_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_13_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_13_b_normal",
+      "positions": 17,
+      "job": {
+        "id": "fixed_cells__qa_13_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_13_b_normal.png",
+        "source_id": "TRAIN_612_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_13_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_13_b_normal/output.pt"
+        },
+        "target_glyphs": 17,
+        "target_sha256": "9822083ce64b1ac02452c5e940196dc950ec0dca59db411001bd7c97d46266b9",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          16
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_13_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_13_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_14_a_normal",
+      "positions": 51,
+      "job": {
+        "id": "fixed_cells__qa_14_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_a_normal.png",
+        "source_id": "TRAIN_3028_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_14_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_14_a_normal/output.pt"
+        },
+        "target_glyphs": 51,
+        "target_sha256": "6e2ee457068c97c3d0e063b92c478a19dc467bee09437cadd6474e9060ebaf56",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          29,
+          36,
+          43,
+          50
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_14_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_14_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_14_b_normal",
+      "positions": 5,
+      "job": {
+        "id": "fixed_cells__qa_14_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_14_b_normal.png",
+        "source_id": "TRAIN_3028_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_14_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_14_b_normal/output.pt"
+        },
+        "target_glyphs": 5,
+        "target_sha256": "91146c8a396ab07ac41e1a572515e49d98f44caff0843f142a8d3d441c66132e",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_14_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_14_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_15_a_normal",
+      "positions": 3,
+      "job": {
+        "id": "fixed_cells__qa_15_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_a_normal.png",
+        "source_id": "TRAIN_3564_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_15_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_15_a_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "eaca8c86a6b36cd5d170cdcae78e7b23204a64402b527eec39e3dfa8e491b2e7",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_15_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_15_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_15_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "fixed_cells__qa_15_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_15_b_normal.png",
+        "source_id": "TRAIN_3564_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_15_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_15_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "c7a5a44455ddf6a3590c2c5bfedc654e5e55232ce8f60c74130377bb362fb6d6",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_15_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_15_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_16_a_normal",
+      "positions": 30,
+      "job": {
+        "id": "fixed_cells__qa_16_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_a_normal.png",
+        "source_id": "TRAIN_2269_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_16_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_16_a_normal/output.pt"
+        },
+        "target_glyphs": 30,
+        "target_sha256": "a86cb1a73dda0023d0884cbe04c01e642b6d516d6cff6ec4bec901a74ce2bca8",
+        "positions": [
+          0,
+          1,
+          5,
+          9,
+          13,
+          17,
+          21,
+          25,
+          29
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_16_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_16_a_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__qa_16_b_normal",
+      "positions": 3,
+      "job": {
+        "id": "fixed_cells__qa_16_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/qa_16_b_normal.png",
+        "source_id": "TRAIN_2269_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__qa_16_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_16_b_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "c58fa091537cf8c75acd46e741633c365b10bf50af6b97ed3f7d63ee8a65020d",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__qa_16_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__qa_16_b_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_01_normal",
+      "positions": 87,
+      "job": {
+        "id": "fixed_cells__book_01_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_01_normal.png",
+        "source_id": "wikisource:17bfbf37a1f9d1cc8cb3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_01_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_01_normal/output.pt"
+        },
+        "target_glyphs": 87,
+        "target_sha256": "fcb3c9f8843a15b1e6bd6a5069129b13a89400b2dbb9cde7d31d567836f1c7a8",
+        "positions": [
+          0,
+          1,
+          13,
+          25,
+          37,
+          49,
+          61,
+          73,
+          86
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_01_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_01_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_02_normal",
+      "positions": 96,
+      "job": {
+        "id": "fixed_cells__book_02_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_02_normal.png",
+        "source_id": "wikisource:7d6722528b248251b168",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_02_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_02_normal/output.pt"
+        },
+        "target_glyphs": 96,
+        "target_sha256": "4953f81550d3580880aa84924d1d83eef327a49a46faee46554abf88a639b185",
+        "positions": [
+          0,
+          1,
+          14,
+          27,
+          41,
+          54,
+          68,
+          81,
+          95
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_02_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_02_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_03_normal",
+      "positions": 91,
+      "job": {
+        "id": "fixed_cells__book_03_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_03_normal.png",
+        "source_id": "wikisource:b68672eb329706d3be26",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_03_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_03_normal/output.pt"
+        },
+        "target_glyphs": 91,
+        "target_sha256": "c0895bbba05d46aece82e9b4d50697423b8cc5b4e5e18a91cd67dab94a2d5a5b",
+        "positions": [
+          0,
+          1,
+          13,
+          26,
+          39,
+          51,
+          64,
+          77,
+          90
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_03_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_03_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_04_normal",
+      "positions": 92,
+      "job": {
+        "id": "fixed_cells__book_04_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_04_normal.png",
+        "source_id": "wikisource:b5f23eebbf51c521f41f",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_04_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_04_normal/output.pt"
+        },
+        "target_glyphs": 92,
+        "target_sha256": "a6696d601adb236b4c2228e2b490c56f4a1111a396a6808b035aa65f114a5d78",
+        "positions": [
+          0,
+          1,
+          13,
+          26,
+          39,
+          52,
+          65,
+          78,
+          91
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_04_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_04_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_05_normal",
+      "positions": 97,
+      "job": {
+        "id": "fixed_cells__book_05_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_05_normal.png",
+        "source_id": "wikisource:385cbfce488f3e12177c",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_05_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_05_normal/output.pt"
+        },
+        "target_glyphs": 97,
+        "target_sha256": "c102076b601b7b9c479298c91a930136d7949ae0bc4d1a3dc00d95ee3f9ea455",
+        "positions": [
+          0,
+          1,
+          14,
+          28,
+          41,
+          55,
+          68,
+          82,
+          96
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_05_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_05_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_06_normal",
+      "positions": 111,
+      "job": {
+        "id": "fixed_cells__book_06_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_06_normal.png",
+        "source_id": "wikisource:fdcc3f89bf962ec1f8d9",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_06_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_06_normal/output.pt"
+        },
+        "target_glyphs": 111,
+        "target_sha256": "894923538a73727d9c8e4ed87cc2b940cfb85915ee9cc77bae797d777247c268",
+        "positions": [
+          0,
+          1,
+          16,
+          32,
+          47,
+          63,
+          78,
+          94,
+          110
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_06_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_06_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_07_normal",
+      "positions": 85,
+      "job": {
+        "id": "fixed_cells__book_07_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_07_normal.png",
+        "source_id": "wikisource:b72b5d9c5e6b9e6551d0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_07_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_07_normal/output.pt"
+        },
+        "target_glyphs": 85,
+        "target_sha256": "3db8df2b7979801ccaf28c78f9e8c5a3e4a00604777fdc1eb976d1cb3440523f",
+        "positions": [
+          0,
+          1,
+          12,
+          24,
+          36,
+          48,
+          60,
+          72,
+          84
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_07_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_07_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_08_normal",
+      "positions": 105,
+      "job": {
+        "id": "fixed_cells__book_08_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_08_normal.png",
+        "source_id": "wikisource:729ed08eff2c1ec60e18",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_08_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_08_normal/output.pt"
+        },
+        "target_glyphs": 105,
+        "target_sha256": "c478271082c04ca5edaf66144ae0a22ed3ea0fa8388424ba91025a0ba4afbbba",
+        "positions": [
+          0,
+          1,
+          15,
+          30,
+          45,
+          59,
+          74,
+          89,
+          104
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_08_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_08_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_09_normal",
+      "positions": 103,
+      "job": {
+        "id": "fixed_cells__book_09_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_09_normal.png",
+        "source_id": "wikisource:c2dfd40c43b9b15bf299",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_09_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_09_normal/output.pt"
+        },
+        "target_glyphs": 103,
+        "target_sha256": "c18a262b31b35845e1d4e5a41ac15e04fa600bcd5b2f6cfe361fc18f201ce249",
+        "positions": [
+          0,
+          1,
+          15,
+          29,
+          44,
+          58,
+          73,
+          87,
+          102
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_09_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_09_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_10_normal",
+      "positions": 100,
+      "job": {
+        "id": "fixed_cells__book_10_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_10_normal.png",
+        "source_id": "wikisource:447beaf560bf280d35a2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_10_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_10_normal/output.pt"
+        },
+        "target_glyphs": 100,
+        "target_sha256": "c0c34b6b5082ad44047fbd87ca611c63e228aa57875687a9e6c57fbe76de468d",
+        "positions": [
+          0,
+          1,
+          15,
+          29,
+          43,
+          57,
+          71,
+          85,
+          99
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_10_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_10_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_11_normal",
+      "positions": 94,
+      "job": {
+        "id": "fixed_cells__book_11_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_11_normal.png",
+        "source_id": "wikisource:1b207559a6676decbcdb",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_11_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_11_normal/output.pt"
+        },
+        "target_glyphs": 94,
+        "target_sha256": "18c2d2119ceac5350ba9ad4e5818ba3f6619519c6d1a7e24fe0180b5a8ddaf61",
+        "positions": [
+          0,
+          1,
+          14,
+          27,
+          40,
+          53,
+          66,
+          79,
+          93
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_11_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_11_normal/pixels.npz"
+    },
+    {
+      "case": "fixed_cells__book_12_normal",
+      "positions": 100,
+      "job": {
+        "id": "fixed_cells__book_12_normal",
+        "split": "development",
+        "kind": "book",
+        "layout": "fixed_cells",
+        "image": "artifacts/compact_visual_span_evaluation_v1/inputs/book_12_normal.png",
+        "source_id": "wikisource:c30845908c656fa830ba",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/fixed_cells__book_12_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__book_12_normal/output.pt"
+        },
+        "target_glyphs": 100,
+        "target_sha256": "a602875dcede479ef1de6a60a39d0cff8893b8e99484e192687f456a7bc3cdb7",
+        "positions": [
+          0,
+          1,
+          15,
+          29,
+          43,
+          57,
+          71,
+          85,
+          99
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/fixed_cells__book_12_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/fixed_cells__book_12_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_01_a_normal",
+      "positions": 118,
+      "job": {
+        "id": "proportional__qa_01_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_a_normal.png",
+        "source_id": "TRAIN_3029_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_01_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_01_a_normal/output.pt"
+        },
+        "target_glyphs": 118,
+        "target_sha256": "5215a487ad3e2742f4feee2bfee749e36aac23dc98bffefd673290e2f5011e0e",
+        "positions": [
+          0,
+          1,
+          17,
+          34,
+          50,
+          67,
+          83,
+          100,
+          117
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_01_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_01_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_01_b_normal",
+      "positions": 8,
+      "job": {
+        "id": "proportional__qa_01_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_01_b_normal.png",
+        "source_id": "TRAIN_3029_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_01_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_01_b_normal/output.pt"
+        },
+        "target_glyphs": 8,
+        "target_sha256": "dfc07cf66dfb6907b19a19df4f6d53d2708a5d4a6b7e4bcb580f840e83ad2f21",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_01_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_01_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_02_a_normal",
+      "positions": 21,
+      "job": {
+        "id": "proportional__qa_02_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_a_normal.png",
+        "source_id": "TRAIN_240_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_02_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_02_a_normal/output.pt"
+        },
+        "target_glyphs": 21,
+        "target_sha256": "28ccb3966edca644f89e0faa7b3912260d37b938f26f0efd52c679c886fd159a",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          9,
+          11,
+          14,
+          17,
+          20
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_02_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_02_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_02_b_normal",
+      "positions": 48,
+      "job": {
+        "id": "proportional__qa_02_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_02_b_normal.png",
+        "source_id": "TRAIN_240_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_02_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_02_b_normal/output.pt"
+        },
+        "target_glyphs": 48,
+        "target_sha256": "7b0ccfa14d81b398594858db0d99a8694cc2c895eacdedb91a6ae0196ad0657a",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          20,
+          27,
+          33,
+          40,
+          47
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_02_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_02_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_03_a_normal",
+      "positions": 49,
+      "job": {
+        "id": "proportional__qa_03_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_a_normal.png",
+        "source_id": "TRAIN_96_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_03_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_03_a_normal/output.pt"
+        },
+        "target_glyphs": 49,
+        "target_sha256": "f3f5d98524e88f2734dcce827c23ac503fc754bea7caa560e5da02eed829b03b",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          21,
+          27,
+          34,
+          41,
+          48
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_03_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_03_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_03_b_normal",
+      "positions": 39,
+      "job": {
+        "id": "proportional__qa_03_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_03_b_normal.png",
+        "source_id": "TRAIN_96_QUERY_4",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_03_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_03_b_normal/output.pt"
+        },
+        "target_glyphs": 39,
+        "target_sha256": "79fab688de524b7e004cb604feba6b1fc1a01a2fefdd5abc0794639469f71eb3",
+        "positions": [
+          0,
+          1,
+          6,
+          11,
+          16,
+          22,
+          27,
+          32,
+          38
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_03_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_03_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_04_a_normal",
+      "positions": 3,
+      "job": {
+        "id": "proportional__qa_04_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_a_normal.png",
+        "source_id": "TRAIN_603_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_04_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_04_a_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "091e715666ab2c17833c2e436e518d55ba523629e6091039f10ab29940f6530e",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_04_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_04_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_04_b_normal",
+      "positions": 7,
+      "job": {
+        "id": "proportional__qa_04_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_04_b_normal.png",
+        "source_id": "TRAIN_603_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_04_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_04_b_normal/output.pt"
+        },
+        "target_glyphs": 7,
+        "target_sha256": "b8444915f6453fa6b8e182315b67089bd1334246837bb9cc0fc275f3a2e4e795",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_04_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_04_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_05_a_normal",
+      "positions": 19,
+      "job": {
+        "id": "proportional__qa_05_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_a_normal.png",
+        "source_id": "TRAIN_3735_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_05_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_05_a_normal/output.pt"
+        },
+        "target_glyphs": 19,
+        "target_sha256": "d223368adf3318b3dcad12338803a6b64d3ddaa9135fb08a10b717be6d1b5d1c",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          8,
+          10,
+          13,
+          15,
+          18
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_05_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_05_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_05_b_normal",
+      "positions": 18,
+      "job": {
+        "id": "proportional__qa_05_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_05_b_normal.png",
+        "source_id": "TRAIN_3735_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_05_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_05_b_normal/output.pt"
+        },
+        "target_glyphs": 18,
+        "target_sha256": "f1848c1f820a9b7b5c32850495f3117ff6a78588c4cc5ca69802373e22fd431b",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10,
+          12,
+          14,
+          17
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_05_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_05_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_06_a_normal",
+      "positions": 72,
+      "job": {
+        "id": "proportional__qa_06_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_a_normal.png",
+        "source_id": "TRAIN_3027_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_06_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_06_a_normal/output.pt"
+        },
+        "target_glyphs": 72,
+        "target_sha256": "044d6d85de1fd27f5a37c1a39652e5c190c0d22938de27bfcc3e05db0c87c343",
+        "positions": [
+          0,
+          1,
+          11,
+          21,
+          31,
+          41,
+          51,
+          61,
+          71
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_06_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_06_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_06_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "proportional__qa_06_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_06_b_normal.png",
+        "source_id": "TRAIN_3027_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_06_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_06_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "8336dddb09bdd59e1c67481dbd309506f1c8fde198bf288b9266e6d3c26d8eaa",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_06_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_06_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_07_a_normal",
+      "positions": 13,
+      "job": {
+        "id": "proportional__qa_07_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_a_normal.png",
+        "source_id": "TRAIN_3700_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_07_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_07_a_normal/output.pt"
+        },
+        "target_glyphs": 13,
+        "target_sha256": "448def09024be2a699fb3089db13dbae88ea0b6463cee1588521fac5003598e6",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          10,
+          12
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_07_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_07_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_07_b_normal",
+      "positions": 10,
+      "job": {
+        "id": "proportional__qa_07_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_07_b_normal.png",
+        "source_id": "TRAIN_3700_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_07_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_07_b_normal/output.pt"
+        },
+        "target_glyphs": 10,
+        "target_sha256": "27f42f6c5991bb0c78f288adac8fae790aecea77632b2a7d98162336c53156c8",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_07_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_07_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_08_a_normal",
+      "positions": 16,
+      "job": {
+        "id": "proportional__qa_08_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_a_normal.png",
+        "source_id": "TRAIN_2105_QUERY_4",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_08_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_08_a_normal/output.pt"
+        },
+        "target_glyphs": 16,
+        "target_sha256": "d1c2826a3ac079321269bcab747ffbfd74394d70af806d53544082d15f19b096",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_08_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_08_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_08_b_normal",
+      "positions": 20,
+      "job": {
+        "id": "proportional__qa_08_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_08_b_normal.png",
+        "source_id": "TRAIN_2105_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_08_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_08_b_normal/output.pt"
+        },
+        "target_glyphs": 20,
+        "target_sha256": "379cb76e63f36375fc6d6fe9101036052b8075695f41accf4d1ede6aca528c49",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          8,
+          11,
+          13,
+          16,
+          19
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_08_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_08_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_09_a_normal",
+      "positions": 7,
+      "job": {
+        "id": "proportional__qa_09_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_a_normal.png",
+        "source_id": "TRAIN_622_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_09_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_09_a_normal/output.pt"
+        },
+        "target_glyphs": 7,
+        "target_sha256": "d45e0bced7613d4f844c5587459a5b53c7ed5e6e3c26c907dfc710dba4e10b1c",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_09_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_09_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_09_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "proportional__qa_09_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_09_b_normal.png",
+        "source_id": "TRAIN_622_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_09_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_09_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "1d9420abe818c2ba709ac882608aa0d2ee76b300dc5454f74b42aa6844a5907b",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_09_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_09_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_10_a_normal",
+      "positions": 5,
+      "job": {
+        "id": "proportional__qa_10_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_a_normal.png",
+        "source_id": "TRAIN_1263_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_10_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_10_a_normal/output.pt"
+        },
+        "target_glyphs": 5,
+        "target_sha256": "e91b73f0a8ceec7850029fe512d9a86044ba922d5888c6a4873a327a632c6002",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_10_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_10_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_10_b_normal",
+      "positions": 10,
+      "job": {
+        "id": "proportional__qa_10_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_10_b_normal.png",
+        "source_id": "TRAIN_1263_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_10_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_10_b_normal/output.pt"
+        },
+        "target_glyphs": 10,
+        "target_sha256": "a45c0f00f27f26fe487765c2e060a190dda302df3b60ad8d970d3c16734286e7",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_10_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_10_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_11_a_normal",
+      "positions": 48,
+      "job": {
+        "id": "proportional__qa_11_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_a_normal.png",
+        "source_id": "TRAIN_1090_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_11_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_11_a_normal/output.pt"
+        },
+        "target_glyphs": 48,
+        "target_sha256": "03157f7dcf3c01493c4d4c581fd68a3555ace0d91293b280d7ca0d2b458aa1ce",
+        "positions": [
+          0,
+          1,
+          7,
+          14,
+          20,
+          27,
+          33,
+          40,
+          47
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_11_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_11_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_11_b_normal",
+      "positions": 23,
+      "job": {
+        "id": "proportional__qa_11_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_11_b_normal.png",
+        "source_id": "TRAIN_1090_QUERY_3",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_11_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_11_b_normal/output.pt"
+        },
+        "target_glyphs": 23,
+        "target_sha256": "42cc2f9f52ab46821806c210b2cf3211a46eb4774a6035d6c4926323fc6e5627",
+        "positions": [
+          0,
+          1,
+          4,
+          7,
+          10,
+          13,
+          16,
+          19,
+          22
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_11_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_11_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_12_a_normal",
+      "positions": 22,
+      "job": {
+        "id": "proportional__qa_12_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_a_normal.png",
+        "source_id": "TRAIN_147_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_12_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_12_a_normal/output.pt"
+        },
+        "target_glyphs": 22,
+        "target_sha256": "6f47e9adf891e967051f8be81d192883040a6ccaf21d8247f4ea5fb6c9a0af75",
+        "positions": [
+          0,
+          1,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_12_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_12_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_12_b_normal",
+      "positions": 15,
+      "job": {
+        "id": "proportional__qa_12_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_12_b_normal.png",
+        "source_id": "TRAIN_147_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_12_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_12_b_normal/output.pt"
+        },
+        "target_glyphs": 15,
+        "target_sha256": "b50e5dda2b118b51ed269d5997d8134cd3f353ea682e781d936bcec7abaaee11",
+        "positions": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_12_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_12_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_13_a_normal",
+      "positions": 18,
+      "job": {
+        "id": "proportional__qa_13_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_a_normal.png",
+        "source_id": "TRAIN_612_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_13_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_13_a_normal/output.pt"
+        },
+        "target_glyphs": 18,
+        "target_sha256": "2389a518f1de1b04189f8222e42411bc434b8db32c37876ebcc7af5c4a31eef5",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          10,
+          12,
+          14,
+          17
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_13_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_13_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_13_b_normal",
+      "positions": 17,
+      "job": {
+        "id": "proportional__qa_13_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_13_b_normal.png",
+        "source_id": "TRAIN_612_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_13_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_13_b_normal/output.pt"
+        },
+        "target_glyphs": 17,
+        "target_sha256": "9822083ce64b1ac02452c5e940196dc950ec0dca59db411001bd7c97d46266b9",
+        "positions": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          16
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_13_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_13_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_14_a_normal",
+      "positions": 51,
+      "job": {
+        "id": "proportional__qa_14_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_a_normal.png",
+        "source_id": "TRAIN_3028_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_14_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_14_a_normal/output.pt"
+        },
+        "target_glyphs": 51,
+        "target_sha256": "6e2ee457068c97c3d0e063b92c478a19dc467bee09437cadd6474e9060ebaf56",
+        "positions": [
+          0,
+          1,
+          8,
+          15,
+          22,
+          29,
+          36,
+          43,
+          50
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_14_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_14_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_14_b_normal",
+      "positions": 5,
+      "job": {
+        "id": "proportional__qa_14_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_14_b_normal.png",
+        "source_id": "TRAIN_3028_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_14_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_14_b_normal/output.pt"
+        },
+        "target_glyphs": 5,
+        "target_sha256": "91146c8a396ab07ac41e1a572515e49d98f44caff0843f142a8d3d441c66132e",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_14_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_14_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_15_a_normal",
+      "positions": 3,
+      "job": {
+        "id": "proportional__qa_15_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_a_normal.png",
+        "source_id": "TRAIN_3564_QUERY_2",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_15_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_15_a_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "eaca8c86a6b36cd5d170cdcae78e7b23204a64402b527eec39e3dfa8e491b2e7",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_15_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_15_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_15_b_normal",
+      "positions": 9,
+      "job": {
+        "id": "proportional__qa_15_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_15_b_normal.png",
+        "source_id": "TRAIN_3564_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_15_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_15_b_normal/output.pt"
+        },
+        "target_glyphs": 9,
+        "target_sha256": "c7a5a44455ddf6a3590c2c5bfedc654e5e55232ce8f60c74130377bb362fb6d6",
+        "positions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_15_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_15_b_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_16_a_normal",
+      "positions": 30,
+      "job": {
+        "id": "proportional__qa_16_a_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_a_normal.png",
+        "source_id": "TRAIN_2269_QUERY_0",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_16_a_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_16_a_normal/output.pt"
+        },
+        "target_glyphs": 30,
+        "target_sha256": "a86cb1a73dda0023d0884cbe04c01e642b6d516d6cff6ec4bec901a74ce2bca8",
+        "positions": [
+          0,
+          1,
+          5,
+          9,
+          13,
+          17,
+          21,
+          25,
+          29
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_16_a_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_16_a_normal/pixels.npz"
+    },
+    {
+      "case": "proportional__qa_16_b_normal",
+      "positions": 3,
+      "job": {
+        "id": "proportional__qa_16_b_normal",
+        "split": "development",
+        "kind": "qa",
+        "layout": "proportional",
+        "image": "artifacts/glyph_tail_input_presentation_v1/evaluation/inputs/qa_16_b_normal.png",
+        "source_id": "TRAIN_2269_QUERY_1",
+        "long_agreement": false,
+        "original_outputs": {
+          "0": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_000000/core128/proportional__qa_16_b_normal/output.pt",
+          "41298": "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_16_b_normal/output.pt"
+        },
+        "target_glyphs": 3,
+        "target_sha256": "c58fa091537cf8c75acd46e741633c365b10bf50af6b97ed3f7d63ee8a65020d",
+        "positions": [
+          0,
+          1,
+          2
+        ]
+      },
+      "scores": "artifacts/global_glyph_ranking_v1/whitespace_density/cases/proportional__qa_16_b_normal/probabilities.npz",
+      "pixels": "artifacts/global_glyph_ranking_v1/qualify/cases/proportional__qa_16_b_normal/pixels.npz"
+    }
+  ],
+  "positions": 12597,
+  "numerical_margin_nats": 0.001,
+  "identical_path_tolerance_nats": 1e-05,
+  "book_rule": "At least half the nonempty mismatches, rounded upward, prefer the source in each of three book groups",
+  "maximum_seconds": 180,
+  "maximum_rss_gib": 2,
+  "minimum_host_gib": 48,
+  "cpu_threads": 2,
+  "prior_cohort_familiarity": true,
+  "independent_confirmation": false,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "new_output_images": 0,
+  "old_gate_changed": false,
+  "current_training_changed": false
+}
