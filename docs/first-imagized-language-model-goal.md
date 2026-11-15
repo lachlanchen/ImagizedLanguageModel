@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-15. Status: **active; usable visual language is unproved**.
+Updated: 2026-11-16. Status: **active; usable visual language is unproved**.
 
 ## Objective
 
@@ -178,6 +178,20 @@ whole deployed parameters do not establish the desired compact model.
   These are implementation checks; all five full-body autonomous restores,
   generation and language remain unexecuted. No post-gate execution binding
   exists. Preserve all 115 training sources while the original owner continues.
+  A separate [saved-score comparison](../references/ranked_glyph_score_gap_result.md)
+  is now complete on the terminal ranked actor's 124 cases/12,597 positions,
+  without a neural replay. Among 7,926 nonempty bitmap mismatches, source and
+  emitted-image preferences are 717 and 7,206, with three numerical ties.
+  All three book source-preference rules fail (51/466, 287/1,632, 298/1,627).
+  An independent scalar recount agrees. In measured scores, a source below an
+  exhibited alternative cannot be the highest-scoring image; source-directed
+  search alone does not explain these canonical mismatches. This does not
+  measure semantic correctness, alternative valid continuations, prefix logits
+  or autonomous language. A useful language model need not reproduce every
+  reference-book glyph. Keep the white-target fit and all original gates
+  unchanged. Conditional source-mode learning remains only a candidate for
+  later controlled testing if the current trial fails. Preserve the four
+  analysis sources and original arrays; do not repeat the completed calculation.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.

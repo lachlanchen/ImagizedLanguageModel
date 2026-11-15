@@ -1,0 +1,64 @@
+{
+  "schema": "ranked-glyph-score-gap-verification-v1",
+  "registration_sha256": "4e4f86ebc4593eb7b864e66a59a0772814b6246f9afbe5fa03ef7cd8d19f3c48",
+  "result_sha256": "929d22b15cd9813c6e49836170d2dddb9fbcb8c3070d51b6d20638905c7e1572",
+  "implementation_commit": "c53fc216",
+  "registration_commit": "f706ddd9",
+  "committed_sources": {
+    "scripts/analyze_ranked_glyph_score_gaps.py": "1db13a9cf300ab460b5fab8aebcd73cfa6f89bb8288f4736faad1d6a23429403",
+    "tests/test_ranked_glyph_score_gaps.py": "e176145e1eb32153612b809088d458248db5e681a9b2d88e1dba4307d4747c7c",
+    "references/ranked_glyph_score_gap_protocol.md": "8cda3f1355d2ac93fa73f07cc0bc3640345d347424ae157fb9fc4f5e1b53a937",
+    "scripts/review_joint_writer_physical.py": "49a8d2385198ae8df66c49fc4fa163f1d99b75a99a1826c45f09513c9e311c15"
+  },
+  "bound_input_count": 255,
+  "all124cases_and12597positions_retained": true,
+  "vector_and_independent_scalar_counts_agree": true,
+  "all_seven_groups_retained": true,
+  "all_original_probability_and_pixel_hashes_verified": true,
+  "all115current_training_sources_unchanged": true,
+  "original_live_training_owners_preserved": true,
+  "CPU_checks": {
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.127,
+    "junit_sha256": "4b976a8a755279a5ed1035d808eae62e98ab0d19be83547dfd970403f009b522",
+    "log_sha256": "8c12836c6b318891ee679126094dd1eeac5dd90cd0672445010f59f187a7d53a",
+    "prior_check_passed": 13,
+    "prior_check_seconds": 0.14,
+    "rerun_reason": "Added preserved failure-cost accounting and made import-side-effect check repeatable after a completed result."
+  },
+  "CPU_operations": {
+    "register": {
+      "action": "register",
+      "seconds": 0.06410133372992277,
+      "peak_rss_gib": 0.01641082763671875,
+      "original115sources_unchanged": true,
+      "new_model_calls": 0
+    },
+    "analyze": {
+      "action": "analyze",
+      "seconds": 0.3140935115516186,
+      "peak_rss_gib": 0.036098480224609375,
+      "original115sources_unchanged": true,
+      "new_model_calls": 0
+    },
+    "verify": {
+      "action": "verify",
+      "seconds": 0.4462028881534934,
+      "peak_rss_gib": 0.036468505859375,
+      "original115sources_unchanged": true,
+      "new_model_calls": 0
+    }
+  },
+  "cumulative_operation_seconds": 0.8243977334350348,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "new_output_images": 0,
+  "old_gate_changed": false,
+  "current_training_changed": false,
+  "semantic_accuracy_measured": false,
+  "complete_language_unmeasured": true,
+  "goal_achieved": false,
+  "recorded_unix": 1794758981.4165072
+}

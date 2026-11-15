@@ -206,6 +206,20 @@ hash checks. Office export and cloud propagation remain unverified.
 Use the private handoff for current ownership/resources; all completed trials
 remain terminal and their sources/readings must not change.
 
+The separate nonempty source-versus-emitted saved-score calculation is complete;
+read `references/ranked_glyph_score_gap_result.md`. All 124 cases/12,597 positions
+use existing authenticated probabilities and pixels, with no neural replay.
+Among 7,926 nonempty bitmap mismatches, 717 prefer the source, 7,206 the emitted
+image and three are numerical ties. All three book source-preference rules fail;
+an independent scalar recount agrees. This is a canonical-image density
+diagnostic, not a semantic error rate or a mandate to reproduce every reference
+book glyph. It authorizes no new fit, decoder or autonomous generation. Keep
+the current white-target trial unchanged and await its actual qualification.
+Preserve the four bound analysis sources, original arrays and first result;
+do not repeat the completed calculation. The active Nature-style PDF/native
+figure revision predates this new descriptive result; a future bounded revision
+must report its limits alongside the counts.
+
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and
 successful cases. Every new experiment needs an observed failure, one bounded
