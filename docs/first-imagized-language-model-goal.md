@@ -169,6 +169,15 @@ whole deployed parameters do not establish the desired compact model.
   credited ink, at most 11/252 false-ink whitespace outputs and at most 37 false
   blanks before any separately committed autonomous binding. Do not substitute
   the old failed actor's evaluator or launch a duplicate worker after a timeout.
+  The [white-target evaluator](../references/white_target_language_execution.md)
+  is now implemented for the unchanged 708-stream plan. Thirty-four CPU checks
+  pass, including hash-authenticated restoration of all 131 real saved tensors
+  after inference freezing and independent complete false-blank/error recount.
+  An actual admission attempt against the running, unqualified actor refuses
+  before Torch import, output-directory creation or execution registration.
+  These are implementation checks; all five full-body autonomous restores,
+  generation and language remain unexecuted. No post-gate execution binding
+  exists. Preserve all 115 training sources while the original owner continues.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.

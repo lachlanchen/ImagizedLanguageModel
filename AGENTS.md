@@ -132,9 +132,16 @@ Do not change bound code, duplicate the owner, restart on observation timeout,
 select intermediates or infer quality from training loss. All seven readable
 groups, credited ink, at most11/252 false-ink whitespace outputs and at most37
 all-case false blanks must pass before any separate autonomous binding. The
-white-target actor's quality and language remain unmeasured. Its future
-post-gate evaluator must restore all131 actual tensors and independently check
-the new false-blank safeguard; the old failed actor's evaluator cannot substitute.
+white-target actor's quality and language remain unmeasured. Its new post-gate
+evaluator is implemented in `scripts/evaluate_white_target_language.py`; see
+`references/white_target_language_execution.md`. All34 CPU checks pass, including
+all131 real tensor restores after inference freezing, complete error recount,
+false-blank rejection despite passed flags and review-scope restoration. The
+actual running actor is refused before Torch import or language-output/binding
+creation. These checks use CPU storage, not full-body neural execution. All five
+autonomous full-body restores, generation and language remain unexecuted. Do not
+create the post-gate binding before the actual physical gate passes all four
+conditions. The old failed actor's evaluator cannot substitute.
 The ranking-specific evaluator is implemented in
 `scripts/evaluate_global_glyph_ranking_language.py`; see
 `references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks

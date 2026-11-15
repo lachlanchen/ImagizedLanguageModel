@@ -1,0 +1,100 @@
+{
+  "schema": "white-target-language-implementation-result-v1",
+  "training_registration_sha256": "04b908f488f5175bff1df8da1a7d38676696c03a3ab5f70faa6a199a1757d828",
+  "source_sha256": {
+    "scripts/evaluate_white_target_language.py": "5f0a8a20798a92e09695e3ec661f60211bdf8c5e04a69b1344de17279aa0f39e",
+    "scripts/review_white_target_language.py": "78297018894e8c178e6393f6f704f1db4046912583263f3261c3c3f682750c60",
+    "tests/test_white_target_language.py": "85d615679b838b4a251ae688185469c97cd1bfff60de7f3d644e15b703d2682a",
+    "references/white_target_language_execution.md": "716518ee3efd0501fe9b5809836baedb1e2a16d0ded4b9afaa9661b0e2f6ab4e"
+  },
+  "CPU_checks": {
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 2.803,
+    "warnings": 1,
+    "warning": "Existing fontTools.misc.py23 DeprecationWarning; dependencies unchanged.",
+    "junit_sha256": "0e7043de5ae781c5e597ccd1ee6ccedbd45f312ee3c04004e3408f70c8a44d73",
+    "log_sha256": "84d28a092b84e8618fb9d17554ac21372e2eec4951d0aa02beaf25a6f3a84a9c",
+    "previous_attempt": {
+      "passed": 34,
+      "seconds": 2.95,
+      "log_sha256": "9226ef610ec1099a69811ecd6432459e8b2f02417d60e3ca6368ca4a812bb71c",
+      "reason_for_final_rerun": "Added source-file authentication for the real saved-tensor restoration fixture; evaluator now binds this evidence receipt."
+    }
+  },
+  "restoration_fixture": {
+    "actual_parameter_tensors": 131,
+    "actual_parameter_elements": 5005760,
+    "checkpoint0_sha256": "23c23a23cdceb4409b314c41fc215ff3e825f60450ae5c056894eb501e626740",
+    "checkpoint5_sha256": "1beaec64c1ea03a9a9fefbfec7930f22a5788787081ff00cb07a0d383f1be361",
+    "restored_order": [
+      0,
+      5,
+      0
+    ],
+    "restored_after_inference_freezing": true,
+    "frozen_parameter_and_buffer_preserved": true,
+    "CPU_storage_only": true,
+    "full_inherited_body_instantiated": false,
+    "model_forward_calls": 0,
+    "step5_added_to_generation_plan": false
+  },
+  "actual_admission": {
+    "arms": [
+      {
+        "step": 0,
+        "cap": 128,
+        "streams": 216
+      },
+      {
+        "step": 0,
+        "cap": 640,
+        "streams": 24
+      },
+      {
+        "step": 10324,
+        "cap": 128,
+        "streams": 76
+      },
+      {
+        "step": 20649,
+        "cap": 128,
+        "streams": 76
+      },
+      {
+        "step": 30973,
+        "cap": 128,
+        "streams": 76
+      },
+      {
+        "step": 41298,
+        "cap": 128,
+        "streams": 216
+      },
+      {
+        "step": 41298,
+        "cap": 640,
+        "streams": 24
+      }
+    ],
+    "streams": 708,
+    "actual_unqualified_admission_refused": "Physical writing review is not yet complete",
+    "Torch_imported": false,
+    "language_directory_created": false,
+    "post_gate_registration_created": false,
+    "seconds": 0.005440539680421352,
+    "peak_rss_gib": 0.01456451416015625
+  },
+  "new_generation_source_closure_includes_this_receipt": true,
+  "all115training_sources_unchanged": true,
+  "original_live_training_owners_preserved": true,
+  "four_physical_conditions_required": true,
+  "physical_quality_of_current_actor_unmeasured": true,
+  "all_five_full_body_autonomous_restores_unexecuted": true,
+  "complete_language_unmeasured": true,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "goal_achieved": false,
+  "recorded_unix": 1794757177.8307219
+}
