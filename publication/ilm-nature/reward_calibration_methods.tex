@@ -1,0 +1,61 @@
+\subsection*{Conservative verification of proposed answer rewards}
+
+Both controls bind their code and inputs before scoring and reuse the final
+normal QA images with previously frozen readings. The image-edit comparison
+binds 235 inputs; the selective comparison binds 347. Neither restores a
+student checkpoint or uses a language model to score the images. The later
+policy-helper refusal guard is separate from the preserved calibration source
+revisions. No reward-driven student update is performed.
+
+For emitted image cells $X_{1:T}$ and nonempty reference $Y_{1:L}$, let $D$ be
+ordered edit distance with insertion/deletion cost one and substitution cost
+one minus foreground Dice similarity. Two blank cells have similarity one.
+For a naturally stopped, visibly nonempty answer, define
+\begin{equation}
+ r_{\rm image}(X,Y)=\frac12\left[
+ \max\!\left(0,1-\frac{D(X,Y)}{\max(T,L)}\right)
+ +\mathbb{1}\{X=Y\}\right].
+ \label{eq:answer-image-reward}
+\end{equation}
+The equality term requires complete binary-image identity, including extent.
+Capped, empty and wholly blank answers receive zero. This rewards a canonical
+writing format; it does not recognize all legitimate styles or paraphrases.
+
+The selective verifier deduplicates all complete 32-by-32 binary glyphs from
+the 108 training pixel shards. Recognition receives only an emitted cell,
+without its question, reference or language context. For distinct prototype
+images $c_i$ and Hamming distance $d_H$, it accepts the nearest $c_{i^*}$ only if
+\begin{equation}
+ \begin{aligned}
+ i^*&=\mathop{\rm argmin}_i d_H(x,c_i),\qquad
+ \delta_i=\min_{j\ne i}d_H(c_i,c_j),\\
+ &\hspace{8mm}2d_H(x,c_{i^*})<\delta_{i^*}.
+ \end{aligned}
+ \label{eq:selective-glyph-verification}
+\end{equation}
+The strict decoding balls are disjoint by the triangle inequality. This
+guarantees unique decoding under a corresponding bounded-corruption assumption,
+not human legibility or semantic correctness of arbitrary images. Larger
+corruption can place an image in another prototype's ball. Prototype IDs name
+physical images, not Unicode labels; equal visible forms share an identity.
+The finite inventory is nevertheless a recognizer and is forbidden in student
+answer generation.
+
+Reference cells require exact membership in the training inventory; missing
+forms fail coverage without adding held-out prototypes. Equation~\ref{eq:answer-image-reward}
+then uses ordered unit-cost edit distance over accepted prototype identities,
+with abstention treated as mismatch and the bonus requiring full accepted
+content. Real blank cells, repeated glyphs, order, extent and stopping remain
+part of the score. This construction cannot silently drop an extra line or
+duplicate a glyph while claiming complete content agreement.
+
+The fixed calibration requires every correct reward above every uncredited
+reward, known-readable AUC at least .95 and zero capped rewards. Selective
+verification additionally requires full clean-reference coverage, all nine
+correct complete contents accepted, and no readable-mismatch or uncertain
+complete content accepted. These conservative reused-cohort rules do not
+adjudicate uncertain readings. Seven geometric/sequence CPU controls include
+exhaustive eight-bit corruption of a physical fixture; nineteen policy-helper
+controls cover probability replay, expected-gradient accounting and refusal of
+an implicit reward. None substitutes for student learning, a fresh validation
+cohort or independent human review.

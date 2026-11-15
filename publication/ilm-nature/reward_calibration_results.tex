@@ -1,0 +1,39 @@
+\subsection*{Candidate training rewards fail conservative calibration}
+
+Two prospective CPU controls test rewards for a proposed whole-answer policy
+objective before student training. They retain all 64 final normal QA outputs
+from the completed continuation trial: 32 questions in two presentations,
+including nine strict complete-correct, nine readable strict-mismatch and
+46 uncredited or uncertain outputs. These are repeated questions from a reused
+development cohort, not 64 independent trials. Original generated pixels and
+frozen readings remain unchanged (Fig.~\ref{fig:reward-calibration}).
+
+An ordered image-edit score with foreground-Dice substitution and an exact
+image bonus separates the 18 known-readable outcomes with pairwise AUC~1.0.
+Nevertheless, an uncertain output receives reward 0.492818, exceeding the
+minimum known-correct reward of 0.485744. It fails the prospective conservative
+separation requirement. This does not establish that the uncertain output is
+semantically wrong; it prevents qualifying the reward from the available
+frozen evidence. All capped outputs receive zero.
+
+A second control replaces image similarity with selective recognition of
+physical glyph cells. Its 9,581 distinct prototypes come only from 7,255,223
+training glyph positions across 13,785 corpus records. No development prototype
+or Unicode label enters this finite training-only inventory, and every clean
+reference cell is covered. The verifier accepts seven of nine known-correct
+complete answers, none of nine readable strict mismatches and one uncertain
+output (Fig.~\ref{fig:reward-calibration}b). Its known-readable AUC is 0.975309.
+Two correct answers each contain one abstained cell; the uncertain answer has
+all ten cells accepted. Figure~\ref{fig:reward-calibration}c retains every such
+disagreement, without correcting its pixels or reading. The fixed calibration
+fails, and the inventory remains outside deployment.
+
+Image-edit scoring takes 0.539\,s at 0.631\,GiB peak process RSS. Selective
+verification takes 7.457\,s at 0.096\,GiB, including 6.405\,s for inventory
+construction. Imports and source hashing precede these timers. Neither control
+makes a neural call or optimizer update. The proposed policy loss remains
+untrained; the generic helper now refuses an unspecified reward before model
+prefill or sampling. These refusals and CPU gradient checks establish
+implementation behavior, not a student language gain. Both calibrations lack
+independent human adjudication and leave the separate white-target trial
+unchanged and unmeasured.

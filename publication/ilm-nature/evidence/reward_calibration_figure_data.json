@@ -1,0 +1,131 @@
+{
+  "schema": "reward-calibration-figure-data-v1",
+  "source_sha256": {
+    "references/evidence/whole_answer_reward_calibration_20261116.json": "c090defa8c7800fd81a9fa200e482e8ff37859ac49f761e47533e97dd43d68ca",
+    "references/evidence/whole_answer_reward_calibration_registration_20261116.json": "c44abdae590cc3f217cea91a3c89a990ce970fa15759acf607114f6f31493baf",
+    "references/evidence/selective_visual_verifier_calibration_20261116.json": "d4214054fb75458b9286d516c868ba941fd60cf353b925b94c84aba5d2e9ff58",
+    "references/evidence/selective_visual_verifier_registration_20261116.json": "71f9cea3e0123bd77211c73032c6c91bc3f144275262ddf2654fac879159693f",
+    "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/fixed_cells__qa_09_a_normal/answer.png": "6becc5c663f71153080322ff505f2ed3f5205a50e29719f2e06f69598f22b7da",
+    "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_15_b_normal/answer.png": "285c362a2941d793e6c2dabd264987a470dabf8807e0aaf27a0b673cdb8b6535",
+    "artifacts/visual_continuation_full_logger_recovery_v2/evaluation/step_041298/core128/proportional__qa_07_b_normal/answer.png": "50c299fcbd68c1a3de6e8ac474f6ce57f86f6fb5f0fd6523dac97af6e6bfb6d3"
+  },
+  "groups": [
+    {
+      "label": "Correct",
+      "cases": 9,
+      "selective_accepted": 7
+    },
+    {
+      "label": "Readable wrong",
+      "cases": 9,
+      "selective_accepted": 0
+    },
+    {
+      "label": "Uncredited / uncertain",
+      "cases": 46,
+      "selective_accepted": 1
+    }
+  ],
+  "extrema": [
+    {
+      "name": "Image edit",
+      "exact_values": [
+        0.4857443869113922,
+        0.4526469920362745,
+        0.4928183317184448
+      ],
+      "values": [
+        0.485744,
+        0.452647,
+        0.492818
+      ]
+    },
+    {
+      "name": "Selective verifier",
+      "exact_values": [
+        0.4285714285714286,
+        0.45,
+        1.0
+      ],
+      "values": [
+        0.428571,
+        0.45,
+        1.0
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "case": "qa_09_a_normal",
+      "layout": "fixed_cells",
+      "file": "publication/ilm-nature/figures/reward_calibration_samples/fixed_cells__qa_09_a_normal.png",
+      "sha256": "6becc5c663f71153080322ff505f2ed3f5205a50e29719f2e06f69598f22b7da",
+      "width": 224,
+      "height": 32,
+      "accepted_cells": 6,
+      "abstained_cells": 1,
+      "emitted_glyphs": 7,
+      "frozen_correct": true,
+      "frozen_uncertain": false
+    },
+    {
+      "case": "qa_15_b_normal",
+      "layout": "proportional",
+      "file": "publication/ilm-nature/figures/reward_calibration_samples/proportional__qa_15_b_normal.png",
+      "sha256": "285c362a2941d793e6c2dabd264987a470dabf8807e0aaf27a0b673cdb8b6535",
+      "width": 288,
+      "height": 32,
+      "accepted_cells": 8,
+      "abstained_cells": 1,
+      "emitted_glyphs": 9,
+      "frozen_correct": true,
+      "frozen_uncertain": false
+    },
+    {
+      "case": "qa_07_b_normal",
+      "layout": "proportional",
+      "file": "publication/ilm-nature/figures/reward_calibration_samples/proportional__qa_07_b_normal.png",
+      "sha256": "50c299fcbd68c1a3de6e8ac474f6ce57f86f6fb5f0fd6523dac97af6e6bfb6d3",
+      "width": 320,
+      "height": 32,
+      "accepted_cells": 10,
+      "abstained_cells": 0,
+      "emitted_glyphs": 10,
+      "frozen_correct": false,
+      "frozen_uncertain": true
+    }
+  ],
+  "categories": [
+    "Minimum\ncorrect",
+    "Maximum\nreadable wrong",
+    "Maximum\nuncredited"
+  ],
+  "chart_decimals": 6,
+  "image_edit_auc": 1.0,
+  "selective_auc": 0.9753086419753086,
+  "selective_inventory": {
+    "prototypes": 9581,
+    "training_glyph_positions": 7255223,
+    "training_records": 13785,
+    "training_shards": 108,
+    "file": "artifacts/selective_visual_verifier_v1/training_inventory.npz",
+    "sha256": "282102e232556696ef1a930df3a701a017bb44495e8abbdef80f5fde52a94db7",
+    "minimum_separation": 4,
+    "maximum_separation": 206,
+    "build_seconds": 6.404932784847915,
+    "development_or_reference_images_added": false,
+    "Unicode_labels": false,
+    "deployed": false
+  },
+  "resource_scopes": {
+    "image": 0.538744019344449,
+    "selective": 7.457499324344099,
+    "imports_and_source_hashing_excluded": true
+  },
+  "both_calibrations_failed": true,
+  "original_readings_unchanged": true,
+  "independent_human_adjudication": false,
+  "student_training": false,
+  "new_model_calls": 0,
+  "exporter_sha256": "2b6fac0b55cd1a457a4df473dde895ca9f1e38f46e8930b02b460111010238f3"
+}

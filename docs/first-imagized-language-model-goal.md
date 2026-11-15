@@ -57,6 +57,15 @@ Seven geometric/sequence CPU controls and two new refusal checks are
 implementation evidence, not language improvement. Supplemental independent
 reading may add evidence but cannot replace the frozen pilot or repair its scores.
 
+The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
+is promoted: 53/93/95-page reading/review/redline PDFs include both failed
+controls, their methods and native Figure 29. All 241 pages received layout
+overview and 38 affected pages detailed visual inspection. The native plate
+contains a chart with literal workbook, a table and all three original
+disagreement PNGs; all 332 earlier figure assets and 153 prior embedded image
+contents remain. The paper preserves the negative language verdict and the
+running trial's unmeasured quality. Publication does not qualify the model.
+
 The complete-sequence comparison is finished and fails its registered pilot.
 All 732 image streams, 183 opaque boards and 96 visible book prefixes have been
 reviewed; readings were frozen before new mapping/reference scoring. The final
