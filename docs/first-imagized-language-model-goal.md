@@ -26,6 +26,21 @@ alone are separate claims.
 
 ## Direction check for every work unit
 
+The [whole-answer learning review](../references/whole_answer_learning_direction_20261116.md)
+separates learning conditional pixel associations from producing correct complete
+answers. A new training-only component samples complete answers, rereads actual
+emitted pixels and accumulates a leave-one-out policy gradient while retaining
+supervised learning as an anchor. Its seventeen CPU checks establish sampler,
+probability and gradient contracts; full-body execution, reward calibration and
+language improvement are unproved. A fixed-font image reward can still favor
+visually similar wrong answers. This is a conditional next experiment, not a
+replacement run or a qualification result. Preserve the live white-target
+sources and serial owner, finish its fixed decision, and do not auto-launch a
+successor. Require a registered training-only support/resource preflight and
+real-output reward calibration before another fit; reject reward gains without
+complete language gains. Do not make another physical blank/ink score stand
+for the full goal.
+
 The complete-sequence comparison is finished and fails its registered pilot.
 All 732 image streams, 183 opaque boards and 96 visible book prefixes have been
 reviewed; readings were frozen before new mapping/reference scoring. The final
