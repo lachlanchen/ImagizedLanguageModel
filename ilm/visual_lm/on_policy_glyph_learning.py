@@ -206,10 +206,14 @@ def rloo_loss(log_probabilities, rewards):
     return -((rewards - baseline) * log_probabilities).mean()
 
 
-def backward_answer_group(actor, prompt, reference, *, generator, group_size=4,
+def backward_answer_group(actor, prompt, reference, *, generator, reward_function=None, group_size=4,
                           maximum_glyphs=32, strength=1., replay_tolerance_nats=.05,
                           guard=lambda: None):
     """Accumulate one RLOO group without retaining multiple backbone graphs.
+
+    There is no qualified default reward. The rejected image-edit reward is
+    retained only for reproducing its calibration. A separately registered
+    caller must qualify and explicitly supply its training-only reward.
 
     This function performs no optimizer step/zero_grad, source selection or
     resource admission. Its registered caller must own those operations and
@@ -217,6 +221,10 @@ def backward_answer_group(actor, prompt, reference, *, generator, group_size=4,
     No answer references enter sampling. The unchanged supervised objective
     can accumulate into the same update as an explicit anchor.
     """
+    if reward_function is None:
+        raise RuntimeError('No qualified default answer reward; do not train the rejected image-edit or selective-template surrogates')
+    if not callable(reward_function):
+        raise TypeError('An explicitly qualified training-only reward callable is required')
     from .visual_continuation import prefill_visual_prompt
 
     if actor.training or type(group_size) is not int or group_size < 2:
@@ -232,7 +240,9 @@ def backward_answer_group(actor, prompt, reference, *, generator, group_size=4,
         memory, _, _ = prefill_visual_prompt(actor.interface, prompt)
         samples = [sample_answer(actor, prompt, generator=generator, maximum_glyphs=maximum_glyphs,
                                  memory=memory, guard=guard) for _ in range(group_size)]
-    rewards = [image_answer_reward(s.ink, reference, stopped=s.stopped) for s in samples]
+    rewards = [float(reward_function(s.ink, reference, stopped=s.stopped)) for s in samples]
+    if not all(math.isfinite(r) and 0 <= r <= 1 for r in rewards):
+        raise ValueError('Every fixed training reward must be finite and in [0,1]; discard pending update')
     advantage = [(r - (sum(rewards) - r) / (group_size - 1)) for r in rewards]
     event = dict(rewards=rewards, advantages=advantage,
                  varying_reward=max(rewards) > min(rewards),

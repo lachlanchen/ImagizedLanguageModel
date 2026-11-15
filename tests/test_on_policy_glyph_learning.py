@@ -7,7 +7,7 @@ from torch.nn import functional as F
 
 from ilm.visual_lm.glyph_joint_density import GlyphJointDensity, pack_glyphs, unpack_glyphs
 from ilm.visual_lm.on_policy_glyph_learning import (
-    SampledAnswer, image_answer_reward, physical_log_probability,
+    SampledAnswer, backward_answer_group, image_answer_reward, physical_log_probability,
     rloo_loss, sample_physical_patterns, stopping_log_probability,
 )
 
@@ -64,6 +64,14 @@ class AnswerRewardTests(unittest.TestCase):
 
 
 class SequenceProbabilityTests(unittest.TestCase):
+    def test_failed_default_reward_refuses_before_actor_or_sampling(self):
+        with self.assertRaisesRegex(RuntimeError, 'No qualified default'):
+            backward_answer_group(None, None, None, generator=None)
+
+    def test_invalid_explicit_reward_refuses_before_actor_or_sampling(self):
+        with self.assertRaises(TypeError):
+            backward_answer_group(None, None, None, generator=None, reward_function=5)
+
     def test_stopped_likelihood_and_gradient(self):
         z = torch.tensor([-.4, .2, .7], dtype=torch.float64, requires_grad=True)
         score = stopping_log_probability(z, 2, stopped=True)

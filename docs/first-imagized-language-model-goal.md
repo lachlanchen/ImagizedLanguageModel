@@ -44,6 +44,19 @@ real-output reward calibration before another fit; reject reward gains without
 complete language gains. Do not make another physical blank/ink score stand
 for the full goal.
 
+The [selective training-only content verifier](../references/selective_visual_verifier_protocol_20261116.md)
+also fails its fixed 64-output calibration: 7/9 known-correct complete answers,
+0/9 readable wrong answers and 1/46 uncredited/uncertain outputs are accepted.
+Its 9,581-image inventory comes only from training pixels and stays outside
+deployment. Disjoint Hamming balls do not certify semantic correctness or
+human legibility. Preserve all frozen readings, the rejected reward and the
+source revision; do not repeat its completed calibration, launch its policy
+fit or tune its decoding radius.
+The generic policy helper now refuses an unspecified reward before model work.
+Seven geometric/sequence CPU controls and two new refusal checks are
+implementation evidence, not language improvement. Supplemental independent
+reading may add evidence but cannot replace the frozen pilot or repair its scores.
+
 The complete-sequence comparison is finished and fails its registered pilot.
 All 732 image streams, 183 opaque boards and 96 visible book prefixes have been
 reviewed; readings were frozen before new mapping/reference scoring. The final

@@ -100,3 +100,41 @@ after the current serial model run finishes and under separate registration.
 No model training is authorized by this protocol. Useful complete language,
 independent image-only generation and matched-quality resource savings remain
 unproved.
+
+## Completed result
+
+The [fixed comparison](evidence/selective_visual_verifier_calibration_20261116.json)
+fails its prospective qualification. The training-only inventory contains
+9,581 distinct physical forms from 7,255,223 training glyph positions across
+13,785 records. All clean reference cells are covered without adding any
+development image. The verifier accepts 7/9 known-correct complete answers,
+0/9 readable wrong answers and 1/46 outputs without a credited clear reading.
+Correct/readable-wrong reward AUC is 0.975309. All capped rewards receive zero.
+
+Two correct answers each contain one abstained cell: fixed-cell
+`qa_09_a_normal` and proportional `qa_15_b_normal`. Proportional
+`qa_07_b_normal` is accepted as complete despite its frozen uncertainty.
+The original readings remain unchanged. That disagreement does not establish
+that the uncertain output is semantically wrong or authorize filling its
+unknown character from a clean prototype or reference. No radius, labels,
+readings or acceptance rules were changed after scoring.
+
+The complete CPU calibration takes 7.457 seconds with 0.096 GiB peak RSS;
+inventory construction accounts for 6.405 seconds. Imports and source hashing
+precede this timer. There are no neural calls or optimizer updates. The derived
+inventory remains private and absent from deployment. Its checksum is in the
+result, whose 64 per-case records retain every disagreement.
+
+**Reject the selective-template reward for policy optimization.** A unique
+geometric decoding ball does not establish reliable human-readable content.
+The two failed reward studies leave the whole-answer policy candidate untrained.
+An optional independent reading of the ambiguous original output can be recorded
+as new supplemental evidence; it must not replace the frozen review or its
+registered failure. No such human adjudication is included in this result.
+
+The registration binds the sources used at commit `93d3591a`. After the completed
+comparison, the generic policy helper was changed to refuse a missing or
+non-callable reward before model prefill/sampling. It no longer silently chooses
+the rejected image-edit reward. A future caller must explicitly supply and
+separately qualify its training reward; the helper cannot establish that
+qualification. Preserve the registered source revision for historical replay.

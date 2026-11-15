@@ -171,7 +171,17 @@ cases. Earlier recognition losses did not satisfy that contract, so a new
 recognizer is not presumed to do so. Validate it on preserved real outputs
 before using its reward; a failed judge stops the policy proposal. Such a
 judge is absent from deployed generation. Its preparation and runtime costs
-must still be counted. No judge has been implemented or qualified here.
+must still be counted. No training-only judge has been qualified.
+
+The subsequent [training-only selective content verifier](selective_visual_verifier_protocol_20261116.md)
+is now implemented and tested. It rejects two of nine known-correct complete
+answers and accepts one uncertain output, failing its registered qualification.
+It is not a qualified replacement judge. Both rejected rewards remain preserved
+for historical reproduction. The generic policy helper now refuses a missing
+or non-callable explicit reward before model prefill or sampling; qualification
+of a future callback remains the registered caller's responsibility. Nineteen
+policy-helper and seven selective-verifier CPU checks pass. No successor
+student training or full inherited-body policy replay has run.
 
 ## Execution decision
 
