@@ -245,6 +245,18 @@ whole deployed parameters do not establish the desired compact model.
   records the versioned local package and owned latest-PDF aliases. Office
   export and cloud propagation remain unverified; publication is not model
   acceptance.
+  The [saved-score revision](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
+  is now promoted: 52/91/92-page reading/review/cumulative-redline PDFs add
+  Figure 28, the complete seven-group score comparison and its interpretation
+  limits. Its native PowerPoint contains one chart with a literal workbook
+  and one table. All 235 pages received layout overview and 47 affected pages
+  detailed visual inspection; all 330 prior figure assets and 152 prior
+  embedded image contents remain. The recorded outer build exit of 143
+  followed three successful TeX children and completed authenticated artifacts;
+  subsequent inspection passed without another build. This adds a measured
+  canonical-density diagnosis, not a meaningful-language result. The original
+  white-target fit and all 115 bound sources remain unchanged. A new local
+  delivery has not yet been performed.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a
@@ -342,16 +354,18 @@ Other completed controls constrain the next decision:
   Reuse their authenticated artifacts. They do not identify a unique cause of
   failed language, and repeating them is not the next model experiment.
 
-The active 48/84/86-page reading/review/redline PDFs include the completed
-continuation, both joint-writer failures, actual-context probability diagnosis
-and limited ranking preflight, with native Figures 23--26. The
-[context-failure build receipt](../publication/ilm-nature/evidence/context_failure_article_build.json)
-records all-page layout overview, 29 detailed page checks and unchanged earlier
-image contents. The earlier 45/80/82-page package remains preserved. The [new versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
-verifies local copying and preserves its predecessor; cloud propagation and
-Office vector export remain unverified.
-The running ranking comparison's language remains unmeasured. Failure-driven
-model work retains priority over presentation-only revisions.
+The active 52/91/92-page reading/review/redline PDFs include the completed
+continuation and writer failures, nonempty ranking, whitespace diagnosis,
+white-target preflight and saved source-versus-emitted score comparison, with
+native Figures 23--28. The
+[current build receipt](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
+records all-page layout overview, 47 detailed page checks and unchanged earlier
+image contents. Previous PDFs and versioned local packages remain preserved.
+The [preceding local delivery](../publication/ilm-nature/evidence/ranking_completed_local_sync.json)
+still contains the earlier 50/88/90-page revision; delivery of the new PDFs is
+pending. Cloud propagation and Office application export remain unverified.
+The current white-target trial's quality and language remain unmeasured.
+Failure-driven model work retains priority over presentation-only revisions.
 
 ## Next model decision
 

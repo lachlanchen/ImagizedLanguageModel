@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_ranking_completed_article.py.
+% Literal captions copied from their source inputs by build_glyph_score_gap_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -123,4 +123,26 @@ corrections were preserved before the sole freeze. All current blank flags
 agree with pixels, but older review errors remain unchanged. Complete language
 and the separate blank-target fit's quality remain unmeasured.}
 \label{fig:ranking-completed}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_28_glyph_score_gaps.png}
+\caption{\textbf{Saved probabilities favor the emitted alternative at most nonempty bitmap mismatches.}
+\textbf{a,} Observed source-preference fractions and fixed required fractions in
+the three book strata. The requirement is at least half of nonempty mismatches,
+rounded upward, separately in every stratum. Chart values round to six decimals
+and displayed percentages to whole percentages; exact counts remain in the
+table and source data. All three rules fail. \textbf{b,} All seven groups retain
+their mismatch denominators and source/emitted/tie counts. A preference requires
+a complete-image log-score advantage above 0.001 nat. The counts sum to 717
+source preferences, 7,206 emitted preferences and three ties over 7,926 nonempty
+bitmap mismatches. \textbf{c,} An exhibited image above the source excludes the
+source from the highest measured score. It does not prove the emitted image
+globally optimal or measure prefix logits. A valid continuation can differ from
+the reference book. All 124 cases and 12,597 supplied-history positions remain;
+exact bitmaps, false blanks and false ink are separate categories. The independent
+scalar recount agrees without a model call or new output image. This reused-cohort
+calculation measures canonical image fidelity rather than semantic accuracy.
+Complete language and the separate white-target trial's quality remain unmeasured.}
+\label{fig:glyph-score-gaps}
 \end{figure*}

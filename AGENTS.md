@@ -216,9 +216,18 @@ diagnostic, not a semantic error rate or a mandate to reproduce every reference
 book glyph. It authorizes no new fit, decoder or autonomous generation. Keep
 the current white-target trial unchanged and await its actual qualification.
 Preserve the four bound analysis sources, original arrays and first result;
-do not repeat the completed calculation. The active Nature-style PDF/native
-figure revision predates this new descriptive result; a future bounded revision
-must report its limits alongside the counts.
+do not repeat the completed calculation. The saved-score manuscript revision is
+now promoted: 52/91/92-page reading/review/cumulative-redline PDFs and native
+Figure 28 report the complete counts and canonical-versus-language limits.
+See `publication/ilm-nature/evidence/glyph_score_gap_article_build.json`.
+All 235 pages received layout overview and 47 affected pages detailed visual
+inspection. The new PowerPoint has one native chart/literal workbook and one
+table; all 330 prior figure assets and 152 earlier embedded image contents
+remain. The outer build's recorded exit143 does not replace the three successful
+TeX-child receipts and subsequent authenticated artifact inspection; no repeat
+build was launched. No new model call or optimizer update was made. The separate
+white-target fit remains unchanged and unmeasured. Delivery of this new revision
+is pending; earlier local packages and owned aliases remain preserved.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and

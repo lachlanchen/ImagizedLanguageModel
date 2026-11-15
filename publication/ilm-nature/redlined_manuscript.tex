@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Sun Nov 15 23:13:17 2026
-%DIF ADD new.tex   Sun Nov 15 23:13:17 2026
+%DIF DEL old.tex   Mon Nov 16 00:26:18 2026
+%DIF ADD new.tex   Mon Nov 16 00:26:18 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -140,7 +140,7 @@
 
 {\sffamily\bfseries\DIFdelbegin %DIFDELCMD < \Large{Learning conditional language\\in continuous image space}%%%
 \DIFdelend \DIFaddbegin \Large{Conditional language generation\\in glyph image space}\DIFaddend \par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms \DIFdelbegin \DIFdel{outside standard }\DIFdelend \DIFaddbegin \DIFadd{that fixed }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventories need not preserve}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces }\DIFdelend \DIFaddbegin \DIFadd{study a model }\DIFaddend that \DIFdelbegin \DIFdel{read and emit glyph }\DIFdelend \DIFaddbegin \DIFadd{reads prompt }\DIFaddend images, \DIFdelbegin \DIFdel{with generated }\DIFdelend \DIFaddbegin \DIFadd{writes answer images and rereads emitted }\DIFaddend pixels\DIFdelbegin \DIFdel{supplying subsequent history}\DIFdelend . \DIFdelbegin \DIFdel{Externally pretrained foundations provide }\DIFdelend \DIFaddbegin \DIFadd{Pretrained weights supply }\DIFaddend inherited \DIFdelbegin \DIFdel{language }\DIFdelend knowledge; \DIFdelbegin \DIFdel{tokenizers, }\DIFdelend lexical \DIFdelbegin \DIFdel{heads and }\DIFdelend \DIFaddbegin \DIFadd{decoding, }\DIFaddend font \DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{lookup and a live teacher }\DIFaddend are absent from \DIFdelbegin \DIFdel{the }\DIFdelend deployed \DIFdelbegin \DIFdel{answer path}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters }\DIFdelend \DIFaddbegin \DIFadd{Complete continuation training on 13,766 Chinese sequences }\DIFaddend gives \DIFdelbegin \DIFdel{sixteen clear complete literal }\DIFdelend \DIFaddbegin \DIFadd{7/32 strict proportional }\DIFaddend answers\DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved questions}\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 both-correct pairs}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{with no credited coherent complete book continuation}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification. A separate compact experiment freezes }\DIFdelend \DIFaddbegin \DIFadd{Training }\DIFaddend a \DIFdelbegin \DIFdel{1.409B contextual body and fits }\DIFdelend \DIFaddbegin \DIFadd{normalized joint glyph writer through }\DIFaddend image \DIFdelbegin \DIFdel{interfaces on 13}\DIFdelend \DIFaddbegin \DIFadd{likelihood lowers loss while increasing empty outputs. Whole-glyph ranking yields 1}\DIFaddend ,\DIFdelbegin \DIFdel{785 complete Chinese book }\DIFdelend \DIFaddbegin \DIFadd{002/1,040 selected readable images }\DIFaddend and \DIFdelbegin \DIFdel{question--answer sequences}\DIFdelend \DIFaddbegin \DIFadd{reduces false blanks from 711 to 37 among 12}\DIFaddend ,\DIFdelbegin \DIFdel{covering 2.576 million target glyph }\DIFdelend \DIFaddbegin \DIFadd{597 supplied-history }\DIFaddend positions. \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{It nevertheless produces ink at 25/252 genuinely blank targets}\DIFaddend , \DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory. Both score zero complete exact QA answers out }\DIFdelend \DIFaddbegin \DIFadd{exceeding the prospective maximum }\DIFaddend of \DIFdelbegin \DIFdel{32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{eleven}\DIFaddend . \DIFdelbegin \DIFdel{A wider writer removes a measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{Exact source bitmaps change only from 4}\DIFaddend ,\DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do }\DIFdelend \DIFaddbegin \DIFadd{603 to 4,609 matches. A fixed blank-image comparison does }\DIFaddend not repair \DIFdelbegin \DIFdel{it}\DIFdelend \DIFaddbegin \DIFadd{whitespace}\DIFaddend . \DIFdelbegin \DIFdel{The reader also has }\DIFdelend \DIFaddbegin \DIFadd{An objective for blank targets passes }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{reset full-body preflight; its complete quality comparison remains unmeasured}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases}\DIFdelend \DIFaddbegin \DIFadd{Deployments retain over 7.5 billion parameters}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution, physical writing }\DIFdelend \DIFaddbegin \DIFadd{Model reviews have prior familiarity }\DIFaddend and \DIFdelbegin \DIFdel{conditional language success}\DIFdelend \DIFaddbegin \DIFadd{no independent human adjudication; older frozen review errors remain preserved}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation}\DIFdelend \DIFaddbegin \DIFadd{Useful visual language}\DIFaddend , historical-form transfer and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality efficiency \DIFdelbegin \DIFdel{advantage }\DIFdelend remain unresolved.}\par\bigskip
+\section*{Abstract}{Written language includes forms \DIFdelbegin \DIFdel{outside standard }\DIFdelend \DIFaddbegin \DIFadd{that fixed }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventories need not preserve}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces }\DIFdelend \DIFaddbegin \DIFadd{study a model }\DIFaddend that \DIFdelbegin \DIFdel{read and emit glyph }\DIFdelend \DIFaddbegin \DIFadd{reads prompt }\DIFaddend images, \DIFdelbegin \DIFdel{with generated }\DIFdelend \DIFaddbegin \DIFadd{writes answer images and rereads emitted }\DIFaddend pixels\DIFdelbegin \DIFdel{supplying subsequent history}\DIFdelend . \DIFdelbegin \DIFdel{Externally pretrained foundations provide }\DIFdelend \DIFaddbegin \DIFadd{Pretrained weights supply }\DIFaddend inherited \DIFdelbegin \DIFdel{language }\DIFdelend knowledge; \DIFdelbegin \DIFdel{tokenizers, }\DIFdelend lexical \DIFdelbegin \DIFdel{heads and }\DIFdelend \DIFaddbegin \DIFadd{decoding, }\DIFaddend font \DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{lookup and a live teacher }\DIFaddend are absent from \DIFdelbegin \DIFdel{the }\DIFdelend deployed \DIFdelbegin \DIFdel{answer path}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters }\DIFdelend \DIFaddbegin \DIFadd{Complete continuation training on 13,766 Chinese sequences }\DIFaddend gives \DIFdelbegin \DIFdel{sixteen clear complete literal }\DIFdelend \DIFaddbegin \DIFadd{7/32 strict proportional }\DIFaddend answers\DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved questions}\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 both-correct pairs}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{with no credited coherent complete book continuation}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification. A separate compact experiment freezes }\DIFdelend \DIFaddbegin \DIFadd{Training }\DIFaddend a \DIFdelbegin \DIFdel{1.409B contextual body and fits }\DIFdelend \DIFaddbegin \DIFadd{normalized joint glyph writer through }\DIFaddend image \DIFdelbegin \DIFdel{interfaces on 13}\DIFdelend \DIFaddbegin \DIFadd{likelihood lowers loss while increasing empty outputs. Whole-glyph ranking yields 1}\DIFaddend ,\DIFdelbegin \DIFdel{785 complete Chinese book }\DIFdelend \DIFaddbegin \DIFadd{002/1,040 selected readable images }\DIFaddend and \DIFdelbegin \DIFdel{question--answer sequences}\DIFdelend \DIFaddbegin \DIFadd{reduces false blanks from 711 to 37 among 12}\DIFaddend ,\DIFdelbegin \DIFdel{covering 2.576 million target glyph }\DIFdelend \DIFaddbegin \DIFadd{597 supplied-history }\DIFaddend positions. \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{It nevertheless produces ink at 25/252 genuinely blank targets}\DIFaddend , \DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory. Both score zero complete exact QA answers out }\DIFdelend \DIFaddbegin \DIFadd{exceeding the prospective maximum }\DIFaddend of \DIFdelbegin \DIFdel{32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{eleven}\DIFaddend . \DIFdelbegin \DIFdel{A wider writer removes a measured velocity-rank restriction without solving language}\DIFdelend \DIFaddbegin \DIFadd{Exact source bitmaps change only from 4,603 to 4,609 matches}\DIFaddend . \DIFdelbegin \DIFdel{Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{At 7}\DIFaddend ,\DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do }\DIFdelend \DIFaddbegin \DIFadd{206 of 7,926 nonempty bitmap mismatches, saved scores favor the emitted alternative. A fixed blank-image comparison does }\DIFaddend not repair \DIFdelbegin \DIFdel{it}\DIFdelend \DIFaddbegin \DIFadd{whitespace}\DIFaddend . \DIFdelbegin \DIFdel{The reader also has }\DIFdelend \DIFaddbegin \DIFadd{An objective for blank targets passes }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{reset full-body preflight; its complete quality comparison remains unmeasured}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases}\DIFdelend \DIFaddbegin \DIFadd{Deployments retain over 7.5 billion parameters}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution, physical writing }\DIFdelend \DIFaddbegin \DIFadd{Model reviews have prior familiarity }\DIFaddend and \DIFdelbegin \DIFdel{conditional language success}\DIFdelend \DIFaddbegin \DIFadd{no independent human adjudication; older frozen review errors remain preserved}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation}\DIFdelend \DIFaddbegin \DIFadd{Useful visual language}\DIFaddend , historical-form transfer and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality efficiency \DIFdelbegin \DIFdel{advantage }\DIFdelend remain unresolved.}\par\bigskip
 \DIFdelbegin \DIFdel{Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history.
@@ -2162,7 +2162,39 @@ seconds with no pressure waiting, at 18.033 GiB peak allocated VRAM and
 54.718 GiB minimum available host RAM. Complete language remains unmeasured.
 }
 
-%DIF >  Literal captions copied from their source inputs by build_ranking_completed_article.py.
+\subsection*{\DIFadd{Saved image scores often favor the emitted alternative}}
+
+\DIFadd{A separately bound calculation compares existing source and emitted-image
+scores across all 124 cases and 12,597 supplied-history positions of the
+completed ranking actor. Both images contain ink but differ in bitmap at
+7,926 positions. The source has higher complete log probability by more than
+0.001 nat at 717 positions, the emitted image at 7,206, with three numerical
+ties (Fig.~\ref{fig:glyph-score-gaps}b). The 4,609 exact bitmaps, 37 false blanks
+and 25 false-ink outputs partition the remaining positions. All 252 truly white
+sources remain in the complete cohort. No image or frozen reading changes.
+}
+
+\DIFadd{All three book strata fail the fixed source-preference rule, which requires
+at least half of nonempty mismatches in each stratum to prefer the source.
+Observed/required counts are 51/466, 287/1,632 and 298/1,627
+(Fig.~\ref{fig:glyph-score-gaps}a). An independent scalar calculation reproduces
+every group and total. Registration, vector calculation and verification take
+0.824 cumulative CPU seconds, at less than 0.037 GiB peak RSS. They make no
+neural call, optimizer update or new glyph image.
+}
+
+\DIFadd{At the 7,206 emitted-preferred positions, an exhibited alternative lies above
+the source in measured probability. More exact maximization of that unchanged
+density cannot make the source its highest-scoring image there. This does not
+prove the emitted image globally optimal, measure prefix logits or identify a
+unique learning failure. A useful language model need not reproduce every
+reference-book glyph, and valid alternative continuations can differ in bitmap.
+These counts diagnose canonical image fidelity, not semantic accuracy. The
+current white-target trial retains its complete original schedule and criteria;
+its quality and complete language remain unmeasured.
+}
+
+%DIF >  Literal captions copied from their source inputs by build_glyph_score_gap_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -2288,6 +2320,28 @@ agree with pixels, but older review errors remain unchanged. Complete language
 and the separate blank-target fit's quality remain unmeasured.}}
 \label{fig:ranking-completed}
 \end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_28_glyph_score_gaps.png}
+\caption{\DIFaddFL{\textbf{Saved probabilities favor the emitted alternative at most nonempty bitmap mismatches.}
+\textbf{a,} Observed source-preference fractions and fixed required fractions in
+the three book strata. The requirement is at least half of nonempty mismatches,
+rounded upward, separately in every stratum. Chart values round to six decimals
+and displayed percentages to whole percentages; exact counts remain in the
+table and source data. All three rules fail. \textbf{b,} All seven groups retain
+their mismatch denominators and source/emitted/tie counts. A preference requires
+a complete-image log-score advantage above 0.001 nat. The counts sum to 717
+source preferences, 7,206 emitted preferences and three ties over 7,926 nonempty
+bitmap mismatches. \textbf{c,} An exhibited image above the source excludes the
+source from the highest measured score. It does not prove the emitted image
+globally optimal or measure prefix logits. A valid continuation can differ from
+the reference book. All 124 cases and 12,597 supplied-history positions remain;
+exact bitmaps, false blanks and false ink are separate categories. The independent
+scalar recount agrees without a model call or new output image. This reused-cohort
+calculation measures canonical image fidelity rather than semantic accuracy.
+Complete language and the separate white-target trial's quality remain unmeasured.}}
+\label{fig:glyph-score-gaps}
+\end{figure*}
 
 
 \DIFaddend \section*{Discussion}
@@ -2364,6 +2418,19 @@ Source-over-blank ranking compares two complete paths; it does not bound the
 probability of other nonempty modes. This limitation is consistent with the
 observed marks without identifying a unique cause of language failure. Bitmap
 mismatch is itself a fidelity diagnostic, not a complete-language judgment.
+}
+
+\DIFadd{The complete saved-score comparison makes that distinction measurable. At
+7,206 of 7,926 nonempty bitmap mismatches, the emitted image already has higher
+probability than the source by the fixed margin (Fig.~\ref{fig:glyph-score-gaps}).
+That witness excludes the source from the highest measured score at those
+positions, without establishing a global optimum for the emitted image or a
+unique cause of failure. A source-directed search alone cannot explain these
+canonical mismatches. Conversely, forcing every reference-book glyph to be the
+mode would not establish useful language: another complete continuation may
+be valid. Conditional source-mode learning remains a candidate for later
+controlled testing if the current trial fails, alongside complete prompt-based
+language evaluation. The current white-target fit remains unchanged.
 }
 
 \DIFadd{The fixed complete-density blank comparison fails its prospective repair rule.
@@ -3692,6 +3759,35 @@ must pass before a separate autonomous execution binding. The unchanged
 708-stream plan retains actual emitted-pixel feedback, paired questions,
 erasures, natural stopping, earlier successes and complete long books.
 No quality or complete-language result is assigned to the running fit.
+}
+
+\subsection*{\DIFadd{Comparing saved source and emitted-image scores}}
+
+\DIFadd{The complete saved-score calculation binds its implementation and all 255
+existing inputs before opening the new score differences. It reuses the final
+ranked actor's authenticated probability vectors and binary source/output
+arrays, without restoring a neural model. For source image $X_t$, emitted image
+$\widehat X_t$, blank image $Z$ and the same supplied-history state $h_t$, define
+}\begin{equation}
+ \begin{aligned}
+ \mathcal M&=\{t:X_t\ne Z,\ \widehat X_t\ne Z,\ \widehat X_t\ne X_t\},\\
+ S_t&=\log q_\phi(X_t\mid h_t),\qquad
+ E_t=\log q_\phi(\widehat X_t\mid h_t).
+ \end{aligned}
+ \label{eq:saved-glyph-score-gap}
+\end{equation}
+\DIFadd{On $\mathcal M$, source preference requires $S_t>E_t+0.001$ nat and emitted
+preference requires $E_t>S_t+0.001$. Positions satisfying neither inequality
+remain numerical ties.
+These categories partition every nonempty bitmap mismatch. Original pixel
+flags, complete finite vectors, zero saved-argmax disagreements and agreement
+within $10^{-5}$ nat for identical image paths are required. Each book stratum
+requires $\lceil|\mathcal M_g|/2\rceil$ source preferences; a pooled majority
+cannot replace a failed stratum. Thirteen CPU checks cover the partition and
+rule. A separate scalar implementation verifies every count from the original
+arrays. The reused cohort prevents treating this descriptive calculation as
+untouched confirmation. It grants no model qualification or new decoding
+permission and leaves all original reviews and gates unchanged.
 }
 
 

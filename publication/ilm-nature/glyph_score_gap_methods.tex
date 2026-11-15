@@ -1,0 +1,27 @@
+\subsection*{Comparing saved source and emitted-image scores}
+
+The complete saved-score calculation binds its implementation and all 255
+existing inputs before opening the new score differences. It reuses the final
+ranked actor's authenticated probability vectors and binary source/output
+arrays, without restoring a neural model. For source image $X_t$, emitted image
+$\widehat X_t$, blank image $Z$ and the same supplied-history state $h_t$, define
+\begin{equation}
+ \begin{aligned}
+ \mathcal M&=\{t:X_t\ne Z,\ \widehat X_t\ne Z,\ \widehat X_t\ne X_t\},\\
+ S_t&=\log q_\phi(X_t\mid h_t),\qquad
+ E_t=\log q_\phi(\widehat X_t\mid h_t).
+ \end{aligned}
+ \label{eq:saved-glyph-score-gap}
+\end{equation}
+On $\mathcal M$, source preference requires $S_t>E_t+0.001$ nat and emitted
+preference requires $E_t>S_t+0.001$. Positions satisfying neither inequality
+remain numerical ties.
+These categories partition every nonempty bitmap mismatch. Original pixel
+flags, complete finite vectors, zero saved-argmax disagreements and agreement
+within $10^{-5}$ nat for identical image paths are required. Each book stratum
+requires $\lceil|\mathcal M_g|/2\rceil$ source preferences; a pooled majority
+cannot replace a failed stratum. Thirteen CPU checks cover the partition and
+rule. A separate scalar implementation verifies every count from the original
+arrays. The reused cohort prevents treating this descriptive calculation as
+untouched confirmation. It grants no model qualification or new decoding
+permission and leaves all original reviews and gates unchanged.

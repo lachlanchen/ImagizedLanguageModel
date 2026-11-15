@@ -78,8 +78,10 @@ owners of the separate white-target fit remain unchanged.
 
 The [complete counts](evidence/ranked_glyph_score_gap_result_20261116.json) and
 [verification receipt](evidence/ranked_glyph_score_gap_verification_20261116.json)
-bind the result, source and original input hashes and record CPU costs. This
-result has not yet been added to the active Nature-style PDF or native figures;
-their preserved revision remains the completed ranking/whitespace/preflight
-account. Future manuscript work must retain the distinction between these
-canonical density diagnostics and useful complete language.
+bind the result, source and original input hashes and record CPU costs. The
+[manuscript build receipt](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
+now records its inclusion in the 52/91/92-page reading, review and cumulative
+redline PDFs, with native Figure 28 and its editable PowerPoint source. Results,
+Methods, Discussion, summary and caption retain the distinction between these
+canonical density diagnostics and useful complete language. All prior figures
+and original failure images remain preserved; no new model output was generated.

@@ -1,0 +1,28 @@
+\subsection*{Saved image scores often favor the emitted alternative}
+
+A separately bound calculation compares existing source and emitted-image
+scores across all 124 cases and 12,597 supplied-history positions of the
+completed ranking actor. Both images contain ink but differ in bitmap at
+7,926 positions. The source has higher complete log probability by more than
+0.001 nat at 717 positions, the emitted image at 7,206, with three numerical
+ties (Fig.~\ref{fig:glyph-score-gaps}b). The 4,609 exact bitmaps, 37 false blanks
+and 25 false-ink outputs partition the remaining positions. All 252 truly white
+sources remain in the complete cohort. No image or frozen reading changes.
+
+All three book strata fail the fixed source-preference rule, which requires
+at least half of nonempty mismatches in each stratum to prefer the source.
+Observed/required counts are 51/466, 287/1,632 and 298/1,627
+(Fig.~\ref{fig:glyph-score-gaps}a). An independent scalar calculation reproduces
+every group and total. Registration, vector calculation and verification take
+0.824 cumulative CPU seconds, at less than 0.037 GiB peak RSS. They make no
+neural call, optimizer update or new glyph image.
+
+At the 7,206 emitted-preferred positions, an exhibited alternative lies above
+the source in measured probability. More exact maximization of that unchanged
+density cannot make the source its highest-scoring image there. This does not
+prove the emitted image globally optimal, measure prefix logits or identify a
+unique learning failure. A useful language model need not reproduce every
+reference-book glyph, and valid alternative continuations can differ in bitmap.
+These counts diagnose canonical image fidelity, not semantic accuracy. The
+current white-target trial retains its complete original schedule and criteria;
+its quality and complete language remain unmeasured.
