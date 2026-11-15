@@ -76,6 +76,27 @@ at entry; retain 24 GiB available host RAM, 48 GiB disk and at most 22 GiB Torch
 allocated VRAM. Limit diagnostic output to 256 MiB. Preserve partial costs and
 failures; no automatic retry, duplicate worker or foreign-process cleanup.
 
+The [diagnostic implementation](../scripts/analyze_ranked_writer_whitespace.py)
+reuses the completed physical path scorer and restores through the ranking
+checkpoint inventory. New CPU checks cover strict-margin choice, whitespace
+and nonempty erasure costs, all seven prospective readability conditions,
+missing-binding rejection before Torch import and first-attempt preservation.
+These checks do not measure the inherited body's neural behavior. The
+[independent CPU export](../scripts/summarize_ranked_writer_whitespace.py)
+recounts every saved probability vector against original source/output arrays
+and frozen selected readings without loading a neural model.
+
+```bash
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
+  MKL_NUM_THREADS=2 PYTHONPATH=. \
+  python scripts/analyze_ranked_writer_whitespace.py register
+# Commit and push the exact public registration before GPU execution.
+```
+
+The external timeout sends TERM at 880 seconds and allows twenty seconds before
+KILL, bounding setup and a stalled constructor as well as monitored forwards.
+Keep the first console, process identity, start/end receipts and partial vectors.
+
 Keep complete prompt dependence, paired questions, erasures, coherent books,
 natural stopping, untouched confirmation, independent execution, historical
 forms and whole-model matched-quality costs as separate outstanding criteria.
