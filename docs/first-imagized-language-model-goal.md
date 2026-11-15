@@ -156,12 +156,19 @@ whole deployed parameters do not establish the desired compact model.
   chosen by unchanged original qualification order. Nine CPU checks include
   the white-branch gradients and exhaustive probability-bound checks. Frozen
   body/feedback/stop/affines stay unchanged. Preserve all107 bound sources;
-  do not repeat this completed preflight. No quality fit or autonomous image
-  was produced. The next full matched comparison still requires new exact
-  implementation, original initialization/schedule/control, source/input/runtime
-  registration and commit/push before GPU work. Retain all seven physical groups,
-  credited ink, at most11/252 false-ink whitespace outputs and at most37 false
-  blanks before any separate autonomous binding. Keep full language unproved.
+  do not repeat this completed preflight. No preflight update or autonomous image
+  was carried forward. The [complete matched comparison](../references/white_target_training_protocol.md)
+  is now implemented and separately registered with 115 bound sources and
+  569 input hashes. Seventeen new accounting, checkpoint and physical-safeguard
+  checks pass. The single serial fit/audit/qualification owner has started;
+  use the private handoff for actual process identity and resources. Preserve
+  the original fresh initialization, full schedule/control, every snapshot and
+  all 115 bound sources during execution. The new ledger and CPU audit count
+  white-target loss separately and recount 68,808 source-white exposures.
+  Quality and language remain unmeasured. Retain all seven physical groups,
+  credited ink, at most 11/252 false-ink whitespace outputs and at most 37 false
+  blanks before any separately committed autonomous binding. Do not substitute
+  the old failed actor's evaluator or launch a duplicate worker after a timeout.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -199,7 +206,8 @@ whole deployed parameters do not establish the desired compact model.
   previous figure assets and all 150 prior embedded image contents remain.
   Its [versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
   records source/destination hashes while preserving the previous package.
-  Those PDFs predate the completed ranking result above. Their next bounded
+  Those PDFs predate the completed ranking, whitespace diagnostic and white-target
+  preflight results above. Their next bounded
   revision must show the conditional gain and failed whitespace separately from
   unmeasured autonomous language. Office export and cloud propagation remain
   unverified; neither article revision nor conditional glyphs establishes success.

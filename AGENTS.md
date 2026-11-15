@@ -119,12 +119,22 @@ original qualification order. Frozen body/feedback/stop/affines stay unchanged;
 peak allocated VRAM17.795GiB. Nine CPU checks cover new-branch gradients,
 enumerable bounds and binding rejection. All owners exited and GPU0 is released.
 Preserve all107 bound sources; do not repeat this completed preflight. This is
-not a trained quality result or language evidence. Implement and separately
-register the complete matched comparison before another fit, preserving original
-fresh initialization, full13766/41298/6108741/five-snapshot schedule, current
-ranked-control pixels, all seven readable groups and credited ink. Require at
-most11/252 false-ink whitespace outputs and at most37 all-case false blanks
-before any separate autonomous binding. No automatic language admission follows.
+not a trained quality result or language evidence. The complete matched pipeline
+is now implemented and registered in
+`references/evidence/white_target_ranking_registration_20261115.json`; see
+`references/white_target_training_protocol.md`. All17 new CPU accounting,
+checkpoint and physical-boundary checks pass. The single serial fit/audit/124-case
+qualification owner has started; use the private handoff for actual identity.
+Preserve all115 bound sources and569 inputs, original fresh initialization,
+full13766/41298/6108741/five-snapshot schedule and saved ranked-control pixels.
+The ledger/audit check both ranking terms and68,808 source-white exposures.
+Do not change bound code, duplicate the owner, restart on observation timeout,
+select intermediates or infer quality from training loss. All seven readable
+groups, credited ink, at most11/252 false-ink whitespace outputs and at most37
+all-case false blanks must pass before any separate autonomous binding. The
+white-target actor's quality and language remain unmeasured. Its future
+post-gate evaluator must restore all131 actual tensors and independently check
+the new false-blank safeguard; the old failed actor's evaluator cannot substitute.
 The ranking-specific evaluator is implemented in
 `scripts/evaluate_global_glyph_ranking_language.py`; see
 `references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks
@@ -170,7 +180,7 @@ PDFs and versioned local packages remain preserved. The new local copy is
 recorded in `publication/ilm-nature/evidence/context_failure_local_sync.json`;
 cloud propagation and Office vector export remain unverified. Model failure resolution
 retains priority over presentation-only work. Those PDFs predate the completed
-ranking result; the next bounded revision must distinguish conditional glyph
+ranking, whitespace diagnostic and white-target preflight results; the next bounded revision must distinguish conditional glyph
 improvement, failed whitespace and unmeasured language. Use the private handoff
 for current ownership/resources; all completed trials remain terminal and their
 sources/readings must not change.
