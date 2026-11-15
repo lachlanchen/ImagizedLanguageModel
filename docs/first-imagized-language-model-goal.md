@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-14. Status: **active; usable visual language is unproved**.
+Updated: 2026-11-15. Status: **active; usable visual language is unproved**.
 
 ## Objective
 
@@ -116,21 +116,33 @@ whole deployed parameters do not establish the desired compact model.
   Fourteen CPU gradient/accounting/review checks pass. Its single serial
   fit/audit/qualification comparison retains all 13,766 sources, 41,298 updates,
   6,108,741 exposures and five fixed snapshots. Use the private handoff for
-  actual live ownership; training completion and language remain unproved.
-  Opaque blank flags must agree with pixels before the first freeze. All seven
-  original physical groups, independently credited ink and at most 11 false-ink
-  outputs among 252 source-white positions must pass before autonomous evaluation.
+  actual live ownership. The [completed ranking result](../references/global_glyph_ranking_physical_result.md)
+  now includes the full fit, independent audit, all 124 cases and 33 actually
+  reviewed boards/2,080 frozen readings. All seven readable groups pass:
+  1,002/1,040 selected candidate images, including development books 106/108.
+  False blanks fall from 711 to 37 over all 12,597 positions, but false ink
+  increases from 11 to 25 among 252 source-white positions. The physical gate
+  fails its unchanged whitespace condition. All blank flags agree with original
+  opaque pixels and no credited candidate is empty. Original unfrozen entry
+  corrections are preserved; frozen readings are not repaired. Review remains
+  model-based with prior familiarity and no independent human adjudication.
+  This actor is terminal and ineligible for autonomous language evaluation.
   The [ranking-specific evaluator](../references/global_glyph_ranking_language_execution.md)
   is now implemented with the unchanged 708-stream plan and actual 131-tensor
   restoration, including restoration after inference freezing. Twenty-two CPU
   checks pass. It reauthenticates the sealed review and independently recounts
-  complete source-whitespace arrays before neural import. The actual running
-  trial correctly refuses early admission without creating evaluation outputs.
+  complete source-whitespace arrays before neural import. This failed actor
+  remains inadmissible without creating evaluation outputs.
   These checks use a CPU storage fixture for restoration, not the full inherited
-  body's neural computation. All five actual full-body restores, generation and
-  language remain unexecuted until qualification and a separately committed
-  post-gate execution binding. Preserve the 91 running sources unchanged.
-  Do not substitute forced ink, more search, unchanged epochs or smaller data.
+  body's neural computation. All five autonomous full-body restores, generation
+  and language remain unexecuted. Do not create this actor's post-gate execution
+  binding. Preserve the 91 bound sources unchanged; do not repeat its completed
+  fit, audit, qualification or review. The [next bounded decision](../references/global_glyph_ranking_whitespace_decision.md)
+  measures blank versus saved-image densities on this new actor's complete
+  fixed cohort before considering another fit. It evaluates one fixed rule's
+  whitespace and nonempty-position costs without changing outputs or scores.
+  Separate source-bound registration is required before that probe; rejection
+  redirects whitespace learning, not unchanged epochs or threshold relaxation.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
@@ -168,8 +180,10 @@ whole deployed parameters do not establish the desired compact model.
   previous figure assets and all 150 prior embedded image contents remain.
   Its [versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
   records source/destination hashes while preserving the previous package.
-  The ranking fit's quality, Office export and cloud propagation remain
-  unverified; this article revision establishes no model success.
+  Those PDFs predate the completed ranking result above. Their next bounded
+  revision must show the conditional gain and failed whitespace separately from
+  unmeasured autonomous language. Office export and cloud propagation remain
+  unverified; neither article revision nor conditional glyphs establishes success.
 
 Keep the goal active through these decisions. Completion requires the language,
 independence, resource and written-form evidence specified below; neither a

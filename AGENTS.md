@@ -87,25 +87,34 @@ The full ranking pipeline is now implemented and registered in
 `references/evidence/global_glyph_ranking_registration_20261114.json`: 91 source
 hashes, 421 input hashes, the complete original schedule and fixed resource
 ceilings. See `references/global_glyph_ranking_training_protocol.md` and the
-private handoff for its single serial fit/audit/qualification owner. Fourteen CPU
-checks pass; the full comparison and language result remain unproved. The new
-opaque review derives and verifies blank flags from pixels before the first
-freeze, retaining actual board review and uncertainty. All seven original
-physical groups, independently credited ink and at most 11 false-ink outputs
-among 252 source-white positions must pass before autonomous generation.
-Preserve all 91 bound sources during execution. No intermediate selection, forced ink,
-smaller corpus or relaxed language gates substitutes.
+private handoff for ownership. The full comparison is now COMPLETE and TERMINAL;
+read `references/global_glyph_ranking_physical_result.md`. All 41,298 updates,
+6,108,741 exposures, independent audit, 124 conditional cases, 33 actual opaque
+boards and 2,080 frozen readings are complete. All seven candidate readability
+groups pass (1,002/1,040; development books 106/108) and false blanks fall from
+711 to 37, but false ink 25/252 exceeds the fixed limit of 11. The physical gate
+FAILS whitespace. Blank flags agree with pixels and no credited candidate is
+empty. Preserve initial unfrozen entry corrections, all frozen readings and the
+failed gate. Review is model-based with prior familiarity, not independent human
+adjudication. All model owners exited. Do not resume the fit, repeat audit/review,
+select intermediates, relax criteria or launch this actor's 708 language streams.
+Preserve all 91 bound sources. The next bounded diagnostic is selected in
+`references/global_glyph_ranking_whitespace_decision.md`: compare complete blank
+and saved-image densities on the new actor's entire fixed cohort, evaluating one
+fixed rule's whitespace and nonempty costs before considering a new loss. It is
+unexecuted and requires a separate source/input/weight/runtime registration,
+commit and push before GPU work. No automatic language admission follows.
 The ranking-specific evaluator is implemented in
 `scripts/evaluate_global_glyph_ranking_language.py`; see
 `references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks
 cover all 708 planned streams, all 131 actual tensor restores in a CPU storage
 fixture, unchanged review bindings and independent complete-whitespace recount.
-The actual running trial refuses premature admission before Torch import and
-without creating output directories. Full-body restoration and generation remain
-unexecuted. Wait for the original pipeline, sealed physical review and all three
-readability/ink/whitespace conditions, then separately register/commit/push exact
-execution bindings before generation. Do not use an old failed actor's evaluator
-or change any of the 91 running source files.
+The failed ranking actor remains inadmissible before Torch import and without
+creating output directories. Autonomous full-body restoration and generation
+remain unexecuted. Do not create its post-gate registration or language outputs.
+Preserve the evaluator for a future separately qualified actor; passing all three
+readability/ink/whitespace conditions and committing exact execution bindings
+remain required. Do not change any of the 91 bound source files.
 The post-qualification evaluator is now implemented in
 `scripts/evaluate_joint_context_language.py`; see
 `references/joint_context_language_execution.md`. It restores all131 learned
@@ -139,9 +148,11 @@ figure assets and 150 earlier embedded image contents remain unchanged. Earlier
 PDFs and versioned local packages remain preserved. The new local copy is
 recorded in `publication/ilm-nature/evidence/context_failure_local_sync.json`;
 cloud propagation and Office vector export remain unverified. Model failure resolution
-retains priority over presentation-only work. The running ranking fit's quality
-is unmeasured. Use the private handoff for current ownership/resources; all old
-trials remain terminal and their sources/readings must not change.
+retains priority over presentation-only work. Those PDFs predate the completed
+ranking result; the next bounded revision must distinguish conditional glyph
+improvement, failed whitespace and unmeasured language. Use the private handoff
+for current ownership/resources; all completed trials remain terminal and their
+sources/readings must not change.
 
 Keep copying, glyph fidelity, complete language, stopping, execution independence
 and resource savings as distinct claims. Preserve original outputs, controls and
