@@ -99,11 +99,20 @@ failed gate. Review is model-based with prior familiarity, not independent human
 adjudication. All model owners exited. Do not resume the fit, repeat audit/review,
 select intermediates, relax criteria or launch this actor's 708 language streams.
 Preserve all 91 bound sources. The next bounded diagnostic is selected in
-`references/global_glyph_ranking_whitespace_decision.md`: compare complete blank
-and saved-image densities on the new actor's entire fixed cohort, evaluating one
-fixed rule's whitespace and nonempty costs before considering a new loss. It is
-unexecuted and requires a separate source/input/weight/runtime registration,
-commit and push before GPU work. No automatic language admission follows.
+`references/global_glyph_ranking_whitespace_decision.md` is now complete; read
+`references/ranked_writer_whitespace_result.md`. All 124 cases/12,597 positions
+restore actual 131-tensor state, with zero saved argmax disagreements and maximum
+source-NLL drift 9.154e-9. The fixed rule fixes only 3/25 spaces, leaving 22 false
+ink and adding one false blank; eligibility FAILS. No images, optimizer updates,
+new reviews or answers were generated. All owners exited and GPU0 is released.
+Preserve all 101 bound sources; do not repeat the probe, change old readings or
+launch a decoding/language comparison from its failed decision. The next bounded
+learning change is selected in `references/white_target_ranking_decision.md`:
+add true-white-target ranking through the first-nonzero upper bound, retaining
+nonempty ranking and the original greedy decoder. It is untrained. Exact CPU
+gradients and a separately source-bound actual complete-source reset preflight,
+including real whitespace, must pass before any full fit. No automatic language
+admission follows from a density or gradient result.
 The ranking-specific evaluator is implemented in
 `scripts/evaluate_global_glyph_ranking_language.py`; see
 `references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks

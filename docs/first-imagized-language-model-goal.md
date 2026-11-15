@@ -137,12 +137,18 @@ whole deployed parameters do not establish the desired compact model.
   body's neural computation. All five autonomous full-body restores, generation
   and language remain unexecuted. Do not create this actor's post-gate execution
   binding. Preserve the 91 bound sources unchanged; do not repeat its completed
-  fit, audit, qualification or review. The [next bounded decision](../references/global_glyph_ranking_whitespace_decision.md)
-  measures blank versus saved-image densities on this new actor's complete
-  fixed cohort before considering another fit. It evaluates one fixed rule's
-  whitespace and nonempty-position costs without changing outputs or scores.
-  Separate source-bound registration is required before that probe; rejection
-  redirects whitespace learning, not unchanged epochs or threshold relaxation.
+  fit, audit, qualification or review. The [ranked-whitespace diagnostic](../references/ranked_writer_whitespace_result.md)
+  is also complete on all 124 cases/12,597 positions with all actual 131 tensors.
+  Saved argmax choices reproduce exactly; source mean NLL drift is 9.154e-9.
+  The fixed blank-versus-emitted-image rule would fix only three spaces, leave
+  22 false-ink outputs and add one false blank. It fails both prospective cost
+  conditions; outputs and the original gate remain unchanged. Preserve all 101
+  bound sources and do not repeat this probe or run a decoding comparison from
+  its failed eligibility. The [next bounded learning decision](../references/white_target_ranking_decision.md)
+  adds white-target ranking using the first-nonzero upper bound while retaining
+  the current nonempty objective and greedy decoder. It is untrained. Exact
+  gradients and a separately registered complete-source preflight with real
+  whitespace and fully reset updates are required before another full fit.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.
