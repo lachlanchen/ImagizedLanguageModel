@@ -146,9 +146,22 @@ whole deployed parameters do not establish the desired compact model.
   bound sources and do not repeat this probe or run a decoding comparison from
   its failed eligibility. The [next bounded learning decision](../references/white_target_ranking_decision.md)
   adds white-target ranking using the first-nonzero upper bound while retaining
-  the current nonempty objective and greedy decoder. It is untrained. Exact
-  gradients and a separately registered complete-source preflight with real
-  whitespace and fully reset updates are required before another full fit.
+  the current nonempty objective and greedy decoder. Its
+  [complete-source preflight](../references/white_target_preflight_result.md)
+  now passes all six cases at 17.795 GiB peak allocated VRAM. Both actual QA
+  layouts compare all 131 gradients with unsplit autograd (max relative2.900e-6,
+  max absolute4.172e-7). Both maximal513-glyph books and both complete314-glyph
+  mixed-white books take real optimizer steps; all four steps are reset.
+  Actual mixed-white targets are source index4,447 with two genuine blanks,
+  chosen by unchanged original qualification order. Nine CPU checks include
+  the white-branch gradients and exhaustive probability-bound checks. Frozen
+  body/feedback/stop/affines stay unchanged. Preserve all107 bound sources;
+  do not repeat this completed preflight. No quality fit or autonomous image
+  was produced. The next full matched comparison still requires new exact
+  implementation, original initialization/schedule/control, source/input/runtime
+  registration and commit/push before GPU work. Retain all seven physical groups,
+  credited ink, at most11/252 false-ink whitespace outputs and at most37 false
+  blanks before any separate autonomous binding. Keep full language unproved.
 - The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
   is complete. Final normal long-book outputs have 98.12% of tiles above clean
   book ink's 99th percentile, with dense writing visible from the beginning.

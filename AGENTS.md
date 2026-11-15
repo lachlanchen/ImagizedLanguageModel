@@ -109,10 +109,22 @@ Preserve all 101 bound sources; do not repeat the probe, change old readings or
 launch a decoding/language comparison from its failed decision. The next bounded
 learning change is selected in `references/white_target_ranking_decision.md`:
 add true-white-target ranking through the first-nonzero upper bound, retaining
-nonempty ranking and the original greedy decoder. It is untrained. Exact CPU
-gradients and a separately source-bound actual complete-source reset preflight,
-including real whitespace, must pass before any full fit. No automatic language
-admission follows from a density or gradient result.
+nonempty ranking and the original greedy decoder. The separately registered
+preflight is now complete; read `references/white_target_preflight_result.md`.
+All six cases pass: both QA layouts compare all131 gradients with unsplit
+autograd (max relative2.900e-6, max absolute4.172e-7); both513-glyph books and
+both314-glyph real mixed-white books take four actual Adam steps that are fully
+reset. The mixed-white source is index4447 with two genuine blanks, selected by
+original qualification order. Frozen body/feedback/stop/affines stay unchanged;
+peak allocated VRAM17.795GiB. Nine CPU checks cover new-branch gradients,
+enumerable bounds and binding rejection. All owners exited and GPU0 is released.
+Preserve all107 bound sources; do not repeat this completed preflight. This is
+not a trained quality result or language evidence. Implement and separately
+register the complete matched comparison before another fit, preserving original
+fresh initialization, full13766/41298/6108741/five-snapshot schedule, current
+ranked-control pixels, all seven readable groups and credited ink. Require at
+most11/252 false-ink whitespace outputs and at most37 all-case false blanks
+before any separate autonomous binding. No automatic language admission follows.
 The ranking-specific evaluator is implemented in
 `scripts/evaluate_global_glyph_ranking_language.py`; see
 `references/global_glyph_ranking_language_execution.md`. Twenty-two CPU checks
