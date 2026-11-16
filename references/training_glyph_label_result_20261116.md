@@ -44,6 +44,9 @@ Hamming verifier. Runtime is 31.966 seconds at 0.208 GiB peak process RSS;
 derived files total 10,536,820 bytes. Three CPU contract checks cover complete
 extent, boundary mismatch, alias preservation and invisible nonspace labels.
 No neural call or optimizer update occurs.
+The earlier 4,096-character primitive already merged nine visual aliases;
+this full-corpus census extends that accounting rather than introducing the
+idea of optical equivalence.
 
 ## Consequence for complete-answer learning
 

@@ -63,3 +63,24 @@ model's own image history. A verifier, copying, lower loss or readable isolated
 glyphs cannot complete that objective. Preserve complete answers, paired
 questions, erasures, learned stopping, long books and untouched confirmation.
 No new student preflight, full fit or verifier training is registered here.
+
+## Completed checks and selected metric test
+
+The [saved preprocessing audit](isolated_reader_preprocessing_audit_20261116.md)
+confirms 402 image encodings at 81 visual positions. Pinned upstream code omits
+qwen35 from a larger-minimum switch; that is a hypothesis, not a measured repair.
+The [full label audit](training_glyph_label_result_20261116.md) verifies all
+7,255,223 cells but rejects exact pointwise Unicode recovery because of eleven
+nonwhite aliases and an invisible nonspace label. Both checks are terminal.
+Neither changes an original output or old qualification rule.
+
+The selected [fixed encoder metric test](frozen_encoder_verifier_protocol_20261116.md)
+uses the existing frozen image encoder and the same 9,581 physical prototypes
+as the rejected Hamming verifier. Only the distance representation changes.
+The earlier Hamming verifier already used physical IDs, so Unicode aliasing
+does not explain its failure. The new hypothesis is that the encoder's learned
+image invariance can better separate real glyph variants from uncredited forms.
+Keep the complete cohort, source-only separation rule, reward and all original
+gates. No encoder fitting, radius tuning, general-vision teacher recovery or
+student optimization is admitted. A failed test closes this exact metric;
+a pass still needs the fresh-clone actor preflight.

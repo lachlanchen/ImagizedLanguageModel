@@ -88,6 +88,20 @@ is a source/preprocessing audit followed by a prospectively bound training-only
 label-coverage check. A compact supervised verifier is a candidate after those
 checks; neither its training nor a successor actor fit is registered.
 
+Those checks are now [complete](../references/training_glyph_label_result_20261116.md).
+All 7,255,223 training cells match source pixels, but eleven nonwhite aliases
+and 34 invisible nonspace occurrences reject exact pointwise Unicode recovery.
+Preserve this negative condition; do not normalize it into a pass. The
+[preprocessing audit](../references/isolated_reader_preprocessing_audit_20261116.md)
+confirms actual image encodings and a small visual budget, without proving a
+causal repair. Both audits are terminal. The selected
+[fixed encoder metric calibration](../references/frozen_encoder_verifier_protocol_20261116.md)
+uses the existing frozen image encoder to replace the Hamming distance of the
+training-only physical-form verifier. It changes no weights, canonical output,
+reward or old gate. It is separately registered for all 64 preserved outputs
+and admits no student fit. Keep its single owner in the private handoff; do not
+resume the rejected general-vision reader or alter a frozen reading.
+
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
 eligible, but their machine-derived labels are not independently qualified.
