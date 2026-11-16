@@ -8,9 +8,12 @@ gate leaves autonomous language unmeasured. These are distinct outcomes.
 [Complete language result](visual_continuation_learning_result.md),
 [ranked-writer result](global_glyph_ranking_physical_result.md).
 
-The running white-target comparison retains its sources, initialization,
-schedule and gates. It tests a physical writing repair. The implementation
-below does not alter that run, start a successor or qualify any model.
+The [completed white-target comparison](white_target_physical_result.md) fails
+both physical blank conditions: 12/252 false ink against a maximum of eleven and
+54 false blanks against a maximum of 37. Its fit, audit, qualification and opaque
+review are terminal. The implementation below qualifies no model; the
+[failure decision](white_target_failure_decision.md) requires a trustworthy
+complete-answer learning signal before any successor fit.
 
 ## What the failures support
 
@@ -185,11 +188,11 @@ student training or full inherited-body policy replay has run.
 
 ## Execution decision
 
-Finish the original serial white-target fit/audit/qualification without source
-changes. A physical pass permits its already prescribed 708-stream language
-comparison. A failure preserves that rejection and does not authorize the
-blocked evaluator, extra epochs or an intermediate checkpoint substitution.
-Neither outcome automatically launches the new code.
+The original serial white-target comparison is complete and fails its physical
+prerequisite. Preserve all 115 bound sources and the first frozen review. Its
+708-stream language comparison remains inadmissible; no execution binding exists.
+Do not restart the completed fit, run extra epochs or substitute an intermediate
+checkpoint. No successor fit is admitted by this result.
 
 The first reward failed calibration; do not run its policy fit or model
 support preflight. Before registering any replacement whole-answer fit,

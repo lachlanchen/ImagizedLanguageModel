@@ -1,585 +1,201 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-16. Status: **active; usable visual language is unproved**.
+Updated: 2026-11-16. **Active; usable visual language remains unproved.**
 
-## Objective
+## Objective and deployment boundary
 
-Build a useful, independently running language model that reads visible writing
-and generates readable answer images on one RTX 4090. Begin with modern-Chinese
-questions, passages and book continuation. Typed prompts may be rendered into
-images at the input boundary. The model must interpret the prompt, write its
-answer, reread its own emitted pixels and decide when to stop.
+Build a useful, independently running language model that reads visible writing,
+understands the supplied prompt and generates readable answer images on one
+RTX 4090. Its causal history must include its own emitted pixels, and it must
+learn when to stop. Begin with modern-Chinese questions, passages and book
+continuation; this development stage does not complete the full objective.
 
 The full target includes simplified and traditional Chinese, historical forms,
-handwriting and shapes absent from Unicode. The eventual word-origin application
+handwriting and writing absent from Unicode. The eventual word-origin application
 accepts Chinese or English questions and produces explanatory writing with
-attested historical forms. Establish modern-Chinese language performance before
-expanding scripts, raw-page layouts, three-dimensional streams or audio.
+attested historical forms and provenance. Generalize the visual representation
+to other writing systems, including cuneiform, after useful modern-Chinese
+language is established. Raw pages, three-dimensional glyph streams, movies and
+audio remain later extensions of this language objective.
 
-Offline teachers, OCR, text corpora and inherited foundation weights are allowed
-for preparation and training. Disclose their contribution and cost. Deployed
-answers must come from the trained model: no live teacher, tokenizer, lexical
-output head, answer lookup, OCR or font renderer in its answer-generation path.
-Optional transcription may read the finished image without changing its pixels.
-Transferring inherited language capability and learning language from images
-alone are separate claims.
+Typed prompts may be rendered into images at the input boundary. Offline
+teachers, OCR, text corpora and inherited foundation weights are allowed for
+preparation and training; disclose their contribution and cost. Deployed answers
+must come from the trained model: no live teacher, tokenizer, lexical output
+head, answer lookup, OCR or font renderer in answer generation. Optional
+transcription may read a finished image without changing its pixels. Transferring
+inherited language capability and learning language from images alone are
+separate claims.
 
-## Direction check for every work unit
+## Current model decision
 
-The [whole-answer learning review](../references/whole_answer_learning_direction_20261116.md)
-separates learning conditional pixel associations from producing correct complete
-answers. A new training-only component samples complete answers, rereads actual
-emitted pixels and accumulates a leave-one-out policy gradient while retaining
-supervised learning as an anchor. Its seventeen CPU checks establish sampler,
-probability and gradient contracts; full-body execution and language improvement
-are unproved. The preregistered 64-output CPU calibration rejects its first
-image reward: an output with an uncertain frozen reading ranks above a known
-correct answer. Preserve the uncertainty and do not train that reward. A
-replacement needs calibrated training-only semantic supervision of actual
-written answers. The generic policy component is a conditional candidate,
-not a replacement run or a qualification result. Preserve the live white-target
-sources and serial owner, finish its fixed decision, and do not auto-launch a
-successor. Require a registered training-only support/resource preflight and
-real-output reward calibration before another fit; reject reward gains without
-complete language gains. Do not make another physical blank/ink score stand
-for the full goal.
+The [complete white-target comparison](../references/white_target_physical_result.md)
+is finished and fails its registered physical prerequisite. All 13,766 sources,
+41,298 retained updates, 6,108,741 target positions, five snapshots, the independent
+CPU audit, 124 conditional cases and 33 opaque boards/2,080 readings are complete.
+The first review was frozen before new owner/reference scoring. All seven
+readability groups pass, with 1,016/1,040 selected candidate forms credited, but
+false ink is **12/252** against a maximum of eleven and false blanks are **54**
+against a maximum of 37. The unchanged control gives 25 and 37. All seventeen
+additional false blanks occur in books. Exact source bitmaps fall from 4,609 to
+4,543 of 12,597; bitmap agreement is not a language score.
 
-The [selective training-only content verifier](../references/selective_visual_verifier_protocol_20261116.md)
-also fails its fixed 64-output calibration: 7/9 known-correct complete answers,
-0/9 readable wrong answers and 1/46 uncredited/uncertain outputs are accepted.
-Its 9,581-image inventory comes only from training pixels and stays outside
-deployment. Disjoint Hamming balls do not certify semantic correctness or
-human legibility. Preserve all frozen readings, the rejected reward and the
-source revision; do not repeat its completed calibration, launch its policy
-fit or tune its decoding radius.
-The generic policy helper now refuses an unspecified reward before model work.
-Seven geometric/sequence CPU controls and two new refusal checks are
-implementation evidence, not language improvement. Supplemental independent
-reading may add evidence but cannot replace the frozen pilot or repair its scores.
+The [public evidence](../references/evidence/white_target_physical_result_20261116.json)
+and [failure decision](../references/white_target_failure_decision.md) are the
+current authority. This actor is terminal and ineligible for its 708-stream
+language comparison. Do not create its execution binding, repeat its fit/audit/
+qualification/review, select an intermediate checkpoint, change thresholds or
+repair frozen readings. Preserve all failures, original controls, 18 uncertain
+readings, failed unfrozen entries and all 115 bound sources. Review used one model
+with prior development familiarity and no independent human adjudication.
 
-The [offline complete-image preference option](../references/image_preference_learning_direction_20261116.md)
-now has a separate pinned source preparation: all 10,735 public Chinese preference
-pairs are preserved and independently checked against Parquet. There are 10,716
-structurally eligible pairs; machine-derived semantic labels and image rendering
-remain unqualified. Only 1,787 complete pairs fit 128 code points, and none is
-truncated. DPO could replace a separately fitted scalar reward with fixed pair
-labels, but it does not remove the need to qualify those labels or actual output
-quality. No model call, optimizer update or preference fit is admitted. Keep the
-running comparison unchanged; require a registered body/replay/resource preflight
-and calibrated actual-output evidence before any preference fit.
+Whole deployed parameters are 7,553,448,370, including 7,522,463,984 inherited
+parameters and 5,005,760 trainables. The small trainable count does not establish
+a lightweight foundation. Fit peak allocation is 18.281 GiB; its 77,076.359 seconds
+and the complete model account do not establish matched-quality efficiency over
+a local LLM. Live ownership belongs only in the private handoff. All workers in
+this comparison have exited; an old status file never authorizes a restart.
 
-The [new-source raster inventory](../references/chinese_preference_raster_result_20261116.md)
-is complete and rejects the unchanged cell policy as a faithful importer for
-the full preference collection. Of 6,118 code points, 964 lack the selected font
-and four isolated renders clip; 10,047 pairs contain formatting collapsed to
-blank. The 556 conservative inventory candidates do not qualify a smaller
-replacement task. Preserve all source rows and register an explicit shaping and
-layout policy before any paired fit. This result concerns new source preparation,
-not the cause of the earlier actor failures. Do not repeat this completed inventory
-or change the running trial, source font, frozen readings or acceptance rules.
+## Next work: qualify complete-answer learning
 
-The [complete-page source support check](../references/shaped_preference_page_result_20261116.md)
-passes64fixed training-source fields with contextual shaping, authenticated
-fallback fonts, zero unknown glyphs/clipping and exact physical-tile round trips.
-The maximum is8,128patches; current-body support and efficient learning are not
-proved. RGB pixels are preserved, but the binary derivative erases a measured
-colored-symbol region and remains unqualified. Preserve the passed RGB check,
-failed initial region assertion and negative binary finding without rerunning
-the unchanged preflight. No full-corpus, semantic, binary or student fit is
-admitted; the original serial model comparison retains priority.
+Individual readable forms have repeatedly improved without establishing useful
+complete language. Another blank/nonblank margin or another unchanged fit using
+correct history is not the selected next intervention. Follow the
+[whole-answer direction](../references/whole_answer_learning_direction_20261116.md)
+and the current failure decision: qualify a training-only signal that connects
+language intent to the complete writing actually emitted.
 
-A [new evaluation-only source reservation](../references/drcd_confirmation_reservation_result_20261116.md)
-now freezes998paired DRCD test passages from377articles, with3,485questions and
-6,970verified human answer spans. All eligible groups surviving the declared
-known-source screen are retained; one overlapping article is quarantined. Raw
-source questions/references remain undisplayed, unrendered and unscored. This
-does not prove semantic or inherited-pretraining novelty. Exclude this pool from
-all training, reward/preference calibration and tuning. Require the original
-physical qualification/pilot and a separately committed confirmation execution
-before model use. Current gates, book and historical-form requirements remain
-unchanged; no usable-language claim follows from the reservation.
+Actual-pixel sampling and differentiable trajectory replay are implemented, with
+supervised learning retained as an anchor. CPU probability/gradient checks do not
+establish full-body execution or language benefit. Both tested image reward
+judges failed their fixed calibration and remain rejected. Do not run their
+policy fits, tune their radius or repair the frozen uncertain readings. A new
+judge must distinguish actual correct, readable wrong and ambiguous outputs;
+transcription must be blind to the question/reference and separate from semantic
+matching. Preserve uncertainty, duplication, spaces, caps and stopping. Do not
+use reused development outputs as fitting data.
 
-The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
-is promoted: 53/93/95-page reading/review/redline PDFs include both failed
-controls, their methods and native Figure 29. All 241 pages received layout
-overview and 38 affected pages detailed visual inspection. The native plate
-contains a chart with literal workbook, a table and all three original
-disagreement PNGs; all 332 earlier figure assets and 153 prior embedded image
-contents remain. The paper preserves the negative language verdict and the
-running trial's unmeasured quality. Publication does not qualify the model.
+The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
+is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
+eligible, but their machine-derived labels are not independently qualified.
+The old cell importer fails full-source fidelity. The 64-field shaped RGB support
+check passes, while its binary derivative erases a measured colored-symbol region.
+Neither result proves current-body support, semantic supervision or efficient
+student learning. Preserve these completed checks rather than repeating them or
+truncating the collection into an easier task.
 
-The complete-sequence comparison is finished and fails its registered pilot.
-All 732 image streams, 183 opaque boards and 96 visible book prefixes have been
-reviewed; readings were frozen before new mapping/reference scoring. The final
-model gives 7/32 strict proportional answers, 0/16 both-correct pairs, 14/32
-readable answers and no credited coherent long-book continuation. Its 7.578B
-whole deployed parameters do not establish the desired compact model.
+Before a successor fit, require a failure-specific, separately registered
+training-only support/gradient/resource preflight on a fresh clone. Bind the
+complete sources, one intervention, unchanged control, initialization, schedule,
+checkpoints, full evaluation, resource ceilings and action for either result.
+Check actual emitted-pixel feedback and complete-action probability replay,
+including genuine stop versus cap censoring. Reset all trial updates. Equal
+rewards or uniformly unreadable samples are a failed learning-signal result.
+No successor full fit is admitted by this goal text alone.
 
-- Use the [completed result](../references/visual_continuation_learning_result.md)
-  and [failure decision](../references/visual_continuation_failure_decision.md)
-  as the current evidence. Do not repeat the completed fit, generation, opaque
-  review, optimizer audit or unchanged earlier diagnoses.
-- The [joint-writer comparison](../references/joint_writer_physical_result.md)
-  is complete: all 41,298 updates, independent audit, 124 conditional cases,
-  33 opaque boards and 2,080 frozen candidate/control readings. The new head
-  gives 970/1,040 original frozen credits versus the point control's 599/1,040,
-  but development books 91/108 and training-fixed QA 90/101 fail the unchanged
-  90% per-group prerequisite. Stop this actor before autonomous evaluation;
-  its complete language is unmeasured. A later [pixel/blank-flag audit](../references/joint_writer_blank_flag_audit.md)
-  finds17review inconsistencies, including4creditedemptyimages; original credits
-  are retained with that limitation and are not corrected physical accuracy.
-  Before claiming a new physical pass, independently verify that every credited
-  output contains ink as well as satisfying the frozen visual review. Preserve
-  contradictory readings and disclose them; an ink check cannot establish language.
-  Preserve the fixed reader/context/
-  feedback/stop path, all snapshots and original verdict. Its 2,642,368 new
-  parameters do not establish a small whole model.
-- The [probability diagnosis](../references/joint_writer_blank_density_result.md)
-  is complete on all 124 cases and 12,597 positions. It finds 349 false blanks;
-  only sixteen prefer their source image. Only one of fourteen selected
-  development-book false blanks and no selected training-fixed-QA false blank
-  do so, rejecting the registered search-only decision rule. No blank-prefix
-  argmax inconsistency is observed. Four selected book source images are
-  themselves empty; keep whitespace separate without revising the old gate.
-- The [controlled gradient-reach change](../references/joint_writer_context_learning_decision.md)
-  trains continuation adapters and the initial query through complete-image
-  likelihood, with the completed head-only trial as its unchanged control.
-  The exact memory-bounded state-gradient implementation matches unsplit
-  autograd. The [real-source GPU preflight](../references/joint_context_preflight_result.md)
-  now passes all four cases at 17.795 GiB peak allocated VRAM, including both
-  complete 513-glyph books and all 131 trainable gradient comparisons. All
-  updates were reset. Preserve the original SIGTERM and its one recorded
-  recovery; do not repeat this completed check. The
-  [complete context-gradient comparison](../references/joint_context_learning_protocol.md)
-  retains the full source exposure and every original physical/language rule.
-  Its [complete result](../references/joint_context_physical_result.md) now fails
-  the physical prerequisite after all 41,298 updates, all 124 cases and 33 opaque
-  boards/2,080 frozen readings. Candidate book groups score 93/108, 95/108 and
-  92/108, below 90%; QA groups pass. The independent pixel audit finds 28 review
-  inconsistencies, including four candidate and two control credited empty images.
-  Preserve the readings and failed gate without repair. Complete language is
-  unmeasured; do not launch this actor's 708 autonomous streams. Source-mask
-  likelihood improves, but all-case false blanks increase 349 to 711 and book
-  false blanks 324 to 689 relative to unchanged head-only pixels. This rejects
-  the tested change as a sufficient repair, not visual language learning in
-  general. Its [bounded probability decision](../references/joint_context_failure_decision.md)
-  has now been executed on the actual learned-context actor; do not repeat it
-  or the old control's completed probability study.
-  The [post-qualification evaluator](../references/joint_context_language_execution.md)
-  is implemented with all 131 context/head tensors restored at every snapshot,
-  the complete 708-stream plan and an independent check that credited candidate
-  forms contain ink. Its CPU checks are implementation evidence. Both completed
-  joint actors failed qualification and remain unevaluated for autonomous
-  language. Preserve the evaluator for a future qualified actor with a separately
-  committed execution binding.
-  Keep prompt memory, native body, image feedback and stop parameters frozen.
-  Register sources, initialization, schedule, gradients, complete evaluation
-  and resource limits before neural execution. Do not restart a completed
-  recipe or launch the failed actor's blocked autonomous comparison.
-- The [learned-context probability probe](../references/joint_context_blank_modes_result.md)
-  is complete on all 124 cases and 12,597 positions. Source preference is only
-  4/93, 26/307 and 27/289 book false blanks, failing all prospective search-only
-  thresholds. Empty global modes are certified at 108 false blanks; all saved
-  physical argmax choices reproduce without disagreement. All 131 actual
-  tensors were restored and actual new context states recomputed. No optimizer
-  update, new glyph or autonomous answer was generated. Preserve all 78 bound
-  sources, original probabilities, review errors and failed decisions.
-  The next [bounded objective change](../references/global_glyph_ranking_decision.md)
-  adds whole-glyph source-versus-blank ranking to the existing likelihood for
-  nonempty training targets, preserving true-whitespace likelihood and the
-  original greedy decoder. Four CPU gradient checks pass. Its new
-  [real-source preflight](../references/global_glyph_ranking_preflight_result.md)
-  now passes both complete QA layouts and both 513-glyph books at 17.795 GiB.
-  All 131 QA gradients match unsplit autograd (maximum relative error 2.90e-6),
-  both actual book updates are reset, and frozen state stays unchanged. Preserve
-  all 64 bound sources and do not repeat this completed proof. The new
-  [complete ranking pipeline](../references/global_glyph_ranking_training_protocol.md)
-  is implemented and registered with 91 bound sources and 421 input hashes.
-  Fourteen CPU gradient/accounting/review checks pass. Its single serial
-  fit/audit/qualification comparison retains all 13,766 sources, 41,298 updates,
-  6,108,741 exposures and five fixed snapshots. Use the private handoff for
-  actual live ownership. The [completed ranking result](../references/global_glyph_ranking_physical_result.md)
-  now includes the full fit, independent audit, all 124 cases and 33 actually
-  reviewed boards/2,080 frozen readings. All seven readable groups pass:
-  1,002/1,040 selected candidate images, including development books 106/108.
-  False blanks fall from 711 to 37 over all 12,597 positions, but false ink
-  increases from 11 to 25 among 252 source-white positions. The physical gate
-  fails its unchanged whitespace condition. All blank flags agree with original
-  opaque pixels and no credited candidate is empty. Original unfrozen entry
-  corrections are preserved; frozen readings are not repaired. Review remains
-  model-based with prior familiarity and no independent human adjudication.
-  This actor is terminal and ineligible for autonomous language evaluation.
-  The [ranking-specific evaluator](../references/global_glyph_ranking_language_execution.md)
-  is now implemented with the unchanged 708-stream plan and actual 131-tensor
-  restoration, including restoration after inference freezing. Twenty-two CPU
-  checks pass. It reauthenticates the sealed review and independently recounts
-  complete source-whitespace arrays before neural import. This failed actor
-  remains inadmissible without creating evaluation outputs.
-  These checks use a CPU storage fixture for restoration, not the full inherited
-  body's neural computation. All five autonomous full-body restores, generation
-  and language remain unexecuted. Do not create this actor's post-gate execution
-  binding. Preserve the 91 bound sources unchanged; do not repeat its completed
-  fit, audit, qualification or review. The [ranked-whitespace diagnostic](../references/ranked_writer_whitespace_result.md)
-  is also complete on all 124 cases/12,597 positions with all actual 131 tensors.
-  Saved argmax choices reproduce exactly; source mean NLL drift is 9.154e-9.
-  The fixed blank-versus-emitted-image rule would fix only three spaces, leave
-  22 false-ink outputs and add one false blank. It fails both prospective cost
-  conditions; outputs and the original gate remain unchanged. Preserve all 101
-  bound sources and do not repeat this probe or run a decoding comparison from
-  its failed eligibility. The [next bounded learning decision](../references/white_target_ranking_decision.md)
-  adds white-target ranking using the first-nonzero upper bound while retaining
-  the current nonempty objective and greedy decoder. Its
-  [complete-source preflight](../references/white_target_preflight_result.md)
-  now passes all six cases at 17.795 GiB peak allocated VRAM. Both actual QA
-  layouts compare all 131 gradients with unsplit autograd (max relative2.900e-6,
-  max absolute4.172e-7). Both maximal513-glyph books and both complete314-glyph
-  mixed-white books take real optimizer steps; all four steps are reset.
-  Actual mixed-white targets are source index4,447 with two genuine blanks,
-  chosen by unchanged original qualification order. Nine CPU checks include
-  the white-branch gradients and exhaustive probability-bound checks. Frozen
-  body/feedback/stop/affines stay unchanged. Preserve all107 bound sources;
-  do not repeat this completed preflight. No preflight update or autonomous image
-  was carried forward. The [complete matched comparison](../references/white_target_training_protocol.md)
-  is now implemented and separately registered with 115 bound sources and
-  569 input hashes. Seventeen new accounting, checkpoint and physical-safeguard
-  checks pass. The single serial fit/audit/qualification owner has started;
-  use the private handoff for actual process identity and resources. Preserve
-  the original fresh initialization, full schedule/control, every snapshot and
-  all 115 bound sources during execution. The new ledger and CPU audit count
-  white-target loss separately and recount 68,808 source-white exposures.
-  Quality and language remain unmeasured. Retain all seven physical groups,
-  credited ink, at most 11/252 false-ink whitespace outputs and at most 37 false
-  blanks before any separately committed autonomous binding. Do not substitute
-  the old failed actor's evaluator or launch a duplicate worker after a timeout.
-  The [white-target evaluator](../references/white_target_language_execution.md)
-  is now implemented for the unchanged 708-stream plan. Thirty-four CPU checks
-  pass, including hash-authenticated restoration of all 131 real saved tensors
-  after inference freezing and independent complete false-blank/error recount.
-  An actual admission attempt against the running, unqualified actor refuses
-  before Torch import, output-directory creation or execution registration.
-  These are implementation checks; all five full-body autonomous restores,
-  generation and language remain unexecuted. No post-gate execution binding
-  exists. Preserve all 115 training sources while the original owner continues.
-  A separate [saved-score comparison](../references/ranked_glyph_score_gap_result.md)
-  is now complete on the terminal ranked actor's 124 cases/12,597 positions,
-  without a neural replay. Among 7,926 nonempty bitmap mismatches, source and
-  emitted-image preferences are 717 and 7,206, with three numerical ties.
-  All three book source-preference rules fail (51/466, 287/1,632, 298/1,627).
-  An independent scalar recount agrees. In measured scores, a source below an
-  exhibited alternative cannot be the highest-scoring image; source-directed
-  search alone does not explain these canonical mismatches. This does not
-  measure semantic correctness, alternative valid continuations, prefix logits
-  or autonomous language. A useful language model need not reproduce every
-  reference-book glyph. Keep the white-target fit and all original gates
-  unchanged. Conditional source-mode learning remains only a candidate for
-  later controlled testing if the current trial fails. Preserve the four
-  analysis sources and original arrays; do not repeat the completed calculation.
-- The [new saved-trajectory analysis](../references/visual_continuation_trajectory_result.md)
-  is complete. Final normal long-book outputs have 98.12% of tiles above clean
-  book ink's 99th percentile, with dense writing visible from the beginning.
-  All 416 first-step contrasts change state; this does not establish language
-  understanding. The [initial/final clean-history control](../references/continuation_clean_history_result.md)
-  is also complete, with both long cache checks passing. Final proportional
-  development QA reaches F1 .95 on 656/713 later supplied-history positions;
-  sampled training books reach it on only about 9%. Do not repeat these controls.
-  The selected replacement must address conditional writing without substituting
-  it for complete autonomous language.
-- Register one bounded change and an unchanged control before another fit.
-  Preserve the full corpus, complete answers, paired questions, erasures, long
-  books, earlier successes and whole-model resource accounting. More unchanged
-  epochs, a selected intermediate checkpoint or looser thresholds are not the
-  next experiment.
-- Require every mathematical or architectural proposal to name a testable
-  prediction, its control and an outcome that would reject it. Ordered visual
-  blocks remain a candidate representation, with language benefit unmeasured.
-- Update the manuscript and native figures from actual completed measurements.
-  The active reading/review/redline PDFs now include the completed continuation
-  and head-only failures, Figures 23--25 and the exact context-gradient methods.
-  Their [45/80/82-page build and visual-review receipt](../publication/ilm-nature/evidence/complete_continuation_article_build.json)
-  preserves the earlier evidence and distinguishes all-page layout overviews
-  from detailed checks. The [versioned local delivery](../publication/ilm-nature/evidence/complete_continuation_local_sync.json)
-  verifies copying while preserving the earlier package; cloud propagation and
-  Office vector export remain unverified. Publication work must not substitute for resolving the measured model
-  failure; the completed context-gradient actor's language remains unmeasured.
-  The subsequent [context-failure revision](../publication/ilm-nature/evidence/context_failure_article_build.json)
-  is now promoted: 48/84/86-page reading/review/redline PDFs include the completed
-  context failure, loss/output disconnection, probability bound and limited
-  ranking preflight. Figure 26 contains three native editable charts, their
-  literal workbooks, a table and eighteen original image instances. All 218
-  pages received layout overview and 29 affected pages detailed visual review;
-  the caption/footer overlap found in the first build is corrected. All 281
-  previous figure assets and all 150 prior embedded image contents remain.
-  Its [versioned local delivery](../publication/ilm-nature/evidence/context_failure_local_sync.json)
-  records source/destination hashes while preserving the previous package.
-  Those baseline PDFs are preserved. The subsequent
-  [ranking-results revision](../publication/ilm-nature/evidence/ranking_completed_article_build.json)
-  is now promoted: 50/88/90-page reading/review/cumulative-redline PDFs include the
-  completed ranking, whitespace diagnostic and reset white-target preflight.
-  Figure 27 retains fixed-order original source/control/candidate images, two
-  native charts with literal workbooks and a seven-group table. All 228 pages
-  received layout overview and 49 affected pages detailed visual inspection.
-  All 301 prior figure assets and 151 prior embedded image contents remain.
-  The paper distinguishes 1,002/1,040 recognizable shapes from exact source
-  bitmaps, which change only from 4,603 to 4,609 of 12,597, and the failed
-  25/252 whitespace count from unmeasured autonomous language. The separate
-  white-target quality comparison is still running and unmeasured. The
-  [separate delivery receipt](../publication/ilm-nature/evidence/ranking_completed_local_sync.json)
-  records the versioned local package and owned latest-PDF aliases. Office
-  export and cloud propagation remain unverified; publication is not model
-  acceptance.
-  The [saved-score revision](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
-  is now promoted: 52/91/92-page reading/review/cumulative-redline PDFs add
-  Figure 28, the complete seven-group score comparison and its interpretation
-  limits. Its native PowerPoint contains one chart with a literal workbook
-  and one table. All 235 pages received layout overview and 47 affected pages
-  detailed visual inspection; all 330 prior figure assets and 152 prior
-  embedded image contents remain. The recorded outer build exit of 143
-  followed three successful TeX children and completed authenticated artifacts;
-  subsequent inspection passed without another build. This adds a measured
-  canonical-density diagnosis, not a meaningful-language result. The original
-  white-target fit and all 115 bound sources remain unchanged. Its
-  [versioned local delivery](../publication/ilm-nature/evidence/glyph_score_gap_local_sync.json)
-  verifies 957 payload files, both owned latest-PDF copies and every file in
-  the preceding 934-file package. The package is a frozen source snapshot;
-  these subsequent goal-status edits do not alter it. Cloud propagation
-  remains unverified.
+An ordered visual volume remains a representation hypothesis. Its completed
+invertible CPU operator preserves order but does not establish compression,
+faster language learning or coherent generation. Any future block must predict
+future visible spans without receiving its own target block as context. Do not
+replace language learning with supplied-answer reconstruction.
 
-Keep the goal active through these decisions. Completion requires the language,
-independence, resource and written-form evidence specified below; neither a
-development pilot nor a manuscript revision closes it.
+## Acceptance criteria
 
-## What counts as success
+The unit of success is a **complete correct answer or coherent continuation**.
+Copying, glyph fidelity, canonical bitmaps, loss, stopping, cold execution and
+resource savings remain distinct claims.
 
-The unit of success is a **complete answer or coherent continuation**. Evaluate
-whether the writing is readable, answers the actual question, uses the supplied
-passage and ends naturally. Ask different questions about the same passage;
-retain both successes and failures. Copying, codec fidelity, individual correct
-glyphs, lower loss and a working inference executable are supporting diagnostics.
+1. Demonstrate complete modern-Chinese answers and coherent book continuation
+   on held-out works and passage groups, using actual emitted pixels as history.
+   Ask different questions about the same passage and retain question-, passage-
+   and prefix-erased controls. Preserve raw outputs, natural stops, caps and
+   uncertain readings; freeze review rules before generation and readings before
+   new reference scoring. Canonical mismatch alone does not establish falsity.
+2. Preserve the original complete-response pilot: at least 12/32 strict
+   proportional answers, 4/16 both-correct pairs, 24/32 readable answers and 4/12
+   coherent complete long books; all eight proportional and two fixed earlier
+   successes; each QA-erasure arm at most two exact answers and a dependence gap
+   of eight. Keep caps 128/640, emitted-image feedback and natural stopping.
+   A physical failure leaves autonomous language unmeasured, not zero.
+3. Confirm development improvements on untouched source groups. The reserved
+   DRCD pool has 998 paired passages, 3,485 questions and 6,970 human answer spans.
+   It remains evaluation-only, unrendered and unscored, excluded from fitting,
+   reward/preference calibration and tuning. Its known-source screen does not
+   prove semantic novelty or unknown inherited pretraining exposure. A separate
+   committed confirmation execution is required after a qualified development
+   comparison; this pool does not replace books or historical-form requirements.
+4. Reproduce training and standalone inference within one 24-GiB GPU. Account for
+   the entire model, inherited weights, preparation, teacher cost, wall time,
+   peak VRAM and latency. Compare useful matched quality against a named local
+   Qwen baseline before claiming efficiency or large-model parity. A prototype
+   attached to a 7.522B inherited body is not a compact foundation.
+5. Extend demonstrated language to held-out writing styles and attested
+   historical or unencoded forms. Evaluate explanation, historical stage,
+   glyph fidelity and provenance separately; label reconstructed forms.
+   Demonstrate Chinese/English word-origin questions as part of the full goal.
+6. Maintain Nature-style TeX/PDF and editable native PowerPoint figures from
+   actual measurements, preserving original images and negative results. These
+   artifacts support the evidence; publication does not qualify the model.
 
-1. Demonstrate complete modern-Chinese answers and book continuation on held-out
-   works and passage groups, using actual generated pixels as history. Include
-   question-erased, passage-erased and prefix-erased controls. Preserve raw images,
-   stops, caps and uncertain readings. Freeze scoring and output review rules
-   before generation; inspect outputs before opening new reference mappings.
-2. Confirm development improvements on untouched source groups. Keep the initial
-   checkpoint and existing successful cases as controls. Report uncertainty,
-   prior cohort familiarity and the absence of independent human adjudication
-   where applicable. Canonical mismatch alone does not establish semantic error.
-3. Reproduce training and standalone inference within one 24-GiB GPU. Report the
-   complete model, trainable parameters, inherited weights, data preparation,
-   teacher cost, wall time, peak VRAM and output latency. Establish useful matched
-   quality against a named local Qwen baseline before claiming greater efficiency
-   or large-model parity.
-4. Extend demonstrated language to held-out writing styles and attested historical
-   or unencoded forms. Check historical stage selection, factual explanation,
-   shape fidelity and provenance separately. Label reconstructed forms.
-5. Maintain the Nature-style TeX/PDF and editable PowerPoint figures from actual
-   measurements. Show raw outputs and complete-language results across fixed
-   checkpoints when those measurements exist. Unmeasured trials remain unmeasured.
+A development pilot alone does not complete this objective. Novelty, human-like
+reading and broad language capability require their own evidence.
 
-A restricted development pilot is not completion of this objective. A small
-trainable interface attached to a 7.522B inherited body is not a compact foundation
-model. The desired lightweight model must account for its entire deployed body.
+## Completed constraints and data
 
-## Current evidence
+The last [autonomous continuation result](../references/visual_continuation_learning_result.md)
+is 7/32 strict proportional answers, 0/16 both-correct pairs, 14/32 readable
+answers and no credited coherent complete long-book continuation. All 732 streams,
+183 boards and 96 normal-book prefixes are reviewed. Both the original scorer and
+independent four-QA-erasure audit reject the trial. Preserve all five checkpoints;
+the better intermediate result does not replace its prescribed final result.
 
-The [complete-sequence continuation trial](../references/visual_continuation_learning_result.md)
-covers 13,766 sources, 41,298 updates and 6,108,741 target glyph positions.
-Proportional exact/readable/pair counts at the five fixed checkpoints are
-4/5/0, 4/8/0, 6/13/0, 9/16/1 and 7/14/0, each over 32 questions and sixteen
-pairs. Every normal book arm has zero credited coherent complete continuations.
-Both the original scorer and the independent four-QA-erasure audit reject the
-final pilot. The [public evidence](../references/evidence/visual_continuation_learning_20261113.json)
-binds the full comparison. Review used one model reviewer with prior cohort
-familiarity and no independent human adjudication.
+Reuse the completed [clean-history](../references/continuation_clean_history_result.md),
+[trajectory](../references/visual_continuation_trajectory_result.md),
+[joint-writer](../references/joint_writer_physical_result.md),
+[context-gradient](../references/joint_context_physical_result.md),
+[nonempty-ranking](../references/global_glyph_ranking_physical_result.md),
+[whitespace](../references/ranked_writer_whitespace_result.md) and
+[saved-score](../references/ranked_glyph_score_gap_result.md) findings. Books fail
+with correct history, so a feedback-only explanation is insufficient. Earlier
+native-reader, teacher-state, question-assignment, recognition-loss, copying,
+writer, codec and released MIXAR controls are terminal; do not repeat unchanged
+fits, evaluator recovery or diagnoses. Preserve contradictory readings and
+original scores. The preceding full goal text is retained at Git revision
+`2dda87d203ce8e137a0c5450fa9efd9c28c1f302`; historical directions are indexed in
+[the decision archive](ilm-goal-decision-history.md).
 
-The earlier [frozen balanced-writer comparison](../references/balanced_writer_matched_result.md)
-is complete: all 216 streams, 54 opaque output boards, twelve book prefixes,
-frozen readings and independent scores. All 216 initial reader states match the
-parent bit-for-bit. The same current development cohort gives:
+Use the authenticated corpus and whole-work/passage-group splits. The original
+13,785 training sequences contain 2,576,239 target glyph positions; the complete
+matched continuation comparisons retain 13,766 eligible sequences. Exposures are
+not unique facts or foundation-scale pretraining. Add data only with a declared
+coverage or supervision reason, provenance and group splits. Preparation is not
+student-language evidence.
 
-| Image-output actor, proportional prompts | Exact QA / 32 | Both-correct pairs / 16 | Readable QA / 32 |
-| --- | ---: | ---: | ---: |
-| Original parent | 6 | 0 | 11 |
-| Direct-context flow writer | 7 | 1 | 14 |
-| Balanced deterministic writer | 6 | 0 | 16 |
-
-Balanced fixed-cell results are 2/32 exact, 1/16 pairs and 3/32 readable. No
-complete book continuation is credited. It retains the parent's exact answers
-but only six of eight union proportional successes, and fails its registered
-pilot. All four QA-erasure arms score zero exact; one proportional
-question-erased output is readable. These are reused development results,
-reviewed by one model reviewer with prior cohort familiarity.
-
-The [matched writing diagnosis](../references/balanced_writer_matched_diagnosis_result.md)
-finds all 64 selected training tiles pixel-exact. Development first tiles are
-0/32 exact with fixed cells and 4/32 with proportional prompts. These are bitmap
-comparisons, not character or language accuracies. Exact training writing has
-not solved complete-answer transfer.
-
-Other completed controls constrain the next decision:
-
-- Both [compact](../references/compact_visual_span_learning_result.md) and
-  [wider-writer](../references/compact_visual_span_full_rank_result.md) fits have
-  0/32 exact QA, 0/16 pairs and no credited complete book continuation at all
-  five fixed checkpoints. Both cover 13,785 training sequences and 8,172 updates.
-  Removing the measured writer rank restriction did not solve language.
-- The [direct-context flow](../references/glyph_context_motor_result.md) fails its
-  language pilot and loses an earlier exact answer. Its cold replay verifies
-  execution independence; it does not qualify language quality.
-- The [decoded-loss](../references/decoder_aware_motor_result.md) and
-  [full-sampler endpoint](../references/rollout_endpoint_motor_result.md) controls
-  fail their later-writing gates. Their complete-language trials were not run.
-  Do not assign them zero language scores or extend their failed fits.
-- The [native-reader diagnosis](../references/glyph_tail_native_reader_result.md)
-  has completed all 448 helper calls and 192 bit-exact adapted image prefills.
-  Adapted native proportional decoding gets 10/32 exact QA; source-adapter-zero
-  gets 13/32. This exposes retained access and layout sensitivity without
-  supplying independent ILM image answers. Its lexical decoder stays diagnostic.
-- Coverage, first-writing, saved-state and pixel-feedback audits are complete.
-  Reuse their authenticated artifacts. They do not identify a unique cause of
-  failed language, and repeating them is not the next model experiment.
-
-The active 52/91/92-page reading/review/redline PDFs include the completed
-continuation and writer failures, nonempty ranking, whitespace diagnosis,
-white-target preflight and saved source-versus-emitted score comparison, with
-native Figures 23--28. The
-[current build receipt](../publication/ilm-nature/evidence/glyph_score_gap_article_build.json)
-records all-page layout overview, 47 detailed page checks and unchanged earlier
-image contents. Previous PDFs and versioned local packages remain preserved.
-The [current local delivery](../publication/ilm-nature/evidence/glyph_score_gap_local_sync.json)
-contains the new PDFs and native figure in a verified 957-file snapshot,
-preserving the earlier 934-file package. Cloud propagation and Office
-application export remain unverified.
-The current white-target trial's quality and language remain unmeasured.
-Failure-driven model work retains priority over presentation-only revisions.
-
-## Next model decision
-
-The registered complete-sequence recipe is rejected. All five prescribed
-snapshots, 660 core streams and 72 long-book streams are complete, with unchanged
-scoring and the supplemental four-arm audit. Final fixed results are 2/32 exact,
-4/32 readable and 1/16 both-correct pairs. Final proportional results are 7/32,
-14/32 and 0/16. The three-quarter snapshot gives 9/32 exact but does not replace
-the registered final model. Six of eight required proportional successes and
-both fixed successes remain. Final erased QA exact counts are 0/1 for question/
-passage erasure in each layout; the proportional normal-minus-erased gap is six.
-
-All twelve final normal 128-cap books reach the cap. The final 640-cap candidate
-stops on eight of twelve normal prefixes, while the matched balanced parent
-stops on seven. Neither produces a readable coherent complete continuation.
-Record-level EOS labels are not proof of a natural whole-document ending.
-
-All 41,298 optimizer updates and 85 final Adam counters were audited. Cumulative
-training child execution is 75,209.326 seconds at 18.568 GiB peak allocated VRAM.
-Candidate evaluation costs 6,338.799 cumulative child seconds and parent long-book
-evaluation 609.626 seconds, preserving failed attempts. Preparation, admission
-queues, CPU/review work and inherited pretraining are separate. These values
-show one-GPU execution, not matched-quality efficiency over an LLM. Those old
-jobs remain terminal. The joint-writer pipelines have also finished and failed;
-do not restart completed training or evaluator recovery.
-
-The immediate model work follows the
-[failure decision](../references/visual_continuation_failure_decision.md).
-The joint-writer comparison from the final frozen reader is now also complete
-and fails its physical prerequisite, despite improved conditional forms. Use
-its frozen result and completed empty-image probability diagnosis as the control
-for the now-completed gradient-reach comparison. That comparison also fails its
-physical prerequisite; no complete-language result is available for either
-joint actor. The completed learned-context probability probe rejects the
-search-only rule. The next intervention follows
-[the whole-glyph ranking decision](../references/global_glyph_ranking_decision.md).
-Its real-source preflight is complete and the new complete-corpus fit has its
-own [exact registration](../references/evidence/global_glyph_ranking_registration_20261114.json).
-Observe its single serial owner through the private handoff; do not repeat
-the completed proof or open a second fit on an observation timeout. Neither CPU gradient checks
-nor a lower source-image loss justify autonomous evaluation or a language claim. Keep
-complete sources, unchanged controls and all full-language criteria. The
-completed initial/final clean-history comparison
-applies to this actual final reader; the older diagnosis remains a different
-actor. Do not repeat either study or treat supplied-history reconstruction as
-autonomous language. Keep the full objective active.
-
-## Training and evaluation contract
-
-### Ordered glyph-volume hypothesis
-
-Treat visible writing as an ordered `[T,C,H,W]` stream. Investigate learned
-compression into a shorter volume with explicit order and temporal detail;
-unweighted ink accumulation aliases different orders. The
-[volume analysis](../references/ordered_glyph_volume_research.md) implements an
-invertible reference and checks all 13,766 eligible targets. Exact reconstruction
-qualifies that operator only. Retaining all coefficients does not reduce their
-information content, and fewer temporal positions do not establish fewer bits
-or a model speedup.
-
-The language hypothesis combines ordered visual compression with conditional
-future-block prediction and a coherent image decoder. Evaluate predicted latent
-states and actual emitted-pixel histories, not only clean autoencoder inputs.
-Use completed earlier blocks for causal context; a block containing the target
-must not enter its own prefix. Question/passage dependence, complete answers,
-book continuation and natural stopping remain required.
-
-This hypothesis is a candidate for a failure-specific comparison after the
-current registered trial. Its CPU representation analysis does not alter that
-trial's model, data, schedule or evaluation, and does not authorize another
-concurrent GPU fit. Preserve the full language, independence, historical-form
-and whole-model efficiency objective. Do not replace it with a recovery task.
-
-### Existing data and prospective comparisons
-
-Use the existing authenticated corpus first: 13,785 full training sequences and
-2,576,239 target glyph positions, with whole-work and CMRC passage-group splits.
-See [visual sequence training](visual-sequence-training.md). Training-only teacher
-caches already exist. Add data when an observed coverage or supervision failure
-justifies it, keeping source provenance and group splits. Inherited pretraining
-exposure remains unknown.
-
-At the core, learn the distribution of the next visible span and its end decision
-from the prompt image and previous visible spans. During autonomous evaluation,
-those preceding spans must be the model's actual emitted pixels. Span size,
-continuous representation and sampling method are design choices to test; they
-must not replace language evaluation. A discrete image grid alone does not make
-language learning cheaper or establish human-like reading.
-
-Before each fit, record the observed failure, one intervention, unchanged
-control, complete-data exposure, fixed checkpoints, evaluation suite, resource
-budget and action for either outcome. Finish that comparison before opening
-another branch. Preserve the 216-stream current comparison and its original
-scoring. For the next complete-response pilot, preregister thresholds before
-training and retain the existing union successes: eight proportional and two
-fixed exact QA cases. The last balanced pilot required at least 10/32 exact,
-2/16 pairs and 16/32 readable proportional answers plus retention; it failed.
-Do not relax that completed rule or substitute earlier different-cohort counts.
-Set book-continuation criteria prospectively, and require untouched confirmation
-before a usability or generalization claim.
-
-Report copying, conditional writing, complete language, natural stopping,
-standalone execution and efficiency separately. Never repair a transcription
-from its reference, select favorable outputs or plot an unmeasured result as
-zero. Freeze whole-response readings and expose uncertain output regions.
+The current 53/93/95-page reading/review/redline PDFs include the two failed reward
+controls and native Figure 29. They predate the completed white-target result.
+The next bounded manuscript revision must add its actual tradeoff, complete
+conditional groups, resource scope and original output images with native
+editable figures. Preserve those baselines and prior figure assets. Local
+Nutstore delivery and cloud propagation are separate verification claims.
 
 ## Work-unit and resource rules
 
-At each work-unit start, read this file and
-`artifacts/glyph_tail_current_handoff.json`. Verify the latest completed result,
-live process identity and the one unresolved measurement being addressed.
-At the end, record the actual result, evidence paths and next decision. Keep
-live scheduling details in the private handoff and historical instructions in
-[the decision archive](ilm-goal-decision-history.md), not in this active brief.
+Read this goal and `artifacts/glyph_tail_current_handoff.json` at each model work
+unit. Verify actual results and live process identity before acting. Record the
+new evidence and next decision at the end. Keep private runtime details out of
+commits and historical result files out of live scheduling authority.
 
-Run at most one heavy project job, under `artifacts/ilm_gpu0.lock`. Recheck host
-RAM, swap, pressure, project processes, tmux and ports before launching. The
-existing full-reader admission requires 48 GiB available host RAM and 20 GiB
-free device memory, with 24 GiB host RAM at runtime and a 22-GiB allocated-VRAM
-ceiling. These host requirements are distinct from fitting one 24-GiB GPU.
-Respect stricter registered limits and the shared-workstation policy. Preserve
-other projects' services. Reuse shared weights and stop obsolete owned runtimes.
-An observation timeout does not authorize a duplicate worker.
+Run at most one heavy project job under `artifacts/ilm_gpu0.lock`. Before a heavy
+launch inspect host RAM, swap, pressure, owned processes, tmux and ports. The
+existing full-reader entry requires 48 GiB available host RAM and 20 GiB free
+GPU; retain 24 GiB host RAM, 48 GiB disk and at most 22 GiB allocated VRAM, or
+stricter registered ceilings. Use two CPU threads. Protect foreign projects,
+reuse shared weights and stop obsolete owned runtimes after evidence capture.
+An observation timeout or serial phase transition does not authorize a duplicate
+or restart.
 
-Prioritize the failure-driven model comparison and complete-language evaluation
-over extra dataset preparation, copying repairs, covers and manuscript polish.
-Update the paper when new interpretable model evidence exists. Commit and push
-related repository changes; keep private runtime data, credentials and unrelated
-work out of commits. Leave the session goal active until its required language,
-independence, resource and written-form capabilities are demonstrated.
+Prioritize the failure-driven model comparison and complete-language evidence
+over additional source preparation, copying repairs, covers or manuscript
+polish. Commit and push related source/document changes while preserving ignored
+private artifacts and unrelated work. Keep the session goal active until every
+language, independence, resource and written-form requirement is proved.

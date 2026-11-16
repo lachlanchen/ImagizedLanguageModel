@@ -2244,3 +2244,25 @@ data, evaluation, and deployment boundary fixed against a named token model.
   own data, causal controls, and quality gates.
 - Preserve negative runs, manifests, fonts, hashes, metrics, and inference
   receipts as scientific evidence.
+
+
+## 2026-11-16: white-target completion and active-brief consolidation
+
+The complete white-target comparison fails both physical blank conditions:
+12/252 false ink against a maximum of eleven and 54 false blanks against a
+maximum of 37. All seven readability groups pass; 1,016/1,040 selected candidate
+forms are credited. All 33 opaque boards/2,080 readings are frozen before
+owner/reference scoring, including 18 uncertain readings. The independent CPU
+export verifies all 124 cases/12,597 positions and unchanged nonempty-ranking
+control pixels.
+[Completed result](../references/white_target_physical_result.md),
+[failure decision](../references/white_target_failure_decision.md).
+
+The original fit/audit/qualification workers are terminal. No 708-stream language
+execution binding exists for this failed actor. The active engineering goal now
+consolidates the current objective, decision, full acceptance scope, resources
+and completed constraints. Its preceding full text is preserved in Git at
+`2dda87d203ce8e137a0c5450fa9efd9c28c1f302:docs/first-imagized-language-model-goal.md`
+(SHA-256 `de397ed963caebb0abbe9e970984f403ccf9a97146613c0445f950681274a57a`).
+Historical running/next-worker directions in that version are superseded.
+The full ILM objective remains active; this is not a language or efficiency pass.
