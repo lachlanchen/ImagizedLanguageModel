@@ -14,6 +14,7 @@ import json
 import os
 from pathlib import Path
 import resource
+import sys
 import time
 import unicodedata
 import urllib.request
@@ -177,7 +178,9 @@ def reserve(cache,output,fetch):
     report={'schema':'drcd-confirmation-reservation-result-v1','registration_sha256':sha(REGISTRATION),
         'source_repository':'DRCKnowledgeTeam/DRCD','source_revision':REVISION,'source_split':'test',
         'source_files_sha256':{p:sha(cache/p) for p in FILES},'source_files_git_blob_sha1':{p:v[1] for p,v in FILES.items()},
-        'license':'CC-BY-SA-3.0','totals':dict(totals),'known_source_counts':dict(known_counts),
+        'license':'CC-BY-SA-3.0','python_version':sys.version.split()[0],
+        'unicode_database_version':unicodedata.unidata_version,
+        'totals':dict(totals),'known_source_counts':dict(known_counts),
         'normalized_known_titles':len(titles),'normalized_known_documents':len(documents),'known64character_windows':len(windows),
         'article_exclusion_counts_overlapping':dict(article_reasons),'annotation_exclusion_counts':dict(annotation_reasons),
         'reserved_articles':len({r['article_id'] for r in accepted}),'reserved_paired_paragraphs':len(accepted),

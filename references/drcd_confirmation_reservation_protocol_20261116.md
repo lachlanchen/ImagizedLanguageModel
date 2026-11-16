@@ -58,7 +58,8 @@ Success here means a nonempty frozen evaluation-only pool and complete source,
 annotation, overlap and quarantine accounting. It is not a language result or
 a complete confirmation evaluation. Any missing source, invalid resource bound
 or empty pool stops preparation without relaxing the policy. A later evaluation
-must first register image preparation, unchanged review/scoring rules, limits,+cold execution, comparators and its decision. Require the current actor's actual
+must first register image preparation, unchanged review/scoring rules, limits,
+cold execution, comparators and its decision. Require the current actor's actual
 physical qualification and original autonomous pilot before invoking it on
 this confirmation source. Book, historical-form, independence and matched-cost
 requirements remain separate and unproved.
