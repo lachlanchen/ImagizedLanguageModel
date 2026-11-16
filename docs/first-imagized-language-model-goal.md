@@ -121,7 +121,8 @@ this completed preflight; do not repeat it.
 
 The [complete matched comparison is now registered](../references/evidence/trainable_visual_context_comparison_registration_20261116.json)
 with 599 bound inputs and sources. Follow its
-[full execution protocol](../references/trainable_visual_context_comparison_protocol_20261116.md)
+[full execution protocol](../references/trainable_visual_context_comparison_protocol_20261116.md),
+[model/code guide](trainable-visual-context.md)
 and private handoff: one serial owner runs treatment fit/audit/generation, then
 the matched frozen-context arm. Each uses all 13,785 sequences, 2,576,239 target
 positions, 2,380,620 saved teacher states and 8,172 updates. Retain all five fixed
