@@ -114,6 +114,10 @@ independent AdamW arithmetic and exact full-state resets. This preflight has
 no retained trained model. A pass permits preparation of a separately registered
 full-corpus comparison, checkpoint loader and complete autonomous evaluation;
 it does not itself authorize a full fit or establish language understanding.
+The [six real update/reset trials now pass](../references/trainable_visual_context_preflight_result_20261116.md):
+all 309 context tensors learn only in treatment, sampled AdamW update error is
+zero, all states reset exactly and peak allocated VRAM is 11.252 GiB. Preserve
+this completed preflight; do not repeat it. No full fit is registered yet.
 
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
