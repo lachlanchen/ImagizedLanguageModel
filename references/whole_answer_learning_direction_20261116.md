@@ -186,6 +186,13 @@ of a future callback remains the registered caller's responsibility. Nineteen
 policy-helper and seven selective-verifier CPU checks pass. No successor
 student training or full inherited-body policy replay has run.
 
+The next fixed qualification is the [isolated-cell vision reader](isolated_glyph_judge_protocol_20261116.md).
+It transcribes physical cells independently, retaining their count and order,
+then freezes those readings before a separate answer matcher uses reference
+strings. The registered cohort retains all 64 earlier outputs and every clean
+reference cell. No new student fit is admitted by its implementation; the fixed
+reader must first pass its conservative reused-output calibration.
+
 ## Execution decision
 
 The original serial white-target comparison is complete and fails its physical
