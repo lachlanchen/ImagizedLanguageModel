@@ -136,7 +136,8 @@ def audit(output: Path) -> dict:
             entry.update(measured)
             entry["status"] = "clipped" if measured["clipped"] else "empty_visible" if not mask.any() else "visible_in_cell"
             masks[char] = mask
-            collisions[measured["raster_sha256"]].append(entry["codepoint"])
+            if mask.any():
+                collisions[measured["raster_sha256"]].append(entry["codepoint"])
         glyphs[char] = entry
         if number % 64 == 0:
             check(started)
