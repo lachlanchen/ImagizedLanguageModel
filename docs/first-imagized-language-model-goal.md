@@ -78,6 +78,16 @@ layout policy before any paired fit. This result concerns new source preparation
 not the cause of the earlier actor failures. Do not repeat this completed inventory
 or change the running trial, source font, frozen readings or acceptance rules.
 
+The [complete-page source support check](../references/shaped_preference_page_result_20261116.md)
+passes64fixed training-source fields with contextual shaping, authenticated
+fallback fonts, zero unknown glyphs/clipping and exact physical-tile round trips.
+The maximum is8,128patches; current-body support and efficient learning are not
+proved. RGB pixels are preserved, but the binary derivative erases a measured
+colored-symbol region and remains unqualified. Preserve the passed RGB check,
+failed initial region assertion and negative binary finding without rerunning
+the unchanged preflight. No full-corpus, semantic, binary or student fit is
+admitted; the original serial model comparison retains priority.
+
 The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
 is promoted: 53/93/95-page reading/review/redline PDFs include both failed
 controls, their methods and native Figure 29. All 241 pages received layout
