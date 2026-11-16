@@ -56,14 +56,16 @@ and the complete model account do not establish matched-quality efficiency over
 a local LLM. Live ownership belongs only in the private handoff. All workers in
 this comparison have exited; an old status file never authorizes a restart.
 
-## Next work: qualify complete-answer learning
+## Next work: train the complete visual context
 
 Individual readable forms have repeatedly improved without establishing useful
-complete language. Another blank/nonblank margin or another unchanged fit using
-correct history is not the selected next intervention. Follow the
-[whole-answer direction](../references/whole_answer_learning_direction_20261116.md)
-and the current failure decision: qualify a training-only signal that connects
-language intent to the complete writing actually emitted.
+complete language. Another blank/nonblank margin or unchanged fit is not the
+selected next intervention. The compact full-rank writer completed its original
+fit with zero strict complete development answers while its 1.409B contextual
+body stayed frozen. The selected comparison makes that full context trainable,
+retaining the image encoder, writer, complete source corpus and six supervised
+objectives. Earlier V35 trained a smaller body and also failed; unfreezing alone
+does not establish the correct architecture or useful language.
 
 Actual-pixel sampling and differentiable trajectory replay are implemented, with
 supervised learning retained as an anchor. CPU probability/gradient checks do not
@@ -84,9 +86,9 @@ observed necessary-condition failures, not a student language result. Preserve
 both attempts, the partial freeze and all old readings. No third teacher run,
 prompt tuning or student fit follows. The next
 [supervision investigation](../references/training_glyph_supervision_direction_20261116.md)
-is a source/preprocessing audit followed by a prospectively bound training-only
-label-coverage check. A compact supervised verifier is a candidate after those
-checks; neither its training nor a successor actor fit is registered.
+was a source/preprocessing audit followed by a prospectively bound training-only
+label-coverage check. Neither a new verifier fit nor a successor actor fit is
+admitted by those checks.
 
 Those checks are now [complete](../references/training_glyph_label_result_20261116.md).
 All 7,255,223 training cells match source pixels, but eleven nonwhite aliases
@@ -94,13 +96,24 @@ and 34 invisible nonspace occurrences reject exact pointwise Unicode recovery.
 Preserve this negative condition; do not normalize it into a pass. The
 [preprocessing audit](../references/isolated_reader_preprocessing_audit_20261116.md)
 confirms actual image encodings and a small visual budget, without proving a
-causal repair. Both audits are terminal. The selected
-[fixed encoder metric calibration](../references/frozen_encoder_verifier_protocol_20261116.md)
-uses the existing frozen image encoder to replace the Hamming distance of the
-training-only physical-form verifier. It changes no weights, canonical output,
-reward or old gate. It is separately registered for all 64 preserved outputs
-and admits no student fit. Keep its single owner in the private handoff; do not
-resume the rejected general-vision reader or alter a frozen reading.
+causal repair. Both audits are terminal. The
+[fixed encoder metric calibration](../references/frozen_encoder_verifier_result_20261116.md)
+is also complete and rejected: six of nine known-correct answers are accepted,
+with zero of nine readable-wrong and zero of 46 uncertain answers accepted.
+It fails the unchanged all-correct and strict-separation conditions. No metric
+tuning, another general-vision reader run or policy fit follows this failure.
+
+The selected [full-context execution preflight](../references/trainable_visual_context_preflight_protocol_20261116.md)
+uses authentic training images and saved offline teacher states directly; it
+does not require a reward judge and uses none of the rejected rewards. Both
+matched arms have FP32 contextual parameters, the same full-rank writer and
+ordinary AdamW with host-resident moments. The single changed variable is
+whether all contextual parameters learn. Bind complete real QA, a 513-glyph book
+and the longest native-unit training record, actual parameter updates, sampled
+independent AdamW arithmetic and exact full-state resets. This preflight has
+no retained trained model. A pass permits preparation of a separately registered
+full-corpus comparison, checkpoint loader and complete autonomous evaluation;
+it does not itself authorize a full fit or establish language understanding.
 
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
@@ -115,10 +128,13 @@ Before a successor fit, require a failure-specific, separately registered
 training-only support/gradient/resource preflight on a fresh clone. Bind the
 complete sources, one intervention, unchanged control, initialization, schedule,
 checkpoints, full evaluation, resource ceilings and action for either result.
-Check actual emitted-pixel feedback and complete-action probability replay,
-including genuine stop versus cap censoring. Reset all trial updates. Equal
-rewards or uniformly unreadable samples are a failed learning-signal result.
-No successor full fit is admitted by this goal text alone.
+For policy-based proposals, check actual emitted-pixel feedback and complete-
+action probability replay, including genuine stop versus cap censoring; equal
+rewards or uniformly unreadable samples fail their learning-signal check.
+Direct supervised proposals instead verify complete source losses and actual
+updates without a reward. Reset all trial updates. Every eventual autonomous
+comparison must use emitted pixels and preserve natural stops and caps. No
+successor full fit is admitted by this goal text alone.
 
 An ordered visual volume remains a representation hypothesis. Its completed
 invertible CPU operator preserves order but does not establish compression,
@@ -165,7 +181,10 @@ resource savings remain distinct claims.
    artifacts support the evidence; publication does not qualify the model.
 
 A development pilot alone does not complete this objective. Novelty, human-like
-reading and broad language capability require their own evidence.
+reading and broad language capability require their own evidence. The requested
+1,000-fold reduction in compute and 1,000-fold performance improvement are
+unproved stretch targets, not an assumption or a result. First establish useful
+complete language and report matched-quality whole-model costs honestly.
 
 ## Completed constraints and data
 
