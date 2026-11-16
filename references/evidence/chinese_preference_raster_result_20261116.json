@@ -1,0 +1,212 @@
+{
+  "schema": "chinese-preference-raster-source-result-v1",
+  "audit_source_commit": "42869873391b09886699dcff30a0828f2e4fda3f",
+  "report": {
+    "schema": "chinese-preference-source-raster-audit-v1",
+    "registration_sha256": "d784885c85067e0f81e41df7e30a1561edf110b1d42dc801c782923895f6e3ac",
+    "script_sha256": "860aee218c6e9274fab085cbd7080996a279e655927f255077f4f41940a6a7f9",
+    "source_rows": 10735,
+    "font": {
+      "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+      "face": 2,
+      "name": [
+        "Noto Sans CJK SC",
+        "Regular"
+      ],
+      "pixels": 26,
+      "cell": [
+        32,
+        32
+      ],
+      "baseline_y": 26,
+      "pillow_version": "10.4.0",
+      "layout_engine": "Layout.RAQM"
+    },
+    "unique_codepoints": 6118,
+    "unique_status_counts": {
+      "legacy_blank": 8,
+      "visible_in_cell": 5142,
+      "clipped": 4,
+      "unsupported": 964
+    },
+    "occurrence_status_counts": {
+      "legacy_blank": 646421,
+      "visible_in_cell": 10302078,
+      "clipped": 10897,
+      "unsupported": 13281
+    },
+    "field_row_reasons": {
+      "system": {
+        "formatting_collapsed_to_blank": 76,
+        "cell_frame_touched": 1
+      },
+      "prompt": {
+        "formatting_collapsed_to_blank": 4590,
+        "cell_frame_touched": 2203,
+        "unsupported": 161,
+        "combining_mark_layout_unreviewed": 35,
+        "clipped": 87
+      },
+      "chosen": {
+        "formatting_collapsed_to_blank": 7715,
+        "unsupported": 318,
+        "cell_frame_touched": 2568,
+        "combining_mark_layout_unreviewed": 49,
+        "clipped": 172
+      },
+      "rejected": {
+        "formatting_collapsed_to_blank": 7386,
+        "cell_frame_touched": 2118,
+        "clipped": 134,
+        "unsupported": 365,
+        "combining_mark_layout_unreviewed": 68
+      }
+    },
+    "pair_row_reasons_overlapping": {
+      "formatting_collapsed_to_blank": 10047,
+      "cell_frame_touched": 3998,
+      "unsupported": 758,
+      "combining_mark_layout_unreviewed": 129,
+      "clipped": 287
+    },
+    "prospective_partition_inventory": {
+      "train": {
+        "conservative_inventory_candidates": 507,
+        "all_rows": 9640
+      },
+      "calibration": {
+        "conservative_inventory_candidates": 49,
+        "all_rows": 1095
+      }
+    },
+    "inventory_candidates_with_both_answers_within_codepoint_cap": {
+      "128": {
+        "calibration": 32,
+        "train": 320
+      },
+      "513": {
+        "train": 507,
+        "calibration": 49
+      },
+      "640": {
+        "train": 507,
+        "calibration": 49
+      }
+    },
+    "identical_nonblank_raster_groups": 22,
+    "glyph_inventory_sha256": "c82049d27897c3ae0210baf7cd129c9567aaffcdee0422872e1795f1e855d1b2",
+    "source_samples_sha256": "4b3d7faa767e321b71a53ea8dc4d9e6f1571741ed7a5aae706aa86a8cdbd2d28",
+    "full_source_strings_unchanged": true,
+    "all_registered_inputs_unchanged": true,
+    "source_rows_rendered_as_complete_images": 0,
+    "grapheme_or_contextual_shaping_qualified": false,
+    "semantic_labels_qualified": false,
+    "model_calls": 0,
+    "optimizer_updates": 0,
+    "preference_fit_admitted": false,
+    "elapsed_seconds": 10.443798158317804,
+    "peak_process_rss_gib": 0.6093597412109375,
+    "ceilings": {
+      "seconds": 120,
+      "peak_rss_gib": 1,
+      "entry_available_host_gib": 48,
+      "runtime_available_host_gib": 24
+    },
+    "candidate_count_is_not_rendering_or_language_qualification": true,
+    "goal_achieved": false
+  },
+  "report_sha256": "25e5b7bc470743db8d2d2cca3a0c899e3a7b3ee22a2edb35dc8ced6366d49edb",
+  "independent_recount": {
+    "schema": "chinese-preference-raster-inventory-recount-v1",
+    "all10735rows_and6118codepoint_frequencies_recounted": true,
+    "all_four_field_counts_match": true,
+    "registered_inputs_and_implementation_unchanged": true,
+    "detail_and_sample_hashes_match": true,
+    "unique_status_counts_recounted": true,
+    "clipped_forms": [
+      {
+        "codepoint": "U+007C",
+        "name": "VERTICAL LINE",
+        "occurrences": 10878,
+        "outside_ink_pixels_per_render": 1,
+        "font_bbox_anchor_ls": [
+          0,
+          -22,
+          7,
+          8
+        ],
+        "full_ink_bbox": [
+          15,
+          4,
+          15,
+          32
+        ]
+      },
+      {
+        "codepoint": "U+0300",
+        "name": "COMBINING GRAVE ACCENT",
+        "occurrences": 7,
+        "outside_ink_pixels_per_render": 23,
+        "font_bbox_anchor_ls": [
+          0,
+          -23,
+          39,
+          3
+        ],
+        "full_ink_bbox": [
+          4,
+          4,
+          41,
+          27
+        ]
+      },
+      {
+        "codepoint": "U+0301",
+        "name": "COMBINING ACUTE ACCENT",
+        "occurrences": 11,
+        "outside_ink_pixels_per_render": 20,
+        "font_bbox_anchor_ls": [
+          0,
+          -23,
+          39,
+          3
+        ],
+        "full_ink_bbox": [
+          4,
+          4,
+          40,
+          27
+        ]
+      },
+      {
+        "codepoint": "U+0304",
+        "name": "COMBINING MACRON",
+        "occurrences": 1,
+        "outside_ink_pixels_per_render": 2,
+        "font_bbox_anchor_ls": [
+          0,
+          -23,
+          30,
+          3
+        ],
+        "full_ink_bbox": [
+          4,
+          4,
+          32,
+          27
+        ]
+      }
+    ],
+    "sample_plate_actually_viewed": true,
+    "sample_review_is_labelled_source_font_evidence_not_blind_model_output_review": true,
+    "new_model_calls": 0,
+    "new_optimizer_updates": 0,
+    "elapsed_seconds": 1.0486168852075934,
+    "peak_process_rss_gib": 0.06874847412109375
+  },
+  "independent_recount_sha256": "32a875f199970cd2adcba48ab399eb9aadb11f696f520de24fab0a0fcca764f2",
+  "decision": "The unchanged legacy cell policy is not a faithful complete-source importer. Preserve all10735pairs and failures; qualify an explicit shaping/layout policy before any paired fit. Do not shrink training to556inventory candidates or repair original trial outputs. No semantic or language success is established.",
+  "all115running_trial_sources_unchanged": true,
+  "current_model_trial_changed": false,
+  "goal_achieved": false
+}

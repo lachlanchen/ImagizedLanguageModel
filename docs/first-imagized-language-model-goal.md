@@ -68,6 +68,16 @@ quality. No model call, optimizer update or preference fit is admitted. Keep the
 running comparison unchanged; require a registered body/replay/resource preflight
 and calibrated actual-output evidence before any preference fit.
 
+The [new-source raster inventory](../references/chinese_preference_raster_result_20261116.md)
+is complete and rejects the unchanged cell policy as a faithful importer for
+the full preference collection. Of 6,118 code points, 964 lack the selected font
+and four isolated renders clip; 10,047 pairs contain formatting collapsed to
+blank. The 556 conservative inventory candidates do not qualify a smaller
+replacement task. Preserve all source rows and register an explicit shaping and
+layout policy before any paired fit. This result concerns new source preparation,
+not the cause of the earlier actor failures. Do not repeat this completed inventory
+or change the running trial, source font, frozen readings or acceptance rules.
+
 The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
 is promoted: 53/93/95-page reading/review/redline PDFs include both failed
 controls, their methods and native Figure 29. All 241 pages received layout
