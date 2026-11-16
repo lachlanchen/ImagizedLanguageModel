@@ -1,12 +1,23 @@
 # ILM goal and decision history
 
-Updated: 2026-11-12. Entries retain their original dates.
+Updated: 2026-11-16. Entries retain their original dates.
 
 The active objective, acceptance criteria and experiment priority are in the
 [engineering goal](first-imagized-language-model-goal.md). This archive retains
 earlier specifications, results and superseded execution instructions verbatim.
 Headings such as “current verdict” below refer to their original checkpoint;
 they do not select the current model or authorize an additional GPU job.
+
+## 16 November: fixed isolated-cell teacher rejected
+
+Current follow-up, 16 November: the complete white-target comparison fails its
+physical prerequisite. Both earlier rewards and the later fixed isolated-cell
+teacher remain rejected. The latter recovery stops at 402/526 requests, but its
+registered one-sided analysis observes 203 failed distinct clean-reference forms
+among 273. Missing readings stay unknown. See the
+[reader result](../references/isolated_glyph_reader_result_20261116.md) and
+[next supervision investigation](../references/training_glyph_supervision_direction_20261116.md).
+No student fit follows; the engineering goal remains active and unachieved.
 
 ## 12 November: continuation-only full-body preflight passes
 

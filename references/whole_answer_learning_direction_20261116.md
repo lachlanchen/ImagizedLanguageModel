@@ -196,6 +196,14 @@ The first transcription action stopped after one request because the shared
 server was pinned to GPU1. It supplies no calibrated result. The distinct
 [GPU0 placement recovery](isolated_glyph_judge_gpu0_recovery_20261116.md)
 preserves that attempt and fixes serving placement before further requests.
+The recovery is now terminal at 402/526 saved readings after its fixed occupancy
+guard fires. The [one-sided result](isolated_glyph_reader_result_20261116.md)
+rejects the fixed reader: 203 distinct observed clean-reference forms fail,
+with 124 queries left unknown. This is not complete calibration or student
+improvement. Do not resume, retune or fit with this judge. The
+[next supervision investigation](training_glyph_supervision_direction_20261116.md)
+requires source/image-path verification before a compact verifier or student
+preflight can be registered.
 
 ## Execution decision
 

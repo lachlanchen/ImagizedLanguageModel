@@ -75,6 +75,19 @@ transcription must be blind to the question/reference and separate from semantic
 matching. Preserve uncertainty, duplication, spaces, caps and stopping. Do not
 use reused development outputs as fitting data.
 
+The [fixed isolated-cell teacher](../references/isolated_glyph_reader_result_20261116.md)
+is also rejected. Its recovery stops at 402/526 queries under the fixed resource
+guard; a registered one-sided analysis finds 203 failed distinct clean-reference
+mask/character pairs among 273 observed, repeated at 726 reference positions.
+The missing 124 queries remain unknown. This is incomplete calibration with
+observed necessary-condition failures, not a student language result. Preserve
+both attempts, the partial freeze and all old readings. No third teacher run,
+prompt tuning or student fit follows. The next
+[supervision investigation](../references/training_glyph_supervision_direction_20261116.md)
+is a source/preprocessing audit followed by a prospectively bound training-only
+label-coverage check. A compact supervised verifier is a candidate after those
+checks; neither its training nor a successor actor fit is registered.
+
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
 eligible, but their machine-derived labels are not independently qualified.
@@ -177,6 +190,9 @@ The next bounded manuscript revision must add its actual tradeoff, complete
 conditional groups, resource scope and original output images with native
 editable figures. Preserve those baselines and prior figure assets. Local
 Nutstore delivery and cloud propagation are separate verification claims.
+Also report the later isolated-reader necessary-condition failures separately
+from complete calibration, preserving missing readings and the two unchanged
+clean-reference examples. The current PDFs do not contain that new result.
 
 ## Work-unit and resource rules
 

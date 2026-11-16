@@ -1,0 +1,34 @@
+{
+  "selection": "First two distinct physical-mask/expected-character failures in full-cohort case order.",
+  "result_sha256": "ecea0eae8cd97bfb807a8282899c6b1bfcf7b62a4f2c7e8e714e645ad98773d6",
+  "samples": [
+    {
+      "file": "references/evidence/isolated_glyph_reader_samples/reference_01.png",
+      "sha256": "a0e76fbec464bb9e4a8993eda03f5d9f842b810fdcad246d4a57e859b0c5e0b4",
+      "source": "artifacts/isolated_glyph_judge_gpu0_v2/cells/5b49e6d62d95934130e68332e2edd0ade98e57337a21be536d8b57708eb343bc.png",
+      "cell": "5b49e6d62d95934130e68332e2edd0ade98e57337a21be536d8b57708eb343bc",
+      "expected": "实",
+      "reader": {
+        "text": "A",
+        "uncertain": false,
+        "accepted": true,
+        "reason": "teacher_single_cell_reading"
+      },
+      "image_kind": "clean reference, not student output"
+    },
+    {
+      "file": "references/evidence/isolated_glyph_reader_samples/reference_02.png",
+      "sha256": "d5271b13b23de13a9c014878e81f9a4ab1118b79cdd4355f0d3d1a7fc910d587",
+      "source": "artifacts/isolated_glyph_judge_gpu0_v2/cells/59066ba31de7a7b1eefe0ed589c1622f8da135bf0fad364879025ad020e9f3ba.png",
+      "cell": "59066ba31de7a7b1eefe0ed589c1622f8da135bf0fad364879025ad020e9f3ba",
+      "expected": "管",
+      "reader": {
+        "text": "π",
+        "uncertain": false,
+        "accepted": true,
+        "reason": "teacher_single_cell_reading"
+      },
+      "image_kind": "clean reference, not student output"
+    }
+  ]
+}
