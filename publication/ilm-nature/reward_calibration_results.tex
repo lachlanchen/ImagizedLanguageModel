@@ -35,5 +35,6 @@ makes a neural call or optimizer update. The proposed policy loss remains
 untrained; the generic helper now refuses an unspecified reward before model
 prefill or sampling. These refusals and CPU gradient checks establish
 implementation behavior, not a student language gain. Both calibrations lack
-independent human adjudication and leave the separate white-target trial
-unchanged and unmeasured.
+independent human adjudication and make no change to the separate white-target
+actor. Its completed physical failure is reported above; no autonomous language
+score is assigned to that actor.

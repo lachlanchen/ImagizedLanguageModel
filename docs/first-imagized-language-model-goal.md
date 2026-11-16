@@ -236,15 +236,18 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The current 53/93/95-page reading/review/redline PDFs include the two failed reward
-controls and native Figure 29. They predate the completed white-target result.
-The next bounded manuscript revision must add its actual tradeoff, complete
-conditional groups, resource scope and original output images with native
-editable figures. Preserve those baselines and prior figure assets. Local
-Nutstore delivery and cloud propagation are separate verification claims.
-Also report the later isolated-reader necessary-condition failures separately
-from complete calibration, preserving missing readings and the two unchanged
-clean-reference examples. The current PDFs do not contain that new result.
+The current 58/101/102-page reading/review/redline PDFs include the completed
+white-target failure, later isolated-reader falsification, source/preprocessing
+and label audits, rejected fixed encoder metric and six real full-context reset
+updates. Native Figures 30--31 retain original output/reference pixels and
+separate physical fidelity, reader qualification, update execution and language.
+All 337 prior figure assets and 154 prior embedded image contents remain.
+The [build evidence](../publication/ilm-nature/evidence/visual_context_evidence_article_build.json)
+records all 261 pages in layout overview and 43 detailed pages. Preserve the
+older 53/93/95-page baselines. The running full-context fit has no completed
+language result in this revision; add its actual final comparison only when
+generation and frozen review finish. Local Nutstore delivery and cloud
+propagation remain separate verification claims.
 
 ## Work-unit and resource rules
 

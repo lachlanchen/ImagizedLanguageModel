@@ -72,6 +72,18 @@ No model code, data, thresholds, review repairs, earlier numerical result,
 README redesign or scientific-success assertion is in scope. No response letter
 is required for this internal results update.
 
+Scope clarification before the final build: the saved-score subsection and
+Figure 28 caption also contain the superseded white-target running status.
+Change only those status sentences to identify their original measurement time
+and point to the now-completed result. Retain every numerical value, original
+figure asset and other prior caption text. This narrow exception to caption
+preservation avoids presenting historical status as the current conclusion.
+Detailed PDF review also finds the same obsolete running-status claim in the
+Introduction's contribution paragraph. Replace only its blank-target status
+and immediate successor description, preserving the introduction's existing
+motivation and all earlier measured results. Rebuild and review the final PDFs
+after this correction; earlier rendered versions are not the delivery baseline.
+
 ## Execution and verification
 
 Use one lightweight CPU publication owner, two threads, at least 48 GiB available
@@ -91,3 +103,27 @@ adjudication. Keep current PDF filenames stable. Commit and push the completed
 revision; a separate local Nutstore delivery may preserve all earlier packages
 and update only verified owned latest aliases. Cloud propagation is a separate
 unverified claim.
+
+## Completion record
+
+The reviewed revision is promoted in
+`publication/ilm-nature/evidence/visual_context_evidence_article_build.json`.
+Reading/review/redline lengths are 58/101/102 pages. All 261 final pages receive
+actual layout overview; 43 affected pages receive detailed review. Unchanged
+prior rendered pages are reused only after exact pixel equivalence checks.
+Both native slides are viewed completely. Figures 30--31 retain one native chart
+with a literal workbook, three native tables, four editable diagram nodes and
+eleven exact original PNG instances. All 337 prior figure assets and 154 prior
+embedded image contents remain.
+
+Two native export attempts total 15.851 seconds, including the corrected
+pre-promotion sample-label association. Three article drafts and two automated
+inspections total 107.078 seconds; two detailed-render passes total 5.402 seconds
+separately. PDF review catches and corrects the remaining historical running
+status in the introduction and saved-score caption before the final build.
+No model code, frozen reading, threshold or score changes. The live full-context
+fit keeps its original controller/worker, source bindings and schedule. This
+publication work makes zero model calls or optimizer updates. Office application
+review, independent human adjudication and cloud propagation remain unverified.
+Scientific commit/push and a separate local delivery follow this completion
+record; complete visual language remains unproved.

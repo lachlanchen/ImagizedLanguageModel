@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Mon Nov 16 05:19:22 2026
-%DIF ADD new.tex   Mon Nov 16 05:19:22 2026
+%DIF DEL old.tex   Tue Nov 17 00:31:44 2026
+%DIF ADD new.tex   Tue Nov 17 00:31:44 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -140,7 +140,7 @@
 
 {\sffamily\bfseries\DIFdelbegin %DIFDELCMD < \Large{Learning conditional language\\in continuous image space}%%%
 \DIFdelend \DIFaddbegin \Large{Conditional language generation\\in glyph image space}\DIFaddend \par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms \DIFdelbegin \DIFdel{outside standard }\DIFdelend \DIFaddbegin \DIFadd{that fixed }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventories need not preserve}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces }\DIFdelend \DIFaddbegin \DIFadd{study a model }\DIFaddend that \DIFdelbegin \DIFdel{read and emit glyph }\DIFdelend \DIFaddbegin \DIFadd{reads prompt }\DIFaddend images, \DIFdelbegin \DIFdel{with generated }\DIFdelend \DIFaddbegin \DIFadd{writes answer images and rereads emitted }\DIFaddend pixels\DIFdelbegin \DIFdel{supplying subsequent history}\DIFdelend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{Inherited }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language }\DIFdelend \DIFaddbegin \DIFadd{weights supply }\DIFaddend knowledge; \DIFdelbegin \DIFdel{tokenizers, }\DIFdelend lexical \DIFdelbegin \DIFdel{heads and }\DIFdelend \DIFaddbegin \DIFadd{decoding, }\DIFaddend font \DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{lookup and a live teacher }\DIFaddend are absent from \DIFdelbegin \DIFdel{the }\DIFdelend deployed \DIFdelbegin \DIFdel{answer path}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters }\DIFdelend \DIFaddbegin \DIFadd{Complete training on 13,766 Chinese sequences }\DIFaddend gives \DIFdelbegin \DIFdel{sixteen clear complete literal }\DIFdelend \DIFaddbegin \DIFadd{7/32 strict proportional }\DIFaddend answers\DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved questions}\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 both-correct pairs}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{with no credited coherent complete book continuation}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification. }\DIFdelend A \DIFdelbegin \DIFdel{separate compact experiment freezes a 1.409B contextual body and fits }\DIFdelend \DIFaddbegin \DIFadd{normalized joint writer trained through }\DIFaddend image \DIFdelbegin \DIFdel{interfaces on 13}\DIFdelend \DIFaddbegin \DIFadd{likelihood lowers loss while increasing empty outputs. Whole-glyph ranking yields 1}\DIFaddend ,\DIFdelbegin \DIFdel{785 complete Chinese book }\DIFdelend \DIFaddbegin \DIFadd{002/1,040 selected readable images }\DIFaddend and \DIFdelbegin \DIFdel{question--answer sequences}\DIFdelend \DIFaddbegin \DIFadd{37 false blanks among 12}\DIFaddend ,\DIFdelbegin \DIFdel{covering 2.576 million target glyph }\DIFdelend \DIFaddbegin \DIFadd{597 supplied-history }\DIFaddend positions\DIFdelbegin \DIFdel{. Two 8}\DIFdelend , \DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory. Both score zero complete exact QA answers out of 32 }\DIFdelend \DIFaddbegin \DIFadd{but produces ink }\DIFaddend at \DIFdelbegin \DIFdel{all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{25/252 genuinely blank targets}\DIFaddend . \DIFdelbegin \DIFdel{A wider writer removes a measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{Exact source bitmaps improve only from 4}\DIFaddend ,\DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{603 to 4,609. Saved scores favor the emitted alternative at 7,206/7,926 nonempty mismatches}\DIFaddend . \DIFdelbegin \DIFdel{The reader }\DIFdelend \DIFaddbegin \DIFadd{Two prospective training-reward calibrations }\DIFaddend also \DIFdelbegin \DIFdel{has }\DIFdelend \DIFaddbegin \DIFadd{fail on 64 frozen answer images, leaving }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{proposed whole-answer policy loss untrained}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases}\DIFdelend \DIFaddbegin \DIFadd{The current white-target quality comparison remains unmeasured}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution, physical writing }\DIFdelend \DIFaddbegin \DIFadd{Deployments retain over 7.5 billion parameters. Reviews involve prior cohort familiarity with no independent human adjudication; uncertain }\DIFaddend and \DIFdelbegin \DIFdel{conditional language success}\DIFdelend \DIFaddbegin \DIFadd{contradictory readings remain unchanged}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation}\DIFdelend \DIFaddbegin \DIFadd{Useful visual language}\DIFaddend , historical-form transfer and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality efficiency \DIFdelbegin \DIFdel{advantage }\DIFdelend remain unresolved.}\par\bigskip
+\section*{Abstract}{Written language includes forms \DIFdelbegin \DIFdel{outside standard }\DIFdelend \DIFaddbegin \DIFadd{that fixed }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventories need not preserve}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces }\DIFdelend \DIFaddbegin \DIFadd{study models }\DIFaddend that read \DIFdelbegin \DIFdel{and emit glyph }\DIFdelend \DIFaddbegin \DIFadd{prompt }\DIFaddend images, \DIFdelbegin \DIFdel{with generated }\DIFdelend \DIFaddbegin \DIFadd{write answer images and reread emitted }\DIFaddend pixels\DIFdelbegin \DIFdel{supplying subsequent history}\DIFdelend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{Inherited }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language }\DIFdelend \DIFaddbegin \DIFadd{weights supply }\DIFaddend knowledge; \DIFdelbegin \DIFdel{tokenizers, }\DIFdelend lexical \DIFdelbegin \DIFdel{heads and }\DIFdelend \DIFaddbegin \DIFadd{decoding, }\DIFaddend font \DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{lookup and a live teacher }\DIFaddend are absent from \DIFdelbegin \DIFdel{the }\DIFdelend deployed \DIFdelbegin \DIFdel{answer path}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters }\DIFdelend \DIFaddbegin \DIFadd{Complete training on 13,766 Chinese sequences }\DIFaddend gives \DIFdelbegin \DIFdel{sixteen clear complete literal answers among }\DIFdelend \DIFaddbegin \DIFadd{7/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved questions}\DIFdelend \DIFaddbegin \DIFadd{strict proportional answers}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven for a fixed-body control. Neither arm passes its qualification. A separate compact experiment freezes a 1.409B contextual body }\DIFdelend \DIFaddbegin \DIFadd{14/32 readable answers }\DIFaddend and \DIFdelbegin \DIFdel{fits image interfaces on 13}\DIFdelend \DIFaddbegin \DIFadd{0/16 both-correct pairs}\DIFaddend , \DIFdelbegin \DIFdel{785 }\DIFdelend \DIFaddbegin \DIFadd{with no credited coherent }\DIFaddend complete \DIFdelbegin \DIFdel{Chinese }\DIFdelend book \DIFdelbegin \DIFdel{and question--answer sequences}\DIFdelend \DIFaddbegin \DIFadd{continuation. Whole-glyph ranking improves readable forms but leaves incorrect writing. Subsequent blank-target training reduces false ink from 25 to 12 of 252 white targets while increasing false blanks from 37 to 54; both fixed limits fail. Exact source bitmaps decrease from 4}\DIFaddend ,\DIFdelbegin \DIFdel{covering 2.576 million target glyph }\DIFdelend \DIFaddbegin \DIFadd{609 to 4,543 of 12,597 supplied-history }\DIFaddend positions. \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{Proposed training judges also fail their prospective conditions. All 7}\DIFaddend ,\DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory}\DIFdelend \DIFaddbegin \DIFadd{255,223 training cells match source rendering, but physical aliases prevent unique pointwise Unicode labels}\DIFaddend . \DIFdelbegin \DIFdel{Both score zero complete exact QA answers out of 32 }\DIFdelend \DIFaddbegin \DIFadd{Six complete-context update/reset trials pass }\DIFaddend at \DIFdelbegin \DIFdel{all five checkpoints. A wider writer removes }\DIFdelend \DIFaddbegin \DIFadd{11.252 GiB allocated VRAM in }\DIFaddend a \DIFdelbegin \DIFdel{measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback, despite near-exact codec reconstruction}\DIFdelend \DIFaddbegin \DIFadd{1.465B-parameter inherited model}\DIFaddend ; \DIFdelbegin \DIFdel{additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{its full training comparison remains unevaluated}\DIFaddend . \DIFdelbegin \DIFdel{The reader also has a measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{Earlier evaluated deployments retain over 7.5 billion parameters}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify }\DIFdelend \DIFaddbegin \DIFadd{Reviews lack }\DIFaddend independent \DIFdelbegin \DIFdel{pixel-feedback execution for fixed cases. These results separate execution}\DIFdelend \DIFaddbegin \DIFadd{human adjudication}\DIFaddend , \DIFdelbegin \DIFdel{physical writing }\DIFdelend and \DIFdelbegin \DIFdel{conditional language success}\DIFdelend \DIFaddbegin \DIFadd{uncertain readings remain unchanged}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation}\DIFdelend \DIFaddbegin \DIFadd{Useful visual language}\DIFaddend , historical-form transfer and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality efficiency \DIFdelbegin \DIFdel{advantage }\DIFdelend remain unresolved.}\par\bigskip
 \DIFdelbegin \DIFdel{Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history.
@@ -228,7 +228,8 @@ all five saved checkpoints. A controlled wider writer and frozen-weight
 interventions then test the sources of failure. The contributions are the }\DIFdelend \DIFaddbegin \DIFadd{The study contributes an }\DIFaddend explicit emitted-pixel \DIFaddbegin \DIFadd{inference }\DIFaddend interface, controlled
 \DIFdelbegin \DIFdel{language tests, reproducible
 single-GPU execution and measured writer/reader restrictions. None establishes a generally
-usable visual language model or a from-scratch language learner. }\DIFdelend \DIFaddbegin \DIFadd{complete-language comparisons and evidence that supplied-history writing and
+usable visual language model or a from-scratch language learner.
+}\DIFdelend \DIFaddbegin \DIFadd{complete-language comparisons and evidence that supplied-history writing and
 one-GPU execution are insufficient qualifications. The failed full trial
 motivates a separate conditional joint glyph writer. That head-only fit is
 complete and fails its physical prerequisite; its original review credits
@@ -241,7 +242,9 @@ a separately registered whole-glyph ranking loss. That complete fit improves
 recognized nonempty forms but fails legitimate blank targets. Exact source-image
 reproduction changes little, and complete language remains unmeasured. A new
 objective for blank targets passes a reset full-body computational preflight;
-its complete quality comparison is running. The larger objective is useful
+its complete quality comparison fails both blank conditions. A subsequent
+full-context learning comparison is in progress, with language unmeasured.
+The larger objective is useful
 visual language across written forms, with historical and unencoded writing
 assessed on its own provenance, shape and meaning. That objective remains open.
 }\DIFaddend
@@ -2190,8 +2193,54 @@ prove the emitted image globally optimal, measure prefix logits or identify a
 unique learning failure. A useful language model need not reproduce every
 reference-book glyph, and valid alternative continuations can differ in bitmap.
 These counts diagnose canonical image fidelity, not semantic accuracy. The
-current white-target trial retains its complete original schedule and criteria;
-its quality and complete language remain unmeasured.
+white-target trial retained its complete original schedule and criteria; at this
+analysis time its quality was unmeasured. The following completed comparison
+reports its physical failure, while its autonomous language remains unmeasured.
+}
+
+\subsection*{\DIFadd{Blank-target ranking exposes a physical tradeoff}}
+
+\DIFadd{The complete blank-target comparison misses both fixed blank conditions
+(Fig.~\ref{fig:white-target-completed}). All 13,766 sources, 41,298 retained
+updates, 6,108,741 target exposures, five snapshots and the independent CPU
+completion audit are finished. Two discarded replay updates are counted
+separately. Every conditional state receives correct preceding source images;
+the following measurements are not autonomous language answers.
+}
+
+\DIFadd{All seven readability groups pass, with 1,016/1,040 candidate forms credited.
+The same control pixels receive 1,010/1,040 in this fresh frozen review, compared
+with their original 1,002/1,040. This review difference neither repairs the
+original score nor establishes a changed control model. A credit denotes a
+readable nonempty form, not the correct source character or a complete answer.
+}
+
+\DIFadd{Across every one of 12,597 positions, false ink at genuine whitespace decreases
+from 25 to 12 of 252 targets, still exceeding the fixed maximum of eleven.
+False blanks increase from 37 to 54, exceeding the maximum of 37. All seventeen
+additional blanks occur in books. Exact source bitmaps decrease from 4,609 to
+4,543. Development-book source-mask mean NLL falls from 0.0803382 to 0.0788611
+nat, while false blanks increase from three to nine and exact bitmaps decrease
+from 222 to 202. The loss change therefore improves some probability summaries
+without satisfying the physical prerequisite. It does not isolate a unique
+cause or turn bitmap matching into language accuracy.
+}
+
+\DIFadd{All 33 opaque boards and 2,080 candidate/control images were inspected before
+new reference scoring. Eighteen uncertain readings and the original failed
+unfrozen submissions remain preserved. No credited candidate image is physically
+empty. Review uses one model with prior cohort familiarity and no independent
+human adjudication. The actor is terminal and ineligible for its separate
+708-stream autonomous comparison; its complete language remains unmeasured.
+}
+
+\DIFadd{Fit execution takes 77,076.359\,s, including 1,461.393\,s of pressure waiting,
+at 18.281\,GiB peak allocated VRAM. CPU audit takes 15.474\,s at 1.170\,GiB peak
+RSS; qualification takes 382.482\,s at 18.035\,GiB allocated VRAM. These costs
+exclude inherited pretraining, preparation, earlier trials and visual review.
+The deployed model retains 7,553,448,370 parameters, including 7,522,463,984
+inherited parameters and 5,005,760 trainables. It establishes neither a compact
+foundation nor matched-quality efficiency.
 }
 
 \subsection*{\DIFadd{Candidate training rewards fail conservative calibration}}
@@ -2234,11 +2283,93 @@ makes a neural call or optimizer update. The proposed policy loss remains
 untrained; the generic helper now refuses an unspecified reward before model
 prefill or sampling. These refusals and CPU gradient checks establish
 implementation behavior, not a student language gain. Both calibrations lack
-independent human adjudication and leave the separate white-target trial
-unchanged and unmeasured.
+independent human adjudication and make no change to the separate white-target
+actor. Its completed physical failure is reported above; no autonomous language
+score is assigned to that actor.
 }
 
-%DIF >  Literal captions copied from their source inputs by build_reward_calibration_article.py.
+\subsection*{\DIFadd{Source fidelity does not qualify a training judge}}
+
+\DIFadd{The fixed local vision reader fails a necessary condition for a training
+reward (Fig.~\ref{fig:visual-context-evidence}a,b). Its GPU0 recovery preserves
+402/526 responses before the unchanged resource guard aborts the run. Among
+273 observed distinct nonwhite clean-reference masks, 202 are read as a wrong
+character and one is an abstention. These 203 failures repeat at 726 reference
+positions. The 124 unexecuted queries include 102 unobserved reference masks
+and 448 unknown reference occurrences. A prospectively bound one-sided analysis
+rejects the fixed setup without imputing those readings or presenting incomplete
+calibration as a full result. All old student readings remain unchanged.
+}
+
+\DIFadd{The first two distinct clean-reference failures in original case order are
+U+5B9E read as A and U+7BA1 read as U+03C0. These are teacher inputs, not student
+answers. The runtime declares 401/402 responses accepted; reported certainty
+does not establish accurate reading. A subsequent source/log audit confirms
+402 actual image encodings, each with 81 visual and 98 text positions. It finds
+a small visual budget but does not demonstrate that changing that budget would
+repair the fixed reader. No third teacher run or student policy fit follows.
+}
+
+\DIFadd{A complete training-source audit verifies exact renderer fidelity at all
+7,255,223 cells from 13,785 records, including 2,576,239 target positions.
+The 9,599 raw code points produce 9,581 physical masks. Eleven nonwhite alias
+groups and 34 invisible nonspace occurrences reject exact pointwise Unicode
+recovery from these tiles. This ambiguity concerns isolated physical identity;
+it neither explains all language failures nor precludes contextual reasoning.
+No development/reference prototype or reserved confirmation record is added.
+}
+
+\DIFadd{Replacing the training-only verifier's Hamming distance with the fixed image
+encoder's raw feature distance also fails its unchanged calibration. It accepts
+six of nine known-correct complete answers, none of nine readable strict
+mismatches and none of 46 uncertain answers. Known-readable AUC is 0.975309,
+but all-correct acceptance and strict reward separation fail. The 9,581 training
+prototypes, uncertainty and original outputs remain fixed. This component uses
+197 forward calls through an 18,486,528-parameter encoder, taking 8.771\,s of
+measured calibration time at 0.688\,GiB peak allocated VRAM. No reward tuning
+or policy training is justified by this result.
+}
+
+\subsection*{\DIFadd{Complete-context updates fit within one consumer GPU}}
+
+\DIFadd{Direct supervision from authentic source images and saved training-only teacher
+states does not require a qualified reward judge. The selected matched
+comparison retains the compact model's visual reader, full-rank flow writer and
+six source objectives, and changes whether all 1,409,410,048 inherited context
+parameters learn. The earlier frozen-context full-rank model produced no strict
+complete development answer. Earlier smaller trainable bodies also failed;
+unfreezing alone is not a demonstrated solution.
+}
+
+\DIFadd{The separately registered execution check now passes all six complete-record
+trials (Fig.~\ref{fig:visual-context-evidence}c). Each arm uses a complete
+513-glyph book, an 846-glyph QA record and the longest native-unit record,
+containing 1,042 glyphs and 961 native units. All 309 context tensors receive
+finite nonzero gradients and change in treatment; none receives a gradient or
+changes in the frozen control. Sampled updates from every active tensor match
+independent GPU PyTorch AdamW exactly. Every full model/objective state is reset
+byte exactly after each trial. No trained checkpoint is retained from this check.
+}
+
+\DIFadd{Measured execution takes 149.509\,s without pressure waiting, at 11.252\,GiB peak
+allocated VRAM and 42.713\,GiB minimum available host RAM. The deployed model has
+1,465,381,142 parameters; the training-only teacher projection adds 8,388,608.
+Host optimizer moments occupy 11,730,771,112 bytes in treatment. These actual
+update and storage measurements establish execution support, not language
+understanding or a matched-quality compute advantage.
+}
+
+\DIFadd{The full comparison is separately registered for all 13,785 sequences and
+8,172 updates per arm, five fixed snapshots, 792 image streams and two traced
+cold replays. It includes paired questions, erased controls, complete books,
+actual emitted-image feedback and natural stopping. Training is in progress;
+complete language and untouched generalization remain unmeasured. No rejected
+reward or reserved DRCD record enters fitting. This comparison transfers an
+inherited text-language foundation into visual interfaces; it does not establish
+language learning from images alone.
+}
+
+%DIF >  Literal captions copied from their source inputs by build_visual_context_evidence_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -2383,7 +2514,9 @@ the reference book. All 124 cases and 12,597 supplied-history positions remain;
 exact bitmaps, false blanks and false ink are separate categories. The independent
 scalar recount agrees without a model call or new output image. This reused-cohort
 calculation measures canonical image fidelity rather than semantic accuracy.
-Complete language and the separate white-target trial's quality remain unmeasured.}}
+At this analysis time the separate white-target trial's quality was unmeasured;
+its subsequent physical failure is reported in Fig.~\ref{fig:white-target-completed}.
+Autonomous language remains unmeasured for that failed actor.}}
 \label{fig:glyph-score-gaps}
 \end{figure*}
 \begin{figure*}[p]
@@ -2408,6 +2541,43 @@ This disagreement does not establish semantic error or authorize repairing
 earlier readings. Both prospective calibrations fail. There is no independent
 human adjudication, new model call, optimizer update or measured language gain.}}
 \label{fig:reward-calibration}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_30_white_target_completed.png}
+\caption{\DIFaddFL{\textbf{Blank-target ranking reduces false ink while increasing false blanks.}
+\textbf{a,} Complete counts over 12,597 supplied-history positions for the
+unchanged control and final white-target model. Fixed maxima are eleven false
+ink outputs among 252 true-white positions and 37 false blanks. Candidate counts
+12 and 54 fail both conditions. \textbf{b,} Every source group's position and
+error counts. All seventeen additional false blanks occur in books. Readable
+form credits do not require the source character or a complete correct answer.
+Fresh control review 1,010/1,040 does not replace its original 1,002/1,040.
+\textbf{c,} Original source/control/candidate tiles for the first occurrence of
+each fixed outcome rule in qualification order: residual false ink, a cleared
+white target and a newly introduced false blank. No tile or reading is repaired.
+These are conditional physical predictions, not autonomous answer excerpts.
+The actor fails qualification and its separate language comparison is not run.}}
+\label{fig:white-target-completed}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_31_visual_context_evidence.png}
+\caption{\DIFaddFL{\textbf{Source fidelity, reader qualification and context learning require separate evidence.}
+\textbf{a,} Complete source rendering passes, while isolated Unicode identity
+is ambiguous and both fixed reader candidates fail their own prerequisites.
+The general vision reader is rejected from observed necessary-condition
+failures; 124 queries, including 102 reference masks, remain unexecuted.
+\textbf{b,} The first two distinct preserved clean-reference failures, without
+image replacement. These are teacher inputs, not student answers.
+\textbf{c,} Native editable diagram of the complete-context comparison and
+measured support from all six real update/reset trials. Every one of 309 context
+tensors changes only in treatment; sampled AdamW update error is zero and all
+states reset exactly. The 11.252\,GiB peak is an execution measurement, not a
+language score. The complete matched training comparison is in progress.
+Inherited text pretraining remains a source of knowledge; neither independent
+from-scratch vision-language learning nor matched-quality efficiency is proved.}}
+\label{fig:visual-context-evidence}
 \end{figure*}
 
 
@@ -2496,16 +2666,19 @@ unique cause of failure. A source-directed search alone cannot explain these
 canonical mismatches. Conversely, forcing every reference-book glyph to be the
 mode would not establish useful language: another complete continuation may
 be valid. Conditional source-mode learning remains a candidate for later
-controlled testing if the current trial fails, alongside complete prompt-based
-language evaluation. The current white-target fit remains unchanged.
+controlled testing alongside complete prompt-based language evaluation. The
+subsequent white-target fit tests the separate blank condition.
 }
 
 \DIFadd{The fixed complete-density blank comparison fails its prospective repair rule.
 An added blank-target term instead trains a sufficient upper-bound condition
 for blank global optimality at genuinely empty sources. Its six-case reset
 full-body preflight passes at 17.795 GiB, including complete sources with actual
-whitespace; the separately registered full quality comparison remains unmeasured.
-The bound may be loose and stronger blank pressure may erase nonempty forms.
+whitespace. The complete registered comparison then reduces false ink from
+25 to 12, but produces 54 false blanks instead of 37 and fails both fixed limits
+(Fig.~\ref{fig:white-target-completed}). Every additional false blank occurs in
+books. The bound may be loose and stronger blank pressure may erase nonempty
+forms, but these observations do not identify a unique causal mechanism.
 The construction still has 5,005,760 trainables within 7,553,448,370 total
 parameters. Neither a normalized physical density, a readable mark nor a
 gradient check establishes a lightweight foundation or semantic understanding.
@@ -2519,9 +2692,26 @@ correct cells and accept an uncertain sequence (Fig.~\ref{fig:reward-calibration
 Neither result identifies which interpretation of the uncertain sequence is
 true. Both preserve the original review and reject their proposed training
 rewards. A training-only judge must account for complete emitted contents,
-order and stopping before its feedback can justify another student fit. The
+order and stopping before its feedback can justify a judge-derived policy fit. The
 finite prototype inventory remains outside deployment, and the proposed
 whole-answer policy component has not produced a language-learning result.
+The later fixed vision reader and frozen image-feature metric also fail their
+prospective requirements. Exact source rendering does not make isolated raw
+Unicode labels identifiable when distinct characters share pixels. These
+failures preserve uncertainty and do not show that all vision readers or
+contextual visual learning are impossible.
+}
+
+\DIFadd{Direct supervised learning from authentic images and saved training-only
+teacher states remains available without a qualified reward judge. The selected
+comparison lets the compact model's entire inherited contextual body learn,
+keeping its reader, writer, complete corpus and objectives matched. Six real
+update/reset trials establish gradients, optimizer arithmetic and memory
+support, not semantic understanding (Fig.~\ref{fig:visual-context-evidence}).
+Its 1,465,381,142-parameter deployment is smaller than the earlier actors but
+inherits text pretraining. Full training is in progress; no autonomous language
+gain or matched-quality efficiency is assigned to it. Earlier smaller trainable
+bodies failed, so trainability alone is not a sufficient explanation.
 }
 
 \DIFadd{Resource claims concern the entire deployed system. The evaluated full
@@ -3827,7 +4017,7 @@ minimum available host RAM. No preflight weight or optimizer update enters
 the later comparison.
 }
 
-\DIFadd{The complete matched comparison is separately registered and in progress.
+\DIFadd{The complete matched comparison was separately registered and is now finished.
 It preserves all 13,766 sources, 41,298 updates, 6,108,741 target exposures,
 five fixed snapshots, original fresh initialization, optimizer schedule and
 saved ranked-control pixels. The ledger and independent source audit count
@@ -3837,7 +4027,12 @@ outputs among 252 true-white positions and at most 37 all-case false blanks
 must pass before a separate autonomous execution binding. The unchanged
 708-stream plan retains actual emitted-pixel feedback, paired questions,
 erasures, natural stopping, earlier successes and complete long books.
-No quality or complete-language result is assigned to the running fit.
+All original source visits, exposures, five snapshots, independent CPU audit,
+124 cases and 33 opaque boards are complete. The measured 12 false ink and
+54 false blanks fail both fixed conditions (Fig.~\ref{fig:white-target-completed}).
+The separate autonomous binding is not created and complete language remains
+unmeasured for this failed actor. No threshold, intermediate checkpoint or frozen
+reading is changed to recover eligibility.
 }
 
 \subsection*{\DIFadd{Comparing saved source and emitted-image scores}}
@@ -3934,6 +4129,146 @@ exhaustive eight-bit corruption of a physical fixture; nineteen policy-helper
 controls cover probability replay, expected-gradient accounting and refusal of
 an implicit reward. None substitutes for student learning, a fresh validation
 cohort or independent human review.
+}
+
+\subsection*{\DIFadd{Later source and reader qualification}}
+
+\DIFadd{The isolated-cell reader is the fixed local Qwen3.5-9B Q8 setup, with no language
+context, prompt tuning or corrected glyph substitution. Both attempts remain
+preserved: the initial shared-server placement failure completes one request in
+12.559\,s; the separately registered GPU0 recovery completes 402 requests in
+260.087\,s before its fixed foreign-device occupancy guard aborts. A GPU1
+occupancy increase does not show that the UUID-pinned teacher used that device.
+Its owned temporary server exits and GPU0 returns to its prior occupancy.
+There are 403 completed requests across attempts and zero student updates.
+The aborted client's final peak RSS and minimum host RAM are not retained;
+the later CPU analyzer's 0.609\,GiB RSS is not substituted for those costs.
+}
+
+\DIFadd{Request hashes and the partial reading freeze precede new reference scoring.
+The one-sided criterion requires every clean reference to be correctly read;
+observed violations can reject it despite missing responses. Preserve missing
+observations and all existing uncertainty. The later source audit uses saved
+server logs and pinned upstream source: 402 actual image encodings each produce
+81 vision positions, with 98 text positions, for 179 total. The 288-square input
+is already aligned to the encoder's 32-pixel effective stride. Pinned runtime
+argument handling omits this model family from an image-minimum branch used by
+several earlier Qwen families. This source difference is not a causal experiment.
+The stripped installed binary does not establish a reproducible release build.
+}
+
+\DIFadd{The full label audit authenticates all original source groups, boundaries,
+pixel shards and alignments. It rerenders the original training strings with
+the original Noto configuration and compares every binary cell exactly. Unique
+physical masks retain their complete raw code-point sets and frequencies;
+nonwhite aliases are not normalized away. The 34 invisible nonspace occurrences
+are U+200B. The audit takes 31.966\,s at 0.208\,GiB peak RSS with no neural call
+or optimizer update. Renderer fidelity, pointwise label identifiability and
+language semantics remain distinct assertions.
+}
+
+\DIFadd{The later fixed-metric calibration uses only the original balanced image
+encoder, with 4,096-dimensional raw features, no new normalization, projection
+or fit. It encodes all 9,581 training-source prototypes and 297 stopped-output
+cells in batches of 64, padding only the final batch. Forward arithmetic is
+FP32; distances are direct FP64 Euclidean distances. For prototype $i$, let
+$\delta_i$ be its nearest other prototype distance. Accept a query only if
+twice its nearest distance is strictly below $\delta_i$; otherwise abstain.
+Disjoint feature balls give unique bounded-feature-corruption decoding, not
+guaranteed visual legibility. The unchanged complete-answer score preserves
+order, duplicates, spaces, caps and uncertainty. All 64 final QA outputs and
+their frozen labels remain. The fixed feature map fails; no layer, checkpoint
+or radius is retuned. Whole-action time is 14.980\,s and peak RSS 1.065\,GiB.
+}
+
+\subsection*{\DIFadd{Trainable visual context and host-moment optimization}}
+
+\DIFadd{Let $X_t$ denote a complete visible span. The frozen glyph codec $C$ and visual
+encoder $E_\phi$ produce continuous updates, and the causal body $F_\theta$
+provides the state predicting the next visible span:
+}\begin{equation}
+ \begin{aligned}
+ z_t&=C(X_t),\qquad u_t=E_\phi(z_t),\\
+ h_t&=F_\theta(u_1,\ldots,u_t).
+ \end{aligned}
+ \label{eq:trainable-visual-context}
+\end{equation}
+\DIFadd{The next span's length includes a zero-length terminal. Its image writer uses
+the existing conditional flow objective with 768-dimensional glyph latents and
+a 1,024-wide full-rank velocity path. The next target is not provided as its
+own predicting state's context. Retain all six equally weighted losses:
+source-feedback relative MSE, update-count cross entropy, span-boundary binary
+cross entropy, next-span length cross entropy, image-flow regression and
+cosine teacher-state alignment. Source native vectors and saved teacher states
+are offline training supervision only. The lexical input table and lexical
+output head are absent from the deployed graph.
+}
+
+\DIFadd{Both matched arms use FP32 parameters, BF16 forward autocast and contextual
+gradient checkpointing. The control freezes $\theta$ but retains gradients to
+the image encoder through that body; treatment learns all contextual weights.
+Use ordinary AdamW with coefficients $(0.9,0.999)$, epsilon $10^{-8}$, weight
+decay 0.01 and global gradient-norm cap one. Image heads and the training-only
+projection use learning rate $2\times10^{-4}$; treatment context uses
+$2\times10^{-5}$. Its moments stay in host RAM and parameter-sized slices move
+to the GPU for the ordinary update:
+}\begin{equation}
+ \begin{aligned}
+ m_k&=\beta_1m_{k-1}+(1-\beta_1)g_k,\\
+ v_k&=\beta_2v_{k-1}+(1-\beta_2)g_k^2,\\
+ w_k&=(1-\eta\lambda)w_{k-1}
+ -\eta\,\frac{m_k/(1-\beta_1^k)}{\sqrt{v_k/(1-\beta_2^k)}+\epsilon}.
+ \end{aligned}
+ \label{eq:host-moment-adamw}
+\end{equation}
+\DIFadd{This changes memory placement, not learning mathematics. Chunks have at most
+16,777,216 elements. CPU tests compare multiple steps and restored optimizer
+state with PyTorch AdamW. The real GPU check additionally compares up to
+seventeen evenly spaced entries per active tensor using actual clipped
+gradients, at relative tolerance $10^{-6}$ and absolute tolerance $10^{-7}$.
+It does not independently derive every full-model gradient.
+}
+
+\DIFadd{The execution check selects the first original QA record, first complete
+513-glyph book and longest native-unit training record, breaking ties by corpus
+order. Both arms start with identical six losses and random states. Actual
+updates change every context tensor only in treatment, and every active tensor
+has one Adam counter and host moment pair. Complete parameters, persistent
+buffers and the training projection reset to their identical initial byte
+hashes after each trial. The codec stays frozen; the source archive remains
+inherited pretraining. Lower supplied-history loss is not a language score.
+}
+
+\DIFadd{The subsequent full comparison uses one epoch of all 108 original training
+shards, padded native-unit budget 1,024 and seed 202611152. Each arm contains
+13,785 records, 2,576,239 target glyph positions, 2,380,620 teacher-state targets
+and 8,172 updates. Save initialization and quarter-shard snapshots at updates
+0, 1,956, 4,049, 6,152 and 8,172; no intermediate replaces the final model.
+The learned-context checkpoint contains all FP32 context tensors and image
+heads; the frozen control reuses its authenticated original body. A byte-exact
+full-state snapshot/restore check precedes each fit. A CPU completion audit
+reconstructs source order, exposures, final counters, moment sizes and complete
+final deployment tensors; it is not a replay of the full optimization trajectory.
+}
+
+\DIFadd{Initial/final snapshots generate all 120 fixed-cell inputs and intermediate
+snapshots all 44 normal inputs at cap 128. The final models also generate all
+24 normal/erased book streams at cap 640: 396 streams per arm. Use eight flow
+steps and seed 202611153. Every predicted span is decoded and reread as actual
+pixels. Length zero is a natural stop; a cap is censored. Freeze all literal
+readings, uncertainty and normal-book coherence before new reference scoring.
+The two traced fresh-process final book-prefix replays are separate execution
+checks. Reserved DRCD confirmation records remain unused. This stage does not
+measure proportional pages, historical forms or all earlier-success retention.
+}
+
+\DIFadd{Only one serial GPU0 owner is allowed. Full-fit admission requires 48\,GiB
+available host RAM and 20\,GiB free GPU memory, retaining 24\,GiB host RAM and
+at most 22\,GiB allocated VRAM. Each arm has an 86,400\,s fit ceiling, at most
+1,800\,s pressure waiting and at least 48\,GiB free disk. Use two CPU threads.
+No automatic retry, threshold relaxation, reference repair or unchanged extra
+epoch follows failure. Full trained language and matched-quality efficiency
+are unmeasured at this revision.
 }
 
 

@@ -98,7 +98,9 @@ a compact foundation nor matched-quality efficiency over a local LLM.
 
 The [failure decision](white_target_failure_decision.md) stops this actor before
 its 708-stream autonomous comparison. Language quality remains unmeasured.
-The existing Nature-style reading/review/redline PDFs predate this result and
-retain the preceding failures and running-status statements. Their next bounded
-revision must add this completed tradeoff with original output images and native
-editable figures, preserving the baseline PDFs and earlier evidence.
+The current Nature-style reading/review/redline PDFs now include this completed
+tradeoff and native Figure 30, with original source/control/candidate tiles and
+all earlier evidence preserved. The previous PDFs remain baseline artifacts.
+The [revision receipt](../publication/ilm-nature/evidence/visual_context_evidence_article_build.json)
+separates this physical failure from the subsequently registered full-context
+fit, whose complete language remains unmeasured.

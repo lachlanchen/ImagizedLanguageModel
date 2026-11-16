@@ -1,0 +1,72 @@
+\subsection*{Source fidelity does not qualify a training judge}
+
+The fixed local vision reader fails a necessary condition for a training
+reward (Fig.~\ref{fig:visual-context-evidence}a,b). Its GPU0 recovery preserves
+402/526 responses before the unchanged resource guard aborts the run. Among
+273 observed distinct nonwhite clean-reference masks, 202 are read as a wrong
+character and one is an abstention. These 203 failures repeat at 726 reference
+positions. The 124 unexecuted queries include 102 unobserved reference masks
+and 448 unknown reference occurrences. A prospectively bound one-sided analysis
+rejects the fixed setup without imputing those readings or presenting incomplete
+calibration as a full result. All old student readings remain unchanged.
+
+The first two distinct clean-reference failures in original case order are
+U+5B9E read as A and U+7BA1 read as U+03C0. These are teacher inputs, not student
+answers. The runtime declares 401/402 responses accepted; reported certainty
+does not establish accurate reading. A subsequent source/log audit confirms
+402 actual image encodings, each with 81 visual and 98 text positions. It finds
+a small visual budget but does not demonstrate that changing that budget would
+repair the fixed reader. No third teacher run or student policy fit follows.
+
+A complete training-source audit verifies exact renderer fidelity at all
+7,255,223 cells from 13,785 records, including 2,576,239 target positions.
+The 9,599 raw code points produce 9,581 physical masks. Eleven nonwhite alias
+groups and 34 invisible nonspace occurrences reject exact pointwise Unicode
+recovery from these tiles. This ambiguity concerns isolated physical identity;
+it neither explains all language failures nor precludes contextual reasoning.
+No development/reference prototype or reserved confirmation record is added.
+
+Replacing the training-only verifier's Hamming distance with the fixed image
+encoder's raw feature distance also fails its unchanged calibration. It accepts
+six of nine known-correct complete answers, none of nine readable strict
+mismatches and none of 46 uncertain answers. Known-readable AUC is 0.975309,
+but all-correct acceptance and strict reward separation fail. The 9,581 training
+prototypes, uncertainty and original outputs remain fixed. This component uses
+197 forward calls through an 18,486,528-parameter encoder, taking 8.771\,s of
+measured calibration time at 0.688\,GiB peak allocated VRAM. No reward tuning
+or policy training is justified by this result.
+
+\subsection*{Complete-context updates fit within one consumer GPU}
+
+Direct supervision from authentic source images and saved training-only teacher
+states does not require a qualified reward judge. The selected matched
+comparison retains the compact model's visual reader, full-rank flow writer and
+six source objectives, and changes whether all 1,409,410,048 inherited context
+parameters learn. The earlier frozen-context full-rank model produced no strict
+complete development answer. Earlier smaller trainable bodies also failed;
+unfreezing alone is not a demonstrated solution.
+
+The separately registered execution check now passes all six complete-record
+trials (Fig.~\ref{fig:visual-context-evidence}c). Each arm uses a complete
+513-glyph book, an 846-glyph QA record and the longest native-unit record,
+containing 1,042 glyphs and 961 native units. All 309 context tensors receive
+finite nonzero gradients and change in treatment; none receives a gradient or
+changes in the frozen control. Sampled updates from every active tensor match
+independent GPU PyTorch AdamW exactly. Every full model/objective state is reset
+byte exactly after each trial. No trained checkpoint is retained from this check.
+
+Measured execution takes 149.509\,s without pressure waiting, at 11.252\,GiB peak
+allocated VRAM and 42.713\,GiB minimum available host RAM. The deployed model has
+1,465,381,142 parameters; the training-only teacher projection adds 8,388,608.
+Host optimizer moments occupy 11,730,771,112 bytes in treatment. These actual
+update and storage measurements establish execution support, not language
+understanding or a matched-quality compute advantage.
+
+The full comparison is separately registered for all 13,785 sequences and
+8,172 updates per arm, five fixed snapshots, 792 image streams and two traced
+cold replays. It includes paired questions, erased controls, complete books,
+actual emitted-image feedback and natural stopping. Training is in progress;
+complete language and untouched generalization remain unmeasured. No rejected
+reward or reserved DRCD record enters fitting. This comparison transfers an
+inherited text-language foundation into visual interfaces; it does not establish
+language learning from images alone.

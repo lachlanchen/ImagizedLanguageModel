@@ -1,0 +1,130 @@
+\subsection*{Later source and reader qualification}
+
+The isolated-cell reader is the fixed local Qwen3.5-9B Q8 setup, with no language
+context, prompt tuning or corrected glyph substitution. Both attempts remain
+preserved: the initial shared-server placement failure completes one request in
+12.559\,s; the separately registered GPU0 recovery completes 402 requests in
+260.087\,s before its fixed foreign-device occupancy guard aborts. A GPU1
+occupancy increase does not show that the UUID-pinned teacher used that device.
+Its owned temporary server exits and GPU0 returns to its prior occupancy.
+There are 403 completed requests across attempts and zero student updates.
+The aborted client's final peak RSS and minimum host RAM are not retained;
+the later CPU analyzer's 0.609\,GiB RSS is not substituted for those costs.
+
+Request hashes and the partial reading freeze precede new reference scoring.
+The one-sided criterion requires every clean reference to be correctly read;
+observed violations can reject it despite missing responses. Preserve missing
+observations and all existing uncertainty. The later source audit uses saved
+server logs and pinned upstream source: 402 actual image encodings each produce
+81 vision positions, with 98 text positions, for 179 total. The 288-square input
+is already aligned to the encoder's 32-pixel effective stride. Pinned runtime
+argument handling omits this model family from an image-minimum branch used by
+several earlier Qwen families. This source difference is not a causal experiment.
+The stripped installed binary does not establish a reproducible release build.
+
+The full label audit authenticates all original source groups, boundaries,
+pixel shards and alignments. It rerenders the original training strings with
+the original Noto configuration and compares every binary cell exactly. Unique
+physical masks retain their complete raw code-point sets and frequencies;
+nonwhite aliases are not normalized away. The 34 invisible nonspace occurrences
+are U+200B. The audit takes 31.966\,s at 0.208\,GiB peak RSS with no neural call
+or optimizer update. Renderer fidelity, pointwise label identifiability and
+language semantics remain distinct assertions.
+
+The later fixed-metric calibration uses only the original balanced image
+encoder, with 4,096-dimensional raw features, no new normalization, projection
+or fit. It encodes all 9,581 training-source prototypes and 297 stopped-output
+cells in batches of 64, padding only the final batch. Forward arithmetic is
+FP32; distances are direct FP64 Euclidean distances. For prototype $i$, let
+$\delta_i$ be its nearest other prototype distance. Accept a query only if
+twice its nearest distance is strictly below $\delta_i$; otherwise abstain.
+Disjoint feature balls give unique bounded-feature-corruption decoding, not
+guaranteed visual legibility. The unchanged complete-answer score preserves
+order, duplicates, spaces, caps and uncertainty. All 64 final QA outputs and
+their frozen labels remain. The fixed feature map fails; no layer, checkpoint
+or radius is retuned. Whole-action time is 14.980\,s and peak RSS 1.065\,GiB.
+
+\subsection*{Trainable visual context and host-moment optimization}
+
+Let $X_t$ denote a complete visible span. The frozen glyph codec $C$ and visual
+encoder $E_\phi$ produce continuous updates, and the causal body $F_\theta$
+provides the state predicting the next visible span:
+\begin{equation}
+ \begin{aligned}
+ z_t&=C(X_t),\qquad u_t=E_\phi(z_t),\\
+ h_t&=F_\theta(u_1,\ldots,u_t).
+ \end{aligned}
+ \label{eq:trainable-visual-context}
+\end{equation}
+The next span's length includes a zero-length terminal. Its image writer uses
+the existing conditional flow objective with 768-dimensional glyph latents and
+a 1,024-wide full-rank velocity path. The next target is not provided as its
+own predicting state's context. Retain all six equally weighted losses:
+source-feedback relative MSE, update-count cross entropy, span-boundary binary
+cross entropy, next-span length cross entropy, image-flow regression and
+cosine teacher-state alignment. Source native vectors and saved teacher states
+are offline training supervision only. The lexical input table and lexical
+output head are absent from the deployed graph.
+
+Both matched arms use FP32 parameters, BF16 forward autocast and contextual
+gradient checkpointing. The control freezes $\theta$ but retains gradients to
+the image encoder through that body; treatment learns all contextual weights.
+Use ordinary AdamW with coefficients $(0.9,0.999)$, epsilon $10^{-8}$, weight
+decay 0.01 and global gradient-norm cap one. Image heads and the training-only
+projection use learning rate $2\times10^{-4}$; treatment context uses
+$2\times10^{-5}$. Its moments stay in host RAM and parameter-sized slices move
+to the GPU for the ordinary update:
+\begin{equation}
+ \begin{aligned}
+ m_k&=\beta_1m_{k-1}+(1-\beta_1)g_k,\\
+ v_k&=\beta_2v_{k-1}+(1-\beta_2)g_k^2,\\
+ w_k&=(1-\eta\lambda)w_{k-1}
+ -\eta\,\frac{m_k/(1-\beta_1^k)}
+ {\sqrt{v_k/(1-\beta_2^k)}+\epsilon}.
+ \end{aligned}
+ \label{eq:host-moment-adamw}
+\end{equation}
+This changes memory placement, not learning mathematics. Chunks have at most
+16,777,216 elements. CPU tests compare multiple steps and restored optimizer
+state with PyTorch AdamW. The real GPU check additionally compares up to
+seventeen evenly spaced entries per active tensor using actual clipped
+gradients, at relative tolerance $10^{-6}$ and absolute tolerance $10^{-7}$.
+It does not independently derive every full-model gradient.
+
+The execution check selects the first original QA record, first complete
+513-glyph book and longest native-unit training record, breaking ties by corpus
+order. Both arms start with identical six losses and random states. Actual
+updates change every context tensor only in treatment, and every active tensor
+has one Adam counter and host moment pair. Complete parameters, persistent
+buffers and the training projection reset to their identical initial byte
+hashes after each trial. The codec stays frozen; the source archive remains
+inherited pretraining. Lower supplied-history loss is not a language score.
+
+The subsequent full comparison uses one epoch of all 108 original training
+shards, padded native-unit budget 1,024 and seed 202611152. Each arm contains
+13,785 records, 2,576,239 target glyph positions, 2,380,620 teacher-state targets
+and 8,172 updates. Save initialization and quarter-shard snapshots at updates
+0, 1,956, 4,049, 6,152 and 8,172; no intermediate replaces the final model.
+The learned-context checkpoint contains all FP32 context tensors and image
+heads; the frozen control reuses its authenticated original body. A byte-exact
+full-state snapshot/restore check precedes each fit. A CPU completion audit
+reconstructs source order, exposures, final counters, moment sizes and complete
+final deployment tensors; it is not a replay of the full optimization trajectory.
+
+Initial/final snapshots generate all 120 fixed-cell inputs and intermediate
+snapshots all 44 normal inputs at cap 128. The final models also generate all
+24 normal/erased book streams at cap 640: 396 streams per arm. Use eight flow
+steps and seed 202611153. Every predicted span is decoded and reread as actual
+pixels. Length zero is a natural stop; a cap is censored. Freeze all literal
+readings, uncertainty and normal-book coherence before new reference scoring.
+The two traced fresh-process final book-prefix replays are separate execution
+checks. Reserved DRCD confirmation records remain unused. This stage does not
+measure proportional pages, historical forms or all earlier-success retention.
+
+Only one serial GPU0 owner is allowed. Full-fit admission requires 48\,GiB
+available host RAM and 20\,GiB free GPU memory, retaining 24\,GiB host RAM and
+at most 22\,GiB allocated VRAM. Each arm has an 86,400\,s fit ceiling, at most
+1,800\,s pressure waiting and at least 48\,GiB free disk. Use two CPU threads.
+No automatic retry, threshold relaxation, reference repair or unchanged extra
+epoch follows failure. Full trained language and matched-quality efficiency
+are unmeasured at this revision.
