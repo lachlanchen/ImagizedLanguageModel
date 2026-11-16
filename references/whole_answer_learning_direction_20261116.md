@@ -192,6 +192,10 @@ then freezes those readings before a separate answer matcher uses reference
 strings. The registered cohort retains all 64 earlier outputs and every clean
 reference cell. No new student fit is admitted by its implementation; the fixed
 reader must first pass its conservative reused-output calibration.
+The first transcription action stopped after one request because the shared
+server was pinned to GPU1. It supplies no calibrated result. The distinct
+[GPU0 placement recovery](isolated_glyph_judge_gpu0_recovery_20261116.md)
+preserves that attempt and fixes serving placement before further requests.
 
 ## Execution decision
 
