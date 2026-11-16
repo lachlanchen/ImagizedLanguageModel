@@ -1,0 +1,151 @@
+{
+  "schema": "chinese-image-preference-source-evidence-v1",
+  "post_preparation_source_inventory": true,
+  "preparation": {
+    "schema": "chinese-image-preference-source-preparation-v1",
+    "script_sha256": "6038a220f1611ff09c9410474adaa3588a78e0c986a5e5e1c1a79cc452627bb6",
+    "dataset": "wenbopan/Chinese-dpo-pairs",
+    "revision": "800b8cc6c8a1f7fa17ba1ab5690e50b663d832ca",
+    "source_file": "train/train-00000-of-00001.parquet",
+    "source_sha256": "aad344da8e25527368e0780d86ea1ce1595a2f739cef1e5261adae816ee661c6",
+    "source_bytes": 17430997,
+    "dataset_card_url": "https://huggingface.co/datasets/wenbopan/Chinese-dpo-pairs/blob/800b8cc6c8a1f7fa17ba1ab5690e50b663d832ca/README.md",
+    "card_license": "mit",
+    "labels": "GPT-3.5-translated preferences from multiple upstream datasets; unqualified",
+    "counts": {
+      "rows": 10735,
+      "null_source_ids": 10535,
+      "empty_prompt": 0,
+      "empty_chosen": 0,
+      "empty_rejected": 1,
+      "identical_normalized_answers": 18,
+      "evaluation_query_matches": 0,
+      "structurally_eligible_not_qualified": 10716
+    },
+    "source_counts": {
+      "flan_v2_niv2": 1397,
+      "ultrachat": 1708,
+      "evol_instruct": 1299,
+      "sharegpt": 2884,
+      "false_qa": 448,
+      "flan_v2_cot": 471,
+      "flan_v2_p3": 249,
+      "flan_v2_flan2021": 69,
+      "truthy_dpo": 200,
+      "openorca": 2010
+    },
+    "prospective_partitions": {
+      "train": 9640,
+      "calibration": 1095
+    },
+    "unique_normalized_prompt_groups": 10695,
+    "grouping": "SHA256(NFKC prompt without whitespace), 10 percent hash buckets reserved for calibration",
+    "evaluation_reference_sha256": "71f6d150dec27e14a928a12577f8e2956a8cffb509410eec85214c873a9f9835",
+    "quarantine_scope": "32 exact normalized QA question substrings in system plus prompt only; not semantic or passage decontamination",
+    "length_unit": "Python Unicode code points, not image glyphs, font coverage or language tokens",
+    "lengths": {
+      "prompt": {
+        "minimum": 6,
+        "median": 91,
+        "p90": 577,
+        "maximum": 3955,
+        "sum": 2236116
+      },
+      "chosen": {
+        "minimum": 1,
+        "median": 345,
+        "p90": 996,
+        "maximum": 5775,
+        "sum": 4892438
+      },
+      "rejected": {
+        "minimum": 0,
+        "median": 254,
+        "p90": 776,
+        "maximum": 3337,
+        "sum": 3749297
+      }
+    },
+    "answer_cap_counts_all_source_rows": {
+      "32": {
+        "both_answers_fit": 278,
+        "at_least_one_answer_exceeds": 10457
+      },
+      "128": {
+        "both_answers_fit": 1787,
+        "at_least_one_answer_exceeds": 8948
+      },
+      "513": {
+        "both_answers_fit": 6085,
+        "at_least_one_answer_exceeds": 4650
+      },
+      "640": {
+        "both_answers_fit": 7157,
+        "at_least_one_answer_exceeds": 3578
+      }
+    },
+    "all_source_rows_preserved": true,
+    "source_strings_normalized_in_export": false,
+    "answers_truncated": false,
+    "pairs_jsonl_sha256": "aca0e7724abeabfd4df7bfc5c658af901a3594098aeebcd36091cbe875999ae0",
+    "pairs_jsonl_bytes": 32178545,
+    "elapsed_seconds": 11.082192474976182,
+    "cost_scope": "This invocation only; prior failed preparation and its download are preserved separately, without captured timing or RSS",
+    "peak_process_rss_gib": 0.6093597412109375,
+    "ceilings": {
+      "seconds": 90,
+      "rss_gib": 1.0,
+      "host_available_gib": 24
+    },
+    "images_rendered": 0,
+    "model_calls": 0,
+    "optimizer_updates": 0,
+    "semantic_labels_qualified": false,
+    "physical_rendering_qualified": false,
+    "preference_fit_admitted": false,
+    "changes_running_trial": false,
+    "goal_achieved": false
+  },
+  "independent_validation": {
+    "schema": "chinese-image-preference-export-independent-check-v1",
+    "all10735raw_records_equal_parquet": true,
+    "all_row_hashes_verified": true,
+    "null_ids_preserved": 10535,
+    "all_exact_prompt_groups_in_one_prospective_partition": true,
+    "source_sha256_verified": true,
+    "export_sha256_verified": true,
+    "source_card_sha256": "4089ca4ed271f58a83393d08c11ac3996ba16c54f7f2d9369d7670843d917c4c",
+    "source_card_bytes": 1278,
+    "semantic_labels_qualified": false,
+    "rendering_qualified": false,
+    "model_calls": 0,
+    "optimizer_updates": 0,
+    "elapsed_seconds": 1.1228852393105626,
+    "peak_process_rss_gib": 0.11215972900390625,
+    "existing_output_refused_without_mutation": true,
+    "pyarrow_version": "21.0.0",
+    "python_version": "3.10.13"
+  },
+  "independent_validation_sha256": "e96396183f8dc8c9d6c9c8bace8d9bb2688b2724910e1c808c1495da6218276a",
+  "preserved_first_failure": {
+    "exit_code": 1,
+    "error": "ValueError: Non-string field; preserve the partial export for inspection",
+    "script_sha256": "5ed631b38711091de66beb260657779f711551525de9a772b7a762e78e008076",
+    "partial_rows": 0,
+    "partial_bytes": 0,
+    "source_download_completed_and_sha256_verified": true,
+    "observed_nullable_id_rows": 10535,
+    "complete_other_five_string_columns": 10735,
+    "elapsed_and_peak_RSS_not_captured": true,
+    "model_calls": 0,
+    "optimizer_updates": 0
+  },
+  "live_trial_sources_unchanged": {
+    "registration_sha256": "04b908f488f5175bff1df8da1a7d38676696c03a3ab5f70faa6a199a1757d828",
+    "verified_source_files": 115,
+    "all115unchanged": true,
+    "new_tracked_paths_outside_bound_sources_and_inputs": true
+  },
+  "source_preparation_is_not_model_learning": true,
+  "goal_achieved": false
+}

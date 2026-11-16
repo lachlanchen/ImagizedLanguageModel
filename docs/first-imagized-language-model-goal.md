@@ -57,6 +57,17 @@ Seven geometric/sequence CPU controls and two new refusal checks are
 implementation evidence, not language improvement. Supplemental independent
 reading may add evidence but cannot replace the frozen pilot or repair its scores.
 
+The [offline complete-image preference option](../references/image_preference_learning_direction_20261116.md)
+now has a separate pinned source preparation: all 10,735 public Chinese preference
+pairs are preserved and independently checked against Parquet. There are 10,716
+structurally eligible pairs; machine-derived semantic labels and image rendering
+remain unqualified. Only 1,787 complete pairs fit 128 code points, and none is
+truncated. DPO could replace a separately fitted scalar reward with fixed pair
+labels, but it does not remove the need to qualify those labels or actual output
+quality. No model call, optimizer update or preference fit is admitted. Keep the
+running comparison unchanged; require a registered body/replay/resource preflight
+and calibrated actual-output evidence before any preference fit.
+
 The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
 is promoted: 53/93/95-page reading/review/redline PDFs include both failed
 controls, their methods and native Figure 29. All 241 pages received layout
