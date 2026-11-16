@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-16. **Active; usable visual language remains unproved.**
+Updated: 2026-11-17. **Active; usable visual language remains unproved.**
 
 ## Objective and deployment boundary
 
@@ -117,7 +117,21 @@ it does not itself authorize a full fit or establish language understanding.
 The [six real update/reset trials now pass](../references/trainable_visual_context_preflight_result_20261116.md):
 all 309 context tensors learn only in treatment, sampled AdamW update error is
 zero, all states reset exactly and peak allocated VRAM is 11.252 GiB. Preserve
-this completed preflight; do not repeat it. No full fit is registered yet.
+this completed preflight; do not repeat it.
+
+The [complete matched comparison is now registered](../references/evidence/trainable_visual_context_comparison_registration_20261116.json)
+with 599 bound inputs and sources. Follow its
+[full execution protocol](../references/trainable_visual_context_comparison_protocol_20261116.md)
+and private handoff: one serial owner runs treatment fit/audit/generation, then
+the matched frozen-context arm. Each uses all 13,785 sequences, 2,576,239 target
+positions, 2,380,620 saved teacher states and 8,172 updates. Retain all five fixed
+snapshots and all 792 prescribed output streams, plus two separate traced cold
+replays. Every learned context tensor must be restored in standalone inference.
+No rejected reward or DRCD fitting is used. Freeze visual readings before new
+reference scoring. The measured preflight fits; full trained language is still
+unmeasured. This deployed model has 1,465,381,142 parameters and inherits text
+pretraining. Neither its size nor a successful fit establishes matched-quality
+efficiency, proportional-page reading or the full historical-language objective.
 
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
