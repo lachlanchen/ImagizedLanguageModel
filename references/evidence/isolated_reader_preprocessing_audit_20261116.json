@@ -1,0 +1,104 @@
+{
+  "schema": "saved-reader-preprocessing-audit-v1",
+  "audit_source_sha256": "4b8bc16ef959b3022709015f4c2b6859a3999a0a091c8c734ef115b46d7fbeab",
+  "retained_log_sha256": "d91c0f53a6891564027d2b20923171bba3f64682a707aa121e24b842d000c950",
+  "installed_runner_sha256": "234b05b2138264f8fb263c3205e85f4c290e8afe5067e280a4f6f90cdac5696b",
+  "installed_ollama_sha256": "a094ad449d3cc4352af89802cf1fc076c6fdd15a5e0f0bbe37f2f1563b0e1882",
+  "runner_version_output": "version: 1 (96278e39f)\nbuilt with GNU 13.3.1 for Linux x86_64",
+  "declared_upstream": {
+    "files": [
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/ollama_runner.go",
+        "url": "https://raw.githubusercontent.com/ollama/ollama/c82ebbd5bfb9ec7d94d3894e9023db0fb224ff50/llm/llama_server.go"
+      },
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/ollama_renderer.go",
+        "url": "https://raw.githubusercontent.com/ollama/ollama/c82ebbd5bfb9ec7d94d3894e9023db0fb224ff50/model/renderers/qwen35.go"
+      },
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/llama_clip.cpp",
+        "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/clip.cpp"
+      },
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/llama_qwen.cpp",
+        "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/models/qwen2vl.cpp"
+      },
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/llama_image.cpp",
+        "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/mtmd-image.cpp"
+      },
+      {
+        "file": "artifacts/reader_preprocessing_audit_v1/llama_clip_impl.h",
+        "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/clip-impl.h"
+      }
+    ],
+    "ollama_tag_commit": "c82ebbd5bfb9ec7d94d3894e9023db0fb224ff50",
+    "llama_reported_commit": "96278e39fc83e1d97c881e34bcec39ac7ea98820"
+  },
+  "installed_go_binary_exact_source_unverified": true,
+  "reproducible_binary_build_verified": false,
+  "pinned_sources": {
+    "artifacts/reader_preprocessing_audit_v1/ollama_runner.go": {
+      "url": "https://raw.githubusercontent.com/ollama/ollama/c82ebbd5bfb9ec7d94d3894e9023db0fb224ff50/llm/llama_server.go",
+      "sha256": "63a952087eceace2dc7d7255afc7a75f2f2335ad54d64ce09e6d20fbf7f8f090",
+      "git_blob_sha1": "c99c295568e259ab736dacdee1b5ef10623eb89a"
+    },
+    "artifacts/reader_preprocessing_audit_v1/ollama_renderer.go": {
+      "url": "https://raw.githubusercontent.com/ollama/ollama/c82ebbd5bfb9ec7d94d3894e9023db0fb224ff50/model/renderers/qwen35.go",
+      "sha256": "6ca6abea759548962ea23189691c5def15cb86704c114f17182784fd159b4872",
+      "git_blob_sha1": "578a32689cca8a0753e1f73bf2bb589e1b66ac86"
+    },
+    "artifacts/reader_preprocessing_audit_v1/llama_clip.cpp": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/clip.cpp",
+      "sha256": "64fbee438f3cba9d93a80513b5380a716ccc7d5a204dac0d2bd260b0d82c8e3e",
+      "git_blob_sha1": "c1870813fb932a64a21fd093ab4be90659420b67"
+    },
+    "artifacts/reader_preprocessing_audit_v1/llama_qwen.cpp": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/models/qwen2vl.cpp",
+      "sha256": "06661c5dd008f1603678eb9def84cf8b566852728c2f8fe4fcd9b003dd1a23af",
+      "git_blob_sha1": "2220c2692a194adeebc4a4c82deadbea22651259"
+    },
+    "artifacts/reader_preprocessing_audit_v1/llama_image.cpp": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/mtmd-image.cpp",
+      "sha256": "5155f943a00907f28c7241a973b4fc8bea57c0af78055bd1a7e27bdc107297d6",
+      "git_blob_sha1": "10cfe52f56f773cb0aa441a820db4e732d3daa52"
+    },
+    "artifacts/reader_preprocessing_audit_v1/llama_clip_impl.h": {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/96278e39fc83e1d97c881e34bcec39ac7ea98820/tools/mtmd/clip-impl.h",
+      "sha256": "e104b79e43c317d718c1ae76b75114edf89e5a10e772c7ddf6fe48674beaa7d9",
+      "git_blob_sha1": "d42b38222c2749d5b01eb587c42e3eed47b8f6d4"
+    }
+  },
+  "encoded_requests": 402,
+  "vision_positions_per_request": 81,
+  "text_positions_per_request": 98,
+  "total_prompt_positions": 179,
+  "input_png_size": [
+    288,
+    288
+  ],
+  "patch_size": 16,
+  "spatial_merge": 2,
+  "expected_merged_positions": 81,
+  "image_min_pixels": 8192,
+  "image_max_pixels": 4194304,
+  "original_size_within_limits": true,
+  "grounding_warning_present": true,
+  "upstream_minimum_1024_architectures": [
+    "qwen2vl",
+    "qwen25vl",
+    "qwen3vl",
+    "qwen3vlmoe"
+  ],
+  "qwen35_covered_by_that_switch": false,
+  "actual_command_has_image_min_tokens": false,
+  "full_prompt_reprocess_messages": 401,
+  "nonconsecutive_position_messages": 1608,
+  "interpretation": "Images were encoded. The logged 81-position budget agrees with dynamic 288-pixel geometry. Pinned Ollama code applies a larger minimum to other Qwen-VL families but omits qwen35. Low budget is a candidate cause, not a demonstrated cause of OCR failure. No output or old review is repaired.",
+  "causal_resolution_experiment_performed": false,
+  "new_model_calls": 0,
+  "optimizer_updates": 0,
+  "teacher_qualified": false,
+  "student_language_improvement": false,
+  "goal_achieved": false
+}
