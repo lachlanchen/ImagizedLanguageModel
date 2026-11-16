@@ -1,0 +1,180 @@
+{
+  "schema": "shaped-preference-source-page-registration-v1",
+  "input_sha256": {
+    "artifacts/chinese_image_preference_sources_v2/pairs.jsonl": "aca0e7724abeabfd4df7bfc5c658af901a3594098aeebcd36091cbe875999ae0",
+    "artifacts/chinese_image_preference_sources_v2/report.json": "afdba57e425abb6e4102813f87796c93d8fc70f4e9be5fdce8b2cec4324a6f35",
+    "artifacts/chinese_preference_raster_v1/glyph_inventory.json": "c82049d27897c3ae0210baf7cd129c9567aaffcdee0422872e1795f1e855d1b2",
+    "references/evidence/chinese_preference_raster_result_20261116.json": "140b444982a3b71cddce3ccf81a80f6a12dd54620432c4b61bfee8fa4ef26f39",
+    "ilm/training_only/shaped_page_renderer.py": "db616c8fa92a3f05624edeb2b743519581ca201d8c9b9e08d558c87760f606d8",
+    "scripts/preflight_shaped_preference_pages.py": "a035d9a12b67af8a9e15f27852eea9c2df82c1bdd77641b9f8d9cc9cce70ec8f",
+    "ilm/visual_lm/full_text_renderer.py": "b32a93a5c941a3dd34e6052145299ba6ad3d12f963a0d260805d15bdb76ae1da",
+    "references/shaped_preference_page_protocol_20261116.md": "badede48c40643d47f3a13c21b68d56f2cad573d5cf3cf6da0b8ca3410244dc0",
+    "artifacts/external/mixar_env_py312/bin/python": "a4034233a83443447294df407aaf94758933dd92719af286be2ae9147bdb715a"
+  },
+  "pairs_file": "artifacts/chinese_image_preference_sources_v2/pairs.jsonl",
+  "fields": [
+    "system",
+    "prompt",
+    "chosen",
+    "rejected"
+  ],
+  "cases": [
+    {
+      "row": 0,
+      "row_sha256": "2f0ea282eb9a7a3ab4e3a05c8ae4ce63f2142eb954e95360ad886072b92d0950",
+      "roles": [
+        "first_paragraph"
+      ]
+    },
+    {
+      "row": 1,
+      "row_sha256": "cd22ae6657ffe8518818aa87edd7108ac63d64533bc7a52a7ccc24c3b0886066",
+      "roles": [
+        "first_devanagari"
+      ]
+    },
+    {
+      "row": 8,
+      "row_sha256": "62d762272150b1b03563922abf3370216c5d3706bed03848179c143396397273",
+      "roles": [
+        "first_bar",
+        "first_replacement"
+      ]
+    },
+    {
+      "row": 16,
+      "row_sha256": "88c3ec16320a7abedbf34f7ed0adb54cc5754d6cd2e60f8c7ba0f1a33229f6e2",
+      "roles": [
+        "first_arabic",
+        "first_nonjoiner"
+      ]
+    },
+    {
+      "row": 18,
+      "row_sha256": "129c34e9b45f0e00ea77f18c955aa7afe9437fb40054e6e36834dd9b69ad5737",
+      "roles": [
+        "first_tab"
+      ]
+    },
+    {
+      "row": 53,
+      "row_sha256": "f36104865ef810bfc55c78b587f7e49465c7eb251aed4d923f6d62870d568034",
+      "roles": [
+        "first_carriage_return"
+      ]
+    },
+    {
+      "row": 139,
+      "row_sha256": "860106119e6088c20c7de5b31402b3338e2c87da3690209411792261d8036191",
+      "roles": [
+        "first_emoji"
+      ]
+    },
+    {
+      "row": 290,
+      "row_sha256": "ed78962a1c03002a278e107cd56598dc52505ffdce79761ab3d48e745983c649",
+      "roles": [
+        "first_joiner"
+      ]
+    },
+    {
+      "row": 564,
+      "row_sha256": "788a6870bd1cfa6f2a6c37d115b0d15efe3ea3139fa3ccfae58838afbe2a069f",
+      "roles": [
+        "first_acute"
+      ]
+    },
+    {
+      "row": 1697,
+      "row_sha256": "c7e25bd4c5364da537bc0136f1f08ae430f708f5659857e898a968c3d409885e",
+      "roles": [
+        "longest_rejected"
+      ]
+    },
+    {
+      "row": 2098,
+      "row_sha256": "3ae085fa2ff767f1ede8de6af7346a7af7a9255fa7ba45689a0e669b96ac93da",
+      "roles": [
+        "first_macron"
+      ]
+    },
+    {
+      "row": 2479,
+      "row_sha256": "d1b37836d28ddb893a0384ab3b6a8e783639d9f95b26088267afd9c18a00da5e",
+      "roles": [
+        "most_distinct_unsupported_forms"
+      ]
+    },
+    {
+      "row": 2488,
+      "row_sha256": "f796f6792796b59884a5a17fb8c95f6966943c76105ec19386d53e4ed23ff010",
+      "roles": [
+        "longest_prompt"
+      ]
+    },
+    {
+      "row": 4285,
+      "row_sha256": "92addee483dbeafd5668ef263c8cb18e2289f9f825eaeb0a907f41e662bf6f0f",
+      "roles": [
+        "longest_chosen"
+      ]
+    },
+    {
+      "row": 6268,
+      "row_sha256": "645aced43d811ba08769a07348c8fe8657d80f4e992cc837c41acf66aa312741",
+      "roles": [
+        "first_grave"
+      ]
+    },
+    {
+      "row": 6936,
+      "row_sha256": "d19823e7f38b53723ea41b034ba5cf83eab2f0aff3e5b3742b57dcef67582abd",
+      "roles": [
+        "most_source_line_feeds"
+      ]
+    }
+  ],
+  "roles": [
+    "first_acute",
+    "first_arabic",
+    "first_bar",
+    "first_carriage_return",
+    "first_devanagari",
+    "first_emoji",
+    "first_grave",
+    "first_joiner",
+    "first_macron",
+    "first_nonjoiner",
+    "first_paragraph",
+    "first_replacement",
+    "first_tab",
+    "longest_chosen",
+    "longest_prompt",
+    "longest_rejected",
+    "most_distinct_unsupported_forms",
+    "most_source_line_feeds"
+  ],
+  "geometry": {
+    "width": 1024,
+    "font_pixels": 26,
+    "padding": 8,
+    "maximum_pixels": 16777216,
+    "tile_size": 32,
+    "primary_font": "Noto Sans CJK SC"
+  },
+  "pango_version": "1.52.1",
+  "training_only_source_cases": true,
+  "new_model_calls_allowed": 0,
+  "new_optimizer_updates_allowed": 0,
+  "fit_admitted": false,
+  "complete_corpus_qualified": false,
+  "binary_projection_legibility_qualified": false,
+  "semantic_labels_qualified": false,
+  "ceilings": {
+    "seconds": 120,
+    "peak_rss_gib": 1,
+    "entry_available_host_gib": 48,
+    "runtime_available_host_gib": 24
+  },
+  "decision": "All fixed source fields and controls must pass; preserve every rejection. No retuned fonts, source repair, cohort substitution or fit. Passing permits only subsequent registered full-source and visual/semantic qualification after the unchanged live model comparison."
+}
