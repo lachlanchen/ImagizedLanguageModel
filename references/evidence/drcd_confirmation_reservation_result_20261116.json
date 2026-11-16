@@ -1,0 +1,91 @@
+{
+  "schema": "drcd-confirmation-reservation-evidence-v1",
+  "source_commit": "616b6fffcc23bcca67d86a9b519957456bde6176",
+  "report": {
+    "schema": "drcd-confirmation-reservation-result-v1",
+    "registration_sha256": "28c5e2cd86e2b683161fe641ed131614991fdc38a25c99cbf630dff0c2c294ec",
+    "source_repository": "DRCKnowledgeTeam/DRCD",
+    "source_revision": "b944790de5af02c5fbb7cd9cb1473d27d169eebf",
+    "source_split": "test",
+    "source_files_sha256": {
+      "DRCD_test.json": "d9de0b4d247a8391ac8daee6c02c2c8272b75562a1e2377b50ae04ecc09a7438",
+      "README.md": "df7c740cbe95a8bc7affc8aa0dd01736fc3becf5fe18fb82a7eefe451f3c3520"
+    },
+    "source_files_git_blob_sha1": {
+      "DRCD_test.json": "341eda001e27a375f14e6b40976b2492b925eae2",
+      "README.md": "59f5599b2bebca5d42d77542cbbcdda16937774c"
+    },
+    "license": "CC-BY-SA-3.0",
+    "python_version": "3.10.13",
+    "unicode_database_version": "13.0.0",
+    "totals": {
+      "articles": 378,
+      "paragraphs": 1000,
+      "questions": 3493
+    },
+    "known_source_counts": {
+      "cmrc_paragraphs": 3251,
+      "wikisource_records": 7017,
+      "preference_rows": 10735
+    },
+    "normalized_known_titles": 3267,
+    "normalized_known_documents": 42225,
+    "known64character_windows": 422525,
+    "article_exclusion_counts_overlapping": {
+      "known_or_viewed_title": 1,
+      "known_exact64character_window": 1
+    },
+    "annotation_exclusion_counts": {},
+    "reserved_articles": 377,
+    "reserved_paired_paragraphs": 998,
+    "reserved_questions": 3485,
+    "fixed_pair_questions": 1996,
+    "all_eligible_surviving_groups_reserved": true,
+    "question_or_reference_texts_printed": false,
+    "pool_sha256": "3da6962ee8f9ee09360fca02d757a47b064b06aad28fc0c78243d407bca49d4f",
+    "quarantine_sha256": "7c0d39dc6e0feea56874e6a635c76ae9c7b9473b38715d3c53519c755169e5a8",
+    "candidate_image_rendering_complete": false,
+    "student_or_baseline_outputs_generated": 0,
+    "student_or_baseline_scores_computed": 0,
+    "new_model_calls": 0,
+    "optimizer_updates": 0,
+    "training_or_reward_use_allowed": false,
+    "prior_project_DRCD_search_scope": "Current tracked model/docs/reference/scripts and known cache paths; not complete historic/external exposure proof",
+    "inherited_pretraining_exposure_unknown": true,
+    "paraphrase_or_semantic_decontamination_proved": false,
+    "elapsed_seconds": 28.94694645702839,
+    "peak_process_rss_gib": 0.15792465209960938,
+    "ceilings": {
+      "seconds": 180,
+      "peak_rss_gib": 1,
+      "entry_available_host_gib": 48,
+      "runtime_available_host_gib": 24
+    },
+    "evaluation_execution_admitted": false,
+    "goal_achieved": false
+  },
+  "report_sha256": "217748e88594045589548520de15f2269d8de54d9ddfc98477b0f79be012d63a",
+  "independent_validation": {
+    "schema": "drcd-evaluation-reservation-independent-check-v1",
+    "all998reserved_paragraphs_equal_raw_source": true,
+    "all3485questions_and_all_answer_arrays_equal_raw_source": true,
+    "source_answer_spans_verified": 6970,
+    "all_nonquarantined_source_groups_retained": true,
+    "no_duplicate_question_or_paragraph_ids": true,
+    "all_fixed_pairs_distinct_with_disjoint_reference_sets": true,
+    "every_reserved_record_evaluation_only": true,
+    "all_source_input_pool_quarantine_hashes_verified": true,
+    "questions_or_references_displayed": false,
+    "images_or_model_outputs_generated": 0,
+    "model_or_baseline_scores": 0,
+    "recomputed_complete_overlap_index": false,
+    "semantic_or_paraphrase_decontamination_proved": false,
+    "elapsed_seconds": 0.12458708044141531,
+    "peak_process_rss_gib": 0.044116973876953125
+  },
+  "independent_validation_sha256": "a0fc1f8790baf9599122873e88db052c30f8f735524a3cf98fccdd5d5f25fd37",
+  "all115live_training_sources_unchanged": true,
+  "current_model_trial_changed": false,
+  "decision": "Retain a frozen evaluation-only source pool. No training, reward/preference calibration, example repair, image rendering or neural evaluation is admitted. Require a separately registered image/review/scoring/resource execution after real physical qualification and the unchanged original pilot. Known overlap screening does not prove unseen inherited pretraining or semantic novelty.",
+  "goal_achieved": false
+}

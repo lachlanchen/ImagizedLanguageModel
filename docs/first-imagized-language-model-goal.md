@@ -88,6 +88,17 @@ failed initial region assertion and negative binary finding without rerunning
 the unchanged preflight. No full-corpus, semantic, binary or student fit is
 admitted; the original serial model comparison retains priority.
 
+A [new evaluation-only source reservation](../references/drcd_confirmation_reservation_result_20261116.md)
+now freezes998paired DRCD test passages from377articles, with3,485questions and
+6,970verified human answer spans. All eligible groups surviving the declared
+known-source screen are retained; one overlapping article is quarantined. Raw
+source questions/references remain undisplayed, unrendered and unscored. This
+does not prove semantic or inherited-pretraining novelty. Exclude this pool from
+all training, reward/preference calibration and tuning. Require the original
+physical qualification/pilot and a separately committed confirmation execution
+before model use. Current gates, book and historical-form requirements remain
+unchanged; no usable-language claim follows from the reservation.
+
 The [reward-calibration manuscript revision](../publication/ilm-nature/evidence/reward_calibration_article_build.json)
 is promoted: 53/93/95-page reading/review/redline PDFs include both failed
 controls, their methods and native Figure 29. All 241 pages received layout
