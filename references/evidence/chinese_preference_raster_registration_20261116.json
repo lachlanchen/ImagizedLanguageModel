@@ -1,0 +1,47 @@
+{
+  "schema": "chinese-preference-source-raster-registration-v1",
+  "script_sha256": "2ea5c4b32828fd315d3a777d037102b28220d6ded4eab95c8c4e5ccc7f0184da",
+  "input_sha256": {
+    "artifacts/chinese_image_preference_sources_v2/pairs.jsonl": "aca0e7724abeabfd4df7bfc5c658af901a3594098aeebcd36091cbe875999ae0",
+    "artifacts/chinese_image_preference_sources_v2/report.json": "afdba57e425abb6e4102813f87796c93d8fc70f4e9be5fdce8b2cec4324a6f35",
+    "scripts/prepare_chinese_image_preferences.py": "6038a220f1611ff09c9410474adaa3588a78e0c986a5e5e1c1a79cc452627bb6",
+    "references/evidence/chinese_image_preference_preparation_20261116.json": "c8c3624a338f02ef3f7a8fd7ff1a081d371f80d68ca560ab2a9d11408b79e5d9",
+    "scripts/prepare_visual_sequence_corpus.py": "267280b21231eb8eb9c78f7b9c8b93c15e4d42e5fd7bdd5d612ee4fdfe776d50",
+    "references/chinese_preference_raster_protocol_20261116.md": "00b26cf23667a307c7aa66f0635565fe453699e8d167e87f71c61392f18798e6"
+  },
+  "pairs_file": "artifacts/chinese_image_preference_sources_v2/pairs.jsonl",
+  "font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "font_face": 2,
+  "font_pixels": 26,
+  "cell_size": [
+    32,
+    32
+  ],
+  "baseline_y": 26,
+  "threshold_ink_below": 128,
+  "expanded_canvas": [
+    128,
+    128
+  ],
+  "translation": [
+    48,
+    48
+  ],
+  "pillow_version": "10.4.0",
+  "fonttools_version": "4.25.0",
+  "unicode_database_version": "13.0.0",
+  "scope": "Complete new10735row source inventory, not an existing actor diagnosis or language evaluation",
+  "prospective": true,
+  "source_rows_required": 10735,
+  "model_calls_allowed": 0,
+  "optimizer_updates_allowed": 0,
+  "source_changes_allowed": false,
+  "neural_execution_admitted": false,
+  "ceilings": {
+    "seconds": 120,
+    "peak_rss_gib": 1,
+    "entry_available_host_gib": 48,
+    "runtime_available_host_gib": 24
+  },
+  "decision": "Preserve any missing forms, clipping, frame contact, formatting collapse or combining-mark uncertainty. No alternate font, shrinking, truncation, silent filtering, corpus repair or fit. A clean inventory still needs complete-image, semantic, actual-body/replay/resource qualification after unchanged live trial."
+}
