@@ -238,9 +238,14 @@ It differs from the failed synthetic teacher-anchor compiler and generated-image
 recognition rewards. The helper is implemented with five passing CPU checks for exact mask labels,
 feature/gradient sharing, helper-free inference and exact update/reset. The
 [source-only preparation](../references/global_form_preparation_protocol_20261118.md)
-is separately registered and admits no model call or fit. Complete this bound
-preparation before registering a candidate comparison using the completed
-96-update tree as unchanged control. Require actual complete
+is complete: 9,581 visible-form classes cover all 552 prescribed targets
+exactly, with no neural call or source mutation. The separately
+[registered physical preflight](../references/global_form_preflight_protocol_20261118.md)
+keeps the completed 96-update tree as unchanged control, binds the original
+initialization and schedule, and adds one normalized auxiliary CE term. It
+requires .90 pooled/.80 per-case source-form accuracy together with every
+original physical condition and .05 gain over the tree. All trial updates
+will reset; no full language fit is admitted. Require actual complete
 source-form discrimination and writing improvement together. Preserve every
 original physical/language criterion, earlier success and untouched confirmation.
 

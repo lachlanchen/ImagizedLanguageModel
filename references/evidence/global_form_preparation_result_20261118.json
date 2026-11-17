@@ -1,0 +1,82 @@
+{
+  "schema": "ilm-global-form-preparation-result-v1",
+  "registration_sha256": "597b6cda93b3a5486e9b743c3ceabbd69a18f03480621065566b27e11b6bf96d",
+  "source_commit": "6817559547e0e9ae3f15f36ea0a22db5b322cc41",
+  "source_cells": 68948,
+  "classes": 9581,
+  "empty_class": 0,
+  "cases": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "\u5927\u5510\u897f\u57df\u8a18",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "positions": 512,
+      "distinct_target_forms": 210,
+      "blank_positions": 4,
+      "label_sha256": "b781dc4c13dbb2a016608efa9b520cc258141ee809b394f95c2ab67f67190a7c"
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "positions": 5,
+      "distinct_target_forms": 5,
+      "blank_positions": 0,
+      "label_sha256": "c4145127e8fb79bd55ee216038ff200c1635c026b7e1c5998ddaf3039fb04124"
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "positions": 35,
+      "distinct_target_forms": 31,
+      "blank_positions": 0,
+      "label_sha256": "28dc2a45774f25de0be2a4dccb29260f85ad72a551a1f07417677e3e9b8562f2"
+    }
+  ],
+  "complete_target_positions": 552,
+  "labels_file": "artifacts/global_form_preparation_v1/labels.pt",
+  "labels_sha256": "e462ae44a2fcc77c22e718a7dabe0373bdfe378684392b3572f061c75497ca7b",
+  "all_targets_exactly_supported": true,
+  "no_unicode_or_teacher_labels": true,
+  "no_source_mutation": true,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "gpu_used": false,
+  "resources": {
+    "elapsed_seconds": 0.1135604539886117,
+    "peak_rss_bytes": 654295040,
+    "minimum_available_host_gib": 54.93556594848633,
+    "cpu_threads": 2
+  },
+  "full_language_fit_authorized": false,
+  "goal_achieved": false,
+  "raw_result_sha256": "b78e5ecc2ceb4532c6ec1becd051834c8c0d3521e9fd02d8eec9d6bf23b61d93"
+}
