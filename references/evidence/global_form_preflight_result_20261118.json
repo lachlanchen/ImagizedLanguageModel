@@ -1,0 +1,2716 @@
+{
+  "schema": "ilm-global-form-preflight-result-v1",
+  "registration_sha256": "b34a915f71f9974c06aaa44a04f2b69aee705e6fde307a3ee10281e832fb03ae",
+  "source_commit": "1d7e8ef7ab4fa1ebe71cf9495e24a5e9aac28e9f",
+  "initial": {
+    "cases": [
+      {
+        "case": {
+          "role": "complete_513_book",
+          "corpus_index": 458,
+          "shard": 3,
+          "local": 74,
+          "kind": "book",
+          "source_id": "wikisource:b811ca6466254ff3f462",
+          "group": "大唐西域記",
+          "glyphs": 513,
+          "prompt_glyphs": 0,
+          "native_units": 509
+        },
+        "pixels": {
+          "positions": 512,
+          "tp": 2868,
+          "fp": 12910,
+          "fn": 81984,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.057000894365497365
+        },
+        "correct_state_nll": {
+          "nats_per_image": 307.3751769065857,
+          "positions": 512
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 307.334988117218,
+          "positions": 512
+        },
+        "changed_state_rows": 478,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_initial_complete_513_book.npz",
+        "raw_sha256": "5f821b8add59cd3645052af85a27059a91ce2c6324eb69a68e42177869ba6793",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_initial_complete_513_book_physical_trace.pt",
+        "trace_sha256": "c59a8d5aaca66ebe44f45de44d7f2fa30a0377b058c62442ae8516331ef74b64",
+        "maximum_replay_logp_error": 4.76837158203125e-07
+      },
+      {
+        "case": {
+          "role": "complete_qa",
+          "corpus_index": 4762,
+          "shard": 37,
+          "local": 26,
+          "kind": "qa",
+          "source_id": "TRAIN_186_QUERY_0",
+          "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+          "glyphs": 846,
+          "prompt_glyphs": 841,
+          "native_units": 740
+        },
+        "pixels": {
+          "positions": 5,
+          "tp": 13,
+          "fp": 146,
+          "fn": 490,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.03927492447129909
+        },
+        "correct_state_nll": {
+          "nats_per_image": 201.6463623046875,
+          "positions": 5
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 201.67344665527344,
+          "positions": 5
+        },
+        "changed_state_rows": 5,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_initial_complete_qa.npz",
+        "raw_sha256": "adf3313877d3ec2e15ae30fc11be8dbdf981293f2816513c845e6a4504baa0e3",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_initial_complete_qa_physical_trace.pt",
+        "trace_sha256": "6bc2509a01b48683e52af136a8a5f2a41614f41139942d8e5ca84956aaf35694",
+        "maximum_replay_logp_error": 3.5762786865234375e-07
+      },
+      {
+        "case": {
+          "role": "longest_native_record",
+          "corpus_index": 9420,
+          "shard": 73,
+          "local": 76,
+          "kind": "qa",
+          "source_id": "TRAIN_2006_QUERY_2",
+          "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+          "glyphs": 1042,
+          "prompt_glyphs": 1007,
+          "native_units": 961
+        },
+        "pixels": {
+          "positions": 35,
+          "tp": 175,
+          "fp": 947,
+          "fn": 5453,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.05185185185185185
+        },
+        "correct_state_nll": {
+          "nats_per_image": 291.93156242370605,
+          "positions": 35
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 291.8111209869385,
+          "positions": 35
+        },
+        "changed_state_rows": 29,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_initial_longest_native_record.npz",
+        "raw_sha256": "0e9b7bf401a912f5ad126baafc55d7cbaebbce72497c6e9f23fe4fd93d139366",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_initial_longest_native_record_physical_trace.pt",
+        "trace_sha256": "ab60dcb283727b016ecc6dfeda4f57aa36271d61b81fcd5f22a55b7e228e48a1",
+        "maximum_replay_logp_error": 4.76837158203125e-07
+      }
+    ],
+    "pooled_pixels": {
+      "positions": 552,
+      "tp": 3056,
+      "fp": 14003,
+      "fn": 87927,
+      "exact": 0,
+      "source_blank": 4,
+      "false_blank": 0,
+      "false_ink": 4,
+      "f1": 0.05657059291756909
+    },
+    "pooled_rotated_minus_correct_nll": -0.0446679142938144
+  },
+  "final": {
+    "cases": [
+      {
+        "case": {
+          "role": "complete_513_book",
+          "corpus_index": 458,
+          "shard": 3,
+          "local": 74,
+          "kind": "book",
+          "source_id": "wikisource:b811ca6466254ff3f462",
+          "group": "大唐西域記",
+          "glyphs": 513,
+          "prompt_glyphs": 0,
+          "native_units": 509
+        },
+        "pixels": {
+          "positions": 512,
+          "tp": 71289,
+          "fp": 156565,
+          "fn": 13563,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.4559490383938907
+        },
+        "correct_state_nll": {
+          "nats_per_image": 213.411723613739,
+          "positions": 512
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 213.6597123146057,
+          "positions": 512
+        },
+        "changed_state_rows": 478,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_final_complete_513_book.npz",
+        "raw_sha256": "0ebc2f7dcbeb723a641c3786c28c9f198700bf26d6d97b134152299567e7218f",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_final_complete_513_book_physical_trace.pt",
+        "trace_sha256": "e5713e607b2c62b894906ecca6257baa0f4852d84e32fe5f784879af7f1b8039",
+        "maximum_replay_logp_error": 1.0728836059570312e-06
+      },
+      {
+        "case": {
+          "role": "complete_qa",
+          "corpus_index": 4762,
+          "shard": 37,
+          "local": 26,
+          "kind": "qa",
+          "source_id": "TRAIN_186_QUERY_0",
+          "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+          "glyphs": 846,
+          "prompt_glyphs": 841,
+          "native_units": 740
+        },
+        "pixels": {
+          "positions": 5,
+          "tp": 259,
+          "fp": 590,
+          "fn": 244,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.3831360946745562
+        },
+        "correct_state_nll": {
+          "nats_per_image": 101.737060546875,
+          "positions": 5
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 104.7651596069336,
+          "positions": 5
+        },
+        "changed_state_rows": 5,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_final_complete_qa.npz",
+        "raw_sha256": "3f43237a960de864ac44f34b2f4e2ea2a97727ed25a2df4996433ad30e7c4dcf",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_final_complete_qa_physical_trace.pt",
+        "trace_sha256": "e0de31c484fd3933ca024759478078ade831b6da7538e970a005598e0f5a1c21",
+        "maximum_replay_logp_error": 7.152557373046875e-07
+      },
+      {
+        "case": {
+          "role": "longest_native_record",
+          "corpus_index": 9420,
+          "shard": 73,
+          "local": 76,
+          "kind": "qa",
+          "source_id": "TRAIN_2006_QUERY_2",
+          "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+          "glyphs": 1042,
+          "prompt_glyphs": 1007,
+          "native_units": 961
+        },
+        "pixels": {
+          "positions": 35,
+          "tp": 4590,
+          "fp": 10056,
+          "fn": 1038,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.4527966854098846
+        },
+        "correct_state_nll": {
+          "nats_per_image": 184.7535228729248,
+          "positions": 35
+        },
+        "rotated_state_nll": {
+          "nats_per_image": 186.93773555755615,
+          "positions": 35
+        },
+        "changed_state_rows": 29,
+        "raw_file": "artifacts/global_form_preflight_v1/tree_final_longest_native_record.npz",
+        "raw_sha256": "149cd9fd80a083140b8ae27fc0d02409a220f9e50b61ab7987523758da67efe5",
+        "trace_file": "artifacts/global_form_preflight_v1/tree_final_longest_native_record_physical_trace.pt",
+        "trace_sha256": "77b2f0476ba881bddefa7a08e7394282bf16668f53e0ec9f5d61043276edcc69",
+        "maximum_replay_logp_error": 8.344650268554688e-07
+      }
+    ],
+    "pooled_pixels": {
+      "positions": 552,
+      "tp": 76138,
+      "fp": 167211,
+      "fn": 14845,
+      "exact": 0,
+      "source_blank": 4,
+      "false_blank": 0,
+      "false_ink": 4,
+      "f1": 0.4554634315590491
+    },
+    "pooled_rotated_minus_correct_nll": 0.39593868497489154
+  },
+  "initial_classification": {
+    "cases": [
+      {
+        "case": {
+          "role": "complete_513_book",
+          "corpus_index": 458,
+          "shard": 3,
+          "local": 74,
+          "kind": "book",
+          "source_id": "wikisource:b811ca6466254ff3f462",
+          "group": "大唐西域記",
+          "glyphs": 513,
+          "prompt_glyphs": 0,
+          "native_units": 509
+        },
+        "positions": 512,
+        "correct": 0,
+        "accuracy": 0.0,
+        "mean_cross_entropy": 9.225996479392052,
+        "predictions_file": "artifacts/global_form_preflight_v1/initial_complete_513_book_helper_predictions.pt",
+        "predictions_sha256": "b5a07414c155b35af6c07633b5daab73a6322f6951ef0da08863ffaf4bb910a1"
+      },
+      {
+        "case": {
+          "role": "complete_qa",
+          "corpus_index": 4762,
+          "shard": 37,
+          "local": 26,
+          "kind": "qa",
+          "source_id": "TRAIN_186_QUERY_0",
+          "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+          "glyphs": 846,
+          "prompt_glyphs": 841,
+          "native_units": 740
+        },
+        "positions": 5,
+        "correct": 0,
+        "accuracy": 0.0,
+        "mean_cross_entropy": 9.619691467285156,
+        "predictions_file": "artifacts/global_form_preflight_v1/initial_complete_qa_helper_predictions.pt",
+        "predictions_sha256": "b6d768483030569e28972027f20ebfbb539350e3bc5d121137bcb840599ec5b6"
+      },
+      {
+        "case": {
+          "role": "longest_native_record",
+          "corpus_index": 9420,
+          "shard": 73,
+          "local": 76,
+          "kind": "qa",
+          "source_id": "TRAIN_2006_QUERY_2",
+          "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+          "glyphs": 1042,
+          "prompt_glyphs": 1007,
+          "native_units": 961
+        },
+        "positions": 35,
+        "correct": 0,
+        "accuracy": 0.0,
+        "mean_cross_entropy": 9.261083493913922,
+        "predictions_file": "artifacts/global_form_preflight_v1/initial_longest_native_record_helper_predictions.pt",
+        "predictions_sha256": "83f980724b0d90aae1cec1a841a1f1cf02ec48072335f1d0954cf2eaff6890fd"
+      }
+    ],
+    "positions": 552,
+    "correct": 0,
+    "accuracy": 0.0
+  },
+  "final_classification": {
+    "cases": [
+      {
+        "case": {
+          "role": "complete_513_book",
+          "corpus_index": 458,
+          "shard": 3,
+          "local": 74,
+          "kind": "book",
+          "source_id": "wikisource:b811ca6466254ff3f462",
+          "group": "大唐西域記",
+          "glyphs": 513,
+          "prompt_glyphs": 0,
+          "native_units": 509
+        },
+        "positions": 512,
+        "correct": 66,
+        "accuracy": 0.12890625,
+        "mean_cross_entropy": 5.1957254111766815,
+        "predictions_file": "artifacts/global_form_preflight_v1/final_complete_513_book_helper_predictions.pt",
+        "predictions_sha256": "1b80214e61b52c165df428612ab4e5a6f1a42d44dd0a4654e6b8f621b3baff73"
+      },
+      {
+        "case": {
+          "role": "complete_qa",
+          "corpus_index": 4762,
+          "shard": 37,
+          "local": 26,
+          "kind": "qa",
+          "source_id": "TRAIN_186_QUERY_0",
+          "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+          "glyphs": 846,
+          "prompt_glyphs": 841,
+          "native_units": 740
+        },
+        "positions": 5,
+        "correct": 4,
+        "accuracy": 0.8,
+        "mean_cross_entropy": 1.2799623489379883,
+        "predictions_file": "artifacts/global_form_preflight_v1/final_complete_qa_helper_predictions.pt",
+        "predictions_sha256": "8f1a6548b9d153ebb76e5b40f3ecae8e302cab67ec51136231a50a9533c00ff3"
+      },
+      {
+        "case": {
+          "role": "longest_native_record",
+          "corpus_index": 9420,
+          "shard": 73,
+          "local": 76,
+          "kind": "qa",
+          "source_id": "TRAIN_2006_QUERY_2",
+          "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+          "glyphs": 1042,
+          "prompt_glyphs": 1007,
+          "native_units": 961
+        },
+        "positions": 35,
+        "correct": 9,
+        "accuracy": 0.2571428571428571,
+        "mean_cross_entropy": 3.108606610979353,
+        "predictions_file": "artifacts/global_form_preflight_v1/final_longest_native_record_helper_predictions.pt",
+        "predictions_sha256": "4ca1d2a6dd338f0b3549904e7f7e46e9f13b37a6cfd13e06c6bacf9c024f2f0b"
+      }
+    ],
+    "positions": 552,
+    "correct": 79,
+    "accuracy": 0.1431159420289855
+  },
+  "gradient_probes": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "auxiliary_shared_gradient_norms": {
+        "condition": 0.14847456174902618,
+        "glyph_position": 0.0031120439525693655,
+        "span_length": 0.0030293737072497606
+      },
+      "nats_per_image": 307.3751769065857,
+      "positions": 512,
+      "auxiliary_nats_per_image": 9.225996479392052,
+      "combined_objective": 1.3065478360965463,
+      "context_gradient_norm": 0.00012974195124115795
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "auxiliary_shared_gradient_norms": {
+        "condition": 0.5838962765410542,
+        "glyph_position": 0.01235396508127451,
+        "span_length": 0.01235396508127451
+      },
+      "nats_per_image": 201.6463623046875,
+      "positions": 5,
+      "auxiliary_nats_per_image": 9.619691848754883,
+      "combined_objective": 1.2462415477802187,
+      "context_gradient_norm": 0.0013217214727774262
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "auxiliary_shared_gradient_norms": {
+        "condition": 0.24972646683454514,
+        "glyph_position": 0.004820731468498707,
+        "span_length": 0.0048808688297867775
+      },
+      "nats_per_image": 291.93156242370605,
+      "positions": 35,
+      "auxiliary_nats_per_image": 9.261083543300629,
+      "combined_objective": 1.2952934975367139,
+      "context_gradient_norm": 0.0004915783647447824
+    }
+  ],
+  "ledger": [
+    {
+      "update": 1,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.4302399754524231,
+      "nats_per_image": 307.3751769065857,
+      "positions": 512,
+      "auxiliary_nats_per_image": 9.225996479392052,
+      "combined_objective": 1.3065478360965463
+    },
+    {
+      "update": 2,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.8406749963760376,
+      "nats_per_image": 191.2799530029297,
+      "positions": 5,
+      "auxiliary_nats_per_image": 9.604774475097656,
+      "combined_objective": 1.2344909058820699
+    },
+    {
+      "update": 3,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.40808987617492676,
+      "nats_per_image": 265.1488552093506,
+      "positions": 35,
+      "auxiliary_nats_per_image": 9.21669864654541,
+      "combined_objective": 1.2642969810987836
+    },
+    {
+      "update": 4,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.2460678070783615,
+      "nats_per_image": 270.39479780197144,
+      "positions": 512,
+      "auxiliary_nats_per_image": 9.096060708165169,
+      "combined_objective": 1.2562607193127433
+    },
+    {
+      "update": 5,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.7872918248176575,
+      "nats_per_image": 176.55186462402344,
+      "positions": 5,
+      "auxiliary_nats_per_image": 9.261364936828613,
+      "combined_objective": 1.1826487059648465
+    },
+    {
+      "update": 6,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.3416539430618286,
+      "nats_per_image": 248.69618225097656,
+      "positions": 35,
+      "auxiliary_nats_per_image": 9.075150430202484,
+      "combined_objective": 1.2327897604550766
+    },
+    {
+      "update": 7,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.2532942295074463,
+      "nats_per_image": 263.052627325058,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.993344530463219,
+      "combined_objective": 1.2378862938585582
+    },
+    {
+      "update": 8,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.7615094780921936,
+      "nats_per_image": 172.35281372070312,
+      "positions": 5,
+      "auxiliary_nats_per_image": 8.941126823425293,
+      "combined_objective": 1.1436163209625212
+    },
+    {
+      "update": 9,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.3295184075832367,
+      "nats_per_image": 241.90185356140137,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.932317614555359,
+      "combined_objective": 1.2105743918384846
+    },
+    {
+      "update": 10,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.236270472407341,
+      "nats_per_image": 258.33191537857056,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.892214477062225,
+      "combined_objective": 1.2222449018106856
+    },
+    {
+      "update": 11,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.7472752332687378,
+      "nats_per_image": 169.08360290527344,
+      "positions": 5,
+      "auxiliary_nats_per_image": 8.632658958435059,
+      "combined_objective": 1.1067758880847096
+    },
+    {
+      "update": 12,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.3387282192707062,
+      "nats_per_image": 238.12693977355957,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.787434160709381,
+      "combined_objective": 1.1910839858454785
+    },
+    {
+      "update": 13,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.2543604373931885,
+      "nats_per_image": 255.1518964767456,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.78640241920948,
+      "combined_objective": 1.2075973771962674
+    },
+    {
+      "update": 14,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.7635701298713684,
+      "nats_per_image": 166.04197692871094,
+      "positions": 5,
+      "auxiliary_nats_per_image": 8.328276634216309,
+      "combined_objective": 1.070603359058127
+    },
+    {
+      "update": 15,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.3458254039287567,
+      "nats_per_image": 234.04938793182373,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.636810898780823,
+      "combined_objective": 1.170671933458766
+    },
+    {
+      "update": 16,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.2639157176017761,
+      "nats_per_image": 251.3120174407959,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.670368522405624,
+      "combined_objective": 1.1911904541107705
+    },
+    {
+      "update": 17,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.8032456040382385,
+      "nats_per_image": 162.9611053466797,
+      "positions": 5,
+      "auxiliary_nats_per_image": 8.018051147460938,
+      "combined_objective": 1.0337551288651214
+    },
+    {
+      "update": 18,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.3582374155521393,
+      "nats_per_image": 230.7331018447876,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.475416719913483,
+      "combined_objective": 1.1498284071232119
+    },
+    {
+      "update": 19,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.28727275133132935,
+      "nats_per_image": 249.08665537834167,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.538711339235306,
+      "combined_objective": 1.1746560110966378
+    },
+    {
+      "update": 20,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.8615658283233643,
+      "nats_per_image": 161.24398803710938,
+      "positions": 5,
+      "auxiliary_nats_per_image": 7.69101095199585,
+      "combined_objective": 0.9964045322894599
+    },
+    {
+      "update": 21,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.38348978757858276,
+      "nats_per_image": 228.8014430999756,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.297726452350616,
+      "combined_objective": 1.1285594696182795
+    },
+    {
+      "update": 22,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.31474360823631287,
+      "nats_per_image": 247.58749270439148,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.386367820203304,
+      "combined_objective": 1.1565742702916075
+    },
+    {
+      "update": 23,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.932019829750061,
+      "nats_per_image": 159.9066619873047,
+      "positions": 5,
+      "auxiliary_nats_per_image": 7.33718729019165,
+      "combined_objective": 0.9565032703923301
+    },
+    {
+      "update": 24,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.4140316843986511,
+      "nats_per_image": 226.90281677246094,
+      "positions": 35,
+      "auxiliary_nats_per_image": 8.098347127437592,
+      "combined_objective": 1.1049569360412543
+    },
+    {
+      "update": 25,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.34162530303001404,
+      "nats_per_image": 245.8215823173523,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.20877930521965,
+      "combined_objective": 1.1354782956445577
+    },
+    {
+      "update": 26,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.0144133567810059,
+      "nats_per_image": 158.5032501220703,
+      "positions": 5,
+      "auxiliary_nats_per_image": 6.9483232498168945,
+      "combined_objective": 0.912715247819786
+    },
+    {
+      "update": 27,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.4500972032546997,
+      "nats_per_image": 224.94311428070068,
+      "positions": 35,
+      "auxiliary_nats_per_image": 7.872253596782684,
+      "combined_objective": 1.078380757532999
+    },
+    {
+      "update": 28,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.37145793437957764,
+      "nats_per_image": 244.1217930316925,
+      "positions": 512,
+      "auxiliary_nats_per_image": 8.002206191420555,
+      "combined_objective": 1.1112852364221308
+    },
+    {
+      "update": 29,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.1080602407455444,
+      "nats_per_image": 156.9208526611328,
+      "positions": 5,
+      "auxiliary_nats_per_image": 6.5189714431762695,
+      "combined_objective": 0.8643360068374578
+    },
+    {
+      "update": 30,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.48774680495262146,
+      "nats_per_image": 222.8376350402832,
+      "positions": 35,
+      "auxiliary_nats_per_image": 7.615367650985718,
+      "combined_objective": 1.0483033653570362
+    },
+    {
+      "update": 31,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.4007601737976074,
+      "nats_per_image": 242.6345362663269,
+      "positions": 512,
+      "auxiliary_nats_per_image": 7.764715880155563,
+      "combined_objective": 1.0839272636030155
+    },
+    {
+      "update": 32,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.209365725517273,
+      "nats_per_image": 155.4199676513672,
+      "positions": 5,
+      "auxiliary_nats_per_image": 6.050636291503906,
+      "combined_objective": 0.8117840431640218
+    },
+    {
+      "update": 33,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.5261433720588684,
+      "nats_per_image": 220.91034698486328,
+      "positions": 35,
+      "auxiliary_nats_per_image": 7.325500309467316,
+      "combined_objective": 1.014802359244313
+    },
+    {
+      "update": 34,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.4248139262199402,
+      "nats_per_image": 241.39638900756836,
+      "positions": 512,
+      "auxiliary_nats_per_image": 7.4974872544407845,
+      "combined_objective": 1.0535686901075043
+    },
+    {
+      "update": 35,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.3123998641967773,
+      "nats_per_image": 154.1591339111328,
+      "positions": 5,
+      "auxiliary_nats_per_image": 5.55001974105835,
+      "combined_objective": 0.7559452318443325
+    },
+    {
+      "update": 36,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.5603622198104858,
+      "nats_per_image": 219.06613445281982,
+      "positions": 35,
+      "auxiliary_nats_per_image": 7.0043429136276245,
+      "combined_objective": 0.977969345255708
+    },
+    {
+      "update": 37,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.42816343903541565,
+      "nats_per_image": 239.84240245819092,
+      "positions": 512,
+      "auxiliary_nats_per_image": 7.207810536026955,
+      "combined_objective": 1.020453029519754
+    },
+    {
+      "update": 38,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.4115214347839355,
+      "nats_per_image": 152.9320068359375,
+      "positions": 5,
+      "auxiliary_nats_per_image": 5.035198211669922,
+      "combined_objective": 0.6985898502821639
+    },
+    {
+      "update": 39,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.5823737382888794,
+      "nats_per_image": 217.21496391296387,
+      "positions": 35,
+      "auxiliary_nats_per_image": 6.661373972892761,
+      "combined_objective": 0.9387503210367826
+    },
+    {
+      "update": 40,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.39513880014419556,
+      "nats_per_image": 238.13148164749146,
+      "positions": 512,
+      "auxiliary_nats_per_image": 6.914109207689762,
+      "combined_objective": 0.9867451061557989
+    },
+    {
+      "update": 41,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.5149438381195068,
+      "nats_per_image": 151.6618194580078,
+      "positions": 5,
+      "auxiliary_nats_per_image": 4.541030406951904,
+      "combined_objective": 0.6434453372776785
+    },
+    {
+      "update": 42,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.5914022326469421,
+      "nats_per_image": 215.3539867401123,
+      "positions": 35,
+      "auxiliary_nats_per_image": 6.317005038261414,
+      "combined_objective": 0.8993690079244122
+    },
+    {
+      "update": 43,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.33183541893959045,
+      "nats_per_image": 236.49040532112122,
+      "positions": 512,
+      "auxiliary_nats_per_image": 6.647559620440006,
+      "combined_objective": 0.9560671171315387
+    },
+    {
+      "update": 44,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.6546374559402466,
+      "nats_per_image": 150.2508544921875,
+      "positions": 5,
+      "auxiliary_nats_per_image": 4.104925632476807,
+      "combined_objective": 0.5944968933997783
+    },
+    {
+      "update": 45,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.6138266324996948,
+      "nats_per_image": 213.4212474822998,
+      "positions": 35,
+      "auxiliary_nats_per_image": 5.993694484233856,
+      "combined_objective": 0.8622146743770577
+    },
+    {
+      "update": 46,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.32612985372543335,
+      "nats_per_image": 234.91301846504211,
+      "positions": 512,
+      "auxiliary_nats_per_image": 6.433484740555286,
+      "combined_objective": 0.9311752947655256
+    },
+    {
+      "update": 47,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.80064857006073,
+      "nats_per_image": 148.90957641601562,
+      "positions": 5,
+      "auxiliary_nats_per_image": 3.7217137813568115,
+      "combined_objective": 0.5513860922649381
+    },
+    {
+      "update": 48,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.6599945425987244,
+      "nats_per_image": 211.4369125366211,
+      "positions": 35,
+      "auxiliary_nats_per_image": 5.69194108247757,
+      "combined_objective": 0.8273614204294046
+    },
+    {
+      "update": 49,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.38046371936798096,
+      "nats_per_image": 233.15190649032593,
+      "positions": 512,
+      "auxiliary_nats_per_image": 6.263095110654831,
+      "combined_objective": 0.9108692644080808
+    },
+    {
+      "update": 50,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.833408236503601,
+      "nats_per_image": 147.6793670654297,
+      "positions": 5,
+      "auxiliary_nats_per_image": 3.3540539741516113,
+      "combined_objective": 0.5100801821772234
+    },
+    {
+      "update": 51,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.68843674659729,
+      "nats_per_image": 209.32279205322266,
+      "positions": 35,
+      "auxiliary_nats_per_image": 5.397281110286713,
+      "combined_objective": 0.7931551779868256
+    },
+    {
+      "update": 52,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.3975721299648285,
+      "nats_per_image": 231.32718753814697,
+      "positions": 512,
+      "auxiliary_nats_per_image": 6.11575473845005,
+      "combined_objective": 0.8930153435548239
+    },
+    {
+      "update": 53,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.7390551567077637,
+      "nats_per_image": 146.3423614501953,
+      "positions": 5,
+      "auxiliary_nats_per_image": 2.9992141723632812,
+      "combined_objective": 0.4700683920967243
+    },
+    {
+      "update": 54,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.6982600092887878,
+      "nats_per_image": 207.1375675201416,
+      "positions": 35,
+      "auxiliary_nats_per_image": 5.109424829483032,
+      "combined_objective": 0.7596216483903107
+    },
+    {
+      "update": 55,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.40744665265083313,
+      "nats_per_image": 229.62322163581848,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.989053852856159,
+      "combined_objective": 0.8775307121410286
+    },
+    {
+      "update": 56,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.603204369544983,
+      "nats_per_image": 144.607421875,
+      "positions": 5,
+      "auxiliary_nats_per_image": 2.680696487426758,
+      "combined_objective": 0.43363003109566317
+    },
+    {
+      "update": 57,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7114143967628479,
+      "nats_per_image": 205.0007028579712,
+      "positions": 35,
+      "auxiliary_nats_per_image": 4.836614191532135,
+      "combined_objective": 0.7277765322189573
+    },
+    {
+      "update": 58,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.4451994001865387,
+      "nats_per_image": 227.96339344978333,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.885927841067314,
+      "combined_objective": 0.8646607441529107
+    },
+    {
+      "update": 59,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.4775937795639038,
+      "nats_per_image": 142.58103942871094,
+      "positions": 5,
+      "auxiliary_nats_per_image": 2.410862684249878,
+      "combined_objective": 0.40221752248593234
+    },
+    {
+      "update": 60,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7262243032455444,
+      "nats_per_image": 202.93443870544434,
+      "positions": 35,
+      "auxiliary_nats_per_image": 4.583489686250687,
+      "combined_objective": 0.6981477360252979
+    },
+    {
+      "update": 61,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.4918854236602783,
+      "nats_per_image": 226.27463126182556,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.804064549505711,
+      "combined_objective": 0.8540818695080445
+    },
+    {
+      "update": 62,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.3662768602371216,
+      "nats_per_image": 140.36276245117188,
+      "positions": 5,
+      "auxiliary_nats_per_image": 2.191359043121338,
+      "combined_objective": 0.37610765860154716
+    },
+    {
+      "update": 63,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7341562509536743,
+      "nats_per_image": 200.92570114135742,
+      "positions": 35,
+      "auxiliary_nats_per_image": 4.353412300348282,
+      "combined_objective": 0.6710891105850254
+    },
+    {
+      "update": 64,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.533815860748291,
+      "nats_per_image": 224.6650881767273,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.739235892891884,
+      "combined_objective": 0.8454385046075495
+    },
+    {
+      "update": 65,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.2703748941421509,
+      "nats_per_image": 137.86643981933594,
+      "positions": 5,
+      "auxiliary_nats_per_image": 2.0220229625701904,
+      "combined_objective": 0.35519857082862005
+    },
+    {
+      "update": 66,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7367131114006042,
+      "nats_per_image": 198.99852752685547,
+      "positions": 35,
+      "auxiliary_nats_per_image": 4.150795817375183,
+      "combined_objective": 0.6471055878183068
+    },
+    {
+      "update": 67,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5707560777664185,
+      "nats_per_image": 223.16570019721985,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.686645567417145,
+      "combined_objective": 0.8382376769369667
+    },
+    {
+      "update": 68,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.2057862281799316,
+      "nats_per_image": 135.14976501464844,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.8964790105819702,
+      "combined_objective": 0.3388511648307113
+    },
+    {
+      "update": 69,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7396536469459534,
+      "nats_per_image": 197.19304847717285,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.9776564240455627,
+      "combined_objective": 0.6264562845335928
+    },
+    {
+      "update": 70,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.6012455224990845,
+      "nats_per_image": 221.83003616333008,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.63970784842968,
+      "combined_objective": 0.8318133253533007
+    },
+    {
+      "update": 71,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.1696380376815796,
+      "nats_per_image": 132.20767211914062,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.7991783618927002,
+      "combined_objective": 0.32536441901970875
+    },
+    {
+      "update": 72,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7428995966911316,
+      "nats_per_image": 195.6114263534546,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.8308661580085754,
+      "combined_objective": 0.6088997688099006
+    },
+    {
+      "update": 73,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.6179041266441345,
+      "nats_per_image": 220.6476104259491,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.59163711220026,
+      "combined_objective": 0.8254150304003166
+    },
+    {
+      "update": 74,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.1300039291381836,
+      "nats_per_image": 129.16026306152344,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.7169761657714844,
+      "combined_objective": 0.3134217728956281
+    },
+    {
+      "update": 75,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7434886693954468,
+      "nats_per_image": 194.14334774017334,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.705046594142914,
+      "combined_objective": 0.5937416311351447
+    },
+    {
+      "update": 76,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.6161572337150574,
+      "nats_per_image": 219.5776915550232,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.539045162498951,
+      "combined_objective": 0.8186334289845563
+    },
+    {
+      "update": 77,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.0848901271820068,
+      "nats_per_image": 126.06451416015625,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.6466683149337769,
+      "combined_objective": 0.3027293616113753
+    },
+    {
+      "update": 78,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7398399114608765,
+      "nats_per_image": 192.78362560272217,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.595758944749832,
+      "combined_objective": 0.5804926206449135
+    },
+    {
+      "update": 79,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5988978743553162,
+      "nats_per_image": 218.57475328445435,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.482650734484196,
+      "combined_objective": 0.8115024618877522
+    },
+    {
+      "update": 80,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.0503277778625488,
+      "nats_per_image": 122.85404205322266,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.58699631690979,
+      "combined_objective": 0.29308508061513405
+    },
+    {
+      "update": 81,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7326412200927734,
+      "nats_per_image": 191.45126914978027,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.4992404878139496,
+      "combined_objective": 0.5686632049848138
+    },
+    {
+      "update": 82,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5747005939483643,
+      "nats_per_image": 217.64814472198486,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.425119146704674,
+      "combined_objective": 0.8043219935095973
+    },
+    {
+      "update": 83,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 1.0218944549560547,
+      "nats_per_image": 119.52532196044922,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.5327268838882446,
+      "combined_objective": 0.28391463782895265
+    },
+    {
+      "update": 84,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7226176261901855,
+      "nats_per_image": 190.16109943389893,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.412288546562195,
+      "combined_objective": 0.5579185080969633
+    },
+    {
+      "update": 85,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5502623915672302,
+      "nats_per_image": 216.77208065986633,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.369541324675083,
+      "combined_objective": 0.7974040028365027
+    },
+    {
+      "update": 86,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.9915136694908142,
+      "nats_per_image": 116.05926513671875,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.4793881177902222,
+      "combined_objective": 0.274711594800789
+    },
+    {
+      "update": 87,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7114003300666809,
+      "nats_per_image": 188.90227127075195,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.333409756422043,
+      "combined_objective": 0.5480850419529916
+    },
+    {
+      "update": 88,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.530095636844635,
+      "nats_per_image": 215.92330074310303,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.318688601255417,
+      "combined_objective": 0.7910280731890302
+    },
+    {
+      "update": 89,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.9637126922607422,
+      "nats_per_image": 112.410400390625,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.4265068769454956,
+      "combined_objective": 0.2653799355169444
+    },
+    {
+      "update": 90,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.7011505961418152,
+      "nats_per_image": 187.69700717926025,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.2620886266231537,
+      "combined_objective": 0.5391282782150837
+    },
+    {
+      "update": 91,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5153436660766602,
+      "nats_per_image": 215.07875394821167,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.273536533117294,
+      "combined_objective": 0.7852781080597881
+    },
+    {
+      "update": 92,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.9371828436851501,
+      "nats_per_image": 108.6224365234375,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.374553918838501,
+      "combined_objective": 0.2560136948387035
+    },
+    {
+      "update": 93,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.6933513283729553,
+      "nats_per_image": 186.49459552764893,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.1973345279693604,
+      "combined_objective": 0.5308906354283472
+    },
+    {
+      "update": 94,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "gradient_norm": 0.5039091110229492,
+      "nats_per_image": 214.23445963859558,
+      "positions": 512,
+      "auxiliary_nats_per_image": 5.233106970787048,
+      "combined_objective": 0.7800435230263495
+    },
+    {
+      "update": 95,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "gradient_norm": 0.898149847984314,
+      "nats_per_image": 104.73101043701172,
+      "positions": 5,
+      "auxiliary_nats_per_image": 1.3226338624954224,
+      "combined_objective": 0.2465500057794726
+    },
+    {
+      "update": 96,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "gradient_norm": 0.6874509453773499,
+      "nats_per_image": 185.28873920440674,
+      "positions": 35,
+      "auxiliary_nats_per_image": 3.137727200984955,
+      "combined_objective": 0.523211041385896
+    }
+  ],
+  "physical_writer_parameters": 2261074,
+  "training_only_helper_parameters": 1886189,
+  "classes": 9581,
+  "initial_tensor_sha256": "858971307acd44f3fa475b9b3ca12e79af13965fb1fbd751d223015d91987cd2",
+  "trained_tensor_sha256": "d32f9e0e813a3084b9152cb39a6c1313d08dde4ede13d673ef73bcc99321c30b",
+  "helper_initial_tensor_sha256": "a95d13d2af39175a4c0be23b18994ff0d1f18ebbe564e75f71c9a627787bd15c",
+  "helper_trained_tensor_sha256": "68dd0b859e758207a4a866efab224e59c964805460fcc93b9a91c1bfdb0e75de",
+  "all_96_trial_updates_reset": true,
+  "helper_reset": true,
+  "source_cache_unchanged": true,
+  "initial_pixels_match_old_tree": true,
+  "helper_absent_from_generation": true,
+  "support_checks": {
+    "pooled_f1": false,
+    "every_case_f1": false,
+    "gain_over_flat": true,
+    "gain_over_tree": false,
+    "false_blank": true,
+    "false_ink": false,
+    "conditional_dependence": false,
+    "source_form_accuracy": false,
+    "every_case_source_form_accuracy": false
+  },
+  "support": false,
+  "control_result": "artifacts/occupancy_density_preflight_v1/tree.json",
+  "control_sha256": "7c9a766d8ff5bb1bec93f54def361f929809273727f316e48b9fc3e0d465a6e0",
+  "control_reexecuted": false,
+  "control_final_pixels": {
+    "positions": 552,
+    "tp": 73449,
+    "fp": 157727,
+    "fn": 17534,
+    "exact": 0,
+    "source_blank": 4,
+    "false_blank": 0,
+    "false_ink": 4,
+    "f1": 0.4559798112112342
+  },
+  "resources": {
+    "elapsed_seconds": 59.972534847445786,
+    "resource_wait_seconds": 0.0,
+    "peak_allocated_vram_gib": 0.2328195571899414,
+    "minimum_available_gib": 52.15603256225586,
+    "pressure_wait_allowance_seconds": 300,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "source_actor_parameters": 1465381142,
+  "source_actor_loaded": false,
+  "scope": "Training-only cached actual histories, supplied lengths and independent within-span glyphs; no autonomous language",
+  "autonomous_language_measured": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false,
+  "input_sha256": {
+    "references/evidence/global_form_preflight_registration_20261118.json": "b34a915f71f9974c06aaa44a04f2b69aee705e6fde307a3ee10281e832fb03ae",
+    "artifacts/global_form_preflight_v1/result.json": "22024cb7433177e87f11283e426279e5a13fdc74a0441d30d509dae87c6240e6",
+    "artifacts/global_form_preflight_v1.exit.json": "47f9501ce5a8a3aacdb4b5c6fb39ebb9a655482a9a02f21d0a0a5ebe10dce906",
+    "artifacts/layer_conditioned_writer_preflight_v1/conditional_training_cache.pt": "c802d54f9ce3e2a2ca251f86f603979326af5d3e09a69f8341c0a8a6141563b1",
+    "artifacts/global_form_preflight_v1/tree_initial_complete_513_book.npz": "5f821b8add59cd3645052af85a27059a91ce2c6324eb69a68e42177869ba6793",
+    "artifacts/global_form_preflight_v1/tree_initial_complete_513_book_physical_trace.pt": "c59a8d5aaca66ebe44f45de44d7f2fa30a0377b058c62442ae8516331ef74b64",
+    "artifacts/global_form_preflight_v1/tree_initial_complete_qa.npz": "adf3313877d3ec2e15ae30fc11be8dbdf981293f2816513c845e6a4504baa0e3",
+    "artifacts/global_form_preflight_v1/tree_initial_complete_qa_physical_trace.pt": "6bc2509a01b48683e52af136a8a5f2a41614f41139942d8e5ca84956aaf35694",
+    "artifacts/global_form_preflight_v1/tree_initial_longest_native_record.npz": "0e9b7bf401a912f5ad126baafc55d7cbaebbce72497c6e9f23fe4fd93d139366",
+    "artifacts/global_form_preflight_v1/tree_initial_longest_native_record_physical_trace.pt": "ab60dcb283727b016ecc6dfeda4f57aa36271d61b81fcd5f22a55b7e228e48a1",
+    "artifacts/global_form_preflight_v1/tree_final_complete_513_book.npz": "0ebc2f7dcbeb723a641c3786c28c9f198700bf26d6d97b134152299567e7218f",
+    "artifacts/global_form_preflight_v1/tree_final_complete_513_book_physical_trace.pt": "e5713e607b2c62b894906ecca6257baa0f4852d84e32fe5f784879af7f1b8039",
+    "artifacts/global_form_preflight_v1/tree_final_complete_qa.npz": "3f43237a960de864ac44f34b2f4e2ea2a97727ed25a2df4996433ad30e7c4dcf",
+    "artifacts/global_form_preflight_v1/tree_final_complete_qa_physical_trace.pt": "e0de31c484fd3933ca024759478078ade831b6da7538e970a005598e0f5a1c21",
+    "artifacts/global_form_preflight_v1/tree_final_longest_native_record.npz": "149cd9fd80a083140b8ae27fc0d02409a220f9e50b61ab7987523758da67efe5",
+    "artifacts/global_form_preflight_v1/tree_final_longest_native_record_physical_trace.pt": "77b2f0476ba881bddefa7a08e7394282bf16668f53e0ec9f5d61043276edcc69",
+    "artifacts/global_form_preflight_v1/initial_complete_513_book_helper_predictions.pt": "b5a07414c155b35af6c07633b5daab73a6322f6951ef0da08863ffaf4bb910a1",
+    "artifacts/global_form_preflight_v1/initial_complete_qa_helper_predictions.pt": "b6d768483030569e28972027f20ebfbb539350e3bc5d121137bcb840599ec5b6",
+    "artifacts/global_form_preflight_v1/initial_longest_native_record_helper_predictions.pt": "83f980724b0d90aae1cec1a841a1f1cf02ec48072335f1d0954cf2eaff6890fd",
+    "artifacts/global_form_preflight_v1/final_complete_513_book_helper_predictions.pt": "1b80214e61b52c165df428612ab4e5a6f1a42d44dd0a4654e6b8f621b3baff73",
+    "artifacts/global_form_preflight_v1/final_complete_qa_helper_predictions.pt": "8f1a6548b9d153ebb76e5b40f3ecae8e302cab67ec51136231a50a9533c00ff3",
+    "artifacts/global_form_preflight_v1/final_longest_native_record_helper_predictions.pt": "4ca1d2a6dd338f0b3549904e7f7e46e9f13b37a6cfd13e06c6bacf9c024f2f0b"
+  },
+  "audits": [
+    {
+      "mode": "tree",
+      "stage": "initial",
+      "case": "complete_513_book",
+      "pixels": {
+        "positions": 512,
+        "tp": 2868,
+        "fp": 12910,
+        "fn": 81984,
+        "exact": 0,
+        "source_blank": 4,
+        "false_blank": 0,
+        "false_ink": 4,
+        "f1": 0.057000894365497365
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 16532,
+      "mean_generated_events": 32.2890625,
+      "maximum_stored_replay_logp_error": 4.76837158203125e-07
+    },
+    {
+      "mode": "tree",
+      "stage": "initial",
+      "case": "complete_qa",
+      "pixels": {
+        "positions": 5,
+        "tp": 13,
+        "fp": 146,
+        "fn": 490,
+        "exact": 0,
+        "source_blank": 0,
+        "false_blank": 0,
+        "false_ink": 0,
+        "f1": 0.03927492447129909
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 165,
+      "mean_generated_events": 33.0,
+      "maximum_stored_replay_logp_error": 3.5762786865234375e-07
+    },
+    {
+      "mode": "tree",
+      "stage": "initial",
+      "case": "longest_native_record",
+      "pixels": {
+        "positions": 35,
+        "tp": 175,
+        "fp": 947,
+        "fn": 5453,
+        "exact": 0,
+        "source_blank": 0,
+        "false_blank": 0,
+        "false_ink": 0,
+        "f1": 0.05185185185185185
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 1107,
+      "mean_generated_events": 31.62857142857143,
+      "maximum_stored_replay_logp_error": 4.76837158203125e-07
+    },
+    {
+      "mode": "tree",
+      "stage": "final",
+      "case": "complete_513_book",
+      "pixels": {
+        "positions": 512,
+        "tp": 71289,
+        "fp": 156565,
+        "fn": 13563,
+        "exact": 0,
+        "source_blank": 4,
+        "false_blank": 0,
+        "false_ink": 4,
+        "f1": 0.4559490383938907
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 93796,
+      "mean_generated_events": 183.1953125,
+      "maximum_stored_replay_logp_error": 1.0728836059570312e-06
+    },
+    {
+      "mode": "tree",
+      "stage": "final",
+      "case": "complete_qa",
+      "pixels": {
+        "positions": 5,
+        "tp": 259,
+        "fp": 590,
+        "fn": 244,
+        "exact": 0,
+        "source_blank": 0,
+        "false_blank": 0,
+        "false_ink": 0,
+        "f1": 0.3831360946745562
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 457,
+      "mean_generated_events": 91.4,
+      "maximum_stored_replay_logp_error": 7.152557373046875e-07
+    },
+    {
+      "mode": "tree",
+      "stage": "final",
+      "case": "longest_native_record",
+      "pixels": {
+        "positions": 35,
+        "tp": 4590,
+        "fp": 10056,
+        "fn": 1038,
+        "exact": 0,
+        "source_blank": 0,
+        "false_blank": 0,
+        "false_ink": 0,
+        "f1": 0.4527966854098846
+      },
+      "all_trace_pixels_exact": true,
+      "physical_events": 6097,
+      "mean_generated_events": 174.2,
+      "maximum_stored_replay_logp_error": 8.344650268554688e-07
+    }
+  ],
+  "exports": [
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_initial_complete_513_book.png",
+      "sha256": "f95f2d63718d98a190b73bc1d5fc646b36b1e11ef86470e940b09a89b6e45f2a",
+      "mode": "tree",
+      "stage": "initial",
+      "case": "complete_513_book",
+      "positions": 512,
+      "columns": 32,
+      "tile_size": 32,
+      "gutter": 4
+    },
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_initial_complete_qa.png",
+      "sha256": "0e2f771bcc94bd014c7079811f92d7319594d2a750a36c960da58c0bc7ce4f99",
+      "mode": "tree",
+      "stage": "initial",
+      "case": "complete_qa",
+      "positions": 5,
+      "columns": 5,
+      "tile_size": 32,
+      "gutter": 4
+    },
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_initial_longest_native_record.png",
+      "sha256": "bd10271d7c7f76bac8765a49d149f2a3a1aac52e7279dde41125d5b43ddcfbe9",
+      "mode": "tree",
+      "stage": "initial",
+      "case": "longest_native_record",
+      "positions": 35,
+      "columns": 32,
+      "tile_size": 32,
+      "gutter": 4
+    },
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_final_complete_513_book.png",
+      "sha256": "83bb0be34c279a8bdbe78636572b38e7a13899f151aa31c842c007f301cec199",
+      "mode": "tree",
+      "stage": "final",
+      "case": "complete_513_book",
+      "positions": 512,
+      "columns": 32,
+      "tile_size": 32,
+      "gutter": 4
+    },
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_final_complete_qa.png",
+      "sha256": "6a34926e460148627d2960e580fa6db076cbb1867980e3936dcee1efcb32137b",
+      "mode": "tree",
+      "stage": "final",
+      "case": "complete_qa",
+      "positions": 5,
+      "columns": 5,
+      "tile_size": 32,
+      "gutter": 4
+    },
+    {
+      "file": "references/evidence/global_form_preflight_20261118/tree_final_longest_native_record.png",
+      "sha256": "2907a5c63dd5f3d57db55cfd6a62819082fc699672cb0d18cde39f6f50f8cbd4",
+      "mode": "tree",
+      "stage": "final",
+      "case": "longest_native_record",
+      "positions": 35,
+      "columns": 32,
+      "tile_size": 32,
+      "gutter": 4
+    }
+  ],
+  "all_1104_generated_images_audited": true,
+  "all_helper_decisions_audited": true,
+  "helper_audits": [
+    {
+      "stage": "initial",
+      "case": "complete_513_book",
+      "positions": 512,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    {
+      "stage": "initial",
+      "case": "complete_qa",
+      "positions": 5,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    {
+      "stage": "initial",
+      "case": "longest_native_record",
+      "positions": 35,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    {
+      "stage": "final",
+      "case": "complete_513_book",
+      "positions": 512,
+      "correct": 66,
+      "accuracy": 0.12890625
+    },
+    {
+      "stage": "final",
+      "case": "complete_qa",
+      "positions": 5,
+      "correct": 4,
+      "accuracy": 0.8
+    },
+    {
+      "stage": "final",
+      "case": "longest_native_record",
+      "positions": 35,
+      "correct": 9,
+      "accuracy": 0.2571428571428571
+    }
+  ],
+  "exporter_sha256": "6ac584802a78cf336353b8d3920054c8d3b906aeebd1d75c78313f5300279883",
+  "stored_probability_replay_scope": "Recounted persisted cached/parallel log probabilities; no new neural evaluation",
+  "nll_scope": "Original immutable neural execution; no independent neural NLL recount"
+}

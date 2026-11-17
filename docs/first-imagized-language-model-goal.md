@@ -229,25 +229,33 @@ These are descriptive post-hoc bins, not new rules or language scores. Do not
 extend this failed fit, choose another snapshot or treat root nonemptiness
 as successful writing. The lossless event savings remain a component result.
 
-The next [candidate learning signal](../references/global_visual_choice_direction_20261118.md)
-is training-only whole-image discrimination on the same global condition used
-by the learned physical writer. Exact source-mask equivalence supplies labels;
-no current-target physical prefix enters the helper. Its classifier and class
-mapping must be absent from inference, which continues to generate every bit.
-It differs from the failed synthetic teacher-anchor compiler and generated-image
-recognition rewards. The helper is implemented with five passing CPU checks for exact mask labels,
-feature/gradient sharing, helper-free inference and exact update/reset. The
-[source-only preparation](../references/global_form_preparation_protocol_20261118.md)
-is complete: 9,581 visible-form classes cover all 552 prescribed targets
-exactly, with no neural call or source mutation. The separately
-[registered physical preflight](../references/global_form_preflight_protocol_20261118.md)
-keeps the completed 96-update tree as unchanged control, binds the original
-initialization and schedule, and adds one normalized auxiliary CE term. It
-requires .90 pooled/.80 per-case source-form accuracy together with every
-original physical condition and .05 gain over the tree. All trial updates
-will reset; no full language fit is admitted. Require actual complete
-source-form discrimination and writing improvement together. Preserve every
-original physical/language criterion, earlier success and untouched confirmation.
+The [whole-form supervision candidate](../references/global_form_preflight_result_20261118.md)
+is now terminal and fails seven of nine fixed conditions after all 96 updates.
+Exact training-image equivalence yields 9,581 forms and covers all 552 targets.
+Source-form helper accuracy rises from zero to 79/552, but physical F1 is
+.455463432 versus unchanged tree .455979811, with zero exact masks and ink at
+all four true spaces. Even short-QA helper accuracy 4/5 does not yield an exact
+emitted image. Pooled rotated-minus-correct NLL .395939 fails its .5 condition.
+Preserve both the classification improvement and the failed drawing.
+
+All initial images match the saved control; no old control is re-executed.
+All three complete-record gradient probes pass, every actual physical event's
+probability replay is within 1.073e-6 nat, and all physical/helper updates reset
+exactly. All 1,104 images, causal traces and helper decisions are independently
+recounted. The helper is absent from generation. The 59.973-second, .233-GiB
+head-only execution excludes the reused 1,465,381,142-parameter source actor
+and earlier preparation, so it proves no whole-model efficiency. No successor,
+autonomous score or full fit follows. Do not extend this failed trial.
+
+The next algorithm decision must make a complete visual writing choice usable
+by its actual generator, rather than repeat an auxiliary-label fit whose decision
+is discarded. Keep global form selection, physical rendering and semantic
+learning distinct. Read the completed continuous-codec, spatial-plan, prior-
+guidance and exact-pixel generalization results before selecting another route.
+A more compact physical representation is a hypothesis about modeling cost,
+not proof of language or consumer-GPU foundation parity. Any new route needs a
+bounded architectural change, real image support and unchanged controls before
+its own prospective fit. The full language criteria below remain unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
