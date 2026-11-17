@@ -30,10 +30,18 @@ Later [head calibration](nonlinear_feedback_alignment_result_20261118.md) and
 coordinate error to .271039 on complete fitting support, while still failing
 the unchanged .10 reader gate. This is not a new language score. The
 [exact-query floor](frozen_query_identifiability_result_20261118.md) is .016775;
-identical-query ambiguity does not by itself rule out that gate. A
-[profiled feature-learning direction](profiled_visual_feedback_direction_20261118.md)
-is untested and requires its own implementation, gradient/source preflight
-and registration. No further full language fit is admitted.
+identical-query ambiguity does not by itself rule out that gate. The
+[profiled feature-learning comparison](profiled_feedback_fit_result_20261118.md)
+now completes twelve updates and reduces error to .228074131, still failing
+all fixed reader-support conditions. Its
+[actual image consequence](reader_writing_consequence_result_20261118.md)
+does not improve pooled physical agreement on the three complete training
+records (.353468785 control, .353352368 candidate). No autonomous language
+score changes. The next
+[writer-layer conditioning candidate](writer_layer_conditioning_direction_20261118.md)
+is implemented with passing CPU identity and gradient checks, but requires its
+own complete-record fitting/reset preflight. It is not a demonstrated solution;
+no full language fit is admitted.
 
 ## The failure that must be solved
 

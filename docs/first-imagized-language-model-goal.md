@@ -159,16 +159,29 @@ both final heads and every trial; do not extend this fit or choose an
 intermediate. The 75.782-second, 1.246-GiB head-only result does not establish
 whole-model efficiency or a trained successor.
 
-The next [read-only image consequence](../references/reader_writing_consequence_protocol_20261118.md)
-compares both final heads inside the same preserved learned-context actor.
-Measure every next-span target from the same three complete training records,
-with matched noise, supplied correct image history and supplied next-span lengths.
-This is failure localization after a failed reader gate, not qualification,
-autonomous language evaluation or permission for a full fit. Preserve all actual
-pixels, whitespace errors and frozen-model checks. If coordinate improvement
-does not improve writing, choose the next intervention from that physical
-failure rather than continue coordinate-only optimization. Original full-goal
-criteria and untouched confirmation data remain unchanged.
+The [read-only image consequence](../references/reader_writing_consequence_result_20261118.md)
+is terminal. With identical noise, correct source-image histories and supplied
+lengths, pooled F1 on all 552 targets per reader is .353468785 for control and
+.353352368 for the learned head. Both have nine exact masks, one false blank
+and four false-ink outputs. All 1,104 generated tiles are independently
+recounted and exported losslessly. The unchanged actor and both heads pass
+tensor-identity checks; no autonomous language is measured. Coordinate
+improvement does not establish an actor repair. Do not continue this head fit.
+
+The next [bounded candidate](../references/writer_layer_conditioning_direction_20261118.md)
+changes conditional computation in the actual image writer: identity-initialized
+scale/shift after each existing transformer block, compared with a common
+explicit execution of unchanged conditioning. Four CPU identity, masking,
+gradient/update/reset and invalid-input checks pass. The
+[real training-only preflight](../references/writer_layer_conditioning_preflight_20261118.md)
+must bind the original final actor, same three whole records, all 552 targets,
+matched noise and twelve updates per arm before launch. Freeze reader, context,
+codec and stopping, reset every trial update and retain all outputs. Require
+physical improvement over initialization and control without more whitespace
+errors; a loss reduction does not pass. A failed preflight stops this
+intervention. No full fit is admitted by implementation or this support test;
+reader qualification, complete autonomous language and untouched confirmation
+remain separate requirements. All original acceptance criteria are unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

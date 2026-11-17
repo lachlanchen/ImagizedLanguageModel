@@ -1,0 +1,14 @@
+{
+  "schema": "ilm-layer-conditioned-writer-cpu-checks-v1",
+  "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_layer_conditioned_writer -v",
+  "tests": 4,
+  "passed": true,
+  "elapsed_seconds": 0.082,
+  "neural_gpu_calls": 0,
+  "scope": "Numerical implementation fixtures, not full-source or language evidence",
+  "first_attempt_failure": "Parameter-count fixture assumed two blocks; actual production writer has three. Identity, masking and gradients passed. Corrected fixture counts actual layers.",
+  "input_sha256": {
+    "ilm/visual_lm/layer_conditioned_writer.py": "c94edda05f77326dcd9740c010c0a33f3a11225d1ac74ffef427c3d551f6b138",
+    "tests/test_layer_conditioned_writer.py": "f8841654ffbeb169517d5c6de91e0a6be9d7fbb868d8a47a42d553a1d735bbee"
+  }
+}
