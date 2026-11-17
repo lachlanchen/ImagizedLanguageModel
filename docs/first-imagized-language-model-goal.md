@@ -414,6 +414,20 @@ remains. Scheduling wait is at most 300 seconds and included in a separately
 enforced 2,400-second total ceiling. Do not duplicate its owner, reduce reserves,
 kill foreign services or retry a worker exception automatically.
 
+That [scheduler is terminal](../references/evidence/residual_motor_scheduling_failure_20261118.json)
+after 291.299 seconds with no worker or model. Both reserve-only attempts remain
+preserved. The current separately registered [physical-head resource amendment](../references/residual_motor_head_resource_protocol_20261118.md)
+uses 40-GiB entry for this 2,385,763-parameter motor only: 24 GiB unchanged live
+host reserve + 8 GiB unchanged maximum process RSS + 8 GiB additional entry
+margin. It retains all GPU, disk, pressure, mutex, time and thread limits. The
+original full-context admission source remains unchanged; no contextual model
+is loaded. This is an explicit resource change before any model execution,
+not a change to quality, mathematical learning rules or failed model scores.
+Every source, initialization, update, generation/probability test and physical/
+language criterion remains fixed. Launch at most once, qualify real complete-
+source memory/gradient/update/reset before retained fitting, and preserve any
+resource violation. No automatic retry or language admission follows.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
