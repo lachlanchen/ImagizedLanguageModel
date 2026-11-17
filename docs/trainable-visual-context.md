@@ -6,9 +6,14 @@ is registered. The treatment has completed all 8,172 updates and passed its
 CPU source/state audit. Its original controller stopped when the first
 generation stage failed the unchanged host-pressure entry guard, before model
 loading. A [separately bound execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
-preserves that failure, queues for the original resource limits and runs only
-the unfinished generation and matched-control stages. Useful autonomous language is
-still unproved. The earlier compact full-rank model produced zero strict complete
+preserves that failure and completes all 396 treatment streams, then stops at
+the strict cold audit because deployment admission reads two undeclared
+obsolete-job metadata files. The frozen-control fit has not started. The
+[failure decision](../references/visual_context_cold_guard_failure_20261117.md)
+selects removal of this deployment dependency while preserving resource guards,
+numerical generation and the strict artifact audit. A new exact execution
+binding is required before continuation. Useful autonomous language is still
+unproved. The earlier compact full-rank model produced zero strict complete
 development answers with a frozen contextual body. All failed baselines remain.
 
 ## Learning path

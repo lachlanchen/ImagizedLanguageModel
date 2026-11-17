@@ -139,11 +139,21 @@ source/state audit. Its controller exits at the first generation stage because
 the unchanged host-pressure entry guard rejects admission before model loading.
 Preserve that terminal execution and its zero-output failed directory. The
 [bounded execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
-adds only a finite queue for the original resource limits, retaining all 599
-bound sources, five checkpoints, both arms and 792 output streams. Register,
-commit and push its exact binding before the single continuation launch. Do not
-repeat the completed treatment fit or audit; any further error ends this recovery.
-Training completion and audit success do not establish language quality.
+was registered, committed and pushed with a finite queue for the original
+resource limits, retaining all 599 bound sources, five checkpoints, both arms
+and 792 output streams. It completes all 396 treatment streams and then ends at
+its strict cold access audit. Two undeclared obsolete-job owner-metadata files
+are opened by the deployment admission guard. The retained cold pixels, stopping
+and feedback match the original output on CPU; the original access audit remains
+failed. The frozen-control fit has not started and language remains unreviewed.
+Follow the [failure decision](../references/visual_context_cold_guard_failure_20261117.md):
+remove only the obsolete runtime-JSON dependency from deployment admission,
+preserving the original resource guards and strict artifact audit. Mechanically
+check numerical-source equivalence and bind a fresh fixed-case cold check and
+the complete remaining comparison before a new execution. Preserve both terminal
+controllers and all 599 original and 21 recovery bindings. Do not repeat the
+completed treatment fit, audit or 396 streams, or automatically restart a failed
+stage. Training completion and audit success do not establish language quality.
 
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
