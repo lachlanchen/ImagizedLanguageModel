@@ -37,11 +37,14 @@ all fixed reader-support conditions. Its
 [actual image consequence](reader_writing_consequence_result_20261118.md)
 does not improve pooled physical agreement on the three complete training
 records (.353468785 control, .353352368 candidate). No autonomous language
-score changes. The next
-[writer-layer conditioning candidate](writer_layer_conditioning_direction_20261118.md)
-is implemented with passing CPU identity and gradient checks, but requires its
-own complete-record fitting/reset preflight. It is not a demonstrated solution;
-no full language fit is admitted.
+score changes. The
+[writer-layer conditioning comparison](writer_layer_conditioning_result_20261118.md)
+now completes its real twelve-update-per-arm support test and also fails.
+Actual pooled F1 is .339850462 for modulation and .342911305 for unchanged
+conditioning, from the identical .348600259 start. The short QA improves, while
+book and long QA deteriorate against control. All trial updates reset exactly;
+all 2,208 emitted tiles are recounted and exported. No working algorithm or new
+full fit is qualified. Another unchanged fit is not selected.
 
 ## The failure that must be solved
 

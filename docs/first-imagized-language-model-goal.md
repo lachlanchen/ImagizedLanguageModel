@@ -168,20 +168,30 @@ recounted and exported losslessly. The unchanged actor and both heads pass
 tensor-identity checks; no autonomous language is measured. Coordinate
 improvement does not establish an actor repair. Do not continue this head fit.
 
-The next [bounded candidate](../references/writer_layer_conditioning_direction_20261118.md)
-changes conditional computation in the actual image writer: identity-initialized
-scale/shift after each existing transformer block, compared with a common
-explicit execution of unchanged conditioning. Four CPU identity, masking,
-gradient/update/reset and invalid-input checks pass. The
-[real training-only preflight](../references/writer_layer_conditioning_preflight_20261118.md)
-must bind the original final actor, same three whole records, all 552 targets,
-matched noise and twelve updates per arm before launch. Freeze reader, context,
-codec and stopping, reset every trial update and retain all outputs. Require
-physical improvement over initialization and control without more whitespace
-errors; a loss reduction does not pass. A failed preflight stops this
-intervention. No full fit is admitted by implementation or this support test;
-reader qualification, complete autonomous language and untouched confirmation
-remain separate requirements. All original acceptance criteria are unchanged.
+The [writer-layer conditioning comparison](../references/writer_layer_conditioning_result_20261118.md)
+is also terminal and fails. Both arms complete twelve whole-record optimizer
+updates, with matched noise and exactly identical initial outputs. Pooled
+physical F1 changes from .348600259 to .342911305 for unchanged conditioning
+and .339850462 for modulation. Short-QA F1 improves to .876016260, but its
+source masks remain nonexact and both book/long-QA case comparisons deteriorate.
+Retain that limited positive effect alongside the failed pooled support gate.
+Every trial resets exactly, all frozen tensors and stopping remain unchanged,
+and all 2,208 generated tiles are independently recounted and exported losslessly.
+The run takes 129.921 monitored seconds at 6.957 GiB peak allocation. It proves
+execution of a physical learning comparison, not autonomous language.
+
+Do not extend this conditioning trial, select an intermediate, change its
+support thresholds or install the failed reader. No new algorithm is qualified
+or selected for a full fit. The next substantive proposal must address complete
+conditional language-to-writing learning, distinguish its mechanism from the
+completed flow, mixture, joint-density, native-state, predictive-KL and modulation
+trials, and retain the original language/confirmation criteria. A lower auxiliary
+loss, an easy fitted short answer or another representational name is insufficient.
+Use the existing positive complete-answer/counterfactual cases as retained
+constraints without repeating their completed tests or repairing frozen readings.
+Before any new execution, bind one failure-specific intervention, unchanged
+control, complete training-only support, real gradients/reset and resources.
+No deployment, language score or full-fit permission follows from the new code.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
