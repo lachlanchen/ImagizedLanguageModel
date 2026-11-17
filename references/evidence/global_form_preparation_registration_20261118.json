@@ -1,0 +1,38 @@
+{
+  "schema": "ilm-global-form-preparation-v1",
+  "input_sha256": {
+    "scripts/prepare_global_form_supervision.py": "f6e805abbe1a2e17b46ff25f96411d951e742c35781448823ad02bf4ebef8cc1",
+    "ilm/visual_lm/global_form_supervision.py": "a3094a8127cb3a144391f3b673b8165b495c5ac6100b8a24884605795f07bc66",
+    "tests/test_global_form_supervision.py": "01507a8efaf84792afca0026c5628f53a12fa20594963a16444fc773194d0f27",
+    "references/global_visual_choice_direction_20261118.md": "2747951950d3a7ee399a3893acefc082a9542a8e0f2fa00f55079e2723052fd0",
+    "references/global_form_preparation_protocol_20261118.md": "5a949a53149e9fdba043ae0e8931dd23e6176f24114cd2f8e9afd1cd89fa1b4b",
+    "references/evidence/global_form_supervision_cpu_20261118.json": "ba2540d5d31f923f6aa3b94c19b0646287e1fecb7dae1fc78e7c771bd7a2e1a0",
+    "artifacts/nonlinear_feedback_alignment_v1/prepared.pt": "67dd0ceb806cf7a7f490425483562206b941b4c04a40897aae6d7610d5230d02",
+    "artifacts/nonlinear_feedback_alignment_v1/preparation.json": "3c6e437714e2b693c9772c88e7a287aefe7c10666c6595c8c04886bd1b99a150",
+    "artifacts/layer_conditioned_writer_preflight_v1/conditional_training_cache.pt": "c802d54f9ce3e2a2ca251f86f603979326af5d3e09a69f8341c0a8a6141563b1",
+    "artifacts/layer_conditioned_writer_preflight_v1/result.json": "f575f6fd09f17456de25cc98b9f1b723e3d0be89830710933aa2f13abeee1d92"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "source_cells": 68948,
+  "distinct_source_span_images": 29740,
+  "derived_native_rows": 33941,
+  "target_positions": [
+    512,
+    5,
+    35
+  ],
+  "label_rule": "lexicographically sorted exact 128-byte masks; preserve all physical aliases including empty",
+  "no_target_omissions": true,
+  "maximum_seconds": 180,
+  "maximum_rss_gib": 2,
+  "cpu_threads": 2,
+  "minimum_entry_host_gib": 48,
+  "minimum_runtime_host_gib": 24,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "full_language_fit_authorized": false,
+  "automatic_retry": false
+}

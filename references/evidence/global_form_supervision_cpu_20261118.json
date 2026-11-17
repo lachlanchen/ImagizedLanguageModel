@@ -1,0 +1,21 @@
+{
+  "schema": "ilm-global-form-supervision-cpu-v1",
+  "input_sha256": {
+    "ilm/visual_lm/global_form_supervision.py": "a3094a8127cb3a144391f3b673b8165b495c5ac6100b8a24884605795f07bc66",
+    "tests/test_global_form_supervision.py": "01507a8efaf84792afca0026c5628f53a12fa20594963a16444fc773194d0f27"
+  },
+  "command": "env CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_global_form_supervision -v",
+  "tests_passed": 5,
+  "test_elapsed_seconds": 0.093,
+  "checks": [
+    "exact physical aliases and unknown rejection",
+    "shared-condition gradient without target prefix",
+    "complete versus accumulated gradients",
+    "helper-free identical inference and preserved RNG",
+    "real update and exact reset"
+  ],
+  "fixtures": "small deterministic numerical fixtures; not a language experiment",
+  "gpu_used": false,
+  "language_measured": false,
+  "full_language_fit_authorized": false
+}

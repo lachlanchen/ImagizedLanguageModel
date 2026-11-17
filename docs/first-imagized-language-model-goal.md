@@ -235,10 +235,12 @@ by the learned physical writer. Exact source-mask equivalence supplies labels;
 no current-target physical prefix enters the helper. Its classifier and class
 mapping must be absent from inference, which continues to generate every bit.
 It differs from the failed synthetic teacher-anchor compiler and generated-image
-recognition rewards. It is currently unimplemented and admits no model call or
-fit. First qualify source-only construction, feature/gradient sharing,
-helper-free inference and exact reset, then register a bounded comparison using
-the completed 96-update tree as unchanged control. Require actual complete
+recognition rewards. The helper is implemented with five passing CPU checks for exact mask labels,
+feature/gradient sharing, helper-free inference and exact update/reset. The
+[source-only preparation](../references/global_form_preparation_protocol_20261118.md)
+is separately registered and admits no model call or fit. Complete this bound
+preparation before registering a candidate comparison using the completed
+96-update tree as unchanged control. Require actual complete
 source-form discrimination and writing improvement together. Preserve every
 original physical/language criterion, earlier success and untouched confirmation.
 
