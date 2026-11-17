@@ -1,0 +1,16 @@
+{
+  "tests": 3,
+  "exit_code": 0,
+  "implementation_sha256": {
+    "ilm/visual_lm/weighted_feedback_ridge.py": "e8b3ecaa5da86b0097c6dbd19130a30ca2f7a06a6073d663e48a2dbf3fcc9c57",
+    "tests/test_weighted_feedback_ridge.py": "ef94867660daed5916d99d3e7ce67566c033c1fc9dcfa6a498796df5e8575ad8"
+  },
+  "checks": [
+    "Streamed weighted ridge equals augmented least squares, including collinear features.",
+    "Native source mean/scale inversion and relative-error weighting agree.",
+    "Inputs unchanged; invalid/empty support rejected."
+  ],
+  "language_measured": false,
+  "goal_achieved": false,
+  "reported_test_seconds": 0.02
+}

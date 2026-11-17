@@ -135,6 +135,22 @@ reader/context/writer components stay fixed. Preserve every failure and keep
 original language criteria. Do not repeat completed native-history, codec,
 sampler or reader diagnoses unchanged.
 
+The [complete head-calibration result](../references/nonlinear_feedback_alignment_result_20261118.md)
+now fails reader support after twenty epochs and 2,660 updates per arm on every
+one of 33,941 sequence/slot rows. Weighted error is .578608694 affine and
+.542496895 nonlinear, from .639791851 initially. All complete-record gates fail;
+no language fit is admitted. Source queries, encoder, codec and all prior
+language evidence remain unchanged. Do not extend those epochs or select an
+intermediate head.
+
+The [next bounded refit](../references/feedback_ridge_refit_protocol_20261118.md)
+keeps both final feature maps and sources fixed and fits only output coefficients
+by one full-support weighted ridge solve. FP64 matrix optimality is separate
+from actual FP32-weight/BF16 inference quality. Require source-error replay,
+complete-record trial fitting/reset, unchanged features and the original reader
+support rule. No new feature learning, loss-weight tuning, source preparation,
+full language fit or autonomous claim is admitted by this procedure.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
