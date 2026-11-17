@@ -1,0 +1,745 @@
+{
+  "schema": "ilm-profiled-feedback-fit-result-v1",
+  "legacy_bf16_error": 0.27103852725122124,
+  "same_weight_fp32_error": 0.27104280788626056,
+  "common_fp32_control": {
+    "rows": 33941,
+    "features": 4481,
+    "outputs": 2048,
+    "ridge_scale": 0.0001,
+    "ridge": 3.222739942390491e-06,
+    "normal_equation_relative_residual": 2.638245712035611e-14,
+    "ideal_native_error": 0.2695005504422053,
+    "ridge_penalty": 0.029266087043157245,
+    "profiled_objective": 0.29876663748536253,
+    "actual_native_error": 0.2695005543791922
+  },
+  "control_cases": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "actual_error": 0.2767590135335922
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "actual_error": 0.2021619826555252
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "actual_error": 0.22193501889705658
+    }
+  ],
+  "outer_steps": [
+    {
+      "outer_step": 1,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.5463809119414332e-14,
+        "ideal_native_error": 0.26499926991495065,
+        "ridge_penalty": 0.02905443283948511,
+        "profiled_objective": 0.29405370275443576,
+        "actual_native_error": 0.2649992739170557
+      },
+      "step": {
+        "gradient_norm": 0.0057811864669614675,
+        "parameter_norm": 42.14220164639877,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 145.79084029631127,
+            "armijo_threshold": 0.2987661502215108,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.5463809119414332e-14,
+              "ideal_native_error": 0.26499926991495065,
+              "ridge_penalty": 0.02905443283948511,
+              "profiled_objective": 0.29405370275443576,
+              "actual_native_error": 0.2649992739170557
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 2,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.6109815818416476e-14,
+        "ideal_native_error": 0.26077152955277694,
+        "ridge_penalty": 0.028805154329840918,
+        "profiled_objective": 0.28957668388261787,
+        "actual_native_error": 0.26077153395453934
+      },
+      "step": {
+        "gradient_norm": 0.005424440920094919,
+        "parameter_norm": 42.53529572009211,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 156.82831225064874,
+            "armijo_threshold": 0.2940532412940385,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.6109815818416476e-14,
+              "ideal_native_error": 0.26077152955277694,
+              "ridge_penalty": 0.028805154329840918,
+              "profiled_objective": 0.28957668388261787,
+              "actual_native_error": 0.26077153395453934
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 3,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.6123720222820215e-14,
+        "ideal_native_error": 0.25677785832674943,
+        "ridge_penalty": 0.028521335907108,
+        "profiled_objective": 0.2852991942338574,
+        "actual_native_error": 0.25677786313463
+      },
+      "step": {
+        "gradient_norm": 0.0051186413503477605,
+        "parameter_norm": 42.95303605070731,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 167.8298326089562,
+            "armijo_threshold": 0.28957624416024497,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.6123720222820215e-14,
+              "ideal_native_error": 0.25677785832674943,
+              "ridge_penalty": 0.028521335907108,
+              "profiled_objective": 0.2852991942338574,
+              "actual_native_error": 0.25677786313463
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 4,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.6703047886720277e-14,
+        "ideal_native_error": 0.2529892495654449,
+        "ridge_penalty": 0.028204290064036602,
+        "profiled_objective": 0.28119353962948146,
+        "actual_native_error": 0.25298925313109066
+      },
+      "step": {
+        "gradient_norm": 0.004853357499944821,
+        "parameter_norm": 43.392998672939946,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 178.81641182803162,
+            "armijo_threshold": 0.2852987730303863,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.6703047886720277e-14,
+              "ideal_native_error": 0.2529892495654449,
+              "ridge_penalty": 0.028204290064036602,
+              "profiled_objective": 0.28119353962948146,
+              "actual_native_error": 0.25298925313109066
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 5,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.7105345588716455e-14,
+        "ideal_native_error": 0.2493832381543184,
+        "ridge_penalty": 0.0278567945981911,
+        "profiled_objective": 0.2772400327525095,
+        "actual_native_error": 0.24938324157847092
+      },
+      "step": {
+        "gradient_norm": 0.004618136868239806,
+        "parameter_norm": 43.852981719104186,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 189.91633626405996,
+            "armijo_threshold": 0.28119313459133816,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.7105345588716455e-14,
+              "ideal_native_error": 0.2493832381543184,
+              "ridge_penalty": 0.0278567945981911,
+              "profiled_objective": 0.2772400327525095,
+              "actual_native_error": 0.24938324157847092
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 6,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.7919688528091866e-14,
+        "ideal_native_error": 0.24594158914675288,
+        "ridge_penalty": 0.027482958708213663,
+        "profiled_objective": 0.27342454785496656,
+        "actual_native_error": 0.24594159229309298
+      },
+      "step": {
+        "gradient_norm": 0.004404709395841765,
+        "parameter_norm": 44.33124173004478,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 201.2901998569775,
+            "armijo_threshold": 0.27723964222003555,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.7919688528091866e-14,
+              "ideal_native_error": 0.24594158914675288,
+              "ridge_penalty": 0.027482958708213663,
+              "profiled_objective": 0.27342454785496656,
+              "actual_native_error": 0.24594159229309298
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 7,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.8272781654024413e-14,
+        "ideal_native_error": 0.2426494208960679,
+        "ridge_penalty": 0.027086821224525544,
+        "profiled_objective": 0.26973624212059344,
+        "actual_native_error": 0.2426494248502422
+      },
+      "step": {
+        "gradient_norm": 0.004208020434875729,
+        "parameter_norm": 44.82653098120289,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 213.05281984699633,
+            "armijo_threshold": 0.2734241705930498,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.8272781654024413e-14,
+              "ideal_native_error": 0.2426494208960679,
+              "ridge_penalty": 0.027086821224525544,
+              "profiled_objective": 0.26973624212059344,
+              "actual_native_error": 0.2426494248502422
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 8,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.8980107498189314e-14,
+        "ideal_native_error": 0.2394947529172869,
+        "ridge_penalty": 0.026671871031229717,
+        "profiled_objective": 0.2661666239485166,
+        "actual_native_error": 0.23949475625704508
+      },
+      "step": {
+        "gradient_norm": 0.004024817735788318,
+        "parameter_norm": 45.3379404220204,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 225.29189343845064,
+            "armijo_threshold": 0.2697358771667,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.8980107498189314e-14,
+              "ideal_native_error": 0.2394947529172869,
+              "ridge_penalty": 0.026671871031229717,
+              "profiled_objective": 0.2661666239485166,
+              "actual_native_error": 0.23949475625704508
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 9,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.952914813570399e-14,
+        "ideal_native_error": 0.23646775454774563,
+        "ridge_penalty": 0.02624108043680386,
+        "profiled_objective": 0.2627088349845495,
+        "actual_native_error": 0.2364677568548359
+      },
+      "step": {
+        "gradient_norm": 0.0038527033175132937,
+        "parameter_norm": 45.86479632398017,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 238.0915037786162,
+            "armijo_threshold": 0.2661662705416107,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.952914813570399e-14,
+              "ideal_native_error": 0.23646775454774563,
+              "ridge_penalty": 0.02624108043680386,
+              "profiled_objective": 0.2627088349845495,
+              "actual_native_error": 0.2364677568548359
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 10,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 2.9917344774547414e-14,
+        "ideal_native_error": 0.23356008456259508,
+        "ridge_penalty": 0.02579698784714281,
+        "profiled_objective": 0.2593570724097379,
+        "actual_native_error": 0.2335600881051505
+      },
+      "step": {
+        "gradient_norm": 0.003690081132807442,
+        "parameter_norm": 46.40660573393527,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 251.52078810055198,
+            "armijo_threshold": 0.262708492496269,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 2.9917344774547414e-14,
+              "ideal_native_error": 0.23356008456259508,
+              "ridge_penalty": 0.02579698784714281,
+              "profiled_objective": 0.2593570724097379,
+              "actual_native_error": 0.2335600881051505
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 11,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 3.068908732159641e-14,
+        "ideal_native_error": 0.23076440783989804,
+        "ridge_penalty": 0.025341835363807474,
+        "profiled_objective": 0.2561062432037055,
+        "actual_native_error": 0.23076441090961453
+      },
+      "step": {
+        "gradient_norm": 0.0035358839325846467,
+        "parameter_norm": 46.96298038183572,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 265.6364364737895,
+            "armijo_threshold": 0.25935674029844236,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 3.068908732159641e-14,
+              "ideal_native_error": 0.23076440783989804,
+              "ridge_penalty": 0.025341835363807474,
+              "profiled_objective": 0.2561062432037055,
+              "actual_native_error": 0.23076441090961453
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    },
+    {
+      "outer_step": 12,
+      "solve": {
+        "rows": 33941,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.222739942390491e-06,
+        "normal_equation_relative_residual": 3.125967723153312e-14,
+        "ideal_native_error": 0.22807412655688325,
+        "ridge_penalty": 0.0248776555830253,
+        "profiled_objective": 0.25295178213990854,
+        "actual_native_error": 0.22807413109694608
+      },
+      "step": {
+        "gradient_norm": 0.0033893409607861948,
+        "parameter_norm": 47.53358545216493,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 280.48866137763247,
+            "armijo_threshold": 0.25610592098864915,
+            "accepted": true,
+            "solve": {
+              "rows": 33941,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.222739942390491e-06,
+              "normal_equation_relative_residual": 3.125967723153312e-14,
+              "ideal_native_error": 0.22807412655688325,
+              "ridge_penalty": 0.0248776555830253,
+              "profiled_objective": 0.25295178213990854,
+              "actual_native_error": 0.22807413109694608
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "full_source_rows": 33941
+    }
+  ],
+  "final": {
+    "rows": 33941,
+    "features": 4481,
+    "outputs": 2048,
+    "ridge": 3.222739942390491e-06,
+    "normal_equation_relative_residual": 3.125967723153312e-14,
+    "ideal_native_error": 0.22807412655688325,
+    "ridge_penalty": 0.0248776555830253,
+    "profiled_objective": 0.25295178213990854,
+    "actual_native_error": 0.22807413109694608
+  },
+  "final_cases": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "actual_error": 0.24294598400592804
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "actual_error": 0.16708698496222496
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "actual_error": 0.16843638941645622
+    }
+  ],
+  "reader_support": false,
+  "support_checks": {
+    "final_actual_error_at_most_010": false,
+    "gain_over_control_at_least_010": false,
+    "all_complete_cases_at_most_010": false
+  },
+  "control_head_sha256": "d236c4fd9e91cd728b5bcf2d8dae2aaff686ec6237c5fd236671acf84707c61f",
+  "final_head_sha256": "cc20af8f490a439c8f8959e437ffda86d836677b10860b054e85bff0c65b6f82",
+  "fitted_feature_parameters": 1576960,
+  "full_source_rows": 33941,
+  "registration_sha256": "28ec87ce06a3b40c32f4c2b0cddc574863ccbb44fa025d3467f72d246c81a39d",
+  "source_commit": "ec051e0f7153cd018a8b32ffe40b85c7f147dc7d",
+  "resources": {
+    "elapsed_seconds": 75.78245783690363,
+    "resource_wait_seconds": 0.0,
+    "peak_allocated_vram_gib": 1.2464938163757324,
+    "minimum_available_gib": 53.318180084228516,
+    "pressure_wait_allowance_seconds": 300,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "language_measured": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false,
+  "supervisor_elapsed_seconds": 85.08567571640015,
+  "bindings": {
+    "artifacts/profiled_feedback_fit_v1/result.json": "44a3ad76b3693707a66cbd24eeee9b279b1ceab1628fe203a1dfe97b4248ca03",
+    "artifacts/profiled_feedback_fit_v1/fixed_feature_control.pt": "d236c4fd9e91cd728b5bcf2d8dae2aaff686ec6237c5fd236671acf84707c61f",
+    "artifacts/profiled_feedback_fit_v1/learned_features_final.pt": "cc20af8f490a439c8f8959e437ffda86d836677b10860b054e85bff0c65b6f82",
+    "references/evidence/profiled_feedback_fit_registration_20261118.json": "28ec87ce06a3b40c32f4c2b0cddc574863ccbb44fa025d3467f72d246c81a39d",
+    "artifacts/profiled_feedback_fit_v1.exit.json": "cc138a86a10f97acb3cee9dcf824f7825cf799078e0950807624699fb1108c42",
+    "artifacts/profiled_feedback_fit_v1/outer_01.json": "9a564ae864166147773454ad9d2f7706ac9b488928d4547695ddfa8345b778f6",
+    "artifacts/profiled_feedback_fit_v1/outer_01_trial_1.json": "ccc6037b1908d6850f00346d5594669fd4912d6f0bc541908d175c123246de86",
+    "artifacts/profiled_feedback_fit_v1/outer_02.json": "505dc989726b79eecaa50d2f41f66a1fa5cd78a28d37b6291fd59d78cd889fde",
+    "artifacts/profiled_feedback_fit_v1/outer_02_trial_1.json": "48892dd0e1a0f7ae820c7f57736a54a9fed61c3b6eacd9de8536cad84ef43af5",
+    "artifacts/profiled_feedback_fit_v1/outer_03.json": "85a11bb403e32033a3c5ac98c5483ce9a4001ce4957d84107d6c92c84bdcd96c",
+    "artifacts/profiled_feedback_fit_v1/outer_03_trial_1.json": "dddfc4d1de8d9b95fb58aaca4d9591fe473e122e54afffc4666dfba3d8ab001a",
+    "artifacts/profiled_feedback_fit_v1/outer_04.json": "2fba4125198977f7bf1f438ca6936393d6da362e9c6ff7ceb5da5efbe7bb7843",
+    "artifacts/profiled_feedback_fit_v1/outer_04_trial_1.json": "1c64e5c9ea4bc994d3c14535237ba1e82ebb1bb5d232b16666850cc83127c8a0",
+    "artifacts/profiled_feedback_fit_v1/outer_05.json": "c3075f2ee08e0fb76cc8294a366779ea5fe57a202954b1e4e3270f26bc6d1cf5",
+    "artifacts/profiled_feedback_fit_v1/outer_05_trial_1.json": "772f8cc1c9a165d490937ddb131eda728b5820123be0095bf5fbd556b782bef8",
+    "artifacts/profiled_feedback_fit_v1/outer_06.json": "49331e9b7074105ec4d3e133b74579186d404cade1db164e382cb31200135f1a",
+    "artifacts/profiled_feedback_fit_v1/outer_06_trial_1.json": "3977ab5608ef93842ed429a60aa450d126d10cb55aeee87efe2ab06cd889ed24",
+    "artifacts/profiled_feedback_fit_v1/outer_07.json": "8d2be1e8c813fd0bb53eab382828634af135c3b48f8a554e3226c93f8eb4b39b",
+    "artifacts/profiled_feedback_fit_v1/outer_07_trial_1.json": "f34980586a2e66d42c9ba023f05fe7a59ce8a64b068727eb82af6f989150c91b",
+    "artifacts/profiled_feedback_fit_v1/outer_08.json": "c2d6b8223feac2fdfc7db4c559418f86117c75d06585ef9305c7a3f6afaf7ada",
+    "artifacts/profiled_feedback_fit_v1/outer_08_trial_1.json": "ddbb025d563981bbcfd369d41779346ead0217ed24bd79639335f2360a71c861",
+    "artifacts/profiled_feedback_fit_v1/outer_09.json": "520a0b9f58dc8d15337c1349dad7661c7e09ce2000fa7a514f29e35353f6568f",
+    "artifacts/profiled_feedback_fit_v1/outer_09_trial_1.json": "2509917e3c3a54efd6056623cbd290115c0acd467ad1098cd59a16d4d34ae36b",
+    "artifacts/profiled_feedback_fit_v1/outer_10.json": "0b03752b1d2298442d69901896f42ba3098f6ca26469a9485dc11551fe8ca9e1",
+    "artifacts/profiled_feedback_fit_v1/outer_10_trial_1.json": "b4c1c41cdd968ced0304fd74c19f46f65df54628c6e470f836b571d7914cf0a6",
+    "artifacts/profiled_feedback_fit_v1/outer_11.json": "ac8baede77e099f83d719fb6da09759902927dba4b6484f166bfedc921052109",
+    "artifacts/profiled_feedback_fit_v1/outer_11_trial_1.json": "ba968f7836a2e853342ba3f6bfae86232778c894fda99e20eb95bcc39291edc2",
+    "artifacts/profiled_feedback_fit_v1/outer_12.json": "c6a734849363bc2cafb169c37ad43f73243249cab1fd3d93628d0383625bcf9d",
+    "artifacts/profiled_feedback_fit_v1/outer_12_trial_1.json": "80b4836babb62a032e9f2cc1dfddd3c10a9aa48ccfc07adea65c74347fcb3107"
+  },
+  "all_twelve_steps_and_trial_records_verified": true,
+  "interpretation": "The full-support profiled feature fit improves coordinate error but fails every reader-support condition. Language remains unmeasured; no language fit admitted."
+}

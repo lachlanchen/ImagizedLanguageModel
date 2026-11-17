@@ -149,14 +149,26 @@ have four passing CPU numerical tests and a passing
 [real complete-record preflight](../references/profiled_feedback_preflight_result_20261118.md).
 All three trial steps improve and reset exactly. The book's re-solved finite
 source derivative differs from the partial gradient by 3.20e-5 relative.
-The 25.903-second, 1.355-GiB preflight qualifies only a separately registered
-[twelve-step full-support head comparison](../references/profiled_feedback_fit_protocol_20261118.md).
-Keep lambda fixed after the common FP32 baseline, all sources/masses unchanged
-and all twelve outer steps/search limits bound before launch. No full language
-fit is admitted. A reader pass would permit only
-separately registered live-image conditional-writing evaluation,
-not full language training or a language claim. Original full-goal criteria
-and untouched confirmation data remain unchanged.
+The 25.903-second, 1.355-GiB preflight qualified the separately registered
+[twelve-step full-support comparison](../references/profiled_feedback_fit_result_20261118.md),
+which is now terminal. Actual error falls from the common FP32 control's
+.269500554 to .228074131; the .10 absolute error, .10 gain and all three
+complete-record limits fail. All twelve first proposals reduce the fixed-ridge
+objective, but numerical optimization is not useful visual language. Preserve
+both final heads and every trial; do not extend this fit or choose an
+intermediate. The 75.782-second, 1.246-GiB head-only result does not establish
+whole-model efficiency or a trained successor.
+
+The next [read-only image consequence](../references/reader_writing_consequence_protocol_20261118.md)
+compares both final heads inside the same preserved learned-context actor.
+Measure every next-span target from the same three complete training records,
+with matched noise, supplied correct image history and supplied next-span lengths.
+This is failure localization after a failed reader gate, not qualification,
+autonomous language evaluation or permission for a full fit. Preserve all actual
+pixels, whitespace errors and frozen-model checks. If coordinate improvement
+does not improve writing, choose the next intervention from that physical
+failure rather than continue coordinate-only optimization. Original full-goal
+criteria and untouched confirmation data remain unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
