@@ -201,12 +201,25 @@ and a normalized nonempty branch. No glyph identity, font, reference topology
 or lexical inventory enters generation. This is a different physical output
 factorization, not a qualified language algorithm or a repetition of old
 blank margins. Root errors and unreadable nonempty images remain possible.
-Before any neural fitting proposal, run the registered CPU structure audit on
-all 68,948 cells of the existing 29,740 distinct saved training-span images.
-Verify exact pixels, topology, root/space counts, event cost and all source
-bindings. These cells are not corpus exposures or held-out language. Dense
-refinement can cost more events than the old fixed writer; no efficiency claim
-is admitted. No full fit, deployment or new language score is selected.
+The [registered CPU structure audit](../references/occupancy_density_structure_result_20261118.md)
+now verifies all 68,948 saved-support cells exactly in 6.521 seconds. Both modes
+preserve all packed bytes and 3,206 empty cells. On this saved support, tree
+refinement averages 97.302 events versus 245.096 for the equal-parameter flat
+control; both components have 2,261,074 parameters. No neural call or optimizer
+update occurs in the audit. The event ratio .396997 is not a throughput,
+compression-byte or language-efficiency measurement; the dense-image support
+still permits 342 events. These cells are not corpus exposures or held-out language.
+
+The next [registered training-only head preflight](../references/occupancy_density_preflight_protocol_20261118.md)
+reuses the immutable original actor's real pre-target context/image cache for
+all 552 next-span positions of the same three whole records. Compare common
+initial tensors, the same root and 96 whole-record likelihood updates per arm;
+freeze the source actor and reset every trial. Verify actual generated topology,
+all-event cached probability replay, whitespace, image fidelity and conditional
+state dependence. Root errors and unreadable nonempty writing remain failures.
+Its physical support cannot qualify independent reading, within-span language,
+learned stopping or complete answers. A failure stops this intervention at the
+fixed budget. No full fit, deployment or new language score is admitted.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

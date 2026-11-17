@@ -1,0 +1,65 @@
+{
+  "schema": "ilm-occupancy-density-preflight-v1",
+  "input_sha256": {
+    "scripts/preflight_occupancy_glyph_density.py": "36265e7f780116bf4ab51be7c31d25ad1ccff6edfbf3618ca02ed900c5e7c5da",
+    "ilm/visual_lm/occupancy_glyph_density.py": "e2585f5841cc4c5d991d375f37a60b07037cfd40073ffb3c1adc74ab5cfef2ad",
+    "tests/test_occupancy_glyph_density.py": "f87eab288a7dc7b5a46040ab9b056f05ee133b5e1d8f816b4a1fae1301a4c0a7",
+    "scripts/audit_occupancy_density_structure.py": "f793e4bdd6cf438aded510007637df5621935c44933325fab54a80c3bc7c67b7",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+    "scripts/measure_reader_writing_consequence.py": "48c26746cd3a1cfd36dcc8598485d66524eab906a7126a35390c76c1b6410bad",
+    "references/occupancy_density_preflight_protocol_20261118.md": "7fc580b7f8ff715508303a7278fbbfe94bfe154701ee0933bf6cbe2e3a6af0a6",
+    "references/evidence/occupancy_density_cpu_20261118.json": "77a919ecc7314fc61c5db69750f1dbeb606dacd8cedd775fb87d29f56c1685a2",
+    "references/evidence/occupancy_density_structure_registration_20261118.json": "f64ca3198bf2ed94a1369de5016ea19b00f9ce2067464541450ccb3644a9167d",
+    "references/evidence/occupancy_density_structure_result_20261118.json": "1fe55897ed41815eb20c77d7670f7b6d94599fd5396d31d22a11ba1471c17fb7",
+    "references/evidence/layer_conditioned_writer_preflight_registration_20261118.json": "293950b8a90b33a89db18c9fbd727417674b4ac3296c6707a76d9a951c768046",
+    "references/evidence/layer_conditioned_writer_preflight_result_20261118.json": "81761fed48fc928c4ef8f62006b87e4054501ca0e7fb6f5ada1144aac8ba4553",
+    "artifacts/layer_conditioned_writer_preflight_v1/result.json": "f575f6fd09f17456de25cc98b9f1b723e3d0be89830710933aa2f13abeee1d92",
+    "artifacts/layer_conditioned_writer_preflight_v1/conditional_training_cache.pt": "c802d54f9ce3e2a2ca251f86f603979326af5d3e09a69f8341c0a8a6141563b1"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "modes": [
+    "flat",
+    "tree"
+  ],
+  "seed": 202611190,
+  "updates_per_arm": 96,
+  "complete_cases": 3,
+  "targets_per_evaluation": 552,
+  "microbatch_images": 8,
+  "generation_batch_images": 16,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.01,
+  "gradient_clip": 1.0,
+  "maximum_replay_logp_error": 0.0002,
+  "support": {
+    "pooled_f1": 0.75,
+    "every_case_f1": 0.6,
+    "gain_over_flat": 0.05,
+    "false_blank": 0,
+    "false_ink": 0,
+    "rotated_minus_correct_nll": 0.5
+  },
+  "reference_history": true,
+  "supplied_span_lengths": true,
+  "glyphs_independent_given_span_state": true,
+  "resources": {
+    "maximum_seconds": 1800,
+    "maximum_pressure_wait_seconds": 300,
+    "maximum_allocated_gpu_gib": 8,
+    "minimum_entry_host_gib": 48,
+    "minimum_runtime_host_gib": 24,
+    "minimum_free_gpu_gib": 20,
+    "minimum_free_disk_gib": 48,
+    "cpu_threads": 2
+  },
+  "all_trial_updates_reset": true,
+  "autonomous_language_measured": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false,
+  "automatic_retry": false
+}
