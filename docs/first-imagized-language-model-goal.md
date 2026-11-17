@@ -308,17 +308,24 @@ finds 110 common forms take 54.6% of training cells and reconstruct exactly,
 while 5,821 once-occurring forms have binary macro F1 .823330. These descriptive
 bins do not prove causality or change any rule.
 
-The next [registered codec intervention](../references/balanced_codec_comparison_protocol_20261118.md)
-changes only training allocation to uniform physical forms, keeping 64 bits,
-all weights at the original fresh initialization, 6,000 updates per mode, the
-same loss/schedule and every original quality/resource condition. Two CPU
-checks qualify uniform group mass and its complete-source gradient equality.
-All original occurrences remain in evaluation; the natural-frequency models
-are unchanged saved controls and are not rerun. The physical partition is
-reused development, not untouched confirmation. Require a .02 gain over the
-saved binary control in addition to all original absolute gates. More balanced
-physical drawing supervision does not change the natural language distribution
-or admit a conditional language fit before qualification.
+The [equal-form codec comparison](../references/balanced_codec_comparison_result_20261118.md)
+is now terminal after 6,000 updates per arm and fails seven of ten conditions.
+It preserves initial weights, architecture, 64 bits and optimizer budget.
+Binary validation F1 rises from .810400756 to .820592454, below the fixed .02
+gain and every absolute fidelity requirement, with zero exact validation cells.
+Continuous training macro F1 improves to .996662318 but validation macro F1
+remains .903684546. Preserve the limited allocation effect and the remaining
+generalization failure together; neither collisions nor word-frequency
+imbalance alone explains the result. No unchanged extension is admitted.
+
+All weighted complete-source preflight updates reset exactly; optimizer replay
+passes and all 275,792 reconstructions/events and 12,000 updates are independently
+recounted. Natural-frequency controls remain unchanged and are not rerun. The
+257.158-second, .593-GiB physical run establishes no contextual language or
+whole-model efficiency. The mask partition is reused development. A new
+architectural proposal may test spatial representation/decoder geometry with
+all original absolute criteria, rather than add discarded auxiliary labels,
+unmeasured code width or more unchanged exposure. No conditional fit is admitted.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
