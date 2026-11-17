@@ -1,0 +1,18 @@
+{
+  "schema": "ilm-gradient-direction-cpu-check-v1",
+  "command": "CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_gradient_signal_accounting -v",
+  "tests": 4,
+  "seconds_reported_by_unittest": 0.052,
+  "exit_code": 0,
+  "passed": true,
+  "coverage": [
+    "Copied FP32 displacement agrees with PyTorch AdamW at retained counters 0 and 8172 within absolute tolerance 1e-7",
+    "Input weights, gradients and optimizer moments are unchanged",
+    "An absent gradient skips momentum and weight decay",
+    "Full-vector geometry preserves zero-norm uncertainty",
+    "Aligned current gradients need not imply descent with retained momentum"
+  ],
+  "model_calls": 0,
+  "language_quality_proved": false,
+  "goal_achieved": false
+}

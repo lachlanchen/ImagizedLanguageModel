@@ -88,6 +88,16 @@ without silently cropping after failure. This goal text authorizes preparation,
 not an unregistered heavy run or another full fit. No development answers,
 reserved DRCD records, rejected reward judge or policy fit enters this work.
 
+The [diagnostic protocol](../references/visual_context_gradient_protocol_20261117.md)
+and [56-source registration](../references/evidence/visual_context_gradient_registration_20261117.json)
+are prepared. Four CPU checks establish copied AdamW arithmetic and unchanged
+inputs, not language learning. The diagnostic retains the complete 513-, 846-
+and 1,042-glyph training records, three RNG-matched gradient passes per record,
+retained moments and the direct combined gradient. Commit and push its binding
+before the sole 1,200-second monitored execution, with no optimizer updates.
+Measure actual model/projection preservation and support for both final actors;
+preserve any execution failure without an automatic retry.
+
 If interference is supported under the relevant update direction, prepare one
 prospective objective intervention with an unchanged control and training-only
 update/reset preflight. Require actual complete conditional writing improvement;

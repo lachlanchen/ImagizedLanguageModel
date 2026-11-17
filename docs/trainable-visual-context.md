@@ -17,6 +17,12 @@ retains all snapshot summaries, resource scopes and evidence hashes. Earlier
 failed admission and cold attempts remain preserved. This implementation has
 not demonstrated a working ILM.
 
+The [gradient diagnostic](../references/visual_context_gradient_protocol_20261117.md)
+now binds the exact final actors, retained AdamW moments and three complete
+training records. It measures copied update directions without applying them;
+four CPU arithmetic checks pass. Its prospective support rule and resource
+ceilings admit no new full fit or language claim.
+
 ## Learning path
 
 A source is an ordered stream of visible 32×32 ink tiles. A frozen codec maps
