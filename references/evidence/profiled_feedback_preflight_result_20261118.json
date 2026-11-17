@@ -1,0 +1,253 @@
+{
+  "schema": "ilm-profiled-feedback-preflight-result-v1",
+  "preflight_passed": true,
+  "all_trial_states_reset": true,
+  "trials": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "complete_native_positions": 509,
+      "initial": {
+        "rows": 509,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge_scale": 0.0001,
+        "ridge": 3.3872478959891936e-06,
+        "normal_equation_relative_residual": 6.067738694024241e-15,
+        "ideal_native_error": 0.05745862940746413,
+        "ridge_penalty": 0.0005073737196509281,
+        "profiled_objective": 0.05796600312711506,
+        "actual_native_error": 0.057458631694316864
+      },
+      "final": {
+        "rows": 509,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.3872478959891936e-06,
+        "normal_equation_relative_residual": 6.131445446387158e-15,
+        "ideal_native_error": 0.05745745749505443,
+        "ridge_penalty": 0.00040951099475133754,
+        "profiled_objective": 0.05786696848980577,
+        "actual_native_error": 0.05745745822787285
+      },
+      "step": {
+        "gradient_norm": 0.00013879055354717705,
+        "parameter_norm": 42.14220164639877,
+        "finite_difference": {
+          "displacement": 0.042142201646398765,
+          "measured_derivative": -0.00013878611875009527,
+          "expected_derivative": -0.00013879055354717705,
+          "absolute_error": 4.434797081783815e-09,
+          "relative_error": 3.195316228979776e-05
+        },
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 6072.776650764489,
+            "armijo_threshold": 0.057965991429236065,
+            "accepted": true,
+            "solve": {
+              "rows": 509,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.3872478959891936e-06,
+              "normal_equation_relative_residual": 6.131445446387158e-15,
+              "ideal_native_error": 0.05745745749505443,
+              "ridge_penalty": 0.00040951099475133754,
+              "profiled_objective": 0.05786696848980577,
+              "actual_native_error": 0.05745745822787285
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "exact_reset": true
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "complete_native_positions": 740,
+      "initial": {
+        "rows": 740,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge_scale": 0.0001,
+        "ridge": 3.593296088929606e-06,
+        "normal_equation_relative_residual": 5.5027508633711335e-15,
+        "ideal_native_error": 3.1399091918286026e-06,
+        "ridge_penalty": 0.0005241815068459458,
+        "profiled_objective": 0.0005273214160377744,
+        "actual_native_error": 3.1399100635098876e-06
+      },
+      "final": {
+        "rows": 740,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.593296088929606e-06,
+        "normal_equation_relative_residual": 5.568331394352532e-15,
+        "ideal_native_error": 2.0105777101673666e-06,
+        "ridge_penalty": 0.000431367732288957,
+        "profiled_objective": 0.00043337830999912435,
+        "actual_native_error": 2.010578299405097e-06
+      },
+      "step": {
+        "gradient_norm": 0.00012908918958384527,
+        "parameter_norm": 42.14220164639877,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 6529.160463746936,
+            "armijo_threshold": 0.0005273105358324588,
+            "accepted": true,
+            "solve": {
+              "rows": 740,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.593296088929606e-06,
+              "normal_equation_relative_residual": 5.568331394352532e-15,
+              "ideal_native_error": 2.0105777101673666e-06,
+              "ridge_penalty": 0.000431367732288957,
+              "profiled_objective": 0.00043337830999912435,
+              "actual_native_error": 2.010578299405097e-06
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "exact_reset": true
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "complete_native_positions": 961,
+      "initial": {
+        "rows": 961,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge_scale": 0.0001,
+        "ridge": 3.259466791420547e-06,
+        "normal_equation_relative_residual": 1.1932861973186944e-14,
+        "ideal_native_error": 9.016133165720916e-05,
+        "ridge_penalty": 0.0028359483106673035,
+        "profiled_objective": 0.0029261096423245127,
+        "actual_native_error": 9.016128569783177e-05
+      },
+      "final": {
+        "rows": 961,
+        "features": 4481,
+        "outputs": 2048,
+        "ridge": 3.259466791420547e-06,
+        "normal_equation_relative_residual": 1.1908727612004392e-14,
+        "ideal_native_error": 5.849357461556699e-05,
+        "ridge_penalty": 0.0023673272929721897,
+        "profiled_objective": 0.002425820867587757,
+        "actual_native_error": 5.849358603882138e-05
+      },
+      "step": {
+        "gradient_norm": 0.0006837656586198363,
+        "parameter_norm": 42.14220164639877,
+        "finite_difference": null,
+        "trials": [
+          {
+            "attempt": 1,
+            "step_size": 1232.6504297235908,
+            "armijo_threshold": 0.002926052011543984,
+            "accepted": true,
+            "solve": {
+              "rows": 961,
+              "features": 4481,
+              "outputs": 2048,
+              "ridge": 3.259466791420547e-06,
+              "normal_equation_relative_residual": 1.1908727612004392e-14,
+              "ideal_native_error": 5.849357461556699e-05,
+              "ridge_penalty": 0.0023673272929721897,
+              "profiled_objective": 0.002425820867587757,
+              "actual_native_error": 5.849358603882138e-05
+            }
+          }
+        ],
+        "accepted_attempt": 1,
+        "changed_parameters": [
+          "expand.bias",
+          "expand.weight",
+          "original.1.bias",
+          "original.1.weight",
+          "project.weight"
+        ]
+      },
+      "exact_reset": true
+    }
+  ],
+  "legacy_bf16_error": 0.27103852725122124,
+  "same_weight_fp32_error": 0.27104280788626056,
+  "source_head_tensor_sha256": "8daaf9eb2d8a07b788906f242d523b75b1ffad98adf5003e1ec2e01dc6a317cd",
+  "retained_successor_head": false,
+  "registration_sha256": "e9606ad848a2017163a9d580aeab93e935b76e3a6705edd1fc7fc39074a475ea",
+  "source_commit": "b6a647775000ccc8121f744ef0c2985f41201b86",
+  "resources": {
+    "elapsed_seconds": 25.902507425285876,
+    "resource_wait_seconds": 0.0,
+    "peak_allocated_vram_gib": 1.3554277420043945,
+    "minimum_available_gib": 55.28129196166992,
+    "pressure_wait_allowance_seconds": 300,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "language_measured": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false,
+  "bindings": {
+    "references/evidence/profiled_feedback_preflight_registration_20261118.json": "e9606ad848a2017163a9d580aeab93e935b76e3a6705edd1fc7fc39074a475ea",
+    "artifacts/profiled_feedback_preflight_v1/result.json": "70c92dbe15cc416cd842a647d2903fd8cabd4cf5279b55b395b2191c4c479762",
+    "artifacts/profiled_feedback_preflight_v1.exit.json": "3d1a3dc5dff066701b6f3535273cf8d5d45f31b154bde6e860a1384b008ceca4",
+    "artifacts/profiled_feedback_preflight_v1/complete_513_book.json": "032dded82f32dbb0b6261136511b6a0a579f169eb06fa494124c33eb9bd497c4",
+    "artifacts/profiled_feedback_preflight_v1/complete_qa.json": "82f700a314f26afdf2a435576a727ed9c3ca553dcb89279c2666841dde0208af",
+    "artifacts/profiled_feedback_preflight_v1/longest_native_record.json": "420be81670d04af43263bb728a10b48399da8dc5f47892ed4659821cf74fbdfa"
+  },
+  "supervisor_elapsed_seconds": 35.035778284072876,
+  "interpretation": "Real complete-record optimizer support only. All trial weights reset. No language result or full language fit admitted."
+}

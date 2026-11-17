@@ -145,10 +145,15 @@ registered head comparison. Keep a common precision-matched fixed-feature
 control; distinguish ideal arithmetic from actual weights. Do not silently add
 slot residuals, change the pixel/query source, tune lambda or add old epochs.
 The [implementation and separate preflight protocol](../references/profiled_feedback_preflight_protocol_20261118.md)
-now have four passing CPU numerical tests, including the envelope gradient and
-streamed accumulation. Commit/register and run the real complete-record reset
-preflight before binding the twelve-step full-support head comparison. No
-variable-projection fit is yet admitted. A reader pass would permit only
+have four passing CPU numerical tests and a passing
+[real complete-record preflight](../references/profiled_feedback_preflight_result_20261118.md).
+All three trial steps improve and reset exactly. The book's re-solved finite
+source derivative differs from the partial gradient by 3.20e-5 relative.
+The 25.903-second, 1.355-GiB preflight qualifies only a separately registered
+[twelve-step full-support head comparison](../references/profiled_feedback_fit_protocol_20261118.md).
+Keep lambda fixed after the common FP32 baseline, all sources/masses unchanged
+and all twelve outer steps/search limits bound before launch. No full language
+fit is admitted. A reader pass would permit only
 separately registered live-image conditional-writing evaluation,
 not full language training or a language claim. Original full-goal criteria
 and untouched confirmation data remain unchanged.
