@@ -25,6 +25,16 @@ language, historical-form, independence and efficiency requirements. The model
 and research discussion below describe the rejected recipe and conditional
 decision rules; they are not evidence of achieved useful visual language.
 
+Later [head calibration](nonlinear_feedback_alignment_result_20261118.md) and
+[direct readout fitting](feedback_ridge_refit_result_20261118.md) lower native
+coordinate error to .271039 on complete fitting support, while still failing
+the unchanged .10 reader gate. This is not a new language score. The
+[exact-query floor](frozen_query_identifiability_result_20261118.md) is .016775;
+identical-query ambiguity does not by itself rule out that gate. A
+[profiled feature-learning direction](profiled_visual_feedback_direction_20261118.md)
+is untested and requires its own implementation, gradient/source preflight
+and registration. No further full language fit is admitted.
+
 ## The failure that must be solved
 
 The [completed compact diagnostic](compact_visual_span_diagnosis_result.md)

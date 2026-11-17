@@ -114,42 +114,40 @@ projection updates reset exactly; the frozen training-only readout is unchanged.
 No successor is retained, autonomous language is unmeasured and no full fit is
 admitted. Preserve all 1,656 actual output tiles and the failed preflight.
 
-Return the next design to an observed representational restriction before
-another loss trial. The earlier reader's native-feedback head still ends in a
-384-to-2,048 affine map with at most 383 varying affine directions and a measured
-relative alignment-error floor near .57. The completed loss replacement does
-not remove it; contextual adaptation did not establish that it was compensated.
-A nonlinear feedback residual with zero output initialization is a candidate
-for removing that specific affine-family bound while preserving the original
-function initially. It is not a proven cause or selected working solution.
-The [selected head-calibration comparison](../references/nonlinear_feedback_alignment_protocol_20261118.md)
-uses the original complete source support and exact native-feedback weighting,
-with a nonlinear residual and an affine control. The existing full-schedule
-alias audit already bounds ambiguity near .000749; do not repeat it or remove
-its aliases. Cache only frozen image-reader queries, then compare twenty fixed
-head-only epochs on every native-sequence/slot row, with complete-record real
-update/reset support first. This is coordinate calibration, not a language fit.
-Even a reader-support pass admits only a separately registered conditional-
-writing evaluation; no full language fit or autonomous claim follows. All other
-reader/context/writer components stay fixed. Preserve every failure and keep
-original language criteria. Do not repeat completed native-history, codec,
-sampler or reader diagnoses unchanged.
+The [complete native-feedback calibration](../references/nonlinear_feedback_alignment_result_20261118.md)
+fails its fixed reader gate after twenty epochs and 2,660 updates per arm on all
+33,941 derived rows, weighted from every original training source. Error is
+.578608694 affine and .542496895 nonlinear, from .639791851 initially. No
+language fit is admitted. Do not repeat the fit or select an intermediate head.
 
-The [complete head-calibration result](../references/nonlinear_feedback_alignment_result_20261118.md)
-now fails reader support after twenty epochs and 2,660 updates per arm on every
-one of 33,941 sequence/slot rows. Weighted error is .578608694 affine and
-.542496895 nonlinear, from .639791851 initially. All complete-record gates fail;
-no language fit is admitted. Source queries, encoder, codec and all prior
-language evidence remain unchanged. Do not extend those epochs or select an
-intermediate head.
+The [separate weighted ridge refit](../references/feedback_ridge_refit_result_20261118.md)
+keeps both final feature maps fixed and improves actual nonlinear error to
+.271038527, versus .536556525 affine. Its ideal matrix error is .269287063;
+actual stored-weight/BF16 execution remains separate. All six complete-record
+trial solves improve and reset; original source head files/features are
+unchanged. The 27.085-second, 1.135-GiB head-only run does not qualify a small
+foundation or language efficiency. Final error and every complete-record limit
+still fail. No full language fit, writer change or autonomous score follows.
 
-The [next bounded refit](../references/feedback_ridge_refit_protocol_20261118.md)
-keeps both final feature maps and sources fixed and fits only output coefficients
-by one full-support weighted ridge solve. FP64 matrix optimality is separate
-from actual FP32-weight/BF16 inference quality. Require source-error replay,
-complete-record trial fitting/reset, unchanged features and the original reader
-support rule. No new feature learning, loss-weight tuning, source preparation,
-full language fit or autonomous claim is admitted by this procedure.
+The [saved-query identity analysis](../references/frozen_query_identifiability_result_20261118.md)
+finds 2,682 conflicting duplicate groups on the same complete support, imposing
+an exact-arithmetic .016774741 free-function floor. Most are same-image cross-
+slot states: one-key cross-attention loses the query's slot identity when no
+query residual is carried forward. This explains a real restriction, not the
+whole .271 error. It does not rule out the unchanged .10 gate. Preserve all
+conflicts, original image aliases and source labels; do not repeat their audits.
+
+The [next bounded design](../references/profiled_visual_feedback_direction_20261118.md)
+is feature learning with a solved output layer (variable projection), using
+these same raw queries and source masses. Qualify its fixed-ridge envelope
+gradient, source support, fitting/reset and numerical execution before a new
+registered head comparison. Keep a common precision-matched fixed-feature
+control; distinguish ideal arithmetic from actual weights. Do not silently add
+slot residuals, change the pixel/query source, tune lambda or add old epochs.
+No variable-projection fit is yet implemented or admitted. A reader pass would
+permit only separately registered live-image conditional-writing evaluation,
+not full language training or a language claim. Original full-goal criteria
+and untouched confirmation data remain unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
