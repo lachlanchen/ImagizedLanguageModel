@@ -12,7 +12,11 @@ obsolete-job metadata files. The frozen-control fit has not started. The
 [failure decision](../references/visual_context_cold_guard_failure_20261117.md)
 selects removal of this deployment dependency while preserving resource guards,
 numerical generation and the strict artifact audit. A new exact execution
-binding is required before continuation. Useful autonomous language is still
+binding is required before continuation. The
+[deployment execution protocol](../references/visual_context_deployment_execution_protocol_20261117.md)
+implements this repair with an exact numerical-source comparison and nine CPU
+guard/plan checks. Fresh strict cold execution remains to be demonstrated.
+Useful autonomous language is still
 unproved. The earlier compact full-rank model produced zero strict complete
 development answers with a frozen contextual body. All failed baselines remain.
 
@@ -88,7 +92,7 @@ arbitrary page layout and proportional writing remain separate extensions.
 | Host-moment AdamW | [offloaded_adamw.py](../ilm/visual_lm/offloaded_adamw.py) |
 | Full learned-context checkpoint | [trainable_context_checkpoint.py](../ilm/visual_lm/trainable_context_checkpoint.py) |
 | Complete trainer | [train_visual_context_comparison.py](../scripts/train_visual_context_comparison.py) |
-| Standalone image generation | [infer_trainable_visual_context.py](../scripts/infer_trainable_visual_context.py) |
+| Standalone image generation | [infer_visual_context_deployment.py](../scripts/infer_visual_context_deployment.py), equivalent numerical source with self-contained admission |
 | Serial comparison and review | [run_visual_context_comparison.py](../scripts/run_visual_context_comparison.py), [review_visual_context_comparison.py](../scripts/review_visual_context_comparison.py) |
 | Original training corpus | `data/visual_sequence_corpus_v1/` |
 | Existing offline teacher cache | `artifacts/visual_sequence_teacher_v1/cache/` |
@@ -108,7 +112,7 @@ Standalone generation from a trained deployment snapshot uses:
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
   CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=. OPENBLAS_NUM_THREADS=2 \
   OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 \
-  python scripts/infer_trainable_visual_context.py \
+  python scripts/infer_visual_context_deployment.py \
     --image prompt_tiles.png --glyph-count 64 \
     --checkpoint artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0008172.pt \
     --output artifacts/visual_context_answer

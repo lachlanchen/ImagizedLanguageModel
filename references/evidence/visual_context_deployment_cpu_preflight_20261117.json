@@ -1,0 +1,47 @@
+{
+  "schema": "visual-context-deployment-cpu-preflight-v1",
+  "recorded_utc": "2026-11-17T10:11:08.975737+00:00",
+  "passed": true,
+  "tests_run": 9,
+  "reported_test_seconds": 1.295,
+  "test_command": "CUDA_VISIBLE_DEVICES= PYTHONPATH=. OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -m unittest tests.test_visual_context_deployment -v",
+  "actual_test_output_tail_sha256": "132249ccf3eb9f1471adc001e80dd4f3eb5f44b8401b56b72e25deb9728be7e6",
+  "source_equivalence": {
+    "numerical_inference_source_identical_except_admission_import": true,
+    "bridge_identical_except_obsolete_owner_check_removed_and_disk_floor_added": true,
+    "wrapper_and_resource_thresholds_preserved": true,
+    "source_sha256": {
+      "scripts/infer_trainable_visual_context.py": "414e48d9bc347d323261eb791367598a25137da2dfe5fd7830bc9fcc0d6d6ed0",
+      "scripts/infer_visual_context_deployment.py": "6507746ed2745db9f99b33f0db89303ce09ac0f93c683ebfac616ec099469583",
+      "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+      "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+      "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+      "scripts/verify_visual_context_deployment_sources.py": "220231f0befa09b3b435b63b3836f256bea04ec699b3d85ec9739e897e77481b"
+    },
+    "language_quality_proved": false
+  },
+  "source_sha256": {
+    "ilm/visual_lm/glyph_runtime_resources.py": "9a5efd4dad93c5f2a5543f2920b3101f3f0ff28700cdd594859df0b1024fc4e4",
+    "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+    "references/visual_context_deployment_execution_protocol_20261117.md": "9e6d130cd6bd20cbac50e452b359d3068b87121feda8b88d269506bd86f3d6d4",
+    "scripts/continue_visual_context_deployment.py": "5bb9d419738f28c90c80d6a2730c4347bdd3bd9d22662b6daea8bc49a8b19339",
+    "scripts/infer_trainable_visual_context.py": "414e48d9bc347d323261eb791367598a25137da2dfe5fd7830bc9fcc0d6d6ed0",
+    "scripts/infer_visual_context_deployment.py": "6507746ed2745db9f99b33f0db89303ce09ac0f93c683ebfac616ec099469583",
+    "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+    "scripts/verify_visual_context_deployment_cold.py": "92fcd8ba733cd8de7e7241b865e40c45b81e24d3ec155bdb7e754efd29fea729",
+    "scripts/verify_visual_context_deployment_sources.py": "220231f0befa09b3b435b63b3836f256bea04ec699b3d85ec9739e897e77481b",
+    "tests/test_visual_context_deployment.py": "db13bd5981d0007b8dab00961b6f17a4c87cb3e928462b4e90fd3011e982981e"
+  },
+  "guard_success_uses_CUDA_API_stub": true,
+  "actual_file_mutex_contention_checked": true,
+  "original_strict_metadata_rejection_checked": true,
+  "remaining_plan_stages": 11,
+  "retained_treatment_streams": 396,
+  "remaining_control_streams": 396,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "CUDA_hidden": true,
+  "neural_execution_proved": false,
+  "language_quality_proved": false,
+  "goal_achieved": false
+}

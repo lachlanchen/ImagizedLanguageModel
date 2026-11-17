@@ -155,6 +155,17 @@ controllers and all 599 original and 21 recovery bindings. Do not repeat the
 completed treatment fit, audit or 396 streams, or automatically restart a failed
 stage. Training completion and audit success do not establish language quality.
 
+The [deployment execution protocol](../references/visual_context_deployment_execution_protocol_20261117.md)
+now implements the admission-only repair. Exact source comparison retains the
+original inference text except its admission import; the copied bridge removes
+the obsolete owner check and adds the disk floor. Nine CPU checks pass for source
+equivalence, resource boundaries, real mutex contention, strict artifact rejection
+and the complete remaining plan. They use a CUDA API stub and prove no neural or
+language result. Commit and push the separate exact execution binding before
+the single serial owner runs a fresh strict treatment cold check, the original
+frozen-control fit/audit/generation and cold check, and all792-stream blind review.
+All previous failed executions and treatment outputs remain preserved.
+
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
 eligible, but their machine-derived labels are not independently qualified.
