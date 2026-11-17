@@ -277,8 +277,15 @@ mathematical normalization and numerical tests are not autonomous language.
 Four additional CPU checks now qualify the matched continuous/binary training
 operator, per-image objective and alias-preserving split. The
 [source-only preparation](../references/binary_codec_preparation_protocol_20261118.md)
-is prospectively registered. No neural experiment or full fit is currently
-registered by this design.
+is complete: all 68,948 cells remain, with 64,041 training cells (8,629
+forms), 4,907 physical-validation cells (952 forms), all aliases grouped and
+3,206 empty training images. Two independent CPU metric checks also pass.
+The [matched codec comparison](../references/binary_codec_comparison_protocol_20261118.md)
+is now separately registered: complete-training-support gradient/update/reset
+preflight, 6,000 updates per arm, exact optimizer replay and all-source initial/
+final reconstruction. It binds .98 fidelity, .80 macro exactness, control
+retention, no false blanks/ink and 40% fewer measured refinement events. This
+physical comparison admits no conditional language fit or autonomous score.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
