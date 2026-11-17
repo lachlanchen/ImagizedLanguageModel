@@ -12,8 +12,8 @@ import time
 from scripts import diagnose_visual_context_gradients as original
 
 ROOT = original.ROOT
-RUN = ROOT / 'artifacts/residual_plan_motor_head_resource_v1'
-REG = ROOT / 'references/evidence/residual_motor_head_admission_registration_20261118.json'
+RUN = ROOT / 'artifacts/residual_plan_motor_loaded_v1'
+REG = ROOT / 'references/evidence/residual_motor_loaded_comparison_registration_20261118.json'
 PUBLIC = ROOT / 'references/evidence/residual_plan_motor_comparison_result_20261118.json'
 OUT = ROOT / 'references/evidence/residual_plan_motor_comparison_20261118'
 
@@ -21,7 +21,7 @@ OUT = ROOT / 'references/evidence/residual_plan_motor_comparison_20261118'
 def main():
     original.require(os.environ.get('CUDA_VISIBLE_DEVICES') == '', 'CPU audit only')
     original.require(not PUBLIC.exists() and not OUT.exists(), 'Preserve every audit and plate')
-    terminal = original.load(ROOT / 'artifacts/residual_plan_motor_head_resource_v1.exit.json')
+    terminal = original.load(ROOT / 'artifacts/residual_plan_motor_loaded_v1.exit.json')
     original.require(terminal['phase'] == 'terminal' and terminal['exit_code'] == 0, 'Actual comparison must complete normally')
     import numpy as np
     import torch
@@ -49,7 +49,7 @@ def main():
         original.require(raw['registration_sha256'] == original.sha(REG), 'Registration changed')
         for name, digest in reg['input_sha256'].items():
             original.require(original.sha(ROOT / name) == digest, 'Bound source changed: ' + name)
-        paths = [REG, RUN / 'result.json', ROOT / 'artifacts/residual_plan_motor_head_resource_v1.exit.json',
+        paths = [REG, RUN / 'result.json', ROOT / 'artifacts/residual_plan_motor_loaded_v1.exit.json',
                  RUN / 'initial_refinement.pt']
         inputs = {str(p.relative_to(ROOT)): original.sha(p) for p in paths}
         prepared = original.load(ROOT / 'artifacts/residual_plan_motor_preparation_v1/result.json')

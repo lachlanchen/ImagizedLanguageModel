@@ -1,0 +1,28 @@
+{
+  "schema": "ilm-residual-motor-loader-v1",
+  "input_sha256": {
+    "scripts/qualify_residual_motor_loader.py": "25cc9ca5fb354460087366c624e343a448c7288257e6c08f04ff69322fc17635",
+    "ilm/visual_lm/residual_motor_data.py": "7199bffb8886c37e8cf35dff4ce710afc15aa2e422d4d478edd846252ee53ee0",
+    "tests/test_residual_motor_data.py": "404e659ce1e6376960cfacdc7d7e22bed9585fbacb190f9a8a8be075b4fea5b8",
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706",
+    "references/evidence/residual_motor_loading_failure_20261118.json": "78a20ad04554114f0582c45d51a82a89766facb369b82a3eaeaa4de81d43a3e3",
+    "artifacts/residual_plan_motor_preparation_v1/physical_targets.pt": "1905a51a063eb760532910fdb1db37b32a61b4b17a1a468f1745a89a61bb7cb9",
+    "references/evidence/residual_motor_preparation_result_20261118.json": "250ab3123790ef1b598721ebcabd8028fe8f35a0c883fe38b48f8a529e54917a"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "source_plans": 68948,
+  "code_bits": 256,
+  "resources": {
+    "entry_host_gib": 40,
+    "runtime_host_gib": 24,
+    "maximum_rss_gib": 2,
+    "cpu_threads": 2,
+    "maximum_seconds": 120
+  },
+  "no_neural_calls": true,
+  "no_training": true,
+  "automatic_retry": false
+}

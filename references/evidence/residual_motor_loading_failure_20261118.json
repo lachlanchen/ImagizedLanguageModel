@@ -1,0 +1,21 @@
+{
+  "schema": "ilm-residual-motor-loading-failure-v1",
+  "error_type": "ValueError",
+  "error": "Complete eight-bit physical patterns required",
+  "retained_updates": 0,
+  "no_model_constructed": true,
+  "no_model_output_or_checkpoint": true,
+  "quality_measured": false,
+  "owned_processes_terminated": true,
+  "input_sha256": {
+    "artifacts/residual_plan_motor_head_resource_v1/status.json": "6a03de4c537f3ae72d9559fccbe2ac2a66d4395962550db1190ebba10858c308",
+    "artifacts/residual_plan_motor_head_resource_v1/failure.json": "6dd947d619030340a489dc7fda508e991694f8f7ff40f2e63276f9be052ec588",
+    "artifacts/residual_plan_motor_head_resource_v1.exit.json": "3c960cd00042c25a6eb674259ea3f0942ac66ce96a7c8cf4a4899f79439dc0b0",
+    "artifacts/residual_plan_motor_head_resource_v1.log": "52be6d9464f7faa60f920369c6cbea587c9fb537761796136d0468bae5a8a652",
+    "references/evidence/residual_motor_head_admission_registration_20261118.json": "380c693f36b6f69edb64c1ba5b8e317552a896b400099f8b4371bf5f7ecbaa3a"
+  },
+  "source_commit": "4585f03c",
+  "diagnosis": "Serialized uint8 plan bytes require integer widening before shared comparison with scalar 256",
+  "automatic_retry": false,
+  "full_language_fit_authorized": false
+}

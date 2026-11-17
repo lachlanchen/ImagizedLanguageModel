@@ -428,6 +428,26 @@ language criterion remains fixed. Launch at most once, qualify real complete-
 source memory/gradient/update/reset before retained fitting, and preserve any
 resource violation. No automatic retry or language admission follows.
 
+The [first head-resource execution](../references/evidence/residual_motor_loading_failure_20261118.json)
+passes admission but stops at serialized-plan loading, before constructing a
+model or making any update. The uint8 plan bytes need widening before the
+shared validator's scalar-256 comparison. The original component is unchanged.
+The [registered CPU loader qualification](../references/evidence/residual_motor_loader_result_20261118.json)
+recovers all 2,206,336 bytes / 17,650,688 bits exactly across all 68,948 plans
+in .490 seconds, with no neural call or source change. A separate unit check
+covers every byte value. Preserve this loading failure and the earlier resource
+attempts, all of which leave physical quality unmeasured.
+
+The [loaded comparison](../references/residual_motor_loaded_comparison_protocol_20261118.md)
+is now separately registered. Its training body changes only the explicit
+integer widening and the already selected physical-resource context. Model,
+source pixels, frozen codec, initialization, objective, sampling, 6,000 updates,
+actual generation/probability tests and every quality criterion stay fixed.
+Use its one serial owner and new output path. Do not alter bound sources or
+restart any earlier run. Only actual complete-source update/reset and final
+generated-image qualification can establish a trained motor; neither code nor
+loading proves language.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
