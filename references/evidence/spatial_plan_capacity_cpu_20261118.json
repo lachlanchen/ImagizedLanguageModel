@@ -1,0 +1,24 @@
+{
+  "schema": "ilm-spatial-plan-capacity-cpu-v1",
+  "input_sha256": {
+    "ilm/visual_lm/spatial_plan_codec.py": "daf6f3da179046d3d0e3db1bc5878346ed5482d619710e33d838e973b524ba69",
+    "ilm/visual_lm/spatial_plan_metrics.py": "d2554d61a16c0a0916023aa1f480bba96b7bf5023c1c39d033e87f4168c3d993",
+    "tests/test_spatial_plan_codec.py": "23741aa762e13bc5ae2bd4807e100e94679a2966b143785fd905ad5b3e9ab8b6"
+  },
+  "tests_passed": 4,
+  "elapsed_seconds": 0.341,
+  "checks": [
+    "exact original 64-value special case and all shared CNN initial values",
+    "all 256 feature coordinates roundtrip with actual 32-event cost",
+    "real continuous/binary updates and exact reset",
+    "32-event joint plan generation excludes current target encoder"
+  ],
+  "codec_parameters": 1770449,
+  "shared_cnn_parameters": 1766209,
+  "code_bits": 256,
+  "plan_events": 32,
+  "source_data_loaded": false,
+  "gpu_used": false,
+  "language_measured": false,
+  "full_language_fit_authorized": false
+}

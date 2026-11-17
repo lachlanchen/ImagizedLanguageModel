@@ -345,6 +345,18 @@ A later spatial capacity intervention must keep geometry, allocation, loss
 and budget fixed, declare increased plan events and preserve every original
 quality/resource condition. No conditional language fit is admitted.
 
+The [spatial capacity comparison](../references/spatial_capacity_comparison_protocol_20261118.md)
+is now prospectively registered after four passing CPU checks. It increases
+features per fixed 4-by-4 site from four to sixteen, giving 256 values/bits,
+while keeping all common CNN initial values, data/order, loss, 6,000 updates
+and resources. Each codec has 1,770,449 parameters, only 3,084 more than the
+spatial-64 model. The exact 64-value case remains byte-compatible. Plan cost
+increases from eight to thirty-two events; the same total refinement limit
+and every absolute fidelity condition remain. Saved spatial-64 controls are
+not rerun. Require .02 held-F1 gain over .847344074 as well. This untrained
+capacity hypothesis establishes no language, historical transfer or efficiency;
+no conditional fit is admitted before actual qualification.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
