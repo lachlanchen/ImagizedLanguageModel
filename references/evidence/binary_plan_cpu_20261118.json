@@ -1,0 +1,45 @@
+{
+  "schema": "ilm-binary-plan-cpu-v1",
+  "input_sha256": {
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706",
+    "tests/test_binary_plan_glyph_density.py": "0f7a61c14e1dd6365825fe1d7946a8372c876d764f9785d18bb3cb6e8abc6d24"
+  },
+  "command": "env CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_binary_plan_glyph_density -v",
+  "tests_passed": 6,
+  "test_elapsed_seconds": 0.129,
+  "checks": [
+    "all 64 bit positions pack/unpack",
+    "exact XOR at every physical pixel for arbitrary bases",
+    "hard forward values and actual codec update/reset",
+    "causal plan logits and cached replay",
+    "finite joint/context gradients and no target encoder in inference",
+    "seeded stochastic generation uses its actual drawn plan"
+  ],
+  "earlier_failure": {
+    "schema": "ilm-binary-plan-cpu-check-failure-v1",
+    "input_sha256": {
+      "ilm/visual_lm/binary_plan_glyph_density.py": "316f4a36be6d61fe2bf462f7fece4ea03d6612a3e69e2c2a7ae99798aa5b4560",
+      "tests/test_binary_plan_glyph_density.py": "a7ec9dc373356fb80349173e222c86b42f54599d80ed647c10bb3f04e537ed39"
+    },
+    "tests_run": 5,
+    "passed": 4,
+    "errors": 1,
+    "elapsed_seconds": 0.171,
+    "error": "TypeError: OccupancyGlyphDensity.generate() got an unexpected keyword argument stochastic",
+    "correction": "Use the established greedy=not stochastic argument; preserve the original physical generator",
+    "source_data_loaded": false,
+    "gpu_used": false,
+    "neural_fit_experiment": false
+  },
+  "component_parameters": {
+    "codec": 2030465,
+    "plan_prior": 2232256,
+    "correction": 2273490,
+    "total_writer": 6536211,
+    "trainable_after_codec_freeze": 4505746
+  },
+  "weights_trained_on_source_data": false,
+  "gpu_used": false,
+  "language_measured": false,
+  "full_language_fit_authorized": false
+}

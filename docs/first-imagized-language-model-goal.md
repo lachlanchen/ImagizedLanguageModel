@@ -257,6 +257,25 @@ not proof of language or consumer-GPU foundation parity. Any new route needs a
 bounded architectural change, real image support and unchanged controls before
 its own prospective fit. The full language criteria below remain unchanged.
 
+The next [implemented factorization](../references/binary_visual_plan_direction_20261118.md)
+generates a 64-bit global visual plan, decodes it with a learned neural image
+function, then generates a normalized physical XOR correction. The plan is
+part of inference, unlike the discarded auxiliary classifier. For each plan,
+XOR is bijective, retaining full binary-image support; training a fixed
+posterior branch upper-bounds marginal image NLL rather than equalling it.
+Quantization is explicit and is not a Unicode/glyph inventory. The 6,536,211-
+parameter writer is untrained, excludes the contextual actor and establishes
+no whole-model efficiency. Six CPU tests pass; the earlier signature-error
+check is preserved. Existing model/data sources remain unchanged.
+
+Next prospectively bind source preparation and a matched continuous/binary
+64-dimensional codec comparison. Group exact image aliases in one physical
+partition, retain all original bytes and leave reserved language data untouched.
+Require faithful actual decoded images and lower actual refinement work before
+registering a conditional prior/correction fit. Supplied-image compression,
+mathematical normalization and numerical tests are not autonomous language.
+No new neural experiment or full fit is currently registered by this design.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
