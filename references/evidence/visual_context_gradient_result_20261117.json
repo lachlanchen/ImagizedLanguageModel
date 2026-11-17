@@ -1,0 +1,1499 @@
+{
+  "schema": "ilm-visual-context-gradient-public-result-v1",
+  "date": "2026-11-17",
+  "source_commit": "9cd13feb2babe9839d78d965622eec79bace9b7e",
+  "registration_sha256": "c7e42cde99b6cd80c715d7b59799b19bf380a4929251cb43c5f896f1f8d6b4be",
+  "complete_records": 6,
+  "results": [
+    {
+      "arm": "trainable",
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.5911703109741211,
+        "feedback_counts": 0.03888247534632683,
+        "span_boundaries": 0.057840365916490555,
+        "output_length": 0.2555437386035919,
+        "output_flow": 0.46994197368621826,
+        "teacher_context": 0.07200119644403458
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 1.618683934211731,
+        "auxiliary": 1.3205695152282715,
+        "combined": 2.096330165863037
+      },
+      "global_clip_scalars": {
+        "flow": 0.6177854537963867,
+        "auxiliary": 0.7572485208511353,
+        "combined": 0.4770238697528839
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.03196480302737366,
+          "right_norm": 1.0774961398523228,
+          "inner_product": 0.00421249508369399,
+          "cosine": 0.1223070951150064,
+          "right_to_left_norm_ratio": 33.708830895331616
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.6186840622572385,
+          "right_norm": 1.3205695446834163,
+          "inner_product": 0.02016145717648604,
+          "cosine": 0.009431886149418423,
+          "right_to_left_norm_ratio": 0.8158290894900735
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.6037680795632991,
+          "right_norm": 0.5327762733577245,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 0.33220281669578916
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.11769909255611935,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.2168969611286747,
+          "right_norm": 0.5340434037671711,
+          "inner_product": 0.015948962092791955,
+          "cosine": 0.13769000105834112,
+          "right_to_left_norm_ratio": 2.462198644868742
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.03196480302737366,
+          "right_norm": 1.0794081657541434,
+          "inner_product": 0.00521101275826335,
+          "cosine": 0.15103041115490612,
+          "right_to_left_norm_ratio": 33.76864749736678
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.6186840622572385,
+          "right_norm": 2.096330169353147,
+          "inner_product": 2.6402584804396225,
+          "cosine": 0.7780807504231501,
+          "right_to_left_norm_ratio": 1.295082974023872
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.6037680795632991,
+          "right_norm": 1.689947517078296,
+          "inner_product": 2.5720720530261527,
+          "cosine": 0.9490046663318928,
+          "right_to_left_norm_ratio": 1.0537355984404324
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.11769909255611935,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.2168969611286747,
+          "right_norm": 0.5997520352410929,
+          "inner_product": 0.06297541465520763,
+          "cosine": 0.4841119889903838,
+          "right_to_left_norm_ratio": 2.765147248353048
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.03196480302737366,
+          "right_norm": 0.12018741847038922,
+          "inner_product": -0.0001704062108135241,
+          "cosine": -0.04435620479202541,
+          "right_to_left_norm_ratio": 3.759992463193484
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.6186840622572385,
+          "right_norm": 0.333119015805363,
+          "inner_product": -0.05139624503820552,
+          "cosine": -0.09531689261578337,
+          "right_to_left_norm_ratio": 0.20579619184044595
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.6037680795632991,
+          "right_norm": 0.2571337717362549,
+          "inner_product": -0.05026391566694924,
+          "cosine": -0.12188650733524356,
+          "right_to_left_norm_ratio": 0.16033101981071451
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.08951822631319409,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.2168969611286747,
+          "right_norm": 0.14963947915902698,
+          "inner_product": -0.0009619231604429129,
+          "cosine": -0.029637442626495047,
+          "right_to_left_norm_ratio": 0.6899104458649052
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.03196480302737366,
+          "right_norm": 0.10461038895832998,
+          "inner_product": 1.3503894198063874e-05,
+          "cosine": 0.004038426445273821,
+          "right_to_left_norm_ratio": 3.27267428705082
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.6186840622572385,
+          "right_norm": 0.3274511015050514,
+          "inner_product": -0.0661757760749341,
+          "cosine": -0.12485056063698508,
+          "right_to_left_norm_ratio": 0.2022946349693616
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.6037680795632991,
+          "right_norm": 0.27391470365448617,
+          "inner_product": -0.06522339645016272,
+          "cosine": -0.14847266351519395,
+          "right_to_left_norm_ratio": 0.17079446033685386
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.2168969611286747,
+          "right_norm": 0.14577937275463132,
+          "inner_product": -0.0009658835189691125,
+          "cosine": -0.030547467479615457,
+          "right_to_left_norm_ratio": 0.6721134864962323
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 10.398787004873157,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    },
+    {
+      "arm": "trainable",
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.5730223655700684,
+        "feedback_counts": 0.0008529741317033768,
+        "span_boundaries": 0.05688510462641716,
+        "output_length": 0.1730378270149231,
+        "output_flow": 0.4735870361328125,
+        "teacher_context": 0.05239780992269516
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 5.041305065155029,
+        "auxiliary": 4.472728729248047,
+        "combined": 6.75085973739624
+      },
+      "global_clip_scalars": {
+        "flow": 0.19836129248142242,
+        "auxiliary": 0.2235771119594574,
+        "combined": 0.14812925457954407
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.05046355980737118,
+          "right_norm": 0.7279591228409442,
+          "inner_product": -0.0049732626466025085,
+          "cosine": -0.1353806264352596,
+          "right_to_left_norm_ratio": 14.425441360452966
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 5.041305168331339,
+          "right_norm": 4.4727290152123125,
+          "inner_product": 0.07639441070596573,
+          "cosine": 0.0033880203538061036,
+          "right_to_left_norm_ratio": 0.8872164778496788
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 4.998794551399257,
+          "right_norm": 4.1469726508234235,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 0.8295945368794178
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.18322034764535616,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.6513557110187969,
+          "right_norm": 1.4981416810588968,
+          "inner_product": 0.08136767335256814,
+          "cosine": 0.08338362765527035,
+          "right_to_left_norm_ratio": 2.300036148782095
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.05046355980737118,
+          "right_norm": 0.7230559837472784,
+          "inner_product": -0.002417632569401426,
+          "cosine": -0.06625833065071912,
+          "right_to_left_norm_ratio": 14.328279386300093
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 5.041305168331339,
+          "right_norm": 6.750859408323697,
+          "inner_product": 25.49112636177855,
+          "cosine": 0.7490088938248856,
+          "right_to_left_norm_ratio": 1.3391094533874879
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 4.998794551399257,
+          "right_norm": 6.495023412873608,
+          "inner_product": 24.9879469670989,
+          "cosine": 0.769634569983425,
+          "right_to_left_norm_ratio": 1.2993179347719999
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.18322034764535616,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.6513557110187969,
+          "right_norm": 1.6829717661779664,
+          "inner_product": 0.5055970272490495,
+          "cosine": 0.4612214068627279,
+          "right_to_left_norm_ratio": 2.5837982805825113
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.05046355980737118,
+          "right_norm": 0.10692310467221788,
+          "inner_product": 0.00011939236844559302,
+          "cosine": 0.022127233744601116,
+          "right_to_left_norm_ratio": 2.1188181150985645
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 5.041305168331339,
+          "right_norm": 0.3912044337941963,
+          "inner_product": -0.5022137285631089,
+          "cosine": -0.25464891172763304,
+          "right_to_left_norm_ratio": 0.07759983193472973
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 4.998794551399257,
+          "right_norm": 0.33348318839309227,
+          "inner_product": -0.4984009372694188,
+          "cosine": -0.2989782651354795,
+          "right_to_left_norm_ratio": 0.06671272142995835
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0836233497874132,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.6513557110187969,
+          "right_norm": 0.15298515332214646,
+          "inner_product": -0.003932183662135065,
+          "cosine": -0.03946083610743914,
+          "right_to_left_norm_ratio": 0.23487189984541582
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.05046355980737118,
+          "right_norm": 0.10461902503749941,
+          "inner_product": 4.153447734522952e-05,
+          "cosine": 0.00786720012891143,
+          "right_to_left_norm_ratio": 2.0731598293273352
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 5.041305168331339,
+          "right_norm": 0.43027233275905435,
+          "inner_product": -0.6585480619856305,
+          "cosine": -0.30359951069020835,
+          "right_to_left_norm_ratio": 0.08534939234822668
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 4.998794551399257,
+          "right_norm": 0.3898448576748983,
+          "inner_product": -0.6533620189954672,
+          "cosine": -0.33527161535223154,
+          "right_to_left_norm_ratio": 0.07798777358548839
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.6513557110187969,
+          "right_norm": 0.14903062397561187,
+          "inner_product": -0.005227577467508821,
+          "cosine": -0.053852606987776434,
+          "right_to_left_norm_ratio": 0.2288006713605235
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 14.29826595634222,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    },
+    {
+      "arm": "trainable",
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.6547834277153015,
+        "feedback_counts": 0.0009796289959922433,
+        "span_boundaries": 0.13389138877391815,
+        "output_length": 0.27028873562812805,
+        "output_flow": 0.4838393032550812,
+        "teacher_context": 0.24689263105392456
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          },
+          "context": {
+            "parameters": 309,
+            "present": 309
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 1.8991212844848633,
+        "auxiliary": 5.0466437339782715,
+        "combined": 5.399942398071289
+      },
+      "global_clip_scalars": {
+        "flow": 0.526559054851532,
+        "auxiliary": 0.19815145432949066,
+        "combined": 0.18518713116645813
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.028325255343644436,
+          "right_norm": 1.7442104341841465,
+          "inner_product": 0.0003049760384669207,
+          "cosine": 0.006172953493051731,
+          "right_to_left_norm_ratio": 61.57792447140318
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.8991212162715747,
+          "right_norm": 5.046644324654702,
+          "inner_product": 0.0302206273227849,
+          "cosine": 0.003153175125389651,
+          "right_to_left_norm_ratio": 2.657357667017412
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.889634221733802,
+          "right_norm": 4.044033686907682,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 2.140114547246687
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.3061490220210157,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.187460881399371,
+          "right_norm": 2.4450793885524535,
+          "inner_product": 0.029915651284317977,
+          "cosine": 0.06526717914638157,
+          "right_to_left_norm_ratio": 13.043144629963622
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.028325255343644436,
+          "right_norm": 1.748717417910321,
+          "inner_product": 0.0011109201351160738,
+          "cosine": 0.02242793913896935,
+          "right_to_left_norm_ratio": 61.73703984994066
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.8991212162715747,
+          "right_norm": 5.399942420490549,
+          "inner_product": 3.6368729104683504,
+          "cosine": 0.3546388503887953,
+          "right_to_left_norm_ratio": 2.8433900765386197
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.889634221733802,
+          "right_norm": 4.46373452982944,
+          "inner_product": 3.5707174919475118,
+          "cosine": 0.4233303322825529,
+          "right_to_left_norm_ratio": 2.3622214704250095
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.3061490220210157,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.187460881399371,
+          "right_norm": 2.4663155435658006,
+          "inner_product": 0.06504449838572314,
+          "cosine": 0.1406861270685593,
+          "right_to_left_norm_ratio": 13.15642775791449
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.028325255343644436,
+          "right_norm": 0.11348480246738707,
+          "inner_product": -3.0254287215774376e-05,
+          "cosine": -0.00941185842622257,
+          "right_to_left_norm_ratio": 4.0064882413443295
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.8991212162715747,
+          "right_norm": 0.3310106872416759,
+          "inner_product": -0.065121959467404,
+          "cosine": -0.1035935600593355,
+          "right_to_left_norm_ratio": 0.17429676652843065
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.889634221733802,
+          "right_norm": 0.25206183648276037,
+          "inner_product": -0.06491673702124501,
+          "cosine": -0.13629246322509678,
+          "right_to_left_norm_ratio": 0.1333918668404964
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.09366752101075716,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.187460881399371,
+          "right_norm": 0.1561425655411804,
+          "inner_product": -0.00017496815894339258,
+          "cosine": -0.005977602840248779,
+          "right_to_left_norm_ratio": 0.8329341267127122
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.028325255343644436,
+          "right_norm": 0.10463153681364525,
+          "inner_product": -5.221858087168669e-06,
+          "cosine": -0.001761929906223703,
+          "right_to_left_norm_ratio": 3.693930929986206
+        },
+        "all": {
+          "elements": 1466346389,
+          "left_norm": 1.8991212162715747,
+          "right_norm": 0.4039035363932101,
+          "inner_product": -0.18237949901764422,
+          "cosine": -0.2377637693500563,
+          "right_to_left_norm_ratio": 0.2126791765225858
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.889634221733802,
+          "right_norm": 0.3621065501093123,
+          "inner_product": -0.18157345857577892,
+          "cosine": -0.2653616993467597,
+          "right_to_left_norm_ratio": 0.19162785365787224
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        },
+        "context": {
+          "elements": 1409410048,
+          "left_norm": 0.187460881399371,
+          "right_norm": 0.14515217732740773,
+          "inner_product": -0.0008008185837791481,
+          "cosine": -0.029430655383599697,
+          "right_to_left_norm_ratio": 0.7743064912736229
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 10.078974574804306,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    },
+    {
+      "arm": "frozen",
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.7195411920547485,
+        "feedback_counts": 0.06999300420284271,
+        "span_boundaries": 0.08353696018457413,
+        "output_length": 0.24636977910995483,
+        "output_flow": 0.48384588956832886,
+        "teacher_context": 0.08429700881242752
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 1.4494534730911255,
+        "auxiliary": 1.5695922374725342,
+        "combined": 2.073484182357788
+      },
+      "global_clip_scalars": {
+        "flow": 0.6899147629737854,
+        "auxiliary": 0.6371077299118042,
+        "combined": 0.48227980732917786
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.3370828499125946,
+          "right_norm": 1.4615559614811515,
+          "inner_product": -0.13283377275000044,
+          "cosine": -0.2696226680251077,
+          "right_to_left_norm_ratio": 4.335895349941809
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.4494535038896117,
+          "right_norm": 1.5695923329969834,
+          "inner_product": -0.13283377275000044,
+          "cosine": -0.058387159900024806,
+          "right_to_left_norm_ratio": 1.0828856039776225
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4097129538429718,
+          "right_norm": 0.5628341164612662,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 0.3992544119900032
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.10340222729266928,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.3370828499125946,
+          "right_norm": 1.4087482093240105,
+          "inner_product": -0.018968881096531272,
+          "cosine": -0.03994585122232171,
+          "right_to_left_norm_ratio": 4.17923430304834
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.4494535038896117,
+          "right_norm": 2.0734841192466607,
+          "inner_product": 1.9683217311361456,
+          "cosine": 0.6549242710507757,
+          "right_to_left_norm_ratio": 1.4305282050665726
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4097129538429718,
+          "right_norm": 1.517917275376168,
+          "inner_product": 1.9872906122326766,
+          "cosine": 0.9287152710569281,
+          "right_to_left_norm_ratio": 1.0767562795235897
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.10340222729266928,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.3370828499125946,
+          "right_norm": 0.14110530872083932,
+          "inner_product": 0.0010221795246465317,
+          "cosine": 0.02149053201826022,
+          "right_to_left_norm_ratio": 0.41860720222766556
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.4494535038896117,
+          "right_norm": 0.3267227272570151,
+          "inner_product": -0.05563511144026345,
+          "cosine": -0.11748037610979677,
+          "right_to_left_norm_ratio": 0.22541097481240616
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4097129538429718,
+          "right_norm": 0.27524081646740306,
+          "inner_product": -0.05665729096490997,
+          "cosine": -0.14601997750463586,
+          "right_to_left_norm_ratio": 0.19524600076709106
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.10525932408777758,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.3370828499125946,
+          "right_norm": 0.1302192977071246,
+          "inner_product": -0.0010518693070829099,
+          "cosine": -0.0239634739309421,
+          "right_to_left_norm_ratio": 0.3863124384432207
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.4494535038896117,
+          "right_norm": 0.3245695739651778,
+          "inner_product": -0.08107683576626212,
+          "cosine": -0.17233944776293458,
+          "right_to_left_norm_ratio": 0.22392548163441922
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4097129538429718,
+          "right_norm": 0.29730177067854846,
+          "inner_product": -0.0800249664591792,
+          "cosine": -0.19094017422472595,
+          "right_to_left_norm_ratio": 0.21089525344013046
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 1.4073543520644307,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    },
+    {
+      "arm": "frozen",
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.7553955316543579,
+        "feedback_counts": 0.0003523360937833786,
+        "span_boundaries": 0.05794741213321686,
+        "output_length": 0.09627914428710938,
+        "output_flow": 0.38433799147605896,
+        "teacher_context": 0.05163084715604782
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 2.3359603881835938,
+        "auxiliary": 2.7501473426818848,
+        "combined": 3.7113702297210693
+      },
+      "global_clip_scalars": {
+        "flow": 0.42808929085731506,
+        "auxiliary": 0.3636167645454407,
+        "combined": 0.26944220066070557
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.4880261131914877,
+          "right_norm": 1.6668430135757863,
+          "inner_product": 0.3777754745273788,
+          "cosine": 0.46440405153363745,
+          "right_to_left_norm_ratio": 3.4154791485958134
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 2.33596044485723,
+          "right_norm": 2.7501474686117793,
+          "inner_product": 0.3777754745273788,
+          "cosine": 0.0588047344340618,
+          "right_to_left_norm_ratio": 1.1773090912846615
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 2.2844127719790044,
+          "right_norm": 2.184802049161527,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 0.9563954798190067
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.1076358359699946,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.4880261131914877,
+          "right_norm": 1.9418497949788058,
+          "inner_product": 0.6151955514655845,
+          "cosine": 0.6491640963783158,
+          "right_to_left_norm_ratio": 3.9789874813868384
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 2.33596044485723,
+          "right_norm": 3.711370071314014,
+          "inner_product": 5.833737264246381,
+          "cosine": 0.6728947191509896,
+          "right_to_left_norm_ratio": 1.588798337525294
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 2.2844127719790044,
+          "right_norm": 3.160996948242944,
+          "inner_product": 5.218541712780799,
+          "cosine": 0.7226874335480794,
+          "right_to_left_norm_ratio": 1.383724074307529
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.1076358359699946,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.4880261131914877,
+          "right_norm": 0.13758196637040815,
+          "inner_product": -0.007295268173770193,
+          "cosine": -0.10865174061489107,
+          "right_to_left_norm_ratio": 0.28191517349487577
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 2.33596044485723,
+          "right_norm": 0.35955860290721964,
+          "inner_product": -0.23620879534552405,
+          "cosine": -0.28122951373236127,
+          "right_to_left_norm_ratio": 0.1539232411656676
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 2.2844127719790044,
+          "right_norm": 0.31775262782674707,
+          "inner_product": -0.2289135271717538,
+          "cosine": -0.31536081310122066,
+          "right_to_left_norm_ratio": 0.13909597762906722
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.09688580372500531,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.4880261131914877,
+          "right_norm": 0.13126155012438775,
+          "inner_product": -0.004722958465278291,
+          "cosine": -0.07372818398544122,
+          "right_to_left_norm_ratio": 0.2689641938747741
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 2.33596044485723,
+          "right_norm": 0.41100246362812204,
+          "inner_product": -0.35880245187467796,
+          "cosine": -0.3737192705300884,
+          "right_to_left_norm_ratio": 0.17594581472172222
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 2.2844127719790044,
+          "right_norm": 0.38947840834548025,
+          "inner_product": -0.3540794934093996,
+          "cosine": -0.39796310354400083,
+          "right_to_left_norm_ratio": 0.17049388495935966
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 1.2039264254271984,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    },
+    {
+      "arm": "frozen",
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "complete_record": true,
+      "losses": {
+        "feedback_vectors": 0.7987425923347473,
+        "feedback_counts": 0.0005127447657287121,
+        "span_boundaries": 0.13292565941810608,
+        "output_length": 0.1288166642189026,
+        "output_flow": 0.5219736695289612,
+        "teacher_context": 0.2259468138217926
+      },
+      "gradient_presence": {
+        "flow": {
+          "reader": {
+            "parameters": 44,
+            "present": 38
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 51
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 0
+          }
+        },
+        "auxiliary": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 4
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        },
+        "combined": {
+          "reader": {
+            "parameters": 44,
+            "present": 44
+          },
+          "writer": {
+            "parameters": 55,
+            "present": 55
+          },
+          "projection": {
+            "parameters": 1,
+            "present": 1
+          }
+        }
+      },
+      "unclipped_total_norms": {
+        "flow": 1.4456987380981445,
+        "auxiliary": 3.2088327407836914,
+        "combined": 3.51326847076416
+      },
+      "global_clip_scalars": {
+        "flow": 0.6917065978050232,
+        "auxiliary": 0.3116396963596344,
+        "combined": 0.28463515639305115
+      },
+      "flow_vs_auxiliary": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.24904299204904035,
+          "right_norm": 2.3106771043172323,
+          "inner_product": -0.021258340329916203,
+          "cosine": -0.03694160574154185,
+          "right_to_left_norm_ratio": 9.278225760563561
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.445698800651189,
+          "right_norm": 3.208832649789089,
+          "inner_product": -0.021258340329916203,
+          "cosine": -0.0045825210315039245,
+          "right_to_left_norm_ratio": 2.2195720494087205
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4240865880681375,
+          "right_norm": 2.2230450564593816,
+          "inner_product": 0.0,
+          "cosine": 0.0,
+          "right_to_left_norm_ratio": 1.5610322259091571
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.12429388918244584,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_gradient": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.24904299204904035,
+          "right_norm": 2.314660719272288,
+          "inner_product": 0.04067661892568529,
+          "cosine": 0.07056399814506858,
+          "right_to_left_norm_ratio": 9.294221452400862
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.445698800651189,
+          "right_norm": 3.5132684425751246,
+          "inner_product": 2.068699229241234,
+          "cosine": 0.40729417331356,
+          "right_to_left_norm_ratio": 2.4301524224773763
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4240865880681375,
+          "right_norm": 2.640066653204809,
+          "inner_product": 2.028022610315549,
+          "cosine": 0.5394131191117548,
+          "right_to_left_norm_ratio": 1.853866664657115
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.12429388918244584,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_combined_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.24904299204904035,
+          "right_norm": 0.14531283931280595,
+          "inner_product": -0.0001733392293177196,
+          "cosine": -0.004789812877302004,
+          "right_to_left_norm_ratio": 0.583484956220698
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.445698800651189,
+          "right_norm": 0.3479665396017954,
+          "inner_product": -0.10171103098806919,
+          "cosine": -0.2021867780103556,
+          "right_to_left_norm_ratio": 0.24069089594946066
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4240865880681375,
+          "right_norm": 0.29447581586045696,
+          "inner_product": -0.10153769175875146,
+          "cosine": -0.24212590468049144,
+          "right_to_left_norm_ratio": 0.20678224086074135
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.11510380222484753,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "flow_vs_flow_only_adamw_displacement": {
+        "reader": {
+          "elements": 5972100,
+          "left_norm": 0.24904299204904035,
+          "right_norm": 0.13045211809889098,
+          "inner_product": -0.0014459978540715456,
+          "cosine": -0.04450842107671591,
+          "right_to_left_norm_ratio": 0.5238136476982375
+        },
+        "all": {
+          "elements": 56936341,
+          "left_norm": 1.445698800651189,
+          "right_norm": 0.4470249672533866,
+          "inner_product": -0.23422888335744027,
+          "cosine": -0.36243559818910365,
+          "right_to_left_norm_ratio": 0.30921030511475295
+        },
+        "writer": {
+          "elements": 42575633,
+          "left_norm": 1.4240865880681375,
+          "right_norm": 0.4275670312727635,
+          "inner_product": -0.2327828855033687,
+          "cosine": -0.38230540721402445,
+          "right_to_left_norm_ratio": 0.30023949024952545
+        },
+        "projection": {
+          "elements": 8388608,
+          "left_norm": 0.0,
+          "right_norm": 0.0,
+          "inner_product": 0.0,
+          "cosine": null,
+          "right_to_left_norm_ratio": null
+        }
+      },
+      "optimizer_updates": 0,
+      "seconds": 1.0305293360725045,
+      "interpretation": "First-order diagnostic on a new training batch with retained moments; no actual loss change or semantic result measured."
+    }
+  ],
+  "state_checks": [
+    {
+      "arm": "trainable",
+      "exact_model_unchanged": true,
+      "exact_objective_unchanged": true,
+      "model_tensor_sha256": "d8b7177213b4f67c9a7738739c49101a5eecd8284e31365337edd552311e5b95",
+      "objective_tensor_sha256": "93bf64221263fa58ec4333fced67d07c07ce6725713d7a5727d0f6a04a0a2c75"
+    },
+    {
+      "arm": "frozen",
+      "exact_model_unchanged": true,
+      "exact_objective_unchanged": true,
+      "model_tensor_sha256": "f997c105d5a3eca6b8ccdd9c38d21202fa3e4517a1e86e609e214aff35a95b3b",
+      "objective_tensor_sha256": "6a4ced896e38621178115a818a1d6af1994789180d396bdbad478eaa9615b41b"
+    }
+  ],
+  "resources": {
+    "elapsed_seconds": 183.60155091248453,
+    "resource_wait_seconds": 10.00987624656409,
+    "peak_allocated_vram_gib": 16.686781406402588,
+    "minimum_available_gib": 55.29841232299805,
+    "pressure_wait_allowance_seconds": 300,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "successful_supervisor_elapsed_seconds": 195.19609475135803,
+  "failed_execution_preserved": "references/evidence/visual_context_gradient_failure_20261117.json",
+  "bindings": {
+    "artifacts/visual_context_device_gradient_diagnostic_v1/frozen_complete_513_book.json": "24f814f98777db59cdeca8398179a91a5031d93607747be512079b3eb046528d",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/frozen_complete_qa.json": "698d9bd2540e773f7392a96abe86141eedfa2863480a2ca5579ca307eb4853ed",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/frozen_longest_native_record.json": "cff68acacaa55ddabb05ecefade817d6a3d0e5511c30b781515afafb73bb20c8",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/frozen_unchanged.json": "04878c0c0dbb99f88b8efea68599d042d8f3414b166eee4b3794b0af7a0c3773",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/result.json": "173ef32133ebe35e8fd4e2e29a2de038bc76cd864442eb609b3b2a077be3b698",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/status.json": "b9d182ffe27ce6bb3dc505269f0b2316947f9c5eb837b5e098eac9d73a3db257",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/trainable_complete_513_book.json": "4e41fc87a5f8c8cfbbb8266febbe11548adbcfc6d66ba6f85e6803c2555a2e1c",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/trainable_complete_qa.json": "86967b2626d7d5e58cc6c71a8553637335078076aa04a23b23f15652f6832fa8",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/trainable_longest_native_record.json": "6b2c17dafe952989def768090c82ff463680df1dff3faadd2f9e0e13114743ac",
+    "artifacts/visual_context_device_gradient_diagnostic_v1/trainable_unchanged.json": "be4f70811b43c76804eb3f612c5a344a505d480fa55cc7c70c7b9dcb73ffde8e",
+    "artifacts/visual_context_device_gradient_diagnostic_v1.exit.json": "0fecdee9185c300e52f9cc2687d3671086b5d7bafdb729958800b8df8f729f26",
+    "references/evidence/visual_context_device_gradient_registration_20261117.json": "c7e42cde99b6cd80c715d7b59799b19bf380a4929251cb43c5f896f1f8d6b4be",
+    "references/evidence/visual_context_gradient_failure_20261117.json": "c6effe8181851a13dfcfe7adb31d3a610f5640ec0302a8cc1be6dd7c6ddc03ee"
+  },
+  "interference_supported_on_prescribed_records": false,
+  "all_combined_first_order_flow_directions_negative": true,
+  "optimizer_updates": 0,
+  "generation_calls": 0,
+  "full_fit_authorized": false,
+  "language_quality_measured": false,
+  "goal_achieved": false,
+  "interpretation": "The registered opposing-direction criterion is not met. Combined directions remain first-order flow-descent directions on all six selected records. No actual updated loss or semantic improvement was measured.",
+  "limitations": [
+    "Only three complete prescribed training records per actor; no corpus-wide causal conclusion.",
+    "Flow-only counterfactual retains the same combined-objective optimizer history.",
+    "Clipping and auxiliary gradients reduce the magnitude of some first-order flow changes; this does not qualify a new loss-weight recipe.",
+    "Earlier failed pressure execution has no saved peak-VRAM or final tensor-preservation check.",
+    "Successful recovery and earlier failure have overlapping monitored/supervisor time scopes; do not add nested timings."
+  ]
+}

@@ -70,51 +70,45 @@ writer, native-history or sampling diagnoses. All old failures and successful
 cases remain evidence. The preceding goal revision is preserved at Git commit
 `6390e80e7ee3e113419279702c2f872448d8c88d`.
 
-## Next work: diagnose the conditional training signal
+## Next work: useful conditional image selection
 
-Full contextual adaptation under the six equally weighted objectives was
-insufficient. The next bounded investigation measures the conditional-flow
-and auxiliary gradients on the exact final actors and authenticated complete
-training records, with no optimizer updates or retained new model. Equal loss
-weights do not imply equal gradients; this is a possible interference mechanism,
-not an established cause. Negative cosine alone is not an AdamW update analysis.
-Follow the failure decision's group accounting, complete hypothetical update
-requirements, limits and actions for either result.
+The [gradient diagnostic](../references/visual_context_gradient_result_20261117.md)
+is now complete on all three whole training records in both final actors. The
+original host-gradient attempt stops at its pressure-wait ceiling with no complete
+case. A separately bound device-copy recovery preserves all original arithmetic,
+records and guards, completes in 183.602 seconds at 16.687 GiB peak allocation,
+and verifies both full models and training-only projections unchanged. It makes
+no optimizer updates or answer generations. Every combined retained-moment
+AdamW direction has a negative inner product with the flow gradient; the
+registered opposing-direction criterion is not met. Do not select new loss
+weights from this result. First-order directions are not actual updated loss or
+language measurements, and three records do not establish a corpus-wide cause.
 
-Before execution, separately register exact records, final actor and offline
-projection identities, parameter groups, precision, source bindings and a finite
-resource ceiling. Admit only one diagnostic owner and verify full-record support
-without silently cropping after failure. This goal text authorizes preparation,
-not an unregistered heavy run or another full fit. No development answers,
-reserved DRCD records, rejected reward judge or policy fit enters this work.
+The [saved-output analysis](../references/visual_context_saved_dependence_result_20261117.md)
+checks all 792 streams and 488 comparisons without new neural calls or reading
+repair. Every final normal QA stream is distinct. Literal prompt independence
+is not established. Yet the learned-context actor has only fourteen distinct
+first tiles across 32 normal questions, with one repeated ten times; the frozen
+control has 32. Same-passage question pairs with matched first-span noise shapes
+have median first-tile distance one pixel in treatment (16 pairs), versus sixteen
+pixels in control (14 pairs). These are descriptive pixel effects, not semantic
+understanding, and the matched subsets differ. Preserve the complete results.
 
-The [diagnostic protocol](../references/visual_context_gradient_protocol_20261117.md)
-and [56-source registration](../references/evidence/visual_context_gradient_registration_20261117.json)
-are prepared. Four CPU checks establish copied AdamW arithmetic and unchanged
-inputs, not language learning. The diagnostic retains the complete 513-, 846-
-and 1,042-glyph training records, three RNG-matched gradient passes per record,
-retained moments and the direct combined gradient. Commit and push its binding
-before the sole 1,200-second monitored execution, with no optimizer updates.
-Measure actual model/projection preservation and support for both final actors;
-preserve any execution failure without an automatic retry.
+The next algorithm work must address useful conditional image selection and
+writing rather than assume opposing auxiliary gradients or repeat unchanged
+training. Before selecting a conditional discrimination objective or output-law
+change, read the existing failed contrastive, joint-density and writer results
+and explain precisely how the proposed intervention differs. Choose one bounded
+change with an unchanged control and training-only update/reset support on
+complete authentic records. Require actual conditional writing improvement and
+fixed complete-language evaluation before a full-corpus claim. No successor
+full fit is currently admitted.
 
-That first diagnostic is now terminal at its pressure-wait ceiling, with zero
-completed record-level measurements. It supplies no interference finding; final
-tensor-preservation checks were not reached. The
-[separate placement recovery](../references/visual_context_device_gradient_protocol_20261117.md)
-keeps the saved FP32 flow gradient on GPU rather than host. Exact source
-comparison preserves every other measurement operation. The original 56 inputs,
-records, actors, moments, guards, time limits and failure remain preserved.
-Its separate registration must be committed and pushed before one new serial
-execution; no optimizer update, answer generation or automatic retry is admitted.
-
-If interference is supported under the relevant update direction, prepare one
-prospective objective intervention with an unchanged control and training-only
-update/reset preflight. Require actual complete conditional writing improvement;
-gradients or reduced auxiliary loss alone cannot admit the next full fit. If the
-evidence does not support interference, reject the explanation and choose the
-next single change from the measured limitation. No working successor algorithm
-has yet been qualified.
+Historical diagnostic registrations, all failed executions and frozen readings
+remain protected. No development answer, reserved DRCD record, rejected reward
+judge or policy fit may enter the new training objective. Source-conditioned
+contrast or image likelihood is training supervision, not evidence of language
+until autonomous complete answers and books meet the original criteria.
 
 The earlier white-target comparison, both reward judges, isolated-cell teacher,
 fixed encoder metric, label uniqueness and preprocessing audits remain terminal.

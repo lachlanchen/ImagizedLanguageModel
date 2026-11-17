@@ -17,15 +17,14 @@ retains all snapshot summaries, resource scopes and evidence hashes. Earlier
 failed admission and cold attempts remain preserved. This implementation has
 not demonstrated a working ILM.
 
-The [gradient diagnostic](../references/visual_context_gradient_protocol_20261117.md)
-now binds the exact final actors, retained AdamW moments and three complete
-training records. It measures copied update directions without applying them;
-four CPU arithmetic checks pass. Its prospective support rule and resource
-ceilings admit no new full fit or language claim.
-The first diagnostic stops at its pressure-wait limit before a complete record
-measurement. The [separately bound recovery](../references/visual_context_device_gradient_protocol_20261117.md)
-changes only the saved gradient's host/device placement, preserving the original
-failure, mathematical measurement and resource ceilings.
+The [completed gradient diagnostic](../references/visual_context_gradient_result_20261117.md)
+measures all six whole-record cases without optimizer updates and verifies both
+models unchanged. Its opposing-direction criterion is not met. The
+[saved-output analysis](../references/visual_context_saved_dependence_result_20261117.md)
+finds visible variation alongside recurrent damaged first glyphs, without
+changing language scores. Neither result admits another unchanged fit or
+qualifies a working model. The next intervention must address useful conditional
+image selection, accounting for the existing failed contrastive/writer trials.
 
 ## Learning path
 
