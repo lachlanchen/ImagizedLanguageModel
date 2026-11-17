@@ -327,6 +327,18 @@ architectural proposal may test spatial representation/decoder geometry with
 all original absolute criteria, rather than add discarded auxiliary labels,
 unmeasured code width or more unchanged exposure. No conditional fit is admitted.
 
+The [next spatial-codec comparison](../references/spatial_codec_comparison_protocol_20261118.md)
+is prospectively registered after four passing CPU checks. It replaces only
+the two global bottleneck maps with shared pointwise maps on a 4-by-4 field,
+retaining 64 values/bits and the complete equal-form schedule. Both new modes
+have 1,767,365 parameters and preserve all 1,766,209 shared convolutional initial
+values; the smaller projection parameter count is part of the architecture,
+not a uniquely isolated locality effect. Saved global equal-form controls are
+not rerun. All absolute fidelity/event/resource conditions remain, with .02
+required gain over the saved global binary control. Spatial layout is a
+learnability hypothesis, not semantics or a guarantee. No conditional language
+fit is admitted before actual qualification.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

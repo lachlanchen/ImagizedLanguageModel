@@ -1,0 +1,21 @@
+{
+  "schema": "ilm-spatial-binary-codec-cpu-v1",
+  "input_sha256": {
+    "ilm/visual_lm/spatial_binary_plan_codec.py": "0cb3dabb3e5e3297b4a80070d0b3ff7ecd7dc2fb3f15ee16f23e8ece6bcda4eb",
+    "tests/test_spatial_binary_plan_codec.py": "312884b6f977710328a4e39a89d77f14085e429fc27adce9a2d14b881e72a26b"
+  },
+  "tests_passed": 4,
+  "elapsed_seconds": 0.159,
+  "checks": [
+    "all 64 site coordinates and raster feature order invertible",
+    "all 1766209 common convolutional initial values match global control",
+    "real updates and exact resets in continuous/binary modes",
+    "joint writer gradients and generation without target encoder"
+  ],
+  "codec_parameters": 1767365,
+  "code_bits": 64,
+  "source_data_loaded": false,
+  "gpu_used": false,
+  "language_measured": false,
+  "full_language_fit_authorized": false
+}
