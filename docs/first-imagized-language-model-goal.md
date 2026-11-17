@@ -210,16 +210,37 @@ update occurs in the audit. The event ratio .396997 is not a throughput,
 compression-byte or language-efficiency measurement; the dense-image support
 still permits 342 events. These cells are not corpus exposures or held-out language.
 
-The next [registered training-only head preflight](../references/occupancy_density_preflight_protocol_20261118.md)
-reuses the immutable original actor's real pre-target context/image cache for
-all 552 next-span positions of the same three whole records. Compare common
-initial tensors, the same root and 96 whole-record likelihood updates per arm;
-freeze the source actor and reset every trial. Verify actual generated topology,
-all-event cached probability replay, whitespace, image fidelity and conditional
-state dependence. Root errors and unreadable nonempty writing remain failures.
-Its physical support cannot qualify independent reading, within-span language,
-learned stopping or complete answers. A failure stops this intervention at the
-fixed budget. No full fit, deployment or new language score is admitted.
+The [registered real-image preflight](../references/occupancy_density_preflight_result_20261118.md)
+is now terminal. Both modes complete 96 whole-record updates and exact reset;
+all 2,208 actual generated images/traces are independently recounted. Tree
+F1 improves from .056570593 to .455979811, versus final flat .004023445, but
+three of six fixed support conditions fail. Both have zero exact source masks
+and ink at all four true spaces. All-event cached probability replay passes
+within 9.54e-7 nat. Keep the finite contextual/root/mask gradients and limited
+conditional NLL effect separate from readable or correct language. The run
+uses .221 GiB peak allocation and 162.945 monitored seconds, excluding its
+inherited 1,465,381,142-parameter actor and earlier cache preparation.
+
+A [saved-array ink diagnosis](../references/evidence/occupancy_density_ink_mass_20261118.json)
+finds opposite density errors: source mean 164.824 pixels, flat 1.772 and tree
+418.797. Of 548 nonempty source positions, 547 flat outputs contain at most
+four ink pixels; 366 tree outputs have more than twice their source ink.
+These are descriptive post-hoc bins, not new rules or language scores. Do not
+extend this failed fit, choose another snapshot or treat root nonemptiness
+as successful writing. The lossless event savings remain a component result.
+
+The next [candidate learning signal](../references/global_visual_choice_direction_20261118.md)
+is training-only whole-image discrimination on the same global condition used
+by the learned physical writer. Exact source-mask equivalence supplies labels;
+no current-target physical prefix enters the helper. Its classifier and class
+mapping must be absent from inference, which continues to generate every bit.
+It differs from the failed synthetic teacher-anchor compiler and generated-image
+recognition rewards. It is currently unimplemented and admits no model call or
+fit. First qualify source-only construction, feature/gradient sharing,
+helper-free inference and exact reset, then register a bounded comparison using
+the completed 96-update tree as unchanged control. Require actual complete
+source-form discrimination and writing improvement together. Preserve every
+original physical/language criterion, earlier success and untouched confirmation.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

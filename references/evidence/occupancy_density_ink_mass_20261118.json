@@ -1,0 +1,137 @@
+{
+  "schema": "ilm-occupancy-ink-mass-diagnosis-v1",
+  "source_ink": {
+    "positions": 552,
+    "total": 90983,
+    "mean": 164.82427536231884,
+    "median": 185.5,
+    "minimum": 0,
+    "maximum": 302,
+    "q10": 22.200000000000003,
+    "q90": 245.0
+  },
+  "nonempty_source_positions": 548,
+  "groups": [
+    {
+      "mode": "flat",
+      "stage": "initial",
+      "generated_ink": {
+        "positions": 552,
+        "total": 288019,
+        "mean": 521.7735507246376,
+        "median": 518.0,
+        "minimum": 509,
+        "maximum": 555,
+        "q10": 515.0,
+        "q90": 543.0
+      },
+      "paired_ink_count_absolute_error_mean": 356.9492753623188,
+      "nonempty_source_with_at_most_four_generated_pixels": 0,
+      "nonempty_source_with_more_than_twice_source_ink": 528,
+      "legitimate_space_generated_ink": [
+        543,
+        538,
+        543,
+        544
+      ],
+      "original_pooled_f1": 0.24753431380309338
+    },
+    {
+      "mode": "flat",
+      "stage": "final",
+      "generated_ink": {
+        "positions": 552,
+        "total": 978,
+        "mean": 1.7717391304347827,
+        "median": 1.0,
+        "minimum": 1,
+        "maximum": 348,
+        "q10": 1.0,
+        "q90": 2.0
+      },
+      "paired_ink_count_absolute_error_mean": 163.2336956521739,
+      "nonempty_source_with_at_most_four_generated_pixels": 547,
+      "nonempty_source_with_more_than_twice_source_ink": 0,
+      "legitimate_space_generated_ink": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "original_pooled_f1": 0.004023444721131784
+    },
+    {
+      "mode": "tree",
+      "stage": "initial",
+      "generated_ink": {
+        "positions": 552,
+        "total": 17059,
+        "mean": 30.903985507246375,
+        "median": 31.0,
+        "minimum": 24,
+        "maximum": 43,
+        "q10": 31.0,
+        "q90": 32.0
+      },
+      "paired_ink_count_absolute_error_mean": 136.42028985507247,
+      "nonempty_source_with_at_most_four_generated_pixels": 0,
+      "nonempty_source_with_more_than_twice_source_ink": 0,
+      "legitimate_space_generated_ink": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "original_pooled_f1": 0.05657059291756909
+    },
+    {
+      "mode": "tree",
+      "stage": "final",
+      "generated_ink": {
+        "positions": 552,
+        "total": 231176,
+        "mean": 418.7971014492754,
+        "median": 447.0,
+        "minimum": 75,
+        "maximum": 499,
+        "q10": 380.1,
+        "q90": 458.0
+      },
+      "paired_ink_count_absolute_error_mean": 255.45108695652175,
+      "nonempty_source_with_at_most_four_generated_pixels": 0,
+      "nonempty_source_with_more_than_twice_source_ink": 366,
+      "legitimate_space_generated_ink": [
+        377,
+        164,
+        417,
+        176
+      ],
+      "original_pooled_f1": 0.4559798112112342
+    }
+  ],
+  "input_sha256": {
+    "references/evidence/occupancy_density_preflight_result_20261118.json": "562de236a63c0b1b94f9338ac186595c923161cbd203fb8227223148255837a7",
+    "artifacts/layer_conditioned_writer_preflight_v1/conditional_training_cache.pt": "c802d54f9ce3e2a2ca251f86f603979326af5d3e09a69f8341c0a8a6141563b1",
+    "artifacts/occupancy_density_preflight_v1/flat_initial_complete_513_book.npz": "d107a5200a41c7f47b04765a6036a37319c04969f931fd58908bc150660ac88a",
+    "artifacts/occupancy_density_preflight_v1/flat_initial_complete_qa.npz": "036f931415782b0dea9c2ef5e7f09a62d6fc1e1841861faddfec8d31348616fd",
+    "artifacts/occupancy_density_preflight_v1/flat_initial_longest_native_record.npz": "0dacd63339ea2b67db689752633b27aca8a42617815c75c7f36db5d4bcef97ec",
+    "artifacts/occupancy_density_preflight_v1/flat_final_complete_513_book.npz": "a8c856a82ba56cd18860ab3bacdf0318978d1bfd7d72e330de6b1e845a8b4865",
+    "artifacts/occupancy_density_preflight_v1/flat_final_complete_qa.npz": "c06dc5e9b28acfd9f0e9eee12046e40430537b4ff2de39984fc7e5724d052071",
+    "artifacts/occupancy_density_preflight_v1/flat_final_longest_native_record.npz": "b3360d53903b6d7345b3fa7e8aaa7bccf48f6805db65070f62c5589d566c24a2",
+    "artifacts/occupancy_density_preflight_v1/tree_initial_complete_513_book.npz": "5f821b8add59cd3645052af85a27059a91ce2c6324eb69a68e42177869ba6793",
+    "artifacts/occupancy_density_preflight_v1/tree_initial_complete_qa.npz": "adf3313877d3ec2e15ae30fc11be8dbdf981293f2816513c845e6a4504baa0e3",
+    "artifacts/occupancy_density_preflight_v1/tree_initial_longest_native_record.npz": "0e9b7bf401a912f5ad126baafc55d7cbaebbce72497c6e9f23fe4fd93d139366",
+    "artifacts/occupancy_density_preflight_v1/tree_final_complete_513_book.npz": "0ea2966ef731de11fa494e1d2835a7f80a3f3283de36b2d8f3f927d4c956d590",
+    "artifacts/occupancy_density_preflight_v1/tree_final_complete_qa.npz": "28ceb72343b03377d6205c45765dc9d611686128d491d747eb6a228d8a944421",
+    "artifacts/occupancy_density_preflight_v1/tree_final_longest_native_record.npz": "605fa05e85771cf0c34047a3dcbc9ef1c034af193f468116846e028c8b5d1ecb"
+  },
+  "analyzer_sha256": "e42ed1510fee4d654e4541027ca8a6dda20ff1c5698bdade2b7a07ae3af301a8",
+  "post_hoc_descriptive_diagnosis": true,
+  "near_empty_and_double_mass_bins_are_not_acceptance_rules": true,
+  "original_support_and_all_scores_unchanged": true,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "interpretation": "Opposite ink-mass errors coexist with correct probability replay. Count control alone would not prove glyph identity or language.",
+  "full_language_fit_authorized": false,
+  "goal_achieved": false
+}

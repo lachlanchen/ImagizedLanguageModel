@@ -46,6 +46,19 @@ book and long QA deteriorate against control. All trial updates reset exactly;
 all 2,208 emitted tiles are recounted and exported. No working algorithm or new
 full fit is qualified. Another unchanged fit is not selected.
 
+The subsequent [occupancy-density comparison](occupancy_density_preflight_result_20261118.md)
+uses a lossless hierarchy and an equal-parameter flat control with the same
+explicit empty/nonempty root. Eight CPU checks and all 68,948 saved-support
+cell roundtrips pass. Both real heads complete 96 whole-record updates/reset.
+Tree F1 reaches .455980 versus flat .004023, but both have zero exact masks and
+ink at all four true spaces. Every generated image and physical probability
+trace is recounted; no language is qualified. Opposite ink-count errors remain
+despite correct probability replay. The next
+[global visual-choice supervision candidate](global_visual_choice_direction_20261118.md)
+is unimplemented. Its helper would supervise complete source-form identity
+before local drawing and be discarded at inference. It requires separate
+source/gradient/reset and actual-writing qualification, not a larger unchanged fit.
+
 ## The failure that must be solved
 
 The [completed compact diagnostic](compact_visual_span_diagnosis_result.md)
