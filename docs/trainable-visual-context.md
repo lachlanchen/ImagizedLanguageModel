@@ -51,6 +51,12 @@ state resets exactly. Peak allocated VRAM is 11.252 GiB. The deployed model has
 These are execution measurements. Training loss, copying and readable individual
 glyphs do not demonstrate correct complete answers.
 
+The [algorithm assessment](../references/visual_language_algorithm_assessment_20261117.md)
+connects this comparison to the measured first-span failures and primary
+pixel-language research. It specifies what joint visual/contextual learning
+could establish and how to interpret either outcome. It does not change the
+registered sources, schedule or acceptance rules.
+
 Each full arm uses all 13,785 sequences, 2,576,239 target glyph positions,
 2,380,620 saved teacher states and 8,172 updates. The fixed snapshots are updates
 0, 1,956, 4,049, 6,152 and 8,172. Evaluation retains 396 streams per arm, including
