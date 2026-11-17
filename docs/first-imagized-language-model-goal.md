@@ -299,6 +299,27 @@ fit is admitted. A new bounded architectural decision must address the measured
 common generalization loss as well as quantization; neither is a unique-cause
 diagnosis or an impossibility proof. All original language criteria remain.
 
+A [saved-plan information analysis](../references/evidence/binary_plan_information_20261118.json)
+finds all 9,581 physical forms have distinct final 64-bit codes, with no code
+conflicts or unstable aliases. All bits vary and empirical H(form|code)=0.
+This rules out an exact-code collision floor on this finite support, not a
+learning or universal-capacity limit. A [saved-frequency analysis](../references/evidence/binary_codec_frequency_20261118.json)
+finds 110 common forms take 54.6% of training cells and reconstruct exactly,
+while 5,821 once-occurring forms have binary macro F1 .823330. These descriptive
+bins do not prove causality or change any rule.
+
+The next [registered codec intervention](../references/balanced_codec_comparison_protocol_20261118.md)
+changes only training allocation to uniform physical forms, keeping 64 bits,
+all weights at the original fresh initialization, 6,000 updates per mode, the
+same loss/schedule and every original quality/resource condition. Two CPU
+checks qualify uniform group mass and its complete-source gradient equality.
+All original occurrences remain in evaluation; the natural-frequency models
+are unchanged saved controls and are not rerun. The physical partition is
+reused development, not untouched confirmation. Require a .02 gain over the
+saved binary control in addition to all original absolute gates. More balanced
+physical drawing supervision does not change the natural language distribution
+or admit a conditional language fit before qualification.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

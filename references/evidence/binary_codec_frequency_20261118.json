@@ -1,0 +1,119 @@
+{
+  "schema": "ilm-binary-codec-frequency-v1",
+  "input_sha256": {
+    "artifacts/nonlinear_feedback_alignment_v1/prepared.pt": "67dd0ceb806cf7a7f490425483562206b941b4c04a40897aae6d7610d5230d02",
+    "artifacts/binary_codec_preparation_v1/partition.pt": "77a93277ea667b421dd89b3e2d69c3747da7868b3fb7c44f161a633c71baa513",
+    "references/evidence/binary_codec_comparison_result_20261118.json": "3593e9f98155ab07ea40a47ec29f2ec947e89a0a83a03e23ffa3525faf376232",
+    "scripts/analyze_codec_frequency.py": "e8100cc9c5a2c326ece446e0c0cc677d44182b1ff7eec7f170c7e94443499cd0",
+    "artifacts/binary_codec_comparison_v1/continuous_final.npz": "cce0c1bd596193de7b9c6391f3860f6f477ce96b078b7d0713c2800201233771",
+    "artifacts/binary_codec_comparison_v1/binary_final.npz": "16c62b666ee90a28a6eaebc0f661beabd10220878834e3c2812601797b7938af"
+  },
+  "reports": [
+    {
+      "mode": "continuous",
+      "training_strata": [
+        {
+          "stratum": "once",
+          "minimum_training_occurrences": 1,
+          "maximum_training_occurrences": 1,
+          "physical_forms": 5821,
+          "training_cells": 5821,
+          "macro_form_f1": 0.9535852285429803,
+          "macro_form_exact_rate": 0.034530149458855866
+        },
+        {
+          "stratum": "two_to_four",
+          "minimum_training_occurrences": 2,
+          "maximum_training_occurrences": 4,
+          "physical_forms": 1474,
+          "training_cells": 3745,
+          "macro_form_f1": 0.9859500356699467,
+          "macro_form_exact_rate": 0.29579375848032563
+        },
+        {
+          "stratum": "five_to_sixteen",
+          "minimum_training_occurrences": 5,
+          "maximum_training_occurrences": 16,
+          "physical_forms": 809,
+          "training_cells": 6865,
+          "macro_form_f1": 0.9987822290226326,
+          "macro_form_exact_rate": 0.8417799752781211
+        },
+        {
+          "stratum": "seventeen_to_sixtyfour",
+          "minimum_training_occurrences": 17,
+          "maximum_training_occurrences": 64,
+          "physical_forms": 415,
+          "training_cells": 12634,
+          "macro_form_f1": 0.9999938996492299,
+          "macro_form_exact_rate": 0.9975903614457832
+        },
+        {
+          "stratum": "sixtyfive_plus",
+          "minimum_training_occurrences": 65,
+          "maximum_training_occurrences": null,
+          "physical_forms": 110,
+          "training_cells": 34976,
+          "macro_form_f1": 1.0,
+          "macro_form_exact_rate": 1.0
+        }
+      ]
+    },
+    {
+      "mode": "binary",
+      "training_strata": [
+        {
+          "stratum": "once",
+          "minimum_training_occurrences": 1,
+          "maximum_training_occurrences": 1,
+          "physical_forms": 5821,
+          "training_cells": 5821,
+          "macro_form_f1": 0.8233295104131713,
+          "macro_form_exact_rate": 0.0003435835767050335
+        },
+        {
+          "stratum": "two_to_four",
+          "minimum_training_occurrences": 2,
+          "maximum_training_occurrences": 4,
+          "physical_forms": 1474,
+          "training_cells": 3745,
+          "macro_form_f1": 0.8840504725362334,
+          "macro_form_exact_rate": 0.004070556309362279
+        },
+        {
+          "stratum": "five_to_sixteen",
+          "minimum_training_occurrences": 5,
+          "maximum_training_occurrences": 16,
+          "physical_forms": 809,
+          "training_cells": 6865,
+          "macro_form_f1": 0.9559923706324278,
+          "macro_form_exact_rate": 0.09888751545117429
+        },
+        {
+          "stratum": "seventeen_to_sixtyfour",
+          "minimum_training_occurrences": 17,
+          "maximum_training_occurrences": 64,
+          "physical_forms": 415,
+          "training_cells": 12634,
+          "macro_form_f1": 0.9972501647226725,
+          "macro_form_exact_rate": 0.7156626506024096
+        },
+        {
+          "stratum": "sixtyfive_plus",
+          "minimum_training_occurrences": 65,
+          "maximum_training_occurrences": null,
+          "physical_forms": 110,
+          "training_cells": 34976,
+          "macro_form_f1": 1.0,
+          "macro_form_exact_rate": 1.0
+        }
+      ]
+    }
+  ],
+  "scope": "Post-hoc descriptive training-frequency bins on immutable saved source images; no causal identification, quality-rule change or language score",
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "gpu_used": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false
+}

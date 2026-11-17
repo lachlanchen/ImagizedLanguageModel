@@ -1,0 +1,288 @@
+{
+  "schema": "ilm-binary-plan-information-v1",
+  "input_sha256": {
+    "references/evidence/binary_codec_comparison_result_20261118.json": "3593e9f98155ab07ea40a47ec29f2ec947e89a0a83a03e23ffa3525faf376232",
+    "artifacts/binary_codec_preparation_v1/partition.pt": "77a93277ea667b421dd89b3e2d69c3747da7868b3fb7c44f161a633c71baa513",
+    "scripts/analyze_binary_plan_information.py": "67e50dc4ad8930779b6ba3144c878be006e057395a5b1937c545df1e1c459082",
+    "artifacts/binary_codec_comparison_v1/continuous_initial.npz": "7667d3f6fb692740afd9c896b1d6d7f63cc23af26a391db1120cefec9fcfe3a5",
+    "artifacts/binary_codec_comparison_v1/continuous_final.npz": "cce0c1bd596193de7b9c6391f3860f6f477ce96b078b7d0713c2800201233771",
+    "artifacts/binary_codec_comparison_v1/binary_initial.npz": "b4c3b15601ef73b0cf12c9cdbd1e5b424f0677541262f53cec01bd1256a37a47",
+    "artifacts/binary_codec_comparison_v1/binary_final.npz": "16c62b666ee90a28a6eaebc0f661beabd10220878834e3c2812601797b7938af"
+  },
+  "reports": [
+    {
+      "mode": "continuous",
+      "stage": "initial",
+      "subsets": {
+        "all": {
+          "positions": 68948,
+          "distinct_physical_forms": 9581,
+          "distinct_actual_codes": 9603,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 22,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0000000000000002,
+          "source_form_entropy_bits": 9.681480903547396,
+          "actual_code_entropy_bits": 9.692818827890731,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.226043076366476
+        },
+        "train": {
+          "positions": 64041,
+          "distinct_physical_forms": 8629,
+          "distinct_actual_codes": 8650,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 21,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 9.430436858096172,
+          "actual_code_entropy_bits": 9.442492998640327,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.075065518881555
+        },
+        "held": {
+          "positions": 4907,
+          "distinct_physical_forms": 952,
+          "distinct_actual_codes": 953,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 1,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 7.755154205661887,
+          "actual_code_entropy_bits": 7.757118727984318,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 9.894852205338287
+        }
+      }
+    },
+    {
+      "mode": "continuous",
+      "stage": "final",
+      "subsets": {
+        "all": {
+          "positions": 68948,
+          "distinct_physical_forms": 9581,
+          "distinct_actual_codes": 9603,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 22,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0000000000000002,
+          "source_form_entropy_bits": 9.681480903547396,
+          "actual_code_entropy_bits": 9.692818827890731,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.226043076366476
+        },
+        "train": {
+          "positions": 64041,
+          "distinct_physical_forms": 8629,
+          "distinct_actual_codes": 8650,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 21,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 9.430436858096172,
+          "actual_code_entropy_bits": 9.442492998640327,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.075065518881555
+        },
+        "held": {
+          "positions": 4907,
+          "distinct_physical_forms": 952,
+          "distinct_actual_codes": 953,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 1,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 7.755154205661887,
+          "actual_code_entropy_bits": 7.757118727984318,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 9.894852205338287
+        }
+      }
+    },
+    {
+      "mode": "binary",
+      "stage": "initial",
+      "subsets": {
+        "all": {
+          "positions": 68948,
+          "distinct_physical_forms": 9581,
+          "distinct_actual_codes": 9580,
+          "codes_with_conflicting_physical_forms": 1,
+          "positions_in_conflicting_codes": 2,
+          "physical_forms_in_conflicting_codes": 2,
+          "maximum_forms_sharing_one_code": 2,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 0.9999854963160643,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 0.9998956267612984,
+          "source_form_entropy_bits": 9.681480903547396,
+          "actual_code_entropy_bits": 9.681451896179526,
+          "source_form_given_code_entropy_bits": 2.9007367871439347e-05,
+          "equal_form_weighted_code_entropy_bits": 13.22575178075657,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.00445263096826594,
+            "maximum_ink_probability": 0.9872367581365666,
+            "sum_marginal_bit_entropies": 42.245609059908965,
+            "marginal_entropy_excess_over_actual_joint": 32.56415716372944
+          }
+        },
+        "train": {
+          "positions": 64041,
+          "distinct_physical_forms": 8629,
+          "distinct_actual_codes": 8629,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 9.430436858096172,
+          "actual_code_entropy_bits": 9.430436858096172,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.074977662301947,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.003981824143907809,
+            "maximum_ink_probability": 0.9870395527864961,
+            "sum_marginal_bit_entropies": 41.87616140594277,
+            "marginal_entropy_excess_over_actual_joint": 32.445724547846595
+          }
+        },
+        "held": {
+          "positions": 4907,
+          "distinct_physical_forms": 952,
+          "distinct_actual_codes": 952,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 7.755154205661887,
+          "actual_code_entropy_bits": 7.755154205661887,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 9.894817763307774,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.010597106174852253,
+            "maximum_ink_probability": 0.9898104748318728,
+            "sum_marginal_bit_entropies": 45.191075947413,
+            "marginal_entropy_excess_over_actual_joint": 37.43592174175111
+          }
+        }
+      }
+    },
+    {
+      "mode": "binary",
+      "stage": "final",
+      "subsets": {
+        "all": {
+          "positions": 68948,
+          "distinct_physical_forms": 9581,
+          "distinct_actual_codes": 9581,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 9.681480903547396,
+          "actual_code_entropy_bits": 9.681480903547396,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.225960527233973,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.2833584730521552,
+            "maximum_ink_probability": 0.7137697975285723,
+            "sum_marginal_bit_entropies": 61.89003570556946,
+            "marginal_entropy_excess_over_actual_joint": 52.208554802022064
+          }
+        },
+        "train": {
+          "positions": 64041,
+          "distinct_physical_forms": 8629,
+          "distinct_actual_codes": 8629,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 9.430436858096172,
+          "actual_code_entropy_bits": 9.430436858096172,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 13.074977662301947,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.2707952717790166,
+            "maximum_ink_probability": 0.7264252588185693,
+            "sum_marginal_bit_entropies": 61.65207783400864,
+            "marginal_entropy_excess_over_actual_joint": 52.221640975912464
+          }
+        },
+        "held": {
+          "positions": 4907,
+          "distinct_physical_forms": 952,
+          "distinct_actual_codes": 952,
+          "codes_with_conflicting_physical_forms": 0,
+          "positions_in_conflicting_codes": 0,
+          "physical_forms_in_conflicting_codes": 0,
+          "maximum_forms_sharing_one_code": 1,
+          "forms_with_multiple_actual_codes": 0,
+          "perfect_arbitrary_code_decoder_cell_exact_upper_bound": 1.0,
+          "perfect_arbitrary_code_decoder_macro_exact_upper_bound": 1.0,
+          "source_form_entropy_bits": 7.755154205661887,
+          "actual_code_entropy_bits": 7.755154205661887,
+          "source_form_given_code_entropy_bits": 0.0,
+          "equal_form_weighted_code_entropy_bits": 9.894817763307774,
+          "binary_bit_statistics": {
+            "nonconstant_bits": 64,
+            "minimum_ink_probability": 0.37191766863664155,
+            "maximum_ink_probability": 0.6708783370694925,
+            "sum_marginal_bit_entropies": 63.11510723573436,
+            "marginal_entropy_excess_over_actual_joint": 55.35995303007247
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Empirical exact-image equivalence in saved representation values; not Unicode labels, a source-alias re-audit, semantics or a universal capacity theorem",
+  "bounds_scope": "Best arbitrary deterministic decoder of actual saved code alone on this finite support; no trained decoder or language success implied",
+  "continuous_code_scope": "Exact saved FP32 bytes, not a 64-bit channel or an entropy-coding cost",
+  "all_original_source_labels_and_images_preserved": true,
+  "no_quality_rule_changed": true,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "gpu_used": false,
+  "resources": {
+    "elapsed_seconds": 1.0448016347363591,
+    "peak_rss_bytes": 654295040,
+    "minimum_available_host_gib": 53.38801574707031,
+    "cpu_threads": 2
+  },
+  "full_language_fit_authorized": false,
+  "goal_achieved": false
+}
