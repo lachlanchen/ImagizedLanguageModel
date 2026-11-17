@@ -166,6 +166,15 @@ the single serial owner runs a fresh strict treatment cold check, the original
 frozen-control fit/audit/generation and cold check, and all792-stream blind review.
 All previous failed executions and treatment outputs remain preserved.
 
+The [fresh treatment cold result](../references/visual_context_deployment_cold_result_20261117.md)
+now passes the unchanged strict artifact audit and exactly reproduces the fixed
+case's pixels, stopping and feedback, without obsolete metadata exceptions.
+This is one cap-censored execution check, not language qualification. The original
+frozen-context fit has launched with the same complete initialized-model and
+objective hashes as treatment. Follow its single serial owner in the private
+handoff through the original fit/audit, remaining396 control streams, cold check
+and all792-stream blind review. No treatment fit or generation is repeated.
+
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
 eligible, but their machine-derived labels are not independently qualified.

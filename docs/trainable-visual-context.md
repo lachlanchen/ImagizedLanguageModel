@@ -15,7 +15,11 @@ numerical generation and the strict artifact audit. A new exact execution
 binding is required before continuation. The
 [deployment execution protocol](../references/visual_context_deployment_execution_protocol_20261117.md)
 implements this repair with an exact numerical-source comparison and nine CPU
-guard/plan checks. Fresh strict cold execution remains to be demonstrated.
+guard/plan checks. The [fresh treatment cold replay](../references/visual_context_deployment_cold_result_20261117.md)
+passes the unchanged strict artifact audit and matches the original pixels,
+stops and feedback on the one fixed case. The original matched control fit has
+launched with identical initialized full-model/objective hashes; its completion
+and both-arm language review remain pending.
 Useful autonomous language is still
 unproved. The earlier compact full-rank model produced zero strict complete
 development answers with a frozen contextual body. All failed baselines remain.
