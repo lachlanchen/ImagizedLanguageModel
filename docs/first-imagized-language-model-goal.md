@@ -345,17 +345,25 @@ A later spatial capacity intervention must keep geometry, allocation, loss
 and budget fixed, declare increased plan events and preserve every original
 quality/resource condition. No conditional language fit is admitted.
 
-The [spatial capacity comparison](../references/spatial_capacity_comparison_protocol_20261118.md)
-is now prospectively registered after four passing CPU checks. It increases
-features per fixed 4-by-4 site from four to sixteen, giving 256 values/bits,
-while keeping all common CNN initial values, data/order, loss, 6,000 updates
-and resources. Each codec has 1,770,449 parameters, only 3,084 more than the
-spatial-64 model. The exact 64-value case remains byte-compatible. Plan cost
-increases from eight to thirty-two events; the same total refinement limit
-and every absolute fidelity condition remain. Saved spatial-64 controls are
-not rerun. Require .02 held-F1 gain over .847344074 as well. This untrained
-capacity hypothesis establishes no language, historical transfer or efficiency;
-no conditional fit is admitted before actual qualification.
+The [spatial capacity comparison](../references/spatial_capacity_comparison_result_20261118.md)
+is terminal after 6,000 updates per arm. At 256 values/bits, continuous physical
+validation F1 reaches .996423850 and macro F1 .993422244, with 316/952 exact
+forms; binary F1 reaches .943690071 and macro F1 .928693592, with only three
+exact forms. The common CNN initialization, data/order, loss and resources stay
+fixed. Each codec has 1,770,449 parameters. Binary training F1 .981661645 passes,
+but four of ten conditions fail: held pooled/macro F1, macro exactness and
+continuous retention. Thirty-two plan events plus actual XOR refinement average
+49.475474 on the complete source, passing the original total event condition.
+
+All complete-source preflight updates reset, optimizer replay passes and all
+275,792 saved reconstructions/events and 12,000 updates are independently
+recounted. Saved spatial-64 controls are unchanged and not rerun. The
+256.635-second, .524-GiB physical run loads no contextual actor. The continuous
+motor can reconstruct new forms accurately on this reused development split;
+hard quantization still loses detail. Neither observation proves language or
+whole-model efficiency. No conditional language fit is admitted. Preserve the
+failed absolute rules and test a bounded representation change before any
+successor fit; do not extend unchanged epochs or select a snapshot.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
