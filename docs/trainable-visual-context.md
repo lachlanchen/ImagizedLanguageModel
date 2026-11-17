@@ -2,7 +2,12 @@
 
 This branch tests full contextual adaptation in the existing image-in/image-out
 language model. The [complete comparison](../references/trainable_visual_context_comparison_protocol_20261116.md)
-is registered and its serial worker has started. Useful autonomous language is
+is registered. The treatment has completed all 8,172 updates and passed its
+CPU source/state audit. Its original controller stopped when the first
+generation stage failed the unchanged host-pressure entry guard, before model
+loading. A [separately bound execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
+preserves that failure, queues for the original resource limits and runs only
+the unfinished generation and matched-control stages. Useful autonomous language is
 still unproved. The earlier compact full-rank model produced zero strict complete
 development answers with a frozen contextual body. All failed baselines remain.
 

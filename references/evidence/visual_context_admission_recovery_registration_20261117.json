@@ -1,0 +1,301 @@
+{
+  "schema": "visual-context-admission-recovery-v1",
+  "registered_utc": "2026-11-17T09:03:43.293537+00:00",
+  "original_registration": "references/evidence/trainable_visual_context_comparison_registration_20261116.json",
+  "original_registration_sha256": "f502962e466b58c0bb4c49da85d6192e8759d95bd2f3835973c6f6e418f11b85",
+  "recovery_directory": "artifacts/trainable_visual_context_comparison_v1/admission_recovery1",
+  "input_sha256": {
+    "scripts/resume_visual_context_comparison.py": "403c9bbc084737707cbd2b668b24d3f4f6b71c5afcea6bc6a423e8dd79eca0ae",
+    "references/visual_context_admission_recovery_protocol_20261117.md": "9595279e97623c36e67bbe64dc070e8e279d780d57acb035f56f9b6b0fb0b6e0",
+    "tests/test_visual_context_admission_recovery.py": "0a9a4858e98f3da191ba78a072f110db16a0e916406aebd502c4baf3dd7901e0",
+    "artifacts/trainable_visual_context_comparison_v1/status.json": "b798a9fe49ce077f194d9a5e60c414b6267bf431a1eb43479f08e2516deebb2d",
+    "artifacts/trainable_visual_context_comparison_v1.exit": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "artifacts/trainable_visual_context_comparison_v1.log": "2fe35446007475662cf4eaf1f23a9e969210c8d0615f656a8f20600fa902c68c",
+    "artifacts/trainable_visual_context_comparison_v1/trainable_generate_0.log": "c2580f2910c6baa4426d9b10beebd2d54ab774d4af2db456ed06c8f27ac60fc4",
+    "artifacts/trainable_visual_context_comparison_v1/trainable_audit.log": "19b8dd7d6cdc5691e15ca16ac2e1b88209680211dbcb5ee9609fffa9fc02d91d",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0000000/status.json": "277a4a5519304e5b71408fc94cb10942496a8275b81977b71079741e43e6ea8e",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0000000/request.json": "9335826c79b641724a8b1eaaa5477a0f3dff707372ec3edd8989f2f4b85db100",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/initial.json": "48043999fb7d50359a9d2c36fe90c502209d2b0236cc389e859ace93f7c75c1c",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/report.json": "aaaa99617c7f864211162fad4de62a386079b2efc6514278902b2ddf150ac7a4",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/audit.json": "c44c15f48faeb360680915723c41070cb40ffc56b601a825abb68f181011201c",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/updates.jsonl": "a1a1e65ed44eb83006f07dddeaa12abc864d63761b38208c08b1e54f8c0ed6fa",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/history.json": "374e2add0217d4f19d27312e230126595cb86d7279257cbae45fef9a7121e2d3",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/checkpoint_latest.pt": "77f32afc35542776763099e236a361c0fdfb542ceb2bbe381b6538d9eb29f06c",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0000000.pt": "4ee8a6d5f3aef17b718bad0914f46231d48c972fb943347f40ac8de485672a15",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0001956.pt": "bedf272c33d4d886f4dcaa4848db8bebcb7f97e7066c0f968b801a07e52d93fd",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0004049.pt": "4a1a3445242c3234769e8e9b061ac340a6354f786860816a6096f6661e5f3bdb",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0006152.pt": "5fa166d52a41a6a88f490c0474b261094b5c9f61358ec10b71f94fb04a30de69",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0008172.pt": "ebcbb2ac37773d5bc2525e36dd374e0aa122b95fb6da6465bd7de8b0b1385a04"
+  },
+  "original_bound_sources": 599,
+  "failed_generation_seconds": 5.248769658617675,
+  "stages": [
+    {
+      "name": "trainable_generate_0",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0000000.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0000000_admission_recovery1",
+        "--profile",
+        "all",
+        "--seconds",
+        "7194.751230341382"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0000000_admission_recovery1",
+      "gpu": true
+    },
+    {
+      "name": "trainable_generate_1",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0001956.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0001956",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0001956",
+      "gpu": true
+    },
+    {
+      "name": "trainable_generate_2",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0004049.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0004049",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0004049",
+      "gpu": true
+    },
+    {
+      "name": "trainable_generate_3",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0006152.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0006152",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0006152",
+      "gpu": true
+    },
+    {
+      "name": "trainable_generate_4",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0008172.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0008172",
+        "--profile",
+        "all"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_step_0008172",
+      "gpu": true
+    },
+    {
+      "name": "trainable_long_books",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/fit/model_step_0008172.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/trainable/generated_final_long_books",
+        "--profile",
+        "long_books",
+        "--maximum-glyphs",
+        "640"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/generated_final_long_books",
+      "gpu": true
+    },
+    {
+      "name": "trainable_cold_replay",
+      "arguments": [
+        "scripts/verify_trainable_visual_context_cold.py",
+        "--arm",
+        "trainable"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/trainable/cold",
+      "gpu": false
+    },
+    {
+      "name": "frozen_fit",
+      "arguments": [
+        "scripts/train_visual_context_comparison.py",
+        "--registration",
+        "references/evidence/trainable_visual_context_comparison_registration_20261116.json",
+        "--arm",
+        "frozen"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/fit",
+      "gpu": true
+    },
+    {
+      "name": "frozen_audit",
+      "arguments": [
+        "scripts/register_visual_context_comparison.py",
+        "--audit",
+        "frozen"
+      ],
+      "output": null,
+      "gpu": false
+    },
+    {
+      "name": "frozen_generate_0",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0000000.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0000000",
+        "--profile",
+        "all"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0000000",
+      "gpu": true
+    },
+    {
+      "name": "frozen_generate_1",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0001956.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0001956",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0001956",
+      "gpu": true
+    },
+    {
+      "name": "frozen_generate_2",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0004049.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0004049",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0004049",
+      "gpu": true
+    },
+    {
+      "name": "frozen_generate_3",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0006152.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0006152",
+        "--profile",
+        "normal"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0006152",
+      "gpu": true
+    },
+    {
+      "name": "frozen_generate_4",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0008172.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0008172",
+        "--profile",
+        "all"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_step_0008172",
+      "gpu": true
+    },
+    {
+      "name": "frozen_long_books",
+      "arguments": [
+        "scripts/infer_trainable_visual_context.py",
+        "--manifest",
+        "artifacts/compact_visual_span_evaluation_v1/inputs/manifest.json",
+        "--checkpoint",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/fit/model_step_0008172.pt",
+        "--output",
+        "artifacts/trainable_visual_context_comparison_v1/frozen/generated_final_long_books",
+        "--profile",
+        "long_books",
+        "--maximum-glyphs",
+        "640"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/generated_final_long_books",
+      "gpu": true
+    },
+    {
+      "name": "frozen_cold_replay",
+      "arguments": [
+        "scripts/verify_trainable_visual_context_cold.py",
+        "--arm",
+        "frozen"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/frozen/cold",
+      "gpu": false
+    },
+    {
+      "name": "prepare_review",
+      "arguments": [
+        "scripts/review_visual_context_comparison.py",
+        "prepare"
+      ],
+      "output": "artifacts/trainable_visual_context_comparison_v1/review",
+      "gpu": false
+    }
+  ],
+  "admission": {
+    "host_available_gib": 48.0,
+    "gpu0_free_mib": 20480,
+    "disk_free_gib": 48.0,
+    "max_some_pressure_avg10": 0.5,
+    "max_full_pressure_avg10": 0.1,
+    "quiet_samples": 2,
+    "interval_seconds": 10.0,
+    "maximum_total_queue_seconds": 1800.0
+  },
+  "skip_completed_treatment_fit_and_audit": true,
+  "unchanged_training_and_inference_sources": true,
+  "original_failed_directory_preserved": true,
+  "automatic_retry": false,
+  "streams": 792,
+  "cold_replays_outside_language_streams": 2,
+  "language_quality_proved": false,
+  "goal_achieved": false
+}

@@ -134,6 +134,17 @@ unmeasured. This deployed model has 1,465,381,142 parameters and inherits text
 pretraining. Neither its size nor a successful fit establishes matched-quality
 efficiency, proportional-page reading or the full historical-language objective.
 
+The treatment now completes all 8,172 updates and passes its original CPU
+source/state audit. Its controller exits at the first generation stage because
+the unchanged host-pressure entry guard rejects admission before model loading.
+Preserve that terminal execution and its zero-output failed directory. The
+[bounded execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
+adds only a finite queue for the original resource limits, retaining all 599
+bound sources, five checkpoints, both arms and 792 output streams. Register,
+commit and push its exact binding before the single continuation launch. Do not
+repeat the completed treatment fit or audit; any further error ends this recovery.
+Training completion and audit success do not establish language quality.
+
 The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
 is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
 eligible, but their machine-derived labels are not independently qualified.
@@ -244,7 +255,7 @@ separate physical fidelity, reader qualification, update execution and language.
 All 337 prior figure assets and 154 prior embedded image contents remain.
 The [build evidence](../publication/ilm-nature/evidence/visual_context_evidence_article_build.json)
 records all 261 pages in layout overview and 43 detailed pages. Preserve the
-older 53/93/95-page baselines. The running full-context fit has no completed
+older 53/93/95-page baselines. The completed full-context treatment fit has no
 language result in this revision; add its actual final comparison only when
 generation and frozen review finish. Local Nutstore delivery and cloud
 propagation remain separate verification claims.
