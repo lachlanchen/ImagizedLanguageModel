@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-17. **Active; usable visual language remains unproved.**
+Updated: 2026-11-18. **Active; usable visual language remains unproved.**
 
 ## Objective and deployment boundary
 
@@ -103,6 +103,19 @@ change with an unchanged control and training-only update/reset support on
 complete authentic records. Require actual conditional writing improvement and
 fixed complete-language evaluation before a full-corpus claim. No successor
 full fit is currently admitted.
+
+The [selected next preflight](../references/predictive_state_distillation_protocol_20261118.md)
+replaces only the state-cosine transfer term by the complete teacher predictive
+KL. Its frozen source readout is training-only; image input/output, writer,
+reader, other objectives and deployment remain unchanged. The prior anchor-
+contrastive, joint-density, ranking and native hard-label adapter failures have
+been reviewed explicitly. Four CPU probability/gradient tests pass; no neural
+comparison or working algorithm is implied. Register a six-update-per-arm,
+three-complete-training-record comparison against the unchanged cosine control,
+reset all updates and require conditional glyph improvement as well as lower
+predictive KL. A pass permits preparation of a larger comparison only. A failed
+or merely lower-loss preflight does not admit another full fit. Keep original
+language acceptance rules and untouched confirmation data unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
