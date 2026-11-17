@@ -144,8 +144,12 @@ gradient, source support, fitting/reset and numerical execution before a new
 registered head comparison. Keep a common precision-matched fixed-feature
 control; distinguish ideal arithmetic from actual weights. Do not silently add
 slot residuals, change the pixel/query source, tune lambda or add old epochs.
-No variable-projection fit is yet implemented or admitted. A reader pass would
-permit only separately registered live-image conditional-writing evaluation,
+The [implementation and separate preflight protocol](../references/profiled_feedback_preflight_protocol_20261118.md)
+now have four passing CPU numerical tests, including the envelope gradient and
+streamed accumulation. Commit/register and run the real complete-record reset
+preflight before binding the twelve-step full-support head comparison. No
+variable-projection fit is yet admitted. A reader pass would permit only
+separately registered live-image conditional-writing evaluation,
 not full language training or a language claim. Original full-goal criteria
 and untouched confirmation data remain unchanged.
 

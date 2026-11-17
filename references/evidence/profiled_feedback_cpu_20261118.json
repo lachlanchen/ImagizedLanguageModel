@@ -1,0 +1,19 @@
+{
+  "date_hk": "2026-11-18",
+  "command": "CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_profiled_visual_feedback -v",
+  "tests": 4,
+  "exit_code": 0,
+  "reported_test_seconds": 0.052,
+  "implementation_sha256": {
+    "ilm/visual_lm/profiled_visual_feedback.py": "fb07a5ae15bc4b8272b162a7d88020a7bcc79d113a52d5a2d49e5007e3205606",
+    "tests/test_profiled_visual_feedback.py": "5c086a76a4fedf6ad9cc3e20e664d9e2dc528a9320b3306098847e2bad79e0ff"
+  },
+  "checks": [
+    "Partial envelope gradient matches differentiation through the fixed-ridge solve.",
+    "Streamed full-source feature gradients match unsplit gradients with fixed lambda.",
+    "Stored FP32 readout reconstructs native coefficients while preserving feature parameters; outer autocast does not change feedback precision.",
+    "Trial state reset and invalid ridge support handled."
+  ],
+  "language_measured": false,
+  "goal_achieved": false
+}
