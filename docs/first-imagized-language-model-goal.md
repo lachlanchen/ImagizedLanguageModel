@@ -379,6 +379,25 @@ hard weights equal initialization and no hard update ledger exists. Preserve
 the file, corrected interpretation and earlier CPU-test expectation failure.
 No language fit is admitted, and every original criterion remains unchanged.
 
+The selected next [physical intervention](../references/residual_plan_motor_direction_20261118.md)
+trains the previously untrained normalized XOR correction while freezing the
+actual spatial-256 codec. Its condition contains generated plan bits and the
+frozen base pixels, all available at deployment. Greedy identity initialization
+matches the unchanged base for every possible plan. The implemented motor has
+2,385,763 parameters including its frozen 1,770,449-parameter codec; 615,314 are
+trainable correction parameters. This excludes all contextual language weights
+and is untrained. Three CPU checks pass for initial writing, likelihood,
+actual gradients/update/reset, fixed-codec identity and target-encoder exclusion.
+
+Its [registered source preparation](../references/evidence/residual_motor_preparation_registration_20261118.json)
+binds the complete saved plans/bases, original masks and unchanged physical
+partition. It makes no neural call and prepares true residuals as training
+targets, not generated images. Separately register the complete learning and
+actual-generation comparison after preparation. The new admission unit is the
+composite motor D(B) XOR R, with every original absolute fidelity, exactness,
+empty-image and total-event condition retained; the failed base remains failed.
+No conditional language fit, whole-model efficiency or autonomous score follows.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

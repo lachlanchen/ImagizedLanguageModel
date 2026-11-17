@@ -1,0 +1,44 @@
+{
+  "schema": "ilm-residual-motor-preparation-v1",
+  "input_sha256": {
+    "scripts/prepare_residual_plan_motor.py": "13c028f576734699354d529583c4690d03cd67e319e6ee00d8dd9b2488a25ce9",
+    "scripts/diagnose_visual_context_gradients.py": "6d17ae80c6905f95b5ecb408a0e81dab1d44cbf62ac338ce4047090458297f34",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c",
+    "ilm/visual_lm/residual_plan_motor.py": "fcbd375eec32207c4c385ca2b31c42ae49423099278194a6501956420eacb763",
+    "tests/test_residual_plan_motor.py": "a5c7269937712c4debd86a41faf24ff538e3c00fd9e89990ed1c4b9d8894b0a2",
+    "references/evidence/residual_plan_motor_cpu_20261118.json": "e69de445c1f87be94a5b0ac672038f42e9abfa9c7e865487290120bc634971d7",
+    "references/residual_plan_motor_direction_20261118.md": "9017205a57359be8a20a20fb649a8968eddb78f6cdc72076052eb5bbebe0643b",
+    "references/evidence/spatial_capacity_comparison_result_20261118.json": "d91d83a8e67a5d797288b9ce17f3b5dd3d17050c10153a7fac77415f054764a2",
+    "references/evidence/scalar_codec_interrupted_result_20261118.json": "ff4dc610fbb1b1acce937411c51d136f76a0aa737a8f70139dc9bac624e304ec",
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706",
+    "ilm/visual_lm/spatial_plan_codec.py": "daf6f3da179046d3d0e3db1bc5878346ed5482d619710e33d838e973b524ba69",
+    "ilm/visual_lm/occupancy_glyph_density.py": "e2585f5841cc4c5d991d375f37a60b07037cfd40073ffb3c1adc74ab5cfef2ad",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "artifacts/spatial_capacity_comparison_v1/binary_final.pt": "9580e2e8c22231b319c9db88899940296a7a6e4677efd5d5c06209bbff75277c",
+    "artifacts/spatial_capacity_comparison_v1/binary_final.npz": "df55ca7c3eeb165e7dbb27b97d5b0529f2359bcef8fa9c03e487ee74dcc550d0",
+    "artifacts/nonlinear_feedback_alignment_v1/prepared.pt": "67dd0ceb806cf7a7f490425483562206b941b4c04a40897aae6d7610d5230d02",
+    "artifacts/binary_codec_preparation_v1/partition.pt": "77a93277ea667b421dd89b3e2d69c3747da7868b3fb7c44f161a633c71baa513"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "source_images": 68948,
+  "train_images": 64041,
+  "held_images": 4907,
+  "code_bits": 256,
+  "retained_frozen_codec": "artifacts/spatial_capacity_comparison_v1/binary_final.pt",
+  "no_new_neural_calls": true,
+  "no_training": true,
+  "no_source_alias_resplit": true,
+  "no_reserved_language_access": true,
+  "automatic_retry": false,
+  "full_language_fit_authorized": false,
+  "resources": {
+    "maximum_seconds": 180,
+    "maximum_rss_gib": 2,
+    "cpu_threads": 2,
+    "minimum_entry_host_gib": 48,
+    "minimum_runtime_host_gib": 24
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "ilm-residual-plan-motor-cpu-v1",
+  "source_sha256": {
+    "ilm/visual_lm/residual_plan_motor.py": "fcbd375eec32207c4c385ca2b31c42ae49423099278194a6501956420eacb763",
+    "tests/test_residual_plan_motor.py": "a5c7269937712c4debd86a41faf24ff538e3c00fd9e89990ed1c4b9d8894b0a2"
+  },
+  "command": "CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_residual_plan_motor -v",
+  "exit_code": 0,
+  "tests": 3,
+  "elapsed_seconds": 0.128,
+  "checks": [
+    "actual initial generation equals base for arbitrary bit plans with target encoder forbidden",
+    "explicit base-pixel features and empty correction log likelihood",
+    "real condition/root/mask gradients, refinement update/reset and frozen codec preservation"
+  ],
+  "physical_motor_parameters": 2385763,
+  "frozen_codec_parameters": 1770449,
+  "trainable_refinement_parameters": 615314,
+  "neural_language_measured": false,
+  "full_language_fit_authorized": false
+}
