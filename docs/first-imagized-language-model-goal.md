@@ -389,14 +389,19 @@ trainable correction parameters. This excludes all contextual language weights
 and is untrained. Three CPU checks pass for initial writing, likelihood,
 actual gradients/update/reset, fixed-codec identity and target-encoder exclusion.
 
-Its [registered source preparation](../references/evidence/residual_motor_preparation_registration_20261118.json)
-binds the complete saved plans/bases, original masks and unchanged physical
-partition. It makes no neural call and prepares true residuals as training
-targets, not generated images. Separately register the complete learning and
-actual-generation comparison after preparation. The new admission unit is the
-composite motor D(B) XOR R, with every original absolute fidelity, exactness,
-empty-image and total-event condition retained; the failed base remains failed.
-No conditional language fit, whole-model efficiency or autonomous score follows.
+Its [complete source preparation](../references/evidence/residual_motor_preparation_result_20261118.json)
+retains all 68,948 saved plans/bases and original target bytes with the unchanged
+physical partition. It takes 1.575 seconds with no neural calls or training.
+True residual targets are not generated corrections. The separate
+[learning comparison](../references/residual_motor_comparison_protocol_20261118.md)
+is now prospectively registered: complete-source real gradient/update/reset,
+6,000 updates, unchanged sampling/budget, all-source initial/final actual
+generation and every emitted-prefix probability replay. The new admission unit
+is the composite motor D(B) XOR R, with every original absolute fidelity,
+exactness, empty-image and total-event condition retained; the failed base stays
+failed. Actual generated correction work and remaining error complexity are
+reported separately. No conditional language fit, whole-model efficiency or
+autonomous score follows from preparation or registration.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

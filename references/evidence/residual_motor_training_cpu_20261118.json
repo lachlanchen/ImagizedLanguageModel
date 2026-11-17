@@ -1,0 +1,14 @@
+{
+  "schema": "ilm-residual-motor-training-cpu-v1",
+  "exit_code": 0,
+  "tests": 1,
+  "source_sha256": {
+    "ilm/visual_lm/residual_motor_metrics.py": "5b36dcc884df1cdf57425516ccfdc0cda602e570b7f9ee843437e07c596cc56e",
+    "tests/test_residual_motor_metrics.py": "b504d86cfbdfe67067dfd5c0d5d987ef1ac61ac9f5335df40a37789309f9b210",
+    "scripts/train_residual_plan_motor.py": "5a68fc458d915c286ccf5731c53fdbcf2bd7de6d29099e995d2291ec60042499"
+  },
+  "stdout": "",
+  "stderr": "test_generated_work_is_not_remaining_error_complexity (tests.test_residual_motor_metrics.ResidualMotorMetricsTest) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.004s\n\nOK\n",
+  "trainer_compiles": true,
+  "scope": "Actual generated event cost differs from remaining error complexity; no neural training or language score"
+}
