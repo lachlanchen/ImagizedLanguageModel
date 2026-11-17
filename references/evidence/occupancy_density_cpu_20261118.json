@@ -1,0 +1,24 @@
+{
+  "schema": "ilm-occupancy-density-cpu-v1",
+  "tests": 8,
+  "passed": true,
+  "elapsed_seconds": 0.16,
+  "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_occupancy_glyph_density -v",
+  "scope": "Random-weight numerical fixtures and exhaustive binary representation checks; no language result",
+  "checks": [
+    "Every 4x4 binary bitmap (65536) roundtrips in both modes",
+    "Actual small neural law sums to one on all 2x2 bitmaps",
+    "Forward/incremental probability logits agree and future action is excluded",
+    "Generated topology and physical support follow actual emitted prefixes",
+    "Root-zero generates empty; root-one cannot finish empty; stochastic replay exact",
+    "Production-size 32x32 sparse/dense edge cases roundtrip",
+    "Illegal topology, empty child, truncation and future descriptors rejected",
+    "Finite contextual/parameter gradients, real AdamW step and exact reset"
+  ],
+  "input_sha256": {
+    "ilm/visual_lm/occupancy_glyph_density.py": "e2585f5841cc4c5d991d375f37a60b07037cfd40073ffb3c1adc74ab5cfef2ad",
+    "tests/test_occupancy_glyph_density.py": "f87eab288a7dc7b5a46040ab9b056f05ee133b5e1d8f816b4a1fae1301a4c0a7"
+  },
+  "gpu_calls": 0,
+  "language_proved": false
+}

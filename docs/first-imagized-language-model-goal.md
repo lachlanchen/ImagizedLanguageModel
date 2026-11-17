@@ -193,6 +193,21 @@ Before any new execution, bind one failure-specific intervention, unchanged
 control, complete training-only support, real gradients/reset and resources.
 No deployment, language score or full-fit permission follows from the new code.
 
+A new [lossless occupancy-density candidate](../references/occupancy_visual_density_direction_20261118.md)
+is implemented, with eight passing CPU structure/probability/gradient tests.
+It predicts a learned empty/nonempty root and generates physical quadrant masks
+in a prefix-determined tree. The equal-parameter flat control has the same root
+and a normalized nonempty branch. No glyph identity, font, reference topology
+or lexical inventory enters generation. This is a different physical output
+factorization, not a qualified language algorithm or a repetition of old
+blank margins. Root errors and unreadable nonempty images remain possible.
+Before any neural fitting proposal, run the registered CPU structure audit on
+all 68,948 cells of the existing 29,740 distinct saved training-span images.
+Verify exact pixels, topology, root/space counts, event cost and all source
+bindings. These cells are not corpus exposures or held-out language. Dense
+refinement can cost more events than the old fixed writer; no efficiency claim
+is admitted. No full fit, deployment or new language score is selected.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
