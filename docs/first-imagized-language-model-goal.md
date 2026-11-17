@@ -104,18 +104,27 @@ complete authentic records. Require actual conditional writing improvement and
 fixed complete-language evaluation before a full-corpus claim. No successor
 full fit is currently admitted.
 
-The [selected next preflight](../references/predictive_state_distillation_protocol_20261118.md)
-replaces only the state-cosine transfer term by the complete teacher predictive
-KL. Its frozen source readout is training-only; image input/output, writer,
-reader, other objectives and deployment remain unchanged. The prior anchor-
-contrastive, joint-density, ranking and native hard-label adapter failures have
-been reviewed explicitly. Four CPU probability/gradient tests pass; no neural
-comparison or working algorithm is implied. Register a six-update-per-arm,
-three-complete-training-record comparison against the unchanged cosine control,
-reset all updates and require conditional glyph improvement as well as lower
-predictive KL. A pass permits preparation of a larger comparison only. A failed
-or merely lower-loss preflight does not admit another full fit. Keep original
-language acceptance rules and untouched confirmation data unchanged.
+The [predictive-state comparison](../references/predictive_state_distillation_result_20261118.md)
+is now terminal and fails all support checks. Both arms complete six real
+updates on the same three complete training records. Across all 552 conditional
+target glyph positions, F1 is .350346 initially, .336480 for cosine control and
+.307754 for the KL replacement; false blanks are zero, two and five. Candidate
+QA KL falls but book KL increases from 6.805294 to 14.433991. All trial model and
+projection updates reset exactly; the frozen training-only readout is unchanged.
+No successor is retained, autonomous language is unmeasured and no full fit is
+admitted. Preserve all 1,656 actual output tiles and the failed preflight.
+
+Return the next design to an observed representational restriction before
+another loss trial. The earlier reader's native-feedback head still ends in a
+384-to-2,048 affine map with at most 383 varying affine directions and a measured
+relative alignment-error floor near .57. The completed loss replacement does
+not remove it; contextual adaptation did not establish that it was compensated.
+A nonlinear feedback residual with zero output initialization is a candidate
+for removing that specific affine-family bound while preserving the original
+function initially. It is not a proven cause or selected working solution.
+Check existing target-identifiability evidence, design one bounded comparison
+and qualify real conditional writing before any full fit. Do not repeat the
+completed native-history, codec, sampler or reader diagnostics unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

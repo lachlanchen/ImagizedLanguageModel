@@ -15,10 +15,11 @@ intervention. That [diagnostic is complete](visual_context_gradient_result_20261
 and does not establish its opposing-update criterion. The subsequent
 [saved-output analysis](visual_context_saved_dependence_result_20261117.md)
 finds prompt-dependent variation alongside recurrent damaged first tiles.
-A [newly specified update/reset preflight](predictive_state_distillation_protocol_20261118.md)
-replaces the state-cosine term with complete predictive KL while preserving the
-image model and other losses. It is an unqualified hypothesis, not a working
-algorithm or an admitted full fit. The
+The [completed predictive-KL update/reset preflight](predictive_state_distillation_result_20261118.md)
+fails all support checks: pooled glyph F1 falls to .307754, below initialization
+and the cosine control, and book KL increases. All twelve trial updates are
+reset. This objective replacement does not qualify a working algorithm or a
+full fit. The
 [engineering goal](../docs/first-imagized-language-model-goal.md) retains the full
 language, historical-form, independence and efficiency requirements. The model
 and research discussion below describe the rejected recipe and conditional

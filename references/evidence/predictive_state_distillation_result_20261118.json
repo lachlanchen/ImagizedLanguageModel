@@ -1,0 +1,826 @@
+{
+  "schema": "ilm-predictive-state-preflight-result-v1",
+  "registration_sha256": "fbd4aaaca1603382db5b9b8809b417f8252aeac069066a3bd93341d101ac5b0d",
+  "source_commit": "b809b3f9c69199bb3a69887b186e32973a77414a",
+  "initial": [
+    {
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "predictive_kl": 6.805294036865234,
+      "old_losses": {
+        "feedback_vectors": 0.5911703109741211,
+        "feedback_counts": 0.03888247534632683,
+        "span_boundaries": 0.057840365916490555,
+        "output_length": 0.2555437386035919,
+        "output_flow": 0.4750998020172119,
+        "teacher_context": 0.07200119644403458
+      },
+      "pixels": {
+        "positions": 512,
+        "tp": 29997,
+        "fp": 56182,
+        "fn": 54855,
+        "false_blanks": 0,
+        "exact": 7,
+        "source_blanks": 4,
+        "f1": 0.35077851383667286
+      },
+      "next_span_length_correct": 443,
+      "length_decisions": 479,
+      "natural_stop_predicted_at_terminal": false,
+      "provided_lengths": true,
+      "correct_image_history": true,
+      "autonomous_language": false,
+      "raw_file": "initial/complete_513_book.npz",
+      "raw_sha256": "95d4b47b94e7488ef48a6d0226f737a9c1be322071e065f51f5c2133ba639221"
+    },
+    {
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "predictive_kl": 9.671793937683105,
+      "old_losses": {
+        "feedback_vectors": 0.5730223655700684,
+        "feedback_counts": 0.0008529741317033768,
+        "span_boundaries": 0.05688510462641716,
+        "output_length": 0.1730378270149231,
+        "output_flow": 0.36118271946907043,
+        "teacher_context": 0.05239780992269516
+      },
+      "pixels": {
+        "positions": 5,
+        "tp": 173,
+        "fp": 343,
+        "fn": 330,
+        "false_blanks": 0,
+        "exact": 0,
+        "source_blanks": 0,
+        "f1": 0.3395485770363101
+      },
+      "next_span_length_correct": 6,
+      "length_decisions": 6,
+      "natural_stop_predicted_at_terminal": true,
+      "provided_lengths": true,
+      "correct_image_history": true,
+      "autonomous_language": false,
+      "raw_file": "initial/complete_qa.npz",
+      "raw_sha256": "cb8daf3e303d5f40d370181100b04664fb909d05880a7e99279936dd3b10d8d0"
+    },
+    {
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "predictive_kl": 27.357561111450195,
+      "old_losses": {
+        "feedback_vectors": 0.6547834277153015,
+        "feedback_counts": 0.0009796289959922433,
+        "span_boundaries": 0.13389138877391815,
+        "output_length": 0.27028873562812805,
+        "output_flow": 0.520250141620636,
+        "teacher_context": 0.24689263105392456
+      },
+      "pixels": {
+        "positions": 35,
+        "tp": 1873,
+        "fp": 3371,
+        "fn": 3755,
+        "false_blanks": 0,
+        "exact": 0,
+        "source_blanks": 0,
+        "f1": 0.34455481972038265
+      },
+      "next_span_length_correct": 27,
+      "length_decisions": 30,
+      "natural_stop_predicted_at_terminal": false,
+      "provided_lengths": true,
+      "correct_image_history": true,
+      "autonomous_language": false,
+      "raw_file": "initial/longest_native_record.npz",
+      "raw_sha256": "b0c390b2526cadff9488bf999e4b34270058abe0f5af176fbc32a2ac149c6ced"
+    }
+  ],
+  "initial_pooled": {
+    "positions": 552,
+    "tp": 32043,
+    "fp": 59896,
+    "fn": 58940,
+    "false_blanks": 0,
+    "exact": 7,
+    "source_blanks": 4,
+    "f1": 0.35034604913569717
+  },
+  "arms": [
+    {
+      "arm": "cosine_control",
+      "updates": [
+        {
+          "arm": "cosine_control",
+          "update": 1,
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "losses": {
+            "feedback_vectors": 0.5911703109741211,
+            "feedback_counts": 0.03888247534632683,
+            "span_boundaries": 0.057840365916490555,
+            "output_length": 0.2555437386035919,
+            "output_flow": 0.4750998020172119,
+            "teacher_context": 0.07200119644403458
+          },
+          "gradient_norm": 1.990325689315796,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "cosine_control",
+          "update": 2,
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "losses": {
+            "feedback_vectors": 0.5660180449485779,
+            "feedback_counts": 0.0014356110477820039,
+            "span_boundaries": 0.05212021246552467,
+            "output_length": 0.17943327128887177,
+            "output_flow": 0.1586269736289978,
+            "teacher_context": 0.05176817625761032
+          },
+          "gradient_norm": 5.084782123565674,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "cosine_control",
+          "update": 3,
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "losses": {
+            "feedback_vectors": 0.6444315910339355,
+            "feedback_counts": 0.0020264056511223316,
+            "span_boundaries": 0.09767086803913116,
+            "output_length": 0.30753466486930847,
+            "output_flow": 0.5429747700691223,
+            "teacher_context": 0.26066654920578003
+          },
+          "gradient_norm": 7.517378807067871,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "cosine_control",
+          "update": 4,
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "losses": {
+            "feedback_vectors": 0.5672518014907837,
+            "feedback_counts": 0.0015760896494612098,
+            "span_boundaries": 0.011308910325169563,
+            "output_length": 0.2211175113916397,
+            "output_flow": 0.5821214318275452,
+            "teacher_context": 0.06473097205162048
+          },
+          "gradient_norm": 1.9922791719436646,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "cosine_control",
+          "update": 5,
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "losses": {
+            "feedback_vectors": 0.5521226525306702,
+            "feedback_counts": 0.003937599249184132,
+            "span_boundaries": 0.04197651520371437,
+            "output_length": 0.061388496309518814,
+            "output_flow": 0.4818439483642578,
+            "teacher_context": 0.0356527678668499
+          },
+          "gradient_norm": 3.0432169437408447,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "cosine_control",
+          "update": 6,
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "losses": {
+            "feedback_vectors": 0.6357318162918091,
+            "feedback_counts": 0.0023060704115778208,
+            "span_boundaries": 0.06875765323638916,
+            "output_length": 0.13791878521442413,
+            "output_flow": 0.5302618145942688,
+            "teacher_context": 0.223446324467659
+          },
+          "gradient_norm": 3.389679193496704,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        }
+      ],
+      "assessment": [
+        {
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "predictive_kl": 5.529592990875244,
+          "old_losses": {
+            "feedback_vectors": 0.5558357238769531,
+            "feedback_counts": 0.0013164910487830639,
+            "span_boundaries": 0.005795178469270468,
+            "output_length": 0.20253871381282806,
+            "output_flow": 0.4039762020111084,
+            "teacher_context": 0.059123024344444275
+          },
+          "pixels": {
+            "positions": 512,
+            "tp": 26386,
+            "fp": 46158,
+            "fn": 58466,
+            "false_blanks": 2,
+            "exact": 11,
+            "source_blanks": 4,
+            "f1": 0.3352817098274416
+          },
+          "next_span_length_correct": 447,
+          "length_decisions": 479,
+          "natural_stop_predicted_at_terminal": false,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "cosine_control/complete_513_book.npz",
+          "raw_sha256": "462f8e56ae08114a678d371a3da5f77d3a6a9aaa677752a8a25d99a9d6b40cab"
+        },
+        {
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "predictive_kl": 3.933223247528076,
+          "old_losses": {
+            "feedback_vectors": 0.5439578294754028,
+            "feedback_counts": 0.0015806361334398389,
+            "span_boundaries": 0.029950032010674477,
+            "output_length": 0.03582574799656868,
+            "output_flow": 0.4281812608242035,
+            "teacher_context": 0.03195357322692871
+          },
+          "pixels": {
+            "positions": 5,
+            "tp": 254,
+            "fp": 311,
+            "fn": 249,
+            "false_blanks": 0,
+            "exact": 0,
+            "source_blanks": 0,
+            "f1": 0.4756554307116105
+          },
+          "next_span_length_correct": 6,
+          "length_decisions": 6,
+          "natural_stop_predicted_at_terminal": true,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "cosine_control/complete_qa.npz",
+          "raw_sha256": "ce9d5700d47801a2d65dbf73ee1dbcdd7dc49c2ae5a0b966809728ebf97c7671"
+        },
+        {
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "predictive_kl": 25.2178955078125,
+          "old_losses": {
+            "feedback_vectors": 0.6318435668945312,
+            "feedback_counts": 0.0018989506643265486,
+            "span_boundaries": 0.05765514075756073,
+            "output_length": 0.09370604902505875,
+            "output_flow": 0.5483067035675049,
+            "teacher_context": 0.21362152695655823
+          },
+          "pixels": {
+            "positions": 35,
+            "tp": 1822,
+            "fp": 3261,
+            "fn": 3806,
+            "false_blanks": 0,
+            "exact": 0,
+            "source_blanks": 0,
+            "f1": 0.34021099803939875
+          },
+          "next_span_length_correct": 29,
+          "length_decisions": 30,
+          "natural_stop_predicted_at_terminal": true,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "cosine_control/longest_native_record.npz",
+          "raw_sha256": "2968b1b3ea0d9067862af86e15b328dbb0066c7c7171acd2d67c8a1f7383a955"
+        }
+      ],
+      "pooled": {
+        "positions": 552,
+        "tp": 28462,
+        "fp": 49730,
+        "fn": 62521,
+        "false_blanks": 2,
+        "exact": 11,
+        "source_blanks": 4,
+        "f1": 0.33647997635584453
+      }
+    },
+    {
+      "arm": "predictive_kl",
+      "updates": [
+        {
+          "arm": "predictive_kl",
+          "update": 1,
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "losses": {
+            "feedback_vectors": 0.5911703109741211,
+            "feedback_counts": 0.03888247534632683,
+            "span_boundaries": 0.057840365916490555,
+            "output_length": 0.2555437386035919,
+            "output_flow": 0.4750998020172119,
+            "teacher_context": 6.805294036865234
+          },
+          "gradient_norm": 153.38589477539062,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "predictive_kl",
+          "update": 2,
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "losses": {
+            "feedback_vectors": 0.5736891031265259,
+            "feedback_counts": 0.0010507757542654872,
+            "span_boundaries": 0.05199865624308586,
+            "output_length": 0.16943860054016113,
+            "output_flow": 0.15792407095432281,
+            "teacher_context": 8.432929992675781
+          },
+          "gradient_norm": 165.05059814453125,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "predictive_kl",
+          "update": 3,
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "losses": {
+            "feedback_vectors": 0.6560680270195007,
+            "feedback_counts": 0.001486577675677836,
+            "span_boundaries": 0.10368630290031433,
+            "output_length": 0.2632066607475281,
+            "output_flow": 0.5287116765975952,
+            "teacher_context": 14.226014137268066
+          },
+          "gradient_norm": 254.91436767578125,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "predictive_kl",
+          "update": 4,
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "losses": {
+            "feedback_vectors": 0.5987997651100159,
+            "feedback_counts": 0.017657551914453506,
+            "span_boundaries": 0.012678365223109722,
+            "output_length": 0.25460901856422424,
+            "output_flow": 0.5443224906921387,
+            "teacher_context": 18.979585647583008
+          },
+          "gradient_norm": 242.795654296875,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "predictive_kl",
+          "update": 5,
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "losses": {
+            "feedback_vectors": 0.5791488289833069,
+            "feedback_counts": 0.002116390271112323,
+            "span_boundaries": 0.03384409472346306,
+            "output_length": 0.23738916218280792,
+            "output_flow": 0.4865606725215912,
+            "teacher_context": 8.684915542602539
+          },
+          "gradient_norm": 272.7625427246094,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        },
+        {
+          "arm": "predictive_kl",
+          "update": 6,
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "losses": {
+            "feedback_vectors": 0.6632295250892639,
+            "feedback_counts": 0.003018101677298546,
+            "span_boundaries": 0.06624585390090942,
+            "output_length": 0.5118241906166077,
+            "output_flow": 0.5031100511550903,
+            "teacher_context": 11.091150283813477
+          },
+          "gradient_norm": 202.443603515625,
+          "complete_record": true,
+          "optimizer_moment_bytes": 11730771112
+        }
+      ],
+      "assessment": [
+        {
+          "case": {
+            "role": "complete_513_book",
+            "corpus_index": 458,
+            "shard": 3,
+            "local": 74,
+            "kind": "book",
+            "source_id": "wikisource:b811ca6466254ff3f462",
+            "group": "大唐西域記",
+            "glyphs": 513,
+            "prompt_glyphs": 0,
+            "native_units": 509
+          },
+          "predictive_kl": 14.433991432189941,
+          "old_losses": {
+            "feedback_vectors": 0.6076868176460266,
+            "feedback_counts": 0.008201897144317627,
+            "span_boundaries": 0.007281957194209099,
+            "output_length": 0.25414222478866577,
+            "output_flow": 0.3998264670372009,
+            "teacher_context": 0.08834376931190491
+          },
+          "pixels": {
+            "positions": 512,
+            "tp": 23013,
+            "fp": 41869,
+            "fn": 61839,
+            "false_blanks": 4,
+            "exact": 8,
+            "source_blanks": 4,
+            "f1": 0.3073850962373275
+          },
+          "next_span_length_correct": 443,
+          "length_decisions": 479,
+          "natural_stop_predicted_at_terminal": false,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "predictive_kl/complete_513_book.npz",
+          "raw_sha256": "092c39c146827253a86f13340d74df8d070b791acc46f67467fc118c912693cf"
+        },
+        {
+          "case": {
+            "role": "complete_qa",
+            "corpus_index": 4762,
+            "shard": 37,
+            "local": 26,
+            "kind": "qa",
+            "source_id": "TRAIN_186_QUERY_0",
+            "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+            "glyphs": 846,
+            "prompt_glyphs": 841,
+            "native_units": 740
+          },
+          "predictive_kl": 2.0853536128997803,
+          "old_losses": {
+            "feedback_vectors": 0.5850968956947327,
+            "feedback_counts": 0.002859031083062291,
+            "span_boundaries": 0.028981423005461693,
+            "output_length": 0.21805047988891602,
+            "output_flow": 0.42676326632499695,
+            "teacher_context": 0.07428296655416489
+          },
+          "pixels": {
+            "positions": 5,
+            "tp": 245,
+            "fp": 292,
+            "fn": 258,
+            "false_blanks": 0,
+            "exact": 0,
+            "source_blanks": 0,
+            "f1": 0.47115384615384615
+          },
+          "next_span_length_correct": 5,
+          "length_decisions": 6,
+          "natural_stop_predicted_at_terminal": false,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "predictive_kl/complete_qa.npz",
+          "raw_sha256": "8c98e4271db6ae6806d7be06f7af0cf9747531a28ef316f44deb93771c57ca34"
+        },
+        {
+          "case": {
+            "role": "longest_native_record",
+            "corpus_index": 9420,
+            "shard": 73,
+            "local": 76,
+            "kind": "qa",
+            "source_id": "TRAIN_2006_QUERY_2",
+            "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+            "glyphs": 1042,
+            "prompt_glyphs": 1007,
+            "native_units": 961
+          },
+          "predictive_kl": 7.9113383293151855,
+          "old_losses": {
+            "feedback_vectors": 0.6650760769844055,
+            "feedback_counts": 0.0032888103742152452,
+            "span_boundaries": 0.05582164600491524,
+            "output_length": 0.4665786325931549,
+            "output_flow": 0.5305154919624329,
+            "teacher_context": 0.3039429485797882
+          },
+          "pixels": {
+            "positions": 35,
+            "tp": 1374,
+            "fp": 2300,
+            "fn": 4254,
+            "false_blanks": 1,
+            "exact": 0,
+            "source_blanks": 0,
+            "f1": 0.2954203397118899
+          },
+          "next_span_length_correct": 25,
+          "length_decisions": 30,
+          "natural_stop_predicted_at_terminal": false,
+          "provided_lengths": true,
+          "correct_image_history": true,
+          "autonomous_language": false,
+          "raw_file": "predictive_kl/longest_native_record.npz",
+          "raw_sha256": "fd749f1fe6488da8ed7688665d26c7b9b905455cfcb3bb773bec04832370fcdb"
+        }
+      ],
+      "pooled": {
+        "positions": 552,
+        "tp": 24632,
+        "fp": 44461,
+        "fn": 66351,
+        "false_blanks": 5,
+        "exact": 8,
+        "source_blanks": 4,
+        "f1": 0.30775381693695497
+      }
+    }
+  ],
+  "support_checks": {
+    "all_record_kl_down": false,
+    "writing_gain_at_least_005": false,
+    "false_blanks_no_worse": false
+  },
+  "support": false,
+  "resources": {
+    "elapsed_seconds": 468.1861195405945,
+    "resource_wait_seconds": 180.1740800542757,
+    "peak_allocated_vram_gib": 11.255414485931396,
+    "minimum_available_gib": 40.601959228515625,
+    "pressure_wait_allowance_seconds": 300,
+    "stage_deadline_checked_during_pressure_wait": true
+  },
+  "teacher_readout_shape": [
+    151936,
+    4096
+  ],
+  "teacher_readout_sha256": "a5c595fe0bf5ff55b6134dcbb8a062167c06f7fd62ed9a64823055735834b68b",
+  "deployed_model_parameters": 1465381142,
+  "all_trial_updates_reset": true,
+  "model_tensor_sha256": "d8b7177213b4f67c9a7738739c49101a5eecd8284e31365337edd552311e5b95",
+  "retained_successor": false,
+  "autonomous_language_measured": false,
+  "full_fit_authorized": false,
+  "goal_achieved": false,
+  "successful_supervisor_elapsed_seconds": 480.4890661239624,
+  "bindings": {
+    "references/evidence/predictive_state_distillation_registration_20261118.json": "fbd4aaaca1603382db5b9b8809b417f8252aeac069066a3bd93341d101ac5b0d",
+    "artifacts/predictive_state_distillation_preflight_v1/result.json": "fc55c6ffbf7ad9946d6550db27bb7fd22eab3298ebaea27161078d10c93d5fd6",
+    "artifacts/predictive_state_distillation_preflight_v1.exit.json": "f6e75db92d7c239d3f17b8af35832fce0a4efb0ce07387291a8517728f16b1d8",
+    "scripts/summarize_predictive_state_preflight.py": "668bcd36d66cfc9ac6398d38c0e2e91c4f8148fbda5e4b38389dd460d4456929",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/complete_513_book.npz": "95d4b47b94e7488ef48a6d0226f737a9c1be322071e065f51f5c2133ba639221",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/complete_513_book.json": "51322736f5cf0725d2ae14cab278d123b781a61e7bdc4cbc013b4f4888d5ecc5",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/complete_qa.npz": "cb8daf3e303d5f40d370181100b04664fb909d05880a7e99279936dd3b10d8d0",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/complete_qa.json": "9f9b212e6aff7504f5c241844324e02351f50866648f95489276ef25ce2bb017",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/longest_native_record.npz": "b0c390b2526cadff9488bf999e4b34270058abe0f5af176fbc32a2ac149c6ced",
+    "artifacts/predictive_state_distillation_preflight_v1/initial/longest_native_record.json": "9ee9f120a8eb821088756e2d66fef91f2d462220dab2f210073bdc83a70f3d02",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_01.json": "10b14279a8a36df3a8491dd4c363ab050f3d5cb8394a75bb08ef2328815d7ac0",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_02.json": "78fad24446bd9e826e7501c3a1d328359bcdbf961271cbed4b246e0518ac3f4a",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_03.json": "647a34be25f02192d73b42a4714afa5be794d256dac5c14b8da69d13b00b5f49",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_04.json": "60006ac0b9dc5b6b458cc69710e872d9ae5050adf0f859957d077f4670be800e",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_05.json": "0c62a32dbc046dc8432b6f17ae199f85ebb7433540d67c9466818d0e3d26ab99",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_update_06.json": "a4bd79ef47d5c9e841c2224992fb067d3cb9b9d81b9b1980326125706125d6c2",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/complete_513_book.npz": "462f8e56ae08114a678d371a3da5f77d3a6a9aaa677752a8a25d99a9d6b40cab",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/complete_513_book.json": "8bc5c9755f9d5533097bdcd07d1571a93fc184e1db9f00a2ec5b97187528bc27",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/complete_qa.npz": "ce9d5700d47801a2d65dbf73ee1dbcdd7dc49c2ae5a0b966809728ebf97c7671",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/complete_qa.json": "5e180ad6e72461e71e143e20d4fb956c298b23cbef6a8d09da7db72c01f353d1",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/longest_native_record.npz": "2968b1b3ea0d9067862af86e15b328dbb0066c7c7171acd2d67c8a1f7383a955",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control/longest_native_record.json": "82b2153046a47d449bffb94d757c2637b2672c6f5be8ce0d041719643d543f49",
+    "artifacts/predictive_state_distillation_preflight_v1/cosine_control_reset.json": "e4e08a042beabd4a98ab94e24eea5c835ead3c98355238489a2df5a19fa769c9",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_01.json": "f0aea551a12993afa70bd4e8860d77a30ee0decd30d689cf2d9cda7d4f671ee5",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_02.json": "bf810b22726b87fcbe1fb4b778901c04cac5400aefa8b5c107f3f7f2545879fa",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_03.json": "be316ceef94d143ffe3fe0ff0ee505ebe54cc166596f56b805d2545f3a38be38",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_04.json": "9d39e38881edb2accb144f3e75ce1bf82b467dbb2e183fdb53de67803b3a8e38",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_05.json": "c0e5a4267742f6b9a325b91b3fc0108428f4e435dd194d0c0f4480cd3b7a0dcf",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_update_06.json": "065680674b9fbd3781ebcc7a10988d2c0560b3bca53305ec51475a78210208ea",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/complete_513_book.npz": "092c39c146827253a86f13340d74df8d070b791acc46f67467fc118c912693cf",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/complete_513_book.json": "b82a410746e61bfd19be6b82718a4f343dfc2b3f120b5517f4a2af64db46450f",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/complete_qa.npz": "8c98e4271db6ae6806d7be06f7af0cf9747531a28ef316f44deb93771c57ca34",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/complete_qa.json": "8aa5a84a8aff542383caf534b4a29d548c46867b2b67f2a161c8a0954b1c1fb6",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/longest_native_record.npz": "fd749f1fe6488da8ed7688665d26c7b9b905455cfcb3bb773bec04832370fcdb",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl/longest_native_record.json": "bce17789a8075a59f1de9eac1c9b0882229e5903feb0a7a1c25c6cd6448845f3",
+    "artifacts/predictive_state_distillation_preflight_v1/predictive_kl_reset.json": "e4e08a042beabd4a98ab94e24eea5c835ead3c98355238489a2df5a19fa769c9",
+    "artifacts/predictive_state_distillation_preflight_v1/unchanged_other_losses.json": "b4bbbbfcf920a3e00420a04d5643730b150c8b50682c3e43ede62126cb946a06",
+    "data/visual_sequence_corpus_v1/train_0003_pixels.npz": "1517b50f7d631ea2738da815e8e325a290bdc14761e08d71866b999c9db0beed",
+    "data/visual_sequence_corpus_v1/train_0073_pixels.npz": "ef27bd7e66ce3fb6c0ce1bf8fca775f6d0bcc92a08e235cc575c183d9600feaf",
+    "data/visual_sequence_corpus_v1/train_0037_pixels.npz": "d9cfabdfc9cca7d86dcabf711c1414d5a90e08d6adab541421423fd89bd7e622"
+  },
+  "all_1656_output_tiles_recounted_from_original_arrays": true,
+  "teacher_readout_cpu_parameters": 622329856,
+  "export_elapsed_seconds": 2.3490145336836576,
+  "interpretation": "The six-update KL replacement fails its preflight. No full fit or working visual language is qualified. All trial weights reset. This does not disprove longer or different distillation procedures.",
+  "limitations": [
+    "Only three already-seen training records; no generalization or autonomous answers measured.",
+    "Correct source histories and supplied next-span lengths isolate physical writing; F1 is canonical pixel agreement, not semantic accuracy or readability.",
+    "KL scalars derive from the bound neural execution, not an independent second model replay.",
+    "Both arms have fresh moments; this is additional adaptation, not replay of an old training update.",
+    "Inherited model/teacher pretraining and prior extraction/training costs remain separate."
+  ]
+}
