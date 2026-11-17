@@ -1,0 +1,43 @@
+{
+  "schema": "ilm-gradient-diagnostic-execution-failure-v1",
+  "registration_sha256": "02cb54f66fccd26a31990f1b31fe7bc98a301bf11df84bee8d804de1f78f0fc9",
+  "source_commit": "6987e8ab79ab836e577e767eb2cec945f70eb1e6",
+  "exit_code": 1,
+  "completed_cases": 0,
+  "status": {
+    "phase": "failed_gradient_diagnostic",
+    "pid": 1631478,
+    "start_ticks": "625697070",
+    "boot_id": "5bb12404-85b6-4406-986b-f462d804b3a0",
+    "elapsed_seconds": 413.3539576018229,
+    "position": {
+      "arm": "trainable",
+      "role": "complete_513_book",
+      "gradient_pass": "combined"
+    },
+    "error": "glyph reader pressure wait exhausted"
+  },
+  "failure": {
+    "error_type": "RuntimeError",
+    "error": "glyph reader pressure wait exhausted",
+    "completed_cases": 0,
+    "automatic_retry": false,
+    "optimizer_updates": 0,
+    "full_fit_authorized": false
+  },
+  "supervisor_elapsed_seconds": 424.90950083732605,
+  "optimizer_updates": 0,
+  "generation_calls": 0,
+  "actual_post_run_model_tensor_hash_check_completed": false,
+  "loss_interference_measured": false,
+  "peak_vram_recorded": null,
+  "input_bindings": {
+    "artifacts/visual_context_gradient_diagnostic_v1/status.json": "b600939dff1c0b6134327e515869205ba33f28c1976104c057c428ae2c549cd0",
+    "artifacts/visual_context_gradient_diagnostic_v1/failure.json": "35be0103dbfc842aa07b015a09a066cb1b5798517f1903b0ca252e005a51fd0a",
+    "artifacts/visual_context_gradient_diagnostic_v1.log": "def34c55babf5086a79d75a80b258c2e57c49e560ed41a926392bf933d4bbccd",
+    "artifacts/visual_context_gradient_diagnostic_v1.exit.json": "190e12aeba21293297e44681a8d0caf62501e7652c31b0e3b0285d334809734d"
+  },
+  "hypothesis": "Keeping the full conditional-flow gradient on host consumes about 5.46 GiB of anonymous RAM for treatment. Moving that saved copy to GPU may reduce pressure; the original failure does not identify the source of global pressure.",
+  "next_action": "Prepare separately registered device-gradient placement recovery with all original math, records, guards and deadlines unchanged. No automatic retry.",
+  "goal_achieved": false
+}

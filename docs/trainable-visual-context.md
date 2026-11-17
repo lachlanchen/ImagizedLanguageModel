@@ -22,6 +22,10 @@ now binds the exact final actors, retained AdamW moments and three complete
 training records. It measures copied update directions without applying them;
 four CPU arithmetic checks pass. Its prospective support rule and resource
 ceilings admit no new full fit or language claim.
+The first diagnostic stops at its pressure-wait limit before a complete record
+measurement. The [separately bound recovery](../references/visual_context_device_gradient_protocol_20261117.md)
+changes only the saved gradient's host/device placement, preserving the original
+failure, mathematical measurement and resource ceilings.
 
 ## Learning path
 

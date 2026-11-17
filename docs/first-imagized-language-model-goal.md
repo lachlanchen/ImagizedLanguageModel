@@ -98,6 +98,16 @@ before the sole 1,200-second monitored execution, with no optimizer updates.
 Measure actual model/projection preservation and support for both final actors;
 preserve any execution failure without an automatic retry.
 
+That first diagnostic is now terminal at its pressure-wait ceiling, with zero
+completed record-level measurements. It supplies no interference finding; final
+tensor-preservation checks were not reached. The
+[separate placement recovery](../references/visual_context_device_gradient_protocol_20261117.md)
+keeps the saved FP32 flow gradient on GPU rather than host. Exact source
+comparison preserves every other measurement operation. The original 56 inputs,
+records, actors, moments, guards, time limits and failure remain preserved.
+Its separate registration must be committed and pushed before one new serial
+execution; no optimizer update, answer generation or automatic retry is admitted.
+
 If interference is supported under the relevant update direction, prepare one
 prospective objective intervention with an unchanged control and training-only
 update/reset preflight. Require actual complete conditional writing improvement;
