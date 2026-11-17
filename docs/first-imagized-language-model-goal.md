@@ -365,6 +365,20 @@ whole-model efficiency. No conditional language fit is admitted. Preserve the
 failed absolute rules and test a bounded representation change before any
 successor fit; do not extend unchanged epochs or select a snapshot.
 
+The [equal-bit scalar-plan intervention](../references/scalar_visual_plan_direction_20261118.md)
+is implemented and has four passing CPU checks. At the same 256-bit budget,
+it trades sixteen one-bit features for eight four-level features per spatial
+site, using finite scalar quantization and a matched unrounded control. Every
+bit pattern is a valid arithmetic plan; the physical XOR correction retains
+full image support. All common CNN initial values and thirty-two plan events
+are preserved. This is an established quantizer applied to the observed
+precision failure, not a theorem or a successful language algorithm. Its
+[complete comparison protocol](../references/scalar_codec_comparison_protocol_20261118.md)
+retains all original absolute criteria, data/order, 6,000-update budget and
+resource ceilings, with .02 gain over saved binary F1 .943690071. No language
+fit is admitted before actual qualification. Keep the corrected CPU-test
+expectation failure alongside the passing implementation checks.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

@@ -1,0 +1,18 @@
+{
+  "schema": "ilm-scalar-plan-cpu-v1",
+  "source_sha256": {
+    "ilm/visual_lm/scalar_plan_codec.py": "3e6aa825c94ebe28798f3a07c4b5e017c27cf29df78e6617569537f47053d104",
+    "tests/test_scalar_plan_codec.py": "d96bf3224ef92e62ac78d2b092f279e1df5018ea5da92cfa57bdb17020bd221d"
+  },
+  "command": "CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_scalar_plan_codec -v",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_all_scalar_levels_and_every_bit_coordinate_roundtrip (tests.test_scalar_plan_codec.ScalarPlanCodecTest) ... ok\ntest_common_initial_cnn_real_updates_and_exact_reset (tests.test_scalar_plan_codec.ScalarPlanCodecTest) ... ok\ntest_joint_writer_generation_has_no_target_encoder_or_glyph_table (tests.test_scalar_plan_codec.ScalarPlanCodecTest) ... ok\ntest_published_bound_levels_and_actual_straight_through_gradient (tests.test_scalar_plan_codec.ScalarPlanCodecTest) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.236s\n\nOK\n",
+  "previous_check": {
+    "exit_code": 1,
+    "tests": 4,
+    "failures": 1,
+    "reason": "Incorrect expected rounded value at raw=-1 in test; actual published bound rounds to -1, not -2. Corrected assertion only; codec unchanged."
+  },
+  "neural_language_measured": false
+}
