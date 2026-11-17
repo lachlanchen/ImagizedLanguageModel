@@ -403,6 +403,17 @@ failed. Actual generated correction work and remaining error complexity are
 reported separately. No conditional language fit, whole-model efficiency or
 autonomous score follows from preparation or registration.
 
+The [first correction-fit execution](../references/evidence/residual_motor_admission_failure_20261118.json)
+ends at the 48-GiB host entry guard, constructing no model and making zero
+updates. No drawing or language quality is measured. Preserve its original
+directory. A separate [admission recovery](../references/residual_motor_admission_recovery_protocol_20261118.md)
+retains every model, source, schedule, quality and resource rule, with a new
+output directory and one worker maximum. It first waits for two stable
+50-GiB host observations ten seconds apart; the original worker's 48-GiB guard
+remains. Scheduling wait is at most 300 seconds and included in a separately
+enforced 2,400-second total ceiling. Do not duplicate its owner, reduce reserves,
+kill foreign services or retry a worker exception automatically.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

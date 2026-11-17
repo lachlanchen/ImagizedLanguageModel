@@ -1,0 +1,27 @@
+{
+  "schema": "ilm-residual-motor-admission-failure-v1",
+  "source_commit": "fd1e4e6d6e376a47ef5ac1b3237f53dd232112d8",
+  "input_sha256": {
+    "references/evidence/residual_motor_comparison_registration_20261118.json": "57ca3dc38401c96af8484c32a5a4e90ad71111ed0fb3f0fb3d1d04505c6b01a4",
+    "scripts/train_residual_plan_motor.py": "5a68fc458d915c286ccf5731c53fdbcf2bd7de6d29099e995d2291ec60042499",
+    "artifacts/residual_plan_motor_comparison_v1/failure.json": "b554a03c0b3618d559de2b59d975de05831a44e5fbf8f4bbe532f7d6015bdd3f",
+    "artifacts/residual_plan_motor_comparison_v1/status.json": "2d2257f58acfb846d87548213bb1c3c786acaf4b3e1ce32b5fc98f2f49c84c88",
+    "artifacts/residual_plan_motor_comparison_v1.exit.json": "554247f2f1d5eb884ad2ceeff499384e5b8ac04bddebd101a2a8ab2b7aefce7f",
+    "artifacts/residual_plan_motor_comparison_v1.log": "1e7833056a576e282dc42a294381370a9c90d0e4126bd0246fdcacd89c0e19cb"
+  },
+  "error_type": "RuntimeError",
+  "error": "bridge RAM entry reserve unavailable",
+  "required_entry_available_host_gib": 48,
+  "retained_updates": 0,
+  "no_model_constructed": true,
+  "no_model_checkpoint_or_output_exists": true,
+  "complete_comparison": false,
+  "quality_measured": false,
+  "actual_guard_stage_elapsed_seconds": 0.023489573039114475,
+  "supervisor_elapsed_seconds": 10.010643005371094,
+  "owned_processes_terminated": true,
+  "foreign_processes_terminated": false,
+  "automatic_retry": false,
+  "full_language_fit_authorized": false,
+  "goal_achieved": false
+}
