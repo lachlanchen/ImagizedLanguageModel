@@ -1,28 +1,21 @@
 # Training the visual context
 
-This branch tests full contextual adaptation in the existing image-in/image-out
-language model. The [complete comparison](../references/trainable_visual_context_comparison_protocol_20261116.md)
-is registered. The treatment has completed all 8,172 updates and passed its
-CPU source/state audit. Its original controller stopped when the first
-generation stage failed the unchanged host-pressure entry guard, before model
-loading. A [separately bound execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
-preserves that failure and completes all 396 treatment streams, then stops at
-the strict cold audit because deployment admission reads two undeclared
-obsolete-job metadata files. The frozen-control fit has not started. The
-[failure decision](../references/visual_context_cold_guard_failure_20261117.md)
-selects removal of this deployment dependency while preserving resource guards,
-numerical generation and the strict artifact audit. A new exact execution
-binding is required before continuation. The
-[deployment execution protocol](../references/visual_context_deployment_execution_protocol_20261117.md)
-implements this repair with an exact numerical-source comparison and nine CPU
-guard/plan checks. The [fresh treatment cold replay](../references/visual_context_deployment_cold_result_20261117.md)
-passes the unchanged strict artifact audit and matches the original pixels,
-stops and feedback on the one fixed case. The original matched control fit has
-launched with identical initialized full-model/objective hashes; its completion
-and both-arm language review remain pending.
-Useful autonomous language is still
-unproved. The earlier compact full-rank model produced zero strict complete
-development answers with a frozen contextual body. All failed baselines remain.
+The [complete comparison](../references/trainable_visual_context_result_20261117.md)
+has finished and rejects the tested recipe. Learned and frozen context each
+produce 0/32 strict complete answers, 0/16 both-correct pairs, 0/32 readable
+complete answers and 0/12 credited coherent complete long-book continuations.
+All 792 streams are reviewed and readings were frozen before reference scoring.
+Both full fit audits and both separate strict cold replays pass; these execution
+checks do not establish useful language. Treatment improves natural long-book
+stopping to 12/12, while writing remains unreadable.
+
+The [failure decision](../references/trainable_visual_context_failure_decision_20261117.md)
+selects a separately registered training-only accounting of conditional and
+auxiliary gradients before choosing any further fit. No completed stage is to
+be restarted. The [public export](../references/evidence/trainable_visual_context_result_20261117.json)
+retains all snapshot summaries, resource scopes and evidence hashes. Earlier
+failed admission and cold attempts remain preserved. This implementation has
+not demonstrated a working ILM.
 
 ## Learning path
 
@@ -107,8 +100,8 @@ arbitrary page layout and proportional writing remain separate extensions.
 
 Large weights, corpora, raw runtime identity and generated outputs remain local.
 Public registrations and result summaries bind them by hash. A completed failed
-run is evidence, not permission to restart it. The current worker must finish or
-exit before any successor owner is considered; observation timeout is not exit.
+run is evidence, not permission to restart it. All comparison workers have exited. Any successor heavy diagnostic needs its
+own committed execution binding and verified ownership.
 
 Standalone generation from a trained deployment snapshot uses:
 
@@ -123,7 +116,8 @@ CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0 \
 ```
 
 Use a binary PNG composed of gapless 32×32 tiles in reading order, with the
-actual tile count. That final snapshot exists only after its full fit completes.
+actual tile count. The final snapshot is retained from the completed failed language comparison.
 Standalone execution acquires the same GPU mutex and refuses a competing job.
-Do not run this command alongside the active comparison. Typed text may be
+This command is a usage example, not a request to repeat the completed evaluation.
+Typed text may be
 rendered at the input boundary; generated answer pixels are never font-rendered.

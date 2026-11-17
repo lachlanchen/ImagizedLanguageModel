@@ -27,174 +27,90 @@ transcription may read a finished image without changing its pixels. Transferrin
 inherited language capability and learning language from images alone are
 separate claims.
 
-## Current model decision
+## Current model decision: full-context recipe rejected
 
-The [complete white-target comparison](../references/white_target_physical_result.md)
-is finished and fails its registered physical prerequisite. All 13,766 sources,
-41,298 retained updates, 6,108,741 target positions, five snapshots, the independent
-CPU audit, 124 conditional cases and 33 opaque boards/2,080 readings are complete.
-The first review was frozen before new owner/reference scoring. All seven
-readability groups pass, with 1,016/1,040 selected candidate forms credited, but
-false ink is **12/252** against a maximum of eleven and false blanks are **54**
-against a maximum of 37. The unchanged control gives 25 and 37. All seventeen
-additional false blanks occur in books. Exact source bitmaps fall from 4,609 to
-4,543 of 12,597; bitmap agreement is not a language score.
+The [complete full-context comparison](../references/trainable_visual_context_result_20261117.md)
+is terminal and fails. Both arms complete all 13,785 records and 8,172 updates;
+all 792 prescribed streams, 180 native boards and 144 normal-book visible
+prefixes have actual review receipts. All readings were frozen before reference
+scoring. Final learned and frozen context each give **0/32 strict complete QA,
+0/16 both-correct pairs, 0/32 readable complete QA and 0/12 credited coherent
+complete long-book continuations**. Every prescribed snapshot has zero strict,
+paired and readable normal QA. Do not choose an intermediate checkpoint.
 
-The [public evidence](../references/evidence/white_target_physical_result_20261116.json)
-and [failure decision](../references/white_target_failure_decision.md) are the
-current authority. This actor is terminal and ineligible for its 708-stream
-language comparison. Do not create its execution binding, repeat its fit/audit/
-qualification/review, select an intermediate checkpoint, change thresholds or
-repair frozen readings. Preserve all failures, original controls, 18 uncertain
-readings, failed unfrozen entries and all 115 bound sources. Review used one model
-with prior development familiarity and no independent human adjudication.
+Treatment's twelve normal long books stop naturally after 209–415 emitted glyph
+positions; the control stops on two blank books and caps on ten. This establishes
+a stopping difference without usable complete writing. Overall review retains
+741 uncertain streams and 51 blank streams. Unreadability prevents credit and
+assessment of latent semantic correctness; it is not evidence of a particular
+wrong semantic answer. One model reviewer had prior development familiarity;
+there was no independent human adjudication. Never repair frozen readings from
+references, source weights, OCR, fonts or answer images.
 
-Whole deployed parameters are 7,553,448,370, including 7,522,463,984 inherited
-parameters and 5,005,760 trainables. The small trainable count does not establish
-a lightweight foundation. Fit peak allocation is 18.281 GiB; its 77,076.359 seconds
-and the complete model account do not establish matched-quality efficiency over
-a local LLM. Live ownership belongs only in the private handoff. All workers in
-this comparison have exited; an old status file never authorizes a restart.
+Both original CPU fit audits and both separate strict cold replays pass. Each
+cold replay checks the same one fixed final book input, outside the 792 language
+streams, with exact pixels, stopping and feedback and no undeclared artifact,
+font/tokenizer/corpus or network access. Neither execution nor natural stopping
+qualifies language. Preserve the earlier failed admission and cold executions.
+The original immutable controller status predates the separate completed review;
+current authority belongs in the private handoff.
 
-## Next work: train the complete visual context
+The whole deployed model has 1,465,381,142 parameters, including 1,409,410,048
+inherited contextual parameters. Treatment fit takes 60,127.268 monitored seconds
+with 11.647 GiB peak allocation; control takes 4,309.029 seconds with 7.200 GiB.
+These fit scopes exclude inherited pretraining, earlier teacher preparation,
+all generation and failed executions. Both arms fail useful quality; no
+matched-quality efficiency or language-from-images-alone claim follows.
 
-Individual readable forms have repeatedly improved without establishing useful
-complete language. Another blank/nonblank margin or unchanged fit is not the
-selected next intervention. The compact full-rank writer completed its original
-fit with zero strict complete development answers while its 1.409B contextual
-body stayed frozen. The selected comparison makes that full context trainable,
-retaining the image encoder, writer, complete source corpus and six supervised
-objectives. Earlier V35 trained a smaller body and also failed; unfreezing alone
-does not establish the correct architecture or useful language.
+Use the [public hash-bound evidence](../references/evidence/trainable_visual_context_result_20261117.json)
+and [failure decision](../references/trainable_visual_context_failure_decision_20261117.md).
+Do not restart completed training, generation, audits, cold checks or visual
+review; do not relax thresholds or repeat unchanged earlier reader, codec,
+writer, native-history or sampling diagnoses. All old failures and successful
+cases remain evidence. The preceding goal revision is preserved at Git commit
+`6390e80e7ee3e113419279702c2f872448d8c88d`.
 
-Actual-pixel sampling and differentiable trajectory replay are implemented, with
-supervised learning retained as an anchor. CPU probability/gradient checks do not
-establish full-body execution or language benefit. Both tested image reward
-judges failed their fixed calibration and remain rejected. Do not run their
-policy fits, tune their radius or repair the frozen uncertain readings. A new
-judge must distinguish actual correct, readable wrong and ambiguous outputs;
-transcription must be blind to the question/reference and separate from semantic
-matching. Preserve uncertainty, duplication, spaces, caps and stopping. Do not
-use reused development outputs as fitting data.
+## Next work: diagnose the conditional training signal
 
-The [fixed isolated-cell teacher](../references/isolated_glyph_reader_result_20261116.md)
-is also rejected. Its recovery stops at 402/526 queries under the fixed resource
-guard; a registered one-sided analysis finds 203 failed distinct clean-reference
-mask/character pairs among 273 observed, repeated at 726 reference positions.
-The missing 124 queries remain unknown. This is incomplete calibration with
-observed necessary-condition failures, not a student language result. Preserve
-both attempts, the partial freeze and all old readings. No third teacher run,
-prompt tuning or student fit follows. The next
-[supervision investigation](../references/training_glyph_supervision_direction_20261116.md)
-was a source/preprocessing audit followed by a prospectively bound training-only
-label-coverage check. Neither a new verifier fit nor a successor actor fit is
-admitted by those checks.
+Full contextual adaptation under the six equally weighted objectives was
+insufficient. The next bounded investigation measures the conditional-flow
+and auxiliary gradients on the exact final actors and authenticated complete
+training records, with no optimizer updates or retained new model. Equal loss
+weights do not imply equal gradients; this is a possible interference mechanism,
+not an established cause. Negative cosine alone is not an AdamW update analysis.
+Follow the failure decision's group accounting, complete hypothetical update
+requirements, limits and actions for either result.
 
-Those checks are now [complete](../references/training_glyph_label_result_20261116.md).
-All 7,255,223 training cells match source pixels, but eleven nonwhite aliases
-and 34 invisible nonspace occurrences reject exact pointwise Unicode recovery.
-Preserve this negative condition; do not normalize it into a pass. The
-[preprocessing audit](../references/isolated_reader_preprocessing_audit_20261116.md)
-confirms actual image encodings and a small visual budget, without proving a
-causal repair. Both audits are terminal. The
-[fixed encoder metric calibration](../references/frozen_encoder_verifier_result_20261116.md)
-is also complete and rejected: six of nine known-correct answers are accepted,
-with zero of nine readable-wrong and zero of 46 uncertain answers accepted.
-It fails the unchanged all-correct and strict-separation conditions. No metric
-tuning, another general-vision reader run or policy fit follows this failure.
+Before execution, separately register exact records, final actor and offline
+projection identities, parameter groups, precision, source bindings and a finite
+resource ceiling. Admit only one diagnostic owner and verify full-record support
+without silently cropping after failure. This goal text authorizes preparation,
+not an unregistered heavy run or another full fit. No development answers,
+reserved DRCD records, rejected reward judge or policy fit enters this work.
 
-The selected [full-context execution preflight](../references/trainable_visual_context_preflight_protocol_20261116.md)
-uses authentic training images and saved offline teacher states directly; it
-does not require a reward judge and uses none of the rejected rewards. Both
-matched arms have FP32 contextual parameters, the same full-rank writer and
-ordinary AdamW with host-resident moments. The single changed variable is
-whether all contextual parameters learn. Bind complete real QA, a 513-glyph book
-and the longest native-unit training record, actual parameter updates, sampled
-independent AdamW arithmetic and exact full-state resets. This preflight has
-no retained trained model. A pass permits preparation of a separately registered
-full-corpus comparison, checkpoint loader and complete autonomous evaluation;
-it does not itself authorize a full fit or establish language understanding.
-The [six real update/reset trials now pass](../references/trainable_visual_context_preflight_result_20261116.md):
-all 309 context tensors learn only in treatment, sampled AdamW update error is
-zero, all states reset exactly and peak allocated VRAM is 11.252 GiB. Preserve
-this completed preflight; do not repeat it.
+If interference is supported under the relevant update direction, prepare one
+prospective objective intervention with an unchanged control and training-only
+update/reset preflight. Require actual complete conditional writing improvement;
+gradients or reduced auxiliary loss alone cannot admit the next full fit. If the
+evidence does not support interference, reject the explanation and choose the
+next single change from the measured limitation. No working successor algorithm
+has yet been qualified.
 
-The [complete matched comparison is now registered](../references/evidence/trainable_visual_context_comparison_registration_20261116.json)
-with 599 bound inputs and sources. Follow its
-[full execution protocol](../references/trainable_visual_context_comparison_protocol_20261116.md),
-[model/code guide](trainable-visual-context.md)
-and private handoff: one serial owner runs treatment fit/audit/generation, then
-the matched frozen-context arm. Each uses all 13,785 sequences, 2,576,239 target
-positions, 2,380,620 saved teacher states and 8,172 updates. Retain all five fixed
-snapshots and all 792 prescribed output streams, plus two separate traced cold
-replays. Every learned context tensor must be restored in standalone inference.
-No rejected reward or DRCD fitting is used. Freeze visual readings before new
-reference scoring. The measured preflight fits; full trained language is still
-unmeasured. This deployed model has 1,465,381,142 parameters and inherits text
-pretraining. Neither its size nor a successful fit establishes matched-quality
-efficiency, proportional-page reading or the full historical-language objective.
+The earlier white-target comparison, both reward judges, isolated-cell teacher,
+fixed encoder metric, label uniqueness and preprocessing audits remain terminal.
+Do not recover old evaluators, tune rejected thresholds or reuse development
+outputs as fitting data. Physical aliases and invisible source symbols remain
+preserved; an exact pointwise Unicode condition's failure is not proof that
+visual language is impossible. The reserved DRCD collection remains unrendered,
+unscored and evaluation-only.
 
-The treatment now completes all 8,172 updates and passes its original CPU
-source/state audit. Its controller exits at the first generation stage because
-the unchanged host-pressure entry guard rejects admission before model loading.
-Preserve that terminal execution and its zero-output failed directory. The
-[bounded execution continuation](../references/visual_context_admission_recovery_protocol_20261117.md)
-was registered, committed and pushed with a finite queue for the original
-resource limits, retaining all 599 bound sources, five checkpoints, both arms
-and 792 output streams. It completes all 396 treatment streams and then ends at
-its strict cold access audit. Two undeclared obsolete-job owner-metadata files
-are opened by the deployment admission guard. The retained cold pixels, stopping
-and feedback match the original output on CPU; the original access audit remains
-failed. The frozen-control fit has not started and language remains unreviewed.
-Follow the [failure decision](../references/visual_context_cold_guard_failure_20261117.md):
-remove only the obsolete runtime-JSON dependency from deployment admission,
-preserving the original resource guards and strict artifact audit. Mechanically
-check numerical-source equivalence and bind a fresh fixed-case cold check and
-the complete remaining comparison before a new execution. Preserve both terminal
-controllers and all 599 original and 21 recovery bindings. Do not repeat the
-completed treatment fit, audit or 396 streams, or automatically restart a failed
-stage. Training completion and audit success do not establish language quality.
-
-The [deployment execution protocol](../references/visual_context_deployment_execution_protocol_20261117.md)
-now implements the admission-only repair. Exact source comparison retains the
-original inference text except its admission import; the copied bridge removes
-the obsolete owner check and adds the disk floor. Nine CPU checks pass for source
-equivalence, resource boundaries, real mutex contention, strict artifact rejection
-and the complete remaining plan. They use a CUDA API stub and prove no neural or
-language result. Commit and push the separate exact execution binding before
-the single serial owner runs a fresh strict treatment cold check, the original
-frozen-control fit/audit/generation and cold check, and all792-stream blind review.
-All previous failed executions and treatment outputs remain preserved.
-
-The [fresh treatment cold result](../references/visual_context_deployment_cold_result_20261117.md)
-now passes the unchanged strict artifact audit and exactly reproduces the fixed
-case's pixels, stopping and feedback, without obsolete metadata exceptions.
-This is one cap-censored execution check, not language qualification. The original
-frozen-context fit has launched with the same complete initialized-model and
-objective hashes as treatment. Follow its single serial owner in the private
-handoff through the original fit/audit, remaining396 control streams, cold check
-and all792-stream blind review. No treatment fit or generation is repeated.
-
-The [offline image preference option](../references/image_preference_learning_direction_20261116.md)
-is also unqualified. All 10,735 source pairs are preserved; 10,716 are structurally
-eligible, but their machine-derived labels are not independently qualified.
-The old cell importer fails full-source fidelity. The 64-field shaped RGB support
-check passes, while its binary derivative erases a measured colored-symbol region.
-Neither result proves current-body support, semantic supervision or efficient
-student learning. Preserve these completed checks rather than repeating them or
-truncating the collection into an easier task.
-
-Before a successor fit, require a failure-specific, separately registered
-training-only support/gradient/resource preflight on a fresh clone. Bind the
-complete sources, one intervention, unchanged control, initialization, schedule,
-checkpoints, full evaluation, resource ceilings and action for either result.
-For policy-based proposals, check actual emitted-pixel feedback and complete-
-action probability replay, including genuine stop versus cap censoring; equal
-rewards or uniformly unreadable samples fail their learning-signal check.
-Direct supervised proposals instead verify complete source losses and actual
-updates without a reward. Reset all trial updates. Every eventual autonomous
-comparison must use emitted pixels and preserve natural stops and caps. No
-successor full fit is admitted by this goal text alone.
+Every successor fit requires its own failure-specific, prospectively bound
+training-only support/gradient/resource preflight on a fresh clone with all trial
+updates reset. Bind complete sources, one intervention, unchanged control,
+initialization, schedule, checkpoints, full evaluation, resource ceilings and
+actions for either result. Direct supervised proposals need no reward judge;
+policy proposals also need qualified complete-action rewards and exact emitted-
+pixel probability replay. More unchanged epochs are not a selected intervention.
 
 An ordered visual volume remains a representation hypothesis. Its completed
 invertible CPU operator preserves order but does not establish compression,
@@ -285,9 +201,10 @@ separate physical fidelity, reader qualification, update execution and language.
 All 337 prior figure assets and 154 prior embedded image contents remain.
 The [build evidence](../publication/ilm-nature/evidence/visual_context_evidence_article_build.json)
 records all 261 pages in layout overview and 43 detailed pages. Preserve the
-older 53/93/95-page baselines. The completed full-context treatment fit has no
-language result in this revision; add its actual final comparison only when
-generation and frozen review finish. Local Nutstore delivery and cloud
+older 53/93/95-page baselines. These PDFs predate the now-completed full-context
+failure. Add the final matched scores and original output images under a bounded
+manuscript/figure revision plan; do not present their earlier pending statements
+as current status. Local Nutstore delivery and cloud
 propagation remain separate verification claims.
 
 ## Work-unit and resource rules

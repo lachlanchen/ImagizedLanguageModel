@@ -1,0 +1,292 @@
+{
+  "schema": "ilm-completed-visual-context-result-v1",
+  "date": "2026-11-17",
+  "decision": "reject_complete_six_objective_visual_span_recipe",
+  "development_stage_passed": false,
+  "goal_achieved": false,
+  "reviewer": "OpenAI assistant; one model reviewer with prior development familiarity; no independent human adjudication",
+  "images_reviewed": 792,
+  "native_boards_reviewed": 180,
+  "normal_book_visible_prefixes": 144,
+  "frozen_before_reference_scoring": true,
+  "uncertain_region_notation": "□ is an unreadable region, not a counted glyph",
+  "arms": {
+    "trainable": {
+      "updates": 8172,
+      "training_records": 13785,
+      "source_target_glyph_positions": 2576239,
+      "source_teacher_states": 2380620,
+      "total_deployed_parameters": 1465381142,
+      "training_parameters_including_offline_projection": 1466346389,
+      "optimizer_moment_bytes": 11730771112,
+      "final_checkpoint_sha256": "ebcbb2ac37773d5bc2525e36dd374e0aa122b95fb6da6465bd7de8b0b1385a04",
+      "fit_resources": {
+        "elapsed_seconds": 60127.26767808851,
+        "resource_wait_seconds": 1421.3542825067416,
+        "peak_allocated_vram_gib": 11.647241592407227,
+        "minimum_available_gib": 38.46422576904297
+      },
+      "original_fit_audit_passed": true,
+      "strict_fixed_case_cold_check_passed": true,
+      "streams": 396,
+      "final_summary": {
+        "arm": "trainable",
+        "step": 8172,
+        "exact": 0,
+        "both_correct_pairs": 0,
+        "readable": 0,
+        "erasure_exact": {
+          "question_blank": 0,
+          "passage_blank": 0
+        },
+        "normal_minus_best_erased": 0,
+        "coherent_complete_long_books": 0,
+        "long_book_stops": 12,
+        "long_book_caps": 0
+      },
+      "visual_review_counts": {
+        "uncertain": 367,
+        "blank": 29
+      }
+    },
+    "frozen": {
+      "updates": 8172,
+      "training_records": 13785,
+      "source_target_glyph_positions": 2576239,
+      "source_teacher_states": 2380620,
+      "total_deployed_parameters": 1465381142,
+      "training_parameters_including_offline_projection": 56936341,
+      "optimizer_moment_bytes": 455490728,
+      "final_checkpoint_sha256": "7b1cc3bad3f512b148acefcaead0831994dc247e11c71aa5b36a2d39e0827979",
+      "fit_resources": {
+        "elapsed_seconds": 4309.029444633983,
+        "resource_wait_seconds": 30.028634579852223,
+        "peak_allocated_vram_gib": 7.199818134307861,
+        "minimum_available_gib": 39.62538146972656
+      },
+      "original_fit_audit_passed": true,
+      "strict_fixed_case_cold_check_passed": true,
+      "streams": 396,
+      "final_summary": {
+        "arm": "frozen",
+        "step": 8172,
+        "exact": 0,
+        "both_correct_pairs": 0,
+        "readable": 0,
+        "erasure_exact": {
+          "question_blank": 0,
+          "passage_blank": 0
+        },
+        "normal_minus_best_erased": 0,
+        "coherent_complete_long_books": 0,
+        "long_book_stops": 2,
+        "long_book_caps": 10
+      },
+      "visual_review_counts": {
+        "uncertain": 374,
+        "blank": 22
+      }
+    }
+  },
+  "all_snapshot_summaries": [
+    {
+      "arm": "trainable",
+      "step": 0,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "trainable",
+      "step": 1956,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "trainable",
+      "step": 4049,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "trainable",
+      "step": 6152,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "trainable",
+      "step": 8172,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 12,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "frozen",
+      "step": 0,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "frozen",
+      "step": 1956,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "frozen",
+      "step": 4049,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "frozen",
+      "step": 6152,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 0,
+      "long_book_caps": 0
+    },
+    {
+      "arm": "frozen",
+      "step": 8172,
+      "exact": 0,
+      "both_correct_pairs": 0,
+      "readable": 0,
+      "erasure_exact": {
+        "question_blank": 0,
+        "passage_blank": 0
+      },
+      "normal_minus_best_erased": 0,
+      "coherent_complete_long_books": 0,
+      "long_book_stops": 2,
+      "long_book_caps": 10
+    }
+  ],
+  "bindings": {
+    "references/evidence/trainable_visual_context_comparison_registration_20261116.json": "f502962e466b58c0bb4c49da85d6192e8759d95bd2f3835973c6f6e418f11b85",
+    "artifacts/trainable_visual_context_comparison_v1/review/scores.json": "e0fd2066e0aa8416d3f1d499736c077046af52735bda66b18c7899cfaac013d8",
+    "artifacts/trainable_visual_context_comparison_v1/review/readings_live.json": "c8a770b62962c5ed53fec1d5b5d5ecb167fa5637289fcd50aff98e7cec82ce51",
+    "artifacts/trainable_visual_context_comparison_v1/review/readings_frozen.json": "eb54316deb58a66291cd5b34c2e491b8975394df3f6908fe4c1aeeb12c17459d",
+    "artifacts/trainable_visual_context_comparison_v1/review/mapping.json": "0672b5fb8cd46090ff3b5d497db9c5be75c4e6aced934e38f90753dae78c8ca9",
+    "artifacts/trainable_visual_context_comparison_v1/review/boards_v1/manifest.json": "7ed71bd6305238fe720f8051532e4a394d384435e4dbc4d53656d6d23ed340b6",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0000_0001.json": "f1530802d816e654d7c1b6134ae6ba431c128d64c76ccd45e8510b394390d875",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0002_0003.json": "ad5b52049daf13c8a5522c0356858754b3bdbcf7f34a8c5bfd99424c54ef308f",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0004_0011.json": "bcacb3828266a2c75c4551883069eed4df44c69f1b342edada40401512714365",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0012_0019.json": "e6458b784ac16386972b6f7d9e3cc1971ce09741d69b0337f11436a7b7bfbe84",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0020_0027.json": "82cbd020c4380d44d239fd56b8bfa692dda64d181706acfedeab846e589ae4b0",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0028_0035.json": "9244f87fb153eb672028b1227173df2b22ee2e59687a7e7911185ad02fd51d32",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0036_0043.json": "5e2be31354860f1392d4fba52b0bf4ba10de6deb9bd271c7259226264de69b08",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0044_0051.json": "7778fbad462fa856cea5d4a4b59a9d726784f6ec23bfa72b7b66b4aae80df08b",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0052_0059.json": "91797352b612f83e3e95862d3b36562396dd7c1b9db038e335945d5477fa3133",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0060_0067.json": "191d63b5d9e8eedb19e48f3244f539f444ed4e044d76ecc56a37a565fecd36e3",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0068_0075.json": "2b8013d42a2133bd54bbef77682eaf3d207bef81d6c255e13aefb8feb327ff42",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0076_0083.json": "3b2e03af04d8e8e9611e303c5684b645f6d76fc1b4d5a49de74c9b5eee19cf34",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0084_0091.json": "cbbd292209aa3b2fb6cdced585fb5a3104cb87ec1bf25b37feb11ff5385fa28b",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0092_0099.json": "6cd08df770a6346789877f79ca7259f1f98e6ccf0eb1fcd3ad6c393f168d58be",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0100_0107.json": "4b126acd9b916c251e2748c28947a1059b311cef3a1037a75f9bb7fe1661f7c1",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0108_0115.json": "7e6279f653b559987ed45933c13b73cf934c668662ff012a3ce3a1667ff759df",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0116_0123.json": "e6cabdf8624561a5d999486024375ee81998e98fca254e149fe50ef21acd6dfb",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0124_0131.json": "9b16f6a62b394152b720a01df0015d7e42e0cdd381eedafaa32f978f02fbb5ab",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0132_0139.json": "d9cea760c2754d90d89346889af33215196e3d08714a0fb7258e60b50a40607b",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0140_0147.json": "64a5cec3bc1f36df4699efc07b4c2973a37792af20709924a93d59913c09739f",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0148_0155.json": "2a24c838e3df27076c8f044feb658333451d8ec95e523a0f9857ca831fdf0121",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0156_0163.json": "f3c067dc887571e9edd363626d4da36d8b639e230b418439e3d4f44e0f6a9d08",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0164_0171.json": "818df84ef6e64c74c4f38b8b161f5bab994cd5dde3429dd1ef7ca3c846111395",
+    "artifacts/trainable_visual_context_comparison_v1/review/reading_batches/batch_0172_0179.json": "8f35a696a251faebd7a50ae97165f1649074c7f5bc7c0a1e27bd20c11831240e",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/report.json": "aaaa99617c7f864211162fad4de62a386079b2efc6514278902b2ddf150ac7a4",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/fit/audit.json": "c44c15f48faeb360680915723c41070cb40ffc56b601a825abb68f181011201c",
+    "artifacts/trainable_visual_context_comparison_v1/trainable/cold_deployment_v1/verification.json": "d7f4f35642aebaa1f0780e6359254edf4ef049e7890495e75f799cc8273ebd3b",
+    "artifacts/trainable_visual_context_comparison_v1/frozen/fit/report.json": "71d56fb34e4322d9fd39a97b36ca4913582c7dc35ed5b0913dc066146de44190",
+    "artifacts/trainable_visual_context_comparison_v1/frozen/fit/audit.json": "cbc3c2244e25051eb7336c1ce1fcab0685ec5fd2b0a2cf07655cb5bac1cd9dc8",
+    "artifacts/trainable_visual_context_comparison_v1/frozen/cold_deployment_v1/verification.json": "085e630206d7ad7d91aa95398a39f831d7b0f528890e7c8b07558b737f6d399e"
+  },
+  "review_receipt_bindings_verified": true,
+  "new_model_calls_for_export": 0,
+  "limitations": [
+    "One model reviewer with prior development familiarity; no independent human adjudication.",
+    "Unreadable writing prevents assessment of latent semantic correctness.",
+    "Natural stopping and cold execution do not establish useful language.",
+    "First and last shard losses are different batches, not a fixed-set learning curve.",
+    "Source position counts are not independent counts of conditional training exposures.",
+    "Fit resource scopes exclude earlier inherited pretraining, teacher preparation and failed executions.",
+    "Proportional layout, untouched confirmation, historical forms, etymology and matched-quality savings remain unproved."
+  ]
+}

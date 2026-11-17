@@ -1,19 +1,21 @@
 # An algorithm for learning language through images: evidence and next decision
 
 The project has not yet demonstrated a reliable image-input, image-output
-language model. The strongest defensible current experiment is **joint
-supervised adaptation of the visual reader, contextual body and conditional
-image writer**. A small learned readout attached to a frozen language body has
-repeatedly failed. Full contextual adaptation is now being compared with that
-frozen control on the same complete corpus. This is an algorithm hypothesis,
-not an achieved language result or a newly discovered learning theorem.
+language model. Joint supervised adaptation of the visual reader, contextual body
+and conditional flow writer has now **failed its complete registered comparison**.
+Both learned and frozen context give zero readable complete normal QA and zero
+credited coherent complete long books. All 792 streams were reviewed and readings
+frozen before reference scoring. The
+[completed result](trainable_visual_context_result_20261117.md) supersedes this
+assessment's earlier pending status.
 
-This assessment was prepared on 17 November 2026. It leaves the running
-[registered comparison](trainable_visual_context_comparison_protocol_20261116.md),
-its sources, checkpoints, evaluation and resource limits unchanged. It introduces
-no successor fit and makes no new model calls. The
+The [failure decision](trainable_visual_context_failure_decision_20261117.md)
+selects training-only gradient accounting before another objective or architecture
+intervention is chosen. It introduces no successor fit. The
 [engineering goal](../docs/first-imagized-language-model-goal.md) retains the full
-language, historical-form, independence and efficiency requirements.
+language, historical-form, independence and efficiency requirements. The model
+and research discussion below describe the rejected recipe and conditional
+decision rules; they are not evidence of achieved useful visual language.
 
 ## The failure that must be solved
 
@@ -96,9 +98,9 @@ cap-censoring must remain visible.
 This factorization is standard probability, and a
 [joint physical-pixel writer](../ilm/visual_lm/glyph_joint_density.py) already
 exists and has failed qualification here. It is included to specify the target
-problem, **not** to propose repeating that completed experiment. The current
-compact comparison instead retains its existing conditional flow writer. It
-tests whether adapting the entire contextual body improves this integrated
+problem, **not** to propose repeating that completed experiment. The completed
+compact comparison retained its conditional flow writer. It
+tested whether adapting the entire contextual body improves this integrated
 visual process, without simultaneously changing the output law.
 
 A flow field trained with squared error is not inherently restricted to a
@@ -108,7 +110,7 @@ autoregressive likelihood does not guarantee useful greedy outputs. The earlier
 failures support neither a blanket impossibility claim for flow nor an automatic
 success claim for a joint density.
 
-## The concrete algorithm being tested
+## The tested algorithm
 
 The [implemented comparison](../docs/trainable-visual-context.md) performs the
 following operations on complete real QA and book sequences:
@@ -140,9 +142,12 @@ The earlier compact reader has a measured native-coordinate alignment
 restriction. Allowing its contextual body to learn may permit another useful
 representation despite that restriction; this is an inference, not a proof.
 Teacher-state cosine alignment likewise does not imply correct next-image
-probabilities. The complete-answer comparison tests the resulting behavior.
+probabilities. The completed complete-answer comparison rejects the resulting recipe.
 
 ## The decision after the comparison
+
+The observed outcome is the fourth row: both arms fail conditional writing.
+Reject the complete recipe and preserve the original results.
 
 Use the final checkpoints and all fixed intermediate observations as registered;
 do not select whichever checkpoint looks best after inspection. Retain all 792
@@ -179,5 +184,5 @@ semantic information that must be learned. The
 distinction. No reviewed theorem proves frontier-level language ability,
 thousandfold savings or automatic understanding of historical forms on one GPU.
 An efficiency claim needs useful matched quality against the named local text
-baseline and the complete cost account. Until those measurements exist, the
-algorithm remains a tested hypothesis in progress.
+baseline and the complete cost account. Until those measurements exist, no
+working algorithm has been demonstrated.
