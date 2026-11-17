@@ -122,9 +122,18 @@ not remove it; contextual adaptation did not establish that it was compensated.
 A nonlinear feedback residual with zero output initialization is a candidate
 for removing that specific affine-family bound while preserving the original
 function initially. It is not a proven cause or selected working solution.
-Check existing target-identifiability evidence, design one bounded comparison
-and qualify real conditional writing before any full fit. Do not repeat the
-completed native-history, codec, sampler or reader diagnostics unchanged.
+The [selected head-calibration comparison](../references/nonlinear_feedback_alignment_protocol_20261118.md)
+uses the original complete source support and exact native-feedback weighting,
+with a nonlinear residual and an affine control. The existing full-schedule
+alias audit already bounds ambiguity near .000749; do not repeat it or remove
+its aliases. Cache only frozen image-reader queries, then compare twenty fixed
+head-only epochs on every native-sequence/slot row, with complete-record real
+update/reset support first. This is coordinate calibration, not a language fit.
+Even a reader-support pass admits only a separately registered conditional-
+writing evaluation; no full language fit or autonomous claim follows. All other
+reader/context/writer components stay fixed. Preserve every failure and keep
+original language criteria. Do not repeat completed native-history, codec,
+sampler or reader diagnoses unchanged.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward

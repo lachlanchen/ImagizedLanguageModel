@@ -1,0 +1,19 @@
+{
+  "date_hk": "2026-11-18",
+  "command": "CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_nonlinear_visual_feedback -v",
+  "tests": 4,
+  "exit_code": 0,
+  "reported_test_seconds": 0.078,
+  "implementation_sha256": {
+    "ilm/visual_lm/nonlinear_visual_feedback.py": "31ad5c78618cde5a667d140eaa155606f05a8a100d1ac6db6656dc9f9b7e71e4",
+    "tests/test_nonlinear_visual_feedback.py": "586c03d674355b70844a7abe31cf416f99fceb716448d100ec8c7955d9bb7a49"
+  },
+  "checks": [
+    "Zero branch preserves FP32/BF16 values, base gradients and caller CPU RNG.",
+    "Two actual AdamW updates open the nonlinear branch and reset exactly.",
+    "Finite numerical fixture escapes the old affine-family rank bound; not a production-rank claim.",
+    "Weighted relative error preserves ambiguous native targets and its gradients."
+  ],
+  "language_measured": false,
+  "goal_achieved": false
+}
