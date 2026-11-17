@@ -280,12 +280,24 @@ operator, per-image objective and alias-preserving split. The
 is complete: all 68,948 cells remain, with 64,041 training cells (8,629
 forms), 4,907 physical-validation cells (952 forms), all aliases grouped and
 3,206 empty training images. Two independent CPU metric checks also pass.
-The [matched codec comparison](../references/binary_codec_comparison_protocol_20261118.md)
-is now separately registered: complete-training-support gradient/update/reset
-preflight, 6,000 updates per arm, exact optimizer replay and all-source initial/
-final reconstruction. It binds .98 fidelity, .80 macro exactness, control
-retention, no false blanks/ink and 40% fewer measured refinement events. This
-physical comparison admits no conditional language fit or autonomous score.
+The [matched codec comparison](../references/binary_codec_comparison_result_20261118.md)
+is terminal and fails six of nine conditions after all 6,000 updates per arm.
+Validation F1 is .932736083 continuous and .810400756 binary; binary has zero
+exact validation cells and loses .122335327 F1. The continuous branch also fails
+its .98 ceiling. Both have zero source false blanks/ink. Binary source plan/
+correction mean 30.015026 events passes the source event gate against 97.302489,
+but poor per-form and held-mask fidelity rejects the recipe. Event counts are
+not bits, throughput or language efficiency.
+
+All complete-training-support preflight updates reset exactly, both actual
+optimizer replays pass, and all 275,792 source reconstructions, correction
+events and 12,000 retained updates are independently recounted. Both final
+checkpoints and all source bytes remain. The 256.499-second, .593-GiB neural
+execution loads no contextual actor and proves no whole-model advantage. Do
+not extend this global 64-bit fit or select a snapshot. No conditional language
+fit is admitted. A new bounded architectural decision must address the measured
+common generalization loss as well as quantization; neither is a unique-cause
+diagnosis or an impossibility proof. All original language criteria remain.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
