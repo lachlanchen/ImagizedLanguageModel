@@ -1,0 +1,34 @@
+{
+  "schema": "ilm-binary-codec-preparation-v1",
+  "input_sha256": {
+    "scripts/prepare_binary_plan_codec.py": "d6e6e14dc3b77e63b24ea1676c2e855600bf63c39d6dd95e3ab1524094f9f7a5",
+    "ilm/visual_lm/binary_plan_codec_learning.py": "48085afd4f927cd6530fa39d2158b0de5a18a38eec12b65c12e6fe07f2cfa089",
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706",
+    "tests/test_binary_plan_codec_learning.py": "a451e1e57a5fa4ae31336fc1495b85700e68a1f8c8099c98d21d651b26b8395f",
+    "references/binary_visual_plan_direction_20261118.md": "92a0c72c7aae8703759706e915587e4fb90e454abedd097dc0e482c566c4b03e",
+    "references/binary_codec_preparation_protocol_20261118.md": "f8000b1066f8a94a54d295a8d0fb21e2bf29fe8f28a53aa50b67bd6a14aa9a7d",
+    "references/evidence/binary_codec_learning_cpu_20261118.json": "9bd58ffaf210bae1c36da618e2d9320ba53e8f7756e1fdbc906c0f71637b5461",
+    "references/evidence/occupancy_density_structure_result_20261118.json": "1fe55897ed41815eb20c77d7670f7b6d94599fd5396d31d22a11ba1471c17fb7",
+    "artifacts/nonlinear_feedback_alignment_v1/prepared.pt": "67dd0ceb806cf7a7f490425483562206b941b4c04a40897aae6d7610d5230d02",
+    "artifacts/nonlinear_feedback_alignment_v1/preparation.json": "3c6e437714e2b693c9772c88e7a287aefe7c10666c6595c8c04886bd1b99a150"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "source_cells": 68948,
+  "distinct_source_span_images": 29740,
+  "derived_native_rows": 33941,
+  "split_rule": "held when SHA256(mask) first eight bytes big-endian modulo ten is zero, except empty always trains",
+  "no_source_omissions": true,
+  "no_language_confirmation_access": true,
+  "maximum_seconds": 180,
+  "maximum_rss_gib": 2,
+  "cpu_threads": 2,
+  "minimum_entry_host_gib": 48,
+  "minimum_runtime_host_gib": 24,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "full_language_fit_authorized": false,
+  "automatic_retry": false
+}

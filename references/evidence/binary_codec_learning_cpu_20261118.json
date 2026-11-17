@@ -1,0 +1,21 @@
+{
+  "schema": "ilm-binary-codec-learning-cpu-v1",
+  "input_sha256": {
+    "ilm/visual_lm/binary_plan_codec_learning.py": "48085afd4f927cd6530fa39d2158b0de5a18a38eec12b65c12e6fe07f2cfa089",
+    "tests/test_binary_plan_codec_learning.py": "a451e1e57a5fa4ae31336fc1495b85700e68a1f8c8099c98d21d651b26b8395f",
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706"
+  },
+  "command": "env CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=. python -m unittest tests.test_binary_plan_codec_learning -v",
+  "tests_passed": 4,
+  "elapsed_seconds": 0.207,
+  "checks": [
+    "physical aliases, empty image and order-preserving partition",
+    "identical tensors with only quantization changed",
+    "complete versus accumulated per-image gradients in both modes",
+    "actual optimizer update and exact reset in both modes"
+  ],
+  "source_data_loaded": false,
+  "gpu_used": false,
+  "language_measured": false,
+  "full_language_fit_authorized": false
+}

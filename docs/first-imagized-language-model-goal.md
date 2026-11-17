@@ -274,7 +274,11 @@ partition, retain all original bytes and leave reserved language data untouched.
 Require faithful actual decoded images and lower actual refinement work before
 registering a conditional prior/correction fit. Supplied-image compression,
 mathematical normalization and numerical tests are not autonomous language.
-No new neural experiment or full fit is currently registered by this design.
+Four additional CPU checks now qualify the matched continuous/binary training
+operator, per-image objective and alias-preserving split. The
+[source-only preparation](../references/binary_codec_preparation_protocol_20261118.md)
+is prospectively registered. No neural experiment or full fit is currently
+registered by this design.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
