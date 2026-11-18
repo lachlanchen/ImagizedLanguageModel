@@ -22,10 +22,10 @@ FRESH = GUIDED / 'fresh'
 PUBLIC = ROOT / 'references/evidence/local_teacher_20261118'
 
 
-def infer(model_path, destination, train, test, pixels, start):
+def infer(model_path, destination, train, test, pixels, start, *, model_type=PicturedIdiom):
     require(sha(model_path) == load(model_path.parent / 'fit.json')['weights_sha256'], 'Checkpoint changed')
     model_weights = torch.load(model_path, weights_only=True, map_location='cpu')
-    net = PicturedIdiom(model_weights['landmarks']).cuda().eval()
+    net = model_type(model_weights['landmarks']).cuda().eval()
     net.load_state_dict(model_weights)
     ink = torch.as_tensor(np.unpackbits(pixels, axis=1), device='cuda', dtype=torch.bool)
     destination.mkdir()

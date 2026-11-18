@@ -18,8 +18,9 @@ from scripts.score_visual_writer_transfer import matching_pairs
 OUT = ROOT / 'artifacts/physical_answer_preference_v1'
 
 
-def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, destination=None, row_weights=None):
-    model = PicturedIdiom(initial['landmarks']).cuda()
+def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, destination=None, row_weights=None,
+        model_type=PicturedIdiom, shuffle_neighborhood=False):
+    model = model_type(initial['landmarks']).cuda()
     model.load_state_dict(initial)
     model.reader.eval()  # Disable dropout identically while differentiating through the reader.
     model.motor.requires_grad_(False)
@@ -30,6 +31,9 @@ def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, 
     begin = time.monotonic()
     for epoch in range(epochs):
         order = rng.permutation(len(y))
+        if shuffle_neighborhood:
+            donors = np.roll(order, len(order) // 2)
+            require((donors != order).all(), 'Neighborhood donors must be different rows')
         likelihood, ranking, seen = 0., 0., 0
         for pos in range(0, len(y), 192):
             if pos % 3072 == 0:
@@ -40,7 +44,12 @@ def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, 
                 partner = foil[ids]
                 paired = partner >= 0
             with torch.autocast('cuda', dtype=torch.bfloat16):
-                state = model.read(features[x[ids]])
+                pictures = features[x[ids]]
+                if shuffle_neighborhood:
+                    local = features[x[donors[pos:pos+len(ids)], 20:28]]
+                    state = model.read(pictures, local)
+                else:
+                    state = model.read(pictures)
                 positive = physical_score(model, state, bits[targets], feedback[targets])
                 weighted = positive if row_weights is None else positive * row_weights[ids]
                 reference_loss = -weighted.mean() / (4 * GROUPS + 1)
