@@ -1,0 +1,45 @@
+{
+  "report": {
+    "idiom_only": {
+      "distinct_bitmaps": 2335,
+      "distinct_codes": 2335,
+      "ambiguous_codes": 0,
+      "conflicting_types": 0,
+      "irreducible_training_occurrences": 0,
+      "heldout": {
+        "cases": 1788,
+        "glyphs": 34080,
+        "seen_target_cells": 23190,
+        "majority_correct_cells": 23190,
+        "all_training_shapes": 221,
+        "full_training_majority": 221,
+        "answer_in_one_source_span": 1788,
+        "all_individually_visible": 1788,
+        "majority_miss_source_span": 1567,
+        "majority_correct_within_eight": 184
+      }
+    },
+    "idiom_and_qa_training": {
+      "distinct_bitmaps": 3975,
+      "distinct_codes": 3957,
+      "ambiguous_codes": 14,
+      "conflicting_types": 32,
+      "irreducible_training_occurrences": 358,
+      "heldout": {
+        "cases": 1788,
+        "glyphs": 34080,
+        "seen_target_cells": 33888,
+        "majority_correct_cells": 33805,
+        "all_training_shapes": 1655,
+        "full_training_majority": 1612,
+        "answer_in_one_source_span": 1788,
+        "all_individually_visible": 1788,
+        "majority_miss_source_span": 176,
+        "majority_correct_within_eight": 656
+      }
+    }
+  },
+  "program_sha256": "d69320a3d67ae5320c6c9f059406ffcc928012c05377948ecefb68f7d867d952",
+  "weights_sha256": "0d0d9477076d28557493e1e76a027884117589716d50fe718ae4960f49dc74a0",
+  "scope": "Training-majority reference lookup and source availability only; no learned answer selection."
+}

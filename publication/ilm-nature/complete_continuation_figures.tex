@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_ordered_neighborhood_article.py.
+% Literal captions copied from their source inputs by build_glyph_planner_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -387,4 +387,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{c}, Number of exactly copied prefixes at each length for 3,845 training expressions and 3,845 previously unseen combinations. Each target glyph was supplied to the shared controller as an image during this copying test.
 \textbf{d}, On the same unfamiliar combinations, both arms received four output positions and committed one path per glyph. Clearing drawing history changed the number of complete copies from zero to 1,450. Curves in c and d show the number of strings correct through the indicated glyph.}
 \label{fig:ordered-neighborhood}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_46_glyph_planner.png}
+\caption{\textbf{Generating a missing expression with separate language and drawing states.}
+\textbf{a}, Each arriving tile updates the passage-dependent state through measurements of the actual ink. The physical drawing recurrence starts anew for each tile.
+\textbf{b}, Complete stopped expressions on two disjoint groups of held-out passages. The additional fits in the second test start from the aligned planner. The dashes identify conditions outside that comparison.
+\textbf{c}, Original emitted pixels in the first gain and loss in source order for the aligned planner with one answer history relative to the uniform writer.
+\textbf{d}, Number of passages with an exact prefix through each glyph on the first test. The fourth point counts four exact glyphs. Each reported complete answer also stopped at four.}
+\label{fig:glyph-planner}
 \end{figure*}
