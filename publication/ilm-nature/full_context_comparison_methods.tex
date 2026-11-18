@@ -1,0 +1,21 @@
+\subsection*{Matched full-context comparison and blind reading}
+Each arm completed 8,172 optimizer updates over 13,785 complete records in
+the same order. Each used the same six objectives, reader, writer and codec.
+Only the learned arm updated the 1,409,410,048 inherited contextual parameters.
+The deployed systems each retained 1,465,381,142 parameters. The host optimizer
+moments occupied 11,730,771,112 bytes with learned context and 455,490,728 bytes
+with frozen context. Monitored fitting took 60,127 and 4,309 seconds, respectively,
+with peak allocated device memory of 11.647 and 7.200\,GiB. These times cover
+the fits and exclude earlier pretraining, source preparation and generation.
+
+We retained the five designated checkpoints in each arm. Each generated short
+answers with a 128-position cap. Both final checkpoints also generated the
+long-book cohort with a 640-position cap. Intermediate checkpoints had no
+long-book measurement. Each response used its own emitted images as history.
+A single model reviewer with prior familiarity with the development set read
+180 anonymized boards, including 144 visible book prefixes, and froze all 792
+readings before reference scoring. No independent human adjudication was
+available. The original CPU audits verified the source order and final states.
+In two additional cold executions, one per arm, the final model reproduced its
+fixed book case, including emitted pixels and stopping. The two replays tested
+execution on one designated case outside the language cohort.

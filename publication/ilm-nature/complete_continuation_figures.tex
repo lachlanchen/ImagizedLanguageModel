@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_context_evidence_article.py.
+% Literal captions copied from their source inputs by build_full_context_comparison_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -203,8 +203,22 @@ image replacement. These are teacher inputs, not student answers.
 measured support from all six real update/reset trials. Every one of 309 context
 tensors changes only in treatment; sampled AdamW update error is zero and all
 states reset exactly. The 11.252\,GiB peak is an execution measurement, not a
-language score. The complete matched training comparison is in progress.
+language score. Figure~\ref{fig:full-context-comparison} reports the subsequent trained outputs.
 Inherited text pretraining remains a source of knowledge; neither independent
 from-scratch vision-language learning nor matched-quality efficiency is proved.}
 \label{fig:visual-context-evidence}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_32_full_context_comparison.png}
+\caption{\textbf{Context training changes termination while complete answers remain unreadable.}
+\textbf{a,} Correct normal answers at the five prescribed checkpoints for the learned
+and frozen contextual bodies. Both curves lie at zero. The 32 questions form 16
+same-passage pairs. \textbf{b,} Final outcomes for the twelve normal long-book
+prefixes. Capped outputs retain all 640 emitted positions.
+\textbf{c,} Complete final images for the first paired passage in evaluation order.
+The learned model stops after 34 positions for both questions. The frozen model
+reaches the cap on the first question and stops after 126 positions on the second.
+The blinded reader marked all four answers uncertain.}
+\label{fig:full-context-comparison}
 \end{figure*}

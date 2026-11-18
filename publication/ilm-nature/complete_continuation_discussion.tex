@@ -116,8 +116,10 @@ keeping its reader, writer, complete corpus and objectives matched. Six real
 update/reset trials establish gradients, optimizer arithmetic and memory
 support, not semantic understanding (Fig.~\ref{fig:visual-context-evidence}).
 Its 1,465,381,142-parameter deployment is smaller than the earlier actors but
-inherits text pretraining. Full training is in progress; no autonomous language
-gain or matched-quality efficiency is assigned to it. Earlier smaller trainable
+inherits text pretraining. After the complete fit, the learned body stops on every long book prefix.
+Neither arm produces a readable complete answer on this cohort
+(Fig.~\ref{fig:full-context-comparison}). The experiment therefore supplies
+no matched-quality estimate of language-learning efficiency. Earlier smaller trainable
 bodies failed, so trainability alone is not a sufficient explanation.
 
 Resource claims concern the entire deployed system. The evaluated full

@@ -1,0 +1,17 @@
+\subsection*{Learning the entire context changes stopping}
+The final learned and frozen contextual bodies each produce zero correct
+complete answers to 32 normal questions, zero pairs with both questions correct
+among 16 passages, and zero readable complete answers. All five checkpoints
+share these three outcomes (Fig.~\ref{fig:full-context-comparison}a).
+Removing either the question or the passage at the final checkpoint also gives
+zero correct answers. Strict exactness alone could miss an alternative correct
+phrasing. Here, the reader could not recover a complete answer from the marks.
+
+The long-book comparison distinguishes termination from coherent writing.
+The learned model stops on all twelve normal prefixes after 209--415 emitted
+positions. The frozen model stops on two, both blank, and reaches the 640-position
+cap on ten. Neither arm earns coherence credit on any complete book continuation
+(Fig.~\ref{fig:full-context-comparison}b). Across all 792 streams, 741 readings
+are uncertain and 51 blank. Panel~c shows the complete final outputs for both
+questions from the first paired passage. Isolated legible forms coexist with
+uncertain writing through the remainder of the answer.
