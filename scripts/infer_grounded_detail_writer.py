@@ -17,6 +17,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader',required=True,type=Path,help='Trusted trained passage reader from this project')
     parser.add_argument('--writer',required=True,type=Path)
+    parser.add_argument('--residual',type=Path,help='Optional trained stroke network for unfamiliar source neighbourhoods')
     parser.add_argument('--output',required=True,type=Path)
     for name in ('passage','question'):
         group=parser.add_mutually_exclusive_group(required=True)
@@ -34,6 +35,11 @@ def main():
         inputs.append(np.packbits(ink.reshape(-1,1024),axis=1))
     reader=joblib.load(args.reader)
     writer=GroundedDetailWriter.load(args.writer)
+    if args.residual is not None:
+        import torch
+        from ilm.visual_lm.residual_ink_writer import ResidualInkWriter
+        torch.set_num_threads(2)
+        writer=ResidualInkWriter.load(writer,args.residual)
     with threadpool_limits(limits=2):
         output,(left,right)=answer(reader,writer,*inputs)
     args.output.mkdir(parents=True,exist_ok=False)
