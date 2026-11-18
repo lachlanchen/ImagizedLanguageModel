@@ -37,6 +37,7 @@ def main():
     weights.add_argument("--arm", choices=("paired", "deranged"), default="paired")
     weights.add_argument("--checkpoint-dir", type=Path,
                          help="Use a fitted grounded writer with the original bitmap memory")
+    parser.add_argument("--locate-entry", action="store_true", help="Locate a unique pictured 【head】 from the question before reading a dictionary card")
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     args = parser.parse_args()
     if args.output.exists():
@@ -52,6 +53,13 @@ def main():
     directory = args.checkpoint_dir or WORK / args.arm
     net = load_writer(directory, args.device)
     memory = WORK / "memory.npy"
+    selection = "whole_source"
+    if args.locate_entry:
+        from ilm.visual_lm.pictured_record_selection import select_visible_record
+        from scripts.prepare_pictured_entry_answers import Rasterizer
+        renderer = Rasterizer()
+        markers = [np.frombuffer(renderer.tile(c), np.uint8) for c in "【】"]
+        streams[0], selection = select_visible_record(*streams, *markers)
     raw, stopped = respond(net, np.load(memory), *streams, args.device)
     args.output.parent.mkdir(exist_ok=True, parents=True)
     with TemporaryDirectory(dir=args.output.parent) as tmp:
@@ -59,7 +67,7 @@ def main():
         dest.mkdir()
         (dest / "answer.bin").write_bytes(raw)
         page(raw).save(dest / "answer.png")
-        write_json(dest / "receipt.json", dict(stopped=stopped, cells=len(raw)//128,
+        write_json(dest / "receipt.json", dict(stopped=stopped, selection=selection, passage_cells=len(streams[0]), cells=len(raw)//128,
                    weights_sha256=sha(directory/"final.safetensors"), memory_sha256=sha(memory)))
         dest.rename(args.output)
     print(args.output / "answer.png")

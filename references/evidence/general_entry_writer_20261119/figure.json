@@ -1,0 +1,169 @@
+{
+  "table": [
+    [
+      "Writer",
+      "Simple / 1,136",
+      "New wording / 96",
+      "English / 1,136",
+      "DRCD pairs / 1,042",
+      "DuReader / 571"
+    ],
+    [
+      "Parent",
+      "0",
+      "0",
+      "0",
+      "21",
+      "16"
+    ],
+    [
+      "Shuffled",
+      "38",
+      "2",
+      "46",
+      "16",
+      "16"
+    ],
+    [
+      "Matched",
+      "284",
+      "19",
+      "74",
+      "12",
+      "15"
+    ],
+    [
+      "Located",
+      "1103",
+      "60",
+      "249",
+      "12",
+      "15"
+    ]
+  ],
+  "dimensions": {
+    "yan_bronze": [
+      480,
+      32
+    ],
+    "yan_oracle": [
+      480,
+      32
+    ],
+    "failed_output": [
+      416,
+      32
+    ],
+    "located_output": [
+      416,
+      32
+    ],
+    "failed_reference": [
+      416,
+      32
+    ]
+  },
+  "examples": {
+    "yan_bronze": {
+      "exact": true,
+      "reference_sha256": "01fa6e216c862bb25a8ab5346353befaa748acb4074d097ce1d4c748376f5210",
+      "receipt": {
+        "entry": "E07105",
+        "split": "train",
+        "sources": [
+          {
+            "stage": "oracle",
+            "label": "J04903",
+            "raster_sha256": "23998b41961981227f1e561252efe9905fffa33f54f7d4e0bd8356a9d288e580",
+            "original_sha256": "768d8f8023a9e845b5800230f4bec028d50d30fac54b1f07f43000dac465b913",
+            "ink_sha256": "40a791e75366fa89bb4a3dc752e94146d4f6d1e0afc7de46f711af7c18f19185"
+          },
+          {
+            "stage": "bronze",
+            "label": "B02975",
+            "raster_sha256": "05d42357749c995fa6daf8b11feb1c46c5394da0f96628f3037fa042f0bcd519",
+            "original_sha256": "1ea9f7d0e1d947001ec099cab0f45b718ebccfff670a6a48551ea4647ca0f8a5",
+            "ink_sha256": "115ebf6a4bfc2524979fb500f839dffa3f6d6e309b79846030aff86f33e6624f"
+          }
+        ],
+        "cell_counts": [
+          29,
+          13,
+          15
+        ],
+        "stopped": true,
+        "unidentified_or_ambiguous": 0,
+        "source_sha256": "0d634bbf78f14f5862671b9763e0fb2206a99ca3e5fbe380478b71a2d9e59ace",
+        "answer_sha256": "01fa6e216c862bb25a8ab5346353befaa748acb4074d097ce1d4c748376f5210",
+        "question_sha256": "e98e128cc0f2424b1c0fa865bcd5c9941f4042f231c2c5e544d51c113feac3cf",
+        "weights_sha256": "c30230774a9eaa2575103371ffa1fd353215a60fac9070d5154c2026de7d6cb7",
+        "memory_sha256": "e5c98825c0896bac250f8cc73dfc6d29c9f7f557f70230efd7d1671423b51340"
+      }
+    },
+    "yan_oracle": {
+      "exact": true,
+      "reference_sha256": "2cdada8ec52c0924d0eec1d766b833305e63fe722093039d44d0d9299b203894",
+      "receipt": {
+        "entry": "E07105",
+        "split": "train",
+        "sources": [
+          {
+            "stage": "oracle",
+            "label": "J04903",
+            "raster_sha256": "23998b41961981227f1e561252efe9905fffa33f54f7d4e0bd8356a9d288e580",
+            "original_sha256": "768d8f8023a9e845b5800230f4bec028d50d30fac54b1f07f43000dac465b913",
+            "ink_sha256": "40a791e75366fa89bb4a3dc752e94146d4f6d1e0afc7de46f711af7c18f19185"
+          },
+          {
+            "stage": "bronze",
+            "label": "B02975",
+            "raster_sha256": "05d42357749c995fa6daf8b11feb1c46c5394da0f96628f3037fa042f0bcd519",
+            "original_sha256": "1ea9f7d0e1d947001ec099cab0f45b718ebccfff670a6a48551ea4647ca0f8a5",
+            "ink_sha256": "115ebf6a4bfc2524979fb500f839dffa3f6d6e309b79846030aff86f33e6624f"
+          }
+        ],
+        "cell_counts": [
+          29,
+          14,
+          15
+        ],
+        "stopped": true,
+        "unidentified_or_ambiguous": 0,
+        "source_sha256": "0d634bbf78f14f5862671b9763e0fb2206a99ca3e5fbe380478b71a2d9e59ace",
+        "answer_sha256": "2cdada8ec52c0924d0eec1d766b833305e63fe722093039d44d0d9299b203894",
+        "question_sha256": "08337cdeba65b1c77a0b07e6d353bfd5ed493e59827d060fe5acbb89abfd8138",
+        "weights_sha256": "c30230774a9eaa2575103371ffa1fd353215a60fac9070d5154c2026de7d6cb7",
+        "memory_sha256": "e5c98825c0896bac250f8cc73dfc6d29c9f7f557f70230efd7d1671423b51340"
+      }
+    },
+    "failure": {
+      "row": 2,
+      "requested": {
+        "card": 0,
+        "entry": "E01451",
+        "head": "耳",
+        "family": "09a44f6acb267b54b12e31e4157a0cb6645e55eb29ecd71fbfd959906fdf6e29",
+        "field": "读音",
+        "stage": "bronze",
+        "value": "ěr",
+        "glyph": "B16241",
+        "raster": "0178f30183adeb6f4c366273eabbe1325da75800a58435811deb07caf6977756"
+      },
+      "copied_form": "B07033",
+      "copied_head": "乃",
+      "located_exact": true
+    }
+  },
+  "series": [
+    [
+      561,
+      568,
+      7
+    ]
+  ],
+  "image_input_reproduced": true,
+  "yan_train_forms": [
+    "L06986",
+    "S01648"
+  ]
+}
