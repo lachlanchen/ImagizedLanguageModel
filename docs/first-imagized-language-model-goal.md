@@ -39,6 +39,8 @@ The [shared-layout writer](../references/shared_layout_writing_result.md) drew 6
 
 The [grounded two-typeface trial](../references/grounded_detail_writing_result.md) couples the trained full-question reader with a local ink writer. On 3,170 official development questions it selected 565 exact source spans and wrote 124 complete correct Serif answers from Sans inputs. It scored nine exact on 3,158 exchanged questions, and seven both-correct pairs out of 3,100. Answer content and length still depend on selecting a visible span. A 10,833-parameter neural fallback raised withheld shape F1 from .660 to .751. Its advantage over copying (.0271) fell below the required .03 and yielded no additional exact answers. Keep this as a grounded writing reference and preserve the full free-writing, stopping, historical transfer and matched-quality cost criteria.
 
+The [pictured title experiment](../references/visual_title_transducer_protocol.md) tests independent selection, composition and stopping. Of 834 eligible development titles, 46 require joining visible glyphs and 64 require drawing a glyph absent from the full prompt. Both native free-writing arms have now failed [complete blind review](../references/native_continuous_blind_result.md).
+
 ## Current model decision: full-context recipe rejected
 
 The [complete full-context comparison](../references/trainable_visual_context_result_20261117.md)
@@ -559,10 +561,7 @@ Both native fits and the independent CPU schedule audit are complete.
 The [fit receipt](../references/evidence/continuous_image_training_completed_20261118.json)
 records 27,570 updates, 5,142,954 next-image exposures, 5,170,524 stop
 decisions and ten snapshots. Monitored training totals 1,306.37 seconds
-on one RTX 4090 D with 1.416 GiB peak allocated memory. Generation and
-reading are separate. Use the existing serial evaluation owner and the
-[anonymous reading workflow](native-continuous-image-language.md) before
-assigning language credit. A training-only frozen encoder cache gives
+on one RTX 4090 D with 1.416 GiB peak allocated memory. The [completed blind evaluation](../references/native_continuous_blind_result.md) covers all 792 original outputs. Both final arms give zero of 32 readable or correct answers and zero of 12 coherent long continuations. The eight-component model reached the cap on every long normal book. Preserve the frozen failure. A training-only frozen encoder cache gives
 1.53–2.86× faster warm forward/backward on three complete CPU cases with
 identical measured codes, losses and gradients. This establishes neither GPU
 training acceleration nor a matched-quality advantage over a text model.

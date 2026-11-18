@@ -1,0 +1,95 @@
+{
+  "original": {
+    "question": "请写出这篇文章的标题。",
+    "font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "partitions": {
+      "training": {
+        "eligible": 2362,
+        "titles": 2362,
+        "counts": {
+          "source_paragraphs": 2403,
+          "unsupported": 41
+        },
+        "passage": {
+          "contiguous": 2030,
+          "missing_glyph": 205,
+          "distributed": 127
+        },
+        "full_prompt": {
+          "contiguous": 2030,
+          "missing_glyph": 205,
+          "distributed": 127
+        },
+        "unknown": {},
+        "source_sha256": "5497aa2f81908e31d6b0e27d99b1f90ab63a8f58fa92fffe5d17cf62eba0c212",
+        "passage_sha256": "5b4723480775417cb612821556cb72b4cf07fd3b50723e391bd21dddfd40976e",
+        "title_sha256": "76dc43490a386680665f78fcffc75d6e5d72f5b94cccf348253ce8a513cdd8d6",
+        "roster_sha256": "e97147479ff9917104575640d560f115166d314c9018b0f92a0f33d04e68d126",
+        "target_cells": 13419,
+        "input_passage_cells": 1197676
+      },
+      "development": {
+        "eligible": 834,
+        "titles": 834,
+        "counts": {
+          "source_paragraphs": 848,
+          "unsupported": 12,
+          "empty": 2
+        },
+        "passage": {
+          "contiguous": 724,
+          "distributed": 46,
+          "missing_glyph": 64
+        },
+        "full_prompt": {
+          "contiguous": 724,
+          "distributed": 46,
+          "missing_glyph": 64
+        },
+        "unknown": {
+          "titles_with_unseen_glyph": 34,
+          "unseen_target_positions": 35
+        },
+        "source_sha256": "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f",
+        "passage_sha256": "788769f108634609bd040224a864cd83991386dfa938de62383345dd8a767ba8",
+        "title_sha256": "22f426a421e4d74110f3c7d181f6d0fd6bb231535459884229156d8379d50f76",
+        "roster_sha256": "71894b2b3b607443889033f99bf107ed945ab829596444491afca4d543c83af4",
+        "target_cells": 4475,
+        "input_passage_cells": 424993
+      }
+    },
+    "question_sha256": "f3af6d0a0c82e8230bc4ce8131c4ea503e6c3d6cedc9717e6f5f0f7ae49eec6a",
+    "elapsed_seconds": 6.496963854879141,
+    "program_sha256": "3695c43a49f6330fe044f171d9b3881e478a056cdefe98818cc41faf2acc5955",
+    "protocol_sha256": "89d02037a6c471ddef81bab7fb72dcac39d02fdb2d6153f896054d42a452796b"
+  },
+  "independent_packed_recount": {
+    "train": {
+      "rows": 2362,
+      "classes": {
+        "contiguous": 2030,
+        "missing_glyph": 205,
+        "distributed": 127
+      },
+      "unknown": [
+        0,
+        0
+      ]
+    },
+    "dev": {
+      "rows": 834,
+      "classes": {
+        "contiguous": 724,
+        "distributed": 46,
+        "missing_glyph": 64
+      },
+      "unknown": [
+        34,
+        35
+      ]
+    }
+  },
+  "train_dev_shared_titles": 0,
+  "train_dev_shared_passages": 0,
+  "reported_preparation_sha256": "3e98700fdceb283235c80dfcb1101a5ef98bf944506a458555f958ee9385d470"
+}
