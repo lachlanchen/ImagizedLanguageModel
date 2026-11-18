@@ -70,11 +70,11 @@ def fit_arm(name, initial, features, inputs, targets, contexts, options, schedul
     opt = torch.optim.AdamW(trainable, lr=0.0006, weight_decay=0.01)
     rng = np.random.default_rng(613)
     mask = torch.arange(GROUPS * 4 + 1, device=inputs.device) % GROUPS != 0
-    test_rows = torch.arange(17, device=inputs.device)
+    test_rows = torch.arange(256, device=inputs.device)
     with torch.no_grad():
         full, original = model.teacher_logits(features[inputs[test_rows]], bits[targets[test_rows]])
         cached, copy = writer_logits(model, contexts[test_rows], bits[targets[test_rows]])
-        require(torch.equal(original, copy) and torch.allclose(full, cached, atol=2e-4, rtol=2e-4),
+        require(torch.equal(original, copy) and torch.equal(full, cached),
                 'Cached context disagrees with original teacher path')
     path = OUT / name
     path.mkdir()
