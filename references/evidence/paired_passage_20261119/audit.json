@@ -1,0 +1,58 @@
+{
+  "first_examples": {
+    "forward": {
+      "row": 42,
+      "ids": [
+        "TRAIN_3768_QUERY_1",
+        "TRAIN_3768_QUERY_3"
+      ],
+      "questions": [
+        "宏霸数码集团成立于哪一年？",
+        "宏霸数码集团最大的单一股东是谁？"
+      ],
+      "output": "1999年；Veron International Limited",
+      "reference": "1999年；Veron International Limited",
+      "stopped": true
+    },
+    "reverse": {
+      "row": 43,
+      "ids": [
+        "TRAIN_3768_QUERY_3",
+        "TRAIN_3768_QUERY_1"
+      ],
+      "questions": [
+        "宏霸数码集团最大的单一股东是谁？",
+        "宏霸数码集团成立于哪一年？"
+      ],
+      "output": "Veron International Limited；1999年",
+      "reference": "Veron International Limited；1999年",
+      "stopped": true
+    },
+    "missed": {
+      "row": 0,
+      "ids": [
+        "TRAIN_3570_QUERY_0",
+        "TRAIN_3570_QUERY_1"
+      ],
+      "questions": [
+        "ChewingOSX / 酷音输入法的作者是谁？",
+        "在艺术协中，高嘉良和唐凤有何种关系？"
+      ],
+      "output": "前开发者以及ChewingOSX / 酷音输入法作者；台湾台中市台中一中、后保送台大资讯工程系。。",
+      "reference": "高嘉良；共同创办了艺立协",
+      "stopped": true
+    }
+  },
+  "gains": 107,
+  "losses": 124,
+  "interval_pp": [
+    -1.201359850358854,
+    0.6191274719006591
+  ],
+  "complete_candidate_recount": 423,
+  "cpu_replayed_rows": [
+    42,
+    43,
+    0
+  ]
+}

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_independent_entry_article.py.
+% Literal captions copied from their source inputs by build_paired_passage_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -584,4 +584,10 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_72_independent_questions.png}
 \caption{\textbf{Wording diversity improves answer selection on independently authored prompts.} \textbf{a}, The first clear gain and the first clear error of the shared-update writer on questions from local Qwen3-8B. The images show the generated answers, including the misplaced pronunciation and oracle form of the neighbouring entry. \textbf{b}, Strict complete-image and stop counts. In the corrections row, the 4,544 scheduled requests reduce to 1,136 distinct question--card--target combinations. \textbf{c}, Mean training loss over nonpadding actions for the three 51,777-parameter fits. The supplementary replay control repeats the original questions at the same target positions for the same number of updates.}
 \label{fig:independent-questions}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_73_paired_passage.png}
+\caption{\textbf{Question order transfers more reliably than question wording.} \textbf{a}, First exchanged pair for which the refined reader wrote both complete answers correctly. The same founding year and company name appear in reverse order. \textbf{b}, First failed request in corpus order, with the actual generated image and the reference. \textbf{c}, Internal held-out results. Each ordered request must match the entire target image and stop. Each distinct pair contributes two requests. The erased-order control receives the same question order for both requests. \textbf{d}, Percentage of official development pairs answered in both orders. All three conditions use the same frozen passage reader. The final two share planner weights. Constraining the reading regions recovered 505 of 4,800 pairs with the shorter Chinese instruction. All plotted values derive from saved answer pixels.}
+\label{fig:paired-passage}
 \end{figure*}

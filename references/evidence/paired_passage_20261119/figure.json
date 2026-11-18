@@ -1,0 +1,67 @@
+{
+  "table": [
+    [
+      "Reader and input",
+      "Ordered requests",
+      "Both orders",
+      "Single questions"
+    ],
+    [
+      "Supplied split, original reader",
+      "440 / 6,086",
+      "220 / 3,043",
+      "434 / 1,788"
+    ],
+    [
+      "Learned split, original reader",
+      "437 / 6,086",
+      "217 / 3,043",
+      "434 / 1,788"
+    ],
+    [
+      "Learned split, refined reader",
+      "423 / 6,086",
+      "210 / 3,043",
+      "419 / 1,788"
+    ],
+    [
+      "Refined reader, order erased",
+      "212 / 6,086",
+      "0 / 3,043",
+      "—"
+    ],
+    [
+      "Varied instructions, original reader",
+      "438 / 6,086",
+      "218 / 3,043",
+      "434 / 1,788"
+    ],
+    [
+      "Ordered decoder, varied instructions",
+      "438 / 6,086",
+      "218 / 3,043",
+      "434 / 1,788"
+    ]
+  ],
+  "series": [
+    [
+      10.7917,
+      0.0,
+      0.0,
+      7.7292
+    ],
+    [
+      10.75,
+      0.0,
+      9.6042,
+      7.6875
+    ],
+    [
+      10.7917,
+      10.5208,
+      10.7708,
+      7.7292
+    ]
+  ],
+  "externalNote": "On the shorter Chinese instruction, the same weights rose from 0 to 505 of 4,800 both-correct pairs when the decoder enforced contiguous questions."
+}

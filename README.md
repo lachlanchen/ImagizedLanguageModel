@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A 101,144-parameter visual reader answered two questions about the Guangmao Railway with **364.6公里；三茂铁路股份有限公司**. Reversing the questions exchanged the two answer images. On the official Chinese passage benchmark, the shorter instruction initially produced zero correct pairs in both orders. Constraining the same learned action scores recovered 505 of 4,800 pairs. Most pairs still contain a wrong answer. [Run the released model](models/pictured_passage_zh/README.md) · [Experiment and failure cases](references/paired_passage_result.md)
+
+[![Actual answer images, including a wrong answer, and results on changed instructions](publication/ilm-nature/figures/Figure_73_paired_passage.png)](publication/ilm-nature/manuscript.pdf#page=97)
+
 A compact visual reader answered 66 of 96 Chinese dictionary questions written separately by a local model. Repeating the original training questions for the same compute and answer exposures gave 18. A request about 明 elicited *bright* and its bronze form. A request about 编 beginning with 老师您好 elicited the wrong headword. Figure 72 shows both original outputs. [Results and limits](references/independent_entry_result.md) · [Run the reader](models/independent_entry_reader/README.md)
 
 [![Pictured questions and actual outputs for 明 and 编, with results from matched replay and new wording](publication/ilm-nature/figures/Figure_72_independent_questions.png)](publication/ilm-nature/manuscript.pdf#page=96)

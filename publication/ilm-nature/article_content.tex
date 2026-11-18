@@ -12,6 +12,8 @@ data preparation. This distinction matters: the current benchmark studies
 learning from rendered Chinese, rather than discovering a script from raw
 archaeological photographs.
 
+We test whether a change in what the reader is asked produces the corresponding change in its answer pixels. Two questions about the same passage supply a direct test. Exchanging their order preserves the available ink and passage facts but exchanges the required answers. Changing only the pictured instruction tests whether the model recognizes the same task under new wording.
+
 \plate{Figure_1_mechanism}{\textbf{Initial visual language interface and its conditional generation test.}
 \textbf{a}, Rendered or native writing supplies ordered image cells to a causal
 visual reader. Text rendering is an optional host interface. \textbf{b}, A
@@ -829,6 +831,7 @@ an alignment repair.
 \input{pictured_entry_writer_results.tex}
 \input{entry_question_reader_results.tex}
 \input{independent_entry_results.tex}
+\input{paired_passage_results.tex}
 \clearpage
 \input{complete_continuation_figures.tex}
 \clearpage
@@ -993,6 +996,7 @@ External pretraining remains part of the model's provenance.
 \input{pictured_entry_writer_methods.tex}
 \input{entry_question_reader_methods.tex}
 \input{independent_entry_methods.tex}
+\input{paired_passage_methods.tex}
 
 \subsection*{Initial raster control data}
 The public Chinese stream contains 7,017 provenance-tracked records. Records
