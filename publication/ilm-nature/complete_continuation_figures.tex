@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_english_request_writer_article.py.
+% Literal captions copied from their source inputs by build_paired_stance_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -645,4 +645,11 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Reading order distinguishes questions with identical local neighborhoods.}
 \textbf{a}, Correct answers to all four requests in a headword--layout group, out of 1,136 groups per test construction. The local writer and the two global-attention writers share the same physical output format. \textbf{b}, The English and Chinese columns give complete responses on 96 independent requests per language. The DRCD column requires both answers to be correct on a shared passage. \textbf{c}, Outputs for the first held-out headword in the first layout. The field and script change together between the two displayed requests. Local and ordered outputs and both source-listed reference images are shown at their emitted resolution.}
 \label{fig:scoped-request-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_82_paired_stance_writer.png}
+\caption{\textbf{Opposing evidence can change the stance that the model writes.}
+\textbf{a}, Percentage of question pairs for which both written positions agree with the human annotations, on the validation and official cohorts. \textbf{b}, Stance, human quotation and complete stopped answer counts on 36 official responses. The last column measures retention on previously evaluated traditional Chinese questions. \textbf{c}, The first three emitted bitmap cells on each side of the first official pair. They label an affirmative or negative position before the model writes the quotation. The passages and human quotations remain in the local research corpus.}
+\label{fig:paired-stance-writer}
 \end{figure*}

@@ -1,0 +1,5 @@
+# Reading the position expressed in pictured passages
+
+Extend the reading, review and redline editions from the accepted English-question and reading-order manuscript. Add one results passage and methods paragraph after the previous writer comparison, summarize the official opposed-evidence outcome in the abstract, and add Figure 82. Preserve Figures 1–81 and the previous local package.
+
+Show both-passages-correct positions and whole responses separately. Use the registered matched and reassigned controls, a physical marker baseline, a question-erasure comparison and the availability of the literal source quotation. The independent audit will quantify whole-window copying and position errors on the official data. Include original model-emitted three-glyph position prefixes on the first official pair, irrespective of outcome. The full research passages and human quotations remain local. Verify the chart values and original pixels inside the editable figure, inspect the three compiled PDFs, and verify the delivered local copies.
