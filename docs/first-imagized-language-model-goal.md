@@ -386,7 +386,7 @@ frozen base pixels, all available at deployment. Greedy identity initialization
 matches the unchanged base for every possible plan. The implemented motor has
 2,385,763 parameters including its frozen 1,770,449-parameter codec; 615,314 are
 trainable correction parameters. This excludes all contextual language weights
-and is untrained. Three CPU checks pass for initial writing, likelihood,
+and was initially untrained. Three CPU checks pass for initial writing, likelihood,
 actual gradients/update/reset, fixed-codec identity and target-encoder exclusion.
 
 Its [complete source preparation](../references/evidence/residual_motor_preparation_result_20261118.json)
@@ -482,7 +482,23 @@ output path. All model, data, quality, source partition, initialization,
 6,000-update schedule, actual-generation/probability and resource rules stay
 fixed. Do not resume the failed weights or select a checkpoint. Observe its
 single serial owner and independently audit all actual final images before
-admitting any conditional-language work. Final motor quality remains unmeasured.
+admitting any conditional-language work. This fit is now terminal and audited.
+
+The [complete correction-motor result](../references/residual_plan_motor_comparison_result_20261118.md)
+fails seven of nine fixed conditions after all 6,000 updates and 768,000 training
+draws. Validation F1 declines from .943690071 to .933584204, macro F1 from
+.928693592 to .916099307, and exact cells from 94/4,907 to zero. Every one of
+the 3,206 true spaces gains ink. Actual plan-plus-generated work averages
+45.998129 events; this passes its event condition while physical quality fails.
+All 137,896 initial/final images, emitted actions, complete causal traces and
+6,000 retained updates are independently recounted. The strict GPU probability
+and optimizer replay checks pass. Numerical correctness does not repair writing.
+The monitored fit takes 434.507 seconds, including 140.133 seconds of pressure
+wait, at .485 GiB peak allocation. These physical-only costs exclude preparation,
+earlier codecs and any contextual foundation. Preserve the fixed base, failed
+motor, every prior attempt and original criteria. No unchanged extension,
+intermediate selection or conditional-language admission follows. Autonomous
+language remains unmeasured for this failed physical actor.
 
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
