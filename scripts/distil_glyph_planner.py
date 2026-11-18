@@ -12,7 +12,7 @@ from torch.nn import functional as F
 
 from ilm.visual_lm.glyph_planner import GlyphPlanner
 from ilm.visual_lm.idiom_ink import GROUPS, LANDMARKS, STOP, PicturedIdiom, nibbles, visual_input
-from scripts.search_glyph_planner import search
+from ilm.visual_lm.glyph_planner_search import search
 from scripts.train_glyph_planner import (
     DATA, DIVERSITY, FRESH, HINTS, JOINT, NEIGHBOR, OUT as PLAN, PREVIOUS, ROOT, WEIGHT,
     corpora, guard, infer, load, load_split, local_counts, matching_pairs, paired_interval,
@@ -203,4 +203,4 @@ if __name__=="__main__":
         write_new(OUT/(phase+"_resources.json"),dict(seconds=time.monotonic()-begin,
                   peak_allocated_bytes=torch.cuda.max_memory_allocated(),rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                   program_sha256=sha(Path(__file__)),protocol_sha256=sha(ROOT/"references/glyph_planner_transfer_protocol.md"),
-                  search_sha256=sha(ROOT/"scripts/search_glyph_planner.py"),device=torch.cuda.get_device_name()))
+                  search_sha256=sha(ROOT/"ilm/visual_lm/glyph_planner_search.py"),device=torch.cuda.get_device_name()))
