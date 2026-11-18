@@ -467,6 +467,23 @@ cause. Require an observed unequal original replay and exact candidate replay
 before a separately registered fresh full physical fit. No language, final
 motor quality or efficiency follows from numerical reproducibility.
 
+The [numerical diagnostic is complete](../references/residual_motor_replay_diagnostic_result_20261118.md).
+Original-mode repeats have identical loss, norm and model weights but depth/
+row/column embedding gradients differ by up to 5.820766091346741e-11, changing
+six optimizer-moment tensors. Strict global deterministic mode makes all four
+repeats exact, including every gradient and optimizer tensor. RNGs do not change;
+all twelve trial updates reset. The 1.674-second, .310-GiB execution qualifies
+this setting, not physical writing or language. Tiny numerical differences do
+not establish a cause of earlier unreadable language.
+
+A separately registered [fresh deterministic fit](../references/residual_motor_deterministic_comparison_protocol_20261118.md)
+uses the committed loaded worker with this one global execution flag and new
+output path. All model, data, quality, source partition, initialization,
+6,000-update schedule, actual-generation/probability and resource rules stay
+fixed. Do not resume the failed weights or select a checkpoint. Observe its
+single serial owner and independently audit all actual final images before
+admitting any conditional-language work. Final motor quality remains unmeasured.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
