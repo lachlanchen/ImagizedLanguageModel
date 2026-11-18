@@ -22,6 +22,10 @@ reported directly below.*
 
 ## Writing modern Chinese from a pictured classical sentence
 
+Figure 61 shows why legible glyphs can give a wrong answer. Asked to translate 高祖亦嘉之, the writer says Gaozu died. The source says he praised someone. Combining probabilities for identical ink saves 2,545 glyph edits across 1,024 passages, while both decoders earn zero faithful answers in the eighteen-passage reading. [Experiment and downloadable checkpoint](references/paired_student_result.md)
+
+![Original pictured translations, complete error counts and faithful-answer scores for the paired students.](publication/ilm-nature/figures/Figure_61_paired_student.png)
+
 A source-only model translated 冬，十月，吴少诚引兵还蔡州。 into 冬季，十月，吴少诚领兵返回蔡州。 by composing learned bitmap phrases. In 2,048 held-out passages it reproduced five changed complete glosses absent from training. It also corrupted a verb it had translated correctly elsewhere. A neural writer made more glyph errors than copying. Increasing phrase training from 32,768 to 55,872 pairs gave four accepted outputs in a further 24-passage reading, compared with three for the smaller model. [Try the image-to-image checkpoints](models/visual_edit_zh/README.md) · [Measured results](references/source_only_visual_translation.md)
 
 The source-conditioned editor in Figure 60 writes 脱因是蒙古人。 from 脱因，蒙古人也。 It makes 49 fewer glyph errors across 1,024 unseen passages, yet damages two previously faithful translations in an eighteen-change reading. A local pretrained vision model transcribes 16/18 pictures exactly and faithfully translates 8/18. [Figure 60 and original outputs](publication/ilm-nature/figures/Figure_60_pictured_revision.png) · [Complete experiment](references/pictured_revision_result.md)

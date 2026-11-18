@@ -45,18 +45,18 @@ def generate(packed, method, weights, *, receipt=None):
     state = load_file(str(weights))
     image = torch.from_numpy(np.unpackbits(packed, axis=1)).bool()[None]
     lengths = torch.tensor([image.shape[1]])
-    if method == "feedback":
+    if method in ("feedback", "paired", "pooled"):
         from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
 
         model = CausalGlyphTranslator(state["landmarks"], state["exemplars"])
         model.load_state_dict(state)
-        pixels, count, stopped, _ = model.eval().generate(image, lengths)
+        pixels, count, stopped, _ = model.eval().generate(image, lengths, pool_routes=method == "pooled")
         if receipt is not None:
             receipt["ending"] = "learned_stop" if stopped.item() else "96_cell_limit"
         return np.packbits(pixels[0, : count.item()].numpy(), axis=1)
     model = BlockTranslator(state["landmarks"])
     model.load_state_dict(state)
-    (result,) = model.eval().generate(image, lengths)
+    (result,) = model.eval().generate(image, lengths, pool_routes=method == "pooled")
     return np.packbits(result.numpy(), axis=1)
 
 
@@ -80,7 +80,7 @@ def main():
     )
     parser.add_argument(
         "--method",
-        choices=("phrases", "neural", "feedback", "revision"),
+        choices=("phrases", "neural", "feedback", "revision", "paired", "pooled"),
         default="phrases",
     )
     parser.add_argument("--weights", type=Path)
@@ -98,6 +98,8 @@ def main():
             "neural": "block_aligned.safetensors",
             "feedback": "causal_feedback.safetensors",
             "revision": "pictured_reviser.safetensors",
+            "paired": "paired_teacher.safetensors",
+            "pooled": "paired_teacher.safetensors",
         }[args.method]
     )
     source = (

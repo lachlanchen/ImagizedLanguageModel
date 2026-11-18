@@ -1,5 +1,6 @@
 """Clause-conditioned visual generation with a source pointer and an open ink writer."""
 
+import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -137,8 +138,46 @@ class CausalGlyphTranslator(nn.Module):
             )
         return loss
 
+    def image_outcomes(self, pictures):
+        # Physical equality is exact, including novel ink and repeated source cells.
+        def packed(tensor):
+            return np.packbits(tensor.cpu().numpy(), axis=-1).reshape(-1, 128)
+
+        bank, inverse = np.unique(
+            np.concatenate((packed(self.exemplars), packed(pictures))),
+            axis=0,
+            return_inverse=True,
+        )
+        device = pictures.device
+        indices = torch.as_tensor(inverse, device=device)
+        count = len(self.exemplars)
+        return (
+            torch.from_numpy(np.unpackbits(bank, axis=1)).to(device).bool(),
+            indices[:count],
+            indices[count:].reshape(pictures.shape[:2]),
+        )
+
+    def certified_outcome(self, state, attention, keys, outcomes):
+        bank, exemplar_ids, source_ids = outcomes
+        prob = self.route(state).double().softmax(-1)
+        batch = len(state)
+        mass = prob.new_zeros(batch, len(bank) + 1)
+        mass.scatter_add_(
+            1, source_ids, attention.double().softmax(-1) * prob[:, COPY, None]
+        )
+        exemplars = self.prototype_scores(state, keys).double().softmax(-1)
+        mass.scatter_add_(
+            1, exemplar_ids.expand(batch, -1), exemplars * prob[:, EXEMPLAR, None]
+        )
+        mass[:, -1] = prob[:, END]
+        value, choice = mass.max(-1)
+        upper = mass.clone()
+        upper[:, :-1] += prob[:, DRAW, None]
+        upper.scatter_(1, choice[:, None], -1)
+        return choice, value > upper.max(-1).values
+
     @torch.inference_mode()
-    def generate(self, pictures, lengths, limit=96):
+    def generate(self, pictures, lengths, limit=96, *, pool_routes=False):
         if (
             limit < 1
             or pictures.ndim != 3
@@ -162,13 +201,23 @@ class CausalGlyphTranslator(nn.Module):
         stopped = torch.zeros_like(lengths, dtype=torch.bool)
         stream = pictures.new_zeros((len(lengths), limit, 1024))
         modes = lengths.new_full((len(lengths), limit), END)
+        outcomes = self.image_outcomes(pictures) if pool_routes else None
         for step in range(limit):
             q, h = self.history(pred, h)
             state, a, c = self.plan_steps(q, memory, keys, mask, lengths, center)
             center = c[:, 0]
             state = state[:, 0]
             mode = self.route(state).argmax(-1)
-            stopped = stopped | (mode == END)
+            if outcomes is not None:
+                choice, certified = self.certified_outcome(
+                    state, a[:, 0], image_keys, outcomes
+                )
+                is_end = choice == len(outcomes[0])
+                # A certified ink decision overrides even a hierarchical END.
+                stop_now = torch.where(certified, is_end, mode == END)
+            else:
+                stop_now = mode == END
+            stopped = stopped | stop_now
             modes[:, step] = mode.masked_fill(stopped, END)
             if stopped.all():
                 break
@@ -186,6 +235,11 @@ class CausalGlyphTranslator(nn.Module):
                 ink = self.motor(bits) > 0
                 ink[:, self.landmarks] = bits.bool()
                 pixels[paint] = ink
+            if outcomes is not None:
+                selected = certified & ~is_end & ~stopped
+                pixels[selected] = outcomes[0][choice[selected]]
+                # A pooled emission has no unique latent route.
+                modes[selected, step] = 4
             stream[:, step] = pixels
             lengths_out += ~stopped
             pred = self.embed(visual_input(pixels, self.landmarks))[:, None]

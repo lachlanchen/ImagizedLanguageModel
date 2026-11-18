@@ -2,6 +2,8 @@
 
 Updated: 2026-11-19. **Active; usable visual language remains unproved.**
 
+The paired teacher-label comparison is complete. Both independent students gave zero faithful answers among eighteen. Pooling routes to the same visible ink reduced 2,545 complete-answer edits but still yielded zero faithful translations. The next matched comparison trains the visible-image likelihood directly on all 55,872 real sentence pairs. Require improved complete meaning on fresh chapters before promotion. [Paired study](../references/paired_student_result.md) · [Full-corpus comparison](../references/visible_image_likelihood_protocol.md)
+
 ## Objective and deployment boundary
 
 Build a useful, independently running language model that reads visible writing,

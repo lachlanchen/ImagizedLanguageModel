@@ -31,7 +31,7 @@ from scripts.train_pictured_revision import (
 )
 
 
-def fresh(bank):
+def fresh(bank, *, earlier=(), seed="reviseread1"):
     prior = read_rows("train") + read_rows("heldout")
     chapters = {r["group"] for r in prior}
     chapters.update(
@@ -46,14 +46,15 @@ def fresh(bank):
         return hashlib.sha256(packed.tobytes()).digest()
 
     used = {identity(bank[r["x"]]) for r in prior}
-    for name, sub in [
-        ("pictured_clause_support_v1", ""),
-        ("causal_glyph_translation_v1", "evaluation"),
-        ("visual_feedback_recovery_v1", "evaluation"),
+    for name, sub, source_file, *roster_file in [
+        ("pictured_clause_support_v1", "", "copy"),
+        ("causal_glyph_translation_v1", "evaluation", "copy"),
+        ("visual_feedback_recovery_v1", "evaluation", "copy"),
+        *earlier,
     ]:
         d = ROOT / "artifacts" / name / sub
-        chapters.update(r["chapter"] for r in load(d / "rows.json"))
-        with np.load(d / "copy.npz") as words:
+        chapters.update(r["chapter"] for r in load(d / (roster_file[0] if roster_file else "rows.json")))
+        with np.load(d / (source_file + ".npz")) as words:
             cells = words["packed"]
             offs = words["offsets"]
             used.update(identity(cells[a:b]) for a, b in zip(offs, offs[1:]))
@@ -69,7 +70,7 @@ def fresh(bank):
                 5 <= len(r["x"]) <= 24 and 3 <= len(r["y"]) <= 48
             ):
                 continue
-            score = hashlib.sha256(f"reviseread1/{r['g']}/{r['i']}".encode()).digest()
+            score = hashlib.sha256(f"{seed}/{r['g']}/{r['i']}".encode()).digest()
             candidates.append((score, r))
     rows = []
     counts = Counter()

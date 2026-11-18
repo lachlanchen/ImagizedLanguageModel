@@ -1,0 +1,5 @@
+# Decoding whole answers by visible image probability
+
+The first-mark comparison recovered more archive and teacher targets than it lost for both references. Apply the same certified choice at every autonomous step to the frozen supplemented student. Keep the hierarchical decoder wherever the unassigned drawing probability could change the winner. Re-encode the actual emitted pixels for the next step and let the same model emit END. Use the same 96-cell cap.
+
+Use the original 1,024 source pictures, same two reference packets and eighteen source-marker passages. These are development comparisons following the first-mark probe. Count exact complete pictures, ink length, early and late stops, edits, and readable meaning. Blind the new answer alongside the original writer and the corpus gloss. Preserve earlier grades. If complete meaning improves over both the original and the phrase writer, repeat on new chapters before promotion. If exact first marks improve while answers collapse, inspect the learned END probability and generated lengths before choosing any new objective. The original checkpoint and original decoder remain available.

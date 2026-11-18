@@ -1,0 +1,153 @@
+{
+  "scores": {
+    "reference": {
+      "rows": 1024,
+      "denominator": 24088,
+      "arms": {
+        "source": {
+          "edits": 14560,
+          "exact": 12,
+          "changed_exact": 0,
+          "cells": 15454
+        },
+        "reference": {
+          "edits": 0,
+          "exact": 1024,
+          "changed_exact": 1012,
+          "cells": 24088
+        },
+        "composer": {
+          "edits": 13649,
+          "exact": 13,
+          "changed_exact": 9,
+          "cells": 15977
+        },
+        "parent": {
+          "edits": 24192,
+          "exact": 7,
+          "changed_exact": 4,
+          "cells": 29468
+        },
+        "archive": {
+          "edits": 21751,
+          "exact": 3,
+          "changed_exact": 1,
+          "cells": 26856
+        },
+        "teacher": {
+          "edits": 22338,
+          "exact": 3,
+          "changed_exact": 2,
+          "cells": 27774
+        },
+        "exchange": {
+          "edits": 27961,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 27774
+        },
+        "teacher_target": {
+          "edits": 15819,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 25204
+        }
+      },
+      "ci95": [
+        [
+          -0.010267552353670871,
+          0.05913426531307526
+        ],
+        [
+          -0.27339532139300193,
+          -0.19270998681560855
+        ]
+      ]
+    },
+    "teacher_target": {
+      "rows": 1023,
+      "denominator": 25025,
+      "arms": {
+        "source": {
+          "edits": 15280,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 15446
+        },
+        "reference": {
+          "edits": 15648,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 24080
+        },
+        "composer": {
+          "edits": 14116,
+          "exact": 1,
+          "changed_exact": 1,
+          "cells": 15969
+        },
+        "parent": {
+          "edits": 24091,
+          "exact": 1,
+          "changed_exact": 1,
+          "cells": 29460
+        },
+        "archive": {
+          "edits": 21656,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 26848
+        },
+        "teacher": {
+          "edits": 21750,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 27678
+        },
+        "exchange": {
+          "edits": 28035,
+          "exact": 0,
+          "changed_exact": 0,
+          "cells": 27751
+        },
+        "teacher_target": {
+          "edits": 0,
+          "exact": 1023,
+          "changed_exact": 1023,
+          "cells": 25025
+        }
+      },
+      "ci95": [
+        [
+          -0.02821223143292167,
+          0.03592329701864148
+        ],
+        [
+          -0.2900288174622535,
+          -0.21454399231635435
+        ]
+      ]
+    }
+  },
+  "stops": {
+    "parent": 997,
+    "archive": 1010,
+    "teacher": 1010
+  },
+  "routes": {
+    "parent": {
+      "1": 22184,
+      "0": 7284
+    },
+    "archive": {
+      "1": 17329,
+      "0": 9523,
+      "2": 4
+    },
+    "teacher": {
+      "1": 18686,
+      "0": 9071,
+      "2": 17
+    }
+  }
+}

@@ -28,8 +28,8 @@ SPECS = {
 }
 
 
-def configure(study):
-    paper.SOURCE = paper.ROOT / "references/evidence" / (study + "_20261118")
+def configure(study, date="20261118"):
+    paper.SOURCE = paper.ROOT / "references/evidence" / (study + "_" + date)
     paper.FIG, deck, _ = SPECS[study]
     paper.DECK = deck + ".pptx"
 
@@ -42,13 +42,13 @@ base.literal_figures = lambda: prior_captions().replace(
 )
 
 
-def export(study):
-    configure(study)
+def export(study, date="20261118"):
+    configure(study, date)
     paper.figure(study + "_figure.mjs")
 
 
-def verify(study):
-    configure(study)
+def verify(study, date="20261118"):
+    configure(study, date)
     ref = base.load(paper.SOURCE / "figure.json")
     ns = {
         "a": "http://schemas.openxmlformats.org/drawingml/2006/main",

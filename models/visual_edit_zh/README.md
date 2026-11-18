@@ -186,3 +186,14 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method revision --text
 ```
 
 The result reads 脱因是蒙古人。 Use `--image references/evidence/pictured_revision_20261118/loss_source.png` to reproduce the damaged calendar date. The two files required for inference are `composer_55k.msgpack.gz` and `pictured_reviser.safetensors`. Together they occupy 6.39 MB. On 1,024 new passages the model made 49 fewer glyph edits than the draft. In the eighteen changed passages reviewed for meaning it lost two previously acceptable drafts. [Scores, limits and training commands](../../references/pictured_revision_result.md)
+
+## Alternative glosses and pooled image probability
+
+The two experimental methods below use the same 2,251,925-parameter checkpoint. The first reproduces the supplemented student's original decision. The second combines copy and exemplar probabilities wherever they produce identical ink. Both take real glyph images and write a PNG, packed image bytes and a stopping receipt. The image strips below are part of Figure 61.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method paired --image references/evidence/paired_student_20261119/gain_source.png --output /tmp/ilm-paired-answer
+PYTHONPATH=. python scripts/infer_visual_translation.py --method pooled --image references/evidence/paired_student_20261119/gain_source.png --output /tmp/ilm-pooled-answer
+```
+
+Pooling reduces full-stream edit distance, but both students scored zero faithful modern translations on the eighteen reviewed passages. [Results and reproduced images](../../references/paired_student_result.md)

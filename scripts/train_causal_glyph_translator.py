@@ -30,12 +30,13 @@ OUT = ROOT / "artifacts/causal_glyph_translation_v1"
 SEED = 90421
 
 
-def prepare(rows, canonical):
+def prepare(rows, canonical, *, examples=None):
     canonical_rows = [
         (canonical[r["x"]].tolist(), canonical[r["z"]].tolist()) for r in rows
     ]
-    frequent = Counter(v for _, seq in canonical_rows for v in seq)
-    examples = np.array([v for v, _ in frequent.most_common(2048)])
+    if examples is None:
+        frequent = Counter(v for _, seq in canonical_rows for v in seq)
+        examples = np.array([v for v, _ in frequent.most_common(2048)])
     index = {int(v): i for i, v in enumerate(examples)}
     x = np.zeros((len(rows), max(len(src) for src, _ in canonical_rows)), np.int32)
     y = np.zeros((len(rows), max(len(tgt) for _, tgt in canonical_rows)), np.int32)
