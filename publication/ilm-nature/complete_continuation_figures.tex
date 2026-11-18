@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_composed_writer_article.py.
+% Literal captions copied from their source inputs by build_bitmap_history_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -603,4 +603,11 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_75_composed_writer.png}
 \caption{\textbf{Learning to select a source span leaves missing content unwritten.} \textbf{a}, An independently authored question asks which script appears in a handout's right column. The reference is small-seal script. \textbf{b}, A second passage describes five bronze seals, two of which are sent away. Both examples show complete, unaltered decoded images from the final weights and lie outside the benchmark. \textbf{c}, Exact terminated references by physical accessibility, with all stops counted separately. Rotating each question to the next case leaves its original passage and scoring reference fixed. \textbf{d}, Exact missing glyphs with the reference segment history and writing action supplied. Both renderers share the same writing context. Their errors precede autonomous feedback.}
 \label{fig:composed-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_76_bitmap_history.png}
+\caption{\textbf{Ordered glyph images predict Chinese spelling when the answer prefix is correct.}
+\textbf{a}, Exact next-image choices with the correct action and antecedent answer segments supplied. The ordered and shuffled conditions use identical human answers and bitmap counts. \textbf{b}, Exact complete references and exact positions of missing glyphs when each system uses its own output history. The rotated-question condition uses the ordered index. \textbf{c}, The ordered writer's complete output on the two original prompts in Fig.~\ref{fig:composed-writer}, with their references. All printed response images are taken directly from CPU decoding. The conditional spelling gain does not produce either requested answer.}
+\label{fig:bitmap-history}
 \end{figure*}

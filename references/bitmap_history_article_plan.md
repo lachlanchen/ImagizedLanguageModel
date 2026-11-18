@@ -1,0 +1,3 @@
+# Chinese spelling when the preceding answer is known
+
+Preserve Figure 75 and add a compact follow-up on four-glyph physical histories. Include strict complete answer counts, supplied-prefix missing-image accuracy and the position of the first departure from the reference. State the ordered and shuffled corpus sizes, memory cost and distinction between conditional spelling and independent language generation. Include a strip from each original author probe under the ordered-image model, with its reference, regardless of success. Verify recorded source hashes, native table, chart and three compiled editions before local Nutstore delivery.

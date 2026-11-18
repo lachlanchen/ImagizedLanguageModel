@@ -1,0 +1,223 @@
+{
+  "scores": {
+    "neural": {
+      "all": {
+        "records": 571,
+        "exact": 25,
+        "stopped": 459,
+        "length": 18148,
+        "edit_distance": 16893,
+        "reference_cells": 14289,
+        "input_absent_overlap": 102,
+        "input_absent_exact_position": 7
+      },
+      "absent_content_ink": {
+        "records": 300,
+        "exact": 0,
+        "stopped": 225,
+        "length": 10234,
+        "edit_distance": 10020,
+        "reference_cells": 7089,
+        "input_absent_overlap": 102,
+        "input_absent_exact_position": 7
+      },
+      "distributed_ink": {
+        "records": 94,
+        "exact": 0,
+        "stopped": 81,
+        "length": 2667,
+        "edit_distance": 2788,
+        "reference_cells": 2508,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      },
+      "single_span": {
+        "records": 177,
+        "exact": 25,
+        "stopped": 153,
+        "length": 5247,
+        "edit_distance": 4085,
+        "reference_cells": 4692,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      }
+    },
+    "ordered": {
+      "all": {
+        "records": 571,
+        "exact": 25,
+        "stopped": 462,
+        "length": 17432,
+        "edit_distance": 16348,
+        "reference_cells": 14289,
+        "input_absent_overlap": 97,
+        "input_absent_exact_position": 1
+      },
+      "absent_content_ink": {
+        "records": 300,
+        "exact": 0,
+        "stopped": 216,
+        "length": 10155,
+        "edit_distance": 10026,
+        "reference_cells": 7089,
+        "input_absent_overlap": 97,
+        "input_absent_exact_position": 1
+      },
+      "distributed_ink": {
+        "records": 94,
+        "exact": 0,
+        "stopped": 87,
+        "length": 2407,
+        "edit_distance": 2578,
+        "reference_cells": 2508,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      },
+      "single_span": {
+        "records": 177,
+        "exact": 25,
+        "stopped": 159,
+        "length": 4870,
+        "edit_distance": 3744,
+        "reference_cells": 4692,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      }
+    },
+    "shuffled": {
+      "all": {
+        "records": 571,
+        "exact": 25,
+        "stopped": 450,
+        "length": 18121,
+        "edit_distance": 16883,
+        "reference_cells": 14289,
+        "input_absent_overlap": 85,
+        "input_absent_exact_position": 4
+      },
+      "absent_content_ink": {
+        "records": 300,
+        "exact": 0,
+        "stopped": 212,
+        "length": 10478,
+        "edit_distance": 10245,
+        "reference_cells": 7089,
+        "input_absent_overlap": 85,
+        "input_absent_exact_position": 4
+      },
+      "distributed_ink": {
+        "records": 94,
+        "exact": 0,
+        "stopped": 83,
+        "length": 2604,
+        "edit_distance": 2755,
+        "reference_cells": 2508,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      },
+      "single_span": {
+        "records": 177,
+        "exact": 25,
+        "stopped": 155,
+        "length": 5039,
+        "edit_distance": 3883,
+        "reference_cells": 4692,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      }
+    },
+    "rotated": {
+      "all": {
+        "records": 571,
+        "exact": 24,
+        "stopped": 450,
+        "length": 17825,
+        "edit_distance": 16687,
+        "reference_cells": 14289,
+        "input_absent_overlap": 106,
+        "input_absent_exact_position": 7
+      },
+      "absent_content_ink": {
+        "records": 300,
+        "exact": 0,
+        "stopped": 215,
+        "length": 10224,
+        "edit_distance": 10173,
+        "reference_cells": 7089,
+        "input_absent_overlap": 106,
+        "input_absent_exact_position": 7
+      },
+      "distributed_ink": {
+        "records": 94,
+        "exact": 0,
+        "stopped": 77,
+        "length": 2796,
+        "edit_distance": 2761,
+        "reference_cells": 2508,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      },
+      "single_span": {
+        "records": 177,
+        "exact": 24,
+        "stopped": 158,
+        "length": 4805,
+        "edit_distance": 3753,
+        "reference_cells": 4692,
+        "input_absent_overlap": 0,
+        "input_absent_exact_position": 0
+      }
+    }
+  },
+  "conditional": {
+    "cells": 1525,
+    "exact": {
+      "neural": 162,
+      "ordered": 431,
+      "shuffled": 121
+    },
+    "ordered_vs_control": {
+      "neural": {
+        "gains": 356,
+        "losses": 87
+      },
+      "shuffled": {
+        "gains": 362,
+        "losses": 52
+      }
+    }
+  },
+  "corpus": {
+    "records": 192230,
+    "positions": 8424544,
+    "distinct_bitmaps": 7725,
+    "counts": {
+      "screens": 271574,
+      "search": 88385,
+      "zhidao": 103845
+    },
+    "archive_sha256": "643aa0d555b684bf3da68dc92516711223cecc899ed53f9e1ef1113dd44af571",
+    "preparation_seconds": 60.1323884120211,
+    "files": {
+      "lengths.npy": "44046a3f973ba0668d1b28793a101a4937228660b8cff51cc75b35f0909daa44",
+      "tiles.npy": "47cd33e2ccf91a348a6f75a7e4dd1d7fc3a395abec0ffbdd543fbad4a605da4e",
+      "License.docx": "1e653288b4bf59878d7ba56258c90411ce57306e00ed385905bd648f38c8a606",
+      "sequence.npy": "9ae7bfe2105b8d8e888c98fa0674badde085333f4c80085ab327fe238151995b",
+      "locators.jsonl": "e313f75dde3a1075b19013e48ff84b4822ad204ae8e15bda6c029c8a1c026e2c",
+      "ordered/next.npy": "c0bedf8bbb04e4855783ad58caab45110a53e16a757364c6b050f4f26d78636f",
+      "ordered/keys.npy": "0a65de698e428cd61ddc515809a517b625c0bc294daab745d81a915d2b27205a",
+      "shuffled/next.npy": "23d7c6efd5c5598bf4fa8488f04b3fd7136b9879b1520406e1e107e7875d8be1",
+      "shuffled/keys.npy": "a7cd366e20f95bd4c2d15e0516eed5f04dbdbbc84a007f677a7531950c0625ec"
+    }
+  },
+  "seconds": 11.373310158960521,
+  "archives": {
+    "shuffled.npz": "9a0c47d64bbba505b28c84c3aa48c82f670378070a8cdae10205692ae4618634",
+    "rotated.npz": "e41ffc5e9c6b4e0b54692b75ef482f61c61a87bb0de0457128bf74dfe087856f",
+    "neural.npz": "c7127054a2711cffe16d80e0b828c65cba85e7e8dd46efad92f0f886235aff6d",
+    "ordered.npz": "34403683d8f2fb515063e6d669f7b5d50e1becbf7862aad80f22e024f042fcb7",
+    "conditional.npz": "57e6ed47337bf1ccec4cc7cd883e03caab3585639d99a80f9ce7ef9d0c016e7f"
+  },
+  "peak_allocated_bytes": 59549696,
+  "peak_host_rss_kib": 1796584
+}

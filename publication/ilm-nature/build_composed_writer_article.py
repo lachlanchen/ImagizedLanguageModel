@@ -24,10 +24,11 @@ literal = base.literal_figures
 def captions():
     source = literal().replace("build_traditional_passage_article.py", "build_composed_writer_article.py")
     # Flush the preceding full-page plates before queuing the new figure.
-    before, opening, last = source.rpartition(r"\begin{figure*}")
-    if not opening or "fig:composed-writer" not in last:
+    head, label, tail = source.partition(r"\label{fig:composed-writer}")
+    before, opening, last = head.rpartition(r"\begin{figure*}")
+    if not opening or not label:
         raise ValueError("Missing final composition figure")
-    return before + "\\clearpage\n" + opening + last
+    return before + "\\clearpage\n" + opening + last + label + tail
 
 
 base.literal_figures = captions
