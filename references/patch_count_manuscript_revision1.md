@@ -1,0 +1,5 @@
+# Drawing the recorded continuation from context
+
+Add a results paragraph and a methods paragraph after the successor assignment study. The prior figure ends with two supplied glyphs. Figure 36 will show independently drawn patches, the first exact response, the first nonempty error and the first blank, with 12 cells of their original contexts and both output and reference. Report the independent nonempty and complete exact counts, all 334 article denominators, model size and fit versus end-to-end time. Include the actual full 言 answer. Also report the 1,024 unrestricted neural next-image comparisons and the failure of density contrast. Distinguish the two article cohorts and trained systems throughout.
+
+Retain the existing TeX and PDFs as a baseline. Rebuild the reading, review and cumulative redline editions, verify original image hashes, native table counts and figure location, inspect changed layouts and verify the subsequent local Nutstore delivery. Report remote cloud propagation as unverified.

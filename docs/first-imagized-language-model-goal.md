@@ -33,6 +33,8 @@ The [512-article successor comparison](../references/visual_successor_result.md)
 
 The [unrestricted drawing comparison](../references/context_contrast_drawing_result.md) tests the same writer without supplied successor images. Subtracting last-glyph density increased the average change between two contexts from 7.08 to 60.18 pixels, with zero exact successors across 1,024 drawings in every arm. Both new complete answers about 言 remained unreadable. Retire this decoding intervention.
 
+The [physical patch writer](../references/patch_count_writing_result.md) now provides a trained generative reference. Across 334 further articles, ordered supervision draws 18/668 exact successors spanning 14 characters, versus zero after rotation of training successors. The targets are absent from both input histories. Ordered writing still produces 348 blanks and no article pair with both independent successors correct. All four ordered free completions reach 128 cells and yield no coherent continuation or etymology. Preserve the successful images alongside the blanks and repeated outputs. This supports learning short-range succession from ink and leaves useful independent language and the matched-cost goal open.
+
 ## Current model decision: full-context recipe rejected
 
 The [complete full-context comparison](../references/trainable_visual_context_result_20261117.md)
