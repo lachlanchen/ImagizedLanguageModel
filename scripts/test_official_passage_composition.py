@@ -11,7 +11,7 @@ from scripts.fit_mixed_ink_reader import predict
 from scripts.prepare_pictured_entry_answers import Rasterizer, sha, load, write_json
 from scripts.train_paired_passage import ROOT, WORK, DEST, pad
 
-OUT = WORK/"official"
+OUT = WORK/"official_v2"
 SOURCE = ROOT/"data/raw/cmrc2018/cmrc2018_dev.json"
 WRAPPERS = ("请依次回答这两个问题：","依次作答：")
 
@@ -37,7 +37,12 @@ def prepare():
         for para in article["paragraphs"]:
             counts["original_paragraphs"]+=1
             text=para["context"]
-            key=sha256(ink(text)).digest()
+            try:
+                key=sha256(ink(text)).digest()
+            except ValueError:
+                counts["unrenderable_paragraphs"]+=1
+                counts["questions_on_unrenderable_paragraphs"]+=len(para["qas"])
+                continue
             if key in used or key in excluded:
                 counts["duplicate_or_overlap_paragraphs"]+=1
                 continue
@@ -51,8 +56,13 @@ def prepare():
                 if not assoc or not qa["question"]:
                     counts["unpictured_questions"]+=1
                     continue
+                try:
+                    question=ids(qa["question"])
+                except ValueError:
+                    counts["unrenderable_questions"]+=1
+                    continue
                 pool.append(len(qs))
-                qs.append(ids(qa["question"]))
+                qs.append(question)
                 aliases.append(set(ink(s) for s in assoc))
                 groups.append(g)
             for a,b in combinations(pool,2):
@@ -70,7 +80,7 @@ def prepare():
 
 
 @torch.inference_mode()
-def test(net, desc, dataset):
+def evaluate_checkpoint(net, desc, dataset):
     ps,qs,aliases,pairs,groups,prefixes,join,tiles,counts=dataset
     features=net.features(tiles)
     requests=[(g,q) for g,q in zip(groups,qs,strict=True)]
@@ -122,7 +132,7 @@ def test(net, desc, dataset):
 
 
 if __name__=="__main__":
-    for path,h in load(ROOT/"references/evidence/paired_passage_external_registration.json")["files"].items():
+    for path,h in load(ROOT/"references/evidence/paired_passage_external_registration_v2.json")["files"].items():
         assert sha(ROOT/path)==h,path
     OUT.mkdir(exist_ok=False)
     torch.cuda.set_per_process_memory_fraction(.86)
@@ -131,6 +141,6 @@ if __name__=="__main__":
     ps,qs,_,pairs,*_=dataset
     result=dict(source_sha256=sha(SOURCE),passages=len(ps),questions=len(qs),ordered_pairs=len(pairs),preparation=dataset[-1])
     for name in ("planner_with_original_reader","passage_composer"):
-        result[name]=test(restore(WORK/(name+".safetensors")).cuda(),name,dataset)
+        result[name]=evaluate_checkpoint(restore(WORK/(name+".safetensors")).cuda(),name,dataset)
     write_json(OUT/"result.json",result)
     print(result,flush=True)
