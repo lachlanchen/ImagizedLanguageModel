@@ -1,0 +1,73 @@
+{
+  "upstream": "CLUEbenchmark/OCNLI",
+  "revision": "b53efdee17257a5c33993cf6fcf8ffff0497ea0e",
+  "git_blobs": {
+    "README.md": "83edac210ab8f8e092136130e8f526dbcfd88105",
+    "data/ocnli/dev.json": "562b7c18c7ec7cdca0650df37bcd88e07bb2ee2b",
+    "data/ocnli/train.50k.json": "13e1456ee3bf6c78a3a3f6edb887c8b919d324a4"
+  },
+  "source_sha256": {
+    "README.md": "f1da61502d1f56db90adc8e07bd31806eb54d76d9bc516848d49a50824d83040",
+    "data/ocnli/dev.json": "001ded235d73a18dac68a45a38cd5f9b3f9311fa4246df623e199422c073ddc5",
+    "data/ocnli/train.50k.json": "cb47a6c00105bfb49bbb791dd537b284d3138f9f1ad5cd1e187afc470ff004e0"
+  },
+  "splits": {
+    "development": {
+      "raw": 3000,
+      "kept": 2947,
+      "excluded": {
+        "no_consensus": 50,
+        "font_coverage": 3
+      },
+      "labels": {
+        "entailment": 944,
+        "neutral": 1103,
+        "contradiction": 900
+      },
+      "premises": 2163,
+      "premises_with_three_labels": 35,
+      "premise_cells": 70456,
+      "claim_cells": 35682,
+      "files": {
+        "pixels.npy": "aaf3c8ae2d3e760fcdf5b7ec8576a273296da56969e677ccee6988b0a4f8cfea",
+        "rows.json": "b3ac236461e7aa0a12db284e6a4740cee2cad784077fbc826a14edf9ca63fe91",
+        "responses.npz": "5d70d02a1ab4befa7166b905f1fb69f8c2b612e71aab87cecb2a6f2eebdab51a",
+        "premises.npz": "4078fe51cc19faf339b8bae47693dc2dd6e5a74fe545f596ff44e46096f9f7ee",
+        "claims.npz": "41b474e5f0e8010acdfe288b9d97608be94bcb919708fc38db79c5cd8c319b8f"
+      }
+    },
+    "train": {
+      "raw": 50486,
+      "kept": 36819,
+      "excluded": {
+        "font_coverage": 62,
+        "development_overlap": 13526,
+        "conflicting_pair": 4,
+        "no_consensus": 49,
+        "duplicate_pair": 26
+      },
+      "labels": {
+        "entailment": 12250,
+        "neutral": 12559,
+        "contradiction": 12010
+      },
+      "premises": 5853,
+      "premises_with_three_labels": 5629,
+      "premise_cells": 892774,
+      "claim_cells": 411906,
+      "files": {
+        "pixels.npy": "7c5812bc1a3b8ec78770d1cca547d8278474276c9631affac90bb0e8f856c7e5",
+        "rows.json": "13dd14bb64ff194f29691d88b8722cfd68059a6ef66541d8ee20f4eff3586274",
+        "responses.npz": "9c96d423b16e365df3e297262505c00974fd8c0467f613739a2dbd67268e82e6",
+        "premises.npz": "22d945a0cde0bc3c5b2d9c8f2c651ad3c9dec84e203b2d041beac39116d75b06",
+        "claims.npz": "27da735bc56e0d5650c496bafa10f8e31b6c1c1e0ad150fefaf0e693fa07c24f"
+      }
+    }
+  },
+  "responses": [
+    "材料支持这个说法。",
+    "这个说法与材料矛盾。",
+    "仅凭材料无法确定。"
+  ],
+  "program_sha256": "8eeb41bb6a3393991ac70aaf916c070edf0e226fa58b9863e8d42fdf8914dc41"
+}
