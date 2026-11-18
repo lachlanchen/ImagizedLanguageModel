@@ -7,6 +7,12 @@ control shares the same native causal reader and local writing architecture.
 No pretrained language body, tokenizer or glyph inventory is loaded. The
 previously trained 7.42M image codec and corpus preparation still count as costs.
 
+On the question “請說明「言」字的演變。”, the trained model reached the
+128-cell cap with both greedy and sampled decoding. Neither image yielded a
+readable explanation. Separate typed and pictured executions produced
+byte-identical greedy answers. [See the complete actual outputs](../references/native_yan_inference_result.md)
+
+
 The [algorithm and probability law](../references/continuous_autoregressive_language_direction_20261118.md)
 separate continuous code density from exact image likelihood. Actual generated
 pixels are re-encoded as history; an unrendered code is never substituted for
