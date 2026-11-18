@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_same_passage_writer_article.py.
+% Literal captions copied from their source inputs by build_english_request_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -631,4 +631,18 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Historical forms from a shared image-stream writer.}
 \textbf{a}, Attribution of the penultimate output cell on 1,136 standard questions about 142 two-entry cards. Each card contains two different historical stages for each headword. \textbf{b}, Exact, stopped outputs across dictionary and modern passage tasks. The located condition adds a pictured-headword matching rule to the matched writer. New wordings were written independently by a local language model. \textbf{c}, Actual responses to two typed questions about the same one-entry card. Both responses match the lexical fact and archived form. The headword and facts were seen in training with different historical exemplars. \textbf{d}, First held-out response in corpus order that copied a distractor form from the requested stage. The second output applies the locator with identical weights. The reference uses the archived form of the requested headword.}
 \label{fig:general-entry-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_80_english_request_writer.png}
+\caption{\textbf{English questions about pictured Chinese entries.}
+\textbf{a}, Correct stopped answers on 96 English requests written by a separate local model. \textbf{b}, The standard and crossed English constructions each cover the same 1,136 targets. Four crossed requests for a headword contain identical multisets of glyphs. The Chinese column uses independently written Chinese questions. Dictionary scores use the visible-headword locator. \textbf{c}, Original response and source-reference images for the first gain over initialization and the first miss in corpus order among the 70 clearer requests.}
+\label{fig:english-request-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_81_scoped_request_writer.png}
+\caption{\textbf{Reading order distinguishes questions with identical local neighborhoods.}
+\textbf{a}, Correct answers to all four requests in a headword--layout group, out of 1,136 groups per test construction. The local writer and the two global-attention writers share the same physical output format. \textbf{b}, The English and Chinese columns give complete responses on 96 independent requests per language. The DRCD column requires both answers to be correct on a shared passage. \textbf{c}, Outputs for the first held-out headword in the first layout. The field and script change together between the two displayed requests. Local and ordered outputs and both source-listed reference images are shown at their emitted resolution.}
+\label{fig:scoped-request-writer}
 \end{figure*}
