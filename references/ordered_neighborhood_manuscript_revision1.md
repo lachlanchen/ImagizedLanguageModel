@@ -7,3 +7,5 @@ Include the training-only writing-state experiment if complete. Display exact tr
 Condense the accumulated abstract to a single paragraph of approximately 180 words. Preserve the research question, image input/output and recurrent feedback, the historical source task, a failed book test, and the strongest current free-writing and control results. Earlier experimental counts stay in their full results sections.
 
 Follow the frozen-state diagnosis through the separately registered two-state intervention. Tie its presentation to the complete canonical versus emitted path comparisons; label all target-informed scores as training-form diagnostics.
+
+Report shared visual control on genuine expressions and withheld synthetic recombinations separately. These inputs contain the requested expression itself. The new diagnostic must not inflate the paper's autonomous passage results.
