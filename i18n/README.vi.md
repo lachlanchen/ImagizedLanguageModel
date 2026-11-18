@@ -40,6 +40,14 @@ Sau 64 giây huấn luyện trên hai luồng CPU, mô hình đọc nhỏ đã c
 
 [Chạy mô hình đọc](../references/visual_extractive_reading_result.md) · [Bản thảo](../publication/ilm-nature/manuscript.pdf)
 
+## Vẽ chữ Hán tiếp theo từ ngữ cảnh
+
+Trong 668 ngữ cảnh của tập phát triển, việc dự đoán bố cục nét tổng thể trước khi vẽ đã nâng số ảnh khớp từng điểm ảnh với một tự dạng đã biết, có nét, từ 198 lên 649. Cả hai mô hình đều viết đúng ký tự kế tiếp trong nguyên văn 18 lần. Khi được hỏi về nguồn gốc của chữ 言, mô hình mới liên tục vẽ một hình giống số 0.
+
+![Vẽ chữ Hán tiếp theo từ ngữ cảnh](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[Kết quả và mô hình đã huấn luyện](../references/shared_layout_writing_result.md)
+
 ## Thử nghiệm viết tiếp trước đây
 
 2026-11-13

@@ -39,6 +39,14 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [読解モデルを実行](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
 
+## 文脈から次の漢字を描く
+
+開発用の668例で、字形全体のおおまかな配置を先に予測すると、既知の空白でない字形と画素単位で一致した出力は198例から649例に増えた。原文の次の文字と一致したのは、どちらのモデルでも18例だった。「言」の成り立ちを尋ねると、新しいモデルはゼロに似た形を繰り返した。
+
+![文脈から次の漢字を描く](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[実験結果と学習済みモデル](../references/shared_layout_writing_result.md)
+
 ## 以前の続きを生成する実験
 
 2026-11-13

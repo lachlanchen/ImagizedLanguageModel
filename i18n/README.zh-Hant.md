@@ -39,6 +39,14 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [執行閱讀模型](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
 
+## 從上文生成下一個漢字
+
+在開發集的 668 個上下文中，先預測整字的粗略布局，使與已知非空字形逐像素相同的輸出從 198 個增至 649 個。兩種模型都只有 18 次寫出原文中的下一個字。詢問「言」的演變時，新模型反覆寫出形似數字零的符號。
+
+![從上文生成下一個漢字](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[實驗結果與訓練模型](../references/shared_layout_writing_result.md)
+
 ## 先前的續寫實驗
 
 2026-11-13

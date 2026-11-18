@@ -28,6 +28,14 @@ In 64 seconds on two CPU threads, a small reader learned to select answer images
 
 [Run the reader](references/visual_extractive_reading_result.md) · [Manuscript](publication/ilm-nature/manuscript.pdf)
 
+## Drawing the next Chinese character
+
+A shared coarse ink layout increased exact matches to known nonempty glyphs from 198 to 649 in 668 development contexts. Both writers produced the recorded next character 18 times. The full response to the question about 言 repeated a zero-shaped mark.
+
+![Drawing the next Chinese character](publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[Experiment and trained model](references/shared_layout_writing_result.md)
+
 ## Earlier continuation trial
 
 2026-11-13

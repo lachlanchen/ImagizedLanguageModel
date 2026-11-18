@@ -40,6 +40,14 @@ En 64 secondes sur deux threads CPU, un petit modèle a appris à sélectionner 
 
 [Exécuter le modèle](../references/visual_extractive_reading_result.md) · [Manuscrit](../publication/ilm-nature/manuscript.pdf)
 
+## Dessiner le prochain caractère chinois
+
+Sur 668 contextes de développement, prédire la répartition générale des traits a fait passer de 198 à 649 le nombre de dessins identiques, pixel par pixel, à un glyphe connu et non vide. Les deux modèles ont produit le caractère suivant du texte source dans 18 cas. Interrogé sur l’origine de 言, le nouveau modèle a répété un signe en forme de zéro.
+
+![Dessiner le prochain caractère chinois](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[Expérience et modèle entraîné](../references/shared_layout_writing_result.md)
+
 ## Expérience antérieure de continuation
 
 2026-11-13

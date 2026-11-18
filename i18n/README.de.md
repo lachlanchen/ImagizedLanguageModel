@@ -38,6 +38,14 @@ Ein kleines Lesemodell lernte in 64 Sekunden auf zwei CPU-Threads, Antworten aus
 
 [Lesemodell ausführen](../references/visual_extractive_reading_result.md) · [Manuskript](../publication/ilm-nature/manuscript.pdf)
 
+## Das nächste chinesische Schriftzeichen zeichnen
+
+In 668 Kontexten des Entwicklungsdatensatzes stieg die Zahl der pixelgenauen Übereinstimmungen mit einer bekannten, nicht leeren Glyphe von 198 auf 649, wenn das Modell zuerst die grobe Strichverteilung vorhersagte. Beide Modelle zeichneten in 18 Fällen das tatsächlich folgende Zeichen. Auf die Frage nach dem Ursprung von 言 wiederholte das neue Modell eine nullförmige Figur.
+
+![Das nächste chinesische Schriftzeichen zeichnen](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[Versuch und trainiertes Modell](../references/shared_layout_writing_result.md)
+
 ## Früherer Versuch zur Textfortsetzung
 
 2026-11-13

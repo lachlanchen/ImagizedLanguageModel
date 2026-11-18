@@ -39,6 +39,14 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [독해 모델 실행](../references/visual_extractive_reading_result.md) · [논문](../publication/ilm-nature/manuscript.pdf)
 
+## 문맥을 보고 다음 한자 그리기
+
+개발용 문맥 668개에서 글자 전체의 대략적인 획 배치를 먼저 예측하자 공백이 아닌 기존 글자 모양과 픽셀 단위로 일치한 출력이 198개에서 649개로 늘었다. 원문에 실제로 이어지는 글자를 맞힌 횟수는 두 모델 모두 18회였다. 言의 유래를 묻자 새 모델은 숫자 0을 닮은 모양을 반복했다.
+
+![문맥을 보고 다음 한자 그리기](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[실험 결과와 학습된 모델](../references/shared_layout_writing_result.md)
+
 ## 이전 이어쓰기 실험
 
 2026-11-13

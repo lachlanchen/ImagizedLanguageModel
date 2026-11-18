@@ -40,6 +40,14 @@ Un pequeño modelo aprendió a seleccionar respuestas en pasajes chinos en 64 se
 
 [Ejecutar el lector](../references/visual_extractive_reading_result.md) · [Manuscrito](../publication/ilm-nature/manuscript.pdf)
 
+## Dibujar el siguiente carácter chino
+
+En 668 contextos de desarrollo, predecir primero la distribución general de los trazos elevó de 198 a 649 el número de dibujos que coincidían píxel por píxel con un glifo conocido no vacío. Ambos modelos acertaron el siguiente carácter del texto original en 18 casos. Ante una pregunta sobre el origen de 言, el nuevo modelo repitió una figura parecida a un cero.
+
+![Dibujar el siguiente carácter chino](../publication/ilm-nature/figures/Figure_37_shared_layout.png)
+
+[Experimento y modelo entrenado](../references/shared_layout_writing_result.md)
+
 ## Ensayo anterior de continuación
 
 2026-11-13
