@@ -34,7 +34,11 @@ def main():
             raw=getattr(args,side+'_text')
             sides.append(text_cells(raw) if raw else np.empty((0,1024),np.uint8))
     torch.set_num_threads(2)
-    state=torch.load(args.weights,weights_only=True,map_location='cpu')
+    if args.weights.suffix=='.safetensors':
+        from safetensors.torch import load_file
+        state=load_file(str(args.weights),device='cpu')
+    else:
+        state=torch.load(args.weights,weights_only=True,map_location='cpu')
     net=PicturedIdiom(state['landmarks']).eval();net.load_state_dict(state)
     pix=torch.from_numpy(context_pixels(*sides))[None]
     out,length,stop=net.generate(visual_input(pix,net.landmarks))
