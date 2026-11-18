@@ -54,3 +54,20 @@ PNG layout only places the emitted pixels in rows. Complete image review and
 frozen readings precede reference scoring. A passed fixed-cell development test
 still requires proportional-layout retention, independent execution, untouched
 source confirmation and historical transfer before the full goal is achieved.
+
+A complete snapshot can also run outside the training directory on a new aligned
+prompt image. It contains the neural codec weights, so this path reads no corpus
+or separate decoder archive:
+
+```bash
+CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/infer_continuous_image_language.py \
+  --checkpoint artifacts/continuous_autoregressive_full_v1/k8/model_0013785.pt \
+  --image prompt.png --output artifacts/my_visual_answer --device cpu
+```
+
+Use `--input-glyphs N` to exclude white grid padding. Typed input is supported
+with `--text '問題……' --font /path/to/input-font.otf` in place of `--image`;
+the font renders input only. The model writes all output pixels itself. Output
+contains `answer.png`, exact binary arrays and a receipt with stopping, cap and
+checkpoint identity. Existing output directories are refused. These commands
+do not establish that the still-unqualified research model answers correctly.
