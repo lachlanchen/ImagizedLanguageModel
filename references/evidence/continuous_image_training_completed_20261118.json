@@ -1,0 +1,105 @@
+{
+  "fit_source_commit": "569a681a7e8e2a74abeb7f3343ab56bfddbf4db0",
+  "registration_sha256": "2ba3d898f6af7e306c4f3ad577ef330e3bce6ce8cd07c7fdeb3e28e6abe6992c",
+  "cpu_audit": {
+    "registration_sha256": "2ba3d898f6af7e306c4f3ad577ef330e3bce6ce8cd07c7fdeb3e28e6abe6992c",
+    "report_sha256": "ad3844de05c542ba8f95e804a326dcf467f3a8da988ad4d1b42ecaaff38b908e",
+    "complete": true,
+    "all_actual_updates_recounted": 27570,
+    "all_target_exposures_recounted": 5142954,
+    "all_stop_exposures_recounted": 5170524,
+    "actual_snapshots_checked": 10,
+    "neural_replay": false,
+    "language_quality_measured": false,
+    "goal_achieved": false
+  },
+  "audit_sha256": "0603a5ded3f5fc8ef3796c6c9dcb57a65f16309c087aaedf34b5c8dfb126cef4",
+  "arms": [
+    {
+      "components": 1,
+      "updates": 13785,
+      "target_exposures": 2571477,
+      "stop_exposures": 2585262,
+      "snapshots": [
+        {
+          "update": 0,
+          "file": "artifacts/continuous_autoregressive_full_v1/k1/model_0000000.pt",
+          "sha256": "f6c6b6fb454bbbc1f66e0758eff8abc97f64349e142209de39a414551851d018"
+        },
+        {
+          "update": 3447,
+          "file": "artifacts/continuous_autoregressive_full_v1/k1/model_0003447.pt",
+          "sha256": "4c0fd99b988ef8085a37d2b9d8a1e3580654d9df1ec7963b55ff568823dd96f8"
+        },
+        {
+          "update": 6893,
+          "file": "artifacts/continuous_autoregressive_full_v1/k1/model_0006893.pt",
+          "sha256": "968727f50337163603f292759f4bb1cd240bf2297ba0c65afff63a45eac55f7b"
+        },
+        {
+          "update": 10339,
+          "file": "artifacts/continuous_autoregressive_full_v1/k1/model_0010339.pt",
+          "sha256": "2cfe52f9fc033228cf4c0c3503be1ddca800bb4502daff6359ac5ef058e49cd2"
+        },
+        {
+          "update": 13785,
+          "file": "artifacts/continuous_autoregressive_full_v1/k1/model_0013785.pt",
+          "sha256": "7007a0540b351c9e00458d445b9405e2fe7918a7a5a13db2655b663f6bba943a"
+        }
+      ],
+      "common_initial_sha256": "f367aaecf0f80d2bb84e757f4a73308f792f8dda9475f115ed187c3472ca5205",
+      "ledger_sha256": "ef97e132ec96ccb1bfc5e23bc6ba28314a99858848940962f95051c561b70903",
+      "latest_sha256": "3cb1b9644c6bc97cc57e380721c2f18b551a713f37659173c0e2e0fd9685b073",
+      "codec_unchanged": true,
+      "language_quality_measured": false
+    },
+    {
+      "components": 8,
+      "updates": 13785,
+      "target_exposures": 2571477,
+      "stop_exposures": 2585262,
+      "snapshots": [
+        {
+          "update": 0,
+          "file": "artifacts/continuous_autoregressive_full_v1/k8/model_0000000.pt",
+          "sha256": "487dcb2da0bbc7466ab4cb85d9c6ffefd38e7d70a48d1456f7bcda1338c743eb"
+        },
+        {
+          "update": 3447,
+          "file": "artifacts/continuous_autoregressive_full_v1/k8/model_0003447.pt",
+          "sha256": "37a6feaedcc759cf6cbbb80123bdd4d9d425cf967babfebeccfa87db8a63b791"
+        },
+        {
+          "update": 6893,
+          "file": "artifacts/continuous_autoregressive_full_v1/k8/model_0006893.pt",
+          "sha256": "54368ade7d0396c1b9085b466301e1ec8f26fff541f4db1acf4e4db3a71ee2f1"
+        },
+        {
+          "update": 10339,
+          "file": "artifacts/continuous_autoregressive_full_v1/k8/model_0010339.pt",
+          "sha256": "0be48b94254361311ce5f7717d06475d44ad2f6538b32908f60bcae58c285d64"
+        },
+        {
+          "update": 13785,
+          "file": "artifacts/continuous_autoregressive_full_v1/k8/model_0013785.pt",
+          "sha256": "d08a466277cf61fa465fc0ef92323bcff3a54d7a065eeda784337174d397b71a"
+        }
+      ],
+      "common_initial_sha256": "f367aaecf0f80d2bb84e757f4a73308f792f8dda9475f115ed187c3472ca5205",
+      "ledger_sha256": "7aa48944c02c36ddb1efb58d713454c948366bba90c960524504b0ee9df35648",
+      "latest_sha256": "d6aca33bcbb93eff8ea148c1e3d0df1502971ac61a962b3868c520e542c77842",
+      "codec_unchanged": true,
+      "language_quality_measured": false
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "fit_resources": {
+    "elapsed_seconds": 1306.3668407481164,
+    "resource_wait_seconds": 50.04771254584193,
+    "peak_allocated_vram_gib": 1.4155387878417969,
+    "minimum_available_gib": 57.03193283081055
+  },
+  "scope": "Both fits under one monitored owner. Earlier codec training, data preparation, audit and autonomous evaluation are outside the fit timer.",
+  "language_quality_measured": false,
+  "matched_quality_efficiency_measured": false
+}

@@ -100,3 +100,42 @@ be replaced by the command. Scoring subsequently opens the reference answers.
 The report distinguishes missing intermediate book or erasure trials from
 observed zero scores. The development result applies to aligned, fixed-size
 glyph images.
+
+## Reusing a frozen encoder during training
+
+The two registered full fits used the ordinary encoder. Together they completed
+27,570 updates and 5,142,954 next-image training positions in 1,306.37 seconds
+on one RTX 4090 D, including 50.05 seconds waiting for resources. Peak
+PyTorch-allocated GPU memory was 1.416 GiB. Source preparation and earlier
+glyph-codec training fall outside this timer.
+[Fit and audit measurements](../references/evidence/continuous_image_training_completed_20261118.json)
+
+A subsequent CPU experiment reused the encoder output for byte-identical
+training images. The cache compares all 1,024 pixels and retains the original
+order and multiplicity of each record. The reader still receives one continuous
+visual observation per position. Distinct drawings can occupy separate entries.
+Evaluation bypasses the cache. Saving the model excludes the cached images and
+features.
+
+| Complete training record | Image positions | Distinct images | Ordinary forward + backward | Warm cache | Speed ratio |
+|---|---:|---:|---:|---:|---:|
+| Book | 513 | 211 | 4.608 s | 3.005 s | 1.53× |
+| Short-answer QA | 846 | 252 | 3.635 s | 1.598 s | 2.28× |
+| Longest preflight QA | 1,042 | 367 | 4.529 s | 1.586 s | 2.86× |
+
+Times are medians of three paired measurements on two CPU threads with the
+trained K=8 checkpoint. The cache was cold at the start of each record and warm
+during the timed repeats. Every code, both objective terms and all 94 parameter
+gradients matched exactly on these cases. Cold timings are included in the
+measurement file. GPU training speed, optimizer-step time, full-epoch savings
+and matched-quality language efficiency require their own measurements.
+[Paired CPU measurements](../references/evidence/frozen_training_encoder_cpu_20261118.json)
+
+For a fresh training experiment, construct
+`ilm.visual_lm.cached_training_encoder.CachedTrainingImageLanguage` with the
+same codec and model configuration as `ContinuousImageLanguage`. Use the
+existing `training_terms(ink, prompt_glyphs)` interface. Supply binary CPU
+glyphs to avoid a transfer back to the host for bitmap comparison.
+`cache_entries` bounds the number of stored features. Once the cache fills,
+new images still pass through the encoder. Weight changes invalidate entries.
+The ordinary model can load the resulting state dictionary for deployment.

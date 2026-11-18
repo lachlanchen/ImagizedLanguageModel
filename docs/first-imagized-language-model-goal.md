@@ -543,6 +543,19 @@ owner in the private handoff. Do not edit bound sources, duplicate its owner,
 restart on observation timeout, add unchanged epochs or infer language from loss.
 Quality, complete language and efficiency remain unmeasured before evaluation.
 
+Both native fits and the independent CPU schedule audit are complete.
+The [fit receipt](../references/evidence/continuous_image_training_completed_20261118.json)
+records 27,570 updates, 5,142,954 next-image exposures, 5,170,524 stop
+decisions and ten snapshots. Monitored training totals 1,306.37 seconds
+on one RTX 4090 D with 1.416 GiB peak allocated memory. Generation and
+reading are separate. Use the existing serial evaluation owner and the
+[anonymous reading workflow](native-continuous-image-language.md) before
+assigning language credit. A training-only frozen encoder cache gives
+1.53–2.86× faster warm forward/backward on three complete CPU cases with
+identical measured codes, losses and gradients. This establishes neither GPU
+training acceleration nor a matched-quality advantage over a text model.
+The registered fits used the ordinary encoder.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
