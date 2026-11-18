@@ -24,7 +24,7 @@ from scripts.score_visual_writer_transfer import matching_pairs, paired_interval
 OUT = ROOT/'artifacts/joint_reference_confirmation_v1'
 
 
-def integrated_check(net, fresh, bank, start):
+def integrated_check(net, fresh, bank, start, *, generated=None):
     state = load_file(str(MODELS/'historical_reader.safetensors'))
     plate, spans = SourcePlateReader().cuda().eval(), StageSpanReader().cuda().eval()
     for module, prefix in [(plate, 'reader.'), (spans, 'span.')]:
@@ -55,7 +55,7 @@ def integrated_check(net, fresh, bank, start):
             require(unchanged.all() and route.all(), 'Historical regression')
         report[name] = dict(exact=int(correct.sum()), unchanged=int(unchanged.sum()), routed=int(route.sum()))
     ink, n, stop, route = assess(net,plate,tensor(np.unpackbits(bank, axis=1)).bool(),fresh['context'],'intact',start,spans)
-    reference = load_split(OUT/'reference/generated.npz')
+    reference = load_split(OUT/'reference/generated.npz' if generated is None else generated)
     require(not route.any() and all(np.array_equal(a,reference[k]) for a,k in
             [(ink,'packed'),(n,'length'),(stop,'stopped')]), 'Modern route or output changed')
     report['modern_preserved'] = len(route)
