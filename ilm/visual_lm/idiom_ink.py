@@ -104,7 +104,7 @@ class PicturedIdiom(nn.Module):
         return self.generate_from_context(self.read(features),beam,limit)
 
     @torch.inference_mode()
-    def generate_from_context(self,ctx,beam=4,limit=8,*,observe_step=None):
+    def generate_from_context(self,ctx,beam=4,limit=8,*,observe_step=None,later_context=None):
         b=len(ctx);device=ctx.device
         ctx=ctx[:,None].expand(-1,beam,-1)
         hidden=ctx.contiguous()
@@ -117,6 +117,8 @@ class PicturedIdiom(nn.Module):
         rows=torch.arange(b,device=device)[:,None]
         for t in range(limit*GROUPS+1):
             slot,offset=divmod(t,GROUPS)
+            if later_context is not None and t==2*GROUPS:
+                ctx=later_context[:,None].expand(-1,beam,-1)
             inputs=self.inputs(previous,torch.full_like(previous,offset),feedback,ctx)
             h,_=self.causal(inputs.reshape(b*beam,1,-1),hidden.reshape(1,b*beam,-1).contiguous())
             h=h.reshape(b,beam,-1)

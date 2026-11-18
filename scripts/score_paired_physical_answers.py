@@ -16,14 +16,17 @@ DEST = OUT / 'paired_trajectories'
 TOLERANCE = .0001
 
 
-def physical_score(net, context, bits, feedback):
+def physical_score(net, context, bits, feedback, *, later_context=None):
     """Teacher-force one specified path, reading the rendered image at each boundary."""
     symbols = nibbles(bits).flatten(1)
     label = F.pad(symbols, (0, 1), value=STOP)
     previous = F.pad(symbols, (1, 0), value=17)
     step = torch.arange(label.shape[1], device=context.device)
     last = F.pad(feedback, (0, 0, 1, 0))[:, step // GROUPS]
-    seq = net.inputs(previous, (step % GROUPS).expand_as(label), last, context[:, None].expand(-1, len(step), -1))
+    conditioning = context[:, None].expand(-1, len(step), -1)
+    if later_context is not None:
+        conditioning = torch.where((step >= 2 * GROUPS)[None,:,None], later_context[:,None], conditioning)
+    seq = net.inputs(previous, (step % GROUPS).expand_as(label), last, conditioning)
     hidden, _ = net.causal(seq, context[None].contiguous())
     score = net.next_pattern(hidden).float()
     score[:, step % GROUPS != 0, STOP] = -torch.inf
