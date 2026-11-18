@@ -31,7 +31,15 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [結果と証拠の範囲](../references/native_paired_qa_learning_result.md)
 
-## 最新結果：全試行が完了、言語能力の予備基準は未達
+## 中国語の字形画像から答えを選ぶ
+
+小型の読解モデルを CPU の 2 スレッドで 64 秒間学習させました。学習に使わなかった中国語の文章に対する 1,788 問のうち、269 問で正解と画素単位で一致する回答画像を選びました。質問を白紙にすると正解は 18 問でした。別の自由生成モデルは「言」の字形の変遷を読める形で説明できませんでした。汎用的な文章生成と 1,000 倍の学習効率は引き続き検証課題です。
+
+![中国語の字形画像から答えを選ぶ](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[読解モデルを実行](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
+
+## 以前の続きを生成する実験
 
 2026-11-13
 

@@ -32,7 +32,15 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
-## Kết quả mới nhất: hoàn tất thử nghiệm, chưa đạt tiêu chí ngôn ngữ
+## Chọn câu trả lời từ ảnh chữ Hán
+
+Sau 64 giây huấn luyện trên hai luồng CPU, mô hình đọc nhỏ đã chọn đúng toàn bộ ảnh đáp án cho 269 trong 1.788 câu hỏi về các đoạn văn tiếng Trung dành riêng để đánh giá. Khi thay câu hỏi bằng ảnh trắng, số câu đúng giảm còn 18. Mô hình viết tự do riêng biệt vẫn chưa tạo được lời giải thích đọc được về lịch sử của chữ 言. Khả năng viết tổng quát và mục tiêu tăng hiệu quả huấn luyện 1.000 lần vẫn cần được kiểm chứng.
+
+![Chọn câu trả lời từ ảnh chữ Hán](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[Chạy mô hình đọc](../references/visual_extractive_reading_result.md) · [Bản thảo](../publication/ilm-nature/manuscript.pdf)
+
+## Thử nghiệm viết tiếp trước đây
 
 2026-11-13
 

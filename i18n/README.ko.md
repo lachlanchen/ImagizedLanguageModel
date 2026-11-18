@@ -31,7 +31,15 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [결과와 근거의 범위](../references/native_paired_qa_learning_result.md)
 
-## 최신 결과: 전체 실험 완료, 언어 능력 예비 기준 미달
+## 중국어 글자 이미지에서 답 고르기
+
+소형 독해 모델을 CPU 스레드 2개로 64초 동안 학습했습니다. 학습에 쓰지 않은 중국어 지문의 질문 1,788개 중 269개에서 정답과 픽셀 단위로 일치하는 답을 골랐습니다. 질문을 빈 이미지로 바꾸자 정답은 18개로 줄었습니다. 별도의 자유 생성 모델은 言의 변천사를 읽을 수 있는 형태로 설명하지 못했습니다. 범용 글쓰기 능력과 1,000배의 학습 효율은 아직 입증되지 않았습니다.
+
+![중국어 글자 이미지에서 답 고르기](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[독해 모델 실행](../references/visual_extractive_reading_result.md) · [논문](../publication/ilm-nature/manuscript.pdf)
+
+## 이전 이어쓰기 실험
 
 2026-11-13
 

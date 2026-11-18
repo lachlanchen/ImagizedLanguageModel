@@ -31,7 +31,15 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [結果與證據範圍](../references/native_paired_qa_learning_result.md)
 
-## 最新結果：完整實驗結束，語言能力預設標準未通過
+## 從漢字影像中選出答案
+
+一個小型閱讀模型用兩個 CPU 執行緒訓練了 64 秒，在保留的中文篇章上答對了 1,788 題中的 269 題，輸出的完整答案影像與參考答案逐像素相同。把問題遮成空白後，只答對了 18 題。另一套自由書寫模型仍未能寫出可讀的「言」字演變說明。通用書寫能力與千倍訓練效率仍待驗證。
+
+![從漢字影像中選出答案](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[執行閱讀模型](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
+
+## 先前的續寫實驗
 
 2026-11-13
 

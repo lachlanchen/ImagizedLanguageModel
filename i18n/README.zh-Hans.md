@@ -31,7 +31,15 @@ ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图
 
 [结果及证据范围](../references/native_paired_qa_learning_result.md)
 
-## 最新结果：完整实验结束，语言能力预设标准未通过
+## 从汉字图像中选出答案
+
+一个小型阅读模型用两个 CPU 线程训练了 64 秒，在留出的中文篇章上答对了 1,788 道题中的 269 道，输出的完整答案图像与参考答案逐像素相同。把问题遮成空白后，只答对了 18 道。另一套自由书写模型仍未能写出可读的「言」字演变说明。通用书写能力和千倍训练效率仍待验证。
+
+![从汉字图像中选出答案](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[运行阅读模型](../references/visual_extractive_reading_result.md) · [论文](../publication/ilm-nature/manuscript.pdf)
+
+## 此前的续写实验
 
 2026-11-13
 

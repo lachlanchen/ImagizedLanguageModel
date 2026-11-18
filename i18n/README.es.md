@@ -32,7 +32,15 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
-## Resultado más reciente: ensayo completo terminado, criterios lingüísticos no superados
+## Extraer respuestas de imágenes de caracteres chinos
+
+Un pequeño modelo aprendió a seleccionar respuestas en pasajes chinos en 64 segundos con dos hilos de CPU. En los pasajes reservados para la evaluación, devolvió la imagen exacta de la respuesta en 269 de 1.788 preguntas. Al borrar la pregunta, los aciertos bajaron a 18. El modelo independiente de escritura libre no produjo una explicación legible de la evolución del carácter 言. La escritura de propósito general y la mejora de eficiencia por un factor de 1.000 siguen pendientes de demostración.
+
+![Extraer respuestas de imágenes de caracteres chinos](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[Ejecutar el lector](../references/visual_extractive_reading_result.md) · [Manuscrito](../publication/ilm-nature/manuscript.pdf)
+
+## Ensayo anterior de continuación
 
 2026-11-13
 

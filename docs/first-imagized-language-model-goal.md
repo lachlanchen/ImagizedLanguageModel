@@ -702,19 +702,15 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The current 58/101/102-page reading/review/redline PDFs include the completed
-white-target failure, later isolated-reader falsification, source/preprocessing
-and label audits, rejected fixed encoder metric and six real full-context reset
-updates. Native Figures 30--31 retain original output/reference pixels and
-separate physical fidelity, reader qualification, update execution and language.
-All 337 prior figure assets and 154 prior embedded image contents remain.
-The [build evidence](../publication/ilm-nature/evidence/visual_context_evidence_article_build.json)
-records all 261 pages in layout overview and 43 detailed pages. Preserve the
-older 53/93/95-page baselines. These PDFs predate the now-completed full-context
-failure. Add the final matched scores and original output images under a bounded
-manuscript/figure revision plan; do not present their earlier pending statements
-as current status. Local Nutstore delivery and cloud
-propagation remain separate verification claims.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports
+native word-order evaluation in Figure 33 and free writing alongside supervised
+passage selection in Figure 34. The reading, review and redline PDFs contain
+63, 107 and 110 pages. All 280 pages received layout inspection. The two
+complete 言 outputs, a correct selection and a wrong selection are shown with
+their measured denominators. [Build verification](../publication/ilm-nature/evidence/visual_reading_writing_article_build.json)
+and [local delivery](../publication/ilm-nature/evidence/visual_reading_writing_local_sync.json)
+preserve the earlier editions and distinguish verified local copies from cloud
+propagation.
 
 ## Work-unit and resource rules
 

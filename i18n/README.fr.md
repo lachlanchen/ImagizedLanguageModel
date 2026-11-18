@@ -32,7 +32,15 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
-## Dernier résultat : essai complet terminé, critères linguistiques non atteints
+## Extraire une réponse à partir de glyphes chinois
+
+En 64 secondes sur deux threads CPU, un petit modèle a appris à sélectionner des réponses dans des passages en chinois. Sur des passages réservés à l’évaluation, 269 réponses sur 1 788 sont identiques à la référence au pixel près. Quand on efface la question, ce nombre tombe à 18. Le modèle distinct de génération libre n’a produit aucune explication lisible de l’évolution du caractère 言. La rédaction libre et le gain d’efficacité d’un facteur 1 000 restent à démontrer.
+
+![Extraire une réponse à partir de glyphes chinois](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[Exécuter le modèle](../references/visual_extractive_reading_result.md) · [Manuscrit](../publication/ilm-nature/manuscript.pdf)
+
+## Expérience antérieure de continuation
 
 2026-11-13
 

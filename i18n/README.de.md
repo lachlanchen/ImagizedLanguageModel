@@ -30,7 +30,15 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
-## Neuestes Ergebnis: Vollständiger Versuch beendet, Sprachkriterien verfehlt
+## Antworten aus chinesischen Schriftbildern auswählen
+
+Ein kleines Lesemodell lernte in 64 Sekunden auf zwei CPU-Threads, Antworten aus chinesischen Textpassagen auszuwählen. Bei 269 von 1.788 Fragen zu zurückgehaltenen Passagen stimmte das vollständige Antwortbild pixelgenau mit der Referenz überein. Bei ausgeblendeter Frage sank die Zahl auf 18. Das separate Modell für freies Schreiben erzeugte keine lesbare Erklärung zur Geschichte des Zeichens 言. Allgemeine Schreibfähigkeit und eine tausendfache Trainingseffizienz sind weiterhin offene Ziele.
+
+![Antworten aus chinesischen Schriftbildern auswählen](../publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[Lesemodell ausführen](../references/visual_extractive_reading_result.md) · [Manuskript](../publication/ilm-nature/manuscript.pdf)
+
+## Früherer Versuch zur Textfortsetzung
 
 2026-11-13
 

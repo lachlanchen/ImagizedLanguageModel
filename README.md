@@ -20,7 +20,15 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
-## Latest result: full trial complete; language pilot failed
+## Reading a Chinese passage from glyphs
+
+In 64 seconds on two CPU threads, a small reader learned to select answer images from Chinese passages. It returned the exact answer to 269 of 1,788 questions on held-out passages. Blanking the question reduced that count to 18. The separate free-writing model produced no readable explanation of the history of 言. General-purpose writing and a 1,000-fold efficiency gain remain open.
+
+![Reading a Chinese passage from glyphs](publication/ilm-nature/figures/Figure_34_visual_reading_writing.png)
+
+[Run the reader](references/visual_extractive_reading_result.md) · [Manuscript](publication/ilm-nature/manuscript.pdf)
+
+## Earlier continuation trial
 
 2026-11-13
 
