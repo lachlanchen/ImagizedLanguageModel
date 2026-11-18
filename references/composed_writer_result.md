@@ -1,0 +1,17 @@
+# Why the Chinese answer writer produces broken or irrelevant text
+
+The 731,384-parameter writer gave 25 exact, terminated responses to 571 held-out natural Chinese questions. All 25 responses were contiguous in the input. Returning the first sentence without looking at the question gave 66 exact references. Rotating the questions gave the pixel writer 24 exact answers. Thirteen were correct in both presentations. The supervised writer failed the registered independent composition test and the previous passage reader remains the released checkpoint. [Protocol](composed_writer_protocol.md) · [Figure 75](../publication/ilm-nature/figures/Figure_75_composed_writer.png)
+
+| Answer condition | Contiguous / 177 | Rearranged / 94 | Input-absent / 300 | Learned stop / 571 |
+|---|---:|---:|---:|---:|
+| Released passage reader | 0 | 0 | 0 | 571 |
+| Recurrent copy only | 25 | 0 | 0 | 390 |
+| Recurrent with training shapes | 25 | 0 | 0 | 459 |
+| Recurrent with pixel correction | 25 | 0 | 0 | 449 |
+| Pixel correction, rotated questions | 24 | 0 | 0 | 453 |
+
+Two failures can produce the impression of gibberish. First, the writer often chooses the wrong evidence. In an original example it repeated the passage about five bronze seals and two being sent away. Every character in the answer was clear. The question asked for the remaining number. Second, the raster correction moves pixels in already recognizable shapes. With correct preceding segments and the writing action supplied, the model chose the correct training bitmap for 162 of 1,525 missing cells. The renderer changed 1,355 candidates, damaging 106 correct ones and repairing one incorrect one. Only 57 were exact after correction. The supplied history removes earlier mistakes as an explanation for those changes. On 2,634 copy steps the pointer chose an admissible start 399 times and completed the correct span 235 times. [Supplied-history recount](evidence/composed_writer_20261119/supplied_history.json) · [Original probes](evidence/composed_writer_20261119/original_probes.json)
+
+A model-based reviewer assessed outputs from all five conditions with hidden labels on twelve fixed questions. Among the four requiring input-absent ink, one pixel-writer response was fully supported, one partially supported and two incorrect. Copying alone had the same category counts. No external factual validation was performed. Exact agreement with a single human image can miss other reasonable answers. The source-only baselines, arm-hidden assessment and actual output lengths complement that measure. [Blinded assessment](evidence/composed_writer_20261119/semantic_scores.json) · [Question-blind controls](evidence/composed_writer_20261119/shortcut_counts.json)
+
+The successful fit used one RTX 4090 D for 41.1 seconds, 1,458 optimizer updates, 2,565 training records, and 120.6 MiB of peak PyTorch allocations. A prior 18-epoch attempt exited at serialization and produced no checkpoint or development answers. Both attempts incurred training cost. The complete system includes the frozen 101,144-parameter passage reader and 2,692 stored training bitmaps. Code and aggregate evidence are public. The trained DuReader candidate, corpus and archived outputs are retained locally for noncommercial research. [Training](../scripts/train_composed_answer_writer.py) · [All counts and execution hashes](evidence/composed_writer_20261119/audit.json)

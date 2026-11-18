@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_traditional_passage_article.py.
+% Literal captions copied from their source inputs by build_composed_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -596,4 +596,11 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_74_traditional_passage.png}
 \caption{\textbf{Additional pictured questions improve extraction on two Chinese passage collections.} \textbf{a}, The first DRCD answer gained over matched replay. The reference is a year. Replay includes the year in a longer span. \textbf{b}, First remaining error. The question asks which region began academic research on Sanskrit. Both readers choose a person; the reference is Europe. All displayed strips contain the complete recorded images. \textbf{c}, Whole-image scores. For paired requests, both exchanged orders must terminate and match accepted references. The two DRCD instructions act on the same questions and passages. \textbf{d}, Percentage of individual DRCD outputs that equal an accepted answer or contain it with extra writing. Both categories require termination.}
 \label{fig:traditional-passage}
+\end{figure*}
+\clearpage
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_75_composed_writer.png}
+\caption{\textbf{Learning to select a source span leaves missing content unwritten.} \textbf{a}, An independently authored question asks which script appears in a handout's right column. The reference is small-seal script. \textbf{b}, A second passage describes five bronze seals, two of which are sent away. Both examples show complete, unaltered decoded images from the final weights and lie outside the benchmark. \textbf{c}, Exact terminated references by physical accessibility, with all stops counted separately. Rotating each question to the next case leaves its original passage and scoring reference fixed. \textbf{d}, Exact missing glyphs with the reference segment history and writing action supplied. Both renderers share the same writing context. Their errors precede autonomous feedback.}
+\label{fig:composed-writer}
 \end{figure*}
