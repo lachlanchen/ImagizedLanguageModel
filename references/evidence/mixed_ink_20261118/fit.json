@@ -1,0 +1,227 @@
+{
+  "natural_training": 7235,
+  "gap_training": 2048,
+  "training": [
+    {
+      "epoch": 1,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 4.378479127671983,
+      "routes_correct": 12695
+    },
+    {
+      "epoch": 2,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 3.004033126657874,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 3,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 2.683699662726359,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 4,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 2.4645163791330873,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 5,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 2.298401300982699,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 6,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 2.1735621003247645,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 7,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 2.056289130141866,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 8,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 1.9567633112418459,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 9,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 1.8669559147618031,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 10,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 1.7677639030804575,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 11,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 1.6863423516868636,
+      "routes_correct": 13379
+    },
+    {
+      "epoch": 12,
+      "examples": 13379,
+      "updates": 442,
+      "loss": 1.6064651182509713,
+      "routes_correct": 13379
+    }
+  ],
+  "qa": {
+    "normal": {
+      "cases": 1788,
+      "exact": 434,
+      "generate": 0
+    },
+    "swapped": {
+      "cases": 1783,
+      "exact": 5,
+      "generate": 0
+    },
+    "blank": {
+      "cases": 1788,
+      "exact": 5,
+      "generate": 0
+    },
+    "baseline_exact": 269,
+    "baseline_ci_pp": [
+      7.380165728504821,
+      11.148921545167479
+    ],
+    "swapped_ci_pp": [
+      21.981357134496683,
+      26.263244110727133
+    ],
+    "long_cases": 1108,
+    "long_exact": 164,
+    "normal_on_swappable": 434,
+    "sample_indices": [
+      [
+        "fixed",
+        0
+      ],
+      [
+        "fixed",
+        1
+      ],
+      [
+        "fixed",
+        2
+      ],
+      [
+        "success",
+        6
+      ]
+    ]
+  },
+  "gap": {
+    "windows": 17686,
+    "eligible_neighbors": 16154,
+    "all_four_absent": 12951,
+    "frozen_replay_identical": 17497,
+    "familiar": {
+      "gap": {
+        "exact": 437,
+        "total": 17686,
+        "routed_generate": 17686,
+        "retained": 17497,
+        "all_absent_exact": 292
+      },
+      "left": {
+        "exact": 16154,
+        "total": 16154,
+        "routed_generate": 0
+      },
+      "right": {
+        "exact": 16154,
+        "total": 16154,
+        "routed_generate": 0
+      },
+      "all_three": 387
+    },
+    "unseen": {
+      "gap": {
+        "exact": 437,
+        "total": 17686,
+        "routed_generate": 17686,
+        "retained": 17497,
+        "all_absent_exact": 292
+      },
+      "left": {
+        "exact": 16071,
+        "total": 16154,
+        "routed_generate": 0
+      },
+      "right": {
+        "exact": 16150,
+        "total": 16154,
+        "routed_generate": 0
+      },
+      "all_three": 385
+    }
+  },
+  "checks": {
+    "qa_prior": true,
+    "qa_question": true,
+    "familiar_retention": false,
+    "familiar_left": true,
+    "familiar_right": true,
+    "unseen_retention": false,
+    "unseen_left": true,
+    "unseen_right": true
+  },
+  "passed": false,
+  "fit_seconds": 42.83925844728947,
+  "elapsed_seconds": 59.92783148493618,
+  "gpu": "NVIDIA GeForce RTX 4090 D",
+  "peak_allocated_mib": 190.34228515625,
+  "parameters": 61972,
+  "writer_parameters": 2115971,
+  "output_sha256": {
+    "0_actual.png": "1857fb23f672ab106343a96413edae1f08a5125054b4bba19d0d9b93135ff9cd",
+    "0_question.png": "c1d4a9b9499be01b6d701a9b93abe5c14f4b52e8a4ff8b99283bff3aee5aee2c",
+    "0_reference.png": "b9bd33faaa17aa102a715dcdc9fbc8f9faef4b9aa3c0f5d7002f12f071da6b99",
+    "1_actual.png": "2f161b4002048b46dc22fa4e0f4d69349f9e346b7b7f3f127f1c9edb014184ed",
+    "1_question.png": "bdec57ffa26ff7374ba21049042f108eaae702d18780d35b4d79005858137101",
+    "1_reference.png": "868b8c9fed2e01841ab7d720dd91242016bdeaa5c52c65e956f1d01e823294c3",
+    "2_actual.png": "a74aae7eccc89aa176ec12266545a0c8f576a8ecbe81e083a98dcfb5f1b99abe",
+    "2_question.png": "f17f42c7e0ad34889630e602ebfffc96ebd2f95f51606fe5e9c7f0671754fc43",
+    "2_reference.png": "233b3c86b0a41a85bc8086d50bfdbe15826f1ac8101d8e7d37c6268ce8fb26ce",
+    "6_actual.png": "48ea8e251ace93a06d25e6acc6b9ead5c6d0b185f6ff3d9fc3f110603afd9b49",
+    "6_question.png": "cb69fefb3991ba0bf676b150e7bba2e18d624aa05bc087e088e955a6c9787d08",
+    "6_reference.png": "48ea8e251ace93a06d25e6acc6b9ead5c6d0b185f6ff3d9fc3f110603afd9b49",
+    "blank.npz": "e04587be0d6b6aa694e291cb3e0226d2f259d96efb34cec62edba26cf18f0551",
+    "familiar_0.npz": "037586e32d56b191c941d18505a6d798b4da593e99ddfb630fcab17e0b34382d",
+    "familiar_1.npz": "2038ff852f3995c00447a8c97237a97c283f7b0f3906d4d102d6df2c159a0c09",
+    "familiar_2.npz": "7bc0e58a4cf99601b62ec3673ee54736698f546e6b931c186e66f696627d379f",
+    "free.npz": "95cf7c2a4cc6c637f4455dc7676afa2f1bcf8d66b1f95e738c91eec34160caa6",
+    "normal.npz": "f25cd3408908bb8dbb0411b6f903e6d5cba07613b01e96f545c6ca77ee60593c",
+    "reader.safetensors": "7126cb5c35cad56d5ab13ec652a636db4b80e1197297ed7878c5734178a609eb",
+    "selected.npy": "b202c2cbdda2a2aed2e96dcf6f3bee307625860d00fda65c5a147a8c9b5351eb",
+    "swapped.npz": "b9b1d9b9cbcb6674481f4748de7bbeb7fdadfbc16a33982676bac261f343e4aa",
+    "unseen_0.npz": "e98810e3e1265192e0cbadc9272a4a5f626e08b567d10e6c7ac9e0d54929cd91",
+    "unseen_1.npz": "c66452739e1deb2b81cad70101bc39621a5bbc13c47d1be1d83d1baf8c269949",
+    "unseen_2.npz": "19cf1fbaa4f8b52cdbfc7b190610c8b95f015e13e4a360cbdb73125c87289320"
+  },
+  "protocol_sha256": "9a7744235540834fea7a3e2f9cc1b7ceeae00d2c7fc0853b865913aa71b77fce"
+}

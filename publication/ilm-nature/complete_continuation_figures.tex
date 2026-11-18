@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_glyph_planner_article.py.
+% Literal captions copied from their source inputs by build_mixed_ink_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -397,4 +397,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{c}, Original emitted pixels in the first gain and loss in source order for the aligned planner with one answer history relative to the uniform writer.
 \textbf{d}, Number of passages with an exact prefix through each glyph on the first test. The fourth point counts four exact glyphs. Each reported complete answer also stopped at four.}
 \label{fig:glyph-planner}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_47_mixed_ink.png}
+\caption{\textbf{Choosing between visible and missing writing.}
+\textbf{a}, Original question and answer images for the first correctly answered pair with disjoint references in official source order. Both questions concern the same railway passage.
+\textbf{b}, Complete outputs equal to at least one accepted answer. The two readers saw the same passages. The exchange control scores against the original question.
+\textbf{c}, Unseen instruction phrasings on 17,600 additional idiom windows. Neighbour questions require four visible glyphs on either side of the central gap.
+\textbf{d}, The first incorrect official output includes additional marks around the company names.}
+\label{fig:mixed-ink}
 \end{figure*}

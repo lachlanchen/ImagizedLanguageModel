@@ -1,0 +1,5 @@
+# Reading and writing with a pictured question
+
+Preserve the Figure 46 article and all earlier figure assets. Extend the abstract, results and methods with the measured whole-answer copy/write comparison. Show the first natural held-out question, the first success if distinct, one native table of task-specific exact counts and an editable chart of the natural-question control. Keep evidence of inherited writing, supervised boundary selection, new phrasing and open-ended generation distinct. Verify all counts against the saved images or decisions. Rebuild, inspect and retain the three article editions and deliver their matching source bundle to the local ILM project. Use the previous edition as the immediate baseline and preserve the existing cumulative redline baseline.
+
+Include the output-support bound on the two previously designated Chinese book titles. Give the denominator of renderable adjacent segments and charge unsupported segments separately. This calculation limits exact reference reproduction. It does not score plausible alternative continuations. Preserve the first compiled stage while rebuilding the final editions with the bound.
