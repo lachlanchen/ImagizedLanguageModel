@@ -734,7 +734,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) includes independent writing and compositional copying in Figure 45 (reading edition, page 61), alongside historical source selection in Figure 42. The reading, review and cumulative redline editions contain 80, 131 and 133 pages. The [verified build](../publication/ilm-nature/evidence/ordered_neighborhood_article_build.json) preserves 377 earlier figure files and contains the original emitted examples and two editable prefix charts. The [local delivery receipt](../publication/ilm-nature/evidence/ordered_neighborhood_local_sync.json) verifies 1,450 package files, the previous 1,411-file package and both latest-PDF aliases. Cloud propagation is unverified.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports independent glyph planning and teacher transfer in Figure 46 (reading edition, page 62), compositional copying in Figure 45 and historical source selection in Figure 42. The reading, review and cumulative redline editions contain 81, 133 and 136 pages. The [verified build](../publication/ilm-nature/evidence/glyph_planner_article_build.json) preserves 379 prior figure files. The [local delivery receipt](../publication/ilm-nature/evidence/glyph_planner_local_sync.json) verifies 1,489 package files, the previous 1,450-file package and both latest-PDF aliases. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
