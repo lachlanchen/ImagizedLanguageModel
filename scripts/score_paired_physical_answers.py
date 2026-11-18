@@ -23,7 +23,11 @@ def physical_score(net, context, bits, feedback, *, later_context=None):
     previous = F.pad(symbols, (1, 0), value=17)
     step = torch.arange(label.shape[1], device=context.device)
     last = F.pad(feedback, (0, 0, 1, 0))[:, step // GROUPS]
-    conditioning = context[:, None].expand(-1, len(step), -1)
+    if context.ndim == 3:
+        conditioning = context[:, (step // GROUPS).clamp(max=context.shape[1]-1)]
+        context = context[:,0]
+    else:
+        conditioning = context[:, None].expand(-1, len(step), -1)
     if later_context is not None:
         conditioning = torch.where((step >= 2 * GROUPS)[None,:,None], later_context[:,None], conditioning)
     seq = net.inputs(previous, (step % GROUPS).expand_as(label), last, conditioning)

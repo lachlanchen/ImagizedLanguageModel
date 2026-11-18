@@ -105,6 +105,9 @@ class PicturedIdiom(nn.Module):
 
     @torch.inference_mode()
     def generate_from_context(self,ctx,beam=4,limit=8,*,observe_step=None,later_context=None):
+        schedule=ctx if ctx.ndim==3 else None
+        if schedule is not None:
+            ctx=schedule[:,0]
         b=len(ctx);device=ctx.device
         ctx=ctx[:,None].expand(-1,beam,-1)
         hidden=ctx.contiguous()
@@ -117,6 +120,8 @@ class PicturedIdiom(nn.Module):
         rows=torch.arange(b,device=device)[:,None]
         for t in range(limit*GROUPS+1):
             slot,offset=divmod(t,GROUPS)
+            if schedule is not None and offset==0:
+                ctx=schedule[:,min(slot,schedule.shape[1]-1),None].expand(-1,beam,-1)
             if later_context is not None and t==2*GROUPS:
                 ctx=later_context[:,None].expand(-1,beam,-1)
             inputs=self.inputs(previous,torch.full_like(previous,offset),feedback,ctx)
