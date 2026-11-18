@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A 28,032-parameter visual writer reads an illustrated dictionary card and writes a sentence with a requested fact and an attested historical form. On 284 held-out character families, it produced **1,134 exact complete answer images in 1,136 requests**. Replacing the printed field names with synonyms reduced this count to 225. The examples for 耳 and 言 run locally on CPU. [Run the writer](models/pictured_entry_writer/README.md) · [Evidence and controls](references/pictured_entry_writer_result.md)
+
+[![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=93)
+
 A compact visual writer learned all 39 supervised Chinese phrase contrasts. Given unfamiliar sources and two alternatives, it chose both correct phrases on only one of 15 pairs. Asked to translate 18 new book passages independently, it produced zero faithful complete answers. The local text teacher scored 11/18. Figure 69 shows the actual generated pixels, including a credited teacher–pupil clause and a failed father–son role reversal. [Results](references/context_phrase_trial_result.md) · [Run from a PNG](models/visual_edit_zh/README.md#pictured-phrase-contrasts)
 
 [![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=92)

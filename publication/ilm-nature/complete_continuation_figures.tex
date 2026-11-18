@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_context_phrase_article.py.
+% Literal captions copied from their source inputs by build_pictured_entry_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -566,4 +566,10 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_69_context_phrases.png}
 \caption{\textbf{Choosing between competing pictured phrases and generating a translation.} \textbf{a}, Complete emitted strips for the first role reversal in the fixed roster and a separately selected credited reading. In the first source the father answers the son. The second exchanges their roles. The third source describes a teacher learning from a pupil. \textbf{b}, Conditional scores use a supplied common prefix and both alternative phrases. Autonomous writers receive only the source. Both-detail credit requires an answer expressing the designated detail on each side. The text teacher receives the source transcription. \textbf{c}, Mean pairwise logistic loss on training examples, averaged over successive groups of 97 updates. Each arm saw 3,492 pair presentations. Rehearsal records this value for comparison.}
 \label{fig:context-phrases}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_70_pictured_entries.png}
+\caption{\textbf{A recurrent writer combines a lexical fact and historical ink.} \textbf{a}, Pictured questions and complete model answers for the first held-out entry. The third row shows the first answer lost when an alternative term replaced the field label. Hanziyuan supplies the source gloss and historical exemplars. \textbf{b}, Each of 142 two-entry cards supports eight independently scored requests. The relocation intervention swaps values for corresponding labels between the two records. The alternate question frame retains the visible field names. The synonym condition changes them. \textbf{c}, Mean training loss per physical span or stop over eight epochs. The control reassigns the eight targets within each training card.}
+\label{fig:pictured-entries}
 \end{figure*}
