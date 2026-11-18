@@ -22,6 +22,8 @@ reported directly below.*
 
 ## Writing modern Chinese from a pictured classical sentence
 
+Given 现在魏 and a pictured classical source at a supplied insertion site, the updated writer drew 国的 and stopped. It recovered 2,280 of 24,048 held-out insertions, compared with 2,143 for its parent and 3,554 for whole-phrase counts. Figure 56 shows both this success and a fluent but incorrect 一个. With only the source and instruction, it recovered zero of 84 complete translations. [Results](references/first_emission_result.md) · [Figure 56](publication/ilm-nature/figures/Figure_56_first_emission.png) · [48 contextual judgments](references/evidence/first_emission_20261118/reading_gallery.pdf) · [Run the model on CPU](models/visual_edit_zh/README.md)
+
 The sentence-conditioned visual writer generated 2,529 of 24,048 Chinese insertions exactly. A control that updated only the ending decision achieved the same total. The updated writer completed 60 multi-glyph insertions, down from 138 for its parent. Figure 55 shows a corrected ending and a first-glyph error using the original outputs. [Results](references/sentence_choice_result.md) · [Figure 55](publication/ilm-nature/figures/Figure_55_sentence_choice.png) · [All 48 blind readings](references/evidence/sentence_choice_20261118/reading_gallery.pdf)
 
 On separate test chapters, a 2.03M-parameter editor copied all 2,045 renderable passages on request. It reproduced 30 of 2,048 modern translations exactly. In one it kept nine glyphs and drew two, changing 薨 to 去世. A simple local-edit baseline still made fewer glyph errors overall. [Run the editor](models/visual_edit_zh/README.md) · [Original output and reference](publication/ilm-nature/figures/Figure_48_visual_edit.png)
@@ -30,7 +32,7 @@ Given a classical sentence, an insertion boundary and the preceding modern text,
 
 ![Generated and reference Chinese phrases, with exact counts for the three evaluation cohorts](publication/ilm-nature/figures/Figure_53_local_ink.png)
 
-An additional 50,072 learned weights let the writer use its own preceding strokes to choose the next ones. It drew 所以来 in a new insertion context. On 6,435 new test sites it wrote 455 exact phrases, compared with 440 for its parent and 670 for local counts. A blinded model reader accepted 13 of 48 responses from each visual writer. [Measured outputs](publication/ilm-nature/figures/Figure_54_conditional_ink.png) · [Gallery of all 48 examples](references/evidence/conditional_ink_20261118/reading_gallery.pdf) · [Run this checkpoint](models/visual_edit_zh/README.md#condition-on-the-previous-strokes)
+An additional 50,072 learned weights let the writer use its own preceding strokes to choose the next ones. It drew 所以来 in a new insertion context. On 6,435 new test sites it wrote 455 exact phrases, compared with 440 for its parent and 670 for local counts. A blinded model reader accepted 13 of 48 responses from each visual writer. [Measured outputs](publication/ilm-nature/figures/Figure_54_conditional_ink_aligned.png) · [Gallery of all 48 examples](references/evidence/conditional_ink_20261118/reading_gallery.pdf) · [Run this checkpoint](models/visual_edit_zh/README.md#condition-on-the-previous-strokes)
 
 ## Reading historical forms
 

@@ -8,6 +8,8 @@ const {finalizePresentation,applyPresentationChartFont} = await import(pathToFil
 const src = path.join(root,'references/evidence/conditional_ink_20261118');
 const stats = JSON.parse(await fs.readFile(path.join(src,'figure.json')));
 
+const corrected = process.env.ILM_ALIGNED_EXCHANGE === '1';
+if(corrected) stats.exchange_counts = JSON.parse(await fs.readFile(path.join(root,'references/evidence/first_emission_20261118/corrected_chart.json')));
 const deck = Presentation.create({slideSize:{width:1500,height:1300}});
 const slide = deck.slides.add();
 slide.background.fill='#FFFFFF';
@@ -54,10 +56,10 @@ const chart=slide.charts.add('bar',{position:{left:50,top:1001,width:845,height:
  textStyle:{typeface:'Arial',fontSize:18},majorGridlines:{fill:'#DCE4E6',width:1}}});
 applyPresentationChartFont(chart,{fontFamily:'Arial'});
 text('Natural sentence pairs',920,1014,505,48,26,true,teal);
-text('The flanking source glyphs and prior modern glyphs match. Bars count pairs favoring each assignment by complete phrase probability. Two pairs tie across the four cohorts.',920,1082,514,150,22);
+text('The flanking source glyphs and prior modern glyphs match. Bars count pairs favoring each assignment by complete phrase probability. '+(corrected?'Each recorded glyph is scored at its own time step.':'Two pairs tie across the four cohorts.'),920,1082,514,150,22);
 slide.speakerNotes.textFrame.setText('Panels show original PNGs from the scored streams, including the previous holdout’s only novel exact insertion and the first bounded new-cohort mismatch for which local counts succeed. Full inputs and control outputs are archived. Table and chart are derived from full cohort records and matched sentence exchanges.');
 await fs.mkdir(path.join(stage,'draft'));await fs.mkdir(path.join(stage,'output'));
-const candidatePath=path.join(stage,'draft/idiom.pptx'), finalPath=path.join(stage,'output/Conditional_ink.pptx');
+const candidatePath=path.join(stage,'draft/idiom.pptx'), finalPath=path.join(stage,corrected?'output/Conditional_ink_aligned.pptx':'output/Conditional_ink.pptx');
 await (await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:1,
  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[1],requiredNativeTableOwnerSlides:[1],verifyArtifactToolImport:true,
@@ -67,4 +69,4 @@ await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExe
  receiptPath:path.join(stage,'presentation_validation.json')});
 const reopened=await PresentationFile.importPptx(await FileBlob.load(finalPath));
 const png=await reopened.slides.items[0].export({format:'png',scale:1});
-await fs.writeFile(path.join(stage,'Figure_54_conditional_ink.png'),new Uint8Array(await png.arrayBuffer()));
+await fs.writeFile(path.join(stage,corrected?'Figure_54_conditional_ink_aligned.png':'Figure_54_conditional_ink.png'),new Uint8Array(await png.arrayBuffer()));

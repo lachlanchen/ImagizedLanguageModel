@@ -1,4 +1,4 @@
-"""Draw an insertion from pictured classical text, its boundary and the available modern prefix."""
+"""Draw a Chinese insertion from pictured context or use the visual editor on a whole sentence."""
 import argparse
 import hashlib
 import json
@@ -46,9 +46,13 @@ def main():
     p.add_argument('--device',choices=['cpu','cuda'],default='cpu')
     p.add_argument('--local-ink',choices=('onset','stream'),help='Use local four-pixel evidence for the first glyph or entire phrase')
     p.add_argument('--ink-interaction',type=Path, help='Optional trained within-glyph transition checkpoint')
-    p.add_argument('--sentence-boundary',type=Path,help='Optional sentence-conditioned phrase residual')
+    residual=p.add_mutually_exclusive_group()
+    residual.add_argument('--first-emission',type=Path,help='Trained correction for the first pictured glyph')
+    residual.add_argument('--sentence-boundary',type=Path,help='Optional sentence-conditioned phrase residual')
     p.add_argument('--ink-directory',type=Path,default=MODELS/'local_ink')
-    p.add_argument('--cursor',type=int,required=True,help='Number of classical cells preceding the insertion site')
+    mode=p.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--whole-sentence',action='store_true',help='Let the visual editor choose each boundary and generate its own prefix')
+    mode.add_argument('--cursor',type=int,help='Number of classical cells preceding the insertion site')
     p.add_argument('--output',type=Path,required=True,help='A new directory for the image and stop receipt')
     for key in ('source','prefix'):
         g=p.add_mutually_exclusive_group(required=key=='source')
@@ -56,10 +60,14 @@ def main():
         g.add_argument('--'+key+'-image',type=Path)
         p.add_argument('--'+key+'-cells',type=int,help='Used glyphs in a padded input grid')
     args=p.parse_args()
-    if args.sentence_boundary and not args.ink_interaction:
-        p.error('--sentence-boundary requires --ink-interaction')
+    if (args.sentence_boundary or args.first_emission) and not args.ink_interaction:
+        p.error('A phrase residual requires --ink-interaction')
     if args.ink_interaction and args.local_ink != 'stream':
         p.error('--ink-interaction requires --local-ink stream')
+    if args.whole_sentence and (args.prefix_image or args.prefix_text is not None or args.prefix_cells is not None or args.sentence_boundary):
+        p.error('--whole-sentence accepts only the classical source and optional first-emission correction')
+    if args.whole_sentence and not args.ink_interaction:
+        p.error('--whole-sentence requires --ink-interaction and --local-ink stream')
     if args.output.exists():
         p.error('Choose a new output directory')
     torch.set_num_threads(2)
@@ -95,18 +103,37 @@ def main():
         from ilm.visual_lm.sentence_choice import SentenceBoundary
         digest = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
         options['sentence_boundary'] = SentenceBoundary.restore(args.sentence_boundary, digest, args.device)
-    pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt,**options)
-    ink=pixels.cpu().numpy()
+    if args.first_emission:
+        from ilm.visual_lm.first_emission import FirstEmission
+        digest = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
+        options['first_emission'] = FirstEmission.restore(args.first_emission, digest, args.device)
+    if args.whole_sentence:
+        from ilm.visual_lm.idiom_ink import visual_input
+        from ilm.visual_lm.phrase_editing import write_sentence
+        packed, reason, insertions = write_sentence(net,streams[0],visual_input(prompt,net.landmarks)[None],
+            options['stream'],options['interaction'],options.get('first_emission'))
+        ink = np.unpackbits(np.asarray(packed,dtype=np.uint8).reshape(-1,128),axis=1)
+        result = dict(emitted_cells=len(ink),stopped=reason=='stop',termination=reason,insertions=insertions)
+    else:
+        pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt,**options)
+        ink=pixels.cpu().numpy()
+        result=dict(emitted_cells=len(ink),stopped=ended,cursor=args.cursor)
     args.output.mkdir(parents=True)
     (args.output/'answer.bin').write_bytes(np.packbits(ink,axis=1).tobytes())
-    Image.fromarray(np.where(np.concatenate(ink.reshape(-1,32,32),axis=1),0,255).astype('uint8')).save(args.output/'answer.png')
-    result=dict(emitted_cells=len(ink),stopped=ended,cursor=args.cursor)
+    cols=min(24 if args.whole_sentence else max(1,len(ink)),max(1,len(ink)))
+    height=max(1,(len(ink)+cols-1)//cols)
+    cells=np.zeros((height*cols,32,32),dtype=bool)
+    cells[:len(ink)]=ink.reshape(-1,32,32)
+    page=cells.reshape(height,cols,32,32).transpose(0,2,1,3).reshape(32*height,32*cols)
+    Image.fromarray(np.where(page,0,255).astype('uint8')).save(args.output/'answer.png')
     if args.local_ink:
         result['local_ink'] = args.local_ink
     if args.ink_interaction:
         result['ink_interaction_sha256'] = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
     if args.sentence_boundary:
         result['sentence_boundary_sha256'] = hashlib.sha256(args.sentence_boundary.read_bytes()).hexdigest()
+    if args.first_emission:
+        result['first_emission_sha256'] = hashlib.sha256(args.first_emission.read_bytes()).hexdigest()
     (args.output/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))
 

@@ -203,7 +203,7 @@ def build():
     print(json.dumps(dict(build_complete=True, costs=costs, documents=details), indent=2))
 
 
-def inspect():
+def inspect(replaced_rgb_hashes=()):
     """Authenticate image contents and render all pages; does not claim review."""
     import fitz
     from PIL import Image, ImageDraw, ImageFont
@@ -265,7 +265,7 @@ def inspect():
                     for row in page.get_images(full=True):
                         image = Image.open(io.BytesIO(old.extract_image(row[0])['image'])).convert('RGB')
                         old_hashes.add(hashlib.sha256(image.tobytes()).hexdigest())
-                assert old_hashes <= image_hashes, (name, 'missing earlier image contents')
+                assert old_hashes - image_hashes <= set(replaced_rgb_hashes), (name, 'missing earlier image contents')
             text = '\n'.join(contents)
             for anchor in ['970/1,040', '7/32', '17.795', 'softplus', '5,005,760', '7,553,448,370', '324', '689', '108', 'ranking', '1,002/1,040', '4,609', '12,597', '314', '238']:
                 assert anchor in text, (name, anchor)
@@ -282,7 +282,8 @@ def inspect():
                     draw.text((x + 5, y + 2), str(number), fill='black', font=font)
                 sheet.save(rendering / f'overview-{first//36+1}.png')
             result['documents'][name] = dict(pages=len(pdf), pdf_sha256=sha(path),
-                all_text_bounds_inside_page=True, all_prior_image_contents_retained=len(old_hashes),
+                all_text_bounds_inside_page=True, all_prior_image_contents_retained=len(old_hashes & image_hashes),
+                replaced_prior_image_contents=sorted(old_hashes - image_hashes),
                 figures=figures, overview_sheets=len(list(rendering.glob('overview-*.png'))))
     result['inspection_seconds'] = time.monotonic() - began
     result['build_plus_inspection_seconds'] = prior_seconds + result['inspection_seconds']

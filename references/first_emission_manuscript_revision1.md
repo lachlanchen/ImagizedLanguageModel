@@ -1,0 +1,5 @@
+# Learning from the first emitted glyph
+
+Extend the abstract, results and methods at ce5e6c3c with the two matched first-drawing interventions. Display actual source, prefix, reference and emitted bitmaps, a gain and a persistent error, the five cohort denominators, and an editable chart of changes in first-image accuracy. Check the preceding exchange evaluator's reuse of a time index. Recount affected likelihood claims while preserving frozen physical outputs and grades. Retain all 55 earlier figures. Verify source images, editable data, layout and local delivery in all three editions.
+
+The outcome triggered a reserved-cohort autonomous editing test and a calibration-only text-teacher comparison. Extend Figure 56 with the complete uncropped autonomous output and the actual number of learned stops. Replace Figure 54's time-misaligned source-exchange chart in the current editions while preserving its original PNG, deck and earlier PDFs. Include the teacher's original and response-format sensitivity counts and attribute offline evaluation costs separately.

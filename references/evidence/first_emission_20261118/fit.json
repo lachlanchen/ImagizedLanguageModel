@@ -1,0 +1,100 @@
+{
+  "arms": {
+    "likelihood": {
+      "calibration_exact": [
+        3319,
+        3397,
+        3441,
+        3450,
+        3475
+      ],
+      "calibration_nats": [
+        8.331853381764848,
+        8.195039012032101,
+        8.094062038896316,
+        8.035060872102346,
+        8.016627918896155
+      ],
+      "selected_scale": 1.0,
+      "epoch_loss": [
+        8.378235004322715,
+        8.316617159453367,
+        8.286489682128472,
+        8.262266560677931,
+        8.242061555348036,
+        8.223393004441105,
+        8.206623424019371,
+        8.189976980386
+      ],
+      "optimizer_seconds": 13.1802785275504,
+      "sha256": "7fa3319d9a8959a04d3006aee4dfea059c3daf79382c5b44fb424358d46ae21d"
+    },
+    "preference": {
+      "calibration_exact": [
+        3319,
+        3456,
+        3138,
+        2669,
+        2272
+      ],
+      "calibration_nats": [
+        8.331853381764848,
+        8.209345408726534,
+        8.321225026581114,
+        8.587962996651463,
+        8.93145694884782
+      ],
+      "selected_scale": 0.25,
+      "epoch_loss": [
+        15.262296011969934,
+        14.823736654145572,
+        14.668073298914756,
+        14.556734419945803,
+        14.473910239353401,
+        14.40282851697738,
+        14.344630352298172,
+        14.287831743559565
+      ],
+      "optimizer_seconds": 17.328639375045896,
+      "sha256": "9ce732f6b9f3e15a6addab5fa981c734223a160f9a028833c003a7b58f140ce8"
+    }
+  },
+  "scales": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "epochs": 8,
+  "training_sites": 241256,
+  "calibration_sites": 13440,
+  "schedule_sha256": "ca65ca10f40ab639f4b7da6db9cf7c3d1b709bf29e22d21ab67620ab707d6485",
+  "parameters": 131456,
+  "preparation_seconds": 25.957644016481936,
+  "seconds": 63.393484939821064,
+  "peak_allocated_mib": 1043.7421875,
+  "peak_rss_mib": 1739.36328125,
+  "preparation": {
+    "groups": {
+      "training": {
+        "sites": 241256,
+        "correct": 56809,
+        "differing_signatures": 184447,
+        "reference_representable": 241232
+      },
+      "calibration": {
+        "sites": 13440,
+        "correct": 3319,
+        "differing_signatures": 10121,
+        "reference_representable": 13439
+      }
+    },
+    "seconds": 32.0583030115813,
+    "first_images_sha256": "7ba54a2248af82210f5e3c7e8b4892af1a4833c0047e1ffaebace3faad0679f7",
+    "source_pairs_sha256": "a7cdc9b23e70925311c8576fdbacd1672c440aabb9c16f65239c6588e55ca474",
+    "rows_sha256": "fd784d3ca8651bbaf8d8d2f644fd56c924d95ef562272d14716ab8fa98a9a8eb",
+    "parent_interaction_sha256": "453056b049e30a2b5bb3dc24c92e92ff30fb7c5029650faaecd26a937d1615ab",
+    "peak_allocated_mib": 277.3759765625
+  }
+}

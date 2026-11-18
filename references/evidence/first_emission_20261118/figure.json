@@ -1,0 +1,102 @@
+{
+  "table": [
+    [
+      "Exact stopped phrases",
+      "Discovery",
+      "Replication",
+      "Holdout 1",
+      "Holdout 2",
+      "New chapters"
+    ],
+    [
+      "Frozen writer",
+      "639",
+      "589",
+      "434",
+      "455",
+      "26"
+    ],
+    [
+      "Likelihood",
+      "636",
+      "608",
+      "442",
+      "459",
+      "32"
+    ],
+    [
+      "Preference",
+      "665",
+      "647",
+      "456",
+      "479",
+      "33"
+    ],
+    [
+      "Whole-phrase counts",
+      "1033",
+      "945",
+      "751",
+      "766",
+      "59"
+    ],
+    [
+      "Insertion sites",
+      "5376",
+      "5413",
+      "5987",
+      "6435",
+      "837"
+    ]
+  ],
+  "exchange_counts": [
+    [
+      501,
+      451,
+      4619
+    ],
+    [
+      678,
+      508,
+      7214
+    ]
+  ],
+  "examples": {
+    "missed": {
+      "split": "confirmation",
+      "site": 385,
+      "source": "孟子曰： 人之有德慧术知者，恒存乎疢疾。",
+      "cursor": 7,
+      "prefix": "孟子说： 人之",
+      "target": "所以",
+      "following": "有规律、理解能力、权术、知识，常常是由于他们灾患的处境。",
+      "cpu_stopped": true,
+      "frozen": "是",
+      "prediction": "一个"
+    },
+    "gained": {
+      "split": "confirmation",
+      "site": 730,
+      "source": "今魏之辞倨而币薄。",
+      "cursor": 2,
+      "prefix": "现在魏",
+      "target": "国的",
+      "following": "言辞傲慢而且礼金少。",
+      "cpu_stopped": true,
+      "frozen": "的",
+      "prediction": "国的"
+    }
+  },
+  "widths": {
+    "missed_source": 20,
+    "missed_prefix": 7,
+    "missed_frozen": 1,
+    "missed_prediction": 2,
+    "missed_reference": 2,
+    "gained_source": 9,
+    "gained_prefix": 3,
+    "gained_frozen": 1,
+    "gained_prediction": 2,
+    "gained_reference": 2
+  }
+}

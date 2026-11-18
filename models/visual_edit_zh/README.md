@@ -98,7 +98,7 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py \
   --output /tmp/ilm-conditional-phrase
 ```
 
-The result is in `answer.png`. On 6,435 new held-out insertions this update recovered 455 exact phrases; the parent recovered 440 and local whole-phrase counts recovered 670. Both visual writers received 13 acceptable judgments out of 48 sampled insertions. [Figure 54](../../publication/ilm-nature/figures/Figure_54_conditional_ink.png) · [All 48 reviewed examples](../../references/evidence/conditional_ink_20261118/reading_gallery.pdf)
+The result is in `answer.png`. On 6,435 new held-out insertions this update recovered 455 exact phrases; the parent recovered 440 and local whole-phrase counts recovered 670. Both visual writers received 13 acceptable judgments out of 48 sampled insertions. [Figure 54](../../publication/ilm-nature/figures/Figure_54_conditional_ink_aligned.png) · [All 48 reviewed examples](../../references/evidence/conditional_ink_20261118/reading_gallery.pdf)
 
 ### Conditioning the writer on the source sentence
 
@@ -114,3 +114,32 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py \
 ```
 
 Open `answer.png`. To run the matched likelihood control, use `sentence_likelihood.safetensors` with the same inputs. Image inputs use `--source-image` and `--prefix-image`. The learned model remains an experimental insertion writer. [Complete results and failure examples](../../references/sentence_choice_result.md)
+
+### Learn from the first wrong glyph
+
+This CPU example takes two images and writes the insertion 国的. The classical sentence is 今魏之辞倨而币薄。 and the supplied modern prefix is 现在魏.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py \
+  --local-ink stream --ink-interaction models/visual_edit_zh/conditional_ink.safetensors \
+  --first-emission models/visual_edit_zh/first_preference.safetensors \
+  --source-image references/evidence/first_emission_20261118/gained_source.png \
+  --prefix-image references/evidence/first_emission_20261118/gained_prefix.png \
+  --cursor 2 --output /tmp/ilm-first-writing
+```
+
+The output directory contains the glyph strip in `answer.png`, its packed pixels and the stopping decision. The matched likelihood weights are `first_likelihood.safetensors`. Text input uses the existing `--source-text` and `--prefix-text` options. The preference update recovered 2,280 exact insertions in 24,048 held-out cases. [Measured successes and failures](../../references/first_emission_result.md)
+
+### Run an autonomous translation
+
+This mode starts with an empty modern page and decides where and how much to write. It is available to reproduce the complete-sentence experiment. The 84-sentence evaluation yielded zero exact translations and the output frequently repeats. This example reproduces the original eight-glyph output in Figure 56d.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py --whole-sentence \
+  --source-text '少阴，少阳。' --local-ink stream \
+  --ink-interaction models/visual_edit_zh/conditional_ink.safetensors \
+  --first-emission models/visual_edit_zh/first_preference.safetensors \
+  --output /tmp/ilm-free-sentence
+```
+
+The optional first-emission weights enable the preference writer. Omitting them runs its frozen control. The receipt distinguishes a learned stop, the 32-glyph phrase limit and the 192-glyph sentence limit. [All autonomous scores](../../references/evidence/first_emission_20261118/sentences.json)

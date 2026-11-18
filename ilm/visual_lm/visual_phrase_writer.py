@@ -46,7 +46,7 @@ class VisualPhraseWriter(VisualSpanWriter):
 
     @torch.inference_mode()
     def complete(self, boundary, history, initial, at_eof, *, original=False, limit=32, first_bias=None, first_code=None,
-                 stream=None, local_context=None, interaction=None, sentence_boundary=None, ending_boundary=None):
+                 stream=None, local_context=None, interaction=None, sentence_boundary=None, ending_boundary=None, first_emission=None):
         if limit < 1:
             raise ValueError('The known nonempty phrase needs room for one glyph')
         if interaction is not None and stream is None:
@@ -63,6 +63,8 @@ class VisualPhraseWriter(VisualSpanWriter):
             local_context = local_context.copy()
         for pos in range(limit):
             state = (boundary + history).tanh()
+            if pos == 0 and first_emission is not None:
+                state = first_emission(boundary, initial, history)
             if pos == 0 and first_code is not None:
                 code = first_code.float()
             else:
@@ -97,7 +99,7 @@ class VisualPhraseWriter(VisualSpanWriter):
         return ink, lengths, stopped
 
     @torch.inference_mode()
-    def generate_phrase(self, source, cursor, prefix, question, *, limit=32, onset=None, stream=None, interaction=None, sentence_boundary=None):
+    def generate_phrase(self, source, cursor, prefix, question, *, limit=32, onset=None, stream=None, interaction=None, sentence_boundary=None, first_emission=None):
         """Generate from one source and prefix of flat binary 32-by-32 ink cells."""
         if source.ndim != 2 or not len(source) or not 0 <= cursor <= len(source) or not len(question):
             raise ValueError('Supply a nonempty source, question, and a boundary inside the source grid')
@@ -115,5 +117,5 @@ class VisualPhraseWriter(VisualSpanWriter):
             context = np.array([cell_context(src, cursor, pre)], dtype=np.uint64)
             if onset is not None:
                 bias = torch.as_tensor(onset.bias(context), device=source.device)
-        ink, sizes, ended = self.complete(at, history[:, -1], initial, cursors == lengths, limit=limit, first_bias=bias, stream=stream, local_context=context, interaction=interaction, sentence_boundary=sentence_boundary)
+        ink, sizes, ended = self.complete(at, history[:, -1], initial, cursors == lengths, limit=limit, first_bias=bias, stream=stream, local_context=context, interaction=interaction, sentence_boundary=sentence_boundary, first_emission=first_emission)
         return ink[0, :int(sizes[0])], bool(ended[0])

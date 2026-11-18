@@ -33,8 +33,15 @@ def match(rows, bank, locations, contexts):
     return matched
 
 
+def reference_steps(labels, history, batch, position, ends):
+    """Gather each target and the history on either side of that same drawing."""
+    if any(index.ndim != 1 or index.shape != batch.shape for index in (position, ends)):
+        raise ValueError('Reference scoring requires one position and ending per batch index')
+    return labels[batch,position], history[batch,position], history[batch,position+1], position+1==ends
+
+
 @torch.inference_mode()
-def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=None):
+def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=None, first_emission=None):
     ink = torch.from_numpy(np.unpackbits(bank, axis=1)).cuda().bool()
     bits = ink[:,net.landmarks]
     sig = signatures(bits.cpu().numpy())
@@ -63,7 +70,7 @@ def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=No
         context = fields(block,sig,pos)
         require(np.array_equal(context,contexts[[r for *_,r in batch]]), 'Exchanged local observations differ')
         images,lengths,ends = net.complete(boundary,hist[b,j],init,c==n,stream=stream,local_context=context,
-                                            interaction=interaction)
+                                            interaction=interaction, first_emission=first_emission)
         for row, length, end, (_,_,i,jj,k,_) in zip(images.cpu().numpy(),lengths.tolist(),ends.tolist(),batch,strict=True):
             packed = np.packbits(row[:length],axis=1)
             physical.append((packed.tobytes(),end))
@@ -75,14 +82,19 @@ def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=No
         bb,cc,t,kk = torch.tensor(steps,device='cuda').T
         onset = np.array([t==batch[b][3] for b,c,t,k in steps])
         # Bind every subsequent local feature to the authentic target history.
-        for view,(b,c,t,k) in zip(ctx, steps, strict=True):
+        for view,(b,c,position,k) in zip(ctx, steps, strict=True):
             r = batch[b][-1]
             i,orig,j,_ = locations[r]
-            require(np.array_equal(view,cell_context(sig[rows[i]['x']],orig,sig[rows[i]['y'][:t]])),
+            require(np.array_equal(view,cell_context(sig[rows[i]['x']],orig,sig[rows[i]['y'][:position]])),
                     'Local teacher history changed')
-        ref = bits[y[bb,t]]
+        target, before, after, final = reference_steps(y,hist,bb,t,kk)
+        ref = bits[target]
         codes = nibbles(ref)
-        state = (boundary[bb]+hist[bb,t]).tanh()
+        state = (boundary[bb]+before).tanh()
+        if first_emission is not None:
+            mask = torch.as_tensor(onset, device=state.device)
+            active = bb[mask]
+            state[mask] = first_emission(boundary[active],init[active],before[mask])
         logits = net.draw.teacher(state,ref)
         for mask,model in ((onset,stream.onset),(~onset,stream.later)):
             if mask.any():
@@ -90,9 +102,9 @@ def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=No
         logits[:,1:] += interaction.teacher(torch.as_tensor(ctx.astype('int64'),device='cuda'),
                                              torch.from_numpy(onset).cuda(),codes)
         draw = logits.log_softmax(-1).gather(-1,codes[:,:,None]).squeeze(-1).double().sum(1)
-        end = net.end((boundary[bb]+hist[bb,t+1]).tanh())[:,0]
+        end = net.end((boundary[bb]+after).tanh())[:,0]
         end += torch.as_tensor(stream.update(ctx,ref.cpu().numpy()),device='cuda')
-        term = draw - F.binary_cross_entropy_with_logits(end,(t+1==kk).float(),reduction='none').double()
+        term = draw - F.binary_cross_entropy_with_logits(end,final.float(),reduction='none').double()
         ll.extend(float(group.sum()) for group in term.split([k-j for s,c,i,j,k,r in batch]))
     with np.load(archive) as saved:
         pixels, ends, offsets = saved['pixels'], saved['stopped'], saved['offsets']
