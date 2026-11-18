@@ -61,16 +61,19 @@ class VisualPhraseComposer:
             / ((self.totals.get(last, 0) + 12) * probability)
         )
 
+    def options(self, key):
+        options = self.phrases.get(key, ())
+        if len(key) == 1 and not any(value == key for value, _ in options):
+            return [*options, (key, -1.6 if options else 0.0)]
+        return options
+
     def decode(self, source):
         paths = [{-1: (0.0, ())}] + [{} for _ in source]
         for i in range(len(source)):
             prior = sorted(paths[i].items(), key=lambda p: -p[1][0])[:4]
             for size in range(1, min(6, len(source) - i) + 1):
                 key = source[i : i + size]
-                options = self.phrases.get(key, ())
-                if size == 1 and not any(value == key for value, _ in options):
-                    options = [*options, (key, -1.6 if options else 0.0)]
-                for segment, logprob in options:
+                for segment, logprob in self.options(key):
                     for last, (score, emitted) in prior:
                         next_score = score + logprob - 0.65
                         if segment and self.weight:

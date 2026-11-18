@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_block_translation_article.py.
+% Literal captions copied from their source inputs by build_clause_support_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -492,4 +492,16 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Complete visual translation with the classical source alone.}
 \textbf{a}, First enrolled passage, realigned neural output and corpus gloss, shown as their original 32-by-32 cells. The writer repeats a common particle in positions requiring different words. \textbf{b}, Complete physical edit distance and exact modern glosses in 2,048 passages with 63,274 reference cells. The reversed control presents the same glyphs in reverse to the encoder and restores the source positions before emission. Acceptance required a complete modern rendering in a separately blinded 24-passage reading. \textbf{c}, Total glyph edits in a second cohort of 2,048 passages. \textbf{d}, First changed exact composer output in cohort order and first erroneous composer output from the blinded reading with a reference of at most 16 cells. The left gloss changes the classical verb of death into its two-glyph modern equivalent. The right output fails on the same verb after an official title. \textbf{e}, Training size comparison on 1,097 previously unevaluated passages. The scoring rule and language weight are fixed. The larger model made 24 fewer glyph edits over 33,879 target cells.}
 \label{fig:block-translation}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_58_clause_support.png}
+\caption{\textbf{Reachable glosses of a fixed visual phrase writer.} \textbf{a}, Original complete glyph strips for a temporal use of a polysemous character, with the recorded gloss and the legal output closest to it. \textbf{b}, Physical edit distance over 23,147 reference cells. The two starred rows use the reference to select a stream. An exact output need not require a change from the source. \textbf{c}, Number of complete, faithful modern renderings in eighteen passages graded with method assignments concealed. The widest answer-informed search minimizes bitmap edit distance. The reading of its witness remains a separate measurement.}
+\label{fig:clause-support}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_59_visual_feedback.png}
+\caption{\textbf{Visual feedback during autonomous classical-to-modern translation.} \textbf{a}, Correct next-image predictions among 1,019 paired histories from the initial writer. Only the previous picture at the first observed error changes. \textbf{b}, Complete-stream scores on a new 1,024-passage evaluation. The two continuation arms begin from identical weights. Eighteen passages were read with method assignments concealed. \textbf{c}, Full, unretouched output pixels for the sole accepted error-trained answer and the first unaccepted answer with a faithful reference and all four strips at most twenty cells long. In the first corpus gloss a personal-name character is printed as two components. Both models preserve the proper name in that answer. In the second they lose who is predicted to die.}
+\label{fig:visual-feedback}
 \end{figure*}

@@ -166,3 +166,13 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py --whole-sentence \
 ```
 
 The optional first-emission weights enable the preference writer. Omitting them runs its frozen control. The receipt distinguishes a learned stop, the 32-glyph phrase limit and the 192-glyph sentence limit. [All autonomous scores](../../references/evidence/first_emission_20261118/sentences.json)
+
+## Reproduce the causal visual writer
+
+This research checkpoint reads the classical source and its own emitted glyphs. To reproduce the first example of Figure 59 on CPU, run the following command from the repository root.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method feedback --text '尝攻襄州，为孔勍所败。' --output /tmp/ilm-xiangzhou
+```
+
+The answer image reads 曾经进攻襄州，被孔勍打败。 The same example can be supplied with `--image references/evidence/visual_feedback_20261118/accepted_copy.png`. On 1,024 new book passages this writer reached its 96-cell limit 350 times. Its receipt records whether it learned to stop. Its single acceptable answer in an eighteen-passage reading was shared with the clean-history control. The shipped weights have SHA-256 `23b86fcb1b644ff1c0c5e2f9df9305f4b37144c86bc8ca4f958d230d0895900b`. [Complete results](../../references/pictured_clause_and_feedback_result.md)

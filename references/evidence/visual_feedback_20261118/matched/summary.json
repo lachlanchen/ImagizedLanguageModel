@@ -1,0 +1,96 @@
+{
+  "arms": {
+    "parent": {
+      "edits": 23092,
+      "cer": 0.9823456842642617,
+      "exact": 4,
+      "changed_exact": 1,
+      "output_cells": 28853,
+      "empty": 0
+    },
+    "clean": {
+      "edits": 23236,
+      "cer": 0.9884715191219636,
+      "exact": 4,
+      "changed_exact": 1,
+      "output_cells": 30134,
+      "empty": 0
+    },
+    "recovery": {
+      "edits": 45765,
+      "cer": 1.9468668907134046,
+      "exact": 4,
+      "changed_exact": 1,
+      "output_cells": 52267,
+      "empty": 0
+    },
+    "copy": {
+      "edits": 13467,
+      "cer": 0.5728931807546688,
+      "exact": 16,
+      "changed_exact": 0,
+      "output_cells": 15495,
+      "empty": 0
+    },
+    "reference": {
+      "edits": 0,
+      "cer": 0.0,
+      "exact": 1024,
+      "changed_exact": 1008,
+      "output_cells": 23507,
+      "empty": 0
+    },
+    "composer": {
+      "edits": 12666,
+      "cer": 0.5388182243587016,
+      "exact": 16,
+      "changed_exact": 6,
+      "output_cells": 16152,
+      "empty": 0
+    }
+  },
+  "chapter_count": 724,
+  "sentences": 1024,
+  "target_cells": 23507,
+  "route_counts": {
+    "parent": {
+      "0": 7939,
+      "1": 20914
+    },
+    "clean": {
+      "0": 9400,
+      "1": 20734
+    },
+    "recovery": {
+      "0": 7666,
+      "1": 44601
+    }
+  },
+  "stops": {
+    "parent": 993,
+    "clean": 989,
+    "recovery": 674
+  },
+  "recovery_minus_clean_ci95": [
+    0.8708123109259277,
+    1.0429964554210254
+  ],
+  "seconds": 20.50805107317865,
+  "checkpoint": "ef75d71c750f69ee82beb3936819a7a455701e86ef1286ced614b4878c521b02",
+  "checkpoints": {
+    "parent": "ef75d71c750f69ee82beb3936819a7a455701e86ef1286ced614b4878c521b02",
+    "clean": "572c8c6b80206588994ae7d736d2ee91d541593f98ed8fad95904b0c8833383a",
+    "recovery": "23b86fcb1b644ff1c0c5e2f9df9305f4b37144c86bc8ca4f958d230d0895900b"
+  },
+  "files_sha256": {
+    "recovery.npz": "154ea19249b943aa98852ffbaf3627ad68e658a9ea52a15adf7a56f9e699b344",
+    "parent.npz": "c2dd537efd01957b8ff856758ac554fac754746c555b7229bbf2ea1b2dd2d296",
+    "clean.npz": "4cd2c297c4df518ad00b8f8fda4f3b72b7e1bb7a420852081f33a67e098e992b",
+    "rows.json": "e74c08399cb0e7ec0f580df28d40c3c54576e506456da98e3ac39ac7c1595eb3",
+    "copy.npz": "1d3217893208f417f00039e97e67bc112be4409e0c812b39e66ecb3797f153f8",
+    "mapping.json": "de7cdc0e9f7e462bd3c43b8f2985e6242f37c5ebaab5e3f09e0a6957d949f926",
+    "composer.npz": "abeae2067798a4ece6326131e774e2123ff680fc822709d99943a631dc3a47c3",
+    "reference.npz": "e3ebc877d67efaa1ce2b6d7c8a0352c72ccf64766ce19465babf1bc00ec0e40f",
+    "review.json": "3a6e74631bc83a8a98965e36043dfe6ea98a5794ec7984d7eaba9a6fd7541ef6"
+  }
+}

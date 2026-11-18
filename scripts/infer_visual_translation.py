@@ -13,7 +13,7 @@ from scripts.infer_continuous_image_language import image_cells, text_cells
 MODELS = Path(__file__).resolve().parents[1] / "models/visual_edit_zh"
 
 
-def generate(packed, method, weights):
+def generate(packed, method, weights, *, receipt=None):
     if method == "phrases":
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
 
@@ -24,10 +24,20 @@ def generate(packed, method, weights):
 
     torch.set_num_threads(2)
     state = load_file(str(weights))
+    image = torch.from_numpy(np.unpackbits(packed, axis=1)).bool()[None]
+    lengths = torch.tensor([image.shape[1]])
+    if method == "feedback":
+        from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
+
+        model = CausalGlyphTranslator(state["landmarks"], state["exemplars"])
+        model.load_state_dict(state)
+        pixels, count, stopped, _ = model.eval().generate(image, lengths)
+        if receipt is not None:
+            receipt["ending"] = "learned_stop" if stopped.item() else "96_cell_limit"
+        return np.packbits(pixels[0, : count.item()].numpy(), axis=1)
     model = BlockTranslator(state["landmarks"])
     model.load_state_dict(state)
-    image = torch.from_numpy(np.unpackbits(packed, axis=1)).bool()[None]
-    (result,) = model.eval().generate(image, torch.tensor([image.shape[1]]))
+    (result,) = model.eval().generate(image, lengths)
     return np.packbits(result.numpy(), axis=1)
 
 
@@ -49,7 +59,9 @@ def main():
     parser.add_argument(
         "--cells", type=int, help="Number of real cells in a padded input image"
     )
-    parser.add_argument("--method", choices=("phrases", "neural"), default="phrases")
+    parser.add_argument(
+        "--method", choices=("phrases", "neural", "feedback"), default="phrases"
+    )
     parser.add_argument("--weights", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
@@ -57,21 +69,27 @@ def main():
         parser.error("--cells requires --image")
     if args.output.exists():
         parser.error("Choose a new output directory")
-    weights = args.weights or MODELS / (
-        "composer.msgpack.gz"
-        if args.method == "phrases"
-        else "block_aligned.safetensors"
+    weights = (
+        args.weights
+        or MODELS
+        / {
+            "phrases": "composer.msgpack.gz",
+            "neural": "block_aligned.safetensors",
+            "feedback": "causal_feedback.safetensors",
+        }[args.method]
     )
     source = (
         image_cells(args.image, args.cells) if args.image else text_cells(args.text)
     )
     packed = np.packbits(source.reshape(-1, 1024), axis=1)
-    result = generate(packed, args.method, weights)
+    details = {}
+    result = generate(packed, args.method, weights, receipt=details)
     args.output.mkdir(parents=True, exist_ok=False)
     page(result).save(args.output / "answer.png")
     (args.output / "answer.bin").write_bytes(result.tobytes())
     receipt = dict(
         method=args.method,
+        **details,
         source_cells=len(packed),
         output_cells=len(result),
         source_sha256=hashlib.sha256(packed).hexdigest(),

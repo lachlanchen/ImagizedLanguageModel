@@ -24,6 +24,10 @@ reported directly below.*
 
 A source-only model translated 冬，十月，吴少诚引兵还蔡州。 into 冬季，十月，吴少诚领兵返回蔡州。 by composing learned bitmap phrases. In 2,048 held-out passages it reproduced five changed complete glosses absent from training. It also corrupted a verb it had translated correctly elsewhere. A neural writer made more glyph errors than copying. Increasing phrase training from 32,768 to 55,872 pairs gave four accepted outputs in a further 24-passage reading, compared with three for the smaller model. [Try the image-to-image checkpoints](models/visual_edit_zh/README.md) · [Measured results](references/source_only_visual_translation.md)
 
+The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 78–79](publication/ilm-nature/manuscript.pdf#page=78)
+
+![Actual Chinese source and outputs from two matched visual writers](publication/ilm-nature/figures/Figure_59_visual_feedback.png)
+
 ![Real source, generated and reference Chinese glyphs in Figure 57, with copy controls and a training-size comparison](publication/ilm-nature/figures/Figure_57_block_translation.png)
 
 Given 现在魏 and a pictured classical source at a supplied insertion site, the updated writer drew 国的 and stopped. It recovered 2,280 of 24,048 held-out insertions, compared with 2,143 for its parent and 3,554 for whole-phrase counts. Figure 56 shows both this success and a fluent but incorrect 一个. With only the source and instruction, it recovered zero of 84 complete translations. [Results](references/first_emission_result.md) · [Figure 56](publication/ilm-nature/figures/Figure_56_first_emission.png) · [48 contextual judgments](references/evidence/first_emission_20261118/reading_gallery.pdf) · [Run the model on CPU](models/visual_edit_zh/README.md)

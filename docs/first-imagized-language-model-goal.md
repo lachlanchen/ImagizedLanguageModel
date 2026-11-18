@@ -27,6 +27,12 @@ transcription may read a finished image without changing its pixels. Transferrin
 inherited language capability and learning language from images alone are
 separate claims.
 
+## Current language experiment, 18 November 2026
+
+The source-only causal visual writer can modernize a short military statement while preserving its participants. The matched clean-history and error-trained checkpoints both read 尝攻襄州，为孔勍所败。 and write 曾经进攻襄州，被孔勍打败。 Each earned only one acceptable gloss in the eighteen-passage reading. On 1,024 fresh passages, error training increased complete physical edit error from 98.85% to 194.69%. Preserve both experiments. Wider exact phrase search also failed to rescue any of twelve reviewed failures with acceptable references.
+
+The next comparison uses the pictured source and a pictured draft to learn a bounded revision, with complete natural sentences as the unit of success. Training drafts must come from writers that excluded their source chapters and identical source ink. Count changes to meaning, previously correct answers lost, autonomous stopping and whole-system cost. General language, unknown-script production and the matched-quality compute target remain open. [Full evidence](../references/pictured_clause_and_feedback_result.md) · [Revision experiment](../references/pictured_revision_protocol.md)
+
 ## Independent generation of absent Han characters
 
 The [candidate-free idiom trial](../references/pictured_idiom_result.md) provides a [standalone 2.12-million-parameter model](../models/pictured_idiom_zh/README.md) that reads pictured prose and writes the missing expression. It exactly completed 134 of 22,907 official validation gaps, including 100 in which all four target glyphs were absent from the input window. Whole-answer alignment raised the original 35 exact answers to 134. Exchanging the contexts gave 23. The local count baseline gave 1,012. Of the 930 passages solved when the reader could choose among pictured training expressions, the independent writer solved 79. It solved none of 38 whole-expression novelties and both members in zero of 8,900 matched-context pairs. Figure 40 shows a correct answer and a failure. Extra sampled proposals failed the registered improvement criterion. Repeating that search is unwarranted.
