@@ -9,7 +9,7 @@ import os
 import numpy as np
 import torch
 from torch.nn import functional as F
-from safetensors.torch import load_model, save_model
+from safetensors.torch import load_file, load_model, save_file
 
 from ilm.visual_lm.composed_answer_writer import COPY, WRITE, STOP, MAX_SPAN, WIDTH, ComposedAnswerWriter, descriptors
 from ilm.visual_lm.ordered_passage_planner import OrderedPassageComposer
@@ -301,7 +301,8 @@ def run():
     t = monotonic()
     losses = train(net,prior,train_data,memory,device)
     elapsed = monotonic()-t
-    save_model(net,str(OUT/"final.safetensors"))
+    save_file({k:v.detach().cpu().contiguous().clone() for k,v in net.state_dict().items()},
+              str(OUT/"final.safetensors"))
     write_json(OUT/"fit.json",dict(seed=SEED,epochs=EPOCHS,batch_size=BATCH,losses=losses,
                 updates=EPOCHS*((len(train_data.y)+BATCH-1)//BATCH),training_seconds=elapsed,
                 writer_parameters=sum(p.numel() for p in net.parameters()),prior_parameters=sum(p.numel() for p in prior.parameters()),
@@ -309,7 +310,7 @@ def run():
                 checkpoint_sha256=sha(OUT/"final.safetensors"),memory_sha256=sha(OUT/"memory.npy")))
     del net
     net = ComposedAnswerWriter().to(device).eval()
-    load_model(net,str(OUT/"final.safetensors"))
+    net.load_state_dict(load_file(str(OUT/"final.safetensors")),strict=True)
     passages = [dev.tiles[s] for s in dev.p]
     questions = [dev.tiles[s] for s in dev.q]
     inputs = InputImages(passages,questions)
