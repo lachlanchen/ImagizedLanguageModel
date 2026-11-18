@@ -567,6 +567,14 @@ in writing-code loss as evidence that the reader learned syntax. The active
 The next learning decision should account for both visual ordering and the
 eventual complete-answer evidence before another heavy fit.
 
+The [matched training-source comparison](../references/visual_passage_register_result.md)
+recovers 2,127 unique modern passages with 1,047,284 direct next-image targets.
+Two visual bigrams trained on equal numbers of transitions score 59.5% for
+modern passage ink and 57.6% for historical book ink on 6,062 additional
+pairs. The paired construction interval for the 1.9-point difference spans
+−9.0 to +12.7 points. The data adapter is verified; changing register alone
+has not passed the criterion for a follow-on neural fit.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
