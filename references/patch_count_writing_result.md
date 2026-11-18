@@ -18,6 +18,10 @@ The writer divides each glyph into sixteen 8-by-8 ink patches. The input records
 
 The ordered fit took 0.75 seconds after source preparation and produced an 18.98 MB compressed checkpoint. The control took 1.85 seconds. The complete two-arm run, including preparation, preflight, serialization, reload and evaluation, took 23.14 seconds with 0.86 GiB peak process memory. Each arm saw 1,047,284 direct successors and 2,127 genuine endings. These CPU timings do not establish Qwen parity or the proposed 1,000-fold saving.
 
+## Why blank cells persist
+
+A subsequent calculation scored the complete blank bitmap and the recorded source bitmap under the saved model at every test position. Of the 348 blank outputs, the model assigned greater probability to the blank than to the recorded successor in 329 cases. The source had greater probability in 19. The median log probability ratio of source to blank was −8.45 across these 348 cases. Even an exact maximum-probability search could not select the recorded successor in those 329 contexts. Other meaningful successors remain possible. This comparison used the original history and checkpoint, with no additional training or generation. [Probability recount](evidence/patch_count_writing_20261118/blank_probability.json)
+
 ## Independent writing
 
 All eight free continuations reached the 128-cell cap. The ordered model produced recognizable fragments followed by repeated marks. The rotated model emitted only blank cells on all four prompts. Neither wrote an explanation about 言. A single model reader inspected the complete images with their conditions visible. The typed and pictured versions of the 言 question reproduced every output pixel from the ordered checkpoint in separate command-line executions. [Ordered answer](evidence/patch_count_writing_20261118/ordered_yan.png)
