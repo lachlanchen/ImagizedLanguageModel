@@ -18,7 +18,7 @@ from scripts.score_visual_writer_transfer import matching_pairs
 OUT = ROOT / 'artifacts/physical_answer_preference_v1'
 
 
-def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, destination=None):
+def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, destination=None, row_weights=None):
     model = PicturedIdiom(initial['landmarks']).cuda()
     model.load_state_dict(initial)
     model.reader.eval()  # Disable dropout identically while differentiating through the reader.
@@ -42,7 +42,8 @@ def fit(arm, initial, x, y, foil, features, bits, feedback, start, *, epochs=8, 
             with torch.autocast('cuda', dtype=torch.bfloat16):
                 state = model.read(features[x[ids]])
                 positive = physical_score(model, state, bits[targets], feedback[targets])
-                reference_loss = -positive.mean() / (4 * GROUPS + 1)
+                weighted = positive if row_weights is None else positive * row_weights[ids]
+                reference_loss = -weighted.mean() / (4 * GROUPS + 1)
                 extra = reference_loss.new_zeros(())
                 if arm == 'preference' and bool(paired.any()):
                     competing = y[partner[paired]]
