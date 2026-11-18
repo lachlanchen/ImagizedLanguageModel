@@ -34,12 +34,18 @@ class VisualPhraseBoundary:
         groups = self.contexts(left, right)
         # Cache the two possible prefixes and suffixes within this occurrence.
         costs = {}
+
         def distance(segment, start, end, reference):
             key = segment, start, end
             if key not in costs:
-                output = self.senses.composer.generate(source[start:end]) if start < end else []
+                output = (
+                    self.senses.composer.generate(source[start:end])
+                    if start < end
+                    else []
+                )
                 costs[key] = Levenshtein.distance(tuple(map(bytes, output)), reference)
             return costs[key]
+
         masses = Counter()
         for option in candidates:
             l, r = option["left"], option["right"]
@@ -61,7 +67,9 @@ class VisualPhraseBoundary:
     def action(self, cell, sense, left, right, allow_left, allow_right):
         score = Counter()
         for context, weight in zip(self.contexts(left, right), (1, 16, 16, 64)):
-            for (l, r, phrase), mass in self.tables.get((cell, sense, *context), {}).items():
+            for (l, r, phrase), mass in self.tables.get(
+                (cell, sense, *context), {}
+            ).items():
                 if l is not None and (not allow_left or l != left):
                     continue
                 if r is not None and (not allow_right or r != right):
@@ -79,8 +87,14 @@ class VisualPhraseBoundary:
             if sense is None:
                 continue
             left, right = sides(packed, index)
-            l, r, phrase = self.action(bytes(packed[index]), sense, left, right,
-                begin < index and left not in self.senses.heads, right not in self.senses.heads)
+            l, r, phrase = self.action(
+                bytes(packed[index]),
+                sense,
+                left,
+                right,
+                begin < index and left not in self.senses.heads,
+                right not in self.senses.heads,
+            )
             end = index - int(l)
             if end > begin:
                 parts.append(self.senses.composer.generate(packed[begin:end]))

@@ -225,3 +225,13 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method context-phrases
   --image references/evidence/predicate_context_20261119/distance_source.png \
   --output artifacts/shouchun_distance
 ```
+
+## Experimental source-span writer
+
+Use the packaged phrase-boundary weights to run the four-verb experiment on a CPU. The input is a strip of aligned 32 × 32 glyph cells. The output directory receives the answer PNG, packed ink and weight hashes.
+
+~~~bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --image references/evidence/phrase_boundary_20261119/camps_source.png --method phrase-boundaries --output /tmp/ilm-camps-boundary
+~~~
+
+The example produces 两营相距九里。 The joint-span and single-cell writers each translated ten of the 29 fresh archive clauses faithfully. Five figure examples reproduce byte for byte, including two incorrect translations. [Measured results](../../references/phrase_boundary_result.md)

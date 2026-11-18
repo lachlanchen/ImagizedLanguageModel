@@ -6,8 +6,21 @@ import tarfile
 from collections import Counter, defaultdict
 
 from scripts.prepare_contextual_phrase_realization import (
-    BASE, EVENT, INITIAL, OLD, OUT as PREVIOUS, ROOT, Rasterizer, clauses, load,
-    order, pairs, read_rows, records, sha, write_new,
+    BASE,
+    EVENT,
+    INITIAL,
+    OLD,
+    OUT as PREVIOUS,
+    ROOT,
+    Rasterizer,
+    clauses,
+    load,
+    order,
+    pairs,
+    read_rows,
+    records,
+    sha,
+    write_new,
 )
 from scripts.prepare_visual_boundary_candidates import OTHER, additional
 
@@ -46,8 +59,16 @@ def prepare():
     audit = []
     for i, r in enumerate(rows):
         if r["predicate"] in OTHER:
-            audit.append(dict(index=i, source=r["source"], target=r["target"],
-                              sense=r["sense"], admit=i not in REJECT, reason=REJECT.get(i)))
+            audit.append(
+                dict(
+                    index=i,
+                    source=r["source"],
+                    target=r["target"],
+                    sense=r["sense"],
+                    admit=i not in REJECT,
+                    reason=REJECT.get(i),
+                )
+            )
     assert len(audit) == 56 and {r["index"] for r in audit} >= REJECT.keys()
     write_new(OUT / "training_audit.json", audit)
     forbidden, chapters = set(), set()
@@ -58,26 +79,39 @@ def prepare():
             if isinstance(row.get(key), str):
                 forbidden.update(clauses(row[key]))
                 if "a" in row and "b" in row:
-                    forbidden.update(clauses(row[key].translate(str.maketrans(
-                        {row["a"]: row["b"], row["b"]: row["a"]}))))
+                    forbidden.update(
+                        clauses(
+                            row[key].translate(
+                                str.maketrans({row["a"]: row["b"], row["b"]: row["a"]})
+                            )
+                        )
+                    )
+
     for split in ("train", "heldout"):
         for row in read_rows(split):
             remember(row)
     for name, roster, _ in OLD:
         for row in load(ROOT / "artifacts" / name / (roster + ".json")):
             remember(row)
-    for row in load(ROOT / "references/evidence/block_translation_20261118/calibration_mapping.json"):
+    for row in load(
+        ROOT / "references/evidence/block_translation_20261118/calibration_mapping.json"
+    ):
         chapters.add(row["chapter"])
-    for folder, names in [(EVENT, ("train", "roles", "broad")), (INITIAL, ("train", "proposed", "test")),
-                          (PREVIOUS, ("train", "proposed", "test"))]:
+    for folder, names in [
+        (EVENT, ("train", "roles", "broad")),
+        (INITIAL, ("train", "proposed", "test")),
+        (PREVIOUS, ("train", "proposed", "test")),
+    ]:
         for name in names:
             for row in load(folder / (name + ".json")):
                 remember(row)
     for row in rows:
         remember(row)
     render = Rasterizer()
+
     def digest(text):
         return hashlib.sha256(b"".join(map(render.tile, text))).digest()
+
     old_ink = set()
     for s in forbidden:
         if len(s) <= 55:
@@ -91,13 +125,20 @@ def prepare():
     with tarfile.open(archive, "r|gz") as tar:
         for entry in tar:
             path = Path(entry.name)
-            if len(path.parts) < 4 or path.parts[1] != "双语数据" or path.name != "bitext.txt":
+            if (
+                len(path.parts) < 4
+                or path.parts[1] != "双语数据"
+                or path.name != "bitext.txt"
+            ):
                 continue
             ch = "/".join(path.parts[2:-1])
             if ch in chapters:
                 continue
             for n, (x, y) in enumerate(pairs(tar.extractfile(entry).read())):
-                for row in [*records(x, y), *additional([dict(source=x, new=y, group=ch)])]:
+                for row in [
+                    *records(x, y),
+                    *additional([dict(source=x, new=y, group=ch)]),
+                ]:
                     s, t = row["source"], row["target"]
                     if not (3 <= len(s) <= 32 and 2 <= len(t) <= 55):
                         continue
@@ -111,8 +152,13 @@ def prepare():
     used_ch, used_ink = set(), set()
     for sense in sorted(pool, key=lambda g: (len(pool[g]), g)):
         taken = 0
-        for row in sorted(pool[sense], key=lambda r: ("相去" not in r["source"],
-                          order(f"boundary-1/{r['chapter']}/{r['ordinal']}/{r['source']}"))):
+        for row in sorted(
+            pool[sense],
+            key=lambda r: (
+                "相去" not in r["source"],
+                order(f"boundary-1/{r['chapter']}/{r['ordinal']}/{r['source']}"),
+            ),
+        ):
             keys = {digest(row[k]) for k in ("source", "target")}
             if row["chapter"] in used_ch or keys & used_ink:
                 continue
@@ -123,11 +169,19 @@ def prepare():
             if taken == 12:
                 break
     write_new(OUT / "proposed.json", candidates)
-    write_new(OUT / "screen.json", dict(inventory_sha=sha(INVENTORY), archive_sha=sha(archive),
-        prior_chapters=len(chapters), prior_bitmaps=len(old_ink),
-        eligible={g: len(v) for g, v in pool.items()},
-        screened=dict(Counter(r["gloss"] for r in candidates)),
-        training_audit_sha=sha(OUT / "training_audit.json"), proposed_sha=sha(OUT / "proposed.json")))
+    write_new(
+        OUT / "screen.json",
+        dict(
+            inventory_sha=sha(INVENTORY),
+            archive_sha=sha(archive),
+            prior_chapters=len(chapters),
+            prior_bitmaps=len(old_ink),
+            eligible={g: len(v) for g, v in pool.items()},
+            screened=dict(Counter(r["gloss"] for r in candidates)),
+            training_audit_sha=sha(OUT / "training_audit.json"),
+            proposed_sha=sha(OUT / "proposed.json"),
+        ),
+    )
     for i, r in enumerate(candidates):
         print(i, r["gloss"], r["source"], "|", r["target"])
 

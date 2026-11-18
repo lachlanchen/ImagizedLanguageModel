@@ -18,7 +18,7 @@ def generate(packed, method, weights, *, receipt=None):
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
 
         return VisualPhraseComposer.restore(weights).generate(packed)
-    if method == "context-phrases":
+    if method in ("context-phrases", "phrase-boundaries"):
         import torch
         from safetensors.torch import load_file
         from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
@@ -31,9 +31,22 @@ def generate(packed, method, weights, *, receipt=None):
         state = load_file(str(encoder_path))
         encoder = CausalGlyphTranslator(state["landmarks"], state["exemplars"])
         encoder.load_state_dict(state)
-        writer = ContextualPhraseRealizer.restore(
-            weights, encoder, VisualPhraseComposer.restore(composer_path)
+        sense_path = (
+            weights.with_name("senses.msgpack.gz")
+            if method == "phrase-boundaries"
+            else weights
         )
+        writer = ContextualPhraseRealizer.restore(
+            sense_path, encoder, VisualPhraseComposer.restore(composer_path)
+        )
+        if method == "phrase-boundaries":
+            from ilm.visual_lm.visual_phrase_boundary import VisualPhraseBoundary
+
+            writer = VisualPhraseBoundary.restore(weights, writer)
+            if receipt is not None:
+                receipt["senses_sha256"] = hashlib.sha256(
+                    sense_path.read_bytes()
+                ).hexdigest()
         if receipt is not None:
             receipt.update(
                 encoder_sha256=hashlib.sha256(encoder_path.read_bytes()).hexdigest(),
@@ -135,6 +148,7 @@ def main():
             "event",
             "bound-event",
             "context-phrases",
+            "phrase-boundaries",
         ),
         default="phrases",
     )
@@ -159,6 +173,7 @@ def main():
             "event": "event_writer.safetensors",
             "bound-event": "event_writer.safetensors",
             "context-phrases": "context_phrases.msgpack.gz",
+            "phrase-boundaries": "phrase_boundaries/boundaries.msgpack.gz",
         }[args.method]
     )
     source = (

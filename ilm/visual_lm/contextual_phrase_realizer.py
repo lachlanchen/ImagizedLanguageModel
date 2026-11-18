@@ -68,7 +68,9 @@ class ContextualPhraseRealizer:
             return self.composer.generate(packed)
         parts = []
         begin = 0
-        for i, option in zip(positions, self.choices(packed, positions, majority=majority)):
+        for i, option in zip(
+            positions, self.choices(packed, positions, majority=majority)
+        ):
             if option is None:
                 continue
             if begin < i:
