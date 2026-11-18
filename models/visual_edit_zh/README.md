@@ -273,3 +273,17 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method anchor-gaps \
 ```
 
 The command writes a PNG, packed image cells and a stopping receipt to a new directory. Use `natural_input.png` and a different output directory to reproduce the erroneous age unit in Figure 68. The narrow checkpoint is `coverage/narrow.safetensors`. [Training, free generation and masked scores](../../references/visual_translation_coverage_result.md)
+
+## Pictured phrase contrasts
+
+The crossed writer uses the existing anchor-gap image inference path. It learned the 39 supervised phrase assignments and scored 1/15 on new assignments. On 18 prespecified new book passages it produced zero faithful complete translations. This example reproduces its archived father–son answer from a PNG on CPU.
+
+```bash
+python -m scripts.infer_visual_translation \
+  --method anchor-gaps \
+  --weights models/visual_edit_zh/context_phrases/crossed.safetensors \
+  --image references/evidence/context_phrase_trial_20261119/source0.png \
+  --output /tmp/ilm-context-phrase-answer
+```
+
+Choose an unused output directory. The command writes the answer image, packed pixels and a receipt with the weight and image hashes. [Measured result](../../references/context_phrase_trial_result.md)

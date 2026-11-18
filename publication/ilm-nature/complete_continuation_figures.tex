@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_translation_coverage_article.py.
+% Literal captions copied from their source inputs by build_context_phrase_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -560,4 +560,10 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_68_translation_coverage.png}
 \caption{\textbf{Transfer from reviewed translations to new chapters.} \textbf{a}, Complete source and emitted images from the 841-source writer. In the supervised biography the model adds the modern copula and removes a classical sentence-final particle. The two celestial counts elicit the same erroneous unit of age. \textbf{b}, One model reader graded method-masked translations of eighteen passages and eight pairs. Quantity credit requires the correct referent as well as the number. The reference gloss received nine of eighteen whole credits under the source-only rubric. \textbf{c}, Training loss averaged over successive blocks of 194 updates. Each writer received the same book replay, number of supplemental exposures and per-batch padding. The broader writer saw each reviewed translation fewer times.}
 \label{fig:translation-coverage}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_69_context_phrases.png}
+\caption{\textbf{Choosing between competing pictured phrases and generating a translation.} \textbf{a}, Complete emitted strips for the first role reversal in the fixed roster and a separately selected credited reading. In the first source the father answers the son. The second exchanges their roles. The third source describes a teacher learning from a pupil. \textbf{b}, Conditional scores use a supplied common prefix and both alternative phrases. Autonomous writers receive only the source. Both-detail credit requires an answer expressing the designated detail on each side. The text teacher receives the source transcription. \textbf{c}, Mean pairwise logistic loss on training examples, averaged over successive groups of 97 updates. Each arm saw 3,492 pair presentations. Rehearsal records this value for comparison.}
+\label{fig:context-phrases}
 \end{figure*}

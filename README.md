@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A compact visual writer learned all 39 supervised Chinese phrase contrasts. Given unfamiliar sources and two alternatives, it chose both correct phrases on only one of 15 pairs. Asked to translate 18 new book passages independently, it produced zero faithful complete answers. The local text teacher scored 11/18. Figure 69 shows the actual generated pixels, including a credited teacher–pupil clause and a failed father–son role reversal. [Results](references/context_phrase_trial_result.md) · [Run from a PNG](models/visual_edit_zh/README.md#pictured-phrase-contrasts)
+
+[![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=92)
+
 On one RTX 4090 D, a 2.33-million-parameter visual writer learned to modernise the pictured biography of Lü Yi. Expanding supervision from 108 to 841 reviewed passages reduced glyph edits on 192 new book passages. Both writers scored 0/18 for faithful complete translations on the masked reading, compared with 12/18 for Qwen3-8B reading text. [Experiment and saved answers](references/visual_translation_coverage_result.md) · [Run image-file inference](models/visual_edit_zh/README.md#supervision-across-chapters)
 
 [![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=91)
