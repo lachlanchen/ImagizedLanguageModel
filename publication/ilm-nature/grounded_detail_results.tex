@@ -1,0 +1,31 @@
+\subsection*{Grounded answer writing across typefaces}
+The final two glyphs of every formatted question in the 1,788-question
+reading assay were identical. The most frequent complete reference bitmap
+sequence occurred six times. A writer observing only that suffix can match
+at most six reference answers. Removing the common cue and grouping the
+raw questions by their last two visible signatures raises the empirical
+ceiling to 184. Neither calculation involves a new fitted model.
+
+We retained the trained passage reader and supplied its selection to a writer
+trained to draw Serif strokes from Sans images. On 3,170 official development
+questions, the reader selected a correct span 565 times. With fine local
+source detail, the writer reproduced 124 complete Serif answers exactly;
+with the same reading intervals and only a coarse layout it reproduced one
+(Fig.~\ref{fig:grounded-detail}). Direct copies of the selected Sans images
+matched zero Serif answers. The difference between detailed and coarse writing
+was 3.88 percentage points (95\% passage interval 3.23 to 4.57).
+Exchanging questions within passages gave nine exact answers to 3,158
+original questions, a paired decline of 3.61 points (2.94 to 4.31).
+Seven of 3,100 cyclic pairs requiring distinct answers had both complete
+outputs correct. These are conditional transcriptions of selected evidence.
+The source of answer length is the learned span boundary.
+
+The writer reproduced 2,600 of 4,742 familiar nonempty training pairs exactly.
+On 537 withheld shapes it reproduced none, with mean ink F1 .660 against .724
+for direct copying. A 10,833-parameter convolutional fallback raised F1 to
+.751, an improvement of .0271 over copying (95\% shape interval .0231 to
+.0312), below the prespecified .03 point requirement. On 314 further Han
+shapes absent from every training passage the fallback reached .7565 against
+.7334 for copying. Neither set yielded an exact new glyph. Repainting every
+development answer retained the same 124 complete correct responses and
+seven both-correct pairs.

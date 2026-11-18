@@ -1,0 +1,26 @@
+\subsection*{Question memory and cross-typeface writing}
+For each compressed state, the maximum number of correct full answers equals
+the frequency of its most common answer. Summing these maxima over states
+gave the suffix accuracy ceiling on the earlier 425-passage cohort.
+For the writing test, we held the trained boundary classifiers fixed and
+used the original official CMRC development questions. Of 3,219 questions,
+49 had unsupported pictured inputs. The other 3,170 covered 836 different
+pictured passages. We scored any complete accepted human reference, including
+changes in answer length under input controls.
+
+Training used paired Noto Sans and Serif CJK Regular images rendered into
+32-pixel cells. A source-bitmap hash reserved approximately one tenth of
+the shapes. Each output cell contained 64 four-by-four patches. We fitted
+frequency-weighted target patch modes conditional on position, coarse layout
+and local source ink. The stored count writer occupied 2.63 MB. Its fit took
+0.21 seconds after preparation. The test paired all questions within a passage
+when resampling uncertainty. We recounted all 25,336 stored output streams.
+
+The neural fallback predicted a residual logit from the source bitmap and
+two position coordinates using four 16-channel convolutional blocks. We
+trained for 12 passes over equally weighted distinct training pairs using
+binary cross entropy and soft Dice loss. The fallback changed only patches
+whose most detailed lookup key had no training evidence. The complete fit
+took 92.65 seconds on two CPU threads. The frozen count writer and source
+reader remained part of the resulting deployment. Novel writing systems,
+unrestricted generation and comparative language-training costs remain open.
