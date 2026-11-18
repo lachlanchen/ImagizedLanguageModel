@@ -27,7 +27,7 @@ class InkPatterns(nn.Module):
         prefix = F.pad(terms[:,:-1].cumsum(1),(0,0,1,0))
         return self.output(F.gelu(self.plan(state)[:,None]+self.position+prefix))+self.bias
 
-    def choose(self,state,beam=4,*,return_score=False):
+    def choose(self,state,beam=4,*,return_score=False,pattern_bias=None):
         context = self.plan(state)
         scores = state.new_zeros(len(state),1)
         history = torch.empty(len(state),1,0,device=state.device,dtype=torch.long)
@@ -35,6 +35,8 @@ class InkPatterns(nn.Module):
         rows = torch.arange(len(state),device=state.device)[:,None]
         for j in range(GROUPS):
             logits = self.output(F.gelu(context[:,None]+self.position[j]+prefix)) + self.bias[j]
+            if pattern_bias is not None:
+                logits = logits + pattern_bias[:,None,j]
             scores,choices = (scores[:,:,None]+logits.log_softmax(-1)).flatten(1).topk(beam,dim=1)
             parents,code = choices//16,choices%16
             prefix = prefix[rows,parents]+self.prefix[j,code]

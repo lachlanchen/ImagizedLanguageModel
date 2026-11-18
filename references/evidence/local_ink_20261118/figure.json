@@ -1,0 +1,91 @@
+{
+  "table": [
+    [
+      "Exact stopped phrases",
+      "Discovery",
+      "Replication",
+      "Fresh sentences"
+    ],
+    [
+      "Original phrase writer",
+      "337",
+      "268",
+      "187"
+    ],
+    [
+      "Local evidence on first glyph",
+      "599",
+      "538",
+      "354"
+    ],
+    [
+      "Local evidence throughout",
+      "618",
+      "564",
+      "405"
+    ],
+    [
+      "Modern prefix only, throughout",
+      "323",
+      "328",
+      "268"
+    ],
+    [
+      "Local whole-phrase counts",
+      "868",
+      "808",
+      "651"
+    ]
+  ],
+  "widths": {
+    "success_source": 14,
+    "success_prefix": 4,
+    "success_prediction": 2,
+    "success_local": 2,
+    "success_reference": 2,
+    "error_source": 9,
+    "error_prefix": 1,
+    "error_prediction": 2,
+    "error_local": 2,
+    "error_reference": 2
+  },
+  "examples": {
+    "success": {
+      "index": 41,
+      "site": 238,
+      "boundary": 4,
+      "source": "黄帝曰：愿闻淫邪泮衍，奈何？",
+      "prefix": "黄帝说：",
+      "reference": "我想",
+      "output": "我想",
+      "stopped": true
+    },
+    "error": {
+      "index": 120,
+      "site": 714,
+      "boundary": 1,
+      "source": "爵禄者，兵之实也。",
+      "prefix": "爵",
+      "reference": "位俸",
+      "output": "位的",
+      "stopped": true
+    }
+  },
+  "multi_counts": [
+    [
+      15,
+      7,
+      1
+    ],
+    [
+      45,
+      29,
+      27
+    ],
+    [
+      62,
+      42,
+      44
+    ]
+  ]
+}

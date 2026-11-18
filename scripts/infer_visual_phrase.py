@@ -44,6 +44,8 @@ def main():
     p.add_argument('--base',type=Path,default=MODELS/'editor.safetensors')
     p.add_argument('--update',type=Path,default=MODELS/'phrase_update.safetensors')
     p.add_argument('--device',choices=['cpu','cuda'],default='cpu')
+    p.add_argument('--local-ink',choices=('onset','stream'),help='Use local four-pixel evidence for the first glyph or entire phrase')
+    p.add_argument('--ink-directory',type=Path,default=MODELS/'local_ink')
     p.add_argument('--cursor',type=int,required=True,help='Number of classical cells preceding the insertion site')
     p.add_argument('--output',type=Path,required=True,help='A new directory for the image and stop receipt')
     for key in ('source','prefix'):
@@ -66,12 +68,27 @@ def main():
         image=image_cells(path,count) if path else text_cells(text) if text else np.empty((0,1024),bool)
         streams.append(torch.as_tensor(image.reshape(-1,1024),device=args.device).bool())
     net,prompt=restore_public(args.base,args.update,args.device)
-    pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt)
+    options = {}
+    if args.local_ink:
+        from ilm.visual_lm.local_ink import LocalInk, PhraseInk
+        manifest = json.loads((args.ink_directory/'manifest.json').read_text())
+        if manifest['format']!='ilm-local-ink-v1' or manifest['phrase_update_sha256']!=hashlib.sha256(args.update.read_bytes()).hexdigest():
+            p.error('Local count model requires its matching phrase writer')
+        models = []
+        for name in (('onset',) if args.local_ink=='onset' else ('onset','later','end')):
+            path = args.ink_directory/(name+'.npz')
+            if hashlib.sha256(path.read_bytes()).hexdigest()!=manifest['tables'][name]['sha256']:
+                p.error('Incomplete or incompatible local-ink archive')
+            models.append(LocalInk.load(path))
+        options[args.local_ink] = models[0] if args.local_ink=='onset' else PhraseInk(*models)
+    pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt,**options)
     ink=pixels.cpu().numpy()
     args.output.mkdir(parents=True)
     (args.output/'answer.bin').write_bytes(np.packbits(ink,axis=1).tobytes())
     Image.fromarray(np.where(np.concatenate(ink.reshape(-1,32,32),axis=1),0,255).astype('uint8')).save(args.output/'answer.png')
     result=dict(emitted_cells=len(ink),stopped=ended,cursor=args.cursor)
+    if args.local_ink:
+        result['local_ink'] = args.local_ink
     (args.output/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))
 

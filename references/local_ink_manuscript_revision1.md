@@ -1,0 +1,3 @@
+# Local visual frequencies in open phrase generation
+
+Preserve the three current editions at bb922ff9. Extend the abstract, results and methods with the registered onset and subsequent stream comparisons, keeping supplied sites and true preceding modern writing explicit. Report every control, held-out chapter scope, unseen phrases, actual first and later glyphs, physical table size and local count costs. Show a genuine generated success and a failure, an editable measured chart and an editable count table in Figure 53. Use the original held-out streams for the illustration; preserve all earlier figures and source pixels. Verify the output files, three PDFs, cumulative redline, figure placement and versioned local Nutstore copy. Historical benchmark claims remain intact.

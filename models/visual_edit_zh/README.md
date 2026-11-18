@@ -71,3 +71,17 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py \
 ```
 
 Use a new output directory for each run. `--source-text` and `--prefix-text` rasterize typed input in the training typeface. Omit the prefix when the insertion begins the modern sentence. On 10,789 sites the model produced 605 exact stopped phrases, including 20 multi-glyph insertions. A local training-count rule recovered 1,676. [Study and limits](../../references/visual_phrase_result.md) · [Original output images](../../publication/ilm-nature/figures/Figure_52_visual_phrase.png)
+
+### Generate a phrase using neighboring glyphs
+
+The optional local-ink model estimates four-pixel patterns from nearby classical and modern glyphs and feeds back its own drawings. This CPU command writes the two pictured glyphs 我想 and stops. It takes the marked insertion boundary and the preceding modern text as inputs.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py \
+  --local-ink stream \
+  --source-image references/evidence/local_ink_20261118/success_source.png \
+  --prefix-image references/evidence/local_ink_20261118/success_prefix.png \
+  --cursor 4 --output /tmp/ilm-local-phrase
+```
+
+Open `answer.png` in the new output directory. Use `--local-ink onset` to apply the correction only to the first glyph. The full model adds 18.95 MB of compressed training counts to the existing base editor and phrase update. It recovered 405 of 5,987 held-out insertions, against 187 for the earlier writer and 651 for a whole-phrase count baseline. It is an experimental insertion model with a supplied boundary. [Results, examples and limitations](../../references/local_ink_result.md)

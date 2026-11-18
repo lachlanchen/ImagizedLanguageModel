@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_phrase_article.py.
+% Literal captions copied from their source inputs by build_local_ink_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -453,4 +453,12 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Exact complete physical phrases including termination. The original editor is required to begin drawing at the same supplied site. Local counts select a whole phrase observed in training.
 \textbf{c}, First-glyph identity. The neural writer can select between offered phrases using source order, but an error on its first independent glyph already prevents most recorded completions.}
 \label{fig:visual-phrase}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_53_local_ink.png}
+\caption{\textbf{Conditional visual frequencies in a Chinese phrase writer.}
+\textbf{a}, Original source, modern prefix and emitted pixels from fresh sentences. Both recorded insertions have two characters absent from the source. On the left the writer produces the recorded first-person opening. On the right it produces a readable but incorrect second character. Examples were selected in roster order with a nonempty prefix and fixed display bounds. The respective boundaries follow the fourth and first source cells.
+\textbf{b}, Exact stopped phrases in 5,376 discovery, 5,413 replication and 5,987 fresh sites. \textbf{c}, Multi-glyph completions out of 2,534, 2,679 and 3,448 targets. Both drawing corrections use the same frozen neural writer. The training-frequency rule selects complete observed phrases.}
+\label{fig:local-ink}
 \end{figure*}
