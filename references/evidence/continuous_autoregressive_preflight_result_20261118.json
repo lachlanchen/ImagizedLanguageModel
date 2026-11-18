@@ -1,0 +1,517 @@
+{
+  "schema": "ilm-continuous-autoregressive-preflight-result-v1",
+  "registration_sha256": "099883d22ac23b5f34d399b2bff4bc16fb890f107e6a85cab1fb282075643068",
+  "source_commit": "f03d0e0f3737604248d5d15fae0dd982467908d0",
+  "source_hashes": {
+    "artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "data/visual_sequence_corpus_v1/report.json": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "data/visual_sequence_corpus_v1/train_0003_pixels.npz": "1517b50f7d631ea2738da815e8e325a290bdc14761e08d71866b999c9db0beed",
+    "data/visual_sequence_corpus_v1/train_0003_sources.json": "dead78831c5bf7eb98b76682c329e3f121a2c684aac299bd292d33dbf3c479a8",
+    "data/visual_sequence_corpus_v1/train_0037_pixels.npz": "d9cfabdfc9cca7d86dcabf711c1414d5a90e08d6adab541421423fd89bd7e622",
+    "data/visual_sequence_corpus_v1/train_0037_sources.json": "b6183aac22c1605315848636488a01c664e546cb1551c2fe90880232b4be8bef",
+    "data/visual_sequence_corpus_v1/train_0073_pixels.npz": "ef27bd7e66ce3fb6c0ce1bf8fca775f6d0bcc92a08e235cc575c183d9600feaf",
+    "data/visual_sequence_corpus_v1/train_0073_sources.json": "bc478dc1298a86ddfde8cac5d92f68b65fa5623e41024aa7de274853b224aea6",
+    "data/visual_sequence_corpus_v1/verification.json": "a3818ecf68b20bbfb5fa7dab6442bea8168481ffb15545043a4b74717f841eb9",
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/continuous_autoregressive_language.py": "7d578dff684a4f9e4eb9706b63331beeba1d2ab2809ced3f36da23fd505b6f49",
+    "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+    "ilm/visual_lm/full_rank_visual_span.py": "9151b935f51e9bc5bc5be4bf96bf4bc263d90b0d34aed58dc3ca7f9202eed7b3",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/saccade_lm.py": "776f25996851d49b8168f7c2894e3272e68d46282130defe9ea4aabfde5c4400",
+    "ilm/visual_lm/visual_cell_stream.py": "0f91f7a85851b9d258097748c28448f3caaa1ebb684ffa8795813fd9b0a27861",
+    "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+    "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+    "references/continuous_autoregressive_language_direction_20261118.md": "c403684fc5e5cbf69d89ec7d31a3a6d8f0f4abf65e6c010502ad98a0ada6e5fc",
+    "references/continuous_glyph_codec_v34_result.md": "fcb695fb6179415e3fb6efdeec72c65e14f78b3364b37761b0f5fe11771edd51",
+    "references/evidence/codec_output_v67_result.json": "361d877eec1cb817105e82c81f4bf508272595b6a106adbe39293759f9cfb32b",
+    "references/evidence/residual_plan_motor_comparison_result_20261118.json": "ff8c6fc147205e5bb5dd235c1be7cafc2d578f9e42c028d4fefc20b8f85d0e36",
+    "references/evidence/trainable_visual_context_preflight_registration_20261116.json": "6c0734397aa44094198635993b338b39ed2312605d7c143d9f48675b50e45f30",
+    "scripts/diagnose_visual_context_gradients.py": "6d17ae80c6905f95b5ecb408a0e81dab1d44cbf62ac338ce4047090458297f34",
+    "scripts/preflight_continuous_autoregressive_language.py": "eb34b6199e3e7322d7b29d23108a4699fbdc16e15276d05e97eb581ff750320b",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c",
+    "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "tests/test_continuous_autoregressive_language.py": "196cac8fe8d176f1c750b2d95459c11962afaefdbc805956d3310b42b3fd2b91"
+  },
+  "parameters": {
+    "1": {
+      "whole": 23519395,
+      "trainable": 16096034,
+      "codec": 7423361
+    },
+    "8": {
+      "whole": 23549194,
+      "trainable": 16125833,
+      "codec": 7423361
+    }
+  },
+  "cases": [
+    {
+      "components": 1,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "before": {
+        "code_nll": 1.418961524963379,
+        "stop_bce": 0.7733786106109619,
+        "total": 2.192340135574341,
+        "target_positions": 512,
+        "stop_positions": 513,
+        "pixels": {
+          "positions": 512,
+          "tp": 15300,
+          "fp": 35525,
+          "fn": 69552,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.22553564716200977
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_complete_513_book_initial.npz",
+        "raw_sha256": "c126bee0709a3094a0651b2f443ed1b2e4edb296214eff24fa6122815930463f"
+      },
+      "after": {
+        "code_nll": 1.4185097217559814,
+        "stop_bce": 0.03033299744129181,
+        "total": 1.4488427639007568,
+        "target_positions": 512,
+        "stop_positions": 513,
+        "pixels": {
+          "positions": 512,
+          "tp": 14822,
+          "fp": 34443,
+          "fn": 70030,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.22103089093850892
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_complete_513_book_updated.npz",
+        "raw_sha256": "ecfedad1bc6e31bb6a7a21daa94e28692228890c33843971e854ee1b5036ecb4"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.980162620544434,
+        "blocks.0.attention.qkv.weight": 4.308477401733398,
+        "blocks.7.attention.qkv.weight": 2.751110076904297,
+        "writer.condition.weight": 0.0019835170824080706,
+        "writer.blocks.0.qkv.weight": 0.0005297248717397451,
+        "writer.output.weight": 0.09100206941366196,
+        "stop.weight": 6.582958698272705
+      },
+      "total_unclipped_gradient_norm": 19.12961769104004,
+      "initial_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "updated_sha256": "b06ac0206677d675a20388e6f3ae2b1724e0353a7ae9acf7bbaa5bf444ac37c9",
+      "reset_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    },
+    {
+      "components": 1,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "before": {
+        "code_nll": 1.4189949035644531,
+        "stop_bce": 0.7535321712493896,
+        "total": 2.1725270748138428,
+        "target_positions": 5,
+        "stop_positions": 6,
+        "pixels": {
+          "positions": 5,
+          "tp": 107,
+          "fp": 387,
+          "fn": 396,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.21464393179538616
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_complete_qa_initial.npz",
+        "raw_sha256": "45a71a00ba6aeb6dbeb696c9bbe66f62bc358aa8dbf55dac730d57061df88519"
+      },
+      "after": {
+        "code_nll": 1.4176089763641357,
+        "stop_bce": 0.31226402521133423,
+        "total": 1.7298729419708252,
+        "target_positions": 5,
+        "stop_positions": 6,
+        "pixels": {
+          "positions": 5,
+          "tp": 112,
+          "fp": 378,
+          "fn": 391,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.2255790533736153
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_complete_qa_updated.npz",
+        "raw_sha256": "dd5e6e21d05be52b1885b0d6af310db932916f7f1e8d7700c6ef458d73f5d852"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.320914268493652,
+        "blocks.0.attention.qkv.weight": 3.0120017528533936,
+        "blocks.7.attention.qkv.weight": 1.908093810081482,
+        "writer.condition.weight": 0.00564905721694231,
+        "writer.blocks.0.qkv.weight": 0.0012166434898972511,
+        "writer.output.weight": 0.25639596581459045,
+        "stop.weight": 6.273499488830566
+      },
+      "total_unclipped_gradient_norm": 16.136749267578125,
+      "initial_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "updated_sha256": "e51ab71c9c336c605527a5970015c4d39cb45f5c71bca2dfb44041001006e98a",
+      "reset_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    },
+    {
+      "components": 1,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "before": {
+        "code_nll": 1.418878436088562,
+        "stop_bce": 0.7512600421905518,
+        "total": 2.170138359069824,
+        "target_positions": 35,
+        "stop_positions": 36,
+        "pixels": {
+          "positions": 35,
+          "tp": 1058,
+          "fp": 2394,
+          "fn": 4570,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.2330396475770925
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_longest_native_record_initial.npz",
+        "raw_sha256": "63b851ebed26843bade428f945445a4c86686b13a2ba15da7607a3575a761353"
+      },
+      "after": {
+        "code_nll": 1.4182943105697632,
+        "stop_bce": 0.11028778553009033,
+        "total": 1.5285820960998535,
+        "target_positions": 35,
+        "stop_positions": 36,
+        "pixels": {
+          "positions": 35,
+          "tp": 1047,
+          "fp": 2377,
+          "fn": 4581,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.2313300927971719
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k1_longest_native_record_updated.npz",
+        "raw_sha256": "57fdcd940db8b632f1d43b4d32d17348562bb312c18ce7b3938e29815bdd501d"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.673334121704102,
+        "blocks.0.attention.qkv.weight": 4.028710842132568,
+        "blocks.7.attention.qkv.weight": 2.6316659450531006,
+        "writer.condition.weight": 0.002664948580786586,
+        "writer.blocks.0.qkv.weight": 0.0006412062793970108,
+        "writer.output.weight": 0.11336640268564224,
+        "stop.weight": 6.272238254547119
+      },
+      "total_unclipped_gradient_norm": 18.179752349853516,
+      "initial_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "updated_sha256": "998ae28cb9d21177c81a328706ff84a12e37b22f0c0cd8f70b0421f2e12dd66c",
+      "reset_sha256": "b913b5bc0320063d6e74886fb8767cf965c53ff3bf245bc3ea82da2ed2993680",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    },
+    {
+      "components": 8,
+      "case": {
+        "role": "complete_513_book",
+        "corpus_index": 458,
+        "shard": 3,
+        "local": 74,
+        "kind": "book",
+        "source_id": "wikisource:b811ca6466254ff3f462",
+        "group": "大唐西域記",
+        "glyphs": 513,
+        "prompt_glyphs": 0,
+        "native_units": 509
+      },
+      "before": {
+        "code_nll": 1.418950080871582,
+        "stop_bce": 0.7733786106109619,
+        "total": 2.192328691482544,
+        "target_positions": 512,
+        "stop_positions": 513,
+        "pixels": {
+          "positions": 512,
+          "tp": 15435,
+          "fp": 35821,
+          "fn": 69417,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.22680518411849412
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_complete_513_book_initial.npz",
+        "raw_sha256": "9adc1a166d16f39807407ebf88a1a81c167cb56e00c39753a1842d3d6b42ffd5"
+      },
+      "after": {
+        "code_nll": 1.4184949398040771,
+        "stop_bce": 0.03033316135406494,
+        "total": 1.448828101158142,
+        "target_positions": 512,
+        "stop_positions": 513,
+        "pixels": {
+          "positions": 512,
+          "tp": 14849,
+          "fp": 34652,
+          "fn": 70003,
+          "exact": 0,
+          "source_blank": 4,
+          "false_blank": 0,
+          "false_ink": 4,
+          "f1": 0.22104456171428996
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_complete_513_book_updated.npz",
+        "raw_sha256": "12487d31d6af362a21ea560dc35b5d3814c43d97d0e3764ff11b815b95645b9f"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.980502128601074,
+        "blocks.0.attention.qkv.weight": 4.308509826660156,
+        "blocks.7.attention.qkv.weight": 2.75118350982666,
+        "writer.condition.weight": 0.0006935446872375906,
+        "writer.blocks.0.qkv.weight": 0.00015690339205320925,
+        "writer.output.weight": 0.032591842114925385,
+        "stop.weight": 6.582958698272705
+      },
+      "total_unclipped_gradient_norm": 19.129873275756836,
+      "initial_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "updated_sha256": "1889309d15a1be3e4331e9b40094d8a340db9faa932ac47445e1715c6aff2c72",
+      "reset_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    },
+    {
+      "components": 8,
+      "case": {
+        "role": "complete_qa",
+        "corpus_index": 4762,
+        "shard": 37,
+        "local": 26,
+        "kind": "qa",
+        "source_id": "TRAIN_186_QUERY_0",
+        "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+        "glyphs": 846,
+        "prompt_glyphs": 841,
+        "native_units": 740
+      },
+      "before": {
+        "code_nll": 1.4188212156295776,
+        "stop_bce": 0.7535321712493896,
+        "total": 2.1723532676696777,
+        "target_positions": 5,
+        "stop_positions": 6,
+        "pixels": {
+          "positions": 5,
+          "tp": 107,
+          "fp": 389,
+          "fn": 396,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.21421421421421422
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_complete_qa_initial.npz",
+        "raw_sha256": "da82ac7a5bfbf3e100c8e7d00b08bde5c2dd3d80672798142d5508128660f707"
+      },
+      "after": {
+        "code_nll": 1.4175939559936523,
+        "stop_bce": 0.3122568726539612,
+        "total": 1.7298507690429688,
+        "target_positions": 5,
+        "stop_positions": 6,
+        "pixels": {
+          "positions": 5,
+          "tp": 109,
+          "fp": 378,
+          "fn": 394,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.2202020202020202
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_complete_qa_updated.npz",
+        "raw_sha256": "0fa7e2513e444865600f67f469206a0728da6198e6dc85efa57f4c003d28486d"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.320898056030273,
+        "blocks.0.attention.qkv.weight": 3.0118236541748047,
+        "blocks.7.attention.qkv.weight": 1.9079456329345703,
+        "writer.condition.weight": 0.0021903985179960728,
+        "writer.blocks.0.qkv.weight": 0.0005192976677790284,
+        "writer.output.weight": 0.0913425162434578,
+        "stop.weight": 6.273499488830566
+      },
+      "total_unclipped_gradient_norm": 16.134613037109375,
+      "initial_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "updated_sha256": "e17ed3bfbdc0d18935225bcb40528eabd82324d9e74ea637d69090c75aadd5cc",
+      "reset_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    },
+    {
+      "components": 8,
+      "case": {
+        "role": "longest_native_record",
+        "corpus_index": 9420,
+        "shard": 73,
+        "local": 76,
+        "kind": "qa",
+        "source_id": "TRAIN_2006_QUERY_2",
+        "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+        "glyphs": 1042,
+        "prompt_glyphs": 1007,
+        "native_units": 961
+      },
+      "before": {
+        "code_nll": 1.418898344039917,
+        "stop_bce": 0.7512600421905518,
+        "total": 2.1701583862304688,
+        "target_positions": 35,
+        "stop_positions": 36,
+        "pixels": {
+          "positions": 35,
+          "tp": 1069,
+          "fp": 2431,
+          "fn": 4559,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.23422436459246276
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_longest_native_record_initial.npz",
+        "raw_sha256": "595065acf0e5ec622ca9fb20547b958b19cd21cc9bd6f25e1e381ef3a061bee4"
+      },
+      "after": {
+        "code_nll": 1.4183313846588135,
+        "stop_bce": 0.11028817296028137,
+        "total": 1.5286195278167725,
+        "target_positions": 35,
+        "stop_positions": 36,
+        "pixels": {
+          "positions": 35,
+          "tp": 1045,
+          "fp": 2394,
+          "fn": 4583,
+          "exact": 0,
+          "source_blank": 0,
+          "false_blank": 0,
+          "false_ink": 0,
+          "f1": 0.2305062313885519
+        },
+        "raw_file": "artifacts/continuous_autoregressive_preflight_v1/k8_longest_native_record_updated.npz",
+        "raw_sha256": "3cf0bd95e4174b2998e8b3340237dada1781bcc3ac689a17c97d50ad637bf4bf"
+      },
+      "gradient_norms": {
+        "input_projection.weight": 10.673781394958496,
+        "blocks.0.attention.qkv.weight": 4.028789520263672,
+        "blocks.7.attention.qkv.weight": 2.6317286491394043,
+        "writer.condition.weight": 0.0009254609467461705,
+        "writer.blocks.0.qkv.weight": 0.00023166238679550588,
+        "writer.output.weight": 0.04004155844449997,
+        "stop.weight": 6.272238254547119
+      },
+      "total_unclipped_gradient_norm": 18.179973602294922,
+      "initial_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "updated_sha256": "3457f3918c0b56c3c7127ac14e81e0e701bbd9720416c464d6cc5bf94e2b0c57",
+      "reset_sha256": "ccabe81daaf023f2f918d7e088c260a40b2892a36318c42dad0f03d4d70bd784",
+      "frozen_codec_unchanged": true,
+      "complete_record": true
+    }
+  ],
+  "actual_trial_updates": 6,
+  "retained_updates": 0,
+  "actual_decoded_images": 2208,
+  "common_initial_sha256": "f367aaecf0f80d2bb84e757f4a73308f792f8dda9475f115ed187c3472ca5205",
+  "all_trial_updates_reset": true,
+  "execution_support": true,
+  "language_quality_measured": false,
+  "autonomous_generation_run": false,
+  "current_direction_proved": false,
+  "full_fit_authorized": false,
+  "goal_achieved": false,
+  "resources": {
+    "elapsed_seconds": 11.961739506572485,
+    "resource_wait_seconds": 0.0,
+    "peak_allocated_vram_gib": 1.3355975151062012,
+    "minimum_available_gib": 66.21596908569336,
+    "admission": {
+      "entry": {
+        "available_gib": 67.50373077392578,
+        "swap_fraction": 0.7182435953750156,
+        "some_pressure_avg10": 0.0,
+        "full_pressure_avg10": 0.0
+      },
+      "mode": "glyph_full_reader_48GiB_entry_24GiB_runtime",
+      "original_training_admission_unchanged": true,
+      "foreign_processes_changed": false,
+      "high_global_swap_occupancy_recorded": false,
+      "minimum_entry_available_gib": 48.0,
+      "minimum_runtime_available_gib": 24.0,
+      "maximum_allocated_vram_gib": 22.0,
+      "recovery_resource_admission_amendment": true,
+      "original_parent_admission_functions_unchanged": true,
+      "project_process_inventory_count": 9
+    },
+    "pressure_wait_allowance_seconds": 180,
+    "stage_deadline_checked_during_pressure_wait": true,
+    "peak_rss_bytes": 1859350528
+  },
+  "public_export": {
+    "original_file": "artifacts/continuous_autoregressive_preflight_v1/original_result.json",
+    "original_sha256": "0f2a5c4868dbbd715cb5ef871205b3ce3322b6a0444c1940b82efaa2a6baf557",
+    "omitted": "Private process-command inventory only",
+    "all_measurements_and_generated_images_unchanged": true,
+    "audit_binds_original_report": true
+  }
+}

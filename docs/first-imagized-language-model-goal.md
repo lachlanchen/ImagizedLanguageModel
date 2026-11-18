@@ -513,10 +513,17 @@ head or glyph bank is used. Code density is not exact pixel likelihood.
 
 Three CPU tests cover distribution scoring, both causal levels, cached attention,
 actual updates/reset, frozen codec, reproducible sampling and emitted-image
-feedback. The next separately registered GPU preflight uses all three original
-complete training cases and resets six actual trial updates. Supplied-history
-initial/updated images and lower same-record loss cannot qualify autonomous
-language. A pass permits only a separately bound complete-corpus comparison.
+feedback. The [registered GPU preflight now passes](../references/continuous_autoregressive_preflight_result_20261118.md)
+on all three original complete training cases in each arm. All six actual
+trial updates reset, the fixed codec/common initialization checks pass, and an
+independent audit recounts every one of the 2,208 generated images. Execution
+takes 11.962 seconds at 1.336 GiB peak allocation. The candidate has 23,549,194
+whole parameters, including the previously trained 7,423,361-parameter codec;
+no language weights are inherited. Code NLL falls slightly in all six cases,
+but updated supplied-history F1 is only about .22–.23 and most loss reduction
+comes from stopping. This is execution support, not trained physical quality
+or language. Do not repeat this completed preflight. Its pass permits only a
+separately bound complete-corpus comparison.
 Keep the original complete-answer, book, retention, erased-input, stopping,
 untouched-confirmation and whole-model cost criteria. The requested 1,000-fold
 efficiency remains an unproved target, not a property inferred from this design.
