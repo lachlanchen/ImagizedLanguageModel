@@ -1,0 +1,44 @@
+{
+  "training": {
+    "questions": 7235,
+    "sampled_positions": 360246,
+    "multiple_matches": 620,
+    "groups": 1702
+  },
+  "fit_seconds": 63.950363158248365,
+  "comparisons": {
+    "blank": {
+      "groups": 425,
+      "questions": 1788,
+      "normal": 269,
+      "control": 18,
+      "difference_ci": [
+        0.12202039198133015,
+        0.1589530549624051
+      ]
+    },
+    "swapped": {
+      "groups": 420,
+      "questions": 1783,
+      "normal": 269,
+      "control": 11,
+      "difference_ci": [
+        0.12722197640117994,
+        0.16308053249471965
+      ]
+    }
+  },
+  "qualified": true,
+  "elapsed_seconds": 112.32957880105823,
+  "peak_rss_gib": 2.112377166748047,
+  "model_bytes": 108624,
+  "model_sha256": "55e8aaa50f412eed3e880131260796ad6b31cc0053b8ba50124be13f56d3f2d1",
+  "rows_sha256": "5b118c98ec59f7296e2d1f5d99767cbc8a03af6be828fdc419afb80e64cb53a7",
+  "protocol_sha256": "70ce48395dff5f5df54b9eed085a945356b5778846f686ac2d3ba5864d1c9b00",
+  "manifest_sha256": "6a4e47e145bba699f580d53d22d5d453abdcc3812dfef392ff6bee1a2c0366b7",
+  "corpus_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+  "implementation_sha256": {
+    "scripts/train_visual_extractive_reader.py": "12ad65657898299b2d6307bd81651aef661b70fb7aa35c32b7f14bf20e1954bf",
+    "ilm/visual_lm/visual_extractive_reader.py": "5d74dfcf17320aca22eecb1e90a8bce133b0fc5d6de7b69869493c2d0742b87f"
+  }
+}

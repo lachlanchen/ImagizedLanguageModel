@@ -584,6 +584,14 @@ explain only 0.39% of squared discrepancy. Preserve the original pixels and
 directions. A scalar normalization remedy misses its prespecified criterion.
 This one question is separate from the complete autonomous evaluation.
 
+A separate [CPU passage reader](../references/visual_extractive_reading_result.md)
+recovers 269/1,788 complete held-out answer rasters from the supplied passages.
+Question erasure gives 18/1,788 and same-passage exchange gives 11/1,783.
+This passes the registered question-dependence test for extractive reading.
+Preserve it as a compact reference for selecting evidence from a supplied
+page. Its scope is a contiguous passage span; standalone writing about an
+absent fact, historical glyph synthesis and matched-quality cost remain open.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
