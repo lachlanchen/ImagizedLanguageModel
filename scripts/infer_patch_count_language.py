@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+from ilm.visual_lm.layout_patch_language import LayoutPatchLanguage
 from ilm.visual_lm.patch_count_language import PatchCountLanguage
 from scripts.infer_continuous_image_language import image_cells, text_cells
 
@@ -25,7 +26,12 @@ def main():
     if args.text is not None and args.input_glyphs is not None:
         parser.error('--input-glyphs applies to a pictured prompt')
     ink=(image_cells(args.image,args.input_glyphs) if args.image is not None else text_cells(args.text))[:,0]
-    model=PatchCountLanguage.load(args.model)
+    with np.load(args.model, allow_pickle=False) as checkpoint:
+        version = int(checkpoint['version'])
+    loaders = {1: PatchCountLanguage, 2: LayoutPatchLanguage}
+    if version not in loaders:
+        parser.error(f'Unsupported patch writer version {version}')
+    model = loaders[version].load(args.model)
     generator=np.random.default_rng(args.sample_seed) if args.sample_seed is not None else None
     answer,stopped=model.generate(ink,maximum_new=args.maximum_new,generator=generator)
     columns=min(32,max(1,len(answer)))
