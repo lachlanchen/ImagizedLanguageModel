@@ -1,0 +1,107 @@
+{
+  "roster": {
+    "original_questions": 3219,
+    "eligible": 3170,
+    "unsupported_input": 49
+  },
+  "passages": 836,
+  "scores": {
+    "normal": {
+      "source_exact": 565,
+      "coarse_exact": 1,
+      "detail_exact": 124,
+      "copy_exact": 0,
+      "detail_changed_from_source": 3170,
+      "count": 3170,
+      "exact_changed": 124,
+      "detail_exact_given_correct_span": 124,
+      "aligned_all_cells": 3902,
+      "aligned_all_f1_sum": 3735.516095724046,
+      "aligned_all_exact": 2837,
+      "aligned_withheld_cells": 415,
+      "aligned_withheld_f1_sum": 277.49464641372,
+      "aligned_withheld_exact": 0
+    },
+    "blank_question": {
+      "source_exact": 31,
+      "coarse_exact": 0,
+      "detail_exact": 11,
+      "copy_exact": 0,
+      "detail_changed_from_source": 3170,
+      "count": 3170,
+      "exact_changed": 11,
+      "detail_exact_given_correct_span": 11,
+      "aligned_all_cells": 204,
+      "aligned_all_f1_sum": 198.7968856092796,
+      "aligned_all_exact": 162,
+      "aligned_withheld_cells": 14,
+      "aligned_withheld_f1_sum": 9.54109035845085,
+      "aligned_withheld_exact": 0
+    },
+    "blank_passage": {
+      "source_exact": 0,
+      "coarse_exact": 0,
+      "detail_exact": 0,
+      "copy_exact": 0,
+      "detail_changed_from_source": 0,
+      "count": 3170,
+      "exact_changed": 0
+    },
+    "exchange": {
+      "source_exact": 26,
+      "coarse_exact": 1,
+      "detail_exact": 9,
+      "copy_exact": 0,
+      "detail_changed_from_source": 3158,
+      "count": 3158,
+      "exact_changed": 9,
+      "detail_exact_given_correct_span": 9,
+      "aligned_all_cells": 197,
+      "aligned_all_f1_sum": 191.54131328151158,
+      "aligned_all_exact": 156,
+      "aligned_withheld_cells": 10,
+      "aligned_withheld_f1_sum": 5.850591850580653,
+      "aligned_withheld_exact": 0
+    }
+  },
+  "pairs": {
+    "distinct_answer_pairs": 3100,
+    "both_complete_exact": 7
+  },
+  "examples": {
+    "failure": "DEV_0_QUERY_0",
+    "pair": [
+      "DEV_121_QUERY_1",
+      "DEV_121_QUERY_2"
+    ]
+  },
+  "detail_minus_coarse": [
+    0.038801261829652996,
+    0.0322782232479934,
+    0.045712797718369585
+  ],
+  "normal_minus_exchange": [
+    0.03609879670677644,
+    0.029430374792926612,
+    0.04306523115896137
+  ],
+  "qualified": true,
+  "elapsed_seconds": 125.19054931588471,
+  "rss_gib": 1.0634727478027344,
+  "fit_sha256": "996884945a7071a2c3700f9ccec8440ad1608c908747be788c39ef57b34c8e56",
+  "program_sha256": "d7c20be2f2d74a6b28f808e1b5be890efadd83bf7c9fbe4e5e8924b51be774ee",
+  "protocol_sha256": "07b3d7ad4dcc1fe5180a920f9f4423e690e5b33c2b7f210178f92957cfa315d3",
+  "files": {
+    "failure_reference.png": "eb477f411ea0253e8b80259de8766edd8fa88cd05c69510cf49f1d9d08fe14f7",
+    "failure_output.png": "8c2eabb73e30f3ad21a86f12bc1c783342b646be621d4f8fe38d118eb049bac3",
+    "failure_question.png": "e3aa9d2af38267e2c19d5c36e05342f4338c2764144e8294a321435e2c3801c5",
+    "pair_answer_b.png": "69b43488db7651c73b2d8502f07dcc519afda72d8b8108e6657693ddcf60e821",
+    "pair_question_a.png": "98c7e04e6485eb96f6d40155acc968f132a0e3a32bd8b2a99d7ddf9c2c1462d4",
+    "pair_passage.png": "6a1d047bcdcb2c65bf6aff4a7b1ebaae1e83d81fe1da335aed5c1cdf206e41e9",
+    "emitted.zip": "6831727259ed180c0938d7bad3fd3162fe2db962cd98dde46d1af75fa11be91a",
+    "scores.json": "d41d99b30ce717a69429dc9874d07252a2b390d9cfd865afb061d53d785a07ed",
+    "pair_answer_a.png": "734f0833c9dfa86eaac22f5b8b008828901e9d54e5fae6d9b3be3d79973d0bb6",
+    "failure_source.png": "f5e3cc5b46db056420748af39a01fefe0bce6cea5c4b43a4c0a07069321122f4",
+    "pair_question_b.png": "fff3eeb268ef40d63d4e61507b4d22a43d555a4c9972e6cb42ed7eca2952a2de"
+  }
+}

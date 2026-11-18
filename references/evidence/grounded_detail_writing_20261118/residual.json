@@ -1,0 +1,124 @@
+{
+  "assays": {
+    "seen": {
+      "pairs": 4742,
+      "metrics": {
+        "copy": {
+          "exact": 6,
+          "mean_ink_f1": 0.719005731731765
+        },
+        "count": {
+          "exact": 2600,
+          "mean_ink_f1": 0.9844023353429675
+        },
+        "neural": {
+          "exact": 0,
+          "mean_ink_f1": 0.7433875091616235
+        },
+        "combined": {
+          "exact": 2600,
+          "mean_ink_f1": 0.9844023353429675
+        }
+      },
+      "combined_minus_copy": [
+        0.2653966036112023,
+        0.26284592813633234,
+        0.2680487649092413
+      ],
+      "patches_using_neural": 0,
+      "pixels_changed_vs_count": 0,
+      "images_changed_vs_count": 0
+    },
+    "withheld": {
+      "pairs": 537,
+      "metrics": {
+        "copy": {
+          "exact": 1,
+          "mean_ink_f1": 0.723902163788559
+        },
+        "count": {
+          "exact": 0,
+          "mean_ink_f1": 0.6596177844230267
+        },
+        "neural": {
+          "exact": 0,
+          "mean_ink_f1": 0.745652447773782
+        },
+        "combined": {
+          "exact": 0,
+          "mean_ink_f1": 0.7510277398480658
+        }
+      },
+      "combined_minus_copy": [
+        0.02712557605950689,
+        0.023050559835435185,
+        0.031231031215536803
+      ],
+      "patches_using_neural": 21320,
+      "pixels_changed_vs_count": 49094,
+      "images_changed_vs_count": 537
+    },
+    "new_development_han": {
+      "pairs": 314,
+      "metrics": {
+        "copy": {
+          "exact": 0,
+          "mean_ink_f1": 0.7334088541443167
+        },
+        "count": {
+          "exact": 0,
+          "mean_ink_f1": 0.6711588230787748
+        },
+        "neural": {
+          "exact": 0,
+          "mean_ink_f1": 0.7562619543445078
+        },
+        "combined": {
+          "exact": 0,
+          "mean_ink_f1": 0.7565381203413533
+        }
+      },
+      "combined_minus_copy": [
+        0.023129266197036553,
+        0.018626065040870658,
+        0.027807257817062402
+      ],
+      "patches_using_neural": 13113,
+      "pixels_changed_vs_count": 31767,
+      "images_changed_vs_count": 314
+    }
+  },
+  "transfer_pass": false,
+  "origins": {
+    "development_pairs": 314,
+    "ambiguous_sans_shapes": 0,
+    "unsupported_development_han": 0
+  },
+  "fit_seconds": 92.64650830905885,
+  "elapsed_seconds": 108.75779467448592,
+  "loss_by_epoch": [
+    0.6367721880836977,
+    0.5634021994033594,
+    0.5468556737185982,
+    0.536258289664701,
+    0.5296085173196992,
+    0.5252678842200726,
+    0.5218112690147659,
+    0.5181095708454557,
+    0.5150811805670809,
+    0.5123847623980299,
+    0.5103306306356019,
+    0.5078531692180356
+  ],
+  "passes": 12,
+  "examples_per_pass": 4743,
+  "updates": 1788,
+  "parameters": 10833,
+  "cpu_threads": 2,
+  "rss_gib": 0.8684730529785156,
+  "program_sha256": "7387d4dae6e1c28e4ec0b5e1798698a6821da1aa9be5936583c943ae79119176",
+  "protocol_sha256": "f6ee310b31ca89da6525d72b11233587599bde3ee78634eb2a6ae0f26c64d728",
+  "count_fit_sha256": "996884945a7071a2c3700f9ccec8440ad1608c908747be788c39ef57b34c8e56",
+  "neural_sha256": "d34ae7c35f7cf45f4322cf2b4cbf04c90ad32597c531e9ec1f0c1a8e54beddfa",
+  "model_code_sha256": "5b83dad0b8b53cc20fcca7c15ddf965d684d810a2390c148398d466a7413a228"
+}
