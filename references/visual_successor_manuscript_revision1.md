@@ -1,0 +1,5 @@
+# Visual successor selection in the manuscript
+
+Add the measured 512-article assignment and same-exposure character control after the visual reading and writing results. Link this experiment to the cost objective in the introduction. Add the independently measured rotated-supervision comparison to the passage-reading paragraph. Keep the previous article and frozen evaluations as the baseline. The revised text distinguishes choosing a supplied image, assigning two images jointly and writing without supplied images. The experiment estimates fixed-budget duration on two CPU threads. A general-language matched-quality speedup remains open.
+
+Figure 35 will include the two image histories from the first article in fixed hash order, their actual successors and the comparison of assignment scores with both-strict counts. Preserve all original figure sources. Check the first pair against its complete frozen pixel digest, recount the two scores from the saved arrays, build the three PDF editions, inspect the affected pages and verify the versioned local delivery.

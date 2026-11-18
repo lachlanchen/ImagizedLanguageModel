@@ -27,6 +27,10 @@ transcription may read a finished image without changing its pixels. Transferrin
 inherited language capability and learning language from images alone are
 separate claims.
 
+## Learning speed on visible Chinese passages
+
+The [512-article successor comparison](../references/visual_successor_result.md) measures how often a reader assigns different glyphs to contexts sharing their final cell. A compact visual model consumed 1,047,284 training targets in 19.46 seconds on two CPU threads. The matched character-indexed model took 18.73 seconds. They scored 55.1% and 56.2% on supplied-candidate assignment. The visual advantage over rotated supervision remained uncertain. The native writer preferred the same candidate for both contexts in 509/512 articles. Preserve these results when evaluating a change to the writing objective. Both individual choices and independently generated answers matter to the deployment goal. General-language efficiency at matched quality remains open.
+
 ## Current model decision: full-context recipe rejected
 
 The [complete full-context comparison](../references/trainable_visual_context_result_20261117.md)
