@@ -1,0 +1,183 @@
+{
+  "partitions": {
+    "validation": {
+      "all": {
+        "total": 3348,
+        "exact": 855,
+        "neural": 746,
+        "neighbors": 450,
+        "either": 970,
+        "took_neighbor": 1555
+      },
+      "absent": {
+        "total": 1895,
+        "exact": 151,
+        "neural": 38,
+        "neighbors": 190,
+        "either": 207,
+        "took_neighbor": 1068
+      },
+      "effect_neural": {
+        "difference_pp": 3.255675029868578,
+        "interval95_pp": [
+          2.281794595508229,
+          4.226578253714876
+        ],
+        "groups": 512,
+        "gained": 173,
+        "lost": 64
+      },
+      "effect_neighbors": {
+        "difference_pp": 12.096774193548388,
+        "interval95_pp": [
+          10.654509818245074,
+          13.619629720636917
+        ],
+        "groups": 512,
+        "gained": 456,
+        "lost": 51
+      },
+      "absent_effect_neural": {
+        "difference_pp": 5.963060686015831,
+        "interval95_pp": [
+          4.711458897908073,
+          7.2478991596638656
+        ],
+        "groups": 486,
+        "gained": 129,
+        "lost": 16
+      },
+      "absent_effect_neighbors": {
+        "difference_pp": -2.058047493403694,
+        "interval95_pp": [
+          -2.7426324134496944,
+          -1.4188030843423785
+        ],
+        "groups": 486,
+        "gained": 1,
+        "lost": 40
+      },
+      "by_length": {
+        "1": {
+          "total": 1117,
+          "exact": 548,
+          "neural": 454,
+          "neighbors": 353,
+          "either": 620,
+          "took_neighbor": 537
+        },
+        "2": {
+          "total": 1095,
+          "exact": 210,
+          "neural": 188,
+          "neighbors": 84,
+          "either": 238,
+          "took_neighbor": 518
+        },
+        "3": {
+          "total": 1136,
+          "exact": 97,
+          "neural": 104,
+          "neighbors": 13,
+          "either": 112,
+          "took_neighbor": 500
+        }
+      }
+    },
+    "official": {
+      "all": {
+        "total": 2947,
+        "exact": 651,
+        "neural": 524,
+        "neighbors": 394,
+        "either": 760,
+        "took_neighbor": 1519
+      },
+      "absent": {
+        "total": 1858,
+        "exact": 170,
+        "neural": 31,
+        "neighbors": 196,
+        "either": 208,
+        "took_neighbor": 1144
+      },
+      "effect_neural": {
+        "difference_pp": 4.309467254835426,
+        "interval95_pp": [
+          3.2899246058944485,
+          5.340702181455824
+        ],
+        "groups": 2163,
+        "gained": 180,
+        "lost": 53
+      },
+      "effect_neighbors": {
+        "difference_pp": 8.720732948761452,
+        "interval95_pp": [
+          7.473401606917377,
+          9.989807183075108
+        ],
+        "groups": 2163,
+        "gained": 313,
+        "lost": 56
+      },
+      "absent_effect_neural": {
+        "difference_pp": 7.481162540365985,
+        "interval95_pp": [
+          6.203198460908341,
+          8.802633922898423
+        ],
+        "groups": 1522,
+        "gained": 149,
+        "lost": 10
+      },
+      "absent_effect_neighbors": {
+        "difference_pp": -1.3993541442411195,
+        "interval95_pp": [
+          -1.998919502971367,
+          -0.8592910848549946
+        ],
+        "groups": 1522,
+        "gained": 2,
+        "lost": 28
+      },
+      "by_length": {
+        "1": {
+          "total": 957,
+          "exact": 431,
+          "neural": 328,
+          "neighbors": 307,
+          "either": 503,
+          "took_neighbor": 519
+        },
+        "2": {
+          "total": 1013,
+          "exact": 157,
+          "neural": 130,
+          "neighbors": 68,
+          "either": 176,
+          "took_neighbor": 524
+        },
+        "3": {
+          "total": 977,
+          "exact": 63,
+          "neural": 66,
+          "neighbors": 19,
+          "either": 81,
+          "took_neighbor": 476
+        }
+      }
+    }
+  },
+  "seconds": 11.66937881987542,
+  "trainable_gate": 15,
+  "files": {
+    "official.npz": "ad1a3d576570cde03ffd057d10d069349eec1ec92d34b5a81deadfce29eefe89",
+    "coefficients.npy": "083005a608b6e32d00b97ca5a116451723752cf7b360de370acf6fd616157816",
+    "glyphs.npy": "40bde4537dd068e82426fcb27c859da76e39d06cf89e650608f6d57d90142b26",
+    "neighbors.npz": "8ae10e36c4b3432e8a9627c29dc74b9fd8b805d732e1ebcc15d647c9280bbfb2",
+    "validation.npz": "14d38a42f6b5d46ff0765b4284328ef4980b7013b0379ad123bcd96507d17d85"
+  },
+  "table_entries": 265143,
+  "deployment_bytes": 2308158
+}
