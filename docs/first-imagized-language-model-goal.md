@@ -2,7 +2,9 @@
 
 Updated: 2026-11-19. **Active; usable visual language remains unproved.**
 
-The paired teacher-label comparison is complete. Both independent students gave zero faithful answers among eighteen. Pooling routes to the same visible ink reduced 2,545 complete-answer edits but still yielded zero faithful translations. The next matched comparison trains the visible-image likelihood directly on all 55,872 real sentence pairs. Require improved complete meaning on fresh chapters before promotion. [Paired study](../references/paired_student_result.md) · [Full-corpus comparison](../references/visible_image_likelihood_protocol.md)
+The paired teacher-label comparison is complete. Both independent students gave zero faithful answers among eighteen. Pooling routes to the same visible ink reduced 2,545 complete-answer edits but still yielded zero faithful translations. The completed full-corpus comparison trains visible-image likelihood on all 55,872 real sentence pairs. [Paired study](../references/paired_student_result.md) · [Full-corpus comparison](../references/visible_image_likelihood_protocol.md)
+
+The all-path writer preserved the speaker and the permission/refusal distinction in all eight prompts crossing four speakers and two signs. Seven complete outputs were acceptable, with no complete source or neural output present in training. The same checkpoint produced zero faithful answers among eighteen diverse new passages. Treat the four-speaker result as a narrow positive control. The next test is role binding in naturally occurring transitive clauses. Use paired changes of agent, recipient and destination with a common event vocabulary. Score full answers and preservation of both roles, compare with the stronger phrase composer, and reserve unseen predicates and chapters. Keep the default unchanged until a replication improves whole meaning on diverse passages. [Measured output and limitations](../references/visible_likelihood_result.md)
 
 ## Objective and deployment boundary
 

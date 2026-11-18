@@ -174,7 +174,7 @@ class CausalGlyphTranslator(nn.Module):
         upper = mass.clone()
         upper[:, :-1] += prob[:, DRAW, None]
         upper.scatter_(1, choice[:, None], -1)
-        return choice, value > upper.max(-1).values
+        return choice, value > torch.maximum(upper.max(-1).values, prob[:, DRAW])
 
     @torch.inference_mode()
     def generate(self, pictures, lengths, limit=96, *, pool_routes=False):

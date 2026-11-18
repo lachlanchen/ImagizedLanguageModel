@@ -24,7 +24,7 @@ def pooled_choice(copy, examples, identifiers, stop, draw):
     upper = lower.copy()
     upper[:-1] += draw
     upper[best] = -1
-    return best, bool(lower[best] > upper.max())
+    return best, bool(lower[best] > max(upper.max(), draw))
 
 
 @torch.inference_mode()

@@ -22,6 +22,10 @@ reported directly below.*
 
 ## Writing modern Chinese from a pictured classical sentence
 
+The visual writer reads 王曰：可。 and writes 王说：可以。 With 不 in the pictured prompt it writes 王说：不可以。 Across four speakers and two polarities it preserves both distinctions on eight unseen inputs and gives seven acceptable complete answers. On eighteen diverse passages the same neural model gives zero faithful translations. [Full training and observed limits](references/visible_likelihood_result.md)
+
+![The visual model writes a refusal, changes its answer with the pictured prompt, and misreads a diplomatic mission.](publication/ilm-nature/figures/Figure_62_visible_likelihood.png)
+
 Figure 61 shows why legible glyphs can give a wrong answer. Asked to translate 高祖亦嘉之, the writer says Gaozu died. The source says he praised someone. Combining probabilities for identical ink saves 2,545 glyph edits across 1,024 passages, while both decoders earn zero faithful answers in the eighteen-passage reading. [Experiment and downloadable checkpoint](references/paired_student_result.md)
 
 ![Original pictured translations, complete error counts and faithful-answer scores for the paired students.](publication/ilm-nature/figures/Figure_61_paired_student.png)

@@ -6,7 +6,6 @@ import numpy as np
 from rapidfuzz.distance import Levenshtein
 from scripts.evaluate_pooled_glyphs import (
     WORK,
-    EVAL,
     ROOT,
     read_streams,
     load,

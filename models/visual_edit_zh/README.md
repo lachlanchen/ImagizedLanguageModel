@@ -197,3 +197,11 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method pooled --image 
 ```
 
 Pooling reduces full-stream edit distance, but both students scored zero faithful modern translations on the eighteen reviewed passages. [Results and reproduced images](../../references/paired_student_result.md)
+
+## Run the whole-glyph likelihood writer
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method marginal --image references/evidence/visible_likelihood_20261119/speech_3_source.png --output /tmp/ilm-king-refusal
+```
+
+The supplied image reads 王曰： 不可。 The checkpoint writes 王说： 不可以。 in `answer.png` and saves the actual packed output in `answer.bin`. An optional `--text` argument rasterizes a typed source before inference. The experiments use a single printing font and fixed cells. The model has 2,251,925 parameters and runs independently from the training data, Qwen and the phrase composer. It reproduced four changed full archive glosses among 1,024 broad passages. On a separate eight-utterance probe it preserved speaker and polarity eight times. [Results](../../references/visible_likelihood_result.md) · [Independent masked readings](../../references/evidence/visible_likelihood_20261119)
