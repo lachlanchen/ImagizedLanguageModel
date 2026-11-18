@@ -1,0 +1,78 @@
+{
+  "preparation": {
+    "archive_sha256": "643aa0d555b684bf3da68dc92516711223cecc899ed53f9e1ef1113dd44af571",
+    "upstream_md5": "dc7658b8cdf4f94b8714d130b7d15196",
+    "program_sha256": "f79197a08dde3b437b117de65946a5ec48e2fc0d6dda85aa3a6fad66705bf847",
+    "development": {
+      "records": 571,
+      "kinds": {
+        "absent_content_ink": 300,
+        "distributed_ink": 94,
+        "single_span": 177
+      },
+      "files": {
+        "questions.npz": "9df202d62e8c51fbfdc3517d26d42a356acc588ba463a6739e94c6a09d277ce3",
+        "pixels.npy": "4440df890497a839e5d2d2ba41112b347832ee0c9ea59ccf84c1673196484b2f",
+        "sources.json": "6de4db7ef15d9af87d026f99047778eb785b94de674d40e85225a7e3867f9c5a",
+        "answers.npz": "2476d74b2377b2d45bf98ed697cdd99856ec84491e2e8f66f3ee1cd6efa208d2",
+        "passages.npz": "67199fc5b4c914d51fc0df2dd6e8498e76ed709e63f1b4bfcbba429f1d7cce71"
+      },
+      "screening": {
+        "examined": 10000,
+        "short_human_answer_records": 4738,
+        "absent_content_ink": 401,
+        "single_span": 177,
+        "distributed_ink": 94
+      }
+    },
+    "train": {
+      "records": 2565,
+      "kinds": {
+        "absent_content_ink": 1526,
+        "distributed_ink": 398,
+        "single_span": 641
+      },
+      "files": {
+        "questions.npz": "4f9214852a2e0dcb3836117b80d6426c2c85ec3a05fa6b142b1cecf173aeaa05",
+        "pixels.npy": "fedbe0a12964c955cf6af2d90d19fffe5a22329ac6e8b41a7bddc4c6c73c77e1",
+        "sources.json": "96e395369da8253f459694536673fa35a02b6c1554ec5b96edaa0b23879ffaea",
+        "answers.npz": "6f48d547ed43c980b22f1d87533d21a629bd3f4caa831ab63d3f095952313204",
+        "passages.npz": "9f18c22870e887e590892a3e6c8097ee822a3fb917f26b1bfff138270db9c658"
+      },
+      "screening": {
+        "examined": 40000,
+        "short_human_answer_records": 18517,
+        "absent_content_ink": 1526,
+        "single_span": 641,
+        "distributed_ink": 398
+      }
+    }
+  },
+  "audit": {
+    "development": {
+      "records": 571,
+      "recount": {
+        "absent_content_ink": 300,
+        "single_span": 177,
+        "distributed_ink": 94
+      },
+      "exact_one_input_span_ceiling": 177,
+      "arbitrary_input_cell_copy_ceiling": 271
+    },
+    "train": {
+      "records": 2565,
+      "recount": {
+        "distributed_ink": 398,
+        "single_span": 641,
+        "absent_content_ink": 1526
+      },
+      "exact_one_input_span_ceiling": 641,
+      "arbitrary_input_cell_copy_ceiling": 1039
+    },
+    "shared_distinct_images": {
+      "passage": 0,
+      "question": 0,
+      "answer": 2
+    }
+  }
+}
