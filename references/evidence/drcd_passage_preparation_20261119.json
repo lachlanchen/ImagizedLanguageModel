@@ -1,0 +1,66 @@
+{
+  "preparation": {
+    "upstream": {
+      "project": "DRCKnowledgeTeam/DRCD",
+      "commit": "b944790de5af02c5fbb7cd9cb1473d27d169eebf",
+      "files": {
+        "DRCD_dev.json": "e236df03861ba241bd7b29628cd48b3b8e339c60137e041a4358b5320ed61928",
+        "DRCD_test.json": "d9de0b4d247a8391ac8daee6c02c2c8272b75562a1e2377b50ae04ecc09a7438",
+        "DRCD_training.json": "5e6268091ab98f0bb858f03c77fba85e23b31e49a91638e4f22d0d8ec703f79a",
+        "README.md": "df7c740cbe95a8bc7affc8aa0dd01736fc3becf5fe18fb82a7eefe451f3c3520"
+      }
+    },
+    "program_sha256": "5ece8d63bb58cd0dc134618b9df5c1acaa4c43f65da17aff98c7d8539029afdc",
+    "cmrc_files": {
+      "cmrc2018_train.json": "5497aa2f81908e31d6b0e27d99b1f90ab63a8f58fa92fffe5d17cf62eba0c212",
+      "cmrc2018_dev.json": "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f"
+    },
+    "development": {
+      "passages": 994,
+      "questions": 3505,
+      "aligned_intervals": 7687,
+      "cells_in_unique_passages": 446300,
+      "exclusions": {
+        "source_questions": 3524,
+        "questions_excluded_missing_passage_glyph": 19
+      },
+      "files": {
+        "questions.npz": "020823be4b0931fe335d3d345813f067371eb8bfb74b317571c456ddb2d5f5c3",
+        "pixels.npy": "7d3e4a9fc393c56a1ad221475c65134e37dd165989c42073664a4ba7f96b497b",
+        "question_ids.json": "5ea767f72350095f021afd35df389d4321a5624455e12c520cf22834a06bf58d",
+        "passages.npz": "5f7c40f975f5a263eee207e0be2bd2be123a0580061841739944fa0446bc1524",
+        "evidence.npz": "4c7340d1469f8cfb34d09b086f4102b2d1010972a3e639f555c05a7ce4ef4d56"
+      }
+    },
+    "train": {
+      "passages": 6579,
+      "questions": 21934,
+      "aligned_intervals": 42339,
+      "cells_in_unique_passages": 2865530,
+      "exclusions": {
+        "source_questions": 26936,
+        "questions_excluded_missing_passage_glyph": 136,
+        "questions_excluded_overlap": 4866
+      },
+      "files": {
+        "questions.npz": "912ae9cd705e6650d5708681c34b871a6376292f50bf79df23f54c794897bff8",
+        "pixels.npy": "7e425a831d2aeee2d61492c5f3e0d47560fa35b212cdaf55a124938663aa776f",
+        "question_ids.json": "e77f8994984c020730ed18d83a295f0be1c1d62e67a9c3ed295fd265cd0d37d0",
+        "passages.npz": "06d26336594f0931f3f7a459a34ca9c4c737146071ba06d6c4268e83d10dad22",
+        "evidence.npz": "51d6f27f3cb915d1923ec4e0d4931478e1abe814856ba948191d663cb6b6d9b5"
+      }
+    }
+  },
+  "independent_recount": {
+    "train": {
+      "questions": 21934,
+      "passages": 6579,
+      "all_exact_intervals": 42339
+    },
+    "development": {
+      "questions": 3505,
+      "passages": 994,
+      "all_exact_intervals": 7687
+    }
+  }
+}
