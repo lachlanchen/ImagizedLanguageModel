@@ -48,6 +48,10 @@ def main():
                 b=net.generate_from_context(read)
                 require(all(np.array_equal(l,r) for l,r in zip(a,b)), 'Production entry points disagree')
     centers=torch.tensor(centers/counts[:,None],device='cuda',dtype=torch.float32)
+    # cuDNN stores the intermediates for input gradients only in training mode.
+    # This one-layer GRU has no dropout, and all of its weights stay frozen.
+    require(net.causal.dropout == 0 and net.causal.num_layers == 1, 'Expected deterministic recurrence')
+    net.causal.train()
     optimized=[]
     for i in range(0,len(words),128):
         guard(start)
@@ -63,6 +67,7 @@ def main():
             require(torch.isfinite(param.grad).all().item(),'Nonfinite state gradient')
             opt.step()
         optimized.append(param.detach().tanh())
+    net.causal.eval()
     fitted=torch.cat(optimized)
     np.savez_compressed(OUT/'states.npz',words=words,counts=counts,centroids=centers.cpu().numpy(),
                         fitted=fitted.cpu().numpy(),reachable=reachable)
