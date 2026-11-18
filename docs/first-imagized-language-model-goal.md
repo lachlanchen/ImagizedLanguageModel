@@ -448,6 +448,25 @@ restart any earlier run. Only actual complete-source update/reset and final
 generated-image qualification can establish a trained motor; neither code nor
 loading proves language.
 
+The loaded trial is now [terminal at optimizer replay](../references/evidence/residual_motor_replay_failure_20261118.json).
+It passes the real complete-source update/reset path and generates all 68,948
+initial images equal to the unchanged base, then retains two updates and fails
+the exact third-update replay. No final trained-image result exists. The saved
+failure state includes an unaccepted replay attempt; do not install it or call
+it a qualified two-update model. The combined check did not retain which
+loss/gradient/model/optimizer component differs, so the cause is unproved.
+
+The [registered numerical diagnostic](../references/residual_motor_replay_diagnostic_protocol_20261118.md)
+compares the original global deterministic-algorithm flag with strict true,
+keeping actual initial tensors, source batches, loss and optimizer fixed.
+It reconstructs two updates and repeats the actual third four times per mode,
+recording every gradient/model/optimizer and RNG digest. All twelve trial
+updates are discarded and reset. cuDNN flags alone do not cover all CUDA
+operations, but neither attention nor embedding reductions are yet an isolated
+cause. Require an observed unequal original replay and exact candidate replay
+before a separately registered fresh full physical fit. No language, final
+motor quality or efficiency follows from numerical reproducibility.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

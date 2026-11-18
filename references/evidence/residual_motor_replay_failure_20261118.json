@@ -1,0 +1,25 @@
+{
+  "schema": "ilm-residual-motor-replay-failure-v1",
+  "source_commit": "36013c17",
+  "input_sha256": {
+    "artifacts/residual_plan_motor_loaded_v1/status.json": "445c6da0f59cce7419afb93457523401257dadd27139a216a7a5ed4a39895335",
+    "artifacts/residual_plan_motor_loaded_v1/failure.json": "2f9eeaf70b59a7900a91fb8eb28491c222a81c988a07f2520556df6cdb1c91c7",
+    "artifacts/residual_plan_motor_loaded_v1/ledger.jsonl": "847f133aebfbd9eea54f88f28065f4c249502c6ac19e06f3a721ccc64d1fcf84",
+    "artifacts/residual_plan_motor_loaded_v1/initial_outputs.npz": "7c0429c78b52c31739c87614da5688b05ce80606376511a6baa0d0c37c49c60b",
+    "artifacts/residual_plan_motor_loaded_v1/initial_refinement.pt": "62943dc2eb3699f450b83dcb14e4c5fabf8629f6dcc651b15af594343a8c9bed",
+    "artifacts/residual_plan_motor_loaded_v1/failure_refinement.pt": "ec3e463b5050f22611ab2c2e84e10dbc9dc0f737c4a2c18cd91352ae3772a471",
+    "artifacts/residual_plan_motor_loaded_v1.exit.json": "0fe7f9d25b0aa7cbc02cd522d6bc9c6103ae49e97b8f5eebb0a2def044a0cb41",
+    "references/evidence/residual_motor_loaded_comparison_registration_20261118.json": "0dd6d936db648980a91d729cb6ced3925588842fdc9e3b3193f6bcf4ee10abda"
+  },
+  "retained_updates": 2,
+  "update_three_replay_failed": true,
+  "preflight_execution_passed_before_failure": true,
+  "actual_initial_images": 68948,
+  "initial_equals_unchanged_base_by_executed_assertion": true,
+  "trained_final_image_quality_measured": false,
+  "exact_replay_failure_components_not_retained": true,
+  "failed_checkpoint_interpretation": "Snapshot includes unaccepted third-update replay attempt; only two ledger updates retained. Not a qualified final model.",
+  "owned_processes_terminated": true,
+  "automatic_retry": false,
+  "full_language_fit_authorized": false
+}

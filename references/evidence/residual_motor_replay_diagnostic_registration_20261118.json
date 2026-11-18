@@ -1,0 +1,57 @@
+{
+  "schema": "ilm-residual-motor-replay-diagnostic-v1",
+  "input_sha256": {
+    "scripts/diagnose_residual_motor_replay.py": "559fcc01ed1feca11c7ee4e9325e78f71db4f02c2ffd84ef85d84e301215e40d",
+    "references/residual_motor_replay_diagnostic_protocol_20261118.md": "bc8a718ac9f6e21217541932c85c5957eb17c8ffaa451745ed3894152ebd0205",
+    "references/evidence/residual_motor_replay_failure_20261118.json": "3dcb22ba6516c9e79f88b72aeeebf4dce667b232d3cf1d8df2e9eb0bf98f8ce5",
+    "references/evidence/residual_motor_loaded_comparison_registration_20261118.json": "0dd6d936db648980a91d729cb6ced3925588842fdc9e3b3193f6bcf4ee10abda",
+    "artifacts/residual_plan_motor_loaded_v1/initial_refinement.pt": "62943dc2eb3699f450b83dcb14e4c5fabf8629f6dcc651b15af594343a8c9bed",
+    "artifacts/residual_plan_motor_loaded_v1/ledger.jsonl": "847f133aebfbd9eea54f88f28065f4c249502c6ac19e06f3a721ccc64d1fcf84",
+    "artifacts/residual_plan_motor_loaded_v1/failure_refinement.pt": "ec3e463b5050f22611ab2c2e84e10dbc9dc0f737c4a2c18cd91352ae3772a471",
+    "artifacts/residual_plan_motor_preparation_v1/physical_targets.pt": "1905a51a063eb760532910fdb1db37b32a61b4b17a1a468f1745a89a61bb7cb9",
+    "artifacts/binary_codec_preparation_v1/partition.pt": "77a93277ea667b421dd89b3e2d69c3747da7868b3fb7c44f161a633c71baa513",
+    "artifacts/spatial_capacity_comparison_v1/source_order.pt": "d0ec07197b9fa2834a2b97e85f619f6576cc58f1861bb0eb3e2910a64af31ab3",
+    "artifacts/spatial_capacity_comparison_v1/binary_final.pt": "9580e2e8c22231b319c9db88899940296a7a6e4677efd5d5c06209bbff75277c",
+    "ilm/visual_lm/residual_motor_data.py": "7199bffb8886c37e8cf35dff4ce710afc15aa2e422d4d478edd846252ee53ee0",
+    "ilm/visual_lm/residual_plan_motor.py": "fcbd375eec32207c4c385ca2b31c42ae49423099278194a6501956420eacb763",
+    "ilm/visual_lm/residual_motor_resources.py": "06f4d2dd16be66565e7236cf481b76ebb742e5482dec275084c754e5c04f112a",
+    "ilm/visual_lm/occupancy_glyph_density.py": "e2585f5841cc4c5d991d375f37a60b07037cfd40073ffb3c1adc74ab5cfef2ad",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/binary_plan_glyph_density.py": "b5b161497a13d5afb34900c7fbf98bb04bfa2c7874f78951ec24a9cf20c46706",
+    "ilm/visual_lm/spatial_plan_codec.py": "daf6f3da179046d3d0e3db1bc5878346ed5482d619710e33d838e973b524ba69",
+    "ilm/visual_lm/full_rank_visual_span.py": "9151b935f51e9bc5bc5be4bf96bf4bc263d90b0d34aed58dc3ca7f9202eed7b3",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+    "scripts/train_spatial_capacity_codec_comparison.py": "e2ca23fc8d1f9a5befd43f5d1115727fac3805a7b3a45cd713c48527ddd7be54",
+    "scripts/diagnose_visual_context_gradients.py": "6d17ae80c6905f95b5ecb408a0e81dab1d44cbf62ac338ce4047090458297f34"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "modes": [
+    false,
+    true
+  ],
+  "intervention": "torch.use_deterministic_algorithms(mode,warn_only=False) only",
+  "warmup_reconstruction_updates": 2,
+  "repetitions_of_update_three": 4,
+  "batch_images": 128,
+  "total_discarded_trial_updates": 12,
+  "total_trial_image_exposures": 1536,
+  "unchanged_original_cudnn_and_cublas_flags": true,
+  "original_model_and_loss_unchanged": true,
+  "resources": {
+    "maximum_seconds": 240,
+    "maximum_pressure_wait_seconds": 60,
+    "minimum_entry_host_gib": 40,
+    "minimum_runtime_host_gib": 24,
+    "maximum_allocated_gpu_gib": 8,
+    "maximum_process_rss_gib": 8,
+    "cpu_threads": 2
+  },
+  "retained_updates": 0,
+  "no_image_generation": true,
+  "automatic_retry": false,
+  "full_language_fit_authorized": false
+}
