@@ -1,0 +1,68 @@
+{
+  "preparation": {
+    "splits": {
+      "train": {
+        "cards": 1115,
+        "questions": 8920,
+        "families": 2230,
+        "field_counts": {
+          "\u672c\u4e49": 4460,
+          "\u8bfb\u97f3": 4460
+        },
+        "historical_forms": 4460,
+        "max_answer_cells": 57,
+        "files": {
+          "answers.npz": "53330bf17cac28ccd7271bd2a1bbc1d75c8f3cbfd07d9650555c0aaa156c4fa4",
+          "cards.npz": "bafee33fec362137b051bdb3bcb81128e2bd32c907227e37dcd9515b3611038c",
+          "index.json": "b94b5a9e3bd940ac9ea6d9ace75f6a36b9826b62224f4d73807868511dd47135",
+          "pixels.npy": "4059215244cc94f88bf3c370360766ea1f2079a745d6a5854b53c75774db836d",
+          "questions.npz": "f9298b190593f6e542e7e2e45cf2faa11ea12eb028a4428967ac29401500afa6"
+        }
+      },
+      "development": {
+        "cards": 142,
+        "questions": 1136,
+        "families": 284,
+        "field_counts": {
+          "\u672c\u4e49": 568,
+          "\u8bfb\u97f3": 568
+        },
+        "historical_forms": 568,
+        "max_answer_cells": 55,
+        "files": {
+          "answers.npz": "b61df50e4a68b673a85bd2bad5ea3b0b8c244092a45b5e929482f11e8312f17d",
+          "cards.npz": "4d995e5d215a0f98f79689accd040087978824525562933236bd590f93cf3595",
+          "index.json": "3b0953e9302858f6b98cffde4a3bad6b46f9e2a5b6ff90156dcc519de63d5ac7",
+          "pixels.npy": "f3f2dd8fb5551938e6366c98f0a611d6b025de1b075b5b40df4fe11075a65191",
+          "question_paraphrases.npz": "b1d018fb913d9e28e66609382210317c0b36e952c9040c31b2cc73e1d59eae67",
+          "questions.npz": "5fe771d977782d9a1ff923359d8e92f7d5029845751e127db2dca54e46444c7c"
+        }
+      }
+    },
+    "train_dev_overlap": {
+      "family": 0,
+      "entry": 0,
+      "raster": 0
+    },
+    "source_report_sha": "2fddb5e8222fe5bba27c143006966caf2075dd503cbd1b1fa3cbd1160b3d3084",
+    "cache_sha": "8902a8d79a3cad0af8ee98531383301ecd02e365ed300533b008a0701def0f0e",
+    "source_code_sha": "66622b7f72695693370b9cdcc3286c4ef9f51b51b763ad68bcb084f343b18ccc",
+    "uses_sealed_partition": false
+  },
+  "independent_raster_recount": {
+    "train": {
+      "checked": 8920,
+      "distinct_answers": 8920,
+      "cards": 1115,
+      "paraphrases": 0,
+      "report_sha": "654bcf68b81f2fd4346b59be3dc386039cc8893d17744f96bc0dde659dffb53d"
+    },
+    "development": {
+      "checked": 1136,
+      "distinct_answers": 1136,
+      "cards": 142,
+      "paraphrases": 1136,
+      "report_sha": "654bcf68b81f2fd4346b59be3dc386039cc8893d17744f96bc0dde659dffb53d"
+    }
+  }
+}
