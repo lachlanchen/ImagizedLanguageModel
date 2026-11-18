@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A 51,776-parameter reader answered Chinese questions whose glyph inventories were identical and whose meanings changed with word order. It wrote 4,542/4,544 exact answer images on held-out character families, compared with 1,136 for a matched reader given sorted glyphs. Moving familiar expressions before the fields they modify reduced the ordered model to 356/4,544. Figure 71 shows the original answer pixels for both successful requests and a failure on the same card. [Read the study](references/entry_question_reader_result.md) · [Run the pictured questions](models/entry_question_reader/README.md)
+
+[![Three pictured requests about 耳 and the actual answers, with complete scores and training loss](publication/ilm-nature/figures/Figure_71_question_order.png)](publication/ilm-nature/manuscript.pdf#page=94)
+
 A 28,032-parameter visual writer reads an illustrated dictionary card and writes a sentence with a requested fact and an attested historical form. On 284 held-out character families, it produced **1,134 exact complete answer images in 1,136 requests**. Replacing the printed field names with synonyms reduced this count to 225. The examples for 耳 and 言 run locally on CPU. [Run the writer](models/pictured_entry_writer/README.md) · [Evidence and controls](references/pictured_entry_writer_result.md)
 
 [![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=93)
