@@ -1,0 +1,276 @@
+{
+  "development": {
+    "n": 22907,
+    "groups": 3218,
+    "all_absent": 16797,
+    "unseen": 38,
+    "pairs": 8900,
+    "reader": 930,
+    "local": 1012,
+    "arms": {
+      "published": {
+        "exact": 134,
+        "exchanged": 23,
+        "distinct": 43,
+        "reader_correct": 79,
+        "recovered_lost_reader": 0,
+        "reader_wrong": 55,
+        "local_wrong": 70,
+        "all_absent": 100,
+        "unseen": 0,
+        "pairs_both": 0,
+        "pairs_changed": 6846,
+        "gain": 0,
+        "loss": 0,
+        "stopped": 22907,
+        "emitted": 91512,
+        "known": 91474,
+        "archive_sha256": "fc6a1d35c1901bf13bb0c2f6542b7f318f2a53dc1f4e4fac5a2e77a18ccc4e33"
+      },
+      "original_targets": {
+        "exact": 292,
+        "exchanged": 40,
+        "distinct": 88,
+        "reader_correct": 169,
+        "recovered_lost_reader": 102,
+        "reader_wrong": 123,
+        "local_wrong": 152,
+        "all_absent": 217,
+        "unseen": 0,
+        "pairs_both": 0,
+        "pairs_changed": 7523,
+        "gain": 208,
+        "loss": 50,
+        "stopped": 22907,
+        "emitted": 91627,
+        "known": 91611,
+        "archive_sha256": "c5a417425a198f424ca3e730d2181e6eba2f4e2bef42b3ef94185795549b8da9"
+      },
+      "distilled_targets": {
+        "exact": 378,
+        "exchanged": 23,
+        "distinct": 106,
+        "reader_correct": 263,
+        "recovered_lost_reader": 190,
+        "reader_wrong": 115,
+        "local_wrong": 200,
+        "all_absent": 268,
+        "unseen": 0,
+        "pairs_both": 0,
+        "pairs_changed": 6890,
+        "gain": 296,
+        "loss": 52,
+        "stopped": 22907,
+        "emitted": 91622,
+        "known": 91235,
+        "archive_sha256": "e49ad930af2d85e29f1aa6bcd03427a2a282ba5109da2fa708a7b5da13302bd1",
+        "paired_pp_vs_published": [
+          0.9140482677670494,
+          1.2247784452816066
+        ],
+        "paired_pp_vs_original_targets": [
+          0.21392662320800637,
+          0.5384560990953653
+        ]
+      }
+    },
+    "transfer_pass": true,
+    "samples": {
+      "gain": {
+        "row": 102,
+        "tag": 577259,
+        "before": "MBA在美国经历了百年的",
+        "after": "，有着很强的生命力。投资的准备与收获当我们决定投",
+        "reference": "风风雨雨",
+        "produced_cells": 4
+      },
+      "miss": {
+        "row": 68,
+        "tag": 577225,
+        "before": "果的本本，其□都备受关注，如果要是在价格上有什么",
+        "after": "，那肯定是一件大新闻。笔者今天就为您介绍一款具体",
+        "reference": "风吹草动",
+        "produced_cells": 4
+      }
+    }
+  },
+  "fresh": {
+    "n": 9135,
+    "groups": 1356,
+    "all_absent": 6676,
+    "unseen": 18,
+    "pairs": 3237,
+    "reader": 398,
+    "local": 406,
+    "arms": {
+      "published": {
+        "exact": 60,
+        "exchanged": 9,
+        "distinct": 28,
+        "reader_correct": 44,
+        "recovered_lost_reader": 0,
+        "reader_wrong": 16,
+        "local_wrong": 27,
+        "all_absent": 38,
+        "unseen": 0,
+        "pairs_both": 0,
+        "pairs_changed": 2495,
+        "gain": 0,
+        "loss": 0,
+        "stopped": 9135,
+        "emitted": 36485,
+        "known": 36475,
+        "archive_sha256": "b4e7f4f07b757ede379350787ed83699fbdc81c329f912f8cff25531b22a5522"
+      },
+      "original_targets": {
+        "exact": 125,
+        "exchanged": 11,
+        "distinct": 69,
+        "reader_correct": 79,
+        "recovered_lost_reader": 41,
+        "reader_wrong": 46,
+        "local_wrong": 58,
+        "all_absent": 80,
+        "unseen": 0,
+        "pairs_both": 0,
+        "pairs_changed": 2754,
+        "gain": 83,
+        "loss": 18,
+        "stopped": 9135,
+        "emitted": 36540,
+        "known": 36535,
+        "archive_sha256": "cf00cf5ec57d1bf2197f38410efa7d3f0e90a93cf4fe9fe3c85c245e39c9a3fa"
+      },
+      "distilled_targets": {
+        "exact": 163,
+        "exchanged": 10,
+        "distinct": 83,
+        "reader_correct": 112,
+        "recovered_lost_reader": 72,
+        "reader_wrong": 51,
+        "local_wrong": 80,
+        "all_absent": 111,
+        "unseen": 0,
+        "pairs_both": 2,
+        "pairs_changed": 2495,
+        "gain": 120,
+        "loss": 17,
+        "stopped": 9135,
+        "emitted": 36541,
+        "known": 36377,
+        "archive_sha256": "0623fbd571b202d8ae3b948b633f1024140150cd3557557a8d56833a4e6a346b",
+        "paired_pp_vs_published": [
+          0.8766824067184928,
+          1.38575715732348
+        ],
+        "paired_pp_vs_original_targets": [
+          0.18517914128227445,
+          0.6536724962527125
+        ]
+      }
+    },
+    "transfer_pass": true
+  },
+  "fit": {
+    "original_targets": {
+      "epochs": 24,
+      "losses": [
+        0.3102610801096571,
+        0.30046745203881275,
+        0.2934059139069068,
+        0.2897838051757253,
+        0.28325024041295305,
+        0.2791982073450571,
+        0.2747057964639292,
+        0.27167782323689244,
+        0.2680231005983381,
+        0.26525348751619443,
+        0.2618589208073805,
+        0.2595379511687174,
+        0.2572941631447917,
+        0.25493972817257443,
+        0.25246397167167645,
+        0.2515494279021834,
+        0.2477905659126834,
+        0.2470229512801501,
+        0.24503508693767517,
+        0.24411197461815787,
+        0.24149766465186653,
+        0.24158171562932637,
+        0.23776863264823778,
+        0.23750317037075525
+      ],
+      "fit_seconds": 42.95303044002503,
+      "trained_parameters": 284033,
+      "frozen_equal": true,
+      "weights_sha256": "8f9b99fb658b228889f370227f076fed58920a88d3cc8e6c160d9da93fa71d77"
+    },
+    "distilled_targets": {
+      "epochs": 24,
+      "losses": [
+        0.35249259882840717,
+        0.3277682826815922,
+        0.3136006536197118,
+        0.30387033792518836,
+        0.297697432397074,
+        0.28923518084215205,
+        0.28360611485302567,
+        0.279365050507599,
+        0.2730091033636465,
+        0.2694387061628807,
+        0.26532420785840694,
+        0.2619662761071236,
+        0.25927679951814303,
+        0.2571305632040581,
+        0.25296765690397915,
+        0.2504728398962133,
+        0.24870088136239188,
+        0.24467869140250006,
+        0.24292490133708355,
+        0.23989458016937645,
+        0.23918967232391583,
+        0.2372856535978341,
+        0.23473264875518315,
+        0.23373744013238093
+      ],
+      "fit_seconds": 36.57998111285269,
+      "trained_parameters": 284033,
+      "frozen_equal": true,
+      "weights_sha256": "5166b88c345da350338cbf212b6c270ebf655bfedacae59eb2eb475168668769"
+    }
+  },
+  "teacher": {
+    "examples": 71439,
+    "options": 3805,
+    "top1_training_correct": 5082,
+    "mean_top1_probability": 0.4028598475051414,
+    "changed_targets": 1212654,
+    "total_targets": 1714536,
+    "seconds": 0.3919596616178751
+  },
+  "execution": {
+    "seconds": 98.14169742818922,
+    "device": "NVIDIA GeForce RTX 4090 D",
+    "peak_allocated_bytes": 350776320,
+    "host_peak_kib": 2185468,
+    "protocol_sha256": "c5d631043f190533dcc7af09b8ace2a3876c6e0e3c1fb04d4133d8995df95bea",
+    "program_sha256": "9ba21bdf84e9132ad63aa51ce7fcc8f2ebbbb985ee04b61b0eddab487c0a6861"
+  },
+  "fresh_execution": {
+    "seconds": 22.218371395021677,
+    "program_sha256": "ffd1b499f38326f524b2b75088ac08981f6476d5fd0cbf239f1973b3e10b2b91",
+    "protocol_sha256": "a0ef2b717f13e5997d5f94eb10920385e10718491bbcd5fcdd44cc15e4a79ef2"
+  },
+  "fresh_preparation": {
+    "counts": {
+      "source_groups": 1356,
+      "overlap": 55,
+      "unsupported": 16
+    },
+    "examples": 9135,
+    "groups": 1356,
+    "source_sha256": "f28b2eb381d0e522b4b77e938712feca9524dd0e9e5f84bf1e35029002e9767e",
+    "contexts_sha256": "5cbae0d72e7348b0247b4390d8154daf25fb160421f60927383adc8fdfa83c84",
+    "pixels_sha256": "9b49caa4f718f02a765954d832159e2f6ff580ec497b0e0f44ce9d44906458e4"
+  }
+}
