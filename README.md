@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+**Training on additional pictured Chinese passages improved exact answers on two collections.** A 101,144-parameter reader answered 1,270 of 3,505 traditional-Chinese DRCD questions, up from 500 before training and 380 after equal-update replay. Official CMRC singles increased from 999 to 1,111 of 3,170. Asked for a year, the reader wrote **1991年**. Asked for a region, it still selected a person. [Run the checkpoint](models/pictured_passage_zh/README.md) · [Results and examples](references/traditional_passage_training_result.md)
+
+[![Original question and answer images for a date and a region, and results on two Chinese question collections](publication/ilm-nature/figures/Figure_74_traditional_passage.png)](publication/ilm-nature/manuscript.pdf#page=98)
+
 A 101,144-parameter visual reader answered two questions about the Guangmao Railway with **364.6公里；三茂铁路股份有限公司**. Reversing the questions exchanged the two answer images. On the official Chinese passage benchmark, the shorter instruction initially produced zero correct pairs in both orders. Constraining the same learned action scores recovered 505 of 4,800 pairs. Most pairs still contain a wrong answer. [Run the released model](models/pictured_passage_zh/README.md) · [Experiment and failure cases](references/paired_passage_result.md)
 
 [![Actual answer images, including a wrong answer, and results on changed instructions](publication/ilm-nature/figures/Figure_73_paired_passage.png)](publication/ilm-nature/manuscript.pdf#page=97)

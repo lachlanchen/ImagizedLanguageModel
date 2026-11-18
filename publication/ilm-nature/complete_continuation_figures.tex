@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_paired_passage_article.py.
+% Literal captions copied from their source inputs by build_traditional_passage_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -590,4 +590,10 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_73_paired_passage.png}
 \caption{\textbf{Question order transfers more reliably than question wording.} \textbf{a}, First exchanged pair for which the refined reader wrote both complete answers correctly. The same founding year and company name appear in reverse order. \textbf{b}, First failed request in corpus order, with the actual generated image and the reference. \textbf{c}, Internal held-out results. Each ordered request must match the entire target image and stop. Each distinct pair contributes two requests. The erased-order control receives the same question order for both requests. \textbf{d}, Percentage of official development pairs answered in both orders. All three conditions use the same frozen passage reader. The final two share planner weights. Constraining the reading regions recovered 505 of 4,800 pairs with the shorter Chinese instruction. All plotted values derive from saved answer pixels.}
 \label{fig:paired-passage}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_74_traditional_passage.png}
+\caption{\textbf{Additional pictured questions improve extraction on two Chinese passage collections.} \textbf{a}, The first DRCD answer gained over matched replay. The reference is a year. Replay includes the year in a longer span. \textbf{b}, First remaining error. The question asks which region began academic research on Sanskrit. Both readers choose a person; the reference is Europe. All displayed strips contain the complete recorded images. \textbf{c}, Whole-image scores. For paired requests, both exchanged orders must terminate and match accepted references. The two DRCD instructions act on the same questions and passages. \textbf{d}, Percentage of individual DRCD outputs that equal an accepted answer or contain it with extra writing. Both categories require termination.}
+\label{fig:traditional-passage}
 \end{figure*}

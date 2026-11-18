@@ -13,7 +13,7 @@ from scripts.infer_pictured_entry import page
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--weights",type=Path,default=Path(__file__).resolve().parents[1]/
-                        "models/pictured_passage_zh/varied_planner.safetensors")
+                        "models/pictured_passage_zh/mixed_evidence_reader.safetensors")
     parser.add_argument("--device",choices=("cpu","cuda"),default="cpu")
     parser.add_argument("--output",type=Path,required=True,help="A new directory")
     for field in ("passage","question"):

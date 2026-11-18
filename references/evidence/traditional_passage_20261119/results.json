@@ -1,0 +1,237 @@
+{
+  "cmrc_questions": 3170,
+  "cmrc_pairs": 9600,
+  "drcd_questions": 3505,
+  "drcd_pairs": 9276,
+  "train_cmrc": 7235,
+  "train_drcd": 21934,
+  "prep_seconds": 7.8579685259610415,
+  "released": {
+    "scores": {
+      "cmrc": {
+        "single_exact": 999,
+        "archive_sha256": "c4d32ee09058bf06707cc026cd757ff0b436f339ccbbbe8e99dedcef6a039b9e",
+        "请依次回答这两个问题：": {
+          "exact": 1036,
+          "both_orders": 518,
+          "stopped": 9598
+        },
+        "依次作答：": {
+          "exact": 1016,
+          "both_orders": 505,
+          "stopped": 9598
+        },
+        "请按次序作答：": {
+          "exact": 1034,
+          "both_orders": 517,
+          "stopped": 9598
+        },
+        "Answer in order: ": {
+          "exact": 974,
+          "both_orders": 371,
+          "stopped": 9598
+        }
+      },
+      "drcd": {
+        "single_exact": 500,
+        "archive_sha256": "c90d2c5708a426121789421e848cc0eed969c95adfc6f4360853bc5fd2b9187c",
+        "依次作答：": {
+          "exact": 212,
+          "both_orders": 104,
+          "stopped": 9276
+        },
+        "請依次回答這兩個問題：": {
+          "exact": 71,
+          "both_orders": 14,
+          "stopped": 9276
+        }
+      },
+      "internal": {
+        "singles": 434,
+        "ordered": 438,
+        "both": 218,
+        "archive_sha256": "414de9c1e9c01f0776512d289a7eb02ae1a06ea8190b2cdc1b0894033bf7f2be"
+      }
+    },
+    "history": [],
+    "weights_sha256": "270ce91dc50bd7f7515fa300f955cce82a5ee42ab7937eb44f4c382bea3a36e9",
+    "peak_cuda_allocated_bytes": 184102912
+  },
+  "replay": {
+    "scores": {
+      "cmrc": {
+        "single_exact": 840,
+        "archive_sha256": "ae2216be6d3fdc03fe4b14b2a86d1686daed521ec50df789a274d5e7234bef66",
+        "请依次回答这两个问题：": {
+          "exact": 722,
+          "both_orders": 361,
+          "stopped": 9598
+        },
+        "依次作答：": {
+          "exact": 710,
+          "both_orders": 353,
+          "stopped": 9598
+        },
+        "请按次序作答：": {
+          "exact": 722,
+          "both_orders": 361,
+          "stopped": 9598
+        },
+        "Answer in order: ": {
+          "exact": 657,
+          "both_orders": 206,
+          "stopped": 9598
+        }
+      },
+      "drcd": {
+        "single_exact": 380,
+        "archive_sha256": "a9e62952526f2d300b0f927795f58309dcf5f4a3492323ebeee7007c5eb253fb",
+        "依次作答：": {
+          "exact": 117,
+          "both_orders": 58,
+          "stopped": 9276
+        },
+        "請依次回答這兩個問題：": {
+          "exact": 40,
+          "both_orders": 4,
+          "stopped": 9276
+        }
+      },
+      "internal": {
+        "singles": 381,
+        "ordered": 364,
+        "both": 181,
+        "archive_sha256": "cb481664bf3214b3f25cfa3c45ea4b28ffa76f61c898194983b3d33f8ab004ea"
+      }
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 2.129422657566083,
+        "source_cells": 21574253,
+        "padded_source_cells": 23747054,
+        "seconds": 14.255133445374668
+      },
+      {
+        "epoch": 2,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 1.8376659571015759,
+        "source_cells": 21583112,
+        "padded_source_cells": 23757995,
+        "seconds": 11.089782590977848
+      },
+      {
+        "epoch": 3,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 1.594618276181451,
+        "source_cells": 21573149,
+        "padded_source_cells": 23743022,
+        "seconds": 9.811741020530462
+      },
+      {
+        "epoch": 4,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 1.3641052041428672,
+        "source_cells": 21580969,
+        "padded_source_cells": 23764454,
+        "seconds": 9.969899272546172
+      }
+    ],
+    "weights_sha256": "bf50a3b7d239db74e72c086180dccbfb4e74e4671e86c2cdbba4df5a82bb7a18",
+    "peak_cuda_allocated_bytes": 192958976
+  },
+  "mixed": {
+    "scores": {
+      "cmrc": {
+        "single_exact": 1111,
+        "archive_sha256": "14b02cebd5d0c7efdd480451aa9bd8f7625f7eeb137ff65ea62ee0ced89c41df",
+        "请依次回答这两个问题：": {
+          "exact": 1245,
+          "both_orders": 622,
+          "stopped": 9598
+        },
+        "依次作答：": {
+          "exact": 1212,
+          "both_orders": 601,
+          "stopped": 9598
+        },
+        "请按次序作答：": {
+          "exact": 1245,
+          "both_orders": 622,
+          "stopped": 9598
+        },
+        "Answer in order: ": {
+          "exact": 1114,
+          "both_orders": 419,
+          "stopped": 9598
+        }
+      },
+      "drcd": {
+        "single_exact": 1270,
+        "archive_sha256": "69876dd09681c32af9240b87c06948e812b0b9ec40bb72d18f4863b01d516c4e",
+        "依次作答：": {
+          "exact": 1250,
+          "both_orders": 613,
+          "stopped": 9276
+        },
+        "請依次回答這兩個問題：": {
+          "exact": 411,
+          "both_orders": 77,
+          "stopped": 9276
+        }
+      },
+      "internal": {
+        "singles": 461,
+        "ordered": 513,
+        "both": 255,
+        "archive_sha256": "c54a826437c1c0c029db114d8cf176c1327913166beb893f66547e77038a0781"
+      }
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 3.286050093389203,
+        "source_cells": 20451487,
+        "padded_source_cells": 21862211,
+        "seconds": 11.07123707048595
+      },
+      {
+        "epoch": 2,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 2.9374191421987237,
+        "source_cells": 20453512,
+        "padded_source_cells": 21856364,
+        "seconds": 11.445553462021053
+      },
+      {
+        "epoch": 3,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 2.7648967812388925,
+        "source_cells": 20446576,
+        "padded_source_cells": 21827566,
+        "seconds": 10.129137531854212
+      },
+      {
+        "epoch": 4,
+        "examples": 43868,
+        "steps": 1376,
+        "loss": 2.6393145904769715,
+        "source_cells": 20447411,
+        "padded_source_cells": 21851792,
+        "seconds": 10.311477378942072
+      }
+    ],
+    "weights_sha256": "ed665f258aabd8399b2aa4dc6c39fc4802b7fcd9ceec5d10d7a0b6ff3b24488c",
+    "peak_cuda_allocated_bytes": 290776576
+  },
+  "seconds": 138.1646914249286
+}
