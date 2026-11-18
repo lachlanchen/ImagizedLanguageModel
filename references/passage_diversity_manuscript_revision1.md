@@ -1,0 +1,5 @@
+# Pictured passage diversity at fixed exposure
+
+Preserve the reading, review and cumulative-redline editions at c9aa2f77 and all preceding figure files. Add Figure 44 after the joint reader/writer results, a short methods paragraph and one measured statement in the abstract. Show free generations from the first fresh case gained and lost against repetition in source order, the full scores and output concentration. State the cost of the matched fit, the local-count comparison, the hard pairs, novelty and the limit of exact-source scoring. Verify the figure's native table against the saved experiment, both actual sample bitmaps against the slide, and the new result text in all three PDFs. Inspect the rendered PDFs before promoting and locally synchronizing the revised package. This internal revision has no reviewer letter.
+
+Include the prespecified training-frequency intervention in the same revision. Report its two frozen fits on newly reserved passages and its effect on scarce expressions and free-generation accuracy. Preserve the preceding matched-data results and sample-selection rule.
