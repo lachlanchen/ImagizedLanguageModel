@@ -588,6 +588,9 @@ A separate [CPU passage reader](../references/visual_extractive_reading_result.m
 recovers 269/1,788 complete held-out answer rasters from the supplied passages.
 Question erasure gives 18/1,788 and same-passage exchange gives 11/1,783.
 This passes the registered question-dependence test for extractive reading.
+Rotating answer assignments among training questions about the same passage
+reduces exact answers to 59/1,788. A whole-passage interval puts the advantage
+of correct supervision at 10.1--13.5 percentage points.
 Preserve it as a compact reference for selecting evidence from a supplied
 page. Its scope is a contiguous passage span; standalone writing about an
 absent fact, historical glyph synthesis and matched-quality cost remain open.
