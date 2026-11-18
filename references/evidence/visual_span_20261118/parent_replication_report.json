@@ -1,0 +1,121 @@
+{
+  "all_requests": 1024,
+  "pictured": 1017,
+  "unsupported": 7,
+  "groups": 317,
+  "outcome": {
+    "translation": {
+      "cases": 1017,
+      "exact": 7,
+      "stopped": 1017,
+      "edits": 20383,
+      "target_cells": 34636,
+      "output_cells": 22979,
+      "known_cells": 22950,
+      "hard": 989,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 0.5884917426954613
+    },
+    "quote": {
+      "cases": 1017,
+      "exact": 1017,
+      "stopped": 1017,
+      "edits": 0,
+      "target_cells": 22769,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 989,
+      "novel_hard_exact": 989,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 1017,
+      "exact": 0,
+      "stopped": 1017,
+      "edits": 31901,
+      "target_cells": 34636,
+      "output_cells": 22979,
+      "known_cells": 22950,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9210359163875736
+    },
+    "copy": {
+      "cases": 1017,
+      "exact": 10,
+      "stopped": 1017,
+      "edits": 20617,
+      "target_cells": 34636,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5952477191361589
+    },
+    "local": {
+      "cases": 1017,
+      "exact": 3,
+      "stopped": 1017,
+      "edits": 20203,
+      "target_cells": 34636,
+      "output_cells": 24148,
+      "known_cells": 24117,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5832948377410786
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.31209465912605844,
+      1.0209247650950426
+    ],
+    "local": [
+      -0.9925572598134057,
+      -0.022993104162516487
+    ],
+    "exchanged": [
+      31.445478792072652,
+      35.050129849636576
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "刘沼，字明信，中山魏昌人。",
+      "target": "刘沼字明信，中山魏昌人。",
+      "chapter": "梁书/列传/卷五十",
+      "output_cells": 13,
+      "copied": 13,
+      "drawn": 0
+    },
+    "first_long_mixed": {
+      "index": 372,
+      "source": "顷之，为南京副留守。",
+      "target": "不久，任南京副留守。",
+      "chapter": "辽史/列传/卷十六",
+      "output_cells": 10,
+      "copied": 7,
+      "drawn": 3
+    },
+    "first_changed_success": {
+      "index": 372,
+      "source": "顷之，为南京副留守。",
+      "target": "不久，任南京副留守。",
+      "chapter": "辽史/列传/卷十六",
+      "output_cells": 10,
+      "copied": 7,
+      "drawn": 3
+    }
+  },
+  "distinct_questions_both": 1,
+  "different_answers": 1007,
+  "rows_sha256": "297a0e00812820c828cd16c21612e69eb5cc91f9afac60015529a32d2072f80e",
+  "streams_sha256": "f8201d602f82a508cfbe8e16678fff3f2790cc30edcbd51ec9212fafe732fd7c",
+  "pass": false
+}

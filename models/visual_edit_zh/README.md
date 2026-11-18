@@ -40,3 +40,18 @@ PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
   --source-image references/evidence/edit_diversity_20261118/success_source.png \
   --question-text 请翻译成白话文 --output /tmp/ilm-solar-eclipse
 ```
+
+### Generate from the visual span transducer
+
+The research update `span_update.safetensors` holds the trainable parameters of a writer that sums over alternative alignments of pictured glyphs. On four constructed role-swap pairs the writer preferred the correct joint assignments. Its two independent responses never reproduced both recorded modern answers in a pair. The PNGs in Figure 51 show a one-glyph modernization and a failure that reached 192 output cells. [Study](../../references/visual_span_result.md)
+
+```sh
+PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
+  --checkpoint models/visual_edit_zh/editor.safetensors \
+  --decoder-update models/visual_edit_zh/span_update.safetensors \
+  --span-decoder action \
+  --source-image references/evidence/visual_span_20261118/changed_source.png \
+  --question-text 请翻译成白话文 --output /tmp/ilm-span-modernization
+```
+
+Use `--span-decoder prefix` and a fresh output directory to sum over compatible source positions as the image is written. The receipt gives the probability of the observed prefix (including termination if reached), its maximum probability-conservation residual and the number of decisions for which a discarded within-glyph prefix could still have beaten the selected output.

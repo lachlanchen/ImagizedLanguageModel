@@ -1,0 +1,121 @@
+{
+  "all_requests": 1024,
+  "pictured": 1022,
+  "unsupported": 2,
+  "groups": 288,
+  "outcome": {
+    "translation": {
+      "cases": 1022,
+      "exact": 8,
+      "stopped": 535,
+      "edits": 100819,
+      "target_cells": 34179,
+      "output_cells": 109437,
+      "known_cells": 109417,
+      "hard": 994,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 2.9497352175312326
+    },
+    "quote": {
+      "cases": 1022,
+      "exact": 1022,
+      "stopped": 1022,
+      "edits": 0,
+      "target_cells": 23408,
+      "output_cells": 23408,
+      "known_cells": 23377,
+      "hard": 994,
+      "hard_exact": 994,
+      "novel_hard_exact": 994,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 1022,
+      "exact": 0,
+      "stopped": 535,
+      "edits": 109208,
+      "target_cells": 34179,
+      "output_cells": 109437,
+      "known_cells": 109417,
+      "hard": 994,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 3.195178325872612
+    },
+    "copy": {
+      "cases": 1022,
+      "exact": 6,
+      "stopped": 1022,
+      "edits": 19164,
+      "target_cells": 34179,
+      "output_cells": 23408,
+      "known_cells": 23377,
+      "hard": 994,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5606951636970069
+    },
+    "local": {
+      "cases": 1022,
+      "exact": 10,
+      "stopped": 1022,
+      "edits": 18892,
+      "target_cells": 34179,
+      "output_cells": 24935,
+      "known_cells": 24905,
+      "hard": 994,
+      "hard_exact": 2,
+      "novel_hard_exact": 2,
+      "cer": 0.552737060768308
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      -258.9997738051276,
+      -220.1295483052158
+    ],
+    "local": [
+      -259.6279977303793,
+      -220.73582391795205
+    ],
+    "exchanged": [
+      3.328116023726831,
+      45.336579340517794
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "式敷民德，永肩一心。",
+      "target": "要把恩惠施给民众，永远能够与民众同心！",
+      "chapter": "尚书/商书/盘庚下",
+      "output_cells": 192,
+      "copied": 0,
+      "drawn": 192
+    },
+    "first_changed_success": {
+      "index": 207,
+      "source": "赵保忠卒。",
+      "target": "赵保忠去世。",
+      "chapter": "宋史/本纪/卷七",
+      "output_cells": 6,
+      "copied": 4,
+      "drawn": 2
+    },
+    "first_long_mixed": {
+      "index": 214,
+      "source": "官至岳阳王府谘议、东扬州别驾。",
+      "target": "官到岳阳王府谘议、东扬州别驾。",
+      "chapter": "梁书/列传/卷三十六",
+      "output_cells": 15,
+      "copied": 14,
+      "drawn": 1
+    }
+  },
+  "distinct_questions_both": 3,
+  "different_answers": 1016,
+  "rows_sha256": "d61451cc79eb964be5fe598e6feed3ab6a4f0792ccf2bc78e10c0d19df216759",
+  "streams_sha256": "29c03b061765fce33818ab0b0c196bdf1a93949890be4660121e4dd2d56da761",
+  "pass": false
+}

@@ -1,0 +1,103 @@
+{
+  "all_requests": 1024,
+  "pictured": 1017,
+  "unsupported": 7,
+  "groups": 317,
+  "outcome": {
+    "translation": {
+      "cases": 1017,
+      "exact": 5,
+      "stopped": 528,
+      "edits": 102692,
+      "target_cells": 34636,
+      "output_cells": 110317,
+      "known_cells": 110295,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 2.9648920198637256
+    },
+    "quote": {
+      "cases": 1017,
+      "exact": 1017,
+      "stopped": 1017,
+      "edits": 0,
+      "target_cells": 22769,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 989,
+      "novel_hard_exact": 989,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 1017,
+      "exact": 0,
+      "stopped": 527,
+      "edits": 110442,
+      "target_cells": 34636,
+      "output_cells": 110461,
+      "known_cells": 110439,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 3.1886476498440928
+    },
+    "copy": {
+      "cases": 1017,
+      "exact": 10,
+      "stopped": 1017,
+      "edits": 20617,
+      "target_cells": 34636,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5952477191361589
+    },
+    "local": {
+      "cases": 1017,
+      "exact": 3,
+      "stopped": 1017,
+      "edits": 20203,
+      "target_cells": 34636,
+      "output_cells": 24148,
+      "known_cells": 24117,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5832948377410786
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      -255.01510348769236,
+      -219.7110124339336
+    ],
+    "local": [
+      -256.1644699147281,
+      -220.87153429517463
+    ],
+    "exchanged": [
+      1.3803724778987265,
+      43.47035239047307
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "刘沼，字明信，中山魏昌人。",
+      "target": "刘沼字明信，中山魏昌人。",
+      "chapter": "梁书/列传/卷五十",
+      "output_cells": 13,
+      "copied": 13,
+      "drawn": 0
+    }
+  },
+  "distinct_questions_both": 0,
+  "different_answers": 1007,
+  "rows_sha256": "51dd3e64f188d5d2a512afcefd80edeeddaec3f4f89e640890a3d7235e1dfe05",
+  "streams_sha256": "ec6459672aeab42e78381932436140fefc3c937751a87193bd3bbc99e7d0279e",
+  "pass": false
+}

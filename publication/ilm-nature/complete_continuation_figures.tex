@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_edit_diversity_article.py.
+% Literal captions copied from their source inputs by build_visual_span_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -435,4 +435,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Exact stopped translations per 2,048 requests and total edits per 100 renderable reference cells. Each local rule uses the same unique pairs as its corresponding neural editor.
 \textbf{c}, Exact 32-by-32 drawings at 39,435 and 37,543 recorded drawing positions. The darker bars use the larger-corpus editor's predicted physical code given correct prior writing. The lighter bars supply the reference code to its frozen renderer.}
 \label{fig:edit-diversity}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_51_visual_span.png}
+\caption{\textbf{Latent edit alignment in pictured translation.}
+\textbf{a}, Actual generated pixels from the summed-alignment writer. The left example is its first exact discovery translation longer than eight cells that contains a source-absent Han glyph and shared writing. The right is the first capped translation with source and reference of at most fourteen glyphs. The single-path row in that column shows its first sixteen glyphs.
+\textbf{b}, Exact translations per 1,024 requests and aggregate bitmap edit distance per 100 renderable reference glyphs. Next-image decoding sums compatible cursors for each emitted physical code. Minimum-risk selection uses separate samples to propose and score complete outputs.
+\textbf{c}, Correct joint assignments of two natural inserted phrases using complete sentence probabilities. The phrases share length and immediate modern neighbors. Each has one to four glyphs, all absent from both sources. Reversal preserves the source glyph multiset.}
+\label{fig:visual-span}
 \end{figure*}

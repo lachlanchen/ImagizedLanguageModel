@@ -1,0 +1,103 @@
+{
+  "all_requests": 1024,
+  "pictured": 1017,
+  "unsupported": 7,
+  "groups": 317,
+  "outcome": {
+    "translation": {
+      "cases": 1017,
+      "exact": 4,
+      "stopped": 830,
+      "edits": 55856,
+      "target_cells": 34636,
+      "output_cells": 61613,
+      "known_cells": 61589,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 1.612657350733341
+    },
+    "quote": {
+      "cases": 1017,
+      "exact": 1017,
+      "stopped": 1017,
+      "edits": 0,
+      "target_cells": 22769,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 989,
+      "novel_hard_exact": 989,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 1017,
+      "exact": 0,
+      "stopped": 830,
+      "edits": 64142,
+      "target_cells": 34636,
+      "output_cells": 61613,
+      "known_cells": 61589,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 1.8518882088000923
+    },
+    "copy": {
+      "cases": 1017,
+      "exact": 10,
+      "stopped": 1017,
+      "edits": 20617,
+      "target_cells": 34636,
+      "output_cells": 22769,
+      "known_cells": 22737,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5952477191361589
+    },
+    "local": {
+      "cases": 1017,
+      "exact": 3,
+      "stopped": 1017,
+      "edits": 20203,
+      "target_cells": 34636,
+      "output_cells": 24148,
+      "known_cells": 24117,
+      "hard": 989,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5832948377410786
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      -115.93213522390313,
+      -88.0218489403666
+    ],
+    "local": [
+      -117.2189421526554,
+      -89.29716778632184
+    ],
+    "exchanged": [
+      7.423025219520679,
+      40.021725402933825
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "刘沼，字明信，中山魏昌人。",
+      "target": "刘沼字明信，中山魏昌人。",
+      "chapter": "梁书/列传/卷五十",
+      "output_cells": 13,
+      "copied": 13,
+      "drawn": 0
+    }
+  },
+  "distinct_questions_both": 0,
+  "different_answers": 1007,
+  "rows_sha256": "297851d390fd0cd334e6f4f8b0b278064be0329d2ebcfa7cd7479ca0d3822c39",
+  "streams_sha256": "63e84a3d942d3af7afbf38f39715bd5fe08814bc13976d9dcff0400e938ee4c8",
+  "pass": false
+}

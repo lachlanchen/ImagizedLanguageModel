@@ -1,0 +1,103 @@
+{
+  "all_requests": 1024,
+  "pictured": 1022,
+  "unsupported": 2,
+  "groups": 288,
+  "outcome": {
+    "translation": {
+      "cases": 1022,
+      "exact": 5,
+      "stopped": 796,
+      "edits": 60385,
+      "target_cells": 34179,
+      "output_cells": 67336,
+      "known_cells": 67318,
+      "hard": 994,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 1.7667281079025132
+    },
+    "quote": {
+      "cases": 1022,
+      "exact": 1022,
+      "stopped": 1022,
+      "edits": 0,
+      "target_cells": 23408,
+      "output_cells": 23408,
+      "known_cells": 23377,
+      "hard": 994,
+      "hard_exact": 994,
+      "novel_hard_exact": 994,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 1022,
+      "exact": 0,
+      "stopped": 796,
+      "edits": 69142,
+      "target_cells": 34179,
+      "output_cells": 67336,
+      "known_cells": 67318,
+      "hard": 994,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 2.0229380613827206
+    },
+    "copy": {
+      "cases": 1022,
+      "exact": 6,
+      "stopped": 1022,
+      "edits": 19164,
+      "target_cells": 34179,
+      "output_cells": 23408,
+      "known_cells": 23377,
+      "hard": 994,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5606951636970069
+    },
+    "local": {
+      "cases": 1022,
+      "exact": 10,
+      "stopped": 1022,
+      "edits": 18892,
+      "target_cells": 34179,
+      "output_cells": 24935,
+      "known_cells": 24905,
+      "hard": 994,
+      "hard_exact": 2,
+      "novel_hard_exact": 2,
+      "cer": 0.552737060768308
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      -136.35604469666035,
+      -105.47668675325903
+    ],
+    "local": [
+      -137.15309975575946,
+      -106.36051495996783
+    ],
+    "exchanged": [
+      8.222262156089224,
+      43.00706267084301
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "式敷民德，永肩一心。",
+      "target": "要把恩惠施给民众，永远能够与民众同心！",
+      "chapter": "尚书/商书/盘庚下",
+      "output_cells": 192,
+      "copied": 0,
+      "drawn": 192
+    }
+  },
+  "distinct_questions_both": 0,
+  "different_answers": 1016,
+  "rows_sha256": "11e4927e839f1389d3ef82d7c4c398789c6164658df82b1fb2085a60f73e2ec8",
+  "streams_sha256": "0ddef57e70371039346b5fda41e454ae52297d9d465de12cc753a599cc62921e",
+  "pass": false
+}

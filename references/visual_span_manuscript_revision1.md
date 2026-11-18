@@ -1,0 +1,3 @@
+# Path marginalization in visual translation
+
+Preserve the three published editions at da48adee. Extend the abstract, results and methods with the observed performance of fixed-path versus summed-path training. Use native Figure 51 to present actual frozen pixels, free complete answers, inserted phrases and source-sensitive role evidence. Give the conditional likelihood, shared prefix state, corpus restrictions and actual computational cost. Compare with the published editor and local edit counts at identical held-out inputs. Check every count against the saved stream recount, inspect the editable PowerPoint and all three compiled editions, and verify local Nutstore delivery.

@@ -1,0 +1,89 @@
+{
+  "table": [
+    [
+      "Writer and selection rule",
+      "Discovery",
+      "Replication"
+    ],
+    [
+      "Local edits",
+      "10   /   55.27%",
+      "3   /   58.33%"
+    ],
+    [
+      "Original editor",
+      "8   /   55.72%",
+      "7   /   58.85%"
+    ],
+    [
+      "Fixed alignment, one path",
+      "5   /   176.67%",
+      "4   /   161.27%"
+    ],
+    [
+      "Summed alignments, one path",
+      "8   /   294.97%",
+      "5   /   296.49%"
+    ],
+    [
+      "Summed alignments, next image",
+      "6   /   54.96%",
+      "9   /   58.43%"
+    ],
+    [
+      "Summed alignments, edit risk",
+      "6   /   55.13%",
+      "9   /   58.41%"
+    ]
+  ],
+  "span_accuracy_percent": [
+    [
+      72.08,
+      73.38
+    ],
+    [
+      52.6,
+      57.55
+    ]
+  ],
+  "widths": {
+    "changed_source": 15,
+    "changed_reference": 15,
+    "changed_marginal": 15,
+    "changed_marginal_prefix": 15,
+    "changed_risk": 15,
+    "capped_source": 7,
+    "capped_reference": 12,
+    "capped_marginal": 16,
+    "capped_marginal_prefix": 7,
+    "capped_risk": 7
+  },
+  "examples": {
+    "changed": {
+      "index": 214,
+      "source": "官至岳阳王府谘议、东扬州别驾。",
+      "reference": "官到岳阳王府谘议、东扬州别驾。",
+      "chapter": "梁书/列传/卷三十六",
+      "lengths": {
+        "source": 15,
+        "reference": 15,
+        "marginal": 15,
+        "marginal_prefix": 15,
+        "risk": 15
+      }
+    },
+    "capped": {
+      "index": 6,
+      "source": "而逢吉谋益露。",
+      "reference": "李逢吉的阴谋更加暴露了。",
+      "chapter": "新唐书/列传/卷九十九",
+      "lengths": {
+        "source": 7,
+        "reference": 12,
+        "marginal": 192,
+        "marginal_prefix": 7,
+        "risk": 7
+      }
+    }
+  }
+}
