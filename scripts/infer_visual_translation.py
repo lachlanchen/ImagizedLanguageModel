@@ -81,6 +81,18 @@ def generate(packed, method, weights, *, receipt=None):
     state = load_file(str(weights))
     image = torch.from_numpy(np.unpackbits(packed, axis=1)).bool()[None]
     lengths = torch.tensor([image.shape[1]])
+    if method == "anchor-gaps":
+        from ilm.visual_lm.anchor_gap_writer import AnchorGapWriter
+
+        model = AnchorGapWriter(state["landmarks"], state["exemplars"])
+        model.load_state_dict(state)
+        pixels, count, stopped, plan = model.eval().write(image, lengths)
+        if receipt is not None:
+            receipt.update(
+                ending="learned_stop" if stopped.item() else "192_cell_limit",
+                preserved_positions=plan.sum().item(),
+            )
+        return np.packbits(pixels[0, : count.item()].numpy(), axis=1)
     if method in ("feedback", "paired", "pooled", "marginal", "event", "bound-event"):
         from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
 
@@ -149,6 +161,7 @@ def main():
             "bound-event",
             "context-phrases",
             "phrase-boundaries",
+            "anchor-gaps",
         ),
         default="phrases",
     )
@@ -165,6 +178,7 @@ def main():
         / {
             "phrases": "composer.msgpack.gz",
             "neural": "block_aligned.safetensors",
+            "anchor-gaps": "anchor_gap_writer.safetensors",
             "feedback": "causal_feedback.safetensors",
             "revision": "pictured_reviser.safetensors",
             "paired": "paired_teacher.safetensors",
