@@ -31,6 +31,8 @@ separate claims.
 
 The [512-article successor comparison](../references/visual_successor_result.md) measures how often a reader assigns different glyphs to contexts sharing their final cell. A compact visual model consumed 1,047,284 training targets in 19.46 seconds on two CPU threads. The matched character-indexed model took 18.73 seconds. They scored 55.1% and 56.2% on supplied-candidate assignment. The visual advantage over rotated supervision remained uncertain. The native writer preferred the same candidate for both contexts in 509/512 articles. Preserve these results when evaluating a change to the writing objective. Both individual choices and independently generated answers matter to the deployment goal. General-language efficiency at matched quality remains open.
 
+The [unrestricted drawing comparison](../references/context_contrast_drawing_result.md) tests the same writer without supplied successor images. Subtracting last-glyph density increased the average change between two contexts from 7.08 to 60.18 pixels, with zero exact successors across 1,024 drawings in every arm. Both new complete answers about 言 remained unreadable. Retire this decoding intervention.
+
 ## Current model decision: full-context recipe rejected
 
 The [complete full-context comparison](../references/trainable_visual_context_result_20261117.md)
@@ -709,15 +711,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports
-native word-order evaluation in Figure 33 and free writing alongside supervised
-passage selection in Figure 34. The reading, review and redline PDFs contain
-63, 107 and 110 pages. All 280 pages received layout inspection. The two
-complete 言 outputs, a correct selection and a wrong selection are shown with
-their measured denominators. [Build verification](../publication/ilm-nature/evidence/visual_reading_writing_article_build.json)
-and [local delivery](../publication/ilm-nature/evidence/visual_reading_writing_local_sync.json)
-preserve the earlier editions and distinguish verified local copies from cloud
-propagation.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports Mandarin order preference in Figure 33, actual free writing and passage selection in Figure 34, and contextual glyph assignment in Figure 35. The reading, review and cumulative redline editions contain 64, 110 and 111 pages. The [verified build](../publication/ilm-nature/evidence/visual_successor_article_build.json) and [local delivery](../publication/ilm-nature/evidence/visual_successor_local_sync.json) preserve the earlier editions. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 

@@ -1,0 +1,147 @@
+{
+  "checkpoint_sha256": "d08a466277cf61fa465fc0ef92323bcff3a54d7a065eeda784337174d397b71a",
+  "protocol_sha256": "2993c88332a8f7c2dece8a79e0c4e7660dedcb33a6359a3c9ea4299ed8f2a4cb",
+  "code_sha256": {
+    "ilm/visual_lm/context_contrast_writer.py": "ff78d647e336214e89f2a48056ca5aac4be4681035f38a0a7ad9cd50fcd1b893",
+    "scripts/evaluate_context_contrast_drawing.py": "92ace9df52f0eb733a8680fdb82400de328325abf4a5a5e74495306a7208fbe9"
+  },
+  "files": {
+    "contrast_yan.png": "9aba433641ffb8721c0d41b2df03b191351fcc2e3098badd8675278d94478d6f",
+    "contrast_yan.npz": "ce1ad0d80d6f1339f668c72795b1617dba6288ceeaa7ee3cf109e664af4e1d78",
+    "density_yan.npz": "b0b2758bc06b2f24cb55d800601ad72557b90cb18d22d5f1b8855dde23e52e75",
+    "density_yan.png": "da215be2fc4be1e548ed6a79e898c16443afa197b3d25dd8cb8d7edbcf32d896",
+    "drawing.npz": "b42a07f14f7a0e7226190604f1fef4e6afe9cb1de71717184b23f00d132a9123",
+    "choices.npz": "40ca7467740d823d5c28e00a232f28f88026539843521c11d78795620dc362b8"
+  },
+  "articles": 512,
+  "stats": {
+    "stock": {
+      "emitted": 1024,
+      "stopped": 0,
+      "distinct_bitmaps": 213,
+      "nonempty": 1024,
+      "exact_source": 0,
+      "exact_training_bitmaps": 0,
+      "both_exact": 0,
+      "mean_source_f1": 0.34903178052418,
+      "mean_exchanged_f1": 0.3490475840759553,
+      "mean_assignment_margin": -3.1607103550562775e-05,
+      "both_generated": 512,
+      "identical_between_contexts": 81,
+      "mean_changed_pixels_between_contexts": 2.30078125
+    },
+    "density": {
+      "emitted": 1024,
+      "stopped": 0,
+      "distinct_bitmaps": 308,
+      "nonempty": 1024,
+      "exact_source": 0,
+      "exact_training_bitmaps": 2,
+      "both_exact": 0,
+      "mean_source_f1": 0.3151784296626158,
+      "mean_exchanged_f1": 0.3150542386764912,
+      "mean_assignment_margin": 0.0002483819722492189,
+      "both_generated": 512,
+      "identical_between_contexts": 40,
+      "mean_changed_pixels_between_contexts": 7.083984375
+    },
+    "contrast": {
+      "emitted": 1024,
+      "stopped": 0,
+      "distinct_bitmaps": 849,
+      "nonempty": 1024,
+      "exact_source": 0,
+      "exact_training_bitmaps": 0,
+      "both_exact": 0,
+      "mean_source_f1": 0.23672633945374782,
+      "mean_exchanged_f1": 0.2368512926072046,
+      "mean_assignment_margin": -0.00024990630691356817,
+      "both_generated": 512,
+      "identical_between_contexts": 12,
+      "mean_changed_pixels_between_contexts": 60.18359375
+    }
+  },
+  "decisions": {
+    "density": {
+      "groups": 49152,
+      "eligible_count_histogram": [
+        0,
+        27636,
+        19314,
+        1159,
+        441,
+        600,
+        2,
+        0,
+        0
+      ],
+      "differs_from_density_on_own_prefix": 0
+    },
+    "contrast": {
+      "groups": 49152,
+      "eligible_count_histogram": [
+        0,
+        23381,
+        16338,
+        5209,
+        2667,
+        1251,
+        227,
+        54,
+        25
+      ],
+      "differs_from_density_on_own_prefix": 10796
+    }
+  },
+  "yan": {
+    "density": {
+      "glyphs": 128,
+      "stopped": false,
+      "unique": 19,
+      "nonempty": 128,
+      "groups": 6144,
+      "eligible_count_histogram": [
+        0,
+        3484,
+        2370,
+        161,
+        126,
+        3,
+        0,
+        0,
+        0
+      ],
+      "differs_from_density_on_own_prefix": 0
+    },
+    "contrast": {
+      "glyphs": 128,
+      "stopped": false,
+      "unique": 99,
+      "nonempty": 128,
+      "groups": 6144,
+      "eligible_count_histogram": [
+        0,
+        2829,
+        2178,
+        623,
+        386,
+        109,
+        18,
+        0,
+        1
+      ],
+      "differs_from_density_on_own_prefix": 933
+    }
+  },
+  "contrast_minus_density_assignment_margin": [
+    -0.0004982882791627861,
+    -0.004693592766312252,
+    0.0036168942064350703
+  ],
+  "physical_improvement": false,
+  "evaluation_seconds": 71.63691785838455,
+  "peak_rss_gib": 0.8889312744140625,
+  "cpu_threads": 2,
+  "fitted_updates": 0,
+  "blinded_streams_opened": 0
+}
