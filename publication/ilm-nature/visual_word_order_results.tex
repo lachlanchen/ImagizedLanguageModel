@@ -1,0 +1,22 @@
+\subsection*{A compact visual reader shows no reliable gain in Mandarin word order}
+To isolate reading from drawing, we compare sentence images that contain
+exactly the same glyphs in different orders. A new causal reader trained from
+scratch receives continuous representations from a previously trained image
+codec. Its eight-component writer and stop head score both complete orders.
+This candidate contains 23.55 million parameters, including the frozen
+7.42-million-parameter codec. During training it predicts future writing images
+from Chinese book and question--answer sequences. The candidate and its
+single-component control together complete 27,570 updates in 1,306 seconds on
+one RTX 4090 D, reaching 1.416 GiB of peak allocated device memory. Earlier
+codec fitting and corpus preparation contribute additional costs.
+
+The reader at initialization prefers the grammatical order on 299 of 552
+Mandarin pairs. After one epoch this count is 284 (51.4\%).
+A visual bigram estimated on the same prediction targets scores 57.2\% with
+half credit for ties. The five reader scores range from 48.0\% to 54.2\%
+(Fig.~\ref{fig:visual-word-order}). Resampling whole constructions gives a
+descriptive 95\% interval of 43.8--59.4\% for final accuracy and
+$-19.6$ to $+14.7$ percentage points for its change from initialization.
+These comparisons find no reliable gain in grammatical preference. They
+assess the scoring of supplied images. Autonomous answer production requires
+an additional decision about which image to draw at each step.

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_full_context_comparison_article.py.
+% Literal captions copied from their source inputs by build_visual_word_order_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -221,4 +221,17 @@ The learned model stops after 34 positions for both questions. The frozen model
 reaches the cap on the first question and stops after 126 positions on the second.
 The blinded reader marked all four answers uncertain.}
 \label{fig:full-context-comparison}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_33_visual_word_order.png}
+\caption{\textbf{Grammatical order preference across five visual-reader checkpoints.}
+\textbf{a,} Both complete input images from the first selected benchmark pair
+(ZhoBLiMP, negation in the Mandarin \emph{ba} construction). They preserve the
+same first glyph and the same physical cells. \textbf{b,} The native reader
+scores the grammatical order higher in 299, 286, 272, 265 and 284 of the same
+552 pairs. The full-corpus bigram is shown as a fixed reference. It wins
+288 comparisons and ties 55. \textbf{c,} Estimates and descriptive 95\%
+intervals from paired resampling of 23 paradigms. A tie receives half credit.}
+\label{fig:visual-word-order}
 \end{figure*}

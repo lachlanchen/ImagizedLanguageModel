@@ -1,0 +1,39 @@
+\subsection*{Continuous visual prediction and the Mandarin ordering test}
+Each input is a binary $32\times32$ cell. The frozen encoder produces
+a 768-dimensional vector $z_i$ and an eight-layer causal reader maps the
+observed prefix to $h_i$. The local writer predicts 48 successive groups of
+16 coordinates of the next image code. Each group has one mixture component
+shared across its coordinates. Within the selected component the coordinates
+have diagonal Gaussian noise with a scale floor of 0.02. For group $j$,
+the mixture weights, means and scales depend on $h_i$ and earlier groups
+of the same image. The resulting conditional density $q(z_{i+1}\mid h_i)$
+is defined on encoder coordinates. The decoder maps predicted codes to
+physical pixels for autonomous writing. The reader re-encodes those pixels
+at the next step. Offline rendering and codec training are part of the
+system's preparation cost.
+
+Each arm traverses the same 13,785 records once and predicts 2,571,477
+next-image positions. The first book image supplies a causal anchor.
+The objective combines average negative code log density per coordinate
+and average binary cross entropy for stopping. The order benchmark uses the
+complete-sentence score
+\begin{align}
+ S(x_{1:n})={}&\sum_{i=1}^{n-1}\bigl[\log q(z_{i+1}\mid h_i)
+                   +\log(1-s_i)\bigr] \nonumber\\
+              &+\log s_n ,
+\end{align}
+where $s_i$ is the learned probability of stopping at the observed prefix.
+The shared first glyph and equal target multisets cancel additive scores
+that depend only on the individual target image.
+
+Using the main ZhoBLiMP release\cite{zhoblimp}, we select 24 distinct pairs
+by a fixed hash order within each of the 23 eligible paradigms. Both orders
+have the same first image and identical multisets of rendered images.
+Neither alternative occurs in full within any fitted training record.
+The control estimates successor counts for exact bitmap pairs and one end
+event per record, with Witten--Bell interpolation against an add-one unigram.
+Previously unseen images share one unknown type in this control.
+A margin within $10^{-6}$ receives half credit. We average accuracies within
+paradigms and bootstrap their paired values with 10,000 whole-paradigm
+resamples. The descriptive intervals reflect variation across the sampled
+constructions. Related templates and the single font restrict transfer.
