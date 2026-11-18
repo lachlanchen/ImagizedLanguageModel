@@ -1,0 +1,172 @@
+{
+  "preflight": {
+    "passages": 8,
+    "targets": 4084,
+    "discarded_models": 2
+  },
+  "training_passages": 2127,
+  "transitions": 1047284,
+  "training_target_bitmaps": 5276,
+  "observed_layouts": 539,
+  "singleton_layouts": 270,
+  "model_sha256": "2da6da0ea589a8d81e409caef99e8cdf692b25b9646af6c348f432fad92b414e",
+  "program_sha256": "d93e6b79f19fa98652a868e43d13f97499f9e3aadc8847c2e985e3c8d07501da",
+  "protocol_sha256": "f8ec1a8ba8ec393b6a9d8f54339e992f250a66199acec282ebb1c9f407e37099",
+  "source_trial_sha256": "dd2db1ca8ac539778b7078fa89eb9cbcf5d886bb3d0ac3a519f942e70b91312c",
+  "arms": {
+    "ordered": {
+      "stats": {
+        "contexts": 668,
+        "stopped": 0,
+        "exact": 18,
+        "exact_rate": 0.02694610778443114,
+        "distinct": 83,
+        "exact_any_training": 650,
+        "blank_emissions": 1,
+        "both_exact": 0,
+        "mean_ink_f1": 0.2976134716635551,
+        "reference_exchanged_f1": 0.2783440278299469,
+        "rolls": {
+          "article_1": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 5
+          },
+          "article_2": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 1
+          },
+          "article_3": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 6
+          },
+          "yan": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 2
+          }
+        }
+      },
+      "free": {
+        "exact": 18,
+        "both": 0,
+        "known_nonempty": 649,
+        "blank": 1
+      },
+      "previous": {
+        "exact": 18,
+        "both": 0,
+        "known_nonempty": 198,
+        "blank": 348
+      },
+      "given_source_layout": {
+        "exact": 242,
+        "both": 43,
+        "known_nonempty": 610,
+        "blank": 0
+      },
+      "paired_exact_difference": [
+        0.0,
+        -0.011976047904191617,
+        0.011976047904191617
+      ],
+      "fit_seconds": 0.21410847268998623,
+      "checkpoint_bytes": 2081428,
+      "checkpoint_sha256": "5d79ee3401ab83e26019bdde3b03db3c57ff77fac500fce51c667e282bd82427",
+      "physical_pass": true,
+      "contextual_exact_improves": false
+    },
+    "rotated": {
+      "stats": {
+        "contexts": 668,
+        "stopped": 0,
+        "exact": 0,
+        "exact_rate": 0.0,
+        "distinct": 20,
+        "exact_any_training": 668,
+        "blank_emissions": 0,
+        "both_exact": 0,
+        "mean_ink_f1": 0.2216039516809335,
+        "reference_exchanged_f1": 0.22286060257831103,
+        "rolls": {
+          "article_1": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 1
+          },
+          "article_2": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 1
+          },
+          "article_3": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 1
+          },
+          "yan": {
+            "cells": 128,
+            "stopped": false,
+            "distinct": 1
+          }
+        }
+      },
+      "free": {
+        "exact": 0,
+        "both": 0,
+        "known_nonempty": 668,
+        "blank": 0
+      },
+      "previous": {
+        "exact": 0,
+        "both": 0,
+        "known_nonempty": 36,
+        "blank": 575
+      },
+      "given_source_layout": {
+        "exact": 242,
+        "both": 43,
+        "known_nonempty": 610,
+        "blank": 0
+      },
+      "paired_exact_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fit_seconds": 0.29277123883366585,
+      "checkpoint_bytes": 2331925,
+      "checkpoint_sha256": "258c6096f9ffa769f109d74ccf06b9e3ef988cf1b3efcf622cb0a2a9d5e466f3",
+      "physical_pass": true,
+      "contextual_exact_improves": false
+    }
+  },
+  "files": {
+    "rotated/model.npz": "258c6096f9ffa769f109d74ccf06b9e3ef988cf1b3efcf622cb0a2a9d5e466f3",
+    "rotated/yan.npz": "4994d75ebc512305a4c4623f62bcce33fa96cc89bbaa1fe7de2f70bd348bd6b1",
+    "rotated/article_1.png": "bd42201a2fe9d10665b1b03bbc65051ae91d8f164802f8246730d5995258df52",
+    "rotated/article_3.png": "bd42201a2fe9d10665b1b03bbc65051ae91d8f164802f8246730d5995258df52",
+    "rotated/article_2.png": "bd42201a2fe9d10665b1b03bbc65051ae91d8f164802f8246730d5995258df52",
+    "rotated/successors.npz": "96e96861a433eb3192ea6c7409b4f2b925daf7109712c24d26c3f83440ffc31a",
+    "rotated/given_source_layout.npz": "44d241f2654e18370c5b95b452a7d0d65735f603bb3299e1661e8816fba2fe1d",
+    "rotated/article_3.npz": "426caf56682cf5d60d0ac74bb1c5ea4d52a5f82d2433e5892ef56c2cb61c06d1",
+    "rotated/article_1.npz": "752b8131f36d61583ab1f634d0f3fc9aecf6a385c2e663a4aa08e9dba6fd5b5c",
+    "rotated/article_2.npz": "2b9b81b0c95d61f39dd0d0c037a703c080e173bcdef8aa2374ebb531b225a129",
+    "rotated/yan.png": "bd42201a2fe9d10665b1b03bbc65051ae91d8f164802f8246730d5995258df52",
+    "ordered/model.npz": "5d79ee3401ab83e26019bdde3b03db3c57ff77fac500fce51c667e282bd82427",
+    "ordered/yan.npz": "ee3725fa86ddad55137c4c12f093c49d88b84c223f02850edf9a9915049defc9",
+    "ordered/article_1.png": "71e5604a44b08a151fc1d122ee3d2604610aad9b4c7c0d841eaa787e339fe0a4",
+    "ordered/article_3.png": "b9a16c018694057af3ffbd294831086dc216f0bad4c1f7add813233219bb45fc",
+    "ordered/article_2.png": "22c07208e60869ea8413e0b5faf9e9fea72f80367d42fd91612591ffdea15847",
+    "ordered/successors.npz": "e572a1b3d1084a5172cdc039a1ccbf9e191de1a04ad0c9a6efd3b4497286f4bf",
+    "ordered/given_source_layout.npz": "44d241f2654e18370c5b95b452a7d0d65735f603bb3299e1661e8816fba2fe1d",
+    "ordered/article_3.npz": "0ea174b65801ea3fd26b73b0f19ac86f78a6aa0d4daf2ae52a4e2eb856b66098",
+    "ordered/article_1.npz": "1f7eb6c10d156b336475334a182dee09d24ae74cdbdbac40c1dc9b8987fd9449",
+    "ordered/article_2.npz": "c4a3652f7ea5a4dcac96ae7b03de704ac2b0d55bf569c44c3182c6db248fff6b",
+    "ordered/yan.png": "c2efd8b023864ab29904582f9a405100049a59cc318910f99208afb2e7bec5da"
+  },
+  "elapsed_seconds": 13.96514734160155,
+  "rss_gib": 0.7544746398925781
+}
