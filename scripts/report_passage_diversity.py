@@ -7,6 +7,7 @@ import pyarrow.parquet as pq
 from scripts.compare_passage_diversity import OUT, ROOT, load_split
 from scripts.diagnose_visual_context_gradients import load, require, sha, write_new
 from scripts.prepare_pictured_idioms import RAW, TAG, WIDTH, Rasterizer
+from scripts.test_expression_frequency_weight import OUT as WEIGHT_RUN
 from scripts.train_visual_extractive_reader import save_page
 
 DEST = ROOT/'references/evidence/passage_diversity_20261118'
@@ -14,7 +15,13 @@ DEST = ROOT/'references/evidence/passage_diversity_20261118'
 
 def main():
     report = load(OUT/'evaluation.json')
+    followup = {'frequency_weight.json':WEIGHT_RUN/'evaluation.json',
+                'weight_holdout.json':WEIGHT_RUN/'fresh/preparation.json',
+                'local_errors.json':WEIGHT_RUN/'local_errors.json'}
+    require(all(path.is_file() for path in followup.values()), 'Complete the frequency comparison and local recount first')
     DEST.mkdir()
+    for filename, path in followup.items():
+        shutil.copyfile(path, DEST/filename)
     for name in ('data','fits','evaluation','prepare_resources','train_resources','evaluate_resources'):
         shutil.copyfile(OUT/(name+'.json'), DEST/(name+'.json'))
     fresh = report['fresh']

@@ -1,0 +1,87 @@
+{
+  "coverage": {
+    "original": {
+      "cells": 285756,
+      "exact_cells": 285756,
+      "types": 2323,
+      "exact_types": 2323,
+      "fully_reachable": 71439,
+      "rows": 71439
+    },
+    "new": {
+      "cells": 285756,
+      "exact_cells": 285715,
+      "types": 2325,
+      "exact_types": 2313,
+      "fully_reachable": 71408,
+      "rows": 71439
+    },
+    "fresh": {
+      "cells": 71448,
+      "exact_cells": 71442,
+      "types": 2203,
+      "exact_types": 2197,
+      "fully_reachable": 17858,
+      "rows": 17862
+    }
+  },
+  "exposures": 571512,
+  "updates": 2980,
+  "arms": {
+    "repeat": {
+      "fit_seconds": 29.46031509898603,
+      "epochs": [
+        {
+          "rows": 142878,
+          "nll": 0.19674101718386783,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.1936675933777237,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.1908920965095382,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.18805161113376173,
+          "preference": 0.0
+        }
+      ],
+      "trained_parameters": 700291,
+      "weights_sha256": "b9686568f640b8ed8b38bfa23e3fe994ae4251103cd0cd496a2d70e65824bb78"
+    },
+    "diverse": {
+      "fit_seconds": 27.604501308873296,
+      "epochs": [
+        {
+          "rows": 142878,
+          "nll": 0.20711149864641215,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.2035079443445481,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.2007095925411373,
+          "preference": 0.0
+        },
+        {
+          "rows": 142878,
+          "nll": 0.19849171207229277,
+          "preference": 0.0
+        }
+      ],
+      "trained_parameters": 700291,
+      "weights_sha256": "5aae021e468016b9ab2e0d17e7487588c86f2532cff4bf2a13b22704b4379899"
+    }
+  },
+  "device": "NVIDIA GeForce RTX 4090 D"
+}
