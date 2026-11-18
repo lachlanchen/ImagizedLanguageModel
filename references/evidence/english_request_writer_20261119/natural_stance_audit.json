@@ -1,0 +1,45 @@
+{
+  "splits": {
+    "development": {
+      "absent_stance_content_with_instruction": 35,
+      "responses": 36,
+      "physical_marker_correct": 24,
+      "physical_marker_both": 6,
+      "pairs": 18
+    },
+    "train": {
+      "absent_stance_content_with_instruction": 1846,
+      "responses": 1898,
+      "physical_marker_correct": 1188,
+      "physical_marker_both": 312,
+      "pairs": 949
+    }
+  },
+  "instruction": "这段材料对下面的问题持什么立场？写明立场，再引一句材料原话。",
+  "positive": [
+    "可以",
+    "能够",
+    "当然",
+    "没问题",
+    "肯定",
+    "没错",
+    "确实",
+    "是的",
+    "能的"
+  ],
+  "negative": [
+    "不能",
+    "不是",
+    "不可以",
+    "不可能",
+    "没有",
+    "不会",
+    "不行",
+    "不对",
+    "不建议",
+    "不需要",
+    "不一定"
+  ],
+  "exact_dual_ceiling_question_only": 0,
+  "program_sha256": "97837f3190dda48ebedc4f32c40d5423cfaaf43133761a36c9933aa0b1d69a95"
+}
