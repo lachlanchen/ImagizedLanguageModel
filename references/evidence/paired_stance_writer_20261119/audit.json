@@ -1,0 +1,86 @@
+{
+  "partitions": {
+    "validation": {
+      "baseline": {
+        "human_quote_is_full_window": 108,
+        "whole_window_correct_both": 22,
+        "missing_position_tile": 280
+      },
+      "scores": {
+        "matched": {
+          "position_same_when_question_removed": 257,
+          "full_output_same_when_question_removed": 176,
+          "full_exact_with_whole_window": 48,
+          "full_exact_with_proper_subspan": 9,
+          "proper_subspan_body_exact": 20,
+          "correct_body_wrong_position": 30,
+          "correct_position_wrong_body_or_stop": 126,
+          "body_equals_input_window": 82,
+          "correct_missing_position": 181
+        },
+        "reassigned": {
+          "position_same_when_question_removed": 256,
+          "full_output_same_when_question_removed": 173,
+          "full_exact_with_whole_window": 27,
+          "full_exact_with_proper_subspan": 10,
+          "proper_subspan_body_exact": 19,
+          "correct_body_wrong_position": 53,
+          "correct_position_wrong_body_or_stop": 88,
+          "body_equals_input_window": 87
+        },
+        "parent": {
+          "position_same_when_question_removed": 166,
+          "full_output_same_when_question_removed": 98,
+          "full_exact_with_whole_window": 0,
+          "full_exact_with_proper_subspan": 0,
+          "proper_subspan_body_exact": 0,
+          "correct_body_wrong_position": 0,
+          "correct_position_wrong_body_or_stop": 0,
+          "body_equals_input_window": 0
+        }
+      }
+    },
+    "official": {
+      "baseline": {
+        "human_quote_is_full_window": 13,
+        "whole_window_correct_both": 2,
+        "missing_position_tile": 35
+      },
+      "scores": {
+        "matched": {
+          "position_same_when_question_removed": 30,
+          "full_output_same_when_question_removed": 23,
+          "full_exact_with_whole_window": 9,
+          "full_exact_with_proper_subspan": 2,
+          "proper_subspan_body_exact": 2,
+          "correct_body_wrong_position": 1,
+          "correct_position_wrong_body_or_stop": 16,
+          "body_equals_input_window": 11,
+          "correct_missing_position": 26
+        },
+        "reassigned": {
+          "position_same_when_question_removed": 32,
+          "full_output_same_when_question_removed": 20,
+          "full_exact_with_whole_window": 4,
+          "full_exact_with_proper_subspan": 3,
+          "proper_subspan_body_exact": 3,
+          "correct_body_wrong_position": 6,
+          "correct_position_wrong_body_or_stop": 12,
+          "body_equals_input_window": 12
+        },
+        "parent": {
+          "position_same_when_question_removed": 28,
+          "full_output_same_when_question_removed": 16,
+          "full_exact_with_whole_window": 0,
+          "full_exact_with_proper_subspan": 0,
+          "proper_subspan_body_exact": 0,
+          "correct_body_wrong_position": 0,
+          "correct_position_wrong_body_or_stop": 0,
+          "body_equals_input_window": 0
+        }
+      }
+    }
+  },
+  "result_sha256": "190b44ea99e86c8fda88fa2d15a3f638aa8255cc1dfbdc48779aaddaef54464c",
+  "source_sha256": "990d1a5b9e8390d7a536780466797df2f0a9cd7cc1bff668bf6cd0d53b8de94e"
+}

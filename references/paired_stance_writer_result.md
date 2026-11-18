@@ -1,0 +1,19 @@
+# A visual writer can infer a passage's position while overlooking the question
+
+Two Chinese passages can supply different human answers to the same question. A 694,152-parameter visual writer learned to express those opposing positions and sometimes quote the human answer. On the 18 official DuReader question pairs it wrote both positions correctly for 10 questions. Reassigning the labels while keeping the evidence and quotations intact reduced this to one. Changing which statement a question asked about exposed a limit to this result. [Figure 82](../publication/ilm-nature/figures/Figure_82_paired_stance_writer.png)
+
+| Official development outcome | Previous writer | Reassigned positions | Matched positions |
+|---|---:|---:|---:|
+| Exact position prefix / 36 | 0 | 19 | 27 |
+| Both passages correct / 18 | 0 | 1 | 10 |
+| Stopped human quotation after either valid position / 36 | 0 | 13 | 12 |
+| Whole position, quotation and stop / 36 | 0 | 7 | 11 |
+| Both whole answers correct / 18 | 0 | 1 | 2 |
+
+The target position was 肯定。 or 否定。. On 35 of the 36 official responses at least one position glyph was missing from the inputs. The matched writer gave the correct position on 26 of those 35. All responses were decoded autonomously from the image streams. The printed-marker rule read both positions correctly on six official pairs. Among the 144 validation questions, matched supervision gave both positions on 55, compared with 13 for reassignment and 41 for the marker. The paired gain over reassignment was 29.2 percentage points (95% bootstrap interval 20.1–38.2). The 9.7-point gain over the marker had an interval from −0.7 to 19.4, missing the prespecified criterion. All 144 validation source records appeared in the inherited large answer corpus. The 18 official records had no source-record overlap with that corpus. [Protocol and split](paired_stance_writer_protocol.md) · [Complete results](evidence/paired_stance_writer_20261119/result.json)
+
+The supplied passages had been selected using the human quotations. On 13 of 36 official responses the quotation occupied the whole pictured window. Nine of the 11 complete matches were in that group. Of 23 requests that required selecting a proper substring, the writer produced two complete answers. Independently, a first-sentence baseline gave the exact quotation on 15 of 36, compared with 12 for the matched writer. The two arms shared quote supervision. [Independent bitmap audit](evidence/paired_stance_writer_20261119/audit.json)
+
+Erasing the question while retaining the instruction and passage left the written position unchanged on 30 of 36 responses. Removing the passage made both-position correctness impossible in every pair. A separate constructed probe held the passage fixed while the user changed the queried subject. Twelve situations gave 24 passages with two opposing questions each. The matched writer kept the same position on all 24 passages, gave 24 of 48 correct positions and completed zero four-way contrasts. Wording the target statement differently can therefore require information this model overlooks. [Crossed questions and emissions](evidence/paired_stance_writer_20261119/role_switch.json) · [All prompts](../scripts/check_stance_role_switch.py)
+
+Each fit used 544 updates with 25,760 stance-and-quotation responses and took less than 16 seconds after inherited training on one RTX 4090 D. Peak PyTorch allocation was below 0.41 GiB. Matched adaptation changed independent English dictionary responses from 60 to 63 of 96, Chinese responses from 56 to 47 of 96, DRCD both-correct pairs from 12 to four of 1,042, and DuReader complete answers from 14 to 12 of 571. Natural answers requiring an absent content glyph remained zero of 300. The adaptation provides a research checkpoint for comparison. Its ordinary language and historical-glyph retention do not warrant replacing the released passage reader.
