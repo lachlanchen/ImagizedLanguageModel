@@ -28,6 +28,12 @@ In 64 seconds on two CPU threads, a small reader learned to select answer images
 
 [Run the reader](references/visual_extractive_reading_result.md) · [Manuscript](publication/ilm-nature/manuscript.pdf)
 
+The reader selected a correct passage span for 565 of 3,170 Chinese questions. A learned writer reproduced 124 complete answers in a different typeface. Two questions about the same band yielded 前卫金属 and 1996年.
+
+![Cross-typeface answer writing](publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[Cross-typeface answer writing](references/grounded_detail_writing_result.md)
+
 ## Drawing the next Chinese character
 
 A shared coarse ink layout increased exact matches to known nonempty glyphs from 198 to 649 in 668 development contexts. Both writers produced the recorded next character 18 times. The full response to the question about 言 repeated a zero-shaped mark.

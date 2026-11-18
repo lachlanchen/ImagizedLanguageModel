@@ -40,6 +40,12 @@ En 64 secondes sur deux threads CPU, un petit modèle a appris à sélectionner 
 
 [Exécuter le modèle](../references/visual_extractive_reading_result.md) · [Manuscrit](../publication/ilm-nature/manuscript.pdf)
 
+Sur 3 170 questions en chinois, le lecteur a sélectionné le bon passage 565 fois. Le modèle d’écriture a reproduit 124 réponses complètes dans une autre police, au pixel près. Deux questions sur le même groupe de musique ont donné 前卫金属 et 1996年.
+
+![Réponses dans une autre police](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[Réponses dans une autre police](../references/grounded_detail_writing_result.md)
+
 ## Dessiner le prochain caractère chinois
 
 Sur 668 contextes de développement, prédire la répartition générale des traits a fait passer de 198 à 649 le nombre de dessins identiques, pixel par pixel, à un glyphe connu et non vide. Les deux modèles ont produit le caractère suivant du texte source dans 18 cas. Interrogé sur l’origine de 言, le nouveau modèle a répété un signe en forme de zéro.

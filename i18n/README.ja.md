@@ -39,6 +39,12 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [読解モデルを実行](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
 
+中国語の質問3,170件のうち、読解モデルは565件で正しい箇所を選び、書字モデルは124件の答え全体を別の書体で正確に描いた。同じバンドに関する二つの問いへの出力は「前卫金属」と「1996年」だった。
+
+![別書体で描いた回答](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[別書体で描いた回答](../references/grounded_detail_writing_result.md)
+
 ## 文脈から次の漢字を描く
 
 開発用の668例で、字形全体のおおまかな配置を先に予測すると、既知の空白でない字形と画素単位で一致した出力は198例から649例に増えた。原文の次の文字と一致したのは、どちらのモデルでも18例だった。「言」の成り立ちを尋ねると、新しいモデルはゼロに似た形を繰り返した。

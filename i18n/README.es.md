@@ -40,6 +40,12 @@ Un pequeño modelo aprendió a seleccionar respuestas en pasajes chinos en 64 se
 
 [Ejecutar el lector](../references/visual_extractive_reading_result.md) · [Manuscrito](../publication/ilm-nature/manuscript.pdf)
 
+En 565 de 3.170 preguntas en chino, el lector seleccionó el fragmento correcto. El modelo de escritura reprodujo 124 respuestas completas en otra tipografía con coincidencia píxel por píxel. Dos preguntas sobre la misma banda dieron 前卫金属 y 1996年.
+
+![Respuestas en otra tipografía](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[Respuestas en otra tipografía](../references/grounded_detail_writing_result.md)
+
 ## Dibujar el siguiente carácter chino
 
 En 668 contextos de desarrollo, predecir primero la distribución general de los trazos elevó de 198 a 649 el número de dibujos que coincidían píxel por píxel con un glifo conocido no vacío. Ambos modelos acertaron el siguiente carácter del texto original en 18 casos. Ante una pregunta sobre el origen de 言, el nuevo modelo repitió una figura parecida a un cero.

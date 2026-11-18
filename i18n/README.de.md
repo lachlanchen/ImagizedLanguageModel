@@ -38,6 +38,12 @@ Ein kleines Lesemodell lernte in 64 Sekunden auf zwei CPU-Threads, Antworten aus
 
 [Lesemodell ausführen](../references/visual_extractive_reading_result.md) · [Manuskript](../publication/ilm-nature/manuscript.pdf)
 
+Bei 565 von 3.170 chinesischen Fragen wählte das Lesemodell die richtige Textstelle. Das Schreibmodell zeichnete 124 vollständige Antworten in einer anderen Schriftart pixelgenau nach. Auf zwei Fragen zur selben Band schrieb es 前卫金属 und 1996年.
+
+![Antworten in einer anderen Schriftart](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[Antworten in einer anderen Schriftart](../references/grounded_detail_writing_result.md)
+
 ## Das nächste chinesische Schriftzeichen zeichnen
 
 In 668 Kontexten des Entwicklungsdatensatzes stieg die Zahl der pixelgenauen Übereinstimmungen mit einer bekannten, nicht leeren Glyphe von 198 auf 649, wenn das Modell zuerst die grobe Strichverteilung vorhersagte. Beide Modelle zeichneten in 18 Fällen das tatsächlich folgende Zeichen. Auf die Frage nach dem Ursprung von 言 wiederholte das neue Modell eine nullförmige Figur.

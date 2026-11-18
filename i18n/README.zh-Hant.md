@@ -39,6 +39,12 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [執行閱讀模型](../references/visual_extractive_reading_result.md) · [論文](../publication/ilm-nature/manuscript.pdf)
 
+在 3,170 道中文問題中，閱讀模型有 565 次在原文中選對答案片段。書寫模型用另一種字體準確寫出了 124 個完整答案。兩個關於同一樂團的問題，分別得到原文簡體字形「前卫金属」與「1996年」。
+
+![跨字體書寫答案](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[跨字體書寫答案](../references/grounded_detail_writing_result.md)
+
 ## 從上文生成下一個漢字
 
 在開發集的 668 個上下文中，先預測整字的粗略布局，使與已知非空字形逐像素相同的輸出從 198 個增至 649 個。兩種模型都只有 18 次寫出原文中的下一個字。詢問「言」的演變時，新模型反覆寫出形似數字零的符號。

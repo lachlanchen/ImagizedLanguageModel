@@ -39,6 +39,12 @@ ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图
 
 [运行阅读模型](../references/visual_extractive_reading_result.md) · [论文](../publication/ilm-nature/manuscript.pdf)
 
+在 3,170 道中文问题中，阅读模型有 565 次在原文中选对了答案片段。书写模型用另一种字体准确写出了 124 个完整答案。针对同一支乐队的两个问题，它分别写出了「前卫金属」和「1996年」。
+
+![跨字体书写答案](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[跨字体书写答案](../references/grounded_detail_writing_result.md)
+
 ## 从上文生成下一个汉字
 
 在 668 个开发集上下文中，先预测整字的粗略布局，使与已知非空字形逐像素相同的输出从 198 个增至 649 个。两种模型都只有 18 次写出了原文中的下一个字。询问「言」的演变时，新模型反复写出形似数字零的符号。

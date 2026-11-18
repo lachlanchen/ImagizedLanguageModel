@@ -40,6 +40,12 @@ Sau 64 giây huấn luyện trên hai luồng CPU, mô hình đọc nhỏ đã c
 
 [Chạy mô hình đọc](../references/visual_extractive_reading_result.md) · [Bản thảo](../publication/ilm-nature/manuscript.pdf)
 
+Trong 3.170 câu hỏi tiếng Trung, mô hình đọc chọn đúng đoạn trả lời cho 565 câu. Mô hình viết tái tạo chính xác 124 câu trả lời trọn vẹn bằng một kiểu chữ khác. Với hai câu hỏi về cùng một ban nhạc, kết quả là 前卫金属 và 1996年.
+
+![Viết câu trả lời bằng kiểu chữ khác](../publication/ilm-nature/figures/Figure_38_grounded_detail.png)
+
+[Viết câu trả lời bằng kiểu chữ khác](../references/grounded_detail_writing_result.md)
+
 ## Vẽ chữ Hán tiếp theo từ ngữ cảnh
 
 Trong 668 ngữ cảnh của tập phát triển, việc dự đoán bố cục nét tổng thể trước khi vẽ đã nâng số ảnh khớp từng điểm ảnh với một tự dạng đã biết, có nét, từ 198 lên 649. Cả hai mô hình đều viết đúng ký tự kế tiếp trong nguyên văn 18 lần. Khi được hỏi về nguồn gốc của chữ 言, mô hình mới liên tục vẽ một hình giống số 0.
