@@ -1,5 +1,17 @@
 # Classical Chinese visual editor
 
+## Ordered source copying
+
+The experimental neural writer reads a pictured classical Chinese strip and emits modern Chinese glyph images. Four complete examples, including two errors, appear in [Figure 66](../../publication/ilm-nature/figures/Figure_66_anchor_gap.png). The packaged model scored two faithful answers on 24 reviewed passages. A finite-gap version scored two on the same cohort. Both accept the same image interface. Output directories contain the PNG, packed pixels and a receipt.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method anchor-gaps --image references/evidence/anchor_gap_20261119/45_source.png --output /tmp/ilm-neural-gap-answer
+PYTHONPATH=. python scripts/infer_visual_translation.py --method finite-gaps --text '虽欲得请之，邻国不与也。' --output /tmp/ilm-finite-gap-answer
+```
+
+Training uses the prepared image pairs and ordered source correspondences. The two fit commands consume the archive produced by `scripts/prepare_ordered_copy_anchors.py`. The finite comparison also requires the frozen control and review files. Experiment scripts keep immutable outputs in fresh run directories. [Methods, data and results](../../references/anchor_gap_result.md)
+
+
 ## Source-only translation
 
 The compact phrase composer reads a classical Chinese glyph strip and returns an answer image. It runs on CPU. On held-out books it can modernize short expressions, but it frequently mistranslates prose. The 32,768-pair checkpoint generated 六月，郑悼公去世。 from 六月，郑悼公卒。 The second checkpoint adds 23,104 training pairs. A neural writer is also available for the paired experiment. [Evaluation and limitations](../../references/source_only_visual_translation.md)

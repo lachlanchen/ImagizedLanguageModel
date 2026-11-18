@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A visual writer trained on 55,872 pictured Chinese passage pairs conveyed the meaning of two of 24 new passages. The earlier phrase composer conveyed three. Figure 66 shows complete input and output images, including an evening-meal passage the neural writer mistranslates. [Read the experiment](references/anchor_gap_result.md) · [Run image inference](models/visual_edit_zh/README.md)
+
+[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=88)
+
 **Can one pictured verb carry two meanings?** Given 去寿春三十里, the experimental writer outputs an image reading 距离寿春三十里。 For 我不能舍仲宝去也, the same 去 becomes 离开. The learned phrase writer conveyed the intended sense in 17 of 20 tested clauses, but only six complete translations were faithful. [See successes and errors in Figure 64](publication/ilm-nature/figures/Figure_64_predicate_context.png) · [Measured results](references/predicate_context_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
 **Can a model read who did what from a picture?** With the bronze names of Qin and Chu as input, the visual writer changes “Qin surrounded Chu” to “Chu surrounded Qin” when their images change places. Across eight reviewed historical event pairs it conveyed the complete meaning in both directions twice. On the separate diverse passage sample the exchange-trained writer produced zero faithful translations out of twelve. [Actual inputs and outputs in Figure 63](publication/ilm-nature/figures/Figure_63_event_roles.png) · [Results and controls](references/visual_event_roles_result.md) · [Research manuscript](publication/ilm-nature/manuscript.pdf)

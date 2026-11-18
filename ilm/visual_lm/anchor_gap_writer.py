@@ -1,5 +1,6 @@
 """Copy selected source images in order and generate the images in between."""
 
+import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -148,6 +149,16 @@ class AnchorGapWriter(CausalGlyphTranslator):
                 (proposed > value[uncertain])[:, None], new, pixels[uncertain]
             )
         return pixels
+
+    @torch.inference_mode()
+    def plan_packed(self, packed):
+        device = self.landmarks.device
+        pictures = (
+            torch.from_numpy(np.unpackbits(packed, axis=1)).to(device).bool()[None]
+        )
+        lengths = torch.tensor([len(packed)], device=device)
+        memory, _, _, _ = self.read(visual_input(pictures, self.landmarks), lengths)
+        return (self.keep(memory)[0, :, 0] >= 0).cpu().numpy()
 
     @torch.inference_mode()
     def write(self, pictures, lengths, *, policy="learned", supplied=None, limit=192):

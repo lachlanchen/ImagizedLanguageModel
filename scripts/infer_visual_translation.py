@@ -54,6 +54,25 @@ def generate(packed, method, weights, *, receipt=None):
                 ending="end_of_source",
             )
         return writer.generate(packed)
+    if method == "finite-gaps":
+        import torch
+        from safetensors.torch import load_file
+        from ilm.visual_lm.anchor_gap_writer import AnchorGapWriter
+        from ilm.visual_lm.finite_visual_gaps import FiniteVisualGaps
+
+        torch.set_num_threads(2)
+        planner_path = MODELS / "anchor_gap_writer.safetensors"
+        state = load_file(str(planner_path))
+        planner = AnchorGapWriter(state["landmarks"], state["exemplars"])
+        planner.load_state_dict(state)
+        mask = planner.eval().plan_packed(packed)
+        if receipt is not None:
+            receipt.update(
+                ending="end_of_source",
+                preserved_positions=int(mask.sum()),
+                planner_sha256=hashlib.sha256(planner_path.read_bytes()).hexdigest(),
+            )
+        return FiniteVisualGaps.restore(weights).generate(packed, mask)
     if method == "revision":
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
         from ilm.visual_lm.pictured_revision import PicturedReviser
@@ -162,6 +181,7 @@ def main():
             "context-phrases",
             "phrase-boundaries",
             "anchor-gaps",
+            "finite-gaps",
         ),
         default="phrases",
     )
@@ -179,6 +199,7 @@ def main():
             "phrases": "composer.msgpack.gz",
             "neural": "block_aligned.safetensors",
             "anchor-gaps": "anchor_gap_writer.safetensors",
+            "finite-gaps": "finite_visual_gaps.msgpack.gz",
             "feedback": "causal_feedback.safetensors",
             "revision": "pictured_reviser.safetensors",
             "paired": "paired_teacher.safetensors",

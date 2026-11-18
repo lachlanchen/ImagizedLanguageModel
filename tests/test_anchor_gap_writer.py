@@ -36,3 +36,23 @@ def test_equal_images_and_deletions_preserve_the_selected_occurrences():
     assert torch.equal(output[1, 0], pictures[1, 1]) and selected.sum() == 3
     _, size, stopped, _ = model.write(pictures, lengths, policy="all", limit=2)
     assert size.tolist() == [2, 2] and stopped.tolist() == [False, True]
+
+
+def test_finite_gaps_backoff_and_unseen_ink(tmp_path):
+    from ilm.visual_lm.finite_visual_gaps import FiniteVisualGaps
+
+    cells = np.zeros((4, 128), np.uint8)
+    cells[:, 0] = [1, 2, 3, 4]
+    rules = {
+        (0, (), 1): ((2,), 3, 3),
+        (-1, (), -2): ((3,), 3, 5),
+        (-2, (2,), -1): ((), 2, 2),
+    }
+    writer = FiniteVisualGaps(cells, rules)
+    path = tmp_path / "gaps.gz"
+    writer.save(path)
+    restored = FiniteVisualGaps.restore(path)
+    answer = restored.generate(cells[:3], np.array([True, True, False]))
+    assert answer[:, 0].tolist() == [4, 1, 3, 2]
+    unknown = np.full((1, 128), 123, np.uint8)
+    assert np.array_equal(restored.generate(unknown, np.array([False])), unknown)
