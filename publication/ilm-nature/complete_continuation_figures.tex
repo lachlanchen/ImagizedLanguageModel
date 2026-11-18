@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_grounded_detail_article.py.
+% Literal captions copied from their source inputs by build_visual_title_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -308,4 +308,20 @@ An exact written answer matches a complete human reference in Serif.
 shapes absent from the training passages. The neural fallback supplies local
 detail when the count writer has no matching neighbourhood and layout.}
 \label{fig:grounded-detail}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_39_visual_titles.png}
+\caption{\textbf{Article-title prediction from pictured Chinese.}
+\textbf{a}, A prefix of eight emitted cells from the first normal short
+question in the final eight-component free-writing evaluation (case order).
+The blind evaluation used the complete original streams.
+\textbf{b}, Complete titles with an autonomous stop and pixel-for-pixel
+agreement with the recorded reference. The contiguous control uses the same
+trained transducer with a single source interval. The exchanged control
+receives the next article in the fixed roster.
+\textbf{c}, Original output and reference images for the first development
+article in each group. The source column shows only the beginning of the
+article. All models receive the full pictured input.}
+\label{fig:visual-titles}
 \end{figure*}

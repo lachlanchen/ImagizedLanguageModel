@@ -1,0 +1,35 @@
+\paragraph{Ordered physical title prediction.}
+Each article and the instruction to write its title were presented as an
+ordered stream of binary $32\times32$ cells. The encoder measures coverage
+in $8\times8$ regions, adds position and instruction-segment indicators,
+and applies a learned projection and a convolution over five adjacent
+cells. A 64-dimensional recurrent state receives the previous emitted
+image features and attended source features. At step $t$, let $a_{t-1}$
+denote the posterior over source occurrences of the previous image and $S$
+shift that mass one cell forward, discarding mass beyond the right edge.
+Given a fresh attention distribution $j_t$ and a learned continuation
+probability $g_t$, the source-position distribution is
+\[
+ p_t=g_t S a_{t-1}+(1-g_t\lVert S a_{t-1}\rVert_1)j_t.
+\]
+This distribution sums to one, including after the last source position.
+For a seen target picture, the training loss uses the negative log of the
+summed mass at every exactly matching occurrence. The filter then
+normalizes the mass on those occurrences. A separate three-way decision
+predicts selection, drawing or stopping. For an absent target, a dense
+head predicts its 1,024 ink intensities using mean binary cross-entropy.
+This per-pixel normalization controls the relative loss scale. It does not
+give a calibrated joint likelihood of all 1,024 bits. At inference a
+selected tile is read from the physical input, a drawn tile is thresholded
+from the ink head, and the chosen image is fed back.
+
+The 2,362 training articles supplied 1,197,676 passage cells and 13,419
+title cells. The 834 development articles supplied 424,993 passage cells
+and 4,475 title cells. Source-passage and reference-title images were
+disjoint across partitions. We excluded unsupported and empty renderings
+and used no development title during fitting. The fixed title instruction
+does not test instruction switching. Training used twelve shuffled passes,
+AdamW with step size 0.002, batch size 16 and seed 417. All outputs and
+termination flags were retained, including failures at the 32-cell cap.
+The independent archive recount checked physical agreement and the
+single-span restriction. The 95\% intervals resample whole articles.

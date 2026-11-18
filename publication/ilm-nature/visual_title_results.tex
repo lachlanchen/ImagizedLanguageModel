@@ -1,0 +1,32 @@
+\paragraph{Ordered image memory supports title extraction.}
+The independent continuous writer completed all 792 registered streams.
+A model reviewer familiar with earlier development read the anonymized
+outputs before reference scoring. Of 792 pages, 52 were physically empty
+and 740 contained marks without a confident transcript. At each of the five
+checkpoints, neither density model produced a readable answer to any of
+the 32 normal questions. Neither final model stopped naturally or produced
+a coherent continuation on any of the 12 long book prompts.
+
+A separate 223,620-parameter transducer kept the pictured passage in order,
+summed the probabilities of identical visible cells, and could select,
+draw or stop. It wrote 629 of 834 development article titles with exact
+ink and a natural stop. All successes occurred among the 724 titles
+available in one span. The other 46 required joining or rearranging
+visible cells and 64 required an absent glyph; neither group gave an
+exact title (Fig.~\ref{fig:visual-titles}). On the full set a contiguous
+decoder gave 630 exact titles and exchanging articles gave zero.
+Training on one RTX 4090 D took 198 seconds, with 108 MiB peak allocated
+device memory across training and evaluation. The instruction was fixed
+and 632 reference titles appeared at the start of their article. A rule
+using eight training-selected visual delimiters to end the opening span
+got 580 exact titles. Of 34 titles containing a glyph absent throughout
+training, 32 were copied exactly from the pictured article.
+
+Free decoding never selected the drawing branch in the 64 missing-glyph
+articles. Given the true preceding pictures, 69 of 143 genuinely absent
+target positions selected drawing. Forcing the ink head at all 143
+positions reproduced 85 target bitmaps, comprising 73 parentheses and
+12 spaces. None of 44 absent Han positions was drawn exactly. Only 490
+of 13,419 training title cells supervised absent-glyph writing. The title
+model learns a useful boundary around a visible name; independent lexical
+composition remains unproved.

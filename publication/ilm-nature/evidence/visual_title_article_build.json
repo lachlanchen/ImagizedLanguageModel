@@ -1,0 +1,425 @@
+{
+  "promoted": true,
+  "baseline_git": "0ffed538",
+  "cumulative_redline_git": "0f14fa3fb1f2ea1c0c71ccba50512b354f0d2ded",
+  "table": [
+    [
+      "Reference in pictured prompt",
+      "Articles",
+      "Full writer",
+      "One span",
+      "Exchanged article"
+    ],
+    [
+      "One span",
+      "724",
+      "629",
+      "630",
+      "0"
+    ],
+    [
+      "Distributed",
+      "46",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Absent glyph",
+      "64",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "deck_sha256": "68b801b9afd3845c86b14def8edbc673ec4ebd401fe4b665297f10f4422b72cb",
+  "source_hashes": {
+    "routing.json": "18f549b318cfb7db6abf009ec3eae773f6132f142c6554d57f3397359a021ef0",
+    "native_eight.png": "3aedcb734c10993ef31b11ea923e8333c3b2e90e50e884f4dc220773a1181730",
+    "distributed_target.png": "d3d57e2d26c3a8ecb35e290c23397ccac6bd9583c2dab1e5ea2577ddbab30b58",
+    "contiguous_output.png": "0d973300b99df091966627cb539a37c209e0bd55f73ae8746be735598fddc14c",
+    "contiguous_target.png": "0d973300b99df091966627cb539a37c209e0bd55f73ae8746be735598fddc14c",
+    "examples.json": "a208a32020f4c5278e271af8ff4421dd7a05945eb700df0b58c0a3d171830ac6",
+    "result.json": "55e93180662a7d6d1e95ab275e6827f6d6fb2f5087159185ff2544378db7ea05",
+    "missing_glyph_source.png": "968879c7221e7fc02e1020f0653d7a41fd7f0629ec637b1a5b0890ecde4f25ce",
+    "contiguous_source.png": "970f198a20649b4c8ab05fba5fc8a690c56fb795005ca4e551bd4d8b659682d1",
+    "identity.json": "3c21ff5c62d4813907b956deca68c4b284417ec2c90698361e44337fc49c42ff",
+    "recount.json": "efec228f79d7771195bcb6c4814320bd76214af92f404fbc2c0baced83b1f649",
+    "missing_glyph_target.png": "5f001646b1ce30bfa92a8c38a42aac95042d93830a645c839068657492d28031",
+    "distributed_source.png": "56af0f113ba1219482e5f9991c39d76ba6ecd04cf423149efcfe2de278c1a48d",
+    "distributed_output.png": "e13b2a6be3f7a66e9ba7c60facde7e30f8d9ba4f2dc9697dc102e4da67173359",
+    "missing_glyph_output.png": "b110d16fbc16a1e42a75b9d81f04109ebf3414387bac86e376b61e24ac59f246",
+    "lead.json": "0a4c967615e3453efe9e04fb56dcc286db17fe0130f534897c7d088aceb283a6"
+  },
+  "inspection": {
+    "documents": {
+      "manuscript": {
+        "pages": 70,
+        "pdf_sha256": "4ad31df67954cb292a44146590961a25d87d1bcdc7cda6f89fc75c79fd382a25",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 163,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              37
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              38
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              39
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              40
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              41
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              42
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              43
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              44
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              45
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              46
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              47
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              48
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              49
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              50
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              51
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              52
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              53
+            ]
+          }
+        },
+        "overview_sheets": 2
+      },
+      "manuscript_review": {
+        "pages": 118,
+        "pdf_sha256": "b39414639aafe0c0cb9aef49b2918a9fb55e39349bbbdbbde0b9494c44b06b07",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 163,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              102
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              103
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              104
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              105
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              106
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              107
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              108
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              109
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              110
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              111
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              112
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              113
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              114
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              115
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              116
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              117
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              118
+            ]
+          }
+        },
+        "overview_sheets": 4
+      },
+      "redlined_manuscript": {
+        "pages": 120,
+        "pdf_sha256": "7d84cd3ccbde05ac147bdbcd8f0eca7998c2980b5291116d03a07fbe7c3dd16d",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 163,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              104
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              105
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              106
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              107
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              108
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              109
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              110
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              111
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              112
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              113
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              114
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              115
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              116
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              117
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              118
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              119
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              120
+            ]
+          }
+        },
+        "overview_sheets": 4
+      }
+    },
+    "figure_assets_preserved": 365,
+    "automated_checks_are_not_visual_review": true,
+    "inspection_seconds": 21.868320036679506,
+    "build_plus_inspection_seconds": 58.993867105804384
+  },
+  "visual_review": {
+    "manuscript": {
+      "pdf_sha256": "4ad31df67954cb292a44146590961a25d87d1bcdc7cda6f89fc75c79fd382a25",
+      "overview_pages": 70,
+      "detailed_pages": [
+        36,
+        53,
+        68
+      ],
+      "observations": "All pages reviewed in overview. Figure 39 has the original output cells, a native table, pictured source and reference titles, and a fully visible caption. Reading edition also inspected for exact physical counts and the normalized attention equation."
+    },
+    "manuscript_review": {
+      "pdf_sha256": "b39414639aafe0c0cb9aef49b2918a9fb55e39349bbbdbbde0b9494c44b06b07",
+      "overview_pages": 118,
+      "detailed_pages": [
+        118
+      ],
+      "observations": "All pages reviewed in overview. Figure 39 has the original output cells, a native table, pictured source and reference titles, and a fully visible caption. Reading edition also inspected for exact physical counts and the normalized attention equation."
+    },
+    "redlined_manuscript": {
+      "pdf_sha256": "7d84cd3ccbde05ac147bdbcd8f0eca7998c2980b5291116d03a07fbe7c3dd16d",
+      "overview_pages": 120,
+      "detailed_pages": [
+        120
+      ],
+      "observations": "All pages reviewed in overview. Figure 39 has the original output cells, a native table, pictured source and reference titles, and a fully visible caption. Reading edition also inspected for exact physical counts and the normalized attention equation."
+    }
+  },
+  "prior_figure_files_verified": 365,
+  "office_application_export_verified": false
+}

@@ -39,7 +39,7 @@ The [shared-layout writer](../references/shared_layout_writing_result.md) drew 6
 
 The [grounded two-typeface trial](../references/grounded_detail_writing_result.md) couples the trained full-question reader with a local ink writer. On 3,170 official development questions it selected 565 exact source spans and wrote 124 complete correct Serif answers from Sans inputs. It scored nine exact on 3,158 exchanged questions, and seven both-correct pairs out of 3,100. Answer content and length still depend on selecting a visible span. A 10,833-parameter neural fallback raised withheld shape F1 from .660 to .751. Its advantage over copying (.0271) fell below the required .03 and yielded no additional exact answers. Keep this as a grounded writing reference and preserve the full free-writing, stopping, historical transfer and matched-quality cost criteria.
 
-The [pictured title experiment](../references/visual_title_transducer_protocol.md) tests independent selection, composition and stopping. Of 834 eligible development titles, 46 require joining visible glyphs and 64 require drawing a glyph absent from the full prompt. Both native free-writing arms have now failed [complete blind review](../references/native_continuous_blind_result.md).
+The [pictured title experiment](../references/visual_title_transducer_protocol.md) tests independent selection, composition and stopping. Of 834 eligible development titles, 46 require joining visible glyphs and 64 require drawing a glyph absent from the full prompt. The [completed title comparison](../references/visual_title_result.md) gives 629/834 correct, all extractive, versus 630 with a contiguous restriction and 580 with a learned opening rule. With genuine answer history, the ink head draws 85/143 absent targets exactly, all punctuation or spaces. Treat the title fit as terminal. Preserve the earlier model and test independent Han drawing and semantic composition as distinct requirements. Both native free-writing arms have now failed [complete blind review](../references/native_continuous_blind_result.md).
 
 ## Current model decision: full-context recipe rejected
 
@@ -574,7 +574,7 @@ training and 57.2% for a matched visual bigram counting adjacent bitmaps.
 Paradigm-level intervals include chance and zero improvement. Preserve all
 paired margins, checkpoints and this negative result. Avoid treating a decrease
 in writing-code loss as evidence that the reader learned syntax. The active
-792-stream autonomous qualification retains its original owner and schedule.
+792-stream autonomous qualification is now complete and failed.
 The next learning decision should account for both visual ordering and the
 eventual complete-answer evidence before another heavy fit.
 
@@ -716,7 +716,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports passage reading and free successor drawing in Figures 33–37. Figure 38 shows both questions about the same source, their complete independently redrawn answers, erased-input controls and withheld Han shapes. The reading, review and cumulative redline editions contain 69, 115 and 118 pages respectively. The [verified build](../publication/ilm-nature/evidence/grounded_detail_article_build.json) preserves the earlier figures. The [local delivery receipt](../publication/ilm-nature/evidence/grounded_detail_local_sync.json) records the Nutstore copies. Cloud propagation is unverified.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports passage reading and free successor drawing in Figures 33–37. Figure 38 shows both questions about the same source, their complete independently redrawn answers, erased-input controls and withheld Han shapes. Figure 39 shows the blind free-writing failure and the complete title experiment. The reading, review and cumulative redline editions now contain 70, 118 and 120 pages respectively. The [verified build](../publication/ilm-nature/evidence/visual_title_article_build.json) preserves the earlier figures. The [local delivery receipt](../publication/ilm-nature/evidence/visual_title_local_sync.json) records the Nutstore copies. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
