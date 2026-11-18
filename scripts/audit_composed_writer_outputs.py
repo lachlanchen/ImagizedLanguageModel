@@ -60,7 +60,8 @@ def recount():
                         emitted_outside_input_and_training=sum(g not in presented and g not in train_tiles for g in out))
             for group in ("all",meta["kind"]):
                 bag.setdefault(group,Counter()).update(counts)
-        report[arm]={k:dict(v) for k,v in bag.items()}
+        report[arm]={group:{key:int(value) for key,value in counters.items()}
+                     for group,counters in bag.items()}
     return dict(scores=report,fit=load(OUT/"fit.json"),execution=execution)
 
 

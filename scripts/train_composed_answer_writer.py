@@ -194,7 +194,7 @@ class InputImages:
 
 
 @torch.inference_mode()
-def generate(net, prior, memory_tiles, inputs, arm, device):
+def generate(net, prior, memory_tiles, inputs, arm, device, spelling=None):
     if arm not in ("copy","finite","raster"):
         raise ValueError(arm)
     fields = source_fields(prior, inputs, inputs.q, device)
@@ -230,7 +230,11 @@ def generate(net, prior, memory_tiles, inputs, arm, device):
             if len(writers):
                 w = tensor(writers,device)
                 context = focus[w,0]
-                literal = net.bitmap_scores(context,memory_ink).argmax(-1)
+                logits = net.bitmap_scores(context,memory_ink)
+                if spelling is None:
+                    literal = logits.argmax(-1)
+                else:
+                    literal = spelling.choose(logits,[b"".join(buf[j]) for j in writers])
                 tile = memory_bits[literal]
                 if arm=="raster":
                     tile = (net.raster_logits(context,tile)>=0).to(torch.uint8)
