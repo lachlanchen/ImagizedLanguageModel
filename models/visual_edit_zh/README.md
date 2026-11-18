@@ -55,3 +55,19 @@ PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
 ```
 
 Use `--span-decoder prefix` and a fresh output directory to sum over compatible source positions as the image is written. The receipt gives the probability of the observed prefix (including termination if reached), its maximum probability-conservation residual and the number of decisions for which a discarded within-glyph prefix could still have beaten the selected output.
+
+### Draw a missing modern phrase at a supplied boundary
+
+The optional phrase writer reads a classical source, the number of source cells preceding the insertion, and any available modern prefix. It generates a new 32-pixel-high strip and a stop receipt. Use the published base editor with `phrase_update.safetensors` (SHA-256 `d02cd89140ece2a741841353c0aa3341e99117096695ba6ba69a6a84b24ee8eb`). The update includes the original pictured translation instruction. This specific task was trained with aligned, nonempty insertions and a correct preceding modern prefix.
+
+From the repository root, the following CPU example returns the two pictured glyphs 没有 and stops. The source, prefix and answer can be inspected directly in the figure.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py \
+  --source-image references/evidence/visual_phrase_20261118/writer_source.png \
+  --cursor 7 \
+  --prefix-image references/evidence/visual_phrase_20261118/writer_prefix.png \
+  --output /tmp/ilm-phrase-example
+```
+
+Use a new output directory for each run. `--source-text` and `--prefix-text` rasterize typed input in the training typeface. Omit the prefix when the insertion begins the modern sentence. On 10,789 sites the model produced 605 exact stopped phrases, including 20 multi-glyph insertions. A local training-count rule recovered 1,676. [Study and limits](../../references/visual_phrase_result.md) · [Original output images](../../publication/ilm-nature/figures/Figure_52_visual_phrase.png)

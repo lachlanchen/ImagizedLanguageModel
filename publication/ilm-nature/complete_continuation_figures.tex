@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_span_article.py.
+% Literal captions copied from their source inputs by build_visual_phrase_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -444,4 +444,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Exact translations per 1,024 requests and aggregate bitmap edit distance per 100 renderable reference glyphs. Next-image decoding sums compatible cursors for each emitted physical code. Minimum-risk selection uses separate samples to propose and score complete outputs.
 \textbf{c}, Correct joint assignments of two natural inserted phrases using complete sentence probabilities. The phrases share length and immediate modern neighbors. Each has one to four glyphs, all absent from both sources. Reversal preserves the source glyph multiset.}
 \label{fig:visual-span}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_52_visual_phrase.png}
+\caption{\textbf{Writing a modern phrase at a supplied insertion site.}
+\textbf{a}, Original input, generated and reference images for two discovery examples. Both targets comprise two glyphs absent from the classical source. Each column uses the first qualifying example in roster order with a nonempty prefix and within the display bounds. The classical boundary falls after the seventh and ninth source cells, respectively.
+\textbf{b}, Exact complete physical phrases including termination. The original editor is required to begin drawing at the same supplied site. Local counts select a whole phrase observed in training.
+\textbf{c}, First-glyph identity. The neural writer can select between offered phrases using source order, but an error on its first independent glyph already prevents most recorded completions.}
+\label{fig:visual-phrase}
 \end{figure*}
