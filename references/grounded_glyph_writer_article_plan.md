@@ -1,0 +1,5 @@
+# Pictured question pairing and the first answer phrase
+
+Add the controlled grounded-writing comparison after Figure 76. Preserve earlier runs and the released extractive reader. Extend the results, methods and summary with the held-out outcome from original and reassigned questions, whole stopped references and failures on input-absent answers. Figure 77 will include the first-four-glyph comparison, an editable counts table and the unaltered outputs for the same two author-written prompts as Figures 75 and 76. Compare the source data with the slide, render all three existing editions, check the affected pages and copy the verified PDFs to the local Nutstore project.
+
+The first compiled draft records the autonomous failure. Complete the revision with the subsequent contrastive test on the same frozen weights. Use panel a for the both-order answer-choice counts, retain all autonomous first-four and complete scores in panel b, and retain the observed output pixels in panel c. Include the unsupervised shape-overlap controls and specify that the task supplies both candidate answers. Preserve the intermediate build privately before creating the final editions.

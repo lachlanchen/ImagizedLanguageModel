@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_bitmap_history_article.py.
+% Literal captions copied from their source inputs by build_grounded_glyph_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -610,4 +610,11 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Ordered glyph images predict Chinese spelling when the answer prefix is correct.}
 \textbf{a}, Exact next-image choices with the correct action and antecedent answer segments supplied. The ordered and shuffled conditions use identical human answers and bitmap counts. \textbf{b}, Exact complete references and exact positions of missing glyphs when each system uses its own output history. The rotated-question condition uses the ordered index. \textbf{c}, The ordered writer's complete output on the two original prompts in Fig.~\ref{fig:composed-writer}, with their references. All printed response images are taken directly from CPU decoding. The conditional spelling gain does not produce either requested answer.}
 \label{fig:bitmap-history}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_77_grounded_glyph_writer.png}
+\caption{\textbf{Learning from paired questions and passages.}
+\textbf{a}, Correct pairs when both candidate answers are supplied. Credit requires the writer to prefer each requested answer with the passages in either order. Direct overlap compares question and answer glyph sets. The second overlap rule uses the two passage regions. \textbf{b}, Exact agreements from an empty answer. The first three score columns use all 571 questions. The final column covers the 300 references containing a content glyph absent from both input images. Complete agreement includes the stop decision. \textbf{c}, The matched writer's complete outputs and the intended answers on the two original prompts in Fig.~\ref{fig:composed-writer}. Each output reproduces its passage pixel for pixel.}
+\label{fig:grounded-glyph-writer}
 \end{figure*}
