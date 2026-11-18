@@ -1,0 +1,18 @@
+# Recognizing a requested answer in a pictured Chinese passage
+
+We tested 1,042 pairs of different questions about 521 shared passages. For every pair, using the glyphs shared between question and answer either tied or favoured the wrong answer. The contrast-trained writer ranked both requested answers above the other question’s answer on 522 pairs. From an empty output it generated both correctly on 21. The specialized span reader retained the highest free-writing score at 128 pairs. [Figure 78](../publication/ilm-nature/figures/Figure_78_same_passage_writer.png)
+
+| Model | Correct single / 1,383 | Both written / 1,042 | Both recognized / 1,042 | Both with questions erased | Canonical DuReader / 571 |
+|---|---:|---:|---:|---:|---:|
+| Before adaptation | 0 | 0 | 11 | 0 | 32 |
+| Likelihood | 202 | 17 | 437 | 0 | 22 |
+| Likelihood and sibling contrast | 177 | 21 | 522 | 0 | 16 |
+| Released span reader | 489 | 128 | — | — | 0 |
+
+The two fits started from identical weights and processed identical examples. Training to rank the correct answer above its sibling gained 158 recognized pairs and lost 73 relative to likelihood alone. The net difference was 8.16 percentage points (95% interval 4.97–11.39, resampling passages). Free generation gained 14 pairs and lost ten, a difference of 0.38 points (interval −0.59 to 1.33). On unique questions the contrast term reduced exact answers by 25. The prespecified criterion for a contrast-specific gain in free writing was missed. The 501 pairs recognized correctly but written incorrectly locate the gap. [Protocol](same_passage_writer_protocol.md) · [Independent physical recount](evidence/same_passage_writer_20261119/recount.json)
+
+The new model learned to end short answers: 1,380 of 1,383 responses ended with its own stop decision. Among 1,203 stopped errors, the model assigned the canonical answer greater mean log probability than its own response in only 30 cases. Total log probability preferred the reference in 32. These scores explain why ranking a correct answer above another human reference gives limited guidance when a plausible incorrect emission outranks both. The comparison uses one canonical answer for scoring and any recorded reference for complete-answer credit. [Emission and reference scores](evidence/same_passage_writer_20261119/emission_scores.json)
+
+All three writers scored zero of 300 on the designated natural references requiring a missing content glyph. Comparing with all 1,367 renderable human annotations for the 571 questions gave 35 matches for the parent, 23 for likelihood and 19 for contrast. Only 168 of the 300 difficult cases had a retrieved document marked selected in the human record. Alternative answers can differ substantially. None of the matches against the full annotation set required an alphanumeric glyph absent from the question and passage. This analysis scores exact physical agreement. Other supported phrasings remain possible. [All-reference audit](evidence/same_passage_writer_20261119/natural_answer_alternatives.json)
+
+Each arm made 2,376 optimizer updates on one RTX 4090 D. Likelihood training took 79.8 seconds and contrast training 69.6 seconds. Both peaked at 1.36 GiB of PyTorch allocations. The comparison excludes the common parent’s training cost. A search of its 191,007 pictured training triples and 2,565 adaptation examples found zero exact test questions and no matches to the 7,507 aligned 32-glyph passage anchors. This screen detects exact physical runs and cannot exclude paraphrases or shorter overlaps. [Measured costs and totals](evidence/same_passage_writer_20261119/result.json) · [Prior training overlap](evidence/same_passage_writer_20261119/prior_overlap.json)

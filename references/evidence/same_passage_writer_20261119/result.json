@@ -1,0 +1,421 @@
+{
+  "conditions": {
+    "parent": {
+      "original": {
+        "records": 1383,
+        "stopped": 1085,
+        "empty": 0,
+        "first": 151,
+        "different_content_or_empty": 1314,
+        "surplus": 69,
+        "pairs": 1042,
+        "both": 0,
+        "same_output": 294,
+        "sibling_reference": 0
+      },
+      "erased": {
+        "records": 1383,
+        "stopped": 1196,
+        "empty": 0,
+        "first": 210,
+        "different_content_or_empty": 1280,
+        "surplus": 101,
+        "exact": 2,
+        "pairs": 1042,
+        "both": 0,
+        "same_output": 1042,
+        "sibling_reference": 2
+      },
+      "dureader": {
+        "records": 571,
+        "stopped": 421,
+        "empty": 0,
+        "first": 213,
+        "different_content_or_empty": 522,
+        "exact": 32,
+        "ends_early": 10,
+        "surplus": 7,
+        "absent_content_ink_exact": 0,
+        "single_span_exact": 32,
+        "distributed_ink_exact": 0
+      },
+      "provided_answers": {
+        "individual": 1014,
+        "both": 11,
+        "pairs": 1042,
+        "ties": 0
+      }
+    },
+    "likelihood": {
+      "original": {
+        "records": 1383,
+        "stopped": 1380,
+        "empty": 0,
+        "first": 359,
+        "exact": 202,
+        "ends_early": 23,
+        "different_content_or_empty": 1136,
+        "surplus": 22,
+        "pairs": 1042,
+        "both": 17,
+        "same_output": 112,
+        "sibling_reference": 90
+      },
+      "erased": {
+        "records": 1383,
+        "stopped": 1372,
+        "empty": 0,
+        "first": 149,
+        "different_content_or_empty": 1258,
+        "surplus": 60,
+        "exact": 59,
+        "ends_early": 6,
+        "pairs": 1042,
+        "both": 0,
+        "same_output": 1042,
+        "sibling_reference": 100
+      },
+      "dureader": {
+        "records": 571,
+        "stopped": 479,
+        "empty": 0,
+        "first": 164,
+        "different_content_or_empty": 534,
+        "ends_early": 10,
+        "exact": 22,
+        "surplus": 5,
+        "absent_content_ink_exact": 0,
+        "single_span_exact": 22,
+        "distributed_ink_exact": 0
+      },
+      "provided_answers": {
+        "individual": 1441,
+        "both": 437,
+        "pairs": 1042,
+        "ties": 0
+      }
+    },
+    "contrast": {
+      "original": {
+        "records": 1383,
+        "stopped": 1380,
+        "empty": 0,
+        "first": 362,
+        "different_content_or_empty": 1151,
+        "surplus": 26,
+        "exact": 177,
+        "ends_early": 29,
+        "pairs": 1042,
+        "both": 21,
+        "same_output": 91,
+        "sibling_reference": 75
+      },
+      "erased": {
+        "records": 1383,
+        "stopped": 1291,
+        "empty": 0,
+        "first": 161,
+        "different_content_or_empty": 1247,
+        "surplus": 99,
+        "exact": 37,
+        "pairs": 1042,
+        "both": 0,
+        "same_output": 1042,
+        "sibling_reference": 55
+      },
+      "dureader": {
+        "records": 571,
+        "stopped": 481,
+        "empty": 0,
+        "first": 169,
+        "different_content_or_empty": 534,
+        "ends_early": 13,
+        "exact": 16,
+        "surplus": 8,
+        "absent_content_ink_exact": 0,
+        "single_span_exact": 16,
+        "distributed_ink_exact": 0
+      },
+      "provided_answers": {
+        "individual": 1527,
+        "both": 522,
+        "pairs": 1042,
+        "ties": 0
+      }
+    },
+    "released_span_reader": {
+      "records": 1383,
+      "stopped": 1383,
+      "empty": 0,
+      "first": 685,
+      "different_content_or_empty": 746,
+      "exact": 489,
+      "ends_early": 45,
+      "surplus": 103,
+      "both": 128,
+      "pairs": 1042
+    }
+  },
+  "contrasts": {
+    "contrast_vs_parent": {
+      "generation": {
+        "gained": 21,
+        "lost": 0,
+        "difference_pp": 2.015355086372361,
+        "ci95_pp": [
+          1.1582453634476755,
+          2.9657502413213677
+        ],
+        "passages": 521
+      },
+      "recognition": {
+        "gained": 515,
+        "lost": 4,
+        "difference_pp": 49.04030710172745,
+        "ci95_pp": [
+          45.54426912431877,
+          52.53626593658058
+        ],
+        "passages": 521
+      }
+    },
+    "contrast_vs_likelihood": {
+      "generation": {
+        "gained": 14,
+        "lost": 10,
+        "difference_pp": 0.3838771593090211,
+        "ci95_pp": [
+          -0.5929000363589448,
+          1.3333333333333333
+        ],
+        "passages": 521
+      },
+      "recognition": {
+        "gained": 158,
+        "lost": 73,
+        "difference_pp": 8.157389635316699,
+        "ci95_pp": [
+          4.965885627076039,
+          11.394919931265706
+        ],
+        "passages": 521
+      }
+    }
+  },
+  "seconds": 23.387122807092965,
+  "fits": {
+    "likelihood": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "pairs": 7108,
+          "updates": 297,
+          "losses": [
+            1.2960686811115478,
+            1.049894362604209,
+            1.7218001219551418
+          ],
+          "seconds": 12.145651619881392
+        },
+        {
+          "epoch": 2,
+          "pairs": 7108,
+          "updates": 594,
+          "losses": [
+            0.9074119503201564,
+            0.7251351386157731,
+            1.6197051052035545
+          ],
+          "seconds": 22.184490896761417
+        },
+        {
+          "epoch": 3,
+          "pairs": 7108,
+          "updates": 891,
+          "losses": [
+            0.7287525218996898,
+            0.5529682053799165,
+            1.556478196271833
+          ],
+          "seconds": 32.361064814031124
+        },
+        {
+          "epoch": 4,
+          "pairs": 7108,
+          "updates": 1188,
+          "losses": [
+            0.5739124512229666,
+            0.4173670593412257,
+            1.4829259748933823
+          ],
+          "seconds": 41.92783477157354
+        },
+        {
+          "epoch": 5,
+          "pairs": 7108,
+          "updates": 1485,
+          "losses": [
+            0.44310681368436583,
+            0.3159614510930651,
+            1.4315629036961879
+          ],
+          "seconds": 51.34514486044645
+        },
+        {
+          "epoch": 6,
+          "pairs": 7108,
+          "updates": 1782,
+          "losses": [
+            0.34395405799402035,
+            0.2478600411299044,
+            1.3585037270756875
+          ],
+          "seconds": 60.389130529016256
+        },
+        {
+          "epoch": 7,
+          "pairs": 7108,
+          "updates": 2079,
+          "losses": [
+            0.2706852756528688,
+            0.19151861558956046,
+            1.303228256403226
+          ],
+          "seconds": 69.98062612954527
+        },
+        {
+          "epoch": 8,
+          "pairs": 7108,
+          "updates": 2376,
+          "losses": [
+            0.22118335426457492,
+            0.15763045962927177,
+            1.2771057356725466
+          ],
+          "seconds": 79.75211370643228
+        }
+      ],
+      "sha256": "6e921a8c6325fede171ba13fca62dc3cc320d30bafb9e87604d8cc7af5babc62",
+      "seconds": 79.76450062170625,
+      "peak_bytes": 1460946944,
+      "updates": 2376,
+      "replay_records": 28512,
+      "paired_presentations": 56864,
+      "initial_sha256": "a9cc00e739eea6d171af622586755f701c5ff0d96b37b51cbeed00b76bf5b610"
+    },
+    "contrast": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "pairs": 7108,
+          "updates": 297,
+          "losses": [
+            1.3446228195591865,
+            0.9180503833743382,
+            1.7638378722921275
+          ],
+          "seconds": 8.796373913995922
+        },
+        {
+          "epoch": 2,
+          "pairs": 7108,
+          "updates": 594,
+          "losses": [
+            0.9582700870247725,
+            0.5489489994628683,
+            1.6794764783587695
+          ],
+          "seconds": 17.737140826880932
+        },
+        {
+          "epoch": 3,
+          "pairs": 7108,
+          "updates": 891,
+          "losses": [
+            0.7782240124585995,
+            0.38216911891101113,
+            1.6348656330741922
+          ],
+          "seconds": 26.796129073016346
+        },
+        {
+          "epoch": 4,
+          "pairs": 7108,
+          "updates": 1188,
+          "losses": [
+            0.6224333781101224,
+            0.25390110661725884,
+            1.5738162475150157
+          ],
+          "seconds": 36.16536965034902
+        },
+        {
+          "epoch": 5,
+          "pairs": 7108,
+          "updates": 1485,
+          "losses": [
+            0.4894389690612231,
+            0.16533199497737036,
+            1.5342247027926856
+          ],
+          "seconds": 44.488197040744126
+        },
+        {
+          "epoch": 6,
+          "pairs": 7108,
+          "updates": 1782,
+          "losses": [
+            0.3796229072011584,
+            0.1167682108648025,
+            1.4670657246181251
+          ],
+          "seconds": 53.11670696269721
+        },
+        {
+          "epoch": 7,
+          "pairs": 7108,
+          "updates": 2079,
+          "losses": [
+            0.3009961893804032,
+            0.0858004590539397,
+            1.417853107194788
+          ],
+          "seconds": 61.26899820752442
+        },
+        {
+          "epoch": 8,
+          "pairs": 7108,
+          "updates": 2376,
+          "losses": [
+            0.24733299607296774,
+            0.06917833763221358,
+            1.3953488925634374
+          ],
+          "seconds": 69.54642036370933
+        }
+      ],
+      "sha256": "3fb3a417b4bf13f0b9276c43b7179acce622b2f646afb6c56b3d97acebe383e4",
+      "seconds": 69.55539816059172,
+      "peak_bytes": 1461071360,
+      "updates": 2376,
+      "replay_records": 28512,
+      "paired_presentations": 56864,
+      "initial_sha256": "a9cc00e739eea6d171af622586755f701c5ff0d96b37b51cbeed00b76bf5b610"
+    }
+  },
+  "archives": {
+    "question_rows.npy": "728105e2e7051edf3e012810d302eb0a6548e2549e71ed9623ef9bac9078338f",
+    "contrast/original.npz": "7985e462f7d44d0062593580832626b4088f84e28eff9677737a0224bc6ded03",
+    "contrast/candidate_mean_logp.npy": "5853fc0bc0381fb1981645cba767c26afed9f5c2a97e6e553351588804bb2d02",
+    "contrast/dureader.npz": "3ba5a08f8d537c80dcf62edcf225d5e34e7392efe28d7197662ea008d8c48f08",
+    "contrast/erased.npz": "68d84e5ada65383cf168eb7763f458ec2c32c08dab0017cbbd77e1e16174bfcd",
+    "likelihood/original.npz": "ab85b1667a281ef0f5b023c2dfc114bffef1e684ab8adae3d81d7934f56f8156",
+    "likelihood/candidate_mean_logp.npy": "8f9168c65cef6a8f60ab50ae9ad7f35697414fde2783f345c2f9cebe7ef9efd4",
+    "likelihood/dureader.npz": "0bf4055f2c4a69a651b59f3c995791d038b70591cc2c46c9020e707cec3ebd60",
+    "likelihood/erased.npz": "d1255972cac5999b620a30306df6c5ba6e4d894b8748802a6cd72d0c0aa98c9b",
+    "parent/original.npz": "6612dc13a2fa55c86e0f221ffd2724b898293b55155677854b92d1eb70d48920",
+    "parent/candidate_mean_logp.npy": "80dd85b250103d7eb4bc6a7224b5eec9f547584776ed7a469cfe5e49b6d45671",
+    "parent/dureader.npz": "5515858c3210b0443dffe36f760cdf4e2dcf2cd7bf44a07d167ff38fa93688eb",
+    "parent/erased.npz": "7d3930b794854873436a2b85ed200a2252013be5b4e8a4559272f018973c5afb"
+  }
+}

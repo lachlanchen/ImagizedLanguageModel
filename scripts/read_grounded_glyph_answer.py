@@ -33,7 +33,10 @@ def main():
         group.add_argument("--" + key + "-text")
         parser.add_argument("--" + key + "-cells", type=int)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--arm", choices=("paired", "deranged"), default="paired")
+    weights = parser.add_mutually_exclusive_group()
+    weights.add_argument("--arm", choices=("paired", "deranged"), default="paired")
+    weights.add_argument("--checkpoint-dir", type=Path,
+                         help="Use a fitted grounded writer with the original bitmap memory")
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     args = parser.parse_args()
     if args.output.exists():
@@ -46,7 +49,8 @@ def main():
         cells = image_cells(path, count) if path else text_cells(getattr(args, key + "_text"))
         streams.append(np.packbits(cells.reshape(-1, 1024), axis=1))
     torch.set_num_threads(2)
-    net = load_writer(WORK / args.arm, args.device)
+    directory = args.checkpoint_dir or WORK / args.arm
+    net = load_writer(directory, args.device)
     memory = WORK / "memory.npy"
     raw, stopped = respond(net, np.load(memory), *streams, args.device)
     args.output.parent.mkdir(exist_ok=True, parents=True)
@@ -56,7 +60,7 @@ def main():
         (dest / "answer.bin").write_bytes(raw)
         page(raw).save(dest / "answer.png")
         write_json(dest / "receipt.json", dict(stopped=stopped, cells=len(raw)//128,
-                   weights_sha256=sha(WORK/args.arm/"final.safetensors"), memory_sha256=sha(memory)))
+                   weights_sha256=sha(directory/"final.safetensors"), memory_sha256=sha(memory)))
         dest.rename(args.output)
     print(args.output / "answer.png")
 
