@@ -46,11 +46,15 @@ class VisualPhraseWriter(VisualSpanWriter):
 
     @torch.inference_mode()
     def complete(self, boundary, history, initial, at_eof, *, original=False, limit=32, first_bias=None, first_code=None,
-                 stream=None, local_context=None, interaction=None):
+                 stream=None, local_context=None, interaction=None, sentence_boundary=None, ending_boundary=None):
         if limit < 1:
             raise ValueError('The known nonempty phrase needs room for one glyph')
         if interaction is not None and stream is None:
             raise ValueError('Conditional drawing needs the local stream model')
+        if sentence_boundary is not None:
+            boundary = sentence_boundary(boundary, initial)
+        if ending_boundary is None:
+            ending_boundary = boundary
         batch = len(history)
         ink = torch.zeros(batch, limit, 1024, dtype=torch.bool, device=history.device)
         lengths = torch.zeros(batch, dtype=torch.long, device=history.device)
@@ -78,7 +82,7 @@ class VisualPhraseWriter(VisualSpanWriter):
             lengths += ~stopped
             h, _ = self.advance_history(picture[:, None, self.landmarks], initial, history[None].contiguous())
             history = h[:, 0]
-            state = (boundary + history).tanh()
+            state = (ending_boundary + history).tanh()
             if original:
                 stop = self.actions(state, at_eof).argmax(1) != INSERT
             else:
@@ -93,7 +97,7 @@ class VisualPhraseWriter(VisualSpanWriter):
         return ink, lengths, stopped
 
     @torch.inference_mode()
-    def generate_phrase(self, source, cursor, prefix, question, *, limit=32, onset=None, stream=None, interaction=None):
+    def generate_phrase(self, source, cursor, prefix, question, *, limit=32, onset=None, stream=None, interaction=None, sentence_boundary=None):
         """Generate from one source and prefix of flat binary 32-by-32 ink cells."""
         if source.ndim != 2 or not len(source) or not 0 <= cursor <= len(source) or not len(question):
             raise ValueError('Supply a nonempty source, question, and a boundary inside the source grid')
@@ -111,5 +115,5 @@ class VisualPhraseWriter(VisualSpanWriter):
             context = np.array([cell_context(src, cursor, pre)], dtype=np.uint64)
             if onset is not None:
                 bias = torch.as_tensor(onset.bias(context), device=source.device)
-        ink, sizes, ended = self.complete(at, history[:, -1], initial, cursors == lengths, limit=limit, first_bias=bias, stream=stream, local_context=context, interaction=interaction)
+        ink, sizes, ended = self.complete(at, history[:, -1], initial, cursors == lengths, limit=limit, first_bias=bias, stream=stream, local_context=context, interaction=interaction, sentence_boundary=sentence_boundary)
         return ink[0, :int(sizes[0])], bool(ended[0])

@@ -34,7 +34,7 @@ def match(rows, bank, locations, contexts):
 
 
 @torch.inference_mode()
-def evaluate(rows, bank, net, stream, interaction, archive):
+def evaluate(rows, bank, net, stream, interaction, archive, sentence_boundary=None):
     ink = torch.from_numpy(np.unpackbits(bank, axis=1)).cuda().bool()
     bits = ink[:,net.landmarks]
     sig = signatures(bits.cpu().numpy())
@@ -58,6 +58,8 @@ def evaluate(rows, bank, net, stream, interaction, archive):
         mem,init,hist,y,n = tensors(block,feat,bits,net,q,False)
         b,c,j,_ = torch.tensor(pos,device='cuda').T
         boundary = net.boundary(mem,b,c)
+        if sentence_boundary is not None:
+            boundary = sentence_boundary(boundary,init)
         context = fields(block,sig,pos)
         require(np.array_equal(context,contexts[[r for *_,r in batch]]), 'Exchanged local observations differ')
         images,lengths,ends = net.complete(boundary,hist[b,j],init,c==n,stream=stream,local_context=context,

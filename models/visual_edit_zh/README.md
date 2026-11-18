@@ -99,3 +99,18 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py \
 ```
 
 The result is in `answer.png`. On 6,435 new held-out insertions this update recovered 455 exact phrases; the parent recovered 440 and local whole-phrase counts recovered 670. Both visual writers received 13 acceptable judgments out of 48 sampled insertions. [Figure 54](../../publication/ilm-nature/figures/Figure_54_conditional_ink.png) · [All 48 reviewed examples](../../references/evidence/conditional_ink_20261118/reading_gallery.pdf)
+
+### Conditioning the writer on the source sentence
+
+The two 198,164-byte residuals read the pictured source at the insertion boundary and the pooled state of its complete sentence. The example below uses the assignment-trained residual. With the supplied preceding modern text, it draws 一定 and stops. The following modern text begins with 会. The output is generated with the frozen 32-by-32 writer and its own pixel feedback.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py \
+  --local-ink stream --ink-interaction models/visual_edit_zh/conditional_ink.safetensors \
+  --sentence-boundary models/visual_edit_zh/sentence_assignment.safetensors \
+  --source-text '齐破晋强，秦王畏晋之强也，必重君以取晋。' --cursor 13 \
+  --prefix-text '齐国败而晋国强大，秦王惧怕魏国的强大，' \
+  --output /tmp/ilm-sentence-answer
+```
+
+Open `answer.png`. To run the matched likelihood control, use `sentence_likelihood.safetensors` with the same inputs. Image inputs use `--source-image` and `--prefix-image`. The learned model remains an experimental insertion writer. [Complete results and failure examples](../../references/sentence_choice_result.md)

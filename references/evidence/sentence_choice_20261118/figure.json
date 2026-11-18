@@ -1,0 +1,104 @@
+{
+  "table": [
+    [
+      "Exact stopped phrases",
+      "Discovery",
+      "Replication",
+      "Holdout 1",
+      "Holdout 2",
+      "New chapters"
+    ],
+    [
+      "Frozen writer",
+      "639",
+      "589",
+      "434",
+      "455",
+      "26"
+    ],
+    [
+      "Likelihood",
+      "739",
+      "685",
+      "523",
+      "531",
+      "38"
+    ],
+    [
+      "Paired assignment",
+      "741",
+      "690",
+      "526",
+      "534",
+      "38"
+    ],
+    [
+      "Whole-phrase counts",
+      "1033",
+      "945",
+      "751",
+      "766",
+      "59"
+    ],
+    [
+      "Insertion sites",
+      "5376",
+      "5413",
+      "5987",
+      "6435",
+      "837"
+    ]
+  ],
+  "exchange_counts": [
+    [
+      138,
+      1197
+    ],
+    [
+      60,
+      2146
+    ],
+    [
+      60,
+      2143
+    ]
+  ],
+  "examples": {
+    "missed": {
+      "split": "confirmation",
+      "site": 385,
+      "source": "孟子曰： 人之有德慧术知者，恒存乎疢疾。",
+      "cursor": 7,
+      "prefix": "孟子说： 人之",
+      "target": "所以",
+      "following": "有规律、理解能力、权术、知识，常常是由于他们灾患的处境。",
+      "cpu_stopped": true,
+      "frozen": "是",
+      "prediction": "是"
+    },
+    "gained": {
+      "split": "confirmation",
+      "site": 3251,
+      "source": "齐破晋强，秦王畏晋之强也，必重君以取晋。",
+      "cursor": 13,
+      "prefix": "齐国败而晋国强大，秦王惧怕魏国的强大，",
+      "target": "一定",
+      "following": "会重用您去交结魏国。",
+      "cpu_stopped": true,
+      "frozen": "一定会",
+      "prediction": "一定"
+    }
+  },
+  "widths": {
+    "missed_source": 20,
+    "missed_prefix": 7,
+    "missed_frozen": 1,
+    "missed_prediction": 1,
+    "missed_reference": 2,
+    "gained_source": 20,
+    "gained_prefix": 14,
+    "gained_frozen": 3,
+    "gained_prediction": 2,
+    "gained_reference": 2
+  }
+}

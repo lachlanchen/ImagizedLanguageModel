@@ -1,0 +1,5 @@
+# Choosing a Chinese insertion from sentence context
+
+Extend the results, methods and abstract at revision 767d0013 with the matched likelihood and sentence-assignment comparison. Keep the previous 54 figures and all three editions as the baseline. Figure 55 will show original source and prediction pixels, an exact insertion and an error under a stated selection rule, a native comparison table and a native chart. Distinguish supplied boundaries and prefixes, free drawing, reference-conditioned assignment and contextual grading. Record the actual size of the stricter chapter holdout. Verify editable data, rendered pages, originals and the local delivery by hash. There is no reviewer or response letter for this research update.
+
+The ending control motivates a first-glyph check on the same saved exchanges. Add its recognition and physical likelihood ranks to the results and state the unequal-signature restriction in the methods. Retain the prior unpromoted typeset proofs alongside the final revision.

@@ -25,20 +25,21 @@ def lines(pdf, tiles, top):
     return top
 
 
-def render():
-    path = EVIDENCE/'reading_gallery.pdf'
+def render(*, path=EVIDENCE/'reading_gallery.pdf', reading=WORK/'reading', cohort=None,
+           directory=WORK/'results/confirmation', versions=None):
+    if versions is None:
+        versions = [('interaction','Adjacent-pattern writer'),('marginal','Earlier writer'),('local','Whole-phrase counts')]
     if path.exists():
         raise FileExistsError(path)
-    rows,bank = inputs('confirmation')
+    rows,bank = inputs('confirmation') if cohort is None else cohort
     locations = list(sites_independent(rows))
-    reading = WORK/'reading'
     result, binding = load(reading/'result.json'),load(reading/'binding.json')
     require(binding==result['binding'] and sha(reading/'mapping.json')==binding['mapping']
             and sha(reading/'ratings.txt')==result['ratings_sha256'],'Reading record changed')
-    report = load(WORK/'results/confirmation/report.json')
+    report = load(directory/'report.json')
     streams = {}
-    for name in ('interaction','marginal','local'):
-        source = WORK/'results/confirmation'/(name+'.npz')
+    for name,_ in versions:
+        source = directory/(name+'.npz')
         require(sha(source)==report['arms'][name]['pixels_sha256'],'Source stream changed')
         with np.load(source) as z:
             streams[name]=(np.split(z['pixels'],z['offsets'][1:-1]),z['stopped'])
@@ -53,7 +54,7 @@ def render():
         r=rows[i]
         groups=[('Classical sentence',bank[r['x']]),('Modern prefix (last 35)',bank[r['y'][max(0,j-35):j]]),
                 ('Following translation (first 35)',bank[r['y'][k:k+35]])]
-        for key,label in [('interaction','Adjacent-pattern writer'),('marginal','Earlier writer'),('local','Whole-phrase counts'),('reference','Recorded insertion')]:
+        for key,label in [*versions,('reference','Recorded insertion')]:
             grade={'A':'acceptable','I':'incompatible','U':'uncertain'}[scores[key]]
             tiles=bank[r['y'][j:k]] if key=='reference' else streams[key][0][site]
             ending='' if key=='reference' else (' / stopped' if streams[key][1][site] else ' / reached cap')

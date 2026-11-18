@@ -22,6 +22,8 @@ reported directly below.*
 
 ## Writing modern Chinese from a pictured classical sentence
 
+The sentence-conditioned visual writer generated 2,529 of 24,048 Chinese insertions exactly. A control that updated only the ending decision achieved the same total. The updated writer completed 60 multi-glyph insertions, down from 138 for its parent. Figure 55 shows a corrected ending and a first-glyph error using the original outputs. [Results](references/sentence_choice_result.md) · [Figure 55](publication/ilm-nature/figures/Figure_55_sentence_choice.png) · [All 48 blind readings](references/evidence/sentence_choice_20261118/reading_gallery.pdf)
+
 On separate test chapters, a 2.03M-parameter editor copied all 2,045 renderable passages on request. It reproduced 30 of 2,048 modern translations exactly. In one it kept nine glyphs and drew two, changing 薨 to 去世. A simple local-edit baseline still made fewer glyph errors overall. [Run the editor](models/visual_edit_zh/README.md) · [Original output and reference](publication/ilm-nature/figures/Figure_48_visual_edit.png)
 
 Given a classical sentence, an insertion boundary and the preceding modern text, the phrase writer can also draw a missing phrase. It wrote 我想 after 黄帝说： in the first example below. In the second it wrote 位的 where the translation needed 位俸. On 5,987 fresh insertion sites it exactly reproduced 405 phrases, compared with 187 for the earlier writer and 651 for local whole-phrase counts. [CPU example](models/visual_edit_zh/README.md#generate-a-phrase-using-neighboring-glyphs) · [Experiment and contextual reading](references/local_ink_result.md)

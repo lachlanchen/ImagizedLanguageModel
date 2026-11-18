@@ -11,7 +11,7 @@ from scripts.prepare_visual_spans import (BASE, COHORTS, CONTRAST, DIVERSITY, OU
 from scripts.train_local_ink import RUN, tiles, training_rows
 
 
-def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_roster=None):
+def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_roster=None, additional_rosters=(), exclude_older_chapters=False):
     bank = tiles()
     groups,old_eval,texts,images = set(),set(),set(),set()
     def exclude(rows, source_bank, *, block=False):
@@ -23,7 +23,8 @@ def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_ro
     exclude(training_rows(),bank,block=True)
     for cohort in COHORTS:
         exclude(frozen(cohort),bank,block=True)
-    if previous_roster is not None:
+    prior = (() if previous_roster is None else (previous_roster,)) + tuple(additional_rosters)
+    for previous_roster in prior:
         receipt = load(previous_roster/'receipt.json')
         require(sha(previous_roster/'rows.jsonl') == receipt['rows_sha256']
                 and sha(previous_roster/'pixels.npy') == receipt['bank_sha256'], 'Previous holdout changed')
@@ -40,6 +41,8 @@ def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_ro
     spec = load(DIVERSITY/'preparation.json')
     for name in (*SHARDS,*COHORTS):
         exclude(read_split(name,spec),bank,block=name in SHARDS)
+    if exclude_older_chapters:
+        groups.update(old_eval)
     archive = BASE/'archive.tar.gz'
     require(sha(archive)==original['archive_sha256'],'Corpus archive changed')
     pool = []
@@ -87,7 +90,10 @@ def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_ro
         rows.append(dict(g=group,i=index,source=src,target=modern,x=x,y=y,a=a,o=o))
         if len(rows)==1024:
             break
-    require(len(rows)==1024,'Insufficient fresh sentence coverage')
+    if exclude_older_chapters:
+        require(bool(rows), 'No eligible classical sentences remain')
+    else:
+        require(len(rows)==1024,'Insufficient fresh sentence coverage')
     folder = folder or RUN/'fresh_roster'
     folder.mkdir()
     with (folder/'rows.jsonl').open('x') as stream:
@@ -99,6 +105,8 @@ def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_ro
     report = dict(rows=len(rows),pictured=sum(bool(r['x']) for r in rows),chapters=len(chapters),
                chapters_in_older_eval=len(chapters&old_eval),excluded_chapters=len(groups),
                rows_sha256=sha(folder/'rows.jsonl'),bank_sha256=sha(folder/'pixels.npy'),archive_sha256=sha(archive))
+    if exclude_older_chapters:
+        report.update(requested_rows=1024,eligible_candidates_in_pool=len(pool),older_evaluation_chapters_excluded=True)
     write_new(folder/'receipt.json',report)
     print(report,flush=True)
 
@@ -108,7 +116,16 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--conditional-ink', action='store_true',
                         help='Reserve the additional sentence cohort after the original fresh holdout')
-    if parser.parse_args().conditional_ink:
+    parser.add_argument('--sentence-choice', action='store_true',
+                        help='Exclude the enlarged training pool and all older evaluation chapters')
+    args = parser.parse_args()
+    if args.sentence_choice and args.conditional_ink:
+        parser.error('Select one roster')
+    if args.sentence_choice:
+        prepare(RUN.parent/'sentence_choice_v1'/'confirmation', priority_prefix='sentence-choice-confirmation',
+                previous_roster=RUN/'fresh_roster', additional_rosters=(RUN.parent/'conditional_ink_v1'/'confirmation',),
+                exclude_older_chapters=True)
+    elif args.conditional_ink:
         work = RUN.parent/'conditional_ink_v1'
         work.mkdir(exist_ok=True)
         prepare(work/'confirmation', priority_prefix='conditional-ink-confirmation',

@@ -46,6 +46,7 @@ def main():
     p.add_argument('--device',choices=['cpu','cuda'],default='cpu')
     p.add_argument('--local-ink',choices=('onset','stream'),help='Use local four-pixel evidence for the first glyph or entire phrase')
     p.add_argument('--ink-interaction',type=Path, help='Optional trained within-glyph transition checkpoint')
+    p.add_argument('--sentence-boundary',type=Path,help='Optional sentence-conditioned phrase residual')
     p.add_argument('--ink-directory',type=Path,default=MODELS/'local_ink')
     p.add_argument('--cursor',type=int,required=True,help='Number of classical cells preceding the insertion site')
     p.add_argument('--output',type=Path,required=True,help='A new directory for the image and stop receipt')
@@ -55,6 +56,8 @@ def main():
         g.add_argument('--'+key+'-image',type=Path)
         p.add_argument('--'+key+'-cells',type=int,help='Used glyphs in a padded input grid')
     args=p.parse_args()
+    if args.sentence_boundary and not args.ink_interaction:
+        p.error('--sentence-boundary requires --ink-interaction')
     if args.ink_interaction and args.local_ink != 'stream':
         p.error('--ink-interaction requires --local-ink stream')
     if args.output.exists():
@@ -88,6 +91,10 @@ def main():
         from ilm.visual_lm.conditional_ink import ConditionalInk
         manifest_hash = hashlib.sha256((args.ink_directory/'manifest.json').read_bytes()).hexdigest()
         options['interaction'] = ConditionalInk.restore(args.ink_interaction, manifest_hash, args.device)
+    if args.sentence_boundary:
+        from ilm.visual_lm.sentence_choice import SentenceBoundary
+        digest = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
+        options['sentence_boundary'] = SentenceBoundary.restore(args.sentence_boundary, digest, args.device)
     pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt,**options)
     ink=pixels.cpu().numpy()
     args.output.mkdir(parents=True)
@@ -98,6 +105,8 @@ def main():
         result['local_ink'] = args.local_ink
     if args.ink_interaction:
         result['ink_interaction_sha256'] = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
+    if args.sentence_boundary:
+        result['sentence_boundary_sha256'] = hashlib.sha256(args.sentence_boundary.read_bytes()).hexdigest()
     (args.output/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))
 

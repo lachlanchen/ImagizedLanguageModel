@@ -11,7 +11,7 @@ from scripts.train_local_ink import OUT, PRIOR, ROOT, RUN, fields, frozen, guard
 
 
 @torch.inference_mode()
-def generate(rows, arm, bank, start, *, stream=False, supplied=False, interaction=None):
+def generate(rows, arm, bank, start, *, stream=False, supplied=False, interaction=None, sentence_boundary=None, residual_path="both"):
     given = arm=='given' or supplied
     ablate = arm=='prefix'
     net = checkpoint('prefix' if ablate else 'source')
@@ -56,8 +56,17 @@ def generate(rows, arm, bank, start, *, stream=False, supplied=False, interactio
                 patterns = nibbles(target)[:,:,None]
                 scores.extend(torch.stack([z.log_softmax(-1).gather(-1,patterns).sum((1,2))
                               for z in (logits,logits+bias)],1).cpu().tolist())
+            drawing = sentence_boundary
+            ending_at = None
+            if residual_path == "drawing":
+                ending_at = at
+            elif residual_path == "ending":
+                ending_at = sentence_boundary(at,initial[b])
+                drawing = None
+            elif residual_path != "both":
+                raise ValueError("Unknown sentence residual path")
             pics,lengths,ended = net.complete(at,hist[b,j],initial[b],c==n[b],first_bias=bias,
-                                               first_code=target if given else None, stream=online, local_context=context, interaction=interaction)
+                                               first_code=target if given else None, stream=online, local_context=context, interaction=interaction, sentence_boundary=drawing, ending_boundary=ending_at)
             mask = pics.cpu().numpy()
             outputs.extend(np.packbits(p[:m],axis=1) for p,m in zip(mask,lengths.tolist(),strict=True))
             stops.extend(ended.tolist())
