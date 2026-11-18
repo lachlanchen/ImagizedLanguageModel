@@ -21,6 +21,19 @@ def sync():
     previous = BASE / old['package_name']
     for name, digest in old['files_sha256'].items():
         require(sha(previous/name) == digest, 'Previous package changed: '+name)
+    if RECEIPT.exists():
+        record = load(RECEIPT)
+        require(record['build_receipt_sha256'] == sha(BUILD), 'Article build receipt differs')
+        for name, digest in record['files_sha256'].items():
+            require(sha(DEST/name) == digest, 'Delivered snapshot changed: '+name)
+        for name, digest in record['latest_alias_sha256'].items():
+            require(sha(BASE/name) == digest, 'Latest alias changed: '+name)
+        copy = DEST/'evidence'/RECEIPT.name
+        if not copy.exists():
+            shutil.copyfile(RECEIPT, copy)
+        require(sha(copy) == sha(RECEIPT), 'Delivered receipt differs')
+        print(f"Verified {len(record['files_sha256'])} files against their saved delivery hashes.")
+        return
     names = set(old['files_sha256']) | set(build['all_root_tex_sha256'])
     additions = ['evidence/'+PREVIOUS.name,'evidence/'+BUILD.name,'full_context_comparison_figure.mjs',
                  'build_full_context_comparison_article.py','figures/Full_context_comparison.pptx',
