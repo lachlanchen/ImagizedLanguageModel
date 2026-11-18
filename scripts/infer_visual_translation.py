@@ -18,6 +18,29 @@ def generate(packed, method, weights, *, receipt=None):
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
 
         return VisualPhraseComposer.restore(weights).generate(packed)
+    if method == "context-phrases":
+        import torch
+        from safetensors.torch import load_file
+        from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
+        from ilm.visual_lm.contextual_phrase_realizer import ContextualPhraseRealizer
+        from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
+
+        torch.set_num_threads(2)
+        encoder_path = MODELS / "marginal_glyph.safetensors"
+        composer_path = MODELS / "composer_55k.msgpack.gz"
+        state = load_file(str(encoder_path))
+        encoder = CausalGlyphTranslator(state["landmarks"], state["exemplars"])
+        encoder.load_state_dict(state)
+        writer = ContextualPhraseRealizer.restore(
+            weights, encoder, VisualPhraseComposer.restore(composer_path)
+        )
+        if receipt is not None:
+            receipt.update(
+                encoder_sha256=hashlib.sha256(encoder_path.read_bytes()).hexdigest(),
+                composer_sha256=hashlib.sha256(composer_path.read_bytes()).hexdigest(),
+                ending="end_of_source",
+            )
+        return writer.generate(packed)
     if method == "revision":
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
         from ilm.visual_lm.pictured_revision import PicturedReviser
@@ -111,6 +134,7 @@ def main():
             "marginal",
             "event",
             "bound-event",
+            "context-phrases",
         ),
         default="phrases",
     )
@@ -134,6 +158,7 @@ def main():
             "marginal": "marginal_glyph.safetensors",
             "event": "event_writer.safetensors",
             "bound-event": "event_writer.safetensors",
+            "context-phrases": "context_phrases.msgpack.gz",
         }[args.method]
     )
     source = (

@@ -215,3 +215,13 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method bound-event \
   --image references/evidence/event_roles_20261119/predicate_4_source.png \
   --output artifacts/qin_surrounds_chu
 ```
+
+### Translate a pictured verb with more than one meaning
+
+The experimental `context-phrases` writer reads a grid of 32 × 32 glyph images and writes a modern answer image. This held-out example uses 去 for distance and produces 距离寿春三十里。 Substituting `leave_source.png` gives a different reading of the same pictured verb. The method recognizes two trained centre images and uses the existing phrase composer for other material. It requires the packaged visual encoder, composer and learned phrase file. [Complete outputs and limitations](../../references/predicate_context_result.md)
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method context-phrases \
+  --image references/evidence/predicate_context_20261119/distance_source.png \
+  --output artifacts/shouchun_distance
+```
