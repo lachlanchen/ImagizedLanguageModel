@@ -13,29 +13,16 @@ from scripts.train_visual_extractive_reader import save_page
 DEST = ROOT/'references/evidence/passage_diversity_20261118'
 
 
-def main():
-    report = load(OUT/'evaluation.json')
-    followup = {'frequency_weight.json':WEIGHT_RUN/'evaluation.json',
-                'weight_holdout.json':WEIGHT_RUN/'fresh/preparation.json',
-                'local_errors.json':WEIGHT_RUN/'local_errors.json'}
-    require(all(path.is_file() for path in followup.values()), 'Complete the frequency comparison and local recount first')
-    DEST.mkdir()
-    for filename, path in followup.items():
-        shutil.copyfile(path, DEST/filename)
-    for name in ('data','fits','evaluation','prepare_resources','train_resources','evaluate_resources'):
-        shutil.copyfile(OUT/(name+'.json'), DEST/(name+'.json'))
-    fresh = report['fresh']
-    test = load_split(OUT/'fresh/contexts.npz')
-    px = np.load(OUT/'pool/pixels.npy')
+def changed_samples(fresh, test, px, folder, destination, control, candidate):
     gold = px[test['target']]
     runs, hits = {},{}
-    for name in ('repeat','diverse'):
-        path = OUT/'evaluation_fresh'/name/'generated.npz'
+    for name in (control, candidate):
+        path = folder/name/'generated.npz'
         require(sha(path)==fresh['arms'][name]['archive_sha256'], 'Generated archive changed')
         v = runs[name] = load_split(path)
         hits[name] = (v['length']==4)&v['stopped']&(v['packed'][:,:4]==gold).all((1,2))
     rows = {key:int(np.flatnonzero(mask)[0]) for key,mask in [
-        ('gain',hits['diverse']&~hits['repeat']),('loss',hits['repeat']&~hits['diverse'])] if mask.any()}
+        ('gain',hits[candidate]&~hits[control]),('loss',hits[control]&~hits[candidate])] if mask.any()}
     wanted = {int(test['tag'][i]):key for key,i in rows.items()}
     groups = {int(test['group'][i]) for i in rows.values()}
     samples = {}
@@ -69,11 +56,29 @@ def main():
     for key, i in rows.items():
         require(np.array_equal(np.frombuffer(b''.join(raster.tile(c) for c in samples[key]['reference']),np.uint8),
                                gold[i].ravel()),'Source reading differs from physical reference')
-        out = runs['diverse']['packed'][i,:runs['diverse']['length'][i]]
+        out = runs[candidate]['packed'][i,:runs[candidate]['length'][i]]
         sides = px[test['context'][i]]
         for suffix, data in [('before',sides[12:24]), ('after',sides[24:36]), ('actual',out),('reference',gold[i])]:
-            save_page(DEST/(key+'_'+suffix+'.png'),data)
+            save_page(destination/(key+'_'+suffix+'.png'),data)
         samples[key]['pixel_reading'] = ''.join(written_tiles.get(tile.tobytes(),'�') for tile in out)
+    return samples
+
+
+def main():
+    report = load(OUT/'evaluation.json')
+    followup = {'frequency_weight.json':WEIGHT_RUN/'evaluation.json',
+                'weight_holdout.json':WEIGHT_RUN/'fresh/preparation.json',
+                'local_errors.json':WEIGHT_RUN/'local_errors.json'}
+    require(all(path.is_file() for path in followup.values()), 'Complete the frequency comparison and local recount first')
+    DEST.mkdir()
+    for filename, path in followup.items():
+        shutil.copyfile(path, DEST/filename)
+    for name in ('data','fits','evaluation','prepare_resources','train_resources','evaluate_resources'):
+        shutil.copyfile(OUT/(name+'.json'), DEST/(name+'.json'))
+    fresh = report['fresh']
+    test = load_split(OUT/'fresh/contexts.npz')
+    px = np.load(OUT/'pool/pixels.npy')
+    samples = changed_samples(fresh,test,px,OUT/'evaluation_fresh',DEST,'repeat','diverse')
     rows = [['Writer','Exact answers','Both in pair','Distinct outputs','Top ten share']]
     for name, label in [('start','Starting writer'),('repeat','Repeated passages'),('diverse','Distinct passages')]:
         arm = fresh['arms'][name]

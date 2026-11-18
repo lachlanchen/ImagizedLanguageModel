@@ -101,7 +101,10 @@ class PicturedIdiom(nn.Module):
     @torch.inference_mode()
     def generate(self,features,beam=4,limit=8):
         """A separate beam per prompt; no inventory, corpus or font is queried."""
-        ctx=self.read(features)
+        return self.generate_from_context(self.read(features),beam,limit)
+
+    @torch.inference_mode()
+    def generate_from_context(self,ctx,beam=4,limit=8):
         b=len(ctx);device=ctx.device
         ctx=ctx[:,None].expand(-1,beam,-1)
         hidden=ctx.contiguous()
