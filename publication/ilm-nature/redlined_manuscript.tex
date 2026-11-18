@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 18 12:54:29 2026
-%DIF ADD new.tex   Wed Nov 18 12:54:29 2026
+%DIF DEL old.tex   Wed Nov 18 13:11:38 2026
+%DIF ADD new.tex   Wed Nov 18 13:11:38 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -140,7 +140,7 @@
 
 {\sffamily\bfseries\DIFdelbegin %DIFDELCMD < \Large{Learning conditional language\\in continuous image space}%%%
 \DIFdelend \DIFaddbegin \Large{Conditional language generation\\in glyph image space}\DIFaddend \par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{\DIFdelbegin \DIFdel{Written language includes forms outside standard }\DIFdelend \DIFaddbegin \DIFadd{Historical inscriptions and variant writing can preserve distinctions absent from a }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventory}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces that }\DIFdelend \DIFaddbegin \DIFadd{study whether a model can }\DIFaddend read \DIFdelbegin \DIFdel{and emit glyph images}\DIFdelend \DIFaddbegin \DIFadd{a question as an image}\DIFaddend , \DIFdelbegin \DIFdel{with generated pixels supplying subsequent history}\DIFdelend \DIFaddbegin \DIFadd{draw an answer and read its own successive marks}\DIFaddend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{The models use }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide }\DIFdelend \DIFaddbegin \DIFadd{visual weights, with either learned or }\DIFaddend inherited language \DIFdelbegin \DIFdel{knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path}\DIFdelend \DIFaddbegin \DIFadd{context}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear }\DIFdelend \DIFaddbegin \DIFadd{An initial comparison on 13,766 Chinese sequences yields 7/32 correct }\DIFaddend complete \DIFdelbegin \DIFdel{literal }\DIFdelend answers \DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{in proportional layout, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved }\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 pairs in which both }\DIFaddend questions \DIFdelbegin \DIFdel{, versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{about the same passage are answered correctly}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification}\DIFdelend \DIFaddbegin \DIFadd{No complete book continuation earns coherence credit}\DIFaddend . \DIFdelbegin \DIFdel{A separate compact experiment freezes a 1.409B }\DIFdelend \DIFaddbegin \DIFadd{We then compare learning and freezing the inherited }\DIFaddend contextual body \DIFdelbegin \DIFdel{and fits image interfaces }\DIFdelend \DIFaddbegin \DIFadd{of a 1.465-billion-parameter model. Both arms train }\DIFaddend on 13,785 \DIFdelbegin \DIFdel{complete Chinese book and question--answer }\DIFdelend sequences\DIFaddbegin \DIFadd{. Among 792 generated streams reviewed blind to model identity}\DIFaddend , \DIFdelbegin \DIFdel{covering 2.576 million target glyph positions}\DIFdelend \DIFaddbegin \DIFadd{neither final checkpoint produces a readable complete answer to the 32 normal questions}\DIFaddend . \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{On twelve book prefixes}\DIFaddend , \DIFdelbegin \DIFdel{172-update fits use 3.930 }\DIFdelend \DIFaddbegin \DIFadd{the trained body stops naturally twelve times }\DIFaddend and \DIFdelbegin \DIFdel{4.889 GiB peak allocated GPU memory}\DIFdelend \DIFaddbegin \DIFadd{the frozen body twice}\DIFaddend . \DIFdelbegin \DIFdel{Both score zero complete exact QA answers out of 32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{Neither produces a credited coherent continuation}\DIFaddend . A \DIFdelbegin \DIFdel{wider writer removes a measured velocity-rank restriction without solving language}\DIFdelend \DIFaddbegin \DIFadd{single model reader familiar with the development cohort reviewed these outputs}\DIFaddend . \DIFdelbegin \DIFdel{Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{A separate 23.55-million-parameter visual model prefers the grammatical order in 284 of 552 Mandarin sentence pairs after training}\DIFaddend , \DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{compared with 299 at initialization}\DIFaddend . \DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{A separate CPU-trained }\DIFaddend reader \DIFdelbegin \DIFdel{also has a measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{selects 269 of 1,788 complete answer images from held-out passages}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases. These results separate execution}\DIFdelend \DIFaddbegin \DIFadd{Erasing the question reduces the count to 18. A patch-count model trained on ordered passages draws 18 of 668 exact next glyphs in further articles}\DIFaddend , \DIFdelbegin \DIFdel{physical }\DIFdelend \DIFaddbegin \DIFadd{versus zero after training successors are rotated. Its free continuations repeat. Independent }\DIFaddend writing \DIFaddbegin \DIFadd{about historical forms }\DIFaddend and \DIFdelbegin \DIFdel{conditional }\DIFdelend \DIFaddbegin \DIFadd{computational savings at matched }\DIFaddend language \DIFdelbegin \DIFdel{success. Reliable open-ended generation, historical-form transfer and a matched-quality efficiency advantage }\DIFdelend \DIFaddbegin \DIFadd{quality }\DIFaddend remain \DIFdelbegin \DIFdel{unresolved}\DIFdelend \DIFaddbegin \DIFadd{open}\DIFaddend .}\par\bigskip
+\section*{Abstract}{\DIFdelbegin \DIFdel{Written language includes forms outside standard }\DIFdelend \DIFaddbegin \DIFadd{Historical inscriptions and variant writing can preserve distinctions absent from a }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventory}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces that }\DIFdelend \DIFaddbegin \DIFadd{study whether a model can }\DIFaddend read \DIFdelbegin \DIFdel{and emit glyph images}\DIFdelend \DIFaddbegin \DIFadd{a question as an image}\DIFaddend , \DIFdelbegin \DIFdel{with generated pixels supplying subsequent history}\DIFdelend \DIFaddbegin \DIFadd{draw an answer and read its own successive marks}\DIFaddend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{The models use }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide }\DIFdelend \DIFaddbegin \DIFadd{visual weights, with either learned or }\DIFaddend inherited language \DIFdelbegin \DIFdel{knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path}\DIFdelend \DIFaddbegin \DIFadd{context}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear }\DIFdelend \DIFaddbegin \DIFadd{An initial comparison on 13,766 Chinese sequences yields 7/32 correct }\DIFaddend complete \DIFdelbegin \DIFdel{literal }\DIFdelend answers \DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{in proportional layout, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved }\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 pairs in which both }\DIFaddend questions \DIFdelbegin \DIFdel{, versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{about the same passage are answered correctly}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification}\DIFdelend \DIFaddbegin \DIFadd{No complete book continuation earns coherence credit}\DIFaddend . \DIFdelbegin \DIFdel{A separate compact experiment freezes a 1.409B }\DIFdelend \DIFaddbegin \DIFadd{We then compare learning and freezing the inherited }\DIFaddend contextual body \DIFdelbegin \DIFdel{and fits image interfaces }\DIFdelend \DIFaddbegin \DIFadd{of a 1.465-billion-parameter model. Both arms train }\DIFaddend on 13,785 \DIFdelbegin \DIFdel{complete Chinese book and question--answer }\DIFdelend sequences\DIFaddbegin \DIFadd{. Among 792 generated streams reviewed blind to model identity}\DIFaddend , \DIFdelbegin \DIFdel{covering 2.576 million target glyph positions}\DIFdelend \DIFaddbegin \DIFadd{neither final checkpoint produces a readable complete answer to the 32 normal questions}\DIFaddend . \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{On twelve book prefixes}\DIFaddend , \DIFdelbegin \DIFdel{172-update fits use 3.930 }\DIFdelend \DIFaddbegin \DIFadd{the trained body stops naturally twelve times }\DIFaddend and \DIFdelbegin \DIFdel{4.889 GiB peak allocated GPU memory}\DIFdelend \DIFaddbegin \DIFadd{the frozen body twice}\DIFaddend . \DIFdelbegin \DIFdel{Both score zero complete exact QA answers out of 32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{Neither produces a credited coherent continuation}\DIFaddend . A \DIFdelbegin \DIFdel{wider writer removes a measured velocity-rank restriction without solving language}\DIFdelend \DIFaddbegin \DIFadd{single model reader familiar with the development cohort reviewed these outputs}\DIFaddend . \DIFdelbegin \DIFdel{Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{A separate 23.55-million-parameter visual model prefers the grammatical order in 284 of 552 Mandarin sentence pairs after training}\DIFaddend , \DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{compared with 299 at initialization}\DIFaddend . \DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{A separate CPU-trained }\DIFaddend reader \DIFdelbegin \DIFdel{also has a measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{selects 269 of 1,788 complete answer images from held-out passages}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases}\DIFdelend \DIFaddbegin \DIFadd{Erasing the question reduces the count to 18. A patch-count model trained on ordered passages draws 18 of 668 exact next glyphs in further articles, versus zero after training successors are rotated}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution}\DIFdelend \DIFaddbegin \DIFadd{A shared coarse layout raises known nonempty glyph matches from 198 to 649 of 668}\DIFaddend , \DIFdelbegin \DIFdel{physical }\DIFdelend \DIFaddbegin \DIFadd{with 18 exact successors in both conditions. Free }\DIFaddend writing \DIFdelbegin \DIFdel{and conditional language success}\DIFdelend \DIFaddbegin \DIFadd{still repeats}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation, historical-form transfer }\DIFdelend \DIFaddbegin \DIFadd{Independent writing about historical forms }\DIFaddend and \DIFdelbegin \DIFdel{a matched-quality efficiency advantage }\DIFdelend \DIFaddbegin \DIFadd{computational savings at matched language quality }\DIFaddend remain \DIFdelbegin \DIFdel{unresolved}\DIFdelend \DIFaddbegin \DIFadd{open}\DIFaddend .}\par\bigskip
 \DIFdelbegin \DIFdel{Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history.
@@ -2537,7 +2537,32 @@ speech reached 128 cells and fell into repetition. Accurate occasional
 successors leave sustained writing and useful answer generation open.
 }
 
-%DIF >  Literal captions copied from their source inputs by build_patch_count_article.py.
+\subsection*{\DIFadd{A shared layout recovers physical form}}
+\DIFadd{A complete probability recount found that the earlier patch writer assigned
+more mass to the blank than to the actual successor on 329 of its 348 blank
+outputs. We therefore conditioned all patches on a common coarse image.
+On the same 668 development contexts, known nonempty glyph matches rose from
+198 to 649 and blanks fell from 348 to one (Fig.~\ref{fig:shared-layout}).
+Exact matches to Han ideographs found in the source rose from 119 to 340.
+Exact recorded successors remained at 18. The writer retained nine earlier
+matches, gained nine and lost nine (paired difference 0.0 percentage points,
+95\% article interval $-1.20$ to $+1.20$). Rotation of the training
+successors produced 668 known nonempty glyphs and zero correct successors.
+For the question about the history of the character for speech, the ordered
+writer produced a letter followed by repeated ovals.
+}
+
+\DIFadd{Training exposed 5,276 distinct target bitmaps and 539 coarse layouts.
+We enumerated the greedy output for every selectable layout. Their range
+contained the reference bitmap at only 242 of the 668 positions. Even perfect
+choice of layout could not produce the other 426 reference images with this
+writer. All four ordered completions reached the cap. A two-glyph context
+also conflates different questions with identical visible endings. Preserving
+finer distinctions in the writer and access to the earlier question in the
+predictor are both necessary for this route to independent language.
+}
+
+%DIF >  Literal captions copied from their source inputs by build_shared_layout_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -2817,6 +2842,21 @@ The control retained the observed frequencies of complete images and spatial
 patch joins. \textbf{c}, Complete output of the ordered model to the
 pictured etymology question. It reached the 128-cell limit.}}
 \label{fig:patch-writing}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_37_shared_layout.png}
+\caption{\DIFaddFL{\textbf{A shared physical layout improves glyph fidelity.}
+\textbf{a}, Original images from matched pictured contexts. The rows show
+the first newly correct output, the first incorrect match to a known Han
+bitmap after an earlier output outside that set, and the first lost match
+in article order. The source
+continues with a different character in the second row.
+\textbf{b}, Complete counts under the two ordered writers. A known
+nonempty glyph may also be a digit, letter or punctuation mark.
+\textbf{c}, The entire response to the pictured etymology question begins
+with a lowercase letter and repeats an oval to the 128-cell cap.}}
+\label{fig:shared-layout}
 \end{figure*}
 
 
@@ -4678,6 +4718,21 @@ The 334 article titles and their selected physical histories were distinct
 from the previous 512. Each recorded successor was absent from both histories
 and belonged to the original training repertoire. Intervals resampled whole
 articles 10,000 times.
+}
+
+\subsection*{\DIFadd{Shared physical layout and exact range}}
+\DIFadd{For target image $X$, let $Z$ mark the squares in a $4\times4$ grid with more
+ink than the image-wide mean per square. We estimated $p(Z\mid h)$ from the
+last two visible glyph signatures by suffix interpolation. The conditional
+writer drew each literal $8\times8$ patch from its spatial neighbours and
+the same predicted $Z$, backing off to $Z$ and then position frequencies.
+Coarse layout and local patch probabilities were normalized separately.
+The learned end event, literal patch escape and feedback through emitted
+pixels matched the earlier writer. We enumerated all 539 greedy images,
+one per layout, before testing reference membership in this set.
+Stochastic generation has a wider support. Both arms saw 2,127 passages.
+The ordered fit took 0.21 seconds after source preparation and occupied
+2.08 MB compressed. The two-arm experiment took 13.97 seconds in total.
 }
 
 

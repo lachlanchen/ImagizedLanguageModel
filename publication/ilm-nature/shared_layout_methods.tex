@@ -1,0 +1,13 @@
+\subsection*{Shared physical layout and exact range}
+For target image $X$, let $Z$ mark the squares in a $4\times4$ grid with more
+ink than the image-wide mean per square. We estimated $p(Z\mid h)$ from the
+last two visible glyph signatures by suffix interpolation. The conditional
+writer drew each literal $8\times8$ patch from its spatial neighbours and
+the same predicted $Z$, backing off to $Z$ and then position frequencies.
+Coarse layout and local patch probabilities were normalized separately.
+The learned end event, literal patch escape and feedback through emitted
+pixels matched the earlier writer. We enumerated all 539 greedy images,
+one per layout, before testing reference membership in this set.
+Stochastic generation has a wider support. Both arms saw 2,127 passages.
+The ordered fit took 0.21 seconds after source preparation and occupied
+2.08 MB compressed. The two-arm experiment took 13.97 seconds in total.

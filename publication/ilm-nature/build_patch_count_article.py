@@ -25,11 +25,11 @@ old_literal = base.literal_figures
 base.literal_figures = lambda: old_literal().replace('build_visual_successor_article.py', 'build_patch_count_article.py')
 
 
-def figure():
+def figure(module_name='patch_count_figure.mjs'):
     folder = WORK / ('figure' if not (WORK/'figure').exists() else 'figure_retry')
     folder.mkdir(exist_ok=False)
     (folder/'node_modules').symlink_to(previous.NODE/'node_modules', target_is_directory=True)
-    module = folder/'patch_count_figure.mjs'
+    module = folder/module_name
     shutil.copy2(HERE/module.name, module)
     base.STAGE = folder
     base.run([str(previous.NODE/'bin/node'), str(module), str(ROOT), str(folder), str(previous.SKILL), sys.executable],
@@ -40,7 +40,17 @@ def figure():
         shutil.copy2(src, dest)
 
 
-def promote():
+def verify_patch_table(cells):
+    stats = base.load(SOURCE/'result.json')['stats']
+    audit = base.load(SOURCE/'audit.json')
+    expected = [['Exact recorded successor', *[str(stats[a]['exact']) for a in ('ordered','rotated')]]]
+    expected.extend([[label, *[str(source[a][key]) for a in ('ordered','rotated')]]
+                     for label,source,key in [('Known nonempty glyph',audit,'observed_nonempty'),
+                                              ('Blank output',stats,'blank_emissions')]])
+    require(cells[1:] == expected, 'Measured native table differs')
+
+
+def promote(verify_table=verify_patch_table, receipt_name='patch_count_article_build.json'):
     before = base.preserved()
     inspection, review, build = (base.load(STAGE/n) for n in ('inspection.json','visual_review.json','build_receipt.json'))
     require(all(base.sha(HERE/n) == h for n,h in build['sources'].items()), 'Compiled TeX changed')
@@ -52,13 +62,7 @@ def promote():
         require(all(base.sha(p) in hashes for p in SOURCE.glob('*.png')), 'Source pixels differ')
         table = ElementTree.fromstring(z.read('ppt/slides/slide1.xml')).find('.//a:tbl', ns)
         cells = [[c.find('.//a:t', ns).text for c in r.findall('a:tc', ns)] for r in table.findall('a:tr', ns)]
-        stats = base.load(SOURCE/'result.json')['stats']
-        audit = base.load(SOURCE/'audit.json')
-        expected = [['Exact recorded successor', *[str(stats[a]['exact']) for a in ('ordered','rotated')]]]
-        expected.extend([[label, *[str(source[a][key]) for a in ('ordered','rotated')]]
-                         for label,source,key in [('Known nonempty glyph',audit,'observed_nonempty'),
-                                                  ('Blank output',stats,'blank_emissions')]])
-        require(cells[1:] == expected, 'Measured native table differs')
+        verify_table(cells)
     promotions = {}
     for folder, name in base.DOCUMENTS:
         path = STAGE/folder/(name+'.pdf')
@@ -74,7 +78,7 @@ def promote():
         stage = dest.with_suffix(dest.suffix+'.promoting')
         shutil.copy2(src, stage)
         os.replace(stage, dest)
-    write_new(HERE/'evidence/patch_count_article_build.json', dict(
+    write_new(HERE/'evidence'/receipt_name, dict(
         promoted=True, baseline_git=previous.BASELINE, cumulative_redline_git=build['redline_baseline'],
         table=cells, deck_sha256=base.sha(deck), source_hashes={p.name:base.sha(p) for p in SOURCE.iterdir()},
         inspection=inspection, visual_review=review, prior_figure_files_verified=len(before['figures_sha256']),
