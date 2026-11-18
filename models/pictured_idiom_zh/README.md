@@ -1,5 +1,20 @@
 # Chinese idiom writing from pictured context
 
+The reader-guided writer produced 378 exact development expressions in 22,907 gaps and 163 in 9,135 previously unused gaps. A local count model produced 1,012 and 406. To use the guided writer on CPU, pass the base checkpoint and its updated writer weights. The following passage produced **风风雨雨** in a fresh process.
+
+```bash
+PYTHONPATH=. python -m scripts.infer_pictured_idiom \
+  --weights models/pictured_idiom_zh/reader_writer.safetensors \
+  --writer models/pictured_idiom_zh/distilled_writer.safetensors \
+  --before-text 'MBA在美国经历了百年的' \
+  --after-text '，有着很强的生命力。投资的准备与收获当我们决定投' \
+  --output /tmp/ilm-guided-answer
+```
+
+The output directory should be new. It will contain the model's physical answer image, its packed bytes, and its stop decision. The training-only teacher and its answer inventory are unnecessary for inference. [Matched comparison and held-out results](../../references/visual_writer_transfer_result.md)
+
+## Initial aligned writer
+
 This checkpoint contains a 2,115,971-parameter reader and writer. It predicts an omitted expression between two pieces of pictured Chinese prose. It was trained on 71,439 candidate-free ChID windows and uses a learned physical renderer. The model has a single cloze task. It does not generate an explanation of an idiom.
 
 With NumPy, PyTorch, Pillow, fontTools and safetensors available, run from the repository root. The example is a published validation case. Its reference and model output are 轻举妄动.

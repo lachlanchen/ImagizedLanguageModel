@@ -1,5 +1,6 @@
 """Write the missing expression between two pieces of pictured Chinese prose."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -24,6 +25,7 @@ def main():
         group.add_argument('--'+side+'-text')
         cli.add_argument('--'+side+'-cells',type=int,help='Used cells in a padded image')
     cli.add_argument('--weights',required=True,type=Path);cli.add_argument('--output',required=True,type=Path)
+    cli.add_argument('--writer', type=Path, help='Optional trained physical writer bound to the base weights')
     args=cli.parse_args()
     sides=[]
     for side in ('before','after'):
@@ -39,6 +41,20 @@ def main():
         state=load_file(str(args.weights),device='cpu')
     else:
         state=torch.load(args.weights,weights_only=True,map_location='cpu')
+    if args.writer:
+        from safetensors import safe_open
+        required = {k for k in state if k.startswith(('ink_group.', 'group_position.', 'feedback.', 'causal.', 'next_pattern.'))}
+        with safe_open(str(args.writer), framework='pt', device='cpu') as patch:
+            metadata = patch.metadata() or {}
+            if (metadata.get('format') != 'ilm-physical-writer-v1' or
+                    metadata.get('base_sha256') != hashlib.sha256(args.weights.read_bytes()).hexdigest() or
+                    set(patch.keys()) != required):
+                cli.error('The writer does not match these base weights')
+            for key in required:
+                tensor = patch.get_tensor(key)
+                if tensor.shape != state[key].shape or tensor.dtype != state[key].dtype:
+                    cli.error(f'Unexpected writer tensor for {key}')
+                state[key] = tensor
     net=PicturedIdiom(state['landmarks']).eval();net.load_state_dict(state)
     pix=torch.from_numpy(context_pixels(*sides))[None]
     out,length,stop=net.generate(visual_input(pix,net.landmarks))

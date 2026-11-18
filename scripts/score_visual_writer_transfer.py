@@ -1,6 +1,8 @@
 """Recount complete image streams and compare decisions on the same passages."""
 from collections import defaultdict
 import json
+import argparse
+from pathlib import Path
 
 import numpy as np
 
@@ -40,7 +42,7 @@ def paired_interval(left, right, group):
     return np.quantile(samples, [.025,.975]).tolist()
 
 
-def score(split, training_targets):
+def score(split, training_targets, destination):
     fresh = split == 'fresh'
     base = OUT/'fresh' if fresh else DATA
     with np.load(base/('contexts.npz' if fresh else 'validation.npz')) as a:
@@ -98,7 +100,7 @@ def score(split, training_targets):
             for label,tiles in [('before',px[x[row,12:24]]),('after',px[x[row,24:36]]),
                                 ('output',img[row,:n[row]]),('reference',truth[row])]:
                 if len(tiles):
-                    save_page(PUBLIC/f'{name}_{label}.png',tiles)
+                    save_page(destination/f'{name}_{label}.png',tiles)
             samples[name] = dict(row=row, tag=int(tags[row]), before=before,after=after,
                                  reference=word, produced_cells=int(n[row]))
         stats['samples'] = samples
@@ -106,16 +108,19 @@ def score(split, training_targets):
 
 
 def main():
-    PUBLIC.mkdir()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=PUBLIC)
+    destination = parser.parse_args().output
+    destination.mkdir(parents=True)
     with np.load(DATA/'train.npz') as train:
         training = {row.tobytes() for row in train['target']}
-    result = {name:score(name,training) for name in ('development','fresh')}
+    result = {name:score(name,training,destination) for name in ('development','fresh')}
     result['fit'] = {name:load(OUT/name/'fit.json') for name in NAMES[1:]}
     result['teacher'] = load(OUT/'teacher.json')
     result['execution'] = load(OUT/'execution.json')
     result['fresh_execution'] = load(OUT/'fresh/execution.json')
     result['fresh_preparation'] = load(OUT/'fresh/preparation.json')
-    write_new(PUBLIC/'result.json',result)
+    write_new(destination/'result.json',result)
     for name in ('development','fresh'):
         print(name,json.dumps(result[name],ensure_ascii=False),flush=True)
 

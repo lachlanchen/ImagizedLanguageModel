@@ -1,4 +1,5 @@
 """Ablate near or far ink in the held-out visual writer, retaining physical positions."""
+import argparse
 import fcntl
 import time
 from pathlib import Path
@@ -14,7 +15,10 @@ from scripts.score_visual_writer_transfer import PUBLIC, matching_pairs, paired_
 
 @torch.inference_mode()
 def main():
-    existing = load(PUBLIC/'result.json')
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=PUBLIC, help='Directory containing the scored result')
+    destination = parser.parse_args().output
+    existing = load(destination/'result.json')
     require(existing['fresh']['transfer_pass'] and existing['development']['transfer_pass'], 'Unqualified distilled writer')
     fresh = OUT/'fresh'
     work = OUT/'distance'
@@ -73,7 +77,7 @@ def main():
     result['protocol_sha256'] = sha(ROOT/'references/visual_writer_context_distance_protocol.md')
     result['model_sha256'] = sha(OUT/'distilled_targets/weights.pt')
     result['program_sha256'] = sha(Path(__file__))
-    write_new(PUBLIC/'context_distance.json',result)
+    write_new(destination/'context_distance.json',result)
     print(result,flush=True)
 
 if __name__=='__main__':
