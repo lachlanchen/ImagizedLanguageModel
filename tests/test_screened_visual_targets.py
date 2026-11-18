@@ -34,3 +34,23 @@ def test_matched_schedule_exposes_every_replay_row_and_balances_review():
     counts = Counter(batches[:, 48:].ravel())
     assert counts.keys() == set(rows)
     assert max(counts.values()) - min(counts.values()) <= 1
+
+
+def test_coverage_rosters_are_chapter_disjoint_and_length_balanced():
+    from scripts.prepare_visual_translation_coverage import DEST, load
+
+    candidates = load(DEST / "sources.json")
+    hold = load(DEST / "holdout.json")["rows"]
+    small = [r for r in candidates if r["narrow_subset"]]
+    assert Counter(r["band"] for r in candidates) == {i: 256 for i in range(4)}
+    assert Counter(r["band"] for r in small) == {i: 32 for i in range(4)}
+    chapters = {r["chapter"] for r in candidates}
+    assert len(chapters) == len(candidates) == 1024
+    assert chapters.isdisjoint(r["chapter"] for r in hold)
+    assessment = load(DEST / "fresh_assessment.json")
+    for record in assessment["number_pairs"]:
+        row = hold[record["row"]]
+        for key, position in (("source", "input_slot"), ("target", "target_slot")):
+            i = record[position]
+            assert row[key][i] == record["original_digit"]
+            assert record[key] == row[key][:i] + record["new_digit"] + row[key][i + 1 :]

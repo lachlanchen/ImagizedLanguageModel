@@ -21,6 +21,8 @@ def collect(
     local,
     *,
     sample=EVIDENCE / "training_sample.json",
+    model=MODEL,
+    prompt=PROMPT,
     out=ROOT / "artifacts/source_only_teacher_pilot_v1",
     output=EVIDENCE / "teacher_drafts.json",
 ):
@@ -59,12 +61,12 @@ def collect(
                     time.sleep(0.5)
             else:
                 raise RuntimeError("Owned local server failed to start")
-            digest = next(t["digest"] for t in tags if t["name"] == MODEL)
+            digest = next(t["digest"] for t in tags if t["name"] == model)
             drafts = []
             for r in load(sample):
                 query = dict(
-                    model=MODEL,
-                    prompt=PROMPT + r["source"],
+                    model=model,
+                    prompt=prompt + r["source"],
                     think=False,
                     stream=False,
                     options=dict(
@@ -87,9 +89,9 @@ def collect(
             write_new(
                 output,
                 dict(
-                    model=MODEL,
+                    model=model,
                     digest=digest,
-                    prompt=PROMPT,
+                    prompt=prompt,
                     training_sample_sha=sha(sample),
                     seconds=time.monotonic() - start,
                     drafts=drafts,
