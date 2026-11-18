@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2037,
+  "unsupported": 11,
+  "groups": 755,
+  "outcome": {
+    "translation": {
+      "cases": 2037,
+      "exact": 7,
+      "stopped": 2037,
+      "edits": 62117,
+      "target_cells": 88424,
+      "output_cells": 49721,
+      "known_cells": 44351,
+      "hard": 2000,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 0.7024902741337193
+    },
+    "quote": {
+      "cases": 2037,
+      "exact": 2037,
+      "stopped": 2037,
+      "edits": 0,
+      "target_cells": 49453,
+      "output_cells": 49453,
+      "known_cells": 49377,
+      "hard": 2000,
+      "hard_exact": 2000,
+      "novel_hard_exact": 2000,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2037,
+      "exact": 0,
+      "stopped": 2037,
+      "edits": 82158,
+      "target_cells": 88424,
+      "output_cells": 49721,
+      "known_cells": 44349,
+      "hard": 2000,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9291368859133267
+    },
+    "copy": {
+      "cases": 2037,
+      "exact": 12,
+      "stopped": 2037,
+      "edits": 62380,
+      "target_cells": 88424,
+      "output_cells": 49453,
+      "known_cells": 49377,
+      "hard": 2000,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.7054645797521035
+    },
+    "local": {
+      "cases": 2037,
+      "exact": 10,
+      "stopped": 2037,
+      "edits": 61218,
+      "target_cells": 88424,
+      "output_cells": 52271,
+      "known_cells": 52195,
+      "hard": 2000,
+      "hard_exact": 2,
+      "novel_hard_exact": 2,
+      "cer": 0.692323351126391
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.10179219325818006,
+      0.49820461576270275
+    ],
+    "local": [
+      -1.2551622383353307,
+      -0.7685712613341756
+    ],
+    "exchanged": [
+      21.68780869368802,
+      23.648692449354687
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "公子魏牟过赵，赵王迎之，顾反至坐，前有尺帛，且令工以为冠。",
+      "target": "魏国公子牟经过赵国，赵孝成王迎接他，回来以后，坐到自己位置上，面前摆着一小块丝织物，准备让工匠用它做帽子。",
+      "chapter": "战国策/赵三/建信君贵于赵",
+      "output_cells": 29,
+      "copied": 26,
+      "drawn": 3
+    },
+    "first_long_mixed": {
+      "index": 1045,
+      "source": "杜子美诗云： 夜足沾沙雨，春多逆水风。",
+      "target": "杜子美诗说： 夜足沾沙雨，春多逆水风。",
+      "chapter": "容斋随笔/卷一/白用杜句",
+      "output_cells": 19,
+      "copied": 18,
+      "drawn": 1
+    },
+    "first_changed_success": {
+      "index": 1045,
+      "source": "杜子美诗云： 夜足沾沙雨，春多逆水风。",
+      "target": "杜子美诗说： 夜足沾沙雨，春多逆水风。",
+      "chapter": "容斋随笔/卷一/白用杜句",
+      "output_cells": 19,
+      "copied": 18,
+      "drawn": 1
+    }
+  },
+  "distinct_questions_both": 1,
+  "different_answers": 2025,
+  "rows_sha256": "70e5bbbb875af2238ef683cc48b1253ce5c05e2a3b21b9e211a2b12ee9a2279d",
+  "streams_sha256": "9a52c7d0388914a4b3f3d8097be616e36fc80c8762f8bbb894c400e27843a375",
+  "pass": false
+}

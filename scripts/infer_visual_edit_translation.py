@@ -1,11 +1,13 @@
 """Apply a trained visual editor to a pictured source and a pictured instruction."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
 import numpy as np
 import torch
 from PIL import Image
+from safetensors import safe_open
 from safetensors.torch import load_file
 
 from ilm.visual_lm.idiom_ink import visual_input
@@ -17,6 +19,7 @@ from scripts.infer_continuous_image_language import image_cells, text_cells
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--checkpoint',type=Path,required=True)
+    parser.add_argument('--decoder-update',type=Path,help='Optional matched research decoder weights')
     parser.add_argument('--output',type=Path,required=True,help='A new directory')
     parser.add_argument('--joint-choice',action='store_true',help='Include physical pattern probability in action selection')
     parser.add_argument('--device',choices=['cpu','cuda'],default='cpu')
@@ -31,6 +34,19 @@ def main():
     torch.set_num_threads(2)
     torch.set_float32_matmul_precision('high')
     state=load_file(str(args.checkpoint))
+    if args.decoder_update is not None:
+        expected = {key for key in state if key.startswith(('step.', 'action.', 'draw.'))}
+        with safe_open(str(args.decoder_update), framework='pt', device='cpu') as update:
+            metadata = update.metadata() or {}
+            if metadata.get('format') != 'ilm-visual-editor-decoder-v1' or set(update.keys()) != expected:
+                parser.error('Unrecognized or incomplete visual editor update')
+            if metadata.get('parent_sha256') != hashlib.sha256(args.checkpoint.read_bytes()).hexdigest():
+                parser.error('This decoder update requires its matching base checkpoint')
+            for key in expected:
+                tensor = update.get_tensor(key)
+                if tensor.shape != state[key].shape or tensor.dtype != state[key].dtype:
+                    parser.error(f'Incompatible decoder tensor {key}')
+                state[key] = tensor
     if 'fertility.2.bias' in state:
         net=FertilityEditor(state['landmarks'],len(state['fertility.2.bias'])-1)
     else:
@@ -59,6 +75,8 @@ def main():
         Image.fromarray(np.where(page.reshape(rows*32,cols*32),0,255).astype(np.uint8)).save(args.output/'answer.png')
     receipt=dict(glyphs=len(bits),stopped=bool(ended[0]),joint_choice=args.joint_choice,
                  actions=actions[0,actions[0]>=0].cpu().tolist())
+    if args.decoder_update is not None:
+        receipt['update_sha256'] = hashlib.sha256(args.decoder_update.read_bytes()).hexdigest()
     (args.output/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 

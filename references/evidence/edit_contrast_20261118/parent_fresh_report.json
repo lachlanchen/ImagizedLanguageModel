@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2043,
+  "unsupported": 5,
+  "groups": 1020,
+  "outcome": {
+    "translation": {
+      "cases": 2043,
+      "exact": 3,
+      "stopped": 2043,
+      "edits": 55913,
+      "target_cells": 81799,
+      "output_cells": 47505,
+      "known_cells": 47408,
+      "hard": 1999,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 0.6835413635863519
+    },
+    "quote": {
+      "cases": 2043,
+      "exact": 2043,
+      "stopped": 2043,
+      "edits": 0,
+      "target_cells": 47197,
+      "output_cells": 47197,
+      "known_cells": 47094,
+      "hard": 1999,
+      "hard_exact": 1999,
+      "novel_hard_exact": 1999,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2043,
+      "exact": 0,
+      "stopped": 2043,
+      "edits": 75169,
+      "target_cells": 81799,
+      "output_cells": 47505,
+      "known_cells": 47408,
+      "hard": 1999,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9189476643968753
+    },
+    "copy": {
+      "cases": 2043,
+      "exact": 6,
+      "stopped": 2043,
+      "edits": 56595,
+      "target_cells": 81799,
+      "output_cells": 47197,
+      "known_cells": 47094,
+      "hard": 1999,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.6918788738248633
+    },
+    "local": {
+      "cases": 2043,
+      "exact": 6,
+      "stopped": 2043,
+      "edits": 55552,
+      "target_cells": 81799,
+      "output_cells": 50261,
+      "known_cells": 50158,
+      "hard": 1999,
+      "hard_exact": 3,
+      "novel_hard_exact": 3,
+      "cer": 0.6791281067005709
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.6069380770013021,
+      1.057906927975033
+    ],
+    "local": [
+      -0.7538822005468939,
+      -0.13060278448484117
+    ],
+    "exchanged": [
+      22.601343668576718,
+      24.491040477003146
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "王不构赵，赵不以毁构矣；而构之秦，赵必复斗，必重魏；是并制秦、赵之事也。",
+      "target": "大王如果不同赵国一道与秦为敌，赵国是不会用损失惨重的军队去与秦国交战的。而魏国同秦国交战，赵国必然会重新投入战斗，一定会重视魏国，这是同时制衡秦国、赵国的大事。",
+      "chapter": "战国策/魏四/秦赵构难而战",
+      "output_cells": 35,
+      "copied": 31,
+      "drawn": 4
+    },
+    "first_long_mixed": {
+      "index": 1822,
+      "source": "三月，纪伯姬卒。",
+      "target": "三月，纪伯姬去世。",
+      "chapter": "左传/庄公/庄公四年",
+      "output_cells": 9,
+      "copied": 7,
+      "drawn": 2
+    },
+    "first_changed_success": {
+      "index": 1822,
+      "source": "三月，纪伯姬卒。",
+      "target": "三月，纪伯姬去世。",
+      "chapter": "左传/庄公/庄公四年",
+      "output_cells": 9,
+      "copied": 7,
+      "drawn": 2
+    }
+  },
+  "distinct_questions_both": 1,
+  "different_answers": 2037,
+  "rows_sha256": "26754aebeb21b2ec0a035d62ea58a029cf777f42b04004574d605f2e6109ce6f",
+  "streams_sha256": "a733ca853817643cfa28721e94971806c4991031740af9ccf3d5270aa9bbd7c1",
+  "pass": false
+}

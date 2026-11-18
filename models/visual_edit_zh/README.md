@@ -16,3 +16,15 @@ Open `answer.png` for the writing. The output directory also contains the packed
 On confirmation chapters the default decoder reproduced 2,045/2,045 renderable quotations and 30/2,048 reference translations. Three translations longer than eight glyphs combined visible source writing with a newly drawn Han glyph. The simpler local-edit control had lower overall edit distance. The checkpoint is available for reproducing these measurements. [Experiment, controls and training commands](../../references/visual_edit_translation_result.md)
 
 SHA-256 of `editor.safetensors` is `705f020c14a1d2b81f55c4b4fc2650cff94e9710b5ded2ffd7251c618a0e025e`.
+
+## Reproduce a measured change of wording
+
+The optional likelihood-trained decoder contains the 242,901 updated parameters from the matched training experiment. With the pictured question to translate, it changed 何谓气？ into 什么是气？ on a previously unused chapter. It matched four complete references on 2,048 requests in that set. Add the following arguments to the invocation above, replacing its source image and output directory. [Original images](../../publication/ilm-nature/figures/Figure_49_edit_contrast.png) · [Results and controls](../../references/edit_contrast_result.md)
+
+```sh
+PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
+  --checkpoint models/visual_edit_zh/editor.safetensors \
+  --decoder-update models/visual_edit_zh/likelihood_decoder.safetensors \
+  --source-image references/evidence/edit_contrast_20261118/short_source.png \
+  --question-text '请翻译成白话文' --output /tmp/ilm-classical-question
+```
