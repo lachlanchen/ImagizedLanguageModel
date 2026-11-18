@@ -1,0 +1,31 @@
+\subsection*{Writing feedback and extractive reading}
+In the question about the character for speech, a passive hook recorded
+the proposed 768-dimensional code $a$ for each position. The decoder and
+binary ink threshold produced the actual image. The encoder then returned
+$b$ from that image. The instrumented runs reproduced all original pixels
+and both stopping decisions. We measured $\|a-b\|_2/\sqrt{768}$. The
+mean-and-scale component of the squared distance per coordinate is
+$(\bar a-\bar b)^2+(\sigma_a-\sigma_b)^2$, with population standard deviations
+over coordinates. The residual is twice the product of the standard
+deviations minus twice the covariance. Controls passed every distinct
+training bitmap through the same round trip, giving one observation per
+physical image. Of 9,581 controls, 8,981 reproduced every input pixel.
+
+For extractive reading we split the 2,127 original Chinese training passages
+by hashed passage group. Training used 7,235 questions on 1,702 passages.
+The remaining 1,788 questions belonged to 425 passages unseen by this reader.
+The earlier native generative model had access to these passages in training.
+For each position we measured physical glyph matches to the question,
+consecutive matched runs up to four cells, nearby overlap and coarse
+four-by-four ink density. Two classifiers with 64 rounds of histogram gradient
+boosting each estimated start and end boundary log odds. Training included
+both gold boundaries and up to 48 uniformly sampled positions per question.
+We chose the contiguous span maximizing the sum of boundary log odds and
+the log of its add-one-smoothed training length count, without supplying the
+answer length. Exact credit required equality of the whole bitmap sequence.
+Within-passage exchanges followed cyclic order by source question identifier.
+We resampled entire passages 10,000 times. Training and evaluation together
+took 112.33 seconds and 2.112\,GiB of peak process memory. The compressed
+classifiers and length counts occupied 108,624 bytes. Corpus preparation was
+outside the timed run. These measurements have no matched-quality LLM cost
+denominator.

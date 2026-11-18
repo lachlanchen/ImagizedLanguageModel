@@ -1,0 +1,37 @@
+\subsection*{The writing code can disagree with its own visible output}
+A typed question and its visually identical pictured form both asked for
+the evolution of the character for speech. Independent CPU processes restored
+the final eight-component writer and produced the same complete greedy answer.
+Of 128 cells, two bitmaps occupied 105 positions. Sampling with a fixed seed
+instead produced 128 distinct bitmaps. Both answers reached the length cap.
+A reader could identify no etymological explanation in either output
+(Fig.~\ref{fig:visual-reading-writing}a). These two case studies are separate
+from the anonymous autonomous cohort.
+
+Tracing the same outputs locates a discrepancy at the writing interface.
+Across 9,581 distinct training glyphs, the median root-mean-square change
+between a physical glyph code and the code obtained by drawing and rereading
+it was zero. The largest change was 0.242. All 256 generated codes changed by
+more than that amount. Median differences were 0.807 under greedy decoding and
+0.965 under sampling. Mean and scale differences explained only 0.39\% of
+the summed squared discrepancy under sampling. Rescaling the sampled vectors
+alone therefore cannot account for most of this measured discrepancy.
+
+\subsection*{A visual reader can select some complete answers from a passage}
+To isolate selection from synthesis, we trained a separate reader to locate
+both boundaries of the answer in the supplied passage. No character label or
+font is needed to emit the selected interval. After 63.95 seconds of feature
+construction and fitting on two CPU threads, the reader recovered 269/1,788
+complete answers across 425 held-out passages. Erasing the question reduced
+this count to 18/1,788. Substituting a different question about the same
+passage reduced it from 269/1,783 to 11/1,783. The paired whole-passage
+95\% intervals for the two differences were 12.2--15.9 and 12.7--16.3
+percentage points (Fig.~\ref{fig:visual-reading-writing}b,c).
+The reader used the question, yet missed 1,519 complete answers and could
+only reproduce writing present in the passage.
+
+A separate comparison changed the source of direct next-glyph supervision.
+With 1,047,284 physical transitions per visual bigram, modern passages scored
+59.5\% and historical books 57.6\% on 6,062 additional Mandarin order pairs
+from the same 23 constructions. The interval for the 1.9-point difference
+spanned $-9.0$ to $+12.7$ points, leaving the effect of source register uncertain.
