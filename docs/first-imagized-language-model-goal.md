@@ -726,7 +726,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports passage reading and free successor drawing in Figures 33–37. Figure 38 shows both questions about the same source, their complete independently redrawn answers, erased-input controls and withheld Han shapes. Figure 39 shows the blind free-writing failure and the complete title experiment. The reading, review and cumulative redline editions now contain 70, 118 and 120 pages respectively. The [verified build](../publication/ilm-nature/evidence/visual_title_article_build.json) preserves the earlier figures. The [local delivery receipt](../publication/ilm-nature/evidence/visual_title_local_sync.json) records the Nutstore copies. Cloud propagation is unverified.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports passage reading and free drawing in Figures 33–41 and source-grounded historical forms in Figure 42. The reading, review and cumulative redline editions contain 75, 125 and 127 pages. The [verified build](../publication/ilm-nature/evidence/source_plate_article_build.json) preserves all earlier figure assets. The [local delivery receipt](../publication/ilm-nature/evidence/source_plate_local_sync.json) records 1,339 package files and the two current Nutstore PDF aliases. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
