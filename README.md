@@ -5,6 +5,9 @@
 
 # Imagized Language Model (ILM)
 
+**Can a model read who did what from a picture?** With the bronze names of Qin and Chu as input, the visual writer changes “Qin surrounded Chu” to “Chu surrounded Qin” when their images change places. Across eight reviewed historical event pairs it conveyed the complete meaning in both directions twice. On the separate diverse passage sample the exchange-trained writer produced zero faithful translations out of twelve. [Actual inputs and outputs in Figure 63](publication/ilm-nature/figures/Figure_63_event_roles.png) · [Results and controls](references/visual_event_roles_result.md) · [Research manuscript](publication/ilm-nature/manuscript.pdf)
+
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)
@@ -1792,7 +1795,7 @@ This README documents all three tracks and keeps the etymology workflow as a fir
 | V35 implementation and reproduction | `docs/causal-glyph-flow-v35.md` |
 | V35 preregistered protocol | `references/causal_glyph_flow_v35_protocol.md` |
 | V34 qualified continuous codec | `references/continuous_glyph_codec_v34_result.md` |
-| Current paper | `publication/ilm-image-native/ilm-image-native.pdf` |
+| Current paper | [Nature-style research manuscript](publication/ilm-nature/manuscript.pdf) |
 | V31 conditional visual field-flow result | `docs/conditional-visual-field-flow-v31-result.md` |
 | V31 preregistered protocol | `references/conditional_visual_field_flow_v31_protocol.md` |
 | V31 research decision | `references/conditional_visual_field_flow_v31_research.md` |

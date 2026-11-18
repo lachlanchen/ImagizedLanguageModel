@@ -177,7 +177,7 @@ class CausalGlyphTranslator(nn.Module):
         return choice, value > torch.maximum(upper.max(-1).values, prob[:, DRAW])
 
     @torch.inference_mode()
-    def generate(self, pictures, lengths, limit=96, *, pool_routes=False):
+    def generate(self, pictures, lengths, limit=96, *, pool_routes=False, ink_permutation=None):
         if (
             limit < 1
             or pictures.ndim != 3
@@ -191,6 +191,8 @@ class CausalGlyphTranslator(nn.Module):
             or (lengths > pictures.size(1)).any()
         ):
             raise ValueError("Invalid source lengths")
+        if ink_permutation is not None:
+            pictures = ink_permutation(pictures)
         memory, keys, mask, h = self.read(
             visual_input(pictures, self.landmarks), lengths
         )
@@ -240,7 +242,9 @@ class CausalGlyphTranslator(nn.Module):
                 pixels[selected] = outcomes[0][choice[selected]]
                 # A pooled emission has no unique latent route.
                 modes[selected, step] = 4
-            stream[:, step] = pixels
+            physical = ink_permutation(pixels) if ink_permutation is not None else pixels
+            stream[:, step] = physical
             lengths_out += ~stopped
-            pred = self.embed(visual_input(pixels, self.landmarks))[:, None]
+            feedback = ink_permutation(physical) if ink_permutation is not None else physical
+            pred = self.embed(visual_input(feedback, self.landmarks))[:, None]
         return stream, lengths_out, stopped, modes

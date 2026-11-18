@@ -45,13 +45,32 @@ def generate(packed, method, weights, *, receipt=None):
     state = load_file(str(weights))
     image = torch.from_numpy(np.unpackbits(packed, axis=1)).bool()[None]
     lengths = torch.tensor([image.shape[1]])
-    if method in ("feedback", "paired", "pooled", "marginal"):
+    if method in ("feedback", "paired", "pooled", "marginal", "event", "bound-event"):
         from ilm.visual_lm.causal_glyph_translator import CausalGlyphTranslator
 
         model = CausalGlyphTranslator(state["landmarks"], state["exemplars"])
         model.load_state_dict(state)
+        permutation = None
+        if method == "bound-event":
+            from ilm.visual_lm.contextual_ink_binding import (
+                ContextualInkBinding,
+                InkPermutation,
+            )
+
+            binding_path = MODELS / "event_binding.msgpack.gz"
+            pairs = ContextualInkBinding.restore(binding_path).choose(packed)
+            if pairs:
+                permutation = InkPermutation(pairs, image.device)
+            if receipt is not None:
+                receipt["bound_shapes"] = len(pairs)
+                receipt["binding_sha256"] = hashlib.sha256(
+                    binding_path.read_bytes()
+                ).hexdigest()
         pixels, count, stopped, _ = model.eval().generate(
-            image, lengths, pool_routes=method in ("pooled", "marginal")
+            image,
+            lengths,
+            pool_routes=method in ("pooled", "marginal", "event", "bound-event"),
+            ink_permutation=permutation,
         )
         if receipt is not None:
             receipt["ending"] = "learned_stop" if stopped.item() else "96_cell_limit"
@@ -90,6 +109,8 @@ def main():
             "paired",
             "pooled",
             "marginal",
+            "event",
+            "bound-event",
         ),
         default="phrases",
     )
@@ -111,6 +132,8 @@ def main():
             "paired": "paired_teacher.safetensors",
             "pooled": "paired_teacher.safetensors",
             "marginal": "marginal_glyph.safetensors",
+            "event": "event_writer.safetensors",
+            "bound-event": "event_writer.safetensors",
         }[args.method]
     )
     source = (

@@ -205,3 +205,13 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method marginal --imag
 ```
 
 The supplied image reads 王曰： 不可。 The checkpoint writes 王说： 不可以。 in `answer.png` and saves the actual packed output in `answer.bin`. An optional `--text` argument rasterizes a typed source before inference. The experiments use a single printing font and fixed cells. The model has 2,251,925 parameters and runs independently from the training data, Qwen and the phrase composer. It reproduced four changed full archive glosses among 1,024 broad passages. On a separate eight-utterance probe it preserved speaker and polarity eight times. [Results](../../references/visible_likelihood_result.md) · [Independent masked readings](../../references/evidence/visible_likelihood_20261119)
+
+### Translate an event written with historical names
+
+The optional `bound-event` method takes a strip of aligned 32 × 32 glyph cells. This example uses the original bronze exemplars of Qin and Chu. The resulting `answer.png` says that Qin surrounded Chu, retaining both input name images. Use `predicate_5_source.png` to reverse the participants. The autonomous model runs on CPU with the packaged weights and the frozen neighbourhood table. [Measured results and limitations](../../references/visual_event_roles_result.md)
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method bound-event \
+  --image references/evidence/event_roles_20261119/predicate_4_source.png \
+  --output artifacts/qin_surrounds_chu
+```
