@@ -715,7 +715,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports Mandarin order preference, passage selection and contextual glyph assignment in Figures 33–35. Figure 36 shows the actual freely drawn successor, a nonempty error, a blank and the complete output for the question about 言. The reading, review and cumulative redline editions contain 66, 111 and 114 pages. The [verified build](../publication/ilm-nature/evidence/patch_count_article_build.json) preserves all earlier figures and records the pages inspected. The [local delivery receipt](../publication/ilm-nature/evidence/patch_count_local_sync.json) verifies the 1,153-file package, both latest PDFs and its 1,123-file predecessor. Cloud propagation is unverified.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports Mandarin order preference, passage selection and contextual glyph assignment in Figures 33–35. Figures 36 and 37 show free successor drawings and complete outputs for the question about 言 from the local patch and shared-layout writers. The reading, review and cumulative redline editions contain 67, 113 and 115 pages. The [verified build](../publication/ilm-nature/evidence/shared_layout_article_build.json) preserves the preceding figures. The [local delivery receipt](../publication/ilm-nature/evidence/shared_layout_local_sync.json) records the Nutstore copies. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
