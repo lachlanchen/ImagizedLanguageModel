@@ -50,13 +50,8 @@ class ContextualPhraseRealizer:
             out.append((mem[i], unit(sparse)))
         return out
 
-    def generate(self, packed, *, majority=False):
-        positions = [i for i, v in enumerate(packed) if bytes(v) in self.heads]
-        if not positions:
-            return self.composer.generate(packed)
+    def choices(self, packed, positions, *, majority=False):
         features = None if majority else self.features(packed, positions)
-        parts = []
-        begin = 0
         for j, i in enumerate(positions):
             options, mean, weights, default = self.heads[bytes(packed[i])]
             if majority:
@@ -65,11 +60,20 @@ class ContextualPhraseRealizer:
                 dense, sparse = features[j]
                 phi = np.r_[1.0, unit(dense - mean), 1.5 * sparse]
                 choice = int((phi @ weights).argmax())
-            if options[choice] is None:
+            yield options[choice]
+
+    def generate(self, packed, *, majority=False):
+        positions = [i for i, v in enumerate(packed) if bytes(v) in self.heads]
+        if not positions:
+            return self.composer.generate(packed)
+        parts = []
+        begin = 0
+        for i, option in zip(positions, self.choices(packed, positions, majority=majority)):
+            if option is None:
                 continue
             if begin < i:
                 parts.append(self.composer.generate(packed[begin:i]))
-            parts.append(np.frombuffer(options[choice], np.uint8).reshape(-1, 128))
+            parts.append(np.frombuffer(option, np.uint8).reshape(-1, 128))
             begin = i + 1
         if begin < len(packed):
             parts.append(self.composer.generate(packed[begin:]))
