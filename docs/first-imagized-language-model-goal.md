@@ -659,10 +659,17 @@ resource savings remain distinct claims.
    artifacts support the evidence; publication does not qualify the model.
 
 A development pilot alone does not complete this objective. Novelty, human-like
-reading and broad language capability require their own evidence. The requested
-1,000-fold reduction in compute and 1,000-fold performance improvement are
-unproved stretch targets, not an assumption or a result. First establish useful
-complete language and report matched-quality whole-model costs honestly.
+reading and broad language capability require their own evidence. The requested 1,000-fold training-efficiency gain is a stretch target.
+Define the ratio as the baseline compute required to reach a fixed held-out
+quality divided by the ILM compute required to reach that same quality. Use
+the same task, source groups, output grading and stopping criteria. Report
+wall time on identical hardware, data exposure and whole-system energy where
+metered. Charge corpus preparation, visual codec fitting and teacher work
+explicitly. Report inference latency per complete correct answer separately.
+An existing pretrained Qwen can establish a quality and serving comparison;
+estimating its training cost requires documented comparable information.
+A smaller checkpoint or faster span extraction does not measure the target
+ratio for a general language model.
 
 ## Completed constraints and data
 

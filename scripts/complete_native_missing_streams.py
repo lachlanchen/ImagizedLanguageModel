@@ -82,7 +82,8 @@ def inventory():
     actual={p for p in ORIGINAL.glob('k*/*') if p.is_file()}
     require(actual==found,'Unexpected original case artifact')
     files=(REG,RUN/'report.json',RUN/'audit.json',PIPELINE,ORIGINAL/'failure.json',ORIGINAL/'status.json',
-           Path(__file__).resolve(),PROTOCOL)
+           Path(__file__).resolve(),PROTOCOL,ROOT/'scripts/review_continuous_image_language.py',
+           ROOT/'scripts/infer_continuous_image_language.py')
     return dict(original={str(p.relative_to(ROOT)):sha(p) for p in files},
                 retained=records, missing=missing, new_budget_seconds=10800)
 
@@ -92,6 +93,7 @@ def publish(record,folder,pixels):
     from PIL import Image
     case=record['input']['id']
     folder.mkdir(exist_ok=True)
+    require(not any((folder/(case+ext)).exists() for ext in ('.json','.png','.npz')), 'Case output already exists')
     with TemporaryDirectory(dir=WORK) as temp:
         tmp=Path(temp)
         raw=tmp/(case+'.npz')
