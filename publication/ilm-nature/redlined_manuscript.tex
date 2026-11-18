@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Tue Nov 17 00:31:44 2026
-%DIF ADD new.tex   Tue Nov 17 00:31:44 2026
+%DIF DEL old.tex   Wed Nov 18 10:02:59 2026
+%DIF ADD new.tex   Wed Nov 18 10:02:59 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -140,7 +140,7 @@
 
 {\sffamily\bfseries\DIFdelbegin %DIFDELCMD < \Large{Learning conditional language\\in continuous image space}%%%
 \DIFdelend \DIFaddbegin \Large{Conditional language generation\\in glyph image space}\DIFaddend \par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{Written language includes forms \DIFdelbegin \DIFdel{outside standard }\DIFdelend \DIFaddbegin \DIFadd{that fixed }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventories need not preserve}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces }\DIFdelend \DIFaddbegin \DIFadd{study models }\DIFaddend that read \DIFdelbegin \DIFdel{and emit glyph }\DIFdelend \DIFaddbegin \DIFadd{prompt }\DIFaddend images, \DIFdelbegin \DIFdel{with generated }\DIFdelend \DIFaddbegin \DIFadd{write answer images and reread emitted }\DIFaddend pixels\DIFdelbegin \DIFdel{supplying subsequent history}\DIFdelend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{Inherited }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language }\DIFdelend \DIFaddbegin \DIFadd{weights supply }\DIFaddend knowledge; \DIFdelbegin \DIFdel{tokenizers, }\DIFdelend lexical \DIFdelbegin \DIFdel{heads and }\DIFdelend \DIFaddbegin \DIFadd{decoding, }\DIFaddend font \DIFdelbegin \DIFdel{rendering }\DIFdelend \DIFaddbegin \DIFadd{lookup and a live teacher }\DIFaddend are absent from \DIFdelbegin \DIFdel{the }\DIFdelend deployed \DIFdelbegin \DIFdel{answer path}\DIFdelend \DIFaddbegin \DIFadd{generation}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters }\DIFdelend \DIFaddbegin \DIFadd{Complete training on 13,766 Chinese sequences }\DIFaddend gives \DIFdelbegin \DIFdel{sixteen clear complete literal answers among }\DIFdelend \DIFaddbegin \DIFadd{7/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved questions}\DIFdelend \DIFaddbegin \DIFadd{strict proportional answers}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven for a fixed-body control. Neither arm passes its qualification. A separate compact experiment freezes a 1.409B contextual body }\DIFdelend \DIFaddbegin \DIFadd{14/32 readable answers }\DIFaddend and \DIFdelbegin \DIFdel{fits image interfaces on 13}\DIFdelend \DIFaddbegin \DIFadd{0/16 both-correct pairs}\DIFaddend , \DIFdelbegin \DIFdel{785 }\DIFdelend \DIFaddbegin \DIFadd{with no credited coherent }\DIFaddend complete \DIFdelbegin \DIFdel{Chinese }\DIFdelend book \DIFdelbegin \DIFdel{and question--answer sequences}\DIFdelend \DIFaddbegin \DIFadd{continuation. Whole-glyph ranking improves readable forms but leaves incorrect writing. Subsequent blank-target training reduces false ink from 25 to 12 of 252 white targets while increasing false blanks from 37 to 54; both fixed limits fail. Exact source bitmaps decrease from 4}\DIFaddend ,\DIFdelbegin \DIFdel{covering 2.576 million target glyph }\DIFdelend \DIFaddbegin \DIFadd{609 to 4,543 of 12,597 supplied-history }\DIFaddend positions. \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{Proposed training judges also fail their prospective conditions. All 7}\DIFaddend ,\DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory}\DIFdelend \DIFaddbegin \DIFadd{255,223 training cells match source rendering, but physical aliases prevent unique pointwise Unicode labels}\DIFaddend . \DIFdelbegin \DIFdel{Both score zero complete exact QA answers out of 32 }\DIFdelend \DIFaddbegin \DIFadd{Six complete-context update/reset trials pass }\DIFaddend at \DIFdelbegin \DIFdel{all five checkpoints. A wider writer removes }\DIFdelend \DIFaddbegin \DIFadd{11.252 GiB allocated VRAM in }\DIFaddend a \DIFdelbegin \DIFdel{measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback, despite near-exact codec reconstruction}\DIFdelend \DIFaddbegin \DIFadd{1.465B-parameter inherited model}\DIFaddend ; \DIFdelbegin \DIFdel{additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{its full training comparison remains unevaluated}\DIFaddend . \DIFdelbegin \DIFdel{The reader also has a measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{Earlier evaluated deployments retain over 7.5 billion parameters}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify }\DIFdelend \DIFaddbegin \DIFadd{Reviews lack }\DIFaddend independent \DIFdelbegin \DIFdel{pixel-feedback execution for fixed cases. These results separate execution}\DIFdelend \DIFaddbegin \DIFadd{human adjudication}\DIFaddend , \DIFdelbegin \DIFdel{physical writing }\DIFdelend and \DIFdelbegin \DIFdel{conditional language success}\DIFdelend \DIFaddbegin \DIFadd{uncertain readings remain unchanged}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation}\DIFdelend \DIFaddbegin \DIFadd{Useful visual language}\DIFaddend , historical-form transfer and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality efficiency \DIFdelbegin \DIFdel{advantage }\DIFdelend remain unresolved.}\par\bigskip
+\section*{Abstract}{\DIFdelbegin \DIFdel{Written language includes forms outside standard }\DIFdelend \DIFaddbegin \DIFadd{Historical inscriptions and variant writing can preserve distinctions absent from a }\DIFaddend character \DIFdelbegin \DIFdel{encodings}\DIFdelend \DIFaddbegin \DIFadd{inventory}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces that }\DIFdelend \DIFaddbegin \DIFadd{study whether a model can }\DIFaddend read \DIFdelbegin \DIFdel{and emit glyph images}\DIFdelend \DIFaddbegin \DIFadd{a question as an image}\DIFaddend , \DIFdelbegin \DIFdel{with generated pixels supplying subsequent history}\DIFdelend \DIFaddbegin \DIFadd{draw an answer and read its own successive marks}\DIFaddend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{The models evaluated here inherit }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language knowledge; tokenizers, lexical heads and font rendering are absent from the deployed answer path}\DIFdelend \DIFaddbegin \DIFadd{weights}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear }\DIFdelend \DIFaddbegin \DIFadd{An initial comparison on 13,766 Chinese sequences yields 7/32 correct }\DIFaddend complete \DIFdelbegin \DIFdel{literal }\DIFdelend answers \DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{in proportional layout, 14/}\DIFaddend 32 \DIFdelbegin \DIFdel{reserved }\DIFdelend \DIFaddbegin \DIFadd{readable answers and 0/16 pairs in which both }\DIFaddend questions \DIFdelbegin \DIFdel{, versus eleven for a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{about the same passage are answered correctly}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification}\DIFdelend \DIFaddbegin \DIFadd{No complete book continuation earns coherence credit}\DIFaddend . A \DIFdelbegin \DIFdel{separate compact experiment freezes a 1.409B }\DIFdelend \DIFaddbegin \DIFadd{subsequent writing objective reduces false ink from 25 to 12 of 252 white targets while increasing false blanks from 37 to 54. We then compare learning and freezing the inherited }\DIFaddend contextual body \DIFdelbegin \DIFdel{and fits image interfaces }\DIFdelend \DIFaddbegin \DIFadd{of a 1.465-billion-parameter model. Both arms train }\DIFaddend on 13,785 \DIFdelbegin \DIFdel{complete Chinese book and question--answer }\DIFdelend sequences\DIFdelbegin \DIFdel{, covering 2.576 million target glyph positions}\DIFdelend . \DIFdelbegin \DIFdel{Two 8}\DIFdelend \DIFaddbegin \DIFadd{Among 792 generated streams reviewed blind to model identity}\DIFaddend , \DIFdelbegin \DIFdel{172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory. Both score zero }\DIFdelend \DIFaddbegin \DIFadd{neither final checkpoint produces a readable }\DIFaddend complete \DIFdelbegin \DIFdel{exact QA answers out of }\DIFdelend \DIFaddbegin \DIFadd{answer to the }\DIFaddend 32 \DIFdelbegin \DIFdel{at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{normal questions}\DIFaddend . \DIFdelbegin \DIFdel{A wider writer removes a measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{On twelve book prefixes}\DIFaddend , \DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{the trained body stops naturally twelve times and the frozen body twice}\DIFaddend . \DIFaddbegin \DIFadd{Neither produces a credited coherent continuation. }\DIFaddend The \DIFdelbegin \DIFdel{reader also has }\DIFdelend \DIFaddbegin \DIFadd{review used }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{single model reader familiar with the development cohort}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases. These results separate execution}\DIFdelend \DIFaddbegin \DIFadd{Historical-form transfer}\DIFaddend , \DIFdelbegin \DIFdel{physical writing and conditional }\DIFdelend \DIFaddbegin \DIFadd{useful visual }\DIFaddend language \DIFdelbegin \DIFdel{success. Reliable open-ended generation, historical-form transfer }\DIFdelend and \DIFdelbegin \DIFdel{a matched-quality efficiency advantage }\DIFdelend \DIFaddbegin \DIFadd{computational savings at matched quality }\DIFaddend remain \DIFdelbegin \DIFdel{unresolved}\DIFdelend \DIFaddbegin \DIFadd{open}\DIFaddend .}\par\bigskip
 \DIFdelbegin \DIFdel{Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history.
@@ -228,8 +228,7 @@ all five saved checkpoints. A controlled wider writer and frozen-weight
 interventions then test the sources of failure. The contributions are the }\DIFdelend \DIFaddbegin \DIFadd{The study contributes an }\DIFaddend explicit emitted-pixel \DIFaddbegin \DIFadd{inference }\DIFaddend interface, controlled
 \DIFdelbegin \DIFdel{language tests, reproducible
 single-GPU execution and measured writer/reader restrictions. None establishes a generally
-usable visual language model or a from-scratch language learner.
-}\DIFdelend \DIFaddbegin \DIFadd{complete-language comparisons and evidence that supplied-history writing and
+usable visual language model or a from-scratch language learner. }\DIFdelend \DIFaddbegin \DIFadd{complete-language comparisons and evidence that supplied-history writing and
 one-GPU execution are insufficient qualifications. The failed full trial
 motivates a separate conditional joint glyph writer. That head-only fit is
 complete and fails its physical prerequisite; its original review credits
@@ -243,7 +242,7 @@ recognized nonempty forms but fails legitimate blank targets. Exact source-image
 reproduction changes little, and complete language remains unmeasured. A new
 objective for blank targets passes a reset full-body computational preflight;
 its complete quality comparison fails both blank conditions. A subsequent
-full-context learning comparison is in progress, with language unmeasured.
+full-context comparison tests whether allowing all inherited context weights to learn improves complete answers or book continuations.
 The larger objective is useful
 visual language across written forms, with historical and unencoded writing
 assessed on its own provenance, shape and meaning. That objective remains open.
@@ -2362,14 +2361,34 @@ understanding or a matched-quality compute advantage.
 \DIFadd{The full comparison is separately registered for all 13,785 sequences and
 8,172 updates per arm, five fixed snapshots, 792 image streams and two traced
 cold replays. It includes paired questions, erased controls, complete books,
-actual emitted-image feedback and natural stopping. Training is in progress;
-complete language and untouched generalization remain unmeasured. No rejected
+actual emitted-image feedback and natural stopping. Figure~\ref{fig:full-context-comparison} reports the complete development
+comparison. Untouched-source generalization remains unmeasured. No rejected
 reward or reserved DRCD record enters fitting. This comparison transfers an
 inherited text-language foundation into visual interfaces; it does not establish
 language learning from images alone.
 }
 
-%DIF >  Literal captions copied from their source inputs by build_visual_context_evidence_article.py.
+\subsection*{\DIFadd{Learning the entire context changes stopping}}
+\DIFadd{The final learned and frozen contextual bodies each produce zero correct
+complete answers to 32 normal questions, zero pairs with both questions correct
+among 16 passages, and zero readable complete answers. All five checkpoints
+share these three outcomes (Fig.~\ref{fig:full-context-comparison}a).
+Removing either the question or the passage at the final checkpoint also gives
+zero correct answers. Strict exactness alone could miss an alternative correct
+phrasing. Here, the reader could not recover a complete answer from the marks.
+}
+
+\DIFadd{The long-book comparison distinguishes termination from coherent writing.
+The learned model stops on all twelve normal prefixes after 209--415 emitted
+positions. The frozen model stops on two, both blank, and reaches the 640-position
+cap on ten. Neither arm earns coherence credit on any complete book continuation
+(Fig.~\ref{fig:full-context-comparison}b). Across all 792 streams, 741 readings
+are uncertain and 51 blank. Panel~c shows the complete final outputs for both
+questions from the first paired passage. Isolated legible forms coexist with
+uncertain writing through the remainder of the answer.
+}
+
+%DIF >  Literal captions copied from their source inputs by build_full_context_comparison_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -2574,10 +2593,24 @@ image replacement. These are teacher inputs, not student answers.
 measured support from all six real update/reset trials. Every one of 309 context
 tensors changes only in treatment; sampled AdamW update error is zero and all
 states reset exactly. The 11.252\,GiB peak is an execution measurement, not a
-language score. The complete matched training comparison is in progress.
+language score. Figure~\ref{fig:full-context-comparison} reports the subsequent trained outputs.
 Inherited text pretraining remains a source of knowledge; neither independent
 from-scratch vision-language learning nor matched-quality efficiency is proved.}}
 \label{fig:visual-context-evidence}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_32_full_context_comparison.png}
+\caption{\DIFaddFL{\textbf{Context training changes termination while complete answers remain unreadable.}
+\textbf{a,} Correct normal answers at the five prescribed checkpoints for the learned
+and frozen contextual bodies. Both curves lie at zero. The 32 questions form 16
+same-passage pairs. \textbf{b,} Final outcomes for the twelve normal long-book
+prefixes. Capped outputs retain all 640 emitted positions.
+\textbf{c,} Complete final images for the first paired passage in evaluation order.
+The learned model stops after 34 positions for both questions. The frozen model
+reaches the cap on the first question and stops after 126 positions on the second.
+The blinded reader marked all four answers uncertain.}}
+\label{fig:full-context-comparison}
 \end{figure*}
 
 
@@ -2709,8 +2742,10 @@ keeping its reader, writer, complete corpus and objectives matched. Six real
 update/reset trials establish gradients, optimizer arithmetic and memory
 support, not semantic understanding (Fig.~\ref{fig:visual-context-evidence}).
 Its 1,465,381,142-parameter deployment is smaller than the earlier actors but
-inherits text pretraining. Full training is in progress; no autonomous language
-gain or matched-quality efficiency is assigned to it. Earlier smaller trainable
+inherits text pretraining. After the complete fit, the learned body stops on every long book prefix.
+Neither arm produces a readable complete answer on this cohort
+(Fig.~\ref{fig:full-context-comparison}). The experiment therefore supplies
+no matched-quality estimate of language-learning efficiency. Earlier smaller trainable
 bodies failed, so trainability alone is not a sufficient explanation.
 }
 
@@ -4267,8 +4302,31 @@ available host RAM and 20\,GiB free GPU memory, retaining 24\,GiB host RAM and
 at most 22\,GiB allocated VRAM. Each arm has an 86,400\,s fit ceiling, at most
 1,800\,s pressure waiting and at least 48\,GiB free disk. Use two CPU threads.
 No automatic retry, threshold relaxation, reference repair or unchanged extra
-epoch follows failure. Full trained language and matched-quality efficiency
-are unmeasured at this revision.
+epoch follows failure. The development outcomes appear in Fig.~\ref{fig:full-context-comparison}.
+}
+
+\subsection*{\DIFadd{Matched full-context comparison and blind reading}}
+\DIFadd{Each arm completed 8,172 optimizer updates over 13,785 complete records in
+the same order. Each used the same six objectives, reader, writer and codec.
+Only the learned arm updated the 1,409,410,048 inherited contextual parameters.
+The deployed systems each retained 1,465,381,142 parameters. The host optimizer
+moments occupied 11,730,771,112 bytes with learned context and 455,490,728 bytes
+with frozen context. Monitored fitting took 60,127 and 4,309 seconds, respectively,
+with peak allocated device memory of 11.647 and 7.200\,GiB. These times cover
+the fits and exclude earlier pretraining, source preparation and generation.
+}
+
+\DIFadd{We retained the five designated checkpoints in each arm. Each generated short
+answers with a 128-position cap. Both final checkpoints also generated the
+long-book cohort with a 640-position cap. Intermediate checkpoints had no
+long-book measurement. Each response used its own emitted images as history.
+A single model reviewer with prior familiarity with the development set read
+180 anonymized boards, including 144 visible book prefixes, and froze all 792
+readings before reference scoring. No independent human adjudication was
+available. The original CPU audits verified the source order and final states.
+In two additional cold executions, one per arm, the final model reproduced its
+fixed book case, including emitted pixels and stopping. The two replays tested
+execution on one designated case outside the language cohort.
 }
 
 

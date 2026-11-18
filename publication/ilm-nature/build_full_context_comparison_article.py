@@ -85,9 +85,65 @@ def build():
               baseline=BASELINE, redline_baseline=base.load(STAGE/'redline_build.json')['baseline_commit']))
 
 
+def promote():
+    import hashlib
+    import io
+    import xml.etree.ElementTree as ET
+    import zipfile
+    from openpyxl import load_workbook
+
+    build = base.load(STAGE / 'build_receipt.json')
+    inspection = base.load(STAGE / 'inspection.json')
+    reviewed = base.load(STAGE / 'visual_review.json')
+    baseline = base.preserved()
+    require(all(base.sha(HERE/name) == value for name,value in build['sources'].items()), 'TeX source changed')
+    evidence = ROOT/'references/evidence/trainable_visual_context_result_20261117.json'
+    data = base.load(evidence)
+    deck = PAPER/'Full_context_comparison.pptx'
+    samples = base.load(WORK/'figure_01/samples.json')
+    namespaces = {'a':'http://schemas.openxmlformats.org/drawingml/2006/main',
+                  'c':'http://schemas.openxmlformats.org/drawingml/2006/chart'}
+    with zipfile.ZipFile(deck) as archive:
+        hashes = {hashlib.sha256(archive.read(n)).hexdigest() for n in archive.namelist() if n.startswith('ppt/media/')}
+        require(all(s['png_sha256'] in hashes for s in samples), 'Embedded original answer changed')
+        sheet, = [n for n in archive.namelist() if n.endswith('.xlsx')]
+        rows = list(load_workbook(io.BytesIO(archive.read(sheet)),read_only=True,data_only=True).active.values)[1:]
+        for index, arm in enumerate(('trainable','frozen')):
+            observed = [(int(r[index*2].replace(',','')),r[index*2+1]) for r in rows]
+            expected = [(v['step'],v['exact']) for v in data['all_snapshot_summaries'] if v['arm'] == arm]
+            require(observed == expected,'Native workbook values changed')
+        chart, = [n for n in archive.namelist() if '/charts/' in n and n.endswith('.xml')]
+        require(len(ET.fromstring(archive.read(chart)).findall('.//c:ser',namespaces)) == 2,'Expected two chart series')
+        table = ET.fromstring(archive.read('ppt/slides/slide1.xml')).find('.//a:tbl',namespaces)
+        values = [[c.find('.//a:t',namespaces).text for c in r.findall('a:tc',namespaces)] for r in table.findall('a:tr',namespaces)]
+        require(values[1:] == [['Learned context','12','0','0'],['Frozen context','2','10','0']], 'Book counts differ')
+    targets = {}
+    for folder, name in base.DOCUMENTS:
+        source = STAGE/folder/(name+'.pdf')
+        result = inspection['documents'][name]
+        require(base.sha(source) == result['pdf_sha256'] == reviewed[name]['pdf_sha256'] == build['documents'][name]
+                and reviewed[name]['overview_pages'] == result['pages'] and reviewed[name]['detailed_pages'],
+                'Incomplete or changed visual review')
+        targets[HERE/(name+'.pdf')] = source
+    targets[HERE/'redlined_manuscript.tex'] = STAGE/'redlines/redlined_manuscript/redlined_manuscript.tex'
+    receipt = HERE/'evidence/full_context_comparison_article_build.json'
+    require(not receipt.exists(), 'Preserve previous promotion')
+    for target, source in targets.items():
+        require(base.sha(target) in (baseline['files_sha256'][target.name],base.sha(source)), 'Active file changed')
+    for target, source in targets.items():
+        temporary = target.with_name(target.name+'.promoting')
+        shutil.copy2(source,temporary)
+        temporary.replace(target)
+    write_new(receipt,dict(promoted=True,baseline_git=BASELINE,cumulative_redline_git=build['redline_baseline'],
+              source_result_sha256=base.sha(evidence),inspection=inspection,visual_review=reviewed,
+              prior_figure_files_verified=len(baseline['figures_sha256']),figure=dict(editable_sha256=base.sha(deck),
+              chart_series=2,charts=1,workbooks=1,tables=1,samples=samples),office_application_export_verified=False,
+              all_root_tex_sha256={p.name:base.sha(p) for p in HERE.glob('*.tex')}))
+
+
 if __name__ == '__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('action',choices=('baseline','figure','captions','build','inspect'))
+    p.add_argument('action',choices=('baseline','figure','captions','build','inspect','promote'))
     p.add_argument('--attempt',type=int,default=1)
     args=p.parse_args()
     with (ROOT/'artifacts/publication_cpu.lock').open('a') as lock:
@@ -102,5 +158,7 @@ if __name__ == '__main__':
             (HERE/'complete_continuation_figures.tex').write_text(base.literal_figures())
         elif args.action == 'build':
             build()
-        else:
+        elif args.action == 'inspect':
             base.inspect()
+        else:
+            promote()
