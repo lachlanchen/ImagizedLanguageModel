@@ -1,0 +1,81 @@
+{
+  "examples": 22907,
+  "stopped": 22907,
+  "lengths": {
+    "3": 335,
+    "4": 22572
+  },
+  "complete_exact": 35,
+  "swapped_exact": 15,
+  "frequency_baseline_exact": 15,
+  "unique_correct": 4,
+  "absent_cases": 22840,
+  "correct_with_absent": 35,
+  "distinct_correct_with_absent": 4,
+  "aligned_absent_cells": 84098,
+  "aligned_absent_exact": 1701,
+  "emitted_cells": 91293,
+  "training_target_shape_hits": 91293,
+  "group_bootstrap_normal_minus_swapped_95": [
+    0.0004809973268989663,
+    0.0013091318494572732
+  ],
+  "oracle_motor": {
+    "known_shapes": 2229,
+    "known_exact": 2229,
+    "unseen_shapes": 8,
+    "unseen_exact": 0
+  },
+  "examples_by_type": {
+    "first": {
+      "index": 0,
+      "tag": 577157,
+      "length": 4
+    },
+    "exact_absent": {
+      "index": 1341,
+      "tag": 578509,
+      "length": 4
+    },
+    "first_miss": {
+      "index": 0,
+      "tag": 577157,
+      "length": 4
+    }
+  },
+  "passed": false,
+  "physical": {
+    "steps": 1250,
+    "known_exact": 2323,
+    "distinct_training_shapes": 2323,
+    "distinct_codes": 2323
+  },
+  "parameters": 2115971,
+  "fit_seconds": 46.30477155838162,
+  "seconds": 56.38086367864162,
+  "peak_vram": 305008128,
+  "peak_host_kib": 2192792,
+  "epoch_losses": [
+    1.930338495021875,
+    1.0246518027355422,
+    0.743686944114883,
+    0.6057689532650737,
+    0.5240085495943505,
+    0.46986527547408585,
+    0.4320282065342241,
+    0.4035454417037948,
+    0.3822679987657287,
+    0.36518017234122624,
+    0.3516304228230025,
+    0.33953211112839987
+  ],
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "bindings": {
+    "scripts/fit_pictured_idioms.py": "56853c8fb6d4f7f6edb2a5468b90616bf59331e1518f6433ba9bbe6e887cb76c",
+    "ilm/visual_lm/idiom_ink.py": "ea209c68ee8b6891fbb7b6e28024c7141abe84da8b54133432f869106824c987",
+    "references/pictured_idiom_protocol.md": "f67ef740b6e1976915caa5d09e8d563dbf1ac33dba8cd6dbc0b8e541691e8246",
+    "data/pictured_idioms_v1/report.json": "8d8e3e81c2989616c2d2f208754e8ea9209292827e6be90f7586ebf2c256b12b",
+    "artifacts/pictured_idioms_v1/weights.pt": "c77ebb1b40b9b8ef9a83ecb85dfcf18a485977eb608dcc22e812842e25f13bb1",
+    "artifacts/pictured_idioms_v1/generated.npz": "a696e9fd7b47a1efe3eada7bf4bd47f2130d4d8f6298713fa56228f4e3c7ad50"
+  }
+}
