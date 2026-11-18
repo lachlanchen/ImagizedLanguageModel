@@ -556,6 +556,17 @@ identical measured codes, losses and gradients. This establishes neither GPU
 training acceleration nor a matched-quality advantage over a text model.
 The registered fits used the ordinary encoder.
 
+The [visual word-order evaluation](../references/visual_word_order_result.md)
+compares the same 552 Mandarin sentence pairs at all five native K=8 checkpoints.
+Final grammatical preference is 284/552 (51.4%) versus 299/552 (54.2%) before
+training and 57.2% for a matched visual bigram counting adjacent bitmaps.
+Paradigm-level intervals include chance and zero improvement. Preserve all
+paired margins, checkpoints and this negative result. Avoid treating a decrease
+in writing-code loss as evidence that the reader learned syntax. The active
+792-stream autonomous qualification retains its original owner and schedule.
+The next learning decision should account for both visual ordering and the
+eventual complete-answer evidence before another heavy fit.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned

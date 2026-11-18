@@ -1,0 +1,8 @@
+# Native visual word order in the manuscript
+
+Report the completed native fit and the prospective ordering experiment in the current article. Use the protected previous article at commit 4794a6a1 as the baseline. The published terminal decline and interval concern supplied Mandarin sentence alternatives. The native answer-image evaluation remains in progress.
+
+1. Revise the abstract's account of inherited weights. Distinguish the native causal reader with a pretrained image codec from the earlier inherited language body. Include 284/552 final and 299/552 initial. Add a concise motivation and interpretation to the Introduction and Discussion.
+2. Add measured Results and Methods to the common article source. Describe both fits, the code-density factorization, observed pixel feedback, identical physical target multisets, the visual bigram, complete-sentence stopping score and paired paradigm bootstrap. Cite the primary ZhoBLiMP paper. Preserve earlier actor thresholds, figures and scores.
+3. Add editable Figure 33. Use all five measured accuracies, the bigram and chance, the final uncertainty intervals, and the first sampled input pair by the fixed sample order. Show both complete source rasterizations at the same scale. Label these as benchmark inputs. Verify the native chart workbook, table and two images against the measurements.
+4. Preserve the current three PDFs before editing. Rebuild reading, line-numbered review and cumulative redline. Inspect the actual rendered pages for the new figure, abstract and text sections, verify reference resolution and preserve prior embedded images. Deliver the PDFs and corresponding sources to a new local Nutstore version, and verify the latest aliases.
