@@ -3,3 +3,5 @@ Extend the independent writing results with a matched comparison of aligned and 
 Report the registered within-pair likelihood diagnostic alongside autonomous writing if verified. Distinguish supplied physical answer trajectories, joint assignment and complete autonomous generation. Show actual free outputs and editable results.
 
 After the local-hint comparison and its fixed diagnostic, add the separately registered joint-training comparison. Show the effect of preference supervision against a matched joint reference-only fit and the published writer, including results on an additional untouched group split. Use the same revision and rebuild for both writing experiments.
+
+Include the separately registered fixed reference writer confirmation before promoting either a runnable model or its paper claim. Keep the earlier control designation explicit.

@@ -35,12 +35,15 @@ def infer(model_path, destination, train, test, pixels, start):
     write_new(destination / 'result.json', stats)
 
 
-def evaluate(split, train, test, pixels, start):
-    folder = EVAL / split
+def evaluate(split, train, test, pixels, start, *, fits=OUT, results=EVAL, arms=('shuffled', 'aligned'), guided=None, require_local_gain=True):
+    control, treatment = arms
+    folder = results / split
     folder.mkdir()
     x, y, groups = (test[k] for k in ('context', 'target', 'group'))
-    before = (FRESH if split == 'previous' else GUIDED) / 'distilled_targets'
-    if split == 'new':
+    before = guided
+    if before is None and split != 'new':
+        before = (FRESH if split == 'previous' else GUIDED) / 'distilled_targets'
+    if before is None:
         before = folder / 'guided'
         infer(GUIDED / 'distilled_targets/weights.pt', before, train, test, pixels, start)
     outcomes = {}
@@ -51,11 +54,11 @@ def evaluate(split, train, test, pixels, start):
     local = local_counts(train, test)
     hits = {}
     paths = [before]
-    for name in ('shuffled', 'aligned'):
+    for name in arms:
         dest = folder / name
-        infer(OUT / name / 'weights.pt', dest, train, test, pixels, start)
+        infer(fits / name / 'weights.pt', dest, train, test, pixels, start)
         paths.append(dest)
-    for name, dest in zip(('guided', 'shuffled', 'aligned'), paths):
+    for name, dest in zip(('guided', *arms), paths):
         archive = load_split(dest / 'generated.npz')
         ink, n, stop = (archive[k] for k in ('packed', 'length', 'stopped'))
         hit = (ink[:, :4] == pixels[y]).all((1, 2)) & (n == 4) & stop
@@ -67,9 +70,9 @@ def evaluate(split, train, test, pixels, start):
                  all_absent_correct=int((absent & hit).sum()), unseen_correct=int((unseen & hit).sum()),
                  emitted=reported['emitted_cells'], known=reported['training_target_shape_hits'],
                  swapped=reported['swapped_exact'], archive_sha256=sha(dest / 'generated.npz'))
-    candidate = hits['aligned']
+    candidate = hits[treatment]
     comparisons = {}
-    for name in ('guided', 'shuffled'):
+    for name in ('guided', control):
         gained = candidate & ~hits[name]
         lost = ~candidate & hits[name]
         comparisons[name] = dict(gained=int(gained.sum()), lost=int(lost.sum()),
@@ -77,11 +80,12 @@ def evaluate(split, train, test, pixels, start):
                      interval_pp=paired_interval(candidate, hits[name], groups))
     stats = dict(n=len(y), groups=len(np.unique(groups)), pairs=len(i), unseen=int(unseen.sum()),
                  all_absent=int(absent.sum()), local_exact=int(local.sum()), outcomes=outcomes, paired=comparisons)
-    stats['passed'] = all(v['interval_pp'][0] > 0 and outcomes['aligned']['local_correct'] > outcomes[k]['local_correct']
-                          for k, v in comparisons.items()) and outcomes['aligned']['known'] >= .99 * outcomes['aligned']['emitted']
+    stats['control_vs_guided_pp'] = paired_interval(hits[control], hits['guided'], groups)
+    stats['passed'] = all(v['interval_pp'][0] > 0 and (not require_local_gain or outcomes[treatment]['local_correct'] > outcomes[k]['local_correct'])
+                          for k, v in comparisons.items()) and outcomes[treatment]['known'] >= .99 * outcomes[treatment]['emitted']
     if split == 'validation':
         cases = raw_cases()
-        packed = load_split(folder / 'aligned/generated.npz')
+        packed = load_split(folder / treatment / 'generated.npz')
         samples = {}
         for label, mask in [('gain', candidate & ~hits['guided']), ('loss', ~candidate & hits['guided'])]:
             if not mask.any():

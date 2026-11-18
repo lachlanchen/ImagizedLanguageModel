@@ -66,7 +66,7 @@ def count(scores):
 
 
 @torch.inference_mode()
-def score(net, split, data, px, name, start):
+def score(net, split, data, px, name, start, *, destination=DEST):
     x, y, group = (data[k] for k in ('context', 'target', 'group'))
     i, j = matching_pairs(x, y, group)
     require((x[i, 23:25] == x[j, 23:25]).all() and (y[i] != y[j]).any(1).all() and (group[i] != group[j]).all(),
@@ -102,7 +102,7 @@ def score(net, split, data, px, name, start):
         if left not in seen and right not in seen:
             distinct.append(k)
             seen.update((left, right))
-    path = DEST / (split + '_' + name + '.npz')
+    path = destination / (split + '_' + name + '.npz')
     np.savez_compressed(path, i=i, j=j, scores=scores, renderable=renderable, distinct_source_pairs=distinct)
     return dict(all=count(scores), renderable=count(scores[renderable]), unique_sources=count(scores[distinct]),
                 replay_max_nats=max_error, sha256=sha(path))
