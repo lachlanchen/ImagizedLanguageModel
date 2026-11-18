@@ -27,7 +27,15 @@ from scripts.prepare_visual_edit_translation import OUT as EARLY
 from scripts.prepare_ordered_copy_anchors import REPORT
 
 
-def main():
+def main(
+    *,
+    prior_rosters=(),
+    prefix="anchor-writer-1",
+    quota=128,
+    maximum_per_chapter=4,
+    evidence=ROOT / "references/evidence/anchor_writer_holdout_20261119.json",
+    extra_text=(),
+):
     render = Rasterizer()
     known_text, chapters = set(), set()
 
@@ -62,6 +70,11 @@ def main():
         for name in names:
             for r in load(directory / (name + ".json")):
                 remember(r)
+
+    for prior in prior_rosters:
+        for row in load(prior)["rows"]:
+            remember(row)
+    known_text.update(extra_text)
 
     def digest(s):
         return sha256(b"".join(map(render.tile, s))).digest()
@@ -112,7 +125,7 @@ def main():
                 )
                 pools[band].append(
                     (
-                        order(f"anchor-writer-1/{ch}/{ordinal}"),
+                        order(f"{prefix}/{ch}/{ordinal}"),
                         dict(
                             source=s,
                             target=t,
@@ -131,15 +144,14 @@ def main():
         for _, r in sorted(pools[band], key=lambda v: v[0]):
             ch = r["chapter"]
             keys = {r["source_sha"], r["target_sha"]}
-            if per_ch[ch] >= 4 or keys & seen:
+            if per_ch[ch] >= maximum_per_chapter or keys & seen:
                 continue
             selected.append(r)
             seen.update(keys)
             per_ch[ch] += 1
             count += 1
-            if count == 128:
+            if count == quota:
                 break
-    evidence = ROOT / "references/evidence/anchor_writer_holdout_20261119.json"
     write_new(
         evidence,
         dict(
@@ -147,8 +159,8 @@ def main():
             training_sha=load(REPORT)["sha256"],
             prior_chapters=len(chapters),
             prior_bitmaps=len(blocked),
-            quota_per_band=128,
-            limit_per_chapter=4,
+            quota_per_band=quota,
+            limit_per_chapter=maximum_per_chapter,
             available={k: len(v) for k, v in pools.items()},
             selected=len(selected),
             chapters=len(per_ch),

@@ -17,9 +17,15 @@ PROMPT = (
 MODEL = "qwen3:8b-q4_K_M"
 
 
-def collect(local):
-    sample = EVIDENCE / "training_sample.json"
-    out = ROOT / "artifacts/source_only_teacher_pilot_v1"
+def collect(
+    local,
+    *,
+    sample=EVIDENCE / "training_sample.json",
+    out=ROOT / "artifacts/source_only_teacher_pilot_v1",
+    output=EVIDENCE / "teacher_drafts.json",
+):
+    if output.exists():
+        raise FileExistsError(output)
     out.mkdir(exist_ok=True)
     with socket.socket() as s:
         s.bind(("127.0.0.1", 0))
@@ -79,7 +85,7 @@ def collect(local):
                     )
                 )
             write_new(
-                EVIDENCE / "teacher_drafts.json",
+                output,
                 dict(
                     model=MODEL,
                     digest=digest,
