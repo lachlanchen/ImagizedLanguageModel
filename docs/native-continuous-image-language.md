@@ -71,3 +71,32 @@ the font renders input only. The model writes all output pixels itself. Output
 contains `answer.png`, exact binary arrays and a receipt with stopping, cap and
 checkpoint identity. Existing output directories are refused. These commands
 do not establish that the still-unqualified research model answers correctly.
+
+## Reading the held-out outputs
+
+After the evaluator finishes all 792 streams, prepare the anonymous reading packet.
+
+```bash
+PYTHONPATH=. python scripts/review_continuous_image_language.py prepare
+```
+
+The packet is under `artifacts/continuous_autoregressive_full_v1/review/boards/`.
+Each board contains complete output images at their original pixel scale. For
+book continuation, the visible book prefix appears above the answer. Work from
+this directory alone. Copy `readings_template.json` to a submission file and
+record the text, uncertainty and, for each visible book prefix, whether the
+complete continuation is coherent. Use an empty transcription for a blank.
+Record recognizable fragments of unclear writing and flag the reading as
+uncertain. Identify the reviewer and disclose prior familiarity with the cases.
+
+```bash
+PYTHONPATH=. python scripts/review_continuous_image_language.py freeze --readings submission.json
+PYTHONPATH=. python scripts/review_continuous_image_language.py score
+```
+
+Preparation checks every PNG against its raw emitted pixels, including padding.
+Freezing checks the board hashes and copies all readings into a file that cannot
+be replaced by the command. Scoring subsequently opens the reference answers.
+The report distinguishes missing intermediate book or erasure trials from
+observed zero scores. The development result applies to aligned, fixed-size
+glyph images.
