@@ -1,0 +1,40 @@
+{
+  "groups": {
+    "train": {
+      "pairs_considered": 26760,
+      "records": 7108,
+      "passages": 3905,
+      "distinct_questions": 9873
+    },
+    "development": {
+      "pairs_considered": 4705,
+      "records": 1042,
+      "passages": 521,
+      "distinct_questions": 1383
+    }
+  },
+  "columns": [
+    "passage",
+    "question_a",
+    "question_b",
+    "begin_a",
+    "end_a",
+    "begin_b",
+    "end_b"
+  ],
+  "parent_sha256": "28bb511de13ac0c7f76b2eaf4467ef2b986d01149295142f60687376ea1ca79b",
+  "source_sha256": "dc8d53f5bb8029b0dce89e596c7235ae28f2f70442000b5057335f8453a755c7",
+  "files": {
+    "development.npy": "31a7218bfc4f91e884592e08de2300ce67ed42d7c965fc2cce944ae3c55ab8ad",
+    "train.npy": "7fccefea531424780eccd6747e2b9ad6e6a49ecaf60bbbb8fc9590431c263e05"
+  },
+  "independent_pixel_recount": {
+    "train": {
+      "verified_pairs": 7108,
+      "identical_question_glyph_sets": 1
+    },
+    "development": {
+      "verified_pairs": 1042
+    }
+  }
+}

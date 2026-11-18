@@ -97,8 +97,13 @@ def main():
         row = report[train][test]
         table.append([name, *map(str,[row["all"]["first"],row["all"]["first4"],row["all"]["exact"],
                                     row["absent_content_ink"]["exact"]])])
-    write_json(source/"figure.json",dict(table=table, series=[[report[a][b]["all"]["first4"]
-               for _,a,b in trials]], dimensions=dims,examples=examples))
+    figure_series = [[report[a][b]["all"]["first4"] for _,a,b in trials]]
+    if (source/"choice_recount.json").is_file():
+        choices = load(source/"answer_choices.json")["counts"]
+        overlap = load(source/"choice_recount.json")["bitmap_overlap"]
+        figure_series = [[choices[a]["all"]["both_questions_both_layouts"] for a in ("paired","deranged")] +
+                         [overlap[k]["both_questions_both_layouts"] for k in ("direct_jaccard","via_passages")]]
+    write_json(source/"figure.json",dict(table=table,series=figure_series,dimensions=dims,examples=examples))
     print(table, tests, diagnostics, examples)
 
 
