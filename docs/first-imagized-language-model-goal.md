@@ -528,6 +528,21 @@ Keep the original complete-answer, book, retention, erased-input, stopping,
 untouched-confirmation and whole-model cost criteria. The requested 1,000-fold
 efficiency remains an unproved target, not a property inferred from this design.
 
+The [complete native comparison](../references/continuous_autoregressive_full_comparison_protocol_20261118.md)
+is now implemented and separately registered. Its two new CPU execution checks
+pass on the authentic source: all 13,785 complete training records remain,
+with 2,571,477 next-image targets per arm. This excludes 4,762 first book images
+used as causal input anchors from the earlier 2,576,239 source-position count.
+The longest record has 1,101 images and no training truncation is needed.
+One shared shuffled order gives 13,785 updates per arm; retain all five fixed
+snapshots and the 792-stream fixed-cell autonomous plan. An independent CPU
+completion audit must precede generation. The full proportional, earlier-
+success, cold-independent and untouched-confirmation requirements remain later
+requirements even if this development comparison passes. Use the one serial
+owner in the private handoff. Do not edit bound sources, duplicate its owner,
+restart on observation timeout, add unchanged epochs or infer language from loss.
+Quality, complete language and efficiency remain unmeasured before evaluation.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
