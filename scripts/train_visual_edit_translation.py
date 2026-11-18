@@ -63,7 +63,7 @@ def examples(rows):
     return [torch.from_numpy(v).cuda() for v in columns],steps,xlen
 
 
-def scored(net,features,ink,columns,ix,source_width,steps):
+def scored(net,features,ink,columns,ix,source_width,steps,*,draw_auxiliary=None):
     x,lens,q,qlens,a,ns,o,cursor,prev_action,prev_output = [v[ix] for v in columns]
     x = x[:,:source_width]
     a,o,cursor,prev_action,prev_output = [v[:,:steps].long() for v in (a,o,cursor,prev_action,prev_output)]
@@ -80,7 +80,10 @@ def scored(net,features,ink,columns,ix,source_width,steps):
     wanted = ink[o[paint]][:,net.landmarks].float()
     pattern = net.draw.teacher(h[paint],wanted)
     ink_loss = F.cross_entropy(pattern.flatten(0,1),nibbles(wanted).flatten())
-    return action_loss+3*ink_loss,ink_loss.detach()
+    loss = action_loss + 3*ink_loss
+    if draw_auxiliary is not None:
+        loss = loss + draw_auxiliary(net.draw, h[paint], wanted)
+    return loss, ink_loss.detach()
 
 
 def run():

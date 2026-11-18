@@ -85,8 +85,8 @@ def ci(rows,control):
     return (100*np.quantile(draws[:,0]/draws[:,1],[.025,.975])).tolist()
 
 
-def evaluate(name,model,tiles,program,train,start,out):
-    records = inputs(name)
+def evaluate(name,model,tiles,program,train,start,out,*,records=None):
+    records = inputs(name) if records is None else records
     raw = [(i,c) for i,c in enumerate(records) if c['x']]
     cases = [c for i,c in raw]
     x = [r['x'] for r in cases]

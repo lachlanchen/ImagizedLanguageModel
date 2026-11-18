@@ -25,8 +25,8 @@ class LimitedJointEditor(FertilityEditor):
 
 
 @torch.inference_mode()
-def teacher(net,tiles):
-    rows=[r for r in inputs('heldout') if r['x']]
+def teacher(net,tiles,*,records=None):
+    rows=[r for r in (inputs('heldout') if records is None else records) if r['x']]
     ink=torch.as_tensor(np.unpackbits(tiles,axis=1),device='cuda').bool()
     features=visual_input(ink,net.landmarks)
     q=torch.tensor(load(OUT/'preparation.json')['question_tiles'][0][0],device='cuda')[None]
