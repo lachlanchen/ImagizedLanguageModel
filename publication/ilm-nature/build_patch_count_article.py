@@ -80,7 +80,7 @@ def promote(verify_table=verify_patch_table, receipt_name='patch_count_article_b
         os.replace(stage, dest)
     write_new(HERE/'evidence'/receipt_name, dict(
         promoted=True, baseline_git=previous.BASELINE, cumulative_redline_git=build['redline_baseline'],
-        table=cells, deck_sha256=base.sha(deck), source_hashes={p.name:base.sha(p) for p in SOURCE.iterdir()},
+        table=cells, deck_sha256=base.sha(deck), source_hashes={str(p.relative_to(SOURCE)):base.sha(p) for p in SOURCE.rglob('*') if p.is_file()},
         inspection=inspection, visual_review=review, prior_figure_files_verified=len(before['figures_sha256']),
         office_application_export_verified=False))
 

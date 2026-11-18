@@ -1,0 +1,31 @@
+# What a visual writer learns from a corrected Chinese translation
+
+Changing the pictured training target changes the sentence the writer emits. On one RTX 4090 D, the same starting model learned 47 of 113 reviewed translations exactly. Its matched control learned 54 original book translations. When a pictured numeral changed, the reviewed writer sometimes wrote a previously unseen, complete modern sentence carrying the new value. On sixteen passages from unfamiliar chapters it earned zero complete-meaning credits. [Figure 67](../publication/ilm-nature/figures/Figure_67_screened_targets.png)
+
+## Controlled training
+
+An offline local Qwen3-8B drafted translations without access to the paired modern text. A model editor kept 50 new drafts as written, changed 51 and excluded 27. With twelve earlier reviewed items the two arms shared 113 supervised sources, of which 112 had different physical targets. Both fits started from the same ordered-copy checkpoint. They replayed 55,872 sources once and oversampled the same 113 sources 18,624 times. Each fit saw 1,515,887 source cells in the same order and used 1,164 AdamW updates. The control saw 2,262,828 target cells and the reviewed arm 2,232,630. Continuation time was 29.9 and 30.5 seconds. These times exclude parent training, target preparation, teacher inference and evaluation. The model has 2,326,230 parameters and 910,550 trainables in this stage. The released writers accept aligned 32 × 32 glyph images and produce the answer as ink independently on a CPU. [Protocol](screened_visual_targets_protocol.md) · [Checkpoints and inference](../models/visual_edit_zh/README.md)
+
+All evaluation, supervised-replay and one-cell intervention arrays are available as packed image streams. Each archive contains an ordered byte array and passage offsets. The evaluation receipts bind the arrays by SHA-256. [Saved output images and baselines](evidence/screened_targets_20261119/streams)
+
+## Reproduction and transfer
+
+| Free-running writer | Exact original wording / 113 | Exact reviewed wording / 113 | Archived passage edits / 118 | Faithful archive answers / 16 | Both authored answers faithful / 12 |
+|---|---:|---:|---:|---:|---:|
+| Starting checkpoint | 1 | 0 | 6,987 | 0 | 3 |
+| Continued on original targets | 54 | 0 | 7,547 | 0 | 0 |
+| Continued on reviewed targets | 1 | 47 | 7,701 | 0 | 1 |
+| Phrase composer | — | — | 3,943 | 0 | 7 |
+| Local Qwen3-8B from text | — | — | 3,944 | 10 | 11 |
+
+The 118 passages come from 108 chapters. Four natural passages per length range and 24 authored prompts changing a participant, quantity or negation received complete readings. Identities were hidden within the packets. A model reader with previous exposure to this task made the judgments. Nine of the sixteen archival book answers earned credit under the source-fragment rubric. For the subsequent teacher comparison, four identical previous answers retained their frozen readings and 36 new choices were graded with identities concealed. The nearly equal edit totals of Qwen and the composer coexist with a ten-answer difference in meaning. The reviewed model also reached its 192-cell cap on 23 archival inputs, compared with 18 for the continued book writer and 15 for the starting checkpoint. [Image-writer scores](evidence/screened_targets_20261119/scores.json) · [Teacher scores](evidence/screened_targets_20261119/teacher_scores.json)
+
+In the exploratory substitution study, the reviewed writer translated 三月辛亥，振陕西灾。 as 三月辛亥日，赈济陕西的灾荒。 Replacing the first input image with 五 produced 五月辛亥日，赈济陕西的灾荒。 All 13 successes in 18 eligible numeral substitutions differed from the prompt and from every complete supervised target in the 55,872-row corpus and the reviewed set. The book control produced its own revised wording in nine of the sixteen cases alignable to the book version. Moving one aligned character right by one pixel without clipping yielded 32 exact or shift-equivalent reviewed answers in 113 attempts. Of the 47 previously exact, 31 survived. The test used one rendering family. [Probe definitions](../scripts/probe_screened_visual_changes.py) · [Audit against both target sets](evidence/screened_targets_20261119/probe_audit.json)
+
+## What the numeral probe identifies
+
+Let a substitution replace one input image at position $i$, and let its aligned output position be $j$. The test asks whether the writer satisfies $f(T_i x)=T_j f(x)$ while modernizing the rest of the sentence. A system storing one paired exemplar can satisfy this relation by copying its translation and replacing the matching bitmap. We implemented that control using only the 113 paired image strips. It reproduced 18/18 changed numbers and 104/113 shifted glyphs. It abstained on every unfamiliar archive or authored prompt. This provides a concrete alternative explanation for success on familiar frames. The experiment leaves the internal mechanism of the neural writer open. [Control code](../scripts/compare_visual_one_cell_analogy.py) · [Exact control counts](evidence/screened_targets_20261119/one_cell_analogy.json)
+
+A displacement of the ink can preserve the intended reading, while replacing a numeral or negation changes the required answer. Imposing invariance to both would discard information. A more informative transfer test changes a pictured value inside a construction whose *surrounding wording* also differs from training. This builds on context-sensitive substitution in compositional augmentation and sequence-level teacher supervision. Earlier direct pixel generation already establishes priority for rendered-language generation. Our experiment concerns the fidelity and transfer of a small Chinese visual writer. [Andreas, ACL 2020](https://aclanthology.org/2020.acl-main.676/) · [Kim and Rush, EMNLP 2016](https://aclanthology.org/D16-1139/) · [Tai et al., Findings of ACL 2024](https://aclanthology.org/2024.findings-acl.874/)
+
+The matched comparison failed its registered transfer criterion. The next data comparison varies how many distinct, source-supported constructions the writer sees at a fixed number of supervised exposures. It retains the simple analogy control and reserves fresh chapter and construction tests before fitting. Delivery of historical etymologies, open-domain reasoning and energy savings at matched quality require their own evidence.

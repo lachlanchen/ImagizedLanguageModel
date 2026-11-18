@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The experimental visual writer reads 三月辛亥，振陕西灾。 and writes 三月辛亥日，赈济陕西的灾荒。 Changing the pictured month to 五 changes the generated date to 五月. It produced the entire revised answer in 13 of 18 familiar sentence frames. A one-cell substitution rule solved all 18. On sixteen passages from unfamiliar chapters, the writer produced zero faithful translations, compared with ten from local Qwen3-8B reading text. [Results and controls](references/screened_visual_targets_result.md) · [Run the visual writer](models/visual_edit_zh/README.md#reviewed-translations)
+
+[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=89)
+
 A visual writer trained on 55,872 pictured Chinese passage pairs conveyed the meaning of two of 24 new passages. The earlier phrase composer conveyed three. Figure 66 shows complete input and output images, including an evening-meal passage the neural writer mistranslates. [Read the experiment](references/anchor_gap_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
 [![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=88)

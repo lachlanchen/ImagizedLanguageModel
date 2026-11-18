@@ -247,3 +247,16 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --image references/evide
 ~~~
 
 The example produces 两营相距九里。 The joint-span and single-cell writers each translated ten of the 29 fresh archive clauses faithfully. Five figure examples reproduce byte for byte, including two incorrect translations. [Measured results](../../references/phrase_boundary_result.md)
+
+## Reviewed translations
+
+Run the released 2.33-million-parameter visual writer on the changed month from Figure 67. The command takes a pictured source and writes the generated glyphs to `answer.png` in a fresh directory.
+
+~~~bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method anchor-gaps \
+  --weights models/visual_edit_zh/screened_targets/screened.safetensors \
+  --image references/evidence/screened_targets_20261119/changed_source.png \
+  --output /tmp/ilm-shaanxi-fifth-month
+~~~
+
+This input yields 五月辛亥日，赈济陕西的灾荒。 The adjacent `book.safetensors` checkpoint uses the original translations in the matched fit. Both are experimental. [Complete results](../../references/screened_visual_targets_result.md)

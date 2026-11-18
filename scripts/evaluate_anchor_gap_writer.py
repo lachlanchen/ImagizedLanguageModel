@@ -20,8 +20,9 @@ ROSTER = ROOT / "references/evidence/anchor_writer_holdout_20261119.json"
 CONTROLS = ROOT / "references/evidence/anchor_writer_controls_20261119.json"
 
 
-def reading(rows, selected, streams):
+def reading(rows, selected, streams, *, evidence=EVIDENCE, extra_chars=""):
     chars = set("".join(r["source"] + r["target"] for r in rows))
+    chars.update(extra_chars)
     for r in read_rows("train"):
         chars.update(r["new"] + r["source"])
     render, lex = Rasterizer(), {}
@@ -46,9 +47,9 @@ def reading(rows, selected, streams):
         mapping.append(
             dict(row=i, options={k: choices.index(v) for k, v in values.items()})
         )
-    write_new(EVIDENCE / "review.json", packet)
-    write_new(EVIDENCE / "mapping.json", mapping)
-    save_streams("review_pixels", pixels, EVIDENCE)
+    write_new(evidence / "review.json", packet)
+    write_new(evidence / "mapping.json", mapping)
+    save_streams("review_pixels", pixels, evidence)
 
 
 def evaluate():
