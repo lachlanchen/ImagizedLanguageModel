@@ -1,0 +1,86 @@
+{
+  "history": [
+    {
+      "epoch": 1,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 7.560219044287999,
+      "physical_group_nll": 2.291565089027087,
+      "wall_seconds": 4.71108462754637
+    },
+    {
+      "epoch": 2,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 6.561489689819018,
+      "physical_group_nll": 1.986411668250958,
+      "wall_seconds": 8.713227859698236
+    },
+    {
+      "epoch": 3,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 5.367008380572001,
+      "physical_group_nll": 1.5966454602281253,
+      "wall_seconds": 12.029337023384869
+    },
+    {
+      "epoch": 4,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 4.573636311205228,
+      "physical_group_nll": 1.3377803021232286,
+      "wall_seconds": 16.114443720318377
+    },
+    {
+      "epoch": 5,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 4.103983890573184,
+      "physical_group_nll": 1.1855509940107662,
+      "wall_seconds": 19.83823675569147
+    },
+    {
+      "epoch": 6,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 3.806605743400256,
+      "physical_group_nll": 1.0898237976551055,
+      "wall_seconds": 23.326782713644207
+    },
+    {
+      "epoch": 7,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 3.603344605286916,
+      "physical_group_nll": 1.0247105902194977,
+      "wall_seconds": 27.052355117164552
+    },
+    {
+      "epoch": 8,
+      "examples": 60000,
+      "updates": 480,
+      "loss": 3.459055718608697,
+      "physical_group_nll": 0.9786078848759333,
+      "wall_seconds": 31.00467947497964
+    }
+  ],
+  "motor": {
+    "steps": 4000,
+    "known_exact": 3110,
+    "distinct_training_shapes": 7326,
+    "seconds": 4.9713556142523885
+  },
+  "parameters": 1984053,
+  "trainable_editor": 568373,
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "peak_allocated_mib": 468.84814453125,
+  "seconds": 38.55186438560486,
+  "weights_sha256": "f3bdd78aab11f4efcebb43de203a6102b257fa2fc5a1a2904d8a83b411daa514",
+  "preparation_sha256": "89e4f109bd7e04395c437fa349cbacd9307d91077ae6d23af56d6a55a1ec8789",
+  "source_sha256": {
+    "scripts/train_visual_edit_translation.py": "085594f10cd869c93089623ce0a137dfaab4a24261abe952d56bd52fe6c93df8",
+    "ilm/visual_lm/visual_edit_writer.py": "ed869508e2af7524293560df562f40d5c748456a19f936276ce12f46369ffd54",
+    "references/visual_edit_translation_protocol.md": "7eb7188a9e63fd92451e97cf88df7ad97f943ecde6644c25441597bf166d5811"
+  }
+}

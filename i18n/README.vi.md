@@ -32,6 +32,10 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
+## Đọc ảnh câu văn ngôn và viết lại bằng tiếng Trung hiện đại
+
+Trên các chương dành riêng để đánh giá, mô hình 2,03 triệu tham số chép đúng cả 2.045 đoạn có thể biểu diễn bằng ảnh. Khi dịch, 30 trong số 2.048 câu khớp hoàn toàn với ảnh tham chiếu. Trong một câu, mô hình chép chín mặt chữ và vẽ thêm hai chữ, đổi 薨 thành 去世. Xét theo khoảng cách chỉnh sửa trên toàn bộ kết quả, phương pháp đơn giản dùng ngữ cảnh gần vẫn tốt hơn. [Chạy mô hình](../models/visual_edit_zh/README.md) · [Ảnh đầu ra và ảnh tham chiếu](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## Đọc dạng chữ cổ từ bảng tư liệu
 
 Với bảng tư liệu gồm bốn hàng, mô hình trả về đúng hình dạng chữ theo thứ tự yêu cầu trong 9.565 trên 9.600 câu hỏi tiếng Trung và tiếng Anh về các họ chữ chưa dùng để huấn luyện. [Chạy mô hình](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

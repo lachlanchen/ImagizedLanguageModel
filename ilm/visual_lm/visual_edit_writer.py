@@ -27,7 +27,7 @@ class InkPatterns(nn.Module):
         prefix = F.pad(terms[:,:-1].cumsum(1),(0,0,1,0))
         return self.output(F.gelu(self.plan(state)[:,None]+self.position+prefix))+self.bias
 
-    def choose(self,state,beam=4):
+    def choose(self,state,beam=4,*,return_score=False):
         context = self.plan(state)
         scores = state.new_zeros(len(state),1)
         history = torch.empty(len(state),1,0,device=state.device,dtype=torch.long)
@@ -39,7 +39,8 @@ class InkPatterns(nn.Module):
             parents,code = choices//16,choices%16
             prefix = prefix[rows,parents]+self.prefix[j,code]
             history = torch.cat((history[rows,parents],code[:,:,None]),dim=-1)
-        return bit_image(history[:,0])
+        bits = bit_image(history[:,0])
+        return (bits,scores[:,0]) if return_score else bits
 
 
 class VisualEditWriter(nn.Module):
@@ -85,7 +86,7 @@ class VisualEditWriter(nn.Module):
         return score.masked_fill(invalid,-1e4)
 
     @torch.inference_mode()
-    def generate(self,source_ink,lengths,question,qlengths,*,max_output=192):
+    def generate(self,source_ink,lengths,question,qlengths,*,max_output=192,insertion_limit=None,joint_choice=False):
         if max_output < 1 or (lengths<1).any() or (qlengths<1).any():
             raise ValueError('Nonempty pictured inputs and a positive output limit are required')
         device = source_ink.device
@@ -103,13 +104,28 @@ class VisualEditWriter(nn.Module):
         complete = torch.zeros(b,dtype=torch.bool,device=device)
         capped = torch.zeros_like(complete)
         output = torch.zeros(b,max_output,1024,device=device,dtype=torch.bool)
+        budgets = insertion_limit(memory,global_state) if insertion_limit is not None else None
+        used = torch.zeros_like(lengths)
         actions = []
         # Each non-stop operation consumes a source tile or emits a tile.
         for _ in range(max_output+source.shape[1]+1):
             inputs = self.decoder_inputs(memory[rows,cursor],global_state,feedback,prev)
             h,state = self.step(inputs[:,None],state)
-            action = self.action_logits(h[:,0],cursor==lengths).argmax(-1)
+            logits = self.action_logits(h[:,0],cursor==lengths)
+            if budgets is not None:
+                logits[:,INSERT].masked_fill_(used >= budgets[rows,cursor],-1e4)
+            action = logits.argmax(-1)
             live = ~(complete|capped)
+            proposed_bits = None
+            if joint_choice:
+                proposed = live & ((action==REPLACE)|(action==INSERT))
+                if proposed.any():
+                    bits,logp = self.draw.choose(h[proposed,0],return_score=True)
+                    proposed_bits = source.new_zeros(b,len(self.landmarks))
+                    proposed_bits[proposed] = bits
+                    logits[proposed,REPLACE] += logp
+                    logits[proposed,INSERT] += logp
+                    action = logits.argmax(-1)
             emitting = (action<=INSERT) & live
             capped |= emitting & (n==max_output)
             live &= ~capped
@@ -120,10 +136,13 @@ class VisualEditWriter(nn.Module):
             emit = copy|draw
             picture = source_ink[rows,cursor.clamp_max(source.shape[1]-1)].bool().clone()
             if draw.any():
-                picture[draw] = self.motor(self.draw.choose(h[draw,0]))>0
+                bits = self.draw.choose(h[draw,0]) if proposed_bits is None else proposed_bits[draw]
+                picture[draw] = self.motor(bits)>0
             output[rows[emit],n[emit]] = picture[emit]
             feedback = torch.where(emit[:,None],visual_input(picture,self.landmarks),feedback)
             n += emit.long()
+            if budgets is not None:
+                used = torch.where(action==INSERT,used+1,0)
             cursor += (live & ((action==COPY)|(action==REPLACE)|(action==DROP))).long()
             prev = action
             if (complete|capped).all():

@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2044,
+  "unsupported": 4,
+  "groups": 254,
+  "outcome": {
+    "translation": {
+      "cases": 2044,
+      "exact": 32,
+      "stopped": 2044,
+      "edits": 37892,
+      "target_cells": 67747,
+      "output_cells": 46124,
+      "known_cells": 46087,
+      "hard": 1955,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 0.5593162796876614
+    },
+    "quote": {
+      "cases": 2044,
+      "exact": 2044,
+      "stopped": 2044,
+      "edits": 0,
+      "target_cells": 45619,
+      "output_cells": 45619,
+      "known_cells": 45583,
+      "hard": 1955,
+      "hard_exact": 1955,
+      "novel_hard_exact": 1954,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2044,
+      "exact": 0,
+      "stopped": 2044,
+      "edits": 62360,
+      "target_cells": 67747,
+      "output_cells": 46124,
+      "known_cells": 46087,
+      "hard": 1955,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9204835638478457
+    },
+    "copy": {
+      "cases": 2044,
+      "exact": 41,
+      "stopped": 2044,
+      "edits": 38246,
+      "target_cells": 67747,
+      "output_cells": 45619,
+      "known_cells": 45583,
+      "hard": 1955,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5645416033182281
+    },
+    "local": {
+      "cases": 2044,
+      "exact": 36,
+      "stopped": 2044,
+      "edits": 37586,
+      "target_cells": 67747,
+      "output_cells": 48359,
+      "known_cells": 48323,
+      "hard": 1955,
+      "hard_exact": 2,
+      "novel_hard_exact": 1,
+      "cer": 0.5547994745154767
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.21792401729204236,
+      0.8142006357867206
+    ],
+    "local": [
+      -0.7718071791759038,
+      -0.14311961808136156
+    ],
+    "exchanged": [
+      34.353775243488286,
+      37.7532902440303
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 1,
+      "source": "丁亥，诏停蔡州乡军。",
+      "target": "二日，诏令取消蔡州乡军。",
+      "chapter": "旧五代史/后周/太祖纪三",
+      "output_cells": 12,
+      "copied": 8,
+      "drawn": 4
+    },
+    "first_changed_success": {
+      "index": 634,
+      "source": "殷琰，陈郡长平人也。",
+      "target": "殷琰，陈郡长平人。",
+      "chapter": "宋书/列传/卷八十七",
+      "output_cells": 9,
+      "copied": 9,
+      "drawn": 0
+    },
+    "first_long_mixed": {
+      "index": 1303,
+      "source": "又曰： 皇帝兴运。",
+      "target": "又说： 皇帝兴运。",
+      "chapter": "南齐书/志/卷十八",
+      "output_cells": 9,
+      "copied": 8,
+      "drawn": 1
+    }
+  },
+  "distinct_questions_both": 2,
+  "different_answers": 2003,
+  "rows_sha256": "c0ca3206b72519e739bfc1b9d720748d5ac93849f4ba734135381e000ca2c92f",
+  "streams_sha256": "a80fa8a8771b6adc56df6198a2f7ba1b8c0e74d3bfd10b92895b2ff36dd49681",
+  "pass": false
+}

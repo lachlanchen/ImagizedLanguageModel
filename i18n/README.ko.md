@@ -31,6 +31,10 @@ ILM은 언어를 **보이는 글쓰기 이미지**로 학습하고 생성합니�
 
 [결과와 근거의 범위](../references/native_paired_qa_learning_result.md)
 
+## 고전 중국어 문장 이미지를 읽고 현대 중국어로 쓰기
+
+매개변수 약 203만 개의 모델은 학습에서 제외한 장을 평가했을 때 이미지로 만들 수 있는 원문 2,045개를 모두 정확히 베꼈다. 현대 중국어 번역은 2,048개 중 30개가 참조 이미지와 일치했다. 한 예에서는 글자꼴 아홉 개를 복사하고 두 개를 새로 그려 薨을 去世로 바꿨다. 전체 글자꼴 편집 거리에서는 단순한 국소 편집 기법이 더 우수했다. [모델 실행](../models/visual_edit_zh/README.md) · [출력과 참조 이미지](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## 자료에서 옛 글자꼴 읽기
 
 네 줄로 된 자료를 제시했을 때 모델은 훈련에서 제외한 글자 계열에 관한 중국어·영어 질문 9,600개 중 9,565개에 요청한 글자꼴을 정확한 순서로 답했습니다. [모델 실행](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

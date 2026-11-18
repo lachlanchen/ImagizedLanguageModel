@@ -20,6 +20,10 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
+## Writing modern Chinese from a pictured classical sentence
+
+On separate test chapters, a 2.03M-parameter editor copied all 2,045 renderable passages on request. It reproduced 30 of 2,048 modern translations exactly. In one it kept nine glyphs and drew two, changing 薨 to 去世. A simple local-edit baseline still made fewer glyph errors overall. [Run the editor](models/visual_edit_zh/README.md) · [Original output and reference](publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## Reading historical forms
 
 Given a four-row illustrated entry, the model returned the requested historical images in order on 9,565 of 9,600 Chinese and English questions about held-out families. It kept the same score after the images moved between rows. The example for 言 returns an oracle form and a bronze form. [Runnable model](models/pictured_idiom_zh/README.md) · [Fig. 42](publication/ilm-nature/figures/Figure_42_historical_plates.png)

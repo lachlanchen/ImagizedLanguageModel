@@ -31,6 +31,10 @@ ILM 研究如何把語言當作**可見書寫影像**來學習與生成：由影
 
 [結果與證據範圍](../references/native_paired_qa_learning_result.md)
 
+## 讀古文圖像，寫現代漢語
+
+這個含 203 萬個參數的模型在獨立測試篇章中完整抄出了全部 2,045 段可繪製的原文。要求改寫為白話時，2,048 個譯文中有 30 個與參考圖像完全一致。其中一例保留九個字形，新寫兩個字，把「薨」改成了「去世」。以整體字形編輯距離衡量，簡單的局部改寫方法仍然較好。 [執行模型](../models/visual_edit_zh/README.md) · [對照輸出與參考圖像](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## 從圖表讀取歷史字形
 
 給定四行字形圖表，在針對訓練時未見字族的 9,600 個中英文問題中，模型有 9,565 次依指定順序傳回正確字形。「言」的範例可直接輸出甲骨文和金文圖像。 [執行範例](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

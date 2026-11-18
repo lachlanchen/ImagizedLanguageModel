@@ -59,9 +59,11 @@ def pairs(raw):
 
 
 def main():
-    OUT.mkdir(exist_ok=False)
     archive = BASE/'archive.tar.gz'
     archive_hash = sha(archive)
+    if archive_hash != 'dd5c20960f224b6f8cb18a077e546f57f7509c0524d0ab70722d455bcb73c62c':
+        raise ValueError('Expected the registered NiuTrans archive revision')
+    OUT.mkdir(exist_ok=False)
     heaps = [[],[],[]]
     counts = Counter()
     with tarfile.open(archive,mode='r|gz') as tar:

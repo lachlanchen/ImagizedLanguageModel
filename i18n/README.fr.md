@@ -32,6 +32,10 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
+## Lire une phrase de chinois classique en image et la réécrire en chinois moderne
+
+Sur des chapitres réservés au test, le modèle de 2,03 millions de paramètres a recopié exactement les 2 045 passages affichables. Pour la traduction, 30 réponses sur 2 048 correspondaient exactement à l’image de référence. Dans un exemple, il a copié neuf glyphes et en a dessiné deux pour remplacer 薨 par 去世. Une méthode simple de réécriture locale a obtenu une distance d’édition globale plus faible. [Exécuter le modèle](../models/visual_edit_zh/README.md) · [Sorties et références](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## Lire les formes historiques
 
 À partir d’une planche de quatre lignes, le modèle a restitué les images historiques dans l’ordre demandé pour 9 565 des 9 600 questions en chinois et en anglais portant sur des familles de caractères exclues de l’entraînement. [Exécuter le modèle](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

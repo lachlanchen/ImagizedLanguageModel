@@ -31,6 +31,10 @@ ILM 研究如何把语言作为**可见书写图像**来学习和生成：从图
 
 [结果及证据范围](../references/native_paired_qa_learning_result.md)
 
+## 看古文图像，写现代汉语
+
+这个含 203 万个参数的模型在独立测试篇章中完整抄出了全部 2,045 段可渲染的原文。要求改写为白话时，2,048 个译文中有 30 个与参考图像完全一致。其中一例保留九个字形，新写两个字，把“薨”改成了“去世”。按整体字形编辑距离衡量，简单的局部改写方法仍然更好。 [运行模型](../models/visual_edit_zh/README.md) · [对照输出与参考图像](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## 从图表读取历史字形
 
 给定四行字形图表，在针对训练时未见字族的 9,600 个中英文问题中，模型有 9,565 次按指定顺序返回了正确字形。「言」的示例可以直接输出甲骨文和金文图像。 [运行示例](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

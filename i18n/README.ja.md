@@ -31,6 +31,10 @@ ILM は言語を **目に見える書字** として学習・生成します。�
 
 [結果と証拠の範囲](../references/native_paired_qa_learning_result.md)
 
+## 漢文の画像から現代中国語を書く
+
+約203万パラメータのモデルは、学習に使わなかった章で、描画可能な2,045件の原文をすべて正確に書き写した。現代中国語訳は2,048件中30件が参照画像と完全に一致した。一例では九つの字形を写し、二つを新たに描いて「薨」を「去世」に置き換えた。字形の編集距離では、単純な局所編集の方が全体として良好だった。 [モデルを実行](../models/visual_edit_zh/README.md) · [出力と参照画像](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## 古い字形を資料から読み取る
 
 4 行の資料を与えると、学習に使わなかった字族についての中国語・英語の質問 9,600 件のうち 9,565 件で、指定された字形を正しい順序で返しました。 [実行例](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

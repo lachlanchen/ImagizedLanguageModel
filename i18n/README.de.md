@@ -30,6 +30,10 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
+## Klassisches Chinesisch als Bild lesen und in modernem Chinesisch schreiben
+
+Auf zurückgehaltenen Kapiteln schrieb das Modell mit 2,03 Millionen Parametern alle 2.045 darstellbaren Passagen exakt ab. Beim Übersetzen stimmten 30 von 2.048 Antworten mit dem Referenzbild überein. In einem Satz übernahm das Modell neun Zeichenbilder und zeichnete zwei neu, um 薨 durch 去世 zu ersetzen. Über alle Übersetzungen erzielte ein einfaches lokales Verfahren eine geringere Editierdistanz. [Modell ausführen](../models/visual_edit_zh/README.md) · [Ausgaben und Referenzbilder](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## Historische Zeichenformen aus einer Tafel lesen
 
 Auf einer Tafel mit vier Zeilen gab das Modell bei 9.565 von 9.600 chinesischen und englischen Fragen zu zuvor ungesehenen Zeichenfamilien die historischen Formen in der verlangten Reihenfolge aus. [Modell ausführen](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)

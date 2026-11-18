@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2045,
+  "unsupported": 3,
+  "groups": 248,
+  "outcome": {
+    "translation": {
+      "cases": 2045,
+      "exact": 30,
+      "stopped": 2045,
+      "edits": 37397,
+      "target_cells": 65816,
+      "output_cells": 44414,
+      "known_cells": 44351,
+      "hard": 1964,
+      "hard_exact": 3,
+      "novel_hard_exact": 3,
+      "cer": 0.5682052996231919
+    },
+    "quote": {
+      "cases": 2045,
+      "exact": 2045,
+      "stopped": 2045,
+      "edits": 0,
+      "target_cells": 43880,
+      "output_cells": 43880,
+      "known_cells": 43813,
+      "hard": 1964,
+      "hard_exact": 1964,
+      "novel_hard_exact": 1963,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2045,
+      "exact": 0,
+      "stopped": 2045,
+      "edits": 60372,
+      "target_cells": 65816,
+      "output_cells": 44414,
+      "known_cells": 44351,
+      "hard": 1964,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9172845508690896
+    },
+    "copy": {
+      "cases": 2045,
+      "exact": 37,
+      "stopped": 2045,
+      "edits": 37698,
+      "target_cells": 65816,
+      "output_cells": 43880,
+      "known_cells": 43813,
+      "hard": 1964,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5727786556460435
+    },
+    "local": {
+      "cases": 2045,
+      "exact": 29,
+      "stopped": 2045,
+      "edits": 37113,
+      "target_cells": 65816,
+      "output_cells": 46811,
+      "known_cells": 46744,
+      "hard": 1964,
+      "hard_exact": 2,
+      "novel_hard_exact": 2,
+      "cer": 0.5638902394554516
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.15772814415192038,
+      0.753319933338385
+    ],
+    "local": [
+      -0.8199110083667119,
+      -0.04673442274694234
+    ],
+    "exchanged": [
+      33.22540486083764,
+      36.57037167241537
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "帝心知陈氏即有后，利必不言，然以封利无名，复命琦、汝敬敕谕再访，且以利女病死告之。",
+      "target": "皇帝心中明白即使陈氏有后裔，黎利也一定不会上奏，但是册封黎利又无名义，于是又派李琦、罗汝敬持敕谕要他再继续寻访，并告诉黎利他的女儿已经得病而死。",
+      "chapter": "明史/列传/卷二百零九",
+      "output_cells": 42,
+      "copied": 38,
+      "drawn": 4
+    },
+    "first_changed_success": {
+      "index": 342,
+      "source": "○麦灾",
+      "target": "麦灾",
+      "chapter": "天工开物/上篇/乃粒",
+      "output_cells": 2,
+      "copied": 2,
+      "drawn": 0
+    },
+    "first_long_mixed": {
+      "index": 1478,
+      "source": "四年，改为侍中、金紫光禄大夫。",
+      "target": "四年，改任侍中、金紫光禄大夫。",
+      "chapter": "梁书/列传/卷二十三",
+      "output_cells": 15,
+      "copied": 14,
+      "drawn": 1
+    }
+  },
+  "distinct_questions_both": 5,
+  "different_answers": 2008,
+  "rows_sha256": "922976309c0ee6e52c657fda7a54d8a986047fc9ed8a2df3c69ec4de46397a12",
+  "streams_sha256": "16bc13258ca719753643f11574295dd9cdf85d2ea44920e427169a6d014b93cf",
+  "pass": false
+}

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_mixed_ink_article.py.
+% Literal captions copied from their source inputs by build_visual_edit_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -407,4 +407,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{c}, Unseen instruction phrasings on 17,600 additional idiom windows. Neighbour questions require four visible glyphs on either side of the central gap.
 \textbf{d}, The first incorrect official output includes additional marks around the company names.}
 \label{fig:mixed-ink}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_48_visual_edit.png}
+\caption{\textbf{Copying and drawing within a sentence.}
+\textbf{a}, Saved inputs, predictions and references from two confirmation chapters. The first exact mixed answer copies 14 glyphs and replaces one. The second example copies nine and draws two to express death in modern Chinese.
+\textbf{b}, Whole stopped answers under the learned insertion limit. Mixed references exceed eight glyphs and contain both a source glyph and an absent Han character.
+\textbf{c}, Physical edit distance on the first roster and the first failed translation in roster order. The local control learns edit counts from short source neighbourhoods.
+\textbf{d}, Exact drawings with the recorded cursor and preceding ink. Both conditions use the same renderer.}
+\label{fig:visual-edit}
 \end{figure*}

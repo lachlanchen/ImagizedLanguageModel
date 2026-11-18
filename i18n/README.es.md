@@ -32,6 +32,10 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
+## Leer una oración en chino clásico como imagen y escribirla en chino moderno
+
+En capítulos reservados para la evaluación, el modelo de 2,03 millones de parámetros copió exactamente los 2.045 pasajes que pudieron representarse. Al traducir, 30 de 2.048 respuestas coincidieron con la imagen de referencia. En un caso copió nueve glifos y dibujó dos para sustituir 薨 por 去世. Un método sencillo de edición local obtuvo una distancia de edición menor en el conjunto de la prueba. [Ejecutar el modelo](../models/visual_edit_zh/README.md) · [Imágenes generadas y de referencia](../publication/ilm-nature/figures/Figure_48_visual_edit.png)
+
 ## Lectura de formas históricas
 
 A partir de una lámina de cuatro filas, el modelo devolvió las imágenes históricas en el orden solicitado en 9.565 de 9.600 preguntas en chino e inglés sobre familias de caracteres excluidas del entrenamiento. [Ejecutar el modelo](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)
