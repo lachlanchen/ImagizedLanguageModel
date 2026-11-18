@@ -1,0 +1,159 @@
+{
+  "scores": {
+    "all": {
+      "n": 834,
+      "normal": {
+        "exact": 629,
+        "draws": 10,
+        "cells": 4955,
+        "stopped": 830
+      },
+      "contiguous": {
+        "exact": 630,
+        "draws": 0,
+        "cells": 4999,
+        "stopped": 828
+      },
+      "exchange": {
+        "exact": 0,
+        "draws": 10,
+        "cells": 4955,
+        "stopped": 830
+      },
+      "normal_minus_contiguous_95": [
+        -0.0035971223021582736,
+        0.0
+      ]
+    },
+    "contiguous": {
+      "n": 724,
+      "normal": {
+        "exact": 629,
+        "draws": 5,
+        "cells": 4100,
+        "stopped": 721
+      },
+      "contiguous": {
+        "exact": 630,
+        "draws": 0,
+        "cells": 4126,
+        "stopped": 719
+      },
+      "exchange": {
+        "exact": 0,
+        "draws": 8,
+        "cells": 4237,
+        "stopped": 720
+      },
+      "normal_minus_contiguous_95": [
+        -0.004143646408839779,
+        0.0
+      ]
+    },
+    "distributed": {
+      "n": 46,
+      "normal": {
+        "exact": 0,
+        "draws": 5,
+        "cells": 436,
+        "stopped": 45
+      },
+      "contiguous": {
+        "exact": 0,
+        "draws": 0,
+        "cells": 445,
+        "stopped": 45
+      },
+      "exchange": {
+        "exact": 0,
+        "draws": 0,
+        "cells": 319,
+        "stopped": 46
+      },
+      "normal_minus_contiguous_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "missing_glyph": {
+      "n": 64,
+      "normal": {
+        "exact": 0,
+        "draws": 0,
+        "cells": 419,
+        "stopped": 64
+      },
+      "contiguous": {
+        "exact": 0,
+        "draws": 0,
+        "cells": 428,
+        "stopped": 64
+      },
+      "exchange": {
+        "exact": 0,
+        "draws": 2,
+        "cells": 399,
+        "stopped": 64
+      },
+      "normal_minus_contiguous_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "unknown": {
+      "n": 34,
+      "normal": {
+        "exact": 32,
+        "draws": 0,
+        "cells": 143,
+        "stopped": 34
+      },
+      "contiguous": {
+        "exact": 32,
+        "draws": 0,
+        "cells": 143,
+        "stopped": 34
+      },
+      "exchange": {
+        "exact": 0,
+        "draws": 0,
+        "cells": 181,
+        "stopped": 34
+      },
+      "normal_minus_contiguous_95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "composition_pass": false,
+  "fit_seconds": 197.50423614494503,
+  "total_seconds": 239.55822578724474,
+  "peak_allocated_bytes": 112875520,
+  "host_peak_kib": 2019776,
+  "parameters": 223620,
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "epoch_loss": [
+    0.8363175782802943,
+    0.5630885466832567,
+    0.5031416543784577,
+    0.4779493232081468,
+    0.46118785732903994,
+    0.4327629399108323,
+    0.41224334436796,
+    0.3972601357696427,
+    0.3730543117869545,
+    0.36417910330803005,
+    0.3436812352942857,
+    0.33257234972473737
+  ],
+  "source_hashes": {
+    "scripts/train_visual_title_transducer.py": "48508c879325f1bc3491d1b6cf299a3939dda2f9fd038730ac52a81d3f20afe3",
+    "ilm/visual_lm/title_transducer.py": "26eddc9f9f21ed9e577b3d008ace5e7c98033602de5624d1dd3235d7f66cc215",
+    "references/visual_title_transducer_protocol.md": "105d3757b0623f687a8b4212066d9ab4eec04f2f0c110a5b0ce3ce36929123cb",
+    "data/visual_title_composition_v1/report.json": "3e98700fdceb283235c80dfcb1101a5ef98bf944506a458555f958ee9385d470",
+    "artifacts/visual_title_transducer_v1/weights.pt": "19dd1887bb82acbc6d3ab4c4ddf4c3c6604c32f030f45c4ada324c57725c62b1",
+    "artifacts/visual_title_transducer_v1/outputs.zip": "95e5a1a58e022758a8b27d23656b63ecc377b0ec58e2c5726591ed062f797e65",
+    "artifacts/visual_title_transducer_v1/rows.json": "7bbb4e588f6f464caeea069eb3af360efd6f8f04f1a2e55577d4adf53a49f261"
+  }
+}
