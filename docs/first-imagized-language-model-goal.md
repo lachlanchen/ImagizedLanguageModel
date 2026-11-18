@@ -732,7 +732,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports independent writing in Figures 40, 41, 43 and 44 and source-grounded historical forms in Figure 42. The reading, review and cumulative redline editions contain 78, 129 and 132 pages. The [verified build](../publication/ilm-nature/evidence/passage_diversity_article_build.json) preserves earlier figure assets. The [local delivery receipt](../publication/ilm-nature/evidence/passage_diversity_local_sync.json) records 1,411 files, the preserved previous package and the two current Nutstore PDF aliases. Cloud propagation is unverified.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) includes independent writing and compositional copying in Figure 45 (reading edition, page 61), alongside historical source selection in Figure 42. The reading, review and cumulative redline editions contain 80, 131 and 133 pages. The [verified build](../publication/ilm-nature/evidence/ordered_neighborhood_article_build.json) preserves 377 earlier figure files and contains the original emitted examples and two editable prefix charts. The [local delivery receipt](../publication/ilm-nature/evidence/ordered_neighborhood_local_sync.json) verifies 1,450 package files, the previous 1,411-file package and both latest-PDF aliases. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
