@@ -61,7 +61,7 @@ def prepare_teacher(model, aux, features, inputs, targets):
     }
 
 
-def fit_arm(name, initial, features, inputs, targets, contexts, options, schedule, bits, start):
+def fit_arm(name, initial, features, inputs, targets, contexts, options, schedule, bits, start, *, destination=OUT):
     model = PicturedIdiom(initial['landmarks']).cuda().eval()
     model.load_state_dict(initial)
     for key, value in model.named_parameters():
@@ -77,7 +77,7 @@ def fit_arm(name, initial, features, inputs, targets, contexts, options, schedul
         require(torch.equal(original, copy) and torch.equal(full, cached),
                 'Cached context disagrees with original teacher path')
     model.causal.train()  # cuDNN stores the recurrent activations needed for backward.
-    path = OUT / name
+    path = destination / name
     path.mkdir()
     torch.cuda.synchronize()
     begin = time.monotonic()

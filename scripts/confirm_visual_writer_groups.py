@@ -21,12 +21,14 @@ from scripts.prepare_pictured_idioms import BIND, RAW, TAG, WIDTH, Rasterizer
 FRESH = OUT / 'fresh'
 
 
-def prepare(train, validation, initial_pixels):
+def prepare(train, validation, initial_pixels, *, buckets=range(32, 36), destination=FRESH, excluded=()):
     raster = Rasterizer()
     packed = {v.tobytes(): i for i, v in enumerate(initial_pixels)}
     require(len(packed) == len(initial_pixels), 'Nonunique physical tile IDs')
-    seen = {v.tobytes() for split in (train, validation) for v in split['context']}
+    seen = {v.tobytes() for split in (train, validation, *excluded) for v in split['context']}
     old_groups = set(train['group'])
+    for previous in excluded:
+        old_groups.update(previous['group'])
     rows, targets, groups, tags = [], [], [], []
     counts = Counter()
     source = RAW / 'train.parquet'
@@ -43,7 +45,7 @@ def prepare(train, validation, initial_pixels):
         for record in batch.to_pylist():
             group = record['idx']
             bucket = hashlib.sha256(str(group).encode()).digest()[0]
-            if not 32 <= bucket <= 35:
+            if bucket not in buckets:
                 continue
             require(group not in old_groups, 'Training group present')
             counts['source_groups'] += 1
@@ -80,10 +82,10 @@ def prepare(train, validation, initial_pixels):
                tag=np.array(tags, np.int32))
     pixels = np.frombuffer(b''.join(packed), dtype=np.uint8).reshape(-1, 128)
     require(np.array_equal(initial_pixels, pixels[:len(initial_pixels)]), 'Original tile IDs changed')
-    np.save(FRESH / 'pixels.npy', pixels)
-    np.savez(FRESH / 'contexts.npz', **dev)
-    write_new(FRESH / 'preparation.json', dict(counts=dict(counts), examples=len(rows), groups=len(set(groups)),
-              source_sha256=sha(source), contexts_sha256=sha(FRESH/'contexts.npz'), pixels_sha256=sha(FRESH/'pixels.npy')))
+    np.save(destination / 'pixels.npy', pixels)
+    np.savez(destination / 'contexts.npz', **dev)
+    write_new(destination / 'preparation.json', dict(counts=dict(counts), examples=len(rows), groups=len(set(groups)),
+              source_sha256=sha(source), contexts_sha256=sha(destination/'contexts.npz'), pixels_sha256=sha(destination/'pixels.npy')))
     return dev, pixels
 
 
