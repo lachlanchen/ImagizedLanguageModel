@@ -38,6 +38,8 @@ Mô hình 2,12 triệu tham số đọc ảnh văn bản ở hai bên chỗ tr�
 
 [Chạy mô hình](../models/pictured_idiom_zh/README.md) · [Hình 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
 
+Khi dùng dự đoán của mô hình đọc để hướng dẫn huấn luyện thêm, mô hình viết đúng 378 trong 22.907 trường hợp. Huấn luyện thêm cùng số lượt chỉ với đáp án gốc cho 292 trường hợp đúng. Trên 9.135 đoạn văn chưa từng sử dụng, hai kết quả lần lượt là 163 và 125. [Hình 41](../publication/ilm-nature/figures/Figure_41_writer_transfer.png)
+
 ## Chọn câu trả lời từ ảnh chữ Hán
 
 Sau 64 giây huấn luyện trên hai luồng CPU, mô hình đọc nhỏ đã chọn đúng toàn bộ ảnh đáp án cho 269 trong 1.788 câu hỏi về các đoạn văn tiếng Trung dành riêng để đánh giá. Khi thay câu hỏi bằng ảnh trắng, số câu đúng giảm còn 18. Mô hình viết tự do riêng biệt vẫn chưa tạo được lời giải thích đọc được về lịch sử của chữ 言. Khả năng viết tổng quát và mục tiêu tăng hiệu quả huấn luyện 1.000 lần vẫn cần được kiểm chứng.

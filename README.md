@@ -26,6 +26,8 @@ A 2.12-million-parameter model reads the text images on either side of a gap and
 
 [Run the model](models/pictured_idiom_zh/README.md) · [Figure 40](publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
 
+Reader guidance during training raised exact completions to 378 of 22,907, compared with 292 after equal extra training on the original answers. On 9,135 previously unused passages the two writers scored 163 and 125. [Figure 41](publication/ilm-nature/figures/Figure_41_writer_transfer.png)
+
 ## Reading a Chinese passage from glyphs
 
 In 64 seconds on two CPU threads, a small reader learned to select answer images from Chinese passages. It returned the exact answer to 269 of 1,788 questions on held-out passages. Blanking the question reduced that count to 18. The separate free-writing model produced no readable explanation of the history of 言. General-purpose writing and a 1,000-fold efficiency gain remain open.

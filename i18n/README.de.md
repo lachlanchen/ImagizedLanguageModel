@@ -36,6 +36,8 @@ Ein Modell mit 2,12 Millionen Parametern liest die Schriftbilder vor und nach ei
 
 [Modell ausführen](../models/pictured_idiom_zh/README.md) · [Abbildung 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
 
+Mit Vorhersagen des Lesemodells als zusätzliche Trainingsziele gab der Schreiber 378 von 22.907 Ausdrücken exakt wieder. Nach gleich vielen weiteren Updates allein mit den Originalantworten waren es 292. Bei 9.135 zuvor ungenutzten Passagen lagen die Werte bei 163 und 125. [Abbildung 41](../publication/ilm-nature/figures/Figure_41_writer_transfer.png)
+
 ## Antworten aus chinesischen Schriftbildern auswählen
 
 Ein kleines Lesemodell lernte in 64 Sekunden auf zwei CPU-Threads, Antworten aus chinesischen Textpassagen auszuwählen. Bei 269 von 1.788 Fragen zu zurückgehaltenen Passagen stimmte das vollständige Antwortbild pixelgenau mit der Referenz überein. Bei ausgeblendeter Frage sank die Zahl auf 18. Das separate Modell für freies Schreiben erzeugte keine lesbare Erklärung zur Geschichte des Zeichens 言. Allgemeine Schreibfähigkeit und eine tausendfache Trainingseffizienz sind weiterhin offene Ziele.

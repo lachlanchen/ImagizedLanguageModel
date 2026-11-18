@@ -38,6 +38,8 @@ Un modelo de 2,12 millones de parámetros lee las imágenes de texto a ambos lad
 
 [Ejecutar el modelo](../models/pictured_idiom_zh/README.md) · [Figura 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
 
+Con las predicciones del lector como guía durante el entrenamiento adicional, el modelo acertó en 378 de 22.907 casos. Con el mismo número de actualizaciones y solo las respuestas originales, acertó en 292. En otros 9.135 pasajes que no se habían utilizado, los resultados fueron 163 y 125 aciertos. [Figura 41](../publication/ilm-nature/figures/Figure_41_writer_transfer.png)
+
 ## Extraer respuestas de imágenes de caracteres chinos
 
 Un pequeño modelo aprendió a seleccionar respuestas en pasajes chinos en 64 segundos con dos hilos de CPU. En los pasajes reservados para la evaluación, devolvió la imagen exacta de la respuesta en 269 de 1.788 preguntas. Al borrar la pregunta, los aciertos bajaron a 18. El modelo independiente de escritura libre no produjo una explicación legible de la evolución del carácter 言. La escritura de propósito general y la mejora de eficiencia por un factor de 1.000 siguen pendientes de demostración.

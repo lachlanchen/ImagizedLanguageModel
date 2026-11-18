@@ -1,0 +1,26 @@
+\paragraph{Transferring recognition into independent writing.}
+Continuing the aligned writer for 24 epochs on its original pictured
+targets increased exact development completions from 134 to 292 of
+22,907. With the same passages and updates, sampling whole training
+expressions from the frozen reader increased this to 378 (1.65\%).
+The difference was 0.38 percentage points (source-group bootstrap
+95\% interval, 0.21--0.54). Of 851 passages that the reader recognized
+and the initial writer missed, the guided writer recovered 190. It
+lost 52 of the initial writer's 134 exact answers overall. Of 16,797
+passages missing every answer glyph, 268 were completed exactly. None of
+38 cases requiring an expression unseen in training was recovered.
+
+On 9,135 previously unused passages from 1,356 source groups, the initial,
+continued and guided writers recovered 60, 125 and 163 expressions.
+The guided-minus-continued difference was 0.42 percentage points (95\%
+interval, 0.19--0.65). The local count baseline recovered 406, and the
+supplied-expression reader recovered 398. The guided writer reproduced
+112 of those 398. It solved both members of two of 3,237 pairs sharing
+the same two adjacent glyphs but requiring different expressions.
+Keeping only the eight nearest cells reduced 163 exact completions to
+126 (66 lost, 29 gained). Removing those eight gave seven. Neither
+intervention preserved a complete both-correct pair. The intact-minus-near
+difference was 0.41 percentage points (95\% interval, 0.20--0.63).
+These comparisons identify input dependence under masking. The task
+supplies a gap and does not evaluate open-ended question answering
+(Fig.~\ref{fig:writer-transfer}).

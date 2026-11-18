@@ -1,0 +1,27 @@
+\paragraph{Sequence-level distillation of physical targets.}
+Following the sequence-level distillation principle of Kim and Rush
+(EMNLP 2016, doi:10.18653/v1/D16-1139), we drew a complete pictured
+expression before computing its successive physical losses. For training
+context $x$, the teacher assigned mass proportional to
+$\exp(u(x)^\top v(y)/0.02)$ to each of 3,805 pictured training expressions
+$y$, using normalized context and answer embeddings. At each epoch the
+target was drawn from this distribution with probability 0.75 and was
+the source expression otherwise. Both fits started from the same
+checkpoint, froze the reader and ink renderer, and used one target per
+passage per epoch. We verified identical cached and direct logits at
+the same batch shape and verified equality of all frozen tensors after
+training. With a batch size of 192 and AdamW learning rate 0.0006, the
+two fits took 43.0 and 36.6 seconds. Combined fitting, assessment and
+teacher preparation took 98.1 seconds on one RTX 4090~D with 335~MiB
+peak allocated device memory. Earlier reader and renderer training are
+additional costs. Sampling changed 1,212,654 of 1,714,536 targets.
+Neither the option images nor the scoring head is needed to write.
+
+For confirmation we took four unused source-group hash buckets (first
+byte 32--35), excluding examples with complete pictured windows shared
+with training, development or earlier confirmation examples. The
+collection draws on the official training source, in the same genre
+as development. The official test split was left unopened. Neighbour
+ablations set the indicated slots to the all-white padding image and
+preserved positions. Intervals resample complete source groups 2,000
+times. Exact scoring requires both physical equality and the correct stop.
