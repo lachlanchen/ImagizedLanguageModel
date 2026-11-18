@@ -31,6 +31,26 @@ def question(char, stages, language, split, alternate):
     return ('請寫'+char+'的'+'再'.join(words)) if alternate else ('取'+'、'.join(words)+'，字為'+char)
 
 
+def write_yan_example(tiles):
+    # Select an actual sampled 言 card by deterministic order, retaining its true split identity.
+    demo=OUT/'yan';demo.mkdir(exist_ok=True)
+    for card,rows in enumerate(load(OUT/'train_cards.json')):
+        yan=[r for r in rows if r['char']=='言']
+        if len(yan)!=2:
+            continue
+        with np.load(OUT/'train.npz') as f:
+            indices=np.flatnonzero((f['card']==card)&(f['length']==2)&(f['language']==1))
+            ordered=sorted((r['stage'] for r in yan),key=list(STAGES).index)
+            idx=next(i for i in indices if [rows[j]['char'] for j in f['row'][i]]==['言','言']
+                     and [rows[j]['stage'] for j in f['row'][i]]==ordered)
+            ids=f['context'][idx]
+            save_page(demo/'question.png',tiles[ids[:24]])
+            save_page(demo/'plate.png',tiles[ids[24:]])
+            save_page(demo/'source_answer.png',tiles[f['target'][idx]])
+            write_new(demo/'source.json',dict(split='train',card=card,index=int(idx),stages=ordered,rows=rows))
+        break
+
+
 def main():
     torch.set_num_threads(2)
     report = load(SPLITS/'report.json')
@@ -124,24 +144,9 @@ def main():
     require(len(bank)<65536,'Tile index overflow')
     tiles=np.frombuffer(b''.join(bank),np.uint8).reshape(-1,128)
     np.save(OUT/'pixels.npy',tiles)
-    # Select an actual sampled 言 card by deterministic order, retaining its true split identity.
-    demo=OUT/'yan';demo.mkdir()
-    for card,rows in enumerate(load(OUT/'train_cards.json')):
-        yan=[r for r in rows if r['char']=='言']
-        if len(yan)!=2 or {r['stage'] for r in yan}!={'bronze','seal'}:
-            continue
-        with np.load(OUT/'train.npz') as f:
-            indices=np.flatnonzero((f['card']==card)&(f['length']==2)&(f['language']==1))
-            idx=next(i for i in indices if [rows[j]['char'] for j in f['row'][i]]==['言','言']
-                     and [rows[j]['stage'] for j in f['row'][i]]==['bronze','seal'])
-            ids=f['context'][idx]
-            save_page(demo/'question.png',tiles[ids[:24]])
-            save_page(demo/'plate.png',tiles[ids[24:]])
-            save_page(demo/'source_answer.png',tiles[f['target'][idx]])
-            write_new(demo/'source.json',dict(split='train',card=card,index=int(idx),rows=rows))
-        break
+    write_yan_example(tiles)
     write_new(OUT/'report.json',dict(splits=details,overlap=overlaps,pixels_sha256=sha(OUT/'pixels.npy'),
-              cache_sha256=sha(CACHE),yan_example=(demo/'source.json').exists(),program_sha256=sha(Path(__file__))))
+              cache_sha256=sha(CACHE),yan_example=(OUT/'yan/source.json').exists(),program_sha256=sha(Path(__file__))))
     print(details,overlaps,flush=True)
 
 if __name__=='__main__':
