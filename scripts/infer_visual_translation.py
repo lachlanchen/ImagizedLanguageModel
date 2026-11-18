@@ -18,6 +18,25 @@ def generate(packed, method, weights, *, receipt=None):
         from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
 
         return VisualPhraseComposer.restore(weights).generate(packed)
+    if method == "revision":
+        from ilm.visual_lm.visual_phrase_composer import VisualPhraseComposer
+        from ilm.visual_lm.pictured_revision import PicturedReviser
+        import torch
+
+        torch.set_num_threads(2)
+        composer_weights = MODELS / "composer_55k.msgpack.gz"
+        draft = VisualPhraseComposer.restore(composer_weights).generate(packed)
+        output = PicturedReviser.restore(weights).revise(packed, draft)
+        if receipt is not None:
+            receipt.update(
+                draft_cells=len(draft),
+                revised=not np.array_equal(draft, output),
+                composer_sha256=hashlib.sha256(
+                    composer_weights.read_bytes()
+                ).hexdigest(),
+                ending="end_of_draft",
+            )
+        return output
     import torch
     from safetensors.torch import load_file
     from ilm.visual_lm.block_translation import BlockTranslator
@@ -60,7 +79,9 @@ def main():
         "--cells", type=int, help="Number of real cells in a padded input image"
     )
     parser.add_argument(
-        "--method", choices=("phrases", "neural", "feedback"), default="phrases"
+        "--method",
+        choices=("phrases", "neural", "feedback", "revision"),
+        default="phrases",
     )
     parser.add_argument("--weights", type=Path)
     parser.add_argument("--output", required=True, type=Path)
@@ -76,6 +97,7 @@ def main():
             "phrases": "composer.msgpack.gz",
             "neural": "block_aligned.safetensors",
             "feedback": "causal_feedback.safetensors",
+            "revision": "pictured_reviser.safetensors",
         }[args.method]
     )
     source = (

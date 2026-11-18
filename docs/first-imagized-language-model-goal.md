@@ -1,6 +1,6 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-18. **Active; usable visual language remains unproved.**
+Updated: 2026-11-19. **Active; usable visual language remains unproved.**
 
 ## Objective and deployment boundary
 
@@ -31,7 +31,7 @@ separate claims.
 
 The source-only causal visual writer can modernize a short military statement while preserving its participants. The matched clean-history and error-trained checkpoints both read 尝攻襄州，为孔勍所败。 and write 曾经进攻襄州，被孔勍打败。 Each earned only one acceptable gloss in the eighteen-passage reading. On 1,024 fresh passages, error training increased complete physical edit error from 98.85% to 194.69%. Preserve both experiments. Wider exact phrase search also failed to rescue any of twelve reviewed failures with acceptable references.
 
-The next comparison uses the pictured source and a pictured draft to learn a bounded revision, with complete natural sentences as the unit of success. Training drafts must come from writers that excluded their source chapters and identical source ink. Count changes to meaning, previously correct answers lost, autonomous stopping and whole-system cost. General language, unknown-script production and the matched-quality compute target remain open. [Full evidence](../references/pictured_clause_and_feedback_result.md) · [Revision experiment](../references/pictured_revision_protocol.md)
+The source-conditioned reviser now changes 189 of 1,024 fresh drafts. Its 49-edit physical gain costs two acceptable drafts among eighteen changed passages, with no newly accepted answer. On eighteen source-stratified passages it receives zero acceptances against ten for a local Qwen3 8B text baseline. A separate Qwen3-VL 8B checkpoint receives twelve with typed sources and eight with pictured sources, despite transcribing sixteen exactly. The next learning comparison has 511 usable offline teacher glosses from 512 training chapters matched to the original inputs and archive controls. Six teacher-only gains and six teacher-only losses in a 24-passage paired reading justify retaining both targets. These preparations do not measure student performance. Evaluate autonomous source-sensitive meaning, retention of identities and dates, learned stopping, and all preparation and training costs. The general visual language and matched-quality efficiency objectives remain open. [Revision experiment](../references/pictured_revision_result.md) · [Teacher-target protocol](../references/teacher_gloss_preparation.md)
 
 ## Independent generation of absent Han characters
 

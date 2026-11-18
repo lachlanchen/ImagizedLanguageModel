@@ -1,0 +1,71 @@
+{
+  "sentences": 1024,
+  "chapters": 623,
+  "target_cells": 23903,
+  "arms": {
+    "source": {
+      "edits": 14141,
+      "cer": 0.5915993808308581,
+      "exact": 13,
+      "changed_exact": 0,
+      "emitted": 15537
+    },
+    "draft": {
+      "edits": 13356,
+      "cer": 0.5587583148558758,
+      "exact": 12,
+      "changed_exact": 2,
+      "emitted": 16051
+    },
+    "reference": {
+      "edits": 0,
+      "cer": 0.0,
+      "exact": 1024,
+      "changed_exact": 1011,
+      "emitted": 23903
+    },
+    "revised": {
+      "edits": 13307,
+      "cer": 0.5567083629669916,
+      "exact": 11,
+      "changed_exact": 2,
+      "emitted": 16050
+    },
+    "exchanged": {
+      "edits": 13488,
+      "cer": 0.564280634230013,
+      "exact": 7,
+      "changed_exact": 2,
+      "emitted": 15743
+    }
+  },
+  "changed": 189,
+  "better": 82,
+  "worse": 40,
+  "tied_changed": 67,
+  "exact_lost": 2,
+  "exact_gained": 1,
+  "source_sensitive": 399,
+  "ci95": [
+    [
+      -0.0032587254869101525,
+      -0.0008845101324437329
+    ],
+    [
+      -0.00943099540525749,
+      -0.005799021182310518
+    ]
+  ],
+  "seconds": 8.875793911516666,
+  "files": {
+    "packets.json": "1242e72eb8b6b81bd9f244fa930803c584c7197f5d483ae6c15bffed521a1bb3",
+    "revised.npz": "13d0f847d40dd36520d731f8bda5c53d59abc14c4fb3b6593f0a986c5bd42420",
+    "exchanged.npz": "5e26d8b4365d33e5e3af72e1cdc8fc896897641919de8dcd6755a3d5650a0d6a",
+    "rows.json": "fa4170cf83331c428786cb388f7bfb80160f3ef4973094861ba31261d5b600d2",
+    "mapping.json": "8ac91c814d6cc88495111e94c15ed6c5b1b0f2748ee6066b06259b8065828301",
+    "source.npz": "b3f597142350b451783005b68c18eba2de89a3e55ff3956db7e8437b0401227c",
+    "reference.npz": "e913955770ab1e8542a99a1ddd1472764b134111095d7100773a9ffa31b55185",
+    "review.json": "66059750cd93dc26b2a7f86af949cf775b5b908a73b58397717e3d24c3a192de",
+    "draft.npz": "9b179e83c7209af8ff9b68d025d4d2c1de9936e98f471a25121db1a741750bdb"
+  }
+}

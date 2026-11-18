@@ -1,0 +1,412 @@
+{
+  "preparation": {
+    "rows": 512,
+    "chapters": 512,
+    "usable": 511,
+    "teacher": "qwen3-vl:8b-instruct-q8_0",
+    "manifest": "eff3eb825b322d4ffb85695e5a15cfe00b4d994d3c336f13dc867d8743b00245",
+    "model_bytes": 9830284736,
+    "original_targets": 512,
+    "teacher_cells": 12050,
+    "model_runtime_seconds": 215.80104908,
+    "last_run_seconds": 226.95254614111036,
+    "response_sha256": "634b7d442fcf80b4c9885d0df7682995a759d9d244c98278facfaacb3b06240b",
+    "image_sha256": "8777274ff0c09a700070e6655ea7718ddc42d1549eb1e97e7551a2569e1503b4",
+    "source": "artifacts/aligned_visual_translation_v1/train.jsonl",
+    "source_sha256": "d2db5fd441443a74067f427274962dfbf310c8bf0464c9ac66ff2ede60e9d5f3"
+  },
+  "quality": {
+    "accepted": {
+      "target": 16,
+      "text": 16
+    },
+    "reviewed": 24,
+    "gains": [
+      14285,
+      5082,
+      41149,
+      55716,
+      22204,
+      31016
+    ],
+    "regressions": [
+      48101,
+      25037,
+      22051,
+      9671,
+      48815,
+      31071
+    ],
+    "supplemental_candidate": true,
+    "review": "b752ce3fdaf45c11982b1704a55f75f26ed5cda190f73cacafeab9e6285bb903",
+    "grades": "77fa67773f27b40f264d3ef253b9c5e75d20fb2ce31cffac2bb216b5935c57a4"
+  },
+  "review": [
+    {
+      "source": "安以鸡酒礼之，毕，告安地处。",
+      "choices": [
+        "袁安立即用携带的鸡和酒招待他们。",
+        "用鸡和酒来款待他，结束后，告知了安地的位置。"
+      ]
+    },
+    {
+      "source": "又给十小吏，青衣数十人。",
+      "choices": [
+        "又赏赐了十个下级官吏，以及几十名穿青色衣服的仆从。",
+        "又送上十个小吏，几十个女仆。"
+      ]
+    },
+    {
+      "source": "万年、国镇力战不支，皆战殁。",
+      "choices": [
+        "万年、国镇拼死相战，体力不支，都阵亡了。",
+        "万年与国镇奋力作战，但终因力量不支而全部战死。"
+      ]
+    },
+    {
+      "source": "则王何不使辩士以此若言说秦？",
+      "choices": [
+        "那么大王为什么不派遣说客用这些话去游说秦王呢？",
+        "那么大王为什么不派能言善辩的人用这些话去游说秦国呢？"
+      ]
+    },
+    {
+      "source": "号召门徒，互相倡和。",
+      "choices": [
+        "召集门徒，彼此唱和呼应。",
+        "召引门徒，相互唱和。"
+      ]
+    },
+    {
+      "source": "初，褒与梁处士汝南周弘让相善。",
+      "choices": [
+        "起初，褒与梁朝的处士汝南人周弘让关系很好。",
+        "当初，王褒与梁国处士汝南人周弘让交好。"
+      ]
+    },
+    {
+      "source": "太子爱其多知，甚悦之。",
+      "choices": [
+        "太子喜爱他知识渊博，非常高兴。",
+        "太子看重他的知识广博，非常喜爱他。"
+      ]
+    },
+    {
+      "source": "天之所谓元亨利贞者，如立天之道，阴与阳之类也。",
+      "choices": [
+        "上天所称说的“元、亨、利、贞”，就如同确立天地运行的大道，如同阴阳二气相辅相成那样。",
+        "天的功能之所以说元亨利贞，就像立天的道理，是属阴与阳之类。"
+      ]
+    },
+    {
+      "source": "今陛下嗜欲不去，杀罚过理，既乖其道，岂获其祚哉！",
+      "choices": [
+        "今陛下嗜欲不除，杀罚过理，既乖其道，岂能得福？",
+        "如今陛下欲望不止，刑罚过度，既违背正道，又怎能获得福祚呢！"
+      ]
+    },
+    {
+      "source": "及还，终不交人事，郡守县令每亲至其门。",
+      "choices": [
+        "回到家后，始终也不与人来往，郡守县令常常亲自到他家。",
+        "等到他回来后，始终不与人来往，郡守县令每每亲自到他家门前拜访。"
+      ]
+    },
+    {
+      "source": "朝义以其将柳城李怀仙为范阳尹、燕京留守。",
+      "choices": [
+        "安禄山之子安庆绪任命他的部将柳城人李怀仙担任范阳尹、燕京留守。",
+        "史朝义任命他的部将柳城人李怀仙为范阳尹、燕京留守。"
+      ]
+    },
+    {
+      "source": "国之所以存者，礼义也。",
+      "choices": [
+        "国家能存在的原因，是有礼义。",
+        "国家得以存在的原因，在于礼义。"
+      ]
+    },
+    {
+      "source": "又性倾巧，敢为矫诞。",
+      "choices": [
+        "他又本性狡黠乖巧，敢于做出虚伪荒诞的事。",
+        "他的性情好倾轧伪诈，敢做假传命令欺骗人的事。"
+      ]
+    },
+    {
+      "source": "天下人情，想望风政。",
+      "choices": [
+        "天下民众，都想观望他的风化德政。",
+        "天下之人，皆盼望风闻政令。"
+      ]
+    },
+    {
+      "source": "自汉以来，刑法沿革不一。",
+      "choices": [
+        "自汉朝以来，刑法沿革不一。",
+        "自从汉朝以来，刑法的变革与沿袭并不统一。"
+      ]
+    },
+    {
+      "source": "岷王及镇守中官王润皆严惮之。",
+      "choices": [
+        "岷王与镇守的宦官王润都对他十分敬畏惧怕。",
+        "期间，岷王和镇守的宦官王润都很怕他。"
+      ]
+    },
+    {
+      "source": "公投袂万里，事惟拯溺，义声所覃，无思不韪。",
+      "choices": [
+        "您奋起征战万里，一心为了解救危难，仁德之声延及之处，没有不善美的。",
+        "您远赴万里之外，所行之事唯在拯救危难之人，您的正义之声所及之处，无人不认为正确。"
+      ]
+    },
+    {
+      "source": "子产之仁，绍世称贤。",
+      "choices": [
+        "子产仁德，世代相传，被称赞为贤能之人。",
+        "子产的仁政，后世称道贤明。"
+      ]
+    },
+    {
+      "source": "中令白敏中方居郎署，未有知者。",
+      "choices": [
+        "白敏中刚刚担任中令，人们都不熟悉他，没有知名度，只有宰相李德裕将他当作国家的栋梁之材。",
+        "中令禀告说，白敏中当时正担任郎官职务，但还没有人知道此事。"
+      ]
+    },
+    {
+      "source": "肃曰： 赵白驹与肃二人足矣。",
+      "choices": [
+        "刘肃说： 有赵白驹和我两人就足够了。",
+        "肃说：“赵白驹与我两人就足够了。”"
+      ]
+    },
+    {
+      "source": "其间三十里，颓岩倚木，厥势殆交。",
+      "choices": [
+        "峡长三十里。其间惊险的危岩，斜出的树木，看来几乎两边要互相交接似的。",
+        "那中间相距三十里，崩塌的岩石倚靠着树木，其形势几乎交错。"
+      ]
+    },
+    {
+      "source": "故曰： 国之将兴听于人，将亡听于神。",
+      "choices": [
+        "故此说 国家将兴听于人，将亡听于神 。",
+        "所以说：国家将要兴起时，会听取百姓的意见；将要衰亡时，则会去求问鬼神。"
+      ]
+    },
+    {
+      "source": "由是豪猾屏迹，良民获安。",
+      "choices": [
+        "从此豪猾之徒都逃跑绝迹，良民得以安宁。",
+        "从此奸邪之徒收敛行迹，善良百姓得以安居。"
+      ]
+    },
+    {
+      "source": "莽曰盐官。",
+      "choices": [
+        "莽说盐官。",
+        "王莽时叫盐官。"
+      ]
+    }
+  ],
+  "mapping": [
+    {
+      "row": 12351,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 20762,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 36241,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 36177,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 34235,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 28951,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 48101,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 14285,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 5082,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 43642,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 25037,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 41615,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 41149,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 22051,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 9671,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 5693,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 55716,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 13823,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    },
+    {
+      "row": 526,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 24667,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 48815,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 22204,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 31016,
+      "options": {
+        "target": 0,
+        "text": 1
+      }
+    },
+    {
+      "row": 31071,
+      "options": {
+        "target": 1,
+        "text": 0
+      }
+    }
+  ],
+  "frozen_grades": [
+    "1\tPP\t-,i\tThe first omits the disclosure after the meal. The second conflates the recipient An with a place name.",
+    "2\tFF\t-,-\tBoth describe the additional minor officials and household attendants.",
+    "3\tFF\t-,-\tBoth leaders fought until overcome and died in combat.",
+    "4\tFF\t-,-\tBoth retain the question asking why persuaders are not sent to Qin.",
+    "5\tFF\t-,-\tBoth express summoning followers and their mutual response.",
+    "6\tFF\t-,-\tBoth preserve the relationship, origin and identity of Zhou Hongrang.",
+    "7\tPF\t-,-\tThe first shifts being pleased with the man to general happiness.",
+    "8\tFP\t-,g\tThe first conveys the relation of the four terms to the heavenly way and its yin and yang. The second is difficult to parse.",
+    "9\tPF\t-,-\tThe second clearly modernizes the rhetorical question and grounds for loss of divine blessing.",
+    "10\tFF\t-,-\tBoth retain the returned man's isolation and visits by local officials.",
+    "11\tXF\ti,-\tThe first substitutes An Qingxu for Chaoyi. The second preserves the donor and appointments.",
+    "12\tFF\t-,-\tBoth make ritual and righteousness the condition for a nation's survival.",
+    "13\tFP\t-,-\tThe first renders crafty character and deceptive behaviour. The second specifies falsifying commands without clear support in the isolated passage.",
+    "14\tFP\t-,-\tThe first preserves hope for virtuous government. The second reduces the object of hope to hearing directives.",
+    "15\tFP\t-,-\tThe first is conventional modern historical prose. The second suggests a lack of uniformity rather than historical variation.",
+    "16\tFF\t-,-\tBoth retain the prince, eunuch and fear.",
+    "17\tPF\t-,-\tThe first loses the observers' agreement with the cause. The second retains it.",
+    "18\tFF\t-,-\tBoth convey Zichan's benevolence and his reputation with later generations.",
+    "19\tXX\tit,i\tThe first displaces Bai's later title into the past and adds unrelated material. The second invents an official reporting the matter.",
+    "20\tFF\t-,-\tBoth correctly interpret Su's reference to himself.",
+    "21\tFP\t-,-\tThe first describes the cliff and trees almost meeting. The second reads the two features as leaning on one another.",
+    "22\tPF\t-,-\tThe first leaves most of the maxim in classical phrasing. The second distinguishes consulting people and divinities.",
+    "23\tPF\t-,-\tChoice 0 makes concealment into flight. Choice 1 captures the restraint and its benefit to the people.",
+    "24\tXF\ti,-\tIn this place-name usage Wang Mang's period supplies a renamed locality, not a speaker uttering an office."
+  ],
+  "length_limited": 1,
+  "student_fit_performed": false
+}

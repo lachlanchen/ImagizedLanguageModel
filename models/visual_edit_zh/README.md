@@ -176,3 +176,13 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method feedback --text
 ```
 
 The answer image reads 曾经进攻襄州，被孔勍打败。 The same example can be supplied with `--image references/evidence/visual_feedback_20261118/accepted_copy.png`. On 1,024 new book passages this writer reached its 96-cell limit 350 times. Its receipt records whether it learned to stop. Its single acceptable answer in an eighteen-passage reading was shared with the clean-history control. The shipped weights have SHA-256 `23b86fcb1b644ff1c0c5e2f9df9305f4b37144c86bc8ca4f958d230d0895900b`. [Complete results](../../references/pictured_clause_and_feedback_result.md)
+
+## Revise a pictured first draft
+
+The optional two-stage editor reads a classical source, makes a draft with the 55,872-pair composer, then rereads the source to make bounded edits. To reproduce the gained exact gloss in Figure 60, use a new output directory.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method revision --text '脱因，蒙古人也。' --output /tmp/ilm-mongol-gloss
+```
+
+The result reads 脱因是蒙古人。 Use `--image references/evidence/pictured_revision_20261118/loss_source.png` to reproduce the damaged calendar date. The two files required for inference are `composer_55k.msgpack.gz` and `pictured_reviser.safetensors`. Together they occupy 6.39 MB. On 1,024 new passages the model made 49 fewer glyph edits than the draft. In the eighteen changed passages reviewed for meaning it lost two previously acceptable drafts. [Scores, limits and training commands](../../references/pictured_revision_result.md)

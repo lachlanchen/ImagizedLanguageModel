@@ -24,6 +24,10 @@ reported directly below.*
 
 A source-only model translated 冬，十月，吴少诚引兵还蔡州。 into 冬季，十月，吴少诚领兵返回蔡州。 by composing learned bitmap phrases. In 2,048 held-out passages it reproduced five changed complete glosses absent from training. It also corrupted a verb it had translated correctly elsewhere. A neural writer made more glyph errors than copying. Increasing phrase training from 32,768 to 55,872 pairs gave four accepted outputs in a further 24-passage reading, compared with three for the smaller model. [Try the image-to-image checkpoints](models/visual_edit_zh/README.md) · [Measured results](references/source_only_visual_translation.md)
 
+The source-conditioned editor in Figure 60 writes 脱因是蒙古人。 from 脱因，蒙古人也。 It makes 49 fewer glyph errors across 1,024 unseen passages, yet damages two previously faithful translations in an eighteen-change reading. A local pretrained vision model transcribes 16/18 pictures exactly and faithfully translates 8/18. [Figure 60 and original outputs](publication/ilm-nature/figures/Figure_60_pictured_revision.png) · [Complete experiment](references/pictured_revision_result.md)
+
+![The visual reviser writes a biographical statement and damages a date in a different passage.](publication/ilm-nature/figures/Figure_60_pictured_revision.png)
+
 The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 78–79](publication/ilm-nature/manuscript.pdf#page=78)
 
 ![Actual Chinese source and outputs from two matched visual writers](publication/ilm-nature/figures/Figure_59_visual_feedback.png)
