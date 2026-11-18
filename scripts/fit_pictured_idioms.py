@@ -117,7 +117,7 @@ def main():
     require(all(sha(DATA/(s+'.npz'))==r['sha256'] for s,r in report['splits'].items()),'Prepared corpus changed')
     with np.load(DATA/'train.npz',allow_pickle=False) as archive:train={k:archive[k] for k in archive.files}
     pixels=np.load(DATA/'pixels.npy',allow_pickle=False)
-    train_types=np.unique(train['target'])
+    train_types=np.unique(train['target']).astype(np.int64)
     masks=np.unpackbits(pixels,axis=1)
     coords=choose_landmarks(masks[train_types])
     model=PicturedIdiom(coords).cuda()
