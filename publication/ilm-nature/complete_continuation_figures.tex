@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_entry_question_article.py.
+% Literal captions copied from their source inputs by build_independent_entry_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -578,4 +578,10 @@ control was evaluated on all 22,907 windows.}
 \includegraphics[width=.84\textwidth]{figures/Figure_71_question_order.png}
 \caption{\textbf{Reading order controls which facts the writer emits.} \textbf{a}, Two requests from the first held-out group and their emitted sentences. The same images of the headword, fields and historical stages appear in both questions. The third row shows the first exact response lost when the status expressions moved before their fields. All six strips are original question or response pixels. \textbf{b}, Each of 1,136 groups has four distinct target images. The sorted control receives a canonical ordering of glyphs through the additional encoder. The source reader and its original visual field matches are identical across arms. The dash denotes an unmeasured control. \textbf{c}, Both models learned on the same 35,680 role-sensitive requests and 8,920 simple requests per epoch.}
 \label{fig:question-order}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_72_independent_questions.png}
+\caption{\textbf{Wording diversity improves answer selection on independently authored prompts.} \textbf{a}, The first clear gain and the first clear error of the shared-update writer on questions from local Qwen3-8B. The images show the generated answers, including the misplaced pronunciation and oracle form of the neighbouring entry. \textbf{b}, Strict complete-image and stop counts. In the corrections row, the 4,544 scheduled requests reduce to 1,136 distinct question--card--target combinations. \textbf{c}, Mean training loss over nonpadding actions for the three 51,777-parameter fits. The supplementary replay control repeats the original questions at the same target positions for the same number of updates.}
+\label{fig:independent-questions}
 \end{figure*}

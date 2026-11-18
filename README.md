@@ -5,29 +5,33 @@
 
 # Imagized Language Model (ILM)
 
+A compact visual reader answered 66 of 96 Chinese dictionary questions written separately by a local model. Repeating the original training questions for the same compute and answer exposures gave 18. A request about 明 elicited *bright* and its bronze form. A request about 编 beginning with 老师您好 elicited the wrong headword. Figure 72 shows both original outputs. [Results and limits](references/independent_entry_result.md) · [Run the reader](models/independent_entry_reader/README.md)
+
+[![Pictured questions and actual outputs for 明 and 编, with results from matched replay and new wording](publication/ilm-nature/figures/Figure_72_independent_questions.png)](publication/ilm-nature/manuscript.pdf#page=96)
+
 A 51,776-parameter reader answered Chinese questions whose glyph inventories were identical and whose meanings changed with word order. It wrote 4,542/4,544 exact answer images on held-out character families, compared with 1,136 for a matched reader given sorted glyphs. Moving familiar expressions before the fields they modify reduced the ordered model to 356/4,544. Figure 71 shows the original answer pixels for both successful requests and a failure on the same card. [Read the study](references/entry_question_reader_result.md) · [Run the pictured questions](models/entry_question_reader/README.md)
 
-[![Three pictured requests about 耳 and the actual answers, with complete scores and training loss](publication/ilm-nature/figures/Figure_71_question_order.png)](publication/ilm-nature/manuscript.pdf#page=94)
+[![Three pictured requests about 耳 and the actual answers, with complete scores and training loss](publication/ilm-nature/figures/Figure_71_question_order.png)](publication/ilm-nature/manuscript.pdf#page=95)
 
 A 28,032-parameter visual writer reads an illustrated dictionary card and writes a sentence with a requested fact and an attested historical form. On 284 held-out character families, it produced **1,134 exact complete answer images in 1,136 requests**. Replacing the printed field names with synonyms reduced this count to 225. The examples for 耳 and 言 run locally on CPU. [Run the writer](models/pictured_entry_writer/README.md) · [Evidence and controls](references/pictured_entry_writer_result.md)
 
-[![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=93)
+[![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=94)
 
 A compact visual writer learned all 39 supervised Chinese phrase contrasts. Given unfamiliar sources and two alternatives, it chose both correct phrases on only one of 15 pairs. Asked to translate 18 new book passages independently, it produced zero faithful complete answers. The local text teacher scored 11/18. Figure 69 shows the actual generated pixels, including a credited teacher–pupil clause and a failed father–son role reversal. [Results](references/context_phrase_trial_result.md) · [Run from a PNG](models/visual_edit_zh/README.md#pictured-phrase-contrasts)
 
-[![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=92)
+[![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=93)
 
 On one RTX 4090 D, a 2.33-million-parameter visual writer learned to modernise the pictured biography of Lü Yi. Expanding supervision from 108 to 841 reviewed passages reduced glyph edits on 192 new book passages. Both writers scored 0/18 for faithful complete translations on the masked reading, compared with 12/18 for Qwen3-8B reading text. [Experiment and saved answers](references/visual_translation_coverage_result.md) · [Run image-file inference](models/visual_edit_zh/README.md#supervision-across-chapters)
 
-[![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=91)
+[![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=92)
 
 The experimental visual writer reads 三月辛亥，振陕西灾。 and writes 三月辛亥日，赈济陕西的灾荒。 Changing the pictured month to 五 changes the generated date to 五月. It produced the entire revised answer in 13 of 18 familiar sentence frames. A one-cell substitution rule solved all 18. On sixteen passages from unfamiliar chapters, the writer produced zero faithful translations, compared with ten from local Qwen3-8B reading text. [Results and controls](references/screened_visual_targets_result.md) · [Run the visual writer](models/visual_edit_zh/README.md#reviewed-translations)
 
-[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=90)
+[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=91)
 
 A visual writer trained on 55,872 pictured Chinese passage pairs conveyed the meaning of two of 24 new passages. The earlier phrase composer conveyed three. Figure 66 shows complete input and output images, including an evening-meal passage the neural writer mistranslates. [Read the experiment](references/anchor_gap_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
-[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=89)
+[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=90)
 
 **Can one pictured verb carry two meanings?** Given 去寿春三十里, the experimental writer outputs an image reading 距离寿春三十里。 For 我不能舍仲宝去也, the same 去 becomes 离开. The learned phrase writer conveyed the intended sense in 17 of 20 tested clauses, but only six complete translations were faithful. [See successes and errors in Figure 64](publication/ilm-nature/figures/Figure_64_predicate_context.png) · [Measured results](references/predicate_context_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
@@ -65,7 +69,7 @@ The source-conditioned editor in Figure 60 writes 脱因是蒙古人。 from 脱
 
 ![The visual reviser writes a biographical statement and damages a date in a different passage.](publication/ilm-nature/figures/Figure_60_pictured_revision.png)
 
-The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 81–82](publication/ilm-nature/manuscript.pdf#page=81)
+The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 82–83](publication/ilm-nature/manuscript.pdf#page=82)
 
 ![Actual Chinese source and outputs from two matched visual writers](publication/ilm-nature/figures/Figure_59_visual_feedback.png)
 
