@@ -1,0 +1,81 @@
+{
+  "rows": 2048,
+  "groups": 114,
+  "overlap_with_first": 105,
+  "reference_cells": 61342,
+  "training": 32768,
+  "phrases": 86180,
+  "training_images": 6619,
+  "tuning": 512,
+  "calibration": {
+    "0.0": 8401,
+    "0.25": 8375,
+    "0.75": 8528
+  },
+  "weight": 0.25,
+  "seconds": 28.850062247365713,
+  "bytes": 2315219,
+  "sha256": "ca50824767d801bef7011f27d87fa31ed6b80083f36dc51a5070da42a469b1be",
+  "arms": {
+    "copy": {
+      "edits": 34732,
+      "cer": 0.5662026018062665,
+      "exact": 59,
+      "changed_exact": 0,
+      "novel_changed_exact": 0,
+      "delta_ci_vs_copy": [
+        0.0,
+        0.0
+      ],
+      "delta_ci_vs_local": [
+        0.0062199429941176936,
+        0.009388467226683872
+      ]
+    },
+    "model": {
+      "edits": 32909,
+      "cer": 0.5364839750904763,
+      "exact": 55,
+      "changed_exact": 5,
+      "novel_changed_exact": 5,
+      "delta_ci_vs_copy": [
+        -0.033920276635128824,
+        -0.02532963318528963
+      ],
+      "delta_ci_vs_local": [
+        -0.025355340953281257,
+        -0.018246899394264895
+      ]
+    },
+    "gloss": {
+      "edits": 0,
+      "cer": 0.0,
+      "exact": 2048,
+      "changed_exact": 1989,
+      "novel_changed_exact": 1988,
+      "delta_ci_vs_copy": [
+        -0.5895145071304972,
+        -0.543016573166858
+      ],
+      "delta_ci_vs_local": [
+        -0.5814028099131913,
+        -0.5355067781714707
+      ]
+    },
+    "local": {
+      "edits": 34256,
+      "cer": 0.5584428287307228,
+      "exact": 48,
+      "changed_exact": 0,
+      "novel_changed_exact": 0,
+      "delta_ci_vs_copy": [
+        -0.009388467226683872,
+        -0.006219942994117694
+      ],
+      "delta_ci_vs_local": [
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

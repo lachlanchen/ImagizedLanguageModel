@@ -1,0 +1,44 @@
+{
+  "rows": 1097,
+  "groups": 105,
+  "training": 55872,
+  "small_training": 32768,
+  "phrases": 148685,
+  "images": 7280,
+  "weight": 0.25,
+  "denominator": 33879,
+  "seconds": 21.503933677449822,
+  "bytes": 3475669,
+  "checkpoint_sha256": "d950ebe60a62876a6cf59ed72c4e01e0ad1ebf7be1d07d4e578db8b95509a319",
+  "arms": {
+    "small": {
+      "edits": 17765,
+      "cer": 0.5243661265090469,
+      "exact": 27,
+      "changed_exact": 1,
+      "novel_changed_exact": 1
+    },
+    "large": {
+      "edits": 17741,
+      "cer": 0.5236577230732903,
+      "exact": 30,
+      "changed_exact": 2,
+      "novel_changed_exact": 2
+    },
+    "copy": {
+      "edits": 18831,
+      "cer": 0.5558310457805721,
+      "exact": 32,
+      "changed_exact": 0,
+      "novel_changed_exact": 0
+    }
+  },
+  "large_minus_small_ci": [
+    -0.003170589134435609,
+    0.001938576398684951
+  ],
+  "large_minus_copy_ci": [
+    -0.037719150572605005,
+    -0.026722566662014877
+  ]
+}

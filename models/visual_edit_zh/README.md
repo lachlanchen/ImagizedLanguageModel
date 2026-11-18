@@ -1,5 +1,28 @@
 # Classical Chinese visual editor
 
+## Source-only translation
+
+The compact phrase composer reads a classical Chinese glyph strip and returns an answer image. It runs on CPU. On held-out books it can modernize short expressions, but it frequently mistranslates prose. The 32,768-pair checkpoint generated 六月，郑悼公去世。 from 六月，郑悼公卒。 The second checkpoint adds 23,104 training pairs. A neural writer is also available for the paired experiment. [Evaluation and limitations](../../references/source_only_visual_translation.md)
+
+From the repository root, choose a new output directory.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --text '六月，郑悼公卒。' --output /tmp/ilm-gloss
+PYTHONPATH=. python scripts/infer_visual_translation.py --image references/evidence/block_translation_20261118/gain_source.png --output /tmp/ilm-from-ink
+PYTHONPATH=. python scripts/infer_visual_translation.py --weights models/visual_edit_zh/composer_55k.msgpack.gz --text '冬，公孙归父如齐。' --output /tmp/ilm-large-gloss
+```
+
+Each directory contains `answer.png`, the unpadded bit-packed stream in `answer.bin`, and a receipt with cell counts and hashes. Input images contain 32 × 32 black-on-white cells in row-major order. Use `--cells N` to exclude trailing grid padding. Typed input uses the project's Noto CJK renderer. Image-mode composition requires Python 3.10+, NumPy, Pillow and msgpack. The neural comparison additionally requires Torch and safetensors and runs with `--method neural`. Both methods produce the answer without a text teacher.
+
+Train a new composer on UTF-8 JSONL using one aligned pair per line. Either side can contain text or a path to a pictured grid relative to the JSONL file, for example `{"source":"六月，郑悼公卒。","target":"六月，郑悼公去世。"}` or `{"source_image":"old.png","target_image":"modern.png"}`. Optional `source_cells` and `target_cells` exclude grid padding. Training also uses RapidFuzz. Typed rendering uses fontTools and the project's Noto CJK font.
+
+```bash
+PYTHONPATH=. python scripts/fit_visual_translator.py paired.jsonl --output /tmp/ilm-fitted.msgpack.gz
+PYTHONPATH=. python scripts/infer_visual_translation.py --weights /tmp/ilm-fitted.msgpack.gz --image pictured-source.png --output /tmp/ilm-fitted-answer
+```
+
+## Earlier visual editor
+
 This research checkpoint accepts a pictured classical sentence and a pictured request to quote or translate. Each output cell is a 32 × 32 bitmap. Its 2,026,237 parameters include the source and question encoders, recurrent editor, glyph renderer and a predictor for the number of insertions allowed at each source position. The output generator runs independently on CPU and reads no corpus, tokenizer, glyph table or font.
 
 From the repository root, with PyTorch, NumPy, Pillow and safetensors installed, reproduce one of the exact held-out edits using only a picture of the source and a typed instruction. Typed input uses Noto Sans CJK and the repository's rasterizer.
