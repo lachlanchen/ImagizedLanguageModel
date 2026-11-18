@@ -575,6 +575,15 @@ pairs. The paired construction interval for the 1.9-point difference spans
 −9.0 to +12.7 points. The data adapter is verified; changing register alone
 has not passed the criterion for a follow-on neural fit.
 
+The [actual 言 question](../references/native_yan_inference_result.md) produced
+identical 128-cell greedy outputs from typed and pictured prompts. Greedy and
+sampled output were both unreadable. At every position in both answers the
+writing code changed more after drawing and re-reading than the largest change
+among 9,581 distinct source images. In the sampled answer, mean and scale
+explain only 0.39% of squared discrepancy. Preserve the original pixels and
+directions. A scalar normalization remedy misses its prespecified criterion.
+This one question is separate from the complete autonomous evaluation.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
