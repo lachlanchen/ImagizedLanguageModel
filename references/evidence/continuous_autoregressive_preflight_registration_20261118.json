@@ -1,0 +1,132 @@
+{
+  "schema": "ilm-continuous-autoregressive-preflight-v1",
+  "input_sha256": {
+    "artifacts/continuous_glyph_codec_v34_20260814/checkpoint_latest.pt": "a138c9cb3b0502e43d1227f689c020893d56b468742c32e1840e44d299662f33",
+    "data/visual_sequence_corpus_v1/report.json": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+    "data/visual_sequence_corpus_v1/train_0003_pixels.npz": "1517b50f7d631ea2738da815e8e325a290bdc14761e08d71866b999c9db0beed",
+    "data/visual_sequence_corpus_v1/train_0003_sources.json": "dead78831c5bf7eb98b76682c329e3f121a2c684aac299bd292d33dbf3c479a8",
+    "data/visual_sequence_corpus_v1/train_0037_pixels.npz": "d9cfabdfc9cca7d86dcabf711c1414d5a90e08d6adab541421423fd89bd7e622",
+    "data/visual_sequence_corpus_v1/train_0037_sources.json": "b6183aac22c1605315848636488a01c664e546cb1551c2fe90880232b4be8bef",
+    "data/visual_sequence_corpus_v1/train_0073_pixels.npz": "ef27bd7e66ce3fb6c0ce1bf8fca775f6d0bcc92a08e235cc575c183d9600feaf",
+    "data/visual_sequence_corpus_v1/train_0073_sources.json": "bc478dc1298a86ddfde8cac5d92f68b65fa5623e41024aa7de274853b224aea6",
+    "data/visual_sequence_corpus_v1/verification.json": "a3818ecf68b20bbfb5fa7dab6442bea8168481ffb15545043a4b74717f841eb9",
+    "ilm/image_edit/baseline.py": "58cfb05962b80c05b742135963bd84300437fbfa573fe1550fa5f58bd9997b7f",
+    "ilm/visual_lm/codec_block_writer.py": "447c93b32b7527533b61a97f7030d92011536200655e1408dd5fe9292938c77b",
+    "ilm/visual_lm/conditional_pixel_density.py": "2153dde219054710c07fe41819f9fb9eac493029c62e048631a4cfb95d664c97",
+    "ilm/visual_lm/continuous_autoregressive_language.py": "7d578dff684a4f9e4eb9706b63331beeba1d2ab2809ced3f36da23fd505b6f49",
+    "ilm/visual_lm/continuous_glyph_codec.py": "ab679b02bd52a33ec5d329dd8c5fa5844172957c4917daeeb1f7b17da3b0fce2",
+    "ilm/visual_lm/full_rank_visual_span.py": "9151b935f51e9bc5bc5be4bf96bf4bc263d90b0d34aed58dc3ca7f9202eed7b3",
+    "ilm/visual_lm/glyph_reader_monitor.py": "cc2d69972291dd67264e67179721f37bb9a2bc345d73923ffab525032915bd1c",
+    "ilm/visual_lm/saccade_lm.py": "776f25996851d49b8168f7c2894e3272e68d46282130defe9ea4aabfde5c4400",
+    "ilm/visual_lm/visual_cell_stream.py": "0f91f7a85851b9d258097748c28448f3caaa1ebb684ffa8795813fd9b0a27861",
+    "ilm/visual_lm/visual_context_deployment_resources.py": "a51f6aa0ce96e5b5ac82a8fff0b3b1f284070c94efc0cd72a1195cb3807d7d95",
+    "ilm/visual_lm/visual_sequence_corpus.py": "90f5c7377b084cf18df0c440b87a5b22b37bbc932fa5f86ca878c25fec12d07a",
+    "references/continuous_autoregressive_language_direction_20261118.md": "c403684fc5e5cbf69d89ec7d31a3a6d8f0f4abf65e6c010502ad98a0ada6e5fc",
+    "references/continuous_glyph_codec_v34_result.md": "fcb695fb6179415e3fb6efdeec72c65e14f78b3364b37761b0f5fe11771edd51",
+    "references/evidence/codec_output_v67_result.json": "361d877eec1cb817105e82c81f4bf508272595b6a106adbe39293759f9cfb32b",
+    "references/evidence/residual_plan_motor_comparison_result_20261118.json": "ff8c6fc147205e5bb5dd235c1be7cafc2d578f9e42c028d4fefc20b8f85d0e36",
+    "references/evidence/trainable_visual_context_preflight_registration_20261116.json": "6c0734397aa44094198635993b338b39ed2312605d7c143d9f48675b50e45f30",
+    "scripts/diagnose_visual_context_gradients.py": "6d17ae80c6905f95b5ecb408a0e81dab1d44cbf62ac338ce4047090458297f34",
+    "scripts/preflight_continuous_autoregressive_language.py": "eb34b6199e3e7322d7b29d23108a4699fbdc16e15276d05e97eb581ff750320b",
+    "scripts/score_pixel_language_first_blocks.py": "94ce2371351612930c0583e24fd4bba5d7f0275777de847ede9bfe1688de023c",
+    "scripts/train_semantic_glyph_bridge.py": "8aa8b923e276677a0ef0ad06456d47fba15843a47b8d38c61156f411768b0f30",
+    "scripts/train_semantic_glyph_language.py": "a1a35815deea23eade17f1ac7bed248e42deb53c5779a593e954834b3937d201",
+    "tests/test_continuous_autoregressive_language.py": "196cac8fe8d176f1c750b2d95459c11962afaefdbc805956d3310b42b3fd2b91"
+  },
+  "packages": {
+    "torch": "2.11.0",
+    "numpy": "2.2.6"
+  },
+  "cases": [
+    {
+      "role": "complete_513_book",
+      "corpus_index": 458,
+      "shard": 3,
+      "local": 74,
+      "kind": "book",
+      "source_id": "wikisource:b811ca6466254ff3f462",
+      "group": "大唐西域記",
+      "glyphs": 513,
+      "prompt_glyphs": 0,
+      "native_units": 509
+    },
+    {
+      "role": "complete_qa",
+      "corpus_index": 4762,
+      "shard": 37,
+      "local": 26,
+      "kind": "qa",
+      "source_id": "TRAIN_186_QUERY_0",
+      "group": "2cda0b6fbb52e0f1930813def7bd12e563c6017e6509b3b18fad97bd3ca51b51",
+      "glyphs": 846,
+      "prompt_glyphs": 841,
+      "native_units": 740
+    },
+    {
+      "role": "longest_native_record",
+      "corpus_index": 9420,
+      "shard": 73,
+      "local": 76,
+      "kind": "qa",
+      "source_id": "TRAIN_2006_QUERY_2",
+      "group": "cd16329c4cca5a58fae62e9798e3a69a308657c48b6f5beb6e4653c3d0b032fa",
+      "glyphs": 1042,
+      "prompt_glyphs": 1007,
+      "native_units": 961
+    }
+  ],
+  "data_report_sha256": "8e09bb92b6bb67a52628da201363d746314e9f931fecbf4ebf50710edf8ea6a7",
+  "seed": 202611198,
+  "components": [
+    1,
+    8
+  ],
+  "model_dim": 384,
+  "layers": 8,
+  "heads": 6,
+  "maximum_cells": 2048,
+  "group_width": 16,
+  "visual_groups": 48,
+  "minimum_scale": 0.02,
+  "precision": "FP32 with global strict deterministic algorithms; TF32 disabled",
+  "optimizer": {
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0
+  },
+  "resources": {
+    "maximum_seconds": 900,
+    "maximum_pressure_wait_seconds": 180,
+    "minimum_entry_host_gib": 48,
+    "minimum_runtime_host_gib": 24,
+    "minimum_free_gpu_gib": 20,
+    "maximum_allocated_gpu_gib": 22,
+    "maximum_process_rss_gib": 8,
+    "minimum_free_disk_gib": 48,
+    "cpu_threads": 2
+  },
+  "actual_trial_updates": 6,
+  "retained_updates": 0,
+  "complete_target_positions_per_arm": 552,
+  "support": [
+    "finite loss and all selected gradients nonzero",
+    "same complete-record total objective decreases after one actual step",
+    "all learned tensors reset exactly",
+    "frozen codec unchanged",
+    "identical common initial tensors",
+    "all actual decoded initial/updated conditional images preserved",
+    "resource limits pass"
+  ],
+  "action_on_pass": "Separately register complete-corpus training and autonomous language evaluation; no full fit admitted here.",
+  "action_on_failure": "Preserve failure without automatic retry or threshold change.",
+  "inherited_language_parameters": 0,
+  "teacher_states_or_embeddings_used": false,
+  "supplied_history_outputs_are_not_autonomous_language": true,
+  "latent_density_is_not_pixel_likelihood": true,
+  "language_quality_measured": false,
+  "goal_achieved": false
+}

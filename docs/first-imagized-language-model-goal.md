@@ -500,6 +500,27 @@ motor, every prior attempt and original criteria. No unchanged extension,
 intermediate selection or conditional-language admission follows. Autonomous
 language remains unmeasured for this failed physical actor.
 
+The next [native continuous-density candidate](../references/continuous_autoregressive_language_direction_20261118.md)
+returns to causal language selection using the already qualified V34 motor,
+without installing the failed binary or correction actors. A newly initialized
+causal image reader predicts 48 groups of continuous writing coordinates, each
+with a normalized shared-component Gaussian mixture. Compare one versus eight
+components, with identical common reader/local initial weights. Actual generated
+coordinates feed the neural decoder; the next history contains the emitted
+pixels re-encoded, never the unrendered coordinate proposal. A learned stop head
+receives no target length. No inherited language body, teacher state, lexical
+head or glyph bank is used. Code density is not exact pixel likelihood.
+
+Three CPU tests cover distribution scoring, both causal levels, cached attention,
+actual updates/reset, frozen codec, reproducible sampling and emitted-image
+feedback. The next separately registered GPU preflight uses all three original
+complete training cases and resets six actual trial updates. Supplied-history
+initial/updated images and lower same-record loss cannot qualify autonomous
+language. A pass permits only a separately bound complete-corpus comparison.
+Keep the original complete-answer, book, retention, erased-input, stopping,
+untouched-confirmation and whole-model cost criteria. The requested 1,000-fold
+efficiency remains an unproved target, not a property inferred from this design.
+
 Historical diagnostic registrations, all failed executions and frozen readings
 remain protected. No development answer, reserved DRCD record, rejected reward
 judge or policy fit may enter the new training objective. Source-conditioned
