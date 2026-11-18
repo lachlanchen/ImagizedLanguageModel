@@ -1,0 +1,62 @@
+{
+  "parent_sha": "71053d75fd2c323c305b7a36c7f49d2fd575d3c99373ac3c5d184b43e70575da",
+  "training_sha": "e363898b64668b2c713ce507fd8e9e67b9a4a4840aa65595ccdb0c352aeabb15",
+  "files": {
+    "draft_manifest.json": "c045fb254b4599b21942abfe774cf4d6770629c1aa64572e7d481642b9ac2f11",
+    "sources.json": "b01956ffa88f82fd36105994e208e431043fcb056a1994784f7d73a45eb3a3b0",
+    "fresh_assessment.json": "b562ce69cc63b2dc1f3f489aa59d516fd434e645087a4e5f97ff6feea68145d7",
+    "holdout.json": "509a93c21b49f5555d52497aff1b97b43dcc4da091c733521a38d7d1041226bd",
+    "isolation.json": "74a2ecc23c136a4e7f85f4549434a1513e49e5febae4e5cc192faaf0b29be5da",
+    "sample_editorial_review.json": "fb99028961e77c5cbba48825d0076431fc0bb1631de22e4d8fc5a36d6d75cc9b",
+    "teacher_test_answers.json": "53d660d08101cddc7d55c3772271d229b432f516083b2d48d6b7f799950b099c",
+    "editorial/0000_0064.json": "e89f3327b1255ddf2492b0a5e83937802ff81a110519009bbe7b1533105f2c16",
+    "editorial/0064_0128.json": "3fd942b6dcd84655ca694efdcaaecadc39ff44b441b17c0d93531d0ada0f210d",
+    "editorial/0128_0192.json": "20c6f677cdb6a2c50f5796cfc0d72409a39b768f541da017654a1dd2042556ce",
+    "editorial/0192_0256.json": "d88c16634f9e4ae874e07affb91020ee25c1d4aec4cdb93ddf4a5a34343ec3a4",
+    "editorial/0256_0320.json": "7ae2f3174c0cabe097fabeda6939d0359994c8a824f81d1ec82fe5dcf1f65d69",
+    "editorial/0320_0384.json": "9c9d1de6b8e663491637eb5635636d12c337b5250a87731c7ee4ab21782c4628",
+    "editorial/0384_0448.json": "3f6041fd8d330b3a550aef64f81c182ee5951bbd535fa71a301a019993d34893",
+    "editorial/0448_0512.json": "950a17e7b1ef228ea4b0e95e2479052236cd01cd58d8b8b2266ca6c02657d774",
+    "editorial/0512_0576.json": "6801786aa62f14b47f641de2c39db1d9a39a4471b646b106f1f057475cbb6ae6",
+    "editorial/0576_0640.json": "ca9dd66475dd5862d0a2e72aaa82e812e59ee76bc4b5ebe9720e7dedd3749a0b",
+    "editorial/0640_0704.json": "d697a72b88e052bf72992836f6dc21cdfd20bdb35a9d7f71932e4746b4550387",
+    "editorial/0704_0768.json": "91aa9856f9a1c637a9cb202d84f9500fa5456b1968379edcdfd963aad0a93ab3",
+    "editorial/0768_0832.json": "4a76eb8c1bfe62c4534421eeca1a8efa07b3de49466e4cbd14ada40c8c1f8fb9",
+    "editorial/0832_0896.json": "2e51aaf8f2da596ed8ec2506927b2f2f2ff40d01d7896b56397ec6c9cd2efe1d",
+    "editorial/0896_0960.json": "0106a5b58bd3ca5b34c4915da5ec6a0dba320224b7ca7583be236329f08b558c",
+    "editorial/0960_1024.json": "b2f9f081c3252a472ff4288e64b8bf6c06f5fc776198a8450c06f7e902b67df7"
+  },
+  "seed": 620611,
+  "decisions": {
+    "retain": 480,
+    "exclude": 183,
+    "revise": 361
+  },
+  "unchanged_book_targets": 5,
+  "corrected_holdout_collisions": 0,
+  "padding_sha": "06324d5c8640b8498e04a4227c73d9930dc244b1f65331531fec460686278747",
+  "steps": 1164,
+  "shared_book_replay_sha": "ef0098e2022ab161e587183d00d5902be48ba3ef89d418fd676395b10c90c53c",
+  "per_band_exposures": 4656,
+  "adamw_lr": 0.0002,
+  "clip": 1.0,
+  "per_arm_limits": {
+    "gpu_gib": 10,
+    "available_host_gib_min": 24,
+    "seconds": 1800
+  },
+  "arms": {
+    "narrow": {
+      "batches_sha256": "927ea5c2aded880e7603ff9a535549f3909f8de67b5132e94f0a1aee4c2c5534",
+      "distinct_reviewed": 108,
+      "source_cells": 1608695,
+      "target_cells": 2377153
+    },
+    "broad": {
+      "batches_sha256": "8c8f9870e49bc3e617dcb83236de4584cab42a0937a56e514230516636cdb592",
+      "distinct_reviewed": 841,
+      "source_cells": 1604339,
+      "target_cells": 2366221
+    }
+  }
+}

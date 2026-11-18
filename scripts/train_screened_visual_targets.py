@@ -113,12 +113,13 @@ def register():
     )
 
 
-def data_sets():
+def data_sets(accepted=None):
     packed, data = prepare(DATA / "training.npz")
     raw = list(map(bytes, packed))
     ix = {v: i for i, v in enumerate(raw)}
     render = Rasterizer()
-    accepted = load(ACCEPTED)
+    if accepted is None:
+        accepted = load(ACCEPTED)
     max_target = max(data[1].shape[1], max(len(r["target"]) for r in accepted))
     x, y, n, m, keep, left, right, off, close = data
 
@@ -168,10 +169,10 @@ def data_sets():
     )
 
 
-def fit(arm, packed, data, maximum, batches, manifest):
+def fit(arm, packed, data, maximum, batches, manifest, *, out=OUT, evidence=EVIDENCE, padding=None):
     start = time.monotonic()
-    model_path = OUT / (arm + ".safetensors")
-    if model_path.exists() or (EVIDENCE / (arm + "_fit.json")).exists():
+    model_path = out / (arm + ".safetensors")
+    if model_path.exists() or (evidence / (arm + "_fit.json")).exists():
         raise FileExistsError(model_path)
     torch.manual_seed(SEED)
     torch.cuda.reset_peak_memory_stats()
@@ -197,6 +198,8 @@ def fit(arm, packed, data, maximum, batches, manifest):
     for step, b in enumerate(batches, 1):
         idx = torch.as_tensor(b, device="cuda")
         nx, ny = data[2][b].max(), maximum[b].max()
+        if padding is not None:
+            nx, ny = padding[step - 1]
         opt.zero_grad(set_to_none=True)
         with torch.autocast("cuda", dtype=torch.bfloat16):
             loss = model.loss(
@@ -236,7 +239,7 @@ def fit(arm, packed, data, maximum, batches, manifest):
         str(model_path),
     )
     write_new(
-        EVIDENCE / (arm + "_fit.json"),
+        evidence / (arm + "_fit.json"),
         dict(
             arm=arm,
             parent_sha=manifest["parent_sha"],
