@@ -1,0 +1,45 @@
+{
+  "models": [
+    {
+      "label": "Ink prediction",
+      "exact": 35,
+      "exchanged": 15,
+      "distinct": 4
+    },
+    {
+      "label": "Whole-answer alignment",
+      "exact": 134,
+      "exchanged": 23,
+      "distinct": 43
+    },
+    {
+      "label": "Generated choices",
+      "exact": 143,
+      "exchanged": 10,
+      "distinct": 58
+    }
+  ],
+  "local": 1012,
+  "inventory": 930,
+  "proposal_oracle": 175,
+  "examples": {
+    "correct": {
+      "i": 224,
+      "tag": 577381,
+      "before": "多人对此采取冷漠的犬儒主义态度，这是令人想起来都",
+      "after": "的。实际上无论你抗议也罢，抵制也罢，都毫无用处，",
+      "reference": "不寒而栗",
+      "reading_if_exact_bitmap": "不寒而栗",
+      "length": 4
+    },
+    "miss": {
+      "i": 0,
+      "tag": 577157,
+      "before": "中国青年报：篮协改革联赛切莫",
+      "after": "羊城晚报：信兰成想干什么？都市时报：中国篮协该歇",
+      "reference": "因噎废食",
+      "reading_if_exact_bitmap": "一波三折",
+      "length": 4
+    }
+  }
+}

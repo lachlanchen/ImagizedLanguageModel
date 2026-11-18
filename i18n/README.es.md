@@ -32,6 +32,12 @@ Resultado del 2026-11-08: terminó la evaluación del entrenamiento de 128 actua
 
 [Resultado y alcance de la evidencia](../references/native_paired_qa_learning_result.md)
 
+## Escribir la expresión china que falta en un pasaje
+
+Un modelo de 2,12 millones de parámetros lee las imágenes de texto a ambos lados de un hueco y dibuja los cuatro caracteres de la expresión que falta. Reprodujo exactamente 134 de las 22.907 respuestas de validación. En 100 de esos aciertos, ninguno de los cuatro caracteres aparecía en el texto visible. Un método de referencia basado en frecuencias locales acertó en 1.012 casos.
+
+[Ejecutar el modelo](../models/pictured_idiom_zh/README.md) · [Figura 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
+
 ## Extraer respuestas de imágenes de caracteres chinos
 
 Un pequeño modelo aprendió a seleccionar respuestas en pasajes chinos en 64 segundos con dos hilos de CPU. En los pasajes reservados para la evaluación, devolvió la imagen exacta de la respuesta en 269 de 1.788 preguntas. Al borrar la pregunta, los aciertos bajaron a 18. El modelo independiente de escritura libre no produjo una explicación legible de la evolución del carácter 言. La escritura de propósito general y la mejora de eficiencia por un factor de 1.000 siguen pendientes de demostración.

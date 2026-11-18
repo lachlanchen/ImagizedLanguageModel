@@ -30,6 +30,12 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
+## Eine fehlende chinesische Redewendung aus Schriftbildern ergänzen
+
+Ein Modell mit 2,12 Millionen Parametern liest die Schriftbilder vor und nach einer Lücke und zeichnet die vier fehlenden chinesischen Zeichen. Bei 134 von 22.907 Validierungsbeispielen stimmte die Antwort genau mit dem Original überein. In 100 dieser Fälle kam keines der vier Zeichen im sichtbaren Text vor. Ein Vergleichsverfahren auf Basis lokaler Häufigkeiten löste 1.012 Fälle.
+
+[Modell ausführen](../models/pictured_idiom_zh/README.md) · [Abbildung 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
+
 ## Antworten aus chinesischen Schriftbildern auswählen
 
 Ein kleines Lesemodell lernte in 64 Sekunden auf zwei CPU-Threads, Antworten aus chinesischen Textpassagen auszuwählen. Bei 269 von 1.788 Fragen zu zurückgehaltenen Passagen stimmte das vollständige Antwortbild pixelgenau mit der Referenz überein. Bei ausgeblendeter Frage sank die Zahl auf 18. Das separate Modell für freies Schreiben erzeugte keine lesbare Erklärung zur Geschichte des Zeichens 言. Allgemeine Schreibfähigkeit und eine tausendfache Trainingseffizienz sind weiterhin offene Ziele.

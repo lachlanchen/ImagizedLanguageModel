@@ -32,6 +32,12 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
+## Écrire le chengyu manquant à partir du passage en image
+
+Un modèle de 2,12 millions de paramètres lit le texte en image de part et d’autre d’une lacune et dessine les quatre caractères de l’expression chinoise manquante. Sur 22 907 exemples de validation, il restitue exactement 134 expressions. Dans 100 de ces cas, aucun des quatre caractères ne figure dans le passage visible. Une méthode de référence fondée sur les fréquences locales donne 1 012 réponses exactes.
+
+[Exécuter le modèle](../models/pictured_idiom_zh/README.md) · [Figure 40](../publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
+
 ## Extraire une réponse à partir de glyphes chinois
 
 En 64 secondes sur deux threads CPU, un petit modèle a appris à sélectionner des réponses dans des passages en chinois. Sur des passages réservés à l’évaluation, 269 réponses sur 1 788 sont identiques à la référence au pixel près. Quand on efface la question, ce nombre tombe à 18. Le modèle distinct de génération libre n’a produit aucune explication lisible de l’évolution du caractère 言. La rédaction libre et le gain d’efficacité d’un facteur 1 000 restent à démontrer.

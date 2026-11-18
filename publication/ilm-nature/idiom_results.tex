@@ -1,0 +1,44 @@
+\paragraph{Writing missing Han from visual context.}
+On candidate-free ChID passages, the 2.12-million-parameter writer
+generated 35 of 22,907 complete idioms exactly. Its outputs reproduced
+only four distinct correct expressions. Adding whole-answer contrastive
+supervision to the same pictured reader increased exact agreement to 134
+(0.58\%), covering 43 distinct expressions. Exchanging the contexts gave
+23 exact answers. The paired improvement over the first writer was 0.43
+percentage points (95\% interval by source group, 0.32--0.55).
+Of the 16,797 gaps with all four target glyphs absent from the pictured
+window, the aligned model completed 100 exactly. Its frozen drawing head
+reproduced every one of 2,229 training-known development shapes from
+true landmark measurements, and none of eight previously unseen shapes.
+The unassisted writer emitted 91,512 cells; 91,474 matched some training
+target glyph. A first fresh CPU run with the shipped checkpoint and
+typed input reproduced the four-cell answer in a case with no target glyph
+in the pictured passage. Of the 134 exact answers, 133 had central 16-cell contexts
+absent from training. In 8,900 paired cases with the same immediate
+neighbours and different references, it changed its answer 6,846 times
+and answered both correctly in zero pairs.
+
+The local count baseline recovered 1,012 complete idioms (4.42\%).
+With 3,805 pictured training expressions supplied, the contrastive reader
+selected 930 exactly. In a separate experiment the writer generated
+32 additional physical candidates per context. Across the resulting
+755,931 recorded streams, at least one correct proposal existed in 175
+cases. Reranking those pictures gave 143 exact outputs, gaining 27 and
+losing 18 relative to the aligned beam. The 95\% interval for improvement
+was $-0.017$ to $+0.100$ percentage points and the registered comparison
+failed. Only 56,756 of its 91,628 selected cells matched a training target
+shape. The aligned beam remains the compact deployment
+(Fig.~\ref{fig:pictured-idioms}). These experiments demonstrate occasional
+independent completion of a missing Chinese expression. They leave
+general prompt following and novel lexical composition open.
+
+Of the 930 cases solved by the reader with supplied expressions, 851
+failed in free writing. The writer solved 55 cases missed by the reader
+and 70 missed by the local baseline. A separate physical check addressed
+the proposed compression of an ordered stream into one plane. Adding
+four binary glyph images produced 3,376 distinct sums for 3,410 distinct
+reference expressions. Even the best decoder given only each sum and the
+observed answer frequencies must miss at least 115 of 22,907 cases.
+Packing the four position bits into a four-bit value at each coordinate
+recovered all 22,907 ordered targets. This checks reversibility. Predicting
+the missing expression requires information from the surrounding prose.

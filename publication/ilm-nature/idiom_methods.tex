@@ -1,0 +1,48 @@
+\paragraph{Missing idiom prediction in physical space.}
+We used the CLUE distribution of ChID (Zheng et al., ACL 2019,
+doi:10.18653/v1/P19-1075). Three leading zero bits in a hash of the
+original training group identifier selected one eighth of groups in
+expectation. After filtering and physical-window deduplication, 71,439
+training examples from 10,529 groups and 22,907 validation examples
+from 3,218 groups remained. Each example supplied at most 24 visible
+cells on either side of its target. The answer choices were removed.
+Other gaps had the same neutral marker. We excluded non-four-Han targets
+and unsupported renderings. Reference words express one attested choice
+among potentially acceptable completions. No official test example was used.
+
+A greedy procedure selected 48 physical pixels that disambiguated all 2,323
+distinct training target shapes. A two-hidden-layer neural network
+reconstructed the binary 1,024-pixel image from those measurements.
+The observations identify familiar training characters; intermediate codes
+do not constitute evidence of writing a new character. On pictured input,
+regional ink coverage, landmark values and position feed two attention
+layers. A recurrent head predicts four measured bits at a time and a stop
+at a glyph boundary. It receives measurements from its own completed
+physical image. Beam width was four and the safety limit eight glyphs.
+For training-only alignment, let $u_i$ denote the normalized pictured
+context state and $v_j$ the normalized encoding of a complete training
+answer. We added half of the following loss to the four-pixel
+cross-entropy:
+\[
+-\log\frac{\sum_{j:Y_j=Y_i}\exp(u_i^\top v_j/0.07)}
+               {\sum_j\exp(u_i^\top v_j/0.07)}.
+\]
+The sums run over one minibatch and equality is between complete physical
+answers. The additional 246,336 answer-encoding parameters are absent
+from the deployed beam writer. The two predictive fits took 46.3 and
+57.2 seconds on one RTX 4090 D. Their complete executions took 56.4 and
+68.2 seconds, with peak allocated device memory of 291 and 289 MiB,
+respectively. The second fit reused the first physical renderer.
+The additional proposal experiment took 51.5 seconds to generate and
+score candidate pictures, preferring stopped four-cell outputs. We
+independently recounted every source-aligned reference and archived
+proposal. Source-group resampling used 2,000 bootstrap samples.
+
+For an ordered stack of four binary glyphs $G_0,\ldots,G_3$, we compared
+the integer image $S=\sum_i G_i$ with $P=\sum_i2^iG_i$. The latter
+occupies four bits per coordinate and recovers each layer by bit extraction.
+For each observed sum we counted all reference expressions yielding that
+sum. Subtracting the largest count in each group from its total gives the
+minimum number of errors for a decoder restricted to that sum on this
+empirical distribution. We also compared per-example archived decisions
+of the supplied-expression reader, the local baseline and the free writer.

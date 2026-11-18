@@ -20,6 +20,12 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
+## Writing a missing Chinese idiom
+
+A 2.12-million-parameter model reads the text images on either side of a gap and draws the missing idiom. It wrote 134 of 22,907 validation answers exactly. In 100 of those passages, all four answer characters were absent from the input window. A local count baseline recovered 1,012 answers.
+
+[Run the model](models/pictured_idiom_zh/README.md) · [Figure 40](publication/ilm-nature/figures/Figure_40_pictured_idioms.png)
+
 ## Reading a Chinese passage from glyphs
 
 In 64 seconds on two CPU threads, a small reader learned to select answer images from Chinese passages. It returned the exact answer to 269 of 1,788 questions on held-out passages. Blanking the question reduced that count to 18. The separate free-writing model produced no readable explanation of the history of 言. General-purpose writing and a 1,000-fold efficiency gain remain open.
