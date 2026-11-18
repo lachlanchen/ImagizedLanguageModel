@@ -260,3 +260,16 @@ PYTHONPATH=. python scripts/infer_visual_translation.py --method anchor-gaps \
 ~~~
 
 This input yields 五月辛亥日，赈济陕西的灾荒。 The adjacent `book.safetensors` checkpoint uses the original translations in the matched fit. Both are experimental. [Complete results](../../references/screened_visual_targets_result.md)
+
+## Supervision across chapters
+
+The 108-source and 841-source checkpoints use the same image reader and writer. To reproduce the learned biography from its actual input image, run this command at the repository root.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_translation.py --method anchor-gaps \
+  --weights models/visual_edit_zh/coverage/broad.safetensors \
+  --image references/evidence/visual_translation_coverage_20261119/supervised_input.png \
+  --output /tmp/ilm-biography-answer
+```
+
+The command writes a PNG, packed image cells and a stopping receipt to a new directory. Use `natural_input.png` and a different output directory to reproduce the erroneous age unit in Figure 68. The narrow checkpoint is `coverage/narrow.safetensors`. [Training, free generation and masked scores](../../references/visual_translation_coverage_result.md)

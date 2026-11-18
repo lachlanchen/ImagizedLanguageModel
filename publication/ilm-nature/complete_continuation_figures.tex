@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_screened_targets_article.py.
+% Literal captions copied from their source inputs by build_translation_coverage_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -554,4 +554,10 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Transfer of learned translations after a change in a pictured quantity.}
 \textbf{a}, Complete input and freely generated output strips, displayed from saved ink. The first row is a supervised sentence. In the second, a substitution changes the date of famine relief from the third month to the fifth. The third is a failed translation from a reserved chapter. \textbf{b}, Total edits on 118 passages, complete meanings on a fixed reading of 16, and pairs conveying both meanings or both tested details among twelve minimal pairs. Qwen3-8B received text and ran separately after training. \textbf{c}, Exact matches against two target wordings for 113 supervised sentences. The numeral and displacement probes change one input cell while keeping the surrounding sentence. An image analogy using the 113 stored examples also answers all 18 numeral edits and abstains on the new passages.}
 \label{fig:screened-targets}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_68_translation_coverage.png}
+\caption{\textbf{Transfer from reviewed translations to new chapters.} \textbf{a}, Complete source and emitted images from the 841-source writer. In the supervised biography the model adds the modern copula and removes a classical sentence-final particle. The two celestial counts elicit the same erroneous unit of age. \textbf{b}, One model reader graded method-masked translations of eighteen passages and eight pairs. Quantity credit requires the correct referent as well as the number. The reference gloss received nine of eighteen whole credits under the source-only rubric. \textbf{c}, Training loss averaged over successive blocks of 194 updates. Each writer received the same book replay, number of supplemental exposures and per-batch padding. The broader writer saw each reviewed translation fewer times.}
+\label{fig:translation-coverage}
 \end{figure*}

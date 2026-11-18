@@ -5,13 +5,17 @@
 
 # Imagized Language Model (ILM)
 
+On one RTX 4090 D, a 2.33-million-parameter visual writer learned to modernise the pictured biography of Lü Yi. Expanding supervision from 108 to 841 reviewed passages reduced glyph edits on 192 new book passages. Both writers scored 0/18 for faithful complete translations on the masked reading, compared with 12/18 for Qwen3-8B reading text. [Experiment and saved answers](references/visual_translation_coverage_result.md) · [Run image-file inference](models/visual_edit_zh/README.md#supervision-across-chapters)
+
+[![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=91)
+
 The experimental visual writer reads 三月辛亥，振陕西灾。 and writes 三月辛亥日，赈济陕西的灾荒。 Changing the pictured month to 五 changes the generated date to 五月. It produced the entire revised answer in 13 of 18 familiar sentence frames. A one-cell substitution rule solved all 18. On sixteen passages from unfamiliar chapters, the writer produced zero faithful translations, compared with ten from local Qwen3-8B reading text. [Results and controls](references/screened_visual_targets_result.md) · [Run the visual writer](models/visual_edit_zh/README.md#reviewed-translations)
 
-[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=89)
+[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=90)
 
 A visual writer trained on 55,872 pictured Chinese passage pairs conveyed the meaning of two of 24 new passages. The earlier phrase composer conveyed three. Figure 66 shows complete input and output images, including an evening-meal passage the neural writer mistranslates. [Read the experiment](references/anchor_gap_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
-[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=88)
+[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=89)
 
 **Can one pictured verb carry two meanings?** Given 去寿春三十里, the experimental writer outputs an image reading 距离寿春三十里。 For 我不能舍仲宝去也, the same 去 becomes 离开. The learned phrase writer conveyed the intended sense in 17 of 20 tested clauses, but only six complete translations were faithful. [See successes and errors in Figure 64](publication/ilm-nature/figures/Figure_64_predicate_context.png) · [Measured results](references/predicate_context_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
@@ -49,7 +53,7 @@ The source-conditioned editor in Figure 60 writes 脱因是蒙古人。 from 脱
 
 ![The visual reviser writes a biographical statement and damages a date in a different passage.](publication/ilm-nature/figures/Figure_60_pictured_revision.png)
 
-The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 78–79](publication/ilm-nature/manuscript.pdf#page=78)
+The causal image writer in Figure 59 translates 尝攻襄州，为孔勍所败。 as 曾经进攻襄州，被孔勍打败。 Two matched checkpoints gave this answer, their only fully acceptable translation in an eighteen-passage reading. Training on mistaken preceding images increased repetition across 1,024 held-out passages. Figures 58–59 give the complete counts and show a failed translation alongside the success. [Original glyphs and results](references/pictured_clause_and_feedback_result.md) · [Manuscript, Figures 58–59 on pages 81–82](publication/ilm-nature/manuscript.pdf#page=81)
 
 ![Actual Chinese source and outputs from two matched visual writers](publication/ilm-nature/figures/Figure_59_visual_feedback.png)
 
