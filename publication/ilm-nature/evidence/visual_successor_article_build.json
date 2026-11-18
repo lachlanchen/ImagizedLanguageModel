@@ -1,0 +1,368 @@
+{
+  "promoted": true,
+  "baseline_git": "dbf7d5ac",
+  "cumulative_redline_git": "0f14fa3fb1f2ea1c0c71ccba50512b354f0d2ded",
+  "table": [
+    [
+      "Predictor",
+      "Correct assignment",
+      "Both choices correct"
+    ],
+    [
+      "Native writer, initial",
+      "54.88%",
+      "39"
+    ],
+    [
+      "Native writer, final",
+      "54.69%",
+      "2"
+    ],
+    [
+      "Compact visual reader, initial",
+      "53.32%",
+      "6"
+    ],
+    [
+      "Visual reader, rotated training",
+      "50.78%",
+      "65"
+    ],
+    [
+      "Visual reader, aligned training",
+      "55.08%",
+      "45"
+    ],
+    [
+      "Character-indexed reader, aligned training",
+      "56.25%",
+      "55"
+    ],
+    [
+      "Physical trigram",
+      "62.70%",
+      "40"
+    ]
+  ],
+  "deck_sha256": "a7cb91b555180de91992e899d905044f272e5250598186fa26d3a1de0f4cc26a",
+  "source_hashes": {
+    "history_b.png": "0aa8a08042a51362c30290a75e223d190610126e69d71f0a23385505f0d0c174",
+    "history_a.png": "f9f7b265533867efe1cb9d3aae5b96a3f7d159d072d7267881239b21c779f66e",
+    "visual.json": "a3aca73a2bfd5b545a6fbf7a946101f9c9b875f28bae6e8f6003859d0c73a1ae",
+    "next_a.png": "cc4877b429299d55b4d287364580b512448eb1ae7a1aa475c83c02edfbec9f8e",
+    "next_b.png": "bade2495b1e133f88622b11dfdebdc1aac32c53d4267b1ea52f0f0f59d7597fa",
+    "audit.json": "d9103898d39cba3defd48dcacec33644fcf8a48e15361282cdd0ada419b5f5a5",
+    "character.json": "01ca8ea00eb9b149f79ac7e12a5ce81f3dfdb51bcea5c7633cb24f7a9d677800"
+  },
+  "inspection": {
+    "documents": {
+      "manuscript": {
+        "pages": 64,
+        "pdf_sha256": "593ee9ed9105f39c8852c026104cc698d12e1859c3e2525f464b2fa9c39314d6",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 159,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              36
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              37
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              38
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              39
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              40
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              41
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              42
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              43
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              44
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              45
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              46
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              47
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              48
+            ]
+          }
+        },
+        "overview_sheets": 2
+      },
+      "manuscript_review": {
+        "pages": 110,
+        "pdf_sha256": "e482e6591d1c44da31b73984a939c7879133e9c6913537bd9824a0af12d1545d",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 159,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              98
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              99
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              100
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              101
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              102
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              103
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              104
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              105
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              106
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              107
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              108
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              109
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              110
+            ]
+          }
+        },
+        "overview_sheets": 4
+      },
+      "redlined_manuscript": {
+        "pages": 111,
+        "pdf_sha256": "faa57dd74fcf3de85c5e0c666243beed4b1ad966acf606e0106768dfcbaab71f",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 159,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              99
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              100
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              101
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              102
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              103
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              104
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              105
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              106
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              107
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              108
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              109
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              110
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              111
+            ]
+          }
+        },
+        "overview_sheets": 4
+      }
+    },
+    "figure_assets_preserved": 357,
+    "automated_checks_are_not_visual_review": true,
+    "inspection_seconds": 21.770641072653234,
+    "build_plus_inspection_seconds": 57.70856678392738
+  },
+  "visual_review": {
+    "manuscript": {
+      "pdf_sha256": "593ee9ed9105f39c8852c026104cc698d12e1859c3e2525f464b2fa9c39314d6",
+      "overview_pages": 64,
+      "detailed_pages": [
+        1,
+        35,
+        48,
+        62
+      ],
+      "observations": "Reviewed complete page overviews and affected page layouts. The paired inputs, reference successors, seven-row table and caption are separated and legible. Results, methods and review markup remain inside the text area."
+    },
+    "manuscript_review": {
+      "pdf_sha256": "e482e6591d1c44da31b73984a939c7879133e9c6913537bd9824a0af12d1545d",
+      "overview_pages": 110,
+      "detailed_pages": [
+        2,
+        15,
+        39,
+        41,
+        71,
+        110
+      ],
+      "observations": "Reviewed complete page overviews and affected page layouts. The paired inputs, reference successors, seven-row table and caption are separated and legible. Results, methods and review markup remain inside the text area."
+    },
+    "redlined_manuscript": {
+      "pdf_sha256": "faa57dd74fcf3de85c5e0c666243beed4b1ad966acf606e0106768dfcbaab71f",
+      "overview_pages": 111,
+      "detailed_pages": [
+        3,
+        15,
+        40,
+        41,
+        70,
+        73,
+        111
+      ],
+      "observations": "Reviewed complete page overviews and affected page layouts. The paired inputs, reference successors, seven-row table and caption are separated and legible. Results, methods and review markup remain inside the text area."
+    }
+  },
+  "prior_figure_files_verified": 357,
+  "office_application_export_verified": false
+}

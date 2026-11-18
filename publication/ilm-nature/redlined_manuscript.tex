@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Wed Nov 18 11:43:56 2026
-%DIF ADD new.tex   Wed Nov 18 11:43:56 2026
+%DIF DEL old.tex   Wed Nov 18 12:26:43 2026
+%DIF ADD new.tex   Wed Nov 18 12:26:43 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 \usepackage{setspace,lineno,etoolbox}
@@ -257,6 +257,11 @@ linguistic context of the observed marks.
 \DIFadd{A reader can answer some questions by locating a span of writing already
 present on a page. Drawing a historical form absent from the prompt also
 requires a reliable writer. We test these capabilities separately.
+}
+
+\DIFadd{A change of context should also change which glyph a writer expects. We
+measure this dependence with passages ending in the same visible character
+and compare pixel and character-indexed learning on identical training text.
 }
 
 
@@ -2456,7 +2461,9 @@ passage reduced it from 269/1,783 to 11/1,783. The paired whole-passage
 95\% intervals for the two differences were 12.2--15.9 and 12.7--16.3
 percentage points (Fig.~\ref{fig:visual-reading-writing}b,c).
 The reader used the question, yet missed 1,519 complete answers and could
-only reproduce writing present in the passage.
+only reproduce writing present in the passage. Rotating answer supervision within
+training passages gave 59/1,788 exact responses. Aligned training therefore
+gained 11.7 percentage points (95\% passage interval 10.1 to 13.5).
 }
 
 \DIFadd{A separate comparison changed the source of direct next-glyph supervision.
@@ -2466,7 +2473,38 @@ from the same 23 constructions. The interval for the 1.9-point difference
 spanned $-9.0$ to $+12.7$ points, leaving the effect of source register uncertain.
 }
 
-%DIF >  Literal captions copied from their source inputs by build_visual_reading_writing_article.py.
+\subsection*{\DIFadd{Choosing a successor absent from the visible history}}
+\DIFadd{Two extracts from the same article can end in the same character and continue
+with different ones. In 512 held-out Chinese articles, we supplied two such
+histories and both possible successor images (Fig.~\ref{fig:visual-successors}).
+Neither successor appeared in either history. The final native writer assigned
+the higher score to the same candidate in both contexts for 509 articles. It
+selected both successors independently in only two articles. A joint assignment
+can detect smaller relative shifts in preference. The final writer made 280/512
+correct joint assignments, compared with 281/512 at initialization.
+}
+
+\DIFadd{A separate visual reader learned a compatibility score between preceding ink
+and a proposed successor. Training on 1,047,284 glyph transitions across 2,127
+modern passages took 19.46 seconds on two CPU threads. The reader assigned
+282/512 pairs correctly and chose both independent successors in 45 articles.
+Reversing the first 31 cells while retaining the final cell reduced its joint
+score by 8.2 percentage points (95\% article bootstrap interval 2.3 to 13.9).
+Its 4.3-point advantage over rotated supervision had an interval of $-2.0$ to
+10.7 points. Its 1.8-point advantage over initialization had an interval of
+$-4.5$ to 8.0. The prespecified training criterion therefore remained unmet.
+}
+
+\DIFadd{An otherwise matched character-indexed reader scored 288/512 after 18.73
+seconds. The visual reader used 121,312 parameters and the character-indexed
+reader 584,448. The visual minus character-indexed accuracy difference was
+$-1.2$ points (interval $-6.8$ to 4.5). Counts of three consecutive
+physical glyphs achieved 62.7\% joint assignment accuracy with half
+credit for 288 ties. Time to a common level of independent language
+generation quality remains unmeasured.
+}
+
+%DIF >  Literal captions copied from their source inputs by build_visual_successor_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -2718,6 +2756,20 @@ their strokes. \textbf{c}, The same reader receives either its original
 question, white cells of equal length or a different question about the same
 passage. Five questions lack a changed counterpart under cyclic exchange.}}
 \label{fig:visual-reading-writing}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_35_visual_successors.png}
+\caption{\DIFaddFL{\textbf{Selecting the next glyph from two pictured alternatives.}
+\textbf{a}, The two 32-image histories and their reference successors from
+the first article in the fixed order. Each successor is absent from both
+histories. \textbf{b}, Joint assignment compares the two possible pairings.
+The final column counts articles where the two histories independently
+assign their highest score to their own successor. The physical trigram tied
+on 288 assignments. The three compact readers with explicit supervision
+saw identical training passages and update counts. The native writer learned from book continuations
+and QA answers, with modern passages appearing inside its input prompts. Chance for joint assignment is 50\%.}}
+\label{fig:visual-successors}
 \end{figure*}
 
 
@@ -4520,6 +4572,34 @@ took 112.33 seconds and 2.112\,GiB of peak process memory. The compressed
 classifiers and length counts occupied 108,624 bytes. Corpus preparation was
 outside the timed run. These measurements have no matched-quality LLM cost
 denominator.
+}
+
+\paragraph{\DIFadd{Paired visual successor assignment.}}
+\DIFadd{We rendered two nonoverlapping 32-cell histories from each selected
+CMRC~2018 development paragraph with the training font. Each pair shared
+its last bitmap. We excluded training histories and duplicated histories,
+selected one pair per article title in fixed hash order, and retained 512
+titles. All 66 cells in each pair belonged to the physical training repertoire.
+For score $s(h,x)$ of candidate image $x$ after history $h$, we compared
+$s(h_1,x_1)+s(h_2,x_2)$ with $s(h_1,x_2)+s(h_2,x_1)$. This cancels
+any candidate preference shared by both histories. We also counted pairs
+where each row independently favoured its proper successor. The native
+writer supplied its conditional visual-code log density. A visual trigram
+interpolated counts with shorter physical histories.
+}
+
+\DIFadd{The separate reader pooled each binary image to $16\times16$, shared a
+nonlinear shape encoder across histories and candidates, and combined the
+last two features with averages over 4, 16 and 32 cells. Within each training
+chunk, softmax contrast compared the true image with the other observed
+successors and summed the probability of identical bitmap occurrences. A
+matched rotation changed 1,033,560 of the 1,047,284 labels. The explicit
+character control replaced the shape encoder with a learned embedding for
+each of 5,294 training characters and a shared unknown entry. Direct
+rendering verified all training passages and test pairs in the character
+comparison. Each compact fit took 1,086 AdamW updates. Fit timings exclude
+preparation and evaluation. Intervals resampled the 512 articles in 10,000
+paired draws.
 }
 
 

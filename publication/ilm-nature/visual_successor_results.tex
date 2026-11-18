@@ -1,0 +1,27 @@
+\subsection*{Choosing a successor absent from the visible history}
+Two extracts from the same article can end in the same character and continue
+with different ones. In 512 held-out Chinese articles, we supplied two such
+histories and both possible successor images (Fig.~\ref{fig:visual-successors}).
+Neither successor appeared in either history. The final native writer assigned
+the higher score to the same candidate in both contexts for 509 articles. It
+selected both successors independently in only two articles. A joint assignment
+can detect smaller relative shifts in preference. The final writer made 280/512
+correct joint assignments, compared with 281/512 at initialization.
+
+A separate visual reader learned a compatibility score between preceding ink
+and a proposed successor. Training on 1,047,284 glyph transitions across 2,127
+modern passages took 19.46 seconds on two CPU threads. The reader assigned
+282/512 pairs correctly and chose both independent successors in 45 articles.
+Reversing the first 31 cells while retaining the final cell reduced its joint
+score by 8.2 percentage points (95\% article bootstrap interval 2.3 to 13.9).
+Its 4.3-point advantage over rotated supervision had an interval of $-2.0$ to
+10.7 points. Its 1.8-point advantage over initialization had an interval of
+$-4.5$ to 8.0. The prespecified training criterion therefore remained unmet.
+
+An otherwise matched character-indexed reader scored 288/512 after 18.73
+seconds. The visual reader used 121,312 parameters and the character-indexed
+reader 584,448. The visual minus character-indexed accuracy difference was
+$-1.2$ points (interval $-6.8$ to 4.5). Counts of three consecutive
+physical glyphs achieved 62.7\% joint assignment accuracy with half
+credit for 288 ties. Time to a common level of independent language
+generation quality remains unmeasured.

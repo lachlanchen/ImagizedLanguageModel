@@ -1,0 +1,25 @@
+\paragraph{Paired visual successor assignment.}
+We rendered two nonoverlapping 32-cell histories from each selected
+CMRC~2018 development paragraph with the training font. Each pair shared
+its last bitmap. We excluded training histories and duplicated histories,
+selected one pair per article title in fixed hash order, and retained 512
+titles. All 66 cells in each pair belonged to the physical training repertoire.
+For score $s(h,x)$ of candidate image $x$ after history $h$, we compared
+$s(h_1,x_1)+s(h_2,x_2)$ with $s(h_1,x_2)+s(h_2,x_1)$. This cancels
+any candidate preference shared by both histories. We also counted pairs
+where each row independently favoured its proper successor. The native
+writer supplied its conditional visual-code log density. A visual trigram
+interpolated counts with shorter physical histories.
+
+The separate reader pooled each binary image to $16\times16$, shared a
+nonlinear shape encoder across histories and candidates, and combined the
+last two features with averages over 4, 16 and 32 cells. Within each training
+chunk, softmax contrast compared the true image with the other observed
+successors and summed the probability of identical bitmap occurrences. A
+matched rotation changed 1,033,560 of the 1,047,284 labels. The explicit
+character control replaced the shape encoder with a learned embedding for
+each of 5,294 training characters and a shared unknown entry. Direct
+rendering verified all training passages and test pairs in the character
+comparison. Each compact fit took 1,086 AdamW updates. Fit timings exclude
+preparation and evaluation. Intervals resampled the 512 articles in 10,000
+paired draws.
