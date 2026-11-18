@@ -107,7 +107,7 @@ def tree_rss(pid):
             total += int(match[1]) if match else 0
             pending += [int(p) for p in Path(
                 f'/proc/{current}/task/{current}/children').read_text().split()]
-        except FileNotFoundError:
+        except (FileNotFoundError, ProcessLookupError):
             pass
     return total / 1048576
 
