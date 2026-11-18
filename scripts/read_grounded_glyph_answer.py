@@ -9,7 +9,8 @@ import torch
 from scripts.infer_continuous_image_language import image_cells, text_cells
 from scripts.infer_pictured_entry import page
 from scripts.prepare_pictured_entry_answers import sha, write_json
-from scripts.train_grounded_glyph_writer import LIMIT, WORK, ShapeBank, load_writer
+from scripts.train_grounded_glyph_writer import LIMIT, WORK, ShapeBank
+from scripts.load_scoped_writer import load_visual_writer
 
 
 @torch.inference_mode()
@@ -51,7 +52,7 @@ def main():
         streams.append(np.packbits(cells.reshape(-1, 1024), axis=1))
     torch.set_num_threads(2)
     directory = args.checkpoint_dir or WORK / args.arm
-    net = load_writer(directory, args.device)
+    net = load_visual_writer(directory, args.device)
     memory = WORK / "memory.npy"
     selection = "whole_source"
     if args.locate_entry:

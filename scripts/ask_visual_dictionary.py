@@ -12,7 +12,8 @@ from scripts.infer_pictured_entry import bitmap, page
 from scripts.prepare_pictured_entry_answers import Rasterizer, load, sha, write_json
 from scripts.prepare_source_plate_questions import CACHE, SPLITS, STAGES
 from scripts.read_grounded_glyph_answer import respond
-from scripts.train_general_entry_writer import PARENT, WORK, load_writer
+from scripts.train_general_entry_writer import PARENT, WORK
+from scripts.load_scoped_writer import load_visual_writer
 
 
 def source_record(head, entry_id):
@@ -89,7 +90,7 @@ def main():
     else:
         question = b"".join(raster.tile(c) for c in args.question)
     memory = PARENT / "memory.npy"
-    net = load_writer(args.checkpoint_dir, "cpu")
+    net = load_visual_writer(args.checkpoint_dir, "cpu")
     p, q = (np.frombuffer(s, np.uint8).reshape(-1, 128) for s in (card, question))
     answer, stopped = respond(net, np.load(memory), p, q, "cpu")
     # Decode only after the complete output was frozen, preserving unmatched pixels.
