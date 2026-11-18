@@ -1,5 +1,6 @@
 """Matched-exposure reading control on disjoint natural Mandarin minimal pairs."""
-from collections import Counter, defaultdict
+import argparse
+from collections import Counter, defaultdict, deque
 import hashlib
 import json
 import math
@@ -97,11 +98,47 @@ class BitmapTransitions:
         return logp
 
 
+def matching_sentences(patterns, corpus):
+    """Aho--Corasick exact substring search, including suffix matches."""
+    edges = [{}]
+    failure = [0]
+    outputs = [set()]
+    for pattern in patterns:
+        node = 0
+        for char in pattern:
+            if char not in edges[node]:
+                edges[node][char] = len(edges)
+                edges.append({})
+                failure.append(0)
+                outputs.append(set())
+            node = edges[node][char]
+        outputs[node].add(pattern)
+    queue = deque(edges[0].values())
+    while queue:
+        node = queue.popleft()
+        for char, child in edges[node].items():
+            parent = failure[node]
+            while parent and char not in edges[parent]:
+                parent = failure[parent]
+            failure[child] = edges[parent].get(char, 0)
+            outputs[child].update(outputs[failure[child]])
+            queue.append(child)
+    hits = set()
+    node = 0
+    for char in corpus:
+        while node and char not in edges[node]:
+            node = failure[node]
+        node = edges[node].get(char, 0)
+        if outputs[node]:
+            hits.update(outputs[node])
+    return hits
+
+
 def scores(handles, records, models, start):
     evidence = load(ROOT/'references/evidence/visual_word_order_20261118.json')
     require(sha(ARCHIVE) == ARCHIVE_SHA and sha(PRIOR) == evidence['files']['pairs.json'], 'Prior sample binding differs')
     prior = {tuple(sorted((r['good_sha256'],r['bad_sha256']))) for r in load(PRIOR)}
-    seen, rows, counts = set(), [], Counter()
+    seen, candidates, counts = set(), [], Counter()
     unknown = chr(len(handles)+1)
     renderer = Rasterizer()
     with tarfile.open(ARCHIVE) as tar:
@@ -124,29 +161,35 @@ def scores(handles, records, models, start):
                     continue
                 seen.add(identity)
                 sentences=[''.join(chr(handles[t]) if t in handles else unknown for t in side) for side in tiles]
-                if any(s in records for s in sentences):
-                    counts['exact_training_overlap']+=1
-                    continue
                 require(sentences[0][0]==sentences[1][0] and Counter(sentences[0])==Counter(sentences[1]),'Mismatched ink')
-                rows.append(dict(paradigm=r['UID'], pair_id=r['pairID'], good_sha256=digests[0], bad_sha256=digests[1],
-                                 margins={name:m.score(sentences[0])-m.score(sentences[1]) for name,m in models.items()}))
+                candidates.append((r['UID'],r['pairID'],digests,sentences))
+    hits = matching_sentences({s for _,_,_,sides in candidates for s in sides}, records)
+    rows = []
+    for uid, idx, digests, (one,two) in candidates:
+        if one in hits or two in hits:
+            counts['exact_training_overlap'] += 1
+            continue
+        rows.append(dict(paradigm=uid, pair_id=idx, good_sha256=digests[0], bad_sha256=digests[1],
+                         margins={name:m.score(one)-m.score(two) for name,m in models.items()}))
     require(len(rows)+sum(n for k,n in counts.items() if k!='text_eligible')==counts['text_eligible'], 'Pair accounting')
     return rows,counts
 
 
-def main():
+def main(output):
     began=time.monotonic()
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','CPU only')
     guard(began, entering=True)
-    OUT.mkdir(exist_ok=False)
+    output.mkdir(exist_ok=False)
+    print("Indexing original training pixels",flush=True)
     handles, books, modern, records=physical_records(began)
     models={};timings={}
     for name,streams in [('books',books),('modern',modern)]:
         before=time.monotonic()
         models[name]=BitmapTransitions(streams,len(handles))
         timings[name]=time.monotonic()-before
+    print("Matched both transition budgets; screening external pairs",flush=True)
     rows,counts=scores(handles,records,models,began)
-    write_new(OUT/'cases.json',rows)
+    write_new(output/'cases.json',rows)
     groups=np.asarray([r['paradigm'] for r in rows])
     names=sorted(set(groups))
     require(len(names)==23, 'Changed paradigm coverage')
@@ -165,13 +208,15 @@ def main():
     guard(began)
     report=dict(arms=result,descriptive_intervals=intervals,counts=dict(Counter(groups)),screen=dict(counts),
                 pairs=len(rows),source_manifest_sha256=sha(MANIFEST),source_archive_sha256=ARCHIVE_SHA,
-                public_protocol_sha256=sha(PROTOCOL),code_sha256=sha(Path(__file__)),case_sha256=sha(OUT/'cases.json'),
+                public_protocol_sha256=sha(PROTOCOL),code_sha256=sha(Path(__file__)),case_sha256=sha(output/'cases.json'),
                 prior_case_file_sha256=sha(PRIOR),physical_alphabet_size=len(handles),
                 elapsed_seconds=time.monotonic()-began,peak_rss_gib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024**2,
                 neural_updates=0,answer_generation=False)
-    write_new(OUT/'report.json',report)
+    write_new(output/'report.json',report)
     print(json.dumps(dict(pairs=len(rows),intervals=intervals,macro={k:v['macro_accuracy'] for k,v in result.items()})))
 
 
 if __name__=='__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT)
+    main(parser.parse_args().output)
