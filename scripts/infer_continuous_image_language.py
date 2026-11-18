@@ -27,11 +27,16 @@ def image_cells(path, glyphs=None):
     return cells.astype(np.uint8).copy()
 
 
-def text_cells(text, font_path):
+def text_cells(text, font_path=None):
     import numpy as np
     from PIL import Image, ImageDraw, ImageFont
-    if not text or not font_path:
-        raise ValueError('Typed input needs nonempty text and an input font path')
+    from scripts.prepare_visual_sequence_corpus import FONT, Rasterizer
+    if not text:
+        raise ValueError('Typed input needs at least one character')
+    if font_path is None or (FONT.is_file() and Path(font_path).samefile(FONT)):
+        renderer = Rasterizer()
+        packed = b''.join(renderer.tile(char) for char in text)
+        return np.unpackbits(np.frombuffer(packed, dtype=np.uint8), bitorder='big').reshape(-1, 1, 32, 32)
     font = ImageFont.truetype(str(font_path), 26)
     cells = []
     for char in text:
@@ -51,7 +56,7 @@ def main():
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--image', type=Path)
     source.add_argument('--text')
-    parser.add_argument('--font', type=Path, help='Input rendering only; required with --text')
+    parser.add_argument('--font', type=Path, help='Optional input font; default uses the training font and layout')
     parser.add_argument('--input-glyphs', type=int, help='Optional count excluding final grid padding')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--device', choices=['cpu', 'cuda:0'], default='cpu')
@@ -105,6 +110,7 @@ def main():
                 digest.update(part)
         result = dict(checkpoint_sha256=digest.hexdigest(), checkpoint_update=checkpoint.get('update'),
             components=checkpoint['components'], prompt_cells=len(cells), typed_input_rendering=bool(args.text),
+            prompt_ink_sha256=hashlib.sha256(cells.tobytes()).hexdigest(),
             stochastic=args.sample, seed=args.seed, output_fonts_used=False,
             external_teacher_or_corpus_used=False, language_quality_established=False, **receipt)
         (args.output / 'receipt.json').write_text(json.dumps(result, indent=2) + '\n')

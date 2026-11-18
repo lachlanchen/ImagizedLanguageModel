@@ -65,9 +65,14 @@ CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python scripts/infer_continuous_image_langu
   --image prompt.png --output artifacts/my_visual_answer --device cpu
 ```
 
-Use `--input-glyphs N` to exclude white grid padding. Typed input is supported
-with `--text '問題……' --font /path/to/input-font.otf` in place of `--image`;
-the font renders input only. The model writes all output pixels itself. Output
+Use `--input-glyphs N` to exclude white grid padding. For typed input, replace
+`--image prompt.png` with `--text '問題：請說明「言」字的演變。'`. The default
+uses the training rasterizer, including its Simplified Chinese Noto font face,
+baseline, punctuation placement and whitespace handling. This requires the
+system Noto Sans CJK collection at the training font path. An explicit
+`--font /path/to/input-font.otf` selects a different input style. The receipt
+records a hash of the exact prompt pixels for comparison with an image upload.
+The model writes all output pixels itself. Output
 contains `answer.png`, exact binary arrays and a receipt with stopping, cap and
 checkpoint identity. Existing output directories are refused. These commands
 do not establish that the still-unqualified research model answers correctly.
