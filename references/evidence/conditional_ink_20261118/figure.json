@@ -1,0 +1,89 @@
+{
+  "table": [
+    [
+      "Exact stopped phrases",
+      "Discovery",
+      "Replication",
+      "Previous holdout",
+      "New holdout"
+    ],
+    [
+      "Existing visual writer",
+      "618",
+      "564",
+      "405",
+      "440"
+    ],
+    [
+      "Adjacent patterns",
+      "639",
+      "589",
+      "434",
+      "455"
+    ],
+    [
+      "Whole-phrase counts",
+      "868",
+      "808",
+      "651",
+      "670"
+    ],
+    [
+      "Insertion sites",
+      "5376",
+      "5413",
+      "5987",
+      "6435"
+    ]
+  ],
+  "exchange_counts": [
+    [
+      85,
+      95,
+      112,
+      130
+    ],
+    [
+      82,
+      85,
+      94,
+      101
+    ]
+  ],
+  "examples": {
+    "novel": {
+      "split": "fresh",
+      "site": 2208,
+      "cursor": 13,
+      "source": "长男曰： 固也，弟今且赦，故辞去。",
+      "prefix": "长男说： 是啊。我弟弟很幸运在今天碰上楚王大赦，",
+      "prefix_shown": "弟很幸运在今天碰上楚王大赦，",
+      "stopped": true,
+      "output": "所以来",
+      "reference": "所以来"
+    },
+    "failed": {
+      "split": "confirmation",
+      "site": 3251,
+      "cursor": 13,
+      "source": "齐破晋强，秦王畏晋之强也，必重君以取晋。",
+      "prefix": "齐国败而晋国强大，秦王惧怕魏国的强大，",
+      "prefix_shown": "国强大，秦王惧怕魏国的强大，",
+      "stopped": true,
+      "output": "一定会",
+      "reference": "一定"
+    }
+  },
+  "widths": {
+    "novel_source": 17,
+    "novel_prefix": 14,
+    "novel_prediction": 3,
+    "novel_marginal": 4,
+    "novel_reference": 3,
+    "failed_source": 20,
+    "failed_prefix": 14,
+    "failed_prediction": 3,
+    "failed_marginal": 3,
+    "failed_reference": 2
+  }
+}

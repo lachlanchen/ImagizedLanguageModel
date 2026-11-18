@@ -85,3 +85,17 @@ PYTHONPATH=. python scripts/infer_visual_phrase.py \
 ```
 
 Open `answer.png` in the new output directory. Use `--local-ink onset` to apply the correction only to the first glyph. The full model adds 18.95 MB of compressed training counts to the existing base editor and phrase update. It recovered 405 of 5,987 held-out insertions, against 187 for the earlier writer and 651 for a whole-phrase count baseline. It is an experimental insertion model with a supplied boundary. [Results, examples and limitations](../../references/local_ink_result.md)
+
+### Condition on the previous strokes
+
+This optional 200,892-byte checkpoint changes the distribution of each four-pixel pattern using the preceding pattern in the same glyph. This CPU example reproduces the three pictured glyphs 所以来 in Figure 54. The full preceding modern text and the insertion boundary are supplied.
+
+```bash
+PYTHONPATH=. python scripts/infer_visual_phrase.py \
+  --local-ink stream --ink-interaction models/visual_edit_zh/conditional_ink.safetensors \
+  --source-text '长男曰： 固也，弟今且赦，故辞去。' --cursor 13 \
+  --prefix-text '长男说： 是啊。我弟弟很幸运在今天碰上楚王大赦，' \
+  --output /tmp/ilm-conditional-phrase
+```
+
+The result is in `answer.png`. On 6,435 new held-out insertions this update recovered 455 exact phrases; the parent recovered 440 and local whole-phrase counts recovered 670. Both visual writers received 13 acceptable judgments out of 48 sampled insertions. [Figure 54](../../publication/ilm-nature/figures/Figure_54_conditional_ink.png) · [All 48 reviewed examples](../../references/evidence/conditional_ink_20261118/reading_gallery.pdf)

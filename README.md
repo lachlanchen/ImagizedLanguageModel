@@ -28,6 +28,8 @@ Given a classical sentence, an insertion boundary and the preceding modern text,
 
 ![Generated and reference Chinese phrases, with exact counts for the three evaluation cohorts](publication/ilm-nature/figures/Figure_53_local_ink.png)
 
+An additional 50,072 learned weights let the writer use its own preceding strokes to choose the next ones. It drew 所以来 in a new insertion context. On 6,435 new test sites it wrote 455 exact phrases, compared with 440 for its parent and 670 for local counts. A blinded model reader accepted 13 of 48 responses from each visual writer. [Measured outputs](publication/ilm-nature/figures/Figure_54_conditional_ink.png) · [Gallery of all 48 examples](references/evidence/conditional_ink_20261118/reading_gallery.pdf) · [Run this checkpoint](models/visual_edit_zh/README.md#condition-on-the-previous-strokes)
+
 ## Reading historical forms
 
 Given a four-row illustrated entry, the model returned the requested historical images in order on 9,565 of 9,600 Chinese and English questions about held-out families. It kept the same score after the images moved between rows. The example for 言 returns an oracle form and a bronze form. [Runnable model](models/pictured_idiom_zh/README.md) · [Fig. 42](publication/ilm-nature/figures/Figure_42_historical_plates.png)

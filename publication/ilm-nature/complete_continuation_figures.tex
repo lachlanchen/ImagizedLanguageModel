@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_local_ink_article.py.
+% Literal captions copied from their source inputs by build_conditional_ink_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -461,4 +461,12 @@ control was evaluated on all 22,907 windows.}
 \textbf{a}, Original source, modern prefix and emitted pixels from fresh sentences. Both recorded insertions have two characters absent from the source. On the left the writer produces the recorded first-person opening. On the right it produces a readable but incorrect second character. Examples were selected in roster order with a nonempty prefix and fixed display bounds. The respective boundaries follow the fourth and first source cells.
 \textbf{b}, Exact stopped phrases in 5,376 discovery, 5,413 replication and 5,987 fresh sites. \textbf{c}, Multi-glyph completions out of 2,534, 2,679 and 3,448 targets. Both drawing corrections use the same frozen neural writer. The training-frequency rule selects complete observed phrases.}
 \label{fig:local-ink}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_54_conditional_ink.png}
+\caption{\textbf{Learning adjacent stroke patterns in Chinese phrase generation.}
+\textbf{a}, Original images from the scored streams. At left the writer draws a three-glyph phrase absent as a complete insertion from its training inventory. The same sequence occurs in six modern training sentences. At right it draws an additional glyph already present at the start of the subsequent translation. Full modern prefixes and the classical source boundaries after cell 13 in each sentence are supplied; only the final 14 prefix cells are shown. The two examples come from the preceding and new holdouts respectively.
+\textbf{b}, Exact stopped phrases at all aligned sites. The frequency control can choose complete observed phrases. \textbf{c}, Number of matched sentence pairs favoring each assignment of distinct source contexts to recorded insertions. Bars use the summed conditional log probability of both phrases including learned endings.}
+\label{fig:conditional-ink}
 \end{figure*}

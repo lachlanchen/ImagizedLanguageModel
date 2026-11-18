@@ -45,6 +45,7 @@ def main():
     p.add_argument('--update',type=Path,default=MODELS/'phrase_update.safetensors')
     p.add_argument('--device',choices=['cpu','cuda'],default='cpu')
     p.add_argument('--local-ink',choices=('onset','stream'),help='Use local four-pixel evidence for the first glyph or entire phrase')
+    p.add_argument('--ink-interaction',type=Path, help='Optional trained within-glyph transition checkpoint')
     p.add_argument('--ink-directory',type=Path,default=MODELS/'local_ink')
     p.add_argument('--cursor',type=int,required=True,help='Number of classical cells preceding the insertion site')
     p.add_argument('--output',type=Path,required=True,help='A new directory for the image and stop receipt')
@@ -54,6 +55,8 @@ def main():
         g.add_argument('--'+key+'-image',type=Path)
         p.add_argument('--'+key+'-cells',type=int,help='Used glyphs in a padded input grid')
     args=p.parse_args()
+    if args.ink_interaction and args.local_ink != 'stream':
+        p.error('--ink-interaction requires --local-ink stream')
     if args.output.exists():
         p.error('Choose a new output directory')
     torch.set_num_threads(2)
@@ -81,6 +84,10 @@ def main():
                 p.error('Incomplete or incompatible local-ink archive')
             models.append(LocalInk.load(path))
         options[args.local_ink] = models[0] if args.local_ink=='onset' else PhraseInk(*models)
+    if args.ink_interaction:
+        from ilm.visual_lm.conditional_ink import ConditionalInk
+        manifest_hash = hashlib.sha256((args.ink_directory/'manifest.json').read_bytes()).hexdigest()
+        options['interaction'] = ConditionalInk.restore(args.ink_interaction, manifest_hash, args.device)
     pixels,ended=net.generate_phrase(streams[0],args.cursor,streams[1],prompt,**options)
     ink=pixels.cpu().numpy()
     args.output.mkdir(parents=True)
@@ -89,6 +96,8 @@ def main():
     result=dict(emitted_cells=len(ink),stopped=ended,cursor=args.cursor)
     if args.local_ink:
         result['local_ink'] = args.local_ink
+    if args.ink_interaction:
+        result['ink_interaction_sha256'] = hashlib.sha256(args.ink_interaction.read_bytes()).hexdigest()
     (args.output/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result))
 

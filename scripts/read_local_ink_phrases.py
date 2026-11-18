@@ -17,31 +17,33 @@ def key(value):
     return hashlib.sha256(value.encode()).hexdigest()
 
 
-def prepare():
-    rows,bank = roster('fresh')
+def prepare(rows=None, bank=None, *, directory=RUN/'stream/fresh', folder=FOLDER,
+            arms=ARMS, seed='wording-fresh-1', excluded=(238,714)):
+    if rows is None:
+        rows,bank = roster('fresh')
     forms = {bytes(bank[g]):ch for r in rows for field,ids in [('source','x'),('target','y')]
              for ch,g in zip(r[field],r[ids])}
     loc = list(sites_independent(rows))
-    report = json.loads((RUN/'stream/fresh/report.json').read_text())
+    report = json.loads((directory/'report.json').read_text())
     runs = {}
-    for arm in ARMS[:2]:
-        path = RUN/'stream/fresh'/(arm+'.npz')
+    for arm in arms[:-1]:
+        path = directory/(arm+'.npz')
         require(sha(path)==report['arms'][arm]['pixels_sha256'],'Changed streams')
         with np.load(path) as z:
             runs[arm]=np.split(z['pixels'],z['offsets'][1:-1])
-    FOLDER.mkdir()
+    folder.mkdir()
     packet,mapping=[],[]
     seen=set()
     picked=Counter()
-    for n in sorted(range(len(loc)),key=lambda n:key(f'wording-fresh-1/{n}')):
+    for n in sorted(range(len(loc)),key=lambda n:key(f'{seed}/{n}')):
         i,c,j,k=loc[n]
         r=rows[i]
         stratum='single' if k-j==1 else 'multi'
-        if n in (238,714) or r['g'] in seen or picked[stratum]>=24:
+        if n in excluded or r['g'] in seen or picked[stratum]>=24:
             continue
         picked[stratum]+=1
         seen.add(r['g'])
-        phrase=[runs['source'][n],runs['local'][n],bank[r['y'][j:k]]]
+        phrase=[runs[arm][n] for arm in arms[:-1]] + [bank[r['y'][j:k]]]
         versions=sorted(set(p.tobytes() for p in phrase),key=lambda s: hashlib.sha256(n.to_bytes(4,'big')+s).digest())
         labels={}
         for v,data in enumerate(versions):
@@ -49,26 +51,26 @@ def prepare():
             string=''.join(forms.get(bytes(pic),'▧') for pic in raw)
             label=chr(65+v)
             if '▧' in string:
-                png(FOLDER,f'{len(packet)+1}_{label}',raw)
+                png(folder,f'{len(packet)+1}_{label}',raw)
             labels[label]=string
         packet.append(dict(number=len(packet)+1,classical=r['source'],before=r['target'][:j],after=r['target'][k:],versions=labels))
-        mapping.append(dict(site=n,stratum=stratum,labels={arm:chr(65+versions.index(p.tobytes())) for arm,p in zip(ARMS,phrase)}))
+        mapping.append(dict(site=n,stratum=stratum,labels={arm:chr(65+versions.index(p.tobytes())) for arm,p in zip(arms,phrase,strict=True)}))
         if len(packet)==48:
             break
     require(len(packet)==48,'Incomplete reading packet')
-    write_new(FOLDER/'packet.json',packet)
-    write_new(FOLDER/'mapping.json',mapping)
-    write_new(FOLDER/'binding.json',dict(packet=sha(FOLDER/'packet.json'),mapping=sha(FOLDER/'mapping.json')))
-    print('Frozen packet',sha(FOLDER/'packet.json'))
+    write_new(folder/'packet.json',packet)
+    write_new(folder/'mapping.json',mapping)
+    write_new(folder/'binding.json',dict(packet=sha(folder/'packet.json'),mapping=sha(folder/'mapping.json')))
+    print('Frozen packet',sha(folder/'packet.json'))
 
 
-def score(grades):
-    read=lambda n:json.loads((FOLDER/(n+'.json')).read_text())
+def score(grades, *, folder=FOLDER, arms=ARMS):
+    read=lambda n:json.loads((folder/(n+'.json')).read_text())
     bind=read('binding')
     for name in ('packet','mapping'):
-        require(bind[name]==sha(FOLDER/(name+'.json')), 'Changed reading packet')
+        require(bind[name]==sha(folder/(name+'.json')), 'Changed reading packet')
     packet,mapping=read('packet'),read('mapping')
-    results={a:Counter() for a in ARMS}
+    results={a:Counter() for a in arms}
     per_item=[]
     for p,m,decision in zip(packet,mapping,grades.read_text().splitlines(),strict=True):
         letters=sorted(p['versions'])
@@ -78,8 +80,8 @@ def score(grades):
         for a,v in per_item[-1].items():
             results[a][v]+=1
     alternatives={a:sum(v[a]=='A' and m['labels'][a]!=m['labels']['reference'] for m,v in zip(mapping,per_item))
-                  for a in ARMS[:2]}
-    write_new(FOLDER/'result.json',dict(totals=results,accepted_nonidentical=alternatives,
+                  for a in arms[:-1]}
+    write_new(folder/'result.json',dict(totals=results,accepted_nonidentical=alternatives,
               binding=bind,ratings_sha256=sha(grades),strata={'single':24,'multi':24},rows=per_item))
     print(results,alternatives)
 

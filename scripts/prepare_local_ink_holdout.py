@@ -11,7 +11,7 @@ from scripts.prepare_visual_spans import (BASE, COHORTS, CONTRAST, DIVERSITY, OU
 from scripts.train_local_ink import RUN, tiles, training_rows
 
 
-def prepare():
+def prepare(folder=None, *, priority_prefix="local-ink-independent", previous_roster=None):
     bank = tiles()
     groups,old_eval,texts,images = set(),set(),set(),set()
     def exclude(rows, source_bank, *, block=False):
@@ -23,6 +23,11 @@ def prepare():
     exclude(training_rows(),bank,block=True)
     for cohort in COHORTS:
         exclude(frozen(cohort),bank,block=True)
+    if previous_roster is not None:
+        receipt = load(previous_roster/'receipt.json')
+        require(sha(previous_roster/'rows.jsonl') == receipt['rows_sha256']
+                and sha(previous_roster/'pixels.npy') == receipt['bank_sha256'], 'Previous holdout changed')
+        exclude(records(previous_roster/'rows.jsonl'), np.load(previous_roster/'pixels.npy'), block=True)
     original = load(OUT/'preparation.json')
     for name in ('heldout','confirmation'):
         path = OUT/(name+'.jsonl')
@@ -49,7 +54,7 @@ def prepare():
             for index,(src,modern) in enumerate(pairs(tar.extractfile(member).read())):
                 if not src or not modern or len(src)>96 or src in texts:
                     continue
-                priority = int.from_bytes(digest(f'local-ink-independent/{group}/{index}')[:8],'big')
+                priority = int.from_bytes(digest(f'{priority_prefix}/{group}/{index}')[:8],'big')
                 entry = (-priority,group,index,src,modern)
                 if len(pool)<8192:
                     heapq.heappush(pool,entry)
@@ -83,7 +88,7 @@ def prepare():
         if len(rows)==1024:
             break
     require(len(rows)==1024,'Insufficient fresh sentence coverage')
-    folder=RUN/'fresh_roster'
+    folder = folder or RUN/'fresh_roster'
     folder.mkdir()
     with (folder/'rows.jsonl').open('x') as stream:
         for r in rows:
@@ -99,4 +104,14 @@ def prepare():
 
 
 if __name__=='__main__':
-    prepare()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--conditional-ink', action='store_true',
+                        help='Reserve the additional sentence cohort after the original fresh holdout')
+    if parser.parse_args().conditional_ink:
+        work = RUN.parent/'conditional_ink_v1'
+        work.mkdir(exist_ok=True)
+        prepare(work/'confirmation', priority_prefix='conditional-ink-confirmation',
+                previous_roster=RUN/'fresh_roster')
+    else:
+        prepare()

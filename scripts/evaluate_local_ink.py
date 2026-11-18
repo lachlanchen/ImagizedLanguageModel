@@ -11,7 +11,7 @@ from scripts.train_local_ink import OUT, PRIOR, ROOT, RUN, fields, frozen, guard
 
 
 @torch.inference_mode()
-def generate(rows, arm, bank, start, *, stream=False, supplied=False):
+def generate(rows, arm, bank, start, *, stream=False, supplied=False, interaction=None):
     given = arm=='given' or supplied
     ablate = arm=='prefix'
     net = checkpoint('prefix' if ablate else 'source')
@@ -57,7 +57,7 @@ def generate(rows, arm, bank, start, *, stream=False, supplied=False):
                 scores.extend(torch.stack([z.log_softmax(-1).gather(-1,patterns).sum((1,2))
                               for z in (logits,logits+bias)],1).cpu().tolist())
             pics,lengths,ended = net.complete(at,hist[b,j],initial[b],c==n[b],first_bias=bias,
-                                               first_code=target if given else None, stream=online, local_context=context)
+                                               first_code=target if given else None, stream=online, local_context=context, interaction=interaction)
             mask = pics.cpu().numpy()
             outputs.extend(np.packbits(p[:m],axis=1) for p,m in zip(mask,lengths.tolist(),strict=True))
             stops.extend(ended.tolist())
