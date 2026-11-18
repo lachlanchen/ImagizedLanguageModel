@@ -85,7 +85,7 @@ class SourcePlateReader(nn.Module):
 
 
 @torch.inference_mode()
-def generate_with_plate(writer, plate, inputs):
+def generate_with_plate(writer, plate, inputs, coverage=None):
     """Choose the physical source-copy or free-writing path from the visible input."""
     features = visual_input(inputs,writer.landmarks)
     select = plate.routing(features)>0
@@ -98,10 +98,58 @@ def generate_with_plate(writer, plate, inputs):
         if not bool(mask.any()):
             continue
         if copy:
-            stream = plate.copy(features[mask],inputs[mask,28:44:5].bool())
+            if coverage is None:
+                stream = plate.copy(features[mask],inputs[mask,28:44:5].bool())
+            else:
+                stream = copy_with_coverage(plate,coverage,features[mask],inputs[mask])
         else:
             stream = writer.generate(features[mask])
         indexes = mask.cpu().numpy()
         pixels[indexes],length[indexes],stop[indexes] = stream
     pixels[np.arange(8)[None,:]>=length[:,None]] = 0
     return pixels,length,stop,select.cpu().numpy()
+
+
+class StageCoverage(nn.Module):
+    """Detect requested stage names in local question patches, independently of page order."""
+    def __init__(self):
+        super().__init__()
+        self.cell = nn.Linear(112,48)
+        self.local = nn.Conv1d(48,96,7,padding=3)
+        self.label = nn.Sequential(nn.Linear(336,96),nn.GELU(),nn.Linear(96,96))
+        self.offset = nn.Parameter(torch.zeros(()))
+
+    def forward(self, features):
+        q = self.cell(features[:,:24]).transpose(1,2)
+        phrases = F.normalize(self.local(q).transpose(1,2),dim=-1)
+        headers = features[:,24:44].reshape(-1,4,5,112)[:,:,1:4].flatten(2)
+        label = F.normalize(self.label(headers),dim=-1)
+        return 16*torch.bmm(label,phrases.transpose(1,2)).amax(-1)+self.offset
+
+
+@torch.inference_mode()
+def copy_with_coverage(plate, coverage, features, inputs):
+    prepared = plate.prepare(features)
+    rows = inputs[:,24:44].reshape(-1,4,5,1024).bool()
+    source = rows[:,:,4]
+    headers = rows[:,:,1:4].flatten(2)
+    remaining = coverage(features)>0
+    previous = torch.zeros_like(source[:,0])
+    idx = torch.arange(len(inputs),device=inputs.device)
+    output = torch.zeros(len(idx),8,1024,device=idx.device,dtype=torch.bool)
+    length = torch.zeros(len(idx),device=idx.device,dtype=torch.long)
+    for step in range(3):
+        active = remaining.any(1)
+        if not bool(active.any()):
+            break
+        score = plate.scores(prepared,source,previous,step)[:,:4]
+        choice = score.masked_fill(~remaining,-torch.inf).argmax(1)
+        emitted = source[idx,choice]
+        output[:,step] = emitted & active[:,None]
+        length += active.long()
+        previous = torch.where(active[:,None],emitted,previous)
+        same_image = (source==previous[:,None]).all(-1)
+        same_header = (headers[:,:,None]==headers[:,None,:]).all(-1)
+        covered = (same_header & same_image[:,None,:]).any(2)
+        remaining = remaining & ~covered & active[:,None]
+    return np.packbits(output.cpu().numpy(),axis=-1),length.cpu().numpy(),(~remaining.any(1)).cpu().numpy()

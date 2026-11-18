@@ -37,7 +37,7 @@ def load_base():
 
 
 @torch.inference_mode()
-def assess(writer,plate,tiles,x,mode,start):
+def assess(writer,plate,tiles,x,mode,start,coverage=None):
     outputs,lengths,stops,routes=[],[],[],[]
     for i in range(0,len(x),128):
         guard(start)
@@ -46,7 +46,7 @@ def assess(writer,plate,tiles,x,mode,start):
             ids[:,24:]=0
         if mode=='blank_question':
             ids[:,:24]=0
-        arr,n,stop,route=generate_with_plate(writer,plate,tiles[tensor(ids.astype(np.int32))])
+        arr,n,stop,route=generate_with_plate(writer,plate,tiles[tensor(ids.astype(np.int32))],coverage)
         outputs.append(arr);lengths.extend(n);stops.extend(stop);routes.extend(route)
     return np.concatenate(outputs),np.asarray(lengths),np.asarray(stops),np.asarray(routes)
 
