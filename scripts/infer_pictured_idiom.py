@@ -46,12 +46,17 @@ def main():
         state=load_file(str(args.weights),device='cpu')
     else:
         state=torch.load(args.weights,weights_only=True,map_location='cpu')
+    compatible_reader = None
     if args.writer:
         from safetensors import safe_open
         required = {k for k in state if k.startswith(('ink_group.', 'group_position.', 'feedback.', 'causal.', 'next_pattern.'))}
         with safe_open(str(args.writer), framework='pt', device='cpu') as patch:
             metadata = patch.metadata() or {}
-            if (metadata.get('format') != 'ilm-physical-writer-v1' or
+            version = metadata.get('format')
+            if version == 'ilm-context-writer-v2':
+                required = {k for k in state if k != 'landmarks' and not k.startswith('motor.')}
+                compatible_reader = metadata.get('qualified_source_sha256')
+            if (version not in ('ilm-physical-writer-v1', 'ilm-context-writer-v2') or
                     metadata.get('base_sha256') != hashlib.sha256(args.weights.read_bytes()).hexdigest() or
                     set(patch.keys()) != required):
                 cli.error('The writer does not match these base weights')
@@ -70,9 +75,12 @@ def main():
         modules = {'reader': SourcePlateReader(), 'span': StageSpanReader()}
         with safe_open(str(args.source_reader), framework='pt', device='cpu') as file:
             meta = file.metadata() or {}
+            writer_matches = meta.get('writer_sha256') == hashlib.sha256(args.writer.read_bytes()).hexdigest()
+            if compatible_reader:
+                writer_matches |= compatible_reader == hashlib.sha256(args.source_reader.read_bytes()).hexdigest()
             if (meta.get('format') != 'ilm-historical-spans-v1' or
                     meta.get('base_sha256') != hashlib.sha256(args.weights.read_bytes()).hexdigest() or
-                    meta.get('writer_sha256') != hashlib.sha256(args.writer.read_bytes()).hexdigest()):
+                    not writer_matches):
                 cli.error('The source reader does not match this base and writer')
             expected = {prefix + '.' + key for prefix, module in modules.items() for key in module.state_dict()}
             if set(file.keys()) != expected:

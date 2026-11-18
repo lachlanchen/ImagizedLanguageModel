@@ -44,6 +44,8 @@ Un modèle de 2,12 millions de paramètres lit le texte en image de part et d’
 
 Avec les prédictions du lecteur comme cibles supplémentaires, le modèle restitue 378 expressions sur 22 907. À nombre égal de mises à jour sur les seules réponses originales, il en restitue 292. Sur 9 135 passages jusque-là inutilisés, les deux modèles obtiennent respectivement 163 et 125 réponses exactes. [Figure 41](../publication/ilm-nature/figures/Figure_41_writer_transfer.png)
 
+Après entraînement conjoint du lecteur et du générateur visuels, le modèle a reproduit exactement 433 expressions sur 17 555 nouveaux passages chinois, contre 276 pour le modèle précédent et 789 pour le comptage local. [Fig. 43](../publication/ilm-nature/figures/Figure_43_expression_preference.png)
+
 ## Extraire une réponse à partir de glyphes chinois
 
 En 64 secondes sur deux threads CPU, un petit modèle a appris à sélectionner des réponses dans des passages en chinois. Sur des passages réservés à l’évaluation, 269 réponses sur 1 788 sont identiques à la référence au pixel près. Quand on efface la question, ce nombre tombe à 18. Le modèle distinct de génération libre n’a produit aucune explication lisible de l’évolution du caractère 言. La rédaction libre et le gain d’efficacité d’un facteur 1 000 restent à démontrer.

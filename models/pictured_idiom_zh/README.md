@@ -1,5 +1,20 @@
 # Chinese idiom writing from pictured context
 
+## Writing a missing expression
+
+The current 2.12M-parameter Chinese writer reads up to 24 pictured cells on either side of a gap and draws its answer. It completed 433 of 17,555 independently held-out gaps exactly, versus 276 for the preceding writer and 789 for a local count baseline. This CPU example produces **一举一动**. Use a new output directory for each run. [Results and failure example](../../references/expression_preference_result.md)
+
+```bash
+python -m scripts.infer_pictured_idiom \
+  --weights models/pictured_idiom_zh/reader_writer.safetensors \
+  --writer models/pictured_idiom_zh/joint_reference_writer.safetensors \
+  --before-text '【广东行情】苹果的本本，其' \
+  --after-text '都备受关注，如果要是在价格上有什么□，那肯定是一' \
+  --output /tmp/ilm-joint-answer
+```
+
+The output directory contains `answer.png`, packed pixels in `answer.bin` and a stop receipt. To use pictured input, pass `--before-image` and `--after-image` with black-on-white, row-major grids of 32-pixel cells.
+
 ## Reading historical forms from a plate
 
 This optional 2.65M-parameter configuration reads a pictured Chinese or English question and four rows of labelled historical evidence. Each row is five 32-pixel cells wide. It accepts oracle, bronze, seal and liushu or their pictured Chinese names 甲骨文、金文、篆書、六書通. The answer contains the selected source pixels in the requested order. On a fresh CPU process the example below returned the oracle form J04919 and bronze form B02976 of 言. These examples use the same 32-pixel font and layout as training. [Held-out tests and limitations](../../references/historical_plate_result.md)
@@ -7,7 +22,7 @@ This optional 2.65M-parameter configuration reads a pictured Chinese or English 
 ```bash
 python -m scripts.infer_pictured_idiom \
   --weights models/pictured_idiom_zh/reader_writer.safetensors \
-  --writer models/pictured_idiom_zh/distilled_writer.safetensors \
+  --writer models/pictured_idiom_zh/joint_reference_writer.safetensors \
   --source-reader models/pictured_idiom_zh/historical_reader.safetensors \
   --question-text 'Show 言: oracle, bronze' \
   --plate-image models/pictured_idiom_zh/examples/yan_plate.png \
@@ -16,6 +31,8 @@ python -m scripts.infer_pictured_idiom \
 
 For a held-out image-only request, pass `--question-image models/pictured_idiom_zh/examples/ma_question.png` and `--plate-image models/pictured_idiom_zh/examples/ma_plate.png`. The receipt records the chosen route, output length and stop. The same three weights also accept the modern passage inputs shown below.
 
+
+## Earlier reader-guided writer
 
 The reader-guided writer produced 378 exact development expressions in 22,907 gaps and 163 in 9,135 previously unused gaps. A local count model produced 1,012 and 406. To use the guided writer on CPU, pass the base checkpoint and its updated writer weights. The following passage produced **风风雨雨** in a fresh process.
 
