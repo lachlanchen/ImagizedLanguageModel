@@ -28,3 +28,15 @@ PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
   --source-image references/evidence/edit_contrast_20261118/short_source.png \
   --question-text '请翻译成白话文' --output /tmp/ilm-classical-question
 ```
+
+### Reproduce the sentence-diversity experiment
+
+Figure 50 shows the larger-corpus editor on a successful calendrical expression and on a command whose meaning it changes. This research update contains the 242,901 decoder parameters trained on 192,000 distinct additional translation pairs. On two chapter-disjoint cohorts it gave 32 and 20 exact matches per 2,048 requests. Its aggregate glyph error was slightly higher than the repeated-passage control. [Experiment](../../references/edit_diversity_result.md)
+
+```sh
+PYTHONPATH=. python scripts/infer_visual_edit_translation.py \
+  --checkpoint models/visual_edit_zh/editor.safetensors \
+  --decoder-update models/visual_edit_zh/diverse_decoder.safetensors \
+  --source-image references/evidence/edit_diversity_20261118/success_source.png \
+  --question-text 请翻译成白话文 --output /tmp/ilm-solar-eclipse
+```

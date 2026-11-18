@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2043,
+  "unsupported": 5,
+  "groups": 388,
+  "outcome": {
+    "translation": {
+      "cases": 2043,
+      "exact": 32,
+      "stopped": 2043,
+      "edits": 39421,
+      "target_cells": 69284,
+      "output_cells": 46306,
+      "known_cells": 46261,
+      "hard": 1945,
+      "hard_exact": 2,
+      "novel_hard_exact": 2,
+      "cer": 0.5689769643785001
+    },
+    "quote": {
+      "cases": 2043,
+      "exact": 2043,
+      "stopped": 2043,
+      "edits": 0,
+      "target_cells": 45713,
+      "output_cells": 45713,
+      "known_cells": 45669,
+      "hard": 1945,
+      "hard_exact": 1945,
+      "novel_hard_exact": 1943,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2043,
+      "exact": 0,
+      "stopped": 2043,
+      "edits": 64035,
+      "target_cells": 69284,
+      "output_cells": 46306,
+      "known_cells": 46261,
+      "hard": 1945,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9242393626234051
+    },
+    "copy": {
+      "cases": 2043,
+      "exact": 41,
+      "stopped": 2043,
+      "edits": 40253,
+      "target_cells": 69284,
+      "output_cells": 45713,
+      "known_cells": 45669,
+      "hard": 1945,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5809855089198084
+    },
+    "local": {
+      "cases": 2043,
+      "exact": 25,
+      "stopped": 2043,
+      "edits": 39249,
+      "target_cells": 69284,
+      "output_cells": 49889,
+      "known_cells": 49860,
+      "hard": 1945,
+      "hard_exact": 4,
+      "novel_hard_exact": 4,
+      "cer": 0.5664944287281335
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      0.8617364451702964,
+      1.5057228177430393
+    ],
+    "local": [
+      -0.6699912718170445,
+      0.18464121718467236
+    ],
+    "exchanged": [
+      33.66461435847525,
+      37.514812360780816
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "汝止，吾将问之。",
+      "target": "你待在这里，我来问问他。",
+      "chapter": "孔子家语/在厄",
+      "output_cells": 9,
+      "copied": 3,
+      "drawn": 6
+    },
+    "first_long_mixed": {
+      "index": 89,
+      "source": "十二月庚辰朔，日有食之。",
+      "target": "十二月初一，日食。",
+      "chapter": "宋史/本纪/卷七",
+      "output_cells": 9,
+      "copied": 7,
+      "drawn": 2
+    },
+    "first_changed_success": {
+      "index": 89,
+      "source": "十二月庚辰朔，日有食之。",
+      "target": "十二月初一，日食。",
+      "chapter": "宋史/本纪/卷七",
+      "output_cells": 9,
+      "copied": 7,
+      "drawn": 2
+    }
+  },
+  "distinct_questions_both": 3,
+  "different_answers": 2002,
+  "rows_sha256": "1fb7a0953c71c558ed882aa02d05dc25686894414d43b66122a42734f875c9c5",
+  "streams_sha256": "87b89d62bba26e9f9f1916d0a3e17b82a62f9ecb4ba5f30bc84c6e33414b792d",
+  "pass": false
+}

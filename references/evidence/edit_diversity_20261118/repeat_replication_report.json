@@ -1,0 +1,121 @@
+{
+  "all_requests": 2048,
+  "pictured": 2042,
+  "unsupported": 6,
+  "groups": 401,
+  "outcome": {
+    "translation": {
+      "cases": 2042,
+      "exact": 19,
+      "stopped": 2042,
+      "edits": 37324,
+      "target_cells": 66903,
+      "output_cells": 45453,
+      "known_cells": 45382,
+      "hard": 1985,
+      "hard_exact": 1,
+      "novel_hard_exact": 1,
+      "cer": 0.5578823072209019
+    },
+    "quote": {
+      "cases": 2042,
+      "exact": 2042,
+      "stopped": 2042,
+      "edits": 0,
+      "target_cells": 44899,
+      "output_cells": 44899,
+      "known_cells": 44829,
+      "hard": 1985,
+      "hard_exact": 1985,
+      "novel_hard_exact": 1983,
+      "cer": 0.0
+    },
+    "exchanged": {
+      "cases": 2042,
+      "exact": 0,
+      "stopped": 2042,
+      "edits": 61617,
+      "target_cells": 66903,
+      "output_cells": 45453,
+      "known_cells": 45382,
+      "hard": 1985,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.9209900901304874
+    },
+    "copy": {
+      "cases": 2042,
+      "exact": 20,
+      "stopped": 2042,
+      "edits": 38288,
+      "target_cells": 66903,
+      "output_cells": 44899,
+      "known_cells": 44829,
+      "hard": 1985,
+      "hard_exact": 0,
+      "novel_hard_exact": 0,
+      "cer": 0.5722912275981645
+    },
+    "local": {
+      "cases": 2042,
+      "exact": 24,
+      "stopped": 2042,
+      "edits": 37615,
+      "target_cells": 66903,
+      "output_cells": 48141,
+      "known_cells": 48089,
+      "hard": 1985,
+      "hard_exact": 6,
+      "novel_hard_exact": 6,
+      "cer": 0.5622318879571917
+    }
+  },
+  "improvement_ci_pp": {
+    "copy": [
+      1.26460079801064,
+      1.6218657025500813
+    ],
+    "local": [
+      0.027267601653794746,
+      0.8042151420051817
+    ],
+    "exchanged": [
+      34.83975122701396,
+      37.78656674295625
+    ]
+  },
+  "examples": {
+    "first_error": {
+      "index": 0,
+      "source": "五年三月，豫宁县长岗山获神钟一枚。",
+      "target": "五年三月，豫宁县长岗山发现一口神钟。",
+      "chapter": "南齐书/志/卷十八",
+      "output_cells": 17,
+      "copied": 17,
+      "drawn": 0
+    },
+    "first_long_mixed": {
+      "index": 796,
+      "source": "六月，镇西将军益州刺史周抚卒。",
+      "target": "六月，镇西将军益州刺史周抚去世。",
+      "chapter": "晋书/志/第二章",
+      "output_cells": 16,
+      "copied": 14,
+      "drawn": 2
+    },
+    "first_changed_success": {
+      "index": 796,
+      "source": "六月，镇西将军益州刺史周抚卒。",
+      "target": "六月，镇西将军益州刺史周抚去世。",
+      "chapter": "晋书/志/第二章",
+      "output_cells": 16,
+      "copied": 14,
+      "drawn": 2
+    }
+  },
+  "distinct_questions_both": 3,
+  "different_answers": 2022,
+  "rows_sha256": "ff2efc8b371814d8d8a053a3ec664ffefa8094fe798c04e4b9ca7dcccce879e5",
+  "streams_sha256": "e51f488117ca25250be6027a4a390f42cb35dc9ef0b837bceaa3bbca6799c5b6",
+  "pass": true
+}
