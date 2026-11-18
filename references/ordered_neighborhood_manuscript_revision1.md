@@ -9,3 +9,5 @@ Condense the accumulated abstract to a single paragraph of approximately 180 wor
 Follow the frozen-state diagnosis through the separately registered two-state intervention. Tie its presentation to the complete canonical versus emitted path comparisons; label all target-informed scores as training-form diagnostics.
 
 Report shared visual control on genuine expressions and withheld synthetic recombinations separately. These inputs contain the requested expression itself. The new diagnostic must not inflate the paper's autonomous passage results.
+
+Include the separately registered fixed-length boundary intervention. Use matched commitment for both arms, show the two unseen-combination curves, and disclose the observed-expression tradeoff and external length.

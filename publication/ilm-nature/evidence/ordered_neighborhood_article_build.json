@@ -1,0 +1,556 @@
+{
+  "promoted": true,
+  "baseline_git": "3e7461e9",
+  "cumulative_redline_git": "0f14fa3fb1f2ea1c0c71ccba50512b354f0d2ded",
+  "table": [
+    [
+      "Reader",
+      "All correct",
+      "Eight seen",
+      "Eight new",
+      "Count baseline missed"
+    ],
+    [
+      "Starting writer",
+      "642",
+      "32",
+      "610",
+      "302"
+    ],
+    [
+      "Original reader",
+      "797",
+      "36",
+      "761",
+      "412"
+    ],
+    [
+      "Shuffled local view",
+      "805",
+      "38",
+      "767",
+      "420"
+    ],
+    [
+      "Aligned local view",
+      "801",
+      "41",
+      "760",
+      "405"
+    ]
+  ],
+  "deck_sha256": "ca841f0121ed5e54a8a7d2200180219c893e014b634f7f7f7e4edd1a0c67fb7a",
+  "source_hashes": {
+    "gain_reference.png": "8fbecfb9d7c1a3be6fbd4c2153499e8c0652596dde0aa8625106ae4428af682e",
+    "fits.json": "42244641472f018a2906235f676d57d7cee88cef2d456fede35b15af0676f35e",
+    "figure.json": "382d4483ca2a446accfcc729991d91dc12b7b1388a937ebb86ad49379360f5a9",
+    "state_trace.json": "2e74f82775b219e1985ec015816b5a4be44130d89e316624c45d50a17fdffc30",
+    "gain_actual.png": "8fbecfb9d7c1a3be6fbd4c2153499e8c0652596dde0aa8625106ae4428af682e",
+    "loss_reference.png": "736016bf351c21e813bcc3a0f8df29dd0fa9e42497b347114ff7d13259f200cf",
+    "preparation.json": "b29cde471e6c584965d6795c0a62bf39da0d8cd16943c1e87978807012bbe538",
+    "loss_after.png": "7665459ab13e4791396abaa46d9e72cfbe6885231149bd1cafa120569ffe78c0",
+    "gain_before.png": "32249738e46cdfd3e169108d833fe2703d1c2d1b10c3dfc8e46509962c878dfb",
+    "loss_actual.png": "82a29d0c59dff41bae36d9b1c8ac56fc83560b2755bdd6f26103a497cdb755f9",
+    "single_state.json": "cfacce86f7241addddc8fce5214cf56a83dce93ce55f1bca3ece4ba757d2af39",
+    "evaluate_resources.json": "dcb1133a2171649287b4f1458c31ae3d09955c723a86d3c8801b48982aadf591",
+    "loss_before.png": "64cffe0edc6eed78749801815c3a95b5e3a2a192fa3d07471016752671007952",
+    "shared_control.json": "11d9c85c324cc441f0536a400f7881f3b1e4a1c1292c4cfe7c0bdc47504c6c8c",
+    "train_resources.json": "605f0f0fd673e01c110a1d2dec63a228e8451216ca609cd308899c65cdc6e0e1",
+    "evaluation.json": "4dc2d9c788bee83ee7842ceff71aea9d7da4b2b69a8c75928d92b6ccee12afd5",
+    "transfer.json": "170290633c906b61c2cde46abcf92984d184b23bb91fe7ca749a917a68bb911f",
+    "two_states.json": "e7ce4cf336fe588d0da14101a1498dd6d4809cfaa6a9fef7030774ce9fb744ac",
+    "position_counts.json": "34e680794d84b196499814c3eaac05f75003c0184f5c8e9e426339a5e05f4eba",
+    "gain_after.png": "d190a75077d9fc30cbc5a0da5bcfadee65f606468627fea5555f70cd8338ca24",
+    "boundary_reset.json": "a401decf181e8e3bde09d7072407bf168242348d6fc4b97733326cd10e094991"
+  },
+  "inspection": {
+    "documents": {
+      "manuscript": {
+        "pages": 80,
+        "pdf_sha256": "b4fd90a876d3005550b1041521452967447a339fb9ad704b7c6e78cfc74132f8",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 169,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              39
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              40
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              41
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              42
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              43
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              44
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              45
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              46
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              47
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              48
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              49
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              50
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              51
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              52
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              53
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              54
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              55
+            ]
+          },
+          "fig:pictured-idioms": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              56
+            ]
+          },
+          "fig:writer-transfer": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              57
+            ]
+          },
+          "fig:historical-plates": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              58
+            ]
+          },
+          "fig:expression-preference": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              59
+            ]
+          },
+          "fig:passage-diversity": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              60
+            ]
+          },
+          "fig:ordered-neighborhood": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              61
+            ]
+          }
+        },
+        "overview_sheets": 3
+      },
+      "manuscript_review": {
+        "pages": 131,
+        "pdf_sha256": "971c48412af6806a3a804a15c33d2f6ea5a43bdc7d9a5b6b87f830df32743467",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 169,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              109
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              110
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              111
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              112
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              113
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              114
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              115
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              116
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              117
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              118
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              119
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              120
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              121
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              122
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              123
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              124
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              125
+            ]
+          },
+          "fig:pictured-idioms": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              126
+            ]
+          },
+          "fig:writer-transfer": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              127
+            ]
+          },
+          "fig:historical-plates": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              128
+            ]
+          },
+          "fig:expression-preference": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              129
+            ]
+          },
+          "fig:passage-diversity": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              130
+            ]
+          },
+          "fig:ordered-neighborhood": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              131
+            ]
+          }
+        },
+        "overview_sheets": 4
+      },
+      "redlined_manuscript": {
+        "pages": 133,
+        "pdf_sha256": "62e52e3f154e9963ddf014c2b896106570b6271c6c5adad9243465c381e1271f",
+        "all_text_bounds_inside_page": true,
+        "all_prior_image_contents_retained": 169,
+        "figures": {
+          "fig:continuation-history": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              111
+            ]
+          },
+          "fig:complete-continuation": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              112
+            ]
+          },
+          "fig:joint-writer-physical": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              113
+            ]
+          },
+          "fig:context-likelihood-failure": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              114
+            ]
+          },
+          "fig:ranking-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              115
+            ]
+          },
+          "fig:glyph-score-gaps": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              116
+            ]
+          },
+          "fig:reward-calibration": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              117
+            ]
+          },
+          "fig:white-target-completed": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              118
+            ]
+          },
+          "fig:visual-context-evidence": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              119
+            ]
+          },
+          "fig:full-context-comparison": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              120
+            ]
+          },
+          "fig:visual-word-order": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              121
+            ]
+          },
+          "fig:visual-reading-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              122
+            ]
+          },
+          "fig:visual-successors": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              123
+            ]
+          },
+          "fig:patch-writing": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              124
+            ]
+          },
+          "fig:shared-layout": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              125
+            ]
+          },
+          "fig:grounded-detail": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              126
+            ]
+          },
+          "fig:visual-titles": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              127
+            ]
+          },
+          "fig:pictured-idioms": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              128
+            ]
+          },
+          "fig:writer-transfer": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              129
+            ]
+          },
+          "fig:historical-plates": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              130
+            ]
+          },
+          "fig:expression-preference": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              131
+            ]
+          },
+          "fig:passage-diversity": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              132
+            ]
+          },
+          "fig:ordered-neighborhood": {
+            "RGB_and_alpha_exact": true,
+            "pages": [
+              133
+            ]
+          }
+        },
+        "overview_sheets": 4
+      }
+    },
+    "figure_assets_preserved": 377,
+    "automated_checks_are_not_visual_review": true,
+    "inspection_seconds": 25.718035832978785,
+    "build_plus_inspection_seconds": 65.45446790289134
+  },
+  "visual_review": {
+    "manuscript": {
+      "pdf_sha256": "b4fd90a876d3005550b1041521452967447a339fb9ad704b7c6e78cfc74132f8",
+      "overview_pages": 80,
+      "detailed_pages": [
+        1,
+        37,
+        38,
+        61,
+        78
+      ],
+      "observations": "Checked all overview sheets, the condensed abstract, revised text, chart legends, original images and Figure 45 caption against the page margins."
+    },
+    "manuscript_review": {
+      "pdf_sha256": "971c48412af6806a3a804a15c33d2f6ea5a43bdc7d9a5b6b87f830df32743467",
+      "overview_pages": 131,
+      "detailed_pages": [
+        1,
+        44,
+        45,
+        82,
+        83,
+        131
+      ],
+      "observations": "Checked all overview sheets, the condensed abstract, revised text, chart legends, original images and Figure 45 caption against the page margins."
+    },
+    "redlined_manuscript": {
+      "pdf_sha256": "62e52e3f154e9963ddf014c2b896106570b6271c6c5adad9243465c381e1271f",
+      "overview_pages": 133,
+      "detailed_pages": [
+        1,
+        46,
+        47,
+        85,
+        133
+      ],
+      "observations": "Checked all overview sheets, the condensed abstract, revised text, chart legends, original images and Figure 45 caption against the page margins."
+    }
+  },
+  "prior_figure_files_verified": 377,
+  "office_application_export_verified": false
+}

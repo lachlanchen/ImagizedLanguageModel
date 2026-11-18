@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_passage_diversity_article.py.
+% Literal captions copied from their source inputs by build_ordered_neighborhood_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -377,4 +377,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, First source-order gain and loss from training with additional distinct passages relative to repeating the original corpus. The panel shows twelve pictured cells from each side of the gap and the complete emitted and source expressions.
 \textbf{c}, Uniform and frequency-weighted likelihood on 17,962 further held-out passages. Rare answers occurred one to twenty times in the combined training data.}
 \label{fig:passage-diversity}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_45_ordered_neighborhood.png}
+\caption{\textbf{Passage-conditioned writing and copying of unfamiliar glyph combinations.}
+\textbf{a}, Complete pixel-exact expressions on 26,213 held-out passages. Eight seen and eight new distinguish local windows present or absent in training. The last column counts correct answers on cases missed by local counts.
+\textbf{b}, First gain and loss in source order relative to the original reader, with the local context, actual output and reference pixels.
+\textbf{c}, Number of exactly copied prefixes at each length for 3,845 training expressions and 3,845 previously unseen combinations. Each target glyph was supplied to the shared controller as an image during this copying test.
+\textbf{d}, On the same unfamiliar combinations, both arms received four output positions and committed one path per glyph. Clearing drawing history changed the number of complete copies from zero to 1,450. Curves in c and d show the number of strings correct through the indicated glyph.}
+\label{fig:ordered-neighborhood}
 \end{figure*}
