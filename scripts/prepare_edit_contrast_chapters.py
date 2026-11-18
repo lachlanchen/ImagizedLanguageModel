@@ -1,4 +1,5 @@
 """Reserve a new chapter-disjoint roster for a comparison of whole-glyph objectives."""
+import argparse
 import heapq
 import json
 import tarfile
@@ -12,7 +13,9 @@ from scripts.train_visual_edit_translation import ROOT, bank, inputs, load, requ
 WORK = ROOT / 'artifacts/visual_edit_contrast_v1'
 
 
-def main():
+def main(confirmation=False):
+    destination = WORK / "confirmation_roster" if confirmation else WORK
+    tag = "contrast-confirmation-v1" if confirmation else "contrast-fresh-v1"
     archive = BASE / 'archive.tar.gz'
     require(sha(archive) == load(OUT / 'preparation.json')['archive_sha256'], 'Archive changed')
     groups, seen, texts = set(), set(), set()
@@ -22,6 +25,16 @@ def main():
             texts.add(row['source'])
             if row['x']:
                 seen.add(tuple(row['x']))
+    if confirmation:
+        require(sha(WORK / 'fresh.jsonl') == load(WORK / 'preparation.json')['fresh_sha256'], 'First fresh roster changed')
+        fresh_bank = np.load(WORK / 'pixels.npy')
+        fresh_images = set()
+        for line in (WORK/'fresh.jsonl').open():
+            row = json.loads(line)
+            groups.add(row['g'])
+            texts.add(row['source'])
+            if row['x']:
+                fresh_images.add(fresh_bank[row['x']].tobytes())
     heap = []
     with tarfile.open(archive, mode='r|gz') as tar:
         for member in tar:
@@ -34,7 +47,7 @@ def main():
             for index, (source, target) in enumerate(pairs(tar.extractfile(member).read())):
                 if len(source) > 96 or source in texts:
                     continue
-                priority = int.from_bytes(digest(f'contrast-fresh-v1/{group}/{index}')[:8], 'big')
+                priority = int.from_bytes(digest(f'{tag}/{group}/{index}')[:8], 'big')
                 entry = (-priority, group, index, source, target)
                 if len(heap) < 8192:
                     heapq.heappush(heap, entry)
@@ -52,6 +65,8 @@ def main():
             x, y = [], []
         if x and tuple(x) in seen:
             continue
+        if confirmation and x and b''.join(renderer.tile(c) for c in source) in fresh_images:
+            continue
         seen.add(tuple(x))
         texts.add(source)
         actions, outputs = edit_trace(x, y) if x else ([], [])
@@ -59,17 +74,19 @@ def main():
         if len(rows) == 2048:
             break
     require(len(rows) == 2048 and not groups.intersection(r['g'] for r in rows), 'Fresh chapter coverage')
-    WORK.mkdir()
-    file = WORK / 'fresh.jsonl'
+    destination.mkdir()
+    file = destination / 'fresh.jsonl'
     with file.open('x') as stream:
         for row in rows:
             stream.write(json.dumps(row, ensure_ascii=False) + '\n')
-    np.save(WORK / 'pixels.npy', np.frombuffer(b''.join(ids), np.uint8).reshape(-1, 128))
+    np.save(destination / 'pixels.npy', np.frombuffer(b''.join(ids), np.uint8).reshape(-1, 128))
     report = dict(rows=len(rows), groups=len({r['g'] for r in rows}), pictured=sum(bool(r['x']) for r in rows),
-                  excluded_chapters=len(groups), fresh_sha256=sha(file), pixels_sha256=sha(WORK / 'pixels.npy'))
-    write_new(WORK / 'preparation.json', report)
+                  excluded_chapters=len(groups), fresh_sha256=sha(file), pixels_sha256=sha(destination / 'pixels.npy'))
+    write_new(destination / 'preparation.json', report)
     print(report)
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--confirmation', action='store_true')
+    main(parser.parse_args().confirmation)

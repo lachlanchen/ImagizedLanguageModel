@@ -28,7 +28,7 @@ def restore(path):
     return model
 
 
-def contrast_loss(head, states, target):
+def contrast_loss(head, states, target, log_frequency=None):
     selected = torch.randperm(len(states), device=states.device)[:256]
     truth = target[selected]
     positions = torch.arange(len(truth), device=states.device)
@@ -39,12 +39,14 @@ def contrast_loss(head, states, target):
     logits = head.teacher(queries.flatten(0, 1), bits)
     logp = logits.log_softmax(-1).gather(-1, nibbles(bits).unsqueeze(-1)).squeeze(-1)
     scores = logp.sum(1).reshape(len(truth), len(offsets))
+    if log_frequency is not None:
+        scores = scores - log_frequency(candidates)
     duplicates = (candidates == truth[:, None]).all(-1)
     duplicates[:, 0] = False
     return -scores.masked_fill(duplicates, -torch.inf).log_softmax(1)[:, 0].mean()
 
 
-def fit(arm, tiles, columns, lengths, source_lengths):
+def fit(arm, tiles, columns, lengths, source_lengths, *, log_frequency=None):
     start = time.monotonic()
     guard(start)
     torch.cuda.reset_peak_memory_stats()
@@ -59,10 +61,10 @@ def fit(arm, tiles, columns, lengths, source_lengths):
     ink = torch.as_tensor(np.unpackbits(tiles, axis=1), device='cuda').bool()
     features = visual_input(ink, net.landmarks)
     history, schedule = [], hashlib.sha256()
-    factor = float(arm == 'contrast')
+    factor = float(arm != 'likelihood')
 
     def auxiliary(head, states, target):
-        return factor * contrast_loss(head, states, target)
+        return factor * contrast_loss(head, states, target, log_frequency)
 
     for epoch in range(4):
         batches = []
