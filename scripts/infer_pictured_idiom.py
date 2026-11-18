@@ -19,13 +19,18 @@ def context_pixels(left,right):
 
 def main():
     cli=argparse.ArgumentParser(description=__doc__)
+    aliases = {'before': 'question', 'after': 'plate'}
     for side in ('before','after'):
         group=cli.add_mutually_exclusive_group(required=True)
-        group.add_argument('--'+side+'-image',type=Path,help='Black on white in row-major 32-pixel cells')
-        group.add_argument('--'+side+'-text')
+        group.add_argument('--'+side+'-image','--'+aliases[side]+'-image',type=Path,help='Black on white in row-major 32-pixel cells')
+        names = ['--' + side + '-text']
+        if side == 'before':
+            names.append('--question-text')
+        group.add_argument(*names)
         cli.add_argument('--'+side+'-cells',type=int,help='Used cells in a padded image')
     cli.add_argument('--weights',required=True,type=Path);cli.add_argument('--output',required=True,type=Path)
     cli.add_argument('--writer', type=Path, help='Optional trained physical writer bound to the base weights')
+    cli.add_argument('--source-reader', type=Path, help='Optional trained reader for four-row historical plates')
     args=cli.parse_args()
     sides=[]
     for side in ('before','after'):
@@ -57,11 +62,33 @@ def main():
                 state[key] = tensor
     net=PicturedIdiom(state['landmarks']).eval();net.load_state_dict(state)
     pix=torch.from_numpy(context_pixels(*sides))[None]
-    out,length,stop=net.generate(visual_input(pix,net.landmarks))
+    if args.source_reader:
+        from safetensors import safe_open
+        from ilm.visual_lm.source_plate import SourcePlateReader, StageSpanReader, generate_with_plate
+        if not args.writer:
+            cli.error('The source reader requires its matching writer')
+        modules = {'reader': SourcePlateReader(), 'span': StageSpanReader()}
+        with safe_open(str(args.source_reader), framework='pt', device='cpu') as file:
+            meta = file.metadata() or {}
+            if (meta.get('format') != 'ilm-historical-spans-v1' or
+                    meta.get('base_sha256') != hashlib.sha256(args.weights.read_bytes()).hexdigest() or
+                    meta.get('writer_sha256') != hashlib.sha256(args.writer.read_bytes()).hexdigest()):
+                cli.error('The source reader does not match this base and writer')
+            expected = {prefix + '.' + key for prefix, module in modules.items() for key in module.state_dict()}
+            if set(file.keys()) != expected:
+                cli.error('Incomplete source reader')
+            for prefix, module in modules.items():
+                module.load_state_dict({k: file.get_tensor(prefix + '.' + k) for k in module.state_dict()})
+                module.eval()
+        out, length, stop, copied = generate_with_plate(net, modules['reader'], pix, modules['span'])
+    else:
+        out,length,stop=net.generate(visual_input(pix,net.landmarks))
     result=out[0,:length[0]];args.output.mkdir(exist_ok=False,parents=True)
     (args.output/'answer.bin').write_bytes(result.tobytes())
     if len(result):save_page(args.output/'answer.png',result)
     report={'cells':int(length[0]),'stopped':bool(stop[0])}
+    if args.source_reader:
+        report['route'] = 'source' if copied[0] else 'writer'
     (args.output/'receipt.json').write_text(json.dumps(report,indent=2)+'\n')
     print(report)
 

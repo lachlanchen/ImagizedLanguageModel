@@ -32,6 +32,10 @@ Résultat du 2026-11-08 : l’évaluation de l’entraînement de 128 mises à j
 
 [Résultat et portée des observations](../references/native_paired_qa_learning_result.md)
 
+## Lire les formes historiques
+
+À partir d’une planche de quatre lignes, le modèle a restitué les images historiques dans l’ordre demandé pour 9 565 des 9 600 questions en chinois et en anglais portant sur des familles de caractères exclues de l’entraînement. [Exécuter le modèle](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)
+
 ## Écrire le chengyu manquant à partir du passage en image
 
 Un modèle de 2,12 millions de paramètres lit le texte en image de part et d’autre d’une lacune et dessine les quatre caractères de l’expression chinoise manquante. Sur 22 907 exemples de validation, il restitue exactement 134 expressions. Dans 100 de ces cas, aucun des quatre caractères ne figure dans le passage visible. Une méthode de référence fondée sur les fréquences locales donne 1 012 réponses exactes.

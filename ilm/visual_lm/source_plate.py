@@ -133,7 +133,12 @@ def copy_with_coverage(plate, coverage, features, inputs):
     rows = inputs[:,24:44].reshape(-1,4,5,1024).bool()
     source = rows[:,:,4]
     headers = rows[:,:,1:4].flatten(2)
-    remaining = coverage(features)>0
+    positions = None
+    if isinstance(coverage, StageSpanReader):
+        logits, positions = coverage.locate(features)
+    else:
+        logits = coverage(features)
+    remaining = logits > 0
     previous = torch.zeros_like(source[:,0])
     idx = torch.arange(len(inputs),device=inputs.device)
     output = torch.zeros(len(idx),8,1024,device=idx.device,dtype=torch.bool)
@@ -143,7 +148,11 @@ def copy_with_coverage(plate, coverage, features, inputs):
         if not bool(active.any()):
             break
         score = plate.scores(prepared,source,previous,step)[:,:4]
-        choice = score.masked_fill(~remaining,-torch.inf).argmax(1)
+        eligible = remaining
+        if positions is not None:
+            earliest = positions.masked_fill(~remaining, positions.shape[-1] + 24).amin(1, keepdim=True)
+            eligible = remaining & (positions == earliest)
+        choice = score.masked_fill(~eligible, -torch.inf).argmax(1)
         emitted = source[idx,choice]
         output[:,step] = emitted & active[:,None]
         length += active.long()
@@ -153,3 +162,35 @@ def copy_with_coverage(plate, coverage, features, inputs):
         covered = (same_header & same_image[:,None,:]).any(2)
         remaining = remaining & ~covered & active[:,None]
     return np.packbits(output.cpu().numpy(),axis=-1),length.cpu().numpy(),(~remaining.any(1)).cpu().numpy()
+
+class StageSpanReader(nn.Module):
+    """Match complete visible mentions against the headings on the supplied plate."""
+
+    max_width = 6
+
+    def __init__(self):
+        super().__init__()
+        self.span = nn.Sequential(nn.Linear(self.max_width * 112, 128), nn.GELU(), nn.Linear(128, 64))
+        self.header = nn.Sequential(nn.Linear(3 * 112, 96), nn.GELU(), nn.Linear(96, 64))
+
+    def embed_spans(self, spans):
+        return F.normalize(self.span(spans.flatten(-2)), dim=-1)
+
+    def embed_headers(self, headers):
+        return F.normalize(self.header(headers.flatten(-2)), dim=-1)
+
+    def locate(self, features):
+        question = features[:, :24]
+        headers = features[:, 24:44].reshape(-1, 4, 5, 112)[:, :, 1:4]
+        keys = self.embed_headers(headers)
+        batch, cells, dim = question.shape
+        spans = question.new_zeros(batch, cells, self.max_width, dim)
+        best = question.new_full((batch, 4, cells), -torch.inf)
+        for offset in range(self.max_width):
+            end = cells - offset
+            spans[:, :end, offset] = question[:, offset:]
+            encoded = self.embed_spans(spans[:, :end])
+            scores = torch.bmm(keys, encoded.transpose(1, 2))
+            best[:, :, :end] = torch.maximum(best[:, :, :end], scores)
+        score, start = best.max(-1)
+        return 16 * (score - 0.5), start

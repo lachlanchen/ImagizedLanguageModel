@@ -1,0 +1,130 @@
+{
+  "questions": 9600,
+  "subgroup_denominator": 2400,
+  "arms": {
+    "intact": {
+      "exact": 6884,
+      "routes": 9600,
+      "correct_length": 6934,
+      "by_language_length": {
+        "zh_1": 1088,
+        "zh_2": 2376,
+        "en_1": 1132,
+        "en_2": 2288
+      },
+      "reversed_order_both": 2291,
+      "single_stage_pair_both": 304,
+      "archive_sha256": "f6712bc67415c3a312c5f016db03696f7a3f8f5eea42b29a96de4dfe5bea429c"
+    },
+    "blank_question": {
+      "exact": 0,
+      "routes": 9600,
+      "correct_length": 0,
+      "by_language_length": {
+        "zh_1": 0,
+        "zh_2": 0,
+        "en_1": 0,
+        "en_2": 0
+      },
+      "reversed_order_both": 0,
+      "single_stage_pair_both": 0,
+      "archive_sha256": "c75a3c90f9599d1cb90a4577e18bcde3da5af2fe41334f85010add15d5db364a"
+    },
+    "blank_plate": {
+      "exact": 0,
+      "routes": 0,
+      "correct_length": 0,
+      "by_language_length": {
+        "zh_1": 0,
+        "zh_2": 0,
+        "en_1": 0,
+        "en_2": 0
+      },
+      "reversed_order_both": 0,
+      "single_stage_pair_both": 0,
+      "archive_sha256": "5b30fa6cd3689d87b57e0457a185be0980aa488e50d3b9e578c98305a3b4b03b"
+    }
+  },
+  "cloze_cases": 9135,
+  "cloze_preserved": 9135,
+  "cloze_routed_to_copy": 0,
+  "cloze_exact": 163,
+  "yan": {
+    "source": {
+      "split": "train",
+      "card": 302,
+      "index": 4839,
+      "stages": [
+        "oracle",
+        "bronze"
+      ],
+      "rows": [
+        {
+          "char": "言",
+          "family": "44a3ce852e59fefe424a2d6c8c3cbdc6629f63dea1ddcdf74821866a8358b256",
+          "entry": "E07105",
+          "stage": "oracle",
+          "label": "J04919",
+          "raster": "2815511095c2252ca36d7b39f948846b416690a60160ec9f548d834ab9984068",
+          "svg": "339e110a0886171ed58e234a86e0c3f2d3b5c713c71deccbdd074015c15c29be",
+          "key": 4827,
+          "tile": 7338
+        },
+        {
+          "char": "征",
+          "family": "dac502eb2de173781e81232d7b96e95a01c06411b790a2dc10f92fd4e17e5c08",
+          "entry": "E08130",
+          "stage": "bronze",
+          "label": "B02017",
+          "raster": "a6411f689af20ed30752937d624916258efee19fe3d4ded0bde15627b8c18238",
+          "svg": "4cb6b1ca40531f78d83b93b64ace14fa15a9894275e7b2a055d32bc2d4556da1",
+          "key": 1575,
+          "tile": 7339
+        },
+        {
+          "char": "征",
+          "family": "dac502eb2de173781e81232d7b96e95a01c06411b790a2dc10f92fd4e17e5c08",
+          "entry": "E08130",
+          "stage": "oracle",
+          "label": "J03463",
+          "raster": "df60ccd2d6311851069ba69d3270a6c3017e6ed76e72e19f6e7daad339b42d64",
+          "svg": "21c1dc35d6151c51c4c3cac08fcc8f7763927f5922b4a9f7b784b4f5dcdd3eee",
+          "key": 1575,
+          "tile": 6177
+        },
+        {
+          "char": "言",
+          "family": "44a3ce852e59fefe424a2d6c8c3cbdc6629f63dea1ddcdf74821866a8358b256",
+          "entry": "E07105",
+          "stage": "bronze",
+          "label": "B02976",
+          "raster": "e1e922f3cc2cc0117c6cdafd350273f20fd926d69354db6c1c9fc891b459cfaa",
+          "svg": "6ff49b8b40b8cce8fdaaddb5372023ea146d968fff89c03e7e21b3ca7b422241",
+          "key": 4827,
+          "tile": 7337
+        }
+      ]
+    },
+    "correct": true,
+    "cells": 2
+  },
+  "train_questions": 96000,
+  "fit_seconds": 38.189086499623954,
+  "seconds": 46.477329461835325,
+  "peak_allocated_bytes": 190863360,
+  "losses": [
+    0.26183024659131965,
+    0.0010555108760794004,
+    0.0005762303336329448,
+    0.0005156376731029013,
+    0.00048080949964059985,
+    0.00047129219697914475,
+    0.0004531311980851266,
+    0.00043654031306505204,
+    0.0004290071985730416,
+    0.0004184154625654628
+  ],
+  "qualified": false,
+  "added_params": 401781,
+  "model_sha256": "9585bee26c66c39c951da2bf798a8fae7489bad05a9c73b911db187c73a973f1"
+}

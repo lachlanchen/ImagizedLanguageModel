@@ -32,6 +32,10 @@ Kết quả ngày 2026-11-08: đã hoàn tất đánh giá lần học 128 cập
 
 [Kết quả và phạm vi bằng chứng](../references/native_paired_qa_learning_result.md)
 
+## Đọc dạng chữ cổ từ bảng tư liệu
+
+Với bảng tư liệu gồm bốn hàng, mô hình trả về đúng hình dạng chữ theo thứ tự yêu cầu trong 9.565 trên 9.600 câu hỏi tiếng Trung và tiếng Anh về các họ chữ chưa dùng để huấn luyện. [Chạy mô hình](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)
+
 ## Đọc ảnh văn bản và viết thành ngữ còn thiếu
 
 Mô hình 2,12 triệu tham số đọc ảnh văn bản ở hai bên chỗ trống rồi vẽ từng chữ của thành ngữ tiếng Trung. Trong 22.907 trường hợp kiểm định, 134 đáp án khớp hoàn toàn với nguyên văn. Ở 100 trường hợp trong số đó, cả bốn chữ của đáp án đều vắng mặt trong đầu vào. Phương pháp đối chứng dựa vào tần suất trong ngữ cảnh gần trả lời đúng 1.012 trường hợp.

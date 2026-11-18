@@ -30,6 +30,10 @@ Ergebnis vom 2026-11-08: Die Auswertung des Trainings mit 128 Updates ist abgesc
 
 [Ergebnis und Aussagegrenzen](../references/native_paired_qa_learning_result.md)
 
+## Historische Zeichenformen aus einer Tafel lesen
+
+Auf einer Tafel mit vier Zeilen gab das Modell bei 9.565 von 9.600 chinesischen und englischen Fragen zu zuvor ungesehenen Zeichenfamilien die historischen Formen in der verlangten Reihenfolge aus. [Modell ausführen](../models/pictured_idiom_zh/README.md) · [Fig. 42](../publication/ilm-nature/figures/Figure_42_historical_plates.png)
+
 ## Eine fehlende chinesische Redewendung aus Schriftbildern ergänzen
 
 Ein Modell mit 2,12 Millionen Parametern liest die Schriftbilder vor und nach einer Lücke und zeichnet die vier fehlenden chinesischen Zeichen. Bei 134 von 22.907 Validierungsbeispielen stimmte die Antwort genau mit dem Original überein. In 100 dieser Fälle kam keines der vier Zeichen im sichtbaren Text vor. Ein Vergleichsverfahren auf Basis lokaler Häufigkeiten löste 1.012 Fälle.

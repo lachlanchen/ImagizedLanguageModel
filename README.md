@@ -20,6 +20,10 @@ use local hanziyuan-derived ziyuan data for `言` (YAN, U+8A00). The measured
 canonical Chinese experiments and their narrower claim boundary are
 reported directly below.*
 
+## Reading historical forms
+
+Given a four-row illustrated entry, the model returned the requested historical images in order on 9,565 of 9,600 Chinese and English questions about held-out families. It kept the same score after the images moved between rows. The example for 言 returns an oracle form and a bronze form. [Runnable model](models/pictured_idiom_zh/README.md) · [Fig. 42](publication/ilm-nature/figures/Figure_42_historical_plates.png)
+
 ## Writing a missing Chinese idiom
 
 A 2.12-million-parameter model reads the text images on either side of a gap and draws the missing idiom. It wrote 134 of 22,907 validation answers exactly. In 100 of those passages, all four answer characters were absent from the input window. A local count baseline recovered 1,012 answers.
