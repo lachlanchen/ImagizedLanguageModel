@@ -1,0 +1,125 @@
+{
+  "examples": 22907,
+  "stopped": 22907,
+  "lengths": {
+    "3": 116,
+    "4": 22791
+  },
+  "complete_exact": 134,
+  "swapped_exact": 23,
+  "frequency_baseline_exact": 15,
+  "unique_correct": 43,
+  "absent_cases": 22840,
+  "correct_with_absent": 134,
+  "distinct_correct_with_absent": 43,
+  "aligned_absent_cells": 84098,
+  "aligned_absent_exact": 1854,
+  "emitted_cells": 91512,
+  "training_target_shape_hits": 91474,
+  "group_bootstrap_normal_minus_swapped_95": [
+    0.0037548026545581557,
+    0.0059187241692413165
+  ],
+  "oracle_motor": {
+    "known_shapes": 2229,
+    "known_exact": 2229,
+    "unseen_shapes": 8,
+    "unseen_exact": 0
+  },
+  "examples_by_type": {
+    "first": {
+      "index": 0,
+      "tag": 577157,
+      "length": 4
+    },
+    "exact_absent": {
+      "index": 20,
+      "tag": 577177,
+      "length": 4
+    },
+    "first_miss": {
+      "index": 0,
+      "tag": 577157,
+      "length": 4
+    }
+  },
+  "passed": true,
+  "alignment": {
+    "options": 3805,
+    "supplied_inventory_exact": 930,
+    "supplied_inventory_exchanged_exact": 36,
+    "local_counts_exact": 1012,
+    "aligned_only": 125,
+    "control_only": 26,
+    "paired_improvement_95": [
+      0.003239437136725287,
+      0.005453793835000273
+    ]
+  },
+  "aligned_pass": true,
+  "fit_seconds": 57.16729377862066,
+  "seconds": 68.19620134867728,
+  "epoch_losses": [
+    [
+      1.9025717440764036,
+      5.180788742521261
+    ],
+    [
+      1.008947959349416,
+      5.026027000401455
+    ],
+    [
+      0.7348555857554621,
+      4.82447099605572
+    ],
+    [
+      0.6032823301776346,
+      4.652726679233132
+    ],
+    [
+      0.522704346001346,
+      4.509431101206253
+    ],
+    [
+      0.46939585875499673,
+      4.377766780599364
+    ],
+    [
+      0.4310783125985471,
+      4.2416452911566624
+    ],
+    [
+      0.4021844724785729,
+      4.104989128641833
+    ],
+    [
+      0.3806508814155172,
+      3.973960332356261
+    ],
+    [
+      0.3645843400714609,
+      3.8449600617798385
+    ],
+    [
+      0.35135256058174663,
+      3.7274675305335316
+    ],
+    [
+      0.3399783149471118,
+      3.6141230364836625
+    ]
+  ],
+  "inference_parameters": 2115971,
+  "aux_parameters": 246336,
+  "peak_vram": 303542272,
+  "host_peak_kib": 2217624,
+  "source_hashes": {
+    "scripts/fit_pictured_idiom_alignment.py": "8bbc69d838fd51a47ddf8501385a37ed09b661eecd92b1831e03938c618bd343",
+    "references/pictured_idiom_alignment_protocol.md": "a0236b724f4f5bf074d52fb41e340a6da6c52b891daafcdf2b9f0ce8c98bbf07",
+    "artifacts/pictured_idioms_v1/result.json": "6193463bc7e7eb2dd8c04711c15045af81e2474b19f55be4552bf62e40b316e3",
+    "artifacts/pictured_idiom_alignment_v1/weights.pt": "6ada588f948f03ff6bbda7eba7e2b449d5908d79b76450be2cdb3f4c2ff8d6c0",
+    "artifacts/pictured_idiom_alignment_v1/training_only_aux.pt": "087cdc3be3890db0dfb28bda636bfc6760f86109dc33767a51915e591162a1eb",
+    "artifacts/pictured_idiom_alignment_v1/diagnostic_choices.npz": "6111e80fef70319474c28b87080bc2af669afc85e919b4e21d28c67aeec831db",
+    "artifacts/pictured_idiom_alignment_v1/generated.npz": "fc6a1d35c1901bf13bb0c2f6542b7f318f2a53dc1f4e4fac5a2e77a18ccc4e33"
+  }
+}
