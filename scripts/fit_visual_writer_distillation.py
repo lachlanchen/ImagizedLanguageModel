@@ -76,6 +76,7 @@ def fit_arm(name, initial, features, inputs, targets, contexts, options, schedul
         cached, copy = writer_logits(model, contexts[test_rows], bits[targets[test_rows]])
         require(torch.equal(original, copy) and torch.equal(full, cached),
                 'Cached context disagrees with original teacher path')
+    model.causal.train()  # cuDNN stores the recurrent activations needed for backward.
     path = OUT / name
     path.mkdir()
     torch.cuda.synchronize()
