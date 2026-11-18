@@ -728,7 +728,7 @@ not unique facts or foundation-scale pretraining. Add data only with a declared
 coverage or supervision reason, provenance and group splits. Preparation is not
 student-language evidence.
 
-The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports independent writing in Figures 40, 41 and 43 and source-grounded historical forms in Figure 42. The reading, review and cumulative redline editions contain 77, 127 and 129 pages. The [verified build](../publication/ilm-nature/evidence/expression_preference_article_build.json) preserves earlier figure assets. The previous verified local package and the current publication are recorded separately in the local delivery receipts.
+The [current manuscript](../publication/ilm-nature/manuscript.pdf) reports independent writing in Figures 40, 41 and 43 and source-grounded historical forms in Figure 42. The reading, review and cumulative redline editions contain 77, 127 and 129 pages. The [verified build](../publication/ilm-nature/evidence/expression_preference_article_build.json) preserves earlier figure assets. The [local delivery receipt](../publication/ilm-nature/evidence/expression_preference_local_sync.json) records 1,379 files, the preserved previous package and the two current Nutstore PDF aliases. Cloud propagation is unverified.
 
 ## Work-unit and resource rules
 
