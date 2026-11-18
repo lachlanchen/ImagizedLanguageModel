@@ -104,7 +104,7 @@ class PicturedIdiom(nn.Module):
         return self.generate_from_context(self.read(features),beam,limit)
 
     @torch.inference_mode()
-    def generate_from_context(self,ctx,beam=4,limit=8):
+    def generate_from_context(self,ctx,beam=4,limit=8,*,observe_step=None):
         b=len(ctx);device=ctx.device
         ctx=ctx[:,None].expand(-1,beam,-1)
         hidden=ctx.contiguous()
@@ -128,6 +128,8 @@ class PicturedIdiom(nn.Module):
             probs[:,:,STOP]=torch.where(done,torch.zeros_like(scores),probs[:,:,STOP])
             winners,choices=(scores[:,:,None]+probs).flatten(1).topk(beam)
             parent=choices//17;symbol=choices%17
+            if observe_step is not None:
+                observe_step(t,parent,symbol,winners)
             codes=codes[rows,parent];feedback=feedback[rows,parent];length=length[rows,parent]
             done=done[rows,parent] | (symbol==STOP)
             scores=winners;hidden=h[rows,parent];previous=symbol
