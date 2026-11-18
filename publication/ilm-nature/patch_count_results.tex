@@ -1,0 +1,29 @@
+\subsection*{Drawing a recorded successor from visible parts}
+Removing a preference shared across contexts changed the native writer's
+strokes. On the same 512 article pairs, we compared full writing-code density
+with its log contrast against the last observed glyph, at the same plausible
+component means. The average difference between the two contexts grew from
+7.08 to 60.18 pixels per 1,024-pixel drawing. Neither rule reproduced any of
+the 1,024 successor images. Mean source ink F1 fell from .315 to .237.
+Both complete outputs about the history of the character for speech remained
+unreadable.
+
+A separate model generated sixteen physical patches per glyph. From the two
+most recent visible images, it estimated how likely each patch was to appear
+at its position and to join the patches already drawn. On 668 new contexts
+from 334 further articles, the model trained on authentic passage order drew
+18 exact successors spanning 14 characters (Fig.~\ref{fig:patch-writing}).
+Moving each training successor to another position in the same passage gave
+zero exact successors. The difference was 2.69 percentage points (95\%
+paired article interval 1.50 to 3.89). The model drew 198 images identical
+to known nonempty glyphs and left 348 outputs blank. Neither model got both
+successors right in any article. The difference establishes that local order
+can help a writer produce the source image without seeing it among candidate
+answers.
+
+Fitting the ordered count tables after preparation took 0.75 seconds on CPU.
+Both fits, preparation, checkpoint writing, reload and evaluation took 23.14
+seconds. The ordered checkpoint occupied 18.98 MB compressed. The three free
+article continuations and the answer about the history of the character for
+speech reached 128 cells and fell into repetition. Accurate occasional
+successors leave sustained writing and useful answer generation open.

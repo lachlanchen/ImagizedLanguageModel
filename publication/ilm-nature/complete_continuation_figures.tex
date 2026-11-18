@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_successor_article.py.
+% Literal captions copied from their source inputs by build_patch_count_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -264,4 +264,18 @@ on 288 assignments. The three compact readers with explicit supervision
 saw identical training passages and update counts. The native writer learned from book continuations
 and QA answers, with modern passages appearing inside its input prompts. Chance for joint assignment is 50\%.}
 \label{fig:visual-successors}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_36_patch_writing.png}
+\caption{\textbf{Free next-glyph drawing from local visual context.}
+\textbf{a}, The first exact, first nonempty incorrect and first blank
+response in fixed article order. Each strip shows the last twelve cells
+observed. The white output cell in the last row is the actual drawing.
+\textbf{b}, Counts from 668 independently generated next images. A known
+nonempty glyph exactly matches a nonempty bitmap in the training repertoire.
+The control retained the observed frequencies of complete images and spatial
+patch joins. \textbf{c}, Complete output of the ordered model to the
+pictured etymology question. It reached the 128-cell limit.}
+\label{fig:patch-writing}
 \end{figure*}

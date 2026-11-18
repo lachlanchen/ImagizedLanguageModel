@@ -1,0 +1,28 @@
+\paragraph{Drawing images without supplied candidates.}
+The native contrastive decoder considered eight local component means at
+each group of sixteen coordinates. An eligible component had at least one
+tenth of the largest mixture weight. Both decoding rules evaluated each
+eligible vector under the entire mixture. The contrastive rule subtracted
+the log density under the same checkpoint conditioned only on the final
+visible glyph. Both branches shared the actual emitted local prefix.
+Reference images entered subsequent scoring.
+
+The patch model used the same 2,127 ordered training passages as the compact
+successor reader. Input signatures recorded which of sixteen spatial
+regions exceeded the mean ink mass of the whole image. The writer maintained
+normalized patch distributions for two input signatures, one signature and
+the marginal at each position. After observing $N$ occurrences of $T$ distinct
+patches, interpolation assigned weight $T/(N+T)$ to the shorter context.
+A second distribution conditioned on the upper and left output patches.
+The product of the temporal and spatial distributions, divided by their
+common marginal, was normalized across observed patch patterns. A uniform
+mixture of weight $1/65{,}536$ supplied support for every 64-bit patch.
+Greedy decoding selected the most probable patch and read the completed
+image back. A separate interpolated end probability used genuine passage
+endings. The control rotated the successor sequence by half its length
+within each passage. Both fits used 1,047,284 transitions. Two training-only
+preflights verified all patch counts and checkpoint replay before full fitting.
+The 334 article titles and their selected physical histories were distinct
+from the previous 512. Each recorded successor was absent from both histories
+and belonged to the original training repertoire. Intervals resampled whole
+articles 10,000 times.

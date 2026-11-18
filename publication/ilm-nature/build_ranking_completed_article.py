@@ -20,6 +20,7 @@ import time
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 STAGE = ROOT / 'artifacts/ranking_results_publication_v1/article_attempt01'
+CPU_PUBLICATION_RESERVE_GIB = 48
 DOCUMENTS = [('reading', 'manuscript'), ('review', 'manuscript_review'),
              ('redlines/redlined_manuscript', 'redlined_manuscript')]
 FIGURES = [
@@ -113,7 +114,7 @@ def tree_rss(pid):
 
 def run(command, log, env, costs):
     start = time.monotonic()
-    assert host()['available_gib'] >= 48
+    assert host()['available_gib'] >= CPU_PUBLICATION_RESERVE_GIB
     with log.open('x') as output:
         process = subprocess.Popen(['nice', '-n', '10', *command], cwd=HERE,
                                    env=env, stdout=output, stderr=subprocess.STDOUT,
@@ -125,7 +126,7 @@ def run(command, log, env, costs):
                     costs['minimum_available_host_gib'], observed['available_gib'])
                 costs['peak_child_tree_rss_gib'] = max(
                     costs['peak_child_tree_rss_gib'], tree_rss(process.pid))
-                assert observed['available_gib'] >= 48, 'host reserve'
+                assert observed['available_gib'] >= CPU_PUBLICATION_RESERVE_GIB, 'host reserve'
                 assert costs['peak_child_tree_rss_gib'] < 2, 'child tree RSS ceiling'
                 assert costs['child_seconds'] + costs.get('prior_inspection_seconds', 0.) + time.monotonic() - start < 180, 'build time ceiling'
                 time.sleep(.2)
@@ -212,7 +213,7 @@ def inspect():
     prior_cost = load(STAGE / 'child_costs.json')
     prior_seconds = prior_cost['child_seconds'] + prior_cost.get('prior_inspection_seconds', 0.)
     def guard():
-        assert host()['available_gib'] >= 48
+        assert host()['available_gib'] >= CPU_PUBLICATION_RESERVE_GIB
         assert prior_seconds + time.monotonic() - began < 180, 'cumulative build/inspection ceiling'
         assert tree_rss(os.getpid()) < 2, 'inspection RSS ceiling'
     result = dict(documents={}, figure_assets_preserved=len(load(STAGE / 'before_manifest.json')['figures_sha256']),
