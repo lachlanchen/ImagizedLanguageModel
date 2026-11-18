@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_grounded_glyph_writer_article.py.
+% Literal captions copied from their source inputs by build_same_passage_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -617,4 +617,18 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Learning from paired questions and passages.}
 \textbf{a}, Correct pairs when both candidate answers are supplied. Credit requires the writer to prefer each requested answer with the passages in either order. Direct overlap compares question and answer glyph sets. The second overlap rule uses the two passage regions. \textbf{b}, Exact agreements from an empty answer. The first three score columns use all 571 questions. The final column covers the 300 references containing a content glyph absent from both input images. Complete agreement includes the stop decision. \textbf{c}, The matched writer's complete outputs and the intended answers on the two original prompts in Fig.~\ref{fig:composed-writer}. Each output reproduces its passage pixel for pixel.}
 \label{fig:grounded-glyph-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_78_same_passage_writer.png}
+\caption{\textbf{Answer recognition and generation in a common passage.}
+\textbf{a}, Complete paired answers on 1,042 held-out question pairs. \textbf{b}, Both questions must succeed for paired credit. Supplied choices are compared by mean physical log likelihood. The DuReader column gives canonical stopped answers out of 571. The earlier span reader supplies a specialized comparison. \textbf{c}, The contrast writer's outputs on two author-written questions about the same handout, with the intended forms printed below. Both responses end with a learned stop.}
+\label{fig:same-passage-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_79_general_entry_writer.png}
+\caption{\textbf{Historical forms from a shared image-stream writer.}
+\textbf{a}, Attribution of the penultimate output cell on 1,136 standard questions about 142 two-entry cards. Each card contains two different historical stages for each headword. \textbf{b}, Exact, stopped outputs across dictionary and modern passage tasks. The located condition adds a pictured-headword matching rule to the matched writer. New wordings were written independently by a local language model. \textbf{c}, Actual responses to two typed questions about the same one-entry card. Both responses match the lexical fact and archived form. The headword and facts were seen in training with different historical exemplars. \textbf{d}, First held-out response in corpus order that copied a distractor form from the requested stage. The second output applies the locator with identical weights. The reference uses the archived form of the requested headword.}
+\label{fig:general-entry-writer}
 \end{figure*}

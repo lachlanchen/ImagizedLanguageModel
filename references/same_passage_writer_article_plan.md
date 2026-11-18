@@ -1,0 +1,7 @@
+# Question-specific writing from a common passage
+
+Extend the manuscript after Figure 77 with the registered same-passage comparison. Include the primary free-writing outcome, the supplied-choice diagnostic, question erasure, intervals clustered by passage, the released span reader and retention on questions requiring new ink. Reproduce actual output pixels from the fixed, independently authored questions. Keep source answers and evidence distinct in the figure. Compare the native chart workbook and table against the aggregate record. Rebuild and inspect the reading, review and redline PDFs and deliver the verified editions to the local Nutstore project.
+
+Add Figure 79 for the separately registered mixed entry experiment. Put its ordinary reading retention beside exact historical-form and complete sentence scores, and show the actual output from the new 言 card with stage provenance. Verify both native decks and preserve the same 862dc8dd publication lineage. Include failures on independent wording or modern writing and the distinction between copying an attested source shape and drawing an unattested one.
+
+Extend panel d of Figure 79 to show the same frozen writer after exact physical headword matching on the pictured card. Preserve the unassisted outputs and report the locator as an engineered layout-specific component. Include the independently phrased and English results, unmarked passage coverage and blank-question fallback. Retain the first complete draft build in the private publication workspace.
