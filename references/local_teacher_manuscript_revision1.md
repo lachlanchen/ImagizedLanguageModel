@@ -1,3 +1,5 @@
 Extend the independent writing results with a matched comparison of aligned and shuffled cross-fitted local hints and the frozen guided writer. Include exact stopped writing on validation and previously unused sources, paired uncertainty, physical output examples, failures and compute. Add a native editable Figure 43, its caption, results and methods to the current article. Retain all earlier figures and editions. Inspect the rebuilt PDFs, authenticate the local Nutstore package and update the public engineering decision after scoring.
 
 Report the registered within-pair likelihood diagnostic alongside autonomous writing if verified. Distinguish supplied physical answer trajectories, joint assignment and complete autonomous generation. Show actual free outputs and editable results.
+
+After the local-hint comparison and its fixed diagnostic, add the separately registered joint-training comparison. Show the effect of preference supervision against a matched joint reference-only fit and the published writer, including results on an additional untouched group split. Use the same revision and rebuild for both writing experiments.
