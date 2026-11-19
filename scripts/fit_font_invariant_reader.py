@@ -108,6 +108,10 @@ def fit():
             print(step+1,trace[-1],flush=True)
             if monotonic()-start>900 or torch.cuda.max_memory_allocated()>15*1024**3:
                 raise RuntimeError("Metric fit exceeded its allowance")
+    finish(metric,pix,available,targets,start,trace,False)
+
+
+def finish(metric,pix,available,targets,start,trace,recovered):
     metric.eval()
     with torch.no_grad():
         projection=torch.randn(192,WIDTH,device="cuda")
@@ -125,29 +129,60 @@ def fit():
     seconds=monotonic()-start;peak=torch.cuda.max_memory_allocated()
     if seconds>900 or peak>15*1024**3:raise RuntimeError("Visual fit exceeded its allowance")
     markers=load_file(str(PARENT/"vision.safetensors"))["markers"]
-    save_file({k:v.detach().cpu().contiguous() for k,v in metric.state_dict().items()},str(WORK/"metric.safetensors"))
-    save_file(dict(projection=projection.cpu(),regression=regression.cpu(),markers=markers),str(WORK/"vision.safetensors"))
-    fit=dict(updates=steps,glyph_classes=len(pix),images=int(available.sum()),seconds=seconds,peak_bytes=peak,
-             training_loss=trace,weights={n:sha(WORK/n) for n in ("metric.safetensors","vision.safetensors","context.safetensors","config.json")},
+    if not recovered:
+        save_file({k:v.detach().cpu().contiguous() for k,v in metric.state_dict().items()},str(WORK/"metric.safetensors"))
+    save_file(dict(projection=projection.cpu(),regression=regression.cpu().contiguous(),markers=markers),str(WORK/"vision.safetensors"))
+    fit=dict(updates=2000,glyph_classes=len(pix),images=int(available.sum()),seconds=seconds,peak_bytes=peak,
+             recovered_after_metric_save=recovered,training_loss=trace,weights={n:sha(WORK/n) for n in ("metric.safetensors","vision.safetensors","context.safetensors","config.json")},
              metric_parameters=sum(p.numel() for p in metric.parameters()),regression_coefficients=regression.numel(),
              projection_coefficients=projection.numel(),registration=sha(PUBLIC/"registration.json"))
+    if recovered:
+        fit["recovery_solve_seconds"]=fit.pop("seconds")
+        fit["recovery_peak_bytes"]=fit.pop("peak_bytes")
+        fit["original_fit_seconds_upper_bound"]=900
+        fit["original_fit_allocated_gib_upper_bound"]=15
     write_json(WORK/"fit.json",fit);write_json(PUBLIC/"fit.json",fit)
     print(fit,flush=True)
+
+
+def recover():
+    import re
+    receipt=json.loads((PUBLIC/"recovery_binding.json").read_text())
+    assert not (WORK/"vision.safetensors").exists() and sha(WORK/"metric.safetensors")==receipt["metric_sha256"]
+    log=ROOT/"artifacts/font_invariant_reader_v1.log"
+    assert sha(log)==receipt["terminal_log_sha256"]
+    trace=[float(v) for _,v in re.findall(r"^(\d+) ([.\d]+)$",log.read_text(),re.M)]
+    assert len(trace)==10
+    pix,available,targets=tables()
+    torch.manual_seed(SEED)
+    metric=GlyphMetric().cuda().to(memory_format=torch.channels_last)
+    metric.load_state_dict(load_file(str(WORK/"metric.safetensors")))
+    # Advance the same GPU random draws performed before the original projection.
+    for _ in range(2000):
+        torch.randperm(len(pix),device="cuda")
+        torch.rand(256,len(TRAIN_FACES),device="cuda")
+    torch.cuda.reset_peak_memory_stats()
+    finish(metric,pix,available,targets,monotonic(),trace,True)
 
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--register",action="store_true")
     reg=PUBLIC/"registration.json"
-    if ap.parse_args().register:
+    ap.add_argument("--recover",action="store_true")
+    args=ap.parse_args()
+    if args.register:
         PUBLIC.mkdir(parents=True,exist_ok=True)
         if reg.exists():raise FileExistsError(reg)
         write_json(reg,bindings());return
-    assert os.environ.get("CUDA_VISIBLE_DEVICES")=="0" and bindings()==json.loads(reg.read_text())
+    expected=json.loads(reg.read_text())
+    correction=PUBLIC/"recovery_binding.json"
+    if correction.exists():expected[str(Path(__file__).relative_to(ROOT))]=json.loads(correction.read_text())["repaired_program_sha256"]
+    assert os.environ.get("CUDA_VISIBLE_DEVICES")=="0" and bindings()==expected
     with (ROOT/"artifacts/ilm_gpu0.lock").open("a") as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         torch.set_num_threads(2)
-        fit()
+        recover() if args.recover else fit()
         from scripts.evaluate_font_invariant_reader import evaluate
         evaluate()
 
