@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+When two people exchange roles on a pictured page, can the answer follow? A learned planner and a shared image writer gave both statements in the requested order on 70 of 136 questions about combinations withheld from compound training. The earlier single-call writer gave three. The film example shows a remaining error: two legible sentences credit the same person with different jobs. [Results and runnable model](references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](publication/ilm-nature/manuscript.pdf#page=122)
+
 Asked who drew a map and who needed directions, the revised reader returns the two different names. It gave 42 exact names on 64 further pictured questions. It also writes the oracle and bronze forms of 言 in either requested order, but gave no exact answer on 128 new open questions requiring a glyph absent from the prompt. [Results and runnable model](references/pointing_causal_writer_result.md)
 
 [![言 · 91](publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](publication/ilm-nature/manuscript.pdf#page=121)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+이미지로 된 글에서 두 사람의 이름을 바꾸면 답도 달라질까? 두 문장을 함께 쓰는 훈련에서 제외한 역할 조합을 물었을 때, 질문을 나눈 뒤 같은 모델로 답을 쓰는 방식은 136문항 중 70문항에서 두 사실을 지정된 순서로 썼다. 한 번에 두 문장을 쓰던 모델은 3문항을 맞혔다. 영화 소개문에서는 두 문장 모두 읽을 수 있었지만 감독과 각본가를 같은 사람으로 잘못 적었다. [실험 결과와 모델](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 누가 지도를 그렸고 누가 길을 물어야 했을까? 개선한 모델은 서로 다른 두 이름을 답했다. 새로운 이미지 질문 64개 중 42개에서 정확한 이름을 썼다. 言의 갑골문과 금문을 지정한 순서로 쓰기도 했다. 입력에 없는 글자꼴이 필요한 새로운 서술형 질문 128개에서는 참조 답안과 완전히 일치한 답이 없었다. [실험 결과와 모델](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)

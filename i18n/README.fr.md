@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Si deux noms sont échangés dans un passage présenté en image, la réponse suit-elle ? Pour des paires de rôles exclues de l’entraînement à deux phrases, le modèle qui décompose la question puis utilise le même générateur a donné les deux faits dans l’ordre demandé 70 fois sur 136. Le modèle écrivant les deux phrases en une fois y est parvenu trois fois. Dans la notice de film, deux phrases lisibles attribuent pourtant le scénario et la réalisation à la même personne. [Résultats et modèle](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 Qui a dessiné la carte et qui cherchait son chemin ? Le lecteur révisé donne deux noms différents. Sur 64 nouvelles questions présentées en image, il donne 42 noms exacts. Il écrit aussi les formes de 言 sur os et sur bronze dans l’ordre demandé. Sur 128 nouvelles questions ouvertes exigeant un glyphe absent de l’entrée, aucune réponse ne correspond exactement à une référence. [Résultats et modèle](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)

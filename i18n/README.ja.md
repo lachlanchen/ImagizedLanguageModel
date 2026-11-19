@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+画像の文章で二人の名前を入れ替えると、答えも正しく変わるだろうか。二文を組み合わせる訓練では見せなかった役割の組合せについて、問いを分けて同じ画像生成器で書くモデルは136問中70問で二つの事実を指定順に記した。一度に二文を書く従来モデルは3問だった。映画の例では、文は読めるものの監督と脚本家に同じ人を挙げた。 [実験結果とモデル](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 地図を描いたのは誰か、道に迷ったのは誰か。改良したモデルは、それぞれ別の名前を答えた。新たな画像の問い64問では42問で正しい人名を返した。「言」の甲骨文と金文も指定順に書ける。一方、入力にない字形を必要とする新たな自由回答128問では、参照解答と完全に一致した例はなかった。 [実験結果とモデル](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)

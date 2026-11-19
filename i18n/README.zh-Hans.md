@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+把图像文章中的两个人名互换，模型能跟着改答案吗？在 136 道角色组合未曾出现在双句训练中的问题上，模型先识别提问顺序，再调用同一个图像书写模型，正确写出了 70 组双句答案。此前一次写完两句的模型只答对 3 组。电影手册的例子也保留了一个错误：两句话都清楚可读，却把导演和编剧都写成了同一个人。 [实验结果与模型](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 谁画了地图，谁需要问路？改进后的模型给出了两个不同的人名。在另外 64 道图像问题中，它准确答出了 42 个人名。它也能按指定顺序写出「言」的甲骨文和金文。不过，在需要写出输入中未出现字形的 128 道新开放题中，没有一个回答与参考答案完全相符。 [实验结果与模型](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)

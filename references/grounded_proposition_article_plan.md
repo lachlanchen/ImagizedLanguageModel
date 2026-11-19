@@ -1,0 +1,3 @@
+# Conditional proposition writing on Chinese sources
+
+Append a measured comparison to the current manuscript at b62b0894. Explain the DuIE source annotations, physical edit, split exclusions, training contrast and limits of canonical scoring. Include the original question and returned glyphs for an original and fact-exchanged passage. Plot performance on separate controls and distinguish the novel source panel, relation wording and untrained two-fact request. Add the result to the abstract and retain the previous figures. Verify chart source, original image hashes, the figure page and all three compiled editions. Deliver the updated paper to the project’s local Nutstore directory.

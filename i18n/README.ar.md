@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+ماذا يحدث عند تبديل اسمين في صورة نص؟ في 136 سؤالاً عن أزواج من الأدوار استُبعدت من تدريب الإجابات ذات الجملتين، قسّم النموذج الطلب وكتب الجملتين بالترتيب الصحيح في 70 إجابة. أصاب النموذج الذي يكتب الجملتين دفعة واحدة في ثلاث فقط. وفي مثال عن فيلم، كتب جملتين مقروءتين لكنه نسب الإخراج وكتابة السيناريو إلى الشخص نفسه. [النتائج والنموذج](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 من رسم الخريطة ومن احتاج إلى السؤال عن الطريق؟ أعاد النموذج بعد تعديله اسمين مختلفين، وأعطى الاسم الصحيح في 42 من 64 سؤالاً مصوراً جديداً. واستطاع كتابة شكل الحرف 言 في نقوش العظام وفي نقوش البرونز بالترتيب المطلوب. وفي 128 سؤالاً مفتوحاً جديداً تتطلب أشكالاً كتابية غائبة عن المدخلات، لم تتطابق أي إجابة تماماً مع الأجوبة المرجعية. [النتائج والنموذج](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)

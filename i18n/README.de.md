@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Folgt die Antwort, wenn zwei Namen im Bild eines Textes vertauscht werden? Bei Rollenkombinationen, die beim Training mit zwei Sätzen ausgelassen wurden, schrieb das Modell mit getrennter Aufgabenplanung und gemeinsamem Bildgenerator in 70 von 136 Fällen beide Fakten in der verlangten Reihenfolge. Das Modell, das beide Sätze in einem Durchgang schrieb, schaffte dies dreimal. Im Filmbeispiel schrieb es lesbare Sätze, nannte aber dieselbe Person für Drehbuch und Regie. [Ergebnisse und Modell](../references/grounded_proposition_result.md)
+
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+
 Wer zeichnete die Karte und wer musste nach dem Weg fragen? Das überarbeitete Modell nennt zwei verschiedene Namen. Bei 64 neuen Fragen in Bildform gab es 42 Namen exakt wieder. Es schreibt auch die Orakelknochen- und Bronzeformen von 言 in der verlangten Reihenfolge. Bei 128 neuen offenen Fragen, die ein in der Eingabe fehlendes Schriftzeichen erforderten, stimmte keine Antwort genau mit einer Referenz überein. [Ergebnisse und Modell](../references/pointing_causal_writer_result.md)
 
 [![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
