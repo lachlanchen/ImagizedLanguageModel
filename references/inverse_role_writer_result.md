@@ -1,0 +1,28 @@
+# Why a legible writer gives the wrong name
+
+Asked **繼光餅是誰發明的？** (“Who invented the Jiguang biscuit?”), the writer returned **馬祖** (Matsu). The human references give **戚繼光** (Qi Jiguang). All the strokes in the returned name came from the passage. On another question, it began with the correct **威廉·瓊斯** (William Jones) but continued for one glyph beyond the name. The two errors require different corrections. [Original pixel recount and source transcriptions](evidence/inverse_role_writer_20261119/audit.json)
+
+We initialized two 694,152-parameter writers from the same forward checkpoint. Both received genuine human reading-comprehension supervision. Only the additional competing assignments were randomized in the control. Both fitted for 2,430 updates on one RTX 4090 D. The matched fit took 95.8 seconds and peaked at 0.94 GiB allocated. The control took 91.2 seconds and 0.93 GiB. Those figures cover the final adaptations only. [Protocol](inverse_role_writer_protocol.md) · [Final measurements and costs](evidence/inverse_role_writer_20261119/result.json)
+
+| Frozen system | Human who-answers / 387 | Both answers / 131 pairs | Who-answers with sentence selection | Both with sentence selection |
+|---|---:|---:|---:|---:|
+| Forward parent | 4 | 0 | — | — |
+| Matched inverse training | 62 | 1 | 116 | 9 |
+| Randomized competing assignments | 64 | 1 | 127 | 12 |
+| Released passage reader | 95 | 7 | 100 | 8 |
+
+The 387 human questions come from 276 DRCD development passages. We counted complete stopped answers against every available aligned human reference. Training and development have disjoint articles, exact passages and exact questions. This development set has been used in prior model evaluation. With full passages the matched advantage over randomization was −0.5 percentage points (95% passage-bootstrap interval −3.1 to 2.1). With identical sentence selection the control again had the higher count. These results support the contribution of narrowing the evidence. They give no reliable advantage to the new matching objective on human questions. [Human question cohort](natural_role_question_baseline.md) · [Selector controls](evidence/inverse_role_writer_20261119/sentence_controls.json)
+
+## Where the model loses the answer
+
+Of the matched writer's 325 wrong answers, 314 copied an uninterrupted fragment of the source, 301 differed from every reference at the first glyph and 24 started with a possible correct glyph. All 387 responses stopped. When four historical names held four different objects, it returned a complete one-name answer from the four available names only nine times out of 96 and wrote the correct name five times. In the two-name bronze test, it selected the first name in 27 of 32 responses and followed the right participant through both orders in 7/16 pairs. The preregistered requirement was 12/16. The images were authentic, the associations in the passages were invented, and the outputs were graded from their actual pixels. [Original archives and recount](evidence/inverse_role_writer_20261119/audit.json)
+
+Showing the shortest sentence known to contain a human reference lifted the matched writer from 62 to 141/387. A length-matched sentence lacking the reference gave zero. Selecting by distinct glyph overlap alone retained an answer in 301 sentences and yielded 116 correct responses, gaining 79 and losing 25 relative to whole-passage reading (net +14.0 points, 95% interval +9.1 to +18.8). The randomized writer reached 127 with the same selector. Even the reference-guided condition left 246 incorrect. [Frozen intervention](inverse_role_evidence_protocol.md) · [Sentence measurements](evidence/inverse_role_writer_20261119/evidence_sentences.json)
+
+The matched writer retained 344/404 familiar forward descriptions and 30/32 two-name bronze descriptions. New-layout forward responses fell from 297/404 to 11/404. Human DRCD overall reached 549/3,505, and the writer gave zero whole DuReader references out of 571. It gave 1/96 complete independent English dictionary responses and 0/96 Chinese. This checkpoint can copy previously unseen visible shapes. It has yet to demonstrate general language generation, the invention of unseen glyphs, Qwen-level quality or an end-to-end efficiency advantage. [All tested tasks](evidence/inverse_role_writer_20261119/result.json)
+
+## Run the measured checkpoint
+
+The local archive is `artifacts/inverse_role_writer_v1/inverse-role-writer.zip`. It contains the matched weights, image memory and standalone CPU/CUDA inference program. The earlier deployed reader remains available. Pass `--evidence overlap` to select a sentence using only input pixels. An isolated CPU process reproduced eight original complete outputs from the printed, bronze and natural evaluations, including the failed answers. Network access was disabled for these checks. [Usage](../docs/inverse-role-writer.md) · [Portable release verification](evidence/inverse_role_writer_20261119/portable.json)
+
+The measured contrast motivates training a question-dependent locator on **competing names within an answer-containing sentence**. Compare this against the same frozen sentence selector on both arms. The decisive evidence is recovery of different complete answers to different human questions about the same source, with natural multi-sentence controls and unfamiliar wording retained. The ability to copy an attested inscription and the ability to explain its actual origin require separate tests.

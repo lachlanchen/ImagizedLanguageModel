@@ -96,7 +96,7 @@ def run(bundle, passage, question, device):
     return b"".join(tiles[i] for i in output[0].tolist() if i),bool(stopped[0])
 
 
-def main(bundle=None):
+def main(bundle=None, sentence_selection=False):
     parser=argparse.ArgumentParser(description=__doc__)
     if bundle is None:parser.add_argument("--bundle",type=Path,required=True)
     for field in ("passage","question"):
@@ -107,6 +107,9 @@ def main(bundle=None):
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--font",type=Path,default=DEFAULT_FONT)
     parser.add_argument("--device",choices=("cpu","cuda:0"),default="cpu")
+    if sentence_selection:
+        parser.add_argument("--evidence", choices=("whole","overlap"), default="whole",
+                            help="Use the complete passage or its most overlapping sentence")
     args=parser.parse_args()
     if args.output.exists():raise FileExistsError(args.output)
     streams=[]
@@ -114,6 +117,15 @@ def main(bundle=None):
         img=getattr(args,field+"_image");n=getattr(args,field+"_cells")
         if img is None and n is not None:parser.error("A cell count requires an image")
         streams.append(read_image(img,n) if img else read_text(getattr(args,field+"_text"),args.font))
+    selected = None
+    if sentence_selection and args.evidence == "overlap":
+        from ilm.visual_lm.pictured_sentence import locate
+        path = bundle/"sentence_ends.npy"
+        manifest = json.loads((bundle/"writer.json").read_text())
+        if hashlib.sha256(path.read_bytes()).hexdigest() != manifest["sha256"][path.name]:
+            raise ValueError("Changed sentence boundary images")
+        selected = locate(*streams, np.load(path, allow_pickle=False))
+        streams[0] = streams[0][slice(*selected)]
     torch.set_num_threads(2)
     answer,stop=run(bundle if bundle is not None else args.bundle,*streams,args.device)
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -122,7 +134,7 @@ def main(bundle=None):
         save_grid(answer,dest/"answer.png")
         (dest/"answer.bin").write_bytes(answer)
         (dest/"receipt.json").write_text(json.dumps(dict(stopped=stop,answer_cells=len(answer)//128,
-            sha256=hashlib.sha256(answer).hexdigest()),indent=2)+"\n")
+            sha256=hashlib.sha256(answer).hexdigest(), **({"sentence_cells":selected} if selected else {})),indent=2)+"\n")
         dest.rename(args.output)
     print(args.output/"answer.png")
 
