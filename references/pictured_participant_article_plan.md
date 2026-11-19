@@ -1,0 +1,3 @@
+# Participant exchanges in Chinese reading
+
+Extend the shared-sentence results and mathematical methods with the matched residual reader, exchanged-label control, source-supported grammatical annotations and fresh transfer test. Report complete paired answers and retained writing skills separately. Figure 87 should show all three systems, exact counts and the first new scene in evaluation order with its actual question and output images. Update the abstract with the measured scope, preserve the preceding editions, compile all three PDFs and verify figure content, fonts, layout and the local delivery.
