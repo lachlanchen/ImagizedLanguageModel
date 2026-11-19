@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Distinguer deux personnes dans une même phrase** Le modèle écrit correctement les noms du donateur et de l’architecte du bâtiment Gates. Il répond juste aux deux questions dans 100 paires sur 864. Sur 24 situations inédites où les noms sont intervertis, il n’en résout aucune entièrement, contre 20 pour Qwen3-8B en local. [Résultats et mode d’emploi](../references/shared_sentence_writer_result.md)
+
+[![Figure 86. Deux questions sur une phrase et les réponses originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+
 **Pourquoi le modèle se trompe-t-il de personne ?** Sur 387 questions chinoises demandant d’identifier une personne, choisir une phrase selon les glyphes qu’elle partage avec la question fait passer le nombre de réponses exactes de 62 à 116. Avec la même sélection, le témoin aux associations supplémentaires aléatoires atteint 127. La figure 85 montre un nom de lieu donné à la place de celui d’un inventeur. [Résultats et mode d’emploi](../references/inverse_role_writer_result.md)
 
 [![Figure 85. Sélection de phrases et réponses produites](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)

@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+**Can it identify two people in one sentence?** The visual writer correctly names both the donor and the architect of the Gates building. Across 864 question pairs it answers both correctly 100 times. In 24 new situations with the names exchanged, it solves no complete scene. Local Qwen3-8B solves 20. [Results and runnable model](references/shared_sentence_writer_result.md)
+
+[![Figure 86. Two questions and original responses per pictured sentence](publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](publication/ilm-nature/manuscript.pdf#page=114)
+
 **Where the writer loses the answer.** On 387 human Chinese “who” questions, choosing one sentence by shared pictured glyphs raised exact answers from 62 to 116. The randomized training control reached 127 with the same selector. Figure 85 shows a clearly written place name where the question asks for an inventor. [Results and runnable reader](references/inverse_role_writer_result.md)
 
 [![Whole passages, selected sentences and original answer images](publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=113)

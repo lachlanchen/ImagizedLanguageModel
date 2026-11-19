@@ -1,0 +1,3 @@
+# A shared sentence with two distinct answers
+
+Compare complete stopped outputs of the frozen writer, two source-run models and a deployed passage reader when both questions receive exactly the same source. Show matched and randomized training, independently authored human questions, retention and typing or PNG inference. Use a native chart, table and original answer images for the first person-pair in fixed evaluation order. Report the small primary person cohort and the annotation used to identify a shared sentence. Compare inference-time sentence selection separately. Retain previous figures, build all manuscript editions and inspect the original output images in the compiled figure.

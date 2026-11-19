@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_inverse_role_writer_article.py.
+% Literal captions copied from their source inputs by build_shared_sentence_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -680,4 +680,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{c}, The source says that Qin has a bronze mirror and Chu lacks one. Asked who has the mirror (upper row) and who lacks it (lower row), the writer returns the same attested Qin image twice.
 \textbf{d}, Asked who invented the Jiguang biscuit, the writer returns Matsu. The recorded answer is Qi Jiguang. The output is the original model image from the first wrong-first-glyph question with an identifiable source span in cohort order.}
 \label{fig:inverse-role-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_86_shared_sentence_writer.png}
+\caption{\textbf{Reading and composing answers about different participants.}
+\textbf{a}, Both answers must match accepted human references as complete stopped images for the same pictured sentence. The extra paired training examples keep their assignments or exchange them at random.
+\textbf{b}, Counts before and after calibrating the choice of output action. The role questions test 24 new situations under name exchange. The text reference is a local Qwen3-8B model.
+\textbf{c}, Original images for the first two person-question pairs in fixed order. In the upper example the writer extends the first name by one glyph and gives an alternate place name for the second. In the lower example the questions ask for the donor and architect of the Gates building. Both complete outputs agree with the recorded names.}
+\label{fig:shared-sentence-writer}
 \end{figure*}

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**한 문장에 등장하는 두 사람을 구별할 수 있을까?** 모델은 게이츠 건물의 기부자와 건축가 이름을 모두 맞혔다. 질문 864쌍 중 두 답을 모두 맞힌 경우는 100쌍이었다. 이름을 맞바꾼 새 상황 24개에서는 모든 답을 맞힌 상황이 없었고 로컬 Qwen3-8B는 20개였다. [결과와 실행 방법](../references/shared_sentence_writer_result.md)
+
+[![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+
 **왜 사람을 잘못 고를까?** 중국어로 누군지 묻는 질문 387개에서 전체 지문을 읽힌 모델은 62개를 맞혔다. 질문과 글자 모양이 겹치는 문장을 먼저 고르자 116개를 맞혔다. 추가 학습의 정답을 무작위로 배정한 대조 모델은 같은 방법으로 127개를 맞혔다. 그림 85는 발명가의 이름을 물었을 때 지명을 쓴 사례다. [결과와 실행 방법](../references/inverse_role_writer_result.md)
 
 [![그림 85. 문장 선택과 실제 출력](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**一文に登場する二人を区別できるか** ゲイツ棟の寄付者と建築家はどちらも正しく書けた。864組の質問のうち両方に正答したのは100組だった。名前を入れ替える24の新しい場面では全問正解が0場面で、ローカルのQwen3-8Bは20場面だった。 [結果と実行方法](../references/shared_sentence_writer_result.md)
+
+[![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+
 **なぜ人物を取り違えるのか** 中国語の「誰」を問う387問では、文章全体を読ませると62問、質問と共通する字形から一文を選ぶと116問に正答した。同じ選文法で、追加訓練の割り当てをランダムにした対照モデルは127問に正答した。図85は発明者の名前の代わりに地名を書いた例を示す。 [結果と実行方法](../references/inverse_role_writer_result.md)
 
 [![図85　選文と実際の出力](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)

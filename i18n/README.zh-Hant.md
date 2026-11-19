@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**同一句話裡的兩個人，模型分得清嗎？** 模型正確寫出了蓋茨大樓的捐贈者和建築師。在 864 對問題中，有 100 對的兩個答案都正確。另有 24 個新情境交換了人名，模型沒有一個情境全部答對，本機 Qwen3-8B 全部答對了其中 20 個。 [結果與模型用法](../references/shared_sentence_writer_result.md)
+
+[![圖 86：同一句話、不同的問題及回答原圖](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+
 **為什麼會答錯人？** 在 387 道中文「誰」字問句中，模型讀整段答對 62 道，依字形重合程度選一句後答對 116 道。隨機分配額外訓練答案的對照模型用同一方法答對 127 道。圖 85 顯示一個實際錯誤：題目問發明者，模型卻寫出了地名。 [結果與用法](../references/inverse_role_writer_result.md)
 
 [![圖 85：選句與回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)

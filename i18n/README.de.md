@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Kann das Modell zwei Personen in einem Satz unterscheiden?** Das Modell nennt den Spender und den Architekten des Gates-Gebäudes korrekt. Bei 100 von 864 Fragenpaaren stimmen beide Antworten. In 24 neuen Situationen mit vertauschten Namen löst es keine vollständig, das lokale Qwen3-8B dagegen 20. [Ergebnisse und Anleitung](../references/shared_sentence_writer_result.md)
+
+[![Abbildung 86. Zwei Fragen zu einem Satz und die Originalantworten](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+
 **Warum wählt das Modell die falsche Person?** Bei 387 chinesischen Wer-Fragen stieg die Zahl vollständig richtiger Antworten von 62 auf 116, wenn zunächst ein Satz anhand gemeinsamer Schriftzeichen ausgewählt wurde. Das Kontrollmodell mit zufälliger Zuordnung im Zusatztraining erreichte damit 127. Abbildung 85 zeigt einen Ortsnamen als Antwort auf die Frage nach einem Erfinder. [Ergebnisse und Anleitung](../references/inverse_role_writer_result.md)
 
 [![Abbildung 85. Satzauswahl und Originalantworten](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
