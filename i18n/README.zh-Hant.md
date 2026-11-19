@@ -1,32 +1,36 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+誰畫了地圖，誰需要問路？改進後的模型給出了兩個不同的人名。在另外 64 道以圖像呈現的問題中，它準確答出了 42 個人名。它也能按指定順序寫出「言」的甲骨文和金文。不過，在需要寫出輸入中未出現字形的 128 道新開放題中，沒有一個回答與參考答案完全相符。 [實驗結果與模型](../references/pointing_causal_writer_result.md)
+
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+
 圖中的短文交代了誰畫地圖、誰迷了路。模型答對了畫圖的人，但問它誰需要問路，它又說了一遍畫圖的事。在 300 道答案需要寫出題面以外字形的問題中，即使給出前面正確的答案，模型也只在 18 道題上選對了第一個新字形。 [實驗結果與回答原圖](../references/causal_glyph_writer_result.md)
 
-[![同一張地圖，兩個問題](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+[![同一張地圖，兩個問題](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
 
 模型現在能根據圖片中的提問，以相反順序寫出「言」的甲骨文和金文。在未參與訓練的字例上，採用熟悉的問法時，96 組測試中有 94 組的兩種順序均正確。換用新的字例和問法後，正確組數為 16。 [結果與實際輸出](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 **從字形影像閱讀與作答.** 在關於兩個人物的 64 道題中，模型用一般中文字體答對 46 道，換成粗體後答對 41 道。本機 Qwen3-8B 讀取文字後答對 55 道。換用訓練時未見的楷體後，模型只答對一道。 [執行模型](../docs/visual-page-responder.md)
 
-[![圖 88：實際輸入的字形與模型的回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![圖 88：實際輸入的字形與模型的回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **同一句話裡的兩個人，模型分得清嗎？** 模型正確寫出了蓋茨大樓的捐贈者和建築師。在 864 對問題中，有 100 對的兩個答案都正確。另有 24 個新情境交換了人名，模型沒有一個情境全部答對，本機 Qwen3-8B 全部答對了其中 20 個。 [結果與模型用法](../references/shared_sentence_writer_result.md)
 
-[![圖 86：同一句話、不同的問題及回答原圖](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
+[![圖 86：同一句話、不同的問題及回答原圖](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
 
 **為什麼會答錯人？** 在 387 道中文「誰」字問句中，模型讀整段答對 62 道，依字形重合程度選一句後答對 116 道。隨機分配額外訓練答案的對照模型用同一方法答對 127 道。圖 85 顯示一個實際錯誤：題目問發明者，模型卻寫出了地名。 [結果與用法](../references/inverse_role_writer_result.md)
 
-[![圖 85：選句與回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+[![圖 85：選句與回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
 
 **模型能寫對人物嗎？** 換用新名字和補語後，模型完整寫對了 404 句中的 368 句。把名字換成金文「秦」「楚」，32 句中有 24 句寫對；問題中去掉名字、只給條件讓模型指出是誰時，32 個答案均未寫對。圖 84 展示了同一問題下的一次張冠李戴和一次正確回答。 [結果與模型用法](../references/visual_role_writer_result.md)
 
-[![圖 84：含金文字形的兩段材料及模型的實際回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+[![圖 84：含金文字形的兩段材料及模型的實際回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
 
 **模型能從字形中讀出什麼？** 面對同一句「她喝了一口□。」，當上文中的飲料從水換成茶時，模型也把答案從「水」改為「茶」。結合神經網路和相鄰字形統計的方法準確補出了 2,947 處缺文中的 651 處。但在交換兩個人物角色的 48 組對照中，沒有一組的兩次判斷都正確。 [實驗結果與執行指令](../references/visual_inference_writer_result.md)
 
-[![圖 83：兩段上文、同一句缺字句和模型寫出的兩個答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
+[![圖 83：兩段上文、同一句缺字句和模型寫出的兩個答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
 
 <!-- paired-writing-status:start -->
 完成 512 次更新的去空白對比實驗仍未實現可靠抄寫：OCR 完全匹配為訓練集 6/32、驗證集 10/32（清晰參考圖為 27/32、28/32）。原始輸出可見漏字和字母重複。訓練時間由 795.624 秒降至 287.182 秒，但語言理解及達到實用品質時的效率仍未得到證明。 [全部 64 個原始輸出](../references/paired_padding_result.md).

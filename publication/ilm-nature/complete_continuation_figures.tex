@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_causal_glyph_writer_article.py.
+% Literal captions copied from their source inputs by build_pointing_causal_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -725,4 +725,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Exact, explicitly stopped answer images on the 571 development questions. Further replay and extra weight on the first absent glyph start from the same matched checkpoint.
 \textbf{c}, Original input and output pixels for the first two fixed role questions. Qin Che loses the way and Zhuo Lin draws the map. Asked who drew it, the model replies that Zhuo Lin drew it for him. Asked who needed directions, it repeats the mapmaking fact.}
 \label{fig:causal-glyph-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_91_pointing_causal_writer.png}
+\caption{\textbf{Quoting a fact and composing an answer with historical glyphs.}
+\textbf{a}, Exact participant names across two questions and two assignments of names for each of sixteen situations in each cohort. Original pictured questions and returned answers show the mapmaker (Zhuo Lin) and the person needing directions (Qin Che). The short-sentence fit quotes the correct name in each case.
+\textbf{b}, Both questions must receive exact answers for each natural passage. In the two historical columns, both complete captions for one headword must contain the requested source bitmaps in the correct order. The last column counts individual answers requiring a content glyph absent from the pictured prompt.
+\textbf{c}, The specified demonstration plate for \textit{yán} (speech) contains images of two families' historical forms. Its two requests ask for oracle and bronze, first in chronological order and then in reverse. Each original answer strip interleaves copied forms with printed connecting text. This card comes from a training family and is separate from the 96 held-out comparisons.}
+\label{fig:pointing-causal-writer}
 \end{figure*}

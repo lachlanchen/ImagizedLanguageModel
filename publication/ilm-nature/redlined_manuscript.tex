@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Thu Nov 19 10:49:43 2026
-%DIF ADD new.tex   Thu Nov 19 10:49:43 2026
+%DIF DEL old.tex   Thu Nov 19 11:16:47 2026
+%DIF ADD new.tex   Thu Nov 19 11:16:47 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 %DIF 4a4
@@ -143,7 +143,7 @@
 
 {\sffamily\bfseries\DIFdelbegin %DIFDELCMD < \Large{Learning conditional language\\in continuous image space}%%%
 \DIFdelend \DIFaddbegin \Large{Conditional language generation\\in glyph image space}\DIFaddend \par}\medskip Imagized Language Model Project\par\medskip
-\section*{Abstract}{\DIFdelbegin \DIFdel{Written language includes }\DIFdelend \DIFaddbegin \DIFadd{Ancient inscriptions can preserve written }\DIFaddend forms \DIFdelbegin \DIFdel{outside standard character encodings}\DIFdelend \DIFaddbegin \DIFadd{absent from a computer font}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces that }\DIFdelend \DIFaddbegin \DIFadd{ask whether a language model can }\DIFaddend read \DIFaddbegin \DIFadd{a question as an image }\DIFaddend and \DIFdelbegin \DIFdel{emit }\DIFdelend \DIFaddbegin \DIFadd{return its answer in the same medium. A recurrent }\DIFaddend glyph \DIFdelbegin \DIFdel{images}\DIFdelend \DIFaddbegin \DIFadd{writer reproduced 1}\DIFaddend ,\DIFdelbegin \DIFdel{with generated pixels supplying subsequent history}\DIFdelend \DIFaddbegin \DIFadd{134 of 1,136 simple dictionary answers about held-out Chinese headwords and learned to reorder words in familiar constructions, including statements containing historical forms}\DIFaddend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{It struggled to identify the right person when a question changed. We therefore fitted a continuous map from glyph images into the contextual layers of a }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language knowledge; tokenizers}\DIFdelend \DIFaddbegin \DIFadd{Chinese reader}\DIFaddend , \DIFdelbegin \DIFdel{lexical heads }\DIFdelend \DIFaddbegin \DIFadd{removed its vocabulary lookup, }\DIFaddend and \DIFdelbegin \DIFdel{font rendering are absent from }\DIFdelend \DIFaddbegin \DIFadd{connected its source-image output to }\DIFaddend the \DIFdelbegin \DIFdel{deployed answer path}\DIFdelend \DIFaddbegin \DIFadd{recurrent writer through a learned decision}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear }\DIFdelend \DIFaddbegin \DIFadd{On 64 questions about 16 unfamiliar situations, the combined system returned 46 }\DIFaddend complete \DIFdelbegin \DIFdel{literal }\DIFdelend answers \DIFdelbegin \DIFdel{among 32 reserved questions}\DIFdelend \DIFaddbegin \DIFadd{in regular print and 41 in bold}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven }\DIFdelend \DIFaddbegin \DIFadd{compared with 55 }\DIFaddend for \DIFdelbegin \DIFdel{a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{local Qwen3-8B receiving text}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification}\DIFdelend \DIFaddbegin \DIFadd{An unseen Kai typeface yielded one correct answer}\DIFaddend . A \DIFdelbegin \DIFdel{separate compact experiment freezes a 1.409B contextual body }\DIFdelend \DIFaddbegin \DIFadd{recurrent decoder subsequently learned to write two separated historical forms in either requested order. It completed both reversals in 94 of 96 held-out comparisons with familiar instructions }\DIFaddend and \DIFdelbegin \DIFdel{fits image interfaces }\DIFdelend \DIFaddbegin \DIFadd{16 of 96 }\DIFaddend on \DIFdelbegin \DIFdel{13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions}\DIFdelend \DIFaddbegin \DIFadd{fresh cards with unfamiliar wording after training on varied requests}\DIFaddend . \DIFdelbegin \DIFdel{Two 8,172-update fits use 3.930 and 4.889 GiB peak allocated GPU memory. Both score zero complete }\DIFdelend \DIFaddbegin \DIFadd{A generative Chinese reader subsequently returned 16 of 571 }\DIFaddend exact \DIFdelbegin \DIFdel{QA }\DIFdelend \DIFaddbegin \DIFadd{open }\DIFaddend answers\DIFdelbegin \DIFdel{out }\DIFdelend \DIFaddbegin \DIFadd{, two }\DIFaddend of \DIFdelbegin \DIFdel{32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{them assembled from dispersed ink}\DIFaddend . \DIFdelbegin \DIFdel{A wider writer removes a measured velocity-rank restriction without solving language. Frozen-weight diagnostics show that writing fails before generated feedback}\DIFdelend \DIFaddbegin \DIFadd{Given the correct answer history}\DIFaddend , \DIFdelbegin \DIFdel{despite near-exact codec reconstruction; additional sampling steps do not repair }\DIFdelend it \DIFdelbegin \DIFdel{. The reader also has }\DIFdelend \DIFaddbegin \DIFadd{selected }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction. Cold replays verify independent pixel-feedback execution for fixed }\DIFdelend \DIFaddbegin \DIFadd{glyph already on the page in 258 of 300 }\DIFaddend cases \DIFaddbegin \DIFadd{at the first position requiring new ink}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution, physical writing and conditional language success}\DIFdelend \DIFaddbegin \DIFadd{Providing the known supporting passage recovered seven of 51 answers missing from the original passage}\DIFaddend . \DIFdelbegin \DIFdel{Reliable open-ended generation, historical-form transfer }\DIFdelend \DIFaddbegin \DIFadd{General language acquisition from images }\DIFaddend and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality \DIFdelbegin \DIFdel{efficiency advantage }\DIFdelend \DIFaddbegin \DIFadd{computational savings }\DIFaddend remain unresolved.}\par\bigskip
+\section*{Abstract}{\DIFdelbegin \DIFdel{Written language includes }\DIFdelend \DIFaddbegin \DIFadd{Ancient inscriptions can preserve written }\DIFaddend forms \DIFdelbegin \DIFdel{outside standard character encodings}\DIFdelend \DIFaddbegin \DIFadd{absent from a computer font}\DIFaddend . We \DIFdelbegin \DIFdel{investigate continuous interfaces that }\DIFdelend \DIFaddbegin \DIFadd{ask whether a language model can }\DIFaddend read \DIFaddbegin \DIFadd{a question as an image }\DIFaddend and \DIFdelbegin \DIFdel{emit }\DIFdelend \DIFaddbegin \DIFadd{return its answer in the same medium. A recurrent }\DIFaddend glyph \DIFdelbegin \DIFdel{images}\DIFdelend \DIFaddbegin \DIFadd{writer reproduced 1}\DIFaddend ,\DIFdelbegin \DIFdel{with generated pixels supplying subsequent history}\DIFdelend \DIFaddbegin \DIFadd{134 of 1,136 simple dictionary answers about held-out Chinese headwords and learned to reorder words in familiar constructions, including statements containing historical forms}\DIFaddend . \DIFdelbegin \DIFdel{Externally }\DIFdelend \DIFaddbegin \DIFadd{It struggled to identify the right person when a question changed. We therefore fitted a continuous map from glyph images into the contextual layers of a }\DIFaddend pretrained \DIFdelbegin \DIFdel{foundations provide inherited language knowledge; tokenizers}\DIFdelend \DIFaddbegin \DIFadd{Chinese reader}\DIFaddend , \DIFdelbegin \DIFdel{lexical heads }\DIFdelend \DIFaddbegin \DIFadd{removed its vocabulary lookup, }\DIFaddend and \DIFdelbegin \DIFdel{font rendering are absent from }\DIFdelend \DIFaddbegin \DIFadd{connected its source-image output to }\DIFaddend the \DIFdelbegin \DIFdel{deployed answer path}\DIFdelend \DIFaddbegin \DIFadd{recurrent writer through a learned decision}\DIFaddend . \DIFdelbegin \DIFdel{A restricted actor retaining 7.522B visual and contextual parameters gives sixteen clear }\DIFdelend \DIFaddbegin \DIFadd{On 64 questions about 16 unfamiliar situations, the combined system returned 46 }\DIFaddend complete \DIFdelbegin \DIFdel{literal }\DIFdelend answers \DIFdelbegin \DIFdel{among 32 reserved questions}\DIFdelend \DIFaddbegin \DIFadd{in regular print and 41 in bold}\DIFaddend , \DIFdelbegin \DIFdel{versus eleven }\DIFdelend \DIFaddbegin \DIFadd{compared with 55 }\DIFaddend for \DIFdelbegin \DIFdel{a fixed-body control}\DIFdelend \DIFaddbegin \DIFadd{local Qwen3-8B receiving text}\DIFaddend . \DIFdelbegin \DIFdel{Neither arm passes its qualification}\DIFdelend \DIFaddbegin \DIFadd{An unseen Kai typeface yielded one correct answer}\DIFaddend . A \DIFdelbegin \DIFdel{separate compact experiment freezes a 1.409B contextual body and fits image interfaces on 13,785 complete Chinese book and question--answer sequences, covering 2.576 million target glyph positions}\DIFdelend \DIFaddbegin \DIFadd{recurrent decoder subsequently learned to write two separated historical forms in either requested order}\DIFaddend . \DIFdelbegin \DIFdel{Two 8,172-update fits use 3.930 }\DIFdelend \DIFaddbegin \DIFadd{It completed both reversals in 94 of 96 held-out comparisons with familiar instructions }\DIFaddend and \DIFdelbegin \DIFdel{4.889 GiB peak allocated GPU memory. Both score zero complete exact QA answers out }\DIFdelend \DIFaddbegin \DIFadd{16 }\DIFaddend of \DIFdelbegin \DIFdel{32 at all five checkpoints}\DIFdelend \DIFaddbegin \DIFadd{96 on fresh cards with unfamiliar wording after training on varied requests}\DIFaddend . A \DIFdelbegin \DIFdel{wider }\DIFdelend \DIFaddbegin \DIFadd{source-pointing }\DIFaddend writer \DIFdelbegin \DIFdel{removes a measured velocity-rank restriction without solving language}\DIFdelend \DIFaddbegin \DIFadd{composed 188 of 192 historical captions with familiar requests and 21 with rephrased requests}\DIFaddend . \DIFdelbegin \DIFdel{Frozen-weight diagnostics show }\DIFdelend \DIFaddbegin \DIFadd{A visual span reader could answer 46 of 64 participant questions }\DIFaddend that \DIFdelbegin \DIFdel{writing fails before generated feedback, despite near-exact codec reconstruction; additional sampling steps do not repair it}\DIFdelend \DIFaddbegin \DIFadd{the combined system initially routed to its writer}\DIFaddend . \DIFdelbegin \DIFdel{The reader also has }\DIFdelend \DIFaddbegin \DIFadd{Adding 1,738 answer-containing sentences to the training of this decision recovered all 46. On 64 further participant questions, the revised system returned 42 exact names, while }\DIFaddend a \DIFdelbegin \DIFdel{measured affine target-alignment restriction}\DIFdelend \DIFaddbegin \DIFadd{length-matched random-excerpt control returned four}\DIFaddend . \DIFdelbegin \DIFdel{Cold replays verify independent pixel-feedback execution for fixed cases}\DIFdelend \DIFaddbegin \DIFadd{It recovered no exact open answer in 128 further questions requiring ink absent from the original prompt}\DIFaddend . \DIFdelbegin \DIFdel{These results separate execution, physical writing and conditional }\DIFdelend \DIFaddbegin \DIFadd{General }\DIFaddend language \DIFdelbegin \DIFdel{success. Reliable open-ended generation, historical-form transfer }\DIFdelend \DIFaddbegin \DIFadd{acquisition from images }\DIFaddend and \DIFdelbegin \DIFdel{a }\DIFdelend matched-quality \DIFdelbegin \DIFdel{efficiency advantage }\DIFdelend \DIFaddbegin \DIFadd{computational savings }\DIFaddend remain unresolved.}\par\bigskip
 \DIFdelbegin \DIFdel{Written language is encountered as marks on paper, screens and historical
 surfaces. Its visual form carries information about script, handwriting and
 material history.
@@ -211,7 +211,15 @@ from learning a language entirely from images without textual pretraining.
 }
 
 \DIFadd{The initial language setting uses Chinese writing in }\DIFaddend one canonical font \DIFdelbegin \DIFdel{to isolate
-this coupling before introducing handwriting or historical scripts. }\DIFdelend \DIFaddbegin \DIFadd{and
+this coupling before introducing handwriting or historical scripts. }%DIFDELCMD <
+
+%DIFDELCMD < %%%
+\DIFdel{The experiments progress from initial raster readers and denoisers to
+inherited contextual bodies with separately learned glyph interfaces. The earlier architectures provide controls. Restricted short-answer experiments
+evaluate the complete-glyph loop shown in Fig. ~S37; a separate compact
+experiment then fits complete book and question--answer sequences and measures
+all five saved checkpoints. A controlled wider writerand frozen-weight
+interventions then test the sources of failure. The contributions are the explicit }\DIFdelend \DIFaddbegin \DIFadd{and
 ordered glyph cells. This isolates conditional shape generation before raw
 page reading, handwriting or historical-script transfer. Earlier compact
 complete-sequence fits produce zero strict complete answers at their fixed
@@ -221,18 +229,14 @@ targets rather than only isolated first glyphs. Its five prescribed checkpoints,
 paired questions, erased inputs, long continuations and retained successes
 separate physical fidelity from complete language. The final model improves
 some short answers relative to its initial checkpoint but fails the pilot.
-}\DIFaddend
+}
 
-\DIFdelbegin \DIFdel{The experiments progress from initial raster readers and denoisers to
-inherited contextual bodies with separately learned glyph interfaces. The
-earlier architectures provide controls. Restricted short-answer experiments
-evaluate the complete-glyph loop shown in Fig.~S37; a separate compact
-experiment then fits complete book and question--answer sequences and measures
-all five saved checkpoints. A controlled wider writer and frozen-weight
-interventions then test the sources of failure. The contributions are the }\DIFdelend \DIFaddbegin \DIFadd{The study contributes an }\DIFaddend explicit emitted-pixel \DIFaddbegin \DIFadd{inference }\DIFaddend interface, controlled
-\DIFdelbegin \DIFdel{language tests, reproducible
-single-GPU execution and measured writer/reader restrictions. None establishes a generally
-usable visual language model or a from-scratch language learner. }\DIFdelend \DIFaddbegin \DIFadd{complete-language comparisons and evidence that supplied-history writing and
+\DIFadd{The study contributes an explicit }\DIFaddend emitted-pixel \DIFdelbegin \DIFdel{interface, controlled language tests, reproducible
+single-GPU execution and measured writer/reader restrictions.
+None establishes a generally
+usable visual language model or a
+from-scratch language learner}\DIFdelend \DIFaddbegin \DIFadd{inference interface, controlled
+complete-language comparisons and evidence that supplied-history writing and
 one-GPU execution are insufficient qualifications. The failed full trial
 motivates a separate conditional joint glyph writer. That head-only fit is
 complete and fails its physical prerequisite; its original review credits
@@ -250,9 +254,9 @@ full-context comparison tests whether allowing all inherited context weights to 
 The larger objective is useful
 visual language across written forms, with historical and unencoded writing
 assessed on its own provenance, shape and meaning. That objective remains open.
-}\DIFaddend
+}
 
-\DIFaddbegin \DIFadd{To measure what the visual reader learns before it draws an answer, we also
+\DIFadd{To measure what the visual reader learns before it draws an answer, we also
 present paired Mandarin sentences containing identical glyphs in different
 orders. Each pair holds the physical inventory constant while changing the
 linguistic context of the observed marks.
@@ -268,8 +272,13 @@ measure this dependence with passages ending in the same visible character
 and compare pixel and character-indexed learning on identical training text.
 }
 
+\DIFadd{A historical caption may require alternating between an attested source shape
+and modern connecting text. In contrast, a factual question can require
+returning just one name from an existing passage. We examine whether a
+visual reader can learn when each response is appropriate}\DIFaddend .
 
-\DIFaddend \section*{Results}
+
+\section*{Results}
 \subsection*{An initial continuous visual interface preserves the written signal}
 In the initial control, each observed cell is a $32\times32$ ink image. An orthonormal transform maps
 its signed pixels into a 1,024-dimensional continuous field. The transform is
@@ -3169,8 +3178,21 @@ supplies a gap and does not evaluate open-ended question answering
 \DIFadd{All 1,525 required occurrences of glyphs absent from the displayed question and passage were writable. Given the correct preceding answer, the writer recovered 446 of these and only 18 of the 300 first such positions. At 258 of those first decisions it selected a glyph already on the page. Giving the first missing glyph eight times the ordinary training weight reduced source selections from 238 to 226 relative to further replay, but both recovered the correct next glyph in only 21 cases. Neither completed an absent-content reference. Some targets also depended on passage selection. For 51 cases the original documents contained the entire reference elsewhere. A question-only lexical ranker displayed it in five and recovered zero complete answers. Placing a window around the known reference displayed it in all 51 and recovered seven. This last condition uses the answer to locate the evidence. It isolates an input limitation while showing that displaying the answer still often fails to elicit it.
 }
 
+\subsection*{\DIFadd{A short passage can hide a fact the reader already knows how to quote}}
+\DIFadd{A source-pointing writer can return the actual shape of a historical glyph while composing a caption around it (Fig.~\ref{fig:pointing-causal-writer}). With the same pictured plate but opposite orders of the requested stages, it returned 188 of 192 captions exactly. Uniform pointing yielded zero and training with exchanged questions yielded one. Rephrasing the request on the same plates reduced accuracy to 21 of 192. The separate demonstration for the headword \textit{yán} (speech) reproduces an oracle form followed by a bronze form, then reverses them. The example illustrates which marks can appear in the answer. Its headword family was represented during training.
+}
+
+\DIFadd{The same causal writer gave both exact facts for two of 128 simplified-Chinese CMRC passages and one of 128 traditional-Chinese DRCD passages. A transferred visual span reader gave 18 and 113, respectively. A learned choice between quoting and writing retained both sets of reading scores and all 188 familiar captions. Yet it selected writing for all 64 questions about named participants in short scenes. This gave zero exact names where quoting alone recovered 46. In the map scene, the first answer identified the mapmaker within a longer sentence. The second repeated the entire passage when asked who needed directions. Exact failure includes informative longer answers as well as selection of the wrong information.
+}
+
+\DIFadd{Adding 1,738 short sentences from the existing natural training passages, each paired with its original question and answer, recovered the 46 names. Equal-length random excerpts recovered eleven. The sentence-trained selector returned 42 exact names on 64 further questions in sixteen new scenes, compared with four for random excerpts and zero for the original fit. Both name assignments and both roles were correct in six complete new scenes. The augmented selector quoted every answer in these two short-scene sets. The improvement came from selecting an available skill. The same change reduced exact answers on 571 open questions from eight to two, and none of 300 answers requiring new content ink was exact.
+}
+
+\DIFadd{Poor document selection accounts for some missing evidence, but changing retrieval alone did little. Among 128 further open questions requiring a content glyph absent from the initial page, a learned ranker exposed the exact reference on five pages, compared with one for lexical retrieval. Even a selector allowed to see the reference exposed it only eleven times within the candidate windows. The writer matched none of the available human references under any of these selection rules. Exact-match failure alone cannot exclude a valid paraphrase. The short-scene results establish question-dependent selection of visible evidence, with transfer of linguistic knowledge from pretrained text models. They leave open how to generate a supported proposition beyond a quote or a familiar caption.
+}
+
 \clearpage
-%DIF >  Literal captions copied from their source inputs by build_causal_glyph_writer_article.py.
+%DIF >  Literal captions copied from their source inputs by build_pointing_causal_writer_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -3897,6 +3919,15 @@ control was evaluated on all 22,907 windows.}}
 \textbf{b}, Exact, explicitly stopped answer images on the 571 development questions. Further replay and extra weight on the first absent glyph start from the same matched checkpoint.
 \textbf{c}, Original input and output pixels for the first two fixed role questions. Qin Che loses the way and Zhuo Lin draws the map. Asked who drew it, the model replies that Zhuo Lin drew it for him. Asked who needed directions, it repeats the mapmaking fact.}}
 \label{fig:causal-glyph-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_91_pointing_causal_writer.png}
+\caption{\DIFaddFL{\textbf{Quoting a fact and composing an answer with historical glyphs.}
+\textbf{a}, Exact participant names across two questions and two assignments of names for each of sixteen situations in each cohort. Original pictured questions and returned answers show the mapmaker (Zhuo Lin) and the person needing directions (Qin Che). The short-sentence fit quotes the correct name in each case.
+\textbf{b}, Both questions must receive exact answers for each natural passage. In the two historical columns, both complete captions for one headword must contain the requested source bitmaps in the correct order. The last column counts individual answers requiring a content glyph absent from the pictured prompt.
+\textbf{c}, The specified demonstration plate for \textit{yán} (speech) contains images of two families' historical forms. Its two requests ask for oracle and bronze, first in chronological order and then in reverse. Each original answer strip interleaves copied forms with printed connecting text. This card comes from a training family and is separate from the 96 held-out comparisons.}}
+\label{fig:pointing-causal-writer}
 \end{figure*}
 
 \clearpage
@@ -6393,6 +6424,20 @@ times. Exact scoring requires both physical equality and the correct stop.
 }
 
 \DIFadd{We fitted the top four causal blocks and final normalization (28.35 million parameters) on two passes over 2,565 pictured DuReader examples, using AdamW, a batch size of at most 16 and a learning rate of $8\times10^{-5}$. The matched and shuffled fits each took 322 updates with the same ordered answer batches. Shuffling rotated complete passage--question pairs within length groups. The matched fit took 15.2 seconds and peaked at 2.08 GiB allocated GPU memory on one RTX 4090 D, excluding upstream pretraining, visual calibration and evaluation. The first-departure comparison added two passes at half that learning rate. We decoded greedily up to 48 cells and required an explicit end decision for exact credit. Conditional likelihood excludes one unwritable target in 14,860 decisions. Physical source membership uses all displayed cells, including one outside the writer bank. The evidence-window contrast kept the same decoder and used 224-character windows. The question-only BM25 ranker used normalized character unigrams and bigrams across windows in the original retrieved documents.
+}
+
+\subsection*{\DIFadd{A physical copy distribution and a learned whole-span action}}
+\DIFadd{Let $x_i$ denote the exact bitmap at source position $i$, $g_t$ a sigmoid writing probability, $a_{ti}$ normalized attention over source positions and $b_t(x)$ the distribution over the 7,990 printed bitmaps and stop. We used
+}\[
+  p_t(x)=g_t b_t(x)+(1-g_t)\sum_{i:x_i=x}a_{ti}.
+\]
+\DIFadd{The sum merges physically identical outcomes before greedy decoding. The question precedes the passage in the causal context. A learned local convolution supplies contextual keys for the source positions. An adjacency term favours the next source position when the previous emitted bitmap equals its predecessor. The selected bitmap, including an out-of-bank copied form, supplies the next visual input. A stop decision can only come from the printed branch. When the training answer occurs as a complete span, an auxiliary first-step loss of weight 0.35 rewards its possible starts. This design adapts the copy mechanism of }\href{https://aclanthology.org/P17-1099/}{\DIFadd{See, Liu and Manning (2017)}} \DIFadd{to exact bitmap identity.
+}
+
+\DIFadd{We fitted the top four causal blocks, last normalization and the new 246,914-parameter pointer on 2,565 DuReader records, 1,918 paired CMRC questions and 2,048 captions on 512 training plates. Each of three arms trained on two passes, 818 updates and 248,356 answer positions. The genuine fit took 67.9 seconds and 3.23 GiB peak allocated memory on one RTX 4090 D, excluding previous language pretraining and interface calibration. The two controls held target batches fixed, with uniform source positions or questions exchanged on each paired training page. Both natural tests used 128 passages with two distinct human answers. DRCD used eligible records from the official test file. Upstream CKIP benchmark exposure was not audited. The 48 historical evaluation cards used held-out families, two headwords per card and two stage orders per headword.
+}
+
+\DIFadd{A frozen CKIP-based visual reader scores all nonempty source spans up to 48 cells by the sum of their endpoint logits. A 148,033-parameter binary classifier reads its summary vector, mean selected-span state, span score and margin, and length features. The target is physical containment of the complete training answer. A score of at least one half selects the span as a single terminal action. Otherwise the frozen causal writer runs to its own stop or limit. The original selector used eight passes and a shuffled-label comparison. Follow-up fits added either answer-containing sentences or random excerpts of identical lengths from the same training passages. The random windows contained 174 answers. The sentence windows contained all 1,738. The follow-up compares joint changes in support and sampling and cannot isolate the effect of length alone. The 16 additional short scenes, with exchanged names, were authored for this evaluation and excluded from all fits. For retrieval, a separate ranker used 591 training questions with both supporting and nonsupporting candidate windows among 1,536 sampled questions. Image generation, span return, target comparison and all evaluation figures used the physical glyph sequences.
 }
 
 

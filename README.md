@@ -5,33 +5,37 @@
 
 # Imagized Language Model (ILM)
 
+Asked who drew a map and who needed directions, the revised reader returns the two different names. It gave 42 exact names on 64 further pictured questions. It also writes the oracle and bronze forms of 言 in either requested order, but gave no exact answer on 128 new open questions requiring a glyph absent from the prompt. [Results and runnable model](references/pointing_causal_writer_result.md)
+
+[![言 · 91](publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](publication/ilm-nature/manuscript.pdf#page=121)
+
 A pictured passage says who drew a map and who got lost. The new Chinese writer identifies the mapmaker, then repeats the same fact when asked who needed directions. On 300 questions requiring a glyph absent from the prompt, it chose the correct first missing glyph 18 times, even with the preceding answer supplied. [Results and original answers](references/causal_glyph_writer_result.md)
 
-[![Two questions about one map](publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](publication/ilm-nature/manuscript.pdf#page=119)
+[![Two questions about one map](publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](publication/ilm-nature/manuscript.pdf#page=120)
 
 The pictured request can now reverse the oracle and bronze forms of 言. With familiar wording, the model returned both requested orders in 94 of 96 held-out comparisons. A new wording on further cards gave 16 of 96. [Results and answer images](references/ordered_page_writer_result.md)
 
-[![言 · 89](publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](publication/ilm-nature/manuscript.pdf#page=118)
+[![言 · 89](publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](publication/ilm-nature/manuscript.pdf#page=119)
 
 **Reading and writing from glyph images.** On 64 questions about two people, the model returned 46 correct answers in regular Chinese print and 41 in bold. Local Qwen3-8B returned 55 from text. An unseen Kai typeface gave one correct answer. [Run the model](docs/visual-page-responder.md)
 
-[![Figure 88. Original pictured questions and answers](publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](publication/ilm-nature/manuscript.pdf#page=117)
+[![Figure 88. Original pictured questions and answers](publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](publication/ilm-nature/manuscript.pdf#page=118)
 
 **Can it identify two people in one sentence?** The visual writer correctly names both the donor and the architect of the Gates building. Across 864 question pairs it answers both correctly 100 times. In 24 new situations with the names exchanged, it solves no complete scene. Local Qwen3-8B solves 20. [Results and runnable model](references/shared_sentence_writer_result.md)
 
-[![Figure 86. Two questions and original responses per pictured sentence](publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](publication/ilm-nature/manuscript.pdf#page=115)
+[![Figure 86. Two questions and original responses per pictured sentence](publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](publication/ilm-nature/manuscript.pdf#page=116)
 
 **Where the writer loses the answer.** On 387 human Chinese “who” questions, choosing one sentence by shared pictured glyphs raised exact answers from 62 to 116. The randomized training control reached 127 with the same selector. Figure 85 shows a clearly written place name where the question asks for an inventor. [Results and runnable reader](references/inverse_role_writer_result.md)
 
-[![Whole passages, selected sentences and original answer images](publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=114)
+[![Whole passages, selected sentences and original answer images](publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=115)
 
 **Writing the right participant.** With new names and complements, the model wrote 368 of 404 complete Chinese statements. It wrote 24 of 32 statements containing bronze Qin and Chu glyphs copied from the pictured input. When asked to name the participant from its property alone it gave zero exact bronze names. Figure 84 shows a wrong name and a correct answer to the same request. [Results and runnable model](references/visual_role_writer_result.md)
 
-[![Figure 84. Two pictured passages with bronze participants and actual answer images](publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=113)
+[![Figure 84. Two pictured passages with bronze participants and actual answer images](publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=114)
 
 **What can the visual writer read?** Given the pictured sentence 她喝了一口□。 (“She took a sip of □.”), the writer supplied 水 (water) or 茶 (tea) when the drink changed in the accompanying passage. The combined writer recovered 651 of 2,947 missing Chinese phrases exactly. When two people exchanged roles, the model gave the correct judgment in both versions on 0 of 48 pairs. [Results and commands](references/visual_inference_writer_result.md)
 
-[![Figure 83. Pictured passages, the same incomplete sentence and the two answer images](publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](publication/ilm-nature/manuscript.pdf#page=112)
+[![Figure 83. Pictured passages, the same incomplete sentence and the two answer images](publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](publication/ilm-nature/manuscript.pdf#page=113)
 
 The same model read two passages about a box. It wrote “the passage supports this claim” both when the box contained three books and when it was empty. The answer images were byte-identical.
 
@@ -44,39 +48,39 @@ The same model read two passages about a box. It wrote “the passage supports t
 
 **Training on additional pictured Chinese passages improved exact answers on two collections.** A 101,144-parameter reader answered 1,270 of 3,505 traditional-Chinese DRCD questions, up from 500 before training and 380 after equal-update replay. Official CMRC singles increased from 999 to 1,111 of 3,170. Asked for a year, the reader wrote **1991年**. Asked for a region, it still selected a person. [Run the checkpoint](models/pictured_passage_zh/README.md) · [Results and examples](references/traditional_passage_training_result.md)
 
-[![Original question and answer images for a date and a region, and results on two Chinese question collections](publication/ilm-nature/figures/Figure_74_traditional_passage.png)](publication/ilm-nature/manuscript.pdf#page=103)
+[![Original question and answer images for a date and a region, and results on two Chinese question collections](publication/ilm-nature/figures/Figure_74_traditional_passage.png)](publication/ilm-nature/manuscript.pdf#page=104)
 
 A 101,144-parameter visual reader answered two questions about the Guangmao Railway with **364.6公里；三茂铁路股份有限公司**. Reversing the questions exchanged the two answer images. On the official Chinese passage benchmark, the shorter instruction initially produced zero correct pairs in both orders. Constraining the same learned action scores recovered 505 of 4,800 pairs. Most pairs still contain a wrong answer. [Run the released model](models/pictured_passage_zh/README.md) · [Experiment and failure cases](references/paired_passage_result.md)
 
-[![Actual answer images, including a wrong answer, and results on changed instructions](publication/ilm-nature/figures/Figure_73_paired_passage.png)](publication/ilm-nature/manuscript.pdf#page=102)
+[![Actual answer images, including a wrong answer, and results on changed instructions](publication/ilm-nature/figures/Figure_73_paired_passage.png)](publication/ilm-nature/manuscript.pdf#page=103)
 
 A compact visual reader answered 66 of 96 Chinese dictionary questions written separately by a local model. Repeating the original training questions for the same compute and answer exposures gave 18. A request about 明 elicited *bright* and its bronze form. A request about 编 beginning with 老师您好 elicited the wrong headword. Figure 72 shows both original outputs. [Results and limits](references/independent_entry_result.md) · [Run the reader](models/independent_entry_reader/README.md)
 
-[![Pictured questions and actual outputs for 明 and 编, with results from matched replay and new wording](publication/ilm-nature/figures/Figure_72_independent_questions.png)](publication/ilm-nature/manuscript.pdf#page=101)
+[![Pictured questions and actual outputs for 明 and 编, with results from matched replay and new wording](publication/ilm-nature/figures/Figure_72_independent_questions.png)](publication/ilm-nature/manuscript.pdf#page=102)
 
 A 51,776-parameter reader answered Chinese questions whose glyph inventories were identical and whose meanings changed with word order. It wrote 4,542/4,544 exact answer images on held-out character families, compared with 1,136 for a matched reader given sorted glyphs. Moving familiar expressions before the fields they modify reduced the ordered model to 356/4,544. Figure 71 shows the original answer pixels for both successful requests and a failure on the same card. [Read the study](references/entry_question_reader_result.md) · [Run the pictured questions](models/entry_question_reader/README.md)
 
-[![Three pictured requests about 耳 and the actual answers, with complete scores and training loss](publication/ilm-nature/figures/Figure_71_question_order.png)](publication/ilm-nature/manuscript.pdf#page=100)
+[![Three pictured requests about 耳 and the actual answers, with complete scores and training loss](publication/ilm-nature/figures/Figure_71_question_order.png)](publication/ilm-nature/manuscript.pdf#page=101)
 
 A 28,032-parameter visual writer reads an illustrated dictionary card and writes a sentence with a requested fact and an attested historical form. On 284 held-out character families, it produced **1,134 exact complete answer images in 1,136 requests**. Replacing the printed field names with synonyms reduced this count to 225. The examples for 耳 and 言 run locally on CPU. [Run the writer](models/pictured_entry_writer/README.md) · [Evidence and controls](references/pictured_entry_writer_result.md)
 
-[![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=99)
+[![Actual answer images for two questions about 耳, a synonym error and complete results](publication/ilm-nature/figures/Figure_70_pictured_entries.png)](publication/ilm-nature/manuscript.pdf#page=100)
 
 A compact visual writer learned all 39 supervised Chinese phrase contrasts. Given unfamiliar sources and two alternatives, it chose both correct phrases on only one of 15 pairs. Asked to translate 18 new book passages independently, it produced zero faithful complete answers. The local text teacher scored 11/18. Figure 69 shows the actual generated pixels, including a credited teacher–pupil clause and a failed father–son role reversal. [Results](references/context_phrase_trial_result.md) · [Run from a PNG](models/visual_edit_zh/README.md#pictured-phrase-contrasts)
 
-[![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=98)
+[![Six source and answer strips, held-out meaning scores and paired training curves](publication/ilm-nature/figures/Figure_69_context_phrases.png)](publication/ilm-nature/manuscript.pdf#page=99)
 
 On one RTX 4090 D, a 2.33-million-parameter visual writer learned to modernise the pictured biography of Lü Yi. Expanding supervision from 108 to 841 reviewed passages reduced glyph edits on 192 new book passages. Both writers scored 0/18 for faithful complete translations on the masked reading, compared with 12/18 for Qwen3-8B reading text. [Experiment and saved answers](references/visual_translation_coverage_result.md) · [Run image-file inference](models/visual_edit_zh/README.md#supervision-across-chapters)
 
-[![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=97)
+[![Saved biography and celestial-count answers, held-out meaning scores and matched training curves](publication/ilm-nature/figures/Figure_68_translation_coverage.png)](publication/ilm-nature/manuscript.pdf#page=98)
 
 The experimental visual writer reads 三月辛亥，振陕西灾。 and writes 三月辛亥日，赈济陕西的灾荒。 Changing the pictured month to 五 changes the generated date to 五月. It produced the entire revised answer in 13 of 18 familiar sentence frames. A one-cell substitution rule solved all 18. On sixteen passages from unfamiliar chapters, the writer produced zero faithful translations, compared with ten from local Qwen3-8B reading text. [Results and controls](references/screened_visual_targets_result.md) · [Run the visual writer](models/visual_edit_zh/README.md#reviewed-translations)
 
-[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=96)
+[![Original input and output glyphs showing a changed month and a failed unfamiliar translation, with whole-answer scores](publication/ilm-nature/figures/Figure_67_screened_targets.png)](publication/ilm-nature/manuscript.pdf#page=97)
 
 A visual writer trained on 55,872 pictured Chinese passage pairs conveyed the meaning of two of 24 new passages. The earlier phrase composer conveyed three. Figure 66 shows complete input and output images, including an evening-meal passage the neural writer mistranslates. [Read the experiment](references/anchor_gap_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
-[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=95)
+[![Four complete pictured translations, their whole-answer scores and errors by length](publication/ilm-nature/figures/Figure_66_anchor_gap.png)](publication/ilm-nature/manuscript.pdf#page=96)
 
 **Can one pictured verb carry two meanings?** Given 去寿春三十里, the experimental writer outputs an image reading 距离寿春三十里。 For 我不能舍仲宝去也, the same 去 becomes 离开. The learned phrase writer conveyed the intended sense in 17 of 20 tested clauses, but only six complete translations were faithful. [See successes and errors in Figure 64](publication/ilm-nature/figures/Figure_64_predicate_context.png) · [Measured results](references/predicate_context_result.md) · [Run image inference](models/visual_edit_zh/README.md)
 
