@@ -1,0 +1,84 @@
+{
+  "cases": 51,
+  "original_complete": 0,
+  "bm25": {
+    "reference_visible": 5,
+    "font_fallback": 0,
+    "changed": 17,
+    "result": {
+      "all": {
+        "n": 51,
+        "exact": 0,
+        "stopped": 42,
+        "ref_in_source": 5,
+        "whole_passage_echo": 0,
+        "has_absent": 13,
+        "all_absent_in_order": 0,
+        "output_length": 1113,
+        "mean_overlap": 0.387014
+      },
+      "groups": {
+        "support": {
+          "n": 51,
+          "exact": 0,
+          "stopped": 42,
+          "ref_in_source": 5,
+          "whole_passage_echo": 0,
+          "has_absent": 13,
+          "all_absent_in_order": 0,
+          "output_length": 1113,
+          "mean_overlap": 0.387014
+        }
+      },
+      "conditional": {
+        "covered": 1150,
+        "positions": 1150,
+        "correct_next": 731,
+        "covered_nll_sum": 2147.2001037597656,
+        "nll_on_covered": 1.8671305250084917
+      },
+      "streams_sha256": "cf51a7a14f7e8e32a9881072893280de2a7890d3b2486fb4ff384fe7039a9c47",
+      "seconds": 1.6367747895419598
+    }
+  },
+  "reference_assisted": {
+    "reference_visible": 51,
+    "font_fallback": 0,
+    "changed": 48,
+    "result": {
+      "all": {
+        "n": 51,
+        "exact": 7,
+        "stopped": 42,
+        "ref_in_source": 51,
+        "whole_passage_echo": 3,
+        "has_absent": 0,
+        "all_absent_in_order": 0,
+        "output_length": 1199,
+        "mean_overlap": 0.525133
+      },
+      "groups": {
+        "support": {
+          "n": 51,
+          "exact": 7,
+          "stopped": 42,
+          "ref_in_source": 51,
+          "whole_passage_echo": 3,
+          "has_absent": 0,
+          "all_absent_in_order": 0,
+          "output_length": 1199,
+          "mean_overlap": 0.525133
+        }
+      },
+      "conditional": {
+        "covered": 1150,
+        "positions": 1150,
+        "correct_next": 1020,
+        "covered_nll_sum": 515.03466796875,
+        "nll_on_covered": 0.44785623301630434
+      },
+      "streams_sha256": "3d2df34a3b34cb0e8aa419d6dcfcb898a173e4b79e9fcb945bdb9a9c923ae7b5",
+      "seconds": 1.4796773325651884
+    }
+  }
+}

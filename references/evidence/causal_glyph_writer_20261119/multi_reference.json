@@ -1,0 +1,62 @@
+{
+  "scores": {
+    "base_open": {
+      "multi_exact": 2,
+      "mean_best_overlap": 0.15504199461469875,
+      "multi_exact_by_group": {
+        "single_span": 2
+      }
+    },
+    "base_native": {
+      "multi_exact": 2,
+      "mean_best_overlap": 0.16039598688499532,
+      "multi_exact_by_group": {
+        "single_span": 2
+      }
+    },
+    "matched_open": {
+      "multi_exact": 16,
+      "mean_best_overlap": 0.4234362105910805,
+      "multi_exact_by_group": {
+        "single_span": 14,
+        "distributed_ink": 2
+      }
+    },
+    "matched_wrong_passage": {
+      "multi_exact": 0,
+      "mean_best_overlap": 0.14370359678676706,
+      "multi_exact_by_group": {}
+    },
+    "shuffled_open": {
+      "multi_exact": 0,
+      "mean_best_overlap": 0.16961250959452293,
+      "multi_exact_by_group": {}
+    }
+  },
+  "overlap_differences": {
+    "base_open": {
+      "difference": 0.2683942159763818,
+      "paired_95_interval": [
+        0.24254197053290272,
+        0.2935844204069341
+      ]
+    },
+    "matched_wrong_passage": {
+      "difference": 0.27973261380431347,
+      "paired_95_interval": [
+        0.25671468470805453,
+        0.3034148303182128
+      ]
+    },
+    "shuffled_open": {
+      "difference": 0.2538237009965576,
+      "paired_95_interval": [
+        0.2291703204975172,
+        0.27884742449662353
+      ]
+    }
+  },
+  "total_human_answers": 1366,
+  "cases": 571,
+  "pixelstream_hash": "637d9ba5f0156d7c2c2369cb1b2896e21ed21a29353a148a0aa15930a56a47a0"
+}
