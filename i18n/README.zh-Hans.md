@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+图中的短文交代了谁画地图、谁迷了路。模型答对了画图的人，但问它谁需要问路，它又说了一遍画图的事。在 300 道答案需要写出题面以外字形的问题中，即使给出前面正确的答案，模型也只在 18 道题上选对了第一个新字形。 [实验结果与回答原图](../references/causal_glyph_writer_result.md)
+
+[![同一张地图，两个问题](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 模型现在能按图片中的提问，以相反顺序写出「言」的甲骨文和金文。在未参与训练的字例上，采用熟悉的问法时，96 组测试中有 94 组的两种顺序均正确。换用新的字例和问法后，正确组数为 16。 [结果与实际输出](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

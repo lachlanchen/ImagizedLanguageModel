@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Der abgebildete Text nennt die Person, die eine Karte zeichnete, und die Person, die sich verlaufen hatte. Das Modell benennt den Kartenzeichner richtig, wiederholt diese Aussage aber auf die Frage, wer nach dem Weg fragen musste. Bei 300 Fragen fehlte eine benötigte Glyphe in der Eingabe. Selbst mit dem richtigen bisherigen Antwortverlauf wählte das Modell die erste fehlende Glyphe nur 18-mal richtig. [Ergebnisse und ursprüngliche Antwortbilder](../references/causal_glyph_writer_result.md)
+
+[![Zwei Fragen zur selben Karte](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 Das Modell gibt die Orakelknochen- und Bronzeformen von 言 in der Reihenfolge der abgebildeten Frage aus. Bei zurückgehaltenen Zeichen und vertrauter Formulierung gelangen beide Reihenfolgen in 94 von 96 Vergleichen. Bei weiteren Karten und neuer Formulierung waren es 16 von 96. [Ergebnisse und Antwortbilder](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

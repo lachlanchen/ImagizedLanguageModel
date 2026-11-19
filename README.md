@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A pictured passage says who drew a map and who got lost. The new Chinese writer identifies the mapmaker, then repeats the same fact when asked who needed directions. On 300 questions requiring a glyph absent from the prompt, it chose the correct first missing glyph 18 times, even with the preceding answer supplied. [Results and original answers](references/causal_glyph_writer_result.md)
+
+[![Two questions about one map](publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](publication/ilm-nature/manuscript.pdf#page=119)
+
 The pictured request can now reverse the oracle and bronze forms of 言. With familiar wording, the model returned both requested orders in 94 of 96 held-out comparisons. A new wording on further cards gave 16 of 96. [Results and answer images](references/ordered_page_writer_result.md)
 
 [![言 · 89](publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](publication/ilm-nature/manuscript.pdf#page=118)

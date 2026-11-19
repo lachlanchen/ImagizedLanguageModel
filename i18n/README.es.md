@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+El pasaje en imagen indica quién dibujó el mapa y quién se perdió. El modelo identifica a quien dibujó el mapa, pero repite ese dato cuando se le pregunta quién necesitaba indicaciones. En 300 preguntas cuya respuesta requería un glifo ausente de la entrada, eligió correctamente el primer glifo ausente 18 veces, incluso al recibir la parte anterior de la respuesta correcta. [Resultados e imágenes de las respuestas](../references/causal_glyph_writer_result.md)
+
+[![Dos preguntas sobre un mismo mapa](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 El modelo escribe las formas de 言 en huesos oraculares y en bronce en el orden solicitado en la imagen. Acertó ambos órdenes en 94 de 96 comparaciones con caracteres reservados y preguntas de redacción conocida. Con otras fichas y una formulación nueva, acertó en 16 de 96. [Resultados e imágenes](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

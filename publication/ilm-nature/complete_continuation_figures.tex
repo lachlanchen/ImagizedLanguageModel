@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_ordered_page_writer_article.py.
+% Literal captions copied from their source inputs by build_causal_glyph_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -716,4 +716,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Exact stopped answer images on natural paired CMRC questions, the 64 individual role questions, and 571 open DuReader cases. The both-orders column counts CMRC pairs for which both complete answers are correct.
 \textbf{c}, The same two-entry plate supplies the source for opposite requests about \textit{yan} (U+8A00). Columns show the returned pixels and the two source forms in the requested order. The depicted card belongs to the historical training-family partition.}
 \label{fig:ordered-page-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_90_causal_glyph_writer.png}
+\caption{\textbf{The first glyph absent from a pictured prompt.}
+\textbf{a}, Next-glyph accuracy with the correct preceding answer. The groups comprise 12,764 target positions whose glyph is on the page, 1,525 whose glyph is absent and the first absent position in each of 300 cases. End decisions are excluded. The two training conditions use the same target batches.
+\textbf{b}, Exact, explicitly stopped answer images on the 571 development questions. Further replay and extra weight on the first absent glyph start from the same matched checkpoint.
+\textbf{c}, Original input and output pixels for the first two fixed role questions. Qin Che loses the way and Zhuo Lin draws the map. Asked who drew it, the model replies that Zhuo Lin drew it for him. Asked who needed directions, it repeats the mapmaking fact.}
+\label{fig:causal-glyph-writer}
 \end{figure*}

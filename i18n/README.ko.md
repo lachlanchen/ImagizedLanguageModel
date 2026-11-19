@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+그림으로 제시한 글에는 누가 지도를 그렸고 누가 길을 잃었는지가 나옵니다. 모델은 지도를 그린 사람을 맞혔지만, 누가 길을 물어야 했느냐는 질문에도 지도를 그린 이야기를 반복했습니다. 입력에 없는 글자 모양이 필요한 300문제에서 그 지점까지의 정답을 보여 줘도 필요한 첫 글자 모양을 맞힌 경우는 18번이었습니다. [실험 결과와 실제 답변 이미지](../references/causal_glyph_writer_result.md)
+
+[![지도 한 장에 관한 두 가지 질문](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 그림으로 제시한 질문에 따라 言의 갑골문과 금문을 순서를 바꿔 출력할 수 있다. 두 순서를 모두 맞힌 경우는 학습에 쓰지 않은 글자와 익숙한 질문 표현에서 96쌍 중 94쌍이었다. 다른 글자와 새로운 표현에서는 16쌍이었다. [결과와 출력 이미지](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

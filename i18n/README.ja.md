@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+画像の文章には、地図を描いた人と道に迷った人が登場します。モデルは地図を描いた人を正しく答えましたが、道を尋ねたのは誰かと聞くと、また地図の話をしました。入力にない字形を必要とする300問では、それまでの正しい解答を与えても、最初に必要な新しい字形を選べたのは18問でした。 [実験結果と実際の解答画像](../references/causal_glyph_writer_result.md)
+
+[![同じ地図についての二つの質問](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 画像で指示すると、「言」の甲骨文と金文を指定した順序で出力できる。未学習の字例を使い、同じ二字形を順方向と逆方向の両方で正しく出せたのは、見慣れた質問文で96組中94組、別の字例と新しい質問文では96組中16組だった。 [結果と出力画像](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+تذكر الفقرة المصوّرة مَن رسم الخريطة ومَن ضلّ الطريق. حدّد النموذج رسّام الخريطة، لكنه كرّر الحديث عن الرسم عندما سُئل عمّن احتاج إلى السؤال عن الطريق. في 300 سؤال تطلّبت إجابتها شكلاً كتابياً غائباً عن المدخلات، اختار النموذج أول شكل غائب اختياراً صحيحاً 18 مرة فقط، حتى عند تزويده بالجزء الصحيح السابق من الإجابة. [النتائج وصور الإجابات الأصلية](../references/causal_glyph_writer_result.md)
+
+[![سؤالان عن خريطة واحدة](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 يستطيع النموذج كتابة الشكلين التاريخيين للحرف 言 بالترتيب المطلوب في السؤال المصوّر. في أمثلة خارج التدريب نجح في الترتيبين معًا في 94 من 96 مقارنة بصياغة مألوفة، وفي 16 من 96 على بطاقات أخرى بصياغة جديدة. [النتائج وصور الإجابات](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)

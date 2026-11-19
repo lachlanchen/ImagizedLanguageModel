@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Le passage en image indique qui a dessiné la carte et qui s’est perdu. Le modèle identifie la personne qui a dessiné la carte, puis répète ce fait quand on lui demande qui a dû demander son chemin. Sur 300 questions dont la réponse exigeait un glyphe absent de l’entrée, il a choisi le bon premier glyphe manquant 18 fois, même avec le début correct de la réponse. [Résultats et images des réponses](../references/causal_glyph_writer_result.md)
+
+[![Deux questions sur la même carte](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+
 Le modèle écrit les formes de 言 sur os oraculaires et sur bronze dans l’ordre demandé par la question en image. Il a réussi les deux ordres dans 94 comparaisons sur 96 sur des caractères réservés avec une formulation familière, puis dans 16 sur 96 avec d’autres fiches et une nouvelle formulation. [Résultats et images](../references/ordered_page_writer_result.md)
 
 [![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
