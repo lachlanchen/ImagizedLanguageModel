@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**De qui parle la phrase ?** Avec des noms et des compléments nouveaux, le modèle a écrit exactement 368 phrases chinoises sur 404. En reprenant les graphies de Qin et Chu dans des inscriptions sur bronze, il a réussi 24 phrases sur 32. Invité à donner le nom à partir de la seule propriété, il n’a restitué exactement aucun nom en graphie ancienne. [Résultats et mode d’emploi](../references/visual_role_writer_result.md)
+
+[![Figure 84. Deux passages avec des graphies sur bronze et les réponses produites](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+
 **Que lit le modèle dans une image de texte ?** Devant la même phrase en image, « 她喝了一口□。 » (« Elle a bu une gorgée de □ »), le modèle a écrit 水 (eau), puis 茶 (thé) quand la boisson a changé dans le passage. En combinant le réseau avec les fréquences des caractères voisins, il a restitué exactement 651 des 2 947 fragments chinois masqués. Lorsque deux personnes ont échangé leurs rôles, il n’a jugé correctement les deux versions dans aucune des 48 paires. [Résultats et commandes](../references/visual_inference_writer_result.md)
 
 [![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)

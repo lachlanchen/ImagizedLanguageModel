@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Von wem handelt der Satz?** Mit neuen Namen und Ergänzungen schrieb das Modell 368 von 404 chinesischen Sätzen vollständig richtig. Mit den Schriftzeichen für Qin und Chu aus Bronzeinschriften gelangen 24 von 32 Sätzen. War nur die Eigenschaft vorgegeben und der Name gefragt, gab es keinen der Namen in Bronzeschrift exakt wieder. [Ergebnisse und Anleitung](../references/visual_role_writer_result.md)
+
+[![Abbildung 84. Zwei Passagen mit Bronzeinschriften und die ausgegebenen Antworten](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+
 **Was liest das Modell aus Schriftbildern?** Beim Satzbild „她喝了一口□。“ („Sie nahm einen Schluck □“) wechselte die Antwort von 水 (Wasser) zu 茶 (Tee), als das Getränk im Begleittext wechselte. Das neuronale Modell und eine Auswertung benachbarter Schriftzeichen ergänzten gemeinsam 651 von 2.947 chinesischen Textlücken wortgetreu. Tauschten zwei Personen ihre Rollen, beurteilte das Modell bei keinem der 48 Paare beide Fassungen richtig. [Ergebnisse und Befehle](../references/visual_inference_writer_result.md)
 
 [![Abbildung 83. Zwei Textpassagen, derselbe Lückensatz und die beiden Antwortbilder](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)

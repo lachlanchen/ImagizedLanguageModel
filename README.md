@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+**Writing the right participant.** With new names and complements, the model wrote 368 of 404 complete Chinese statements. It wrote 24 of 32 statements containing bronze Qin and Chu glyphs copied from the pictured input. When asked to name the participant from its property alone it gave zero exact bronze names. Figure 84 shows a wrong name and a correct answer to the same request. [Results and runnable model](references/visual_role_writer_result.md)
+
+[![Figure 84. Two pictured passages with bronze participants and actual answer images](publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](publication/ilm-nature/manuscript.pdf#page=111)
+
 **What can the visual writer read?** Given the pictured sentence 她喝了一口□。 (“She took a sip of □.”), the writer supplied 水 (water) or 茶 (tea) when the drink changed in the accompanying passage. The combined writer recovered 651 of 2,947 missing Chinese phrases exactly. When two people exchanged roles, the model gave the correct judgment in both versions on 0 of 48 pairs. [Results and commands](references/visual_inference_writer_result.md)
 
 [![Figure 83. Pictured passages, the same incomplete sentence and the two answer images](publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](publication/ilm-nature/manuscript.pdf#page=110)

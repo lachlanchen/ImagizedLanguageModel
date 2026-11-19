@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**誰について書いているか.** 新しい名前と補語を用いた中国語の文は 404 件中 368 件で完全に一致した。秦と楚の金文の字形を入力から写した文は 32 件中 24 件で正解したが、性質だけを示して名前を尋ねると、金文の名前を正しく返した例はなかった。 [結果と実行方法](../references/visual_role_writer_result.md)
+
+[![図84　金文を含む二つの入力と実際の出力](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+
 **字形から何を読み取れるか** 同じ画像の文「她喝了一口□。」（彼女は□を一口飲んだ）に対し、先行文の飲み物を水から茶に変えると、出力も「水」から「茶」に変わった。ニューラルモデルと隣接字形の頻度を組み合わせると、中国語の穴埋め 2,947 問中 651 問で原文と一致した。一方、二人の役割を入れ替えた 48 組では、両方の文について正しく判定できた組はなかった。 [実験結果と実行コマンド](../references/visual_inference_writer_result.md)
 
 [![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)

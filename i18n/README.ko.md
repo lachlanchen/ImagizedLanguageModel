@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**누구에 관한 문장인가.** 새 이름과 보어로 만든 중국어 문장 404개 중 368개를 정확히 썼다. 진과 초의 금문 글자를 입력에서 옮겨 쓴 문장은 32개 중 24개가 맞았다. 이름 없이 조건만 주고 누구인지 물으면 금문 이름을 정확히 쓴 경우는 없었다. [결과 및 실행 방법](../references/visual_role_writer_result.md)
+
+[![그림 84. 금문이 들어간 두 지문과 실제 출력](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+
 **모델은 글자 이미지에서 무엇을 읽을 수 있을까?** 같은 문장 이미지 “她喝了一口□。”(그녀는 □를 한 모금 마셨다)에서 앞 문단의 음료가 물에서 차로 바뀌자 모델의 답도 水에서 茶로 바뀌었다. 신경망과 이웃 글자의 빈도를 결합해 중국어 빈칸 2,947개 중 651개를 원문과 똑같이 복원했다. 두 인물의 역할을 맞바꾼 48쌍에서는 두 경우를 모두 올바르게 판단한 쌍이 없었다. [실험 결과와 실행 명령](../references/visual_inference_writer_result.md)
 
 [![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)

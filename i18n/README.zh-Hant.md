@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**模型能寫對人物嗎？** 換用新名字和補語後，模型完整寫對了 404 句中的 368 句。把名字換成金文「秦」「楚」，32 句中有 24 句寫對；問題中去掉名字、只給條件讓模型指出是誰時，32 個答案均未寫對。圖 84 展示了同一問題下的一次張冠李戴和一次正確回答。 [結果與模型用法](../references/visual_role_writer_result.md)
+
+[![圖 84：含金文字形的兩段材料及模型的實際回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+
 **模型能從字形中讀出什麼？** 面對同一句「她喝了一口□。」，當上文中的飲料從水換成茶時，模型也把答案從「水」改為「茶」。結合神經網路和相鄰字形統計的方法準確補出了 2,947 處缺文中的 651 處。但在交換兩個人物角色的 48 組對照中，沒有一組的兩次判斷都正確。 [實驗結果與執行指令](../references/visual_inference_writer_result.md)
 
 [![圖 83：兩段上文、同一句缺字句和模型寫出的兩個答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
