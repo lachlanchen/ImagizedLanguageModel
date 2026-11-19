@@ -1,0 +1,246 @@
+{
+  "evidence": {
+    "human_predicted": {
+      "scores": {
+        "cmrc": {
+          "n": 29,
+          "quote_exact": 21,
+          "reference": 19,
+          "statement": 2
+        },
+        "drcd": {
+          "n": 19,
+          "quote_exact": 19,
+          "reference": 8,
+          "statement": 1
+        }
+      },
+      "sha256": "a0389c34564786e6fff786b916d157f588546ab8b835c662fcdfa7a4cccd59b0"
+    },
+    "human_oracle": {
+      "scores": {
+        "cmrc": {
+          "n": 29,
+          "quote_exact": 29,
+          "reference": 20,
+          "statement": 2
+        },
+        "drcd": {
+          "n": 19,
+          "quote_exact": 19,
+          "reference": 8,
+          "statement": 1
+        }
+      },
+      "sha256": "817bb112683774b38c7eb7db9c7709b7d98342f78a2c5614c7ec65a272870faf"
+    },
+    "notes_predicted": {
+      "scores": {
+        "relation_0": {
+          "n": 32,
+          "exact": 15,
+          "equivalent": 15,
+          "objects": 19,
+          "role_and_names": 15,
+          "needs_new_bitmap": 28,
+          "stopped": 32,
+          "exact_with_new": 13,
+          "complete_boards": 8,
+          "both_edits_and_requests": 2,
+          "both_edits_and_requests_exact": 2,
+          "both_edits_and_requests_objects": 2
+        },
+        "quote_exact": 15
+      },
+      "sha256": "be2a71a50a3c3c79adfe4140b5d826c1a58a84ced387480c596fdd9e1506d4b8"
+    },
+    "notes_oracle": {
+      "scores": {
+        "relation_0": {
+          "n": 32,
+          "exact": 28,
+          "equivalent": 28,
+          "objects": 32,
+          "role_and_names": 28,
+          "needs_new_bitmap": 28,
+          "stopped": 32,
+          "exact_with_new": 24,
+          "complete_boards": 8,
+          "both_edits_and_requests": 6,
+          "both_edits_and_requests_exact": 6,
+          "both_edits_and_requests_objects": 8
+        },
+        "quote_exact": 32
+      },
+      "sha256": "b349731140723a7470ac981cbd23c3b38a71941c83183ff3c4c3865fe0f06269"
+    },
+    "regression_predicted": {
+      "scores": {
+        "historical": {
+          "n": 192,
+          "exact": 113,
+          "stopped": 192,
+          "answer_with_new_ink": 192,
+          "mean_overlap": 0.9393171932234433,
+          "both": 53,
+          "pairs": 96,
+          "same_response": 0
+        },
+        "historical_rephrased": {
+          "n": 192,
+          "exact": 20,
+          "stopped": 191,
+          "answer_with_new_ink": 181,
+          "mean_overlap": 0.6490052877801497,
+          "both": 2,
+          "pairs": 96,
+          "same_response": 25
+        },
+        "absent_content_ink": {
+          "n": 300,
+          "exact": 0,
+          "stopped": 250,
+          "answer_with_new_ink": 202,
+          "mean_overlap": 0.3311919985987085
+        },
+        "distributed_ink": {
+          "n": 94,
+          "exact": 1,
+          "stopped": 86,
+          "answer_with_new_ink": 47,
+          "mean_overlap": 0.34048747799964224
+        },
+        "single_span": {
+          "n": 177,
+          "exact": 8,
+          "stopped": 154,
+          "answer_with_new_ink": 98,
+          "mean_overlap": 0.43653312457585774
+        }
+      },
+      "sha256": "c1f4a4064bb53d594af1734a65867dfbb644a2d4f94a00a8d740f95a09d9ad09"
+    }
+  },
+  "wrongcue": {
+    "human_predicted": {
+      "scores": {
+        "cmrc": {
+          "n": 29,
+          "quote_exact": 21,
+          "reference": 7,
+          "statement": 0
+        },
+        "drcd": {
+          "n": 19,
+          "quote_exact": 19,
+          "reference": 2,
+          "statement": 0
+        }
+      },
+      "sha256": "84ecd093ae9b570199f414385267a2756c90968daeb5a888b56954844f6ea071"
+    },
+    "human_oracle": {
+      "scores": {
+        "cmrc": {
+          "n": 29,
+          "quote_exact": 29,
+          "reference": 7,
+          "statement": 0
+        },
+        "drcd": {
+          "n": 19,
+          "quote_exact": 19,
+          "reference": 2,
+          "statement": 0
+        }
+      },
+      "sha256": "396e3de530af998e29e9df1c0937145f10d2934d88c2ccd72a94df4f4742e455"
+    },
+    "notes_predicted": {
+      "scores": {
+        "relation_0": {
+          "n": 32,
+          "exact": 12,
+          "equivalent": 12,
+          "objects": 12,
+          "role_and_names": 12,
+          "needs_new_bitmap": 28,
+          "stopped": 32,
+          "exact_with_new": 10,
+          "complete_boards": 8,
+          "both_edits_and_requests": 1,
+          "both_edits_and_requests_exact": 1,
+          "both_edits_and_requests_objects": 1
+        },
+        "quote_exact": 15
+      },
+      "sha256": "81567dad340395fbef8d94448bc7519cf455d02d02edf6106988ea268bb4845e"
+    },
+    "notes_oracle": {
+      "scores": {
+        "relation_0": {
+          "n": 32,
+          "exact": 1,
+          "equivalent": 1,
+          "objects": 1,
+          "role_and_names": 1,
+          "needs_new_bitmap": 28,
+          "stopped": 32,
+          "exact_with_new": 1,
+          "complete_boards": 8,
+          "both_edits_and_requests": 0,
+          "both_edits_and_requests_exact": 0,
+          "both_edits_and_requests_objects": 0
+        },
+        "quote_exact": 32
+      },
+      "sha256": "bca8d6417d911b82d452b5660bd104f528126c522f94430a766b1a499d315512"
+    },
+    "regression_predicted": {
+      "scores": {
+        "historical": {
+          "n": 192,
+          "exact": 108,
+          "stopped": 192,
+          "answer_with_new_ink": 192,
+          "mean_overlap": 0.9301159951159952,
+          "both": 50,
+          "pairs": 96,
+          "same_response": 0
+        },
+        "historical_rephrased": {
+          "n": 192,
+          "exact": 21,
+          "stopped": 191,
+          "answer_with_new_ink": 181,
+          "mean_overlap": 0.6520051139290205,
+          "both": 0,
+          "pairs": 96,
+          "same_response": 13
+        },
+        "absent_content_ink": {
+          "n": 300,
+          "exact": 0,
+          "stopped": 245,
+          "answer_with_new_ink": 202,
+          "mean_overlap": 0.3029885418690798
+        },
+        "distributed_ink": {
+          "n": 94,
+          "exact": 0,
+          "stopped": 78,
+          "answer_with_new_ink": 49,
+          "mean_overlap": 0.33453444698512413
+        },
+        "single_span": {
+          "n": 177,
+          "exact": 8,
+          "stopped": 161,
+          "answer_with_new_ink": 103,
+          "mean_overlap": 0.43188768814756584
+        }
+      },
+      "sha256": "460a1f691c9a129e8403ee661efa33ab559e48f38b3847eb44c4ab40aed02589"
+    }
+  }
+}
