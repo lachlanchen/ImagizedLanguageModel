@@ -1,0 +1,7 @@
+# Separating writing length from question phrasing
+
+The first ordered decoder gave both stage orders on 94/96 familiar contrasts and 0/96 after rewording. It stopped after a single glyph in 178/192 rephrased two-form requests. Ordinary single-name answers fell from 46/64 to 0/64. All 39 exact open answers were contiguous source spans.
+
+Compare six more passes from the same frozen decoder and writing memory. A replay arm retains the original inputs. A variation arm presents single and double historical requests in shared phrasing families, and changes half of the CMRC pairs into natural single questions drawn from the exact same passages. Both arms receive the same batch membership, ordering, learning rate and update count. The DuReader cohort is unchanged. Use the final states only. Each fit has a ceiling of ten minutes and 12 GiB on GPU 0.
+
+Repeat all original evaluations, including the failed regular-print single questions and open answers, and evaluate both models on a preregistered third wording with 24 different development cards. Accuracy must improve on both-order pairs for both unfamiliar wordings versus replay, with at least 48/96 complete reversals per wording before qualifying historical transfer. Treat the previous reworded set as development evidence. Report every original cohort and separate complete open answers requiring new ink. Broad replacement requires preserving previous deployed strengths. If a failure persists, inspect actual decisions from a fixed example. No intermediate state or manual task label may choose the writer.
