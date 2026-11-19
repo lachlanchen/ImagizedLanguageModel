@@ -1,0 +1,68 @@
+{
+  "repository": "https://github.com/UniversalDependencies/UD_Chinese-GSD",
+  "revision": "a7cb4270c8ea437d7f2cd7978b0dcc0941cb7266",
+  "release": "r2.16",
+  "license": "CC BY-SA 4.0",
+  "source_blobs": {
+    "LICENSE.txt": "9af2e0b2f73cf29fe1f60cb6376b176d9c2ba846",
+    "README.md": "93a7ea39e9bc73d17adc36d1832930609ef8dc4f",
+    "zh_gsd-ud-dev.conllu": "138124a9029ce76b79afda4879c51ca31164e36f",
+    "zh_gsd-ud-test.conllu": "9b83830f9d76543593a4905165875bccbac50a1b",
+    "zh_gsd-ud-train.conllu": "d6b3581ea606424e295afc20bd3917c06efddd90"
+  },
+  "splits": {
+    "train": {
+      "aligned_sentences": 3997,
+      "relations": 872,
+      "questions": 1744,
+      "source_sentences": 799,
+      "unique_predicates": 524,
+      "relations_with_train_absent_predicate": 0,
+      "files": {
+        "subject_question.npz": "1fd13310da049ccf92660295838501df87c1730ef4b31640a2181fda47a2f70a",
+        "pixels.npy": "53512dc8927a66ccf68018029959de2260069d6430131711d65f7571ebdbc7ba",
+        "object.npz": "fe0332f3f7eb30fa562a4936c949a0f558e0c12b8c6ec62ef467e76b4b7c1f6f",
+        "rows.json": "e0a7d43c47652a596727c16c3264e0082c3cd7c90f05a4bd9505d0d8d07cca0c",
+        "object_question.npz": "60458859ae3d4134dc0f7e9254bc81654a3bb79fb99e0370b2ca569478766c71",
+        "sentence.npz": "50de41d081ebeae54e6017c93e5dfa6fe6017b7895a7b6e0e1df65f74aee09d8",
+        "subject.npz": "d0d4b1fefd4bd1cf5ab68bb03fb578154fe1c5cbf6626b84870bfaa1b749e001"
+      }
+    },
+    "dev": {
+      "aligned_sentences": 500,
+      "relations": 113,
+      "questions": 226,
+      "source_sentences": 96,
+      "unique_predicates": 96,
+      "relations_with_train_absent_predicate": 47,
+      "files": {
+        "subject_question.npz": "23e293ae844891b29e84e87d97bd6f846c2374811c2dd6f45d51420fe458b096",
+        "pixels.npy": "8c9b3d04ae5a43463179b3ea63011a42855bfd459ca54c1c4ad35a6363ce95c8",
+        "object.npz": "8beee9b39400804904351bfe7a4408f8e08fad705846756aaba512ccf004f0cb",
+        "rows.json": "65277aa0eff98da3050b0c1854e2db696862385158810d0f55d1a251e4aa1b1d",
+        "object_question.npz": "18296990169e619cc99c608175daa2fdd6cf865298755e718d4887b3a32a79f1",
+        "sentence.npz": "f37d3078f06b271a71de96cf52b57c52b4e9584771f056950343d2c3ada92ecc",
+        "subject.npz": "932b9a3b7056f2570dc8237ecff21b1461dad4fb1969090d89243aca1c6c92ee"
+      }
+    },
+    "test": {
+      "aligned_sentences": 500,
+      "relations": 106,
+      "questions": 212,
+      "source_sentences": 98,
+      "unique_predicates": 85,
+      "relations_with_train_absent_predicate": 36,
+      "files": {
+        "subject_question.npz": "edddbcf6fdad9e4558e1f0b840fc6fd0c7a608ce5d669e3ad46044e5ec5bd6ae",
+        "pixels.npy": "580227c39767b0b19aabfad8a2f38fdd1cfd3c9bea3518f7ae5195c7a9c2f344",
+        "object.npz": "e723fdbaa5f55a976d4bece783f78723577c3a0aac2a72d6e3bf3d40b5e60e97",
+        "rows.json": "b23f5fcf28db211e8eeaaf4af2eb292fe96d5eb3710ec9f0c8085dbe479c9564",
+        "object_question.npz": "965403297d1edead1075473d5bf0c0ada1d4813670e6c6682b833889798ee882",
+        "sentence.npz": "f746c71868ef5d34b053ea7c5f3a5bd0b7d588da67a92142479bc13846871d20",
+        "subject.npz": "02681ac4b9605446bc4cbd240d0230b615b9af2cca96343d0122a9aa155e6120"
+      }
+    }
+  },
+  "program": "77a7d180fa77aae408f3e04aa5c87a09caa8510161e0e50423020aeee1cb3ece",
+  "scope": "Direct grammatical subjects and objects of the same visible verb; ordinary SVO order only. Automatically rendered questions. Annotation was originally manual in another scheme and converted to UD."
+}

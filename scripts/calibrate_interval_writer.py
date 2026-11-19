@@ -84,7 +84,7 @@ def fit():
 
 if __name__=="__main__":
     if os.environ.get("CUDA_VISIBLE_DEVICES")!="0":raise ValueError("Use GPU0")
-    binding=load(PUBLIC/"calibration_binding.json")
+    binding=load(PUBLIC/"calibration_execution.json")["files"]
     assert all(sha(ROOT/k)==v for k,v in binding.items())
     with (ROOT/"artifacts/ilm_gpu0.lock").open("a") as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)

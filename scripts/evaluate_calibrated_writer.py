@@ -5,11 +5,12 @@ from safetensors.torch import load_file
 
 from ilm.visual_lm.interval_writer import IntervalWriter
 from scripts.audit_traditional_passage_training import archived
-from scripts.calibrate_interval_writer import (DEST, DEVICE, PUBLIC, START, WHO, WORK, SentenceCorpus,
+from scripts.calibrate_interval_writer import (DEST, DEVICE, PUBLIC, START, WORK, SentenceCorpus,
     load,load_visual_writer,memory_bank,physical_tables,sha,to_batch,write_json)
 from scripts.evaluate_inverse_role_writer import available_sets
 from scripts.evaluate_same_passage_writer import image_archive
 from scripts.explicit_participant_cases import cases
+from scripts.train_interval_writer import WHO
 from scripts.train_visual_role_writer import Tiles
 
 

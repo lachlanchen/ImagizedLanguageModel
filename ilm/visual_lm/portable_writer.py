@@ -92,7 +92,16 @@ def run(bundle, passage, question, device):
     bits=np.unpackbits(np.frombuffer(b"".join(tiles),np.uint8).reshape(-1,128),axis=1)
     ink=model.ink(descriptors(torch.from_numpy(bits).to(device)))
     mem=torch.arange(1,len(memory)+1,device=device)
-    output,stopped=model.generate(ink,p,q,model.write_key(ink[mem]),mem,limit=manifest["limit"])
+    if "interval.safetensors" in manifest["sha256"]:
+        from ilm.visual_lm.interval_writer import IntervalWriter
+        path = bundle/"interval.safetensors"
+        if hashlib.sha256(path.read_bytes()).hexdigest() != manifest["sha256"][path.name]:
+            raise ValueError("Changed source-run checkpoint")
+        locator = IntervalWriter().to(device).eval()
+        locator.load_state_dict(load_file(str(path)),strict=True)
+        output,stopped=locator.generate(model,ink,p,q,model.write_key(ink[mem]),mem,limit=manifest["limit"])
+    else:
+        output,stopped=model.generate(ink,p,q,model.write_key(ink[mem]),mem,limit=manifest["limit"])
     return b"".join(tiles[i] for i in output[0].tolist() if i),bool(stopped[0])
 
 

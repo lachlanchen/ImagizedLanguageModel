@@ -1,0 +1,32 @@
+# Two questions about the same pictured sentence
+
+One sentence identifies Bill Gates as the donor of MIT's Gates building and Frank Gehry as its architect. Given the same sentence and two different pictured questions, the calibrated visual writer returned **比爾蓋茨** and **法蘭克·蓋瑞**. The preceding pair exposes a failure. The writer added a glyph to Wang Mang's name and gave a place name when asked whom he blamed. These are the first two person-question pairs in evaluation order. [Original images, questions and scores](evidence/shared_sentence_writer_20261119/audit.json) · [Figure 86](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)
+
+We trained a reading action that locates the beginning and end of an answer in pictured evidence. Its highest-scoring interval can contain up to 64 original glyph images, including an inscription absent from the model's writing memory. The alternative action invokes the frozen recurrent writer to compose a response in its own order. The network adds 88,019 parameters to the 694,152-parameter writer. Inputs to the network and its returned answers are glyph images. [Model](../ilm/visual_lm/interval_writer.py) · [Training protocol](shared_sentence_writer_protocol.md)
+
+| System | Both questions correct on the same sentence / 864 | Person pairs / 27 | Who-answers with sentence selection / 387 | Both who-questions with selection / 131 | Reordered descriptions / 404 | Explicit roles / 96 |
+|---|---:|---:|---:|---:|---:|---:|
+| Frozen writer | 58 | 1 | 116 | 9 | 344 | 11 |
+| Randomized additional assignments | 72 | 0 | 144 | 16 | 0 | 26 |
+| Matched additional assignments | 100 | 1 | 148 | 19 | 0 | 23 |
+| Matched, with calibrated writing decision | 100 | 1 | 148 | 19 | 344 | 21 |
+| Prior specialized passage reader | 73 | 1 | 100 | 8 | — | 10 |
+| Local Qwen3-8B, text input | — | — | — | — | — | 90 |
+
+The first two columns give both questions the same reference-selected sentence. In the next two, the reader chooses a sentence by overlap with pictured glyphs. The matched advantage over randomization on all 864 shared pairs was 3.2 percentage points (95% passage-bootstrap interval 1.2–5.4). On the 27 person pairs the interval was 0–12 points. The joint primary criterion therefore failed. Each arm took 3,136 single-GPU updates and saw 175,472 ordinary DRCD questions and 92,112 additional paired presentations after inherited training. The matched adaptation took 140.3 seconds. [All final scores, fits and intervals](evidence/shared_sentence_writer_20261119/result.json)
+
+## Which relationships does the evidence support?
+
+Merely finding both names in the same sentence gives a misleading test of language. In a model-based reading before inspecting fitted predictions on the 27 person pairs, the selected sentence explicitly supported 23 of 54 requested relations and both relations in only one pair. The published exact scores retain all 27. To test the distinction directly, we wrote 24 new situations, asked two questions in each and exchanged the names. Each question has a determinate answer from the sentence. All visual systems gave zero complete four-answer scenes, while Qwen3-8B gave 20/24. Its exact text-answer count was 90/96. The visual and text inputs carry the same wording. This comparison measures answer quality on an investigator-written test. It supplies no evidence of an end-to-end compute advantage. [Source-support reading](evidence/shared_sentence_writer_20261119/support_reading.json) · [Explicit questions and name exchanges](../scripts/explicit_participant_cases.py) · [Teacher and student scores](evidence/shared_sentence_writer_20261119/explicit_result.json)
+
+## Restoring composition
+
+The uncalibrated model gave 1,346/3,505 exact full-passage answers, but copied source runs when asked to reorder a clause. We trained only the 12,417 parameters that choose between reading and composing. Mixed original training examples supplied 25,853 targets present as one run and 18,307 targets requiring another action. All interval-scoring tensors and the entire underlying writer were preserved. The repair took 15.3 seconds and recovered 344/404 familiar and 30/32 bronze-name descriptions, with 1,344 full-passage answers and all 148 previously counted who-answers in aggregate. Unfamiliar description layouts gave only 8/404, four-name historical identification gave zero of 96, and open DuReader writing gave zero of 571 canonical responses. [Calibration targets](shared_sentence_calibration_protocol.md) · [Complete outputs and action counts](evidence/shared_sentence_writer_20261119/calibrated.json)
+
+## Local use
+
+The complete archive is `artifacts/shared_sentence_writer_v1/shared-sentence-writer.zip`. It contains both learned components, the original glyph memory, illustrated examples and inference code. Isolated CPU inference with network access blocked reproduced ten original outputs, including a reordered sentence and a historical glyph question. The training run and both original controls are preserved. After the calibration fit, an import error interrupted evaluation. The certified final weights were evaluated after the import repair. [Usage](../docs/shared-sentence-writer.md) · [Standalone comparisons](evidence/shared_sentence_writer_20261119/portable.json) · [Evaluation recovery](evidence/shared_sentence_writer_20261119/calibration_eval_recovery.json)
+
+## Grounded training material
+
+A new training set renders subject and object questions from the traditional Chinese GSD treebank. Both targets attach to the same visible predicate in the original dependency analysis. The release contains 872 training relations from 799 sentences, giving 1,744 pictured training questions, with 113 development and 106 test relations. It keeps all three official partitions separate and excludes identical sentences across splits. The current selection covers subject–verb–object order, so position remains a shortcut. The next test needs held-out verbs, constructions that change the answer's position, independently expressed questions and a word-order control. This is prepared data, and was not used to train the results above. The source annotations originated in a manually annotated scheme and were converted to Universal Dependencies. The source and its derivatives carry CC BY-SA 4.0. [Treebank and contributors](https://universaldependencies.org/treebanks/zh_gsd/index.html) · [Rendered dataset receipt](evidence/shared_sentence_writer_20261119/grammar_source.json)

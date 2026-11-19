@@ -1,0 +1,96 @@
+{
+  "arms": {
+    "parent": {
+      "shared_pairs": 58,
+      "direct_pair": false,
+      "explicit": 11
+    },
+    "passage_reader": {
+      "shared_pairs": 73,
+      "direct_pair": false,
+      "explicit": 10
+    },
+    "randomized": {
+      "shared_pairs": 72,
+      "direct_pair": false,
+      "explicit": 26
+    },
+    "matched": {
+      "shared_pairs": 100,
+      "direct_pair": true,
+      "explicit": 23
+    },
+    "calibrated": {
+      "shared_pairs": 100,
+      "direct_pair": true,
+      "explicit": 21,
+      "examples": [
+        {
+          "passage": "由於高句麗士卒脫逃，王莽怪罪於高句麗王並改高句麗為「下句麗」，又名樂鮮，仍屬幽州。",
+          "cells": [
+            41,
+            19,
+            16
+          ],
+          "answers": [
+            {
+              "id": "1199-13-1",
+              "question": "高句麗人被誰編進遼西郡進攻匈奴等民族？",
+              "emitted": "王莽怪",
+              "correct": false,
+              "reference": [
+                "王莽",
+                "王莽"
+              ]
+            },
+            {
+              "id": "1199-13-2",
+              "question": "王莽認為高句麗士卒脫逃是誰的錯？",
+              "emitted": "樂鮮",
+              "correct": false,
+              "reference": [
+                "高句麗王",
+                "高句麗王"
+              ]
+            }
+          ]
+        },
+        {
+          "passage": "1999年，比爾蓋茨向麻省理工捐助了兩千萬美金建造名為威廉·H·蓋茨大樓的電腦實驗室，此建築物由法蘭克·蓋瑞設計。",
+          "cells": [
+            57,
+            31,
+            13
+          ],
+          "answers": [
+            {
+              "id": "2388-12-3",
+              "question": "向麻省理工捐助了兩千萬美金建造名為威廉·H·蓋茨大樓的人為誰?",
+              "emitted": "比爾蓋茨",
+              "correct": true,
+              "reference": [
+                "比爾蓋茨",
+                "比爾蓋茨"
+              ]
+            },
+            {
+              "id": "2388-12-4",
+              "question": "誰設計威廉·H·蓋茨大樓?",
+              "emitted": "法蘭克·蓋瑞",
+              "correct": true,
+              "reference": [
+                "法蘭克·蓋瑞",
+                "法蘭克·蓋瑞"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "raw_sha256": "e236df03861ba241bd7b29628cd48b3b8e339c60137e041a4358b5320ed61928",
+  "primary_result": "0c3ac8e5bbddcae0c1124d16c3e51aef1ff6415363fe7e8582ebc9d3ab3c3116",
+  "calibrated_result": "f9af20d84505ff4af1893044f820fe3ce1722a57ce5d6b1f8c4015408b51c3f3",
+  "qwen_exact": 90,
+  "program": "e929acdbeb766703babd8c845c555b2e8d9e13c7abf854f327f7a2939a9faaa0"
+}
