@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Que lit le modèle dans une image de texte ?** Devant la même phrase en image, « 她喝了一口□。 » (« Elle a bu une gorgée de □ »), le modèle a écrit 水 (eau), puis 茶 (thé) quand la boisson a changé dans le passage. En combinant le réseau avec les fréquences des caractères voisins, il a restitué exactement 651 des 2 947 fragments chinois masqués. Lorsque deux personnes ont échangé leurs rôles, il n’a jugé correctement les deux versions dans aucune des 48 paires. [Résultats et commandes](../references/visual_inference_writer_result.md)
+
+[![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+
 <!-- paired-writing-status:start -->
 La comparaison après 512 mises à jour avec suppression des marges blanches échoue encore à copier fidèlement : correspondance OCR exacte de 6/32 à l’entraînement et 10/32 en validation (références nettes : 27/32 et 28/32). Les images brutes montrent des caractères omis et des lettres répétées. Le temps d’entraînement passe de 795.624 à 287.182 secondes, sans démonstration de compréhension du langage ni d’efficacité à une qualité utile. [Les 64 sorties brutes](../references/paired_padding_result.md).
 <!-- paired-writing-status:end -->

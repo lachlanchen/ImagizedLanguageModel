@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**字形から何を読み取れるか** 同じ画像の文「她喝了一口□。」（彼女は□を一口飲んだ）に対し、先行文の飲み物を水から茶に変えると、出力も「水」から「茶」に変わった。ニューラルモデルと隣接字形の頻度を組み合わせると、中国語の穴埋め 2,947 問中 651 問で原文と一致した。一方、二人の役割を入れ替えた 48 組では、両方の文について正しく判定できた組はなかった。 [実験結果と実行コマンド](../references/visual_inference_writer_result.md)
+
+[![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+
 <!-- paired-writing-status:start -->
 512 回更新の余白削減比較でも、安定した書き写しには至っていません。OCR 完全一致は訓練 6/32、検証 10/32（鮮明な参照画像は 27/32、28/32）で、生成画像には文字の欠落や重複が見られます。訓練時間は 795.624 秒から 287.182 秒に短縮しましたが、言語理解と実用品質での効率は未実証です。 [全 64 件の生成画像](../references/paired_padding_result.md).
 <!-- paired-writing-status:end -->

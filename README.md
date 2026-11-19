@@ -5,7 +5,18 @@
 
 # Imagized Language Model (ILM)
 
-**The experimental writer learned Chinese spelling from ordered glyph images.** Given the correct answer prefix, it selected 431 of 1,525 missing glyphs after learning from 192,230 additional human answers, versus 162 without the image histories and 121 with shuffled histories. Starting from the question and passage alone, it gave zero complete references on the 300 cases requiring new content ink. The released reader below remains the supported passage model. [Actual output and causes](references/composed_writer_result.md) · [Spelling comparison](references/bitmap_history_writing_result.md) · [Latest figure](publication/ilm-nature/figures/Figure_76_bitmap_history.png)
+**What can the visual writer read?** Given the pictured sentence 她喝了一口□。 (“She took a sip of □.”), the writer supplied 水 (water) or 茶 (tea) when the drink changed in the accompanying passage. The combined writer recovered 651 of 2,947 missing Chinese phrases exactly. When two people exchanged roles, the model gave the correct judgment in both versions on 0 of 48 pairs. [Results and commands](references/visual_inference_writer_result.md)
+
+[![Figure 83. Pictured passages, the same incomplete sentence and the two answer images](publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](publication/ilm-nature/manuscript.pdf#page=110)
+
+The same model read two passages about a box. It wrote “the passage supports this claim” both when the box contained three books and when it was empty. The answer images were byte-identical.
+
+| Passage image | Claim image | Actual answer image |
+|---|---|---|
+| ![The box contains three books](references/evidence/visual_inference_writer_20261119/box_books.png) | ![There is at least one book in the box](references/evidence/visual_inference_writer_20261119/box_claim.png) | ![The passage supports this claim](references/evidence/visual_inference_writer_20261119/box_answer.png) |
+| ![The box is empty](references/evidence/visual_inference_writer_20261119/box_empty.png) | ![There is at least one book in the box](references/evidence/visual_inference_writer_20261119/box_claim.png) | ![The passage supports this claim](references/evidence/visual_inference_writer_20261119/box_answer.png) |
+
+**The experimental writer learned Chinese spelling from ordered glyph images.** Given the correct answer prefix, it selected 431 of 1,525 missing glyphs after learning from 192,230 additional human answers, versus 162 without the image histories and 121 with shuffled histories. Starting from the question and passage alone, it gave zero complete references on the 300 cases requiring new content ink. The released reader below remains the supported passage model. [Actual output and causes](references/composed_writer_result.md) · [Spelling comparison](references/bitmap_history_writing_result.md) · [Spelling results in Figure 76](publication/ilm-nature/figures/Figure_76_bitmap_history.png)
 
 **Training on additional pictured Chinese passages improved exact answers on two collections.** A 101,144-parameter reader answered 1,270 of 3,505 traditional-Chinese DRCD questions, up from 500 before training and 380 after equal-update replay. Official CMRC singles increased from 999 to 1,111 of 3,170. Asked for a year, the reader wrote **1991年**. Asked for a region, it still selected a person. [Run the checkpoint](models/pictured_passage_zh/README.md) · [Results and examples](references/traditional_passage_training_result.md)
 

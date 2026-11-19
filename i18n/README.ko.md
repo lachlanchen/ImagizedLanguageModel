@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**모델은 글자 이미지에서 무엇을 읽을 수 있을까?** 같은 문장 이미지 “她喝了一口□。”(그녀는 □를 한 모금 마셨다)에서 앞 문단의 음료가 물에서 차로 바뀌자 모델의 답도 水에서 茶로 바뀌었다. 신경망과 이웃 글자의 빈도를 결합해 중국어 빈칸 2,947개 중 651개를 원문과 똑같이 복원했다. 두 인물의 역할을 맞바꾼 48쌍에서는 두 경우를 모두 올바르게 판단한 쌍이 없었다. [실험 결과와 실행 명령](../references/visual_inference_writer_result.md)
+
+[![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+
 <!-- paired-writing-status:start -->
 512회 업데이트한 여백 제거 비교에서도 안정적인 베껴 쓰기는 달성하지 못했습니다. OCR 완전 일치는 훈련 6/32, 검증 10/32이며, 깨끗한 참조 이미지는 27/32, 28/32입니다. 원본 출력에는 글자 누락과 반복이 보입니다. 훈련 시간은 795.624초에서 287.182초로 줄었지만 언어 이해와 실용적인 품질에서의 효율성은 입증되지 않았습니다. [64개 원본 출력](../references/paired_padding_result.md).
 <!-- paired-writing-status:end -->
