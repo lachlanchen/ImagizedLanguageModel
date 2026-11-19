@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**قراءة صور الحروف والإجابة عنها.** أجاب النموذج إجابة صحيحة عن 46 سؤالًا من أصل 64 عن شخصين بالخط الصيني العادي، وعن 41 بالخط العريض. وأجاب Qwen3-8B المحلي عن 55 سؤالًا إجابة صحيحة عند إدخال النص. وعند استخدام خط كاي لم يسبق للنموذج التدرّب عليه، أجاب عن سؤال واحد فقط إجابة صحيحة. [تشغيل النموذج](../docs/visual-page-responder.md)
+
+[![الشكل 88. صور الأسئلة والإجابات الفعلية](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **هل يميّز النموذج بين شخصين في جملة واحدة؟** كتب النموذج اسم المتبرع لمبنى غيتس واسم المهندس المعماري بشكل صحيح. ومن أصل 864 زوجًا من الأسئلة أجاب عن السؤالين معًا إجابة صحيحة في 100 زوج. وعند تبديل الأسماء في 24 موقفًا جديدًا لم يُجب عن كل أسئلة أي موقف، بينما نجح نموذج Qwen3-8B المحلي في 20 موقفًا. [النتائج وطريقة التشغيل](../references/shared_sentence_writer_result.md)
 
 [![الشكل 86. سؤالان عن الجملة نفسها وصور الإجابات](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

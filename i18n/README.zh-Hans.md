@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**从字形图像阅读和作答.** 在关于两个人物的 64 道题中，模型用常规中文字体答对 46 道，换成粗体后答对 41 道。以文本作答的本地 Qwen3-8B 答对 55 道。换用训练中未见的楷体后，模型只答对了一道。 [运行模型](../docs/visual-page-responder.md)
+
+[![图 88：实际输入的字形与模型的回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **同一句话里的两个人，模型分得清吗？** 模型正确写出了盖茨大楼的捐赠者和建筑师。在 864 对问题中，有 100 对的两个答案都正确。另有 24 个新情境交换了人名，模型没有一个情境全部答对，本地 Qwen3-8B 全部答对了其中 20 个。 [结果与模型用法](../references/shared_sentence_writer_result.md)
 
 [![图 86：同一句话、不同的问题和回答原图](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

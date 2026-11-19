@@ -1,0 +1,3 @@
+# A continuous visual interface for a pretrained contextual reader
+
+Add the pretrained reader experiment after the participant study. Document the word-embedding regression, font invariance intervention and learned choice of reading or writing. Show the native text reference, original held font failure and complete answers under question and name exchange. Use native evidence charts and original image strips. State inherited training, complete runtime size, external referent and source-only limitations. Preserve both earlier editions, rebuild all three manuscript variants and verify updated reading-page anchors and local package aliases.

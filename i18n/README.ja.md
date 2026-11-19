@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**字形画像を読んで答える.** 二人の人物に関する中国語の設問64問のうち、通常の書体では46問、太字では41問に正答しました。ローカルのQwen3-8Bはテキスト入力で55問に正答しました。学習に使わなかった楷書体では正答は1問でした。 [モデルを実行](../docs/visual-page-responder.md)
+
+[![図88：字形画像の質問と実際の回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **一文に登場する二人を区別できるか** ゲイツ棟の寄付者と建築家はどちらも正しく書けた。864組の質問のうち両方に正答したのは100組だった。名前を入れ替える24の新しい場面では全問正解が0場面で、ローカルのQwen3-8Bは20場面だった。 [結果と実行方法](../references/shared_sentence_writer_result.md)
 
 [![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

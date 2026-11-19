@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**글자 이미지를 읽고 답하기.** 두 인물에 관한 중국어 질문 64개 중 일반 글꼴에서는 46개, 굵은 글꼴에서는 41개에 정답을 냈습니다. 로컬 Qwen3-8B는 텍스트 입력으로 55개를 맞혔습니다. 학습에 쓰지 않은 해서체에서는 정답이 1개였습니다. [모델 실행](../docs/visual-page-responder.md)
+
+[![그림 88. 글자 이미지 질문과 실제 응답](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **한 문장에 등장하는 두 사람을 구별할 수 있을까?** 모델은 게이츠 건물의 기부자와 건축가 이름을 모두 맞혔다. 질문 864쌍 중 두 답을 모두 맞힌 경우는 100쌍이었다. 이름을 맞바꾼 새 상황 24개에서는 모든 답을 맞힌 상황이 없었고 로컬 Qwen3-8B는 20개였다. [결과와 실행 방법](../references/shared_sentence_writer_result.md)
 
 [![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

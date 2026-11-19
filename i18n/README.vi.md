@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Đọc và trả lời bằng hình ảnh chữ viết.** Với 64 câu hỏi tiếng Trung về hai người, mô hình trả lời đúng 46 câu ở kiểu chữ thường và 41 câu ở kiểu chữ đậm. Qwen3-8B chạy cục bộ trả lời đúng 55 câu khi nhận văn bản. Ở kiểu chữ Khải chưa dùng để huấn luyện, mô hình chỉ trả lời đúng một câu. [Chạy mô hình](../docs/visual-page-responder.md)
+
+[![Hình 88. Ảnh câu hỏi và câu trả lời thực tế](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **Mô hình có phân biệt được hai người trong cùng một câu?** Mô hình viết đúng tên người tài trợ và kiến trúc sư của tòa nhà Gates. Trong 864 cặp câu hỏi, có 100 cặp đúng cả hai đáp án. Khi hoán đổi tên trong 24 tình huống mới, mô hình không giải đúng trọn vẹn tình huống nào. Qwen3-8B chạy cục bộ giải đúng 20. [Kết quả và cách chạy](../references/shared_sentence_writer_result.md)
 
 [![Hình 86. Hai câu hỏi trên cùng một câu văn và ảnh đầu ra](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

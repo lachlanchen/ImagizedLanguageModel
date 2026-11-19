@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Schriftbilder lesen und Fragen beantworten.** Von 64 chinesischen Fragen zu zwei Personen beantwortete das Modell 46 in Normalschrift und 41 in Fettschrift richtig. Das lokale Qwen3-8B kam mit Texteingabe auf 55. Bei einer im Training nicht verwendeten Kai-Schrift war nur eine Antwort richtig. [Modell ausführen](../docs/visual-page-responder.md)
+
+[![Abbildung 88. Fragen und Antworten als Schriftbilder](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **Kann das Modell zwei Personen in einem Satz unterscheiden?** Das Modell nennt den Spender und den Architekten des Gates-Gebäudes korrekt. Bei 100 von 864 Fragenpaaren stimmen beide Antworten. In 24 neuen Situationen mit vertauschten Namen löst es keine vollständig, das lokale Qwen3-8B dagegen 20. [Ergebnisse und Anleitung](../references/shared_sentence_writer_result.md)
 
 [![Abbildung 86. Zwei Fragen zu einem Satz und die Originalantworten](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_pictured_participant_reader_article.py.
+% Literal captions copied from their source inputs by build_font_invariant_reader_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -698,4 +698,13 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Individual exact responses on new situations, held-out verbs in controlled sentence frames, natural person questions with glyph-overlap sentence selection, and external referent completion with answer options withheld.
 \textbf{c}, The first completely correct matched-reader test pair in Chinese GSD order (fifth eligible predicate) and the first independently written map-drawing situation in fixed order. The upper responses identify the church and the principal renovation project. The lower responses give the map maker's name, then a clause beginning with the lost person's name. Images are original inputs and complete returned glyphs. The treebank sentence and derived question targets are from Chinese GSD r2.16, CC BY-SA 4.0.}
 \label{fig:pictured-participant-reader}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_88_font_invariant_reader.png}
+\caption{\textbf{Continuous visual reading and recurrent glyph writing.}
+\textbf{a}, Exact answer images for the same 64 questions in regular and held-out bold print. A raw-pixel regression and a learned visual metric supply continuous inputs to the same pretrained contextual reader.
+\textbf{b}, Complete-answer counts. The frozen gate selects the contextual reader or the recurrent writer. Text references use the original questions and passages. Dashes indicate comparisons not measured in that cohort.
+\textbf{c}, The first new scene asks who drew a map and who needed directions. The two original bold answer images give the correct names. The first historical description requires a rearranged statement carrying a bronze glyph. The recurrent writer composed the complete reference. No display font substitutes for the returned historical image.}
+\label{fig:font-invariant-reader}
 \end{figure*}

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Чтение и ответы по изображениям иероглифов.** Из 64 вопросов на китайском о двух людях модель правильно ответила на 46 при обычном начертании и на 41 при полужирном. Локальная Qwen3-8B дала 55 правильных ответов на текстовый ввод. При использовании незнакомого шрифта в стиле кайшу правильным оказался лишь один ответ. [Запуск модели](../docs/visual-page-responder.md)
+
+[![Рисунок 88. Изображения вопросов и ответов](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **Различает ли модель двух людей в одном предложении?** Модель правильно назвала и спонсора, и архитектора здания Гейтса. Из 864 пар вопросов она дала оба верных ответа в 100 случаях. При перестановке имён в 24 новых ситуациях модель не решила полностью ни одной, а локальная Qwen3-8B решила 20. [Результаты и запуск](../references/shared_sentence_writer_result.md)
 
 [![Рисунок 86. Два вопроса к одному предложению и исходные ответы](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

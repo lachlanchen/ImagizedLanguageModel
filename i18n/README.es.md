@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Lectura y respuesta a partir de imágenes de caracteres.** En 64 preguntas en chino sobre dos personas, el modelo acertó 46 con letra normal y 41 en negrita. Qwen3-8B ejecutado localmente acertó 55 con texto como entrada. Con una tipografía de estilo Kai que no se usó en el entrenamiento, el modelo solo acertó una. [Ejecutar el modelo](../docs/visual-page-responder.md)
+
+[![Figura 88. Imágenes de las preguntas y respuestas reales](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+
 **¿Distingue a dos personas en una misma oración?** El modelo escribe correctamente los nombres del donante y del arquitecto del edificio Gates. De 864 pares de preguntas, acierta ambas respuestas en 100. En 24 situaciones nuevas con intercambio de nombres, no resuelve por completo ninguna, frente a 20 de Qwen3-8B en local. [Resultados e instrucciones](../references/shared_sentence_writer_result.md)
 
 [![Figura 86. Dos preguntas sobre una oración y respuestas originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)

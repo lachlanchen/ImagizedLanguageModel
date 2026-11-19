@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+**Reading and writing from glyph images.** On 64 questions about two people, the model returned 46 correct answers in regular Chinese print and 41 in bold. Local Qwen3-8B returned 55 from text. An unseen Kai typeface gave one correct answer. [Run the model](docs/visual-page-responder.md)
+
+[![Figure 88. Original pictured questions and answers](publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](publication/ilm-nature/manuscript.pdf#page=116)
+
 **Can it identify two people in one sentence?** The visual writer correctly names both the donor and the architect of the Gates building. Across 864 question pairs it answers both correctly 100 times. In 24 new situations with the names exchanged, it solves no complete scene. Local Qwen3-8B solves 20. [Results and runnable model](references/shared_sentence_writer_result.md)
 
 [![Figure 86. Two questions and original responses per pictured sentence](publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](publication/ilm-nature/manuscript.pdf#page=114)
