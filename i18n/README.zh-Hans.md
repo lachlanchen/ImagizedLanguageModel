@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**为什么会答错人？** 在 387 道中文「谁」字问句中，模型读整段答对 62 道，按字形重合度选一句后答对 116 道。随机分配额外训练答案的对照模型用同一方法答对 127 道。图 85 展示了一个真实错误：题目问发明者，模型却写出了地名。 [结果与用法](../references/inverse_role_writer_result.md)
+
+[![图 85：选句与回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+
 **模型能写对人物吗？** 换用新名字和补语后，模型完整写对了 404 句中的 368 句。把名字换成金文「秦」「楚」，32 句中有 24 句写对；问题中去掉名字、只给条件让模型指出是谁时，32 个答案均未写对。图 84 展示了同一问题下的一次张冠李戴和一次正确回答。 [结果与模型用法](../references/visual_role_writer_result.md)
 
-[![图 84：含金文字形的两段材料及模型的实际回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![图 84：含金文字形的两段材料及模型的实际回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 **模型能从字形中读出什么？** 面对同一句「她喝了一口□。」，当上文中的饮料从水换成茶时，模型也把答案从「水」改为「茶」。结合神经网络和相邻字形统计的方法准确补出了 2,947 处缺文中的 651 处。但在交换两个人物角色的 48 组对照中，没有一组的两次判断都正确。 [实验结果与运行命令](../references/visual_inference_writer_result.md)
 
-[![图 83：两段上文、同一句缺字句和模型写出的两个答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+[![图 83：两段上文、同一句缺字句和模型写出的两个答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
 
 <!-- paired-writing-status:start -->
 完成 512 次更新的去空白对比实验仍未实现可靠抄写：OCR 完全匹配为训练集 6/32、验证集 10/32（清晰参考图为 27/32、28/32）。原始输出可见漏字和字母重复。训练时间由 795.624 秒降至 287.182 秒，但语言理解及达到实用质量时的效率仍未得到证明。 [全部 64 个原始输出](../references/paired_padding_result.md).

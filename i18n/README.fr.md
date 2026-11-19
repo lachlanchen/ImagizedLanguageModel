@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**Pourquoi le modèle se trompe-t-il de personne ?** Sur 387 questions chinoises demandant d’identifier une personne, choisir une phrase selon les glyphes qu’elle partage avec la question fait passer le nombre de réponses exactes de 62 à 116. Avec la même sélection, le témoin aux associations supplémentaires aléatoires atteint 127. La figure 85 montre un nom de lieu donné à la place de celui d’un inventeur. [Résultats et mode d’emploi](../references/inverse_role_writer_result.md)
+
+[![Figure 85. Sélection de phrases et réponses produites](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+
 **De qui parle la phrase ?** Avec des noms et des compléments nouveaux, le modèle a écrit exactement 368 phrases chinoises sur 404. En reprenant les graphies de Qin et Chu dans des inscriptions sur bronze, il a réussi 24 phrases sur 32. Invité à donner le nom à partir de la seule propriété, il n’a restitué exactement aucun nom en graphie ancienne. [Résultats et mode d’emploi](../references/visual_role_writer_result.md)
 
-[![Figure 84. Deux passages avec des graphies sur bronze et les réponses produites](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![Figure 84. Deux passages avec des graphies sur bronze et les réponses produites](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 **Que lit le modèle dans une image de texte ?** Devant la même phrase en image, « 她喝了一口□。 » (« Elle a bu une gorgée de □ »), le modèle a écrit 水 (eau), puis 茶 (thé) quand la boisson a changé dans le passage. En combinant le réseau avec les fréquences des caractères voisins, il a restitué exactement 651 des 2 947 fragments chinois masqués. Lorsque deux personnes ont échangé leurs rôles, il n’a jugé correctement les deux versions dans aucune des 48 paires. [Résultats et commandes](../references/visual_inference_writer_result.md)
 
-[![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+[![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
 
 <!-- paired-writing-status:start -->
 La comparaison après 512 mises à jour avec suppression des marges blanches échoue encore à copier fidèlement : correspondance OCR exacte de 6/32 à l’entraînement et 10/32 en validation (références nettes : 27/32 et 28/32). Les images brutes montrent des caractères omis et des lettres répétées. Le temps d’entraînement passe de 795.624 à 287.182 secondes, sans démonstration de compréhension du langage ni d’efficacité à une qualité utile. [Les 64 sorties brutes](../references/paired_padding_result.md).

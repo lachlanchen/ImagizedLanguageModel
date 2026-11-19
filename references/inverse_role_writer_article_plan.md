@@ -1,0 +1,3 @@
+# Manuscript revision for inverse participant writing
+
+Figure 85 pairs measured question-dependent choices with the original bronze Qin and Chu input and output images. The table reports intact human questions and retention on open writing. Keep the preceding figures and original failed comparisons. Discuss source selection and stopping separately from visual rendering. Report both supervision arms, the forward-trained parent, the deployed passage reader, the fixed four-name rotation and the limits of single-checkpoint evidence. Recount human answers from DRCD and historical names from independently identified raster digests. Build the reading, review and cumulative-redline editions, inspect the figure in each PDF, and verify the versioned local delivery.

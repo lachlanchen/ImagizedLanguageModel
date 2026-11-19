@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**¿Por qué el modelo confunde a las personas?** En 387 preguntas en chino sobre la identidad de una persona, seleccionar una oración por los glifos que comparte con la pregunta elevó de 62 a 116 las respuestas completamente correctas. Con el mismo selector, el control con asignación aleatoria en el entrenamiento adicional acertó 127. La figura 85 muestra un nombre de lugar en respuesta a una pregunta por un inventor. [Resultados e instrucciones](../references/inverse_role_writer_result.md)
+
+[![Figura 85. Selección de oraciones y respuestas originales](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+
 **¿De quién habla la frase?** Con nombres y complementos nuevos, el modelo escribió correctamente 368 de 404 oraciones chinas completas. Al copiar del pasaje los nombres Qin y Chu en escritura sobre bronce, acertó en 24 de 32 oraciones. Cuando tuvo que dar el nombre a partir de una propiedad, no reprodujo correctamente ningún nombre en esa escritura. [Resultados e instrucciones](../references/visual_role_writer_result.md)
 
-[![Figura 84. Dos pasajes con escritura sobre bronce y las respuestas obtenidas](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![Figura 84. Dos pasajes con escritura sobre bronce y las respuestas obtenidas](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 **¿Qué lee el modelo en una imagen de texto?** Ante la misma frase en imagen, «她喝了一口□。» («Tomó un sorbo de □»), el modelo escribió 水 (agua) o 茶 (té) según la bebida del pasaje. Al combinar la red con las frecuencias de los caracteres vecinos, recuperó exactamente 651 de los 2947 fragmentos chinos ocultos. Al intercambiar los papeles de dos personas, no juzgó correctamente ambas versiones en ninguno de los 48 pares. [Resultados y comandos](../references/visual_inference_writer_result.md)
 
-[![Figura 83. Dos pasajes, la misma frase incompleta y las dos respuestas en imagen](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+[![Figura 83. Dos pasajes, la misma frase incompleta y las dos respuestas en imagen](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
 
 <!-- paired-writing-status:start -->
 La comparación de eliminación de márgenes blancos, tras 512 actualizaciones, sigue sin copiar con fiabilidad: coincidencia OCR exacta de 6/32 en entrenamiento y 10/32 en validación (referencias nítidas: 27/32 y 28/32). Las imágenes originales omiten caracteres y repiten letras. El tiempo de entrenamiento baja de 795.624 a 287.182 segundos, pero no demuestra comprensión del lenguaje ni eficiencia con una calidad útil. [Las 64 salidas originales](../references/paired_padding_result.md).

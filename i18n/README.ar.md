@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+**لماذا يختار النموذج الاسم الخطأ؟** في 387 سؤالًا صينيًا عن هوية شخص ارتفع عدد الإجابات الصحيحة بالكامل من 62 إلى 116 عند اختيار جملة بحسب أشكال الحروف المشتركة مع السؤال. وبالطريقة نفسها أجاب نموذج المقارنة ذو التعيين العشوائي في التدريب الإضافي عن 127 سؤالًا إجابة صحيحة. يوضح الشكل 85 كيف كتب النموذج اسم مكان حين سُئل عن اسم مخترع. [النتائج وطريقة التشغيل](../references/inverse_role_writer_result.md)
+
+[![الشكل 85. اختيار الجملة وصور الإجابات](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+
 **عمّن تتحدث الجملة؟.** كتب النموذج 368 جملة صينية كاملة بصورة صحيحة من أصل 404 عند استخدام أسماء وتتمات جديدة. وعندما نسخ اسمي تشين وتشو من صور نقوش برونزية، أصاب في 24 جملة من أصل 32. وعندما عُرضت عليه الصفة وحدها وطُلب منه تحديد الاسم، لم يُرجع أي اسم برونزي صحيح. [النتائج وطريقة التشغيل](../references/visual_role_writer_result.md)
 
-[![الشكل 84. فقرتان تتضمنان نقوشاً برونزية وصورتا الإجابة الفعلية](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![الشكل 84. فقرتان تتضمنان نقوشاً برونزية وصورتا الإجابة الفعلية](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 **ماذا يقرأ النموذج من صور الكتابة؟** عُرضت على النموذج صورة الجملة الصينية «她喝了一口□。» (أخذت رشفة من □). عندما تغيّر الشراب في الفقرة المرافقة من الماء إلى الشاي، تغيّرت الإجابة من 水 إلى 茶. واستعاد النموذج، بعد الجمع بين الشبكة العصبية وتكرارات المحارف المتجاورة، النص الأصلي في 651 موضعاً من أصل 2,947. وعند تبادل شخصين دوريهما في 48 زوجاً من الأمثلة، لم يصدر النموذج الحكم الصحيح على النسختين معاً في أي زوج. [النتائج وأوامر التشغيل](../references/visual_inference_writer_result.md)
 
-[![الشكل 83. فقرتان وصورة الجملة نفسها وصورتا الإجابة](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=110)
+[![الشكل 83. فقرتان وصورة الجملة نفسها وصورتا الإجابة](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
 
 <!-- paired-writing-status:start -->
 لم تحقق مقارنة إزالة الهوامش البيضاء، بعد 512 خطوة تحديث، نسخاً موثوقاً: التطابق التام عبر OCR هو 6/32 للتدريب و10/32 للتحقق، مقابل 27/32 و28/32 للصور المرجعية الواضحة. تظهر المخرجات الأصلية حذفاً وتكراراً للأحرف. انخفض وقت التدريب من 795.624 إلى 287.182 ثانية، لكن فهم اللغة والكفاءة عند جودة عملية لم يثبتا بعد. [المخرجات الأصلية الـ64](../references/paired_padding_result.md).
