@@ -1,0 +1,7 @@
+# Choosing a supporting page for the same pictured question
+
+In the previous fixed-reader experiment, a different original paragraph contained the full reference for 51 of 300 source-absent questions. BM25 exposed five answers and the old reader returned none. Test whether the new writer can select and use evidence without seeing an evaluation answer.
+
+Form up to eight candidates from the original selected window and question-only BM25 windows from the source documents. Use original document order for ties. Fit a small neural ranker on states of the frozen genuine pointing writer using 1,536 seeded training questions. A positive window contains one of the available short human training references verbatim. Train an equal-update control with support labels cyclically displaced within each question. A positive-support upper bound may use the reference only as an explicitly labelled diagnostic. Use the same frozen writing checkpoint for every returned answer.
+
+Evaluate all 571 original questions and a separate fixed cohort of up to 128 original-development questions outside the training and development question/passage sets (64 per source). Require a source-absent alphanumeric reference cell on their initial page. Compare complete stopped answers and multi-reference overlap, and count separately answers that still require new source ink after retrieval. A selection gain alone does not establish writing ability. Preserve the original models, data and rankings.
