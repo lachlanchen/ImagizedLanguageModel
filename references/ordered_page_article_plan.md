@@ -1,0 +1,3 @@
+# Ordered image writing in the manuscript
+
+Add the measured recurrent span-and-glyph comparison after the single-span reading study. Figure 89 should reproduce the actual historical outputs for two opposite requests beside previous-model outputs and source references. Include the natural compound questions and failure on open writing if observed. Report paired reversals, exact stopped answers, training provenance and incremental costs. Compare full replies with the deployed control in the abstract, results and methods. Preserve the earlier figures and frozen findings. Check the editable chart against the recorded numbers, the embedded output images against the evaluation and all three compiled editions before local delivery.

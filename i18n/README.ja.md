@@ -1,24 +1,28 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+画像で指示すると、「言」の甲骨文と金文を指定した順序で出力できる。未学習の字例を使い、同じ二字形を順方向と逆方向の両方で正しく出せたのは、見慣れた質問文で96組中94組、別の字例と新しい質問文では96組中16組だった。 [結果と出力画像](../references/ordered_page_writer_result.md)
+
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+
 **字形画像を読んで答える.** 二人の人物に関する中国語の設問64問のうち、通常の書体では46問、太字では41問に正答しました。ローカルのQwen3-8Bはテキスト入力で55問に正答しました。学習に使わなかった楷書体では正答は1問でした。 [モデルを実行](../docs/visual-page-responder.md)
 
-[![図88：字形画像の質問と実際の回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![図88：字形画像の質問と実際の回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **一文に登場する二人を区別できるか** ゲイツ棟の寄付者と建築家はどちらも正しく書けた。864組の質問のうち両方に正答したのは100組だった。名前を入れ替える24の新しい場面では全問正解が0場面で、ローカルのQwen3-8Bは20場面だった。 [結果と実行方法](../references/shared_sentence_writer_result.md)
 
-[![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+[![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
 
 **なぜ人物を取り違えるのか** 中国語の「誰」を問う387問では、文章全体を読ませると62問、質問と共通する字形から一文を選ぶと116問に正答した。同じ選文法で、追加訓練の割り当てをランダムにした対照モデルは127問に正答した。図85は発明者の名前の代わりに地名を書いた例を示す。 [結果と実行方法](../references/inverse_role_writer_result.md)
 
-[![図85　選文と実際の出力](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+[![図85　選文と実際の出力](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
 
 **誰について書いているか.** 新しい名前と補語を用いた中国語の文は 404 件中 368 件で完全に一致した。秦と楚の金文の字形を入力から写した文は 32 件中 24 件で正解したが、性質だけを示して名前を尋ねると、金文の名前を正しく返した例はなかった。 [結果と実行方法](../references/visual_role_writer_result.md)
 
-[![図84　金文を含む二つの入力と実際の出力](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
+[![図84　金文を含む二つの入力と実際の出力](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
 
 **字形から何を読み取れるか** 同じ画像の文「她喝了一口□。」（彼女は□を一口飲んだ）に対し、先行文の飲み物を水から茶に変えると、出力も「水」から「茶」に変わった。ニューラルモデルと隣接字形の頻度を組み合わせると、中国語の穴埋め 2,947 問中 651 問で原文と一致した。一方、二人の役割を入れ替えた 48 組では、両方の文について正しく判定できた組はなかった。 [実験結果と実行コマンド](../references/visual_inference_writer_result.md)
 
-[![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 <!-- paired-writing-status:start -->
 512 回更新の余白削減比較でも、安定した書き写しには至っていません。OCR 完全一致は訓練 6/32、検証 10/32（鮮明な参照画像は 27/32、28/32）で、生成画像には文字の欠落や重複が見られます。訓練時間は 795.624 秒から 287.182 秒に短縮しましたが、言語理解と実用品質での効率は未実証です。 [全 64 件の生成画像](../references/paired_padding_result.md).

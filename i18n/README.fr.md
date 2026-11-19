@@ -1,24 +1,28 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Le modèle écrit les formes de 言 sur os oraculaires et sur bronze dans l’ordre demandé par la question en image. Il a réussi les deux ordres dans 94 comparaisons sur 96 sur des caractères réservés avec une formulation familière, puis dans 16 sur 96 avec d’autres fiches et une nouvelle formulation. [Résultats et images](../references/ordered_page_writer_result.md)
+
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+
 **Lire et répondre à partir d’images de caractères.** Sur 64 questions en chinois portant sur deux personnes, le modèle a donné 46 réponses exactes en caractères ordinaires et 41 en gras. Qwen3-8B exécuté localement en a donné 55 à partir du texte. Avec une écriture de style Kai absente de l’entraînement, le modèle n’a donné qu’une réponse exacte. [Exécuter le modèle](../docs/visual-page-responder.md)
 
-[![Figure 88. Questions et réponses sous forme d’images](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![Figure 88. Questions et réponses sous forme d’images](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **Distinguer deux personnes dans une même phrase** Le modèle écrit correctement les noms du donateur et de l’architecte du bâtiment Gates. Il répond juste aux deux questions dans 100 paires sur 864. Sur 24 situations inédites où les noms sont intervertis, il n’en résout aucune entièrement, contre 20 pour Qwen3-8B en local. [Résultats et mode d’emploi](../references/shared_sentence_writer_result.md)
 
-[![Figure 86. Deux questions sur une phrase et les réponses originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+[![Figure 86. Deux questions sur une phrase et les réponses originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
 
 **Pourquoi le modèle se trompe-t-il de personne ?** Sur 387 questions chinoises demandant d’identifier une personne, choisir une phrase selon les glyphes qu’elle partage avec la question fait passer le nombre de réponses exactes de 62 à 116. Avec la même sélection, le témoin aux associations supplémentaires aléatoires atteint 127. La figure 85 montre un nom de lieu donné à la place de celui d’un inventeur. [Résultats et mode d’emploi](../references/inverse_role_writer_result.md)
 
-[![Figure 85. Sélection de phrases et réponses produites](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+[![Figure 85. Sélection de phrases et réponses produites](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
 
 **De qui parle la phrase ?** Avec des noms et des compléments nouveaux, le modèle a écrit exactement 368 phrases chinoises sur 404. En reprenant les graphies de Qin et Chu dans des inscriptions sur bronze, il a réussi 24 phrases sur 32. Invité à donner le nom à partir de la seule propriété, il n’a restitué exactement aucun nom en graphie ancienne. [Résultats et mode d’emploi](../references/visual_role_writer_result.md)
 
-[![Figure 84. Deux passages avec des graphies sur bronze et les réponses produites](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
+[![Figure 84. Deux passages avec des graphies sur bronze et les réponses produites](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
 
 **Que lit le modèle dans une image de texte ?** Devant la même phrase en image, « 她喝了一口□。 » (« Elle a bu une gorgée de □ »), le modèle a écrit 水 (eau), puis 茶 (thé) quand la boisson a changé dans le passage. En combinant le réseau avec les fréquences des caractères voisins, il a restitué exactement 651 des 2 947 fragments chinois masqués. Lorsque deux personnes ont échangé leurs rôles, il n’a jugé correctement les deux versions dans aucune des 48 paires. [Résultats et commandes](../references/visual_inference_writer_result.md)
 
-[![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![Figure 83. Deux passages, la même phrase à compléter et les deux réponses en image](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 <!-- paired-writing-status:start -->
 La comparaison après 512 mises à jour avec suppression des marges blanches échoue encore à copier fidèlement : correspondance OCR exacte de 6/32 à l’entraînement et 10/32 en validation (références nettes : 27/32 et 28/32). Les images brutes montrent des caractères omis et des lettres répétées. Le temps d’entraînement passe de 795.624 à 287.182 secondes, sans démonstration de compréhension du langage ni d’efficacité à une qualité utile. [Les 64 sorties brutes](../references/paired_padding_result.md).

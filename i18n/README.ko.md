@@ -1,24 +1,28 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+그림으로 제시한 질문에 따라 言의 갑골문과 금문을 순서를 바꿔 출력할 수 있다. 두 순서를 모두 맞힌 경우는 학습에 쓰지 않은 글자와 익숙한 질문 표현에서 96쌍 중 94쌍이었다. 다른 글자와 새로운 표현에서는 16쌍이었다. [결과와 출력 이미지](../references/ordered_page_writer_result.md)
+
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+
 **글자 이미지를 읽고 답하기.** 두 인물에 관한 중국어 질문 64개 중 일반 글꼴에서는 46개, 굵은 글꼴에서는 41개에 정답을 냈습니다. 로컬 Qwen3-8B는 텍스트 입력으로 55개를 맞혔습니다. 학습에 쓰지 않은 해서체에서는 정답이 1개였습니다. [모델 실행](../docs/visual-page-responder.md)
 
-[![그림 88. 글자 이미지 질문과 실제 응답](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![그림 88. 글자 이미지 질문과 실제 응답](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **한 문장에 등장하는 두 사람을 구별할 수 있을까?** 모델은 게이츠 건물의 기부자와 건축가 이름을 모두 맞혔다. 질문 864쌍 중 두 답을 모두 맞힌 경우는 100쌍이었다. 이름을 맞바꾼 새 상황 24개에서는 모든 답을 맞힌 상황이 없었고 로컬 Qwen3-8B는 20개였다. [결과와 실행 방법](../references/shared_sentence_writer_result.md)
 
-[![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+[![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
 
 **왜 사람을 잘못 고를까?** 중국어로 누군지 묻는 질문 387개에서 전체 지문을 읽힌 모델은 62개를 맞혔다. 질문과 글자 모양이 겹치는 문장을 먼저 고르자 116개를 맞혔다. 추가 학습의 정답을 무작위로 배정한 대조 모델은 같은 방법으로 127개를 맞혔다. 그림 85는 발명가의 이름을 물었을 때 지명을 쓴 사례다. [결과와 실행 방법](../references/inverse_role_writer_result.md)
 
-[![그림 85. 문장 선택과 실제 출력](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
+[![그림 85. 문장 선택과 실제 출력](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
 
 **누구에 관한 문장인가.** 새 이름과 보어로 만든 중국어 문장 404개 중 368개를 정확히 썼다. 진과 초의 금문 글자를 입력에서 옮겨 쓴 문장은 32개 중 24개가 맞았다. 이름 없이 조건만 주고 누구인지 물으면 금문 이름을 정확히 쓴 경우는 없었다. [결과 및 실행 방법](../references/visual_role_writer_result.md)
 
-[![그림 84. 금문이 들어간 두 지문과 실제 출력](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
+[![그림 84. 금문이 들어간 두 지문과 실제 출력](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=113)
 
 **모델은 글자 이미지에서 무엇을 읽을 수 있을까?** 같은 문장 이미지 “她喝了一口□。”(그녀는 □를 한 모금 마셨다)에서 앞 문단의 음료가 물에서 차로 바뀌자 모델의 답도 水에서 茶로 바뀌었다. 신경망과 이웃 글자의 빈도를 결합해 중국어 빈칸 2,947개 중 651개를 원문과 똑같이 복원했다. 두 인물의 역할을 맞바꾼 48쌍에서는 두 경우를 모두 올바르게 판단한 쌍이 없었다. [실험 결과와 실행 명령](../references/visual_inference_writer_result.md)
 
-[![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=111)
+[![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=112)
 
 <!-- paired-writing-status:start -->
 512회 업데이트한 여백 제거 비교에서도 안정적인 베껴 쓰기는 달성하지 못했습니다. OCR 완전 일치는 훈련 6/32, 검증 10/32이며, 깨끗한 참조 이미지는 27/32, 28/32입니다. 원본 출력에는 글자 누락과 반복이 보입니다. 훈련 시간은 795.624초에서 287.182초로 줄었지만 언어 이해와 실용적인 품질에서의 효율성은 입증되지 않았습니다. [64개 원본 출력](../references/paired_padding_result.md).
