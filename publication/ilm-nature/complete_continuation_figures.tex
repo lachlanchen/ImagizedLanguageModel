@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_paired_stance_writer_article.py.
+% Literal captions copied from their source inputs by build_visual_inference_writer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -652,4 +652,13 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Opposing evidence can change the stance that the model writes.}
 \textbf{a}, Percentage of question pairs for which both written positions agree with the human annotations, on the validation and official cohorts. \textbf{b}, Stance, human quotation and complete stopped answer counts on 36 official responses. The last column measures retention on previously evaluated traditional Chinese questions. \textbf{c}, The first three emitted bitmap cells on each side of the first official pair. They label an affirmative or negative position before the model writes the quotation. The passages and human quotations remain in the local research corpus.}
 \label{fig:paired-stance-writer}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_83_visual_inference_writer.png}
+\caption{\textbf{Visual inference and restoration from original Chinese text.}
+\textbf{a}, Percentage of complete stopped image responses matching the OCNLI relation sentence or the human text removed from the claim. The missing-ink subset requires at least one target glyph unavailable in the displayed inputs.
+\textbf{b}, Official development counts. Triples contain three claims with different relations to the same premise. The local controls use visual unigram, bigram and overlap features for decisions and neighboring-glyph counts for missing text.
+\textbf{c}, The model's complete outputs on the first two newly written restoration examples. Changing the drink in the passage changes the warranted missing glyph. The first two columns show the input rasters.}
+\label{fig:visual-inference-writer}
 \end{figure*}

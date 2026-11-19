@@ -1,0 +1,9 @@
+# Natural inference and missing writing
+
+Extend the opposed-evidence manuscript with the measured two-input OCNLI comparison. Some questions reverse the stance licensed by unchanged evidence. The new experiment learns from many naturally written claims about each premise. Its second target asks for the original missing glyphs so that semantic decisions and productive short completions can be measured separately.
+
+Introduce Figure 83 after the stance experiment, with native numerical series, complete official results and selected model-emitted images tied to the frozen records. Preserve source restrictions. Use published aggregate results, the study's own decision outputs and the independent author-created reading probe in the public figure. Keep the official OCNLI sentences and human completions local. Cite the authors in Methods. Verify controls, source erasure, ink availability, confidence intervals, retention and measured cost before stating results.
+
+Replace the 550-word abstract with a concise account of the problem, visual interface, strongest historical and natural-language evidence, and principal outstanding limitations. Keep the earlier staged controls and mixed outcomes in the main text. Add a short introduction paragraph explaining the causal role of changing either the claim or the evidence. Rebuild all three editions from the published Figure 82 baseline, inspect Figure 83 and affected front matter and preserve the verified local package and all 82 preceding figure assets.
+
+The completed evaluation identified poor restoration of absent glyphs. Include the registered follow-up combining the two-neighbor estimate with the neural proposal, report the full and absent-only totals, and explain the calibration split. Add the local Qwen3-8B comparison on all 35 official three-relation families with the two input formats and uncertainty explicit.
