@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+Cada pasaje de novela china recibió dos preguntas en chino y las mismas dos en inglés. El modelo bilingüe acertó las cuatro respuestas en 3 de 374 pasajes, frente a 0 en el control que intercambió las preguntas en inglés durante el entrenamiento. En XQuAD, el modelo bilingüe acertó las cuatro en 1 de 227 pasajes. [Resultados e imágenes de las respuestas](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 Variar el grosor de los trazos y las proporciones de los caracteres durante el entrenamiento elevó las respuestas exactas en chino con HanaMin de 15 a 43 de 394. El modelo acertó las dos preguntas de 6 de 197 pasajes. En una prueba aparte con XQuAD y la misma fuente no acertó ambas en ninguno de los 227 pasajes. [Resultados e imágenes de las respuestas](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

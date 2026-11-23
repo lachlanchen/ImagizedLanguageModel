@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Deux questions sur chaque extrait de roman chinois ont été posées en chinois et en anglais. Le modèle bilingue a donné quatre réponses exactes pour 3 des 374 extraits, contre 0 pour le témoin entraîné avec les questions anglaises interverties. Sur XQuAD, le modèle bilingue a réussi les quatre réponses pour 1 passages sur 227. [Résultats et images des réponses](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 En faisant varier l’épaisseur des traits et les proportions des caractères à l’entraînement, le nombre de réponses exactes en chinois avec la police HanaMin est passé de 15 à 43 sur 394. Le modèle a réussi les deux questions de 6 passages sur 197. Sur un autre jeu de lecture, XQuAD, il n’a réussi les deux questions d’aucun des 227 passages composés dans cette police. [Résultats et images des réponses](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

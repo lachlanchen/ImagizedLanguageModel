@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The bilingual writer answered two questions in both Chinese and English on 3/374 Chinese novel passages. A control trained with exchanged English questions did so on 0/374. On XQuAD the bilingual writer completed 1/227 passages. [Results and original replies](references/bilingual_novel_result.md)
+
+[![104 · BiPaR](publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](publication/ilm-nature/manuscript.pdf#page=138)
+
 Training on changes in stroke width and glyph proportions raised exact Chinese reading answers in HanaMin from 15 to 43 of 394. The writer completed six of 197 two-question passages. On a separate XQuAD reading test it completed zero of 227 passages in that print. [Results and original answers](references/stroke_scale_result.md)
 
 [![103 · HanaMin](publication/ilm-nature/figures/Figure_103_stroke_scale.png)](publication/ilm-nature/manuscript.pdf#page=137)

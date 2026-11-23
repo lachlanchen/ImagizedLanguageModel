@@ -68,6 +68,10 @@
 
 # نموذج اللغة المصوّرة (ILM)
 
+طُرح سؤالان عن كل مقطع روائي صيني، مرة بالصينية ومرة بالإنجليزية. أجاب النموذج الثنائي اللغة عن الطلبات الأربعة بدقة في 3 من 374 مقطعاً، مقابل 0 للنموذج الضابط الذي بُدّلت أسئلته الإنجليزية أثناء التدريب. وفي اختبار XQuAD أجاب النموذج الثنائي بدقة عن الأسئلة الأربعة في 1 من 227 مقطعاً. [النتائج وصور الإجابات](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 رفع تغيير سماكة الخط ونسب الحروف أثناء التدريب عدد الإجابات الصحيحة في أسئلة القراءة الصينية بخط HanaMin من 15 إلى 43 من أصل 394. أجاب النموذج عن السؤالين معاً في 6 من 197 مقطعاً، وفي اختبار XQuAD مستقل بالخط نفسه لم يُجب عن السؤالين معاً في أي من المقاطع الـ227. [النتائج وصور الإجابات](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

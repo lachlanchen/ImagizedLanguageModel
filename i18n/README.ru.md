@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+К каждому отрывку китайского романа задали по два вопроса на китайском и на английском. Двуязычная модель дала четыре точных ответа для 3 из 374 отрывков, контрольная модель с переставленными при обучении английскими вопросами — для 0. В XQuAD двуязычная модель дала все четыре ответа для 1 из 227 отрывков. [Результаты и изображения ответов](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 Изменение толщины штрихов и пропорций знаков при обучении увеличило число точных ответов на китайские вопросы, набранные шрифтом HanaMin, с 15 до 43 из 394. Обе задачи модель решила для 6 из 197 отрывков. В отдельном тесте XQuAD с тем же шрифтом таких отрывков было 0 из 227. [Результаты и изображения ответов](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

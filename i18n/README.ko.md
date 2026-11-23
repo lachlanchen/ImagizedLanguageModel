@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+중국어 소설 지문마다 같은 두 질문을 중국어와 영어로 제시했습니다. 네 답을 모두 맞힌 지문은 374개 중 이중 언어 모델이 3개, 훈련 중 영어 질문을 바꿔 짝지은 대조 모델이 0개였습니다. XQuAD에서 이중 언어 모델은 227개 중 1개 지문의 네 질문에 모두 답했습니다. [결과와 실제 답변](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 글자의 비율과 획 굵기를 바꿔 학습하자 하나민 글꼴로 제시한 중국어 독해 문제 394개 중 정답이 15개에서 43개로 늘었습니다. 지문당 두 문제를 모두 맞힌 경우는 197개 중 6개였습니다. 별도의 XQuAD 평가에서는 같은 글꼴로 제시한 227개 지문 중 두 문제를 모두 맞힌 사례가 없었습니다. [결과와 실제 답변](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

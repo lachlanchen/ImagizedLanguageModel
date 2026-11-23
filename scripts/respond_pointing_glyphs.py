@@ -38,7 +38,7 @@ def main():
         group.add_argument("--"+key,action=action,type=Path,help="black-on-white horizontal strip of 32-pixel cells")
         group.add_argument("--"+key+"-text",action=action,help="render text on the host before image inference")
     parser.add_argument("--paragraph-ranker",type=Path,help="score repeated, explicitly separated passages against the pictured question")
-    parser.add_argument("--model",type=Path,default=Path("artifacts/pointing_causal_writer_v1/pointing"))
+    parser.add_argument("--model",type=Path,help="writer checkpoint directory")
     parser.add_argument("--reader",type=Path,help="optional frozen visual span reader directory")
     parser.add_argument("--selection",type=Path,help="learned choice between quoting and writing")
     parser.add_argument("--output",type=Path,required=True)
@@ -46,6 +46,10 @@ def main():
     parser.add_argument("--font",type=Path,default=Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"))
     parser.add_argument("--font-index",type=int,default=2)
     args=parser.parse_args()
+    if args.model is None:
+        candidates = (Path("writer"), Path("artifacts/bilingual_novel_v1/bilingual/page"),
+                      Path("artifacts/pointing_causal_writer_v1/pointing"))
+        args.model = next((p for p in candidates if (p / "pointer.safetensors").is_file()), candidates[-1])
     torch.set_num_threads(4)
     question=(packed_page(args.question) if args.question else
               render_text(args.question_text,args.font,args.font_index))

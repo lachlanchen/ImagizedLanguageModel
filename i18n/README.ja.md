@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+中国語の小説の各抜粋に、中国語と英語でそれぞれ同じ2問を提示しました。4問すべてに正答したのは374編中、対訳で学習したモデルが3編、英語の質問を入れ替えた対照モデルが0編でした。XQuADでは対訳モデルが227編中1編で全問正答しました。 [結果と回答画像](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 字形の縦横比と線幅を変えて学習すると、花園明朝の中国語読解問題で正答数が394問中15問から43問に増えました。各文章の2問とも正解したのは197件中6件で、別のXQuAD読解問題では同じ書体で227件中0件でした。 [結果と実際の出力](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

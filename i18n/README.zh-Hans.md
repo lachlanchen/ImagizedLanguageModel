@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+针对同一篇中文小说片段，用中英文分别提两个问题。双语模型在 374 篇中有 3 篇四问全对，训练时调换英文问题的对照模型为 0 篇。在 XQuAD 中，双语模型有 1/227 篇四问全对。 [结果与原始回答](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 训练时改变笔画粗细和字形比例后，模型在花园明朝体的 394 道中文阅读题中从答对 15 道提高到 43 道。197 篇文章中有 6 篇两问全对。在另一组同字体的 XQuAD 阅读题中，227 篇均未做到两问全对。 [结果与原始回答](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

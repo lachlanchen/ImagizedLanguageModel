@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Zu jedem chinesischen Romanauszug wurden zwei Fragen jeweils auf Chinesisch und Englisch gestellt. Das bilinguale Modell gab bei 3 von 374 Auszügen alle vier Antworten korrekt, das mit vertauschten englischen Fragen trainierte Kontrollmodell bei 0. Auf XQuAD gelangen dem bilingualen Modell bei 1 von 227 Texten alle vier Antworten. [Ergebnisse und Antwortbilder](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 Mit variierenden Strichstärken und Zeichenproportionen im Training stieg die Zahl exakter Antworten auf chinesische Lesefragen in HanaMin von 15 auf 43 von 394. Bei 6 von 197 Texten waren beide Antworten richtig. In einem separaten XQuAD-Test mit derselben Schrift gelang das bei keinem der 227 Texte. [Ergebnisse und Antwortbilder](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)

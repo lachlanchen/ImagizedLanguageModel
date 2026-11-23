@@ -68,6 +68,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Mỗi đoạn tiểu thuyết tiếng Trung có hai câu hỏi, mỗi câu được hỏi bằng tiếng Trung và tiếng Anh. Mô hình song ngữ trả lời đúng cả bốn lượt ở 3/374 đoạn, so với 0/374 ở mô hình đối chứng được huấn luyện với câu hỏi tiếng Anh ghép sai. Trên XQuAD, mô hình song ngữ đạt 1/227 đoạn. [Kết quả và ảnh câu trả lời](../references/bilingual_novel_result.md)
+
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+
 Khi thay đổi độ dày nét và tỷ lệ chữ trong lúc huấn luyện, số câu đọc hiểu tiếng Trung trả lời đúng bằng phông HanaMin tăng từ 15 lên 43 trên 394 câu. Mô hình trả lời đúng cả hai câu ở 6 trong 197 đoạn. Trên bộ XQuAD riêng dùng cùng phông chữ, kết quả là 0 trên 227 đoạn. [Kết quả và ảnh câu trả lời](../references/stroke_scale_result.md)
 
 [![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)
