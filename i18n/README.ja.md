@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+中国語の字形画像を読むモデルは、年を変更し、質問を三通りに言い換えても、単一段落の64組中34組、二段落の48組中8組で、すべての回答に正しい人物名と年を書けた。より広い分野から人が作成した359問では、完全一致は7問だった。
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

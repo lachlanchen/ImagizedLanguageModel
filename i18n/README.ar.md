@@ -68,6 +68,10 @@
 
 # نموذج اللغة المصوّرة (ILM)
 
+قرأ النموذج نصوصًا صينية مصوّرة وكتب الاسم والسنة الصحيحين بعد كل تغيير وبثلاث صيغ جديدة للسؤال، في 34 من 64 حالة بفقرة واحدة و8 من 48 حالة بفقرتين. وطابقت إجاباته المرجع في سبعة من 359 سؤال فهم أوسع نطاقًا كتبها أشخاص.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

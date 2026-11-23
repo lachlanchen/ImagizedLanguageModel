@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Das Modell liest chinesische Schriftbilder. Bei drei neuen Frageformulierungen gab es nach jeder Jahresänderung in 34 von 64 Fällen mit einem Absatz und in 8 von 48 Fällen mit zwei Absätzen den richtigen Namen und das richtige Jahr aus. Bei 359 breiter angelegten menschlichen Lesefragen stimmten sieben Antworten exakt mit der Referenz überein.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

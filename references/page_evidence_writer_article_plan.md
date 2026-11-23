@@ -1,0 +1,5 @@
+# Reporting the page-conditioned writer
+
+Preserve the screened answer-list study and Figure 97. In the abstract replace the prospective statement about missing dates with the observed comparison between original-page and fields-only writing. Add results and methods on split protection, visual inputs, inherited training, counterfactual design, autonomous stopping, ordinary-question retention and transfer to human or historical questions. Use Figure 98 for the condition counts and untouched emitted glyph strips, including the first failure where one exists. Keep benchmark denominators beside each outcome. Verify the editable slide against the original measurements, inspect the reading, review and redlined PDF pages, and check the corresponding local Nutstore package.
+
+Include the familiar-wording comparison and the new writer trained with varied requests. Distinguish the previously tested 96 pairs and 64 boards from the newly screened 64 pairs and 48 boards tested under three new instructions. Preserve exact images and report complete boards across all rephrasings.

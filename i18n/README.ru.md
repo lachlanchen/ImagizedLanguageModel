@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+Модель читает изображения китайских иероглифов. При трёх новых формулировках вопроса она правильно указала имя и год после каждой замены даты в 34 из 64 случаев с одним абзацем и в 8 из 48 с двумя абзацами. Из 359 более общих вопросов, составленных людьми, точное совпадение с эталоном получено в семи.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

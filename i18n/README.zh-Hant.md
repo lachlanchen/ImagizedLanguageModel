@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+模型直接讀取漢字圖像。在三種新問法下，它對每次年份改動都能寫出正確的人名與年份，單段材料通過了 34/64 組，雙段材料通過了 8/48 組。在 359 道題材更廣的人工閱讀題中，7 道答案與參考完全一致。
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

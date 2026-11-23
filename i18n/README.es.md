@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+El modelo leyó pasajes chinos en imágenes y dio el nombre y el año correctos tras cada cambio y con tres formulaciones nuevas en 34 de 64 pasajes individuales y en 8 de 48 casos de dos párrafos. Respondió con exactitud a siete de 359 preguntas más generales escritas por personas.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

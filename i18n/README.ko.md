@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+한자 이미지를 읽는 모델은 연도를 바꾸고 질문을 세 가지 새로운 표현으로 제시했을 때, 단일 문단 64개 중 34개와 두 문단 48개 중 8개에서 모든 답에 정확한 인명과 연도를 썼다. 사람이 작성한 폭넓은 독해 문제 359개에서는 7개가 정답과 완전히 일치했다.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+À partir de textes chinois présentés en images, le modèle a donné le bon nom et la bonne année pour chaque modification et trois nouvelles formulations sur 34 des 64 passages simples et 8 des 48 cas à deux paragraphes. Il a fourni sept réponses exactes sur 359 questions plus générales rédigées par des humains.
+
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
 ![Focus](https://img.shields.io/badge/focus-text--as--image-0A7EA4)

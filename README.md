@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A writer reading Chinese glyph images produced the correct participant and year for every edit under three new phrasings on 34 of 64 single passages and 8 of 48 two-paragraph cases. It returned seven exact replies on 359 broader human questions.
+
+[![98 · 1993 → 1994](publication/ilm-nature/figures/Figure_98_page_evidence.png)](publication/ilm-nature/manuscript.pdf#page=130)
+
 After excluding reserved DRCD material and retraining, the wider reader returned 234 exact answer images on 359 development questions. The generic reader returned 242. Earlier DRCD scores used reserved test passages. [Results and source correction](references/span_list_result.md)
 
 [![97 · 战国史](publication/ilm-nature/figures/Figure_97_span_list.png)](publication/ilm-nature/manuscript.pdf#page=129)
