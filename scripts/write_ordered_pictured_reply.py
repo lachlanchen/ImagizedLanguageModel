@@ -3,13 +3,18 @@
 import argparse
 import json
 from pathlib import Path
+import numpy as np
 import torch
 
 from ilm.visual_lm.causal_glyph_writer import packed_page, write_strip
+from ilm.visual_lm.anchored_clause_writer import answer_pair
 from ilm.visual_lm.ordered_evidence_writer import ranked_intervals, writer_inputs
 from ilm.visual_lm.prepared_glyph_responder import PreparedGlyphResponder
 from ilm.visual_lm.question_evidence_reader import QuestionEvidenceReader
-from scripts.evaluate_page_evidence_writer import tensor
+
+
+def tensor(raw):
+    return torch.from_numpy(np.frombuffer(raw, dtype=np.uint8).copy().reshape(-1, 128))
 
 
 def main():
@@ -18,6 +23,13 @@ def main():
     parser.add_argument("--page", type=Path, required=True)
     parser.add_argument(
         "--questions", type=Path, nargs=2, required=True, metavar=("FIRST", "SECOND")
+    )
+    parser.add_argument("--mode", choices=("direct", "frame"), default="direct")
+    parser.add_argument(
+        "--controls",
+        type=Path,
+        default=root / "references/evidence/anchored_book_clauses_20261124/examples",
+        help="Directory containing the three physical control strips for frame mode",
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--device", default="cpu")
@@ -39,7 +51,7 @@ def main():
     parser.add_argument(
         "--writer",
         type=Path,
-        default=root / "artifacts/ordered_book_replies_v1/matched/page",
+        default=None,
     )
     parser.add_argument(
         "--separator",
@@ -57,15 +69,31 @@ def main():
         args.reader, args.question_weights, args.head, args.device
     )
     qs = [first, second]
-    intervals = ranked_intervals(
-        reader.reader, reader.questions, reader.head, [(page, q) for q in qs]
+    folder = args.writer or (
+        root
+        / (
+            "artifacts/ordered_book_replies_v1/matched/page"
+            if args.mode == "direct"
+            else "artifacts/anchored_book_clauses_v1/page"
+        )
     )
-    p, q = writer_inputs(page, qs, intervals, sep)
-    writer = PreparedGlyphResponder(args.writer, args.device)
-    im, end = writer.answer_many([(tensor(p), tensor(q))])[0]
+    writer = PreparedGlyphResponder(folder, args.device)
+    if args.mode == "frame":
+        controls = [
+            packed_page(args.controls / (name + ".png")).numpy().tobytes()
+            for name in ("mark", "comma", "stop")
+        ]
+        ink, end = answer_pair(reader, writer, page, qs, *controls)
+        im = tensor(ink)
+    else:
+        intervals = ranked_intervals(
+            reader.reader, reader.questions, reader.head, [(page, q) for q in qs]
+        )
+        p, q = writer_inputs(page, qs, intervals, sep)
+        im, end = writer.answer_many([(tensor(p), tensor(q))])[0]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_strip(im.numpy(), args.output)
-    print(json.dumps(dict(cells=len(im), stopped=end)))
+    print(json.dumps(dict(cells=len(im), accepted=end, mode=args.mode)))
 
 
 if __name__ == "__main__":

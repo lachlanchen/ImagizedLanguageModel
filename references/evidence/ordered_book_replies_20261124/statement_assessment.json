@@ -1,0 +1,59 @@
+{
+  "counts": {
+    "parent_plain": {
+      "requests": 48,
+      "stopped_in_budget": 48,
+      "ordered": 4,
+      "complete_model_grade": 9,
+      "partial_model_grade": 5,
+      "ungraded": 0
+    },
+    "shifted_shifted": {
+      "requests": 48,
+      "stopped_in_budget": 48,
+      "ordered": 7,
+      "complete_model_grade": 22,
+      "partial_model_grade": 2,
+      "ungraded": 1
+    },
+    "shifted_matched": {
+      "requests": 48,
+      "stopped_in_budget": 48,
+      "ordered": 7,
+      "complete_model_grade": 16,
+      "partial_model_grade": 0,
+      "ungraded": 1
+    },
+    "matched_shifted": {
+      "requests": 48,
+      "stopped_in_budget": 48,
+      "ordered": 7,
+      "complete_model_grade": 17,
+      "partial_model_grade": 2,
+      "ungraded": 0
+    },
+    "matched_matched": {
+      "requests": 48,
+      "stopped_in_budget": 48,
+      "ordered": 9,
+      "complete_model_grade": 22,
+      "partial_model_grade": 2,
+      "ungraded": 1
+    },
+    "text_qwen": {
+      "requests": 48,
+      "stopped_in_budget": 46,
+      "ordered": 42,
+      "complete_model_grade": 46,
+      "partial_model_grade": 0,
+      "ungraded": 2
+    }
+  },
+  "model": "qwen3:8b-q8_0",
+  "model_sha": "e56358ca25dd14db6853a9f68a92d717aaa6f0a94250a72d1a0f3d86a9f30130",
+  "model_bytes": 8851089053,
+  "seconds": 60.661466483958066,
+  "rows_sha": "d833adbb7576f411882b00ab39dbcb0bdbdd90455a2187be691c2442542e0b00",
+  "judge": "核对一个学生的中文回答。给出材料、两个问题及其参考事实。只有回答依次正确表达两个事实、每个事实的角色和关系都正确、没有重要错误或无意义重复时判为完整。只列两个词而没有表达关系不算完整。允许自然改写。只返回一个整数：2表示完整，1表示至少一个问题回答正确，0表示无正确答案。",
+  "limitations": "A single text-model assessment, including self-assessment of the text baseline. Unstopped, uncertain and invalid grades receive no complete credit."
+}

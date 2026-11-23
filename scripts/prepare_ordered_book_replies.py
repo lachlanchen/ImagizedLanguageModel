@@ -18,7 +18,7 @@ PAGES = 1024
 SYSTEM = """读给定的小说摘录和两组人工问答。为每组写一句独立、简短、主谓齐全的中文陈述句，逐字保留该组给定的答案。不要加入摘录未提供的信息。每句至多22字。不要重复问题或给答案加解释。只输出两行，每行一个陈述句。"""
 
 
-def sample(split):
+def sample(split, limit=None):
     path = BOOK / f"{split}.jsonl"
     manifest = json.loads((BOOK_PUBLIC / "corpus.json").read_text())
     if sha(path) != manifest["splits"][split]["sha256"]:
@@ -39,7 +39,9 @@ def sample(split):
             )
             break
     choices.sort(key=lambda r: hashlib.sha256(r["key"].encode()).digest())
-    return choices[:PAGES] if split == "train" else choices[:96]
+    if limit is None:
+        limit = PAGES if split == "train" else 96
+    return choices[:limit]
 
 
 def clean(lines, refs):

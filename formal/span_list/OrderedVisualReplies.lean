@@ -48,6 +48,38 @@ theorem both_require_change (read : α → Option (Nat × Nat)) (x y : α)
   subst y
   exact incompatible (read x) ⟨a,b⟩
 
+/-- Count pages satisfying an empirical image-level check. -/
+def countPass (test : α → Bool) : List α → Nat
+  | [] => 0
+  | x :: xs => (test x).toNat + countPass test xs
+
+/-- If two roles are written by a factored predictor, both are correct on at
+least A + B - N requests. This distribution-free statement also applies when
+the two component errors are correlated. Agreement of the joined sentence
+with the source is an additional empirical condition. -/
+theorem joint_coverage (a b : α → Bool) (xs : List α) :
+    countPass a xs + countPass b xs ≤ xs.length + countPass (fun x => a x && b x) xs := by
+  induction xs with
+  | nil => simp [countPass]
+  | cons x xs ih =>
+    simp only [countPass, List.length_cons]
+    cases ha : a x <;> cases hb : b x <;> simp [ha,hb] <;> omega
+
+/-- Expand a single valid insertion mark with original source cells. -/
+def splice (left ink right : List α) : List α := left ++ (ink ++ right)
+
+theorem drop_context (left ink right : List α) :
+    (splice left ink right).drop left.length = ink ++ right := by
+  induction left with
+  | nil => rfl
+  | cons _ _ ih => exact ih
+
+theorem anchor_length (left ink right : List α) :
+    (splice left ink right).length = left.length + ink.length + right.length := by
+  simp [splice, Nat.add_assoc]
+
+#print axioms drop_context
+#print axioms joint_coverage
 #print axioms order_blind_bound
 #print axioms both_require_change
 end OrderedVisualReplies

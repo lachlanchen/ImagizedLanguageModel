@@ -33,3 +33,17 @@ def test_distractors_preserve_every_bank_width_and_the_full_page():
     assert pairs[0][1] == pairs[1][1] == cell(7) + cell(111) + cell(8)
     assert all(page.startswith(p) for page, _ in pairs)
     assert len(pairs[0][0]) == len(pairs[1][0])
+
+
+def test_anchored_reply_requires_a_unique_aligned_mark_and_retains_bad_frames():
+    from ilm.visual_lm.anchored_clause_writer import fill_frame, join_clauses
+
+    x, mark, y, fact = [cell(i) for i in range(4)]
+    frame = x + mark + y
+    a = fill_frame(frame, True, fact, mark)
+    assert a.valid and a.written_cells == 2 and a.ink == x + fact + y
+    for raw, stop in ((x + y, True), (mark + mark, True), (frame, False)):
+        v = fill_frame(raw, stop, fact, mark)
+        assert not v.valid and v.ink == raw
+    ink, ok = join_clauses(a, a, cell(4), cell(5), limit=7)
+    assert len(ink) == 8 * 128 and not ok
