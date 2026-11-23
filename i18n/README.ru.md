@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+На 34 из 48 вопросов, составленных людьми на китайском языке, модель записала верный ответ в обоих заданных порядках слов. Она правильно назвала композитора песни «秋潮», но ошиблась в имени, когда в описании другой песни композитора и автора слов поменяли местами. [Результаты и модель](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 После обучения на 26 890 примерах китайского текста в виде изображений модель правильно ответила полным предложением на 33 из 48 вопросов, написанных людьми. Другая модель, рисующая знаки по одному, выразила тот же факт в обоих заданных порядках в 31 случае. В исходном описании фильма режиссёр и сценарист названы верно, но после перестановки имён модель скопировала лишнюю часть предложения. [Результаты и модель](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

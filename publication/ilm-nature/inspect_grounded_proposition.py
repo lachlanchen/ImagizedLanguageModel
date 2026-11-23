@@ -19,7 +19,7 @@ def rgb(image):
     return hashlib.sha256(image.tobytes()).hexdigest()
 
 
-def inspect(base):
+def inspect(base, *, verify_existing_pages=False):
     stage = base.STAGE
     base.preserved()
     base.model_sources()
@@ -38,7 +38,7 @@ def inspect(base):
         if base.sha(path) != build["documents"][name]:
             raise ValueError(f"Compiled document changed: {name}")
         target = stage / "inspection" / name
-        target.mkdir(parents=True, exist_ok=False)
+        target.mkdir(parents=True, exist_ok=verify_existing_pages)
         pages_for = defaultdict(set)
         masks = {}
         texts = []
@@ -52,7 +52,14 @@ def inspect(base):
                 for b in page.get_text("blocks"):
                     if b[6] == 0 and (b[0] < -1 or b[1] < -1 or b[2] > page.rect.width+1 or b[3] > page.rect.height+1):
                         raise ValueError(f"Text outside {name} page {index+1}")
-                page.get_pixmap(matrix=fitz.Matrix(.65, .65)).save(target / f"page-{index+1:03}.png")
+                raster = target / f"page-{index+1:03}.png"
+                pixmap = page.get_pixmap(matrix=fitz.Matrix(.65, .65))
+                if verify_existing_pages and raster.exists():
+                    with Image.open(raster) as prior:
+                        if prior.size != (pixmap.width, pixmap.height) or prior.convert("RGB").tobytes() != pixmap.samples:
+                            raise ValueError(f"Earlier page raster differs: {raster}")
+                else:
+                    pixmap.save(raster)
                 for xref, mask, *_ in page.get_images(full=True):
                     pages_for[xref].add(index+1)
                     masks[xref] = mask

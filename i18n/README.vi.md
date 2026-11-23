@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Với 34 trong số 48 câu hỏi tiếng Trung do người viết, mô hình đã viết đúng cùng một sự kiện theo cả hai trật tự từ được yêu cầu. Mô hình nêu đúng tên người soạn nhạc cho bài 《秋潮》, nhưng vẫn nhầm tên khi đổi vai người viết lời và người soạn nhạc trong một bài khác. [Kết quả và mô hình](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 Sau khi học từ 26.890 ví dụ tiếng Trung dưới dạng ảnh, mô hình viết đúng câu trả lời hoàn chỉnh cho 33 trong 48 câu hỏi do người viết. Một mô hình khác sinh từng hình chữ và diễn đạt đúng cùng một sự việc theo cả hai trật tự được yêu cầu ở 31 câu. Trong ví dụ về phim, mô hình ghi đúng đạo diễn và người viết kịch bản trong bản gốc, nhưng chép thừa cả một đoạn sau khi hai tên được đổi chỗ. [Kết quả và mô hình](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

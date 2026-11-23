@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Sur 48 questions rédigées en chinois, le modèle a écrit 34 réponses exactes dans chacun des deux ordres de mots demandés. Il a correctement nommé le compositeur de « 秋潮 ». Sur une autre chanson, échanger les noms du compositeur et du parolier a suffi à lui faire attribuer la musique à la mauvaise personne. [Résultats et modèle](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 Entraîné sur 26 890 exemples de chinois en image, le lecteur donne une phrase complète et correcte pour 33 des 48 questions écrites par des personnes. Un second modèle, qui génère les glyphes un à un, exprime le même fait dans les deux ordres demandés pour 31 questions. Il retrouve les deux crédits du film dans la notice originale, mais copie un fragment de phrase de trop après l’échange des noms. [Résultats et modèle](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

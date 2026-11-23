@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Bei 34 von 48 von Menschen formulierten chinesischen Fragen gab das Modell den Sachverhalt in beiden gewünschten Wortstellungen korrekt wieder. Es nannte den richtigen Komponisten von „秋潮“. Bei einem anderen Lied verwechselte es Komponist und Texter, als ihre Namen vertauscht wurden. [Ergebnisse und Modell](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 Nach dem Training mit 26.890 chinesischen Bildbeispielen beantwortete das Modell 33 von 48 von Menschen formulierten Fragen in vollständigen, korrekten Sätzen. Ein zweites Modell schrieb Zeichen für Zeichen und drückte denselben Sachverhalt bei 31 Fragen in beiden verlangten Wortfolgen aus. Im Filmbeispiel stimmen die ursprünglichen Angaben zu Regie und Drehbuch. Nach dem Namenstausch kopiert das Modell einen Teil des Satzes mit. [Ergebnisse und Modell](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

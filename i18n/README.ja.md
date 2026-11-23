@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+人が書いた中国語の質問48問のうち34問で、画像を出力するモデルが同じ事実を指定された二通りの語順で正しく書けた。「秋潮」の作曲者は正しく答えたが、別の曲で作詞者と作曲者の名前を入れ替えると、人名を取り違えた。 [実験結果とモデル](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 26,890件の中国語画像で学習したモデルは、人が書いた48問のうち33問に完全な文で正しく答えた。字形を一つずつ生成する別のモデルは、そのうち31問で、同じ内容を指定された二通りの語順で書けた。映画紹介では元の監督と脚本家を正しく挙げたが、名前を入れ替えると余分な箇所まで写した。 [実験結果とモデル](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

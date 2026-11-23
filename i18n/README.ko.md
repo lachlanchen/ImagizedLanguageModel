@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+사람이 작성한 중국어 질문 48개 중 34개에서 모델이 같은 사실을 요청한 두 가지 어순으로 정확히 써냈다. 《秋潮》의 작곡가는 맞혔지만, 다른 곡에서 작곡가와 작사가의 이름을 바꾸자 사람을 잘못 짚었다. [실험 결과와 모델](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 중국어 이미지 예시 26,890개로 학습한 모델은 사람이 쓴 질문 48개 중 33개에 정확하고 완전한 문장으로 답했다. 글자꼴을 하나씩 생성하는 별도 모델은 31개 질문에서 요청된 두 어순으로 같은 사실을 표현했다. 영화 소개문에서는 원래 감독과 각본가를 맞혔지만 두 이름을 바꾸자 문장 일부까지 이름으로 옮겼다. [실험 결과와 모델](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

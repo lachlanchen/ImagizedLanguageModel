@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在人工编写的 48 道中文问题中，模型有 34 道能按要求用两种语序写出正确事实。它能正确写出《秋潮》的作曲人。另一首歌的测试显示，交换作曲人和作词人后，模型仍可能答错人名。 [实验结果与模型](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 模型用 26,890 条中文图像样本学习辨认陈述中的主体、关系和对象，在 48 道真人撰写的问题中写出了 33 个完整正确的句子。另一个逐字形生成的模型在其中 31 题上能按两种指定语序作答。在电影介绍的例子中，模型在原文上正确写出了导演和编剧，但在人名互换后多抄了一段原文。 [实验结果与模型](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

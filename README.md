@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The image writer now gives the correct fact in two requested word orders on 34 of 48 human-written Chinese questions. It credits the composer of 《秋潮》 correctly. A second song shows what still fails when two people exchange roles. [Results and model](references/pictured_relation_result.md)
+
+[![秋潮 · 94](publication/ilm-nature/figures/Figure_94_pictured_relation.png)](publication/ilm-nature/manuscript.pdf#page=125)
+
 A reader trained on 26,890 pictured Chinese examples wrote 33 complete, correct statements on 48 human questions. A separate glyph-by-glyph writer expressed the same fact in two requested word orders on 31 of them. In the film example it correctly names the director and screenwriter on the original page, then selects too much text after the names are exchanged. [Results and runnable model](references/role_binding_result.md)
 
 [![93 · 雨巷来信](publication/ilm-nature/figures/Figure_93_role_binding.png)](publication/ilm-nature/manuscript.pdf#page=124)

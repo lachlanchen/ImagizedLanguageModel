@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+كتب النموذج المعلومة الصحيحة بالترتيبين المطلوبين للكلمات في 34 من أصل 48 سؤالاً صينياً كتبها أشخاص. وذكر ملحّن أغنية «秋潮» على نحو صحيح، لكنه أخطأ في اسم الملحّن عندما تبدّل دورا الملحّن وكاتب الكلمات في أغنية أخرى. [النتائج والنموذج](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 تدرّب القارئ على 26,890 مثالاً صينياً مصوّراً، وكتب إجابات تامة وصحيحة عن 33 من 48 سؤالاً صاغها أشخاص. وكتب نموذج منفصل يولّد أشكال الحروف تباعاً الحقيقة نفسها بالترتيبين المطلوبين في 31 سؤالاً. في مثال الفيلم حدّد المخرج وكاتب السيناريو في النص الأصلي، ثم نسخ جزءاً زائداً من النص بعد تبديل الاسمين. [النتائج والنموذج](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)

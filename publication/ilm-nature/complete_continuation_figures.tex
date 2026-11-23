@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_role_binding_article.py.
+% Literal captions copied from their source inputs by build_pictured_relation_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -753,4 +753,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{b}, Counts of complete replies with disrupted field supervision and with the induced writer. The last column requires two stopped, exact answers to the same question from the autoregressive writer, first leading with the subject and then with the object.
 \textbf{c}, Original film notes, questions and emitted strips. Credits run from director at left to screenwriter at right. On the exchanged source the first predicted name extends into a second clause. At bottom, the autoregressive writer starts both original credits with the correct person.}
 \label{fig:role-binding}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_94_pictured_relation.png}
+\caption{\textbf{Reading the requested role and copying the correct person.}
+\textbf{a}, Percentage of questions with stopped, pixel-exact answers in both requested word orders. Both readers use the same autoregressive writer.
+\textbf{b}, Exact statements with the learned sentence pattern. Repairs and losses compare the same inputs before and after adding the question reader.
+\textbf{c}, The original diagnostic and actual object-first replies. Both name Shen He. The updated output identifies him as the composer.
+\textbf{d}, In a separate song with exchanged names, the model identifies the role but copies the lyricist instead of the composer. All displayed Chinese strips are original input or emitted pixels.}
+\label{fig:pictured-relation}
 \end{figure*}

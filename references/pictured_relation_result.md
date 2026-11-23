@@ -20,7 +20,7 @@ The underlying visual reader and writer transfer prior Chinese text-model traini
 
 ## Run or reproduce the experiment
 
-The small update installs beside the existing local fact model. The inference command takes passage and question PNGs and writes a PNG. The local release check compares three isolated CPU runs with the original output images, including the wrong exchanged answer. [Installation and example](../models/pictured_relation/README.md) · [Release hashes](evidence/pictured_relation_20261123/release.json)
+The workstation stores the full inference bundle at `artifacts/role_binding_v1/visual-fact-reader-writer.zip` and the update at `artifacts/pictured_relation_v1/pictured-relation-update.zip`. Extract both into the same directory, starting with the full bundle. The inference command takes passage and question PNGs and writes a PNG. The local release check compares three isolated CPU runs with the original output images, including the wrong exchanged answer. [Installation and example](../models/pictured_relation/README.md) · [Release hashes](evidence/pictured_relation_20261123/release.json)
 
 After preparing the original reader, writer and splits, run these commands in the repository environment. The supplementary fit uses the CPU. The full two-order generation comparison used a single RTX 4090 D.
 

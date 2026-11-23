@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+De 48 preguntas escritas en chino por personas, el modelo respondió correctamente a 34 en los dos órdenes de palabras solicitados. Identificó al compositor de «秋潮», pero confundió al compositor con el letrista al intercambiar los nombres en otra canción. [Resultados y modelo](../references/pictured_relation_result.md)
+
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+
 Tras entrenarse con 26.890 ejemplos de chino en imágenes, el lector escribió oraciones completas y correctas en 33 de 48 preguntas redactadas por personas. Otro modelo, que genera los glifos uno a uno, expresó el mismo hecho en los dos órdenes solicitados en 31 preguntas. Identificó al director y al guionista en la ficha original, pero copió parte de una oración al intercambiar los nombres. [Resultados y modelo](../references/role_binding_result.md)
 
 [![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)
