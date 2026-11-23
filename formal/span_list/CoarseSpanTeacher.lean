@@ -45,6 +45,15 @@ theorem any_tail_unidentified {α : Type} (loss : List Nat → α)
 on all observable bins permits opposing best intervals inside the tail. -/
 example : coarsen [6] [5,1] = coarsen [6] [1,5] := by decide
 
+/-- Two questions with opposite correct answers incur at least twice the
+requested margin if a scorer returns the same score difference on both. -/
+theorem same_difference_loss (margin difference : Int) :
+    2 * margin ≤ max 0 (margin - difference) + max 0 (margin + difference) := by
+  have left : margin - difference ≤ max 0 (margin - difference) := Int.le_max_right _ _
+  have right : margin + difference ≤ max 0 (margin + difference) := Int.le_max_right _ _
+  omega
+
+#print axioms same_difference_loss
 #print axioms coarsen_preserves_mass
 #print axioms any_tail_unidentified
 #print axioms regroup

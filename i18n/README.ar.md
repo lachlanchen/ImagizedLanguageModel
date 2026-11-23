@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+يقرأ نموذج يضم 64,666 مُعاملاً صورة السؤال وصورة المقطع الصيني، ثم يعيد الجزء الذي اختاره من صورة النص الأصلي. بعد التدريب على 6,439 مقطعاً، أجاب إجابة صحيحة عن 104 من 452 سؤالاً بالصينية و45 من 452 سؤالاً بالإنجليزية حول روايتين خُصّصتا للتقييم. وعند التدريب على إجابات البشر وحدها، بلغ العدد 81 و48 على التوالي. وما زال من النادر أن يجيب النموذج عن سؤالين مختلفين حول المقطع نفسه إجابة صحيحة. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 تتبّع النموذج البصري تبديل الأدوار بين شخصين في صور قوائم المشاركين في الأعمال في 175 مقارنة من أصل 256، مقابل 19 للنموذج الضابط. وفي اثنتي عشرة قصة جديدة لم ينجح أيّ منهما في مقارنة كاملة. وعند تقديم سؤالين مصوّرين مع القسم المناسب من الفهرس لكل سؤال، أعاد النموذج إنتاج أربعة أشكال تاريخية للحرف 言 في محاولتين من أصل ثمانٍ. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

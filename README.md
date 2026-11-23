@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A 64,666-parameter reader takes a pictured question and Chinese passage and returns a strip of the original page. Trained on 6,439 passages, it found 104 of 452 source answers for Chinese questions and 45 for English questions about two reserved novels. Human answers alone produced 81 and 48. The model can answer some questions about people; it still rarely answers two different questions about the same passage correctly. [ILM · 64k](models/book_span_distillation/README.md) · [104/452](references/book_span_distillation_result.md)
+
+[![113 · ILM](publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](publication/ilm-nature/manuscript.pdf#page=151)
+
 The visual writer learned to follow changes in who performed an action on pictured credits (175/256 comparisons, versus 19/256 for the control). On twelve new stories both writers missed every complete comparison. With two pictured requests and the corresponding catalogue sections, the writer reproduced four historical forms of 言 in two of eight trials. [↗](references/individual_clause_writer_result.md)
 
 [![111 · ILM](publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](publication/ilm-nature/manuscript.pdf#page=148)

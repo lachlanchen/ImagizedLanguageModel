@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Ce lecteur de 64 666 paramètres reçoit une question et un passage chinois sous forme d’images, puis renvoie un extrait de la page originale. Entraîné sur 6 439 passages, il a trouvé 104 réponses exactes sur 452 questions en chinois et 45 sur 452 en anglais dans deux romans réservés à l’évaluation. Avec les seules réponses humaines, les scores étaient de 81 et 48. Le lecteur répond encore rarement juste à deux questions différentes sur le même passage. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 Le modèle visuel a suivi une permutation des rôles dans des crédits présentés en image pour 175 comparaisons sur 256, contre 19 pour le témoin. Sur douze nouveaux récits, aucun des deux modèles n’a réussi une comparaison complète. Avec deux questions en image et les sections correspondantes du catalogue, le modèle a reproduit quatre formes historiques de 言 dans deux essais sur huit. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

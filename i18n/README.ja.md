@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+64,666 パラメータの読解モデルが、画像として与えられた質問と中国語の文章を読み、答えにあたる字形を元の画像から返します。6,439 段落で学習し、評価用に残した小説 2 作品について、中国語の質問では 452 問中 104 問、英語では 452 問中 45 問に正答しました。人手の正解だけで学習した場合はそれぞれ 81 問と 48 問でした。同じ段落について異なる二問の両方に正答することはまだまれです。 [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 画像で提示したクレジットで二人の担当を入れ替えると、視覚モデルは256件中175件で両方の担当を追跡できた。対照モデルは19件だった。新作の短い物語12編では、どちらも比較の全条件を満たせなかった。二つの質問を画像で示し、それぞれに対応する目録の部分を添えると、8試行中2試行で「言」の歴史的字形4種を順番どおりに再現した。 [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

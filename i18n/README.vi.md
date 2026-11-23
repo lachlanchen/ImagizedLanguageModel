@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình đọc có 64.666 tham số nhận ảnh câu hỏi và đoạn văn tiếng Trung rồi trả về ảnh phần văn bản chứa câu trả lời. Sau khi học từ 6.439 đoạn văn, mô hình trả lời đúng 104/452 câu hỏi tiếng Trung và 45/452 câu hỏi tiếng Anh về hai tiểu thuyết dành riêng cho đánh giá. Khi chỉ học từ đáp án của con người, kết quả tương ứng là 81 và 48. Mô hình vẫn hiếm khi trả lời đúng cả hai câu hỏi khác nhau về cùng một đoạn. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 Khi đổi vai của hai người trong phần ghi công được trình bày dưới dạng ảnh, mô hình thị giác xác định đúng cả hai vai trong 175 trên 256 phép so sánh, còn mô hình đối chứng đạt 19. Trên mười hai truyện mới, cả hai đều không hoàn thành phép so sánh nào. Khi nhận hai câu hỏi bằng hình ảnh cùng các mục tương ứng trong danh mục, mô hình tái hiện đúng bốn dạng chữ 言 cổ trong hai trên tám lần thử. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

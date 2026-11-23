@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+這個含 64,666 個參數的閱讀模型接收問題和中文段落的影像，直接擷取原文中的字形作答。在 6,439 個段落上訓練後，面對兩部保留作評估的小說，它在各 452 道題中答對了 104 道中文題和 45 道英文題。只用人工答案訓練的模型分別答對 81 道和 48 道。同一段落換一個問題後，兩題都答對的情況仍然很少。 [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 把作品署名表做成圖像，再交換兩人的分工，視覺模型在 256 組比較中有 175 組答對了交換前後的兩個角色，對照模型答對 19 組。在 12 篇新故事中，兩者都沒有完整答對一組。把兩個問題分別配上對應的圖錄片段後，模型在 8 次測試中有 2 次按要求的順序重現了「言」的四種歷史字形。 [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Модель с 64 666 параметрами читает изображение вопроса и китайского отрывка и возвращает фрагмент исходной страницы. После обучения на 6 439 отрывках она правильно ответила на 104 из 452 вопросов по-китайски и на 45 из 452 по-английски по двум романам, оставленным для оценки. При обучении только по ответам людей результат составил 81 и 48 соответственно. На два разных вопроса об одном отрывке модель пока редко даёт два верных ответа. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 В тесте на смену ролей в титрах, представленных изображениями, модель прошла 175 из 256 сравнений, контрольная модель — 19. На двенадцати новых рассказах ни одна модель не прошла ни одного полного сравнения. По двум вопросам в виде изображений и соответствующим разделам каталога модель воспроизвела четыре исторических начертания 言 в двух из восьми испытаний. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

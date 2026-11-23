@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Este lector de 64.666 parámetros recibe imágenes de una pregunta y un pasaje en chino y devuelve un recorte de la página original. Tras entrenarse con 6.439 pasajes, acertó 104 de 452 preguntas en chino y 45 de 452 en inglés sobre dos novelas reservadas para la evaluación. El entrenamiento con respuestas humanas únicamente obtuvo 81 y 48 aciertos. El lector todavía rara vez acierta dos preguntas distintas sobre el mismo pasaje. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 El modelo visual siguió el intercambio de funciones entre dos personas en los créditos de una obra en 175 de 256 comparaciones, frente a 19 del control. En doce relatos nuevos ninguno completó una comparación. Con dos preguntas en imágenes y las secciones correspondientes del catálogo, reprodujo cuatro formas históricas de 言 en dos de ocho ensayos. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

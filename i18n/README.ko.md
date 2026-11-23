@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+매개변수 64,666개의 읽기 모델은 질문과 중국어 지문을 이미지로 받아 원문에서 답에 해당하는 글자 이미지를 돌려줍니다. 6,439개 지문으로 학습한 뒤 평가용 소설 두 편에서 중국어 질문은 452개 중 104개, 영어 질문은 452개 중 45개를 맞혔습니다. 사람이 작성한 정답만으로 학습한 모델은 각각 81개와 48개를 맞혔습니다. 한 지문에 대한 서로 다른 두 질문을 모두 맞히는 경우는 여전히 드뭅니다. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
+
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+
 작품 크레디트를 이미지로 제시하고 두 사람의 역할을 바꾸자 시각 모델은 256개 비교 중 175개에서 역할을 올바르게 추적했다. 대조 모델은 19개를 통과했다. 새로운 이야기 12편에서는 두 모델 모두 비교 조건을 전부 충족한 사례가 없었다. 질문 두 개를 이미지로 제시하고 각각에 해당하는 도록 부분을 제공하자 8회 중 2회에서 言의 옛 자형 네 가지를 순서대로 재현했다. [↗](../references/individual_clause_writer_result.md)
 
 [![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)

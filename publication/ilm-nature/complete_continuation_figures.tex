@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_book_participant_article.py.
+% Literal captions copied from their source inputs by build_book_span_distillation_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -917,4 +917,11 @@ The selected names are correct under both English requests. The first generated 
 \caption{\textbf{Identifying people in novels from pictured questions.}
 \textbf{a,} Both answers must be correct when the reader chooses between the two annotated expressions in either candidate order. The novels were held out of training for the fresh readers. Chinese and English questions refer to the same Chinese passage. \textbf{b,} Individual exact image replies and completely answered passages with no candidate supplied at inference. The detector proposes up to 16 distinct source images. Text Qwen3-8B receives the printed content as text. Its response must stop and match the same reference. \textbf{c,} Original pixels of the Chinese questions, source answers and autonomous outputs from the detector and aligned reader. The first two questions per work follow the reserved source order. The final two show the first passage on which both Chinese answers were correct, selected to illustrate a success.}
 \label{fig:book-participant-reader}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_113_book_span_distillation.png}
+\caption{\textbf{Transferring interval probabilities from a visual teacher.}
+\textbf{a,} Exact source-image answers for each reserved novel and question language. Each question can select any contiguous strip of one to eight glyphs. The two students share the same human answer images. In the exchanged condition, the teacher distribution belongs to the other question about the same page. \textbf{b,} Exact answers to individual questions and to both questions about a passage. The optical teacher and text Qwen3-8B were evaluated on the same questions. \textbf{c,} Pictured questions, source answers and output bitmaps for the first reserved passage of each work. The final pair illustrates the first passage on which the matched student answered both Chinese questions correctly. All outputs are reproduced at their stored resolution before display scaling.}
+\label{fig:book-span-distillation}
 \end{figure*}
