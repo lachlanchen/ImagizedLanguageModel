@@ -7,10 +7,7 @@ import numpy as np
 import torch
 
 from ilm.visual_lm.causal_glyph_writer import packed_page, write_strip
-from ilm.visual_lm.anchored_clause_writer import answer_pair
-from ilm.visual_lm.ordered_evidence_writer import ranked_intervals, writer_inputs
 from ilm.visual_lm.prepared_glyph_responder import PreparedGlyphResponder
-from ilm.visual_lm.question_evidence_reader import QuestionEvidenceReader
 
 
 def tensor(raw):
@@ -24,7 +21,7 @@ def main():
     parser.add_argument(
         "--questions", type=Path, nargs=2, required=True, metavar=("FIRST", "SECOND")
     )
-    parser.add_argument("--mode", choices=("direct", "frame"), default="direct")
+    parser.add_argument("--mode", choices=("direct", "frame", "page"), default="direct")
     parser.add_argument(
         "--controls",
         type=Path,
@@ -65,32 +62,41 @@ def main():
         packed_page(p).numpy().tobytes()
         for p in (args.page, *args.questions, args.separator)
     ]
-    reader = QuestionEvidenceReader(
-        args.reader, args.question_weights, args.head, args.device
-    )
     qs = [first, second]
-    folder = args.writer or (
-        root
-        / (
-            "artifacts/ordered_book_replies_v1/matched/page"
-            if args.mode == "direct"
-            else "artifacts/anchored_book_clauses_v1/page"
-        )
+    folders = dict(
+        direct="artifacts/ordered_book_replies_v1/matched/page",
+        frame="artifacts/anchored_book_clauses_v1/page",
+        page="artifacts/role_change_writer_v1/aligned/page",
     )
-    writer = PreparedGlyphResponder(folder, args.device)
-    if args.mode == "frame":
-        controls = [
-            packed_page(args.controls / (name + ".png")).numpy().tobytes()
-            for name in ("mark", "comma", "stop")
-        ]
-        ink, end = answer_pair(reader, writer, page, qs, *controls)
-        im = tensor(ink)
+    writer = PreparedGlyphResponder(
+        args.writer or root / folders[args.mode], args.device
+    )
+    if args.mode == "page":
+        im, end = writer.answer_many([(tensor(page), tensor(first + sep + second))])[0]
     else:
-        intervals = ranked_intervals(
-            reader.reader, reader.questions, reader.head, [(page, q) for q in qs]
+        from ilm.visual_lm.anchored_clause_writer import answer_pair
+        from ilm.visual_lm.ordered_evidence_writer import (
+            ranked_intervals,
+            writer_inputs,
         )
-        p, q = writer_inputs(page, qs, intervals, sep)
-        im, end = writer.answer_many([(tensor(p), tensor(q))])[0]
+        from ilm.visual_lm.question_evidence_reader import QuestionEvidenceReader
+
+        reader = QuestionEvidenceReader(
+            args.reader, args.question_weights, args.head, args.device
+        )
+        if args.mode == "frame":
+            controls = [
+                packed_page(args.controls / (name + ".png")).numpy().tobytes()
+                for name in ("mark", "comma", "stop")
+            ]
+            ink, end = answer_pair(reader, writer, page, qs, *controls)
+            im = tensor(ink)
+        else:
+            intervals = ranked_intervals(
+                reader.reader, reader.questions, reader.head, [(page, q) for q in qs]
+            )
+            p, q = writer_inputs(page, qs, intervals, sep)
+            im, end = writer.answer_many([(tensor(p), tensor(q))])[0]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_strip(im.numpy(), args.output)
     print(json.dumps(dict(cells=len(im), accepted=end, mode=args.mode)))

@@ -8,18 +8,16 @@ from scripts.train_anchored_book_clauses import PUBLIC, WORK, PARENT, ROOT
 from scripts.train_causal_glyph_writer import record, sha
 
 
-def package():
-    torch.set_num_threads(2)
-    folder = WORK / "release"
-    folder.mkdir(exist_ok=True)
-    trained = json.loads((PUBLIC / "fit.json").read_text())["weights"]
-    base = json.loads((PARENT.parent / "page_fit.json").read_text())["weights"]
+def write_update(base_folder, trained_folder, base, trained, folder):
     changed = {}
     for name, target in trained.items():
-        assert sha(WORK / "page" / name) == target and sha(PARENT / name) == base[name]
+        assert (
+            sha(trained_folder / name) == target
+            and sha(base_folder / name) == base[name]
+        )
         if target == base[name]:
             continue
-        old, new = [load_file(str(d / name)) for d in (PARENT, WORK / "page")]
+        old, new = [load_file(str(d / name)) for d in (base_folder, trained_folder)]
         assert old.keys() == new.keys()
         for key in new:
             if not torch.equal(old[key], new[key]):
@@ -30,6 +28,16 @@ def package():
         folder / "frame_manifest.json",
         dict(base=base, trained=trained, update_sha=sha(delta)),
     )
+    return changed, delta
+
+
+def package():
+    torch.set_num_threads(2)
+    folder = WORK / "release"
+    folder.mkdir(exist_ok=True)
+    trained = json.loads((PUBLIC / "fit.json").read_text())["weights"]
+    base = json.loads((PARENT.parent / "page_fit.json").read_text())["weights"]
+    changed, delta = write_update(PARENT, WORK / "page", base, trained, folder)
     paths = {p.name: p for p in (delta, folder / "frame_manifest.json")}
     paths["FRAME_README.md"] = ROOT / "models/anchored_book_writer/README.md"
     for n in (
