@@ -1,52 +1,56 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+في تقييم جديد شمل 384 سؤالاً لفهم نصوص صينية، طابقت إجابات النموذج صورة الإجابة المرجعية في 285 سؤالاً بعد جمع ترجيحات أربعة نماذج، وهي نتيجة القارئ العام أيضاً. وفي اختبارات تبادل الأسماء نجح في جميع أسئلة 63 مجموعة من أصل 128، مقابل 79 للقارئ المتخصص. [النتائج وأوزان النموذج](../references/span_choice_result.md)
+
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+
 عند تبادل اسمين في مقطع صيني مصوّر، أجاب النموذج المدرَّب بتعظيم الإمكان عن جميع الأسئلة بالترتيبين المطلوبين للكلمات في 79 من 128 مقطعاً، مقابل 29 سابقاً. أمّا في الأسئلة التي كتبها أشخاص، فانخفض عدد الإجابات الصحيحة بالترتيبين من 34 إلى 28 من أصل 48. [النتائج والنماذج](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 كتب النموذج المعلومة الصحيحة بالترتيبين المطلوبين للكلمات في 34 من أصل 48 سؤالاً صينياً كتبها أشخاص. وذكر ملحّن أغنية «秋潮» على نحو صحيح، لكنه أخطأ في اسم الملحّن عندما تبدّل دورا الملحّن وكاتب الكلمات في أغنية أخرى. [النتائج والنموذج](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 تدرّب القارئ على 26,890 مثالاً صينياً مصوّراً، وكتب إجابات تامة وصحيحة عن 33 من 48 سؤالاً صاغها أشخاص. وكتب نموذج منفصل يولّد أشكال الحروف تباعاً الحقيقة نفسها بالترتيبين المطلوبين في 31 سؤالاً. في مثال الفيلم حدّد المخرج وكاتب السيناريو في النص الأصلي، ثم نسخ جزءاً زائداً من النص بعد تبديل الاسمين. [النتائج والنموذج](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 ماذا يحدث عند تبديل اسمين في صورة نص؟ في 136 سؤالاً عن أزواج من الأدوار استُبعدت من تدريب الإجابات ذات الجملتين، قسّم النموذج الطلب وكتب الجملتين بالترتيب الصحيح في 70 إجابة. أصاب النموذج الذي يكتب الجملتين دفعة واحدة في ثلاث فقط. وفي مثال عن فيلم، كتب جملتين مقروءتين لكنه نسب الإخراج وكتابة السيناريو إلى الشخص نفسه. [النتائج والنموذج](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 من رسم الخريطة ومن احتاج إلى السؤال عن الطريق؟ أعاد النموذج بعد تعديله اسمين مختلفين، وأعطى الاسم الصحيح في 42 من 64 سؤالاً مصوراً جديداً. واستطاع كتابة شكل الحرف 言 في نقوش العظام وفي نقوش البرونز بالترتيب المطلوب. وفي 128 سؤالاً مفتوحاً جديداً تتطلب أشكالاً كتابية غائبة عن المدخلات، لم تتطابق أي إجابة تماماً مع الأجوبة المرجعية. [النتائج والنموذج](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 تذكر الفقرة المصوّرة مَن رسم الخريطة ومَن ضلّ الطريق. حدّد النموذج رسّام الخريطة، لكنه كرّر الحديث عن الرسم عندما سُئل عمّن احتاج إلى السؤال عن الطريق. في 300 سؤال تطلّبت إجابتها شكلاً كتابياً غائباً عن المدخلات، اختار النموذج أول شكل غائب اختياراً صحيحاً 18 مرة فقط، حتى عند تزويده بالجزء الصحيح السابق من الإجابة. [النتائج وصور الإجابات الأصلية](../references/causal_glyph_writer_result.md)
 
-[![سؤالان عن خريطة واحدة](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![سؤالان عن خريطة واحدة](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 يستطيع النموذج كتابة الشكلين التاريخيين للحرف 言 بالترتيب المطلوب في السؤال المصوّر. في أمثلة خارج التدريب نجح في الترتيبين معًا في 94 من 96 مقارنة بصياغة مألوفة، وفي 16 من 96 على بطاقات أخرى بصياغة جديدة. [النتائج وصور الإجابات](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
 
 **قراءة صور الحروف والإجابة عنها.** أجاب النموذج إجابة صحيحة عن 46 سؤالًا من أصل 64 عن شخصين بالخط الصيني العادي، وعن 41 بالخط العريض. وأجاب Qwen3-8B المحلي عن 55 سؤالًا إجابة صحيحة عند إدخال النص. وعند استخدام خط كاي لم يسبق للنموذج التدرّب عليه، أجاب عن سؤال واحد فقط إجابة صحيحة. [تشغيل النموذج](../docs/visual-page-responder.md)
 
-[![الشكل 88. صور الأسئلة والإجابات الفعلية](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+[![الشكل 88. صور الأسئلة والإجابات الفعلية](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=120)
 
 **هل يميّز النموذج بين شخصين في جملة واحدة؟** كتب النموذج اسم المتبرع لمبنى غيتس واسم المهندس المعماري بشكل صحيح. ومن أصل 864 زوجًا من الأسئلة أجاب عن السؤالين معًا إجابة صحيحة في 100 زوج. وعند تبديل الأسماء في 24 موقفًا جديدًا لم يُجب عن كل أسئلة أي موقف، بينما نجح نموذج Qwen3-8B المحلي في 20 موقفًا. [النتائج وطريقة التشغيل](../references/shared_sentence_writer_result.md)
 
-[![الشكل 86. سؤالان عن الجملة نفسها وصور الإجابات](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![الشكل 86. سؤالان عن الجملة نفسها وصور الإجابات](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **لماذا يختار النموذج الاسم الخطأ؟** في 387 سؤالًا صينيًا عن هوية شخص ارتفع عدد الإجابات الصحيحة بالكامل من 62 إلى 116 عند اختيار جملة بحسب أشكال الحروف المشتركة مع السؤال. وبالطريقة نفسها أجاب نموذج المقارنة ذو التعيين العشوائي في التدريب الإضافي عن 127 سؤالًا إجابة صحيحة. يوضح الشكل 85 كيف كتب النموذج اسم مكان حين سُئل عن اسم مخترع. [النتائج وطريقة التشغيل](../references/inverse_role_writer_result.md)
 
-[![الشكل 85. اختيار الجملة وصور الإجابات](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![الشكل 85. اختيار الجملة وصور الإجابات](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **عمّن تتحدث الجملة؟.** كتب النموذج 368 جملة صينية كاملة بصورة صحيحة من أصل 404 عند استخدام أسماء وتتمات جديدة. وعندما نسخ اسمي تشين وتشو من صور نقوش برونزية، أصاب في 24 جملة من أصل 32. وعندما عُرضت عليه الصفة وحدها وطُلب منه تحديد الاسم، لم يُرجع أي اسم برونزي صحيح. [النتائج وطريقة التشغيل](../references/visual_role_writer_result.md)
 
-[![الشكل 84. فقرتان تتضمنان نقوشاً برونزية وصورتا الإجابة الفعلية](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
+[![الشكل 84. فقرتان تتضمنان نقوشاً برونزية وصورتا الإجابة الفعلية](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
 
 **ماذا يقرأ النموذج من صور الكتابة؟** عُرضت على النموذج صورة الجملة الصينية «她喝了一口□。» (أخذت رشفة من □). عندما تغيّر الشراب في الفقرة المرافقة من الماء إلى الشاي، تغيّرت الإجابة من 水 إلى 茶. واستعاد النموذج، بعد الجمع بين الشبكة العصبية وتكرارات المحارف المتجاورة، النص الأصلي في 651 موضعاً من أصل 2,947. وعند تبادل شخصين دوريهما في 48 زوجاً من الأمثلة، لم يصدر النموذج الحكم الصحيح على النسختين معاً في أي زوج. [النتائج وأوامر التشغيل](../references/visual_inference_writer_result.md)
 
-[![الشكل 83. فقرتان وصورة الجملة نفسها وصورتا الإجابة](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=114)
+[![الشكل 83. فقرتان وصورة الجملة نفسها وصورتا الإجابة](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
 
 <!-- paired-writing-status:start -->
 لم تحقق مقارنة إزالة الهوامش البيضاء، بعد 512 خطوة تحديث، نسخاً موثوقاً: التطابق التام عبر OCR هو 6/32 للتدريب و10/32 للتحقق، مقابل 27/32 و28/32 للصور المرجعية الواضحة. تظهر المخرجات الأصلية حذفاً وتكراراً للأحرف. انخفض وقت التدريب من 795.624 إلى 287.182 ثانية، لكن فهم اللغة والكفاءة عند جودة عملية لم يثبتا بعد. [المخرجات الأصلية الـ64](../references/paired_padding_result.md).
