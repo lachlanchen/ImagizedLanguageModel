@@ -23,9 +23,9 @@ theorem empirical (scale : Nat) (rivals : List Nat) :
   | nil => simp [errors, mass]
   | cons a xs ih =>
     by_cases h : scale ≤ 2*a
-    · simp only [errors, mass, if_pos h, Nat.succ_mul, Nat.mul_add]
+    · rw [errors, if_pos h, Nat.add_mul, Nat.one_mul, mass, Nat.mul_add]
       omega
-    · simp only [errors, mass, if_neg h, Nat.mul_add]
+    · rw [errors, if_neg h, mass, Nat.mul_add]
       omega
 
 /-- Winning a fixed comparison can coexist with an incorrect free choice. -/
