@@ -2,59 +2,59 @@
 
 따로 보관한 DRCD 자료를 제외하고 다시 학습한 결과, 후보를 늘린 모델은 개발용 질문 359개 중 234개에서 정답 이미지와 정확히 일치했고 범용 모델은 242개에서 일치했다. 이전 DRCD 평가에는 보류된 시험 지문이 포함됐다. [결과 및 데이터 출처 정정](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 중국어 독해 문제 384개로 새로 평가한 결과, 네 모델의 이미지 답안 후보를 종합한 모델은 범용 모델과 같은 285개에서 정답 이미지와 정확히 일치했다. 이름을 맞바꾸는 시험 128세트에서는 63세트의 모든 문항을 맞혔고, 특화 모델은 79세트를 맞혔다. [결과 및 가중치](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 중국어 지문 이미지에서 두 사람의 이름을 맞바꾸자 우도만으로 학습한 모델은 128개 지문 중 79개에서 모든 질문에 두 가지 어순으로 정확히 답했다. 기존 모델은 29개였다. 사람이 쓴 질문 48개에서는 두 어순 모두 맞힌 수가 34개에서 28개로 줄었다. [실험 결과와 모델](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 사람이 작성한 중국어 질문 48개 중 34개에서 모델이 같은 사실을 요청한 두 가지 어순으로 정확히 써냈다. 《秋潮》의 작곡가는 맞혔지만, 다른 곡에서 작곡가와 작사가의 이름을 바꾸자 사람을 잘못 짚었다. [실험 결과와 모델](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 중국어 이미지 예시 26,890개로 학습한 모델은 사람이 쓴 질문 48개 중 33개에 정확하고 완전한 문장으로 답했다. 글자꼴을 하나씩 생성하는 별도 모델은 31개 질문에서 요청된 두 어순으로 같은 사실을 표현했다. 영화 소개문에서는 원래 감독과 각본가를 맞혔지만 두 이름을 바꾸자 문장 일부까지 이름으로 옮겼다. [실험 결과와 모델](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 이미지로 된 글에서 두 사람의 이름을 바꾸면 답도 달라질까? 두 문장을 함께 쓰는 훈련에서 제외한 역할 조합을 물었을 때, 질문을 나눈 뒤 같은 모델로 답을 쓰는 방식은 136문항 중 70문항에서 두 사실을 지정된 순서로 썼다. 한 번에 두 문장을 쓰던 모델은 3문항을 맞혔다. 영화 소개문에서는 두 문장 모두 읽을 수 있었지만 감독과 각본가를 같은 사람으로 잘못 적었다. [실험 결과와 모델](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 누가 지도를 그렸고 누가 길을 물어야 했을까? 개선한 모델은 서로 다른 두 이름을 답했다. 새로운 이미지 질문 64개 중 42개에서 정확한 이름을 썼다. 言의 갑골문과 금문을 지정한 순서로 쓰기도 했다. 입력에 없는 글자꼴이 필요한 새로운 서술형 질문 128개에서는 참조 답안과 완전히 일치한 답이 없었다. [실험 결과와 모델](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 그림으로 제시한 글에는 누가 지도를 그렸고 누가 길을 잃었는지가 나옵니다. 모델은 지도를 그린 사람을 맞혔지만, 누가 길을 물어야 했느냐는 질문에도 지도를 그린 이야기를 반복했습니다. 입력에 없는 글자 모양이 필요한 300문제에서 그 지점까지의 정답을 보여 줘도 필요한 첫 글자 모양을 맞힌 경우는 18번이었습니다. [실험 결과와 실제 답변 이미지](../references/causal_glyph_writer_result.md)
 
-[![지도 한 장에 관한 두 가지 질문](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![지도 한 장에 관한 두 가지 질문](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 그림으로 제시한 질문에 따라 言의 갑골문과 금문을 순서를 바꿔 출력할 수 있다. 두 순서를 모두 맞힌 경우는 학습에 쓰지 않은 글자와 익숙한 질문 표현에서 96쌍 중 94쌍이었다. 다른 글자와 새로운 표현에서는 16쌍이었다. [결과와 출력 이미지](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 **글자 이미지를 읽고 답하기.** 두 인물에 관한 중국어 질문 64개 중 일반 글꼴에서는 46개, 굵은 글꼴에서는 41개에 정답을 냈습니다. 로컬 Qwen3-8B는 텍스트 입력으로 55개를 맞혔습니다. 학습에 쓰지 않은 해서체에서는 정답이 1개였습니다. [모델 실행](../docs/visual-page-responder.md)
 
-[![그림 88. 글자 이미지 질문과 실제 응답](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![그림 88. 글자 이미지 질문과 실제 응답](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 **한 문장에 등장하는 두 사람을 구별할 수 있을까?** 모델은 게이츠 건물의 기부자와 건축가 이름을 모두 맞혔다. 질문 864쌍 중 두 답을 모두 맞힌 경우는 100쌍이었다. 이름을 맞바꾼 새 상황 24개에서는 모든 답을 맞힌 상황이 없었고 로컬 Qwen3-8B는 20개였다. [결과와 실행 방법](../references/shared_sentence_writer_result.md)
 
-[![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+[![그림 86. 같은 문장에 대한 두 질문과 실제 답](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
 
 **왜 사람을 잘못 고를까?** 중국어로 누군지 묻는 질문 387개에서 전체 지문을 읽힌 모델은 62개를 맞혔다. 질문과 글자 모양이 겹치는 문장을 먼저 고르자 116개를 맞혔다. 추가 학습의 정답을 무작위로 배정한 대조 모델은 같은 방법으로 127개를 맞혔다. 그림 85는 발명가의 이름을 물었을 때 지명을 쓴 사례다. [결과와 실행 방법](../references/inverse_role_writer_result.md)
 
-[![그림 85. 문장 선택과 실제 출력](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![그림 85. 문장 선택과 실제 출력](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 **누구에 관한 문장인가.** 새 이름과 보어로 만든 중국어 문장 404개 중 368개를 정확히 썼다. 진과 초의 금문 글자를 입력에서 옮겨 쓴 문장은 32개 중 24개가 맞았다. 이름 없이 조건만 주고 누구인지 물으면 금문 이름을 정확히 쓴 경우는 없었다. [결과 및 실행 방법](../references/visual_role_writer_result.md)
 
-[![그림 84. 금문이 들어간 두 지문과 실제 출력](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![그림 84. 금문이 들어간 두 지문과 실제 출력](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **모델은 글자 이미지에서 무엇을 읽을 수 있을까?** 같은 문장 이미지 “她喝了一口□。”(그녀는 □를 한 모금 마셨다)에서 앞 문단의 음료가 물에서 차로 바뀌자 모델의 답도 水에서 茶로 바뀌었다. 신경망과 이웃 글자의 빈도를 결합해 중국어 빈칸 2,947개 중 651개를 원문과 똑같이 복원했다. 두 인물의 역할을 맞바꾼 48쌍에서는 두 경우를 모두 올바르게 판단한 쌍이 없었다. [실험 결과와 실행 명령](../references/visual_inference_writer_result.md)
 
-[![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![그림 83. 두 지문, 같은 빈칸 문장과 두 답안 이미지](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 <!-- paired-writing-status:start -->
 512회 업데이트한 여백 제거 비교에서도 안정적인 베껴 쓰기는 달성하지 못했습니다. OCR 완전 일치는 훈련 6/32, 검증 10/32이며, 깨끗한 참조 이미지는 27/32, 28/32입니다. 원본 출력에는 글자 누락과 반복이 보입니다. 훈련 시간은 795.624초에서 287.182초로 줄었지만 언어 이해와 실용적인 품질에서의 효율성은 입증되지 않았습니다. [64개 원본 출력](../references/paired_padding_result.md).
@@ -68,21 +68,25 @@
 
 # Imagized Language Model (ILM)
 
+글자의 비율과 획 굵기를 바꿔 학습하자 하나민 글꼴로 제시한 중국어 독해 문제 394개 중 정답이 15개에서 43개로 늘었습니다. 지문당 두 문제를 모두 맞힌 경우는 197개 중 6개였습니다. 별도의 XQuAD 평가에서는 같은 글꼴로 제시한 227개 지문 중 두 문제를 모두 맞힌 사례가 없었습니다. [결과와 실제 답변](../references/stroke_scale_result.md)
+
+[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=137)
+
 학습에서 제외한 하나민(HanaMin) 글꼴로 새 중국어 지문을 제시했을 때 이미지 모델은 394문제 중 15문제에 정확히 답했습니다. 여러 글꼴로 추가 학습만 한 모델은 3문제를 맞혔습니다. 197개 지문 중 두 문제를 모두 맞힌 지문은 0개였습니다. 오프라인 자형 목록에서는 中과 같은 표제자의 고대 자형을 요청해 이미지로 답을 받을 수 있습니다. [모델과 자형 목록 사용법](../models/typeface_writer/README.md)
 
-[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=136)
 
 중국어 지문 이미지 98개에 두 문제씩 제시했을 때 증류 모델은 196문제 중 72문제, 일반 학습 모델은 63문제에 정확히 답했습니다. 두 문제를 모두 맞힌 지문은 두 모델 모두 11개였습니다. 같은 내용을 텍스트로 받은 Qwen3-8B는 55개 지문에서 두 문제를 모두 맞혔습니다. [실험 결과와 모델](../references/interval_teacher_result.md)
 
-[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=135)
 
 하나의 모델이 글자 이미지를 읽고 중국어 독해 359문제 중 114문제에 정확히 답했습니다. 도판에 있는 言의 갑골문과 금문 글꼴도 요청한 순서대로 출력했습니다. 별도의 지문 128개에 두 문제씩 제시했을 때 두 답을 모두 맞힌 지문은 15개였고, 정답 구간을 추출하는 모델은 49개였습니다. [이미지 모델 실행 방법](../models/mixed_visual_answers/README.md)
 
-[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=134)
 
 한자 이미지를 읽는 모델은 연도를 바꾸고 질문을 세 가지 새로운 표현으로 제시했을 때, 단일 문단 64개 중 34개와 두 문단 48개 중 8개에서 모든 답에 정확한 인명과 연도를 썼다. 사람이 작성한 폭넓은 독해 문제 359개에서는 7개가 정답과 완전히 일치했다.
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=131)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=132)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
