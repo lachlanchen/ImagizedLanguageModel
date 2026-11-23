@@ -38,7 +38,7 @@ def starts(p,y):
     return [j for j,c in enumerate(p) if c==y[0] and p[j:j+n]==y]
 
 
-def objective(model,read,out,pairs,answers,uniform):
+def objective(model,read,out,pairs,answers,uniform,additional_loss=None):
     device=out.device
     sequences=[]
     offsets=[]
@@ -67,7 +67,8 @@ def objective(model,read,out,pairs,answers,uniform):
     same=(targets[:,:,None]==source[:,None,:]) & valid[:,None,:]
     att=pointer.log_softmax(-1)
     copy=att.masked_fill(~same,-1e30).logsumexp(-1)[loss_mask]
-    gate=gate.squeeze(-1)[loss_mask]
+    model_gate=gate.squeeze(-1)
+    gate=model_gate[loss_mask]
     likelihood=torch.logaddexp(gen+F.logsigmoid(gate),copy+F.logsigmoid(-gate))
     loss=-likelihood.mean()
     which=[i for i,idx in enumerate(exact_starts) if idx]
@@ -76,6 +77,9 @@ def objective(model,read,out,pairs,answers,uniform):
         for i in which: aligned[i,exact_starts[i]]=True
         aux=-att[which,0].masked_fill(~aligned[which],-1e30).logsumexp(-1).mean()
         loss=loss+.35*aux
+    if additional_loss is not None:
+        stop_logp = pointer.new_zeros(loss_mask.shape).masked_scatter(loss_mask,vocab[:,0])
+        loss = loss + additional_loss(pointer, model_gate, stop_logp, source, valid, targets, loss_mask)
     return loss, -likelihood.detach().sum(),len(labels)
 
 

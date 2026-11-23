@@ -82,18 +82,22 @@ def materialize(face):
 def fit(folder):
     folder.mkdir(exist_ok=False, parents=True)
     torch.set_num_threads(2)
-    torch.manual_seed(SEED)
     base = VARIED / "page"
     original = json.loads((VARIED / "page_fit.json").read_text())["weights"]
+    rows = materialize(Face((FONTS[0], 2)))
+    fit_rows(folder, base, original, rows, SEED)
+
+
+def fit_rows(folder, base, original, rows, seed, supervision=None):
+    torch.manual_seed(seed)
     if any(sha(base / n) != h for n, h in original.items()):
         raise ValueError("Parent writer changed")
     model = PointingCausalWriter.restore(base, "cuda")
     model.writer.requires_grad_(False)
     model.writer.body.h[-4:].requires_grad_(True)
     model.writer.body.ln_f.requires_grad_(True)
-    rows = materialize(Face((FONTS[0], 2)))
     report = dict(
-        seed=SEED,
+        seed=seed,
         groups=dict(Counter(r.task for r in rows)),
         rows=len(rows),
         image_digest=digest(rows),
@@ -115,7 +119,7 @@ def fit(folder):
     total = count = steps = 0
     start = monotonic()
     torch.cuda.reset_peak_memory_stats()
-    rng = np.random.default_rng(SEED)
+    rng = np.random.default_rng(seed)
     for pool in np.array_split(rng.permutation(len(rows)), max(1, len(rows) // 512)):
         pool = sorted(pool, key=lambda i: len(rows[i].p) + 2 * len(rows[i].q))
         for ids in np.array_split(pool, int(np.ceil(len(pool) / 20))):
@@ -127,6 +131,7 @@ def fit(folder):
                     [pairs[i] for i in ids],
                     [answers[i] for i in ids],
                     False,
+                    supervision(ids) if supervision is not None else None,
                 )
             if not torch.isfinite(loss) or loss.item() > 100:
                 raise ValueError("Unreachable or non-finite physical answer")
