@@ -35,16 +35,18 @@ def shelf(model):
 
 
 @torch.inference_mode()
-def run():
-    folder = WORK / "serving"
+def run(
+    work=WORK, public=PUBLIC, pages_path=PAGES, case_loader=reserved, arms=("first", "later")
+):
+    folder = work / "serving"
     folder.mkdir(exist_ok=True)
-    pages = json.loads(PAGES.read_text())
-    groups = reserved()
+    pages = json.loads(pages_path.read_text())
+    groups = case_loader()
     report, correct = {}, {}
-    for arm in ("first", "later"):
-        model = PreparedGlyphResponder(WORK / arm / "page", "cuda")
+    for arm in arms:
+        model = PreparedGlyphResponder(work / arm / "page", "cuda")
         report[arm + "_shelf"] = shelf(model)
-        if arm == "first":
+        if arm == arms[0]:
             for lang in ("zh", "en"):
                 cases = groups["fresh_" + lang]
                 batch = [(tensor(c.p), tensor(c.q)) for c in cases]
@@ -55,7 +57,7 @@ def run():
                 torch.cuda.synchronize()
                 elapsed = monotonic() - start
                 ys, ends = load_streams(
-                    WORK / "evaluation/first" / ("fresh_" + lang + ".npz")
+                    work / "evaluation" / arm / ("fresh_" + lang + ".npz")
                 )
                 flags, different = [], 0
                 for c, (im, stop), y, end in zip(
@@ -139,7 +141,7 @@ def run():
             r"offloaded (\d+/\d+) layers to GPU", (folder / "server.log").read_text()
         ),
     )
-    record(PUBLIC / "serving.json", report)
+    record(public / "serving.json", report)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,3 @@
+# Whole-answer preference supervision on six literary works
+
+Extend the existing manuscript with a matched one-GPU comparison of positive-only gradients and gradients through both stopped replies. The abstract, introduction, results and methods will distinguish train-pair ordering from free reading on separate works. Figure 106 will contain an editable chart, an editable table and literal question, reply and reference pixels. Select illustrative replies by fixed source order and report both successes and misses. Preserve Figure 105 and all earlier images. Verify the reading, review and redlined editions and the local Nutstore delivery from the compiled files.

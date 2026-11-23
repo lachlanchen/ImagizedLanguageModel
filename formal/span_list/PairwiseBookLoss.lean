@@ -31,6 +31,28 @@ theorem empirical (scale : Nat) (rivals : List Nat) :
 /-- Winning a fixed comparison can coexist with an incorrect free choice. -/
 example : (3:Nat) > 2 ∧ (4:Nat) > 3 := by decide
 
+/-- Finite search certificate: a bound on the total unexamined mass can
+certify a complete-answer winner even if only a few rivals were scored. -/
+theorem member_le_mass {q : Nat} {xs : List Nat} (hq : q ∈ xs) : q ≤ mass xs := by
+  induction xs with
+  | nil => simp at hq
+  | cons a xs ih =>
+    rcases List.mem_cons.mp hq with h | h
+    · subst a
+      simp [mass]
+    · have bound := ih h
+      simp only [mass]
+      omega
+
+theorem dominates_all (gold : Nat) (seen unseen : List Nat)
+    (wins : ∀ q ∈ seen, q < gold) (tail : mass unseen < gold) :
+    ∀ q ∈ seen ++ unseen, q < gold := by
+  intro q hq
+  rcases List.mem_append.mp hq with h | h
+  · exact wins q h
+  · exact Nat.lt_of_le_of_lt (member_le_mass h) tail
+
+#print axioms dominates_all
 #print axioms reversed_iff
 #print axioms empirical
 end PairwiseBookLoss
