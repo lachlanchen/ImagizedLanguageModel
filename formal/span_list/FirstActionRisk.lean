@@ -53,6 +53,19 @@ theorem gain_iff (a b : List (Bool × Bool)) :
   have := partition b
   omega
 
+/-- For a finite set of replies, scores can be represented by ordinal ranks
+without changing their order. One emitted reply strictly above every
+acceptable reply rules out every acceptable sequence as a global maximum. -/
+theorem dominated_reference_cannot_win {Reply : Type} (score : Reply → Nat)
+    (accepted : Reply → Prop) (emitted chosen : Reply)
+    (above : ∀ r, accepted r → score r < score emitted)
+    (maximizes : ∀ r, score r ≤ score chosen) : ¬ accepted chosen := by
+  intro h
+  have low := above chosen h
+  have high := maximizes emitted
+  omega
+
+#print axioms dominated_reference_cannot_win
 #print axioms wrong_cost
 #print axioms gain_iff
 end FirstActionRisk

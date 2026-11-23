@@ -1,4 +1,5 @@
 """Authenticate and render the four separately sourced book reading evaluations."""
+
 import argparse
 from functools import lru_cache
 import json
@@ -26,16 +27,20 @@ def paragraphs(path):
     else:
         parts = re.split(r"\n\s*\n", raw)
     joined = "\n".join("".join(p.split()) for p in parts)
-    return subprocess.check_output(
-        ["uconv", "-x", "Traditional-Simplified"], input=joined.encode()
-    ).decode().split("\n")
+    return (
+        subprocess.check_output(
+            ["uconv", "-x", "Traditional-Simplified"], input=joined.encode()
+        )
+        .decode()
+        .split("\n")
+    )
 
 
 def passage(source):
     short = source[:210]
     ends = [m.end() for m in re.finditer("[。！？；]", short)]
     if len(source) > 210 and ends and ends[-1] > 68:
-        short = short[:ends[-1]]
+        short = short[: ends[-1]]
     return short.replace("\u200b", "")
 
 
@@ -72,10 +77,17 @@ def verify(library):
         assert opposite(*v["questions"]), k
         strings = [v["page"]]
         for q in v["questions"]:
-            assert all(r and r in v["page"] for r in q["refs"]), (k,q)
+            assert all(r and r in v["page"] for r in q["refs"]), (k, q)
             strings.extend([q["en"], q["zh"], *q["refs"]])
-        missing = sorted({c for s in strings for c in s if not c.isspace() and
-                          (ord(c) not in face.coverage or not any(face.cell(c)))})
+        missing = sorted(
+            {
+                c
+                for s in strings
+                for c in s
+                if not c.isspace()
+                and (ord(c) not in face.coverage or not any(face.cell(c)))
+            }
+        )
         if missing:
             excluded[k] = missing
         else:
@@ -84,16 +96,29 @@ def verify(library):
     # Sampling training starts at stride 16 guarantees detection of any
     # contiguous aligned match of 47 or more glyphs using width-32 windows.
     width = 32 * 128
-    fresh = {r.p[i:i+width] for r in groups["fresh_zh"][::2]
-             for i in range(0, len(r.p)-width+1, 128)}
+    fresh = {
+        r.p[i : i + width]
+        for r in groups["fresh_zh"][::2]
+        for i in range(0, len(r.p) - width + 1, 128)
+    }
     rows = load_rows() + novel_rows("bilingual")[0]
     train = {r.p for r in rows}
     for page in train:
-        if any(page[i:i+width] in fresh for i in range(0,len(page)-width+1,16*128)):
+        if any(
+            page[i : i + width] in fresh
+            for i in range(0, len(page) - width + 1, 16 * 128)
+        ):
             raise ValueError("Overlapping book and fit passages")
-    evidence = dict(pages_sha256=sha(PAGES), eligible=eligible, missing_glyphs=excluded,
-                    proposed=len(pages), trained_rows=len(rows), unique_fit_pages=len(train),
-                    queried_windows=len(fresh), overlap_at_least_47_cells=False)
+    evidence = dict(
+        pages_sha256=sha(PAGES),
+        eligible=eligible,
+        missing_glyphs=excluded,
+        proposed=len(pages),
+        trained_rows=len(rows),
+        unique_fit_pages=len(train),
+        queried_windows=len(fresh),
+        overlap_at_least_47_cells=False,
+    )
     if RESERVATION.exists() and json.loads(RESERVATION.read_text()) != evidence:
         raise ValueError("Reservation changed")
     record(RESERVATION, evidence)

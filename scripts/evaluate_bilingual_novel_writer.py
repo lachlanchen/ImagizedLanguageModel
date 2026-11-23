@@ -133,6 +133,52 @@ def recount(groups, folder):
 
 
 @torch.inference_mode()
+def generate_archives(groups, base, folder):
+    keys = sorted(
+        {(c.p, c.q) for rows in groups.values() for c in rows},
+        key=lambda t: (len(t[0]) + len(t[1]) * 2, t),
+    )
+    weights = json.loads((base.parent / "page_fit.json").read_text())["weights"]
+    assert all(sha(base / k) == h for k, h in weights.items())
+    receipt = folder / "archives.json"
+    if receipt.exists():
+        archived = json.loads(receipt.read_text())
+        assert weights == archived["weights"] and all(
+            sha(folder / k) == h for k, h in archived["files"].items()
+        )
+    else:
+        folder.mkdir(exist_ok=True, parents=True)
+        state = PreparedGlyphResponder(base, "cuda")
+        started = monotonic()
+        outputs = {}
+        for i in range(0, len(keys), 16):
+            batch = keys[i : i + 16]
+            predictions = state.answer_many(
+                [(tensor(p), tensor(q)) for p, q in batch]
+            )
+            outputs.update(
+                (k, (im.numpy().tobytes(), s))
+                for k, (im, s) in zip(batch, predictions, strict=True)
+            )
+        hashes = {}
+        for name, cases in groups.items():
+            ys, ends = zip(*(outputs[c.p, c.q] for c in cases), strict=True)
+            dest = folder / (name + ".npz")
+            store_streams(dest, ys, ends)
+            hashes[dest.name] = sha(dest)
+        record(
+            receipt,
+            dict(
+                weights=weights,
+                files=hashes,
+                seconds=monotonic() - started,
+                unique=len(keys),
+            ),
+        )
+        del state, outputs
+
+
+@torch.inference_mode()
 def evaluate():
     groups = corpus()
     for prefix in ("book", "xquad_regular", "xquad_hana"):
@@ -141,53 +187,12 @@ def evaluate():
             overlapping_images(a, b) for a, b in zip(rows[::2], rows[1::2], strict=True)
         ):
             raise ValueError("Overlapping physical answer sets in " + prefix)
-    keys = sorted(
-        {(c.p, c.q) for rows in groups.values() for c in rows},
-        key=lambda t: (len(t[0]) + len(t[1]) * 2, t),
-    )
     scores = {}
     passes = {}
     for arm in ("parent", *ARMS):
         base = PARENT / "mapped/page" if arm == "parent" else WORK / arm / "page"
-        weights = json.loads((base.parent / "page_fit.json").read_text())["weights"]
-        assert all(sha(base / k) == h for k, h in weights.items())
         folder = WORK / "evaluation" / arm
-        receipt = folder / "archives.json"
-        if receipt.exists():
-            archived = json.loads(receipt.read_text())
-            assert weights == archived["weights"] and all(
-                sha(folder / k) == h for k, h in archived["files"].items()
-            )
-        else:
-            folder.mkdir(exist_ok=True, parents=True)
-            state = PreparedGlyphResponder(base, "cuda")
-            started = monotonic()
-            outputs = {}
-            for i in range(0, len(keys), 16):
-                batch = keys[i : i + 16]
-                predictions = state.answer_many(
-                    [(tensor(p), tensor(q)) for p, q in batch]
-                )
-                outputs.update(
-                    (k, (im.numpy().tobytes(), s))
-                    for k, (im, s) in zip(batch, predictions, strict=True)
-                )
-            hashes = {}
-            for name, cases in groups.items():
-                ys, ends = zip(*(outputs[c.p, c.q] for c in cases), strict=True)
-                dest = folder / (name + ".npz")
-                store_streams(dest, ys, ends)
-                hashes[dest.name] = sha(dest)
-            record(
-                receipt,
-                dict(
-                    weights=weights,
-                    files=hashes,
-                    seconds=monotonic() - started,
-                    unique=len(keys),
-                ),
-            )
-            del state, outputs
+        generate_archives(groups, base, folder)
         scores[arm], passes[arm] = recount(groups, folder)
         print(
             arm,
