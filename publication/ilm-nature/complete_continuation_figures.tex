@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_bilingual_novel_article.py.
+% Literal captions copied from their source inputs by build_first_glyph_book_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -850,4 +850,11 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{Bilingual question supervision on depicted Chinese passages.}
 \textbf{a,} Exact stopped image replies to Chinese and English questions about Chinese novel passages from BiPaR and encyclopaedic passages from XQuAD. Bars show percentages for the parent and three fine-tuned writers. \textbf{b,} Complete passage counts require four answers for bilingual evaluations, both questions for CMRC and both requested orders for historical cards. \textbf{c,} Original question, reply and reference pixels from evaluation in source order. BiPaR questions and reference material are adapted from Jing, Xiong and Yan (2019) under CC BY-NC 4.0.}
 \label{fig:bilingual-novel}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_105_first_glyph_book.png}
+\caption{\textbf{First-glyph supervision and complete answers on independent literary works.}
+\textbf{a,} Correct initial glyph and exact stopped reply frequencies for 68 Chinese and 68 English requests. Each question refers to a Chinese passage. Bars compare ordinary bilingual supervision, additional supervision on a later action and additional supervision on the first action. \textbf{b,} Literary works, BiPaR and XQuAD require four correct answers per passage. CMRC and the historical headwords require two. \textbf{c,} Unmodified glyph pixels from the first exact Chinese reply and the first missed English reply in passage order for the first-action writer. Excerpts reproduce cells from the input around an accepted answer. The full passages were available at inference.}
+\label{fig:first-glyph-book}
 \end{figure*}
