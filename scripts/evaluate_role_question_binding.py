@@ -5,6 +5,7 @@ from collections import defaultdict
 from statistics import median
 from time import monotonic
 
+import numpy as np
 import torch
 
 from ilm.visual_lm.book_participant_reader import InkBank, group_spans, best_strip, padded
@@ -61,12 +62,11 @@ def scores(detail):
 
 
 @torch.inference_mode()
-def evaluate(arm):
-    face=Face(FACES[0]);items=list(populations());answers=[];times=[]
+def decode(arm,items,work,file=None,expected=None,measure_margin=False):
+    face=Face(FACES[0]);answers=[];times=[];margins=[]
     if arm=="text":
         # Use the same text model and decoding prompt as the earlier novel reference.
-        items=[x for x in items if x["group"]=="classical"]
-        with local_teacher("qwen3:8b-q8_0",WORK) as (request,weights,_):
+        with local_teacher("qwen3:8b-q8_0",work) as (request,weights,_):
             def ask(p,q):
                 return request("根据摘录回答问题。只输出原文中指代这个人的最短完整词语，保留原文汉字，不要解释或加标点。",
                     dict(role="user",content=p+"\n"+q),think=False,options=dict(temperature=0,seed=241127,num_ctx=2048,num_predict=30))
@@ -78,11 +78,8 @@ def evaluate(arm):
             energy=consumed(first,snapshot())
     else:
         bank=InkBank()
-        model_arm="aligned" if arm=="without_question" else arm
-        file=WEIGHTS if arm=="original" else WORK/model_arm/"reader.safetensors"
         weights=sha(file)
-        expected=read(PUBLIC/("corpus.json" if arm=="original" else model_arm+"_fit.json"))
-        assert weights==expected["parent_weights" if arm=="original" else "weights"]
+        assert weights==expected
         net=restore(file,"cuda")
         pages=[bank.encode(face(r["page"])) for r in items]
         qs=[bank.encode(face(("誰？" if r["lang"]=="zh" else "Who?") if arm=="without_question" else r["question"])) for r in items]
@@ -91,10 +88,15 @@ def evaluate(arm):
         last_page=groups=None
         for i in range(0,len(items),24):
             t=monotonic();ps=pages[i:i+24];z=net(pixels,padded(ps,"cuda"),padded(qs[i:i+24],"cuda")).cpu().numpy()
-            for p,logits in zip(ps,z,strict=True):
+            for j,(p,logits) in enumerate(zip(ps,z,strict=True)):
                 if last_page!=p:
                     groups=group_spans(p);last_page=p
                 emitted=best_strip(logits[:len(p)],groups)
+                if measure_margin:
+                    item=items[i+j]
+                    flat=logits[:len(p)].flatten().astype(np.float64)
+                    values=[np.logaddexp.reduce(flat[groups[tuple(bank.encode(face(item[k]))) ]]) for k in ("answer","other")]
+                    margins.append(float(values[0]-values[1]))
                 answers.append((b"".join(bank.cells[k] for k in emitted).hex(),True))
             times.append(monotonic()-t)
         energy=consumed(first,snapshot())
@@ -104,9 +106,22 @@ def evaluate(arm):
         def label(a):return face(a).hex() if physical else a
         detail.append(dict(**{k:item[k] for k in ("group","key","world","lang","h")},reply=reply,ended=ended,
                            correct=ended and reply==label(item["answer"]),rival=ended and reply==label(item["other"])))
+    if margins:
+        for r,m in zip(detail,margins,strict=True):
+            r["source_margin"]=m
+    cost=dict(weights=weights,energy=energy,elapsed_batches=sum(times),median_batch_seconds=median(times),maximum_batch=1 if arm=="text" else 24)
+    return detail,cost
+
+
+def evaluate(arm):
+    items=list(populations())
+    if arm=="text":items=[x for x in items if x["group"]=="classical"]
+    model_arm="aligned" if arm=="without_question" else arm
+    file=WEIGHTS if arm=="original" else WORK/model_arm/"reader.safetensors"
+    expected=None if arm=="text" else (read(PUBLIC/"corpus.json")["parent_weights"] if arm=="original" else read(PUBLIC/(model_arm+"_fit.json"))["weights"])
+    detail,cost=decode(arm,items,WORK,file,expected)
     path=WORK/(arm+"_responses.json");record(path,detail)
-    record(PUBLIC/(arm+"_scores.json"),dict(counts=scores(detail),weights=weights,response_sha=sha(path),energy=energy,
-                                        elapsed_batches=sum(times),median_batch_seconds=median(times),maximum_batch=1 if arm=="text" else 24))
+    record(PUBLIC/(arm+"_scores.json"),dict(counts=scores(detail),response_sha=sha(path),**cost))
 
 
 if __name__=="__main__":
