@@ -54,9 +54,10 @@ def cmrc(split):
 
 
 def drcd(face, used):
-    path=ROOT/"data/raw/drcd/DRCD_test.json"
+    from scripts.span_reservation import development_path,reservation
+    path=development_path()
     articles=json.loads(path.read_text())["data"]
-    pars=[p for art in articles for p in art["paragraphs"]]
+    pars=list(reservation().filter_development(articles))
     rows=[]
     for i in np.random.default_rng(15322).permutation(len(pars)):
         par=pars[i]

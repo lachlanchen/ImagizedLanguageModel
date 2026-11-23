@@ -1,5 +1,7 @@
 # Reading a pictured fact as a subject, relation and object
 
+**Source correction, 24 November 2026.** Later record checks established that the official DRCD test split was already reserved. The affected traditional-script evaluations describe observed outputs on exposed material. [Exposure audit and replacement evaluation](drcd_source_exposure_correction.md)
+
 On 48 human-written Chinese questions the visual reader and its induced statement writer produced **33 complete correct sentences**, compared with five under disrupted supervision and three for the preceding evidence-conditioned writer. It returned the reference object on 43/48 as a short answer. The 48 were previously used to diagnose the old system. A second evaluation used 1,200 separate DuIE development passages with generated questions in wording withheld from the new fit. There the complete count was 841. Each returned subject and object came from physical pixels in the passage. [Complete component scores](evidence/role_binding_20261123/results.json)
 
 | Source and question | Cases | Subject | Relation | Object | Complete statement | Disrupted complete |

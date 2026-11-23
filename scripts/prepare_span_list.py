@@ -18,6 +18,8 @@ SEED = 241196
 
 
 def materialize():
+    if (PUBLIC/"corpus.json").exists():
+        raise FileExistsError("Archived comparison. Use scripts.prepare_screened_span_list for new fits.")
     rng = random.Random(SEED)
     face = Face((FONTS[0], 2))
     old = rows("training") + rows("held") + read("paired") + read("new")
@@ -128,7 +130,8 @@ def split(name):
         != json.loads((PUBLIC / "corpus.json").read_text())["splits"][name]["sha256"]
     ):
         raise ValueError("Data changed: " + name)
-    return json.loads(path.read_text())
+    from scripts.span_reservation import screened
+    return screened(json.loads(path.read_text()))
 
 
 if __name__ == "__main__":

@@ -38,12 +38,13 @@ def model():
     )
 
 
-def records(split):
+def records(split, *, eligible_only=False):
+    from scripts.span_reservation import screened
     path = CACHE / (split + ".json")
     entry = json.loads((PUBLIC / "corpus.json").read_text())["splits"][split]
     if sha(path) != entry["sha256"]:
         raise ValueError(f"{split} records changed")
-    return json.loads(path.read_text())
+    return screened(json.loads(path.read_text()), eligible_only=eligible_only)
 
 
 def collect(reader, face, items):

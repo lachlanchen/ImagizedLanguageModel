@@ -1,5 +1,7 @@
 # Which part of the question identifies the composer?
 
+**Source correction, 24 November 2026.** Later record checks established that the official DRCD test split was already reserved. The affected traditional-script evaluations describe observed outputs on exposed material. [Exposure audit and replacement evaluation](drcd_source_exposure_correction.md)
+
 Given a pictured song credit and the question “《秋潮》的作曲人是谁？”, the original reader selected the correct person but described him as the producer. The updated model writes **沈河是《秋潮》的作曲人。** It also writes the subject-first sentence when requested. The song exposed the error and motivated this study. A separate song with exchanged names tests whether the change transfers. [Inputs and generated answers](evidence/pictured_relation_20261123/songs.json)
 
 ![Original generated image of the corrected object-first answer](evidence/pictured_relation_20261123/song_0_updated_object.png)

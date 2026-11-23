@@ -14,6 +14,12 @@ work unit. Use the goal for current acceptance criteria and the private handoff
 for verified live ownership. Historical result files are evidence, not current
 scheduling instructions.
 
+The official DRCD test pool is protected and its earlier untouched status was
+lost. See `references/drcd_source_exposure_correction.md`. Use the official
+training/development splits with `scripts/span_reservation.py` for new work.
+Keep original receipts and do not rescore cached records from the reserved
+test file. Historical mixed cohorts are unsuitable as independent confirmation.
+
 The full continuation-only trial is complete: 13,766 sequences, 41,298 updates,
 6,108,741 scheduled target positions and all 732 prescribed output streams.
 All 183 opaque boards and 96 visible normal-book prefixes have actual review

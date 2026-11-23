@@ -17,7 +17,7 @@ SOURCES = {
         "data/raw/cmrc2018/cmrc2018_train.json",
         "data/raw/cmrc2018/cmrc2018_dev.json",
     ),
-    "drcd": ("data/raw/drcd/DRCD_training.json", "data/raw/drcd/DRCD_test.json"),
+    "drcd": ("data/raw/drcd/DRCD_training.json", "data/raw/drcd/DRCD_dev.json"),
 }
 
 
@@ -26,11 +26,15 @@ def digest(value):
 
 
 def main():
+    from scripts.span_reservation import reservation
+    if (PUBLIC / "corpus.json").exists():
+        raise FileExistsError("Preserve the original span-choice corpus")
+    guard=reservation()
     CACHE.mkdir(exist_ok=True)
     PUBLIC.mkdir(parents=True, exist_ok=True)
     face = Face((FONTS[0], 2))
     rng = random.Random(SEED)
-    old = rows("training") + rows("held")
+    old = rows("training",eligible_only=True) + rows("held",eligible_only=True)
     blocked = {simplify(v["p"][:416]) for v in old}
     used = json.loads((WORK / "transfer_questions.json").read_text())
     used_ids = {v["key"] for v in used}
@@ -42,13 +46,15 @@ def main():
             raw = (ROOT / path).read_bytes()
             files[path] = sha256(raw).hexdigest()
             paras = [p for a in json.loads(raw)["data"] for p in a["paragraphs"]]
+            if group=="drcd":
+                paras=list(guard.filter_development(json.loads(raw)["data"]))
             rng.shuffle(paras)
             counts = Counter()
             quotas = [("fresh", 192)] if idx else [("validation", 256), ("train", 3500)]
             for para in paras:
                 page = para["context"][:416]
                 key = simplify(page)
-                if key in blocked or any(x["id"] in used_ids for x in para["qas"]):
+                if guard.overlaps(page) or key in blocked or any(x["id"] in used_ids for x in para["qas"]):
                     continue
                 if any(not c.isspace() and ord(c) not in face.coverage for c in page):
                     continue

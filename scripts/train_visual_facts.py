@@ -15,11 +15,12 @@ from scripts.evaluate_pointing_causal_writer import READER
 from scripts.prepare_visual_facts import Face,FONTS,WORK,PUBLIC,ROOT,RELATIONS,SEED,statement,write_json
 
 
-def rows(split):
+def rows(split, *, eligible_only=False):
+    from scripts.span_reservation import screened
     file=WORK/(split+".jsonl")
     expected=json.loads((PUBLIC/"corpus.json").read_text())["sha256"][split]
     if hashlib.sha256(file.read_bytes()).hexdigest()!=expected:raise ValueError("Changed split")
-    return [json.loads(line) for line in file.read_text().splitlines()]
+    return screened([json.loads(line) for line in file.read_text().splitlines()], eligible_only=eligible_only)
 
 
 def visual_cache(split,data,face,reader):

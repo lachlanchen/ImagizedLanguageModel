@@ -1,5 +1,7 @@
 # Which person did the pictured question ask about?
 
+**Source correction, 24 November 2026.** Later record checks established that the official DRCD test split was already reserved. The affected traditional-script evaluations describe observed outputs on exposed material. [Exposure audit and replacement evaluation](drcd_source_exposure_correction.md)
+
 The passage says **新曲《松窗》由周至作词，苏恬作曲。** Asked for the composer, the previous system credited the lyricist. A learned span reader now emits **苏恬是《松窗》的作曲人。** Both word orders are correct across all four person–role combinations on that song. The song was already known to expose the bug. The independent evidence comes from 128 separate annotated passages and 48 additional constructed credits. [Actual output](evidence/participant_margin_20261123/song_matched.png) · [Registered comparison](participant_margin_protocol.md)
 
 | Every generated answer correct | Inputs per source | Previous | Randomized paired labels | Matched |

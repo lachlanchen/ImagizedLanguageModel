@@ -19,15 +19,17 @@ from scripts.train_pointing_causal_writer import sha
 
 @torch.inference_mode()
 def probe(archive_only=False):
+    from scripts.span_reservation import reservation
+    guard=reservation()
     model=BoundFactReader(READER,WORK/"genuine","cuda");face=Face((FONTS[0],2))
     exclude={simplify(x["p"]) for split in ("training","held") for x in rows(split)}
     stats={};ledger=[]
-    sources=(("cmrc","data/raw/cmrc2018/cmrc2018_dev.json"),("drcd","data/raw/drcd/DRCD_test.json"))
+    sources=(("cmrc","data/raw/cmrc2018/cmrc2018_dev.json"),("drcd","data/raw/drcd/DRCD_dev.json"))
     for name,f in (() if archive_only else sources):
         rng=random.Random(SEED+777)
         candidates=[]
         for article in json.loads((ROOT/f).read_text())["data"]:
-            for para in article["paragraphs"]:
+            for para in (guard.filter_development([article]) if name=="drcd" else article["paragraphs"]):
                 p=para["context"][:416]
                 if simplify(p) in exclude:continue
                 for q in para["qas"]:

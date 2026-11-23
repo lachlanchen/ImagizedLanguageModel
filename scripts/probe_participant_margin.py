@@ -26,11 +26,14 @@ from scripts.train_visual_facts import READER
 
 def broad_cases(face):
     ledger = json.loads((WORK / "transfer_questions.json").read_text())
+    from scripts.span_reservation import reservation
+    if any(c["group"]=="drcd" and c["key"] in reservation().by_question for c in ledger):
+        raise ValueError("Archived transfer questions include the protected DRCD split")
     need = {(c["group"], c["key"]) for c in ledger}
     result = {}
     for group, file in [
         ("cmrc", "data/raw/cmrc2018/cmrc2018_dev.json"),
-        ("drcd", "data/raw/drcd/DRCD_test.json"),
+        ("drcd", "data/raw/drcd/DRCD_dev.json"),
     ]:
         for article in json.loads((ROOT / file).read_text())["data"]:
             for para in article["paragraphs"]:

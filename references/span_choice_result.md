@@ -1,5 +1,7 @@
 # Choosing answer images on Chinese reading questions
 
+**Source correction, 24 November 2026.** Later record checks established that the official DRCD test split was already reserved. The affected traditional-script evaluations describe observed outputs on exposed material. [Exposure audit and replacement evaluation](drcd_source_exposure_correction.md)
+
 On 384 questions from previously excluded paragraphs, the learned selector returned 285 pixel-exact answers. The frozen generic reader also returned 285. They differed on six scored outcomes, with three gains and three losses (two-sided exact paired test, p = 1). The likelihood-only specialist returned 178 and a selector trained with shuffled answer labels returned 225. On the established exchange task, the specialist still gave more complete replies.
 
 | Test | Generic | Factual | Likelihood | Margin | Pooled |

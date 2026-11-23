@@ -1,5 +1,7 @@
 # Frozen evaluation-only Chinese source reservation
 
+**Source correction, 24 November 2026.** Later record checks established that the official DRCD test split was already reserved. The affected traditional-script evaluations describe observed outputs on exposed material. [Exposure audit and replacement evaluation](drcd_source_exposure_correction.md)
+
 A new unscored source pool is reserved before the running model's new outputs
 are inspected: 998 paired passages from377articles, containing3,485questions.
 Every surviving eligible group is retained. No question/reference strings were

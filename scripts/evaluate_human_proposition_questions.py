@@ -72,6 +72,9 @@ CHOICES={
 
 
 def cases():
+    from scripts.span_reservation import reservation
+    if any(line.split()[0] in reservation().by_question for line in CHOICES["drcd"].strip().splitlines()):
+        raise ValueError("Archived human questions include the protected DRCD split. Use screened eligible records.")
     rows=[];meta=[];sources={};skip=[]
     face=Face((FONTS[0],2))
     for name,block in CHOICES.items():
@@ -80,7 +83,7 @@ def cases():
             key,s,r=line.split()
             if name=="cmrc":key="DEV_"+key.replace("_","_QUERY_")
             chosen[key]=(s,r)
-        file=ROOT/("data/raw/cmrc2018/cmrc2018_dev.json" if name=="cmrc" else "data/raw/drcd/DRCD_test.json")
+        file=ROOT/("data/raw/cmrc2018/cmrc2018_dev.json" if name=="cmrc" else "data/raw/drcd/DRCD_dev.json")
         sources[name]=sha(file)
         found=set()
         for doc in json.loads(file.read_text())["data"]:
