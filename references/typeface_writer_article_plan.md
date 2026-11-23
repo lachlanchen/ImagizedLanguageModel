@@ -1,0 +1,3 @@
+# Cross-typeface manuscript revision
+
+Preserve the reading, review and cumulative-redline PDFs at 9de8647c and all earlier figures. Add the matched comparison to the Chinese reading results and methods, and update the abstract with its primary empirical outcome. Figure 102 should compare exact answers on paired passages and show original source and reply strips, with a failure visible alongside any gain. Compare the held font family, erasure, historical copying and open-answer controls. Verify the scores from the archived pixels, the editable chart and the three rendered editions before replacing the local Nutstore latest copies.
