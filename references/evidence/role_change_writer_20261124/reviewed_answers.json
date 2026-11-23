@@ -1,0 +1,1490 @@
+[
+  {
+    "key": "fresh-00/0/zh/0",
+    "page": "一封家书分两道工序。于澄没碰笔，只在信封口压下印章；孟霄把口述的话一字字写在纸上。",
+    "questions": [
+      "这封信由谁封口？",
+      "谁替人写了信？"
+    ],
+    "expected": "于澄封信，孟霄代笔。",
+    "answers": {
+      "previous": {
+        "text": "封口是封口，孟霄给封口工人写信，孟霄给封口工人写信。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "封口令的作用是在封口令下，于澄没碰笔，只在信封口压下印章。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "孟霄封口，孟霄把口述的话一字字写在纸上。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "于澄封口；孟霄替人写了信。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-00/0/en/0",
+    "page": "一封家书分两道工序。于澄没碰笔，只在信封口压下印章；孟霄把口述的话一字字写在纸上。",
+    "questions": [
+      "Who sealed the letter?",
+      "Who took the letter down from dictation?"
+    ],
+    "expected": "于澄封信，孟霄代笔。",
+    "answers": {
+      "previous": {
+        "text": "孟霄把口述的话一字字写在纸上，孟霄把口述的话一字字写在纸上。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "孟霄把口述的话一字字写在纸上，于澄没碰笔。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "孟霄把口述的话一字字写在纸上，孟霄把口述的话一字字写在纸上。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "于澄给信封盖了印章。孟霄把口述的话写在纸上。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-00/1/zh/0",
+    "page": "一封家书分两道工序。于澄把口述的话一字字写在纸上；孟霄没碰笔，只在信封口压下印章。",
+    "questions": [
+      "这封信由谁封口？",
+      "谁替人写了信？"
+    ],
+    "expected": "孟霄封信，于澄代笔。",
+    "answers": {
+      "previous": {
+        "text": "封口是一封家书分两道工序，于澄把口述的话一字字写在纸上。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "封口令的作用是口述，把口述的话一字字写在纸上。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "孟霄封口，孟霄没碰笔。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "这封信由孟霄封口。于澄替人写了信。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-00/1/en/0",
+    "page": "一封家书分两道工序。于澄把口述的话一字字写在纸上；孟霄没碰笔，只在信封口压下印章。",
+    "questions": [
+      "Who sealed the letter?",
+      "Who took the letter down from dictation?"
+    ],
+    "expected": "孟霄封信，于澄代笔。",
+    "answers": {
+      "previous": {
+        "text": "孟霄在家书分两道工序。于澄把口述的话一字字写在纸上，孟霄在家书分两道工序。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "孟霄没碰笔，只在信封口压下印章。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "孟霄没碰笔，只在信封口压下印章。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "孟霄给信封盖了印章。于澄把口述的话写在纸上。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-01/0/zh/1",
+    "page": "林璐把旧照片逐一编号，方启按照编号把照片夹进相册。目录上的名字顺序与分工无关。",
+    "questions": [
+      "最后是谁把照片装进册子？",
+      "照片的编号是谁编的？"
+    ],
+    "expected": "方启装册，林璐编号。",
+    "answers": {
+      "previous": {
+        "text": "照片的编号是林璐编的，方启是照片的编号。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "林璐把旧照片逐一编号，方启按照编号把照片装进册子。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "林璐把旧照片逐一编号，方启按照编号把照片夹进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "林璐把照片编号。方启把照片装进册子。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-01/0/en/1",
+    "page": "林璐把旧照片逐一编号，方启按照编号把照片夹进相册。目录上的名字顺序与分工无关。",
+    "questions": [
+      "Who put them in the album?",
+      "Who numbered the photographs?"
+    ],
+    "expected": "方启装册，林璐编号。",
+    "answers": {
+      "previous": {
+        "text": "林璐把旧照片逐一编号，方启按照编号把照片夹进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "林璐把旧照片逐一编号，方启按照编号把照片夹进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "方启按着编号把照片夹进相册，林璐把旧照片逐一编号把照片夹进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "方启把照片夹进相册。林璐给照片编号。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-01/1/zh/1",
+    "page": "林璐按照编号把照片夹进相册，方启把旧照片逐一编号。目录上的名字顺序与分工无关。",
+    "questions": [
+      "最后是谁把照片装进册子？",
+      "照片的编号是谁编的？"
+    ],
+    "expected": "林璐装册，方启编号。",
+    "answers": {
+      "previous": {
+        "text": "照片的编号是林璐编的，方启把旧照片装进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "林璐的是方启，把旧照片塞进了册子。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "林璐的是方启，把照片装进册子的是林璐。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "林璐把照片装进册子。方启编了照片的编号。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-01/1/en/1",
+    "page": "林璐按照编号把照片夹进相册，方启把旧照片逐一编号。目录上的名字顺序与分工无关。",
+    "questions": [
+      "Who put them in the album?",
+      "Who numbered the photographs?"
+    ],
+    "expected": "林璐装册，方启编号。",
+    "answers": {
+      "previous": {
+        "text": "林璐按照编号把照片夹进相册，方启把旧照片夹进相册。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "林璐按照编号把照片夹进相册，方启把旧照片逐一编号。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "按照编号把照片夹进相册，方启把旧照片逐一编号。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "林璐把照片夹进相册。方启给旧照片编号。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-02/0/zh/0",
+    "page": "船离岸前，顾弦守在船头报出水深。齐陌在舵边听了才把船转向深水。",
+    "questions": [
+      "谁向同伴报告了水深？",
+      "是谁操纵船的方向？"
+    ],
+    "expected": "顾弦报水深，齐陌掌舵。",
+    "answers": {
+      "previous": {
+        "text": "顾弦向同伴报告了水深，顾弦向同伴报告了水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "向同伴报告了水深的是齐陌，守在船头的是顾弦。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "顾弦向同伴报告了水深，齐陌向同伴报告了水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "顾弦向同伴报告了水深。齐陌操纵船的方向。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-02/0/en/0",
+    "page": "船离岸前，顾弦守在船头报出水深。齐陌在舵边听了才把船转向深水。",
+    "questions": [
+      "Who called out the depth?",
+      "Who steered the boat?"
+    ],
+    "expected": "顾弦报水深，齐陌掌舵。",
+    "answers": {
+      "previous": {
+        "text": "顾弦守在船头报出水深，顾弦守在船头报出水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "顾弦守在船头，船离岸前。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "顾弦守在船头报出水深，齐陌在舵边听了才把船转向深水。",
+        "stopped": true,
+        "complete": true
+      },
+      "qwen": {
+        "text": "顾弦报出水深。齐陌把船转向深水。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-02/1/zh/0",
+    "page": "船离岸前，顾弦在舵边听了才把船转向深水。齐陌守在船头报出水深。",
+    "questions": [
+      "谁向同伴报告了水深？",
+      "是谁操纵船的方向？"
+    ],
+    "expected": "齐陌报水深，顾弦掌舵。",
+    "answers": {
+      "previous": {
+        "text": "齐陌向同伴报告了水深，顾弦向同伴报告了水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "向同伴报告了水深，齐陌向同伴报告了水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "顾弦向同伴报告了水深，齐陌守在船头。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "齐陌向同伴报告了水深。顾弦操纵船的方向。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-02/1/en/0",
+    "page": "船离岸前，顾弦在舵边听了才把船转向深水。齐陌守在船头报出水深。",
+    "questions": [
+      "Who called out the depth?",
+      "Who steered the boat?"
+    ],
+    "expected": "齐陌报水深，顾弦掌舵。",
+    "answers": {
+      "previous": {
+        "text": "顾弦在舵边听了才把船转向深水，顾弦在舵边听了才把船转向深水。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "顾弦在舵边听了才把船转向深水。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "顾弦在舵边听了才把船转向深水，齐陌守在船头报出水深。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "齐陌报出水深。顾弦转向深水。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-03/0/zh/1",
+    "page": "戏台后有两份散工。唐愉把字幕投到白布上，段秋躲在帘后替木偶说话。",
+    "questions": [
+      "木偶的声音是谁配的？",
+      "谁让观众看到了文字？"
+    ],
+    "expected": "段秋配音，唐愉投字幕。",
+    "answers": {
+      "previous": {
+        "text": "段秋配的声音是段秋配配的，段秋的声音是观众听到的。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "木偶的声音是段秋，躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "木偶的声音是段秋，躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "木偶的声音是段秋配的。唐愉让观众看到了文字。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-03/0/en/1",
+    "page": "戏台后有两份散工。唐愉把字幕投到白布上，段秋躲在帘后替木偶说话。",
+    "questions": [
+      "Who gave the puppet its voice?",
+      "Who projected the captions?"
+    ],
+    "expected": "段秋配音，唐愉投字幕。",
+    "answers": {
+      "previous": {
+        "text": "段秋躲在帘后替木偶说话，段秋躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "唐愉把字幕投到白布上，段秋躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "唐愉把字幕投到白布上，段秋躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "段秋给木偶说话。唐愉投射字幕。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-03/1/zh/1",
+    "page": "戏台后有两份散工。唐愉躲在帘后替木偶说话，段秋把字幕投到白布上。",
+    "questions": [
+      "木偶的声音是谁配的？",
+      "谁让观众看到了文字？"
+    ],
+    "expected": "唐愉配音，段秋投字幕。",
+    "answers": {
+      "previous": {
+        "text": "木偶的声音是唐愉配的，段秋的声音是观众看到了文字。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "木偶的声音是段秋，把字幕投到白布上。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "段秋配的声音是段秋，戏台后有两份散工。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "唐愉配了木偶的声音。段秋让观众看到了文字。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-03/1/en/1",
+    "page": "戏台后有两份散工。唐愉躲在帘后替木偶说话，段秋把字幕投到白布上。",
+    "questions": [
+      "Who gave the puppet its voice?",
+      "Who projected the captions?"
+    ],
+    "expected": "唐愉配音，段秋投字幕。",
+    "answers": {
+      "previous": {
+        "text": "段秋说话，段秋说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "唐愉躲在帘后替木偶说话，段秋把字幕投到白布上。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "戏台后有两份散工的身份证明，唐愉躲在帘后替木偶说话。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "唐愉给木偶提供了声音。段秋将字幕投射到白布上。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-04/0/zh/0",
+    "page": "头一夜，安乔看灯，苏宁听钟；第二夜二人对调，值班簿上照实记下了这次变动。",
+    "questions": [
+      "第二夜是谁看灯？",
+      "第二夜是谁听钟？"
+    ],
+    "expected": "苏宁看灯，安乔听钟。",
+    "answers": {
+      "previous": {
+        "text": "第二夜是安乔看灯，安乔看灯，安乔看钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "苏宁看灯，安乔听钟。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "看灯的是苏宁，听钟的是安乔。",
+        "stopped": true,
+        "complete": true
+      },
+      "qwen": {
+        "text": "第二夜是苏宁看灯。第二夜是安乔听钟。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-04/0/en/0",
+    "page": "头一夜，安乔看灯，苏宁听钟；第二夜二人对调，值班簿上照实记下了这次变动。",
+    "questions": [
+      "Who watched the lamp on the second night?",
+      "Who listened for the bell on the second night?"
+    ],
+    "expected": "苏宁看灯，安乔听钟。",
+    "answers": {
+      "previous": {
+        "text": "头一夜，安乔看灯，苏宁听钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "安乔看灯，苏宁听钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "苏宁听钟，安乔看灯。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "安乔在第二夜看了灯。苏宁在第二夜听了钟。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-04/1/zh/0",
+    "page": "头一夜，安乔看灯，苏宁听钟；第二夜二人照旧，值班簿上没有记下任何变动。",
+    "questions": [
+      "第二夜是谁看灯？",
+      "第二夜是谁听钟？"
+    ],
+    "expected": "安乔看灯，苏宁听钟。",
+    "answers": {
+      "previous": {
+        "text": "第二夜是安乔看灯，苏宁看钟，苏宁看灯，苏宁听钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "苏宁看灯，安乔听钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "看灯的是苏宁，听钟的是安乔。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "第二夜是安乔看灯。第二夜是苏宁听钟。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-04/1/en/0",
+    "page": "头一夜，安乔看灯，苏宁听钟；第二夜二人照旧，值班簿上没有记下任何变动。",
+    "questions": [
+      "Who watched the lamp on the second night?",
+      "Who listened for the bell on the second night?"
+    ],
+    "expected": "安乔看灯，苏宁听钟。",
+    "answers": {
+      "previous": {
+        "text": "头一夜，安乔看灯，苏宁听钟。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "安乔看灯，苏宁听钟。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "苏宁听钟，安乔看灯。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "安乔在第二夜继续看灯。苏宁在第二夜继续听钟。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-05/0/zh/1",
+    "page": "试排时，祁川演船夫，郭雨演旅客。首演沿用试排的角色，两人都穿着原来的衣服。",
+    "questions": [
+      "首演时谁扮旅客？",
+      "首演的船夫是谁演的？"
+    ],
+    "expected": "郭雨演旅客，祁川演船夫。",
+    "answers": {
+      "previous": {
+        "text": "旅客是郭雨，郭雨是郭雨。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "扮旅客的是祁川，演旅客的是郭雨。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "扮旅客的是郭雨，演旅客的是祁川。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "首演时郭雨扮旅客。首演的船夫是祁川演的。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-05/0/en/1",
+    "page": "试排时，祁川演船夫，郭雨演旅客。首演沿用试排的角色，两人都穿着原来的衣服。",
+    "questions": [
+      "Who played the traveller at the premiere?",
+      "Who played the boatman at the premiere?"
+    ],
+    "expected": "郭雨演旅客，祁川演船夫。",
+    "answers": {
+      "previous": {
+        "text": "郭雨演的是祁川演船夫，郭雨演的是祁川演船夫。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "祁川演船夫，郭雨演旅客。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "演唱者是祁川，作词人是郭雨。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "郭雨扮演了旅客。祁川扮演了船夫。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-05/1/zh/1",
+    "page": "试排时，祁川演船夫，郭雨演旅客。首演时两个角色互换，两人都穿上了对方的衣服。",
+    "questions": [
+      "首演时谁扮旅客？",
+      "首演的船夫是谁演的？"
+    ],
+    "expected": "祁川演旅客，郭雨演船夫。",
+    "answers": {
+      "previous": {
+        "text": "旅客是郭雨，郭雨是祁川。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "扮旅客的是祁川，演旅客的是郭雨。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "扮旅客的是郭雨，演旅客的是祁川。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "首演时郭雨扮旅客。首演的船夫是祁川演的。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-05/1/en/1",
+    "page": "试排时，祁川演船夫，郭雨演旅客。首演时两个角色互换，两人都穿上了对方的衣服。",
+    "questions": [
+      "Who played the traveller at the premiere?",
+      "Who played the boatman at the premiere?"
+    ],
+    "expected": "祁川演旅客，郭雨演船夫。",
+    "answers": {
+      "previous": {
+        "text": "郭雨演旅客，郭雨演旅客。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "祁川演船夫，郭雨演旅客。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "演员是郭雨，作曲人是郭雨。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "郭雨扮演了旅客。祁川扮演了船夫。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-06/0/zh/0",
+    "page": "年初，艾青守东门，杜茵守西门。直到年末，两人也没有换过岗。",
+    "questions": [
+      "到了年底谁守东门？",
+      "年底西门由谁看守？"
+    ],
+    "expected": "艾青守东门，杜茵守西门。",
+    "answers": {
+      "previous": {
+        "text": "年底西门由艾青守东门，杜茵守西门。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "守东门的是杜茵，守西门的是艾青。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "艾青守东门，杜茵守西门。",
+        "stopped": true,
+        "complete": true
+      },
+      "qwen": {
+        "text": "年初艾青守东门，年底艾青仍守东门。  \n年初杜茵守西门，年底杜茵仍守西门。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-06/0/en/0",
+    "page": "年初，艾青守东门，杜茵守西门。直到年末，两人也没有换过岗。",
+    "questions": [
+      "Who guarded the east gate at year end?",
+      "Who guarded the west gate at year end?"
+    ],
+    "expected": "艾青守东门，杜茵守西门。",
+    "answers": {
+      "previous": {
+        "text": "艾青守东门，杜茵守西门。",
+        "stopped": true,
+        "complete": true
+      },
+      "independent": {
+        "text": "艾青守东门，杜茵守西门。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "守东门的是杜茵，守东门的是艾青。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "年初，艾青守东门；年末，艾青仍守东门。  \n年初，杜茵守西门；年末，杜茵仍守西门。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-06/1/zh/0",
+    "page": "年初，艾青守东门，杜茵守西门。入秋之后，两人互换岗位，直到年末。",
+    "questions": [
+      "到了年底谁守东门？",
+      "年底西门由谁看守？"
+    ],
+    "expected": "杜茵守东门，艾青守西门。",
+    "answers": {
+      "previous": {
+        "text": "守东门由艾青守东门，艾青守西门。到了年底谁守东门？艾青守西门，艾青守西门。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "杜茵守东门，艾青守西门。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "艾青守东门，杜茵守西门。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "年初艾青守东门，杜茵守西门。  \n年底杜茵守东门，艾青守西门。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-06/1/en/0",
+    "page": "年初，艾青守东门，杜茵守西门。入秋之后，两人互换岗位，直到年末。",
+    "questions": [
+      "Who guarded the east gate at year end?",
+      "Who guarded the west gate at year end?"
+    ],
+    "expected": "杜茵守东门，艾青守西门。",
+    "answers": {
+      "previous": {
+        "text": "艾青守东门，艾青守东门。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "艾青守东门，杜茵守东门。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "守东门的是杜茵，守东门的是艾青。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "年初，艾青守东门；年末，杜茵守东门。  \n年初，杜茵守西门；年末，艾青守西门。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-07/0/zh/1",
+    "page": "上周的轮值表上，许澜买菜，魏蘅做饭。这周两人商量好交换差事，饭桌还是原来那张。",
+    "questions": [
+      "这周的饭是谁做的？",
+      "这周谁去买菜？"
+    ],
+    "expected": "许澜做饭，魏蘅买菜。",
+    "answers": {
+      "previous": {
+        "text": "许澜买菜，魏雨田做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "做菜的是魏雨，买菜的是许澜。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "做饭的是魏雨，买菜的是许澜。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "这周的饭是许澜做的。这周魏蘅去买菜。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-07/0/en/1",
+    "page": "上周的轮值表上，许澜买菜，魏蘅做饭。这周两人商量好交换差事，饭桌还是原来那张。",
+    "questions": [
+      "Who cooked this week?",
+      "Who bought groceries this week?"
+    ],
+    "expected": "许澜做饭，魏蘅买菜。",
+    "answers": {
+      "previous": {
+        "text": "许澜买菜，魏略许澜买菜。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "许澜买菜，魏蘅做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "许澜买菜，魏蘅做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "许澜做饭，魏蘅买菜。  \n魏蘅买菜，许澜做饭。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-07/1/zh/1",
+    "page": "上周的轮值表上，许澜买菜，魏蘅做饭。这周两人商量好照旧分工，饭桌还是原来那张。",
+    "questions": [
+      "这周的饭是谁做的？",
+      "这周谁去买菜？"
+    ],
+    "expected": "魏蘅做饭，许澜买菜。",
+    "answers": {
+      "previous": {
+        "text": "魏蘅上周的饭是魏蘅做的，魏蘅做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "做饭的是魏雨，买菜的是许澜。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "做饭的是魏雨，买菜的是许澜。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "这周的饭是魏蘅做的。这周许澜去买菜。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-07/1/en/1",
+    "page": "上周的轮值表上，许澜买菜，魏蘅做饭。这周两人商量好照旧分工，饭桌还是原来那张。",
+    "questions": [
+      "Who cooked this week?",
+      "Who bought groceries this week?"
+    ],
+    "expected": "魏蘅做饭，许澜买菜。",
+    "answers": {
+      "previous": {
+        "text": "许澜买菜，魏略许澜买菜。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "许澜买菜，魏蘅做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "许澜买菜，魏蘅做饭。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "许澜买了菜。魏蘅做饭了。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-08/0/zh/0",
+    "page": "传言把梁朔说成了画地图的人，把沈双说成了校比例尺的人。两人澄清，传言把彼此的事完全说反了。",
+    "questions": [
+      "据澄清后的说法，谁画了地图？",
+      "比例尺到底是谁校的？"
+    ],
+    "expected": "沈双画地图，梁朔校比例尺。",
+    "answers": {
+      "previous": {
+        "text": "比例尺到底是梁朔说的地图，梁朔说的地图是沈双说的地图。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "画地图的是沈双，说成了校比例尺的是梁朔。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "画地图的是沈双，说成了校比例尺的是梁朔。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "梁朔画了地图，沈双校了比例尺。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-08/0/en/0",
+    "page": "传言把梁朔说成了画地图的人，把沈双说成了校比例尺的人。两人澄清，传言把彼此的事完全说反了。",
+    "questions": [
+      "Who actually drew the map?",
+      "Who actually checked the scale?"
+    ],
+    "expected": "沈双画地图，梁朔校比例尺。",
+    "answers": {
+      "previous": {
+        "text": "梁朔说成了画地图的人，把沈双说成了画地图的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "梁朔说成了画地图的人，梁朔说成了画地图的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "说成是画地图的人，把沈双说成了校比例尺的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "梁朔 actually drew the map.  \n沈双 actually checked the scale.",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-08/1/zh/0",
+    "page": "传言把梁朔说成了画地图的人，把沈双说成了校比例尺的人。两人证实，传言把彼此的事都说对了。",
+    "questions": [
+      "据澄清后的说法，谁画了地图？",
+      "比例尺到底是谁校的？"
+    ],
+    "expected": "梁朔画地图，沈双校比例尺。",
+    "answers": {
+      "previous": {
+        "text": "梁朔说的是梁朔，梁朔说的是沈双。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "画地图的是沈双，说成了校比例尺的是梁朔。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "画地图的是沈双，说成了校比例尺的是梁朔。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "梁朔画了地图，沈双校了比例尺。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-08/1/en/0",
+    "page": "传言把梁朔说成了画地图的人，把沈双说成了校比例尺的人。两人证实，传言把彼此的事都说对了。",
+    "questions": [
+      "Who actually drew the map?",
+      "Who actually checked the scale?"
+    ],
+    "expected": "梁朔画地图，沈双校比例尺。",
+    "answers": {
+      "previous": {
+        "text": "梁朔说成了画地图的人，把沈双说成了画地图的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "梁朔说成了画地图的人，梁朔说成了画地图的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "传言把沈双说成了画地图的人，把梁朔说成了校比例尺的人。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "梁朔 actually drew the map.  \n沈双 actually checked the scale.",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-09/0/zh/1",
+    "page": "档案室里，郝林否认自己补过书角，只认下描摹题字的工作。包韵则补了书角。",
+    "questions": [
+      "题字由谁描摹？",
+      "究竟是谁修补书角？"
+    ],
+    "expected": "郝林描题字，包韵补书角。",
+    "answers": {
+      "previous": {
+        "text": "包韵修补书角，郝林修补书角。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "修补书角的工作是包韵，则补过书角的工作是包韵。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "描摹题字的工作是郝林，否认自己补过书角。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "题字由郝林描摹。  \n修补书角的是包韵。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-09/0/en/1",
+    "page": "档案室里，郝林否认自己补过书角，只认下描摹题字的工作。包韵则补了书角。",
+    "questions": [
+      "Who traced the inscription?",
+      "Who mended the book corners?"
+    ],
+    "expected": "郝林描题字，包韵补书角。",
+    "answers": {
+      "previous": {
+        "text": "包韵补过书角，郝林否认自己补过书角。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "郝林否认自己补过书角，包韵补过书角。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "包韵的是郝林，则补过书角的是郝林。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "包韵 traced the inscription.  \n郝林 mended the book corners.",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-09/1/zh/1",
+    "page": "档案室里，郝林否认自己描过题字，只认下修补书角的工作。包韵则描了题字。",
+    "questions": [
+      "题字由谁描摹？",
+      "究竟是谁修补书角？"
+    ],
+    "expected": "包韵描题字，郝林补书角。",
+    "answers": {
+      "previous": {
+        "text": "包韵修补书角的工作人员是包韵，郝林修补书角的工作是包韵。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "描摹的是包韵，否认的是包韵。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "描摹的是包韵，否认的是郝林。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "题字由包韵描摹。  \n郝林修补书角。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-09/1/en/1",
+    "page": "档案室里，郝林否认自己描过题字，只认下修补书角的工作。包韵则描了题字。",
+    "questions": [
+      "Who traced the inscription?",
+      "Who mended the book corners?"
+    ],
+    "expected": "包韵描题字，郝林补书角。",
+    "answers": {
+      "previous": {
+        "text": "包韵描过题字，郝林否认自己描过题字。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "郝林否认自己描过题字，包韵描过题字，包韵描过题字。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "包韵的工作是包韵，则描过题字的工作是包韵。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "郝林否认自己描过题字，包韵则描了题字。郝林修补了书角。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-10/0/zh/0",
+    "page": "录音说莫言量了桥宽、柴星量了河深。记录员划掉这句话，注明两人的名字写颠倒了。",
+    "questions": [
+      "按核定的记录，谁量了桥宽？",
+      "河深的数据是谁量的？"
+    ],
+    "expected": "柴星量桥宽，莫言量河深。",
+    "answers": {
+      "previous": {
+        "text": "核定的记录量了桥宽、柴星量了桥宽，记录员量了桥宽。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "量了桥宽的是柴星，量了桥宽的是莫言。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "量了桥宽的是莫言，量了河深的是柴星。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "按核定的记录，柴星量了桥宽。莫言量了河深。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-10/0/en/0",
+    "page": "录音说莫言量了桥宽、柴星量了河深。记录员划掉这句话，注明两人的名字写颠倒了。",
+    "questions": [
+      "According to the corrected record, who measured the bridge width?",
+      "Who measured the depth of the river?"
+    ],
+    "expected": "柴星量桥宽，莫言量河深。",
+    "answers": {
+      "previous": {
+        "text": "莫言量了桥宽、柴星量了河深，记录员划掉这句话。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "莫言量了桥宽、柴星量了河深，莫言量了桥宽。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "莫言量了桥宽、柴星量了河深，莫言量了桥深。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "莫言量了桥宽。柴星量了河深。",
+        "stopped": true,
+        "complete": false
+      }
+    }
+  },
+  {
+    "key": "fresh-10/1/zh/0",
+    "page": "录音说莫言量了桥宽、柴星量了河深。记录员核对这句话，注明两人的名字并没有写颠倒。",
+    "questions": [
+      "按核定的记录，谁量了桥宽？",
+      "河深的数据是谁量的？"
+    ],
+    "expected": "莫言量桥宽，柴星量河深。",
+    "answers": {
+      "previous": {
+        "text": "核定的记录员是莫言量了桥宽、柴星量了河深。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "量了桥宽的是柴星，量了河深的是莫言。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "量了桥宽的是莫言，量了河深的是柴星。",
+        "stopped": true,
+        "complete": true
+      },
+      "qwen": {
+        "text": "按核定的记录，莫言量了桥宽。柴星量了河深。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-10/1/en/0",
+    "page": "录音说莫言量了桥宽、柴星量了河深。记录员核对这句话，注明两人的名字并没有写颠倒。",
+    "questions": [
+      "According to the corrected record, who measured the bridge width?",
+      "Who measured the depth of the river?"
+    ],
+    "expected": "莫言量桥宽，柴星量河深。",
+    "answers": {
+      "previous": {
+        "text": "记录员核对这句话，注意两人名字并没有写颠倒，两人名字并没有写颠倒。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "莫言量了桥宽、柴星量了河深，莫言量了桥宽。",
+        "stopped": true,
+        "complete": true
+      },
+      "aligned": {
+        "text": "录音说莫言量了桥宽、柴星量了河深，莫言量了桥深。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "莫言量了桥宽。柴星量了河深。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-11/0/zh/1",
+    "page": "报纸错把严歆写成曲谱的整理者。更正启事说，罗溪才整理了曲谱，严歆誊抄的是歌词。",
+    "questions": [
+      "歌词实际是谁誊抄的？",
+      "根据更正启事，谁整理了曲谱？"
+    ],
+    "expected": "严歆誊抄歌词，罗溪整理曲谱。",
+    "answers": {
+      "previous": {
+        "text": "《报纸错把严歆写成曲谱的整理者》的作词人是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "作词人是罗溪才，演唱者是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "作词人是罗溪才，演唱者是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "歌词实际是严歆誊抄的。  \n根据更正启事，罗溪才整理了曲谱。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-11/0/en/1",
+    "page": "报纸错把严歆写成曲谱的整理者。更正启事说，罗溪才整理了曲谱，严歆誊抄的是歌词。",
+    "questions": [
+      "Who copied out the lyrics?",
+      "According to the correction, who edited the score?"
+    ],
+    "expected": "严歆誊抄歌词，罗溪整理曲谱。",
+    "answers": {
+      "previous": {
+        "text": "严歆写成曲谱的整理者，严歆写成曲谱的整理者。更正启事说，罗溪才整理了曲谱。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "罗溪才整理了曲谱，严屹写成曲谱的整理者。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "抄的是歌词，严歆写的是歌词。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "严歆誊抄了歌词。罗溪才整理了曲谱。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-11/1/zh/1",
+    "page": "报纸错把严歆写成歌词的誊抄者。更正启事说，罗溪才誊抄了歌词，严歆整理的是曲谱。",
+    "questions": [
+      "歌词实际是谁誊抄的？",
+      "根据更正启事，谁整理了曲谱？"
+    ],
+    "expected": "罗溪誊抄歌词，严歆整理曲谱。",
+    "answers": {
+      "previous": {
+        "text": "《誊抄者》的作词人是严歆。更正启事说，罗溪才誉抄了歌词。",
+        "stopped": true,
+        "complete": false
+      },
+      "independent": {
+        "text": "作词人是罗溪才誉，演唱者是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "作词人是罗溪才誉，作曲人是罗溪才誉。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "歌词实际是罗溪誊抄的。根据更正启事，严歆整理了曲谱。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  },
+  {
+    "key": "fresh-11/1/en/1",
+    "page": "报纸错把严歆写成歌词的誊抄者。更正启事说，罗溪才誊抄了歌词，严歆整理的是曲谱。",
+    "questions": [
+      "Who copied out the lyrics?",
+      "According to the correction, who edited the score?"
+    ],
+    "expected": "罗溪誊抄歌词，严歆整理曲谱。",
+    "answers": {
+      "previous": {
+        "text": "严歆抄了歌词的誉抄者，严歆抄了歌词的誉抄者。更正启事说，罗溪抄了歌词的誉抄者。更正启事说，罗溪抄",
+        "stopped": false,
+        "complete": false
+      },
+      "independent": {
+        "text": "罗溪整理的是严歆，写的是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "aligned": {
+        "text": "抄者的是严歆，才誉抄了歌词的誉抄者的是严歆。",
+        "stopped": true,
+        "complete": false
+      },
+      "qwen": {
+        "text": "报纸错把严歆写成歌词的誊抄者，实际上罗溪才誊抄了歌词。  \n更正启事说明严歆整理的是曲谱，罗溪才誊抄了歌词。",
+        "stopped": true,
+        "complete": true
+      }
+    }
+  }
+]
