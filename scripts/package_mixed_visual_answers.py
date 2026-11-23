@@ -19,6 +19,7 @@ def package(
     evidence=PUBLIC,
     readme=ROOT / "models/mixed_visual_answers/README.md",
     archive_name="mixed-visual-writer.zip",
+    extra_files=None,
 ):
     files = {
         "README.md": readme,
@@ -59,6 +60,10 @@ def package(
         files["examples/" + p.name] = (
             p if p.is_file() else evidence / "examples" / p.name
         )
+    if extra_files:
+        if set(extra_files) & files.keys():
+            raise ValueError("Additional archive members replace model files")
+        files.update(extra_files)
     dest = work / archive_name
     if dest.exists():
         raise FileExistsError(dest)

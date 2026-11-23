@@ -26,7 +26,7 @@ class TypefaceMap(nn.Module):
     def identify(self, packed):
         scores = self.metric(unpack(packed)) @ F.normalize(self.prototypes, dim=1).T
         best, labels = scores.topk(2, dim=1)
-        accept = (best[:, 0] >= .65) & (best[:, 0] - best[:, 1] >= .06)
+        accept = (best[:, 0] >= 0.65) & (best[:, 0] - best[:, 1] >= 0.06)
         return self.ids[labels[:, 0]], accept
 
     @classmethod
@@ -38,7 +38,12 @@ class TypefaceMap(nn.Module):
             raise ValueError("Typeface map belongs to another bitmap inventory")
         weights = load_file(str(path))
         ids = weights["ids"]
-        if len(ids) < 2 or ids.min() < 1 or ids.max() > len(packed) or len(ids.unique()) != len(ids):
+        if (
+            len(ids) < 2
+            or ids.min() < 1
+            or ids.max() > len(packed)
+            or len(ids.unique()) != len(ids)
+        ):
             raise ValueError("Invalid bitmap indices in typeface map")
         model = cls(ids, weights["prototypes"])
         model.load_state_dict(weights)
