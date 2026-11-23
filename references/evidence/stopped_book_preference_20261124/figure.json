@@ -1,0 +1,129 @@
+{
+  "series": [
+    [
+      8.6,
+      3.7,
+      7.1,
+      15.8
+    ],
+    [
+      81.5,
+      79.4,
+      78.8,
+      85.5
+    ],
+    [
+      90.7,
+      90.7,
+      87.6,
+      92.1
+    ]
+  ],
+  "table": [
+    [
+      "Every answer correct",
+      "Passages",
+      "Released",
+      "Gold replay",
+      "Preference"
+    ],
+    [
+      "Six new works",
+      "36",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Four earlier works",
+      "34",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "BiPaR novels",
+      "374",
+      "3",
+      "1",
+      "3"
+    ],
+    [
+      "XQuAD",
+      "227",
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "CMRC",
+      "197",
+      "16",
+      "14",
+      "9"
+    ],
+    [
+      "Historical forms",
+      "100",
+      "99",
+      "100",
+      "98"
+    ]
+  ],
+  "strips": [
+    [
+      "success_excerpt",
+      "Success · excerpt"
+    ],
+    [
+      "success_question",
+      "Pictured question"
+    ],
+    [
+      "success_output",
+      "Writer reply"
+    ],
+    [
+      "failure_excerpt",
+      "Failure · excerpt"
+    ],
+    [
+      "failure_question",
+      "Pictured question"
+    ],
+    [
+      "failure_output",
+      "Writer reply"
+    ],
+    [
+      "failure_reference",
+      "Accepted reply"
+    ]
+  ],
+  "examples": {
+    "success": {
+      "id": "孟子-3/0",
+      "title": "孟子",
+      "question": "百姓把文王建的台称为什么？",
+      "refs": [
+        "灵台"
+      ],
+      "reply_if_unique": "灵台",
+      "stopped": true,
+      "exact": true,
+      "source_excerpt": "诗云：『经始灵台，经之营之。庶民攻之，不日成之。"
+    },
+    "failure": {
+      "id": "孟子-3/0",
+      "title": "孟子",
+      "question": "What did King Wen's people call the terrace?",
+      "refs": [
+        "灵台"
+      ],
+      "reply_if_unique": "民力",
+      "stopped": true,
+      "exact": false,
+      "source_excerpt": "诗云：『经始灵台，经之营之。庶民攻之，不日成之。"
+    }
+  }
+}
