@@ -1,0 +1,3 @@
+# Pictured statement attribution
+
+Append the restricted learnability result and one supervised attribution experiment to the preceding three editions. Preserve previous output images. In the new figure show component and complete accuracy on original human questions and annotated held-out Chinese sources. Display the actual answer strips to both questions about a fixed, separately written film note before and after exchanging the names. Label the source of the syntax and the transferred visual reader. Verify the scatter-free quantitative chart, counts, original image content, reading page and two review editions. Keep general linguistic claims conditional on direct evidence.
