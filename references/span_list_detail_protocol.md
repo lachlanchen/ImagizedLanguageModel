@@ -1,0 +1,4 @@
+# Does the writer see a change to a date?
+
+Use up to the first 32 eligible held DuIE pages with exactly one four-digit year followed by 年. Exclude years contained in the annotated subject or object. Make a copy changing that year by one, retain the named relation, and ask the same pictured question about the single year. These changes are controlled counterfactuals. A date reply must contain the correct four digits in order and omit the other date. In the diagnostic, the original writer receives the correct same subject, relation and object with the natural-writing cue for each page. Its interface omits the extra date information. Compare actual stopped outputs against both date obligations. Separately give the trained wide reader the complete page and a pictured date question and score its direct image answer. These operations test sensitivity to one detail and do not measure the quality of a full explanation.
+
