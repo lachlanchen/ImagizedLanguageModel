@@ -88,13 +88,14 @@ def duie(split, limit, blocked):
     return rows
 
 
-def fresh():
+def fresh(path=None, prefix="fresh"):
+    path = path or PUBLIC / "fresh.tsv"
     rows = []
-    with (PUBLIC / "fresh.tsv").open() as f:
+    with path.open() as f:
         for i, r in enumerate(csv.DictReader(f, delimiter="\t")):
             rows.append(
                 dict(
-                    key=f"fresh-{i:02}",
+                    key=f"{prefix}-{i:02}",
                     kind=r["kind"],
                     pages=[r["page_zero"], r["page_one"]],
                     names=[r["person_a"], r["person_b"]],
