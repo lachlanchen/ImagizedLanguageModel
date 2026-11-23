@@ -10,11 +10,21 @@ from scripts.prepare_visual_facts import Face, FONTS, write_json
 from scripts.evaluate_participant_margin import save_png
 from scripts.evaluate_pointing_causal_writer import load_streams
 from scripts.train_visual_facts import rows
+from scripts.train_pointing_causal_writer import sha
 
 
 def main():
-    res = json.loads((PUBLIC / "results.json").read_text())["arms"]
-    res.update(json.loads((PUBLIC / "ablation.json").read_text())["arms"])
+    primary = json.loads((PUBLIC / "results.json").read_text())
+    secondary = json.loads((PUBLIC / "ablation.json").read_text())
+    for recorded in (
+        primary["raw_sha256"],
+        primary["ledger_sha256"],
+        secondary["raw_sha256"],
+    ):
+        for name, expected in recorded.items():
+            if sha(OUT / name) != expected:
+                raise ValueError(f"Output differs from evaluation: {name}")
+    res = primary["arms"] | secondary["arms"]
     arms = ("previous", "permuted", "matched", "likelihood")
     cohorts = ("new_source", "clause_order")
     series = [

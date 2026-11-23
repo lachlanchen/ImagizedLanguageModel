@@ -12,7 +12,7 @@ from scripts.grounded_proposition_corpus import (
     label,
     query,
 )
-from scripts.prepare_visual_facts import Face, FONTS, LANG, ROOT, simplify, write_json
+from scripts.prepare_visual_facts import Face, FONTS, ROOT, simplify, write_json
 from scripts.train_visual_facts import rows
 from scripts.train_pointing_causal_writer import sha
 

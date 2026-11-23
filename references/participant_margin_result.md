@@ -44,8 +44,8 @@ python scripts/prepare_participant_margin.py
 python scripts/train_participant_margin.py
 python scripts/evaluate_participant_margin.py
 python scripts/probe_participant_margin.py
-python scripts/report_participant_margin.py
 python scripts/train_participant_margin.py --likelihood-only
 python scripts/evaluate_participant_margin.py --likelihood-only
 python scripts/probe_participant_margin.py --likelihood-only
+python scripts/report_participant_margin.py
 ```
