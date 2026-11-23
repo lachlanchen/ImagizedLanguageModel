@@ -195,13 +195,13 @@ def prepare():
     )
 
 
-def score():
-    binding = json.loads((PUBLIC / "blind_binding.json").read_text())
-    assert all(sha(WORK / (k + ".json")) == binding[k] for k in ("blind", "keys"))
+def score(public=PUBLIC, work=WORK):
+    binding = json.loads((public / "blind_binding.json").read_text())
+    assert all(sha(work / (k + ".json")) == binding[k] for k in ("blind", "keys"))
     blind, keys = [
-        json.loads((WORK / (k + ".json")).read_text()) for k in ("blind", "keys")
+        json.loads((work / (k + ".json")).read_text()) for k in ("blind", "keys")
     ]
-    reading = json.loads((PUBLIC / "reading.json").read_text())
+    reading = json.loads((public / "reading.json").read_text())
     counts = defaultdict(Counter)
     by = defaultdict(list)
     out = []
@@ -223,11 +223,11 @@ def score():
         )
     for (arm, _), flags in by.items():
         counts[arm]["four_correct"] += all(flags)
-    record(PUBLIC / "reviewed_answers.json", out)
+    record(public / "reviewed_answers.json", out)
     record(
-        PUBLIC / "reading_result.json",
+        public / "reading_result.json",
         dict(
-            scores=counts, reading=sha(PUBLIC / "reading.json"), blind=binding["blind"]
+            scores=counts, reading=sha(public / "reading.json"), blind=binding["blind"]
         ),
     )
 

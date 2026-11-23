@@ -4,6 +4,7 @@ import argparse
 from collections import Counter
 import json
 from safetensors import safe_open
+from scripts.measure_writer_energy import snapshot, consumed
 from scripts.pointing_glyph_corpus import Row, plates
 from scripts.prepare_ordered_book_replies import WORK as BOOK_WORK, sample
 from scripts.role_change_corpus import load, target, fresh
@@ -39,6 +40,13 @@ def book_rows(face):
         if not reply["clauses"]:
             continue
         p = face(c["page"])
+        if any(
+            not ch.isspace() and ord(ch) not in face.coverage
+            for t in reply["clauses"]
+            for ch in t
+        ):
+            counts["missing_print_pairs"] += 1
+            continue
         labels = [face(t + "。") for t in reply["clauses"]]
         extra = set(cell for s in labels for cell in in_cells(s) if cell not in bank)
         if not extra.issubset(in_cells(p)):
@@ -112,10 +120,12 @@ def fit(arm):
     dest = WORK / ("clause_" + arm)
     dest.mkdir(exist_ok=False)
     weights = json.loads((LAST / "aligned_fit.json").read_text())["weights"]
+    start_energy = snapshot()
     fit_rows(dest, PARENT, weights, rows, SEED)
     record(
         PUBLIC / f"{arm}_fit.json",
-        json.loads((dest / "page_fit.json").read_text()) | dict(book_filter=counts),
+        json.loads((dest / "page_fit.json").read_text())
+        | dict(book_filter=counts, fit_energy=consumed(start_energy, snapshot())),
     )
 
 
