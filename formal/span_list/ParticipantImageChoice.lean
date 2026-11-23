@@ -4,7 +4,7 @@ namespace ParticipantImageChoice
 
 /-- Two occurrences of one response are disjoint choices of source span.
 Masses are nonnegative and can be represented in common fixed-point units. -/
-def imageMass (occurrences : List Nat) := occurrences.sum
+def imageMass (occurrences : List Nat) := occurrences.foldl Nat.add 0
 
 theorem marginal_may_win : imageMass [4, 4] > imageMass [7] := by decide
 
