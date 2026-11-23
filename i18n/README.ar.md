@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+قرأ النموذج أسئلة صينية ومقاطع روائية على هيئة صور، وكتب الإجابة في صورة تضم عبارتين. طابقت الإجابات الصورة المرجعية في 34 من 48 حالة لرواية «رحلة إلى الغرب» وفي 42 من 48 لرواية «حلم الغرفة الحمراء». وفي 9 من أصل 60 عائلة من الحروف المخصصة للتقييم، كتب النموذج شكلي الحرف الموثقين على العظام والبرونز بصورة صحيحة في جميع الترتيبات. وعند طرح الأسئلة بالإنجليزية انخفض العدد إلى 2 و10 من أصل 48 على التوالي. [تشغيل النموذج](../models/grounded_ink_editor/README.md) · [النتائج والأمثلة](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 أجاب قارئ بصري يضم 86 مليون معامل عن 38 من 56 سؤالاً صينياً مصوّراً حول شخصيات كتاب «خطابات الممالك» (國語). وعندما أُعيد طرح السؤالين بعد تبديل اسمي الشخصيتين، أصاب في الإجابات الأربع في 4 من 14 مقطعاً، مقابل 3 مقاطع للقارئ الأصلي ومقطعين للنموذج الذي أعطى الاسمين وزناً متساوياً أثناء التدريب. وفي الإنجليزية أجاب عن 16 سؤالاً إجابة صحيحة، ولم يُجب عن الأسئلة الأربعة كلها في أي مقطع. يعيد المثال صورتي الاسمين 密康公 و恭王 من الصفحة الأصلية. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

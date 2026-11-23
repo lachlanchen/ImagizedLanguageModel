@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Das Modell liest chinesische Fragen und Romanpassagen als Bilder und schreibt seine Antwort in zwei Teilsätzen als Bild. Für Die Reise nach Westen stimmten 34 von 48 Antworten exakt mit der Vorlage überein, für Der Traum der Roten Kammer waren es 42 von 48. Bei 9 von 60 zurückgehaltenen Zeichenfamilien schrieb es die belegten Orakelknochen- und Bronzeformen in jeder Anordnung richtig. Bei englischen Fragen gelangen 2 bzw. 10 von 48 Antworten. [Modell ausführen](../models/grounded_ink_editor/README.md) · [Ergebnisse und Beispiele](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 Ein visuelles Lesemodell mit 86 Millionen Parametern beantwortete 38 von 56 chinesischen Fragen zu den Personen im *Guoyu* (國語) richtig. Fragen und Passagen lagen als Bilder vor. Vor und nach dem Tausch zweier Namen gelangen alle vier Antworten in 4 von 14 Passagen. Das Ausgangsmodell schaffte 3, das Kontrollmodell mit gleich gewichteten Namen 2. Auf Englisch gelangen 16 richtige Antworten, aber keine vollständige Vierergruppe. Das Beispiel gibt die Schriftbilder von 密康公 und 恭王 aus der Vorlage zurück. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_role_question_binding_article.py.
+% Literal captions copied from their source inputs by build_fixed_action_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -945,4 +945,18 @@ The selected names are correct under both English requests. The first generated 
 \caption{\textbf{Optical reading of classical roles.}
 \textbf{a,} Exact source-image answers for Chinese and English questions. The original optical reader and the two updated readers received identical test images. The independent-label model gave both candidate names equal target weight in classical training. \textbf{b,} Numbers of excerpts for which the model returned both requested people before and after an exchange of their names. The text reference received the same wording as text. \textbf{c,} The first reserved passage from the \textit{Discourses of the States}. The original page says that King Mu proposed a campaign and Jigong Moufu advised against it. The following page exchanges the two men. Actual answer images appear to the right of the reference strips, including the error on the edited passage.}
 \label{fig:optical-role-adapter}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_117_fixed_action.png}
+\caption{\textbf{Fixed-position action exchanges.}
+\textbf{a,} Exact individual name images after reading a Chinese or English question about an excerpt from \textit{Romance of the Three Kingdoms} or \textit{Water Margin}. Each work contributes 128 requests per language, from two questions, two action assignments and two clause orders on 16 excerpts. \textbf{b,} Complete excerpts in the original clause order. Both questions must be answered correctly on both assignments. Independent-label training gives the two possible names equal weight. The generic question omits the action. \textbf{c,} The first reserved excerpt and its edited version. Dong Zhuo and Lü Bu occupy the same glyph coordinates before and after the edit. The output column contains the actual image strips emitted by the assigned-name reader.}
+\label{fig:fixed-action}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_118_grounded_ink_editor.png}
+\caption{\textbf{Writing from visual evidence.}
+\textbf{a,} Exact two-clause responses from 48 requests per work and language. Aligned and randomized-order editors see the same retrieved evidence at test time. The supplied-regions condition fixes the two source locations to their references. \textbf{b,} Numbers of excerpts for which every reply has the correct pixels and voluntary ending in both request orders on both action assignments. \textbf{c,} The first reserved excerpt of \textit{Journey to the West}. On the original page Tripitaka mounts and his disciple leads the way. The edit reverses their actions. The four outputs reproduce the source clauses in requested order and contain a newly written conjunction. \textbf{d,} Historical oracle and bronze forms from the previously used plate for the character meaning speech. The adapted reader selects an incorrect bronze region. With the frozen optical parent supplying both locations, the same editor reproduces the authentic forms in either requested order. On a separate 60-family evaluation with the same page layout, this combination succeeded in all four arrangements for nine families.}
+\label{fig:grounded-ink-editor}
 \end{figure*}

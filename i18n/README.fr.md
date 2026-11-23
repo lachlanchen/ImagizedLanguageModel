@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Le modèle lit en image une question en chinois et un extrait de roman, puis écrit une réponse en deux propositions sous forme d’image. Il reproduit exactement la réponse attendue dans 34 cas sur 48 pour La Pérégrination vers l’Ouest et 42 sur 48 pour Le Rêve dans le pavillon rouge. Pour 9 des 60 familles de caractères réservées à l’évaluation, il reproduit les formes sur os et sur bronze dans toutes les configurations. En anglais, les questions obtiennent respectivement 2 et 10 réponses exactes sur 48. [Exécuter le modèle](../models/grounded_ink_editor/README.md) · [Résultats et exemples](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 Un lecteur visuel de 86 millions de paramètres a répondu correctement à 38 des 56 questions en chinois présentées sous forme d’images sur les personnages du *Guoyu* (國語). Après permutation des deux noms, il a donné les quatre bonnes réponses sur 4 des 14 extraits, contre 3 pour le lecteur initial et 2 pour le témoin entraîné avec un poids égal pour les deux noms. En anglais, il a donné 16 réponses exactes sans réussir les quatre questions d’un même extrait. L’exemple restitue les glyphes originaux de 密康公 et 恭王. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

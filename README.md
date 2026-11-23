@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The model read pictured Chinese questions about two novels and wrote two-clause image replies. It returned 34/48 exact replies for *Journey to the West* and 42/48 for *Dream of the Red Chamber*. It could write 行者引路，而三藏上馬。 with the clauses in the requested order. On historical plates it returned both attested shapes in every arrangement for 9/60 held-out character families. The English questions yielded 2/48 and 10/48 exact replies. [Run the model](models/grounded_ink_editor/README.md) · [Results and examples](references/grounded_ink_writing_result.md)
+
+[![118 · ILM](publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](publication/ilm-nature/manuscript.pdf#page=157)
+
 An 86-million-parameter visual reader answered 38 of 56 pictured Chinese questions about the people in the *Discourses of the States* (國語). It answered both questions before and after a name exchange on 4 of 14 excerpts, compared with 3 for the original reader and 2 for the equal-label control. For pictured English questions it gave 16 correct answers and completed no excerpt. The example returns the original glyphs for 密康公 and 恭王. [Guoyu · ILM](models/optical_role_reader/README.md) · [38/56](references/optical_role_adapter_result.md)
 
 [![116 · ILM](publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](publication/ilm-nature/manuscript.pdf#page=154)

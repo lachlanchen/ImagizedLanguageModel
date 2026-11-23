@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+モデルは中国語の質問と小説の一節を画像で読み、二つの節からなる回答を画像で書く。参照画像と完全に一致した回答は『西遊記』で48件中34件、『紅楼夢』で48件中42件だった。評価用の60字族のうち9字族では、配置と質問順を変えても甲骨文と金文の両方を正しく書けた。英語の質問ではそれぞれ48件中2件と10件だった。 [モデルの実行](../models/grounded_ink_editor/README.md) · [結果と出力例](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 8,600 万パラメータの画像読解モデルは、『国語』の登場人物について画像で示した中国語の質問 56 問のうち 38 問に正答した。二人の名を入れ替える前後で各 2 問にすべて正答したのは 14 篇中 4 篇で、元のモデルは 3 篇、二人を同じ重みで学習した対照モデルは 2 篇だった。英語では 16 問に正答したが、4 問すべてに正答した篇はなかった。実行例では原文から「密康公」と「恭王」の字形を返す。 [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

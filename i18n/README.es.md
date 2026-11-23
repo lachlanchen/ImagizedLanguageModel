@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+El modelo lee preguntas en chino y pasajes de novelas en imágenes y escribe una respuesta de dos cláusulas como imagen. La respuesta coincidió exactamente con la referencia en 34 de 48 casos de Viaje al Oeste y en 42 de 48 de Sueño en el pabellón rojo. En 9 de las 60 familias de caracteres reservadas para la evaluación reprodujo las formas de los huesos oraculares y del bronce en todas las disposiciones. Con preguntas en inglés acertó en 2 y 10 de 48 casos, respectivamente. [Ejecutar el modelo](../models/grounded_ink_editor/README.md) · [Resultados y ejemplos](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 Un lector visual de 86 millones de parámetros acertó 38 de 56 preguntas en chino sobre los personajes del *Guoyu* (國語), presentadas como imágenes. Al intercambiar los dos nombres y repetir las preguntas, dio las cuatro respuestas correctas en 4 de 14 pasajes, frente a 3 del lector original y 2 del control que asignaba el mismo peso a ambos nombres. Acertó 16 preguntas en inglés y en ningún pasaje acertó las cuatro. El ejemplo devuelve los glifos originales de 密康公 y 恭王. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

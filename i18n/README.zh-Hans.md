@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+模型直接读中文问题和小说片段的图像，再用图像写出两个分句。在《西游记》和《红楼梦》的测试中，分别有 34/48 和 42/48 个回答与参考图像完全相同。例如，它能按提问顺序写出「行者引路，而三藏上馬。」。在 60 个留作评估的汉字字族中，有 9 个字族在所有排列下都写对了甲骨文和金文。换用英文问题后，两部小说分别只答对 2/48 和 10/48。 [运行模型](../models/grounded_ink_editor/README.md) · [结果与实例](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 这个有 8600 万参数的视觉模型直接阅读《国语》的段落和问题图像。在 56 个中文问题中，它答对了 38 个。把两个人名互换后再次提问，模型在 14 段中有 4 段四问全对，原模型为 3 段，两个名字权重相同的对照模型为 2 段。英文提问答对 16 题，没有一段四问全对。示例返回原文中「密康公」和「恭王」的字形。 [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

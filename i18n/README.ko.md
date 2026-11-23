@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+모델은 중국어 질문과 소설 구절을 이미지로 읽고 두 절로 된 답을 이미지로 쓴다. 기준 이미지와 완전히 일치한 답은 《서유기》에서 48개 중 34개, 《홍루몽》에서 48개 중 42개였다. 평가용 한자 60개 계열 중 9개에서는 배치와 질문 순서를 바꾸어도 갑골문과 금문을 모두 정확히 썼다. 영어로 물었을 때 정확한 답은 각각 2개와 10개였다. [모델 실행](../models/grounded_ink_editor/README.md) · [결과와 출력 예시](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 8,600만 개의 매개변수를 가진 시각 독해 모델이 《국어》의 인물을 묻는 중국어 질문 이미지 56개 중 38개에 정답을 냈다. 두 사람의 이름을 바꾸기 전후로 질문 두 개에 모두 맞힌 대목은 14개 중 4개였다. 원래 모델은 3개, 두 이름에 같은 가중치를 준 대조 모델은 2개였다. 영어 질문은 16개를 맞혔으며 네 답이 모두 맞은 대목은 없었다. 실행 예제는 원문의 密康公과 恭王을 글자 이미지로 반환한다. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

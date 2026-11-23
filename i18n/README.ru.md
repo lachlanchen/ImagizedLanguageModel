@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Модель читает китайские вопросы и отрывки из романов как изображения и записывает ответ из двух частей в виде изображения. С эталоном полностью совпали 34 из 48 ответов по «Путешествию на Запад» и 42 из 48 по «Сну в красном тереме». Для 9 из 60 семейств иероглифов из оценочной выборки модель верно воспроизвела формы из надписей на гадательных костях и на бронзе при всех перестановках. При вопросах на английском совпало соответственно 2 и 10 ответов из 48. [Запуск модели](../models/grounded_ink_editor/README.md) · [Результаты и примеры](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 Визуальная модель с 86 млн параметров правильно ответила на 38 из 56 вопросов на китайском о персонажах «Го юй» (國語). И текст, и вопросы подавались в виде изображений. После перестановки двух имён вопросы задавали повторно. Все четыре ответа были верны для 4 из 14 отрывков, у исходной модели — для 3, у контрольной модели с равными весами имён — для 2. На английском модель дала 16 правильных ответов и ни разу не ответила верно на всю четвёрку. В примере возвращаются изображения имён 密康公 и 恭王 из оригинала. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)

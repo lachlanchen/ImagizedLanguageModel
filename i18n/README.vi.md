@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình đọc ảnh câu hỏi tiếng Trung cùng một đoạn tiểu thuyết rồi viết câu trả lời gồm hai vế dưới dạng ảnh. Số ảnh trả lời khớp hoàn toàn với mẫu là 34/48 cho Tây du ký và 42/48 cho Hồng lâu mộng. Với 9 trong 60 họ chữ dành cho đánh giá, mô hình viết đúng cả dạng giáp cốt và dạng kim văn ở mọi cách sắp xếp. Khi câu hỏi bằng tiếng Anh, số câu đúng lần lượt là 2/48 và 10/48. [Chạy mô hình](../models/grounded_ink_editor/README.md) · [Kết quả và ví dụ](../references/grounded_ink_writing_result.md)
+
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+
 Mô hình đọc ảnh với 86 triệu tham số trả lời đúng 38/56 câu hỏi tiếng Trung về các nhân vật trong *Quốc ngữ* (國語). Khi đổi chỗ hai tên người rồi hỏi lại, mô hình trả lời đúng cả bốn câu ở 4/14 đoạn. Mô hình ban đầu đạt 3 đoạn, còn đối chứng huấn luyện với hai tên có trọng số bằng nhau đạt 2. Với câu hỏi tiếng Anh, mô hình trả lời đúng 16 câu nhưng không đúng hết cả bốn ở đoạn nào. Ví dụ trả về hình chữ 密康公 và 恭王 từ trang gốc. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
 [![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
