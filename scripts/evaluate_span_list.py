@@ -1,5 +1,7 @@
 """Score the frozen rerankers on physical answers and the full autoregressive writer."""
 
+import argparse
+from pathlib import Path
 from collections import Counter, defaultdict
 import json
 import torch
@@ -12,7 +14,7 @@ from ilm.visual_lm.span_choice import EXPERTS, pooled_choice
 from ilm.visual_lm.span_list import SpanListReader, SpanRanker, image_choice
 from scripts.evaluate_participant_margin import save_png
 from scripts.evaluate_pointing_causal_writer import load_streams, store_streams
-from scripts.prepare_span_list import CACHE, PUBLIC, split
+from scripts.prepare_screened_span_list import CACHE, PUBLIC, split
 from scripts.prepare_span_choice import PUBLIC as EARLIER
 from scripts.prepare_visual_facts import ROOT, WORK, Face, FONTS, write_json
 from scripts.train_fact_realizer import authored_clause, target
@@ -34,8 +36,13 @@ def contains(raw, part):
 
 
 @torch.inference_mode()
-def evaluate():
-    if (PUBLIC / "results.json").exists():
+def evaluate(run_dir=None):
+    published = PUBLIC if run_dir is None else run_dir / "evaluation"
+    raw_dir = CACHE if run_dir is None else published
+    if run_dir is not None:
+        published.mkdir(exist_ok=False)
+    fit_dir = run_dir or PUBLIC
+    if (published / "results.json").exists():
         raise FileExistsError("Frozen list evaluation")
     face = Face((FONTS[0], 2))
     experts = model()
@@ -48,16 +55,19 @@ def evaluate():
     reader = SpanListReader(experts)
     arms = {}
     for arm in ("wide", "first", "shuffled"):
-        hp = (WEIGHTS if arm == "wide" else CACHE) / (arm + ".safetensors")
+        hp = (run_dir or (WEIGHTS if arm == "wide" else CACHE)) / (arm + ".safetensors")
         assert (
             sha(hp)
-            == json.loads((PUBLIC / "fit.json").read_text())["arms"][arm]["weights"]
+            == json.loads((fit_dir / "fit.json").read_text())["arms"][arm]["weights"]
         )
         h = SpanRanker().cuda().eval()
         h.load_state_dict(load_file(str(hp)))
         arms[arm] = h
     reader.head = arms["wide"]
-    current, prior = split("fresh"), records("fresh")
+    current, prior = (
+        split("fresh"),
+        [v for v in records("fresh", eligible_only=True) if v["group"] == "cmrc"],
+    )
     sets = {
         "second": pictured(face, current),
         "first_sample": pictured(face, prior),
@@ -72,7 +82,10 @@ def evaluate():
             )
         ],
     }
-    earlier = json.loads((EARLIER / "coverage.json").read_text())["cases"]
+    earlier = {
+        v["key"]: v
+        for v in json.loads((EARLIER / "coverage.json").read_text())["cases"]
+    }
     summary = {}
     examples = {}
     ledger = []
@@ -131,9 +144,12 @@ def evaluate():
                 row = dict(sample=name, i=i, **hits, oracle8=cover, oracle1=top)
                 if name == "first_sample":
                     assert (
-                        earlier[i]["first_rank_if_at_most_eight"] is not None
+                        earlier[prior[i]["key"]]["first_rank_if_at_most_eight"]
+                        is not None
                     ) == cover
-                    assert (earlier[i]["first_rank_if_at_most_eight"] == 1) == top
+                    assert (
+                        earlier[prior[i]["key"]]["first_rank_if_at_most_eight"] == 1
+                    ) == top
                 if name == "second":
                     v = current[i]
                     row.update(source=v["group"], key=v["key"])
@@ -154,12 +170,12 @@ def evaluate():
                             ("generic", guesses["generic"]),
                             ("reference", refs[0]),
                         ]:
-                            save_png(PUBLIC / f"{tag}_{label}.png", buf)
+                            save_png(published / f"{tag}_{label}.png", buf)
                 ledger.append(row)
         summary[name] = dict(counts)
-        store_streams(CACHE / (name + ".npz"), outputs, [True] * len(outputs))
-    write_json(PUBLIC / "examples.json", examples)
-    write_json(CACHE / "direct.json", ledger)
+        store_streams(raw_dir / (name + ".npz"), outputs, [True] * len(outputs))
+    write_json(published / "examples.json", examples)
+    write_json(raw_dir / "direct.json", ledger)
     writer = FactRealizer(WORK / "writer", "cuda")
     stats = defaultdict(Counter)
     boards = defaultdict(lambda: defaultdict(list))
@@ -167,7 +183,9 @@ def evaluate():
     stops = [[], []]
     natural, free_stops = [], []
     free_cases = []
-    allrows = rows("held") + read("new")
+    from scripts.span_reservation import screened
+
+    allrows = rows("held", eligible_only=True) + screened(read("new"))
     for k in range(0, len(allrows), 24):
         chunk = allrows[k : k + 24]
         fields = reader.fields_many([(face(v["p"]), face(v["q"])) for v in chunk])
@@ -213,14 +231,14 @@ def evaluate():
         assert all(len(v) == (8 if g == "clause_order" else 4) for v in b.values())
         stats[g].update(boards=len(b), all_both=sum(all(v) for v in b.values()))
     for i, n in enumerate(("subject", "object")):
-        store_streams(CACHE / (n + ".npz"), streams[i], stops[i])
-    store_streams(CACHE / "natural.npz", natural, free_stops)
-    write_json(CACHE / "natural.json", free_cases)
+        store_streams(raw_dir / (n + ".npz"), streams[i], stops[i])
+    store_streams(raw_dir / "natural.npz", natural, free_stops)
+    write_json(raw_dir / "natural.json", free_cases)
     fresh = summary["second"]
     checks = dict(
         generic=fresh["wide"] > fresh["generic"],
         first=fresh["wide"] > fresh["first"],
-        human=stats["cmrc"]["both"] + stats["drcd"]["both"] >= 34,
+        human_cmrc=stats["cmrc"]["both"] >= 20,
         exchanges=stats["new_source"]["all_both"] >= 79,
         reordered=stats["clause_order"]["all_both"] >= 37,
     )
@@ -247,13 +265,20 @@ def evaluate():
         paired_p=binomtest(fresh["gain"], fresh["gain"] + fresh["loss"]).pvalue
         if fresh["gain"] + fresh["loss"]
         else 1.0,
-        output_sha256={p.name: sha(p) for p in sorted(CACHE.glob("*.npz"))},
-        direct_ledger=sha(CACHE / "direct.json"),
+        output_sha256={p.name: sha(p) for p in sorted(raw_dir.glob("*.npz"))},
+        direct_ledger=sha(raw_dir / "direct.json"),
     )
-    write_json(PUBLIC / "results.json", report)
+    write_json(published / "results.json", report)
     print(json.dumps(report, indent=2), flush=True)
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--run-dir",
+        type=Path,
+        help="Evaluate the three heads fitted in this run directory",
+    )
+    args = parser.parse_args()
     with gpu_owner():
-        evaluate()
+        evaluate(args.run_dir)

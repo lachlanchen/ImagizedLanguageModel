@@ -1,5 +1,7 @@
 """Train wide, depth-one and randomly supervised readers against the same visual features."""
 
+import argparse
+from pathlib import Path
 from collections import defaultdict
 from time import monotonic
 
@@ -7,12 +9,12 @@ from safetensors.torch import save_file
 import torch
 
 from ilm.visual_lm.span_list import SpanListReader, SpanRanker, image_choice
-from scripts.prepare_span_list import CACHE, PUBLIC, SEED, split
+from scripts.prepare_screened_span_list import CACHE, PUBLIC, SEED, split
 from scripts.prepare_visual_facts import Face, FONTS, ROOT, write_json
 from scripts.train_pointing_causal_writer import sha
 from scripts.train_span_choice import gpu_owner, model
 
-WEIGHTS = ROOT / "models/span_list"
+WEIGHTS = ROOT / "models/span_list_screened"
 
 
 def collect(reader, face, items):
@@ -32,7 +34,7 @@ def collect(reader, face, items):
     return tuple(torch.cat(parts).to("cuda") for parts in zip(*blocks))
 
 
-def fit(train, val, items, arm):
+def fit(train, val, items, arm, destination):
     torch.manual_seed(SEED)
     head = SpanRanker().cuda()
     opt = torch.optim.AdamW(head.parameters(), lr=0.00065, weight_decay=0.02)
@@ -90,7 +92,7 @@ def fit(train, val, items, arm):
                 state = {
                     k: v.detach().cpu().clone() for k, v in head.state_dict().items()
                 }
-    path = (WEIGHTS if arm == "wide" else CACHE) / (arm + ".safetensors")
+    path = destination / (arm + ".safetensors")
     save_file(state, str(path))
     return dict(
         weights=sha(path),
@@ -101,8 +103,11 @@ def fit(train, val, items, arm):
     )
 
 
-def main():
-    if (PUBLIC / "fit.json").exists():
+def main(run_dir=None):
+    receipt = (run_dir or PUBLIC) / "fit.json"
+    if run_dir is not None:
+        run_dir.mkdir(parents=True, exist_ok=False)
+    if receipt.exists():
         raise FileExistsError("Completed fit")
     start = monotonic()
     WEIGHTS.mkdir(exist_ok=True)
@@ -112,10 +117,13 @@ def main():
     train, val = [collect(reader, face, items) for items in (split("train"), val_rows)]
     prepared = monotonic()
     arms = {
-        arm: fit(train, val, val_rows, arm) for arm in ("wide", "first", "shuffled")
+        arm: fit(
+            train, val, val_rows, arm, run_dir or (WEIGHTS if arm == "wide" else CACHE)
+        )
+        for arm in ("wide", "first", "shuffled")
     }
     write_json(
-        PUBLIC / "fit.json",
+        receipt,
         dict(
             arms=arms,
             feature_seconds=prepared - start,
@@ -128,5 +136,12 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--run-dir",
+        type=Path,
+        help="Write a new independent fit and controls to a new directory",
+    )
+    args = parser.parse_args()
     with gpu_owner():
-        main()
+        main(args.run_dir)

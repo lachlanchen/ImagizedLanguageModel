@@ -1,0 +1,47 @@
+{
+  "splits": {
+    "train": {
+      "n": 16181,
+      "by_source": {
+        "drcd": 2953,
+        "paired": 9728,
+        "cmrc": 3500
+      },
+      "sha256": "f1b0bec79a285423b671218a7a24c900115f7f3788ee2bb8a50680cd6df45911"
+    },
+    "validation": {
+      "n": 848,
+      "by_source": {
+        "paired": 384,
+        "cmrc": 256,
+        "drcd": 208
+      },
+      "sha256": "85fe1a140051fae7b5370986ad42aaa247133d4e102a847ff2b58d17048e028e"
+    },
+    "fresh": {
+      "n": 359,
+      "by_source": {
+        "cmrc": 192,
+        "drcd": 167
+      },
+      "sha256": "728a51740b5e5c4c7e55cc581104924ea60579fffe0084e2527b8c373028114d"
+    }
+  },
+  "filtering": {
+    "train": {
+      "raw": 16728,
+      "removed": 547
+    },
+    "validation": {
+      "raw": 896,
+      "removed": 48
+    }
+  },
+  "source_sha256": {
+    "cmrc": "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f",
+    "drcd": "e236df03861ba241bd7b29628cd48b3b8e339c60137e041a4358b5320ed61928"
+  },
+  "overlap_across_splits": 0,
+  "protected_rows_admitted": 0,
+  "selection_seed": 251125
+}
