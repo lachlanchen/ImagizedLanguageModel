@@ -3,6 +3,7 @@
 import json
 from collections import Counter
 from functools import lru_cache
+from safetensors.numpy import load_file
 
 from scripts.evaluate_pointing_causal_writer import load_streams
 from scripts.pointing_glyph_corpus import plates
@@ -82,6 +83,36 @@ def audit():
     answers = [stop and y == r.y for (y, stop), r in zip(streams, rows, strict=True)]
     assert sum(answers) == stats["exact"]
     result["catalogue_card"] = answers
+    path = WORK / "page/interface.safetensors"
+    assert (
+        sha(path)
+        == json.loads((WORK / "page_fit.json").read_text())["weights"][path.name]
+    )
+    fixed = {image.tobytes() for image in load_file(str(path))["packed"]}
+    cards = plates("development", f)
+    inventory = {}
+
+    def cells(raw):
+        return {raw[i : i + 128] for i in range(0, len(raw), 128)}
+
+    for name in ("historical", "historical_rephrased", "yan"):
+        replies, _ = get("mixed", name)
+        counts = Counter()
+        for (y, stop), r in zip(
+            replies, [v for v in cards if v.task == name], strict=True
+        ):
+            if not stop or y != r.y:
+                continue
+            counts["exact"] += 1
+            outside = cells(y) - fixed
+            assert outside <= cells(r.p)
+            counts["requires_source_bitmap"] += int(bool(outside))
+            counts["requires_nonpage_bitmap"] += int(bool(cells(y) - cells(r.p)))
+            counts["requires_both"] += int(
+                bool(outside) and bool(cells(y) - cells(r.p))
+            )
+        inventory[name] = dict(counts)
+    result["physical_inventory"] = dict(fixed_bitmaps=len(fixed), groups=inventory)
     result["additional_questions"] = dict(Counter(v["group"] for v in cases))
     record(PUBLIC / "recount.json", result)
 
