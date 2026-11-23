@@ -2,59 +2,59 @@
 
 Tras excluir el material reservado de DRCD y repetir el entrenamiento, el lector con más candidatos obtuvo 234 respuestas exactas en 359 preguntas de desarrollo, frente a 242 del lector generalista. Las evaluaciones anteriores de DRCD utilizaron pasajes reservados para pruebas. [Resultados y corrección sobre los datos](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=132)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)
 
 En 384 nuevas preguntas de comprensión lectora en chino, al combinar las respuestas en imagen de cuatro lectores se obtuvieron 285 aciertos exactos, tantos como con el lector generalista. El modelo superó por completo 63 de 128 pruebas de intercambio de nombres, frente a las 79 del lector especializado. [Resultados y pesos](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=131)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=132)
 
 Al intercambiar dos nombres en un pasaje chino presentado como imagen, el lector entrenado solo por verosimilitud respondió a todas las preguntas en ambos órdenes de palabras en 79 de 128 pasajes, frente a 29 antes. En 48 preguntas escritas por personas, los aciertos en ambos órdenes bajaron de 34 a 28. [Resultados y modelos](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 De 48 preguntas escritas en chino por personas, el modelo respondió correctamente a 34 en los dos órdenes de palabras solicitados. Identificó al compositor de «秋潮», pero confundió al compositor con el letrista al intercambiar los nombres en otra canción. [Resultados y modelo](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 Tras entrenarse con 26.890 ejemplos de chino en imágenes, el lector escribió oraciones completas y correctas en 33 de 48 preguntas redactadas por personas. Otro modelo, que genera los glifos uno a uno, expresó el mismo hecho en los dos órdenes solicitados en 31 preguntas. Identificó al director y al guionista en la ficha original, pero copió parte de una oración al intercambiar los nombres. [Resultados y modelo](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 ¿Cambia la respuesta cuando se intercambian dos nombres en la imagen de un texto? Para pares de funciones que se excluyeron del entrenamiento con dos frases, el modelo que divide la pregunta y reutiliza el mismo generador dio los dos datos en el orden pedido en 70 de 136 casos. El modelo que escribía ambas frases de una vez acertó en tres. En la ficha de una película, dos frases legibles atribuyeron el guion y la dirección a la misma persona. [Resultados y modelo](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 ¿Quién dibujó el mapa y quién necesitaba indicaciones? El lector revisado devuelve dos nombres distintos. Dio el nombre exacto en 42 de 64 preguntas nuevas presentadas como imágenes. También escribe las formas de 言 en hueso oracular y bronce en el orden solicitado. En 128 preguntas abiertas nuevas que requerían un glifo ausente de la entrada, ninguna respuesta coincidió exactamente con una referencia. [Resultados y modelo](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 El pasaje en imagen indica quién dibujó el mapa y quién se perdió. El modelo identifica a quien dibujó el mapa, pero repite ese dato cuando se le pregunta quién necesitaba indicaciones. En 300 preguntas cuya respuesta requería un glifo ausente de la entrada, eligió correctamente el primer glifo ausente 18 veces, incluso al recibir la parte anterior de la respuesta correcta. [Resultados e imágenes de las respuestas](../references/causal_glyph_writer_result.md)
 
-[![Dos preguntas sobre un mismo mapa](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![Dos preguntas sobre un mismo mapa](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 El modelo escribe las formas de 言 en huesos oraculares y en bronce en el orden solicitado en la imagen. Acertó ambos órdenes en 94 de 96 comparaciones con caracteres reservados y preguntas de redacción conocida. Con otras fichas y una formulación nueva, acertó en 16 de 96. [Resultados e imágenes](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 **Lectura y respuesta a partir de imágenes de caracteres.** En 64 preguntas en chino sobre dos personas, el modelo acertó 46 con letra normal y 41 en negrita. Qwen3-8B ejecutado localmente acertó 55 con texto como entrada. Con una tipografía de estilo Kai que no se usó en el entrenamiento, el modelo solo acertó una. [Ejecutar el modelo](../docs/visual-page-responder.md)
 
-[![Figura 88. Imágenes de las preguntas y respuestas reales](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![Figura 88. Imágenes de las preguntas y respuestas reales](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 **¿Distingue a dos personas en una misma oración?** El modelo escribe correctamente los nombres del donante y del arquitecto del edificio Gates. De 864 pares de preguntas, acierta ambas respuestas en 100. En 24 situaciones nuevas con intercambio de nombres, no resuelve por completo ninguna, frente a 20 de Qwen3-8B en local. [Resultados e instrucciones](../references/shared_sentence_writer_result.md)
 
-[![Figura 86. Dos preguntas sobre una oración y respuestas originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![Figura 86. Dos preguntas sobre una oración y respuestas originales](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 **¿Por qué el modelo confunde a las personas?** En 387 preguntas en chino sobre la identidad de una persona, seleccionar una oración por los glifos que comparte con la pregunta elevó de 62 a 116 las respuestas completamente correctas. Con el mismo selector, el control con asignación aleatoria en el entrenamiento adicional acertó 127. La figura 85 muestra un nombre de lugar en respuesta a una pregunta por un inventor. [Resultados e instrucciones](../references/inverse_role_writer_result.md)
 
-[![Figura 85. Selección de oraciones y respuestas originales](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![Figura 85. Selección de oraciones y respuestas originales](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
 
 **¿De quién habla la frase?** Con nombres y complementos nuevos, el modelo escribió correctamente 368 de 404 oraciones chinas completas. Al copiar del pasaje los nombres Qin y Chu en escritura sobre bronce, acertó en 24 de 32 oraciones. Cuando tuvo que dar el nombre a partir de una propiedad, no reprodujo correctamente ningún nombre en esa escritura. [Resultados e instrucciones](../references/visual_role_writer_result.md)
 
-[![Figura 84. Dos pasajes con escritura sobre bronce y las respuestas obtenidas](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+[![Figura 84. Dos pasajes con escritura sobre bronce y las respuestas obtenidas](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
 
 **¿Qué lee el modelo en una imagen de texto?** Ante la misma frase en imagen, «她喝了一口□。» («Tomó un sorbo de □»), el modelo escribió 水 (agua) o 茶 (té) según la bebida del pasaje. Al combinar la red con las frecuencias de los caracteres vecinos, recuperó exactamente 651 de los 2947 fragmentos chinos ocultos. Al intercambiar los papeles de dos personas, no juzgó correctamente ambas versiones en ninguno de los 48 pares. [Resultados y comandos](../references/visual_inference_writer_result.md)
 
-[![Figura 83. Dos pasajes, la misma frase incompleta y las dos respuestas en imagen](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![Figura 83. Dos pasajes, la misma frase incompleta y las dos respuestas en imagen](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 <!-- paired-writing-status:start -->
 La comparación de eliminación de márgenes blancos, tras 512 actualizaciones, sigue sin copiar con fiabilidad: coincidencia OCR exacta de 6/32 en entrenamiento y 10/32 en validación (referencias nítidas: 27/32 y 28/32). Las imágenes originales omiten caracteres y repiten letras. El tiempo de entrenamiento baja de 795.624 a 287.182 segundos, pero no demuestra comprensión del lenguaje ni eficiencia con una calidad útil. [Las 64 salidas originales](../references/paired_padding_result.md).
@@ -68,37 +68,41 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+El codificador visual emparejó correctamente las preguntas en inglés y en chino en 364 de 374 pasajes de novela. En 92 preguntas sobre otras cinco obras, el lector extrajo 31 respuestas exactas. Con esos fragmentos, el modelo generativo produjo 19 respuestas exactas. [↗](../references/bilingual_book_intervals_result.md)
+
+[![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)
+
 Tras entrenarse con 642 de sus propios errores, el modelo visual produjo 31 respuestas en imagen exactas en 144 consultas sobre otras seis obras chinas. Respondió bien a ambas preguntas en los dos idiomas en 0 de los 36 pasajes. [↗](../references/stopped_book_preference_result.md)
 
-[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=142)
 
 En 34 pasajes de otras cuatro obras chinas, el modelo entrenado con mayor peso en el primer carácter dio 31 respuestas exactas a 136 preguntas en chino e inglés. En ningún pasaje acertó las cuatro respuestas. [↗](../references/first_glyph_book_result.md)
 
-[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)
+[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=141)
 
 Cada pasaje de novela china recibió dos preguntas en chino y las mismas dos en inglés. El modelo bilingüe acertó las cuatro respuestas en 3 de 374 pasajes, frente a 0 en el control que intercambió las preguntas en inglés durante el entrenamiento. En XQuAD, el modelo bilingüe acertó las cuatro en 1 de 227 pasajes. [Resultados e imágenes de las respuestas](../references/bilingual_novel_result.md)
 
-[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=139)
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=140)
 
 Variar el grosor de los trazos y las proporciones de los caracteres durante el entrenamiento elevó las respuestas exactas en chino con HanaMin de 15 a 43 de 394. El modelo acertó las dos preguntas de 6 de 197 pasajes. En una prueba aparte con XQuAD y la misma fuente no acertó ambas en ninguno de los 227 pasajes. [Resultados e imágenes de las respuestas](../references/stroke_scale_result.md)
 
-[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=139)
 
 En nuevos pasajes chinos escritos con HanaMin, una fuente excluida del entrenamiento, el modelo dio 15 respuestas exactas de 394. El entrenamiento con varias fuentes por sí solo dio 3. Acertó las dos preguntas en 0 de 197 pasajes. El catálogo local permite pedir las formas históricas de un carácter como 中 y recibir una respuesta en imagen. [Usar el modelo y el catálogo](../models/typeface_writer/README.md)
 
-[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=137)
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=138)
 
 En 98 pasajes chinos presentados como imágenes, el modelo destilado acertó 72 de 196 preguntas, frente a 63 con entrenamiento ordinario. Ambos acertaron las dos preguntas en 11 pasajes. Qwen3-8B, que recibió el mismo material como texto, acertó ambas en 55. [Resultados y modelo](../references/interval_teacher_result.md)
 
-[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=136)
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=137)
 
 El mismo modelo respondió correctamente a 114 de 359 preguntas de lectura en chino y reprodujo, en ambos órdenes solicitados, las formas de 言 de las inscripciones en hueso y bronce mostradas en una lámina. En otros 128 pasajes con dos preguntas cada uno, acertó ambas en 15 pasajes. El lector que extrae la respuesta del texto acertó ambas en 49. [Ejecutar el modelo](../models/mixed_visual_answers/README.md)
 
-[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=136)
 
 El modelo leyó pasajes chinos en imágenes y dio el nombre y el año correctos tras cada cambio y con tres formulaciones nuevas en 34 de 64 pasajes individuales y en 8 de 48 casos de dos párrafos. Respondió con exactitud a siete de 359 preguntas más generales escritas por personas.
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=134)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
