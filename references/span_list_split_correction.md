@@ -1,0 +1,8 @@
+# Source split correction before replacement fitting
+
+The official DRCD test split had already been reserved for a separate confirmation. The earlier factual subset, transfer sample and both successive span-selector samples drew questions from that file. Treat their DRCD scores as exposed developmental observations. Preserve the original fits and receipts. Retire the reservation's claim of whole-pool novelty. No further inference on the affected records.
+
+Use unchanged architectures and training settings. Exclude all examples sharing a normalized 64-character window or whole passage with the protected pool. Exclude DRCD records outside the official training and development sources, including duplicate reserved article titles. Refit all three list scorers from the same initialization. Freeze 192 questions per corpus on new eligible CMRC-development and DRCD-development paragraphs, each different from those used in previous span samples. Source screens precede rendering. Hold out the same 96 validation exchange subjects. Keep the frozen generic, likelihood and former pooled controls; exposure in earlier controls must be disclosed.
+
+Measure both word orders on all eligible previous factual records (CMRC, DuIE, notes and the exchange boards). Preserve the archived 48-question threshold as unrepeatable on that original mixed cohort. Report 20/29 as the prior eligible CMRC comparator, keeping 79/128 and 37/48 as the unchanged complete exchange comparators. The new development test is a separate comparison; the old reservation cannot be restored by filtering after scoring. Report exact pixel scores, paired changes, freer output and the limits of source screening.
+

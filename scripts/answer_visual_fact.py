@@ -22,6 +22,7 @@ def main():
     parser.add_argument("--writer",type=Path,help="Use a separately trained autoregressive image writer")
     parser.add_argument("--relation-head",type=Path,help="Optional question-side relation checkpoint")
     scorers=parser.add_mutually_exclusive_group()
+    scorers.add_argument("--span-list",type=Path,help="Rank up to eight spans per visual reader")
     scorers.add_argument("--span-choice",type=Path,help="Select among four proposed answer images with learned probabilities")
     parser.add_argument("--span-experts",type=Path,default=Path("models/participant_margin"))
     scorers.add_argument("--participant-head",type=Path,help="Use a learned role-conditioned object span scorer")
@@ -36,14 +37,19 @@ def main():
     model=BoundFactReader(args.reader,args.model,args.device)
     if args.relation_head is None and (args.model/"pictured-relation.npz").is_file():
         args.relation_head=args.model/"pictured-relation.npz"
-    if args.span_choice and not args.relation_head:
+    if (args.span_choice or args.span_list) and not args.relation_head:
         args.relation_head=Path("models/pictured_relation/pictured-relation.npz")
     if args.participant_head and not args.relation_head:
         parser.error("--participant-head requires pictured relation weights in the model or --relation-head")
     if args.relation_head:
         from ilm.visual_lm.pictured_relation import PicturedRelation
         channel=PicturedRelation(args.relation_head)
-        if args.span_choice:
+        if args.span_list:
+            from ilm.visual_lm.span_choice import SpanChoiceReader
+            from ilm.visual_lm.span_list import SpanListReader
+            experts=SpanChoiceReader(model,channel,args.span_experts)
+            fields=SpanListReader(experts,args.span_list).fields_many([pair])
+        elif args.span_choice:
             from ilm.visual_lm.span_choice import SpanChoiceReader
             fields=SpanChoiceReader(model,channel,args.span_experts,args.span_choice).fields_many([pair])
         elif args.participant_head:
