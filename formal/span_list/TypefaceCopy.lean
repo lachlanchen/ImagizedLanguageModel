@@ -27,3 +27,26 @@ theorem copy_preserves_difference {n : Nat} {Ink : Type}
 outcome when the copied typeface differs from the fixed typeface. -/
 example : 3 + 3 > 4 ∧ 3 < 4 := by decide
 end TypefaceCopy
+
+namespace TypefaceCopy
+
+/-- A lower bound on the winning score and a gap to every rival certify
+the very same accept decision throughout a uniform score perturbation.
+Scores, threshold and slack are expressed in common integer units. -/
+theorem stable_acceptance {Label : Type} (s t : Label → Int)
+    (winner : Label) (threshold margin eps : Int)
+    (close_lo : ∀ i, s i - eps ≤ t i) (close_hi : ∀ i, t i ≤ s i + eps)
+    (confidence : threshold + eps ≤ s winner)
+    (separation : ∀ j, j ≠ winner → s j + margin + 2 * eps ≤ s winner) :
+    threshold ≤ t winner ∧ ∀ j, j ≠ winner → t j + margin ≤ t winner := by
+  constructor
+  · have := close_lo winner
+    omega
+  · intro j different
+    have := close_lo winner
+    have := close_hi j
+    have := separation j different
+    omega
+
+#print axioms stable_acceptance
+end TypefaceCopy

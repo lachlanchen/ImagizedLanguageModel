@@ -157,8 +157,10 @@ def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=
     stage.mkdir()
     for f in ("config.json", "interface.safetensors", "metric.safetensors"):
         os.link(base / f, stage / f)
-    if typeface_map is not None:
-        os.link(typeface_map, stage / "typeface.safetensors")
+    inherited_map = base / "typeface.safetensors"
+    deployed_map = typeface_map if typeface_map is not None else inherited_map
+    if deployed_map.is_file():
+        os.link(deployed_map, stage / "typeface.safetensors")
     for name, part in (("body", model.writer.body), ("pointer", model.pointer)):
         save_file(
             {k: v.detach().cpu().contiguous() for k, v in part.state_dict().items()},
