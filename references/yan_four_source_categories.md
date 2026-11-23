@@ -1,0 +1,7 @@
+# Four catalogued forms of 言
+
+The earlier card labelled “yan” contains oracle and bronze exemplars for both 言 and 征. Each of four prompts asks for one character in one of two orders. Four exact answers on that card therefore cover two exemplars of 言. The card was originally selected from the source-plate training split.
+
+For a separate test, choose the lexicographically first existing Hanziyuan SVG label for each of the oracle, bronze, seal and Liushutong categories for 言 and 征. Check every asset against the local source index, record its hash and render it with the original 32-pixel historical renderer. Liushutong is a collection label. This test concerns catalogue identity and source copying. It does not establish that four shapes form a dated chronological chain.
+
+On a page with both characters and all four categories, ask once for all four 言 forms, then ask two questions requesting two forms each. Repeat with reversed question order, Chinese and English, and with reversed stage order on the pictured page. A separate source-assisted condition gives each two-category request its corresponding two-category card. This uses known catalogue boundaries and the requested categories. Count a form only if its exact source bitmap occurs, and count a full response only if all four occur once, in order, with a stop for every clause and no glyph belonging to the distractor character. Preserve all outputs.

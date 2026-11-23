@@ -1,6 +1,5 @@
 """Compare the stopped correct clause to the same clause naming the other participant."""
 
-import json
 from collections import defaultdict, Counter
 import torch
 from ilm.visual_lm.pointing_causal_writer import PointingCausalWriter
