@@ -1,0 +1,124 @@
+{
+  "table": [
+    [
+      "All requests correct",
+      "Passages",
+      "Ordinary",
+      "Later action",
+      "First action"
+    ],
+    [
+      "Four literary works",
+      "34",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "BiPaR novels",
+      "374",
+      "3",
+      "3",
+      "3"
+    ],
+    [
+      "XQuAD",
+      "227",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "CMRC",
+      "197",
+      "16",
+      "21",
+      "16"
+    ],
+    [
+      "Historical forms",
+      "100",
+      "99",
+      "99",
+      "99"
+    ]
+  ],
+  "series": [
+    [
+      52.9,
+      16.2,
+      33.8,
+      10.3
+    ],
+    [
+      47.1,
+      14.7,
+      35.3,
+      7.4
+    ],
+    [
+      51.5,
+      19.1,
+      35.3,
+      10.3
+    ]
+  ],
+  "strips": [
+    [
+      "answer_hit_context",
+      "Correct · excerpt"
+    ],
+    [
+      "answer_hit_question",
+      "Pictured question"
+    ],
+    [
+      "answer_hit_first",
+      "Writer reply"
+    ],
+    [
+      "answer_miss_context",
+      "Missed · excerpt"
+    ],
+    [
+      "answer_miss_question",
+      "Pictured question"
+    ],
+    [
+      "answer_miss_first",
+      "Writer reply"
+    ],
+    [
+      "answer_miss_reference",
+      "Accepted reply"
+    ]
+  ],
+  "examples": {
+    "answer_hit": {
+      "id": "lu-3/0",
+      "title": "呐喊·自序",
+      "question": "药是给谁买的？",
+      "refs": [
+        "父亲",
+        "久病的父亲"
+      ],
+      "reply_if_unique": "父亲",
+      "stopped": true,
+      "exact": true,
+      "source_excerpt": "上给我久病的父亲去买药。回家之后，又须忙别的事了"
+    },
+    "answer_miss": {
+      "id": "lu-3/0",
+      "title": "呐喊·自序",
+      "question": "Whom was the narrator buying medicine for?",
+      "refs": [
+        "父亲",
+        "久病的父亲"
+      ],
+      "reply_if_unique": "芦根",
+      "stopped": true,
+      "exact": false,
+      "source_excerpt": "上给我久病的父亲去买药。回家之后，又须忙别的事了"
+    }
+  }
+}
