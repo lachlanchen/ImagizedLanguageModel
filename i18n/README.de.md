@@ -2,59 +2,59 @@
 
 Nach Ausschluss der reservierten DRCD-Daten und erneutem Training lieferte das Modell mit der erweiterten Auswahlliste bei 234 von 359 Entwicklungsfragen das exakte Antwortbild, das allgemeine Lesemodell bei 242. Frühere DRCD-Auswertungen verwendeten reservierte Testpassagen. [Ergebnisse und Berichtigung zur Datenquelle](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 Bei 384 neu ausgewerteten chinesischen Lesefragen stimmten 285 Antworten des kombinierten Modells exakt mit dem Referenzbild überein, ebenso viele wie beim allgemeinen Lesemodell. Von 128 Tests mit vertauschten Namen bestand es 63 vollständig, das spezialisierte Modell 79. [Ergebnisse und Gewichte](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 Nach dem Vertauschen zweier Namen in einem chinesischen Textbild beantwortete das allein mit Likelihood trainierte Modell bei 79 von 128 Passagen sämtliche Fragen in beiden Wortstellungen richtig. Zuvor waren es 29. Bei 48 von Menschen formulierten Fragen sank die Zahl richtiger Antworten in beiden Wortstellungen von 34 auf 28. [Ergebnisse und Modelle](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 Bei 34 von 48 von Menschen formulierten chinesischen Fragen gab das Modell den Sachverhalt in beiden gewünschten Wortstellungen korrekt wieder. Es nannte den richtigen Komponisten von „秋潮“. Bei einem anderen Lied verwechselte es Komponist und Texter, als ihre Namen vertauscht wurden. [Ergebnisse und Modell](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 Nach dem Training mit 26.890 chinesischen Bildbeispielen beantwortete das Modell 33 von 48 von Menschen formulierten Fragen in vollständigen, korrekten Sätzen. Ein zweites Modell schrieb Zeichen für Zeichen und drückte denselben Sachverhalt bei 31 Fragen in beiden verlangten Wortfolgen aus. Im Filmbeispiel stimmen die ursprünglichen Angaben zu Regie und Drehbuch. Nach dem Namenstausch kopiert das Modell einen Teil des Satzes mit. [Ergebnisse und Modell](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 Folgt die Antwort, wenn zwei Namen im Bild eines Textes vertauscht werden? Bei Rollenkombinationen, die beim Training mit zwei Sätzen ausgelassen wurden, schrieb das Modell mit getrennter Aufgabenplanung und gemeinsamem Bildgenerator in 70 von 136 Fällen beide Fakten in der verlangten Reihenfolge. Das Modell, das beide Sätze in einem Durchgang schrieb, schaffte dies dreimal. Im Filmbeispiel schrieb es lesbare Sätze, nannte aber dieselbe Person für Drehbuch und Regie. [Ergebnisse und Modell](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 Wer zeichnete die Karte und wer musste nach dem Weg fragen? Das überarbeitete Modell nennt zwei verschiedene Namen. Bei 64 neuen Fragen in Bildform gab es 42 Namen exakt wieder. Es schreibt auch die Orakelknochen- und Bronzeformen von 言 in der verlangten Reihenfolge. Bei 128 neuen offenen Fragen, die ein in der Eingabe fehlendes Schriftzeichen erforderten, stimmte keine Antwort genau mit einer Referenz überein. [Ergebnisse und Modell](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 Der abgebildete Text nennt die Person, die eine Karte zeichnete, und die Person, die sich verlaufen hatte. Das Modell benennt den Kartenzeichner richtig, wiederholt diese Aussage aber auf die Frage, wer nach dem Weg fragen musste. Bei 300 Fragen fehlte eine benötigte Glyphe in der Eingabe. Selbst mit dem richtigen bisherigen Antwortverlauf wählte das Modell die erste fehlende Glyphe nur 18-mal richtig. [Ergebnisse und ursprüngliche Antwortbilder](../references/causal_glyph_writer_result.md)
 
-[![Zwei Fragen zur selben Karte](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![Zwei Fragen zur selben Karte](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 Das Modell gibt die Orakelknochen- und Bronzeformen von 言 in der Reihenfolge der abgebildeten Frage aus. Bei zurückgehaltenen Zeichen und vertrauter Formulierung gelangen beide Reihenfolgen in 94 von 96 Vergleichen. Bei weiteren Karten und neuer Formulierung waren es 16 von 96. [Ergebnisse und Antwortbilder](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 **Schriftbilder lesen und Fragen beantworten.** Von 64 chinesischen Fragen zu zwei Personen beantwortete das Modell 46 in Normalschrift und 41 in Fettschrift richtig. Das lokale Qwen3-8B kam mit Texteingabe auf 55. Bei einer im Training nicht verwendeten Kai-Schrift war nur eine Antwort richtig. [Modell ausführen](../docs/visual-page-responder.md)
 
-[![Abbildung 88. Fragen und Antworten als Schriftbilder](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![Abbildung 88. Fragen und Antworten als Schriftbilder](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=121)
 
 **Kann das Modell zwei Personen in einem Satz unterscheiden?** Das Modell nennt den Spender und den Architekten des Gates-Gebäudes korrekt. Bei 100 von 864 Fragenpaaren stimmen beide Antworten. In 24 neuen Situationen mit vertauschten Namen löst es keine vollständig, das lokale Qwen3-8B dagegen 20. [Ergebnisse und Anleitung](../references/shared_sentence_writer_result.md)
 
-[![Abbildung 86. Zwei Fragen zu einem Satz und die Originalantworten](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![Abbildung 86. Zwei Fragen zu einem Satz und die Originalantworten](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 **Warum wählt das Modell die falsche Person?** Bei 387 chinesischen Wer-Fragen stieg die Zahl vollständig richtiger Antworten von 62 auf 116, wenn zunächst ein Satz anhand gemeinsamer Schriftzeichen ausgewählt wurde. Das Kontrollmodell mit zufälliger Zuordnung im Zusatztraining erreichte damit 127. Abbildung 85 zeigt einen Ortsnamen als Antwort auf die Frage nach einem Erfinder. [Ergebnisse und Anleitung](../references/inverse_role_writer_result.md)
 
-[![Abbildung 85. Satzauswahl und Originalantworten](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![Abbildung 85. Satzauswahl und Originalantworten](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **Von wem handelt der Satz?** Mit neuen Namen und Ergänzungen schrieb das Modell 368 von 404 chinesischen Sätzen vollständig richtig. Mit den Schriftzeichen für Qin und Chu aus Bronzeinschriften gelangen 24 von 32 Sätzen. War nur die Eigenschaft vorgegeben und der Name gefragt, gab es keinen der Namen in Bronzeschrift exakt wieder. [Ergebnisse und Anleitung](../references/visual_role_writer_result.md)
 
-[![Abbildung 84. Zwei Passagen mit Bronzeinschriften und die ausgegebenen Antworten](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![Abbildung 84. Zwei Passagen mit Bronzeinschriften und die ausgegebenen Antworten](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **Was liest das Modell aus Schriftbildern?** Beim Satzbild „她喝了一口□。“ („Sie nahm einen Schluck □“) wechselte die Antwort von 水 (Wasser) zu 茶 (Tee), als das Getränk im Begleittext wechselte. Das neuronale Modell und eine Auswertung benachbarter Schriftzeichen ergänzten gemeinsam 651 von 2.947 chinesischen Textlücken wortgetreu. Tauschten zwei Personen ihre Rollen, beurteilte das Modell bei keinem der 48 Paare beide Fassungen richtig. [Ergebnisse und Befehle](../references/visual_inference_writer_result.md)
 
-[![Abbildung 83. Zwei Textpassagen, derselbe Lückensatz und die beiden Antwortbilder](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
+[![Abbildung 83. Zwei Textpassagen, derselbe Lückensatz und die beiden Antwortbilder](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
 
 <!-- paired-writing-status:start -->
 Auch der Vergleich nach 512 Aktualisierungen mit entfernten weißen Rändern liefert keine zuverlässigen Abschriften: exakt per OCR erkannt werden 6/32 Trainings- und 10/32 Validierungsfolgen (klare Referenzbilder: 27/32 und 28/32). Die Rohbilder lassen Zeichen aus und wiederholen Buchstaben. Die Trainingszeit sinkt von 795.624 auf 287.182 Sekunden; Sprachverständnis und Effizienz bei brauchbarer Qualität bleiben unbelegt. [Alle 64 Rohbilder](../references/paired_padding_result.md).
@@ -68,9 +68,13 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Dasselbe Modell beantwortete 114 von 359 chinesischen Leseverständnisfragen exakt. Die auf einer Bildtafel gezeigten Orakelknochen- und Bronzeformen von 言 gab es in beiden gewünschten Reihenfolgen wieder. Bei 128 weiteren Texten mit je zwei Fragen beantwortete es für 15 Texte beide Fragen richtig, das extraktive Lesemodell für 49. [Bildmodell ausführen](../models/mixed_visual_answers/README.md)
+
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+
 Das Modell liest chinesische Schriftbilder. Bei drei neuen Frageformulierungen gab es nach jeder Jahresänderung in 34 von 64 Fällen mit einem Absatz und in 8 von 48 Fällen mit zwei Absätzen den richtigen Namen und das richtige Jahr aus. Bei 359 breiter angelegten menschlichen Lesefragen stimmten sieben Antworten exakt mit der Referenz überein.
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)

@@ -2,59 +2,59 @@
 
 Sau khi loại tài liệu DRCD đã dành riêng và huấn luyện lại, mô hình xét nhiều đáp án hơn trả lời khớp hoàn toàn 234 trong 359 câu hỏi phát triển. Bộ đọc đa dụng trả lời đúng 242 câu. Các đánh giá DRCD trước đây đã sử dụng đoạn văn dành riêng cho kiểm thử. [Kết quả và đính chính về nguồn dữ liệu](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 Trên 384 câu hỏi đọc hiểu tiếng Trung mới được đánh giá, mô hình kết hợp các đáp án bằng hình ảnh từ bốn bộ đọc trả lời đúng hoàn toàn 285 câu, ngang với bộ đọc đa dụng. Mô hình vượt qua trọn vẹn 63 trong 128 phép thử đổi tên, so với 79 của bộ đọc chuyên biệt. [Kết quả và trọng số](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 Khi đổi chỗ hai tên trong đoạn văn tiếng Trung dạng ảnh, mô hình huấn luyện chỉ bằng hàm hợp lý trả lời đúng mọi câu hỏi theo cả hai trật tự từ ở 79 trong 128 đoạn, so với 29 đoạn trước đây. Với 48 câu hỏi do người viết, số câu đúng theo cả hai trật tự giảm từ 34 xuống 28. [Kết quả và mô hình](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 Với 34 trong số 48 câu hỏi tiếng Trung do người viết, mô hình đã viết đúng cùng một sự kiện theo cả hai trật tự từ được yêu cầu. Mô hình nêu đúng tên người soạn nhạc cho bài 《秋潮》, nhưng vẫn nhầm tên khi đổi vai người viết lời và người soạn nhạc trong một bài khác. [Kết quả và mô hình](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 Sau khi học từ 26.890 ví dụ tiếng Trung dưới dạng ảnh, mô hình viết đúng câu trả lời hoàn chỉnh cho 33 trong 48 câu hỏi do người viết. Một mô hình khác sinh từng hình chữ và diễn đạt đúng cùng một sự việc theo cả hai trật tự được yêu cầu ở 31 câu. Trong ví dụ về phim, mô hình ghi đúng đạo diễn và người viết kịch bản trong bản gốc, nhưng chép thừa cả một đoạn sau khi hai tên được đổi chỗ. [Kết quả và mô hình](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 Khi đổi chỗ hai tên người trong một đoạn văn dưới dạng ảnh, mô hình có đổi câu trả lời đúng theo không? Với những cặp vai trò chưa xuất hiện cùng nhau khi luyện viết hai câu, mô hình tách câu hỏi rồi dùng chung một bộ viết ảnh đã trả lời đúng thứ tự ở 70 trong 136 câu hỏi. Mô hình viết liền hai câu chỉ đạt 3. Ở ví dụ về phim, cả hai câu đều dễ đọc nhưng lại ghi cùng một người làm đạo diễn và biên kịch. [Kết quả và mô hình](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 Ai vẽ bản đồ và ai cần hỏi đường? Mô hình cải tiến trả về hai tên khác nhau. Với 64 câu hỏi mới dưới dạng ảnh, mô hình trả lời đúng tên 42 lần. Nó cũng viết được dạng giáp cốt và kim văn của chữ 言 theo thứ tự yêu cầu. Trong 128 câu hỏi mở mới cần dạng chữ không có trong đầu vào, không câu trả lời nào trùng khớp hoàn toàn với đáp án tham chiếu. [Kết quả và mô hình](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 Đoạn văn trong ảnh cho biết ai vẽ bản đồ và ai bị lạc. Mô hình xác định đúng người vẽ bản đồ, nhưng khi được hỏi ai cần hỏi đường, nó lại kể chuyện vẽ bản đồ. Trong 300 câu cần dùng một mặt chữ không xuất hiện trong đầu vào, mô hình chỉ chọn đúng mặt chữ mới đầu tiên 18 lần, dù đã được cung cấp phần đầu đáp án đúng. [Kết quả và ảnh câu trả lời gốc](../references/causal_glyph_writer_result.md)
 
-[![Hai câu hỏi về cùng một bản đồ](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![Hai câu hỏi về cùng một bản đồ](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 Mô hình viết dạng giáp cốt văn và kim văn của chữ 言 theo thứ tự nêu trong câu hỏi bằng hình ảnh. Với cách hỏi quen thuộc và các chữ dành riêng cho đánh giá, mô hình viết đúng cả hai thứ tự ở 94 trong 96 phép so sánh. Khi đổi thẻ và cách hỏi, kết quả là 16 trên 96. [Kết quả và hình ảnh](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 **Đọc và trả lời bằng hình ảnh chữ viết.** Với 64 câu hỏi tiếng Trung về hai người, mô hình trả lời đúng 46 câu ở kiểu chữ thường và 41 câu ở kiểu chữ đậm. Qwen3-8B chạy cục bộ trả lời đúng 55 câu khi nhận văn bản. Ở kiểu chữ Khải chưa dùng để huấn luyện, mô hình chỉ trả lời đúng một câu. [Chạy mô hình](../docs/visual-page-responder.md)
 
-[![Hình 88. Ảnh câu hỏi và câu trả lời thực tế](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![Hình 88. Ảnh câu hỏi và câu trả lời thực tế](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=121)
 
 **Mô hình có phân biệt được hai người trong cùng một câu?** Mô hình viết đúng tên người tài trợ và kiến trúc sư của tòa nhà Gates. Trong 864 cặp câu hỏi, có 100 cặp đúng cả hai đáp án. Khi hoán đổi tên trong 24 tình huống mới, mô hình không giải đúng trọn vẹn tình huống nào. Qwen3-8B chạy cục bộ giải đúng 20. [Kết quả và cách chạy](../references/shared_sentence_writer_result.md)
 
-[![Hình 86. Hai câu hỏi trên cùng một câu văn và ảnh đầu ra](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![Hình 86. Hai câu hỏi trên cùng một câu văn và ảnh đầu ra](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 **Vì sao mô hình chọn nhầm người?** Trong 387 câu hỏi tiếng Trung về danh tính, số câu trả lời đúng hoàn toàn tăng từ 62 lên 116 khi chọn trước một câu dựa trên hình dạng chữ trùng nhau. Mô hình đối chứng với cách gán ngẫu nhiên trong phần huấn luyện bổ sung đạt 127 với cùng cách chọn câu. Hình 85 cho thấy mô hình viết một địa danh khi được hỏi tên nhà phát minh. [Kết quả và cách chạy](../references/inverse_role_writer_result.md)
 
-[![Hình 85. Chọn câu và ảnh đầu ra](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![Hình 85. Chọn câu và ảnh đầu ra](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **Câu này nói về ai?** Với tên và bổ ngữ mới, mô hình viết đúng trọn vẹn 368 trong 404 câu tiếng Trung. Khi chép hai tên Tần và Sở từ hình chữ khắc trên đồ đồng, mô hình viết đúng 24 trong 32 câu. Khi chỉ biết đặc điểm và phải tự nêu tên, mô hình không trả về đúng tên nào ở dạng chữ khắc. [Kết quả và cách chạy](../references/visual_role_writer_result.md)
 
-[![Hình 84. Hai đoạn có chữ khắc trên đồ đồng và câu trả lời thực tế](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![Hình 84. Hai đoạn có chữ khắc trên đồ đồng và câu trả lời thực tế](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **Mô hình đọc được gì từ hình ảnh chữ viết?** Với cùng một ảnh câu “她喝了一口□。” (Cô ấy uống một ngụm □), khi đồ uống trong đoạn văn đổi từ nước sang trà, câu trả lời cũng đổi từ 水 sang 茶. Kết hợp mạng nơ-ron với tần suất của các chữ liền kề giúp khôi phục chính xác 651 trong 2.947 cụm chữ bị che. Khi hoán đổi vai trò của hai người, mô hình không đánh giá đúng cả hai phiên bản ở bất kỳ cặp nào trong 48 cặp. [Kết quả và lệnh chạy](../references/visual_inference_writer_result.md)
 
-[![Hình 83. Hai đoạn văn, cùng một câu có chỗ trống và hai ảnh câu trả lời](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
+[![Hình 83. Hai đoạn văn, cùng một câu có chỗ trống và hai ảnh câu trả lời](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
 
 <!-- paired-writing-status:start -->
 Thử nghiệm loại bỏ khoảng trắng với 512 bước cập nhật vẫn chưa sao chép đáng tin cậy: OCR khớp hoàn toàn 6/32 mẫu huấn luyện và 10/32 mẫu kiểm định (ảnh tham chiếu rõ: 27/32 và 28/32). Ảnh đầu ra còn thiếu ký tự và lặp chữ. Thời gian huấn luyện giảm từ 795.624 xuống 287.182 giây, nhưng khả năng hiểu ngôn ngữ và hiệu quả ở chất lượng hữu ích vẫn chưa được chứng minh. [Toàn bộ 64 ảnh đầu ra](../references/paired_padding_result.md).
@@ -68,9 +68,13 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Cùng một mô hình đọc ảnh chữ đã trả lời chính xác 114 trong 359 câu hỏi tiếng Trung và viết lại hai dạng giáp cốt văn và kim văn của chữ 言 theo thứ tự yêu cầu từ thẻ hình. Với 128 đoạn đọc khác, mỗi đoạn có hai câu hỏi, mô hình trả lời đúng cả hai ở 15 đoạn. Mô hình trích xuất đáp án đạt 49 đoạn. [Chạy mô hình](../models/mixed_visual_answers/README.md)
+
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+
 Mô hình đọc các đoạn văn tiếng Trung dưới dạng ảnh. Khi đổi năm và đặt câu hỏi theo ba cách mới, mô hình ghi đúng tên và năm trong mọi câu trả lời ở 34/64 trường hợp một đoạn và 8/48 trường hợp hai đoạn. Với 359 câu hỏi đọc hiểu đa dạng hơn do con người viết, có bảy câu trả lời trùng khớp hoàn toàn.
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)

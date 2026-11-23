@@ -2,59 +2,59 @@
 
 予約済みの DRCD 資料を除いて再学習した結果、候補を増やしたモデルは開発用359問中234問で正解画像と完全に一致し、汎用モデルは242問で一致した。以前の DRCD 評価には予約済みのテスト文章が含まれていた。 [結果とデータ出典の訂正](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 中国語の新たな読解問題384問で、4つの読み取りモデルが提示した画像候補をまとめると、汎用モデルと同じ285問で正解画像と完全に一致した。人名を入れ替える128組のテストでは全問正解が63組で、専用モデルは79組だった。 [結果と重み](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 画像内の中国語の文章で二人の名前を入れ替えると、尤度だけで訓練したモデルは128件中79件で、すべての質問に二通りの語順で正しく答えた。従来は29件だった。一方、人が書いた48問では両方の語順で正解した数が34問から28問に減った。 [実験結果とモデル](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 人が書いた中国語の質問48問のうち34問で、画像を出力するモデルが同じ事実を指定された二通りの語順で正しく書けた。「秋潮」の作曲者は正しく答えたが、別の曲で作詞者と作曲者の名前を入れ替えると、人名を取り違えた。 [実験結果とモデル](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 26,890件の中国語画像で学習したモデルは、人が書いた48問のうち33問に完全な文で正しく答えた。字形を一つずつ生成する別のモデルは、そのうち31問で、同じ内容を指定された二通りの語順で書けた。映画紹介では元の監督と脚本家を正しく挙げたが、名前を入れ替えると余分な箇所まで写した。 [実験結果とモデル](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 画像の文章で二人の名前を入れ替えると、答えも正しく変わるだろうか。二文を組み合わせる訓練では見せなかった役割の組合せについて、問いを分けて同じ画像生成器で書くモデルは136問中70問で二つの事実を指定順に記した。一度に二文を書く従来モデルは3問だった。映画の例では、文は読めるものの監督と脚本家に同じ人を挙げた。 [実験結果とモデル](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 地図を描いたのは誰か、道に迷ったのは誰か。改良したモデルは、それぞれ別の名前を答えた。新たな画像の問い64問では42問で正しい人名を返した。「言」の甲骨文と金文も指定順に書ける。一方、入力にない字形を必要とする新たな自由回答128問では、参照解答と完全に一致した例はなかった。 [実験結果とモデル](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 画像の文章には、地図を描いた人と道に迷った人が登場します。モデルは地図を描いた人を正しく答えましたが、道を尋ねたのは誰かと聞くと、また地図の話をしました。入力にない字形を必要とする300問では、それまでの正しい解答を与えても、最初に必要な新しい字形を選べたのは18問でした。 [実験結果と実際の解答画像](../references/causal_glyph_writer_result.md)
 
-[![同じ地図についての二つの質問](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![同じ地図についての二つの質問](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 画像で指示すると、「言」の甲骨文と金文を指定した順序で出力できる。未学習の字例を使い、同じ二字形を順方向と逆方向の両方で正しく出せたのは、見慣れた質問文で96組中94組、別の字例と新しい質問文では96組中16組だった。 [結果と出力画像](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
 
 **字形画像を読んで答える.** 二人の人物に関する中国語の設問64問のうち、通常の書体では46問、太字では41問に正答しました。ローカルのQwen3-8Bはテキスト入力で55問に正答しました。学習に使わなかった楷書体では正答は1問でした。 [モデルを実行](../docs/visual-page-responder.md)
 
-[![図88：字形画像の質問と実際の回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![図88：字形画像の質問と実際の回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=121)
 
 **一文に登場する二人を区別できるか** ゲイツ棟の寄付者と建築家はどちらも正しく書けた。864組の質問のうち両方に正答したのは100組だった。名前を入れ替える24の新しい場面では全問正解が0場面で、ローカルのQwen3-8Bは20場面だった。 [結果と実行方法](../references/shared_sentence_writer_result.md)
 
-[![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
+[![図86　一文をめぐる二つの質問と実際の回答](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
 
 **なぜ人物を取り違えるのか** 中国語の「誰」を問う387問では、文章全体を読ませると62問、質問と共通する字形から一文を選ぶと116問に正答した。同じ選文法で、追加訓練の割り当てをランダムにした対照モデルは127問に正答した。図85は発明者の名前の代わりに地名を書いた例を示す。 [結果と実行方法](../references/inverse_role_writer_result.md)
 
-[![図85　選文と実際の出力](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
+[![図85　選文と実際の出力](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=118)
 
 **誰について書いているか.** 新しい名前と補語を用いた中国語の文は 404 件中 368 件で完全に一致した。秦と楚の金文の字形を入力から写した文は 32 件中 24 件で正解したが、性質だけを示して名前を尋ねると、金文の名前を正しく返した例はなかった。 [結果と実行方法](../references/visual_role_writer_result.md)
 
-[![図84　金文を含む二つの入力と実際の出力](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
+[![図84　金文を含む二つの入力と実際の出力](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=117)
 
 **字形から何を読み取れるか** 同じ画像の文「她喝了一口□。」（彼女は□を一口飲んだ）に対し、先行文の飲み物を水から茶に変えると、出力も「水」から「茶」に変わった。ニューラルモデルと隣接字形の頻度を組み合わせると、中国語の穴埋め 2,947 問中 651 問で原文と一致した。一方、二人の役割を入れ替えた 48 組では、両方の文について正しく判定できた組はなかった。 [実験結果と実行コマンド](../references/visual_inference_writer_result.md)
 
-[![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=115)
+[![図83　二つの先行文、共通の穴埋め文、二つの出力画像](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=116)
 
 <!-- paired-writing-status:start -->
 512 回更新の余白削減比較でも、安定した書き写しには至っていません。OCR 完全一致は訓練 6/32、検証 10/32（鮮明な参照画像は 27/32、28/32）で、生成画像には文字の欠落や重複が見られます。訓練時間は 795.624 秒から 287.182 秒に短縮しましたが、言語理解と実用品質での効率は未実証です。 [全 64 件の生成画像](../references/paired_padding_result.md).
@@ -68,9 +68,13 @@
 
 # Imagized Language Model (ILM)
 
+同じモデルが字形画像を読み、中国語の読解問題 359 問中 114 問に正答しました。図版にある「言」の甲骨文と金文も、指定された順に出力できました。別の 128 文章に各 2 問を出すと、両方に正答したのは 15 文章で、抽出型の読解モデルは 49 文章でした。 [画像モデルの実行方法](../models/mixed_visual_answers/README.md)
+
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+
 中国語の字形画像を読むモデルは、年を変更し、質問を三通りに言い換えても、単一段落の64組中34組、二段落の48組中8組で、すべての回答に正しい人物名と年を書けた。より広い分野から人が作成した359問では、完全一致は7問だった。
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
