@@ -68,6 +68,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Với hai câu hỏi khác nhau cho mỗi ảnh trong 98 đoạn văn tiếng Trung, mô hình chưng cất trả lời chính xác 72 trong 196 câu, so với 63 câu khi huấn luyện thông thường. Cả hai mô hình đều đúng cả hai câu ở 11 đoạn. Qwen3-8B nhận cùng nội dung dưới dạng văn bản và đúng cả hai câu ở 55 đoạn. [Kết quả và mô hình](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 Cùng một mô hình đọc ảnh chữ đã trả lời chính xác 114 trong 359 câu hỏi tiếng Trung và viết lại hai dạng giáp cốt văn và kim văn của chữ 言 theo thứ tự yêu cầu từ thẻ hình. Với 128 đoạn đọc khác, mỗi đoạn có hai câu hỏi, mô hình trả lời đúng cả hai ở 15 đoạn. Mô hình trích xuất đáp án đạt 49 đoạn. [Chạy mô hình](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

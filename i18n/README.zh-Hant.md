@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+對 98 篇中文材料的影像各提兩個不同的問題，蒸餾模型在 196 問中準確回答了 72 問，一般訓練模型答對 63 問。兩個模型都是 11 篇兩問全對。同樣的材料以文字輸入 Qwen3-8B 時，有 55 篇兩問全對。 [實驗結果與模型](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 同一個模型直接讀取字形圖像，在 359 道中文閱讀題中準確回答了 114 道，還能依指定順序從圖卡中寫出「言」的甲骨文和金文。另選的 128 篇材料每篇各有兩問，模型有 15 篇兩問全對，擷取式閱讀模型則有 49 篇。 [執行圖像問答模型](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+En 98 pasajes chinos presentados como imágenes, el modelo destilado acertó 72 de 196 preguntas, frente a 63 con entrenamiento ordinario. Ambos acertaron las dos preguntas en 11 pasajes. Qwen3-8B, que recibió el mismo material como texto, acertó ambas en 55. [Resultados y modelo](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 El mismo modelo respondió correctamente a 114 de 359 preguntas de lectura en chino y reprodujo, en ambos órdenes solicitados, las formas de 言 de las inscripciones en hueso y bronce mostradas en una lámina. En otros 128 pasajes con dos preguntas cada uno, acertó ambas en 15 pasajes. El lector que extrae la respuesta del texto acertó ambas en 49. [Ejecutar el modelo](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

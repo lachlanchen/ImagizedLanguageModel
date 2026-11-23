@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+中国語の文章画像98件に各2問を出したところ、蒸留モデルは196問中72問、通常の訓練を行ったモデルは63問に正答しました。2問とも正解した文章はどちらも11件でした。同じ文章をテキストで入力したQwen3-8Bでは55件でした。 [実験結果とモデル](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 同じモデルが字形画像を読み、中国語の読解問題 359 問中 114 問に正答しました。図版にある「言」の甲骨文と金文も、指定された順に出力できました。別の 128 文章に各 2 問を出すと、両方に正答したのは 15 文章で、抽出型の読解モデルは 49 文章でした。 [画像モデルの実行方法](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

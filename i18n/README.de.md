@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Zu 98 chinesischen Textabbildungen wurden je zwei Fragen gestellt. Das destillierte Modell gab 72 von 196 Antworten exakt wieder, das regulär trainierte Modell 63. Beide beantworteten bei 11 Texten beide Fragen richtig. Qwen3-8B gelang dies bei 55 Texten mit derselben Vorlage als Texteingabe. [Ergebnisse und Modell](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 Dasselbe Modell beantwortete 114 von 359 chinesischen Leseverständnisfragen exakt. Die auf einer Bildtafel gezeigten Orakelknochen- und Bronzeformen von 言 gab es in beiden gewünschten Reihenfolgen wieder. Bei 128 weiteren Texten mit je zwei Fragen beantwortete es für 15 Texte beide Fragen richtig, das extraktive Lesemodell für 49. [Bildmodell ausführen](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

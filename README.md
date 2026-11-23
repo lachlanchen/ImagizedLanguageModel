@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+Asked two different questions about each of 98 pictured Chinese passages, the distilled writer gave 72 exact answers to 196 questions, up from 63 with ordinary training. Both writers answered both questions on 11 passages. Qwen3-8B, given the same passages as text, answered both on 55. [Results and model](references/interval_teacher_result.md)
+
+[![101 · 72/196](publication/ilm-nature/figures/Figure_101_interval_teacher.png)](publication/ilm-nature/manuscript.pdf#page=134)
+
 One writer answered 114 of 359 Chinese reading questions exactly and returned both the oracle and bronze forms of 言 from a pictured catalogue card in either requested order. On 128 additional passages with two questions each, it answered both on 15. The span reader answered both on 49. [Run the image writer](models/mixed_visual_answers/README.md)
 
 [![100 · 言](publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](publication/ilm-nature/manuscript.pdf#page=133)

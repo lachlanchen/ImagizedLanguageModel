@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Sur 196 questions portant sur 98 passages chinois présentés en images, le modèle distillé a donné 72 réponses exactes, contre 63 après entraînement ordinaire. Chacun a répondu correctement aux deux questions pour 11 passages. Qwen3-8B, qui a reçu les mêmes passages en texte, y est parvenu pour 55 passages. [Résultats et modèle](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 Le même modèle a répondu exactement à 114 des 359 questions de lecture en chinois. À partir d’une planche, il a aussi reproduit dans les deux ordres demandés les formes de 言 attestées sur os et sur bronze. Sur 128 autres passages accompagnés de deux questions chacun, il a donné les deux bonnes réponses pour 15 passages, contre 49 pour le lecteur extractif. [Exécuter le modèle](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

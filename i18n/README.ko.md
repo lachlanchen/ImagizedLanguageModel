@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+중국어 지문 이미지 98개에 두 문제씩 제시했을 때 증류 모델은 196문제 중 72문제, 일반 학습 모델은 63문제에 정확히 답했습니다. 두 문제를 모두 맞힌 지문은 두 모델 모두 11개였습니다. 같은 내용을 텍스트로 받은 Qwen3-8B는 55개 지문에서 두 문제를 모두 맞혔습니다. [실험 결과와 모델](../references/interval_teacher_result.md)
+
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+
 하나의 모델이 글자 이미지를 읽고 중국어 독해 359문제 중 114문제에 정확히 답했습니다. 도판에 있는 言의 갑골문과 금문 글꼴도 요청한 순서대로 출력했습니다. 별도의 지문 128개에 두 문제씩 제시했을 때 두 답을 모두 맞힌 지문은 15개였고, 정답 구간을 추출하는 모델은 49개였습니다. [이미지 모델 실행 방법](../models/mixed_visual_answers/README.md)
 
 [![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=133)

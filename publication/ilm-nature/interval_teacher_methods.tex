@@ -1,0 +1,9 @@
+\paragraph{Supervision of source intervals and stopping.}
+For a pictured passage $x$, the frozen reader assigns each source interval $[i,j]$ of at most 48 glyphs a weight $w_{ij}=\exp(a_i+b_j)$ using its two endpoint logits. For a sequence of emitted bitmaps $u$, let $M(u)$ sum the weights of all intervals beginning with $u$ and $E(u)$ sum those ending with exactly that sequence. Repeated occurrences contribute separately. For $M(u)>0$, the conditional probabilities of stopping and continuing with bitmap $g$ are
+\[
+ P(\mathrm{stop}\mid u)=\frac{E(u)}{M(u)},\qquad
+ P(g\mid u)=\frac{M(ug)}{M(u)}.
+\]
+The product along a complete sequence ending in a stop is $E(u)/M(\varnothing)$. Lean checks the finite mass partition and residual-prefix identities with natural-number weights. The implementation computes the endpoint masses in log space. On 496 training examples, prefix products and independently enumerated full-interval masses agreed within $7.64\times10^{-6}$ in log probability. Across 18,333 natural training rows the annotated answer received mean mass 0.503. The highest-weight interval produced that answer on 9,524 rows.
+
+The original mixed corpus supplied 20,271 examples. We added 2,014 CMRC and 4,096 DRCD training questions in same-passage pairs. Every arm received the same 1,326 AdamW updates and 346,780 supervised positions from the same initialization. The extra alignment loss had coefficient 0.5 on natural training rows. The distilled condition split that coefficient equally between hard and teacher targets evaluated after each supplied correct prefix. All evaluations generated from the source and request alone. On one RTX 4090 D, teacher preparation took 72.3 seconds and optimization took 90.5--91.9 seconds per arm, with peak allocated memory below 4 GiB. The 86.6-million-parameter writer inherited a Chinese text-pretrained body. These costs describe adaptation. The distinct histories and costs of pretraining are unknown.
