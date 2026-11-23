@@ -23,3 +23,19 @@ def test_collision_includes_exposures_before_conflicting_label():
     assert result["unique"] == 2 and result["exposures"] == 4
     assert result["conflicting_bitmaps"] == 1
     assert result["occurrences_on_conflicting_bitmaps"] == 3
+
+
+def test_print_route_ignores_blank_cells_and_checks_each_strip():
+    from types import SimpleNamespace
+    from ilm.visual_lm.causal_glyph_writer import CausalGlyphWriter
+
+    writer = SimpleNamespace(augmented_typeface_map=True)
+    known = {bytes([1]) * 128: 1}
+
+    def cells(*values):
+        return torch.tensor(values, dtype=torch.uint8)[:, None].expand(-1, 128)
+
+    choose = CausalGlyphWriter.uses_augmented_print
+    assert not choose(writer, cells(1, 1, 1, 1, 2), cells(0), known)
+    assert choose(writer, cells(1, 1, 1, 1), cells(0, 2), known)
+    assert not choose(SimpleNamespace(), cells(2), cells(2), known)

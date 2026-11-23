@@ -34,8 +34,23 @@ class CausalGlyphWriter(nn.Module):
         from ilm.visual_lm.typeface_map import TypefaceMap
         self.typeface_map = TypefaceMap.restore(path, self.packed)
 
-    def read_extra(self, packed, alphabet):
-        mapper = getattr(self, "typeface_map", None)
+    def uses_augmented_print(self, passage, question, known):
+        if not hasattr(self, "augmented_typeface_map"):
+            return False
+        blank = bytes(128)
+        for strip in (passage, question):
+            total = familiar = 0
+            for row in strip.detach().cpu().numpy():
+                raw = row.tobytes()
+                if raw != blank:
+                    total += 1
+                    familiar += raw in known
+            if 5 * familiar < 4 * total:
+                return True
+        return False
+
+    def read_extra(self, packed, alphabet, *, augmented=False):
+        mapper = self.augmented_typeface_map if augmented else getattr(self, "typeface_map", None)
         if mapper is None:
             return self.encode(packed)
         indices, accept = mapper.identify(packed)
@@ -93,6 +108,11 @@ class CausalGlyphWriter(nn.Module):
         writer.body.load_state_dict(load_file(str(folder / "body.safetensors")))
         if (folder / "typeface.safetensors").is_file():
             writer.attach_typeface_map(folder / "typeface.safetensors")
+        if (folder / "augmented_typeface.safetensors").is_file():
+            from ilm.visual_lm.typeface_map import TypefaceMap
+            if not hasattr(writer, "typeface_map"):
+                raise ValueError("Augmented print requires the familiar-print map")
+            writer.augmented_typeface_map = TypefaceMap.restore(folder / "augmented_typeface.safetensors", writer.packed)
         return writer.to(device).eval()
 
 

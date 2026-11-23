@@ -19,6 +19,21 @@ class PreparedGlyphResponder:
     @torch.inference_mode()
     def answer_many(self, pairs, limit=48):
         """Accept (passage, question) pairs of packed uint8 cells. Return physical images."""
+        if not hasattr(self.net.writer, "augmented_typeface_map"):
+            return self._answer_many(pairs, limit, False)
+        pairs = list(pairs)
+        groups = {False: [], True: []}
+        for index, (passage, question) in enumerate(pairs):
+            route = self.net.writer.uses_augmented_print(passage, question, self.fixed)
+            groups[route].append(index)
+        result = [None] * len(pairs)
+        for augmented, indices in groups.items():
+            replies = self._answer_many([pairs[i] for i in indices], limit, augmented)
+            for i, reply in zip(indices, replies, strict=True):
+                result[i] = reply
+        return result
+
+    def _answer_many(self, pairs, limit, augmented):
         additions = {}
         def indices(cells):
             if cells.ndim != 2 or cells.shape[1] != 128 or cells.dtype != torch.uint8 or not len(cells):
@@ -38,7 +53,7 @@ class PreparedGlyphResponder:
         states = [self.alphabet]
         if additions:
             new = torch.from_numpy(np.frombuffer(b"".join(additions), np.uint8).copy().reshape(-1,128)).to(self.device)
-            states.extend(self.net.writer.read_extra(part, self.alphabet) for part in new.split(256))
+            states.extend(self.net.writer.read_extra(part, self.alphabet, augmented=augmented) for part in new.split(256))
         states.append(self.net.writer.markers[:1])
         output, ended = self.net.generate(torch.cat(states), self.alphabet, indexed, limit=limit)
         source_ink = list(additions)
