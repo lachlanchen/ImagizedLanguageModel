@@ -23,6 +23,13 @@ theorem corpus_bound (scores : List (Int × Int)) :
     obtain ⟨t,r⟩ := x
     exact Int.add_le_add (pair_bound t r) ih
 
+/-- With a positive common denominator this also bounds rational scores,
+including the exact values represented by any pair of finite binary floats. -/
+theorem scaled_pair_bound (unit target rival : Int) (positive : 0 < unit) :
+    unit * mistake target rival ≤ max 0 (unit + rival - target) := by
+  unfold mistake
+  split <;> simp <;> omega
+
 /-- Pair supervision alone does not rule out a third, unlabelled winner. -/
 theorem third_span : hinge 2 0 = 0 ∧ mistake 2 3 = 1 := by decide
 
@@ -58,6 +65,7 @@ theorem edited_recovery {A B : Type} (valid : A → Prop) (edited : B → Prop)
 
 #print axioms pair_bound
 #print axioms corpus_bound
+#print axioms scaled_pair_bound
 #print axioms third_span
 #print axioms recover
 #print axioms edited_recovery

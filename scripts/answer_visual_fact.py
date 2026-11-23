@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--direct",action="store_true",help="Return only the participant or object")
     parser.add_argument("--writer",type=Path,help="Use a separately trained autoregressive image writer")
     parser.add_argument("--relation-head",type=Path,help="Optional question-side relation checkpoint")
+    parser.add_argument("--participant-head",type=Path,help="Use a learned role-conditioned object span scorer")
     parser.add_argument("--word-order",choices=("subject","object","natural"),default="subject")
     parser.add_argument("--font",type=Path,default=Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"))
     parser.add_argument("--font-index",type=int,default=2)
@@ -32,10 +33,16 @@ def main():
     model=BoundFactReader(args.reader,args.model,args.device)
     if args.relation_head is None and (args.model/"pictured-relation.npz").is_file():
         args.relation_head=args.model/"pictured-relation.npz"
+    if args.participant_head and not args.relation_head:
+        parser.error("--participant-head requires pictured relation weights in the model or --relation-head")
     if args.relation_head:
         from ilm.visual_lm.pictured_relation import PicturedRelation
         channel=PicturedRelation(args.relation_head)
-        fields=[(s,channel.choose(pair[1],s,r)[0],o) for s,r,o in model.fields_many([pair])]
+        if args.participant_head:
+            from ilm.visual_lm.role_conditioned_span import ParticipantReader
+            fields=ParticipantReader(model,channel,args.participant_head).fields_many([pair])
+        else:
+            fields=[(s,channel.choose(pair[1],s,r)[0],o) for s,r,o in model.fields_many([pair])]
     else:
         fields=model.fields_many([pair])
     if args.writer:
