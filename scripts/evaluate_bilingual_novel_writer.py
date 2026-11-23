@@ -240,7 +240,6 @@ def evaluate():
             for k in range(2):
                 c = cases[i + k]
                 for name, raw in (
-                    ("page", c.p),
                     ("question", c.q),
                     ("answer", ys[i + k]),
                     ("reference", c.source[0]),

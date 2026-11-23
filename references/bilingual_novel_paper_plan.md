@@ -1,0 +1,3 @@
+# Bilingual novel reading manuscript revision
+
+Preserve Figure 103 and the three previously delivered editions. Document the three matched book-training arms and their complete-page validation, a separate XQuAD transfer assessment, erasure, historical and open-writing controls. Distinguish bilingual intent discrimination from learning to write novel prose. Include the Lean implication, measured costs and the matched text comparison. Add an editable figure with original reply pixels from predetermined pages and enough reference context to interpret successes and misses. Attribute the novel questions and retain the source passages in local research storage. Verify the reading, review and cumulative-redline PDFs and the versioned local delivery.
