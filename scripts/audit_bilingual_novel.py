@@ -5,7 +5,7 @@ from collections import Counter
 
 from scripts.evaluate_bilingual_novel_writer import corpus
 from scripts.evaluate_pointing_causal_writer import load_streams
-from scripts.train_bilingual_novel_writer import PUBLIC, WORK
+from scripts.train_bilingual_novel_writer import PUBLIC, WORK, match_page
 from scripts.train_causal_glyph_writer import in_cells, record, sha
 
 
@@ -68,9 +68,41 @@ def characterize(cases, replies, stops):
     return dict(counts)
 
 
+def unseen_book_cases(cases):
+    """Screen exact question strings and annotated answer strings seen in book fitting."""
+    queries = {"en": set(), "zh": set()}
+    answers = set()
+    titles = set()
+
+    def title(q):
+        return q["id"].split("_", 1)[1].rsplit("_", 3)[0]
+
+    for line in (WORK / "train.jsonl").read_text().splitlines():
+        for q, _ in match_page(json.loads(line)["questions"]):
+            titles.add(title(q))
+            answers.add(q["refs"][0])
+            for lang in queries:
+                queries[lang].add(q[lang].strip())
+    valid = {
+        q["id"]: q
+        for line in (WORK / "valid.jsonl").read_text().splitlines()
+        for q in json.loads(line)["questions"]
+    }
+    selected = [valid[c.question_id] for c in cases]
+    return dict(
+        new_title=[title(q) not in titles for q in selected],
+        both_questions_unseen=[
+            all(q[lang].strip() not in known for lang, known in queries.items())
+            for q in selected
+        ],
+        all_answers_unseen=[answers.isdisjoint(q["refs"]) for q in selected],
+    )
+
+
 def audit():
     all_cases = corpus()
     result = json.loads((PUBLIC / "result.json").read_text())
+    unseen = unseen_book_cases(all_cases["book_zh"])
     stats = {}
     for arm, scores in result["scores"].items():
         group = {}
@@ -91,6 +123,16 @@ def audit():
                     a == b for a, b in zip(physical[::2], physical[1::2], strict=True)
                 )
                 group[k] = measures
+                if name == "book":
+                    for subset, mask in unseen.items():
+                        counts = [
+                            c.grade(y, stop)[2]
+                            for c, (y, stop), use in zip(
+                                rows, physical, mask, strict=True
+                            )
+                            if use
+                        ]
+                        measures[subset] = dict(n=len(counts), exact=sum(counts))
             group[name + "_same_between_languages"] = sum(
                 a == b for a, b in zip(by_lang["en"], by_lang["zh"], strict=True)
             )
