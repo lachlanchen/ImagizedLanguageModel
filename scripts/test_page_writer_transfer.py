@@ -18,7 +18,7 @@ from scripts.train_span_choice import gpu_owner
 
 
 @torch.inference_mode()
-def compare(folder):
+def compare(folder, *, adapted_only=False):
     destination = folder/"transfer"
     destination.mkdir(exist_ok=False)
     face = Face((FONTS[0],2))
@@ -27,6 +27,8 @@ def compare(folder):
     cases.extend((r.task,r.p,r.q,[r.y]) for r in plates("development",face))
     result = {}
     for arm, weights in (("initial",BASE),("page",folder/"page")):
+        if adapted_only and arm == "initial":
+            continue
         source = json.loads((folder/("corpus.json" if arm=="initial" else "page_fit.json")).read_text())
         hashes = source["base"] if arm=="initial" else source["weights"]
         if any(sha(weights/k)!=h for k,h in hashes.items()):
@@ -55,6 +57,8 @@ def compare(folder):
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir",type=Path,default=DEFAULT)
+    parser.add_argument("--adapted-only",action="store_true")
+    args=parser.parse_args()
     with gpu_owner():
         torch.set_num_threads(2)
-        compare(parser.parse_args().run_dir)
+        compare(args.run_dir,adapted_only=args.adapted_only)

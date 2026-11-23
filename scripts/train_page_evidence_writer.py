@@ -37,7 +37,10 @@ def writable_records(face, net, raw):
     return keep, dict(omitted)
 
 
-def fit(folder, arm, data, face):
+def fit(folder, arm, data, face, *, order_records=None):
+    ordering = data if order_records is None else order_records
+    if len(ordering) != len(data):
+        raise ValueError("Length bucketing requires one source row per example")
     torch.manual_seed(SEED)
     net = PointingCausalWriter.restore(BASE, "cuda")
     net.writer.requires_grad_(False)
@@ -58,7 +61,7 @@ def fit(folder, arm, data, face):
     for epoch in range(2):
         total = count = 0
         for pool in np.array_split(rng.permutation(len(data)), max(1, len(data)//512)):
-            ordered = sorted(pool, key=lambda i: len(data[i]["p"]) + 2 * len(data[i]["q"]))
+            ordered = sorted(pool, key=lambda i: len(ordering[i]["p"]) + 2 * len(ordering[i]["q"]))
             for ids in np.array_split(ordered, int(np.ceil(len(ordered)/20))):
                 with torch.autocast("cuda", dtype=torch.bfloat16):
                     loss, nll, n = objective(net, read, alphabet, [pairs[i] for i in ids],
