@@ -116,10 +116,12 @@ def more_pairs(face):
 
 
 @torch.inference_mode()
-def evaluate():
-    out = WORK / "evaluation"
+def evaluate(folder=WORK, evidence=PUBLIC):
+    out = folder / "evaluation"
+    if (evidence / "evaluation.json").exists():
+        raise FileExistsError(evidence / "evaluation.json")
     out.mkdir(exist_ok=False)
-    PUBLIC.mkdir(parents=True, exist_ok=True)
+    evidence.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(2)
     font = Face((FONTS[0], 2))
     face = lru_cache(maxsize=20000)(font)
@@ -179,8 +181,8 @@ def evaluate():
             )
     results = {}
     exemplars = []
-    for arm, folder in (
-        ("mixed", WORK / "page"),
+    for arm, checkpoint in (
+        ("mixed", folder / "page"),
         ("parent", VARIED / "page"),
         ("extractor", READER),
     ):
@@ -188,13 +190,13 @@ def evaluate():
         material = [key for name in use for _, key, _ in tasks[name]]
         unique = sorted(set(material), key=lambda k: (len(k[0]) + 2 * len(k[1]), k))
         if arm == "extractor":
-            model = FontInvariantReader.restore(folder, "cuda")
+            model = FontInvariantReader.restore(checkpoint, "cuda")
         else:
-            expected = json.loads((folder.parent / "page_fit.json").read_text())[
+            expected = json.loads((checkpoint.parent / "page_fit.json").read_text())[
                 "weights"
             ]
-            assert all(sha(folder / n) == h for n, h in expected.items())
-            model = PreparedGlyphResponder(folder, "cuda")
+            assert all(sha(checkpoint / n) == h for n, h in expected.items())
+            model = PreparedGlyphResponder(checkpoint, "cuda")
         emitted = {}
         for start in range(0, len(unique), 16):
             batch = unique[start : start + 16]
@@ -232,7 +234,7 @@ def evaluate():
                         ("page", k[0]),
                     ):
                         write_strip(
-                            tensor(raw).numpy(), PUBLIC / ("human_" + short + ".png")
+                            tensor(raw).numpy(), evidence / ("human_" + short + ".png")
                         )
                     exemplars.append(
                         dict(
@@ -262,13 +264,24 @@ def evaluate():
         print(arm, {k: v["exact"] for k, v in output.items()}, flush=True)
         record(out / (arm + ".json"), output)
     record(
-        PUBLIC / "evaluation.json",
+        evidence / "evaluation.json",
         dict(results=results, extra_sha256=sha(out / "extra.json"), example=exemplars),
     )
     for n in ("corpus.json", "page_fit.json"):
-        shutil.copyfile(WORK / n, PUBLIC / n)
+        shutil.copyfile(folder / n, evidence / n)
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run-dir", type=Path, default=WORK)
+    parser.add_argument("--evidence-dir", type=Path)
+    args = parser.parse_args()
+    evidence = args.evidence_dir or (
+        PUBLIC
+        if args.run_dir.resolve() == WORK.resolve()
+        else args.run_dir / "evidence"
+    )
     with gpu_owner():
-        evaluate()
+        evaluate(args.run_dir, evidence)
