@@ -65,7 +65,7 @@ class BoundFactReader:
         self.device=device
 
     @torch.inference_mode()
-    def answer_many(self,pairs,direct=False):
+    def fields_many(self,pairs):
         if not pairs:return []
         if any(not p or not q or len(p)%128 or len(q)%128 for p,q in pairs):
             raise ValueError("Each input must consist of complete, nonempty 32 × 32 cells")
@@ -78,5 +78,9 @@ class BoundFactReader:
             objects=best_bounds(ends[:,:,2:]).tolist()
             for (p,_),r,(a,b),(c,d) in zip(items,roles.argmax(1).tolist(),subjects,objects,strict=True):
                 obj=p[c*128:d*128]
-                output.append(obj if direct else render_fact(self.frames[r],p[a*128:b*128],obj))
+                output.append((p[a*128:b*128],r,obj))
         return output
+
+    def answer_many(self,pairs,direct=False):
+        return [obj if direct else render_fact(self.frames[role],subject,obj)
+                for subject,role,obj in self.fields_many(pairs)]
