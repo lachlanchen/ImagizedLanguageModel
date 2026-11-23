@@ -1,5 +1,7 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Nach dem Tausch zweier Namen in abgebildeten Werkangaben beantwortete das Modell mit 87 Millionen Parametern die Fragen in beiden Reihenfolgen bei 165 von 256 Vergleichen richtig. Das Kontrollmodell sah dieselben Beispiele und bestand fünf Vergleiche. Bei eigens formulierten Erzählungen erreichten beide Modelle 0 von 24. [Ergebnisse und Originalbilder](../references/role_change_writer_result.md) · [Modell ausführen](../models/role_change_writer/README.md)
+
 Nach Ausschluss der reservierten DRCD-Daten und erneutem Training lieferte das Modell mit der erweiterten Auswahlliste bei 234 von 359 Entwicklungsfragen das exakte Antwortbild, das allgemeine Lesemodell bei 242. Frühere DRCD-Auswertungen verwendeten reservierte Testpassagen. [Ergebnisse und Berichtigung zur Datenquelle](../references/span_list_result.md)
 
 [![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)

@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+When two names exchanged roles on a pictured credit, the 87M-parameter writer followed the edit in both question orders on 165 of 256 comparisons. The equal-exposure control passed five. On separately worded stories both writers scored zero of 24. [Results and original images](references/role_change_writer_result.md) · [Run the writer](models/role_change_writer/README.md)
+
+[![Original reply images and edited-page results](publication/ilm-nature/figures/Figure_110_role_change_writer.png)](publication/ilm-nature/manuscript.pdf#page=147)
+
 Using the learned question image to locate evidence raised exact English-request excerpts from 17 to 41 of 412 on MLQA. The independent writer produced 111 exact stopped replies across both languages, compared with 90 when given the original pages. [↗](references/question_evidence_transfer_result.md)
 
 [![108 · ILM](publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](publication/ilm-nature/manuscript.pdf#page=144)

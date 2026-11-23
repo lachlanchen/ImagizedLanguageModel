@@ -1,5 +1,7 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+عند تبديل اسمين في صورة تعرض أسماء المشاركين في عمل فني، أجاب النموذج ذو 87 مليون معامل إجابة صحيحة في كلا ترتيبي السؤالين في 165 مقارنة من أصل 256. نجح النموذج الضابط الذي تدرب على الأمثلة نفسها في خمس مقارنات. وفي قصص كُتبت بصورة مستقلة كانت نتيجة كلا النموذجين صفراً من أصل 24. [النتائج وصور المخرجات الأصلية](../references/role_change_writer_result.md) · [تشغيل النموذج](../models/role_change_writer/README.md)
+
 بعد استبعاد مواد DRCD المحجوزة وإعادة التدريب، طابق القارئ ذو قائمة الإجابات الأوسع الصورة المرجعية في 234 من 359 سؤالاً في مجموعة التطوير، مقابل 242 للقارئ العام. استُخدمت في تقييمات DRCD السابقة فقرات كانت محجوزة للاختبار. [النتائج وتصحيح مصدر البيانات](../references/span_list_result.md)
 
 [![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)

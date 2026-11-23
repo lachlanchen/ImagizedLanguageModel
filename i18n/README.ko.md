@@ -1,5 +1,7 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+작품의 크레디트를 이미지로 제시하고 두 사람의 이름을 맞바꾸자, 매개변수 8,700만 개의 모델은 256개 비교 중 165개에서 두 질문 순서 모두에 맞게 답했다. 같은 예시를 본 대조 모델은 5개에 성공했다. 별도로 작성한 이야기에서는 두 모델 모두 24개 중 하나도 통과하지 못했다. [결과와 실제 출력 이미지](../references/role_change_writer_result.md) · [모델 실행](../models/role_change_writer/README.md)
+
 따로 보관한 DRCD 자료를 제외하고 다시 학습한 결과, 후보를 늘린 모델은 개발용 질문 359개 중 234개에서 정답 이미지와 정확히 일치했고 범용 모델은 242개에서 일치했다. 이전 DRCD 평가에는 보류된 시험 지문이 포함됐다. [결과 및 데이터 출처 정정](../references/span_list_result.md)
 
 [![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)

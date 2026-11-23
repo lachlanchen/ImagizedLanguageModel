@@ -1,5 +1,7 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+作品のクレジットを画像で示し、登場する二人の名前を入れ替えた。8700万パラメータのモデルは、質問の順序を変えても両方の画像に正答できた比較が256組中165組だった。同じ事例で学習した対照モデルは5組だった。別に書き起こした物語では、どちらも24組中0組だった。 [結果と実際の出力画像](../references/role_change_writer_result.md) · [モデルの実行](../models/role_change_writer/README.md)
+
 予約済みの DRCD 資料を除いて再学習した結果、候補を増やしたモデルは開発用359問中234問で正解画像と完全に一致し、汎用モデルは242問で一致した。以前の DRCD 評価には予約済みのテスト文章が含まれていた。 [結果とデータ出典の訂正](../references/span_list_result.md)
 
 [![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)
