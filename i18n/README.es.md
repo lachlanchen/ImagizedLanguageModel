@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+En nuevos pasajes chinos escritos con HanaMin, una fuente excluida del entrenamiento, el modelo dio 15 respuestas exactas de 394. El entrenamiento con varias fuentes por sí solo dio 3. Acertó las dos preguntas en 0 de 197 pasajes. El catálogo local permite pedir las formas históricas de un carácter como 中 y recibir una respuesta en imagen. [Usar el modelo y el catálogo](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 En 98 pasajes chinos presentados como imágenes, el modelo destilado acertó 72 de 196 preguntas, frente a 63 con entrenamiento ordinario. Ambos acertaron las dos preguntas en 11 pasajes. Qwen3-8B, que recibió el mismo material como texto, acertó ambas en 55. [Resultados y modelo](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

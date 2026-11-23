@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Bei neuen chinesischen Texten in der vom Training ausgeschlossenen Schrift HanaMin gab das Bildmodell 15 von 394 Antworten genau wieder, beim alleinigen Training mit weiteren Schriften waren es 3. Für 0 von 197 Texten stimmten beide Antworten. Im lokalen Katalog lassen sich historische Formen für ein Zeichen wie 中 als Bildantwort anfordern. [Modell und Katalog verwenden](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 Zu 98 chinesischen Textabbildungen wurden je zwei Fragen gestellt. Das destillierte Modell gab 72 von 196 Antworten exakt wieder, das regulär trainierte Modell 63. Beide beantworteten bei 11 Texten beide Fragen richtig. Qwen3-8B gelang dies bei 55 Texten mit derselben Vorlage als Texteingabe. [Ergebnisse und Modell](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+將另選的中文材料排成訓練時未使用的 HanaMin 字體，影像模型在 394 道閱讀題中準確回答了 15 道，只用不同字體擴充訓練資料的模型答對 3 道。197 篇文章中有 0 篇兩問全對。離線字形目錄也可按字頭查詢，例如輸入「中」即可要求模型以影像呈現指定的古文字形。 [執行模型與字形目錄](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 對 98 篇中文材料的影像各提兩個不同的問題，蒸餾模型在 196 問中準確回答了 72 問，一般訓練模型答對 63 問。兩個模型都是 11 篇兩問全對。同樣的材料以文字輸入 Qwen3-8B 時，有 55 篇兩問全對。 [實驗結果與模型](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

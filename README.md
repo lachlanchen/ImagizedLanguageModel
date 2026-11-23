@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+On Chinese passages printed in HanaMin, a typeface withheld from training, the image writer answered 15 of 394 additional trial questions exactly. Training on alternate print alone gave 3. The writer answered both questions on 0 of 197 passages. Its offline catalogue accepts a headword such as 中 and returns an answer image with the requested historical forms. [Run the writer and catalogue](models/typeface_writer/README.md)
+
+[![102 · 中](publication/ilm-nature/figures/Figure_102_typeface_writer.png)](publication/ilm-nature/manuscript.pdf#page=135)
+
 Asked two different questions about each of 98 pictured Chinese passages, the distilled writer gave 72 exact answers to 196 questions, up from 63 with ordinary training. Both writers answered both questions on 11 passages. Qwen3-8B, given the same passages as text, answered both on 55. [Results and model](references/interval_teacher_result.md)
 
 [![101 · 72/196](publication/ilm-nature/figures/Figure_101_interval_teacher.png)](publication/ilm-nature/manuscript.pdf#page=134)

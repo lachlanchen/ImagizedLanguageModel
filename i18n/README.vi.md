@@ -68,6 +68,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Với các đoạn tiếng Trung mới dùng HanaMin, một phông chữ được giữ riêng khi huấn luyện, mô hình ảnh trả lời chính xác 15 trong 394 câu. Chỉ huấn luyện thêm trên nhiều phông chữ cho 3 câu đúng. Mô hình đúng cả hai câu ở 0 trong 197 đoạn. Danh mục ngoại tuyến cho phép tra một chữ như 中 và nhận ảnh trả lời với những dạng chữ cổ được yêu cầu. [Dùng mô hình và danh mục](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 Với hai câu hỏi khác nhau cho mỗi ảnh trong 98 đoạn văn tiếng Trung, mô hình chưng cất trả lời chính xác 72 trong 196 câu, so với 63 câu khi huấn luyện thông thường. Cả hai mô hình đều đúng cả hai câu ở 11 đoạn. Qwen3-8B nhận cùng nội dung dưới dạng văn bản và đúng cả hai câu ở 55 đoạn. [Kết quả và mô hình](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

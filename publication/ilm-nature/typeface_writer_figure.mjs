@@ -42,11 +42,11 @@ const cfg={
  title:'Reading Chinese across typefaces',
  a:'a   Passages with two correct answers (%)',
  categories:['Regular','Bold','Kai','HanaMin','Trial regular','Trial HanaMin'],
- names:['Parent','Map only','Typeface replay','Map + replay'],max:100,tick:25,
+ names:['Parent','Map only','Typeface replay','Map + replay'],max:20,tick:5,
  note:'Each passage has two human questions with different answers. HanaMin was held out from visual training. Trial passages were screened against the CMRC training and development sets.',
  b:'b   Exact writing on held sources and historical cards',
- widths:[410,155,175,210,215,220],c:'c   Reading a pictured question in HanaMin',
- rows:[['example_question','Held-font question'],['example_answer','Generated answer'],['error_reference','First error, reference'],['error_answer','Generated answer']]
+ widths:[410,155,175,210,215,220],c:'c   Generated answers in their original pixels',
+ rows:[['example_question','Held-font question'],['example_answer','Generated answer'],['error_reference','First error, reference'],['error_answer','Generated answer'],['zhong_answer','Archived forms of 中']]
 };
 text(cfg.title,50,22,1420,65,42,true);
 text(cfg.a,50,111,1410,52,29,true);
@@ -60,8 +60,8 @@ applyPresentationChartFont(chart,{fontFamily:'Arial'});
 text('Scoring unit',995,190,420,55,26,true,teal);text(cfg.note,995,248,442,230,22);
 text(cfg.b,50,536,1410,50,29,true);table(stats.table,609,315,cfg.widths);
 text(cfg.c,50,968,1410,55,29,true);
-for(let i=0;i<cfg.rows.length;i++) await strip(...cfg.rows[i],1055+i*85);
-text('Examples follow the source order of the CMRC trial set. Responses preserve the original output pixels.',60,1405,1390,45,21);
+for(let i=0;i<cfg.rows.length;i++) await strip(...cfg.rows[i],1045+i*68);
+text('Trial examples follow source order. The last reply gives the bronze and oracle forms requested from the local archive.',60,1405,1390,45,21);
 slide.speakerNotes.textFrame.setText('Each bar measures the proportion of passages with two exact stopped answers. Kai excludes two source passages with unsupported font characters. Table entries count accepted complete replies.');
 await fs.mkdir(path.join(stage,'draft'));await fs.mkdir(path.join(stage,'output'));
 const candidatePath=path.join(stage,'draft/idiom.pptx'), finalPath=path.join(stage,'output/Typeface_writer.pptx');

@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+학습에서 제외한 하나민(HanaMin) 글꼴로 새 중국어 지문을 제시했을 때 이미지 모델은 394문제 중 15문제에 정확히 답했습니다. 여러 글꼴로 추가 학습만 한 모델은 3문제를 맞혔습니다. 197개 지문 중 두 문제를 모두 맞힌 지문은 0개였습니다. 오프라인 자형 목록에서는 中과 같은 표제자의 고대 자형을 요청해 이미지로 답을 받을 수 있습니다. [모델과 자형 목록 사용법](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 중국어 지문 이미지 98개에 두 문제씩 제시했을 때 증류 모델은 196문제 중 72문제, 일반 학습 모델은 63문제에 정확히 답했습니다. 두 문제를 모두 맞힌 지문은 두 모델 모두 11개였습니다. 같은 내용을 텍스트로 받은 Qwen3-8B는 55개 지문에서 두 문제를 모두 맞혔습니다. [실험 결과와 모델](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

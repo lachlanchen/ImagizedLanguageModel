@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+学習に使っていない花園明朝で中国語の新しい文章を表示すると、画像モデルは394問中15問に正答しました。複数書体での追加学習だけでは3問でした。各文章の2問とも正解したのは197件中0件です。オフラインの字形目録では、「中」などの見出し字を指定して古い字形を画像で回答させることもできます。 [モデルと字形目録の使い方](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 中国語の文章画像98件に各2問を出したところ、蒸留モデルは196問中72問、通常の訓練を行ったモデルは63問に正答しました。2問とも正解した文章はどちらも11件でした。同じ文章をテキストで入力したQwen3-8Bでは55件でした。 [実験結果とモデル](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

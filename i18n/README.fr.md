@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Sur de nouveaux passages chinois composés en HanaMin, une police exclue de l’entraînement, le modèle a donné 15 réponses exactes sur 394, contre 3 avec le seul entraînement sur plusieurs polices. Il a répondu aux deux questions de 0 passages sur 197. Le catalogue hors ligne permet de demander les formes historiques d’un caractère comme 中 et de recevoir la réponse en image. [Utiliser le modèle et le catalogue](../models/typeface_writer/README.md)
+
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+
 Sur 196 questions portant sur 98 passages chinois présentés en images, le modèle distillé a donné 72 réponses exactes, contre 63 après entraînement ordinaire. Chacun a répondu correctement aux deux questions pour 11 passages. Qwen3-8B, qui a reçu les mêmes passages en texte, y est parvenu pour 55 passages. [Résultats et modèle](../references/interval_teacher_result.md)
 
 [![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=134)

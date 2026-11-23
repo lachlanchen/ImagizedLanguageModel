@@ -3,7 +3,7 @@
 import json
 import shutil
 from scripts.audit_typeface_writer import ARMS
-from scripts.train_typeface_writer import PUBLIC
+from scripts.train_typeface_writer import PUBLIC, WORK
 from scripts.train_causal_glyph_writer import record
 
 
@@ -40,6 +40,7 @@ def illustrate():
         ("error_answer", "error_mapped"),
     ]:
         shutil.copyfile(PUBLIC / "examples" / (src + ".png"), PUBLIC / (name + ".png"))
+    shutil.copyfile(WORK / "zhong_cli/answer.png", PUBLIC / "zhong_answer.png")
     record(PUBLIC / "figure.json", dict(series=series, table=table, example=tag))
 
 
