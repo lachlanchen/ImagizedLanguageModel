@@ -4,6 +4,7 @@ import torch
 from torch.nn import functional as F
 
 
+@torch.no_grad()
 def interval_targets(source, valid, answer, lengths, teacher=None, max_span=48):
     """Return [batch, step, source start] copy masses and [batch, step] stop masses.
 

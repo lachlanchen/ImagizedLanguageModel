@@ -63,3 +63,22 @@ def test_duplicates_padding_and_gradients():
         torch.isfinite(x.grad).all() and x.grad.abs().sum() > 0
         for x in (pointer, gate, stop)
     )
+
+
+def test_teacher_cross_entropy_scores_the_actual_copy_and_stop_routes():
+    source = torch.tensor([[1, 2]])
+    valid = source != 0
+    answer = torch.tensor([[1, 0]])
+    pointer = torch.tensor([[[0.0, 0.0], [0.0, 0.0]]])
+    gate = torch.zeros(1, 2)
+    stop_logp = torch.full((1, 2), math.log(0.25))
+    mask = torch.ones((1, 2), dtype=torch.bool)
+    # Equiprobable teacher spans [1], [2], [1,2]. After the prefix [1],
+    # the copy and terminal events have probability one half each.
+    teacher = torch.zeros(1, 2, 2, requires_grad=True)
+    loss = path_loss(
+        pointer, gate, stop_logp, source, valid, answer, mask, teacher, 1.0
+    )
+    expected = (-math.log(0.25) - 0.5 * math.log(0.25) - 0.5 * math.log(0.125)) / 2
+    assert float(loss) == pytest.approx(expected)
+    assert not loss.requires_grad

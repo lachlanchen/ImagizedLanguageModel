@@ -26,7 +26,7 @@ theorem append_prefix {α : Type} [DecidableEq α] (xs : Corpus α) (p q : List 
     afterPrefix xs (p ++ q) = afterPrefix (afterPrefix xs p) q := by
   induction p generalizing xs with
   | nil => rfl
-  | cons a p ih => exact ih (step a xs)
+  | cons a _ ih => exact ih (step a xs)
 
 /-- Terminal mass after a prefix equals the mass of identical complete
 outputs in the original corpus. -/

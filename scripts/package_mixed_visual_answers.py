@@ -14,15 +14,20 @@ from scripts.train_causal_glyph_writer import sha, record
 from scripts.train_mixed_visual_answers import WORK, PUBLIC
 
 
-def package():
+def package(
+    work=WORK,
+    evidence=PUBLIC,
+    readme=ROOT / "models/mixed_visual_answers/README.md",
+    archive_name="mixed-visual-writer.zip",
+):
     files = {
-        "README.md": ROOT / "models/mixed_visual_answers/README.md",
+        "README.md": readme,
         "paragraph.safetensors": ROOT
         / "models/paragraph_evidence/paragraph.safetensors",
     }
-    weights = json.loads((WORK / "page_fit.json").read_text())["weights"]
+    weights = json.loads((work / "page_fit.json").read_text())["weights"]
     for n, h in weights.items():
-        src = WORK / "page" / n
+        src = work / "page" / n
         if sha(src) != h:
             raise ValueError(f"Changed {n}")
         files["writer/" + n] = src
@@ -48,12 +53,14 @@ def package():
             for kind in ("page", "question", "output", "reference")
         ],
     ):
-        p = PUBLIC / (name + ".png")
-        files["examples/" + p.name] = p if p.is_file() else PUBLIC / "examples" / p.name
-    dest = WORK / "mixed-visual-writer.zip"
+        p = evidence / (name + ".png")
+        files["examples/" + p.name] = (
+            p if p.is_file() else evidence / "examples" / p.name
+        )
+    dest = work / archive_name
     if dest.exists():
         raise FileExistsError(dest)
-    with tempfile.TemporaryDirectory(dir=WORK) as t:
+    with tempfile.TemporaryDirectory(dir=work) as t:
         t = Path(t).resolve()
         archive = t / "bundle.zip"
         with ZipFile(archive, "w", ZIP_DEFLATED, compresslevel=1) as z:
@@ -111,7 +118,7 @@ def package():
             )
         archive.rename(dest)
     record(
-        PUBLIC / "release.json",
+        evidence / "release.json",
         dict(archive=sha(dest), bytes=dest.stat().st_size, cpu=checks),
     )
 
