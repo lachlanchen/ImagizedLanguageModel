@@ -1,4 +1,5 @@
 """Prepare paragraph-disjoint broad QA and subject-disjoint participant exchanges."""
+
 from collections import Counter
 from hashlib import sha256
 import json
@@ -12,7 +13,10 @@ CACHE = ROOT / "artifacts/span_choice_v1"
 PUBLIC = ROOT / "references/evidence/span_choice_20261124"
 SEED = 241107
 SOURCES = {
-    "cmrc": ("data/raw/cmrc2018/cmrc2018_train.json", "data/raw/cmrc2018/cmrc2018_dev.json"),
+    "cmrc": (
+        "data/raw/cmrc2018/cmrc2018_train.json",
+        "data/raw/cmrc2018/cmrc2018_dev.json",
+    ),
     "drcd": ("data/raw/drcd/DRCD_training.json", "data/raw/drcd/DRCD_test.json"),
 }
 
@@ -55,13 +59,20 @@ def main():
                 rng.shuffle(qa)
                 for x in qa:
                     q = x["question"]
-                    refs = list(dict.fromkeys(a["text"] for a in x["answers"]
-                                              if 0 < len(a["text"]) <= 48 and a["text"] in page))
+                    refs = list(
+                        dict.fromkeys(
+                            a["text"]
+                            for a in x["answers"]
+                            if 0 < len(a["text"]) <= 48 and a["text"] in page
+                        )
+                    )
                     if not refs or not q or len(q) + len(page) > 509:
                         continue
                     if any(not c.isspace() and ord(c) not in face.coverage for c in q):
                         continue
-                    sets[split].append(dict(p=page, q=q, refs=refs, group=group, key=x["id"]))
+                    sets[split].append(
+                        dict(p=page, q=q, refs=refs, group=group, key=x["id"])
+                    )
                     keys[split].add(digest(key))
                     blocked.add(key)
                     counts[split] += 1
@@ -75,20 +86,31 @@ def main():
     reserved = set(subjects[:120])
     for x in paired:
         split = "validation" if simplify(x["s"]) in reserved else "train"
-        sets[split].append(dict(p=x["p"], q=x["q"], refs=[x["o"]], group="paired", key=x["board"]))
+        sets[split].append(
+            dict(p=x["p"], q=x["q"], refs=[x["o"]], group="paired", key=x["board"])
+        )
         keys[split].add(digest(simplify(x["p"])))
-    assert all(not keys[a] & keys[b] for i,a in enumerate(keys) for b in list(keys)[i+1:])
-    receipt = dict(source_sha256=files, splits={}, normalized_page_overlap=0, validation_exchange_subjects=len(reserved))
+    assert all(
+        not keys[a] & keys[b] for i, a in enumerate(keys) for b in list(keys)[i + 1 :]
+    )
+    receipt = dict(
+        source_sha256=files,
+        splits={},
+        normalized_page_overlap=0,
+        validation_exchange_subjects=len(reserved),
+    )
     for split, items in sets.items():
         rng.shuffle(items)
         path = CACHE / (split + ".json")
         write_json(path, items)
-        receipt["splits"][split] = dict(counts=dict(Counter(x["group"] for x in items)),
-                                        sha256=sha256(path.read_bytes()).hexdigest(), pages=len(keys[split]))
+        receipt["splits"][split] = dict(
+            counts=dict(Counter(x["group"] for x in items)),
+            sha256=sha256(path.read_bytes()).hexdigest(),
+            pages=len(keys[split]),
+        )
     write_json(PUBLIC / "corpus.json", receipt)
     print(receipt, flush=True)
 
 
 if __name__ == "__main__":
     main()
-

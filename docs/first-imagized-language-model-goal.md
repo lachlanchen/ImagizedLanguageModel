@@ -1,6 +1,8 @@
 # Imagized Language Model: Engineering Goal
 
-Updated: 2026-11-23. **Active; usable visual language remains unproved.**
+Updated: 2026-11-24. **Active; usable visual language remains unproved.**
+
+Pooling four visual span readers matched the generic reader on 285/384 fresh human questions but lost complete name exchanges (63/128 versus 79) and historical substitutions (11/32 versus 17 with generic object selection). The four-output experiment is complete. Wider span lists expose 46 of 84 previously absent exact answers. Test whether a question-conditioned scorer can actually recover these outputs using a larger physical candidate set. Select on natural paragraphs and genuinely unseen exchange subjects outside the frozen specialists' training sources. Freeze the rule before a second fresh human test and evaluate complete stopped replies, historical forms, and open writing independently. Keep generic and specialist models available. [Lean proof, actual images and diagnostic](../references/span_choice_result.md)
 
 Conditioning the copied name on the pictured role raises complete generative name-exchange tests from 29 to 70 of 128 unseen DuIE passages. The same supervision with likelihood alone passes 79/128. Reversing clause order as well raises complete tests from 13 to 36 of 48 with the extra margin, or 37 with likelihood alone. On broadly sampled human questions direct answers fall from 147 to 121 of 256. The trained scorer is optional. Future work should train on naturally phrased, diverse questions with exact reply boundaries and evaluate the same counterfactuals alongside broader open answers. Preserve the previous reader and all failed transfers. The exchange tests establish adaptation to pictured relationships. From-scratch language acquisition, unrestricted writing and a measured matched-quality efficiency advantage remain open. [Lean result, measured transfer and weights](../references/participant_margin_result.md)
 
