@@ -33,6 +33,46 @@ class Case:
     refs: tuple
 
 
+def open_reading():
+    from zipfile import ZipFile
+    from scripts.prepare_composed_chinese_answers import ARCHIVE, DEST
+    from scripts.prepare_pictured_entry_answers import Rasterizer
+    from scripts.train_causal_glyph_writer import examples
+    from scripts.span_reservation import reservation
+
+    metadata = json.loads((DEST / "development/sources.json").read_text())
+    original = examples("development")
+    raster = Rasterizer()
+    guard = reservation()
+    by_member = defaultdict(dict)
+    for i, v in enumerate(metadata):
+        by_member[v["member"]][v["line"]] = i
+    groups = defaultdict(list)
+    with ZipFile(ARCHIVE) as z:
+        for member, indices in by_member.items():
+            with z.open(member) as f:
+                for line, raw in enumerate(f):
+                    if line > max(indices):
+                        break
+                    if line not in indices:
+                        continue
+                    i = indices[line]
+                    v = metadata[i]
+                    r = json.loads(raw)
+                    assert str(r["question_id"]) == v["question_id"]
+                    text = r["documents"][v["doc"]]["paragraphs"][v["paragraph"]][
+                        :1024
+                    ][v["start"] : v["start"] + 224]
+                    if guard.overlaps(text):
+                        continue
+                    p, q, y = original[i]
+                    assert p == b"".join(raster.tile(c) for c in text)
+                    groups["open_" + v["kind"]].append(
+                        Case(v["question_id"], p, q, (y,))
+                    )
+    return groups
+
+
 def trials():
     font = Face((FONTS[0], 2))
     face = lru_cache(maxsize=16000)(font)
@@ -82,6 +122,7 @@ def trials():
                 Case(v["board"], face(p), face(q), tuple(face(r) for r in v["refs"]))
             )
     assert len(groups["prior"]) == parent_results["extra_cmrc"]["n"]
+    groups.update(open_reading())
     return groups
 
 
