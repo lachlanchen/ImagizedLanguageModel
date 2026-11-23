@@ -1,0 +1,4 @@
+# Rank of a missing answer on a pictured page
+
+The frozen evaluation contains 84 fresh human questions for which all four readers' highest-scoring spans miss every annotated answer. Before fitting another reader, test whether widening the four lists to two, four or eight spans per reader makes those answer images available. Rank valid start/end pairs by the same joint score, breaking ties by their physical index. Compare exact strips, including equivalent occurrences at different positions. Retain the full 384-question denominator and the 84 top-one misses. Check that the independently computed top-one union reproduces 300/384. A recovery of at least half the 84 at depth eight motivates training a reranker over a larger pool on independent passages. Otherwise prioritize learning better endpoints from broader page supervision. The diagnostic uses labels only for measurement and supplies an oracle upper bound. No change to model weights, thresholds or frozen scores.
+

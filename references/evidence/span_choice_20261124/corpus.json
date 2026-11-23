@@ -1,0 +1,38 @@
+{
+  "source_sha256": {
+    "data/raw/cmrc2018/cmrc2018_train.json": "5497aa2f81908e31d6b0e27d99b1f90ab63a8f58fa92fffe5d17cf62eba0c212",
+    "data/raw/cmrc2018/cmrc2018_dev.json": "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f",
+    "data/raw/drcd/DRCD_training.json": "5e6268091ab98f0bb858f03c77fba85e23b31e49a91638e4f22d0d8ec703f79a",
+    "data/raw/drcd/DRCD_test.json": "d9de0b4d247a8391ac8daee6c02c2c8272b75562a1e2377b50ae04ecc09a7438"
+  },
+  "splits": {
+    "train": {
+      "counts": {
+        "drcd": 3500,
+        "paired": 8704,
+        "cmrc": 3500
+      },
+      "sha256": "73b2c4f1c08427fd4d5e11f10b42f00f501d23c01932c3bc73028b8a08209fb6",
+      "pages": 6456
+    },
+    "validation": {
+      "counts": {
+        "paired": 896,
+        "cmrc": 256,
+        "drcd": 256
+      },
+      "sha256": "1ccc49c0c4bf4712044a926275dc5230571726f7ae74780e38750ab2e6986345",
+      "pages": 960
+    },
+    "fresh": {
+      "counts": {
+        "cmrc": 192,
+        "drcd": 192
+      },
+      "sha256": "680e787673e40a8a34f77daf9395f8114a4581f073f7504d20995a7a6027ad28",
+      "pages": 384
+    }
+  },
+  "normalized_page_overlap": 0,
+  "validation_exchange_subjects": 120
+}

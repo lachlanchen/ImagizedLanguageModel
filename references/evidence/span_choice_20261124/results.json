@@ -1,0 +1,123 @@
+{
+  "direct": {
+    "fresh": {
+      "generic": 285,
+      "factual": 232,
+      "likelihood": 178,
+      "margin": 192,
+      "trained": 285,
+      "permuted": 225,
+      "oracle": 300,
+      "uncovered": 84,
+      "wrong_selection": 15,
+      "gained": 3,
+      "lost": 3,
+      "n": 384
+    },
+    "prior_broad": {
+      "generic": 187,
+      "factual": 147,
+      "likelihood": 119,
+      "margin": 121,
+      "trained": 181,
+      "permuted": 142,
+      "oracle": 194,
+      "uncovered": 62,
+      "wrong_selection": 13,
+      "gained": 0,
+      "lost": 6,
+      "n": 256
+    },
+    "historical": {
+      "generic": 17,
+      "factual": 13,
+      "likelihood": 12,
+      "margin": 14,
+      "trained": 11,
+      "permuted": 14,
+      "oracle": 18,
+      "uncovered": 14,
+      "wrong_selection": 7,
+      "gained": 0,
+      "lost": 6,
+      "n": 32
+    }
+  },
+  "writer": {
+    "cmrc": {
+      "stops": 58,
+      "n": 29,
+      "both": 20,
+      "subject_order": 20,
+      "object_order": 21
+    },
+    "drcd": {
+      "stops": 38,
+      "n": 19,
+      "both": 13,
+      "subject_order": 14,
+      "object_order": 14
+    },
+    "notes": {
+      "stops": 64,
+      "n": 32,
+      "both": 14,
+      "subject_order": 16,
+      "object_order": 15
+    },
+    "duie": {
+      "stops": 2395,
+      "n": 1200,
+      "both": 921,
+      "subject_order": 946,
+      "object_order": 934
+    },
+    "new_source": {
+      "stops": 1019,
+      "n": 512,
+      "both": 381,
+      "subject_order": 395,
+      "object_order": 382,
+      "boards": 128,
+      "all_both": 63
+    },
+    "clause_order": {
+      "stops": 764,
+      "n": 384,
+      "both": 353,
+      "subject_order": 355,
+      "object_order": 357,
+      "boards": 48,
+      "all_both": 34
+    }
+  },
+  "checks": {
+    "fresh": true,
+    "human": false,
+    "exchanges": false,
+    "clause_order": false
+  },
+  "passed": false,
+  "paired_fresh_p": 1.0,
+  "by_source": {
+    "cmrc": {
+      "n": 192,
+      "trained": 101,
+      "generic": 100
+    },
+    "drcd": {
+      "n": 192,
+      "trained": 184,
+      "generic": 185
+    }
+  },
+  "sha256": {
+    "fresh_answers.npz": "3d3c6fd8fb5240298cc0020c878c6657908e4dc579eb04ddc2a91ca9d16aadcf",
+    "historical_answers.npz": "497967273b89636dc57db81c5713393ac63e50869ba606c89558ebfc327315d4",
+    "object.npz": "5c2682ba297ab6de72e69a287c5c7855f63b4696a0b30f0d6bdaee2c52d0ed4c",
+    "prior_broad_answers.npz": "e769f4bc61a79ae3270ad3d090ad21be3fa8ffb93f0eb5f20dc9d4b6da0c520c",
+    "subject.npz": "f14156862de4661474e19aead115afa7c681e711523505d2775f220d54959d6f"
+  },
+  "ledger_sha256": "85b5b883e0cff7613d03e76d676b1016a25776ad58642063e167586515a660ad",
+  "peak_allocated_bytes": 1185796096
+}
