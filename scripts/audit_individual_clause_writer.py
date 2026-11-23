@@ -66,7 +66,7 @@ def paired():
                 facts[r["scene"], r["lang"]].append(r["correct"])
             stats[arm] = {
                 s: (int(all(facts[s, "zh"])) + int(all(facts[s, "en"]))) / 2
-                for s, l in facts
+                for s, _ in facts
             }
         result[group] = {}
         for ref in ("independent", "parent"):

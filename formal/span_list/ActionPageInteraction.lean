@@ -21,6 +21,22 @@ theorem four_correct (x y z w : Int) (h : x>0 ∧ y<0 ∧ z<0 ∧ w>0) :
   unfold interaction
   omega
 
+/-- Coefficients of the four sign patterns, in common scaled units. The
+aligned interaction must overcome the worst cell's additive name bias. -/
+theorem four_signs_iff (c p q i : Int) :
+    (c+p+q+i > 0 ∧ c+p-q-i < 0 ∧ c-p+q-i < 0 ∧ c-p-q+i > 0) ↔
+    (i > -(c+p+q) ∧ i > c+p-q ∧ i > c-p+q ∧ i > -c+p+q) := by
+  constructor <;> intro h <;> omega
+
+/-- Without division, all margins reconstruct exactly from the four measured
+cells. Transposing either axis flips the sign of the interaction. -/
+theorem first_cell_reconstruction (x y z w : Int) :
+    (x+y+z+w)+(x+y-z-w)+(x-y+z-w)+interaction x y z w = 4*x := by
+  unfold interaction
+  omega
+
+#print axioms four_signs_iff
+#print axioms first_cell_reconstruction
 example : interaction 7 (-2) 1 3 > 0 ∧ ¬ ((1:Int)<0) := by decide
 #print axioms additive_cannot_bind
 #print axioms four_correct
