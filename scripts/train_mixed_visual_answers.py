@@ -88,7 +88,7 @@ def fit(folder):
     fit_rows(folder, base, original, rows, SEED)
 
 
-def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=None):
+def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=None, focus=None):
     torch.manual_seed(seed)
     if any(sha(base / n) != h for n, h in original.items()):
         raise ValueError("Parent writer changed")
@@ -134,6 +134,7 @@ def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=
                     [answers[i] for i in ids],
                     False,
                     supervision(ids) if supervision is not None else None,
+                    focus=[focus[i] for i in ids] if focus is not None else None,
                 )
             if not torch.isfinite(loss) or loss.item() > 100:
                 raise ValueError("Unreachable or non-finite physical answer")

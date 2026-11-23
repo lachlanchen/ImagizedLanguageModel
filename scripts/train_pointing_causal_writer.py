@@ -38,7 +38,22 @@ def starts(p,y):
     return [j for j,c in enumerate(p) if c==y[0] and p[j:j+n]==y]
 
 
-def objective(model,read,out,pairs,answers,uniform,additional_loss=None):
+def focused_action_loss(log_probs, answers, focus):
+    """Mean next-ink NLL on one selected action of each eligible book request."""
+    offsets = []
+    start = 0
+    for actions, index in zip(answers, focus, strict=True):
+        if index is not None:
+            if not 0 <= index < len(actions):
+                raise ValueError("Focused action outside the supervised reply")
+            offsets.append(start + index)
+        start += len(actions)
+    if start != log_probs.numel():
+        raise ValueError("Incorrect number of supervised glyph probabilities")
+    return -log_probs[offsets].mean() if offsets else log_probs.sum() * 0
+
+
+def objective(model,read,out,pairs,answers,uniform,additional_loss=None,focus=None):
     device=out.device
     sequences=[]
     offsets=[]
@@ -71,6 +86,8 @@ def objective(model,read,out,pairs,answers,uniform,additional_loss=None):
     gate=model_gate[loss_mask]
     likelihood=torch.logaddexp(gen+F.logsigmoid(gate),copy+F.logsigmoid(-gate))
     loss=-likelihood.mean()
+    if focus is not None:
+        loss = loss + focused_action_loss(likelihood, answers, focus)
     which=[i for i,idx in enumerate(exact_starts) if idx]
     if which:
         aligned=torch.zeros_like(valid)
