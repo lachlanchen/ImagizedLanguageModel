@@ -38,7 +38,7 @@ class PreparedGlyphResponder:
         states = [self.alphabet]
         if additions:
             new = torch.from_numpy(np.frombuffer(b"".join(additions), np.uint8).copy().reshape(-1,128)).to(self.device)
-            states.extend(self.net.writer.encode(part) for part in new.split(256))
+            states.extend(self.net.writer.read_extra(part, self.alphabet) for part in new.split(256))
         states.append(self.net.writer.markers[:1])
         output, ended = self.net.generate(torch.cat(states), self.alphabet, indexed, limit=limit)
         source_ink = list(additions)

@@ -130,7 +130,7 @@ class PointingCausalWriter(nn.Module):
             import numpy as np
             added = torch.from_numpy(np.frombuffer(b"".join(extra),np.uint8).copy().reshape(-1,128)).to(device)
             bank.append(added)
-            features.extend(self.writer.encode(cells) for cells in added.split(256))
+            features.extend(self.writer.read_extra(cells, alphabet) for cells in added.split(256))
         read = torch.cat([*features,self.writer.markers[:1]])
         streams,stops = self.generate(read,alphabet,[(p,q)],limit)
         chosen = torch.tensor(streams[0],device=device,dtype=torch.long)-1

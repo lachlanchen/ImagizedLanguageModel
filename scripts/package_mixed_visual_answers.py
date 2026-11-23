@@ -40,6 +40,8 @@ def package(
     ):
         name = "ilm/visual_lm/" + n + ".py"
         files[name] = ROOT / name
+    if "typeface.safetensors" in weights:
+        files["ilm/visual_lm/typeface_map.py"] = ROOT / "ilm/visual_lm/typeface_map.py"
     files["scripts/respond_pointing_glyphs.py"] = (
         ROOT / "scripts/respond_pointing_glyphs.py"
     )

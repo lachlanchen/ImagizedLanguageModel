@@ -127,7 +127,7 @@ def dataset(writer, records, native=False):
         read = [output]
         if extra:
             v = torch.from_numpy(np.frombuffer(b"".join(extra),np.uint8).reshape(-1,128).copy()).cuda()
-            read.extend(writer.encode(t) for t in v.split(256))
+            read.extend(writer.read_extra(t, output) for t in v.split(256))
         read.append(writer.markers[:1])
         read = torch.cat(read)
     start = len(read)-1

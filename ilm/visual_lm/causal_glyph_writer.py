@@ -30,6 +30,20 @@ class CausalGlyphWriter(nn.Module):
         features = F.relu(self.metric(bits) @ self.projection)
         return (features * (2 / self.projection.shape[1]) ** .5) @ self.regression
 
+    def attach_typeface_map(self, path):
+        from ilm.visual_lm.typeface_map import TypefaceMap
+        self.typeface_map = TypefaceMap.restore(path, self.packed)
+
+    def read_extra(self, packed, alphabet):
+        mapper = getattr(self, "typeface_map", None)
+        if mapper is None:
+            return self.encode(packed)
+        indices, accept = mapper.identify(packed)
+        result = alphabet[indices]
+        if not accept.all():
+            result[~accept] = self.encode(packed[~accept])
+        return result
+
     @torch.no_grad()
     def alphabet(self):
         # Row zero ends the response. All other logits refer to actual ink planes.
@@ -77,6 +91,8 @@ class CausalGlyphWriter(nn.Module):
         writer = cls(GPT2Config.from_json_file(str(folder / "config.json")), **interface)
         writer.metric.load_state_dict(load_file(str(folder / "metric.safetensors")))
         writer.body.load_state_dict(load_file(str(folder / "body.safetensors")))
+        if (folder / "typeface.safetensors").is_file():
+            writer.attach_typeface_map(folder / "typeface.safetensors")
         return writer.to(device).eval()
 
 
