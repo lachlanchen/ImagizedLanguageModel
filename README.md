@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The visual writer learned to follow changes in who performed an action on pictured credits (175/256 comparisons, versus 19/256 for the control). On twelve new stories both writers missed every complete comparison. With two pictured requests and the corresponding catalogue sections, the writer reproduced four historical forms of 言 in two of eight trials. [↗](references/individual_clause_writer_result.md)
+
+[![111 · ILM](publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](publication/ilm-nature/manuscript.pdf#page=148)
+
 When two names exchanged roles on a pictured credit, the 87M-parameter writer followed the edit in both question orders on 165 of 256 comparisons. The equal-exposure control passed five. On separately worded stories both writers scored zero of 24. [Results and original images](references/role_change_writer_result.md) · [Run the writer](models/role_change_writer/README.md)
 
 [![Original reply images and edited-page results](publication/ilm-nature/figures/Figure_110_role_change_writer.png)](publication/ilm-nature/manuscript.pdf#page=147)

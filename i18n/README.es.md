@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+El modelo visual siguió el intercambio de funciones entre dos personas en los créditos de una obra en 175 de 256 comparaciones, frente a 19 del control. En doce relatos nuevos ninguno completó una comparación. Con dos preguntas en imágenes y las secciones correspondientes del catálogo, reprodujo cuatro formas históricas de 言 en dos de ocho ensayos. [↗](../references/individual_clause_writer_result.md)
+
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+
 Al intercambiar dos nombres en los créditos de una obra presentados como imagen, el modelo de 87 millones de parámetros siguió el cambio en ambos órdenes de preguntas en 165 de 256 comparaciones. El control, que vio los mismos ejemplos, superó cinco. En relatos redactados por separado, ambos obtuvieron 0 de 24. [Resultados e imágenes originales](../references/role_change_writer_result.md) · [Ejecutar el modelo](../models/role_change_writer/README.md)
 
 Tras excluir el material reservado de DRCD y repetir el entrenamiento, el lector con más candidatos obtuvo 234 respuestas exactas en 359 preguntas de desarrollo, frente a 242 del lector generalista. Las evaluaciones anteriores de DRCD utilizaron pasajes reservados para pruebas. [Resultados y corrección sobre los datos](../references/span_list_result.md)

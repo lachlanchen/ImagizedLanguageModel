@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Khi đổi vai của hai người trong phần ghi công được trình bày dưới dạng ảnh, mô hình thị giác xác định đúng cả hai vai trong 175 trên 256 phép so sánh, còn mô hình đối chứng đạt 19. Trên mười hai truyện mới, cả hai đều không hoàn thành phép so sánh nào. Khi nhận hai câu hỏi bằng hình ảnh cùng các mục tương ứng trong danh mục, mô hình tái hiện đúng bốn dạng chữ 言 cổ trong hai trên tám lần thử. [↗](../references/individual_clause_writer_result.md)
+
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+
 Khi hai tên đổi vai trò trong phần ghi công dưới dạng ảnh, mô hình 87 triệu tham số trả lời đúng theo cả hai thứ tự câu hỏi ở 165 trong 256 phép so sánh. Mô hình đối chứng được xem cùng các ví dụ và đạt 5 trên 256. Với các câu chuyện được viết riêng, cả hai mô hình đều đạt 0 trên 24. [Kết quả và ảnh đầu ra gốc](../references/role_change_writer_result.md) · [Chạy mô hình](../models/role_change_writer/README.md)
 
 Sau khi loại tài liệu DRCD đã dành riêng và huấn luyện lại, mô hình xét nhiều đáp án hơn trả lời khớp hoàn toàn 234 trong 359 câu hỏi phát triển. Bộ đọc đa dụng trả lời đúng 242 câu. Các đánh giá DRCD trước đây đã sử dụng đoạn văn dành riêng cho kiểm thử. [Kết quả và đính chính về nguồn dữ liệu](../references/span_list_result.md)

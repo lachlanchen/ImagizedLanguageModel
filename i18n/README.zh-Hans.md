@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+把作品署名表做成图像，再交换两个人的分工，视觉模型在 256 组比较中有 175 组答对了交换前后的两个角色，对照模型答对 19 组。在 12 篇新故事中，两者都没有完整答对一组。把两个问题分别配上对应的图录片段后，模型在 8 次测试中有 2 次按要求的顺序再现了「言」的四种历史字形。 [↗](../references/individual_clause_writer_result.md)
+
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+
 在图像形式的作品署名中交换两个人名后，8700 万参数的模型在 256 组比较中有 165 组能按两种提问顺序正确作答。训练样本相同、答案独立分配的对照模型通过了 5 组。在另行撰写的故事中，两个模型均未通过 24 组比较中的任何一组。 [结果与原始输出图像](../references/role_change_writer_result.md) · [运行模型](../models/role_change_writer/README.md)
 
 剔除预留的 DRCD 材料并重新训练后，扩大候选范围的阅读器在359道开发集问题中精确答对234道，通用阅读器答对242道。此前的 DRCD 评测使用了预留测试段落。 [结果与数据来源更正](../references/span_list_result.md)

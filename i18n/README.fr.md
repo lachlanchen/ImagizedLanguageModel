@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Le modèle visuel a suivi une permutation des rôles dans des crédits présentés en image pour 175 comparaisons sur 256, contre 19 pour le témoin. Sur douze nouveaux récits, aucun des deux modèles n’a réussi une comparaison complète. Avec deux questions en image et les sections correspondantes du catalogue, le modèle a reproduit quatre formes historiques de 言 dans deux essais sur huit. [↗](../references/individual_clause_writer_result.md)
+
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+
 Après permutation de deux noms dans des crédits présentés en image, le modèle de 87 millions de paramètres a suivi le changement dans les deux ordres de questions pour 165 comparaisons sur 256. Le témoin, exposé aux mêmes exemples, en a réussi cinq. Sur des récits rédigés séparément, les deux modèles ont obtenu 0 sur 24. [Résultats et images originales](../references/role_change_writer_result.md) · [Exécuter le modèle](../models/role_change_writer/README.md)
 
 Après exclusion des passages réservés de DRCD et réentraînement, le lecteur à liste élargie a produit 234 réponses exactes sur 359 questions de développement, contre 242 pour le lecteur généraliste. Des passages réservés au test avaient servi aux évaluations DRCD antérieures. [Résultats et rectification sur les données](../references/span_list_result.md)

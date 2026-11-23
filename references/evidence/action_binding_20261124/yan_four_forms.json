@@ -1,0 +1,1092 @@
+{
+  "previous_white_one_rasters_verified": 4,
+  "prior_card_split": "train",
+  "prior_card": [
+    {
+      "char": "言",
+      "stage": "oracle",
+      "label": "J04919"
+    },
+    {
+      "char": "征",
+      "stage": "bronze",
+      "label": "B02017"
+    },
+    {
+      "char": "征",
+      "stage": "oracle",
+      "label": "J03463"
+    },
+    {
+      "char": "言",
+      "stage": "bronze",
+      "label": "B02976"
+    }
+  ],
+  "sources": [
+    {
+      "char": "言",
+      "stage": "oracle",
+      "label": "J04903",
+      "svg_sha": "768d8f8023a9e845b5800230f4bec028d50d30fac54b1f07f43000dac465b913",
+      "raster_sha": "40a791e75366fa89bb4a3dc752e94146d4f6d1e0afc7de46f711af7c18f19185"
+    },
+    {
+      "char": "言",
+      "stage": "bronze",
+      "label": "B02975",
+      "svg_sha": "1ea9f7d0e1d947001ec099cab0f45b718ebccfff670a6a48551ea4647ca0f8a5",
+      "raster_sha": "115ebf6a4bfc2524979fb500f839dffa3f6d6e309b79846030aff86f33e6624f"
+    },
+    {
+      "char": "言",
+      "stage": "seal",
+      "label": "S01648",
+      "svg_sha": "019ed0c04c060fd17d2a3fc1874c2b9c501d9951eb8d8d134831545359143626",
+      "raster_sha": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20"
+    },
+    {
+      "char": "言",
+      "stage": "liushutong",
+      "label": "L06958",
+      "svg_sha": "9a8b3f10d06fe462bea3fb899579ef99b8d2342c21e4cdb1b58b14f7aa991a33",
+      "raster_sha": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438"
+    },
+    {
+      "char": "征",
+      "stage": "oracle",
+      "label": "J03463",
+      "svg_sha": "21c1dc35d6151c51c4c3cac08fcc8f7763927f5922b4a9f7b784b4f5dcdd3eee",
+      "raster_sha": "dc0a2a20c0764a9df5d2d3c83423de0534306b17fd164025e5af5cd9a0f46053"
+    },
+    {
+      "char": "征",
+      "stage": "bronze",
+      "label": "B02016",
+      "svg_sha": "087b620694149f643b5386c13d12d07430e4913840e8b7c368dda8fcbe275166",
+      "raster_sha": "b20991fe135099bf7dd937f469c0b8828299d7c2018cb0d8398e8d3a85b3be7b"
+    },
+    {
+      "char": "征",
+      "stage": "seal",
+      "label": "S01223",
+      "svg_sha": "7e8bc572393ebae10888661ca07749607e30829bd6ea4d4695862263b569d799",
+      "raster_sha": "a9722bdce5016884085b4664f61882b3d9cac991cd74d33498d49ed4731bcea1"
+    },
+    {
+      "char": "征",
+      "stage": "liushutong",
+      "label": "L10976",
+      "svg_sha": "be244a225783423578f3d4fe8accfb62bd1c468f33dd027407a189ee1ffc5f15",
+      "raster_sha": "113a60a833dba4bd7f3d5cfe5a4d217a09162efd271d96c4a51ad1acec439aba"
+    }
+  ],
+  "counts": {
+    "print_whole": {
+      "false": 8
+    },
+    "print_two": {
+      "false": 8
+    },
+    "print_source_assisted": {
+      "true": 2,
+      "false": 6
+    },
+    "legacy_whole": {
+      "false": 8
+    },
+    "legacy_two": {
+      "false": 7,
+      "true": 1
+    },
+    "legacy_source_assisted": {
+      "true": 2,
+      "false": 6
+    }
+  },
+  "cases": [
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "print_forward_forward_zh_whole.png",
+      "sha256": "7b11cb267f5076cecf25c69c895b7a0f3d56776305e1747cef887d6acab3b53d"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "print_forward_forward_zh_two.png",
+      "sha256": "3ec2bd664d393c5f3b763362ada0aed94dbf1a487683dcdc8b25484d44d88c43"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": true,
+      "distinct_correct": 4,
+      "image": "print_forward_forward_zh_source_assisted.png",
+      "sha256": "9db72071b8ba817884e9301ce65e2eb4665efa7a11aeeaf20bff00795e0c4a52"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_forward_en_whole.png",
+      "sha256": "a890070f3846636d60399a99a46e30c366fffeef53fe166fee3326b5d0503dd3"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_forward_en_two.png",
+      "sha256": "feadec7145ac20e0f6a612cec26e478e42bc362864f2ce32f9656e855b213dec"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_forward_en_source_assisted.png",
+      "sha256": "322bdbf62c81cf7422939a18ba246a209ec8f1458827f5f83311e4d37c2c8819"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "print_forward_reverse_zh_whole.png",
+      "sha256": "64dabb2cf198d6276dcea8c92426c1c60ff9ae89f888f5d00821d37908129053"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "bronze"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "print_forward_reverse_zh_two.png",
+      "sha256": "af8c1437ff05303216e32e8f892b797aad06ae28ebe0d7fa654c4ced48c2f9ab"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "oracle"
+        ]
+      ],
+      "all_four": true,
+      "distinct_correct": 4,
+      "image": "print_forward_reverse_zh_source_assisted.png",
+      "sha256": "8d6f7bee18d449fbf769d5bf3a1eeeb0812525f4f24283eae9517acda483ba04"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_reverse_en_whole.png",
+      "sha256": "a890070f3846636d60399a99a46e30c366fffeef53fe166fee3326b5d0503dd3"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_reverse_en_two.png",
+      "sha256": "feadec7145ac20e0f6a612cec26e478e42bc362864f2ce32f9656e855b213dec"
+    },
+    {
+      "polarity": "print",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_forward_reverse_en_source_assisted.png",
+      "sha256": "5611a91f06c0dfe51c1cfafed489dd24af3ac9d3d531a3fb72baa7acd90a47ac"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "print_reverse_forward_zh_whole.png",
+      "sha256": "7b11cb267f5076cecf25c69c895b7a0f3d56776305e1747cef887d6acab3b53d"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "print_reverse_forward_zh_two.png",
+      "sha256": "0fdc8f73f2b101cdc88667d08bd46e1680b27825b5d5478b88b84f1154ef0272"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 4,
+      "image": "print_reverse_forward_zh_source_assisted.png",
+      "sha256": "90cfea52cfe8a56599ea577eb10dc53a040d7600c4e993fd9e28c9ee180084fe"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_forward_en_whole.png",
+      "sha256": "8b5154f37f8d852bcb67844184ad871b626eb2e96d2dc9ad18d4b647f42a2f2c"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_forward_en_two.png",
+      "sha256": "0be60a7894812ba28297c313b7da8bdc5a800e0f86c45a7ab153e02b5b0f4c0d"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_forward_en_source_assisted.png",
+      "sha256": "ef7c20f4e286b202feefc96f9f90e19c4518ca75f734624527efb4c161366af5"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "print_reverse_reverse_zh_whole.png",
+      "sha256": "f6a28d54e0999e1e36c1637267b6a9cb702d2e5cae47ee9ad63bcf572e8a1685"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "print_reverse_reverse_zh_two.png",
+      "sha256": "290a9e7d5ccf5c8ef1345ad6bbf245ce3f95a31092e64c2e1739f8c404c6fa50"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "bronze"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 4,
+      "image": "print_reverse_reverse_zh_source_assisted.png",
+      "sha256": "8ca86bfd45a02527d142a0ef3a913e693ca39b0073b259dfdcc84ec43f42136c"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_reverse_en_whole.png",
+      "sha256": "8b5154f37f8d852bcb67844184ad871b626eb2e96d2dc9ad18d4b647f42a2f2c"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_reverse_en_two.png",
+      "sha256": "0be60a7894812ba28297c313b7da8bdc5a800e0f86c45a7ab153e02b5b0f4c0d"
+    },
+    {
+      "polarity": "print",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "print_reverse_reverse_en_source_assisted.png",
+      "sha256": "1973e64eb22bdbfdf0507297c26b974c19a3e501b7b88a64737c3043cc45df37"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "legacy_forward_forward_zh_whole.png",
+      "sha256": "a8b7780ffc4c2504e546deac1a8bd73bf1887f70539ee7d531f9d4616088074f"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "legacy_forward_forward_zh_two.png",
+      "sha256": "31c461b6822091a60e0b128831eee474d9dadefbba15181e43df12a40656f0eb"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": true,
+      "distinct_correct": 4,
+      "image": "legacy_forward_forward_zh_source_assisted.png",
+      "sha256": "4a1fc134428200116cc9a9436cc8b2c641f06d1e24e5db5a12374db71cff6ee1"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_forward_forward_en_whole.png",
+      "sha256": "a890070f3846636d60399a99a46e30c366fffeef53fe166fee3326b5d0503dd3"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_forward_forward_en_two.png",
+      "sha256": "feadec7145ac20e0f6a612cec26e478e42bc362864f2ce32f9656e855b213dec"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "forward",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "oracle"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "legacy_forward_forward_en_source_assisted.png",
+      "sha256": "766829ab0c55ed012bdb83933a72f232ec41641cf49e9aa634765f98ff3cf6fe"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "legacy_forward_reverse_zh_whole.png",
+      "sha256": "834c8b5b78b6552b10799b3cb51c784b5165032b05ddfd2bebe9ab83d9d53c11"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "oracle"
+        ]
+      ],
+      "all_four": true,
+      "distinct_correct": 4,
+      "image": "legacy_forward_reverse_zh_two.png",
+      "sha256": "843500d85d75dbe9bd42a4cbc69870ada0b5206f4992d1514ce3dbf76e9eda0f"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "liushutong"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "oracle"
+        ]
+      ],
+      "all_four": true,
+      "distinct_correct": 4,
+      "image": "legacy_forward_reverse_zh_source_assisted.png",
+      "sha256": "843500d85d75dbe9bd42a4cbc69870ada0b5206f4992d1514ce3dbf76e9eda0f"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_forward_reverse_en_whole.png",
+      "sha256": "a890070f3846636d60399a99a46e30c366fffeef53fe166fee3326b5d0503dd3"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_forward_reverse_en_two.png",
+      "sha256": "feadec7145ac20e0f6a612cec26e478e42bc362864f2ce32f9656e855b213dec"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "forward",
+      "order": "reverse",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "oracle"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "legacy_forward_reverse_en_source_assisted.png",
+      "sha256": "a0ad94619c00dff0ea93597fc23fa4de66f4f283f3d58b215805823262f116de"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "legacy_reverse_forward_zh_whole.png",
+      "sha256": "80fcd1c398350ad64d77f9b14c906b80156014cb6133b4f941bc239e03153671"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "liushutong"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "legacy_reverse_forward_zh_two.png",
+      "sha256": "80d49fb8b6739b24da972bf1fcf202b8a81394a8595178110b053becbb57901d"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "legacy_reverse_forward_zh_source_assisted.png",
+      "sha256": "2a39f5b57d88f399e79da420760b7db15c8bbeb665a498378d8a0b3f24cb0032"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_reverse_forward_en_whole.png",
+      "sha256": "9d03b8e83a9f1883549ccfa7191a6c40ea0eefbd8466277dc3f3a4d8157a9a04"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_reverse_forward_en_two.png",
+      "sha256": "0509e93f66188b313dfc4364eb4e91be4884a65658d52dab9d01c48c9aa0008e"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "forward",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_reverse_forward_en_source_assisted.png",
+      "sha256": "fdce2cc940e0cbb28216a1d8ae923a53fa19fe92be37cb026e65919a92ce6bae"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "whole",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "legacy_reverse_reverse_zh_whole.png",
+      "sha256": "1961ac35c6c4d8a4781aec46ea1849e859de44e41add1acd79124d18dc80b523"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "bronze"
+        ],
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 2,
+      "image": "legacy_reverse_reverse_zh_two.png",
+      "sha256": "33e89e18e08a8df7c7201ce197d451ae6527faf2f5b4c9100a60a557de65267f"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "zh",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "seal"
+        ],
+        [
+          "言",
+          "oracle"
+        ],
+        [
+          "言",
+          "bronze"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 3,
+      "image": "legacy_reverse_reverse_zh_source_assisted.png",
+      "sha256": "8f4bfe5b37bd9c66e401bd5589a20cbd4b6269bdfcb4837aa927d831cb70ee1b"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "whole",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_reverse_reverse_en_whole.png",
+      "sha256": "8b0bafc09ac399d6d8c32181332ced0254902a6725ebf089c35582e0f369b660"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "two",
+      "ended": true,
+      "actual": [
+        [
+          "言",
+          "seal"
+        ]
+      ],
+      "all_four": false,
+      "distinct_correct": 1,
+      "image": "legacy_reverse_reverse_en_two.png",
+      "sha256": "8759a0c751906793a872c338a9d3418bf23d2c9a2833ae247534cb65e7904c5a"
+    },
+    {
+      "polarity": "legacy",
+      "layout": "reverse",
+      "order": "reverse",
+      "lang": "en",
+      "route": "source_assisted",
+      "ended": true,
+      "actual": [],
+      "all_four": false,
+      "distinct_correct": 0,
+      "image": "legacy_reverse_reverse_en_source_assisted.png",
+      "sha256": "64089703addbedc71421b764f7f604e8eeaa20c9ca45e33aee3082528e94b940"
+    }
+  ]
+}

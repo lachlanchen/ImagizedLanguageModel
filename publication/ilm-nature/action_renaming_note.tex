@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage[margin=28mm]{geometry}
+\usepackage{amsmath,booktabs,hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\hypersetup{hidelinks}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+\pagestyle{empty}
+\begin{document}
+{\small Supplement to \emph{Conditional language generation in glyph image space}}\par
+{\Large\bfseries Can a preference for one written name explain incorrect action assignments?}\par
+A writer can give a fluent answer about the wrong person if the appearance of a name raises its probability independently of the passage. The earlier name-only scores showed such a preference on 14 of 24 comparisons. We tested whether removing a fixed name preference restores the ability to distinguish the two participants in a story.
+
+For an image input $x$ comprising page and question, let $y$ denote the supported complete clause and $z$ the same clause naming the other person. The transposition $T$ exchanges the two annotated name images throughout all three streams. It preserves action wording, glyph order outside the names and the meaning of the comparison. We checked the inverse transformation on every affected page and question and verified that exchanging the two answer images gives the original alternatives in reverse. With weights frozen, define
+\[
+ d(x,y,z)=\log p(y,\mathrm{stop}\mid x)-\log p(z,\mathrm{stop}\mid x),\qquad
+ \bar d=\tfrac12\{d(x,y,z)+d(Tx,Ty,Tz)\}.
+\]
+A constant contribution $+b$ favouring one physical name becomes $-b$ in the renamed example. It cancels exactly. Lean verifies this identity for scores in common integer units and shows that averaging two nonpositive margins cannot make the supported clause preferable. The construction does not cancel preferences that change with the surrounding text.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{Earlier stories} & \multicolumn{2}{c}{New stories}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Writer & Raw & Averaged & Raw & Averaged\\
+\midrule
+Common parent & 0 & 0 & 2 & 2\\
+Independent labels & 0 & 1 & 0 & 1\\
+Aligned clauses & 0 & 2 & 1 & 1\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each column counts comparisons out of 24 for which the writer preferred the correct clause for both actions on both page versions. The aligned writer improved on the earlier stories, but on the new stories its individual decisions fell from 53 to 48 of 96, with one complete comparison under either rule. Removing a fixed preference for one name was insufficient to recover assignment on the new stories. These scores use annotated names and supplied candidate answers. Free writing remains measured by the independently graded image responses in Figure 111.
+\end{document}
