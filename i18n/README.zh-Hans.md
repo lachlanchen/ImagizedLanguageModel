@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+利用问题图像的表示定位答案后，MLQA 的 412 道英语问题中，准确摘录数从 17 增至 41。中英文合计 824 次提问，独立生成模型根据摘录给出 111 个完全正确且自行结束的回答，直接阅读原页面时为 90 个。 [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 从零训练的视觉编码器在 374 段小说中正确配对了 364 段的中英文问题。在另外五部作品的 92 次提问中，阅读模型准确摘录了 31 次，生成模型根据摘录给出了 19 个完全正确的回答。 [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

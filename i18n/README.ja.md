@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+質問画像の表現を使うと、MLQAの英語412問で正しい箇所を特定できた数が17から41に増えた。中英合わせた824問では、生成モデルが抜粋を受け取った場合に111問、元のページを受け取った場合に90問で、正答して自ら生成を終了した。 [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 視覚エンコーダーは小説374節のうち364節で英語と中国語の質問を正しく対応付けた。別の5作品への92問では、読解モデルが31問で正しい箇所を抜き出し、その抜粋を受け取った生成モデルは19問に正答した。 [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

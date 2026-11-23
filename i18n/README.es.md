@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+Con la representación visual de la pregunta, el lector extrajo 41 respuestas exactas en 412 preguntas de MLQA en inglés, frente a 17 anteriormente. En las 824 preguntas de ambos idiomas, el generador produjo 111 respuestas exactas con parada autónoma al recibir los fragmentos, frente a 90 con las páginas completas. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 El codificador visual emparejó correctamente las preguntas en inglés y en chino en 364 de 374 pasajes de novela. En 92 preguntas sobre otras cinco obras, el lector extrajo 31 respuestas exactas. Con esos fragmentos, el modelo generativo produjo 19 respuestas exactas. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

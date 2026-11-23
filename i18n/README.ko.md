@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+질문 이미지의 표현을 사용하자 MLQA 영어 질문 412개 중 정확한 답 구절을 찾은 수가 17개에서 41개로 늘었다. 중국어와 영어를 합친 824개 질문에서 생성 모델이 정확히 답하고 스스로 멈춘 횟수는 발췌문을 주었을 때 111회, 원문 페이지를 주었을 때 90회였다. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 시각 인코더는 소설 지문 374개 중 364개에서 영어 질문과 중국어 질문을 올바르게 짝지었다. 다른 작품 다섯 편에 대한 92개 질문에서 읽기 모델은 정답 구절 31개를 골랐고, 그 구절을 받은 생성 모델은 19개 질문에 정확히 답했다. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

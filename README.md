@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+Using the learned question image to locate evidence raised exact English-request excerpts from 17 to 41 of 412 on MLQA. The independent writer produced 111 exact stopped replies across both languages, compared with 90 when given the original pages. [↗](references/question_evidence_transfer_result.md)
+
+[![108 · ILM](publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](publication/ilm-nature/manuscript.pdf#page=144)
+
 A visual encoder trained from scratch matched English and Chinese questions on 364 of 374 novel passages. On five further works, the reader found 31 exact excerpts in 92 requests. The writer gave 19 exact replies when supplied with those excerpts. [↗](references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](publication/ilm-nature/manuscript.pdf#page=143)

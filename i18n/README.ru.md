@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+Благодаря визуальному представлению вопроса число точных цитат на 412 английских вопросах MLQA выросло с 17 до 41. Из 824 вопросов на двух языках генератор дал 111 точных ответов с самостоятельной остановкой по отрывкам и 90 по полным страницам. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 Визуальный кодировщик верно сопоставил английские и китайские вопросы в 364 из 374 отрывков романов. В ответ на 92 вопроса о пяти других произведениях модель чтения выбрала 31 точную цитату. Получив эти отрывки, генератор дал 19 точных ответов. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

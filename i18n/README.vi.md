@@ -68,6 +68,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Biểu diễn học từ ảnh câu hỏi giúp tăng số đoạn trích chính xác từ 17 lên 41 trong 412 câu hỏi MLQA tiếng Anh. Với 824 câu hỏi ở cả hai ngôn ngữ, mô hình sinh trả lời chính xác và tự dừng 111 lần khi nhận đoạn trích, so với 90 lần khi nhận cả trang. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 Bộ mã hóa thị giác ghép đúng câu hỏi tiếng Anh và tiếng Trung ở 364 trong 374 đoạn tiểu thuyết. Với 92 câu hỏi về năm tác phẩm khác, mô hình đọc trích đúng 31 câu trả lời. Mô hình sinh nhận các trích đoạn ấy và trả lời chính xác 19 câu. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

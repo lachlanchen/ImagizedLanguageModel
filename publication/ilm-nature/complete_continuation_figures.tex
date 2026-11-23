@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_bilingual_book_intervals_article.py.
+% Literal captions copied from their source inputs by build_question_evidence_transfer_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -873,4 +873,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{b,} Strictly correct joint assignments of two English to two Chinese questions from the same passage. The separate visual question encoders receive only the four question images. Ties receive no credit. The length baseline compares the lengths of the two streams.
 \textbf{c,} Original glyphs for the first exact Chinese-request reply and first nonempty missed English-request reply in fixed packet order. The writer emits its own cells and stop after receiving the predicted excerpt.}
 \label{fig:bilingual-book-intervals}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_108_question_evidence_transfer.png}
+\caption{\textbf{Using a cross-script question vector to locate and write a pictured answer.}
+\textbf{a,} Exact excerpt rates on the Chinese-context MLQA development subset and the BiPaR novel development pages. EN and ZH denote the question language. Matched and exchanged fits add the same number of parameters to the frozen parent.
+\textbf{b,} Exact freely stopped replies after presenting either the full original page or the predicted excerpt to the released causal writer, together with the actual question. The last column counts pages with two different facts answered in both languages.
+\textbf{c,} Measured English question, selected source cells and writer output for two different facts on the first classical passage with four exact selections. Panels a and b include failures.
+The selected names are correct under both English requests. The first generated reply stops incorrectly, and the second reaches the 48-cell limit.}
+\label{fig:question-evidence-transfer}
 \end{figure*}

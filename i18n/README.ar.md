@@ -68,6 +68,10 @@
 
 # نموذج اللغة المصوّرة (ILM)
 
+زادت الإجابات المقتبسة بدقة من 17 إلى 41 في 412 سؤالًا إنجليزيًا من MLQA باستخدام تمثيل صورة السؤال. وفي 824 سؤالًا باللغتين، أنتج نموذج الكتابة 111 إجابة دقيقة توقف فيها تلقائيًا عند تزويده بالمقتطف، مقابل 90 عند تزويده بالصفحة كاملة. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 طابق المُرمّز البصري الأسئلة الإنجليزية بنظيراتها الصينية في 364 من أصل 374 مقطعًا روائيًا. وفي 92 سؤالًا عن خمسة أعمال أخرى، اختار نموذج القراءة 31 مقتطفًا صحيحًا، وقدّم نموذج الكتابة 19 إجابة دقيقة عند تزويده بالمقتطفات. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

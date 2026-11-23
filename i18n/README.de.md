@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Mit der visuellen Fragedarstellung fand das Lesemodell bei 412 englischen MLQA-Fragen 41 statt 17 exakte Antworten. Bei insgesamt 824 Fragen erzeugte das Schreibmodell aus den Auszügen 111 exakte Antworten mit selbständigem Stopp. Mit den ganzen Seiten waren es 90. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 Der visuelle Encoder ordnete englische und chinesische Fragen in 364 von 374 Romanpassagen richtig zu. Bei 92 Fragen zu fünf weiteren Werken wählte das Lesemodell 31 exakte Antworten aus. Mit diesen Auszügen erzeugte das Schreibmodell 19 exakte Antworten. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)

@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Avec la représentation visuelle de la question, le lecteur a extrait 41 réponses exactes sur 412 questions anglaises de MLQA, contre 17 auparavant. Sur les 824 questions des deux langues, le générateur a produit 111 réponses exactes avec arrêt autonome à partir des extraits, contre 90 à partir des pages entières. [↗](../references/question_evidence_transfer_result.md)
+
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+
 L’encodeur visuel a apparié correctement les questions anglaises et chinoises pour 364 des 374 passages de romans. Sur 92 questions portant sur cinq autres œuvres, le lecteur a extrait 31 réponses exactes. Le modèle génératif a produit 19 réponses exactes à partir de ces extraits. [↗](../references/bilingual_book_intervals_result.md)
 
 [![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)
