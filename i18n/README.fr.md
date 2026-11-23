@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Après permutation de deux noms dans un passage chinois en image, le lecteur entraîné par vraisemblance seule a répondu à toutes les questions dans les deux ordres demandés sur 79 passages sur 128, contre 29 auparavant. Sur 48 questions rédigées par des personnes, ce score est passé de 34 à 28. [Résultats et modèles](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 Sur 48 questions rédigées en chinois, le modèle a écrit 34 réponses exactes dans chacun des deux ordres de mots demandés. Il a correctement nommé le compositeur de « 秋潮 ». Sur une autre chanson, échanger les noms du compositeur et du parolier a suffi à lui faire attribuer la musique à la mauvaise personne. [Résultats et modèle](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)

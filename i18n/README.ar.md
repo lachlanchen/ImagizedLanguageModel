@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+عند تبادل اسمين في مقطع صيني مصوّر، أجاب النموذج المدرَّب بتعظيم الإمكان عن جميع الأسئلة بالترتيبين المطلوبين للكلمات في 79 من 128 مقطعاً، مقابل 29 سابقاً. أمّا في الأسئلة التي كتبها أشخاص، فانخفض عدد الإجابات الصحيحة بالترتيبين من 34 إلى 28 من أصل 48. [النتائج والنماذج](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 كتب النموذج المعلومة الصحيحة بالترتيبين المطلوبين للكلمات في 34 من أصل 48 سؤالاً صينياً كتبها أشخاص. وذكر ملحّن أغنية «秋潮» على نحو صحيح، لكنه أخطأ في اسم الملحّن عندما تبدّل دورا الملحّن وكاتب الكلمات في أغنية أخرى. [النتائج والنموذج](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)

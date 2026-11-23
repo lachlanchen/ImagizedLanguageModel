@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+画像内の中国語の文章で二人の名前を入れ替えると、尤度だけで訓練したモデルは128件中79件で、すべての質問に二通りの語順で正しく答えた。従来は29件だった。一方、人が書いた48問では両方の語順で正解した数が34問から28問に減った。 [実験結果とモデル](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 人が書いた中国語の質問48問のうち34問で、画像を出力するモデルが同じ事実を指定された二通りの語順で正しく書けた。「秋潮」の作曲者は正しく答えたが、別の曲で作詞者と作曲者の名前を入れ替えると、人名を取り違えた。 [実験結果とモデル](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)

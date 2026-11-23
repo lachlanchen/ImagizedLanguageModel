@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+When two names exchange roles on a pictured Chinese passage, the likelihood-trained reader now answers every question in both word orders on 79 of 128 passages, up from 29. On human-written questions its two-order score falls from 34 to 28 of 48. [Results and checkpoints](references/participant_margin_result.md)
+
+[![松窗 · 95](publication/ilm-nature/figures/Figure_95_participant_margin.png)](publication/ilm-nature/manuscript.pdf#page=126)
+
 The image writer now gives the correct fact in two requested word orders on 34 of 48 human-written Chinese questions. It credits the composer of 《秋潮》 correctly. A second song shows what still fails when two people exchange roles. [Results and model](references/pictured_relation_result.md)
 
 [![秋潮 · 94](publication/ilm-nature/figures/Figure_94_pictured_relation.png)](publication/ilm-nature/manuscript.pdf#page=125)

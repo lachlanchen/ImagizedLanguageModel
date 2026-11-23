@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+중국어 지문 이미지에서 두 사람의 이름을 맞바꾸자 우도만으로 학습한 모델은 128개 지문 중 79개에서 모든 질문에 두 가지 어순으로 정확히 답했다. 기존 모델은 29개였다. 사람이 쓴 질문 48개에서는 두 어순 모두 맞힌 수가 34개에서 28개로 줄었다. [실험 결과와 모델](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 사람이 작성한 중국어 질문 48개 중 34개에서 모델이 같은 사실을 요청한 두 가지 어순으로 정확히 써냈다. 《秋潮》의 작곡가는 맞혔지만, 다른 곡에서 작곡가와 작사가의 이름을 바꾸자 사람을 잘못 짚었다. [실험 결과와 모델](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)

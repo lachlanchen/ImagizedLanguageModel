@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在中文图文段落中交换两个人名后，只用似然目标训练的模型在 128 段中有 79 段能用两种语序正确回答全部问题，原模型为 29 段。在人工编写的 48 道问题上，两种语序都答对的题数从 34 降至 28。 [实验结果与模型](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 在人工编写的 48 道中文问题中，模型有 34 道能按要求用两种语序写出正确事实。它能正确写出《秋潮》的作曲人。另一首歌的测试显示，交换作曲人和作词人后，模型仍可能答错人名。 [实验结果与模型](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)

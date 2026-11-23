@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_pictured_relation_article.py.
+% Literal captions copied from their source inputs by build_participant_margin_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -763,4 +763,14 @@ control was evaluated on all 22,907 windows.}
 \textbf{c}, The original diagnostic and actual object-first replies. Both name Shen He. The updated output identifies him as the composer.
 \textbf{d}, In a separate song with exchanged names, the model identifies the role but copies the lyricist instead of the composer. All displayed Chinese strips are original input or emitted pixels.}
 \label{fig:pictured-relation}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_95_participant_margin.png}
+\caption{\textbf{A visual reader follows exchanged credits while losing accuracy on broader questions.}
+\textbf{a}, Fraction of passages passing every requested word order, role and name assignment. The clause-order test also reverses the order of the two clauses.
+\textbf{b}, Counts of questions with two stopped, pixel-exact replies from the same autoregressive writer. The likelihood-only fit used the same correct labels and omitted the extra margin penalty.
+\textbf{c}, Original input and output pixels from the song that exposed the error in Figure~\ref{fig:pictured-relation}. The revised answer names Su Tian.
+\textbf{d}, First human question in evaluation order on which the earlier writer passed both orders and the new scorer lost one. Both name Wu Woyao. The new object-first reply also copies the character identifying the Qing dynasty.}
+\label{fig:participant-margin}
 \end{figure*}

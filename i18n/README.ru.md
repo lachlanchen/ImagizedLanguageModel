@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+После перестановки двух имён в изображении китайского текста модель, обученная только по правдоподобию, верно ответила на все вопросы в обоих порядках слов для 79 из 128 отрывков. Прежняя модель справилась с 29. Среди 48 вопросов, составленных людьми, число верных ответов в обоих порядках упало с 34 до 28. [Результаты и модели](../references/participant_margin_result.md)
+
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+
 На 34 из 48 вопросов, составленных людьми на китайском языке, модель записала верный ответ в обоих заданных порядках слов. Она правильно назвала композитора песни «秋潮», но ошиблась в имени, когда в описании другой песни композитора и автора слов поменяли местами. [Результаты и модель](../references/pictured_relation_result.md)
 
 [![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=125)
