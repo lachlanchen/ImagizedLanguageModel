@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình đọc ảnh với 86 triệu tham số trả lời đúng 38/56 câu hỏi tiếng Trung về các nhân vật trong *Quốc ngữ* (國語). Khi đổi chỗ hai tên người rồi hỏi lại, mô hình trả lời đúng cả bốn câu ở 4/14 đoạn. Mô hình ban đầu đạt 3 đoạn, còn đối chứng huấn luyện với hai tên có trọng số bằng nhau đạt 2. Với câu hỏi tiếng Anh, mô hình trả lời đúng 16 câu nhưng không đúng hết cả bốn ở đoạn nào. Ví dụ trả về hình chữ 密康公 và 恭王 từ trang gốc. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 Mô hình đọc có 64.666 tham số nhận ảnh câu hỏi và đoạn văn tiếng Trung rồi trả về ảnh phần văn bản chứa câu trả lời. Sau khi học từ 6.439 đoạn văn, mô hình trả lời đúng 104/452 câu hỏi tiếng Trung và 45/452 câu hỏi tiếng Anh về hai tiểu thuyết dành riêng cho đánh giá. Khi chỉ học từ đáp án của con người, kết quả tương ứng là 81 và 48. Mô hình vẫn hiếm khi trả lời đúng cả hai câu hỏi khác nhau về cùng một đoạn. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

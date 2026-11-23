@@ -1,0 +1,3 @@
+# Small classical argument reader
+
+This 64,666-parameter comparison model takes a pictured passage and question and returns a span of source ink. It completed one of 16 Chinese name-exchange contrasts in the Zuo Tradition. The weight file is the aligned final checkpoint. Use it from the repository root with `python -m scripts.read_book_participant --writer models/classical_argument_reader/reader.safetensors --page passage.png --question question.png --output answer.png`. [Results and comparison](../../references/optical_role_adapter_result.md) · [Fit receipt](../../references/evidence/classical_argument_20261124/aligned_fit.json)

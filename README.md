@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+An 86-million-parameter visual reader answered 38 of 56 pictured Chinese questions about the people in the *Discourses of the States* (國語). It answered both questions before and after a name exchange on 4 of 14 excerpts, compared with 3 for the original reader and 2 for the equal-label control. For pictured English questions it gave 16 correct answers and completed no excerpt. The example returns the original glyphs for 密康公 and 恭王. [Guoyu · ILM](models/optical_role_reader/README.md) · [38/56](references/optical_role_adapter_result.md)
+
+[![116 · ILM](publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](publication/ilm-nature/manuscript.pdf#page=154)
+
 A 64,666-parameter reader takes a pictured question and Chinese passage and returns a strip of the original page. Trained on 6,439 passages, it found 104 of 452 source answers for Chinese questions and 45 for English questions about two reserved novels. Human answers alone produced 81 and 48. The model can answer some questions about people; it still rarely answers two different questions about the same passage correctly. [ILM · 64k](models/book_span_distillation/README.md) · [104/452](references/book_span_distillation_result.md)
 
 [![113 · ILM](publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](publication/ilm-nature/manuscript.pdf#page=151)

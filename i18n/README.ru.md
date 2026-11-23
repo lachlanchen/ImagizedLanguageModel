@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Визуальная модель с 86 млн параметров правильно ответила на 38 из 56 вопросов на китайском о персонажах «Го юй» (國語). И текст, и вопросы подавались в виде изображений. После перестановки двух имён вопросы задавали повторно. Все четыре ответа были верны для 4 из 14 отрывков, у исходной модели — для 3, у контрольной модели с равными весами имён — для 2. На английском модель дала 16 правильных ответов и ни разу не ответила верно на всю четвёрку. В примере возвращаются изображения имён 密康公 и 恭王 из оригинала. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 Модель с 64 666 параметрами читает изображение вопроса и китайского отрывка и возвращает фрагмент исходной страницы. После обучения на 6 439 отрывках она правильно ответила на 104 из 452 вопросов по-китайски и на 45 из 452 по-английски по двум романам, оставленным для оценки. При обучении только по ответам людей результат составил 81 и 48 соответственно. На два разных вопроса об одном отрывке модель пока редко даёт два верных ответа. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

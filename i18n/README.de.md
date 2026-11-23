@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Ein visuelles Lesemodell mit 86 Millionen Parametern beantwortete 38 von 56 chinesischen Fragen zu den Personen im *Guoyu* (國語) richtig. Fragen und Passagen lagen als Bilder vor. Vor und nach dem Tausch zweier Namen gelangen alle vier Antworten in 4 von 14 Passagen. Das Ausgangsmodell schaffte 3, das Kontrollmodell mit gleich gewichteten Namen 2. Auf Englisch gelangen 16 richtige Antworten, aber keine vollständige Vierergruppe. Das Beispiel gibt die Schriftbilder von 密康公 und 恭王 aus der Vorlage zurück. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 Das Lesemodell mit 64.666 Parametern erhält eine Frage und einen chinesischen Text als Bilder und gibt einen Ausschnitt der Originalseite zurück. Nach dem Training mit 6.439 Passagen beantwortete es zu zwei zurückgehaltenen Romanen 104 von 452 chinesischen und 45 von 452 englischen Fragen richtig. Beim Training allein mit menschlichen Antworten waren es 81 beziehungsweise 48. Zwei verschiedene Fragen zur selben Passage beantwortet das Modell bislang selten beide richtig. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

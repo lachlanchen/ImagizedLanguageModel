@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un lecteur visuel de 86 millions de paramètres a répondu correctement à 38 des 56 questions en chinois présentées sous forme d’images sur les personnages du *Guoyu* (國語). Après permutation des deux noms, il a donné les quatre bonnes réponses sur 4 des 14 extraits, contre 3 pour le lecteur initial et 2 pour le témoin entraîné avec un poids égal pour les deux noms. En anglais, il a donné 16 réponses exactes sans réussir les quatre questions d’un même extrait. L’exemple restitue les glyphes originaux de 密康公 et 恭王. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 Ce lecteur de 64 666 paramètres reçoit une question et un passage chinois sous forme d’images, puis renvoie un extrait de la page originale. Entraîné sur 6 439 passages, il a trouvé 104 réponses exactes sur 452 questions en chinois et 45 sur 452 en anglais dans deux romans réservés à l’évaluation. Avec les seules réponses humaines, les scores étaient de 81 et 48. Le lecteur répond encore rarement juste à deux questions différentes sur le même passage. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+8,600 万パラメータの画像読解モデルは、『国語』の登場人物について画像で示した中国語の質問 56 問のうち 38 問に正答した。二人の名を入れ替える前後で各 2 問にすべて正答したのは 14 篇中 4 篇で、元のモデルは 3 篇、二人を同じ重みで学習した対照モデルは 2 篇だった。英語では 16 問に正答したが、4 問すべてに正答した篇はなかった。実行例では原文から「密康公」と「恭王」の字形を返す。 [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 64,666 パラメータの読解モデルが、画像として与えられた質問と中国語の文章を読み、答えにあたる字形を元の画像から返します。6,439 段落で学習し、評価用に残した小説 2 作品について、中国語の質問では 452 問中 104 問、英語では 452 問中 45 問に正答しました。人手の正解だけで学習した場合はそれぞれ 81 問と 48 問でした。同じ段落について異なる二問の両方に正答することはまだまれです。 [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

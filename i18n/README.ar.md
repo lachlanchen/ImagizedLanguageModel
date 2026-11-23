@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+أجاب قارئ بصري يضم 86 مليون معامل عن 38 من 56 سؤالاً صينياً مصوّراً حول شخصيات كتاب «خطابات الممالك» (國語). وعندما أُعيد طرح السؤالين بعد تبديل اسمي الشخصيتين، أصاب في الإجابات الأربع في 4 من 14 مقطعاً، مقابل 3 مقاطع للقارئ الأصلي ومقطعين للنموذج الذي أعطى الاسمين وزناً متساوياً أثناء التدريب. وفي الإنجليزية أجاب عن 16 سؤالاً إجابة صحيحة، ولم يُجب عن الأسئلة الأربعة كلها في أي مقطع. يعيد المثال صورتي الاسمين 密康公 و恭王 من الصفحة الأصلية. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 يقرأ نموذج يضم 64,666 مُعاملاً صورة السؤال وصورة المقطع الصيني، ثم يعيد الجزء الذي اختاره من صورة النص الأصلي. بعد التدريب على 6,439 مقطعاً، أجاب إجابة صحيحة عن 104 من 452 سؤالاً بالصينية و45 من 452 سؤالاً بالإنجليزية حول روايتين خُصّصتا للتقييم. وعند التدريب على إجابات البشر وحدها، بلغ العدد 81 و48 على التوالي. وما زال من النادر أن يجيب النموذج عن سؤالين مختلفين حول المقطع نفسه إجابة صحيحة. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

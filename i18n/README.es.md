@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un lector visual de 86 millones de parámetros acertó 38 de 56 preguntas en chino sobre los personajes del *Guoyu* (國語), presentadas como imágenes. Al intercambiar los dos nombres y repetir las preguntas, dio las cuatro respuestas correctas en 4 de 14 pasajes, frente a 3 del lector original y 2 del control que asignaba el mismo peso a ambos nombres. Acertó 16 preguntas en inglés y en ningún pasaje acertó las cuatro. El ejemplo devuelve los glifos originales de 密康公 y 恭王. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 Este lector de 64.666 parámetros recibe imágenes de una pregunta y un pasaje en chino y devuelve un recorte de la página original. Tras entrenarse con 6.439 pasajes, acertó 104 de 452 preguntas en chino y 45 de 452 en inglés sobre dos novelas reservadas para la evaluación. El entrenamiento con respuestas humanas únicamente obtuvo 81 y 48 aciertos. El lector todavía rara vez acierta dos preguntas distintas sobre el mismo pasaje. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

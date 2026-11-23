@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+这个有 8600 万参数的视觉模型直接阅读《国语》的段落和问题图像。在 56 个中文问题中，它答对了 38 个。把两个人名互换后再次提问，模型在 14 段中有 4 段四问全对，原模型为 3 段，两个名字权重相同的对照模型为 2 段。英文提问答对 16 题，没有一段四问全对。示例返回原文中「密康公」和「恭王」的字形。 [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 这个含 64,666 个参数的阅读模型接收问题和中文段落的图像，直接截取原文中的字形作答。在 6,439 个段落上训练后，面对两部预留小说，它在各 452 道题中答对了 104 道中文题和 45 道英文题。仅用人工答案训练的模型分别答对 81 道和 48 道。同一段落换一个问题后，两题都答对的情况仍然很少。 [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+8,600만 개의 매개변수를 가진 시각 독해 모델이 《국어》의 인물을 묻는 중국어 질문 이미지 56개 중 38개에 정답을 냈다. 두 사람의 이름을 바꾸기 전후로 질문 두 개에 모두 맞힌 대목은 14개 중 4개였다. 원래 모델은 3개, 두 이름에 같은 가중치를 준 대조 모델은 2개였다. 영어 질문은 16개를 맞혔으며 네 답이 모두 맞은 대목은 없었다. 실행 예제는 원문의 密康公과 恭王을 글자 이미지로 반환한다. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
+
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+
 매개변수 64,666개의 읽기 모델은 질문과 중국어 지문을 이미지로 받아 원문에서 답에 해당하는 글자 이미지를 돌려줍니다. 6,439개 지문으로 학습한 뒤 평가용 소설 두 편에서 중국어 질문은 452개 중 104개, 영어 질문은 452개 중 45개를 맞혔습니다. 사람이 작성한 정답만으로 학습한 모델은 각각 81개와 48개를 맞혔습니다. 한 지문에 대한 서로 다른 두 질문을 모두 맞히는 경우는 여전히 드뭅니다. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
 [![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
