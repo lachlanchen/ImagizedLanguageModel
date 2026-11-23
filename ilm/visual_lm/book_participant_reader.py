@@ -23,7 +23,7 @@ class InkBank:
             raise ValueError("Expected a nonempty row of packed 32-pixel cells")
         ids = []
         for start in range(0, len(raw), CELL):
-            cell = raw[start:start + CELL]
+            cell = raw[start : start + CELL]
             if cell not in self.lookup:
                 self.lookup[cell] = len(self.cells)
                 self.cells.append(cell)
@@ -38,13 +38,22 @@ class InkBank:
 
 def positions(page, candidate):
     n = len(candidate)
-    return [i * WIDTH + n - 1 for i in range(len(page)-n+1)
-            if page[i:i+n] == candidate] if 0 < n <= WIDTH else []
+    return (
+        [
+            i * WIDTH + n - 1
+            for i in range(len(page) - n + 1)
+            if page[i : i + n] == candidate
+        ]
+        if 0 < n <= WIDTH
+        else []
+    )
 
 
 def padded(rows, device):
     pad = torch.nn.utils.rnn.pad_sequence
-    return pad([torch.tensor(s, dtype=torch.long) for s in rows], batch_first=True).to(device)
+    return pad([torch.tensor(s, dtype=torch.long) for s in rows], batch_first=True).to(
+        device
+    )
 
 
 def literal_evidence(page, question):
@@ -58,11 +67,13 @@ def literal_evidence(page, question):
 
 
 def neighborhood(evidence, width):
-    return F.avg_pool1d(evidence.unsqueeze(1), 2*width+1, stride=1, padding=width).squeeze(1)
+    return F.avg_pool1d(
+        evidence.unsqueeze(1), 2 * width + 1, stride=1, padding=width
+    ).squeeze(1)
 
 
 def end_values(x):
-    return F.pad(x, (0, WIDTH-1)).unfold(-1, WIDTH, 1)
+    return F.pad(x, (0, WIDTH - 1)).unfold(-1, WIDTH, 1)
 
 
 def valid_spans(page):
@@ -72,7 +83,9 @@ def valid_spans(page):
 def literal_spans(p, q):
     s = literal_evidence(p, q)
     local = 2 * neighborhood(s, 4) + neighborhood(s, 12)
-    return ((local.unsqueeze(-1) + end_values(local)) * 0.5).masked_fill(~valid_spans(p), -1e4)
+    return ((local.unsqueeze(-1) + end_values(local)) * 0.5).masked_fill(
+        ~valid_spans(p), -1e4
+    )
 
 
 class VisualContext(nn.Module):
@@ -96,7 +109,7 @@ class BookParticipantReader(nn.Module):
         self.ink = nn.Sequential(nn.Linear(256, dim), nn.LayerNorm(dim), nn.GELU())
         self.context = VisualContext(dim)
         self.question_weight = nn.Linear(dim, 1)
-        self.cross = nn.Linear(4*dim+3, dim)
+        self.cross = nn.Linear(4 * dim + 3, dim)
         self.read = VisualContext(dim)
         self.start = nn.Linear(dim, WIDTH)
         self.end = nn.Linear(dim, 1)
@@ -105,14 +118,18 @@ class BookParticipantReader(nn.Module):
         bank = self.ink(pixels)
         p = self.context(bank[page], page != 0)
         q = self.context(bank[question], question != 0)
-        affinity = torch.bmm(F.normalize(p, dim=-1), F.normalize(q, dim=-1).transpose(1, 2))
-        attn = (5*affinity).masked_fill(question[:, None, :] == 0, -1e4).softmax(-1)
+        affinity = torch.bmm(
+            F.normalize(p, dim=-1), F.normalize(q, dim=-1).transpose(1, 2)
+        )
+        attn = (5 * affinity).masked_fill(question[:, None, :] == 0, -1e4).softmax(-1)
         local_q = attn @ q
         salience = self.question_weight(q).squeeze(-1).masked_fill(question == 0, -1e4)
         global_q = (salience.softmax(-1).unsqueeze(1) @ q).expand_as(p)
         s = literal_evidence(page, question)
         fields = torch.stack((s, neighborhood(s, 4), neighborhood(s, 12)), dim=-1)
-        x = self.cross(torch.cat((p, local_q, p*local_q, p*global_q, fields), dim=-1))
+        x = self.cross(
+            torch.cat((p, local_q, p * local_q, p * global_q, fields), dim=-1)
+        )
         u = self.read(x, page != 0)
         logits = self.start(u) + end_values(self.end(u).squeeze(-1))
         return logits.masked_fill(~valid_spans(page), -1e4)
@@ -122,8 +139,8 @@ def group_spans(page):
     """Map distinct emitted bitmaps to every valid source occurrence."""
     groups = defaultdict(list)
     for i in range(len(page)):
-        for n in range(1, min(WIDTH, len(page)-i)+1):
-            groups[tuple(page[i:i+n])].append(i*WIDTH+n-1)
+        for n in range(1, min(WIDTH, len(page) - i) + 1):
+            groups[tuple(page[i : i + n])].append(i * WIDTH + n - 1)
     return groups
 
 
