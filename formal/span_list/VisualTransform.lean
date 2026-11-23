@@ -12,7 +12,7 @@ theorem exact_reader_iff {Example Image Label : Type} [Inhabited Label]
   · rintro ⟨read, correct⟩ x y same
     rw [← correct x, ← correct y, same]
   · intro consistent
-    classical
+    letI := Classical.propDecidable
     let read := fun image =>
       if h : ∃ x, paint x = image then target (Classical.choose h) else default
     refine ⟨read, ?_⟩

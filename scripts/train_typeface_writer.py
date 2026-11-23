@@ -61,8 +61,11 @@ def glyph_views(rows, faces, packed):
     return torch.tensor(ids), bits.reshape(len(ids), len(faces), 128)
 
 
-def fit_correspondence(rows, faces):
-    path = WORK / "typeface.safetensors"
+def fit_correspondence(
+    rows, faces, *, path=None, report=None, transform=None, observe=None
+):
+    path = WORK / "typeface.safetensors" if path is None else path
+    report = PUBLIC / "correspondence.json" if report is None else report
     if path.exists():
         raise FileExistsError(path)
     t = monotonic()
@@ -97,6 +100,10 @@ def fit_correspondence(rows, faces):
         x = bits[labels, selection]
         dy, dx = torch.randint(-1, 2, (2,)).tolist()
         x = F.pad(x, (1, 1, 1, 1))[:, 1 + dy : 33 + dy, 1 + dx : 33 + dx]
+        if transform is not None:
+            x = transform(x)
+        if observe is not None:
+            observe(x, labels, selection, dy, dx)
         with torch.autocast("cuda", dtype=torch.bfloat16):
             logits = net.metric(x) @ F.normalize(centers, dim=1).T
         loss = F.cross_entropy(logits.float() / 0.04, labels)
@@ -125,7 +132,7 @@ def fit_correspondence(rows, faces):
         },
     )
     record(
-        PUBLIC / "correspondence.json",
+        report,
         dict(
             classes=len(ids),
             views=int(valid.sum()),
