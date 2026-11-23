@@ -47,6 +47,8 @@ def run():
     ):
         name = f"ilm/visual_lm/{m}.py"
         files[name] = ROOT / name
+    for name in ("two_page0.png", "two_question0.png", "two_question1.png"):
+        files["yan/" + name] = PUBLIC / "yan" / name
     archive = stage / "individual-clause-update.zip"
     with ZipFile(archive, "x", compression=ZIP_DEFLATED, compresslevel=2) as z:
         for n in ("scripts", "ilm", "ilm/visual_lm"):
@@ -97,6 +99,16 @@ def run():
                 assert receipt["stops"] == flags[w] and torch.equal(
                     packed_page(out), packed_page(PUBLIC / f"actual{w}.png")
                 )
+        historical = json.loads((PUBLIC / "yan_four_forms.json").read_text())
+        case = next(row for row in historical["cases"]
+                    if row["image"] == "print_forward_forward_zh_two.png")
+        actual = json.loads(subprocess.check_output(
+            [sys.executable, "-m", "scripts.write_pictured_clauses",
+             "--writer", "restored", "--output", str(out), "--page", "yan/two_page0.png",
+             "--questions", "yan/two_question0.png", "yan/two_question1.png"],
+            cwd=d, env=os.environ | {"PYTHONPATH": str(d)}, text=True))
+        assert all(actual["stops"]) == case["ended"]
+        assert torch.equal(packed_page(out), packed_page(PUBLIC / "yan" / case["image"]))
     record(
         PUBLIC / "release.json",
         dict(
@@ -106,7 +118,7 @@ def run():
             changed_tensors=len(changed),
             trained=trained,
             base=base,
-            exact_cpu_replays=4,
+            exact_cpu_replays=5,
             files={n: sha(p) for n, p in files.items()},
         ),
     )

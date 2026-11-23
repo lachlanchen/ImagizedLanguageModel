@@ -21,6 +21,8 @@ PYTHONPATH=. python -m scripts.write_pictured_clauses --writer restored \
   --page examples/page1.png --questions examples/q0.png examples/q1.png --output edited.png
 ```
 
+The archive also includes a page with genuine oracle, bronze, seal and Liushutong images of 言 and 征. To reproduce the illustrated four-form request, use `--page yan/two_page0.png --questions yan/two_question0.png yan/two_question1.png` on the installed writer. The historical evaluation compares the emitted pixels with each catalogued image in the requested order.
+
 The installer verifies the parent, change archive and reconstructed weights. For training on the project workstation, prepare the earlier paired role corpus, then run the following against its fixed parent. The teacher preparation reuses the original book targets. Each fit creates a fresh output directory.
 
 ```bash

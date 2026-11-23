@@ -35,6 +35,20 @@ theorem first_cell_reconstruction (x y z w : Int) :
   unfold interaction
   omega
 
+/-- Smallest common signed-score increase needed for all four decisions to
+clear a requested positive integer margin. The upper bound includes zero
+because an already qualified interaction needs no increase. -/
+def deficit (x y z w margin : Int) :=
+  max 0 (max (margin-x) (max (margin+y) (max (margin+z) (margin-w))))
+
+theorem uniform_interaction_repair (x y z w margin delta : Int) :
+    deficit x y z w margin ≤ delta ↔
+    0 ≤ delta ∧ margin ≤ x+delta ∧ y-delta ≤ -margin ∧
+      z-delta ≤ -margin ∧ margin ≤ w+delta := by
+  simp only [deficit, Int.max_le]
+  omega
+
+#print axioms uniform_interaction_repair
 #print axioms four_signs_iff
 #print axioms first_cell_reconstruction
 example : interaction 7 (-2) 1 3 > 0 ∧ ¬ ((1:Int)<0) := by decide
