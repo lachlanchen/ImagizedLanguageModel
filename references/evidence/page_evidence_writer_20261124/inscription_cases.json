@@ -1,0 +1,109 @@
+{
+  "original_split": "train",
+  "cases": [
+    {
+      "character": "征",
+      "stages": [
+        "oracle",
+        "bronze"
+      ],
+      "request": "請介紹「征」的字形，依甲骨文、金文的順序作答。",
+      "outputs": {
+        "fields_parent": {
+          "exact": false,
+          "stopped": false
+        },
+        "one": {
+          "exact": false,
+          "stopped": true
+        },
+        "varied": {
+          "exact": false,
+          "stopped": true
+        }
+      },
+      "labels": [
+        "J03463",
+        "B02017"
+      ]
+    },
+    {
+      "character": "征",
+      "stages": [
+        "bronze",
+        "oracle"
+      ],
+      "request": "請介紹「征」的字形，依金文、甲骨文的順序作答。",
+      "outputs": {
+        "fields_parent": {
+          "exact": false,
+          "stopped": true
+        },
+        "one": {
+          "exact": false,
+          "stopped": true
+        },
+        "varied": {
+          "exact": false,
+          "stopped": true
+        }
+      },
+      "labels": [
+        "B02017",
+        "J03463"
+      ]
+    },
+    {
+      "character": "言",
+      "stages": [
+        "oracle",
+        "bronze"
+      ],
+      "request": "請介紹「言」的字形，依甲骨文、金文的順序作答。",
+      "outputs": {
+        "fields_parent": {
+          "exact": false,
+          "stopped": true
+        },
+        "one": {
+          "exact": true,
+          "stopped": true
+        },
+        "varied": {
+          "exact": false,
+          "stopped": true
+        }
+      },
+      "labels": [
+        "J04919",
+        "B02976"
+      ]
+    },
+    {
+      "character": "言",
+      "stages": [
+        "bronze",
+        "oracle"
+      ],
+      "request": "請介紹「言」的字形，依金文、甲骨文的順序作答。",
+      "outputs": {
+        "fields_parent": {
+          "exact": false,
+          "stopped": true
+        },
+        "one": {
+          "exact": true,
+          "stopped": true
+        },
+        "varied": {
+          "exact": false,
+          "stopped": true
+        }
+      },
+      "labels": [
+        "B02976",
+        "J04919"
+      ]
+    }
+  ]
+}
