@@ -11,3 +11,5 @@ On the fresh classical set report individual name images, both questions correct
 ## Manuscript revision
 
 Keep the earlier comparison and Figure 113. Add a results paragraph, methods with the contrastive objective, and a new editable figure showing held-out scores and actual question/answer images for the first fixed excerpt. Update the summary using the measured result, compile the reading, review and redline PDFs and check the rendered pages before local delivery.
+
+Local Qwen3-8B additionally answers the same 224 original and counterfactual questions as text, with the instruction to give only the shortest complete expression for the person in the passage. Use greedy decoding, record its literal responses and stopping, and report exact scores under the same keys. It sees no options. Run it after the student fits release the GPU.
