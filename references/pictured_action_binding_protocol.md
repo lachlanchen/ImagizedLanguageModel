@@ -1,0 +1,7 @@
+# Can an edited passage change the answer to one question?
+
+The full-answer writer passed no complete contrast on twelve independently worded stories. We hold its weights fixed and give it each of the two original questions separately. Each of the two candidate outputs consists of one participant's pictured name and a stop. The same two questions apply to both page versions. A complete contrast requires all four choices within one question language. We also record freely stopped output images, exact names and replies identifying the correct name without the other one. A single-question prompt differs from the two-question task used in the preceding fit. The 128 held-out credits, twelve independently worded stories and their annotation-assisted rewrites provide separate comparisons.
+
+Run the existing aligned and independent-label writers. If the aligned writer makes all four probability choices on a majority of the 24 original story contrasts, study the additional burden of writing the two clauses. Otherwise test explicit single-action supervision with a fresh holdout before changing the decoder. Maintain the two-clause and historical checks. Each evaluation uses one GPU with two host threads. Preserve outputs and count each edited page pair as one unit per language.
+
+Lean verifies that an additive page bias and question bias cannot generate all four required signs in the name log-odds table. Complete crossings measure an interaction between the picture and the question. A positive aggregate interaction alone is insufficient.
