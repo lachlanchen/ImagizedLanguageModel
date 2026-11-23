@@ -53,8 +53,24 @@ def focused_action_loss(log_probs, answers, focus):
     return -log_probs[offsets].mean() if offsets else log_probs.sum() * 0
 
 
-def objective(model,read,out,pairs,answers,uniform,additional_loss=None,focus=None):
+def whole_reply_preference(log_scores, gold_rows, suppress_rival):
+    """Compare summed stopped-reply log probabilities for matched rows."""
+    rival = log_scores[-len(gold_rows):]
+    if not suppress_rival:
+        # Same forward values and gold gradients; the replay control supplies
+        # zero derivative through the incorrect reply.
+        rival = rival.detach()
+    return F.softplus(rival - log_scores[gold_rows]).mean()
+
+
+def objective(model,read,out,pairs,answers,uniform,additional_loss=None,focus=None,rivals=None,suppress_rival=True):
     device=out.device
+    gold_count = len(answers)
+    gold_rows = []
+    if rivals is not None:
+        gold_rows = [i for i, r in enumerate(rivals) if r is not None]
+        pairs = [*pairs, *(pairs[i] for i in gold_rows)]
+        answers = [*answers, *(rivals[i] for i in gold_rows)]
     sequences=[]
     offsets=[]
     begin=[]
@@ -85,7 +101,14 @@ def objective(model,read,out,pairs,answers,uniform,additional_loss=None,focus=No
     model_gate=gate.squeeze(-1)
     gate=model_gate[loss_mask]
     likelihood=torch.logaddexp(gen+F.logsigmoid(gate),copy+F.logsigmoid(-gate))
-    loss=-likelihood.mean()
+    preference = 0
+    if gold_rows:
+        sums = torch.zeros_like(model_gate).masked_scatter(loss_mask, likelihood).sum(dim=1)
+        preference = whole_reply_preference(sums, gold_rows, suppress_rival)
+        likelihood = likelihood[:sum(len(y) for y in answers[:gold_count])]
+        answers = answers[:gold_count]
+        exact_starts = exact_starts[:gold_count]
+    loss=-likelihood.mean() + preference
     if focus is not None:
         loss = loss + focused_action_loss(likelihood, answers, focus)
     which=[i for i,idx in enumerate(exact_starts) if idx]
@@ -97,7 +120,7 @@ def objective(model,read,out,pairs,answers,uniform,additional_loss=None,focus=No
     if additional_loss is not None:
         stop_logp = pointer.new_zeros(loss_mask.shape).masked_scatter(loss_mask,vocab[:,0])
         loss = loss + additional_loss(pointer, model_gate, stop_logp, source, valid, targets, loss_mask)
-    return loss, -likelihood.detach().sum(),len(labels)
+    return loss, -likelihood.detach().sum(),likelihood.numel()
 
 
 def fit(rows,name):

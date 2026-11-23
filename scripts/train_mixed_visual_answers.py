@@ -88,7 +88,7 @@ def fit(folder):
     fit_rows(folder, base, original, rows, SEED)
 
 
-def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=None, focus=None):
+def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=None, focus=None, rival_streams=None, suppress_rival=True):
     torch.manual_seed(seed)
     if any(sha(base / n) != h for n, h in original.items()):
         raise ValueError("Parent writer changed")
@@ -108,6 +108,25 @@ def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=
     record(folder / "corpus.json", report)
     print(report["groups"], flush=True)
     read, alphabet, pairs, answers = inputs(model.writer, rows)
+    rivals = None
+    if rival_streams is not None:
+        if supervision is not None or focus is not None:
+            raise ValueError("The matched preference experiment uses ordinary replay")
+        rivals = []
+        for row, (source, _) in zip(rows, pairs, strict=True):
+            ink = rival_streams.get((row.task, row.key))
+            if ink is None:
+                rivals.append(None)
+                continue
+            address = row.p.find(ink)
+            while address >= 0 and address % 128:
+                address = row.p.find(ink, address + 1)
+            if not ink or len(ink) % 128 or address < 0 or row.y == ink:
+                raise ValueError("Expected a distinct source-grounded stopped alternative")
+            start = address // 128
+            rivals.append(source[start:start+len(ink)//128] + [0])
+        if sum(r is not None for r in rivals) != len(rival_streams):
+            raise ValueError("Unmatched or repeated preference example")
     optimizer = torch.optim.AdamW(
         [
             dict(
@@ -135,6 +154,8 @@ def fit_rows(folder, base, original, rows, seed, supervision=None, typeface_map=
                     False,
                     supervision(ids) if supervision is not None else None,
                     focus=[focus[i] for i in ids] if focus is not None else None,
+                    rivals=[rivals[i] for i in ids] if rivals is not None else None,
+                    suppress_rival=suppress_rival,
                 )
             if not torch.isfinite(loss) or loss.item() > 100:
                 raise ValueError("Unreachable or non-finite physical answer")

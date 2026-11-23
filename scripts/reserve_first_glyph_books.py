@@ -59,14 +59,16 @@ def cases(pages, keys, face):
     return result
 
 
-def reserved():
-    receipt = json.loads(RESERVATION.read_text())
-    assert sha(PAGES) == receipt["pages_sha256"]
-    return cases(json.loads(PAGES.read_text()), receipt["eligible"], Face(FACES[0]))
+def reserved(pages_path=PAGES, reservation_path=RESERVATION):
+    receipt = json.loads(reservation_path.read_text())
+    assert sha(pages_path) == receipt["pages_sha256"]
+    return cases(
+        json.loads(pages_path.read_text()), receipt["eligible"], Face(FACES[0])
+    )
 
 
-def verify(library):
-    pages = json.loads(PAGES.read_text())
+def verify(library, pages_path=PAGES, reservation_path=RESERVATION, earlier_pages=None):
+    pages = json.loads(pages_path.read_text())
     face = Face(FACES[0])
     excluded = {}
     eligible = []
@@ -110,7 +112,7 @@ def verify(library):
         ):
             raise ValueError("Overlapping book and fit passages")
     evidence = dict(
-        pages_sha256=sha(PAGES),
+        pages_sha256=sha(pages_path),
         eligible=eligible,
         missing_glyphs=excluded,
         proposed=len(pages),
@@ -119,9 +121,25 @@ def verify(library):
         queried_windows=len(fresh),
         overlap_at_least_47_cells=False,
     )
-    if RESERVATION.exists() and json.loads(RESERVATION.read_text()) != evidence:
+    if earlier_pages is not None:
+        earlier = json.loads(earlier_pages.read_text())
+        assert {r["title"] for r in earlier.values()}.isdisjoint(
+            r["title"] for r in pages.values()
+        )
+        for old in earlier.values():
+            bitmap = face(old["page"])
+            if any(
+                bitmap[i : i + width] in fresh
+                for i in range(0, len(bitmap) - width + 1, 128)
+            ):
+                raise ValueError("Literary reservations share a 32-cell window")
+        evidence["previous_literary_sha256"] = sha(earlier_pages)
+    if (
+        reservation_path.exists()
+        and json.loads(reservation_path.read_text()) != evidence
+    ):
         raise ValueError("Reservation changed")
-    record(RESERVATION, evidence)
+    record(reservation_path, evidence)
     print(evidence, flush=True)
 
 
