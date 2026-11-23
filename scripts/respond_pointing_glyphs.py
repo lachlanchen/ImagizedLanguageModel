@@ -34,8 +34,10 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     for key in ("passage","question"):
         group=parser.add_mutually_exclusive_group(required=True)
-        group.add_argument("--"+key,type=Path,help="black-on-white horizontal strip of 32-pixel cells")
-        group.add_argument("--"+key+"-text",help="render text on the host before image inference")
+        action="append" if key=="passage" else "store"
+        group.add_argument("--"+key,action=action,type=Path,help="black-on-white horizontal strip of 32-pixel cells")
+        group.add_argument("--"+key+"-text",action=action,help="render text on the host before image inference")
+    parser.add_argument("--paragraph-ranker",type=Path,help="score repeated, explicitly separated passages against the pictured question")
     parser.add_argument("--model",type=Path,default=Path("artifacts/pointing_causal_writer_v1/pointing"))
     parser.add_argument("--reader",type=Path,help="optional frozen visual span reader directory")
     parser.add_argument("--selection",type=Path,help="learned choice between quoting and writing")
@@ -45,8 +47,21 @@ def main():
     parser.add_argument("--font-index",type=int,default=2)
     args=parser.parse_args()
     torch.set_num_threads(4)
-    page,question=[packed_page(path) if path is not None else render_text(text,args.font,args.font_index)
-                   for path,text in ((args.passage,args.passage_text),(args.question,args.question_text))]
+    question=(packed_page(args.question) if args.question else
+              render_text(args.question_text,args.font,args.font_index))
+    pages=([packed_page(path) for path in args.passage] if args.passage else
+           [render_text(s,args.font,args.font_index) for s in args.passage_text])
+    if len(pages)>1 and args.paragraph_ranker is None:
+        parser.error("Multiple passages require --paragraph-ranker")
+    index=0
+    if len(pages)>1:
+        from ilm.visual_lm.paragraph_evidence import ParagraphRanker
+        ranker=ParagraphRanker.restore(args.paragraph_ranker,args.device)
+        scores=ranker.scores(question.numpy().tobytes(),[p.numpy().tobytes() for p in pages])
+        index=max(range(len(scores)),key=scores.__getitem__)
+        print(f"Selected paragraph {index+1} of {len(pages)}")
+        del ranker
+    page=pages[index]
     if bool(args.reader) != bool(args.selection):
         parser.error("--reader and --selection are used together")
     quote = None
