@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Tras excluir el material reservado de DRCD y repetir el entrenamiento, el lector con más candidatos obtuvo 234 respuestas exactas en 359 preguntas de desarrollo, frente a 242 del lector generalista. Las evaluaciones anteriores de DRCD utilizaron pasajes reservados para pruebas. [Resultados y corrección sobre los datos](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 En 384 nuevas preguntas de comprensión lectora en chino, al combinar las respuestas en imagen de cuatro lectores se obtuvieron 285 aciertos exactos, tantos como con el lector generalista. El modelo superó por completo 63 de 128 pruebas de intercambio de nombres, frente a las 79 del lector especializado. [Resultados y pesos](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

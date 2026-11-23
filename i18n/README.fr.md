@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Après exclusion des passages réservés de DRCD et réentraînement, le lecteur à liste élargie a produit 234 réponses exactes sur 359 questions de développement, contre 242 pour le lecteur généraliste. Des passages réservés au test avaient servi aux évaluations DRCD antérieures. [Résultats et rectification sur les données](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 Sur 384 nouvelles questions de compréhension en chinois, la mise en commun des réponses en image de quatre lecteurs donne 285 réponses exactes, autant que le lecteur généraliste. Elle réussit intégralement 63 des 128 tests de permutation de noms, contre 79 pour le lecteur spécialisé. [Résultats et poids](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

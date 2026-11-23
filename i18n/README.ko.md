@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+따로 보관한 DRCD 자료를 제외하고 다시 학습한 결과, 후보를 늘린 모델은 개발용 질문 359개 중 234개에서 정답 이미지와 정확히 일치했고 범용 모델은 242개에서 일치했다. 이전 DRCD 평가에는 보류된 시험 지문이 포함됐다. [결과 및 데이터 출처 정정](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 중국어 독해 문제 384개로 새로 평가한 결과, 네 모델의 이미지 답안 후보를 종합한 모델은 범용 모델과 같은 285개에서 정답 이미지와 정확히 일치했다. 이름을 맞바꾸는 시험 128세트에서는 63세트의 모든 문항을 맞혔고, 특화 모델은 79세트를 맞혔다. [결과 및 가중치](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

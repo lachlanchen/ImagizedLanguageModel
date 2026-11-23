@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+予約済みの DRCD 資料を除いて再学習した結果、候補を増やしたモデルは開発用359問中234問で正解画像と完全に一致し、汎用モデルは242問で一致した。以前の DRCD 評価には予約済みのテスト文章が含まれていた。 [結果とデータ出典の訂正](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 中国語の新たな読解問題384問で、4つの読み取りモデルが提示した画像候補をまとめると、汎用モデルと同じ285問で正解画像と完全に一致した。人名を入れ替える128組のテストでは全問正解が63組で、専用モデルは79組だった。 [結果と重み](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

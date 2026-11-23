@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+After excluding reserved DRCD material and retraining, the wider reader returned 234 exact answer images on 359 development questions. The generic reader returned 242. Earlier DRCD scores used reserved test passages. [Results and source correction](references/span_list_result.md)
+
+[![97 · 战国史](publication/ilm-nature/figures/Figure_97_span_list.png)](publication/ilm-nature/manuscript.pdf#page=129)
+
 On 384 fresh Chinese reading questions, pooling four pictured answers gave 285 exact replies, equal to the generic reader. It passed 63 of 128 complete name exchanges; the specialized reader passed 79. [Results and weights](references/span_choice_result.md)
 
 [![道地的 · 96](publication/ilm-nature/figures/Figure_96_span_choice.png)](publication/ilm-nature/manuscript.pdf#page=128)

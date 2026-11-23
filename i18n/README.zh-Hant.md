@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+剔除預留的 DRCD 材料並重新訓練後，擴大候選範圍的閱讀器在359道開發集問題中精確答對234道，通用閱讀器答對242道。先前的 DRCD 評測使用了預留測試段落。 [結果與資料來源更正](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 在384道新評測的中文閱讀題中，模型合併四個閱讀器對圖像答案的預測，精確答對285道，與通用閱讀器持平。在128組人名互換測試中，它完全答對63組，專項閱讀器答對79組。 [結果與權重](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

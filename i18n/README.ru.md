@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+После исключения зарезервированных материалов DRCD и повторного обучения модель с расширенным набором вариантов дала 234 точных ответа на 359 вопросах из выборки разработки, а универсальная модель — 242. В прежних оценках DRCD использовались зарезервированные тестовые отрывки. [Результаты и исправление по источникам данных](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 В новой проверке на 384 вопросах по китайским текстам объединение вариантов от четырёх моделей дало 285 точных совпадений с изображением ответа. Столько же получила универсальная модель. При перестановке имён все вопросы пройдены в 63 из 128 тестов, а у специализированной модели — в 79. [Результаты и веса](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)

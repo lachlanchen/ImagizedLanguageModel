@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+بعد استبعاد مواد DRCD المحجوزة وإعادة التدريب، طابق القارئ ذو قائمة الإجابات الأوسع الصورة المرجعية في 234 من 359 سؤالاً في مجموعة التطوير، مقابل 242 للقارئ العام. استُخدمت في تقييمات DRCD السابقة فقرات كانت محجوزة للاختبار. [النتائج وتصحيح مصدر البيانات](../references/span_list_result.md)
+
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+
 في تقييم جديد شمل 384 سؤالاً لفهم نصوص صينية، طابقت إجابات النموذج صورة الإجابة المرجعية في 285 سؤالاً بعد جمع ترجيحات أربعة نماذج، وهي نتيجة القارئ العام أيضاً. وفي اختبارات تبادل الأسماء نجح في جميع أسئلة 63 مجموعة من أصل 128، مقابل 79 للقارئ المتخصص. [النتائج وأوزان النموذج](../references/span_choice_result.md)
 
 [![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=128)
