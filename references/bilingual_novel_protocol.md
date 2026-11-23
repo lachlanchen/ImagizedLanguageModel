@@ -15,3 +15,5 @@ python -m scripts.prepare_bilingual_novel_questions
 python -m scripts.train_bilingual_novel_writer --check-only chinese_repeat english_exchanged bilingual
 CUDA_VISIBLE_DEVICES=0 python -m scripts.train_bilingual_novel_writer chinese_repeat english_exchanged bilingual
 ```
+
+Alongside complete answers, report mean ordered-glyph F1, the longest common subsequence between the emitted cells and any accepted reference divided by the mean of their lengths. This measures partial overlap even if the writer fails to stop. Also count stopped outputs that exactly answer the other question on the page. The complete-page criterion uses stopped image replies and requires incompatible physical reference sets. The Lean proof establishes that collapsing the two question representations in either language prevents a complete board. [Checked proof](../formal/span_list/BilingualReading.lean)
