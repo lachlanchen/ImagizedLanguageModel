@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_first_glyph_book_article.py.
+% Literal captions copied from their source inputs by build_stopped_book_preference_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -857,4 +857,11 @@ control was evaluated on all 22,907 windows.}
 \caption{\textbf{First-glyph supervision and complete answers on independent literary works.}
 \textbf{a,} Correct initial glyph and exact stopped reply frequencies for 68 Chinese and 68 English requests. Each question refers to a Chinese passage. Bars compare ordinary bilingual supervision, additional supervision on a later action and additional supervision on the first action. \textbf{b,} Literary works, BiPaR and XQuAD require four correct answers per passage. CMRC and the historical headwords require two. \textbf{c,} Unmodified glyph pixels from the first exact Chinese reply and the first missed English reply in passage order for the first-action writer. Excerpts reproduce cells from the input around an accepted answer. The full passages were available at inference.}
 \label{fig:first-glyph-book}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_106_stopped_book_preference.png}
+\caption{\textbf{Learning to prefer a complete book answer and reading a new passage.}
+\textbf{a,} Percentage of supervised pairs in which the complete annotated reply has greater joint probability than the released writer's earlier wrong reply. Shorter, equal and longer refer to the rival's length relative to the annotation. \textbf{b,} Passages or headwords with every required reply correct in free generation. Literary, BiPaR and XQuAD passages require four replies. CMRC passages and historical cards require two. \textbf{c,} Original input and reply pixels for the first exact Chinese-request reply and first nonempty missed English-request reply in reserved passage order. The excerpt locates an accepted answer on the full input page. The writer receives the full passage and question.}
+\label{fig:stopped-book-preference}
 \end{figure*}

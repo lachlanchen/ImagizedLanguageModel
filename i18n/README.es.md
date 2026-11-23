@@ -68,6 +68,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+Tras entrenarse con 642 de sus propios errores, el modelo visual produjo 31 respuestas en imagen exactas en 144 consultas sobre otras seis obras chinas. Respondió bien a ambas preguntas en los dos idiomas en 0 de los 36 pasajes. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 En 34 pasajes de otras cuatro obras chinas, el modelo entrenado con mayor peso en el primer carácter dio 31 respuestas exactas a 136 preguntas en chino e inglés. En ningún pasaje acertó las cuatro respuestas. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

@@ -68,6 +68,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Sau khi học từ 642 câu trả lời sai của chính mình, mô hình đưa ra 31 câu trả lời bằng hình ảnh khớp hoàn toàn trong 144 lượt hỏi về sáu tác phẩm tiếng Trung khác. Mô hình trả lời đúng cả hai câu hỏi bằng cả hai ngôn ngữ ở 0 trong 36 đoạn văn. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 Trên 34 đoạn trích từ bốn tác phẩm tiếng Trung khác, mô hình được huấn luyện với trọng số lớn hơn cho chữ đầu tiên đã trả lời chính xác 31 trong 136 lượt hỏi bằng tiếng Trung và tiếng Anh. Không đoạn nào có đủ bốn câu trả lời đúng. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

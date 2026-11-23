@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+自身が誤答した642例で追加学習したモデルは、別の中国語作品6点への144回の質問に対し、31回で正しい画像を出力した。36の抜粋のうち、中国語と英語の両方で2問とも正答したのは0件だった。 [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 別の中国語作品4冊から選んだ34の抜粋で、先頭字形の学習を強めたモデルは中国語・英語による136回の質問のうち31回に完全正答しました。4問すべてに正答した抜粋はありませんでした。 [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

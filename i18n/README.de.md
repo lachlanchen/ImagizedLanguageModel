@@ -68,6 +68,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Nach dem Training an 642 eigenen Fehlantworten lieferte das visuelle Modell bei 144 Anfragen zu sechs weiteren chinesischen Werken 31 exakt richtige Bildantworten. Bei 0 von 36 Passagen beantwortete es beide Fragen in beiden Sprachen richtig. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 Auf 34 Auszügen aus vier weiteren chinesischen Werken lieferte das Modell mit stärkerer Gewichtung des ersten Schriftzeichens 31 exakte Antworten auf 136 Anfragen auf Chinesisch und Englisch. Bei keinem Auszug waren alle vier Antworten richtig. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

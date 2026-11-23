@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+After training on 642 of its own mistaken book answers, the visual writer gave 31/144 exact image replies on six additional Chinese works. It answered both questions in both languages on 0/36 passages. [↗](references/stopped_book_preference_result.md)
+
+[![106 · ILM](publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](publication/ilm-nature/manuscript.pdf#page=141)
+
 On 34 passages from four additional Chinese books, extra first-glyph supervision produced 31 exact replies in 136 Chinese and English requests. No passage received all four correct replies. [↗](references/first_glyph_book_result.md)
 
 [![105 · ILM](publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](publication/ilm-nature/manuscript.pdf#page=140)

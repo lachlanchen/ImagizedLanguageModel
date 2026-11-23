@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+用 642 个模型曾答错的例子训练后，视觉模型在另外六部中文作品的 144 次提问中给出了 31 个完全正确的图像回答。36 段文字中，有 0 段的两道题用中英文提问时都答对了。 [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 在另外四部中文作品的 34 段文字上，加强首字训练的模型对 136 次中英文提问给出了 31 个完全正确的回答。没有一段的四次提问全部答对。 [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

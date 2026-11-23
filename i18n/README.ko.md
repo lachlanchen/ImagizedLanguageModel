@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+이 모델은 자신이 틀린 답 642개로 추가 학습한 뒤 다른 중국어 작품 여섯 편에 관한 질문 144개 중 31개에 정확한 이미지로 답했다. 지문 36개 중 두 질문에 중국어와 영어로 모두 정답을 낸 지문은 0개였다. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 중국어 작품 네 편에서 새로 고른 지문 34개를 대상으로 첫 글자 학습을 강화한 모델을 평가했습니다. 중국어와 영어로 제시한 질문 136개 중 31개에 정확히 답했고, 네 답을 모두 맞힌 지문은 없었습니다. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

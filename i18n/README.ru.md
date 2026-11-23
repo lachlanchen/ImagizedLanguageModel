@@ -68,6 +68,10 @@
 
 # Imagized Language Model (ILM)
 
+После обучения на 642 собственных ошибках модель дала 31 точных ответов в виде изображений на 144 запроса по шести другим китайским произведениям. В 0 из 36 отрывков она верно ответила на оба вопроса на обоих языках. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 На 34 отрывках из четырёх других китайских книг модель с повышенным весом первого знака дала 31 точный ответ на 136 вопросов на китайском и английском. Ни для одного отрывка она не ответила правильно на все четыре вопроса. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

@@ -68,6 +68,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Après un entraînement sur 642 de ses propres erreurs, le modèle visuel a produit 31 réponses en image exactement conformes sur 144 questions portant sur six autres œuvres chinoises. Il a répondu correctement aux deux questions dans les deux langues pour 0 des 36 extraits. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 Sur 34 extraits de quatre autres œuvres chinoises, le modèle entraîné à donner davantage de poids au premier caractère a fourni 31 réponses exactes aux 136 questions posées en chinois et en anglais. Aucun extrait n’a reçu quatre réponses exactes. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)

@@ -68,6 +68,10 @@
 
 # نموذج اللغة المصوّرة (ILM)
 
+بعد التدريب على 642 إجابة أخطأ فيها سابقًا، أعطى النموذج البصري 31 إجابة مصوّرة مطابقة من أصل 144 سؤالًا عن ستة مؤلفات صينية أخرى. وأجاب عن السؤالين بالصينية والإنجليزية إجابة صحيحة في 0 من أصل 36 مقطعًا. [↗](../references/stopped_book_preference_result.md)
+
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+
 في اختبار شمل 34 مقطعاً من أربعة كتب صينية أخرى، أعطى النموذج الذي زيد وزن تدريب الحرف الأول فيه 31 إجابة مطابقة من أصل 136 سؤالاً بالصينية والإنجليزية. ولم يُجب عن الأسئلة الأربعة كلها إجابة صحيحة في أي مقطع. [↗](../references/first_glyph_book_result.md)
 
 [![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=140)
