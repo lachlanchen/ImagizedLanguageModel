@@ -47,7 +47,7 @@ class EvidenceWriter(nn.Module):
         self.free_mix = nn.Linear(width, 1)
         self.stop = nn.Linear(width, 1)
 
-    def read(self, bank, q, s):
+    def read_features(self, bank, q, s):
         qm = q >= 2
         sm = s >= 2
         u = self.context(bank[q.long()], qm)
@@ -95,6 +95,10 @@ class EvidenceWriter(nn.Module):
                 (qpool[:, 0], (ev.softmax(-1)[:, None].to(key.dtype) @ key)[:, 0]), -1
             )
         )
+        return key, ev, summary, sm
+
+    def read(self, bank, q, s):
+        key, ev, summary, sm = self.read_features(bank, q, s)
         valid = F.pad(sm, (0, LENGTH - 1)).unfold(1, LENGTH, 1)
         scores = self.interval_scores(key, ev, summary)
         score = scores.masked_fill(~valid, -1e9)
