@@ -2,6 +2,10 @@
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
+Can a model read a pictured question and write a complete answer as an image? A 913,127-parameter reader and writer trained on one RTX 4090 D reproduced the human answer on **6 of 96 English questions and 33 of 96 Chinese catalogue questions**. Asked for a hotel's address, it wrote **地址是在北京顺义区天竺镇府前一街24号。** The figure shows the actual question and output pixels in both languages. When a bus stop changed, the model followed the new name but damaged the subject of its sentence. [Run the model on either pictured question](models/region_writer/README.md) · [Results and limitations](references/region_writer_result.md) · [Paper, pages 16–17](publication/ilm-nature/visual_language_paper.pdf#page=16)
+
+[![Pictured English and Chinese questions, selected facts and independently generated answer glyphs](publication/ilm-nature/figures/Figure_164_sentences_from_pictured_questions.png)](publication/ilm-nature/visual_language_paper.pdf#page=16)
+
 Given whole English stories as glyph images, a 2.46-million-parameter writer answered both questions on **63 of 498 held stories**, up from 16 before bilingual training. In the image below, it correctly named the speaker and failed to explain what happened to an actor in 2004. On 116 questions whose accepted answers could not be copied from the source or visible query, it produced zero exact answers. [Run the reader](models/evidence_views/README.md) · [Experiment and copy audit](references/evidence_views_result.md) · [Article, page 15](publication/ilm-nature/visual_language_paper.pdf#page=15)
 
 [![Two held English questions with the actual human reference and outputs from both visual writers](publication/ilm-nature/figures/Figure_162_writing_from_evidence.png)](publication/ilm-nature/visual_language_paper.pdf#page=15)

@@ -125,7 +125,100 @@ def main():
                 ),
             )
     plate.rule(131)
-    dump(PUB / "plates.json", [plate.render()])
+    edit_panel = plate.render()
+    complete = Plate("Figure_164_sentences_from_pictured_questions", assets)
+    exact_cases = []
+    for j, task in enumerate(("statements", "catalogue")):
+        for i, (row, response) in enumerate(
+            zip(original, replies["original"], strict=True)
+        ):
+            if row["task"] != task or not response["stop"] or response["visible_reply"]:
+                continue
+            ink = Ink(np.load(MODEL / "palette.npy"))
+
+            def form(s):
+                return "".join(map(chr, ink.encode(s)))
+
+            sources = [form(v) for v in [row["q"], *row["blocks"]]]
+            if any(form(a) in src for a in row["answers"] for src in sources):
+                continue
+            raw = bytes.fromhex(response["ink_hex"])
+            assert sha256(raw).hexdigest() == response["sha256"]
+            if not any(
+                ink.array()[ink.encode(a)].tobytes() == raw for a in row["answers"]
+            ):
+                continue
+            break
+        else:
+            raise ValueError("No complete held answer for " + task)
+        folder = MODEL / "examples" / ("exact-" + task)
+        folder.mkdir(parents=True, exist_ok=True)
+
+        def grid(k, s):
+            ids = ink.encode(s)
+            draw(folder, k, ink.array()[ids])
+            return dict(png=k + ".png", cells=len(ids))
+
+        q = grid("question", row["q"])
+        facts = grid("fact", next(iter(row["facts"].values())))
+        dump(
+            folder / "input.json",
+            dict(
+                question=q,
+                regions=[
+                    grid("region-" + str(k), s) for k, s in enumerate(row["blocks"])
+                ],
+            ),
+        )
+        pixels = np.frombuffer(raw, np.uint8).reshape(-1, 128)
+        draw(folder, "answer", pixels)
+        top = 135 * j
+        complete.label(5, top + 1, "ab"[j], 12, True)
+        complete.label(
+            23,
+            top + 1,
+            (
+                "Answering a question about a historical figure"
+                if j == 0
+                else "Giving the address of a hotel"
+            ),
+            10,
+            True,
+        )
+        for k, title, n, y in (
+            ("question", "Question", q["cells"], 22),
+            ("fact", "Source fact", facts["cells"], 61),
+            ("answer", "Written answer", len(pixels), 86),
+        ):
+            complete.label(
+                8, top + y + 2, title, 8, True, TEAL if k == "answer" else MUTED
+            )
+            pieces = 1 if n <= 64 else 2
+            for z in range(pieces):
+                complete.strip(
+                    str(j) + k + str(z),
+                    folder / (k + ".png"),
+                    n,
+                    93,
+                    top + y + 16 * z,
+                    438,
+                    16,
+                    n * z // pieces,
+                    n * (z + 1) // pieces,
+                )
+        exact_cases.append(
+            dict(
+                task=task,
+                index=i,
+                question=row["q"],
+                answer=response["text"],
+                sha256=response["sha256"],
+                source_fact=row["facts"],
+            )
+        )
+    complete.rule(131)
+    dump(PUB / "exact-cases.json", exact_cases)
+    dump(PUB / "plates.json", [complete.render(), edit_panel])
     dump(PUB / "figure-cases.json", examples)
 
 

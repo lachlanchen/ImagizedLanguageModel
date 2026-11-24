@@ -9,7 +9,7 @@
 \noindent{\sffamily\bfseries\fontsize{25}{28}\selectfont Learning to write answers from pictured pages\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
-Historical inscriptions can preserve distinctions that a transcription discards. We trained readers to answer pictured questions with streams of glyph images. On a held railway page, substituting a name changed the subject of a generated English sentence. A period-conditioned reader recovered both requested forms on 14 of 64 Chinese dictionary cards, but no card retained both answers under all four layouts. A 2.46-million-parameter writer trained on 92,760 English conversation turns and 11,865 Chinese questions answered both questions on 63 of 498 English stories, up from 16 before training. Giving a second writer the annotated evidence during half its English training presentations reduced this count to 51. Neither fit wrote an exact answer on 116 questions whose accepted phrases were all absent from the visible ink. A small visual reader can learn which visible words answer a question. Expressing an answer in new words remains the principal failure in this experiment.\par}
+A reader of historical writing must preserve shapes that a transcription can discard. We trained compact models to read pictured questions and passages and write their replies as streams of glyph images. A whole-story writer answered both questions on 63 of 498 English stories, up from 16 before bilingual training, but produced no exact answer on 116 questions whose accepted wording was absent from the input. A second system learned from complete human sentences. On held pages it reproduced six of 94 English and 32 of 92 Chinese answers whose accepted wording was absent from the pictured question and source. All 33 exact Chinese replies used a response frame seen with a different value during training. Editing a fact could change the corresponding name in a generated English sentence while leaving its subject malformed. A mathematical test traced most first errors to the glyph distributions available to the writer. These results separate visual fact selection, sentence construction and transfer to unfamiliar writing.\par}
 \vspace{4pt}
 \platehere{Figure_150_optical_reading_and_writing}{Following a name through the reader and writer}{The two reader stages are shown above a held SQuAD question. The second source row substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing is reduced for print throughout.}
 \begin{multicols}{2}
@@ -227,6 +227,42 @@ Equal-length disjoint span & 5 & 16 & 19\\
 Marked evidence erased & 24 & 49 & 49\\ \bottomrule
 \end{tabular*}}\par\smallskip
 \noindent{\small Prior generative pixel models include \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR} (Tai et al., 2024). \href{https://arxiv.org/abs/2611.22820}{Chu et al.} (2026, preprint) report a benefit from intermediate visual steps on canvas reasoning tasks. Here, exact bitmap tracing distinguishes answers available for direct copying from answers requiring re-expression.}
+\newpage
+\spread{Writing a human answer from pictured evidence}
+\noindent A question about a historical figure calls for a name in a declarative sentence. A hotel query calls for an address. In both cases the output below matches the entire human reference image, including the order and spacing of the glyphs.
+\platehere{Figure_164_sentences_from_pictured_questions}{Complete replies written independently in English and Chinese}{Each panel shows the first qualifying case in a fixed order. The printed fact is the human annotation. At inference the model saw the pictured question and source regions and selected a region itself. Every accepted reference was absent from the pictured inputs as a contiguous bitmap. Line breaks in the English question and answer are for print.}
+\begin{multicols}{2}
+\section*{What the writer sees}
+The region reader compares visual features of the question with the glyphs in each source region. The writer encodes a query and either the whole page or the region that the reader selects. A recurrent state tracks the emitted prefix. At each step the writer can draw a glyph from its training bank, reproduce an input glyph or stop. It uses aligned monochrome cells, with a 256-decision budget for a complete answer. We fitted both writers from the same random initialization on the same 89,263 human targets for four passes. These include English QA2D statements grounded in SQuAD passages, restaurant descriptions from E2E and Chinese catalogue dialogue from CrossWOZ.
+\section*{Which formulations transfer?}
+We held out 96 document or entity families per task. The direct and selected-region writers reproduced four and six exact English reference images. For Chinese the counts were 35 and 33. Of the selected writer's 33 exact Chinese replies, 32 had no accepted wording present in the pictured inputs. All 33 used a training answer frame once the requested value was removed. None of the six exact English frames occurred in training under the same substitution. An earlier two-stage fact and statement writer reproduced eight English references on the same questions. No complete test target in these exact successes matched a normalized training answer.
+\section*{Complete meaning and visible facts}
+The selected writer included the requested short fact in 28 English replies, compared with 17 for the direct writer. The paired 95\% bootstrap interval for the difference was 2.1 to 21.9 percentage points. On a separate reading of 16 fact-editable English cases, a local judge accepted all human answers and rejected every minimally altered foil in both orders. It credited one direct answer and zero selected-region answers. The corresponding Chinese judge calibration failed. Finding the right fact remains compatible with a wrong subject or relation.
+\end{multicols}
+\smallskip\noindent{\small\sffamily\textbf{Two ways to score the same 96 held cases in each domain}}\par\smallskip
+\noindent{\small\sffamily\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}rrr@{}}\toprule
+Stopped replies & Full page & Selected region & Human region\\ \midrule
+English statement, requested fact present & 17 & 28 & 30\\
+Chinese catalogue, requested value present & 81 & 87 & 87\\
+Restaurant, every scored field correct & 1 & 15 & 15\\ \bottomrule
+\end{tabular*}}\par
+\newpage
+\spread{When the source fact changes}
+\noindent We changed a value on the source page and asked the original question again. Holding the question fixed separates reliance on the changed ink from a stock answer associated with the question.
+\platehere{Figure_163_writing_after_a_fact_changes}{A substituted value can survive a defective sentence}{Panel a shows the first eligible English edit on which the writer followed both values. It copied the bus stop and its replacement while producing the malformed subject \emph{Certain Bluest}. Panel b shows the first Chinese edit failing the two-version value check. The first reply truncated the address. The second gave the full replacement. Original and edited replies are the emitted bitmaps. The edits are synthetic interventions on real held questions.}
+\begin{multicols}{2}
+\section*{What changed in the answer?}
+The selected writer included the requested fact on both versions of 84/96 Chinese catalogue edits and 5/24 English statement edits. The full-page writer achieved 71 and four. Only 3/49 restaurant edits retained every scored field on both versions, although the selected writer produced the new food without the old food on 47. On the 68 previously tested source-absent CoQA turns that fit the new reader, both writers failed every exact reference. The other 48 exceeded its geometry. Neither model matched eight continuation glyphs on any of 152 book prefixes or returned the requested specimen on any of 260 historical questions.
+\section*{Can redistributing probability repair a wrong glyph?}
+Let $S_i$ and $C_i$ be the spelling and copying probabilities for glyph $i$. The decoder mixes them with weight $g$ on spelling. A desired glyph $i$ beats rival $j$ when
+\[
+ g[(S_i-S_j)-(C_i-C_j)]> C_j-C_i .
+\]
+All rivals constrain the same scalar. We checked the inequality in Lean and intersected the intervals using the exact binary ratios of the measured probabilities. At the first divergence on 66 of 90 failed English statements, no weight could tie an accepted glyph for first place. The remaining 24 admitted a strict winner. In 34 of the 66 infeasible cases, the correct multi-glyph word was present intact in the question or selected source. This measures the opportunity to copy a longer span. Its selection and the rest of the sentence still require testing.
+\section*{Cost and scope}
+The independent region reader and writer together have 913,127 parameters. Fitting them on one RTX 4090 D took 70 and 148 seconds, consuming 8.09 and 18.62 kJ respectively. The separate direct control took 164 seconds and 23.96 kJ. These are device measurements for fitting. For generation, a local 8B quantized vision model and the selected writer each returned the requested fact on three of eight English and seven of eight Chinese questions in a small matched comparison. Broader bilingual parity and training cost at matched language quality remain open.
+\end{multicols}
+\smallskip\noindent{\small Data sources include \href{https://arxiv.org/abs/1809.02922}{Demszky, Guu and Liang} (QA2D), \href{https://aclanthology.org/D16-1264/}{Rajpurkar et al.} (SQuAD), \href{https://github.com/tuetschek/e2e-cleaning}{the cleaned E2E corpus} and \href{https://github.com/thu-coai/CrossWOZ}{CrossWOZ}. The archive contains original images, controls and the geometric eligibility counts.}
 \newpage
 \spread{From writing glyphs to explaining their history}
 \noindent An answer to a question about an inscription must select the relevant historical form and preserve its strokes. The same system can succeed at modern factual extraction while failing this test.\par

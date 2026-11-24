@@ -10,8 +10,9 @@ const sets=mode==='sets';
 const exam=mode==='exam';
 const branch=mode==='branch';
 const views=mode==='views';
-const folder=path.join(root,'references/evidence',views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
+const region=mode==='region';
+const folder=path.join(root,'references/evidence',region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -37,7 +38,23 @@ for(const plate of plates){
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
-if(views){
+if(region){
+  const results=JSON.parse(await fs.readFile(path.join(folder,'pixel-audit.json'))).measurements;
+  label(slide,'Writing the requested fact',24,18,1040,48,31,true,ink);
+  label(slide,'Replies containing the requested fact',25,84,540,40,21,true,ink);
+  const arms=['direct','selected','oracle'],names=['Full page','Selected region','Human region'];
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:24,top:133,width:506,height:300},
+    categories:['English statements','Chinese catalogue'],series:arms.map((a,i)=>({name:names[i],values:[results[a].statements.fact,results[a].catalogue.fact],fill:['#897B72',teal,'#91ABA6'][i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:13}},yAxis:{min:0,max:96,textStyle:{fontSize:14}},xAxis:{textStyle:{fontSize:14}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  label(slide,'Exact stopped answer images',554,84,498,40,21,true,ink);
+  const values=[['Input','English','Chinese'],...arms.map((a,i)=>[names[i],String(results[a].statements.bitmap_exact),String(results[a].catalogue.bitmap_exact)])];
+  const table=slide.tables.add({rows:4,columns:3,left:554,top:143,width:490,height:204,columnWidths:[223,129,138],values});
+  table.styleOptions={headerRow:true,bandedRows:false};table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<4;i++)for(let j=0;j<3;j++){let c=table.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
+  label(slide,'Each domain has 96 held families. A fact can appear in a sentence with an incorrect subject or predicate.',25,458,1038,64,17,false,ink);
+  slide.speakerNotes.textFrame.setText('The chart counts stopped answers containing the requested short fact. The table requires the complete human reference bitmap. The two writing models were fitted on the same complete human targets.');
+}else if(views){
   const arms=['parent','whole','highlight'];
   const scores=await Promise.all(arms.map(async a=>JSON.parse(await fs.readFile(path.join(folder,a+'-scores.json')))));
   const labels=['Before fitting','Full-story control','Evidence-trained'];
@@ -171,7 +188,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1;
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
