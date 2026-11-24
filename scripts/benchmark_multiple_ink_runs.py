@@ -18,15 +18,15 @@ PROMPT = (
 )
 
 
-def main():
+def main(text=False):
     rows, tiles = corpus()
     sample = [
         r
         for lang in ("en", "zh")
         for r in [r for r in rows if r["lang"] == lang and multi(r)][:16]
     ]
-    out = PUB / "qwen-answers.json.gz"
-    report = PUB / "qwen.json"
+    out = PUB / ("qwen-text-answers.json.gz" if text else "qwen-answers.json.gz")
+    report = PUB / ("qwen-text.json" if text else "qwen.json")
     if report.exists():
         if sha(out) != read(report)["sha256"]:
             raise ValueError("Published comparison changed")
@@ -45,6 +45,16 @@ def main():
                 content=PROMPT,
                 images=[png(tiles, r["pi"]), png(tiles, r["qi"])],
             )
+            if text:
+                instruction = PROMPT.split("Read both. ", 1)[1]
+                msg = dict(
+                    role="user",
+                    content=instruction
+                    + "\nPassage:\n"
+                    + r["p"]
+                    + "\nQuestion:\n"
+                    + r["q"],
+                )
             resp = requests.post(
                 url + "/api/chat",
                 json=dict(
@@ -115,4 +125,8 @@ if __name__ == "__main__":
     from scripts.verse_gpu_runtime import configure_cuda_cli
 
     configure_cuda_cli()
-    main()
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--text", action="store_true")
+    main(ap.parse_args().text)

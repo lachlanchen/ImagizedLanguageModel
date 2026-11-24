@@ -59,3 +59,22 @@ def test_shared_reader_is_unchanged_by_padding():
         padded, c = net(bank, q, torch.nn.functional.pad(p, (0, 2)))
     torch.testing.assert_close(role, padded[:, :3], atol=1e-5, rtol=1e-5)
     torch.testing.assert_close(count, c, atol=1e-5, rtol=1e-5)
+
+
+def test_survival_path_scores_match_conditional_likelihood_including_padding():
+    from ilm.visual_lm.run_survival import supervised, utilities
+
+    torch.manual_seed(51)
+    role = torch.randn(1, 5, 3, dtype=torch.float64, requires_grad=True)
+    keep = torch.tensor([[True, True, True, False, False]])
+    scores = utilities(role, keep)
+    mass = 0.0
+    for seq in product(range(3), repeat=3):
+        if any(t == 2 and (not j or seq[j - 1] == 0) for j, t in enumerate(seq)):
+            continue
+        y = torch.tensor([list(seq) + [0, 0]])
+        nll = supervised(role, y, keep) * 3
+        unary = scores[0, range(3), list(seq)].sum()
+        torch.testing.assert_close(-nll.double(), unary, atol=2e-7, rtol=2e-7)
+        mass += float(unary.detach().exp())
+    assert abs(mass - 1) < 1e-9

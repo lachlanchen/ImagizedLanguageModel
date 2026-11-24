@@ -108,8 +108,17 @@ def aggregate(items):
 
 
 @torch.inference_mode()
-def main():
+def main(survival=False, confirm=False):
     rows, tiles = corpus()
+    if confirm:
+        spec = read(PUB / "confirmation-split.json")
+        assert (
+            sha(WORK / "confirm.json") == spec["sha256"]
+            and sha(WORK / "confirm-tiles.npy") == spec["tiles"]
+        )
+        rows = read(WORK / "confirm.json")
+        tiles = np.concatenate((tiles, np.load(WORK / "confirm-tiles.npy")))
+    prefix = ("survival-" if survival else "") + ("confirm-" if confirm else "")
     offset = len(tiles)
     tiles = np.concatenate((tiles, unseen(tiles)))
     variants = []
@@ -141,12 +150,12 @@ def main():
             )
     detail = []
     with gpu_owner():
-        model = load("cuda")
+        model = load("cuda", survival)
         bank = model.ink(torch.from_numpy(observations({"tiles": tiles}, "ink")).cuda())
         for i in range(0, len(variants), 12):
             group = variants[i : i + 12]
             roles, counts = forward(
-                model, bank, [x[2] for x in group], [x[3] for x in group]
+                model, bank, [x[2] for x in group], [x[3] for x in group], survival
             )
             for j, (r, condition, q, p, text, refs) in enumerate(group):
                 for mode in ("count", "single", "free"):
@@ -194,12 +203,14 @@ def main():
                 n=len(edited),
                 both=sum(r["exact"] and orig[r["id"]]["primary_exact"] for r in edited),
             )
-    packed(PUB / "answers.json.gz", detail)
+    packed(PUB / (prefix + "answers.json.gz"), detail)
     dump(
-        PUB / "scores.json",
+        PUB / (prefix + "scores.json"),
         dict(
-            weights=read(PUB / "fit.json")["weights"],
-            outputs=sha(PUB / "answers.json.gz"),
+            weights=read(PUB / ("survival.json" if survival else "fit.json"))[
+                "weights"
+            ],
+            outputs=sha(PUB / (prefix + "answers.json.gz")),
             scores=scores,
             edit_pairs=recount,
         ),
@@ -211,4 +222,10 @@ if __name__ == "__main__":
     from scripts.verse_gpu_runtime import configure_cuda_cli
 
     configure_cuda_cli()
-    main()
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--survival", action="store_true")
+    ap.add_argument("--confirm", action="store_true")
+    a = ap.parse_args()
+    main(a.survival, a.confirm)

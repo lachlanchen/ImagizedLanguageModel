@@ -23,24 +23,27 @@ BATCH = 12
 SEED = 317091
 
 
-def load(device="cpu"):
-    path = MODEL / "reader.safetensors"
-    if sha(path) != read(PUB / "fit.json")["weights"]:
+def load(device="cpu", survival=False):
+    path = MODEL / ("survival.safetensors" if survival else "reader.safetensors")
+    if (
+        sha(path)
+        != read(PUB / ("survival.json" if survival else "fit.json"))["weights"]
+    ):
         raise ValueError("Changed released weights")
     model = RunReader().to(device)
     model.load_state_dict(load_file(str(path), device=device))
     return model.eval()
 
 
-def fit(run=None):
+def fit(run=None, survival=False):
     spec = read(PUB / "corpus.json")
     path = WORK / "training.npz"
     if sha(path) != spec["files"][path.name]:
         raise ValueError("Training corpus changed")
     dest = run or MODEL
     dest.mkdir(parents=True, exist_ok=True)
-    receipt = (run or PUB) / "fit.json"
-    weights = dest / "reader.safetensors"
+    receipt = (run or PUB) / ("survival.json" if survival else "fit.json")
+    weights = dest / ("survival.safetensors" if survival else "reader.safetensors")
     if receipt.exists():
         if sha(weights) != read(receipt)["weights"]:
             raise ValueError("Weight checksum mismatch")
@@ -49,14 +52,25 @@ def fit(run=None):
         arr = {k: f[k] for k in f.files}
     splits = [np.flatnonzero(arr["lang"] == i) for i in range(2)]
     corpus = sha(PUB / "corpus.json")
-    checkpoint = (run or WORK) / "resume.pt"
+    checkpoint = (run or WORK) / ("survival-resume.pt" if survival else "resume.pt")
     bindings = dict(
         corpus=corpus,
-        protocol=sha(ROOT / "references/multiple_ink_runs_protocol.md"),
+        protocol=sha(
+            ROOT
+            / (
+                "references/ink_run_survival_protocol.md"
+                if survival
+                else "references/multiple_ink_runs_protocol.md"
+            )
+        ),
         trainer=sha(Path(__file__)),
         reader=sha(ROOT / "ilm/visual_lm/multiple_ink_runs.py"),
         base=sha(ROOT / "models/paired_evidence/evidence.safetensors"),
     )
+    if survival:
+        from ilm.visual_lm.run_survival import supervised
+
+        bindings["survival"] = sha(ROOT / "ilm/visual_lm/run_survival.py")
     with gpu_owner():
         torch.manual_seed(SEED)
         model = RunReader(reader("evidence", "cuda")).cuda().train()
@@ -106,12 +120,15 @@ def fit(run=None):
                 keep = s >= 2
                 # Balanced emphasis on rare positive cells, with matching log offsets
                 # to keep the deployed logits on the underlying role scale.
-                w = role.new_tensor([1.0, 5.0, 2.0])
-                token = F.cross_entropy(
-                    (role + w.log()).transpose(1, 2), y, reduction="none"
-                )
-                mass = keep * w[y]
-                tag_loss = ((token * mass).sum(1) / mass.sum(1)).mean()
+                if survival:
+                    tag_loss = supervised(role, y, keep)
+                else:
+                    w = role.new_tensor([1.0, 5.0, 2.0])
+                    token = F.cross_entropy(
+                        (role + w.log()).transpose(1, 2), y, reduction="none"
+                    )
+                    mass = keep * w[y]
+                    tag_loss = ((token * mass).sum(1) / mass.sum(1)).mean()
                 loss = tag_loss + 0.18 * count_loss
             opt.zero_grad(set_to_none=True)
             loss.backward()
@@ -178,4 +195,6 @@ if __name__ == "__main__":
     configure_cuda_cli()
     ap = ArgumentParser(description=__doc__)
     ap.add_argument("--run-dir", type=Path)
-    fit(ap.parse_args().run_dir)
+    ap.add_argument("--survival", action="store_true")
+    args = ap.parse_args()
+    fit(args.run_dir, args.survival)

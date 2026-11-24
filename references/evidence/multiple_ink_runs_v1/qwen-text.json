@@ -1,0 +1,56 @@
+{
+  "model": "qwen3-vl:8b-instruct-q4_K_M",
+  "weights": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "seconds": 19.263436793349683,
+  "joules": 4683.824,
+  "sha256": "45409d5e398f559a31dc0d7e59cf88956aa99eba7ad95d00016319bc17369240",
+  "qwen": {
+    "en-multi": {
+      "pages": 16,
+      "exact": 6,
+      "visible": 16,
+      "exact_and_visible": 6,
+      "extra": 23,
+      "missing": 37,
+      "matched": 19,
+      "part_precision": 0.4523809523809524,
+      "part_recall": 0.3392857142857143
+    },
+    "zh-multi": {
+      "pages": 16,
+      "exact": 1,
+      "visible": 11,
+      "exact_and_visible": 1,
+      "extra": 93,
+      "missing": 419,
+      "matched": 72,
+      "part_precision": 0.43636363636363634,
+      "part_recall": 0.14663951120162932
+    }
+  },
+  "optical": {
+    "en-multi": {
+      "pages": 16,
+      "exact": 0,
+      "visible": 16,
+      "exact_and_visible": 0,
+      "extra": 33,
+      "missing": 45,
+      "matched": 11,
+      "part_precision": 0.25,
+      "part_recall": 0.19642857142857142
+    },
+    "zh-multi": {
+      "pages": 16,
+      "exact": 0,
+      "visible": 11,
+      "exact_and_visible": 0,
+      "extra": 18,
+      "missing": 693,
+      "matched": 5,
+      "part_precision": 0.21739130434782608,
+      "part_recall": 0.0071633237822349575
+    }
+  },
+  "stopped": 31
+}
