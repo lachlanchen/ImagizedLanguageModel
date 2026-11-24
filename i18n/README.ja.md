@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+212万パラメータのモデルを RTX 4090 D 1枚で学習させたところ、初見の英語・中国語の文章で次の字形を予測する精度が向上しました。一方、省エネルギーの方法を尋ねると、質問の文言を繰り返しました。視覚読解モジュールを追加したモデルは、人が作成した384問中11問に正答しました。同じ文章に関する2問にともに正答したのは192組中0組です。図144に実際の出力画像を示します。 [論文を読む](../publication/ilm-nature/visual_language_paper.pdf) · [画像モデルを実行](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 118万パラメータのモデルが、漢文の画像で指定された字の英訳を画像で書く。「言及之而不言」の末字には speak、「有是言也」の「言」には speech と答えた。同じ字の異なる語義を両方正しく書けたのは『論語』で566組中213組、『楚辞』で403組中82組。近接文字の頻度を使う方法では211組と104組だった。 [モデルの実行](../models/visual_word_senses/README.md) · [実験結果](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

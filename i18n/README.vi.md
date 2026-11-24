@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình 2,12 triệu tham số được huấn luyện trên một RTX 4090 D đã học cách dự đoán hình dạng ký tự tiếp theo trong văn bản tiếng Anh và tiếng Trung chưa từng thấy. Khi được hỏi cách tiết kiệm năng lượng, mô hình lặp lại câu hỏi. Sau khi bổ sung bộ đọc hình ảnh, mô hình trả lời đúng 11 trong 384 câu hỏi do con người đặt ra. Trong 192 đoạn văn, không có đoạn nào mà mô hình trả lời đúng cả hai câu hỏi. Hình 144 trình bày ảnh đầu ra thực tế. [Đọc bài báo](../publication/ilm-nature/visual_language_paper.pdf) · [Chạy mô hình](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 Mô hình 1,18 triệu tham số đọc một chữ được đánh dấu trong ảnh văn bản cổ rồi viết nghĩa tiếng Anh dưới dạng ảnh. Với chữ 言, nó viết “speak” ở cuối câu 言及之而不言 và “speech” trong 有是言也. Mô hình viết đúng cả hai nghĩa ở 213/566 cặp trong Luận ngữ và 82/403 cặp trong Sở từ. Phương pháp đếm các chữ lân cận đạt 211 và 104 cặp. [Chạy mô hình](../models/visual_word_senses/README.md) · [Kết quả](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Модель с 2,12 млн параметров, обученная на одной RTX 4090 D, научилась предсказывать изображения следующих знаков в новых английских и китайских текстах. На вопрос о том, как экономить энергию, она повторила часть вопроса. С дополнительным модулем чтения модель дала 11 эталонных ответов на 384 вопроса. Ни для одного из 192 отрывков она не ответила правильно на оба вопроса. На рисунке 144 показаны реальные выходные изображения. [Прочитать статью](../publication/ilm-nature/visual_language_paper.pdf) · [Запустить модель](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 Модель с 1,18 млн параметров читает выделенный иероглиф на изображении классического китайского текста и рисует его английское толкование. Для последнего 言 в 言及之而不言 она пишет «speak», а для 言 в 有是言也 — «speech». Оба значения верны в 213 из 566 пар «Лунь юй» и 82 из 403 пар «Чуских строф». Метод подсчёта соседних знаков решил 211 и 104 пары. [Запуск модели](../models/visual_word_senses/README.md) · [Результаты](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

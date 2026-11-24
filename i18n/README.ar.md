@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+تعلّم نموذج يضم 2.12 مليون مُعامِل، دُرِّب على بطاقة RTX 4090 D واحدة، توقّع أشكال الحروف التالية في نصوص إنجليزية وصينية جديدة. وعندما سُئل عن طريقة لتوفير الطاقة، كرّر جزءًا من السؤال. بعد إضافة قارئ بصري، كتب النموذج الإجابة المرجعية في 11 سؤالًا من أصل 384. ولم يُجب إجابة صحيحة عن السؤالين معًا في أيّ من المقاطع الـ192. يعرض الشكل 144 صور المخرجات الفعلية. [قراءة البحث](../publication/ilm-nature/visual_language_paper.pdf) · [تشغيل النموذج](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 يقرأ نموذج من 1.18 مليون معامل حرفاً محدداً في صورة نص صيني قديم ويكتب معناه الإنجليزي في صورة. كتب speak للحرف الأخير في 言及之而不言 وكتب speech للحرف 言 في 有是言也. وأصاب في المعنيين معاً في 213 من 566 زوجاً من «المحاورات» و82 من 403 أزواج من «أغاني تشو». وأصابت طريقة تعتمد على تواتر الحروف المجاورة في 211 و104 أزواج على التوالي. [تشغيل النموذج](../models/visual_word_senses/README.md) · [النتائج](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

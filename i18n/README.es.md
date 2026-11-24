@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modelo de 2,12 millones de parámetros entrenado en una RTX 4090 D aprendió a predecir glifos en pasajes inéditos en inglés y chino. Al preguntarle cómo ahorrar energía, repitió parte de la pregunta. Con un lector visual adicional acertó 11 de 384 preguntas y en ninguno de los 192 pasajes acertó las dos preguntas. La figura 144 muestra los píxeles generados. [Leer el artículo](../publication/ilm-nature/visual_language_paper.pdf) · [Ejecutar el modelo](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 Un modelo de 1,18 millones de parámetros lee un carácter señalado en una imagen de chino clásico y dibuja su significado en inglés. Para 言 escribe «speak» al final de 言及之而不言 y «speech» en 有是言也. Acierta ambos sentidos en 213 de 566 pares de las Analectas y 82 de 403 pares de los Cantos de Chu. El método que cuenta caracteres vecinos resuelve 211 y 104 pares. [Ejecutar el modelo](../models/visual_word_senses/README.md) · [Resultados](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

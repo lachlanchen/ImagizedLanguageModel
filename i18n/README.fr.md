@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modèle de 2,12 millions de paramètres entraîné sur une RTX 4090 D a appris à prédire la suite de passages anglais et chinois à partir de glyphes. À la question sur les économies d’énergie, il a répété une partie de la consigne. Après ajout d’un lecteur visuel, il a produit 11 réponses de référence sur 384 et échoué à répondre correctement aux deux questions sur chacun des 192 passages. La figure 144 montre les pixels produits. [Lire l’article](../publication/ilm-nature/visual_language_paper.pdf) · [Exécuter le modèle](../models/visual_cursor/README.md)
+
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 Un modèle de 1,18 million de paramètres lit un caractère désigné dans une image de chinois classique et dessine son équivalent anglais. Pour 言, il écrit « speak » à la fin de 言及之而不言 et « speech » dans 有是言也. Il retrouve les deux sens dans 213 des 566 paires des Entretiens et 82 des 403 paires des Chants de Chu. Le comptage des caractères voisins en résout 211 et 104. [Exécuter le modèle](../models/visual_word_senses/README.md) · [Résultats](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

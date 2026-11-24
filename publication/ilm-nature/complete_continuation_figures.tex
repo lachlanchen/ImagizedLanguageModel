@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_story_mentions_article.py.
+% Literal captions copied from their source inputs by build_visual_discourse_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1121,4 +1121,11 @@ The selected names are correct under both English requests. The first generated 
 \caption{\textbf{Reading the owner of an indirectly stated fact.}
 \textbf{a,} Original paragraph, question, target strips and emitted reply images for the authored park and tower example. The question asks for an admission price. The numerals and their units are printed in the passage. \textbf{b,} Correct referents in screened passages from SQuAD, DRCD and CMRC. The four bars in each group combine the same supplied candidate names with different readers. The post-fit explicit ordering rule solved 38/41. A reader can also select neither name for an adjectival use. \textbf{c,} The Chinese two-venue task requires both names in both orders. The English and Chinese reference tests compare story-only fitting to mixed-corpus fitting of the same visual model. GAP is a three-way choice including neither, whereas CLUE tests one proposed link.}
 \label{fig:story-mentions}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_144_visual_discourse.png}
+\caption{\textbf{Predictive learning and open writing from glyph images.}
+\textbf{a,} First held English and Chinese instructions in fixed hash order with the paired writer's own emitted pixels. Blank sidebearings and line wrapping have been adjusted for display. The English output reached the 96-cell limit. \textbf{b,} Mean held next-glyph cost with correct preceding answer cells. The four groups contain 128, 24, 128 and 128 windows. Crossed prompts are from the same task and language. The Winograd count requires writing both opposite correct names and stopping. \textbf{c,} Complete self-generated answers on human questions from CoQA, CMRC and DRCD. The two source-position models shared their base and fitting draws. In each corpus two different questions refer to each of 64 unseen passages. No model wrote both correct answers on any passage.}
+\label{fig:visual-discourse}
 \end{figure*}
