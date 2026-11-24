@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+客人问北京贵都大酒店的价格和地址。早期模型找对了两项资料，却把 1354 元写成了地址。让写作模型在落笔时知道当前要表达哪项事实，它给出了「价格是1354元。地址是在北京西城区广安门内大街217号。」这个 333,850 参数的模型在单张 RTX 4090 D 上从头训练，直接接收图片，写出答案图片。在 37 道真人双项问题中，两项资料都与正确属性对应的答案从 24 道提高到 36 道。冻结模型后追加的 14 道题通过了 12 道。若要求把先提到的属性放在第二项，18 组语序测试全部失败。[运行模型](../models/chinese_two_fact/README.md) · [六页论文](../publication/ilm-nature/visual_language_paper.pdf) · [数据与失败实例](../references/chinese_two_fact_result.md)
+
+[![同一道问题的真实答案图像、属性对应得分与语序测试](../publication/ilm-nature/figures/Figure_141_two_fact_figure.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 同一家餐馆、同一张资料卡。换个问法，模型分别写出了“营业时间是周一至周日 11:00-21:30。”和“地址是西四南大街60号(近缸瓦市)。”这两个回答都是模型生成的图像。单张 RTX 4090 D 从 5,097 轮真人中文对话训练了这个 157 万参数的模型。515 道留出问题中，507 道给出了正确资料值；擦除问题后是 237 道。同规模字节模型是 508 道。另有一些回答虽然数值正确，句子仍然不通顺。[运行模型](../models/chinese_card_reply/README.md) · [阅读论文](../publication/ilm-nature/visual_language_paper.pdf) · [查看实际输出与错误](../references/chinese_card_reply_result.md)
 
 一个拥有 118 万参数的模型从古文图像中读取指定汉字，用图像写出英文释义。「言及之而不言」的末字，模型写成 speak；「有是言也」的「言」，它写成 speech。在同字异义的对照中，《论语》有 213/566 对两义全对，《楚辞》有 82/403 对。按邻近字形计数的方法分别答对 211 和 104 对。模型在一张 RTX 4090 D 上从头训练。 [运行模型](../models/visual_word_senses/README.md) · [实验结果](../references/visual_word_sense_result.md)
