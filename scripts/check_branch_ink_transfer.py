@@ -30,7 +30,7 @@ def write(writer, net, tiles, rows, book=False):
     return out
 
 
-def main():
+def main(arms=(("matched", EXAM), ("branch", MODEL)), report_dir=PUB):
     data = Corpus()
     _, blocks = cohorts(data)
     rows, enc = dataset(statements=False)
@@ -45,7 +45,7 @@ def main():
     report = {}
     with gpu_owner(), torch.inference_mode():
         writer = Writer(device="cuda")
-        for arm, root in (("matched", EXAM), ("branch", MODEL)):
+        for arm, root in arms:
             net = load(arm, "cuda", root)
             qa = write(writer, net, tiles, questions)
             bydoc = defaultdict(list)
@@ -103,8 +103,8 @@ def main():
                     for k, v in bstats.items()
                 },
             )
-            packed(PUB / (arm + "-transfer.json.gz"), records)
-    dump(PUB / "transfer.json", report)
+            packed(report_dir / (arm + "-transfer.json.gz"), records)
+    dump(report_dir / "transfer.json", report)
 
 
 if __name__ == "__main__":

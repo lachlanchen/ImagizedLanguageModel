@@ -18,7 +18,7 @@ from scripts.evaluate_visual_discourse import draw
 def load(arm, device, model_dir=MODEL):
     if arm == "parent":
         return initial("dynamic", device)
-    if arm in ("matched", "exchanged", "branch"):
+    if arm in ("matched", "exchanged", "branch", "whole", "highlight"):
         net = ComposingWriter(dynamic=True).to(device)
         dest = model_dir / arm
         w = dest / "writer.safetensors"
@@ -30,11 +30,19 @@ def load(arm, device, model_dir=MODEL):
 
 
 @torch.inference_mode()
-def infer(writer, net, q, p, cap=64):
+def infer(writer, net, q, p, cap=64, *, geometry=(160, 600)):
     tiles, (qi, pi) = encode_pages(writer.palette, [q, p])
     x = torch.from_numpy(observations({"tiles": tiles}, "ink")).to(writer.device)
     [(ids, stop)] = generate(
-        writer.model, net, x, len(writer.palette), [qi], [pi], [pi + qi], cap
+        writer.model,
+        net,
+        x,
+        len(writer.palette),
+        [qi],
+        [pi],
+        [pi + qi],
+        cap,
+        geometry=geometry,
     )
     return tiles[np.asarray(ids, int)], stop
 
@@ -47,7 +55,9 @@ def main():
         g.add_argument("--" + name + "-image", type=Path)
         parser.add_argument("--" + name + "-cells", type=int)
     parser.add_argument(
-        "--arm", choices=("parent", "matched", "exchanged", "branch"), default="matched"
+        "--arm",
+        choices=("parent", "matched", "exchanged", "branch", "whole", "highlight"),
+        default="matched",
     )
     parser.add_argument(
         "--model-dir",
@@ -82,6 +92,7 @@ def main():
             load(a.arm, a.device, a.model_dir),
             ink("question"),
             ink("passage"),
+            geometry=(320, 4096) if a.arm in ("whole", "highlight") else (160, 600),
         )
     a.output.mkdir(parents=True, exist_ok=False)
     draw(a.output, "answer", pixels)

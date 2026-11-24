@@ -26,11 +26,11 @@ def load(arm, device):
 
 
 @torch.inference_mode()
-def generate(base, net, features, n, qs, ss, context, cap, *, forced=None):
+def generate(base, net, features, n, qs, ss, context, cap, *, forced=None, geometry=(160, 600)):
     if cap < 1 or not qs or len(qs) != len(ss) or len(qs) != len(context):
         raise ValueError("Missing question, passage or output budget")
-    if any(not 1 <= len(x) <= 160 for x in qs) or any(
-        not 1 <= len(x) <= 600 for x in ss
+    if any(not 1 <= len(x) <= geometry[0] for x in qs) or any(
+        not 1 <= len(x) <= geometry[1] for x in ss
     ):
         raise ValueError("A question or page exceeds the supported cell geometry")
     device = features.device
