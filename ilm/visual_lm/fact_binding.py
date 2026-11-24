@@ -29,7 +29,7 @@ def pack_paths(paths):
     bounds = np.zeros(shape, dtype=np.int64)
     for i, row in enumerate(paths):
         for j, path in enumerate(row):
-            bounds[i, j, : len(path)] = path
+            bounds[i, j, : len(path)] = np.asarray(path, dtype=np.int64).reshape(-1, 2)
     return bounds
 
 

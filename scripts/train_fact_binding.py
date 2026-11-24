@@ -43,14 +43,14 @@ def corpus(split):
     return read(WORK / (split + ".json")), np.load(WORK / "tiles.npy")
 
 
-def train(arm):
+def train(arm, output_dir=None):
     rows, tiles = corpus("train")
     rng = np.random.default_rng(SEED)
     n = STEPS * BATCH
     ids = np.concatenate(
         [rng.permutation(len(rows)) for _ in range(1 + n // len(rows))]
     )[:n].reshape(-1, BATCH)
-    dest = MODEL / arm
+    dest = (output_dir or MODEL) / arm
     dest.mkdir(parents=True, exist_ok=True)
     weights = dest / "head.safetensors"
     receipt = dest / "fit.json"
@@ -135,4 +135,6 @@ if __name__ == "__main__":
     configure_cuda_cli()
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("arm", choices=("linear", "mixture"))
-    train(ap.parse_args().arm)
+    ap.add_argument("--output-dir", type=Path)
+    args = ap.parse_args()
+    train(args.arm, args.output_dir)
