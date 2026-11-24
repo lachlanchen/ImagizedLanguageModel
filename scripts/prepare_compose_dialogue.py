@@ -66,6 +66,38 @@ def spans(sample):
     return [fold(" ".join(part)) for part in parts]
 
 
+def reserve_dialogue(raw, excluded, start, end):
+    candidates = {}
+    for item in pq.read_table(raw).to_pylist():
+        page = fold(item["story"])
+        canonical = key(page)
+        if (
+            canonical not in excluded
+            and printable(page)
+            and 321 <= len(page.split()) <= 448
+        ):
+            candidates.setdefault(canonical, (page, item))
+    fresh = {"pages": {}, "rows": []}
+    for canonical in sorted(candidates, key=lambda k: ident("compose-v1/" + k))[
+        start:end
+    ]:
+        page, item = candidates[canonical]
+        pid = ident(page)
+        history = ""
+        for j, (q, a) in enumerate(
+            zip(item["questions"], item["answers"]["input_text"], strict=True)
+        ):
+            q, a = fold(q), fold(a)
+            prev = " ".join(history.split()[-48:])
+            history = q + " " + a
+            if a and printable(q) and printable(prev) and 1 <= len(q.split()) <= 32:
+                fresh["pages"][pid] = page
+                fresh["rows"].append(
+                    ["fresh", pid, j, q, prev, a, [-1, -1], item["source"]]
+                )
+    return fresh, len(candidates)
+
+
 def prepare():
     if sha(ARCHIVE) != ARCHIVE_SHA:
         raise ValueError("Different MultiSpanQA archive")
@@ -91,32 +123,7 @@ def prepare():
     ms_keys = {s: {key(" ".join(r["context"])) for r in src} for s, src in ms.items()}
     dialogue_keys = old_keys | dev_keys
     excluded = dialogue_keys | ms_keys["train"] | ms_keys["valid"]
-    candidates = {}
-    for item in pq.read_table(raw).to_pylist():
-        page = fold(item["story"])
-        canonical = key(page)
-        if (
-            canonical not in excluded
-            and printable(page)
-            and 321 <= len(page.split()) <= 448
-        ):
-            candidates.setdefault(canonical, (page, item))
-    fresh = {"pages": {}, "rows": []}
-    for canonical in sorted(candidates, key=lambda k: ident("compose-v1/" + k))[:200]:
-        page, item = candidates[canonical]
-        pid = ident(page)
-        history = ""
-        for j, (q, a) in enumerate(
-            zip(item["questions"], item["answers"]["input_text"], strict=True)
-        ):
-            q, a = fold(q), fold(a)
-            prev = " ".join(history.split()[-48:])
-            history = q + " " + a
-            if a and printable(q) and printable(prev) and 1 <= len(q.split()) <= 32:
-                fresh["pages"][pid] = page
-                fresh["rows"].append(
-                    ["fresh", pid, j, q, prev, a, [-1, -1], item["source"]]
-                )
+    fresh, candidate_count = reserve_dialogue(raw, excluded, 0, 200)
     ext = {}
     counts = {}
     for split, items in ms.items():
@@ -183,7 +190,7 @@ def prepare():
         fitting=len(orig),
         pools={k: len(v) for k, v in pools.items()},
         multispan=counts,
-        fresh_candidates=len(candidates),
+        fresh_candidates=candidate_count,
         fresh_stories=len(fresh["pages"]),
         fresh_turns=len(fresh["rows"]),
         fresh_kinds=dict(
