@@ -5,7 +5,7 @@
 
 # Imagized Language Model (ILM)
 
-A visual writer answered “Who took the tea first?” with an image reading **Shen Nong**. On 758 fresh conversation turns it matched a human answer 270 times. Exchanging the question and history reduced that count to 29. Four paired training seeds gave an uncertain gain from human evidence supervision. All eight visual fits missed all 27 questions that required new multiword phrasing. [Run the model](models/dialogue_evidence/README.md) · [Measured results and Lean proofs](references/dialogue_evidence_result.md)
+A visual writer answered “Who took the tea first?” with an image reading **Shen Nong**. On 758 fresh conversation turns it matched a human answer 270 times. Exchanging the question and history reduced that count to 29. Four paired training seeds gave an uncertain gain from human evidence supervision. All eight visual fits missed all 27 questions that required new multiword phrasing. [Run the model](models/dialogue_evidence/README.md) · [Measured results and Lean proofs](references/dialogue_evidence_result.md) · [Illustrated Lean guide](publication/ilm-math-validation/lean_reading_guide.pdf)
 
 [![Four paired training seeds and original visual replies, including one correct and one incorrect change](publication/ilm-nature/figures/Figure_130_dialogue_evidence.png)](publication/ilm-nature/manuscript.pdf#page=173)
 
