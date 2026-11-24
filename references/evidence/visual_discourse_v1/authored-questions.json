@@ -1,0 +1,657 @@
+{
+  "source": "6694ba23c378c38eea98b9d303277538f8bfb63daead719456c744d6ba6bc796",
+  "arms": {
+    "ink-independent": {
+      "rows": [
+        {
+          "language": "en",
+          "kind": "grounding",
+          "prompt": "Q: Mira put the key in the red box and the coin in the blue box. What colour is the box containing the key? A: ",
+          "wanted": "red",
+          "opposite": "blue",
+          "output": "The key",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "grounding",
+          "prompt": "Q: Mira put the key in the blue box and the coin in the red box. What colour is the box containing the key? A: ",
+          "wanted": "blue",
+          "opposite": "red",
+          "output": "The key",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "adjective",
+          "prompt": "Q: What is the opposite of hot? A: ",
+          "wanted": "cold|cool",
+          "opposite": "hot|warm",
+          "output": "The oppositite to fosit to heoth of hot? The oppite hother is a statement in the sentence in the",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "adjective",
+          "prompt": "Q: What is the opposite of cold? A: ",
+          "wanted": "hot|warm",
+          "opposite": "cold|cool",
+          "output": "A: A cold? A: A: The opposite the opposite the cold colos the cold collect and collect and a sta",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "fact",
+          "prompt": "Q: How many sides does a triangle have? A: ",
+          "wanted": "three|3",
+          "opposite": "four|4",
+          "output": "Tree have does an triangle have have a set and the sentence in the sentence in the sentence in t",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "fact",
+          "prompt": "Q: How many sides does a square have? A: ",
+          "wanted": "four|4",
+          "opposite": "three|3",
+          "output": "The square sides does a square sentence in the sentence in the sentence in the sentence in the s",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "time",
+          "prompt": "Q: Which day comes immediately after Monday? A: ",
+          "wanted": "Tuesday",
+          "opposite": "Friday",
+          "output": "Moneday and Moneday and Make a sentence and and and and and and and and and and and and and and ",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "time",
+          "prompt": "Q: Which day comes immediately after Thursday? A: ",
+          "wanted": "Friday",
+          "opposite": "Tuesday",
+          "output": "Thure afters after Thurs company of fter the after a ftransport the and company to an allow it i",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "direction",
+          "prompt": "Q: If you face north and turn right, which direction do you face? A: ",
+          "wanted": "east",
+          "opposite": "west",
+          "output": "The direct and you fall the direct do turn the direct and the your right the you face that is th",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "direction",
+          "prompt": "Q: If you face north and turn left, which direction do you face? A: ",
+          "wanted": "west",
+          "opposite": "east",
+          "output": "The do you face not you fall and you fall and the direction of the direer in the direct the diri",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "attribute",
+          "prompt": "Q: Which is normally sweeter, sugar or salt? A: ",
+          "wanted": "sugar",
+          "opposite": "salt",
+          "output": "The salt? swet or salt salt sweeter sor sort sort saless sort of sort of sort of the sort of the",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "attribute",
+          "prompt": "Q: Which is normally saltier, sugar or salt? A: ",
+          "wanted": "salt",
+          "opposite": "sugar",
+          "output": "The salt salties salties salties soar salties stalting salting salters in the salt salting salte",
+          "stopped": false,
+          "lexical_pass": true
+        },
+        {
+          "language": "en",
+          "kind": "arithmetic",
+          "prompt": "Q: Add two and three. Give just the number. A: ",
+          "wanted": "five|5",
+          "opposite": "six|6",
+          "output": "The number just the number just the number jour is a new not in the number journey of the new ne",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "arithmetic",
+          "prompt": "Q: Multiply two and three. Give just the number. A: ",
+          "wanted": "six|6",
+          "opposite": "five|5",
+          "output": "Giver jo the number jo the number jo the number job the number of the number job the number job ",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "translation",
+          "prompt": "Q: Translate the Chinese word for red, 红, into English. A: ",
+          "wanted": "red",
+          "opposite": "blue",
+          "output": "The Chines word for redue with a reate with a really and reate who it is a set work to the sente",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "translation",
+          "prompt": "Q: Translate the Chinese word for blue, 蓝, into English. A: ",
+          "wanted": "blue",
+          "opposite": "red",
+          "output": "The Chines with in the slayer in the sentence with the sentence in the sentence to the sentence ",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "grounding",
+          "prompt": "问：小林把钥匙放进红盒子，把硬币放进蓝盒子。装钥匙的盒子是什么颜色？ 答：",
+          "wanted": "红|紅",
+          "opposite": "蓝|藍",
+          "output": "小林把钥匙放进红盒子，把钥匙放进红盒子。",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "grounding",
+          "prompt": "问：小林把钥匙放进蓝盒子，把硬币放进红盒子。装钥匙的盒子是什么颜色？ 答：",
+          "wanted": "蓝|藍",
+          "opposite": "红|紅",
+          "output": "小林把钥匙放进蓝盒子，把钥匙放进蓝盒子的盒子。",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "adjective",
+          "prompt": "问：“热”的反义词是什么？ 答：",
+          "wanted": "冷|凉|涼",
+          "opposite": "热|熱|暖",
+          "output": "热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热热热热热",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "adjective",
+          "prompt": "问：“冷”的反义词是什么？ 答：",
+          "wanted": "热|熱|暖",
+          "opposite": "冷|凉|涼",
+          "output": "冷”的反义词是什么？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "fact",
+          "prompt": "问：一个三角形有几条边？ 答：",
+          "wanted": "三|3",
+          "opposite": "四|4",
+          "output": "一个三角形有边？",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "fact",
+          "prompt": "问：一个正方形有几条边？ 答：",
+          "wanted": "四|4",
+          "opposite": "三|3",
+          "output": "一个正方形有边的边？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "time",
+          "prompt": "问：星期一的第二天是星期几？ 答：",
+          "wanted": "二|2",
+          "opposite": "五|5",
+          "output": "星期一的第一的第二天，星期一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第",
+          "stopped": false,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "time",
+          "prompt": "问：星期四的第二天是星期几？ 答：",
+          "wanted": "五|5",
+          "opposite": "二|2",
+          "output": "星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，星期四的第一天，",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "direction",
+          "prompt": "问：面朝北，向右转，面朝哪个方向？ 答：",
+          "wanted": "东|東",
+          "opposite": "西",
+          "output": "朝右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，右转，向右转，右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "direction",
+          "prompt": "问：面朝北，向左转，面朝哪个方向？ 答：",
+          "wanted": "西",
+          "opposite": "东|東",
+          "output": "朝北，向朝左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，左转，向左转，左转，向左",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "attribute",
+          "prompt": "问：糖和盐，哪一种通常更甜？ 答：",
+          "wanted": "糖",
+          "opposite": "盐|鹽",
+          "output": "糖和盐，哪一种通常更甜的盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "attribute",
+          "prompt": "问：糖和盐，哪一种通常更咸？ 答：",
+          "wanted": "盐|鹽",
+          "opposite": "糖",
+          "output": "糖和盐，哪一种通常更咸的盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "arithmetic",
+          "prompt": "问：二加三是多少？只回答结果。 答：",
+          "wanted": "五|5",
+          "opposite": "六|6",
+          "output": "二加三是多少？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "arithmetic",
+          "prompt": "问：二乘三是多少？只回答结果。 答：",
+          "wanted": "六|6",
+          "opposite": "五|5",
+          "output": "二乘三是多少？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "translation",
+          "prompt": "问：把英语单词 red 翻译成中文。 答：",
+          "wanted": "红|紅",
+          "opposite": "蓝|藍",
+          "output": "real is a strange in the sentence in the sentence in the sentence in the sentence in the sentenc",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "translation",
+          "prompt": "问：把英语单词 blue 翻译成中文。 答：",
+          "wanted": "蓝|藍",
+          "opposite": "红|紅",
+          "output": "英语 blue blue of the belien believe blue blue of the belien believe blies black of the believes i",
+          "stopped": false,
+          "lexical_pass": false
+        }
+      ],
+      "individual": 5,
+      "both": 1
+    },
+    "ink-pair": {
+      "rows": [
+        {
+          "language": "en",
+          "kind": "grounding",
+          "prompt": "Q: Mira put the key in the red box and the coin in the blue box. What colour is the box containing the key? A: ",
+          "wanted": "red",
+          "opposite": "blue",
+          "output": "The key",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "grounding",
+          "prompt": "Q: Mira put the key in the blue box and the coin in the red box. What colour is the box containing the key? A: ",
+          "wanted": "blue",
+          "opposite": "red",
+          "output": "The key",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "adjective",
+          "prompt": "Q: What is the opposite of hot? A: ",
+          "wanted": "cold|cool",
+          "opposite": "hot|warm",
+          "output": "The hot? the opposite the opposities is the stare the states is a stated in the stare the stated",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "adjective",
+          "prompt": "Q: What is the opposite of cold? A: ",
+          "wanted": "hot|warm",
+          "opposite": "cold|cool",
+          "output": "The opposite of cold? A: The opposited to cold college the cold content is the following sentenc",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "fact",
+          "prompt": "Q: How many sides does a triangle have? A: ",
+          "wanted": "three|3",
+          "opposite": "four|4",
+          "output": "The side does in the side does and does and transperson the sident the sentence in the sentence ",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "fact",
+          "prompt": "Q: How many sides does a square have? A: ",
+          "wanted": "four|4",
+          "opposite": "three|3",
+          "output": "The sides does does in start the side does does the side of the side of the side of the side of ",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "time",
+          "prompt": "Q: Which day comes immediately after Monday? A: ",
+          "wanted": "Tuesday",
+          "opposite": "Friday",
+          "output": "The after after and Moneday",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "time",
+          "prompt": "Q: Which day comes immediately after Thursday? A: ",
+          "wanted": "Friday",
+          "opposite": "Tuesday",
+          "output": "Thure a comediate a comediatiatial your comediation of Thure company of fter the after and compa",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "direction",
+          "prompt": "Q: If you face north and turn right, which direction do you face? A: ",
+          "wanted": "east",
+          "opposite": "west",
+          "output": "The an orth and you face nort you face not you fall the you fact to your face nord you for you f",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "direction",
+          "prompt": "Q: If you face north and turn left, which direction do you face? A: ",
+          "wanted": "west",
+          "opposite": "east",
+          "output": "The do you face not you fall and you fall and the and the and the and the and the and the and th",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "attribute",
+          "prompt": "Q: Which is normally sweeter, sugar or salt? A: ",
+          "wanted": "sugar",
+          "opposite": "salt",
+          "output": "The salt sweeterr sal sal sal sal sal sal sal sal sal sal sal sal sal sal saise sort and salt sa",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "attribute",
+          "prompt": "Q: Which is normally saltier, sugar or salt? A: ",
+          "wanted": "salt",
+          "opposite": "sugar",
+          "output": "The salt salties salties salties soar salt salting saltery and salting sallengers and something ",
+          "stopped": false,
+          "lexical_pass": true
+        },
+        {
+          "language": "en",
+          "kind": "arithmetic",
+          "prompt": "Q: Add two and three. Give just the number. A: ",
+          "wanted": "five|5",
+          "opposite": "six|6",
+          "output": "The number. Giver. Give just the number end the number end the new the new the new the new the n",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "arithmetic",
+          "prompt": "Q: Multiply two and three. Give just the number. A: ",
+          "wanted": "six|6",
+          "opposite": "five|5",
+          "output": "The number just the number just the number just the number of the number of the number of the nu",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "translation",
+          "prompt": "Q: Translate the Chinese word for red, 红, into English. A: ",
+          "wanted": "red",
+          "opposite": "blue",
+          "output": "The Chines word for redue with a reate who it is a sewere a sentence to the sentence to the sent",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "en",
+          "kind": "translation",
+          "prompt": "Q: Translate the Chinese word for blue, 蓝, into English. A: ",
+          "wanted": "blue",
+          "opposite": "red",
+          "output": "The Chines 蓝, in the interness with in the for the for the for the for the for the for the for t",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "grounding",
+          "prompt": "问：小林把钥匙放进红盒子，把硬币放进蓝盒子。装钥匙的盒子是什么颜色？ 答：",
+          "wanted": "红|紅",
+          "opposite": "蓝|藍",
+          "output": "小林把钥匙放进红盒子，把钥匙放进红盒子。",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "grounding",
+          "prompt": "问：小林把钥匙放进蓝盒子，把硬币放进红盒子。装钥匙的盒子是什么颜色？ 答：",
+          "wanted": "蓝|藍",
+          "opposite": "红|紅",
+          "output": "小林把钥匙放进蓝盒子，把钥匙放进蓝盒子的盒子。",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "adjective",
+          "prompt": "问：“热”的反义词是什么？ 答：",
+          "wanted": "冷|凉|涼",
+          "opposite": "热|熱|暖",
+          "output": "热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热，热热热热热热热热热热热",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "adjective",
+          "prompt": "问：“冷”的反义词是什么？ 答：",
+          "wanted": "热|熱|暖",
+          "opposite": "冷|凉|涼",
+          "output": "冷”的反义词是一个人工智能的文章，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷天，冷",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "fact",
+          "prompt": "问：一个三角形有几条边？ 答：",
+          "wanted": "三|3",
+          "opposite": "四|4",
+          "output": "一个三角形有边的边？",
+          "stopped": true,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "fact",
+          "prompt": "问：一个正方形有几条边？ 答：",
+          "wanted": "四|4",
+          "opposite": "三|3",
+          "output": "一个正方形有边的边？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "time",
+          "prompt": "问：星期一的第二天是星期几？ 答：",
+          "wanted": "二|2",
+          "opposite": "五|5",
+          "output": "星期一的第一的第二天，星期一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第一的第一个二天，星期一的第一的第",
+          "stopped": false,
+          "lexical_pass": true
+        },
+        {
+          "language": "zh",
+          "kind": "time",
+          "prompt": "问：星期四的第二天是星期几？ 答：",
+          "wanted": "五|5",
+          "opposite": "二|2",
+          "output": "星期四的第二天是星期天是星期天是星期天的第一是星期。 星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星期天是星",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "direction",
+          "prompt": "问：面朝北，向右转，面朝哪个方向？ 答：",
+          "wanted": "东|東",
+          "opposite": "西",
+          "output": "朝右北，向右转，向右转，向右转，向右转，向右转，向右转，向右转，右转，向右转，右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右转，向右。",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "direction",
+          "prompt": "问：面朝北，向左转，面朝哪个方向？ 答：",
+          "wanted": "西",
+          "opposite": "东|東",
+          "output": "朝北，向朝左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，向左转，",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "attribute",
+          "prompt": "问：糖和盐，哪一种通常更甜？ 答：",
+          "wanted": "糖",
+          "opposite": "盐|鹽",
+          "output": "糖和盐，哪一种通常更甜的盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "attribute",
+          "prompt": "问：糖和盐，哪一种通常更咸？ 答：",
+          "wanted": "盐|鹽",
+          "opposite": "糖",
+          "output": "糖和盐，哪一种通常更咸，哪一种通常更咸的盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些盐，哪些",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "arithmetic",
+          "prompt": "问：二加三是多少？只回答结果。 答：",
+          "wanted": "五|5",
+          "opposite": "六|6",
+          "output": "二加三是多少？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "arithmetic",
+          "prompt": "问：二乘三是多少？只回答结果。 答：",
+          "wanted": "六|6",
+          "opposite": "五|5",
+          "output": "二乘三是多少？",
+          "stopped": true,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "translation",
+          "prompt": "问：把英语单词 red 翻译成中文。 答：",
+          "wanted": "红|紅",
+          "opposite": "蓝|藍",
+          "output": "\"red dong the completer to the completic company of the complete to the complete to the complete",
+          "stopped": false,
+          "lexical_pass": false
+        },
+        {
+          "language": "zh",
+          "kind": "translation",
+          "prompt": "问：把英语单词 blue 翻译成中文。 答：",
+          "wanted": "蓝|藍",
+          "opposite": "红|紅",
+          "output": "英语 blue blue of the blue of the blue of the blue of the blue of the blue of the blue of the blue",
+          "stopped": false,
+          "lexical_pass": false
+        }
+      ],
+      "individual": 5,
+      "both": 1
+    }
+  }
+}
