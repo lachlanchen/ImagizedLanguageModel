@@ -1,0 +1,1840 @@
+{
+  "summary": {
+    "en": {
+      "median_span_prior": 0.35442177951335907,
+      "above_half": 27,
+      "disabled": {
+        "n": 96,
+        "exact": 0,
+        "stopped": 14,
+        "contiguous": 5,
+        "mean_lcs": 0.37031348949598614,
+        "repeated_trigrams": 0.41500359595465985
+      }
+    },
+    "zh": {
+      "median_span_prior": 0.028536377474665642,
+      "above_half": 0,
+      "disabled": {
+        "n": 96,
+        "exact": 0,
+        "stopped": 66,
+        "contiguous": 33,
+        "mean_lcs": 0.18793691591091222,
+        "repeated_trigrams": 0.23110913625048357
+      }
+    }
+  },
+  "original_prompts": {
+    "museum-zh": {
+      "output": "十七件青铜器。第二批展出了九件青铜器。",
+      "stopped": true
+    },
+    "museum-en": {
+      "output": "The second exhibition contained nine bronzes. The second exhibition contained nine bronzes. The ",
+      "stopped": false
+    },
+    "workshop-zh": {
+      "output": " 八点开始。晚班于六点开始。",
+      "stopped": true
+    },
+    "workshop-en": {
+      "output": "The evening class starts at eight. The evening class starts at eight. The evening class starts a",
+      "stopped": false
+    }
+  },
+  "priors": [
+    {
+      "id": "183757",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02107408083975315
+    },
+    {
+      "id": "182144",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03157017007470131
+    },
+    {
+      "id": "189448",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03513002768158913
+    },
+    {
+      "id": "186518",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.046921879053115845
+    },
+    {
+      "id": "190061",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.07376214861869812
+    },
+    {
+      "id": "185744",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.04842996969819069
+    },
+    {
+      "id": "186711",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.06705110520124435
+    },
+    {
+      "id": "188935",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.035284623503685
+    },
+    {
+      "id": "184817",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.02811332978308201
+    },
+    {
+      "id": "190892",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.029428312554955482
+    },
+    {
+      "id": "186558",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.06021912023425102
+    },
+    {
+      "id": "187491",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.41911137104034424
+    },
+    {
+      "id": "187220",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.020409507676959038
+    },
+    {
+      "id": "189871",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.01867935061454773
+    },
+    {
+      "id": "184797",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.050864968448877335
+    },
+    {
+      "id": "182433",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.022403927519917488
+    },
+    {
+      "id": "183541",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.0657433345913887
+    },
+    {
+      "id": "185942",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.04323256015777588
+    },
+    {
+      "id": "183482",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.10019635409116745
+    },
+    {
+      "id": "182888",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.027010025456547737
+    },
+    {
+      "id": "187060",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02097955346107483
+    },
+    {
+      "id": "184124",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.07889424264431
+    },
+    {
+      "id": "191018",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.022248199209570885
+    },
+    {
+      "id": "184662",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03492753207683563
+    },
+    {
+      "id": "184944",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03278207406401634
+    },
+    {
+      "id": "189477",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.11977538466453552
+    },
+    {
+      "id": "182296",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.024784624576568604
+    },
+    {
+      "id": "187154",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.022669563069939613
+    },
+    {
+      "id": "181949",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.030143555253744125
+    },
+    {
+      "id": "186123",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.020526837557554245
+    },
+    {
+      "id": "184193",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.01470549963414669
+    },
+    {
+      "id": "189796",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.027671901509165764
+    },
+    {
+      "id": "189728",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02345271408557892
+    },
+    {
+      "id": "183431",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.02563611790537834
+    },
+    {
+      "id": "184893",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02165159396827221
+    },
+    {
+      "id": "188227",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.023995324969291687
+    },
+    {
+      "id": "183744",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.02543424442410469
+    },
+    {
+      "id": "188253",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.024157008156180382
+    },
+    {
+      "id": "184917",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.025705765932798386
+    },
+    {
+      "id": "190109",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.04690041020512581
+    },
+    {
+      "id": "184864",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.022205330431461334
+    },
+    {
+      "id": "185279",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.024526355788111687
+    },
+    {
+      "id": "185314",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.028168248012661934
+    },
+    {
+      "id": "184582",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.010649154894053936
+    },
+    {
+      "id": "188540",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.03169102594256401
+    },
+    {
+      "id": "185694",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03457436338067055
+    },
+    {
+      "id": "183281",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.031393423676490784
+    },
+    {
+      "id": "183954",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.020812826231122017
+    },
+    {
+      "id": "184658",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.028320437297225
+    },
+    {
+      "id": "183943",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.1495324820280075
+    },
+    {
+      "id": "186761",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.02565741166472435
+    },
+    {
+      "id": "188089",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03564834222197533
+    },
+    {
+      "id": "186509",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02362903207540512
+    },
+    {
+      "id": "191440",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03652293607592583
+    },
+    {
+      "id": "189956",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02594020590186119
+    },
+    {
+      "id": "182104",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02581145241856575
+    },
+    {
+      "id": "187559",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.029311755672097206
+    },
+    {
+      "id": "188223",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.028752317652106285
+    },
+    {
+      "id": "186490",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.045587822794914246
+    },
+    {
+      "id": "183136",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.042722128331661224
+    },
+    {
+      "id": "189361",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.025943489745259285
+    },
+    {
+      "id": "183424",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.1207696795463562
+    },
+    {
+      "id": "182634",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.018371371552348137
+    },
+    {
+      "id": "184840",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.019754590466618538
+    },
+    {
+      "id": "185998",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.024328196421265602
+    },
+    {
+      "id": "183455",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.021039871498942375
+    },
+    {
+      "id": "186385",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.07307442277669907
+    },
+    {
+      "id": "185628",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.029497181996703148
+    },
+    {
+      "id": "186126",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.0281183160841465
+    },
+    {
+      "id": "182440",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.027580108493566513
+    },
+    {
+      "id": "187624",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02566482685506344
+    },
+    {
+      "id": "190269",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.07222536206245422
+    },
+    {
+      "id": "182889",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03140340372920036
+    },
+    {
+      "id": "185296",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.05775091052055359
+    },
+    {
+      "id": "185792",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.026359831914305687
+    },
+    {
+      "id": "182271",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.03239390254020691
+    },
+    {
+      "id": "187264",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03724583983421326
+    },
+    {
+      "id": "182461",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.027193250134587288
+    },
+    {
+      "id": "190619",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.05984622612595558
+    },
+    {
+      "id": "183544",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.04564977064728737
+    },
+    {
+      "id": "183487",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.05793963745236397
+    },
+    {
+      "id": "190343",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.025076081976294518
+    },
+    {
+      "id": "185798",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.0333593524992466
+    },
+    {
+      "id": "185742",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.027261247858405113
+    },
+    {
+      "id": "182871",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.025776846334338188
+    },
+    {
+      "id": "182519",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.025808217003941536
+    },
+    {
+      "id": "182182",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.01267979945987463
+    },
+    {
+      "id": "183876",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.02583671361207962
+    },
+    {
+      "id": "187349",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.037517908960580826
+    },
+    {
+      "id": "182346",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.023175954818725586
+    },
+    {
+      "id": "182560",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03465380519628525
+    },
+    {
+      "id": "186920",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03049040213227272
+    },
+    {
+      "id": "186809",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.03208925575017929
+    },
+    {
+      "id": "187843",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.020804066210985184
+    },
+    {
+      "id": "187487",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.052152134478092194
+    },
+    {
+      "id": "183248",
+      "lang": "zh",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.04099659249186516
+    },
+    {
+      "id": "183453",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.027333706617355347
+    },
+    {
+      "id": "184523",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.022816739976406097
+    },
+    {
+      "id": "185207",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.02583303488790989
+    },
+    {
+      "id": "186626",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.07918722927570343
+    },
+    {
+      "id": "187702",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.02065134048461914
+    },
+    {
+      "id": "183218",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.020153913646936417
+    },
+    {
+      "id": "184558",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.024474577978253365
+    },
+    {
+      "id": "191552",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.026583099737763405
+    },
+    {
+      "id": "186943",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.026773691177368164
+    },
+    {
+      "id": "184777",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.016280990093946457
+    },
+    {
+      "id": "187632",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.022709764540195465
+    },
+    {
+      "id": "191318",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.040129635483026505
+    },
+    {
+      "id": "187666",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.029135100543498993
+    },
+    {
+      "id": "188880",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.03316783159971237
+    },
+    {
+      "id": "182743",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.02626500464975834
+    },
+    {
+      "id": "182177",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.04533189907670021
+    },
+    {
+      "id": "189143",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.030660532414913177
+    },
+    {
+      "id": "186502",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.027774184942245483
+    },
+    {
+      "id": "182160",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.02055876888334751
+    },
+    {
+      "id": "185615",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.02540074847638607
+    },
+    {
+      "id": "188560",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.02463328279554844
+    },
+    {
+      "id": "184639",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.08048910647630692
+    },
+    {
+      "id": "185814",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.09492898732423782
+    },
+    {
+      "id": "184787",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.019597899168729782
+    },
+    {
+      "id": "186868",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.0627322569489479
+    },
+    {
+      "id": "190385",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.0685267299413681
+    },
+    {
+      "id": "190306",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.03556191176176071
+    },
+    {
+      "id": "183375",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.0387185774743557
+    },
+    {
+      "id": "191391",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.025077316910028458
+    },
+    {
+      "id": "185901",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.025841878727078438
+    },
+    {
+      "id": "189642",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.03644566237926483
+    },
+    {
+      "id": "189437",
+      "lang": "zh",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.050855059176683426
+    },
+    {
+      "id": "dolly_10083",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5728303790092468
+    },
+    {
+      "id": "dolly_11530",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.1133202388882637
+    },
+    {
+      "id": "dolly_02083",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.39769238233566284
+    },
+    {
+      "id": "dolly_02060",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.39599210023880005
+    },
+    {
+      "id": "dolly_06218",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.17591163516044617
+    },
+    {
+      "id": "dolly_07598",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.04004434123635292
+    },
+    {
+      "id": "dolly_10931",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5605307221412659
+    },
+    {
+      "id": "dolly_08334",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.7371790409088135
+    },
+    {
+      "id": "dolly_02925",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5005085468292236
+    },
+    {
+      "id": "dolly_06770",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6118610501289368
+    },
+    {
+      "id": "dolly_13274",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.48978742957115173
+    },
+    {
+      "id": "dolly_07796",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4981086552143097
+    },
+    {
+      "id": "dolly_03700",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3724290728569031
+    },
+    {
+      "id": "dolly_03094",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6898565292358398
+    },
+    {
+      "id": "dolly_04070",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.9507681131362915
+    },
+    {
+      "id": "dolly_10794",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3693379759788513
+    },
+    {
+      "id": "dolly_00418",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5382707715034485
+    },
+    {
+      "id": "dolly_03346",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.47073253989219666
+    },
+    {
+      "id": "dolly_12535",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5076431632041931
+    },
+    {
+      "id": "dolly_04101",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4743591547012329
+    },
+    {
+      "id": "dolly_02500",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3446049988269806
+    },
+    {
+      "id": "dolly_11870",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.40330830216407776
+    },
+    {
+      "id": "dolly_14075",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3290174603462219
+    },
+    {
+      "id": "dolly_12132",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.8304266333580017
+    },
+    {
+      "id": "dolly_10506",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4620319604873657
+    },
+    {
+      "id": "dolly_03793",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.10708073526620865
+    },
+    {
+      "id": "dolly_12281",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3503340184688568
+    },
+    {
+      "id": "dolly_06818",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.26545387506484985
+    },
+    {
+      "id": "dolly_03333",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5651559233665466
+    },
+    {
+      "id": "dolly_01690",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.14001458883285522
+    },
+    {
+      "id": "dolly_10846",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.353199303150177
+    },
+    {
+      "id": "dolly_02327",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.19084513187408447
+    },
+    {
+      "id": "dolly_08183",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.2514645755290985
+    },
+    {
+      "id": "dolly_00004",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.7535680532455444
+    },
+    {
+      "id": "dolly_02381",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.35515910387039185
+    },
+    {
+      "id": "dolly_10775",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3098766803741455
+    },
+    {
+      "id": "dolly_09737",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6156232953071594
+    },
+    {
+      "id": "dolly_01384",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4445863366127014
+    },
+    {
+      "id": "dolly_11270",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.08512681722640991
+    },
+    {
+      "id": "dolly_09398",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.07468115538358688
+    },
+    {
+      "id": "dolly_06991",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.392564058303833
+    },
+    {
+      "id": "dolly_11184",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.23337571322917938
+    },
+    {
+      "id": "dolly_09591",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4508676826953888
+    },
+    {
+      "id": "dolly_13717",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4752849340438843
+    },
+    {
+      "id": "dolly_11507",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.509760856628418
+    },
+    {
+      "id": "dolly_12994",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.07461274415254593
+    },
+    {
+      "id": "dolly_10578",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.07211260497570038
+    },
+    {
+      "id": "dolly_07871",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.41512393951416016
+    },
+    {
+      "id": "dolly_09323",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.7221348881721497
+    },
+    {
+      "id": "dolly_13345",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.09347626566886902
+    },
+    {
+      "id": "dolly_07657",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.082759790122509
+    },
+    {
+      "id": "dolly_13380",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.914107084274292
+    },
+    {
+      "id": "dolly_08471",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.22222968935966492
+    },
+    {
+      "id": "dolly_00863",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.9004898071289062
+    },
+    {
+      "id": "dolly_07350",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.09882346540689468
+    },
+    {
+      "id": "dolly_09586",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3622979521751404
+    },
+    {
+      "id": "dolly_13367",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.04441780969500542
+    },
+    {
+      "id": "dolly_06870",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5846330523490906
+    },
+    {
+      "id": "dolly_03344",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.05078810080885887
+    },
+    {
+      "id": "dolly_10248",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.09925547242164612
+    },
+    {
+      "id": "dolly_05779",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.27534908056259155
+    },
+    {
+      "id": "dolly_05342",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.10977267473936081
+    },
+    {
+      "id": "dolly_03561",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.30832114815711975
+    },
+    {
+      "id": "dolly_02024",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.09559027850627899
+    },
+    {
+      "id": "dolly_07251",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.14408494532108307
+    },
+    {
+      "id": "dolly_14807",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4117685854434967
+    },
+    {
+      "id": "dolly_10788",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5862722396850586
+    },
+    {
+      "id": "dolly_14904",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.10269417613744736
+    },
+    {
+      "id": "dolly_14283",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.13164815306663513
+    },
+    {
+      "id": "dolly_08762",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.04965338855981827
+    },
+    {
+      "id": "dolly_09324",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.878350555896759
+    },
+    {
+      "id": "dolly_01251",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.32499387860298157
+    },
+    {
+      "id": "dolly_02552",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.28642725944519043
+    },
+    {
+      "id": "dolly_07546",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.24960699677467346
+    },
+    {
+      "id": "dolly_03140",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6974573135375977
+    },
+    {
+      "id": "dolly_06660",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4601934254169464
+    },
+    {
+      "id": "dolly_14474",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5175086855888367
+    },
+    {
+      "id": "dolly_12692",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.3536844551563263
+    },
+    {
+      "id": "dolly_04628",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.07571801543235779
+    },
+    {
+      "id": "dolly_10887",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.11737271398305893
+    },
+    {
+      "id": "dolly_08232",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.5777027606964111
+    },
+    {
+      "id": "dolly_00708",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6294791102409363
+    },
+    {
+      "id": "dolly_07817",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.13002236187458038
+    },
+    {
+      "id": "dolly_11774",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.18892496824264526
+    },
+    {
+      "id": "dolly_11542",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.522124707698822
+    },
+    {
+      "id": "dolly_14414",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.3397701382637024
+    },
+    {
+      "id": "dolly_08470",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.14415977895259857
+    },
+    {
+      "id": "dolly_14669",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.07192090153694153
+    },
+    {
+      "id": "dolly_07620",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.11231577396392822
+    },
+    {
+      "id": "dolly_06563",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.09855175018310547
+    },
+    {
+      "id": "dolly_11977",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.916740357875824
+    },
+    {
+      "id": "dolly_14204",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": false,
+      "prior": 0.05559736117720604
+    },
+    {
+      "id": "dolly_05443",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.6588238477706909
+    },
+    {
+      "id": "dolly_07971",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.4951392710208893
+    },
+    {
+      "id": "dolly_02111",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.42500898241996765
+    },
+    {
+      "id": "dolly_09787",
+      "lang": "en",
+      "subset": "absent",
+      "contiguous": true,
+      "prior": 0.0473039485514164
+    },
+    {
+      "id": "dolly_04168",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.19295182824134827
+    },
+    {
+      "id": "dolly_06132",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.34076061844825745
+    },
+    {
+      "id": "dolly_14990",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.41545820236206055
+    },
+    {
+      "id": "dolly_02815",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.04797285050153732
+    },
+    {
+      "id": "dolly_01137",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.1268547773361206
+    },
+    {
+      "id": "dolly_12670",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.3056960105895996
+    },
+    {
+      "id": "dolly_06570",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.25529950857162476
+    },
+    {
+      "id": "dolly_06017",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.4843537509441376
+    },
+    {
+      "id": "dolly_10276",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.12421633303165436
+    },
+    {
+      "id": "dolly_13585",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.14849433302879333
+    },
+    {
+      "id": "dolly_06308",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.06921392679214478
+    },
+    {
+      "id": "dolly_02903",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.451205849647522
+    },
+    {
+      "id": "dolly_13966",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.2721361815929413
+    },
+    {
+      "id": "dolly_08929",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.5882576107978821
+    },
+    {
+      "id": "dolly_01487",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.3361743986606598
+    },
+    {
+      "id": "dolly_05101",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.460877388715744
+    },
+    {
+      "id": "dolly_10526",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.2169627994298935
+    },
+    {
+      "id": "dolly_11656",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.12087634950876236
+    },
+    {
+      "id": "dolly_09892",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.41680967807769775
+    },
+    {
+      "id": "dolly_00274",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.06596416980028152
+    },
+    {
+      "id": "dolly_07169",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.044607289135456085
+    },
+    {
+      "id": "dolly_11345",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.11127112060785294
+    },
+    {
+      "id": "dolly_14808",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.4449939727783203
+    },
+    {
+      "id": "dolly_06025",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.6291195750236511
+    },
+    {
+      "id": "dolly_06423",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.2748492658138275
+    },
+    {
+      "id": "dolly_02703",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.044655781239271164
+    },
+    {
+      "id": "dolly_04373",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.350530743598938
+    },
+    {
+      "id": "dolly_03494",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": false,
+      "prior": 0.09808588773012161
+    },
+    {
+      "id": "dolly_08765",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.03193170949816704
+    },
+    {
+      "id": "dolly_06013",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.5506492853164673
+    },
+    {
+      "id": "dolly_04044",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.05024237558245659
+    },
+    {
+      "id": "dolly_13972",
+      "lang": "en",
+      "subset": "additional",
+      "contiguous": true,
+      "prior": 0.22448621690273285
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Reading a fact and writing a complete statement from a page image
+
+Asked who designed Salamanca, the system wrote “Matthew Murray designed Salamanca.” Changing that one name in the unseen SQuAD passage changed the response to “Daniel Harper designed Salamanca.” The second name is an experimental substitution. The pictured question is byte-identical across the edit. In a separate page about bronze inscriptions Lena and Mira also yielded two complete grounded statements. On the school question the reader extracted 1635 and followed an edit to 1735. In both cases the writer dropped the date and repeated the end of the question. On a fossil page it followed a country substitution and dropped the preposition. CPU replay of all four original pages reproduced the GPU output bitmaps and stopping decisions. All eight image triples and their intermediate facts are available. [Examples](../models/visual_statements/examples/intervention) · [Verified replay](evidence/visual_statements_v1/physical-replays.json)
+
+The writer learned from 60,254 human QA2D examples. The shared optical backbone has 2,117,313 parameters, the fixed fact reader 325,111 and the statement head 344,879. At inference only the question and passage are supplied. The page reader writes a proposed fact. The statement head reads that fact image beside a rendering of the question and emits its own glyphs until it stops or reaches 160. Both stages use the same packed pixel representation in memory. A source-only shape can be preserved even when the optional transcript cannot encode it. [Model and CLI](../models/visual_statements/README.md) · [Study protocol](visual_statement_protocol.md)
+
+| Measurement | Before sentence training | After |
+|---|---:|---:|
+| Exact complete human statement with correct short fact supplied | 0/128 | 29/128 |
+| Exact complete human statement with autonomous optical fact reading | 0/96 | 8/96 |
+| Both complete after substituting an intermediate fact | 0/92 | 18/92 |
+| Fresh pages with an exactly read fact | 25/96 | 25/96 |
+| Fresh pages with a stopped output containing a recorded fact | 22/96 | 27/96 |
+| Correctly read fresh facts preserved in stopped output | 18/25 | 21/25 |
+| Fresh pages containing the fact in stopped output when the true fact was supplied | 47/96 | 72/96 |
+| First 24 fresh pages with a complete, grounded grammatical proposition | 0/24 | 4/24 |
+
+Exact matches use the existing normalized string scorer and require stopping. A reference substring is a weak factual measure; the predicates can still be wrong. The first two rows use questions held out from the English sentence stage. Its 96 available passage texts belong to original SQuAD training and could have been seen by the upstream fact reader. The independent 96 use distinct official SQuAD development passage families after exclusion of earlier experiment pages and long training fragments. Only the first 600 source cells are shown. The final row is an exploratory, unblinded assessment by a project model-based reviewer with access to the source and references. Correct bare answers do not earn full-sentence credit. The four credited fresh sentences were all absent as contiguous strings from both the question and the visible passage after removing whitespace and folding case. [Before](evidence/visual_statements_v1/before-scores.json) · [After](evidence/visual_statements_v1/trained-scores.json) · [Item readings](evidence/visual_statements_v1/fresh-reading.json)
+
+Supplying an unencoded attested mark in place of a short fact led the writer to include its exact bitmap in 8/32 outputs. None consisted of that mark alone. These substitutions establish the capacity to carry supplied ink. The bilingual recurrent model still failed its independent historical reading test. The English statement head has no demonstrated ability to explain a new character's origin.
+
+The last training stage took 6,400 updates of 24 examples, 10,640,256 target cells, 151.51 seconds and 18.92 kJ of device energy on one RTX 4090 D. The total for the four deployed fitting stages is about 506 seconds and 67.1 kJ. There is no matched general LLM quality comparison. Raw data preparation, control arms, evaluation and host energy are excluded. [Training measurements](evidence/visual_statements_v1/training.json)
+
+The next controlled comparison should train fact selection with near-miss evidence from the same page, while freezing the sentence writer. Keep the current model as control and hold out new page families. For the complementary date-loss problem, test whether changing a training fact induces the matching change in the whole sentence with the reader fixed. Keep question-image erasure, source-only edits, independent ratings of full answers and a matched byte model. Score historical and Chinese free answers independently of English statement formation.
