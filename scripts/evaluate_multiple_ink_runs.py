@@ -120,6 +120,11 @@ def main(survival=False, confirm=False, run_dir=None):
         rows = read(WORK / "confirm.json")
         tiles = np.concatenate((tiles, np.load(WORK / "confirm-tiles.npy")))
     prefix = ("survival-" if survival else "") + ("confirm-" if confirm else "")
+    evaluate_cases(rows, tiles, results, prefix, survival, run_dir)
+
+
+@torch.inference_mode()
+def evaluate_cases(rows, tiles, results, prefix, survival, run_dir):
     offset = len(tiles)
     tiles = np.concatenate((tiles, unseen(tiles)))
     variants = []

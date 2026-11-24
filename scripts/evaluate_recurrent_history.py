@@ -13,7 +13,7 @@ from ilm.visual_lm.book_prefix import observations
 from hashlib import sha256
 
 
-def main():
+def historical_pages():
     archive = ROOT / "data/source_plates_v1"
     old = read(ROOT / "references/evidence/paired_evidence_v1/historical.json")["rows"]
     entries = [
@@ -44,6 +44,11 @@ def main():
             assert sha256(img.tobytes()).hexdigest() == r["expected_sha256"]
             pages.extend([ink(r["question"]), page])
             targets.append(img)
+    return old, pages, targets
+
+
+def main():
+    old, pages, targets = historical_pages()
     with gpu_owner():
         writer = Writer(device="cuda")
         shapes, seq = encode_pages(writer.palette, pages)

@@ -25,8 +25,14 @@ def main(text=False):
         for lang in ("en", "zh")
         for r in [r for r in rows if r["lang"] == lang and multi(r)][:16]
     ]
-    out = PUB / ("qwen-text-answers.json.gz" if text else "qwen-answers.json.gz")
-    report = PUB / ("qwen-text.json" if text else "qwen.json")
+    compare(text, sample, tiles, PUB, PUB / "answers.json.gz")
+
+
+def compare(text, sample, tiles, destination, optical_answers):
+    out = destination / (
+        "qwen-text-answers.json.gz" if text else "qwen-answers.json.gz"
+    )
+    report = destination / ("qwen-text.json" if text else "qwen.json")
     if report.exists():
         if sha(out) != read(report)["sha256"]:
             raise ValueError("Published comparison changed")
@@ -99,7 +105,7 @@ def main(text=False):
     keys = {(r["lang"], r["id"]) for r in sample}
     own = [
         r
-        for r in unpack(PUB / "answers.json.gz")
+        for r in unpack(optical_answers)
         if (r["lang"], r["id"]) in keys
         and r["mode"] == "count"
         and r["condition"] == "original"
