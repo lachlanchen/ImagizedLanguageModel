@@ -1,0 +1,71 @@
+{
+  "scores": {
+    "absent": {
+      "original": {
+        "n": 83,
+        "f1": 0.21131859844397974,
+        "em": 0.10843373493975904,
+        "any_exact": 10,
+        "quoted": 53,
+        "finished": 83
+      },
+      "question": {
+        "n": 83,
+        "f1": 0.024515887294058805,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 56,
+        "finished": 82
+      },
+      "passage": {
+        "n": 83,
+        "f1": 0.004685408299866131,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 9,
+        "finished": 83
+      }
+    },
+    "sample": {
+      "original": {
+        "n": 128,
+        "f1": 0.4341391049973311,
+        "em": 0.376953125,
+        "any_exact": 49,
+        "quoted": 87,
+        "finished": 128
+      },
+      "question": {
+        "n": 128,
+        "f1": 0.10151141826923077,
+        "em": 0.099609375,
+        "any_exact": 13,
+        "quoted": 93,
+        "finished": 128
+      },
+      "passage": {
+        "n": 128,
+        "f1": 0.044921875,
+        "em": 0.044921875,
+        "any_exact": 6,
+        "quoted": 9,
+        "finished": 128
+      }
+    }
+  },
+  "admitted": false,
+  "requests": 633,
+  "model": "163553aea1b1de62de7c5eb2ef5afb756b4b3133308d9ae7e42e951d8d696ef5",
+  "binary": "2455aa95608d9a0be9118bed7fb7206970f6a323697c505bef4669d749380990",
+  "prompt": "Read the passage and answer the current question using the previous exchange when relevant. Give the shortest natural answer that completely answers the question. Use yes or no for a yes/no question. If the passage cannot answer it, write unknown. Copy one short contiguous quote from the passage supporting your answer; use an empty quote if there is no support. Return JSON with string fields answer and quote.",
+  "decisions": "1d6ea6c88e09fb1af232c92b55374cc8a84e46798ea739662eaec25bfb92f44a",
+  "cost": {
+    "seconds": 74.72707641217858,
+    "energy": {
+      "joules": 14189.916,
+      "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+    },
+    "new": 633,
+    "cached": 0
+  }
+}

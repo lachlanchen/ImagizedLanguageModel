@@ -1,0 +1,98 @@
+{
+  "current_question_last": true,
+  "scores": {
+    "absent": {
+      "original": {
+        "n": 83,
+        "f1": 0.27611087800933404,
+        "em": 0.14457831325301204,
+        "any_exact": 13,
+        "quoted": 53,
+        "finished": 83
+      },
+      "question": {
+        "n": 83,
+        "f1": 0.052531495199815544,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 60,
+        "finished": 83
+      },
+      "passage": {
+        "n": 83,
+        "f1": 0.007697456492637215,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 8,
+        "finished": 83
+      }
+    },
+    "sample": {
+      "original": {
+        "n": 128,
+        "f1": 0.5356670998272561,
+        "em": 0.466796875,
+        "any_exact": 61,
+        "quoted": 93,
+        "finished": 128
+      },
+      "question": {
+        "n": 128,
+        "f1": 0.07830853608197359,
+        "em": 0.06640625,
+        "any_exact": 9,
+        "quoted": 93,
+        "finished": 128
+      },
+      "passage": {
+        "n": 128,
+        "f1": 0.037109375,
+        "em": 0.037109375,
+        "any_exact": 5,
+        "quoted": 11,
+        "finished": 128
+      }
+    },
+    "replication": {
+      "original": {
+        "n": 9,
+        "f1": 0.31994949494949493,
+        "em": 0.2222222222222222,
+        "any_exact": 2,
+        "quoted": 8,
+        "finished": 9
+      },
+      "question": {
+        "n": 9,
+        "f1": 0.05555555555555555,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 6,
+        "finished": 9
+      },
+      "passage": {
+        "n": 9,
+        "f1": 0.008724279835390947,
+        "em": 0.0,
+        "any_exact": 0,
+        "quoted": 1,
+        "finished": 9
+      }
+    }
+  },
+  "admitted": false,
+  "requests": 660,
+  "model": "163553aea1b1de62de7c5eb2ef5afb756b4b3133308d9ae7e42e951d8d696ef5",
+  "binary": "2455aa95608d9a0be9118bed7fb7206970f6a323697c505bef4669d749380990",
+  "prompt": "Read the passage and answer the current question using the previous exchange when relevant. Give the shortest natural answer that completely answers the question. Use yes or no for a yes/no question. If the passage cannot answer it, write unknown. Copy one short contiguous quote from the passage supporting your answer; use an empty quote if there is no support. Return JSON with string fields answer and quote.",
+  "decisions": "0010dbd628914ec58f9108267b97828baea2c8ad03bfc40c93dadae3c4092406",
+  "cost": {
+    "seconds": 83.07146369013935,
+    "energy": {
+      "joules": 15357.341,
+      "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+    },
+    "new": 660,
+    "cached": 0
+  }
+}

@@ -7,6 +7,15 @@ from ilm.visual_lm.dialogue_ink import DialogueInk
 from ilm.visual_lm.gloss_focus import cell_features
 
 
+def interval_occupancy(endpoints):
+    """Marginal P(left <= i <= right | left <= right) for every source word."""
+    left, right = endpoints.unbind(-1)
+    before = torch.logcumsumexp(left, dim=1)
+    after = torch.logcumsumexp(right.flip((1,)), dim=1).flip((1,))
+    normalizer = (left + after).logsumexp(1, keepdim=True)
+    return (before + after - normalizer).clamp(max=0).exp()
+
+
 class SurfaceDialogue(DialogueInk):
     def __init__(self, palette, mode):
         super().__init__(palette)
@@ -20,6 +29,25 @@ class SurfaceDialogue(DialogueInk):
         self.register_buffer(
             "position_sign", torch.randint(2, (128, 50), generator=seed).float() * 2 - 1
         )
+
+    def memory(
+        self,
+        passage,
+        passage_length,
+        question,
+        question_length,
+        history,
+        history_length,
+    ):
+        memory, endpoints = super().memory(
+            passage, passage_length, question, question_length, history, history_length
+        )
+        if getattr(self, "use_predicted_interval", False):
+            values, keys, edits, mask, preceding, state = memory
+            bonus = (3 * interval_occupancy(endpoints)).log1p()
+            bonus = F.pad(bonus, (0, edits.size(1) - passage.size(1)))
+            memory = values, keys, edits + bonus[..., None], mask, preceding, state
+        return memory, endpoints
 
     def observe(self, packed):
         if self.mode == "byte":

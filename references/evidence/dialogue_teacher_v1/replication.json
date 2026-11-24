@@ -1,0 +1,1438 @@
+{
+  "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+  "seeds": [
+    420121,
+    420122,
+    420123,
+    420124
+  ],
+  "by_seed": {
+    "420121": {
+      "arms": {
+        "plain": {
+          "sha256": "06408e2266642ff34b65525af55939fa8cd1e77015561b36ba2c7606a0ac1019",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "plain",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420121,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 21.85210846643895,
+            "energy": {
+              "joules": 2702.75,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 393078272
+          },
+          "preparation": {
+            "seconds": 7.3396227257326245,
+            "energy": {
+              "joules": 622.221,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 286284288
+          },
+          "evidence_positions": 94847,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              4.658142566680908,
+              2.091806173324585
+            ],
+            [
+              500,
+              4.12172794342041,
+              1.1927520036697388
+            ],
+            [
+              750,
+              5.022281169891357,
+              1.603126049041748
+            ],
+            [
+              1000,
+              3.8330178260803223,
+              1.1218576431274414
+            ],
+            [
+              1250,
+              4.451480388641357,
+              1.3758838176727295
+            ],
+            [
+              1500,
+              5.43437385559082,
+              1.6438796520233154
+            ]
+          ]
+        },
+        "human": {
+          "sha256": "5cd09c20e2cbc8cbf54c1d851a8f47c0178c9e6c84d5191c8ae94458d2d98b96",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "human",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420121,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 26.90769027452916,
+            "energy": {
+              "joules": 3077.395,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 392410624
+          },
+          "preparation": {
+            "seconds": 6.050098855048418,
+            "energy": {
+              "joules": 510.078,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 295852544
+          },
+          "evidence_positions": 94847,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              5.387206077575684,
+              2.08024001121521
+            ],
+            [
+              500,
+              4.544821739196777,
+              1.1912988424301147
+            ],
+            [
+              750,
+              5.608220100402832,
+              1.6027470827102661
+            ],
+            [
+              1000,
+              4.195578098297119,
+              1.1014842987060547
+            ],
+            [
+              1250,
+              4.9358320236206055,
+              1.360770344734192
+            ],
+            [
+              1500,
+              6.039522647857666,
+              1.6403839588165283
+            ]
+          ]
+        }
+      },
+      "groups": {
+        "long": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.4107613052920395,
+                "em": 0.33641160949868076,
+                "any_exact": 264,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.05747881296364146,
+                "em": 0.036939313984168866,
+                "any_exact": 29,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11717186327934256,
+                "em": 0.10257255936675462,
+                "any_exact": 79,
+                "stopped": 756
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.22625463885490624,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.014721074380165289,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.02111742424242424,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "4e2a126b74f4246d9e8132d36315f7848baba53d2db0ae58c24fbc5d8577fe4d"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.4184058401419972,
+                "em": 0.34432717678100266,
+                "any_exact": 270,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.0583752395361894,
+                "em": 0.03660949868073879,
+                "any_exact": 29,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11151461467189608,
+                "em": 0.09564643799472296,
+                "any_exact": 74,
+                "stopped": 756
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.22625463885490624,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.014721074380165289,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.02111742424242424,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "166302a98b547e7462837946eca2a8fb6e9fdd7b5bb4377032bf5d7790c7c8eb"
+          },
+          "comparison": {
+            "delta": 0.007644534849957707,
+            "interval95": [
+              3.4841365641066436e-05,
+              0.016033833043783696
+            ],
+            "stories": 47,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        },
+        "longer": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.35126004947433515,
+                "em": 0.288961038961039,
+                "any_exact": 46,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.03698142135642136,
+                "em": 0.01948051948051948,
+                "any_exact": 3,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.1305301516665153,
+                "em": 0.125,
+                "any_exact": 20,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.2,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "cf7999a54c6b6e9b5134c80fe8e378bb6e0705668d31c4d8498d449f67029f9d"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.35667130488559057,
+                "em": 0.30194805194805197,
+                "any_exact": 48,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.03579094516594517,
+                "em": 0.01948051948051948,
+                "any_exact": 3,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.1370236581600218,
+                "em": 0.1314935064935065,
+                "any_exact": 21,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.2,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "2b51bdaf14df116f74f7b2daba074a244dd63e9d0f50ab85d775e4095250722d"
+          },
+          "comparison": {
+            "delta": 0.005411255411255412,
+            "interval95": [
+              -0.01657715051476218,
+              0.028138528138528136
+            ],
+            "stories": 8,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        }
+      }
+    },
+    "420122": {
+      "arms": {
+        "plain": {
+          "sha256": "f7339461bbd49019de9f07649366071460766465bed7d2d03056313246d7965c",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "plain",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420122,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 26.030591492541134,
+            "energy": {
+              "joules": 2980.562,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 395779072
+          },
+          "preparation": {
+            "seconds": 5.919228001497686,
+            "energy": {
+              "joules": 497.413,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 292909056
+          },
+          "evidence_positions": 96109,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              4.64034366607666,
+              1.9032325744628906
+            ],
+            [
+              500,
+              5.729114532470703,
+              2.1224007606506348
+            ],
+            [
+              750,
+              4.5376152992248535,
+              1.73712158203125
+            ],
+            [
+              1000,
+              4.568315505981445,
+              2.2694778442382812
+            ],
+            [
+              1250,
+              4.716249942779541,
+              1.8754183053970337
+            ],
+            [
+              1500,
+              4.62847900390625,
+              1.4782861471176147
+            ]
+          ]
+        },
+        "human": {
+          "sha256": "ea6783363b588d8bea4133ea581f03557a51513f1235bdd7581f6679e44429e2",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "human",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420122,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 26.067160013131797,
+            "energy": {
+              "joules": 3009.191,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 396683264
+          },
+          "preparation": {
+            "seconds": 7.038157743401825,
+            "energy": {
+              "joules": 591.709,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 301428736
+          },
+          "evidence_positions": 96109,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              5.303341388702393,
+              1.8945016860961914
+            ],
+            [
+              500,
+              6.461458206176758,
+              2.113152027130127
+            ],
+            [
+              750,
+              5.158750057220459,
+              1.7314763069152832
+            ],
+            [
+              1000,
+              5.360672473907471,
+              2.2519233226776123
+            ],
+            [
+              1250,
+              5.348391532897949,
+              1.8459382057189941
+            ],
+            [
+              1500,
+              5.174269676208496,
+              1.4808976650238037
+            ]
+          ]
+        }
+      },
+      "groups": {
+        "long": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.41897054597325945,
+                "em": 0.337401055408971,
+                "any_exact": 267,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.05002441956198379,
+                "em": 0.03199208443271768,
+                "any_exact": 25,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.12225280318247322,
+                "em": 0.10784960422163588,
+                "any_exact": 84,
+                "stopped": 756
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.2493201891456887,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 21
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.02324380165289256,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.03155618890913008,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "052a50913d8f360d7e2cc2cf21ef524cc6d3ce7d35c4ef725f427452ff4f335c"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.42111740282345606,
+                "em": 0.3387203166226913,
+                "any_exact": 268,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.05014202210633262,
+                "em": 0.03199208443271768,
+                "any_exact": 25,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11606863572688889,
+                "em": 0.10158311345646438,
+                "any_exact": 79,
+                "stopped": 755
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.2493201891456887,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 21
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.02324380165289256,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.03155618890913008,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "0e83cd2148c7a8971ae56f0e8778c5f93ba966f08e3f41db7e926ac1d5349fee"
+          },
+          "comparison": {
+            "delta": 0.0021468568501966643,
+            "interval95": [
+              -0.0060399574272432905,
+              0.010763020376820058
+            ],
+            "stories": 47,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        },
+        "longer": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.3818238309309738,
+                "em": 0.3344155844155844,
+                "any_exact": 54,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.031316617556113355,
+                "em": 0.017857142857142856,
+                "any_exact": 3,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.12658289714487195,
+                "em": 0.11525974025974026,
+                "any_exact": 18,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.2,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "818200a3de5f7ab3590a303d5b250b898ffa8bc7b21cfabee9efba5770c729cd"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.3902653893725322,
+                "em": 0.3425324675324675,
+                "any_exact": 55,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.031316617556113355,
+                "em": 0.017857142857142856,
+                "any_exact": 3,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.12507195185766615,
+                "em": 0.11525974025974026,
+                "any_exact": 18,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.2,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "b7334d3ca0807a2fa4ac82a8e8fcc52e57a1beef4d60282d3811eea62b71a119"
+          },
+          "comparison": {
+            "delta": 0.008441558441558443,
+            "interval95": [
+              0.0,
+              0.021568627450980392
+            ],
+            "stories": 8,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        }
+      }
+    },
+    "420123": {
+      "arms": {
+        "plain": {
+          "sha256": "ca1b1bc86d70bfcba8c4b67e48d28de583567086159ca7eb286cb6b587111369",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "plain",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420123,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 23.332195746712387,
+            "energy": {
+              "joules": 2769.23,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 398666752
+          },
+          "preparation": {
+            "seconds": 6.627367274835706,
+            "energy": {
+              "joules": 559.218,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 301428736
+          },
+          "evidence_positions": 95491,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              4.829133033752441,
+              1.542720079421997
+            ],
+            [
+              500,
+              4.531367778778076,
+              1.2335129976272583
+            ],
+            [
+              750,
+              4.943116188049316,
+              1.900197148323059
+            ],
+            [
+              1000,
+              4.565183639526367,
+              2.1798830032348633
+            ],
+            [
+              1250,
+              4.368717193603516,
+              2.121262788772583
+            ],
+            [
+              1500,
+              4.8455986976623535,
+              1.1960504055023193
+            ]
+          ]
+        },
+        "human": {
+          "sha256": "1ff3f4da49feab891f23151c0052f7b7121dd370e3b495e4a5b9284616f0b60c",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "human",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420123,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 28.45306281466037,
+            "energy": {
+              "joules": 3212.764,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 397876736
+          },
+          "preparation": {
+            "seconds": 7.3262479258701205,
+            "energy": {
+              "joules": 621.421,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 301428736
+          },
+          "evidence_positions": 95491,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              5.351468563079834,
+              1.5229034423828125
+            ],
+            [
+              500,
+              4.960855484008789,
+              1.2258352041244507
+            ],
+            [
+              750,
+              5.6293206214904785,
+              1.907697081565857
+            ],
+            [
+              1000,
+              5.325820446014404,
+              2.155927896499634
+            ],
+            [
+              1250,
+              5.133008003234863,
+              2.12221097946167
+            ],
+            [
+              1500,
+              5.265287399291992,
+              1.1823818683624268
+            ]
+          ]
+        }
+      },
+      "groups": {
+        "long": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.39876168541038187,
+                "em": 0.32519788918205805,
+                "any_exact": 257,
+                "stopped": 757
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.04747275754332621,
+                "em": 0.02704485488126649,
+                "any_exact": 21,
+                "stopped": 757
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11058058260914073,
+                "em": 0.09861477572559367,
+                "any_exact": 77,
+                "stopped": 756
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.21685265667815623,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.02324380165289256,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.024688057040998215,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "1599060ef9ff9459e193d4abd819035a6b045beaac991e822948e1194f02af4e"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.39912460493552526,
+                "em": 0.32354881266490765,
+                "any_exact": 256,
+                "stopped": 757
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.047933163824930416,
+                "em": 0.02836411609498681,
+                "any_exact": 22,
+                "stopped": 757
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11328104104838545,
+                "em": 0.1012532981530343,
+                "any_exact": 79,
+                "stopped": 756
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.21685265667815623,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.015938606847697757,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.024688057040998215,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "f52ad291c195d0697ef8b4303e22e6cf0f83ada8dbf8ed3ca0fbe90c80582336"
+          },
+          "comparison": {
+            "delta": 0.0003629195251433713,
+            "interval95": [
+              -0.005978248921609477,
+              0.006416136430519225
+            ],
+            "stories": 47,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        },
+        "longer": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.3835613482742669,
+                "em": 0.31655844155844154,
+                "any_exact": 51,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.023832070707070708,
+                "em": 0.012987012987012988,
+                "any_exact": 2,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.14935064935064934,
+                "em": 0.1461038961038961,
+                "any_exact": 23,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.19444444444444445,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "aee86a0ca816754706a4c980d28ee09799ea4cf84b8705c450c04f38e14139fe"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.38049497020788886,
+                "em": 0.31655844155844154,
+                "any_exact": 51,
+                "stopped": 154
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.023832070707070708,
+                "em": 0.012987012987012988,
+                "any_exact": 2,
+                "stopped": 154
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.1500999000999001,
+                "em": 0.1461038961038961,
+                "any_exact": 23,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.15,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "f4a93284f2f88cd7a1fe27c4a70613c06acfacb60b37c5fac277611e57739aa6"
+          },
+          "comparison": {
+            "delta": -0.0030663780663780665,
+            "interval95": [
+              -0.007195740223108138,
+              0.0
+            ],
+            "stories": 8,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        }
+      }
+    },
+    "420124": {
+      "arms": {
+        "plain": {
+          "sha256": "5994a623f88e55a60a503c19017c07683ec498cc73b0b74a6aac0db52c2c5b0f",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "plain",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420124,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 26.06078724935651,
+            "energy": {
+              "joules": 3006.06,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 399814144
+          },
+          "preparation": {
+            "seconds": 5.968126771971583,
+            "energy": {
+              "joules": 509.586,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 301428736
+          },
+          "evidence_positions": 94827,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              5.218222141265869,
+              2.2016892433166504
+            ],
+            [
+              500,
+              4.240567207336426,
+              1.1813867092132568
+            ],
+            [
+              750,
+              5.218810081481934,
+              1.740454077720642
+            ],
+            [
+              1000,
+              5.156606674194336,
+              1.953286051750183
+            ],
+            [
+              1250,
+              5.032714366912842,
+              2.061584234237671
+            ],
+            [
+              1500,
+              5.706069469451904,
+              2.9694435596466064
+            ]
+          ]
+        },
+        "human": {
+          "sha256": "424738fb9595074c7265d91547bf3a88f3d598f4aed287b9489abddbd79609fa",
+          "parent": "9a70cd7555d69f33b74c8da79244fe115b176146f4445c6f71c8504955a551f2",
+          "mode": "ink",
+          "labels": "human",
+          "teacher_admitted": false,
+          "accepted_cases": 0,
+          "seed": 420124,
+          "steps": 1500,
+          "presentations": 48000,
+          "parameters": 547125,
+          "fit": {
+            "seconds": 25.091573890298605,
+            "energy": {
+              "joules": 2912.973,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 399090176
+          },
+          "preparation": {
+            "seconds": 6.746187067590654,
+            "energy": {
+              "joules": 575.044,
+              "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+            },
+            "peak_bytes": 301428736
+          },
+          "evidence_positions": 94827,
+          "max_passage_words": 448,
+          "trace": [
+            [
+              250,
+              5.974794864654541,
+              2.1853091716766357
+            ],
+            [
+              500,
+              4.643489360809326,
+              1.163195013999939
+            ],
+            [
+              750,
+              5.796931266784668,
+              1.7165299654006958
+            ],
+            [
+              1000,
+              5.847024440765381,
+              1.9290311336517334
+            ],
+            [
+              1250,
+              5.764308452606201,
+              2.057905435562134
+            ],
+            [
+              1500,
+              6.75358772277832,
+              2.954737901687622
+            ]
+          ]
+        }
+      },
+      "groups": {
+        "long": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.3977892871776466,
+                "em": 0.3169525065963061,
+                "any_exact": 249,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.058575806705753936,
+                "em": 0.03660949868073879,
+                "any_exact": 29,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11950940848753423,
+                "em": 0.10290237467018469,
+                "any_exact": 80,
+                "stopped": 754
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.2149895558986468,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 21
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.022026269185360093,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.05741436963001103,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "128eef4afa6d5a7f03c2187234ecc7ae724c9c7dfc3fc86cd0f8c95397bd0d50"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 758,
+                "f1": 0.4032493412015286,
+                "em": 0.3232189973614776,
+                "any_exact": 254,
+                "stopped": 756
+              },
+              "question": {
+                "turns": 758,
+                "f1": 0.05851353388622518,
+                "em": 0.037598944591029027,
+                "any_exact": 30,
+                "stopped": 756
+              },
+              "passage": {
+                "turns": 758,
+                "f1": 0.11622398943686707,
+                "em": 0.10158311345646438,
+                "any_exact": 79,
+                "stopped": 754
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 22,
+                "f1": 0.22004006094915188,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 21
+              },
+              "question": {
+                "turns": 22,
+                "f1": 0.022026269185360093,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              },
+              "passage": {
+                "turns": 22,
+                "f1": 0.039954855459970545,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 22
+              }
+            },
+            "outputs_sha256": "7c147db42cbe39c6ab1f8a9597d7db18c7437924c8cfc449804442c9fcfa6ff0"
+          },
+          "comparison": {
+            "delta": 0.005460054023881965,
+            "interval95": [
+              -0.003173017849918973,
+              0.014159862118036314
+            ],
+            "stories": 47,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        },
+        "longer": {
+          "plain": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.37007543322478387,
+                "em": 0.32142857142857145,
+                "any_exact": 52,
+                "stopped": 152
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.035926491808844746,
+                "em": 0.01948051948051948,
+                "any_exact": 3,
+                "stopped": 152
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.12458771387342817,
+                "em": 0.1185064935064935,
+                "any_exact": 19,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.18636363636363634,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "bc882af0482e793ec8e1583047b11a9c0c1869300b84251763ba6a0c7e92e2c0"
+          },
+          "human": {
+            "all": {
+              "original": {
+                "turns": 154,
+                "f1": 0.37003420461212666,
+                "em": 0.32305194805194803,
+                "any_exact": 52,
+                "stopped": 152
+              },
+              "question": {
+                "turns": 154,
+                "f1": 0.03430311518546813,
+                "em": 0.01948051948051948,
+                "any_exact": 3,
+                "stopped": 152
+              },
+              "passage": {
+                "turns": 154,
+                "f1": 0.12750444000444,
+                "em": 0.1185064935064935,
+                "any_exact": 19,
+                "stopped": 154
+              }
+            },
+            "absent": {
+              "original": {
+                "turns": 5,
+                "f1": 0.18636363636363634,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "question": {
+                "turns": 5,
+                "f1": 0.0,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              },
+              "passage": {
+                "turns": 5,
+                "f1": 0.1,
+                "em": 0.0,
+                "any_exact": 0,
+                "stopped": 5
+              }
+            },
+            "outputs_sha256": "928232448ff8e1f419339f2429984dc4b86420c349ba4fec1cda0683ae586fd3"
+          },
+          "comparison": {
+            "delta": -4.122861265718322e-05,
+            "interval95": [
+              -0.012445887445887444,
+              0.010157699443413732
+            ],
+            "stories": 8,
+            "gained_absent": 0,
+            "lost_absent": 0
+          }
+        }
+      }
+    }
+  },
+  "groups": {
+    "long": {
+      "turns": 758,
+      "stories": 47,
+      "absent": 22,
+      "delta": 0.0039035913122949266,
+      "interval95": [
+        -0.002254071533572146,
+        0.010577102235227176
+      ],
+      "passes": false,
+      "draws": 100000
+    },
+    "longer": {
+      "turns": 154,
+      "stories": 8,
+      "absent": 5,
+      "delta": 0.002686301793444651,
+      "interval95": [
+        -0.006944444444444444,
+        0.014748070725874843
+      ],
+      "passes": false,
+      "draws": 100000
+    }
+  },
+  "passes": false
+}

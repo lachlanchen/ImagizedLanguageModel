@@ -18,14 +18,15 @@ from scripts.dialogue_ink_images import WordImages
 def load(folder, device="cpu"):
     meta = json.loads((folder / "weights.json").read_text())
     file = folder / "writer.safetensors"
-    if (
-        hashlib.sha256(file.read_bytes()).hexdigest()
-        != meta["checkpoints"]["8000"]["sha256"]
-    ):
+    expected = (
+        meta["sha256"] if "sha256" in meta else meta["checkpoints"]["8000"]["sha256"]
+    )
+    if hashlib.sha256(file.read_bytes()).hexdigest() != expected:
         raise ValueError("Wrong surface checkpoint")
     state = load_file(str(file))
     net = SurfaceDialogue(state["palette"], meta["mode"]).to(device)
     net.load_state_dict(state)
+    net.max_passage_words = meta.get("max_passage_words", 320)
     return net.eval()
 
 
@@ -40,12 +41,12 @@ def answer(net, fields):
         words = [[w.encode("ascii") for w in value.split()] for value in fields]
         unit, sep = 1, b" "
     if (
-        not 1 <= len(words[0]) <= 320
+        not 1 <= len(words[0]) <= net.max_passage_words
         or not 1 <= len(words[1]) <= 32
         or len(words[2]) > 48
     ):
         raise ValueError(
-            "Expected a passage of 1–320 words, a question of 1–32 and history of at most 48"
+            f"Expected a passage of 1–{net.max_passage_words} words, a question of 1–32 and history of at most 48"
         )
     bank = WordImages(
         {v for field in words for v in field}, net.reader, None, unit, net.encode_words
@@ -82,9 +83,15 @@ if __name__ == "__main__":
         g.add_argument("--" + name, type=Path)
         g.add_argument("--" + name + "-text")
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument(
+        "--predicted-interval",
+        action="store_true",
+        help="Weight pointer locations using the model's estimated supporting interval",
+    )
     a = p.parse_args()
     torch.set_num_threads(2)
     net = load(a.model)
+    net.use_predicted_interval = a.predicted_interval
     fields = []
     for name in ("passage", "question", "history"):
         path = getattr(a, name)
