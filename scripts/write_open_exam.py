@@ -18,7 +18,7 @@ from scripts.evaluate_visual_discourse import draw
 def load(arm, device, model_dir=MODEL):
     if arm == "parent":
         return initial("dynamic", device)
-    if arm in ("matched", "exchanged"):
+    if arm in ("matched", "exchanged", "branch"):
         net = ComposingWriter(dynamic=True).to(device)
         dest = model_dir / arm
         w = dest / "writer.safetensors"
@@ -47,7 +47,7 @@ def main():
         g.add_argument("--" + name + "-image", type=Path)
         parser.add_argument("--" + name + "-cells", type=int)
     parser.add_argument(
-        "--arm", choices=("parent", "matched", "exchanged"), default="matched"
+        "--arm", choices=("parent", "matched", "exchanged", "branch"), default="matched"
     )
     parser.add_argument(
         "--model-dir",

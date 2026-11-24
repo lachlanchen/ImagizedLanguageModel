@@ -7,16 +7,21 @@ from ilm.visual_lm.book_prefix import observations
 from scripts.evaluate_recurrent_history import historical_pages
 from scripts.replay_paired_evidence import STAGES
 from scripts.prepare_visual_sequence_corpus import Rasterizer
-from scripts.prepare_open_exam import PUB, dump, read
+from scripts.prepare_open_exam import MODEL, PUB, dump, read
 from scripts.train_paired_evidence import gpu_owner
 from scripts.write_open_exam import load
 from scripts.write_recurrent_evidence import generate
 from scripts.write_visual_discourse import Writer, encode_pages
 
 
-def main():
+def main(
+    arm="matched",
+    model_dir=MODEL,
+    report=PUB,
+    baseline_path=PUB / "matched-history.json",
+):
     rows, pages, marks = historical_pages()
-    previous = read(PUB / "matched-history.json")
+    previous = read(baseline_path) if baseline_path is not None else None
     raster = Rasterizer()
 
     def ink(s):
@@ -66,7 +71,7 @@ def main():
                 )
     with gpu_owner(), torch.inference_mode():
         writer = Writer(device="cuda")
-        net = load("matched", "cuda")
+        net = load(arm, "cuda", model_dir)
         shapes, seq = encode_pages(writer.palette, conditioned)
         x = torch.from_numpy(observations({"tiles": shapes}, "ink")).cuda()
         for k in range(0, len(records), 16):
@@ -84,9 +89,14 @@ def main():
             for r, (ids, end) in zip(records[k : k + 16], result, strict=True):
                 h = sha256(shapes[np.asarray(ids, int)].tobytes()).hexdigest()
                 r.update(output=h, stop=end, correct=end and h == r["expected"])
-                if not (r["images"] or r["labels"]) and (h, end) != (
-                    previous[r["index"]]["sha256"],
-                    previous[r["index"]]["stopped"],
+                if (
+                    previous is not None
+                    and not (r["images"] or r["labels"])
+                    and (h, end)
+                    != (
+                        previous[r["index"]]["sha256"],
+                        previous[r["index"]]["stopped"],
+                    )
                 ):
                     raise ValueError("Original historical card did not replay")
     summary = {}
@@ -111,7 +121,7 @@ def main():
                 for s in (0, 1)
             },
         )
-    dump(PUB / "stage-order.json", dict(summary=summary, rows=records))
+    dump(report / "stage-order.json", dict(summary=summary, rows=records))
 
 
 if __name__ == "__main__":

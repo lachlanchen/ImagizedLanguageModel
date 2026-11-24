@@ -56,7 +56,7 @@ def key(x):
     return sha256(("open-exam-v1 " + x).encode()).digest()
 
 
-def build(stage):
+def build(stage, excluded_held=()):
     pinned_source("license.txt", FILES["license.txt"][1])
     previous = set(read(PUB / "reserved-documents.json"))
     covered = set()
@@ -146,12 +146,23 @@ def build(stage):
                     groups[split + "-" + genre].append(rows)
     train = sum((g for k in ("train-m", "train-d") for g in groups[k]), [])
     held = []
-    seen = set()
+    seen = {normalize(r["p"]) for r in excluded_held}
+
+    def windows(page):
+        text = normalize(page)
+        return {text[i : i + 32] for i in range(len(text) - 31)} or {text}
+
+    prior_windows = {f for r in excluded_held for f in windows(r["p"])}
+    prior_docs = {r["doc"] for r in excluded_held}
     for genre in ("m", "d"):
         remaining = []
         paired = 0
         for g in groups["dev-" + genre]:
-            if normalize(g[0]["p"]) in seen:
+            if (
+                normalize(g[0]["p"]) in seen
+                or g[0]["doc"] in prior_docs
+                or (prior_windows and windows(g[0]["p"]) & prior_windows)
+            ):
                 continue
             other = next(
                 (

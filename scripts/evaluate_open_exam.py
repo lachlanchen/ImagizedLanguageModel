@@ -69,10 +69,10 @@ def summarize(items):
 
 
 @torch.inference_mode()
-def main(arms=ARMS, model_dir=MODEL, work=WORK, report=PUB):
+def main(arms=ARMS, model_dir=MODEL, work=WORK, report=PUB, *, samples=None):
     work.mkdir(parents=True, exist_ok=True)
     report.mkdir(parents=True, exist_ok=True)
-    rows, tiles, n = corpus("held")
+    rows, tiles, n = corpus("held") if samples is None else samples
     qswap, pswap = assignments(rows)
     metrics = {}
     with gpu_owner():
