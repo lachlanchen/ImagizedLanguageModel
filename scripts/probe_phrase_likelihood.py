@@ -78,16 +78,21 @@ def masses(net, ctx, h, seq, phrase):
     return torch.stack(mass, -1)[0].cpu().double().numpy()
 
 
-def main():
-    rows = read(WORK / "confirmation.json")
-    replies = unpack(WORK / "confirmation-phrase.json.gz")["original"]
+def study(
+    work=WORK,
+    public=PUB,
+    checkpoint=MODEL,
+    prediction_file="confirmation-phrase.json.gz",
+):
+    rows = read(work / "confirmation.json")
+    replies = unpack(work / prediction_file)["original"]
     palette = np.load(PARENT / "palette.npy")
     ink = Ink(palette)
     results = defaultdict(list)
     with gpu_owner(), torch.inference_mode():
         torch.set_float32_matmul_precision("highest")
         one = model("selected", "cuda")
-        multi = phrase_model(MODEL, "cuda")
+        multi = phrase_model(checkpoint, "cuda")
         for r, reply in zip(rows, replies, strict=True):
             q = pack([ink.encode(r["q"])], "cuda")
             p = pack([ink.encode(r["blocks"][reply["selected"]])], "cuda")
@@ -142,7 +147,7 @@ def main():
                 r["reference"] - r["canonical"] > 1e-6 for r in common
             ),
         )
-    dump(PUB / "likelihood.json", dict(scores=scores, examples=results))
+    dump(public / "likelihood.json", dict(scores=scores, examples=results))
     print(scores)
 
 
@@ -150,4 +155,4 @@ if __name__ == "__main__":
     from scripts.verse_gpu_runtime import configure_cuda_cli
 
     configure_cuda_cli()
-    main()
+    study()

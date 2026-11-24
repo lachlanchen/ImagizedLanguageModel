@@ -72,8 +72,12 @@ def compare(rows=None, public=PUB, phrase_checkpoint=None):
                     )
 
         def count(values, subset):
-            r = score_rows(values, subset, measure, norm)
+            scoring_rows = [
+                {**s, "task": "catalogue"} if s["task"] == "exam" else s for s in subset
+            ]
+            r = score_rows(values, scoring_rows, measure, norm)
             for v, (t, *_), s in zip(r, values, subset):
+                v["task"] = s["task"]
                 v["visible_reply"] = bool(t) and any(
                     t in b for b in [s["q"], *s["blocks"]]
                 )
