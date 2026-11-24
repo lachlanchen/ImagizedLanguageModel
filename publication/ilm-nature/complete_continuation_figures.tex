@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_verse_canvas_article.py.
+% Literal captions copied from their source inputs by build_verse_contrast_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1077,4 +1077,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_136_verse_canvas.png}
 \caption{\textbf{Visible-glyph supervision and writing from pictured verse.} \textbf{a,} Fraction of previously hidden cells matching the recorded second line across 6,362 line pairs from 156 reserved poet attributions. The masked writers fill one cell per step. The count predictor uses the first-line glyph at the corresponding position. \textbf{b,} First confirmation example in fixed order and first exact two-cell repair that failed after source exchange. The strips reproduce the input, reference and emitted bitmaps. \textbf{c,} Counts for the image writer with identity supervision, including a first line from another poem and an unseen Droid typeface. Surviving second-line ink stays in the canonical face.}
 \label{fig:verse-canvas}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_137_verse_contrast.png}
+\caption{\textbf{Source discrimination and recovery of missing glyphs in Song verse.} \textbf{a,} Number of pages on which both missing glyphs matched the recorded line under two ordered decoders. The paired and contrastive writers continue their respective visible-glyph-supervised parents on identical Tang training examples. \textbf{b,} Actual input and output pixels from the first held page and the first exact repair lost after exchanging its source. \textbf{c,} Correct reciprocal assignments among pairs whose reference glyphs are in the output bank, and exact repairs across all 3,854 pages with the original or exchanged source.}
+\label{fig:verse-contrast}
 \end{figure*}
