@@ -13,20 +13,19 @@ PUB = ROOT / "references/evidence/word_memory_v1"
 MODEL = ROOT / "models/word_memory"
 
 
-def reserve():
-    fresh, n = eligible_stories(400, 547)
-    old = [preceding(), prepared()["fresh"]]
+def write_reservation(start, end, old, work, pub):
+    fresh, n = eligible_stories(start, end)
     if {key(p) for p in fresh["pages"].values()} & {
         key(p) for data in old for p in data["pages"].values()
     }:
         raise ValueError("Repeated story")
-    WORK.mkdir(exist_ok=True, parents=True)
-    PUB.mkdir(exist_ok=True, parents=True)
+    work.mkdir(exist_ok=True, parents=True)
+    pub.mkdir(exist_ok=True, parents=True)
     grouped = Counter(
         kind(r[5], (fresh["pages"][r[1]], r[3], r[4])) for r in fresh["rows"]
     )
     packed = gzip.compress(json.dumps(fresh, separators=(",", ":")).encode(), mtime=0)
-    f = WORK / "reserved.json.gz"
+    f = work / "reserved.json.gz"
     if f.exists() and f.read_bytes() != packed:
         raise ValueError("Reservation changed")
     f.write_bytes(packed)
@@ -34,22 +33,26 @@ def reserve():
         source=SOURCES["train"],
         list_archive=ARCHIVE_SHA,
         eligible=n,
-        range=[400, 547],
+        range=[start, end],
         stories=list(fresh["pages"]),
         groups=dict(grouped),
         turns=len(fresh["rows"]),
         sha256=sha(f),
     )
-    path = PUB / "reservation.json"
+    path = pub / "reservation.json"
     if path.exists() and json.loads(path.read_text()) != manifest:
         raise ValueError("Reservation manifest changed")
     dump(path, manifest)
     print(len(fresh["pages"]), grouped)
 
 
-def reserved():
-    f = WORK / "reserved.json.gz"
-    if sha(f) != json.loads((PUB / "reservation.json").read_text())["sha256"]:
+def reserve():
+    write_reservation(400, 547, [preceding(), prepared()["fresh"]], WORK, PUB)
+
+
+def reserved(work=WORK, pub=PUB):
+    f = work / "reserved.json.gz"
+    if sha(f) != json.loads((pub / "reservation.json").read_text())["sha256"]:
         raise ValueError("Wrong reserved cohort")
     return json.loads(gzip.decompress(f.read_bytes()))
 
