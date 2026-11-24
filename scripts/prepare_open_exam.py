@@ -4,12 +4,12 @@ import json
 import re
 from collections import Counter, defaultdict
 from hashlib import sha1, sha256
-from pathlib import Path
 import numpy as np
 import requests
 
-from scripts.prepare_c3_visual_reading import REVISION
-from scripts.prepare_fact_binding import ROOT, read, dump, sha
+from scripts.prepare_c3_visual_reading import REVISION, FILES
+from scripts.prepare_fact_binding import ROOT, read, sha
+from scripts.prepare_fact_binding import dump as dump
 from scripts.prepare_multiple_ink_runs import prepared_files, normalize, fragments
 from scripts.evaluate_competing_facts import CorpusFace
 from scripts.write_visual_discourse import DEFAULT
@@ -27,25 +27,29 @@ BLOBS = {
 CUE = re.compile("下列|以下|选项|说法|哪一项|哪个选项|哪项|选择|哪句|哪句话|哪一说法")
 
 
-def source(k):
-    name = "data/c3-" + k + ".json"
+def pinned_source(name, blob):
     path = SOURCE / name
-    if not path.is_file():
-        resp = requests.get(
+    if path.is_file():
+        raw = path.read_bytes()
+    else:
+        response = requests.get(
             f"https://raw.githubusercontent.com/nlpdata/c3/{REVISION}/{name}",
             timeout=60,
         )
-        resp.raise_for_status()
-        raw = resp.content
-    else:
-        raw = path.read_bytes()
-    if sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest() != BLOBS[k]:
-        raise ValueError("Pinned exam source differs")
+        response.raise_for_status()
+        raw = response.content
+    if sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest() != blob:
+        raise ValueError(f"Pinned exam source differs: {name}")
     if not path.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_suffix(".tmp")
         tmp.write_bytes(raw)
         tmp.replace(path)
-    return json.loads(raw)
+    return raw
+
+
+def source(k):
+    return json.loads(pinned_source("data/c3-" + k + ".json", BLOBS[k]))
 
 
 def key(x):
@@ -53,12 +57,8 @@ def key(x):
 
 
 def build(stage):
-    previous = {
-        r["document"]
-        for r in read(ROOT / "artifacts/c3_visual_reading_v1/preparation.json")[
-            "selected"
-        ]
-    }
+    pinned_source("license.txt", FILES["license.txt"][1])
+    previous = set(read(PUB / "reserved-documents.json"))
     covered = set()
     trained_pages = set()
     stats = Counter()

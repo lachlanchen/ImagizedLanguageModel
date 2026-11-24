@@ -1,0 +1,66 @@
+{
+  "parent": {
+    "counts": {
+      "wrong_first": 346,
+      "exact": 10,
+      "correct_option_wrong_free": 198,
+      "wrong_later_or_cap": 18,
+      "overrun_after_complete_spelling": 7,
+      "early_stop_after_correct_prefix": 3
+    },
+    "distinct_exact_absent_multi": 0,
+    "exact_absent_multi": 0,
+    "distinct_outputs": 374,
+    "most_frequent_count": 3
+  },
+  "exchanged": {
+    "counts": {
+      "wrong_first": 342,
+      "correct_option_wrong_free": 185,
+      "early_stop_after_correct_prefix": 6,
+      "wrong_later_or_cap": 17,
+      "exact": 16,
+      "overrun_after_complete_spelling": 3
+    },
+    "distinct_exact_absent_multi": 1,
+    "exact_absent_multi": 5,
+    "distinct_outputs": 310,
+    "most_frequent_count": 17
+  },
+  "matched": {
+    "counts": {
+      "wrong_first": 329,
+      "correct_option_wrong_free": 185,
+      "overrun_after_complete_spelling": 3,
+      "exact": 22,
+      "wrong_later_or_cap": 27,
+      "early_stop_after_correct_prefix": 3
+    },
+    "distinct_exact_absent_multi": 1,
+    "exact_absent_multi": 5,
+    "distinct_outputs": 351,
+    "most_frequent_count": 13
+  },
+  "exploratory_paired_bootstrap": {
+    "samples": 20000,
+    "seed": 93211,
+    "matched_minus": {
+      "exchanged": {
+        "gains": 13,
+        "losses": 7,
+        "percentage_point_interval": [
+          -0.78125,
+          3.90625
+        ]
+      },
+      "parent": {
+        "gains": 17,
+        "losses": 5,
+        "percentage_point_interval": [
+          0.78125,
+          5.46875
+        ]
+      }
+    }
+  }
+}
