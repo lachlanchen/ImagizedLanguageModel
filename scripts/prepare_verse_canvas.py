@@ -1,5 +1,4 @@
 """Prepare fixed-author partitions of paired Tang verse as physical cell streams."""
-import argparse
 from collections import Counter
 import hashlib
 import json
@@ -34,12 +33,18 @@ def fetch():
     repo = 'chinese-poetry/chinese-poetry'
     base = f'https://raw.githubusercontent.com/{repo}/{REV}/'
     with requests.Session() as client:
-        req = client.get(f'https://api.github.com/repos/{repo}/contents/全唐诗',params={'ref':REV},timeout=30)
-        req.raise_for_status()
-        files = {r['name']:r['sha'] for r in req.json() if re.fullmatch(r'poet\.tang\.\d+\.json',r['name'])}
-        req = client.get(f'https://api.github.com/repos/{repo}/contents/LICENSE',params={'ref':REV},timeout=30)
-        req.raise_for_status()
-        files['LICENSE'] = req.json()['sha']
+        # On repeat fits use the pinned inventory already shipped with the release.
+        inventory=ROOT/'references/evidence/verse_canvas_v1/corpus.json'
+        published=json.loads(inventory.read_text()) if inventory.exists() else {}
+        if published.get('revision')==REV and 'files' in published:
+            files=published['files']
+        else:
+            req = client.get(f'https://api.github.com/repos/{repo}/contents/全唐诗',params={'ref':REV},timeout=30)
+            req.raise_for_status()
+            files = {r['name']:r['sha'] for r in req.json() if re.fullmatch(r'poet\.tang\.\d+\.json',r['name'])}
+            req = client.get(f'https://api.github.com/repos/{repo}/contents/LICENSE',params={'ref':REV},timeout=30)
+            req.raise_for_status()
+            files['LICENSE'] = req.json()['sha']
         if len(files)!=59:
             raise ValueError('Unexpected pinned source inventory')
         for name,digest in files.items():

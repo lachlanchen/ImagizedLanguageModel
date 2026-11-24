@@ -1,4 +1,5 @@
 """Fit matched image- and byte-observation line writers on the same masked pages."""
+import argparse
 import hashlib
 import json
 import math
@@ -29,9 +30,10 @@ def banks(data, mode, device):
     return torch.as_tensor(values,device=device)
 
 
-def train(meta,data,mode):
-    dest=MODEL/f'{mode}.safetensors'
-    receipt=PUB/f'{mode}-fit.json'
+def train(meta,data,mode,binding=False):
+    name = mode+'-bound' if binding else mode
+    dest=MODEL/f'{name}.safetensors'
+    receipt=PUB/f'{name}-fit.json'
     if receipt.exists():
         old=json.loads(receipt.read_text())
         if old['weights']!=sha(dest) or old['data']!=meta['corpus']:
@@ -69,9 +71,17 @@ def train(meta,data,mode):
         masked=torch.as_tensor(mask,device='cuda')
         srcface=torch.as_tensor(face,device='cuda')[:,None]
         with torch.autocast('cuda',dtype=torch.bfloat16):
-            logits=writer(bank[srcface,source],bank[0,truth.masked_fill(masked,0)],~masked)
+            first_ink = bank[srcface,source]
+            visible_ink = bank[0,truth.masked_fill(masked,0)]
+            logits=writer(first_ink,visible_ink,~masked)
             labels=(truth-1).masked_fill(~masked,-100)
             loss=F.cross_entropy(logits.flatten(0,1),labels.flatten())
+            if binding:
+                # The same output rows encode observed and predicted canonical bitmaps.
+                seen = torch.cat([writer.source(first_ink),writer.target(visible_ink)],dim=1)
+                canonical = torch.cat([source-1,(truth-1).masked_fill(masked,-100)],dim=1)
+                visible_logits=writer.ink(F.layer_norm(seen,(seen.shape[-1],))).float()
+                loss=loss+.5*F.cross_entropy(visible_logits.flatten(0,1),canonical.flatten())
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(writer.parameters(),1.)
@@ -82,7 +92,7 @@ def train(meta,data,mode):
             scalar=loss.detach().item()
             sec=monotonic()-t0
             peak=torch.cuda.max_memory_allocated()
-            print(mode,step,round(scalar,4),round(sec,2),peak,flush=True)
+            print(name,step,round(scalar,4),round(sec,2),peak,flush=True)
             if not math.isfinite(scalar) or sec>1200 or peak>8*2**30:
                 raise RuntimeError('Numeric or resource limit exceeded')
             trace.append([step,scalar,sec])
@@ -93,23 +103,31 @@ def train(meta,data,mode):
     save_file({k:v.cpu().contiguous() for k,v in writer.state_dict().items()},str(temp))
     temp.replace(dest)
     dump(receipt,dict(data=meta['corpus'],weights=sha(dest),schedule=schedule.hexdigest(),
-                      mode=mode,params=sum(p.numel() for p in writer.parameters()),seconds=seconds,
+                      mode=mode,identity_supervision=binding,params=sum(p.numel() for p in writer.parameters()),seconds=seconds,
                       energy=cost,peak_allocated=torch.cuda.max_memory_allocated(),trace=trace,
                       distinct_pairs=int(touched.sum()),hidden_cells=num_hidden,exposures=STEPS*BATCH))
 
 
-def main():
+def main(binding=False):
     meta,data=corpus()
     with gpu_owner():
         torch.set_num_threads(2)
         for mode in ('ink','byte'):
-            train(meta,data,mode)
-    receipts={k:json.loads((PUB/f'{k}-fit.json').read_text()) for k in ('ink','byte')}
-    if receipts['ink']['schedule']!=receipts['byte']['schedule']:
+            train(meta,data,mode,binding)
+    names=[m+'-bound' if binding else m for m in ('ink','byte')]
+    receipts={k:json.loads((PUB/f'{k}-fit.json').read_text()) for k in names}
+    if len({r['schedule'] for r in receipts.values()})!=1:
         raise ValueError('Different training schedules')
-    dump(MODEL/'writer.json',dict(vocab=meta['train_shapes'],palette=sha(MODEL/'palette.npy'),
+    if binding:
+        baseline=json.loads((PUB/'ink-fit.json').read_text())
+        if baseline['schedule']!=receipts[names[0]]['schedule']:
+            raise ValueError('Changed supervision schedule')
+    dest=MODEL/('bound-writer.json' if binding else 'writer.json')
+    dump(dest,dict(vocab=meta['train_shapes'],palette=sha(MODEL/'palette.npy'),
                                   weights={k:v['weights'] for k,v in receipts.items()}))
 
 
 if __name__=='__main__':
-    main()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--binding',action='store_true')
+    main(parser.parse_args().binding)

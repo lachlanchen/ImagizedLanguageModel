@@ -13,10 +13,10 @@ from scripts.train_span_choice import gpu_owner
 from scripts.measure_writer_energy import snapshot,consumed
 
 
-def cases(data):
-    rng=np.random.default_rng(17531)
-    rows=data['test']
-    idx=rng.permutation(len(rows))[:4096]
+def cases(data, subset='test', limit=4096, seed=17531):
+    rng=np.random.default_rng(seed)
+    rows=data[subset]
+    idx=rng.permutation(len(rows))[:limit]
     test=rows[idx]
     donors=np.zeros(len(idx),int)
     for length in (5,7):
