@@ -221,6 +221,7 @@ def run_group(net, sel, mode, records, ink, book, score, norm):
     scored = score_rows(outputs, records, score, norm)
     for s, (_, ids, _, _, _), q, ps in zip(scored, outputs, qs, blocks):
         run = "".join(map(chr, ids))
+        s["ink_hex"] = tiles[np.asarray(ids, int)].tobytes().hex()
         s["visible_reply"] = bool(run) and any(
             run in "".join(map(chr, z)) for z in [q, *ps]
         )
