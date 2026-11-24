@@ -1,0 +1,52 @@
+[
+  {
+    "task": "statements",
+    "index": 2,
+    "rule": "first matched-control gain",
+    "question": "Who entered past six security checkpoints?",
+    "evidence": "Attendees",
+    "reference": "Attendees entered past six security checkpoints.",
+    "outputs": {
+      "original": {
+        "text": "Attendees entered past six security checkpoints.",
+        "sha256": "4b8a7677309427d0136f15d0f59a09ecb65f22e57201e0ede0ea0ac7e42ed6c7",
+        "stop": true
+      },
+      "direct": {
+        "text": "Anzac Day entered past six security checkpoints.",
+        "sha256": "d6cbc1add0f7c363c2e8139cfb9c1f063f3343ead57d1a955b0eb9de4c9c4847",
+        "stop": true
+      },
+      "surround": {
+        "text": "Attendees entered past six security checkpoints.",
+        "sha256": "4b8a7677309427d0136f15d0f59a09ecb65f22e57201e0ede0ea0ac7e42ed6c7",
+        "stop": true
+      }
+    }
+  },
+  {
+    "task": "exam",
+    "index": 206,
+    "rule": "first matched-control loss",
+    "question": "彼得·希-活的出生地是哪里？",
+    "evidence": "伦敦的肯辛顿",
+    "reference": "伦敦的肯辛顿",
+    "outputs": {
+      "original": {
+        "text": "伦敦的肯辛顿",
+        "sha256": "179a6c3623281f733bd4cbb9e01316424eaa9aff1e89294bd1e2ecaf528d5bf4",
+        "stop": true
+      },
+      "direct": {
+        "text": "伦敦的肯辛顿",
+        "sha256": "179a6c3623281f733bd4cbb9e01316424eaa9aff1e89294bd1e2ecaf528d5bf4",
+        "stop": true
+      },
+      "surround": {
+        "text": "伦敦",
+        "sha256": "b2bc4174f1b2089a87bc51ca793e22ddff64d53c486b9ed8dba219d674f7a726",
+        "stop": true
+      }
+    }
+  }
+]
