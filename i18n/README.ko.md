@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+같은 시구 舉杯邀明月을 보고 무엇을 들어 올렸는지 물으면 **cup**, 누구를 초대했는지 물으면 **moon**을 이미지로 씁니다. 이 시구는 이전 훈련에 포함됐습니다. 별도로 남긴 971개 구절 중 247개에서 모든 동사와 목적어를 찾아 목적어의 영어 뜻을 모두 썼습니다. 훈련할 때 목적어를 서로 바꾸면 11개였습니다. 자연스러운 질문이 모두 처음 보는 표현이었던 21개 구절에서는 전부 맞힌 사례가 없었습니다. [모델 실행](../models/questioned_events/README.md) · [결과](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 동작을 영어로 풀어 물었을 때 영상 모델은 한문 구절 268쌍 중 44쌍에서 두 목적어의 위치를 찾아 영어 뜻을 썼습니다. 이전 모델은 11쌍을 맞혔습니다. 포송령 작품에서 고른 10쌍 중 두 행을 모두 맞힌 경우는 4쌍이었고, 두 답을 모두 쓴 경우는 없었습니다. 그림 125에는 복숭아를 물었을 때의 실제 출력이 있습니다. [모델 실행](../models/visual_action_meaning/README.md) · [결과](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

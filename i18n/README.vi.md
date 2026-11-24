@@ -90,6 +90,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Với cùng câu thơ 舉杯邀明月, mô hình viết **cup** khi được hỏi vật gì được nâng lên và **moon** khi được hỏi ai được mời. Câu thơ này đã xuất hiện trong dữ liệu huấn luyện trước đó. Trong 971 câu để riêng, mô hình xác định mọi động từ và tân ngữ, rồi viết đúng nghĩa tiếng Anh của từng tân ngữ ở 247 câu. Khi hoán đổi tân ngữ trong lúc huấn luyện, kết quả là 11 câu. Trong 21 câu mà mọi cách hỏi tự nhiên đều mới, mô hình không trả lời đúng trọn vẹn câu nào. [Chạy mô hình](../models/questioned_events/README.md) · [Kết quả](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 Khi câu hỏi mô tả hành động bằng tiếng Anh, mô hình tìm đúng cả hai tân ngữ và viết nghĩa tiếng Anh cho 44 trong 268 cặp câu Hán văn. Mô hình trước đạt 11 cặp. Trong 10 cặp chọn từ truyện của Bồ Tùng Linh, mô hình mới chọn đúng cả hai dòng ở bốn cặp, nhưng không viết đúng cả hai đáp án ở cặp nào. Hình 125 cho thấy câu trả lời thực tế khi hỏi về quả đào. [Chạy mô hình](../models/visual_action_meaning/README.md) · [Kết quả](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

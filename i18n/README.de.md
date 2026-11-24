@@ -90,6 +90,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Beim selben Vers 舉杯邀明月 schreibt das Modell **cup** auf die Frage, was gehoben wird, und **moon** auf die Frage, wer eingeladen wird. Der Vers war aus früherem Training bekannt. In 247 von 971 zurückgehaltenen Sätzen fand das Modell alle Verben und Objekte und schrieb die erwarteten englischen Bedeutungen. Bei vertauschten Objekten im Training gelang dies für elf Sätze. Keinen der 21 Sätze mit ausschließlich neuen natürlich formulierten Fragen löste es vollständig. [Modell ausführen](../models/questioned_events/README.md) · [Ergebnisse](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 Bei englischen Umschreibungen einer Handlung fand das Bildmodell in 44 von 268 klassischen chinesischen Satzpaaren beide Objekte und schrieb ihre englische Bedeutung. Das Vorgängermodell löste elf Paare. Bei zehn Paaren aus Erzählungen von Pu Songling wählte das neue Modell viermal beide richtigen Zeilen und schrieb bei keinem Paar beide richtigen Antworten. Abbildung 125 zeigt die tatsächliche Antwort auf eine Frage zu einem Pfirsich. [Modell ausführen](../models/visual_action_meaning/README.md) · [Ergebnisse](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

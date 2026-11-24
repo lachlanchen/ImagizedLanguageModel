@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The visual reader now answers two questions about the same line. For 舉杯邀明月 it writes **cup** when asked what is raised and **moon** when asked who is invited. This verse appeared in earlier training. On 971 held clauses the reader located every verb and object and wrote every registered meaning on 247, compared with 11 under exchanged object supervision. It completed none of 21 clauses whose natural questions were all previously unseen. [Run the reader](models/questioned_events/README.md) · [Results](references/questioned_events_result.md)
+
+[![126 · ILM](publication/ilm-nature/figures/Figure_126_questioned_events.png)](publication/ilm-nature/manuscript.pdf#page=167)
+
 When an English question described an action, the visual reader located and wrote both Chinese object glosses on 44 of 268 paired pages. The previous reader completed 11. On ten screened pairs from Pu Songling it chose both correct lines on four pairs and wrote both answers on none. Figure 125 shows the actual reply to a question about a peach. [Run the reader](models/visual_action_meaning/README.md) · [Results](references/visual_action_meaning_result.md)
 
 [![125 · ILM](publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](publication/ilm-nature/manuscript.pdf#page=166)

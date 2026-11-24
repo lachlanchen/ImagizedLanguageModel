@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+「舉杯邀明月」という同じ行を見て、何を上げるのかと聞けば **cup**、誰を招くのかと聞けば **moon** と画像で答えます。この詩句は以前の学習に含まれています。別の評価用の971句では、すべての動詞と目的語を特定し、目的語の英訳をすべて書けたのは247句でした。学習時に目的語を入れ替えると11句でした。自然な質問がすべて未知だった21句では全問正解はありませんでした。 [モデルを実行](../models/questioned_events/README.md) · [結果](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 英語で動作を説明した質問に対し、画像モデルは漢文の268組中44組で両方の目的語を特定し、英語の意味を書けました。従来モデルは11組でした。蒲松齢の作品から選んだ10組では、両方の行を正しく選べたのは4組で、両方の答えを書けた組はありませんでした。図125に桃について尋ねた際の出力を示します。 [モデルの実行](../models/visual_action_meaning/README.md) · [結果](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

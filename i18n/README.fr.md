@@ -90,6 +90,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Devant le même vers 舉杯邀明月, le modèle écrit **cup** si on lui demande ce qui est levé et **moon** si on lui demande qui est invité. Ce vers figurait dans un entraînement antérieur. Sur 971 phrases réservées, le modèle a repéré tous les verbes et leurs compléments et écrit chaque réponse attendue dans 247 cas, contre 11 après permutation des compléments à l’entraînement. Il n’a entièrement réussi aucune des 21 phrases dont toutes les questions naturelles étaient inédites. [Exécuter le modèle](../models/questioned_events/README.md) · [Résultats](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 Lorsque la question décrivait une action en anglais, le modèle visuel a repéré les deux compléments et écrit leur sens en anglais pour 44 des 268 paires de phrases en chinois classique. Le modèle précédent en réussissait 11. Sur dix paires tirées de Pu Songling, le nouveau modèle a choisi les deux bonnes lignes dans quatre cas et n’a écrit les deux bonnes réponses dans aucun cas. La figure 125 montre sa réponse à une question sur une pêche. [Exécuter le modèle](../models/visual_action_meaning/README.md) · [Résultats](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

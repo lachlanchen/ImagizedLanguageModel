@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_action_meaning_article.py.
+% Literal captions copied from their source inputs by build_questioned_events_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1005,4 +1005,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_125_visual_action_meaning.png}
 \caption{\textbf{Reading an action described in other words.} \textbf{a,} Counts of complete paired responses for two alternate English wordings and the multiword subset of the dictionary benchmark. Denominators count eligible two-line pages. The exchanged control permutes definition supervision while preserving the literal training pairs. \textbf{b,} Original input and emitted word images from two screened Pu Songling passages. For the second request the model selected the right line and the wrong object cell. \textbf{c,} Complete written answers include both source positions, registered object meanings and stopped outputs across all eight requests. Only the Pu evaluation excluded inherited training overlap for both literary lines and their target windows.}
 \label{fig:visual-action-meaning}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_126_questioned_events.png}
+\caption{\textbf{Two actions within one Chinese line.} \textbf{a,} Counts of held multi-event clauses for which every named action receives both correct source positions, followed by the stricter criterion requiring the complete stopped English word for each object. The next-cell control uses the learned verb address. \textbf{b,} The unchanged image writer is queried at two different positions selected from the same previously seen line. Both responses are original model output images. \textbf{c,} Complete bound-and-written pages for the literal reader and two readers given a second English question view during training. The natural-question subset with all prompts unseen excludes full question strings present in the inherited training material. The literary sample is separately registered.}
+\label{fig:questioned-events}
 \end{figure*}

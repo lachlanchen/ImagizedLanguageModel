@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+面對同一句「舉杯邀明月」，影像模型在被問到舉起什麼時寫出 **cup**，被問到邀請誰時寫出 **moon**。這句詩在早期訓練中出現過。在另外保留的 971 句中，有 247 句的每個動詞和受詞都定位正確，並寫對了每個受詞的英語釋義。交換訓練中的受詞後僅有 11 句達標。若一句話的所有自然問法均未出現過，則 21 句中沒有一句全部答對。 [執行模型](../models/questioned_events/README.md) · [實驗結果](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 以英語描述動作時，圖像模型能在 268 組文言短句中的 44 組找出兩個受詞，並寫出正確的英語釋義。舊模型答對了 11 組。在蒲松齡作品中另選的 10 組裡，新模型有 4 組能選對兩句，但沒有一組寫對兩個答案。圖 125 展示了問到桃子時的實際輸出。 [執行模型](../models/visual_action_meaning/README.md) · [實驗結果](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)

@@ -90,6 +90,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+Ante el mismo verso 舉杯邀明月, el modelo escribe **cup** si se pregunta qué se alza y **moon** si se pregunta a quién se invita. El verso figuraba en datos de entrenamiento anteriores. En una prueba aparte, localizó todos los verbos y sus objetos y escribió cada respuesta esperada en 247 de 971 cláusulas, frente a 11 al intercambiar los objetos durante el entrenamiento. No completó ninguna de las 21 cláusulas cuyas preguntas en lenguaje natural eran todas inéditas. [Ejecutar el modelo](../models/questioned_events/README.md) · [Resultados](../references/questioned_events_result.md)
+
+[![126 · ILM](../publication/ilm-nature/figures/Figure_126_questioned_events.png)](../publication/ilm-nature/manuscript.pdf#page=167)
+
 Cuando la pregunta describía una acción en inglés, el modelo visual localizó ambos objetos y escribió sus significados en inglés en 44 de 268 pares de frases en chino clásico. El modelo anterior acertó en 11 pares. En diez pares de los relatos de Pu Songling, el nuevo modelo eligió las dos líneas correctas en cuatro casos y no escribió ambas respuestas correctas en ninguno. La figura 125 muestra su respuesta a una pregunta sobre un melocotón. [Ejecutar el modelo](../models/visual_action_meaning/README.md) · [Resultados](../references/visual_action_meaning_result.md)
 
 [![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)
