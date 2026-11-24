@@ -1,0 +1,32 @@
+# Distinguishing two requests made about the same page
+
+**Primary result.** A 2,462,192-parameter writer learned a limited new distinction between historical forms. The registered primary test of general Chinese question answering failed. On 80 new C³ pages with two different questions, the additional loss and its control solved the same single page. The C³ official test remained sealed. We retain the previous deployment model. [Preregistered comparison](branch_ink_protocol.md) · [Weights and PNG inference](../models/branch_ink/README.md)
+
+| Free writing from aligned input images | Complete-answer loss | Added distinguishing-glyph loss |
+|---|---:|---:|
+| New Chinese questions | 22/288 | 23/288 |
+| Both questions on a new Chinese page | 1/80 | 1/80 |
+| Earlier Chinese questions | 22/384 | 18/384 |
+| Both questions on an earlier Chinese page | 0/128 | 1/128 |
+| Bilingual human questions | 83/512 | 83/512 |
+| Both questions on a bilingual page | 9/256 | 12/256 |
+| Correct before and after a numerical edit | 13/24 | 14/24 |
+| Exact next eight glyphs on book prefixes | 0/152 | 0/152 |
+
+The additional loss gained four new examination answers and lost three. The 95% stratified document-bootstrap interval for the absolute difference spans −1.39 to 2.08 percentage points. Replacing the pictured question reduced the new writer's score from 23 to six. Both writers produced eight exact multi-glyph answers absent from the fresh passage, all with one distinct wording per writer. C³ provides one correct option and free writing can admit other wordings. On 80 sampled training pages the correct first glyph improved from 43 to 56 of 160 questions, while complete answers fell from 27 to 19. The stricter test for book continuation uses one observed sequence and does not judge possible alternatives. [New exam](evidence/branch_ink_v1/fresh.json) · [Paired differences](evidence/branch_ink_v1/paired-audit.json) · [Transfer](evidence/branch_ink_v1/transfer.json) · [Training sample](evidence/branch_ink_v1/training-sample.json)
+
+**What the image writer actually did.** On the authored cabinet page it distinguished the mirror from the rubbing and returned the correct cabinet after both locations were exchanged. It confused the destinations of two travellers. Across eight authored examples with two questions and two versions it solved all four requests in one example versus none for the control. Across the 32 individual requests the counts were 11 and 12 respectively. On genuine Chinese dictionary cards the model recovered both requested specimens for 14 of 64 headwords versus zero for the control. It recovered one question across all four label and specimen layouts for 51/128 questions, but recovered both questions in all layouts for 0/64 cards. The English requests yielded zero exact specimens. For the independently specified 言 example it returned the precise bitmap J04919 for the oracle form and wrote the modern characters 甲骨 in response to the bronze request. Specimens were present in the input. [Original answer images](../models/branch_ink/examples/history) · [All 64 cases and crossed layouts](evidence/branch_ink_v1/stage-order.json) · [Paired recount](evidence/branch_ink_v1/historical-pairs.json)
+
+**Mechanism and cost.** The new loss measures the conditional probability of the requested next glyph at the first differing position between two stopped answers on a pictured page. 5,350 of 11,865 training questions qualify, and 5,241 differ at position zero. Both fits share the original initialization, architecture, optimizer, four-pass draw order and 47,460 presentations. The new fit took 144.30 seconds and 15.76 kJ of GPU energy versus 81.23 seconds and 9.00 kJ for the control. These are incremental fit costs. Training the inherited 2,117,313-parameter prior and original reader, data preparation, and host power are outside these measurements. The exact finite path-mass inequality implies a sufficient condition for a correct local greedy decision. It makes no guarantee that optimization meets the condition on new questions or later prefixes. Full-precision prefix calculations agree with sequential observation to within 0.00072 log units across eight real checks. [Lean proof](../formal/span_list/BranchInkMass.lean) · [Floating-point check](evidence/branch_ink_v1/preflight.json) · [Fit receipt](../models/branch_ink/branch/fit.json)
+
+**A direct evidence intervention.** We tested the first English question in each official CoQA development story. Of 500 stories, 398 had an exact annotated highlight within the first 600 characters and an equally long disjoint span. We used no dialogue history and supplied no candidate answers. The table reports stopped replies matching any normalized human reference. Evaluation uses the official annotations and reports official leave-one-reference-out F1 separately. The evidence-only and disjoint-span conditions match length. This intervention is a secondary analysis of an English development subset. [Counts, exclusions and official scores](evidence/branch_ink_v1/rationale.json) · [Corpus and annotation method](https://stanfordnlp.github.io/coqa/)
+
+| Input given with the question | Before Chinese training | Complete-answer loss | Added glyph loss |
+|---|---:|---:|---:|
+| Cropped full page | 108 | 33 | 21 |
+| Annotated evidence alone | 170 | 110 | 92 |
+| Disjoint text of equal length | 5 | 8 | 5 |
+| Full page with the evidence blanked | 24 | 13 | 6 |
+| Evidence alone, all references absent from it (47 questions) | 1 | 0 | 1 |
+
+English performance deteriorated after Chinese fitting. Supplying the human-selected evidence helped markedly but left almost all questions that required new phrasing unsolved. The training-source audit found 105,260 CoQA turns with valid slice offsets and lengths within the specified limits. Of these, 12,193 have a normalized multiword answer absent from the whole passage, across 11,659 distinct answer strings. The count precedes document deduplication, optical checks and conversation-history preparation. Train the conversion of evidence into a freely written answer alongside full-page bilingual reading. Measure retention against the stronger pre-exam English reader. Require improvement on independent passages, independent questions on the same page, changed facts, and source-absent answers. [Training supply and exclusions](evidence/branch_ink_v1/training-evidence-supply.json)

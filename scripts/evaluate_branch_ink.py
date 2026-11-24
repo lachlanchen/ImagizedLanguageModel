@@ -1,6 +1,8 @@
 """Compare complete optical answers and the prefixes actually reached on two held cohorts."""
 
+import argparse
 from collections import defaultdict
+from pathlib import Path
 from scripts.prepare_branch_ink import EXAM, MODEL, WORK, PUB
 from scripts.prepare_open_exam import dump, read, sha
 from scripts.train_open_exam import corpus
@@ -32,20 +34,32 @@ def details(rows, records):
     return dict(both_reached=both, pages=len(pairs), different_exact_absent=len(absent))
 
 
-if __name__ == "__main__":
-    from scripts.verse_gpu_runtime import configure_cuda_cli
-
-    configure_cuda_cli()
+def run(model_dir, work, report):
     old, tiles, n = corpus("held")
     assert sha(WORK / "held.json") == read(PUB / "corpus.json")["files"]["held.json"]
     for cohort, rows in (("fresh", read(WORK / "held.json")), ("previous", old)):
         out = {}
-        for arm, root in (("matched", EXAM), ("branch", MODEL)):
-            d = WORK / cohort / arm
+        for arm, root in (("matched", EXAM), ("branch", model_dir)):
+            d = work / cohort / arm
             evaluate([arm], root, d, d, samples=(rows, tiles, n))
             records = unpack(d / (arm + "-responses.json.gz"))
             scores = read(d / "results.json")[arm]
             scores.update(details(rows, records))
             out[arm] = scores
-        dump(PUB / (cohort + ".json"), out)
-    stages("branch", MODEL, PUB, None)
+        dump(report / (cohort + ".json"), out)
+    stages("branch", model_dir, report, None)
+
+
+if __name__ == "__main__":
+    from scripts.verse_gpu_runtime import configure_cuda_cli
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--model-dir", type=Path, default=MODEL)
+    parser.add_argument(
+        "--output", type=Path, help="Separate directory for all replication outputs"
+    )
+    args = parser.parse_args()
+    configure_cuda_cli()
+    report = args.output or PUB
+    report.mkdir(parents=True, exist_ok=True)
+    run(args.model_dir, args.output or WORK, report)

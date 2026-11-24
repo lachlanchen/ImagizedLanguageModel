@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     configure_cuda_cli()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--arm", choices=ARMS, action="append")
+    parser.add_argument("--arm", choices=(*ARMS, "branch"), action="append")
     parser.add_argument("--model-dir", type=Path, default=MODEL)
     parser.add_argument(
         "--output", type=Path, help="Separate directory for this replication"
