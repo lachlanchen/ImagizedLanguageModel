@@ -1,0 +1,53 @@
+{
+  "examples": {
+    "first": {
+      "index": 0,
+      "poet": "元稹",
+      "source": "夢上高高原",
+      "reference": "原上有深井",
+      "blank": "山中落落水",
+      "left": "山中不不水",
+      "template": "原上□□井",
+      "restored": "原上秋山井",
+      "donor_result": "原上無雲井"
+    },
+    "miss": {
+      "index": 0,
+      "poet": "元稹",
+      "source": "夢上高高原",
+      "reference": "原上有深井",
+      "blank": "山中落落水",
+      "left": "山中不不水",
+      "template": "原上□□井",
+      "restored": "原上秋山井",
+      "donor_result": "原上無雲井"
+    },
+    "restore": {
+      "index": 41,
+      "poet": "歐陽詹",
+      "source": "獨恨侍遊違長者",
+      "reference": "不知高意是誰陪",
+      "blank": "不知何得不何人",
+      "left": "不知何事不何人",
+      "template": "□□高意是誰陪",
+      "restored": "不知高意是誰陪",
+      "donor_result": "山上高意是誰陪"
+    }
+  },
+  "counts": {
+    "blank": {
+      "both_correct": 633,
+      "confidence_only": 128,
+      "left_only": 111,
+      "out_of_support": 18
+    },
+    "gap": {
+      "both_correct": 279,
+      "confidence_only": 23,
+      "left_only": 25,
+      "out_of_support": 6
+    }
+  },
+  "cpu_roundtrips": 9,
+  "source_sensitive_gap_lines": 7
+}
