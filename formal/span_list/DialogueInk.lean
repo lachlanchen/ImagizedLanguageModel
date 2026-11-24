@@ -33,7 +33,7 @@ theorem reachable {G : Type} (visible : List (List G)) (palette : List G)
   · intro a ha
     obtain ⟨w,hw,rfl⟩ := List.mem_map.mp ha
     by_cases h : admissible visible palette (.point w)
-    · simpa [choose,h] using h
+    · simp [choose,h]
     · simpa [choose,h] using (available w hw).resolve_left h
 
 /-- A marginal pointer loss sums the likelihood of every source occurrence
