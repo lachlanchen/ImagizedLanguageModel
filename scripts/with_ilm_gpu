@@ -9,6 +9,10 @@ export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
 runner="${ILM_NVML_RUNNER:-}"
 if [ -z "$runner" ]; then
     runner=$(command -v with-current-nvidia || true)
+    # Batch jobs can start without the login shell's user-bin directory.
+    if [ -z "$runner" ] && [ -n "${HOME:-}" ] && [ -x "$HOME/.local/bin/with-current-nvidia" ]; then
+        runner="$HOME/.local/bin/with-current-nvidia"
+    fi
 fi
 if [ -n "$runner" ]; then
     export ILM_NVML_RUNNER="$runner"

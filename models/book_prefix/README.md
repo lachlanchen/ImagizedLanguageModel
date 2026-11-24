@@ -15,6 +15,16 @@ scripts/with_ilm_gpu python -m scripts.write_book_prefix --device cuda \
 
 Use `--cells N` to exclude padding at the end of a rectangular grid. Typed input uses the Noto CJK font expected by the project renderer. For a scan or a handwritten sample, align cells and binarize to this interface. Evaluation covers the canonical printed font.
 
+## Workstation GPU command
+
+The project runtime on this workstation is `/home/lachlan/miniconda3/bin/python`. Use its full path when running from the older `incoder` shell. The launcher finds the user-installed driver compatibility libraries in batch shells as well as login shells. The November 24 training run used the loaded 595.84 kernel driver with matching CUDA and NVML libraries. An unwrapped system NVML client installed for 595.99 reported a version mismatch. The older environment's PyTorch can execute CUDA operations, but its torchvision is incompatible with PyTorch and it lacks safetensors.
+
+```bash
+scripts/with_ilm_gpu /home/lachlan/miniconda3/bin/python -m scripts.write_book_prefix \
+  --device cuda --input references/evidence/book_prefix_v1/KR1h0004-prefix.png \
+  --steps 16 --output continuation.png
+```
+
 ## Reproduction
 
 Install the three CoNLL-U files and the accompanying LICENSE.txt from the treebank's r2.16 release in `data/raw/ud_classical_kyoto_r216/`. The release reassembles unpunctuated text by volume, removes title records and reserves entire works. Rendered images, count training features and training caches are constructed locally. The upstream distribution credits the Institute for Research in Humanities, Kyoto University and its contributors. Its bundled LICENSE.txt specifies CC BY-SA 4.0. The derived corpus examples and suffix-count data retain that attribution and licence. [Versioned data](https://github.com/UniversalDependencies/UD_Classical_Chinese-Kyoto/tree/r2.16) · [Licence](https://creativecommons.org/licenses/by-sa/4.0/)
