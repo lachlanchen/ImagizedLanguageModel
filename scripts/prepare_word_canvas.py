@@ -23,7 +23,7 @@ PUB = ROOT / "references/evidence/word_canvas_v1"
 MODEL = ROOT / "models/word_canvas"
 
 
-def prepare():
+def eligible_stories(start, end):
     train = ROOT / "data/raw/coqa/train.parquet"
     if sha(train) != SOURCES["train"] or sha(ARCHIVE) != ARCHIVE_SHA:
         raise ValueError("Different source archive")
@@ -35,7 +35,12 @@ def prepare():
         for partition in ("train", "valid"):
             data = json.loads(z.read("MultiSpanQA_data/" + partition + ".json"))["data"]
             excluded.update(key(" ".join(r["context"])) for r in data)
-    fresh, n = reserve_dialogue(train, excluded, 200, 400)
+    return reserve_dialogue(train, excluded, start, end)
+
+
+def prepare():
+    train = ROOT / "data/raw/coqa/train.parquet"
+    fresh, n = eligible_stories(200, 400)
     earlier = prepared()["fresh"]
     if {key(s) for s in fresh["pages"].values()} & {
         key(s) for s in earlier["pages"].values()
