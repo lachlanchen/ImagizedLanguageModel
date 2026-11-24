@@ -74,6 +74,32 @@ def field_prefixes():
         return {k: f[str(i)] for i, k in enumerate(("名称", *FIELDS))}
 
 
+def read_fields(page, domains, prefixes):
+    domain = domains.get(page[1].tobytes())
+    if domain is None or not page[0].any():
+        raise ValueError("Unrecognized domain or blank question")
+    values = {}
+    for row in page[2:]:
+        key = next(
+            (
+                k
+                for k, p in prefixes.items()
+                if np.array_equal(row[: len(p)], p)
+            ),
+            None,
+        )
+        if key is None or key in values:
+            raise ValueError("Unrecognized or repeated field")
+        tail = row[len(prefixes[key]) :]
+        indices = np.flatnonzero(tail.any(1))
+        if not len(indices):
+            raise ValueError("Empty field " + key)
+        values[key] = tail[: indices[-1] + 1].copy()
+    if "名称" not in values or len(values) < 2:
+        raise ValueError("Provide a name and at least one field")
+    return domain, values
+
+
 class ChineseReply:
     def __init__(self, device, *, focus=False):
         self.device = device
@@ -98,28 +124,7 @@ class ChineseReply:
 
     @torch.inference_mode()
     def reply(self, page):
-        domain = self.domains.get(page[1].tobytes())
-        if domain is None or not page[0].any():
-            raise ValueError("Unrecognized domain or blank question")
-        values = {}
-        for row in page[2:]:
-            key = next(
-                (
-                    k
-                    for k, p in self.prefixes.items()
-                    if np.array_equal(row[: len(p)], p)
-                ),
-                None,
-            )
-            if key is None or key in values:
-                raise ValueError("Unrecognized or repeated field")
-            tail = row[len(self.prefixes[key]) :]
-            indices = np.flatnonzero(tail.any(1))
-            if not len(indices):
-                raise ValueError("Empty field " + key)
-            values[key] = tail[: indices[-1] + 1].copy()
-        if "名称" not in values or len(values) < 2:
-            raise ValueError("Provide a name and at least one field")
+        domain, values = read_fields(page, self.domains, self.prefixes)
         query = torch.as_tensor(
             observations({"tiles": page[0]}, "ink"), device=self.device
         )[None]
