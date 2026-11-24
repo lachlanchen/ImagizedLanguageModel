@@ -1,0 +1,105 @@
+{
+  "mode": "page",
+  "sha256": "3abf9bc9f4c779a3141c0d9868b272fbaf181ed9b2e61c82eb09da5ce3de853b",
+  "sources": {
+    "scripts/train_visual_story_writer.py": "36eca60165a9d991895207d67cd2b1d6ad339f6ce1f4574ad52dce4f7974ecba",
+    "scripts/prepare_visual_story_writer.py": "6ef6e9e60d7f43b05323522d944527a758c51207da0ddb1bfb10c6868aed2346",
+    "ilm/visual_lm/visual_story_writer.py": "20bad10e1487a13b43b1bfe7aed027fbea717bdbd9c4a2978c89e901476406d2",
+    "ilm/visual_lm/region_writer.py": "e7d009a0c23e762214693a09451149d2b9d60f6057b7066b037c2ca2e904934a",
+    "references/visual_story_writer_protocol.md": "de5a5be4262caebd4f676fc3260962bb67a36218b0015870e14e7c1fc7276eeb",
+    "references/evidence/visual_story_writer_v1/reservation.json": "b1de7fa6c7719f1b83f442465b6827facf62d4aeb104526e193d282d8fc0fe86",
+    "references/evidence/story_answer_fit_v1/reservation.json": "97b972695f2ab48943116bc1b2e8c30c4567198da3edc447d6c05180771ddd83",
+    "data/chinese_origin_library_v1/manifest.json": "1f450f9d7e4ad713a63c079e7e1b3b9c8f14c3e87c8865bc31ca341f6db47d3f",
+    "models/directional_reading/signed/weights.safetensors": "26e73f406a398884303140d4049d9e2c45cbb71232432917a42284c5cb1f1aca",
+    "models/fact_span_ranking/whole/weights.safetensors": "2476859c528d79c2e380624f10ce664a932de9d07dda2a11ddb52c49f058a9c5",
+    "models/fact_channel/human/weights.safetensors": "10e1ef816c403e8df3a2e42468c491aa23124dee1e2d925a1fbd86870224b648"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "loss": 0.6238611351310285,
+      "examples": {
+        "stories": 8455,
+        "exam": 2048,
+        "statements": 2048,
+        "forms": 5230
+      },
+      "unreachable": {
+        "stories": 0,
+        "exam": 0,
+        "statements": 0,
+        "forms": 0
+      },
+      "updates": 960,
+      "batch_order": "57f7aefed9e486c6325f915f7e3960b046bde4dcc584254b279cfd29ca4d0838",
+      "seconds": 17.789258040487766,
+      "joules": 1971.232,
+      "peak": 403706880
+    },
+    {
+      "epoch": 2,
+      "loss": 0.4708715948327696,
+      "examples": {
+        "statements": 2048,
+        "stories": 8455,
+        "exam": 2048,
+        "forms": 5230
+      },
+      "unreachable": {
+        "statements": 0,
+        "stories": 0,
+        "exam": 0,
+        "forms": 0
+      },
+      "updates": 960,
+      "batch_order": "4eb95ba68aa05415c3955542c09207c02f9180ba8a675a90d06002b53837ce83",
+      "seconds": 16.32514235842973,
+      "joules": 1828.084,
+      "peak": 400701952
+    },
+    {
+      "epoch": 3,
+      "loss": 0.411195033978575,
+      "examples": {
+        "forms": 5230,
+        "stories": 8455,
+        "statements": 2048,
+        "exam": 2048
+      },
+      "unreachable": {
+        "forms": 0,
+        "stories": 0,
+        "statements": 0,
+        "exam": 0
+      },
+      "updates": 960,
+      "batch_order": "2cb074bb34c30806d2d1b6353d863410a665a7b4239c7ca22a123203f6b0ab26",
+      "seconds": 15.811231878586113,
+      "joules": 1842.919,
+      "peak": 402698752
+    },
+    {
+      "epoch": 4,
+      "loss": 0.37353612982304607,
+      "examples": {
+        "forms": 5230,
+        "stories": 8455,
+        "statements": 2048,
+        "exam": 2048
+      },
+      "unreachable": {
+        "forms": 0,
+        "stories": 0,
+        "statements": 0,
+        "exam": 0
+      },
+      "updates": 960,
+      "batch_order": "eaac5cfb8d3a28d5c9dd9a299695eaf49d64ea5df266576f9feecef41f4d2a17",
+      "seconds": 16.22514400817454,
+      "joules": 1878.963,
+      "peak": 394286080
+    }
+  ],
+  "writer_parameters": 968165,
+  "complete_parameters": 1179882
+}
