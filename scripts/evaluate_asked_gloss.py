@@ -259,6 +259,8 @@ def run():
                 )
             },
         )
+    examples = PUBLIC / "simple_examples"
+    examples.mkdir(exist_ok=True)
     for success, name in [(True, "correct"), (False, "miss")]:
         for r in records:
             if r["book"] != "Daodejing":
@@ -280,16 +282,16 @@ def run():
                 replies=r["replies"][n],
                 gloss=r["gloss"],
             )
-            dump(PUBLIC / (name + ".json"), example)
+            dump(examples / (name + ".json"), example)
             write_strip(
                 np.frombuffer(face(r["page"]), np.uint8).reshape(-1, 128),
-                PUBLIC / (name + "_page.png"),
+                examples / (name + "_page.png"),
             )
             for k, i in enumerate(r["positions"][n]):
-                write_strip(streams[r["indices"][i]], PUBLIC / f"{name}_answer{k}.png")
+                write_strip(streams[r["indices"][i]], examples / f"{name}_answer{k}.png")
                 write_strip(
                     np.frombuffer(face(QUESTIONS[4][k]), np.uint8).reshape(-1, 128),
-                    PUBLIC / f"{name}_question{k}.png",
+                    examples / f"{name}_question{k}.png",
                 )
             break
 

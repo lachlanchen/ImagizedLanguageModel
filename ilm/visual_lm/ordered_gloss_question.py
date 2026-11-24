@@ -21,4 +21,4 @@ class OrderedGlossFocus(GlossFocus):
         sequence, _ = self.q_sequence(packed)
         sequence, _ = nn.utils.rnn.pad_packed_sequence(sequence, batch_first=True)
         mask = torch.arange(sequence.shape[1], device=x.device) < lengths[:, None]
-        return self.query(sequence.masked_fill(~mask[...,None], -torch.inf).amax(1))
+        return self.query(sequence.masked_fill(~mask[..., None], -torch.inf).amax(1))

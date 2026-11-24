@@ -11,10 +11,12 @@ EN = ("main verb", "direct object")
 def make(frame, roles, answer_first):
     # Each pair is ordered as (predicate question, object question).
     left, right = roles if answer_first else roles[::-1]
-    values = (frame.format(left,right),frame.format(right,left))
+    values = (frame.format(left, right), frame.format(right, left))
+
     def triples(s):
-        padded = (None,*s,None)
-        return Counter(zip(padded,padded[1:],padded[2:]))
+        padded = (None, *s, None)
+        return Counter(zip(padded, padded[1:], padded[2:]))
+
     assert triples(values[0]) == triples(values[1]) and values[0] != values[1]
     return values
 
