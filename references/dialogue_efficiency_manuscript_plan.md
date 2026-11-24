@@ -1,0 +1,3 @@
+# Visual and subword dialogue comparison
+
+Extend the measured dialogue paper with the same-exposure subword Transformer and cold controlled pair. Figure 129 shows the four measured learning-curve points for both representations, complete-answer results and measured fit energy. The manuscript should distinguish evidence-conditioned accuracy, absent phrasing, architecture, inheritance and actual cost at a common quality. Report the Lean assumptions and verify the resulting physical-answer certificate against both released writers. Update the abstract, build all three editions, inspect the figures, and retain only current and recent reading PDFs in the local delivery.

@@ -5,13 +5,17 @@
 
 # Imagized Language Model (ILM)
 
+**Can a small model learn to read from ink?** A 547,125-parameter visual writer trained from scratch answered 1,574 of 5,588 held English dialogue turns exactly. A matched writer reading ordinary bytes answered 1,558. Both first cleared 20% accuracy on both held splits after 2,400 updates, consuming 5.20 and 4.86 kJ respectively. [Code and weights](models/dialogue_surfaces/README.md) · [Learning curves and limits](references/dialogue_efficiency_result.md) · [Lean proofs](formal/span_list/VisualTokenRisk.lean)
+
+[![Measured learning curves for pictured letters and byte tokens](publication/ilm-nature/figures/Figure_129_dialogue_efficiency.png)](publication/ilm-nature/manuscript.pdf#page=171)
+
 A visual writer can answer questions about a pictured passage and follow a changed date. It matched one of four human answers on 2,221 of 5,588 held English conversation turns. On 83 turns where all four human answers required new multiword phrasing, it matched none. [Run the writer](models/dialogue_ink/README.md) · [Results](references/dialogue_ink_result.md)
 
 [![Two actual written replies to questions about a light bulb](publication/ilm-nature/figures/Figure_128_dialogue_ink.png)](publication/ilm-nature/manuscript.pdf#page=170)
 
 On one pictured paragraph about Portugal, the reader returns **Lisbon** when asked for a city and **1822** when asked for a year. It learned to select answer pixels on one RTX 4090 D. Across 20 reserved English articles it returned 872 exact answers to 1,957 human questions. It completed both questions on 108 of 484 passages, versus zero after exchanging the questions. The source supplies the answer wording. [Run the released reader](models/optical_passage_qa/README.md) · [Results and limits](references/optical_passage_qa_result.md)
 
-[![Question-dependent answers from pictured passages](publication/ilm-nature/figures/Figure_127_optical_passage_qa.png)](publication/ilm-nature/manuscript.pdf#page=168)
+[![Question-dependent answers from pictured passages](publication/ilm-nature/figures/Figure_127_optical_passage_qa.png)](publication/ilm-nature/manuscript.pdf#page=169)
 
 The visual reader now answers two questions about the same line. For 舉杯邀明月 it writes **cup** when asked what is raised and **moon** when asked who is invited. This verse appeared in earlier training. On 971 held clauses the reader located every verb and object and wrote every registered meaning on 247, compared with 11 under exchanged object supervision. It completed none of 21 clauses whose natural questions were all previously unseen. [Run the reader](models/questioned_events/README.md) · [Results](references/questioned_events_result.md)
 

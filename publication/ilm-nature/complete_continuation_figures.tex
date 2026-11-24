@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_dialogue_ink_article.py.
+% Literal captions copied from their source inputs by build_dialogue_efficiency_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1026,4 +1026,13 @@ The selected names are correct under both English requests. The first generated 
 \textbf{b,} Direct-writer outputs on consecutive turns from the same reserved passage. Both are actual answer pixels independently reproduced from image inputs. The first answer is correct. The second borrows words associated with the preceding question and misses the requested explanation.
 \textbf{c,} Counts of complete normalized first-reference matches among multiword answers absent as a case-insensitive substring of each input and unseen as complete normalized training answers. Case, punctuation and article normalization can yield a wording match despite a difference in ink.}
 \label{fig:dialogue-ink}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_129_dialogue_efficiency.png}
+\caption{\textbf{Learning visual and token representations of a printed conversation.}
+\textbf{a,} Development accuracy at four fixed training steps in two 547,125-parameter writers with the same optimizer batches, pointer and spelling mechanism. The visual arm receives measured ink and the byte arm receives one-hot character IDs. Checkpoints are categorical and equally spaced in the panel.
+\textbf{b,} First-reference exact matches among 5,588 eligible turns and official four-reference word F1. Each training curve and energy value represents one run. Fit energy excludes feature preparation, evaluation, host energy and any earlier training.
+\textbf{c,} Independent replay with supplied reference prefixes predicts exactly which complete reference images the two inherited writers generate autonomously.}
+\label{fig:dialogue-efficiency}
 \end{figure*}
