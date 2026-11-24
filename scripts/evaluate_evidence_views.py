@@ -54,7 +54,7 @@ def requires_new_phrase(row, norm):
 
 
 def groups(judge, dev):
-    coqa, composition = [], []
+    coqa, composition, composition_evidence = [], [], []
     for d in read(dev)["data"]:
         p = d["story"]
         if not 0 < len(p) <= 4096:
@@ -77,9 +77,15 @@ def groups(judge, dev):
                 )
             previous = raw + " " + a["input_text"]
         coqa.extend(pair_rows(rows, judge.normalize_answer))
-        composition.extend(
-            r for r in rows if requires_new_phrase(r, judge.normalize_answer)
-        )
+        evidence = {a["turn_id"]: a for a in d["answers"]}
+        for r in rows:
+            if not requires_new_phrase(r, judge.normalize_answer):
+                continue
+            composition.append(r)
+            a = evidence[r["turn"]]
+            lo, hi = a["span_start"], a["span_end"]
+            if 0 <= lo < hi <= len(p) and p[lo:hi] == a["span_text"]:
+                composition_evidence.append(dict(r, page=p[lo:hi], highlight=p[lo:hi]))
     if sha(DROP) != SOURCES[DROP]:
         raise ValueError("Changed independent evaluation source")
     drop = defaultdict(list)
@@ -115,10 +121,16 @@ def groups(judge, dev):
         changed = coqa[i ^ 1]
         assert r["doc"] == changed["doc"] and r["page"] == changed["page"]
         exchanged.append(dict(r, question=changed["question"]))
+    wrong_pages = [
+        dict(r, page=coqa[(i + 2) % len(coqa)]["page"]) for i, r in enumerate(coqa)
+    ]
+    assert all(a["page"] != b["page"] for a, b in zip(wrong_pages, coqa))
     result = {
         "coqa": coqa,
+        "exchanged_page": wrong_pages,
         "drop": cases,
         "composition": composition,
+        "composition_evidence": composition_evidence,
         "exchanged": exchanged,
     }
     for view in ("full", "evidence", "disjoint", "masked"):
@@ -141,6 +153,7 @@ def summaries(rows):
     result = {}
     for name, g in (
         ("all", rows),
+        ("lexical", [r for r in rows if r["lexical"]]),
         ("absent_multiword", [r for r in rows if r["absent_multiword"]]),
         ("absent_evidence", [r for r in rows if r["absent_evidence"]]),
     ):
@@ -221,6 +234,7 @@ def run(arms, model_dir, report, work):
                             stop=stop,
                             cells=len(ids),
                             absent_multiword=missing,
+                            lexical=not bool(set(refs) & {"yes", "no", "unknown"}),
                             absent_evidence=no_ref,
                             f1=(f1 if stop else 0) if f1 is not None else None,
                             sha256=sha256(
