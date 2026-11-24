@@ -14,8 +14,8 @@ from scripts.evaluate_visual_discourse import cohorts
 from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
-def main(models=None, public=PUB, output_model=MODEL):
-    ink = Ink(np.load(MODEL / "palette.npy"))
+def main(models=None, public=PUB, output_model=MODEL, *, palette_dir=MODEL):
+    ink = Ink(np.load(palette_dir / "palette.npy"))
     specs = []
     labels, images, targets = historical_pages()
     for i, r in enumerate(labels):

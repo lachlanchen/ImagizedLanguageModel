@@ -15,18 +15,18 @@ from scripts.audit_region_writer import wording
 from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
-def main(work=WORK, public=PUB, models=None):
+def main(work=WORK, public=PUB, models=None, *, palette_dir=MODEL):
     allrows = read(work / "confirmation.json")
     rows = [
         r
         for t in ("statements", "exam")
         for r in [x for x in allrows if x["task"] == t][:16]
     ]
-    ink = Ink(np.load(MODEL / "palette.npy"))
+    ink = Ink(np.load(palette_dir / "palette.npy"))
     qs = [ink.encode(r["q"]) for r in rows]
     bs = [[ink.encode(s) for s in r["blocks"]] for r in rows]
     tiles = ink.array()
-    chars = dict(enumerate(read(MODEL / "readback.json")))
+    chars = dict(enumerate(read(palette_dir / "readback.json")))
     for c, i in ink.chars.items():
         chars.setdefault(i, c)
     messages = []
