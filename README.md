@@ -2,6 +2,10 @@
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
+On a pictured entry for **言**, a 2.46-million-parameter writer reproduced the requested oracle-bone specimen. Asked for the bronze form on the same page, it wrote the modern characters **甲骨**. It correctly returned both period forms on 14 of 64 original Chinese cards. On new Chinese examinations it answered both questions on only one of 80 paired pages. [Run the checkpoint](models/branch_ink/README.md) · [Measured results](references/branch_ink_result.md) · [Reading PDF](publication/ilm-nature/visual_language_paper.pdf)
+
+[![Original questions, reference specimens and complete generated answers for 举 and 言](publication/ilm-nature/figures/Figure_161_questions_about_historical_ink.png)](publication/ilm-nature/visual_language_paper.pdf)
+
 On 384 pictured Chinese examination questions, a 2.46-million-parameter writer gave 22 exact replies. Replacing the question reduced that count to four. It solved zero of 128 same-page question pairs. In a dictionary of historical forms it reproduced 33 Chinese specimens, all in the second position. Pages 10–12 show the original answer images, including both replies for 荒. [Reading article](publication/ilm-nature/visual_language_paper.pdf#page=10) · [Run the Chinese PNG writer](models/open_exam/README.md) · [Evidence and limitations](references/open_exam_result.md)
 
 A reader trained on complete answers recovered several consecutive lines from a pictured question about the *Li Sao*. It also copied modern commentary into its reply. On 64 further Chinese pages a two-mode scoring head recognized both supplied answer groupings on 20 pages and wrote zero complete answers without candidates. Pages 8–9 print the original ink and compare recognition with writing. [Reading article](publication/ilm-nature/visual_language_paper.pdf#page=8) · [Weights and PNG inference](models/fact_binding/README.md) · [Held results](references/fact_binding_result.md)
