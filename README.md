@@ -1,3 +1,7 @@
+A compact visual writer answered a pictured question with **“Napoleon offered public support to secondary education.”** On another page it gave the right year but dropped *online*, changing the historical claim. Across 192 new English questions it generated ten complete human answer images. On a second test of the same pages, supplying a pictured short fact yielded five exact sentences for this writer and 34 for an earlier writer trained specifically to formulate sentences from facts. [Read the paper, pp. 18–20](publication/ilm-nature/visual_language_paper.pdf#page=18) · [Run the PNG examples](models/phrase_marginal/README.md) · [Experiments and data](references/optical_phrase_learning_result.md)
+
+[![Two complete pictured questions, human answers and original model outputs about secondary education and online publishing](publication/ilm-nature/figures/Figure_166_learning_complete_answers.png)](publication/ilm-nature/visual_language_paper.pdf#page=19)
+
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
