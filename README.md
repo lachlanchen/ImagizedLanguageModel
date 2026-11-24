@@ -4,6 +4,10 @@
 
 # Imagized Language Model (ILM)
 
+A pictured line by Li She reads 縱使雞鳴遇關吏. Given the damaged second line **□□余也是何人**, the image writer restored **不知余也是何人** and returned the completed page as a PNG. This was one of 17 exact two-cell repairs across 6,362 lines from reserved poet attributions. Given an entirely blank second line, the writer matched no complete reference. [Run the page writer](models/verse_canvas/README.md) · [Experiments and limitations](references/verse_canvas_result.md)
+
+[![Figure 136. Generating a blank verse line, restoring damaged ink and reading another typeface](publication/ilm-nature/figures/Figure_136_verse_canvas.png)](publication/ilm-nature/manuscript.pdf)
+
 A 1.03-million-parameter visual writer trained on classical Chinese on a single RTX 4090 D. Given the original printed history, it recovered 2,744 of 28,880 next glyphs in the *Analects* and *Chu Ci*. With its own output fed back, it recovered 839, falling to 426 when the distant prefix came from the other work. No prompt produced eight consecutive correct initial glyphs. The figure shows the first output from each book. [Run the image writer](models/book_prefix/README.md) · [Measured results and Lean proof](references/book_prefix_result.md)
 
 [![Figure 135. Observed and self-fed continuation, with actual input and output strips for both held classical Chinese works](publication/ilm-nature/figures/Figure_135_book_prefix.png)](publication/ilm-nature/manuscript.pdf)

@@ -96,3 +96,5 @@ A conversational answer can require a word missing from the pictured passage. We
 A claim of energy efficiency requires comparison at a common level of language performance. We compare a pictured writer with a subword Transformer and then hold architecture and supervision fixed while changing only how a letter is observed. This design separates an advantage of a complete trained system from the narrower question of whether printed shape itself reduces the cost of learning.
 
 A book also tests whether meaning survives the writer's own first mistake. We retain the original passage during generation and exchange its distant glyphs while preserving its ending. Comparing the result with a byte reader and a count predictor measures how much the pictured context contributes to recovering the continuation.
+
+A torn or faded line poses a different question. If several positions are blank, the reader can begin where the neighbouring text is most informative. Paired lines of verse let us test this choice directly and distinguish recovering a printed shape from recovering the expression that belongs there.
