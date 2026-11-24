@@ -33,13 +33,16 @@ class VerseCanvas(nn.Module):
         self.body = nn.Sequential(*(ReadingBlock(width) for _ in range(4)),nn.LayerNorm(width))
         self.ink = nn.Linear(width,vocab)
 
-    def forward(self, source, target, visible):
+    def encode(self, source, target, visible):
         length = source.shape[1]
         if length not in (5,7):
             raise ValueError('Expected five or seven aligned glyphs')
         state = self.source(source)+self.position[:length]+self.metre[int(length==7)]
         state = state+torch.where(visible[:,:,None],self.target(target),self.blank)
-        return self.ink(self.body(state)).float()
+        return self.body(state)
+
+    def forward(self, source, target, visible):
+        return self.ink(self.encode(source,target,visible)).float()
 
     @torch.inference_mode()
     def fill(self, source, target, visible, palette, order='confidence'):
