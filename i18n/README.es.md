@@ -90,6 +90,10 @@ Estado actual: la escritura lingüística mediante imágenes sigue sin estar val
 
 # Modelo de Lenguaje Imaginizado (ILM)
 
+El modelo lee imágenes de un pasaje en chino clásico y de una pregunta, y escribe la respuesta en inglés como imagen. Para 還其珠 escribe **return** o **pearl** según la pregunta. Con 1,40 millones de parámetros, escribió correctamente las dos lecturas de 之, *it* y *go*, en 31 de 40 pares de contextos de prueba, frente a cuatro al barajar las respuestas de entrenamiento. En otros dos libros acertó las cuatro preguntas en solo uno de 29 pasajes. [Ejecutar el modelo](../models/pronoun_writer/README.md) · [Resultados](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 Ante 執大象, el modelo lee la pregunta en una imagen y dibuja **hold** para el verbo o **image** para el objeto. Respondió correctamente a ocho preguntas en chino e inglés sobre 230 de 539 pasajes. Con un repertorio de traducciones observadas en el entrenamiento llegó a 247. Las preguntas coloquiales siguen siendo difíciles. [Ejecutar el modelo](../models/asked_gloss/README.md) · [Resultados](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

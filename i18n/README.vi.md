@@ -90,6 +90,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Mô hình đọc đoạn Hán văn và câu hỏi dưới dạng ảnh, rồi viết câu trả lời tiếng Anh thành ảnh. Với 還其珠, mô hình viết **return** hoặc **pearl** tùy câu hỏi. Mô hình 1,40 triệu tham số viết đúng cả *it* và *go* cho chữ 之 ở 31/40 cặp ngữ cảnh kiểm tra, so với 4/40 khi xáo trộn đáp án huấn luyện. Trong hai cuốn sách khác, chỉ 1/29 đoạn có cả bốn câu trả lời đúng. [Chạy mô hình](../models/pronoun_writer/README.md) · [Kết quả](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 Với câu 執大象, mô hình đọc câu hỏi dưới dạng ảnh rồi viết **hold** cho động từ hoặc **image** cho tân ngữ. Mô hình trả lời đúng cả tám câu hỏi tiếng Trung và tiếng Anh trên 230 trong số 539 đoạn kiểm tra. Khi giới hạn đầu ra ở những nghĩa đã gặp lúc huấn luyện, con số tăng lên 247. Các cách hỏi thường ngày vẫn còn khó. [Chạy mô hình](../models/asked_gloss/README.md) · [Kết quả](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

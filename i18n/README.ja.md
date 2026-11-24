@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+このモデルは漢文と質問を画像で読み、英語の答えを画像で書きます。「還其珠」では質問に応じて **return** または **pearl** と書きます。約140万パラメータのモデルは「之」を *it* と *go* に書き分ける課題で、評価用の40組中31組に正答しました。教師データの答えを入れ替えた対照では4組でした。別の2冊では、四つの質問すべてに正答したのは29節中1節でした。 [実行方法](../models/pronoun_writer/README.md) · [実験結果](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 「執大象」に画像で質問すると、モデルは動詞には **hold**、目的語には **image** と画像で答えます。中国語と英語の計8問すべてに正解したのは、評価用539節のうち230節でした。訓練で見た訳語に出力を限定すると247節に増えました。日常的な言い換えにはまだ弱さがあります。 [モデルを実行](../models/asked_gloss/README.md) · [実験結果](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

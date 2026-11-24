@@ -90,6 +90,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Le modèle lit le passage en chinois classique et la question sous forme d’images, puis écrit sa réponse en anglais dans une image. Pour 還其珠, il écrit **return** ou **pearl** selon la question. Avec 1,40 million de paramètres, il écrit correctement les deux lectures de 之, *it* et *go*, dans 31 des 40 paires de contextes réservées au test, contre quatre après permutation des réponses d’entraînement. Dans deux autres livres, il répond correctement aux quatre questions pour un seul des 29 extraits. [Exécuter le modèle](../models/pronoun_writer/README.md) · [Résultats](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 Pour 執大象, le modèle lit la question en image et dessine **hold** pour le verbe ou **image** pour le complément d’objet. Il a répondu correctement aux huit demandes en chinois et en anglais sur 230 des 539 passages. Un répertoire de traductions attestées porte ce nombre à 247. Les questions en langue courante restent difficiles. [Utiliser le modèle](../models/asked_gloss/README.md) · [Résultats](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

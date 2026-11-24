@@ -78,8 +78,10 @@ class VisualGlossWriter(nn.Module):
         return self.distribution(state)
 
     @torch.inference_mode()
-    def write(self, features, limit=32):
+    def write(self, features, limit=32, context_adapter=None):
         context = self.encode(features)
+        if context_adapter is not None:
+            context = context_adapter(context)
         state = context.unsqueeze(0).contiguous()
         prev = torch.full((len(features),), self.stop, device=features.device)
         result = []

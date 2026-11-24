@@ -31,7 +31,7 @@ def load_focus(folder, device):
 
 
 @torch.inference_mode()
-def answer(writer, reader, page, question, lexicon=None):
+def answer(writer, reader, page, question, lexicon=None, context_adapter=None):
     if not len(page) or not len(question):
         raise ValueError("Both the passage and the question need at least one cell")
     device = next(reader.parameters()).device
@@ -45,13 +45,16 @@ def answer(writer, reader, page, question, lexicon=None):
     )
     ctx = encoding_windows(writer, features(page))
     pos = reader(ctx, page_length, q[:, None])[0, 0].argmax().item()
-    ink, ended = respond(writer, page, pos)
+    ink, ended = respond(writer, page, pos, context_adapter=context_adapter)
     if lexicon is not None:
         landmarks = writer.landmarks.cpu().numpy()
         bits = np.unpackbits(ink, axis=-1)[:, landmarks]
         physical = tuple((bits * (2 ** np.arange(len(landmarks)))).sum(-1).tolist())
         if not ended or physical not in lexicon.members:
-            choice = lexicon.best(writer, ctx[0, pos])
+            state = ctx[0, pos]
+            if context_adapter is not None:
+                state = context_adapter(state)
+            choice = lexicon.best(writer, state)
             ink = np.packbits(writer.draw(choice).cpu().numpy(), axis=-1)
             ended = True
     return ink, ended, pos
@@ -68,6 +71,12 @@ def main():
             type=int,
             help="Occupied cells in a padded image grid",
         )
+    p.add_argument(
+        "--reader-dir",
+        type=Path,
+        default=RELEASE,
+        help="Directory containing the pictured-question reader weights",
+    )
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--font", type=Path, default=DEFAULT)
     p.add_argument("--font-index", type=int, default=2)
@@ -77,6 +86,11 @@ def main():
         "--known-glosses",
         action="store_true",
         help="If necessary, draw the most probable complete training gloss",
+    )
+    p.add_argument(
+        "--writer-adapter",
+        type=Path,
+        help="Directory with a fitted visual speller residual",
     )
     args = p.parse_args()
 
@@ -104,12 +118,18 @@ def main():
         ):
             raise ValueError("Changed attested gloss bank")
         lexicon = AttestedGlosses(bank, writer.stop, args.device)
+    adapter = None
+    if args.writer_adapter:
+        from scripts.write_visual_gloss import load_adapter
+
+        adapter = load_adapter(args.writer_adapter, args.device)
     ink, stop, pos = answer(
         writer,
-        load_focus(RELEASE, args.device),
+        load_focus(args.reader_dir, args.device),
         load("page"),
         load("question"),
         lexicon,
+        adapter,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_strip(ink, args.output)

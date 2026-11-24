@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+模型讀取文言文和問題的圖像，再以圖像寫出英語答案。對於「還其珠」，它能按問題寫出 **return** 或 **pearl**。這個約 140 萬參數的模型在 40 對保留語境中，有 31 對能分辨「之」的代詞義和動詞義，分別寫出 *it* 和 *go*；打亂訓練答案後為 4 對。在另兩本書的 29 個片段中，只有 1 個片段的四道課堂問題全部答對。 [執行模型](../models/pronoun_writer/README.md) · [實驗結果](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 給模型看「執大象」和一張問題圖片，問動詞，它寫出 **hold**；問賓語，它寫出 **image**。在 539 個測試片段中，有 230 個片段的八道中英文問題全部答對。把輸出限定為訓練中見過的釋義後，增至 247 個。換成日常問法，準確率仍然很低。 [執行模型](../models/asked_gloss/README.md) · [實驗結果](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

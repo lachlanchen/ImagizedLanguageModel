@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+The visual model reads a classical passage and a pictured question, then draws an English answer. For 還其珠 it writes **return** or **pearl**. With 1.40 million parameters, it drew both meanings of 之, *it* and *go*, on 31/40 held context pairs, compared with 4/40 after shuffling supervision. Across two other books it answered all four classroom questions on only 1/29 passages. [Run the model](models/pronoun_writer/README.md) · [Results](references/pronoun_writer_result.md)
+
+[![122 · ILM](publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](publication/ilm-nature/manuscript.pdf#page=162)
+
 Given 執大象 and a pictured question, the 1.35M-parameter model draws **hold** for the verb and **image** for the object. It located and glossed both terms under eight Chinese and English requests on 230/539 held passages, or 247 with a bank of attested glosses. Everyday paraphrases remain difficult. [Run the model](models/asked_gloss/README.md) · [Experiment](references/asked_gloss_result.md)
 
 [![120 · ILM](publication/ilm-nature/figures/Figure_120_asked_gloss.png)](publication/ilm-nature/manuscript.pdf#page=160)

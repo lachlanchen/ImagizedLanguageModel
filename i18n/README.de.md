@@ -90,6 +90,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Das Modell liest eine klassische chinesische Textstelle und die Frage als Bilder und schreibt die englische Antwort als Bild. Für 還其珠 schreibt es je nach Frage **return** oder **pearl**. Mit 1,40 Millionen Parametern gab es bei 31 von 40 zurückgehaltenen Kontextpaaren beide Lesarten von 之 richtig wieder, *it* und *go*. Mit vertauschten Trainingsantworten gelang dies bei vier Paaren. In zwei weiteren Büchern beantwortete es nur bei einer von 29 Textstellen alle vier Fragen richtig. [Modell ausführen](../models/pronoun_writer/README.md) · [Ergebnisse](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 Zu 執大象 zeichnet das Modell je nach abgebildeter Frage **hold** für das Verb oder **image** für das Objekt. Bei 230 von 539 Textstellen beantwortete es alle acht chinesischen und englischen Fragen richtig. Mit einem Verzeichnis belegter Übersetzungen waren es 247. Alltagssprachliche Fragen bereiten weiterhin Schwierigkeiten. [Modell ausführen](../models/asked_gloss/README.md) · [Ergebnisse](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)

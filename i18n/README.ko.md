@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+이 모델은 한문 구절과 질문을 이미지로 읽고 영어 답을 이미지로 씁니다. 還其珠에 대해서는 질문에 따라 **return** 또는 **pearl**을 씁니다. 약 140만 개의 매개변수를 가진 모델이 之를 *it*과 *go*로 구별해 쓴 경우는 평가용 문맥 40쌍 중 31쌍이었고, 학습 정답을 섞은 대조군에서는 4쌍이었습니다. 다른 두 책에서는 29개 구절 중 하나에서만 네 질문을 모두 맞혔습니다. [모델 실행](../models/pronoun_writer/README.md) · [실험 결과](../references/pronoun_writer_result.md)
+
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+
 모델은 執大象에 관한 질문 이미지를 읽고 동사를 물으면 **hold**, 목적어를 물으면 **image**를 이미지로 씁니다. 평가 구절 539개 중 230개에서 중국어와 영어 질문 여덟 개에 모두 정답을 냈습니다. 훈련에서 본 풀이로 출력을 제한하면 247개였습니다. 일상적인 표현으로 바꾼 질문에는 여전히 취약합니다. [모델 실행](../models/asked_gloss/README.md) · [실험 결과](../references/asked_gloss_result.md)
 
 [![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)
