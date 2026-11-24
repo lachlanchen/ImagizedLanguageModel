@@ -18,10 +18,12 @@ from scripts.measure_writer_energy import snapshot, consumed
 from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
-def compare(rows):
-    actors = models()
+def compare(
+    rows, actors=None, tasks=("mlqa-en", "mlqa-zh", "drop"), work=WORK, public=PUB
+):
+    actors = models() if actors is None else actors
     picks = []
-    for task in ("mlqa-en", "mlqa-zh", "drop"):
+    for task in tasks:
         task_indices = [i for i, row in enumerate(rows) if row["task"] == task]
         picks.extend(task_indices[:16])
     ink = Ink(np.load(BASE / "palette.npy"))
@@ -81,14 +83,14 @@ def compare(rows):
         outputs=outputs,
         costs=costs,
         vision_weights=MODELS[VLM],
-        cohort=sha(WORK / "confirmation.json"),
+        cohort=sha(work / "confirmation.json"),
     )
-    dump(PUB / "comparison.json", result)
+    dump(public / "comparison.json", result)
     return result
 
 
-def review(rows, comparison):
-    names = ("original", "unsigned", "signed", "qwen", "human", "foil")
+def review(rows, comparison, arms=("original", "unsigned", "signed"), public=PUB):
+    names = (*arms, "qwen", "human", "foil")
     keys = "ABCDEF"
     schema = dict(
         type="object",
@@ -143,7 +145,10 @@ def review(rows, comparison):
         group["calibrated"] = (
             group["human"] >= 14 and group["foil_rejected_twice"] >= 14
         )
-    dump(PUB / "semantic.json", dict(summary=summary, votes=votes, judge=MODELS[JUDGE]))
+    dump(
+        public / "semantic.json",
+        dict(summary=summary, votes=votes, judge=MODELS[JUDGE]),
+    )
     print(summary, flush=True)
 
 

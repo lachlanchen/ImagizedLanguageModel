@@ -15,10 +15,12 @@ const phrase=mode==='phrase';
 const marginal=mode==='marginal';
 const fact=mode==='fact';
 const ranking=mode==='ranking';
+const competition=mode==='competition';
+const storyFit=mode==='story-fit';
 const directional=mode==='directional';
 const context=mode==='sentence-context';
-const folder=path.join(root,'references/evidence',directional?'directional_reading_v1':context?'sentence_context_v1':ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(directional||context||ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
+const folder=path.join(root,'references/evidence',storyFit?'story_answer_fit_v1':competition?'optical_competition_v1':directional?'directional_reading_v1':context?'sentence_context_v1':ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(storyFit||competition||directional||context||ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -78,6 +80,51 @@ if(fact){
   table.styleOptions={headerRow:true,bandedRows:false};table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
   for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=table.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
   label(slide,'Only the pictured question and source page are supplied at inference.',25,457,1030,54,18,false,ink);
+ }else if(storyFit){
+  const load=async name=>JSON.parse(await fs.readFile(path.join(folder,name+'.json')));
+  const [trace,semantic,scores]=await Promise.all(['trajectory','semantic','scores'].map(load));
+  const arms=['signed','single','marginal','qwen'];
+  const names=['Parent','Single path','Marginal','Qwen'];
+  const colors=['#88786A','#557DA1',teal,'#B99452'];
+  label(slide,'What does learning from a complete answer change?',22,16,1050,43,29,true,ink);
+  label(slide,'a   Mean training loss per answer (nats)',22,81,508,33,19,true,ink);
+  label(slide,'b   Meaning credited on free replies (out of 16)',534,81,535,33,19,true,ink);
+  const style={hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}};
+  const epochs=slide.charts.add('line',{...style,position:{left:19,top:120,width:488,height:255},
+    categories:trace.single.map((_,i)=>String(i+1)),series:arms.slice(1,3).map((m,i)=>({name:names[i+1],values:trace[m].map(v=>Number(v.toFixed(4))),line:{fill:colors[i+1],width:2.8}})),
+    yAxis:{min:47,max:47.5,majorUnit:0.1,textStyle:{fontSize:13}}});
+  const tasks=['stories','exam','mlqa-en','mlqa-zh'];
+  const meaning=slide.charts.add('bar',{...style,barOptions:{direction:'column',grouping:'clustered'},position:{left:534,top:120,width:524,height:255},
+    categories:['New story','Exam','MLQA EN','MLQA ZH'],series:arms.map((m,i)=>({name:names[i],values:tasks.map(t=>semantic.summary[t][m]),fill:colors[i]})),
+    yAxis:{min:0,max:16,majorUnit:4,textStyle:{fontSize:13}}});
+  for(const chart of [epochs,meaning])applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  const vals=[['Exact stopped replies','Parent','Single path','Marginal'],
+    ...['stories','exam'].map((t,i)=>[[ 'New story (96)','Chinese exam (192)'][i],...arms.slice(0,3).map(m=>String(scores[m].free[t].exact))])];
+  const tb=slide.tables.add({rows:3,columns:4,left:37,top:387,width:1011,height:118,columnWidths:[390,200,200,221],values:vals});
+  tb.styleOptions={headerRow:true,bandedRows:false};tb.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<3;i++)for(let j=0;j<4;j++){const c=tb.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
+  slide.speakerNotes.textFrame.setText('The loss includes the stop. A blinded automated judge saw each reply in two orders. Human-reference and sibling-foil calibration is reported per cohort in the paper.');
+ }else if(competition){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
+  const trace=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
+  const modes=['signed','independent','competing'], names=['Previous','Independent','Competing'], colors=['#88786A','#557DA1',teal];
+  label(slide,'Can a reader learn from the other answers on a page?',22,15,1040,45,29,true,ink);
+  label(slide,'a   Exact stopped replies (%)',22,73,520,30,19,true,ink);
+  const bars=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:22,top:111,width:488,height:246},
+    categories:['Exam','Story','MLQA EN','MLQA ZH','DROP'],series:modes.map((m,i)=>({name:names[i],values:['exam','stories','mlqa-en','mlqa-zh','drop'].map(t=>Number((100*data[m].free[t].exact/data[m].free[t].n).toFixed(3))),fill:colors[i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(bars,{fontFamily:'Arial'});
+  label(slide,'b   Mean training loss per pass (nats)',530,73,545,30,19,true,ink);
+  const steps=['1','2','3','4','5','6','7','8'];
+  const lines=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:530,top:111,width:525,height:246},categories:steps,
+    series:['independent','competing'].map((t,i)=>({name:names[i+1],values:trace[t].map(v=>Number(v.toFixed(4))),fill:colors[i+1]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(lines,{fontFamily:'Arial'});
+  const judgment=JSON.parse(await fs.readFile(path.join(folder,'semantic.json')));
+  const vals=[['Semantic credit / 80','Previous','Independent','Competing'],['Pictured QA',...modes.map(m=>String(Object.values(judgment.summary).reduce((v,r)=>v+r[m],0)))],['Qwen3-VL Q4 (same 80)',String(Object.values(judgment.summary).reduce((v,r)=>v+r.qwen,0)),'','']];
+  const tb=slide.tables.add({rows:3,columns:4,left:40,top:373,width:997,height:124,columnWidths:[400,190,190,217],values:vals});
+  tb.styleOptions={headerRow:true,bandedRows:false};tb.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<3;i++)for(let j=0;j<4;j++){const c=tb.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
  }else if(directional){
   const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
   const trace=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
@@ -318,7 +365,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1+Number(fact);
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',directional?'Reading_relations_in_context.pptx':context?'Writing_the_sentence_in_context.pptx':ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',storyFit?'Learning_from_complete_replies.pptx':competition?'Comparing_candidate_answers.pptx':directional?'Reading_relations_in_context.pptx':context?'Writing_the_sentence_in_context.pptx':ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:fact?[total-1,total]:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
