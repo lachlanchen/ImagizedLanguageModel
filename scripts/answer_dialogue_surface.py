@@ -11,6 +11,7 @@ from ilm.visual_lm.causal_glyph_writer import write_strip
 from ilm.visual_lm.dialogue_surface import SurfaceDialogue
 from ilm.visual_lm.optical_passage_qa import word_runs
 from ilm.visual_lm.portable_writer import read_image, read_text, DEFAULT_FONT
+from ilm.visual_lm.image_copy_search import copy_proposals
 from scripts.answer_dialogue_ink import generate
 from scripts.dialogue_ink_images import WordImages
 
@@ -59,12 +60,24 @@ def answer(net, fields):
             (bank.features[ix], torch.tensor([len(field)], device=bank.device))
         )
         indices.append(ix)
+    variants = bank.edits[torch.cat(indices, 1)]
+    if getattr(net, "copy_search", False):
+        proposals = copy_proposals(net, bank, inputs, variants)[0]
+        if not proposals:
+            raise ValueError("No completed copyable answer")
+        best, score = proposals[0]
+        return sep.join(bank.raw[i] for i in best), dict(
+            stopped=True,
+            actions=["copy"] * len(best),
+            candidates=len(proposals),
+            mean_log_probability=score,
+        )
     output, stopped, actions = generate(
         net,
         None,
         bank,
         inputs,
-        bank.edits[torch.cat(indices, 1)],
+        variants,
         separator=sep,
         feedback=net.surface,
     )
@@ -88,10 +101,32 @@ if __name__ == "__main__":
         action="store_true",
         help="Weight pointer locations using the model's estimated supporting interval",
     )
+    p.add_argument(
+        "--device",
+        choices=("cuda", "cpu"),
+        default="cpu",
+        help="Device for standalone inference",
+    )
+    p.add_argument(
+        "--copy-search",
+        action="store_true",
+        help="Search stopped sequences of visible word images (width 8)",
+    )
+    p.add_argument(
+        "--marginal-copy",
+        action="store_true",
+        help="Sum pointer mass for identical output images",
+    )
     a = p.parse_args()
     torch.set_num_threads(2)
-    net = load(a.model)
+    if a.copy_search and (a.marginal_copy or a.predicted_interval):
+        p.error(
+            "--copy-search uses its own image-marginal scoring and has no interval weighting"
+        )
+    net = load(a.model, a.device)
+    net.copy_search = a.copy_search
     net.use_predicted_interval = a.predicted_interval
+    net.marginal_copy = a.marginal_copy
     fields = []
     for name in ("passage", "question", "history"):
         path = getattr(a, name)

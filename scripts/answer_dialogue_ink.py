@@ -13,6 +13,7 @@ from ilm.visual_lm.causal_glyph_writer import write_strip
 from ilm.visual_lm.portable_writer import DEFAULT_FONT, read_image, read_text
 from scripts.answer_optical_passage_qa import optical_words, PARENT, sha
 from scripts.dialogue_ink_images import WordImages
+from ilm.visual_lm.image_copy_search import copy_groups, modal_copy_position
 from scripts.answer_optical_passage_qa import ROOT
 
 RELEASE = ROOT / "models/dialogue_ink"
@@ -48,13 +49,19 @@ def generate(
     results = [[] for _ in range(n)]
     paths = [[] for _ in range(n)]
     raw_palette = net.palette.cpu().numpy()
+    groups = copy_groups(variants) if getattr(net, "marginal_copy", False) else None
     for t in range(net.max_words + 1):
         ch, ptr, z, state = net.step(mem, prev, state)
         route = ch[:, 0].argmax(1).masked_fill(done, 0)
         done = done | (route == 0)
         if t == net.max_words or bool(done.all()):
             break
-        pointer = ptr[:, 0].masked_fill(variants == 0, -1e4).flatten(1).argmax(1)
+        if groups is None:
+            pointer = ptr[:, 0].masked_fill(variants == 0, -1e4).flatten(1).argmax(1)
+        else:
+            pointer = modal_copy_position(
+                ptr[:, 0].flatten(1), groups, variants.flatten(1) != 0
+            )
         match = variants.flatten(1).gather(1, pointer[:, None]).long()
         prev = bank.features[match, :50].clone()
         copy = (route == 1).nonzero().flatten()

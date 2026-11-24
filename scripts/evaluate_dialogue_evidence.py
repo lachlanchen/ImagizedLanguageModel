@@ -37,8 +37,8 @@ def turn_metrics(evaluator, marker, r):
 
 
 @torch.inference_mode()
-def predict(folder, ds, net, sep, unit, decode, rows):
-    q, p = exchanges(rows)
+def predict(folder, ds, net, sep, unit, decode, rows, swaps=None):
+    q, p = exchanges(rows) if swaps is None else swaps
     records = [{} for _ in rows]
     for key, qi, pi in [
         ("original", None, None),
