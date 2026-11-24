@@ -113,7 +113,14 @@ def fit(arm, questions=None, reader_type=GlossFocus):
     reader = reader_type().cuda()
     opt = torch.optim.AdamW(reader.parameters(), lr=0.001)
     templates = questions if questions is not None else QUESTIONS[:4]
-    raw, ql = packed_batch([q for pair in templates for q in pair], Face(FACES[0]), "cuda")
+    if questions is None:
+        # Preserve the original canvas width, including its masked trailing cells.
+        raw, ql = question_batch(Face(FACES[0]), "cuda")
+        raw, ql = raw[:8], ql[:8]
+    else:
+        raw, ql = packed_batch(
+            [q for pair in templates for q in pair], Face(FACES[0]), "cuda"
+        )
     q = cell_features(raw)
     role = torch.arange(2, device="cuda")[None]
     steps = 0
@@ -127,7 +134,9 @@ def fit(arm, questions=None, reader_type=GlossFocus):
         flip = torch.as_tensor(
             rng.random(len(rows)) < 0.5, device="cuda", dtype=torch.long
         )
-        phr = torch.as_tensor(rng.integers(0, len(templates), (len(rows), 2)), device="cuda")
+        phr = torch.as_tensor(
+            rng.integers(0, len(templates), (len(rows), 2)), device="cuda"
+        )
         loss_sum = 0.0
         for part in np.array_split(order, (len(rows) + 127) // 128):
             ix = torch.as_tensor(part, device="cuda")

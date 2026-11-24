@@ -3,7 +3,7 @@
 from collections import defaultdict
 import torch
 from scripts.asked_gloss_questions import HELD
-from scripts.prepare_asked_gloss import PUBLIC, WORK, read, dump, sha
+from scripts.prepare_asked_gloss import PUBLIC, ORIGINAL, read, dump, sha
 from scripts.train_asked_gloss import packed_batch
 from scripts.train_typeface_writer import Face, FACES
 from scripts.write_visual_gloss import restore
@@ -23,10 +23,11 @@ PARAPHRASES = [
 
 @torch.inference_mode()
 def probe():
-    registry = read(WORK / "paraphrase_registration.json")
-    assert sha(PUBLIC / "order_result.json") == registry["prior"] and registry[
-        "questions"
-    ] == [list(p) for p in PARAPHRASES]
+    registry = read(ORIGINAL / "paraphrase_registration.json")
+    order_hash = sha(PUBLIC / "order_result.json")
+    if PUBLIC.resolve() == ORIGINAL.resolve() and order_hash != registry["prior"]:
+        raise ValueError("Frozen primary result changed")
+    assert registry["questions"] == [list(p) for p in PARAPHRASES]
     face = Face(FACES[0])
     model = load_focus(RELEASE, "cpu")
     writer = restore()
@@ -64,7 +65,7 @@ def probe():
         PUBLIC / "paraphrases.json",
         dict(
             questions=PARAPHRASES,
-            prior=registry["prior"],
+            prior=order_hash,
             positions=saved,
             counts={
                 k: dict(pages=len(v), both=[sum(col) for col in zip(*v, strict=True)])

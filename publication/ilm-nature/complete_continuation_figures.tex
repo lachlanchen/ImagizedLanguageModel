@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_word_senses_article.py.
+% Literal captions copied from their source inputs by build_asked_gloss_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -966,4 +966,11 @@ The selected names are correct under both English requests. The first generated 
 \caption{\textbf{Writing one character's meaning from its use in a passage.}
 \textbf{a,} Exact single-image responses and pairs for which both distinct reference readings were written correctly. The two held evaluation works supply 6,987 and 7,173 passages, including 566 and 403 disjoint contrasts. The control permutes the English glosses within the same printed headword during training. Local counts back off from five source cells to the headword. \textbf{b,} Complete pairs using the original visual path or physical ink matching to the training bank. UKai denotes a printed Kai face. Five \textit{Chu ci} pairs contain a cell unavailable in that face. \textbf{c,} First fully correct reserved pair for the character meaning speech in the \textit{Analects}. Both English answers are the model's original pixels. \textbf{d,} First incomplete \textit{Chu ci} pair. The second reply repeats the numerical reading in a passage whose gloss is \textit{unite}. The underline marks the supplied focal cell for the reader of the figure.}
 \label{fig:visual-word-senses}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_120_asked_gloss.png}
+\caption{\textbf{Question order in visual reading.}
+\textbf{a,} Held clauses for which the focus reader selected the intended verb and object and wrote both accepted glosses. Four requests per language reverse the requested role and the order of the positive and negative instructions. The pooled and exchanged-answer controls each completed zero clauses across all eight requests. \textbf{b,} Complete eight-request results with free writing or an optional bank of training gloss images. The last column supplies both locations and measures writing alone. \textbf{c,} Original question and response bitmaps for an excerpt from chapter 35 of the \textit{Dao De Jing}. The passage contains a verb meaning to hold and a noun meaning an image. \textbf{d,} Two passages from chapter 28. Constraining an unattested string to the highest-probability training gloss recovers the reading of the male term; the female term still receives an incorrect word. These four generated answers were reproduced from the released weights on CPU.}
+\label{fig:asked-gloss}
 \end{figure*}

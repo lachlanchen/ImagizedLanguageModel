@@ -2,6 +2,9 @@
 
 import argparse
 import json
+import os
+
+import numpy as np
 from pathlib import Path
 
 import torch
@@ -15,7 +18,7 @@ from scripts.read_optical_role import digest
 from scripts.respond_pointing_glyphs import render_text
 from scripts.write_visual_gloss import DEFAULT, ROOT, restore, respond
 
-RELEASE = ROOT / "models/asked_gloss"
+RELEASE = Path(os.environ.get("ILM_ASKED_GLOSS_RELEASE", ROOT / "models/asked_gloss"))
 
 
 def load_focus(folder, device):
@@ -28,7 +31,7 @@ def load_focus(folder, device):
 
 
 @torch.inference_mode()
-def answer(writer, reader, page, question):
+def answer(writer, reader, page, question, lexicon=None):
     if not len(page) or not len(question):
         raise ValueError("Both the passage and the question need at least one cell")
     device = next(reader.parameters()).device
@@ -43,6 +46,14 @@ def answer(writer, reader, page, question):
     ctx = encoding_windows(writer, features(page))
     pos = reader(ctx, page_length, q[:, None])[0, 0].argmax().item()
     ink, ended = respond(writer, page, pos)
+    if lexicon is not None:
+        landmarks = writer.landmarks.cpu().numpy()
+        bits = np.unpackbits(ink, axis=-1)[:, landmarks]
+        physical = tuple((bits * (2 ** np.arange(len(landmarks)))).sum(-1).tolist())
+        if not ended or physical not in lexicon.members:
+            choice = lexicon.best(writer, ctx[0, pos])
+            ink = np.packbits(writer.draw(choice).cpu().numpy(), axis=-1)
+            ended = True
     return ink, ended, pos
 
 
@@ -62,6 +73,11 @@ def main():
     p.add_argument("--font-index", type=int, default=2)
     p.add_argument("--device", default="cpu")
     p.add_argument("--transcribe", action="store_true")
+    p.add_argument(
+        "--known-glosses",
+        action="store_true",
+        help="If necessary, draw the most probable complete training gloss",
+    )
     args = p.parse_args()
 
     def load(item):
@@ -76,11 +92,24 @@ def main():
         ).numpy()
 
     torch.set_num_threads(2)
+    writer = restore(device=args.device)
+    lexicon = None
+    if args.known_glosses:
+        from ilm.visual_lm.attested_gloss import AttestedGlosses
+
+        bank = RELEASE / "attested.npz"
+        if (
+            digest(bank)
+            != json.loads((RELEASE / "attested.json").read_text())["sha256"]
+        ):
+            raise ValueError("Changed attested gloss bank")
+        lexicon = AttestedGlosses(bank, writer.stop, args.device)
     ink, stop, pos = answer(
-        restore(device=args.device),
+        writer,
         load_focus(RELEASE, args.device),
         load("page"),
         load("question"),
+        lexicon,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     write_strip(ink, args.output)

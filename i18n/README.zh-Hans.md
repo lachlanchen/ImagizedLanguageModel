@@ -2,81 +2,81 @@
 
 一个拥有 118 万参数的模型从古文图像中读取指定汉字，用图像写出英文释义。「言及之而不言」的末字，模型写成 speak；「有是言也」的「言」，它写成 speech。在同字异义的对照中，《论语》有 213/566 对两义全对，《楚辞》有 82/403 对。按邻近字形计数的方法分别答对 211 和 104 对。模型在一张 RTX 4090 D 上从头训练。 [运行模型](../models/visual_word_senses/README.md) · [实验结果](../references/visual_word_sense_result.md)
 
-[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=159)
 
 模型直接读中文问题和小说片段的图像，再用图像写出两个分句。在《西游记》和《红楼梦》的测试中，分别有 34/48 和 42/48 个回答与参考图像完全相同。例如，它能按提问顺序写出「行者引路，而三藏上馬。」。在 60 个留作评估的汉字字族中，有 9 个字族在所有排列下都写对了甲骨文和金文。换用英文问题后，两部小说分别只答对 2/48 和 10/48。 [运行模型](../models/grounded_ink_editor/README.md) · [结果与实例](../references/grounded_ink_writing_result.md)
 
-[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=158)
 
 这个有 8600 万参数的视觉模型直接阅读《国语》的段落和问题图像。在 56 个中文问题中，它答对了 38 个。把两个人名互换后再次提问，模型在 14 段中有 4 段四问全对，原模型为 3 段，两个名字权重相同的对照模型为 2 段。英文提问答对 16 题，没有一段四问全对。示例返回原文中「密康公」和「恭王」的字形。 [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
-[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=154)
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=156)
 
 这个含 64,666 个参数的阅读模型接收问题和中文段落的图像，直接截取原文中的字形作答。在 6,439 个段落上训练后，面对两部预留小说，它在各 452 道题中答对了 104 道中文题和 45 道英文题。仅用人工答案训练的模型分别答对 81 道和 48 道。同一段落换一个问题后，两题都答对的情况仍然很少。 [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
-[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=153)
 
 把作品署名表做成图像，再交换两个人的分工，视觉模型在 256 组比较中有 175 组答对了交换前后的两个角色，对照模型答对 19 组。在 12 篇新故事中，两者都没有完整答对一组。把两个问题分别配上对应的图录片段后，模型在 8 次测试中有 2 次按要求的顺序再现了「言」的四种历史字形。 [↗](../references/individual_clause_writer_result.md)
 
-[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=151)
 
 在图像形式的作品署名中交换两个人名后，8700 万参数的模型在 256 组比较中有 165 组能按两种提问顺序正确作答。训练样本相同、答案独立分配的对照模型通过了 5 组。在另行撰写的故事中，两个模型均未通过 24 组比较中的任何一组。 [结果与原始输出图像](../references/role_change_writer_result.md) · [运行模型](../models/role_change_writer/README.md)
 
 剔除预留的 DRCD 材料并重新训练后，扩大候选范围的阅读器在359道开发集问题中精确答对234道，通用阅读器答对242道。此前的 DRCD 评测使用了预留测试段落。 [结果与数据来源更正](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=137)
 
 在384道新评测的中文阅读题中，模型合并四个阅读器对图像答案的预测，精确答对285道，与通用阅读器持平。在128组人名互换测试中，它完全答对63组，专项阅读器答对79组。 [结果与权重](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=132)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=136)
 
 在中文图文段落中交换两个人名后，只用似然目标训练的模型在 128 段中有 79 段能用两种语序正确回答全部问题，原模型为 29 段。在人工编写的 48 道问题上，两种语序都答对的题数从 34 降至 28。 [实验结果与模型](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=131)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=135)
 
 在人工编写的 48 道中文问题中，模型有 34 道能按要求用两种语序写出正确事实。它能正确写出《秋潮》的作曲人。另一首歌的测试显示，交换作曲人和作词人后，模型仍可能答错人名。 [实验结果与模型](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=134)
 
 模型用 26,890 条中文图像样本学习辨认陈述中的主体、关系和对象，在 48 道真人撰写的问题中写出了 33 个完整正确的句子。另一个逐字形生成的模型在其中 31 题上能按两种指定语序作答。在电影介绍的例子中，模型在原文上正确写出了导演和编剧，但在人名互换后多抄了一段原文。 [实验结果与模型](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=133)
 
 把图像文章中的两个人名互换，模型能跟着改答案吗？在 136 道角色组合未曾出现在双句训练中的问题上，模型先识别提问顺序，再调用同一个图像书写模型，正确写出了 70 组双句答案。此前一次写完两句的模型只答对 3 组。电影手册的例子也保留了一个错误：两句话都清楚可读，却把导演和编剧都写成了同一个人。 [实验结果与模型](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=132)
 
 谁画了地图，谁需要问路？改进后的模型给出了两个不同的人名。在另外 64 道图像问题中，它准确答出了 42 个人名。它也能按指定顺序写出「言」的甲骨文和金文。不过，在需要写出输入中未出现字形的 128 道新开放题中，没有一个回答与参考答案完全相符。 [实验结果与模型](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=127)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 图中的短文交代了谁画地图、谁迷了路。模型答对了画图的人，但问它谁需要问路，它又说了一遍画图的事。在 300 道答案需要写出题面以外字形的问题中，即使给出前面正确的答案，模型也只在 18 道题上选对了第一个新字形。 [实验结果与回答原图](../references/causal_glyph_writer_result.md)
 
-[![同一张地图，两个问题](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![同一张地图，两个问题](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 模型现在能按图片中的提问，以相反顺序写出「言」的甲骨文和金文。在未参与训练的字例上，采用熟悉的问法时，96 组测试中有 94 组的两种顺序均正确。换用新的字例和问法后，正确组数为 16。 [结果与实际输出](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 **从字形图像阅读和作答.** 在关于两个人物的 64 道题中，模型用常规中文字体答对 46 道，换成粗体后答对 41 道。以文本作答的本地 Qwen3-8B 答对 55 道。换用训练中未见的楷体后，模型只答对了一道。 [运行模型](../docs/visual-page-responder.md)
 
-[![图 88：实际输入的字形与模型的回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![图 88：实际输入的字形与模型的回答](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=128)
 
 **同一句话里的两个人，模型分得清吗？** 模型正确写出了盖茨大楼的捐赠者和建筑师。在 864 对问题中，有 100 对的两个答案都正确。另有 24 个新情境交换了人名，模型没有一个情境全部答对，本地 Qwen3-8B 全部答对了其中 20 个。 [结果与模型用法](../references/shared_sentence_writer_result.md)
 
-[![图 86：同一句话、不同的问题和回答原图](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=122)
+[![图 86：同一句话、不同的问题和回答原图](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 **为什么会答错人？** 在 387 道中文「谁」字问句中，模型读整段答对 62 道，按字形重合度选一句后答对 116 道。随机分配额外训练答案的对照模型用同一方法答对 127 道。图 85 展示了一个真实错误：题目问发明者，模型却写出了地名。 [结果与用法](../references/inverse_role_writer_result.md)
 
-[![图 85：选句与回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=121)
+[![图 85：选句与回答](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 **模型能写对人物吗？** 换用新名字和补语后，模型完整写对了 404 句中的 368 句。把名字换成金文「秦」「楚」，32 句中有 24 句写对；问题中去掉名字、只给条件让模型指出是谁时，32 个答案均未写对。图 84 展示了同一问题下的一次张冠李戴和一次正确回答。 [结果与模型用法](../references/visual_role_writer_result.md)
 
-[![图 84：含金文字形的两段材料及模型的实际回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=120)
+[![图 84：含金文字形的两段材料及模型的实际回答](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 **模型能从字形中读出什么？** 面对同一句「她喝了一口□。」，当上文中的饮料从水换成茶时，模型也把答案从「水」改为「茶」。结合神经网络和相邻字形统计的方法准确补出了 2,947 处缺文中的 651 处。但在交换两个人物角色的 48 组对照中，没有一组的两次判断都正确。 [实验结果与运行命令](../references/visual_inference_writer_result.md)
 
-[![图 83：两段上文、同一句缺字句和模型写出的两个答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=119)
+[![图 83：两段上文、同一句缺字句和模型写出的两个答案](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
 
 <!-- paired-writing-status:start -->
 完成 512 次更新的去空白对比实验仍未实现可靠抄写：OCR 完全匹配为训练集 6/32、验证集 10/32（清晰参考图为 27/32、28/32）。原始输出可见漏字和字母重复。训练时间由 795.624 秒降至 287.182 秒，但语言理解及达到实用质量时的效率仍未得到证明。 [全部 64 个原始输出](../references/paired_padding_result.md).
@@ -90,45 +90,49 @@
 
 # Imagized Language Model (ILM)
 
+给模型看“執大象”和一张问题图片，问动词，它写出 **hold**；问宾语，它写出 **image**。在 539 个测试片段中，有 230 个片段的八道中英文问题全部答对。把输出限定为训练中见过的释义后，增至 247 个。换成日常问法，准确率仍然很低。 [运行模型](../models/asked_gloss/README.md) · [实验结果](../references/asked_gloss_result.md)
+
+[![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)
+
 利用问题图像的表示定位答案后，MLQA 的 412 道英语问题中，准确摘录数从 17 增至 41。中英文合计 824 次提问，独立生成模型根据摘录给出 111 个完全正确且自行结束的回答，直接阅读原页面时为 90 个。 [↗](../references/question_evidence_transfer_result.md)
 
-[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
 
 从零训练的视觉编码器在 374 段小说中正确配对了 364 段的中英文问题。在另外五部作品的 92 次提问中，阅读模型准确摘录了 31 次，生成模型根据摘录给出了 19 个完全正确的回答。 [↗](../references/bilingual_book_intervals_result.md)
 
-[![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=143)
+[![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=147)
 
 用 642 个模型曾答错的例子训练后，视觉模型在另外六部中文作品的 144 次提问中给出了 31 个完全正确的图像回答。36 段文字中，有 0 段的两道题用中英文提问时都答对了。 [↗](../references/stopped_book_preference_result.md)
 
-[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=142)
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=146)
 
 在另外四部中文作品的 34 段文字上，加强首字训练的模型对 136 次中英文提问给出了 31 个完全正确的回答。没有一段的四次提问全部答对。 [↗](../references/first_glyph_book_result.md)
 
-[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=145)
 
 针对同一篇中文小说片段，用中英文分别提两个问题。双语模型在 374 篇中有 3 篇四问全对，训练时调换英文问题的对照模型为 0 篇。在 XQuAD 中，双语模型有 1/227 篇四问全对。 [结果与原始回答](../references/bilingual_novel_result.md)
 
-[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=140)
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=144)
 
 训练时改变笔画粗细和字形比例后，模型在花园明朝体的 394 道中文阅读题中从答对 15 道提高到 43 道。197 篇文章中有 6 篇两问全对。在另一组同字体的 XQuAD 阅读题中，227 篇均未做到两问全对。 [结果与原始回答](../references/stroke_scale_result.md)
 
-[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=139)
+[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=143)
 
 将另选的中文材料排成训练时未使用的 HanaMin 字体，图像模型在 394 道阅读题中准确回答了 15 道，只做字体增强训练的模型答对 3 道。197 篇文章中有 0 篇两问全对。离线字形目录还支持按字头查询，例如输入「中」即可要求模型用图像给出指定的古文字形。 [运行模型与字形目录](../models/typeface_writer/README.md)
 
-[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=142)
 
 对 98 篇中文材料的图像各提两个不同的问题，蒸馏模型在 196 问中准确回答了 72 问，常规训练模型答对 63 问。两个模型都是 11 篇两问全对。同样的材料以文本输入 Qwen3-8B 时，有 55 篇两问全对。 [实验结果与模型](../references/interval_teacher_result.md)
 
-[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=137)
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=141)
 
 同一个模型直接读取字形图像，在 359 道中文阅读题中准确回答了 114 道，还能按要求的先后顺序从图卡中写出「言」的甲骨文和金文。在另选的 128 篇材料中，每篇各有两问，模型有 15 篇两问全对，抽取式阅读模型则有 49 篇。 [运行图像问答模型](../models/mixed_visual_answers/README.md)
 
-[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=136)
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=140)
 
 模型直接读取汉字图像。在三种新问法下，它对每次年份改动都能给出正确的人名和年份，单段材料通过了 34/64 组，双段材料通过了 8/48 组。在 359 道题材更广的人工阅读题中，7 道答案与参考完全一致。
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=138)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)

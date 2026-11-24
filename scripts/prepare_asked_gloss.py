@@ -15,7 +15,8 @@ from scripts.train_typeface_writer import Face, FACES
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = Path(os.environ.get("ILM_ASKED_GLOSS_DIR", ROOT / "artifacts/asked_gloss_v1"))
-PUBLIC = ROOT / "references/evidence/asked_gloss_v1"
+ORIGINAL = ROOT / "references/evidence/asked_gloss_v1"
+PUBLIC = Path(os.environ.get("ILM_ASKED_GLOSS_RESULTS", ORIGINAL))
 QUESTIONS = [
     ("句中主要動詞的英文是什麼", "句中直接賓語的英文是什麼"),
     ("請用英文解釋主要動詞", "請用英文解釋直接賓語"),
@@ -117,7 +118,7 @@ def reserve():
         if sha(p) != expected:
             raise ValueError("Wrong Kyoto edition: " + str(p))
         raw.extend(iter_rows(p, part))
-    external = PUBLIC / "daodejing.tsv"
+    external = ORIGINAL / "daodejing.tsv"
     for n, r in enumerate(
         csv.DictReader(external.read_text().splitlines(), delimiter="\t")
     ):
@@ -158,6 +159,7 @@ def reserve():
             continue
         kept.append(r)
     WORK.mkdir(parents=True, exist_ok=True)
+    PUBLIC.mkdir(parents=True, exist_ok=True)
     path = WORK / "rows.json"
     dump(path, kept)
     result = dict(
