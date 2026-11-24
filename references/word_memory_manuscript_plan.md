@@ -1,0 +1,3 @@
+# Evidence for fitting-word retrieval
+
+Append one result and one methods passage to the reading, review and cumulative redline editions. The preceding edition ends its language comparison at the four-pass writer. The addition should report the independently held retrieval trial, the separate concealed-word assay, the matched decoder ablation, honest image samples and GPU cost. Figure 133 should show quantities from the released records and actual inference pixels with at least one failure. Verify every chart and table against saved measurements, inspect the compiled pages and deliver the reading PDF to the existing local Nutstore destination.

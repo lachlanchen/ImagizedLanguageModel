@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Tue Nov 24 14:28:45 2026
-%DIF ADD new.tex   Tue Nov 24 14:28:45 2026
+%DIF DEL old.tex   Tue Nov 24 14:48:22 2026
+%DIF ADD new.tex   Tue Nov 24 14:48:22 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 %DIF 4a4
@@ -3632,8 +3632,18 @@ supplies a gap and does not evaluate open-ended question answering
 \DIFadd{The masked visual writer predicted the reference word count on 91 difficult turns, compared with 65 for the causal control. Giving it the correct length on all 435 difficult turns within its capacity yielded just one normalized match. In 393 cases, a word image committed on the first pass already differed from the literal reference. Even when supplied all other human answer words, the writer recovered 677 of 1,937 individually copyable target word images and none of the 327 absent images. On the latter it chose spelling ten times. Forcing the spelling route would recover nine. Among the absent images, 245 had appeared in fitting answers, including 152 among the 2,048 most frequent fitting word images. These counts identify two distinct problems for free writing: locating the right word among visible alternatives and producing a fitting word that the current passage does not contain.
 }
 
+\subsection*{\DIFadd{Retrieving word images from earlier answers}}
+\DIFadd{A visual writer can preserve a familiar word in memory and still select the wrong word for a new sentence. We added 2,048 fitting-answer word images to the masked writer and tested it on 147 previously unused conversational passages (Fig.~\ref{fig:word-memory}). On 2,238 questions the frozen parent produced 500 exact answers, a revised decoder with retrieval disabled produced 502, and enabling retrieval also produced 502. The last count fell to 59 after exchanging the question and history, and to 254 after exchanging the passage. The corresponding byte writer produced 473 exact answers with retrieval enabled.
+}
+
+\DIFadd{None of the three visual conditions matched a complete reference on the 259 questions requiring new multiword phrasing. Visual word F1 with retrieval was 14.79\%, compared with 14.40\% for the original writer (paired difference 0.39 percentage points, 95\% story-bootstrap interval $-0.42$ to 1.28). Given the answer length and every other reference word, the writer recovered 356 of 1,100 available source words and none of 208 source-absent words. The correct image was stored for 108 of those 208. Among the 2,048 memory entries its median rank was 117, it ranked first three times, and it reached the first eight on 17 occasions. The median probability of using the retrieval route on those 108 slots was 0.106. Forcing retrieval would therefore recover only three of these missing words even with supplied neighbours.
+}
+
+\DIFadd{The model wrote \emph{University of Bristol} when asked where Mr.\ Preece worked. Its answer changed under both input exchanges. For \emph{What was their deal?}, it wrote \emph{he had with palms}, against \emph{would toss a coin}. Retrieval also changed one answer from \emph{No} to the correct \emph{yes}, but that \emph{yes} persisted after exchanging the question. The measured failure concerns contextual selection among writable words. These aligned English print tests leave historical-script transfer and a compute advantage at matched language quality open.
+}
+
 \clearpage
-%DIF >  Literal captions copied from their source inputs by build_word_canvas_article.py.
+%DIF >  Literal captions copied from their source inputs by build_word_memory_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -4688,6 +4698,12 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_132_word_canvas.png}
 \caption{\DIFaddFL{\textbf{Writing from a blank answer strip.} \textbf{a,} Mean word F1 for three visual writers on all 3,155 turns and on 443 questions whose target phrase was absent. The length intervention covers the 435 difficult references within the sixteen-word limit. \textbf{b,} Actual answers reproduced from pictured inputs. In the first example the two unchanged passes are omitted. The first-pass layout uses the final word widths for display. The other strips show the first difficult masked miss and the first exchange-sensitive difficult causal success. \textbf{c,} Presence of the normalized reference in independently generated proposals, by rank cutoff. The same 279 questions and pictured information were used for both visual searches. The byte controls received the corresponding ASCII fields.}}
 \label{fig:word-canvas}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_133_word_memory.png}
+\caption{\DIFaddFL{\textbf{Retrieving fitting-word images in a new answer.} \textbf{a,} Mean word F1 on 259 held questions whose normalized target wording is absent from the inputs. All arms produced zero complete matches on this subset. The decoder-only control sets the retrieval gate to zero. Ranks at right use the correct length and other answer words. \textbf{b,} Actual visual outputs reproduced from pictured inputs. Examples follow fixed corpus order within the first source-sensitive multiword success, first difficult miss and first correction relative to disabled retrieval. \textbf{c,} Normalized exact complete answers on all held turns and literal word-image recovery with a single concealed word. Stored denotes membership in the fitting memory. Each main count uses the original passage and question.}}
+\label{fig:word-memory}
 \end{figure*}
 
 \clearpage
@@ -7634,6 +7650,20 @@ times. Exact scoring requires both physical equality and the correct stop.
 }
 
 \DIFadd{The alternative search used the eight most probable lengths and four fixed orders (confidence, leftmost, rightmost and centre first). After deduplication we ranked stopped proposals by log length probability plus mean committed-word log probability. This is a proposal score. We scored targets only after the completed drafts were saved in memory. For diagnosis we separately supplied the true word count and then, for each word, every other human answer word. We compared literal images in these two assays as well as normalized complete answers for the length-only condition.
+}
+
+\subsection*{\DIFadd{Conditional retrieval of previously written words}}
+\DIFadd{We reserved the next 147 stories in the previously fixed CoQA hash ordering before fitting. We ranked distinct fitting-answer word images by frequency and broke ties by first occurrence. The top 2,048 were stored as sequences of observed glyph images. Each prototype has a learned retrieval key. The passage, question and visible answer words produce the frozen writer's hidden state $h$. We trained a query projection and a scalar gate $g(h)$ with the prototype keys and biases. For answer-word image $w$ the physical likelihood is
+}\[
+P(w\mid h)=(1-g)\bigl[\pi_c C(w\mid h)+\pi_s S(w\mid h)\bigr]+g R(w\mid h).
+\]
+\DIFadd{Here $C$ sums over copy locations and trims that produce exactly the target image, $S$ multiplies spelling and stop probabilities, and $R$ is a softmax over fitting images. Minimizing the negative log of this sum trains the retrieval component in proportion to its contribution to the observed word. Gradients update only the new retrieval parameters. The size of the memory and all inherited weights count towards deployment cost.
+}
+
+\DIFadd{Both arms used 3,200 updates of 32 turns on identical batches (44,417 distinct turns, one seed). With 785,190 parameters including 211,169 fitted here, the visual checkpoint occupies 4,264,184 bytes. On one RTX 4090~D the visual fit used 24.4 seconds, 2.86 kJ and 347 MB peak allocated GPU memory, after 5.9 seconds and 0.49 kJ for preparation. The byte fit used 24.6 seconds and 2.88 kJ, after 4.8 seconds and 0.40 kJ for preparation. These are incremental device measurements; the inherited models have separate training costs.
+}
+
+\DIFadd{Decoding combines exact copy and retrieval masses by output image and adds the mass of the greedy completed spelling. Other spellings can contribute at most the unused spelling probability $u$ to any rival. If the largest resolved mass exceeds the second largest by more than $u$, its image must maximize the full mixture. We checked this sufficient condition and its worst-case tightness in Lean on an arbitrary common denominator. The floating-point implementation uses a $10^{-6}$ safety margin. The condition held at 678 of 1,308 supplied-neighbour visual positions with retrieval. This measures agreement with the model's own mode; a certified mode can be the wrong word. At deployment the writer predicts its own length and previous commitments. The disabled-retrieval control uses this same decoder with $g=0$; the unchanged parent retains its original route-first decoder.
 }
 
 

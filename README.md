@@ -1,7 +1,10 @@
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
+
+A visual writer fitted on one RTX 4090 D answered 502 of 2,238 questions from 147 new stories. Asked where Mr. Preece worked, it wrote **University of Bristol** from the pictured input. Giving it a memory of 2,048 fitting-word images left it at zero complete matches on 259 questions requiring new multiword phrasing. [Run the model](models/word_memory/README.md) · [Read the comparison](references/word_memory_result.md)
+
+[![Figure 133, held answer quality, three generated strips and the missing-word test](publication/ilm-nature/figures/Figure_133_word_memory.png)](publication/ilm-nature/manuscript.pdf#page=177)
 
 # Imagized Language Model (ILM)
 

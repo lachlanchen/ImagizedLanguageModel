@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_word_canvas_article.py.
+% Literal captions copied from their source inputs by build_word_memory_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1053,4 +1053,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_132_word_canvas.png}
 \caption{\textbf{Writing from a blank answer strip.} \textbf{a,} Mean word F1 for three visual writers on all 3,155 turns and on 443 questions whose target phrase was absent. The length intervention covers the 435 difficult references within the sixteen-word limit. \textbf{b,} Actual answers reproduced from pictured inputs. In the first example the two unchanged passes are omitted. The first-pass layout uses the final word widths for display. The other strips show the first difficult masked miss and the first exchange-sensitive difficult causal success. \textbf{c,} Presence of the normalized reference in independently generated proposals, by rank cutoff. The same 279 questions and pictured information were used for both visual searches. The byte controls received the corresponding ASCII fields.}
 \label{fig:word-canvas}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_133_word_memory.png}
+\caption{\textbf{Retrieving fitting-word images in a new answer.} \textbf{a,} Mean word F1 on 259 held questions whose normalized target wording is absent from the inputs. All arms produced zero complete matches on this subset. The decoder-only control sets the retrieval gate to zero. Ranks at right use the correct length and other answer words. \textbf{b,} Actual visual outputs reproduced from pictured inputs. Examples follow fixed corpus order within the first source-sensitive multiword success, first difficult miss and first correction relative to disabled retrieval. \textbf{c,} Normalized exact complete answers on all held turns and literal word-image recovery with a single concealed word. Stored denotes membership in the fitting memory. Each main count uses the original passage and question.}
+\label{fig:word-memory}
 \end{figure*}
