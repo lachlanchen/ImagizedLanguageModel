@@ -77,6 +77,11 @@ def sample(root, work, report):
         for r in rows
         if r["doc"] != chosen["doc"] and not answers["highlight"][key(r)]["exact"]
     )
+    highlights = {
+        (d["id"], a["turn_id"]): (a["span_start"], a["span_end"])
+        for d in read(dev)["data"]
+        for a in d["answers"]
+    }
     data = []
     writer = Writer()
     models = {arm: load(arm, "cpu", root) for arm in answers}
@@ -89,6 +94,11 @@ def sample(root, work, report):
         reference = a.encode(r["refs"][0])
         # The published figure shows the current question; the complete model input
         # also contains the previous exchange on follow-up turns.
+        lo, hi = highlights[key(r)]
+        if not 0 <= lo < hi <= len(p):
+            lo, hi = 0, len(p)
+        cut = p[lo : min(lo + 72, hi)]
+        draw(d, "source-excerpt", a.array()[cut])
         draw(d, "question", a.array()[raw])
         draw(d, "reference", a.array()[reference])
         seen_outputs = {}
@@ -117,6 +127,8 @@ def sample(root, work, report):
             page_cells=len(p),
             reference=r["refs"][0],
             ref_cells=len(reference),
+            excerpt_cells=len(cut),
+            excerpt_start=lo,
             output=seen_outputs,
         )
         dump(d / "receipt.json", item)
@@ -140,9 +152,25 @@ def figure(root, report, cases):
             10,
             True,
         )
-        p.label(8, top + 24, "Current question", 8, True, MUTED)
+        p.label(8, top + 24, "Story excerpt", 8, True, MUTED)
         p.strip(
-            str(i) + "-q", d / "question.png", r["question_cells"], 8, top + 37, 523, 18
+            str(i) + "-p",
+            d / "source-excerpt.png",
+            r["excerpt_cells"],
+            98,
+            top + 20,
+            433,
+            17,
+        )
+        p.label(8, top + 48, "Current question", 8, True, MUTED)
+        p.strip(
+            str(i) + "-q",
+            d / "question.png",
+            r["question_cells"],
+            98,
+            top + 44,
+            433,
+            17,
         )
         xs = (8, 181, 353)
         for x, (name, tag, ct) in zip(
@@ -160,7 +188,7 @@ def figure(root, report, cases):
             p.label(x, top + 69, name, 8, True, TEAL if tag == "highlight" else MUTED)
             if ct:
                 if ct <= 28:
-                    p.strip(str(i) + tag, d / (tag + ".png"), ct, x, top + 86, 166, 21)
+                    p.strip(str(i) + tag, d / (tag + ".png"), ct, x, top + 86, 148, 21)
                 else:
                     mid = (ct + 1) // 2
                     p.strip(

@@ -1,0 +1,66 @@
+{
+  "composition": {
+    "parent": {
+      "turns": 154,
+      "exact": 2,
+      "distinct": 2,
+      "outside_training": 2,
+      "distinct_outside_training": 2
+    },
+    "whole": {
+      "turns": 154,
+      "exact": 4,
+      "distinct": 4,
+      "outside_training": 3,
+      "distinct_outside_training": 3
+    },
+    "highlight": {
+      "turns": 154,
+      "exact": 2,
+      "distinct": 2,
+      "outside_training": 2,
+      "distinct_outside_training": 2
+    }
+  },
+  "paired": {
+    "coqa": {
+      "docs": 498,
+      "turns": 996,
+      "gained": 40,
+      "lost": 78,
+      "exact_diff_pp_ci95": [
+        -6.124497991967871,
+        -1.7068273092369477
+      ],
+      "pair_diff_pp_ci95": [
+        -5.220883534136546,
+        0.20080321285140562
+      ]
+    },
+    "drop": {
+      "docs": 128,
+      "turns": 256,
+      "gained": 0,
+      "lost": 3,
+      "exact_diff_pp_ci95": [
+        -3.125,
+        0.0
+      ],
+      "pair_diff_pp_ci95": [
+        -2.34375,
+        0.0
+      ]
+    },
+    "composition": {
+      "docs": 117,
+      "turns": 154,
+      "gained": 0,
+      "lost": 2,
+      "exact_diff_pp_ci95": [
+        -3.289473684210526,
+        0.0
+      ],
+      "pair_diff_pp_ci95": null
+    }
+  }
+}

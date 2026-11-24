@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from ilm.visual_lm.portable_writer import read_image
-from scripts.evaluate_evidence_views import groups, official_index
+from scripts.prepare_evidence_views import ROOT, query, sha
 from scripts.evaluate_visual_discourse import draw
 from scripts.prepare_evidence_views import MODEL, Alphabet, read
 from scripts.prepare_open_exam import dump
@@ -15,13 +15,23 @@ from scripts.write_open_exam import Writer, infer, load
 
 def replay(model_dir, index, arm, output):
     receipt = read(model_dir / "examples" / str(index) / "receipt.json")
-    judge, _, _, dev, _ = official_index()
-    candidates = groups(judge, dev)[receipt["group"]]
-    r = next(
-        r
-        for r in candidates
-        if (r["doc"], r["turn"]) == (receipt["doc"], receipt["turn"])
-    )
+    dev = ROOT / "data/raw/coqa/dev-official.json"
+    if sha(dev) != "dfa367a9733ce53222918d0231d9b3bedc2b8ee831a2845f62dfc70701f2540a":
+        raise ValueError("Changed CoQA development stories")
+    story = next(d for d in read(dev)["data"] if d["id"] == receipt["doc"])
+    previous = ""
+    for question, answer in zip(story["questions"], story["answers"], strict=True):
+        if question["turn_id"] == receipt["turn"]:
+            r = dict(
+                doc=story["id"],
+                turn=question["turn_id"],
+                page=story["story"],
+                question=query(question["input_text"], previous),
+            )
+            break
+        previous = question["input_text"] + " " + answer["input_text"]
+    else:
+        raise ValueError("Missing published turn")
     a = Alphabet()
     q = a.encode(r["question"])
     p = a.encode(r["page"])

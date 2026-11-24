@@ -1,0 +1,39 @@
+{
+  "sources": {
+    "train-fixed.no-ol.csv": "12a4f59ec85ddd2586244aaf166f65d1b8cd468b6227e6620108baf118d5b325",
+    "train.json.zip": "b81f6a0845011bb4593d21dd58e2d76af4dd5d52e300ecc68cb8dee17ccc3cf8",
+    "attraction_db.json": "89b0db1a11ce63233e822ead70c30522d5b7715542307b9235d8c4d69d18929d",
+    "restaurant_db.json": "df3827ac9bd0536d4c7c92aa41c7071b240a8c85d8a24fbd6b8b25753382d296",
+    "hotel_db.json": "5746b3846f285c82dd7640b50d3ac21f2ae929f52fdca2b603e452585a4a694e"
+  },
+  "sha256": "36d0fcab71ab978de85ea814b3776df4004888f4ef19d3d017c9a03646b7aca2",
+  "counts": {
+    "en": {
+      "pairs_by_decision_budget": {
+        "64": 450,
+        "128": 4759,
+        "256": 7286,
+        "512": 7290
+      },
+      "annotated_facts": 12568,
+      "multiple_wordings": 7290,
+      "distinct_formulations": 27114,
+      "two_under_current_cap": 450,
+      "distinct_under_cap": 1638
+    },
+    "zh": {
+      "pairs_by_decision_budget": {
+        "64": 846,
+        "128": 846,
+        "256": 846,
+        "512": 846
+      },
+      "annotated_facts": 2485,
+      "multiple_wordings": 846,
+      "distinct_formulations": 2462,
+      "two_under_current_cap": 846,
+      "distinct_under_cap": 2462
+    }
+  },
+  "scope": "Original training partitions only. Distinct wording after case, punctuation and whitespace folding. Grouping uses equality of the annotated fact record. Additional unannotated claims or conversational differences require separate semantic screening."
+}
