@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modèle de 1,18 million de paramètres lit un caractère désigné dans une image de chinois classique et dessine son équivalent anglais. Pour 言, il écrit « speak » à la fin de 言及之而不言 et « speech » dans 有是言也. Il retrouve les deux sens dans 213 des 566 paires des Entretiens et 82 des 403 paires des Chants de Chu. Le comptage des caractères voisins en résout 211 et 104. [Exécuter le modèle](../models/visual_word_senses/README.md) · [Résultats](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 Le modèle lit en image une question en chinois et un extrait de roman, puis écrit une réponse en deux propositions sous forme d’image. Il reproduit exactement la réponse attendue dans 34 cas sur 48 pour La Pérégrination vers l’Ouest et 42 sur 48 pour Le Rêve dans le pavillon rouge. Pour 9 des 60 familles de caractères réservées à l’évaluation, il reproduit les formes sur os et sur bronze dans toutes les configurations. En anglais, les questions obtiennent respectivement 2 et 10 réponses exactes sur 48. [Exécuter le modèle](../models/grounded_ink_editor/README.md) · [Résultats et exemples](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

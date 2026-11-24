@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+يقرأ نموذج من 1.18 مليون معامل حرفاً محدداً في صورة نص صيني قديم ويكتب معناه الإنجليزي في صورة. كتب speak للحرف الأخير في 言及之而不言 وكتب speech للحرف 言 في 有是言也. وأصاب في المعنيين معاً في 213 من 566 زوجاً من «المحاورات» و82 من 403 أزواج من «أغاني تشو». وأصابت طريقة تعتمد على تواتر الحروف المجاورة في 211 و104 أزواج على التوالي. [تشغيل النموذج](../models/visual_word_senses/README.md) · [النتائج](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 قرأ النموذج أسئلة صينية ومقاطع روائية على هيئة صور، وكتب الإجابة في صورة تضم عبارتين. طابقت الإجابات الصورة المرجعية في 34 من 48 حالة لرواية «رحلة إلى الغرب» وفي 42 من 48 لرواية «حلم الغرفة الحمراء». وفي 9 من أصل 60 عائلة من الحروف المخصصة للتقييم، كتب النموذج شكلي الحرف الموثقين على العظام والبرونز بصورة صحيحة في جميع الترتيبات. وعند طرح الأسئلة بالإنجليزية انخفض العدد إلى 2 و10 من أصل 48 على التوالي. [تشغيل النموذج](../models/grounded_ink_editor/README.md) · [النتائج والأمثلة](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+118万パラメータのモデルが、漢文の画像で指定された字の英訳を画像で書く。「言及之而不言」の末字には speak、「有是言也」の「言」には speech と答えた。同じ字の異なる語義を両方正しく書けたのは『論語』で566組中213組、『楚辞』で403組中82組。近接文字の頻度を使う方法では211組と104組だった。 [モデルの実行](../models/visual_word_senses/README.md) · [実験結果](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 モデルは中国語の質問と小説の一節を画像で読み、二つの節からなる回答を画像で書く。参照画像と完全に一致した回答は『西遊記』で48件中34件、『紅楼夢』で48件中42件だった。評価用の60字族のうち9字族では、配置と質問順を変えても甲骨文と金文の両方を正しく書けた。英語の質問ではそれぞれ48件中2件と10件だった。 [モデルの実行](../models/grounded_ink_editor/README.md) · [結果と出力例](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

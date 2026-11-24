@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình 1,18 triệu tham số đọc một chữ được đánh dấu trong ảnh văn bản cổ rồi viết nghĩa tiếng Anh dưới dạng ảnh. Với chữ 言, nó viết “speak” ở cuối câu 言及之而不言 và “speech” trong 有是言也. Mô hình viết đúng cả hai nghĩa ở 213/566 cặp trong Luận ngữ và 82/403 cặp trong Sở từ. Phương pháp đếm các chữ lân cận đạt 211 và 104 cặp. [Chạy mô hình](../models/visual_word_senses/README.md) · [Kết quả](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 Mô hình đọc ảnh câu hỏi tiếng Trung cùng một đoạn tiểu thuyết rồi viết câu trả lời gồm hai vế dưới dạng ảnh. Số ảnh trả lời khớp hoàn toàn với mẫu là 34/48 cho Tây du ký và 42/48 cho Hồng lâu mộng. Với 9 trong 60 họ chữ dành cho đánh giá, mô hình viết đúng cả dạng giáp cốt và dạng kim văn ở mọi cách sắp xếp. Khi câu hỏi bằng tiếng Anh, số câu đúng lần lượt là 2/48 và 10/48. [Chạy mô hình](../models/grounded_ink_editor/README.md) · [Kết quả và ví dụ](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Модель с 1,18 млн параметров читает выделенный иероглиф на изображении классического китайского текста и рисует его английское толкование. Для последнего 言 в 言及之而不言 она пишет «speak», а для 言 в 有是言也 — «speech». Оба значения верны в 213 из 566 пар «Лунь юй» и 82 из 403 пар «Чуских строф». Метод подсчёта соседних знаков решил 211 и 104 пары. [Запуск модели](../models/visual_word_senses/README.md) · [Результаты](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 Модель читает китайские вопросы и отрывки из романов как изображения и записывает ответ из двух частей в виде изображения. С эталоном полностью совпали 34 из 48 ответов по «Путешествию на Запад» и 42 из 48 по «Сну в красном тереме». Для 9 из 60 семейств иероглифов из оценочной выборки модель верно воспроизвела формы из надписей на гадательных костях и на бронзе при всех перестановках. При вопросах на английском совпало соответственно 2 и 10 ответов из 48. [Запуск модели](../models/grounded_ink_editor/README.md) · [Результаты и примеры](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

@@ -4,6 +4,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 import hashlib
 import json
+import os
 import re
 
 import numpy as np
@@ -13,7 +14,16 @@ from scripts.train_typeface_writer import Face, FACES
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / "artifacts/visual_word_senses_v1"
 PUBLIC = ROOT / "references/evidence/visual_word_senses_20261124"
-SOURCE = ROOT / "data/raw/ud_classical_kyoto_r216/lzh_kyoto-ud-train.conllu"
+if experiment_dir := os.environ.get("ILM_WORD_SENSE_RUN_DIR"):
+    WORK = Path(experiment_dir).expanduser().resolve()
+    PUBLIC = WORK / "evidence"
+SOURCE = Path(
+    os.environ.get(
+        "ILM_KYOTO_CONLLU",
+        ROOT / "data/raw/ud_classical_kyoto_r216/lzh_kyoto-ud-train.conllu",
+    )
+)
+SOURCE_HASH = "dde87435a4590bde8346cc6b792ff0c6dcd301f876815143187bd9b2c839e02b"
 BOOKS = ("KR1h0004", "KR4a0001")
 RADIUS = 8
 LIMIT = 24
@@ -54,7 +64,9 @@ def key(data):
 
 
 def reserve():
-    WORK.mkdir(exist_ok=True)
+    if sha(SOURCE) != SOURCE_HASH:
+        raise ValueError("Expected the pinned Kyoto 2.16 training file")
+    WORK.mkdir(parents=True, exist_ok=True)
     PUBLIC.mkdir(exist_ok=True)
     raw = SOURCE.read_text()
     faces = [Face(f) for f in FACES[:2]]

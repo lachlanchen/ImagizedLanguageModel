@@ -31,13 +31,15 @@ def restore(folder=RELEASE, device="cpu"):
 
 
 @torch.inference_mode()
-def respond(net, page, focus):
+def respond(net, page, focus, matcher=None):
     if not 0 <= focus < len(page):
         raise ValueError("Marked cell outside image")
     a, b = max(0, focus - RADIUS), min(len(page), focus + RADIUS + 1)
     local = np.zeros((2 * RADIUS + 1, 128), np.uint8)
     start = RADIUS - (focus - a)
     local[start : start + b - a] = page[a:b]
+    if matcher is not None:
+        local = matcher.match(local)
     tensor = torch.from_numpy(np.unpackbits(local, axis=-1)).to(
         next(net.parameters()).device
     )
@@ -57,6 +59,11 @@ def main():
         "--index", type=int, help="Zero-based position in row-major reading order"
     )
     g.add_argument("--word", help="Unique single glyph in typed input")
+    ap.add_argument(
+        "--match-ink",
+        action="store_true",
+        help="Map each input image to its closest observed training shape",
+    )
     ap.add_argument("--page-cells", type=int)
     ap.add_argument("--font", type=Path, default=DEFAULT)
     ap.add_argument("--font-index", type=int, default=2)
@@ -82,7 +89,18 @@ def main():
     )
     torch.set_num_threads(2)
     net = restore(device=a.device)
-    raw, end = respond(net, page, focus)
+    matcher = None
+    if a.match_ink:
+        from ilm.visual_lm.stroke_matching import StrokeMatcher
+
+        file = RELEASE / "source_ink.npy"
+        if (
+            digest(file)
+            != json.loads((RELEASE / "weights.json").read_text())["source_ink"]
+        ):
+            raise ValueError("Changed training ink bank")
+        matcher = StrokeMatcher(np.load(file, allow_pickle=False), a.device)
+    raw, end = respond(net, page, focus, matcher)
     a.output.parent.mkdir(parents=True, exist_ok=True)
     write_strip(raw, a.output)
     report = dict(cells=len(raw), stopped=end)

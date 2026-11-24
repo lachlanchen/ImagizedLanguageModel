@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+一个拥有 118 万参数的模型从古文图像中读取指定汉字，用图像写出英文释义。「言及之而不言」的末字，模型写成 speak；「有是言也」的「言」，它写成 speech。在同字异义的对照中，《论语》有 213/566 对两义全对，《楚辞》有 82/403 对。按邻近字形计数的方法分别答对 211 和 104 对。模型在一张 RTX 4090 D 上从头训练。 [运行模型](../models/visual_word_senses/README.md) · [实验结果](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 模型直接读中文问题和小说片段的图像，再用图像写出两个分句。在《西游记》和《红楼梦》的测试中，分别有 34/48 和 42/48 个回答与参考图像完全相同。例如，它能按提问顺序写出「行者引路，而三藏上馬。」。在 60 个留作评估的汉字字族中，有 9 个字族在所有排列下都写对了甲骨文和金文。换用英文问题后，两部小说分别只答对 2/48 和 10/48。 [运行模型](../models/grounded_ink_editor/README.md) · [结果与实例](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

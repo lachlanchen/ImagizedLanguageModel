@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modelo de 1,18 millones de parámetros lee un carácter señalado en una imagen de chino clásico y dibuja su significado en inglés. Para 言 escribe «speak» al final de 言及之而不言 y «speech» en 有是言也. Acierta ambos sentidos en 213 de 566 pares de las Analectas y 82 de 403 pares de los Cantos de Chu. El método que cuenta caracteres vecinos resuelve 211 y 104 pares. [Ejecutar el modelo](../models/visual_word_senses/README.md) · [Resultados](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 El modelo lee preguntas en chino y pasajes de novelas en imágenes y escribe una respuesta de dos cláusulas como imagen. La respuesta coincidió exactamente con la referencia en 34 de 48 casos de Viaje al Oeste y en 42 de 48 de Sueño en el pabellón rojo. En 9 de las 60 familias de caracteres reservadas para la evaluación reprodujo las formas de los huesos oraculares y del bronce en todas las disposiciones. Con preguntas en inglés acertó en 2 y 10 de 48 casos, respectivamente. [Ejecutar el modelo](../models/grounded_ink_editor/README.md) · [Resultados y ejemplos](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

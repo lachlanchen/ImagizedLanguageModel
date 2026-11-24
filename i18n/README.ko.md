@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+118만 개의 매개변수를 가진 모델이 한문 이미지에서 지정한 글자를 읽고 영어 뜻을 이미지로 쓴다. 言及之而不言의 마지막 글자에는 speak, 有是言也의 言에는 speech라고 썼다. 같은 글자의 두 뜻을 모두 맞힌 경우는 《논어》 566쌍 중 213쌍, 《초사》 403쌍 중 82쌍이었다. 인접 글자의 빈도를 이용한 방법은 각각 211쌍과 104쌍을 맞혔다. [모델 실행](../models/visual_word_senses/README.md) · [실험 결과](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 모델은 중국어 질문과 소설 구절을 이미지로 읽고 두 절로 된 답을 이미지로 쓴다. 기준 이미지와 완전히 일치한 답은 《서유기》에서 48개 중 34개, 《홍루몽》에서 48개 중 42개였다. 평가용 한자 60개 계열 중 9개에서는 배치와 질문 순서를 바꾸어도 갑골문과 금문을 모두 정확히 썼다. 영어로 물었을 때 정확한 답은 각각 2개와 10개였다. [모델 실행](../models/grounded_ink_editor/README.md) · [결과와 출력 예시](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

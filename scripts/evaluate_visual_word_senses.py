@@ -7,7 +7,15 @@ import numpy as np
 import torch
 from safetensors.torch import load_file
 from ilm.visual_lm.visual_word_sense import VisualGlossWriter, retinal_features
-from scripts.prepare_visual_word_senses import WORK, PUBLIC, BOOKS, sha, save, RADIUS
+from scripts.prepare_visual_word_senses import (
+    WORK,
+    PUBLIC,
+    BOOKS,
+    sha,
+    save,
+    RADIUS,
+    ROOT,
+)
 from scripts.train_visual_word_senses import corpus, images
 from scripts.measure_writer_energy import snapshot, consumed
 from scripts.train_span_choice import gpu_owner
@@ -92,7 +100,7 @@ def frozen():
     from ilm.visual_lm.grounded_ink_editor import GroundedInkEditor
     from scripts.train_typeface_writer import Face, FACES
 
-    weights = WORK.parents[1] / "models/grounded_ink_editor/editor.safetensors"
+    weights = ROOT / "models/grounded_ink_editor/editor.safetensors"
     assert (
         sha(weights)
         == "eb2237148ac598466afaaf43de1abe1b9ee6d1b518058800b9128916ea2672d6"

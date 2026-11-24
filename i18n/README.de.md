@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Ein Modell mit 1,18 Millionen Parametern liest ein markiertes Zeichen in einem Bild eines klassischen chinesischen Textes und zeichnet seine englische Bedeutung. Für 言 schreibt es am Ende von 言及之而不言 „speak“, in 有是言也 dagegen „speech“. Beide Bedeutungen trifft es bei 213 von 566 Paaren in den Gesprächen des Konfuzius und 82 von 403 in den Liedern von Chu. Ein Häufigkeitsverfahren mit Nachbarzeichen löst 211 und 104 Paare. [Modell ausführen](../models/visual_word_senses/README.md) · [Ergebnisse](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 Das Modell liest chinesische Fragen und Romanpassagen als Bilder und schreibt seine Antwort in zwei Teilsätzen als Bild. Für Die Reise nach Westen stimmten 34 von 48 Antworten exakt mit der Vorlage überein, für Der Traum der Roten Kammer waren es 42 von 48. Bei 9 von 60 zurückgehaltenen Zeichenfamilien schrieb es die belegten Orakelknochen- und Bronzeformen in jeder Anordnung richtig. Bei englischen Fragen gelangen 2 bzw. 10 von 48 Antworten. [Modell ausführen](../models/grounded_ink_editor/README.md) · [Ergebnisse und Beispiele](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)

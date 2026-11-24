@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+一個有 118 萬個參數的模型從古文影像讀取指定漢字，再以影像寫出英文釋義。它將「言及之而不言」的末字寫作 speak，將「有是言也」的「言」寫作 speech。在同字異義的對照中，《論語》有 213/566 對兩義全對，《楚辭》有 82/403 對。按鄰近字形計數的方法分別答對 211 和 104 對。模型在一張 RTX 4090 D 上從頭訓練。 [執行模型](../models/visual_word_senses/README.md) · [實驗結果](../references/visual_word_sense_result.md)
+
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+
 模型直接閱讀中文問題與小說片段的影像，再以影像寫出兩個分句。在《西遊記》和《紅樓夢》的測試中，分別有 34/48 和 42/48 個回答與參考影像完全相同。例如，它能依提問順序寫出「行者引路，而三藏上馬。」。在 60 個保留作評估的漢字字族中，有 9 個字族在所有排列下都寫對了甲骨文與金文。改用英文提問後，兩部小說分別只答對 2/48 和 10/48。 [執行模型](../models/grounded_ink_editor/README.md) · [結果與實例](../references/grounded_ink_writing_result.md)
 
 [![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=157)
