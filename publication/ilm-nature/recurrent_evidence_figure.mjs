@@ -5,8 +5,9 @@ import {Presentation,PresentationFile} from '@oai/artifact-tool';
 const [root,stage,skill,python,mode]=process.argv.slice(2);
 const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')));
 const competing=mode==='competing';
-const folder=path.join(root,'references/evidence',competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,competing?'plates.json':'reading-plates.json')));
+const runs=mode==='runs';
+const folder=path.join(root,'references/evidence',runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -32,7 +33,26 @@ for(const plate of plates){
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
-if(competing){
+if(runs){
+  const results=await Promise.all(['scores','survival-scores','confirm-scores','survival-confirm-scores'].map(async n=>(JSON.parse(await fs.readFile(path.join(folder,n+'.json')))).scores.count.original));
+  const groups=[['en-multi',0],['en-multi',2],['zh-multi',0],['zh-multi',2]];
+  const comp=JSON.parse(await fs.readFile(path.join(folder,'composition.json')));
+  label(slide,'Recovering a complete answer from several facts',24,20,1040,45,30,true,ink);
+  label(slide,'Every requested fact, with no extra part',24,87,540,32,21,true,ink);
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},
+    position:{left:24,top:138,width:548,height:292},categories:['English (160)','English (96)','Chinese (160)','Chinese (96)'],
+    series:['Cell classifier','Conditional'].map((name,i)=>({name,values:groups.map(([g,j])=>results[j+i][g].exact),fill:i?teal:'#9EAFAA'})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,max:10,majorUnit:2,textStyle:{fontSize:14}},xAxis:{textStyle:{fontSize:12}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  label(slide,'What survives in an English sentence?',600,87,475,32,21,true,ink);
+  const data=[['Facts supplied','Stopped','All present'],...['read','given'].map((k,i)=>[i?'Human facts':"Reader’s facts",comp[k].stopped+'/'+comp[k].n,comp[k].contains_all+'/'+comp[k].n])];
+  const tab=slide.tables.add({rows:3,columns:3,left:600,top:145,width:458,height:160,columnWidths:[179,132,147],values:data});
+  tab.styleOptions={headerRow:true,bandedRows:false};tab.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<3;i++)for(let j=0;j<3;j++){const c=tab.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
+  label(slide,'The sentence measure credits repeated wording if every annotated part is present and generation stops.',600,340,449,99,18,false,ink);
+  label(slide,'Initial and fresh pages are scored separately. Each English sentence condition uses the same 256 questions.',24,477,1040,40,16,false,ink);
+  slide.speakerNotes.textFrame.setText('Held official development pages. Membership is scored after normalization, with no credit for missing or additional parts. No human judgment of the new sentences.');
+}else if(competing){
   const data=JSON.parse(await fs.readFile(path.join(folder,'benchmark.json')));
   label(slide,'Answering two questions on the same page',25,22,1035,48,31,true,ink);
   label(slide,'All 256 pages',25,89,470,32,21,true,ink);
@@ -71,7 +91,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1;
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,

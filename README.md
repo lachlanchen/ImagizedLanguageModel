@@ -2,6 +2,8 @@
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
+A visual reader can copy both names from a pictured page, including a substituted name drawn in unfamiliar ink. On fresh multi-part questions it recovered the complete answer on 3/96 English pages and 0/96 Chinese pages. The Western Xia example shows the question, the page and the one region the reader preserved. [Article, pages 6–7](publication/ilm-nature/visual_language_paper.pdf#page=6) · [Run the released weights](models/multiple_ink_runs/README.md) · [Full evaluation](references/multiple_ink_runs_result.md)
+
 Asked “Who designed Salamanca?” about an unseen railway page, the image model wrote **Matthew Murray designed Salamanca.** Changing only the name in the pictured passage made it write **Daniel Harper designed Salamanca.** On 96 fresh pages the reader recovered the human fact on 25. It also read a school year correctly and then lost the date while writing. The first page of the paper prints the actual answer images. [PDF](publication/ilm-nature/visual_language_paper.pdf) · [PNG](models/visual_statements/examples/intervention)
 
 On 256 additional English and Chinese pages, with two human questions per page, the contrast-trained ILM answered both on 34. A local Q4 Qwen3-8B reading text solved 101. On a 64-page subset with identical image inputs, ILM solved six and Qwen3-VL-8B solved 21. The paper includes original answer images and failures. [PDF](publication/ilm-nature/visual_language_paper.pdf) · [PNG](models/competing_facts/examples)
