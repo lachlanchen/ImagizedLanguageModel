@@ -29,8 +29,28 @@ def restore_lookup(folder, device):
     ]:
         if digest(p) != spec[field]:
             raise ValueError(f"Weight checksum mismatch for {p.name}")
-    net = PicturedActionLookup().to(device)
-    net.load_state_dict(load_file(str(folder / "lookup.safetensors")))
+    state = load_file(str(folder / "lookup.safetensors"))
+    if spec.get("architecture") == "visual_action_meaning_delta_v1":
+        base = folder.parent / "aligned" / "lookup.safetensors"
+        if digest(base) != spec["base_sha256"]:
+            raise ValueError("Incorrect base for the exchanged reader")
+        combined = load_file(str(base))
+        if set(state) != {
+            k for k in combined if k.split(".")[0] not in {"parent", "words"}
+        }:
+            raise ValueError("Incomplete or unexpected control tensors")
+        combined.update(state)
+        state = combined
+    if spec.get("architecture") in {
+        "visual_action_meaning_v1",
+        "visual_action_meaning_delta_v1",
+    }:
+        from ilm.visual_lm.visual_action_meaning import VisualActionMeaning
+
+        net = VisualActionMeaning().to(device)
+    else:
+        net = PicturedActionLookup().to(device)
+    net.load_state_dict(state)
     return net.eval()
 
 
@@ -109,6 +129,9 @@ def main():
     q.add_argument("--question-text")
     ap.add_argument("--output", required=True, type=Path)
     ap.add_argument("--device", default="cpu")
+    ap.add_argument(
+        "--reader-dir", type=Path, default=ROOT / "models/pictured_action_lookup"
+    )
     ap.add_argument("--transcribe", action="store_true")
     args = ap.parse_args()
     torch.set_num_threads(2)
@@ -125,7 +148,7 @@ def main():
         restore(device=dev),
         load_focus(ROOT / "models/visual_clause_roles", dev),
         load_adapter(ROOT / "models/pronoun_writer", dev),
-        restore_lookup(ROOT / "models/pictured_action_lookup", dev),
+        restore_lookup(args.reader_dir, dev),
         lines,
         question,
     )

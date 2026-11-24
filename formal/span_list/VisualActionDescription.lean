@@ -12,6 +12,14 @@ theorem need_distinct {Q R : Type} (f : Q → R) (choose : R → Bool)
     (x y : Q) (same : f x = f y) : ¬(choose (f x) = true ∧ choose (f y) = false) := by
   rw [same]
   simp
+/-- Once a line is fixed, a question-independent object pointer gives a single
+position. Two distinct correct positions in that line cannot both be returned. -/
+theorem single_object_limit {Line Position : Type} (pointer : Line → Position)
+    (line : Line) {first second : Position} (different : first ≠ second) :
+    ¬ (pointer line = first ∧ pointer line = second) := by
+  intro h
+  exact different (h.1.symm.trans h.2)
+#print axioms single_object_limit
 #print axioms two_stage
 #print axioms need_distinct
 end VisualActionDescription
