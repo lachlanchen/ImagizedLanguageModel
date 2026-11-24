@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from safetensors.torch import load_file
+from ilm.visual_lm.printed_transcript import transcribe
 from ilm.visual_lm.recurrent_evidence import ComposingWriter
 from ilm.visual_lm.book_prefix import observations
 from ilm.visual_lm.portable_writer import read_image, read_text, DEFAULT_FONT
@@ -44,6 +45,12 @@ def main():
         type=Path,
         help="Load a separately fitted statement head and its training receipt.",
     )
+    p.add_argument(
+        "--reader",
+        choices=("evidence", "likelihood", "contrast", "additive", "product"),
+        default="evidence",
+        help="Optical fact reader used before writing the sentence.",
+    )
     a = p.parse_args()
     if a.device == "cuda":
         from scripts.verse_gpu_runtime import configure_cuda_cli
@@ -51,7 +58,7 @@ def main():
         configure_cuda_cli()
     torch.set_num_threads(3)
     w = Writer(device=a.device)
-    r = reader("evidence", a.device)
+    r = reader(a.reader, a.device)
     e = editor(a.device, a.run_dir)
 
     def get(k):
@@ -73,7 +80,7 @@ def main():
         ink = shapes[np.asarray(seq, dtype=int)]
         draw(a.output, k, ink)
         (a.output / (k + ".bin")).write_bytes(ink.tobytes())
-        return "".join(w.transcript[i] if i < len(w.transcript) else "�" for i in seq)
+        return transcribe(seq, shapes, w.transcript)
 
     txt = save("answer", out)
     evidence = save("read_fact", fact)

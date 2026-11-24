@@ -95,21 +95,24 @@ class EvidenceWriter(nn.Module):
                 (qpool[:, 0], (ev.softmax(-1)[:, None].to(key.dtype) @ key)[:, 0]), -1
             )
         )
-        start, end = self.where(key).float().unbind(-1)
-        stops = F.pad(end, (0, LENGTH - 1), value=-1e9).unfold(1, LENGTH, 1)
         valid = F.pad(sm, (0, LENGTH - 1)).unfold(1, LENGTH, 1)
-        scores = (
-            start[:, :, None]
-            + ev[:, :, None]
-            + stops
-            + self.length(summary).float()[:, None, :]
-        )
+        scores = self.interval_scores(key, ev, summary)
         score = scores.masked_fill(~valid, -1e9)
         return (
             score.flatten(1).log_softmax(-1).view_as(score),
             ev,
             summary,
             self.span(summary).float().squeeze(-1),
+        )
+
+    def interval_scores(self, key, ev, summary):
+        start, end = self.where(key).float().unbind(-1)
+        stops = F.pad(end, (0, LENGTH - 1), value=-1e9).unfold(1, LENGTH, 1)
+        return (
+            start[:, :, None]
+            + ev[:, :, None]
+            + stops
+            + self.length(summary).float()[:, None, :]
         )
 
     def glyph_scores(self, state, bank, n):

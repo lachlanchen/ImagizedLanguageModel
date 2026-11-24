@@ -1,0 +1,50 @@
+{
+  "model": "qwen3:8b-q4_K_M",
+  "weights": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+  "modality": "text",
+  "quantization": "Q4_K_M",
+  "ollama": {
+    "version": "0.32.6"
+  },
+  "seconds": 87.72150880843401,
+  "joules": 14842.275,
+  "size_vram": 7495011532,
+  "sha256": "343b31cb1e28b910541426ccd277c3b804a589fe2bd96e3237b9d458be069008",
+  "metrics": {
+    "all": {
+      "n": 512,
+      "correct": 298,
+      "stopped": 512,
+      "both": 101,
+      "pages": 256
+    },
+    "squad": {
+      "n": 128,
+      "correct": 81,
+      "stopped": 128,
+      "both": 28,
+      "pages": 64
+    },
+    "coqa": {
+      "n": 128,
+      "correct": 36,
+      "stopped": 128,
+      "both": 5,
+      "pages": 64
+    },
+    "cmrc": {
+      "n": 128,
+      "correct": 82,
+      "stopped": 128,
+      "both": 29,
+      "pages": 64
+    },
+    "drcd": {
+      "n": 128,
+      "correct": 99,
+      "stopped": 128,
+      "both": 39,
+      "pages": 64
+    }
+  }
+}

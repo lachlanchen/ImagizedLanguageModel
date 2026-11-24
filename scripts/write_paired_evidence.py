@@ -6,6 +6,7 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 from safetensors.torch import load_file
+from ilm.visual_lm.printed_transcript import transcribe
 from ilm.visual_lm.paired_evidence import EvidenceWriter, LENGTH
 from ilm.visual_lm.book_prefix import observations
 from ilm.visual_lm.portable_writer import read_image, read_text, DEFAULT_FONT
@@ -16,6 +17,14 @@ from scripts.evaluate_visual_discourse import draw
 
 
 def reader(arm, device):
+    if arm in ("additive", "product"):
+        from scripts.train_endpoint_interaction import restored
+
+        return restored(arm, device)
+    if arm in ("likelihood", "contrast"):
+        from scripts.train_competing_facts import trained
+
+        return trained(arm, device)
     path = MODEL / (arm + ".safetensors")
     if sha(path) != read(PUB / (arm + ".json"))["weights"]:
         raise ValueError("Changed reader")
@@ -107,7 +116,11 @@ def main():
     src.add_argument("--passage-image", type=Path)
     p.add_argument("--question-cells", type=int)
     p.add_argument("--passage-cells", type=int)
-    p.add_argument("--arm", choices=("answer", "evidence"), default="evidence")
+    p.add_argument(
+        "--arm",
+        choices=("answer", "evidence", "likelihood", "contrast", "additive", "product"),
+        default="evidence",
+    )
     p.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     p.add_argument("--max-glyphs", type=int, default=96)
     p.add_argument("--output", required=True, type=Path)
@@ -155,9 +168,7 @@ def main():
     report = dict(
         emitted=len(out),
         stopped=stop,
-        transcript="".join(
-            writer.transcript[i] if i < len(writer.transcript) else "�" for i in out
-        ),
+        transcript=transcribe(out, shapes, writer.transcript),
     )
     dump(a.output / "result.json", report)
     print(report["transcript"])

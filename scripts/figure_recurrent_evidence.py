@@ -26,7 +26,8 @@ plt.rcParams.update(
 
 
 class Plate:
-    def __init__(self, name):
+    def __init__(self, name, assets=ASSETS):
+        self.assets = assets
         self.name = name
         self.items = []
 
@@ -50,7 +51,7 @@ class Plate:
             glyph = mask[:, cols[0] : cols[-1] + 1] if len(cols) else mask[:, :8]
             parts.extend((glyph, np.zeros((32, 2), np.uint8)))
         im = Image.fromarray(255 * (1 - np.concatenate(parts, axis=1)))
-        f = ASSETS / (self.name + "-" + tag + ".png")
+        f = self.assets / (self.name + "-" + tag + ".png")
         im.save(f)
         scale = min(maxwidth / im.width, height / 32)
         self.items.append(
@@ -90,7 +91,7 @@ class Plate:
                 )
             else:
                 ax.imshow(
-                    np.asarray(Image.open(ASSETS / r["path"])),
+                    np.asarray(Image.open(self.assets / r["path"])),
                     cmap="gray",
                     vmin=0,
                     vmax=255,
