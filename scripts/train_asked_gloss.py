@@ -93,7 +93,7 @@ def cache():
     )
 
 
-def fit(arm):
+def fit(arm, questions=None, reader_type=GlossFocus):
     rows, split = rows_and_split()
     rows = [r for r in rows if r["split"] == "train"]
     cacheinfo = read(WORK / "cache.json")
@@ -110,10 +110,11 @@ def fit(arm):
     work = WORK / arm
     work.mkdir(exist_ok=False)
     torch.manual_seed(SEED)
-    reader = GlossFocus().cuda()
+    reader = reader_type().cuda()
     opt = torch.optim.AdamW(reader.parameters(), lr=0.001)
-    raw, ql = question_batch(Face(FACES[0]), "cuda")
-    q = cell_features(raw[:8])
+    templates = questions if questions is not None else QUESTIONS[:4]
+    raw, ql = packed_batch([q for pair in templates for q in pair], Face(FACES[0]), "cuda")
+    q = cell_features(raw)
     role = torch.arange(2, device="cuda")[None]
     steps = 0
     trace = []
@@ -126,17 +127,17 @@ def fit(arm):
         flip = torch.as_tensor(
             rng.random(len(rows)) < 0.5, device="cuda", dtype=torch.long
         )
-        phr = torch.as_tensor(rng.integers(0, 4, (len(rows), 2)), device="cuda")
+        phr = torch.as_tensor(rng.integers(0, len(templates), (len(rows), 2)), device="cuda")
         loss_sum = 0.0
         for part in np.array_split(order, (len(rows) + 127) // 128):
             ix = torch.as_tensor(part, device="cuda")
-            qs = reader.read_questions(q, ql[:8])[2 * phr[ix] + role]
+            qs = reader.read_questions(q, ql)[2 * phr[ix] + role]
             logits = reader(x[ix].float(), lens[ix], qs)
             if arm == "locations":
                 loss = F.cross_entropy(logits.flatten(0, 1), truth[ix].flatten())
             else:
                 ev = logp[ix]
-                if arm == "exchanged":
+                if arm.endswith("exchanged"):
                     ev = ev[
                         torch.arange(len(ix), device="cuda")[:, None],
                         role ^ flip[ix, None],
