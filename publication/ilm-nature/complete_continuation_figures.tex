@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_compose_dialogue_article.py.
+% Literal captions copied from their source inputs by build_word_canvas_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1047,4 +1047,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_131_compose_dialogue.png}
 \caption{\textbf{Writing an answer from more than one phrase.} \textbf{a,} Complete answers on 501 held list questions under three visual curricula. The second series counts complete answers on 396 difficult turns that lost credit after each of two input exchanges. The conversational test used different passages and a single human reference. \textbf{b,} Actual output pixels from the uniform and list-trained checkpoints for the first new exchange-sensitive difficult list success and the first missed difficult dialogue question. Both outputs were reproduced from pictured inputs. \textbf{c,} Correct joint assignments of two supplied human answers to two questions from the same story with empty history. Exchanging the passage keeps both questions and candidate images fixed.}
 \label{fig:compose-dialogue}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_132_word_canvas.png}
+\caption{\textbf{Writing from a blank answer strip.} \textbf{a,} Mean word F1 for three visual writers on all 3,155 turns and on 443 questions whose target phrase was absent. The length intervention covers the 435 difficult references within the sixteen-word limit. \textbf{b,} Actual answers reproduced from pictured inputs. In the first example the two unchanged passes are omitted. The first-pass layout uses the final word widths for display. The other strips show the first difficult masked miss and the first exchange-sensitive difficult causal success. \textbf{c,} Presence of the normalized reference in independently generated proposals, by rank cutoff. The same 279 questions and pictured information were used for both visual searches. The byte controls received the corresponding ASCII fields.}
+\label{fig:word-canvas}
 \end{figure*}
