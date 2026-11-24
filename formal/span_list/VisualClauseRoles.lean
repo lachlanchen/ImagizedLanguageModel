@@ -34,6 +34,14 @@ theorem fronted_excludes_fixed_order (pred target : Arc)
   rintro rfl
   omega
 
+/-- Collapsing a minimal question pair is fatal on every page with distinct
+targets, regardless of the arc scorer or the amount of document training. -/
+theorem collapsed_questions_fail (a t : Arc) (r : Role) (h : t.verb ≠ t.object) :
+    ¬ (locate a r = t.verb ∧ locate a r = t.object) := by
+  rintro ⟨hv, ho⟩
+  exact h (hv.symm.trans ho)
+
+#print axioms collapsed_questions_fail
 #print axioms paired_identification
 #print axioms fronted_excludes_fixed_order
 end VisualClauseRoles

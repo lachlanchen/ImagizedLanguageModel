@@ -23,9 +23,15 @@ RELEASE = Path(os.environ.get("ILM_ASKED_GLOSS_RELEASE", ROOT / "models/asked_gl
 
 def load_focus(folder, device):
     file = folder / "focus.safetensors"
-    if digest(file) != json.loads((folder / "weights.json").read_text())["sha256"]:
+    spec = json.loads((folder / "weights.json").read_text())
+    if digest(file) != spec["sha256"]:
         raise ValueError("Changed pictured-question weights")
-    net = OrderedGlossFocus().to(device)
+    if spec.get("architecture") == "visual_clause_roles":
+        from ilm.visual_lm.visual_clause_roles import VisualClauseRoles
+
+        net = VisualClauseRoles().to(device)
+    else:
+        net = OrderedGlossFocus().to(device)
     net.load_state_dict(load_file(str(file)))
     return net.eval()
 

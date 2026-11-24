@@ -1,0 +1,686 @@
+{
+  "model": "qwen3:8b-q8_0",
+  "manifest": "e56358ca25dd14db6853a9f68a92d717aaa6f0a94250a72d1a0f3d86a9f30130",
+  "installed_weight_bytes": 8851089053,
+  "system": "Write naturally worded questions for a bilingual reading exercise. Each pair asks two DIFFERENT questions about an unspecified line of classical Chinese with a transitive verb. The first asks for the ACTION that someone carries out (the verb). The second asks for the person or thing acted upon (the direct object). The answer should be one translated word from the line. Neither question asks for the subject, purpose, instrument or place. Do not give answers or placeholders, do not quote a particular story. Vary wording, length and sentence shape. Use the requested language. Return JSON matching the schema.",
+  "registers": [
+    "spoken to a young reader",
+    "an ordinary reader asking for a short explanation",
+    "a concise exercise in literary interpretation",
+    "a reader contrasting the deed with its target",
+    "a student asking a tutor without using grammar terminology",
+    "a teacher asking indirect questions in everyday language"
+  ],
+  "kept": [
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What does the person do?",
+        "What is the thing they act on?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What action is being performed here?",
+        "What is the direct object of that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What verb is used to describe the action?",
+        "What is the object of that verb?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What does the sentence say someone is doing?",
+        "What is the object of that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What action is clearly shown in the line?",
+        "What is the thing being acted upon?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "spoken to a young reader",
+      "pair": [
+        "What is the verb in this sentence?",
+        "What is the direct object of the verb?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "你看到他做了什麼事？",
+        "他做了什麼事情？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "他拿走了什麼？",
+        "他拿走的是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "她說了什麼話？",
+        "她說的話是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "他們打了誰？",
+        "他們打的是誰？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "他吃了什麼東西？",
+        "他吃的是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "你聽見他說了什麼？",
+        "他說的是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "他寫了什麼字？",
+        "他寫的是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "spoken to a young reader",
+      "pair": [
+        "他們送了什麼禮物？",
+        "他們送的是什麼？"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What does the person do in this line?",
+        "What is the thing the person interacts with?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What is the main verb in this line?",
+        "What is directly affected by the verb?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What is the person doing in this sentence?",
+        "What is the direct object of the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What action is described in this line?",
+        "What is being acted upon in the sentence?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What does the sentence say the person is doing?",
+        "What is the direct object of the sentence?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "What is the verb action in this line?",
+        "What is the thing that receives the action?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "你讀過這句話裡的動作是什麼？",
+        "這句話裡的動作是針對什麼進行的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "這句話中，有人做了什麼事？",
+        "這句話中，這件事是作用在哪個對象上的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "這句話的動詞是什麼？",
+        "這句話的動詞是作用在哪個物件上的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "這句話中，做了什麼動作？",
+        "這句話中，動作是作用在哪個東西上的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "an ordinary reader asking for a short explanation",
+      "pair": [
+        "這句話裡的動作是什麼？",
+        "這句話裡的動作是作用在哪個目標上的？"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "What action does the subject perform in this line?",
+        "What is the direct object of the verb in this line?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "Which verb indicates the action being carried out?",
+        "What noun is directly affected by the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "What action is being described here?",
+        "What is the recipient of the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "What is the main action in this line?",
+        "What is the target of the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "What verb is being used to describe the action?",
+        "What is the object receiving the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "What is the subject doing in this line?",
+        "What is the direct object of the subject's action?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "請問這句話中，人物所進行的動作是什麼？",
+        "請問這句話中，動作所作用的對象是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "這句話裡，動作的執行者做了什麼事？",
+        "這句話裡，動作的目標是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "請問這句話中，動詞所表達的行為是什麼？",
+        "請問這句話中，動詞所作用的目標是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "這句話中，主語進行了什麼動作？",
+        "這句話中，動作作用於什麼事物？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "請問這句話中，行為的內容是什麼？",
+        "請問這句話中，行為的目標是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "這句話裡，動詞所表示的動作是什麼？",
+        "這句話裡，動詞所作用的對象是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "請問這句話中，行為的內容為何？",
+        "請問這句話中，行為所作用的物件是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a concise exercise in literary interpretation",
+      "pair": [
+        "這句話中，主語執行了什麼動作？",
+        "這句話中，動作所作用的目標是什麼？"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "Which action is being carried out in the line?",
+        "What is receiving the action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "What deed is the subject engaged in?",
+        "What is the target of that deed?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "什麼行動被執行了？",
+        "這個行動作用於什麼物件？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "這句話中描述的動作是什麼？",
+        "這個動作直接作用於哪個對象？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "請指出這個句子中所提及的行為。",
+        "這個行為針對的是哪個目標？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "這句話中的動詞代表什麼行為？",
+        "這個行為作用在什麼事物上？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "請說明這個句子中的行為。",
+        "這個行為所作用的是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "這句話中提到的動作是什麼？",
+        "這個動作的目標是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a reader contrasting the deed with its target",
+      "pair": [
+        "請指出這個句子中所描述的行為。",
+        "這個行為作用於什麼物件？"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What did the person do?",
+        "What was the thing they used?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What was the person doing?",
+        "What did they act on?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What did the person carry out?",
+        "What was the target of their action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What was the main action in the sentence?",
+        "What did the action affect?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What did they do in the line?",
+        "What was the object of their doing?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "What action is described here?",
+        "What was the direct object of that action?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "你讀到的那個句子裡，有人做了什麼事？",
+        "那個句子裡，他們是對什麼東西做動作的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "這句話中，動作是什麼？",
+        "這句話中，動作的目標是什麼？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "請問這句話裡，動作是什麼？",
+        "這句話裡，動作是作用在什麼東西上的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "這句話裡，有人做了什麼？",
+        "這句話裡，動作是對什麼東西進行的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a student asking a tutor without using grammar terminology",
+      "pair": [
+        "這句話中的動作是什麼？",
+        "這句話中的動作是作用在什麼東西上？"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What action is being described in the text?",
+        "What object is involved in that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What verb is used to show what is happening?",
+        "What is receiving the action of the verb?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What is the main action in this sentence?",
+        "What is directly affected by that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What action is being performed by the subject?",
+        "What is the direct target of that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What does the sentence describe as happening?",
+        "What is the focus of that action?"
+      ]
+    },
+    {
+      "language": "English",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "What action is being carried out in this line?",
+        "What is being acted upon in the line?"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "你說說看，這句話裡有人做了什麼事？",
+        "這句話裡被動了什麼東西？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "這句話裡動詞是什麼？",
+        "動詞是對誰或對什麼東西做的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "這句話中，有人做了什麼動作？",
+        "這個動作是對誰或對什麼東西進行的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "這句話中有人做了什麼？",
+        "這個動作對誰或對什麼東西進行的？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "這句話裡的動詞是什麼？",
+        "這個動詞作用的是什麼東西？"
+      ]
+    },
+    {
+      "language": "Traditional Chinese",
+      "register": "a teacher asking indirect questions in everyday language",
+      "pair": [
+        "這句話裡有人做了什麼事？",
+        "這件事是對誰或對什麼東西做的？"
+      ]
+    }
+  ],
+  "dropped": [
+    [
+      "What is the main action in the line?",
+      "What is the direct object of that action?"
+    ],
+    [
+      "What is the action that happens first?",
+      "What is the object of that action?"
+    ],
+    [
+      "What action is being performed here?",
+      "What is receiving the action in this line?"
+    ],
+    [
+      "What is the main action being performed?",
+      "What is the object of that action?"
+    ],
+    [
+      "這句話的動詞指的是什麼行為？",
+      "這句話的動詞是作用在哪個物件上的？"
+    ],
+    [
+      "這句話中，有人做了什麼事？",
+      "這句話中，這件事是作用在哪個對象上的？"
+    ],
+    [
+      "這句話裡的動作是什麼？",
+      "這句話裡的動作是作用在哪個目標上的？"
+    ],
+    [
+      "What is the main verb in this sentence?",
+      "What is the thing being acted upon?"
+    ],
+    [
+      "What verb is used to express the action?",
+      "What is the direct object of the sentence?"
+    ],
+    [
+      "What action does the subject perform?",
+      "What is the direct object of the verb?"
+    ],
+    [
+      "What is the main action described?",
+      "What is the direct object of that action?"
+    ],
+    [
+      "What is the subject doing?",
+      "What is being acted upon?"
+    ],
+    [
+      "What action is being performed?",
+      "What is the object of that action?"
+    ],
+    [
+      "What is the subject's action?",
+      "What is the direct object of the verb?"
+    ],
+    [
+      "What is the action taking place?",
+      "What is the direct object of that action?"
+    ],
+    [
+      "這句話中描述的動作是什麼？",
+      "這個動作作用於哪個對象？"
+    ],
+    [
+      "What action is being described here?",
+      "What is being affected by that action?"
+    ],
+    [
+      "What action is mentioned in the line?",
+      "What is the direct object of that action?"
+    ],
+    [
+      "這句話中，動作是什麼？",
+      "這句話中，動作作用的是什麼東西？"
+    ],
+    [
+      "這句話裡，他們做了什麼事？",
+      "這句話裡，動作是作用在什麼東西上的？"
+    ],
+    [
+      "這句話裡，有什麼動作？",
+      "這句話裡，動作是作用在什麼東西上的？"
+    ],
+    [
+      "What does the person do in this line?",
+      "What is the thing being acted upon here?"
+    ],
+    [
+      "What is the verb indicating the action?",
+      "What is the object of that verb?"
+    ],
+    [
+      "這句話裡動詞是什麼？",
+      "動詞作用的是什麼東西？"
+    ],
+    [
+      "這句話中有人做了什麼動作？",
+      "這個動作是對什麼東西進行的？"
+    ]
+  ]
+}
