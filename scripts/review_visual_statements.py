@@ -3,6 +3,7 @@
 from hashlib import sha256
 import gzip
 import json
+from scripts.evaluate_visual_cursor import normalize
 from scripts.prepare_visual_statements import PUB, WORK, read, dump
 
 # A strict pass needs a grammatical, standalone proposition that answers the
@@ -43,13 +44,30 @@ FROZEN_ANSWERS = {
 
 
 def main():
-    source = read(WORK / "fresh.json")[: len(LABELS)]
+    fresh = read(WORK / "fresh.json")
+    source = fresh[: len(LABELS)]
+    visibility = {}
     result = {}
     for arm in ("before", "trained"):
         payload = gzip.decompress((PUB / (arm + "-answers.json.gz")).read_bytes())
         if sha256(payload).hexdigest() != FROZEN_ANSWERS[arm]:
             raise ValueError("The stored readings belong to different model outputs")
         raw = json.loads(payload)["fresh"]
+        conditioned = {
+            key: {"pages": 0, "fact_read": 0, "output_contains_fact": 0}
+            for key in ("visible", "outside_crop")
+        }
+        for page, output in zip(fresh, raw, strict=True):
+            assert page["id"] == output["id"]
+            visible = any(
+                normalize(ref) and normalize(ref) in normalize(page["source"])
+                for ref in page["refs"]
+            )
+            bucket = conditioned["visible" if visible else "outside_crop"]
+            bucket["pages"] += 1
+            bucket["fact_read"] += int(output["fact_read"])
+            bucket["output_contains_fact"] += int(output["contains"])
+        visibility[arm] = conditioned
         rows = []
         for i, (page, v) in enumerate(zip(source, raw)):
             assert v["id"] == page["id"]
@@ -77,6 +95,7 @@ def main():
             assessment="One project model-based reviewer with access to arm identity, source, prompt and reference. No independent human adjudication.",
             requirement="Stopped, grammatical, standalone proposition giving the requested grounded answer; a right bare name or number earns no full-sentence credit.",
             counts={k: sum(x["strict"] for x in v) for k, v in result.items()},
+            fresh_reference_visibility=visibility,
             rows=result,
         ),
     )
