@@ -1,5 +1,6 @@
 """Reserve classical Chinese works, render glyphs and keep chapter boundaries."""
 from collections import Counter,defaultdict
+import os
 import hashlib
 import json
 from pathlib import Path
@@ -12,6 +13,9 @@ from ilm.visual_lm.portable_writer import DEFAULT_FONT
 WORK=ROOT/"artifacts/book_prefix_v1"
 PUB=ROOT/"references/evidence/book_prefix_v1"
 MODEL=ROOT/"models/book_prefix"
+if os.environ.get("ILM_BOOK_PREFIX_RUN"):
+    run_dir = Path(os.environ["ILM_BOOK_PREFIX_RUN"]).expanduser().resolve()
+    WORK, PUB, MODEL = run_dir/"artifacts", run_dir/"evidence", run_dir/"model"
 SOURCE=ROOT/"data/raw/ud_classical_kyoto_r216"
 TEST={"KR1h0004","KR4a0001"}
 DEV={"KR1h0001"}
