@@ -88,15 +88,15 @@ def paired_set(base):
 
 
 @torch.inference_mode()
-def measure(arm, rows, tiles, paired, paired_tiles):
-    net = load_reader("cuda", True, run_dir(arm))
+def measure(arm, rows, tiles, paired, paired_tiles, *, release=run_dir, output=PUB):
+    net = load_reader("cuda", True, release(arm))
     writer = Writer(device="cuda")
     head = editor("cuda")
     sep = read_text(" and ", DEFAULT_FONT)
     bar = read_text(" | ", DEFAULT_FONT)
     sent = []
     paired_records = []
-    details = unpack(PUB / (arm + "-answers.json.gz"))
+    details = unpack(output / (arm + "-answers.json.gz"))
     actual = {
         v["id"]: v
         for v in details
@@ -218,10 +218,10 @@ def measure(arm, rows, tiles, paired, paired_tiles):
     torch.cuda.synchronize()
     elapsed = monotonic() - t
     cost = consumed(energy, snapshot())["joules"]
-    packed(PUB / (arm + "-sentences.json.gz"), sent)
-    packed(PUB / (arm + "-pairs.json.gz"), paired_records)
+    packed(output / (arm + "-sentences.json.gz"), sent)
+    packed(output / (arm + "-pairs.json.gz"), paired_records)
     dump(
-        PUB / (arm + "-transfer.json"),
+        output / (arm + "-transfer.json"),
         dict(
             paired=summar,
             sentences=dict(
@@ -241,7 +241,14 @@ def measure(arm, rows, tiles, paired, paired_tiles):
 
 
 @torch.inference_mode()
-def history():
+def history(
+    arms=ARMS,
+    *,
+    release=run_dir,
+    output=PUB,
+    example_root=MODEL,
+    example_arm="contrast",
+):
     from scripts.evaluate_recurrent_history import historical_pages
     from scripts.write_visual_discourse import encode_pages
     from scripts.evaluate_visual_discourse import draw
@@ -250,8 +257,8 @@ def history():
     shapes, seq = encode_pages(np.zeros((2, 128), np.uint8), pages)
     physical = torch.from_numpy(observations({"tiles": shapes}, "ink")).cuda()
     separator = read_text(" | ", DEFAULT_FONT)
-    for arm in ARMS:
-        model = load_reader("cuda", True, run_dir(arm))
+    for arm in arms:
+        model = load_reader("cuda", True, release(arm))
         bank = model.ink(physical)
         detail = []
         for i in range(0, len(old), 16):
@@ -274,12 +281,14 @@ def history():
                     output=sha256(ans.tobytes()).hexdigest(),
                 )
                 detail.append(record)
-                if r["example"] and arm == "contrast":
-                    dest = MODEL / "examples" / "yan" / r["language"] / r["stage"]
+                if r["example"] and arm == example_arm:
+                    dest = (
+                        example_root / "examples" / "yan" / r["language"] / r["stage"]
+                    )
                     dest.mkdir(parents=True, exist_ok=True)
                     draw(dest, "answer", ans)
                     dump(dest / "receipt.json", record)
-        dump(PUB / (arm + "-history.json"), detail)
+        dump(output / (arm + "-history.json"), detail)
 
 
 def main():
