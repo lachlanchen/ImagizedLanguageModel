@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+清溪園和星河塔只在段首各出現一次，下文用「前者」「後者」說明票價。問題圖保持相同，只換要問的地點，模型分別寫出 **门票是12元的。** 和 **门票是35元的。** 舊模型兩次都答 12 元。在 536 組由真實對話改寫的測試裡，兩處地點、兩種順序的四個問題全部答對了 365 組。換成需要依靠上下文推斷指代的英文配對題，兩問全對的只有 1/120 組。
+
+[![指代實驗的真實回答圖像及對照結果](../publication/ilm-nature/figures/Figure_143_story_mentions.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 一個有 118 萬個參數的模型從古文影像讀取指定漢字，再以影像寫出英文釋義。它將「言及之而不言」的末字寫作 speak，將「有是言也」的「言」寫作 speech。在同字異義的對照中，《論語》有 213/566 對兩義全對，《楚辭》有 82/403 對。按鄰近字形計數的方法分別答對 211 和 104 對。模型在一張 RTX 4090 D 上從頭訓練。 [執行模型](../models/visual_word_senses/README.md) · [實驗結果](../references/visual_word_sense_result.md)
 
 [![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)

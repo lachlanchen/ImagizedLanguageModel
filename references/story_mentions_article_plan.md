@@ -1,0 +1,3 @@
+# Reference reading in pictured text
+
+Figure 143 follows the wrong-owner result in Figure 142. Show the original two-venue paragraph, the two target names and all four emitted answers. Use the three separately screened natural corpora for the order comparison. Keep their denominators, cue-erased and byte controls visible. Report the controlled four-query criterion, fresh article results, free-cast failure, Chinese negative baseline and one physical replay discrepancy. Preserve prior figures and fixed outputs. The compact edition gives the new result on pages one and two. The cumulative edition retains the preceding evidence.
