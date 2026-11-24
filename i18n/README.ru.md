@@ -2,81 +2,81 @@
 
 Модель с 1,18 млн параметров читает выделенный иероглиф на изображении классического китайского текста и рисует его английское толкование. Для последнего 言 в 言及之而不言 она пишет «speak», а для 言 в 有是言也 — «speech». Оба значения верны в 213 из 566 пар «Лунь юй» и 82 из 403 пар «Чуских строф». Метод подсчёта соседних знаков решил 211 и 104 пары. [Запуск модели](../models/visual_word_senses/README.md) · [Результаты](../references/visual_word_sense_result.md)
 
-[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=159)
+[![119 · ILM](../publication/ilm-nature/figures/Figure_119_visual_word_senses.png)](../publication/ilm-nature/manuscript.pdf#page=160)
 
 Модель читает китайские вопросы и отрывки из романов как изображения и записывает ответ из двух частей в виде изображения. С эталоном полностью совпали 34 из 48 ответов по «Путешествию на Запад» и 42 из 48 по «Сну в красном тереме». Для 9 из 60 семейств иероглифов из оценочной выборки модель верно воспроизвела формы из надписей на гадательных костях и на бронзе при всех перестановках. При вопросах на английском совпало соответственно 2 и 10 ответов из 48. [Запуск модели](../models/grounded_ink_editor/README.md) · [Результаты и примеры](../references/grounded_ink_writing_result.md)
 
-[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=158)
+[![118 · ILM](../publication/ilm-nature/figures/Figure_118_grounded_ink_editor.png)](../publication/ilm-nature/manuscript.pdf#page=159)
 
 Визуальная модель с 86 млн параметров правильно ответила на 38 из 56 вопросов на китайском о персонажах «Го юй» (國語). И текст, и вопросы подавались в виде изображений. После перестановки двух имён вопросы задавали повторно. Все четыре ответа были верны для 4 из 14 отрывков, у исходной модели — для 3, у контрольной модели с равными весами имён — для 2. На английском модель дала 16 правильных ответов и ни разу не ответила верно на всю четвёрку. В примере возвращаются изображения имён 密康公 и 恭王 из оригинала. [Guoyu · ILM](../models/optical_role_reader/README.md) · [38/56](../references/optical_role_adapter_result.md)
 
-[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=156)
+[![116 · ILM](../publication/ilm-nature/figures/Figure_116_optical_role_adapter.png)](../publication/ilm-nature/manuscript.pdf#page=157)
 
 Модель с 64 666 параметрами читает изображение вопроса и китайского отрывка и возвращает фрагмент исходной страницы. После обучения на 6 439 отрывках она правильно ответила на 104 из 452 вопросов по-китайски и на 45 из 452 по-английски по двум романам, оставленным для оценки. При обучении только по ответам людей результат составил 81 и 48 соответственно. На два разных вопроса об одном отрывке модель пока редко даёт два верных ответа. [ILM · 64k](../models/book_span_distillation/README.md) · [104/452](../references/book_span_distillation_result.md)
 
-[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=153)
+[![113 · ILM](../publication/ilm-nature/figures/Figure_113_book_span_distillation.png)](../publication/ilm-nature/manuscript.pdf#page=154)
 
 В тесте на смену ролей в титрах, представленных изображениями, модель прошла 175 из 256 сравнений, контрольная модель — 19. На двенадцати новых рассказах ни одна модель не прошла ни одного полного сравнения. По двум вопросам в виде изображений и соответствующим разделам каталога модель воспроизвела четыре исторических начертания 言 в двух из восьми испытаний. [↗](../references/individual_clause_writer_result.md)
 
-[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=151)
+[![111 · ILM](../publication/ilm-nature/figures/Figure_111_individual_clause_writer.png)](../publication/ilm-nature/manuscript.pdf#page=152)
 
 После перестановки двух имён в титрах, представленных изображением, модель с 87 миллионами параметров правильно ответила при обоих порядках вопросов в 165 из 256 сравнений. Контрольная модель видела те же примеры и прошла пять сравнений. На отдельно написанных рассказах обе модели получили 0 из 24. [Результаты и исходные изображения ответов](../references/role_change_writer_result.md) · [Запуск модели](../models/role_change_writer/README.md)
 
 После исключения зарезервированных материалов DRCD и повторного обучения модель с расширенным набором вариантов дала 234 точных ответа на 359 вопросах из выборки разработки, а универсальная модель — 242. В прежних оценках DRCD использовались зарезервированные тестовые отрывки. [Результаты и исправление по источникам данных](../references/span_list_result.md)
 
-[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=137)
+[![97 · 战国史](../publication/ilm-nature/figures/Figure_97_span_list.png)](../publication/ilm-nature/manuscript.pdf#page=138)
 
 В новой проверке на 384 вопросах по китайским текстам объединение вариантов от четырёх моделей дало 285 точных совпадений с изображением ответа. Столько же получила универсальная модель. При перестановке имён все вопросы пройдены в 63 из 128 тестов, а у специализированной модели — в 79. [Результаты и веса](../references/span_choice_result.md)
 
-[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=136)
+[![道地的 · 96](../publication/ilm-nature/figures/Figure_96_span_choice.png)](../publication/ilm-nature/manuscript.pdf#page=137)
 
 После перестановки двух имён в изображении китайского текста модель, обученная только по правдоподобию, верно ответила на все вопросы в обоих порядках слов для 79 из 128 отрывков. Прежняя модель справилась с 29. Среди 48 вопросов, составленных людьми, число верных ответов в обоих порядках упало с 34 до 28. [Результаты и модели](../references/participant_margin_result.md)
 
-[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=135)
+[![松窗 · 95](../publication/ilm-nature/figures/Figure_95_participant_margin.png)](../publication/ilm-nature/manuscript.pdf#page=136)
 
 На 34 из 48 вопросов, составленных людьми на китайском языке, модель записала верный ответ в обоих заданных порядках слов. Она правильно назвала композитора песни «秋潮», но ошиблась в имени, когда в описании другой песни композитора и автора слов поменяли местами. [Результаты и модель](../references/pictured_relation_result.md)
 
-[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=134)
+[![秋潮 · 94](../publication/ilm-nature/figures/Figure_94_pictured_relation.png)](../publication/ilm-nature/manuscript.pdf#page=135)
 
 После обучения на 26 890 примерах китайского текста в виде изображений модель правильно ответила полным предложением на 33 из 48 вопросов, написанных людьми. Другая модель, рисующая знаки по одному, выразила тот же факт в обоих заданных порядках в 31 случае. В исходном описании фильма режиссёр и сценарист названы верно, но после перестановки имён модель скопировала лишнюю часть предложения. [Результаты и модель](../references/role_binding_result.md)
 
-[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=133)
+[![93 · 雨巷来信](../publication/ilm-nature/figures/Figure_93_role_binding.png)](../publication/ilm-nature/manuscript.pdf#page=134)
 
 Изменится ли ответ, если поменять местами два имени на изображении страницы? Для сочетаний ролей, исключённых из обучения ответам в два предложения, модель с разбором вопроса и общим генератором изображений верно указала оба факта в заданном порядке в 70 из 136 случаев. Модель, писавшая оба предложения за один раз, справилась трижды. В примере с фильмом оба предложения читаются, но сценарий и режиссура приписаны одному человеку. [Результаты и модель](../references/grounded_proposition_result.md)
 
-[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=132)
+[![图 92 · Film credits](../publication/ilm-nature/figures/Figure_92_grounded_proposition.png)](../publication/ilm-nature/manuscript.pdf#page=133)
 
 Кто нарисовал карту и кому нужно было спросить дорогу? Обновлённая модель вернула два разных имени. В 64 новых вопросах в виде изображений она точно назвала имя 42 раза. Она также воспроизводит формы 言 на гадательных костях и бронзе в заданном порядке. Ни один из 128 новых открытых вопросов, требовавших отсутствующего во входных данных знака, не получил ответа, точно совпадающего с эталоном. [Результаты и модель](../references/pointing_causal_writer_result.md)
 
-[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=131)
+[![言 · 91](../publication/ilm-nature/figures/Figure_91_pointing_causal_writer.png)](../publication/ilm-nature/manuscript.pdf#page=132)
 
 В тексте на изображении сказано, кто нарисовал карту и кто заблудился. Модель верно назвала автора карты, но повторила тот же факт в ответ на вопрос о том, кому нужно было спросить дорогу. В 300 вопросах ответ требовал знака, отсутствующего во входных данных. Даже получив верное начало ответа, модель правильно выбрала первый недостающий знак лишь 18 раз. [Результаты и исходные изображения ответов](../references/causal_glyph_writer_result.md)
 
-[![Два вопроса об одной карте](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=130)
+[![Два вопроса об одной карте](../publication/ilm-nature/figures/Figure_90_causal_glyph_writer.png)](../publication/ilm-nature/manuscript.pdf#page=131)
 
 Модель выводит формы 言 в надписях на гадательных костях и бронзе в порядке, заданном вопросом на изображении. При знакомой формулировке оба порядка оказались верны в 94 из 96 сравнений на отложенных знаках. На других карточках с новой формулировкой результат составил 16 из 96. [Результаты и изображения ответов](../references/ordered_page_writer_result.md)
 
-[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=129)
+[![言 · 89](../publication/ilm-nature/figures/Figure_89_ordered_page_writer.png)](../publication/ilm-nature/manuscript.pdf#page=130)
 
 **Чтение и ответы по изображениям иероглифов.** Из 64 вопросов на китайском о двух людях модель правильно ответила на 46 при обычном начертании и на 41 при полужирном. Локальная Qwen3-8B дала 55 правильных ответов на текстовый ввод. При использовании незнакомого шрифта в стиле кайшу правильным оказался лишь один ответ. [Запуск модели](../docs/visual-page-responder.md)
 
-[![Рисунок 88. Изображения вопросов и ответов](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=128)
+[![Рисунок 88. Изображения вопросов и ответов](../publication/ilm-nature/figures/Figure_88_font_invariant_reader.png)](../publication/ilm-nature/manuscript.pdf#page=129)
 
 **Различает ли модель двух людей в одном предложении?** Модель правильно назвала и спонсора, и архитектора здания Гейтса. Из 864 пар вопросов она дала оба верных ответа в 100 случаях. При перестановке имён в 24 новых ситуациях модель не решила полностью ни одной, а локальная Qwen3-8B решила 20. [Результаты и запуск](../references/shared_sentence_writer_result.md)
 
-[![Рисунок 86. Два вопроса к одному предложению и исходные ответы](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
+[![Рисунок 86. Два вопроса к одному предложению и исходные ответы](../publication/ilm-nature/figures/Figure_86_shared_sentence_writer.png)](../publication/ilm-nature/manuscript.pdf#page=127)
 
 **Почему модель путает имена?** На 387 китайских вопросах о том, кто совершил действие, выбор предложения по общим с вопросом начертаниям знаков увеличил число полностью верных ответов с 62 до 116. При том же выборе предложения контрольная модель со случайным распределением дополнительных обучающих ответов дала 127 верных ответов. На рисунке 85 показано, как вместо имени изобретателя модель написала географическое название. [Результаты и запуск](../references/inverse_role_writer_result.md)
 
-[![Рисунок 85. Выбор предложения и изображения ответов](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
+[![Рисунок 85. Выбор предложения и изображения ответов](../publication/ilm-nature/figures/Figure_85_inverse_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=126)
 
 **О ком говорится в предложении?** С новыми именами и дополнениями модель полностью правильно написала 368 из 404 китайских предложений. Скопировав имена Цинь и Чу в начертании с бронзовых надписей, она правильно написала 24 из 32 предложений. Когда требовалось назвать участника лишь по его признаку, модель ни разу не воспроизвела нужное древнее имя точно. [Результаты и запуск](../references/visual_role_writer_result.md)
 
-[![Рисунок 84. Два отрывка с древними начертаниями и ответы модели](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
+[![Рисунок 84. Два отрывка с древними начертаниями и ответы модели](../publication/ilm-nature/figures/Figure_84_visual_role_writer.png)](../publication/ilm-nature/manuscript.pdf#page=125)
 
 **Что модель может прочитать на изображении текста?** Для одного и того же предложения «她喝了一口□。» («Она сделала глоток □») модель написала 水 (вода), а после замены напитка в исходном отрывке — 茶 (чай). Нейросеть в сочетании с частотами соседних знаков точно восстановила 651 из 2947 пропущенных китайских фрагментов. Когда два человека менялись ролями, ни в одной из 48 пар модель не оценила верно обе версии. [Результаты и команды](../references/visual_inference_writer_result.md)
 
-[![Рисунок 83. Два отрывка, одно предложение с пропуском и два изображения ответа](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=123)
+[![Рисунок 83. Два отрывка, одно предложение с пропуском и два изображения ответа](../publication/ilm-nature/figures/Figure_83_visual_inference_writer.png)](../publication/ilm-nature/manuscript.pdf#page=124)
 
 <!-- paired-writing-status:start -->
 Сравнение после 512 обновлений с удалением белых полей всё ещё не даёт надёжного копирования: точное совпадение OCR — 6/32 на обучении и 10/32 на валидации (чёткие эталоны: 27/32 и 28/32). В исходных изображениях пропущены символы и повторяются буквы. Время обучения снизилось с 795.624 до 287.182 секунды, но понимание языка и эффективность при полезном качестве не доказаны. [Все 64 исходных результата](../references/paired_padding_result.md).
@@ -90,57 +90,61 @@
 
 # Imagized Language Model (ILM)
 
+Когда действие было описано по-английски, модель нашла оба дополнения и написала их английские значения в 44 из 268 пар фраз на классическом китайском. Предыдущая модель справилась с 11 парами. На десяти парах из рассказов Пу Сунлина новая модель четырежды выбрала обе верные строки, но ни разу не написала оба верных ответа. На рисунке 125 показан её ответ на вопрос о персике. [Запуск модели](../models/visual_action_meaning/README.md) · [Результаты](../references/visual_action_meaning_result.md)
+
+[![125 · ILM](../publication/ilm-nature/figures/Figure_125_visual_action_meaning.png)](../publication/ilm-nature/manuscript.pdf#page=166)
+
 На одной странице стоят 焉得仁 и 策其馬. На вопрос о том, что обретают, модель пишет **benevolence**, а на вопрос о том, что стегают, — **horse**. На 703 из 1691 тестовой страницы она верно нашла и написала оба дополнения при обоих порядках строк и двух формулировках вопроса. На тех же 188 страницах замена названий действий снизила число полностью верных страниц с 95 до семи. [Запуск модели](../models/pictured_action_lookup/README.md) · [Результаты](../references/pictured_action_lookup_result.md)
 
-[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=165)
 
 Модель читает изображения отрывка на классическом китайском и вопроса, затем рисует ответ на английском. Для 還其珠 она пишет **return** или **pearl** в зависимости от вопроса. Модель с 1,40 млн параметров правильно написала оба варианта перевода 之, *it* и *go*, в 31 из 40 пар контрольных контекстов. При перемешивании обучающих ответов результат снизился до четырёх пар. В двух других книгах модель верно ответила на все четыре вопроса только для одного из 29 отрывков. [Запуск модели](../models/pronoun_writer/README.md) · [Результаты](../references/pronoun_writer_result.md)
 
-[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
+[![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=163)
 
 Прочитав вопрос о фразе 執大象, модель рисует **hold** для глагола и **image** для дополнения. Она верно ответила на все восемь вопросов на китайском и английском для 230 из 539 отрывков. При выборе из изученных толкований результат вырос до 247. Разговорные формулировки пока вызывают трудности. [Запуск модели](../models/asked_gloss/README.md) · [Результаты](../references/asked_gloss_result.md)
 
-[![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=160)
+[![120 · ILM](../publication/ilm-nature/figures/Figure_120_asked_gloss.png)](../publication/ilm-nature/manuscript.pdf#page=161)
 
 Благодаря визуальному представлению вопроса число точных цитат на 412 английских вопросах MLQA выросло с 17 до 41. Из 824 вопросов на двух языках генератор дал 111 точных ответов с самостоятельной остановкой по отрывкам и 90 по полным страницам. [↗](../references/question_evidence_transfer_result.md)
 
-[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=148)
+[![108 · ILM](../publication/ilm-nature/figures/Figure_108_question_evidence_transfer.png)](../publication/ilm-nature/manuscript.pdf#page=149)
 
 Визуальный кодировщик верно сопоставил английские и китайские вопросы в 364 из 374 отрывков романов. В ответ на 92 вопроса о пяти других произведениях модель чтения выбрала 31 точную цитату. Получив эти отрывки, генератор дал 19 точных ответов. [↗](../references/bilingual_book_intervals_result.md)
 
-[![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=147)
+[![107 · ILM](../publication/ilm-nature/figures/Figure_107_bilingual_book_intervals.png)](../publication/ilm-nature/manuscript.pdf#page=148)
 
 После обучения на 642 собственных ошибках модель дала 31 точных ответов в виде изображений на 144 запроса по шести другим китайским произведениям. В 0 из 36 отрывков она верно ответила на оба вопроса на обоих языках. [↗](../references/stopped_book_preference_result.md)
 
-[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=146)
+[![106 · ILM](../publication/ilm-nature/figures/Figure_106_stopped_book_preference.png)](../publication/ilm-nature/manuscript.pdf#page=147)
 
 На 34 отрывках из четырёх других китайских книг модель с повышенным весом первого знака дала 31 точный ответ на 136 вопросов на китайском и английском. Ни для одного отрывка она не ответила правильно на все четыре вопроса. [↗](../references/first_glyph_book_result.md)
 
-[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=145)
+[![105 · ILM](../publication/ilm-nature/figures/Figure_105_first_glyph_book.png)](../publication/ilm-nature/manuscript.pdf#page=146)
 
 К каждому отрывку китайского романа задали по два вопроса на китайском и на английском. Двуязычная модель дала четыре точных ответа для 3 из 374 отрывков, контрольная модель с переставленными при обучении английскими вопросами — для 0. В XQuAD двуязычная модель дала все четыре ответа для 1 из 227 отрывков. [Результаты и изображения ответов](../references/bilingual_novel_result.md)
 
-[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=144)
+[![104 · BiPaR](../publication/ilm-nature/figures/Figure_104_bilingual_novel.png)](../publication/ilm-nature/manuscript.pdf#page=145)
 
 Изменение толщины штрихов и пропорций знаков при обучении увеличило число точных ответов на китайские вопросы, набранные шрифтом HanaMin, с 15 до 43 из 394. Обе задачи модель решила для 6 из 197 отрывков. В отдельном тесте XQuAD с тем же шрифтом таких отрывков было 0 из 227. [Результаты и изображения ответов](../references/stroke_scale_result.md)
 
-[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=143)
+[![103 · HanaMin](../publication/ilm-nature/figures/Figure_103_stroke_scale.png)](../publication/ilm-nature/manuscript.pdf#page=144)
 
 На новых китайских текстах, набранных шрифтом HanaMin, которого не было в обучающей выборке, модель дала 15 точных ответов из 394. Одно лишь обучение на нескольких шрифтах дало 3. Модель ответила на оба вопроса для 0 из 197 отрывков. В локальном каталоге можно запросить исторические формы знака, например 中, и получить ответ в виде изображения. [Запуск модели и каталога](../models/typeface_writer/README.md)
 
-[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=142)
+[![102 · 中](../publication/ilm-nature/figures/Figure_102_typeface_writer.png)](../publication/ilm-nature/manuscript.pdf#page=143)
 
 Для 98 изображений китайских текстов составили по два разных вопроса. Модель после дистилляции дала 72 точных ответа из 196, при обычном обучении — 63. Обе модели правильно ответили на оба вопроса для 11 отрывков. Qwen3-8B получила те же отрывки в виде текста и справилась с обоими вопросами для 55 из них. [Результаты и модель](../references/interval_teacher_result.md)
 
-[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=141)
+[![101 · 72/196](../publication/ilm-nature/figures/Figure_101_interval_teacher.png)](../publication/ilm-nature/manuscript.pdf#page=142)
 
 Одна модель точно ответила на 114 из 359 вопросов по китайским текстам и воспроизвела с иллюстрации обе формы знака 言 из надписей на костях и бронзе в запрошенном порядке. Из 128 дополнительных отрывков с двумя вопросами к каждому модель правильно ответила на оба вопроса для 15 отрывков, а модель извлечения ответов — для 49. [Запуск модели](../models/mixed_visual_answers/README.md)
 
-[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=140)
+[![100 · 言](../publication/ilm-nature/figures/Figure_100_mixed_visual_answers.png)](../publication/ilm-nature/manuscript.pdf#page=141)
 
 Модель читает изображения китайских иероглифов. При трёх новых формулировках вопроса она правильно указала имя и год после каждой замены даты в 34 из 64 случаев с одним абзацем и в 8 из 48 с двумя абзацами. Из 359 более общих вопросов, составленных людьми, точное совпадение с эталоном получено в семи.
 
-[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=138)
+[![98 · 1993 → 1994](../publication/ilm-nature/figures/Figure_98_page_evidence.png)](../publication/ilm-nature/manuscript.pdf#page=139)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Status](https://img.shields.io/badge/status-research-orange)
