@@ -17,9 +17,8 @@ from scripts.prepare_multiple_ink_runs import (
     normalize,
 )
 from scripts.evaluate_visual_discourse import packed
-from scripts.train_multiple_ink_runs import load
 from scripts.train_paired_evidence import gpu_owner
-from scripts.write_multiple_ink_runs import forward
+from scripts.write_multiple_ink_runs import forward, load_reader
 
 
 def grade(parts, refs):
@@ -108,7 +107,9 @@ def aggregate(items):
 
 
 @torch.inference_mode()
-def main(survival=False, confirm=False):
+def main(survival=False, confirm=False, run_dir=None):
+    results = run_dir / "evaluation" if run_dir is not None else PUB
+    results.mkdir(parents=True, exist_ok=True)
     rows, tiles = corpus()
     if confirm:
         spec = read(PUB / "confirmation-split.json")
@@ -150,7 +151,7 @@ def main(survival=False, confirm=False):
             )
     detail = []
     with gpu_owner():
-        model = load("cuda", survival)
+        model = load_reader("cuda", survival, run_dir)
         bank = model.ink(torch.from_numpy(observations({"tiles": tiles}, "ink")).cuda())
         for i in range(0, len(variants), 12):
             group = variants[i : i + 12]
@@ -203,14 +204,14 @@ def main(survival=False, confirm=False):
                 n=len(edited),
                 both=sum(r["exact"] and orig[r["id"]]["primary_exact"] for r in edited),
             )
-    packed(PUB / (prefix + "answers.json.gz"), detail)
+    packed(results / (prefix + "answers.json.gz"), detail)
     dump(
-        PUB / (prefix + "scores.json"),
+        results / (prefix + "scores.json"),
         dict(
-            weights=read(PUB / ("survival.json" if survival else "fit.json"))[
-                "weights"
-            ],
-            outputs=sha(PUB / (prefix + "answers.json.gz")),
+            weights=read(
+                (run_dir or PUB) / ("survival.json" if survival else "fit.json")
+            )["weights"],
+            outputs=sha(results / (prefix + "answers.json.gz")),
             scores=scores,
             edit_pairs=recount,
         ),
@@ -226,6 +227,13 @@ if __name__ == "__main__":
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--survival", action="store_true")
+    from pathlib import Path
+
+    ap.add_argument(
+        "--run-dir",
+        type=Path,
+        help="Score a separate fit and save results inside its evaluation directory",
+    )
     ap.add_argument("--confirm", action="store_true")
     a = ap.parse_args()
-    main(a.survival, a.confirm)
+    main(a.survival, a.confirm, a.run_dir)

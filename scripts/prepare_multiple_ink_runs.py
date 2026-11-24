@@ -3,6 +3,9 @@
 from collections import Counter
 from hashlib import sha256
 import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import fcntl
 import re
 from zipfile import ZipFile
 
@@ -107,15 +110,45 @@ def multi(r):
     return all(len({normalize(s) for s in a}) > 1 for a in r["refs"])
 
 
-def prepare():
-    WORK.mkdir(parents=True, exist_ok=True)
-    PUB.mkdir(parents=True, exist_ok=True)
-    meta = PUB / "corpus.json"
-    if meta.exists():
-        for f, h in read(meta)["files"].items():
-            if sha(WORK / f) != h:
-                raise ValueError("Corpus changed: " + f)
-        return
+def prepared_files(work, receipt, filenames, build):
+    """Rebuild a missing private cache and authenticate it against any released receipt."""
+    work.mkdir(parents=True, exist_ok=True)
+    receipt.parent.mkdir(parents=True, exist_ok=True)
+    with (work / (receipt.stem + ".lock")).open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        released = read(receipt) if receipt.exists() else None
+        if released is not None:
+            complete = True
+            for name, key in filenames.items():
+                path = work / name
+                if not path.is_file():
+                    complete = False
+                    continue
+                digest = released
+                for field in key:
+                    digest = digest[field]
+                if sha(path) != digest:
+                    raise ValueError(f"Changed corpus file: {name}")
+            if complete:
+                return
+        with TemporaryDirectory(dir=work) as temp:
+            stage = Path(temp)
+            measured = build(stage)
+            if released is not None and released != measured:
+                raise ValueError("Rebuilt corpus differs from its published receipt")
+            for name in filenames:
+                (stage / name).replace(work / name)
+            if released is None:
+                dump(stage / receipt.name, measured)
+                (stage / receipt.name).replace(receipt)
+
+
+def prepare(work=WORK, public=PUB):
+    names = {f: ("files", f) for f in ("training.npz", "held.json")}
+    prepared_files(work, public / "corpus.json", names, build_training)
+
+
+def build_training(work):
     if sha(EN) != ARCHIVE_SHA:
         raise ValueError("English archive changed")
     val = list(english("valid")) + list(chinese("valid"))
@@ -223,7 +256,7 @@ def prepare():
         r["pi"] = render(r["p"])
         r["visible_parts"] = [all(ans in r["p"] for ans in a) for a in r["refs"]]
     np.savez_compressed(
-        WORK / "training.npz",
+        work / "training.npz",
         q=np.asarray(qs, np.int32),
         p=np.asarray(ps, np.int32),
         y=np.asarray(ys, np.uint8),
@@ -232,18 +265,14 @@ def prepare():
         lang=np.asarray(langs, np.uint8),
         tiles=np.stack([np.frombuffer(t, np.uint8) for t in palette]),
     )
-    dump(WORK / "held.json", held)
-    dump(
-        meta,
-        dict(
-            raw=dict(en=sha(EN), zh=sha(ZH)),
-            counts=dict(counts),
-            held=[r["id"] for r in held],
-            fallback_test_characters=dict(missing),
-            files={f: sha(WORK / f) for f in ("training.npz", "held.json")},
-        ),
+    dump(work / "held.json", held)
+    return dict(
+        raw=dict(en=sha(EN), zh=sha(ZH)),
+        counts=dict(counts),
+        held=[r["id"] for r in held],
+        fallback_test_characters=dict(missing),
+        files={f: sha(work / f) for f in ("training.npz", "held.json")},
     )
-    print(counts, flush=True)
 
 
 if __name__ == "__main__":

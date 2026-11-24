@@ -20,16 +20,18 @@ Use a fresh output path. The original PNG inputs yield **John Lennon | Paul McCa
 
 ## Reproduce the comparison
 
-The upstream archives are the MultiSpanQA release at `data/raw/multispanqa/release.zip` and DuReader 2.0 at `data/raw/dureader2/dureader_raw.zip`. The corpus receipt records both source hashes and the prepared file digests. The independent fit starts from the published optical evidence encoder. A fresh run directory preserves the released result. The scoring and replay commands below use the published weights.
+The upstream archives are the MultiSpanQA release at `data/raw/multispanqa/release.zip` and DuReader 2.0 at `data/raw/dureader2/dureader_raw.zip`. The corpus receipt records both source hashes and the prepared file digests. The independent fit starts from the published optical evidence encoder. A fresh run directory preserves the released result. The scoring command can evaluate a separate fit and stores those scores inside its run directory. Omit that option to use the released model. The replay checks the released examples.
 
 ```bash
 python -m scripts.prepare_multiple_ink_runs
 python -m scripts.reserve_survival_pages
 python -m scripts.train_multiple_ink_runs --survival --run-dir artifacts/list-survival-refit
 python -m scripts.evaluate_multiple_ink_runs --survival
-python -m scripts.evaluate_multiple_ink_runs --survival --confirm
+python -m scripts.evaluate_multiple_ink_runs --survival --confirm --run-dir artifacts/list-survival-refit
 python -m scripts.probe_run_composition
 python -m scripts.replay_multiple_ink_runs
 ```
+
+A fresh training run on the same workstation reproduced the conditional weights byte for byte and all 1,440 confirmation decisions. Use the same image inference command with `--run-dir artifacts/list-survival-refit` to write answers with your own fitted weights. [Reproduction record](../../references/evidence/multiple_ink_runs_v1/clean-refit.json)
 
 The archives include the original cell model, the conditional model, the single-interval and unconstrained-count controls, question exchange, changed ink and every scored answer. The Lean files describe the admitted paths and their probabilities. [Data and scores](../../references/evidence/multiple_ink_runs_v1) · [Conditional path proof](../../formal/span_list/InkRunSurvival.lean) · [Maximum-score path proof](../../formal/span_list/MultipleInkRuns.lean)

@@ -78,3 +78,28 @@ def test_survival_path_scores_match_conditional_likelihood_including_padding():
         torch.testing.assert_close(-nll.double(), unary, atol=2e-7, rtol=2e-7)
         mass += float(unary.detach().exp())
     assert abs(mass - 1) < 1e-9
+
+
+def test_release_cache_rebuild_preserves_published_receipt(tmp_path):
+    import json
+    import pytest
+    from scripts.prepare_multiple_ink_runs import prepared_files, sha
+
+    work = tmp_path / "private"
+    receipt = tmp_path / "public" / "receipt.json"
+    names = {"pages": ("files", "pages")}
+
+    def build(stage):
+        (stage / "pages").write_bytes(b"a")
+        return {"files": {"pages": sha(stage / "pages")}}
+
+    prepared_files(work, receipt, names, build)
+    original = receipt.read_bytes()
+    mtime = receipt.stat().st_mtime_ns
+    (work / "pages").unlink()
+    prepared_files(work, receipt, names, build)
+    assert sha(work / "pages") == json.loads(original)["files"]["pages"]
+    assert receipt.read_bytes() == original and receipt.stat().st_mtime_ns == mtime
+    (work / "pages").write_bytes(b"changed")
+    with pytest.raises(ValueError, match="Changed corpus file"):
+        prepared_files(work, receipt, names, build)

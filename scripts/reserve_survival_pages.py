@@ -15,16 +15,23 @@ from scripts.prepare_multiple_ink_runs import (
     sha,
     multi,
     CorpusFace,
+    prepared_files,
 )
 
 
-def main():
-    path = WORK / "confirm.json"
-    receipt = PUB / "confirmation-split.json"
-    if receipt.exists():
-        assert sha(path) == read(receipt)["sha256"]
-        return
-    prior = read(WORK / "held.json")
+def main(work=WORK, public=PUB):
+    names = {"confirm.json": ("sha256",), "confirm-tiles.npy": ("tiles",)}
+    prepared_files(
+        work,
+        public / "confirmation-split.json",
+        names,
+        lambda stage: reserve(work, stage),
+    )
+
+
+def reserve(work, stage):
+    path = stage / "confirm.json"
+    prior = read(work / "held.json")
     banq = {normalize(r["q"]) for r in prior}
     banp = {normalize(r["p"]) for r in prior}
     old = set().union(*(fragments(r["p"], 24) for r in prior))
@@ -61,7 +68,7 @@ def main():
         for v in fragments(r["p"], 32):
             if v in owners:
                 rejected.update(owners[v])
-    with np.load(WORK / "training.npz") as z:
+    with np.load(work / "training.npz") as z:
         base = z["tiles"]
     lookup = {a.tobytes(): i for i, a in enumerate(base) if i >= 2}
     new = []
@@ -92,17 +99,14 @@ def main():
             r["visible_parts"] = [all(w in r["p"] for w in a) for a in r["refs"]]
         chosen.extend(rows)
     dump(path, chosen)
-    extra = WORK / "confirm-tiles.npy"
+    extra = stage / "confirm-tiles.npy"
     np.save(extra, np.frombuffer(b"".join(new), np.uint8).reshape(-1, 128))
-    dump(
-        receipt,
-        dict(
-            sha256=sha(path),
-            tiles=sha(extra),
-            candidates=len(pool),
-            overlap_rejected=len(rejected),
-            ids=[r["id"] for r in chosen],
-        ),
+    return dict(
+        sha256=sha(path),
+        tiles=sha(extra),
+        candidates=len(pool),
+        overlap_rejected=len(rejected),
+        ids=[r["id"] for r in chosen],
     )
 
 

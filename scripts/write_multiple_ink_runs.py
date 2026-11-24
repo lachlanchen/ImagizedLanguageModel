@@ -9,10 +9,25 @@ from ilm.visual_lm.book_prefix import observations
 from ilm.visual_lm.multiple_ink_runs import intervals
 from ilm.visual_lm.portable_writer import read_image, read_text, DEFAULT_FONT
 from scripts.evaluate_visual_discourse import draw
-from scripts.prepare_multiple_ink_runs import dump
+from scripts.prepare_multiple_ink_runs import dump, read, sha
 from scripts.train_multiple_ink_runs import load
 from scripts.train_visual_cursor import pad
 from scripts.write_visual_discourse import encode_pages
+
+
+def load_reader(device, survival, run_dir=None):
+    if run_dir is None:
+        return load(device, survival)
+    from safetensors.torch import load_file
+    from ilm.visual_lm.multiple_ink_runs import RunReader
+
+    weights = run_dir / ("survival.safetensors" if survival else "reader.safetensors")
+    receipt = read(run_dir / ("survival.json" if survival else "fit.json"))
+    if sha(weights) != receipt["weights"]:
+        raise ValueError("Weights do not match the training receipt")
+    reader = RunReader().to(device)
+    reader.load_state_dict(load_file(str(weights), device=device))
+    return reader.eval()
 
 
 @torch.inference_mode()
@@ -97,6 +112,11 @@ def main():
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     ap.add_argument("--mode", choices=("count", "single", "free"), default="count")
+    ap.add_argument(
+        "--run-dir",
+        type=Path,
+        help="Use the final weights and receipt from a separate fit",
+    )
     ap.add_argument("--survival", action="store_true")
     ap.add_argument(
         "--sentence",
@@ -119,7 +139,13 @@ def main():
         )
 
     q, p = pixels("question"), pixels("page")
-    spans = infer(load(args.device, args.survival), q, p, args.mode, args.survival)
+    spans = infer(
+        load_reader(args.device, args.survival, args.run_dir),
+        q,
+        p,
+        args.mode,
+        args.survival,
+    )
     args.output.mkdir(parents=True, exist_ok=False)
     parts = [p[i:j] for i, j in spans]
     n = write(parts, args.output)
