@@ -15,8 +15,8 @@ from scripts.audit_region_writer import wording
 from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
-def main():
-    allrows = read(WORK / "confirmation.json")
+def main(work=WORK, public=PUB, models=None):
+    allrows = read(work / "confirmation.json")
     rows = [
         r
         for t in ("statements", "exam")
@@ -48,8 +48,8 @@ def main():
     runs = {}
     costs = {}
     with gpu_owner(), torch.inference_mode():
-        for arm in ("direct", "human", "predicted"):
-            actor = VisualAnswer(arm, "cuda")
+        for arm in models or ("direct", "human", "predicted"):
+            actor = models[arm]() if models else VisualAnswer(arm, "cuda")
             actor.answer(tiles, [qs[0]], [bs[0]])
             torch.cuda.synchronize()
             meter = snapshot()
@@ -101,7 +101,7 @@ def main():
             )
         score[k] = sc
     dump(
-        PUB / "comparison.json",
+        public / "comparison.json",
         dict(
             score=score,
             cost=costs,

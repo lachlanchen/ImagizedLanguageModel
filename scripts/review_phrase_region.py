@@ -27,7 +27,8 @@ def review(
     rows = read(work / "confirmation.json")
     edited = changed(rows)
     files = files or {k: k for k in arms}
-    answers = {k: unpack(work / (prefix + "-" + files[k] + ".json.gz")) for k in arms}
+    stem = prefix + "-" if prefix else ""
+    answers = {k: unpack(work / (stem + files[k] + ".json.gz")) for k in arms}
     names = [*arms, "human", "foil"]
     keys = list("ABCDE"[: len(names)])
     schema = dict(

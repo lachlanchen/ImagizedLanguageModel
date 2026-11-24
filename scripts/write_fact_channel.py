@@ -30,6 +30,9 @@ class VisualAnswer:
         self.n = len(self.palette)
         self.chars = read(root / "readback.json")
 
+    def select(self, features, qs, pages):
+        return predict(self.reader, features, qs, pages, self.device)
+
     @torch.inference_mode()
     def answer(self, tiles, qs, pages, supplied=None, limit=256, evidence="both"):
         if (
@@ -44,7 +47,7 @@ class VisualAnswer:
         if supplied is not None:
             spans = supplied
         elif self.reader is not None:
-            spans = predict(self.reader, features, qs, pages, self.device)
+            spans = self.select(features, qs, pages)
         else:
             spans = [None] * len(qs)
         if self.arm == "direct":
@@ -71,7 +74,14 @@ class VisualAnswer:
 def main(args):
     if args.device == "cpu":
         torch.set_num_threads(3)
-    model = VisualAnswer(args.arm, args.device, args.model_dir)
+    if args.arm in ("whole", "endpoints"):
+        from scripts.write_fact_ranking import RankedAnswer
+
+        if args.model_dir.resolve() != MODEL.resolve():
+            raise ValueError("Ranked inference requires the bound reader and writer")
+        model = RankedAnswer(args.arm, args.device)
+    else:
+        model = VisualAnswer(args.arm, args.device, args.model_dir)
     ink = Ink(model.palette)
     if args.input:
         doc = read(args.input)
@@ -119,7 +129,9 @@ if __name__ == "__main__":
     p.add_argument("--question")
     p.add_argument("--passage", action="append")
     p.add_argument(
-        "--arm", choices=["direct", "human", "predicted"], default="predicted"
+        "--arm",
+        choices=["direct", "human", "predicted", "endpoints", "whole"],
+        default="predicted",
     )
     p.add_argument("--model-dir", type=Path, default=MODEL)
     p.add_argument("--device", choices=["cpu", "cuda"], default="cpu")

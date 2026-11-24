@@ -1,0 +1,40 @@
+{
+  "binding": {
+    "reader": "cd0f2f5387cd2a24fb55350bc58e73f9768a7a89aec2f7df2c138d1e081b1078",
+    "writer": "10e1ef816c403e8df3a2e42468c491aa23124dee1e2d925a1fbd86870224b648",
+    "corpus": "eaa538c8be4edaf7229e45816ef23ff4bd2c6b182364032e29704860d0842e01",
+    "reservation": "f355952f7032b7dfb45d80ecd05c48008f3db20241dd78f7c6c9c00bf71cd667",
+    "sources": {
+      "ilm/visual_lm/fact_ranking.py": "ec24eb616998e001388b144a1acb625b0ac5a5e8c8d0d87565fa9cb2ec39bf0a",
+      "scripts/train_fact_ranking.py": "4400ee61f89b20f7975ab8c52151a0f87a36874ddfd162e6f33284b4aeb8e377",
+      "formal/span_list/FactRankMass.lean": "16c10a2fe28f31d8a9c537dff55362ac086281e0346c91b11b366eb53cc2679a",
+      "references/fact_span_reranking_protocol.md": "20ca7eae8ff8b20b5bd1f7bb2c32603798b4d5b7f8f454a60808673612f22222"
+    }
+  },
+  "sha256": "5e82fdaaad5e9b4fc53d1fa28a5e7f3037ded58c9f4d54ebe94a0c3958370b65",
+  "tensor_sha256": {
+    "features": "b713bd54973495fdfd2e3483bf082b9dd177d63756775f280cdabf70fb0b32ba",
+    "base": "d51bf834fd5f743c63836aa969d749662c01795512d3ad5ff94893ce35f75d80",
+    "lengths": "db297691d0d4714951b8e3346d3830803e61786108fc323cd6f15e7e8337a7cd",
+    "correct": "d60905cfab2bbea5d58436926befbcc7303386d371773665a163e35142642cc9"
+  },
+  "counts": {
+    "squad": {
+      "rows": 14868,
+      "supported": 10175,
+      "correct_positions": 11289,
+      "positions": 475776,
+      "duplicate_positions": 19881
+    },
+    "exam": {
+      "rows": 24189,
+      "supported": 19124,
+      "correct_positions": 25082,
+      "positions": 774048,
+      "duplicate_positions": 37366
+    }
+  },
+  "seconds": 15.738568650558591,
+  "joules": 1818.262,
+  "peak_bytes": 497128960
+}

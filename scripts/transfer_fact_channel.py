@@ -14,7 +14,7 @@ from scripts.evaluate_visual_discourse import cohorts
 from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
-def main():
+def main(models=None, public=PUB, output_model=MODEL):
     ink = Ink(np.load(MODEL / "palette.npy"))
     specs = []
     labels, images, targets = historical_pages()
@@ -50,8 +50,8 @@ def main():
     stage_evidence = {}
     yan = []
     with gpu_owner(), torch.inference_mode():
-        for arm in ("direct", "human", "predicted"):
-            net = VisualAnswer(arm, "cuda")
+        for arm in models or ("direct", "human", "predicted"):
+            net = models[arm]() if models else VisualAnswer(arm, "cuda")
             result = defaultdict(list)
             stages = defaultdict(lambda: defaultdict(int))
             for j in range(0, len(specs), 12):
@@ -73,7 +73,7 @@ def main():
                             st["fact_only_specimen"] += fact == y
                         if r["headword"] == "言":
                             folder = (
-                                MODEL
+                                output_model
                                 / "examples"
                                 / ("yan-" + r["language"] + "-" + r["stage"])
                             )
@@ -118,8 +118,8 @@ def main():
                     )
             stage_evidence[arm] = stages
             scores[arm] = {k: dict(n=len(v), correct=sum(v)) for k, v in result.items()}
-    dump(PUB / "transfer.json", scores)
-    dump(PUB / "historical-reading.json", dict(stages=stage_evidence, yan=yan))
+    dump(public / "transfer.json", scores)
+    dump(public / "historical-reading.json", dict(stages=stage_evidence, yan=yan))
     print(scores)
 
 
