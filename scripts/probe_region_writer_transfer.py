@@ -15,7 +15,7 @@ from scripts.evaluate_visual_discourse import cohorts
 from scripts.audit_region_writer import wording
 
 
-def main():
+def transfer(loaders):
     ink = Ink(np.load(MODEL / "palette.npy"))
     n = len(ink.tiles)
     samples = []
@@ -65,8 +65,8 @@ def main():
     counts = {}
     with gpu_owner(), torch.inference_mode():
         sel = model("selector", "cuda")
-        for arm in ("direct", "selected"):
-            net = model(arm, "cuda")
+        for label, arm, load in loaders:
+            net = load()
             d = defaultdict(list)
             for j in range(0, len(samples), 16):
                 batch = samples[j : j + 16]
@@ -106,8 +106,15 @@ def main():
                             and wording("".join(chars[i] for i in ids))
                             in list(map(wording, refs))
                         )
-            counts[arm] = {t: dict(n=len(g), correct=sum(g)) for t, g in d.items()}
-    dump(PUB / "transfer.json", dict(scores=counts, serif_sha256=sha(font)))
+            counts[label] = {t: dict(n=len(g), correct=sum(g)) for t, g in d.items()}
+    return dict(scores=counts, serif_sha256=sha(font))
+
+
+def main():
+    loaders = [
+        (arm, arm, lambda a=arm: model(a, "cuda")) for arm in ("direct", "selected")
+    ]
+    dump(PUB / "transfer.json", transfer(loaders))
 
 
 if __name__ == "__main__":

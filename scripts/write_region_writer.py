@@ -25,6 +25,22 @@ def model(arm, device, model_dir=MODEL):
     return net.eval()
 
 
+def phrase_model(directory, device, model_dir=MODEL):
+    from ilm.visual_lm.phrase_region import PhraseRegionWriter
+
+    receipt = read(directory / "fit.json")
+    weights = directory / "weights.safetensors"
+    if (
+        sha(weights) != receipt["weights"]
+        or sha(model_dir / "selector/weights.safetensors")
+        != receipt["binding"]["selector"]
+    ):
+        raise ValueError("Phrase writer or region selector differs from its receipt")
+    net = PhraseRegionWriter().to(device)
+    net.load_state_dict(load_file(str(weights)))
+    return net.eval()
+
+
 @torch.inference_mode()
 def answer(net, selector, arm, tiles, n, queries, pages, device, *, supplied=None):
     for q, p in zip(queries, pages, strict=True):
@@ -93,8 +109,15 @@ def main(args):
         if ink.bad:
             raise ValueError("The supplied font cannot render every requested cell")
     tiles = ink.array()
+    if args.phrase_checkpoint and args.arm != "selected":
+        raise ValueError("Phrase checkpoints use the learned region selector")
+    net = (
+        phrase_model(args.phrase_checkpoint, device, args.model_dir)
+        if args.phrase_checkpoint
+        else model(args.arm, device, args.model_dir)
+    )
     pred, selected = answer(
-        model(args.arm, device, args.model_dir),
+        net,
         model("selector", device, args.model_dir) if args.arm == "selected" else None,
         args.arm,
         tiles,
@@ -127,6 +150,7 @@ if __name__ == "__main__":
     p.add_argument("--arm", choices=("direct", "selected"), default="selected")
     p.add_argument("--question")
     p.add_argument("--passage", action="append")
+    p.add_argument("--phrase-checkpoint", type=Path)
     p.add_argument("--input", type=Path)
     p.add_argument("--device", choices=("cuda", "cpu"), default="cpu")
     p.add_argument("--output", type=Path, required=True)
