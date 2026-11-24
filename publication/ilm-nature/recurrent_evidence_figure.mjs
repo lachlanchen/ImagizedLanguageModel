@@ -6,8 +6,9 @@ const [root,stage,skill,python,mode]=process.argv.slice(2);
 const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')));
 const competing=mode==='competing';
 const runs=mode==='runs';
-const folder=path.join(root,'references/evidence',runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(runs||competing)?'plates.json':'reading-plates.json')));
+const sets=mode==='sets';
+const folder=path.join(root,'references/evidence',sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -33,7 +34,26 @@ for(const plate of plates){
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
-if(runs){
+if(sets){
+  const data=JSON.parse(await fs.readFile(path.join(root,'references/evidence/fact_binding_v1/scores.json')));
+  const arms=['parent','linear','mixture'], names=['Frozen reader','Additive head','Two readings'];
+  label(slide,'Pairing a supplied list and writing an answer',23,20,1040,44,30,true,ink);
+  label(slide,'Both supplied lists preferred (64 pages)',23,88,495,55,21,true,ink);
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},
+    position:{left:22,top:149,width:472,height:305},categories:['Original question','Unrelated question'],
+    series:arms.map((arm,i)=>({name:names[i],values:['witness','witness-exchanged'].map(k=>data[arm][k].witness.both),fill:['#94A7A2','#B46C49',teal][i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:13}},yAxis:{min:0,max:24,majorUnit:4,textStyle:{fontSize:14}},xAxis:{textStyle:{fontSize:14}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  label(slide,'Whole answers written from the page',520,88,540,55,21,true,ink);
+  const groups=[['New Chinese (64)','witness','witness'],['English plural (64)','confirmation','en-multi'],['Chinese plural (96)','confirmation','zh-multi'],['Chinese single (64)','confirmation','zh-single']];
+  const values=[['Pages','Frozen','Additive','Two readings'],...groups.map(([name,k,g])=>[name,...arms.map(a=>String(data[a][k][g].exact))])];
+  const table=slide.tables.add({rows:5,columns:4,left:520,top:149,width:548,height:250,columnWidths:[185,92,108,163],values});
+  table.styleOptions={headerRow:true,bandedRows:false};
+  table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<5;i++)for(let j=0;j<4;j++){const cell=table.getCell(i,j);cell.fill=i?'#FFFFFF':'#E9F1ED';cell.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
+  label(slide,'At inference only the question and page images are available. Every missing or additional part counts against the free answer.',23,473,1040,55,17,false,ink);
+  slide.speakerNotes.textFrame.setText('The score preference tests two annotated disjoint placements and two exchanges. Free answers are scored against any accepted annotation.');
+}else if(runs){
   const results=await Promise.all(['scores','survival-scores','confirm-scores','survival-confirm-scores'].map(async n=>(JSON.parse(await fs.readFile(path.join(folder,n+'.json')))).scores.count.original));
   const groups=[['en-multi',0],['en-multi',2],['zh-multi',0],['zh-multi',2]];
   const comp=JSON.parse(await fs.readFile(path.join(folder,'composition.json')));
@@ -91,7 +111,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1;
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
