@@ -14,10 +14,20 @@ from scripts.benchmark_competing_qwen import STORE, MODELS
 from scripts.train_paired_evidence import gpu_owner
 
 
-def review(work=WORK, public=PUB, prefix="confirmation", arms=("single", "phrase")):
+def review(
+    work=WORK,
+    public=PUB,
+    prefix="confirmation",
+    arms=("single", "phrase"),
+    *,
+    files=None,
+):
+    if len(arms) > 3 or len(set((*arms, "human", "foil"))) != len(arms) + 2:
+        raise ValueError("Model labels and human/foil controls must have unique roles")
     rows = read(work / "confirmation.json")
     edited = changed(rows)
-    answers = {k: unpack(work / (prefix + "-" + k + ".json.gz")) for k in arms}
+    files = files or {k: k for k in arms}
+    answers = {k: unpack(work / (prefix + "-" + files[k] + ".json.gz")) for k in arms}
     names = [*arms, "human", "foil"]
     keys = list("ABCDE"[: len(names)])
     schema = dict(

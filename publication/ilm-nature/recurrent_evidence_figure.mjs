@@ -13,8 +13,9 @@ const views=mode==='views';
 const region=mode==='region';
 const phrase=mode==='phrase';
 const marginal=mode==='marginal';
-const folder=path.join(root,'references/evidence',marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
+const fact=mode==='fact';
+const folder=path.join(root,'references/evidence',fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -39,8 +40,42 @@ for(const plate of plates){
   }
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
+if(fact){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
+  const tr=deck.slides.add();tr.background.fill='#FFFFFF';
+  label(tr,'Writing during training',20,10,1040,43,29,true,ink);
+  const arms=['direct','human','predicted'], names=['Full page','Fact alone','Fact + region'];
+  const steps=Object.keys(data.direct).sort((a,b)=>+a-+b);
+  for(const [j,t] of ['statements','exam'].entries()){
+    for(const [i,metric] of ['bitmap_exact','fact'].entries()){
+      const x=20+j*535,y=60+i*219;
+      label(tr,(j?'Chinese':'English')+(i?' · fact present':' · exact image'),x,y,503,24,17,true,ink);
+      const chart=tr.charts.add('line',{position:{left:x,top:y+30,width:504,height:171},categories:steps.map(s=>Number(s).toLocaleString('en-US')),
+        series:arms.map((arm,k)=>({name:names[k],values:steps.map(s=>data[arm][s].totals[t][metric]),line:{fill:['#885640','#446796',teal][k],width:2.5}})),
+        hasLegend:false,yAxis:{min:0,textStyle:{fontSize:11}},xAxis:{textStyle:{fontSize:11}}});
+      applyPresentationChartFont(chart,{fontFamily:'Arial'});
+    }
+  }
+  for(const [i,n] of names.entries())label(tr,n,210+i*231,504,225,26,16,true,['#885640','#446796',teal][i]);
+  tr.speakerNotes.textFrame.setText('Counts out of 64 questions in each language at each saved writer checkpoint. The optical reader is held fixed. Category labels give the actual update counts.');
+}
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
-if(marginal){
+if(fact){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
+  const arms=['direct','human','predicted'], names=['Full page','Fact alone','Fact + region'];
+  label(slide,'From a pictured fact to an answer',25,18,1040,45,31,true,ink);
+  label(slide,'Exact answer images (192 per language)',24,82,524,45,20,true,ink);
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:22,top:139,width:497,height:294},
+    categories:['English','Chinese'],series:arms.map((a,i)=>({name:names[i],values:['statements','exam'].map(t=>data[a].original[t].bitmap_exact),fill:['#885640','#446796',teal][i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:13}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:14}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  label(slide,'Both questions correct (96 passages)',550,82,510,45,20,true,ink);
+  const values=[['Writer','English','Chinese'],...arms.map((a,i)=>[names[i],String(data[a].original.statements.both_exact),String(data[a].original.exam.both_exact)])];
+  const table=slide.tables.add({rows:4,columns:3,left:550,top:143,width:490,height:205,columnWidths:[225,135,130],values});
+  table.styleOptions={headerRow:true,bandedRows:false};table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=table.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
+  label(slide,'Only the pictured question and source page are supplied at inference.',25,457,1030,54,18,false,ink);
+}else if(marginal){
   const data=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
   const scores=JSON.parse(await fs.readFile(path.join(folder,'answers.json'))).new.scores;
   const steps=Object.keys(data).filter(k=>data[k]).sort((a,b)=>Number(a)-Number(b));
@@ -219,12 +254,12 @@ for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=t.getCell(i,j);c.fill=i?'#FFFFF
 label(slide,'A fact appearing in a reply can coexist with wrong grammar or a false claim.',552,368,500,86,18,false,ink);
 slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen the QA2D passage texts. The separate fresh set uses 96 official SQuAD development passage families.');
 }
-const total=plates.length+1;
+const total=plates.length+1+Number(fact);
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
-  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
+  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:fact?[total-1,total]:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
   integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
   layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
   layoutArgs:['--expected-slide-size-emu','10363200,5124450','--require-native-table-slide',String(total)],

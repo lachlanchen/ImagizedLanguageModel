@@ -42,3 +42,12 @@ def test_reader_scores_are_independent_of_batch_padding():
         torch.tensor([[4, 0, 8, 9, 0, 0], [6, 11, 3, 5, 4, 2]]),
     )
     torch.testing.assert_close(a[0], b[0, :4, :4], atol=2e-6, rtol=2e-6)
+
+
+def test_blinded_model_and_control_roles_must_be_distinct(tmp_path):
+    import pytest
+    from scripts.review_phrase_region import review
+
+    for arms in (("candidate", "human"), ("foil",), ("candidate", "candidate")):
+        with pytest.raises(ValueError, match="unique roles"):
+            review(tmp_path, tmp_path, arms=arms)
