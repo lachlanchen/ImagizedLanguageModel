@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_context_cloze_article.py.
+% Literal captions copied from their source inputs by build_book_prefix_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1065,4 +1065,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_134_context_cloze.png}
 \caption{\textbf{Neighbouring word images predict some missing text.} \textbf{a,} Literal held word accuracy with both sides present and with only the left side visible. The network and count backoff were trained with the same 256,000 passage windows. The image strips show an unseen four-flank combination and the predicted centre. \textbf{b,} Conditional rank and emitted word with reference neighbours supplied, followed by exact autonomous replies on all difficult questions. The first exchange-sensitive difficult success and first difficult miss are shown in source order. \textbf{c,} Greedy continuation from the first reserved passage in evaluation order with no right-hand context. The repeated text is the actual output.}
 \label{fig:context-cloze}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_135_book_prefix.png}
+\caption{\textbf{A longer pictured prefix influences autonomous writing in two classical Chinese books.} \textbf{a,} The same 28,880 glyphs were predicted with the source history supplied at every step or with each predicted bitmap fed back to the writer. Each neural writer included a learned pointer to previous cells. \textbf{b,} First test passage in each work, followed by its reference and sixteen physical outputs from the visual mixture. Both examples enter short cycles. \textbf{c,} Correct positions after exchanging the first 30 cells with a passage from the other work or restricting the writer to two observed cells at every step. The intervals resample volumes within each work.}
+\label{fig:book-prefix}
 \end{figure*}

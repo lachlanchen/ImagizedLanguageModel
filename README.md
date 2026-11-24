@@ -4,6 +4,10 @@
 
 # Imagized Language Model (ILM)
 
+A 1.03-million-parameter visual writer trained on classical Chinese on a single RTX 4090 D. Given the original printed history, it recovered 2,744 of 28,880 next glyphs in the *Analects* and *Chu Ci*. With its own output fed back, it recovered 839, falling to 426 when the distant prefix came from the other work. No prompt produced eight consecutive correct initial glyphs. The figure shows the first output from each book. [Run the image writer](models/book_prefix/README.md) · [Measured results and Lean proof](references/book_prefix_result.md)
+
+[![Figure 135. Observed and self-fed continuation, with actual input and output strips for both held classical Chinese works](publication/ilm-nature/figures/Figure_135_book_prefix.png)](publication/ilm-nature/manuscript.pdf)
+
 From images reading **strong enough** and **he could**, the model supplied the missing word **that**. On 50,012 unseen English passage positions it restored 4,863 words from their neighbours, falling to 1,010 after a context exchange. Count backoff trained on the same windows restored 6,715. Free eight-word continuations still repeated. [Try the visual gap model](models/context_cloze/README.md) · [Measured results](references/context_cloze_result.md)
 
 [![Figure 134. Actual input, predicted word image, correct and failed answers, and a free continuation](publication/ilm-nature/figures/Figure_134_context_cloze.png)](publication/ilm-nature/manuscript.pdf#page=178)
