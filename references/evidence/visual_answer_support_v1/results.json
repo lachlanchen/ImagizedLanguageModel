@@ -1,0 +1,122 @@
+{
+  "training_wordings": {
+    "restaurant": {
+      "questions": 12520,
+      "answers": 32333,
+      "target_cells": 3603214,
+      "missing_literal_fact": 32333
+    },
+    "catalogue": {
+      "questions": 3919,
+      "answers": 3919,
+      "target_cells": 68376,
+      "one_fact_with_surrounding_text": 3911,
+      "cells_outside_that_fact": 23414,
+      "text_on_both_sides": 3651,
+      "fact_is_the_entire_answer": 7,
+      "multiple_occurrences": 1
+    },
+    "statements": {
+      "questions": 53011,
+      "answers": 53011,
+      "target_cells": 3725432,
+      "one_fact_with_surrounding_text": 43779,
+      "cells_outside_that_fact": 2258954,
+      "text_on_both_sides": 33576,
+      "missing_literal_fact": 9060,
+      "multiple_occurrences": 136,
+      "fact_is_the_entire_answer": 36
+    },
+    "exam": {
+      "questions": 12101,
+      "answers": 12101,
+      "target_cells": 104019,
+      "fact_is_the_entire_answer": 12101
+    }
+  },
+  "instructions": {
+    "alpaca_en.json": {
+      "counts": {
+        "rows": 52002,
+        "nonempty_reference": 51974,
+        "reference_cells": 14056782,
+        "missing_input_or_output_font": 18,
+        "can_spell_or_copy_all_cells_and_render_input": 51641,
+        "length_fits_256_including_stop": 29706,
+        "within_256_and_optical_support": 29484,
+        "length_fits_512_including_stop": 43283,
+        "within_512_and_optical_support": 43007,
+        "length_fits_1024_including_stop": 51049,
+        "within_1024_and_optical_support": 50720,
+        "length_fits_2048_including_stop": 51912,
+        "within_2048_and_optical_support": 51579,
+        "empty_reference": 28
+      },
+      "reference_length_percentiles": {
+        "50": 185,
+        "90": 610,
+        "95": 746,
+        "99": 1196,
+        "100": 4181
+      }
+    },
+    "alpaca_zh.json": {
+      "counts": {
+        "rows": 48818,
+        "nonempty_reference": 48818,
+        "reference_cells": 11127307,
+        "missing_input_or_output_font": 76,
+        "can_spell_or_copy_all_cells_and_render_input": 28045,
+        "length_fits_256_including_stop": 28202,
+        "within_256_and_optical_support": 20484,
+        "length_fits_512_including_stop": 47064,
+        "within_512_and_optical_support": 27148,
+        "length_fits_1024_including_stop": 48607,
+        "within_1024_and_optical_support": 27888,
+        "length_fits_2048_including_stop": 48811,
+        "within_2048_and_optical_support": 28039
+      },
+      "reference_length_percentiles": {
+        "50": 198,
+        "90": 440,
+        "95": 485,
+        "99": 754,
+        "100": 2466
+      }
+    },
+    "databricks_dolly_15k/databricks-dolly-15k.jsonl": {
+      "counts": {
+        "rows": 15011,
+        "nonempty_reference": 15011,
+        "reference_cells": 5375502,
+        "missing_input_or_output_font": 36,
+        "can_spell_or_copy_all_cells_and_render_input": 14922,
+        "length_fits_256_including_stop": 8860,
+        "within_256_and_optical_support": 8827,
+        "length_fits_512_including_stop": 12047,
+        "within_512_and_optical_support": 12001,
+        "length_fits_1024_including_stop": 14010,
+        "within_1024_and_optical_support": 13945,
+        "length_fits_2048_including_stop": 14759,
+        "within_2048_and_optical_support": 14682
+      },
+      "reference_length_percentiles": {
+        "50": 186,
+        "90": 803,
+        "95": 1195,
+        "99": 2650,
+        "100": 26018
+      }
+    }
+  },
+  "raw_sha256": {
+    "alpaca_en.json": "2eddafc6b977608d778aaab8dfc7e50e547b3af9826dfb9e909d9fc362e4a419",
+    "alpaca_zh.json": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+    "databricks_dolly_15k/databricks-dolly-15k.jsonl": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec"
+  },
+  "writer_corpus_sha256": "eaa538c8be4edaf7229e45816ef23ff4bd2c6b182364032e29704860d0842e01",
+  "palette_sha256": "0db12e3afe8ed979823c8387c6076384f67aa5a3021dbd07c79cf2640b6051c5",
+  "code_sha256": "b14893cd83c7920b72d0e8d15ba651b02a7467564391cb46fc3e1ef4c948209b",
+  "lean_sha256": "075bbef871559175eab89b0c81bde70c444d14812ed060b6a77a4c25a817fc1b",
+  "counted_output_bitmaps": 4331
+}

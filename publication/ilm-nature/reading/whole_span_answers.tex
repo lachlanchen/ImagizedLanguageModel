@@ -21,4 +21,17 @@ We supplied the human fact on every page. The writer then produced 44 exact Engl
 \section*{Generalization and cost}
 On 32 questions the revised pipeline used 180 J of device energy. Q4 Qwen3-VL-8B used 9,240 J. Across sixteen English questions they included the requested fact once and twelve times, respectively. On 152 book prompts no pipeline reproduced the eight-glyph continuation. Across 130 Chinese historical-form requests the revised reader returned three exact specimens, with zero on 130 English requests. The study demonstrates limited transfer in reading short visual evidence. It leaves independent, general writing and matched-quality efficiency open.
 \end{multicols}
+\section*{Can the writer express a complete instruction response?}
+We counted representable images separately from correct answers. Of 53,011 English training statements, 43,779 contain one occurrence of the supplied fact and additional text. All 12,101 Chinese exam targets equal the fact. We also checked 115,831 English and Chinese instruction records from the local Alpaca and Dolly corpora. With one decision per cell and one for stopping, a 256-step writer can finish at most 255 cells. Each required mark must be available for drawing or copying. A Lean proof gives both necessary conditions. We fitted 2,015 additional bitmap shapes on training responses. The table counts complete references meeting the physical conditions on separate instruction families, allowing access to the whole prompt for copying. No instruction answer was generated in this calculation.
+
+\smallskip\noindent{\small\sffamily
+\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}rrr@{}}
+\toprule
+Held references & Original, 256 steps & Original, 1,024 steps & Expanded, 1,024 steps \\
+\midrule
+English Alpaca (10,513) & 5,934 & 10,260 & 10,332 \\
+Chinese Alpaca (9,712) & 4,095 & 5,573 & 9,546 \\
+English Dolly (2,993) & 1,772 & 2,795 & 2,802 \\
+\bottomrule
+\end{tabular*}}
 \newpage

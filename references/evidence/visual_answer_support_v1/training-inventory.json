@@ -1,0 +1,65 @@
+{
+  "family_split": "NFKC alphanumeric casefolded instruction, 1/5 held",
+  "training_families": 92253,
+  "held_families": 23123,
+  "training_rows": {
+    "alpaca_en.json": {
+      "references": 41461
+    },
+    "alpaca_zh.json": {
+      "references": 39106
+    },
+    "databricks_dolly_15k/databricks-dolly-15k.jsonl": {
+      "references": 12018
+    }
+  },
+  "held": {
+    "alpaca_en.json": {
+      "references": 10513,
+      "base_full_optical_support": 10433,
+      "base_at_256": 5934,
+      "base_at_1024": 10260,
+      "base_at_2048": 10417,
+      "expanded_full_optical_support": 10505,
+      "expanded_at_256": 5988,
+      "expanded_at_1024": 10332,
+      "expanded_at_2048": 10489,
+      "missing_input_or_output_font": 6
+    },
+    "alpaca_zh.json": {
+      "references": 9712,
+      "base_full_optical_support": 5603,
+      "base_at_1024": 5573,
+      "base_at_2048": 5602,
+      "expanded_full_optical_support": 9589,
+      "expanded_at_1024": 9546,
+      "expanded_at_2048": 9588,
+      "base_at_256": 4095,
+      "expanded_at_256": 5548,
+      "missing_input_or_output_font": 23
+    },
+    "databricks_dolly_15k/databricks-dolly-15k.jsonl": {
+      "references": 2993,
+      "base_full_optical_support": 2978,
+      "base_at_256": 1772,
+      "base_at_1024": 2795,
+      "base_at_2048": 2930,
+      "expanded_full_optical_support": 2989,
+      "expanded_at_256": 1774,
+      "expanded_at_1024": 2802,
+      "expanded_at_2048": 2940,
+      "missing_input_or_output_font": 4
+    }
+  },
+  "base_shapes": 4331,
+  "expanded_shapes": 6346,
+  "new_shapes": 2015,
+  "image_bytes": 812544,
+  "inventory_sha256": "38dc0d3bbd5560484ce4f4d1976524718ea65e02e68645b492a9572b5f57b98a",
+  "source_hashes": {
+    "alpaca_en.json": "2eddafc6b977608d778aaab8dfc7e50e547b3af9826dfb9e909d9fc362e4a419",
+    "alpaca_zh.json": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+    "databricks_dolly_15k/databricks-dolly-15k.jsonl": "2df9083338b4abd6bceb5635764dab5d833b393b55759dffb0959b6fcbf794ec"
+  },
+  "measurement_sha256": "9dc95dd0230373c596e5f69c767960b31d7e77f7f122d5f128ad22902cb5abe7"
+}
