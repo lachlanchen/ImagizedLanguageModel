@@ -27,10 +27,13 @@ def load(folder, device="cpu"):
         raise ValueError("Wrong surface checkpoint")
     state = load_file(str(file))
     architecture = WordCanvas if meta.get("arm") == "masked" else SurfaceDialogue
-    if meta.get("arm") == "word_memory":
+    if meta.get("arm") in ("word_memory", "context_cloze"):
         from ilm.visual_lm.word_memory import WordMemory
 
-        net = WordMemory(
+        from ilm.visual_lm.context_cloze import ContextCloze
+
+        cls = ContextCloze if meta["arm"] == "context_cloze" else WordMemory
+        net = cls(
             state["palette"],
             meta["mode"],
             state["prototype_cells"],

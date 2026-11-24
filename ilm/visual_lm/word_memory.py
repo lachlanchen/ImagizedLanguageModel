@@ -51,6 +51,9 @@ class WordMemory(WordCanvas):
             self.keys.shape[1]
         )
 
+    def gate_logits(self, latent):
+        return self.gate(latent)
+
     def choose_images(
         self, bank, route, pointer, latent, groups, image_table, valid, pending
     ):
@@ -60,7 +63,7 @@ class WordMemory(WordCanvas):
         k = len(self.prototype_words)
         suffix = torch.arange(image_table.size(1), device=valid.device)[None]
         union = torch.where(lookup[image_table] >= 0, lookup[image_table], k + suffix)
-        p = torch.sigmoid(self.gate(latent))
+        p = torch.sigmoid(self.gate_logits(latent))
         if getattr(self, "disable_retrieval", False):
             p = torch.zeros_like(p)
         memory_mass = p * self.retrieve_logits(latent).softmax(-1)
