@@ -247,6 +247,10 @@ Update the goal and private handoff when the decision changes. Keep the session
 goal active until its acceptance criteria are proved. Verify ownership before
 launching a job; an observation timeout does not authorize another worker.
 
+## Nutstore manuscript delivery
+
+Run `python3 scripts/sync_manuscript_pdf.py` after updating the reading edition. It publishes a single verified file, `Projects/ILM/ILM_Manuscript_LATEST.pdf`. Keep source, review editions, figures, weights and evidence in the project repository. Existing Nutstore archives are historical deliveries.
+
 ## Always Commit and Push After Change
 
 Policy: After making any change to files in this repository (e.g., via `apply_patch` or manual edits), create an atomic commit and push it to the tracked branch.
