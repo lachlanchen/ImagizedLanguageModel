@@ -28,16 +28,18 @@ def datafile(name):
 
 def load_model(mode,device):
     path=MODEL/(mode+".safetensors")
-    if sha(path)!=read(MODEL/"weights.json")["weights"][mode]:
+    manifest="wording-weights.json" if mode.endswith("-wording") else "weights.json"
+    if sha(path)!=read(MODEL/manifest)["weights"][mode]:
         raise ValueError("Changed atlas reader")
     net=AtlasReader().to(device).eval()
     net.load_state_dict(load_file(str(path),device=str(device)))
     return net
 
 
-def train(mode,obs,data,signature):
-    path=MODEL/(mode+".safetensors")
-    receipt=PUB/(mode+"-fit.json")
+def train(mode,obs,data,signature,edition=""):
+    name=mode+edition
+    path=MODEL/(name+".safetensors")
+    receipt=PUB/(name+"-fit.json")
     if receipt.exists():
         item=read(receipt)
         if item["weights"]!=sha(path) or item["corpus"]!=signature or item["steps"]!=STEPS:
@@ -87,7 +89,7 @@ def train(mode,obs,data,signature):
         if step==1 or step%200==0:
             scalar=loss.item();elapsed=monotonic()-start
             trace.append([step,scalar,elapsed])
-            print(mode,step,round(scalar,4),round(elapsed,2),flush=True)
+            print(name,step,round(scalar,4),round(elapsed,2),flush=True)
             if not math.isfinite(scalar) or elapsed>900 or torch.cuda.max_memory_allocated()>8*2**30:
                 raise RuntimeError("Numerical or resource limit")
     torch.cuda.synchronize()

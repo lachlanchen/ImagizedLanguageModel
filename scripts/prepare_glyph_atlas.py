@@ -29,7 +29,7 @@ def cleaned(value):
     return text
 
 
-def questions(entries,section,ids):
+def questions(entries,section,ids,*,training=TRAIN,held=HELD):
     train = section=="train"
     rng = np.random.default_rng(20930 if train else 20931)
     pool = np.array([i for i,e in enumerate(entries) if e["split"]==section])
@@ -46,7 +46,7 @@ def questions(entries,section,ids):
         for i in range(64000):
             a,b = rng.choice(pool,2,replace=False)
             lang = int(rng.integers(2))
-            frame = rng.choice(TRAIN[lang])
+            frame = rng.choice(training[lang])
             fields = [6] if rng.random()<.2 else rng.choice(6,int(rng.integers(1,4)),replace=False)
             add(a,b,fields,lang,frame,int(rng.integers(2)),i,"train")
     else:
@@ -54,7 +54,7 @@ def questions(entries,section,ids):
             b = pool[(i+1)%len(pool)]
             fields = rng.choice(6,2,replace=False).tolist()
             for lang in (0,1):
-                for k,templates in enumerate((TRAIN,HELD)):
+                for k,templates in enumerate((TRAIN,held)):
                     frame = templates[lang][(i%len(templates[lang])) if k else 2+i%4]
                     group = (i*2+lang)*2+k
                     for x,y in ((a,b),(b,a)):
