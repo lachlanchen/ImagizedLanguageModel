@@ -22,6 +22,15 @@ Consider the beginning of a word such as \emph{conserve}. Its remaining letters 
 Four printed cells enter each causal transformer block. The output distribution scores observed shapes by their pixels and can also reuse an earlier visible mark. Feedback comes from the model's own emitted image. We trained the 2.12-million-parameter writer on pictured fiction, synthetic instructions and contrastive reference questions. Its deployed fit took 183 seconds and 25.9 kJ of device energy on one RTX 4090 D. Adding the 0.53-million-parameter source-position reader required a further 118 seconds and 12.7 kJ. These measurements exclude controls, preparation, evaluation and host energy.
 
 A repeated name poses a specific difficulty. At the first letter, several source positions may be compatible with the answer. Our second writer retains the posterior mass of each position and can either move forward one cell, start copying elsewhere, or resume free writing. Exact marginalization supports arbitrary switches. A separate matched writer must select its source position anew at every step.
+
+\heading{Two questions about tennis on the same pictured page}
+\begin{tabular}{@{}l@{\hspace{1em}}l@{}}
+\textbf{Question} & \textbf{Emitted answer}\\[2pt]
+\includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/0/question.png} & \includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/0/answer.png}\\[2pt]
+\includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/1/question.png} & \includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/1/answer.png}\\[2pt]
+\end{tabular}
+
+The first question asks which sport uses a hollow rubber ball and a net. The model wrote \emph{tennis}. The second asks which sport descended from lawn tennis. The model wrote the year 1890. The reference says \emph{modern tennis}. The example is one of eleven passages on which the writer answered exactly one question correctly. Each question and answer above uses the replayed pixels.
 \newpage
 \heading{Figure 1. The answers the writers returned}
 \begin{center}
