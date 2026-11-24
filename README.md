@@ -4,9 +4,13 @@
 
 # Imagized Language Model (ILM)
 
-**Can a model write a different sentence when one printed fact changes?** A 1.59-million-parameter visual writer and reader trained on one RTX 4090 D take Chinese or English fact cards and return English sentence images. Changing a family policy reversed the corresponding claim in both answers for 1,286 of 1,291 pairs. On 1,847 Chinese cards, 657 complete answers passed a literal fact checker and 1,606 passed with equivalent price and rating bands. The first test card still acquired an unsupported price. [Run the released model](models/semantic_page/README.md) · [Four-page paper](publication/ilm-nature/visual_language_paper.pdf) · [Full results](references/semantic_page_result.md)
+**A Chinese question in, a Chinese answer image out.** On the same pictured restaurant card, one guest asked for opening hours and another asked where it was. The writer returned **营业时间是周一至周日 11:00-21:30。** and **地址是西四南大街60号(近缸瓦市)。** A 1.57-million-parameter model trained on a single RTX 4090 D gave clean source values on 507 of 515 held human questions. Removing the question reduced this to 237. A matched byte reader scored 508. Both relation selection and the wording can still fail. [Run the writer](models/chinese_card_reply/README.md) · [Five-page paper](publication/ilm-nature/visual_language_paper.pdf) · [Evidence and failures](references/chinese_card_reply_result.md)
 
-[![One pictured Chinese record, an edited policy and the two original generated answers](publication/ilm-nature/figures/Figure_139_semantic_page.png)](publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Original questions and answer images on one restaurant, a failed hotel question and a historical-mark transfer experiment](publication/ilm-nature/figures/Figure_140_visual_fact_reply.png)](publication/ilm-nature/visual_language_paper.pdf#page=2)
+
+**Can a model write a different sentence when one printed fact changes?** A 1.59-million-parameter visual writer and reader trained on one RTX 4090 D take Chinese or English fact cards and return English sentence images. Changing a family policy reversed the corresponding claim in both answers for 1,286 of 1,291 pairs. On 1,847 Chinese cards, 657 complete answers passed a literal fact checker and 1,606 passed with equivalent price and rating bands. The first test card still acquired an unsupported price. [Run the released model](models/semantic_page/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf) · [Full results](references/semantic_page_result.md)
+
+[![One pictured Chinese record, an edited policy and the two original generated answers](publication/ilm-nature/figures/Figure_139_semantic_page.png)](publication/ilm-nature/visual_language_paper.pdf#page=3)
 
 For an illustrated etymology question about 言, a separate reader returns its attested oracle, bronze, seal and Liushutong forms. [Read the example](models/glyph_atlas/README.md)
 

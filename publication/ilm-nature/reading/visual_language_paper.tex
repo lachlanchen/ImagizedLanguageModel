@@ -12,19 +12,35 @@
 {\Huge\bfseries Reading pictured facts and writing new sentences as glyphs\par}
 {\large Imagized Language Model research report}\par
 \heading{Abstract}
-Changing one fact on a printed card should change what a generated sentence says. We trained a 1.37-million-parameter writer on 33,525 human descriptions paired with restaurant records rendered in Chinese or English. The writer read aligned image cells and emitted English letter images until it chose to stop. A second visual reader checked candidate sentences against the pictured facts. On 1,847 unseen combinations presented in Chinese, readback improved complete fact recovery from 1,453 to 1,606 when price and rating aliases were treated as equivalent and search candidates and length normalization were fixed. A stricter literal detector accepted 657 outputs and 1,729 of 4,693 human references. In 1,286 of 1,291 paired interventions the writer correctly reversed a family policy. The corresponding byte-input writer recovered 1,610 complete normalized fact sets. These experiments support conditional visual writing in a finite domain. General conversation, open-alphabet synthesis and superior training efficiency remain unestablished.
+Two speakers can look at the same printed record and ask for different facts in their own words. On one RTX 4090 D we trained a 1.57-million-parameter writer on 5,097 human Chinese dialogue turns. It reads a pictured question and venue record, chooses which field to address and writes a reply as a sequence of glyph images. On 515 eligible held turns it returned the correct value without a competing value or extraneous number on 507, compared with 237 when the question was erased. A matched byte reader scored 508. In a separate English writing task, source-copy actions allowed a sentence to contain previously unseen pictured names, including historical marks. Both systems operate on aligned cards. Open-ended conversation and a computational advantage over byte reading remain open.
 
+\heading{Two questions, one restaurant}
+One guest asked when the restaurant opened. Another asked where it was without using the printed word for address. Figure~1 shows the two original questions and both generated image replies. Both answers gave the correct value on 111 of 114 naturally occurring same-card pairs. Erasing the question yielded zero complete pairs. On 59 turns with both a new question and a new venue, 57 answers had the correct value. Across 80 new wordings that omitted the exact field label, the writer succeeded on 78, compared with 71 for character-trigram retrieval and 28 for a literal field match with a domain fallback.
+
+\heading{Which words did the writer supply?}
+The model learns how to frame an answer from human responses. It can write 437 fixed glyphs, copy the original pixels of the name or selected value, and choose when to stop. In 492 of 515 replies it wrote at least two Chinese characters beyond the copied data. Of the complete responses, 194 matched the human wording. One hours answer began with a malformed clause. One price answer wrongly volunteered that the price was unreasonable. The value test accepted both. Figure~1 also shows a hotel question for which the model confidently wrote the wrong field.
+
+\href{https://github.com/thu-coai/CrossWOZ}{Chinese questions, responses and venue data from CrossWOZ}.
+\newpage
+\heading{Figure 1. Questions, original output pixels and controls}
+\begin{center}
+\includegraphics[width=.98\linewidth,height=.65\textheight,keepaspectratio]{../figures/Figure_140_visual_fact_reply.png}
+\end{center}
+\small Both Chinese inputs use the same venue record. The English sentence in panel c comes from a separate visual writer trained on human restaurant descriptions. Exchanging its pictured name and landmark preserved the original marks in all 128 novel-name pairs. Requiring both complete answers to carry the other facts reduced success to 59/64 Latin-name and 56/64 historical-mark pairs.\normalsize
+
+\heading{Does word order matter?}
+When two fields occurred in one question, the original reader got both directions right on nine of 54 controlled pairs. Replacing field names by identical pictured markers and learning which context denotes the request increased this to 54. On twelve further constructions, the new selector succeeded on ten and failed on two, compared with 58/216 complete pairs for the original reader and 180/216 after the change. None of the 515 natural questions activated the two-mention selector. Once the two field images are replaced by identical markers, swapping the field names leaves the visual context unchanged. For distinct fields, both answers have the correct role exactly when the selected position is correct. This is a checked Lean result. The eighteen swaps inside each frame share that positional decision.
+\newpage
 \heading{What changed when the meaning changed?}
-The first eligible held record names Blue Spice, a pub serving Chinese food in the city centre, near Rainbow Vegetarian Caf\'e. The pictured policy excludes families. Figure~1 shows both returned pages after changing that single field. The writer changed sentence structure and polarity and kept the other facts. The candidates consisted of its own completions. The selector inferred the requested facts from the card.
+The first eligible held record names Blue Spice, a pub serving Chinese food in the city centre, near Rainbow Vegetarian Caf\'e. The pictured policy excludes families. Figure~2 shows both returned pages after changing that single field. The writer changed sentence structure and polarity and kept the other facts. The candidates consisted of its own completions. The selector inferred the requested facts from the card.
 
 The first card specified only a name, a coffee shop and the city centre. The writer added a high price. The final card named The Sorrento as the nearby landmark. The writer printed \emph{The Portel}. Both sentences are legible. Both would mislead a reader. In a source-visible, model-assisted assessment of twenty evenly spaced Chinese cards, the original greedy writer conveyed all facts without additions on 13 and the released system on 17. Several faithful sentences had awkward English. This reading has no independent human adjudication.
 
 \heading{Dependence on the source}
 The official test contains 1,847 fact combinations absent from training. Each selected English sentence differs from every full training reference under literal string comparison. After exchanging the test records cyclically, none of the selected Chinese-card outputs retained the exact requested literal fact set. Stock phrases and previously seen values remain available. \href{https://github.com/tuetschek/e2e-cleaning}{Cleaned E2E corpus and realization rules}.
-\newpage
-\heading{Figure 1. What the writer actually printed}
+\heading{Figure 2. What the writer actually printed}
 \begin{center}
-\includegraphics[width=.99\linewidth,height=.78\textheight,keepaspectratio]{../figures/Figure_139_semantic_page.png}
+\includegraphics[width=.99\linewidth,height=.50\textheight,keepaspectratio]{../figures/Figure_139_semantic_page.png}
 \end{center}
 \small The original Chinese input and both answers preserve their physical glyph pixels. For display, blank sidebearings were trimmed and words were wrapped. The two errors are the first and last records in fixed test order. Each bar uses 1,847 unique meanings. The edited-fact column requires the requested family policy in the original answer and its opposite after the edit. Other factual errors can occur in the same pair.\normalsize
 \newpage
@@ -52,8 +68,8 @@ Some questions require a particular attested mark. A separate optical reader ide
 \begin{center}
 \includegraphics[width=.90\linewidth,height=.54\textheight,keepaspectratio]{../figures/Figure_138_glyph_atlas.png}
 \end{center}
-\small \textbf{Figure 2.} The experiment reused 795 held headword families across fresh wording. Field selection and page composition use a finite schema. Each form retains its source pixels. Inferring an unattested form needs different evidence.\normalsize
+\small \textbf{Figure 3.} The experiment reused 795 held headword families across fresh wording. Field selection and page composition use a finite schema. Each form retains its source pixels. Inferring an unattested form needs different evidence.\normalsize
 
 \heading{Relation to earlier work}
-PIXAR demonstrated autoregressive text generation in pixel space. Earlier E2E systems used semantic reranking over generated text. Here the generator feeds back glyph images, the listener reads those images, and the byte reader shares the physical output task. The next test is free-form writing from independent passages, including Chinese answer prose and unseen print faces. \href{https://aclanthology.org/2024.findings-acl.874/}{Tai et al., 2024}. \href{https://ufal.mff.cuni.cz/~odusek/E2E/final_papers/E2E-ZHAW.pdf}{ZHAW E2E system}. \href{https://aclanthology.org/W17-5525/}{Novikova et al., 2017}.
+PIXAR demonstrated autoregressive text generation in pixel space. Earlier E2E systems used semantic reranking over generated text. Here the generator feeds back glyph images, the listener reads those images, and the byte reader shares the physical output task. The next test is free-form writing from independent passages, with unseen print faces and independently assessed Chinese phrasing. \href{https://aclanthology.org/2024.findings-acl.874/}{Tai et al., 2024}. \href{https://ufal.mff.cuni.cz/~odusek/E2E/final_papers/E2E-ZHAW.pdf}{ZHAW E2E system}. \href{https://aclanthology.org/W17-5525/}{Novikova et al., 2017}.
 \end{document}
