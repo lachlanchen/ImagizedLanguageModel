@@ -77,7 +77,7 @@ class OpticalPassageQA(nn.Module):
             ..., None
         ]
 
-    def forward(self, passage, psizes, question, qsizes):
+    def contextualize(self, passage, psizes, question, qsizes):
         pm, qm = self.mask(passage, psizes), self.mask(question, qsizes)
         p, q = self.encode(passage, pm), self.encode(question, qm)
         pool = self.query_pool(q).squeeze(-1).masked_fill(~qm, -1e4).softmax(1)
@@ -90,6 +90,10 @@ class OpticalPassageQA(nn.Module):
         for conv, norm in zip(self.context, self.norms):
             z = (h * pm[:, :, None]).transpose(1, 2)
             h = norm(h + F.gelu(conv(z).transpose(1, 2)))
+        return h, pm, q, qm, global_q[:, 0]
+
+    def forward(self, passage, psizes, question, qsizes):
+        h, pm, _, _, _ = self.contextualize(passage, psizes, question, qsizes)
         return self.endpoints(h).masked_fill(~pm[:, :, None], -1e4), self.trim(
             h
         ).unflatten(-1, (2, self.cuts))
