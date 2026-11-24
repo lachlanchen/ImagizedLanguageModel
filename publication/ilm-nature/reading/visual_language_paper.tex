@@ -9,9 +9,9 @@
 \noindent{\sffamily\bfseries\fontsize{25}{28}\selectfont Learning to write answers from pictured pages\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
-An inscription can carry a distinction that a transcription discards. We ask whether a model can read a question and a passage as ink, then write an answer as ink. A 2.79-million-parameter system learned to turn a pictured question and an intermediate fact into an English sentence. When the intermediate fact was supplied, exact agreement with a human statement rose from 0 to 29 of 128 questions. When the system had to read the fact itself, it matched 8 of 96 human statements. On 96 further, unseen passage families the reader recovered the recorded fact on 25. A source edit could change the subject of an otherwise intact generated sentence. Other edits were lost between reading and writing.\par}
+A transcription can discard a distinction preserved in the ink of an inscription. We trained a model to read a pictured question and passage, select a fact, and write an answer as an image. Changing a name on a held page changed the subject of a generated English sentence. Training against a competing fact improved the reader's two-choice preference on unseen English and Chinese pages, yet both autonomous answers were correct on only 34 of 256 pages, compared with 32 for the original reader. A local quantized Qwen3-8B reading text solved 101. On 64 of the same pages presented as images, a quantized Qwen3-VL solved 21 and the visual reader solved six. Accurate glyph production and fact-sensitive writing are possible on one consumer GPU. Locating the requested evidence and expressing the whole answer remain the principal limitations measured here.\par}
 \vspace{4pt}
-\platehere{Figure_148_writing_visual_statements}{Following a name through the reader and writer}{The upper page excerpt comes from a held SQuAD article. The lower version substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing is reduced for print throughout.}
+\platehere{Figure_150_optical_reading_and_writing}{Following a name through the reader and writer}{The two reader stages are shown above a held SQuAD question. The second source row substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing is reduced for print throughout.}
 \begin{multicols}{2}
 \section*{What changes when the page changes?}
 The original railway page mentions Trevithick, Murray and Stephenson. The question asks who designed Salamanca. The answer joins a name from the page to a predicate from the question and stops. Changing only the name in the page changes the subject of the reply (Fig.~1a). Another page asks who wrote about bronze inscriptions. Replacing Lena with Mira changes the entire answer appropriately in both cases.
@@ -39,6 +39,50 @@ Stopped output contains a recorded fact, fresh pages & 22/96 & 27/96\\ \bottomru
 \end{tabular*}}\par\medskip
 \noindent{\small The first two rows concern the sentence writer's held split. The upstream reader could have seen those passage texts. The last row uses separate, previously unused official SQuAD development passage families. It measures the occurrence of an answer string. On the first 24 fresh pages in hash order, one project reviewer credited four complete grounded propositions after training and zero before. The assessment was exploratory and unblinded.}
 \newpage
+\spread{Learning to distinguish competing facts}
+\noindent One page often contains two plausible names, dates or places. Can a reader learn which one answers a particular question? We kept the sentence writer fixed and changed how its upstream reader learned from pairs of questions about the same page.
+\platehere{Figure_149_competing_facts}{Changing the reader can recover or corrupt a fact}{Panel a shows two readers' answers to the same question about NSFNET and the sentence generated from the contrast-trained reader's fact. In panel b the revised reader completes a monarch's name. In panel c it emits a year in response to a question about a historical period. All strips show actual output or input pixels. The English example and the two Traditional Chinese examples illustrate changes in opposite directions.}
+\begin{multicols}{2}
+\section*{Probability of a written answer}
+A reader assigns probabilities to source intervals. For a question $q$ on page $x$, let $M_q(y)$ sum the probabilities of every interval that emits the complete answer image $y$. Counting all occurrences matters when a name appears twice. Starting from the same visual reader, we compared further training on $-\log M_q(y)$ with training that also penalizes a competing answer $r$ from the same page. The added loss was
+\[
+0.75\log\!\left(1+4 M_q(r)/M_q(y)\right).
+\]
+Three fits, including a matched byte-input reader, each saw 128,000 question presentations drawn in identical order from 32,527 training pages across four corpora. The writer received no proposed answers at test time.
+\section*{What the margin can establish}
+Take two questions exchanging the roles of $y$ and $r$. Let $d_1,d_2$ be their respective correct-minus-rival log masses. A shared bias for one answer shifts the margins in opposite directions. The largest attainable smaller margin is $(d_1+d_2)/2$. A Lean proof checks this identity for integer log scores and half-unit offsets. Evaluation rounded each log mass to $10^{-4}$ nats. The identity concerns these two facts. The reader must also compete against every other interval and decide when to stop.
+\section*{A positive diagnostic and a negative outcome}
+On 207 held pages admitting the two-way comparison, both questions favoured their own fact on 153 pages before training, 157 with further likelihood training, and 164 with the added contrast. On all 256 held pages the numbers of fully correct pairs were 32, 33 and 34. Relative to the original reader the contrast gained 14 and lost 12 (two-sided exact paired $P=0.845$). It also fell behind likelihood training on the two Chinese corpora combined, 26 versus 27 pairs. The prespecified adoption criterion failed.
+\end{multicols}
+\newpage
+\spread{What changes when the same model sees ink?}
+\noindent We compared complete short answers from the optical readers with two locally deployed 8-billion-parameter models, both quantized to Q4\_K\_M. Every page carried two distinct human questions. We used the same excerpt, accepted references, normalization and stop requirement across systems.
+\platehere{Figure_151_local_quantized_readers}{Paired reading accuracy on a single RTX 4090 D}{Each point counts pages for which both autonomous answers matched accepted human wording after normalization. Lines show descriptive 95\% Wilson intervals for each proportion. In panel b both visual systems saw the same two images, one for the passage and one for the question. The text conditions used the strings from which the images were rendered. Each corpus contributed 64 pages to panel a and its first 16 reserved pages to panel b.}
+\begin{multicols}{2}
+\section*{Holding the input fixed}
+On all 512 questions the contrast-trained model wrote 181 accepted short answers. Qwen3-8B returned 298 from text. On the 128-question subset, the optical model wrote 43 from images and Qwen3-VL-8B returned 63 from those images. The very same Qwen3-VL weights returned 83 from text. These public corpora can have appeared in the general models' pretraining. The ILM tests exclude known training passage families. Each comparison measures the deployed system, including the optical input representation.
+\section*{Where answers lose their boundaries}
+An accepted answer was present as an exact interval of at most 48 cells in 449 cases. The contrast model independently wrote the correct answer on 175. Its single highest-scoring interval matched on 181. Restricting the search to a correct start raised this to 324. Supplying a correct end gave 319. Both interventions use the reference during diagnosis. In 53 cases neither alone sufficed. This locates an important source of error even with the target present on the page.
+\section*{What one GPU bought}
+The optical short-answer pipeline processed 512 questions in 4.37 seconds (0.52 kJ of device energy), compared with 87.72 seconds and 14.84 kJ for the text-only 8B model. The ILM batched 16 questions and verified the emitted pixels; Ollama served four requests concurrently. Image preparation, shared setup and host energy are outside these device measurements. On the same 64 pages the visual ILM answered both questions on six and Qwen3-VL on 21. The lower cost therefore accompanies substantially lower accuracy.
+\end{multicols}
+\newpage
+\spread{Does coupling the two endpoints help?}
+\noindent The oracle boundary result suggests a concrete explanation. Perhaps the reader can identify a promising start and a promising end in isolation, yet lacks the capacity to decide whether they belong to the same answer. We changed the interval scorer to test that explanation on another set of unseen pages.
+\platehere{Figure_152_endpoint_interaction}{Different endpoints can change meaning or punctuation}{The two models have equal trainable parameter counts and share the same book writer. Panel a shows the first English SQuAD loss of an exact match relative to the additive control. It drops an entire movie category. Panel b shows the first Traditional Chinese gain. The final mark closes a book title that both models identified. These strips were generated from the original question and page PNGs on CPU and matched the recorded GPU output bit for bit.}
+\begin{multicols}{2}
+\section*{A constraint on the original scores}
+For fixed pictured inputs, the original score for positions $i,j$ takes the form $u_i+v_j+\ell_{j-i}$. The endpoint features already depend on the question and surrounding ink. Subtract the learned length term and write the resulting score as $R_{ij}$. For four legal intervals, in exact arithmetic,
+\[
+ R_{ij}+R_{kl}-R_{il}-R_{kj}=0 .
+\]
+Thus one start cannot prefer end $j$ while another prefers $l$ after length correction. Lean verifies the identity on signed integers and an explicit counterexample for a product score. Floating-point roundoff and reintroducing the length term can change the empirical contrast. The theorem predicts additional representational capacity from an interaction. It makes no prediction that the optimizer will use that capacity effectively.
+\section*{Testing the proposed repair}
+Each arm projected the question-conditioned endpoints to two eight-dimensional vectors. One added their coordinate sums. The other added their inner product. A scalar initialized to zero preserved the original model at the first step. Each fit updated 237,349 parameters on the same 128,000 question presentations. Neither had access to the 128 newly reserved bilingual pages while training.
+\section*{An expressive model can still misread}
+Each new reader solved both questions on 18/128 pages. The original solved 20. The two new readers agreed on the emitted ink on 237/256 questions. On four of the remaining 19, exact correctness changed, with two gains and two losses. Both readers answered 100 individual questions versus 92 for the original. Every fully solved page was the same across the two new readers. Greater freedom at the boundaries alone yielded no new fully answered page over the matched control.
+\end{multicols}
+\newpage
 \spread{From writing glyphs to explaining their history}
 \noindent An answer to a question about an inscription must select the relevant historical form and preserve its strokes. The same system can succeed at modern factual extraction while failing this test.\par
 \platehere{Figure_147_reading_and_composition}{What the bilingual writer can read, combine and reproduce}{Panel a shows the year emitted in response to a held question about the first US public school. In panel b the source states two museum counts. The answer gives only seventeen. Panel c shows an attested oracle-bone form of the character for speech alongside the writer's actual answer to the Chinese question. The image labelled reference is the requested mark.}
@@ -53,12 +97,12 @@ At a run boundary the next action may start anywhere on the page. An inside recu
 \section*{Limits of visual transfer}
 The bilingual writer failed all 128 historical questions in each language and all 120 paired Winograd contrasts. When the English statement writer was explicitly given an unfamiliar oracle-bone mark as its fact, 8 of 32 outputs included its exact bitmap. This tests transport of a supplied shape. Reading an unseen etymology page and giving an accurate historical account remains open.
 \section*{Hardware and inputs}
-The four deployed fitting stages took about 506 seconds and 67.1\,kJ of device energy on a single RTX 4090 D. This includes the shared book writer, interval reader, recurrent writer and English sentence training. Preparation, comparison runs, evaluation and host energy are excluded. Input pages use aligned 32-by-32 cells. New shapes can travel from the prompt to the output. Segmentation of raw scans and synthesis of unobserved historical forms require separate experiments. These data give no matched-quality efficiency advantage over a general language model.
+The four deployed fitting stages took about 506 seconds and 67.1\,kJ of device energy on a single RTX 4090 D. This includes the shared book writer, interval reader, recurrent writer and English sentence training. Preparation, comparison runs, evaluation and host energy are excluded. Input pages use aligned 32-by-32 cells. New shapes can travel from the prompt to the output. Segmentation of raw scans and synthesis of unobserved historical forms require separate experiments. The additional contrast fit used 45.79 seconds and 6.23 kJ. Generalization to independently scanned, unsegmented book pages remains unmeasured.
 \end{multicols}
 \smallskip\noindent{\small\sffamily\textbf{Data and methods.} Rajpurkar et al., \href{https://aclanthology.org/D16-1264/}{SQuAD} (2016);
 He et al., \href{https://aclanthology.org/W18-2605/}{DuReader} (2018);
 Demszky, Guu \& Liang, \href{https://arxiv.org/abs/1809.02922}{Transforming question answering datasets into natural language inference datasets} (2018);
 Databricks, \href{https://huggingface.co/datasets/databricks/databricks-dolly-15k}{Dolly 15k} (2023).
-Related copying mechanism: Gu et al., \href{https://aclanthology.org/P16-1154/}{Incorporating copying mechanism in sequence-to-sequence learning} (2016).
-\href{https://github.com/lachlanchen/ImagizedLanguageModel/tree/main/models/visual_statements}{Model weights, runnable PNG inference and original answer images}.}
+Additional reading corpora include CoQA, CMRC 2018 and DRCD. The complete release includes all four groups' scores and answers. Related copying mechanism: Gu et al., \href{https://aclanthology.org/P16-1154/}{Incorporating copying mechanism in sequence-to-sequence learning} (2016).
+\href{https://github.com/lachlanchen/ImagizedLanguageModel/tree/main/models/competing_facts}{Model weights, runnable PNG inference and original answer images}.}
 \end{document}

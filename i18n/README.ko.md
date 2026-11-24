@@ -2,7 +2,9 @@
 
 철도 기사 이미지를 보고 Salamanca의 설계자를 묻자 모델은 **Matthew Murray designed Salamanca.**라고 썼다. 기사 속 이름만 Daniel Harper로 바꾸자 답변의 주어도 바뀌었다. 새로운 글 96편 중 25편에서 짧은 정답을 정확히 읽었다. 설립 연도를 제대로 읽고도 문장에서 빠뜨린 사례도 있다. 논문 첫 페이지에서 실제 출력 이미지를 볼 수 있다. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+영어와 중국어로 된 새 지문 256개에 사람이 작성한 질문을 두 개씩 제시했습니다. 대조 학습한 ILM은 34개 지문에서 두 문제를 모두 맞혔고, 텍스트를 읽은 양자화 Qwen3-8B는 101개를 맞혔습니다. 64개 지문의 동일한 이미지를 입력했을 때는 ILM이 6개, Qwen3-VL-8B가 21개 지문에서 두 문제를 모두 맞혔습니다. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 같은 물고기 설명문에서 질문을 바꾸자 모델이 통칭과 분류를 각각 써냈습니다. RTX 4090 D 한 장으로 학습한 244만 매개변수 모델은 처음 보는 영문·중문 지문 256개 중 44개에서 두 질문에 모두 정답을 썼습니다. 이전 시각 모델은 0개, 비슷한 에너지를 쓴 바이트 입력 모델은 52개였습니다. 言의 옛 자형을 재현하는 문제는 풀지 못했습니다. [모델 실행](../models/paired_evidence/README.md) · [논문](../publication/ilm-nature/visual_language_paper.pdf)
 

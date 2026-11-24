@@ -2,7 +2,9 @@
 
 给模型看一页介绍早期火车的英文资料，问谁设计了 Salamanca，它写出 **Matthew Murray designed Salamanca.** 只把原图中的人名换成 Daniel Harper，答案的主语也随之改变。在 96 篇新文章中，它读对了 25 个短答案；另一次虽然读对了建校年份，写句子时却漏掉了日期。论文第一页展示两种情况的原始输出图。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+另取 256 篇中英文文章，每篇有两道真人提出的问题。经对比训练的 ILM 有 34 篇两题全对，本地四位量化 Qwen3-8B 读文字时为 101 篇。在其中 64 篇上给两个模型完全相同的图片，ILM 两题全对 6 篇，Qwen3-VL-8B 为 21 篇。论文展示了实际写出的答案和错误。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 在同一张鱼类介绍页面上，模型读到俗名问题时写出“厚壳仔”，读到分类问题时写出“辐鳍鱼纲鲈形目隆头鱼亚目雀鲷科”。这个 244 万参数的模型在单张 RTX 4090 D 上训练，在 256 篇未见过的中英文短文中，有 44 篇的两道问题都答对了。上一版为零，以字节作为输入的对照模型为 52 篇，训练能耗接近。它仍然无法按要求写出“言”的历史字形。 [运行模型](../models/paired_evidence/README.md) · [阅读论文](../publication/ilm-nature/visual_language_paper.pdf)
 

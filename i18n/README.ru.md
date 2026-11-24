@@ -2,7 +2,9 @@
 
 На вопрос о том, кто спроектировал локомотив Salamanca, модель по изображению страницы написала **Matthew Murray designed Salamanca.** Когда в изображении заменили только имя на Daniel Harper, изменилось и подлежащее ответа. На 96 новых страницах модель верно прочитала 25 кратких ответов. В другом примере она правильно прочитала год основания школы, но пропустила его в предложении. На первой странице статьи показаны исходные изображения ответов. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+На 256 новых страницах на английском и китайском языках к каждой странице прилагались два вопроса, составленные людьми. После контрастного обучения ILM верно ответила на оба вопроса для 34 страниц. Квантованная Qwen3-8B при чтении текста справилась со 101 страницей. На подвыборке из 64 страниц при одинаковых изображениях ILM решила обе задачи на шести страницах, а Qwen3-VL-8B — на 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 По одной и той же китайской странице о рыбе модель написала её обиходное название и классификацию в ответ на два разных вопроса. Модель с 2,44 млн параметров, обученная на одной RTX 4090 D, правильно ответила на оба вопроса для 44 из 256 новых китайских и английских отрывков. Предыдущая зрительная модель не справилась ни с одной парой, а побайтовая при сходном расходе энергии решила 52. Воспроизвести исторические начертания 言 зрительной модели пока не удалось. [Запуск модели](../models/paired_evidence/README.md) · [Статья](../publication/ilm-nature/visual_language_paper.pdf)
 

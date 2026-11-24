@@ -2,7 +2,9 @@
 
 鉄道の記事を画像で見せて Salamanca の設計者を尋ねると、モデルは **Matthew Murray designed Salamanca.** と書いた。記事の人名だけを Daniel Harper に変えると、答えの主語も変わった。新しい記事 96 件で事実を正しく読み取れたのは 25 件だった。創立年を正しく読み取っても、文にする際に年を落とした例もある。論文の冒頭に実際の出力画像を掲載した。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+英語と中国語の新たな 256 ページに、人が作成した質問を各 2 問用意しました。対照学習した ILM が両方に正答したのは 34 ページで、テキストを読む量子化 Qwen3-8B は 101 ページでした。64 ページの部分集合で同じ画像を与えると、ILM は 6 ページ、Qwen3-VL-8B は 21 ページで両問に正答しました。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 同じ魚の解説ページから、質問に応じて通称と分類を書き分けました。RTX 4090 D 1枚で学習した244万パラメータのモデルは、未見の英語・中国語の文章256件のうち44件で、二つの質問に両方正答しました。従来の画像モデルは0件、同程度の消費電力量で学習したバイト入力モデルは52件でした。「言」の古い字形を求める問いには正答できませんでした。 [モデルを実行](../models/paired_evidence/README.md) · [論文](../publication/ilm-nature/visual_language_paper.pdf)
 

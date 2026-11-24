@@ -2,7 +2,9 @@
 
 Al preguntarle quién diseñó Salamanca a partir de la imagen de una página sobre ferrocarriles, el modelo escribió **Matthew Murray designed Salamanca.** Al cambiar solo el nombre en la página por Daniel Harper, también cambió el sujeto de la respuesta. En 96 pasajes nuevos recuperó 25 respuestas cortas exactas. En otro ejemplo leyó bien el año de fundación de una escuela y luego lo omitió al escribir. La primera página del artículo muestra las imágenes originales. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+En 256 páginas nuevas en inglés y chino, cada una con dos preguntas redactadas por personas, el ILM con entrenamiento contrastivo acertó ambas en 34 páginas. Qwen3-8B cuantizado, con entrada de texto, lo hizo en 101. En un subconjunto de 64 páginas con imágenes idénticas, el ILM acertó ambas en 6 y Qwen3-VL-8B en 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 Ante la misma página china sobre un pez, el lector escribió el nombre común o la clasificación según la pregunta. El modelo de 2,44 millones de parámetros, entrenado en una RTX 4090 D, acertó las dos preguntas en 44 de 256 pasajes nuevos en chino e inglés. El lector anterior no acertó ningún par. El control que recibe bytes acertó 52 con un consumo similar. El lector visual todavía falla al reproducir las formas históricas de 言. [Ejecutar el modelo](../models/paired_evidence/README.md) · [Leer el artículo](../publication/ilm-nature/visual_language_paper.pdf)
 

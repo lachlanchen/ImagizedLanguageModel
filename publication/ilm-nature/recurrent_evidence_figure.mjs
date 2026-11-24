@@ -2,10 +2,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
-const [root,stage,skill,python]=process.argv.slice(2);
+const [root,stage,skill,python,mode]=process.argv.slice(2);
 const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')));
-const folder=path.join(root,'references/evidence/recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,'reading-plates.json')));
+const competing=mode==='competing';
+const folder=path.join(root,'references/evidence',competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,competing?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -31,6 +32,25 @@ for(const plate of plates){
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
+if(competing){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'benchmark.json')));
+  label(slide,'Answering two questions on the same page',25,22,1035,48,31,true,ink);
+  label(slide,'All 256 pages',25,89,470,32,21,true,ink);
+  label(slide,'Same 64 pages, exact answers',551,89,510,35,21,true,ink);
+  const arms=['parent','contrast','qwen8-text'];
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},
+    position:{left:21,top:147,width:488,height:293},categories:['Original ILM','Contrast ILM','Qwen3 text'],
+    series:[{name:'Both correct',values:arms.map(a=>data.full[a].both),fill:teal}],
+    hasLegend:false,yAxis:{min:0,max:128,majorUnit:32,textStyle:{fontSize:14}},xAxis:{textStyle:{fontSize:14}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  const labels=['Original ILM (images)','Contrast ILM (images)','Qwen3 (text)','Qwen3-VL (images)','Qwen3-VL (text)'];
+  const rows=[['System','Questions','Both'],...Object.values(data.subset).map((v,i)=>[labels[i],v.correct+'/'+v.questions,v.both+'/'+v.pages])];
+  const t=slide.tables.add({rows:rows.length,columns:3,left:551,top:145,width:515,height:290,columnWidths:[251,138,126],values:rows});
+  t.styleOptions={headerRow:true,bandedRows:false};t.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<rows.length;i++)for(let j=0;j<3;j++){const c=t.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
+  label(slide,'Qwen models use 8B weights at Q4_K_M. Both visual systems receive identical ink.',25,475,1040,34,17,false,ink);
+  slide.speakerNotes.textFrame.setText('Short-answer exact match with a stop; two distinct questions per held page, four public corpora. Inputs are aligned glyph grids. Pretraining contamination in the general models is unknown.');
+}else{
 label(slide,'From reading a fact to writing a sentence',24,16,1025,44,31,true,ink);
 label(slide,'Complete matches to human statements',24,69,496,33,19,true,ink);
 label(slide,'Fresh passages and changed facts',552,69,520,33,19,true,ink);
@@ -48,12 +68,14 @@ t.styleOptions={headerRow:true,bandedRows:false};t.borders.assign({style:'solid'
 for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=t.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
 label(slide,'A fact appearing in a reply can coexist with wrong grammar or a false claim.',552,368,500,86,18,false,ink);
 slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen the QA2D passage texts. The separate fresh set uses 96 official SQuAD development passage families.');
+}
+const total=plates.length+1;
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output/Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:4,
-  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[4],requiredNativeTableOwnerSlides:[4],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
+  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
   integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
   layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
-  layoutArgs:['--expected-slide-size-emu','10363200,5124450','--require-native-table-slide','4'],
+  layoutArgs:['--expected-slide-size-emu','10363200,5124450','--require-native-table-slide',String(total)],
   receiptPath:path.join(stage,'presentation_validation.json')});

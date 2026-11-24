@@ -2,7 +2,9 @@
 
 Khi được hỏi ai thiết kế Salamanca trên ảnh một trang viết về đường sắt, mô hình viết **Matthew Murray designed Salamanca.** Chỉ đổi tên trên trang thành Daniel Harper cũng làm chủ ngữ trong câu trả lời thay đổi. Trong 96 trang mới, mô hình đọc đúng đáp án ngắn ở 25 trang. Ở một ví dụ khác, nó đọc đúng năm thành lập trường rồi bỏ mất năm khi viết câu. Trang đầu bài báo trình bày ảnh đầu ra thực tế. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+Trên 256 đoạn văn tiếng Anh và tiếng Trung mới, mỗi đoạn có hai câu hỏi do con người đặt, ILM được huấn luyện đối sánh trả lời đúng cả hai ở 34 đoạn. Qwen3-8B lượng tử hóa đọc văn bản đạt 101 đoạn. Khi hai mô hình nhận cùng ảnh trên 64 đoạn, ILM đạt 6 và Qwen3-VL-8B đạt 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 Trên cùng một trang tiếng Trung về một loài cá, mô hình viết tên thường gọi hoặc phân loại tùy theo câu hỏi. Mô hình 2,44 triệu tham số được huấn luyện trên một RTX 4090 D và trả lời đúng cả hai câu hỏi ở 44 trong 256 đoạn văn tiếng Trung và tiếng Anh chưa từng thấy. Mô hình thị giác trước đó đạt 0, còn mô hình đối chứng nhận byte đạt 52 với mức tiêu thụ năng lượng tương đương. Mô hình vẫn chưa tái hiện được các dạng cổ của chữ 言. [Chạy mô hình](../models/paired_evidence/README.md) · [Bài báo](../publication/ilm-nature/visual_language_paper.pdf)
 

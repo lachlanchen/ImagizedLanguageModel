@@ -2,7 +2,9 @@
 
 Devant une page illustrant les débuts du chemin de fer, le modèle répond **Matthew Murray designed Salamanca.** Si seul le nom de la personne change dans la page, il écrit **Daniel Harper designed Salamanca.** Sur 96 nouveaux passages, il a retrouvé 25 réponses courtes exactes. Dans un autre cas, il a lu correctement l’année de fondation d’une école puis l’a omise dans la phrase. Les images produites figurent en première page de l’article. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+Sur 256 nouvelles pages en anglais et en chinois, chacune accompagnée de deux questions rédigées par des humains, l’ILM entraîné par contraste a répondu correctement aux deux questions sur 34 pages. Qwen3-8B quantifié, qui lisait le texte, en a réussi 101. Sur 64 pages présentées aux deux modèles sous forme d’images identiques, l’ILM en a réussi 6 et Qwen3-VL-8B 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 Sur une page chinoise illustrant un poisson, le lecteur a écrit son nom usuel puis sa classification selon la question posée. Entraîné sur une RTX 4090 D, ce modèle de 2,44 millions de paramètres a répondu correctement aux deux questions pour 44 des 256 passages inédits en anglais et en chinois. Le lecteur précédent en réussissait zéro. Le témoin utilisant des octets en a réussi 52 pour une énergie comparable. Le modèle visuel a échoué à restituer les formes historiques de 言. [Exécuter le modèle](../models/paired_evidence/README.md) · [Lire l’article](../publication/ilm-nature/visual_language_paper.pdf)
 

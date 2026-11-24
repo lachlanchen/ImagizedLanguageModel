@@ -2,7 +2,9 @@
 
 給模型看一頁介紹早期火車的英文資料，問誰設計了 Salamanca，它寫出 **Matthew Murray designed Salamanca.** 只將原圖中的人名換成 Daniel Harper，答案的主詞也隨之改變。在 96 篇新文章中，它讀對了 25 個短答案；另一次雖然讀對了創校年份，寫句子時卻漏掉了日期。論文首頁並列兩種情況的原始輸出影像。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+另取 256 篇中英文文章，每篇有兩道人們實際提出的問題。經對比訓練的 ILM 有 34 篇兩題全對，本機四位元量化 Qwen3-8B 讀文字時為 101 篇。在其中 64 篇上給兩個模型完全相同的圖片，ILM 兩題全對 6 篇，Qwen3-VL-8B 為 21 篇。論文展示了實際寫出的答案與錯誤。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 在同一張魚類介紹頁面上，模型能分別寫出魚的俗名和分類。這個 244 萬參數的模型以單張 RTX 4090 D 訓練。在 256 篇未見過的中英文短文中，有 44 篇的兩道問題都答對了。前一版為零，以位元組作為輸入的對照模型為 52 篇，訓練能耗相近。它仍無法依提問寫出「言」的歷史字形。 [執行模型](../models/paired_evidence/README.md) · [閱讀論文](../publication/ilm-nature/visual_language_paper.pdf)
 

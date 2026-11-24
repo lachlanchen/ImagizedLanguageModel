@@ -4,7 +4,9 @@
 
 Asked “Who designed Salamanca?” about an unseen railway page, the image model wrote **Matthew Murray designed Salamanca.** Changing only the name in the pictured passage made it write **Daniel Harper designed Salamanca.** On 96 fresh pages the reader recovered the human fact on 25. It also read a school year correctly and then lost the date while writing. The first page of the paper prints the actual answer images. [PDF](publication/ilm-nature/visual_language_paper.pdf) · [PNG](models/visual_statements/examples/intervention)
 
-[![Salamanca](publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](publication/ilm-nature/visual_language_paper.pdf)
+On 256 additional English and Chinese pages, with two human questions per page, the contrast-trained ILM answered both on 34. A local Q4 Qwen3-8B reading text solved 101. On a 64-page subset with identical image inputs, ILM solved six and Qwen3-VL-8B solved 21. The paper includes original answer images and failures. [PDF](publication/ilm-nature/visual_language_paper.pdf) · [PNG](models/competing_facts/examples)
+
+[![Salamanca](publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](publication/ilm-nature/visual_language_paper.pdf)
 
 On a pictured Chinese page about a damselfish, a 2.44-million-parameter reader wrote **厚壳仔** when asked its common name and **辐鳍鱼纲鲈形目隆头鱼亚目雀鲷科** when asked for its classification. Across 256 unseen English and Chinese passages it wrote both human answers on 44, up from zero for the previous optical model. It followed 20 of 28 changes to stated numbers. A matched byte reader solved 52 paired passages at comparable energy. The optical model still missed the attested forms of 言 and rarely composed a correct answer whose wording was absent from the passage. [Run the model](models/paired_evidence/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf)
 

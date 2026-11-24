@@ -2,7 +2,9 @@
 
 Auf die Frage nach dem Konstrukteur der Lokomotive Salamanca schrieb das Modell **Matthew Murray designed Salamanca.** Wurde nur der Name im Seitenbild in Daniel Harper geändert, wechselte auch das Subjekt der Antwort. In 96 neuen Texten las das Modell 25 Kurzantworten richtig. In einem anderen Fall erkannte es das Gründungsjahr einer Schule, ließ es im Satz aber aus. Die erste Seite des Artikels zeigt die tatsächlichen Ausgabebilder. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+Auf 256 neuen englischen und chinesischen Seiten mit je zwei von Menschen formulierten Fragen beantwortete das kontrastiv trainierte ILM auf 34 Seiten beide Fragen richtig. Das quantisierte Qwen3-8B erreichte mit Texteingabe 101 Seiten. Bei identischer Bildeingabe auf 64 Seiten löste das ILM beide Fragen auf 6 Seiten, Qwen3-VL-8B auf 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 Auf derselben chinesischen Buchseite über einen Fisch schrieb das Modell je nach Frage dessen gebräuchlichen Namen oder dessen Klassifikation. Der auf einer RTX 4090 D trainierte Leser mit 2,44 Millionen Parametern beantwortete bei 44 von 256 neuen englischen und chinesischen Passagen beide Fragen richtig. Der Vorgänger schaffte kein Paar, das Byte-Vergleichsmodell bei ähnlichem Energieverbrauch 52. Die historischen Formen von 言 gab der visuelle Leser nicht korrekt wieder. [Modell ausführen](../models/paired_evidence/README.md) · [Forschungsbericht](../publication/ilm-nature/visual_language_paper.pdf)
 

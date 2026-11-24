@@ -2,7 +2,9 @@
 
 عندما سُئل النموذج عمّن صمّم قاطرة Salamanca بعد عرض صفحة عن السكك الحديدية، كتب **Matthew Murray designed Salamanca.** وعندما تغيّر الاسم وحده في صورة الصفحة إلى Daniel Harper، تغيّر الفاعل في الجواب أيضاً. قرأ النموذج الإجابة القصيرة الصحيحة في 25 صفحة من أصل 96 صفحة جديدة. وفي مثال آخر قرأ سنة تأسيس مدرسة ثم أسقطها عند كتابة الجملة. تعرض الصفحة الأولى من الورقة صور الإجابات الفعلية. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
-[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+اختبرنا النموذج على 256 صفحة جديدة بالإنجليزية والصينية، بسؤالين كتبهما أشخاص لكل صفحة. أجاب ILM بعد التدريب التبايني عن السؤالين إجابة صحيحة في 34 صفحة، مقابل 101 لنموذج Qwen3-8B المكمّم عند قراءة النص. وعند عرض الصور نفسها على النموذجين في عينة من 64 صفحة، نجح ILM في 6 صفحات وQwen3-VL-8B في 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_150_optical_reading_and_writing.png)](../publication/ilm-nature/visual_language_paper.pdf)
 
 عند عرض صفحة صينية عن سمكة، كتب النموذج اسمها الشائع أو تصنيفها بحسب السؤال. تدرّب النموذج البصري، الذي يضم 2.44 مليون معامل، على بطاقة RTX 4090 D واحدة. أجاب عن السؤالين إجابة صحيحة في 44 من أصل 256 مقطعاً جديداً بالصينية والإنجليزية. كانت نتيجة النموذج البصري السابق صفراً، وبلغت نتيجة نموذج المقارنة الذي يستقبل البايتات 52 باستهلاك طاقة مماثل. ولم ينجح النموذج البصري في كتابة الأشكال التاريخية للحرف 言. [تشغيل النموذج](../models/paired_evidence/README.md) · [البحث](../publication/ilm-nature/visual_language_paper.pdf)
 
