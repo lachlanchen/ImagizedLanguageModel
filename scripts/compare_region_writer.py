@@ -23,8 +23,9 @@ from scripts.measure_writer_energy import snapshot, consumed
 from scripts.write_region_writer import model, answer
 
 
-def compare():
-    rows = read(WORK / "dev-source.json")
+def compare(rows=None, public=PUB, phrase_checkpoint=None):
+    if rows is None:
+        rows = read(WORK / "dev-source.json")
     # Reassemble the prior writer's page with visible gaps for region separation.
     a = Alphabet()
     sep = a.encode("  ")
@@ -85,7 +86,7 @@ def compare():
     # First eight items in the sealed order per domain. Use identical ink in two grids.
     subset = [
         r
-        for t in ("statements", "catalogue", "restaurant")
+        for t in ("statements", "catalogue", "restaurant", "exam")
         for r in [z for z in rows if z["task"] == t][:8]
     ]
     ink = Ink(np.load(MODEL / "palette.npy"))
@@ -120,8 +121,17 @@ def compare():
     paired = {}
     with gpu_owner(), torch.inference_mode():
         selector = model("selector", "cuda")
-        for arm in ("direct", "selected"):
-            net = model(arm, "cuda")
+        loaders = [
+            (a, a, lambda arm=a: model(arm, "cuda")) for a in ("direct", "selected")
+        ]
+        if phrase_checkpoint is not None:
+            from scripts.write_region_writer import phrase_model
+
+            loaders.append(
+                ("phrase", "selected", lambda: phrase_model(phrase_checkpoint, "cuda"))
+            )
+        for label, arm, load_net in loaders:
+            net = load_net()
             vals = []
             answer(net, selector, arm, native, len(book), [qb[0]], [pages[0]], "cuda")
             torch.cuda.synchronize()
@@ -132,11 +142,11 @@ def compare():
                 ids, stop = res[0]
                 vals.append(("".join(chars[i] for i in ids), ids, stop, None, ""))
             torch.cuda.synchronize()
-            costs[arm] = dict(
+            costs[label] = dict(
                 seconds=monotonic() - timer,
                 joules=consumed(begin, snapshot())["joules"],
             )
-            paired[arm] = count(vals, subset)
+            paired[label] = count(vals, subset)
         with server() as url:
             ask(url, VLM, dict(role="user", content="只回答好。"))
             timer = monotonic()
@@ -149,7 +159,7 @@ def compare():
             )
         paired["qwen"] = count([(t, list(t), e, None, "") for t, e in replies], subset)
     dump(
-        PUB / "comparators.json",
+        public / "comparators.json",
         dict(
             full=out,
             image_subset=paired,
