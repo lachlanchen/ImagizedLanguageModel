@@ -34,7 +34,10 @@ def load(folder, device):
 
 
 @torch.inference_mode()
-def generate(net, optical, bank, inputs, variants):
+def generate(
+    net, optical, bank, inputs, variants, *, separator=bytes(128), feedback=None
+):
+    feedback = net.reader.surface if feedback is None else feedback
     mem, _ = net.memory(*inputs)
     initial = mem[-1]
     n = len(initial)
@@ -64,11 +67,11 @@ def generate(net, optical, bank, inputs, variants):
             complete[writer] &= ended
             packed = net.palette[glyphs]
             length = (glyphs != 0).sum(1)
-            prev[writer, 0] = net.reader.surface(packed, length, optical)[:, :50]
+            prev[writer, 0] = feedback(packed, length, optical)[:, :50]
             for j, g in zip(writer.tolist(), glyphs.tolist()):
                 results[j].append(raw_palette[[k for k in g if k]].tobytes())
                 paths[j].append("spell")
-    return [bytes(128).join(x) for x in results], (done & complete).tolist(), paths
+    return [separator.join(x) for x in results], (done & complete).tolist(), paths
 
 
 @torch.inference_mode()

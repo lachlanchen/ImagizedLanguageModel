@@ -1,0 +1,184 @@
+{
+  "scores": {
+    "reserved": {
+      "ink": {
+        "all": {
+          "n": 4413,
+          "exact": 1103,
+          "f1": 0.3297583412244228,
+          "stopped": 4388,
+          "verbatim": 781,
+          "exchanged_question_exact": 160,
+          "exchanged_passage_exact": 477
+        },
+        "strict": {
+          "n": 586,
+          "exact": 7,
+          "f1": 0.14692174959689228,
+          "stopped": 580,
+          "verbatim": 0,
+          "exchanged_question_exact": 0,
+          "exchanged_passage_exact": 0
+        }
+      },
+      "byte": {
+        "all": {
+          "n": 4413,
+          "exact": 1121,
+          "f1": 0.335921878271808,
+          "stopped": 4391,
+          "verbatim": 803,
+          "exchanged_question_exact": 136,
+          "exchanged_passage_exact": 499
+        },
+        "strict": {
+          "n": 586,
+          "exact": 7,
+          "f1": 0.15249412540460408,
+          "stopped": 581,
+          "verbatim": 0,
+          "exchanged_question_exact": 2,
+          "exchanged_passage_exact": 0
+        }
+      }
+    },
+    "dev": {
+      "ink": {
+        "all": {
+          "n": 5588,
+          "exact": 1574,
+          "f1": 0.3616497391883104,
+          "stopped": 5565,
+          "verbatim": 1096,
+          "exchanged_question_exact": 237,
+          "exchanged_passage_exact": 672,
+          "official_em": 0.3402827487473157,
+          "official_f1": 0.4181334165154166,
+          "any_exact": 1957
+        },
+        "strict": {
+          "n": 697,
+          "exact": 15,
+          "f1": 0.15667023235353136,
+          "stopped": 688,
+          "verbatim": 0,
+          "exchanged_question_exact": 3,
+          "exchanged_passage_exact": 0,
+          "official_em": 0.12051649928263988,
+          "official_f1": 0.2685705374431022,
+          "any_exact": 90
+        },
+        "all_references_absent": {
+          "n": 83,
+          "exact": 0,
+          "f1": 0.15287741382336484,
+          "stopped": 83,
+          "verbatim": 0,
+          "exchanged_question_exact": 0,
+          "exchanged_passage_exact": 0,
+          "official_em": 0.0,
+          "official_f1": 0.20978423632476373,
+          "any_exact": 0
+        }
+      },
+      "byte": {
+        "all": {
+          "n": 5588,
+          "exact": 1558,
+          "f1": 0.3644182334208042,
+          "stopped": 5561,
+          "verbatim": 1092,
+          "exchanged_question_exact": 187,
+          "exchanged_passage_exact": 686,
+          "official_em": 0.341982820329277,
+          "official_f1": 0.4218540584596428,
+          "any_exact": 1969
+        },
+        "strict": {
+          "n": 697,
+          "exact": 10,
+          "f1": 0.16076587006634419,
+          "stopped": 690,
+          "verbatim": 0,
+          "exchanged_question_exact": 0,
+          "exchanged_passage_exact": 0,
+          "official_em": 0.13414634146341464,
+          "official_f1": 0.27847769303867875,
+          "any_exact": 102
+        },
+        "all_references_absent": {
+          "n": 83,
+          "exact": 0,
+          "f1": 0.1406602732855111,
+          "stopped": 80,
+          "verbatim": 0,
+          "exchanged_question_exact": 0,
+          "exchanged_passage_exact": 0,
+          "official_em": 0.0,
+          "official_f1": 0.18543292487163945,
+          "any_exact": 0
+        }
+      }
+    }
+  },
+  "paired": {
+    "reserved": {
+      "stories": 268,
+      "point": -0.004078857919782461,
+      "interval95": [
+        -0.01578520727044977,
+        0.0077201768145791095
+      ]
+    },
+    "dev": {
+      "stories": 355,
+      "point": 0.002863278453829635,
+      "interval95": [
+        -0.007711106436790874,
+        0.013450641864567285
+      ]
+    }
+  },
+  "paired_arms": [
+    "ink",
+    "byte"
+  ],
+  "bootstrap": {
+    "seed": 64117,
+    "replicates": 5000,
+    "unit": "whole story"
+  },
+  "decisions": [
+    "a6c142d649c5519e732483c89ef112d85bb20cd2dd89b109922eeb02ee7d2582",
+    "85b8359b59dbbabb276fbdcfc30ae35c4aca25726e7d2c76228e88ce526edeeb"
+  ],
+  "official_data": "dfa367a9733ce53222918d0231d9b3bedc2b8ee831a2845f62dfc70701f2540a",
+  "official_scorer": "d42f70d686abc724a9169947a487f4509087ee69804277cc73950682cb700b4d",
+  "first_measured_energy_at_quality": {
+    "ink": {
+      "10": {
+        "step": 800,
+        "joules": 2208.277
+      },
+      "20": {
+        "step": 2400,
+        "joules": 5195.723
+      },
+      "25": null
+    },
+    "byte": {
+      "10": {
+        "step": 800,
+        "joules": 1868.99
+      },
+      "20": {
+        "step": 2400,
+        "joules": 4858.209
+      },
+      "25": {
+        "step": 8000,
+        "joules": 15800.674
+      }
+    }
+  }
+}

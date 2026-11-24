@@ -4,7 +4,6 @@ from collections import defaultdict
 import gzip
 import hashlib
 import json
-from pathlib import Path
 import runpy
 from scripts.prepare_dialogue_ink import ROOT, PUB, WORK, sha, dump, clean
 
@@ -19,7 +18,6 @@ def official_index():
     ):
         raise ValueError("Official reference or scorer checksum mismatch")
     evaluator = runpy.run_path(str(code))["CoQAEvaluator"](str(raw))
-    norm = evaluator.normalize_answer
     rows = {}
     stories = {}
     for story in json.loads(raw.read_text())["data"]:

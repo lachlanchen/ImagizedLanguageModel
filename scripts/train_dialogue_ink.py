@@ -12,7 +12,7 @@ from ilm.visual_lm.dialogue_ink import DialogueInk, WordCodeDialogueInk
 from scripts.pretrain_dialogue_spelling import pretrain, alignment_loss
 from scripts.answer_optical_passage_qa import load as parent, RELEASE as READER, PARENT
 from scripts.dialogue_ink_data import Corpus, read_data
-from scripts.prepare_dialogue_ink import PUB, WORK, dump, sha
+from scripts.prepare_dialogue_ink import PUB, dump, sha
 from scripts.train_span_choice import gpu_owner
 from scripts.measure_writer_energy import snapshot, consumed
 
@@ -49,6 +49,30 @@ def targets(net, bank, idx):
     )
 
 
+def dialogue_loss(net, train, idx, labels):
+    d = targets(net, train, idx)
+    channel = F.cross_entropy(d["channel"][d["active"]], d["target"][d["active"]])
+    copy = d["copy"]
+    copylog = d["ptr"][copy].log_softmax(-1).masked_fill(~d["matches"][copy], -1e4)
+    copyloss = -copylog.logsumexp(-1).sum() / copy.sum().clamp(min=1)
+    spell = d["word"] & ~copy
+    letters = labels[d["ans"][spell]].long()
+    spellloss = channel.new_zeros(())
+    if len(letters):
+        width = min(25, int((letters != 0).sum(1).max()) + 1)
+        letters = letters[:, :width]
+        spellloss = net.spell_loss(d["latent"][spell], letters, net.letter_inputs())
+    ev = train.ev[idx]
+    valid = ev[:, 0] >= 0
+    aux = channel.new_zeros(())
+    if valid.any():
+        aux = sum(
+            F.cross_entropy(d["evidence"][valid, :, j], ev[valid, j]) for j in (0, 1)
+        )
+    loss = channel + copyloss + spellloss + 0.20 * aux
+    return loss, (channel, copyloss, spellloss, aux), d, spell, letters
+
+
 def fit(output, word_code=False):
     if output.exists():
         raise FileExistsError(output)
@@ -77,28 +101,8 @@ def fit(output, word_code=False):
     for step in range(8000):
         idx = rng.integers(len(seen), size=32)
         seen[idx] = True
-        d = targets(net, train, idx)
-        channel = F.cross_entropy(d["channel"][d["active"]], d["target"][d["active"]])
-        copy = d["copy"]
-        copylog = d["ptr"][copy].log_softmax(-1).masked_fill(~d["matches"][copy], -1e4)
-        copyloss = -copylog.logsumexp(-1).sum() / copy.sum().clamp(min=1)
-        spell = d["word"] & ~copy
-        letters = labels[d["ans"][spell]].long()
-        spellloss = channel.new_zeros(())
-        if len(letters):
-            width = min(25, int((letters != 0).sum(1).max()) + 1)
-            spellloss = net.spell_loss(
-                d["latent"][spell], letters[:, :width], net.letter_inputs()
-            )
-        ev = train.ev[idx]
-        valid = ev[:, 0] >= 0
-        aux = channel.new_zeros(())
-        if valid.any():
-            aux = sum(
-                F.cross_entropy(d["evidence"][valid, :, j], ev[valid, j])
-                for j in (0, 1)
-            )
-        loss = channel + copyloss + spellloss + 0.20 * aux
+        loss, parts, d, spell, letters = dialogue_loss(net, train, idx, labels)
+        channel, copyloss, spellloss, aux = parts
         if word_code:
             idx_word = d["ans"][d["word"]]
             code = net.observed_code(train.bank.features[idx_word])
@@ -108,7 +112,7 @@ def fit(output, word_code=False):
             if len(letters):
                 observed = net.observed_code(train.bank.features[d["ans"][spell]])
                 loss = loss + 0.35 * net.supplied_loss(
-                    observed, letters[:, :width], net.letter_inputs()
+                    observed, letters, net.letter_inputs()
                 )
         opt.zero_grad(set_to_none=True)
         loss.backward()

@@ -1,6 +1,5 @@
 """Deduplicate rasterized word images and pack variable-length dialogue batches."""
 
-from pathlib import Path
 import json
 import numpy as np
 import torch
@@ -28,7 +27,10 @@ def pack(lines, device):
 
 
 class Corpus:
-    def __init__(self, data, group, net, optical):
+    def __init__(
+        self, data, group, net, optical, *, face=None, bank_factory=WordImages, unit=128
+    ):
+        self.unit = unit
         self.rows = [r for r in data["rows"] if r[0] == group]
         self.device = net.sketch.device
         keys = sorted({r[1] for r in self.rows})
@@ -40,9 +42,9 @@ class Corpus:
         if group == "train":
             sources += targets
         words = {w for s in sources for w in s.split()}
-        face = Face(FACES[0])
+        face = Face(FACES[0]) if face is None else face
         self.raw = {w: face(w) for w in words}
-        self.bank = WordImages(self.raw.values(), net, optical)
+        self.bank = bank_factory(self.raw.values(), net, optical)
         self.index = {w: self.bank.ids[v] for w, v in self.raw.items()}
 
         def encoded(lines):
@@ -65,24 +67,24 @@ class Corpus:
         # The zero image marks the spelling boundary and is never a nonblank output letter.
         glyphs = sorted(
             {
-                bytes(w[i : i + 128])
+                bytes(w[i : i + self.unit])
                 for r in self.rows
                 for t in r[5].split()
                 for w in [self.raw[t]]
-                for i in range(0, len(w), 128)
+                for i in range(0, len(w), self.unit)
             }
         )
-        palette = [bytes(128)] + glyphs
+        palette = [bytes(self.unit)] + glyphs
         ids = {v: i for i, v in enumerate(palette)}
         labels = np.zeros((len(self.bank.raw), 25), np.int16)
         for r in self.rows:
             for word in r[5].split():
                 w = self.raw[word]
                 labels[self.index[word], : len(word)] = [
-                    ids[w[i : i + 128]] for i in range(0, len(w), 128)
+                    ids[w[i : i + self.unit]] for i in range(0, len(w), self.unit)
                 ]
         return torch.tensor(
-            np.frombuffer(b"".join(palette), np.uint8).copy().reshape(-1, 128)
+            np.frombuffer(b"".join(palette), np.uint8).copy().reshape(-1, self.unit)
         ), torch.tensor(labels, device=self.device)
 
     def inputs(self, idx, qidx=None, pidx=None):

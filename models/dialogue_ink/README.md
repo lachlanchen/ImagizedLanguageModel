@@ -27,3 +27,5 @@ python -m scripts.audit_dialogue_ink artifacts/refit-eval artifacts/refit-audit
 ```
 
 GPU energy measurement uses NVML. Set `ILM_NVML_RUNNER` to a compatible NVML environment wrapper when needed. The model JSON files record measured costs, sampling, checkpoint hashes and parameters. The word-code checkpoint also records its word-image pretraining.
+
+For the official four-answer recount, save the original development JSON as `data/raw/coqa/dev-official.json` and the original evaluation script as `data/raw/coqa/official_eval.py`. The scorer verifies both digests. [Official development stories and four annotations](https://downloads.cs.stanford.edu/nlp/data/coqa/coqa-dev-v1.0.json) · [Official evaluation script](https://downloads.cs.stanford.edu/nlp/data/coqa/evaluate-v1.0.py)
