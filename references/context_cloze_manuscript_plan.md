@@ -1,0 +1,3 @@
+# Missing-word learning and forward writing
+
+The preceding edition reports a frozen retrieval writer that often failed to find available answer words. Add the new comparison on withheld passage positions and fresh dialogue to Results, Methods and Figure 134. Include the count-based control with identical training windows, question exchange, forward prediction and the repeated free continuation. Preserve preceding figures. Check numeric sources against saved outputs, show the actual model PNGs, rebuild the three current editions, inspect the changed pages and deliver the reading PDF to the existing local Nutstore folder.

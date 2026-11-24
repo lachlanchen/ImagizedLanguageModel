@@ -2,11 +2,15 @@
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
+# Imagized Language Model (ILM)
+
+From images reading **strong enough** and **he could**, the model supplied the missing word **that**. On 50,012 unseen English passage positions it restored 4,863 words from their neighbours, falling to 1,010 after a context exchange. Count backoff trained on the same windows restored 6,715. Free eight-word continuations still repeated. [Try the visual gap model](models/context_cloze/README.md) · [Measured results](references/context_cloze_result.md)
+
+[![Figure 134. Actual input, predicted word image, correct and failed answers, and a free continuation](publication/ilm-nature/figures/Figure_134_context_cloze.png)](publication/ilm-nature/manuscript.pdf#page=178)
+
 A visual writer fitted on one RTX 4090 D answered 502 of 2,238 questions from 147 new stories. Asked where Mr. Preece worked, it wrote **University of Bristol** from the pictured input. Giving it a memory of 2,048 fitting-word images left it at zero complete matches on 259 questions requiring new multiword phrasing. [Run the model](models/word_memory/README.md) · [Read the comparison](references/word_memory_result.md)
 
 [![Figure 133, held answer quality, three generated strips and the missing-word test](publication/ilm-nature/figures/Figure_133_word_memory.png)](publication/ilm-nature/manuscript.pdf#page=177)
-
-# Imagized Language Model (ILM)
 
 A visual writer filled a blank answer strip with **Amanda** on pass one and **Lenhart** on pass three. On 200 new conversational passages it matched 693/3,155 answers. It matched none of 443 questions requiring absent phrasing. Supplying the correct length recovered one difficult answer, and most literal errors were already fixed on the first pass. A matched left-to-right writer assembled one difficult reply correctly. [Try the four-pass writer](models/word_canvas/README.md) · [Measured outcomes](references/word_canvas_result.md)
 

@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_word_memory_article.py.
+% Literal captions copied from their source inputs by build_context_cloze_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1059,4 +1059,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_133_word_memory.png}
 \caption{\textbf{Retrieving fitting-word images in a new answer.} \textbf{a,} Mean word F1 on 259 held questions whose normalized target wording is absent from the inputs. All arms produced zero complete matches on this subset. The decoder-only control sets the retrieval gate to zero. Ranks at right use the correct length and other answer words. \textbf{b,} Actual visual outputs reproduced from pictured inputs. Examples follow fixed corpus order within the first source-sensitive multiword success, first difficult miss and first correction relative to disabled retrieval. \textbf{c,} Normalized exact complete answers on all held turns and literal word-image recovery with a single concealed word. Stored denotes membership in the fitting memory. Each main count uses the original passage and question.}
 \label{fig:word-memory}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_134_context_cloze.png}
+\caption{\textbf{Neighbouring word images predict some missing text.} \textbf{a,} Literal held word accuracy with both sides present and with only the left side visible. The network and count backoff were trained with the same 256,000 passage windows. The image strips show an unseen four-flank combination and the predicted centre. \textbf{b,} Conditional rank and emitted word with reference neighbours supplied, followed by exact autonomous replies on all difficult questions. The first exchange-sensitive difficult success and first difficult miss are shown in source order. \textbf{c,} Greedy continuation from the first reserved passage in evaluation order with no right-hand context. The repeated text is the actual output.}
+\label{fig:context-cloze}
 \end{figure*}

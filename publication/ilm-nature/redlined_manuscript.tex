@@ -1,7 +1,7 @@
 \documentclass[12pt,a4paper]{article}
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL old.tex   Tue Nov 24 14:48:22 2026
-%DIF ADD new.tex   Tue Nov 24 14:48:22 2026
+%DIF DEL old.tex   Tue Nov 24 15:09:07 2026
+%DIF ADD new.tex   Tue Nov 24 15:09:07 2026
 \usepackage[left=24mm,right=24mm,top=23mm,bottom=23mm]{geometry}
 \usepackage{nature_reading}
 %DIF 4a4
@@ -3642,8 +3642,18 @@ supplies a gap and does not evaluate open-ended question answering
 \DIFadd{The model wrote \emph{University of Bristol} when asked where Mr.\ Preece worked. Its answer changed under both input exchanges. For \emph{What was their deal?}, it wrote \emph{he had with palms}, against \emph{would toss a coin}. Retrieval also changed one answer from \emph{No} to the correct \emph{yes}, but that \emph{yes} persisted after exchanging the question. The measured failure concerns contextual selection among writable words. These aligned English print tests leave historical-script transfer and a compute advantage at matched language quality open.
 }
 
+\subsection*{\DIFadd{Predicting missing words from neighbouring ink}}
+\DIFadd{From the pictured words \emph{strong enough} and \emph{he could}, the visual writer supplied the missing word \emph{that} (Fig.~\ref{fig:context-cloze}). The four flanking words had never occurred together in its sampled training windows. Across 50,012 interior positions of 147 new passages the model recovered 4,863 literal word images (9.72\%). With neighbourhoods exchanged between stories it recovered 1,010 (2.02\%). The most frequent fitting word accounted for 2,537 (5.07\%). A frequency-count predictor that backed off to shorter contexts recovered 6,715 (13.43\%) using exactly the same sampled windows. The network's deficit was 3.70 percentage points (95\% paired story interval 3.34 to 4.07). The byte network recovered 4,924 words. Of all positions, 32,604 had a centre word inside the 2,048-image output memory.
+}
+
+\DIFadd{Direct training on source-absent answer words also improved their ranking. Given the other answer words, the visual writer placed the correct stored word first on 16 of 115 positions, compared with five for its parent and 12 for the version trained on questions and answers alone. Mean reciprocal rank rose to 0.219 from 0.116 for the parent (difference 0.103, 95\% interval 0.045 to 0.163) and 0.052 for the fitting-frequency prior (difference 0.167, interval 0.111 to 0.227). Question-and-history exchange reduced the new score to 0.115. Passage exchange gave 0.199; the interval for that change included zero. Once copy and spelling competed with retrieval, only three of the 115 missing words were emitted correctly. Unassisted, the writer answered 484 of 2,234 questions exactly, falling to 32 after exchanging the question and history and 272 after exchanging the passage. The parent answered 479. Both writers matched the same one of 265 difficult references. The visual writer improved its conditional word ranking but failed the registered whole-answer criterion.
+}
+
+\DIFadd{We also measured the cost of losing the original context during forward writing. With just two true preceding images, the network recovered 3,111 of 50,012 next words. Given two prefix images at a fixed location in each of the 147 passages, it produced only 36 distinct eight-word continuations. The first began after \emph{Nina, the} and read \emph{song of the song of the song of}. None matched all eight reference words. Supplying the true two-word history at every step recovered 70 of 1,176 positions, compared with 50 using self-generated histories. Two emitted words already reduced the 147 prompts to 36 distinct states. Even a perfect choice of one remaining suffix per reached state could therefore match at most 36 of the 147 human suffixes. The observed writer matched none of these six-word suffixes.
+}
+
 \clearpage
-%DIF >  Literal captions copied from their source inputs by build_word_memory_article.py.
+%DIF >  Literal captions copied from their source inputs by build_context_cloze_article.py.
 %DIF >  Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -4704,6 +4714,12 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_133_word_memory.png}
 \caption{\DIFaddFL{\textbf{Retrieving fitting-word images in a new answer.} \textbf{a,} Mean word F1 on 259 held questions whose normalized target wording is absent from the inputs. All arms produced zero complete matches on this subset. The decoder-only control sets the retrieval gate to zero. Ranks at right use the correct length and other answer words. \textbf{b,} Actual visual outputs reproduced from pictured inputs. Examples follow fixed corpus order within the first source-sensitive multiword success, first difficult miss and first correction relative to disabled retrieval. \textbf{c,} Normalized exact complete answers on all held turns and literal word-image recovery with a single concealed word. Stored denotes membership in the fitting memory. Each main count uses the original passage and question.}}
 \label{fig:word-memory}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_134_context_cloze.png}
+\caption{\DIFaddFL{\textbf{Neighbouring word images predict some missing text.} \textbf{a,} Literal held word accuracy with both sides present and with only the left side visible. The network and count backoff were trained with the same 256,000 passage windows. The image strips show an unseen four-flank combination and the predicted centre. \textbf{b,} Conditional rank and emitted word with reference neighbours supplied, followed by exact autonomous replies on all difficult questions. The first exchange-sensitive difficult success and first difficult miss are shown in source order. \textbf{c,} Greedy continuation from the first reserved passage in evaluation order with no right-hand context. The repeated text is the actual output.}}
+\label{fig:context-cloze}
 \end{figure*}
 
 \clearpage
@@ -7664,6 +7680,16 @@ P(w\mid h)=(1-g)\bigl[\pi_c C(w\mid h)+\pi_s S(w\mid h)\bigr]+g R(w\mid h).
 }
 
 \DIFadd{Decoding combines exact copy and retrieval masses by output image and adds the mass of the greedy completed spelling. Other spellings can contribute at most the unused spelling probability $u$ to any rival. If the largest resolved mass exceeds the second largest by more than $u$, its image must maximize the full mixture. We checked this sufficient condition and its worst-case tightness in Lean on an arbitrary common denominator. The floating-point implementation uses a $10^{-6}$ safety margin. The condition held at 678 of 1,308 supplied-neighbour visual positions with retrieval. This measures agreement with the model's own mode; a certified mode can be the wrong word. At deployment the writer predicts its own length and previous commitments. The disabled-retrieval control uses this same decoder with $g=0$; the unchanged parent retains its original route-first decoder.
+}
+
+\subsection*{\DIFadd{Relative word-image context and passage completion}}
+\DIFadd{Finite-context neural language models learn a distribution over the next word (Bengio et al., }\url{https://www.jmlr.org/papers/v3/bengio03a.html}\DIFadd{). PIXEL learns from masked rendered patches (Rust et al., }\url{https://arxiv.org/abs/2207.06991}\DIFadd{). Our auxiliary task hides an entire aligned word. Four relative offsets $(-2,-1,+1,+2)$ each supply a 50-dimensional physical word feature, a visibility indicator and a boundary indicator. A query network combines these observations with the frozen dialogue state. The passage-only head receives a zero dialogue state. The output distribution scores the existing 2,048 training-word prototypes. This finite output vocabulary does not cover every written form. During QA a learned gate combines retrieval with the inherited copy and glyph-spelling routes. The standalone gap interface receives separate left and right image strips; it never receives the missing word or its width.
+}
+
+\DIFadd{We reserved the final 147 long CoQA stories in the original ordering before fitting. The four continuations used identical QA positions and masks. Each update included 16 uniformly sampled training turns with one random hidden position and 16 sampled multiword positions where the correct stored word was physically absent from all allowed copy edits. Cross entropy supervised retrieval directly against all prototypes on eligible positions. Binary cross entropy supervised the gate on the uniformly sampled portion. We mixed full masks, random masks and a single concealed word. The passage-trained arm added 64 window centres per update from fitting passages, giving 256,000 presentations and 230,157 distinct positions. Both visual arms had 896,983 parameters (322,833 updated). The passage-assisted visual fit took 33.1 seconds, 3.81 kJ and 366 MB peak allocated GPU memory on one RTX 4090~D. The four earlier fitting stages and the new preparation bring total measured device energy to 35.44 kJ, versus 34.04 kJ for the equivalent byte lineage. Host energy and offline corpus assembly are outside those totals.
+}
+
+\DIFadd{For the passage test, every interior position counted in the denominator, including centres outside the writable memory. We also evaluated a count-based comparator on the identical fitting draws. It tries four flanks, the immediate flanking pair, the preceding word and then the following word, with a sampled unigram fallback. Two-sided pair and longer pattern estimates required two occurrences. For forward prediction it tries the previous pair before the previous word. Ties use prototype order. In an exploratory eight-word rollout the first 32 words of each story defined the prefix, of which the local predictor receives only the last two. Each subsequent input used the images emitted in the previous steps. The model has no learned stop in this fixed-length task. For a reached state $s$, let $c(s,y)$ count its desired remaining reference suffixes. A deterministic writer sharing that state can match at most $\sum_s\max_y c(s,y)$ suffixes. We proved in Lean that this bound is attained by choosing a modal suffix independently per state and that equality requires a modal choice in every observed state. A particular recurrent writer may attain less.
 }
 
 
