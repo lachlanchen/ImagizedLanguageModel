@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_questioned_events_article.py.
+% Literal captions copied from their source inputs by build_optical_passage_qa_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1011,4 +1011,10 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_126_questioned_events.png}
 \caption{\textbf{Two actions within one Chinese line.} \textbf{a,} Counts of held multi-event clauses for which every named action receives both correct source positions, followed by the stricter criterion requiring the complete stopped English word for each object. The next-cell control uses the learned verb address. \textbf{b,} The unchanged image writer is queried at two different positions selected from the same previously seen line. Both responses are original model output images. \textbf{c,} Complete bound-and-written pages for the literal reader and two readers given a second English question view during training. The natural-question subset with all prompts unseen excludes full question strings present in the inherited training material. The literary sample is separately registered.}
 \label{fig:questioned-events}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_127_optical_passage_qa.png}
+\caption{\textbf{Extracting answers from pictured passages.} \textbf{a,} Percentage of eligible two-question passages with both normalized answers exact, under the original questions and with their assignments exchanged. The complete-pair counts are 108 versus zero of 484 reserved passages and 351 versus two of 1,285 development passages. \textbf{b,} Original answer images from the first complete reserved pair and a failed question from the first incomplete development pair. The questions are transcribed with their original spelling. \textbf{c,} Answer-level accuracy on the registered article subsets. Exact ink compares the answer bitmap with the rendered accepted references.}
+\label{fig:optical-passage-qa}
 \end{figure*}
