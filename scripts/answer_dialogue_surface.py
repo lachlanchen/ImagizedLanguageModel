@@ -9,6 +9,7 @@ import torch
 from safetensors.torch import load_file
 from ilm.visual_lm.causal_glyph_writer import write_strip
 from ilm.visual_lm.dialogue_surface import SurfaceDialogue
+from ilm.visual_lm.word_canvas import WordCanvas, draw
 from ilm.visual_lm.optical_passage_qa import word_runs
 from ilm.visual_lm.portable_writer import read_image, read_text, DEFAULT_FONT
 from ilm.visual_lm.image_copy_search import copy_proposals
@@ -25,7 +26,8 @@ def load(folder, device="cpu"):
     if hashlib.sha256(file.read_bytes()).hexdigest() != expected:
         raise ValueError("Wrong surface checkpoint")
     state = load_file(str(file))
-    net = SurfaceDialogue(state["palette"], meta["mode"]).to(device)
+    architecture = WordCanvas if meta.get("arm") == "masked" else SurfaceDialogue
+    net = architecture(state["palette"], meta["mode"]).to(device)
     net.load_state_dict(state)
     net.max_passage_words = meta.get("max_passage_words", 320)
     return net.eval()
@@ -61,6 +63,19 @@ def answer(net, fields):
         )
         indices.append(ix)
     variants = bank.edits[torch.cat(indices, 1)]
+    if isinstance(net, WordCanvas):
+        if any(
+            getattr(net, name, False)
+            for name in ("copy_search", "use_predicted_interval", "marginal_copy")
+        ):
+            raise ValueError("The masked writer uses its four-pass image decoder")
+        rounds = []
+        words, stopped, _ = draw(net, bank, inputs, variants, commit_rounds=rounds)[0][
+            0
+        ]
+        return sep.join(words), dict(
+            stopped=stopped, words=len(words), passes=4, commit_rounds=rounds[0]
+        )
     if getattr(net, "copy_search", False):
         proposals = copy_proposals(net, bank, inputs, variants)[0]
         if not proposals:
