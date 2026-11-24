@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+同じページに「焉得仁」と「策其馬」があります。何を得るのかと英語で尋ねると **benevolence**、何に鞭を打つのかと尋ねると **horse** と画像で答えます。未学習の1,691ページのうち703ページで、2通りの行順と質問形式のすべてで両方の目的語を正しく特定して書きました。同じ188ページで動作の表現を言い換えると、全問正解は95ページから7ページに減りました。 [実行方法](../models/pictured_action_lookup/README.md) · [実験結果](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 このモデルは漢文と質問を画像で読み、英語の答えを画像で書きます。「還其珠」では質問に応じて **return** または **pearl** と書きます。約140万パラメータのモデルは「之」を *it* と *go* に書き分ける課題で、評価用の40組中31組に正答しました。教師データの答えを入れ替えた対照では4組でした。別の2冊では、四つの質問すべてに正答したのは29節中1節でした。 [実行方法](../models/pronoun_writer/README.md) · [実験結果](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

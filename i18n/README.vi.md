@@ -90,6 +90,10 @@ Tình trạng hiện tại: khả năng sinh ngôn ngữ dưới dạng ảnh ch
 
 # Imagized Language Model (ILM)
 
+Trên cùng một trang có 焉得仁 và 策其馬. Khi được hỏi họ đạt được gì, mô hình viết **benevolence**. Khi được hỏi họ quất con gì, nó viết **horse**. Mô hình xác định và viết đúng cả hai tân ngữ trên 703/1.691 trang kiểm tra ở cả hai thứ tự dòng và hai mẫu câu hỏi. Đổi cách diễn đạt hành động trên cùng 188 trang làm số trang đúng hoàn toàn giảm từ 95 xuống 7. [Chạy mô hình](../models/pictured_action_lookup/README.md) · [Kết quả](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 Mô hình đọc đoạn Hán văn và câu hỏi dưới dạng ảnh, rồi viết câu trả lời tiếng Anh thành ảnh. Với 還其珠, mô hình viết **return** hoặc **pearl** tùy câu hỏi. Mô hình 1,40 triệu tham số viết đúng cả *it* và *go* cho chữ 之 ở 31/40 cặp ngữ cảnh kiểm tra, so với 4/40 khi xáo trộn đáp án huấn luyện. Trong hai cuốn sách khác, chỉ 1/29 đoạn có cả bốn câu trả lời đúng. [Chạy mô hình](../models/pronoun_writer/README.md) · [Kết quả](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

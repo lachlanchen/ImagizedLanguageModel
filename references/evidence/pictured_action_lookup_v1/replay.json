@@ -1,0 +1,682 @@
+[
+  {
+    "sample": "overall_success",
+    "order": 0,
+    "query": "What is it that they wear here?",
+    "expected": [
+      "long-robe"
+    ],
+    "actual": "long-robe",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.502366304397583,
+      0.18437761068344116
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_success",
+    "order": 0,
+    "query": "In the line about the action 'wear', what is affected?",
+    "expected": [
+      "long-robe"
+    ],
+    "actual": "long-robe",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.7175097465515137,
+      0.14344817399978638
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_success",
+    "order": 0,
+    "query": "What is it that they have here?",
+    "expected": [
+      "that-which"
+    ],
+    "actual": "that-which",
+    "row": 2,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.17896497249603271,
+      0.767575740814209
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_success",
+    "order": 0,
+    "query": "In the line about the action 'have', what is affected?",
+    "expected": [
+      "that-which"
+    ],
+    "actual": "that-which",
+    "row": 2,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.2981173098087311,
+      0.7282155156135559
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_success",
+    "order": 1,
+    "query": "What is it that they wear here?",
+    "expected": [
+      "long-robe"
+    ],
+    "actual": "long-robe",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.18437761068344116,
+      0.502366304397583
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_success",
+    "order": 1,
+    "query": "In the line about the action 'wear', what is affected?",
+    "expected": [
+      "long-robe"
+    ],
+    "actual": "long-robe",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.14344817399978638,
+      0.7175097465515137
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_success",
+    "order": 1,
+    "query": "What is it that they have here?",
+    "expected": [
+      "that-which"
+    ],
+    "actual": "that-which",
+    "row": 1,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.767575740814209,
+      0.1789649873971939
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_success",
+    "order": 1,
+    "query": "In the line about the action 'have', what is affected?",
+    "expected": [
+      "that-which"
+    ],
+    "actual": "that-which",
+    "row": 1,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.7282155156135559,
+      0.2981173098087311
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 0,
+    "query": "What is it that they die here?",
+    "expected": [
+      "step"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 2,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.1039375513792038,
+      0.12689335644245148
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 0,
+    "query": "In the line about the action 'die', what is affected?",
+    "expected": [
+      "step"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 2,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.2177632451057434,
+      0.3908466100692749
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 0,
+    "query": "What is it that they hold here?",
+    "expected": [
+      "drive-a-chariot"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 2,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.1039375439286232,
+      0.7169991135597229
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 0,
+    "query": "In the line about the action 'hold', what is affected?",
+    "expected": [
+      "drive-a-chariot"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 2,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.2177632451057434,
+      0.6980940699577332
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 1,
+    "query": "What is it that they die here?",
+    "expected": [
+      "step"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 1,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.12689335644245148,
+      0.10393746197223663
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 1,
+    "query": "In the line about the action 'die', what is affected?",
+    "expected": [
+      "step"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 1,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.3908466100692749,
+      0.2177632749080658
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 1,
+    "query": "What is it that they hold here?",
+    "expected": [
+      "drive-a-chariot"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 1,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.7169991135597229,
+      0.10393746197223663
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_line",
+    "order": 1,
+    "query": "In the line about the action 'hold', what is affected?",
+    "expected": [
+      "drive-a-chariot"
+    ],
+    "actual": "drive-a-chariot",
+    "row": 1,
+    "source_cell": 1,
+    "stopped": true,
+    "scores": [
+      0.6980940699577332,
+      0.2177632749080658
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 0,
+    "query": "What is it that they hear here?",
+    "expected": [
+      "one"
+    ],
+    "actual": "one",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.7709909677505493,
+      0.24368563294410706
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 0,
+    "query": "In the line about the action 'hear', what is affected?",
+    "expected": [
+      "one"
+    ],
+    "actual": "one",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.7724174857139587,
+      0.20165643095970154
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 0,
+    "query": "What is it that they have here?",
+    "expected": [
+      "people"
+    ],
+    "actual": "person",
+    "row": 2,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.2273445725440979,
+      0.7496737837791443
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 0,
+    "query": "In the line about the action 'have', what is affected?",
+    "expected": [
+      "people"
+    ],
+    "actual": "person",
+    "row": 2,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.3750612437725067,
+      0.7187776565551758
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 1,
+    "query": "What is it that they hear here?",
+    "expected": [
+      "one"
+    ],
+    "actual": "one",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.24368566274642944,
+      0.7709909677505493
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 1,
+    "query": "In the line about the action 'hear', what is affected?",
+    "expected": [
+      "one"
+    ],
+    "actual": "one",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.20165644586086273,
+      0.7724174857139587
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 1,
+    "query": "What is it that they have here?",
+    "expected": [
+      "people"
+    ],
+    "actual": "person",
+    "row": 1,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.7496738433837891,
+      0.2273445725440979
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "overall_wrong_word",
+    "order": 1,
+    "query": "In the line about the action 'have', what is affected?",
+    "expected": [
+      "people"
+    ],
+    "actual": "person",
+    "row": 1,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.7187776565551758,
+      0.3750612437725067
+    ],
+    "unique_ink_match": true
+  },
+  {
+    "sample": "same_head_success",
+    "order": 0,
+    "query": "What is it that they return here?",
+    "expected": [
+      "wall"
+    ],
+    "actual": "wall",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.6153971552848816,
+      0.5705177783966064
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 0,
+    "query": "In the line about the action 'return', what is affected?",
+    "expected": [
+      "wall"
+    ],
+    "actual": "wall",
+    "row": 1,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.6679865121841431,
+      0.6090566515922546
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 0,
+    "query": "What is it that they repeat here?",
+    "expected": [
+      "body"
+    ],
+    "actual": "body",
+    "row": 2,
+    "source_cell": 7,
+    "stopped": true,
+    "scores": [
+      0.42062345147132874,
+      0.573026180267334
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 0,
+    "query": "In the line about the action 'repeat', what is affected?",
+    "expected": [
+      "body"
+    ],
+    "actual": "body",
+    "row": 2,
+    "source_cell": 7,
+    "stopped": true,
+    "scores": [
+      0.4046904146671295,
+      0.6378136873245239
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 1,
+    "query": "What is it that they return here?",
+    "expected": [
+      "wall"
+    ],
+    "actual": "wall",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.5705177783966064,
+      0.6153971552848816
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 1,
+    "query": "In the line about the action 'return', what is affected?",
+    "expected": [
+      "wall"
+    ],
+    "actual": "wall",
+    "row": 2,
+    "source_cell": 3,
+    "stopped": true,
+    "scores": [
+      0.6090566515922546,
+      0.6679865121841431
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 1,
+    "query": "What is it that they repeat here?",
+    "expected": [
+      "body"
+    ],
+    "actual": "body",
+    "row": 1,
+    "source_cell": 7,
+    "stopped": true,
+    "scores": [
+      0.573026180267334,
+      0.42062345147132874
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_success",
+    "order": 1,
+    "query": "In the line about the action 'repeat', what is affected?",
+    "expected": [
+      "body"
+    ],
+    "actual": "body",
+    "row": 1,
+    "source_cell": 7,
+    "stopped": true,
+    "scores": [
+      0.6378136873245239,
+      0.4046904146671295
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 0,
+    "query": "What is it that they lose here?",
+    "expected": [
+      "me"
+    ],
+    "actual": "civil",
+    "row": 2,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.5565398931503296,
+      0.6661022305488586
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 0,
+    "query": "In the line about the action 'lose', what is affected?",
+    "expected": [
+      "me"
+    ],
+    "actual": "civil",
+    "row": 2,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.5959810018539429,
+      0.6790804862976074
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 0,
+    "query": "What is it that they mourn here?",
+    "expected": [
+      "civil"
+    ],
+    "actual": "me",
+    "row": 1,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.715587854385376,
+      0.6839100122451782
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 0,
+    "query": "In the line about the action 'mourn', what is affected?",
+    "expected": [
+      "civil"
+    ],
+    "actual": "me",
+    "row": 1,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.7454842329025269,
+      0.7003722190856934
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 1,
+    "query": "What is it that they lose here?",
+    "expected": [
+      "me"
+    ],
+    "actual": "civil",
+    "row": 1,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.6661022305488586,
+      0.5565398931503296
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 1,
+    "query": "In the line about the action 'lose', what is affected?",
+    "expected": [
+      "me"
+    ],
+    "actual": "civil",
+    "row": 1,
+    "source_cell": 5,
+    "stopped": true,
+    "scores": [
+      0.6790804862976074,
+      0.5959810018539429
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 1,
+    "query": "What is it that they mourn here?",
+    "expected": [
+      "civil"
+    ],
+    "actual": "me",
+    "row": 2,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.6839100122451782,
+      0.715587854385376
+    ],
+    "unique_ink_match": false
+  },
+  {
+    "sample": "same_head_wrong_line",
+    "order": 1,
+    "query": "In the line about the action 'mourn', what is affected?",
+    "expected": [
+      "civil"
+    ],
+    "actual": "me",
+    "row": 2,
+    "source_cell": 2,
+    "stopped": true,
+    "scores": [
+      0.7003722190856934,
+      0.7454842329025269
+    ],
+    "unique_ink_match": false
+  }
+]

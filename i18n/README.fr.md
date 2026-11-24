@@ -90,6 +90,10 @@ La comparaison après 512 mises à jour avec suppression des marges blanches éc
 
 # Modèle de Langage Imagé (ILM)
 
+Une même page présente 焉得仁 et 策其馬. Le modèle écrit **benevolence** si on lui demande ce qu’ils obtiennent et **horse** si on lui demande ce qu’ils fouettent. Sur 703 des 1 691 pages de test, il repère et écrit les deux compléments dans les deux ordres de lignes et avec deux formulations. Sur les mêmes 188 pages, remplacer les noms des actions par d’autres expressions fait passer de 95 à sept le nombre de pages entièrement réussies. [Exécuter le modèle](../models/pictured_action_lookup/README.md) · [Résultats](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 Le modèle lit le passage en chinois classique et la question sous forme d’images, puis écrit sa réponse en anglais dans une image. Pour 還其珠, il écrit **return** ou **pearl** selon la question. Avec 1,40 million de paramètres, il écrit correctement les deux lectures de 之, *it* et *go*, dans 31 des 40 paires de contextes réservées au test, contre quatre après permutation des réponses d’entraînement. Dans deux autres livres, il répond correctement aux quatre questions pour un seul des 29 extraits. [Exécuter le modèle](../models/pronoun_writer/README.md) · [Résultats](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

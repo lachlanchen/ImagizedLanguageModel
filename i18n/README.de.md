@@ -90,6 +90,10 @@ Aktueller Stand: Die Spracherzeugung als Bild ist weiterhin nicht für den prakt
 
 # Imagized-Sprachmodell (ILM)
 
+Auf derselben Seite stehen 焉得仁 und 策其馬. Auf die englische Frage, was sie erlangen, schreibt das Modell **benevolence**, und auf die Frage, was sie peitschen, **horse**. Auf 703 von 1.691 Testseiten fand und schrieb es beide Objekte bei beiden Zeilenfolgen und Frageformen richtig. Auf denselben 188 Seiten sank die Zahl vollständig richtiger Antworten von 95 auf sieben, wenn die Verben umschrieben wurden. [Modell ausführen](../models/pictured_action_lookup/README.md) · [Ergebnisse](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 Das Modell liest eine klassische chinesische Textstelle und die Frage als Bilder und schreibt die englische Antwort als Bild. Für 還其珠 schreibt es je nach Frage **return** oder **pearl**. Mit 1,40 Millionen Parametern gab es bei 31 von 40 zurückgehaltenen Kontextpaaren beide Lesarten von 之 richtig wieder, *it* und *go*. Mit vertauschten Trainingsantworten gelang dies bei vier Paaren. In zwei weiteren Büchern beantwortete es nur bei einer von 29 Textstellen alle vier Fragen richtig. [Modell ausführen](../models/pronoun_writer/README.md) · [Ergebnisse](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

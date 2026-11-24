@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+同一页上有「焉得仁」和「策其馬」。用英语问得到什么，模型写出 **benevolence**；问鞭策什么，就写出 **horse**。在 1,691 张留出的页面中，有 703 张在两种行序和两种问法下都能找对位置、写对两个宾语。在 188 张相同页面上改用近义表达后，全部答对的页数从 95 降至 7。 [运行模型](../models/pictured_action_lookup/README.md) · [实验结果](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 模型读取文言文和问题的图像，用图像写出英语答案。对于「還其珠」，它能按问题写出 **return** 或 **pearl**。这个约 140 万参数的模型在 40 对留出的语境中，有 31 对能分辨「之」的代词义和动词义，分别写出 *it* 和 *go*；打乱训练答案后为 4 对。在另两本书的 29 个片段中，只有 1 个片段的四道课堂问题全部答对。 [运行模型](../models/pronoun_writer/README.md) · [实验结果](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

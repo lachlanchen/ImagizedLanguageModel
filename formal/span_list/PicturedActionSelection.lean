@@ -29,7 +29,7 @@ def totalHinge (m : Int) : List (Int × Int) → Int
   | [] => 0
   | (a,b) :: xs => hinge m a b + totalHinge m xs
 
-theorem count_bound (xs : List (Int × Int)) (m : Int) (hm : 0 ≤ m) :
+theorem count_bound (xs : List (Int × Int)) (m : Int) :
     mistakes xs * m ≤ totalHinge m xs := by
   induction xs with
   | nil => simp [mistakes, totalHinge]
@@ -42,6 +42,28 @@ theorem count_bound (xs : List (Int × Int)) (m : Int) (hm : 0 ≤ m) :
       simp [mistakes, totalHinge, h, List.filter_cons] at ih ⊢
       omega
 
+/-- With a single positive, assigning it over half the total positive
+weight makes it outrank each distractor. Here the three weights include
+the remaining batch entries in `rest`. The normalization cancels. -/
+theorem singleton_majority (good bad rest : Nat)
+    (h : good + bad + rest < good + good) : bad < good := by omega
+
+/-- The multi-positive training criterion sums positive weights. A large
+sum alone cannot certify that *each* requested source beats a distractor. -/
+theorem pooled_majority_can_miss : ∃ a b neg : Nat,
+    a + b > neg ∧ a < neg ∧ b > neg := by
+  exact ⟨1, 6, 5, by decide⟩
+
+/-- If a paraphrase moves both row scores by at most epsilon, an original
+strict margin above twice epsilon preserves the source. This condition must
+be checked for each action and question frame to certify a paired page. -/
+theorem transfer_with_margin (good bad good' bad' eps : Int)
+    (margin : bad + 2*eps < good) (lower : good - eps ≤ good')
+    (upper : bad' ≤ bad + eps) : bad' < good' := by omega
+
+#print axioms transfer_with_margin
+#print axioms singleton_majority
+#print axioms pooled_majority_can_miss
 #print axioms count_bound
 #print axioms reverse_at_unequal
 #print axioms need_content

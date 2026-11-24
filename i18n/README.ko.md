@@ -90,6 +90,10 @@
 
 # Imagized Language Model (ILM)
 
+같은 페이지에 焉得仁과 策其馬가 있습니다. 무엇을 얻는지 영어로 물으면 모델은 **benevolence**, 무엇을 채찍질하는지 물으면 **horse**를 이미지로 씁니다. 평가용 1,691쪽 중 703쪽에서 두 행의 순서와 질문 형식을 바꾸어도 두 목적어를 모두 정확히 찾아 썼습니다. 같은 188쪽에서 동작을 다른 말로 표현하자 모두 맞힌 쪽은 95쪽에서 7쪽으로 줄었습니다. [모델 실행](../models/pictured_action_lookup/README.md) · [실험 결과](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 이 모델은 한문 구절과 질문을 이미지로 읽고 영어 답을 이미지로 씁니다. 還其珠에 대해서는 질문에 따라 **return** 또는 **pearl**을 씁니다. 약 140만 개의 매개변수를 가진 모델이 之를 *it*과 *go*로 구별해 쓴 경우는 평가용 문맥 40쌍 중 31쌍이었고, 학습 정답을 섞은 대조군에서는 4쌍이었습니다. 다른 두 책에서는 29개 구절 중 하나에서만 네 질문을 모두 맞혔습니다. [모델 실행](../models/pronoun_writer/README.md) · [실험 결과](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)

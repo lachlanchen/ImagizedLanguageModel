@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+One pictured page contains 焉得仁 and 策其馬. Asked what they get, the visual model writes **benevolence**. Asked what they whip, it writes **horse**. It located and wrote both objects on 703/1,691 held pages across both line orders and two question frames. Replacing the action names on 188 matched pages reduced complete answers from 95 to seven. [Run the model](models/pictured_action_lookup/README.md) · [Results](references/pictured_action_lookup_result.md)
+
+[![124 · ILM](publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](publication/ilm-nature/manuscript.pdf#page=164)
+
 The visual model reads a classical passage and a pictured question, then draws an English answer. For 還其珠 it writes **return** or **pearl**. With 1.40 million parameters, it drew both meanings of 之, *it* and *go*, on 31/40 held context pairs, compared with 4/40 after shuffling supervision. Across two other books it answered all four classroom questions on only 1/29 passages. [Run the model](models/pronoun_writer/README.md) · [Results](references/pronoun_writer_result.md)
 
 [![122 · ILM](publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](publication/ilm-nature/manuscript.pdf#page=162)

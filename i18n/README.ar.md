@@ -90,6 +90,10 @@
 
 # نموذج اللغة المصوّرة (ILM)
 
+تجمع صفحة واحدة بين 焉得仁 و策其馬. حين يُسأل النموذج بالإنجليزية عمّا ينالونه يكتب **benevolence**، وحين يُسأل عمّا يضربونه بالسوط يكتب **horse**. حدّد المفعول به وكتبه في الجملتين على 703 من أصل 1691 صفحة اختبار مع تبديل ترتيب السطرين وصيغة السؤال. وعند إعادة صياغة الفعل على الصفحات الـ188 نفسها، انخفض عدد الصفحات الصحيحة بالكامل من 95 إلى سبع. [تشغيل النموذج](../models/pictured_action_lookup/README.md) · [النتائج](../references/pictured_action_lookup_result.md)
+
+[![124 · ILM](../publication/ilm-nature/figures/Figure_124_pictured_action_lookup.png)](../publication/ilm-nature/manuscript.pdf#page=164)
+
 يقرأ النموذج المقطع الصيني الكلاسيكي والسؤال في صورتين، ثم يكتب الإجابة الإنجليزية في صورة. في المقطع 還其珠 يكتب **return** أو **pearl** بحسب السؤال. نجح النموذج، بحجمه البالغ 1.40 مليون معامل، في كتابة القراءتين *it* و*go* للرمز 之 في 31 من 40 زوجًا من السياقات المحجوزة للاختبار، مقابل أربعة أزواج عند خلط إجابات التدريب. وفي كتابين آخرين أجاب عن الأسئلة الأربعة كلها إجابة صحيحة في مقطع واحد من أصل 29. [تشغيل النموذج](../models/pronoun_writer/README.md) · [النتائج](../references/pronoun_writer_result.md)
 
 [![122 · ILM](../publication/ilm-nature/figures/Figure_122_pronoun_writer.png)](../publication/ilm-nature/manuscript.pdf#page=162)
