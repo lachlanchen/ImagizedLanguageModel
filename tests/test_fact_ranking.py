@@ -44,3 +44,22 @@ def test_missing_targets_give_zero_gradient_and_occurrences_are_marginalized():
     missing = candidate_loss(z, torch.zeros_like(y))
     assert missing.item() == 0
     assert torch.autograd.grad(missing, z)[0].count_nonzero() == 0
+
+
+def test_physical_fact_repair_matches_all_single_replacements():
+    from itertools import product
+    from scripts.inspect_fact_ranking_frames import recoverable, offsets
+
+    words = [p for n in range(5) for p in product((0, 1), repeat=n)]
+    for reference in words:
+        for fact in ((0,), (1,), (0, 0), (0, 1)):
+            at = offsets(reference, fact)
+            if len(at) != 1:
+                continue
+            for answer in words:
+                explicit = any(
+                    answer[:i] + fact + answer[j:] == reference
+                    for i in range(len(answer) + 1)
+                    for j in range(i, len(answer) + 1)
+                )
+                assert recoverable(answer, reference, at[0], len(fact)) == explicit

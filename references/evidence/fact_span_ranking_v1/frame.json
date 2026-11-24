@@ -1,0 +1,1449 @@
+{
+  "totals": {
+    "statements": {
+      "n": 192,
+      "exact": 44,
+      "framed": 143,
+      "framed_correct": 30,
+      "framed_failed": 113,
+      "stopped_failures": 110,
+      "recoverable": 19,
+      "recoverable_stopped": 19,
+      "fact_missing": 29,
+      "fact_once": 69,
+      "fact_repeated": 15
+    },
+    "exam": {
+      "n": 192,
+      "exact": 187,
+      "framed": 192,
+      "framed_correct": 187,
+      "framed_failed": 5,
+      "stopped_failures": 4,
+      "recoverable": 5,
+      "recoverable_stopped": 4,
+      "fact_missing": 3,
+      "fact_once": 2,
+      "fact_repeated": 0
+    }
+  },
+  "examples": [
+    {
+      "task": "statements",
+      "q": "What kind of nations does the media portray?",
+      "reference": [
+        "The media portrays developing countries."
+      ],
+      "fact": "developing",
+      "output": "The media portrays developing nations.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What nationality is the team?",
+      "reference": [
+        "The nationality of the team is Ukrainian."
+      ],
+      "fact": "Ukrainian",
+      "output": "The Ukrainian is the nationality is the Ukrainian.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was slashed?",
+      "reference": [
+        "An eyeball was slashed."
+      ],
+      "fact": "eyeball",
+      "output": "Eyeball was slashed.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What kind of skin does one have?",
+      "reference": [
+        "One has light skin."
+      ],
+      "fact": "light",
+      "output": "One has a light skin.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "Where did the nurse work?",
+      "reference": [
+        "The nurse worked at a senior activity center in Austin."
+      ],
+      "fact": "at a senior activity center in Austin",
+      "output": "The nurse worked work in Austin.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "When is the historical event taking place?",
+      "reference": [
+        "The historical event is currently taking place."
+      ],
+      "fact": "currently",
+      "output": "The historical event taking place is currently currently.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What kind programmes are they?",
+      "reference": [
+        "They are breeding kind of programmes."
+      ],
+      "fact": "breeding",
+      "output": "Breeding are breeding.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What are there two of?",
+      "reference": [
+        "There are two years."
+      ],
+      "fact": "years",
+      "output": "There are two of years.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "How often does a new congress convene?",
+      "reference": [
+        "A new congress convenes every two years."
+      ],
+      "fact": "every two years",
+      "output": "A new congress conveness conveness conveness convene.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Who did he beat?",
+      "reference": [
+        "He beat Terre'Blanche."
+      ],
+      "fact": "Terre'Blanche",
+      "output": "Terre'Blanche beat Terre'Blanche.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What city is the Nobel awarded in?",
+      "reference": [
+        "Stockholm awards the Nobel."
+      ],
+      "fact": "Stockholm",
+      "output": "The Nobel is awarded in Stockholm.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was awarded?",
+      "reference": [
+        "Prizes were awarded."
+      ],
+      "fact": "Prizes",
+      "output": "Prizes was awarded.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How many years is the period for Romance languages",
+      "reference": [
+        "The period for Romance languages is 2000 years."
+      ],
+      "fact": "2000",
+      "output": "The period for Romance languages years is the period for Romance languages.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How many ways are there?",
+      "reference": [
+        "There are a number of ways."
+      ],
+      "fact": "a number",
+      "output": "There are a number ways.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What country is mentioned?",
+      "reference": [
+        "The United States is mentioned."
+      ],
+      "fact": "United States",
+      "output": "United States is mentioned.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What country are the girls from?",
+      "reference": [
+        "The girls are from the US."
+      ],
+      "fact": "US",
+      "output": "The girls from US are the US.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What were about him?",
+      "reference": [
+        "The scandals were about him."
+      ],
+      "fact": "scandals",
+      "output": "Scandals were scandals.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "When is the Iron age occurring?",
+      "reference": [
+        "The Iron Age is occuring after the Bronze Age."
+      ],
+      "fact": "after the Bronze Age",
+      "output": "The Iron is after the Bronze Age.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How long do environmentalists want to ban?",
+      "reference": [
+        "Environmentalists want the ban until the population recovers."
+      ],
+      "fact": "until the population recovers",
+      "output": "Environmentalists wanted to ban until the population recovers.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How big are the pond systems in the town in mu?",
+      "reference": [
+        "The pond systems are 15,000 mu."
+      ],
+      "fact": "15,000",
+      "output": "The pond systems in the town in mu are 15,000 big are the pond systems in the town in mu.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What type of plane did Hillary fly in?",
+      "reference": [
+        "Hillary flew in twin-engined ski plane."
+      ],
+      "fact": "twin-engined ski plane",
+      "output": "Hillary fled in twin-engined ski plane.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where did Hillary land in a plane?",
+      "reference": [
+        "Hillary landed in a plane at the North Pole."
+      ],
+      "fact": "North Pole",
+      "output": "Hillary landed in a plane in a plane.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How long would he be forced out for?",
+      "reference": [
+        "He would be forced out permanently."
+      ],
+      "fact": "permanently",
+      "output": "Permanently would he be forced out for permanently.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is Sterling doing?",
+      "reference": [
+        "Sterling is refusing to sell."
+      ],
+      "fact": "refusing to sell",
+      "output": "Sterling is doing refusing to sell.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "Who doesn't think its reflective?",
+      "reference": [
+        "I don't think it's reflective."
+      ],
+      "fact": "I",
+      "output": "I doesn't think its reflective doesn't think its reflective.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Which reunion was it?",
+      "reference": [
+        "It was a previous reunion."
+      ],
+      "fact": "previous",
+      "output": "Previous was it previous.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is scheduled in 2010?",
+      "reference": [
+        "The last meeting is scheduled in 2010."
+      ],
+      "fact": "last meeting",
+      "output": "Last meeting is scheduled in 2010.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What does the first do with flowers?",
+      "reference": [
+        "The first does shows with flowers."
+      ],
+      "fact": "shows",
+      "output": "The first does with flowers with flowers.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What is the last part of Van's name?",
+      "reference": [
+        "The last part of Van's name was Gogh."
+      ],
+      "fact": "Gogh",
+      "output": "The last part of Van's name is Gogh.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is the meane more commendable than?",
+      "reference": [
+        "The meane is more commendable than the excellency."
+      ],
+      "fact": "the excellency",
+      "output": "The meane more commendable than the excellency is the excellency.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was the album's title?",
+      "reference": [
+        "The album's title is Relapse."
+      ],
+      "fact": "Relapse",
+      "output": "The album's title was Relapse.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is the documentary called?",
+      "reference": [
+        "The documentary is called `` Hip Hop: Beyond Beats and Rhymes. ''"
+      ],
+      "fact": "Hip Hop: Beyond Beats and Rhymes",
+      "output": "The documentary is called Hip Hop: Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyond Beyo",
+      "stopped": false,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was the score?",
+      "reference": [
+        "The score was 3 -- 11."
+      ],
+      "fact": "3 -- 11",
+      "output": "The score was 3 11.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What type of people were they?",
+      "reference": [
+        "They were al-Qaeda-type people."
+      ],
+      "fact": "al-Qaeda-type",
+      "output": "The type of people were they al-Qaeda-type.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "how many years closer are we to nuclear Iran?",
+      "reference": [
+        "We are four years closer to nuclear Iran."
+      ],
+      "fact": "four",
+      "output": "Four years closer four years closer four years closer four.",
+      "stopped": true,
+      "repeats": 3,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Why might they prefer to distinguish memory type?",
+      "reference": [
+        "For this reason they might prefer to distinguish memory type."
+      ],
+      "fact": "For this reason",
+      "output": "For this reason memory type might they prefer to distinguish memory type.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Who are they playing against?",
+      "reference": [
+        "They are playing against Great Britain."
+      ],
+      "fact": "Great Britain",
+      "output": "They are they playing against Great Britain.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "When will they play their next game?",
+      "reference": [
+        "They will play their next game Saturday."
+      ],
+      "fact": "Saturday",
+      "output": "Saturday will played in Saturday.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What did ex-USSR do?",
+      "reference": [
+        "ex-USSR landed."
+      ],
+      "fact": "landed",
+      "output": "Ex-USSR do landed landed.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What type of agency is it?",
+      "reference": [
+        "It is a news agency."
+      ],
+      "fact": "news",
+      "output": "News are it is news.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What does he ask them to do in the lamentation?",
+      "reference": [
+        "He asks them to mourn for his friend in the lamentation."
+      ],
+      "fact": "mourn for his friend",
+      "output": "He ask them to mourn for his friend in the lamentation in the lamentation.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What does this do?",
+      "reference": [
+        "This includes it."
+      ],
+      "fact": "includes",
+      "output": "This dos includes this includes.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Who urged him?",
+      "reference": [
+        "Sacchi urged him."
+      ],
+      "fact": "Sacchi",
+      "output": "Sacchi urged him urged him.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What is he professor of?",
+      "reference": [
+        "He is a professor of Sports Media."
+      ],
+      "fact": "Sports Media",
+      "output": "He is he professor of Sports Media.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "When is there a home run?",
+      "reference": [
+        "If the ball is hit in the air within the foul lines over the entire outfield there is a home run."
+      ],
+      "fact": "If the ball is hit in the air within the foul lines over the entire outfield",
+      "output": "There is a home run in the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air within the air ",
+      "stopped": false,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is present day?",
+      "reference": [
+        "Bahrain is present day."
+      ],
+      "fact": "Bahrain",
+      "output": "Present is present day.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What was in Persia?",
+      "reference": [
+        "The Gulf was in Persia."
+      ],
+      "fact": "Gulf",
+      "output": "Gulf was in Persia.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What of the sewage do these projects threaten?",
+      "reference": [
+        "These projects threaten the quality of sewage."
+      ],
+      "fact": "the quality",
+      "output": "These projects threaten the quality of the sewage of the sewage of the sewage.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What do they discuss?",
+      "reference": [
+        "They discuss how to successfully incorporate future tourism without sacrificing local values and culture."
+      ],
+      "fact": "how to successfully incorporate future tourism without sacrificing local values and culture",
+      "output": "They discusse tourism without sacrificing local values and culture.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Who attacked?",
+      "reference": [
+        "Michael Adebolajo attacked."
+      ],
+      "fact": "Michael Adebolajo",
+      "output": "Michael Adebolajo attacked Michael Adebolajo.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "When was the ruling?",
+      "reference": [
+        "The ruling was recent"
+      ],
+      "fact": "recent",
+      "output": "The ruling was in recent.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What is the role improving?",
+      "reference": [
+        "The role is improving habitat and species protection."
+      ],
+      "fact": "habitat and species protection",
+      "output": "The role improving is habitat and species protection.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What might happen accidentally?",
+      "reference": [
+        "The nuclear war might happen accidentally."
+      ],
+      "fact": "nuclear war",
+      "output": "The might happen accidentally might happen accidentally.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What is Shultz first name",
+      "reference": [
+        "Shultz first name is George."
+      ],
+      "fact": "George",
+      "output": "Shultz is first name.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What vehicle was Adam's brother in?",
+      "reference": [
+        "Adam's brother was in the X5."
+      ],
+      "fact": "X5",
+      "output": "Adam's brother was X5 vehicle.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What did she die in?",
+      "reference": [
+        "She died in the accident."
+      ],
+      "fact": "the accident",
+      "output": "She died the accident.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What Slavs did he hope for the liberation of?",
+      "reference": [
+        "He hoped for the liberation of Balkan Slavs."
+      ],
+      "fact": "Balkan",
+      "output": "He hoped the hope for the liberation of Balkan.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Which Christian Empire did he want restored?",
+      "reference": [
+        "He wanted to restore the Byzantine Christian Empire."
+      ],
+      "fact": "Byzantine",
+      "output": "He want restored Byzantine.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was wrong with his vision?",
+      "reference": [
+        "His vision was impaired."
+      ],
+      "fact": "impaired",
+      "output": "Wong was wrong with his vision.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was she involved in?",
+      "reference": [
+        "She was involved in organizing several edit-a-thons aimed at encouraging greater female participation and improving content about women."
+      ],
+      "fact": "organizing several edit-a-thons aimed at encouraging greater female participation and improving content about women",
+      "output": "She was involved at encouraging greater female participation and improving content about women.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How efficiently are they working?",
+      "reference": [
+        "They are working as efficiently as possible."
+      ],
+      "fact": "as possible",
+      "output": "They are working as possible efficiently.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What did the law not apply to?",
+      "reference": [
+        "The law did not apply to a bare-breasted woman."
+      ],
+      "fact": "bare-breasted woman",
+      "output": "The law not apply to bare-breasted woman.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is happening to bond yield spreads?",
+      "reference": [
+        "Bond yield spreads are widening."
+      ],
+      "fact": "widening",
+      "output": "Happening to bond yield spreads is widening.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What had been damaged?",
+      "reference": [
+        "The railway had been damaged."
+      ],
+      "fact": "railway",
+      "output": "Heen had been damaged.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What kind of route may have been available?",
+      "reference": [
+        "A diversionary route may have been available."
+      ],
+      "fact": "diversionary",
+      "output": "Diversionary may have been available.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What did she do by telephone?",
+      "reference": [
+        "She kept in contact by telephone."
+      ],
+      "fact": "kept in contact",
+      "output": "She do by telephoned kept in contact.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where was her appeal broadcast?",
+      "reference": [
+        "Her appeal was broadcast on BBC Radio."
+      ],
+      "fact": "on BBC Radio",
+      "output": "Her appeal was broadcast in BBC Radio.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What type of suspects are they?",
+      "reference": [
+        "They are terror type suspects."
+      ],
+      "fact": "terror",
+      "output": "Terror suspects are terror.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Whose territorial integrity was threatened?",
+      "reference": [
+        "Turkey's territorial integrity was threatened."
+      ],
+      "fact": "Turkey",
+      "output": "Turkey was threatened Turkey.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where was the zinc consumed?",
+      "reference": [
+        "The zinc was consumed in the electric battery."
+      ],
+      "fact": "electric battery",
+      "output": "The zinc was consumed in electric battery.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What would it do?",
+      "reference": [
+        "It would take."
+      ],
+      "fact": "take",
+      "output": "Take would take it take.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What are the fine filaments made of?",
+      "reference": [
+        "The fine filaments made of protein."
+      ],
+      "fact": "protein",
+      "output": "The fine filaments are made of protein.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where can I learn more about sex pili?",
+      "reference": [
+        "You can learn more about sex pills if you see bacterial genetics."
+      ],
+      "fact": "see bacterial genetics",
+      "output": "I can more about sex pili in see bacterial genetics.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was in Georgia?",
+      "reference": [
+        "A tornado was in Georgia."
+      ],
+      "fact": "tornado",
+      "output": "In Georgia was tornado.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was Saladin trying to get into?",
+      "reference": [
+        "Saladin was trying to get into the Citadel of Damascus."
+      ],
+      "fact": "Citadel of Damascus",
+      "output": "Saladin was trying to get into Citadel of Damascus.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where was the emir going to begin?",
+      "reference": [
+        "The emir was going to begin in Damascus."
+      ],
+      "fact": "Damascus",
+      "output": "The emir going to begin in Damascus to begin.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What city did General Howe take his army to?",
+      "reference": [
+        "General Howe takes his army to Philadelphia."
+      ],
+      "fact": "Philadelphia",
+      "output": "General Howe took his army to Philadelphia.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Where are they tracing?",
+      "reference": [
+        "They are tracing back to the thirteenth century."
+      ],
+      "fact": "back to the thirteenth century",
+      "output": "The thirteenth century are back to the thirteenth century.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Which ancestors were they?",
+      "reference": [
+        "They were his paternal ancestors."
+      ],
+      "fact": "his paternal ancestors",
+      "output": "The ancestors were they ancestors.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "How long did something take?",
+      "reference": [
+        "Something took 40 minutes."
+      ],
+      "fact": "40 minutes",
+      "output": "Something did something take 40 minutes.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What do the provisions allow people to do?",
+      "reference": [
+        "The provisions allowed the people to sue the government."
+      ],
+      "fact": "sue the government",
+      "output": "The provisions allow people to sue the government.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What percent are something in Norway?",
+      "reference": [
+        "25 percent are something in Norway."
+      ],
+      "fact": "25",
+      "output": "Something in Norway are something in Norway.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is public opinion on?",
+      "reference": [
+        "The public has an opinion on the death penalty."
+      ],
+      "fact": "the death penalty",
+      "output": "Public opinion is on the death penalty.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What was the day of the Sun God",
+      "reference": [
+        "Sunday was the day of the Sun God."
+      ],
+      "fact": "Sunday",
+      "output": "The day of the Sun God was the day of the Sun God.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "Who is praying?",
+      "reference": [
+        "The cult is praying."
+      ],
+      "fact": "cult",
+      "output": "Praying is cult.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What percent had the preference?",
+      "reference": [
+        "77 percent had the preference."
+      ],
+      "fact": "77 percent",
+      "output": "The percent had the preference 77 percent.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What kind of athletes are there?",
+      "reference": [
+        "There are Paralympic kind of athletes."
+      ],
+      "fact": "Paralympic",
+      "output": "The Paralympic are there are Paralympic.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What age class beat Caboolture?",
+      "reference": [
+        "The under 19s age class beat Caboolture."
+      ],
+      "fact": "under 19s",
+      "output": "Under 19s age class beat Caboolture.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is final?",
+      "reference": [
+        "The day is final"
+      ],
+      "fact": "day",
+      "output": "Final is day.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Who adopted it?",
+      "reference": [
+        "Israelites adopted it."
+      ],
+      "fact": "Israelites",
+      "output": "Israelites adopted it adopted it.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What is the first name of Gorce?",
+      "reference": [
+        "The first name of Gabriel was Gorce."
+      ],
+      "fact": "Gabriel",
+      "output": "The first name of Gorce is Gabriel.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What day of the month was it started?",
+      "reference": [
+        "It started on the 17th day of the month."
+      ],
+      "fact": "17",
+      "output": "It was started 17 day of the month.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What night did he say the film was broadcast?",
+      "reference": [
+        "He said the film was broadcast on Friday."
+      ],
+      "fact": "Friday",
+      "output": "He say the film was broadcast.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What size man was Gough demonstrated to be?",
+      "reference": [
+        "Gough was demonstrated to be a big man."
+      ],
+      "fact": "big",
+      "output": "Gough was demonstrated to be big.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "When did domestic dairy animals get to Europe?",
+      "reference": [
+        "Domestic dairy animals got to Europe around 7000 BC."
+      ],
+      "fact": "around 7000 BC",
+      "output": "Domestic dairy animals got to Europe in around 7000 BC.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "When were they domesticated?",
+      "reference": [
+        "They were domesticated around 7000 -- 6000 BC."
+      ],
+      "fact": "around 7000 -- 6000 BC",
+      "output": "They were domesticated in around 7000 BC.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What day did Sen George from South Dakota die on?",
+      "reference": [
+        "Sen George from South Dakota died Sunday."
+      ],
+      "fact": "Sunday",
+      "output": "Sen George from South Dakota died on Sunday.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What were high?",
+      "reference": [
+        "The islands were high."
+      ],
+      "fact": "islands",
+      "output": "High were islands.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What philosophical tradition did Lopez admire?",
+      "reference": [
+        "Lopez admired the Spanish philosophical tradition."
+      ],
+      "fact": "Spanish",
+      "output": "Lopez admired Spanish philosophical tradition.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What vegetable was the department concerned with?",
+      "reference": [
+        "The department was concerned with the tomato."
+      ],
+      "fact": "tomato",
+      "output": "The department concerned with tomato vegetable was tomato.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What are results part of?",
+      "reference": [
+        "The results are part of a wider study."
+      ],
+      "fact": "a wider study",
+      "output": "Results are part of a wider study.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What is divided?",
+      "reference": [
+        "The country is divided."
+      ],
+      "fact": "The country",
+      "output": "The country is divided is divided.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What did Fluke's speech center on?",
+      "reference": [
+        "Fluke's speech centered on women's rights, women's healthcare, and the Patient Protection and Affordable Care Act."
+      ],
+      "fact": "women's rights, women's healthcare, and the Patient Protection and Affordable Care Act",
+      "output": "Fluke's speech centered on women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women's rights, women",
+      "stopped": false,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What must you play?",
+      "reference": [
+        "You must play the game."
+      ],
+      "fact": "game",
+      "output": "You must play game must you play.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What subjection did the pope avoid?",
+      "reference": [
+        "The pope avoided visible subjection."
+      ],
+      "fact": "visible",
+      "output": "The pope avoid the pope avoid visible subjection.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What were the former Papal's?",
+      "reference": [
+        "The former papal's were States."
+      ],
+      "fact": "States",
+      "output": "The former Papal's were the former Papal's.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What can't be emphasized too strongly?",
+      "reference": [
+        "It can't be emphasized too strongly."
+      ],
+      "fact": "It",
+      "output": "The can't be emphasized too strongly.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What was nowise the result of present depression?",
+      "reference": [
+        "These trends were the result of present depression."
+      ],
+      "fact": "These trends",
+      "output": "These trends was nowise the result of present depression.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What kind of organizations were they?",
+      "reference": [
+        "They were media organizations."
+      ],
+      "fact": "media",
+      "output": "The media of organizations were they are media.",
+      "stopped": true,
+      "repeats": 2,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What event happens some years?",
+      "reference": [
+        "Victor Hugo International Music Festival happens some years."
+      ],
+      "fact": "Victor Hugo International Music Festival",
+      "output": "The Victor Hugo International Music Festival happens some years.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "statements",
+      "q": "What was Hugo's?",
+      "reference": [
+        "Hugo's was a novel."
+      ],
+      "fact": "novel",
+      "output": "Hugo's was novel.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "What should light quanta be regarded as?",
+      "reference": [
+        "Light Quanta should be regarded as real particles."
+      ],
+      "fact": "real particles",
+      "output": "Light quanta be regarded as real particles.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": false
+    },
+    {
+      "task": "statements",
+      "q": "Why should you go to your house?",
+      "reference": [
+        "You should go to your house to set it straight."
+      ],
+      "fact": "set it straight",
+      "output": "You should should go to your house.",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": false
+    },
+    {
+      "task": "exam",
+      "q": "中国建筑工程总公司标识的整体造型象征什么？",
+      "reference": [
+        "建筑的基石、诚信的品格以及国内外市场一体化的运营实力"
+      ],
+      "fact": "建筑的基石、诚信的品格以及国内外市场一体化的运营实力",
+      "output": "建筑的基石、诚信的品格以及国内外市场一体化的运",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "exam",
+      "q": "《康健杂志》的期许是什么？",
+      "reference": [
+        "每个人都能活得自在、活得愉快、活得健康。",
+        "期许每个人都能活得自在、活得愉快、活得健康。"
+      ],
+      "fact": "每个人都能活得自在、活得愉快、活得健康。",
+      "output": "每个人都能活得自在、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活得愉快、活",
+      "stopped": false,
+      "repeats": 0,
+      "recoverable": true
+    },
+    {
+      "task": "exam",
+      "q": "即时书签是由什么公司推出的？",
+      "reference": [
+        "Mozilla Firefox"
+      ],
+      "fact": "Mozilla Firefox",
+      "output": "Mozilla Firefox.",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "exam",
+      "q": "玉桂山的地址在哪里？",
+      "reference": [
+        "香港南区鸭脷洲东部"
+      ],
+      "fact": "香港南区鸭脷洲东部",
+      "output": "地址在香港南区鸭脷洲东部。",
+      "stopped": true,
+      "repeats": 1,
+      "recoverable": true
+    },
+    {
+      "task": "exam",
+      "q": "交银金融大厦第3层有哪些机构？",
+      "reference": [
+        "总行外汇交易厅、银行计算机中心、大厦计算机中心"
+      ],
+      "fact": "总行外汇交易厅、银行计算机中心、大厦计算机中心",
+      "output": "总行外汇交易厅、银行计算机中心",
+      "stopped": true,
+      "repeats": 0,
+      "recoverable": true
+    }
+  ]
+}
