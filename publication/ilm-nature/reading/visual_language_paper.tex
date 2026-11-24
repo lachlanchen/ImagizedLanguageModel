@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=20mm,top=18mm,bottom=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,graphicx,amsmath,microtype,xcolor}
+\usepackage[colorlinks=true,urlcolor=teal]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\definecolor{deep}{HTML}{173A47}
+\newcommand{\heading}[1]{\par\vspace{5pt}{\Large\bfseries\color{deep}#1}\par}
+\begin{document}
+{\Huge\bfseries Reading pictured facts and writing new sentences as glyphs\par}
+{\large Imagized Language Model research report}\par
+\heading{Abstract}
+Changing one fact on a printed card should change what a generated sentence says. We trained a 1.37-million-parameter writer on 33,525 human descriptions paired with restaurant records rendered in Chinese or English. The writer read aligned image cells and emitted English letter images until it chose to stop. A second visual reader checked candidate sentences against the pictured facts. On 1,847 unseen combinations presented in Chinese, readback improved complete fact recovery from 1,453 to 1,606 when price and rating aliases were treated as equivalent and search candidates and length normalization were fixed. A stricter literal detector accepted 657 outputs and 1,729 of 4,693 human references. In 1,286 of 1,291 paired interventions the writer correctly reversed a family policy. The corresponding byte-input writer recovered 1,610 complete normalized fact sets. These experiments support conditional visual writing in a finite domain. General conversation, open-alphabet synthesis and superior training efficiency remain unestablished.
+
+\heading{What changed when the meaning changed?}
+The first eligible held record names Blue Spice, a pub serving Chinese food in the city centre, near Rainbow Vegetarian Caf\'e. The pictured policy excludes families. Figure~1 shows both returned pages after changing that single field. The writer changed sentence structure and polarity and kept the other facts. The candidates consisted of its own completions. The selector inferred the requested facts from the card.
+
+The first card specified only a name, a coffee shop and the city centre. The writer added a high price. The final card named The Sorrento as the nearby landmark. The writer printed \emph{The Portel}. Both sentences are legible. Both would mislead a reader. In a source-visible, model-assisted assessment of twenty evenly spaced Chinese cards, the original greedy writer conveyed all facts without additions on 13 and the released system on 17. Several faithful sentences had awkward English. This reading has no independent human adjudication.
+
+\heading{Dependence on the source}
+The official test contains 1,847 fact combinations absent from training. Each selected English sentence differs from every full training reference under literal string comparison. After exchanging the test records cyclically, none of the selected Chinese-card outputs retained the exact requested literal fact set. Stock phrases and previously seen values remain available. \href{https://github.com/tuetschek/e2e-cleaning}{Cleaned E2E corpus and realization rules}.
+\newpage
+\heading{Figure 1. What the writer actually printed}
+\begin{center}
+\includegraphics[width=.99\linewidth,height=.78\textheight,keepaspectratio]{../figures/Figure_139_semantic_page.png}
+\end{center}
+\small The original Chinese input and both answers preserve their physical glyph pixels. For display, blank sidebearings were trimmed and words were wrapped. The two errors are the first and last records in fixed test order. Each bar uses 1,847 unique meanings. The edited-fact column requires the requested family policy in the original answer and its opposite after the edit. Other factual errors can occur in the same pair.\normalsize
+\newpage
+\heading{How the visual writer learns}
+English letters and Chinese characters use the same size cell. Their information content and linguistic functions can differ. The visual encoder maps a row of 32-pixel cells to a vector. Row order is randomized and row meaning is supervised during fitting. The decoder sees the set of row vectors and estimates
+\[
+ p(y\mid x)=\prod_{t=1}^{T+1} p(y_t\mid y_{<t}, E(x)),\qquad y_{T+1}=\mathrm{stop}.
+\]
+The writer uses a three-layer transformer across blocks of four glyphs. Within a block each cell can depend on earlier glyphs. Feedback comes from earlier emitted images. Choosing among 73 printable training bitmaps ensures sharp letters and restricts the alphabet. The optional Unicode transcript maps these particular bitmaps back to text.
+
+\heading{Which error does reading back remove?}
+The beam proposes eight stopped sentences. A 223,200-parameter inverse reader learned to recover facts from human descriptions presented as images. For a given card the selector uses its predicted field set, the writer's mean log likelihood and the inverse reader's Bernoulli log likelihood. Among $N$ cards let $C$ count those with a faithful candidate and $S$ those where the selected sentence is faithful. Then
+\[
+ N-S=(N-C)+(C-S).
+\]
+The merged-facts counts are $241=179+62$. The first 179 errors require better candidates. A perfect selector on this pool could recover at most 62 more. Enabling readback recovered 179 previously failed cases and lost 26 previously successful ones. The literal gains and losses were 71 and eight. A Lean proof gives a sufficient selection condition. If an ideal faithful witness exceeds every unfaithful score by more than twice the learned score's uniform error, a learned maximizer is faithful. The margin has yet to be established for these networks.
+
+\heading{Controls and costs}
+On a separately evaluated development set, interleaved Chinese and English rows gave 1,304 of 1,484 complete merged fact sets and 246 literal passes. The listener fit took 12.0 seconds and 1.49 kJ on one RTX 4090 D. Optical and byte writer fits took 113.0 and 115.2 seconds, consuming 11.51 and 11.72 kJ of device energy. The optical writer and listener have 1,591,210 parameters together. Host and cooling energy are excluded. Beam generation with readback for 3,138 Chinese cards consumed 4.66 kJ.
+
+The scorer can mark both \emph{5 out of 5} and \emph{high} for one phrase. Merging such labels and corresponding price bands accepted 4,396 of 4,693 human references. Precision lost to merging and unrecognized invented facts limit this measure.
+\newpage
+\heading{Historical writing as evidence}
+Some questions require a particular attested mark. A separate optical reader identified a headword and ordered fields in a pictured question about an illustrated dictionary. It returned their stored ink. One example below contains four historical exemplars. In another case unfamiliar wording led it to the wrong headword.
+\begin{center}
+\includegraphics[width=.90\linewidth,height=.54\textheight,keepaspectratio]{../figures/Figure_138_glyph_atlas.png}
+\end{center}
+\small \textbf{Figure 2.} The experiment reused 795 held headword families across fresh wording. Field selection and page composition use a finite schema. Each form retains its source pixels. Inferring an unattested form needs different evidence.\normalsize
+
+\heading{Relation to earlier work}
+PIXAR demonstrated autoregressive text generation in pixel space. Earlier E2E systems used semantic reranking over generated text. Here the generator feeds back glyph images, the listener reads those images, and the byte reader shares the physical output task. The next test is free-form writing from independent passages, including Chinese answer prose and unseen print faces. \href{https://aclanthology.org/2024.findings-acl.874/}{Tai et al., 2024}. \href{https://ufal.mff.cuni.cz/~odusek/E2E/final_papers/E2E-ZHAW.pdf}{ZHAW E2E system}. \href{https://aclanthology.org/W17-5525/}{Novikova et al., 2017}.
+\end{document}

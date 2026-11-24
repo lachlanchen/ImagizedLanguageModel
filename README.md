@@ -4,6 +4,12 @@
 
 # Imagized Language Model (ILM)
 
+**Can a model write a different sentence when one printed fact changes?** A 1.59-million-parameter visual writer and reader trained on one RTX 4090 D take Chinese or English fact cards and return English sentence images. Changing a family policy reversed the corresponding claim in both answers for 1,286 of 1,291 pairs. On 1,847 Chinese cards, 657 complete answers passed a literal fact checker and 1,606 passed with equivalent price and rating bands. The first test card still acquired an unsupported price. [Run the released model](models/semantic_page/README.md) · [Four-page paper](publication/ilm-nature/visual_language_paper.pdf) · [Full results](references/semantic_page_result.md)
+
+[![One pictured Chinese record, an edited policy and the two original generated answers](publication/ilm-nature/figures/Figure_139_semantic_page.png)](publication/ilm-nature/visual_language_paper.pdf#page=2)
+
+For an illustrated etymology question about 言, a separate reader returns its attested oracle, bronze, seal and Liushutong forms. [Read the example](models/glyph_atlas/README.md)
+
 A pictured line by Li She reads 縱使雞鳴遇關吏. Given the damaged second line **□□余也是何人**, the image writer restored **不知余也是何人** and returned the completed page as a PNG. This was one of 17 exact two-cell repairs across 6,362 lines from reserved poet attributions. Given an entirely blank second line, the writer matched no complete reference. [Run the page writer](models/verse_canvas/README.md) · [Experiments and limitations](references/verse_canvas_result.md)
 
 [![Figure 136. Generating a blank verse line, restoring damaged ink and reading another typeface](publication/ilm-nature/figures/Figure_136_verse_canvas.png)](publication/ilm-nature/manuscript.pdf)
