@@ -1,5 +1,7 @@
 # Language in continuous image space
 
+The current three-page article, **Learning to write answers from pictured pages**, opens with the original question and answer images from a controlled name change. The second page reports Chinese factual selection and the third shows the actual answer to a historical-form question. The cumulative manuscript opens with the same article, followed by the earlier experimental record. The separately versioned reviews and redlines below document their respective prior editions. [Read the current PDF](visual_language_paper.pdf) · [LaTeX](reading/visual_language_paper.tex) · [Editable figure plates and quantitative chart](figures/Visual_evidence_and_statements.pptx) · [Measurements](../../references/visual_statement_result.md)
+
 This compact research article separates measured visual prediction, glyph
 synthesis and conditional generation. Its reading layout follows the Lamp+LCD
 V-SPICE v13.7 manuscript template: a two-column article, a matching review

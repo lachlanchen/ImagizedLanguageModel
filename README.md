@@ -2,35 +2,39 @@
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
+Asked “Who designed Salamanca?” about an unseen railway page, the image model wrote **Matthew Murray designed Salamanca.** Changing only the name in the pictured passage made it write **Daniel Harper designed Salamanca.** On 96 fresh pages the reader recovered the human fact on 25. It also read a school year correctly and then lost the date while writing. The first page of the paper prints the actual answer images. [PDF](publication/ilm-nature/visual_language_paper.pdf) · [PNG](models/visual_statements/examples/intervention)
+
+[![Salamanca](publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](publication/ilm-nature/visual_language_paper.pdf)
+
 On a pictured Chinese page about a damselfish, a 2.44-million-parameter reader wrote **厚壳仔** when asked its common name and **辐鳍鱼纲鲈形目隆头鱼亚目雀鲷科** when asked for its classification. Across 256 unseen English and Chinese passages it wrote both human answers on 44, up from zero for the previous optical model. It followed 20 of 28 changes to stated numbers. A matched byte reader solved 52 paired passages at comparable energy. The optical model still missed the attested forms of 言 and rarely composed a correct answer whose wording was absent from the passage. [Run the model](models/paired_evidence/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf)
 
-[![Figure 145](publication/ilm-nature/figures/Figure_145_paired_evidence.png)](publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 145](publication/ilm-nature/figures/Figure_145_paired_evidence.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=2)
 
 # Imagized Language Model (ILM)
 
 Can a model answer a question when both the prompt and reply are glyph images? A 2.12-million-parameter writer trained on one RTX 4090 D learned to predict unseen English and Chinese prose. Its first free English reply repeated the question about saving energy. An additional visual reader wrote 11 of 384 human reference answers and answered both questions on 0 of 192 passages. Figure 144 shows the original emitted pixels. [Read the paper](publication/ilm-nature/visual_language_paper.pdf) · [Run the image writer](models/visual_cursor/README.md)
 
-[![Figure 144](publication/ilm-nature/figures/Figure_144_visual_discourse.png)](publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![Figure 144](publication/ilm-nature/figures/Figure_144_visual_discourse.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 Two attractions share a paragraph. The garden and tower are named once, and their fees are given for *the former* and *the latter*. With the same pictured question, changing the target produced **门票是12元的。** and **门票是35元的。** The preceding writer gave 12 for both. The new reader and writer answered both venues in both orders on 365/536 controlled comparisons. On a harder English test where a changed word reverses the referent, it got both answers right on only 1/120 pairs.
 
-[![Original answer images, ordinal controls, and limits of reference reading](publication/ilm-nature/figures/Figure_143_story_mentions.png)](publication/ilm-nature/visual_language_paper.pdf#page=6)
+[![Original answer images, ordinal controls, and limits of reference reading](publication/ilm-nature/figures/Figure_143_story_mentions.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=6)
 
 Two restaurants in a human-written Chinese paragraph receive different ratings. Asked the same question about each restaurant, a visual reader writes **评分是4.7分。** and **评分是4.8分。** as images. The 486,442-parameter system runs on CPU and fits on one RTX 4090 D. It answered both venues under both paragraph orders in 472 of 539 comparisons assembled from held conversations. Erasing the target-name position during training and inference reduced this to zero. On twelve newly written two-venue paragraphs, both answers were correct on five. The model still charges the same amount for “the former” and “the latter” in a passage that gives different fees. [Read the seven-page paper](publication/ilm-nature/visual_language_paper.pdf) · [Run the released weights on a PNG](models/prose_fields/README.md) · [Data and comparison with bytes](references/prose_fields_result.md)
 
-[![Two original restaurant answer images, the name-erased comparison and a failure to resolve former and latter](publication/ilm-nature/figures/Figure_142_prose_fields.png)](publication/ilm-nature/visual_language_paper.pdf#page=7)
+[![Two original restaurant answer images, the name-erased comparison and a failure to resolve former and latter](publication/ilm-nature/figures/Figure_142_prose_fields.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=7)
 
 A hotel guest asked for the price and address. An earlier image writer gave the right number and street but called 1,354 yuan an address. A **333,850-parameter visual reader and writer**, trained from scratch on one RTX 4090 D, drew **价格是1354元。地址是在北京西城区广安门内大街217号。** Giving the writer the identity of the field currently being expressed raised correctly attached pairs from 24 to 36 on 37 held questions. On 14 additional turns evaluated after freezing the model, it passed 12. Asked to report the first-mentioned field second, it still failed every paired order test. [Run the model on a PNG](models/chinese_two_fact/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf) · [Evidence and limits](references/chinese_two_fact_result.md)
 
-[![Original question and answer pixels for a hotel price and address, attachment scores and an order-reversal failure](publication/ilm-nature/figures/Figure_141_two_fact_figure.png)](publication/ilm-nature/visual_language_paper.pdf#page=8)
+[![Original question and answer pixels for a hotel price and address, attachment scores and an order-reversal failure](publication/ilm-nature/figures/Figure_141_two_fact_figure.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=8)
 
 **A Chinese question in, a Chinese answer image out.** On the same pictured restaurant card, one guest asked for opening hours and another asked where it was. The writer returned **营业时间是周一至周日 11:00-21:30。** and **地址是西四南大街60号(近缸瓦市)。** A 1.57-million-parameter model trained on a single RTX 4090 D gave clean source values on 507 of 515 held human questions. Removing the question reduced this to 237. A matched byte reader scored 508. Both relation selection and the wording can still fail. [Run the writer](models/chinese_card_reply/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf) · [Evidence and failures](references/chinese_card_reply_result.md)
 
-[![Original questions and answer images on one restaurant, a failed hotel question and a historical-mark transfer experiment](publication/ilm-nature/figures/Figure_140_visual_fact_reply.png)](publication/ilm-nature/visual_language_paper.pdf#page=9)
+[![Original questions and answer images on one restaurant, a failed hotel question and a historical-mark transfer experiment](publication/ilm-nature/figures/Figure_140_visual_fact_reply.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=9)
 
 **Can a model write a different sentence when one printed fact changes?** A 1.59-million-parameter visual writer and reader trained on one RTX 4090 D take Chinese or English fact cards and return English sentence images. Changing a family policy reversed the corresponding claim in both answers for 1,286 of 1,291 pairs. On 1,847 Chinese cards, 657 complete answers passed a literal fact checker and 1,606 passed with equivalent price and rating bands. The first test card still acquired an unsupported price. [Run the released model](models/semantic_page/README.md) · [Reading edition](publication/ilm-nature/visual_language_paper.pdf) · [Full results](references/semantic_page_result.md)
 
-[![One pictured Chinese record, an edited policy and the two original generated answers](publication/ilm-nature/figures/Figure_139_semantic_page.png)](publication/ilm-nature/visual_language_paper.pdf#page=10)
+[![One pictured Chinese record, an edited policy and the two original generated answers](publication/ilm-nature/figures/Figure_139_semantic_page.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=10)
 
 For an illustrated etymology question about 言, a separate reader returns its attested oracle, bronze, seal and Liushutong forms. [Read the example](models/glyph_atlas/README.md)
 

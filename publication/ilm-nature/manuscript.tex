@@ -1,9 +1,11 @@
 \documentclass[10pt,a4paper,twocolumn]{article}
 \usepackage[left=13.5mm,right=13.5mm,top=17mm,bottom=17mm,columnsep=5mm]{geometry}
-\usepackage{nature_reading}
+\usepackage{nature_reading,pdfpages}
 \extrafloats{128}
 \input{frontmatter.tex}
 \begin{document}
+% The short primary article is followed by the cumulative experimental record.
+\includepdf[pages=-,pagecommand={},linktodoc=true]{visual_language_paper.pdf}
 \twocolumn[{\noindent{\sffamily\bfseries\fontsize{23}{26}\selectfont\PaperTitle\par}
 \vspace{7pt}\noindent{\fontsize{11}{13}\selectfont Imagized Language Model Project\par}
 \vspace{12pt}\noindent{\bfseries\fontsize{10.5}{12.2}\selectfont\PaperSummary\par}\vspace{13pt}}]

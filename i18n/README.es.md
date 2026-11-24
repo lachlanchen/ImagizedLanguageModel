@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Al preguntarle quién diseñó Salamanca a partir de la imagen de una página sobre ferrocarriles, el modelo escribió **Matthew Murray designed Salamanca.** Al cambiar solo el nombre en la página por Daniel Harper, también cambió el sujeto de la respuesta. En 96 pasajes nuevos recuperó 25 respuestas cortas exactas. En otro ejemplo leyó bien el año de fundación de una escuela y luego lo omitió al escribir. La primera página del artículo muestra las imágenes originales. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+
 Ante la misma página china sobre un pez, el lector escribió el nombre común o la clasificación según la pregunta. El modelo de 2,44 millones de parámetros, entrenado en una RTX 4090 D, acertó las dos preguntas en 44 de 256 pasajes nuevos en chino e inglés. El lector anterior no acertó ningún par. El control que recibe bytes acertó 52 con un consumo similar. El lector visual todavía falla al reproducir las formas históricas de 言. [Ejecutar el modelo](../models/paired_evidence/README.md) · [Leer el artículo](../publication/ilm-nature/visual_language_paper.pdf)
 
-[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=2)
 
 Un modelo de 2,12 millones de parámetros entrenado en una RTX 4090 D aprendió a predecir glifos en pasajes inéditos en inglés y chino. Al preguntarle cómo ahorrar energía, repitió parte de la pregunta. Con un lector visual adicional acertó 11 de 384 preguntas y en ninguno de los 192 pasajes acertó las dos preguntas. La figura 144 muestra los píxeles generados. [Leer el artículo](../publication/ilm-nature/visual_language_paper.pdf) · [Ejecutar el modelo](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 Un modelo de 1,18 millones de parámetros lee un carácter señalado en una imagen de chino clásico y dibuja su significado en inglés. Para 言 escribe «speak» al final de 言及之而不言 y «speech» en 有是言也. Acierta ambos sentidos en 213 de 566 pares de las Analectas y 82 de 403 pares de los Cantos de Chu. El método que cuenta caracteres vecinos resuelve 211 y 104 pares. [Ejecutar el modelo](../models/visual_word_senses/README.md) · [Resultados](../references/visual_word_sense_result.md)
 

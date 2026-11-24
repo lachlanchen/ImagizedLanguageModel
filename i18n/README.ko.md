@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+철도 기사 이미지를 보고 Salamanca의 설계자를 묻자 모델은 **Matthew Murray designed Salamanca.**라고 썼다. 기사 속 이름만 Daniel Harper로 바꾸자 답변의 주어도 바뀌었다. 새로운 글 96편 중 25편에서 짧은 정답을 정확히 읽었다. 설립 연도를 제대로 읽고도 문장에서 빠뜨린 사례도 있다. 논문 첫 페이지에서 실제 출력 이미지를 볼 수 있다. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+
 같은 물고기 설명문에서 질문을 바꾸자 모델이 통칭과 분류를 각각 써냈습니다. RTX 4090 D 한 장으로 학습한 244만 매개변수 모델은 처음 보는 영문·중문 지문 256개 중 44개에서 두 질문에 모두 정답을 썼습니다. 이전 시각 모델은 0개, 비슷한 에너지를 쓴 바이트 입력 모델은 52개였습니다. 言의 옛 자형을 재현하는 문제는 풀지 못했습니다. [모델 실행](../models/paired_evidence/README.md) · [논문](../publication/ilm-nature/visual_language_paper.pdf)
 
-[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=2)
 
 212만 개의 매개변수를 가진 모델을 RTX 4090 D 한 장으로 학습시켰습니다. 처음 보는 영어와 중국어 지문에서 다음 글자 모양을 더 잘 예측했지만, 에너지를 아끼는 방법을 묻자 질문을 되풀이했습니다. 시각 독해 모듈을 추가한 뒤에는 사람이 작성한 384개 질문 중 11개에 정답을 썼습니다. 같은 지문에 딸린 두 질문에 모두 정답을 쓴 경우는 192쌍 중 0쌍이었습니다. 그림 144는 실제 출력 이미지입니다. [논문 읽기](../publication/ilm-nature/visual_language_paper.pdf) · [모델 실행](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 118만 개의 매개변수를 가진 모델이 한문 이미지에서 지정한 글자를 읽고 영어 뜻을 이미지로 쓴다. 言及之而不言의 마지막 글자에는 speak, 有是言也의 言에는 speech라고 썼다. 같은 글자의 두 뜻을 모두 맞힌 경우는 《논어》 566쌍 중 213쌍, 《초사》 403쌍 중 82쌍이었다. 인접 글자의 빈도를 이용한 방법은 각각 211쌍과 104쌍을 맞혔다. [모델 실행](../models/visual_word_senses/README.md) · [실험 결과](../references/visual_word_sense_result.md)
 

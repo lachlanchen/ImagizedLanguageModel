@@ -1,161 +1,64 @@
-\documentclass[11pt]{article}
-\usepackage[a4paper,margin=20mm,top=18mm,bottom=18mm]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern,graphicx,amsmath,microtype,xcolor}
-\usepackage[colorlinks=true,urlcolor=teal]{hyperref}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt}
-\definecolor{deep}{HTML}{173A47}
-\newcommand{\heading}[1]{\par\vspace{5pt}{\Large\bfseries\color{deep}#1}\par}
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=13.5mm,right=13.5mm,top=17mm,bottom=17mm,columnsep=5mm]{geometry}
+\usepackage{nature_reading,multicol}
+\setlength{\multicolsep}{11pt}\raggedcolumns
+\setlength{\columnsep}{5mm}
+\newcommand{\platehere}[3]{\par\vspace{9pt}{\centering\includegraphics[width=\linewidth]{../figures/#1.pdf}\par}\vspace{4pt}\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{#2.} #3}\endgroup}
+\newcommand{\spread}[1]{\noindent{\sffamily\bfseries\fontsize{19}{22}\selectfont #1\par}\vspace{4pt}}
 \begin{document}
-{\Huge\bfseries Reading two questions about\\the same pictured passage\par}
-{\large Imagized Language Model research report}\par
-
-\heading{Abstract}
-Writing can preserve distinctions that are lost when an inscription is transcribed into a modern character set. We tested whether a model that reads and writes glyph images can use the meaning of a question to select evidence. On 256 previously unseen English and Chinese passages, a 2.44-million-parameter model wrote complete answers to both human questions on 44 passages. A preceding visual writer passed none. Holding the question constant and changing a numeral in the passage gave correct answers on both versions in 20 of 28 cases. Giving the model a page containing historical Chinese forms exposed a different result. Asked to return either of two pictured forms, it missed every pair. The results establish a limited ability to read modern printed evidence while leaving historical interpretation and open composition unresolved.
-
-\heading{Two questions, one page}
-A Chinese passage identifies a damselfish by its common name and its taxonomy. Asked what the fish is commonly called, the model wrote three characters. Asked which group the fish belongs to, it wrote a fifteen-character classification. Both answers matched the human references. The inputs and outputs in Figure~1 are the actual bitmaps. The two answers can be reproduced on CPU from the released question and passage PNGs.
-
-\heading{What the model learns}
-Each printed cell is a $32\times32$ image. A convolutional reader aligns the question with the passage and scores complete intervals of up to 48 glyphs. A second path can write successive glyphs from learned visual features and the existing book-trained writer. If several intervals produce the same answer, their probabilities add. At each step, the writer emits the most probable next mark and updates the probability of every path still compatible with its output. A stop decision ends the reply. A proof checked in Lean gives one sufficient condition for this decoder: when an entire answer carries more probability than all rivals combined, it wins every prefix decision, including stopping. Of the 510 reference answers assessed for that condition, 104 crossed one half and all 104 appeared exactly in the emitted pixels.
-
-\heading{How much did evidence supervision help?}
-We trained on pairs of different human questions about the same passage. Adding human-marked evidence locations during fitting raised the number of completely correct pairs from 43 to 44. Nineteen passages passed only with the marks and eighteen only without them. Most of the gain over the previous reader was already present in the new architecture and paired training. The comparison leaves the individual contributions of those two changes unresolved.
+\noindent{\sffamily\bfseries\fontsize{25}{28}\selectfont Learning to write answers from pictured pages\par}
+\vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
+\noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
+An inscription can carry a distinction that a transcription discards. We ask whether a model can read a question and a passage as ink, then write an answer as ink. A 2.79-million-parameter system learned to turn a pictured question and an intermediate fact into an English sentence. When the intermediate fact was supplied, exact agreement with a human statement rose from 0 to 29 of 128 questions. When the system had to read the fact itself, it matched 8 of 96 human statements. On 96 further, unseen passage families the reader recovered the recorded fact on 25. A source edit could change the subject of an otherwise intact generated sentence. Other edits were lost between reading and writing.\par}
+\vspace{4pt}
+\platehere{Figure_148_writing_visual_statements}{Following a name through the reader and writer}{The upper page excerpt comes from a held SQuAD article. The lower version substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing is reduced for print throughout.}
+\begin{multicols}{2}
+\section*{What changes when the page changes?}
+The original railway page mentions Trevithick, Murray and Stephenson. The question asks who designed Salamanca. The answer joins a name from the page to a predicate from the question and stops. Changing only the name in the page changes the subject of the reply (Fig.~1a). Another page asks who wrote about bronze inscriptions. Replacing Lena with Mira changes the entire answer appropriately in both cases.
+\section*{Where the same mechanism fails}
+On a school page the system correctly reads 1635. Replacing it with 1735 changes the intermediate image, yet the writer produces exactly the same defective sentence on both pages (Fig.~1b). On a fossil page the model follows the change from Niger to Nepal and omits the English preposition both times. Legible letters, selection of a fact and expression of the relation can be tested separately.
+\end{multicols}
 \newpage
-\heading{Figure 1. Complete answers under a change of question}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.66\textheight,keepaspectratio]{../figures/Figure_145_paired_evidence.png}
-\end{center}
-\small Each source contributes two questions about each of 64 previously unseen passages. Panel a shows original answer pixels from the first fully correct and first incomplete simplified Chinese pairs in the evaluation order. Failure to reproduce a reference requires inspection when several wordings are acceptable. On 32 English dialogue questions whose four recorded wordings were all absent from the visible passage, both credited replies were \emph{no}. Always answering \emph{yes} would score 12/32. One of the two credited questions had human references of both polarities.\normalsize
-
-\heading{Independent writing on one GPU}
-The optical model's deployed fitting stages took 273 seconds and 37.5\,kJ on one RTX 4090 D. The matched byte-input reader took 280 seconds and 38.0\,kJ and solved 52/256 pairs. Device energy excludes preparation, controls, evaluation and host consumption. In an exploratory historical test the optical reader returned none of the requested attested forms on 128 questions in each language. It also failed all 120 paired Winograd contrasts. Reading a stated modern fact has become measurable; writing an independent explanation of a character's evolution remains an open test.
+\spread{Which fact does the question ask for?}
+\noindent Two Chinese questions on the same page distinguish reading the ink from identifying the requested relation. Each column below shows what a trained writer produced.\par
+\platehere{Figure_146_reading_visible_facts}{A change in the question can redirect attention to the wrong fact}{Panel a asks first for the fish's common name and then for its classification. The interval writer gives both. The recurrent writer gives the common name and then the fish's range in the Indo-West Pacific. Panel b asks where a dinosaur fossil was found. Here the recurrent writer supplies Niger, while the interval writer emits a fragment. Questions, evidence excerpts and replies are bitmaps from the two executions.}
+\begin{multicols}{2}
+\section*{Learning when to return to the page}
+We trained a writer to return to a pictured passage after any phrase. It could copy one, two, four or eight cells at a new position, write a single glyph, or stop. English letters and Chinese characters used the same image representation. Training mixed 38,500 Chinese DuReader and 3,289 English Dolly examples with existing paired questions, instructions and books.\par
+Across 256 held passages, the interval reader answered both questions correctly on 44. The recurrent writer did so on 38. On 96 English and 96 Chinese questions for which the human answer did not occur as a contiguous visible span, it reproduced no reference exactly. In a small masked comparison, two of its sixteen answers conveyed the full requested meaning. Selecting one existing source sentence gave five. Exact wording alone would miss these distinctions.
+\section*{Learning how to state the fact}
+We froze the stronger interval reader and trained the recurrent writer on 60,254 human examples from QA2D. Each had a pictured question, a short answer and a declarative target. At inference the first model reads the passage and draws its proposed fact. The second sees that drawing and the original question. A mistaken fact can become a fluent false statement.\par
+\end{multicols}
+\vspace{4pt}\noindent{\sffamily\bfseries Complete outputs before and after training on human statements}\par\smallskip
+\noindent{\small\sffamily\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}rr@{}}\toprule
+Outcome & Before & After \\ \midrule
+Exact human statement, correct intermediate supplied & 0/128 & 29/128\\
+Exact human statement, model reads the passage & 0/96 & 8/96\\
+Exact statements on both versions of a supplied-fact substitution & 0/92 & 18/92\\
+Stopped output contains a recorded fact, fresh pages & 22/96 & 27/96\\ \bottomrule
+\end{tabular*}}\par\medskip
+\noindent{\small The first two rows concern the sentence writer's held split. The upstream reader could have seen those passage texts. The last row uses separate, previously unused official SQuAD development passage families. It measures the occurrence of an answer string. On the first 24 fresh pages in hash order, one project reviewer credited four complete grounded propositions after training and zero before. The assessment was exploratory and unblinded.}
 \newpage
-
-
-{\Huge\bfseries Reading and writing language\\from glyph images\par}
-{\large Imagized Language Model research report}\par
-
-\heading{Abstract}
-We trained a writer that reads a pictured prompt and returns a sequence of printed glyphs. English letters and Chinese characters enter through the same visual encoder. On unseen English fiction the model needed 2.64 bits per glyph to predict what came next, compared with 5.66 before training. Changing the pictured passage increased that cost. Yet a reader asking how to conserve energy received a repeated fragment of the question. We tested whether keeping track of a position in the source would allow the writer to give complete answers. Across 384 human questions in English, simplified Chinese and traditional Chinese, the new system wrote eleven reference answers and the matched system with independent source positions wrote twelve. Neither answered both questions correctly on any of 192 passages.
-
-\heading{What does a predicted glyph establish?}
-Consider the beginning of a word such as \emph{conserve}. Its remaining letters are fairly predictable once several letters are supplied. A model can learn that regularity from pixels. A useful answer to the energy question requires a further decision about which action to recommend. We tested prediction with correct preceding glyphs, then removed this help and let the same network write its entire answer. Figure~2 preserves what the writer actually produced.
-
-\heading{How the model reads and writes}
-Four printed cells enter each causal transformer block. The output distribution scores observed shapes by their pixels and can also reuse an earlier visible mark. Feedback comes from the model's own emitted image. We trained the 2.12-million-parameter writer on pictured fiction, synthetic instructions and contrastive reference questions. Its deployed fit took 183 seconds and 25.9 kJ of device energy on one RTX 4090 D. Adding the 0.53-million-parameter source-position reader required a further 118 seconds and 12.7 kJ. These measurements exclude controls, preparation, evaluation and host energy.
-
-A repeated name poses a specific difficulty. At the first letter, several source positions may be compatible with the answer. Our second writer retains the posterior mass of each position and can either move forward one cell, start copying elsewhere, or resume free writing. Exact marginalization supports arbitrary switches. A separate matched writer must select its source position anew at every step.
-
-\heading{Two questions about tennis on the same pictured page}
-\begin{tabular}{@{}l@{\hspace{1em}}l@{}}
-\textbf{Question} & \textbf{Emitted answer}\\[2pt]
-\includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/0/question.png} & \includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/0/answer.png}\\[2pt]
-\includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/1/question.png} & \includegraphics[height=2.8ex]{../../../models/visual_cursor/paired-examples/drcd/0bc2ba07f2e5/1/answer.png}\\[2pt]
-\end{tabular}
-
-The first question asks which sport uses a hollow rubber ball and a net. The model wrote \emph{tennis}. The second asks which sport descended from lawn tennis. The model wrote the year 1890. The reference says \emph{modern tennis}. The example is one of eleven passages on which the writer answered exactly one question correctly. Each question and answer above uses the replayed pixels.
-\newpage
-\heading{Figure 2. The answers the writers returned}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.65\textheight,keepaspectratio]{../figures/Figure_144_visual_discourse.png}
-\end{center}
-\small The inputs and outputs in panel a reproduce archived PNG examples. The first English reply reached the 96-cell limit. The Chinese request asks for a five-word alliteration. Panel b supplies preceding answer glyphs when scoring costs. Panel c gives complete stopped answers without an answer list. Matched corpus samples each include 64 different passages. The English dialogue includes a preceding exchange when available.\normalsize
-
-\heading{What remains unresolved}
-On one traditional Chinese page the new writer correctly identified tennis from a question about a hollow rubber ball and a net. On another it gave the year 1260 when asked to name a person. Across the 35 English questions whose reference wording was absent from the visible prompt, it wrote zero complete references. The original writer, independent source reader and persistent source reader all failed to write both answers correctly on every external Winograd contrast pair. In a further test we supplied two human answers and kept the visible passage identical. Changing only the pictured question reversed the preference correctly on 0/192 pairs for the persistent model and 7/192 for the independent comparison. The difference in the written answers cannot be attributed solely to difficulty forming glyphs.
-\newpage
-
-{\Huge\bfseries Reading who a printed phrase refers to\par}
-{\large Imagized Language Model research report}\par
-\heading{Abstract}
-A paragraph about two attractions states that the former costs 12 yuan and the latter costs 35. A previous visual writer assigned 12 yuan to both. We trained a reader to associate a pictured expression with an earlier name, then used that association to restrict the evidence the writer could read. The two answers became distinct, readable Chinese sentences. On 536 constructed comparisons using human dialogue, the system gave each venue its own value under both presentation orders on 365. The previous writer passed none. On 41 screened passages in English, traditional Chinese and simplified Chinese, the reader resolved 38 marked references. An explicit ordering rule also resolved 38. The result establishes transfer of a small, learnable relation. In a separate English test where a context edit reversed the correct name, the reader answered both variants on just one of 120 pairs.
-
-\heading{What is the model learning?}
-One name can be printed several times. We collapse occurrences of each candidate name to a single anonymous marker and keep a pointer to its source pixels. The reader scores each occurrence from the surrounding writing and the marked expression. For each name it sums the probability mass of all its occurrences. A separate null option permits abstention. A second learned function reads up to eight glyphs in the marked expression and six immediately following it. Given two candidate names, it adjusts the odds attached to their earlier and later occurrences. English letters and Chinese characters both enter as 32-pixel image cells. A text prompt can be rendered into these same cells.
-
-\heading{What evidence would separate language from copying?}
-The garden and tower share one page and one question. Only the target name changes. A writer that copies the most salient number draws fluent but wrong answers. On the four-query test, the new system got 1,758/2,144 individual answers right. Requiring every answer in a group to be correct leaves 365/536. The source utterances occur in multiple assemblies. The model receives candidate-name images, and a fixed procedure finds known reference spellings and restricts the clause. Correct sentences measure the combined procedure.
-
-An injective name change preserves the anonymized page and transports the pooled name masses, provided the matches and marked query remain in correspondence. Lean checks this result. Replacing names by previously unseen marks preserved all 41 ordinal decisions in a physical PNG replay. Equivariance explains why the same reader can copy an unfamiliar name. It alone cannot establish that the reader chose the right name.
-\newpage
-\heading{Figure 3. Two prices, two owners}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.69\textheight,keepaspectratio]{../figures/Figure_143_story_mentions.png}
-\end{center}
-\small The answer rows preserve the emitted pixels. In the chart the first sixteen occurrences per corpus were screened before fitting. Seven were excluded. Adjectival uses can require neither name. A post-fit rule that always maps former and latter to the earlier and later candidate also gave 9/11, 14/15 and 15/15. The byte model answered 39/41. The small ordinal test gives no visual advantage over these comparisons.\normalsize
-
-\heading{Where reading still fails}
-With the reference marked but no supplied names, the first locator recovered the correct antecedent in 43/200 Chinese and 157/430 English story cases. In 120 \href{https://cs.nyu.edu/~davise/papers/WinogradSchemas/WSCollection.html}{Winograd contrast pairs}, a change elsewhere in the sentence reversed the correct answer while the pronoun and names stayed fixed. The reader changed its answer on four pairs and got both variants right only once. The end-to-end system has 567,759 inference parameters. Its deployed fitting stages total about 72 seconds and 7.1 kJ of GPU energy on one RTX 4090 D. Data preparation, comparisons, evaluation and host energy are excluded. These tasks do not establish open-domain language ability or relative general-model training efficiency.
-\newpage
-\heading{Figure 4. Referent changes on the same page}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.69\textheight,keepaspectratio]{../figures/Figure_142_prose_fields.png}
-\end{center}
-\small The restaurant example is the single naturally occurring test utterance passing the two-name and distinct-value screen. In the joined test, 472/539 groups passed with the name-conditioned optical reader, 487 with its matched byte counterpart and 305 with a nearest-name rule supplied both true value locations. Human utterances recur in constructed groups. Each of the twelve authored paragraphs has a distinct wording.\normalsize
-
-\heading{Computational scope}
-The four fits required 57.9 seconds and 5.72 kJ of device energy in total. The comparison excludes host energy, data preparation and evaluation. Both the 539-group comparison and 184 single-venue replies used physically reproduced PNG input and output. No result here establishes a training advantage over general language models.
-\newpage
-\heading{Figure 5. Which fact does this clause express?}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.69\textheight,keepaspectratio]{../figures/Figure_141_two_fact_figure.png}
-\end{center}
-\small Panel a preserves actual output glyphs. In panel b the strict check requires each source value and an appropriate local field cue. It accepts 35 of 37 human references. Panel c tests three sentence constructions. Each row of eighteen pairs shares one construction. The last reverses the order of mention.\normalsize
-
-\heading{Warm inference on one GPU}
-Over 32 consecutive sweeps per measurement block, answering 37 questions took 0.393--0.492 seconds and 35.3--44.5 J per sweep for the compact writer. Two warm sweeps with local Qwen3-8B Q8 took 18.66--18.71 seconds and 4.17--4.23 kJ each. Both systems ran serially. The compact writer received prepared image cells and emitted copied spans and learned printed glyphs. Qwen received an ordinary text record over local HTTP. Preparation, loading and host energy are outside these measurements. The two systems have different scope.
-\newpage
-\heading{Figure 6. Questions, original output pixels and controls}
-\begin{center}
-\includegraphics[width=.98\linewidth,height=.65\textheight,keepaspectratio]{../figures/Figure_140_visual_fact_reply.png}
-\end{center}
-\small Both Chinese inputs use the same venue record. The English sentence in panel c comes from a separate visual writer trained on human restaurant descriptions. Exchanging its pictured name and landmark preserved the original marks in all 128 novel-name pairs. Requiring both complete answers to carry the other facts reduced success to 59/64 Latin-name and 56/64 historical-mark pairs.\normalsize
-
-\heading{Does word order matter?}
-When two fields occurred in one question, the original reader got both directions right on nine of 54 controlled pairs. Replacing field names by identical pictured markers and learning which context denotes the request increased this to 54. On twelve further constructions, the new selector succeeded on ten and failed on two, compared with 58/216 complete pairs for the original reader and 180/216 after the change. None of the 515 natural questions activated the two-mention selector. Once the two field images are replaced by identical markers, swapping the field names leaves the visual context unchanged. For distinct fields, both answers have the correct role exactly when the selected position is correct. This is a checked Lean result. The eighteen swaps inside each frame share that positional decision.
-\newpage
-\heading{What changed when the meaning changed?}
-The first eligible held record names Blue Spice, a pub serving Chinese food in the city centre, near Rainbow Vegetarian Caf\'e. The pictured policy excludes families. Figure~7 shows both returned pages after changing that single field. The writer changed sentence structure and polarity and kept the other facts. The candidates consisted of its own completions. The selector inferred the requested facts from the card.
-
-The first card specified only a name, a coffee shop and the city centre. The writer added a high price. The final card named The Sorrento as the nearby landmark. The writer printed \emph{The Portel}. Both sentences are legible. Both would mislead a reader. In a source-visible, model-assisted assessment of twenty evenly spaced Chinese cards, the original greedy writer conveyed all facts without additions on 13 and the released system on 17. Several faithful sentences had awkward English. This reading has no independent human adjudication.
-
-\heading{Dependence on the source}
-The official test contains 1,847 fact combinations absent from training. Each selected English sentence differs from every full training reference under literal string comparison. After exchanging the test records cyclically, none of the selected Chinese-card outputs retained the exact requested literal fact set. Stock phrases and previously seen values remain available. \href{https://github.com/tuetschek/e2e-cleaning}{Cleaned E2E corpus and realization rules}.
-\heading{Figure 7. What the writer actually printed}
-\begin{center}
-\includegraphics[width=.99\linewidth,height=.50\textheight,keepaspectratio]{../figures/Figure_139_semantic_page.png}
-\end{center}
-\small The original Chinese input and both answers preserve their physical glyph pixels. For display, blank sidebearings were trimmed and words were wrapped. The two errors are the first and last records in fixed test order. Each bar uses 1,847 unique meanings. The edited-fact column requires the requested family policy in the original answer and its opposite after the edit. Other factual errors can occur in the same pair.\normalsize
-\newpage
-\heading{How the visual writer learns}
-English letters and Chinese characters use the same size cell. Their information content and linguistic functions can differ. The visual encoder maps a row of 32-pixel cells to a vector. Row order is randomized and row meaning is supervised during fitting. The decoder sees the set of row vectors and estimates
+\spread{From writing glyphs to explaining their history}
+\noindent An answer to a question about an inscription must select the relevant historical form and preserve its strokes. The same system can succeed at modern factual extraction while failing this test.\par
+\platehere{Figure_147_reading_and_composition}{What the bilingual writer can read, combine and reproduce}{Panel a shows the year emitted in response to a held question about the first US public school. In panel b the source states two museum counts. The answer gives only seventeen. Panel c shows an attested oracle-bone form of the character for speech alongside the writer's actual answer to the Chinese question. The image labelled reference is the requested mark.}
+\begin{multicols}{2}
+\section*{What the loss measures}
+Let $x$ denote the pictured question and evidence, and $y$ the target ink stream including its stop. Several ways to copy, spell and stop can yield the same $y$. If $a$ is such an action path, we optimize the conditional image likelihood
 \[
- p(y\mid x)=\prod_{t=1}^{T+1} p(y_t\mid y_{<t}, E(x)),\qquad y_{T+1}=\mathrm{stop}.
+-\log\!\sum_{a:\,\operatorname{ink}(a)=y}
+           \prod_j p_\theta(a_j\mid x,y_{<t_j}).
 \]
-The writer uses a three-layer transformer across blocks of four glyphs. Within a block each cell can depend on earlier glyphs. Feedback comes from earlier emitted images. Choosing among 73 printable training bitmaps ensures sharp letters and restricts the alphabet. The optional Unicode transcript maps these particular bitmaps back to text.
-
-\heading{Which error does reading back remove?}
-The beam proposes eight stopped sentences. A 223,200-parameter inverse reader learned to recover facts from human descriptions presented as images. For a given card the selector uses its predicted field set, the writer's mean log likelihood and the inverse reader's Bernoulli log likelihood. Among $N$ cards let $C$ count those with a faithful candidate and $S$ those where the selected sentence is faithful. Then
-\[
- N-S=(N-C)+(C-S).
-\]
-The merged-facts counts are $241=179+62$. The first 179 errors require better candidates. A perfect selector on this pool could recover at most 62 more. Enabling readback recovered 179 previously failed cases and lost 26 previously successful ones. The literal gains and losses were 71 and eight. A Lean proof gives a sufficient selection condition. If an ideal faithful witness exceeds every unfaithful score by more than twice the learned score's uniform error, a learned maximizer is faithful. The margin has yet to be established for these networks.
-
-\heading{Controls and costs}
-On a separately evaluated development set, interleaved Chinese and English rows gave 1,304 of 1,484 complete merged fact sets and 246 literal passes. The listener fit took 12.0 seconds and 1.49 kJ on one RTX 4090 D. Optical and byte writer fits took 113.0 and 115.2 seconds, consuming 11.51 and 11.72 kJ of device energy. The optical writer and listener have 1,591,210 parameters together. Host and cooling energy are excluded. Beam generation with readback for 3,138 Chinese cards consumed 4.66 kJ.
-
-The scorer can mark both \emph{5 out of 5} and \emph{high} for one phrase. Merging such labels and corresponding price bands accepted 4,396 of 4,693 human references. Precision lost to merging and unrecognized invented facts limit this measure.
-\newpage
-\heading{Historical writing as evidence}
-Some questions require a particular attested mark. A separate optical reader identified a headword and ordered fields in a pictured question about an illustrated dictionary. It returned their stored ink. One example below contains four historical exemplars. In another case unfamiliar wording led it to the wrong headword.
-\begin{center}
-\includegraphics[width=.90\linewidth,height=.54\textheight,keepaspectratio]{../figures/Figure_138_glyph_atlas.png}
-\end{center}
-\small \textbf{Figure 8.} The experiment reused 795 held headword families across fresh wording. Field selection and page composition use a finite schema. Each form retains its source pixels. Inferring an unattested form needs different evidence.\normalsize
-
-\heading{Relation to earlier work}
-PIXAR demonstrated autoregressive text generation in pixel space. Earlier E2E systems used semantic reranking over generated text. Here the generator feeds back glyph images, the listener reads those images, and the byte reader shares the physical output task. Learning which evidence to use in an unlabelled paragraph requires a further transfer test. The current catalogue reader receives a resolved venue and visible field labels. \href{https://aclanthology.org/2024.findings-acl.874/}{Tai et al., 2024}. \href{https://ufal.mff.cuni.cz/~odusek/E2E/final_papers/E2E-ZHAW.pdf}{ZHAW E2E system}. \href{https://aclanthology.org/W17-5525/}{Novikova et al., 2017}.
+At a run boundary the next action may start anywhere on the page. An inside recurrence sums compatible paths. A Lean proof establishes the corresponding finite weighted-path identity, including censored prefixes. Enumeration and gradient comparisons check the implementation. At inference the hidden paths are marginalized after each emitted glyph. Greedy pixel generation can still choose an incorrect fact or end a sentence too soon.
+\section*{Limits of visual transfer}
+The bilingual writer failed all 128 historical questions in each language and all 120 paired Winograd contrasts. When the English statement writer was explicitly given an unfamiliar oracle-bone mark as its fact, 8 of 32 outputs included its exact bitmap. This tests transport of a supplied shape. Reading an unseen etymology page and giving an accurate historical account remains open.
+\section*{Hardware and inputs}
+The four deployed fitting stages took about 506 seconds and 67.1\,kJ of device energy on a single RTX 4090 D. This includes the shared book writer, interval reader, recurrent writer and English sentence training. Preparation, comparison runs, evaluation and host energy are excluded. Input pages use aligned 32-by-32 cells. New shapes can travel from the prompt to the output. Segmentation of raw scans and synthesis of unobserved historical forms require separate experiments. These data give no matched-quality efficiency advantage over a general language model.
+\end{multicols}
+\smallskip\noindent{\small\sffamily\textbf{Data and methods.} Rajpurkar et al., \href{https://aclanthology.org/D16-1264/}{SQuAD} (2016);
+He et al., \href{https://aclanthology.org/W18-2605/}{DuReader} (2018);
+Demszky, Guu \& Liang, \href{https://arxiv.org/abs/1809.02922}{Transforming question answering datasets into natural language inference datasets} (2018);
+Databricks, \href{https://huggingface.co/datasets/databricks/databricks-dolly-15k}{Dolly 15k} (2023).
+Related copying mechanism: Gu et al., \href{https://aclanthology.org/P16-1154/}{Incorporating copying mechanism in sequence-to-sequence learning} (2016).
+\href{https://github.com/lachlanchen/ImagizedLanguageModel/tree/main/models/visual_statements}{Model weights, runnable PNG inference and original answer images}.}
 \end{document}

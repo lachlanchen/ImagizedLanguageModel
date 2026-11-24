@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Khi được hỏi ai thiết kế Salamanca trên ảnh một trang viết về đường sắt, mô hình viết **Matthew Murray designed Salamanca.** Chỉ đổi tên trên trang thành Daniel Harper cũng làm chủ ngữ trong câu trả lời thay đổi. Trong 96 trang mới, mô hình đọc đúng đáp án ngắn ở 25 trang. Ở một ví dụ khác, nó đọc đúng năm thành lập trường rồi bỏ mất năm khi viết câu. Trang đầu bài báo trình bày ảnh đầu ra thực tế. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
+
+[![Salamanca](../publication/ilm-nature/figures/Figure_148_writing_visual_statements.png)](../publication/ilm-nature/visual_language_paper.pdf)
+
 Trên cùng một trang tiếng Trung về một loài cá, mô hình viết tên thường gọi hoặc phân loại tùy theo câu hỏi. Mô hình 2,44 triệu tham số được huấn luyện trên một RTX 4090 D và trả lời đúng cả hai câu hỏi ở 44 trong 256 đoạn văn tiếng Trung và tiếng Anh chưa từng thấy. Mô hình thị giác trước đó đạt 0, còn mô hình đối chứng nhận byte đạt 52 với mức tiêu thụ năng lượng tương đương. Mô hình vẫn chưa tái hiện được các dạng cổ của chữ 言. [Chạy mô hình](../models/paired_evidence/README.md) · [Bài báo](../publication/ilm-nature/visual_language_paper.pdf)
 
-[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=2)
 
 Mô hình 2,12 triệu tham số được huấn luyện trên một RTX 4090 D đã học cách dự đoán hình dạng ký tự tiếp theo trong văn bản tiếng Anh và tiếng Trung chưa từng thấy. Khi được hỏi cách tiết kiệm năng lượng, mô hình lặp lại câu hỏi. Sau khi bổ sung bộ đọc hình ảnh, mô hình trả lời đúng 11 trong 384 câu hỏi do con người đặt ra. Trong 192 đoạn văn, không có đoạn nào mà mô hình trả lời đúng cả hai câu hỏi. Hình 144 trình bày ảnh đầu ra thực tế. [Đọc bài báo](../publication/ilm-nature/visual_language_paper.pdf) · [Chạy mô hình](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 Mô hình 1,18 triệu tham số đọc một chữ được đánh dấu trong ảnh văn bản cổ rồi viết nghĩa tiếng Anh dưới dạng ảnh. Với chữ 言, nó viết “speak” ở cuối câu 言及之而不言 và “speech” trong 有是言也. Mô hình viết đúng cả hai nghĩa ở 213/566 cặp trong Luận ngữ và 82/403 cặp trong Sở từ. Phương pháp đếm các chữ lân cận đạt 211 và 104 cặp. [Chạy mô hình](../models/visual_word_senses/README.md) · [Kết quả](../references/visual_word_sense_result.md)
 
