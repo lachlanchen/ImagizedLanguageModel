@@ -1,0 +1,55 @@
+{
+  "training": {
+    "cmrc": 9981,
+    "drcd": 26775,
+    "coqa": 105513
+  },
+  "held": {
+    "cmrc": 128,
+    "drcd": 128,
+    "coqa": 128
+  },
+  "exclusions": {
+    "cmrc_unrenderable": 168,
+    "coqa_unrenderable": 2455,
+    "drcd_unrenderable": 161,
+    "passage_overlap": 694
+  },
+  "source": {
+    "cmrc": [
+      [
+        "cmrc2018/cmrc2018_train.json",
+        "5497aa2f81908e31d6b0e27d99b1f90ab63a8f58fa92fffe5d17cf62eba0c212"
+      ],
+      [
+        "cmrc2018/cmrc2018_dev.json",
+        "e9ff74231f05c230c6fa88b84441ee334d97234cbb610991cd94b82db00c7f1f"
+      ]
+    ],
+    "drcd": [
+      [
+        "drcd/DRCD_training.json",
+        "5e6268091ab98f0bb858f03c77fba85e23b31e49a91638e4f22d0d8ec703f79a"
+      ],
+      [
+        "drcd/DRCD_dev.json",
+        "e236df03861ba241bd7b29628cd48b3b8e339c60137e041a4358b5320ed61928"
+      ]
+    ],
+    "coqa": [
+      [
+        "coqa/train.parquet",
+        "4272ee344ef27112c50237a1ae3b1c90e65e11a101d6874b2f57e4c08d147135"
+      ],
+      [
+        "coqa/validation.parquet",
+        "d66f4811dd137818923a3db7a629ce3cf9e73977b5e2541471311c1566bf349f"
+      ]
+    ]
+  },
+  "inputs": 98605140,
+  "targets": 2005423,
+  "stored_tiles": 8911,
+  "pages": "5e88ff07459b522590ecfb7b6a698a8de2b86c03f04a1fe9bc92d4a050037e01",
+  "test": "b077fd62e18966747e180a3bc02ebf20eb7eeebb09e225e2dbc3b27bb2bb27e3"
+}
