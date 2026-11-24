@@ -1,4 +1,5 @@
 """Reserve the third disjoint group of long CoQA stories for the word-image memory."""
+
 import gzip
 import json
 from collections import Counter
@@ -21,15 +22,24 @@ def reserve():
         raise ValueError("Repeated story")
     WORK.mkdir(exist_ok=True, parents=True)
     PUB.mkdir(exist_ok=True, parents=True)
-    grouped = Counter(kind(r[5], (fresh["pages"][r[1]], r[3], r[4])) for r in fresh["rows"])
+    grouped = Counter(
+        kind(r[5], (fresh["pages"][r[1]], r[3], r[4])) for r in fresh["rows"]
+    )
     packed = gzip.compress(json.dumps(fresh, separators=(",", ":")).encode(), mtime=0)
     f = WORK / "reserved.json.gz"
     if f.exists() and f.read_bytes() != packed:
         raise ValueError("Reservation changed")
     f.write_bytes(packed)
-    manifest = dict(source=SOURCES["train"], list_archive=ARCHIVE_SHA, eligible=n,
-                    range=[400,547], stories=list(fresh["pages"]), groups=dict(grouped),
-                    turns=len(fresh["rows"]), sha256=sha(f))
+    manifest = dict(
+        source=SOURCES["train"],
+        list_archive=ARCHIVE_SHA,
+        eligible=n,
+        range=[400, 547],
+        stories=list(fresh["pages"]),
+        groups=dict(grouped),
+        turns=len(fresh["rows"]),
+        sha256=sha(f),
+    )
     path = PUB / "reservation.json"
     if path.exists() and json.loads(path.read_text()) != manifest:
         raise ValueError("Reservation manifest changed")

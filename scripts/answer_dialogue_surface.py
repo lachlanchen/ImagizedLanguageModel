@@ -27,7 +27,18 @@ def load(folder, device="cpu"):
         raise ValueError("Wrong surface checkpoint")
     state = load_file(str(file))
     architecture = WordCanvas if meta.get("arm") == "masked" else SurfaceDialogue
-    net = architecture(state["palette"], meta["mode"]).to(device)
+    if meta.get("arm") == "word_memory":
+        from ilm.visual_lm.word_memory import WordMemory
+
+        net = WordMemory(
+            state["palette"],
+            meta["mode"],
+            state["prototype_cells"],
+            state["prototype_lengths"],
+            state["prototype_features"],
+        ).to(device)
+    else:
+        net = architecture(state["palette"], meta["mode"]).to(device)
     net.load_state_dict(state)
     net.max_passage_words = meta.get("max_passage_words", 320)
     return net.eval()

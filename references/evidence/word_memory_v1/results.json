@@ -1,0 +1,889 @@
+{
+  "reservation": "7866385e61f2f64b03b0942a621c29090c76320ef13c329a8058459f62556223",
+  "models": {
+    "ink-parent": {
+      "weights": "06d9878809998398914aca2510d200b0ec282c3c5fb6e37a2f9c260f6b035342",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 283,
+          "exact": [
+            500,
+            55,
+            262
+          ],
+          "f1": [
+            0.3225112138580862,
+            0.03969479196583092,
+            0.1297447471744237
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.1440483364396407,
+            0.03357241891076478,
+            0.04086012892956723
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.16042248849266388,
+            0.04049233144339331,
+            0.046286773976741934
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.11223038188206175,
+            0.020125770693952515,
+            0.03031517094017094
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 356
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 0,
+      "tested_for_certificate": 0,
+      "evaluation": {
+        "seconds": 3.513679306022823,
+        "energy": {
+          "joules": 350.323,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 139712512
+      },
+      "diagnosis": {
+        "seconds": 0.30436701234430075,
+        "energy": {
+          "joules": 28.052,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 139712512
+      },
+      "outputs": "1104d95cfff27e6835fc70c7a38fccc65a9e12850b4ba7319f4f494caa69901f",
+      "slots": "75907ffde680897ae791508f810fd9bd285c74b647bd543b27509a8efabdf892"
+    },
+    "ink-disabled": {
+      "weights": "38c31b968ee23258cbe10da1598a1de6075ca8aafb4dc62490bbdf071006db99",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 300,
+          "exact": [
+            502,
+            58,
+            243
+          ],
+          "f1": [
+            0.32316301464393515,
+            0.04065211263613062,
+            0.12132272534757609
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.14065004018420163,
+            0.02995962244082545,
+            0.04086012892956723
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.15819933802389938,
+            0.036482306380736663,
+            0.046286773976741934
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.10654856370024354,
+            0.017284861603043423,
+            0.03031517094017094
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 356
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 688,
+      "tested_for_certificate": 1308,
+      "evaluation": {
+        "seconds": 7.448997160419822,
+        "energy": {
+          "joules": 732.822,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 170345984
+      },
+      "diagnosis": {
+        "seconds": 0.5806612428277731,
+        "energy": {
+          "joules": 57.657,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 170345984
+      },
+      "outputs": "4fa98c7f1a5a200572d377a539ab03acdd5ee15142d7b80d1ee95f11a3223a06",
+      "slots": "75907ffde680897ae791508f810fd9bd285c74b647bd543b27509a8efabdf892"
+    },
+    "ink-memory": {
+      "weights": "38c31b968ee23258cbe10da1598a1de6075ca8aafb4dc62490bbdf071006db99",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 298,
+          "exact": [
+            502,
+            59,
+            254
+          ],
+          "f1": [
+            0.32470254370973445,
+            0.041460389851914546,
+            0.12695212970352202
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.14790780815625532,
+            0.035120163315652035,
+            0.04434422527080643
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.1647086669016493,
+            0.04304543136491428,
+            0.049419606056942435
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.11526068491236476,
+            0.01971992653810836,
+            0.0344818376068376
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 356
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 678,
+      "tested_for_certificate": 1308,
+      "evaluation": {
+        "seconds": 7.363914622925222,
+        "energy": {
+          "joules": 734.514,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 174930944
+      },
+      "diagnosis": {
+        "seconds": 1.1086348816752434,
+        "energy": {
+          "joules": 102.392,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 174930944
+      },
+      "outputs": "b0207b10b6a37381bdcdf44069aef06c726e6a07ce9e8a68463c874ac5e0fe6b",
+      "slots": "cffb1449ce8559c6a086f3f09e042a97ece77b30779c596e4895165d0b5d7fa8"
+    },
+    "byte-parent": {
+      "weights": "4baa5b841da993a0a647ff4c6666ce56c912c244cab37ad43e596cce6e92f231",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 275,
+          "exact": [
+            473,
+            61,
+            251
+          ],
+          "f1": [
+            0.316409749356334,
+            0.041456035661319064,
+            0.12544645200614835
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.11841527480625219,
+            0.03778878778878778,
+            0.04250159512163628
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.1351760043588298,
+            0.052933226617437136,
+            0.0422463813914577
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.08584612988022079,
+            0.008360389610389611,
+            0.042997521801869616
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 381
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 0,
+      "tested_for_certificate": 0,
+      "evaluation": {
+        "seconds": 2.993510658852756,
+        "energy": {
+          "joules": 328.927,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 94299136
+      },
+      "diagnosis": {
+        "seconds": 0.3224016269668937,
+        "energy": {
+          "joules": 30.13,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 106655232
+      },
+      "outputs": "59d35196e3a3b4b5cb59cc6406783e6fde9d7a0f412707a08e4cc4e6498cf77d",
+      "slots": "46b25c0006b9dc4a691c539f5f7608579944b65fe4d336246b10954f9e7199fb"
+    },
+    "byte-disabled": {
+      "weights": "0e5f12075235f635bb4887d078adde0bf28f03c1b5646f58128934d649698cd3",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 287,
+          "exact": [
+            479,
+            68,
+            238
+          ],
+          "f1": [
+            0.31920155342159645,
+            0.04476255934317787,
+            0.11943834036800995
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.11466152105249844,
+            0.03778878778878778,
+            0.04250159512163628
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.1338764591996355,
+            0.052933226617437136,
+            0.0422463813914577
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.07732340260749353,
+            0.008360389610389611,
+            0.042997521801869616
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 381
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 788,
+      "tested_for_certificate": 1308,
+      "evaluation": {
+        "seconds": 5.852307046763599,
+        "energy": {
+          "joules": 602.507,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 101715968
+      },
+      "diagnosis": {
+        "seconds": 1.0458161821588874,
+        "energy": {
+          "joules": 93.093,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 108890112
+      },
+      "outputs": "702da9ac4555cd1b0f97d2b497f42afb5d0f4bd4dd6d5d68923d6c10e8d5b2cb",
+      "slots": "46b25c0006b9dc4a691c539f5f7608579944b65fe4d336246b10954f9e7199fb"
+    },
+    "byte-memory": {
+      "weights": "0e5f12075235f635bb4887d078adde0bf28f03c1b5646f58128934d649698cd3",
+      "scores": {
+        "all": {
+          "n": 2238,
+          "grounded": 275,
+          "exact": [
+            473,
+            68,
+            254
+          ],
+          "f1": [
+            0.3167722832185856,
+            0.04449788632381316,
+            0.12650177514592192
+          ],
+          "stopped": [
+            2238,
+            2238,
+            2238
+          ]
+        },
+        "difficult": {
+          "n": 259,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.11486214625312365,
+            0.03838938838938838,
+            0.04663437782584756
+          ],
+          "stopped": [
+            259,
+            259,
+            259
+          ]
+        },
+        "assembly": {
+          "n": 171,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.13418033011754152,
+            0.05306318113335656,
+            0.04562055757265143
+          ],
+          "stopped": [
+            171,
+            171,
+            171
+          ]
+        },
+        "spell": {
+          "n": 88,
+          "grounded": 0,
+          "exact": [
+            0,
+            0,
+            0
+          ],
+          "f1": [
+            0.07732340260749353,
+            0.009875541125541124,
+            0.04860441490876273
+          ],
+          "stopped": [
+            88,
+            88,
+            88
+          ]
+        }
+      },
+      "hidden": {
+        "copyable": {
+          "total": 1100,
+          "correct": 383
+        },
+        "absent_stored": {
+          "total": 108,
+          "correct": 0
+        },
+        "absent_unstored": {
+          "total": 100,
+          "correct": 0
+        }
+      },
+      "certified": 791,
+      "tested_for_certificate": 1308,
+      "evaluation": {
+        "seconds": 3.9309255741536617,
+        "energy": {
+          "joules": 423.545,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 101715968
+      },
+      "diagnosis": {
+        "seconds": 0.6348037607967854,
+        "energy": {
+          "joules": 57.484,
+          "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+        },
+        "peak_bytes": 108817408
+      },
+      "outputs": "b6fc9edd46a1367c9f06471919bcbec01090e9906d162b2b4d06efb69700b54f",
+      "slots": "ae62c54e1af1a5e83d7b582c7d586b57252e42be18775ac30bfa0a968044a4a2"
+    }
+  },
+  "differences": {
+    "ink-parent-all": {
+      "f1": {
+        "delta": 0.0021913298516482477,
+        "interval95": [
+          -0.0039270718676668774,
+          0.008558011567716699
+        ],
+        "stories": 147
+      },
+      "gained": 30,
+      "lost": 15
+    },
+    "ink-parent-difficult": {
+      "f1": {
+        "delta": 0.003859471716614573,
+        "interval95": [
+          -0.004212955851396711,
+          0.012812863510444146
+        ],
+        "stories": 106
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "ink-parent-assembly": {
+      "f1": {
+        "delta": 0.004286178408985427,
+        "interval95": [
+          -0.004734890432564851,
+          0.014341807980629678
+        ],
+        "stories": 93
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "ink-parent-spell": {
+      "f1": {
+        "delta": 0.0030303030303030294,
+        "interval95": [
+          -0.013047061634018158,
+          0.022666666666666665
+        ],
+        "stories": 60
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "ink-disabled-all": {
+      "f1": {
+        "delta": 0.0015395290657992044,
+        "interval95": [
+          -0.003475334689458095,
+          0.006839836889243688
+        ],
+        "stories": 147
+      },
+      "gained": 13,
+      "lost": 15
+    },
+    "ink-disabled-difficult": {
+      "f1": {
+        "delta": 0.007257767972053686,
+        "interval95": [
+          -0.002598985890652557,
+          0.019485340821655102
+        ],
+        "stories": 106
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "ink-disabled-assembly": {
+      "f1": {
+        "delta": 0.006509328877749929,
+        "interval95": [
+          -0.0027392519919693836,
+          0.01729095804988661
+        ],
+        "stories": 93
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "ink-disabled-spell": {
+      "f1": {
+        "delta": 0.008712121212121211,
+        "interval95": [
+          -0.00963855421686747,
+          0.03200128205128203
+        ],
+        "stories": 60
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-parent-all": {
+      "f1": {
+        "delta": 0.00036253386225165496,
+        "interval95": [
+          -0.006315392084849258,
+          0.007361044883319722
+        ],
+        "stories": 147
+      },
+      "gained": 20,
+      "lost": 20
+    },
+    "byte-parent-difficult": {
+      "f1": {
+        "delta": -0.0035531285531285534,
+        "interval95": [
+          -0.009421071971266591,
+          0.001520123166497528
+        ],
+        "stories": 106
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-parent-assembly": {
+      "f1": {
+        "delta": -0.0009956742412882765,
+        "interval95": [
+          -0.005938473951391005,
+          0.004524841588615155
+        ],
+        "stories": 93
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-parent-spell": {
+      "f1": {
+        "delta": -0.008522727272727272,
+        "interval95": [
+          -0.023201916881443296,
+          0.0
+        ],
+        "stories": 60
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-disabled-all": {
+      "f1": {
+        "delta": -0.002429270203010855,
+        "interval95": [
+          -0.006396323254186779,
+          0.0012609275076258634
+        ],
+        "stories": 147
+      },
+      "gained": 2,
+      "lost": 14
+    },
+    "byte-disabled-difficult": {
+      "f1": {
+        "delta": 0.00020062520062520046,
+        "interval95": [
+          -0.0023838314463314465,
+          0.003544249226720488
+        ],
+        "stories": 106
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-disabled-assembly": {
+      "f1": {
+        "delta": 0.00030387091790600536,
+        "interval95": [
+          -0.003586655213571176,
+          0.005297951789164126
+        ],
+        "stories": 93
+      },
+      "gained": 0,
+      "lost": 0
+    },
+    "byte-disabled-spell": {
+      "f1": {
+        "delta": 0.0,
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "stories": 60
+      },
+      "gained": 0,
+      "lost": 0
+    }
+  }
+}

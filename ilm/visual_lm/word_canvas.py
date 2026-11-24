@@ -70,6 +70,31 @@ class WordCanvas(SurfaceDialogue):
         feedback = self.surface(self.palette[glyphs], length)[:, :50]
         return glyphs, ended, score, feedback
 
+    def choose_images(
+        self, bank, route, pointer, latent, groups, image_table, valid, pending
+    ):
+        spell = (route[:, :, 1] > route[:, :, 0]) & pending
+        ptr = pointer.flatten(2).masked_fill(~valid[:, None], -torch.inf).softmax(-1)
+        mass = torch.zeros_like(ptr).scatter_add_(
+            2, groups[:, None].expand_as(ptr), ptr
+        )
+        prob, group = mass.max(2)
+        word = image_table.gather(1, group)
+        confidence = route[:, :, 0] + prob.log()
+        new_appearance = bank.features[word, :50]
+        letters = torch.zeros(
+            (*word.shape, self.max_letters), device=word.device, dtype=torch.long
+        )
+        ended = torch.ones_like(pending)
+        if spell.any():
+            glyphs, stopped, score, features = self.draw_letters(latent[spell])
+            letters[spell] = glyphs
+            ended[spell] = stopped
+            confidence[spell] = route[:, :, 1][spell] + score
+            new_appearance[spell] = features
+            word = word.masked_fill(spell, 0)
+        return word, letters, ended, confidence, new_appearance
+
 
 def canvas_loss(net, ds, indices, labels):
     inputs, variants = ds.inputs(indices)
@@ -171,24 +196,9 @@ def draw(
     for step in range(1, 5):
         route, pointer, latent = net.paint(mem, appearance, visible, length)
         route = route.log_softmax(-1)
-        spell = (route[:, :, 1] > route[:, :, 0]) & active & ~visible
-        ptr = pointer.flatten(2).masked_fill(~valid[:, None], -torch.inf).softmax(-1)
-        mass = torch.zeros_like(ptr).scatter_add_(
-            2, groups[:, None].expand_as(ptr), ptr
+        word, letters, ended, confidence, new_appearance = net.choose_images(
+            bank, route, pointer, latent, groups, image_table, valid, active & ~visible
         )
-        prob, group = mass.max(2)
-        word = image_table.gather(1, group)
-        confidence = route[:, :, 0] + prob.log()
-        new_appearance = bank.features[word, :50]
-        letters = torch.zeros_like(saved_letters)
-        ended = torch.ones_like(active)
-        if spell.any():
-            glyphs, stopped, score, features = net.draw_letters(latent[spell])
-            letters[spell] = glyphs
-            ended[spell] = stopped
-            confidence[spell] = route[:, :, 1][spell] + score
-            new_appearance[spell] = features
-            word = word.masked_fill(spell, 0)
         priority = confidence.clamp_min(-1e20)
         if explore:
             priority = torch.where(order_type[:, None] == 1, -time, priority)
@@ -228,7 +238,11 @@ def draw(
         zip(saved_copy.tolist(), saved_letters.tolist(), length.tolist(), strict=True)
     ):
         words = tuple(
-            bank.raw[j] if j else b"".join(palette[k] for k in g if k)
+            net.prototype_words[-j - 1]
+            if j < 0
+            else bank.raw[j]
+            if j
+            else b"".join(palette[k] for k in g if k)
             for j, g in zip(copies[:size], glyphs)
         )
         paths.append((words, stopped[i], score[i]))
