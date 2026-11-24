@@ -1,12 +1,16 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在同一張魚類介紹頁面上，模型能分別寫出魚的俗名和分類。這個 244 萬參數的模型以單張 RTX 4090 D 訓練。在 256 篇未見過的中英文短文中，有 44 篇的兩道問題都答對了。前一版為零，以位元組作為輸入的對照模型為 52 篇，訓練能耗相近。它仍無法依提問寫出「言」的歷史字形。 [執行模型](../models/paired_evidence/README.md) · [閱讀論文](../publication/ilm-nature/visual_language_paper.pdf)
+
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 用圖像提問，模型能以字形寫出有意義的回答嗎？一個 212 萬參數的模型在單張 RTX 4090 D 上學會了預測未見過的中英文段落。面對如何節能的問題，它反覆抄寫題幹。加入視覺閱讀模組後，384 道由人提出的問題中答對 11 道，同一段落的兩道題皆答對的為 0/192。圖 144 保留了模型實際寫出的像素。 [閱讀論文](../publication/ilm-nature/visual_language_paper.pdf) · [執行影像模型](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 清溪園和星河塔只在段首各出現一次，下文用「前者」「後者」說明票價。問題圖保持相同，只換要問的地點，模型分別寫出 **门票是12元的。** 和 **门票是35元的。** 舊模型兩次都答 12 元。在 536 組由真實對話改寫的測試裡，兩處地點、兩種順序的四個問題全部答對了 365 組。換成需要依靠上下文推斷指代的英文配對題，兩問全對的只有 1/120 組。
 
-[![指代實驗的真實回答圖像及對照結果](../publication/ilm-nature/figures/Figure_143_story_mentions.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![指代實驗的真實回答圖像及對照結果](../publication/ilm-nature/figures/Figure_143_story_mentions.png)](../publication/ilm-nature/visual_language_paper.pdf#page=6)
 
 一個有 118 萬個參數的模型從古文影像讀取指定漢字，再以影像寫出英文釋義。它將「言及之而不言」的末字寫作 speak，將「有是言也」的「言」寫作 speech。在同字異義的對照中，《論語》有 213/566 對兩義全對，《楚辭》有 82/403 對。按鄰近字形計數的方法分別答對 211 和 104 對。模型在一張 RTX 4090 D 上從頭訓練。 [執行模型](../models/visual_word_senses/README.md) · [實驗結果](../references/visual_word_sense_result.md)
 

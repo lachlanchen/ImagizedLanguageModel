@@ -1,8 +1,12 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Auf derselben chinesischen Buchseite über einen Fisch schrieb das Modell je nach Frage dessen gebräuchlichen Namen oder dessen Klassifikation. Der auf einer RTX 4090 D trainierte Leser mit 2,44 Millionen Parametern beantwortete bei 44 von 256 neuen englischen und chinesischen Passagen beide Fragen richtig. Der Vorgänger schaffte kein Paar, das Byte-Vergleichsmodell bei ähnlichem Energieverbrauch 52. Die historischen Formen von 言 gab der visuelle Leser nicht korrekt wieder. [Modell ausführen](../models/paired_evidence/README.md) · [Forschungsbericht](../publication/ilm-nature/visual_language_paper.pdf)
+
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 Ein Modell mit 2,12 Millionen Parametern lernte auf einer RTX 4090 D, Schriftzeichen in unbekannten englischen und chinesischen Texten vorherzusagen. Auf die Frage nach einer Möglichkeit zum Energiesparen wiederholte es Teile der Frage. Nach Ergänzung eines visuellen Lesemoduls traf es bei 11 von 384 Fragen eine Referenzantwort. Bei keiner der 192 Passagen beantwortete es beide Fragen richtig. Abbildung 144 zeigt die ausgegebenen Pixel. [Artikel lesen](../publication/ilm-nature/visual_language_paper.pdf) · [Modell ausführen](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 Ein Modell mit 1,18 Millionen Parametern liest ein markiertes Zeichen in einem Bild eines klassischen chinesischen Textes und zeichnet seine englische Bedeutung. Für 言 schreibt es am Ende von 言及之而不言 „speak“, in 有是言也 dagegen „speech“. Beide Bedeutungen trifft es bei 213 von 566 Paaren in den Gesprächen des Konfuzius und 82 von 403 in den Liedern von Chu. Ein Häufigkeitsverfahren mit Nachbarzeichen löst 211 und 104 Paare. [Modell ausführen](../models/visual_word_senses/README.md) · [Ergebnisse](../references/visual_word_sense_result.md)
 

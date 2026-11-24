@@ -1,16 +1,20 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在同一张鱼类介绍页面上，模型读到俗名问题时写出“厚壳仔”，读到分类问题时写出“辐鳍鱼纲鲈形目隆头鱼亚目雀鲷科”。这个 244 万参数的模型在单张 RTX 4090 D 上训练，在 256 篇未见过的中英文短文中，有 44 篇的两道问题都答对了。上一版为零，以字节作为输入的对照模型为 52 篇，训练能耗接近。它仍然无法按要求写出“言”的历史字形。 [运行模型](../models/paired_evidence/README.md) · [阅读论文](../publication/ilm-nature/visual_language_paper.pdf)
+
+[![Figure 145](../publication/ilm-nature/figures/Figure_145_paired_evidence.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+
 用图像提问，模型能用字形写出有意义的回答吗？一个 212 万参数的模型在单张 RTX 4090 D 上学会了预测未见过的中英文段落。面对如何节能的问题，它反复抄写题干。加入视觉阅读模块后，384 道真人提出的问题中有 11 道答对，同一段落的两道题全部答对的为 0/192。图 144 保留了模型实际写出的像素。 [阅读论文](../publication/ilm-nature/visual_language_paper.pdf) · [运行图像模型](../models/visual_cursor/README.md)
 
-[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=2)
+[![Figure 144](../publication/ilm-nature/figures/Figure_144_visual_discourse.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
 
 清溪园和星河塔只在段首各出现一次，下文用「前者」「后者」说明票价。问题图保持相同，只换要问的地点，模型分别写出 **门票是12元的。** 和 **门票是35元的。** 旧模型两次都答 12 元。在 536 组由真实对话改写的测试里，两处地点、两种顺序的四个问题全部答对了 365 组。换成需要依靠上下文推断指代的英文成对题，两问全对的只有 1/120 组。
 
-[![指代实验的真实回答图像与对照结果](../publication/ilm-nature/figures/Figure_143_story_mentions.png)](../publication/ilm-nature/visual_language_paper.pdf#page=4)
+[![指代实验的真实回答图像与对照结果](../publication/ilm-nature/figures/Figure_143_story_mentions.png)](../publication/ilm-nature/visual_language_paper.pdf#page=6)
 
 客人问北京贵都大酒店的价格和地址。早期模型找对了两项资料，却把 1354 元写成了地址。让写作模型在落笔时知道当前要表达哪项事实，它给出了「价格是1354元。地址是在北京西城区广安门内大街217号。」这个 333,850 参数的模型在单张 RTX 4090 D 上从头训练，直接接收图片，写出答案图片。在 37 道真人双项问题中，两项资料都与正确属性对应的答案从 24 道提高到 36 道。冻结模型后追加的 14 道题通过了 12 道。若要求把先提到的属性放在第二项，18 组语序测试全部失败。[运行模型](../models/chinese_two_fact/README.md) · [论文阅读版](../publication/ilm-nature/visual_language_paper.pdf) · [数据与失败实例](../references/chinese_two_fact_result.md)
 
-[![同一道问题的真实答案图像、属性对应得分与语序测试](../publication/ilm-nature/figures/Figure_141_two_fact_figure.png)](../publication/ilm-nature/visual_language_paper.pdf#page=6)
+[![同一道问题的真实答案图像、属性对应得分与语序测试](../publication/ilm-nature/figures/Figure_141_two_fact_figure.png)](../publication/ilm-nature/visual_language_paper.pdf#page=8)
 
 同一家餐馆、同一张资料卡。换个问法，模型分别写出了“营业时间是周一至周日 11:00-21:30。”和“地址是西四南大街60号(近缸瓦市)。”这两个回答都是模型生成的图像。单张 RTX 4090 D 从 5,097 轮真人中文对话训练了这个 157 万参数的模型。515 道留出问题中，507 道给出了正确资料值；擦除问题后是 237 道。同规模字节模型是 508 道。另有一些回答虽然数值正确，句子仍然不通顺。[运行模型](../models/chinese_card_reply/README.md) · [阅读论文](../publication/ilm-nature/visual_language_paper.pdf) · [查看实际输出与错误](../references/chinese_card_reply_result.md)
 
@@ -106,7 +110,7 @@
 
 一段真人写的餐馆推荐给两家店分别打了 4.7 分和 4.8 分。保持段落和问题不变，只换所问餐馆的名称，模型写出了两张不同的答案图像：“评分是4.7分。”和“评分是4.8分。”这个模型有 486,442 个参数，在一张 RTX 4090 D 上训练。把留出对话中的两段话拼在一起，交换两家店和段落先后次序，539 组中有 472 组的四个答案全对。擦除店名位置信息后是 0 组。另写的 12 段双地点短文中，两问都答对的有 5 段。遇到“前者收 12 元、后者收 35 元”时，它把两张票都答成了 12 元。[七页论文](../publication/ilm-nature/visual_language_paper.pdf) · [用 PNG 运行模型](../models/prose_fields/README.md) · [数据与字节模型对照](../references/prose_fields_result.md)
 
-[![同段换店名的两张原始答案图、对照实验和指代失败的实例](../publication/ilm-nature/figures/Figure_142_prose_fields.png)](../publication/ilm-nature/visual_language_paper.pdf#page=5)
+[![同段换店名的两张原始答案图、对照实验和指代失败的实例](../publication/ilm-nature/figures/Figure_142_prose_fields.png)](../publication/ilm-nature/visual_language_paper.pdf#page=7)
 
 面对同一句「舉杯邀明月」，图像模型在被问到举起什么时写出 **cup**，被问到邀请谁时写出 **moon**。这句诗在早期训练中出现过。在另外留出的 971 句中，有 247 句的每个动词和宾语都定位正确，并写对了每个宾语的英语释义。交换训练中的宾语后仅有 11 句达标。若一句话的所有自然问法均未出现过，则 21 句中没有一句全部答对。 [运行模型](../models/questioned_events/README.md) · [实验结果](../references/questioned_events_result.md)
 

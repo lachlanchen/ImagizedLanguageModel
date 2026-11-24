@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_visual_discourse_article.py.
+% Literal captions copied from their source inputs by build_paired_evidence_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1128,4 +1128,11 @@ The selected names are correct under both English requests. The first generated 
 \caption{\textbf{Predictive learning and open writing from glyph images.}
 \textbf{a,} First held English and Chinese instructions in fixed hash order with the paired writer's own emitted pixels. Blank sidebearings and line wrapping have been adjusted for display. The English output reached the 96-cell limit. \textbf{b,} Mean held next-glyph cost with correct preceding answer cells. The four groups contain 128, 24, 128 and 128 windows. Crossed prompts are from the same task and language. The Winograd count requires writing both opposite correct names and stopping. \textbf{c,} Complete self-generated answers on human questions from CoQA, CMRC and DRCD. The two source-position models shared their base and fitting draws. In each corpus two different questions refer to each of 64 unseen passages. No model wrote both correct answers on any passage.}
 \label{fig:visual-discourse}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_145_paired_evidence.png}
+\caption{\textbf{Question-dependent writing from a pictured passage.}
+\textbf{a,} Questions and replies from the first completely correct simplified Chinese pair and the first incomplete pair in the reserved passage order. The first page concerns a fish. The final question concerns a fossil discovery in Niger. Display uses the original input and output pixels with blank margins removed. \textbf{b,} Each corpus contributed 64 different passages and two human questions per passage. A pair counts only if the model wrote and stopped on both answers. Evidence marks were visible only during fitting. \textbf{c,} Exact normalized stopped answers and paired numeral interventions. In each intervention the question image was fixed while a single number in the source was incremented. The final column requires both the original and the changed answer.}
+\label{fig:paired-evidence}
 \end{figure*}
