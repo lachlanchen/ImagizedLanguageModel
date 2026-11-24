@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+A visual writer answered “Who took the tea first?” with an image reading **Shen Nong**. On 758 fresh conversation turns it matched a human answer 270 times. Exchanging the question and history reduced that count to 29. Four paired training seeds gave an uncertain gain from human evidence supervision. All eight visual fits missed all 27 questions that required new multiword phrasing. [Run the model](models/dialogue_evidence/README.md) · [Measured results and Lean proofs](references/dialogue_evidence_result.md)
+
+[![Four paired training seeds and original visual replies, including one correct and one incorrect change](publication/ilm-nature/figures/Figure_130_dialogue_evidence.png)](publication/ilm-nature/manuscript.pdf#page=173)
+
 **Can a small model learn to read from ink?** A 547,125-parameter visual writer trained from scratch answered 1,574 of 5,588 held English dialogue turns exactly. A matched writer reading ordinary bytes answered 1,558. Both first cleared 20% accuracy on both held splits after 2,400 updates, consuming 5.20 and 4.86 kJ respectively. [Code and weights](models/dialogue_surfaces/README.md) · [Learning curves and limits](references/dialogue_efficiency_result.md) · [Lean proofs](formal/span_list/VisualTokenRisk.lean)
 
 [![Measured learning curves for pictured letters and byte tokens](publication/ilm-nature/figures/Figure_129_dialogue_efficiency.png)](publication/ilm-nature/manuscript.pdf#page=171)

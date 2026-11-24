@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_dialogue_efficiency_article.py.
+% Literal captions copied from their source inputs by build_dialogue_evidence_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1035,4 +1035,10 @@ The selected names are correct under both English requests. The first generated 
 \textbf{b,} First-reference exact matches among 5,588 eligible turns and official four-reference word F1. Each training curve and energy value represents one run. Fit energy excludes feature preparation, evaluation, host energy and any earlier training.
 \textbf{c,} Independent replay with supplied reference prefixes predicts exactly which complete reference images the two inherited writers generate autonomously.}
 \label{fig:dialogue-efficiency}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_130_dialogue_evidence.png}
+\caption{\textbf{Learning the source of a written answer.} \textbf{a,} Change in official four-reference word F1 after adding evidence supervision, in four paired visual training runs. Each pair started from the same parent weights and saw identical batches. The two series use 758 and 154 turns. The 95\% intervals resample both seeds and stories. \textbf{b,} Independently reproduced prediction pixels from seed 1 for the first newly correct and first newly incorrect answer in corpus order. The figures preserve the original question capitalization. \textbf{c,} Text-teacher qualification on the 83 previously specified turns. Any exact accepts any human answer. A valid quote is a literal contiguous passage string and need not explain the answer. Both student arms in panels a and b used human supervision.}
+\label{fig:dialogue-evidence}
 \end{figure*}
