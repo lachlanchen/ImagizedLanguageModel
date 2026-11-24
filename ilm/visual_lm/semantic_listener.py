@@ -24,15 +24,18 @@ class SemanticListener(nn.Module):
 
 
 @torch.inference_mode()
-def beam_write(net, memory, visible, palette, listener, width=8, limit=400, return_candidates=False):
+def beam_write(net, memory, visible, palette, listener, width=8, limit=400, return_candidates=False, allowed=None):
     """Keep active and completed hypotheses separate; preserve their actual images."""
     batch, rows, dim = memory.shape
     if not visible.any(1).all() or width < 1 or not 1 <= limit <= len(net.position)*BLOCK:
         raise ValueError("Invalid card, beam width or generation limit")
     device = memory.device
-    learned = net.concept(memory).argmax(-1)
-    desired = (F.one_hot(learned,net.concept.out_features).bool() & visible[...,None]).any(1)
-    desired[:, 0] = False
+    if allowed is not None and (allowed.shape != (batch,len(palette)) or not allowed[:,0].all()):
+        raise ValueError("Supply one output-action mask per card and permit stopping")
+    if listener is not None:
+        learned = net.concept(memory).argmax(-1)
+        desired = (F.one_hot(learned,net.concept.out_features).bool() & visible[...,None]).any(1)
+        desired[:, 0] = False
     memory = memory[:, None].expand(-1,width,-1,-1).reshape(-1,rows,dim)
     visible = visible[:, None].expand(-1,width,-1).reshape(-1,rows)
     embed = net.feedback(palette)
@@ -51,6 +54,8 @@ def beam_write(net, memory, visible, palette, listener, width=8, limit=400, retu
             outer = net.context(previous,memory,visible)[:,-1:]
             block = torch.zeros_like(previous[:,:1])
         logprob = net.letters(outer,block)[:,0,phase].log_softmax(-1).reshape(batch,width,-1)
+        if allowed is not None:
+            logprob = logprob.masked_fill(~allowed[:,None,:], -torch.inf)
         scores = live[:,:,None] + logprob
         terminal = scores[:,:,0] / ((pos+1)**.7)
         finished, choice = torch.cat((finished,terminal),1).topk(width,dim=1)
@@ -78,6 +83,10 @@ def beam_write(net, memory, visible, palette, listener, width=8, limit=400, retu
         active = ends > pos
         ids[:,:,pos] = torch.where(active,letters[pos].gather(1,leaves),0)
         leaves = torch.where(active,parents[pos].gather(1,leaves),leaves)
+    if listener is None:
+        if return_candidates:
+            raise ValueError("Candidate readback scores require a listener")
+        return ids[:,0],ends[:,0]
     valid = torch.arange(ids.size(2),device=device) < ends[:,:,None]
     concept = listener(palette[ids.flatten(0,1)],valid.flatten(0,1)).reshape(batch,width,-1)
     truths = desired[:,None].expand_as(concept)

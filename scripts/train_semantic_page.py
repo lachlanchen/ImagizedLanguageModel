@@ -43,16 +43,16 @@ def load(mode,device):
     return net
 
 
-def train(mode,data,bank,meta):
-    receipt=PUB/(mode+"-fit.json")
-    path=MODEL/(mode+".safetensors")
+def train(mode,data,bank,meta,*,report_dir=PUB,model_dir=MODEL,output_pixels=None):
+    receipt=report_dir/(mode+"-fit.json")
+    path=model_dir/(mode+".safetensors")
     if receipt.exists():
         r=read(receipt)
         if r["weights"]!=sha(path) or r["data"]!=meta["archives"]["train"]:raise ValueError("Changed fit")
         return r
     obs=torch.as_tensor(observations(bank,mode),device="cuda")
     rows=obs[bank["surface"]]
-    output=palette("cuda")
+    output=palette("cuda") if output_pixels is None else output_pixels
     levels=rows.shape[1]
     torch.manual_seed(29041)
     rng=np.random.default_rng(29041)
