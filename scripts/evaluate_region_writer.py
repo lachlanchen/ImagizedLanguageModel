@@ -5,6 +5,8 @@ import copy
 from hashlib import sha256
 from importlib.util import module_from_spec, spec_from_file_location
 import sys
+import unicodedata
+import re
 from urllib.request import urlopen
 import numpy as np
 import torch
@@ -151,6 +153,20 @@ def offpage():
     return out, excluded, judge.normalize_answer
 
 
+def contains_fact(text, fact, language_task):
+    clean = lambda s: " ".join(unicodedata.normalize("NFKC", s).casefold().split())
+    needle, hay = clean(fact), clean(text)
+    if not needle:
+        return False
+    if language_task == "catalogue":
+        left = r"(?<![0-9])" if needle[0].isdigit() else ""
+        right = r"(?![0-9])" if needle[-1].isdigit() else ""
+    else:
+        left = r"(?<!\w)" if needle[0].isalnum() else ""
+        right = r"(?!\w)" if needle[-1].isalnum() else ""
+    return re.search(left + re.escape(needle) + right, hay) is not None
+
+
 def score_rows(outputs, rows, slot_scorer, norm):
     scores = []
     for r, (text, ids, stop, pick, h) in zip(rows, outputs, strict=True):
@@ -162,7 +178,7 @@ def score_rows(outputs, rows, slot_scorer, norm):
             and bool(normalize(text))
             and any(normalize(text) == normalize(ref) for ref in refs)
         )
-        has = lambda x: bool(phrase_key(x)) and phrase_key(x) in phrase_key(text)
+        has = lambda x: contains_fact(text, x, t)
         errors = slot_scorer(text, r["facts"]) if t == "restaurant" else []
         fact = stop and (
             (not any(errors))

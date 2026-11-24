@@ -1,0 +1,207 @@
+{
+  "measurements": {
+    "direct": {
+      "restaurant": {
+        "n": 96,
+        "exact": 0,
+        "bitmap_exact": 0,
+        "novel": 96,
+        "novel_exact": 0,
+        "stopped": 96,
+        "fact": 1,
+        "copied": 0,
+        "edits": 49,
+        "both_fact": 0,
+        "edit_new_without_old": 11
+      },
+      "catalogue": {
+        "n": 96,
+        "exact": 35,
+        "bitmap_exact": 35,
+        "novel": 92,
+        "novel_exact": 35,
+        "stopped": 95,
+        "fact": 81,
+        "copied": 0,
+        "edits": 96,
+        "both_fact": 71,
+        "edit_new_without_old": 81
+      },
+      "statements": {
+        "n": 96,
+        "exact": 4,
+        "bitmap_exact": 4,
+        "novel": 94,
+        "novel_exact": 4,
+        "stopped": 88,
+        "fact": 17,
+        "copied": 0,
+        "edits": 24,
+        "both_fact": 4,
+        "edit_new_without_old": 4
+      }
+    },
+    "selected": {
+      "restaurant": {
+        "n": 96,
+        "exact": 0,
+        "bitmap_exact": 0,
+        "novel": 96,
+        "novel_exact": 0,
+        "stopped": 95,
+        "fact": 15,
+        "copied": 0,
+        "edits": 49,
+        "both_fact": 3,
+        "edit_new_without_old": 47
+      },
+      "catalogue": {
+        "n": 96,
+        "exact": 33,
+        "bitmap_exact": 33,
+        "novel": 92,
+        "novel_exact": 32,
+        "stopped": 95,
+        "fact": 87,
+        "copied": 0,
+        "edits": 96,
+        "both_fact": 84,
+        "edit_new_without_old": 93
+      },
+      "statements": {
+        "n": 96,
+        "exact": 6,
+        "bitmap_exact": 6,
+        "novel": 94,
+        "novel_exact": 6,
+        "stopped": 92,
+        "fact": 28,
+        "copied": 0,
+        "edits": 24,
+        "both_fact": 5,
+        "edit_new_without_old": 7
+      }
+    },
+    "oracle": {
+      "restaurant": {
+        "n": 96,
+        "exact": 0,
+        "bitmap_exact": 0,
+        "novel": 96,
+        "novel_exact": 0,
+        "stopped": 95,
+        "fact": 15,
+        "copied": 0,
+        "edits": 49,
+        "both_fact": 3,
+        "edit_new_without_old": 47
+      },
+      "catalogue": {
+        "n": 96,
+        "exact": 33,
+        "bitmap_exact": 33,
+        "novel": 92,
+        "novel_exact": 32,
+        "stopped": 95,
+        "fact": 87,
+        "copied": 0,
+        "edits": 96,
+        "both_fact": 84,
+        "edit_new_without_old": 93
+      },
+      "statements": {
+        "n": 96,
+        "exact": 6,
+        "bitmap_exact": 6,
+        "novel": 94,
+        "novel_exact": 6,
+        "stopped": 92,
+        "fact": 30,
+        "copied": 0,
+        "edits": 24,
+        "both_fact": 4,
+        "edit_new_without_old": 6
+      }
+    }
+  },
+  "paired": {
+    "restaurant": {
+      "fact": {
+        "gained": 15,
+        "lost": 1,
+        "diff_pp_ci95": [
+          7.291666666666667,
+          22.916666666666664
+        ]
+      },
+      "exact": {
+        "gained": 0,
+        "lost": 0,
+        "diff_pp_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "novel_exact": {
+        "gained": 0,
+        "lost": 0,
+        "diff_pp_ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "catalogue": {
+      "fact": {
+        "gained": 9,
+        "lost": 3,
+        "diff_pp_ci95": [
+          -1.0416666666666665,
+          13.541666666666666
+        ]
+      },
+      "exact": {
+        "gained": 7,
+        "lost": 9,
+        "diff_pp_ci95": [
+          -10.416666666666668,
+          6.25
+        ]
+      },
+      "novel_exact": {
+        "gained": 6,
+        "lost": 9,
+        "diff_pp_ci95": [
+          -11.458333333333332,
+          5.208333333333334
+        ]
+      }
+    },
+    "statements": {
+      "fact": {
+        "gained": 17,
+        "lost": 6,
+        "diff_pp_ci95": [
+          2.083333333333333,
+          21.875
+        ]
+      },
+      "exact": {
+        "gained": 3,
+        "lost": 1,
+        "diff_pp_ci95": [
+          -2.083333333333333,
+          6.25
+        ]
+      },
+      "novel_exact": {
+        "gained": 3,
+        "lost": 1,
+        "diff_pp_ci95": [
+          -2.083333333333333,
+          6.25
+        ]
+      }
+    }
+  }
+}

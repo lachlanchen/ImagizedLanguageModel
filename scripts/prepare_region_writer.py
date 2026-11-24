@@ -4,11 +4,17 @@ import csv
 from collections import defaultdict
 from hashlib import sha256
 import re
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+from urllib.request import urlopen
+from shutil import copyfileobj
 import numpy as np
 
 from scripts.prepare_evidence_views import ROOT, sha
 from scripts.prepare_open_exam import read, dump
+from scripts.prepare_multiple_ink_runs import prepared_files
 from scripts.prepare_grounded_phrasings import phrase_key
+from scripts.prepare_paired_evidence import SOURCES
 from scripts.prepare_visual_statements import collect, detok, squad
 from scripts.prepare_chinese_card_reply import DOMAINS, RAW, extract
 from scripts.prepare_semantic_page import RAW as E2E, FILES
@@ -207,16 +213,45 @@ class Ink:
         return np.frombuffer(b"".join(self.tiles), np.uint8).reshape(-1, 128)
 
 
-def main():
-    WORK.mkdir(exist_ok=True, parents=True)
-    PUB.mkdir(exist_ok=True, parents=True)
+CORPUS_FILES = ("train.json", "dev.json", "dev-source.json", "palette.npy", "tiles.npy", "strings.npz")
+
+
+def ensure_raw_sources():
+    from scripts.prepare_chinese_card_reply import sources
+    from scripts.prepare_semantic_page import fetch
+
+    if any(not (E2E / FILES[s]).is_file() for s in ("train", "dev")):
+        fetch()
+    chinese_files = ["train.json.zip", "val.json.zip", *(d + "_db.json" for d in DOMAINS.values())]
+    if any(not (RAW / f).is_file() for f in chinese_files):
+        sources()
+    for split, (relative, expected) in zip(("train", "dev"), SOURCES["squad"], strict=True):
+        dest = ROOT / "data/raw" / relative
+        if dest.is_file():
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        url = f"https://rajpurkar.github.io/SQuAD-explorer/dataset/{split}-v1.1.json"
+        with NamedTemporaryFile(dir=dest.parent, delete=False) as file:
+            temp = Path(file.name)
+        try:
+            with urlopen(url, timeout=90) as response, temp.open("wb") as file:
+                copyfileobj(response, file)
+            if sha(temp) != expected:
+                raise ValueError(f"Unexpected SQuAD digest for {split}")
+            temp.replace(dest)
+        finally:
+            temp.unlink(missing_ok=True)
+
+
+def build_corpus(stage):
+    ensure_raw_sources()
     train, dev = inventory()
     ink = Ink()
     for r in train:
         for s in r["answers"]:
             ink.encode(s)
     vocab = len(ink.tiles)
-    np.save(WORK / "palette.npy", ink.array())
+    np.save(stage / "palette.npy", ink.array())
     strings = {}
     seq = []
 
@@ -235,7 +270,7 @@ def main():
             ys = [index(s) for s in r["answers"] if not ink.bad.intersection(s)]
             if ys:
                 encoded.append([q, ps, r["valid"], ys, r["task"], r["family"]])
-        dump(WORK / (split + ".json"), encoded)
+        dump(stage / (split + ".json"), encoded)
         sizes[split] = {
             t: dict(
                 questions=sum(z[4] == t for z in encoded),
@@ -243,34 +278,25 @@ def main():
             )
             for t in ("restaurant", "catalogue", "statements")
         }
-    dump(WORK / "dev-source.json", dev)
-    np.save(WORK / "tiles.npy", ink.array())
+    dump(stage / "dev-source.json", dev)
+    np.save(stage / "tiles.npy", ink.array())
     np.savez(
-        WORK / "strings.npz",
+        stage / "strings.npz",
         ids=np.concatenate([np.asarray(x, np.int32) for x in seq]),
         ptr=np.cumsum([0] + list(map(len, seq))),
     )
-    dump(
-        PUB / "corpus.json",
-        dict(
-            counts=sizes,
-            output_bitmaps=vocab,
-            missing_codepoints=sorted(map(ord, ink.bad)),
-            max_decisions=LIMIT,
-            files={
-                f: sha(WORK / f)
-                for f in (
-                    "train.json",
-                    "dev.json",
-                    "dev-source.json",
-                    "palette.npy",
-                    "tiles.npy",
-                    "strings.npz",
-                )
-            },
-        ),
+    return dict(
+        counts=sizes,
+        output_bitmaps=vocab,
+        missing_codepoints=sorted(map(ord, ink.bad)),
+        max_decisions=LIMIT,
+        files={name: sha(stage / name) for name in CORPUS_FILES},
     )
-    print(sizes, flush=True)
+
+
+def main():
+    names = {name: ("files", name) for name in CORPUS_FILES}
+    prepared_files(WORK, PUB / "corpus.json", names, build_corpus)
 
 
 if __name__ == "__main__":

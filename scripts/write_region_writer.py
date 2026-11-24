@@ -10,14 +10,14 @@ from safetensors.torch import load_file
 from ilm.visual_lm.book_prefix import observations
 from ilm.visual_lm.region_writer import RegionSelector, RegionWriter
 from scripts.evaluate_visual_discourse import draw
-from scripts.prepare_region_writer import MODEL, Ink, regions
+from scripts.prepare_region_writer import MODEL, PUB, Ink, regions
 from scripts.prepare_open_exam import dump, read, sha
 from scripts.train_region_writer import selector_input, pack, join_regions
 from scripts.write_open_exam import read_image
 
 
-def model(arm, device):
-    path = MODEL / arm / "weights.safetensors"
+def model(arm, device, model_dir=MODEL):
+    path = model_dir / arm / "weights.safetensors"
     if sha(path) != read(path.parent / "fit.json")["weights"]:
         raise ValueError("Invalid checkpoint")
     net = (RegionSelector() if arm == "selector" else RegionWriter()).to(device)
@@ -70,7 +70,10 @@ def main(args):
     device = args.device
     if device == "cpu":
         torch.set_num_threads(3)
-    palette = np.load(MODEL / "palette.npy")
+    palette_path = args.model_dir / "palette.npy"
+    if sha(palette_path) != read(PUB / "corpus.json")["files"]["palette.npy"]:
+        raise ValueError("Changed output bitmap bank")
+    palette = np.load(palette_path)
     ink = Ink(palette)
     if args.input:
         doc = read(args.input)
@@ -91,8 +94,8 @@ def main(args):
             raise ValueError("The supplied font cannot render every requested cell")
     tiles = ink.array()
     pred, selected = answer(
-        model(args.arm, device),
-        model("selector", device) if args.arm == "selected" else None,
+        model(args.arm, device, args.model_dir),
+        model("selector", device, args.model_dir) if args.arm == "selected" else None,
         args.arm,
         tiles,
         len(palette),
@@ -120,6 +123,7 @@ def main(args):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--model-dir", type=Path, default=MODEL)
     p.add_argument("--arm", choices=("direct", "selected"), default="selected")
     p.add_argument("--question")
     p.add_argument("--passage", action="append")
