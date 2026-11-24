@@ -1,0 +1,3 @@
+# Reporting question-conditioned optical evidence
+
+Add a spread to the reading manuscript with original free-answer pixels for a gained and a lost or unresolved bilingual question. Report blind MLQA and DROP counts beside genuine English statement writing, the controlled exchange of the two sides, and training and inference costs. Use identical quantities in the article and editable charts. The first eligible gain and loss in corpus order that fits the panel determines which examples appear. Keep earlier figures and both comparators. Build the reading and cumulative PDFs, inspect the changed pages and deck, and deliver only the reading PDF to the existing latest alias with three previous reading editions.

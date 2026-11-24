@@ -15,9 +15,10 @@ const phrase=mode==='phrase';
 const marginal=mode==='marginal';
 const fact=mode==='fact';
 const ranking=mode==='ranking';
+const directional=mode==='directional';
 const context=mode==='sentence-context';
-const folder=path.join(root,'references/evidence',context?'sentence_context_v1':ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(context||ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
+const folder=path.join(root,'references/evidence',directional?'directional_reading_v1':context?'sentence_context_v1':ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(directional||context||ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -77,6 +78,27 @@ if(fact){
   table.styleOptions={headerRow:true,bandedRows:false};table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
   for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=table.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
   label(slide,'Only the pictured question and source page are supplied at inference.',25,457,1030,54,18,false,ink);
+ }else if(directional){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
+  const trace=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
+  const modes=['original','unsigned','signed'], names=['Earlier','Unsigned','Signed'], colors=['#88786A','#557DA1',teal];
+  label(slide,'Which side of the glyph carries the evidence?',22,15,1040,45,29,true,ink);
+  label(slide,'a   Exact evidence per 192 new questions',22,73,520,30,19,true,ink);
+  const bars=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:22,top:111,width:488,height:246},
+    categories:['English','Chinese','DROP'],series:modes.map((m,i)=>({name:names[i],values:['mlqa-en','mlqa-zh','drop'].map(t=>data[m].confirmation[t].fact),fill:colors[i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(bars,{fontFamily:'Arial'});
+  label(slide,'b   Mean training loss per pass (nats)',530,73,545,30,19,true,ink);
+  const steps=['1','2','3','4'];
+  const lines=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:530,top:111,width:525,height:246},categories:steps,
+    series:['unsigned','signed'].map((t,i)=>({name:names[i+1],values:trace[t].map(v=>Number(v.toFixed(4))),fill:colors[i+1]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(lines,{fontFamily:'Arial'});
+  const judgment=JSON.parse(await fs.readFile(path.join(folder,'semantic.json')));
+  const vals=[['Semantic credit / 16','English','Chinese','DROP'],...['signed','qwen'].map((m,i)=>[[ 'Directional ILM','Qwen3-VL Q4'][i],...['mlqa-en','mlqa-zh','drop'].map(t=>String(judgment.summary[t][m]))])];
+  const tb=slide.tables.add({rows:3,columns:4,left:40,top:373,width:997,height:124,columnWidths:[400,190,190,217],values:vals});
+  tb.styleOptions={headerRow:true,bandedRows:false};tb.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<3;i++)for(let j=0;j<4;j++){const c=tb.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
  }else if(context){
   const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
   const trace=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
@@ -296,7 +318,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1+Number(fact);
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',context?'Writing_the_sentence_in_context.pptx':ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',directional?'Reading_relations_in_context.pptx':context?'Writing_the_sentence_in_context.pptx':ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:fact?[total-1,total]:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,

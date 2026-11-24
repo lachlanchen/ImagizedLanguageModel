@@ -1,0 +1,63 @@
+{
+  "binding": {
+    "mode": "signed",
+    "hashes": {
+      "scripts/train_directional_reading.py": "184f16ee49d575e6b07780914b4027e84533f90fc44bfd9c9c848e8da6dcf565",
+      "ilm/visual_lm/directional_reading.py": "fb8f30ac39b86cf6f7688f68ac4214d3a2e82711c9e253708f613c17744b346b",
+      "formal/span_list/DirectionalReading.lean": "e6acf9f315f159e9ee5f88e0c9c5f0ec6e118a8099ac606d0f4cfaa91ba5d70b",
+      "references/evidence/directional_reading_v1/reservation.json": "9aaf8c61aec3a9907547927fc91c774a3bab4a0ea3d82f154a34e06a8de075d0",
+      "references/directional_reading_protocol.md": "8777e363050f6919748ea2c5d576756fe810ad4c89542f5c1b7ba7739d608858",
+      "references/evidence/fact_channel_v1/corpus.json": "eaa538c8be4edaf7229e45816ef23ff4bd2c6b182364032e29704860d0842e01",
+      "models/fact_channel/reader/weights.safetensors": "cd0f2f5387cd2a24fb55350bc58e73f9768a7a89aec2f7df2c138d1e081b1078",
+      "models/fact_channel/human/weights.safetensors": "10e1ef816c403e8df3a2e42468c491aa23124dee1e2d925a1fbd86870224b648",
+      "models/fact_span_ranking/whole/weights.safetensors": "2476859c528d79c2e380624f10ce664a932de9d07dda2a11ddb52c49f058a9c5"
+    },
+    "example_order": "37cb917a405295b61c7c395840efd6305cce70b0b728bc00a8d2c6a587d51cac"
+  },
+  "weights": "26e73f406a398884303140d4049d9e2c45cbb71232432917a42284c5cb1f1aca",
+  "epochs": [
+    {
+      "epoch": 1,
+      "seconds": 9.860445669852197,
+      "joules": 1695.323,
+      "peak_bytes": 291051520,
+      "queries": 39057,
+      "updates": 1177,
+      "mean_nll": 3.3674788581374835,
+      "pre_reranking_top_correct": 12662
+    },
+    {
+      "epoch": 2,
+      "seconds": 11.450682394206524,
+      "joules": 1851.044,
+      "peak_bytes": 296624128,
+      "queries": 39057,
+      "updates": 1177,
+      "mean_nll": 3.176363653846944,
+      "pre_reranking_top_correct": 13712
+    },
+    {
+      "epoch": 3,
+      "seconds": 11.37931442912668,
+      "joules": 1849.271,
+      "peak_bytes": 287670272,
+      "queries": 39057,
+      "updates": 1177,
+      "mean_nll": 3.1096221087919416,
+      "pre_reranking_top_correct": 14090
+    },
+    {
+      "epoch": 4,
+      "seconds": 11.608037382364273,
+      "joules": 1884.434,
+      "peak_bytes": 291733504,
+      "queries": 39057,
+      "updates": 1177,
+      "mean_nll": 3.0649451645855703,
+      "pre_reranking_top_correct": 14359
+    }
+  ],
+  "parameter_count": 25026,
+  "steps": 4708,
+  "questions": 156228
+}
