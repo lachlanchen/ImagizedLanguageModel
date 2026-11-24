@@ -17,12 +17,12 @@ For typed questions, use `--passage-text`, `--question-text` and optional `--his
 
 The four releases are under `ink/{plain,human}` and `byte/{plain,human}`. Each pair continues its matching cold parent. Both arms receive human answers and endpoint supervision. The `human` arm also rewards assigning pointer mass to correct word images inside human-marked evidence. The byte arm accepts ASCII and writes text. Every checkpoint includes SHA-256, parent hash, seed, training trace, cost and the number of eligible training positions in `weights.json`.
 
-After preparing the pinned CoQA split and installing the official development data and scorer, the following trains both visual and byte arms on one GPU. The released teacher qualification receipts select the human-supervised comparison. No teacher installation or teacher requests are needed to train these arms or run the checkpoints. NVML measures GPU energy. Set `ILM_NVML_RUNNER` if your workstation requires a compatible environment wrapper. Choose an empty output path for a new training run. [Dataset and preparation](../dialogue_ink/README.md) · [Cold parents](../dialogue_surfaces/README.md)
+After preparing the pinned CoQA split and installing the official development data and scorer, the following trains both visual and byte arms on one GPU. The released teacher qualification receipts select the human-supervised comparison. No teacher installation or teacher requests are needed to train these arms or run the checkpoints. NVML measures GPU energy. The supplied `scripts/with_ilm_gpu` launcher selects device 0 by default and applies the workstation’s `with-current-nvidia` library environment to both PyTorch and NVML. On a standard installation it launches the command directly. Set `ILM_NVML_RUNNER` to select another compatible launcher. Choose an empty output path for a new training run. [Dataset and preparation](../dialogue_ink/README.md) · [Cold parents](../dialogue_surfaces/README.md)
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 python -m scripts.train_dialogue_evidence --output artifacts/my-dialogue-models
-CUDA_VISIBLE_DEVICES=0 python -m scripts.evaluate_dialogue_evidence --model-root artifacts/my-dialogue-models --output artifacts/my-dialogue-evaluation
-CUDA_VISIBLE_DEVICES=0 python -m scripts.replicate_dialogue_evidence --output artifacts/my-dialogue-replications
+scripts/with_ilm_gpu python -m scripts.train_dialogue_evidence --output artifacts/my-dialogue-models
+scripts/with_ilm_gpu python -m scripts.evaluate_dialogue_evidence --model-root artifacts/my-dialogue-models --output artifacts/my-dialogue-evaluation
+scripts/with_ilm_gpu python -m scripts.replicate_dialogue_evidence --output artifacts/my-dialogue-replications
 python -m scripts.audit_dialogue_evidence
 python -m scripts.check_matched_reading_cost --lean /path/to/lean
 ```

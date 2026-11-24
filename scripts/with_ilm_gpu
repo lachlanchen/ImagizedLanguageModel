@@ -1,0 +1,17 @@
+#!/bin/sh
+# Apply the workstation's matching CUDA/NVML userspace to the entire process.
+set -eu
+if [ "$#" -eq 0 ]; then
+    echo "Usage: scripts/with_ilm_gpu COMMAND [ARG ...]" >&2
+    exit 64
+fi
+export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
+runner="${ILM_NVML_RUNNER:-}"
+if [ -z "$runner" ]; then
+    runner=$(command -v with-current-nvidia || true)
+fi
+if [ -n "$runner" ]; then
+    export ILM_NVML_RUNNER="$runner"
+    exec "$runner" "$@"
+fi
+exec "$@"
