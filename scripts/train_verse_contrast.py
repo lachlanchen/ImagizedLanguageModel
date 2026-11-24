@@ -46,8 +46,14 @@ def fit(mode, contrast, meta, data, song_hash):
     dest = MODEL / (name+".safetensors")
     if receipt.exists():
         old = json.loads(receipt.read_text())
-        if old["weights"] != sha(dest) or old["song_reservation"] != song_hash:
-            raise ValueError("Changed checkpoint or reservation")
+        parent_name = mode+"-bound"
+        manifest = json.loads((MODEL/"bound-writer.json").read_text())
+        expected = dict(name=name, weights=sha(dest), song_reservation=song_hash,
+                        tang=meta["corpus"], exposures=STEPS*BATCH,
+                        parent=sha(MODEL/(parent_name+".safetensors")))
+        if expected["parent"] != manifest["weights"][parent_name] or any(
+                old.get(key) != value for key,value in expected.items()):
+            raise ValueError("Checkpoint, parent, corpus or fit reservation changed")
         return old
     torch.manual_seed(SEED)
     rng = np.random.default_rng(SEED)

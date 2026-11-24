@@ -54,10 +54,12 @@ python -m scripts.write_verse_canvas --device cuda --phrase contrast --order pai
 
 On 3,854 held Song pages the contrastive writer supplied both recorded glyphs eight times. The paired control supplied both 12 times. Use `--phrase paired` to run that control. Both accept raw page images. All four continuation checkpoints and their parent identifiers are released. [Comparison and training costs](../../references/verse_contrast_result.md)
 
-To reproduce the comparison, first prepare the original Tang corpus as above. Then run these commands in order. The first reserves the Song cases before any new fitting. Training reuses completed fit receipts when their checkpoint and reservation hashes match.
+To reproduce the comparison, first prepare the original Tang corpus as above. Then run these commands in order. The first reserves the Song cases before any new fitting. Training reuses completed fit receipts after checking the checkpoint, parent weights, training corpus, held corpus and example count.
 
 ```bash
 python -m scripts.prepare_verse_contrast
 python -m scripts.train_verse_contrast
 python -m scripts.evaluate_verse_contrast
 ```
+
+The CUDA commands for pictured verse use the matching NVIDIA libraries selected by `scripts/with_ilm_gpu`. On a shared machine the kernel driver can remain at its running version after a newer user-space library is installed. The launcher also works with other project Python commands. To check device energy metering in the same environment, run `scripts/with_ilm_gpu python -m scripts.measure_writer_energy`.
