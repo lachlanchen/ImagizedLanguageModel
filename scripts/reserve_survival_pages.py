@@ -29,18 +29,28 @@ def main(work=WORK, public=PUB):
     )
 
 
-def reserve(work, stage):
+def reserve(
+    work, stage, prior=None, groups=None, seed="survival-confirm-v1 ", pool_limit=200
+):
     path = stage / "confirm.json"
-    prior = read(work / "held.json")
+    if prior is None:
+        prior = read(work / "held.json")
+    if groups is None:
+        groups = (("en", True, 96), ("zh", True, 96))
     banq = {normalize(r["q"]) for r in prior}
     banp = {normalize(r["p"]) for r in prior}
     old = set().union(*(fragments(r["p"], 24) for r in prior))
     pool = []
     owners = {}
-    for lang, rows in (("en", english("valid")), ("zh", chinese("valid"))):
+    for lang, plural, _ in groups:
+        rows = english("valid") if lang == "en" else chinese("valid")
         candidates = sorted(
-            (r for r in rows if multi(r)),
-            key=lambda r: key("survival-confirm-v1 " + r["id"] + r["p"]),
+            (
+                r
+                for r in rows
+                if (multi(r) if plural else all(len(a) == 1 for a in r["refs"]))
+            ),
+            key=lambda r: key(seed + r["id"] + r["p"]),
         )
         n = 0
         for r in candidates:
@@ -57,7 +67,7 @@ def reserve(work, stage):
             banp.add(p)
             pool.append(r)
             n += 1
-            if n == 200:
+            if n == pool_limit:
                 break
     rejected = set()
     candidate_q = {normalize(r["q"]): i for i, r in enumerate(pool)}
@@ -88,11 +98,13 @@ def reserve(work, stage):
         return seq
 
     chosen = []
-    for lang in ("en", "zh"):
+    for lang, plural, quota in groups:
         rows = [
-            r for i, r in enumerate(pool) if i not in rejected and r["lang"] == lang
-        ][:96]
-        assert len(rows) == 96
+            r
+            for i, r in enumerate(pool)
+            if i not in rejected and r["lang"] == lang and multi(r) == plural
+        ][:quota]
+        assert len(rows) == quota, (lang, plural, len(rows), quota)
         for r in rows:
             r["pi"] = encode(r["p"])
             r["qi"] = encode(r["q"])
