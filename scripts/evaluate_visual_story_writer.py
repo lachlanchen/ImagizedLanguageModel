@@ -130,12 +130,12 @@ def counters(rows, out):
     return groups
 
 
-def evaluate(args):
+def evaluate(args, arms=ARMS, work=WORK, pub=PUB):
     rows = material()
     scores = {}
-    for mode in ARMS:
-        stash = WORK / (mode + "-replies.json.gz")
-        receipt = PUB / (mode + "-run.json")
+    for mode in arms:
+        stash = work / (mode + "-replies.json.gz")
+        receipt = pub / (mode + "-run.json")
         if receipt.exists():
             rc = read(receipt)
             if sha(stash) != rc["file"]:
@@ -193,18 +193,22 @@ def evaluate(args):
         scores[mode] = rc
         dump(receipt, rc)
         print(mode, rc["results"], flush=True)
-    dump(PUB / "scores.json", scores)
+    dump(pub / "scores.json", scores)
 
 
-def forms():
+def forms(arms=ARMS[:3], split="development", work=WORK, pub=PUB, printed=False):
     from scripts.prepare_visual_story_writer import STAGES
 
     ver = {}
-    for mode in ARMS[:3]:
+    for mode in arms:
         with gpu_owner(), torch.inference_mode():
             net = visual(mode, "cuda")
             ink = Ink(net.palette)
-            cases = history(ink, "development", 128)
+            cases = history(ink, split, 128)
+            if printed:
+                from ilm.visual_lm.catalogue_ink import print_forms
+
+                cases = print_forms(ink, cases)
             requests = []
             for i in range(0, len(cases), 2):
                 for j, r in enumerate(cases[i : i + 2]):
@@ -277,12 +281,12 @@ def forms():
                 exact=sum(r["correct"] for r in audit),
                 n=len(audit),
             )
-            dump(WORK / (mode + "-forms.json"), audit)
+            dump(work / (mode + "-forms.json"), audit)
         print(mode, ver[mode]["exact"], ver[mode]["all_16_per_family"], flush=True)
-    dump(PUB / "forms.json", ver)
+    dump(pub / "forms.json", ver)
 
 
-def semantic():
+def semantic(arms=ARMS, stores=None, pub=PUB):
     from concurrent.futures import ThreadPoolExecutor
     from scripts.benchmark_open_exam import ask, JUDGE
     from scripts.benchmark_competing_qwen import server, MODELS, STORE
@@ -290,9 +294,10 @@ def semantic():
     if sha(STORE / "blobs" / ("sha256-" + MODELS[JUDGE])) != MODELS[JUDGE]:
         raise ValueError("Judge checksum")
     rows = material()
-    out = {m: unpack(WORK / (m + "-replies.json.gz")) for m in ARMS}
+    stores = stores or {m: WORK for m in arms}
+    out = {m: unpack(stores[m] / (m + "-replies.json.gz")) for m in arms}
     rng = np.random.default_rng(19731)
-    names = [*ARMS, "human", "foil"]
+    names = [*arms, "human", "foil"]
     keys = "ABCDEF"
     schema = dict(
         type="object",
@@ -305,7 +310,7 @@ def semantic():
         for i in [i for i, r in enumerate(rows) if r["task"] == t][:16]:
             r = rows[i]
             indices.append(i)
-            vals = {m: out[m][i]["text"] for m in ARMS}
+            vals = {m: out[m][i]["text"] for m in arms}
             vals.update(human=r["answers"][0], foil=rows[i ^ 1]["answers"][0])
             order = list(rng.permutation(names))
             for perm in (order, order[::-1]):
@@ -326,7 +331,7 @@ def semantic():
             perm, prompt = job
             s, stop = ask(url, JUDGE, dict(role="user", content=prompt), schema)
             v = json.loads(s)
-            if not stop or any(type(v.get(k)) != bool for k in keys):
+            if not stop or any(not isinstance(v.get(k), bool) for k in keys):
                 raise ValueError("Invalid judge output")
             return {p: v[k] for k, p in zip(keys, perm)}
 
@@ -338,10 +343,10 @@ def semantic():
         d = summary[rows[i]["task"]]
         d["n"] += 1
         for m in names:
-            d[m] += int(a[m] and b[m] and (m not in ARMS or out[m][i]["stop"]))
+            d[m] += int(a[m] and b[m] and (m not in arms or out[m][i]["stop"]))
         d["foil_rejected_twice"] += int(not a["foil"] and not b["foil"])
     dump(
-        PUB / "semantic.json",
+        pub / "semantic.json",
         dict(indices=indices, summary=summary, votes=votes, judge=MODELS[JUDGE]),
     )
     print(summary, flush=True)
@@ -350,7 +355,7 @@ def semantic():
 if __name__ == "__main__":
     configure_cuda_cli()
     ap = argparse.ArgumentParser()
-    ap.add_argument("actions", nargs="+", choices=("evaluate", "forms", "judge"))
+    ap.add_argument("actions", nargs="+", choices=("evaluate", "forms", "judge", "judge-balanced"))
     ap.add_argument("--minimind", type=Path, default=ROOT.parent / "minimind")
     ap.add_argument(
         "--weights",
@@ -363,5 +368,9 @@ if __name__ == "__main__":
             evaluate(a)
         elif action == "forms":
             forms()
+        elif action == "judge-balanced":
+            from scripts.train_balanced_visual_story import WORK as balance_work, PUB as balance_pub
+            paths = dict(page=WORK, fixed=balance_work, balanced=balance_work, minimind=WORK)
+            semantic(tuple(paths), paths, balance_pub)
         else:
             semantic()

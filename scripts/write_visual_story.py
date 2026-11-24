@@ -45,7 +45,7 @@ if __name__ == "__main__":
     p.add_argument("--passage", action="append")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
-    p.add_argument("--mode", choices=MODES, default="page")
+    p.add_argument("--mode", choices=(*MODES, "fixed", "balanced"), default="page")
     args = p.parse_args()
     if args.device == "cuda":
         configure_cuda_cli()
